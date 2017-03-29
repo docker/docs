@@ -1,204 +1,231 @@
 ---
+title: DTR backups and recovery
 description: Learn how to back up your Docker Trusted Registry cluster, and to recover your cluster from an existing backup.
 keywords: docker, registry, high-availability, backup, recovery
-title: DTR backups and recovery
 ---
 
-DTR replicas rely on having a majority available at any given time for writes to
-succeed. Therefore if a majority of replicas are permanently lost, the only way
-to restore DTR to a working state is to recover from backups. This is why it's
-very important to perform periodic backups.
+DTR needs that a majority (n/2 + 1) of its replicas are healthy at all times
+for it to work. So if a majority of replicas is unhealthy or lost, the only
+way to restore DTR to a working state, is by recovering from a backup. This
+is why it's important to ensure replicas are healthy and perform frequent
+backups.
 
-## DTR data persistence
+## Data managed by DTR
 
-Docker Trusted Registry persists:
+Docker Trusted Registry maintains data about:
 
-* **Configurations**: the cluster configurations are stored on a key-value store
-that is replicated through all DTR replicas.
-* **Repository metadata**: the information about the repositories and
-images deployed. This information is replicated through all DTR replicas.
-* **Access control**: permissions for teams and repos.
-* **Notary data**: notary tags and signatures.
-* **Scan results**: security scanning results for images.
-* **Certificates and keys**: the certificates, public keys, and private keys
-that are used for mutual TLS communication.
+| Data                               | Description                                                                                                                                       |
+|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Configurations                     | The DTR cluster configurations                                                                                                                    |
+| Repository metadata                | The metadata about the repositories and images deployed                                                                                           |
+| Access control to repos and images | Permissions for teams and repositories                                                                                                            |
+| Notary data                        | Notary tags and signatures                                                                                                                        |
+| Scan results                       | Security scanning results for images                                                                                                              |
+| Certificates and keys              | The certificates, public keys, and private keys that are used for mutual TLS communication                                                        |
+| Images content                     | The images you push to DTR. This can be stored on the filesystem of the node running DTR, or other storage system, depending on the configuration |
 
-This data persists using named volumes on the host where DTR is running.
+This data is persisted on the host running DTR, using named volumes.
 [Learn more about DTR named volumes](../architecture.md).
 
-DTR also persists Docker images on the filesystem of the host running DTR, or
-on a cloud provider, depending on the way DTR is configured.
+To perform a backup of a DTR node, run the `docker/dtr backup` command. This
+command backups up the following data:
+
+| Data                               | Backed up | Description                                                    |
+|:-----------------------------------|:----------|:---------------------------------------------------------------|
+| Configurations                     | yes       |                                                                |
+| Repository metadata                | yes       |                                                                |
+| Access control to repos and images | yes       |                                                                |
+| Notary data                        | yes       |                                                                |
+| Scan results                       | yes       |                                                                |
+| Certificates and keys              | yes       |                                                                |
+| Image content                      | no        | Needs to be backed up separately, depends on DTR configuration |
+| Users, orgs, teams                 | no        | Create a UCP backup to backup this data                        |
+| Vulnerability database             | no        | Can be re-downloaded after a restore                           |
+
 
 ## Backup DTR data
 
-To perform a backup of a DTR node, use the `backup` command. This
-command creates a backup of DTR:
+To create a backup of DTR you need to:
 
-* Configurations,
-* Repository metadata,
-* Access control,
-* Notary data,
-* Scan results,
-* Certificates and keys used by DTR.
+1. Backup image content
+2. Backup DTR metadata
 
-This data is added to a tar archive, and the result is streamed to stdout. This
-is done while DTR is running without shutting down any containers.
+You should always create backups from the same DTR replica, to ensure a smoother
+restore.
 
-Things DTR's backup command doesn't back up:
+### Backup image content
 
-* The vulnerability database (if using image scanning)
-* Image contents
-* Users, orgs, teams
+Since you can configure the storage backend that DTR uses to store images,
+the way you backup images depends on the storage backend you're using.
 
-There is no way to back up the vulnerability database. You can re-download it
-after restoring or re-apply your offline tar update if offline.
-
-The backup command does not create a backup of Docker images. You should
-implement a separate backup policy for the Docker images, taking in
-consideration whether your DTR installation is configured to store images on the
-filesystem or using a cloud provider. During restore, you need to separately
-restore the image contents.
-
-The backup command also doesn't create a backup of the users and organizations.
-That data is managed by UCP, so when you create a UCP backup you're creating
-a backup of the users and organizations. For this reason, when restoring DTR,
-you must do it on the same UCP cluster (or one created by restoring from
-backups) or else all DTR resources such as repos will be owned by non-existent
-users and will not be usable despite technically existing in the database.
-
-When creating a backup, the resulting .tar file contains sensitive information
-such as private keys. You should ensure the backups are stored securely.
-
-You can check the
-[reference documentation](../../reference/cli/backup.md), for the
-backup command to learn about all the available flags.
-
-As an example, to create a backup of a DTR node, you can use:
+If you've configured DTR to store images on the local filesystem or NFS mount,
+you can backup the images by using ssh to log into a node where DTR is running,
+and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
-$ docker run -i --rm docker/dtr backup \
+tar -cf /tmp/backup-images.tar dtr-registry-<replica-id>
+```
+
+If you're using a different storage backend, follow the best practices
+recommended for that system.
+
+
+### Backup DTR metadata
+
+To create a DTR backup, load your UCP client bundle, and run the following
+command, replacing the placeholders for the real values:
+
+```none
+read -sp 'ucp password: ' UCP_PASSWORD; \
+docker run -i --rm \
+  --env UCP_PASSWORD=$UCP_PASSWORD \
+  docker/dtr:<version> backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
-  --existing-replica-id <replica-id> \
-  --ucp-username <ucp-admin> \
-  --ucp-password <ucp-password> > /tmp/backup.tar
+  --ucp-username <ucp-username> \
+  --existing-replica-id <replica-id> > /tmp/backup-metadata.tar
 ```
 
 Where:
 
-* `--ucp-url` is the address of UCP,
-* `--ucp-insecure-tls` is to trust the UCP TLS certificate,
-* `--existing-replica-id` is the id of the replica to backup,
-* `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator.
+* `<version>`, the version of DTR you're running
+* `<ucp-url>` is the url you use to access UCP
+* `<ucp-username>` is the username of a UCP administrator
+* `<replica-id>` is the id of the DTR replica to backup
 
-To avoid having to pass the password as a command line parameter, you may
-instead use the following approach in bash:
+
+This prompts you for the UCP password, backups up the DTR metadata and saves the
+result into a tar archive. You can learn more about the supported flags in
+the [reference documentation](../../reference/cli/backup.md).
+
+The backup command doesn't stop DTR, so that you can take frequent backups
+without affecting your users. Also, the backup contains sensitive information
+like private keys, so you can encrypt the backup by running:
 
 ```none
-$ read -sp 'ucp password: ' PASS; UCP_PASSWORD=$PASS docker run -i --rm -e UCP_PASSWORD docker/dtr backup \
-  --ucp-url <ucp-url> \
-  --ucp-insecure-tls \
-  --existing-replica-id <replica-id> \
-  --ucp-username <ucp-admin> > /tmp/backup.tar
+gpg --symmetric /tmp/backup-metadata.tar
 ```
 
-This puts the password into a shell variable which is then passed into the
-docker client command with the -e flag which in turn relays the password to the
-DTR bootstrapper.
+This prompts you for a password to encrypt the backup, copies the backup file
+and encrypts it.
 
-## Testing backups
+### Test your backups
 
 To validate that the backup was correctly performed, you can print the contents
-of the tar file created:
+of the tar file created. The backup of the images should look like:
 
 ```none
-$ tar -tf /tmp/backup.tar
+tar -tf /tmp/backup-images.tar
+
+dtr-backup-v2.2.3/
+dtr-backup-v2.2.3/rethink/
+dtr-backup-v2.2.3/rethink/layers/
 ```
 
-The structure of the archive should look something like this:
+And the backup of the DTR metadata should look like:
 
 ```none
+tar -tf /tmp/backup-metadata.tar
+
+# The archive should look like this
 dtr-backup-v2.2.1/
 dtr-backup-v2.2.1/rethink/
 dtr-backup-v2.2.1/rethink/properties/
 dtr-backup-v2.2.1/rethink/properties/0
-...
 ```
 
-To really test that the backup works, you must make a copy of your UCP cluster
-by backing it up and restoring it onto separate machines. Then you can restore
-DTR there from your backup and verify that it has all the data you expect to
-see.
+If you've encrypted the metadata backup, you can use:
+
+```none
+gpg -d /tmp/backup.tar.gpg | tar -t
+```
+
+You can also create a backup of a UCP cluster and restore it into a new
+cluster. Then restore DTR on that new cluster to confirm that everything is
+working as expected.
 
 ## Restore DTR data
 
-You can restore a DTR node from a backup using the `restore` command.
+If your DTR has a majority of unhealthy replicas, the one way to restore it to
+a working state is by restoring from an existing backup.
 
-Note that backups are tied to specific DTR versions and are guaranteed to work
-only with those DTR versions. You can backup/restore across patch versions
-at your own risk, but not across minor versions as those require more complex
-migrations.
+To restore DTR, you need to:
 
-Before restoring DTR, make sure that you are restoring it on the same UCP
-cluster or you've also restored UCP using its restore command. DTR does not
-manage users, orgs or teams so if you try to
-restore DTR on a cluster other than the one it was backed up on, DTR
-repositories will be associated with users that don't exist and it will appear
-as if the restore operation didn't work.
+1. Stop any DTR containers that might be running
+2. Restore the images from a backup
+3. Restore DTR metadata from a backup
+4. Re-fetch the vulnerability database
 
-Note that to restore DTR, you must first remove any left over containers from
-the previous installation. To do this, see the [uninstall
-documentation](../install/uninstall.md).
+You need to restore DTR on the same UCP cluster where you've created the
+backup. If you restore on a different UCP cluster, all DTR resources will be
+owned by users that don't exist, so you'll not be able to manage the resources,
+even though they're stored in the DTR data store.
 
-The restore command performs a fresh installation of DTR, and reconfigures it with
-the configuration created during a backup. The command starts by installing DTR.
-Then it restores the configurations from the backup and then restores the
-repository metadata. Finally, it applies all of the configs specified as flags to
-the restore command.
+When restoring, you need to use the same version of the `docker/dtr` image
+that you've used when creating the update. Other versions are not guaranteed
+to work.
 
-After restoring DTR, you must make sure that it's configured to use the same
-storage backend where it can find the image data. If the image data was backed
-up separately, you must restore it now.
+### Stop DTR containers
 
-Finally, if you are using security scanning, you must re-fetch the security
-scanning database through the online update or by uploading the offline tar. See
-the [security scanning configuration](../admin/configure/set-up-vulnerability-scans.md)
-for more detail.
-
-You can check the
-[reference documentation](../../reference/cli/restore.md), for the
-restore command to learn about all the available flags.
-
-As an example, to install DTR on the host and restore its
-state from an existing backup:
+Start by removing any DTR container that is still running:
 
 ```none
-# Install and restore configurations from an existing backup
-$ docker run -i --rm \
-  docker/dtr restore \
+docker run -it --rm \
+  docker/dtr:<version> destroy \
+  --ucp-insecure-tls
+```
+
+### Restore images
+
+If you had DTR configured to store images on the local filesystem, you can
+extract your backup:
+
+```none
+sudo tar -xzf /tmp/image-backup.tar -C /var/lib/docker/volumes
+```
+
+If you're using a different storage backend, follow the best practices
+recommended for that system. When restoring the DTR metadata, DTR will be
+deployed with the same configurations it had when creating the backup.
+
+
+### Restore DTR metadata
+
+You can restore the DTR metadata with the `docker/dtr restore` command. This
+performs a fresh installation of DTR, and reconfigures it with
+the configuration created during a backup.
+
+Load your UCP client bundle, and run the following command, replacing the
+placeholders for the real values:
+
+```none
+read -sp 'ucp password: ' UCP_PASSWORD; \
+docker run -i --rm \
+  --env UCP_PASSWORD=$UCP_PASSWORD \
+  docker/dtr:<version> restore \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
-  --ucp-username <ucp-admin> \
-  --ucp-password <ucp-password> \
-  --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
+  --ucp-username <ucp-username> \
+  --ucp-node <hostname> \
+  --replica-id <replica-id> \
+  --dtr-external-url <dtr-external-url> < /tmp/backup-metadata.tar
 ```
 
 Where:
 
-* `--ucp-url` is the address of UCP,
-* `--ucp-insecure-tls` is to trust the UCP TLS certificate,
-* `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
-* `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
+* `<version>`, the version of DTR you're running
+* `<ucp-url>` is the url you use to access UCP
+* `<ucp-username>` is the username of a UCP administrator
+* `<hostname>` is the hostname of the node where you've restored the images
+* `<replica-id>` the id of the replica you backed up
+* `<dtr-external-url>`the url that clients use to access DTR
 
-Note that if you want to avoid typing your password into the terminal you must pass
-it in as an environment variable using the same approach as for the backup command:
+### Re-fetch the vulnerability database
 
-```none
-$ read -sp 'ucp password: ' PASS; UCP_PASSWORD=$PASS docker run -i --rm -e UCP_PASSWORD docker/dtr restore ...
-```
+If you're scanning images, you now need to download the vulnerability database.
 
 After you successfully restore DTR, you can join new replicas the same way you
-would after a fresh installation.
+would after a fresh installation. [Learn more](configure/set-up-vulnerability-scans.md).
 
 ## Where to go next
 
