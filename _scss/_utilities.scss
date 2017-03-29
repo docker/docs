@@ -93,11 +93,12 @@ i.fa.fa-outdent {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    width: 100%;
+    min-width: 260px;
 }
 
 .nav-secondary-tabs .search-form {
-    width: 81%;
+    width: 240px;
+    margin: 10px 0 0 10px!important;
 }
 
 .search-form input[type=text]:focus {
@@ -200,7 +201,7 @@ div#autocompleteResults {
 div#autocompleteResults {
     background: #f6fcff;
     border: 1px solid #eee;
-    padding: 20px 55px 15px 15px;
+    padding: 20px 0 15px 0px;
     margin: 10px 0 0 0;
     position: absolute;
     width: 600px!important;
@@ -225,7 +226,29 @@ div#autocompleteResults span {
     font-size: large;
 }
 
-
+.autocompleteSelected {
+  background-color: #f5f5f5;
+}
+.autocompleteList
+{
+  list-style-type: none;
+  width: 400px;
+  padding:0px;
+  margin-bottom: 0px;
+}
+.autoCompleteResult {
+  border-bottom: 1px solid #6db9d1;
+  padding-bottom: 10px;
+}
+#autocompleteShowAll {
+  padding-bottom: 10px;
+}
+.autocompleteList li {
+  width: 380px;
+  border: 0px;
+  padding-right: 20px;
+  margin: 0px;
+}
 /*
   *
   * google-Results  **********************************************************
