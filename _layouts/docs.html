@@ -147,7 +147,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 									<ul>
 										{% if edit_url != "" %}
 										<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
-										<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
 										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
 										<!-- day/night switch
