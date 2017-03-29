@@ -43,8 +43,8 @@ prose is simple, clear, and straightforward it will translate readily.
 
 One way to think about this is to assume Docker’s users are generally university
 educated and read at least a "16th" grade level (meaning they have a
-university degree). You can use a [readability
-tester](https://readability-score.com/) to help guide your judgement. For
+university degree). You can use a
+[readability tester](https://readable.io/) to help guide your judgment. For
 example, the readability score for the phrase "Containers should be ephemeral"
 is around the 13th grade level (first year at university), and so is acceptable.
 
