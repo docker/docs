@@ -89,9 +89,9 @@ balance checks. Use `/health` instead for those kinds of checks.
 Use the following examples to configure your load balancer for DTR.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#nginx" data-group="nginx">NGINX</a></li>
-  <li><a data-toggle="tab" href="#haproxy" data-group="haproxy">HAProxy</a></li>
-  <li><a data-toggle="tab" href="#aws">AWS LB</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#nginx" data-group="nginx">NGINX</a></li>
+  <li><a data-toggle="tab" data-target="#haproxy" data-group="haproxy">HAProxy</a></li>
+  <li><a data-toggle="tab" data-target="#aws">AWS LB</a></li>
 </ul>
 <div class="tab-content">
   <div id="nginx" class="tab-pane fade in active">
@@ -259,8 +259,8 @@ backend dtr_upstream_servers_443
 You can deploy your load balancer using:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#nginx-2" data-group="nginx">NGINX</a></li>
-  <li><a data-toggle="tab" href="#haproxy-2" data-group="haproxy">HAProxy</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#nginx-2" data-group="nginx">NGINX</a></li>
+  <li><a data-toggle="tab" data-target="#haproxy-2" data-group="haproxy">HAProxy</a></li>
 </ul>
 <div class="tab-content">
   <div id="nginx-2" class="tab-pane fade in active">
@@ -302,17 +302,3 @@ docker run --detach \
 
 * [Backups and disaster recovery](../backups-and-disaster-recovery.md)
 * [DTR architecture](../../architecture.md)
-
-
-<script>
-// sync tabs for the same language, so you only have to click once.
-
-// jquery is only loaded at the footer, so we can't rely on it for the
-// page load event
-window.onload = function() {
-  $('.nav-tabs > li > a').click(function(e) {
-    var group = $(this).attr('data-group');
-    $('.nav-tabs > li > a[data-group="'+ group +'"]').tab('show');
-  })
-};
-</script>
