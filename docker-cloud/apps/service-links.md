@@ -107,6 +107,14 @@ scales up or down. Service links are only updated when a service is deployed or
 redeployed, but are not updated during runtime. No new service link environment
 variables are created when a service scales up or down.
 
+>**Tip:** You can specify one of several [container distribution strategies](/docker-cloud/infrastructure/deployment-strategies.md) for
+applications deployed to multiple nodes. These strategies enable automatic
+deployments of containers to nodes, and sometimes auto-linking of containers.
+Note that if a service with
+[EVERY_NODE](/docker-cloud/infrastructure/deployment-strategies.md#every-node)
+strategy is linked to another service with EVERY_NODE strategy, containers will
+be linked one-to-one on each node.
+
 ### Service link example
 
 For the explanation of service linking, consider the following application
