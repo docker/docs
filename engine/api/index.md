@@ -23,9 +23,9 @@ The API can be accessed with any HTTP client, but we also provide [SDKs](sdks.md
 As an example, the `docker run` command can be easily implemented in various programming languages and by hitting the API directly with `curl`:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#python">Python</a></li>
-  <li><a data-toggle="tab" href="#go">Go</a></li>
-  <li><a data-toggle="tab" href="#curl">curl</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#python">Python</a></li>
+  <li><a data-toggle="tab" data-target="#go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#curl">curl</a></li>
 </ul>
 <div class="tab-content">
   <div id="python" class="tab-pane fade in active">

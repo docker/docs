@@ -280,3 +280,12 @@ if($('.nav-sidebar ul a.active').length != 0)
       $(this).addClass('collapse in').siblings;
   });
 }
+
+// sync tabs with the same data-group
+
+window.onload = function() {
+  $('.nav-tabs > li > a').click(function(e) {
+    var group = $(this).attr('data-group');
+    $('.nav-tabs > li > a[data-group="'+ group +'"]').tab('show');
+  })
+};
