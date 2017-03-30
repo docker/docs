@@ -33,7 +33,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
 </div>
 </div>
 
-## Products
+## Components
 
 <div class="component-container">
     <!--start real row-->
@@ -71,13 +71,6 @@ environment. Highlights Compose Version 3 new features and swarm mode.
         </div>
     <!-- end real row-->
     </div>
-<!-- end component-container 1-->
-</div>
-
-## Tools
-
-<!--component-container 2-->
-<div class="component-container">
     <!--start real row-->
     <div class="row">
     <!--organic row 1-->
