@@ -251,8 +251,8 @@ references as you rename, add, and remove tabs.
 
 ```
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
-  <li><a data-toggle="tab" href="#tab2">TAB 2 HEADER</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
   <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
