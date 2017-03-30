@@ -338,9 +338,10 @@ command.
 > **Note**: Under the content addressable storage model introduced with Docker
 > 1.10, image history data is no longer stored in a config file with each image
 > layer. It is now stored as a string of text in a single config file that
-> relates to the overall image. This can result in some image layers showing as
->  "missing" in the output of the `docker history` command. This is normal
->  behavior and can be ignored.
+> relates to the overall image. This can result in some parent image layers showing as
+> `missing` in the output of the `docker history` command. This is normal
+> behavior and can be ignored. `missing` means that there is no local image
+> associated with this history chain.
 >
 > You may hear images like these referred to as *flat images*.
 
