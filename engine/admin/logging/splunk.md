@@ -30,7 +30,7 @@ logging driver options:
 | Option                      | Required | Description                                                                                                                                                                                                             |
 |-----------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `splunk-token`              | required | Splunk HTTP Event Collector token.                                                                                                                                                                                      |
-| `splunk-url`                | required | Path to your Splunk Enterprise or Splunk Cloud instance (including port and scheme used by HTTP Event Collector) `https://your_splunk_instance:8088`.                                                                   |
+| `splunk-url`                | required | Path to your Splunk Enterprise, self-service Splunk Cloud instance, or Splunk Cloud managed cluster (including port and scheme used by HTTP Event Collector) in one of the following formats: `https://your_splunk_instance:8088` or `https://input-prd-p-XXXXXXX.cloud.splunk.com:8088` or `https://http-inputs-XXXXXXXX.splunkcloud.com`.  |
 | `splunk-source`             | optional | Event source.                                                                                                                                                                                                           |
 | `splunk-sourcetype`         | optional | Event source type.                                                                                                                                                                                                      |
 | `splunk-index`              | optional | Event index.                                                                                                                                                                                                            |
@@ -69,6 +69,10 @@ $ docker run --log-driver=splunk \
        your/application
 {% endraw %}
 ```
+
+The `splunk-url` for Splunk instances hosted on Splunk Cloud is in a format
+like `https://http-inputs-XXXXXXXX.splunkcloud.com` and does not include a
+port specifier.
 
 ### Message formats
 
