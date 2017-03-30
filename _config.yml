@@ -163,3 +163,10 @@ defaults:
       path: "apidocs/v2.0.1"
     values:
       hide_from_sitemap: true
+
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _scss
+  style:            :compressed
