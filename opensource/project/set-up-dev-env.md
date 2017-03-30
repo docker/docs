@@ -145,7 +145,7 @@ can take over 15 minutes to complete.
 6. Make a `docker` binary.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/docker/docker# hack/make.sh binary
+   root@a8b2885ab900:/go/src/github.com/docker/docker/hack/make.sh binary
    ...output snipped...
    bundles/1.12.0-dev already exists. Removing.
 
