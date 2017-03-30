@@ -24,6 +24,8 @@ guides:
     title: Docker for Mac
   - path: /docker-for-windows/install/
     title: Docker for Windows
+  - path: /docker-ee-for-windows/install/
+    title: Docker EE for Windows Server   
   - sectiontitle: Docker for Linux
     section:
     - path: /engine/installation/linux/ubuntu/
