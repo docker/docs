@@ -31,7 +31,8 @@ you can delete the service from the swarm.
     ```
 
 4.  Even though the service no longer exists, the task containers take a few
-    seconds to clean up. You can use `docker ps` to verify when they are gone.
+    seconds to clean up. You can use `docker service ps` to verify when the
+    tasks have been removed.
 
     ```bash
     $ docker ps
