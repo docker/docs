@@ -9,4 +9,4 @@
 
   Output:
     [#12345](https://github.com/docker/docker/pull/12345)
-{% endcomment %}{% assign org = include.org | default: "docker" %}{% assign repo = include.repo | default: "docker" %}{% assign pr = include.pr | default: NULL %}{% assign github-url="https://github.com" %}{% capture pr-link %}[#{{ pr }}]({{ github-url }}/{{ org }}/{{ repo }}/pull/{{ pr }}){% endcapture %}{{ pr-link | strip_newlines }}
+{% endcomment %}{% assign org = include.org | default: "docker" %}{% assign repo = include.repo | default: "docker" %}{% assign pr = include.pr | default: NULL %}{% assign github-url="https://github.com" %}{% capture pr-link %}<span class="glyphicons glyphicons-git-pull-request"></span>[#{{ pr }}]({{ github-url }}/{{ org }}/{{ repo }}/pull/{{ pr }}){% endcapture %}{{ pr-link | strip_newlines }}
