@@ -85,7 +85,7 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 | **TERMINATING**        | Docker Cloud is in the process of destroying this swarm. | None |
 | **TERMINATED**        | The swarm has been destroyed and will be removed from the list in 5 minutes. | None |
 | **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm will be removed from list in 5 minutes. | None |
-| **FAILED**        | Provisioning failed. | remove |
+| **FAILED**        | Provisioning failed. | Remove |
 
 ### Understanding and resolving problems
 
