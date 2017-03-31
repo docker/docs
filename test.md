@@ -347,6 +347,15 @@ break the Markdown block up. This example does it with Markdown. You can't have 
 break the Markdown block up.
 {: style="column-count: 3 "}
 
+## Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
+
 ## Admonitions (notes)
 
 > **Note**: This is a note.
