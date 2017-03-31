@@ -72,6 +72,7 @@ Docker: |
   The Docker project as a whole, which is a platform for developers and sysadmins to
   develop, ship, and run applications
   The docker daemon process running on the host which manages images and containers
+  (also called Docker Engine)
 Docker for Mac: |
   [Docker for Mac](/docker-for-mac/) is an easy-to-install,
   lightweight Docker development environment designed specifically for the Mac. A
@@ -117,6 +118,10 @@ image: |
   execution parameters for use within a container runtime. An image typically
   contains a union of layered filesystems stacked on top of each other. An image
   does not have state and it never changes.
+Kitematic: |
+  A legacy GUI, bundled with [Docker Toolbox](#toolbox), for managing Docker
+  containers. We recommend upgrading to [Docker for Mac](#docker-for-mac) or
+  [Docker for Windows](#docker-for-windows/), which have superseded Kitematic.
 libcontainer: |
   libcontainer provides a native Go implementation for creating containers with
   namespaces, cgroups, capabilities, and filesystem access controls. It allows
