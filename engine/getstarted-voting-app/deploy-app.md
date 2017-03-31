@@ -20,7 +20,7 @@ The `docker-stack.yml` file must be located on a manager for the swarm where you
 2.  Copy `docker-stack.yml` from your host machine onto the manager.
 
     ```
-    $ docker-machine scp ~/sandbox/voting-app/docker-stack.yml manager:/home/docker/.
+    $ docker-machine scp ~/sandbox/voting-app/docker-stack.yml manager:/home/docker/
     docker-stack.yml                                                                      100% 1558     1.5KB/s   00:00
     ```
 
