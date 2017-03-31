@@ -85,6 +85,8 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
+Note that the China and US Gov Cloud AWS partitions are not currently supported.
+
 ### Configuration
 
 Docker for AWS is installed with a CloudFormation template that configures Docker in swarm-mode, running on instances backed custom AMIs. There are two ways you can deploy Docker for AWS. You can use the AWS Management Console (browser based), or use the AWS CLI. Both have the following configuration options.

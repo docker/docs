@@ -30,9 +30,15 @@ This will initiate a rolling upgrade of the Docker swarm and service state will 
 
 The upgrade process may take several minutes to complete. You can follow the progress of the upgrade either from the output of the upgrade command or from the Azure UI by going to the Azure UI blades corresponding to the Virtual Machine Scale Sets hosting your manager and worker nodes. The URL for the Azure UI blades corresponding to your subscription and resource group is printed in the output of upgrade command above. They follow the following format:
 
+```none
 https://portal.azure.com/#resource/subscriptions/[subscription-id]/resourceGroups/[resource-group]/providers/Microsoft.Compute/virtualMachineScaleSets/swarm-manager-vmss/instances
+```
 
+```none
 https://portal.azure.com/#resource/subscriptions/[subscription-id]/resourceGroups/[resource-group]/providers/Microsoft.Compute/virtualMachineScaleSets/swarm-worker-vmss/instances
+```
+`[subscription-id]` and `[resource-group]` are placeholders which will be replaced by
+real values.
 
 Note that in the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you won't be able to access the node and if you were logged in, your SSH connection will drop.
 

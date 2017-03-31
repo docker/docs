@@ -72,17 +72,29 @@ You can now access this cluster using the following command in any Docker Engine
 
 ![List of swarms in Docker Cloud](images/cloud-swarms.png)
 
-## Swarm statuses in Docker Cloud
+## Swarm states in Docker Cloud
 
-Swarms that are registered in Docker Cloud appear in the Swarms list. Each line in the list shows the swarm's status. The statuses are:
+Swarms that are registered in Docker Cloud appear in the Swarms list. Each line in the list shows the swarm's state. The states are:
 
-<!-- TODO - **DEPLOYING**: Docker Cloud is provisioning the nodes of this swarm. -->
-- **DEPLOYED**: the swarm is sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check.
-- **UNREACHABLE**: the swarm is sending heartbeat pings, but Docker Cloud cannot contact the swarm.
-- **UNAVAILABLE**: Docker Cloud is not receiving any heartbeats from the swarm.
-- **REMOVED**: the swarm has been unregistered from Docker Cloud and will be removed from the list soon.
+|     State     |                    Description                          | Actions available |
+|:---------------|:--------------------------------------------------------|:---------------------------------|
+| **DEPLOYING**  | Docker Cloud is in the process of provisioning the swarm. | None |
+| **DEPLOYED**   | The swarm is running, connected, and sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check. | All (Edit endpoint, remove) |
+| **UNREACHABLE**        | The swarm is sending heartbeat pings and Docker Cloud is receiving them, but Cloud cannot connect to the swarm. | Remove |
+| **UNAVAILABLE**        | Docker Cloud is not receiving heartbeats from the swarm. | Remove |
+| **TERMINATING**        | Docker Cloud is in the process of destroying this swarm. | None |
+| **TERMINATED**        | The swarm has been destroyed and will be removed from the list in 5 minutes. | None |
+| **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm will be removed from list in 5 minutes. | None |
+| **FAILED**        | Provisioning failed. | Remove |
 
-> **Note**: [Removing a swarm](#unregister-a-swarm-from-docker-cloud) only removes the swarm from the interface in Docker Cloud. It does not change the swarm itself or any processes running on the swarm.
+### Understanding and resolving problems
+
+* If a swarm is UNREACHABLE, it may be behind a firewall or NAT.
+
+* If a swarm is UNAVAILABLE check the swarm from your infrastructure provider. The manager node(s) may be unresponsive or the server proxy service might not be running. You can SSH into an UNAVAILABLE swarm.
+
+* Removing a swarm only removes the swarm from the interface in Docker Cloud (i.e., [unregisters](#unregister-a-swarm-from-docker-cloud) it). It does not
+change the swarm itself or any processes running on the swarm.
 
 ## Unregister a swarm from Docker Cloud
 

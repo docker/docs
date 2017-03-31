@@ -232,22 +232,22 @@ You can nest captures within each other to represent more complex logic with Liq
 Here are some tabs:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
-  <li><a data-toggle="tab" href="#tab2">TAB 2 HEADER</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
   <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
   <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
 </div>
 
-You need to adjust the IDs and HREFs to match your use case.
+You need to adjust the `id` and `data-target` values to match your use case.
 
 If you have Markdown inside the content of the `<div>`, you need to capture it, then
 print it and run it through the `markdownify` Liquid filter. Here's a demo:
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#tab3">TAB 1 HEADER</a></li>
-  <li><a data-toggle="tab" href="#tab4">TAB 2 HEADER</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab4">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active">
@@ -269,6 +269,38 @@ print it and run it through the `markdownify` Liquid filter. Here's a demo:
 {{ tab4-content | markdownify }}
 </div>
 </div>
+
+#### Synchronizing multiple tab groups
+
+Consider an example where you have something like one tab per language, and
+you have multiple tab sets like this on a page. You might want them to all
+toggle together. We have Javascript that loads on every page that lets you
+do this by setting the `data-group` attributes to be the same. Note that the
+`data-target` attributes still need to point to unique div IDs.
+
+In this example, selecting `Go` or `Python` in one tab set will toggle the
+other tab set to match.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#go" data-group="go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#python" data-group="python">Python</a></li>
+</ul>
+<div class="tab-content">
+  <div id="go" class="tab-pane fade in active">Go content here</div>
+  <div id="python" class="tab-pane fade in">Python content here</div>
+</div>
+
+And some content between the two sets, just for fun...
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#go-2" data-group="go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#python-2" data-group="python">Python</a></li>
+</ul>
+<div class="tab-content">
+  <div id="go-2" class="tab-pane fade in active">Go content here</div>
+  <div id="python-2" class="tab-pane fade in">Python content here</div>
+</div>
+
 
 ### Cards
 
@@ -314,6 +346,15 @@ break the Markdown block up. This example does it with Markdown. You can't have 
 break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
 break the Markdown block up.
 {: style="column-count: 3 "}
+
+## Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
 
 ## Admonitions (notes)
 

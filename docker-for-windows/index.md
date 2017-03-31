@@ -288,7 +288,7 @@ PowerShell Module as follows.
     Notepad $PROFILE
     ```
 
-Now, when you press tab after typing the first few letters, Docker commands such
+Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
 as `start`, `stop`, `run`, and their options, along with container and image
 names should now auto-complete.
 
@@ -310,6 +310,8 @@ display options through taskbar settings for notifications.
 To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
+
+>**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-windows). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
 
 The **Settings** dialogs provide options to allow Docker auto-start,
 automatically check for updates, share local drives with Docker containers,
@@ -603,21 +605,6 @@ because they do not apply to Windows containers:
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
 
-### Giving feedback and getting help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows).
-
-To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
-
-To give feedback on the documentation or update it yourself, use the Feedback
-options at the bottom of each docs page.
-
 ### Docker Store
 
 Choose **Docker Store** from the Docker for Windows menu
@@ -629,11 +616,13 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-### Docker Cloud
+### Docker Cloud (Edge feature)
 
-You can access your Docker Cloud account from within Docker for Windows.
+You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Windows.
 
 ![Docker Cloud](images/docker-cloud.png)
+
+>**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-windows).  On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
 
 From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
 or create one.
@@ -649,9 +638,29 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
+### Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can review
+community reported issues, and file new ones. As a part of reporting issues on
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
+
 ### Diagnose and Feedback
 
-If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.
+If you encounter problems for which you do not find solutions in this
+documentation, searching [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) already filed by other users,
+or on the [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows), we can help you
+troubleshoot the log data.
 
 Select **Upload a diagnostic**.
 

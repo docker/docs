@@ -96,7 +96,7 @@ functionality using directional links recorded in environment variables.
 When you link a "client" service to a "server" service, Docker Cloud performs
 the following actions on the "client" service:
 
-1. Creates a group of environment variables that contain information about the exposed ports of the "server" service, including its IP address, port and protocol.
+1. Creates a group of environment variables that contain information about the exposed ports of the "server" service, including its IP address, port, and protocol.
 
 2. Copies all of the "server" service environment variables to the "client" service with an `HOSTNAME_ENV_` prefix.
 
@@ -106,6 +106,14 @@ Some environment variables such as the API endpoint are updated when a service
 scales up or down. Service links are only updated when a service is deployed or
 redeployed, but are not updated during runtime. No new service link environment
 variables are created when a service scales up or down.
+
+>**Tip:** You can specify one of several [container distribution strategies](/docker-cloud/infrastructure/deployment-strategies.md) for
+applications deployed to multiple nodes. These strategies enable automatic
+deployments of containers to nodes, and sometimes auto-linking of containers.
+Note that if a service with
+[EVERY_NODE](/docker-cloud/infrastructure/deployment-strategies.md#every-node)
+strategy is linked to another service with EVERY_NODE strategy, containers will
+be linked one-to-one on each node.
 
 ### Service link example
 
@@ -156,7 +164,7 @@ This example snippet creates a directional link from `my-proxy` to `my-web-app`,
 
 ### DNS hostnames vs service links
 
-  > **Note**: Hostnames are updated during runtime if the service scales up or down. Environment variables are only set or updated at deploy or redeploy. If your services will scale up or down frequently, you should use hostnames rather than service links.
+> **Note**: Hostnames are updated during runtime if the service scales up or down. Environment variables are only set or updated at deploy or redeploy. If your services will scale up or down frequently, you should use hostnames rather than service links.
 
 In the example, the `my-proxy` containers can access the service links using following hostnames:
 

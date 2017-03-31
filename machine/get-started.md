@@ -73,7 +73,7 @@ Toolbox.
 
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
   correctly installed on your system. If you used
-  [Toolbox]("https://www.docker.com/products/docker-toolbox"){: target="_blank" class="_"}
+  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_"}
   or [Docker for Windows](/docker-for-windows/index.md){: target="_blank" class="_"}
   to install Docker Machine, VirtualBox is
   automatically installed.

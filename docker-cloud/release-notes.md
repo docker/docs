@@ -46,7 +46,7 @@ The following release notes document changes since [Tutum v0.19.5](https://suppo
 ### Added
 
 - **Docker Cloud is Generally Available**: all features of Docker Cloud are Generally Available with the exception of the build features which remain in beta.
-- **Docker Hub Registry Integration**: All of your Docker Hub image repositories are available and accessible when you login to Docker Cloud. Changes you make to your repositories are reflected in both Docker Hub and Docker Cloud.
+- **Docker Hub Registry Integration**: all of your Docker Hub image repositories are available and accessible when you login to Docker Cloud. Changes you make to your repositories are reflected in both Docker Hub and Docker Cloud.
 - **Autoredeploy from Docker Hub**: services that use a repository stored in the Docker Hub now have the [**autoredeploy** option](apps/auto-redeploy.md) available, which allows automatic redeployments on push without setting up webhooks.
 - **Environment variable substitution on CLI**: the `docker-cloud` CLI now substitutes environment variables in stack files, [the same way Docker Compose does it](/compose/compose-file/#variable-substitution:91de898b5f5cdb090642a917d3dedf68).
 
@@ -77,4 +77,4 @@ The following release notes document changes since [Tutum v0.19.5](https://suppo
 ### Known issues
 
 - **Documentation screen captures** in most cases still reflect the Tutum interface and branding. We will update these and refresh the documentation as we go.
-- **References to Tutum remain** in the documentation. We will update these and refresh the documentation as we go
+- **References to Tutum remain** in the documentation. We will update these and refresh the documentation as we go.

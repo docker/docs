@@ -104,7 +104,7 @@ If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker ne
 
 ## Which AWS regions will this work with?
 
-Docker for AWS should work with all regions except for AWS China, which is a little different than the other regions.
+Docker for AWS should work with all regions except for AWS US Gov Cloud (us-gov-west-1) and AWS China, which are a little different than the other regions.
 
 ## How many Availability Zones does Docker for AWS use?
 

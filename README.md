@@ -204,6 +204,12 @@ guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.
 
+### Testing changes and practical guidance
+
+If you want to test a style change, or if you want to see how to achieve a
+particular outcome with Markdown, Bootstrap, JQuery, or something else, have
+a look at `test.md` (which renders in the site at `/test/`).
+
 ### Per-page front-matter
 
 The front-matter of a given page is in a section at the top of the Markdown
@@ -251,14 +257,25 @@ references as you rename, add, and remove tabs.
 
 ```
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
-  <li><a data-toggle="tab" href="#tab2">TAB 2 HEADER</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
   <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
   <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
 </div>
 ```
+
+For more info and a few more permutations, see `test.md`.
+
+### Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
 
 ## Copyright and license
 

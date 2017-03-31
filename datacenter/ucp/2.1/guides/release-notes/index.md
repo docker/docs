@@ -13,6 +13,57 @@ You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
 
+## Version 2.1.2
+
+(29 Mar 2017)
+
+**Known issues**
+
+There is known issue in UCP 2.1 where upgrading from UCP 1.1.z can cause swarm
+to leave worker nodes in a pending state with the message:
+
+```
+[Pending] Completing node registration
+```
+
+There are two workarounds for rectifying this issue:
+
+1. When upgrading from UCP 1.1.z, first upgrade to UCP 2.0.z, and then to UCP
+2.1.z. This will prevent the issue from happening, and is the recommended upgrade path.
+2. If you have already upgraded from UCP 1.1.z directly to UCP 2.1.z, you can
+fix the issue by restarting the ucp-swarm-manager container on each of your UCP
+controller nodes.
+
+This issue will be fixed in UCP 2.1.3.
+
+**Bug fixes**
+
+* Core
+	* `ucp-reconcile` service now correctly brings up `ucp-kv` container if it
+	has stopped or become unreachable
+	* Fixed known issue in which users are unable to log into UCP UI after upgrading
+	from UCP 2.1.0 to 2.1.1 because the parameter for maximum concurrent users was
+	incorrectly defaulted to '0'
+	* Fixed an issue where the UCP manager becomes unresponsive and requires a restart
+	if `docker ps` or `docker info` calls to engine take a long time for a response
+	* HTTP Routing Mesh now correctly provides httplog for debug logging of services
+	* `docker node ls -f` now correctly filters when run against a UCP cluster
+	* `docker inspect task` no longer returns errors when run against a UCP cluster
+	* UCP now correctly reports progress when loading an image from CLI
+
+* docker/ucp image
+	* UCP support dumps now include Docker Engine daemon logs
+	* Host address IPs are now automatically added to SANs during install
+	* UCP now reports its version number in the CLI after being installed
+
+* UI/UX
+	* Deploying Compose-based applications in the GUI now works correctly when
+	Docker Content Trust "Run Only Signed Images" is turned on
+	* Fixed an issue where UI temporarily showed more tasks for a service than
+	actually existed
+	* Fixed an issue in which metrics incorrectly displayed `0%` in the UI
+
+
 ## Version 2.1.1
 
 (14 Mar 2017)

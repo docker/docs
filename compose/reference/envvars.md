@@ -10,13 +10,13 @@ Several environment variables are available for you to configure the Docker Comp
 Variables starting with `DOCKER_` are the same as those used to configure the
 Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
 
-> Note: Some of these variables can also be provided using an
+> **Note**: Some of these variables can also be provided using an
 > [environment file](../env-file.md)
 
 ## COMPOSE\_PROJECT\_NAME
 
 Sets the project name. This value is prepended along with the service name to
-the container on start up. For example, if you project name is `myapp` and it
+the container on start up. For example, if your project name is `myapp` and it
 includes two services `db` and `web` then compose starts containers named
 `myapp_db_1` and `myapp_web_1` respectively.
 
@@ -30,16 +30,17 @@ Specify the path to a Compose file. If not provided, Compose looks for a file na
 `docker-compose.yml` in the current directory and then each parent directory in
 succession until a file by that name is found.
 
-This variable supports multiple compose files separate by a path separator (on
+This variable supports multiple compose files separated by a path separator (on
 Linux and macOS the path separator is `:`, on Windows it is `;`). For example:
-`COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`
+`COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. The path separator
+can also be customized using `COMPOSE_PATH_SEPARATOR`.
 
 See also the `-f` [command-line option](overview.md).
 
 ## COMPOSE\_API\_VERSION
 
 The Docker API only supports requests from clients which report a specific
-version. If you receive a `client and server don't have same version error` using
+version. If you receive a `client and server don't have same version` error using
 `docker-compose`, you can workaround this error by setting this environment
 variable. Set the version value to match the server version.
 
@@ -83,8 +84,13 @@ Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
 ## COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
 Enable path conversion from Windows-style to Unix-style in volume definitions.
-Users of Docker Machine and Docker Toolbox on Windows should always set this. Defaults to `0`
+Users of Docker Machine and Docker Toolbox on Windows should always set this. Defaults to `0`.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
+
+## COMPOSE\_PATH\_SEPARATOR
+
+If set, the value of the `COMPOSE_FILE` environment variable will be separated
+using this character as path separator.
 
 
 ## Related Information

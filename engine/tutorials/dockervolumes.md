@@ -105,7 +105,8 @@ content. Once the mount is removed, the content is accessible again. This is
 consistent with the expected behavior of the `mount` command.
 
 The `container-dir` must always be an absolute path such as `/src/docs`.
-The `host-dir` can either be an absolute path or a `name` value. If you
+The `host-dir` can either be an absolute path such as `/dst/docs` on Linux
+or `C:\dst\docs` on Windows, or a `name` value. If you
 supply an absolute path for the `host-dir`, Docker bind-mounts to the path
 you specify. If you supply a `name`, Docker creates a named volume by that `name`.
 

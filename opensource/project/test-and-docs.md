@@ -242,7 +242,7 @@ make any changes, just run these commands again.
 
 The Docker documentation source files are in a centralized repository at
 [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
-written using extended Markdown, which you can edit in a plain text editor such as 
+written using extended Markdown, which you can edit in a plain text editor such as
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
 Most documentation is developed in the centralized repository. The exceptions are
@@ -282,7 +282,7 @@ which will build an image named `docs/docstage` and launch a container with Jeky
 correctly. The container uses Jekyll to incrementally build and serve the site using the
 files in the local repository.
 
-Go to [http://localhost:4000/](http://localhost:4000/) in your web browser to view the documentation.
+Go to `http://localhost:4000/` in your web browser to view the documentation.
 
 The container runs in the foreground. It will continue to run and incrementally build the site when changes are
 detected, even if you change branches.

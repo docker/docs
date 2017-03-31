@@ -477,12 +477,14 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.26/
-    title: v1.26 Reference
+  - path: /engine/api/v1.27/
+    title: v1.27 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.26/
+      title: v1.26 reference
     - path: /engine/api/v1.25/
       title: v1.25 reference
     - path: /engine/api/v1.24/
@@ -699,6 +701,8 @@ reference:
       title: docker plugin rm
     - path: /engine/reference/commandline/plugin_set/
       title: docker plugin set
+    - path: /engine/reference/commandline/plugin_upgrade/
+      title: docker plugin upgrade
   - path: /engine/reference/commandline/port/
     title: docker port
   - path: /engine/reference/commandline/ps/
@@ -2210,6 +2214,8 @@ glossary:
   title: filesystem
 - path: /glossary/#image
   title: image
+- path: /glossary/#kitematic
+  title: Kitematic
 - path: /glossary/#libcontainer
   title: libcontainer
 - path: /glossary/#libnetwork

@@ -1,6 +1,6 @@
 ---
 description: Introduction and Overview of Compose
-keywords: documentation, docs,  docker, compose, orchestration, containers
+keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 ---
 
@@ -44,7 +44,7 @@ A `docker-compose.yml` looks like this:
       logvolume01: {}
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file.md)
+[Compose file reference](compose-file.md).
 
 Compose has commands for managing the whole lifecycle of your application:
 
@@ -127,7 +127,7 @@ below.
 ### Development environments
 
 When you're developing software, the ability to run an application in an
-isolated environment and interact with it is crucial.  The Compose command
+isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
 The [Compose file](compose-file.md) provides a way to document and configure
@@ -137,7 +137,7 @@ and start one or more containers for each dependency with a single command
 (`docker-compose up`).
 
 Together, these features provide a convenient way for developers to get
-started on a project.  Compose can reduce a multi-page "developer getting
+started on a project. Compose can reduce a multi-page "developer getting
 started guide" to a single machine readable Compose file and a few commands.
 
 ### Automated testing environments

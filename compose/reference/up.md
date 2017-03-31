@@ -28,7 +28,8 @@ Options:
                                running. (default: 10)
     --remove-orphans           Remove containers for services not defined in
                                the Compose file
-
+    --exit-code-from SERVICE   Return the exit code of the selected service container.
+                               Implies --abort-on-container-exit.
 ```
 
 Builds, (re)creates, starts, and attaches to containers for a service.

@@ -27,7 +27,7 @@ To install Compose, do the following:
 4.  Follow the instructions from the release page and run the `curl` command,
     which the release page specifies, in your terminal.
 
-    > Note: If you get a "Permission denied" error, your `/usr/local/bin` directory
+    > **Note**: If you get a "Permission denied" error, your `/usr/local/bin` directory
     > probably isn't writable and you'll need to install Compose as the superuser. Run
     > `sudo -i`, then the two commands below, then `exit`.
 
@@ -62,7 +62,7 @@ To install Compose, do the following:
 ### Install using pip
 
 Compose can be installed from [pypi](https://pypi.python.org/pypi/docker-compose)
-using `pip`.  If you install using `pip` it is highly recommended that you use a
+using `pip`. If you install using `pip`, it is highly recommended that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating systems
 have python system packages that conflict with docker-compose dependencies. See
 the [virtualenv tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
@@ -72,7 +72,7 @@ to get started.
 $ pip install docker-compose
 ```
 
-> **Note**: pip version 6.0 or greater is required
+> **Note**: pip version 6.0 or greater is required.
 
 ### Install as a container
 
@@ -132,7 +132,7 @@ $ pip uninstall docker-compose
 
 > **Note**: If you get a "Permission denied" error using either of the above
 > methods, you probably do not have the proper permissions to remove
-> `docker-compose`.  To force the removal, prepend `sudo` to either of the above
+> `docker-compose`. To force the removal, prepend `sudo` to either of the above
 > >commands and run again.
 
 
