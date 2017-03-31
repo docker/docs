@@ -72,7 +72,7 @@ to get started.
 $ pip install docker-compose
 ```
 
-> **Note**: pip version 6.0 or greater is required
+> **Note**: pip version 6.0 or greater is required.
 
 ### Install as a container
 
