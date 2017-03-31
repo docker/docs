@@ -10,7 +10,7 @@ Docker packages your app with its dependencies, freeing you from worrying about
 your system configuration, and making your app more portable.
 
 <div class="row">
-<div class="col-sm-12 col-md-12 col-lg-6">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 {% capture basics %}
 ### Learn Docker basics
 
@@ -21,7 +21,7 @@ tutorial stops short of teaching you how to deploy applications.
 {% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
 </div>
 
-<div class="col-sm-12 col-md-12 col-lg-6 block">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 {% capture apps %}
 ### Define and deploy apps in Swarm Mode
 
@@ -38,9 +38,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
 <div class="component-container">
     <!--start row-->
     <div class="row">
-    <!--organic row 1-->
-    <!--Docker for Mac-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-mac/"> <img src="../images/apple_48.svg" alt="Docker for Mac"> </a>
@@ -49,8 +47,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
-    <!--Docker for Windows-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker for Windows"> </a>
@@ -59,8 +56,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>
-    <!--Docker for Linux-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="engine/installation/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>

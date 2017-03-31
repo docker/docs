@@ -106,7 +106,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							}
 							</script>
 							{% if page.noratings != true %}
-						  <div style="text-align: center; margin-top: 50px">
+						  <div style="color:#b9c2cc; text-align: center; margin-top: 150px">
 								<img src="/images/chat.png" alt="chat icon" style="display:inline">
 								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
 								<a href="{{ edit_url }}">Edit this page</a> <span>&#9679;</span> {% endif %}
@@ -141,7 +141,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						</div>
 					</nav>
 					<div class="col-toc">
-							<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper toc-nav{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
+							<div id="{% if page.landing == true %}sidebar-right{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top hidden-xs hidden-sm{%else%}sidebar-wrapper hidden-xs hidden-sm{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
 							<div class="toc-nav">
 								<div class="feedback-links">
 									<ul>
@@ -150,8 +150,8 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 										<li><a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC @{{ assignee }}"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
 										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
-										<!-- day/night switch
-										<li>
+										<!-- toggle mode -->
+<!-- 										<li>
 											<div class="toggle-mode">
 												<div class="icon">
 													<i class="fa fa-sun-o" aria-hidden="true"></i>

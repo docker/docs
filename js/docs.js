@@ -127,15 +127,15 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name,"",-1);
 }
-/*
+
 if (readCookie("night") == "true") {
-  document.getElementById('pagestyle').setAttribute('href', '/css/style-alt.css');
+  applyNight();
   $('#switch-style').prop('checked', true);
 } else {
-  document.getElementById('pagestyle').setAttribute('href', '/css/style.css');
+  applyDay();
   $('#switch-style').prop('checked', false);
 }
-*/
+
 
 
 /*
@@ -147,6 +147,11 @@ if (readCookie("night") == "true") {
 $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $(".wrapper").toggleClass("right-open");
+        $(".col-toc").toggleClass("col-toc-hidden");
+    });
+$("#menu-toggle-left").click(function(e) {
+        e.preventDefault();
+        $(".col-nav").toggleClass("col-toc-hidden");
     });
 $(".navbar-toggle").click(function(){
   $(".sidebar, .sidebar-home").each(function(){
@@ -248,21 +253,31 @@ $('ul.nav li.dropdown').hover(function() {
  *
  */
 
-function swapStyleSheet(sheet) {
-    document.getElementById('pagestyle').setAttribute('href', sheet);
+// function swapStyleSheet(sheet) {
+//     document.getElementById('pagestyle').setAttribute('href', sheet);
+// }
+
+function applyNight()
+{
+  $( "body" ).addClass( "night" );
 }
 
+function applyDay() {
+  $( "body" ).removeClass( "night" );
+}
 
 $('#switch-style').change(function() {
 
     if ($(this).is(':checked')) {
-        swapStyleSheet('/css/style-alt.css');
+        applyNight();
         createCookie("night",true,999)
-    } else {
-        swapStyleSheet('/css/style.css');
+    } else {  
+        applyDay();
+    //     swapStyleSheet('/css/style.css');
         eraseCookie("night")
     }
 });
+
 
 /*
  *
@@ -281,8 +296,18 @@ if($('.nav-sidebar ul a.active').length != 0)
   });
 }
 
-// sync tabs with the same data-group
 
+/*
+ *
+ * Components *********************************************************************
+ *
+ */
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// sync tabs with the same data-group
 window.onload = function() {
   $('.nav-tabs > li > a').click(function(e) {
     var group = $(this).attr('data-group');
