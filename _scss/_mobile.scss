@@ -104,6 +104,10 @@
     .search-form {
         width: 81%;
     }
+    .nav-secondary input[type=search] {
+        background: rgb(78, 77, 77) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
   }
 
 /*
@@ -118,7 +122,8 @@
   and (max-device-width: 670px)  {
     .logo,
     .hero-text,
-    .banner {
+    .banner,
+    .ctrl-right {
         display: none;
     }
 
@@ -156,13 +161,17 @@
         background-color: $black;
         height: 100px;
     }
+    .nav-secondary input[type=search] {
+        background: rgb(78, 77, 77) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
     .nav-sidebar a {
         color: #a8a8a8;
     }
     .tabs {
         float: left;
         margin: 0;
-        padding: 5px 0 0 30px;
+        padding: 5px 0 0 17px;
     }
     .tabs li a {
         color: #fff;
@@ -199,6 +208,7 @@
     }
     .search-form {
         display: block!important;
+        width: 230px;
     }
     .component-full {
         text-align: center;
@@ -289,6 +299,19 @@
 }
 
 
+/* Portrait and Landscape iphone 4 + S */
+// @media only screen 
+//   and (min-device-width: 320px) 
+//   and (max-device-width: 480px)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+//     .tabs {
+//         padding: 5px 0 0 8px;
+//     }
+//     .tabs li a {
+//         padding: 15px 9px 10px 4px;
+//     }
+// }
+
 /*
 *
 * medium displays mobile  **********************************************************
@@ -335,16 +358,20 @@
 @media only screen 
   and (min-device-width: 768px) 
   and (max-device-width: 1024px) 
-  and (orientation: landscape) {
+  and (orientation: portrait) {
 
-    .tabs li a {
-        color: #fff;
-        padding: 17px 9px 12px 5px;
-        float: left;
-        opacity: 0.8;
-    }
-    .navbar-toggle {
-        display: block!important;
+    // .tabs li a {
+    //     color: #fff;
+    //     padding: 17px 9px 12px 5px;
+    //     float: left;
+    //     opacity: 0.8;
+    // }
+    // .navbar-toggle {
+    //     display: block!important;
+    // }
+    .nav-secondary input[type=search] {
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
     }
 }
 
@@ -366,6 +393,13 @@
         display: block;
     }
 
+    .sidebar, .sidebar.affix {
+        width: 270px;
+    }
+    .nav-secondary input[type=search] {
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
 }
 
 @media (max-width: 768px) {
