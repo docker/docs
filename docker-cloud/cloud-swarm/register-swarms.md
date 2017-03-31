@@ -72,24 +72,24 @@ You can now access this cluster using the following command in any Docker Engine
 
 ![List of swarms in Docker Cloud](images/cloud-swarms.png)
 
-## Swarm statuses in Docker Cloud
+## Swarm states in Docker Cloud
 
-Swarms that are registered in Docker Cloud appear in the Swarms list. Each line in the list shows the swarm's status. The statuses are:
+Swarms that are registered in Docker Cloud appear in the Swarms list. Each line in the list shows the swarm's state. The states are:
 
-|     Status     |                    Description                          | Actions |
+|     State     |                    Description                          | Actions available |
 |:---------------|:--------------------------------------------------------|:---------------------------------|
 | **DEPLOYING**  | Docker Cloud is in the process of provisioning the swarm. | None |
-| **DEPLOYED**   | The swarm is running, connected, and sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check. | All (Edit endpoint, view logs, review, terminate) |
+| **DEPLOYED**   | The swarm is running, connected, and sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check. | All (Edit endpoint, remove) |
 | **UNREACHABLE**        | The swarm is sending heartbeat pings and Docker Cloud is receiving them, but Cloud cannot connect to the swarm. | Remove |
 | **UNAVAILABLE**        | Docker Cloud is not receiving heartbeats from the swarm. | Remove |
 | **TERMINATING**        | Docker Cloud is in the process of destroying this swarm. | None |
-| **TERMINATED**        | The swarm has been destroyed and be removed from the list in 5 minutes. | None |
+| **TERMINATED**        | The swarm has been destroyed and will be removed from the list in 5 minutes. | None |
 | **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm will be removed from list in 5 minutes. | None |
-| **FAILED**        | Provisioning failed. Please view logs for details. | View logs, remove |
+| **FAILED**        | Provisioning failed. | remove |
 
 ### Understanding and resolving problems
 
-* If a swarm is publicly UNREACHABLE, it may be behind a firewall or NAT.
+* If a swarm is UNREACHABLE, it may be behind a firewall or NAT.
 
 * If a swarm is UNAVAILABLE check the swarm from your infrastructure provider. The manager node(s) may be unresponsive or the server proxy service might not be running. You can SSH into an UNAVAILABLE swarm.
 
