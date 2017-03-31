@@ -15,6 +15,13 @@ It incorporates defect fixes that you can use in environments where new features
 cannot be adopted as quickly for consistency and compatibility reasons.
 
 
+## CS Engine 1.13.1-cs3
+(23 Feb 2017)
+
+Backports all fixes from 17.03.1
+
+* Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
+
 ## CS Engine 1.13.1-cs2
 (23 Feb 2017)
 
