@@ -8,10 +8,18 @@ title: Docker for Azure Release Notes
 
 ## Stable Channel
 
-### 17.03.0 CE
-Release date: 02/08/2017
+### 17.03.1 CE
+Release date: 03/30/2017
 
 {{azure_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Update to the CloudStor plugin for log streaming instead of aggregation
+
+### 17.03.0 CE
+Release date: 02/08/2017
 
 **New**
 

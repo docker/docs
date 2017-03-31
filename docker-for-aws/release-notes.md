@@ -8,11 +8,18 @@ title: Docker for AWS Release Notes
 
 ## Stable Channel
 
-### 17.03.0 CE
-Release date: 03/01/2017
+### 17.03.1 CE
+Release date: 03/30/2017
 
 {{aws_blue_latest}}
 
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Updated AZ for Sao Paulo
+
+### 17.03.0 CE
+Release date: 03/01/2017
 
 **New**
 
