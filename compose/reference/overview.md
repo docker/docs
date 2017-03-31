@@ -120,8 +120,7 @@ See also the `COMPOSE_FILE` [environment variable](envvars.md#compose-file).
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
 directory name. See also the `COMPOSE_PROJECT_NAME` [environment variable](
-envvars.md#compose-project-name)
-
+envvars.md#compose-project-name).
 
 ## Where to go next
 
