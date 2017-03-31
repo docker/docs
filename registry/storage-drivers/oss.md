@@ -65,7 +65,7 @@ An endpoint which defaults to `<bucket>.<region>.aliyuncs.com` or `<bucket>.<reg
 <td>
 no
 </td>
-<td> An internal endpoint or the public endpoint for OSS access. The default is false. For a list of regions, you can look at <https://docs.aliyun.com/#/oss/product-documentation/domain-region>
+<td> An internal endpoint or the public endpoint for OSS access. The default is false. For a list of regions, you can look at [https://docs.aliyun.com/#/oss/product-documentation/domain-region](https://docs.aliyun.com/#/oss/product-documentation/domain-region).
 </td>
 </tr>
 <tr>
