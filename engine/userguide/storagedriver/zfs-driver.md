@@ -235,9 +235,6 @@ Once ZFS is installed and loaded, you're ready to configure ZFS for Docker.
         zpool-docker         93.5K  3.84G    19K  /zpool-docker
         zpool-docker/docker  19K    3.84G    19K  /var/lib/docker
 
-    Now that you have a ZFS filesystem mounted to `/var/lib/docker`, the daemon
- should automatically load with the `zfs` storage driver.
-
 5. Start the Docker daemon.
 
         $ sudo service docker start
