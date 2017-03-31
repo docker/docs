@@ -44,7 +44,7 @@ Your access key secret.
 <td>
 yes
 </td>
-<td> The name of the OSS region in which you would like to store objects (for example `oss-cn-beijing`). For a list of regions, you can look at <https://docs.aliyun.com/#/oss/product-documentation/domain-region>
+<td> The name of the OSS region in which you would like to store objects (for example `oss-cn-beijing`). For a list of regions, you can look at [https://docs.aliyun.com/#/oss/product-documentation/domain-region](https://docs.aliyun.com/#/oss/product-documentation/domain-region).
 </td>
 </tr>
 <tr>
