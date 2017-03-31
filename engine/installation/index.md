@@ -8,50 +8,34 @@ redirect_from:
 title: Install Docker
 ---
 
-## Docker variants
+Docker is available in two editions: **Community Edition (CE)** and **Enterprise
+Edition (EE)**.
 
-Docker is available in multiple variants:
+Docker Community Edition (CE) is ideal for developers and small
+teams looking to get started with Docker and experimenting with container-based
+apps. Docker CE has two update channels, **stable** and **edge**:
 
-- **Docker Enterprise Edition (Docker EE)** is designed for enterprise
-  development and IT teams who build, ship, and run business critical
-  applications in production at scale. Docker EE is integrated, certified, and
-  supported to provide enterprises with the most secure container platform in
-  the industry to modernize all applications. For more information
-  about Docker EE, including purchasing options, see
-  [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+* **Stable** gives you reliable updates every quarter
+* **Edge** gives you new features every month
 
-- **Docker Community Edition (Docker CE)** is ideal for developers and small
-  teams looking to get started with Docker and experimenting with
-  container-based apps. Docker CE is available on many platforms, from desktop
-  to cloud to server. Docker CE is available for macOS and Windows and provides
-  a native experience to help you focus on learning Docker. You can build and
-  share containers and automate the development pipeline all from a single
-  environment.
+For more information about Docker CE, see
+[Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
 
-  Docker CE gives you the option to run **stable** or **edge** builds.
+Docker Enterprise Edition (EE) is designed for enterprise
+development and IT teams who build, ship, and run business critical
+applications in production at scale. For more information about Docker EE,
+including purchasing options, see
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-  - **Stable** builds are released once per quarter.
-  - **Edge** builds are released once per month.
+{% include docker_ce_ee.md %}
 
-  For more information about Docker CE, see
-  [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
 
-- **Docker Cloud** is a platform run by Docker which allows you to deploy your
-  application using multiple cloud providers such as Digital Ocean, Packet,
-  SoftLink, or to bring your own device. For more information about using Docker
-  Cloud, see [Docker Cloud](#docker-cloud).
+## Supported platforms
 
-## Platform support matrix
-
-Docker CE and Docker EE run on Linux, Cloud, Windows, and macOS platforms. Use
-the following matrix to choose the best installation path for you. The links
-under **Platform** take you straight to the installation instructions for that
-platform.
+Docker CE and EE are available on multiple platforms, on cloud and on-premises.
+Use the following matrix to choose the best installation path for you.
 
 {% include docker_platform_matrix.md %}
-
-See also [Docker Cloud](#on-docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
 
 ### Prior releases
 
