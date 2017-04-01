@@ -1,6 +1,6 @@
 ---
 description: How to control service startup order in Docker Compose
-keywords: documentation, docs,  docker, compose, startup, order
+keywords: documentation, docs, docker, compose, startup, order
 title: Controlling startup order in Compose
 notoc: true
 ---
@@ -8,7 +8,7 @@ notoc: true
 You can control the order of service startup with the
 [depends_on](compose-file.md#depends-on) option. Compose always starts
 containers in dependency order, where dependencies are determined by
-`depends_on`, `links`, `volumes_from` and `network_mode: "service:..."`.
+`depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
 However, Compose will not wait until a container is "ready" (whatever that means
 for your particular application) - only until it's running. There's a good
