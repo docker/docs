@@ -49,7 +49,7 @@ For more about Stable and Edge channels, see the
    statistics and other data. <br><br>Stable builds are released once per quarter.
     </td>
     <td width="50%">This installer provides the latest Edge release of
-    Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    Docker for Windows and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
     </td>
   </tr>
   <tr valign="top">
