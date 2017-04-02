@@ -87,7 +87,7 @@ Use the appropriate command below to check whether Docker is running:
 
 | Init system  | Command                     |
 |--------------|-----------------------------|
-| `systemd`    | `sudo systemctl is-active ` |
+| `systemd`    | `sudo systemctl is-active docker ` |
 | `upstart`    | `sudo status docker`        |
 
 You can also use Docker itself to check whether Docker is running:
