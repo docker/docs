@@ -12,6 +12,8 @@ title: Docker for Azure Release Notes
 Release date: 02/08/2017
 
 {{azure_blue_latest}}
+<br />
+<br />
 
 **New**
 
@@ -41,6 +43,8 @@ Release date: 1/18/2017
 Release date: 03/01/2017
 
 {{azure_blue_edge}}
+<br />
+<br />
 
 **New**
 
@@ -112,3 +116,6 @@ Release date: 8/9/2016
 ### Errata
 
  * To assist with debugging, the Docker Engine API is available internally in the Azure VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
+
+## Template Archive
+If you are looking for templates from older releases, please check out the [template archive](/docker-for-azure/archive.md).

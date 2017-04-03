@@ -13,6 +13,8 @@ Release date: 03/01/2017
 
 {{aws_blue_latest}}
 
+<br />
+<br />
 
 **New**
 
@@ -42,6 +44,8 @@ Release date: 03/01/2017
 
 {{aws_blue_edge}}
 
+<br />
+<br />
 
 **New**
 
@@ -257,3 +261,6 @@ Release date: 7/13/2016
 
  * To assist with debugging, the Docker Engine API is available internally in the AWS VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
  * Likewise, swarm-mode is configured to auto-accept both manager and worker nodes inside the VPC. This policy will be changed to be more restrictive by default in the future.
+
+## Template Archive
+If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).
