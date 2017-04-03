@@ -9,9 +9,9 @@ redirect_from:
 title: Install Docker
 ---
 
-## Docker variants
+## Docker editions
 
-Docker is available in multiple variants:
+Docker is available in two editions:
 
 - **Docker Enterprise Edition (Docker EE)** is designed for enterprise
   development and IT teams who build, ship, and run business critical
@@ -29,10 +29,12 @@ Docker is available in multiple variants:
   share containers and automate the development pipeline all from a single
   environment.
 
-  Docker CE gives you the option to run **stable** or **edge** builds.
+  Docker CE has both **stable** and **edge** channels.
 
   - **Stable** builds are released once per quarter.
-  - **Edge** builds are released once per month.
+  - **Edge** builds are released once per month, except during the months that
+    Edge builds are released. If you subscribe to the Edge channel, you should
+    also subscribe to the Stable channel.
 
   For more information about Docker CE, see
   [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
@@ -56,17 +58,9 @@ Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
 
 ## Time-based release schedule
 
-Starting with Docker 17.03, Docker uses semantic versioning and a time-based
-release schedule, outlined below. There may be times when exceptions need to be
-made, but this is the goal.
-
-- Ideally, a Docker CE release is published the first week of each month.
-  - In March, June, September, and December, the release will be published to the
-    **stable** channel.
-  - The rest of the time, this monthly release will be published to the **edge**
-    channel.
-- At the end of the month in March, June, September, and December, a Docker EE
-  release is published.
+Starting with Docker 17.03, Docker uses a time-based release schedule, outlined
+below. For Docker CE Edge users, if you want to receive each month's release,
+you need to subscribe to both the Edge and Stable channels.
 
 {% include docker_schedule_matrix.md %}
 

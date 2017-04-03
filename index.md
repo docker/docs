@@ -5,22 +5,32 @@ landing: true
 title: Docker Documentation
 notoc: true
 ---
+{% assign page.title = site.name %}
 
 Docker packages your app with its dependencies, freeing you from worrying about
 your system configuration, and making your app more portable.
 
 {% if site.edge == true %}
+{% capture ce-edge-section %}
+
 ## Docker CE Edge
 
 The Docker CE Edge channel provides monthly releases which allow you to try
 new features of Docker and verify bug fixes quickly. Edge releases are only
-supported for one month, including security updates and high priority bug fixes
-only. When a new release becomes available in the Docker CE Edge channel,
-previous releases stop receiving updates. Commercial support is not available
-for Docker CE.
+supported for one month, and a given Edge release will not receive any updates
+after this period.
+
+Stable releases are not published to the Edge channel, so you still need to
+subscribe to the Stable channel as well. Commercial support is not available for
+Docker CE.
 
 For information about all Docker release channels and expectations about
-support, see [Docker channels](/engine/installation/#docker-channels)
+support, see [Docker channels](/engine/installation/#docker-channels).
+
+<!-- This button toggles the div below, and hides itself when clicked -->
+<a id="ce-edge-readmore-btn" onclick="$(this).hide(); ga('send', 'event', 'ce-edge-readmore', 'click', 'CE engagement');" data-target="#ce-edge-readmore" data-toggle="collapse" class="button outline-btn collapse in">Read more about Docker CE Edge releases</a>
+
+<div markdown="1" id="ce-edge-readmore" class="collapse" data-target="#ce-edge-readmore-btn" data-toggle="collapse">
 
 This page lists features that are only available in Docker CE Edge releases.
 Where applicable, the API and CLI reference documentation has been updated to
@@ -33,16 +43,17 @@ available until a Docker CE Stable release incorporates the feature**.
   <li class="active"><a data-toggle="tab" data-target="#1704">17.04</a></li>
   <!--<li><a data-toggle="tab" data-target="#1705">17.05</a></li>-->
 </ul>
-<div class="tab-content">
-<div id="1704" class="tab-pane fade in active">
+<div markdown="1" class="tab-content">
+<div markdown="1" id="1704" class="tab-pane fade in active">
 
-{% capture release-notes %}
 #### Docker CE Edge 17.04
 
 The following major features and changes are included in Docker CE Edge 17.04.
 Continue reading, or go straight to [API and CLI](#api-and-cli),
 [Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
 [Stacks](#stacks).
+
+[Read the full release notes](https://github.com/docker/docker/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
 
 ##### API and CLI
 
@@ -184,35 +195,33 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
   types of endpoints and expands the options you can use when specifying mounts.
   {% include github-pr.md pr=31795 %}
 
-{% endcapture %}
-{{ release-notes | markdownify }}
-</div>
+</div> <!-- 17.04 -->
 <!--<div id="1705" class="tab-pane fade">TAB 2 CONTENT</div>-->
-</div>
-
+</div> <!-- tab-content -->
+</div> <!-- ce-edge-readmore -->
+{% endcapture %} <!-- from line 13 -->
+{{ ce-edge-section | markdownify }}
 {% endif %}
 
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-{% capture basics %}
+<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 ### Learn Docker basics
 
 Get started learning Docker concepts, tools, and commands. The examples show you
 how to build, push, and pull Docker images, and run them as containers. This
 tutorial stops short of teaching you how to deploy applications.
-{% endcapture %}{{ basics | markdownify }}
-{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
+
+[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-{% capture apps %}
+<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 ### Define and deploy apps in Swarm Mode
 
 Learn how to relate containers to each other, define them as services, and
 configure an application stack ready to deploy at scale in a production
 environment. Highlights Compose Version 3 new features and swarm mode.
-{% endcapture %}{{ apps | markdownify }}
-{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button outline-btn"}{% endcapture %}{{ apps | markdownify }}
+
+[Start the application tutorial](/engine/getstarted-voting-app/){: class="button outline-btn"}
 </div>
 </div>
 

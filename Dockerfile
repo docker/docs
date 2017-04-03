@@ -14,6 +14,9 @@ COPY . md_source
 # into static HTML in the "target" directory using Jekyll
 # then nuke the md_source directory.
 
+# Process this as an Edge release
+ENV EDGE 1
+
 ## Branch to pull from, per ref doc
 ## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 ENV ENGINE_SVN_BRANCH="branches/17.04.x"
@@ -43,7 +46,7 @@ RUN svn co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/extend md_so
   && wget -O md_source/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
   && wget -O md_source/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml \
   && wget -O md_source/engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
-	&& jekyll build -s md_source -d target \
+	&& (if [ $EDGE -eq 1 ]; then jekyll build -s md_source -d target --config md_source/_config-edge.yml; else jekyll build -s md_source -d target; fi)\
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
 	&& rm -rf md_source
