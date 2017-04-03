@@ -10,13 +10,11 @@ For this sample, we will create a sample `dotnet core web application` using the
 
 >**Note**: This sample is made for Docker Engine on Linux. For Windows Containers, please visit [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows).
 
-# Create the Docker Compose application
-
-1. Create a directory called `/app` under root.
+1. Create a new directory for your application.
 
     This directory will be the context of your docker-compose project. For [Docker for Windows](https://docs.docker.com/docker-for-windows/#/shared-drives) and [Docker for Mac](https://docs.docker.com/docker-for-mac/#/file-sharing), you have to set up file sharing for the volume that you need to map. 
 
-1. Within your directory, use the `aspnetcore-build` Docker image to generate a sample web application within the container and into your host machine under the `/app` directory:
+1. Within your directory, use the `aspnetcore-build` Docker image to generate a sample web application within the container under the `/app` directory and into your host machine in the working directory:
 
         docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new mvc --auth Individual
 
