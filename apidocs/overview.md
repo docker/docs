@@ -12,4 +12,6 @@ DTR repositories, permissions, and settings.
 To get access to interactive documentation, in your **DTR UI**, click
 on the **top-right menu** and choose **API docs**.
 
+Please note that the interactive documentation in the DTR UI is a subset of the complete API documentation provided. 
+
 ![](dtr-api-overview.png)
