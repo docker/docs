@@ -1,6 +1,6 @@
 ---
 description: Guide to using Docker Compose in production
-keywords: documentation, docs,  docker, compose, orchestration, containers, production
+keywords: compose, orchestration, containers, production
 title: Using Compose in production
 ---
 
@@ -28,7 +28,7 @@ more appropriate to a live environment. These changes may include:
 For this reason, you'll probably want to define an additional Compose file, say
 `production.yml`, which specifies production-appropriate
 configuration. This configuration file only needs to include the changes you'd
-like to make from the original Compose file.  The additional Compose file
+like to make from the original Compose file. The additional Compose file
 can be applied over the original `docker-compose.yml` to create a new configuration.
 
 Once you've got a second configuration file, tell Compose to use it with the
