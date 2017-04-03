@@ -12,8 +12,6 @@ title: "Get Started, Part 6: SSL and Secrets"
   <li><a href="part7.md">Part 7</a></li>
 </ul>
 
-Options (volumes, plugins)
-
 End!
 
 [On to Part 7 >>](part7.md){: class="button outline-btn"}
