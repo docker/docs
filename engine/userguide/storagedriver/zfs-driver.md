@@ -247,6 +247,19 @@ Once ZFS is installed and loaded, you're ready to configure ZFS for Docker.
     `--storage-driver=zfs` flag to the `dockerd` command, or to the
     `DOCKER_OPTS` line in the Docker config file.
 
+    If your distribution uses Systemd, the method of forcing the Docker daemon to
+    use the `zfs` driver differs slightly. You will need to edit your
+    [daemon config file]((https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)),
+    which is located at `/etc/docker/daemon.json`. Add (or alter) the following line.
+
+        {"storage-driver": "zfs"}
+
+    Note that this must be valid JSON.
+
+    Now restart the Docker daemon.
+
+        $ sudo systemctl restart docker
+
 6. Verify that the daemon is using the `zfs` storage driver.
 
         $ sudo docker info
