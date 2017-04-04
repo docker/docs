@@ -9,6 +9,7 @@ title: Docker for Azure Release Notes
 ## Stable Channel
 
 ### 17.03.1 CE
+
 Release date: 03/30/2017
 
 {{azure_blue_latest}}
@@ -20,6 +21,7 @@ Release date: 03/30/2017
 - Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 17.03.0 CE
+
 Release date: 02/08/2017
 
 **New**
@@ -27,6 +29,7 @@ Release date: 02/08/2017
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-2
+
 Release date: 02/08/2017
 
 **New**
@@ -34,6 +37,7 @@ Release date: 02/08/2017
 - Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-1
+
 Release date: 1/18/2017
 
 **New**
@@ -47,6 +51,7 @@ Release date: 1/18/2017
 ## Edge Channel
 
 ### 17.03.0-edge CE
+
 Release date: 03/01/2017
 
 {{azure_blue_edge}}
@@ -58,6 +63,7 @@ Release date: 03/01/2017
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-beta18
+
 Release date: 02/16/2017
 
 **New**
@@ -125,4 +131,5 @@ Release date: 8/9/2016
  * To assist with debugging, the Docker Engine API is available internally in the Azure VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
 
 ## Template Archive
+
 If you are looking for templates from older releases, please check out the [template archive](/docker-for-azure/archive.md).

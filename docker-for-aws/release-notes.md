@@ -13,7 +13,8 @@ title: Docker for AWS Release Notes
 Release date: 03/30/2017
 
 {{aws_blue_latest}}
-
+<br />
+<br />
 
 **New**
 
@@ -54,6 +55,8 @@ Release date: 01/18/2017
 Release date: 03/01/2017
 
 {{aws_blue_edge}}
+<br />
+<br />
 
 **New**
 
@@ -159,7 +162,6 @@ Release date: 11/17/2016
 **Important**
 
 - Due to some changes with the IP ranges in the subnets in Beta10, it will not be possible to upgrade from beta 10 to beta 11. You will need to start from scratch using beta11. We are sorry for any issues this might cause. We needed to make the change, and it was decided it was best to do it now, while still in private beta to limit the impact.
-
 
 ### 1.12.3-beta10
 
@@ -278,4 +280,5 @@ Release date: 7/13/2016
  * Likewise, swarm-mode is configured to auto-accept both manager and worker nodes inside the VPC. This policy will be changed to be more restrictive by default in the future.
 
 ## Template Archive
+
 If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).
