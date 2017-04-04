@@ -16,6 +16,8 @@ horizontalnav:
   node: samples
 
 guides:
+- title: "Docs Hackathon: April 17-22nd, 2017"
+  path: /hackathon/
 - sectiontitle: Get Docker
   section:
   - path: /engine/installation/
@@ -25,7 +27,7 @@ guides:
   - path: /docker-for-windows/install/
     title: Docker for Windows
   - path: /docker-ee-for-windows/install/
-    title: Docker EE for Windows Server   
+    title: Docker EE for Windows Server
   - sectiontitle: Docker for Linux
     section:
     - path: /engine/installation/linux/ubuntu/
