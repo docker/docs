@@ -26,7 +26,7 @@ sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
 The best way to quickly grok the layout and syntax of a Compose file is to look
-at files for [sample applications](samples.md). A good place to start is the
+at files for [sample applications](/compose/samples.md). A good place to start is the
 version 3 Compose stack file we use for the voting app sample to illustrate
 multi-container apps, service definitions, swarm mode, the `deploy` key, and the
 `docker stack deploy` command. Click to show/hide the example file below. This
