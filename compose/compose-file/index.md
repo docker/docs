@@ -37,7 +37,7 @@ tutorial](/engine/getstarted-voting-app/index.md).
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h4>
+      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h5>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
       <div class="panel-body">
