@@ -3,6 +3,7 @@ description: Lists the installation methods
 keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
 redirect_from:
 - /installation/
+- /engine/installation/linux/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
 title: Install Docker
