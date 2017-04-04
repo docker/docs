@@ -316,6 +316,8 @@ guides:
       title: How nodes work
     - path: /engine/swarm/how-swarm-mode-works/services/
       title: How services work
+    - path: /engine/swarm/how-swarm-mode-works/pki/
+      title: How PKI works in swarm mode
   - path: /engine/swarm/swarm-mode/
     title: Run Docker Engine in swarm mode
   - path: /engine/swarm/join-nodes/
