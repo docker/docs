@@ -8,7 +8,7 @@ title: Use Supervisor with Docker
 
 > **Note**:
 > - **If you don't like sudo** then see [*Giving non-root
->   access*](../installation/binaries.md#giving-non-root-access)
+>   access*](/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user)
 
 Traditionally a Docker container runs a single process when it is launched, for
 example an Apache daemon or a SSH server daemon. Often though you want to run

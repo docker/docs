@@ -8,13 +8,21 @@ title: Docker for AWS Release Notes
 
 ## Stable Channel
 
-### 17.03.0 CE
-Release date: 03/01/2017
+### 17.03.1 CE
+
+Release date: 03/30/2017
 
 {{aws_blue_latest}}
 
-<br />
-<br />
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Updated AZ for Sao Paulo
+
+### 17.03.0 CE
+
+Release date: 03/01/2017
 
 **New**
 
@@ -23,6 +31,7 @@ Release date: 03/01/2017
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
 ### 1.13.1-2
+
 Release date: 02/08/2017
 
 **New**
@@ -30,6 +39,7 @@ Release date: 02/08/2017
 - Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-1
+
 Release date: 01/18/2017
 
 **New**
@@ -40,12 +50,10 @@ Release date: 01/18/2017
 ## Edge Channel
 
 ### 17.03.0-edge CE
+
 Release date: 03/01/2017
 
 {{aws_blue_edge}}
-
-<br />
-<br />
 
 **New**
 
@@ -55,6 +63,7 @@ Release date: 03/01/2017
 - Added alias to `Cloudstor` plugin to make it easier on upgrades.
 
 ### 1.13.1-beta18
+
 Release date: 02/16/2017
 
 **New**
@@ -70,6 +79,7 @@ Release date: 02/16/2017
     - **node_type** (worker, manager)
 
 ### 1.13.1-rc2-beta17
+
 Release date: 02/07/2017
 
 **New**
@@ -77,6 +87,7 @@ Release date: 02/07/2017
 - Docker Engine upgraded to [Docker 1.13.1-rc2](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-rc1-beta16
+
 Release date: 02/01/2017
 
 **New**
@@ -84,6 +95,7 @@ Release date: 02/01/2017
 - Docker Engine upgraded to [Docker 1.13.1-rc1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc5-beta15
+
 Release date: 01/10/2017
 
 **New**
@@ -91,6 +103,7 @@ Release date: 01/10/2017
 - Docker Engine upgraded to [Docker 1.13.0-rc5](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc4-beta14
+
 Release date: 12/21/2016
 
 **New**
@@ -104,6 +117,7 @@ Release date: 12/21/2016
 - Made recovery improvements when primary swarm node crashes
 
 ### 1.13.0-rc3-beta13
+
 Release date: 12/06/2016
 
 **New**
@@ -115,6 +129,7 @@ Release date: 12/06/2016
 - Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](/docker-for-aws/deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
 
 ### 1.13.0-rc2-beta12
+
 Release date: 11/23/2016
 
 **New**

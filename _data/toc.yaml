@@ -472,9 +472,6 @@ reference:
   nosync: true
 - title: Daemon CLI reference (dockerd)
   path: /engine/reference/commandline/dockerd/
-- title: Docker ID Accounts API
-  path: /docker-id/api-reference/
-  nosync: true
 - sectiontitle: Engine API
   section:
   - path: /engine/api/
@@ -1894,12 +1891,8 @@ manuals:
     title: Open Source Licensing
   - path: /docker-for-windows/release-notes/
     title: Release Notes
-- sectiontitle: Docker ID
-  section:
-  - title: Docker ID accounts
-    path: /docker-id/
-  - title: Docker ID accounts API
-    path: /docker-id/api-reference/
+- title: Docker ID accounts
+  path: /docker-id/
 - sectiontitle: Docker Machine
   section:
   - path: /machine/overview/
