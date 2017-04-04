@@ -126,6 +126,7 @@ to update its RHEL kernel.
 
 9. Log out and log back in to have your new permissions take effect.
 
+
 ### Install on Ubuntu 14.04 LTS or 16.04 LTS
 
 1.  Install packages to allow `apt` to use a repository over HTTPS:
@@ -295,6 +296,9 @@ to update its RHEL kernel.
 
     Log out and log back in to have your new permissions take effect.
 
+7.  [Configure Btrfs for graph storage](/engine/userguide/storagedriver/btrfs-driver.md).
+    This is the only graph storage driver supported on SLES.
+    
 ## Install using packages
 
 If you need to install Docker on an air-gapped system with no access to the
