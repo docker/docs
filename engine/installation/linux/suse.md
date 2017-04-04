@@ -78,14 +78,20 @@ the repository.
 
 #### Set up the repository
 
-Use the following command to set up the **stable** repository, using the
-Docker EE repository URL you located in the [prerequisites](#prerequisites).
+1.  Use the following command to set up the **stable** repository, using the
+    Docker EE repository URL you located in the [prerequisites](#prerequisites).
 
-```bash
-$ sudo zypper addrepo \
-    <DOCKER-EE-URL>/12.3/x86_64/stable-{{ minor-version }} \
-    docker-ee-stable
-```
+    ```bash
+    $ sudo zypper addrepo \
+        <DOCKER-EE-URL>/12.3/x86_64/stable-{{ minor-version }} \
+        docker-ee-stable
+    ```
+
+2.  Import the GPG key from the repository.
+
+    ```bash
+    $ sudo rpm --import <DOCKER-EE-URL/gpg
+    ```
 
 #### Install Docker EE
 
@@ -158,9 +164,9 @@ $ sudo zypper addrepo \
     container runs, it prints an informational message and exits.
 
 Docker EE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+commands. Continue to [Linux postinstall](linux-postinstall.md) to configure the
+graph storage driver, allow non-privileged users to run Docker commands, and for
+other optional configuration steps.
 
 #### Upgrade Docker EE
 
