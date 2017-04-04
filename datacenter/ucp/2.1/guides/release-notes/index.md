@@ -12,6 +12,24 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.3
+
+(4 Apr 2017)
+
+**Bug fixes**
+
+* Core
+	* Fixed known issue where worker nodes would be left in a pending state
+	  after upgrading from UCP 1.1.z (#5926).
+	* Nodes will no longer be reported as unhealthy if the `ucp-reconcile`
+	  container is removed (#5794).
+	* Fixed an issue where nodes in the same subnet may report incorrect
+	  hostnames in the UCP node list (#5804).
+
+* UI/UX
+	* UCP support dumps and client bundles can now be downloaded on IE10/11 (#5871).
+	* The task counter in the services page should now correctly omit tasks that
+	  have not been assigned to a node yet (#5908).
 
 ## Version 2.1.2
 
