@@ -17,7 +17,8 @@ copy-on-write, and snapshotting.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
  Btrfs Filesystem as Btrfs.
 
-> **Note**: The [Commercially Supported Docker Engine (CS-Engine)](https://www.docker.com/compatibility-maintenance) does not currently support the `btrfs` storage driver.
+> **Note**: Btrfs is not supported on every Linux version and Docker edition.
+> It is only supported on Docker CE on Ubuntu, and Docker EE / CS Engine on SLES.
 
 ## The future of Btrfs
 
@@ -140,7 +141,7 @@ filesystems like Btrfs and incurs very little overhead.
 With Btrfs, writing and updating lots of small files can result in slow
 performance. More on this later.
 
-## Configuring Docker with Btrfs
+## Configure Docker with Btrfs
 
 The `btrfs` storage driver only operates on a Docker host where
 `/var/lib/docker` is mounted as a Btrfs filesystem. The following procedure
@@ -163,103 +164,173 @@ loaded. To verify this, use the following command:
 
 	        btrfs
 
-### Configure Btrfs on Ubuntu 14.04 LTS
+### Configure Btrfs on Ubuntu
 
-Assuming your system meets the prerequisites, do the following:
+> **Note**: Btrfs is not supported on Docker EE or Docker CS Engine for Ubuntu.
 
-1. Install the "btrfs-tools" package.
+1.  Install the `btrfs-tools` package.
 
-        $ sudo apt-get install btrfs-tools
+    ```bash
+    $ sudo apt-get install btrfs-tools
+    ```
 
-        Reading package lists... Done
-        Building dependency tree
-        <output truncated>
+2.  Format the Btrfs filesystem across a pool of one or more devices by passing
+    the devices to the `mkfs.btrfs` command. Replace `<DEVICE>` with the
+    actual device names.
 
-2. Create the Btrfs storage pool.
+    ```bash
+    $ sudo mkfs.btrfs -f /dev/<DEVICE> /dev/<DEVICE> /dev/<DEVICE>
+    ```
 
-    Btrfs storage pools are created with the `mkfs.btrfs` command. Passing
-multiple devices to the `mkfs.btrfs` command creates a pool across all of those
- devices. Here you create a pool with a single device at `/dev/xvdb`.
+    There are many more options for Btrfs, including striping and RAID. See the
+    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
 
-        $ sudo mkfs.btrfs -f /dev/xvdb
+3.  Stop Docker and back up the contents of `/var/lib/docker/`.
 
-        WARNING! - Btrfs v3.12 IS EXPERIMENTAL
-        WARNING! - see http://btrfs.wiki.kernel.org before using
+    ```bash
+    $ sudo service docker stop
+    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
+    $ sudo rm -rf /var/lib/docker/*
+    ```
 
-        Turning ON incompat feature 'extref': increased hardlink limit per file to 65536
-        fs created label (null) on /dev/xvdb
-            nodesize 16384 leafsize 16384 sectorsize 4096 size 4.00GiB
-        Btrfs v3.12
+4.  Configure the Btrfs volume to automatically mount to `/var/lib/docker`.
+    As root (`sudo` may not be sufficient), edit `/etc/fstab` and add the
+    following line at the end, Replace `/dev/<DEVICE>` with any one of the devices
+    you used in step 2. You can choose to specify the device's UUID instead of the
+    device path. Refer to `man 5 fstab` for more information.
 
-    Be sure to substitute `/dev/xvdb` with the appropriate device(s) on your
-    system.
+    ```none
+    /dev/<DEVICE> /var/lib/docker btrfs defaults 0 1
+    ```
 
-    > **Warning**: Take note of the warning about Btrfs being experimental. As
-    noted earlier, Btrfs is not currently recommended for production deployments
-    unless you already have extensive experience.
+5.  Mount the Btrfs volume:
 
-3. If it does not already exist, create a directory for the Docker host's local
- storage area at `/var/lib/docker`.
+    ```bash
+    $ sudo mount /var/lib/docker
+    ```
 
-        $ sudo mkdir /var/lib/docker
+    Copy the old Docker contents to `/var/lib/docker`.
 
-4. Configure the system to automatically mount the Btrfs filesystem each time the system boots.
+    ```bash
+    $ sudo cp -r /var/lib/docker.bk/* /var/lib/docker
+    ```
 
-    a. Obtain the Btrfs filesystem's UUID.
+6.  Configure Docker so that it realizes it is using Btrfs for graph storage.
+    Edit or create the file `/etc/docker/daemon.json`. If it is a new file, add
+    the following contents. If it is an existing file, add the key and value
+    only, being careful to end the line with a comma if it is not the final
+    line before an ending curly bracket (`}`).
 
-        $ sudo blkid /dev/xvdb
+    ```json
+    {
+      "storage-driver": "btrfs"
+    }
+    ```
 
-        /dev/xvdb: UUID="a0ed851e-158b-4120-8416-c9b072c8cf47" UUID_SUB="c3927a64-4454-4eef-95c2-a7d44ac0cf27" TYPE="btrfs"
+7.  Start Docker.
 
-    b. Create an `/etc/fstab` entry to automatically mount `/var/lib/docker`
-each time the system boots. Either of the following lines will work, just
-remember to substitute the UUID value with the value obtained from the previous
- command.
+    ```bash
+    $ sudo service docker start
+    ```
 
-        /dev/xvdb /var/lib/docker btrfs defaults 0 0
-        UUID="a0ed851e-158b-4120-8416-c9b072c8cf47" /var/lib/docker btrfs defaults 0 0
+    Verify that Btrfs is being used with the following command:
 
-5. Mount the new filesystem and verify the operation.
+    ```bash
+    $ docker info |grep Storage
 
-        $ sudo mount -a
+    Storage Driver: btrfs
+    ```
 
-        $ mount
+8.  After you have verified that Docker is working as expected, remove the
+    backup copy of the Docker files.
 
-        /dev/xvda1 on / type ext4 (rw,discard)
-        <output truncated>
-        /dev/xvdb on /var/lib/docker type btrfs (rw)
+    ```bash
+    $ sudo rm -rf /var/lib/docker.bk
+    ```
 
-    The last line in the output above shows the `/dev/xvdb` mounted at
-`/var/lib/docker` as Btrfs.
+### Configure Btrfs on SLES
 
-Now that you have a Btrfs filesystem mounted at `/var/lib/docker`, the daemon
-should automatically load with the `btrfs` storage driver.
+1.  Install the Btrfs utilities.
 
-1. Start the Docker daemon.
+    ```bash
+    $ sudo zypper install btrfsprogs
+    ```
 
-        $ sudo service docker start
+2.  Format the Btrfs filesystem across a pool of one or more devices by passing
+    the devices to the `mkfs.btrfs` command. Replace `<DEVICE>` with the
+    actual device names.
 
-        docker start/running, process 2315
+    ```bash
+    $ sudo mkfs.btrfs -f /dev/<DEVICE> /dev/<DEVICE> /dev/<DEVICE>
+    ```
 
-    The procedure for starting the Docker daemon may differ depending on the
-    Linux distribution you are using.
+    There are many more options for Btrfs, including striping and RAID. See the
+    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
 
-    You can force the Docker daemon to start with the `btrfs` storage
-driver by either passing the `--storage-driver=btrfs` flag to the `docker
-daemon` at startup, or adding it to the `DOCKER_OPTS` line to the Docker config
- file.
+3.  Stop Docker and back up the contents of `/var/lib/docker/`.
 
-2. Verify the storage driver with the `docker info` command.
+    ```bash
+    $ sudo service docker stop
+    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
+    $ sudo rm -rf /var/lib/docker/*
+    ```
 
-        $ sudo docker info
+4.  Configure the Btrfs volume to automatically mount to `/var/lib/docker`.
+    As root (`sudo` may not be sufficient), edit `/etc/fstab` and add the
+    following line at the end, Replace `/dev/<DEVICE>` with any one of the devices
+    you used in step 2. You can choose to specify the device's UUID instead of the
+    device path. Refer to `man 5 fstab` for more information.
 
-        Containers: 0
-        Images: 0
-        Storage Driver: btrfs
-        [...]
+    ```none
+    /dev/<DEVICE> /var/lib/docker btrfs defaults 0 1
+    ```
 
-Your Docker host is now configured to use the `btrfs` storage driver.
+    Save the file.
 
+5.  Mount the Btrfs volume:
+
+    ```bash
+    $ sudo mount /var/lib/docker
+    ```
+
+    Copy the old Docker contents to `/var/lib/docker`.
+
+    ```bash
+    $ sudo cp -r /var/lib/docker.bk/* /var/lib/docker
+    ```
+
+6.  Configure Docker so that it realizes it is using Btrfs for graph storage.
+    Edit or create the file `/etc/docker/daemon.json`. If it is a new file, add
+    the following contents. If it is an existing file, add the key and value
+    only, being careful to end the line with a comma if it is not the final
+    line before an ending curly bracket (`}`).
+
+    ```json
+    {
+      "storage-driver": "btrfs"
+    }
+    ```
+
+7.  Start Docker.
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+    Verify that Btrfs is being used with the following command:
+
+    ```bash
+    $ docker info |grep Storage
+
+    Storage Driver: btrfs
+    ```
+
+8.  After you have verified that Docker is working as expected, remove the
+    backup copy of the Docker files.
+
+    ```bash
+    $ sudo rm -rf /var/lib/docker.bk
+    ```
 
 ## Btrfs and Docker performance
 
@@ -312,14 +383,14 @@ any of the potential overheads introduced by thin provisioning and
 copy-on-write. For this reason, you should place heavy write workloads on data
 volumes.
 
-- **Balance BTRFS**. Enable a cronjob to rebalance your BTRFS devices. e.g. 
-Spread the subvolume's blocks evenly across your raid devices, and reclaim 
-unused blocks. Without doing this, snapshots and subvolumes that docker 
-removes will leave allocated blocks fillingup the BTRFS root volume. Once full 
-you won't be able to re-balance, resulting in a potentially unrecoverable 
-state without adding an additional storage device. If you would rather not 
-automate this with crond, another option is to run a re-balance manually 
-outside peak use times since the operation can be disk I/O intensive. This 
+- **Balance BTRFS**. Enable a cronjob to rebalance your BTRFS devices. e.g.
+Spread the subvolume's blocks evenly across your raid devices, and reclaim
+unused blocks. Without doing this, snapshots and subvolumes that docker
+removes will leave allocated blocks fillingup the BTRFS root volume. Once full
+you won't be able to re-balance, resulting in a potentially unrecoverable
+state without adding an additional storage device. If you would rather not
+automate this with crond, another option is to run a re-balance manually
+outside peak use times since the operation can be disk I/O intensive. This
 command will claim all chunks that are 1% used or less:
 
   $ sudo btrfs filesystem balance start -dusage=1 /var/lib/docker
