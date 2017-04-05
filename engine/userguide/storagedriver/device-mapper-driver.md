@@ -162,10 +162,10 @@ distributions. This includes RHEL and most of its forks. Currently, the
 following distributions support the driver:
 
 * RHEL/CentOS/Fedora
+* Oracle Linux
 * Ubuntu 12.04
 * Ubuntu 14.04
 * Debian
-* Arch Linux
 
 Docker hosts running the `devicemapper` storage driver default to a
 configuration mode known as `loop-lvm`. This mode uses sparse files to build
@@ -224,7 +224,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     The `thin-provisioning-tools` package allows you to activate and manage your
     pool.
-    
+
     ```bash
     $ sudo yum install -y lvm2
     ```

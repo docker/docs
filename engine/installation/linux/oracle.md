@@ -32,11 +32,12 @@ Docker Community Edition (Docker CE) is not supported on Oracle Linux.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of Oracle Linux 7 running the
-Unbreakable Enterprise Kernel Release 4 (4.1.12) or higher.
+To install Docker EE, you need the 64-bit version of Oracle Linux 7.3 running the
+Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher. Older versions of Oracle
+Linux are not supported.
 
-The [OverlayFS2 storage driver](https://docs.docker.com/engine/userguide/storagedriver/overlayfs-driver/) is only supported
-when running the UEK4.
+The `device-mapper` graph driver is supported. OverlayFS and Brtfs are
+**not** supported.
 
 ### Uninstall old versions
 
@@ -234,13 +235,6 @@ instead of `yum -y install`, and pointing to the new file.
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
-
-    > **Note**: If you are using the `btrfs` graph driver, you will need to manually
-    > remove any subvolumes that were created by the Docker Engine before removing the
-    > rest of the data.
-    > Review the [Oracle Linux 7 Administrator Guide](http://docs.oracle.com/cd/E52668_01/E54669/html/ol7-use-case3-btrfs.html)
-    > for more information on how to remove btrfs subvolumes or see the output of
-    > `man btrfs-subvolume` for information on removing `btrfs` subvolumes.
 
 You must delete any edited configuration files manually.
 
