@@ -1,7 +1,7 @@
 command: docker volume
 short: Manage volumes
 long: |-
-  Manage volumes. You can use subcommand to create, list, inspect, remove
+  Manage volumes. You can use subcommands to create, inspect, list, remove
   volumes.
 usage: docker volume COMMAND
 pname: docker
