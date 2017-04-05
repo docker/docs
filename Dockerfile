@@ -16,7 +16,7 @@ COPY . md_source
 
 ## Branch to pull from, per ref doc
 ENV ENGINE_BRANCH="17.03.x"
-ENV DISTRIBUTION_BRANCH="release/2.5"
+ENV DISTRIBUTION_BRANCH="release/2.6"
 
 RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend md_source/engine/extend \
 	&& wget -O md_source/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
