@@ -31,10 +31,11 @@ Docker is available in two editions:
 
   Docker CE has both **stable** and **edge** channels.
 
-  - **Stable** builds are released once per quarter.
-  - **Edge** builds are released once per month, except during the months that
-    Edge builds are released. If you subscribe to the Edge channel, you should
-    also subscribe to the Stable channel.
+  - **Stable** builds are released once per quarter and are supported for 4
+    months.
+  - **Edge** builds are released once per month, and are supported for that
+    month only. If you subscribe to the Edge channel on Linux distributions, you
+    should also subscribe to the Stable channel.
 
   For more information about Docker CE, see
   [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
@@ -59,8 +60,7 @@ Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
 ## Time-based release schedule
 
 Starting with Docker 17.03, Docker uses a time-based release schedule, outlined
-below. For Docker CE Edge users, if you want to receive each month's release,
-you need to subscribe to both the Edge and Stable channels.
+below.
 
 {% include docker_schedule_matrix.md %}
 
