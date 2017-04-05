@@ -6,6 +6,8 @@
 
 - ucp-version: "2.1"
   tar-files:
+    - description: "UCP 2.1.3"
+      url: https://packages.docker.com/caas/ucp_images_2.1.3.tar.gz
     - description: "UCP 2.1.2"
       url: https://packages.docker.com/caas/ucp_images_2.1.2.tar.gz
     - description: "UCP 2.1.1"
