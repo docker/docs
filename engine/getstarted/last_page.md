@@ -26,7 +26,7 @@ Depending on your interest, the Docker documentation contains a wealth of inform
     <td class="tg-031e" style="width: 50%">Tutorials and sample app walkthroughs.<br><br>
      A logical next step after completing the basic getting started
      example, this tutorial walks you through using a Docker stack file
-     to define a set of services and deploy them to a [swarm](/engine/reference/glossary.md#swarm).
+     to define a set of services and deploy them to a <a href="/engine/reference/glossary/#swarm">swarm</a>.
     </td>
     <td class="tg-031e"><a href="/engine/getstarted-voting-app/">Define and deploy apps in Swarm Mode</a></td>
   </tr>
