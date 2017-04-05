@@ -103,12 +103,16 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding-left: 15px;
-    padding: 0;
+    padding: 0px;
     text-align: left;
     li {
         display: block;
     }
+}
+
+.nav-sidebar .nav ul
+{
+  padding: 0px 0px 0px 15px;
 }
 
 .nav-sidebar ul li a:hover {
