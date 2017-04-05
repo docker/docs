@@ -8,7 +8,7 @@ long: |-
   information about valid image and tag names.
 
   Killing the `docker push` process, for example by pressing `CTRL-c` while it
-  is\nrunning in a terminal, terminates the push operation.
+  is running in a terminal, terminates the push operation.
 
   Progress bars are shown during docker push, which show the
   uncompressed size. The actual amount of data that's pushed will be compressed
