@@ -1,0 +1,69 @@
+command: docker login
+short: Log in to a Docker registry
+long: "Login to a registry.\n\n### Login to a self-hosted registry\n\nIf you want
+  to login to a self-hosted registry you can specify this by\nadding the server name.\n\n```bash\n$
+  docker login localhost:8080\n```\n\n### Privileged user requirement\n\n`docker login`
+  requires user to use `sudo` or be `root`, except when:\n\n1.  connecting to a remote
+  daemon, such as a `docker-machine` provisioned `docker engine`.\n2.  user is added
+  to the `docker` group.  This will impact the security of your system; the `docker`
+  group is `root` equivalent.  See [Docker Daemon Attack Surface](https://docs.docker.com/security/security/#docker-daemon-attack-surface)
+  for details.\n\nYou can log into any public or private repository for which you
+  have\ncredentials.  When you log in, the command stores encoded credentials in\n`$HOME/.docker/config.json`
+  on Linux or `%USERPROFILE%/.docker/config.json` on Windows.\n\n### Credentials store\n\nThe
+  Docker Engine can keep user credentials in an external credentials store,\nsuch
+  as the native keychain of the operating system. Using an external store\nis more
+  secure than storing credentials in the Docker configuration file.\n\nTo use a credentials
+  store, you need an external helper program to interact\nwith a specific keychain
+  or external store. Docker requires the helper\nprogram to be in the client's host
+  `$PATH`.\n\nThis is the list of currently available credentials helpers and where\nyou
+  can download them from:\n\n- D-Bus Secret Service: https://github.com/docker/docker-credential-helpers/releases\n-
+  Apple macOS keychain: https://github.com/docker/docker-credential-helpers/releases\n-
+  Microsoft Windows Credential Manager: https://github.com/docker/docker-credential-helpers/releases\n\nYou
+  need to specify the credentials store in `$HOME/.docker/config.json`\nto tell the
+  docker engine to use it:\n\n```json\n{\n\t\"credsStore\": \"osxkeychain\"\n}\n```\n\nIf
+  you are currently logged in, run `docker logout` to remove\nthe credentials from
+  the file and run `docker login` again.\n\n### Credential helper protocol\n\nCredential
+  helpers can be any program or script that follows a very simple protocol.\nThis
+  protocol is heavily inspired by Git, but it differs in the information shared.\n\nThe
+  helpers always use the first argument in the command to identify the action.\nThere
+  are only three possible values for that argument: `store`, `get`, and `erase`.\n\nThe
+  `store` command takes a JSON payload from the standard input. That payload carries\nthe
+  server address, to identify the credential, the user name, and either a password\nor
+  an identity token.\n\n```json\n{\n\t\"ServerURL\": \"https://index.docker.io/v1\",\n\t\"Username\":
+  \"david\",\n\t\"Secret\": \"passw0rd1\"\n}\n```\n\nIf the secret being stored is
+  an identity token, the Username should be set to\n`<token>`.\n\nThe `store` command
+  can write error messages to `STDOUT` that the docker engine\nwill show if there
+  was an issue.\n\nThe `get` command takes a string payload from the standard input.
+  That payload carries\nthe server address that the docker engine needs credentials
+  for. This is\nan example of that payload: `https://index.docker.io/v1`.\n\nThe `get`
+  command writes a JSON payload to `STDOUT`. Docker reads the user name\nand password
+  from this payload:\n\n```json\n{\n\t\"Username\": \"david\",\n\t\"Secret\": \"passw0rd1\"\n}\n```\n\nThe
+  `erase` command takes a string payload from `STDIN`. That payload carries\nthe server
+  address that the docker engine wants to remove credentials for. This is\nan example
+  of that payload: `https://index.docker.io/v1`.\n\nThe `erase` command can write
+  error messages to `STDOUT` that the docker engine\nwill show if there was an issue.\n\n###
+  Credential helpers\n\nCredential helpers are similar to the credential store above,
+  but act as the\ndesignated programs to handle credentials for *specific registries*.
+  The default\ncredential store (`credsStore` or the config file itself) will not
+  be used for\noperations concerning credentials of the specified registries.\n\n###
+  Logging out\n\nIf you are currently logged in, run `docker logout` to remove\nthe
+  credentials from the default store.\n\nCredential helpers are specified in a similar
+  way to `credsStore`, but\nallow for multiple helpers to be configured at a time.
+  Keys specify the\nregistry domain, and values specify the suffix of the program
+  to use\n(i.e. everything after `docker-credential-`).\nFor example:\n\n```json\n{\n
+  \ \"credHelpers\": {\n    \"registry.example.com\": \"registryhelper\",\n    \"awesomereg.example.org\":
+  \"hip-star\",\n    \"unicorn.example.io\": \"vcbait\"\n  }\n}\n```"
+usage: docker login [OPTIONS] [SERVER]
+pname: docker
+plink: docker.yaml
+options:
+- option: email
+  shorthand: e
+  description: Email
+- option: password
+  shorthand: p
+  description: Password
+- option: username
+  shorthand: u
+  description: Username
+

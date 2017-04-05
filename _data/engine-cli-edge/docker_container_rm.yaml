@@ -1,0 +1,20 @@
+command: docker container rm
+short: Remove one or more containers
+long: Remove one or more containers
+usage: docker container rm [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: force
+  shorthand: f
+  default_value: "false"
+  description: Force the removal of a running container (uses SIGKILL)
+- option: link
+  shorthand: l
+  default_value: "false"
+  description: Remove the specified link
+- option: volumes
+  shorthand: v
+  default_value: "false"
+  description: Remove the volumes associated with the container
+

@@ -1,0 +1,44 @@
+command: docker container update
+short: Update configuration of one or more containers
+long: Update configuration of one or more containers
+usage: docker container update [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: blkio-weight
+  default_value: "0"
+  description: |
+    Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
+- option: cpu-period
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) period
+- option: cpu-quota
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) quota
+- option: cpu-rt-period
+  default_value: "0"
+  description: Limit the CPU real-time period in microseconds
+- option: cpu-rt-runtime
+  default_value: "0"
+  description: Limit the CPU real-time runtime in microseconds
+- option: cpu-shares
+  shorthand: c
+  default_value: "0"
+  description: CPU shares (relative weight)
+- option: cpuset-cpus
+  description: CPUs in which to allow execution (0-3, 0,1)
+- option: cpuset-mems
+  description: MEMs in which to allow execution (0-3, 0,1)
+- option: kernel-memory
+  description: Kernel memory limit
+- option: memory
+  shorthand: m
+  description: Memory limit
+- option: memory-reservation
+  description: Memory soft limit
+- option: memory-swap
+  description: |
+    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+- option: restart
+  description: Restart policy to apply when a container exits
+

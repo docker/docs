@@ -1,0 +1,15 @@
+command: docker swarm unlock-key
+short: Manage the unlock key
+long: Manage the unlock key
+usage: docker swarm unlock-key [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display token
+- option: rotate
+  default_value: "false"
+  description: Rotate unlock key
+

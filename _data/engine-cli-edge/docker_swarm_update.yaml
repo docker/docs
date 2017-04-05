@@ -1,0 +1,33 @@
+command: docker swarm update
+short: Update the swarm
+long: Updates a swarm with new parameter values. This command must target a manager
+  node.
+usage: docker swarm update [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: autolock
+  default_value: "false"
+  description: Change manager autolocking setting (true|false)
+- option: cert-expiry
+  default_value: 2160h0m0s
+  description: Validity period for node certificates (ns|us|ms|s|m|h)
+- option: dispatcher-heartbeat
+  default_value: 5s
+  description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
+- option: external-ca
+  description: Specifications of one or more certificate signing endpoints
+- option: max-snapshots
+  default_value: "0"
+  description: Number of additional Raft snapshots to retain
+- option: snapshot-interval
+  default_value: "10000"
+  description: Number of log entries between Raft snapshots
+- option: task-history-limit
+  default_value: "5"
+  description: Task history retention limit
+examples: |-
+  ```bash
+  $ docker swarm update --cert-expiry 720h
+  ```
+

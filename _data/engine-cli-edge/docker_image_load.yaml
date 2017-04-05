@@ -1,0 +1,15 @@
+command: docker image load
+short: Load an image from a tar archive or STDIN
+long: Load an image from a tar archive or STDIN
+usage: docker image load [OPTIONS]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: input
+  shorthand: i
+  description: Read from tar archive file, instead of STDIN
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Suppress the load output
+

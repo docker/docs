@@ -1,0 +1,19 @@
+command: docker image history
+short: Show the history of an image
+long: Show the history of an image
+usage: docker image history [OPTIONS] IMAGE
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: human
+  shorthand: H
+  default_value: "true"
+  description: Print sizes and dates in human readable format
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only show numeric IDs
+

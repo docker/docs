@@ -1,0 +1,13 @@
+command: docker network inspect
+short: Display detailed information on one or more networks
+long: |-
+  Returns information about one or more networks. By default, this command renders
+  all results in a JSON object.
+usage: docker network inspect [OPTIONS] NETWORK [NETWORK...]
+pname: docker network
+plink: docker_network.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template
+

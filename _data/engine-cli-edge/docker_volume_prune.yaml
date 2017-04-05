@@ -1,0 +1,25 @@
+command: docker volume prune
+short: Remove all unused volumes
+long: Remove all unused volumes. Unused volumes are those which are not referenced
+  by any conta
+usage: docker volume prune [OPTIONS]
+pname: docker volume
+plink: docker_volume.yaml
+options:
+- option: force
+  shorthand: f
+  default_value: "false"
+  description: Do not prompt for confirmation
+examples: |-
+  ```bash
+  $ docker volume prune
+
+  WARNING! This will remove all volumes not used by at least one container.
+  Are you sure you want to continue? [y/N] y
+  Deleted Volumes:
+  07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e
+  my-named-vol
+
+  Total reclaimed space: 36 B
+  ```
+
