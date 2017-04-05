@@ -1,0 +1,17 @@
+command: docker system events
+short: Get real time events from the server
+long: Get real time events from the server
+usage: docker system events [OPTIONS]
+pname: docker system
+plink: docker_system.yaml
+options:
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: format
+  description: Format the output using the given Go template
+- option: since
+  description: Show all events created since timestamp
+- option: until
+  description: Stream events until this timestamp
+

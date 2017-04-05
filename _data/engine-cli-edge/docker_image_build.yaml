@@ -1,0 +1,85 @@
+command: docker image build
+short: Build an image from a Dockerfile
+long: Build an image from a Dockerfile
+usage: docker image build [OPTIONS] PATH | URL | -
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: build-arg
+  default_value: '[]'
+  description: Set build-time variables
+- option: cache-from
+  default_value: '[]'
+  description: Images to consider as cache sources
+- option: cgroup-parent
+  description: Optional parent cgroup for the container
+- option: compress
+  default_value: "false"
+  description: Compress the build context using gzip
+- option: cpu-period
+  default_value: "0"
+  description: Limit the CPU CFS (Completely Fair Scheduler) period
+- option: cpu-quota
+  default_value: "0"
+  description: Limit the CPU CFS (Completely Fair Scheduler) quota
+- option: cpu-shares
+  shorthand: c
+  default_value: "0"
+  description: CPU shares (relative weight)
+- option: cpuset-cpus
+  description: CPUs in which to allow execution (0-3, 0,1)
+- option: cpuset-mems
+  description: MEMs in which to allow execution (0-3, 0,1)
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
+- option: file
+  shorthand: f
+  description: Name of the Dockerfile (Default is 'PATH/Dockerfile')
+- option: force-rm
+  default_value: "false"
+  description: Always remove intermediate containers
+- option: isolation
+  description: Container isolation technology
+- option: label
+  default_value: '[]'
+  description: Set metadata for an image
+- option: memory
+  shorthand: m
+  description: Memory limit
+- option: memory-swap
+  description: |
+    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+- option: network
+  default_value: default
+  description: |
+    Set the networking mode for the RUN instructions during build
+- option: no-cache
+  default_value: "false"
+  description: Do not use cache when building the image
+- option: pull
+  default_value: "false"
+  description: Always attempt to pull a newer version of the image
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Suppress the build output and print image ID on success
+- option: rm
+  default_value: "true"
+  description: Remove intermediate containers after a successful build
+- option: security-opt
+  default_value: '[]'
+  description: Security options
+- option: shm-size
+  description: Size of /dev/shm, default value is 64MB
+- option: squash
+  default_value: "false"
+  description: Squash newly built layers into a single new layer
+- option: tag
+  shorthand: t
+  default_value: '[]'
+  description: Name and optionally a tag in the 'name:tag' format
+- option: ulimit
+  default_value: '[]'
+  description: Ulimit options
+

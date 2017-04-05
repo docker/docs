@@ -1,0 +1,10 @@
+command: docker stack rm
+aliases: remove, down
+short: Remove the stack
+long: |-
+  Remove the stack from the swarm. This command has to be run targeting
+  a manager node.
+usage: docker stack rm STACK
+pname: docker stack
+plink: docker_stack.yaml
+

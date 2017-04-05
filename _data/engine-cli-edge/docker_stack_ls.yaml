@@ -1,0 +1,18 @@
+command: docker stack ls
+aliases: list
+short: List stacks
+long: Lists the stacks.
+usage: docker stack ls
+pname: docker stack
+plink: docker_stack.yaml
+examples: |-
+  The following command shows all stacks and some additional information:
+
+  ```bash
+  $ docker stack ls
+
+  ID                 SERVICES
+  vossibility-stack  6
+  myapp              2
+  ```
+

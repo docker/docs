@@ -1,0 +1,15 @@
+command: docker container inspect
+short: Display detailed information on one or more containers
+long: Display detailed information on one or more containers
+usage: docker container inspect [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template
+- option: size
+  shorthand: s
+  default_value: "false"
+  description: Display total file sizes
+

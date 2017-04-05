@@ -12,4 +12,10 @@ here, you'll need to find the string by searching this repo:
 https://www.github.com/docker/docker
 -->
 
-{% include cli.md %}
+{% if site.edge == true %}
+  {% assign datafolder = "engine-cli-edge" %}
+{% else %}
+  {% assign datafolder = page.datafolder %}
+{% endif %}
+
+{% include cli.md datafolder=datafolder datafile=page.datafile %}
