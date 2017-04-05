@@ -1,0 +1,16 @@
+command: docker container attach
+short: Attach to a running container
+long: Attach to a running container
+usage: docker container attach [OPTIONS] CONTAINER
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: detach-keys
+  description: Override the key sequence for detaching a container
+- option: no-stdin
+  default_value: "false"
+  description: Do not attach STDIN
+- option: sig-proxy
+  default_value: "true"
+  description: Proxy all received signals to the process
+

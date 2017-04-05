@@ -1,0 +1,7 @@
+command: docker container diff
+short: Inspect changes to files or directories on a container's filesystem
+long: Inspect changes to files or directories on a container's filesystem
+usage: docker container diff CONTAINER
+pname: docker container
+plink: docker_container.yaml
+

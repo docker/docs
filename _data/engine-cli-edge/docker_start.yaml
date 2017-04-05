@@ -1,0 +1,26 @@
+command: docker start
+short: Start one or more stopped containers
+long: Start one or more stopped containers
+usage: docker start [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker
+plink: docker.yaml
+options:
+- option: attach
+  shorthand: a
+  default_value: "false"
+  description: Attach STDOUT/STDERR and forward signals
+- option: checkpoint
+  description: Restore from this checkpoint
+- option: checkpoint-dir
+  description: Use a custom checkpoint storage directory
+- option: detach-keys
+  description: Override the key sequence for detaching a container
+- option: interactive
+  shorthand: i
+  default_value: "false"
+  description: Attach container's STDIN
+examples: |-
+  ```bash
+  $ docker start my_container
+  ```
+

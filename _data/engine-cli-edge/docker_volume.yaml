@@ -1,0 +1,21 @@
+command: docker volume
+short: Manage volumes
+long: |-
+  Manage volumes. You can use subcommand to create, list, inspect, remove
+  volumes.
+usage: docker volume COMMAND
+pname: docker
+plink: docker.yaml
+cname:
+- docker volume create
+- docker volume inspect
+- docker volume ls
+- docker volume prune
+- docker volume rm
+clink:
+- docker_volume_create.yaml
+- docker_volume_inspect.yaml
+- docker_volume_ls.yaml
+- docker_volume_prune.yaml
+- docker_volume_rm.yaml
+

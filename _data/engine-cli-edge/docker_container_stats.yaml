@@ -1,0 +1,17 @@
+command: docker container stats
+short: Display a live stream of container(s) resource usage statistics
+long: Display a live stream of container(s) resource usage statistics
+usage: docker container stats [OPTIONS] [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: all
+  shorthand: a
+  default_value: "false"
+  description: Show all containers (default shows just running)
+- option: format
+  description: Pretty-print images using a Go template
+- option: no-stream
+  default_value: "false"
+  description: Disable streaming stats and only pull the first result
+
