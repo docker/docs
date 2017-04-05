@@ -5,7 +5,7 @@ long: |-
   registry or to a self-hosted one.
 
   Refer to the [`docker tag`](tag.md) reference for more
-  information about valid\nimage and tag names.
+  information about valid image and tag names.
 
   Killing the `docker push` process, for example by pressing `CTRL-c` while it
   is\nrunning in a terminal, terminates the push operation.
