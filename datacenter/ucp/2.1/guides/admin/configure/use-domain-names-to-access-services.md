@@ -70,7 +70,11 @@ name it is trying to reach.
 
 When receiving a connection in the HTTPS port, the routing mesh looks at the
 Server Name Indication header and routes the request to the right service.
-The service is responsible for terminating the HTTPS connection.
+The service is responsible for terminating the HTTPS connection. Note that 
+the routing mesh uses the SSL session ID to make sure that a single SSL 
+session always goes to the same task for the service. This is done for
+performance reasons so that the same SSL session can be maintained across
+requests.
 
 
 ## Where to go next
