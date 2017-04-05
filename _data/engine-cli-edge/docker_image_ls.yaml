@@ -1,0 +1,28 @@
+command: docker image ls
+aliases: images, list
+short: List images
+long: List images
+usage: docker image ls [OPTIONS] [REPOSITORY[:TAG]]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: all
+  shorthand: a
+  default_value: "false"
+  description: Show all images (default hides intermediate images)
+- option: digests
+  default_value: "false"
+  description: Show digests
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: format
+  description: Pretty-print images using a Go template
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only show numeric IDs
+

@@ -1,0 +1,13 @@
+command: docker checkpoint create
+short: Create a checkpoint from a running container
+long: Create a checkpoint from a running container
+usage: docker checkpoint create [OPTIONS] CONTAINER CHECKPOINT
+pname: docker checkpoint
+plink: docker_checkpoint.yaml
+options:
+- option: checkpoint-dir
+  description: Use a custom checkpoint storage directory
+- option: leave-running
+  default_value: "false"
+  description: Leave the container running after checkpoint
+

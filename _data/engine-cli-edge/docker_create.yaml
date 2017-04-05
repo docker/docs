@@ -1,0 +1,375 @@
+command: docker create
+short: Create a new container
+long: |-
+  The `docker create` command creates a writeable container layer over the
+  specified image and prepares it for running the specified command.  The
+  container ID is then printed to `STDOUT`.  This is similar to `docker run -d`
+  except the container is never started.  You can then use the
+  `docker start <container_id>` command to start the container at any point.
+
+  This is useful when you want to set up a container configuration ahead of time
+  so that it is ready to start when you need it. The initial status of the
+  new container is `created`.
+
+  Please see the [run command](run.md) section and the [Docker run reference](../run.md) for more details.
+usage: docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
+pname: docker
+plink: docker.yaml
+options:
+- option: add-host
+  default_value: '[]'
+  description: Add a custom host-to-IP mapping (host:ip)
+- option: attach
+  shorthand: a
+  default_value: '[]'
+  description: Attach to STDIN, STDOUT or STDERR
+- option: blkio-weight
+  default_value: "0"
+  description: |
+    Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
+- option: blkio-weight-device
+  default_value: '[]'
+  description: Block IO weight (relative device weight)
+- option: cap-add
+  default_value: '[]'
+  description: Add Linux capabilities
+- option: cap-drop
+  default_value: '[]'
+  description: Drop Linux capabilities
+- option: cgroup-parent
+  description: Optional parent cgroup for the container
+- option: cidfile
+  description: Write the container ID to the file
+- option: cpu-count
+  default_value: "0"
+  description: CPU count (Windows only)
+- option: cpu-percent
+  default_value: "0"
+  description: CPU percent (Windows only)
+- option: cpu-period
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) period
+- option: cpu-quota
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) quota
+- option: cpu-rt-period
+  default_value: "0"
+  description: Limit CPU real-time period in microseconds
+- option: cpu-rt-runtime
+  default_value: "0"
+  description: Limit CPU real-time runtime in microseconds
+- option: cpu-shares
+  shorthand: c
+  default_value: "0"
+  description: CPU shares (relative weight)
+- option: cpus
+  default_value: "0.000"
+  description: Number of CPUs
+- option: cpuset-cpus
+  description: CPUs in which to allow execution (0-3, 0,1)
+- option: cpuset-mems
+  description: MEMs in which to allow execution (0-3, 0,1)
+- option: credentialspec
+  description: Credential spec for managed service account (Windows only)
+- option: device
+  default_value: '[]'
+  description: Add a host device to the container
+- option: device-read-bps
+  default_value: '[]'
+  description: Limit read rate (bytes per second) from a device
+- option: device-read-iops
+  default_value: '[]'
+  description: Limit read rate (IO per second) from a device
+- option: device-write-bps
+  default_value: '[]'
+  description: Limit write rate (bytes per second) to a device
+- option: device-write-iops
+  default_value: '[]'
+  description: Limit write rate (IO per second) to a device
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
+- option: dns
+  default_value: '[]'
+  description: Set custom DNS servers
+- option: dns-opt
+  default_value: '[]'
+  description: Set DNS options
+- option: dns-option
+  default_value: '[]'
+  description: Set DNS options
+- option: dns-search
+  default_value: '[]'
+  description: Set custom DNS search domains
+- option: entrypoint
+  description: Overwrite the default ENTRYPOINT of the image
+- option: env
+  shorthand: e
+  default_value: '[]'
+  description: Set environment variables
+- option: env-file
+  default_value: '[]'
+  description: Read in a file of environment variables
+- option: expose
+  default_value: '[]'
+  description: Expose a port or a range of ports
+- option: group-add
+  default_value: '[]'
+  description: Add additional groups to join
+- option: health-cmd
+  description: Command to run to check health
+- option: health-interval
+  default_value: 0s
+  description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
+- option: health-retries
+  default_value: "0"
+  description: Consecutive failures needed to report unhealthy
+- option: health-timeout
+  default_value: 0s
+  description: |
+    Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
+- option: help
+  default_value: "false"
+  description: Print usage
+- option: hostname
+  shorthand: h
+  description: Container host name
+- option: init
+  default_value: "false"
+  description: |
+    Run an init inside the container that forwards signals and reaps processes
+- option: init-path
+  description: Path to the docker-init binary
+- option: interactive
+  shorthand: i
+  default_value: "false"
+  description: Keep STDIN open even if not attached
+- option: io-maxbandwidth
+  description: |
+    Maximum IO bandwidth limit for the system drive (Windows only)
+- option: io-maxiops
+  default_value: "0"
+  description: Maximum IOps limit for the system drive (Windows only)
+- option: ip
+  description: Container IPv4 address (e.g. 172.30.100.104)
+- option: ip6
+  description: Container IPv6 address (e.g. 2001:db8::33)
+- option: ipc
+  description: IPC namespace to use
+- option: isolation
+  description: Container isolation technology
+- option: kernel-memory
+  description: Kernel memory limit
+- option: label
+  shorthand: l
+  default_value: '[]'
+  description: Set meta data on a container
+- option: label-file
+  default_value: '[]'
+  description: Read in a line delimited file of labels
+- option: link
+  default_value: '[]'
+  description: Add link to another container
+- option: link-local-ip
+  default_value: '[]'
+  description: Container IPv4/IPv6 link-local addresses
+- option: log-driver
+  description: Logging driver for the container
+- option: log-opt
+  default_value: '[]'
+  description: Log driver options
+- option: mac-address
+  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+- option: memory
+  shorthand: m
+  description: Memory limit
+- option: memory-reservation
+  description: Memory soft limit
+- option: memory-swap
+  description: |
+    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+- option: memory-swappiness
+  default_value: "-1"
+  description: Tune container memory swappiness (0 to 100)
+- option: name
+  description: Assign a name to the container
+- option: net
+  default_value: default
+  description: Connect a container to a network
+- option: net-alias
+  default_value: '[]'
+  description: Add network-scoped alias for the container
+- option: network
+  default_value: default
+  description: Connect a container to a network
+- option: network-alias
+  default_value: '[]'
+  description: Add network-scoped alias for the container
+- option: no-healthcheck
+  default_value: "false"
+  description: Disable any container-specified HEALTHCHECK
+- option: oom-kill-disable
+  default_value: "false"
+  description: Disable OOM Killer
+- option: oom-score-adj
+  default_value: "0"
+  description: Tune host's OOM preferences (-1000 to 1000)
+- option: pid
+  description: PID namespace to use
+- option: pids-limit
+  default_value: "0"
+  description: Tune container pids limit (set -1 for unlimited)
+- option: privileged
+  default_value: "false"
+  description: Give extended privileges to this container
+- option: publish
+  shorthand: p
+  default_value: '[]'
+  description: Publish a container's port(s) to the host
+- option: publish-all
+  shorthand: P
+  default_value: "false"
+  description: Publish all exposed ports to random ports
+- option: read-only
+  default_value: "false"
+  description: Mount the container's root filesystem as read only
+- option: restart
+  default_value: "no"
+  description: Restart policy to apply when a container exits
+- option: rm
+  default_value: "false"
+  description: Automatically remove the container when it exits
+- option: runtime
+  description: Runtime to use for this container
+- option: security-opt
+  default_value: '[]'
+  description: Security Options
+- option: shm-size
+  description: Size of /dev/shm, default value is 64MB
+- option: stop-signal
+  default_value: SIGTERM
+  description: Signal to stop a container, SIGTERM by default
+- option: stop-timeout
+  default_value: "0"
+  description: Timeout (in seconds) to stop a container
+- option: storage-opt
+  default_value: '[]'
+  description: Storage driver options for the container
+- option: sysctl
+  default_value: map[]
+  description: Sysctl options
+- option: tmpfs
+  default_value: '[]'
+  description: Mount a tmpfs directory
+- option: tty
+  shorthand: t
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+- option: ulimit
+  default_value: '[]'
+  description: Ulimit options
+- option: user
+  shorthand: u
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+- option: userns
+  description: User namespace to use
+- option: uts
+  description: UTS namespace to use
+- option: volume
+  shorthand: v
+  default_value: '[]'
+  description: Bind mount a volume
+- option: volume-driver
+  description: Optional volume driver for the container
+- option: volumes-from
+  default_value: '[]'
+  description: Mount volumes from the specified container(s)
+- option: workdir
+  shorthand: w
+  description: Working directory inside the container
+examples: |-
+  ### Create and start a container
+
+  ```bash
+  $ docker create -t -i fedora bash
+
+  6d8af538ec541dd581ebc2a24153a28329acb5268abe5ef868c1f1a261221752
+
+  $ docker start -a -i 6d8af538ec5
+
+  bash-4.2#
+  ```
+
+  ### Initialize volumes
+
+  As of v1.4.0 container volumes are initialized during the `docker create` phase
+  (i.e., `docker run` too). For example, this allows you to `create` the `data`
+  volume container, and then use it from another container:
+
+  ```bash
+  $ docker create -v /data --name data ubuntu
+
+  240633dfbb98128fa77473d3d9018f6123b99c454b3251427ae190a7d951ad57
+
+  $ docker run --rm --volumes-from data ubuntu ls -la /data
+
+  total 8
+  drwxr-xr-x  2 root root 4096 Dec  5 04:10 .
+  drwxr-xr-x 48 root root 4096 Dec  5 04:11 ..
+  ```
+
+  Similarly, `create` a host directory bind mounted volume container, which can
+  then be used from the subsequent container:
+
+  ```bash
+  $ docker create -v /home/docker:/docker --name docker ubuntu
+
+  9aa88c08f319cd1e4515c3c46b0de7cc9aa75e878357b1e96f91e2c773029f03
+
+  $ docker run --rm --volumes-from docker ubuntu ls -la /docker
+
+  total 20
+  drwxr-sr-x  5 1000 staff  180 Dec  5 04:00 .
+  drwxr-xr-x 48 root root  4096 Dec  5 04:13 ..
+  -rw-rw-r--  1 1000 staff 3833 Dec  5 04:01 .ash_history
+  -rw-r--r--  1 1000 staff  446 Nov 28 11:51 .ashrc
+  -rw-r--r--  1 1000 staff   25 Dec  5 04:00 .gitconfig
+  drwxr-sr-x  3 1000 staff   60 Dec  1 03:28 .local
+  -rw-r--r--  1 1000 staff  920 Nov 28 11:51 .profile
+  drwx--S---  2 1000 staff  460 Dec  5 00:51 .ssh
+  drwxr-xr-x 32 1000 staff 1140 Dec  5 04:01 docker
+  ```
+
+
+  Set storage driver options per container.
+
+  ```bash
+  $ docker create -it --storage-opt size=120G fedora /bin/bash
+  ```
+
+  This (size) will allow to set the container rootfs size to 120G at creation time.
+  This option is only available for the `devicemapper`, `btrfs`, `overlay2`,
+  `windowsfilter` and `zfs` graph drivers.
+  For the `devicemapper`, `btrfs`, `windowsfilter` and `zfs` graph drivers,
+  user cannot pass a size less than the Default BaseFS Size.
+  For the `overlay2` storage driver, the size option is only available if the
+  backing fs is `xfs` and mounted with the `pquota` mount option.
+  Under these conditions, user can pass any size less then the backing fs size.
+
+  ### Specify isolation technology for container (--isolation)
+
+  This option is useful in situations where you are running Docker containers on
+  Windows. The `--isolation=<value>` option sets a container's isolation
+  technology. On Linux, the only supported is the `default` option which uses
+  Linux namespaces. On Microsoft Windows, you can specify these values:
+
+
+  | Value     | Description                                                                                                                                                   |
+  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value if the
+  daemon is running on Windows server, or `hyperv` if running on Windows client.  |
+  | `process` | Namespace isolation only.                                                                                                                                     |
+  | `hyperv`   | Hyper-V hypervisor partition-based isolation.                                                                                                                  |
+
+  Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
+

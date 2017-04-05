@@ -1,0 +1,19 @@
+command: docker stack
+short: Manage Docker stacks
+long: Manage stacks.
+usage: docker stack
+pname: docker
+plink: docker.yaml
+cname:
+- docker stack deploy
+- docker stack ls
+- docker stack ps
+- docker stack rm
+- docker stack services
+clink:
+- docker_stack_deploy.yaml
+- docker_stack_ls.yaml
+- docker_stack_ps.yaml
+- docker_stack_rm.yaml
+- docker_stack_services.yaml
+
