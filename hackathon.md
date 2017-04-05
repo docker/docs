@@ -4,8 +4,6 @@ keywords: hack, hackathon, dockercon, austin, 2017
 noratings: true
 ---
 
-![DockerCon Docs Hackathon logo](docs-hackathon-1.png)
-
 During DockerCon 2017, Docker's docs team will be running our first-ever
 hackathon, and you're invited to participate and win prizes -- whether you
 attend DockerCon or are just watching the proceedings online.
@@ -15,8 +13,8 @@ up on GitHub for you to grab.
 
 You can participate in one of two ways:
 
-- With the docs team's help in **the fourth floor hack room at DockerCon on
-  Tuesday, April 18th and Wednesday, April 19th, from 1-6pm**.
+- With the docs team's help in [**the fourth floor hack room at DockerCon on
+  Tuesday, April 18th and Wednesday, April 19th, from 1-6pm**](https://dockercon.smarteventscloud.com/connect/sessionDetail.ww?SESSION_ID=116676).
 - Online! Right here! During the whole week of DockerCon (April 17th - 21st).
 
 Or, both -- if you want to have the best shot. After all, we won't be in the
@@ -25,10 +23,13 @@ hack room 24/7 that whole week.
 All participants who show up in the 4th floor hack room at DockerCon will get
 [this way-cool magnet](http://www.cafepress.com/dockerdocshackathon.25633054) just for stopping by.
 
+![DockerCon Docs Hackathon logo](docs-hackathon-1.png)
+
 <div data-type="countdown" data-id="104602" class="tickcounter" style="width: 100%; position: relative; padding-bottom: 25%"><a href="//www.tickcounter.com/countdown/104602/docs-hackathon-starts-in" title="Docs Hackathon Starts in:">Docs Hackathon Starts in:</a><a href="//www.tickcounter.com/" title="Countdown">Countdown</a></div><script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
 
 ## Quick links
 
+- [Event page on DockerCon website](https://dockercon.smarteventscloud.com/connect/sessionDetail.ww?SESSION_ID=116676)
 - [View hackathon bugs on GitHub](https://github.com/docker/docker.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ahackathon)
 - [Report your hackathon work](https://goo.gl/forms/oEaQOlKvQj8iJbn53)
 - [Browse prizes](http://www.cafepress.com/dockerdocshackathon)
