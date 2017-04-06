@@ -224,6 +224,13 @@ least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
 [What to know before you install](install.md#what-to-know-before-you-install) in
 the install guide.
 
+### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
+
+Yes, if you [change the name of your macOS user account and home
+folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
+already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac will fail to start. See also,
+[Docker for Mac will not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-will-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
 No, you can use these side by side. Docker Toolbox leverages a Docker daemon

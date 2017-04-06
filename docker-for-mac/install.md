@@ -45,7 +45,6 @@ For more about Stable and Edge channels, see the
     best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
    On this channel, you can select whether to send usage
    statistics and other data. <br><br>Stable builds are released once per quarter.
-    </td>
     <td width="50%">This installer provides the latest Edge release of
     Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
     </td>

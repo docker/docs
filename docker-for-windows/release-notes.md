@@ -303,6 +303,23 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.0.4 Release Notes (2017-04-06 17.04.0-ce-win7)
+
+**New**
+
+- New installer experience
+- Experimental Windows Server 2016 support
+
+**Upgrades**
+
+- [Docker 17.04.0-ce](https://github.com/docker/docker/releases/tag/v17.04.0-ce)
+- [Docker Compose 1.12.0](https://github.com/docker/compose/releases/tag/1.12.0)
+- Linux Kernel 4.9.19
+
+**Bug fixes and minor changes**
+
+- Add patches to the kernel to fix VMBus crash
+
 ### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-win3)
 
 **Upgrades**

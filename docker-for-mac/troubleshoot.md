@@ -6,8 +6,6 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-<!-- /TOC -->
-
 Here is information about how to diagnose and troubleshoot problems, send logs
 and communicate with the Docker for Mac team, use our forums and Knowledge Hub,
 browse and log issues on GitHub, and find workarounds for known problems.
@@ -119,6 +117,14 @@ auto-generated reports on packages.
 <a name="troubleshoot"></a>
 
 ## Troubleshooting
+
+### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app
+
+If, after installing Docker for Mac, you [change the name of your macOS user
+account and home folder](https://support.apple.com/en-us/HT201548), Docker for
+Mac will fail to start. To solve this problem, uninstall then reinstall Docker for Mac under the new user account.
+
+See also, the discussion on the issue [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I need to reinstall Docker for Mac if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account) in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
