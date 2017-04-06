@@ -1539,7 +1539,7 @@ and `my_second_secret` already exists in Docker.
 secrets:
   my_first_secret:
     file: ./secret_data
-  my_second_secret
+  my_second_secret:
     external: true
 ```
 
