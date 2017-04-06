@@ -16,6 +16,18 @@ upgrade your installation to the latest release.
 
 (4 Apr 2017)
 
+**Known issues**
+
+In UCP 2.1.3, if you try to upload externally-signed controller
+certificates through the **Admin Settings** page on the UI, you'll see a
+"Success" message, but the certificates won't be updated on any
+of the controller nodes.
+
+The workaround is to update the contents of the `ucp-controller-server-certs`
+volume manually on each manager node with the new `ca.pem`, `cert.pem`, and
+`key.pem` contents. Update all three of these files  approximately
+simultaneously, to avoid issues with reconciliation.
+
 **Bug fixes**
 
 * Core
