@@ -1,6 +1,6 @@
 ---
 title: Deploy DDC on Linux servers
-description: Learn how to  get a trial license and install Docker Datacenter
+description: Learn how to get a trial license and install Docker Datacenter
 keywords: docker, datacenter, install, orchestration
 redirect_from:
 - /datacenter/try/
@@ -33,20 +33,20 @@ Also make sure the hosts are running one of these operating systems:
 Install the commercially supported Docker Engine on all hosts you want to manage
 with Docker Datacenter.
 
-Log in into each host using ssh, and install CS Docker Engine:
+Log in to each host using ssh, and install CS Docker Engine:
 
 ```bash
 curl -SLf https://packages.docker.com/1.13/install.sh  | sh
 ```
 
-[You can also install CS Docker Engine using a package manager](/cs-engine/1.13/index.md)
+[You can also install CS Docker Engine using a package manager](/cs-engine/1.13/index.md).
 
 ### Step 3: Install Universal Control Plane
 
 Docker Universal Control Plane (UCP) allows managing from a centralized place
 your images, applications, networks, and other computing resources.
 
-Use ssh to log in into the host where you want to install UCP and run:
+Use ssh to log in to the host where you want to install UCP and run:
 
 ```none
 docker run --rm -it --name ucp \
@@ -59,13 +59,13 @@ docker run --rm -it --name ucp \
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
 
-[Learn more about the UCP installation](../ucp/2.1/guides/admin/install/index.md)
+[Learn more about the UCP installation](../ucp/2.1/guides/admin/install/index.md).
 
 
 ### Step 4: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI, login with your administrator credentials and upload your
+to the UCP web UI, log in with your administrator credentials and upload your
 license.
 
 ![](../images/try-ddc-1.png){: .with-border}
@@ -89,7 +89,7 @@ Check the 'Add node as a manager' option to join the node as a manager
 to provide replication and make UCP highly available. For a highly available
 installation, make sure you have 3, 5, or 7 manager nodes.
 
-Copy the command to your clipboard, and run in on every node that you want
+Copy the command to your clipboard, and run it on every node that you want
 to be managed by UCP. After you run the command in the node, the node
 will show up in the UP web UI.
 
@@ -99,7 +99,7 @@ Docker Trusted Registry (DTR) is a private image registry so that you can
 manage who has access to your Docker images. DTR needs to be installed on
 a node that is being managed by UCP.
 
-Use ssh to log in into the host where you already installed UCP, and run:
+Use ssh to log in to the host where you already installed UCP, and run:
 
 ```none
 docker run -it --rm \
