@@ -133,3 +133,18 @@ even if you don't spend them.
 Ask us anything at docs@docker.com or in [the #docs channel on Slack](https://dockercommunity.slack.com/messages/C2V58TASE).
 
 Thank you for participating in the 2017 Docs Hackathon!
+
+## Legal
+
+Eligibility: Participants must be eighteen (18) years of age or older as of the date of your pull request.
+
+To participate in the Docs Hackathon you must submit a pull request that handles a GitHub issue in the docker/docker.github.io repo that has the label "hackathon" sometime between April 17th thru 22nd.
+
+Multiple entries per person allowed and encouraged.
+
+Participation in the Docs Hackathon and submission of content therein gives Docker rights to use submitted content (e.g., text, code, and images) for potential future promotional marketing activities.
+
+For the purposes of copyright all content submitted to Docker for the Docs Hackathon belongs to Docker.
+
+Winners will be announced the week of April 22nd on https://docs.docker.com/hackathon. The winners will be named by GitHub username and contacted via email.
+
