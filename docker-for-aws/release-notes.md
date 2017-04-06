@@ -13,8 +13,6 @@ title: Docker for AWS Release Notes
 Release date: 03/30/2017
 
 {{aws_blue_latest}}
-<br />
-<br />
 
 **New**
 
@@ -50,13 +48,25 @@ Release date: 01/18/2017
 
 ## Edge Channel
 
+### 17.04.0-edge CE
+
+Release date: 04/06/2017
+
+{{aws_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Added lambda support for Mumbai
+- Removed the ELB Name to allow for longer stack names
+- Added i3 EC2 instance types
+- Added CloudStor support to the Sydney region
+- Updated AZ for Sao Paulo
+- [Bring your own VPC] Added a VPC CIDR Parameter
+
 ### 17.03.0-edge CE
 
 Release date: 03/01/2017
-
-{{aws_blue_edge}}
-<br />
-<br />
 
 **New**
 

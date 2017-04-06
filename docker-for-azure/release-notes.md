@@ -13,8 +13,6 @@ title: Docker for Azure Release Notes
 Release date: 03/30/2017
 
 {{azure_blue_latest}}
-<br />
-<br />
 
 **New**
 
@@ -55,8 +53,6 @@ Release date: 1/18/2017
 Release date: 03/01/2017
 
 {{azure_blue_edge}}
-<br />
-<br />
 
 **New**
 
