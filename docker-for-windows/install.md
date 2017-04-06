@@ -72,7 +72,7 @@ For more about Stable and Edge channels, see the
   </td>
   <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
   </td>
-  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.exe SHA256</font></a>
   </td>
   </tr>
 </table>
