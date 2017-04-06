@@ -40,30 +40,39 @@ For more about Stable and Edge channels, see the
 <table style="width:100%">
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Edge channel</th>
+    <th style="font-size: x-large; font-family: arial;">Edge channel</th>
+    <th style="font-size: x-large; font-family: arial;"></th>
   </tr>
   <tr valign="top">
-    <td width="50%">This installer is fully baked and tested. This is the
+    <td width="33%">This installer is fully baked and tested. This is the
     best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
    On this channel, you can select whether to send usage
    statistics and other data. <br><br>Stable builds are released once per quarter.
     </td>
-    <td width="50%">This installer provides the latest Edge release of
+    <td width="33%">This installer provides the latest Edge release of
     Docker for Windows and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    </td>
+    </td>
+    <td width="33%">Docker for Windows Edge releases now provide experimental support for Windows Server 2016.<br><br>Use this installer to get the latest Edge releases on Windows Server 2016.<br><br>You'll get the same Edge features as described for the standard installer, and on the same timeline.
     </td>
   </tr>
   <tr valign="top">
-  <td width="50%">
+  <td width="33%">
   <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
   </td>
-  <td width="50%">
+  <td width="33%">
   <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge)</a>
+  </td>
+  <td width="33%">
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows Server 2016 (Edge)</a>
   </td>
   </tr>
   <tr valign="top">
-  <td width="50%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
   </td>
-  <td width="50%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  </td>
+  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
   </td>
   </tr>
 </table>
