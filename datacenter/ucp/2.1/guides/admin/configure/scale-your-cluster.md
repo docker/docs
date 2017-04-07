@@ -16,7 +16,7 @@ you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
 command to add more nodes to your cluster. When joining new nodes, the UCP
 services automatically start running in that node.
 
-When joining a node a a cluster you can specify its role: manager or worker.
+When joining a node to a cluster you can specify its role: manager or worker.
 
 * **Manager nodes**
 
@@ -40,12 +40,12 @@ When joining a node a a cluster you can specify its role: manager or worker.
 
 ## Join nodes to the cluster
 
-To add join nodes to the cluster, go to the **UCP web UI**, navigate to
+To join nodes to the cluster, go to the **UCP web UI**, navigate to
 the **Resources** page, and go to the **Nodes** section.
 
 ![](../../images/scale-your-cluster-1.png){: .with-border}
 
-Click the **Add Node button** to add a new node.
+Click the **Add Node** button to add a new node.
 
 ![](../../../../../images/try-ddc-3.png){: .with-border}
 
@@ -75,8 +75,10 @@ in UCP.
 2. If the status of the worker node is `Ready`, you'll need to manually force
    the node to leave the swarm. To do this, connect to the target node through
    SSH and run `docker swarm leave --force` directly against the local docker
-   engine. Warning: do not perform this step if the node is still a manager, as
-   that may cause loss of quorum.
+   engine. 
+   
+   >**Warning**: Do not perform this step if the node is still a manager, as
+   >that may cause loss of quorum.
 
 3. Now that the status of the node is reported as `Down`, you may remove the
    node:
