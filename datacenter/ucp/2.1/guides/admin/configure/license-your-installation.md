@@ -18,8 +18,8 @@ download your UCP license or get a free trial license.
 ## License your installation
 
 Once you've downloaded the license file, you can apply it to your UCP
-installation. Navigate to the **UCP web UI**, and then go to the **Settings
-page**.
+installation. Navigate to the **UCP web UI**, and then go to the **Settings**
+page.
 
 On the **License** page you can upload the new license.
 
