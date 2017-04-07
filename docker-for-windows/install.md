@@ -41,7 +41,7 @@ For more about Stable and Edge channels, see the
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
     <th style="font-size: x-large; font-family: arial;">Edge channel</th>
-    <th style="font-size: x-large; font-family: arial;"></th>
+    <th style="font-size: x-large; font-family: arial;">Legacy Edge installer</th>
   </tr>
   <tr valign="top">
     <td width="33%">This installer is fully baked and tested. This is the
@@ -49,11 +49,10 @@ For more about Stable and Edge channels, see the
    On this channel, you can select whether to send usage
    statistics and other data. <br><br>Stable builds are released once per quarter.
     </td>
-    <td width="33%">This installer provides the latest Edge release of
-    Docker for Windows and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    <td width="33%">This new installer includes experimental support for Windows Server 2016 as a part of the latest Edge release of
+    Docker for Windows and Engine. <br><br>Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
     </td>
-    </td>
-    <td width="33%">Docker for Windows Edge releases now provide experimental support for Windows Server 2016.<br><br>Use this installer to get the latest Edge releases on Windows Server 2016.<br><br>You'll get the same Edge features as described for the standard installer, and on the same timeline.
+    <td width="33%">We recommend that all Edge users try the new installer. <br><br>However, if you have problems with the new installer experience, you can use the legacy Edge installer and still get all other Edge features.
     </td>
   </tr>
   <tr valign="top">
@@ -61,18 +60,18 @@ For more about Stable and Edge channels, see the
   <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
   </td>
   <td width="33%">
-  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Edge)</a>
   </td>
   <td width="33%">
-  <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows Server 2016 (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge) (legacy installer)</a>
   </td>
   </tr>
   <tr valign="top">
-  <td width="33%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Stable InstallDocker.msi SHA256</font></a>
   </td>
-  <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: New Edge InstallDocker.exe SHA256</font></a>
   </td>
-  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.exe SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Legacy Edge InstallDocker.msi SHA256</font></a>
   </td>
   </tr>
 </table>
