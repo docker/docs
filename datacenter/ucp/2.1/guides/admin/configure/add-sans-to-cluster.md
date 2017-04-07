@@ -8,7 +8,7 @@ UCP always runs with HTTPS enabled.When you connect to UCP, you need to make
 sure that the hostname that you use to connect is recognized by UCP's
 certificates. If, for instance, you put UCP behind a load balancer that
 forwards its traffic to your UCP instance, your requests will be for the load
-balancer's hostname or IP address, not UCP's.  UCP will reject these requests
+balancer's hostname or IP address, not UCP's. UCP will reject these requests
 unless you include the load balancer's address as a Subject Alternative Name
 (or SAN) in UCP's certificates.
 
