@@ -117,11 +117,6 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							</script>
 							{% if page.noratings != true %}
 						  <div style="color:#b9c2cc; text-align: center; margin-top: 150px">
-								<img src="/images/chat.png" alt="chat icon" style="display:inline">
-								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
-								<a href="{{ edit_url }}">Edit this page</a> <span>&#9679;</span> {% endif %}
-								<a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC @{{ assignee }}"
-												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
