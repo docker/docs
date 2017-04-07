@@ -5,8 +5,8 @@ description: Docker Universal Control Plane has an HTTP routing mesh that
 keywords: ucp, services, http, dns
 ---
 
-Docker has a transport-layer load balancer, also know as an L4 load balancer.
-This allows you to access your services independently of the node they are
+Docker has a transport-layer load balancer, also known as an L4 load balancer.
+This allows you to access your services independently of the node where they are
 running.
 
 ![swarm routing mesh](../../images/use-domain-names-1.svg)
@@ -16,7 +16,7 @@ Users can access wordpress using the IP address of any node
 in the cluster and port 8080. If wordpress is not running in that node, the
 request is redirected to a node that is.
 
-UCP extends this and provides an http routing mesh for application-layer
+UCP extends this and provides an HTTP routing mesh for application-layer
 load balancing. This allows you to access services with HTTP and HTTPS endpoints
 using a domain name instead of an IP.
 
@@ -59,7 +59,7 @@ When a user tries to access an HTTP service from that domain name:
 
 1. The DNS resolution will point them to the IP of one of the UCP nodes
 2. The HTTP routing mesh looks at the Hostname header in the HTTP request
-3. If there's a service that maps to that hostname the request is routed to the
+3. If there's a service that maps to that hostname, the request is routed to the
 port where the service is listening
 4. If not, the user receives an HTTP 503, bad gateway error
 
