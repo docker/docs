@@ -4,18 +4,24 @@ long: |-
   Use `docker push` to share your images to the [Docker Hub](https://hub.docker.com)
   registry or to a self-hosted one.
 
-  Refer to the [`docker tag`](tag.md) reference for more information about valid
-  image and tag names.
+  Refer to the [`docker tag`](tag.md) reference for more
+  information about valid image and tag names.
 
-  Killing the `docker push` process, for example by pressing `CTRL-c` while it is
-  running in a terminal, terminates the push operation.
+  Killing the `docker push` process, for example by pressing `CTRL-c` while it
+  is running in a terminal, terminates the push operation.
+
+  Progress bars are shown during docker push, which show the
+  uncompressed size. The actual amount of data that's pushed will be compressed
+  before sending, so the uploaded
+  size will not be reflected by the progress bar.
 
   Registry credentials are managed by [docker login](login.md).
 
   ### Concurrent uploads
 
-  By default the Docker daemon will push five layers of an image at a time.
-  If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
+  By default the Docker daemon will push five layers of an image at a time. If
+  you are on a low bandwidth connection this may cause timeout issues and you may
+  want to lower
   this via the `--max-concurrent-uploads` daemon option. See the
   [daemon documentation](dockerd.md) for more details.
 usage: docker push [OPTIONS] NAME[:TAG]

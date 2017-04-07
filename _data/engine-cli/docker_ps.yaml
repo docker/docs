@@ -357,7 +357,7 @@ examples: |-
   ```
 
   The following filter matches all containers that have exposed UDP port `80`:
-
+    
   ```bash
   $ docker ps --filter publish=80/udp
 

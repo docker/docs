@@ -1,6 +1,6 @@
 command: docker service
 short: Manage services
-long: Manage services
+long: Manage services.
 usage: docker service
 pname: docker
 plink: docker.yaml

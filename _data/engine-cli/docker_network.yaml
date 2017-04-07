@@ -1,6 +1,8 @@
 command: docker network
 short: Manage networks
-long: Manage networks
+long: |-
+  Manage networks. You can use subcommands to create, inspect, list, remove,
+  connect and disconnect networks.
 usage: docker network
 pname: docker
 plink: docker.yaml
