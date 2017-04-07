@@ -2184,77 +2184,77 @@ manuals:
       title: Docker Swarm API
 
 glossary:
-- path: /glossary/#aufs
+- path: /glossary/?term=aufs
   title: aufs
-- path: /glossary/#base-image
+- path: /glossary/?term=base image
   title: base image
-- path: /glossary/#boot2docker
+- path: /glossary/?term=boot2docker
   title: boot2docker
-- path: /glossary/#btrfs
+- path: /glossary/?term=btrfs
   title: btrfs
-- path: /glossary/#build
+- path: /glossary/?term=build
   title: build
-- path: /glossary/#cgroups
+- path: /glossary/?term=cgroups
   title: cgroups
-- path: /glossary/#compose
+- path: /glossary/?term=Compose
   title: Compose
-- path: /glossary/#copy-on-write
+- path: /glossary/?term=copy-on-write
   title: copy-on-write
-- path: /glossary/#container
+- path: /glossary/?term=container
   title: container
-- path: /glossary/#data-volume
+- path: /glossary/?term=data volume
   title: data volume
-- path: /glossary/#docker
+- path: /glossary/?term=docker
   title: Docker
-- path: /glossary/#docker-for-mac
+- path: /glossary/?term=Docker for Mac
   title: Docker for Mac
-- path: /glossary/#docker-for-windows
+- path: /glossary/?term=Docker for Windows
   title: Docker for Windows
-- path: /glossary/#docker-hub
+- path: /glossary/?term=Docker Hub
   title: Docker Hub
-- path: /glossary/#dockerfile
+- path: /glossary/?term=Dockerfile
   title: Dockerfile
-- path: /glossary/#filesystem
+- path: /glossary/?term=filesystem
   title: filesystem
-- path: /glossary/#image
+- path: /glossary/?term=image
   title: image
-- path: /glossary/#kitematic
+- path: /glossary/?term=kitematic
   title: Kitematic
-- path: /glossary/#libcontainer
+- path: /glossary/?term=libcontainer
   title: libcontainer
-- path: /glossary/#libnetwork
+- path: /glossary/?term=libnetwork
   title: libnetwork
-- path: /glossary/#link
+- path: /glossary/?term=link
   title: link
-- path: /glossary/#machine
+- path: /glossary/?term=Machine
   title: Machine
-- path: /glossary/#node
+- path: /glossary/?term=node
   title: node
-- path: /glossary/#overlay-network-driver
+- path: /glossary/?term=overlay network driver
   title: overlay network driver
-- path: /glossary/#overlay-storage-driver
+- path: /glossary/?term=overlay storage driver
   title: overlay storage driver
-- path: /glossary/#registry
+- path: /glossary/?term=registry
   title: registry
-- path: /glossary/#repository
+- path: /glossary/?term=repository
   title: repository
-- path: /glossary/#service
+- path: /glossary/?term=service
   title: service
-- path: /glossary/#service-discovery
+- path: /glossary/?term=service discovery
   title: service discovery
-- path: /glossary/#swarm
+- path: /glossary/?term=swarm
   title: swarm
-- path: /glossary/#docker-swarm
+- path: /glossary/?term=Docker Swarm
   title: Docker Swarm
-- path: /glossary/#swarm-mode
+- path: /glossary/?term=swarm mode
   title: swarm mode
-- path: /glossary/#tag
+- path: /glossary/?term=tag
   title: tag
-- path: /glossary/#task
+- path: /glossary/?term=task
   title: task
-- path: /glossary/#toolbox
+- path: /glossary/?term=toolbox
   title: Toolbox
-- path: /glossary/#union-file-system
+- path: /glossary/?term=Union file system
   title: Union file system
-- path: /glossary/#virtual-machine
+- path: /glossary/?term=virtual machine
   title: virtual machine
