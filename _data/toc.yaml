@@ -72,6 +72,8 @@ guides:
       title: Open Source Licensing
     - path: /docker-for-aws/release-notes/
       title: Release Notes
+    - path: /docker-for-aws/archive/
+      title: Template Archive
   - sectiontitle: Docker for Azure
     section:
     - path: /docker-for-azure/why/
@@ -90,6 +92,8 @@ guides:
       title: Open Source Licensing
     - path: /docker-for-azure/release-notes/
       title: Release Notes
+    - path: /docker-for-azure/archive/
+      title: Template Archive
   - sectiontitle: Docker Toolbox (Legacy)
     section:
     - path: /toolbox/overview/
