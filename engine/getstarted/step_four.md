@@ -58,7 +58,7 @@ creating an image which runs on Linux.
     $ nano Dockerfile
     ```
 
-    **Windows**:
+    **Windows**: The `.` tells `notepad` not to add a `.txt` extension.
 
     ```none
     C:\> notepad Dockerfile.
