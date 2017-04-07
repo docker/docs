@@ -596,7 +596,7 @@ are not on the same network.
 
 The following example illustrates these points.
 
-1.  Create another network named `local_alias`
+1.  Create another network named `local_alias`:
 
     ```bash
     $ docker network create -d bridge --subnet 172.26.0.0/24 local_alias
@@ -648,7 +648,7 @@ The following example illustrates these points.
 4.  Disconnect `container5` from the `isolated_nw` network. Attach to `container4`
     and try pinging `c5` and `foo`.
 
-    ```
+    ```bash
     $ docker network disconnect isolated_nw container5
 
     $ docker attach container4

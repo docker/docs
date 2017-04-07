@@ -1,0 +1,90 @@
+command: docker search
+short: Search the Docker Hub for images
+long: |-
+  Search [Docker Hub](https://hub.docker.com) for images
+
+  See [*Find Public Images on Docker Hub*](https://docs.docker.com/engine/tutorials/dockerrepos/#searching-for-images) for
+  more details on finding shared images from the command line.
+
+  > **Note**: Search queries return a maximum of 25 results.
+usage: docker search [OPTIONS] TERM
+pname: docker
+plink: docker.yaml
+options:
+- option: automated
+  default_value: "false"
+  description: Only show automated builds
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: limit
+  default_value: "25"
+  description: Max number of search results
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output
+- option: stars
+  shorthand: s
+  default_value: "0"
+  description: Only displays with at least x stars
+examples: "### Search images by name\n\nThis example displays images with a name containing
+  'busybox':\n\n```none\n$ docker search busybox\n\nNAME                             DESCRIPTION
+  \                                    STARS     OFFICIAL   AUTOMATED\nbusybox                          Busybox
+  base image.                             316       [OK]       \nprogrium/busybox
+  \                                                                50                   [OK]\nradial/busyboxplus
+  \              Full-chain, Internet enabled, busybox made...   8                    [OK]\nodise/busybox-python
+  \                                                            2                    [OK]\nazukiapp/busybox
+  \                This image is meant to be used as the base...   2                    [OK]\nofayau/busybox-jvm
+  \              Prepare busybox to install a 32 bits JVM.       1                    [OK]\nshingonoide/archlinux-busybox
+  \   Arch Linux, a lightweight and flexible Lin...   1                    [OK]\nodise/busybox-curl
+  \                                                              1                    [OK]\nofayau/busybox-libc32
+  \           Busybox with 32 bits (and 64 bits) libs         1                    [OK]\npeelsky/zulu-openjdk-busybox
+  \                                                    1                    [OK]\nskomma/busybox-data
+  \             Docker image suitable for data volume cont...   1                    [OK]\nelektritter/busybox-teamspeak
+  \   Lightweight teamspeak3 container based on...    1                    [OK]\nsocketplane/busybox
+  \                                                             1                    [OK]\noveits/docker-nginx-busybox
+  \     This is a tiny NginX docker image based on...   0                    [OK]\nggtools/busybox-ubuntu
+  \          Busybox ubuntu version with extra goodies       0                    [OK]\nnikfoundas/busybox-confd
+  \        Minimal busybox based distribution of confd     0                    [OK]\nopenshift/busybox-http-app
+  \                                                      0                    [OK]\njllopis/busybox
+  \                                                                 0                    [OK]\nswyckoff/busybox
+  \                                                                0                    [OK]\npowellquiring/busybox
+  \                                                           0                    [OK]\nwilliamyeh/busybox-sh
+  \           Docker image for BusyBox's sh                   0                    [OK]\nsimplexsys/busybox-cli-powered
+  \  Docker busybox images, with a few often us...   0                    [OK]\nfhisamoto/busybox-java
+  \          Busybox java                                    0                    [OK]\nscottabernethy/busybox
+  \                                                          0                    [OK]\nmarclop/busybox-solr\n```\n\n###
+  Display non-truncated description (--no-trunc)\n\nThis example displays images with
+  a name containing 'busybox',\nat least 3 stars and the description isn't truncated
+  in the output:\n\n```bash\n$ docker search --stars=3 --no-trunc busybox\nNAME                 DESCRIPTION
+  \                                                                              STARS
+  \    OFFICIAL   AUTOMATED\nbusybox              Busybox base image.                                                                       325
+  \      [OK]       \nprogrium/busybox                                                                                               50
+  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
+  made from scratch. Comes in git and cURL flavors.   8                    [OK]\n```\n\n###
+  Limit search results (--limit)\n\nThe flag `--limit` is the maximum number of results
+  returned by a search. This value could\nbe in the range between 1 and 100. The default
+  value of `--limit` is 25.\n\n\n### Filtering\n\nThe filtering flag (`-f` or `--filter`)
+  format is a `key=value` pair. If there is more\nthan one filter, then pass multiple
+  flags (e.g. `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe currently supported
+  filters are:\n\n* stars (int - number of stars the image has)\n* is-automated (true|false)
+  - is the image automated or not\n* is-official (true|false) - is the image official
+  or not\n\n\n#### stars\n\nThis example displays images with a name containing 'busybox'
+  and at\nleast 3 stars:\n\n```bash\n$ docker search --filter stars=3 busybox\n\nNAME
+  \                DESCRIPTION                                     STARS     OFFICIAL
+  \  AUTOMATED\nbusybox              Busybox base image.                             325
+  \      [OK]       \nprogrium/busybox                                                     50
+  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
+  made...   8                    [OK]\n```\n\n\n#### is-automated\n\nThis example
+  displays images with a name containing 'busybox'\nand are automated builds:\n\n```bash\n$
+  docker search --filter is-automated busybox\n\nNAME                 DESCRIPTION
+  \                                    STARS     OFFICIAL   AUTOMATED\nprogrium/busybox
+  \                                                    50                   [OK]\nradial/busyboxplus
+  \  Full-chain, Internet enabled, busybox made...   8                    [OK]\n```\n\n####
+  is-official\n\nThis example displays images with a name containing 'busybox', at
+  least\n3 stars and are official builds:\n\n```bash\n$ docker search --filter \"is-official=true\"
+  --filter \"stars=3\" busybox\n\nNAME                 DESCRIPTION                                     STARS
+  \    OFFICIAL   AUTOMATED\nprogrium/busybox                                                     50
+  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
+  made...   8                    [OK]\n```"
+

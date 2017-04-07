@@ -11,7 +11,7 @@ Variables starting with `DOCKER_` are the same as those used to configure the
 Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
 
 > **Note**: Some of these variables can also be provided using an
-> [environment file](../env-file.md)
+> [environment file](/compose/env-file.md)
 
 ## COMPOSE\_PROJECT\_NAME
 
@@ -95,7 +95,7 @@ using this character as path separator.
 
 ## Related Information
 
-- [User guide](../index.md)
-- [Installing Compose](../install.md)
-- [Compose file reference](../compose-file.md)
-- [Environment file](../env-file.md)
+- [User guide](/compose/index.md)
+- [Installing Compose](/compose/install.md)
+- [Compose file reference](/compose/compose-file.md)
+- [Environment file](/compose/env-file.md)

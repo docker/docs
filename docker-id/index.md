@@ -51,7 +51,3 @@ You can also log in using the `docker login` command. (You can read more about `
 stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the
 [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
-
-## The Accounts API
-
-Once you create and verify your Docker ID, you can also update it using the [Docker Accounts API](/docker-id/api-reference.md).

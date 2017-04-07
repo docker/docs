@@ -167,6 +167,10 @@ rebuild the image.
 2.  Refresh the app in your browser. The greeting should be updated, and the
     counter should still be incrementing.
 
+>**Note:** If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
+ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
+requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+need VirtualBox.
 
 ## Step 6: Experiment with some other commands
 

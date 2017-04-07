@@ -82,9 +82,19 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 				<div class="col-body">
 					<main class="col-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
 						<section class="section">
-							{% if page.title %}
+							{% if page.url == '/' %}
+							<h1>{{ site.name }}</h1>
+							{% else %}
+								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<!-- tags -->
+							{% assign keywords = page.keywords | split:"," %}
+							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
+							{% capture keywordlist %}{{ keywordlist }}<a href="/glossary/?term={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
+							{% endfor %}
+							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
+							<!-- link corrections -->
               <script language="JavaScript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
@@ -107,11 +117,6 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							</script>
 							{% if page.noratings != true %}
 						  <div style="color:#b9c2cc; text-align: center; margin-top: 150px">
-								<img src="/images/chat.png" alt="chat icon" style="display:inline">
-								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
-								<a href="{{ edit_url }}">Edit this page</a> <span>&#9679;</span> {% endif %}
-								<a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC @{{ assignee }}"
-												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {

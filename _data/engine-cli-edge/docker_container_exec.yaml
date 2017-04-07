@@ -1,0 +1,32 @@
+command: docker container exec
+short: Run a command in a running container
+long: Run a command in a running container
+usage: docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: detach
+  shorthand: d
+  default_value: "false"
+  description: 'Detached mode: run command in the background'
+- option: detach-keys
+  description: Override the key sequence for detaching a container
+- option: env
+  shorthand: e
+  default_value: '[]'
+  description: Set environment variables
+- option: interactive
+  shorthand: i
+  default_value: "false"
+  description: Keep STDIN open even if not attached
+- option: privileged
+  default_value: "false"
+  description: Give extended privileges to the command
+- option: tty
+  shorthand: t
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+- option: user
+  shorthand: u
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+

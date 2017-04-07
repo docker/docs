@@ -31,13 +31,13 @@ the machines where you want to upgrade UCP.
 
 For each machine that you want to manage with UCP:
 
-1.  Copy the offline package package to that machine.
+1.  Copy the offline package to that machine.
 
     ```bash
     $ scp docker-datacenter.tar.gz <user>@<host>:/tmp
     ```
 
-2.  Use ssh to login into the hosts where you transferred the package.
+2.  Use ssh to log in to the hosts where you transferred the package.
 
 3.  Load the UCP images.
 

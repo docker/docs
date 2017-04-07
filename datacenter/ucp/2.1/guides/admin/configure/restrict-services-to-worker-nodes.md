@@ -9,7 +9,7 @@ worker nodes. This ensures all cluster management functionality stays
 performant, and makes the cluster more secure.
 
 If a user deploys a malicious service that can affect the node where it
-is running, they won't be able to affect other nodes in the cluster, or
+is running, it won't be able to affect other nodes in the cluster, or
 any cluster management functionality.
 
 To restrict users from deploying to manager nodes, log in with administrator

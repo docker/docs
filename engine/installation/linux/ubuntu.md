@@ -41,6 +41,8 @@ To install Docker, you need the 64-bit version of one of these Ubuntu versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
+Docker CE is supported on both `x86_64` and `armhf` architectures.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
@@ -110,7 +112,6 @@ The procedure for setting up the repository is different for [Docker CE](#docker
 
 2.  Add Docker's official GPG key:
 
-
     ```bash
     $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
     ```
@@ -138,12 +139,20 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     > example: If you are using `Linux Mint Rafaela`, you could use
     > `trusty`.
 
-    To also add the **edge** repository, add `edge` after `stable` on the last
-    line of the command.
+    **amd64**:
 
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    **armhf**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=armhf] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -275,17 +284,18 @@ a new file each time you want to upgrade Docker.
 
     - **Docker CE**: Go to
       [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-      Ubuntu version, browse to `stable/pool/stable/amd64/`, and download the
-      `.deb` file for the Docker version you want to install and for your
-      version of Ubuntu.
+      Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+      `armhf`,and download the `.deb` file for the Docker version you want to
+      install and for your version of Ubuntu.
 
       > **Note**: To install an **edge**  package, change the word
       > `stable` in the  URL to `edge`.
       > [Learn about **stable** and **edge** channels](/engine/installation/).
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
-      trial or subscription in your browser. Go to `x86_64/stable-{{ minor-version }}` and download
-      the `.deb` file for the Docker version you want to install.
+      trial or subscription in your browser. Go to
+      `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+      Docker version you want to install.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.

@@ -90,7 +90,7 @@ the repository.
     it alongside the stable repository.
 
     ```bash
-    $ sudo dnf config-manager --enable docker-ce-edge
+    $ sudo dnf config-manager --set-enabled docker-ce-edge
     ```
 
     You can disable the **edge** repository by running the `dnf config-manager`
@@ -98,7 +98,7 @@ the repository.
     `--enable` flag. The following command disables the **edge** repository.
 
     ```bash
-    $ sudo dnf config-manager --disable docker-ce-edge
+    $ sudo dnf config-manager --set-disabled docker-ce-edge
     ```
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
