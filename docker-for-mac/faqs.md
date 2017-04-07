@@ -104,6 +104,11 @@ provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
 
+### How can I opt out of sending my usage data?
+
+If you do not want auto-send of usage data, use the Stable channel. For more
+information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Mac?").
+
 ### Can I use Docker for Mac with new swarm mode?
 
 Yes, you can use Docker for Mac to test single-node features of [swarm
