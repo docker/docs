@@ -3,6 +3,7 @@ title: "Docker Glossary"
 description: "Glossary of terms used around Docker"
 keywords: "glossary, docker, terms, definitions"
 notoc: true
+noratings: true
 ---
 <!--
 To edit/add/remove glossary entries, visit the YAML file at:
@@ -12,11 +13,14 @@ To get a specific entry while writing a page in the docs, enter Liquid text
 like so:
 {{ site.data.glossary["aufs"] }}
 -->
+<span id="glossaryMatch" />
+<span id="topicMatch" />
 
-{% for entry in site.data.glossary %}{% assign newEntry="true" %}
+## Glossary terms
 
-## {{ entry[0] }}
+To see a definition for a term, and all topics in the documentation that have
+been tagged with that term, click any entry below:
 
-{{ entry[1] }}
-
+{% for entry in site.data.glossary %}
+- [{{ entry[0] }}](/glossary/?term={{ entry[0]}})
 {% endfor %}
