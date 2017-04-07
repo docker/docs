@@ -25,8 +25,10 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
-The best way to quickly grok the layout and syntax of a Compose file is to look
-at files for [sample applications](/compose/samples.md). A good place to start is the
+The best way to quickly grok the layout and syntax of a Compose file is to 
+read [Get started with Docker Compose](/compose/gettingstarted/) and to look
+at files for [applications on GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code). 
+A good place to start is the
 version 3 Compose stack file we use for the voting app sample to illustrate
 multi-container apps, service definitions, swarm mode, the `deploy` key, and the
 `docker stack deploy` command. Click to show/hide the example file below. This
