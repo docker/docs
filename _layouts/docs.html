@@ -88,6 +88,13 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<!-- tags -->
+							{% assign keywords = page.keywords | split:"," %}
+							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
+							{% capture keywordlist %}{{ keywordlist }}<a href="/glossary/?term={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
+							{% endfor %}
+							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
+							<!-- link corrections -->
               <script language="JavaScript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
