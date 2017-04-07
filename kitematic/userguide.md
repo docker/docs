@@ -24,7 +24,19 @@ and configuring volumes.  You can use Kitematic to change environment variables,
 stream logs, and single click terminal into your Docker container all from the
 GUI.
 
-First, if you haven't yet done so, download and start Kitematic by installing [Docker Toolbox](/toolbox/overview.md#ready-to-get-started).
+First, if you haven't yet done so, download and install Kitematic in one of the following ways:
+
+* Choose **Kitematic** from the Docker for Mac or Docker for Windows menu to get started with the Kitematic install.
+
+* Install [Docker Toolbox](/toolbox/overview.md#ready-to-get-started) (on older systems that do not meet the requirements of [Docker for Mac](/docker-for-mac/install.md#what-to-know-before-you-install) or [Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+
+* Download Kitematic directly from the [Kitematic releases page](https://github.com/docker/kitematic/releases/).
+
+Start Kitematic. (On desktop systems, click on the app.)
+
+## Log in with your Docker ID
+
+Provide your Docker ID and user name and click **LOG IN** or click **Skip for now** to browse Docker Hub as a guest.
 
 ## Container list
 
@@ -85,7 +97,7 @@ The "Terminal" icon at the top of the container summary will `docker exec -i -t 
 This will allow you to make quick changes, or to debug a problem.
 
 > **Note**: Your exec'ed `sh` process will not have the same environment settings
-> as the main container process and its children. 
+> as the main container process and its children.
 > Get the environment commands for your shell: `docker-machine env default`.
 
 ### Managing Volumes
