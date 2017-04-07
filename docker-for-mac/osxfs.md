@@ -37,15 +37,31 @@ Docker user who started the containers.
 
 ### Namespaces
 
-Much of the OS X file system that is accessible to the user is also available to
-containers using the `-v` bind mount syntax. By default, you can share files in
-`/Users`, `/Volumes`, `/private`, and `/tmp` directly. To add or remove
-directory trees that are exported to Docker, use the **File sharing** tab in
-Docker preferences <img src="../images/whale-x.png"> -> **Preferences** ->
-**File sharing**. (See [Preferences](index.md#preferences).) All other paths
+Much of the macOS file system that is accessible to the user is also available to
+containers using the `-v` bind mount syntax. The following command runs a container
+from an image called `r-base` and shares the macOS user's `~/Desktop/` directory as
+`/Desktop` in the container.
+
+```bash
+$ docker run -it -v ~/Desktop:/Desktop r-base bash
+```
+
+The user's `~/Desktop/` directory is now visible in the container as a directory
+under `/`.
+
+`root@2h30fa0c600e:/# ls
+bin  boot  Desktop  dev  etc  home  lib  lib32	lib64  libx32  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var`
+
+By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and `/tmp` 
+directly.
+To add or remove directory trees that are exported to Docker, use the 
+**File sharing** tab in Docker preferences ![Docker Preferences]("docker-for-mac/images/whale-x.png) -> **Preferences** ->
+**File sharing**. (See [Preferences](index.md#preferences).)
+
+All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
 containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
-should work as expected. If an OS X path is not shared and does not exist in the
+should work as expected. If a macOS path is not shared and does not exist in the
 VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from OS X.
