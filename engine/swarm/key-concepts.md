@@ -28,7 +28,7 @@ A **node** is an instance of the Docker engine participating in the swarm. You c
 
 To deploy your application to a swarm, you submit a service definition to a
 **manager node**. The manager node dispatches units of work called
-[tasks](#Services-and-tasks) to worker nodes.
+[tasks](#services-and-tasks) to worker nodes.
 
 Manager nodes also perform the orchestration and cluster management functions
 required to maintain the desired state of the swarm. Manager nodes elect a
