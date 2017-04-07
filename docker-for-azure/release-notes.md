@@ -16,6 +16,7 @@ Release date: 03/30/2017
 **New**
 
 - Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Fixed bugs in the way container logs are uploaded to File Storage in the storage account for logs
 
 ### 17.03.0 CE
 Release date: 02/08/2017
@@ -44,10 +45,18 @@ Release date: 1/18/2017
 
 ## Edge Channel
 
-### 17.03.0-edge CE
-Release date: 03/01/2017
+### 17.04.0-edge CE
+Release date: 04/06/2017
 
 {{azure_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Fixed bugs in the way container logs are uploaded to File Storage in the storage account for logs
+
+### 17.03.0-edge CE
+Release date: 03/01/2017
 
 **New**
 
