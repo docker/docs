@@ -214,7 +214,7 @@ function renderTopicsByTagTable(tagToLookup,divID)
     thisPage = metadata.pages[i];
     if (thisPage.keywords)
     {
-      var keywordArray = thisPage.keywords.split(",");
+      var keywordArray = thisPage.keywords.toString().split(",");
       for (n=0;n<keywordArray.length;n++)
       {
         if (keywordArray[n].trim().toLowerCase()==tagToLookup.toLowerCase())
