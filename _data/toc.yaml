@@ -164,6 +164,8 @@ guides:
       title: Network containers
     - path: /engine/tutorials/dockervolumes/
       title: Manage data in containers
+  - path: /engine/docker-overview/
+    title: Docker overview
 - sectiontitle: User Guide
   section:
   - path: /engine/userguide/intro/
