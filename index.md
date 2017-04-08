@@ -7,6 +7,19 @@ notoc: true
 ---
 {% assign page.title = site.name %}
 
+## Docs Hackathon, April 17-22nd, 2017
+
+<a href="/hackathon/"><img src="docs-hackathon-2.png" alt="Docker Docs Hackathon, April 17-22nd, 2017" style="max-width: 100%"></a>
+
+Earn rewards for fixing bugs in our documentation!
+Participate online, and/or visit us at DockerCon in the fourth floor hack room.
+Convert your participation points into swag. Happening all DockerCon week!
+
+[Hackathon details](/hackathon/){: class="button outline-btn" style="margin-bottom:20px"}
+
+## Introduction to Docker
+
+
 Docker packages your app with its dependencies, freeing you from worrying about
 your system configuration, and making your app more portable.
 
@@ -139,7 +152,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 - The Docker daemon no longer depends upon `sqlite`. This change means that it
   is not possible to upgrade the Docker daemon from version 1.9 directly to the
   latest version. It is recommended to upgrade from one major version to the
-  next, in sequence. {% include github-pr.md pr=30208 %}  
+  next, in sequence. {% include github-pr.md pr=30208 %}
 
 ##### Dockerfile
 
