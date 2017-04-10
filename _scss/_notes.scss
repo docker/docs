@@ -1,0 +1,35 @@
+/*
+* Infos, notes, and warnings
+*/
+
+$info-color: #1488C6;
+$warning-color: #aa6708;
+$danger-color: #ce4844;
+
+blockquote {
+  border-left-color: $info-color;
+}
+
+blockquote > p:first-child {
+  margin-top: 0;
+}
+
+blockquote > p > strong {
+  color: $info-color;
+}
+
+blockquote.warning {
+  border-left-color: $warning-color;
+}
+
+blockquote.warning > p > strong {
+  color: $warning-color;
+}
+
+blockquote.danger {
+  border-left-color: $danger-color;
+}
+
+blockquote.danger > p > strong {
+  color: $danger-color;
+}
