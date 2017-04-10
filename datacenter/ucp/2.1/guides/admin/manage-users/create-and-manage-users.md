@@ -18,7 +18,7 @@ Click the **Create User** button, and fill-in the user information.
 
 ![](../../images/create-users-2.png){: .with-border}
 
-Check the 'Is a UCP admin' option, if you want to grant permissions for the
+Check the `Is a UCP admin` option, if you want to grant permissions for the
 user to change cluster configurations. Also, assign the user with a default
 permission level.
 
@@ -30,8 +30,8 @@ permission levels:
 |:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `No Access`              | The user can't view resource, like services, images, networks, and volumes.                                                                                                                     |
 | `View Only`              | The user can view images and volumes, but can't create services.                                                                                                                                |
-| `Restricted Control`     | The user can view and edit volumes and networks. They can create services, but can't see other users services, run `docker exec`, or run containers that require privileged access to the host. |
-| `Full Control`           | The user can view and edit volumes and networks. They can create containers without any restriction, but can't see other users containers.                                                      |
+| `Restricted Control`     | The user can view and edit volumes and networks. They can create services, but can't see other users' services, run `docker exec`, or run containers that require privileged access to the host. |
+| `Full Control`           | The user can view and edit volumes and networks. They can create containers without any restriction, but can't see other users' containers.                                                      |
 
 [Learn more about the UCP permission levels](permission-levels.md). Finally,
 click the **Create User** button, to create the user.
