@@ -86,20 +86,12 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
   project
 
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
-  project
-
 - **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
   docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
   project
 
 - **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
   docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
-  project
-
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
 ## Per-PR staging on GitHub
