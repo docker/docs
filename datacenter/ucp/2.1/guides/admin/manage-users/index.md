@@ -10,7 +10,7 @@ resources like services, images, networks, and volumes in your cluster.
 By default no one can make changes to your cluster. You can then grant and
 manage permissions to enforce fine-grained access control. For that:
 
-* Start by creating a user and assigning them with a default permission.
+* Start by creating a user and assigning them a default permission.
 
     Default permissions specify the permission a user has to create and edit
     resources. You can choose from four permission levels that range from
