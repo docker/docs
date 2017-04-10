@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="261px" height="84px" viewBox="0 0 261 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Dockercon-register-now</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="-8.52651283e-14 0 262 4 262 49 21.3837891 48.8623047"></polygon>
+    </defs>
+    <g id="fisher" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dockercon-register-now" transform="translate(-1.000000, -3.000000)">
+            <g id="Group-3" transform="translate(0.000000, 39.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Mask"></g>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(-117.000000, 6.000000)">
+                        <polygon id="Rectangle-15" fill="#6CDBFF" points="426.184898 0 448.290479 12 10.0798373 12 0.977539062 0"></polygon>
+                        <polygon id="Rectangle-15-Copy" fill="#F27D52" points="437.887852 15 459.993434 27 23.0831204 27 12.6804939 15"></polygon>
+                        <polygon id="Rectangle-15-Copy-2" fill="#FAAC18" points="470.39606 30 486 42 33.4857469 42 24.3834487 30"></polygon>
+                    </g>
+                </g>
+            </g>
+            <text id="dockercon17" font-family="Comfortaa-Bold, Comfortaa" font-size="28" font-weight="bold" fill="#FFFFFF">
+                <tspan x="1.21191406" y="39">dockercon17</tspan>
+            </text>
+            <text id="live-streaming" opacity="0.511265851" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#FFFFFF">
+                <tspan x="1" y="14">live streaming</tspan>
+            </text>
+            <text id="register-now" font-family="Comfortaa-Bold, Comfortaa" font-size="16" font-weight="bold" fill="#FFFFFF">
+                <tspan x="40" y="71">register now</tspan>
+            </text>
+            <text id="april-17-20" opacity="0.511265851" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#FFFFFF">
+                <tspan x="176" y="39">april 17-20</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
