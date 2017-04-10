@@ -32,3 +32,4 @@ RUN md_source/_scripts/fetch-upstream-resources.sh \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
 	&& rm -rf md_source
+
