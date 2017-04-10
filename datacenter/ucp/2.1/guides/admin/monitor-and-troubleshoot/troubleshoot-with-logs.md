@@ -56,15 +56,15 @@ specially useful if the UCP web application is not working.
 ## Get a support dump
 
 Before making any changes to UCP, download a [support dump](../../get-support.md).
-This allows you to troubleshoot which problems were already happening before
+This allows you to troubleshoot problems which were already happening before
 changing UCP configurations.
 
-Then you can increase the UCP log levels to debug, making it easier to understand
+Then you can increase the UCP log level to debug, making it easier to understand
 the status of the UCP cluster. Changing the UCP log level restarts all UCP
 system components and introduces a small downtime window to UCP. Your
 applications won't be affected by this.
 
-To increase the UCP log levels, navigate to the **UCP web UI**, go to the
+To increase the UCP log level, navigate to the **UCP web UI**, go to the
 **Admin Settings** tab, and choose **Logs**.
 
 ![](../../images/troubleshoot-with-logs-2.png){: .with-border}
@@ -87,7 +87,7 @@ logs of the `ucp-auth-api` and `ucp-auth-store` containers.
 It's normal for the `ucp-reconcile` container to be in a stopped state. This
 container is only started when the `ucp-agent` detects that a node needs to
 transition to a different state, and it is responsible for creating and removing
-containers, issuing certificates and pulling missing images.
+containers, issuing certificates, and pulling missing images.
 
 
 ## Where to go next
