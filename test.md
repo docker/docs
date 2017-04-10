@@ -358,20 +358,31 @@ Bootstrap JS are loaded.
 
 ## Admonitions (notes)
 
-> **Note**: This is a note.
+> **Note**: This is a note using the old note style
 
-> **Info**: This is an info.
+> **This is a note using the new style**
+>
+> And you include a small description here telling users to be on the lookout
 
-> **Tip**: This is a tip.
+> **Be careful out there**
+>
+> Add the `warning` class to your blockquotes if you want to tell users
+> to be careful about something.
+{: .warning}
 
-> **Warning**: This is a warning.
+> **Ouch, don't do that!**
+>
+> Use the `danger` class to let people know this is dangerous or they
+> should pay close attention to this part of the road.
+>
+> You can also add more paragraphs here if your explanation is
+> super complex.
+{: .danger}
 
-> **Caution**: This is a caution.
 
-> **Note**: One line of note text
-> another line of note text
-
-> **Note**: This is a note with a list and a table in it.
+> **This is a crazy note**
+>
+> This note has tons of content in it:
 >
 > - List item 1
 > - List item 2
@@ -382,6 +393,7 @@ Bootstrap JS are loaded.
 > | Row 2 column 1 | Row 2 column 2 |
 >
 > And another sentence to top it all off.
+
 
 ## Comments
 
@@ -548,6 +560,3 @@ authorizedkeys:
   volumes:
     /root:/user:rw
 ```
-
-
-
