@@ -12,12 +12,12 @@ propagate that information to UCP and DTR.
 When you switch from built-in authentication to LDAP authentication,
 all manually created users whose usernames do not match any LDAP search results
 become inactive with the exception of the recovery admin user which can still
-login with the recovery admin password.
+log in with the recovery admin password.
 
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users using an LDAP directory,
-go to the **UCP web UI**, navigate to the **Settings** page, and click the
+go to the **UCP web UI**, navigate to the **Admin Settings** page, and click the
 **Auth** tab.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
@@ -124,7 +124,7 @@ LDAP user, and clicking the **Test** button.
 
 ## Synchronize users
 
-Once you've configure the LDAP integration, UCP synchronizes users based on the
+Once you've configured the LDAP integration, UCP synchronizes users based on the
 interval you've defined starting at the top of the hour. When the
 synchronization runs, UCP stores logs that can help you troubleshoot when
 something goes wrong.
