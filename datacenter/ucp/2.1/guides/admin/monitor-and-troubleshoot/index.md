@@ -28,7 +28,7 @@ Each node has a status message explaining any problems with the node.
 ## Check status from the CLI
 
 You can also monitor the status of a UCP cluster using the Docker CLI client.
-Download a UCP client certificate bundle](../../user/access-ucp/cli-based-access.md)
+Download [a UCP client certificate bundle](../../user/access-ucp/cli-based-access.md)
 and then run:
 
 ```none
