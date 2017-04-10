@@ -1182,7 +1182,15 @@ long: |
   Configuration reload will log a warning message if it detects a change in
   previously configured cluster configurations.
 
-
+  ### Configuration inheritance
+  
+  Some options will not take effect on existing containers and will only take effect on new containers. These include
+  options that override defaults for options used by `docker run` such as:
+  
+  - `log-driver`
+  - `log-opts`
+  - Potentially others...  
+  
   ## Running multiple daemons
 
   > **Note:** Running multiple daemons on a single host is considered as "experimental". The user should be aware of
