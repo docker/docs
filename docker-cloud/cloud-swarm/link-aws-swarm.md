@@ -2,7 +2,7 @@
 previewflag: cloud-swarm
 description: Link your Amazon Web Services account
 keywords: AWS, Cloud, link
-title: Link to Amazon Web Services to create Swarms
+title: Link Amazon Web Services to Docker Cloud
 ---
 
 You can create a role with AWS IAM (Identity and Access Management) so that
@@ -76,9 +76,9 @@ Back in Docker Cloud, click the account menu and select **Cloud Settings**, and
 in the **Cloud providers** section, click the green plug icon to unlink your AWS
 account.
 
-Then follow the instructions [below](#add-aws-account-credentials-to-docker-cloud) to re-link your account.
+Then follow the instructions below to re-link your account.
 
-## Add AWS account credentials to Docker Cloud
+## Add your AWS account credentials to Docker Cloud
 
 Once you've created the a `dockercloud-swarm-policy`, added the
 `dockercloud-swarm-role` inline, and have the role's Role ARN, go back to Docker
@@ -95,11 +95,4 @@ You're now ready to deploy a swarm!
 
 For next steps, see [create a new swarm in Docker Cloud](create-cloud-swarm.md).
 
-You can get an overview of topics on [swarms in Docker Cloud](index.md).
-
-<!-- TODO: Commenting out until this replaces the existing ../infrastructure/link-aws file.
-
-## What's next?
-
-You're ready to start using AWS as the infrastructure provider for swarms in
-Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](/docker-cloud/getting-started/your_first_node.md).-->
+You can get an overivew of topics on [swarms in Docker Cloud](index.md).

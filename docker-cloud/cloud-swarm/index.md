@@ -2,6 +2,8 @@
 previewflag: cloud-swarm
 description: Work with swarms in Docker Cloud
 keywords: swarm mode, swarms, orchestration Cloud, fleet management
+redirect_from:
+- /docker-cloud/cloud-swarm/create-cloud-swarm/
 title: Swarms in Docker Cloud (Beta)
 notoc: true
 ---
@@ -22,8 +24,14 @@ personal or team swarms.
 
 * [Register existing swarms](register-swarms.md)
 
-* [Create a new swarm in Docker Cloud](create-cloud-swarm.md)
+* [Create a new swarm on AWS in Docker Cloud](create-cloud-swarm-aws.md)
+
+* [Create a new swarm on Microsoft Azure in Docker Cloud](create-cloud-swarm-azure.md)
 
 * [Connect to a swarm through Docker Cloud](connect-to-swarm.md)
 
-* [Link to Amazon Web Services to create Swarms](link-aws-swarm.md)
+* [Link Amazon Web Services to Docker Cloud](link-aws-swarm.md)
+
+* [Link Microsoft Azure Cloud Services to Docker Cloud](link-azure-swarm.md)
+
+* [Set up SSH keys](ssh-key-setup.md)

@@ -1269,13 +1269,24 @@ manuals:
       title: Using Swarm mode
     - path: /docker-cloud/cloud-swarm/register-swarms/
       title: Register existing swarms
-    - path: /docker-cloud/cloud-swarm/create-cloud-swarm/
-      title: Create a new swarm in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
+      title: Create a new swarm on Amazon Web Services in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-azure/
+      title: Create a new swarm on Microsoft Azure in Docker Cloud
     - path: /docker-cloud/cloud-swarm/connect-to-swarm/
       title: Connect to a swarm through Docker Cloud
     - path: /docker-cloud/cloud-swarm/link-aws-swarm/
+<<<<<<< HEAD
       title: Link to Amazon Web Services to create swarms
   - sectiontitle: Manage infrastructure (standard mode)
+=======
+      title: Link Amazon Web Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/link-azure-swarm/
+      title: Link Microsoft Azure Cloud Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/ssh-key-setup/
+      title: Set up SSH keys
+  - sectiontitle: Manage Infrastructure (Standard Mode)
+>>>>>>> d5369e015c... add Cloud link to Azure topics
     section:
     - path: /docker-cloud/infrastructure/
       title: Infrastructure overview
