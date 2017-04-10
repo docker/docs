@@ -32,6 +32,10 @@ $ docker info |grep 'Logging Driver'
 Logging Driver: json-file
 ```
 
+If the default logging driver is changed via the Docker daemon command line flags `--log-driver`
+and `--log-opt` or `daemon.json` options `log-driver` and `log-opts`, the new 
+defaults will  not be applied to existing containers, only new containers.
+
 ## Configure the logging driver for a container
 
 When you start a container, you can configure it to use a different logging
