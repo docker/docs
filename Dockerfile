@@ -64,8 +64,8 @@ RUN svn co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/extend md_so
 
 	## Branch to pull from, per ref doc
 	## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
-	ENV ENGINE_SVN_BRANCH="branches/17.04.x"
-	ENV ENGINE_BRANCH="17.04.x"
+	ENV ENGINE_SVN_BRANCH="trunk"
+	ENV ENGINE_BRANCH="master"
 	ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 	ENV DISTRIBUTION_BRANCH="release/2.6"
 
