@@ -1191,9 +1191,9 @@ refer to it within the Compose file:
 ## Compose documentation
 
 - [User guide](/compose/index.md)
-- [Installing Compose](/compose/install/)
+- [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Django](/compose/django/)
-- [Get started with Rails](/compose/rails/)
-- [Get started with WordPress](/compose/wordpress/)
+- [Get started with Django](/compose/django.md)
+- [Get started with Rails](/compose/rails.md)
+- [Get started with WordPress](/compose/wordpress.md)
 - [Command line reference](/compose/reference/)
