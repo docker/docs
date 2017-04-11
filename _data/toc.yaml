@@ -1165,6 +1165,8 @@ manuals:
     title: Deploy Datacenter on AWS
   - path: /datacenter/install/linux/
     title: Deploy Datacenter on Linux
+  - path: /datacenter/install/azure/
+    title: Deploy Datacenter on Azure
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.1/guides/
