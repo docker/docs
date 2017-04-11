@@ -22,6 +22,16 @@ guides:
   section:
   - path: /engine/installation/
     title: Install Docker
+  - sectiontitle: Docker Edge
+    section:
+    - path: /edge/
+      title: Overview
+    - path: /edge/engine/reference/commandline/docker/
+      title: Docker Edge CLI reference
+      nosync: true
+    - path: /edge/engine/api/v1.28/
+      title: v1.28 Reference (Docker CE Edge)
+      nosync: true
   - path: /docker-for-mac/install/
     title: Docker for Mac
   - path: /docker-for-windows/install/
@@ -486,6 +496,9 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
+  - path: /edge/engine/api/v1.28/
+    title: v1.28 Reference (Docker CE Edge)
+    nosync: true
   - path: /engine/api/v1.27/
     title: v1.27 Reference
   - sectiontitle: Previous API versions
@@ -837,6 +850,340 @@ reference:
     - path: /engine/reference/commandline/volume_rm/
       title: docker volume rm
   - path: /engine/reference/commandline/wait/
+    title: docker wait
+- title: Edge Daemon CLI reference (dockerd)
+  path: /edge/engine/reference/commandline/dockerd/
+- sectiontitle: Docker Edge Engine API
+  section:
+  - path: /edge/engine/api/v1.28/
+    title: v1.28 API Reference
+- sectiontitle: Docker Edge Engine (docker) CLI
+  section:
+  - path: /edge/engine/reference/run/
+    title: Docker run reference
+  - path: /edge/engine/reference/commandline/cli/
+    title: Use the Docker command line
+  - path: /edge/engine/reference/commandline/docker/
+    title: docker (base command)
+  - path: /edge/engine/reference/commandline/attach/
+    title: docker attach
+  - path: /edge/engine/reference/commandline/build/
+    title: docker build
+  - sectiontitle: docker checkpoint *
+    section:
+    - path: /edge/engine/reference/commandline/checkpoint/
+      title: docker checkpoint
+    - path: /edge/engine/reference/commandline/checkpoint_create/
+      title: docker checkpoint create
+    - path: /edge/engine/reference/commandline/checkpoint_create/
+      title: docker checkpoint create
+    - path: /edge/engine/reference/commandline/checkpoint_ls/
+      title: docker checkpoint ls
+    - path: /edge/engine/reference/commandline/checkpoint_rm/
+      title: docker checkpoint rm
+  - path: /edge/engine/reference/commandline/commit/
+    title: docker commit
+  - sectiontitle: docker container *
+    section:
+    - path: /edge/engine/reference/commandline/container/
+      title: docker container
+    - path: /edge/engine/reference/commandline/container_attach/
+      title: docker container attach
+    - path: /edge/engine/reference/commandline/container_commit/
+      title: docker container commit
+    - path: /edge/engine/reference/commandline/container_cp/
+      title: docker container cp
+    - path: /edge/engine/reference/commandline/container_create/
+      title: docker container create
+    - path: /edge/engine/reference/commandline/container_diff/
+      title: docker container diff
+    - path: /edge/engine/reference/commandline/container_exec/
+      title: docker container exec
+    - path: /edge/engine/reference/commandline/container_export/
+      title: docker container export
+    - path: /edge/engine/reference/commandline/container_inspect/
+      title: docker container inspect
+    - path: /edge/engine/reference/commandline/container_kill/
+      title: docker container kill
+    - path: /edge/engine/reference/commandline/container_logs/
+      title: docker container logs
+    - path: /edge/engine/reference/commandline/container_ls/
+      title: docker container ls
+    - path: /edge/engine/reference/commandline/container_pause/
+      title: docker container pause
+    - path: /edge/engine/reference/commandline/container_port/
+      title: docker container port
+    - path: /edge/engine/reference/commandline/container_prune/
+      title: docker container prune
+    - path: /edge/engine/reference/commandline/container_rename/
+      title: docker container rename
+    - path: /edge/engine/reference/commandline/container_restart/
+      title: docker container restart
+    - path: /edge/engine/reference/commandline/container_rm/
+      title: docker container rm
+    - path: /edge/engine/reference/commandline/container_run/
+      title: docker container run
+    - path: /edge/engine/reference/commandline/container_start/
+      title: docker container start
+    - path: /edge/engine/reference/commandline/container_stats/
+      title: docker container stats
+    - path: /edge/engine/reference/commandline/container_stop/
+      title: docker container stop
+    - path: /edge/engine/reference/commandline/container_top/
+      title: docker container top
+    - path: /edge/engine/reference/commandline/container_unpause/
+      title: docker container unpause
+    - path: /edge/engine/reference/commandline/container_update/
+      title: docker container update
+    - path: /edge/engine/reference/commandline/container_wait/
+      title: docker container wait
+  - path: /edge/engine/reference/commandline/cp/
+    title: docker cp
+  - path: /edge/engine/reference/commandline/create/
+    title: docker create
+  - path: /edge/engine/reference/commandline/deploy/
+    title: docker deploy
+  - path: /edge/engine/reference/commandline/diff/
+    title: docker diff
+  - path: /edge/engine/reference/commandline/events/
+    title: docker events
+  - path: /edge/engine/reference/commandline/exec/
+    title: docker exec
+  - path: /edge/engine/reference/commandline/export/
+    title: docker export
+  - path: /edge/engine/reference/commandline/history/
+    title: docker history
+  - sectiontitle: docker image *
+    section:
+    - path: /edge/engine/reference/commandline/image/
+      title: docker image
+    - path: /edge/engine/reference/commandline/image_build/
+      title: docker image build
+    - path: /edge/engine/reference/commandline/image_history/
+      title: docker image history
+    - path: /edge/engine/reference/commandline/image_import/
+      title: docker image import
+    - path: /edge/engine/reference/commandline/image_inspect/
+      title: docker image inspect
+    - path: /edge/engine/reference/commandline/image_load/
+      title: docker image load
+    - path: /edge/engine/reference/commandline/image_ls/
+      title: docker image ls
+    - path: /edge/engine/reference/commandline/image_prune/
+      title: docker image prune
+    - path: /edge/engine/reference/commandline/image_pull/
+      title: docker image pull
+    - path: /edge/engine/reference/commandline/image_push/
+      title: docker image push
+    - path: /edge/engine/reference/commandline/image_rm/
+      title: docker image rm
+    - path: /edge/engine/reference/commandline/image_save/
+      title: docker image save
+    - path: /edge/engine/reference/commandline/image_tag/
+      title: docker image tag
+  - path: /edge/engine/reference/commandline/images/
+    title: docker images
+  - path: /edge/engine/reference/commandline/import/
+    title: docker import
+  - path: /edge/engine/reference/commandline/info/
+    title: docker info
+  - path: /edge/engine/reference/commandline/inspect/
+    title: docker inspect
+  - path: /edge/engine/reference/commandline/kill/
+    title: docker kill
+  - path: /edge/engine/reference/commandline/load/
+    title: docker load
+  - path: /edge/engine/reference/commandline/login/
+    title: docker login
+  - path: /edge/engine/reference/commandline/logout/
+    title: docker logout
+  - path: /edge/engine/reference/commandline/logs/
+    title: docker logs
+  - sectiontitle: docker network *
+    section:
+    - path: /edge/engine/reference/commandline/network/
+      title: docker network
+    - path: /edge/engine/reference/commandline/network_connect/
+      title: docker network connect
+    - path: /edge/engine/reference/commandline/network_create/
+      title: docker network create
+    - path: /edge/engine/reference/commandline/network_disconnect/
+      title: docker network disconnect
+    - path: /edge/engine/reference/commandline/network_inspect/
+      title: docker network inspect
+    - path: /edge/engine/reference/commandline/network_ls/
+      title: docker network ls
+    - path: /edge/engine/reference/commandline/network_prune/
+      title: docker network prune
+    - path: /edge/engine/reference/commandline/network_rm/
+      title: docker network rm
+  - sectiontitle: docker node *
+    section:
+    - path: /edge/engine/reference/commandline/node/
+      title: docker node
+    - path: /edge/engine/reference/commandline/node_demote/
+      title: docker node demote
+    - path: /edge/engine/reference/commandline/node_inspect/
+      title: docker node inspect
+    - path: /edge/engine/reference/commandline/node_ls/
+      title: docker node ls
+    - path: /edge/engine/reference/commandline/node_promote/
+      title: docker node promote
+    - path: /edge/engine/reference/commandline/node_ps/
+      title: docker node ps
+    - path: /edge/engine/reference/commandline/node_rm/
+      title: docker node rm
+    - path: /edge/engine/reference/commandline/node_update/
+      title: docker node update
+  - path: /edge/engine/reference/commandline/pause/
+    title: docker pause
+  - sectiontitle: docker plugin *
+    section:
+    - path: /edge/engine/reference/commandline/plugin/
+      title: docker plugin
+    - path: /edge/engine/reference/commandline/plugin_create/
+      title: docker plugin create
+    - path: /edge/engine/reference/commandline/plugin_disable/
+      title: docker plugin disable
+    - path: /edge/engine/reference/commandline/plugin_enable/
+      title: docker plugin enable
+    - path: /edge/engine/reference/commandline/plugin_inspect/
+      title: docker plugin inspect
+    - path: /edge/engine/reference/commandline/plugin_install/
+      title: docker plugin install
+    - path: /edge/engine/reference/commandline/plugin_ls/
+      title: docker plugin ls
+    - path: /edge/engine/reference/commandline/plugin_rm/
+      title: docker plugin rm
+    - path: /edge/engine/reference/commandline/plugin_set/
+      title: docker plugin set
+    - path: /edge/engine/reference/commandline/plugin_upgrade/
+      title: docker plugin upgrade
+  - path: /edge/engine/reference/commandline/port/
+    title: docker port
+  - path: /edge/engine/reference/commandline/ps/
+    title: docker ps
+  - path: /edge/engine/reference/commandline/pull/
+    title: docker pull
+  - path: /edge/engine/reference/commandline/push/
+    title: docker push
+  - path: /edge/engine/reference/commandline/rename/
+    title: docker rename
+  - path: /edge/engine/reference/commandline/restart/
+    title: docker restart
+  - path: /edge/engine/reference/commandline/rm/
+    title: docker rm
+  - path: /edge/engine/reference/commandline/rmi/
+    title: docker rmi
+  - path: /edge/engine/reference/commandline/run/
+    title: docker run
+  - path: /edge/engine/reference/commandline/save/
+    title: docker save
+  - path: /edge/engine/reference/commandline/search/
+    title: docker search
+  - sectiontitle: docker secret *
+    section:
+    - path: /edge/engine/reference/commandline/secret/
+      title: docker secret
+    - path: /edge/engine/reference/commandline/secret_create/
+      title: docker secret create
+    - path: /edge/engine/reference/commandline/secret_inspect/
+      title: docker secret inspect
+    - path: /edge/engine/reference/commandline/secret_ls/
+      title: docker secret ls
+    - path: /edge/engine/reference/commandline/secret_rm/
+      title: docker secret rm
+  - sectiontitle: docker service *
+    section:
+    - path: /edge/engine/reference/commandline/service/
+      title: docker service
+    - path: /edge/engine/reference/commandline/service_create/
+      title: docker service create
+    - path: /edge/engine/reference/commandline/service_inspect/
+      title: docker service inspect
+    - path: /edge/engine/reference/commandline/service_logs/
+      title: docker service logs
+    - path: /edge/engine/reference/commandline/service_ls/
+      title: docker service ls
+    - path: /edge/engine/reference/commandline/service_ps/
+      title: docker service ps
+    - path: /edge/engine/reference/commandline/service_rm/
+      title: docker service rm
+    - path: /edge/engine/reference/commandline/service_scale/
+      title: docker service scale
+    - path: /edge/engine/reference/commandline/service_update/
+      title: docker service update
+  - sectiontitle: docker stack *
+    section:
+    - path: /edge/engine/reference/commandline/stack/
+      title: docker stack
+    - path: /edge/engine/reference/commandline/stack_deploy/
+      title: docker stack deploy
+    - path: /edge/engine/reference/commandline/stack_ps/
+      title: docker stack ps
+    - path: /edge/engine/reference/commandline/stack_rm/
+      title: docker stack rm
+    - path: /edge/engine/reference/commandline/stack_services/
+      title: docker stack services
+  - path: /edge/engine/reference/commandline/start/
+    title: docker start
+  - path: /edge/engine/reference/commandline/stats/
+    title: docker stats
+  - path: /edge/engine/reference/commandline/stop/
+    title: docker stop
+  - sectiontitle: docker swarm *
+    section:
+    - path: /edge/engine/reference/commandline/swarm/
+      title: docker swarm
+    - path: /edge/engine/reference/commandline/swarm_init/
+      title: docker swarm init
+    - path: /edge/engine/reference/commandline/swarm_join-token/
+      title: docker swarm join-token
+    - path: /edge/engine/reference/commandline/swarm_join/
+      title: docker swarm join
+    - path: /edge/engine/reference/commandline/swarm_leave/
+      title: docker swarm leave
+    - path: /edge/engine/reference/commandline/swarm_unlock-key/
+      title: docker swarm unlock-key
+    - path: /edge/engine/reference/commandline/swarm_unlock/
+      title: docker swarm unlock
+    - path: /edge/engine/reference/commandline/swarm_update/
+      title: docker swarm update
+  - sectiontitle: docker system *
+    section:
+    - path: /edge/engine/reference/commandline/system/
+      title: docker system
+    - path: /edge/engine/reference/commandline/system_df/
+      title: docker system df
+    - path: /edge/engine/reference/commandline/system_events/
+      title: docker system events
+    - path: /edge/engine/reference/commandline/system_info/
+      title: docker system info
+    - path: /edge/engine/reference/commandline/system_prune/
+      title: docker system prune
+  - path: /edge/engine/reference/commandline/tag/
+    title: docker tag
+  - path: /edge/engine/reference/commandline/top/
+    title: docker top
+  - path: /edge/engine/reference/commandline/unpause/
+    title: docker unpause
+  - path: /edge/engine/reference/commandline/update/
+    title: docker update
+  - path: /edge/engine/reference/commandline/version/
+    title: docker version
+  - sectiontitle: docker volume *
+    section:
+    - path: /edge/engine/reference/commandline/volume_create/
+      title: docker volume create
+    - path: /edge/engine/reference/commandline/volume_inspect/
+      title: docker volume inspect
+    - path: /edge/engine/reference/commandline/volume_ls/
+      title: docker volume ls
+    - path: /edge/engine/reference/commandline/volume_prune/
+      title: docker volume prune
+    - path: /edge/engine/reference/commandline/volume_rm/
+      title: docker volume rm
+  - path: /edge/engine/reference/commandline/wait/
     title: docker wait
 - title: Machine (docker-machine) CLI
   path: /machine/reference/
