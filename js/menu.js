@@ -239,10 +239,21 @@ function renderTopicsByTagTable(tagToLookup,divID)
 }
 function renderTagsPage()
 {
-  if(window.location.pathname.indexOf("/glossary/")>-1)
+  if(window.location.pathname.indexOf("/glossary/")>-1 || window.location.pathname.indexOf("/search/")>-1)
   {
-    var tagToLookup = decodeURI(queryString().term);
-    $("#keyword").html(tagToLookup);
+    var tagToLookup;
+    if (window.location.pathname.indexOf("/glossary/")>-1)
+    {
+      // Get ?term=<value>
+      tagToLookup = decodeURI(queryString().term);
+      $("#keyword").html(tagToLookup);
+    }
+    else
+    {
+      // Get ?q=<value>
+      tagToLookup = decodeURI(queryString().q);
+    }
+    // Get the term and definition
     for (i=0;i<glossary.terms.length;i++)
     {
       if (glossary.terms[i].term.toLowerCase()==tagToLookup.toLowerCase())
