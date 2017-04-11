@@ -6,7 +6,7 @@ title: Create and manage users
 ---
 
 When using the UCP built-in authentication, you need to create users and
-assign them with a default permission level so that they can access the
+assign them a default permission level so that they can access the
 cluster.
 
 To create a new user, go to the **UCP web UI**, and navigate to the
@@ -19,7 +19,7 @@ Click the **Create User** button, and fill-in the user information.
 ![](../../images/create-users-2.png){: .with-border}
 
 Check the `Is a UCP admin` option, if you want to grant permissions for the
-user to change cluster configurations. Also, assign the user with a default
+user to change cluster configurations. Also, assign the user a default
 permission level.
 
 Default permissions specify the permission a user has for resources that don't
