@@ -97,16 +97,17 @@ you will need to add this configuration in the Docker systemd service file.
     $ sudo systemctl daemon-reload
     ```
 
-5.  Verify that the configuration has been loaded:
+5.  Restart Docker:
+
+    ```bash
+    $ sudo systemctl restart docker
+    ```
+
+6.  Verify that the configuration has been loaded:
 
     ```bash
     $ systemctl show --property=Environment docker
     Environment=HTTP_PROXY=http://proxy.example.com:80/
-    ```
-6.  Restart Docker:
-
-    ```bash
-    $ sudo systemctl restart docker
     ```
 
 ## Manually creating the systemd unit files
