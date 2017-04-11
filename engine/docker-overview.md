@@ -131,7 +131,7 @@ Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
 
 When you use the `docker pull` or `docker run` commands, the required images are
 pulled from your configured registry. When you use the `docker push` command,
-your image is pushed to your confiured registry.
+your image is pushed to your configured registry.
 
 [Docker store](http://store.docker.com) allows you to buy and sell Docker images
 or distribute them for free. For instance, you can buy a Docker image containing
