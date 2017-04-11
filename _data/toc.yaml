@@ -2211,8 +2211,6 @@ glossary:
   title: copy-on-write
 - path: /glossary/?term=container
   title: container
-- path: /glossary/?term=data volume
-  title: data volume
 - path: /glossary/?term=docker
   title: Docker
 - path: /glossary/?term=Docker for Mac
@@ -2223,6 +2221,8 @@ glossary:
   title: Docker Hub
 - path: /glossary/?term=Dockerfile
   title: Dockerfile
+- path: /glossary/?term=entrypoint
+  title: ENTRYPOINT
 - path: /glossary/?term=filesystem
   title: filesystem
 - path: /glossary/?term=image
@@ -2267,3 +2267,5 @@ glossary:
   title: Union file system
 - path: /glossary/?term=virtual machine
   title: virtual machine
+- path: /glossary/?term=volume
+  title: volume

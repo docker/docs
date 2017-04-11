@@ -60,12 +60,6 @@ container: |
 
   The concept is borrowed from Shipping Containers, which define a standard to ship
   goods globally. Docker defines a standard to ship software.
-data volume: |
-  A data volume is a specially-designated directory within one or more containers
-  that bypasses the Union File System. Data volumes are designed to persist data,
-  independent of the container's life cycle. Docker therefore never automatically
-  delete volumes when you remove a container, nor will it "garbage collect"
-  volumes that are no longer referenced by a container.
 Docker: |
   The term Docker can refer to
 
@@ -103,6 +97,34 @@ Dockerfile: |
   A Dockerfile is a text document that contains all the commands you would
   normally execute manually in order to build a Docker image. Docker can
   build images automatically by reading the instructions from a Dockerfile.
+ENTRYPOINT: |
+  In a Dockerfile, an `ENTRYPOINT` is an optional definition for the first part
+  of the command to be run. If you want your Dockerfile to be runnable without
+  specifying additional arguments to the `docker run` command, you must specify
+  either `ENTRYPOINT`, `CMD`, or both.
+  - If `ENTRYPOINT` is specified, it is set to a single command. Most official
+    Docker images have an `ENTRYPOINT` of `/bin/sh` or `/bin/bash`. Even if you
+    do not specify `ENTRYPOINT`, you may inherit it from the base image that you
+    specify using the `FROM` keyword in your Dockerfile. To override the
+    `ENTRYPOINT` at runtime, you can use `--entrypoint`. The following example
+    overrides the entrypoint to be `/bin/ls` and sets the `CMD` to `-l /tmp`.
+
+    ```bash
+    $ docker run --entrypoint=/bin/ls ubuntu -l /tmp
+    ```
+
+  - `CMD` is appended to the `ENTRYPOINT`. The `CMD` can be any arbitrary string
+    that is valid in terms of the `ENTRYPOINT`, which allows you to pass
+    multiple commands or flags at once. To override the `CMD` at runtime, just
+    add it after the container name or ID. In the following example, the `CMD`
+    is overridden to be `/bin/ls -l /tmp`.
+
+    ```bash
+    $ docker run ubuntu /bin/ls -l /tmp
+    ```
+
+  In practice, `ENTRYPOINT` is not often overridden. However, specifying the
+  `ENTRYPOINT` can make your images more fiexible and easier to reuse.
 filesystem: |
   A file system is the method an operating system uses to name files
   and assign them locations for efficient storage and retrieval.
@@ -260,3 +282,10 @@ virtual machine: |
   gets its own set of resources and does minimal sharing.
 
   *Also known as : VM*
+volume: |
+  A volume is a specially-designated directory within one or more containers
+  that bypasses the Union File System. Volumes are designed to persist data,
+  independent of the container's life cycle. Docker therefore never automatically
+  delete volumes when you remove a container, nor will it "garbage collect"
+  volumes that are no longer referenced by a container.
+  *Also known as: data volume*
