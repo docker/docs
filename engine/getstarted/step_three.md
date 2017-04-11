@@ -90,7 +90,7 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
 6. Take a moment to play with the **whalesay** container a bit.
 
     Try running the `whalesay` image again with a word or phrase. Try a long or
-    short phrase.  Can you break the cow?
+    short phrase.  Can you break the whale?
 
         $ docker run docker/whalesay cowsay boo-boo
          _________
