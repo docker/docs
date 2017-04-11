@@ -16,7 +16,7 @@ the **User Management** tab, and choose the user whose password you want to chan
 
 If you're an administrator and forgot your password, you can ask other users
 with administrator credentials to change your password.
-If you're the only administrator, use **ssh** to log directly in to a manager
+If you're the only administrator, use **ssh** to log in to a manager
 node managed by UCP, and run:
 
 ```none
