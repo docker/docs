@@ -695,7 +695,7 @@ reference:
     - path: /engine/reference/commandline/plugin/
       title: docker plugin
     - path: /engine/reference/commandline/plugin_create/
-      title: docker plugin disable
+      title: docker plugin create
     - path: /engine/reference/commandline/plugin_disable/
       title: docker plugin disable
     - path: /engine/reference/commandline/plugin_enable/
