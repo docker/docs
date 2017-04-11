@@ -1275,14 +1275,6 @@ manuals:
           title: Web-based access
         - path: /datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access/
           title: CLI-based access
-      - sectiontitle: Content trust
-        section:
-        - path: /datacenter/ucp/2.1/guides/user/content-trust/
-          title: Run only images you trust
-        - path: /datacenter/ucp/2.1/guides/user/content-trust/manage-trusted-repositories/
-          title: Manage trusted repositories
-        - path: /datacenter/ucp/2.1/guides/user/content-trust/continuous-integration/
-          title: Use trusted images for continuous integration
       - sectiontitle: Deploy an application
         section:
         - path: /datacenter/ucp/2.1/guides/user/services/deploy-a-service/
