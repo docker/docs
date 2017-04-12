@@ -59,7 +59,7 @@ configure this app to use our SQL Server database, and then create a
     project and expose port 80. After that, it will call an `entrypoint` script
     that we will create in the next step.
 
-1.  The previous `Dockerfile` makes use of an entrypoint to your webapp Docker
+1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
     image. Create this script in a file called `entrypoint.sh` and paste the
     contents below.
 
