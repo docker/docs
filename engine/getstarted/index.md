@@ -13,10 +13,6 @@ This is a tutorial for non-technical users who are interested in learning more a
 
 Depending on how you got here, you may or may not have already downloaded Docker for your platform and installed it.
 
-## Got Docker?
-
-If you haven't yet downloaded Docker for your platform or installed it, go to [Get Docker](step_one.md#step-1-get-docker).
-
 ## Ready to start working with Docker?
 
 If you have already downloaded and installed Docker, you are ready to run Docker commands! Go to [Verify your installation](step_one.md#step-3-verify-your-installation).
