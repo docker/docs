@@ -61,12 +61,12 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull {{ page.docker_image }}
+    $ docker pull {{ page.ucp_latest_image }}
 
     # Install UCP
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.docker_image }} install \
+      {{ page.ucp_latest_image }} install \
       --host-address <node-ip-address> \
       --interactive
     ```
