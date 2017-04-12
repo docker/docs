@@ -12,9 +12,9 @@ options:
   default_value: '[]'
   description: Add network-scoped alias for the container
 - option: ip
-  description: IP Address
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: IPv6 Address
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: link
   default_value: '[]'
   description: Add link to another container

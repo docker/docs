@@ -6,7 +6,7 @@ pname: docker node
 plink: docker_node.yaml
 options:
 - option: availability
-  description: Availability of the node (active/pause/drain)
+  description: Availability of the node ("active"|"pause"|"drain")
 - option: label-add
   default_value: '[]'
   description: Add or update a node label (key=value)
@@ -14,7 +14,7 @@ options:
   default_value: '[]'
   description: Remove a node label if exists
 - option: role
-  description: Role of the node (worker/manager)
+  description: Role of the node ("worker"|"manager")
 examples: |-
   ### Add label metadata to a node
 

@@ -1,6 +1,6 @@
 command: docker swarm
 short: Manage Swarm
-long: Manage Swarm
+long: Manage the swarm.
 usage: docker swarm
 pname: docker
 plink: docker.yaml
