@@ -289,6 +289,20 @@ Release date: 7/13/2016
  * To assist with debugging, the Docker Engine API is available internally in the AWS VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
  * Likewise, swarm-mode is configured to auto-accept both manager and worker nodes inside the VPC. This policy will be changed to be more restrictive by default in the future.
 
+## Test Channel
+
+### 17.05.0-ce-rc1
+
+Release date: 04/12/2017
+
+{{aws_blue_test}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.05.0 CE RC1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Terminated instances will now automatically be removed from the Swarm.
+- [Bug Fix] [meta-server] fixed crashing issue, when an instance had no public IP address.
+
 ## Template Archive
 
 If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).
