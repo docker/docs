@@ -12,11 +12,9 @@ notags: true
 
 <a href="/hackathon/"><img src="docs-hackathon-2.png" alt="Docker Docs Hackathon, April 17-22nd, 2017" style="max-width: 100%"></a>
 
-Earn rewards for fixing bugs in our documentation!
-Participate online, and/or visit us at DockerCon in the fourth floor hack room.
-Convert your participation points into swag. Happening all DockerCon week!
+Fix docs bugs to claim the points, and cash in your points for prizes in [the swag store](http://www.cafepress.com/dockerdocshackathon). Every 10 points is worth $1 USD in store credit. Happening all DockerCon week, from April 17-21, 2017.
 
-[Hackathon details](/hackathon/){: class="button outline-btn" style="margin-bottom:20px"}
+[Hackathon details](/hackathon/){: class="button outline-btn" style="margin:20px"}[View available bugs on GitHub](https://github.com/docker/docker.github.io/milestone/9){: class="button outline-btn" style="margin:20px"} [Visit the rewards store](http://www.cafepress.com/dockerdocshackathon){: class="button outline-btn" style="margin:20px"}
 
 ## Introduction to Docker
 
