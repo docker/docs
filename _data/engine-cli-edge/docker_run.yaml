@@ -1,6 +1,17 @@
 command: docker run
 short: Run a command in a new container
-long: Run a command in a new container
+long: |-
+  The `docker run` command first `creates` a writeable container layer over the
+  specified image, and then `starts` it using the specified command. That is,
+  `docker run` is equivalent to the API `/containers/create` then
+  `/containers/(id)/start`. A stopped container can be restarted with all its
+  previous changes intact using `docker start`. See `docker ps -a` to view a list
+  of all containers.
+
+  The `docker run` command can be used in combination with `docker commit` to
+  [*change the command that a container runs*](commit.md). There is additional detailed information about `docker run` in the [Docker run reference](../run.md).
+
+  For information on connecting a container to a network, see the ["*Docker network overview*"](https://docs.docker.com/engine/userguide/networking/).
 usage: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker
 plink: docker.yaml
@@ -69,6 +80,9 @@ options:
 - option: device
   default_value: '[]'
   description: Add a host device to the container
+- option: device-cgroup-rule
+  default_value: '[]'
+  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -140,20 +154,22 @@ options:
   default_value: "false"
   description: Keep STDIN open even if not attached
 - option: io-maxbandwidth
+  default_value: "0"
   description: |
     Maximum IO bandwidth limit for the system drive (Windows only)
 - option: io-maxiops
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
   description: Container isolation technology
 - option: kernel-memory
+  default_value: "0"
   description: Kernel memory limit
 - option: label
   shorthand: l
@@ -174,13 +190,16 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
+  default_value: "0"
   description: Memory limit
 - option: memory-reservation
+  default_value: "0"
   description: Memory soft limit
 - option: memory-swap
+  default_value: "0"
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: memory-swappiness
@@ -240,13 +259,14 @@ options:
   default_value: '[]'
   description: Security Options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: sig-proxy
   default_value: "true"
   description: Proxy received signals to the process
 - option: stop-signal
   default_value: SIGTERM
-  description: Signal to stop a container, SIGTERM by default
+  description: Signal to stop a container
 - option: stop-timeout
   default_value: "0"
   description: Timeout (in seconds) to stop a container
@@ -830,38 +850,45 @@ examples: |-
   ### Specify isolation technology for container (--isolation)
 
   This option is useful in situations where you are running Docker containers on
-  Microsoft Windows. The `--isolation <value>` option sets a container's isolation
-  technology. On Linux, the only supported is the `default` option which uses
+  Windows. The `--isolation <value>` option sets a container's isolation technology.
+  On Linux, the only supported is the `default` option which uses
   Linux namespaces. These two commands are equivalent on Linux:
 
-  ```
+  ```bash
   $ docker run -d busybox top
   $ docker run -d --isolation default busybox top
   ```
 
-  On Microsoft Windows, can take any of these values:
+  On Windows, `--isolation` can take one of these values:
 
 
-  | Value     | Description                                                                                                                                                   |
-  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`   | Hyper-V hypervisor partition-based isolation.                                                                                                                  |
+  | Value     | Description                                                                                |
+  |-----------|--------------------------------------------------------------------------------------------|
+  | `default` | Use the value specified by the Docker daemon's `--exec-opt` or system default (see below). |
+  | `process` | Shared-kernel namespace isolation (not supported on Windows client operating systems).     |
+  | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                              |
 
-  On Windows, the default isolation for client is `hyperv`, and for server is
-  `process`. Therefore when running on Windows server without a `daemon` option
-  set, these two commands are equivalent:
+  The default isolation on Windows server operating systems is `process`. The default (and only supported)
+  isolation on Windows client operating systems is `hyperv`. An attempt to start a container on a client
+  operating system with `--isolation process` will fail.
+
+  On Windows server, assuming the default configuration, these commands are equivalent
+  and result in `process` isolation:
+
+  ```PowerShell
+  PS C:\> docker run -d microsoft/nanoserver powershell echo process
+  PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo process
+  PS C:\> docker run -d --isolation process microsoft/nanoserver powershell echo process
   ```
-  $ docker run -d --isolation default busybox top
-  $ docker run -d --isolation process busybox top
-  ```
 
-  If you have set the `--exec-opt isolation=hyperv` option on the Docker `daemon`,
-  if running on Windows server, any of these commands also result in `hyperv` isolation:
+  If you have set the `--exec-opt isolation=hyperv` option on the Docker `daemon`, or
+  are running against a Windows client-based daemon, these commands are equivalent and
+  result in `hyperv` isolation:
 
-  ```
-  $ docker run -d --isolation default busybox top
-  $ docker run -d --isolation hyperv busybox top
+  ```PowerShell
+  PS C:\> docker run -d microsoft/nanoserver powershell echo hyperv
+  PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo hyperv
+  PS C:\> docker run -d --isolation hyperv microsoft/nanoserver powershell echo hyperv
   ```
 
   ### Configure namespaced kernel parameters (sysctls) at runtime

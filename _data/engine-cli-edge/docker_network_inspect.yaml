@@ -10,4 +10,8 @@ options:
 - option: format
   shorthand: f
   description: Format the output using the given Go template
+- option: verbose
+  shorthand: v
+  default_value: "false"
+  description: Verbose output for diagnostics
 

@@ -69,6 +69,9 @@ options:
 - option: device
   default_value: '[]'
   description: Add a host device to the container
+- option: device-cgroup-rule
+  default_value: '[]'
+  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -140,20 +143,22 @@ options:
   default_value: "false"
   description: Keep STDIN open even if not attached
 - option: io-maxbandwidth
+  default_value: "0"
   description: |
     Maximum IO bandwidth limit for the system drive (Windows only)
 - option: io-maxiops
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
   description: Container isolation technology
 - option: kernel-memory
+  default_value: "0"
   description: Kernel memory limit
 - option: label
   shorthand: l
@@ -174,13 +179,16 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
+  default_value: "0"
   description: Memory limit
 - option: memory-reservation
+  default_value: "0"
   description: Memory soft limit
 - option: memory-swap
+  default_value: "0"
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: memory-swappiness
@@ -240,13 +248,14 @@ options:
   default_value: '[]'
   description: Security Options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: sig-proxy
   default_value: "true"
   description: Proxy received signals to the process
 - option: stop-signal
   default_value: SIGTERM
-  description: Signal to stop a container, SIGTERM by default
+  description: Signal to stop a container
 - option: stop-timeout
   default_value: "0"
   description: Timeout (in seconds) to stop a container

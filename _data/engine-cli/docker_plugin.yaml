@@ -1,6 +1,6 @@
 command: docker plugin
 short: Manage plugins
-long: Manage plugins
+long: Manage plugins.
 usage: docker plugin
 pname: docker
 plink: docker.yaml

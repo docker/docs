@@ -47,6 +47,7 @@ options:
   default_value: '[]'
   description: Remove a DNS search domain
 - option: endpoint-mode
+  default_value: vip
   description: Endpoint mode (vip or dnsrr)
 - option: env-add
   default_value: '[]'
@@ -93,7 +94,7 @@ options:
   default_value: "0.000"
   description: Limit CPUs
 - option: limit-memory
-  default_value: 0 B
+  default_value: "0"
   description: Limit Memory
 - option: log-driver
   description: Logging driver for service
@@ -108,20 +109,27 @@ options:
 - option: no-healthcheck
   default_value: "false"
   description: Disable any container-specified HEALTHCHECK
+- option: placement-pref-add
+  description: Add a placement preference
+- option: placement-pref-rm
+  description: Remove a placement preference
 - option: publish-add
   description: Add or update a published port
 - option: publish-rm
   description: Remove a published port by its target port
+- option: read-only
+  default_value: "false"
+  description: Mount the container's root filesystem as read only
 - option: replicas
   description: Number of tasks
 - option: reserve-cpu
   default_value: "0.000"
   description: Reserve CPUs
 - option: reserve-memory
-  default_value: 0 B
+  default_value: "0"
   description: Reserve Memory
 - option: restart-condition
-  description: Restart when condition is met (none, on-failure, or any)
+  description: Restart when condition is met ("none"|"on-failure"|"any")
 - option: restart-delay
   description: Delay between restart attempts (ns|us|ms|s|m|h)
 - option: restart-max-attempts
@@ -131,6 +139,23 @@ options:
 - option: rollback
   default_value: "false"
   description: Rollback to previous specification
+- option: rollback-delay
+  default_value: 0s
+  description: Delay between task rollbacks (ns|us|ms|s|m|h) (default 0s)
+- option: rollback-failure-action
+  default_value: pause
+  description: Action on rollback failure ("pause"|"continue")
+- option: rollback-max-failure-ratio
+  default_value: "0"
+  description: Failure rate to tolerate during a rollback
+- option: rollback-monitor
+  default_value: 0s
+  description: |
+    Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h) (default 0s)
+- option: rollback-parallelism
+  default_value: "1"
+  description: |
+    Maximum number of tasks rolled back simultaneously (0 to roll back all at once)
 - option: secret-add
   description: Add or update a secret on a service
 - option: secret-rm
@@ -139,6 +164,8 @@ options:
 - option: stop-grace-period
   description: |
     Time to wait before force killing a container (ns|us|ms|s|m|h)
+- option: stop-signal
+  description: Signal to stop the container
 - option: tty
   shorthand: t
   default_value: "false"
@@ -148,7 +175,7 @@ options:
   description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
 - option: update-failure-action
   default_value: pause
-  description: Action on update failure (pause|continue)
+  description: Action on update failure ("pause"|"continue"|"rollback")
 - option: update-max-failure-ratio
   default_value: "0"
   description: Failure rate to tolerate during an update
@@ -192,18 +219,29 @@ examples: "### Update a service\n\n```bash\n$ docker service update --limit-cpu 
   \     type=volume,source=other-volume,target=/somewhere-else \\\n    myservice\n\nmyservice\n\n$
   docker service update --mount-rm /somewhere myservice\n\nmyservice\n```\n\n### Rolling
   back to the previous version of a service \n\nUse the `--rollback` option to roll
-  back to the previous version of the service. \n\nThis will revert the service to
+  back to the previous version of the service.\n\nThis will revert the service to
   the configuration that was in place before the most recent `docker service update`
   command.\n\nThe following example updates the number of replicas for the service
   from 4 to 5, and then rolls back to the previous configuration.\n\n```bash\n$ docker
   service update --replicas=5 web\n\nweb\n\n$ docker service ls\n\nID            NAME
   \ MODE        REPLICAS  IMAGE\n80bvrzp6vxf3  web   replicated  0/5       nginx:alpine\n\n```\nRoll
-  back the `web` service... \n\n```bash\n$ docker service update --rollback web\n\nweb\n\n$
+  back the `web` service...\n\n```bash\n$ docker service update --rollback web\n\nweb\n\n$
   docker service ls\n\nID            NAME  MODE        REPLICAS  IMAGE\n80bvrzp6vxf3
   \ web   replicated  0/4       nginx:alpine\n\n```\n\nOther options can be combined
   with `--rollback` as well, for example, `--update-delay 0s` to execute the rollback
   without a delay between tasks:\n\n```bash\n$ docker service update \\\n  --rollback
-  \\\n  --update-delay 0s\n  web\n\nweb\n\n```\n\n### Add or remove secrets\n\nUse
+  \\\n  --update-delay 0s\n  web\n\nweb\n\n```\n\nServices can also be set up to roll
+  back to the previous version automatically\nwhen an update fails. To set up a service
+  for automatic rollback, use\n`--update-failure-action=rollback`. A rollback will
+  be triggered if the fraction\nof the tasks which failed to update successfully exceeds
+  the value given with\n`--update-max-failure-ratio`.\n\nThe rate, parallelism, and
+  other parameters of a rollback operation are\ndetermined by the values passed with
+  the following flags:\n\n- `--rollback-delay`\n- `--rollback-failure-action`\n- `--rollback-max-failure-ratio`\n-
+  `--rollback-monitor`\n- `--rollback-parallelism`\n\nFor example, a service set up
+  with `--update-parallelism 1 --rollback-parallelism 3`\nwill update one task at
+  a time during a normal update, but during a rollback, 3\ntasks at a time will get
+  rolled back. These rollback parameters are respected both\nduring automatic rollbacks
+  and for rollbacks initiated manually using `--rollback`.\n\n### Add or remove secrets\n\nUse
   the `--secret-add` or `--secret-rm` options add or remove a service's\nsecrets.\n\nThe
   following example adds a secret named `ssh-2` and removes `ssh-1`:\n\n```bash\n$
   docker service update \\\n    --secret-add source=ssh-2,target=ssh-2 \\\n    --secret-rm

@@ -18,7 +18,7 @@ options:
   description: Format the output using the given Go template
 - option: pretty
   default_value: "false"
-  description: Print the information in a human friendly format.
+  description: Print the information in a human friendly format
 examples: "### Inspect a service by name or ID\n\nYou can inspect a service, either
   by its *name*, or *ID*\n\nFor example, given the following service;\n\n```bash\n$
   docker service ls\nID            NAME   MODE        REPLICAS  IMAGE\ndmu1ept4cxcf
@@ -43,11 +43,11 @@ examples: "### Inspect a service by name or ID\n\nYou can inspect a service, eit
   of the default\nJSON output, by using the `--pretty` option:\n\n```bash\n$ docker
   service inspect --pretty frontend\n\nID:\t\tc8wgl7q4ndfd52ni6qftkvnnp\nName:\t\tfrontend\nLabels:\n
   - org.example.projectname=demo-app\nService Mode:\tREPLICATED\n Replicas:\t\t5\nPlacement:\nUpdateConfig:\n
-  Parallelism:\t0\nContainerSpec:\n Image:\t\tnginx:alpine\nResources:\nEndpoint Mode:
-  \ vip\nPorts:\n Name =\n Protocol = tcp\n TargetPort = 443\n PublishedPort = 4443\n```\n\nYou
-  can also use `--format pretty` for the same effect.\n\n\n#### Find the number of
-  tasks running as part of a service\n\nThe `--format` option can be used to obtain
-  specific information about a\nservice. For example, the following command outputs
-  the number of replicas\nof the \"redis\" service.\n\n```bash\n$ docker service inspect
-  --format='{{.Spec.Mode.Replicated.Replicas}}' redis\n\n10\n```"
+  Parallelism:\t0\n On failure:\tpause\n Max failure ratio:\t0\nContainerSpec:\n Image:\t\tnginx:alpine\nResources:\nNetworks:\tnet1\nEndpoint
+  Mode:  vip\nPorts:\n PublishedPort = 4443\n  Protocol = tcp\n  TargetPort = 443\n
+  \ PublishMode = ingress\n```\n\nYou can also use `--format pretty` for the same
+  effect.\n\n\n#### Find the number of tasks running as part of a service\n\nThe `--format`
+  option can be used to obtain specific information about a\nservice. For example,
+  the following command outputs the number of replicas\nof the \"redis\" service.\n\n```bash\n$
+  docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis\n\n10\n```"
 

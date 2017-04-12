@@ -78,6 +78,8 @@ examples: |-
   * volume (volume name or mount point) - filters containers that mount volumes.
   * network (network id or name) - filters containers connected to the provided network
   * health (starting|healthy|unhealthy|none) - filters containers based on healthcheck status
+  * publish=(container's published port) - filters published ports by containers
+  * expose=(container's exposed port) - filters exposed ports by containers
 
   #### label
 

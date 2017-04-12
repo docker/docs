@@ -4,13 +4,24 @@ short: List plugins
 long: |-
   Lists all the plugins that are currently installed. You can install plugins
   using the [`docker plugin install`](plugin_install.md) command.
+  You can also filter using the `-f` or `--filter` flag.
+  Refer to the [filtering](#filtering) section for more information about available filter options.
 usage: docker plugin ls [OPTIONS]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
+- option: filter
+  shorthand: f
+  description: Provide filter values (e.g. 'enabled=true')
+- option: format
+  description: Pretty-print plugins using a Go template
 - option: no-trunc
   default_value: "false"
   description: Don't truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display plugin IDs
 examples: |-
   ```bash
   $ docker plugin ls
@@ -73,8 +84,10 @@ examples: |-
   `ID` and `Name` entries separated by a colon for all plugins:
 
   ```bash
+  {% raw %}
   $ docker plugin ls --format "{{.ID}}: {{.Name}}"
 
   4be01827a72e: tiborvass/no-remove
+  {% endraw %}
   ```
 

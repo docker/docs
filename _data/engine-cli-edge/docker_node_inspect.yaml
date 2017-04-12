@@ -15,7 +15,7 @@ options:
   description: Format the output using the given Go template
 - option: pretty
   default_value: "false"
-  description: Print the information in a human friendly format.
+  description: Print the information in a human friendly format
 examples: |-
   ### Inspect a node
 
