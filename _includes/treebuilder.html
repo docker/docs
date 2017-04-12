@@ -1,20 +1,24 @@
 {% assign topicFound="false" %}
 {% for section in site.data.toc.horizontalnav %}
-{% if section.node == "glossary" %}
-  {% capture leftnav %}{% for entry in site.data.glossary %}
-  <li><a href="/glossary/?term={{ entry[0] }}">{{ entry[0] }}</a></li>{% endfor %}{% endcapture %}
-{% else %}
   {% assign activeCSS = "" %}
   {% if topicFound=="false" %}
-    {% assign tree = site.data.toc[section.node] %}
-    {% capture thisSection %}{% include tree.html %}{% endcapture %}
-    {% if section.path == page.url or thisSection contains "active currentPage" %}
-      {% capture leftnav %}{{ thisSection }}{% endcapture %}
-      {% capture activeCSS %} class="active"{% endcapture %}
-      {% assign topicFound="true" %}
+    {% if section.node == "glossary" %}
+      {% capture leftnav %}{% for entry in site.data.glossary %}
+      <li><a href="/glossary/?term={{ entry[0] }}">{{ entry[0] }}</a></li>{% endfor %}{% endcapture %}
+      {% if page.url == "/glossary/" %}
+      {% assign topicFound = "true" %}
+      {% capture leftnav %}<li><a href="/glossary/" class="active currentPage">Glossary Home</a></li>{{ leftnav }}{% endcapture %}
+      {% endif %}
+    {% else %}
+      {% assign tree = site.data.toc[section.node] %}
+      {% capture thisSection %}{% include tree.html %}{% endcapture %}
+      {% if section.path == page.url or thisSection contains "active currentPage" %}
+        {% capture leftnav %}{{ thisSection }}{% endcapture %}
+        {% capture activeCSS %} class="active"{% endcapture %}
+        {% assign topicFound="true" %}
+      {% endif %}
     {% endif %}
   {% endif %}
-{% endif %}
 <li id="{{ section.node }}"{{ activeCSS }}><a href="{{ section.path }}">{{ section.title }}</a></li>
 {% endfor %}
 {% if site.edge == true %}
