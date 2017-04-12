@@ -37,11 +37,10 @@ configure this app to use our SQL Server database, and then create a
     $ docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new mvc --auth Individual
     ```
 
-    > **Note**: If running in Docker for Windows, make sure to add the necessary
-    > `C:/` prefix to the host mapped folder and that you are running on Linux
-    > containers mode.
+    > **Note**: If running in Docker for Windows, make sure to use Powershell 
+    or specify the absolute path of your app directory.
 
-1.  Create a `Dockerfile` within the `/app` directory and add the following content:
+1.  Create a `Dockerfile` within your app directory and add the following content:
 
     ```dockerfile
     FROM microsoft/aspnetcore-build:lts
