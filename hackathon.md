@@ -120,13 +120,14 @@ there.
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-vXsZX_u8EoPanCGnBd5eudnaHdJ4dqTumOurt2smCC9gTg/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
-### Conversion rate
+## Conversion rate
 
-The points-to-cash ratio will be posted in this space no later than Friday the
-21st. We need to figure out how many points' worth of fixes come in first.
+### Every 10 points is worth $1 USD in the swag store
 
-Sorry but we can not send you cash for these points under any circumstances,
-even if you don't spend them.
+You'll see point values for each of the bugs, such as `points/100` and `points/250`. Opening an accepted PR that 
+fixes these bugs by the end of the hackathon earns you that number of points. 
+
+So if you fix a 100-point bug, that's $10 you have to spend in [the swag store](http://www.cafepress.com/dockerdocshackathon).
 
 ## Questions?
 
