@@ -40,9 +40,6 @@ usage: docker service logs [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
 options:
-- option: details
-  default_value: "false"
-  description: Show extra details provided to logs
 - option: follow
   shorthand: f
   default_value: "false"
@@ -50,8 +47,15 @@ options:
 - option: no-resolve
   default_value: "false"
   description: Do not map IDs to Names
+- option: no-task-ids
+  default_value: "false"
+  description: Do not include task IDs
+- option: no-trunc
+  default_value: "false"
+  description: Do not truncate output
 - option: since
-  description: Show logs since timestamp
+  description: |
+    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
 - option: tail
   default_value: all
   description: Number of lines to show from the end of the logs

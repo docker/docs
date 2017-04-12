@@ -1,6 +1,6 @@
 command: docker image
 short: Manage images
-long: Manage images
+long: Manage images.
 usage: docker image
 pname: docker
 plink: docker.yaml
