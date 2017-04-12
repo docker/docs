@@ -13,7 +13,7 @@ You just need to have [Docker Engine](https://docs.docker.com/engine/installatio
 and [Docker Compose](https://docs.docker.com/compose/install/) installed on your
 platform of choice: Linux, Mac or Windows.
 
-For this sample, we will create a sample `dotnet core web application` using the
+For this sample, we will create a sample .NET Core Web Application using the
 `aspnetcore-build` Docker image. After that, we will create a `Dockerfile`,
 configure this app to use our SQL Server database, and then create a
 `docker-compose.yml` that will define the behavior of all of these components.
