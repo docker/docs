@@ -2,7 +2,9 @@
 title: CS Docker Engine 1.13 release notes
 description: Commercially supported Docker Engine release notes
 keywords: docker, engine, install, release notes
-
+redirect_from:
+- /docker-trusted-registry/cs-engine/release-notes/
+- /cs-engine/release-notes/
 ---
 
 This document describes the latest changes, additions, known issues, and fixes
@@ -14,6 +16,7 @@ back-ported fixes (security-related and priority defects) from the open source.
 It incorporates defect fixes that you can use in environments where new features
 cannot be adopted as quickly for consistency and compatibility reasons.
 
+[Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
 ## CS Engine 1.13.1-cs3
 (23 Feb 2017)
