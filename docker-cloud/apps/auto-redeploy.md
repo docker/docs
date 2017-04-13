@@ -6,6 +6,8 @@ redirect_from:
 title: Redeploy services automatically
 ---
 
+[![Automated Deployments with Docker Cloud](images/video-auto-redeploy-docker-cloud.png)](https://www.youtube.com/watch?v=I4depUwfbFc "Automated Deployments with Docker Cloud"){:target="_blank"}
+
 Docker Cloud's **Autoredeploy** feature allows a service that uses an image
 stored in Docker Hub to automatically redeploy whenever a new image is pushed or
 built.
