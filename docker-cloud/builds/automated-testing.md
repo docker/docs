@@ -6,6 +6,8 @@ redirect_from:
 title: Automated repository tests
 ---
 
+[![Automated Tests with Docker Cloud](images/video-auto-tests-docker-cloud.png)](https://www.youtube.com/watch?v=KX6PD2MANRI "Automated Tests with Docker Cloud"){:target="_blank"}
+
 Docker Cloud can automatically test changes to your source code repositories
 using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests on each pull request to the source code
 repository to create a continuous integration testing service.
