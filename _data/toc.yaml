@@ -29,9 +29,6 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
-    - path: /edge/engine/api/v1.28/
-      title: v1.28 Reference (Docker CE Edge)
-      nosync: true
   - path: /docker-for-mac/install/
     title: Docker for Mac
   - path: /docker-for-windows/install/
@@ -496,9 +493,8 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /edge/engine/api/v1.28/
-    title: v1.28 Reference (Docker CE Edge)
-    nosync: true
+  - path: /engine/api/v1.28/
+    title: v1.28 Reference
   - path: /engine/api/v1.27/
     title: v1.27 Reference
   - sectiontitle: Previous API versions
@@ -853,10 +849,6 @@ reference:
     title: docker wait
 - title: Edge Daemon CLI reference (dockerd)
   path: /edge/engine/reference/commandline/dockerd/
-- sectiontitle: Docker Edge Engine API
-  section:
-  - path: /edge/engine/api/v1.28/
-    title: v1.28 API Reference
 - sectiontitle: Docker Edge Engine (docker) CLI
   section:
   - path: /edge/engine/reference/run/
