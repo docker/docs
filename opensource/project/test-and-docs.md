@@ -95,7 +95,7 @@ hour. To run the test suite, do the following:
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
-    ```no-highlight
+    ```none
     Ran 68 tests in 79.135s
     ```
 
