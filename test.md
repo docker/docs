@@ -501,7 +501,7 @@ command=/usr/sbin/sshd -D
 
 Yes, we have our own highlighting in Rouge!
 
-```dockerfile
+```conf
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #

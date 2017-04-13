@@ -163,7 +163,7 @@ are included inline.
 must be escaped. If your string contains inner quote characters (`"`), escape
 them as well.
 
-```dockerfile
+```conf
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor="ACME Incorporated"
