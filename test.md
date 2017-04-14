@@ -142,13 +142,13 @@ might be interesting. You can use them with Markdown or HTML images.
 
 Some tables in markdown and html.
 
-| Permission level | Access        |
-| ---------------- | ------------- |
-| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. | |
-|                  | Previous cell is empty. A `--flag` in mono text. |
-| Read             | Pull |
-| Read/Write       | Pull, push |
-| Admin            | All of the above, plus update description, create and delete |
+| Permission level                                                         | Access                                                       |
+|:-------------------------------------------------------------------------|:-------------------------------------------------------------|
+| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. |                                                              |
+|                                                                          | Previous cell is empty. A `--flag` in mono text.             |
+| Read                                                                     | Pull                                                         |
+| Read/Write                                                               | Pull, push                                                   |
+| Admin                                                                    | All of the above, plus update description, create and delete |
 
 The alignment of the cells in the source doesn't really matter. The ending pipe
 character is optional (unless the last cell is supposed to be empty). The header
@@ -353,17 +353,20 @@ Bootstrap JS are loaded.
 
 > **Note**: This is a note using the old note style
 
-> **This is a note using the new style**
->
-> And you include a small description here telling users to be on the lookout
+> **Note**: This is a note using
+> the old style and has multiple lines, but a single paragraph
 
-> **Be careful out there**
+> Pssst, wanna know something?
+>
+> You include a small description here telling users to be on the lookout
+
+> It's not safe out there, take this Moby with you
 >
 > Add the `warning` class to your blockquotes if you want to tell users
 > to be careful about something.
 {: .warning}
 
-> **Ouch, don't do that!**
+> Ouch, don't do that!
 >
 > Use the `danger` class to let people know this is dangerous or they
 > should pay close attention to this part of the road.

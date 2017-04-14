@@ -12,24 +12,45 @@ blockquote {
 
 blockquote > p:first-child {
   margin-top: 0;
+  font-weight: 700;
+  color: $info-color;
 }
 
-blockquote > p > strong {
-  color: $info-color;
+blockquote > p:first-child::before {
+  content: 'Note: ';
 }
 
 blockquote.warning {
   border-left-color: $warning-color;
 }
 
-blockquote.warning > p > strong {
+blockquote.warning > p:first-child {
   color: $warning-color;
+}
+
+blockquote.warning > p:first-child::before {
+  content: 'Important: ';
 }
 
 blockquote.danger {
   border-left-color: $danger-color;
 }
 
-blockquote.danger > p > strong {
+blockquote.danger > p:first-child {
   color: $danger-color;
+}
+
+blockquote.danger > p:first-child::before {
+  content: 'Warning: '
+}
+
+/* Maintain backwards compatibility with old
+*  note style
+*/
+blockquote > p:only-child {
+  font-weight: inherit;
+  color: inherit;
+}
+blockquote > p:only-child::before {
+  content: none;
 }
