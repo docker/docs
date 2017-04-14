@@ -12,7 +12,6 @@ safe: false
 lsi: false
 url: https://docs.docker.com
 keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13"]
-edge: false  # set to true if the next expected release is going to the edge channel
 
 gems:
   - jekyll-redirect-from
