@@ -10,7 +10,7 @@ If you'd like to improve the code of any of Docker's projects, we would love to
 have your contributions. All of our projects' code <a href="https://github.com/docker" target="_blank">repositories are on GitHub</a>.
 
 If you want to contribute to the `docker/docker` repository you should be
-familiar with or invested in learning Go or the Markdown language.  If you
+familiar with or interested in learning Go or the Markdown language.  If you
 know other languages, investigate our other repositories&mdash;not all of them
 run on Go.
 
