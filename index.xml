@@ -408,7 +408,7 @@ $ docker pull ubuntu
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This will find the &lt;code&gt;ubuntu&lt;/code&gt; image by name on
-&lt;a href=&#34;http://localhost/articles/articles/userguide/dockerrepos/#searching-for-images&#34;&gt;&lt;em&gt;Docker Hub&lt;/em&gt;&lt;/a&gt;
+&lt;a href=&#34;http://localhost/userguide/dockerrepos/#searching-for-images&#34;&gt;&lt;em&gt;Docker Hub&lt;/em&gt;&lt;/a&gt;
 and download it from &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; to a local
 image cache.&lt;/p&gt;
 
@@ -574,7 +574,7 @@ $ docker images
 
 &lt;p&gt;You now have an image state from which you can create new instances.&lt;/p&gt;
 
-&lt;p&gt;Read more about &lt;a href=&#34;http://localhost/articles/articles/userguide/dockerrepos&#34;&gt;&lt;em&gt;Share Images via
+&lt;p&gt;Read more about &lt;a href=&#34;http://localhost/userguide/dockerrepos&#34;&gt;&lt;em&gt;Share Images via
 Repositories&lt;/em&gt;&lt;/a&gt; or
 continue to the complete &lt;a href=&#34;http://localhost/articles/articles/reference/commandline/cli&#34;&gt;&lt;em&gt;Command
 Line&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
@@ -2347,7 +2347,7 @@ This document discusses advanced networking configuration
 and options for Docker. In most cases you won&amp;rsquo;t need this information.
 If you&amp;rsquo;re looking to get started with a simpler explanation of Docker
 networking and an introduction to the concept of container linking see
-the &lt;a href=&#34;http://localhost/articles/articles/userguide/dockerlinks/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+the &lt;a href=&#34;http://localhost/userguide/dockerlinks/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;But &lt;code&gt;docker0&lt;/code&gt; is no ordinary interface.  It is a virtual &lt;em&gt;Ethernet
@@ -2689,7 +2689,7 @@ services.  If the Docker daemon is running with both &lt;code&gt;--icc=false&lt;
 &lt;code&gt;ACCEPT&lt;/code&gt; rules so that the new container can connect to the ports
 exposed by the other container — the ports that it mentioned in the
 &lt;code&gt;EXPOSE&lt;/code&gt; lines of its &lt;code&gt;Dockerfile&lt;/code&gt;.  Docker has more documentation on
-this subject — see the &lt;a href=&#34;http://localhost/articles/articles/userguide/dockerlinks&#34;&gt;linking Docker containers&lt;/a&gt;
+this subject — see the &lt;a href=&#34;http://localhost/userguide/dockerlinks&#34;&gt;linking Docker containers&lt;/a&gt;
 page for further details.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -2763,7 +2763,7 @@ MASQUERADE  all  --  172.17.0.0/16       0.0.0.0/0
 
 &lt;p&gt;But if you want containers to accept incoming connections, you will need
 to provide special options when invoking &lt;code&gt;docker run&lt;/code&gt;.  These options
-are covered in more detail in the &lt;a href=&#34;http://localhost/articles/articles/userguide/dockerlinks&#34;&gt;Docker User Guide&lt;/a&gt;
+are covered in more detail in the &lt;a href=&#34;http://localhost/userguide/dockerlinks&#34;&gt;Docker User Guide&lt;/a&gt;
 page.  There are two approaches.&lt;/p&gt;
 
 &lt;p&gt;First, you can supply &lt;code&gt;-P&lt;/code&gt; or &lt;code&gt;--publish-all=true|false&lt;/code&gt; to &lt;code&gt;docker run&lt;/code&gt; which
@@ -2830,7 +2830,7 @@ connect to a local container exposed port through the commonly used loopback
 address: this alternative is preferred for performance reason.&lt;/p&gt;
 
 &lt;p&gt;Again, this topic is covered without all of these low-level networking
-details in the &lt;a href=&#34;http://localhost/articles/articles/userguide/dockerlinks/&#34;&gt;Docker User Guide&lt;/a&gt; document if you
+details in the &lt;a href=&#34;http://localhost/userguide/dockerlinks/&#34;&gt;Docker User Guide&lt;/a&gt; document if you
 would like to use that as your port redirection reference instead.&lt;/p&gt;
 
 &lt;h2 id=&#34;ipv6&#34;&gt;IPv6&lt;/h2&gt;
