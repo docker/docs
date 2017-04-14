@@ -2,6 +2,7 @@
 description: Configure logging driver.
 keywords: docker, logging, driver, Fluentd
 redirect_from:
+- /engine/reference/logging/overview/
 title: Configure logging drivers
 ---
 
