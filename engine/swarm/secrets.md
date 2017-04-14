@@ -485,7 +485,7 @@ generate the site key and certificate, name the files `site.key` and
     ```bash
     $ docker service rm nginx
 
-    $ docker secret rm site.crt site.key nginx.conf
+    $ docker secret rm site.crt site.key site.conf
     ```
 
 ### Advanced example: Use secrets with a WordPress service
