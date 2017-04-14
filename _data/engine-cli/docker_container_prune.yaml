@@ -1,14 +1,25 @@
 command: docker container prune
 short: Remove all stopped containers
-long: Remove all stopped containers
+long: Removes all stopped containers.
 usage: docker container prune [OPTIONS]
 pname: docker container
 plink: docker_container.yaml
 options:
-- option: filter
-  description: Provide filter values (e.g. 'until=<timestamp>')
 - option: force
   shorthand: f
   default_value: "false"
   description: Do not prompt for confirmation
+examples: |-
+  ### Prune containers
+
+  ```bash
+  $ docker container prune
+  WARNING! This will remove all stopped containers.
+  Are you sure you want to continue? [y/N] y
+  Deleted Containers:
+  4a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063
+  f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360
+
+  Total reclaimed space: 212 B
+  ```
 

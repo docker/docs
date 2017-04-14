@@ -1,6 +1,7 @@
 command: docker swarm update
 short: Update the swarm
-long: Update the swarm
+long: Updates a swarm with new parameter values. This command must target a manager
+  node.
 usage: docker swarm update [OPTIONS]
 pname: docker swarm
 plink: docker_swarm.yaml
@@ -25,4 +26,8 @@ options:
 - option: task-history-limit
   default_value: "5"
   description: Task history retention limit
+examples: |-
+  ```bash
+  $ docker swarm update --cert-expiry 720h
+  ```
 
