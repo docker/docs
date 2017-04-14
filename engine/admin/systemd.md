@@ -3,6 +3,7 @@ description: Controlling and configuring Docker using systemd
 keywords: docker, daemon, systemd,  configuration
 redirect_from:
 - /engine/articles/systemd/
+- /articles/systemd/
 title: Control and configure Docker with systemd
 ---
 
@@ -24,7 +25,7 @@ do not have `systemctl`, use the `service` command.
   ```
 
 - **`service`**:
-  
+
   ```bash
   $ sudo service docker start
   ```
