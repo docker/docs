@@ -1,21 +1,21 @@
 command: docker plugin ls
 aliases: list
 short: List plugins
-long: List plugins
+long: |-
+  Lists all the plugins that are currently installed. You can install plugins
+  using the [`docker plugin install`](plugin_install.md) command.
 usage: docker plugin ls [OPTIONS]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
-- option: filter
-  shorthand: f
-  description: Provide filter values (e.g. 'enabled=true')
-- option: format
-  description: Pretty-print plugins using a Go template
 - option: no-trunc
   default_value: "false"
   description: Don't truncate output
-- option: quiet
-  shorthand: q
-  default_value: "false"
-  description: Only display plugin IDs
+examples: |-
+  ```bash
+  $ docker plugin ls
+
+  ID                  NAME                             TAG                 DESCRIPTION                ENABLED
+  69553ca1d123        tiborvass/sample-volume-plugin   latest              A test plugin for Docker   true
+  ```
 

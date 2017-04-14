@@ -1,14 +1,24 @@
 command: docker network prune
 short: Remove all unused networks
-long: Remove all unused networks
+long: |-
+  Remove all unused networks. Unused networks are those which are not referenced
+  by any containers.
 usage: docker network prune [OPTIONS]
 pname: docker network
 plink: docker_network.yaml
 options:
-- option: filter
-  description: Provide filter values (e.g. 'until=<timestamp>')
 - option: force
   shorthand: f
   default_value: "false"
   description: Do not prompt for confirmation
+examples: |-
+  ```bash
+  $ docker network prune
+
+  WARNING! This will remove all networks not used by at least one container.
+  Are you sure you want to continue? [y/N] y
+  Deleted Networks:
+  n1
+  n2
+  ```
 
