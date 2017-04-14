@@ -407,7 +407,7 @@ sharing and managing your application stacks.&lt;/li&gt;
 
 &lt;h2 id=&#34;about-this-guide&#34;&gt;About this guide&lt;/h2&gt;
 
-&lt;p&gt;The &lt;a href=&#34;../engine/introduction/understanding-docker/&#34;&gt;Understanding Docker section&lt;/a&gt; will help you:&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;/engine/introduction/understanding-docker/&#34;&gt;Understanding Docker section&lt;/a&gt; will help you:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;See how Docker works at a high level&lt;/li&gt;
