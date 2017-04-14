@@ -111,7 +111,7 @@ Whether attending in-person or online, to claim a bug as one that you are
 working on (so nobody else grabs it out from under you) you must type a comment
 saying you claim it. Respect it when you see other comments claiming a bug.
 
-[View avaiable bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
+[View available bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
 
 ## Claiming your points
 
