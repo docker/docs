@@ -13,6 +13,15 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.6
+
+(13 April 2017)
+
+**Bugs fixed**
+
+* High impact
+  * Fixed memory leaks causing DTR to use all RAM available
+
 ## DTR 2.1.5
 
 (17 March 2017)
