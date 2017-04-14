@@ -44,7 +44,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 
 ##### API and CLI
 
-- Add [version 1.28](/edge/engine/reference/api/v1.28/) of the Docker API.
+- Add [version 1.28](/engine/reference/api/v1.28/) of the Docker API.
 
 - Add `--device-cgroup-rule` flag to give containers access to devices that appear
   after the container is started. {% include github-pr.md pr="22563" %}
