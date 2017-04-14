@@ -21,8 +21,3 @@
   {% endif %}
 <li id="{{ section.node }}"{{ activeCSS }}><a href="{{ section.path }}">{{ section.title }}</a></li>
 {% endfor %}
-{% if site.edge == true %}
-  <li id="stable-cta"><a href="/">Back to Stable docs</a></li>
-{% else %}
-  <li id="edge-cta"><a href="/edge/">Try the CE Edge docs</a></li>
-{% endif %}

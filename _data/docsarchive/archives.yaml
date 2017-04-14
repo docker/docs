@@ -1,7 +1,4 @@
 - archive:
-  name: edge
-  image: docs/docker.github.io:latest
-- archive:
   name: v17.03
   image: docs/docker.github.io:latest
   current: true
