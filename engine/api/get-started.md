@@ -2,7 +2,7 @@
 title: Get started with the Docker API
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
-- /engine/api/getting-started.md
+- /engine/api/getting-started/
 ---
 
 After you
