@@ -112,7 +112,7 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
 
 On this page, you learned to search for images on Docker Hub. You used your
 command line to run an image. Think about it, effectively you ran a piece of
-Linux software on your Mac computer.  You learned that running an image copies
+Linux software on your computer.  You learned that running an image copies
 it on your computer.  Now, you are ready to create your own Docker image.
 Go on to the next part [to build your own image](step_four.md).
 
