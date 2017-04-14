@@ -1,6 +1,5 @@
 {% capture green-check %}![yes](/engine/installation/images/green-check.svg){: style="height: 14px"}{% endcapture %}
 
-{% capture matrix %}
 | Platform                                                                                             | Docker EE         | Docker CE x86_64 | Docker CE ARM |
 | ---------------------------------------------------------------------------------------------------- | ----------------- | ----------------- | ----------------- |
 | [Ubuntu](/engine/installation/linux/ubuntu.md)                                                       | {{ green-check }} | {{ green-check }} | {{ green-check }} |
@@ -16,6 +15,3 @@
 | [Microsoft Azure](/docker-for-azure/)                                                                | {{ green-check }} | {{ green-check }} |                   |
 | [Amazon Web Services](/docker-for-aws/)                                                              | {{ green-check }} | {{ green-check }} |                   |
 {: style="width: 75%" }
-
-{% endcapture %}
-{{ matrix | markdownify }}
