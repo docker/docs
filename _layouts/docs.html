@@ -63,6 +63,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="/css/pygments/perldoc.css">
 	<link id="pagestyle" rel="stylesheet" href="/css/style.css">
 
 	<!-- Go get "Open Sans" font from Google -->
@@ -192,10 +193,12 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 		{% include footer.html %}
 	</footer>
 	<link rel="stylesheet" href="/css/github.css">
+	{% if page.highlightjs == true %}
 	<script src="/js/highlight.pack.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
 	</script>
+	{% endif %}
 	<!-- <script src="/js/anchorlinks.js"></script> -->
 	<script defer src="/js/menu.js"></script>
 	<script src="/js/jquery.js"></script>

@@ -1,5 +1,5 @@
 ---
-description: Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker. 
+description: Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker.
 keywords: dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql
 title: "Quickstart: Compose and ASP.NET Core with SQL Server"
 ---
@@ -27,7 +27,7 @@ configure this app to use our SQL Server database, and then create a
     This directory will be the context of your docker-compose project. For
     [Docker for Windows](https://docs.docker.com/docker-for-windows/#/shared-drives) and
     [Docker for Mac](https://docs.docker.com/docker-for-mac/#/file-sharing), you
-    have to set up file sharing for the volume that you need to map. 
+    have to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `aspnetcore-build` Docker image to generate a
     sample web application within the container under the `/app` directory and
@@ -37,12 +37,12 @@ configure this app to use our SQL Server database, and then create a
     $ docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new mvc --auth Individual
     ```
 
-    > **Note**: If running in Docker for Windows, make sure to use Powershell 
+    > **Note**: If running in Docker for Windows, make sure to use Powershell
     or specify the absolute path of your app directory.
 
 1.  Create a `Dockerfile` within your app directory and add the following content:
 
-    ```dockerfile
+    ```conf
     FROM microsoft/aspnetcore-build:lts
     COPY . /app
     WORKDIR /app
@@ -88,20 +88,18 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a `docker-compose.yml` file. Write the following in the file, and
     make sure to replace the password in the `SA_PASSWORD` environment variable
     under `db` below. This file will define the way the images will interact as
-    independent services. 
+    independent services.
 
     > **Note**: The SQL Server container requires a secure password to startup:
     > Minimum length 8 characters, including uppercase and lowercase letters,
     > base 10 digits and/or non-alphanumeric symbols.
 
-    ```none
-
-    version: '3'
-
+    ```yaml
+    version: "3"
     services:
         web:
             build: .
-            ports: 
+            ports:
                 - "8000:80"
             depends_on:
                 - db
@@ -126,7 +124,7 @@ configure this app to use our SQL Server database, and then create a
     [...]
     public void ConfigureServices(IServiceCollection services)
     {
-        // Database connection string. 
+        // Database connection string.
         // Make sure to update the Password value below from "your_password" to your actual password.
         var connection = @"Server=db;Database=master;User=sa;Password=your_password;";
 
@@ -147,7 +145,7 @@ configure this app to use our SQL Server database, and then create a
     }
     [...]
     ```
-    
+
 1.  Ready! You can now run the `docker-compose build` command.
 
     ```bash

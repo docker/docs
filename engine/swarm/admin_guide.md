@@ -338,7 +338,7 @@ If you lose the quorum of managers, you cannot administer the swarm. If you have
 lost the quorum and you attempt to perform any management operation on the swarm,
 an error occurs:
 
-```no-highlight
+```none
 Error response from daemon: rpc error: code = 4 desc = context deadline exceeded
 ```
 

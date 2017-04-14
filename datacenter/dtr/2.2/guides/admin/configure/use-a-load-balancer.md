@@ -70,7 +70,7 @@ queried, and it takes the form:
     "replica id": "2006-01-02T15:04:05Z07:00",
     "another replica id": "2006-01-02T15:04:05Z07:00"
   },
-  // other fields
+  "(other fields go here)": "..."
 }
 ```
 
@@ -94,10 +94,8 @@ Use the following examples to configure your load balancer for DTR.
   <li><a data-toggle="tab" data-target="#aws">AWS LB</a></li>
 </ul>
 <div class="tab-content">
-  <div id="nginx" class="tab-pane fade in active">
-  {% highlight nginx %}
-
-
+  <div id="nginx" class="tab-pane fade in active" markdown="1">
+```conf
 user  nginx;
 worker_processes  1;
 
@@ -129,14 +127,10 @@ stream {
         proxy_pass dtr_80;
     }
 }
-
-
-  {% endhighlight %}
+```
   </div>
-  <div id="haproxy" class="tab-pane fade">
-  {% highlight none %}    
-
-
+  <div id="haproxy" class="tab-pane fade" markdown="1">
+```conf
 global
     log /dev/log    local0
     log /dev/log    local1 notice
@@ -180,14 +174,10 @@ backend dtr_upstream_servers_443
         server node01 <DTR_REPLICA_1_IP>:443 weight 100 check check-ssl verify none
         server node02 <DTR_REPLICA_2_IP>:443 weight 100 check check-ssl verify none
         server node03 <DTR_REPLICA_N_IP>:443 weight 100 check check-ssl verify none
-
-
-  {% endhighlight %}
+```
   </div>
-  <div id="aws" class="tab-pane fade">
-  {% highlight json %}  
-
-
+  <div id="aws" class="tab-pane fade" markdown="1">
+```json
 {
     "Subnets": [
         "subnet-XXXXXXXX",
@@ -249,9 +239,7 @@ backend dtr_upstream_servers_443
         "GroupName":  "XXXXXXXXXXXX"
     }
 }
-
-
-  {% endhighlight %}
+```
   </div>
 </div>
 
@@ -263,9 +251,8 @@ You can deploy your load balancer using:
   <li><a data-toggle="tab" data-target="#haproxy-2" data-group="haproxy">HAProxy</a></li>
 </ul>
 <div class="tab-content">
-  <div id="nginx-2" class="tab-pane fade in active">
-  {% highlight none %}
-
+  <div id="nginx-2" class="tab-pane fade in active" markdown="1">
+```conf
 # Create the nginx.conf file, then
 # deploy the load balancer
 
@@ -276,12 +263,10 @@ docker run --detach \
   --publish 443:443 \
   --volume ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro \
   nginx:stable-alpine
-
-  {% endhighlight %}
+```
   </div>
-  <div id="haproxy-2" class="tab-pane fade">
-  {% highlight none %}
-
+  <div id="haproxy-2" class="tab-pane fade" markdown="1">
+```conf
 # Create the haproxy.cfg file, then
 # deploy the load balancer
 
@@ -293,8 +278,7 @@ docker run --detach \
   --restart=unless-stopped \
   --volume ${PWD}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro \
   haproxy:1.7-alpine haproxy -d -f /usr/local/etc/haproxy/haproxy.cfg
-
-  {% endhighlight %}
+```
   </div>
 </div>
 

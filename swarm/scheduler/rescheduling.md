@@ -42,7 +42,7 @@ docker logs SWARM_MANAGER_CONTAINER_ID
 When a container is successfully rescheduled, it generates a message similar to
 the following:
 
-```no-highlight
+```none
 Rescheduled container 2536adb23 from node-1 to node-2 as 2362901cb213da321
 Container 2536adb23 was running, starting container 2362901cb213da321
 ```
@@ -50,7 +50,7 @@ Container 2536adb23 was running, starting container 2362901cb213da321
 If for some reason, the new container fails to start on the new node, the log
 contains:
 
-```no-highlight
+```none
 Failed to start rescheduled container 2362901cb213da321
 ```
 
