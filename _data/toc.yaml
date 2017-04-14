@@ -858,8 +858,12 @@ samples:
   title: Tutorial labs
 - sectiontitle: Sample applications
   section:
+  - path: /samples/
+    title: Samples home
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
+  - path: /compose/aspnet-mssql-compose/
+    title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/
     title: CouchDB
   - path: /engine/examples/couchbase/
