@@ -24,7 +24,7 @@ to upgrade your installation to the latest release.
   restart
   * Improved performance of search on the web UI. To improve performance
   the search now only returns accounts and repositories that match the search
-  input. It no longer shows repositories belonging to the accounts retuned in
+  input. It no longer shows repositories belonging to the accounts returned in
   the search result
   * The web UI now displays all members of an organization
 * Low impact
