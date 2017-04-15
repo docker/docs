@@ -155,7 +155,7 @@ can take over 15 minutes to complete.
    Copying nested executables into bundles/1.12.0-dev/binary
    ```
 
-7. Copy the binary to the container's `**/usr/bin/**` directory.
+7. Copy the binary to the container's **/usr/bin/** directory.
 
    ```none
    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
