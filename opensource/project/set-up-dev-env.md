@@ -230,7 +230,7 @@ you have:
 
 * forked and cloned the Docker Engine code repository
 * created a feature branch for development
-* created and started a Engine development container from your branch
+* created and started an Engine development container from your branch
 * built a Docker binary inside of your Docker development container
 * launched a `docker` daemon using your newly compiled binary
 * called the `docker` client to run a `hello-world` container inside
