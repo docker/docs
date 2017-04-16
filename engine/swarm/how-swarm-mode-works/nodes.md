@@ -53,7 +53,7 @@ manager nodes.
 
 Worker nodes are also instances of Docker Engine whose sole purpose is to
 execute containers. Worker nodes don't participate in the Raft distributed
-state, make in scheduling decisions, or serve the swarm mode HTTP API.
+state, make scheduling decisions, or serve the swarm mode HTTP API.
 
 You can create a swarm of one manager node, but you cannot have a worker node
 without at least one manager node. By default, all managers are also workers.
