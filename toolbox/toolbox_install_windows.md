@@ -245,7 +245,7 @@ To uninstall Toolbox on Windows, do the following:
 
 ## Next Steps
 
-* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
+* Try out the [Get started](/get-started/) tutorial.
 
 * Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

@@ -239,7 +239,7 @@ your swarm, and start an image on your swarm.
     $ docker run -it ubuntu bash
     ```
 
-    For more examples and ideas, visit the [User Guide](/engine/userguide/intro/).
+    For more examples and ideas, visit the [User Guide](/engine/userguide/).
 
 5.  Use the `docker ps` command to find out which node the container ran on.
 

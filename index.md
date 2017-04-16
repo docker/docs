@@ -9,31 +9,13 @@ notoc: true
 Docker packages your app with its dependencies, freeing you from worrying about
 your system configuration, and making your app more portable.
 
-<div class="row">
-<div class="col-sm-12 col-md-12 col-lg-6">
-{% capture basics %}
-### Learn the basics of Docker
+## Get started with Docker
 
-The basic tutorial introduces Docker concepts, tools, and commands. The examples
-show you how to build, push, and pull Docker images, and run them as containers.
-This tutorial stops short of teaching you how to deploy applications.
-{% endcapture %}{{ basics | markdownify }}
-{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
-</div>
+Try our new multi-part walkthrough that goes from writing your first app,
+data storage, networking, and swarms, ending with your app running on
+production servers in the cloud. Total reading time is less than an hour!
 
-<div class="col-sm-12 col-md-12 col-lg-6 block">
-{% capture apps %}
-### Define and deploy applications
-
-The define-and-deploy tutorial shows how to relate containers to each other and
-define them as services in an application that is ready to deploy at scale in a
-production environment. Highlights Compose Version 3 new features and swarm
-mode.
-{% endcapture %}{{ apps | markdownify }}
-{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button outline-btn"}{% endcapture %}{{ apps | markdownify }}
-</div>
-</div>
-
+[Get started with Docker](/get-started/){: class="button outilne-btn"}
 
 ## Components
 

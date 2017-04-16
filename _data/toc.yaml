@@ -138,8 +138,8 @@ guides:
       title: Manage data in containers
 - sectiontitle: User Guide
   section:
-  - path: /engine/userguide/intro/
-    title: Introduction
+  - path: /engine/userguide/
+    title: Overview
   - sectiontitle: Work with images
     section:
     - path: /engine/userguide/eng-image/dockerfile_best-practices/

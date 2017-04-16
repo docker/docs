@@ -95,7 +95,6 @@ You can name your local images either when you build it, using
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
 or by using `docker commit <exiting-container> <hub-user>/<repo-name>[:<tag>]` to commit
 changes.
-See [Working with Docker images](/engine/getstarted/step_four.md) for a detailed description.
 
 Now you can push this repository to the registry designated by its name or tag.
 

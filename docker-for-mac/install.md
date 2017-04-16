@@ -119,7 +119,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   > instead of HyperKit.
 
 * **What the install includes**: The installation provides
-  [Docker Engine](/engine/userguide/intro/), Docker CLI client,
+  [Docker Engine](/engine/userguide/), Docker CLI client,
   [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Install and Run Docker for Mac
@@ -168,4 +168,4 @@ workarounds, how to run and submit diagnostics, and submit issues.
 
 * [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
 
-* [Learn Docker](/learn.md) provides general Docker tutorials.
+* [Get Started with Docker](/get-started/) provides a general Docker tutorial.

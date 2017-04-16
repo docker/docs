@@ -247,7 +247,7 @@ installed as a part of the Toolbox install.
 
 ## Next Steps
 
-* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
+* Try the [Get started](/get-started/) tutorial.
 
 * Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

@@ -65,9 +65,6 @@ Private repositories do not appear in the repository search results. To see all
 the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
-You can find more information on working with Docker images in the
-[Docker userguide](/engine/getstarted/step_four.md).
-
 ### Use Official Repositories
 
 Docker Hub contains a number of [Official
