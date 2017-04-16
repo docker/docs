@@ -3,7 +3,9 @@
 * layout
 *
 */
-
+#wrapper {
+    transition: all 0.5s ease;
+}
 /*
 *
 * branding *********************************************************************
@@ -98,7 +100,7 @@
     order: -1;
 }
 
-.col-content {}
+// .col-content {}
 
 .col-body {
     flex-direction: row;
@@ -126,7 +128,10 @@
 }
 
 .content {
-    padding: 60px 50px;
+    padding: 50px 50px 20px 50px;
+    max-width: 1024px;
+    min-width: 300px;
+    min-height: 500px;
 }
 
 .main-content {
@@ -134,7 +139,8 @@
 }
 
 section.section {
-    max-width: 980px;
+    // min-width: 380px;
+    // max-width: 850px;
     margin: 0 auto;
 }
 
@@ -150,22 +156,24 @@ section.section {
 
 #sidebar-wrapper {
     background-color: $bg-sidebar;
-    border-left: 1px solid rgba(204, 204, 204, 0.29);
+    // border-left: 1px solid rgba(204, 204, 204, 0.29);
     height: 100%;
     position: fixed;
     padding: 70px 0 0;
     overflow-y: auto;
     overflow-x: hidden;
+    right: 250px;
     margin-right: -250px;
     width: 0;
+    transition: all 0.5s ease;
 }
 
 #sidebar-right {
     background-color: $bg-sidebar;
-    border-left: 1px solid rgba(204, 204, 204, 0.29);
+    // border-left: 1px solid rgba(204, 204, 204, 0.29);
     height: 100%;
     padding-top: 20px;
-    width: 255px;
+    width: 270px;
     min-height: 800px;
 }
 
@@ -176,7 +184,7 @@ section.section {
 }
 
 .wrapper.right-open #sidebar-wrapper {
-    width: 255px;
+    width: 270px;                                                                                                                                                                            
 }
 
 
@@ -191,7 +199,7 @@ section.section {
 
 .sidebar-home {
     background-color: $bg-sidebar;
-    border-right: 1px solid rgba(204, 204, 204, 0.29);
+    // border-right: 1px solid rgba(204, 204, 204, 0.29);
     overflow-x: hidden;
     overflow-y: auto;
     min-height: 800px;
@@ -202,7 +210,7 @@ section.section {
 
 .sidebar-home .affix {
     background-color: $bg-sidebar;
-    border-right: 1px solid rgba(204, 204, 204, 0.29);
+    // border-right: 1px solid rgba(204, 204, 204, 0.29);
     top: 55px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -216,7 +224,7 @@ section.section {
 
 .sidebar,.sidebar.affix  {
     background-color: $bg-sidebar;
-    border-right: 1px solid rgba(204,204,204,0.29);
+    // border-right: 1px solid rgba(204,204,204,0.29);
     top: 51px;
     bottom: 0;
     left: 0;
