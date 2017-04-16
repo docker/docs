@@ -29,7 +29,7 @@ A Docker image, though, is capable of much more. An image can start software as
 complex as a database, wait for you (or someone else) to add data, store the
 data for later use, and then wait for the next person.
 
-Who built the `hello-world` software image though? In this case, Docker did but
+Who built the `hello-world` software image though? In this case, Docker did, but
 anyone can. Docker Engine lets people (or companies) create and share software
 through Docker images. Using Docker Engine, you don't have to worry about
 whether your computer can run the software in a Docker image &mdash; a Docker
