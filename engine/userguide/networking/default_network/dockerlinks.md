@@ -33,9 +33,7 @@ Let's say you used this command to run a simple Python Flask application:
     $ docker run -d -P training/webapp python app.py
 
 > **Note**:
-> Containers have an internal network and an IP address
-> (as we saw when we used the `docker inspect` command to show the container's
-> IP address in [Run a simple application](/engine/getstarted/step_three.md) section).
+> Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
 > information on Docker networking [here](/engine/userguide/networking/index.md).
 

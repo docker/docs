@@ -17,34 +17,37 @@ redirect_from:
 - /engine/getstarted-voting-app/test-drive/
 - /engine/getstarted-voting-app/customize-app/
 - /engine/getstarted-voting-app/cleanup/
-<<<<<<< HEAD
+- /engine/userguide/intro/
 - /mac/started/
 - /windows/started/
 - /linux/started/
 - /getting-started/
-- /mac/last_page/
-- /windows/last_page/
-- /linux/last_page/
+- /mac/step_one/
+- /windows/step_one/
+- /linux/step_one/
+- /engine/tutorials/dockerizing/
+- /mac/step_two/
+- /windows/step_two/
+- /linux/step_two/
+- /mac/step_three/
+- /windows/step_three/
+- /linux/step_three/
+- /engine/tutorials/usingdocker/
 - /mac/step_four/
 - /windows/step_four/
 - /linux/step_four/
 - /engine/tutorials/dockerimages/
 - /userguide/dockerimages/
 - /engine/userguide/dockerimages/
-- /mac/step_one/
-- /windows/step_one/
-- /linux/step_one/
-- /engine/tutorials/dockerizing/
+- /mac/last_page/
+- /windows/last_page/
+- /linux/last_page/
 - /mac/step_six/
 - /windows/step_six/
 - /linux/step_six/
+- /engine/tutorials/dockerrepos/
+- /userguide/dockerrepos/
 - /engine/userguide/containers/dockerimages/
-- /mac/step_three/
-- /windows/step_three/
-- /linux/step_three/
-- /engine/tutorials/usingdocker/
-=======
->>>>>>> TOC/redirect implementation
 ---
 
 {% include_relative nav.html selected="1" %}

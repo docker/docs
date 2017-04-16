@@ -21,6 +21,7 @@ Fix docs bugs to claim the points, and cash in your points for prizes in [the sw
 Try our new multi-part walkthrough that goes from writing your first app,
 data storage, networking, and swarms, ending with your app running on
 production servers in the cloud. Total reading time is less than an hour!
+<<<<<<< HEAD
 
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 
@@ -217,6 +218,10 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 {% endcapture %} <!-- from line 13 -->
 {{ ce-edge-section | markdownify }}
 {% endif %}
+=======
+
+[Get started with Docker](/get-started/){: class="button outilne-btn"}
+>>>>>>> Changing links to point to new tutorial
 
 ## Docker Editions
 
