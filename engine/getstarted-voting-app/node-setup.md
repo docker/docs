@@ -144,11 +144,11 @@ You will need the IP address of the manager for a later step.
 
 There are a few ways to interact with these machines directly on the command
 line or programatically. We'll cover two methods for managing the machines
-directly from the command line. We will use the second of these two methods for the tutorial (`docker ssh`), but it is worth learning both if you have time.
+directly from the command line. We will use the second of these two methods for the tutorial (`docker-machine ssh`), but it is worth learning both if you have time.
 
 * [Manage the machines from a pre-configured shell](#manage-the-machines-from-a-pre-configured-shell)
 
-* [`docker ssh` into a machine](#ssh-into-a-machine)
+* [`docker-machine ssh` into a machine](#ssh-into-a-machine)
 
 #### Manage the machines from a pre-configured shell
 
@@ -234,11 +234,11 @@ Docker version 1.13.0-rc6, build 2f2d055
 ```
 
 You _do not_ have to set up `docker-machine` environment variables, as in the
-previous section, for `docker ssh` to work. You can run this command in that
+previous section, for `docker-machine ssh` to work. You can run this command in that
 same shell you configured to talk to the manager, or in a new one, and it will
 work either way.
 
-This tutorial will employ the `docker ssh` method to run commands on the
+This tutorial will employ the `docker-machine ssh` method to run commands on the
 machines, but which approach you use is really a matter of personal preference.
 
 ## What's next?
