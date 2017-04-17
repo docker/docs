@@ -107,9 +107,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/engine-api/client"
-	"github.com/docker/engine-api/types"
-	"github.com/docker/engine-api/types/container"
+	"github.com/docker/docker/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"golang.org/x/net/context"
 )
 
@@ -120,7 +120,7 @@ func main() {
 		panic(err)
 	}
 
-	_, err = cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
+	_, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
