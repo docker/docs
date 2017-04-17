@@ -257,13 +257,19 @@ PowerShell Module as follows.
     To check that the policy is set properly, run `get-executionpolicy`, which
     should return `RemoteSigned`.
 
-3.  To enable auto-completion of commands for the current PowerShell only, type:
+3.  To install auto-completion of commands for PowerShell, type:
 
     ```none
     Install-Module posh-docker
     ```
 
-4.  To make tab completion persistent across all PowerShell sessions, add the
+4.  After installation to enable autocompletion for the current PowerShell only, type:
+
+    ```none
+    Import-Module posh-docker
+    ```
+
+5.  To make tab completion persistent across all PowerShell sessions, add the
     command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
     ```none
@@ -428,7 +434,7 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
-```powershell
+```none
 PS C:\Users\jdoe> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
