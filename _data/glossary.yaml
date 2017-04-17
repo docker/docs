@@ -63,9 +63,9 @@ container: |
 Docker: |
   The term Docker can refer to
 
-  The Docker project as a whole, which is a platform for developers and sysadmins to
+  - The Docker project as a whole, which is a platform for developers and sysadmins to
   develop, ship, and run applications
-  The docker daemon process running on the host which manages images and containers
+  - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
 Docker for Mac: |
   [Docker for Mac](/docker-for-mac/) is an easy-to-install,
@@ -89,10 +89,10 @@ Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
   Docker and its components. It provides the following services:
 
-  Docker image hosting
-  User authentication
-  Automated image builds and work-flow tools such as build triggers and web hooks
-  Integration with GitHub and Bitbucket
+  - Docker image hosting
+  - User authentication
+  - Automated image builds and work-flow tools such as build triggers and web hooks
+  - Integration with GitHub and Bitbucket
 Dockerfile: |
   A Dockerfile is a text document that contains all the commands you would
   normally execute manually in order to build a Docker image. Docker can
@@ -102,6 +102,7 @@ ENTRYPOINT: |
   of the command to be run. If you want your Dockerfile to be runnable without
   specifying additional arguments to the `docker run` command, you must specify
   either `ENTRYPOINT`, `CMD`, or both.
+  
   - If `ENTRYPOINT` is specified, it is set to a single command. Most official
     Docker images have an `ENTRYPOINT` of `/bin/sh` or `/bin/bash`. Even if you
     do not specify `ENTRYPOINT`, you may inherit it from the base image that you
@@ -131,9 +132,9 @@ filesystem: |
 
   Examples :
 
-  Linux : ext4, aufs, btrfs, zfs
-  Windows : NTFS
-  macOS : HFS+
+  - Linux : ext4, aufs, btrfs, zfs
+  - Windows : NTFS
+  - macOS : HFS+
 image: |
   Docker images are the basis of [containers](#container). An Image is an
   ordered collection of root filesystem changes and the corresponding
@@ -191,7 +192,7 @@ repository: |
   labeled using [tags](#tag).
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
-  and its [tags](https://hub.docker.com/r/library/nginx/tags/)
+  and its [tags](https://hub.docker.com/r/library/nginx/tags/).
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
   you want to run your application containers in a swarm. At the most basic level
@@ -231,9 +232,9 @@ swarm mode: |
   join nodes to a swarm, the Docker Engine runs in swarm mode.
 tag: |
   A tag is a label applied to a Docker image in a [repository](#repository).
-  tags are how various images in a repository are distinguished from each other.
+  Tags are how various images in a repository are distinguished from each other.
 
-  *Note : This label is not related to the key=value labels set for docker daemon*
+  *Note : This label is not related to the key=value labels set for docker daemon.*
 task: |
   A [task](/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling) is the
   atomic unit of scheduling within a swarm. A task carries a Docker container and
@@ -267,7 +268,7 @@ Union file system: |
   [Docker and Btrfs in
   practice](/engine/userguide/storagedriver/btrfs-driver/),
   and [Docker and OverlayFS in
-  practice](/engine/userguide/storagedriver/overlayfs-driver/)
+  practice](/engine/userguide/storagedriver/overlayfs-driver/).
 
   Example implementations of union file systems are
   [UnionFS](https://en.wikipedia.org/wiki/UnionFS),
