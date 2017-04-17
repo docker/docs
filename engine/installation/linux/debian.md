@@ -93,6 +93,7 @@ from the repository.
          apt-transport-https \
          ca-certificates \
          curl \
+         gnupg2 \
          software-properties-common
     ```
 
