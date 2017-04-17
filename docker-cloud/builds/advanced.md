@@ -90,7 +90,7 @@ To learn more about Docker build-time variables, see the [docker build documenta
 
 #### Two-phase build
 
-If your build process requires a component that is not a dependency for your application, you can use a pre_build hook (refers to the hooks/pre_build file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary required before the build.
+If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary required before the build.
 
 ```bash
 #!/bin/bash
