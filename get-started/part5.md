@@ -173,9 +173,9 @@ networks:
 ```
 
 Redis has an official image in the Docker library and has been granted the short
-image name of just `redis`, so no `username/repo` notation here. The Redis port,
-6379, has been pre-configured by Redis to be exposed from the container to the
-host, and here in our Compose file we expose it from the host to the world,
+`image` name of just `redis`, so no `username/repo` notation here. The Redis
+port, 6379, has been pre-configured by Redis to be exposed from the container to
+the host, and here in our Compose file we expose it from the host to the world,
 so you can actually enter the IP for any of your nodes into Redis Desktop
 Manager and manage this Redis instance, if you so choose.
 
@@ -183,8 +183,8 @@ Most importantly, there are a couple of things in the `redis` specification that
 make data persist between deployments of this stack:
 
 - `redis` always runs on the manager, so it's always using the same filesystem.
-- `redis` accesses an arbitrary file in the host's file system as `/data` inside
-  the container, which is where Redis stores data.
+- `redis` accesses an arbitrary directory in the host's file system as `/data`
+  inside the container, which is where Redis stores data.
 
 Together, this is creating a "source of truth" in your host's physical
 filesystem for the Redis data. Without this, Redis would store its data in
