@@ -175,6 +175,16 @@ In this section, you set up the database connection for Django.
 
     ![Django example](images/django-it-worked.png)
 
+5. Clean up: Shut down containers with CONTROL-C.
+
+  ```
+  Gracefully stopping... (press Ctrl+C again to force)
+  Killing test_web_1 ... done
+  Killing test_db_1 ... done
+  ```
+
+  It's safe to `rm -rf` your project directory.
+
 ## More Compose documentation
 
 - [User guide](index.md)
