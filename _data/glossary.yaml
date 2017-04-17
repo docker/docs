@@ -67,6 +67,11 @@ Docker: |
   develop, ship, and run applications
   The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
+Docker Datacenter: |
+  The Docker Datacenter is subscription-based service enabling enterprises to leverage a
+  platform built by Docker, for Docker. The Docker native tools are integrated to create
+  an on premises CaaS platform, allowing organizations to save time and seamlessly take
+  applications built in dev to production.
 Docker for Mac: |
   [Docker for Mac](/docker-for-mac/) is an easy-to-install,
   lightweight Docker development environment designed specifically for the Mac. A
