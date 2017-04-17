@@ -138,9 +138,9 @@ essentially involves two steps:
 {% endcapture %}
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#cloud">Community Edition (Cloud provider)</a></li>
-  <li><a data-toggle="tab" href="#enterprisecloud">Enterprise Edition (Cloud provider)</a></li>
-  <li><a data-toggle="tab" href="#enterpriseonprem">Enterprise Edition (On-premise)</a></li>
+  <li class="active"><a data-toggle="tab" href="#cloud">Docker CE (Cloud provider)</a></li>
+  <li><a data-toggle="tab" href="#enterprisecloud">Enterprise (Cloud provider)</a></li>
+  <li><a data-toggle="tab" href="#enterpriseonprem">Enterprise (On-premise)</a></li>
 </ul>
 <div class="tab-content">
   <div id="cloud" class="tab-pane fade in active" markdown="1">{{ cloud }}</div>
