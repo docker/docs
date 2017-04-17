@@ -216,9 +216,19 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
-users to run Docker commands and for other optional configuration steps.
+6.  If you don’t want to use sudo when you use the docker command, you can add 
+    users to the `docker` group.
+    ```bash
+    $ sudo usermod -aG docker <username>
+    ```
+    
+    Now apply group settings by running the following command.
+    ```bash
+    $ newgrp docker
+    ```
+
+Docker is installed and running.
+
 
 #### Upgrade Docker
 
