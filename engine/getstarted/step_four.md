@@ -118,8 +118,8 @@ $ docker build -t docker-whale .
 
 Sending build context to Docker daemon 2.048 kB
 ...snip...
-Removing intermediate container cb53c9d09f3b
-Successfully built c2c3152907b5
+Removing intermediate container a8e6faa88df3
+Successfully built 7d9495d03763
 ```
 
 The command takes several seconds to run and reports its outcome. Keep reading
@@ -264,7 +264,7 @@ Now you can verify that the new image is on your computer and you can run it.
     $ docker images
 
     REPOSITORY           TAG          IMAGE ID          CREATED             SIZE
-    docker-whale         latest       c2c3152907b5      4 minutes ago       275.1 MB
+    docker-whale         latest       7d9495d03763      4 minutes ago       275.1 MB
     docker/whalesay      latest       fb434121fc77      4 hours ago         247 MB
     hello-world          latest       91c95931e552      5 weeks ago         910 B
     ```
