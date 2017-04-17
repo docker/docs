@@ -155,7 +155,7 @@ can take over 15 minutes to complete.
    Copying nested executables into bundles/1.12.0-dev/binary
    ```
 
-7. Copy the binary to the container's `**/usr/bin/**` directory.
+7. Copy the binary to the container's **/usr/bin/** directory.
 
    ```none
    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
@@ -230,7 +230,7 @@ you have:
 
 * forked and cloned the Docker Engine code repository
 * created a feature branch for development
-* created and started a Engine development container from your branch
+* created and started an Engine development container from your branch
 * built a Docker binary inside of your Docker development container
 * launched a `docker` daemon using your newly compiled binary
 * called the `docker` client to run a `hello-world` container inside
