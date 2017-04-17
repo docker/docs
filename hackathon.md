@@ -34,6 +34,7 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 - [Report your hackathon work](https://goo.gl/forms/oEaQOlKvQj8iJbn53)
 - [Browse prizes](http://www.cafepress.com/dockerdocshackathon)
 - [#docs on Slack, if you have questions](https://dockercommunity.slack.com/messages/C2V58TASE)
+- [Moby Mingle offer]((https://mobymingle.dockercon.com/offers/27855) to mentor people to contribute to the Hackathon.
 
 ## How it works
 
