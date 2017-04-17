@@ -72,12 +72,16 @@ executable.
 
 Consider this diagram comparing virtual machines to containers:
 
+### Virtual Machine diagram
+
 ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
 
 Virtual machines run guest operating systems -- note the OS layer in each box.
 This is resource intensive, and the resulting disk image and appication state is
 an entangelment of OS settings, system-installed dependencies, OS security
 patches, and other easy-to-lose, hard-to-replicate ephemera.
+
+### Container diagram
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
 
