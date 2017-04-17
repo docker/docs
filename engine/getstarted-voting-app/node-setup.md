@@ -17,7 +17,7 @@ run some basic commands to interact with the machines.
 * **Docker Machine** - These steps rely on use of
 [Docker Machine](/machine/get-started.md) (`docker-machine`), which
 comes auto-installed with both Docker for Mac and Docker for Windows. It is also
-available with [Docker Toolbox](/toolbox/overview.md), a good solution especially for earlier Windows operating systems, as described below.
+available with [Docker Toolbox](/toolbox/overview.md), a good solution especially for earlier Windows operating systems, as described below. If you are running natively on Linux, you will also need to install [VirtualBox](https://www.virtualbox.org) version > 5.
 
 <p />
 
@@ -57,7 +57,7 @@ create machines.
 The Docker Machine commands to create local virtual machines on Mac and Windows
 are as follows.
 
-#### Mac
+#### Mac or Linux
 
 ```none
 docker-machine create --driver virtualbox MACHINE-NAME
@@ -172,7 +172,7 @@ example, we'll set up a shell to talk to our manager machine.
 
 2.  Connect your shell to the manager.
 
-    On Mac:
+    On Mac or Linux:
 
     ```none
     $ eval $(docker-machine env manager)

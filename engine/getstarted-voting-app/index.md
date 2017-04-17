@@ -20,7 +20,7 @@ Docker Engine.
 If you haven't yet downloaded Docker or installed it, go to [Get
 Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
 your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/install.md),
-[Docker for Windows](/docker-for-windows/install.md), [Docker Toolbox](/toolbox/overview.md), or [Docker for Linux](/engine/installation/linux/).
+[Docker for Windows](/docker-for-windows/install.md), [Docker Toolbox](/toolbox/overview.md), or [Docker for Linux](/engine/installation/linux/). This tutorial will use Docker Machine to manage multiple Docker VMs. Docker Machine is part of the Docker for Windows and Docker for Mac packages, however for Linux you will need to download and install it separately by [following these instructions](/machine/install-machine.md).
 
 If you are totally new to Docker, you might want to work through the [Get
 Started with Docker tutorial](/engine/getstarted/index.md) first, then come
