@@ -264,7 +264,7 @@ docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
 docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
 docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
 docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
-docker-machien ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
 docker-machine start myvm1            # Start a VM that is currently not running
 docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
 docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
