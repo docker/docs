@@ -54,6 +54,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
          restart: always
          environment:
            WORDPRESS_DB_HOST: db:3306
+           WORDPRESS_DB_USER: wordpress
            WORDPRESS_DB_PASSWORD: wordpress
     volumes:
         db_data:
