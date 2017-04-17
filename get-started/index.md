@@ -26,12 +26,11 @@ Welcome! We are excited you want to learn how to use Docker.
 In this seven-part tutorial, you will:
 
 1. Get set up and oriented, on this page.
-2. [Build and run our first app](part2.md)
-3. [Turn our app into a scaling service](part3.md)
-4. [Span our service across multiple machines](part4.md)
+2. [Build and run your first app](part2.md)
+3. [Turn your app into a scaling service](part3.md)
+4. [Span your service across multiple machines](part4.md)
 5. [Add a visitor counter that persists data](part5.md)
-6. [Add SSL using Let's Encrypt and haproxy](part6.md)
-7. [Conclusion, and next steps](part7.md)
+6. [Deploy your swarm to production](part6.md)
 
 The application itself is very simple so that you are not too distracted by
 what the code is doing. After all, the value of Docker is in how it can build,
