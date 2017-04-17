@@ -222,8 +222,8 @@ Here's [a terminal recording of what was covered on this page](https://asciinema
 <script type="text/javascript" src="https://asciinema.org/a/113840.js" speed="2" id="asciicast-113840" async></script>
 
 You learned that stacks are inter-related services all running in concert, and
-that--surprise--you've been using stacks since part three of this tutorial. You
-learned that to add more services to your stack, you insert them in your Compose
-file. Finally, you learned that by using a combination of placement constraints
-and volumes you can create a permanent home for persisting data, so that your
-app's data survives when the container is torn down and redeployed.
+that -- surprise! -- you've been using stacks since part three of this tutorial.
+You learned that to add more services to your stack, you insert them in your
+Compose file. Finally, you learned that by using a combination of placement
+constraints and volumes you can create a permanent home for persisting data, so
+that your app's data survives when the container is torn down and redeployed.
