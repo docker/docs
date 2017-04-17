@@ -36,23 +36,25 @@ probably be a service for storing application data in a database, a service
 for video transcoding in the background after a user uploads something, a
 service for the front-end, and so on.
 
-Scaling a service changes the number of container instances running that piece
-of software, assigning more computing resources to the service in the process.
-These containers are all running the same image within the service, so they are
-called **replicas**.
+A service really just means, "containers in production." A service only runs one
+image, but it codifies the way that image runs -- what ports it should use, how
+many replicas of the container should run so the service has the capacity it
+needs, and so on. Scaling a service changes the number of container instances
+running that piece of software, assigning more computing resources to the
+service in the process.
 
 Luckily it's very easy to define, run, and scale services with the Docker
 platform -- just write a `docker-compose.yml` file.
 
 ## Your first `docker-compose.yml` File
 
-A `docker-compose.yml` file is a YAML markup file thatdefines how Docker
-containers should behave in production.
+A `docker-compose.yml` file is a YAML file that defines how Docker containers
+should behave in production.
 
 ### `docker-compose.yml`
 
 Save this file as `docker-compose.yml` wherever you want. Be sure you have
-pushed the image to a registry, as instructed in [Part 2](part2.md), and use
+pushed the image you created in [Part 2](part2.md) to a registry, and use
 that info to replace `username/repo:tag`:
 
 ```yaml
@@ -86,17 +88,21 @@ This `docker-compose.yml` file tells Docker to do the following:
 - Instruct `web`'s containers to share port 80 via a load-balanced network
   called `webnet`. (Internally, the containers themselves will publish to
   `web`'s port 80 at an ephemeral port.)
-- Define the `webnet` network with the default settings, which is a
-  load-balanced overlay network.
+- Define the `webnet` network with the default settings (which is a
+  load-balanced overlay network).
 
 ## Run your new load-balanced app
 
-Now let's run it. You have to give our app a name; here it is set to
+Now let's run it. You have to give your app a name -- here it is set to
 `getstartedlab` :
 
 ```
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
+
+> **Note**: If you get an error that "this node is not a swarm manager," go
+  ahead and run `docker swarm init` and then retry. We'll get into the meaning
+  of that command in [part 4](part4.md).
 
 See a list of the five containers you just launched:
 
@@ -135,13 +141,16 @@ you will learn how to run this app on a cluster of machines.
 
 > Note: Compose files like this are used to define applications with Docker, and
 can be uploaded to cloud providers using [Docker Cloud](/docker-cloud/), or on
-any hardware or cloud provider you choose with our Docker-platform-in-a-box,
-[Datacenter](https://www.docker.com/enterprise-edition), featuring Docker
-Enterprise Edition.
+any hardware or cloud provider you choose with [Docker Enterprise
+Edition](https://www.docker.com/enterprise-edition).
 
 [On to "Part 4" >>](part4.md){: class="button outline-btn"}
 
 ## Recap and cheat sheet (optional)
+
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip):
+
+<script type="text/javascript" src="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip.js" id="asciicast-b5gai4rnflh7r0kie01fx6lip" speed="2" async></script>
 
 To recap, while typing `docker run` is simple enough, the true implementation
 of a container in production is running it as a service. Services codify a

@@ -22,10 +22,12 @@ title: "Get Started, Part 4: Swarms"
 ## Introduction
 
 In [part 3](part3.md), you took an app you wrote in [part 2](part2.md), and
-defined how it should run in production, scaling it up 5x.
+defined how it should run in production by turning it into a service, scaling it
+up 5x in the process.
 
-Here in part 4, you deploy this application onto a cluster, running it on multiple
-machines, thus taking advantage of the extra capacity.
+Here in part 4, you deploy this application onto a cluster, running it on
+multiple machines. Multi-container, multi-machine applications are made possible
+by joining multiple macines into a "Dockerized" cluster called a **swarm**.
 
 ## Understanding Swarm clusters
 
@@ -72,11 +74,10 @@ To add a worker to this swarm, run the following command:
 
 > **Note**: Getting an error about needing to use `--advertise-addr`? Copy the
 > IP address for `myvm1` by running `docker-machine ls`, then run the
-> `docker swarm join` command again, using that IP and specifying port `2377`
+> `docker swarm init` command again, using that IP and specifying port `2377`
 > (the port for swarm joins) with `--advertise-addr`. For example:
 >
-> `docker-machine ssh myvm1 "docker swarm join --advertise-addr 192.168.99.100:2377"`
-
+> `docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"`
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -117,7 +118,7 @@ $ docker-machine create --driver virtualbox myvm1
 $ docker-machine create --driver virtualbox myvm2
 ```
 
-{{ local-instructions | markdownify }}
+{{ local-instructions }}
 {% endcapture %}
 
 {% capture localwin %}
@@ -140,7 +141,7 @@ $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
 $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 ```
 
-{{ local-instructions | markdownify}}
+{{ local-instructions }}
 {% endcapture %}
 
 ## Set up your swarm
@@ -149,15 +150,18 @@ A swarm is made up of multiple nodes, which can be either physical or virtual
 machines. The basic concept is simple enough: run `docker swarm init` to enable
 swarm mode and make your current machine a swarm manager, then run
 `docker swarm join` on other machines to have them join the swarm as a worker.
-Choose a tab below to see how this plays out in various contexts.
+Choose a tab below to see how this plays out in various contexts. We'll use VMs
+to quickly create a two-machine cluster and turn it into a swarm.
+
+### Create a cluster
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
   <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
 </ul>
 <div class="tab-content">
-  <div id="local" class="tab-pane fade in active">{{ local | markdownify }}</div>
-  <div id="localwin" class="tab-pane fade">{{ localwin | markdownify }}</div>
+  <div id="local" class="tab-pane fade in active" markdown="1">{{ local }}</div>
+  <div id="localwin" class="tab-pane fade" markdown="1">{{ localwin }}</div>
 </div>
 
 ## Deploy your app on a cluster
@@ -198,32 +202,62 @@ ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
 ```
 
-You can access your app from the IP address of either `myvm1` or `myvm2`. The
-network you created is shared between them and load-balancing. Run
+### Accessing your cluster
+
+You can access your app from the IP address of **either** `myvm1` or `myvm2`.
+The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
 browser, hitting refresh (or just `curl` them). You'll see five possible
 container IDs all cycling by randomly, demonstrating the load-balancing.
 
-From here you can do everything you learned about in part 3: scale the app by
-changing the `docker-compose.yml` file and running `docker stack deploy` again,
-tear down the stack with `docker stack rm`, etc. You can also join any machine,
-physical or virtual, to this swarm, using the same `docker swarm join` command
-you used on `myvm2`, and capacity will be added to your cluster.
+The reason both IP addresses work is that nodes in a swarm participate in an in
+ingress **routing mesh**. This ensures that a service deployed at a certain port
+within your swarm always has that port reserved to itself, no matter what node
+is  actually running the container. Here's a diagram of how a routing mesh for a
+service called `my-web` published at port `8080` on a three-node swarm would
+look:
 
-[On to next >>](part5.md){: class="button outline-btn"}
+![routing mesh diagram](/engine/swarm/images/ingress-routing-mesh.png)
+
+> **Note**: If you're having any connectivity trouble, keep in mind that in
+> order to use the ingress network in the swarm, you need to have
+> the following ports open between the swarm nodes before you enable swarm mode:
+>
+> - Port 7946 TCP/UDP for container network discovery.
+> - Port 4789 UDP for the container ingress network.
+
+## Iterating and scaling your app
+
+From here you can do everything you learned about in part 3: scale the app by
+changing the `docker-compose.yml` file, or change the app behavior be editing
+code. In either case, simply running `docker stack deploy` again deploys these
+changes. You can tear down the stack with `docker stack rm`. You can also join
+any machine, physical or virtual, to this swarm, using the same
+`docker swarm join` command you used on `myvm2`, and capacity will be added to
+your cluster; just run `docker stack deploy` afterwards and your app will take
+advantage of the new resources.
+
+[On to Part 5 >>](part5.md){: class="button outline-btn"}
 
 ## Recap and cheat sheet (optional)
 
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113837):
+
+<script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async></script>
+
 In part 4 you learned what a swarm is, how nodes in swarms can be managers or
 workers, created a swarm, and deployed an application on it. You saw that the
-core Docker commands didn't change from part 3, they just had to be targeted
-to run on a swarm master. You also saw the power of Docker's networking in
-action, which kept load-balancing requests across containers, even though they
-were running on different machines.
+core Docker commands didn't change from part 3, they just had to be targeted to
+run on a swarm master. You also saw the power of Docker's networking in action,
+which kept load-balancing requests across containers, even though they were
+running on different machines. Finally, you learned how to iterate and scale
+your app on a cluster.
 
 Here are some commands you might like to run to interact with your swarm a bit:
 
 ```
+docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
+docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
 docker-machine env myvm1                # View basic information about your node
 docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
 docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node

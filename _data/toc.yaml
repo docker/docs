@@ -116,7 +116,7 @@ guides:
   section:
   - sectiontitle: "Get started with Docker"
     section:
-    - title: "Part 1: Orientation and Setup"
+    - title: "Part 1: Orientation"
       path: /get-started/
     - title: "Part 2: Containers"
       path: /get-started/part2/
@@ -126,10 +126,8 @@ guides:
       path: /get-started/part4/
     - title: "Part 5: Stacks"
       path: /get-started/part5/
-    - title: "Part 6: SSL and Secrets"
+    - title: "Part 6: Deploy your app"
       path: /get-started/part6/
-    - title: "Part 7: Deploy to production"
-      path: /get-started/part7/
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/

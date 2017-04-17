@@ -280,28 +280,28 @@ application by running this container in a **service**.
 
 ## Recap and cheat sheet (optional)
 
-Here's [a terminal recording of everything that we did on this page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g).
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):
 
-<script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" async></script>
+<script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
 
 Here is a list of the basic commands from this page, and some related ones if
 you'd like to explore a bit before moving on.
 
 ```shell
-docker build -t friendlyname . #Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyname #Run image "friendlyname" mapping port 4000 to 80
-docker run -d -p 4000:80 friendlyname #Same thing, but in detached mode
-docker ps #See a list of all running containers
-docker stop <hash> #Gracefully stop the specified container
-docker ps -a #See a list of all containers on this machine, even the ones not running
-docker kill <hash> #Force shutdown of the specified container
-docker rm <hash> #Remove the specified container from this machine
-docker rm $(docker ps -a -q) #Remove all containers from this machine
-docker images -a #Show all images that have been built or downloaded onto this machine
-docker rmi <imagename> #Remove the specified image from this machine
-docker rmi $(docker images -q) #Remove all images from this machine
-docker login #Log in this CLI session using your Docker credentials
-docker tag <image> username/repository:tag #Tag <image> on your local machine for upload
-docker push username/repository:tag #Upload tagged image to registry
-docker run username/repository:tag #Run image from a registry
+docker build -t friendlyname .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+docker ps                                 # See a list of all running containers
+docker stop <hash>                     # Gracefully stop the specified container
+docker ps -a           # See a list of all containers, even the ones not running
+docker kill <hash>                   # Force shutdown of the specified container
+docker rm <hash>              # Remove the specified container from this machine
+docker rm $(docker ps -a -q)           # Remove all containers from this machine
+docker images -a                               # Show all images on this machine
+docker rmi <imagename>            # Remove the specified image from this machine
+docker rmi $(docker images -q)             # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
 ```

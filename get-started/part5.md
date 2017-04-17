@@ -31,13 +31,15 @@ Here in part 5, you'll reach the top of the hierarchy of distributed
 applications: the **stack**. A stack is a group of interelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
-application, though very complex applications may want to use multiple stacks.
+application (though very complex applications may want to use multiple stacks).
 
 Some good news is, you have technically been working with stacks since part 3,
 when you created a Compose file and used `docker stack deploy`. But that was a
 single service stack running on a single host, which is not usually what takes
 place in production. Here, you're going to take what you've learned and make
 multiple services relate to each other, and run them on multiple machines.
+
+This is the home stretch, so congratulate yourself!
 
 ## Adding a new service and redploying.
 
@@ -86,7 +88,8 @@ container, built from [an open source project created by
 Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays Docker
 services running on a swarm in a diagram.
 
-Copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
+We'll talk more about placement constraints and volumes in a moment. But for
+now, copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
 
 ```
 docker-machine scp myvm1 docker-compose.yml myvm1:~
@@ -115,11 +118,10 @@ this visualization by running `docker stack ps <stack>`:
 docker-machine ssh myvm1 "docker stack ps getstartedlab"
 ```
 
-This visuaizer is good to add to any stack. It's agnostic about what you're
-running and where, and doesn't depend on any other service.
-
-Now let's a service that *does* involve a dependency: the Redis service that
-will provide a visitor counter.
+The visualizer is a standalone service that can run in any app that includes it
+in the stack. It doesn't depend on anything else. Now let's create a service
+that *does* have a dependency: the Redis service that will provide a visitor
+counter.
 
 
 ## Persisting data
@@ -172,8 +174,9 @@ networks:
 
 Redis has an official image in the Docker library and has been granted the short
 image name of just `redis`, so no `username/repo` notation here. The Redis port,
-6379, is exposed from the container to the host and from the host to the world,
-so you can actually enter the manager's IP and port 6379 into Redis Desktop
+6379, has been pre-configured by Redis to be exposed from the container to the
+host, and here in our Compose file we expose it from the host to the world,
+so you can actually enter the IP for any of your nodes into Redis Desktop
 Manager and manage this Redis instance, if you so choose.
 
 Most importantly, there are a couple of things in the `redis` specification that
@@ -188,13 +191,18 @@ filesystem for the Redis data. Without this, Redis would store its data in
 `/data` inside the container's filesystem, which would get wiped out if that
 container were ever redeployed.
 
-> **Note**: Be careful when using the host filesystem to store data; hosts can
-be ephemeral, just like containers, especially when using VMs. Another option is
-to use a storage driver and store data on an external cloud service.
+This source of truth has two components:
+
+- The placement constraint you put on the Redis service, ensuring that it
+  always uses the same host.
+- The volume you created that lets the container access `./data` (on the host)
+  as `/data` (inside the Redis container). While containers come and go, the
+  files stored on `./data` on the specified host will persist, enabling
+  continuity.
 
 To deploy your new Redis-using stack, create `./data` on the manager, copy over
-the new `docker-compose.yml` file with `docker-machine scp`, and run `docker
-stack deploy` one more time.
+the new `docker-compose.yml` file with `docker-machine scp`, and run
+`docker stack deploy` one more time.
 
 ```
 $ docker-machine ssh myvm1 "mkdir ./data"
@@ -206,3 +214,16 @@ Check the results on http://localhost and you'll see that a visitor counter is
 now live and storing information on Redis.
 
 [On to Part 6 >>](part6.md){: class="button outline-btn"}
+
+## Recap (optional)
+
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113840):
+
+<script type="text/javascript" src="https://asciinema.org/a/113840.js" speed="2" id="asciicast-113840" async></script>
+
+You learned that stacks are inter-related services all running in concert, and
+that--surprise--you've been using stacks since part three of this tutorial. You
+learned that to add more services to your stack, you insert them in your Compose
+file. Finally, you learned that by using a combination of placement constraints
+and volumes you can create a permanent home for persisting data, so that your
+app's data survives when the container is torn down and redeployed.

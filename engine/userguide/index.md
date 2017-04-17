@@ -2,6 +2,8 @@
 description: How to use the Docker Engine user guide
 keywords: engine, introduction, documentation, about, technology, docker, user, guide, framework, home, intro
 title: Docker Engine user guide
+redirect_from:
+- /engine/userguide/intro/
 ---
 This guide helps users learn how to use Docker Engine.
 

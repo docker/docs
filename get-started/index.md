@@ -17,7 +17,6 @@ redirect_from:
 - /engine/getstarted-voting-app/test-drive/
 - /engine/getstarted-voting-app/customize-app/
 - /engine/getstarted-voting-app/cleanup/
-- /engine/userguide/intro/
 ---
 
 {% include_relative nav.html selected="1" %}
@@ -45,7 +44,7 @@ While we'll define concepts along the way, it is good for you to understand
 [what Docker is](https://www.docker.com/what-docker) and [why you would use
 Docker](https://www.docker.com/use-cases) before we begin.
 
-We also need to assume you understand a few concepts before we continue:
+We also need to assume you are familiar with a few concepts before we continue:
 
 - IP Addresses and Ports
 - Virtual Machines
@@ -83,11 +82,13 @@ patches, and other easy-to-lose, hard-to-replicate ephemera.
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
 
-Containers can share a single kernel, and the only information packaged in a
-container image is the executable and its package dependencies, which never need
-to be installed on the host system. These processes run like native processes,
-and you can manage them individually by running commands like `docker ps` --
-just like you would run `ps` on Linux to see any other active executable.
+Containers can share a single kernel, and the only information that needs to be
+in a container image is the executable and its package dependencies, which
+never need to be installed on the host system. These processes run like native
+processes, and you can manage them individually by running commands like `docker
+ps` -- just like you would run `ps` on Linux to see active processes. Finally,
+because they contain all their dependencies, there is no configuration
+entanglement; a containerized app "runs anywhere."
 
 ## Setup
 
