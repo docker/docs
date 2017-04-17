@@ -60,6 +60,14 @@ To install Compose, do the following:
 
 ## Alternative install options
 
+### Install using apt-get on Ubuntu
+
+Compose can be installed on Ubuntu using the following command:
+
+```bash
+$ sudo apt-get install docker-compose
+```
+
 ### Install using pip
 
 Compose can be installed from [pypi](https://pypi.python.org/pypi/docker-compose)
