@@ -74,8 +74,8 @@ After your cloud provider is all set up, create a Swarm:
 [Connect to your swarm via Docker
 Cloud](/docker-cloud/cloud-swarm/connect-to-swarm/). This opens a terminal whose
 context is your local machine, but whose Docker commands are routed up to the
-swarm running on your cloud provider.This is a little different from the
-paradign you've been following, where you were slinging commands via SSH; now,
+swarm running on your cloud provider. This is a little different from the
+paradigm you've been following, where you were slinging commands via SSH; now,
 you can directly access both your local file system and your remote swarm,
 enabling some very tidy-looking commands:
 
