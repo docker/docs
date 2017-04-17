@@ -83,6 +83,8 @@ For full instructions on getting Docker for various Linux distributions, see [In
 
 ## Step 3: Verify your installation
 
+  Depending on your Docker system configuration, you may be required to preface each docker command with `sudo`.
+
 1. Open a command-line terminal, and run some Docker commands to verify that Docker is working as expected.
 
     Some good commands to try are `docker version` to check that you have the latest release installed and `docker ps` to see if you have any running containers. (Probably not, since you just started.)
