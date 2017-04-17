@@ -3,6 +3,10 @@
 * Primary navigation - top header **********************************************************
 *
 */
+.nav-container {
+    overflow: hidden;
+    height: 50px;
+}
 
 
 .primary {
@@ -58,7 +62,9 @@
 
 .nav-secondary {
     background: $bg-secondary;
+    box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
+    overflow: hidden;
 }
 
 
@@ -74,9 +80,10 @@
     height: 55px;
     position: absolute;
     width: 100%;
+    overflow: hidden;
     &.affix {
         background: #0C5176;
-        // box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
         top: 0;
         position: fixed;
         z-index: 100;
@@ -172,6 +179,7 @@
     margin: 0;
     padding: 0 60px 0 0;
     width: 300px;
+    line-height: 24px;
     li {
         padding: 2px 8px 2px 15px;
         float: left;
@@ -179,7 +187,7 @@
         a {
             display: block;
             font-size: 12px;
-            padding: 5px;
+            padding: 0 10px 0 10px;
             text-decoration: none;
         }
     }
@@ -311,7 +319,7 @@ input:checked+.slider:before {
 
 .tabs li a {
     color: $white;
-    padding: 17px 15px 11px;
+    padding: 17px 13px 11px;
     float: left;
     opacity: 0.8;
     font-weight: 600;
@@ -372,5 +380,5 @@ input:checked+.slider:before {
 
 .ctrl-right .btn-group {
     float: left;
-    margin: 2px 24px 0 0;
+    margin: 2px 0 0;
 }
