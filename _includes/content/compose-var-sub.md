@@ -19,7 +19,7 @@ port mapping is `:5000` (which is of course an invalid port mapping, and will
 result in an error when attempting to create the container).
 
 You can set default values for environment variables using a
-[`.env` file](env-file.md), which Compose will automatically look for. Values
+[`.env` file](../env-file.md), which Compose will automatically look for. Values
 set in the shell environment will override those set in the `.env` file.
 
     $ unset EXTERNAL_PORT
