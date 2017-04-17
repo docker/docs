@@ -34,7 +34,7 @@ To install Compose, do the following:
     The following is an example command illustrating the format:
 
     ```bash
-    $ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose --fail
     ```
 
     If you have problems installing with `curl`, see
@@ -80,7 +80,7 @@ Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
 ```bash
-$ curl -L https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose --fail
 $ chmod +x /usr/local/bin/docker-compose
 ```
 
