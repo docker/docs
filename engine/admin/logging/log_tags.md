@@ -40,9 +40,9 @@ the tags. If you use `docker rename` to rename a container, the new name is not
 reflected in the log messages. Instead, these messages continue to use the
 original container name.
 
-For advanced usage, the generated tag's use
+For advanced usage, the generated tags use
 [go templates](http://golang.org/pkg/text/template/) and the container's
-[logging context](https://github.com/docker/docker/blob/v1.13.0/daemon/logger/loginfo.go).
+[logging context](https://github.com/docker/docker/blob/master/daemon/logger/loginfo.go).
 
 As an example of what is possible with the syslog logger, if you use the following
 command, you get the output that follows:
