@@ -98,7 +98,7 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button darkblue-btn"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 
 You should be able to run `docker run hello-world` and see a response like this:
 
