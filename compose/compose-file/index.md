@@ -1432,6 +1432,8 @@ A full example:
       config:
         - subnet: 172.28.0.0/16
 
+> **Note:** Additional IPAM configurations (e.g. `gateway') are only acceptable for version 2 at the moment.
+
 ### internal
 
 By default, Docker also connects a bridge network to it to provide external
