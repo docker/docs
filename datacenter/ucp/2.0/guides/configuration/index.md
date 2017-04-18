@@ -39,11 +39,12 @@ and click **Certificates**.
 
 Upload your certificates and keys:
 
-* A ca.pem file with the root CA public certificate.
-* A cert.pem file with the TLS certificate and any intermediate CA public
+* A `ca.pem` file with the root CA public certificate followed by any intermediate CA public 
+certificates.
+* A `cert.pem` file with the TLS certificate and any intermediate public
 certificates. This certificate should also have SANs for all addresses used to
 access UCP, including load balancers.
-* A key.pem file with TLS private key.
+* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. Encrypted keys should have `ENCRYPTED` in the first line.
 
 Finally, click **Update** for the changes to take effect.
 
