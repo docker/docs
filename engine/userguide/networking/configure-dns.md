@@ -131,3 +131,5 @@ IPv6 Google DNS nameservers will also be added (2001:4860:4860::8888 and
 > **Note**: If you need access to a host's localhost resolver, you must modify
 > your DNS service on the host to listen on a non-localhost address that is
 > reachable from within the container.
+
+> **Note**: The DNS server is always at `127.0.0.11`.
