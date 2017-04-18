@@ -218,16 +218,18 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
 
 6.  If you don’t want to use sudo when you use the docker command, you can add 
     users to the `docker` group.
+
     ```bash
     $ sudo usermod -aG docker <username>
     ```
     
     Now apply group settings by running the following command.
+
     ```bash
     $ newgrp docker
     ```
 
-Docker is installed and running.
+    Docker is installed and running.
 
 
 #### Upgrade Docker
