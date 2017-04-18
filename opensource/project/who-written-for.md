@@ -9,13 +9,13 @@ title: README first
 This section of the documentation contains a guide for Docker users who want to
 contribute code or documentation to the Docker Engine project. As a community, we
 share rules of behavior and interaction. Make sure you are familiar with the <a
-href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md#docker-community-guidelines"
+href="https://github.com/moby/moby/blob/master/CONTRIBUTING.md#docker-community-guidelines"
 target="_blank">community guidelines</a> before continuing.
 
 ## Where and what you can contribute
 
 The Docker project consists of not just one but several repositories on GitHub.
-So, in addition to the `docker/docker` repository, there is the
+So, in addition to the `moby/moby` repository, there is the
 `docker/compose` repo, the `docker/machine` repo, and several more.
 Contribute to any of these and you contribute to the Docker project.
 
@@ -25,7 +25,7 @@ contributing to a Docker repository that has a language or a focus area you are
 familiar with.
 
 If you are new to the open source community, to Docker, or to formal
-programming, you should start out contributing to the `docker/docker`
+programming, you should start out contributing to the `moby/moby`
 repository. Why? Because this guide is written for that repository specifically.
 
 Finally, code or documentation isn't the only way to contribute. You can report

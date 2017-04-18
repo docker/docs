@@ -40,4 +40,4 @@ To find and claim an issue you want to work on:
 Go to next section to learn [Set up your Kitematic development
 environment](set_up_dev.md).
 
-(For more about working with open source issues in Docker, see <a href="/opensource/workflow/find-an-issue/" target="_blank">Find an issue</a> and <a href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md" target="_blank"> Docker Contributing Guidelines</a>.)
+(For more about working with open source issues in Docker, see <a href="/opensource/workflow/find-an-issue/" target="_blank">Find an issue</a> and <a href="https://github.com/moby/moby/blob/master/CONTRIBUTING.md" target="_blank"> Docker Contributing Guidelines</a>.)
