@@ -67,6 +67,7 @@ function checkNavSizes()
     var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
     sidebarObj.style.height = sidebarHeight + "px";
     document.getElementsByClassName("toc-nav")[0].style.height = tocNavHeight + "px";
+    document.getElementsByClassName("col-nav")[0].style.height = tocNavHeight + "px";
     $(sidebarObj).clearQueue().finish();
     setTimeout(highlightRightNav(currentHeading),1);
   }
