@@ -743,7 +743,7 @@ The `ENV` instruction sets the environment variable `<key>` to the value
 many as well.
 
 The `ENV` instruction has two forms. The first form, `ENV <key> <value>`,
-will set a single variable to a value. The entire string after the first
+will set a single variable to a value. The entire string after the second
 space will be treated as the `<value>` - including characters such as
 spaces and quotes.
 
