@@ -522,22 +522,22 @@ The `Data Space` values show that the pool is 100GB total. This example extends 
 
     a.  Get the pool name first.
 
-        ```bash
-        $ sudo dmsetup status | grep pool
+    ```bash
+    $ sudo dmsetup status | grep pool
 
-        docker-8:1-123141-pool: 0 209715200 thin-pool 91
-        422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
-        ```
+    docker-8:1-123141-pool: 0 209715200 thin-pool 91
+    422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
+    ```
 
-        The name is the string before the colon.
+    The name is the string before the colon.
 
     b.  Dump the device mapper table first.
 
-        ```bash
-        $ sudo dmsetup table docker-8:1-123141-pool
+    ```bash
+    $ sudo dmsetup table docker-8:1-123141-pool
 
-        0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
-        ```
+    0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+    ```
 
     c.  Calculate the real total sectors of the thin pool now.
 
@@ -548,11 +548,11 @@ The `Data Space` values show that the pool is 100GB total. This example extends 
 
     d.  Reload the thin pool with the new sector number
 
-        ```bash
-        $ sudo dmsetup suspend docker-8:1-123141-pool \
-        && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
-        && sudo dmsetup resume docker-8:1-123141-pool
-        ```
+    ```bash
+    $ sudo dmsetup suspend docker-8:1-123141-pool \
+    && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
+    && sudo dmsetup resume docker-8:1-123141-pool
+    ```
 
 #### The device_tool
 
@@ -596,43 +596,43 @@ disk partition.
 
     a.  Get the pool name.
 
-        ```bash
-        $ sudo dmsetup status | grep pool
+    ```bash
+    $ sudo dmsetup status | grep pool
 
-        docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
-        ```
+    docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
+    ```
 
-        The name is the string before the colon.
+    The name is the string before the colon.
 
     b.  Dump the device mapper table.
 
-        ```bash
-        $ sudo dmsetup table docker-253:17-1835016-pool
+    ```bash
+    $ sudo dmsetup table docker-253:17-1835016-pool
 
-        0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
-        ```
+    0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
+    ```
 
     c.  Calculate the real total sectors of the thin pool now. we can use `blockdev`
         to get the real size of data lv.
 
-        Change the second number of the table info (i.e. the number of sectors) to
-        reflect the new number of 512 byte sectors in the disk. For example, as the
-        new data `lv` size is `264132100096` bytes, change the second number to
-        `515883008`.
+    Change the second number of the table info (i.e. the number of sectors) to
+    reflect the new number of 512 byte sectors in the disk. For example, as the
+    new data `lv` size is `264132100096` bytes, change the second number to
+    `515883008`.
 
-        ```bash
-        $ sudo blockdev --getsize64 /dev/vg-docker/data
+    ```bash
+    $ sudo blockdev --getsize64 /dev/vg-docker/data
 
-        264132100096
-        ```
+    264132100096
+    ```
 
     d.  Then reload the thin pool with the new sector number.
 
-        ```bash
-        $ sudo dmsetup suspend docker-253:17-1835016-pool \
-          && sudo dmsetup reload docker-253:17-1835016-pool --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1        skip_block_zeroing' \
-          && sudo dmsetup resume docker-253:17-1835016-pool
-        ```
+    ```bash
+    $ sudo dmsetup suspend docker-253:17-1835016-pool \
+        && sudo dmsetup reload docker-253:17-1835016-pool --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1        skip_block_zeroing' \
+        && sudo dmsetup resume docker-253:17-1835016-pool
+    ```
 
 ## Device Mapper and Docker performance
 

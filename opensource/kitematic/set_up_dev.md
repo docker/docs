@@ -99,7 +99,7 @@ To clone your repository and create a branch for the issue:
     $ git clone https://github.com/YOUR_USERNAME/kitematic.git
     ```
 
-4. Create and checkout a branch for the issue you will be working on.
+4.  Create and checkout a branch for the issue you will be working on.
 
     ```
     $ git checkout -b 1191-branch
