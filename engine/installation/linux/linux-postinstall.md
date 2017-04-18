@@ -39,8 +39,10 @@ To create the `docker` group and add your user:
 3.  Log out and log back in so that your group membership is re-evaluated.
     If testing in a virtual machine, it may be necessary to restart the virtual machine
     for changes to take affect.
+    (On a desktop version of Linux, log out of your X Window
+    session completely and then log back in.)
 
-4.  Verify that you can `docker` commands without `sudo`.
+4.  Verify that you can run `docker` commands without `sudo`.
 
     ```bash
     $ docker run hello-world
