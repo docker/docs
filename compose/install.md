@@ -18,15 +18,12 @@ To install Compose, do the following:
 
     * [Other systems](/engine/installation/index.md){: target="_blank" class="_"}
 
-2.  Docker for Mac, Docker for Windows, and Docker Toolbox installs Docker Compose as part of those suites
-    along with Docker Engine and Docker Machine, so Mac and Windows users are done installing.
-    Others should continue to the next step.
+2.  Docker for Mac, Docker for Windows, and Docker Toolbox include Docker Compose, so Mac and Windows users do not need
+    to install Docker Compose separately.
 
-3.  The binaries for Compose are located at the
+3.  On Linux, you can download the Docker Compose binary from the
     [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
-
-4.  Follow the instructions from the release page and run the `curl` command,
-    which the release page specifies, in your terminal to download the binaries.
+    Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
 
     > **Note**: If you get a "Permission denied" error, your `/usr/local/bin` directory
     > probably isn't writable and you'll need to install Compose as the superuser. Run
