@@ -333,7 +333,7 @@ We did not distribute a 1.12.4 stable release
 **Upgrades**
 
 - [Docker 17.03.1-ce-rc1](https://github.com/moby/moby/releases/tag/v17.03.1-ce-rc1)
-- [Docker Credential Helpers 0.5.0](https://github.com/moby/moby-credential-helpers/releases/tag/v0.5.0)
+- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
 - Linux Kernel 4.9.14
 
 **Bug fixes and minor changes**
