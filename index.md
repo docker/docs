@@ -247,7 +247,35 @@ channel for more predictability.
 [Learn more about Docker EE](/engine/installation/#platform-support-matrix){: class="button outline-btn"}
 </div>
 </div><!-- end row -->
+## Docker Editions
 
+<div class="row">
+<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
+
+### Docker Enterprise Edition
+
+Designed for enterprise development and IT teams who build, ship, and run
+business critical applications in production at scale. Integrated, certified,
+and supported to provide enterprises with the most secure container platform in
+the industry to modernize all applications. Docker EE Advanced comes with enterprise
+[add-ons](#docker-ee-add-ons) like UCP and DTR.
+
+[Learn more about Docker EE](/engine/installation/#platform-support-matrix){: class="button outline-btn"}
+</div>
+
+<div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
+
+### Docker Community Edition
+
+Get started with Docker and experimenting with container-based apps. Docker CE
+is available on many platforms, from desktop to cloud to server. Build and share
+containers and automate the development pipeline from a single environment.
+Choose the Edge channel to get fast access to the latest features, or the Stable
+channel for more predictability.
+
+[Learn more about Docker EE](/engine/installation/#platform-support-matrix){: class="button outline-btn"}
+</div>
+</div><!-- end row -->
 
 ## Run Docker anywhere
 
