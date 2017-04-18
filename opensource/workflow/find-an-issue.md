@@ -146,8 +146,8 @@ class="gh-label expert">exp/expert</strong> issue.
 
 To claim an issue:
 
-1. Go to the `docker/docker` <a
-	href="https://github.com/docker/docker" target="_blank">repository</a>.
+1. Go to the `moby/moby` <a
+	href="https://github.com/moby/moby" target="_blank">repository</a>.
 
 2. Click the "Issues" tab.
 
@@ -180,10 +180,10 @@ bot, changes the issue status to claimed. The following example shows issue #110
 
 ## Sync your fork and create a new branch
 
-If you have followed along in this guide, you forked the `docker/docker`
+If you have followed along in this guide, you forked the `moby/moby`
 repository. Maybe that was an hour ago or a few days ago. In any case, before
 you start working on your issue, sync your repository with the upstream
-`docker/docker` master. Syncing ensures your repository has the latest
+`moby/moby` master. Syncing ensures your repository has the latest
 changes.
 
 To sync your repository:
@@ -202,17 +202,17 @@ To sync your repository:
 
     Recall that `origin/master` is a branch on your remote GitHub repository.
 
-4. Make sure you have the upstream remote `docker/docker` by listing them.
+4. Make sure you have the upstream remote `moby/moby` by listing them.
 
         $ git remote -v
         origin	https://github.com/moxiegirl/docker.git (fetch)
         origin	https://github.com/moxiegirl/docker.git (push)
-        upstream	https://github.com/docker/docker.git (fetch)
-        upstream	https://github.com/docker/docker.git (push)
+        upstream	https://github.com/moby/moby.git (fetch)
+        upstream	https://github.com/moby/moby.git (push)
 
     If the `upstream` is missing, add it.
 
-        $ git remote add upstream https://github.com/docker/docker.git
+        $ git remote add upstream https://github.com/moby/moby.git
 
 5. Fetch all the changes from the `upstream master` branch.
 
@@ -222,7 +222,7 @@ To sync your repository:
         remote: Total 141 (delta 52), reused 46 (delta 46), pack-reused 66
         Receiving objects: 100% (141/141), 112.43 KiB | 0 bytes/s, done.
         Resolving deltas: 100% (79/79), done.
-	    From github.com:docker/docker
+	    From github.com:moby/moby
 	     * branch            master     -> FETCH_HEAD
 
 7. Rebase your local master with the `upstream/master`.
