@@ -97,7 +97,7 @@ Timeouts occur when pulling the image takes more than 10 minutes. This can somet
 
 #### GitHub link
 
-<a href="https://github.com/docker/docker/issues/12823" target="_blank">docker/docker#12823</a>
+<a href="https://github.com/moby/moby/issues/12823" target="_blank">docker/docker#12823</a>
 
 #### Workaround
 

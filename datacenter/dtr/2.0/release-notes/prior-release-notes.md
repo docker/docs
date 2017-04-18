@@ -32,7 +32,7 @@ This release addresses the following issues in Docker Trusted Registry 1.4.2.
 
 * Fixed an issue where the Trusted Registry correctly updates team members after an LDAP sync. This removed duplication of users if they were moved to a different team.
 
-* Previously, if you started the Trusted Registry 1.4.2 with CS Engine 1.7.0 onwards, it might not start because `docker` might start the Trusted Registry containers in an order that makes [links impossible to create](https://github.com/docker/docker/issues/17118). Using CS Engine 1.9 and later with the latest Trusted Registry includes creation of a custom network that allows all containers to connect to each other without links. This means that every time the Trusted Registry starts up, there should be no error.
+* Previously, if you started the Trusted Registry 1.4.2 with CS Engine 1.7.0 onwards, it might not start because `docker` might start the Trusted Registry containers in an order that makes [links impossible to create](https://github.com/moby/moby/issues/17118). Using CS Engine 1.9 and later with the latest Trusted Registry includes creation of a custom network that allows all containers to connect to each other without links. This means that every time the Trusted Registry starts up, there should be no error.
 
     Also, when you upgrade CS Engine from 1.6 to 1.9 and the Trusted Registry admin server starts, it checks if it's running with links enabled. If that happens, the Trusted Registry restarts everything, creating the new network if necessary and removing the links, replacing them with a custom "dtr" network.
 

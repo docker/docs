@@ -28,7 +28,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+- [Docker Credential Helpers 0.4.2](https://github.com/moby/moby-credential-helpers/releases/tag/v0.4.2)
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (stable)
 
@@ -40,7 +40,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker 17.03.0-ce](https://github.com/moby/moby/releases/tag/v17.03.0-ce)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
 - [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - Linux kernel 4.9.12
@@ -76,7 +76,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker 1.13.1](https://github.com/moby/moby/releases/tag/v1.13.1)
 - [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
 - Linux kernel 4.9.8
 
@@ -91,7 +91,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker 1.13.0](https://github.com/moby/moby/releases/tag/v1.13.0)
 - [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
 - [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
 - [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)
@@ -339,7 +339,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
+- [Docker 17.05.0-ce-rc1](https://github.com/moby/moby/releases/tag/v17.05.0-ce-rc1)
 
 
 ### Docker Community Edition 17.04.0-ce-mac7, 2017-04-06 (edge)
@@ -349,7 +349,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker 17.04.0-ce](https://github.com/docker/docker/releases/tag/v17.04.0-ce)
+- [Docker 17.04.0-ce](https://github.com/moby/moby/releases/tag/v17.04.0-ce)
 - [Docker Compose 1.12.0](https://github.com/docker/compose/releases/tag/1.12.0)
 - Linux Kernel 4.9.19
 
@@ -364,8 +364,8 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker 17.03.1-ce-rc1](https://github.com/docker/docker/releases/tag/v17.03.1-ce-rc1)
-- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
+- [Docker 17.03.1-ce-rc1](https://github.com/moby/moby/releases/tag/v17.03.1-ce-rc1)
+- [Docker Credential Helpers 0.5.0](https://github.com/moby/moby-credential-helpers/releases/tag/v0.5.0)
 - Linux Kernel 4.9.14
 
 **Bug fixes and minor changes**
@@ -386,7 +386,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+- [Docker Credential Helpers 0.4.2](https://github.com/moby/moby-credential-helpers/releases/tag/v0.4.2)
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (edge)
 
@@ -398,7 +398,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker 17.03.0-ce](https://github.com/moby/moby/releases/tag/v17.03.0-ce)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
 - [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - Linux Kernel 4.9.12
@@ -447,7 +447,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- [Docker 1.13.1-rc1](https://github.com/moby/moby/releases/tag/v1.13.1-rc1)
 - Linux kernel 4.9.6
 
 **New**
@@ -485,14 +485,14 @@ events or unexpected unmounts.
 - Fix bug where update window hides when app not focused
 - Limit vCPUs to 16 ([docker/for-mac#1144](https://github.com/docker/for-mac/issues/1144))
 - Fix for swap not being mounted
-- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/docker/docker/issues/30245))
+- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/moby/moby/issues/30245))
 
 
 ### Beta 38 Release Notes (2017-01-20 1.13.0-beta38)
 
 **Upgrades**
 
-- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker 1.13.0](https://github.com/moby/moby/releases/tag/v1.13.0)
 - [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
 - [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
 - [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)

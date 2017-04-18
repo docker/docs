@@ -29,7 +29,7 @@ progressively
 
 **Upgrades**
 
-- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker 17.03.0-ce](https://github.com/moby/moby/releases/tag/v17.03.0-ce)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
 - [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - Linux kernel 4.9.12
@@ -56,7 +56,7 @@ progressively
 
 **Upgrades**
 
-- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker 1.13.1](https://github.com/moby/moby/releases/tag/v1.13.1)
 - [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
 - Linux kernel 4.9.8
 
@@ -71,7 +71,7 @@ progressively
 
 **Upgrades**
 
-- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker 1.13.0](https://github.com/moby/moby/releases/tag/v1.13.0)
 - [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
 - [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
 - [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)
@@ -307,7 +307,7 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
+- [Docker 17.05.0-ce-rc1](https://github.com/moby/moby/releases/tag/v17.05.0-ce-rc1)
 
 
 
@@ -320,7 +320,7 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- [Docker 17.04.0-ce](https://github.com/docker/docker/releases/tag/v17.04.0-ce)
+- [Docker 17.04.0-ce](https://github.com/moby/moby/releases/tag/v17.04.0-ce)
 - [Docker Compose 1.12.0](https://github.com/docker/compose/releases/tag/1.12.0)
 - Linux Kernel 4.9.19
 
@@ -332,8 +332,8 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- [Docker 17.03.1-ce-rc1](https://github.com/docker/docker/releases/tag/v17.03.1-ce-rc1)
-- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
+- [Docker 17.03.1-ce-rc1](https://github.com/moby/moby/releases/tag/v17.03.1-ce-rc1)
+- [Docker Credential Helpers 0.5.0](https://github.com/moby/moby-credential-helpers/releases/tag/v0.5.0)
 - Linux Kernel 4.9.14
 
 **Bug fixes and minor changes**
@@ -349,7 +349,7 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker 17.03.0-ce](https://github.com/moby/moby/releases/tag/v17.03.0-ce)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
 - [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - Linux Kernel 4.9.12
@@ -401,7 +401,7 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- [Docker 1.13.1-rc1](https://github.com/moby/moby/releases/tag/v1.13.1-rc1)
 - Linux kernel 4.9.6
 
 **Bug fixes and minor improvements**
@@ -431,13 +431,13 @@ We did not distribute a 1.12.4 stable release
 
 - Fix some timeout issues in port forwarding
 - Fix for swap not being mounted ([docker/for-win#403](https://github.com/docker/for-win/issues/403))
-- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/docker/docker/issues/30245))
+- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/moby/moby/issues/30245))
 
 ### Beta 38 Release Notes (2017-01-20 1.13.0-beta38)
 
 **Upgrades**
 
-- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker 1.13.0](https://github.com/moby/moby/releases/tag/v1.13.0)
 - [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
 - [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
 - [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)

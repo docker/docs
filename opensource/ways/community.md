@@ -28,7 +28,7 @@ target="_blank">Docker Community Forum</a>
 *  <a href="http://stackoverflow.com/search?tab=newest&q=docker"
 target="_blank">StackOverflow</a>
 
-You can also check the <a href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee" target="_blank">list of
+You can also check the <a href="https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee" target="_blank">list of
 open user questions</a> on the Docker project.
 
 
