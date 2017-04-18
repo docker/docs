@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 4: Swarms"
+keywords: swarms, scale, cluster, machine, vm, manager, deploy, ssh, orchestration
+description: Learn how to create clusters of Dockerized machines.
 ---
 {% include_relative nav.html selected="4" %}
 
@@ -61,7 +63,7 @@ You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
 this:
 
-```node
+```
 $ docker-machine ssh myvm1 "docker swarm init"
 Swarm initialized: current node <node ID> is now a manager.
 
@@ -237,7 +239,8 @@ any machine, physical or virtual, to this swarm, using the same
 your cluster; just run `docker stack deploy` afterwards and your app will take
 advantage of the new resources.
 
-[On to Part 5 >>](part5.md){: class="button outline-btn"}
+[On to Part 5 >>](part5.md){: class="button outline-btn" style="margin-bottom: 30px"}
+
 
 ## Recap and cheat sheet (optional)
 
@@ -255,7 +258,7 @@ your app on a cluster.
 
 Here are some commands you might like to run to interact with your swarm a bit:
 
-```
+```shell
 docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
 docker-machine env myvm1                # View basic information about your node

@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 3: Services"
+keywords: services, replicas, scale, ports, compose, compose file, stack, networking
+description: Learn how to define load-balanced and scalable service that runs containers. 
 ---
 {% include_relative nav.html selected="3" %}
 
@@ -144,7 +146,7 @@ can be uploaded to cloud providers using [Docker Cloud](/docker-cloud/), or on
 any hardware or cloud provider you choose with [Docker Enterprise
 Edition](https://www.docker.com/enterprise-edition).
 
-[On to "Part 4" >>](part4.md){: class="button outline-btn"}
+[On to "Part 4" >>](part4.md){: class="button outline-btn" style="margin-bottom: 30px"}
 
 ## Recap and cheat sheet (optional)
 
@@ -161,7 +163,7 @@ it runs, using the same command that launched the service:
 
 Some commands to explore at this stage:
 
-```
+```shell
 docker stack ls              # List all running applications on this Docker host
 docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
 docker stack services <appname>       # List the services associated with an app

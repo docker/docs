@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 1: Orientation and Setup"
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers
+description: Get oriented on some basics of Docker before diving into the walkthrough.
 redirect_from:
 - /engine/getstarted/
 - /learn/
@@ -129,7 +131,7 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%"}
 
 You should be able to run `docker run hello-world` and see a response like this:
 
@@ -154,4 +156,4 @@ density is increased, and orchestrating scaling behavior is a matter of spinning
 up new executables, not new VM hosts. We'll be learning about all of those
 things, but first let's learn to walk.
 
-[On to Part 2 >>](part2.md){: class="button outline-btn"}
+[On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}

@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 2: Containers"
+keywords: containers, python, code, coding, build, push, run
+description: Learn how to write, build, and run a simple app -- the Docker way.
 ---
 
 {% include_relative nav.html selected="2" %}
@@ -57,7 +59,7 @@ after doing that, you can expect that the build of your app defined in this
 Create an empty directory and put this file in it, with the name `Dockerfile`.
 Take note of the comments that explain each statement.
 
-```
+```conf
 # Use an official Python runtime as a base image
 FROM python:2.7-slim
 
@@ -276,7 +278,8 @@ install anything but Docker to run it.
 That's all for this page. In the next section, we will learn how to scale our
 application by running this container in a **service**.
 
-[Continue to Part 3 >>](part3.md){: class="button outline-btn"}
+[Continue to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px"}
+
 
 ## Recap and cheat sheet (optional)
 

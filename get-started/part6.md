@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 6: Deploy your app"
+keywords: deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise
+description: Deploy your app to production using Docker CE or EE.
 ---
 {% include_relative nav.html selected="6" %}
 
@@ -17,7 +19,7 @@ title: "Get Started, Part 6: Deploy your app"
   ```
   docker run -p 80:80 username/repo:tag
   ```
-- Have a copy of your `docker-compose.yml` from [Part 5](part5.md) handy.
+- Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5/#persisting-data) handy.
 
 ## Introduction
 

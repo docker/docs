@@ -1,5 +1,7 @@
 ---
 title: "Get Started, Part 5: Stacks"
+keywords: stack, data, persist, dependencies, redis, storage, volume, port
+description: Learn how to create a multi-container application that uses all the machines in a cluster.
 ---
 
 {% include_relative nav.html selected="5" %}
@@ -48,7 +50,7 @@ a free visualizer service that lets us look at how our swarm is scheduling
 containers. Open up `docker-compose.yml` in an editor and replace its contents
 with the following:
 
-```
+```yaml
 version: "3"
 services:
   web:
@@ -129,7 +131,7 @@ counter.
 Go through the same workflow once more. Save this new `docker-compose.yml` file,
 which finally adds a Redis service.
 
-```
+```yaml
 version: "3"
 services:
   web:
@@ -213,7 +215,7 @@ $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstarted
 Check the results on http://localhost and you'll see that a visitor counter is
 now live and storing information on Redis.
 
-[On to Part 6 >>](part6.md){: class="button outline-btn"}
+[On to Part 6 >>](part6.md){: class="button outline-btn" style="margin-bottom: 30px"}
 
 ## Recap (optional)
 
