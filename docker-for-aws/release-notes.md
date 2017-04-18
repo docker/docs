@@ -16,7 +16,7 @@ Release date: 03/30/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Updated AZ for Sao Paulo
 
 ### 17.03.0 CE
@@ -25,7 +25,7 @@ Release date: 03/01/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Added r4 EC2 instance types
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
@@ -35,7 +35,7 @@ Release date: 02/08/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 
 ### 1.13.0-1
 
@@ -43,7 +43,7 @@ Release date: 01/18/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Change ELB health check from TCP to HTTP
 
 ## Edge Channel
@@ -56,7 +56,7 @@ Release date: 04/06/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Added lambda support for Mumbai
 - Removed the ELB Name to allow for longer stack names
 - Added i3 EC2 instance types
@@ -70,7 +70,7 @@ Release date: 03/01/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Added r4 EC2 instance types
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 - Added alias to `Cloudstor` plugin to make it easier on upgrades.
@@ -81,7 +81,7 @@ Release date: 02/16/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Added a second CloudFormation template that allows you to [install Docker for AWS into a pre-existing VPC](index.md#install-into-an-existing-vpc).
 - Added Swarm wide support for [persistent storage volumes](persistent-data-volumes.md)
 - Added the following engine labels
@@ -97,7 +97,7 @@ Release date: 02/07/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1-rc2](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1-rc2](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 
 ### 1.13.1-rc1-beta16
 
@@ -105,7 +105,7 @@ Release date: 02/01/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1-rc1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1-rc1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc5-beta15
 
@@ -113,7 +113,7 @@ Release date: 01/10/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc5](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc5](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc4-beta14
 
@@ -121,7 +121,7 @@ Release date: 12/21/2016
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc4](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc4](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Previously we always only used 2 Availability Zones per region, even if the region had more. We now dynamically pick the best number of Availability Zones to use based on the region. If a region only has two AZs it will only use 2. If it has three or more, it will use 3
 - Changed the AutoScaleGroup HealthCheck from an EC2 check to an ELB check
 - Removed password prompt when ssh key is invalid
@@ -135,7 +135,7 @@ Release date: 12/06/2016
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc3](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc3](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - New option to decide if you want to send container logs to CloudWatch. (previously it was always on)
 - SSH access has been added to the worker nodes
 - The Docker daemon no longer listens on port 2375
@@ -147,7 +147,7 @@ Release date: 11/23/2016
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc2](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc2](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - New option to cleanup unused resources on your Swarm using new Docker prune command available in 1.13
 - New option to pick the size of the ephemeral storage volume size on workers and managers
 - New option to pick the disk type for the ephemeral storage on workers and managers
@@ -160,7 +160,7 @@ Release date: 11/17/2016
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
 - Changes to port 2375 access. For security reasons we locked down access to port 2375 in the following ways.
     - You can't connect to port 2375 on managers from workers (changed)
     - You can't connect to port 2375 on workers from other workers (changed)
