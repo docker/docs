@@ -73,7 +73,7 @@ To do this, edit the container `General Settings` layout.
     $ git commit -s -m "added container ID to show on settings tab, fixes issue #1191"
     ```
 
-    (See <a href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md#coding-style" target="_blank">Coding Style</a> in the general guidelines on <a href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md" target="_blank">Contributing to Docker</a>.)
+    (See <a href="https://github.com/moby/moby/blob/master/CONTRIBUTING.md#coding-style" target="_blank">Coding Style</a> in the general guidelines on <a href="https://github.com/moby/moby/blob/master/CONTRIBUTING.md" target="_blank">Contributing to Docker</a>.)
 
 ## Where to go next
 

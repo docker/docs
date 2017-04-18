@@ -6,7 +6,7 @@ title: Swarm mode overview
 
 To use Docker Engine in swarm mode, install the Docker Engine `v1.12.0` or
 later from the [Docker releases GitHub
-repository](https://github.com/docker/docker/releases). Alternatively, install
+repository](https://github.com/moby/moby/releases). Alternatively, install
 the latest Docker for Mac or Docker for Windows Beta.
 
 Docker Engine 1.12 includes swarm mode for natively managing a cluster of
