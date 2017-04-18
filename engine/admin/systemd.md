@@ -62,6 +62,8 @@ To accomplish this, set the following flags in the `daemon.json` file:
 
 ### HTTP proxy
 
+>**Note:** The same instructions work for `HTTS_PROXY` as well.
+
 The Docker daemon uses the `HTTP_PROXY` and `NO_PROXY` environmental variables in
 its start-up environment to configure HTTP proxy behavior. You cannot configure
 these environment variables using the `daemon.json` file.

@@ -93,7 +93,7 @@ docker-machine version 0.10.0, build 76ed2a6
     want to keep some images around so that you don't have to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
-**Want more example applications?** [Learn Docker](/learn.md) is a great place to start.
+**Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
 
 ## Preferences
 
@@ -382,13 +382,7 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
 ## Where to go next
 
-* Try out the tutorials and sample app walkthroughs at [Learn Docker](/learn.md), including:
-
-  *  Learn Docker basics in [Getting Started with Docker](/engine/getstarted/index.md)
-
-  * Learn how to [define and deploy a Docker stack to a swarm](/engine/getstarted-voting-app/index.md)
-  (deploy multiple containers as services and use new
-    Compose Version 3 features)
+* Try out the walkthrough at [Get Started](/get-started/).
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
   walkthroughs and source code.
