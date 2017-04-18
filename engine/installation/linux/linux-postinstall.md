@@ -99,11 +99,11 @@ your host's Linux distribution and available kernel drivers.
 
 Docker will not run correctly if your kernel is older than version 3.10 or if it
 is missing some modules. To check kernel compatibility, you can download and
-run the [`check-compatibility.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
+run the [`check-compatibility.sh`](https://raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh)
 script.
 
 ```bash
-$ curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
+$ curl https://raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh > check-config.sh
 
 $ bash ./check-config.sh
 ```
