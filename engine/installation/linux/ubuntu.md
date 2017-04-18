@@ -93,115 +93,120 @@ the repository.
 
 #### Set up the repository
 
-The procedure for setting up the repository is different for [Docker CE](#docker-ce) and
-[Docker EE](#docker-ee).
+The procedure for setting up the repository is different for Docker CE and
+Docker EE.
 
-##### Docker CE
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-repo-setup">Docker CE</a></li>
+  <li><a data-toggle="tab" data-group="ee" data-target="#ee-repo-setup">Docker EE</a></li>
+</ul>
+<div class="tab-content">
+  <div id="ce-repo-setup" class="tab-pane fade in active" markdown="1">
+  {% assign download-url-base = "https://download.docker.com/linux/ubuntu" %}
 
-{% assign download-url-base = "https://download.docker.com/linux/ubuntu" %}
+  1.  Install packages to allow `apt` to use a repository over HTTPS:
 
-1.  Install packages to allow `apt` to use a repository over HTTPS:
+      ```bash
+      $ sudo apt-get install \
+          apt-transport-https \
+          ca-certificates \
+          curl \
+          software-properties-common
+      ```
 
-    ```bash
-    $ sudo apt-get install \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        software-properties-common
-    ```
+  2.  Add Docker's official GPG key:
 
-2.  Add Docker's official GPG key:
+      ```bash
+      $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
+      ```
 
-    ```bash
-    $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
-    ```
+      Verify that the key fingerprint is `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`.
 
-    Verify that the key fingerprint is `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`.
+      ```bash
+      $ sudo apt-key fingerprint 0EBFCD88
 
-    ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
+      pub   4096R/0EBFCD88 2017-02-22
+            Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+      uid                  Docker Release (CE deb) <docker@docker.com>
+      sub   4096R/F273FCD8 2017-02-22
+      ```
 
-    pub   4096R/0EBFCD88 2017-02-22
-          Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid                  Docker Release (CE deb) <docker@docker.com>
-    sub   4096R/F273FCD8 2017-02-22
-    ```
+  3.  Use the following command to set up the **stable** repository. You always
+      need the **stable** repository, even if you want to install **edge** builds
+      as well.
 
-3.  Use the following command to set up the **stable** repository. You always
-    need the **stable** repository, even if you want to install **edge** builds
-    as well.
+      > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+      > Ubuntu distribution, such as `xenial`.
+      >
+      > Sometimes, in a distribution like Linux Mint, you might have to change
+      > `$(lsb_release -cs)` to your parent Ubuntu distribution. For
+      > example: If you are using `Linux Mint Rafaela`, you could use
+      > `trusty`.
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`.
-    >
-    > Sometimes, in a distribution like Linux Mint, you might have to change
-    > `$(lsb_release -cs)` to your parent Ubuntu distribution. For
-    > example: If you are using `Linux Mint Rafaela`, you could use
-    > `trusty`.
+      **amd64**:
 
-    **amd64**:
+      ```bash
+      $ sudo add-apt-repository \
+         "deb [arch=amd64] {{ download-url-base }} \
+         $(lsb_release -cs) \
+         stable"
+      ```
 
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
+      **armhf**:
 
-    **armhf**:
+      ```bash
+      $ sudo add-apt-repository \
+         "deb [arch=armhf] {{ download-url-base }} \
+         $(lsb_release -cs) \
+         stable"
+      ```
 
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
+      [Learn about **stable** and **edge** channels](/engine/installation/).
+  </div>
+  <div id="ee-repo-setup" class="tab-pane fade" markdown="1">
+  1.  Install packages to allow `apt` to use a repository over HTTPS:
 
-    [Learn about **stable** and **edge** channels](/engine/installation/).
+      ```bash
+      $ sudo apt-get install \
+          apt-transport-https \
+          ca-certificates \
+          curl \
+          software-properties-common
+      ```
 
-##### Docker EE
+  2.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
-1.  Install packages to allow `apt` to use a repository over HTTPS:
+      ```bash
+      $ curl -fsSL <DOCKER-EE-URL>/gpg | sudo apt-key add -
+      ```
 
-    ```bash
-    $ sudo apt-get install \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        software-properties-common
-    ```
+      Verify that the key fingerprint is `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
 
-2.  Add Docker's official GPG key using your customer Docker EE repository URL:
+      ```bash
+      $ apt-key fingerprint 0EBFCD88
 
-    ```bash
-    $ curl -fsSL <DOCKER-EE-URL>/gpg | sudo apt-key add -
-    ```
+      pub   4096R/6D085F96 2017-02-22
+          Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
+      uid       [ultimate] Docker Release (EE deb) <docker@docker.com>
+      sub   4096R/91A29FA3 2017-02-22
+      ```
 
-    Verify that the key fingerprint is `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
+  3.  Use the following command to set up the **stable** repository, replacing
+      `<DOCKER-EE-URL>` with the URL you noted down in the
+      [prerequisites](#prerequisites).
 
-    ```bash
-    $ apt-key fingerprint 0EBFCD88
+      > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+      > Ubuntu distribution, such as `xenial`.
+      >
 
-    pub   4096R/6D085F96 2017-02-22
-        Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
-    uid       [ultimate] Docker Release (EE deb) <docker@docker.com>
-    sub   4096R/91A29FA3 2017-02-22
-    ```
-
-3.  Use the following command to set up the **stable** repository, replacing
-    `<DOCKER-EE-URL>` with the URL you noted down in the
-    [prerequisites](#prerequisites).
-
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`.
-    >
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=amd64] <DOCKER-EE-URL> \
-       $(lsb_release -cs) \
-       stable-{{ minor-version }}"
-    ```
+      ```bash
+      $ sudo add-apt-repository \
+         "deb [arch=amd64] <DOCKER-EE-URL> \
+         $(lsb_release -cs) \
+         stable-{{ minor-version }}"
+      ```
+  </div>
+</div>
 
 #### Install Docker
 
@@ -216,10 +221,26 @@ The procedure for setting up the repository is different for [Docker CE](#docker
 
     Use this command to install the latest version of Docker:
 
-    | Docker Edition | Command                             |
-    |----------------|-------------------------------------|
-    | Docker CE      | `sudo apt-get install docker-ce`    |
-    | Docker EE      | `sudo apt-get install docker-ee`    |
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-install-docker">Docker CE</a></li>
+      <li><a data-toggle="tab" data-group="ee" data-target="#ee-install-docker">Docker EE</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="ce-install-docker" class="tab-pane fade in active" markdown="1">
+
+    ```bash
+    $ sudo apt-get install docker-ce
+    ```
+
+    </div>
+    <div id="ee-install-docker" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo apt-get install docker-ee
+    ```
+
+    </div>
+    </div>
 
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
@@ -246,10 +267,26 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     by extension its stability level. To install a specific version, append the
     version string to the package name and separate them by an equals sign (`=`):
 
-    | Docker Edition | Command                                       |
-    |----------------|-----------------------------------------------|
-    | Docker CE      | `sudo apt-get install docker-ce=<VERSION>`    |
-    | Docker EE      | `sudo apt-get install docker-ee=<VERSION>`    |
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-install-version-docker">Docker CE</a></li>
+      <li><a data-toggle="tab" data-group="ee" data-target="#ee-install-version-docker">Docker EE</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="ce-install-version-docker" class="tab-pane fade in active" markdown="1">
+
+    ```bash
+    $ sudo apt-get install docker-ce=<VERSION>
+    ```
+
+    </div>
+    <div id="ee-install-version-docker" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo apt-get install docker-ee=<VERSION>
+    ```
+
+    </div>
+    </div>
 
     The Docker daemon starts automatically.
 
@@ -282,20 +319,32 @@ a new file each time you want to upgrade Docker.
 
 1.  This step is different for Docker CE and Docker EE.
 
-    - **Docker CE**: Go to
-      [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-      Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
-      `armhf`,and download the `.deb` file for the Docker version you want to
-      install and for your version of Ubuntu.
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-install-from-package-docker">Docker CE</a></li>
+      <li><a data-toggle="tab" data-group="ee" data-target="#ee-install-from-package-docker">Docker EE</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="ce-install-from-package-docker" class="tab-pane fade in active" markdown="1">
+
+    Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
+    Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+    `armhf`,and download the `.deb` file for the Docker version you want to
+    install and for your version of Ubuntu.
 
       > **Note**: To install an **edge**  package, change the word
       > `stable` in the  URL to `edge`.
       > [Learn about **stable** and **edge** channels](/engine/installation/).
 
-    - **Docker EE**: Go to the Docker EE repository URL associated with your
-      trial or subscription in your browser. Go to
-      `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
-      Docker version you want to install.
+    </div>
+    <div id="ee-install-from-package-docker" class="tab-pane fade" markdown="1">
+
+    Go to the Docker EE repository URL associated with your
+    trial or subscription in your browser. Go to
+    `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+    Docker version you want to install.
+
+    </div>
+    </div>
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.
@@ -330,10 +379,26 @@ To upgrade Docker, download the newer package file and repeat the
 
 1.  Uninstall the Docker package:
 
-    | Docker Edition | Command                        |
-    |----------------|--------------------------------|
-    | Docker CE      | `sudo apt-get purge docker-ce` |
-    | Docker EE      | `sudo apt-get purge docker-ee` |
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-uninstall-version-docker">Docker CE</a></li>
+      <li><a data-toggle="tab" data-group="ee" data-target="#ee-uninstall-version-docker">Docker EE</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="ce-uninstall-version-docker" class="tab-pane fade in active" markdown="1">
+
+    ```bash
+    $ sudo apt-get purge docker-ce
+    ```
+
+    </div>
+    <div id="ee-uninstall-version-docker" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo apt-get purge docker-ee
+    ```
+
+    </div>
+    </div>
 
 2.  Images, containers, volumes, or customized configuration files on your host
     are not automatically removed. To delete all images, containers, and
