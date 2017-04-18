@@ -22,7 +22,7 @@ the project contributor guide. You should also have
 A refactor or cleanup proposal changes Docker's internal structure without
 altering the external behavior. To make this type of proposal:
 
-1. Fork `docker/docker`.
+1. Fork `moby/moby`.
 
 2. Make your changes in a feature branch.
 
@@ -68,13 +68,14 @@ The following provides greater detail on the process:
     The design proposals are
     [all online in our GitHub pull requests](https://github.com/docker/docker.github.io/pulls).
 
+
 3.  Talk to the community about your idea.
 
     We have lots of [community forums](https://forums.docker.com){: target="_blank" class="_"}
     where you can get feedback on your idea. Float your idea in a forum or two
     to get some commentary going on it.
 
-4. Fork `docker/docker` and clone the repo to your local host.
+4. Fork `moby/moby` and clone the repo to your local host.
 
 5. Create a new Markdown file in the area you wish to change.
 
@@ -96,7 +97,7 @@ The following provides greater detail on the process:
 
     This is your chance to convince people your idea is sound.
 
-8. Submit your proposal in a pull request to `docker/docker`.
+8. Submit your proposal in a pull request to `moby/moby`.
 
     The title should have the format:
 
@@ -120,14 +121,14 @@ The following provides greater detail on the process:
 
     Implementation uses all the standard practices of any contribution.
 
-    * fork `docker/docker`
+    * fork `moby/moby`
     * create a feature branch
     * sync frequently back to master
     * test as you go and full test before a PR
 
     If you run into issues, the community is there to help.
 
-12. When you have a complete implementation, submit a pull request back to `docker/docker`.
+12. When you have a complete implementation, submit a pull request back to `moby/moby`.
 
 13. Review and iterate on your code.
 

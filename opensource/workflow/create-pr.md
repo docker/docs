@@ -6,9 +6,9 @@ title: Create a pull request (PR)
 
 A pull request (PR) sends your changes to the Docker maintainers for review. You
 create a pull request on GitHub. A pull request "pulls" changes from your forked
-repository into the `docker/docker` repository.
+repository into the `moby/moby` repository.
 
-You can see <a href="https://github.com/docker/docker/pulls" target="_blank">the
+You can see <a href="https://github.com/moby/moby/pulls" target="_blank">the
 list of active pull requests to Docker</a> on GitHub.
 
 ## Check your work
@@ -41,10 +41,10 @@ Always rebase and squash your commits before making a pull request.
 
     This is the branch associated with your request.
 
-2. Fetch any last minute changes from `docker/docker`.
+2. Fetch any last minute changes from `moby/moby`.
 
         $ git fetch upstream master
-        From github.com:docker/docker
+        From github.com:moby/moby
          * branch            master     -> FETCH_HEAD
 
 3. Start an interactive rebase.
@@ -97,7 +97,7 @@ You create and manage PRs on GitHub:
     ![PR dialog](images/to_from_pr.png)
 
     The pull request compares your changes to the `master` branch on the
-    `docker/docker` repository.
+    `moby/moby` repository.
 
 3. Edit the dialog's description and add a reference to the issue you are fixing.
 
@@ -114,7 +114,7 @@ You create and manage PRs on GitHub:
 
 5. Press "Create pull request".
 
-    The system creates the request and opens it for you in the `docker/docker`
+    The system creates the request and opens it for you in the `moby/moby`
     repository.
 
     ![Pull request made](images/pull_request_made.png)

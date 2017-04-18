@@ -43,7 +43,7 @@ What to look for:
  * Are the steps in the right order?
  * Did you get the results the procedure or example said you would?
 
-## Step 3.  If you couldn't complete the procedure or example, file <a href="https://github.com/docker/docker/issues/new" target="_blank">an issue in the Docker repo</a>.
+## Step 3.  If you couldn't complete the procedure or example, file <a href="https://github.com/moby/moby/issues/new" target="_blank">an issue in the Docker repo</a>.
 
 # Test code in the Docker
 
