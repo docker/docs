@@ -14,11 +14,15 @@ Options:
 
 Pushes images for services to their respective `registry/repository`.
 
-_Note: It is assumed you are building the image and should have the `build` key._
+The following assumptions are made:
 
-For example
+- You are pushing an image you have built locally
 
-```
+- You have access to the build key
+
+## Example
+
+```yaml
 version: '3'
 services:
   service1:
