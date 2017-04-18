@@ -201,8 +201,8 @@ to the file:
 
    [[Extensions]]
    Name = "nginx"
-   ConfigPath = "/etc/conf/nginx.conf"
-   PidPath = "/etc/conf/nginx.pid"
+   ConfigPath = "/etc/nginx/nginx.conf"
+   PidPath = "/var/run/nginx.pid"
    MaxConn = 1024
    Port = 80
    ```
