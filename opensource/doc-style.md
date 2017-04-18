@@ -203,11 +203,14 @@ Text from a CLI should be quoted verbatim, even if it contains errors or its
 style contradicts this guide. You can add "(sic)" after the quote to indicate
 the errors are in the quote and are not errors in our docs.
 
-Text taken from a GUI (e.g., menu text or button text) should be made bold.
-The text should take the exact same capitalisation, etc. as appears in
-the GUI. E.g., Click **Continue** to save the settings.
+Text taken from a GUI, such as menu text or button text, should be bold.
+Use the text exactly as it appears in the GUI. For example:
 
-Text that refers to a keyboard command or hotkey is capitalized (e.g., Ctrl-D).
+```none
+Click **Continue** to save the settings.
+```
+
+Text that refers to a keyboard command or hotkey should be capitalized and bold. For example: **Ctrl-D**.
 
 When writing CLI examples, give the user hints by making the examples resemble
 exactly what they see in their shell:
