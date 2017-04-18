@@ -42,7 +42,8 @@ original container name.
 
 For advanced usage, the generated tag's use
 [go templates](http://golang.org/pkg/text/template/) and the container's
-[logging context](https://github.com/docker/docker/blob/17.05.x/daemon/logger/loginfo.go).
+
+[logging context](https://github.com/moby/moby/blob/v1.13.0/daemon/logger/loginfo.go).
 
 As an example of what is possible with the syslog logger, if you use the following
 command, you get the output that follows:
