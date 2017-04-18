@@ -28,7 +28,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- [Docker Credential Helpers 0.4.2](https://github.com/moby/moby-credential-helpers/releases/tag/v0.4.2)
+- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (stable)
 
@@ -365,7 +365,7 @@ events or unexpected unmounts.
 **Upgrades**
 
 - [Docker 17.03.1-ce-rc1](https://github.com/moby/moby/releases/tag/v17.03.1-ce-rc1)
-- [Docker Credential Helpers 0.5.0](https://github.com/moby/moby-credential-helpers/releases/tag/v0.5.0)
+- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
 - Linux Kernel 4.9.14
 
 **Bug fixes and minor changes**
@@ -386,7 +386,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- [Docker Credential Helpers 0.4.2](https://github.com/moby/moby-credential-helpers/releases/tag/v0.4.2)
+- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (edge)
 
