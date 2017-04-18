@@ -147,10 +147,10 @@ You should pull and rebase frequently as you work.
 1. Return to the terminal on your local machine and checkout your
     feature branch in your local `docker-fork` repository.
 
-2. Fetch any last minute changes from `docker/docker`.
+2. Fetch any last minute changes from `moby/moby`.
 
         $ git fetch upstream master
-        From github.com:docker/docker
+        From github.com:moby/moby
          * branch            master     -> FETCH_HEAD
 
 3. Start an interactive rebase.
