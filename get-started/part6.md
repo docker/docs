@@ -95,7 +95,7 @@ via UI using Universal Control Plane, run a private image registry with Docker
 Trusted Registry, integrate with your LDAP provider, sign production images with
 Docker Content Trust, and many other features.
 
-[Take a tour of Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: class="button outline-btn" onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Take tour');"}
+[Take a tour of Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: class="button outline-btn" onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Take tour');" style="margin-bottom: 30px; margin-right:50%"}
 {% endcapture %}
 {% capture enterprisedeployapp %}
 Once you're all set up and Datacenter is running, you can [deploy your Compose
