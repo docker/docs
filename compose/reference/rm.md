@@ -12,7 +12,6 @@ Options:
     -f, --force   Don't ask to confirm removal
     -s, --stop    Stop the containers, if required, before removing
     -v            Remove any anonymous volumes attached to containers
-    -a, --all     Deprecated - no effect.
 ```
 
 Removes stopped service containers.
@@ -31,6 +30,3 @@ Going to remove djangoquickstart_web_run_1
 Are you sure? [yN] y
 Removing djangoquickstart_web_run_1 ... done
 ```
->**Note**: 
-> The `--all` or the `-a` option is obselete. It's now the default behavior of
-`docker-compose rm`.
