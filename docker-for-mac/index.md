@@ -9,6 +9,7 @@ redirect_from:
 - /docker-for-mac/started/
 - /installation/mac/
 - /engine/installation/mac/
+- /docker-for-mac/index/
 title: Get started with Docker for Mac
 ---
 
@@ -66,7 +67,7 @@ docker-machine version 0.10.0, build 76ed2a6
 
     ![nginx home page](images/hello-world-nginx.png)
 
-    > **Note:** Early beta releases used `docker` as the hostname to build the
+    > **Note**: Early beta releases used `docker` as the hostname to build the
     > URL. Now, ports are exposed on the private IP addresses of the VM and
     > forwarded to `localhost` with no other host name set. See also,
     > [Release Notes](release-notes.md) for Beta 9.
@@ -102,6 +103,8 @@ the menu bar.
 ![Docker context menu](images/menu-prefs-selected.png)
 
 You can set the following runtime options.
+
+>**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-mac). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
 
 ### General
 
@@ -149,7 +152,7 @@ want to add.
 See [Namespaces](osxfs.md#namespaces) in the topic on
 [osxfs file system sharing](osxfs.md) for more information.
 
-> **Tip:** File sharing is required for volume mounting if the project lives
+> **Tip**: File sharing is required for volume mounting if the project lives
 > outside of the `/Users` directory. In that case, share the drive where the
 > Dockerfile and volume are located. Otherwise, you will get file not found or
 > cannot start service errors at runtime. (See also
@@ -355,9 +358,11 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-## Docker Cloud
+## Docker Cloud (Edge feature)
 
-You can access your Docker Cloud account from within Docker for Mac.
+>**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-mac). On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
+
+You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Mac.
 
 ![Docker Cloud](images/docker-cloud.png)
 

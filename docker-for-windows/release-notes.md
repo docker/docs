@@ -303,7 +303,44 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-win1)
+### Docker Community Edition 17.0.5 Release Notes (2017-04-13 17.05.0-ce-win8)(edge)
+
+**Upgrades**
+
+- [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
+
+
+
+### Docker Community Edition 17.0.4 Release Notes (2017-04-06 17.04.0-ce-win7)(edge)
+
+**New**
+
+- New installer experience
+- Experimental Windows Server 2016 support
+
+**Upgrades**
+
+- [Docker 17.04.0-ce](https://github.com/docker/docker/releases/tag/v17.04.0-ce)
+- [Docker Compose 1.12.0](https://github.com/docker/compose/releases/tag/1.12.0)
+- Linux Kernel 4.9.19
+
+**Bug fixes and minor changes**
+
+- Add patches to the kernel to fix VMBus crash
+
+### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-win3)(edge)
+
+**Upgrades**
+
+- [Docker 17.03.1-ce-rc1](https://github.com/docker/docker/releases/tag/v17.03.1-ce-rc1)
+- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
+- Linux Kernel 4.9.14
+
+**Bug fixes and minor changes**
+
+- VPNKit: capture up to 64KiB of NTP traffic for diagnostics, better handling of DNS
+
+### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-win1)(edge)
 
 **New**
 
@@ -326,7 +363,7 @@ We did not distribute a 1.12.4 stable release
 - Improved Firewall handling: stop listing the rules since it can take a lot of time
 - Don't rollback to the previous engine when the desired engine fails to start
 
-### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1)
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1) (edge)
 
 **New**
 

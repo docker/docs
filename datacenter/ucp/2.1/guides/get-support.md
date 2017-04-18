@@ -38,3 +38,7 @@ docker run --rm \
   {{ page.docker_image }} \
   support > docker-support.tgz
 ```
+
+This support dump only contains logs for the node where you're running the
+command. If your UCP is highly available, you should collect support dumps
+from all the manager nodes.

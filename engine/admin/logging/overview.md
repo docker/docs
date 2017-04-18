@@ -69,7 +69,6 @@ for its configurable options, if applicable.
 | `splunk`    | Writes log messages to `splunk` using the HTTP Event Collector.|
 | `etwlogs`   | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms. |
 | `gcplogs`   | Writes log messages to Google Cloud Platform (GCP) Logging.    |
-| `nats`      | NATS logging driver for Docker. Publishes log entries to a NATS server.|
 
 ## Limitations of logging drivers
 
@@ -124,6 +123,14 @@ This example starts an `alpine` container with the `none` log driver.
 $ docker run -it --log-driver none alpine ash
 ```
 
+{% if site.edge == true %}
+### Options for all drivers
+| Option            | Description | Example value |
+|-------------------|-------------|---------------|
+| `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
+| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
+{% endif %}
+
 ## `json-file`
 
 `json-file` is the default logging driver, and returns logging output in JSON
@@ -165,7 +172,7 @@ The following logging options are supported for the `syslog` logging driver:
 | `syslog-tls-ca-cert` | The absolute path to the trust certificates signed by the CA. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem` |
 | `syslog-tls-cert`    | The absolute path to the TLS certificate file. **Ignored if the address protocol is not `tcp+tls`**. | `--log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem` |
 | `syslog-tls-key`     | The absolute path to the TLS key file. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem` |
-| `syslog-tls-skip`    | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-skip-verify=true` |
+| `syslog-tls-skip-verify`    | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-skip-verify=true` |
 | `tag`                | A string that is appended to the `APP-NAME` in the `syslog` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
 | `syslog-format`      | The `syslog` message format to use. If not specified the local UNIX syslog format is used, without a specified hostname. Specify `rfc3164` for the RFC-3164 compatible format, `rfc5424` for RFC-5424 compatible format, or `rfc5424micro` for RFC-5424 compatible format with microsecond timestamp resolution. | `--log-opt syslog-format=rfc5424micro` |
 | `labels`             | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
@@ -297,6 +304,7 @@ The `awslogs` supports the following options:
 | `awslogs-region`       | Sets the region where the logs are sent. If not set, the container's region is used. | `--log-opt awslogs-region=us-east-1` |
 | `awslogs-group`        | The log group to use for the logs. | `--log-opt awslogs-group=myLogGroup` |
 | `awslogs-stream`       | The log stream to use. If not specified, the container ID is used as the log stream. | `--log-opt awslogs-stream=myLogStream` |
+| `awslogs-create-group` | If the option is set to true, create the log group if the log group does not exist yet. | `--log-opt awslogs-create-group=true` |
 
 ### Examples
 
@@ -308,6 +316,7 @@ $ docker run \
          --log-driver=awslogs \
          --log-opt awslogs-region=us-east-1 \
          --log-opt awslogs-group=myLogGroup \
+         --log-opt awslogs-create-group=true \
          alpine sh
 ```
 
@@ -418,23 +427,3 @@ $ docker run --log-driver=gcplogs \
 
 For detailed information about working with the Google Cloud logging driver, see
 the [Google Cloud Logging driver](gcplogs.md) reference documentation.
-
-## NATS logging options
-
-The NATS logging driver supports the following options:
-
-```none
---log-opt labels=<label1>,<label2>
---log-opt env=<envvar1>,<envvar2>
---log-opt tag=<tag>
---log-opt nats-servers="<comma separated list of nats servers uris>"
---log-opt nats-max-reconnect="<max attempts to connect to a server>"
---log-opt nats-subject="<subject where logs are sent>"
---log-opt nats-tls-ca-cert="<absolute path to cert>"
---log-opt nats-tls-cert="<absolute path to cert>"
---log-opt nats-tls-key="<absolute path to cert>"
---log-opt nats-tls-skip-verify="<value>"
-```
-
-For detailed information, see [the NATS logging driver](nats.md) reference
-documentation.

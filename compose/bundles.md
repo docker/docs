@@ -207,7 +207,7 @@ A service has the following fields:
     </dd>
 </dl>
 
-> **Note:** Some configuration options are not yet supported in the DAB format,
+> **Note**: Some configuration options are not yet supported in the DAB format,
 > including volume mounts.
 
 ## Related topics

@@ -162,10 +162,10 @@ distributions. This includes RHEL and most of its forks. Currently, the
 following distributions support the driver:
 
 * RHEL/CentOS/Fedora
+* Oracle Linux
 * Ubuntu 12.04
 * Ubuntu 14.04
 * Debian
-* Arch Linux
 
 Docker hosts running the `devicemapper` storage driver default to a
 configuration mode known as `loop-lvm`. This mode uses sparse files to build
@@ -204,7 +204,7 @@ mode uses block devices to create the thin pool. The following procedure shows
 you how to configure a Docker host to use the `devicemapper` storage driver in
 a `direct-lvm` configuration.
 
-> **Caution:** If you have already run the Docker daemon on your Docker host
+> **Caution**: If you have already run the Docker daemon on your Docker host
 > and have images you want to keep, `push` them to Docker Hub or your private
 > Docker Trusted Registry before attempting this procedure.
 
@@ -224,7 +224,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     The `thin-provisioning-tools` package allows you to activate and manage your
     pool.
-    
+
     ```bash
     $ sudo yum install -y lvm2
     ```
@@ -325,6 +325,10 @@ assumes that the Docker daemon is in the `stopped` state.
     There are two ways to do this. You can set options on the command line if
     you start the daemon there:
 
+    > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`, is not yet supported
+    > on CentOS, RHEL, or Ubuntu 14.04 when using the default kernel.  Support was added in the
+    > upstream kernel version 3.18.
+
     ```none
     --storage-driver=devicemapper \
     --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool \
@@ -346,9 +350,6 @@ assumes that the Docker daemon is in the `stopped` state.
        ]
     }
     ```
-
-    > **Note**: Always set both `dm.use_deferred_removal=true` and `dm.use_deferred_deletion=true`
-    > to prevent unintentionally leaking mount points.
 
 15. If using systemd and modifying the daemon configuration via unit or drop-in file, reload systemd to scan for changes.
 

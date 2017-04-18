@@ -12,6 +12,10 @@ The CI system is an automated system. The maintainers are human beings that also
 work on Docker.  You need to understand and work with both the "bots" and the
 "beings" to review your contribution.
 
+> **Note**: These guidelines apply to Docker code submissions. If you want to
+> contribute to the Docker documentation itself, see the guidelines in the
+> `docker.github.io` repository's
+> [README.md](https://github.com/docker/docker.github.io).
 
 ## How we process your review
 
@@ -28,19 +32,21 @@ code. Building includes running the same tests you ran locally. If you forgot
 to run tests or missed something in fixing problems, the automated build is our
 safety check.
 
-After Gordon and the bots, the "beings" review your work. Docker maintainers look
-at your pull request and comment on it. The shortest comment you might see is
-`LGTM` which means **l**ooks-**g**ood-**t**o-**m**e. If you get an `LGTM`, that
-is a good thing, you passed that review.
+After Gordon and the bots, Docker maintainers look at your pull request and
+provide feedback. The shortest comment you might see is `LGTM` which means
+"Looks Good To Me". If you get an `LGTM`, that is a good thing, you passed that
+review.
 
 For complex changes, maintainers may ask you questions or ask you to change
-something about your submission. All maintainer comments on a PR go to the
-email address associated with your GitHub account. Any GitHub user who
-"participates" in a PR receives an email to. Participating means creating or
-commenting on a PR.
+something about your submission. You are notified about all maintainer comments
+on a PR, depending on the way you have configured Github to notify you. Any
+GitHub user who participates in a PR receives an email. Participation includes
+creating the PR, commenting on it, committing into someone else's PR, or being
+at-mentioned in a comment. You can unsubscribe from notifications to a PR by
+clicking the **Unsubscribe** button.
 
-Our maintainers are very experienced Docker users and open source contributors.
-So, they value your time and will try to work efficiently with you by keeping
+Our maintainers are experienced Docker users and open source contributors.
+They value your time and will try to work efficiently with you by keeping
 their comments specific and brief. If they ask you to make a change, you'll
 need to update your pull request with additional changes.
 
@@ -48,7 +54,7 @@ need to update your pull request with additional changes.
 
 To update your existing pull request:
 
-1. Checkout the PR branch in your local `docker-fork` repository.
+1. Checkout the PR branch in your local repository.
 
     This is the branch associated with your request.
 
@@ -79,9 +85,10 @@ To update your existing pull request:
         #		modified:   docs/installation/mac.md
         #		modified:   docs/installation/rhel.md
 
-5. Force push the change to your origin.
+5. Force-push the change to your origin.
 
-    The command syntax is:
+    Force-pushing is necessary because you amended your commit, and effectively
+    changed history. The command syntax is:
 
         git push -f origin <branch_name>
 
@@ -107,7 +114,7 @@ It can take time to see a merged pull request in Docker's official release.
 A master build is available almost immediately though. Docker builds and
 updates its development binaries after each merge to `master`.
 
-1. Browse to <a href="https://master.dockerproject.org/" target="_blank">https://master.dockerproject.org/</a>.
+1. Browse to [https://master.dockerproject.org/](https://master.dockerproject.org/){: target="_blank" class="_"}.
 
 2. Look for the binary appropriate to your system.
 
@@ -116,12 +123,9 @@ updates its development binaries after each merge to `master`.
     You might want to run the binary in a container though. This
     will keep your local host environment clean.
 
-4. View any documentation changes at <a href="http://docs.master.dockerproject.org/" target="_blank">docs.master.dockerproject.org</a>.
-
 Once you've verified everything merged, feel free to delete your feature branch
-from your fork. For information on how to do this,
-<a href="https://help.github.com/articles/deleting-unused-branches/" target="_blank">
-see the GitHub help on deleting branches</a>.
+from your fork.
+[See the GitHub help on deleting branches](https://help.github.com/articles/deleting-unused-branches/){: target="_blank" class="_"}.
 
 ## Where to go next
 

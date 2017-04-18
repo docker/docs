@@ -95,6 +95,11 @@ provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
 
+### How can I opt out of sending my usage data?
+
+If you do not want auto-send of usage data, use the Stable channel. For more
+information, see [Stable and Edge channels](#questions-about-stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Windows?").
+
 ### Can I use Docker for Windows with new swarm mode?
 
 Yes! You can use Docker for Windows to test single-node features of
@@ -109,7 +114,7 @@ experiment with a multi-node swarm. Check out the tutorial at
 
 You might need to provide the location of the Engine API for Docker clients and development tools.
 
-On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `http://localhost:2375`.
+On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `tcp://localhost:2375`.
 
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the given values (for the named pipe or TCP socket, whichever you use).
 

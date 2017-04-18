@@ -53,14 +53,34 @@ To configure which
 should be used, you can specify the `awslogs-stream` log option.  If not
 specified, the container ID is used as the log stream.
 
-> **Note:**
+> **Note**:
 > Log streams within a given log group should only be used by one container
 > at a time.  Using the same log stream for multiple containers concurrently
 > can cause reduced logging performance.
 
+{% if site.edge == true %}
+### awslogs-create-group
+
+Log driver will return an error by default if the log group does not exist. However, you can set the
+`awslogs-create-group` to `true` to automatically create the log group as needed.
+The `awslogs-create-group` option defaults to `false`.
+
+```bash
+$ docker run --log-driver=awslogs \
+             --log-opt awslogs-region=us-east-1 \
+             --log-opt awslogs-group=myLogGroup \
+             --log-opt awslogs-create-group=true \
+             ...
+```
+
+> **Note:**
+> Your AWS IAM policy must include the `logs:CreateLogGroup` permission before you attempt to use `awslogs-create-group`.
+
+{% endif %}
+
 ### tag
 
-Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`). 
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`).
 See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.

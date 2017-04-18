@@ -492,7 +492,7 @@ The following example briefly describes how to use `--link`.
     `container5` is created, `container4` will be able to resolve the name `c5` to
     `container5`'s IP address.
 
-    >**Note:** Any link between containers created with *legacy link* is static in
+    >**Note**: Any link between containers created with *legacy link* is static in
     nature and hard-binds the container with the alias. It does not tolerate
     linked container restarts. The new *link* functionality in user defined
     networks supports dynamic links between containers, and tolerates restarts and
@@ -513,7 +513,7 @@ The following example briefly describes how to use `--link`.
     ping: bad address 'c5'
 
     ```
-    Detach from `container3` and leave it running using `CTRL-p CTRL-q`.
+    Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
 2.  Create another container named `container5`, and link it to `container4`
     using the alias `c4`.
@@ -596,7 +596,7 @@ are not on the same network.
 
 The following example illustrates these points.
 
-1.  Create another network named `local_alias`
+1.  Create another network named `local_alias`:
 
     ```bash
     $ docker network create -d bridge --subnet 172.26.0.0/24 local_alias
@@ -611,7 +611,7 @@ The following example illustrates these points.
     $ docker network connect --link container4:bar local_alias container5
     ```
 
-3. Attach to `container3` and try to ping `container4` using alias `foo`, then
+3. Attach to `container4` and try to ping `container4` (yes, the same one) using alias `foo`, then
    try pinging container `container5` using alias `c5`:
 
     ```bash
@@ -648,7 +648,7 @@ The following example illustrates these points.
 4.  Disconnect `container5` from the `isolated_nw` network. Attach to `container4`
     and try pinging `c5` and `foo`.
 
-    ```
+    ```bash
     $ docker network disconnect isolated_nw container5
 
     $ docker attach container4
@@ -685,8 +685,8 @@ containers use, it does have some limitations.
 Environment variable injection is static in nature and environment variables
 cannot be changed after a container is started. The legacy `--link` flag shares
 all environment variables to the linked container, but the `docker network` command
-has no equivalent. When you connect to a network using `docker network`, no
-environment variables can be dynamically among containers.
+has no equivalent. When you connect a container to a network using `docker network`, no
+environment variables can be dynamically shared among containers.
 
 #### Understanding network-scoped aliases
 
@@ -997,7 +997,7 @@ multi-host network, the daemon cannot clean up stale connectivity endpoints.
 Such stale endpoints may cause an error if a new container is connected
 to that network with the same name as the stale endpoint:
 
-```no-highlight
+```none
 ERROR: Cannot start container bc0b19c089978f7845633027aa3435624ca3d12dd4f4f764b61eac4c0610f32e: container already connected to network multihost
 ```
 

@@ -1,3 +1,4 @@
+<!-- Page generated {{ site.time }} -->
 <!-- relative link basehrefs -->
 {% if page.path contains "index.md" %} {% capture basehref %}{{ page.url }}{% endcapture %} {% else %} {% assign crumbs = page.url | split: '/' %} {% assign stoppingpoint = crumbs | size | minus: 1 %} {% for crumb in crumbs %} {% if forloop.index == stoppingpoint
 %} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% break %} {% else %} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% endif %} {% endfor %} {% endif %}
@@ -30,7 +31,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 			display: block;
 		}
 	</style>
-	{% if page.url contains "/datacenter/" %}<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>{% endif %}
+	<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>
 	<script type="text/javascript">
 	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
 	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
@@ -62,6 +63,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="/css/pygments/perldoc.css">
 	<link id="pagestyle" rel="stylesheet" href="/css/style.css">
 
 	<!-- Go get "Open Sans" font from Google -->
@@ -81,9 +83,21 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 				<div class="col-body">
 					<main class="col-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
 						<section class="section">
-							{% if page.title %}
+							{% if page.url == '/' %}
+							<h1>{{ site.name }}</h1>
+							{% else %}
+								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<!-- tags -->
+							{% unless page.notags == true %}
+							{% assign keywords = page.keywords | split:"," %}
+							{% for keyword in keywords %}{% assign strippedKeyword = keyword | strip %}
+							{% capture keywordlist %}{{ keywordlist }}<a href="/glossary/?term={{strippedKeyword}}">{{strippedKeyword}}</a>{% unless forloop.last %}, {% endunless %}{% endcapture %}
+							{% endfor %}
+							{% if keywordlist.size > 0 %}<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">{{ keywordlist }}</span>{% endif %}
+							{% endunless %}
+							<!-- link corrections -->
               <script language="JavaScript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
@@ -105,12 +119,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							}
 							</script>
 							{% if page.noratings != true %}
-						  <div style="text-align: center; margin-top: 50px">
-								<img src="/images/chat.png" alt="chat icon" style="display:inline">
-								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
-								<a href="{{ edit_url }}">Edit this page</a> <span>&#9679;</span> {% endif %}
-								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />
+						  <div style="color:#b9c2cc; text-align: center; margin-top: 150px">
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
@@ -140,17 +149,17 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						</div>
 					</nav>
 					<div class="col-toc">
-							<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper toc-nav{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
+							<div id="{% if page.landing == true %}sidebar-right{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top hidden-xs hidden-sm{%else%}sidebar-wrapper hidden-xs hidden-sm{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
 							<div class="toc-nav">
 								<div class="feedback-links">
 									<ul>
 										{% if edit_url != "" %}
 										<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
-										<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC @{{ assignee }}"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
 										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
-										<!-- day/night switch
-										<li>
+										<!-- toggle mode -->
+<!-- 										<li>
 											<div class="toggle-mode">
 												<div class="icon">
 													<i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -184,10 +193,12 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 		{% include footer.html %}
 	</footer>
 	<link rel="stylesheet" href="/css/github.css">
+	{% if page.highlightjs == true %}
 	<script src="/js/highlight.pack.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
 	</script>
+	{% endif %}
 	<!-- <script src="/js/anchorlinks.js"></script> -->
 	<script defer src="/js/menu.js"></script>
 	<script src="/js/jquery.js"></script>

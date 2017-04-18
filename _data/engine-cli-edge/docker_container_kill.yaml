@@ -1,0 +1,12 @@
+command: docker container kill
+short: Kill one or more running containers
+long: Kill one or more running containers
+usage: docker container kill [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: signal
+  shorthand: s
+  default_value: KILL
+  description: Signal to send to the container
+

@@ -1,195 +1,82 @@
 ---
-description: Docker Universal Control Plane
-keywords: networking, kv, engine-discovery, ucp
-title: Enable container networking with UCP
+title: Use domain names to access services
+description: Docker Universal Control Plane has an HTTP routing mesh that
+  allows you to make your services accessible through a domain name. Learn more.
+keywords: ucp, services, http, dns
 ---
 
-UCP provides an HTTP routing mesh, that extends the networking capabilities
-of Docker Engine. Docker Engine provides load balancing and service discovery
-at the transport layer for TCP and UDP connections. UCP's HTTP routing mesh
-allows you to extend service discovery to have name-based virtual hosting for
-HTTP and HTTPS services.
+Docker has a transport-layer load balancer, also known as an L4 load balancer.
+This allows you to access your services independently of the node where they are
+running.
 
-See the
-[Docker Engine documentation on overlay networks](/engine/swarm/networking.md)
-for more information on what Docker Engine provides.
+![swarm routing mesh](../../images/use-domain-names-1.svg)
+
+In this example, the wordpress service is being served on port 8080.
+Users can access wordpress using the IP address of any node
+in the cluster and port 8080. If wordpress is not running in that node, the
+request is redirected to a node that is.
+
+UCP extends this and provides an HTTP routing mesh for application-layer
+load balancing. This allows you to access services with HTTP and HTTPS endpoints
+using a domain name instead of an IP.
+
+![http routing mesh](../../images/use-domain-names-2.svg)
+
+In this example, the Wordpress service listens on port 8080 and is attached to
+the `ucp-hrm` network. There's also a DNS entry mapping `wordpress.example.org`
+to the IP addresses of the UCP nodes.
+
+When users access `wordpress.example.org:80`, the HTTP routing mesh routes
+the request to the service running Wordpress in a way that is transparent to
+the user.
 
 ## Enable the HTTP routing mesh
 
 To enable the HTTP routing mesh, go to the **UCP web UI**, navigate to the
-**Settings** page, and click the **Routing Mesh** tab.
+**Settings** page, and click the **Routing Mesh** option.
+Check the **Enable HTTP routing mesh** option.
 
-<!-- todo: add screenshot -->
+![http routing mesh](../../images/use-domain-names-3.png){: .with-border}
 
-The default port for HTTP services is **80**, and the default port for HTTPS
-services is **8443**. You may choose an alternate port on this screen.
+By default the HTTP routing mesh service listens on port 80 for HTTP and port
+8443 for HTTPS. Change the ports if you already have services that are using
+them.
 
-Check the checkbox to enable the HTTP routing mesh. This will create a service
-called `ucp-hrm` and a network called `ucp-hrm`.
+## Under the hood
 
-If the HTTP routing mesh receives a HTTP request for a domain that it does not
-handle, it returns a 503 error (Bad Gateway). For HTTPS requests, all unknown
-domains are routed to the UCP web interface.
+Once you enable the HTTP routing mesh, UCP deploys:
 
-## HTTPS support
+| Name      | What    | Description                                                                   |
+|:----------|:--------|:------------------------------------------------------------------------------|
+| `ucp-hrm` | Service | Receive HTTP and HTTPS requests and send them to the right service            |
+| `ucp-hrm` | Network | The network used to communicate with the services using the HTTP routing mesh |
 
-The HTTP routing mesh has support for routing using HTTPS. Using a feature of
-HTTPS called Server Name Indication, the HTTP routing mesh is able to route
-connections to service backends without terminating the HTTPS connection.
+You then deploy a service that exposes a port, attach that service to the
+`ucp-hrm` network, and create a DNS entry to map a domain name to the IP
+address of the UCP nodes.
 
-To use HTTPS support, no certificates for the service are provided to the HTTP
-routing mesh. Instead, the backend service **must** handle HTTPS connections
-directly. Services that meet this criteria can use the `SNI` protocol to
-indicate handling of HTTPS in this manner.
+When a user tries to access an HTTP service from that domain name:
 
-## Route to a service
+1. The DNS resolution will point them to the IP of one of the UCP nodes
+2. The HTTP routing mesh looks at the Hostname header in the HTTP request
+3. If there's a service that maps to that hostname, the request is routed to the
+port where the service is listening
+4. If not, the user receives an HTTP 503, bad gateway error
 
-The HTTP routing mesh can route to a Docker service that runs a webserver.
-This service must meet three criteria:
+For services exposing HTTPS things are similar. The HTTP routing mesh doesn't
+terminate the TLS connection, and instead leverages an extension to TLS called
+Server Name Indication, that allows a client to announce in clear the domain
+name it is trying to reach.
 
-* The service must be connected a network with a `com.docker.ucp.mesh.http` label
-* The service must publish one or more ports
-* The service must have one or more labels prefixed with
-  `com.docker.ucp.mesh.http` to specify the ports to route (see the syntax
-  below)
+When receiving a connection in the HTTPS port, the routing mesh looks at the
+Server Name Indication header and routes the request to the right service.
+The service is responsible for terminating the HTTPS connection. Note that 
+the routing mesh uses the SSL session ID to make sure that a single SSL 
+session always goes to the same task for the service. This is done for
+performance reasons so that the same SSL session can be maintained across
+requests.
 
-These options can be configured using the UCP UI, or can be entered manually
-using the `docker service` command.
 
-### Route to a service using the UI
+## Where to go next
 
-<!-- todo: expand, add screenshots -->
-
-When using the wizard to create services in the UCP UI, you may enable the HTTP
-routing mesh for a service by publishing a port, and filling in the options
-relating to "Routing Mesh Host".
-
-### Route to a service using the CLI
-
-The key of the label must begin with `com.docker.ucp.mesh.http`. For multiple
-labels, some examples could be `com.docker.ucp.mesh.http.80` and
-`com.docker.ucp.mesh.http.443`. Here `80` and `443` are used to differentiate
-the HRM labels via port numbers. You can use whatever values you want, just
-make sure they are different from each other and you can keep track of them.
-
-Labels with the prefix `com.docker.ucp.mesh.http` allow you to configure a
-single hostname and port to route to a service. If you wish to route multiple
-ports or hostnames to the same service, then multiple labels with the prefix
-`com.docker.ucp.mesh.http` may be created.
-
-The syntax of this label is as follows:
-
-The key of the label must begin with `com.docker.ucp.mesh.http`, for example
-`com.docker.ucp.mesh.http.80` and `com.docker.ucp.mesh.http.443`.
-
-The value of the label is a comma separated list of key/value pairs separated
-by equals signs. These pairs are optional unless noted below, and are as
-follows:
-
-* `external_route` **(required)** the external URL to route to this service.
-  Examples: `http://myapp.example.com` and `sni://myapp.example.com`
-* `internal_port`: the internal port to use for the service.  Examples: `80`,
-  `8443`. This is **required** if more one port is published by the service.
-* `sticky_sessions`: if present, use the named cookie to route the user to the
-  same backend task for this service. See the "Sticky Sessions" section below.
-* `redirect`: if present, perform redirection to the specified URL. See the
-  "Redirection" section below.
-
-Examples:
-
-A service based on the image `myimage/mywebserver:latest` with a webserver running on port
-8080 can be routed to `http://foo.example.com` can be created using the
-following:
-
-```sh
-$ docker service create \
-  -p 8080 \
-  --network ucp-hrm \
-  --label com.docker.ucp.mesh.http.8080=external_route=http://foo.example.com,internal_port=8080 \
-  --name myservice \
-  myimage/mywebserver:latest
-```
-
-Next, you will need to route the referenced domains to the HTTP routing mesh.
-
-## Route domains to the HTTP routing mesh
-
-The HTTP routing mesh uses the `Host` HTTP header (or the Server Name
-Indication field for HTTPS requests) to determine which service should receive
-a particular HTTP request. This is typically done using DNS and pointing one or
-more domains to one or more nodes in the UCP cluster.
-
-## Networks, Access Control, and the HTTP routing mesh
-
-The HTTP routing mesh uses one or more overlay networks to communicate with the
-backend services. By default, a single network is created called `ucp-hrm`,
-with the access control label `ucp-hrm`. Adding a service to this network
-either requires administrator-level access, or the user must be in a group that
-gives them `ucp-hrm` access.
-
-This default configuration does not provide any isolation between services
-using the HTTP routing mesh.
-
-Isolation between services may be implemented by creating one or more overlay
-networks with the label `com.docker.ucp.mesh.http` prior to enabling the HTTP
-routing mesh. Once the HTTP routing mesh is enabled, it will be able to route
-to all services attached to any of these networks, but services on different
-networks cannot communicate directly.
-
-## Disable the HTTP routing mesh
-
-To disable the HTTP routing mesh, first ensure that all services that are using
-the HTTP routing mesh are disconnected from the **ucp-hrm** network.
-
-Next, go to the **UCP web UI**, navigate to the **Settings** page, and click
-the **Routing Mesh** tab. Uncheck the checkbox to disable the HTTP routing mesh.
-
-## Additional Routing Features
-
-The HTTP routing mesh provides some additional features for some specific use
-cases.
-
-### Sticky Sessions
-
-Enable the sticky sessions option for a route if your application requires that
-a user's session continues to use the same task of a backend service. This
-option uses HTTP cookies to choose which task receives a given connection.
-
-The cookie name for this feature is configured as the value of this option
-within the label. The cookie must be created by the application, and its value
-is used to pick a backend task.
-
-Stickyness may be lost temporarily if the number of tasks for a service
-changes, or if a service is reconfigured in a way that requires all of its
-tasks to restart.
-
-This option is incompatible with the `sni` protocol (routing HTTPS connections
-without termination).
-
-### Redirection
-
-The `redirect` option indicates that all requests to this route should be
-redirected to another domain name using a HTTP redirect.
-
-One use of this feature is for a service which only listens using HTTPS, with
-HTTP traffic to it being redirected to HTTPS. If the service is on
-`example.com`, then this can be accomplished with two labels:
-
-* `com.docker.ucp.mesh.http.1=external_route=http://example.com,redirect=https://example.com`
-* `com.docker.ucp.mesh.http.2=external_route=sni://example.com`
-
-Another use is a service expecting traffic only on a single domain, but other
-domains should be redirected to it. For example, a website that has been
-renamed might use this functionality. The following labels accomplish this for
-`new.example.com` and `old.example.com`
-
-* `com.docker.ucp.mesh.http.1=external_route=http://old.example.com,redirect=http://new.example.com`
-* `com.docker.ucp.mesh.http.2=external_route=http://new.example.com`
-
-## Troubleshoot
-
-If a service is not configured properly for use of the HTTP routing mesh, this
-information is available in the UI when inspecting the service.
-
-More logging from the HTTP routing mesh is available in the logs of the
-`ucp-controller` containers on your UCP manager nodes.
+* [Run only the images you trust](run-only-the-images-you-trust.md)

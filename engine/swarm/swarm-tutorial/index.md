@@ -41,7 +41,7 @@ provider. This tutorial uses the following machine names:
 * worker1
 * worker2
 
->**Note:** You can follow many of the tutorial steps to test single-node swarm
+>**Note**: You can follow many of the tutorial steps to test single-node swarm
 as well, in which case you need only one host. Multi-node commands will not
 work, but you can initialize a swarm, create services, and scale them.
 

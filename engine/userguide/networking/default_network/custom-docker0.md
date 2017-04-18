@@ -37,7 +37,7 @@ Finally, the `docker0` Ethernet bridge settings are used every time you create a
 ```
 # The network, as seen from a container
 
-$ docker run -i -t --rm base /bin/bash
+$ docker run --rm -it alpine /bin/ash
 
 root@f38c87f2a42d:/# ip addr show eth0
 

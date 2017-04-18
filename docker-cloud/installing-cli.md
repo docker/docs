@@ -69,7 +69,7 @@ Once Homebrew is installed, open Terminal and run the following command:
 $ brew install docker-cloud
 ```
 
-> **Note:** You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the
+> **Note**: You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the
 Mac.
 
 #### Validate the installation
@@ -115,7 +115,7 @@ $ export DOCKERCLOUD_NAMESPACE=myorganization
 ```
 
 You can also set the `DOCKERCLOUD_NAMESPACE` variable before each CLI command.
-for example:
+For example:
 
 ```none
 $ DOCKERCLOUD_NAMESPACE=myteam docker container ps
@@ -128,7 +128,7 @@ To learn more, see the [Docker Cloud CLI README](https://github.com/docker/docke
 
 Periodically, Docker will add new features and fix bugs in the existing CLI. To use these new features, you must upgrade the CLI.
 
-#### Upgrade on the docker-cloud CLI on Linux or Windows
+#### Upgrade the docker-cloud CLI on Linux or Windows
 
 ```none
 $ pip install -U docker-cloud

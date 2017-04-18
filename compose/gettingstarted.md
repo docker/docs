@@ -68,7 +68,7 @@ This tells Docker to:
 * Add the current directory `.` into the path `/code` in the image.
 * Set the working directory to `/code`.
 * Install the Python dependencies.
-* Set the default command for the container to `python app.py`
+* Set the default command for the container to `python app.py`.
 
 For more information on how to write Dockerfiles, see the [Docker user
 guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
@@ -103,7 +103,7 @@ The `redis` service uses a public
 [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
 Hub registry.
 
->**Tip:** If your project is outside of the `Users` directory (`cd ~`), then you
+>**Tip**: If your project is outside of the `Users` directory (`cd ~`), then you
 need to share the drive or location of the Dockerfile and volume you are using.
 If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
@@ -140,7 +140,7 @@ containers](../engine/tutorials/dockervolumes.md).
    doesn't resolve, you can also try `http://localhost:5000`.
 
    If you're using Docker Machine on a Mac, use `docker-machine ip MACHINE_VM` to get
-   the IP address of your Docker host. Then, `open http://MACHINE_VM_IP:5000` in a
+   the IP address of your Docker host. Then, open `http://MACHINE_VM_IP:5000` in a
    browser.
 
    You should see a message in your browser saying:
@@ -151,7 +151,7 @@ containers](../engine/tutorials/dockervolumes.md).
 
    The number should increment.
 
->**Tip:** You can list local images with `docker image ls` and inspect them with `docker inspect <tag or id>`. Listing images at this point should return `redis` and `web`.
+>**Tip**: You can list local images with `docker image ls` and inspect them with `docker inspect <tag or id>`. Listing images at this point should return `redis` and `web`.
 
 
 ## Step 5: Update the application
@@ -167,6 +167,10 @@ rebuild the image.
 2.  Refresh the app in your browser. The greeting should be updated, and the
     counter should still be incrementing.
 
+>**Note:** If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
+ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
+requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+need VirtualBox.
 
 ## Step 6: Experiment with some other commands
 
@@ -211,4 +215,4 @@ At this point, you have seen the basics of how Compose works.
 - Next, try the quick start guide for [Django](django.md),
   [Rails](rails.md), or [WordPress](wordpress.md).
 - [Explore the full list of Compose commands](./reference/index.md)
-- [Compose configuration file reference](compose-file.md)
+- [Compose configuration file reference](compose-file/index.md)

@@ -578,7 +578,7 @@ line.
       `/run/secrets/mysql_password` and `/run/secrets/mysql_root_password`.
       They are never exposed as environment variables, nor can they be committed
       to an image if the `docker commit` command is run. The `mysql_password`
-      secret is the one used the non-privileged WordPress container will use to
+      secret is the one used by the non-privileged WordPress container to
       connect to MySQL.
     - Sets the environment variables `MYSQL_PASSWORD_FILE` and
       `MYSQL_ROOT_PASSWORD_FILE` to point to the

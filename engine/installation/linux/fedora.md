@@ -6,6 +6,8 @@ redirect_from:
 title: Get Docker for Fedora
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -73,7 +75,9 @@ the repository.
     $ sudo dnf -y install dnf-plugins-core
     ```
 
-2.  Use the following command to set up the **stable** repository:
+2.  Use the following command to set up the **stable** repository. You always
+    need the **stable** repository, even if you want to install **edge** builds
+    as well
 
     ```bash
     $ sudo dnf config-manager \
@@ -83,13 +87,10 @@ the repository.
 
 3.  **Optional**: Enable the **edge** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. For information about **stable** and
-    **edge** builds, see
-    [Docker variants](/engine/installation/#docker-variants).
-
+    it alongside the stable repository.
 
     ```bash
-    $ sudo dnf config-manager --enable docker-ce-edge
+    $ sudo dnf config-manager --set-enabled docker-ce-edge
     ```
 
     You can disable the **edge** repository by running the `dnf config-manager`
@@ -97,8 +98,10 @@ the repository.
     `--enable` flag. The following command disables the **edge** repository.
 
     ```bash
-    $ sudo dnf config-manager --disable docker-ce-edge
+    $ sudo dnf config-manager --set-disabled docker-ce-edge
     ```
+
+    [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
 
@@ -137,7 +140,7 @@ the repository.
     ```bash
     $ dnf list docker-ce.x86_64  --showduplicates |sort -r
 
-    docker-ce.x86_64  17.03.0.fc24                               docker-ce-stable  
+    docker-ce.x86_64  {{ minor-version }}.0.fc24                               docker-ce-stable  
     ```
 
     The contents of the list depend upon which repositories are enabled, and
@@ -184,11 +187,12 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/7/x86_64/stable/]({{ download-url-base }}/7/x86_64/stable/)
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
+    version of Fedora. Go to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
-    > `stable` in the > URL to `edge`.
+    > `stable` in the URL to `edge`.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.

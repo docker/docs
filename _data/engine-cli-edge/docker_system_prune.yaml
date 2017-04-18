@@ -1,0 +1,49 @@
+command: docker system prune
+short: Remove unused data
+long: Remove all unused containers, volumes, networks and images (both dangling and
+  unreferenced).
+usage: docker system prune [OPTIONS]
+pname: docker system
+plink: docker_system.yaml
+options:
+- option: all
+  shorthand: a
+  default_value: "false"
+  description: Remove all unused images not just dangling ones
+- option: filter
+  description: Provide filter values (e.g. 'until=<timestamp>')
+- option: force
+  shorthand: f
+  default_value: "false"
+  description: Do not prompt for confirmation
+examples: "```bash\n$ docker system prune -a\n\nWARNING! This will remove:\n\t- all
+  stopped containers\n\t- all volumes not used by at least one container\n\t- all
+  networks not used by at least one container\n\t- all images without at least one
+  container associated to them\nAre you sure you want to continue? [y/N] y\nDeleted
+  Containers:\n0998aa37185a1a7036b0e12cf1ac1b6442dcfa30a5c9650a42ed5010046f195b\n73958bfb884fa81fa4cc6baf61055667e940ea2357b4036acbbe25a60f442a4d\n\nDeleted
+  Volumes:\nnamed-vol\n\nDeleted Images:\nuntagged: my-curl:latest\ndeleted: sha256:7d88582121f2a29031d92017754d62a0d1a215c97e8f0106c586546e7404447d\ndeleted:
+  sha256:dd14a93d83593d4024152f85d7c63f76aaa4e73e228377ba1d130ef5149f4d8b\nuntagged:
+  alpine:3.3\ndeleted: sha256:695f3d04125db3266d4ab7bbb3c6b23aa4293923e762aa2562c54f49a28f009f\nuntagged:
+  alpine:latest\ndeleted: sha256:ee4603260daafe1a8c2f3b78fd760922918ab2441cbb2853ed5c439e59c52f96\ndeleted:
+  sha256:9007f5987db353ec398a223bc5a135c5a9601798ba20a1abba537ea2f8ac765f\ndeleted:
+  sha256:71fa90c8f04769c9721459d5aa0936db640b92c8c91c9b589b54abd412d120ab\ndeleted:
+  sha256:bb1c3357b3c30ece26e6604aea7d2ec0ace4166ff34c3616701279c22444c0f3\nuntagged:
+  my-jq:latest\ndeleted: sha256:6e66d724542af9bc4c4abf4a909791d7260b6d0110d8e220708b09e4ee1322e1\ndeleted:
+  sha256:07b3fa89d4b17009eb3988dfc592c7d30ab3ba52d2007832dffcf6d40e3eda7f\ndeleted:
+  sha256:3a88a5c81eb5c283e72db2dbc6d65cbfd8e80b6c89bb6e714cfaaa0eed99c548\n\nTotal
+  reclaimed space: 13.5 MB\n```\n\n### Filtering\n\nThe filtering flag (`-f` or `--filter`)
+  format is of \"key=value\". If there is more\nthan one filter, then pass multiple
+  flags (e.g., `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe currently supported
+  filters are:\n\n* until (`<timestamp>`) - only remove containers, images, and networks
+  created before given timestamp\n\nThe `until` filter can be Unix timestamps, date
+  formatted\ntimestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed\nrelative
+  to the daemon machine’s time. Supported formats for date\nformatted time stamps
+  include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,\n`2006-01-02T15:04:05.999999999`,
+  `2006-01-02Z07:00`, and `2006-01-02`. The local\ntimezone on the daemon will be
+  used if you do not provide either a `Z` or a\n`+-00:00` timezone offset at the end
+  of the timestamp.  When providing Unix\ntimestamps enter seconds[.nanoseconds],
+  where seconds is the number of seconds\nthat have elapsed since January 1, 1970
+  (midnight UTC/GMT), not counting leap\nseconds (aka Unix epoch or Unix time), and
+  the optional .nanoseconds field is a\nfraction of a second no more than nine digits
+  long."
+

@@ -17,7 +17,7 @@ the new policy to your existing role by following the instructions
 [below](#attach-a-policy-for-legacy-aws-links).
 
 ## Create a dockercloud-swarm-role role with an embedded policy
-1. Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>
+1. Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
 2. Give the new role a name, such as `dockercloud-swarm-role`.
 
     > **Note**: You must use one role per Docker Cloud account namespace, so if

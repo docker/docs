@@ -16,6 +16,8 @@ horizontalnav:
   node: samples
 
 guides:
+- title: "Docs Hackathon: April 17-22nd, 2017"
+  path: /hackathon/
 - sectiontitle: Get Docker
   section:
   - path: /engine/installation/
@@ -24,6 +26,8 @@ guides:
     title: Docker for Mac
   - path: /docker-for-windows/install/
     title: Docker for Windows
+  - path: /docker-ee-for-windows/install/
+    title: Docker EE for Windows Server
   - sectiontitle: Docker for Linux
     section:
     - path: /engine/installation/linux/ubuntu/
@@ -68,6 +72,8 @@ guides:
       title: Open Source Licensing
     - path: /docker-for-aws/release-notes/
       title: Release Notes
+    - path: /docker-for-aws/archive/
+      title: Template Archive
   - sectiontitle: Docker for Azure
     section:
     - path: /docker-for-azure/why/
@@ -86,6 +92,8 @@ guides:
       title: Open Source Licensing
     - path: /docker-for-azure/release-notes/
       title: Release Notes
+    - path: /docker-for-azure/archive/
+      title: Template Archive
   - sectiontitle: Docker Toolbox (Legacy)
     section:
     - path: /toolbox/overview/
@@ -111,7 +119,7 @@ guides:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
   - path: /release-notes/
-    title: Docker Release Notes
+    title: Docker release notes
 - sectiontitle: Get Started
   section:
   - sectiontitle: "Get started with Docker"
@@ -134,6 +142,8 @@ guides:
       title: Network containers
     - path: /engine/tutorials/dockervolumes/
       title: Manage data in containers
+  - path: /engine/docker-overview/
+    title: Docker overview
 - sectiontitle: User Guide
   section:
   - path: /engine/userguide/
@@ -292,6 +302,8 @@ guides:
       title: How nodes work
     - path: /engine/swarm/how-swarm-mode-works/services/
       title: How services work
+    - path: /engine/swarm/how-swarm-mode-works/pki/
+      title: How PKI works in swarm mode
   - path: /engine/swarm/swarm-mode/
     title: Run Docker Engine in swarm mode
   - path: /engine/swarm/join-nodes/
@@ -444,9 +456,6 @@ reference:
   nosync: true
 - title: Daemon CLI reference (dockerd)
   path: /engine/reference/commandline/dockerd/
-- title: Docker ID Accounts API
-  path: /docker-id/api-reference/
-  nosync: true
 - sectiontitle: Engine API
   section:
   - path: /engine/api/
@@ -455,12 +464,14 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.26/
-    title: v1.26 Reference
+  - path: /engine/api/v1.27/
+    title: v1.27 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.26/
+      title: v1.26 reference
     - path: /engine/api/v1.25/
       title: v1.25 reference
     - path: /engine/api/v1.24/
@@ -662,7 +673,7 @@ reference:
     - path: /engine/reference/commandline/plugin/
       title: docker plugin
     - path: /engine/reference/commandline/plugin_create/
-      title: docker plugin disable
+      title: docker plugin create
     - path: /engine/reference/commandline/plugin_disable/
       title: docker plugin disable
     - path: /engine/reference/commandline/plugin_enable/
@@ -677,6 +688,8 @@ reference:
       title: docker plugin rm
     - path: /engine/reference/commandline/plugin_set/
       title: docker plugin set
+    - path: /engine/reference/commandline/plugin_upgrade/
+      title: docker plugin upgrade
   - path: /engine/reference/commandline/port/
     title: docker port
   - path: /engine/reference/commandline/ps/
@@ -823,8 +836,12 @@ samples:
   title: Tutorial labs
 - sectiontitle: Sample applications
   section:
+  - path: /samples/
+    title: Samples home
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
+  - path: /compose/aspnet-mssql-compose/
+    title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/
     title: CouchDB
   - path: /engine/examples/couchbase/
@@ -1148,16 +1165,12 @@ manuals:
           title: Install
         - path: /datacenter/ucp/2.1/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+          title: Upgrade
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade-offline/
+          title: Upgrade offline
         - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
@@ -1180,10 +1193,8 @@ manuals:
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
-        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
-          title: Only allow running signed images
-        - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
-          title: Use trusted images for continuous integration
+        - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
+          title: Run only the images you trust
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
           title: Integrate with LDAP
       - sectiontitle: Manage users
@@ -1250,8 +1261,8 @@ manuals:
         section:
         - path: /datacenter/ucp/2.1/guides/user/services/deploy-a-service/
           title: Deploy a service
-        - path: /datacenter/ucp/2.1/guides/user/services/use-hostnames-to-access-your-service/
-          title: Use hostnames to access your service
+        - path: /datacenter/ucp/2.1/guides/user/services/use-domain-names-to-access-services/
+          title: Use domain names to access services
         - path: /datacenter/ucp/2.1/guides/user/services/
           title: Deploy an app from the UI
         - path: /datacenter/ucp/2.1/guides/user/services/deploy-app-cli/
@@ -1262,6 +1273,12 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/ucp/2.1/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/ucp/2.1/guides/get-support/
       title: Get support
   - sectiontitle: Docker Trusted Registry
@@ -1280,16 +1297,10 @@ manuals:
           title: Install
         - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+          title: Upgrade
         - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
@@ -1300,6 +1311,8 @@ manuals:
           section:
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
             title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
+            title: S3
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
             title: NFS
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
@@ -1308,8 +1321,14 @@ manuals:
           title: Use a load balancer
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
           title: Set up vulnerability scans
-        - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
-          title: Deploy a cache
+        - sectiontitle: Deploy caches
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/
+            title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/
+            title: Deploy caches with TLS
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/
+            title: Chain multiple caches
         - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
           title: Garbage collection
       - sectiontitle: Manage users
@@ -1328,6 +1347,8 @@ manuals:
           title: Monitor the cluster status
         - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
+        - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+          title: Troubleshoot batch jobs
       - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - sectiontitle: CLI reference
@@ -1358,6 +1379,8 @@ manuals:
         section:
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/
           title: Configure your Docker Engine
+        - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
+          title: Configure your Notary client
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
           title: Use a cache
       - sectiontitle: Manage images
@@ -1370,12 +1393,24 @@ manuals:
           title: Delete images
         - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
           title: Scan images for vulnerabilities
-        - path: /datacenter/dtr/2.2/guides/user/manage-images/manage-trusted-repositories/
-          title: Manage trusted repositories
+        - sectiontitle: Sign images
+          section:
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/
+            title: Sign an image
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/
+            title: Delegate image signing
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/
+            title: Manage trusted repositories
       - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
     - path: /datacenter/dtr/2.2/reference/api/
       title: API reference
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/dtr/2.2/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/dtr/2.2/guides/support/
       title: Get support
   - sectiontitle: Previous versions
@@ -1844,12 +1879,8 @@ manuals:
     title: Open Source Licensing
   - path: /docker-for-windows/release-notes/
     title: Release Notes
-- sectiontitle: Docker ID
-  section:
-  - title: Docker ID accounts
-    path: /docker-id/
-  - title: Docker ID accounts API
-    path: /docker-id/api-reference/
+- title: Docker ID accounts
+  path: /docker-id/
 - sectiontitle: Docker Machine
   section:
   - path: /machine/overview/
@@ -2134,77 +2165,3 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
-
-glossary:
-- path: /glossary/#aufs
-  title: aufs
-- path: /glossary/#base-image
-  title: base image
-- path: /glossary/#boot2docker
-  title: boot2docker
-- path: /glossary/#btrfs
-  title: btrfs
-- path: /glossary/#build
-  title: build
-- path: /glossary/#cgroups
-  title: cgroups
-- path: /glossary/#compose
-  title: Compose
-- path: /glossary/#copy-on-write
-  title: copy-on-write
-- path: /glossary/#container
-  title: container
-- path: /glossary/#data-volume
-  title: data volume
-- path: /glossary/#docker
-  title: Docker
-- path: /glossary/#docker-for-mac
-  title: Docker for Mac
-- path: /glossary/#docker-for-windows
-  title: Docker for Windows
-- path: /glossary/#docker-hub
-  title: Docker Hub
-- path: /glossary/#dockerfile
-  title: Dockerfile
-- path: /glossary/#filesystem
-  title: filesystem
-- path: /glossary/#image
-  title: image
-- path: /glossary/#libcontainer
-  title: libcontainer
-- path: /glossary/#libnetwork
-  title: libnetwork
-- path: /glossary/#link
-  title: link
-- path: /glossary/#machine
-  title: Machine
-- path: /glossary/#node
-  title: node
-- path: /glossary/#overlay-network-driver
-  title: overlay network driver
-- path: /glossary/#overlay-storage-driver
-  title: overlay storage driver
-- path: /glossary/#registry
-  title: registry
-- path: /glossary/#repository
-  title: repository
-- path: /glossary/#service
-  title: service
-- path: /glossary/#service-discovery
-  title: service discovery
-- path: /glossary/#swarm
-  title: swarm
-- path: /glossary/#docker-swarm
-  title: Docker Swarm
-- path: /glossary/#swarm-mode
-  title: swarm mode
-- path: /glossary/#tag
-  title: tag
-- path: /glossary/#task
-  title: task
-- path: /glossary/#toolbox
-  title: Toolbox
-- path: /glossary/#union-file-system
-  title: Union file system
-- path: /glossary/#virtual-machine
-  title: virtual machine

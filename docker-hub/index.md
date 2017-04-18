@@ -76,7 +76,7 @@ to building your applications and services.
 With Official Repositories you know you're using an optimized and
 up-to-date image that was built by experts to power your applications.
 
-> **Note:** If you would like to contribute an Official Repository for your
+> **Note**: If you would like to contribute an Official Repository for your
 > organization or product, see the documentation on
 > [Official Repositories on Docker Hub](/docker-hub/official_repos.md) for more
 > information.

@@ -26,13 +26,17 @@ services.
 
 If a service is defined in both files Compose merges the configurations using
 the rules described in [Adding and overriding
-configuration](extends.md#adding-and-overriding-configuration).
+configuration](extends.md#adding-and-overriding-configuration). You can turn off
+the automatic use of `docker-compose.override.yml` with command-line option
+`--ignore-override`.
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the [`docker-compose`
 command reference](./reference/overview.md) for more information about
-using `-f`.
+using `-f`. When using the `-f` option, the use of `--ignore-override` will
+have no effect as the full list of used files is whatever you define with the `-f`
+option.
 
 When you use multiple configuration files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
@@ -167,7 +171,7 @@ is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
-> **Note:** `links`, `volumes_from`, and `depends_on` are never shared between
+> **Note**: `links`, `volumes_from`, and `depends_on` are never shared between
 > services using `extends`. These exceptions exist to avoid
 > implicit dependencies&mdash;you always define `links` and `volumes_from`
 > locally. This ensures dependencies between services are clearly visible when
@@ -284,7 +288,7 @@ replaces the old value.
     # result
     command: python otherapp.py
 
-> **Note:** In the case of `build` and `image`, when using
+> **Note**: In the case of `build` and `image`, when using
 > [version 1 of the Compose file format](compose-file.md#version-1), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.

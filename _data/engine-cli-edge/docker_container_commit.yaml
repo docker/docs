@@ -1,0 +1,22 @@
+command: docker container commit
+short: Create a new image from a container's changes
+long: Create a new image from a container's changes
+usage: docker container commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: author
+  shorthand: a
+  description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+- option: change
+  shorthand: c
+  default_value: '[]'
+  description: Apply Dockerfile instruction to the created image
+- option: message
+  shorthand: m
+  description: Commit message
+- option: pause
+  shorthand: p
+  default_value: "true"
+  description: Pause container during commit
+

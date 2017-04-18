@@ -163,7 +163,7 @@ are included inline.
 must be escaped. If your string contains inner quote characters (`"`), escape
 them as well.
 
-```dockerfile
+```conf
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor="ACME Incorporated"
@@ -515,7 +515,7 @@ If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
 like `RUN groupadd -r postgres && useradd -r -g postgres postgres`.
 
-> **Note:** Users and groups in an image get a non-deterministic
+> **Note**: Users and groups in an image get a non-deterministic
 > UID/GID in that the “next” UID/GID gets assigned regardless of image
 > rebuilds. So, if it’s critical, you should assign an explicit UID/GID.
 

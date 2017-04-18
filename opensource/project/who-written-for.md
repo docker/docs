@@ -49,7 +49,7 @@ predictably, and procedurally as possible.
 
 Users who are new to Engine development should start by setting up their
 environment. Then, they should try a simple code change. After that, you should
-find something to work on or propose at totally new change.
+find something to work on or propose a totally new change.
 
 If you are a programming prodigy, you still may find this documentation useful.
 Please feel free to skim past information you find obvious or boring.

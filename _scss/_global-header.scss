@@ -1,0 +1,55 @@
+/*
+*
+* hero banner text *************************************************************
+*
+*/
+
+.hero-text {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    min-height: 20em;
+    min-width: 400px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    & h1 {
+        color: $white;
+    }
+    & ul {
+        padding: 0;
+        li {
+            padding: 0 10px 0 0;
+        }
+    }
+    p {
+        color: $white;
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-family: "Open Sans", sans-serif;
+    }
+}
+
+.hero-text-centered {
+    -ms-flex: none;
+    flex: none;
+    text-align: center;
+    max-width: 70%;
+}
+
+
+/** dockercon banner **/
+
+.banner {
+    width: 270px;
+    height: auto;
+    position: absolute;
+    bottom: 55px;
+    right: 0;
+    z-index: 1;
+    img {
+        width: 100%;
+    }
+}

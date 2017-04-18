@@ -9,6 +9,7 @@ redirect_from:
 - /docker-for-windows/started/
 - /installation/windows/
 - /engine/installation/windows/
+- /docker-for-windows/index/
 title: Get started with Docker for Windows
 ---
 Welcome to Docker for Windows!
@@ -128,7 +129,7 @@ The next few steps take you through some examples. These are just suggestions fo
     Live Restore Enabled: false
     ```
 
-    >**Note:** The outputs above are examples. Your output for commands like
+    >**Note**: The outputs above are examples. Your output for commands like
     > `docker version` and `docker info` will vary depending on your product
     > versions (e.g., as you install newer versions).
 
@@ -287,7 +288,7 @@ PowerShell Module as follows.
     Notepad $PROFILE
     ```
 
-Now, when you press tab after typing the first few letters, Docker commands such
+Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
 as `start`, `stop`, `run`, and their options, along with container and image
 names should now auto-complete.
 
@@ -297,7 +298,7 @@ When Docker is running, the Docker whale is displayed. By default, the Docker
 whale icon is placed in the Notifications area. If it is hidden, click the up
 arrow on the taskbar to show it.
 
->**Tip:** You can pin the whale outside of the notification box so that it is
+>**Tip**: You can pin the whale outside of the notification box so that it is
 always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
 right-click an empty porition of the taskbar, select Settings, and choose
 display options through taskbar settings for notifications.
@@ -309,6 +310,8 @@ display options through taskbar settings for notifications.
 To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
+
+>**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-windows). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
 
 The **Settings** dialogs provide options to allow Docker auto-start,
 automatically check for updates, share local drives with Docker containers,
@@ -353,7 +356,7 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
-> **Tip:** Shared drives are only required for volume mounting
+> **Tip**: Shared drives are only required for volume mounting
 > [Linux containers](#switch-between-windows-and-linux-containers), and not for
 > Windows containers. For Linux containers, you need to share the drive where
 > your project is located (i.e., where the Dockerfile and volume are located).
@@ -365,7 +368,7 @@ See also
 [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
 in Troubleshooting.
 
-> **Note:** You can share local drives with your _containers_ but not with
+> **Note**: You can share local drives with your _containers_ but not with
 > Docker Machine nodes. See
 > [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 > in the FAQs.
@@ -406,7 +409,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 ![Network settings](/docker-for-windows/images/settings-network.png)
 
-> **Note:** Some users reported problems connecting to Docker Hub on Docker for
+> **Note**: Some users reported problems connecting to Docker Hub on Docker for
 > Windows stable version. This would manifest as an error when trying to run
 > `docker` commands that pull images from Docker Hub that are not already
 > downloaded, such as a first time run of `docker run hello-world`. If you
@@ -426,7 +429,7 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
 ```powershell
-PS C:\Users\jdoe> docker run -it alpine env
+PS C:\Users\jdoe> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
 TERM=xterm
@@ -465,7 +468,7 @@ in the [Docker Experimental Features README](https://github.com/docker/docker/bl
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
 experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsquent Betas, and never released
+others may be modified or pulled from subsequent Betas, and never released
 on Stable.
 
 On both Beta and Stable releases, you can toggle **experimental mode** on and
@@ -602,21 +605,6 @@ because they do not apply to Windows containers:
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
 
-### Giving feedback and getting help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows).
-
-To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
-
-To give feedback on the documentation or update it yourself, use the Feedback
-options at the bottom of each docs page.
-
 ### Docker Store
 
 Choose **Docker Store** from the Docker for Windows menu
@@ -628,11 +616,13 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-### Docker Cloud
+### Docker Cloud (Edge feature)
 
-You can access your Docker Cloud account from within Docker for Windows.
+You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Windows.
 
 ![Docker Cloud](images/docker-cloud.png)
+
+>**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-windows).  On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
 
 From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
 or create one.
@@ -648,9 +638,29 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
+### Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can review
+community reported issues, and file new ones. As a part of reporting issues on
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
+
 ### Diagnose and Feedback
 
-If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.
+If you encounter problems for which you do not find solutions in this
+documentation, searching [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) already filed by other users,
+or on the [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows), we can help you
+troubleshoot the log data.
 
 Select **Upload a diagnostic**.
 

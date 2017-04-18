@@ -20,17 +20,17 @@ Docker Engine to run.
 
 For each host that you plan to manage with UCP:
 
-1.  Log in into that host using ssh.
+1.  Log in to that host using ssh.
 2.  Install Docker Engine 1.13:
 
     ```bash
     curl -SLf https://packages.docker.com/1.13/install.sh  | sh
     ```
 
-    [You can also install Docker Engine using a package manager](/cs-engine/1.13/index.md)
+    [You can also install Docker Engine using a package manager](/cs-engine/1.13/index.md).
 
 Make sure you install the same Docker Engine version on all the nodes. Also,
-if you're creating virtual machine templates with Docker Engine  already
+if you're creating virtual machine templates with Docker Engine already
 installed, make sure the `/etc/docker/key.json` file is not included in the
 virtual machine image. When provisioning the virtual machine, restart the Docker
 daemon to generate a new `/etc/docker/key.json` file.
@@ -55,18 +55,18 @@ manage UCP.
 
 To install UCP:
 
-1. Use ssh to log in into the host where you want to install UCP.
+1. Use ssh to log in to the host where you want to install UCP.
 
 2.  Run the following command:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull {{ page.docker_image }}
+    $ docker pull {{ page.ucp_latest_image }}
 
     # Install UCP
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.docker_image }} install \
+      {{ page.ucp_latest_image }} install \
       --host-address <node-ip-address> \
       --interactive
     ```
@@ -79,7 +79,7 @@ To install UCP:
 ## Step 5: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI, login with your administrator credentials and upload your
+to the UCP web UI, log in with your administrator credentials and upload your
 license.
 
 ![](../../../../../images/try-ddc-1.png){: .with-border}
@@ -94,7 +94,7 @@ can get it from your [Docker Store subscriptions](https://store.docker.com/?over
 Skip this step if you don't want UCP to be highly available.
 
 To make your Docker swarm and UCP fault-tolerant and highly available, you can
-join more manager nodes to your it. Manager nodes are the nodes in the swarm
+join more manager nodes to it. Manager nodes are the nodes in the swarm
 that perform the orchestration and swarm management tasks, and dispatch tasks
 for worker nodes to execute.
 
@@ -103,7 +103,7 @@ the **Resources** page, and go to the **Nodes** section.
 
 ![](../../images/step-6-one-node.png){: .with-border}
 
-Click the **Add Node button** to add a new node.
+Click the **Add Node** button to add a new node.
 
 ![](../../../../../images/try-ddc-3.png){: .with-border}
 
@@ -116,7 +116,7 @@ Set the 'Use a custom advertise address' option if you want to customize the
 network and port this node will advertise to other swarm members so that they
 can reach it.
 
-For each manager node that you want to join to UCP, login into that
+For each manager node that you want to join to UCP, log in to that
 node using ssh, and run the join command that is displayed on UCP.
 
 ![](../../images/step-6-two-nodes.png){: .with-border}

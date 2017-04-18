@@ -71,7 +71,7 @@ Drives** and share the drive that contains the Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 
->**Tip:** Shared drives are only required for volume mounting [Linux
+>**Tip**: Shared drives are only required for volume mounting [Linux
 containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
@@ -211,7 +211,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note:**  Be sure to quit and then restart Docker for Windows before attempting to start containers.
+	> **Note**:  Be sure to quit and then restart Docker for Windows before attempting to start containers.
 
 4.  Try to start the container again:
 
@@ -262,11 +262,11 @@ Windows containers without Docker for Windows. However, if you install Docker
 this way, you cannot develop or run Linux containers.  If you try to run a Linux
 container on the native Docker daemon, an error occurs:
 
-  ```no-highlight
+  ```none
   C:\Program Files\Docker\docker.exe:
    image operating system "linux" cannot be used on this platform.
    See 'C:\Program Files\Docker\docker.exe run --help'.
-   ```
+  ```
 
 ### Limitations of Windows containers for `localhost` and published ports
 
@@ -284,7 +284,7 @@ So, in a scenario where you use Docker to pull an image and run a webserver with
 a command like this:
 
 ```
-docker run -d -p 80:80 --name webserver nginx  
+docker run -d -p 80:80 --name webserver nginx
 ```
 
 Using `curl http://localhost`, or pointing your web browser at

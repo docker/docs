@@ -4,9 +4,10 @@ keywords: mac, beta, alpha, install, download
 title: Install Docker for Mac
 ---
 
-The Docker for Mac install package includes everything you need to run Docker on
-a Mac. This topic describes pre-install considerations, and how to download and
-install Docker for Mac.
+Docker for Mac is a [Docker Community Edition (CE)](https://www.docker.com/community-edition) app. The Docker for Mac
+install package includes everything you need to run Docker on a Mac. This topic
+describes pre-install considerations, and how to download and install Docker for
+Mac.<br><br>
 
 > **Already have Docker for Mac?** If you already have
 Docker for Mac installed, and are ready to get started, skip to
@@ -18,8 +19,21 @@ the command line, preferences, and tools.
 ## Download Docker for Mac
 
 If you have not already done so, please install Docker for Mac. You can download
-installers from the Stable or beta channel. For more about Stable and Edge
-channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
+installers from the Stable or beta channel.
+
+Both Stable and Edge installers come with <a
+href="https://github.com/docker/docker/blob/master/experimental/README.md">
+experimental features in Docker Engine</a> enabled by default and configurable
+on [Docker Daemon preferences](index.md#daemon-experimental-mode) for
+experimental mode. We recommend that you disable experimental features for
+apps in production.
+
+On both channels, we welcome your <a
+href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>)
+to help us as the apps evolve.
+
+For more about Stable and Edge channels, see the
+[FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
 
 <table style="width:100%">
   <tr>
@@ -27,48 +41,39 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
     <th style="font-size: x-large; font-family: arial">Edge channel</th>
   </tr>
   <tr valign="top">
-    <td width="50%">This installer is fully baked and tested, and comes
-    with the latest GA version of Docker Engine along with <a
-    href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled by
-    default and configurable on <a href="index#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
-    best channel to use if you want a reliable platform to work with.
-    (Be sure to disable experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead
-    time than the Edge releases, synched with Docker Engine releases and
-    hotfixes.<br><br>On the Stable channel, you can select whether to send usage
-    statistics and other data.
-    </td>
+    <td width="50%">This installer is fully baked and tested. This is the
+    best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
+   On this channel, you can select whether to send usage
+   statistics and other data. <br><br>Stable builds are released once per quarter.
+   </td>
     <td width="50%">This installer provides the latest Edge release of
-    Docker for Mac, offers cutting edge features along with
-    <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled by
-    default and configurable on <a href="index#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
-    best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel
-    is a continuation of the Edge program, where you can provide feedback
-    as the apps evolve. Releases are typically more frequent than for
-    Stable, often one or more per month. <br><br>We collect all usage
-    data on Edge releases across the board.</td>
+    Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    </td>
   </tr>
   <tr valign="top">
   <td width="50%">
   <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a>
   </td>
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/edge/Docker.dmg">Get Docker for Mac (Edge)</a>
   </td>
   </tr>
-  <tr>
-  <td><a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
-  <td><a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
+  <tr valign="top">
+  <td width="50%">
+  <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Docker.dmg SHA256</font></a>
+  </td>
+  <td width="50%">
+  <a href="https://download.docker.com/mac/edge/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Docker.dmg SHA256</font></a>
+  </td>
   </tr>
 </table>
 
->**Important Notes**:
->
-> - Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or
-   newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
-   [What to know before you install](#what-to-know-before-you-install)
-   for a full explanation and list of prerequisites.
->
-> - You can switch between Edge and Stable versions, but you must have only one
+* Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or newer Mac, with Intel's  hardware support for MMU virtualization.
+The app will run on 10.10.3 Yosemite, but with limited support. Please see [What
+to know before you install](#what-to-know-before-you-install) for a full
+explanation and list of prerequisites.
+
+* You can switch between Edge and Stable versions, but you must have only one
    app installed at a time. Also, you will need to save images and export
    containers you want to keep before uninstalling the current version before
    installing another. For more about this, see the
@@ -112,7 +117,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   - At least 4GB of RAM
   <p />
   - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible
-    with Docker for Mac)
+    with Docker for Mac). If you have a newer version of VirtualBox installed, it's fine.
 
   > **Note**: If your system does not satisfy these requirements, you can
   > install [Docker Toolbox](/toolbox/overview.md), which uses Oracle VirtualBox
@@ -129,9 +134,9 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
 
 	  ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
 
-2.  Double-click `Docker.app` to start Docker.
+2.  Double-click `Docker.app` in the Applications folder to start Docker.  (In the example below, the Applications folder is in "grid" view mode.)
 
-	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png
+	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
 	  You will be asked to authorize `Docker.app` with your system password after you launch it.
 	  Privileged access is needed to install networking components and links to the Docker apps.

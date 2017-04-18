@@ -37,93 +37,10 @@
     opacity: .2;
     margin: 10px 15px 0 0;
 }
-/*
-*
-* toc  **********************************************************
-*
-*/
-div#side-toc-title {
-    font-weight: bold;
-    margin: 0 0 10px 13px;
-}
-.offcanvas a:focus, .toc-nav a:hover {
-    color: opacity: .8;
-}
-/*
-*
-*   MOBILE VIEWS
-*
-*/
-
-/*
-*
-* override google results.....
-*
-*/
-
-a.gs-title {
-    color: #2089C4!important;
-    text-decoration: none;
-}
-
-.gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
-    color: #82949E!important;
-}
-
-.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
-    font-size: 14px!important;
-}
-
-img.with-border {
-  border: 1px solid #eaeaea;
-}
-
-.cse input.gsc-search-button:focus,
-input.gsc-search-button:focus {
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
-  -webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
-  -moz-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
-}
-
-.cse .gsc-search-button input.gsc-search-button-v2,
-input.gsc-search-button-v2 {
-  width: 13px;
-  height: 13px;
-  padding: 6px 27px;
-  min-width: 13px;
-  margin-top: 2px;
-}
 
 /* Make table headings  bold, give tables some breathing room */
-
-th, td.th {
-  font-weight: bold;
-}
 
 .content table {
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-/* Without this, if the CTA button is used right before a header,
-   the header is on the same line */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    clear: both;
-}
-
-/* This needs some space at the bottom */
-.button.outline-btn {
-  margin-bottom: 20px;
-}
-/* Clearfix of floated elements within p tags */
-p:after {
-	content: "";
-	clear: both;
-	display: table;
 }

@@ -39,7 +39,7 @@ Macvlan Bridge mode has a unique MAC address per container used to track MAC to 
 
 In the following example, `eth0` on the docker host has an IP on the `172.16.86.0/24` network and a default gateway of `172.16.86.1`. The gateway is an external router with an address of `172.16.86.1`. An IP address is not required on the Docker host interface `eth0` in `bridge` mode, it merely needs to be on the proper upstream network to get forwarded by a network switch or network router.
 
-![Simple Macvlan Bridge Mode Example](images/macvlan_bridge_simple.png)
+![Simple Macvlan Bridge Mode Example](images/macvlan_bridge_simple.svg)
 
 **Note** For Macvlan bridge mode the subnet values need to match the NIC's interface of the Docker host. For example, Use the same subnet and gateway of the Docker host ethernet interface that is specified by the `-o parent=` option.
 
@@ -122,7 +122,7 @@ The network can then be deleted with:
 docker network rm <network_name or id>
 ```
 
-- **Note:** In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
+- **Note**: In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
 
 For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
 

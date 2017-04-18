@@ -4,103 +4,57 @@ keywords: seccomp, security, docker, documentation
 title: Seccomp security profiles for Docker
 ---
 
-Secure computing mode (Seccomp) is a Linux kernel feature. You can use it to
+Secure computing mode (`seccomp`) is a Linux kernel feature. You can use it to
 restrict the actions available within the container. The `seccomp()` system
 call operates on the seccomp state of the calling process. You can use this
 feature to restrict your application's access.
 
-This feature is available only if Docker has been built with seccomp and the
+This feature is available only if Docker has been built with `seccomp` and the
 kernel is configured with `CONFIG_SECCOMP` enabled. To check if your kernel
-supports seccomp:
+supports `seccomp`:
 
 ```bash
 $ cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=
 CONFIG_SECCOMP=y
 ```
 
-> **Note**: seccomp profiles require seccomp 2.2.1 and are only
+> **Note**: `seccomp` profiles require seccomp 2.2.1 and are only
 > available starting with Debian 9 "Stretch", Ubuntu 16.04 "Xenial",
-> Fedora 22, CentOS 7 and Oracle Linux 7. To use this feature on Ubuntu 14.04, Debian Wheezy, or
-> Debian Jessie, you must download the [latest static Docker Linux binary](../installation/binaries.md).
+> Fedora 22, CentOS 7 and Oracle Linux 7. To use this feature on Ubuntu 14.04,
+> Debian Wheezy, or Debian Jessie, you must download the
+> [latest static Docker Linux binary](../installation/binaries.md).
 > This feature is currently *not* available on other distributions.
 
 ## Passing a profile for a container
 
-The default seccomp profile provides a sane default for running containers with
-seccomp and disables around 44 system calls out of 300+. It is moderately protective while providing wide application
-compatibility. The [default Docker profile](https://github.com/docker/docker/blob/master/profiles/seccomp/default.json) has a JSON layout in the following form:
+The default `seccomp` profile provides a sane default for running containers with
+seccomp and disables around 44 system calls out of 300+. It is moderately
+protective while providing wide application compatibility. The default Docker
+profile can be found
+[here](https://github.com/docker/docker/blob/master/profiles/seccomp/default.json)).
 
-```json
-{
-	"defaultAction": "SCMP_ACT_ERRNO",
-	"archMap": [
-		{
-			"architecture": "SCMP_ARCH_X86_64",
-			"subArchitectures": [
-				"SCMP_ARCH_X86",
-				"SCMP_ARCH_X32"
-			]
-		},
-		...
-	],
-	"syscalls": [
-		{
-			"names": [
-				"accept",
-				"accept4",
-				"access",
-				"alarm",
-				"alarm",
-				"bind",
-				"brk",
-				...
-				"waitid",
-				"waitpid",
-				"write",
-				"writev"
-			],
-			"action": "SCMP_ACT_ALLOW",
-			"args": [],
-			"comment": "",
-			"includes": {},
-			"excludes": {}
-		},
-		{
-			"names": [
-				"clone"
-			],
-			"action": "SCMP_ACT_ALLOW",
-			"args": [
-				{
-					"index": 1,
-					"value": 2080505856,
-					"valueTwo": 0,
-					"op": "SCMP_CMP_MASKED_EQ"
-				}
-			],
-			"comment": "s390 parameter ordering for clone is different",
-			"includes": {
-				"arches": [
-					"s390",
-					"s390x"
-				]
-			},
-			"excludes": {
-				"caps": [
-					"CAP_SYS_ADMIN"
-				]
-			}
-		},
-		...
-}
-```
+In effect, the profile is a whitelist which denies access to system calls by
+default, then whitelists specific system calls. The profile works by defining a
+`defaultAction` of `SCMP_ACT_ERRNO` and overriding that action only for specific
+system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
+error. Next, the profile defines a specific list of system calls which are fully
+allowed, because their `action` is overridden to be `SCMP_ACT_ALLOW`. Finally,
+some specific rules are for individual system calls such as `personality`,
+`socket`, `socketcall`, and others, to allow variants of those system calls with
+specific arguments.
 
-When you run a container, it uses the default profile unless you override
-it with the `security-opt` option. For example, the following explicitly
-specifies the default policy:
+`seccomp` is instrumental for running Docker containers with least privilege. It
+is not recommended to change the default `seccomp` profile.
 
-```
-$ docker run --rm -it --security-opt seccomp=/path/to/seccomp/profile.json hello-world
+When you run a container, it uses the default profile unless you override it
+with the `--security-opt` option. For example, the following explicitly
+specifies a policy:
+
+```bash
+$ docker run --rm \
+             -it \
+             --security-opt seccomp=/path/to/seccomp/profile.json \
+             hello-world
 ```
 
 ### Significant syscalls blocked by the default profile
@@ -150,7 +104,8 @@ the reason each syscall is blocked rather than white-listed.
 | `request_key`       | Prevent containers from using the kernel keyring, which is not namespaced.                                    |
 | `set_mempolicy`     | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                       |
 | `setns`             | Deny associating a thread with a namespace. Also gated by `CAP_SYS_ADMIN`.                                    |
-| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                    |
+| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.
+| `socket`, `socketcall` | Used to send or receive packets and for other socket operations. All `socket` and `socketcall` calls are blocked except communication domains `AF_UNIX`, `AF_INET`, `AF_INET6`, `AF_NETLINK`, and `AF_PACKET`. |
 | `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                    |
 | `swapon`            | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `swapoff`           | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |

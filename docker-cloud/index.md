@@ -31,7 +31,7 @@ Log in to Docker Cloud using your free [Docker ID](../docker-id/).
     <td class="bluebar" width="50%"><a href="cloud-swarm/index.md"><b>Manage Swarms (Beta Swarm Mode)</b></a></td>
   </tr>
   <tr>
-    <td class="plain" width="50%"><p>Build and test your code, build Docker images. Link Cloud repositories to your source code provider to automate building images and pushing them to Cloud. </p></td>
+    <td class="plain" width="50%"><p>Build and test your code, and build Docker images. Link Cloud repositories to your source code provider to automate building images and pushing them to Cloud. </p></td>
     <td class="plain" width="50%"><p>Provision swarms to popular cloud providers, register existing swarms, and use your Docker ID to authenticate and securely access personal or team swarms.</p></td>
   </tr>
   <tr>
@@ -39,7 +39,7 @@ Log in to Docker Cloud using your free [Docker ID](../docker-id/).
     <td class="bluebar" colspan="2"><a href="standard/index.md"><b>Manage Nodes and Apps (Standard Mode)</b></a></td>
   </tr>
   <tr>
-    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
+    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ.</a></p></td>
     <td class="plain" width="50%"><p>Deploy and manage nodes, services, and applications in Docker Cloud (Standard Mode).</p></td>
   </tr>
   <tr>

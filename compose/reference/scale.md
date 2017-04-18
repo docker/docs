@@ -15,8 +15,8 @@ Numbers are specified as arguments in the form `service=num`. For example:
 
     docker-compose scale web=2 worker=3
 
->**Tip:** Alternatively, in
+>**Tip**: Alternatively, in
 [Compose file version 3.x](/compose/compose-file/index.md), you can specify
-[`replicas`](/compose/compose-file/index.md#replicas)
-under [`deploy`](/compose/compose-file/index.md#deploy) as part of the
-service configuration for [Swarm mode](/engine/swarm/).
+[replicas](/compose/compose-file/index.md#replicas)
+under the [deploy](/compose/compose-file/index.md#deploy) key as part of a
+service configuration for [Swarm mode](/engine/swarm/). Note that the `deploy` key and its sub-options (including `replicas`) will only work with the `docker stack deploy` command, not `docker compose up` or `docker-compose run`.

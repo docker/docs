@@ -23,7 +23,7 @@ you submit good information that doesn't conform to the guide than no
 information at all. Docker's tech writers are always happy to help you with the
 prose, and we promise not to judge or use a red pen!
 
-> **Note:**
+> **Note**:
 > The documentation is written with paragraphs wrapped at 80 column lines to
 > make it easier for terminal use. You can probably set up your favorite text
 > editor to do this automatically for you.
@@ -43,8 +43,8 @@ prose is simple, clear, and straightforward it will translate readily.
 
 One way to think about this is to assume Docker’s users are generally university
 educated and read at least a "16th" grade level (meaning they have a
-university degree). You can use a [readability
-tester](https://readability-score.com/) to help guide your judgement. For
+university degree). You can use a
+[readability tester](https://readable.io/) to help guide your judgment. For
 example, the readability score for the phrase "Containers should be ephemeral"
 is around the 13th grade level (first year at university), and so is acceptable.
 
@@ -169,7 +169,7 @@ Use notes sparingly and only to bring things to the reader's attention that are
 critical or otherwise deserving of being called out from the body text. Please
 format all notes as follows:
 
-    > **Note:**
+    > **Note**:
     > One line of note text
     > another line of note text
 

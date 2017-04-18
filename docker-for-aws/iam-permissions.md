@@ -156,6 +156,7 @@ follow the link for more information.
                 "autoscaling:DescribeLifecycleHooks",
                 "autoscaling:DescribeLoadBalancers",
                 "autoscaling:DescribeScalingActivities",
+                "autoscaling:DescribeScheduledActions",
                 "autoscaling:DescribeTags",
                 "autoscaling:DetachInstances",
                 "autoscaling:DetachLoadBalancers",
@@ -316,6 +317,21 @@ follow the link for more information.
             "Effect": "Allow",
             "Action": [
                 "elasticfilesystem:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "Stmt1487169681009",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:GetFunctionConfiguration",
+                "lambda:InvokeFunction",
+                "lambda:UpdateFunctionCode",
+                "lambda:UpdateFunctionConfiguration"
             ],
             "Resource": [
                 "*"

@@ -1,7 +1,7 @@
 # Docs @ Docker
 
-Welcome to the repo for our documentation. This is the source for the URL
-served at [https://docs.docker.com/](https://docs.docker.com/).
+Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/).
 
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
@@ -9,7 +9,8 @@ open source and we deeply appreciate contributions from our community!
 ## Providing feedback
 
 We really want your feedback, and we've made it easy. You can edit, rate, or
-file an issue at the bottom of every page on [https://docs.docker.com/](https://docs.docker.com/).
+file an issue at the bottom of every page on
+[https://docs.docker.com/](https://docs.docker.com/).
 
 **Please only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -17,7 +18,7 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
-  consider asking a question on [https://forums.docker.com](https://forums.docker.com) instead.
+  ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
   of Docker, or have found a bug in part of Docker, please file that issue in
@@ -85,20 +86,12 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
   project
 
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
-  project
-
 - **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
   docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
   project
 
 - **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
   docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
-  project
-
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
 ## Per-PR staging on GitHub
@@ -111,11 +104,11 @@ building. Review the staged site and amend your commit if necessary. Reviewers
 will also check the staged site before merging the PR, to protect the integrity
 of [https://docs.docker.com/](https://docs.docker.com/).
 
-## Staging locally
+## Staging the docs
 
 You have three options:
 
-1.  Clone this repo and run our staging container:
+1.  On your local machine, clone this repo and run our staging container:
 
     ```bash
     git clone https://github.com/docker/docker.github.io.git
@@ -136,7 +129,7 @@ You have three options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly.
+2.  Install Jekyll and GitHub Pages on your local machine.
 
     a. Clone this repo by running:
 
@@ -203,6 +196,12 @@ guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.
 
+### Testing changes and practical guidance
+
+If you want to test a style change, or if you want to see how to achieve a
+particular outcome with Markdown, Bootstrap, JQuery, or something else, have
+a look at `test.md` (which renders in the site at `/test/`).
+
 ### Per-page front-matter
 
 The front-matter of a given page is in a section at the top of the Markdown
@@ -239,6 +238,36 @@ tree: false
 no_ratings: true
 ---
 ```
+
+### Creating tabs
+
+The use of tabs, as on pages like https://docs.docker.com/engine/api/, requires
+the use of HTML. The tabs use Bootstrap CSS/JS, so refer to those docs for more
+advanced usage. For a basic horizontal tab set, copy/paste starting from this
+code and implement from there. Keep an eye on those `href="#id"` and `id="id"`
+references as you rename, add, and remove tabs.
+
+```
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
+</div>
+```
+
+For more info and a few more permutations, see `test.md`.
+
+### Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
 
 ## Copyright and license
 

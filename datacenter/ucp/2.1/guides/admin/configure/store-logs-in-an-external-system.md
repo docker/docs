@@ -9,7 +9,7 @@ title: Configure UCP logging
 
 You can configure UCP for sending logs to a remote logging service:
 
-1. Login into UCP with an administrator account
+1. Log in to UCP with an administrator account
 2. Navigate to the **Settings** page
 3. Set the information about your logging server, and click
 **Enable Remote Logging**
@@ -18,7 +18,7 @@ You can configure UCP for sending logs to a remote logging service:
 
 ## Example: Setting up an ELK stack
 
-One popular logging stack is composed of Elasticsearch, Logstash and
+One popular logging stack is composed of Elasticsearch, Logstash, and
 Kibana. The following example demonstrates how to set up an example
 deployment which can be used for logging.
 
@@ -55,4 +55,4 @@ options that can accomplish this (e.g. Shield plug-in for Kibana)
 
 ## Where to go next
 
-* [Only allow running signed images](only-allow-running-signed-images.md)
+* [Require all images to be signed](restrict-services-to-worker-nodes.md)

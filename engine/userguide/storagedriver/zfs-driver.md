@@ -18,7 +18,7 @@ The ZFS on Linux (ZoL) port is healthy and maturing. However, at this point in
 time it is not recommended to use the `zfs` Docker storage driver for
 production use unless you have substantial experience with ZFS on Linux.
 
-> **Note:** There is also a FUSE implementation of ZFS on the Linux platform.
+> **Note**: There is also a FUSE implementation of ZFS on the Linux platform.
 > This should work with Docker but is not recommended. The native ZFS driver
 > (ZoL) is more tested, more performant, and is more widely used. The remainder
 >  of this document will relate to the native ZoL port.
@@ -235,9 +235,6 @@ Once ZFS is installed and loaded, you're ready to configure ZFS for Docker.
         zpool-docker         93.5K  3.84G    19K  /zpool-docker
         zpool-docker/docker  19K    3.84G    19K  /var/lib/docker
 
-    Now that you have a ZFS filesystem mounted to `/var/lib/docker`, the daemon
- should automatically load with the `zfs` storage driver.
-
 5. Start the Docker daemon.
 
         $ sudo service docker start
@@ -249,6 +246,19 @@ Once ZFS is installed and loaded, you're ready to configure ZFS for Docker.
     to start with the `zfs` storage driver by passing the
     `--storage-driver=zfs` flag to the `dockerd` command, or to the
     `DOCKER_OPTS` line in the Docker config file.
+
+    If your distribution uses Systemd, the method of forcing the Docker daemon to
+    use the `zfs` driver differs slightly. You will need to edit your
+    [daemon config file]((https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)),
+    which is located at `/etc/docker/daemon.json`. Add (or alter) the following line.
+
+        {"storage-driver": "zfs"}
+
+    Note that this must be valid JSON.
+
+    Now restart the Docker daemon.
+
+        $ sudo systemctl restart docker
 
 6. Verify that the daemon is using the `zfs` storage driver.
 

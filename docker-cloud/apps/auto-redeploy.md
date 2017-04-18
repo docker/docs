@@ -6,13 +6,18 @@ redirect_from:
 title: Redeploy services automatically
 ---
 
+[![Automated Deployments with Docker Cloud](images/video-auto-redeploy-docker-cloud.png)](https://www.youtube.com/watch?v=I4depUwfbFc "Automated Deployments with Docker Cloud"){:target="_blank"}
+
 Docker Cloud's **Autoredeploy** feature allows a service that uses an image
 stored in Docker Hub to automatically redeploy whenever a new image is pushed or
 built.
 
-> **Note:** To enable autoredeploy on an image stored in a third party registry,
+> **Notes**:
+>
+>* **Autoredeploy** works only for hub images with the _latest_ tag.
+>
+>* To enable **autoredeploy** on an image stored in a third party registry,
 > you will need to use [redeploy triggers](triggers.md) instead.
-
 
 ## Launching a new service with autoredeploy
 
@@ -50,7 +55,7 @@ You can activate or deactivate **autoredeploy** on a service after it has been 
 
 1. Click into the service detail page.
 2. Click **Edit**.
-3. Change the **autoredeploy** setting on the form to `true`
+3. Change the **autoredeploy** setting on the form to `true`.
 4. Click **Save changes**.
 
 

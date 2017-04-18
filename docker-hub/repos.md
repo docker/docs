@@ -123,7 +123,7 @@ designated, they can `push` and `pull` to your repositories. They will not be
 allowed to perform any administrative tasks such as deleting the repository or
 changing its status from private to public.
 
-> **Note:**
+> **Note**:
 > A collaborator cannot add other collaborators. Only the owner of
 > the repository has administrative access.
 
@@ -208,7 +208,7 @@ payload similar to the example shown below.
 
 <!-- TODO: does it tell you what tag was updated? -->
 
->**Note:** If you want to test your webhook, we recommend using a tool like
+>**Note**: If you want to test your webhook, we recommend using a tool like
 >[requestb.in](http://requestb.in/). Also note, the Docker Hub server can't be
 >filtered by IP address.
 

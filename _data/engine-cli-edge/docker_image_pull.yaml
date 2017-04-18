@@ -1,0 +1,15 @@
+command: docker image pull
+short: Pull an image or a repository from a registry
+long: Pull an image or a repository from a registry
+usage: docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: all-tags
+  shorthand: a
+  default_value: "false"
+  description: Download all tagged images in the repository
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
+

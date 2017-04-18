@@ -8,6 +8,8 @@ redirect_from:
 title: Get Docker for Ubuntu
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -38,6 +40,8 @@ To install Docker, you need the 64-bit version of one of these Ubuntu versions:
 - Yakkety 16.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
+
+Docker CE is supported on both `x86_64` and `armhf` architectures.
 
 ### Uninstall old versions
 
@@ -108,7 +112,6 @@ The procedure for setting up the repository is different for [Docker CE](#docker
 
 2.  Add Docker's official GPG key:
 
-
     ```bash
     $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
     ```
@@ -124,8 +127,9 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-
-3.  Use the following command to set up the **stable** repository.
+3.  Use the following command to set up the **stable** repository. You always
+    need the **stable** repository, even if you want to install **edge** builds
+    as well.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`.
@@ -135,10 +139,7 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     > example: If you are using `Linux Mint Rafaela`, you could use
     > `trusty`.
 
-
-    To add the **edge** repository, add `edge` after `stable` on the last line of
-    the command. For information about **stable** and **edge** builds, see
-    [Docker variants](/engine/installation/#docker-variants).
+    **amd64**:
 
     ```bash
     $ sudo add-apt-repository \
@@ -147,7 +148,16 @@ The procedure for setting up the repository is different for [Docker CE](#docker
        stable"
     ```
 
-    [Learn about **stable** and **edge** builds](/engine/installation/).
+    **armhf**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    [Learn about **stable** and **edge** channels](/engine/installation/).
 
 ##### Docker EE
 
@@ -178,7 +188,6 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     sub   4096R/91A29FA3 2017-02-22
     ```
 
-
 3.  Use the following command to set up the **stable** repository, replacing
     `<DOCKER-EE-URL>` with the URL you noted down in the
     [prerequisites](#prerequisites).
@@ -189,7 +198,7 @@ The procedure for setting up the repository is different for [Docker CE](#docker
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] <-DOCKER-EE-URL> \
+       "deb [arch=amd64] <DOCKER-EE-URL> \
        $(lsb_release -cs) \
        stable-{{ minor-version }}"
     ```
@@ -222,8 +231,6 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     instead of always using the latest. This output is truncated. List the
     available versions. For Docker EE customers, use `docker-ee` where you see
     `docker-ce`.
-
-    {% assign minor-version = "17.03" %}
 
     ```bash
     $ apt-cache madison docker-ce
@@ -276,18 +283,19 @@ a new file each time you want to upgrade Docker.
 1.  This step is different for Docker CE and Docker EE.
 
     - **Docker CE**: Go to
-      [{{ download-url-base }}/pool/stable-{{ minor-version }}/amd64/]({{ download-url-base }}/pool/stable-{{ minor-version }}/amd64/)
-      and download the `.deb` file for the Docker version you want to install and
-      for your version of Ubuntu.
+      [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
+      Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+      `armhf`,and download the `.deb` file for the Docker version you want to
+      install and for your version of Ubuntu.
 
       > **Note**: To install an **edge**  package, change the word
-      > `stable` in the > URL to `edge`. For information about **stable** and
-      > **edge** builds, see
-      > [Docker variants](/engine/installation/#docker-variants).
+      > `stable` in the  URL to `edge`.
+      > [Learn about **stable** and **edge** channels](/engine/installation/).
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
-      trial or subscription in your browser. Go to `x86_64/stable` and download
-      the `.rpm` file for the Docker version you want to install.
+      trial or subscription in your browser. Go to
+      `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+      Docker version you want to install.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.

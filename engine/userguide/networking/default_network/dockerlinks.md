@@ -32,8 +32,10 @@ Let's say you used this command to run a simple Python Flask application:
 
     $ docker run -d -P training/webapp python app.py
 
-> **Note:**
-> Containers have an internal network and an IP address.
+> **Note**:
+> Containers have an internal network and an IP address
+> (as we saw when we used the `docker inspect` command to show the container's
+> IP address in [Run a simple application](/engine/getstarted/step_three.md) section).
 > Docker can have a variety of network configurations. You can see more
 > information on Docker networking [here](/engine/userguide/networking/index.md).
 
@@ -92,7 +94,7 @@ configurations. For example, if you've bound the container port to the
 
     127.0.0.1:49155
 
-> **Note:**
+> **Note**:
 > The `-p` flag can be used multiple times to configure multiple ports.
 
 ## Connect with the linking system
@@ -140,7 +142,7 @@ name the container `web`. You can see the container's name using the
 You can also use `docker inspect` to return the container's name.
 
 
-> **Note:**
+> **Note**:
 > Container names have to be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
 > the old container (with `docker rm`) before you can create a new
@@ -340,7 +342,7 @@ that host now via any of these entries:
     56 bytes from 172.17.0.5: icmp_seq=1 ttl=64 time=0.250 ms
     56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
 
-> **Note:**
+> **Note**:
 > In the example, you'll note you had to install `ping` because it was not included
 > in the container initially.
 
@@ -348,7 +350,7 @@ Here, you used the `ping` command to ping the `db` container using its host entr
 which resolves to `172.17.0.5`. You can use this host entry to configure an application
 to make use of your `db` container.
 
-> **Note:**
+> **Note**:
 > You can link multiple recipient containers to a single source. For
 > example, you could have multiple (differently named) web containers attached to your
 >`db` container.

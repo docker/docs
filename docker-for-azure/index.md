@@ -68,33 +68,54 @@ The number of workers you want in your swarm (1-100).
 
 #### Service Principal
 
-To set up Docker for Azure, a [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/) is required. Docker for Azure uses the principal to operate Azure APIs as you scale up and down or deploy apps on your swarm. Docker provides a containerized helper-script to help create the Service Principal - `docker4x/create-sp-azure`.
+A [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
+is required to set up Docker for Azure. The Service Principal is used to invoke Azure APIs as you scale the number of nodes up
+and down or deploy apps on your swarm that require configuration of the Azure Load Balancer. Docker provides a
+containerized helper script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
-Ensure the latest version of `docker4x/create-sp-azure` has been downloaded to your local environment: `docker pull docker4x/create-sp-azure:latest`
+1.  Download the latest version of `docker4x/create-sp-azure` to your local environment:
+   
+   ```bash
+   docker pull docker4x/create-sp-azure:latest
+   ```
 
-Then run the sp-azure script with the following arguments:
+2. Run the `sp-azure` script with the following arguments:
 
-```bash
-$ docker run -ti docker4x/create-sp-azure sp-name rg-name rg-region
+   ```bash
+   $ docker run -ti docker4x/create-sp-azure sp-name [rg-name rg-region]
 
-...
-Your access credentials =============================
-AD App ID:       <app-id>
-AD App Secret:   <secret>
-AD Tenant ID:   <tenant-id>
-```
+   ...
+   Your access credentials =============================
+   AD App ID:       <app-id>
+   AD App Secret:   <secret>
+   AD Tenant ID:   <tenant-id>
+   ```
 
-If you have multiple Azure subscriptions, make sure you're creating the Service Principal with subscription ID that you will be using to deploy Docker for Azure.
+   If you have multiple Azure subscriptions, make sure to create the
+   Service Principal with the subscription ID that you will be using
+   to deploy Docker for Azure.
+   
+   | Argument | Description | Example values |
+   |----------|-------------|---------|
+   | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. | `sp1` |
+   | `rg-name` | The name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `swarm1` |
+   | `rg-region` | The name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions. |
 
-* `sp-name` is the name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. Example: `sp1`.
-* `rg-name` is the name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Example: `swarm1`.
-* `rg-region` is the name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure e.g. `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions.
+- **Docker Community Edition for Azure**: `rg-name` and `rg-region` are optional, but specifying them is recommended
+  so that the Azure resource group is created up front and the service principal is scoped to that specific resource
+  group.
+  
+- **Docker Enterprise Edition for Azure**: The Azure Marketplace portal does not currently allow users to specify an
+  existing resource group to use when deploying resources. Do not specify `rg-name` and `rg-region`, because you need
+  a Service Principal that is scoped throughout your account.
 
-While `rg-name` and `rg-region` are optional, it's highly recommended that you create the resource group up front and scope the service principal to that specific resource group.
 
-If the script fails, it's typically because your Azure user account doesn't have sufficient privileges. Contact your Azure administrator.
+If the script fails, your Azure user account may not have sufficient privileges. Contact your Azure administrator.
 
-When setting up the ARM template, you will be prompted for the App ID (a UUID) and the app secret. If you specified the resource group name and location parameters, please choose the option to deploy the template into an existing resource group and pass the same name and region/location that were passed above to create-sp-azure.
+When setting up the ARM template, you will be prompted for the App ID (a UUID) and the app secret. If you are
+deploying Docker Community Edition for Azure and specified the resource group name and location parameters,
+choose the option to deploy the template into an **existing resource group** and pass the same name and
+region/location that you used when running the `create-sp-azure` helper script.
 
 <img src="img/service-principal.png" />
 

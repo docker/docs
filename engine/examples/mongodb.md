@@ -10,7 +10,7 @@ In this example, we are going to learn how to build a Docker image with
 MongoDB pre-installed.  We'll also see how to `push` that image to the
 [Docker Hub registry](https://hub.docker.com) and share it with others!
 
-> **Note:** This guide will show the mechanics of building a MongoDB container, but
+> **Note**: This guide will show the mechanics of building a MongoDB container, but
 you will probably want to use the official image on [Docker Hub]( https://hub.docker.com/_/mongo/)
 
 Using Docker and containers for deploying [MongoDB](https://www.mongodb.org/)
@@ -20,7 +20,7 @@ instances will bring several benefits, such as:
  - Ready to run and start working within milliseconds;
  - Based on globally accessible and shareable images.
 
-> **Note:** If you do **_not_** like `sudo`, you might want to check out
+> **Note**: If you do **_not_** like `sudo`, you might want to check out
 [*Giving non-root access*](../installation/binaries.md#giving-non-root-access).
 
 ## Creating a Dockerfile for MongoDB
@@ -34,54 +34,56 @@ $ nano Dockerfile
 Although optional, it is handy to have comments at the beginning of a
 `Dockerfile` explaining its purpose:
 
-```dockerfile
+```conf
     # Dockerizing MongoDB: Dockerfile for building MongoDB images
     # Based on ubuntu:latest, installs MongoDB following the instructions from:
     # http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 ```
 
-> **Tip:** `Dockerfile`s are flexible. However, they need to follow a certain
+> **Tip**: `Dockerfile`s are flexible. However, they need to follow a certain
 format. The first item to be defined is the name of an image, which becomes
 the *parent* of your *Dockerized MongoDB* image.
 
 We will build our image using the latest version of Ubuntu from the
 [Docker Hub Ubuntu](https://hub.docker.com/_/ubuntu/) repository.
 
-```dockerfile
+```conf
 # Format: FROM    repository[:version]
 FROM       ubuntu:latest
 ```
 
-> **Note:** Although Ubuntu systems have MongoDB packages, they are likely to
+> **Note**: Although Ubuntu systems have MongoDB packages, they are likely to
 > be outdated. Therefore in this example, we will use the official MongoDB
 > packages.
 
 We will begin with importing the MongoDB public GPG key. We will also create
 a MongoDB repository file for the package manager.
 
-```dockerfile
+```conf
 # Installation:
 # Import MongoDB public GPG key AND create a MongoDB list file
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+RUN apt-get install -y --no-install-recommends software-properties-common
 RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -d= -f2)/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 ```
 
 After this initial preparation we can update our packages and install MongoDB.
 
-```dockerfile
+```conf
 # Update apt-get sources AND install MongoDB
 RUN apt-get update && apt-get install -y mongodb-org
 ```
 
-> **Tip:** You can install a specific version of MongoDB by using a list of required packages with versions, e.g.:
-```dockerfile
-RUN apt-get update && apt-get install -y mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-mongos=3.0.1 mongodb-org-tools=3.0.1
+> **Tip**: You can install a specific version of MongoDB by using a list of required packages with versions, e.g.:
+>
+> ```conf
+> RUN apt-get update && apt-get install -y mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-> mongos=3.0.1 mongodb-org-tools=3.0.1
 ```
 
 MongoDB requires a data directory. Let's create it as the final step of our
 installation instructions.
 
-```dockerfile
+```conf
 # Create the MongoDB data directory
 RUN mkdir -p /data/db
 ```
@@ -90,7 +92,7 @@ Lastly we set the `ENTRYPOINT` which will tell Docker to run `mongod` inside
 the containers launched from our MongoDB image. And for ports, we will use
 the `EXPOSE` instruction.
 
-```dockerfile
+```conf
 # Expose port 27017 from the container to the host
 EXPOSE 27017
 
@@ -100,7 +102,7 @@ ENTRYPOINT ["/usr/bin/mongod"]
 
 Now save the file and let's build our image.
 
-> **Note:**  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker.github.io/blob/master/engine/examples/mongodb/Dockerfile).
+> **Note**:  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker.github.io/blob/master/engine/examples/mongodb/Dockerfile).
 
 ## Building the MongoDB Docker image
 
@@ -108,7 +110,7 @@ With our `Dockerfile`, we can now build the MongoDB image using Docker. Unless
 experimenting, it is always a good practice to tag Docker images by passing the
 `--tag` option to `docker build` command.
 
-```dockerfile
+```conf
 # Format: docker build --tag/-t <user-name>/<repository> .
 # Example:
 $ docker build --tag my/repo .
@@ -168,7 +170,7 @@ $ mongo --port 27017
 $ mongo --port 27017 --host 192.168.59.103
 ```
 
-> **Tip:** If you want to run two containers on the same engine, then you will need to map
+> **Tip**: If you want to run two containers on the same engine, then you will need to map
 the exposed port to two different ports on the host
 
 ```bash

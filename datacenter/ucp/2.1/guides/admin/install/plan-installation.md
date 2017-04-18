@@ -14,7 +14,7 @@ deploying Docker Universal Control Plane for production.
 Before installing UCP you should make sure that all nodes (physical or virtual
 machines) that you'll manage with UCP:
 
-* [Comply the the system requirements](system-requirements.md)
+* [Comply with the system requirements](system-requirements.md)
 * Are running the same version of Docker Engine
 
 ## Hostname strategy
@@ -46,7 +46,7 @@ this.
 
 In distributed systems such as Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
-then engines in a UCP cluster, all engines should regularly synchronize time
+the engines in a UCP cluster, all engines should regularly synchronize time
 with a NTP server. If a server's clock is skewed, unexpected behavior may
 cause poor performance or even failures.
 
