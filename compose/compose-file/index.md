@@ -1432,7 +1432,7 @@ A full example:
       config:
         - subnet: 172.28.0.0/16
 
-> **Note:** Additional IPAM configurations (e.g. `gateway`) are only acceptable for version 2 at the moment.
+> **Note**: Additional IPAM configurations, such as `gateway`, are only honored for version 2 at the moment.
 
 ### internal
 
