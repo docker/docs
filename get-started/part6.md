@@ -49,12 +49,12 @@ To set up and deploy:
 
 First, link Docker Cloud with your cloud provider:
 
-* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm/)
-* [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
-* [Microsoft Azure setup guide](/docker-cloud/infrastructure/link-azure.md)
-* [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
-* [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
-* [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
+* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'AWS');"}
+* [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'DigitalOcean');"}
+* [Microsoft Azure setup guide](/docker-cloud/infrastructure/link-azure.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Azure');"}
+* [Packet setup guide](/docker-cloud/infrastructure/link-packet.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Packet');"}
+* [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'SoftLayer');"}
+* [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'BYOH');"}
 
 ### Create your swarm
 
@@ -62,8 +62,8 @@ After your cloud provider is all set up, create a Swarm:
 
 * If you're on AWS you
   can [automatically create a
-  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm/).
-* Otherwise, [create your nodes](/docker-cloud/getting-started/your_first_node/)
+  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create AWS Swarm');"}.
+* Otherwise, [create your nodes](/docker-cloud/getting-started/your_first_node/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create Nodes');"}
   in the Docker Cloud UI, and run the `docker swarm init` and `docker swarm join`
   commands you learned in [part 4](part4.md) over [SSH via Docker
   Cloud](/docker-cloud/infrastructure/ssh-into-a-node/). Finally, [enable Swarm
@@ -95,11 +95,11 @@ via UI using Universal Control Plane, run a private image registry with Docker
 Trusted Registry, integrate with your LDAP provider, sign production images with
 Docker Content Trust, and many other features.
 
-[Take a tour of Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: class="button outline-btn"}
+[Take a tour of Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: class="button outline-btn" onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Take tour');"}
 {% endcapture %}
 {% capture enterprisedeployapp %}
 Once you're all set up and Datacenter is running, you can [deploy your Compose
-file from directly within the UI](/datacenter/ucp/2.1/guides/user/services/).
+file from directly within the UI](/datacenter/ucp/2.1/guides/user/services/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Deploy app in UI');"}.
 
 ![Deploy an app on DDC](/datacenter/ucp/2.1/guides/images/deploy-app-ui-1.png)
 
@@ -117,11 +117,11 @@ Enterprise editions are Amazon Web Services and Microsoft Azure.
 The good news is: there are one-click templates to quickly deploy Docker
 Enterprise on each of these providers:
 
-* [Docker Enterprise for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description)
-* [Docker Enterprise for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description)
+* [Docker Enterprise for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'EE for AWS');"}
+* [Docker Enterprise for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'EE for Azure');"}
 
-> **Note**: Having trouble with these? View [our setup guide for AWS](/datacenter/install/aws/).
-> You can also [view the WIP guide for Microsoft Azure](https://github.com/docker/docker.github.io/pull/2796).
+> **Note**: Having trouble with these? View [our setup guide for AWS](/datacenter/install/aws/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'AWS setup guide');"}.
+> You can also [view the WIP guide for Microsoft Azure](https://github.com/docker/docker.github.io/pull/2796){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Azure setup guide');"}.
 
 {{ enterprisedeployapp }}
 {% endcapture %}
@@ -131,10 +131,10 @@ Enterprise on each of these providers:
 Bringing your own server to Docker Enterprise and setting up Docker Datacenter
 essentially involves two steps:
 
-1. [Get Docker Enterprise Edition for your server's OS from Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
-2. Follow the [instructions to install Datacenter on your own host](/datacenter/install/linux/).
+1. [Get Docker Enterprise Edition for your server's OS from Docker Store](https://store.docker.com/search?offering=enterprise&type=edition){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Get Docker EE for your OS');"}.
+2. Follow the [instructions to install Datacenter on your own host](/datacenter/install/linux/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'BYOH setup guide');"}.
 
-> **Note**: Running Windows containers? View our [Windows Server setup guide](/docker-ee-for-windows/install/).
+> **Note**: Running Windows containers? View our [Windows Server setup guide](/docker-ee-for-windows/install/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
 
 {{ enterprisedeployapp }}
 {% endcapture %}
