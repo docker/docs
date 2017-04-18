@@ -463,7 +463,7 @@ some of the commmon settings to make it easier to configure them.
 
 Starting with Stable 1.13.0 and Beta 34, both Docker for Windows Stable and Beta
 releases have the experimental version of Docker Engine enabled, described
-in the [Docker Experimental Features README](https://github.com/docker/docker/blob/master/experimental/README.md) on GitHub.
+in the [Docker Experimental Features README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
