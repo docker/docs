@@ -10,4 +10,7 @@ here, you'll need to find the string by searching this repo:
 
 https://www.github.com/docker/docker
 -->
-{% include cli.md %}
+{% if page.datafolder contains '-edge' %}
+  {% include edge_only.md section="cliref" %}
+{% endif %}
+{% include cli.md datafolder=page.datafolder datafile=page.datafile %}

@@ -1,6 +1,17 @@
 command: docker run
 short: Run a command in a new container
-long: Run a command in a new container
+long: |-
+  The `docker run` command first `creates` a writeable container layer over the
+  specified image, and then `starts` it using the specified command. That is,
+  `docker run` is equivalent to the API `/containers/create` then
+  `/containers/(id)/start`. A stopped container can be restarted with all its
+  previous changes intact using `docker start`. See `docker ps -a` to view a list
+  of all containers.
+
+  The `docker run` command can be used in combination with `docker commit` to
+  [*change the command that a container runs*](commit.md). There is additional detailed information about `docker run` in the [Docker run reference](../run.md).
+
+  For information on connecting a container to a network, see the ["*Docker network overview*"](https://docs.docker.com/engine/userguide/networking/).
 usage: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker
 plink: docker.yaml

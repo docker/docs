@@ -1,4 +1,4 @@
-var metadata;
+var metadata, glossary;
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();
 var autoCompleteShowingID = 0;
@@ -193,9 +193,86 @@ function hookupTOCEvents()
   });
 }
 
+function queryString()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+function renderTopicsByTagTable(tagToLookup,divID)
+{
+  var matchingPages = new Array();
+  for (i=0;i<metadata.pages.length;i++)
+  {
+    thisPage = metadata.pages[i];
+    if (thisPage.keywords)
+    {
+      var keywordArray = thisPage.keywords.toString().split(",");
+      for (n=0;n<keywordArray.length;n++)
+      {
+        if (keywordArray[n].trim().toLowerCase()==tagToLookup.toLowerCase())
+        {
+          matchingPages.push(i); // log the id of the page w/matching keyword
+        }
+      }
+    }
+  }
+  var pagesOutput = new Array();
+  if (matchingPages.length > 0)
+  {
+    pagesOutput.push("<h2>Pages tagged with: " + tagToLookup + "</h2>");
+    pagesOutput.push("<table><thead><tr><td>Page</td><td>Description</td></tr></thead><tbody>");
+    for(i=0;i<matchingPages.length;i++) {
+      thisPage = metadata.pages[matchingPages[i]];
+      pagesOutput.push("<tr><td><a href='" + thisPage.url + "'>" + thisPage.title + "</a></td><td>" + thisPage.description + "</td></tr>");
+    }
+    pagesOutput.push("</tbody></table>");
+  }
+  $("#" + divID).html(pagesOutput.join(""));
+}
+function renderTagsPage()
+{
+  if(window.location.pathname.indexOf("/glossary/")>-1 || window.location.pathname.indexOf("/search/")>-1)
+  {
+    var tagToLookup;
+    if (window.location.pathname.indexOf("/glossary/")>-1)
+    {
+      // Get ?term=<value>
+      tagToLookup = decodeURI(queryString().term);
+      $("#keyword").html(tagToLookup);
+    }
+    else
+    {
+      // Get ?q=<value>
+      tagToLookup = decodeURI(queryString().q);
+    }
+    // Get the term and definition
+    for (i=0;i<glossary.terms.length;i++)
+    {
+      if (glossary.terms[i].term.toLowerCase()==tagToLookup.toLowerCase())
+      {
+        var glossaryOutput = glossary.terms[i].def;
+      }
+    }
+    if (glossaryOutput) $("#glossaryMatch").html("<h2>Definition of: " + tagToLookup + "</h2>" + glossaryOutput);
+    renderTopicsByTagTable(tagToLookup,"topicMatch",true);
+  }
+}
+
 jQuery(document).ready(function(){
     $.getJSON( "/metadata.txt", function( data ) {
       metadata = data;
       hookupTOCEvents();
+      $.getJSON( "/glossary.txt", function( data ) {
+        glossary = data;
+        renderTagsPage();
+      });
     });
 });

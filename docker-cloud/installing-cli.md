@@ -115,7 +115,7 @@ $ export DOCKERCLOUD_NAMESPACE=myorganization
 ```
 
 You can also set the `DOCKERCLOUD_NAMESPACE` variable before each CLI command.
-for example:
+For example:
 
 ```none
 $ DOCKERCLOUD_NAMESPACE=myteam docker container ps
@@ -128,7 +128,7 @@ To learn more, see the [Docker Cloud CLI README](https://github.com/docker/docke
 
 Periodically, Docker will add new features and fix bugs in the existing CLI. To use these new features, you must upgrade the CLI.
 
-#### Upgrade on the docker-cloud CLI on Linux or Windows
+#### Upgrade the docker-cloud CLI on Linux or Windows
 
 ```none
 $ pip install -U docker-cloud

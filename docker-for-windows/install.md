@@ -40,30 +40,38 @@ For more about Stable and Edge channels, see the
 <table style="width:100%">
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Edge channel</th>
+    <th style="font-size: x-large; font-family: arial;">Edge channel</th>
+    <th style="font-size: x-large; font-family: arial;">Legacy Edge installer</th>
   </tr>
   <tr valign="top">
-    <td width="50%">This installer is fully baked and tested. This is the
+    <td width="33%">This installer is fully baked and tested. This is the
     best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
    On this channel, you can select whether to send usage
    statistics and other data. <br><br>Stable builds are released once per quarter.
     </td>
-    <td width="50%">This installer provides the latest Edge release of
-    Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    <td width="33%">This new installer includes experimental support for Windows Server 2016 as a part of the latest Edge release of
+    Docker for Windows and Engine. <br><br>Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    </td>
+    <td width="33%">We recommend that all Edge users try the new installer. <br><br>However, if you have problems with the new installer experience, you can use the legacy Edge installer and still get all other Edge features.
     </td>
   </tr>
   <tr valign="top">
-  <td width="50%">
+  <td width="33%">
   <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
   </td>
-  <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge)</a>
+  <td width="33%">
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Edge)</a>
+  </td>
+  <td width="33%">
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge) (legacy installer)</a>
   </td>
   </tr>
   <tr valign="top">
-  <td width="50%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Stable InstallDocker.msi SHA256</font></a>
   </td>
-  <td width="50%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
+  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: New Edge InstallDocker.exe SHA256</font></a>
+  </td>
+  <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Legacy Edge InstallDocker.msi SHA256</font></a>
   </td>
   </tr>
 </table>
@@ -106,7 +114,7 @@ on a VMWare or Parallels instance, might work, but come with no
 guarantees (i.e., not officially supported). For more information, see
 [Running Docker for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 <p />
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro.md), Docker CLI client, [Docker Compose](/compose/overview.md), and [Docker Machine](/machine/overview.md).
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), and [Docker Machine](/machine/overview.md).
 
 ### About Windows containers and Windows Server 2016
 
@@ -157,11 +165,12 @@ Congratulations! You are up and running with Docker for Windows.
 basic Docker command examples, how to get help or give feedback, and
 links to all topics in the Docker for Windows guide.
 
+* [Get started with Docker](/get-started/) teaches you how to define and deploy
+applications with Docker.
+
 * [Troubleshooting](troubleshoot.md) describes common problems,
 workarounds, how to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
 * [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
-
-* [Learn Docker](/learn.md) provides general Docker tutorials.

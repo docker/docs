@@ -1,0 +1,37 @@
+command: docker container ls
+aliases: ps, list
+short: List containers
+long: List containers
+usage: docker container ls [OPTIONS]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: all
+  shorthand: a
+  default_value: "false"
+  description: Show all containers (default shows just running)
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: format
+  description: Pretty-print containers using a Go template
+- option: last
+  shorthand: "n"
+  default_value: "-1"
+  description: Show n last created containers (includes all states)
+- option: latest
+  shorthand: l
+  default_value: "false"
+  description: Show the latest created container (includes all states)
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display numeric IDs
+- option: size
+  shorthand: s
+  default_value: "false"
+  description: Display total file sizes
+

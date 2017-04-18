@@ -73,7 +73,7 @@ Use the `-f` flag to specify the location of a Compose configuration file. You
 can supply multiple `-f` configuration files. When you supply multiple files,
 Compose combines them into a single configuration. Compose builds the
 configuration in the order you supply the files. Subsequent files override and
-add to their successors.
+add to their predecessors.
 
 For example, consider this command line:
 
@@ -120,8 +120,7 @@ See also the `COMPOSE_FILE` [environment variable](envvars.md#compose-file).
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
 directory name. See also the `COMPOSE_PROJECT_NAME` [environment variable](
-envvars.md#compose-project-name)
-
+envvars.md#compose-project-name).
 
 ## Where to go next
 

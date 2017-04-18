@@ -86,20 +86,12 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
   project
 
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
-  project
-
 - **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
   docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
   project
 
 - **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
   docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
-  project
-
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
 ## Per-PR staging on GitHub
@@ -204,6 +196,12 @@ guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.
 
+### Testing changes and practical guidance
+
+If you want to test a style change, or if you want to see how to achieve a
+particular outcome with Markdown, Bootstrap, JQuery, or something else, have
+a look at `test.md` (which renders in the site at `/test/`).
+
 ### Per-page front-matter
 
 The front-matter of a given page is in a section at the top of the Markdown
@@ -259,6 +257,17 @@ references as you rename, add, and remove tabs.
   <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
 </div>
 ```
+
+For more info and a few more permutations, see `test.md`.
+
+### Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
 
 ## Copyright and license
 

@@ -1,0 +1,239 @@
+/*
+*
+* layout
+*
+*/
+#wrapper {
+    transition: all 0.5s ease;
+}
+/*
+*
+* branding *********************************************************************
+*
+*/
+
+.logo {
+    margin: 12px 10px 0 10px;
+    width: 160px;
+}
+
+/*
+*
+* Header ***********************************************************************
+*
+*/
+
+.header {
+    animation: gradientswitch 80s infinite;
+    -webkit-animation: gradientswitch 80 sinfinite;
+    height: $global-header-height;
+    position: relative;
+    z-index: 1;
+    transition: all 0.1s ease;
+}
+
+@keyframes gradientswitch {
+    0% {
+        background: #0087C9;
+    }
+    16% {
+        background: #EF4A53;
+    }
+    32% {
+        background: #FFB463;
+    }
+    49% {
+        background: #33D5D4;
+    }
+    65% {
+        background: #254356;
+    }
+    81% {
+        background: #5B4097
+    }
+    100% {
+        background: #0087C9
+    }
+}
+
+@-webkit-keyframes gradientswitch {
+    0% {
+        background: #0087C9;
+    }
+    16% {
+        background: #EF4A53;
+    }
+    32% {
+        background: #FFB463;
+    }
+    49% {
+        background: #33D5D4;
+    }
+    65% {
+        background: #254356;
+    }
+    81% {
+        background: #5B4097
+    }
+    100% {
+        background: #0087C9
+    }
+}
+
+.fan {
+    background: linear-gradient(-120deg, rgba(245, 33, 33, 0) 87%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-110deg, rgba(27, 0, 255, 0) 85%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-103deg, rgba(255, 33, 33, 0) 84%, rgba(255, 255, 255, 0.08) 15%), radial-gradient(circle, rgba(0, 135, 201, 0) 0%, rgba(0, 135, 201, 0) 100%);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+
+
+.columns,
+.col-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-nav {
+    order: -1;
+}
+
+// .col-content {}
+
+.col-body {
+    flex-direction: row;
+    flex: 1;
+    min-height: 555px;
+}
+.col-content {
+    flex: 1;
+}
+.col-nav,
+.col-toc {
+    flex: 0 0 0;
+}
+
+.col-toc-hidden {
+    display: none;
+}
+
+
+@media only screen and (min-width: 1000px) {
+    .col-nav,
+    .col-toc {
+        flex: 0 0 17em;
+    }
+}
+
+.content {
+    padding: 50px 50px 20px 50px;
+    max-width: 1024px;
+    min-width: 300px;
+    min-height: 500px;
+}
+
+.main-content {
+    padding: 0 35px 25px 30px;
+}
+
+section.section {
+    // min-width: 380px;
+    // max-width: 850px;
+    margin: 0 auto;
+}
+
+.content ul {
+    margin-top: 10px;
+}
+
+/*
+*
+* sidebar ***********************************************************************
+*
+*/
+
+#sidebar-wrapper {
+    background-color: $bg-sidebar;
+    // border-left: 1px solid rgba(204, 204, 204, 0.29);
+    height: 100%;
+    position: fixed;
+    padding: 70px 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    right: 250px;
+    margin-right: -250px;
+    width: 0;
+    transition: all 0.5s ease;
+}
+
+#sidebar-right {
+    background-color: $bg-sidebar;
+    // border-left: 1px solid rgba(204, 204, 204, 0.29);
+    height: 100%;
+    padding-top: 20px;
+    width: 270px;
+    min-height: 800px;
+}
+
+#sidebar-right.affix {
+    top: 10px;
+    position: fixed;
+    min-height: 800px;
+}
+
+.wrapper.right-open #sidebar-wrapper {
+    width: 270px;                                                                                                                                                                            
+}
+
+
+.wrapper.right-open .page-content {
+    padding-right: 190px;
+    background-color: purple;
+}
+
+/*
+* Sidebar
+*/
+
+.sidebar-home {
+    background-color: $bg-sidebar;
+    // border-right: 1px solid rgba(204, 204, 204, 0.29);
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 800px;
+    height: 100%;
+    width: 270px;
+    padding-top: 20px;
+}
+
+.sidebar-home .affix {
+    background-color: $bg-sidebar;
+    // border-right: 1px solid rgba(204, 204, 204, 0.29);
+    top: 55px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 100px;
+    height: 100%;
+    width: 270px;
+}
+
+
+/*.sidebar-home .affix {}*/
+
+.sidebar,.sidebar.affix  {
+    background-color: $bg-sidebar;
+    // border-right: 1px solid rgba(204,204,204,0.29);
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px 10px 100px 0;
+    position: fixed;
+    height: 100% !important;
+    width: 270px;
+}

@@ -1,87 +1,90 @@
 {% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
 {% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
-{% if page.datafolder and page.datafile %}
+{% if include.datafolder and include.datafile %}
 
 ## Description
 
-{% if page.datafile=="docker" %}<!-- docker.yaml is textless, so override -->
+{% if include.datafile=="docker" %}<!-- docker.yaml is textless, so override -->
 {{ dockerBaseDesc }}
 {% else %}
-{{ site.data[page.datafolder][page.datafile].short }}
+{{ site.data[include.datafolder][include.datafile].short }}
 {% endif %}
 
-{% if site.data[page.datafolder][page.datafile].usage %}
+{% if site.data[include.datafolder][include.datafile].usage %}
 
 ## Usage
 
 ```none
-{{ site.data[page.datafolder][page.datafile].usage | replace: tabChar,"" | strip }}{% if site.data[page.datafolder][page.datafile].cname %} COMMAND{% endif %}
+{{ site.data[include.datafolder][include.datafile].usage | replace: tabChar,"" | strip }}{% if site.data[include.datafolder][include.datafile].cname %} COMMAND{% endif %}
 ```
 
 {% endif %}
-{% if site.data[page.datafolder][page.datafile].options %}
+{% if site.data[include.datafolder][include.datafile].options %}
 
 ## Options
 
 | Name, shorthand | Default | Description |
-| ---- | ------- | ----------- |{% for option in  site.data[page.datafolder][page.datafile].options %}
+| ---- | ------- | ----------- |{% for option in  site.data[include.datafolder][include.datafile].options %}
 | `--{{ option.option }}{% if option.shorthand %}, -{{ option.shorthand }}{% endif %}` | {% if option.default_value and option.default_value != "[]" %}`{{ option.default_value }}`{% endif %} | {{ option.description | replace: "|","&#124;" | strip }} | {% endfor %}
 
 {% endif %}
 
-{% if site.data[page.datafolder][page.datafile].cname %}
+{% if site.data[include.datafolder][include.datafile].cname %}
 
 ## Child commands
 
 | Command | Description |
-| ------- | ----------- |{% for command in site.data[page.datafolder][page.datafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[page.datafolder][dataFileName].short }} |{% endfor %}
+| ------- | ----------- |{% for command in site.data[include.datafolder][include.datafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[include.datafolder][dataFileName].short }} |{% endfor %}
 
 {% endif %}
 
-{% unless site.data[page.datafolder][page.datafile].pname == page.datafile %}
+{% unless site.data[include.datafolder][include.datafile].pname == include.datafile %}
 
 ## Parent command
 
-{% capture parentfile %}{{ site.data[page.datafolder][page.datafile].plink | replace: ".yaml", "" | replace: "docker_","" }}{% endcapture %}
-{% capture parentdatafile %}{{ site.data[page.datafolder][page.datafile].plink | replace: ".yaml", "" }}{% endcapture %}
+{% capture parentfile %}{{ site.data[include.datafolder][include.datafile].plink | replace: ".yaml", "" | replace: "docker_","" }}{% endcapture %}
+{% capture parentdatafile %}{{ site.data[include.datafolder][include.datafile].plink | replace: ".yaml", "" }}{% endcapture %}
 
-{% if site.data[page.datafolder][page.datafile].pname == "docker" %}
+{% if site.data[include.datafolder][include.datafile].pname == "docker" %}
 {% capture parentDesc %}{{ dockerBaseDesc }}{% endcapture %}
 {% else %}
-{% capture parentDesc %}{{ site.data[page.datafolder][parentdatafile].short }}{% endcapture %}
+{% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 {% endif %}
 
 | Command | Description |
 | ------- | ----------- |
-| [{{ site.data[page.datafolder][page.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
+| [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
 {% endunless %}
 
-{% unless site.data[page.datafolder][page.datafile].pname == "docker" or site.data[page.datafolder][page.datafile].pname == "dockerd" %}
+{% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" %}
 
 ## Related commands
 
 | Command | Description |
-| ------- | ----------- |{% for command in site.data[page.datafolder][parentdatafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[page.datafolder][dataFileName].short }} |{% endfor %}
+| ------- | ----------- |{% for command in site.data[include.datafolder][parentdatafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[include.datafolder][dataFileName].short }} |{% endfor %}
 
 {% endunless %}
 
-{% unless site.data[page.datafolder][page.datafile].long == site.data[page.datafolder][page.datafile].short %}
+{% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
 
 ## Extended description
 
-{{ site.data[page.datafolder][page.datafile].long }}
+{{ site.data[include.datafolder][include.datafile].long }}
 
 {% endunless %}
 
-{% if site.data[page.datafolder][page.datafile].examples %}
+{% if site.data[include.datafolder][include.datafile].examples %}
 
 ## Examples
 
-{{ site.data[page.datafolder][page.datafile].examples }}
+{{ site.data[include.datafolder][include.datafile].examples }}
 
 {% endif %}
+{% else %}
+
+The include.datafolder or include.datafile was not set.
 
 {% endif %}

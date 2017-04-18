@@ -87,7 +87,7 @@ container can connect to the ports exposed by the other container -- the ports
 that it mentioned in the `EXPOSE` lines of its `Dockerfile`.
 
 > **Note**: The value `CONTAINER_NAME` in `--link=` must either be an
-auto-assigned Docker name like `stupefied_pare` or else the name you assigned
+auto-assigned Docker name like `stupefied_pare` or the name you assigned
 with `--name=` when you ran `docker run`.  It cannot be a hostname, which Docker
 will not recognize in the context of the `--link=` option.
 

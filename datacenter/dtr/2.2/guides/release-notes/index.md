@@ -12,6 +12,29 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.4
+
+(13 April 2017)
+
+**Bugs fixed**
+
+* High impact
+  * Fixed memory leaks causing DTR to use all RAM available
+  * Fixed concurrency problems that might cause the registry and api server to
+  restart
+  * Improved performance of search on the web UI. To improve performance
+  the search now only returns accounts and repositories that match the search
+  input. It no longer shows repositories belonging to the accounts returned in
+  the search result
+  * The web UI now displays all members of an organization
+* Low impact
+  * When installing or joining replicas with `--nfs-storage-url` and the
+  installation fails, DTR now deletes the `.dtr-nfs-test` file
+  * The web UI now shows if a team is managed in LDAP or not
+  * After updating the vulnerability database, a rescan button only shows
+  if the user has permissions for that action
+
+
 ## DTR 2.2.3
 
 (9 March 2017)

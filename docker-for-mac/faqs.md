@@ -104,6 +104,11 @@ provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
 
+### How can I opt out of sending my usage data?
+
+If you do not want auto-send of usage data, use the Stable channel. For more
+information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Mac?").
+
 ### Can I use Docker for Mac with new swarm mode?
 
 Yes, you can use Docker for Mac to test single-node features of [swarm
@@ -223,6 +228,13 @@ Note that you need a Mac that supports hardware virtualization and can run at
 least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
 [What to know before you install](install.md#what-to-know-before-you-install) in
 the install guide.
+
+### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
+
+Yes, if you [change the name of your macOS user account and home
+folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
+already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac will fail to start. See also,
+[Docker for Mac will not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-will-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 

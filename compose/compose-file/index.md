@@ -25,8 +25,10 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
-The best way to quickly grok the layout and syntax of a Compose file is to look
-at files for [sample applications](samples.md). A good place to start is the
+The best way to quickly grok the layout and syntax of a Compose file is to
+read [Get started with Docker Compose](/compose/gettingstarted/) and to look
+at files for [applications on GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
+A good place to start is the
 version 3 Compose stack file we use for the voting app sample to illustrate
 multi-container apps, service definitions, swarm mode, the `deploy` key, and the
 `docker stack deploy` command. Click to show/hide the example file below. This
@@ -37,7 +39,7 @@ tutorial](/engine/getstarted-voting-app/index.md).
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h4>
+      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h5>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
       <div class="panel-body">
@@ -651,31 +653,6 @@ An entry with the ip address and hostname will be created in `/etc/hosts` inside
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
-
-### group_add
-
-> [Version 2 file format](compose-versioning.md#version-2) and up.
-
-Specify additional groups (by name or number) which the user inside the
-container will be a member of. Groups must exist in both the container and the
-host system to be added. An example of where this is useful is when multiple
-containers (running as different users) need to all read or write the same
-file on the host system. That file can be owned by a group shared by all the
-containers, and specified in `group_add`. See the
-[Docker documentation](/engine/reference/run.md#additional-groups) for more
-details.
-
-A full example:
-
-    version: '2'
-    services:
-        image: alpine
-        group_add:
-          - mail
-
-Running `id` inside the created container will show that the user belongs to
-the `mail` group, which would not have been the case if `group_add` were not
-used.
 
 ### healthcheck
 
@@ -1487,7 +1464,7 @@ Compose. `docker-compose up` will not attempt to create it, and will raise
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
+(`driver`, `driver_opts`, `ipam`, `internal`).
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose will
@@ -1539,7 +1516,7 @@ and `my_second_secret` already exists in Docker.
 secrets:
   my_first_secret:
     file: ./secret_data
-  my_second_secret
+  my_second_secret:
     external: true
 ```
 
@@ -1555,8 +1532,6 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Sample app with swarm mode](/engine/getstarted-voting-app/)
-- [Get started with Django](/compose/django/)
-- [Get started with Rails](/compose/rails/)
-- [Get started with WordPress](/compose/wordpress/)
+- [Get started with Docker](/get-started/)
+- [Samples](/samples/)
 - [Command line reference](/compose/reference/)

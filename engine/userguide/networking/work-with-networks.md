@@ -596,7 +596,7 @@ are not on the same network.
 
 The following example illustrates these points.
 
-1.  Create another network named `local_alias`
+1.  Create another network named `local_alias`:
 
     ```bash
     $ docker network create -d bridge --subnet 172.26.0.0/24 local_alias
@@ -648,7 +648,7 @@ The following example illustrates these points.
 4.  Disconnect `container5` from the `isolated_nw` network. Attach to `container4`
     and try pinging `c5` and `foo`.
 
-    ```
+    ```bash
     $ docker network disconnect isolated_nw container5
 
     $ docker attach container4
@@ -997,7 +997,7 @@ multi-host network, the daemon cannot clean up stale connectivity endpoints.
 Such stale endpoints may cause an error if a new container is connected
 to that network with the same name as the stale endpoint:
 
-```no-highlight
+```none
 ERROR: Cannot start container bc0b19c089978f7845633027aa3435624ca3d12dd4f4f764b61eac4c0610f32e: container already connected to network multihost
 ```
 

@@ -59,40 +59,40 @@ a new service that will be started after the docker daemon service has started.
 ### systemd
 
     [Unit]
-    Description=Redis container
+    Description=Docker Container %I
     Requires=docker.service
     After=docker.service
 
     [Service]
     Restart=always
-    ExecStart=/usr/bin/docker start -a redis_server
-    ExecStop=/usr/bin/docker stop -t 2 redis_server
+    ExecStart=/usr/bin/docker start -a %i
+    ExecStop=/usr/bin/docker stop -t 2 %i
 
     [Install]
     WantedBy=default.target
 
 If you intend to use this as a system service, put the above contents in a file
 in the `/etc/systemd/system` directory, e.g.
-`/etc/systemd/system/docker-redis_server.service`.
+`/etc/systemd/system/docker-container@.service`.
 
 If you need to pass options to the redis container (such as `--env`),
 then you'll need to use `docker run` rather than `docker start`. This will
 create a new container every time the service is started, which will be stopped
 and removed when the service is stopped. Make sure you don't use "`-d`" for
 "detached mode". The command run from "`ExecStart`" needs to run in the foreground.
+    
+    systemctl edit docker-container@redis_server.service
 
     [Service]
-    ...
-    ExecStart=/usr/bin/docker run --env foo=bar --name redis_server redis
-    ExecStop=/usr/bin/docker stop -t 2 redis_server
-    ExecStopPost=/usr/bin/docker rm -f redis_server
-    ...
+    ExecStart=
+    ExecStart=/usr/bin/docker run --env foo=bar --name %i redis
+    ExecStopPost=/usr/bin/docker rm -f %i
 
 To start using the service, reload systemd and start the service:
 
     systemctl daemon-reload
-    systemctl start docker-redis_server.service
+    systemctl start docker-container@redis_server.service
 
 To enable the service at system startup, execute:
 
-    systemctl enable docker-redis_server.service
+    systemctl enable docker-container@redis_server.service

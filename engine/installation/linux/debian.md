@@ -30,6 +30,9 @@ Raspbian versions:
 - Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
+Docker CE is supported on both `x86_64` and `armhf` architectures for Jessie and
+Stretch.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
@@ -90,6 +93,7 @@ from the repository.
          apt-transport-https \
          ca-certificates \
          curl \
+         gnupg2 \
          software-properties-common
     ```
 
@@ -130,21 +134,33 @@ from the repository.
     To also add the **edge** repository, add `edge` after `stable` on the last
     line of the command.
 
+    **amd64**:
+
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
+
+    **armhf**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
     running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
     line like the following, and comment it out or remove it:
-    
+
     ```none
     deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable
     ```
-    
+
     Save and exit the file.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
@@ -223,9 +239,9 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 a new file each time you want to upgrade Docker.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
-    choose your Ubuntu version, browse to `stable/pool/stable/amd64/`, and
-    download the `.deb` file for the Docker version you want to install and for
-    your version of Debian.
+    choose your Debian version, browse to `stable/pool/stable/`, choose either
+    `amd64` or `armhf`,and download the `.deb` file for the Docker version you
+    want to install and for your version of Debian.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.

@@ -45,7 +45,7 @@ For more about Stable and Edge channels, see the
     best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
    On this channel, you can select whether to send usage
    statistics and other data. <br><br>Stable builds are released once per quarter.
-    </td>
+   </td>
     <td width="50%">This installer provides the latest Edge release of
     Docker for Mac and Engine, and typically offers new features in development. Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
     </td>
@@ -124,7 +124,7 @@ explanation and list of prerequisites.
   > instead of HyperKit.
 
 * **What the install includes**: The installation provides
-  [Docker Engine](/engine/userguide/intro/), Docker CLI client,
+  [Docker Engine](/engine/userguide/), Docker CLI client,
   [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Install and Run Docker for Mac
@@ -173,4 +173,4 @@ workarounds, how to run and submit diagnostics, and submit issues.
 
 * [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
 
-* [Learn Docker](/learn.md) provides general Docker tutorials.
+* [Get Started with Docker](/get-started/) provides a general Docker tutorial.

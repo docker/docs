@@ -8,11 +8,20 @@ title: Docker for AWS Release Notes
 
 ## Stable Channel
 
-### 17.03.0 CE
-Release date: 03/01/2017
+### 17.03.1 CE
+
+Release date: 03/30/2017
 
 {{aws_blue_latest}}
 
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Updated AZ for Sao Paulo
+
+### 17.03.0 CE
+
+Release date: 03/01/2017
 
 **New**
 
@@ -21,6 +30,7 @@ Release date: 03/01/2017
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
 ### 1.13.1-2
+
 Release date: 02/08/2017
 
 **New**
@@ -28,6 +38,7 @@ Release date: 02/08/2017
 - Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-1
+
 Release date: 01/18/2017
 
 **New**
@@ -37,11 +48,25 @@ Release date: 01/18/2017
 
 ## Edge Channel
 
-### 17.03.0-edge CE
-Release date: 03/01/2017
+### 17.04.0-edge CE
+
+Release date: 04/06/2017
 
 {{aws_blue_edge}}
 
+**New**
+
+- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Added lambda support for Mumbai
+- Removed the ELB Name to allow for longer stack names
+- Added i3 EC2 instance types
+- Added CloudStor support to the Sydney region
+- Updated AZ for Sao Paulo
+- [Bring your own VPC] Added a VPC CIDR Parameter
+
+### 17.03.0-edge CE
+
+Release date: 03/01/2017
 
 **New**
 
@@ -51,6 +76,7 @@ Release date: 03/01/2017
 - Added alias to `Cloudstor` plugin to make it easier on upgrades.
 
 ### 1.13.1-beta18
+
 Release date: 02/16/2017
 
 **New**
@@ -66,6 +92,7 @@ Release date: 02/16/2017
     - **node_type** (worker, manager)
 
 ### 1.13.1-rc2-beta17
+
 Release date: 02/07/2017
 
 **New**
@@ -73,6 +100,7 @@ Release date: 02/07/2017
 - Docker Engine upgraded to [Docker 1.13.1-rc2](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-rc1-beta16
+
 Release date: 02/01/2017
 
 **New**
@@ -80,6 +108,7 @@ Release date: 02/01/2017
 - Docker Engine upgraded to [Docker 1.13.1-rc1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc5-beta15
+
 Release date: 01/10/2017
 
 **New**
@@ -87,6 +116,7 @@ Release date: 01/10/2017
 - Docker Engine upgraded to [Docker 1.13.0-rc5](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-rc4-beta14
+
 Release date: 12/21/2016
 
 **New**
@@ -100,6 +130,7 @@ Release date: 12/21/2016
 - Made recovery improvements when primary swarm node crashes
 
 ### 1.13.0-rc3-beta13
+
 Release date: 12/06/2016
 
 **New**
@@ -111,6 +142,7 @@ Release date: 12/06/2016
 - Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](/docker-for-aws/deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
 
 ### 1.13.0-rc2-beta12
+
 Release date: 11/23/2016
 
 **New**
@@ -140,7 +172,6 @@ Release date: 11/17/2016
 **Important**
 
 - Due to some changes with the IP ranges in the subnets in Beta10, it will not be possible to upgrade from beta 10 to beta 11. You will need to start from scratch using beta11. We are sorry for any issues this might cause. We needed to make the change, and it was decided it was best to do it now, while still in private beta to limit the impact.
-
 
 ### 1.12.3-beta10
 
@@ -257,3 +288,7 @@ Release date: 7/13/2016
 
  * To assist with debugging, the Docker Engine API is available internally in the AWS VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
  * Likewise, swarm-mode is configured to auto-accept both manager and worker nodes inside the VPC. This policy will be changed to be more restrictive by default in the future.
+
+## Template Archive
+
+If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).

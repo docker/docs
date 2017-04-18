@@ -68,7 +68,7 @@ This tells Docker to:
 * Add the current directory `.` into the path `/code` in the image.
 * Set the working directory to `/code`.
 * Install the Python dependencies.
-* Set the default command for the container to `python app.py`
+* Set the default command for the container to `python app.py`.
 
 For more information on how to write Dockerfiles, see the [Docker user
 guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
@@ -140,7 +140,7 @@ containers](../engine/tutorials/dockervolumes.md).
    doesn't resolve, you can also try `http://localhost:5000`.
 
    If you're using Docker Machine on a Mac, use `docker-machine ip MACHINE_VM` to get
-   the IP address of your Docker host. Then, `open http://MACHINE_VM_IP:5000` in a
+   the IP address of your Docker host. Then, open `http://MACHINE_VM_IP:5000` in a
    browser.
 
    You should see a message in your browser saying:
@@ -167,6 +167,10 @@ rebuild the image.
 2.  Refresh the app in your browser. The greeting should be updated, and the
     counter should still be incrementing.
 
+>**Note:** If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
+ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
+requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+need VirtualBox.
 
 ## Step 6: Experiment with some other commands
 
