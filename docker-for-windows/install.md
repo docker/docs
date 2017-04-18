@@ -114,7 +114,7 @@ on a VMWare or Parallels instance, might work, but come with no
 guarantees (i.e., not officially supported). For more information, see
 [Running Docker for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 <p />
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro.md), Docker CLI client, [Docker Compose](/compose/overview.md), and [Docker Machine](/machine/overview.md).
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), and [Docker Machine](/machine/overview.md).
 
 ### About Windows containers and Windows Server 2016
 
@@ -165,11 +165,12 @@ Congratulations! You are up and running with Docker for Windows.
 basic Docker command examples, how to get help or give feedback, and
 links to all topics in the Docker for Windows guide.
 
+* [Get started with Docker](/get-started/) teaches you how to define and deploy
+applications with Docker.
+
 * [Troubleshooting](troubleshoot.md) describes common problems,
 workarounds, how to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
 * [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
-
-* [Learn Docker](/learn.md) provides general Docker tutorials.

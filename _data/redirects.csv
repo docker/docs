@@ -1,5 +1,5 @@
 /source,destination
-/engine/quickstart/,/engine/getstarted/
+/engine/quickstart/,/get-started/
 /engine/containers/,/engine/tutorials/
 /win/,/docker-for-windows/
 /mac/,/docker-for-mac/
