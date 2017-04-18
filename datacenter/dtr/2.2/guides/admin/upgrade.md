@@ -20,9 +20,9 @@ support upgrades according to the following rules:
 
 |From| To| Description| Supported|
 |:----|:---|:------------|----------|
-| 2.2.0 | 2.2.1 | patch upgrade | yes |
-| 2.2.0 | 2.2.2 | skip patch version | yes |
-| 2.2.2 | 2.2.1 | patch downgrade | no |
+| X.Y.0 | 2.2.1 | patch upgrade | yes |
+| X.Y.0 | 2.2.2 | skip patch version | yes |
+| X.Y.2 | 2.2.1 | patch downgrade | no |
 | 2.1.0 | 2.2.0 | minor upgrade | yes |
 | 2.1.1 | 2.2.0 | minor upgrade | yes |
 | 2.1.2 | 2.2.2 | minor upgrade | yes |
