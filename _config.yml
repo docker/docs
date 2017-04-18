@@ -18,10 +18,6 @@ gems:
   - jekyll-seo-tag
   - jekyll-relative-links
 
-webrick:
-  headers:
-    Cache-Control: 600
-
 defaults:
   -
     scope:
