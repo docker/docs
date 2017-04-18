@@ -26,7 +26,7 @@ Raft tolerates up to `(N-1)/2` failures and requires a majority or quorum of
 a cluster of 5 Managers running Raft, if 3 nodes are unavailable, the system
 will not process any more requests to schedule additional tasks. The existing
 tasks will keep running but the scheduler will not be able to rebalance tasks to
-cope with failures if when the manager set is not healthy.
+cope with failures if the manager set is not healthy.
 
 The implementation of the consensus algorithm in swarm mode means it features
 the properties inherent to distributed systems:
