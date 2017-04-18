@@ -93,8 +93,8 @@ the repository.
 
 #### Set up the repository
 
-The procedure for setting up the repository is different for [Docker CE](#docker-ce) and
-[Docker EE](#docker-ee).
+The procedure for setting up the repository is different for Docker CE and
+Docker EE.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="ce" data-target="#ce-repo-setup">Docker CE</a></li>
@@ -326,10 +326,10 @@ a new file each time you want to upgrade Docker.
     <div class="tab-content">
     <div id="ce-install-from-package-docker" class="tab-pane fade in active" markdown="1">
 
-    - Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-      Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
-      `armhf`,and download the `.deb` file for the Docker version you want to
-      install and for your version of Ubuntu.
+    Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
+    Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+    `armhf`,and download the `.deb` file for the Docker version you want to
+    install and for your version of Ubuntu.
 
       > **Note**: To install an **edge**  package, change the word
       > `stable` in the  URL to `edge`.
@@ -338,10 +338,10 @@ a new file each time you want to upgrade Docker.
     </div>
     <div id="ee-install-from-package-docker" class="tab-pane fade" markdown="1">
 
-    - Go to the Docker EE repository URL associated with your
-      trial or subscription in your browser. Go to
-      `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
-      Docker version you want to install.
+    Go to the Docker EE repository URL associated with your
+    trial or subscription in your browser. Go to
+    `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+    Docker version you want to install.
 
     </div>
     </div>
