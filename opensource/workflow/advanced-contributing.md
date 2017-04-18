@@ -66,7 +66,7 @@ The following provides greater detail on the process:
 2.  Review existing issues and proposals to make sure no other user is proposing a similar idea.
 
     The design proposals are
-    [all online in our GitHub pull requests](https://github.com/docker/docker.github.io/pulls){: target="_blank" class="_"}.
+    [all online in our GitHub pull requests](https://github.com/docker/docker.github.io/pulls).
 
 3.  Talk to the community about your idea.
 
