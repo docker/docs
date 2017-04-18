@@ -44,7 +44,8 @@ certificates.
 * A `cert.pem` file with the TLS certificate and any intermediate public
 certificates. This certificate should also have SANs for all addresses used to
 access UCP, including load balancers.
-* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. Encrypted keys should have `ENCRYPTED` in the first line.
+* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. 
+Encrypted keys should have `ENCRYPTED` in the first line.
 
 Finally, click **Update** for the changes to take effect.
 
