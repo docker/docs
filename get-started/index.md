@@ -56,7 +56,7 @@ redirect_from:
 
 Welcome! We are excited you want to learn how to use Docker.
 
-In this seven-part tutorial, you will:
+In this six-part tutorial, you will:
 
 1. Get set up and oriented, on this page.
 2. [Build and run your first app](part2.md)
