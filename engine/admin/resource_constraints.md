@@ -38,16 +38,22 @@ for [Memory Resource Controller](https://www.kernel.org/doc/Documentation/cgroup
 
 ### `--memory-swap` details
 
-- If unset, and `--memory` is set, the container can use twice as much swap
+- A limit value equal to memory plus swap. Must be used with `-m (--memory)` flag.
+      The limit should always be larger than `-m (--memory)` value. By default, it is
+      set to double the value of --memory.
+
+- If unset, and `--memory` is set, the container can use as much swap
       as the `--memory` setting, if the host container has swap memory configured.
       For instance, if `--memory="300m"` and `--memory-swap` is not set, the
-      container can use 300m of memory and 600m of swap.
-- If set to a positive integer,  and if both `--memory` and `--memory-swap`
-      are set, `--memory-swap` represents the total amount of memory and swap
+      container can use 300m of memory and 300m of swap.
+- If set to a positive integer,  then both `--memory` and `--memory-swap` must be
+      set, `--memory-swap` represents the total amount of memory and swap
       that can be used, and `--memory` controls the amount used by non-swap
       memory. So if `--memory="300m"` and `--memory-swap="1g"`, the container
       can use 300m of memory and 700m (1g - 300m) swap.
 - If set to `-1` (the default), the container is allowed to use unlimited swap memory.
+- If set to `0`, it will be ignored and treated as unset.
+- If set to equal the `--memory` setting to a positive interger, set the swap limit to `0`.
 
 ### `--memory-swappiness` details
 
