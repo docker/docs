@@ -146,11 +146,15 @@ from the repository.
     **armhf**:
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
+        raspbian-jessie main" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
     ```
+
+    > **Warning**: It is HIGHLY recommended you use
+    > ```bash $ curl -sSL https://get.docker.com | sh ``` in order to install Docker on
+    > Raspberry Pi's!! This will also install bash auto-completion and
+    > appropriately mirror the download depending on your country.
 
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
@@ -166,6 +170,8 @@ from the repository.
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
+
+> **NOTE**: Docker CE is not available on raspbian-jessie, scroll down to follow the Raspian steps.
 
 1.  Update the `apt` package index.
 
@@ -231,6 +237,57 @@ steps.
 To upgrade Docker, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
+
+
+### Install on Raspian (Raspberry Pi)
+>**Warning**: This isn't necessary if you used the recommended
+>```bash $ curl -sSL https://get.docker.com | sh ``` command!
+
+Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
+see `docker.list` if you:
+
+```bash
+$ ls /etc/apt/sources.list.d/
+```
+
+And the contents of the `docker.list` should read:
+
+`deb [arch=armhf] https://apt.dockerproject.org/repo raspbian-jessie main`
+
+If you don't see that in `docker.list`, then either comment the line out, or
+`rm` the `docker.list` file.
+
+Once you have verified that you have the correct repository, you may continue
+installing Docker.
+
+1.  Update the `apt` package index.
+
+    ```bash
+    $ sudo apt-get update
+    ```
+2.  Install the latest version of Docker, or go to the next step to install a
+    specific version. Any existing installation of Docker is replaced.
+
+    Use this command to install the latest version of Docker:
+
+    ```bash
+    $ sudo apt-get install docker
+    ```
+    > **NOTE**: By default, Docker on Raspian is Docker Community Edition, so
+    > there is no need to specify docker-ce.
+
+    > **NOTE**: If ```bash $ curl -sSL https://get.docker.com | sh ``` isn't used,
+    > then docker won't have auto-completion! You'll have to add it manually.
+
+3.  Verify that Docker is installed correctly by running the `hello-world`
+    image.
+
+    ```bash
+    $ sudo docker run hypriot/armhf-hello-world
+    ```
+
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
 
 ### Install from a package
 
