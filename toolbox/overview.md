@@ -25,7 +25,7 @@ Toolbox includes these Docker tools:
 
 * Oracle VirtualBox
 
-You can find the versions of the tools on [Toolbox Releases](https://github.com/docker/toolbox/releases) or running `--version` as the flag in terminal, for example, `docker-compose --version`
+You can find various versions of the tools on [Toolbox Releases](https://github.com/docker/toolbox/releases) or run them with the `--version` flag in the terminal, for example, `docker-compose --version`.
 
 
 ## Ready to get started?
