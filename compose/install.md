@@ -60,7 +60,7 @@ To install Compose, do the following:
 ### Install using pip
 
 Compose can be installed from [pypi](https://pypi.python.org/pypi/docker-compose)
-using `pip`. If you install using `pip`, it is highly recommended that you use a
+using `pip`. If you install using `pip`, we recommend that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating systems
 have python system packages that conflict with docker-compose dependencies. See
 the [virtualenv tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
