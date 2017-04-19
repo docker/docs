@@ -134,19 +134,9 @@ $("#menu-toggle-left").click(function(e) {
         $(".col-nav").toggleClass("col-toc-hidden");
     });
 $(".navbar-toggle").click(function(){
-  $(".sidebar, .sidebar-home").each(function(){
-    if($(this).hasClass("hidden-sm")) {
-      $(this).removeClass("hidden-sm");
-      $(this).css("overflow-y","scroll");
-    } else {
-      $(this).addClass("hidden-sm");
-    }
-    if($(this).hasClass("hidden-xs")) {
-      $(this).removeClass("hidden-xs");
-      $(this).css("overflow-y","scroll");
-    } else {
-      $(this).addClass("hidden-xs");
-    }
+  $("#sidebar-nav").each(function(){
+    $(this).toggleClass("hidden-sm");
+    $(this).toggleClass("hidden-xs");
   });
 });
 
