@@ -59,15 +59,27 @@ function checkNavSizes()
   sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
   footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
   headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
-  if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
+  if(document.getElementsByClassName("header").length != 0){
+    //on home page
+    var screenBottomReal = $(window).scrollTop() + $(window).height();
+    var footerTopReal = $("footer").offset().top;
+    var sideBarHeight = $(window).height();
+    if(screenBottomReal > footerTopReal){
+      var dif = screenBottomReal - footerTopReal;
+      sideBarHeight = sideBarHeight - dif;
+    }
+    document.getElementsByClassName("col-nav")[0].getElementsByTagName('ul')[0].style.height = sideBarHeight +"px"; 
+  }
+  else if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
   {
 
     // the footer is overlapping the sidebar
     var sidebarHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
     var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
     sidebarObj.style.height = sidebarHeight + "px";
-    document.getElementsByClassName("toc-nav")[0].style.height = tocNavHeight + "px";
+    //document.getElementsByClassName("toc-nav")[0].style.height = tocNavHeight + "px";
     document.getElementsByClassName("col-nav")[0].style.height = tocNavHeight + "px";
+    document.getElementById("sidebar-wrapper").style.height = tocNavHeight + "px";
     $(sidebarObj).clearQueue().finish();
     setTimeout(highlightRightNav(currentHeading),1);
   }
