@@ -4,7 +4,8 @@ keywords: windows faqs
 title: Frequently asked questions (FAQ)
 ---
 
->**Looking for popular FAQs on Docker for Windows?** Check out the [Docker
+>**Looking for popular FAQs on Docker for Windows?**
+>Check out the [Docker
 Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,
 technical support for various subscription levels, and more.
 
