@@ -147,7 +147,8 @@ working as expected.
 ## Restore DTR data
 
 If your DTR has a majority of unhealthy replicas, the one way to restore it to
-a working state is by restoring from an existing backup.
+a working state is by restoring from an existing backup. Performing restore require 
+restoration to the same release that the backups were acquired from.
 
 To restore DTR, you need to:
 

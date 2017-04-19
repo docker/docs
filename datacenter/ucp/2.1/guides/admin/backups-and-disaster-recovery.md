@@ -77,7 +77,8 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 ## Restore your cluster
 
 The restore command can be used to create a new UCP cluster from a backup file.
-After the restore operation is complete, the following data will be recovered
+Performing restore require restoration to the same release that the backups were 
+acquired from. After the restore operation is complete, the following data will be recovered
 from the backup file:
 
 * Users, teams and permissions.

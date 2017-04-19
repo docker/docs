@@ -50,6 +50,9 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 
 ## Restore command
 
+Performing restore require restoration to the same release that the backups were 
+acquired from.
+
 The example below shows how to restore a UCP controller node from an existing
 backup:
 

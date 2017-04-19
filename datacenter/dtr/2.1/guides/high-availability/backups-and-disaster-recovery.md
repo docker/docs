@@ -81,6 +81,8 @@ $ tar -tf /tmp/backup.tar
 
 ## Restore DTR data
 
+Performing restore require restoration to the same release that the backups were 
+acquired from.
 You can restore a DTR node from a backup using the `restore`
 command.
 This command performs a fresh installation of DTR, and reconfigures it with
