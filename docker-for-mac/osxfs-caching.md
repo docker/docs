@@ -35,8 +35,8 @@ with certain types of workload the overhead of maintaining perfect
 consistency can result in performance that is significantly worse than a
 native (non-Docker) environment.  For example,
 
- * running `go list ./...` in a bind-mounted golang source tree takes
-   around 26 seconds
+ * running `go list ./...` in the bind-mounted `docker/docker` source tree
+   takes around 26 seconds
 
  * writing 100MB in 1k blocks into a bind-mounted directory takes
    around 23 seconds
