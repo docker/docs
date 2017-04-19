@@ -21,11 +21,13 @@ it will only connect to servers with a certificate signed by that CA.
 > **Warning**:
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
 > with OpenSSL, x509 and TLS before using it in production.
+{:.warning}
 
 > **Warning**:
 > These TLS commands will only generate a working set of certificates on Linux.
 > macOS comes with a version of OpenSSL that is incompatible with the
 > certificates that Docker requires.
+{:.warning}
 
 ## Create a CA, server and client keys with OpenSSL
 
@@ -160,6 +162,7 @@ need to provide your client keys, certificates and trusted CA:
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard
 > these keys as you would a root password!
+{:.warning}
 
 ## Secure by default
 
