@@ -290,3 +290,13 @@ volume: |
   delete volumes when you remove a container, nor will it "garbage collect"
   volumes that are no longer referenced by a container.
   *Also known as: data volume*
+
+  There are three types of volumes: *host, anonymous, and named*:
+
+  - A **host volume** lives on the Docker host's filesystem and can be accessed from within the container.  
+
+  - An **anonymous volume** is useful for when you would rather have Docker handle where the files are stored.
+    It can be difficult, however, to refer to the same volume over time when it is an anonymous volumes.
+
+  - A **named volume** is similar to an anonymous volume. Docker manages where on disk the volume is created,
+    but you give it a volume name.
