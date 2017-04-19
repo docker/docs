@@ -214,7 +214,9 @@ registry:
     - /path/auth:/auth
 ```
 
-> **Warning**: replace `/path` by whatever directory that holds your `certs` and `auth` folder from above.
+> **Warning**:
+> replace `/path` by whatever directory that holds your `certs` and `auth` folder from above.
+{:.warning}
 
 You can then start your registry with a simple
 
