@@ -168,6 +168,15 @@ from the repository.
 
       > **Warning**: Always audit scripts downloaded from the internet before
       > running them locally.
+      
+      If you use this method, Docker is installed but does not start automatically.
+      Start it:
+      
+      ```bash
+      $ sudo systemctl start docker
+      ```
+      
+      Then skip to step 4 below.
 
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
