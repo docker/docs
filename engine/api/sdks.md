@@ -27,7 +27,7 @@ For a full reference, see the [Docker SDK for Python documentation](https://dock
 The Docker SDK for Go is a package inside the Docker Engine repository. To use it, you import it:
 
 {% highlight go %}
-import "github.com/moby/moby/client"
+import "github.com/docker/docker/client"
 {% endhighlight %}
 
 To see how to start using it, [head to the getting started guide](getting-started.md).

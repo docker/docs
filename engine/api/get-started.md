@@ -107,9 +107,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/moby/moby/client"
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/api/types/container"
+	"github.com/docker/docker/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"golang.org/x/net/context"
 )
 
@@ -205,9 +205,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/api/types/container"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
 )
 
@@ -289,8 +289,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 func main() {
@@ -358,8 +358,8 @@ package main
 import (
 	"context"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 func main() {
@@ -434,8 +434,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 func main() {
@@ -501,8 +501,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 func main() {
@@ -569,8 +569,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
 )
 
@@ -638,9 +638,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/moby/moby/api/types"
-	"github.com/moby/moby/api/types/container"
-	"github.com/moby/moby/client"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
 )
 
