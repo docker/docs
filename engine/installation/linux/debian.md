@@ -151,11 +151,13 @@ from the repository.
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
-    > **Warning**: It is HIGHLY recommended you use
+    > **Warning**:
+    > It is HIGHLY recommended you use
     > ```bash $ curl -sSL https://get.docker.com | sh ``` in order to install Docker on
     > Raspberry Pi's!! This will also install bash auto-completion and
     > appropriately mirror the download depending on your country.
-
+    {:.warning}
+    
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
     running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
