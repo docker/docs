@@ -34,6 +34,7 @@ sut:
     - SOURCE_BRANCH
 ```
 
+
 ## Override build, test or push commands
 
 Docker Cloud allows you to override and customize the `build`, `test` and `push`
@@ -111,3 +112,23 @@ If you needed to give the resulting image multiple tags, or push the same image 
 docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
 docker push $DOCKER_REPO:$SOURCE_COMMIT
 ```
+
+## Source Repository / Branch Clones
+
+When Docker Cloud pulls a branch from a source code repository, it performs
+a shallow clone (only the tip of the specified branch).  This has the advantage
+of minimizing the amount of data transfer necessary from the repository and 
+speeding up the build because it pulls only the minimal code necessary. 
+
+Because of this, if you need to perform a custom action that relies on a different 
+branch (such as a `post_push` hook), you won't be able checkout that branch, unless
+you do one of the following:
+
+* You can get a shallow checkout of the target branch by doing the following:
+
+		git fetch origin branch:mytargetbranch --depth 1
+
+* You can also "unshallow" the clone, which fetches the whole Git history (and potentially
+takes a long time / moves a lot of data) by using the `--unshallow` flag on the fetch:
+
+		git fetch --unshallow origin

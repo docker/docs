@@ -126,7 +126,9 @@ By default when you set up autobuilds, a basic build rule is created for you. Th
 
     * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
-
+> **Note:** When Docker Cloud pulls a branch from a source code repository, it performs
+a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md)
+for more information.
 
 ### Environment variables for builds
 
