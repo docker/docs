@@ -101,7 +101,7 @@ guides:
       title: Release notes
     - path: /docker-for-azure/archive/
       title: Template archive
-  - sectiontitle: Docker Toolbox (Legacy)
+  - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
       title: Toolbox overview
@@ -127,9 +127,9 @@ guides:
       title: Troubleshooting
   - path: /release-notes/
     title: Docker release notes
-- sectiontitle: Get Started
+- sectiontitle: Get started
   section:
-  - sectiontitle: "Get started with Docker"
+  - sectiontitle: Get started with Docker
     section:
     - title: "Part 1: Orientation"
       path: /get-started/
@@ -151,7 +151,7 @@ guides:
       title: Manage data in containers
   - path: /engine/docker-overview/
     title: Docker overview
-- sectiontitle: User Guide
+- sectiontitle: User guide
   section:
   - path: /engine/userguide/
     title: Overview
@@ -219,7 +219,7 @@ guides:
     title: Deprecated Engine features
   - path: /engine/faq/
     title: FAQ
-- sectiontitle: Admin Guide
+- sectiontitle: Admin guide
   section:
   - path: /engine/admin/
     title: Configuring and running Docker
@@ -371,11 +371,11 @@ guides:
     title: Volume plugins
   - path: /engine/extend/plugin_api/
     title: Plugins API
-- sectiontitle: Open Source at Docker
+- sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
     title: Quickstart contribution
-  - sectiontitle: Set up for Engine Development
+  - sectiontitle: Set up for Engine development
     section:
     - path: /opensource/project/who-written-for/
       title: README first
@@ -1210,7 +1210,7 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
-- sectiontitle: Commercially Supported Docker Engine
+- sectiontitle: Commercially supported Docker Engine
   section:
   - sectiontitle: 1.13
     section:
@@ -1241,7 +1241,7 @@ manuals:
   - path: /docker-cloud/orgs/
     title: Organizations and teams
 
-  - sectiontitle: Manage Builds and Images
+  - sectiontitle: Manage builds and images
     section:
     - path: /docker-cloud/builds/
       title: Builds and images overview
@@ -1259,7 +1259,7 @@ manuals:
       title: Automated repository tests
     - path: /docker-cloud/builds/advanced/
       title: Advanced options for autobuild and autotest
-  - sectiontitle: Manage Swarms (Beta Swarm Mode)
+  - sectiontitle: Manage swarms (beta swarm mode)
     section:
     - path: /docker-cloud/cloud-swarm/
       title: Overview
@@ -1273,7 +1273,7 @@ manuals:
       title: Connect to a swarm through Docker Cloud
     - path: /docker-cloud/cloud-swarm/link-aws-swarm/
       title: Link to Amazon Web Services to create swarms
-  - sectiontitle: Manage Infrastructure (Standard Mode)
+  - sectiontitle: Manage infrastructure (standard mode)
     section:
     - path: /docker-cloud/infrastructure/
       title: Infrastructure overview
@@ -1299,11 +1299,11 @@ manuals:
       title: Using Docker Cloud and Packet.net
     - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
       title: Using Docker Cloud on AWS
-  - sectiontitle: Manage Nodes and Apps (Standard Mode)
+  - sectiontitle: Manage nodes and apps (standard mode)
     section:
     - path: /docker-cloud/standard/
       title: Overview
-    - sectiontitle: Getting Started
+    - sectiontitle: Getting started
       section:
       - path: /docker-cloud/getting-started/
         title: Getting started with Docker Cloud
@@ -1341,7 +1341,7 @@ manuals:
           title: Stackfiles for your service
         - path: /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
           title: Data management with volumes
-    - sectiontitle: Manage Applications
+    - sectiontitle: Manage applications
       section:
       - path: /docker-cloud/apps/
         title: Applications in Docker Cloud
@@ -1450,7 +1450,7 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-  - sectiontitle: Compose File Reference
+  - sectiontitle: Compose file reference
     section:
     - path: /compose/compose-file/
       title: Version 3
@@ -1942,7 +1942,7 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
           title: Deploy an app from the CLI
-      - sectiontitle: UCP Tool CLI
+      - sectiontitle: UCP tool CLI
         section:
         - path: /datacenter/ucp/1.1/reference/
           title: UCP tool v1.1 overview

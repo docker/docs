@@ -37,10 +37,12 @@ To create the `docker` group and add your user:
     ```
 
 3.  Log out and log back in so that your group membership is re-evaluated.
-    If testing in a virtual machine, it may be necessary to restart the virtual machine
-    for changes to take affect.
 
-4.  Verify that you can `docker` commands without `sudo`.
+    If testing on a virtual machine, it may be necessary to restart the virtual machine for changes to take affect.
+
+    On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
+
+4.  Verify that you can run `docker` commands without `sudo`.
 
     ```bash
     $ docker run hello-world
@@ -48,7 +50,7 @@ To create the `docker` group and add your user:
 
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
-    
+
 ## Configure Docker to start on boot
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)

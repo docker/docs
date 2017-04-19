@@ -1,6 +1,6 @@
 ---
 title: "Get Started, Part 4: Swarms"
-keywords: swarms, scale, cluster, machine, vm, manager, deploy, ssh, orchestration
+keywords: swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration
 description: Learn how to create clusters of Dockerized machines.
 ---
 {% include_relative nav.html selected="4" %}
@@ -29,7 +29,7 @@ up 5x in the process.
 
 Here in part 4, you deploy this application onto a cluster, running it on
 multiple machines. Multi-container, multi-machine applications are made possible
-by joining multiple macines into a "Dockerized" cluster called a **swarm**.
+by joining multiple machines into a "Dockerized" cluster called a **swarm**.
 
 ## Understanding Swarm clusters
 

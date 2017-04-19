@@ -26,7 +26,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 3. Add the following content to the `Dockerfile`.
 
-        FROM python:2.7
+        FROM python:3
         ENV PYTHONUNBUFFERED 1
         RUN mkdir /code
         WORKDIR /code
@@ -46,7 +46,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 6. Add the required software in the file.
 
-        Django
+        Django>=1.8,<2.0
         psycopg2
 
 7. Save and close the `requirements.txt` file.
@@ -69,7 +69,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
             image: postgres
           web:
             build: .
-            command: python manage.py runserver 0.0.0.0:8000
+            command: python3 manage.py runserver 0.0.0.0:8000
             volumes:
               - .:/code
             ports:

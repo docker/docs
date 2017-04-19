@@ -18,14 +18,12 @@ To install Compose, do the following:
 
     * [Other systems](/engine/installation/index.md){: target="_blank" class="_"}
 
-2.  The Docker Toolbox installation includes both Engine and Compose, so Mac and
-    Windows users are done installing. Others should continue to the next step.
+2.  Docker for Mac, Docker for Windows, and Docker Toolbox include Docker Compose, so Mac and Windows users do not need
+    to install Docker Compose separately.
 
-3.  Go to the
+3.  On Linux, you can download the Docker Compose binary from the
     [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
-
-4.  Follow the instructions from the release page and run the `curl` command,
-    which the release page specifies, in your terminal.
+    Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
 
     > **Note**: If you get a "Permission denied" error, your `/usr/local/bin` directory
     > probably isn't writable and you'll need to install Compose as the superuser. Run
@@ -34,7 +32,7 @@ To install Compose, do the following:
     The following is an example command illustrating the format:
 
     ```bash
-    $ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ curl -L --fail "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     If you have problems installing with `curl`, see
@@ -80,7 +78,7 @@ Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
 ```bash
-$ curl -L https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose
+$ curl -L --fail https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
 ```
 
