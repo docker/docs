@@ -41,7 +41,7 @@ To install Compose, do the following:
 5.  Apply executable permissions to the binary:
 
     ```bash
-    $ chmod +x /usr/local/bin/docker-compose
+    $ sudo chmod +x /usr/local/bin/docker-compose
     ```
 
 6.  Optionally, install [command completion](completion.md) for the
@@ -69,6 +69,11 @@ to get started.
 ```bash
 $ pip install docker-compose
 ```
+if you are not using virtualenv,
+
+```bash
+$ sudo pip install docker-compose
+```
 
 > **Note**: pip version 6.0 or greater is required.
 
@@ -78,8 +83,8 @@ Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
 ```bash
-$ curl -L --fail https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose
-$ chmod +x /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ## Master builds
@@ -111,7 +116,7 @@ Alternatively, if you're not worried about keeping them, you can remove them.
 Compose will just create new ones.
 
 ```bash
-docker rm -f -v myapp_web_1 myapp_db_1 ...
+$ docker rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation
@@ -119,7 +124,7 @@ docker rm -f -v myapp_web_1 myapp_db_1 ...
 To uninstall Docker Compose if you installed using `curl`:
 
 ```bash
-rm /usr/local/bin/docker-compose
+$ sudo rm /usr/local/bin/docker-compose
 ```
 
 To uninstall Docker Compose if you installed using `pip`:
