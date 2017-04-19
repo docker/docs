@@ -18,7 +18,24 @@ Place the completion script in `/etc/bash_completion.d/` (`/usr/local/etc/bash_c
 
      curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
-Completion will be available upon next login.
+Then add the following to your `~/.bash_profile`
+
+	if [ -f $(brew --prefix)/etc/bash_completion ]; then
+	. $(brew --prefix)/etc/bash_completion
+	fi
+ 
+You can source your `~/.bash_profile` or launch a new terminal to utilize completion.
+
+## MacPorts Bash Completion
+
+If you're using MacPorts you'll need to slightly modify your steps to the following
+Run `sudo port install bash-completion` to install bash completion
+
+	if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+	    . /opt/local/etc/profile.d/bash_completion.sh
+	fi
+
+ You can source your `~/.bash_profile` or launch a new terminal to utilize completion.
 
 ### Zsh
 
