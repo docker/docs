@@ -168,10 +168,12 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     | Docker CE      | `sudo yum install docker-ce`        |
     | Docker EE      | `sudo yum install docker-ee`        |
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > **Warning**: 
+    > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `yum install` or
     > `yum update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
+    {:.warning}
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions. This
