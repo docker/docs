@@ -10,7 +10,7 @@ Blog](http://blog.docker.com/category/engineering/docker-releases/). For our
 open source projects, you can find detailed information about what changes were
 made in each release in the project changelogs.
 
-* <a href="https://github.com/moby/moby/blob/master/CHANGELOG.md"
+* <a href="https://github.com/docker/docker/blob/master/CHANGELOG.md"
 target="_blank">Docker Engine</a>
 * <a href="https://github.com/docker/machine/blob/master/CHANGELOG.md"
 target="_blank">Docker Machine</a>
