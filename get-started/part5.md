@@ -208,7 +208,7 @@ the new `docker-compose.yml` file with `docker-machine scp`, and run
 
 ```
 $ docker-machine ssh myvm1 "mkdir ./data"
-$ docker-machine scp compose-file.yml myvm1:~
+$ docker-machine scp docker-compose.yml myvm1:~
 $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
 ```
 
