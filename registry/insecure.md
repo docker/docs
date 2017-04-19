@@ -108,3 +108,22 @@ $ update-ca-trust enable
 ```
 
 Restart Docker for the  changes to take effect.
+
+### Windows
+
+In your browser navigate to `https://<dtr-url>/ca` to download the TLS
+certificate used by DTR. Open Windows Explorer, right-click the
+file you've downloaded, and choose **Install certificate**.
+
+Then, select the following options:
+
+* Store location: local machine
+* Check 'place all certificates in the following store'
+* Click 'Browser', and select 'Trusted Root Certificate Authorities'
+* Click 'Finish'
+[See also] (https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal)
+[Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+
+After adding the CA certificate to Windows, restart Docker for Windows.
+
+
