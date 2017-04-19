@@ -145,16 +145,32 @@ from the repository.
 
     **armhf**:
 
-    ```bash
-    $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
-        raspbian-jessie main" | \
-        sudo tee /etc/apt/sources.list.d/docker.list
-    ```
+    You can choose between two methods for `armhf`. You can use the same method
+    as Debian, setting up the repository and using `apt-get install`, or you can
+    use a convenience script, which requires privileged access, but sets up the
+    repository for you and installs the packages for Bash auto-completion.
 
-    > **Warning**: It is HIGHLY recommended you use
-    > ```bash $ curl -sSL https://get.docker.com | sh ``` in order to install Docker on
-    > Raspberry Pi's!! This will also install bash auto-completion and
-    > appropriately mirror the download depending on your country.
+    - Setting up the repository directly:
+
+      ```bash
+      $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
+          raspbian-jessie main" | \
+          sudo tee /etc/apt/sources.list.d/docker.list
+      ```
+
+    - Using the convenience script:
+
+      ```bash
+      $ curl -sSL https://get.docker.com > install.sh
+
+      $ sudo bash ./install.sh
+      ```
+
+      > **Warning**: Always audit scripts downloaded from the internet before
+      > running them locally.
+      
+      If you use this method, Docker is installed and starts automatically.
+      Skip to step 4 below.
 
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
