@@ -54,7 +54,7 @@ with the following:
 version: "3"
 services:
   web:
-    image: docs/get-started:part2
+    image: username/repo:tag
     deploy:
       replicas: 5
       restart_policy:
@@ -94,7 +94,7 @@ We'll talk more about placement constraints and volumes in a moment. But for
 now, copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
 
 ```
-docker-machine scp myvm1 docker-compose.yml myvm1:~
+docker-machine scp docker-compose.yml myvm1:~
 ```
 
 Now just re-run the `docker stack deploy` command on the manager, and whatever
@@ -135,7 +135,7 @@ which finally adds a Redis service.
 version: "3"
 services:
   web:
-    image: johndmulhausen/get-started:part1
+    image: username/repo:tag
     deploy:
       replicas: 5
       restart_policy:
@@ -208,7 +208,7 @@ the new `docker-compose.yml` file with `docker-machine scp`, and run
 
 ```
 $ docker-machine ssh myvm1 "mkdir ./data"
-$ docker-machine scp compose-file.yml myvm1:~
+$ docker-machine scp docker-compose.yml myvm1:~
 $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
 ```
 

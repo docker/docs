@@ -44,6 +44,14 @@ To remove unnecessary artifacts:
    There are no running or stopped containers on this host. A fast way to
    remove old containers is the following:
 
+   As of Docker Engine version 1.13 you can now use the `docker system prune` command to achieve this:
+
+   ```none 
+   $ docker system prune -a
+   ```
+
+   Older versions of the Docker Engine should reference the command below:
+
    ```none
    $ docker rm $(docker ps -a -q)
    ```
@@ -91,6 +99,9 @@ can take over 15 minutes to complete.
 
 1. Open a terminal.
 
+   For [Docker Toolbox](../../toolbox/overview.md) users, use `docker-machine status your_vm_name` to make sure your VM is running. You
+   may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
+   shell environment.
 
 2. Change into the root of the `docker-fork` repository.
 

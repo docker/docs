@@ -93,6 +93,8 @@ Follow along with this example to create a Dockerized <a href="https://aws.amazo
 
     Start with something basic like `docker run hello-world`, or for a more interesting test, run a Dockerized webserver on your new remote machine.
 
+    **Note**: We are using port `8000` in this example and that port has been added to the AWS Security Group associated with docker-machine. If you want to run your container on another port, you will need to update the security group to reflect that.
+
     In this example, the `-p` option is used to expose port 80 from the `nginx` container and make it accessible on port `8000` of the `aws-sandbox` host.
 
         $ docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
