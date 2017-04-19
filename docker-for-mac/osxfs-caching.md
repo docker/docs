@@ -3,7 +3,7 @@ description: OSXFS CACHING
 keywords: mac, osxfs
 redirect_from:
 - /mackit/osxfs-caching/
-title: Behaviour of the `cached` and `delegated` mount flags
+title: Behavior of the `cached` and `delegated` mount flags
 ---
 
 Docker 17.04 CE Edge adds support for two new flags to the `-v`
@@ -11,7 +11,7 @@ option, `cached` and `delegated`, that can significantly improve
 performance of mounted volume access in Docker for Mac.  A blog post,
 [User-guided caching in Docker for Mac](link-TODO) describes the
 background and motivation for the new flags.  This document gives a
-more detailed description of their behaviour.
+more detailed description of their behavior.
 
 ## Background
 
@@ -57,7 +57,7 @@ In particular, in many cases there is no need for writes performed in a
 container to be immediately reflected on the host.  For example, while
 interactive development requires that writes to a bind-mounted directory
 on the host immediately generate file system events within a container,
-there is no need for writes to build artefacts within the container to
+there is no need for writes to build artifacts within the container to
 be immediately reflected on the host file system.  Distinguishing between
 these two cases makes it possible to significantly improve performance.
 
@@ -93,7 +93,7 @@ crashes then writes may be lost.
 However, by relinquishing consistency, `delegated` mounts can offer
 significantly better performance than the other configurations.  Where
 the data written is ephemeral or readily reproducible (e.g. scratch
-space or build artefacts) `delegated` may be optimal for a user's
+space or build artifacts) `delegated` may be optimal for a user's
 workload.
 
 A `delegated` mount offers the following guarantees, which are presented
@@ -178,7 +178,7 @@ container and host views are always synchronized: writes performed
 within the container are immediately visible on the host, and writes
 performed on the host are immediately visible within the container.
 
-The `consistent` configuration most closely reflects the behaviour of
+The `consistent` configuration most closely reflects the behavior of
 bind mounts on Linux.  However, the overheads of providing strong
 consistency guarantees make it unsuitable for a few use cases, where
 performance is a priority and maintaining perfect consistency has low
