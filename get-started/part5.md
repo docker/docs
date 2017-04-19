@@ -54,7 +54,7 @@ with the following:
 version: "3"
 services:
   web:
-    image: docs/get-started:part2
+    image: username/repo:tag
     deploy:
       replicas: 5
       restart_policy:
@@ -135,7 +135,7 @@ which finally adds a Redis service.
 version: "3"
 services:
   web:
-    image: johndmulhausen/get-started:part1
+    image: username/repo:tag
     deploy:
       replicas: 5
       restart_policy:
