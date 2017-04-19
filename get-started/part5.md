@@ -94,7 +94,7 @@ We'll talk more about placement constraints and volumes in a moment. But for
 now, copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
 
 ```
-docker-machine scp myvm1 docker-compose.yml myvm1:~
+docker-machine scp docker-compose.yml myvm1:~
 ```
 
 Now just re-run the `docker stack deploy` command on the manager, and whatever
