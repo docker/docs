@@ -47,7 +47,9 @@ For Docker Cloud, Hub, and Store, log in using the web interface.
 
 You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
 
-> **Warning**: When you use the `docker login` command, your credentials are
+> **Warning**: 
+> When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the
 [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
+{:.warning}
