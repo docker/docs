@@ -902,7 +902,15 @@ then read-write will be used.
 >     - container_name
 >     - container_name:rw
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### restart
+
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error. 
+
+      - restart: no
+      - restart: always
+      - restart: on-failure
+
+### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -925,8 +933,6 @@ Each of these is a single value, analogous to its
     privileged: true
 
     oom_score_adj: 500
-
-    restart: always
 
     read_only: true
     shm_size: 64M
