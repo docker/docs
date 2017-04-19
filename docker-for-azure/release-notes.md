@@ -16,7 +16,7 @@ Release date: 03/30/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Fixed bugs in the way container logs are uploaded to File Storage in the storage account for logs
 
 ### 17.03.0 CE
@@ -25,7 +25,7 @@ Release date: 02/08/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-2
 
@@ -33,7 +33,7 @@ Release date: 02/08/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.0-1
 
@@ -41,7 +41,7 @@ Release date: 1/18/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Writing to home directory no longer requires `sudo`
 - Added support to perform fine grained monitoring of health status of swarm nodes, destroy unhealthy nodes and create replacement nodes
 - Added support to scale the number of nodes in manager and worker vm scale sets through Azure UI/CLI for managing the number of nodes in a scale set
@@ -56,7 +56,7 @@ Release date: 04/06/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.04.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Fixed bugs in the way container logs are uploaded to File Storage in the storage account for logs
 
 ### 17.03.0-edge CE
@@ -64,7 +64,7 @@ Release date: 03/01/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-beta18
 
@@ -72,7 +72,7 @@ Release date: 02/16/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.1](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Added Swarm wide support for [persistent storage volumes](persistent-data-volumes.md)
 
 ### 1.13.0-beta12
@@ -81,7 +81,7 @@ Release date: 12/09/2016
 
 **New**
 
-- Docker Engine upgraded to [Docker 1.13.0-rc2](https://github.com/moby/moby/blob/master/CHANGELOG.md)
+- Docker Engine upgraded to [Docker 1.13.0-rc2](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - SSH access has been added to the worker nodes
 - The Docker daemon no longer listens on port 2375
 - Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
