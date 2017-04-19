@@ -344,7 +344,7 @@ The `splunk` logging driver **allows** the following options:
 
 | Option                 | Description                     | Example value                             |
 |------------------------|---------------------------------|-------------------------------------------|
-| `splunk-source`             | Event source.              | `--log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20` |
+| `splunk-source`             | Event source.              | `--log-opt splunk-source=<splunk_source>` |
 | `splunk-sourcetype`         | Event source type.         | `--log-opt splunk-sourcetype=iis`   |
 | `splunk-index`              | Event index.               | `--log-opt splunk-index=os` |
 | `splunk-capath`             | Path to root certificate.  | `--log-opt splunk-capath=/path/to/cert/cacert.pem` |
