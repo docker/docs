@@ -45,6 +45,14 @@ To remove unnecessary artifacts:
    There are no running or stopped containers on this host. A fast way to
    remove old containers is the following:
 
+   As of Docker Engine version 1.13 you can now use the `docker system prune` command to achieve this:
+
+   ```none 
+   $ docker system prune -a
+   ```
+
+   Older versions of the Docker Engine should reference the command below:
+
    ```none
    $ docker rm $(docker ps -a -q)
    ```
