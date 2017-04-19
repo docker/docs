@@ -1,6 +1,6 @@
 ---
 title: "Get Started, Part 4: Swarms"
-keywords: swarms, scale, cluster, machine, vm, manager, deploy, ssh, orchestration
+keywords: swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration
 description: Learn how to create clusters of Dockerized machines.
 ---
 {% include_relative nav.html selected="4" %}
