@@ -987,11 +987,13 @@ container access to the secret and mounts it at `/run/secrets/<secret_name>`
 within the container. The source name and destination mountpoint are both set
 to the secret name.
 
-> **Warning**: Due to a bug in Docker 1.13.1, using the short syntax currently
+> **Warning**:
+> Due to a bug in Docker 1.13.1, using the short syntax currently
 > mounts the secret with permissions `000`, which means secrets defined using
 > the short syntax are unreadable within the container if the command does not
 > run as the `root` user. The workaround is to use the long syntax instead if
 > you use Docker 1.13.1 and the secret must be read by a non-`root` user.
+{:.warning}
 
 The following example uses the short syntax to grant the `redis` service
 access to the `my_secret` and `my_other_secret` secrets. The value of
