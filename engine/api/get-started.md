@@ -66,7 +66,7 @@ You can specify the API version to use, in one of the following ways:
 
 - For the SDKs, you can also specify the API version programmatically, as a
   parameter to the `client` object. See the
-  [Go constructor](https://github.com/docker/docker/blob/master/client/client.go#L136){: target="_blank" class="_"}
+  [Go constructor](https://github.com/moby/moby/blob/master/client/client.go#L136){: target="_blank" class="_"}
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
@@ -107,9 +107,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
+	"github.com/moby/moby/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/api/types/container"
 	"golang.org/x/net/context"
 )
 
@@ -205,9 +205,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/api/types/container"
+	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
 )
 
@@ -289,8 +289,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/client"
 )
 
 func main() {
@@ -358,8 +358,8 @@ package main
 import (
 	"context"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/client"
 )
 
 func main() {
@@ -434,8 +434,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/client"
 )
 
 func main() {
@@ -501,8 +501,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/client"
 )
 
 func main() {
@@ -569,8 +569,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
 )
 
@@ -638,9 +638,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types"
+	"github.com/moby/moby/api/types/container"
+	"github.com/moby/moby/client"
 	"golang.org/x/net/context"
 )
 
@@ -694,5 +694,5 @@ $ curl --unix-socket /var/run/docker.sock\
 ## Next steps
 
  - [Full documentation for the Python SDK](https://docker-py.readthedocs.io)
- - [Full documentation for the Go SDK](https://godoc.org/github.com/docker/docker/client)
+ - [Full documentation for the Go SDK](https://godoc.org/github.com/moby/moby/client)
  - [Full documentation for the HTTP API](/engine/api/v1.27/)

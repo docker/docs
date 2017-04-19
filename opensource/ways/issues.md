@@ -34,7 +34,7 @@ Follow these steps:
    notification go to your GitHub or email inbox. Some of repositories you can watch are:
 
    | Repository | Description |
-   | [docker/docker](https://github.com/docker/docker) | Docker the open-source application container engine |
+   | [moby/moby](https://github.com/moby/moby) | Docker the open-source application container engine |
    | [docker/machine](https://github.com/docker/machine) | Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center. |
    | [kitematic/kitematic](https://github.com/kitematic/kitematic) | Kitematic is a simple application for managing Docker containers on macOS and Windows. |
    | [docker/swarm](https://github.com/docker/swarm) | Native clustering for Docker; manage several Docker hosts as a single, virtual host. |
@@ -42,9 +42,9 @@ Follow these steps:
 
    See <a href="https://github.com/docker" target="_blank">the complete list of Docker repositories</a> on GitHub.
 
-3. Choose an issue from the [list of untriaged issues](https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%2Ffeature).
+3. Choose an issue from the [list of untriaged issues](https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+-label%3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%2Ffeature).
 
-4. Follow <a href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md" target="_blank">the triage process</a> to triage the issue.
+4. Follow <a href="https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md" target="_blank">the triage process</a> to triage the issue.
 
    The triage process asks you to add both a `kind/` and a `exp/` label to each
    issue. Because you are not a Docker maintainer, you add these through comments.
@@ -54,6 +54,6 @@ Follow these steps:
 
    For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
    beginner writing task. For descriptions of valid labels, see <a
-   href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md">the triage process</a>.
+   href="https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md">the triage process</a>.
 
 5. Triage another issue.

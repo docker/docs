@@ -2,7 +2,7 @@ FROM docs/docker.github.io:docs-base
 
 # docs-base contains: GitHub Pages, nginx, and the docs archives, running on
 # Debian Jesse. See the contents of docs-base at:
-# https://github.com/docker/docker.github.io/tree/docs-base
+# https://github.com/moby/moby.github.io/tree/docs-base
 
 # First, build non-edge (all of this is duplicated later -- that is on purpose)
 
