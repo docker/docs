@@ -14,7 +14,7 @@ troubleshooting problems in your code contribution.
 - [How should I comment my code?](FAQ.md#how-should-i-comment-my-code)
 - [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch)
 
-## How do I set my signature {#how-do-i-set-my-signature}
+## How do I set my signature
 
 1.  Change to the root of your `docker-fork` repository.
 
