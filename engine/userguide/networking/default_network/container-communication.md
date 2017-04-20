@@ -130,25 +130,36 @@ IP address.
 
 ## Container communication between hosts
 
-For security reasons Docker configures the `iptables` rules to make sure Docker containers aren't forwarded traffic from outside their host. This is done by setting the `FORWARD` chain default policy to `DROP`.
+For security reasons, Docker configures the `iptables` rules to prevent containers
+from forwarding traffic from outside the host machine, on Linux hosts. Docker sets
+the default policy of the `FORWARD` chain to `DROP`.
 
-To change this default behavior you can manually type:
+To override this default behavior you can manually change the default policy:
 
 ```bash
 $ sudo iptables -P FORWARD ACCEPT
 ```
+The `iptables` settings are lost when the system reboots. If you want
+the change to be permanent, refer to your Linux distribution's documentation.
 
-Remember `iptables` settings will be lost on restart so configure your hosts accordingly. 
-
-> **Note**: In versions pre 1.13 the default `FORWARD` chain behavior was `ACCEPT`, this was automatically changed to `DROP` upon upgrading. If you had a previously working configuration with multiple containers spanned over multiple hosts, this change could cause it to suddenly stop working if your setup relied on forwarded packets.
+> **Note**: In Docker 1.12 and earlier, the default `FORWARD` chain policy was
+> `ACCEPT`. When you upgrade to Docker 1.13 or higher, this default is
+> automatically changed for you.
+>
+> If you had a previously working configuration with multiple containers
+> spanned over multiple hosts, this change may cause the existing setup
+> to stop working if you do not intervene.
 
 ### Why would you need to change the default `DROP` to `ACCEPT`?
 
 Suppose you have two hosts and each has the following configuration
 
-```
+```none
 host1: eth0/192.168.7.1, docker0/172.17.0.0/16
 host2: eth0/192.168.8.1, docker0/172.18.0.0/16
 ```
-
-If you were on host1 and wanted to ping a Docker container on host2, you have to go setup a route to host2. Once a route is setup host2 would have to accept forwarded packets so that it could forward them to it's containers. This would be a reason for host2 to `ACCEPT` instead of `DROP` forwarded packets.
+If the container running on `host1` needs the ability to communicate directly
+with a container on `host2`, you need a route from `host1` to `host2`. After
+the route exists, `host2` needs to be able to accept packets destined for its
+running container, and forward them along. Setting the policy to `ACCEPT`
+accomplishes this.
