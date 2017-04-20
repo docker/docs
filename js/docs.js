@@ -180,6 +180,8 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
+  $(".sidebar").Stickyfill();
+
   // Add smooth scrolling to all links
   $(".nav-sidebar ul li a").on('click', function(event) {
 
