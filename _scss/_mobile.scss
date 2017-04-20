@@ -341,7 +341,6 @@
     }
 }
 
-
 /* Landscape */
 @media only screen 
   and (min-device-width: 768px) 
@@ -351,9 +350,6 @@
         float: left;
         margin: 10px 15px 0 0px;
         width: 160px;
-    }
-    .navbar-toggle {
-        display: none!important;
     }
     .ctrl-right {
         display: block;
@@ -368,8 +364,12 @@
     }
 }
 
-@media (max-width: 768px) {
 .navbar-toggle {
     display: block;
+}
+
+@media (min-width: 992px) {
+    .navbar-toggle {
+        display: none;
     }
 }
