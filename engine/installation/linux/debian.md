@@ -256,8 +256,33 @@ to install.
 
 
 ### Install on Raspian (Raspberry Pi)
->**Warning**: This isn't necessary if you used the recommended
->```bash $ curl -sSL https://get.docker.com | sh ``` command!
+
+You can choose between two methods for `armhf`. You can use the same method
+as Debian, setting up the repository and using `apt-get install`, or you can
+use a convenience script, which requires privileged access, but sets up the
+repository for you and installs the packages for Bash auto-completion.
+
+- Setting up the repository directly:
+
+  ```bash
+  $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
+      raspbian-jessie main" | \
+      sudo tee /etc/apt/sources.list.d/docker.list
+  ```
+
+- Using the convenience script:
+
+  ```bash
+  $ curl -sSL https://get.docker.com > install.sh
+
+  $ sudo bash ./install.sh
+  ```
+
+  > **Warning**: Always audit scripts downloaded from the internet before
+  > running them locally.
+      
+  If you use this method, Docker is installed and starts automatically.
+  Skip the rest of this step.
 
 Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
 see `docker.list` if you:
