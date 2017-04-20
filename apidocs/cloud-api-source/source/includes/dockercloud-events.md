@@ -33,8 +33,8 @@ This is a [namespaced endpoint](#namespaced-endpoints).
 
 | Attribute    | Description                                                                                                                      |
 |:-------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| type         | Type of object that was created or updated. For possible values, check the [events types](#event-types) table below.              |
-| action       | Type of action that was executed on the object. Posible values: `create`, `update` or `delete`                                   |
+| type         | Type of object that was created or updated. For possible values, check the [events types](#event-types) table below.             |
+| action       | Type of action that was executed on the object. Possible values: `create`, `update` or `delete`                                  |
 | parents      | List of resource URIs (REST API) of the parents of the object, according to the "Parent-child hierarchy" table below             |
 | resource_uri | Resource URI (REST API) of the object that was created or updated. You can do a `GET` operation on this URL to fetch its details |
 | state        | The current state of the object                                                                                                  |

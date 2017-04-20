@@ -509,7 +509,7 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 buids** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)

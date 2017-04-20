@@ -5,13 +5,13 @@ title: Join nodes to a swarm
 ---
 
 When you first create a swarm, you place a single Docker Engine (Engine) into
-swarm mode. To take full advantage of swarm mode, you can:
+swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:
 
-* Add worker nodes to the swarm to increase capacity. When you deploy a service to a swarm,
+* Adding worker nodes increases capacity. When you deploy a service to a swarm,
 the Engine schedules tasks on available nodes whether they are worker nodes or
 manager nodes. When you add workers to your swarm, you increase the scale of
-the swarm to handle tasks without affecting the manager raft consenus.
-* Add Manager nodes to the swarm to increase fault-tolerance. Manager nodes perform the
+the swarm to handle tasks without affecting the manager raft consensus.
+* Manager nodes increase fault-tolerance. Manager nodes perform the
 orchestration and cluster management functions for the swarm. Among manager
 nodes, a single leader node conducts orchestration tasks. If a leader node
 goes down, the remaining manager nodes elect a new leader and resume

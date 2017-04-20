@@ -69,7 +69,7 @@ culpa qui officia deserunt mollit anim id est laborum.
 - [a markdown link](https://docker.com/)
 
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
-  (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encouters another underscore.)
+  (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
 - <a href="https://docker.com/">an HTML link</a>
 

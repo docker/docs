@@ -85,7 +85,7 @@ You can specify the following options when using the Amazon Web Services provide
 
 * `vpc`: VPC-related options (optional)
     * `id`: AWS VPC identifier of the target VPC where the nodes of the cluster will be deployed (required)
-    * `subnets`: a list of target subnet indentifiers inside selected VPC. If you specify more than one subnet, Docker Cloud will balance among all of them following a high-availability schema (optional)
+    * `subnets`: a list of target subnet identifiers inside selected VPC. If you specify more than one subnet, Docker Cloud will balance among all of them following a high-availability schema (optional)
     * `security_groups`: the security group that will be applied to every node of the cluster (optional)
 * `iam`: IAM-related options (optional)
     * `instance_profile_name`: name of the instance profile (container for instance an IAM role) to attach to every node of the cluster (required)
