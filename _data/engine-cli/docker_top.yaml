@@ -4,4 +4,13 @@ long: Display the running processes of a container
 usage: docker top CONTAINER [ps OPTIONS]
 pname: docker
 plink: docker.yaml
+examples: |-
+   ```bash
+   $ docker unpause httpd
+   UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+   root                9523                9506                0                   16:42               ?                   00:00:00            httpd -DFOREGROUND
+   bin                 9616                9523                0                   16:42               ?                   00:00:00            httpd -DFOREGROUND
+   bin                 9617                9523                0                   16:42               ?                   00:00:00            httpd -DFOREGROUND
+   bin                 9618                9523                0                   16:42               ?                   00:00:00            httpd -DFOREGROUND
+   ```
 
