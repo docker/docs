@@ -31,7 +31,7 @@ are deployed on a node, depend on whether the node is a manager or worker.
 [Learn more about the UCP architecture](../architecture.md)
 
 To check the state and logs of other UCP internal components, go to the
-**Containers** page, and appply the **System containers** filter.
+**Containers** page, and apply the **System containers** filter.
 This can help validate that all UCP internal components are up and running.
 
 ![](../images/monitor-ucp-3.png){: .with-border}

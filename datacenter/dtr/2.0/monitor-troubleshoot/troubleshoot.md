@@ -19,7 +19,7 @@ docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/d
 ```
 
 You can create new overlay network for this test with `docker network create
--d overaly network-name`. You can also use any images that contain `sh` and
+-d overlay network-name`. You can also use any images that contain `sh` and
 `ping` for this test.
 
 If the second command succeeds, overlay networking is working.

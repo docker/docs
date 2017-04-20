@@ -33,7 +33,7 @@ information.  Here are some places to start:
   storing images on Docker Hub.
 
 * **Platform-specific Getting-Started guides**: Installation, release notes,
-  basic command-line examplees, and more for your specific platform:
+  basic command-line examples, and more for your specific platform:
 
   - [Get started with Docker for Mac](/docker-for-mac/)
   - [Get started with Docker for Windows](/docker-for-windows/)

@@ -44,7 +44,7 @@ There isn't anything we can do right now to fix this issue, we have contacted Am
 This AWS documentation page will describe how you can tell if you have EC2-Classic, EC2-VPC or both.  http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 
 ### Possible fixes to the EC2-Classic region issue:
-There are a few work arounds that you can try to get Docker for AWS up and running for you.
+There are a few workarounds that you can try to get Docker for AWS up and running for you.
 
 1. Create your own VPC, then [install Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc).
 2. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.

@@ -209,7 +209,7 @@ interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
-some of the commmon settings to make it easier to configure them.
+some of the common settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)

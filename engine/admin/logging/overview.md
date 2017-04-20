@@ -310,7 +310,7 @@ The `awslogs` supports the following options:
 
 ### Examples
 
-This exampe sends the logs to region `us-east-1` and uses the log group
+This example sends the logs to region `us-east-1` and uses the log group
 `myLogGroup`.
 
 ```bash

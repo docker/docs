@@ -289,7 +289,7 @@ Address 3: 10.0.9.9 my-dnsrr-service.2.am6fx47p3bropyy2dy4f8hofb.my-network
 
 ## Confirm VIP connectivity
 
-In genaral we recommend you use `dig`, `nslookup`, or another DNS query tool to
+In general we recommend you use `dig`, `nslookup`, or another DNS query tool to
 test access to the service name via DNS. Because a VIP is a logical IP, `ping`
 is not the right tool to confirm VIP connectivity.
 

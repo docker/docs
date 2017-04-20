@@ -37,7 +37,7 @@ as follows:
 * designates the current node as a leader manager node for the swarm.
 * names the node with the machine hostname.
 * configures the manager to listen on an active network interface on port 2377.
-* sets the current node to `Active` availability, meanining it can receive tasks
+* sets the current node to `Active` availability, meaning it can receive tasks
 from the scheduler.
 * starts an internal distributed data store for Engines participating in the
 swarm to maintain a consistent view of the swarm and all services running on it.
