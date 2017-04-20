@@ -260,9 +260,9 @@ to install.
 You can choose between two methods for `armhf`. You can use the same method
 as Debian, setting up the repository and using `apt-get install`, or you can
 use a convenience script, which requires privileged access, but sets up the
-repository for you and installs the packages for Bash auto-completion.
+repository for you and start automatically the daemon.
 
-- Setting up the repository directly:
+- Setting up the repository directly (recommended):
 
   ```bash
   $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
@@ -312,13 +312,13 @@ installing Docker.
     Use this command to install the latest version of Docker:
 
     ```bash
-    $ sudo apt-get install docker
+    $ sudo apt-get install docker-engine
     ```
-    > **NOTE**: By default, Docker on Raspian is Docker Community Edition, so
-    > there is no need to specify docker-ce.
-
-    > **NOTE**: If ```bash $ curl -sSL https://get.docker.com | sh ``` isn't used,
-    > then docker won't have auto-completion! You'll have to add it manually.
+    > **NOTE**: Currently Docker on Raspian is Docker Community Edition Edge.
+    > The URL is still the same as prior to the introduction of the CE and EE edition.
+    > It is possible that in the future this URL does not work anymore,
+    > then please use the Debian URL. Use also that URL if you want to use the stable
+    > edition.
 
 3.  Verify that Docker is installed correctly by running the `hello-world`
     image.
