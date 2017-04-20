@@ -1,6 +1,6 @@
 ---
 description: Configure logging driver.
-keywords: docker, logging, driver, Fluentd
+keywords: docker, logging, driver
 redirect_from:
 - /engine/reference/logging/overview/
 title: Configure logging drivers
@@ -136,7 +136,7 @@ $ docker run -it --log-driver none alpine ash
 ## `json-file`
 
 `json-file` is the default logging driver, and returns logging output in JSON
-format.
+format. For detailed information on working with this logging driver, see [the json-file](json-file.md) reference documentation.
 
 ### Options
 
@@ -162,6 +162,9 @@ $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
 
 ## `syslog`
+
+The `syslog` logging driver routes logs to a `syslog` server.
+For detailed information on working with this logging driver, see [the syslog logging driver](syslog.md) reference documentation.
 
 ### Options
 
@@ -230,6 +233,8 @@ $ docker run \
 ```
 
 ## `gelf`
+
+The `gelf` logging driver is a convenient format that is understood by a number of tools like [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), [Fluentd](http://www.fluentd.org/), and many more. For detailed information on working with this logging driver, see [the Graylog Extended Format logging driver](gelf.md) reference documentation.
 
 ### Options
 
