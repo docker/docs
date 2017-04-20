@@ -95,8 +95,8 @@ to your services.
 
 The HTTP routing mesh can route to a service, as long as that service:
 
-* Is attached to a network that has the `com.docker.ucp.mesh.http` label. You
-can use the default `ucp-hrm` network or create your own
+* Is attached to a network that has the `com.docker.ucp.mesh.http` label. Enabling the 
+HTTP routing mesh creates a new service called `ucp-hrm` and a new network called `ucp-hrm`.
 * Publishes the ports that you want to route to
 * Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
 the ports to route to
