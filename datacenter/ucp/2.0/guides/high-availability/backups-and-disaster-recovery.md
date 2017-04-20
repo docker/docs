@@ -50,8 +50,6 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 
 ## Restore command
 
-DTR data must be restored to the same release version where the backups were obtained.
-
 The example below shows how to restore a UCP controller node from an existing
 backup:
 
@@ -60,6 +58,8 @@ $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   docker/ucp restore --passphrase "secret" < backup.tar
 ```
+
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
 
 ## Restore your cluster
 

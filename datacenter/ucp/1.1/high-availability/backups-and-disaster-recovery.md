@@ -61,10 +61,9 @@ Enter passphrase: secret
 
 ## Restore command
 
-DTR data must be restored to the same release version where the backups were obtained.
-
 The example below shows how to restore a UCP controller node from an existing
 backup.
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
 
 First find out the Id of the UCP replica you want to restore:
 
