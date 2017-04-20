@@ -50,8 +50,7 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 
 ## Restore command
 
-Performing restore require restoration to the same release that the backups were 
-acquired from.
+DTR data must be restored to the same release version where the backups were obtained.
 
 The example below shows how to restore a UCP controller node from an existing
 backup:
