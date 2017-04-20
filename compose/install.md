@@ -32,7 +32,7 @@ To install Compose, do the following:
     The following is an example command illustrating the format:
 
     ```bash
-    $ curl -L --fail "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     ```
 
     If you have problems installing with `curl`, see
@@ -41,7 +41,7 @@ To install Compose, do the following:
 5.  Apply executable permissions to the binary:
 
     ```bash
-    $ sudo chmod +x /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
     ```
 
 6.  Optionally, install [command completion](completion.md) for the
@@ -51,8 +51,7 @@ To install Compose, do the following:
 
     ```bash
     $ docker-compose --version
-
-    docker-compose version: 1.11.2
+    docker-compose version 1.12.0, build b31ff33
     ```
 
 ## Alternative install options
@@ -67,12 +66,12 @@ the [virtualenv tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs
 to get started.
 
 ```bash
-$ pip install docker-compose
+pip install docker-compose
 ```
 if you are not using virtualenv,
 
 ```bash
-$ sudo pip install docker-compose
+sudo pip install docker-compose
 ```
 
 > **Note**: pip version 6.0 or greater is required.
@@ -83,8 +82,9 @@ Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
 ```bash
-$ curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ## Master builds
@@ -109,14 +109,14 @@ your existing containers (for example, because they have data volumes you want
 to preserve) you can use compose 1.5.x to migrate them with the following command:
 
 ```bash
-$ docker-compose migrate-to-labels
+docker-compose migrate-to-labels
 ```
 
 Alternatively, if you're not worried about keeping them, you can remove them.
 Compose will just create new ones.
 
 ```bash
-$ docker rm -f -v myapp_web_1 myapp_db_1 ...
+docker rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation
@@ -124,13 +124,13 @@ $ docker rm -f -v myapp_web_1 myapp_db_1 ...
 To uninstall Docker Compose if you installed using `curl`:
 
 ```bash
-$ sudo rm /usr/local/bin/docker-compose
+sudo rm /usr/local/bin/docker-compose
 ```
 
 To uninstall Docker Compose if you installed using `pip`:
 
 ```bash
-$ pip uninstall docker-compose
+pip uninstall docker-compose
 ```
 
 > **Note**: If you get a "Permission denied" error using either of the above
