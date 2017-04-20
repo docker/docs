@@ -20,20 +20,24 @@ support upgrades according to the following rules:
 
 |From| To| Description| Supported|
 |:----|:---|:------------|----------|
-| 2.2.0 | 2.2.1 | patch upgrade | yes |
-| 2.2.0 | 2.2.2 | skip patch version | yes |
-| 2.2.2 | 2.2.1 | patch downgrade | no |
-| 2.1.0 | 2.2.0 | minor upgrade | yes |
-| 2.1.1 | 2.2.0 | minor upgrade | yes |
-| 2.1.2 | 2.2.2 | minor upgrade | yes |
-| 2.0.1 | 2.2.0 | skip minor version | no |
-| 2.2.0 | 2.1.0 | minor downgrade | no |
-| 1.4.3 | 2.0.0 | major upgrade | yes |
-| 1.4.3 | 2.0.3 | major upgrade | yes |
-| 1.4.3 | 3.0.0 | skip major version | no |
-| 1.4.1 | 2.0.3 | major upgrade from an old version | no |
-| 1.4.3 | 2.1.0 | major upgrade skipping minor version | no |
-| 2.0.0 | 1.4.3 | major downgrade | no |
+| x.y.0 | x.y.1 | patch upgrade | yes |
+| x.y.0 | x.y.2 | skip patch version | yes |
+| x.y.2 | x.y.1 | patch downgrade | no |
+| x.y.* | x.y+1.* | minor upgrade | yes |
+| x.y.* | x.y+2.* | skip minor version | no |
+| x.y.* | x.y-1.* | minor downgrade | no |
+| x.*.* | x+2.*.* | skip major version | no |
+| x.*.* | x-1.*.* | major downgrade | no |
+
+In the next table, y and z are the latest minor or patch version  and a,b the
+earliest minor or pacth version 
+
+|From| To| Description| Supported|
+|:----|:---|:------------|----------|
+| x.y.z | x+1.a.b | major upgrade | yes |
+| x.y.z-1 | x+1.a.b+1 | major upgrade from an old version | no |
+| x.y.z | x+1.a+1.b | major upgrade skipping minor version | no |
+
 
 There may be at most a few seconds of interruption during the upgrade of a
 DTR cluster. Schedule the upgrade to take place outside business peak hours
