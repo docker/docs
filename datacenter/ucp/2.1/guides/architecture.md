@@ -36,7 +36,7 @@ and stops UCP services, based on whether that node is a
 If the node is a:
 
 * **Manager**: the `ucp-agent` service automatically starts serving all UCP
-components including the UCP web UI and data stores used by UCP. The `ucp-agent` accomplishes this by [deploying several containers](#ucp-components-in-manager-nodes) on the node. By promoting a node to manager, UCP automatically becomes highly available and fault tolerant. <br/><br/>
+components including the UCP web UI and data stores used by UCP. The `ucp-agent` accomplishes this by [deploying several containers](#ucp-components-in-manager-nodes) on the node. By promoting a node to manager, UCP automatically becomes highly available and fault tolerant.
 * **Worker**: on worker nodes the `ucp-agent` service starts serving a proxy
 service that ensures only authorized users and other UCP services can run Docker
 commands in that node. The `ucp-agent` only deploys a [subset of containers](#ucp-components-in-worker-nodes) on worker nodes.
