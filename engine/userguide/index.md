@@ -2,20 +2,17 @@
 description: How to use the Docker Engine user guide
 keywords: engine, introduction, documentation, about, technology, docker, user, guide, framework, home, intro
 title: Docker Engine user guide
+redirect_from:
+- /engine/userguide/intro/
 ---
-
 This guide helps users learn how to use Docker Engine.
-
-- [Introduction to Engine user guide](intro.md)
 
 ## Learn by example
 
-- [Hello world in a container](/engine/getstarted/step_one.md)
-- [Build your own images](/engine/getstarted/step_four.md)
 - [Network containers](/engine/tutorials/networkingcontainers.md)
-- [Run a simple application](/engine/getstarted/step_three.md)
 - [Manage data in containers](/engine/tutorials/dockervolumes.md)
-- [Store images on Docker Hub](/engine/getstarted/step_six.md)
+- [Samples](/samples/)
+- [Get started](/get-started/)
 
 ## Work with images
 

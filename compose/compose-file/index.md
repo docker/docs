@@ -1210,12 +1210,20 @@ volumes:
     target: /opt/app/static
 ```
 
+### restart
+
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error. 
+
+      - restart: no
+      - restart: always
+      - restart: on-failure
+
 > **Note:** The long syntax is new in v3.2
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
-### domainname, hostname, ipc, mac\_address, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -1230,7 +1238,6 @@ Each of these is a single value, analogous to its
 
     privileged: true
 
-    restart: always
 
     read_only: true
     shm_size: 64M
@@ -1432,6 +1439,8 @@ A full example:
       config:
         - subnet: 172.28.0.0/16
 
+> **Note**: Additional IPAM configurations, such as `gateway`, are only honored for version 2 at the moment.
+
 ### internal
 
 By default, Docker also connects a bridge network to it to provide external
@@ -1532,8 +1541,6 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Sample app with swarm mode](/engine/getstarted-voting-app/)
-- [Get started with Django](/compose/django/)
-- [Get started with Rails](/compose/rails/)
-- [Get started with WordPress](/compose/wordpress/)
+- [Get started with Docker](/get-started/)
+- [Samples](/samples/)
 - [Command line reference](/compose/reference/)

@@ -19,8 +19,8 @@ processes and do not affect your service's run environment.
 * `SOURCE_COMMIT`: the SHA1 hash of the commit being tested.
 * `COMMIT_MSG`: the message from the commit being tested and built.
 * `DOCKER_REPO`: the name of the Docker repository being built.
-* `DOCKER_TAG`: the Docker repository tag being built.
-* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`:`DOCKER_TAG`.)
+* `CACHE_TAG`: the Docker repository tag being built.
+* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`:`CACHE_TAG`.)
 
 If you are using these build environment variables in a
 `docker-compose.test.yml` file for automated testing, declare them in your `sut`
@@ -33,6 +33,7 @@ sut:
   environment:
     - SOURCE_BRANCH
 ```
+
 
 ## Override build, test or push commands
 
@@ -90,7 +91,7 @@ To learn more about Docker build-time variables, see the [docker build documenta
 
 #### Two-phase build
 
-If your build process requires a component that is not a dependency for your application, you can use a `pre-build` hook to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary required before the build.
+If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.
 
 ```bash
 #!/bin/bash
@@ -111,3 +112,23 @@ If you needed to give the resulting image multiple tags, or push the same image 
 docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
 docker push $DOCKER_REPO:$SOURCE_COMMIT
 ```
+
+## Source Repository / Branch Clones
+
+When Docker Cloud pulls a branch from a source code repository, it performs
+a shallow clone (only the tip of the specified branch).  This has the advantage
+of minimizing the amount of data transfer necessary from the repository and 
+speeding up the build because it pulls only the minimal code necessary. 
+
+Because of this, if you need to perform a custom action that relies on a different 
+branch (such as a `post_push` hook), you won't be able checkout that branch, unless
+you do one of the following:
+
+* You can get a shallow checkout of the target branch by doing the following:
+
+		git fetch origin branch:mytargetbranch --depth 1
+
+* You can also "unshallow" the clone, which fetches the whole Git history (and potentially
+takes a long time / moves a lot of data) by using the `--unshallow` flag on the fetch:
+
+		git fetch --unshallow origin

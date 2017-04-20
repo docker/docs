@@ -90,5 +90,4 @@ up on what Docker for AWS and Docker for Azure have to offer you
 ## Get started
 
 After setting up Docker, try learning the basics over at
-[Getting started with Docker](/engine/getstarted/), then learn how to deploy
-full-blown applications in our [app tutorial](/engine/getstarted-voting-app/).
+[Getting started with Docker](/get-started/).

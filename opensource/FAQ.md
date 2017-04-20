@@ -7,14 +7,14 @@ title: FAQ for contributors
 This section contains some frequently asked questions and tips for
 troubleshooting problems in your code contribution.
 
-- [How do I set my signature?](FAQ.md#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I track changes from the docker repo upstream?](FAQ.md#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I format my Go code?](FAQ.md#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867)
-- [What is the pre-pull request checklist?](FAQ.md#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867)
-- [How should I comment my code?](FAQ.md#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I set my signature?](FAQ.md#how-do-i-set-my-signature)
+- [How do I track changes from the docker repo upstream?](FAQ.md#how-do-i-track-changes-from-the-docker-repo-upstream)
+- [How do I format my Go code?](FAQ.md#how-do-i-format-my-go-code)
+- [What is the pre-pull request checklist?](FAQ.md#what-is-the-pre-pull-request-checklist)
+- [How should I comment my code?](FAQ.md#how-should-i-comment-my-code)
+- [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch)
 
-## How do I set my signature {#how-do-i-set-my-signature}
+## How do I set my signature
 
 1.  Change to the root of your `docker-fork` repository.
 

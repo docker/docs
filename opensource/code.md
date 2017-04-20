@@ -71,7 +71,7 @@ pull request</a>.
 	![Sign commits and issues](images/bonus.png)
 
 	We also have checklist that describes [what each pull request
-	needs](code.md#what-is-the-pre-pull-request-checklist).
+	needs](FAQ.md#what-is-the-pre-pull-request-checklist).
 
 
 7. <a href="/opensource/workflow/review-pr/"

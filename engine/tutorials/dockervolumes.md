@@ -8,10 +8,6 @@ redirect_from:
 title: Manage data in containers
 ---
 
-So far you've been introduced to some
-[basic Docker concepts](/engine/getstarted/step_three.md), seen how to work with
-[Docker images](/engine/getstarted/step_four.md), and learned about
-[how to network your containers](/engine/tutorials/networkingcontainers.md).
 In this section you're going to learn how you can manage data inside and between
 your Docker containers.
 
@@ -24,7 +20,7 @@ Docker Engine.
 ## Data volumes
 
 A *data volume* is a specially-designated directory within one or more
-containers that bypasses the [*Union File System*](/engine/reference/glossary.md#union-file-system).
+containers that bypasses the [*Union File System*](/glossary/?term=Union file system).
 Data volumes provide several useful features for persistent or shared data:
 
 - Volumes are initialized when a container is created. If the container's
@@ -36,7 +32,7 @@ Data volumes provide several useful features for persistent or shared data:
 - Changes to a data volume will not be included when you update an image.
 - Data volumes persist even if the container itself is deleted.
 
-Data volumes are designed to persist data, independent of the container's lifecycle. 
+Data volumes are designed to persist data, independent of the container's lifecycle.
 Docker therefore *never* automatically deletes volumes when you remove
 a container, nor will it "garbage collect" volumes that are no longer
 referenced by a container.
@@ -361,12 +357,3 @@ Data volumes are directly accessible from the Docker host. This means you can
 read and write to them with normal Linux tools. In most cases you should not do
 this as it can cause data corruption if your containers and applications are
 unaware of your direct access.
-
-# Next steps
-
-Now you've learned a bit more about how to use Docker we're going to see how to
-combine Docker with the services available on
-[Docker Hub](https://hub.docker.com) including Automated Builds and private
-repositories.
-
-Go to [Store images in Docker Hub](/engine/getstarted/step_six.md).

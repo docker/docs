@@ -31,8 +31,8 @@ When installing UCP on a host, make sure the following ports are open:
 | managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
 | managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
 | managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
-| managers, workers |  in, out  | TCP, UDP 4789           | Port for overlay networking                                                       |
-| managers, workers |  in, out  | TCP, UDP 7946           | Port  for overlay networking                                                      |
+| managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
+| managers, workers |  in, out  | TCP, UDP 7946           | Port for gossip-based clustering                                                  |
 | managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
 | managers          |    in     | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
 | managers          |    in     | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
