@@ -215,6 +215,23 @@ examples: |-
   fedora       latest      105182bb5e8b    5 days ago   372.7 MB
   ```
 
+   ### Pull image on ARM device
+
+    Recently, Docker has started publishing docker images for ARM devices,
+    you can explore ARMv7(armhf) images [here](https://hub.docker.com/u/armhf/)
+
+    ```bash
+    $ docker pull armhf/fedora
+    ```
+
+    for ARMv8(arm64), click (here)(https://hub.docker.com/u/aarch64/)
+
+    ```
+    $ docker pull aarch64/fedora
+    ```
+
+    For more info you can check (repository)[https://github.com/docker-library/official-images].
+
   ### Cancel a pull
 
   Killing the `docker pull` process, for example by pressing `CTRL-c` while it is
