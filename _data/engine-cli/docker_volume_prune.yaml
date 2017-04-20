@@ -1,7 +1,7 @@
 command: docker volume prune
 short: Remove all unused volumes
 long: Remove all unused volumes. Unused volumes are those which are not referenced
-  by any conta
+  by any container, this is supported with daemon version>=1.25
 usage: docker volume prune [OPTIONS]
 pname: docker volume
 plink: docker_volume.yaml
