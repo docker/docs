@@ -121,8 +121,7 @@ Then, select the following options:
 * Check 'place all certificates in the following store'
 * Click 'Browser', and select 'Trusted Root Certificate Authorities'
 * Click 'Finish'
-[See also] (https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal)
-[Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+[Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal)
 
 After adding the CA certificate to Windows, restart Docker for Windows.
 
