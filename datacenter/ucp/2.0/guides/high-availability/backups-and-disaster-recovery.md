@@ -59,6 +59,8 @@ $ docker run --rm -i --name ucp \
   docker/ucp restore --passphrase "secret" < backup.tar
 ```
 
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
+
 ## Restore your cluster
 
 The restore command can be used to create a new UCP cluster from a backup file.
