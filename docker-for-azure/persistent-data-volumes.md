@@ -12,6 +12,8 @@ Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-conf
 
 ## Use Cloudstor
 
+> **Note**: Cloudstor is currently only pre-installed and pre-configured in the edge channel distribution of Docker for Azure v17.03.
+
 After creating a swarm on Docker for Azure and connecting to any manager using SSH, verify that Cloudstor is already installed and configured for the stack/resource group:
 
 ```bash
