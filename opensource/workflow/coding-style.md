@@ -11,7 +11,7 @@ program code and documentation code.
 
 ## Change and commit code
 
-* Fork the `docker/docker` repository.
+* Fork the `moby/moby` repository.
 
 * Make changes on your fork in a feature branch. Name your branch `XXXX-something`
   where `XXXX` is the issue number you are working on.
