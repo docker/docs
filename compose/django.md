@@ -175,6 +175,17 @@ In this section, you set up the database connection for Django.
 
     ![Django example](images/django-it-worked.png)
 
+> **Note:**
+> On certain platforms (Windows 10), you may additionally need to edit `ALLOWED_HOSTS`
+> inside settings.py and add your Docker hostname or IP to the list.  For demo 
+> purposes, you may set the value to:
+>
+>       ALLOWED_HOSTS = ['*']
+>
+> Please note this value is **not** safe for production usage.  Refer to the 
+> [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts) 
+> for more information.
+
 ## More Compose documentation
 
 - [User guide](index.md)
