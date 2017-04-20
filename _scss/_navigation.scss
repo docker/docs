@@ -173,8 +173,7 @@
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding: 0 60px 0 0;
-    width: 300px;
+    padding-left: 0;
     line-height: 24px;
     li {
         padding: 2px 8px 2px 15px;
@@ -209,7 +208,6 @@ div#side-toc-title {
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
-    width: 100%;
 }
 
 .edit {

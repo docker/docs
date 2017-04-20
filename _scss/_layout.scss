@@ -187,7 +187,7 @@ section.section {
     position: -webkit-sticky;
     position: sticky;
     top: 55px;
-    overflow-y: scroll;
+    overflow: auto;
     max-height: calc(100vh - 55px);
     padding-top: 20px;
     padding-bottom: 20px;
