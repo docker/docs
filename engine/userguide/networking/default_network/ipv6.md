@@ -92,7 +92,7 @@ on the host:
 
 ![](images/ipv6_slash64_subnet_config.svg)
 
-In this setup the subnet `2001:db8:23:42::/80` with a range from
+In this setup the subnet `2001:db8:23:42::/64` with a range from
 `2001:db8:23:42:0:0:0:0` to `2001:db8:23:42:0:ffff:ffff:ffff` is attached to
 `eth0`, with the host listening at `2001:db8:23:42::1`. The subnet
 `2001:db8:23:42:1::/80` with an address range from `2001:db8:23:42:1:0:0:0` to
