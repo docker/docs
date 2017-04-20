@@ -4,8 +4,7 @@ keywords: docker, ucp, architecture
 title: UCP architecture
 ---
 
-Universal Control Plane is a containerized application that runs on the
-Commercially Supported (CS) Docker Engine, and extends its functionality to
+Universal Control Plane is a containerized application that runs on [Docker Enterprise Edition](/enterprise/index.md) and extends its functionality to
 make it easier to deploy, configure, and monitor your applications at scale.
 
 It also secures Docker with role-based access control so that only authorized
@@ -25,9 +24,7 @@ and Docker Compose.
 Docker UCP leverages the clustering and orchestration functionality provided
 by Docker.
 
-<a name="figure-architecture-2">
 ![](images/architecture-2.svg)
-</a>
 
 A swarm is a collection of nodes that are in the same Docker swarm. [Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two modes: Manager or Worker. If nodes are not already running in a swarm when installing UCP, nodes will be configured to run in swarm mode.
 

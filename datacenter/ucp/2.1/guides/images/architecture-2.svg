@@ -23,7 +23,7 @@
                         <g id="engine" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="Docker-Enterprise-Engine" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="5.26025391" y="15">Docker Enterprise Edition</tspan>
+                                <tspan x="28" y="15">Docker EE</tspan>
                             </text>
                         </g>
                         <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -52,7 +52,7 @@
                         <g id="engine" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="Docker-Enterprise-Engine" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="5.26025391" y="15">Docker Enterprise Edition</tspan>
+                                <tspan x="28" y="15">Docker EE</tspan>
                             </text>
                         </g>
                         <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -83,7 +83,7 @@
                         <g id="engine" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="Docker-Enterprise-Engine" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="5.26025391" y="15">Docker Enterprise Edition</tspan>
+                                <tspan x="28" y="15">Docker EE</tspan>
                             </text>
                         </g>
                         <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -112,7 +112,7 @@
                         <g id="engine" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="Docker-Enterprise-Engine" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="5.26025391" y="15">Docker Enterprise Edition</tspan>
+                                <tspan x="28" y="15">Docker EE</tspan>
                             </text>
                         </g>
                         <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -141,7 +141,7 @@
                         <g id="engine" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="Docker-Enterprise-Engine" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="5.26025391" y="15">Docker Enterprise Edition</tspan>
+                                <tspan x="28" y="15">Docker EE</tspan>
                             </text>
                         </g>
                         <g id="ucp" transform="translate(1.000000, 56.000000)">
