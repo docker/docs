@@ -14,9 +14,9 @@ be used anywhere else.
 
 > **Note**: You must be _logged in_ to Docker Cloud for the button to work correctly. If you are not logged in, you'll see a 404 error instead.
 
-This is an example button to deploy our <a href="https://github.com/docker/dockercloud-quickstart-python" target="_blank">python quickstart</a>:
+This is an example button to deploy our <a href="https://github.com/moby/mobycloud-quickstart-python" target="_blank">python quickstart</a>:
 
-<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/docker/dockercloud-quickstart-python" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
+<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/moby/mobycloud-quickstart-python" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
 
 The button redirects the user to the **Launch new Stack** wizard, with the stack
 definition already filled with the contents of any of the following files (which
@@ -61,9 +61,9 @@ https://cloud.docker.com/stack/deploy/?repo=<repo_url>
 
 where `<repo_url>` is the path to your GitHub repository. For example:
 
-* `https://github.com/docker/dockercloud-quickstart-python`
-* `https://github.com/docker/dockercloud-quickstart-python/tree/staging` to use branch `staging` instead of the default branch
-* `https://github.com/docker/dockercloud-quickstart-python/tree/master/example` to use branch `master` and the relative path `/example` inside the repository
+* `https://github.com/moby/mobycloud-quickstart-python`
+* `https://github.com/moby/mobycloud-quickstart-python/tree/staging` to use branch `staging` instead of the default branch
+* `https://github.com/moby/mobycloud-quickstart-python/tree/master/example` to use branch `master` and the relative path `/example` inside the repository
 
 You can use your own image for the link (or no image). Our **Deploy to Docker Cloud** image is available at the following URL:
 

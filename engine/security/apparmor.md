@@ -20,7 +20,7 @@ instead.
 A profile for the Docker Engine daemon exists but it is not currently installed
 with the `deb` packages. If you are interested in the source for the daemon
 profile, it is located in
-[contrib/apparmor](https://github.com/docker/docker/tree/master/contrib/apparmor)
+[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 
 ## Understand the policies
@@ -28,7 +28,7 @@ in the Docker Engine source repository.
 The `docker-default` profile is the default for running containers. It is
 moderately protective while providing wide application compatibility. The
 profile is generated from the following
-[template](https://github.com/docker/docker/blob/master/profiles/apparmor/template.go).
+[template](https://github.com/moby/moby/blob/master/profiles/apparmor/template.go).
 
 When you run a container, it uses the `docker-default` policy unless you
 override it with the `security-opt` option. For example, the following
@@ -283,8 +283,8 @@ Trusty, where some interesting behaviors are enforced.)
 
 Advanced users and package managers can find a profile for `/usr/bin/docker`
 (Docker Engine Daemon) underneath
-[contrib/apparmor](https://github.com/docker/docker/tree/master/contrib/apparmor)
+[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 
 The `docker-default` profile for containers lives in
-[profiles/apparmor](https://github.com/docker/docker/tree/master/profiles/apparmor).
+[profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor).

@@ -11,7 +11,7 @@ title: Release notes archive for Commercially Supported Docker Engine.
 This document contains the previous versions of the commercially supported
 Docker Engine release notes. It includes issues, fixes, and new features.
 
-Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.10.3-cs3
+Refer to the [detailed list](https://github.com/moby/moby/releases) of all changes since the release of CS Engine 1.10.3-cs3
 
 ## CS Engine 1.10.3-cs4
 (12 Jan 2017)
@@ -27,22 +27,22 @@ A vulnerability in the Go standard runtime libraries allowed a maliciously craft
 
 This issue is resolved by using Go runtime v1.5.4 which was released to address this vulnerability
 
-* https://github.com/docker/docker/pull/21977
-* https://github.com/docker/docker/pull/21987
+* https://github.com/moby/moby/pull/21977
+* https://github.com/moby/moby/pull/21987
 
 ## CS Engine 1.10.3-cs2
 (18 March 2016)
 
 Bug fix release picking up changes from Docker 1.10.3 release.
 
-Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.10.3) of all changes since the release of CS Engine 1.10.2-cs1
+Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v1.10.3) of all changes since the release of CS Engine 1.10.2-cs1
 
 ## CS Engine 1.10.2-cs1
 (22 February 2016)
 
 In this release the CS Engine is supported on SUSE Linux Enterprise 12 OS.
 
-Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.9.1.
+Refer to the [detailed list](https://github.com/moby/moby/releases) of all changes since the release of CS Engine 1.9.1.
 
 ## CS Engine 1.9.1-cs3
 (6 January 2016)
@@ -75,7 +75,7 @@ Starting with this release, upgrading minor versions, for example, from 1.9.0 to
 
 You can refer to the detailed list of all changes since the release of CS Engine
 1.9.0
-https://github.com/docker/docker/releases.
+https://github.com/moby/moby/releases.
 
 ## CS Engine 1.9.0
 (12 November 2015)
@@ -105,14 +105,14 @@ source with three releases under support at one time. This means you’ll be abl
 to take advantage of the latest and greatest features and you won’t have to wait
 for a supported release to take advantage of a specific feature.
 
-Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.6.
+Refer to the [detailed list](https://github.com/moby/moby/releases) of all changes since the release of CS Engine 1.6.
 
 ## CS Engine 1.6.2-cs7
 (12 October 2015)
 
 As part of our ongoing security efforts, <a href="http://blog.docker.com/2015/10/security-release-docker-1-8-3-1-6-2-cs7" target="_blank">a vulnerability was discovered</a> that affects the way content
 is stored and retrieved within the Docker Engine and CS Docker Engine. Today we
-are releasing a security update that fixes this issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The <a href="https://github.com/docker/docker/blob/master/CHANGELOG.md#161-2015-10-12" target="_blank">change log for Docker Engine 1.8.3</a> has a complete list of all the changes incorporated into both the open source and commercially
+are releasing a security update that fixes this issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The <a href="https://github.com/moby/moby/blob/master/CHANGELOG.md#161-2015-10-12" target="_blank">change log for Docker Engine 1.8.3</a> has a complete list of all the changes incorporated into both the open source and commercially
 supported releases.
 
 We recommend that users upgrade to CS Docker Engine 1.6.2-cs7. If you are unable

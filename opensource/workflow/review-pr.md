@@ -15,7 +15,7 @@ work on Docker.  You need to understand and work with both the "bots" and the
 > **Note**: These guidelines apply to Docker code submissions. If you want to
 > contribute to the Docker documentation itself, see the guidelines in the
 > `docker.github.io` repository's
-> [README.md](https://github.com/docker/docker.github.io).
+> [README.md](https://github.com/moby/moby.github.io).
 
 ## How we process your review
 

@@ -160,11 +160,11 @@ commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
 
-For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
+For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/moby/moby/issues/24388">Docker RUN fails to execute shell script (https://github.com/moby/moby/issues/24388)</a>.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
-Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
+Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
 
 You may get the following error when you try to start a container created with pre-Beta 18 Docker for Windows applications.
 
@@ -380,7 +380,7 @@ Discussion thread on GitHub at [Docker for Windows issue 267](https://github.com
 
 ### Networking issues
 
-Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/docker/docker/issues/22567).)
+Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/moby/moby/issues/22567).)
 
 Here is an example command and error message:
 

@@ -59,31 +59,31 @@ work will be visible on docs.docker.com.
 
 The following `vnext` branches currently exist:
 
-- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  docs for upcoming features in the [docker/docker](https://github.com/docker/docker/)
+- **[vnext-engine](https://github.com/moby/moby.github.io/tree/vnext-engine):**
+  docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
   project
 
-- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
+- **[vnext-compose](https://github.com/moby/moby.github.io/tree/vnext-compose):**
   docs for upcoming features in the [docker/compose](https://github.com/docker/compose/)
   project
 
-- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
+- **[vnext-distribution](https://github.com/moby/moby.github.io/tree/vnext-distribution):**
   docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
   project
 
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
+- **[vnext-opensource](https://github.com/moby/moby.github.io/tree/vnext-opensource):**
   docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
   project
 
-- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
+- **[vnext-swarm](https://github.com/moby/moby.github.io/tree/vnext-swarm):**
   docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
   project
 
-- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
+- **[vnext-toolbox](https://github.com/moby/moby.github.io/tree/vnext-toolbox):**
   docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
   project
 
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
+- **[vnext-kitematic](https://github.com/moby/moby.github.io/tree/vnext-kitematic):**
   docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
