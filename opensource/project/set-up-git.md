@@ -23,15 +23,15 @@ To fork and clone Docker:
 
 1. Open a browser and log into GitHub with your account.
 
-2. Go to the <a href="https://github.com/docker/docker"
-target="_blank">docker/docker repository</a>.
+2. Go to the <a href="https://github.com/moby/moby"
+target="_blank">moby/moby repository</a>.
 
 3. Click the "Fork" button in the upper right corner of the GitHub interface.
 
     ![Branch Signature](images/fork_docker.png)
 
     GitHub forks the repository to your GitHub account. The original
-    `docker/docker` repository becomes a new fork `YOUR_ACCOUNT/docker` under
+    `moby/moby` repository becomes a new fork `YOUR_ACCOUNT/docker` under
     your account.
 
 4. Copy your fork's clone URL from GitHub.
@@ -102,8 +102,8 @@ with `git commit -s`. Docker does not accept anonymous contributions or contribu
 through pseudonyms.
 
 As you change code in your fork, you'll want to keep it in sync with the changes
-others make in the `docker/docker` repository. To make syncing easier, you'll
-also add a _remote_ called `upstream` that points to `docker/docker`. A remote
+others make in the `moby/moby` repository. To make syncing easier, you'll
+also add a _remote_ called `upstream` that points to `moby/moby`. A remote
 is just another project version hosted on the internet or network.
 
 To configure your username, email, and add a remote:
@@ -129,7 +129,7 @@ To configure your username, email, and add a remote:
 4. Set your local repo to track changes upstream, on the `docker` repository.
 
    ```bash
-   $ git remote add upstream https://github.com/docker/docker.git
+   $ git remote add upstream https://github.com/moby/moby.git
    ```
 
 5. Check the result in your `git` configuration.
@@ -146,7 +146,7 @@ To configure your username, email, and add a remote:
    branch.master.merge=refs/heads/master
    user.name=Mary Anthony
    user.email=mary@docker.com
-   remote.upstream.url=https://github.com/docker/docker.git
+   remote.upstream.url=https://github.com/moby/moby.git
    remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
    ```
 
@@ -156,8 +156,8 @@ To configure your username, email, and add a remote:
    $ git remote -v
    origin	https://github.com/moxiegirl/docker.git (fetch)
    origin	https://github.com/moxiegirl/docker.git (push)
-   upstream https://github.com/docker/docker.git (fetch)
-   upstream https://github.com/docker/docker.git (push)
+   upstream https://github.com/moby/moby.git (fetch)
+   upstream https://github.com/moby/moby.git (push)
    ```
 
 ## Task 3. Create and push a branch

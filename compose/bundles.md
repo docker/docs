@@ -6,8 +6,8 @@ title: Docker stacks and distributed application bundles (experimental)
 ---
 
 > **Note**: This is a modified copy of the [Docker Stacks and Distributed Application
-> Bundles](https://github.com/docker/docker/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)
-> document in the [docker/docker repo](https://github.com/docker/docker). It's been updated to accurately reflect newer releases.
+> Bundles](https://github.com/moby/moby/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)
+> document in the [moby/moby repo](https://github.com/moby/moby). It's been updated to accurately reflect newer releases.
 
 ## Overview
 
@@ -59,7 +59,7 @@ Wrote bundle to vossibility-stack.dab
 > [Docker for Mac](/docker-for-mac/) or
 > [Docker for Windows](/docker-for-windows/) to install
 > it. If you're on Linux, follow the instructions in the
-> [experimental build README](https://github.com/docker/docker/blob/master/experimental/README.md).
+> [experimental build README](https://github.com/moby/moby/blob/master/experimental/README.md).
 
 A stack is created using the `docker deploy` command:
 

@@ -68,7 +68,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 [Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
 [Stacks](#stacks).
 
-[Read the full release notes](https://github.com/docker/docker/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
+[Read the full release notes](https://github.com/moby/moby/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
 
 ##### API and CLI
 

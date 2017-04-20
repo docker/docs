@@ -60,7 +60,7 @@ work will be visible on docs.docker.com.
 The following `vnext` branches currently exist:
 
 - **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  docs for upcoming features in the [docker/docker](https://github.com/docker/docker/)
+  docs for upcoming features in the [moby/moby](https://github.com/moby/moby/)
   project
 
 - **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**

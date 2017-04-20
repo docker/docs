@@ -16,7 +16,7 @@ run a Docker container, and develop code in the container. Docker itself builds,
 tests, and releases new Docker versions using this container.
 
 If you followed the procedures that <a href="/opensource/project/set-up-git/" target="_blank">
-set up Git for contributing</a>, you should have a fork of the `docker/docker`
+set up Git for contributing</a>, you should have a fork of the `moby/moby`
 repository. You also created a branch called `dry-run-test`. In this section,
 you continue working with your fork on this branch.
 

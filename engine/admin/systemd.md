@@ -139,5 +139,5 @@ you will need to add this configuration in the Docker systemd service file.
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files
 (`service` and `socket`) from [the github
-repository](https://github.com/docker/docker/tree/master/contrib/init/systemd)
+repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.

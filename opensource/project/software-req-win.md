@@ -39,10 +39,10 @@ You are now ready clone and build the Docker source code.
 
 In a new (to pick up the path change) PowerShell prompt, run:
 
-    git clone https://github.com/docker/docker
+    git clone https://github.com/moby/moby
     cd docker
 
-This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/docker/docker) to learn about the other software that powers the Docker platform.
+This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/moby/moby) to learn about the other software that powers the Docker platform.
 
 ## 5. Build and run
 
