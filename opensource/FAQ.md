@@ -44,10 +44,10 @@ Set your local repo to track changes upstream, on the `docker` repository.
     $ cd docker-fork
     ```
 
-2.  Add a remote called `upstream` that points to `docker/docker`.
+2.  Add a remote called `upstream` that points to `moby/moby`.
 
     ```
-    $ git remote add upstream https://github.com/docker/docker.git
+    $ git remote add upstream https://github.com/moby/moby.git
     ```
 
 ## How do I format my Go code
@@ -90,7 +90,7 @@ leave a blank line to separate paragraphs.
 
 Always rebase and squash your commits before making a pull request.
 
-1.  Fetch any of the last minute changes from `docker/docker`.
+1.  Fetch any of the last minute changes from `moby/moby`.
 
     ```
     $ git fetch upstream master
