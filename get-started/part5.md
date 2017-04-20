@@ -43,7 +43,7 @@ multiple services relate to each other, and run them on multiple machines.
 
 This is the home stretch, so congratulate yourself!
 
-## Adding a new service and redploying.
+## Adding a new service and redeploying.
 
 It's easy to add services to our `docker-compose.yml` file. First, let's add
 a free visualizer service that lets us look at how our swarm is scheduling
