@@ -171,7 +171,7 @@ you may experience exceptional, adequate, or poor performance with `osxfs`, the
 file system server in Docker for Mac. File system APIs are very wide (20-40
 message types) with many intricate semantics  involving on-disk state, in-memory
 cache state, and concurrent access by multiple  processes. Additionally, `osxfs`
-integrates   a mapping between macOS's FSEvents API and Linux's `inotify` API
+integrates a mapping between macOS's FSEvents API and Linux's `inotify` API
 which is implemented inside of the file system itself complicating matters
 further (cache behavior in particular).
 
