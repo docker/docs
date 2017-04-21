@@ -146,12 +146,12 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						</section>
 					</main>
 					<nav class="col-nav">
-						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %} hidden-sm hidden-xs">
+						<div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
 						{% include side-menu.html %}
 						</div>
 					</nav>
 					<div class="col-toc">
-							<div id="{% if page.landing == true %}sidebar-right{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top hidden-xs hidden-sm{%else%}sidebar-wrapper hidden-xs hidden-sm{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
+							<div class="sidebar hidden-xs hidden-sm">
 							<div class="toc-nav">
 								<div class="feedback-links">
 									<ul>
@@ -215,6 +215,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<script defer src="/js/menu.js"></script>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/stickyfill.min.js"></script>
 	<script defer src="/js/docs.js"></script>
 </body>
 
