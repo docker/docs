@@ -133,7 +133,9 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%; clear: left;"}
+<div style="clear:left"></div>
+> **Note** version 1.13 or higher is required
 
 You should be able to run `docker run hello-world` and see a response like this:
 
@@ -147,7 +149,15 @@ To generate this message, Docker took the following steps:
 ...(snipped)...
 ```
 
-If you see a message like the one above, you're ready to begin the journey.
+Now would also be a good time to make sure you are using version 1.13 or higher
+
+```
+$ docker version
+
+Docker version 17.03.1-ce, build c6d412e
+```
+
+If you see a messages like the ones above, you're ready to begin the journey.
 
 ## Conclusion
 
