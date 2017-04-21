@@ -846,3 +846,80 @@ the information from a Docker-managed secret instead of being passed directly.
 >**Note**: Docker secrets do not set environment variables directly. This was a
 conscious decision, because environment variables can unintentionally be leaked
 between containers (for instance, if you use `--link`).
+
+## Using Docker Secrets in Compose
+
+For this example we will create a simple WordPress site using Docker Secrets in
+a compose file. 
+
+We will be using the short syntax that only specifies the secret 
+name. This will grant the container access to the secret and will mount its value 
+at `/run/secrets/secret_name`.
+
+More information on short and long syntax is can be found at 
+[Compose file version 3 reference](/compose/compose-file/#secrets).
+
+> **Note** The latest mySQL and WordPress images have the Docker Secret functionality 
+> (i.e. ability to read from MYSQL_ROOT_PASSWORD_FILE and MYSQL_PASSWORD_FILE)
+
+Instead of hardcoding the datapase passwords in the compose file, each password 
+will be a Docker secret. Two plain text files will be used for each secret and 
+labeled 'db_password.txt' and 'db_root_password.txt'. Within each file is the actual 
+plain text passwords used to setup the mySQL database.
+
+Notice in the compose file `WORDPRESS_DB_PASSWORD_FILE` is referencing a Docker 
+Secret at `/run/secrets/db_password`
+
+For a service to have access to a secret it must be delcared under `secrets:`. 
+
+You can see the mySQL service is using two secrets under `environment:` 
+and the WordPress service is using just one secret `db_password`.
+
+The actual Docker secrets and their values are declared under a seperate root `secrets:` 
+section. We simply declare each secret and where to find the text we want to associate 
+with that secret. For this case the two secrets point to two seperate text files described earlier.
+
+
+```
+version: '3.1'
+
+services:
+   db:
+     image: mysql:latest
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:      
+       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_root_password
+       - db_password
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_password
+
+
+secrets:
+   db_password:
+     file: db_password.txt
+   db_root_password:
+     file: db_root_password.txt
+
+volumes:
+    db_data:
+```
+
