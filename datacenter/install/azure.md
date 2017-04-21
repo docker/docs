@@ -1,5 +1,5 @@
 ---
-title: Deploy Docker Enterprise Edition on Azure (Standard/Advanced)
+title: Deploy Docker Enterprise Edition for Azure (Standard/Advanced)
 description: Learn how to deploy Docker EE for Azure (Standard/Advanced) quickly, by using the Azure portal.
 keywords: docker, enterprise edition, azure, docker ee, docker datacenter, install, orchestration, manage, container, deploy, provision, azure resource manager, arm template
 ---
