@@ -74,23 +74,23 @@ work will be visible on [https://docs.docker.com/](https://docs.docker.com/).
 
 The following `vnext` branches currently exist:
 
-- **[vnext-engine](https://github.com/moby/moby.github.io/tree/vnext-engine):**
+- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
   docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
   project
 
-- **[vnext-compose](https://github.com/moby/moby.github.io/tree/vnext-compose):**
+- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
   docs for upcoming features in the [docker/compose](https://github.com/docker/compose/)
   project
 
-- **[vnext-distribution](https://github.com/moby/moby.github.io/tree/vnext-distribution):**
+- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
   docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
   project
 
-- **[vnext-swarm](https://github.com/moby/moby.github.io/tree/vnext-swarm):**
+- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
   docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
   project
 
-- **[vnext-toolbox](https://github.com/moby/moby.github.io/tree/vnext-toolbox):**
+- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
   docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
   project
 
@@ -111,7 +111,7 @@ You have three options:
 1.  On your local machine, clone this repo and run our staging container:
 
     ```bash
-    git clone https://github.com/moby/moby.github.io.git
+    git clone https://github.com/docker/docker.github.io.git
     cd docker.github.io
     docker-compose up
     ```
@@ -134,7 +134,7 @@ You have three options:
     a. Clone this repo by running:
 
        ```bash
-       git clone https://github.com/moby/moby.github.io.git
+       git clone https://github.com/docker/docker.github.io.git
        ```
 
     b. Install Ruby 2.3 or later as described in [Installing Ruby]

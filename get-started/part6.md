@@ -121,7 +121,7 @@ Enterprise on each of these providers:
 * [Docker Enterprise for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'EE for Azure');"}
 
 > **Note**: Having trouble with these? View [our setup guide for AWS](/datacenter/install/aws/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'AWS setup guide');"}.
-> You can also [view the WIP guide for Microsoft Azure](https://github.com/moby/moby.github.io/pull/2796){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Azure setup guide');"}.
+> You can also [view the WIP guide for Microsoft Azure](https://github.com/docker/docker.github.io/pull/2796){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Azure setup guide');"}.
 
 {{ enterprisedeployapp }}
 {% endcapture %}

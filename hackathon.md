@@ -30,7 +30,7 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 ## Quick links
 
 - [Event page on DockerCon website](https://dockercon.smarteventscloud.com/connect/sessionDetail.ww?SESSION_ID=116676)
-- [View hackathon bugs on GitHub](https://github.com/moby/moby.github.io/milestone/9)
+- [View hackathon bugs on GitHub](https://github.com/docker/docker.github.io/milestone/9)
 - [Report your hackathon work](https://goo.gl/forms/oEaQOlKvQj8iJbn53)
 - [Browse prizes](http://www.cafepress.com/dockerdocshackathon)
 - [#docs on Slack, if you have questions](https://dockercommunity.slack.com/messages/C2V58TASE)
@@ -40,7 +40,7 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 
 We have a number of bugs that have built up in our docs queue on GitHub, and
 we have labeled a whole slew of them with [the tag `hackathon`, which you can
-see here](https://github.com/moby/moby.github.io/labels/hackathon).
+see here](https://github.com/docker/docker.github.io/labels/hackathon).
 
 Submit fixes for these bugs, or close them if you do a bit of research it turns
 out they aren't actually valid. Every action you take gets you more points, and
@@ -103,7 +103,7 @@ Wednesday from 1pm to 6pm**. We'll be there to answer questions and help you.
 ### Online
 
 Drop into [the community Slack channel for the docs](https://dockercommunity.slack.com/messages/C2V58TASE) and ask any questions
-you have. Otherwise, just go to GitHub and [look at our `hackathon` label](https://github.com/moby/moby.github.io/milestone/9)
+you have. Otherwise, just go to GitHub and [look at our `hackathon` label](https://github.com/docker/docker.github.io/milestone/9)
 and come here to claim your points when you're done.
 
 ## Claiming a bug
@@ -112,7 +112,7 @@ Whether attending in-person or online, to claim a bug as one that you are
 working on (so nobody else grabs it out from under you) you must type a comment
 saying you claim it. Respect it when you see other comments claiming a bug.
 
-[View available bugs](https://github.com/moby/moby.github.io/milestone/9){: class="button primary-btn"}
+[View available bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
 
 ## Claiming your points
 

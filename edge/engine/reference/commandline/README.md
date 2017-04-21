@@ -25,5 +25,5 @@ The process for generating the YAML files is still in flux. Check with
 branch of `docker/docker` checked out (probably not `master`).
 
 After generating the YAML files, replace the YAML files in
-[https://github.com/moby/moby.github.io/tree/master/_data/engine-cli](https://github.com/moby/moby.github.io/tree/master/_data/engine-cli)
+[https://github.com/docker/docker.github.io/tree/master/_data/engine-cli](https://github.com/docker/docker.github.io/tree/master/_data/engine-cli)
 with the newly-generated files. Submit a pull request.

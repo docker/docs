@@ -241,7 +241,7 @@ make any changes, just run these commands again.
 ## Build and test the documentation
 
 The Docker documentation source files are in a centralized repository at
-[https://github.com/moby/moby.github.io](https://github.com/moby/moby.github.io). The content is
+[https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
 written using extended Markdown, which you can edit in a plain text editor such as
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
@@ -311,7 +311,7 @@ If for some reason you are unable to use Docker Compose, you can use Jekyll dire
 
 -  Use `bundle` to install Jekyll and its dependencies from the bundle in the
    centralized documentation repository. Within your clone of the
-   [https://github.com/moby/moby.github.io](https://github.com/moby/moby.github.io)
+   [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io)
    repository, issue the following command:
 
    ```bash

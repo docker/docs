@@ -3,6 +3,8 @@ title: "Get Started, Part 1: Orientation and Setup"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers
 description: Get oriented on some basics of Docker before diving into the walkthrough.
 redirect_from:
+- /getstarted/
+- /get-started/part1/
 - /engine/getstarted/
 - /learn/
 - /engine/getstarted/step_one/
