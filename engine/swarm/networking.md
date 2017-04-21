@@ -158,6 +158,8 @@ the service a VIP. The VIP maps to a DNS alias based upon the service name.
 Containers on the network share DNS mappings for the service via gossip so any container on the network can access the service via its service
 name.
 
+>**Note**: Service discovery will only work if your services are attached to a user-created overlay network (see top of this article). When a swarm is initialized, an `ingress` network is created if it does not exist. This network is not used by containers directly, but to enable the routing mesh functionality in swarm mode.
+
 You don't need to expose service-specific ports to make the service
 available to other services on the same overlay network. The swarm's internal
 load balancer automatically distributes requests to the service VIP among the
