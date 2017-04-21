@@ -23,10 +23,10 @@ Docker configures `docker0` with an IP address, netmask and IP allocation range.
 
 - `--mtu=BYTES`: override the maximum packet length on `docker0`.
 
-- `--default-gateway=Container default Gateway IPV4 address`: restricts where containers connected to
-  the `docker0` bridge route traffic by default. Applicable for addresses set with `--bip` and
-  `--fixed-cidr` flags. For instance, ou can configure `--fixed-cidr=172.17.2.0/24` and
-  `default-gateway=172.17.1.1`.
+- `--default-gateway=Container default Gateway IPV4 address`: designates the default gateway for
+  containers connected to the `docker0` bridge, which controls where they route traffic by default.
+  Applicable for addresses set with `--bip` and `--fixed-cidr` flags. For instance, you can configure
+  `--fixed-cidr=172.17.2.0/24` and `default-gateway=172.17.1.1`.
 
 - `--dns=[]`: The DNS servers to use. For example: `--dns=172.17.2.10`. You can also specify DNS servers
   when starting the Docker daemon, by adding the values to `/etc/docker/daemon.json` (recommended) or using
