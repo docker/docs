@@ -102,7 +102,7 @@ docker swarm init
 ```
 
 >**Note**: We'll get into the meaning of that command in [part 4](part4.md).
-> If you don't run that command you'll get an error that "this node is not a swarm manager,"
+> If you don't run `docker swarm init` you'll get an error that "this node is not a swarm manager."
 
 Now let's run it. You have to give your app a name -- here it is set to
 `getstartedlab` :
