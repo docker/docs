@@ -12,21 +12,32 @@ By default, the Docker server creates and configures the host system's `docker0`
 
 Docker configures `docker0` with an IP address, netmask and IP allocation range. The host machine can both receive and send packets to containers connected to the bridge, and gives it an MTU -- the _maximum transmission unit_ or largest packet length that the interface will allow -- of 1,500 bytes. These options are configurable at server startup:
 
-- `--bip=CIDR` -- supply a specific IP address and netmask for the `docker0` bridge, using standard CIDR notation like `192.168.1.5/24`.
+- `--bip=CIDR`: supply a specific IP address and netmask for the `docker0` bridge, using standard
+  CIDR notation. For example: `192.168.1.5/24`.
 
-- `--fixed-cidr=CIDR` -- restrict the IP range from the `docker0` subnet, using the standard CIDR notation like `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs (ex: 10.20.0.0/16) and must be a subset of the bridge IP range (`docker0` or set using `--bridge`). For example with `--fixed-cidr=192.168.1.0/25`, IPs for your containers will be chosen from the first half of `192.168.1.0/24` subnet.
+- `--fixed-cidr=CIDR`: restrict the IP range from the `docker0` subnet, using standard CIDR notation.
+  For example: `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs, such as `10.20.0.0/16`,
+  and must be a subset of the bridge IP range (`docker0` or set using `--bridge`). For example, with
+  `--fixed-cidr=192.168.1.0/25`, IPs for your containers will be chosen from the first half of addresses
+  included in the`192.168.1.0/24` subnet.
 
-- `--mtu=BYTES` -- override the maximum packet length on `docker0`.
+- `--mtu=BYTES`: override the maximum packet length on `docker0`.
 
-- `--default-gateway=Container default Gateway IPV4 address` -- restricts to route network  from the given IP Address of the router for the `docker0` bridge,applicable for both `--bip` and `fixed-cidr` applicable if you have configured docker-daemon to connect to your corporate network. Eg You can configure `--fixed-cidr=172.17.2.0/24` and `default-gateway=172.17.1.1`
+- `--default-gateway=Container default Gateway IPV4 address`: restricts where containers connected to
+  the `docker0` bridge route traffic by default. Applicable for addresses set with `--bip` and
+  `--fixed-cidr` flags. For instance, ou can configure `--fixed-cidr=172.17.2.0/24` and
+  `default-gateway=172.17.1.1`.
 
-- `--dns=[]` -- DNS Servers to use Eg we can add `--dns=172.17.2.10`.optionally can be added in /etc/default/docker or /etc/sysconfig/docker file by creating a variable `DOCKER_OPTS` and giving values such as `DOCKER_OPTS = --dns=172.17.2.10 --dns=172.17.2.12` 
+- `--dns=[]`: The DNS servers to use. For example: `--dns=172.17.2.10`. You can also specify DNS servers
+  when starting the Docker daemon, by adding the values to `/etc/docker/daemon.json` (recommended) or using
+  the `--dns` flag when starting `dockerd` manually.
 
-Once you have one or more containers up and running, you can confirm that Docker has properly connected them to the `docker0` bridge by running the `brctl` command on the host machine and looking at the `interfaces` column of the output.  Here is a host with two different containers connected:
+Once you have one or more containers up and running, you can confirm that Docker has properly connected
+them to the `docker0` bridge by running the `brctl` command on the host machine and looking at the
+`interfaces` column of the output.  Thhis example shows a `docker0` bridge with two containers
+connected:
 
-```
-# Display bridge info
-
+```bash
 $ sudo brctl show
 
 bridge name     bridge id               STP enabled     interfaces
