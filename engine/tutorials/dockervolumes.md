@@ -174,15 +174,15 @@ Volume drivers create volumes by name, instead of by path like in
 the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
-using the `flocker` volume driver (`flocker` is a plugin for multi-host portable volumes)
+using the `convoy` volume driver (`convoy` is a plugin for a variety of storage back-ends)
 and makes it available within the container at `/webapp`. Before running the command,
-[install flocker](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
-If you do not want to install `flocker`, replace `flocker` with `local` in the example commands
+[install and configure convoy](https://github.com/rancher/convoy#quick-start-guide).
+If you do not want to install `convoy`, replace `convoy` with `local` in the example commands
 below to use the `local` driver.
 
 ```bash
 $ docker run -d -P \
-  --volume-driver=flocker \
+  --volume-driver=convoy \
   -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
@@ -195,7 +195,7 @@ using the `docker volume create` command. Options are specified as key-value
 pairs in the format `o=<key>=<value>`.
 
 ```bash
-$ docker volume create -d flocker --opt o=size=20GB my-named-volume
+$ docker volume create -d convoy --opt o=size=20GB my-named-volume
 
 $ docker run -d -P \
   -v my-named-volume:/webapp \
