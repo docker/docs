@@ -36,22 +36,19 @@ docker node update --label-add <key>=<value> <node-id>
 
 ## Add constraint to a service
 
-After adding labels to your nodes you can add deployment constraints on your 
-service base on your labels.
 When deploying a service, you can specify constraints, so that the service only
 gets scheduled on a node that has a label that fulfills all the constraints
-you specify
+you specify.
 
 In this example, when users deploy a service they can add constraints for the
 service to be scheduled on nodes that have an SSD storage.
 
-You can apply deployment constraints inside the docker-stack.yml or when you are creating a stack
+You can add deployment constraints to your docker-stack.yml file or when you are creating a stack:
 ![](../../images/use-contraints-in-stack-deployement.png)
 
 Or you can apply them when you are creating a service.
 
-![](../../images/add-constraint-to service-step1.png)
-![](../../images/add-constraint-to service-step2.png)
+![](../../images/add-constraint-to-service.png)
 
 You can check if a service have deployment constraints, navigate to the **Services** page,
 and choose the service your want to check.
