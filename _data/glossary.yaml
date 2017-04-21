@@ -151,10 +151,11 @@ Kitematic: |
   containers. We recommend upgrading to [Docker for Mac](#docker-for-mac) or
   [Docker for Windows](#docker-for-windows/), which have superseded Kitematic.
 layer: |
-  *layer* or *layers* on a Docker image are modifications applied to a base image. Every 
-  executable line in Dockerfile creates a modification on base image. Each such modification is 
-  stored as a *layer* which is cached and reused for same base image. The layer format of docker images
-  helps in reducing the storage space on the host and faster portability.
+  In an image, a layer is modification to the image, represented by an instruction in the
+  Dockerfile. Layers are applied in sequence to the base image to create the final image.
+  When an image is updated or rebuilt, only layers that change need to be updated, and
+  unchanged layers are cached locally. This is part of why Docker images are so fast
+  and lightweight. The sizes of each layer add up to equal the size of the final image.
 libcontainer: |
   libcontainer provides a native Go implementation for creating containers with
   namespaces, cgroups, capabilities, and filesystem access controls. It allows
@@ -176,11 +177,15 @@ Machine: |
 
   *Also known as : docker-machine*
 namespace: |
-   [namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html) is a Linux kernel feature that isolates
-   and vitualizes system resources. Processes which are part of a namespace, can only see the changes to the 
-   resources in namespaces they are part of. Processes belonging to different namespace cannot see the changes 
-   in another container. This is one of the founding blocks of the linux containers. There are different types of 
-   namespaces that allow different capabilities to container.
+  A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html){: target="_blank" class="_"}
+  is a Linux kernel feature that isolates and vitualizes system resources. Processes which restricted to
+  a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
+  are an important part of Docker's isolation model. Namespaces exist for each type of
+  resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
+  and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run.md)
+  and [Introduction to user namespaces(https://success.docker.com/KBase/Introduction_to_User_Namespaces_in_Docker_Engine){ :target="_blank" class="_" }.
+  
+  
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in swarm mode.
