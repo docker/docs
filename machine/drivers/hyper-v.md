@@ -69,7 +69,7 @@ Select the Virtual Switch Manager on the left-side **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
-Set up a new **external network switch** to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one, but it must be an **external** switch)
+Set up a new **external network switch** to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one, but it must be an **external** switch.)
 
 For this example, we created a virtual switch called `Primary Virtual Switch`.
 
