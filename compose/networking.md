@@ -97,16 +97,16 @@ Here's an example Compose file defining two custom networks. The `proxy` service
         networks:
           - backend
 
-     networks:
-       frontend:
-         # Use a custom driver
-         driver: custom-driver-1
-       backend:
-         # Use a custom driver which takes special options
-         driver: custom-driver-2
-         driver_opts:
-           foo: "1"
-           bar: "2"
+    networks:
+      frontend:
+        # Use a custom driver
+        driver: custom-driver-1
+      backend:
+        # Use a custom driver which takes special options
+        driver: custom-driver-2
+        driver_opts:
+          foo: "1"
+          bar: "2"
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
 
@@ -129,8 +129,8 @@ Instead of (or as well as) specifying your own networks, you can also change the
       db:
         image: postgres
 
-      networks:
-        default:
+    networks:
+      default:
         # Use a custom driver
         driver: custom-driver-1
 
