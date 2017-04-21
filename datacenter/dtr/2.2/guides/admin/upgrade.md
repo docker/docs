@@ -18,26 +18,18 @@ support upgrades according to the following rules:
   version. We also strongly recommend upgrading to the latest minor/patch
   version for your major version first.
 
-|From| To| Description| Supported|
-|:----|:---|:------------|----------|
-| x.y.0 | x.y.1 | patch upgrade | yes |
-| x.y.0 | x.y.2 | skip patch version | yes |
-| x.y.2 | x.y.1 | patch downgrade | no |
-| x.y.* | x.y+1.* | minor upgrade | yes |
-| x.y.* | x.y+2.* | skip minor version | no |
-| x.y.* | x.y-1.* | minor downgrade | no |
-| x.*.* | x+2.*.* | skip major version | no |
-| x.*.* | x-1.*.* | major downgrade | no |
-
-In the next table, y and z are the latest minor or patch version  and a,b the
-earliest minor or pacth version 
-
-|From| To| Description| Supported|
-|:----|:---|:------------|----------|
-| x.y.z | x+1.a.b | major upgrade | yes |
-| x.y.z-1 | x+1.a.b+1 | major upgrade from an old version | no |
-| x.y.z | x+1.a+1.b | major upgrade skipping minor version | no |
-
+| Description                          | From  | To        | Supported |
+|:-------------------------------------|:------|:----------|-----------|
+| patch upgrade                        | x.y.0 | x.y.1     | yes       |
+| skip patch version                   | x.y.0 | x.y.2     | yes       |
+| patch downgrade                      | x.y.2 | x.y.1     | no        |
+| minor upgrade                        | x.y.* | x.y+1.*   | yes       |
+| skip minor version                   | x.y.* | x.y+2.*   | no        |
+| minor downgrade                      | x.y.* | x.y-1.*   | no        |
+| skip major version                   | x.*.* | x+2.*.*   | no        |
+| major downgrade                      | x.*.* | x-1.*.*   | no        |
+| major upgrade                        | x.y.z | x+1.0.0   | yes       |
+| major upgrade skipping minor version | x.y.z | x+1.y+1.z | no        |
 
 There may be at most a few seconds of interruption during the upgrade of a
 DTR cluster. Schedule the upgrade to take place outside business peak hours
