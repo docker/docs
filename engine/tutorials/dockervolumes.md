@@ -334,7 +334,7 @@ restore testing using your preferred tools.
 
 ## List all volumes
 
-You can list  all existing volumes which are created.
+You can list all existing volumes using `docker volume ls`.
 
 ```bash
 $ docker volume ls
@@ -342,7 +342,6 @@ DRIVER              VOLUME NAME
 local               ec75c47aa8b8c61fdabcf37f89dad44266841b99dc4b48261a4757e70357ec06
 local               f73e499de345187639cdf3c865d97f241216c2382fe5fa67555c64f258892128
 local               tmp_data
-
 ```
 
 ## Remove volumes
