@@ -6,6 +6,8 @@ usage: docker volume prune [OPTIONS]
 pname: docker volume
 plink: docker_volume.yaml
 options:
+- option: filter
+  description: Provide filter values (e.g. 'label=<label>')
 - option: force
   shorthand: f
   default_value: "false"

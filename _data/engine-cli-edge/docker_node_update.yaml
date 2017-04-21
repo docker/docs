@@ -8,10 +8,8 @@ options:
 - option: availability
   description: Availability of the node ("active"|"pause"|"drain")
 - option: label-add
-  default_value: '[]'
   description: Add or update a node label (key=value)
 - option: label-rm
-  default_value: '[]'
   description: Remove a node label if exists
 - option: role
   description: Role of the node ("worker"|"manager")
