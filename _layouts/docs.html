@@ -217,6 +217,18 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
 	<script defer src="/js/docs.js"></script>
+	<script language="javascript">
+	jQuery(document).ready(function(){
+			$.getJSON( "/metadata.txt", function( data ) {
+				metadata = data;
+				hookupTOCEvents();
+				$.getJSON( "/glossary.txt", function( data ) {
+					glossary = data;
+					renderTagsPage();
+				});
+			});
+	});
+	</script>
 </body>
 
 </html>
