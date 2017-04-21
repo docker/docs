@@ -14,7 +14,7 @@ For more info, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
 
 > **Note**: You may see references to the earlier brand name, "Docker Datacenter"
-> and "DDC".These names are equivalent with Docker Enterprise Edition for Azure.
+> and "DDC". These names are equivalent with Docker Enterprise Edition for Azure.
 
 ## Prerequisites for deploying Docker EE for Azure
 
@@ -139,11 +139,11 @@ load balancers.
 
     ![Output URLs of an Docker EE for Azure deployment](../images/ddc-azure-outputs.png)
 
-2.  In the **Output** section, copy the URL in `UCPLOGINURL` and
+2.  In the **Output** section, copy the URL in **UCPLOGINURL** and
     paste it into a web browser. The UCP login page opens. To login, use the
     DDC username and password you entered in the Settings blade.
 
-3.  Copy the URL in `DTRLOGINURL` and paste it into a new tab in the
+3.  Copy the URL in **DTRLOGINURL** and paste it into a new tab in the
     web browser. The DTR interface page opens.
 
 ## Connect to a manager node with SSH
@@ -151,7 +151,7 @@ load balancers.
 In addition to managing Docker EE with the user interface, you can
 connect to a manager node by using SSH. You need the private key that
 corresponds with the public key that you provided when you created the Docker EE
-deployment. When you `ssh` to a manager node, login with the username `docker`,
+deployment. When you `ssh` to a manager node, login with the username "docker",
 not the username you entered in the Settings blade, which is for UI.
 
 ```bash
