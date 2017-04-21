@@ -2,7 +2,7 @@
 title: Docker CE Edge documentation
 description: Information about current Docker Edge releases
 keywords: engine, edge, installation
-current_edge: 17.04
+current_edge: 17.05
 ---
 
 The current Docker CE Edge release is {{ page.current_edge }}. The Docker CE
@@ -27,18 +27,52 @@ available until a Docker CE Stable release incorporates the feature**.
 ### Docker CE Edge new features
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#1704">17.04</a></li>
-  <!--<li><a data-toggle="tab" data-target="#1705">17.05</a></li>-->
+  <li class="active"><a data-toggle="tab" data-target="#1705">17.05</a></li>
+  <li><a data-toggle="tab" data-target="#1704">17.04</a></li>
 </ul>
+
 <div markdown="1" class="tab-content">
-<div markdown="1" id="1704" class="tab-pane fade in active">
+
+<div markdown="1" id="1705" class="tab-pane fade in active">
+#### Docker CE Edge 17.05
+
+The following major features and changes are included in Docker CE Edge 17.05.
+**Docker CE Edge 17.05 also includes the features from Docker CE Edge 17.04.**
+Continue reading, or go straight to [API and CLI](#api-and-cli),
+[Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
+[Stacks](#stacks).
+
+[Read the full release notes](https://github.com/moby/moby/releases/tag/v17.05.0-ce){: target="_blank" class="_" }
+
+##### API and CLI
+
+- Add [version 1.29](/engine/reference/api/v1.29/) of the Docker API.
+
+<!--- Docker now updates swarm nodes if the swarm configuration is updated.
+  {% include github-pr.md pr="30259" %}-->
+
+##### Daemon
+
+
+
+##### Dockerfile
+
+
+
+##### Services
+
+
+
+##### Stacks
+
+
+</div> <!-- 17.05 -->
+
+<div markdown="1" id="1704" class="tab-pane fade">
 
 #### Docker CE Edge 17.04
 
 The following major features and changes are included in Docker CE Edge 17.04.
-Continue reading, or go straight to [API and CLI](#api-and-cli),
-[Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
-[Stacks](#stacks).
 
 [Read the full release notes](https://github.com/moby/moby/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
 
@@ -185,5 +219,4 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
   {% include github-pr.md pr="31795" %}
 
 </div> <!-- 17.04 -->
-<!--<div id="1705" class="tab-pane fade">TAB 2 CONTENT</div>-->
 </div> <!-- tab-content -->
