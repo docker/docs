@@ -8,7 +8,7 @@ description: Learn how to create a multi-container application that uses all the
 
 ## Prerequisites
 
-- [Install Docker](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have pushed the container you created to a registry, as
