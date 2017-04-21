@@ -255,14 +255,14 @@ To upgrade Docker, first run `sudo apt-get update`, then follow the
 to install.
 
 
-### Install on Raspian (Raspberry Pi)
+### Install on Raspbian (Raspberry Pi)
 
-You can choose between two methods for `armhf`. You can use the same method
-as Debian, setting up the repository and using `apt-get install`, or you can
-use a convenience script, which requires privileged access, but sets up the
-repository for you and start automatically the daemon.
+You can choose between two methods for Raspbian on `armhf`. You can use the
+same method as Debian, setting up the repository and using `apt-get install`,
+or you can use a convenience script, which requires privileged access, but
+sets up the repository for you and start automatically the daemon.
 
-- Setting up the repository directly (recommended):
+- Setting up the repository directly:
 
   ```bash
   $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
@@ -284,8 +284,8 @@ repository for you and start automatically the daemon.
   If you use this method, Docker is installed and starts automatically.
   Skip the rest of this step.
 
-Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
-see `docker.list` if you:
+Once you have added the Docker repository to `/etc/apt/sources.list.d/`,
+you should see `docker.list` if you:
 
 ```bash
 $ ls /etc/apt/sources.list.d/
@@ -314,11 +314,12 @@ installing Docker.
     ```bash
     $ sudo apt-get install docker-engine
     ```
-    > **NOTE**: Currently Docker on Raspian is Docker Community Edition Edge.
-    > The URL is still the same as prior to the introduction of the CE and EE edition.
-    > It is possible that in the future this URL does not work anymore,
-    > then please use the Debian URL. Use also that URL if you want to use the stable
-    > edition.
+    > **NOTE**: Currently Docker on Raspbian is Docker Community Edition from
+    > the edge channel. If you want to use the stable channel, then you need
+    > to use the same URL as for Debian on `armhf`. The URL for Raspbian is still
+    > the same as prior to the introduction of the CE and EE edition but it is
+    > still working.
+
 
 3.  Verify that Docker is installed correctly by running the `hello-world`
     image.
