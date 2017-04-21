@@ -16,7 +16,6 @@ options:
 - option: ip6
   description: IPv6 address (e.g., 2001:db8::33)
 - option: link
-  default_value: '[]'
   description: Add link to another container
 - option: link-local-ip
   default_value: '[]'
