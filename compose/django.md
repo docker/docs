@@ -177,14 +177,24 @@ In this section, you set up the database connection for Django.
 
 > **Note:**
 > On certain platforms (Windows 10), you may additionally need to edit `ALLOWED_HOSTS`
-> inside settings.py and add your Docker hostname or IP to the list.  For demo 
+> inside settings.py and add your Docker hostname or IP to the list.  For demo
 > purposes, you may set the value to:
 >
 >       ALLOWED_HOSTS = ['*']
 >
-> Please note this value is **not** safe for production usage.  Refer to the 
-> [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts) 
+> Please note this value is **not** safe for production usage.  Refer to the
+> [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)
 > for more information.
+
+5. Clean up: Shut down containers with CONTROL-C.
+
+  ```
+  Gracefully stopping... (press Ctrl+C again to force)
+  Killing test_web_1 ... done
+  Killing test_db_1 ... done
+  ```
+
+  It's safe to `rm -rf` your project directory.
 
 ## More Compose documentation
 
