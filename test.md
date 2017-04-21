@@ -69,7 +69,7 @@ culpa qui officia deserunt mollit anim id est laborum.
 - [a markdown link](https://docker.com/)
 
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
-  (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encouters another underscore.)
+  (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
 - <a href="https://docker.com/">an HTML link</a>
 
@@ -160,9 +160,8 @@ This is also the case if you need to use rowspans or colspans. Try to avoid
 setting styles directly on your tables! If you set the width on a `<td>`, you
 only need to do it on the first one. If you have a `<th>`, set it there.
 
-> **Note**: If you need to have **markdown** in a **HTML** table, you need to
-> capture the table and then filter it through `markdownify`. See [tabs](#tabs)
-> for an example. Here, I avoid that by using HTML throughout.
+> **Note**: If you need to have **markdown** in a **HTML** table, add
+> `markdown="1"` to the HTML for the `<td>` cells that contain the Markdown.
 
 <table>
   <tr>
@@ -172,7 +171,7 @@ only need to do it on the first one. If you have a `<th>`, set it there.
   <tr>
   <td>This is some test text. <br><br>This is more <b>text</b> on a new line. <br><br>Lorem ipsum dolor <tt>sit amet</tt>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </td>
-    <td>This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+    <td>This is some more text about the right hand side. There is a <a href="https://github.com/moby/moby/tree/master/experimental" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
   </tr>
   <tr>
   <td>
@@ -242,31 +241,25 @@ Here are some tabs:
 
 You need to adjust the `id` and `data-target` values to match your use case.
 
-If you have Markdown inside the content of the `<div>`, you need to capture it, then
-print it and run it through the `markdownify` Liquid filter. Here's a demo:
+If you have Markdown inside the content of the `<div>`, just add `markdown="1"`
+as an attribute in the HTML for the `<div>` and Kramdown will render it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
   <li><a data-toggle="tab" data-target="#tab4">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
-<div id="tab3" class="tab-pane fade in active">
-{% capture tab3-content %}
+<div id="tab3" class="tab-pane fade in active" markdown="1">
 #### A Markdown header
 
 - list item 1
 - list item 2
-{% endcapture %}
-{{ tab3-content | markdownify }}
 </div>
-<div id="tab4" class="tab-pane fade">
-{% capture tab4-content %}
+<div id="tab4" class="tab-pane fade" markdown="1">
 #### Another Markdown header
 
 - list item 3
 - list item 4
-{% endcapture %}
-{{ tab4-content | markdownify }}
 </div>
 </div>
 
@@ -358,20 +351,31 @@ Bootstrap JS are loaded.
 
 ## Admonitions (notes)
 
-> **Note**: This is a note.
+> **Note**: This is a note using the old note style
 
-> **Info**: This is an info.
+> **This is a note using the new style**
+>
+> And you include a small description here telling users to be on the lookout
 
-> **Tip**: This is a tip.
+> **Be careful out there**
+>
+> Add the `warning` class to your blockquotes if you want to tell users
+> to be careful about something.
+{: .warning}
 
-> **Warning**: This is a warning.
+> **Ouch, don't do that!**
+>
+> Use the `danger` class to let people know this is dangerous or they
+> should pay close attention to this part of the road.
+>
+> You can also add more paragraphs here if your explanation is
+> super complex.
+{: .danger}
 
-> **Caution**: This is a caution.
 
-> **Note**: One line of note text
-> another line of note text
-
-> **Note**: This is a note with a list and a table in it.
+> **This is a crazy note**
+>
+> This note has tons of content in it:
 >
 > - List item 1
 > - List item 2
@@ -382,6 +386,7 @@ Bootstrap JS are loaded.
 > | Row 2 column 1 | Row 2 column 2 |
 >
 > And another sentence to top it all off.
+
 
 ## Comments
 
@@ -460,7 +465,10 @@ end
 
 ### JSON
 
-Sometimes this doesn't work right and you have to use `none`.
+Warning: Syntax highlighting breaks easily for JSON if the code you present is
+not a valid JSON document. Try running your snippet through [this
+linter](http://jsonlint.com/) to make sure it's valid, and remember: there is no
+syntax for comments in JSON!
 
 ```json
 "server": {
@@ -499,9 +507,10 @@ command=/usr/sbin/sshd -D
 
 ### Dockerfile
 
-Yes, we have our own highlighting in Rouge!
+To enable syntax highlighting for Dockerfiles, use the `conf` lexer, for now.
+In the future, native Dockerfile support is coming to Rouge.
 
-```dockerfile
+```conf
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #
@@ -536,9 +545,7 @@ CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main
 
 ### YAML
 
-The `yaml` hint doesn't play nicely with Atom so we sometimes have to use `none`.
-
-```none
+```yaml
 authorizedkeys:
   image: dockercloud/authorizedkeys
   deployment_strategy: every_node
@@ -548,6 +555,3 @@ authorizedkeys:
   volumes:
     /root:/user:rw
 ```
-
-
-

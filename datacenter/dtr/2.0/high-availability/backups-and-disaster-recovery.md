@@ -86,10 +86,9 @@ $ tar -tf /tmp/backup.tar
 
 ## Restore DTR data
 
-You can restore a DTR node from a backup using the `docker/dtr restore`
-command.
 This command performs a fresh installation of DTR, and reconfigures it with
 the configuration created during a backup.
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
 
 The command starts by installing DTR, restores the configurations stored on
 etcd, and then restores the repository metadata stored on RethinkDB. You

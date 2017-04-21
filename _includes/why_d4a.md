@@ -80,7 +80,7 @@ reduced.
 
 Centralized logging is a critical component of many modern infrastructure
 stacks. To have these logs indexed and searchable proves invaluable for
-debugging appliation and system issues as they come up. Out of the box, Docker
+debugging application and system issues as they come up. Out of the box, Docker
 for {{cloudprovider}} forwards logs from containers to a native cloud provider
 abstraction ({{cloudprovider_log_dest}}).
 

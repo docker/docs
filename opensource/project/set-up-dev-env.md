@@ -22,8 +22,7 @@ you continue working with your fork on this branch.
 
 ##  Task 1. Remove images and containers
 
-Docker developers run the latest stable release of the Docker software (with
-Docker Machine if their machine is macOS). They clean their local hosts of
+Docker developers run the latest stable release of the Docker software. They clean their local hosts of
 unnecessary Docker artifacts such as stopped containers or unused images.
 Cleaning unnecessary artifacts isn't strictly necessary, but it is good
 practice, so it is included here.
@@ -44,6 +43,14 @@ To remove unnecessary artifacts:
 
    There are no running or stopped containers on this host. A fast way to
    remove old containers is the following:
+
+   As of Docker Engine version 1.13 you can now use the `docker system prune` command to achieve this:
+
+   ```none 
+   $ docker system prune -a
+   ```
+
+   Older versions of the Docker Engine should reference the command below:
 
    ```none
    $ docker rm $(docker ps -a -q)
@@ -92,7 +99,7 @@ can take over 15 minutes to complete.
 
 1. Open a terminal.
 
-   For Mac users, use `docker-machine status your_vm_name` to make sure your VM is running. You
+   For [Docker Toolbox](../../toolbox/overview.md) users, use `docker-machine status your_vm_name` to make sure your VM is running. You
    may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
    shell environment.
 
@@ -121,23 +128,22 @@ can take over 15 minutes to complete.
    $ make BIND_DIR=. shell
    ```
 
-   The command returns informational messages as it runs. The first build may
-   take a few minutes to create an image. Using the instructions in the
-   `Dockerfile`, the build may need to download source and other images. A
+   Using the instructions in the
+   `Dockerfile`, the build may need to download and / or configure source and other images. On first build this process may take between 5 - 15 minutes to create an image. The command returns informational messages as it runs.  A
    successful build returns a final message and opens a Bash shell into the
    container.
 
    ```none
    Successfully built 3d872560918e
-   docker run --rm -i --privileged -e BUILDFLAGS -e KEEPBUNDLE -e DOCKER_BUILD_GOGC -e DOCKER_BUILD_PKGS -e DOCKER_CLIENTONLY -e DOCKER_DEBUG -e DOCKER_EXPERIMENTAL -e DOCKER_GITCOMMIT -e DOCKER_GRAPHDRIVER=devicemapper -e DOCKER_INCREMENTAL_BINARY -e DOCKER_REMAP_ROOT -e DOCKER_STORAGE_OPTS -e DOCKER_USERLANDPROXY -e TESTDIRS -e TESTFLAGS -e TIMEOUT -v "home/ubuntu/repos/docker/bundles:/go/src/github.com/docker/docker/bundles" -t "docker-dev:dry-run-test" bash
-   root@f31fa223770f:/go/src/github.com/docker/docker#
+   docker run --rm -i --privileged -e BUILDFLAGS -e KEEPBUNDLE -e DOCKER_BUILD_GOGC -e DOCKER_BUILD_PKGS -e DOCKER_CLIENTONLY -e DOCKER_DEBUG -e DOCKER_EXPERIMENTAL -e DOCKER_GITCOMMIT -e DOCKER_GRAPHDRIVER=devicemapper -e DOCKER_INCREMENTAL_BINARY -e DOCKER_REMAP_ROOT -e DOCKER_STORAGE_OPTS -e DOCKER_USERLANDPROXY -e TESTDIRS -e TESTFLAGS -e TIMEOUT -v "home/ubuntu/repos/docker/bundles:/go/src/github.com/moby/moby/bundles" -t "docker-dev:dry-run-test" bash
+   root@f31fa223770f:/go/src/github.com/moby/moby#
    ```
 
    At this point, your prompt reflects the container's BASH shell.
 
-5. List the contents of the current directory (`/go/src/github.com/docker/docker`).
+5. List the contents of the current directory (`/go/src/github.com/moby/moby`).
 
-   You should see the image's source from the  `/go/src/github.com/docker/docker`
+   You should see the image's source from the  `/go/src/github.com/moby/moby`
    directory.
 
    ![List example](images/list_example.png)
@@ -145,7 +151,7 @@ can take over 15 minutes to complete.
 6. Make a `docker` binary.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/docker/docker# hack/make.sh binary
+   root@a8b2885ab900:/go/src/github.com/moby/moby# hack/make.sh binary
    ...output snipped...
    bundles/1.12.0-dev already exists. Removing.
 
@@ -155,17 +161,17 @@ can take over 15 minutes to complete.
    Copying nested executables into bundles/1.12.0-dev/binary
    ```
 
-7. Copy the binary to the container's `**/usr/bin/**` directory.
+7. Copy the binary to the container's **/usr/bin/** directory.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
-   root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
+   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
    ```
 
 8. Start the Engine daemon running in the background.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/docker/docker# docker daemon -D&
+   root@a8b2885ab900:/go/src/github.com/docker/docker# dockerd -D &
    ...output snipped...
    DEBU[0001] Registering POST, /networks/{id:.*}/connect
    DEBU[0001] Registering POST, /networks/{id:.*}/disconnect
@@ -176,10 +182,10 @@ can take over 15 minutes to complete.
 
    The `-D` flag starts the daemon in debug mode. The `&` starts it as a
    background process. You'll find these options useful when debugging code
-   development.
+   development. You will need to hit `return` in order to get back to your shell prompt.
 
    > **Note**: The following command automates the `build`,
-   > `install`, and `run` steps above.
+   > `install`, and `run` steps above. Once the command below completes, hit `ctrl-z` to suspend the process, then run `bg 1` and hit `enter` to resume the daemon process in the background and get back to your shell prompt.
 
    ```none
    hack/make.sh binary install-binary run
@@ -188,7 +194,7 @@ can take over 15 minutes to complete.
 9. Inside your container, check your Docker version.
 
    ```none
-   root@5f8630b873fe:/go/src/github.com/docker/docker# docker --version
+   root@5f8630b873fe:/go/src/github.com/moby/moby# docker --version
    Docker version 1.12.0-dev, build 6e728fb
    ```
 
@@ -199,13 +205,13 @@ can take over 15 minutes to complete.
 10. Run the `hello-world` image.
 
     ```none
-    root@5f8630b873fe:/go/src/github.com/docker/docker# docker run hello-world
+    root@5f8630b873fe:/go/src/github.com/moby/moby# docker run hello-world
     ```
 
 11. List the image you just downloaded.
 
     ```none
-    root@5f8630b873fe:/go/src/github.com/docker/docker# docker images
+    root@5f8630b873fe:/go/src/github.com/moby/moby# docker images
 	REPOSITORY   TAG     IMAGE ID      CREATED        SIZE
 	hello-world  latest  c54a2cc56cbb  3 months ago   1.85 kB
     ```
@@ -230,14 +236,18 @@ you have:
 
 * forked and cloned the Docker Engine code repository
 * created a feature branch for development
-* created and started a Engine development container from your branch
+* created and started an Engine development container from your branch
 * built a Docker binary inside of your Docker development container
 * launched a `docker` daemon using your newly compiled binary
 * called the `docker` client to run a `hello-world` container inside
   your development container
 
-Running the `make shell` command mounted your local Docker repository source into
-your Docker container. When you start to develop code though, you'll
+Running the `make BIND_DIR=. shell` command mounted your local Docker repository source into
+your Docker container. 
+
+   > **Note**: Inspecting the `Dockerfile` shows a `COPY . /go/src/github.com/docker/docker` instruction, suggesting that dynamic code changes will _not_ be reflected in the container. However inspecting the `Makefile` shows that the current working directory _will_ be mounted via a `-v` volume mount.
+
+When you start to develop code though, you'll
 want to iterate code changes and builds inside the container. If you have
 followed this guide exactly, you have a BASH shell running a development
 container.
@@ -279,7 +289,7 @@ example, you'll edit the help for the `attach` subcommand.
 
 7. Rebuild the binary by using the command `hack/make.sh binary` in the docker development container shell.
 
-8. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell.
+8. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell (or use the `hack/make.sh binary install-binary run` command described above).
 
    ```
    cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
@@ -289,7 +299,7 @@ example, you'll edit the help for the `attach` subcommand.
 9. To view your change, run the `docker attach --help` command in the docker development container shell.
 
    ```bash
-   root@b0cb4f22715d:/go/src/github.com/docker/docker# docker attach --help
+   root@b0cb4f22715d:/go/src/github.com/moby/moby# docker attach --help
 
    Usage:	docker attach [OPTIONS] CONTAINER
 

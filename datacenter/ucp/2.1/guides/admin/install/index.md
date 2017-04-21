@@ -10,7 +10,7 @@ installed on-premise or on a cloud infrastructure.
 ## Step 1: Validate the system requirements
 
 The first step to installing UCP, is ensuring your
-infrastructure has all the [requirements UCP needs to run](system-requirements.md).
+infrastructure has all the [requirements UCP needs to run](system-requirements.md). You also need to ensure that all nodes (physical or virtual) are running the same version of CS Docker Engine.
 
 
 ## Step 2: Install CS Docker on all nodes
@@ -61,12 +61,12 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull {{ page.docker_image }}
+    $ docker pull {{ page.ucp_latest_image }}
 
     # Install UCP
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.docker_image }} install \
+      {{ page.ucp_latest_image }} install \
       --host-address <node-ip-address> \
       --interactive
     ```

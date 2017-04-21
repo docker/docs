@@ -1,6 +1,6 @@
 command: docker container
 short: Manage containers
-long: Manage containers
+long: Manage containers.
 usage: docker container
 pname: docker
 plink: docker.yaml

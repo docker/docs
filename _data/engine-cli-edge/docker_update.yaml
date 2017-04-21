@@ -40,13 +40,17 @@ options:
 - option: cpuset-mems
   description: MEMs in which to allow execution (0-3, 0,1)
 - option: kernel-memory
+  default_value: "0"
   description: Kernel memory limit
 - option: memory
   shorthand: m
+  default_value: "0"
   description: Memory limit
 - option: memory-reservation
+  default_value: "0"
   description: Memory soft limit
 - option: memory-swap
+  default_value: "0"
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: restart

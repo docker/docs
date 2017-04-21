@@ -10,6 +10,9 @@ plink: docker_swarm.yaml
 options:
 - option: advertise-addr
   description: 'Advertised address (format: <ip|interface>[:port])'
+- option: availability
+  default_value: active
+  description: Availability of the node ("active"|"pause"|"drain")
 - option: listen-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
@@ -77,5 +80,14 @@ examples: |-
 
   ### `--token string`
 
-  Secret value required for nodes to join the swar
+  Secret value required for nodes to join the swarm
+
+  ### `--availability`
+
+  This flag specifies the availability of the node at the time the node joins a master.
+  Possible availability values are `active`, `pause`, or `drain`.
+
+  This flag is useful in certain situations. For example, a cluster may want to have
+  dedicated manager nodes that are not served as worker nodes. This could be achieved
+  by passing `--availability=drain` to `docker swarm join`.
 

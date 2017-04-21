@@ -2,6 +2,7 @@
 description: Configure logging driver.
 keywords: docker, logging, driver, Fluentd
 redirect_from:
+- /engine/reference/logging/overview/
 title: Configure logging drivers
 ---
 
@@ -72,7 +73,7 @@ for its configurable options, if applicable.
 
 ## Limitations of logging drivers
 
-- The `docker logs` command is not available for drivers other than `json-file`
+The `docker logs` command is not available for drivers other than `json-file`
   and `journald`.
 
 ## Examples
@@ -123,13 +124,14 @@ This example starts an `alpine` container with the `none` log driver.
 $ docker run -it --log-driver none alpine ash
 ```
 
-{% if site.edge == true %}
 ### Options for all drivers
+
+{% include edge_only.md section="options" %}
+
 | Option            | Description | Example value |
 |-------------------|-------------|---------------|
 | `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
 | `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
-{% endif %}
 
 ## `json-file`
 
@@ -308,7 +310,7 @@ The `awslogs` supports the following options:
 
 ### Examples
 
-This exampe sends the logs to region `us-east-1` and uses the log group
+This example sends the logs to region `us-east-1` and uses the log group
 `myLogGroup`.
 
 ```bash
@@ -342,7 +344,7 @@ The `splunk` logging driver **allows** the following options:
 
 | Option                 | Description                     | Example value                             |
 |------------------------|---------------------------------|-------------------------------------------|
-| `splunk-source`             | Event source.              | `--log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20` |
+| `splunk-source`             | Event source.              | `--log-opt splunk-source=prod` |
 | `splunk-sourcetype`         | Event source type.         | `--log-opt splunk-sourcetype=iis`   |
 | `splunk-index`              | Event index.               | `--log-opt splunk-index=os` |
 | `splunk-capath`             | Path to root certificate.  | `--log-opt splunk-capath=/path/to/cert/cacert.pem` |

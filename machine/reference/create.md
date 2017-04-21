@@ -25,7 +25,7 @@ To see how to connect Docker to this machine, run: docker-machine env dev
 ## Accessing driver-specific flags in the help text
 
 The `docker-machine create` command has some flags which are applicable to all
-drivers.  These largely control aspects of Machine's provisoning process
+drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
 

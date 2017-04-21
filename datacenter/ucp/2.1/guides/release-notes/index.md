@@ -259,7 +259,7 @@ Docker Engine 1.13 in the nodes that you plan to manage with UCP.
 
 The `docker stats` command is sometimes wrongly reporting high CPU usage.
 Use the `top` command to confirm the real CPU usage of your node.
-[Learn more](https://github.com/docker/docker/issues/28941).
+[Learn more](https://github.com/moby/moby/issues/28941).
 
 
 **Version compatibility**

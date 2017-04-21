@@ -25,15 +25,16 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 
 ![DockerCon Docs Hackathon logo](docs-hackathon-1.png)
 
-<div data-type="countdown" data-id="104602" class="tickcounter" style="width: 100%; position: relative; padding-bottom: 25%"><a href="//www.tickcounter.com/countdown/104602/docs-hackathon-starts-in" title="Docs Hackathon Starts in:">Docs Hackathon Starts in:</a><a href="//www.tickcounter.com/" title="Countdown">Countdown</a></div><script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
+** The Docs Hackathon is officially underway! **
 
 ## Quick links
 
 - [Event page on DockerCon website](https://dockercon.smarteventscloud.com/connect/sessionDetail.ww?SESSION_ID=116676)
-- [View hackathon bugs on GitHub](https://github.com/docker/docker.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ahackathon)
+- [View hackathon bugs on GitHub](https://github.com/docker/docker.github.io/milestone/9)
 - [Report your hackathon work](https://goo.gl/forms/oEaQOlKvQj8iJbn53)
 - [Browse prizes](http://www.cafepress.com/dockerdocshackathon)
 - [#docs on Slack, if you have questions](https://dockercommunity.slack.com/messages/C2V58TASE)
+- [Moby Mingle offer](https://mobymingle.dockercon.com/offers/27855) to mentor people to contribute to the Hackathon.
 
 ## How it works
 
@@ -102,7 +103,7 @@ Wednesday from 1pm to 6pm**. We'll be there to answer questions and help you.
 ### Online
 
 Drop into [the community Slack channel for the docs](https://dockercommunity.slack.com/messages/C2V58TASE) and ask any questions
-you have. Otherwise, just go to GitHub and [look at our `hackathon` label](https://github.com/docker/docker.github.io/labels/hackathon)
+you have. Otherwise, just go to GitHub and [look at our `hackathon` label](https://github.com/docker/docker.github.io/milestone/9)
 and come here to claim your points when you're done.
 
 ## Claiming a bug
@@ -111,7 +112,7 @@ Whether attending in-person or online, to claim a bug as one that you are
 working on (so nobody else grabs it out from under you) you must type a comment
 saying you claim it. Respect it when you see other comments claiming a bug.
 
-[View avaiable bugs](https://github.com/docker/docker.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ahackathon){: class="button primary-btn"}
+[View available bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
 
 ## Claiming your points
 
@@ -120,13 +121,14 @@ there.
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-vXsZX_u8EoPanCGnBd5eudnaHdJ4dqTumOurt2smCC9gTg/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
-### Conversion rate
+## Conversion rate
 
-The points-to-cash ratio will be posted in this space no later than Friday the
-21st. We need to figure out how many points' worth of fixes come in first.
+### Every 10 points is worth $1 USD in the swag store
 
-Sorry but we can not send you cash for these points under any circumstances,
-even if you don't spend them.
+You'll see point values for each of the bugs, such as `points/100` and `points/250`. Opening an accepted PR that 
+fixes these bugs by the end of the hackathon earns you that number of points. 
+
+So if you fix a 100-point bug, that's $10 you have to spend in [the swag store](http://www.cafepress.com/dockerdocshackathon).
 
 ## Questions?
 

@@ -255,9 +255,9 @@ If the swarm manager cannot resolve the image to a digest, all is not lost:
   - If this fails, the task fails to deploy and the manager tries again to deploy
     the task, possibly on a different worker node.
 
-{% if site.edge == true %}
 ### Control service scale and placement
 
+{% include edge_only.md section="options" %}
 Swarm mode has two types of services, replicated and global. For replicated
 services, you specify the number of replica tasks for the swarm manager to
 schedule onto available nodes. For global services, the scheduler places one
@@ -302,8 +302,6 @@ additional placement preferences to further divide tasks over groups of nodes.
 For example, you can balance them over multiple racks within each datacenter.
 For more information on constraints, refer to the `docker service create`
 [CLI reference](/engine/reference/commandline/service_create.md).
-
-{% endif %}
 
 ### Reserving memory or number of CPUs for a service
 

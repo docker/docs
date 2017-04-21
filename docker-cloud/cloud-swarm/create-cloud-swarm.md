@@ -50,7 +50,7 @@ Learn how to [connect to a swarm through Docker Cloud](connect-to-swarm.md).
 
 Learn how to [register existing swarms](register-swarms.md).
 
-You can get an overivew of topics on [swarms in Docker Cloud](index.md).
+You can get an overview of topics on [swarms in Docker Cloud](index.md).
 
 To find out more about Docker swarm in general, see the Docker engine
 [Swarm Mode overview](/engine/swarm/).

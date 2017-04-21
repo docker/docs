@@ -8,7 +8,7 @@ A pull request (PR) sends your changes to the Docker maintainers for review. You
 create a pull request on GitHub. A pull request "pulls" changes from your forked
 repository into the `docker/docker` repository.
 
-You can see <a href="https://github.com/docker/docker/pulls" target="_blank">the
+You can see <a href="https://github.com/moby/moby/pulls" target="_blank">the
 list of active pull requests to Docker</a> on GitHub.
 
 ## Check your work

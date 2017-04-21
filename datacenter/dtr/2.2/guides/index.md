@@ -23,10 +23,22 @@ who pushed what image at what time. It even allows you to see what dockerfile
 lines were used to produce the image and, if security scanning is enabled, to
 see a list of all of the software installed in your images.
 
+## Availability
+
+DTR is highly available through the use of multiple replicas of all containers
+and metadata such that if a machine fails, DTR continues to operate and can be repaired.
+
+## Efficiency
+
+DTR has the ability to [cache images closer to users](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/)
+to reduce the amount of bandwidth used during docker pulls.
+
+DTR has the ability to [clean up unreferenced manifests and layers](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/garbage-collection/).
+
 ## Built-in access control
 
 DTR uses the same authentication mechanism as Docker Universal Control Plane.
-Users can be managed manually or syched from LDAP or Active Directory. DTR
+Users can be managed manually or synched from LDAP or Active Directory. DTR
 uses [Role Based Access Control](admin/manage-users/index.md) (RBAC) to allow you to implement fine-grained
 access control policies for who has access to your Docker images.
 

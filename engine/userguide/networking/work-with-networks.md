@@ -997,7 +997,7 @@ multi-host network, the daemon cannot clean up stale connectivity endpoints.
 Such stale endpoints may cause an error if a new container is connected
 to that network with the same name as the stale endpoint:
 
-```no-highlight
+```none
 ERROR: Cannot start container bc0b19c089978f7845633027aa3435624ca3d12dd4f4f764b61eac4c0610f32e: container already connected to network multihost
 ```
 

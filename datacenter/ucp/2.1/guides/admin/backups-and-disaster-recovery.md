@@ -77,6 +77,7 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 ## Restore your cluster
 
 The restore command can be used to create a new UCP cluster from a backup file.
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
 After the restore operation is complete, the following data will be recovered
 from the backup file:
 

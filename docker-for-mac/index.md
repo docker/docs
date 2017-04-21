@@ -93,7 +93,7 @@ docker-machine version 0.10.0, build 76ed2a6
     want to keep some images around so that you don't have to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
-**Want more example applications?** [Learn Docker](/learn.md) is a great place to start.
+**Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
 
 ## Preferences
 
@@ -209,7 +209,7 @@ interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
-some of the commmon settings to make it easier to configure them.
+some of the common settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)
@@ -222,7 +222,7 @@ some of the commmon settings to make it easier to configure them.
 Starting with Stable 1.13.0 and Beta 31, both Docker for Mac Stable and Beta
 releases have experimental features enabled on Docker Engine, as described in
 the [Docker Experimental Features
-README](https://github.com/docker/docker/blob/master/experimental/README.md) on GitHub.
+README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
@@ -382,13 +382,7 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
 ## Where to go next
 
-* Try out the tutorials and sample app walkthroughs at [Learn Docker](/learn.md), including:
-
-  *  Learn Docker basics in [Getting Started with Docker](/engine/getstarted/index.md)
-
-  * Learn how to [define and deploy a Docker stack to a swarm](/engine/getstarted-voting-app/index.md)
-  (deploy multiple containers as services and use new
-    Compose Version 3 features)
+* Try out the walkthrough at [Get Started](/get-started/).
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
   walkthroughs and source code.

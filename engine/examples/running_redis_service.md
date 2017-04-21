@@ -12,7 +12,7 @@ using a link.
 Firstly, we create a `Dockerfile` for our new Redis
 image.
 
-```dockerfile
+```conf
 FROM        ubuntu:14.04
 RUN         apt-get update && apt-get install -y redis-server
 EXPOSE      6379

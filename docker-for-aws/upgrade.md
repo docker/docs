@@ -23,7 +23,7 @@ To initiate an update, use either the AWS Console or the AWS cli to initiate a s
 
 ![Upgrade in AWS console](img/cloudformation_update.png)
 
-Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because the're not Docker Swarm objects, but are known only to the individual Docker engines.
+Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because they're not Docker Swarm objects, but are known only to the individual Docker engines.
 
 ## Changing instance sizes and other template parameters
 

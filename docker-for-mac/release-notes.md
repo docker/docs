@@ -335,6 +335,13 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.05.0-ce-mac8, 2017-04-13 (edge)
+
+**Upgrades**
+
+- [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
+
+
 ### Docker Community Edition 17.04.0-ce-mac7, 2017-04-06 (edge)
 
 **New**
@@ -613,7 +620,7 @@ events or unexpected unmounts.
 - Memory can be allocated with 256 MiB steps
 - The storage location of the Linux volume can now be moved
 - More explicit proxy settings
-- Proxy can now be completly disabled
+- Proxy can now be completely disabled
 - You can switch daemon tabs without losing your settings
 - You can't edit settings while docker is restarting
 
@@ -1218,7 +1225,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **New**
 
-* Token validation is now done over an actual SSL tunnel (HTTPS). (This should fix issues with antivirus applictions.)
+* Token validation is now done over an actual SSL tunnel (HTTPS). (This should fix issues with antivirus applications.)
 
 **Upgrades**
 

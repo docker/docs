@@ -39,10 +39,10 @@ You are now ready clone and build the Docker source code.
 
 In a new (to pick up the path change) PowerShell prompt, run:
 
-    git clone https://github.com/docker/docker
+    git clone https://github.com/moby/moby
     cd docker
 
-This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/docker/docker) to learn about the other software that powers the Docker platform.
+This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/moby/moby) to learn about the other software that powers the Docker platform.
 
 ## 5. Build and run
 
@@ -52,7 +52,7 @@ Create a builder-container with the Docker source code. You can change the sourc
 
 To build Docker, run:
 
-    docker run --name out nativebuildimage sh -c 'cd /c/go/src/github.com/docker/docker; hack/make.sh binary'
+    docker run --name out nativebuildimage sh -c 'cd /c/go/src/github.com/moby/moby; hack/make.sh binary'
 
 Copy out the resulting Windows Docker daemon binary to dockerd.exe in the current directory:
 
@@ -63,7 +63,7 @@ To test it, stop the system Docker daemon and start the one you just built:
     Stop-Service Docker
     .\dockerd-1.13.0-dev.exe -D
 
-The other make targets work too, to run unit tests try: `docker run --rm docker-builder sh -c 'cd /c/go/src/github.com/docker/docker; hack/make.sh test-unit'`.
+The other make targets work too, to run unit tests try: `docker run --rm docker-builder sh -c 'cd /c/go/src/github.com/moby/moby; hack/make.sh test-unit'`.
 
 
 ## Where to go next

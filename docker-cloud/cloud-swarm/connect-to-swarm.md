@@ -25,7 +25,7 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 To switch Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`.
 
-> **Note**: If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/docker/dockercloud-federation#known-issues).
+> **Note**: If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/moby/mobycloud-federation#known-issues).
 
 ## Reconnect a swarm
 

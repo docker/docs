@@ -13,4 +13,4 @@ This section contains the following:
 * [Dockerizing a CouchDB service](couchdb_data_volumes.md)
 * [Dockerizing a Redis service](running_redis_service.md)
 * [Dockerizing an apt-cacher-ng service](apt-cacher-ng.md)
-* [Dockerizing applications: A 'Hello world'](/engine/getstarted/step_one.md)
+* [Get Started](/get-started/)
