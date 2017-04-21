@@ -183,8 +183,7 @@ namespace: |
   are an important part of Docker's isolation model. Namespaces exist for each type of
   resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
   and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run.md)
-  and [Introduction to user namespaces(https://success.docker.com/KBase/Introduction_to_User_Namespaces_in_Docker_Engine){ :target="_blank" class="_" }.
-  
+  and [Introduction to user namespaces](https://success.docker.com/KBase/Introduction_to_User_Namespaces_in_Docker_Engine){ :target="_blank" class="_" }.
   
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
