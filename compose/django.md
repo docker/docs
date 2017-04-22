@@ -34,8 +34,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
         RUN pip install -r requirements.txt
         ADD . /code/
 
-    This `Dockerfile` starts with a Python 2.7 base image. The base image is
-    modified by adding a new `code` directory. The base image is further modified
+    This `Dockerfile` starts with a [Python 3 base image](https://hub.docker.com/r/library/python/tags/3/).
+    The base image is modified by adding a new `code` directory. The base image is further modified
     by installing the Python requirements defined in the `requirements.txt` file.
 
 4. Save and close the `Dockerfile`.
