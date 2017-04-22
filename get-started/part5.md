@@ -30,7 +30,7 @@ machines running Docker, and deployed an application to it, with containers
 running in concert on multiple machines.
 
 Here in part 5, you'll reach the top of the hierarchy of distributed
-applications: the **stack**. A stack is a group of interelated services that
+applications: the **stack**. A stack is a group of interrelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
 application (though very complex applications may want to use multiple stacks).
