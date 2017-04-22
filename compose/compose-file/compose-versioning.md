@@ -190,7 +190,7 @@ Designed to be cross-compatible between Compose and the Docker Engine's
 several more.
 
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`, `cpuset`,
-  `mem_limit`, `memswap_limit`, `extends`, `group_add`. See the [upgrading](#upgrading)
+  `mem_limit`, `memswap_limit`, `extends`, `group_add`, `container_name`. See the [upgrading](#upgrading)
   guide for how to migrate away from these.
 
 - Added: [deploy](index.md#deploy)
