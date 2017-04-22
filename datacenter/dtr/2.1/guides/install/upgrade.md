@@ -13,8 +13,11 @@ There is no downtime when upgrading an highly-available DTR cluster. If your
 DTR deployment has a single replica, schedule the upgrade to take place outside
 business peak hours to ensure the impact on your business is close to none.
 
-> Warning: Before performing any upgrade it’s important to backup. See 
+> **Warning**
+>
+> Before performing any upgrade it’s important to backup. See 
 > [docker/dtr backup](/datacenter/dtr/2.0/reference/backup/.md).
+{: .warning}
 
 ## Step 1. Upgrade DTR to 2.0
 
