@@ -11,3 +11,6 @@
 	url = https://github.com/go-yaml/yaml.git
 	branch = a5b47d31c556af34a302ce5d659e6fea44d90de0
 
+[submodule "samples/library"]
+	path = samples/library
+	url = https://github.com/docker-library/docs.git
