@@ -304,16 +304,6 @@ Specify an optional parent cgroup for the container.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
-### container_name
-
-Specify a custom container name, rather than a generated default name.
-
-    container_name: my-web-container
-
-Because Docker container names must be unique, you cannot scale a service
-beyond 1 container if you have specified a custom name. Attempting to do so
-results in an error.
-
 ### deploy
 
 > **[Version 3](compose-versioning.md#version-3) only.**
@@ -1212,7 +1202,7 @@ volumes:
 
 ### restart
 
-`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error. 
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
       - restart: no
       - restart: always
