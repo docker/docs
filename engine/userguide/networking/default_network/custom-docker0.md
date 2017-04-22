@@ -34,7 +34,7 @@ Docker configures `docker0` with an IP address, netmask and IP allocation range.
 
 Once you have one or more containers up and running, you can confirm that Docker has properly connected
 them to the `docker0` bridge by running the `brctl` command on the host machine and looking at the
-`interfaces` column of the output.  Thhis example shows a `docker0` bridge with two containers
+`interfaces` column of the output.  This example shows a `docker0` bridge with two containers
 connected:
 
 ```bash
