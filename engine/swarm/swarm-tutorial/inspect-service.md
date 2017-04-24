@@ -92,7 +92,7 @@ the Docker CLI to see details about the service running in the swarm.
     ```bash
     $ docker service ps helloworld
 
-    NAME                                    IMAGE   NODE     DESIRED STATE  LAST STATE
+    NAME                                    IMAGE   NODE     DESIRED STATE  CURRENT STATE
     helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2  Running        Running 3 minutes
     ```
 
