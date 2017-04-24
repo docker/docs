@@ -308,6 +308,6 @@ To delete a webhook subscription send a `DELETE` request to
 which you would like to delete.
 
 Note that in order to delete a subscription you must be either a system
-administrator or an admistrator for the resource which the payload subscribes
+administrator or an administrator for the resource which the payload subscribes
 to.  For example, as a normal user you can only delete subscriptions for
 repositories which you are an admin of.

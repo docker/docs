@@ -187,7 +187,7 @@ local command-line session, and runs `/bin/bash`.
 $ docker run -i -t ubuntu /bin/bash
 ```
 
-When you run this command, the following happens (assuming you have are using
+When you run this command, the following happens (assuming you are using
 the default registry configuration):
 
 1.  If you do not have the `ubuntu` image locally, Docker pulls it from your

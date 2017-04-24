@@ -147,7 +147,7 @@ class="gh-label expert">exp/expert</strong> issue.
 To claim an issue:
 
 1. Go to the `docker/docker` <a
-	href="https://github.com/docker/docker" target="_blank">repository</a>.
+	href="https://github.com/moby/moby" target="_blank">repository</a>.
 
 2. Click the "Issues" tab.
 
@@ -207,12 +207,12 @@ To sync your repository:
         $ git remote -v
         origin	https://github.com/moxiegirl/docker.git (fetch)
         origin	https://github.com/moxiegirl/docker.git (push)
-        upstream	https://github.com/docker/docker.git (fetch)
-        upstream	https://github.com/docker/docker.git (push)
+        upstream	https://github.com/moby/moby.git (fetch)
+        upstream	https://github.com/moby/moby.git (push)
 
     If the `upstream` is missing, add it.
 
-        $ git remote add upstream https://github.com/docker/docker.git
+        $ git remote add upstream https://github.com/moby/moby.git
 
 5. Fetch all the changes from the `upstream master` branch.
 

@@ -106,7 +106,7 @@ will still need to provide them for the commands to work correctly.
 Now that the repository is initialized, we need to create the delegations for Jenkins. Docker
 Content Trust treats a delegation role called `targets/releases` specially. It considers this
 delegation to contain the canonical list of published images for the repository. It is therefore
-generally desiable to add all users to this delegation with the following command:
+generally desirable to add all users to this delegation with the following command:
 
 ```
 notary delegation add my_repository targets/releases --all-paths /path/to/cert.pem

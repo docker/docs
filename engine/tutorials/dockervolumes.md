@@ -37,7 +37,7 @@ Docker therefore *never* automatically deletes volumes when you remove
 a container, nor will it "garbage collect" volumes that are no longer
 referenced by a container.
 
-### Adding a data volume
+### Add a data volume
 
 You can add a data volume to a container using the `-v` flag with the
 `docker create` and `docker run` command. You can use the `-v` multiple times
@@ -54,7 +54,7 @@ This will create a new volume inside a container at `/webapp`.
 > You can also use the `VOLUME` instruction in a `Dockerfile` to add one or
 > more new volumes to any container created from that image.
 
-### Locating a volume
+### Locate a volume
 
 You can locate the volume on the host by utilizing the `docker inspect` command.
 
@@ -174,15 +174,15 @@ Volume drivers create volumes by name, instead of by path like in
 the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
-using the `flocker` volume driver (`flocker` is a plugin for multi-host portable volumes)
+using the `convoy` volume driver (`convoy` is a plugin for a variety of storage back-ends)
 and makes it available within the container at `/webapp`. Before running the command,
-[install flocker](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
-If you do not want to install `flocker`, replace `flocker` with `local` in the example commands
+[install and configure convoy](https://github.com/rancher/convoy#quick-start-guide).
+If you do not want to install `convoy`, replace `convoy` with `local` in the example commands
 below to use the `local` driver.
 
 ```bash
 $ docker run -d -P \
-  --volume-driver=flocker \
+  --volume-driver=convoy \
   -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
@@ -195,7 +195,7 @@ using the `docker volume create` command. Options are specified as key-value
 pairs in the format `o=<key>=<value>`.
 
 ```bash
-$ docker volume create -d flocker --opt o=size=20GB my-named-volume
+$ docker volume create -d convoy --opt o=size=20GB my-named-volume
 
 $ docker run -d -P \
   -v my-named-volume:/webapp \
@@ -332,7 +332,19 @@ $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /
 You can use the techniques above to automate backup, migration and
 restore testing using your preferred tools.
 
-## Removing volumes
+## List all volumes
+
+You can list all existing volumes using `docker volume ls`.
+
+```bash
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               ec75c47aa8b8c61fdabcf37f89dad44266841b99dc4b48261a4757e70357ec06
+local               f73e499de345187639cdf3c865d97f241216c2382fe5fa67555c64f258892128
+local               tmp_data
+```
+
+## Remove volumes
 
 A Docker data volume persists after a container is deleted. You can create named
 or anonymous volumes. Named volumes have a specific source form outside the
@@ -346,6 +358,14 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 
 This command creates an anonymous `/foo` volume. When the container is removed,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
+
+To remove all unused volumes and free up space,
+
+```bash
+$ docker volume prune
+```
+
+it will remove all unused volumes which are not associated with any container.
 
 ## Important tips on using shared volumes
 

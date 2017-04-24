@@ -265,8 +265,8 @@ guides:
     title: Using Chef
   - path: /engine/admin/puppet/
     title: Using Puppet
-  - path: /engine/admin/using_supervisord/
-    title: Using Supervisor with Docker
+  - path: /engine/admin/multi-service_containers/
+    title: Run multiple services in a container
   - path: /engine/admin/runmetrics/
     title: Runtime metrics
   - path: /engine/admin/ambassador_pattern_linking/
@@ -1486,6 +1486,8 @@ manuals:
     title: Deploy Datacenter on AWS
   - path: /datacenter/install/linux/
     title: Deploy Datacenter on Linux
+  - path: /datacenter/install/azure/
+    title: Deploy Datacenter on Azure
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.1/guides/

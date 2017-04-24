@@ -4,8 +4,7 @@ keywords: docker, ucp, architecture
 title: UCP architecture
 ---
 
-Universal Control Plane is a containerized application that runs on the
-Commercially Supported (CS) Docker Engine, and extends its functionality to
+Universal Control Plane is a containerized application that runs on [Docker Enterprise Edition](/enterprise/index.md) and extends its functionality to
 make it easier to deploy, configure, and monitor your applications at scale.
 
 It also secures Docker with role-based access control so that only authorized
@@ -27,6 +26,7 @@ by Docker.
 
 ![](images/architecture-2.svg)
 
+A swarm is a collection of nodes that are in the same Docker swarm. [Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two modes: Manager or Worker. If nodes are not already running in a swarm when installing UCP, nodes will be configured to run in swarm mode.
 
 When you deploy UCP, it starts running a globally scheduled service called
 `ucp-agent`. This service monitors the node where it is running and starts
@@ -36,11 +36,10 @@ and stops UCP services, based on whether that node is a
 If the node is a:
 
 * **Manager**: the `ucp-agent` service automatically starts serving all UCP
-components including the UCP web UI and data stores used by UCP. By promoting
-a node to manager, UCP automatically becomes highly available and fault tolerant.
+components including the UCP web UI and data stores used by UCP. The `ucp-agent` accomplishes this by [deploying several containers](#ucp-components-in-manager-nodes) on the node. By promoting a node to manager, UCP automatically becomes highly available and fault tolerant.
 * **Worker**: on worker nodes the `ucp-agent` service starts serving a proxy
 service that ensures only authorized users and other UCP services can run Docker
-commands in that node.
+commands in that node. The `ucp-agent` only deploys a [subset of containers](#ucp-components-in-worker-nodes) on worker nodes.
 
 
 ## UCP internal components

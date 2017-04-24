@@ -34,7 +34,7 @@ Linux.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of RHEL 7.
+To install Docker, you need the 64-bit version of RHEL 7, running on an x86 hardware platform.
 
 ### Uninstall old versions
 

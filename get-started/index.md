@@ -3,6 +3,8 @@ title: "Get Started, Part 1: Orientation and Setup"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers
 description: Get oriented on some basics of Docker before diving into the walkthrough.
 redirect_from:
+- /getstarted/
+- /get-started/part1/
 - /engine/getstarted/
 - /learn/
 - /engine/getstarted/step_one/
@@ -110,8 +112,8 @@ Consider this diagram comparing virtual machines to containers:
 ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
 
 Virtual machines run guest operating systems -- note the OS layer in each box.
-This is resource intensive, and the resulting disk image and appication state is
-an entangelment of OS settings, system-installed dependencies, OS security
+This is resource intensive, and the resulting disk image and application state is
+an entanglement of OS settings, system-installed dependencies, OS security
 patches, and other easy-to-lose, hard-to-replicate ephemera.
 
 ### Container diagram
@@ -131,7 +133,9 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%; clear: left;"}
+<div style="clear:left"></div>
+> **Note** version 1.13 or higher is required
 
 You should be able to run `docker run hello-world` and see a response like this:
 
@@ -145,7 +149,15 @@ To generate this message, Docker took the following steps:
 ...(snipped)...
 ```
 
-If you see a message like the one above, you're ready to begin the journey.
+Now would also be a good time to make sure you are using version 1.13 or higher
+
+```
+$ docker version
+
+Docker version 17.03.1-ce, build c6d412e
+```
+
+If you see a messages like the ones above, you're ready to begin the journey.
 
 ## Conclusion
 

@@ -4,6 +4,22 @@ keywords: hack, hackathon, dockercon, austin, 2017
 noratings: true
 ---
 
+## Docs Hackathon: Results coming soon
+
+Well, it's over.
+We had an amazing hackathon on the documentation last week, with over 140 bugs
+closed and counting. We couldn't be more thankful for your participation!
+This week we will be wrapping up reviews on the remaining pull requests,
+tallying points, and sending out prizes. If you participated, make sure you
+[fill out your report](/hackathon/#claiming-your-points) so you can [get your rewards](http://www.cafepress.com/dockerdocshackathon).
+
+We are so humbled and lucky to have a community like you working with us. From
+the bottom of our hearts: thank you!
+
+[Hackathon details](/hackathon/){: class="button outline-btn" style="margin-bottom:20px;margin-right:20px"}[Visit the rewards store](http://www.cafepress.com/dockerdocshackathon){: class="button outline-btn" style="margin-bottom:20px"}
+
+## Original Hackathon details
+
 During DockerCon 2017, Docker's docs team will be running our first-ever
 hackathon, and you're invited to participate and win prizes -- whether you
 attend DockerCon or are just watching the proceedings online.
@@ -24,8 +40,6 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 [this way-cool magnet](http://www.cafepress.com/dockerdocshackathon.25633054) just for stopping by.
 
 ![DockerCon Docs Hackathon logo](docs-hackathon-1.png)
-
-** The Docs Hackathon is officially underway! **
 
 ## Quick links
 
@@ -125,8 +139,8 @@ there.
 
 ### Every 10 points is worth $1 USD in the swag store
 
-You'll see point values for each of the bugs, such as `points/100` and `points/250`. Opening an accepted PR that 
-fixes these bugs by the end of the hackathon earns you that number of points. 
+You'll see point values for each of the bugs, such as `points/100` and `points/250`. Opening an accepted PR that
+fixes these bugs by the end of the hackathon earns you that number of points.
 
 So if you fix a 100-point bug, that's $10 you have to spend in [the swag store](http://www.cafepress.com/dockerdocshackathon).
 
@@ -149,4 +163,3 @@ Participation in the Docs Hackathon and submission of content therein gives Dock
 For the purposes of copyright all content submitted to Docker for the Docs Hackathon belongs to Docker.
 
 Winners will be announced the week of April 22nd on https://docs.docker.com/hackathon. The winners will be named by GitHub username and contacted via email.
-

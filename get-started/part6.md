@@ -7,7 +7,7 @@ description: Deploy your app to production using Docker CE or EE.
 
 ## Prerequisites
 
-- [Install Docker](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have pushed the container you created to a registry, as
@@ -162,7 +162,7 @@ Want to go deeper? Here are some resources we recommend:
 
 - [Samples](/samples/): Our samples include multiple examples of popular software
   running in containers, and some good labs that teach best practices.
-- [User Guide](/engine/userguide/): The user guide has serveral examples that
+- [User Guide](/engine/userguide/): The user guide has several examples that
   explain networking and storage in greater depth than was covered here.
 - [Admin Guide](/engine/admin/): Covers how to manage a Dockerized production
   environment.

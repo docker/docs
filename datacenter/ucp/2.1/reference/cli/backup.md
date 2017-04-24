@@ -9,7 +9,7 @@ Create a backup of a UCP manager node
 ## Description
 
 This command creates a tar file with the contents of the volumes used by
-this UCP manager node, and prints it. You can then use the 'restore' command to
+this UCP manager node, and prints it. You can then use the `restore` command to
 restore the data from an existing backup.
 
 To create backups of a multi-node swarm, you only need to backup a single manager
@@ -22,7 +22,7 @@ Note:
     applications.
 
   * The backup contains private keys and other sensitive information. Use the
-    '--passphrase' flag to encrypt the backup with PGP-compatible encryption.
+    `--passphrase` flag to encrypt the backup with PGP-compatible encryption.
 
 
 ## Options

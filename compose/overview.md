@@ -27,7 +27,7 @@ so they can be run together in an isolated environment.
 
 A `docker-compose.yml` looks like this:
 
-    version: '2'
+    version: '3'
     services:
       web:
         build: .
@@ -44,7 +44,7 @@ A `docker-compose.yml` looks like this:
       logvolume01: {}
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file.md).
+[Compose file reference](compose-file/index.md).
 
 Compose has commands for managing the whole lifecycle of your application:
 
@@ -62,7 +62,7 @@ Compose has commands for managing the whole lifecycle of your application:
 - [Get started with WordPress](wordpress.md)
 - [Frequently asked questions](faq.md)
 - [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Compose file reference](compose-file/index.md)
 
 ## Features
 

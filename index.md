@@ -8,14 +8,6 @@ notags: true
 ---
 {% assign page.title = site.name %}
 
-## Docs Hackathon, April 17-22nd, 2017
-
-<a href="/hackathon/"><img src="docs-hackathon-2.png" alt="Docker Docs Hackathon, April 17-22nd, 2017" style="max-width: 100%"></a>
-
-Fix docs bugs to claim the points, and cash in your points for prizes in [the swag store](http://www.cafepress.com/dockerdocshackathon). Every 10 points is worth $1 USD in store credit. Happening all DockerCon week, from April 17-21, 2017. <font color="#ef4d53">Hack room at the conference Tuesday, Wednesday 1pm to end of day: 4th floor, room 13A-13B.</font>
-
-[Hackathon details](/hackathon/){: class="button outline-btn" style="margin:20px"}[View available bugs on GitHub](https://github.com/docker/docker.github.io/milestone/9){: class="button outline-btn" style="margin:20px"} [Visit the rewards store](http://www.cafepress.com/dockerdocshackathon){: class="button outline-btn" style="margin:20px"}
-
 ## Get started with Docker
 
 Try our new multi-part walkthrough that goes from writing your first app,
@@ -68,7 +60,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 [Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
 [Stacks](#stacks).
 
-[Read the full release notes](https://github.com/docker/docker/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
+[Read the full release notes](https://github.com/moby/moby/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
 
 ##### API and CLI
 

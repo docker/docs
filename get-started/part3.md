@@ -7,7 +7,7 @@ description: Learn how to define load-balanced and scalable service that runs co
 
 ## Prerequisites
 
-- [Install Docker](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have pushed the container you created to a registry, as
@@ -95,16 +95,21 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 ## Run your new load-balanced app
 
+Before we can use the `docker stack deploy` command we'll first run 
+
+```
+docker swarm init
+```
+
+>**Note**: We'll get into the meaning of that command in [part 4](part4.md).
+> If you don't run `docker swarm init` you'll get an error that "this node is not a swarm manager."
+
 Now let's run it. You have to give your app a name -- here it is set to
 `getstartedlab` :
 
 ```
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
-
-> **Note**: If you get an error that "this node is not a swarm manager," go
-  ahead and run `docker swarm init` and then retry. We'll get into the meaning
-  of that command in [part 4](part4.md).
 
 See a list of the five containers you just launched:
 

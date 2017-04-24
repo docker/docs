@@ -141,7 +141,7 @@ Volume mounting requires shared drives for projects that live outside of the
 
 Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
 RC3. (For more information, see
-https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
+https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
 
 You may get the following error when you try to start a container created with
 pre-Beta 18 Docker for Mac applications.

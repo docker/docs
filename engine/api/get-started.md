@@ -66,7 +66,7 @@ You can specify the API version to use, in one of the following ways:
 
 - For the SDKs, you can also specify the API version programmatically, as a
   parameter to the `client` object. See the
-  [Go constructor](https://github.com/docker/docker/blob/master/client/client.go#L136){: target="_blank" class="_"}
+  [Go constructor](https://github.com/moby/moby/blob/master/client/client.go#L136){: target="_blank" class="_"}
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
@@ -694,5 +694,5 @@ $ curl --unix-socket /var/run/docker.sock\
 ## Next steps
 
  - [Full documentation for the Python SDK](https://docker-py.readthedocs.io)
- - [Full documentation for the Go SDK](https://godoc.org/github.com/docker/docker/client)
+ - [Full documentation for the Go SDK](https://godoc.org/github.com/moby/moby/client)
  - [Full documentation for the HTTP API](/engine/api/v1.27/)

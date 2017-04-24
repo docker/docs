@@ -34,8 +34,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
         RUN pip install -r requirements.txt
         ADD . /code/
 
-    This `Dockerfile` starts with a Python 2.7 base image. The base image is
-    modified by adding a new `code` directory. The base image is further modified
+    This `Dockerfile` starts with a [Python 3 base image](https://hub.docker.com/r/library/python/tags/3/).
+    The base image is modified by adding a new `code` directory. The base image is further modified
     by installing the Python requirements defined in the `requirements.txt` file.
 
 4. Save and close the `Dockerfile`.
@@ -174,6 +174,27 @@ In this section, you set up the database connection for Django.
     `docker-machine ip MACHINE_NAME` to get the IP address.
 
     ![Django example](images/django-it-worked.png)
+
+> **Note:**
+> On certain platforms (Windows 10), you may additionally need to edit `ALLOWED_HOSTS`
+> inside settings.py and add your Docker hostname or IP to the list.  For demo
+> purposes, you may set the value to:
+>
+>       ALLOWED_HOSTS = ['*']
+>
+> Please note this value is **not** safe for production usage.  Refer to the
+> [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)
+> for more information.
+
+5. Clean up: Shut down containers with CONTROL-C.
+
+  ```
+  Gracefully stopping... (press Ctrl+C again to force)
+  Killing test_web_1 ... done
+  Killing test_db_1 ... done
+  ```
+
+  It's safe to `rm -rf` your project directory.
 
 ## More Compose documentation
 

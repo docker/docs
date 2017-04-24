@@ -310,9 +310,13 @@ Specify a custom container name, rather than a generated default name.
 
     container_name: my-web-container
 
-Because Docker container names must be unique, you cannot scale a service
-beyond 1 container if you have specified a custom name. Attempting to do so
-results in an error.
+Because Docker container names must be unique, you cannot scale a service beyond
+1 container if you have specified a custom name. Attempting to do so results in
+an error.
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### deploy
 
@@ -440,6 +444,25 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
         image: web
         labels:
           com.example.description: "This label will appear on all containers for the web service"
+
+#### Not supported for `docker stack deploy`
+
+The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+
+- [build](#build)
+- [cgroup_parent](#cgroup-parent)
+- [container_name](#containername)
+- [devices](#devices)
+- [dns](#devices)
+- [dns_search](#dnssearch)
+- [tmpfs](#tmpfs)
+- [external_links](#externallinks)
+- [links](#links)
+- [network_mode](#networkmode)
+- [security_opt](#securityopt)
+- [stop_signal](#stopsignal)
+- [sysctls](#sysctls)
+- [userns_mode](#usernsmode)
 
 ### devices
 
@@ -1210,12 +1233,20 @@ volumes:
     target: /opt/app/static
 ```
 
+### restart
+
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+
+      - restart: no
+      - restart: always
+      - restart: on-failure
+
 > **Note:** The long syntax is new in v3.2
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
-### domainname, hostname, ipc, mac\_address, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -1230,7 +1261,6 @@ Each of these is a single value, analogous to its
 
     privileged: true
 
-    restart: always
 
     read_only: true
     shm_size: 64M

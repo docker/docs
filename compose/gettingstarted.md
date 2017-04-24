@@ -11,7 +11,7 @@ understandable even if you're not familiar with it.
 
 ## Prerequisites
 
-Make sure you have already [installed both Docker Engine and Docker
+Make sure you have already installed both [Docker Engine](/engine/installation/) and [Docker
 Compose](install.md). You don't need to install Python or Redis, as both are
 provided by Docker images.
 
@@ -110,10 +110,10 @@ mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
 Docker for Windows that uses [Linux
-containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers-beta-feature).
+containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature).
 For more information, see [Shared
-Drives](../docker-for-windows/index.md#shared-drives) on Docker for Windows,
-[File sharing](../docker-for-mac/index.md#file-sharing) on Docker for Mac, and
+Drives](../docker-for-windows/#shared-drives) on Docker for Windows,
+[File sharing](../docker-for-mac/#file-sharing) on Docker for Mac, and
 the general examples on how to [Manage data in
 containers](../engine/tutorials/dockervolumes.md).
 
@@ -214,5 +214,5 @@ At this point, you have seen the basics of how Compose works.
 
 - Next, try the quick start guide for [Django](django.md),
   [Rails](rails.md), or [WordPress](wordpress.md).
-- [Explore the full list of Compose commands](./reference/index.md)
-- [Compose configuration file reference](compose-file/index.md)
+- [Explore the full list of Compose commands](./reference/)
+- [Compose configuration file reference](compose-file/)

@@ -8,7 +8,7 @@ title: Docker Engine frequently asked questions (FAQ)
 
 If you don't see your question here, feel free to submit new ones to
 <docs@docker.com>.  Or, you can fork [the
-repo](https://github.com/docker/docker) and contribute them yourself by editing
+repo](https://github.com/moby/moby) and contribute them yourself by editing
 the documentation sources.
 
 
@@ -19,8 +19,8 @@ Docker Engine is 100% free. It is open source, so you can use it without paying.
 ### What open source license are you using?
 
 We are using the Apache License Version 2.0, see it here:
-[https://github.com/docker/docker/blob/master/LICENSE](
-https://github.com/docker/docker/blob/master/LICENSE)
+[https://github.com/moby/moby/blob/master/LICENSE](
+https://github.com/moby/moby/blob/master/LICENSE)
 
 ### Does Docker run on Linux, macOS, or Windows?
 
@@ -41,7 +41,7 @@ Server 2016, or Windows 10.
 
 ### How do containers compare to virtual machines?
 
-Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second. 
+Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second.
 
 ### What does Docker technology add to just plain LXC?
 
@@ -139,12 +139,10 @@ pattern](admin/ambassador_pattern_linking.md).
 
 ### How do I run more than one process in a Docker container?
 
-Any capable process supervisor such as [http://supervisord.org/](
-http://supervisord.org/), runit, s6, or daemontools can do the trick. Docker
-will start up the process management daemon which will then fork to run
-additional processes. As long as the processor manager daemon continues to run,
-the container will continue to as well. You can see a more substantial example
-[that uses supervisord here](admin/using_supervisord.md).
+This approach is discouraged for most use cases. For maximum efficiency and
+isolation, each container should address one specific area of concern. However,
+if you need to run multiple services within a single container, see
+[Run multiple services in a container](admin/multi-service_container.md).
 
 ### What platforms does Docker run on?
 
@@ -283,7 +281,7 @@ You can find more answers on:
 - [Docker user mailinglist](https://groups.google.com/d/forum/docker-user)
 - [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev)
 - [IRC, docker on freenode](irc://chat.freenode.net#docker)
-- [GitHub](https://github.com/docker/docker)
+- [GitHub](https://github.com/moby/moby)
 - [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker)
 - [Join the conversation on Twitter](http://twitter.com/docker)
 

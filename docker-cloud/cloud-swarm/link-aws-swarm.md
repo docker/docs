@@ -65,7 +65,7 @@ If you already have your AWS account connected to Docker Cloud and used the lega
 7. In the **Policy Document** section, copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
 8. Click **Create Policy**.
 9. Select and copy the **Role ARN** on the role screen.
-    It should't have changed, but you'll use it to re-link your account.
+    It shouldn't have changed, but you'll use it to re-link your account.
 
 Because you edited the role's permissions, you need to re-link to your account.
 Back in Docker Cloud, click the account menu and select **Cloud Settings**, and
@@ -91,7 +91,7 @@ You're now ready to deploy a swarm!
 
 For next steps, see [create a new swarm in Docker Cloud](create-cloud-swarm.md).
 
-You can get an overivew of topics on [swarms in Docker Cloud](index.md).
+You can get an overview of topics on [swarms in Docker Cloud](index.md).
 
 <!-- TODO: Commenting out until this replaces the existing ../infrastructure/link-aws file.
 

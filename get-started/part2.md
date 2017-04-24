@@ -8,7 +8,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Prerequisites
 
-- [Install Docker](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/).
 - Read the orientation in [Part 1](index.md).
 - Give your environment a quick test run to make sure you're all set up:
 

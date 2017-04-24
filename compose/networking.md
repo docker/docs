@@ -68,6 +68,8 @@ See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
 
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode consult the [Docker Stacks](/compose/bundles.md) documentation.
+
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
 Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster will use the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
@@ -97,16 +99,16 @@ Here's an example Compose file defining two custom networks. The `proxy` service
         networks:
           - backend
 
-     networks:
-       frontend:
-         # Use a custom driver
-         driver: custom-driver-1
-       backend:
-         # Use a custom driver which takes special options
-         driver: custom-driver-2
-         driver_opts:
-           foo: "1"
-           bar: "2"
+    networks:
+      frontend:
+        # Use a custom driver
+        driver: custom-driver-1
+      backend:
+        # Use a custom driver which takes special options
+        driver: custom-driver-2
+        driver_opts:
+          foo: "1"
+          bar: "2"
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
 
@@ -129,8 +131,8 @@ Instead of (or as well as) specifying your own networks, you can also change the
       db:
         image: postgres
 
-      networks:
-        default:
+    networks:
+      default:
         # Use a custom driver
         driver: custom-driver-1
 

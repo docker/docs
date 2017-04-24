@@ -33,7 +33,7 @@ $ notary status <dtr_url>/<account>/<repository> --unstage 0
 $ notary status <dtr_url>/<account>/<repository> --reset
 ```
 
-When you're ready to publish your chages to the Notary server, run:
+When you're ready to publish your changes to the Notary server, run:
 
 ```bash
 $ notary publish <dtr_url>/<account>/<repository>

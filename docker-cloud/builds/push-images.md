@@ -12,8 +12,7 @@ Docker Cloud uses Docker Hub as its native registry for storing both public and
 private repositories. Once you push your images to Docker Hub, they will be
 available in Docker Cloud.
 
-Images pushed to Docker Hub automatically appear for you in the **Launch new
-service** wizard.
+If you don't have Swarm Mode enable, images pushed to Docker Hub automatically appear for you on the **Services/Wizard** page on Docker Cloud.
 
 > **Note**: You must use Docker Engine 1.6 or later to push to Docker Hub.
 Follow the <a href="/engine/installation/" target="_blank">official installation instructions</a> depending on your system.

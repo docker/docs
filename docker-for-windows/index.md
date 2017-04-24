@@ -237,11 +237,10 @@ PowerShell Module as follows.
 
 1.  Start an "elevated" PowerShell (i.e., run it as administrator).
 
-    To do this, search for PowerShell, right-click, and choose
-    **Run as administrator**.<br>
+    To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
     ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-    <br><br>
+    
     When asked if you want to allow this app to make changes to your device,
     click **Yes**.
 
@@ -306,7 +305,7 @@ arrow on the taskbar to show it.
 
 >**Tip**: You can pin the whale outside of the notification box so that it is
 always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
-right-click an empty porition of the taskbar, select Settings, and choose
+right-click an empty portion of the taskbar, select Settings, and choose
 display options through taskbar settings for notifications.
 >
 ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
@@ -457,7 +456,7 @@ containers will run. You can configure some **Basic** options on the daemon with
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
-some of the commmon settings to make it easier to configure them.
+some of the common settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)
@@ -469,7 +468,7 @@ some of the commmon settings to make it easier to configure them.
 
 Starting with Stable 1.13.0 and Beta 34, both Docker for Windows Stable and Beta
 releases have the experimental version of Docker Engine enabled, described
-in the [Docker Experimental Features README](https://github.com/docker/docker/blob/master/experimental/README.md) on GitHub.
+in the [Docker Experimental Features README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some

@@ -164,10 +164,6 @@
 *
 */
 
-.toc-nav {
-    padding: 0;
-}
-
 .toc-toggle {
     width: 25px;
     height: 25px;
@@ -177,15 +173,13 @@
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding: 0 60px 0 0;
-    width: 300px;
+    padding-left: 0;
     line-height: 24px;
     li {
         padding: 2px 8px 2px 15px;
-        float: left;
         width: 100%;
         a {
-            display: block;
+            display: inline-block;
             font-size: 12px;
             padding: 0 10px 0 10px;
             text-decoration: none;
@@ -214,8 +208,6 @@ div#side-toc-title {
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
-    float: left;
-    width: 100%;
 }
 
 .edit {
