@@ -445,6 +445,25 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
         labels:
           com.example.description: "This label will appear on all containers for the web service"
 
+#### Not supported for `docker stack deploy`
+
+The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+
+- [build](#build)
+- [cgroup_parent](#cgroup-parent)
+- [container_name](#containername)
+- [devices](#devices)
+- [dns](#devices)
+- [dns_search](#dnssearch)
+- [tmpfs](#tmpfs)
+- [external_links](#externallinks)
+- [links](#links)
+- [network_mode](#networkmode)
+- [security_opt](#securityopt)
+- [stop_signal](#stopsignal)
+- [sysctls](#sysctls)
+- [userns_mode](#usernsmode)
+
 ### devices
 
 List of device mappings.  Uses the same format as the `--device` docker
