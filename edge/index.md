@@ -71,6 +71,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 ##### Builder
 
 - Add support for multi-stage builds {% include github-pr.md pr="31257" %}
+  (see [Use multi-stage builds](/engine/userguide/eng-image/multistage-build.md))
 - Add support for named build stages when using multi-stage builds
   {% include github-pr.md pr="32063" %}
 - Add support for using `ARG` variables in the `FROM` instruction in the
