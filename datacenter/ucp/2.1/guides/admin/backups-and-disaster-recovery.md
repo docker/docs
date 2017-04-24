@@ -26,7 +26,7 @@ backups of a single manager node.
 
 To create a consistent backup, the backup command temporarily stops the UCP
 containers running on the node where the backup is being performed. User
-resources, such as services, containers and stacks are not affected by this
+resources, such as services, containers, and stacks are not affected by this
 operation and will continue operating as expected. Any long-lasting `exec`,
 `logs`, `events` or `attach` operations on the affected manager node will
 be disconnected.
@@ -81,7 +81,7 @@ When restoring, make sure you use the same version of the `docker/dtr` image tha
 After the restore operation is complete, the following data will be recovered
 from the backup file:
 
-* Users, teams and permissions.
+* Users, teams, and permissions.
 * All UCP configuration options available under `Admin Settings`, such as the
 DDC subscription license, scheduling options, Content Trust and authentication
 backends.
@@ -91,10 +91,10 @@ There are two ways to restore a UCP cluster:
 * On a manager node of an existing swarm, which is not part of a UCP
 installation. In this case, a UCP cluster will be restored from the backup.
 * On a docker engine that is not participating in a swarm. In this case, a new
-swarm will be created and UCP will be restored on top
+swarm will be created and UCP will be restored on top.
 
 In order to restore an existing UCP installation from a backup, you will need to
-first uninstall UCP from the cluster by using the `uninstall-ucp` command
+first uninstall UCP from the cluster by using the `uninstall-ucp` command.
 
 The example below shows how to restore a UCP cluster from an existing backup
 file, presumed to be located at `/tmp/backup.tar`:
@@ -136,9 +136,9 @@ no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
 
 1. On one of the remaining manager nodes, perform `docker swarm init
-   --force-new-cluster`. You may need to specify also need to specify an
+   --force-new-cluster`. You may also need to specify an
    `--advertise-addr` parameter which is equivalent to the `--host-address`
-   parameter of the `docker/ucp install` operation.  This will instantiate a new
+   parameter of the `docker/ucp install` operation. This will instantiate a new
    single-manager swarm by recovering as much state as possible from the
    existing manager. This is a disruptive operation and existing tasks may be
    either terminated or suspended.
