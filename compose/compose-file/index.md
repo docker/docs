@@ -954,16 +954,16 @@ port (a random host port will be chosen).
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
 
-- `target`: the publicly exposed port
-- `published`: the port inside the container
+- `target`: the port inside the container
+- `published`: the publicly exposed port
 - `protocol`: the port protocol (`tcp` or `udp`)
 - `mode`: `host` for publishing a host port on each node, or `ingress` for a swarm
    mode port which will be load balanced.
 
 ```none
 ports:
-  - target: 8080
-    published: 80
+  - target: 80
+    published: 8080
     protocol: tcp
     mode: host
 
