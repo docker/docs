@@ -185,6 +185,8 @@ guides:
       title: Create a base image
     - path: /engine/userguide/eng-image/image_management/
       title: Image management
+    - path: /engine/userguide/eng-image/multistage-build/
+      title: Use multi-stage builds (edge only)
   - sectiontitle: Docker storage drivers
     section:
     - path: /engine/userguide/storagedriver/imagesandcontainers/
