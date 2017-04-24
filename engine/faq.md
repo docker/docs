@@ -41,7 +41,7 @@ Server 2016, or Windows 10.
 
 ### How do containers compare to virtual machines?
 
-Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second. 
+Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second.
 
 ### What does Docker technology add to just plain LXC?
 
@@ -139,12 +139,10 @@ pattern](admin/ambassador_pattern_linking.md).
 
 ### How do I run more than one process in a Docker container?
 
-Any capable process supervisor such as [http://supervisord.org/](
-http://supervisord.org/), runit, s6, or daemontools can do the trick. Docker
-will start up the process management daemon which will then fork to run
-additional processes. As long as the processor manager daemon continues to run,
-the container will continue to as well. You can see a more substantial example
-[that uses supervisord here](admin/using_supervisord.md).
+This approach is discouraged for most use cases. For maximum efficiency and
+isolation, each container should address one specific area of concern. However,
+if you need to run multiple services within a single container, see
+[Run multiple services in a container](admin/multi-service_container.md).
 
 ### What platforms does Docker run on?
 
