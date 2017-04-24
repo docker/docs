@@ -260,9 +260,9 @@ to install.
 You can choose between two methods for Raspbian on `armhf`. You can use the
 same method as Debian, setting up the repository and using `apt-get install`,
 or you can use a convenience script, which requires privileged access, but
-sets up the repository for you and start automatically the daemon.
+sets up the repository for you and automatically start Docker.
 
-- Setting up the repository directly:
+- Set up the repository directly:
 
   ```bash
   $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
@@ -270,7 +270,7 @@ sets up the repository for you and start automatically the daemon.
       sudo tee /etc/apt/sources.list.d/docker.list
   ```
 
-- Using the convenience script:
+- Use the convenience script:
 
   ```bash
   $ curl -sSL https://get.docker.com > install.sh
