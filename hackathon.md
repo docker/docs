@@ -25,7 +25,7 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 
 ![DockerCon Docs Hackathon logo](docs-hackathon-1.png)
 
-<div data-type="countdown" data-id="104602" class="tickcounter" style="width: 100%; position: relative; padding-bottom: 25%"><a href="//www.tickcounter.com/countdown/104602/docs-hackathon-starts-in" title="Docs Hackathon Starts in:">Docs Hackathon Starts in:</a><a href="//www.tickcounter.com/" title="Countdown">Countdown</a></div><script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
+** The Docs Hackathon is officially underway! **
 
 ## Quick links
 
@@ -34,6 +34,7 @@ All participants who show up in the 4th floor hack room at DockerCon will get
 - [Report your hackathon work](https://goo.gl/forms/oEaQOlKvQj8iJbn53)
 - [Browse prizes](http://www.cafepress.com/dockerdocshackathon)
 - [#docs on Slack, if you have questions](https://dockercommunity.slack.com/messages/C2V58TASE)
+- [Moby Mingle offer](https://mobymingle.dockercon.com/offers/27855) to mentor people to contribute to the Hackathon.
 
 ## How it works
 
@@ -111,7 +112,7 @@ Whether attending in-person or online, to claim a bug as one that you are
 working on (so nobody else grabs it out from under you) you must type a comment
 saying you claim it. Respect it when you see other comments claiming a bug.
 
-[View avaiable bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
+[View available bugs](https://github.com/docker/docker.github.io/milestone/9){: class="button primary-btn"}
 
 ## Claiming your points
 

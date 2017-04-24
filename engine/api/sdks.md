@@ -32,7 +32,7 @@ import "github.com/docker/docker/client"
 
 To see how to start using it, [head to the getting started guide](getting-started.md).
 
-[A full reference is available on GoDoc.](https://godoc.org/github.com/docker/docker/client)
+[A full reference is available on GoDoc.](https://godoc.org/github.com/moby/moby/client)
 
 ## Other languages
 

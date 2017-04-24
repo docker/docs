@@ -16,16 +16,33 @@ On a Mac, install with `brew install bash-completion`
 
 Place the completion script in `/etc/bash_completion.d/` (`/usr/local/etc/bash_completion.d/` on a Mac), using e.g.
 
-     curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+    curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
-Completion will be available upon next login.
+Then add the following to your `~/.bash_profile`
+
+	if [ -f $(brew --prefix)/etc/bash_completion ]; then
+	. $(brew --prefix)/etc/bash_completion
+	fi
+ 
+You can source your `~/.bash_profile` or launch a new terminal to utilize completion.
+
+## MacPorts Bash Completion
+
+If you're using MacPorts you'll need to slightly modify your steps to the following
+Run `sudo port install bash-completion` to install bash completion
+
+	if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+	    . /opt/local/etc/profile.d/bash_completion.sh
+	fi
+
+ You can source your `~/.bash_profile` or launch a new terminal to utilize completion.
 
 ### Zsh
 
 Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`
 
-    mkdir -p ~/.zsh/completion
-    curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+    $ mkdir -p ~/.zsh/completion
+    $ curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 
 Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`
 

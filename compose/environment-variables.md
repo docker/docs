@@ -88,6 +88,19 @@ Values in the shell take precedence over those specified in the `.env` file. If 
     services:
       web:
         image: 'webapp:v2.0'
+   
+When values are provided with both with shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken from environment file first and then from environment key:
+
+    $ cat docker-compose.yml
+    version: '2.0'
+    services:
+      web:
+        image: 'webapp:v1.5'
+        env_file:
+         - ./test
+        environment:
+         - var=1
+
 
 ## Configuring Compose using environment variables
 

@@ -132,7 +132,7 @@ Since secrets are immutable in the sense that you cannot change the data
 they store after they are created, we can use the following process to achieve
 this:
 
-1. Create a new service with a different password
+1. Create a new secret with a different password
 2. Update all the services that are using the old secret to use the new one
 instead
 3. Delete the old secret
@@ -172,6 +172,10 @@ the file with the content of `wordpress-password-v2` be mounted in
 
 Then do the same thing for the WordPress service. After this is done, the
 WordPress application is running and using the new password.
+
+## Managing secrets through the CLI
+
+You can find additional documentation on managing secrets through the CLI at [How Docker manages secrets](/engine/swarm/secrets/#read-more-about-docker-secret-commands).
 
 ## Where to go next
 

@@ -75,7 +75,7 @@ metadata
 - The "manifest", which is pulled first and lists all layers and the config file
 for the image.
 
-All of these files are stored in a content-addressible manner.  We take the
+All of these files are stored in a content-addressable manner.  We take the
 sha256 hash of the file's content and use the hash as the filename.  This means
 that if tag `example.com/user/blog:1.11.0` and `example.com/user/blog:latest`
 use the same layers we only store them once.

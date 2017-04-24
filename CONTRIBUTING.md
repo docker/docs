@@ -12,7 +12,7 @@ let you know so that you can rebase it.
 ### Files not edited here
 
 Files and directories listed in the `path:` keys in
-[`.NOT_EDITED_HERE.yaml`](/NOT_EDITED_HERE.yaml) are maintained in other
+[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) are maintained in other
 repositories and should not be edited in this one. Pull requests against these
 files will be rejected. Make your edits to the files in the repository and path
 in the `source:` key in the YAML file.
@@ -60,7 +60,7 @@ work will be visible on docs.docker.com.
 The following `vnext` branches currently exist:
 
 - **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  docs for upcoming features in the [docker/docker](https://github.com/docker/docker/)
+  docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
   project
 
 - **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**

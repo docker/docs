@@ -6,77 +6,60 @@ var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoun
 
 // ensure that the left nav visibly displays the current topic
 var current = document.getElementsByClassName("active currentPage");
+var body = document.getElementsByClassName("col-content content");
 if (current[0]) {
     if (sidebarObj) {
       current[0].scrollIntoView(true);
-      sidebarObj.scrollTop -= 150;
+      body[0].scrollIntoView(true);
     }
   }
 
 function highlightRightNav(heading)
 {
-  if (heading == "title")
-  {
-    history.replaceState({},"Top of page on " + document.location.pathname,document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname);
-    $("#my_toc a").each(function(){
-      $(this).removeClass("active");
-    });
-    $("#sidebar-wrapper").animate({
-      scrollTop: 0
-    },800);
-  } else {
-    var targetAnchorHREF = document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname + "#" + heading;
-    // make sure we aren't filtering out that heading level
-    var noFilterFound = false;
-    $("#my_toc a").each(function(){
-      if (this.href==targetAnchorHREF) {
-        noFilterFound = true;
-      }
-    });
-    // now, highlight that heading
-    if (noFilterFound)
+  if (document.location.pathname.indexOf("/glossary/")<0){
+    console.log("highlightRightNav called on",document.location.pathname)
+    if (heading == "title")
     {
+      history.replaceState({},"Top of page on " + document.location.pathname,document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname);
       $("#my_toc a").each(function(){
-        //console.log("right-nav",this.href);
-        if (this.href==targetAnchorHREF)
-        {
-          history.replaceState({},this.innerText,targetAnchorHREF);
-          $(this).addClass("active");
-          var sidebarOffset = (sidebarBottom > 200) ? 200 : headerOffset - 20;
-          $("#sidebar-wrapper").animate({
-            scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - sidebarOffset
-          },100);
-          //document.getElementById("sidebar-wrapper").scrollTop = this.getBoundingClientRect().top - 200;
-        } else {
-          $(this).removeClass("active");
+        $(this).removeClass("active");
+      });
+      $("#sidebar-wrapper").animate({
+        scrollTop: 0
+      },800);
+    } else {
+      var targetAnchorHREF = document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname + "#" + heading;
+      // make sure we aren't filtering out that heading level
+      var noFilterFound = false;
+      $("#my_toc a").each(function(){
+        if (this.href==targetAnchorHREF) {
+          noFilterFound = true;
         }
       });
+      // now, highlight that heading
+      if (noFilterFound)
+      {
+        $("#my_toc a").each(function(){
+          //console.log("right-nav",this.href);
+          if (this.href==targetAnchorHREF)
+          {
+            history.replaceState({},this.innerText,targetAnchorHREF);
+            $(this).addClass("active");
+            var sidebarOffset = (sidebarBottom > 200) ? 200 : headerOffset - 20;
+            $("#sidebar-wrapper").animate({
+              scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - sidebarOffset
+            },100);
+            //document.getElementById("sidebar-wrapper").scrollTop = this.getBoundingClientRect().top - 200;
+          } else {
+            $(this).removeClass("active");
+          }
+        });
+      }
     }
   }
 }
-function checkNavSizes()
-{
-  sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
-  footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
-  headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
-  if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
-  {
-
-    // the footer is overlapping the sidebar
-    var sidebarHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
-    var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
-    sidebarObj.style.height = sidebarHeight + "px";
-    document.getElementsByClassName("toc-nav")[0].style.height = tocNavHeight + "px";
-    $(sidebarObj).clearQueue().finish();
-    setTimeout(highlightRightNav(currentHeading),1);
-  }
-}
-$(window).resize(function() {
-  checkNavSizes();
-});
 var currentHeading = "";
 $(window).scroll(function(){
-  checkNavSizes();
   var headingPositions = new Array();
   $("h1, h2, h3, h4, h5, h6").each(function(){
     if (this.id == "") this.id="title";
@@ -154,19 +137,9 @@ $("#menu-toggle-left").click(function(e) {
         $(".col-nav").toggleClass("col-toc-hidden");
     });
 $(".navbar-toggle").click(function(){
-  $(".sidebar, .sidebar-home").each(function(){
-    if($(this).hasClass("hidden-sm")) {
-      $(this).removeClass("hidden-sm");
-      $(this).css("overflow-y","scroll");
-    } else {
-      $(this).addClass("hidden-sm");
-    }
-    if($(this).hasClass("hidden-xs")) {
-      $(this).removeClass("hidden-xs");
-      $(this).css("overflow-y","scroll");
-    } else {
-      $(this).addClass("hidden-xs");
-    }
+  $("#sidebar-nav").each(function(){
+    $(this).toggleClass("hidden-sm");
+    $(this).toggleClass("hidden-xs");
   });
 });
 
@@ -210,6 +183,8 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
+  $(".sidebar").Stickyfill();
+
   // Add smooth scrolling to all links
   $(".nav-sidebar ul li a").on('click', function(event) {
 
@@ -271,7 +246,7 @@ $('#switch-style').change(function() {
     if ($(this).is(':checked')) {
         applyNight();
         createCookie("night",true,999)
-    } else {  
+    } else {
         applyDay();
     //     swapStyleSheet('/css/style.css');
         eraseCookie("night")

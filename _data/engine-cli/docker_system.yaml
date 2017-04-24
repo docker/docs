@@ -1,6 +1,6 @@
 command: docker system
 short: Manage Docker
-long: Manage Docker
+long: Manage docker.
 usage: docker system
 pname: docker
 plink: docker.yaml

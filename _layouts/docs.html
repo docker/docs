@@ -9,6 +9,8 @@
 else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %}
 
 <!-- End of logic for 'edit this button' -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +65,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="/css/pygments/perldoc.css">
 	<link id="pagestyle" rel="stylesheet" href="/css/style.css">
 
 	<!-- Go get "Open Sans" font from Google -->
@@ -143,12 +146,12 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						</section>
 					</main>
 					<nav class="col-nav">
-						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %} hidden-sm hidden-xs">
+						<div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
 						{% include side-menu.html %}
 						</div>
 					</nav>
 					<div class="col-toc">
-							<div id="{% if page.landing == true %}sidebar-right{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top hidden-xs hidden-sm{%else%}sidebar-wrapper hidden-xs hidden-sm{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
+							<div class="sidebar hidden-xs hidden-sm">
 							<div class="toc-nav">
 								<div class="feedback-links">
 									<ul>
@@ -188,19 +191,44 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 		</div>
 	</div>
 
+	{% if page.path == "404.md" %}
+		<script type="text/javascript">
+			var path = window.location.pathname.replace("#","");
+			var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
+			document.getElementsByClassName("nomunge")[1].onclick = function() {
+				 document.getElementsByClassName("nomunge")[1].href = ghIssueQueryString;
+				 return true;
+			};
+		</script>
+	{% endif %}
 	<footer class="footer">
 		{% include footer.html %}
 	</footer>
 	<link rel="stylesheet" href="/css/github.css">
+	{% if page.highlightjs == true %}
 	<script src="/js/highlight.pack.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
 	</script>
+	{% endif %}
 	<!-- <script src="/js/anchorlinks.js"></script> -->
 	<script defer src="/js/menu.js"></script>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/stickyfill.min.js"></script>
 	<script defer src="/js/docs.js"></script>
+	<script language="javascript">
+	jQuery(document).ready(function(){
+			$.getJSON( "/metadata.txt", function( data ) {
+				metadata = data;
+				hookupTOCEvents();
+				$.getJSON( "/glossary.txt", function( data ) {
+					glossary = data;
+					renderTagsPage();
+				});
+			});
+	});
+	</script>
 </body>
 
 </html>

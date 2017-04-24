@@ -65,7 +65,7 @@ Follow this workflow as you work:
         <td>
             <p>
             Format <code>.go</code> files using the <code>gofmt</code> command.
-            For example, if you edited the `docker.go` file you would format the file
+            For example, if you edited the <code>docker.go</code> file you would format the file
             like this:
             </p>
             <p><code>$ gofmt -s -w docker.go</code></p>

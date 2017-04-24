@@ -73,7 +73,7 @@ Use the `-f` flag to specify the location of a Compose configuration file. You
 can supply multiple `-f` configuration files. When you supply multiple files,
 Compose combines them into a single configuration. Compose builds the
 configuration in the order you supply the files. Subsequent files override and
-add to their successors.
+add to their predecessors.
 
 For example, consider this command line:
 

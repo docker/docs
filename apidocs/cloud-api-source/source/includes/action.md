@@ -26,7 +26,7 @@
 
 An action represents an API call by a user. Details of the API call such as timestamp, origin IP address, and user agent are logged in the action object.
 
-Simple API calls that do not require asynchronous execution will return immediately with the appropiate HTTP error code and an action object will be created either in `Success` or `Failed` states. API calls that do require asynchronous execution will return HTTP code `202 Accepted` immediately and create an action object in `In progress` state, which will change to `Success` or `Failed` state depending on the outcome of the operation being performed. In both cases the response will include a `X-DockerCloud-Action-URI` header with the resource URI of the created action.
+Simple API calls that do not require asynchronous execution will return immediately with the appropriate HTTP error code and an action object will be created either in `Success` or `Failed` states. API calls that do require asynchronous execution will return HTTP code `202 Accepted` immediately and create an action object in `In progress` state, which will change to `Success` or `Failed` state depending on the outcome of the operation being performed. In both cases the response will include a `X-DockerCloud-Action-URI` header with the resource URI of the created action.
 
 
 ### Attributes

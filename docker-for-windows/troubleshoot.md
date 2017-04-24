@@ -160,11 +160,11 @@ commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
 
-For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
+For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/moby/moby/issues/24388">Docker RUN fails to execute shell script (https://github.com/moby/moby/issues/24388)</a>.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
-Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
+Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
 
 You may get the following error when you try to start a container created with pre-Beta 18 Docker for Windows applications.
 
@@ -262,11 +262,11 @@ Windows containers without Docker for Windows. However, if you install Docker
 this way, you cannot develop or run Linux containers.  If you try to run a Linux
 container on the native Docker daemon, an error occurs:
 
-  ```no-highlight
+  ```none
   C:\Program Files\Docker\docker.exe:
    image operating system "linux" cannot be used on this platform.
    See 'C:\Program Files\Docker\docker.exe run --help'.
-   ```
+  ```
 
 ### Limitations of Windows containers for `localhost` and published ports
 
@@ -284,7 +284,7 @@ So, in a scenario where you use Docker to pull an image and run a webserver with
 a command like this:
 
 ```
-docker run -d -p 80:80 --name webserver nginx  
+docker run -d -p 80:80 --name webserver nginx
 ```
 
 Using `curl http://localhost`, or pointing your web browser at
@@ -380,7 +380,7 @@ Discussion thread on GitHub at [Docker for Windows issue 267](https://github.com
 
 ### Networking issues
 
-Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/docker/docker/issues/22567).)
+Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/moby/moby/issues/22567).)
 
 Here is an example command and error message:
 
@@ -509,7 +509,7 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 buids** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)

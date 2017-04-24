@@ -52,7 +52,7 @@ Next, we'll run the **authorizedkeys** service.
 You can create a new stack in Docker Cloud and enter the following stackfile to create the service manually.
 
 You can also click the button below to automatically create a new stack in Docker Cloud with the **authorizedkeys** service mostly configured. (Either way you still need to add your public key.)
-<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/docker/dockercloud-authorizedkeys" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
+<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/moby/mobycloud-authorizedkeys" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
 
 
 ```yml

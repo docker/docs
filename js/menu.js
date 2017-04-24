@@ -261,18 +261,9 @@ function renderTagsPage()
         var glossaryOutput = glossary.terms[i].def;
       }
     }
-    if (glossaryOutput) $("#glossaryMatch").html("<h2>Definition of: " + tagToLookup + "</h2>" + glossaryOutput);
+    if (glossaryOutput) {
+      $("#glossaryMatch").html("<h2>Definition of: " + tagToLookup + "</h2>" + glossaryOutput);
+    }
     renderTopicsByTagTable(tagToLookup,"topicMatch",true);
   }
 }
-
-jQuery(document).ready(function(){
-    $.getJSON( "/metadata.txt", function( data ) {
-      metadata = data;
-      hookupTOCEvents();
-      $.getJSON( "/glossary.txt", function( data ) {
-        glossary = data;
-        renderTagsPage();
-      });
-    });
-});

@@ -83,5 +83,8 @@
 {{ site.data[include.datafolder][include.datafile].examples }}
 
 {% endif %}
+{% else %}
+
+The include.datafolder or include.datafile was not set.
 
 {% endif %}

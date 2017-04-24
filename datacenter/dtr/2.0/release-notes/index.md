@@ -210,7 +210,7 @@ future release. Configure user authentication in UCP.
 * Misc
   * When using Docker Engine 1.11 and DTR and UCP are running on the same host,
   restarting the host might cause the DTR containers not start. This is caused
-  by a [bug in Docker Engine](https://github.com/docker/docker/issues/22486).
+  by a [bug in Docker Engine](https://github.com/moby/moby/issues/22486).
   You can restart the DTR containers from the UCP UI.
   * When the DTR proxy container stops, it may seem that the DTR UI is
   responding but it shows an "empty" notification when saving settings.

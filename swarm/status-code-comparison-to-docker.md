@@ -10,7 +10,7 @@ Docker Engine provides a REST API for making calls to the Engine daemon. Docker 
 
 Four methods are included, and they are GET, POST, PUT and DELETE.
 
-The comparison is based on api v1.22, and all Docker Status Codes in api v1.22 are referenced from [docker-remote-api-v1.22](https://github.com/docker/docker/blob/master/docs/reference/api/docker_remote_api_v1.22.md
+The comparison is based on api v1.22, and all Docker Status Codes in api v1.22 are referenced from [docker-remote-api-v1.22](https://github.com/moby/moby/blob/master/docs/reference/api/docker_remote_api_v1.22.md
 ).
 
 ## GET

@@ -12,6 +12,29 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.4
+
+(13 April 2017)
+
+**Bugs fixed**
+
+* High impact
+  * Fixed memory leaks causing DTR to use all RAM available
+  * Fixed concurrency problems that might cause the registry and api server to
+  restart
+  * Improved performance of search on the web UI. To improve performance
+  the search now only returns accounts and repositories that match the search
+  input. It no longer shows repositories belonging to the accounts returned in
+  the search result
+  * The web UI now displays all members of an organization
+* Low impact
+  * When installing or joining replicas with `--nfs-storage-url` and the
+  installation fails, DTR now deletes the `.dtr-nfs-test` file
+  * The web UI now shows if a team is managed in LDAP or not
+  * After updating the vulnerability database, a rescan button only shows
+  if the user has permissions for that action
+
+
 ## DTR 2.2.3
 
 (9 March 2017)
@@ -103,7 +126,7 @@ events like image push, repository creation, and others
   * The install command was improved to avoid deploying DTR to a node where it
   cannot run due to port collisions
   * The `docker/dtr install --ucp-node` flag is now mandatory
-  * The install command no longer allows deploying replicas with duplica ids
+  * The install command no longer allows deploying replicas with duplicate ids
   * The upgrade command now validates if all tags were migrated to the latest
   version before trying to migrate blob links
 
@@ -118,7 +141,7 @@ letters
 created
 * The copy to clipboard button on the repository page now works on Firefox
 * The repository page now renders properly the repository permissions
-* You can now delete a users's full name from the UI
+* You can now delete a users full name from the UI
 * Organization administrators can now see the repositories owned by the organization
 * The garbage collection settings now show the correct cron values
 * You can now specify DTR to use port 443 when installing DTR

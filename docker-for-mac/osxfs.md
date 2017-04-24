@@ -7,16 +7,16 @@ title: File system sharing (osxfs)
 ---
 
 `osxfs` is a new shared file system solution, exclusive to Docker for Mac.
-`osxfs` provides a close-to-native user experience for bind mounting OS X file
+`osxfs` provides a close-to-native user experience for bind mounting macOS file
 system trees into Docker containers. To this end, `osxfs` features a number of
 unique capabilities as well as differences from a classical Linux file system.
 
 ### Case sensitivity
 
-With Docker for Mac, file systems are shared from OS X into containers in the
-same way as they operate in OS X. As a result, if a file system on OS X is
-case-insensitive that behavior is shared by any bind mount from OS X into a
-container. The default OS X file system is HFS+ and, during installation, it is
+With Docker for Mac, file systems are shared from macOS into containers in the
+same way as they operate in macOS. As a result, if a file system on macOS is
+case-insensitive that behavior is shared by any bind mount from macOS into a
+container. The default macOS file system is HFS+ and, during installation, it is
 installed as case-insensitive by default. To get case-sensitive behavior from
 your bind mounts, you must either create and format a ramdisk or external volume
 as HFS+ with case-sensitivity or reformat your OS root partition with HFS+ with
@@ -49,13 +49,16 @@ $ docker run -it -v ~/Desktop:/Desktop r-base bash
 The user's `~/Desktop/` directory is now visible in the container as a directory
 under `/`.
 
-`root@2h30fa0c600e:/# ls
-bin  boot  Desktop  dev  etc  home  lib  lib32	lib64  libx32  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var`
+```
+root@2h30fa0c600e:/# ls
+Desktop	boot	etc	lib	lib64	media	opt	root	sbin	sys	usr
+bin	dev	home	lib32	libx32	mnt	proc	run	srv	tmp	var
+```
 
-By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and `/tmp` 
+By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and `/tmp`
 directly.
-To add or remove directory trees that are exported to Docker, use the 
-**File sharing** tab in Docker preferences ![Docker Preferences]("docker-for-mac/images/whale-x.png) -> **Preferences** ->
+To add or remove directory trees that are exported to Docker, use the
+**File sharing** tab in Docker preferences ![Docker Preferences](images/whale-x.png) -> **Preferences** ->
 **File sharing**. (See [Preferences](index.md#preferences).)
 
 All other paths
@@ -64,7 +67,7 @@ containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
 should work as expected. If a macOS path is not shared and does not exist in the
 VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
-be exported from OS X.
+be exported from macOS.
 
 ### Ownership
 
@@ -74,7 +77,7 @@ containerized process changes the ownership of a shared file system
 object, e.g. with `chown`, the new ownership information is persisted in
 the `com.docker.owner` extended attribute of the object. Subsequent
 requests for ownership metadata will return the previously set
-values. Ownership-based permissions are only enforced at the OS X file
+values. Ownership-based permissions are only enforced at the macOS file
 system level with all accessing processes behaving as the user running
 Docker. If the user does not have permission to read extended attributes
 on an object (such as when that object's permissions are `0000`), `osxfs`
@@ -87,7 +90,7 @@ it until the extended attribute is readable again.
 
 Most `inotify` events are supported in bind mounts, and likely `dnotify` and
 `fanotify` (though they have not been tested) are also supported. This means
-that file system events from OS X are sent into containers and trigger any
+that file system events from macOS are sent into containers and trigger any
 listening processes there.
 
 The following are **supported file system events**:
@@ -111,13 +114,13 @@ The following are **unsupported file system events**:
 * Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
 
 Some events may be delivered multiple times. These limitations do not apply to
-events between containers, only to those events originating in OS X.
+events between containers, only to those events originating in macOS.
 
 ### Mounts
 
-The OS X mount structure is not visible in the shared volume, but volume
+The macOS mount structure is not visible in the shared volume, but volume
 contents are visible. Volume contents appear in the same file system as the rest
-of the shared file system. Mounting/unmounting OS X volumes that are also bind
+of the shared file system. Mounting/unmounting macOS volumes that are also bind
 mounted into containers may result in unexpected behavior in those containers.
 Unmount events are not supported. Mount export support is planned but is still
 under development.
@@ -125,14 +128,14 @@ under development.
 ### Symlinks
 
 Symlinks are shared unmodified. This may cause issues when symlinks contain
-paths that rely on the default case-insensitivity of the default OS X file
+paths that rely on the default case-insensitivity of the default macOS file
 system, HFS+.
 
 ### File types
 
 Symlinks, hardlinks, socket files, named pipes, regular files, and directories
 are supported. Socket files and named pipes only transmit between containers and
-between OS X processes -- no transmission across the hypervisor is supported,
+between macOS processes -- no transmission across the hypervisor is supported,
 yet. Character and block device files are not supported.
 
 ### Extended attributes
@@ -142,7 +145,7 @@ Extended attributes are not yet supported.
 ### Technology
 
 `osxfs` does not use OSXFUSE. `osxfs` does not run under, inside, or
-between OS X userspace processes and the OS X kernel.
+between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
@@ -168,7 +171,7 @@ you may experience exceptional, adequate, or poor performance with `osxfs`, the
 file system server in Docker for Mac. File system APIs are very wide (20-40
 message types) with many intricate semantics  involving on-disk state, in-memory
 cache state, and concurrent access by multiple  processes. Additionally, `osxfs`
-integrates   a mapping between OS X's FSEvents API and Linux's  inotify API
+integrates a mapping between macOS's FSEvents API and Linux's `inotify` API
 which is implemented inside of the file system itself complicating matters
 further (cache behavior in particular).
 
@@ -186,7 +189,7 @@ is typically under 10μs (microseconds). With `osxfs`, latency is presently
 around 200μs for most operations or 20x slower. For workloads which demand many
 sequential roundtrips, this results in significant observable slowdown. To
 reduce the latency, we need to shorten the data path from a Linux system call to
-OS X and back again. This requires tuning each component in the data path in
+macOS and back again. This requires tuning each component in the data path in
 turn -- some of which require significant engineering effort. Even if we achieve
 a huge latency reduction of 100μs/roundtrip, we will still "only" see a doubling
 of performance. This is typical of performance engineering, which requires
@@ -207,7 +210,7 @@ with the file system. Using this caching comes with a number of trade-offs:
 correct, stateful functionality on top of those caches.
 
 * It harms the coherence or consistency of the file system as observed
-from Linux containers and the OS X file system interfaces.
+from Linux containers and the macOS file system interfaces.
 
 #### What we are doing
 
@@ -229,19 +232,19 @@ Unfortunately, even this is not sufficient for the first time rake is run on a
 shared directory. To handle that case, we actually need to develop a Linux
 kernel patch which negatively caches all directory entries not in a
 specified set -- and this cache must be kept up-to-date in real-time with the OS
-X file system state even in the presence of missing OS X FSEvents messages and
-so must be invalidated if OS X ever reports an event delivery failure.
+X file system state even in the presence of missing macOS FSEvents messages and
+so must be invalidated if macOS ever reports an event delivery failure.
 
 2. Running ember build in a shared file system results in ember creating many
 different temporary directories and performing lots of intermediate activity
 within them. An empty ember project is over 300MB. This usage pattern does not
-require coherence between Linux and OS X but, because we cannot distinguish this
+require coherence between Linux and macOS but, because we cannot distinguish this
 fact at run-time, we maintain coherence during its hundreds of thousands of file
 system accesses to manipulate temporary state. There is no "correct" solution in
 this case. Either ember needs to change, the volume mount needs to have
 coherence properties specified on it somehow, some heuristic needs to be
 introduced to detect this access pattern and compensate, or the behavior needs
-to be indicated via, e.g., extended attributes in the OS X file system.
+to be indicated via, e.g., extended attributes in the macOS file system.
 
 These two examples come from performance use cases contributed by users and they
 are incredibly helpful in prioritizing aspects of file system performance to
@@ -254,7 +257,7 @@ Under development, we have:
 1. A Linux kernel patch to reduce data path latency by 2/7 copies and 2/5
 context switches
 
-2. Increased OS X integration to reduce the latency between the hypervisor and
+2. Increased macOS integration to reduce the latency between the hypervisor and
 the file system server
 
 3. A server-side directory read cache to speed up traversal of large directories
@@ -314,7 +317,7 @@ the Beta channel in the coming release cycles.
 
 In due course, we will open source all of our shared file system components. At
 that time, we would be very happy to collaborate with you on improving the
-implementation of osxfs and related software.
+implementation of `osxfs` and related software.
 
 We still have on the slate to write up and publish details of shared file system
 performance analysis and improvement on the Docker blog. Look for or nudge

@@ -29,7 +29,7 @@ docker run dockercloud/cli -h
 
 This command runs the `docker-cloud` CLI image in a container for you. Learn
 more about how to use this container
-[here](https://github.com/docker/dockercloud-cli#docker-image).
+[here](https://github.com/moby/mobycloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
@@ -121,7 +121,7 @@ For example:
 $ DOCKERCLOUD_NAMESPACE=myteam docker container ps
 ```
 
-To learn more, see the [Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+To learn more, see the [Docker Cloud CLI README](https://github.com/moby/mobycloud-cli#namespace).
 
 
 ## Upgrade the docker-cloud CLI

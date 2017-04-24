@@ -208,8 +208,8 @@ swarm is connected to the public internet. To create your cluster:
 
 You can contribute a new discovery backend to Swarm. For information on how to
 do this, see <a
-href="https://github.com/docker/docker/tree/master/pkg/discovery">
-github.com/docker/docker/pkg/discovery</a>.
+href="https://github.com/moby/moby/tree/master/pkg/discovery">
+github.com/moby/moby/pkg/discovery</a>.
 
 
 ## Docker Swarm documentation index

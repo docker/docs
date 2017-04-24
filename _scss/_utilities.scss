@@ -67,8 +67,8 @@ i.fa.fa-outdent {
 
 .search-form {
     float: left;
-    margin: 10px 15px 0 0px!important;
-    width: 210px;
+    margin: 5px 15px 0 0px;
+    width: 200px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
         background-position: 10px 9px;
@@ -93,12 +93,6 @@ i.fa.fa-outdent {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    min-width: 260px;
-}
-
-.nav-secondary-tabs .search-form {
-    // width: 240px;
-    margin: 10px 0 0 10px!important;
 }
 
 .search-form input[type=text]:focus {

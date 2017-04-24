@@ -31,7 +31,7 @@ search: true
 
 # Introduction
 
-Docker Cloud currently offers a **HTTP REST API** and a **Websocket Stream API** which are used by both the [Web UI](https://cloud.docker.com/) and the [CLI](https://github.com/docker/dockercloud-cli). This API documentation contains all API operations currently supported in the platform and provides examples of how to execute them using our Command Line Interface (CLI), [Python SDK](https://github.com/docker/python-dockercloud) and [Go SDK](https://github.com/docker/go-dockercloud).
+Docker Cloud currently offers a **HTTP REST API** and a **Websocket Stream API** which are used by both the [Web UI](https://cloud.docker.com/) and the [CLI](https://github.com/moby/mobycloud-cli). This API documentation contains all API operations currently supported in the platform and provides examples of how to execute them using our Command Line Interface (CLI), [Python SDK](https://github.com/docker/python-dockercloud) and [Go SDK](https://github.com/docker/go-dockercloud).
 
 # Authentication
 
@@ -102,7 +102,7 @@ Examples:
 If you are using namespaces with the `docker-cloud` CLI, set them by changing
 the value of the `DOCKERCLOUD_NAMESPACE` environment variable. You can either
 set this globally, or specify it before each CLI command. To learn more, see the
-[Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+[Docker Cloud CLI README](https://github.com/moby/mobycloud-cli#namespace).
 
 ## Stream API
 

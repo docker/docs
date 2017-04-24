@@ -8,7 +8,7 @@ title: Docker Engine frequently asked questions (FAQ)
 
 If you don't see your question here, feel free to submit new ones to
 <docs@docker.com>.  Or, you can fork [the
-repo](https://github.com/docker/docker) and contribute them yourself by editing
+repo](https://github.com/moby/moby) and contribute them yourself by editing
 the documentation sources.
 
 
@@ -19,8 +19,8 @@ Docker Engine is 100% free. It is open source, so you can use it without paying.
 ### What open source license are you using?
 
 We are using the Apache License Version 2.0, see it here:
-[https://github.com/docker/docker/blob/master/LICENSE](
-https://github.com/docker/docker/blob/master/LICENSE)
+[https://github.com/moby/moby/blob/master/LICENSE](
+https://github.com/moby/moby/blob/master/LICENSE)
 
 ### Does Docker run on Linux, macOS, or Windows?
 
@@ -283,7 +283,7 @@ You can find more answers on:
 - [Docker user mailinglist](https://groups.google.com/d/forum/docker-user)
 - [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev)
 - [IRC, docker on freenode](irc://chat.freenode.net#docker)
-- [GitHub](https://github.com/docker/docker)
+- [GitHub](https://github.com/moby/moby)
 - [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker)
 - [Join the conversation on Twitter](http://twitter.com/docker)
 

@@ -7,11 +7,11 @@ toc_max: 2
 
 ## Stable and edge channels
 
-Two different download channels are available for Docker for AWS:
+Two different download channels are available for Docker for Azure:
 
 * The **stable channel** provides a general availability release-ready deployment
   for a fully baked and tested, more reliable cluster. The stable version of Docker
-  for AWS comes with the latest released version of Docker Engine. The release
+  for Azure comes with the latest released version of Docker Engine. The release
   schedule is synched with Docker Engine releases and hotfixes. On the stable
   channel, you can select whether to send usage statistics and other data.
 
