@@ -190,7 +190,7 @@ Designed to be cross-compatible between Compose and the Docker Engine's
 several more.
 
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`, `cpuset`,
-  `mem_limit`, `memswap_limit`, `extends`, `group_add`, `container_name`. See the [upgrading](#upgrading)
+  `mem_limit`, `memswap_limit`, `extends`, `group_add`. See the [upgrading](#upgrading)
   guide for how to migrate away from these.
 
 - Added: [deploy](index.md#deploy)
@@ -227,7 +227,6 @@ several options have been removed:
     `deploy`. Note that `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
--   `container_name`: This option has been removed for `version: "3.x"` Compose files.
 -   `extends`: This option has been removed for `version: "3.x"` Compose files.
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 
