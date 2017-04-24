@@ -8,14 +8,15 @@ This image has commands to install and manage
 Docker Universal Control Plane (UCP) on a Docker Engine.
 
 You can configure the commands using flags or environment variables. When using
-environment variables use the 'docker run -e VARIABLE_NAME' syntax to pass the
-value from your shell, or 'docker run -e VARIABLE_NAME=value' to specify the
+environment variables use the `docker run -e VARIABLE_NAME` syntax to pass the
+value from your shell, or `docker run -e VARIABLE_NAME=value` to specify the
 value explicitly on the command line.
 
-The container running this image needs to be named 'ucp' and bind-mount the
+The container running this image needs to be named `ucp` and bind-mount the
 Docker daemon socket. Below you can find an example of how to run this image.
 
-Additional help is available for each command with the '--help' flag.
+Additional help is available for each command with the `--help` flag.
+
 ## Usage
 
 ```bash
