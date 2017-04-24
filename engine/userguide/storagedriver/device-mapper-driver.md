@@ -401,9 +401,9 @@ NAME			   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 xvda			   202:0	0	 8G  0 disk
 └─xvda1			   202:1	0	 8G  0 part /
 xvdf			   202:80	0	10G  0 disk
-├─vg--docker-data		   253:0	0	90G  0 lvm
+├─docker-thinpool_tmeta		   253:0	0	90G  0 lvm
 │ └─docker-202:1-1032-pool 253:2	0	10G  0 dm
-└─vg--docker-metadata	   253:1	0	 4G  0 lvm
+└─docker-thinpool_tdata	   253:1	0	 4G  0 lvm
   └─docker-202:1-1032-pool 253:2	0	10G  0 dm
 ```
 
@@ -576,17 +576,17 @@ disk partition.
 1.  Extend the volume group (VG) `vg-docker`.
 
     ```bash
-    $ sudo vgextend vg-docker /dev/sdh1
+    $ sudo vgextend docker /dev/sdh1
 
-    Volume group "vg-docker" successfully extended
+    Volume group "docker" successfully extended
     ```
 
     Your volume group may use a different name.
 
-2.  Extend the `data` logical volume (LV) `vg-docker/data`
+2.  Extend the `data` logical volume (LV) `docker/thinpool`
 
     ```bash
-    $ sudo lvextend  -l+100%FREE -n vg-docker/data
+    $ sudo lvextend  -l+100%FREE -n docker/thinpool
 
     Extending logical volume data to 200 GiB
     Logical volume data successfully resized
@@ -621,7 +621,7 @@ disk partition.
     `515883008`.
 
     ```bash
-    $ sudo blockdev --getsize64 /dev/vg-docker/data
+    $ sudo blockdev --getsize64 /dev/docker/thinpool
 
     264132100096
     ```
