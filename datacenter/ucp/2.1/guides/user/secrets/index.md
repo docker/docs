@@ -42,12 +42,12 @@ In the **UCP web UI**, navigate to **Resources**, and click **Secrets**.
 
 ![](../../images/manage-secrets-1.png){: .with-border}
 
-Click **Create Secret** to create a new secret. Once you create the secret
+Click **Create Secret** to create a new secret. Once you create the secret,
 you won't be able to edit it or see the secret data again.
 
 ![](../../images/manage-secrets-2.png){: .with-border}
 
-Assign a unique name to the service and set its value. You can optionally define
+Assign a unique name to the secret and set its value. You can optionally define
 a permission label so that other users have permission to use this secret. Also
 note that a service and secret must have the same permission label (or both
 must have no permission label at all) in order to be used together.
