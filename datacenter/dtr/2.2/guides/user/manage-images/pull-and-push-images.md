@@ -26,18 +26,18 @@ Click on the repository to see its details.
 
 ![](../../images/pull-push-images-2.png)
 
-To pull the 1.7 tag of the dave.lauper/golang image, run:
+To pull the 1.7 tag of the admin/golang image, run:
 
 ```bash
-$ docker login dtr.company.org
-$ docker pull dtr.company.org/dave.lauper/golang:1.7
+$ docker login dtr.local:4443
+$ docker pull dtr.local:4443/admin/golang:1.7
 ```
 
 ## Push an image
 
 Before you can push an image to DTR you need to [create a repository](index.md)
 to store the image. In this example the full name of our repository is
-`dtr.company.org/dave.lauper/golang`.
+`dtr.local/admin/golang`.
 
 ### Tag the image
 
@@ -50,7 +50,7 @@ from, and where it will be pushed to.
 $ docker pull golang:1.7
 
 # Tag the golang:1.7 image with the full repository name we've created in DTR
-$ docker tag golang:1.7 dtr.company.org/dave.lauper/golang:1.7
+$ docker tag golang:1.7 dtr.local:4443/admin/golang:1.7
 ```
 
 ### Push the image
@@ -59,8 +59,8 @@ Now that you have tagged the image, you only need to authenticate and push the
 image to DTR.
 
 ```bash
-$ docker login dtr.company.org
-$ docker push dtr.company.org/dave.lauper/golang:1.7
+$ docker login dtr.local:4443
+$ docker push dtr.local:4443/admin/golang:1.7
 ```
 
 Go back to the **DTR web UI** to validate that the tag was successfully pushed.
