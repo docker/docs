@@ -84,8 +84,7 @@ long: |
   > you control access to `docker`. If you are binding
   > to a TCP port, anyone with access to that port has full Docker access;
   > so it is not advisable on an open network.
-  {:.warning}
-  
+
   With `-H` it is possible to make the Docker daemon to listen on a
   specific IP and port. By default, it will listen on
   `unix:///var/run/docker.sock` to allow only local connections by the
