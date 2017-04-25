@@ -135,7 +135,7 @@ These keys are supported:
 
 You can use the `sticky_sessions` value to always route a user to the same
 backend service. The first time a user makes a request, the service includes
-a cookie in the response. When the user makes a new request, their browser
+a cookie in the response. When the user makes a new request, the user's browser
 will send the cookie, and the HTTP routing mesh can use it to decide to which
 service to route to.
 
@@ -186,5 +186,5 @@ you can create an overlay network that contains the `com.docker.mesh.http` label
 docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
 ```
 
-If you're creating a a new HRM network you need to disable the HRM service first, or disable 
+If you're creating a new HRM network you need to disable the HRM service first, or disable 
 and enable the HRM service after you create the network else HRM will not be available on new network.
