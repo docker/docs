@@ -27,11 +27,11 @@ manager node.
 ## Download client certificates
 
 To download a client certificate bundle, log into the **UCP web UI**, and
-navigate to your user **profile page**.
+navigate to your **user profile** page.
 
 ![](../../images/cli-based-access-1.png){: .with-border}
 
-Click the **Create a Client Bundle** button, to download the certificate bundle.
+Click the **Create a Client Bundle** button to download the certificate bundle.
 
 
 ## Use client certificates
@@ -50,12 +50,12 @@ $ eval $(<env.sh)
 
 The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
 local Docker CLI communicate with UCP. It also updates the `DOCKER_CERT_PATH`
-environment variables to use the client certificates that are included in the
+environment variable to use the client certificates that are included in the
 client bundle you downloaded.
 
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine.
-You can now use the Docker CLI to create services, networks, volumes and other
+You can now use the Docker CLI to create services, networks, volumes, and other
 resources on a swarm managed by UCP.
 
 ## Download client certificates using the REST API
