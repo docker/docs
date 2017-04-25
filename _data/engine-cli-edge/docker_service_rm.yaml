@@ -20,8 +20,6 @@ examples: |-
   ID  NAME  MODE  REPLICAS  IMAGE
   ```
 
-  > **Warning**:
-  > Unlike `docker rm`, this command does not ask for confirmation
+  > **Warning**: Unlike `docker rm`, this command does not ask for confirmation
   > before removing a running service.
-  {:.warning}
-  
+
