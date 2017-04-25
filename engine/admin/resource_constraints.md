@@ -39,7 +39,10 @@ for [Memory Resource Controller](https://www.kernel.org/doc/Documentation/cgroup
 ### `--memory-swap` details
 
 `--memory-swap` is a modifier flag that only has meaning if `--memory` is also
-set. Swap is disk-based storage, so is usually less performant than memory.
+set. Using swap allows the container to write excess memory requirements to disk
+when the container has exhausted all the RAM that is available to it. There is a
+performance penalty for applications that swap memory to disk often.
+
 Its setting can have complicated effects:
 
 - If `--memory-swap` is set to a positive integer, then both `--memory` and
