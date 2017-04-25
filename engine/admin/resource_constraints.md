@@ -38,16 +38,33 @@ for [Memory Resource Controller](https://www.kernel.org/doc/Documentation/cgroup
 
 ### `--memory-swap` details
 
-- If unset, and `--memory` is set, the container can use twice as much swap
-      as the `--memory` setting, if the host container has swap memory configured.
-      For instance, if `--memory="300m"` and `--memory-swap` is not set, the
-      container can use 300m of memory and 600m of swap.
-- If set to a positive integer,  and if both `--memory` and `--memory-swap`
-      are set, `--memory-swap` represents the total amount of memory and swap
-      that can be used, and `--memory` controls the amount used by non-swap
-      memory. So if `--memory="300m"` and `--memory-swap="1g"`, the container
-      can use 300m of memory and 700m (1g - 300m) swap.
-- If set to `-1` (the default), the container is allowed to use unlimited swap memory.
+`--memory-swap` is a modifier flag that only has meaning if `--memory` is also
+set. Using swap allows the container to write excess memory requirements to disk
+when the container has exhausted all the RAM that is available to it. There is a
+performance penalty for applications that swap memory to disk often.
+
+Its setting can have complicated effects:
+
+- If `--memory-swap` is set to a positive integer, then both `--memory` and
+  `--memory-swap` must be set. `--memory-swap` represents the total amount of
+  memory and swap that can be used, and `--memory` controls the amount used by
+  non-swap memory. So if `--memory="300m"` and `--memory-swap="1g"`, the
+  container can use 300m of memory and 700m (`1g - 300m`) swap.
+
+- If `--memory-swap` is set to `0`, the setting is ignored, and the value is
+  treated as unset.
+
+- If `--memory-swap` is set to the same value as `--memory`, and `--memory` is
+  set to a positive integer, the effect is the same as setting `--memory-swap`
+  to `0` (the value is treated as unset).
+
+- If `--memory-swap` is unset, and `--memory` is set, the container can use
+  twice as much swap as the `--memory` setting, if the host container has swap
+  memory configured. For instance, if `--memory="300m"` and `--memory-swap` is
+  not set, the container can use 300m of memory and 600m of swap.
+
+- If `--memory-swap` is explicitly set to `-1`, the container is allowed to use
+  unlimited swap, up to the amount available on the host system.
 
 ### `--memory-swappiness` details
 
@@ -97,7 +114,7 @@ and higher, you can also configure the
 
 The CFS is the Linux kernel CPU scheduler for normal Linux processes. Several
 runtime flags allow you to configure the amount of access to CPU resources your
-container has. When you use these settings, Docker modifies the settings for 
+container has. When you use these settings, Docker modifies the settings for
 the container's cgroup on the host machine.
 
 | Option                | Description                 |
