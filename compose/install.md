@@ -10,7 +10,7 @@ To install Compose, do the following:
 
 1.  Install Docker Engine:
 
-    * [macOS installation](/docker-for-mac/index.md){: target="_blank" class="_"}
+    * [Mac installation](/docker-for-mac/index.md){: target="_blank" class="_"}
 
     * [Windows installation](/docker-for-windows/index.md){: target="_blank" class="_"}
 
@@ -18,10 +18,31 @@ To install Compose, do the following:
 
     * [Other systems](/engine/installation/index.md){: target="_blank" class="_"}
 
-2.  Docker for Mac, Docker for Windows, and Docker Toolbox include Docker Compose, so Mac and Windows users do not need
-    to install Docker Compose separately.
+2.  **[Docker for Mac](/docker-for-mac/install.md)**, **[Docker for Windows](/docker-for-windows/install.md)**, and **[Docker Toolbox](/toolbox/overview.md)** include Docker Compose, so most Mac and Windows users do not need to install Docker Compose separately.
 
-3.  On Linux, you can download the Docker Compose binary from the
+    If you are running the Docker daemon and client directly on
+    **Microsoft Windows Server 2016** (with [Docker EE for Windows Server 2016](/docker-ee-for-windows/install.md)), you _do_ need to install Docker Compose.
+
+    To do this, start an "elevated" PowerShell (run it as administrator). Search
+    for PowerShell, right-click, and choose **Run as administrator**. When asked
+    if you want to allow this app to make changes to your device, click **Yes**.
+
+    Run the following command to download Docker Compose, replacing
+`$dockerComposeVersion` with the specific version of Compose you want to use:
+
+    ```none
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    ```
+
+    For example, to download Compose version 1.12.0, the command is:
+
+    ```none
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+        ```
+
+    Now, run the executable to install Compose.
+
+3.  On **Linux**, you can download the Docker Compose binary from the
     [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
     Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
 
