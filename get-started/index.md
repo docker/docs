@@ -152,9 +152,8 @@ To generate this message, Docker took the following steps:
 Now would also be a good time to make sure you are using version 1.13 or higher
 
 ```
-$ docker version
-
-Docker version 17.03.1-ce, build c6d412e
+$ docker --version
+Docker version 17.05.0-ce-rc1, build 2878a85
 ```
 
 If you see a messages like the ones above, you're ready to begin the journey.
