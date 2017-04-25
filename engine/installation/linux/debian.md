@@ -145,32 +145,11 @@ from the repository.
 
     **armhf**:
 
-    You can choose between two methods for `armhf`. You can use the same method
-    as Debian, setting up the repository and using `apt-get install`, or you can
-    use a convenience script, which requires privileged access, but sets up the
-    repository for you and installs the packages for Bash auto-completion.
-
-    - Setting up the repository directly:
-
-      ```bash
-      $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
-          raspbian-jessie main" | \
-          sudo tee /etc/apt/sources.list.d/docker.list
-      ```
-
-    - Using the convenience script:
-
-      ```bash
-      $ curl -sSL https://get.docker.com > install.sh
-
-      $ sudo bash ./install.sh
-      ```
-
-      > **Warning**: Always audit scripts downloaded from the internet before
-      > running them locally.
-      
-      If you use this method, Docker is installed and starts automatically.
-      Skip to step 4 below.
+    ```bash
+    $ echo "deb [arch=armhf] {{ download-url-base }} \
+         $(lsb_release -cs) stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
+    ```
 
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
@@ -187,7 +166,8 @@ from the repository.
 
 #### Install Docker CE
 
-> **NOTE**: Docker CE is not available on raspbian-jessie, scroll down to follow the Raspian steps.
+> **NOTE**: On Debian for ARM you can continue following this step. For Raspbian,
+  scroll down to follow its specific steps.
 
 1.  Update the `apt` package index.
 
@@ -238,8 +218,16 @@ from the repository.
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
+    **amd64**:
+
     ```bash
     $ sudo docker run hello-world
+    ```
+
+    **armhf**:
+
+    ```bash
+    $ sudo docker run armhf/hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
