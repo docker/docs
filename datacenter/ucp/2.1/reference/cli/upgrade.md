@@ -8,7 +8,7 @@ Upgrade the UCP components on this node
 
 ## Description
 
-This commands upgrades the UCP running on this node.
+This command upgrades the UCP running on this node.
 To upgrade UCP:
 
   * Upgrade the Docker Engine in all nodes (optional)
