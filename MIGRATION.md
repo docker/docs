@@ -22,4 +22,4 @@ reference we imported, and its tag if relevant.
 | https://github.com/docker/opensource   | b9b87bed67f4289 | docs-2016-08-03        |
 | https://github.com/docker/kitematic    | 02c9f9607128802 | v0.12.0                |
 | https://github.com/docker/machine      | 95041b4cfe2e8b2 | docs-v0.8.2-2016-09-28 |
-| https://github.com/docker/docker       | 3134c23b55eb100 | n/a                    |
+| https://github.com/moby/moby       | 3134c23b55eb100 | n/a                    |

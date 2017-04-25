@@ -95,8 +95,7 @@ to your services.
 
 The HTTP routing mesh can route to a service, as long as that service:
 
-* Is attached to a network that has the `com.docker.ucp.mesh.http` label. You
-can use the default `ucp-hrm` network or create your own
+* Is attached to a network that has the `com.docker.ucp.mesh.http` label. You can use the default ucp-hrm network or create your own.
 * Publishes the ports that you want to route to
 * Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
 the ports to route to
@@ -179,3 +178,13 @@ enabling the HTTP routing mesh:
 
 The HTTP routing mesh will route to all services in these networks, but services
 on different networks can't communicate directly.
+
+When using a UCP client bundle for an admin user, or a user with administrator privileges, 
+you can create an overlay network that contains the `com.docker.mesh.http` label by running the following command.
+
+```none
+docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
+```
+
+If you're creating a a new HRM network you need to disable the HRM service first, or disable 
+and enable the HRM service after you create the network else HRM will not be available on new network.

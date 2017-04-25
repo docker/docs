@@ -32,7 +32,7 @@ it will only connect to servers with a certificate signed by that CA.
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
-First generate CA private and public keys:
+First, on the **Docker daemon's host machine**, generate CA private and public keys:
 
     $ openssl genrsa -aes256 -out ca-key.pem 4096
     Generating RSA private key, 4096 bit long modulus
@@ -90,6 +90,9 @@ using `10.10.10.20` and `127.0.0.1`:
 For client authentication, create a client key and certificate signing
 request:
 
+> **Note:** for simplicity of the next couple of steps, you may perform this 
+> step on the Docker daemon's host machine as well.
+
     $ openssl genrsa -out key.pem 4096
     Generating RSA private key, 4096 bit long modulus
     .........................................................++
@@ -137,6 +140,10 @@ providing a certificate trusted by our CA:
 
 To be able to connect to Docker and validate its certificate, you now
 need to provide your client keys, certificates and trusted CA:
+
+> **Note**: This step should be run on your Docker client machine. As such, you 
+> need to copy your CA certificate, your server certificate, and your client 
+> certificate to that machine.
 
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.

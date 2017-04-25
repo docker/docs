@@ -25,119 +25,21 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
-The best way to quickly grok the layout and syntax of a Compose file is to
-read [Get started with Docker Compose](/compose/gettingstarted/) and to look
-at files for [applications on GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
-A good place to start is the
-version 3 Compose stack file we use for the voting app sample to illustrate
-multi-container apps, service definitions, swarm mode, the `deploy` key, and the
-`docker stack deploy` command. Click to show/hide the example file below. This
-file is fully explained in the [voting app sample
-tutorial](/engine/getstarted-voting-app/index.md).
+The best way to grok the layout and syntax of a Compose file is to
+read [Get started with Docker Compose](/compose/gettingstarted/) and look
+at files included in [sample applications](https://docs.docker.com/samples/).
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+A good place to start is the [Getting Started](/get-started/index.md) tutorial
+which uses version 3 Compose stack files to implement multi-container apps,
+service definitions, and swarm mode. Here are some Compose files used in the
+tutorial.
 
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h5>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
-      <div class="panel-body">
-      <pre><code>
-      version: "3"
-      services:
+- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
 
-        redis:
-          image: redis:alpine
-          ports:
-            - "6379"
-          networks:
-            - frontend
-          deploy:
-            replicas: 2
-            update_config:
-              parallelism: 2
-              delay: 10s
-            restart_policy:
-              condition: on-failure
-        db:
-          image: postgres:9.4
-          volumes:
-            - db-data:/var/lib/postgresql/data
-          networks:
-            - backend
-          deploy:
-            placement:
-              constraints: [node.role == manager]
-        vote:
-          image: dockersamples/examplevotingapp_vote:before
-          ports:
-            - 5000:80
-          networks:
-            - frontend
-          depends_on:
-            - redis
-          deploy:
-            replicas: 2
-            update_config:
-              parallelism: 2
-            restart_policy:
-              condition: on-failure
-        result:
-          image: dockersamples/examplevotingapp_result:before
-          ports:
-            - 5001:80
-          networks:
-            - backend
-          depends_on:
-            - db
-          deploy:
-            replicas: 1
-            update_config:
-              parallelism: 2
-              delay: 10s
-            restart_policy:
-              condition: on-failure
+- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
 
-        worker:
-          image: dockersamples/examplevotingapp_worker
-          networks:
-            - frontend
-            - backend
-          deploy:
-            mode: replicated
-            replicas: 1
-            labels: [APP=VOTING]
-            restart_policy:
-              condition: on-failure
-              delay: 10s
-              max_attempts: 3
-              window: 120s
-            placement:
-              constraints: [node.role == manager]
+Another example of a Compose file is included in the Docker Labs topic, [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
 
-        visualizer:
-          image: dockersamples/visualizer:stable
-          ports:
-            - "8080:8080"
-          stop_grace_period: 1m30s
-          volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock"
-          deploy:
-            placement:
-              constraints: [node.role == manager]
-
-      networks:
-        frontend:
-        backend:
-
-      volumes:
-        db-data:
-    </code></pre>
-      </div>
-    </div>
-  </div>
-</div>
 
 ## Service configuration reference
 
@@ -201,7 +103,8 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose will build and tag it with a generated name, and use that image thereafter.
+Compose will build and tag it with a generated name, and use that image
+thereafter.
 
     build:
       context: ./dir
@@ -310,9 +213,13 @@ Specify a custom container name, rather than a generated default name.
 
     container_name: my-web-container
 
-Because Docker container names must be unique, you cannot scale a service
-beyond 1 container if you have specified a custom name. Attempting to do so
-results in an error.
+Because Docker container names must be unique, you cannot scale a service beyond
+1 container if you have specified a custom name. Attempting to do so results in
+an error.
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### deploy
 
@@ -323,30 +230,51 @@ only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
 [`docker stack deploy`](/engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`.
 
-    deploy:
-      replicas: 6
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
+    version: '3'
+    services:
+      redis:
+        image: redis:alpine
+        deploy:
+          replicas: 6
+          update_config:
+            parallelism: 2
+            delay: 10s
+          restart_policy:
+            condition: on-failure
 
 Several sub-options are available:
 
 #### mode
 
 Either `global` (exactly one container per swarm node) or `replicated` (a
-specified number of containers). The default is `replicated`.
+specified number of containers). The default is `replicated`. (To learn more,
+see [Replicated and global
+services](/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-services)
+in the [swarm](/engine/swarm/) topics.)
 
-    mode: global
+
+version: '3'
+services:
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    deploy:
+      mode: global
 
 #### replicas
 
 If the service is `replicated` (which is the default), specify the number of
 containers that should be running at any given time.
 
-    mode: replicated
-    replicas: 6
+    version: '3'
+    services:
+      worker:
+        image: dockersamples/examplevotingapp_worker
+        networks:
+          - frontend
+          - backend
+        deploy:
+          mode: replicated
+          replicas: 6
 
 #### placement
 
@@ -355,10 +283,15 @@ available types of constraints, see the
 [docker service create](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
 documentation.
 
-    placement:
-      constraints:
-        - node.role == manager
-        - engine.labels.operatingsystem == ubuntu 14.04
+    version: '3'
+    services:
+      db:
+        image: postgres
+        deploy:
+          placement:
+            constraints:
+              - node.role == manager
+              - engine.labels.operatingsystem == ubuntu 14.04
 
 #### update_config
 
@@ -372,10 +305,18 @@ updates.
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 
-```
-    update_config:
-      parallelism: 2
-      delay: 10s
+```none
+version: '3'
+services:
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    depends_on:
+      - redis
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
 ```
 
 #### resources
@@ -387,14 +328,19 @@ options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
-```
-resources:
-  limits:
-    cpus: '0.001'
-    memory: 50M
-  reservations:
-    cpus: '0.0001'
-    memory: 20M
+```none
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      resources:
+        limits:
+          cpus: '0.001'
+          memory: 50M
+        reservations:
+          cpus: '0.0001'
+          memory: 20M
 ```
 
 #### restart_policy
@@ -411,12 +357,17 @@ Configures if and how to restart containers when they exit. Replaces
   specified as a [duration](#specifying-durations) (default:
   decide immediately).
 
-```
-    restart_policy:
-      condition: on-failure
-      delay: 5s
-      max_attempts: 3
-      window: 120s
+```none
+version: "3"
+     services:
+       redis:
+         image: redis:alpine
+         deploy:
+           restart_policy:
+             condition: on-failure
+             delay: 5s
+             max_attempts: 3
+             window: 120s
 ```
 
 #### labels
@@ -440,6 +391,25 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
         image: web
         labels:
           com.example.description: "This label will appear on all containers for the web service"
+
+#### Not supported for `docker stack deploy`
+
+The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+
+- [build](#build)
+- [cgroup_parent](#cgroup-parent)
+- [container_name](#containername)
+- [devices](#devices)
+- [dns](#devices)
+- [dns_search](#dnssearch)
+- [tmpfs](#tmpfs)
+- [external_links](#externallinks)
+- [links](#links)
+- [network_mode](#networkmode)
+- [security_opt](#securityopt)
+- [stop_signal](#stopsignal)
+- [sysctls](#sysctls)
+- [userns_mode](#usernsmode)
 
 ### devices
 
@@ -466,7 +436,7 @@ Express dependency between services, which has two effects:
 
 Simple example:
 
-    version: '2'
+    version: '3'
     services:
       web:
         build: .
@@ -1210,12 +1180,20 @@ volumes:
     target: /opt/app/static
 ```
 
+### restart
+
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+
+      - restart: no
+      - restart: always
+      - restart: on-failure
+
 > **Note:** The long syntax is new in v3.2
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
-### domainname, hostname, ipc, mac\_address, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -1230,7 +1208,6 @@ Each of these is a single value, analogous to its
 
     privileged: true
 
-    restart: always
 
     read_only: true
     shm_size: 64M
@@ -1432,6 +1409,8 @@ A full example:
       config:
         - subnet: 172.28.0.0/16
 
+> **Note**: Additional IPAM configurations, such as `gateway`, are only honored for version 2 at the moment.
+
 ### internal
 
 By default, Docker also connects a bridge network to it to provide external
@@ -1532,8 +1511,6 @@ stack.
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Sample app with swarm mode](/engine/getstarted-voting-app/)
-- [Get started with Django](/compose/django/)
-- [Get started with Rails](/compose/rails/)
-- [Get started with WordPress](/compose/wordpress/)
+- [Get started with Docker](/get-started/)
+- [Samples](/samples/)
 - [Command line reference](/compose/reference/)

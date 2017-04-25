@@ -116,13 +116,13 @@ Try this now.
     `dry-run-test` image.
 
     ```bash
-    $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
+    $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/moby/moby dry-run-test /bin/bash
     ```
 
 3.  Run the tests using the `hack/make.sh` script.
 
     ```bash
-    root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
+    root@5f8630b873fe:/go/src/github.com/moby/moby# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
     ```
 
     The tests run just as they did within your local host.
@@ -131,7 +131,7 @@ Try this now.
     just the unit tests:
 
     ```bash
-    root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit
+    root@5f8630b873fe:/go/src/github.com/moby/moby# hack/make.sh dynbinary binary cross test-unit
     ```
 
     Most test targets require that you build these precursor targets first:
@@ -179,7 +179,7 @@ $ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration-cli
 To run the same test inside your Docker development container, you do this:
 
 ```bash
-root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
+root@5f8630b873fe:/go/src/github.com/moby/moby# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
 ```
 
 ## Test the Windows binary against a Linux daemon
@@ -197,7 +197,7 @@ run a Bash terminal on Windows.
 2.  Change to the `docker` source directory.
 
     ```bash
-    $ cd /c/gopath/src/github.com/docker/docker
+    $ cd /c/gopath/src/github.com/moby/moby
     ```
 
 3.  Set `DOCKER_REMOTE_DAEMON` as follows:

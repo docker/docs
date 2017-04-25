@@ -20,8 +20,7 @@ identical to the container name.
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
-    version: '2'
-
+    version: "3"
     services:
       web:
         build: .
@@ -55,8 +54,9 @@ If any containers have connections open to the old container, they will be close
 
 Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
 
-    version: '2'
+    version: "3"
     services:
+      
       web:
         build: .
         links:
@@ -67,6 +67,8 @@ Links allow you to define extra aliases by which a service is reachable from ano
 See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
+
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode consult the [Docker Stacks](/compose/bundles.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
@@ -80,28 +82,28 @@ Each service can specify what networks to connect to with the *service-level* `n
 
 Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
 
-    version: '2'
-
+    version: "3"
     services:
+      
       proxy:
         build: ./proxy
         networks:
-          - front
+          - frontend
       app:
         build: ./app
         networks:
-          - front
-          - back
+          - frontend
+          - backend
       db:
         image: postgres
         networks:
-          - back
+          - backend
 
     networks:
-      front:
+      frontend:
         # Use a custom driver
         driver: custom-driver-1
-      back:
+      backend:
         # Use a custom driver which takes special options
         driver: custom-driver-2
         driver_opts:
@@ -119,9 +121,9 @@ For full details of the network configuration options available, see the followi
 
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
-    version: '2'
-
+    version: "3"
     services:
+    
       web:
         build: .
         ports:

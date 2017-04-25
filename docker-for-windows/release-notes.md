@@ -574,7 +574,7 @@ We did not distribute a 1.12.4 stable release
 
 **Bug fixes and minor changes**
 
-- Time drifts between Windows and Linux containers should disapear
+- Time drifts between Windows and Linux containers should disappear
 - VPNKit: Improved diagnostics
 - Improvements in drive sharing code
 - Removed the legacy "Disable oplocks" trick for enabling Windows Containers on older insider previews
@@ -605,7 +605,7 @@ dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
 
 **Bug fixes and minor changes**
 
-- Time drifts between Windows and Linux containers should disapear
+- Time drifts between Windows and Linux containers should disappear
 - VPNKit: Improved diagnostics
 - Improvements in drive sharing code
 - Removed the legacy "Disable oplocks" trick for enabling Windows Containers on older insider previews

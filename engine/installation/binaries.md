@@ -36,9 +36,9 @@ meets the prerequisites:
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
   `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount
   point is not sufficient. See Github issues
-  [#2683](https://github.com/docker/docker/issues/2683),
-  [#3485](https://github.com/docker/docker/issues/3485),
-  [#4568](https://github.com/docker/docker/issues/4568)).
+  [#2683](https://github.com/moby/moby/issues/2683),
+  [#3485](https://github.com/moby/moby/issues/3485),
+  [#4568](https://github.com/moby/moby/issues/4568)).
 
 #### Secure your environment as much as possible
 
@@ -68,7 +68,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 1.  Download the static binary archive. You can download either the latest
     release binaries or a specific version. To find the download link, see the
-    [release notes](https://github.com/docker/docker/releases) for the version
+    [release notes](https://github.com/moby/moby/releases) for the version
     of Docker you want to install. You can choose a `tar.gz` archive or `zip`
     archive.
 
@@ -123,7 +123,7 @@ The macOS binary includes the Docker client only. It does not include the
 
 1.  Download the static binary archive. You can download either the latest
     release binaries or a specific version. To find the download link, see the
-    [release notes](https://github.com/docker/docker/releases) for the version
+    [release notes](https://github.com/moby/moby/releases) for the version
     of Docker you want to install. You can choose a `tar.gz` archive or
     `zip` archive.
 

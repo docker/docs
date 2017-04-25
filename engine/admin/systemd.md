@@ -60,15 +60,16 @@ To accomplish this, set the following flags in the `daemon.json` file:
 }
 ```
 
-### HTTP proxy
+### HTTP/HTTPS proxy
 
-The Docker daemon uses the `HTTP_PROXY` and `NO_PROXY` environmental variables in
-its start-up environment to configure HTTP proxy behavior. You cannot configure
+The Docker daemon uses the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` environmental variables in
+its start-up environment to configure HTTP or HTTPS proxy behavior. You cannot configure
+
 these environment variables using the `daemon.json` file.
 
 This example overrides the default `docker.service` file.
 
-If you are behind an HTTP proxy server, for example in corporate settings,
+If you are behind an HTTP or HTTPS proxy server, for example in corporate settings,
 you will need to add this configuration in the Docker systemd service file.
 
 1.  Create a systemd drop-in directory for the docker service:
@@ -85,11 +86,26 @@ you will need to add this configuration in the Docker systemd service file.
     Environment="HTTP_PROXY=http://proxy.example.com:80/"
     ```
 
+    Or, if you are behind an HTTPS proxy server, create a file called
+    `/etc/systemd/system/docker.service.d/https-proxy.conf`
+    that adds the `HTTPS_PROXY` environment variable:
+
+    ```conf
+    [Service]
+    Environment="HTTPS_PROXY=https://proxy.example.com:443/"
+    ```
+
 3.  If you have internal Docker registries that you need to contact without
     proxying you can specify them via the `NO_PROXY` environment variable:
 
     ```conf
     Environment="HTTP_PROXY=http://proxy.example.com:80/" "NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"
+    ```
+
+    Or, if you are behind an HTTPS proxy server:
+
+    ```conf
+    Environment="HTTPS_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"
     ```
 
 4.  Flush changes:
@@ -111,10 +127,17 @@ you will need to add this configuration in the Docker systemd service file.
     Environment=HTTP_PROXY=http://proxy.example.com:80/
     ```
 
+    Or, if you are behind an HTTPS proxy server:
+
+    ```bash
+    $ systemctl show --property=Environment docker
+    Environment=HTTPS_PROXY=https://proxy.example.com:443/
+    ```
+
 ## Manually creating the systemd unit files
 
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files
 (`service` and `socket`) from [the github
-repository](https://github.com/docker/docker/tree/master/contrib/init/systemd)
+repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.

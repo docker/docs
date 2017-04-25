@@ -846,3 +846,66 @@ the information from a Docker-managed secret instead of being passed directly.
 >**Note**: Docker secrets do not set environment variables directly. This was a
 conscious decision, because environment variables can unintentionally be leaked
 between containers (for instance, if you use `--link`).
+
+## Use Secrets in Compose
+
+```
+version: '3.1'
+
+services:
+   db:
+     image: mysql:latest
+     volumes:
+       - db_data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_root_password
+       - db_password
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_password
+
+
+secrets:
+   db_password:
+     file: db_password.txt
+   db_root_password:
+     file: db_root_password.txt
+
+volumes:
+    db_data:
+```
+
+This example creates a simple WordPress site using two secrets in
+a compose file.
+
+The keyword `secrets:` defines two secrets `db_password:` and `db_root_password:`.
+
+When deploying, Docker will create these two secrets and populate them with the
+content from the file specified in the compose file.
+
+The db service uses both secrets, and the wordpress is using one.
+
+When you deploy, Docker will mount a file under `/run/secrets/<secret_name>` in the
+services. These files are never persisted in disk, they're managed in memory
+
+Each service has environment variables to specify where the service should look for
+that secret data.
+
+More information on short and long syntax for secrets can be found at
+[Compose file version 3 reference](/compose/compose-file/index.md#secrets).
+

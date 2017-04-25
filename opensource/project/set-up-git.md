@@ -23,7 +23,7 @@ To fork and clone Docker:
 
 1. Open a browser and log into GitHub with your account.
 
-2. Go to the <a href="https://github.com/docker/docker"
+2. Go to the <a href="https://github.com/moby/moby"
 target="_blank">docker/docker repository</a>.
 
 3. Click the "Fork" button in the upper right corner of the GitHub interface.
@@ -129,7 +129,7 @@ To configure your username, email, and add a remote:
 4. Set your local repo to track changes upstream, on the `docker` repository.
 
    ```bash
-   $ git remote add upstream https://github.com/docker/docker.git
+   $ git remote add upstream https://github.com/moby/moby.git
    ```
 
 5. Check the result in your `git` configuration.
@@ -146,7 +146,7 @@ To configure your username, email, and add a remote:
    branch.master.merge=refs/heads/master
    user.name=Mary Anthony
    user.email=mary@docker.com
-   remote.upstream.url=https://github.com/docker/docker.git
+   remote.upstream.url=https://github.com/moby/moby.git
    remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
    ```
 
@@ -156,8 +156,8 @@ To configure your username, email, and add a remote:
    $ git remote -v
    origin	https://github.com/moxiegirl/docker.git (fetch)
    origin	https://github.com/moxiegirl/docker.git (push)
-   upstream https://github.com/docker/docker.git (fetch)
-   upstream https://github.com/docker/docker.git (push)
+   upstream https://github.com/moby/moby.git (fetch)
+   upstream https://github.com/moby/moby.git (push)
    ```
 
 ## Task 3. Create and push a branch

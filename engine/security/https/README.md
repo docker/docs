@@ -10,7 +10,7 @@ At this point, it has to be a manual thing, and I've been running it in boot2doc
 My process is as following:
 
     $ boot2docker ssh
-    root@boot2docker:/# git clone https://github.com/docker/docker
+    root@boot2docker:/# git clone https://github.com/moby/moby
     root@boot2docker:/# cd docker/docs/articles/https
     root@boot2docker:/# make cert
 

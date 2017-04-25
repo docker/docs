@@ -33,6 +33,8 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 
     74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 
+<p style="text-align:center;"><img src="bridge1.png" alt="bridge1"></p>
+
 Inspecting the network is an easy way to find out the container's IP address.
 
 ```bash
@@ -63,12 +65,6 @@ $ docker network inspect bridge
                 "MacAddress": "02:42:ac:11:00:02",
                 "IPv4Address": "172.17.0.2/16",
                 "IPv6Address": ""
-            },
-            "94447ca479852d29aeddca75c28f7104df3c3196d7b6d83061879e339946805c": {
-                "EndpointID": "b047d090f446ac49747d3c37d63e4307be745876db7f0ceef7b311cbba615f48",
-                "MacAddress": "02:42:ac:11:00:03",
-                "IPv4Address": "172.17.0.3/16",
-                "IPv6Address": ""
             }
         },
         "Options": {
@@ -94,7 +90,7 @@ While you can disconnect a container from a network, you cannot remove the  buil
 
 Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, you'll create a bridge network:
 
-    $ docker network create -d bridge my-bridge-network
+    $ docker network create -d bridge my_bridge
 
 The `-d` flag tells Docker to use the `bridge` driver for the new network. You could have left this flag off as `bridge` is the default value for this flag. Go ahead and list the networks on your machine:
 
@@ -102,17 +98,17 @@ The `-d` flag tells Docker to use the `bridge` driver for the new network. You c
 
     NETWORK ID          NAME                DRIVER
     7b369448dccb        bridge              bridge
-    615d565d498c        my-bridge-network   bridge
+    615d565d498c        my_bridge           bridge
     18a2866682b8        none                null
     c288470c46f6        host                host
 
 If you inspect the network, you'll find that it has nothing in it.
 
-    $ docker network inspect my-bridge-network
+    $ docker network inspect my_bridge
 
     [
         {
-            "Name": "my-bridge-network",
+            "Name": "my_bridge",
             "Id": "5a8afc6364bccb199540e133e63adb76a557906dd9ff82b94183fc48c40857ac",
             "Scope": "local",
             "Driver": "bridge",
@@ -120,8 +116,8 @@ If you inspect the network, you'll find that it has nothing in it.
                 "Driver": "default",
                 "Config": [
                     {
-                        "Subnet": "172.18.0.0/16",
-                        "Gateway": "172.18.0.1"
+                        "Subnet": "10.0.0.0/24",
+                        "Gateway": "10.0.0.1"
                     }
                 ]
             },
@@ -137,23 +133,25 @@ To build web applications that act in concert but do so securely, create a
 network. Networks, by definition, provide complete isolation for containers. You
 can add containers to a network when you first run a container.
 
-Launch a container running a PostgreSQL database and pass it the `--net=my-bridge-network` flag to connect it to your new network:
+Launch a container running a PostgreSQL database and pass it the `--net=my_bridge` flag to connect it to your new network:
 
-    $ docker run -d --net=my-bridge-network --name db training/postgres
+    $ docker run -d --net=my_bridge --name db training/postgres
 
-If you inspect your `my-bridge-network` you'll see it has a container attached.
+If you inspect your `my_bridge` you'll see it has a container attached.
 You can also inspect your container to see where it is connected:
 
     {% raw %}
     $ docker inspect --format='{{json .NetworkSettings.Networks}}'  db
     {% endraw %}
 
-    {"my-bridge-network":{"NetworkID":"7d86d31b1478e7cca9ebed7e73aa0fdeec46c5ca29497431d3007d2d9e15ed99",
-    "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.18.0.1","IPAddress":"172.18.0.2","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
+    {"my_bridge":{"NetworkID":"7d86d31b1478e7cca9ebed7e73aa0fdeec46c5ca29497431d3007d2d9e15ed99",
+    "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"10.0.0.1","IPAddress":"10.0.0.254","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 
 Now, go ahead and start your by now familiar web application. This time don't specify a network.
 
     $ docker run -d --name web training/webapp python app.py
+
+![bridge2](bridge2.png)
 
 Which network is your `web` application running under? Inspect the application and you'll find it is running in the default `bridge` network.
 
@@ -162,7 +160,7 @@ Which network is your `web` application running under? Inspect the application a
     {% endraw %}
 
     {"bridge":{"NetworkID":"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
-    "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.17.0.1","IPAddress":"172.17.0.2","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
+    "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.17.0.1","IPAddress":"10.0.0.2","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 
 Then, get the IP address of your `web`
 
@@ -185,25 +183,28 @@ Now, open a shell to your running `db` container:
 
 After a bit, use `CTRL-C` to end the `ping` and you'll find the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the `exit` command to close the container.
 
-Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running `web` app to the `my-bridge-network`.
+Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running `web` app to the `my_bridge`.
 
-    $ docker network connect my-bridge-network web
+    $ docker network connect my_bridge web
+
+
+![bridge3](bridge3.png)
 
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP Address.
 
     $ docker exec -it db bash
 
     root@a205f0dd33b2:/# ping web
-    PING web (172.18.0.3) 56(84) bytes of data.
-    64 bytes from web (172.18.0.3): icmp_seq=1 ttl=64 time=0.095 ms
-    64 bytes from web (172.18.0.3): icmp_seq=2 ttl=64 time=0.060 ms
-    64 bytes from web (172.18.0.3): icmp_seq=3 ttl=64 time=0.066 ms
+    PING web (10.0.0.2) 56(84) bytes of data.
+    64 bytes from web (10.0.0.2): icmp_seq=1 ttl=64 time=0.095 ms
+    64 bytes from web (10.0.0.2): icmp_seq=2 ttl=64 time=0.060 ms
+    64 bytes from web (10.0.0.2): icmp_seq=3 ttl=64 time=0.066 ms
     ^C
     --- web ping statistics ---
     3 packets transmitted, 3 received, 0% packet loss, time 2000ms
     rtt min/avg/max/mdev = 0.060/0.073/0.095/0.018 ms
 
-The `ping` shows it is contacting a different IP address, the address on the `my-bridge-network` which is different from its address on the `bridge` network.
+The `ping` shows it is contacting a different IP address, the address on the `my_bridge` which is different from its address on the `bridge` network.
 
 ## Next steps
 

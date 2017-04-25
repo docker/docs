@@ -28,7 +28,7 @@ This is the complete list of the available functions with examples:
 It puts a separator between each element in the list.
 
 	{% raw %}
-	$ docker ps --format '{{join .Names " or "}}'
+	$ docker inspect --format '{{join .Args " , "}}' container
 	{% endraw %}
 
 ### `json`

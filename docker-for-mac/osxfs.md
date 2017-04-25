@@ -55,10 +55,10 @@ Desktop	boot	etc	lib	lib64	media	opt	root	sbin	sys	usr
 bin	dev	home	lib32	libx32	mnt	proc	run	srv	tmp	var
 ```
 
-By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and `/tmp` 
+By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and `/tmp`
 directly.
-To add or remove directory trees that are exported to Docker, use the 
-**File sharing** tab in Docker preferences ![Docker Preferences]("docker-for-mac/images/whale-x.png) -> **Preferences** ->
+To add or remove directory trees that are exported to Docker, use the
+**File sharing** tab in Docker preferences ![Docker Preferences](images/whale-x.png) -> **Preferences** ->
 **File sharing**. (See [Preferences](index.md#preferences).)
 
 All other paths
@@ -171,7 +171,7 @@ you may experience exceptional, adequate, or poor performance with `osxfs`, the
 file system server in Docker for Mac. File system APIs are very wide (20-40
 message types) with many intricate semantics  involving on-disk state, in-memory
 cache state, and concurrent access by multiple  processes. Additionally, `osxfs`
-integrates   a mapping between macOS's FSEvents API and Linux's  inotify API
+integrates a mapping between macOS's FSEvents API and Linux's `inotify` API
 which is implemented inside of the file system itself complicating matters
 further (cache behavior in particular).
 
@@ -317,7 +317,7 @@ the Beta channel in the coming release cycles.
 
 In due course, we will open source all of our shared file system components. At
 that time, we would be very happy to collaborate with you on improving the
-implementation of osxfs and related software.
+implementation of `osxfs` and related software.
 
 We still have on the slate to write up and publish details of shared file system
 performance analysis and improvement on the Docker blog. Look for or nudge

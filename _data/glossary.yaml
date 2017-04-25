@@ -67,6 +67,11 @@ Docker: |
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
+Docker Datacenter: |
+  The Docker Datacenter is subscription-based service enabling enterprises to leverage a
+  platform built by Docker, for Docker. The Docker native tools are integrated to create
+  an on premises CaaS platform, allowing organizations to save time and seamlessly take
+  applications built in dev to production.
 Docker for Mac: |
   [Docker for Mac](/docker-for-mac/) is an easy-to-install,
   lightweight Docker development environment designed specifically for the Mac. A
@@ -145,6 +150,12 @@ Kitematic: |
   A legacy GUI, bundled with [Docker Toolbox](#toolbox), for managing Docker
   containers. We recommend upgrading to [Docker for Mac](#docker-for-mac) or
   [Docker for Windows](#docker-for-windows/), which have superseded Kitematic.
+layer: |
+  In an image, a layer is modification to the image, represented by an instruction in the
+  Dockerfile. Layers are applied in sequence to the base image to create the final image.
+  When an image is updated or rebuilt, only layers that change need to be updated, and
+  unchanged layers are cached locally. This is part of why Docker images are so fast
+  and lightweight. The sizes of each layer add up to equal the size of the final image.
 libcontainer: |
   libcontainer provides a native Go implementation for creating containers with
   namespaces, cgroups, capabilities, and filesystem access controls. It allows
@@ -165,6 +176,15 @@ Machine: |
   installs Docker on them, then configures the Docker client to talk to them.
 
   *Also known as : docker-machine*
+namespace: |
+  A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html){: target="_blank" class="_"}
+  is a Linux kernel feature that isolates and vitualizes system resources. Processes which restricted to
+  a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
+  are an important part of Docker's isolation model. Namespaces exist for each type of
+  resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
+  and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run.md)
+  and [Introduction to user namespaces](https://success.docker.com/KBase/Introduction_to_User_Namespaces_in_Docker_Engine){ :target="_blank" class="_" }.
+  
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in swarm mode.
@@ -290,3 +310,14 @@ volume: |
   delete volumes when you remove a container, nor will it "garbage collect"
   volumes that are no longer referenced by a container.
   *Also known as: data volume*
+
+  There are three types of volumes: *host, anonymous, and named*:
+
+  - A **host volume** lives on the Docker host's filesystem and can be accessed from within the container.  
+
+  - A **named volume** is a volume which Docker manages where on disk the volume is created,
+    but it is given a name.
+
+  - An **anonymous volume** is similar to a named volume, however, it can be difficult, to refer to
+    the same volume over time when it is an anonymous volumes. Docker handle where the files are stored.
+    

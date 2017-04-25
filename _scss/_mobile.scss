@@ -23,16 +23,7 @@
         font-size: 13px;
         padding: 19px 10px 11px;
     }
-    // .sidebar-home,
-    // .sidebar-home.affix,
-    // .sidebar,
-    // .sidebar.affix {
-    //     position: absolute;
-    //     width: 100%;
-    //     height: 500px;
-    //     overflow: scroll;
 
-    // }
     h1,
     h2,
     h3 {
@@ -70,15 +61,10 @@
         font-size: 13px;
         padding: 19px 10px 11px;
     }
-    .sidebar-home,
-    .sidebar-home.affix,
-    .sidebar,
-    .sidebar.affix {
-        position: absolute;
+    .sidebar {
+        position: fixed;
         width: 100%;
-        height: 500px;
-        overflow: scroll;
-
+        z-index: 100;
     }
     .content {
         padding: 50px;
@@ -179,8 +165,7 @@
         padding: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        padding: 60px 10px 100px 15px;
-        position: absolute;
+        position: fixed;
         width: 100%;
     }
     .sidebar-home,
@@ -265,8 +250,7 @@
         padding: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        padding: 10px 10px 100px 0;
-        position: absolute;
+        position: fixed;
         width: 100%;
     }
     .component-full {
@@ -357,7 +341,6 @@
     }
 }
 
-
 /* Landscape */
 @media only screen 
   and (min-device-width: 768px) 
@@ -367,9 +350,6 @@
         float: left;
         margin: 10px 15px 0 0px;
         width: 160px;
-    }
-    .navbar-toggle {
-        display: none!important;
     }
     .ctrl-right {
         display: block;
@@ -384,8 +364,16 @@
     }
 }
 
-@media (max-width: 768px) {
 .navbar-toggle {
     display: block;
+}
+
+@media (min-width: 992px) {
+    .navbar-toggle {
+        display: none;
+    }
+
+    .nav-sidebar.collapse {
+        display: block;
     }
 }

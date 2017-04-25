@@ -38,7 +38,7 @@ DTR has the ability to [clean up unreferenced manifests and layers](https://docs
 ## Built-in access control
 
 DTR uses the same authentication mechanism as Docker Universal Control Plane.
-Users can be managed manually or syched from LDAP or Active Directory. DTR
+Users can be managed manually or synched from LDAP or Active Directory. DTR
 uses [Role Based Access Control](admin/manage-users/index.md) (RBAC) to allow you to implement fine-grained
 access control policies for who has access to your Docker images.
 

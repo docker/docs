@@ -101,7 +101,7 @@ guides:
       title: Release notes
     - path: /docker-for-azure/archive/
       title: Template archive
-  - sectiontitle: Docker Toolbox (Legacy)
+  - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
       title: Toolbox overview
@@ -127,44 +127,22 @@ guides:
       title: Troubleshooting
   - path: /release-notes/
     title: Docker release notes
-- sectiontitle: Get Started
+- sectiontitle: Get started
   section:
-  - path: /learn/
-    title: Learn Docker
-  - sectiontitle: Docker basics
+  - sectiontitle: Get started with Docker
     section:
-    - path: /engine/getstarted/
-      title: Get started with Docker
-    - path: /engine/getstarted/step_one/
-      title: Install Docker and run hello-world
-    - path: /engine/getstarted/step_two/
-      title: Understand images &amp; containers
-    - path: /engine/getstarted/step_three/
-      title: Find &amp; run the whalesay image
-    - path: /engine/getstarted/step_four/
-      title: Build your own image
-    - path: /engine/getstarted/step_five/
-      title: Create a Docker Hub account &amp; repository
-    - path: /engine/getstarted/step_six/
-      title: Tag, push, &amp; pull your image
-    - path: /engine/getstarted/last_page/
-      title: Learning more
-  - sectiontitle: Define and deploy your app
-    section:
-    - path: /engine/getstarted-voting-app/
-      title: Sample app overview
-    - path: /engine/getstarted-voting-app/node-setup/
-      title: Set up Dockerized machines
-    - path: /engine/getstarted-voting-app/create-swarm/
-      title: Create a swarm
-    - path: /engine/getstarted-voting-app/deploy-app/
-      title: Deploy the app
-    - path: /engine/getstarted-voting-app/test-drive/
-      title: Try out the voting app
-    - path: /engine/getstarted-voting-app/customize-app/
-      title: Customize the app and redeploy
-    - path: /engine/getstarted-voting-app/cleanup/
-      title: Graceful shutdown, reboot, and clean-up
+    - title: "Part 1: Orientation"
+      path: /get-started/
+    - title: "Part 2: Containers"
+      path: /get-started/part2/
+    - title: "Part 3: Services"
+      path: /get-started/part3/
+    - title: "Part 4: Swarms"
+      path: /get-started/part4/
+    - title: "Part 5: Stacks"
+      path: /get-started/part5/
+    - title: "Part 6: Deploy your app"
+      path: /get-started/part6/
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
@@ -173,10 +151,10 @@ guides:
       title: Manage data in containers
   - path: /engine/docker-overview/
     title: Docker overview
-- sectiontitle: User Guide
+- sectiontitle: User guide
   section:
-  - path: /engine/userguide/intro/
-    title: Introduction
+  - path: /engine/userguide/
+    title: Overview
   - sectiontitle: Work with images
     section:
     - path: /engine/userguide/eng-image/dockerfile_best-practices/
@@ -241,7 +219,7 @@ guides:
     title: Deprecated Engine features
   - path: /engine/faq/
     title: FAQ
-- sectiontitle: Admin Guide
+- sectiontitle: Admin guide
   section:
   - path: /engine/admin/
     title: Configuring and running Docker
@@ -287,8 +265,8 @@ guides:
     title: Using Chef
   - path: /engine/admin/puppet/
     title: Using Puppet
-  - path: /engine/admin/using_supervisord/
-    title: Using Supervisor with Docker
+  - path: /engine/admin/multi-service_containers/
+    title: Run multiple services in a container
   - path: /engine/admin/runmetrics/
     title: Runtime metrics
   - path: /engine/admin/ambassador_pattern_linking/
@@ -393,11 +371,11 @@ guides:
     title: Volume plugins
   - path: /engine/extend/plugin_api/
     title: Plugins API
-- sectiontitle: Open Source at Docker
+- sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
     title: Quickstart contribution
-  - sectiontitle: Set up for Engine Development
+  - sectiontitle: Set up for Engine development
     section:
     - path: /opensource/project/who-written-for/
       title: README first
@@ -1232,7 +1210,7 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
-- sectiontitle: Commercially Supported Docker Engine
+- sectiontitle: Commercially supported Docker Engine
   section:
   - sectiontitle: 1.13
     section:
@@ -1263,7 +1241,7 @@ manuals:
   - path: /docker-cloud/orgs/
     title: Organizations and teams
 
-  - sectiontitle: Manage Builds and Images
+  - sectiontitle: Manage builds and images
     section:
     - path: /docker-cloud/builds/
       title: Builds and images overview
@@ -1281,7 +1259,7 @@ manuals:
       title: Automated repository tests
     - path: /docker-cloud/builds/advanced/
       title: Advanced options for autobuild and autotest
-  - sectiontitle: Manage Swarms (Beta Swarm Mode)
+  - sectiontitle: Manage swarms (beta swarm mode)
     section:
     - path: /docker-cloud/cloud-swarm/
       title: Overview
@@ -1295,7 +1273,7 @@ manuals:
       title: Connect to a swarm through Docker Cloud
     - path: /docker-cloud/cloud-swarm/link-aws-swarm/
       title: Link to Amazon Web Services to create swarms
-  - sectiontitle: Manage Infrastructure (Standard Mode)
+  - sectiontitle: Manage infrastructure (standard mode)
     section:
     - path: /docker-cloud/infrastructure/
       title: Infrastructure overview
@@ -1321,11 +1299,11 @@ manuals:
       title: Using Docker Cloud and Packet.net
     - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
       title: Using Docker Cloud on AWS
-  - sectiontitle: Manage Nodes and Apps (Standard Mode)
+  - sectiontitle: Manage nodes and apps (standard mode)
     section:
     - path: /docker-cloud/standard/
       title: Overview
-    - sectiontitle: Getting Started
+    - sectiontitle: Getting started
       section:
       - path: /docker-cloud/getting-started/
         title: Getting started with Docker Cloud
@@ -1363,7 +1341,7 @@ manuals:
           title: Stackfiles for your service
         - path: /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
           title: Data management with volumes
-    - sectiontitle: Manage Applications
+    - sectiontitle: Manage applications
       section:
       - path: /docker-cloud/apps/
         title: Applications in Docker Cloud
@@ -1472,7 +1450,7 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-  - sectiontitle: Compose File Reference
+  - sectiontitle: Compose file reference
     section:
     - path: /compose/compose-file/
       title: Version 3
@@ -1508,6 +1486,8 @@ manuals:
     title: Deploy Datacenter on AWS
   - path: /datacenter/install/linux/
     title: Deploy Datacenter on Linux
+  - path: /datacenter/install/azure/
+    title: Deploy Datacenter on Azure
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.1/guides/
@@ -1964,7 +1944,7 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
           title: Deploy an app from the CLI
-      - sectiontitle: UCP Tool CLI
+      - sectiontitle: UCP tool CLI
         section:
         - path: /datacenter/ucp/1.1/reference/
           title: UCP tool v1.1 overview

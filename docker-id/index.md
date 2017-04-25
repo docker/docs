@@ -50,4 +50,4 @@ You can also log in using the `docker login` command. (You can read more about `
 > **Warning**: When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the
-[Docker credential helpers](https://github.com/docker/docker-credential-helpers).
+[Docker credential helpers](https://github.com/moby/moby-credential-helpers).

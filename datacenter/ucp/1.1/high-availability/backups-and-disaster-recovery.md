@@ -63,6 +63,7 @@ Enter passphrase: secret
 
 The example below shows how to restore a UCP controller node from an existing
 backup.
+When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
 
 First find out the Id of the UCP replica you want to restore:
 

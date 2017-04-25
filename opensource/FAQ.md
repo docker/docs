@@ -14,7 +14,7 @@ troubleshooting problems in your code contribution.
 - [How should I comment my code?](FAQ.md#how-should-i-comment-my-code)
 - [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch)
 
-## How do I set my signature {#how-do-i-set-my-signature}
+## How do I set my signature
 
 1.  Change to the root of your `docker-fork` repository.
 
@@ -47,7 +47,7 @@ Set your local repo to track changes upstream, on the `docker` repository.
 2.  Add a remote called `upstream` that points to `docker/docker`.
 
     ```
-    $ git remote add upstream https://github.com/docker/docker.git
+    $ git remote add upstream https://github.com/moby/moby.git
     ```
 
 ## How do I format my Go code
