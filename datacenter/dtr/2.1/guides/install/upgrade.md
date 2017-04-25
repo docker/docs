@@ -15,8 +15,8 @@ business peak hours to ensure the impact on your business is close to none.
 
 > **Warning**
 >
-> Before performing any upgrade it’s important to backup. See 
-> [docker/dtr backup](/datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/).
+> Before performing any upgrade it’s important to backup. See
+> [docker/dtr backup](/datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery.md).
 {: .warning}
 
 ## Step 1. Upgrade DTR to 2.0

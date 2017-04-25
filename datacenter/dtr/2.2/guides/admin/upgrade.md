@@ -19,7 +19,7 @@ support upgrades according to the following rules:
   version for your major version first.
 
 | Description                          | From  | To        | Supported |
-|:-------------------------------------|:------|:----------|-----------|
+|:-------------------------------------|:------|:----------|:----------|
 | patch upgrade                        | x.y.0 | x.y.1     | yes       |
 | skip patch version                   | x.y.0 | x.y.2     | yes       |
 | patch downgrade                      | x.y.2 | x.y.1     | no        |
@@ -43,8 +43,8 @@ link to the compatibility matrix)-->
 
 > **Warning**
 >
-> Before performing any upgrade it’s important to backup. See 
-> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/).
+> Before performing any upgrade it’s important to backup. See
+> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery.md).
 {: .warning}
 
 ### Step 1. Upgrade DTR to 2.1 if necessary
