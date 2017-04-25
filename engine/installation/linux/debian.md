@@ -247,7 +247,7 @@ to install.
 
 ### Install on Raspian (Raspberry Pi)
 >**Warning**: This isn't necessary if you used the recommended
->```bash $ curl -sSL https://get.docker.com | sh ``` command!
+>`$ curl -sSL https://get.docker.com | sh` command!
 
 Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
 see `docker.list` if you:
