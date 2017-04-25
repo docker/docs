@@ -131,10 +131,12 @@ realtime scheduler, for tasks which cannot use the CFS scheduler. You need to
 before you can [configure the Docker daemon](#configure-the-docker-daemon) or
 [configure individual containers](#configure-individual-containers).
 
->**Warning**: CPU scheduling and prioritization are advanced kernel-level
+>**Warning**:
+>CPU scheduling and prioritization are advanced kernel-level
 features. Most users do not need to change these values from their defaults.
 Setting these values incorrectly can cause your host system to become unstable
 or unusable.
+{:.warning}
 
 #### Configure the host machine's kernel
 

@@ -71,8 +71,9 @@ If you need several VMs and want to manage the version of the Docker client or s
 
 >**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
 
-> **Warning**: If you install Docker for Mac on a machine where Docker Toolbox is installed, it will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
-
+> **Warning**:
+> If you install Docker for Mac on a machine where Docker Toolbox is installed, it will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
+{:.warning}
 
 ## Docker Toolbox and Docker for Mac coexistence
 
