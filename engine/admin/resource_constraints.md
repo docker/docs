@@ -51,17 +51,17 @@ Its setting can have complicated effects:
   non-swap memory. So if `--memory="300m"` and `--memory-swap="1g"`, the
   container can use 300m of memory and 700m (`1g - 300m`) swap.
 
-- If `--memory-swap` is unset, and `--memory` is set, the container can use as much swap
-  as the `--memory` setting, if the host container has swap memory configured.
-  For instance, if `--memory="300m"` and `--memory-swap` is not set, the
-  container can use 300m of memory and 300m of swap.
-
 - If `--memory-swap` is set to `0`, the setting is ignored, and the value is
   treated as unset.
 
 - If `--memory-swap` is set to the same value as `--memory`, and `--memory` is
   set to a positive integer, the effect is the same as setting `--memory-swap`
-  to `0`.
+  to `0` (the value is treated as unset).
+
+- If `--memory-swap` is unset, and `--memory` is set, the container can use
+  twice as much swap as the `--memory` setting, if the host container has swap
+  memory configured. For instance, if `--memory="300m"` and `--memory-swap` is
+  not set, the container can use 300m of memory and 600m of swap.
 
 - If `--memory-swap` is explicitly set to `-1`, the container is allowed to use
   unlimited swap, up to the amount available on the host system.
