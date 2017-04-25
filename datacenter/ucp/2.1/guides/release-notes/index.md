@@ -1,13 +1,13 @@
 ---
 title: UCP 2.1 release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
-  changes introduced in the latest versions.
+ changes introduced in the latest versions.
 keywords: Docker, UCP, release notes
 redirect_from:
 - /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
 ---
 
-Here you can learn about new features, bug fixes, breaking changes and
+Here you can learn about new features, bug fixes, breaking changes, and
 known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
@@ -25,7 +25,7 @@ of the controller nodes.
 
 The workaround is to update the contents of the `ucp-controller-server-certs`
 volume manually on each manager node with the new `ca.pem`, `cert.pem`, and
-`key.pem` contents. Update all three of these files  approximately
+`key.pem` contents. Update all three of these files approximately
 simultaneously, to avoid issues with reconciliation.
 
 **Bug fixes**
@@ -73,7 +73,7 @@ This issue will be fixed in UCP 2.1.3.
 	has stopped or become unreachable
 	* Fixed known issue in which users are unable to log into UCP UI after upgrading
 	from UCP 2.1.0 to 2.1.1 because the parameter for maximum concurrent users was
-	incorrectly defaulted to '0'
+	incorrectly defaulted to `0`
 	* Fixed an issue where the UCP manager becomes unresponsive and requires a restart
 	if `docker ps` or `docker info` calls to engine take a long time for a response
 	* HTTP Routing Mesh now correctly provides httplog for debug logging of services
@@ -209,7 +209,7 @@ Docker Engine 1.13 in the nodes that you plan to manage with UCP.
   * Support for Compose yml 3.1 to deploy stacks of services, networks, volumes,
   and secrets.
   * HTTP Routing Mesh now generally available. It now supports HTTPS passthrough
-  where the TLS termination is performed by your services, Service Name  Indication
+  where the TLS termination is performed by your services, Service Name Indication
   (SNI) extension of TLS, multiple networks for app isolation, and Sticky Sessions
   * Granular label-based access control for secrets and volumes
   (NOTE: unlike other resources controlled via label-based access control, a
