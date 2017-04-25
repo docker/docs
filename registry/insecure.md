@@ -111,9 +111,8 @@ Restart Docker for the  changes to take effect.
 
 ### Windows
 
-In your browser navigate to `https://<dtr-url>/ca` to download the TLS
-certificate used by DTR. Open Windows Explorer, right-click the
-file you've downloaded, and choose **Install certificate**.
+Open Windows Explorer, right-click the certificate, and choose
+**Install certificate**.
 
 Then, select the following options:
 
@@ -124,5 +123,3 @@ Then, select the following options:
 [Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal)
 
 After adding the CA certificate to Windows, restart Docker for Windows.
-
-
