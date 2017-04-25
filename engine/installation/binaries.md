@@ -162,10 +162,10 @@ The macOS binary includes the Docker client only. It does not include the
 You can install Docker from binaries on Windows Server 2016 or Windows 10.
 
 - To install both client and server binaries, download the 64-bit binary. The
-  archive includes `x86.64` in the file name.
+  archive includes `x86_64` in the path.
 
 - To install the client only, download the 32-bit binary. The archive includes
-  `i386` in the file name.
+  `i386` in the path.
 
 1.  Use the following PowerShell commands to install and start Docker:
 
