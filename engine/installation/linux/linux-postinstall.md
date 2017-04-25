@@ -18,9 +18,11 @@ If you don't want to use `sudo` when you use the `docker` command, create a Unix
 group called `docker` and add users to it. When the `docker` daemon starts, it
 makes the ownership of the Unix socket read/writable by the `docker` group.
 
-> **Warning**: The `docker` group grants privileges equivalent to the `root`
+> **Warning**:
+> The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
 > [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
+{:.warning}
 
 To create the `docker` group and add your user:
 

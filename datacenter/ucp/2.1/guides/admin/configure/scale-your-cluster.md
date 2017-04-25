@@ -77,8 +77,10 @@ in UCP.
    SSH and run `docker swarm leave --force` directly against the local docker
    engine. 
    
-   >**Warning**: Do not perform this step if the node is still a manager, as
+   >**Warning**:
+   >Do not perform this step if the node is still a manager, as
    >that may cause loss of quorum.
+   {:.warning}
 
 3. Now that the status of the node is reported as `Down`, you may remove the
    node:

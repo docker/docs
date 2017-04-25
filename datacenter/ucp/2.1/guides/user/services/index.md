@@ -117,10 +117,7 @@ volumes:
 > When "Services" is selected, you can define services in this YAML file that
 have a `deploy:` key, which schedules the containers on certain nodes, defines
 their restart behavior, configures the number of replicas, and so on. These
-features are provided by the Compose V3 file format, which is currently in beta.
-You can [read the pre-release documentation for Compose V3 on Docker's preview
-URL for the upcoming Compose
-documentation](http://docker-docs-vnext-compose.netlify.com/compose/compose-file/#/deploy).
+features are provided by the [Compose V3 file format](/compose/compose-file/index.md).
 
 Give the application a name (such as "VotingApp" used here), and click
 **Create**.

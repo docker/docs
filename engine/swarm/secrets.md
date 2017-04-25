@@ -45,11 +45,13 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for secrets as for the rest of the swarm
 management data.
 
->**Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
+>**Warning**:
+>Raft data is encrypted in Docker 1.13 and higher. If any of your
 Swarm managers run an earlier version, and one of those managers becomes the
 manager of the swarm, the secrets will be stored unencrypted in that node's Raft
 logs. Before adding any secrets, update all of your manager nodes to Docker 1.13
 to prevent secrets from being written to plain-text Raft logs.
+{:.warning}
 
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem at

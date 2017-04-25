@@ -36,8 +36,10 @@ between UCP and DTR, and
 between DTR and your Docker Engine/docker-trusted-registry/repos-and-images/,
 but for our sandbox deployment we can skip this.
 
-> **Warning**: These steps produce an insecure DTR connection. Do not use these
+> **Warning**:
+> These steps produce an insecure DTR connection. Do not use these
 configuration steps for a production deployment.
+{:.warning}
 
 To allow the Docker Engine to connect to DTR despite it having a self-signed
 certificate, we'll specify that there is one insecure registry that we'll allow

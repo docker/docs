@@ -109,11 +109,13 @@ The following image depicts the various signing keys and their relationships:
 
 ![Content trust components](images/trust_components.png)
 
->**WARNING**: Loss of the root key is **very difficult** to recover from.
+>**WARNING**:
+> Loss of the root key is **very difficult** to recover from.
 >Correcting this loss requires intervention from [Docker
 >Support](https://support.docker.com) to reset the repository state. This loss
 >also requires **manual intervention** from every consumer that used a signed
 >tag from this repository prior to the loss.
+{:.warning}
 
 You should backup the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
