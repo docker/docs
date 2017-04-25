@@ -47,6 +47,7 @@ for [Memory Resource Controller](https://www.kernel.org/doc/Documentation/cgroup
       that can be used, and `--memory` controls the amount used by non-swap
       memory. So if `--memory="300m"` and `--memory-swap="1g"`, the container
       can use 300m of memory and 700m (1g - 300m) swap.
+- If set to the same value as `--memory`, no swap will be allowed.
 - If set to `-1` (the default), the container is allowed to use unlimited swap memory.
 
 ### `--memory-swappiness` details
