@@ -295,6 +295,20 @@ installing Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
+#### (Optional) Install Docker Compose for Raspbian
+
+This functionality is provided by [Hypriot](https://blog.hypriot.com/). Add the Hypriot repo:
+
+```bash
+curl -s https://packagecloud.io/install/repositories/Hypriot/Schatzkiste/script.deb.sh | sudo bash
+```
+
+Install `docker-compose`:
+
+```bash
+sudo apt-get install docker-compose
+```
+
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker CE, you can download the
