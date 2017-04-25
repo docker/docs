@@ -90,7 +90,7 @@ explanation and list of prerequisites.
 * **Relationship to Docker Machine**: Installing Docker for Mac does not affect
   machines you created with Docker Machine. You'll get the option to copy
   containers and images from your local `default` machine (if one exists) to the
-  new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/)" VM. When
+  new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/) VM. When
   you are running Docker for Mac, you do not need Docker Machine nodes running
   at all locally (or anywhere else). With Docker for Mac, you have a new, native
   virtualization system running (HyperKit) which takes the place of the
