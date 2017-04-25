@@ -282,7 +282,7 @@ installing Docker.
     > **NOTE**: By default, Docker on Raspian is Docker Community Edition, so
     > there is no need to specify docker-ce.
 
-    > **NOTE**: If ```bash $ curl -sSL https://get.docker.com | sh ``` isn't used,
+    > **NOTE**: If `curl -sSL https://get.docker.com | sh` isn't used,
     > then docker won't have auto-completion! You'll have to add it manually.
 
 3.  Verify that Docker is installed correctly by running the `hello-world`
