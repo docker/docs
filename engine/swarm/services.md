@@ -394,40 +394,28 @@ option to the `--publish` flag.
 > `--mode=global` flag on `docker service  create`, it will be difficult to know
 > which nodes are running the service in order to route work to them.
 
-##### Example: Run a `cadvisor` monitoring service on every swarm node
+##### Example: Run a `nginx` web server service on every swarm node
 
-[Google cAdvisor](https://hub.docker.com/r/google/cadvisor/) is a tool for
-monitoring Linux hosts which run containers. Typically, cAdvisor is run as a
-stand-alone container, because it is designed to monitor a given Docker Engine
-instance. If you run cAdvisor as a service using the routing mesh, connecting
-to the cAdvisor port on any swarm node will show you the statistics for
-(effectively) **a random swarm node** running the service. This is probably not
-what you want.
+[nginx](https://hub.docker.com/_/nginx/) is an open source reverse proxy, load balancer, HTTP cache, and a web server. If you run nginx as a service using the routing mesh, connecting
+to the nginx port on any swarm node will show you the web page for
+(effectively) **a random swarm node** running the service.
 
-The following example runs cAdvisor as a service on each node in your swarm and
-exposes cAdvisor port locally on each swarm node. Connecting to the cAdvisor
-port on a given node will show you **that node's** statistics. In practice, this
-is similar to running a single stand-alone cAdvisor container on each node, but
-without the need to manually administer those containers.
+The following example runs nginx as a service on each node in your swarm and
+exposes nginx port locally on each swarm node.
 
 ```bash
 $ docker service create \
   --mode global \
-  --mount type=bind,source=/,destination=/rootfs,ro=1 \
-  --mount type=bind,source=/var/run,destination=/var/run \
-  --mount type=bind,source=/sys,destination=/sys,ro=1 \
-  --mount type=bind,source=/var/lib/docker/,destination=/var/lib/docker,ro=1 \
-  --publish mode=host,target=8080,published=8080 \
-  --name=cadvisor \
-  google/cadvisor:latest
+  --publish mode=host,target=80,published=8080 \
+  --name=nginx \
+  nginx:latest
 ```
 
-You can reach cAdvisor on port 8080 of every swarm node. If you add a node to
-the swarm, a cAdvisor task will be started on it. You cannot start another
+You can reach the nginx server on port 8080 of every swarm node. If you add a node to
+the swarm, a nginx task will be started on it. You cannot start another
 service or container on any swarm node which binds to port 8080.
 
-> **Note**: This is a naive example that works well for system monitoring
-> applications and similar types of software. Creating an application-layer
+> **Note**: This is a naive example. Creating an application-layer
 > routing framework for a multi-tiered service is complex and out of scope for
 > this topic.
 
