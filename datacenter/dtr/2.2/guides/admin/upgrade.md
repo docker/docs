@@ -44,7 +44,7 @@ link to the compatibility matrix)-->
 > **Warning**
 >
 > Before performing any upgrade it’s important to backup. See 
-> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/.md).
+> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/).
 {: .warning}
 
 ### Step 1. Upgrade DTR to 2.1 if necessary
