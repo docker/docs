@@ -5,7 +5,7 @@ title: Docker Trusted Registry system requirements
 ---
 
 Docker Trusted Registry can be installed on-premises or on the cloud.
-Before installing, be sure your infrastructure has these requirements.
+Before installing, be sure your infrastructure meets these requirements.
 
 ## Software requirements
 
