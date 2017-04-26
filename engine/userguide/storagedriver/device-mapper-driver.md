@@ -401,14 +401,16 @@ NAME			   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 xvda			   202:0	0	 8G  0 disk
 └─xvda1			   202:1	0	 8G  0 part /
 xvdf			   202:80	0	10G  0 disk
-├─docker-thinpool_tmeta		   253:0	0	90G  0 lvm
-│ └─docker-202:1-1032-pool 253:2	0	10G  0 dm
+├─docker-thinpool_tmeta	   253:0	0	90G  0 lvm
+│ └─docker-thinpool        253:2	0	10G  0 lvm
 └─docker-thinpool_tdata	   253:1	0	 4G  0 lvm
-  └─docker-202:1-1032-pool 253:2	0	10G  0 dm
+  └─docker-thinpool        253:2	0	10G  0 lvm
 ```
 
 The diagram below shows the image from prior examples updated with the detail
-from the `lsblk` command above.
+from the `lsblk` command above when no containers are running.
+
+
 
 ![](images/lsblk-diagram.jpg)
 
