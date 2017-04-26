@@ -38,11 +38,11 @@ provider.
 
 6. Choose how many swarm managers and swarm worker nodes to deploy.
 
-<font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
+    <font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
 
 7. Select the machine sizes for the managers, and for the workers.
 
-<font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
+    <font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
 
 8. Copy-paste the public SSH key you want to use to connect to the nodes.
 
