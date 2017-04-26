@@ -210,7 +210,7 @@ Simple example:
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
-> **[Version 2.1](#version-21) file format only.**
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 A healthcheck indicates that you want a dependency to wait
 for another container to be "healthy" (i.e. its healthcheck advertises a
@@ -267,8 +267,6 @@ Custom DNS search domains. Can be a single value or a list.
       - dc2.example.com
 
 ### tmpfs
-
-> [Version 2 file format](compose-versioning.md#version-2) and up.
 
 Mount a temporary file system inside the container. Can be a single value or a list.
 
@@ -423,8 +421,6 @@ An entry with the ip address and hostname will be created in `/etc/hosts` inside
 
 ### group_add
 
-> [Version 2 file format](compose-versioning.md#version-2) only.
-
 Specify additional groups (by name or number) which the user inside the
 container will be a member of. Groups must exist in both the container and the
 host system to be added. An example of where this is useful is when multiple
@@ -501,7 +497,7 @@ options and tags it with the specified tag.
 
 ### init
 
-> [Added in version 2.2 file format](#version-22).
+> [Added in version 2.2 file format](compose-versioning.md#version-22).
 
 Run an init inside the container that forwards signals and reaps processes.
 Either set a boolean value to use the default `init`, or specify a path to
@@ -522,7 +518,7 @@ a custom one.
 
 ### isolation
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
@@ -569,8 +565,6 @@ Links also express dependency between services in the same way as
 
 ### logging
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. Used instead of version 1
-> options for [log_driver](#log_driver) and [log_opt](#log_opt).
 
 Logging configuration for the service.
 
@@ -599,16 +593,6 @@ Logging options are key-value pairs. An example of `syslog` options:
 
     driver: "syslog"
     options:
-      syslog-address: "tcp://192.168.0.42:123"
-
-### log_opt
-
-> [Version 1 file format](compose-versioning.md#version-1) only. In version 2, use
-> [logging](#logging).
-
-Specify logging options as key-value pairs. An example of `syslog` options:
-
-    log_opt:
       syslog-address: "tcp://192.168.0.42:123"
 
 ### network_mode
@@ -720,7 +704,7 @@ An example:
 
 #### link_local_ips
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Specify a list of link-local IPs. Link-local IPs are special IPs which belong
 to a well known subnet and are purely managed by the operator, usually
@@ -754,7 +738,7 @@ containers in the bare-metal machine's namespace and vise-versa.
 
 ### pids_limit
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 
@@ -791,8 +775,6 @@ Override the default labeling scheme for each container.
 
 ### stop_grace_period
 
-> [Added in version 2 file format](#version-2)
-
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
 [`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
@@ -814,7 +796,7 @@ SIGTERM. Setting an alternative signal using `stop_signal` will cause
 
 ### sysctls
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Kernel parameters to set in the container. You can use either an array or a
 dictionary.
@@ -841,7 +823,7 @@ limit as an integer or soft/hard limits as a mapping.
 
 ### userns_mode
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
     userns_mode: "host"
 
@@ -855,8 +837,6 @@ Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 For [version 2 files](compose-versioning.md#version-2), named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
-When using [version 1](compose-versioning.md#version-1), the Docker Engine will create the named
-volume automatically if it doesn't exist.
 
 You can mount a relative path on the host, which will expand relative to
 the directory of the Compose configuration file being used. Relative paths
@@ -885,7 +865,7 @@ If you do not use a host path, you may specify a `volume_driver`.
 There are several things to note, depending on which
 [Compose file version](#versioning) you're using:
 
--   You can use `volume_driver` in [version 2 files](#version-2),
+-   You can use `volume_driver` in [version 2 files](compose-versioning.md#version-2),
     but it will only apply to anonymous volumes (those specified in the image,
     or specified under `volumes` without an explicit named volume or host path).
     To configure the driver for a named volume, use the `driver` key under the
@@ -915,7 +895,7 @@ then read-write will be used.
      - container:container_name:rw
 
 > **Note**: The `container:...` formats are only supported in the
-> [version 2 file format](#version-2). In [version 1](compose-versioning.md#version-1), you can use
+> [version 2 file format](compose-versioning.md#version-2). In [version 1](compose-versioning.md#version-1), you can use
 > container names without marking them as such:
 >
 >     - service_name
@@ -925,7 +905,7 @@ then read-write will be used.
 
 ### restart
 
-`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error. 
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
       - restart: no
       - restart: always
@@ -1062,7 +1042,7 @@ refer to it within the Compose file:
 
 ### labels
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
@@ -1112,7 +1092,7 @@ documentation for more information. Optional.
 
 ### enable_ipv6
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Enable IPv6 networking on this network.
 
@@ -1145,15 +1125,13 @@ A full example:
 
 ### internal
 
-> [Version 2 file format](compose-versioning.md#version-2) and up.
-
 By default, Docker also connects a bridge network to it to provide external
 connectivity. If you want to create an externally isolated overlay network,
 you can set this option to `true`.
 
 ### labels
 
-> [Added in version 2.1 file format](#version-21).
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
