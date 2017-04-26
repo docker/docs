@@ -331,7 +331,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     ```none
     --storage-driver=devicemapper \
-    --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool \
+    --storage-opt=dm.thinpooldev=docker-thinpool \
     --storage-opt=dm.use_deferred_removal=true \
     --storage-opt=dm.use_deferred_deletion=true
     ```
