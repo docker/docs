@@ -16,13 +16,13 @@ Edition (*Docker CE*).
 
 ## Supported platforms
 
-For the full platform support matrix, see [Install Docker](/engine/installation/#platform-support-matrix).
-
-This table shows all of the platforms that are available for Docker EE.
+The following table shows all of the platforms that are available for Docker EE.
 Each link in the first column takes you to the installation
 instructions for the corresponding platform. Docker EE is an integrated,
 supported, and certified container platform for the listed cloud providers and
 operating systems.
+
+{% include docker_platform_matrix.md %}
 
 ## Docker EE feature tiers
 
