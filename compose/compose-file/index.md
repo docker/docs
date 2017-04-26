@@ -771,6 +771,8 @@ the special form `service:[service name]`.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
+> **Note**: `network_mode: "host"` cannot be mixed with [links](#links).
+
 ### networks
 
 Networks to join, referencing entries under the
