@@ -13,7 +13,11 @@ title: Link an Amazon Web Services account
 
 You can create a role with AWS IAM (Identity and Access Management) so that Docker Cloud can provision and manage **node clusters** and **nodes** on your behalf.
 
+<<<<<<< HEAD
 [Previously](https://docs.docker.com/v1.11/docker-cloud/infrastructure/link-aws/), we recommended that you create a service user that Docker Cloud would use to access your AWS account. If you previously used this method, you can [create a new role](link-aws.md#acreate-a-dockercloud-role-role), attach the policy you created previously, unlink your AWS credentials and relink them using the new ARN method. You can then delete the `dockercloud-user`.
+=======
+Previously, we recommended that you create a service user that Docker Cloud would use to access your AWS account. If you used this method, you can [create a new role](link-aws.md#create-a-dockercloud-role-role), attach the policy you created for this purpose (see <a href="https://console.aws.amazon.com/iam/home#policies" target ="_blank">AWS polices</a>), unlink your AWS credentials and relink them using the new ARN method. You can then delete the `dockercloud-user` on AWS.
+>>>>>>> fca46e538d... screen snaps, updates per latest on staging
 
 ## Create a dockercloud-policy
 
@@ -47,7 +51,7 @@ Create an access control policy that will grant specific privileges to Docker Cl
     `iam:ListInstanceProfiles` allows the user to retrieve instance profiles to apply to your nodes.
 
     > **Note**: You cannot use an instance profile that has more permissions than the IAM user you are using with Docker Cloud. If you do that, you will get an "unauthorized operation" error. You can fix this issue by adding the `"Action":"iam:PassRole"` permission to the policy for the service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>.
-    
+
 6.  Click **Validate Policy**.
 7.  If the validation is successful click **Create Policy**.
 

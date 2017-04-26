@@ -5,12 +5,14 @@ keywords: Azure, Cloud, link
 title: Link Microsoft Azure Cloud Services to Docker Cloud
 ---
 
-You can link your Microsoft Azure account so that Docker Cloud can provision and
+You can link your [Microsoft Azure Cloud Services](https://portal.azure.com/) account so that Docker Cloud can provision and
 manage swarms on your behalf.
 
-For this, you will need your Azure subscription ID to authenticate Docker to your service provider.
+For this, you will need an SSH key and your Azure subscription ID to authenticate Docker to your service provider.
 
-> **Note**: When you are ready to create and deploy swarms, you must also have an [SSH key](ssh-key-setup.md).
+## Create or locate the SSH key you want to use
+
+When you are ready to create and deploy swarms, you must have an [SSH](`/engine/reference/glossary.md#ssh`) key to authenticate Docker Cloud to your Azure account. See the topic [Set up SSH keys](/docker-cloud/cloud-swarm/ssh-key-setup.md) to learn how to check for existing keys or set up a new one, and copy the public key.
 
 ## Find your Azure subscription ID
 
@@ -27,7 +29,7 @@ You can click a resource from the Dashboard and find the subscription ID under
 When you are ready to add your subscription ID to Docker Cloud,
 copy it from your Azure Dashboard.
 
-## Add you Azure account credentials to Docker Cloud
+## Add your Azure account credentials to Docker Cloud
 
 Go to Docker Cloud to connect the account.
 
@@ -49,16 +51,19 @@ Go to Docker Cloud to connect the account.
 6. Your Microsoft Azure login credentials will automatically populate to
 Docker Cloud under **Service Providers -> Microsoft Azure**.
 
+    ![](images/azure-creds-cloud.png)
+
 7. Click **Save**.
 
 You're now ready to deploy a swarm!
 
 ## Where to go next
 
-You'll need an SSH key to provide to Docker Cloud
-during the swarm create process. See [Setting up SSH keys](ssh-key-setup.md).
-
 **Ready to create swarms on Azure?** See [Create a new swarm in Docker
-Cloud](create-cloud-swarm.md).
+Cloud](create-cloud-swarm-azure.md).
+
+You'll need an SSH key to provide to Docker Cloud during the swarm create
+process. If you haven't done so yet, check out [Set up SSH
+keys](ssh-key-setup.md).
 
 You can get an overivew of topics on [swarms in Docker Cloud](index.md).

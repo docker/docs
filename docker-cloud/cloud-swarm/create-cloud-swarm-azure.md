@@ -16,7 +16,7 @@ If you haven't yet linked Docker Cloud to Azure, follow the steps in [Link Micro
 linked, it will show up on the **Swarms -> Create** page as a connected service
 provider.
 
-<font style="color:red;">TBD - ADD SCREEN SNAP HERE</font>
+![](images/azure-creds-cloud.png)
 
 ## Create a swarm
 

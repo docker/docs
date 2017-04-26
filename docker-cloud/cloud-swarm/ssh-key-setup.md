@@ -20,9 +20,10 @@ want to reuse.
 
 If you find an existing key you want to use, skip to the topic that describes
 how to [copy your public key for use with Docker
-Cloud](copy-your-public-key-for-use-with-docker-cloud).
+Cloud](#copy-your-public-key-for-use-with-docker-cloud).
 
-Otherwise, [create a new SSH key](create-a-new-ssh-key-for-use-by-docker-cloud).
+Otherwise, [create a new SSH
+key](#create-a-new-ssh-key-for-use-by-docker-cloud).
 
 ## Create a new SSH key
 
