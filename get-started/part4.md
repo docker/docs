@@ -36,6 +36,8 @@ by joining multiple machines into a "Dockerized" cluster called a **swarm**.
 A swarm is a group of machines that are running Docker and have been joined into
 a cluster. After that has happened, you continue to run the Docker commands
 you're used to, but now they are executed on a cluster by a **swarm manager**.
+The machines in a swarm can be physical or virtual. After joining a swarm, they
+are referred to as **nodes**.
 
 Swarm managers can use several strategies to run containers, such as "emptiest
 node" -- which fills the least utilized machines with containers. Or "global",
@@ -74,12 +76,16 @@ To add a worker to this swarm, run the following command:
   <ip>:<port>
 ```
 
-> **Note**: Getting an error about needing to use `--advertise-addr`? Copy the
+> Getting an error about needing to use `--advertise-addr`?
+>
+> Copy the
 > IP address for `myvm1` by running `docker-machine ls`, then run the
 > `docker swarm init` command again, using that IP and specifying port `2377`
 > (the port for swarm joins) with `--advertise-addr`. For example:
 >
-> `docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"`
+> ```
+> docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"
+> ```
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -110,8 +116,9 @@ First, you'll need a hypervisor that can create VMs, so [install
 VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your machine's OS.
 
 > **Note**: If you're on a Windows system that has Hyper-V installed, such as
-Windows 10, there is no need for this step and you should use Hyper-V instead.
-View the instructions for Hyper-V systems by clicking the Hyper-V tab above.
+Windows 10, there is no need to install VirtualBox and you should use Hyper-V
+instead. View the instructions for Hyper-V systems by clicking the Hyper-V tab
+above.
 
 Now, create a couple of VMs using `docker-machine`, using the VirtualBox driver:
 
