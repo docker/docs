@@ -24,23 +24,25 @@ provider.
 
 2. Click **Swarms** in the top navigation, then click **Create**.
 
-    >**Tip:** Alternatively, you can select **+ -> Swarm** from the top navigation to get to the same page.
+    Alternatively, you can select **+ -> Swarm** from the top navigation to get to the same page.
 
 3. Enter a name for the new swarm.
 
-4. Select Microsoft Azure as the service provider.
+    >**Tip:** Use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed.
 
-    <font style="color:red;">TBD: MAKE THIS SPECIFIC TO AZURE AND ADD IMAGES THROUGHOUT</font>
+4. Select Microsoft Azure as the service provider, provide Docker Azure CE as the App name, and select your Azure subscription from the drop-down
 
-    Additional options appear depending on which provider you select.
+    ![](images/azure-create-swarm.png)
 
-5. Enter any additional provider-specific information, such as region.
-
-    <font style="color:red;">TBD: MAKE THIS SPECIFIC TO AZURE</font>
+    <font style="color:red;">RYAN, ALBERTO: Need help here ^^ with screen snaps and proper instructions. (I don't have CE subscription enabled in Azure yet, and am not sure what to provide as "App name")</font>
 
 6. Choose how many swarm managers and swarm worker nodes to deploy.
 
+<font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
+
 7. Select the machine sizes for the managers, and for the workers.
+
+<font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
 
 8. Copy-paste the public SSH key you want to use to connect to the nodes.
 

@@ -93,6 +93,6 @@ You're now ready to deploy a swarm!
 
 ## Where to go next
 
-For next steps, see [create a new swarm in Docker Cloud](create-cloud-swarm.md).
+**Ready to create swarms on AWS?** See [Create a new swarm on Amazon Web Services in Docker Cloud](create-cloud-swarm-aws.md).
 
 You can get an overivew of topics on [swarms in Docker Cloud](index.md).

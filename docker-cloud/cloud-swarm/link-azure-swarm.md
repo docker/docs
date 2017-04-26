@@ -8,7 +8,7 @@ title: Link Microsoft Azure Cloud Services to Docker Cloud
 You can link your [Microsoft Azure Cloud Services](https://portal.azure.com/) account so that Docker Cloud can provision and
 manage swarms on your behalf.
 
-For this, you will need an SSH key and your Azure subscription ID to authenticate Docker to your service provider.
+For this, you will need an SSH key and your Azure subscription ID to authenticate Docker to your service provider. Also, you need to enable your Azure subscription on behalf of Docker Cloud.
 
 ## Create or locate the SSH key you want to use
 
@@ -55,15 +55,36 @@ Docker Cloud under **Service Providers -> Microsoft Azure**.
 
 7. Click **Save**.
 
+## Enable your Azure subscription for Docker Cloud
+
+You need to verify Microsoft Azure terms of use and manually enable your Azure subscription on behalf of Docker Cloud.
+
+1.  Go to the [Microsoft Azure Marketplace](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryFeaturedMenuItemBlade/selectedMenuItemId/home) and search for **Docker**, or specifically **Docker for Azure CE**.
+
+    ![](images/azure-eula-1-marketplace.png)
+
+2. Select **Docker for Azure CE** and click the option on the lower right to deploy programmatically.
+
+    ![](images/azure-eula-2-deploy-vm.png)
+
+3. Read the terms of use, click **Enable** for your subscription, and click **Save**.
+
+    ![](images/azure-eula-3-enable-subscription.png)
+
+4. Verify that your subscription is enabled.
+
+    Go to **Dashboard -> Subscriptions** to view details on your current subscriptions. Docker for Azure CE should be listed as enabled Programmatic deployment.
+
+    ![](images/azure-eula-4-verify.png)
+
 You're now ready to deploy a swarm!
 
 ## Where to go next
 
-**Ready to create swarms on Azure?** See [Create a new swarm in Docker
-Cloud](create-cloud-swarm-azure.md).
+**Ready to create swarms on Azure?** See [Create a new swarm on Microsoft Azure in Docker Cloud](create-cloud-swarm-azure.md).
 
 You'll need an SSH key to provide to Docker Cloud during the swarm create
-process. If you haven't done so yet, check out [Set up SSH
+process. If you haven't done so yet, check out how to [Set up SSH
 keys](ssh-key-setup.md).
 
 You can get an overivew of topics on [swarms in Docker Cloud](index.md).
