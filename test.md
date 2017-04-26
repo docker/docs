@@ -187,12 +187,15 @@ only need to do it on the first one. If you have a `<th>`, set it there.
 
 ## Glossary
 
-The glossary source lives in the documentation repository https://github.com/docker/docker.github.io in `_data/glossary.yaml`. The glossary publishes to [https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
+The glossary source lives in the documentation repository
+https://github.com/docker/docker.github.io in `_data/glossary.yaml`. The
+glossary publishes to
+[https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
 
-To update glossary content, edit `_data/glossary.yaml` in .
+To update glossary content, edit `_data/glossary.yaml`.
 
-To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for example, [swarm](glossary.md?term=swarm)).
-
+To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
+example, [swarm](glossary.md?term=swarm)).
 
 ## Mixing Markdown and HTML
 
