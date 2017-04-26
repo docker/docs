@@ -7,9 +7,13 @@ redirect_from:
 title: Link an Amazon Web Services account
 ---
 
+> **Legacy instructions**:
+>
+> This topic has been superseded by [the AWS instructions that enable swarm mode](/docker-cloud/cloud-swarm/link-aws-swarm/).
+
 You can create a role with AWS IAM (Identity and Access Management) so that Docker Cloud can provision and manage **node clusters** and **nodes** on your behalf.
 
-Previously, we recommended that you create a service user that Docker Cloud would use to access your AWS account. If you previously used this method, you can [create a new role](link-aws.md#acreate-a-dockercloud-role-role), attach the policy you created previously, unlink your AWS credentials and relink them using the new ARN method. You can then delete the `dockercloud-user`.
+[Previously](https://docs.docker.com/v1.11/docker-cloud/infrastructure/link-aws/), we recommended that you create a service user that Docker Cloud would use to access your AWS account. If you previously used this method, you can [create a new role](link-aws.md#acreate-a-dockercloud-role-role), attach the policy you created previously, unlink your AWS credentials and relink them using the new ARN method. You can then delete the `dockercloud-user`.
 
 ## Create a dockercloud-policy
 
