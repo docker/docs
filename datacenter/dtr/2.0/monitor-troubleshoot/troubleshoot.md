@@ -43,7 +43,9 @@ synchronized. Etcd requires synchronized clocks to function correctly.
 
 ## Accessing the RethinkDB Admin UI
 
- > Warning: This command will expose your database to the internet with no authentication. Use with caution.
+ > **Warning**:
+ > This command will expose your database to the internet with no authentication. Use with caution.
+{:.warning}
 
 Run this on the UCP node that has a DTR replica with the given replica id:
 
