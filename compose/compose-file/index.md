@@ -359,15 +359,15 @@ Configures if and how to restart containers when they exit. Replaces
 
 ```none
 version: "3"
-     services:
-       redis:
-         image: redis:alpine
-         deploy:
-           restart_policy:
-             condition: on-failure
-             delay: 5s
-             max_attempts: 3
-             window: 120s
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 ```
 
 #### labels
@@ -818,7 +818,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
       worker:
         build: ./worker
         networks:
-        - legacy
+          - legacy
 
       db:
         image: mysql
