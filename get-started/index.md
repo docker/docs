@@ -156,7 +156,7 @@ $ docker --version
 Docker version 17.05.0-ce-rc1, build 2878a85
 ```
 
-If you see a messages like the ones above, you're ready to begin the journey.
+If you see messages like the ones above, you're ready to begin the journey.
 
 ## Conclusion
 
