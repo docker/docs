@@ -499,6 +499,27 @@ If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
+### init
+
+> [Added in version 2.2 file format](#version-22).
+
+Run an init inside the container that forwards signals and reaps processes.
+Either set a boolean value to use the default `init`, or specify a path to
+a custom one.
+
+    version: '2.2'
+    services:
+      web:
+        image: alpine:latest
+        init: true
+
+
+    version: '2.2'
+    services:
+      web:
+        image: alpine:latest
+        init: /usr/libexec/docker-init
+
 ### isolation
 
 > [Added in version 2.1 file format](#version-21).
