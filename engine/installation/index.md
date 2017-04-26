@@ -9,9 +9,12 @@ redirect_from:
 title: Install Docker
 ---
 
-## Docker editions
+Docker is available in two editions: **Community Edition (CE)** and **Enterprise
+Edition (EE)**.
 
-Docker is available in two editions:
+Docker Community Edition (CE) is ideal for developers and small
+teams looking to get started with Docker and experimenting with container-based
+apps. Docker CE has two update channels, **stable** and **edge**:
 
 * **Stable** gives you reliable updates every quarter
 * **Edge** gives you new features every month
@@ -19,13 +22,13 @@ Docker is available in two editions:
 For more information about Docker CE, see
 [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
 
-  Docker CE has both **stable** and **edge** channels.
+Docker Enterprise Edition (EE) is designed for enterprise
+development and IT teams who build, ship, and run business critical
+applications in production at scale. For more information about Docker EE,
+including purchasing options, see
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-  - **Stable** builds are released once per quarter and are supported for 4
-    months.
-  - **Edge** builds are released once per month, and are supported for that
-    month only. If you subscribe to the Edge channel on Linux distributions, you
-    should also subscribe to the Stable channel.
+{% include docker_ce_ee.md %}
 
 ## Supported platforms
 
@@ -59,13 +62,6 @@ You can use Docker Cloud to automatically provision and manage your cloud instan
 * [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
 * [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
 * [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
-
-We also provide official Docker solutions for running on AWS and Azure. You can read
-up on what Docker for AWS and Docker for Azure have to offer you
-[here](/docker-for-aws/why/) and [here](/docker-for-azure/why/) respectively.
-
-* [Docker for AWS](/docker-for-aws/)
-* [Docker for Azure](/docker-for-azure/)
 
 ## Get started
 
