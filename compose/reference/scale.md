@@ -5,6 +5,9 @@ title: docker-compose scale
 notoc: true
 ---
 
+> **Note**: This command is deprecated. Use the [up](up.md) command with the
+  `--scale` flag instead.
+
 ```
 Usage: scale [SERVICE=NUM...]
 ```
