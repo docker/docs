@@ -236,7 +236,7 @@ containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get fast access to the latest features, or the Stable
 channel for more predictability.
 
-[Learn more about Docker EE](/engine/installation/#platform-support-matrix){: class="button outline-btn"}
+[Learn more about Docker CE](/engine/installation/#platform-support-matrix){: class="button outline-btn"}
 </div>
 </div><!-- end row -->
 
