@@ -26,8 +26,8 @@ download your license.
 ## License your installation
 
 Once you've downloaded the license file, you can apply it to your DTR
-installation. Navigate to the **DTR web UI**, and then go to the **Settings
-page**.
+installation. Navigate to the **DTR web UI**, and then go to the **Settings**
+page.
 
 ![](../../images/license-2.png)
 
