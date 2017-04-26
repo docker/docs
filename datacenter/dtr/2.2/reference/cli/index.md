@@ -9,7 +9,7 @@ Trusted Registry (DTR). It also allows uninstalling DTR.
 By default the tool runs in interactive mode. It prompts you for
 the values needed.
 
-Additional help is available for each command with the '--help' option.
+Additional help is available for each command with the `--help` option.
 
 
 ## Usage
