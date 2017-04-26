@@ -59,7 +59,7 @@ this in a few different ways.
   while /bin/true; do
     PROCESS_1_STATUS=$(ps aux |grep -q my_first_process)
     PROCESS_2_STATUS=$(ps aux |grep -q my_second_process)
-    if [ $PROCESS_!_STATUS || $PROCESS_2_STATUS ]; then
+    if [ $PROCESS_1_STATUS || $PROCESS_2_STATUS ]; then
       echo "One of the processes has already exited."
       exit -1
     fi
