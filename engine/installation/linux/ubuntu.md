@@ -329,7 +329,7 @@ a new file each time you want to upgrade Docker.
     <div id="ce-install-from-package-docker" class="tab-pane fade in active" markdown="1">
 
     Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-    Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+    Ubuntu version, browse to `pool/stable/`, choose either `amd64` or
     `armhf`,and download the `.deb` file for the Docker version you want to
     install and for your version of Ubuntu.
 
