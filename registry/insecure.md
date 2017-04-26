@@ -23,25 +23,35 @@ While this is relatively easy to configure the daemon in this way, it is
 solution for isolated testing or in a tightly controlled, air-gapped
 environment.
 
-1. Open the `/etc/default/docker` file or `/etc/sysconfig/docker` for editing.
+1.  Open the `/etc/default/docker` file or `/etc/sysconfig/docker` for editing.
 
     Depending on your operating system, your Engine daemon start options.
 
-2. Edit (or add) the `DOCKER_OPTS` line and add the `--insecure-registry` flag.
+2.  **If using docker version 1.12 or greater**
+
+    Create or modify `/etc/docker/daemon.json` on the client machine and add:
+     
+    ```
+    { "insecure-registries":["myregistry.example.com:5000"] }
+    ```
+
+    **If using less than version 1.12**
+    
+    Edit (or add) the `DOCKER_OPTS` line and add the `--insecure-registry` flag.
 
     This flag takes the URL of your registry, for example.
 
     `DOCKER_OPTS="--insecure-registry myregistrydomain.com:5000"`
 
-3. Close and save the configuration file.
+3.  Close and save the configuration file.
 
-4. Restart your Docker daemon
+4.  Restart your Docker daemon
 
     The command you use to restart the daemon depends on your operating system.
     For example, on Ubuntu, this is usually the `service docker stop` and `service
     docker start` command.
 
-5. Repeat this configuration on every Engine host that wants to access your registry.
+5.  Repeat this configuration on every Engine host that wants to access your registry.
 
 
 ## Using self-signed certificates
