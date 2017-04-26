@@ -194,7 +194,6 @@ Introduces the following additional parameters:
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
 
-
 ### Version 3
 
 Designed to be cross-compatible between Compose and the Docker Engine's

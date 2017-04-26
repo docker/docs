@@ -1109,6 +1109,7 @@ which is optional:
     - `gateway`: IPv4 or IPv6 gateway for the master subnet
     - `aux_addresses`: Auxiliary IPv4 or IPv6 addresses used by Network driver,
       as a mapping from hostname to IP
+-   `options`: Driver-specific options as a key-value mapping.
 
 A full example:
 
@@ -1122,6 +1123,9 @@ A full example:
             host1: 172.28.1.5
             host2: 172.28.1.6
             host3: 172.28.1.7
+      options:
+        foo: bar
+        baz: "0"
 
 ### internal
 
