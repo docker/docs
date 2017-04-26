@@ -1173,6 +1173,9 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
+- sectiontitle: Library references
+  section:
+  - generateTOC: library
 - sectiontitle: Sample applications
   section:
   - path: /samples/
