@@ -1,6 +1,5 @@
 ---
-description: Learn how to install Docker Trusted Registry on a machine with no internet
-  access.
+description: Learn how to install Docker Trusted Registry on a machine with no internet access.
 keywords: docker, registry, install, offline
 title: Install Docker Trusted Registry offline
 ---
@@ -37,7 +36,7 @@ For each machine where you want to install DTR:
     $ scp docker-datacenter.tar.gz <user>@<host>:/tmp
     ```
 
-2.  Use ssh to login into the hosts where you transferred the package.
+2.  Use ssh to log in to the hosts where you transferred the package.
 
 3.  Load the Docker Datacenter images.
 
