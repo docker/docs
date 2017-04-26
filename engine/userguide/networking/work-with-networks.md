@@ -688,7 +688,7 @@ all environment variables to the linked container, but the `docker network` comm
 has no equivalent. When you connect a container to a network using `docker network`, no
 environment variables can be dynamically shared among containers.
 
-#### Understanding network-scoped aliases
+#### Use network-scoped aliases
 
 Legacy links provide outgoing name resolution that is isolated within the
 container in which the alias is configured. Network-scoped aliases do not allow
@@ -785,7 +785,18 @@ containers connected to that network can access the alias.
 #### Resolving multiple containers to a single alias
 
 Multiple containers can share the same network-scoped alias within the same
-network. This example illustrates how this works.
+network. This provides a sort of DNS round-robin high availability. This may not
+be reliable when using software such as Nginx, which caches clients by IP
+address.
+
+The following example illustrates how to set up and use network aliases.
+
+> **Note**: Those using network aliases for DNS round-robin high availability
+> should consider using swarm services instead. Swarm services
+> provide a similar load-balancing feature out of the box. If you connect to any
+> node, even a node that isn't participating in the service. Docker sends
+> the request to a random node which is participating in the service and
+> manages all the communication.
 
 1.  Launch `container7` in `isolated_nw` with the same alias as `container6`,
     which is `app`.
@@ -801,10 +812,10 @@ network. This example illustrates how this works.
     container with the alias will be resolved. This provides a sort of high
     availability within the cluster.
 
-    > When the IP address is resolved, the container chosen to resolve it is
-    random. For that reason, in the exercises below, you may get different
-    results in some steps. If the step assumes the result returned is `container6`
-    but you get `container7`, this is why.
+    > **Note**: When the IP address is resolved, the container chosen to resolve
+    > it is not completely predictable. For that reason, in the exercises below,
+    > you may get different results in some steps. If the step assumes the result
+    > returned is `container6` but you get `container7`, this is why.
 
 2.  Start a continuous ping from `container4` to the `app` alias.
 
@@ -983,7 +994,7 @@ disconnect` command.
     ```
 
 4.  Remove `container4`, `container5`, `container6`, and `container7`.
-    
+
     ```bash
     $ docker stop container4 container5 container6 container7
 
