@@ -225,7 +225,8 @@ To uninstall Toolbox on Windows, do the following:
 
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel.
 
-    >**Note**: This process does not remove the `docker-install.exe` file. You must delete that file yourself.
+    >**Note**:
+    > This process does not remove the `docker-install.exe` file. You must delete that file yourself.
 
 5. Optionally, remove the
 `C:\Users\<your-user>\.docker` directory.
