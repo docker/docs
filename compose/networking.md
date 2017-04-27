@@ -28,6 +28,8 @@ For example, suppose your app is in a directory called `myapp`, and your `docker
           - "8000:8000"
       db:
         image: postgres
+        ports:
+          - "8001:5432"
 
 When you run `docker-compose up`, the following happens:
 
@@ -42,7 +44,15 @@ get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
 
-Because `web` explicitly maps a port, it's also accessible from the outside world via port 8000 on your Docker host's network interface.
+It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
+In the above example, for `db`, the `HOST_PORT` would be `8001`,
+and the container port would be `5432` (postgres default). Networked service-to-service
+communication happens on the `CONTAINER_PORT`, and when `HOST_PORT` is defined,
+the service is accessible externally as well.
+
+Within the `web` container, your connection string to `db` would look like
+`postgres://db:5432`, and from the host machine, the connection string would
+look like `postgres://{DOCKER_IP}:8001`.
 
 ## Updating containers
 
