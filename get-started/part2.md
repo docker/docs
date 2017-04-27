@@ -189,6 +189,9 @@ between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
 `docker run -p`. In later steps, we'll just map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
+> **Note**: If you're using Mac or Windows, you'll need to use docker-machine ip to get the actual ip address.
+  then, you are able to link to the `http://your-ip-address:4000` instead of `http://localhost:4000`
+  
 Hit `CTRL+C` in your terminal to quit.
 
 Now let's run the app in the background, in detached mode:
