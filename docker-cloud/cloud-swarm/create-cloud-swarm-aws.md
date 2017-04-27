@@ -16,7 +16,7 @@ If you haven't yet linked Docker Cloud to AWS, follow the steps in [Link Amazon 
 linked, it will show up on the **Swarms -> Create** page as a connected service
 provider.
 
-<font style="color:red;">TBD - ADD SCREEN SNAP HERE</font>
+![](images/aws-creds-cloud.png)
 
 ## Create a swarm
 
@@ -32,7 +32,7 @@ provider.
 
     <font style="color:red;">TBD: MAKE THIS SPECIFIC TO AWS AND ADD IMAGES THROUGHOUT</font>
 
-    Additional options appear depending on which provider you select.
+    <font style="color:red;">TBD from here down, Add info re: VPC for Region Advanced Settings, and other generic or AWS specific configurations. Generic configurations seem to be Swarm size and properties, along with manager and worker properties. (See Azure steps, which briefly cover these generic configs.)</font>
 
 5. Enter any additional provider-specific information, such as region.
 
@@ -48,7 +48,11 @@ provider.
 
 9. Click **Create**.
 
-Docker Cloud connects to your AWS account, deploys Docker for AWS instances, forms a Swarm, and joins the instances to it.
+    Docker for AWS bootstraps all of the recommended infrastructure to
+    start using Docker on AWS automatically. You don't need to worry
+    about rolling your own instances, security groups, or load balancers
+    when using Docker for AWS. (To learn more, see
+    [Why Docker for AWS](/docker-for-aws/why.md).)
 
 > **Note**: At this time, you cannot add or remove nodes from a swarm from within Docker Cloud. To add new nodes or remove nodes from an existing swarm,
 log in to your AWS account, and add or delete nodes manually. (You can

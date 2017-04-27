@@ -34,15 +34,13 @@ provider.
 
     ![](images/azure-create-swarm.png)
 
-    <font style="color:red;">RYAN, ALBERTO: Need help here ^^ with screen snaps and proper instructions. (I don't have CE subscription enabled in Azure yet, and am not sure what to provide as "App name")</font>
-
 6. Choose how many swarm managers and swarm worker nodes to deploy.
 
-    <font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
+    <font style="color:red;">TBD, fill in more details here, maybe screen snaps</font>
 
 7. Select the machine sizes for the managers, and for the workers.
 
-    <font style="color:red;">TBD, RYAN, ALBERTO: More images and/or different Azure specific steps?</font>
+    <font style="color:red;">TBD, fill in more details here, maybe screen snaps</font>
 
 8. Copy-paste the public SSH key you want to use to connect to the nodes.
 
@@ -52,7 +50,10 @@ provider.
 
 9. Click **Create**.
 
-Docker Cloud connects to your Microsoft Azure account, deploys Docker for Azure virtual machines, forms a Swarm, and joins the nodes to it.
+    Docker for Azure bootstraps all of the recommended infrastructure to start
+    using Docker on Azure automatically. You don’t need to worry about rolling
+    your own instances, security groups, or load balancers when using Docker for
+    Azure. (To learn more, see [Why Docker for Azure](/docker-for-azure/why.md).)
 
 > **Note**: At this time, you cannot add or remove nodes from a swarm from within Docker Cloud. To add new nodes or remove nodes from an existing swarm,
 log in to your Azure account, and add or delete nodes manually. (You can
