@@ -54,7 +54,9 @@ provider.
 
 Docker Cloud connects to your Microsoft Azure account, deploys Docker for Azure virtual machines, forms a Swarm, and joins the nodes to it.
 
-> **Note**: At this time, you cannot dissolve swarms or delete swarm nodes from within Docker Cloud - you can only unregister the swarm from the Docker Cloud UI. To delete the swarm and its members, log in to your AWS account and delete them manually.
+> **Note**: At this time, you cannot add or remove nodes from a swarm from within Docker Cloud. To add new nodes or remove nodes from an existing swarm,
+log in to your Azure account, and add or delete nodes manually. (You can
+unregister or dissolve swarms directly from Docker Cloud.)
 
 ## Where to go next
 
