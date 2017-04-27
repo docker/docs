@@ -19,16 +19,16 @@ docker run -it --rm docker/dtr \
 This command installs Docker Trusted Registry (DTR) on a node managed by
 Docker Universal Control Plane (UCP).
 
-After installing DTR, you can join additional DTR replicas using the 'join'
+After installing DTR, you can join additional DTR replicas using the `join`
 command.
 
 Example usage:
 
-$ docker run -it --rm docker/dtr:2.2.0 install \
-	--ucp-node <UCP_NODE_HOSTNAME> \
-	--ucp-insecure-tls
+    $ docker run -it --rm docker/dtr:2.2.0 install \
+	    --ucp-node <UCP_NODE_HOSTNAME> \
+	    --ucp-insecure-tls
 
-Note: We recommend --ucp-ca "$(cat ca.pem)" instead of --ucp-insecure-tls for a production deployment.
+**Note**: We recommend `--ucp-ca "$(cat ca.pem)"` instead of `--ucp-insecure-tls` for a production deployment.
 
 ## Options
 
@@ -46,10 +46,10 @@ Note: We recommend --ucp-ca "$(cat ca.pem)" instead of --ucp-insecure-tls for a 
 |`--https-proxy`|The HTTPS proxy used for outgoing requests|
 |`--hub-password`|Password to use when pulling images|
 |`--hub-username`|Username to use when pulling images|
-|`--log-host`|Endpoint to send logs to, required if --log-protocol is tcp or udp|
+|`--log-host`|Endpoint to send logs to, required if `--log-protocol` is tcp or udp|
 |`--log-level`|Log level for container logs. Default: INFO|
 |`--log-protocol`|The protocol for sending container logs: tcp, tcp+tls, udp or internal. Default: internal|
-|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip|hostname>/<mountpoint>|
+|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip\|hostname>/<mountpoint>|
 |`--no-proxy`|Don't use a proxy for these domains. Format acme.org[, acme.com]|
 |`--overlay-subnet`|The subnet used by the dtr-ol overlay network. Example: 10.0.0.0/24|
 |`--replica-http-port`|The public HTTP port for the DTR replica. Default is 80|
