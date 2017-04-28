@@ -359,15 +359,15 @@ Configures if and how to restart containers when they exit. Replaces
 
 ```none
 version: "3"
-     services:
-       redis:
-         image: redis:alpine
-         deploy:
-           restart_policy:
-             condition: on-failure
-             delay: 5s
-             max_attempts: 3
-             window: 120s
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 ```
 
 #### labels
@@ -818,7 +818,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
       worker:
         build: ./worker
         networks:
-        - legacy
+          - legacy
 
       db:
         image: mysql
@@ -1193,9 +1193,9 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 
 `no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
-      restart: "no"
-      restart: always
-      restart: on-failure
+    restart: "no"
+    restart: always
+    restart: on-failure
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 

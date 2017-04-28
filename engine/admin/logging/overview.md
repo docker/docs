@@ -200,9 +200,9 @@ trust certificate, certificate, and key to use.
 $ docker run \
          --log-driver=syslog \
          --log-opt syslog-address=tcp+tls://192.168.0.42:123 \
-         --log-opt syslog-tls-ca-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
-         --log-opt syslog-tls-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/cert.pem \
-         --log-opt syslog-tls-key=syslog-tls-ca-cert=/etc/ca-certificates/custom/key.pem \
+         --log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
+         --log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem \
+         --log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem \
          alpine ash
 ```
 

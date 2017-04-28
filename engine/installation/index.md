@@ -9,48 +9,31 @@ redirect_from:
 title: Install Docker
 ---
 
-## Docker editions
+Docker is available in two editions: **Community Edition (CE)** and **Enterprise
+Edition (EE)**.
 
-Docker is available in two editions:
+Docker Community Edition (CE) is ideal for developers and small
+teams looking to get started with Docker and experimenting with container-based
+apps. Docker CE has two update channels, **stable** and **edge**:
 
-- **Docker Enterprise Edition (Docker EE)** is designed for enterprise
-  development and IT teams who build, ship, and run business critical
-  applications in production at scale. Docker EE is integrated, certified, and
-  supported to provide enterprises with the most secure container platform in
-  the industry to modernize all applications. For more information
-  about Docker EE, including purchasing options, see
-  [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+* **Stable** gives you reliable updates every quarter
+* **Edge** gives you new features every month
 
-- **Docker Community Edition (Docker CE)** is ideal for developers and small
-  teams looking to get started with Docker and experimenting with
-  container-based apps. Docker CE is available on many platforms, from desktop
-  to cloud to server. Docker CE is available for macOS and Windows and provides
-  a native experience to help you focus on learning Docker. You can build and
-  share containers and automate the development pipeline all from a single
-  environment.
+For more information about Docker CE, see
+[Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
 
-  Docker CE has both **stable** and **edge** channels.
+Docker Enterprise Edition (EE) is designed for enterprise
+development and IT teams who build, ship, and run business critical
+applications in production at scale. For more information about Docker EE,
+including purchasing options, see
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-  - **Stable** builds are released once per quarter and are supported for 4
-    months.
-  - **Edge** builds are released once per month, and are supported for that
-    month only. If you subscribe to the Edge channel on Linux distributions, you
-    should also subscribe to the Stable channel.
+{% include docker_ce_ee.md %}
 
-  For more information about Docker CE, see
-  [Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
+## Supported platforms
 
-- **Docker Cloud** is a platform run by Docker which allows you to deploy your
-  application using multiple cloud providers such as Digital Ocean, Packet,
-  SoftLink, or to bring your own device. For more information about using Docker
-  Cloud, see [Docker Cloud](#docker-cloud).
-
-## Platform support matrix
-
-Docker CE and Docker EE run on Linux, Cloud, Windows, and macOS platforms. Use
-the following matrix to choose the best installation path for you. The links
-under **Platform** take you straight to the installation instructions for that
-platform.
+Docker CE and EE are available on multiple platforms, on cloud and on-premises.
+Use the following matrix to choose the best installation path for you.
 
 {% include docker_platform_matrix.md %}
 
@@ -79,13 +62,6 @@ You can use Docker Cloud to automatically provision and manage your cloud instan
 * [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
 * [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
 * [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
-
-We also provide official Docker solutions for running on AWS and Azure. You can read
-up on what Docker for AWS and Docker for Azure have to offer you
-[here](/docker-for-aws/why/) and [here](/docker-for-azure/why/) respectively.
-
-* [Docker for AWS](/docker-for-aws/)
-* [Docker for Azure](/docker-for-azure/)
 
 ## Get started
 

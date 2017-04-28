@@ -8,7 +8,7 @@ title: Docker for AWS persistent data volumes
 
 ## What is Cloudstor?
 
-Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-configured in swarms deployed on Docker for AWS. Swarm tasks use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled or migrated to. Cloudstor relies on shared storage infrastructure provided by AWS to allow swarm tasks to create/mount their persistent volumes on any node in the swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
+Cloudstor is a volume plugin managed by Docker. It comes pre-installed and pre-configured in swarms deployed on Docker for AWS. Swarm tasks use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled or migrated to. Cloudstor relies on shared storage infrastructure provided by AWS to allow swarm tasks to create/mount their persistent volumes on any node in the swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
 
 ## Use Cloudstor
 

@@ -63,7 +63,7 @@ that info to replace `username/repo:tag`:
 version: "3"
 services:
   web:
-    image: username/repo:tag
+    image: username/repository:tag
     deploy:
       replicas: 5
       resources:
