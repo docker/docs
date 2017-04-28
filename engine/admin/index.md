@@ -93,7 +93,7 @@ subsystem used:
 | Operating system | Location |
 |------------------|----------|
 | RHEL, Oracle Linux | `/var/log/messages` |
-| Debian           | `/varlog/daemon.log` |
+| Debian           | `/var/log/daemon.log` |
 | Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service` |
 | Ubuntu 14.10-    | `/var/log/upstart/docker.log` |
 | macOS            | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
