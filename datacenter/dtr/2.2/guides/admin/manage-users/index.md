@@ -39,7 +39,7 @@ delegate the management of a set of repositories and user permissions to the
 organization administrators.
 
 An organization owns a set of repositories, and defines a set of teams. With
-teams you can define fine-grain permissions that a team of
+teams you can define fine-grained permissions that a team of
 user has for a set of repositories.
 
 ![](../../images/authentication-authorization-1.svg)
