@@ -8,10 +8,7 @@ title: Behavior of the `cached` and `delegated` mount flags
 
 Docker 17.04 CE Edge adds support for two new flags to the `-v`
 option, `cached` and `delegated`, that can significantly improve
-performance of mounted volume access in Docker for Mac.  A blog post,
-[User-guided caching in Docker for Mac](link-TODO) describes the
-background and motivation for the new flags.  This document gives a
-more detailed description of their behavior.
+performance of mounted volume access in Docker for Mac.
 
 ## Background
 

@@ -208,10 +208,9 @@ constraint opens up a number of opportunities for improved performance.
 At present there is support for read caching, with which the container's view
 of the file system can temporarily drift apart from the authoritative view on
 the host.  Further caching developments, including support for write caching,
-are planned.  A blog post, [User-guided caching in Docker for Mac](link-TODO)
-outlines how to enable caching and when it is appropriate to do so.
+are planned.
 A [detailed description of the behavior in various caching configurations](osxfs-caching)
-is also available.
+is available.
 
 #### What we are doing
 
