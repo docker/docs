@@ -1,7 +1,7 @@
 {% assign green-check = '![yes](/engine/installation/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                           | Docker CE x86_64  |   Docker CE ARM   |     Docker EE     |
-|:-------------------------------------------------------------------|:-----------------:|:-----------------:|:-----------------:|
+| Platform                                                           | Docker CE x86_64  | Docker CE ARM     | Docker EE         |
+|:-------------------------------------------------------------------|:------------------|:------------------|:------------------|
 | [Ubuntu](/engine/installation/linux/ubuntu.md)                     | {{ green-check }} | {{ green-check }} | {{ green-check }} |
 | [Debian](/engine/installation/linux/debian.md)                     | {{ green-check }} | {{ green-check }} |                   |
 | [Red Hat Enterprise Linux](/engine/installation/linux/rhel.md)     |                   |                   | {{ green-check }} |

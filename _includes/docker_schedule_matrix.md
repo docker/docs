@@ -2,19 +2,19 @@
 {% capture superscript-link %}[1](#edge-footnote){: style="vertical-align: super; font-size: smaller;" }{% endcapture %}
 {: style="width: 75%" }
 
-| Month     |             Docker CE Edge              | Docker CE Stable  |     Docker EE     |
-|:----------|:---------------------------------------:|:-----------------:|:-----------------:|
-| January   |            {{ green-check }}            |                   |                   |
-| February  |            {{ green-check }}            |                   |                   |
+| Month     | Docker CE Edge                          | Docker CE Stable  | Docker EE         |
+|:----------|:----------------------------------------|:------------------|:------------------|
+| January   | {{ green-check }}                       |                   |                   |
+| February  | {{ green-check }}                       |                   |                   |
 | March     | {{ green-check }}{{ superscript-link }} | {{ green-check }} | {{ green-check }} |
-| April     |            {{ green-check }}            |                   |                   |
-| May       |            {{ green-check }}            |                   |                   |
+| April     | {{ green-check }}                       |                   |                   |
+| May       | {{ green-check }}                       |                   |                   |
 | June      | {{ green-check }}{{ superscript-link }} | {{ green-check }} | {{ green-check }} |
-| July      |            {{ green-check }}            |                   |                   |
-| August    |            {{ green-check }}            |                   |                   |
+| July      | {{ green-check }}                       |                   |                   |
+| August    | {{ green-check }}                       |                   |                   |
 | September | {{ green-check }}{{ superscript-link }} | {{ green-check }} | {{ green-check }} |
-| October   |            {{ green-check }}            |                   |                   |
-| November  |            {{ green-check }}            |                   |                   |
+| October   | {{ green-check }}                       |                   |                   |
+| November  | {{ green-check }}                       |                   |                   |
 | December  | {{ green-check }}{{ superscript-link }} | {{ green-check }} | {{ green-check }} |
 
 `1`: On Linux distributions, these releases will only appear in the `stable`
