@@ -32,7 +32,7 @@ time, configure your DTR for high-availability.
 |`--dtr-external-url`|URL of the host or load balancer clients use to reach DTR. Format https://host[:port]|
 |`--dtr-key`|Use a PEM-encoded TLS private key for DTR. If not provided, one will be generated at install time.|
 |`--dtr-storage-volume`|Full path or volume name to store Docker images in the local filesystem|
-|`--enable-pprof`|Enables pprof profiling of the server|
+|`--enable-pprof`|Enable pprof profiling of the server|
 |`--existing-replica-id`|The ID of an existing DTR replica|
 |`--http-proxy`|The HTTP proxy used for outgoing requests|
 |`--https-proxy`|The HTTPS proxy used for outgoing requests|
