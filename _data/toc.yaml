@@ -369,6 +369,8 @@ guides:
     title: Docker network driver plugins
   - path: /engine/extend/plugins_volume/
     title: Volume plugins
+  - title: Plugin configuration
+    path: /engine/extend/config/
   - path: /engine/extend/plugin_api/
     title: Plugins API
 - sectiontitle: Open source at Docker
