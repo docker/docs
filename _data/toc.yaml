@@ -16,7 +16,7 @@ horizontalnav:
   node: samples
 
 guides:
-- title: "Docs hackathon: April 17-22nd, 2017"
+- title: Docs hackathon results
   path: /hackathon/
 - sectiontitle: Get Docker
   section:
