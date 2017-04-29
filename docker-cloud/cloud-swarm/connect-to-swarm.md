@@ -11,21 +11,38 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 ## Connect to a swarm
 
-1. Log in to Docker Cloud in your web browser.
-2. Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
-3. Copy the command provided in the dialog that appears.
-4. In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
+1.  Log in to Docker Cloud in your web browser.
+2.  Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
+3.  Copy the command provided in the dialog that appears.
+
+    ![](images/swarm-connect.png)
+
+4.  In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
 
     The local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
-5. To complete the connection process, run the `export DOCKER_HOST` command found in the previous command's output, to connect your local shell to the client proxy.
+5.  To complete the connection process, run the `export DOCKER_HOST` command found in the previous command's output, to connect your local shell to the client proxy.
 
-    Be sure to include the client connection port in the URL. For example `export DOCKER_HOST=tcp://127.0.0.1:32768`.
+    Be sure to include the client connection port in the URL. For example,  `export DOCKER_HOST=tcp://127.0.0.1:32768`.
 
 
-To switch Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`.
+6.  You can run `docker node ls` to verify that the swarm is running.
 
-> **Note**: If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/moby/mobycloud-federation#known-issues).
+    ```
+    $ docker node ls
+    ID                            HOSTNAME              STATUS              AVAILABILITY        MANAGER STATUS
+    6uotpiv8vyxsjzdtux13nkvj4     swarm-worker000001    Ready               Active              
+    8j3e54j3vv16scrrvcyg5de2w     swarm-worker000002    Ready               Active              
+    qmvk4swo9rdv1viu9t88dw0t3     swarm-worker000000    Ready               Active              
+    w7kgzzdkka0k2svssz1dk1fzw *   swarm-manager000000   Ready               Active              Leader
+    ```
+
+    From this point on, you can use the
+    [CLI commands](/engine/swarm/index.md#swarm-mode-cli-commands)
+    to manage your cloud-hosted [swarm mode](/engine/swarm/) just as you
+    would a local swarm.
+
+> **Note**: To switch back to Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`. If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/moby/mobycloud-federation#known-issues).
 
 ## Reconnect a swarm
 
