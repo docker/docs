@@ -4,7 +4,6 @@
 *
 */
 .nav-container {
-    overflow: hidden;
     height: 50px;
 }
 
@@ -64,7 +63,7 @@
     background: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 
@@ -80,7 +79,6 @@
     height: 55px;
     position: absolute;
     width: 100%;
-    overflow: hidden;
     &.affix {
         background: #0C5176;
         box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
@@ -313,7 +311,6 @@ input:checked+.slider:before {
     color: $white;
     padding: 17px 13px 11px;
     float: left;
-    opacity: 0.8;
     font-weight: 600;
 }
 
