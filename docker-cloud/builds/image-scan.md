@@ -54,13 +54,16 @@ To view scan results:
 
 3. Click **Tags**.
 
-    The Tag view displays a summarized view of each tag scan, and the age of the scan.
+    The Tag view displays a summarized view of each tag scan, and the
+    age of the scan.
 
     ![Scanned tags](images/scan-tags.png)
 
     A solid green bar indicates a clean scan without known vulnerabilities.
-    Colored stripes in yellow, orange, and red indicate minor, major, and critical
-    vulnerabilities respectively.
+    Colored stripes in yellow, orange, and red indicate minor, major, and
+    critical vulnerabilities respectively.
+
+    >**Tip:** Vulnerability scores are defined by the entity that issues the vulnerability (e.g., [NVD](https://nvd.nist.gov/)), and are based on a [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale) defined as part of the [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document).
 
 4. Click a scan summary to see more detailed results for the specific tag.
 
