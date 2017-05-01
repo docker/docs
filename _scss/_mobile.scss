@@ -373,3 +373,11 @@
         display: block;
     }
 }
+
+@media (max-width: 1024px) {
+    .nav-secondary-tabs.affix-top {
+        background-color: $bg-secondary;
+        position: fixed;
+        top: 0;
+    }
+}

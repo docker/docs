@@ -369,6 +369,8 @@ guides:
     title: Docker network driver plugins
   - path: /engine/extend/plugins_volume/
     title: Volume plugins
+  - title: Plugin configuration
+    path: /engine/extend/config/
   - path: /engine/extend/plugin_api/
     title: Plugins API
 - sectiontitle: Open source at Docker
@@ -1675,7 +1677,7 @@ manuals:
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/
-          title: Create and manage users
+          title: Authentication and authorization
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
           title: Create and manage users
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/

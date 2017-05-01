@@ -131,7 +131,7 @@ $ docker run -it --log-driver none alpine ash
 | Option            | Description | Example value |
 |-------------------|-------------|---------------|
 | `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
-| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
+| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reached, log messages will be dropped. | `--log-opt max-buffer-size 5m`
 
 ## `json-file`
 
@@ -200,9 +200,9 @@ trust certificate, certificate, and key to use.
 $ docker run \
          --log-driver=syslog \
          --log-opt syslog-address=tcp+tls://192.168.0.42:123 \
-         --log-opt syslog-tls-ca-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
-         --log-opt syslog-tls-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/cert.pem \
-         --log-opt syslog-tls-key=syslog-tls-ca-cert=/etc/ca-certificates/custom/key.pem \
+         --log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
+         --log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem \
+         --log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem \
          alpine ash
 ```
 

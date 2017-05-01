@@ -273,7 +273,7 @@ and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and the host machine doesn't have to
 install anything but Docker to run it.
 
-## Conclusion of part one
+## Conclusion of part two
 
 That's all for this page. In the next section, we will learn how to scale our
 application by running this container in a **service**.
