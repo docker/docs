@@ -17,8 +17,23 @@ the new policy to your existing role by following the instructions
 [below](#attach-a-policy-for-legacy-aws-links).
 
 ## Create a dockercloud-swarm-role role with an embedded policy
-1. Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
-2. Give the new role a name, such as `dockercloud-swarm-role`.
+
+1.  Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
+
+2.  Select **Role for Cross-Account Access**, and in the submenu that opens select **Provide access between your AWS account and a 3rd party AWS account**.
+
+3.  In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
+4.  In the **External ID** field, enter the namespace you will be linking.
+
+    This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
+
+5.  Leave **Require MFA** unchecked.
+
+6.  On the next screen, do not select a policy. Click **Next**.
+
+    You will add the policy in a later step.
+
+7.  Give the new role a name, such as `dockercloud-swarm-role`.
 
     > **Note**: You must use one role per Docker Cloud account namespace, so if
     you will be using a single AWS account for multiple Docker Cloud accounts,
@@ -26,18 +41,7 @@ the new policy to your existing role by following the instructions
     you might have `dockercloud-swarm-role-moby` and
     `dockercloud-swarm-role-teamawesome`.
 
-3.  Select **Role for Cross-Account Access**, and in the submenu that opens select **Allows IAM users from a 3rd party AWS account to access this account**.
-4. In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
-5. In the **External ID** field, enter the namespace you will be linking.
-
-    This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
-
-6. Leave **Require MFA** unchecked.
-7. On the next screen, do not select a policy. Click **Next**.
-
-    You will add the policy in a later step.
-
-8. On the next page click **Create Role**.
+8.  On the next page click **Create Role**.
 
     AWS IAM creates the new role and returns you to the **Roles** list.
 
