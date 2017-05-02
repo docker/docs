@@ -276,6 +276,53 @@ Commands that follow this style are:
 
 For machines other than `default`, and commands other than those listed above, you must always specify the name explicitly as an argument.
 
+## Unset environment variables in the current shell
+
+You might want to use the current shell to connect to a different Docker Engine. This would be the case if, for example, you are [running Docker for Mac concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to talk to two different Docker Engines, or running [swarms on Docker Cloud](/docker-cloud/cloud-swarm/connect-to-swarm.md) and want to switch between managing the swarm and using Docker Machine. In both scenarios, you have the option to switch the environment for the current shell to talk to different Docker engines.
+
+1.  Run `env|grep DOCKER` to check whether DOCKER environment variables are set.
+
+    ```
+    $ env | grep DOCKER
+    DOCKER_HOST=tcp://192.168.99.100:2376
+    DOCKER_MACHINE_NAME=default
+    DOCKER_TLS_VERIFY=1
+    DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+    ```
+
+    If it returns output (as shown in the example), you can unset the `DOCKER` environment variables.
+
+2.  Use one of two methods to unset DOCKER environment variables in the current shell.
+
+    * Run the `unset` command on the following `DOCKER` environment variables.
+
+      ```
+      unset DOCKER_TLS_VERIFY
+      unset DOCKER_CERT_PATH
+      unset DOCKER_MACHINE_NAME
+      unset DOCKER_HOST
+      ```
+
+    *  Alternatively, run a shortcut command `docker-machine env -u` to show the command you need to run to unset all DOCKER variables:
+
+        ```
+        $ docker-machine env -u
+        unset DOCKER_TLS_VERIFY
+        unset DOCKER_HOST
+        unset DOCKER_CERT_PATH
+        unset DOCKER_MACHINE_NAME
+        # Run this command to configure your shell:
+        # eval $(docker-machine env -u)
+        ```
+
+        Run `eval $(docker-machine env -u)` to unset all DOCKER variables in the current shell.
+
+3. Now, after running either of the above commands, this command should return no output.
+
+    ```
+    $ env | grep DOCKER
+    ```
+
 ## Start local machines on startup
 
 In order to ensure that the Docker client is automatically configured at the

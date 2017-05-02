@@ -75,6 +75,10 @@ If you need several VMs and want to manage the version of the Docker client or s
 > If you install Docker for Mac on a machine where Docker Toolbox is installed, it will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
+See also [Unset environment variables in the current
+shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell)
+in the Docker Machine topics.
+
 ## Docker Toolbox and Docker for Mac coexistence
 
 You can use Docker for Mac and Docker Toolbox together on the same machine. When you want to use Docker for Mac, make sure all DOCKER environment variables are unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval $(docker-machine env default)` (or the name of the machine you want to target). This will switch the current command shell to talk to the specified Toolbox machine.
