@@ -39,11 +39,22 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 6.  Now, you can run `docker node ls` to verify that the swarm is running.
 
+    Here is an example of `docker node ls` output for a swarm running one manager and two workers on **Amazon Web Services**.
+
+    ```
+    $ docker node ls
+    ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
+    dhug6p7arwrm3a9j62zh0a0hf     ip-172-31-23-167.us-west-1.compute.internal   Ready               Active              
+    xmbxtffkrzaveqhyuouj0rxso     ip-172-31-4-109.us-west-1.compute.internal    Ready               Active              
+    yha4q9bleg80kvbn9tqgxd69g *   ip-172-31-24-61.us-west-1.compute.internal    Ready               Active              Leader
+    ```
+
+    Here is an example of `docker node ls` output for a swarm running one manager and two workers on **Microsoft Azure Cloud Services**.
+
     ```
     $ docker node ls
     ID                            HOSTNAME              STATUS              AVAILABILITY        MANAGER STATUS
-    6uotpiv8vyxsjzdtux13nkvj4     swarm-worker000001    Ready               Active              
-    8j3e54j3vv16scrrvcyg5de2w     swarm-worker000002    Ready               Active              
+    6uotpiv8vyxsjzdtux13nkvj4     swarm-worker000001    Ready               Active               
     qmvk4swo9rdv1viu9t88dw0t3     swarm-worker000000    Ready               Active              
     w7kgzzdkka0k2svssz1dk1fzw *   swarm-manager000000   Ready               Active              Leader
     ```
