@@ -107,7 +107,7 @@ ENTRYPOINT: |
   of the command to be run. If you want your Dockerfile to be runnable without
   specifying additional arguments to the `docker run` command, you must specify
   either `ENTRYPOINT`, `CMD`, or both.
-  
+
   - If `ENTRYPOINT` is specified, it is set to a single command. Most official
     Docker images have an `ENTRYPOINT` of `/bin/sh` or `/bin/bash`. Even if you
     do not specify `ENTRYPOINT`, you may inherit it from the base image that you
@@ -184,7 +184,7 @@ namespace: |
   resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
   and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run.md)
   and [Introduction to user namespaces](https://success.docker.com/KBase/Introduction_to_User_Namespaces_in_Docker_Engine){ :target="_blank" class="_" }.
-  
+
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in swarm mode.
@@ -213,6 +213,9 @@ repository: |
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
+SSH: |
+  SSH (secure shell) is a secure protocol for accessing remote machines and applications. It
+  provides authentication and encrypts data communication over insecure networks such as the Internet. SSH uses public/private key pairs to authenticate logins.
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
   you want to run your application containers in a swarm. At the most basic level
@@ -313,11 +316,10 @@ volume: |
 
   There are three types of volumes: *host, anonymous, and named*:
 
-  - A **host volume** lives on the Docker host's filesystem and can be accessed from within the container.  
+  - A **host volume** lives on the Docker host's filesystem and can be accessed from within the container.
 
   - A **named volume** is a volume which Docker manages where on disk the volume is created,
     but it is given a name.
 
   - An **anonymous volume** is similar to a named volume, however, it can be difficult, to refer to
     the same volume over time when it is an anonymous volumes. Docker handle where the files are stored.
-    
