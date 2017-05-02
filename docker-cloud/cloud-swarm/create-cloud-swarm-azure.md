@@ -75,7 +75,11 @@ Subscription you want to use.
 
     ![](images/azure-create-swarm-6-manager-worker.png)
 
-    The larger your swarm, the larger the machine size you should use. To learn more about resource setup, see [configuration options](/docker-for-azure/index.md#configuration) in the Docker for Azure topics.
+    The larger your swarm, the larger the machine size you should use.
+    To learn more about resource setup, see [configuration options](/docker-for-azure/index.md#configuration) in the Docker
+    for Azure topics.
+
+    You can find Microsoft Azure Linux Virtual Machine pricing and options  [here](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/).
 
 9.  Click **Create**.
 
