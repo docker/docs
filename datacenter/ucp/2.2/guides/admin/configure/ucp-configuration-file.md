@@ -171,7 +171,7 @@ Configures the logging options for UCP components.
 
 | Parameter  | Required | Description                                                                                                                                                                                     |
 | ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `protocol` | no       | The protocol to use for remote logging. Values are those supported by the Go [Dial function](https://golang.org/pkg/net/#Dial). The default is `tcp`.                                                                                                                               |
+| `protocol` | no       | The protocol to use for remote logging. Values are `tcp` and `udp`. The default is `tcp`.                                                                                                                               |
 | `host`     | no       | Specifies a remote syslog server to send UCP controller logs to. If omitted, controller logs are sent through the default docker daemon logging driver from the `ucp-controller` container.     |
 | `level`    | no       | The logging level for UCP components. Values are [syslog priority  levels](https://linux.die.net/man/5/syslog.conf): `debug`, `info`, `notice`, `warning`, `err`, `crit`, `alert`, and `emerg`. |
 
