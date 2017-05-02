@@ -19,14 +19,25 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 4.  In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
 
-    The local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
+    You will be asked to provide you Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
-5.  To complete the connection process, run the `export DOCKER_HOST` command found in the previous command's output, to connect your local shell to the client proxy.
+    ```
+    $ docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST dockercloud/client orangesnap/vote-swarm
+    Use your Docker ID credentials to authenticate:
+    Username: orangesnap
+    Password:
 
-    Be sure to include the client connection port in the URL. For example,  `export DOCKER_HOST=tcp://127.0.0.1:32768`.
+    => You can now start using the swarm orangesnap/vote-swarm by executing:
+    	export DOCKER_HOST=tcp://127.0.0.1:32770
+```
 
+5.  To complete the connection process, run the `export DOCKER_HOST` command  as provided in the output of the previous command. This connects your local shell to the client proxy.
 
-6.  You can run `docker node ls` to verify that the swarm is running.
+    Be sure to include the given client connection port in the URL. For our example, the command is: `export DOCKER_HOST=tcp://127.0.0.1:32770`.
+
+    (If you are connecting to your first swarm, the _command:port_ is likely to be `export DOCKER_HOST=tcp://127.0.0.1:32768`.)
+
+6.  Now, you can run `docker node ls` to verify that the swarm is running.
 
     ```
     $ docker node ls
