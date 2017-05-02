@@ -24,27 +24,65 @@ provider.
 
 2. Click **Swarms** in the top navigation, then click **Create**.
 
-    >**Tip:** Alternatively, you can select **+ -> Swarm** from the top navigation to get to the same page.
+    Alternatively, you can select **+ -> Swarm** from the top navigation to get to the same page.
 
-3. Enter a name for the new swarm.
+3.  Enter a name for the new swarm.
 
-4. Select a connected cloud services provider.
+    Your Docker ID is pre-populated. In the example, our swarm name
+    is "vote-swarm".
 
-    <font style="color:red;">TBD: MAKE THIS SPECIFIC TO AWS AND ADD IMAGES THROUGHOUT</font>
+    ![](images/aws-create-swarm-1-name.png)
 
-    <font style="color:red;">TBD from here down, Add info re: VPC for Region Advanced Settings, and other generic or AWS specific configurations. Generic configurations seem to be Swarm size and properties, along with manager and worker properties. (See Azure steps, which briefly cover these generic configs.)</font>
+    >**Tip:** Use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed.
 
-5. Enter any additional provider-specific information, such as region.
+4.  Select Amazon Web Services as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, and provide an App name.
 
-    > **Note:** For Amazon Web Services, the SSH keys that appear in this wizard are filtered by the region you select. Make sure that you have appropriate SSH keys available on the region you select.
+    In this example, we'll use the `Stable` channel, and use "voting_app" as our application name.
 
-6. Choose how many swarm managers and swarm worker nodes to deploy.
+    ![](images/aws-create-swarm-0.png)
+
+5.  Select a **Region** from the drop-down menu.
+
+    > **Tip:** The SSH keys available to you in the next steps are
+    filtered by the region you select here. Make sure that you have
+    appropriate SSH keys available on the region you select.
+
+    Optionally, click **Region Advanced Settings** to configure a
+    [Virtual Private Cloud(VPC)](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html) on which to run this swarm.
+
+    ![](images/aws-create-swarm-3-region.png)
+
+    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](https://docs.docker.com/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
+
+6.  Choose how many swarm managers and swarm worker nodes to deploy.
+
+    Here, we create one manager and two worker nodes. (This maps nicely to the [Swarm tutorial setup](/engine/swarm/swarm-tutorial/index.md) and the [voting app sample in Docker Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).)
+
+    ![](images/cloud-create-swarm-4-size.png)
+
+7.  Configure swarm properties.
+
+    ![](images/aws-create-swarm-5-properties.png)
+
+    * Select a public SSH key for Docker Cloud to use to connect to the
+    nodes on AWS. Public keys from the [key pairs you configured on AWS](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) are provided in the drop-down menu. Only keys associated with the
+    Region you selected (in step 5) are shown.
+
+    * Choose whether to provide daily resource cleanup.
+
+    * Enable or disable Cloudwatch for container logging. (It is enabled by default.)
+
+    <font style="color:red;">
+    RYAN, ALBERTO:<br>
+    Can you provide more detail here on what daily resource cleanup does and pros and cons of having this on/off?<br><br>
+    Same for Cloudwatch for container logging, can you provide more detail?
+    </font>
 
 7. Select the instance sizes for the managers, and for the workers.
 
-8. Select the SSH key to use to connect to the nodes.
+    ![](images/aws-create-swarm-6-manager-worker.png)
 
-    The list contains any SSH keys that you have access to on your linked cloud services provider. Select the one for which you have the private key locally.
+    <font style="color:red;">RYAN, ALBERTO: Should we add more detail on machine sizes?</font>
 
 9. Click **Create**.
 
@@ -54,9 +92,14 @@ provider.
     when using Docker for AWS. (To learn more, see
     [Why Docker for AWS](/docker-for-aws/why.md).)
 
-> **Note**: At this time, you cannot add or remove nodes from a swarm from within Docker Cloud. To add new nodes or remove nodes from an existing swarm,
-log in to your AWS account, and add or delete nodes manually. (You can
-unregister or dissolve swarms directly from Docker Cloud.)
+    This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
+
+    ![](images/aws-create-swarm-7-list.png)
+
+    > **Note**: At this time, you cannot add nodes to a swarm from
+    within Docker Cloud. To add new nodes to an existing swarm,
+    log in to your AWS account, and add nodes manually. (You can
+    unregister or dissolve swarms directly from Docker Cloud.)
 
 ## Where to go next
 

@@ -24,19 +24,22 @@ provider.
 
 2.  Click **Swarms** in the top navigation, then click **Create**.
 
-    Alternatively, you can select **+ -> Swarm** from the top navigation to get to the same page.
+    Alternatively, you can select **+ -> Swarm** from the top navigation to
+    get to the same page.
 
 3.  Enter a name for the new swarm.
 
-    Your Docker ID is pre-populated. In the example, our swarm name is "vote_swarm".
+    Your Docker ID is pre-populated. In the example, our swarm name
+    is "vote_swarm".
 
     ![](images/azure-create-swarm-1-name.png)
 
     >**Tip:** Use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed.
 
-4.  Select Microsoft Azure as the service provider, provide Docker Azure CE as the App name, and select your Azure subscription from the drop-down menu.
+4.  Select Microsoft Azure as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, provide an App name, and select the Azure
+Subscription you want to use.
 
-    In this example, our app name is "voting_app" and we use a Pay-As-You-Go subscription.
+    In this example, we'll use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
 
     ![](images/azure-create-swarm-0.png)
 
@@ -52,7 +55,7 @@ provider.
 
     Here, we create one manager and two worker nodes. (This maps nicely to the [Swarm tutorial setup](/engine/swarm/swarm-tutorial/index.md) and the [voting app sample in Docker Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).)
 
-    ![](images/azure-create-swarm-4-size.png)
+    ![](images/cloud-create-swarm-4-size.png)
 
 8.  Configure swarm properties, SSH key and resource cleanup.
 
@@ -64,7 +67,7 @@ provider.
 
     * To copy the public SSH key to your clipboard: `$ pbcopy < ~/.ssh/id_rsa.pub`
 
-    Chose whether to provide daily resource cleanup.
+    Choose whether to provide daily resource cleanup.
 
     <font style="color:red;">RYAN, ALBERTO: Can you provide more detail here on what cleanup does and pros and cons of having this on/off?</font>
 
@@ -83,11 +86,12 @@ provider.
 
     This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
 
-    ![](images/azure-create-swarm-7-list-callout.png)
+    ![](images/azure-create-swarm-7-list.png)
 
-> **Note**: At this time, you cannot add or remove nodes from a swarm from within Docker Cloud. To add new nodes or remove nodes from an existing swarm,
-log in to your Azure account, and add or delete nodes manually. (You can
-unregister or dissolve swarms directly from Docker Cloud.)
+    > **Note**: At this time, you cannot add nodes to a swarm from
+    within Docker Cloud. To add new nodes to an existing swarm,
+    log in to your AWS account, and add nodes manually. (You can
+    unregister or dissolve swarms directly from Docker Cloud.)
 
 ## Where to go next
 

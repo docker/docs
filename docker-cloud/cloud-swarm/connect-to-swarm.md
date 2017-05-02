@@ -42,6 +42,9 @@ local Docker instance, which connects to a manager node on the target swarm.
     to manage your cloud-hosted [swarm mode](/engine/swarm/) just as you
     would a local swarm.
 
+7.  Now that your swarm is set up, try out the example to [deploy a service to the swarm](/engine/swarm/swarm-tutorial/deploy-service/),
+and other subsequent tasks in the Swarm getting started tutorial.
+
 > **Note**: To switch back to Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`. If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/moby/mobycloud-federation#known-issues).
 
 ## Reconnect a swarm
