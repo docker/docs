@@ -63,9 +63,9 @@ Subscription you want to use.
 
     ![](images/azure-create-swarm-5-properties.png)
 
-    * To list existing SSH keys: `$ ls -al ~/.ssh`
+    * To list existing SSH keys: `ls -al ~/.ssh`
 
-    * To copy the public SSH key to your clipboard: `$ pbcopy < ~/.ssh/id_rsa.pub`
+    * To copy the public SSH key to your clipboard: `pbcopy < ~/.ssh/id_rsa.pub`
 
     Choose whether to provide daily resource cleanup. (Enabling this
     option helps avoid charges for resources that you are no longer
