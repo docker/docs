@@ -129,6 +129,7 @@ These keys are supported:
 | internal_port   | yes, if the port published multiple ports | port-number                              | The internal port to use for the service                                                                 |
 | sticky_sessions | no                                        | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
 | redirect        | no                                        | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
+| include_forwarded_for        | no                                        | true | If present, include the X-Forwarded-For header in requests             |
 
 
 ### Sticky sessions
@@ -167,6 +168,10 @@ com.docker.ucp.mesh.http.1=external_route=http://example.org,redirect=https://ex
 com.docker.ucp.mesh.http.2=external_route=sni://example.org
 ```
 
+### X-Forwarded-For header
+
+Because HRM forwards traffic to your application, the requests that your application receives will all appear to come from HRM's IP address. If you add `include_forwarded_for=true` in the HRM label for your service, HRM will add an HTTP header to every request called `X-Forwarded-For` that will contain the IP address that the original request came from. Note that this feature will only work if your external_route field begins with `http://`.
+
 ### Keep services isolated
 
 If you want to keep the services from sharing the same network, before
@@ -179,12 +184,12 @@ enabling the HTTP routing mesh:
 The HTTP routing mesh will route to all services in these networks, but services
 on different networks can't communicate directly.
 
-When using a UCP client bundle for an admin user, or a user with administrator privileges, 
+When using a UCP client bundle for an admin user, or a user with administrator privileges,
 you can create an overlay network that contains the `com.docker.mesh.http` label by running the following command.
 
 ```none
 docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
 ```
 
-If you're creating a a new HRM network you need to disable the HRM service first, or disable 
+If you're creating a a new HRM network you need to disable the HRM service first, or disable
 and enable the HRM service after you create the network else HRM will not be available on new network.
