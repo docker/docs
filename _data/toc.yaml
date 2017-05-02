@@ -1626,6 +1626,8 @@ manuals:
           title: Store logs in an external system
         - path: /datacenter/ucp/2.2/guides/admin/configure/restrict-services-to-worker-nodes/
           title: Restrict services to worker nodes
+        - path: /datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file/
+          title: UCP configuration file
         - path: /datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
         - path: /datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/
