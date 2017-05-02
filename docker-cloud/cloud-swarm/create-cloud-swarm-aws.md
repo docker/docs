@@ -70,19 +70,17 @@ provider.
 
     * Choose whether to provide daily resource cleanup.
 
-    * Enable or disable Cloudwatch for container logging. (It is enabled by default.)
+      Enabling this option helps to avoid charges for resources that you are no longer using. (See also, topics on [resource cleanup](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CleaningUp.html) in the AWS documentation.)
 
-    <font style="color:red;">
-    RYAN, ALBERTO:<br>
-    Can you provide more detail here on what daily resource cleanup does and pros and cons of having this on/off?<br><br>
-    Same for Cloudwatch for container logging, can you provide more detail?
-    </font>
+    * Enable or disable Cloudwatch for container logging.
+
+      When enabled, Docker sends container logs to [Amazon Cloudwatch](https://aws.amazon.com/cloudwatch/), as described in the Docker for AWS topic on [Logging](/docker-for-aws/index.md#logging).
 
 7. Select the instance sizes for the managers, and for the workers.
 
     ![](images/aws-create-swarm-6-manager-worker.png)
 
-    <font style="color:red;">RYAN, ALBERTO: Should we add more detail on machine sizes?</font>
+    In general, the larger your swarm, the larger the instance sizes you should use. See the Docker for AWS topics for more on [resource configuration](/docker-for-aws/index.md#configuration).
 
 9. Click **Create**.
 

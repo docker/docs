@@ -67,15 +67,15 @@ Subscription you want to use.
 
     * To copy the public SSH key to your clipboard: `$ pbcopy < ~/.ssh/id_rsa.pub`
 
-    Choose whether to provide daily resource cleanup.
-
-    <font style="color:red;">RYAN, ALBERTO: Can you provide more detail here on what cleanup does and pros and cons of having this on/off?</font>
+    Choose whether to provide daily resource cleanup. (Enabling this
+    option helps avoid charges for resources that you are no longer
+    using.)
 
 7.  Select the machine sizes for the managers, and for the workers.
 
     ![](images/azure-create-swarm-6-manager-worker.png)
 
-    <font style="color:red;">RYAN, ALBERTO: Should we add more detail on machine sizes?</font>
+    The larger your swarm, the larger the machine size you should use. To learn more about resource setup, see [configuration options](/docker-for-azure/index.md#configuration) in the Docker for Azure topics.
 
 9.  Click **Create**.
 
