@@ -33,7 +33,7 @@ provider.
 
     ![](images/aws-create-swarm-1-name.png)
 
-    >**Tip:** Use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed.
+    >**Tip:** For Docker Cloud, use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed. AWS does not accept underscores in the name `_`.
 
 4.  Select Amazon Web Services as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, and provide an App name.
 
