@@ -33,8 +33,8 @@ regardless of viewport size and footer position.
 
 #### Most bugs closed
 
-This award goes to @shubeksha who helped closed a stunning 31 bugs during our
-hackathon. For details of all of @shubeksha's contributions, see the
+This award goes to @shubheksha who helped closed a stunning 31 bugs during our
+hackathon. For details of all of @shubheksha's contributions, see the
 [raw results](#raw-results). Excellent work!
 
 #### Most participation (active every day)
@@ -44,7 +44,7 @@ hackathon every single day it was active. So we're going to split this award
 four ways:
 
 - @johnharris85
-- @shubeksha
+- @shubheksha
 - @scjane
 - @bdwill
 
