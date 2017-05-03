@@ -37,11 +37,11 @@ provider.
 
 4.  Select Amazon Web Services as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, and provide an App name.
 
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+
     In this example, we'll use the `Stable` channel, and use "voting_app" as our application name.
 
     ![](images/aws-create-swarm-0.png)
-
-    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the Docker CE Edge topics.
 
 5.  Select a **Region** from the drop-down menu.
 
