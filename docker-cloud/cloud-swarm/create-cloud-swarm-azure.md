@@ -43,6 +43,8 @@ Subscription you want to use.
 
     ![](images/azure-create-swarm-0.png)
 
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the Docker CE Edge topics.
+
 5.  Make sure that **Create new resource group** is selected, provide a name for the group, and select a location from the drop-down menu.
 
     We'll call our example app "swarm_vote_resources", and choose a location in West US.
