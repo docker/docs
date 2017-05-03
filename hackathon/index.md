@@ -56,10 +56,6 @@ whole hackathon. 250 points to each of you, and our sincere thanks.
 And now, the moment we've all been waiting for. The top three of the Docs
 Hackathon!
 
-An interesting note: these bonuses didn't actually change the top 3. Whether
-the bonuses were in play or not, they just added to the point total for these
-three amazing participants who fully earned the top spots.
-
 #### 3rd place: @johnharris85
 
 Congratulations to @johnharris85, our second runner-up! For your efforts you
