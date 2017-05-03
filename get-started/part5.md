@@ -162,7 +162,7 @@ services:
   redis:
     image: redis
     ports:
-      - "6379:6739"
+      - "6379:6379"
     volumes:
       - ./data:/data
     deploy:
