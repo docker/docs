@@ -89,7 +89,7 @@ set DOCKER_MACHINE_NAME=dev
 # Run this command to configure your shell: copy and paste the above values into your command prompt
 ```
 
->**Tip:** See also, [Unset environment variables in the current shell](/machine/get-started.md#uunset-environment-variables-in-the-current-shell).
+>**Tip:** See also, how to [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).
 
 ## Excluding the created machine from proxies
 

@@ -94,7 +94,7 @@ Cloud to connect the account.
 
     ![](images/aws-creds-cloud.png)
 
-You're now ready to deploy a swarm!
+You are now ready to deploy a swarm!
 
 ## Where to go next
 

@@ -67,7 +67,37 @@ local Docker instance, which connects to a manager node on the target swarm.
 7.  Now that your swarm is set up, try out the example to [deploy a service to the swarm](/engine/swarm/swarm-tutorial/deploy-service/),
 and other subsequent tasks in the Swarm getting started tutorial.
 
-> **Note**: To switch back to Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`. If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/moby/mobycloud-federation#known-issues).
+## Switch between your swarm and Docker hosts in the same shell
+
+To switch to Docker hosts:
+
+* If you are running Docker for Mac or Docker for Windows, and want to connect to the Docker Engine for those apps, run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. For example:
+
+  ```
+  $ docker-machine env -u
+  unset DOCKER_TLS_VERIFY
+  unset DOCKER_HOST
+  unset DOCKER_CERT_PATH
+  unset DOCKER_MACHINE_NAME
+  # Run this command to configure your shell:
+  # eval $(docker-machine env -u)
+  ```
+
+* If you are using Docker Machine, and want to switch to one of your local VMs,  be sure to unset `DOCKER_TLS_VERIFY`. Best practice is similar to the previous step.  Run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. Follow this with `docker machine ls` to view your current machines, then connect to the one you want with `docker-machine env my-local-machine` and run the given `eval` command. For example:
+
+  ```
+  $ docker-machine env my-local-machine
+  export DOCKER_TLS_VERIFY="1"
+  export DOCKER_HOST="tcp://192.168.99.100:2376"
+  export DOCKER_CERT_PATH="/Users/victoriabialas/.docker/machine/machines/my-local-machine"
+  export DOCKER_MACHINE_NAME="my-local-machine"
+  # Run this command to configure your shell:
+  # eval $(docker-machine env my-local-machine)
+  ```
+
+To switch back to the deployed swarm, re-run the `export DOCKER_HOST` command with the  connection port for the swarm you want to work with. (For example, `export DOCKER_HOST=tcp://127.0.0.1:32770`)
+
+To learn more, see [Unset environment variables in the current shell](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
 ## Reconnect a swarm
 
