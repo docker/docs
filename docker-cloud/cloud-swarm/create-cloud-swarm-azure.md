@@ -39,6 +39,8 @@ provider.
 4.  Select Microsoft Azure as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, provide an App name, and select the Azure
 Subscription you want to use.
 
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+
     In this example, we'll use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
 
     ![](images/azure-create-swarm-0.png)
