@@ -4,11 +4,11 @@ keywords: docker, machine, cloud, digital ocean
 title: Digital Ocean example
 ---
 
-Follow along with this example to create a Dockerized <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> Droplet (cloud host).
+Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
 
 ### Step 1. Create a Digital Ocean account
 
-If you have not done so already, go to <a href="https://digitalocean.com" target="_blank">Digital Ocean</a>, create an account, and log in.
+If you have not done so already, go to [Digital Ocean](https://digitalocean.com), create an account, and log in.
 
 ### Step 2. Generate a personal access token
 
@@ -70,7 +70,7 @@ To generate your access token:
         default          -        virtualbox     Running   tcp://192.168.99.100:2376
         docker-sandbox   *        digitalocean   Running   tcp://45.55.139.48:2376
 
-    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
+    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (\*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
 
 ### Step 4. Run Docker commands on the Droplet
 

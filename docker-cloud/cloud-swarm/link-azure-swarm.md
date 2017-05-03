@@ -38,26 +38,19 @@ Go to Docker Cloud to connect the account.
 
     ![](images/azure-id-wizard.png)
 
-3. Provide your subscription ID.
+3. Provide your subscription ID and click **Save**.
 
-    You will be redirected to [Azure Cloud Services](portal.azure.com).
-
-4. Log in to your Azure account.
-
-5. Click **Accept** to grant Docker Cloud access to your Microsoft Azure account.
-
-    ![](images/azure-permissions.png)
-
-6. Your Microsoft Azure login credentials will automatically populate to
-Docker Cloud under **Service Providers -> Microsoft Azure**.
+    This grants Docker Cloud access to your Microsoft Azure account, and links
+    the two accounts. Your Azure login credentials will automatically populate
+    to Docker Cloud under **Service Providers -> Microsoft Azure**.
 
     ![](images/azure-creds-cloud.png)
 
-7. Click **Save**.
-
 ## Enable your Azure subscription for Docker Cloud
 
-You need to verify Microsoft Azure terms of use and manually enable your Azure subscription on behalf of Docker Cloud.
+You need to verify Microsoft Azure terms of use and manually enable your Azure subscription on behalf of Docker Cloud. You need do this only once, before you attempt to deploy a Docker Cloud Microsoft Azure swarm for the first time.
+
+>**Tip:** If your Azure subscription is not enabled first, the swarm deployment will fail. The error will show up on your **Azure portal -> resource groups -> _ResourceGroupForYourSwarm_ -> deployments**.
 
 1.  Go to the [Microsoft Azure Marketplace](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryFeaturedMenuItemBlade/selectedMenuItemId/home) and search for **Docker**, or specifically **Docker for Azure CE**.
 
@@ -77,7 +70,7 @@ You need to verify Microsoft Azure terms of use and manually enable your Azure s
 
     ![](images/azure-eula-4-verify.png)
 
-You're now ready to deploy a swarm!
+You are now ready to deploy a swarm!
 
 ## Where to go next
 

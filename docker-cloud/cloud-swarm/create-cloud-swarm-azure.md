@@ -94,7 +94,7 @@ Subscription you want to use.
 
     > **Note**: At this time, you cannot add nodes to a swarm from
     within Docker Cloud. To add new nodes to an existing swarm,
-    log in to your AWS account, and add nodes manually. (You can
+    log in to your Azure account, and add nodes manually. (You can
     unregister or dissolve swarms directly from Docker Cloud.)
 
 ## Where to go next
