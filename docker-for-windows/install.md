@@ -15,7 +15,7 @@ Docker for Windows.<br><br>
 Windows installed, and are ready to get started, skip to
 [Get started with Docker for Windows](index.md) for a quick tour of
 the command line, settings, and tools.
->
+
 >**Looking for Release Notes?** [Get release notes for all
 versions here](release-notes.md).
 

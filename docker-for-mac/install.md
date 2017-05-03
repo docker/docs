@@ -13,7 +13,7 @@ Mac.<br><br>
 Docker for Mac installed, and are ready to get started, skip to
 [Get started with Docker for Mac](index.md) for a quick tour of
 the command line, preferences, and tools.
->
+
 >**Looking for Release Notes?** [Get release notes for all versions here](release-notes.md).
 
 ## Download Docker for Mac

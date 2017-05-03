@@ -20,8 +20,8 @@ systems.
 
 > **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
 and beta channels, system requirements, and download/install information.
->
-**Looking for system requirements?** Check out
+
+>**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
@@ -240,7 +240,7 @@ PowerShell Module as follows.
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
     ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-    
+
     When asked if you want to allow this app to make changes to your device,
     click **Yes**.
 
