@@ -20,8 +20,8 @@ Docker for Mac is the best way to get started with Docker on a Mac.
 
 > **Got Docker for Mac?** If you have not yet installed Docker for Mac, please see [Install Docker for Mac](install.md) for an explanation of stable and beta
 channels, system requirements, and download/install information.
->
-**Looking for system requirements?** Check out
+
+>**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
