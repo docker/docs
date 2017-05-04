@@ -46,7 +46,7 @@ To add replicas to an existing DTR deployment:
 
 1. Use ssh to log into any node that is already part of UCP.
 
-2.  Run the DTR join command:
+2. Run the DTR join command:
 
     ```none
     docker run -it --rm \
@@ -66,7 +66,7 @@ To add replicas to an existing DTR deployment:
 To remove a DTR replica from your deployment:
 
 1. Use ssh to log into any node that is part of UCP.
-2.  Run the DTR remove command:
+2. Run the DTR remove command:
 
 ```none
 docker run -it --rm \
@@ -76,8 +76,8 @@ docker run -it --rm \
 
 You will be prompted for:
 
-* Existing replica id: the id of any healthy DTR replica of that cluster
-* Replica id: the id of the DTR replica you want to remove. It can be the id of an
+* Existing replica ID: the ID of any healthy DTR replica of that cluster
+* Replica ID: the ID of the DTR replica you want to remove. It can be the ID of an
 unhealthy replica
 * UCP username and password: the administrator credentials for UCP
 
