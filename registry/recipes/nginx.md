@@ -55,9 +55,10 @@ So if you have an nginx sitting behind it, should remove these lines from the
 example config below:
 
 ```
-X-Real-IP         $remote_addr; # pass on real client's IP
-X-Forwarded-For   $proxy_add_x_forwarded_for;
-X-Forwarded-Proto $scheme;
+      proxy_set_header  Host              $http_host;   # required for docker client's sake
+      proxy_set_header  X-Real-IP         $remote_addr; # pass on real client's IP
+      proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header  X-Forwarded-Proto $scheme;
 ```
 
 Otherwise nginx will reset the ELB's values, and the requests will not be routed
