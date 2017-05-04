@@ -14,11 +14,11 @@ You can learn more about the supported configuration in the
 
 ## Get the TLS certificate and keys
 
-Before deploying a DTR cache with TLS you need to get a public key
-certificate for the domain name were you'll deploy the cache. You'll also
+Before deploying a DTR cache with TLS, you need to get a public key
+certificate for the domain name where you'll deploy the cache. You'll also
 need the public and private key files for that certificate.
 
-Once you have then, transfer those file to the host where you'll deploy
+Once you have then, transfer those files to the host where you'll deploy
 the DTR cache.
 
 
@@ -83,7 +83,7 @@ docker run --detach --restart always \
 You can also use Let's Encrypt to automatically generate TLS certificates that
 are trusted by most clients.
 
-Learn more [about Let's Encrypt](https://letsencrypt.org/how-it-works/), and
+Learn more about [Let's Encrypt](https://letsencrypt.org/how-it-works/), and
 how to
 [create a configuration file that leverages it](/registry/configuration.md#letsencrypt).
 
