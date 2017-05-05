@@ -18,7 +18,6 @@ options:
   description: Override the key sequence for detaching a container
 - option: env
   shorthand: e
-  default_value: '[]'
   description: Set environment variables
 - option: interactive
   shorthand: i

@@ -6,11 +6,9 @@ pname: docker container
 plink: docker_container.yaml
 options:
 - option: add-host
-  default_value: '[]'
   description: Add a custom host-to-IP mapping (host:ip)
 - option: attach
   shorthand: a
-  default_value: '[]'
   description: Attach to STDIN, STDOUT or STDERR
 - option: blkio-weight
   default_value: "0"
@@ -20,10 +18,8 @@ options:
   default_value: '[]'
   description: Block IO weight (relative device weight)
 - option: cap-add
-  default_value: '[]'
   description: Add Linux capabilities
 - option: cap-drop
-  default_value: '[]'
   description: Drop Linux capabilities
 - option: cgroup-parent
   description: Optional parent cgroup for the container
@@ -52,19 +48,14 @@ options:
   default_value: "0"
   description: CPU shares (relative weight)
 - option: cpus
-  default_value: "0.000"
   description: Number of CPUs
 - option: cpuset-cpus
   description: CPUs in which to allow execution (0-3, 0,1)
 - option: cpuset-mems
   description: MEMs in which to allow execution (0-3, 0,1)
-- option: credentialspec
-  description: Credential spec for managed service account (Windows only)
 - option: device
-  default_value: '[]'
   description: Add a host device to the container
 - option: device-cgroup-rule
-  default_value: '[]'
   description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
@@ -82,31 +73,23 @@ options:
   default_value: "true"
   description: Skip image verification
 - option: dns
-  default_value: '[]'
   description: Set custom DNS servers
 - option: dns-opt
-  default_value: '[]'
   description: Set DNS options
 - option: dns-option
-  default_value: '[]'
   description: Set DNS options
 - option: dns-search
-  default_value: '[]'
   description: Set custom DNS search domains
 - option: entrypoint
   description: Overwrite the default ENTRYPOINT of the image
 - option: env
   shorthand: e
-  default_value: '[]'
   description: Set environment variables
 - option: env-file
-  default_value: '[]'
   description: Read in a file of environment variables
 - option: expose
-  default_value: '[]'
   description: Expose a port or a range of ports
 - option: group-add
-  default_value: '[]'
   description: Add additional groups to join
 - option: health-cmd
   description: Command to run to check health
@@ -116,6 +99,10 @@ options:
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
+- option: health-start-period
+  default_value: 0s
+  description: |
+    Start period for the container to initialize before starting health-retries countdown (ns|us|ms|s|m|h) (default 0s)
 - option: health-timeout
   default_value: 0s
   description: |
@@ -156,21 +143,16 @@ options:
   description: Kernel memory limit
 - option: label
   shorthand: l
-  default_value: '[]'
   description: Set meta data on a container
 - option: label-file
-  default_value: '[]'
   description: Read in a line delimited file of labels
 - option: link
-  default_value: '[]'
   description: Add link to another container
 - option: link-local-ip
-  default_value: '[]'
   description: Container IPv4/IPv6 link-local addresses
 - option: log-driver
   description: Logging driver for the container
 - option: log-opt
-  default_value: '[]'
   description: Log driver options
 - option: mac-address
   description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
@@ -188,19 +170,19 @@ options:
 - option: memory-swappiness
   default_value: "-1"
   description: Tune container memory swappiness (0 to 100)
+- option: mount
+  description: Attach a filesystem mount to the container
 - option: name
   description: Assign a name to the container
 - option: net
   default_value: default
   description: Connect a container to a network
 - option: net-alias
-  default_value: '[]'
   description: Add network-scoped alias for the container
 - option: network
   default_value: default
   description: Connect a container to a network
 - option: network-alias
-  default_value: '[]'
   description: Add network-scoped alias for the container
 - option: no-healthcheck
   default_value: "false"
@@ -221,7 +203,6 @@ options:
   description: Give extended privileges to this container
 - option: publish
   shorthand: p
-  default_value: '[]'
   description: Publish a container's port(s) to the host
 - option: publish-all
   shorthand: P
@@ -239,7 +220,6 @@ options:
 - option: runtime
   description: Runtime to use for this container
 - option: security-opt
-  default_value: '[]'
   description: Security Options
 - option: shm-size
   default_value: "0"
@@ -251,13 +231,11 @@ options:
   default_value: "0"
   description: Timeout (in seconds) to stop a container
 - option: storage-opt
-  default_value: '[]'
   description: Storage driver options for the container
 - option: sysctl
   default_value: map[]
   description: Sysctl options
 - option: tmpfs
-  default_value: '[]'
   description: Mount a tmpfs directory
 - option: tty
   shorthand: t
@@ -275,12 +253,10 @@ options:
   description: UTS namespace to use
 - option: volume
   shorthand: v
-  default_value: '[]'
   description: Bind mount a volume
 - option: volume-driver
   description: Optional volume driver for the container
 - option: volumes-from
-  default_value: '[]'
   description: Mount volumes from the specified container(s)
 - option: workdir
   shorthand: w
