@@ -149,6 +149,8 @@ between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
+>Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge releease.
+
 With regard to reported performance issues ([GitHub issue 77: File access in
 mounted volumes extremely slow](https://github.com/docker/for-mac/issues/77)),
 and a similar thread on [Docker for Mac forums on topic: File access in mounted
@@ -234,7 +236,7 @@ keeps track of, in the Linux kernel itself, the files that do not exist.
 However, even this is not sufficient for the first time rake is run on a
 shared directory. To handle that case, we actually need to develop a Linux
 kernel patch which negatively caches all directory entries not in a
-specified set -- and this cache must be kept up-to-date in real-time with the macOS 
+specified set -- and this cache must be kept up-to-date in real-time with the macOS
 file system state even in the presence of missing macOS FSEvents messages and
 so must be invalidated if macOS ever reports an event delivery failure.
 

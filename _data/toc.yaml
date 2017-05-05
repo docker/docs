@@ -2200,6 +2200,8 @@ manuals:
     title: Networking
   - path: /docker-for-mac/osxfs/
     title: File system sharing
+  - path: /docker-for-mac/osxfs-caching/
+    title: Performance tuning for volume mounts (shared filesystems)
   - path: /docker-for-mac/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-mac/faqs/
