@@ -158,10 +158,11 @@ to improve performance by adding the `cached` option:
 $ docker run -d -P --name web -v /src/webapp:/webapp:cached training/webapp python app.py
 ```
 
-The `cached` option typically improves the performance of read-heavy workloads on
-Docker for Mac, at the cost of some temporary inconsistency between the host and
-the container.  On other platforms `cached` currently has no effect.  The article
-[User-guided caching in Docker for Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/)
+The `cached` option typically improves the performance of read-heavy workloads
+on Docker for Mac, at the cost of some temporary inconsistency between the host
+and the container.  On other platforms, `cached` currently has no effect.  The
+article [User-guided caching in Docker for
+Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/)
 gives more details about the behavior of `cached` on macOS.
 
 

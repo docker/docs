@@ -6,9 +6,14 @@ toc_max: 4
 toc_min: 2
 ---
 
-[Docker 17.04 CE Edge](https://docs.docker.com/edge/#docker-ce-edge-new-features) adds support for two new flags to the [docker run -v, volume](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
-option, `cached` and `delegated`, that can significantly improve the
-performance of mounted volume access on Docker for Mac. These options begin to solve some of the challenges discussed in [Performance issues, solutions, and roadmap](/docker-for-mac/osxfs.md#performance-issues-solutions-and-roadmap).
+[Docker 17.04 CE
+Edge](https://docs.docker.com/edge/#docker-ce-edge-new-features) adds support
+for two new flags to the [docker run -v,
+--volume](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
+option, `cached` and `delegated`, that can significantly improve the performance
+of mounted volume access on Docker for Mac. These options begin to solve some of
+the challenges discussed in [Performance issues, solutions, and
+roadmap](/docker-for-mac/osxfs.md#performance-issues-solutions-and-roadmap).
 
 > **Tip:** Release notes for Docker CE Edge 17.04 are [here](https://github.com/moby/moby/releases/tag/v17.04.0-ce), and the associated pull request for the additional `docker run -v` flags is [here](https://github.com/moby/moby/pull/31047).
 
@@ -75,8 +80,10 @@ two cases temporary discrepancies are allowed between container and host.
  * `delegated`: the container's view is authoritative  
    (permit delays before updates on the container appear in the host)
 
-Each of these configurations can be specified as a suffix to the `-v`
-option of `docker run`.
+## Examples
+
+Each of these configurations (`consistent`, `cached`, `delegated`) can be specified as a suffix to the [`-v`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
+option of [`docker run`](https://docs.docker.com/engine/reference/run.md).
 For example, to bind-mount `/Users/yallop/project` in a container under
 the path `/project`, you might run the following command:
 
@@ -158,13 +165,19 @@ synchronizes with the host source directory.
 
 ### cached
 
-The `cached` configuration provides all the guarantees of the
-`delegated` configuration and some additional guarantees around the
-visibility of writes performed by containers.  For directories mounted
-with `cached` the host's view of the file system is authoritative;
-writes performed by containers are immediately visible to the host, but
-there may be a delay before writes performed on the host are visible
-within containers.
+The `cached` configuration provides all the guarantees of the `delegated`
+configuration, and some additional guarantees around the visibility of writes
+performed by containers.  As such, `cached` typically improves the performance
+of read-heavy workloads, at the cost of some temporary inconsistency between the
+host and the container.
+
+For directories mounted with `cached`, the host's view of
+the file system is authoritative; writes performed by containers are immediately
+visible to the host, but there may be a delay before writes performed on the
+host are visible within containers.
+
+>**Tip:** To learn more about `cached`, see the article on
+[User-guided caching in Docker for Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/).
 
 1. Implementations **_must_** obey `delegated` Semantics 1-5.
 
