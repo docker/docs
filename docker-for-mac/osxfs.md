@@ -69,6 +69,8 @@ VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
 
+>Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge releease.
+
 ### Ownership
 
 Initially, any containerized process that requests ownership metadata of
