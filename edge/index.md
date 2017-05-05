@@ -2,7 +2,7 @@
 title: Docker CE Edge documentation
 description: Information about current Docker Edge releases
 keywords: engine, edge, installation
-current_edge: 17.04
+current_edge: 17.05
 ---
 
 The current Docker CE Edge release is {{ page.current_edge }}. The Docker CE
@@ -27,18 +27,153 @@ available until a Docker CE Stable release incorporates the feature**.
 ### Docker CE Edge new features
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#1704">17.04</a></li>
-  <!--<li><a data-toggle="tab" data-target="#1705">17.05</a></li>-->
+  <li class="active"><a data-toggle="tab" data-target="#1705">17.05</a></li>
+  <li><a data-toggle="tab" data-target="#1704">17.04</a></li>
 </ul>
+
 <div markdown="1" class="tab-content">
-<div markdown="1" id="1704" class="tab-pane fade in active">
+
+<div markdown="1" id="1705" class="tab-pane fade in active">
+#### Docker CE Edge 17.05
+
+The following major features and changes are included in Docker CE Edge 17.05.
+**Docker CE Edge 17.05 also includes the features from Docker CE Edge 17.04.**
+Continue reading, or go straight to [API and CLI](#api-and-cli),
+[Builder](#builder), [Daemon](#daemon), [Dockerfile](#dockerfile),
+[Logging](#logging), [Networking](#networking),
+[Operating system support](#operating-system-support), [Runtime](#runtime),
+[Security](#security), [Services](#services), or [Stacks](#stacks).
+
+[Read the full release notes](https://github.com/moby/moby/releases/tag/v17.05.0-ce){: target="_blank" class="_" }
+
+##### API and CLI
+
+- Add [version 1.29](/engine/reference/api/v1.29/) of the Docker API.
+- Add `--mount` flag to `docker run` and `docker create`
+  {% include github-pr.md pr="32251" %}
+- Add the ability to specify `--type=secret` in `docker inspect`
+  {% include github-pr.md pr="32124" %}
+- Add `--format` and `--filter` options for `docker secret ls`
+  {% include github-pr.md pr="30810" %} and {% include github-pr.md pr="31552" %}
+- Add the ability to only show local or swarm networks in `docker network ls`
+  {% include github-pr.md pr="31529" %}
+- Add the ability to update the `--cpus` value for a running container
+  {% include github-pr.md pr="31148" %}
+- Add label filtering to all `prune` commands
+  {% include github-pr.md pr="30740" %}
+- Add the ability to remove multiple stacks with a single `docker stack rm`
+  invocation {% include github-pr.md pr="32110" %}
+* Improve `docker version --format` option when the client has downgraded the
+  API version {% include github-pr.md pr="31022" %}
+* You are now prompted when using an encrypted client certificate to connect to
+  a Docker daemon {% include github-pr.md pr="31364" %}
+
+##### Builder
+
+- Add support for multi-stage builds {% include github-pr.md pr="31257" %}
+  (see [Use multi-stage builds](/engine/userguide/eng-image/multistage-build.md))
+- Add support for named build stages when using multi-stage builds
+  {% include github-pr.md pr="32063" %}
+- Add support for using `ARG` variables in the `FROM` instruction in the
+  Dockerfile {% include github-pr.md pr="31352" %}
+- `docker build` now reads the Dockerfile from `STDIN` when using the `-f` flag
+  {% include github-pr.md pr="31236" %}
+- Default build arguments are no longer included in the image history
+  {% include github-pr.md pr="31584" %}
+
+##### Daemon
+
+- The `--api-cors-header` is no longer ignored if `--api-enable-cors` is not set
+  {% include github-pr.md pr="32174" %}
+- The `--graph` flag is deprecated in favor or `--data-root`
+  {% include github-pr.md pr="28696" %}
+- Document deprecation of the `--api-enable-cors` daemon flag. This flag was
+  marked as deprecated in Docker 1.6.0 but was inadvertently omitted from the
+  list of deprecated features. {% include github-pr.md pr="32352" %}
+
+##### Logging
+
+- You can now show the logs for an individual service task in the
+  `docker service logs` command or via the `/tasks/{id}/logs` REST endpoint
+  {% include github-pr.md pr="32015" %}
+- Add support for logging driver plugins {% include github-pr.md pr="28403" %}
+- Add the ability to set `--log-opt env-regex` to match an environment variable
+  using a regular expression {% include github-pr.md pr="27565" %}
+- `docker service logs` is no longer experimental.
+  {% include github-pr.md pr="32462" %}
+
+##### Networking
+
+- Add the ability to replace, and customize the ingress network
+  {% include github-pr.md pr="31714" %}
+- Files are now written to the correct directory if a custom data-root is set
+  {% include github-pr.md pr="32505" %}
+
+##### Operating system support
+
+- Ubuntu 12.04 (Precise Pangolin) is no longer supported.
+  {% include github-pr.md pr="32520" %}
+- Ubuntu 17.04 (Zesty Zapus) is now supported.
+  {% include github-pr.md pr="32435" %}
+
+##### Runtime
+
+- The health probe is now consistently stopped when a container exits
+  {% include github-pr.md pr="32274" %}
+- You can now specify "grace periods" on healthchecks using `--start-period` and `--health-start-period`
+  to support services and containers with an initial startup delay {% include github-pr.md pr="28938" %}
+
+##### Security
+
+- Add the ability to set SELinux type or MCS labels when using
+  `--ipc=container:` or `--ipc=host ` {% include github-pr.md pr="30652" %}
+
+##### Services
+
+- You can now show the logs for an individual service task in the
+  `docker service logs` command or via the `/tasks/{id}/logs` REST endpoint
+  {% include github-pr.md pr="32015" %}
+- You can now specify the update or rollback order for services using
+  `--update-order` and `--rollback-order` {% include github-pr.md pr="30261" %}
+- Add support for synchronous service creation and update {% include github-pr.md pr="31144" %}
+- You can now specify "grace periods" on healthchecks using `--start-period` and `--health-start-period`
+  to support services and containers with an initial startup delay
+  {% include github-pr.md pr="28938" %}
+- `docker service create` now omits fields that are not shown by the user, where
+  possible. In addition, `docker service inspect` now shows default values that
+  were not specified by the user. {% include github-pr.md pr="32284" %}
+- `docker service logs` is no longer experimental.
+  {% include github-pr.md pr="32462" %}
+- Add support for Credential Spec and SELinux to services
+  {% include github-pr.md pr="32339" %}
+- You can override the entrypoint using the `--entrypoint` flag with
+  `docker service create` or `docker service update`
+  {% include github-pr.md pr="29228" %}
+- Add `--network-add` and `--network-rm` flags to `docker service update`
+  {% include github-pr.md pr="32062" %}
+- Add the ability to specify the credential specification to
+  `docker service create` and `docker service update`
+  {% include github-pr.md pr="32339" %}
+- Add the ability to filter by service replication mode when listing services
+  {% include github-pr.md pr="31538" %}
+- Add `--format` option to `docker node ls`
+  {% include github-pr.md pr="30424" %}
+- Tasks are no longer re-deployed unnecessarily when environment-variables are
+  used {% include github-pr.md pr="32364" %}
+
+##### Stacks
+
+- Add the ability to update stacks to prune services that are no longer defined
+  in the stack file {% include github-pr.md pr="31302" %}
+- `docker stack deploy` now supports `endpoint_mode` when deploying from a stack
+  file {% include github-pr.md pr="32333" %}
+</div> <!-- 17.05 -->
+
+<div markdown="1" id="1704" class="tab-pane fade">
 
 #### Docker CE Edge 17.04
 
 The following major features and changes are included in Docker CE Edge 17.04.
-Continue reading, or go straight to [API and CLI](#api-and-cli),
-[Daemon](#daemon), [Dockerfile](#dockerfile), [Services](#services), or
-[Stacks](#stacks).
 
 [Read the full release notes](https://github.com/moby/moby/releases/tag/v17.04.0-ce){: target="_blank" class="_" }
 
@@ -185,5 +320,4 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
   {% include github-pr.md pr="31795" %}
 
 </div> <!-- 17.04 -->
-<!--<div id="1705" class="tab-pane fade">TAB 2 CONTENT</div>-->
 </div> <!-- tab-content -->

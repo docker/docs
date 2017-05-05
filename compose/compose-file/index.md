@@ -253,12 +253,12 @@ services](/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-ser
 in the [swarm](/engine/swarm/) topics.)
 
 
-version: '3'
-services:
-  worker:
-    image: dockersamples/examplevotingapp_worker
-    deploy:
-      mode: global
+    version: '3'
+    services:
+      worker:
+        image: dockersamples/examplevotingapp_worker
+        deploy:
+          mode: global
 
 #### replicas
 

@@ -1,5 +1,5 @@
 command: docker attach
-short: Attach to a running container
+short: Attach local standard input, output, and error streams to a running container
 long: |-
   Use `docker attach` to attach your terminal's standard input, output, and error
   (or any combination of the three) to a running container using the container's

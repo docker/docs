@@ -43,7 +43,7 @@ It might be helpful to connect directly to the RethinkDB instance running on a
 DTR replica to check the DTR internal state.
 
 Use SSH to log into a node that is running a DTR replica, and run the following
-command, replacing `$REPLICA_ID` by the id of the DTR replica running on that
+command, replacing `$REPLICA_ID` by the ID of the DTR replica running on that
 node:
 
 ```none
