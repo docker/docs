@@ -151,6 +151,21 @@ $ docker run -d -P --name web -v /src/webapp:/webapp:ro training/webapp python a
 Here you've mounted the same `/src/webapp` directory but you've added the `ro`
 option to specify that the mount should be read-only.
 
+You can also relax the consistency requirements of a mounted directory
+to improve performance by adding the `cached` option:
+
+```bash
+$ docker run -d -P --name web -v /src/webapp:/webapp:cached training/webapp python app.py
+```
+
+The `cached` option typically improves the performance of read-heavy workloads
+on Docker for Mac, at the cost of some temporary inconsistency between the host
+and the container.  On other platforms, `cached` currently has no effect.  The
+article [User-guided caching in Docker for
+Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/)
+gives more details about the behavior of `cached` on macOS.
+
+
 >**Note**: The host directory is, by its nature, host-dependent. For this
 >reason, you can't mount a host directory from `Dockerfile`, the `VOLUME`
 instruction does not support passing a `host-dir`, because built images

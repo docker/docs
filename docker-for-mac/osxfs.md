@@ -1,5 +1,5 @@
 ---
-description: OSXFS
+description: Osxfs
 keywords: mac, osxfs
 redirect_from:
 - /mackit/osxfs/
@@ -27,8 +27,8 @@ Mac software dubiously relies on case-insensitivity to function.
 ### Access control
 
 `osxfs`, and therefore Docker, can access only those file system resources that
-the Docker for Mac user has access to. `osxfs` does not run as `root`. If the OS
-X user is an administrator, `osxfs` inherits those administrator privileges. We
+the Docker for Mac user has access to. `osxfs` does not run as `root`. If the macOS
+user is an administrator, `osxfs` inherits those administrator privileges. We
 are still evaluating which privileges to drop in the file system process to
 balance security and ease-of-use. `osxfs` performs no additional permissions
 checks and enforces no extra access control on accesses made through it. All
@@ -68,6 +68,8 @@ should work as expected. If a macOS path is not shared and does not exist in the
 VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
+
+>Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 ### Ownership
 
@@ -149,17 +151,18 @@ between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
+>Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
+
 With regard to reported performance issues ([GitHub issue 77: File access in
 mounted volumes extremely slow](https://github.com/docker/for-mac/issues/77)),
 and a similar thread on [Docker for Mac forums on topic: File access in mounted
 volumes extremely
 slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/),
-this topic provides an explanation of the issues, what we are doing to
-address them, how the community can help us, and what you can expect in the
-future. This explanation is a slightly re-worked version of an [understanding
-performance
-post](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158?u=orangesnap)
-from David Sheets (@dsheets) on the [Docker development
+this topic provides an explanation of the issues, recent progress in addressing
+them, how the community can help us, and what you can expect in the
+future. This explanation derives from a [post about understanding
+performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158?u=orangesnap)
+by David Sheets (@dsheets) on the [Docker development
 team](https://forums.docker.com/groups/Docker) to the forum topic just
 mentioned. We want to surface it in the documentation for wider reach.
 
@@ -172,7 +175,7 @@ file system server in Docker for Mac. File system APIs are very wide (20-40
 message types) with many intricate semantics  involving on-disk state, in-memory
 cache state, and concurrent access by multiple  processes. Additionally, `osxfs`
 integrates a mapping between macOS's FSEvents API and Linux's `inotify` API
-which is implemented inside of the file system itself complicating matters
+which is implemented inside of the file system itself, complicating matters
 further (cache behavior in particular).
 
 At the highest level, there are two dimensions to file system performance:
@@ -186,65 +189,64 @@ Latency is the time it takes for a file system call to complete. For instance,
 the time between a thread issuing write in a container and resuming with the
 number of bytes written. With a classical block-based file system, this latency
 is typically under 10μs (microseconds). With `osxfs`, latency is presently
-around 200μs for most operations or 20x slower. For workloads which demand many
-sequential roundtrips, this results in significant observable slowdown. To
-reduce the latency, we need to shorten the data path from a Linux system call to
+around 130μs for most operations or 13× slower. For workloads which demand many
+sequential roundtrips, this results in significant observable slowdown.
+Reducing the latency requires shortening the data path from a Linux system call to
 macOS and back again. This requires tuning each component in the data path in
 turn -- some of which require significant engineering effort. Even if we achieve
-a huge latency reduction of 100μs/roundtrip, we will still "only" see a doubling
+a huge latency reduction of 65μs/roundtrip, we will still "only" see a doubling
 of performance. This is typical of performance engineering, which requires
 significant effort to analyze slowdowns and develop optimized components. We
-know how we can likely halve the roundtrip time but we haven't implemented those
-improvements yet (more on this below in
+know a number of approaches that will probably reduce the roundtrip time but we
+haven't implemented all those improvements yet (more on this below in
 [What you can do](osxfs.md#what-you-can-do)).
 
-There is hope for significant performance improvement in the near term despite
-these fundamental communication channel properties, which are difficult to
-overcome (latency in particular). This hope comes in the form of increased
-caching (storing "recent" values closer to their use to prevent roundtrips
-completely). The Linux kernel's VFS layer contains a number of caches which can
-be used to greatly improve performance by reducing the required communication
-with the file system. Using this caching comes with a number of trade-offs:
+A second approach to improving performance is to reduce the number of
+roundtrips by caching data.  Recent versions of Docker for Mac (17.04 onwards)
+include caching support that brings significant (2-4×) improvements to many
+applications.  Much of the overhead of osxfs arises from the requirement to
+keep the container's and the host's view of the file system consistent, but
+full consistency is not necessary for all applications and relaxing the
+constraint opens up a number of opportunities for improved performance.
 
-* It requires understanding the cache behavior in detail in order to write
-correct, stateful functionality on top of those caches.
-
-* It harms the coherence or consistency of the file system as observed
-from Linux containers and the macOS file system interfaces.
+At present there is support for read caching, with which the container's view
+of the file system can temporarily drift apart from the authoritative view on
+the host.  Further caching developments, including support for write caching,
+are planned.
+A [detailed description of the behavior in various caching configurations](osxfs-caching)
+is available.
 
 #### What we are doing
 
-We are actively working on both increasing caching while mitigating the
-associated issues and on reducing the file system data path latency. This
-requires significant analysis of file system traces and speculative development
-of system improvements to try to address specific performance issues. Perhaps
-surprisingly, application workload can have a huge effect on performance. As an
-example, here are two different use cases contributed on the [forum topic](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/)
+We continue to actively work on increasing caching and on reducing the
+file system data path latency. This requires significant analysis of file
+system traces and speculative development of system improvements to try to
+address specific performance issues. Perhaps surprisingly, application
+workload can have a huge effect on performance. As an example, here are two
+different use cases contributed on the
+[forum topic](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/)
 and how their performance differs and suffers due to latency, caching, and
 coherence:
 
 1. A rake example (see below) appears to attempt to access 37000+
-different files that don't exist on the shared volume. We can work very hard to
-speed up all use cases by 2x via latency reduction but this use case will still
-seem "slow". The ultimate solution for rake is to use a "negative dcache" that
+different files that don't exist on the shared volume. Even with a 2× speedup
+via latency reduction this use case will still seem "slow".
+With caching enabled the performance increases around 3.5×, as described in
+the [user-guided caching post](link-TODO).
+We expect to see further performance improvements for rake with a "negative dcache" that
 keeps track of, in the Linux kernel itself, the files that do not exist.
-Unfortunately, even this is not sufficient for the first time rake is run on a
+However, even this is not sufficient for the first time rake is run on a
 shared directory. To handle that case, we actually need to develop a Linux
 kernel patch which negatively caches all directory entries not in a
-specified set -- and this cache must be kept up-to-date in real-time with the OS
-X file system state even in the presence of missing macOS FSEvents messages and
+specified set -- and this cache must be kept up-to-date in real-time with the macOS
+file system state even in the presence of missing macOS FSEvents messages and
 so must be invalidated if macOS ever reports an event delivery failure.
 
-2. Running ember build in a shared file system results in ember creating many
+2. Running `ember build` in a shared file system results in ember creating many
 different temporary directories and performing lots of intermediate activity
 within them. An empty ember project is over 300MB. This usage pattern does not
-require coherence between Linux and macOS but, because we cannot distinguish this
-fact at run-time, we maintain coherence during its hundreds of thousands of file
-system accesses to manipulate temporary state. There is no "correct" solution in
-this case. Either ember needs to change, the volume mount needs to have
-coherence properties specified on it somehow, some heuristic needs to be
-introduced to detect this access pattern and compensate, or the behavior needs
-to be indicated via, e.g., extended attributes in the macOS file system.
+require coherence between Linux and macOS, and will be significantly improved by
+write caching.
 
 These two examples come from performance use cases contributed by users and they
 are incredibly helpful in prioritizing aspects of file system performance to
@@ -254,24 +256,17 @@ work on next.
 
 Under development, we have:
 
-1. A Linux kernel patch to reduce data path latency by 2/7 copies and 2/5
-context switches
-
-2. Increased macOS integration to reduce the latency between the hypervisor and
-the file system server
-
-3. A server-side directory read cache to speed up traversal of large directories
-
-4. User-facing file system tracing capabilities so that you can send us
-recordings of slow workloads for analysis
-
-5. A growing performance test suite of real world use cases (more on this below
+1. A growing performance test suite of real world use cases (more on this below
 in What you can do)
 
-6. Experimental support for using Linux's inode, writeback, and page caches
+2. Further caching improvements, including negative, structural, and write-back
+caching, and lazy cache invalidation.
 
-7. End-user controls to configure the coherence of subsets of cross-OS bind
-mounts without exposing all of the underlying complexity
+3. A Linux kernel patch to reduce data path latency by 2/7 copies and 2/5
+context switches
+
+4. Increased macOS integration to reduce the latency between the hypervisor and
+the file system server
 
 #### What you can do
 
@@ -310,16 +305,16 @@ can be easily tracked.
 #### What you can expect
 
 We will continue to work toward an optimized shared file system implementation
-on the Beta channel of Docker for Mac.
+on the Edge channel of Docker for Mac.
 
 You can expect some of the performance improvement work mentioned above to reach
-the Beta channel in the coming release cycles.
+the Edge channel in the coming release cycles.
 
 In due course, we will open source all of our shared file system components. At
 that time, we would be very happy to collaborate with you on improving the
 implementation of `osxfs` and related software.
 
-We still have on the slate to write up and publish details of shared file system
+We also plan to write up and publish further details of shared file system
 performance analysis and improvement on the Docker blog. Look for or nudge
 @dsheets about those articles, which should serve as a jumping off point for
 understanding the system, measuring it, or contributing to it.
