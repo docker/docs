@@ -213,7 +213,7 @@ in your worker Auto Scaling group (via the AWS console, or updating the
   high-availability. The template is adjustable and upgradeable meaning you can
   adjust your configuration (e.g instance types or Docker engine version).
 
-  ![ddc_aws.svg](/images/ddc_aws.svg)
+  ![`ddc_aws`.svg](../images/ddc_aws.svg)
 
 
 ## Cloudformation Parameters
