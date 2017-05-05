@@ -14,9 +14,9 @@ performance of mounted volume access on Docker for Mac. These options begin to s
 
 ## Performance implications of host-container file system consistency
 
-With Docker distributions for an increasing number of platforms,
-including macOS and Windows, generalizing mount semantics during
-container run is a necessity to enable workload optimizations.
+With Docker distributions now available for an increasing number of
+platforms, including macOS and Windows, generalizing mount semantics
+during container run is a necessity to enable workload optimizations.
 
 The current implementations of mounts on Linux provide a consistent
 view of a host directory tree inside a container: reads and writes
