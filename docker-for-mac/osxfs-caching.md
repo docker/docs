@@ -8,8 +8,8 @@ toc_min: 2
 
 [Docker 17.04 CE
 Edge](https://docs.docker.com/edge/#docker-ce-edge-new-features) adds support
-for two new flags to the [docker run -v,
--\-volume](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
+for two new flags to the [docker run `-v`,
+`--volume`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
 option, `cached` and `delegated`, that can significantly improve the performance
 of mounted volume access on Docker for Mac. These options begin to solve some of
 the challenges discussed in [Performance issues, solutions, and
