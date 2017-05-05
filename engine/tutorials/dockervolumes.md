@@ -160,7 +160,10 @@ $ docker run -d -P --name web -v /src/webapp:/webapp:cached training/webapp pyth
 
 The `cached` option typically improves the performance of read-heavy workloads on
 Docker for Mac, at the cost of some temporary inconsistency between the host and
-the container.  On other platforms `cached` currently has no effect.
+the container.  On other platforms `cached` currently has no effect.  The article
+[User-guided caching in Docker for Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/)
+gives more details about the behavior of `cached` on macOS.
+
 
 >**Note**: The host directory is, by its nature, host-dependent. For this
 >reason, you can't mount a host directory from `Dockerfile`, the `VOLUME`
