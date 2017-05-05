@@ -28,7 +28,7 @@ This data is persisted on the host running DTR, using named volumes.
 [Learn more about DTR named volumes](../architecture.md).
 
 To perform a backup of a DTR node, run the `docker/dtr backup` command. This
-command backups up the following data:
+command backs up the following data:
 
 | Data                               | Backed up | Description                                                    |
 |:-----------------------------------|:----------|:---------------------------------------------------------------|
@@ -39,27 +39,27 @@ command backups up the following data:
 | Scan results                       | yes       |                                                                |
 | Certificates and keys              | yes       |                                                                |
 | Image content                      | no        | Needs to be backed up separately, depends on DTR configuration |
-| Users, orgs, teams                 | no        | Create a UCP backup to backup this data                        |
+| Users, orgs, teams                 | no        | Create a UCP backup to back up this data                        |
 | Vulnerability database             | no        | Can be re-downloaded after a restore                           |
 
 
-## Backup DTR data
+## Back up DTR data
 
 To create a backup of DTR you need to:
 
-1. Backup image content
-2. Backup DTR metadata
+1. Back up image content
+2. Back up DTR metadata
 
 You should always create backups from the same DTR replica, to ensure a smoother
 restore.
 
-### Backup image content
+### Back up image content
 
 Since you can configure the storage backend that DTR uses to store images,
-the way you backup images depends on the storage backend you're using.
+the way you back up images depends on the storage backend you're using.
 
 If you've configured DTR to store images on the local filesystem or NFS mount,
-you can backup the images by using ssh to log into a node where DTR is running,
+you can back up the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
@@ -70,7 +70,7 @@ If you're using a different storage backend, follow the best practices
 recommended for that system.
 
 
-### Backup DTR metadata
+### Back up DTR metadata
 
 To create a DTR backup, load your UCP client bundle, and run the following
 command, replacing the placeholders for the real values:
@@ -91,10 +91,10 @@ Where:
 * `<version>`, the version of DTR you're running
 * `<ucp-url>` is the url you use to access UCP
 * `<ucp-username>` is the username of a UCP administrator
-* `<replica-id>` is the id of the DTR replica to backup
+* `<replica-id>` is the ID of the DTR replica to back up
 
 
-This prompts you for the UCP password, backups up the DTR metadata and saves the
+This prompts you for the UCP password, backs up the DTR metadata and saves the
 result into a tar archive. You can learn more about the supported flags in
 the [reference documentation](../../reference/cli/backup.md).
 
@@ -217,8 +217,8 @@ Where:
 * `<ucp-url>` is the url you use to access UCP
 * `<ucp-username>` is the username of a UCP administrator
 * `<hostname>` is the hostname of the node where you've restored the images
-* `<replica-id>` the id of the replica you backed up
-* `<dtr-external-url>`the url that clients use to access DTR
+* `<replica-id>` the ID of the replica you backed up
+* `<dtr-external-url>` the url that clients use to access DTR
 
 ### Re-fetch the vulnerability database
 
