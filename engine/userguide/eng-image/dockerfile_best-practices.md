@@ -270,7 +270,7 @@ recommendations.
         s3cmd=1.1.* \
      && rm -rf /var/lib/apt/lists/*
 
-The `s3cmd` instructions specifies a version `1.1.0*`. If the image previously
+The `s3cmd` instructions specifies a version `1.1.*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensure the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
