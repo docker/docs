@@ -1,5 +1,5 @@
 ---
-description: OSXFS
+description: Osxfs
 keywords: mac, osxfs
 redirect_from:
 - /mackit/osxfs/
