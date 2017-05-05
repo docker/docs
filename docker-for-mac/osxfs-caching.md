@@ -75,6 +75,24 @@ two cases temporary discrepancies are allowed between container and host.
  * `delegated`: the container's view is authoritative  
    (permit delays before updates on the container appear in the host)
 
+Each of these configurations can be specified as a suffix to the `-v`
+option of `docker run`.
+For example, to bind-mount `/Users/yallop/project` in a container under
+the path `/project`, you might run the following command:
+
+```
+docker run -v /Users/yallop/project:/project:cached alpine command
+```
+
+The caching configuration can be varied independently for each bind mount,
+so you can mount each directory in a different mode:
+
+```
+docker run -v /Users/yallop/project:/project:cached \
+ -v /host/another-path:/mount/another-point:consistent
+ alpine command
+```
+
 ## Semantics
 
 The semantics of each configuration is described as a set of guarantees
