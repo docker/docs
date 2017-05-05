@@ -1,6 +1,6 @@
 ---
 description: Osxfs caching
-keywords: mac, osxfs, volume mounts, docker run -v, performance
+keywords: mac, osxfs, volumes
 title: Performance tuning for volume mounts (shared filesystems)
 toc_max: 4
 toc_min: 2
