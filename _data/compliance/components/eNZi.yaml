@@ -1,0 +1,790 @@
+documentation_complete: false
+schema_version: 3.1.0
+name: Authentication and Authorization Service (eNZi)
+references:
+  - name: UCP Documentation
+    path: https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Docker_Datacenter_Best_Practices_and_Design_Considerations#Identity_Management
+    type: URL
+satisfies:
+  - control_key: AC-1
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of
+          this control, one can control which users and teams are allowed to
+          create and manipulate Docker Enterprise Edition resources. By default, no one
+          can make changes to the cluster. Permissions can be granted and
+          managed to enforce fine-grained access control. Supporting
+          documentation can found at the following resources:
+          
+          UCP:
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/
+          
+          DTR:
+          - https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/
+          - https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, an external identity management system (such as Microsoft''s
+          Active Directory or an LDAP endpoint) can be configured as mandated by
+          this control and can be integrated with Docker Enterprise Edition.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, an external identity management system (such as Microsoft''s
+          Active Directory or an LDAP endpoint) can be configured as mandated by
+          this control and can be integrated with Docker Enterprise Edition.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (2)
+    covered_by: []
+    implementation_statuses:
+      - none
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Using Docker Enterprise Edition''s LDAP integration capabilities, one
+          can disable and/or remove temporary and emergency accounts in a
+          connected directory service (such as Active Directory) after an
+          organization-defined time period. When a user is removed from LDAP,
+          that user becomes inactive after the LDAP synchronization runs.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/'
+    standard_key: NIST-800-53    
+
+  - control_key: AC-2 (3)
+    covered_by: []
+    implementation_statuses:
+      - none
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Using Docker Enterprise Edition''s LDAP integration capabilities, one
+          can automatically disable inactive accounts in a connected directory
+          service (such as Active Directory). When a user is removed from LDAP,
+          that user becomes inactive after the LDAP synchronization runs.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (4)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition logs various authentication and
+          authorization events to standard log files. One can configure Docker
+          Enterprise Edition to direct these event logs to a remote logging
+          service such as an Elasticsearch, Logstash and Kibana (ELK) stack and
+          subsequently alert on specific event types. When integrating Docker
+          Enterprise Edition with LDAP, one can refer the the directory
+          service''s logging mechanisms for auditing the events defined by this
+          control. Supporting documentation can be found at the following
+          resources:
+          
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (5)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, Docker Enterprise Edition can be configured to enforce automated
+          session termination of users after an organization-defined time period
+          of inactivity. By default, the initial lifetime of a user''s session
+          is set to 72 hours and the renewal session for a user''s session is
+          set to 24 hours. These values can both be changed in the "Auth"
+          section of the "Admin Settings" in Universal Control Plane.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (7)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, Docker Enterprise Edition supports various levels of user
+          permissions and role-based access control enforcements. Administrator
+          users have permissions to: manage other Docker Enterprise Edition
+          users, manage Docker Trusted Registry repositories and settings, and
+          manage the Universal Control Plane and underlying Docker Swarm Mode
+          cluster. Supporting documentation can be found at the following
+          resources:
+          
+          UCP:
+          - https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/
+          - https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Docker_Datacenter_Best_Practices_and_Design_Considerations#Identity_Management
+          - https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Securing_Docker_Datacenter_and_Security_Best_Practices#RBAC
+          
+          DTR:
+          - https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
+          - https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Securing_Docker_Datacenter_and_Security_Best_Practices#Organizations_.E2.80.94_RBAC'
+    standard_key: NIST-800-53
+  
+  - control_key: AC-2 (9)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, users and/or groups synchronized to Docker Enterprise Edition
+          via LDAP can be configured at the directory service.'
+    standard_key: NIST-800-53
+  
+  - control_key: AC-2 (10)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Users and/or groups synchronized to Docker Enterprise Edition via
+          LDAP can be configured at the directory service.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (11)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Information system accounts synchronized to Docker Enterprise Edition
+          via LDAP can be configured at the directory service to meet this
+          requirement as necessary.'
+    standard_key: NIST-800-53
+  
+  - control_key: AC-2 (12)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, when Docker Enterprise Edition is configured for LDAP
+          integration, one can refer to the directory service''s existing
+          monitoring tools.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-2 (13)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'To assist the organization in meeting the requirements of this
+          control, users and/or groups synchronized to Docker Enterprise Edition
+          via LDAP can be managed at the directory service.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-3
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'One can control which users and teams can create and manipulate
+          Docker Enterprise Edition resources. By default, no one can make
+          changes to the cluster. Permissions can be granted and managed to
+          enforce fine-grained access control. The eNZi component facilitates
+          authorizations as dictated by the system''s administrators.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-6 (9)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition logs privileged user events to standard log
+          files. One can configure Docker Enterprise Edition to direct these
+          event logs to a remote logging service such as an Elasticsearch,
+          Logstash and Kibana (ELK) stack and subsequently alert on specific
+          event types. When integrating Docker Enterprise Edition with LDAP, one
+          can refer the the directory service''s logging mechanisms for auditing
+          the events defined by this control. Supporting documentation regarding
+          logging and monitoring can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.0/guides/monitor/
+          - https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-6 (10)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'One can control which users and teams can create and manipulate
+          Docker Enterprise Edition resources. By default, no one can make changes to
+          the cluster. Permissions can be granted and managed to enforce
+          fine-grained access control. Supporting documentation for the configuration of this functionality can be found at the following resources:
+
+          - https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/
+          - https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/
+          - https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/permission-levels/
+          - https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/permission-levels/'
+    standard_key: NIST-800-53
+  
+  - control_key: AC-7
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'When Docker Enterprise Edition is integrated to a directory service via LDAP,
+          one can reference the functionality of the directory service to
+          configure the enforcement of a limit to the number of conesecutive
+          invalid logon attempts by a user during a specified time period.'
+      - key: b
+        text: |
+          'When Docker Enterprise Edition is integrated to a directory service
+          via LDAP, one can reference the functionality of the directory service
+          to configure he ability to automatically lock/disable an account for a
+          specified period of time after a consecutive invalid logon attempt
+          limit is reached.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-10
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to limit the number of
+          concurrent sessions for each account. These options can be found
+          within the Universal Control Plane Admin Settings under the "Auth"
+          section. '
+    standard_key: NIST-800-53
+
+  - control_key: AC-11
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Per the requirements of AC-2 (5), Docker Enterprise Edition
+          can be configured to enforce user session lifetime limits and renewal
+          thresholds. These options can be found within the Universal Control
+          Plane Admin Settings under the "Auth" section. Configurable options
+          include the initial lifetime (in hours) of a user''s session and the
+          renewal threshold of a session (in hours).'
+    standard_key: NIST-800-53
+
+  - control_key: AC-11 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Per the requirements of AC-2 (5), Docker Enterprise Edition
+          can be configured to enforce user session lifetime limits and renewal
+          thresholds. These options can be found within the Universal Control
+          Plane Admin Settings under the "Auth" section. Configurable options
+          include the initial lifetime (in hours) of a user''s session and the
+          renewal threshold of a session (in hours). Upon the expiration of the
+          configured session thresholds, a user will be locked out of his/her
+          session.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-12
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Per the requirements of AC-2 (5), Docker Enterprise Edition
+          can be configured to enforce user session lifetime limits and renewal
+          thresholds. These options can be found within the Universal Control
+          Plane Admin Settings under the "Auth" section. Configurable options
+          include the initial lifetime (in hours) of a user''s session and the
+          renewal threshold of a session (in hours). Upon the expiration of the
+          configured session thresholds, a user will be locked out of his/her
+          session.'
+    standard_key: NIST-800-53
+  
+  - control_key: AC-17 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - organization
+    narrative:
+      - text: |
+          'Docker Enterprise Edition logs and controls all local and remote access
+          events. In addition, auditing can be configured on the underlying
+          operating system to meet this control.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-3
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition generates all of the audit record
+          information indicated by this control. A sample audit event has been
+          provided below:
+
+          {"level":"info","license_key":"123456789123456789123456789","msg":"eNZi:Password
+          based auth
+          suceeded","remote_addr":"192.168.33.1:55905","time":"2016-11-09T22:41:01Z","type":"auth
+          ok","username":"dockeruser"}'
+    standard_key: NIST-800-53
+
+  - control_key: IA-2
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to identify and authenticate
+          users via it's integrated support for LDAP. Users and groups managed
+          within the organization's LDAP directory service (e.g. Active
+          Directory) can be synchronized to UCP and DTR on a regular interval. When a
+          user is removed from the LDAP-backed directory, that user becomes
+          inactive within UCP and DTR. In addition, UCP and DTR teams can be mapped to groups
+          synchronized via LDAP. When a user is added/removed to/from the LDAP
+          group, that same user is automatically added/removed to/from the UCP and DTR
+          team. Instructions for configuring LDAP integration can be found at
+          https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-2 (5)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, Docker Enterprise Edition
+          requires individual users to be authenticated in order to gain access
+          to the system. Any permissions granted to the team(s) that which the
+          user is a member are subsequently applied.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-2 (8)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition integrates with LDAP for authenticating users to an
+          external directory service. You should configure your external
+          directory service for ensuring that you are protected against replay
+          attacks.'
+    standard_key: NIST-800-53
+
+  - control_key: IA-2 (9)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition integrates with LDAP for authenticating users to an
+          external directory service. You should configure your external
+          directory service for ensuring that you are protected against replay
+          attacks.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-4
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: c
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to prevent the reuse of user identifiers for a specified
+          period of time. Refer to your directory service's documentation for
+          configuring this.
+      - key: d
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to prevent the reuse of user identifiers for a specified
+          period of time. Refer to your directory service's documentation for
+          configuring this.'
+      - key: e
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to prevent the reuse of user identifiers for a specified
+          period of time. Refer to your directory service's documentation for
+          configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-4 (4)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to uniquely identify each individual according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-5
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: b
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to establish initial authenticator content according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+      - key: c
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to enforce strength requirements for authenticators
+          according to the requirements of this control. Refer to your directory
+          service's documentation for configuring this.'
+      - key: d
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to distribute, redistribute, and revoke authenticators
+          according to the requirements of this control. Refer to your directory
+          service's documentation for configuring this.'
+      - key: e
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to change default authenticator content according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+      - key: f
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to set minimum and maximum lifetime restrictions and reuse
+          conditions for authenticators according to the requirements of this
+          control. Refer to your directory service's documentation for
+          configuring this.'
+      - key: g
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to refresh authenticators at a regular cadence according to
+          the requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+      - key: h
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to protect authenticator content from unauthorized
+          disclosure or modification according to the requirements of this
+          control. Refer to your directory service's documentation for
+          configuring this.'
+      - key: i
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to implement specific security safeguards to protect
+          authentications according to the requirements of this control. Refer
+          to your directory service's documentation for configuring this.'
+      - key: j
+        text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to change authenticators for group or role accounts when
+          membership to those groups or roles changes  according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-5 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to enforce minimum password
+          complexity requirements. Refer to your directory service's
+          documentation for configuring this.'
+      - key: b
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to enforce the requirement to
+          change at least one character when changing passwords according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+      - key: c
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to store and transmit
+          cryptographically protected passwords according to the requirements of
+          this control. Refer to your directory service's documentation for
+          configuring this.'
+      - key: d
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to enforce the required minimum and
+          maximum lifetime restrictions according to the requirements of this
+          control. Refer to your directory service's documentation for
+          configuring this.'
+      - key: e
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to enforce the required number of
+          generations before password reuse according to the requirements of
+          this control. Refer to your directory service's documentation for
+          configuring this.'
+      - key: f
+        text: |
+          'An external directory service integrated with Docker Enterprise
+          Edition via LDAP can be configured to enforce the requirement to
+          change initial/temporary passwords upon first login according to the
+          requirements of this control. Refer to your directory service's
+          documentation for configuring this.'
+    standard_key: NIST-800-53
+
+  - control_key: IA-5 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'All users within a Docker Enterprise Edition cluster can create a
+          client certificate bundle for authenticating in to the cluster from
+          the Docker client tooling. When a user attempts to authenticate in to
+          the Docker cluster, the system validates the certificates per the
+          requirements of this control.'
+      - key: b
+        text: |
+          'All users within a Docker Enterprise Edition cluster can create a
+          client certificate bundle for authenticating in to the cluster from
+          the Docker client tooling. When a user attempts to authenticate in to
+          the Docker cluster, the system enforces authorized access to the
+          corresponding private key per the requirements of this control.'
+      - key: c
+        text: |
+          'All users within a Docker Enterprise Edition cluster can create a
+          client certificate bundle for authenticating in to the cluster from
+          the Docker client tooling. When a user attempts to authenticate in to
+          the Docker cluster, the system maps the authenticated identity to the
+          account of the individual or group per the requirements of this
+          control.'
+      - key: d
+        text: |
+          'All users within a Docker Enterprise Edition cluster can create a
+          client certificate bundle for authenticating in to the cluster from
+          the Docker client tooling. When a user attempts to authenticate in to
+          the Docker cluster, it is up to the underlying operating system
+          hosting Docker Enterprise Edition to ensure that it implements a local
+          cache of revocation data per the requirements of this control.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-5 (4)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured with automation to ensure that password authenticators meet
+          strength requirements as defined by this control. Refer to your
+          directory service's documentation for configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-5 (6)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to protect authenticators as required by this control.
+          Refer to your directory service's documentation for configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-8 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'An external directory service integrated with Docker Enterprise Edition via
+          LDAP can be configured to meet the FICAM requirements as indicated by
+          this control. Refer to your directory service's documentation for
+          configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-8 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to meet the FICAM requirements as indicated by this
+          control. Refer to your directory service's documentation for
+          configuring this.'
+    standard_key: NIST-800-53
+  
+  - control_key: IA-8 (4)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with meeting these requirements, an external
+          directory service integrated with Docker Enterprise Edition via LDAP can be
+          configured to meet the FICAM requirements as indicated by this
+          control. Refer to your directory service's documentation for
+          configuring this.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-23 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition invalidates session identifiers upon user
+          logout per the requirements of this control.'
+    standard_key: NIST-800-53

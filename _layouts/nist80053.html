@@ -1,0 +1,197 @@
+---
+layout: docs
+---
+
+{% if page.datafile %}
+
+{% for control in site.data.compliance.standards[page.datafile] %}
+
+{% if control.family == page.family %}
+{% assign header_id = control.number | replace: ".", "" | replace: "(", "-" | replace: ")", "" | replace: " ", "" %}
+{% if control.number contains "(" %}
+<h3 id="{{ header_id }}">{{ control.number }} {{ control.title }}</h3>
+{% else %}
+<h2 id="{{ header_id }}">{{ control.number }} {{ control.title }}</h2>
+{% endif %}
+
+<b>Description</b>
+<br />
+{% for toplevel_statement in control.statements %}
+{{ toplevel_statement.description }}
+<ol type="a">
+    {% for secondlevel_statement in toplevel_statement.statements %}
+    <li>{{ secondlevel_statement.description }}</li>
+    {% if secondlevel_statement.statements != null %}
+    <ol type="1">
+        {% for thirdlevel_statement in secondlevel_statement.statements %}
+        <li>{{ thirdlevel_statement.description }}</li>
+        {% endfor %}
+    </ol>
+    {% endif %}  
+    {% endfor %}
+</ol>
+{% endfor %}
+
+<b>Control information</b>
+
+<table>
+    <tr>
+        <th>Responsible role(s)</th>
+        <th>Implementation status(es)</th>
+        <th>Control origination(s)</th>
+    </tr>
+    <tr>
+        <td>
+        {% if control.statements[0].description contains "The organization" %}
+        Organization
+        {% elsif control.statements[0].description contains "The information system" %}
+        Docker EE system
+        {% endif %}
+        </td>
+        <td>
+        {% for component_hash in site.data.compliance.components %}
+        {% assign component = component_hash[1] %}
+        {% assign component_name_array = component.name | split: " " | %}
+        {% assign component_name = component_name_array.last | replace: "(", "" | replace: ")", "" %}
+        {% for satisfied_control in component.satisfies %}
+        {% if satisfied_control.control_key == control.number %}
+        {% if satisfied_control.implementation_status %}
+        <b>{{ component_name }}</b> - {{ satisfied_control.implementation_status }}<br />
+        {% elsif satisfied_control.implementation_statuses %}
+        <b>{{ component_name }}</b> - {{ satisfied_control.implementation_statuses | join: ", " }}<br />
+        {% endif %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </td>
+        <td>
+        {% for component_hash in site.data.compliance.components %}
+        {% assign component = component_hash[1] %}
+        {% assign component_name_array = component.name | split: " " | %}
+        {% assign component_name = component_name_array.last | replace: "(", "" | replace: ")", "" %}
+        {% for satisfied_control in component.satisfies %}
+        {% if satisfied_control.control_key == control.number %}
+        {% if satisfied_control.control_origin %}
+        <b>{{ component_name }}</b> - {{ satisfied_control.control_origin }}<br />
+        {% elsif satisfied_control.control_origins %}
+        <b>{{ component_name }}</b> - {{ satisfied_control.control_origins | join: ", " }}<br />
+        {% endif %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+
+<b>{{ control.number }} What is the solution and how is it implemented</b>
+
+{% assign control_id = control.number | replace: " ", "" | replace: "(", "-" | replace: ")", "" %}
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#tabEngine{{ control_id }}">Engine</a></li>
+    <li><a data-toggle="tab" data-target="#tabDTR{{ control_id }}">DTR</a></li>
+    <li><a data-toggle="tab" data-target="#tabUCP{{ control_id }}">UCP</a></li>
+    <li><a data-toggle="tab" data-target="#tabENZI{{ control_id }}">eNZi</a></li>
+    <li><a data-toggle="tab" data-target="#tabDSS{{ control_id }}">DSS</a></li>
+</ul>
+
+
+<div class="tab-content">
+    {% for component_hash in site.data.compliance.components %}
+    {% assign component = component_hash[1] %}
+
+    {% case component.name %}
+    {% when "Docker Enterprise Edition (Engine)" %}
+    <div id="tabEngine{{ control_id }}" class="tab-pane fade in active">
+    {% assign narrative_text = "" %}
+    {% for satisfied_control in component.satisfies %}
+    {% if satisfied_control.control_key == control.number %}
+    {% for narrative in satisfied_control.narrative %}
+    {% assign narrative_text = narrative.text %}
+    {{ narrative_text }}
+    {% endfor %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% if narrative_text == "" %}
+    The control is not applicable to the Docker Engine component.
+    {% endif %}
+    </div>
+
+    {% when "Docker Trusted Registry (DTR)" %}
+    <div id="tabDTR{{ control_id }}" class="tab-pane fade">
+    {% assign narrative_text = "" %}
+    {% for satisfied_control in component.satisfies %}
+    {% if satisfied_control.control_key == control.number %}
+    {% for narrative in satisfied_control.narrative %}
+    {% assign narrative_text = narrative.text %}
+    {{ narrative_text }}
+    {% endfor %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% if narrative_text == "" %}
+    The control is not applicable to the Docker Trusted Registry component.
+    {% endif %}
+    </div>
+
+    {% when "Docker Security Scanning (DSS)" %}
+    <div id="tabDSS{{ control_id }}" class="tab-pane fade">
+    {% assign narrative_text = "" %}
+    {% for satisfied_control in component.satisfies %}
+    {% if satisfied_control.control_key == control.number %}
+    {% for narrative in satisfied_control.narrative %}
+    {% assign narrative_text = narrative.text %}
+    {{ narrative_text }}
+    {% endfor %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% if narrative_text == "" %}
+    The control is not applicable to the Docker Security Scanning component.
+    {% endif %}
+    </div>
+
+    {% when "Authentication and Authorization Service (eNZi)" %}
+    <div id="tabENZI{{ control_id }}" class="tab-pane fade">
+    {% assign narrative_text = "" %}
+    {% for satisfied_control in component.satisfies %}
+    {% if satisfied_control.control_key == control.number %}
+    {% for narrative in satisfied_control.narrative %}
+    {% assign narrative_text = narrative.text %}
+    {{ narrative_text }}
+    {% endfor %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% if narrative_text == "" %}
+    The control is not applicable to the Authentication and Authorization Service (eNZi) component.
+    {% endif %}
+    </div>
+
+    {% when "Universal Control Plane (UCP)" %}
+    <div id="tabUCP{{ control_id }}" class="tab-pane fade">
+    {% assign narrative_text = "" %}
+    {% for satisfied_control in component.satisfies %}
+    {% if satisfied_control.control_key == control.number %}
+    {% for narrative in satisfied_control.narrative %}
+    {% assign narrative_text = narrative.text %}
+    {{ narrative_text }}
+    {% endfor %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% if narrative_text == "" %}
+    The control is not applicable to the Universal Control Plane component.
+    {% endif %}
+    </div>
+    {% endcase %}
+
+    {% endfor %}
+</div>
+
+{% endif %}
+{% endfor %}
+{% endif %}
