@@ -48,11 +48,21 @@ Release date: 01/18/2017
 
 ## Edge Channel
 
+### 17.05.0-edge CE
+
+Release date: 05/08/2017
+
+{{aws_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.05.0 CE](https://github.com/moby/moby/releases/tag/v17.05.0-ce)
+- Added VPCID output when a VPC is created
+- Added CloudFormation parameter to enable/disable CloudStor
+
 ### 17.04.0-edge CE
 
 Release date: 04/06/2017
-
-{{aws_blue_edge}}
 
 **New**
 
