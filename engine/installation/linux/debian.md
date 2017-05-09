@@ -245,7 +245,7 @@ To upgrade Docker, first run `sudo apt-get update`, then follow the
 to install.
 
 
-### Install on Raspian (Raspberry Pi)
+### Install on Raspbian (Raspberry Pi)
 >**Warning**: This isn't necessary if you used the recommended
 >`$ curl -sSL https://get.docker.com | sh` command!
 
@@ -279,7 +279,7 @@ installing Docker.
     ```bash
     $ sudo apt-get install docker
     ```
-    > **NOTE**: By default, Docker on Raspian is Docker Community Edition, so
+    > **NOTE**: By default, Docker on Raspbian is Docker Community Edition, so
     > there is no need to specify docker-ce.
 
     > **NOTE**: If `curl -sSL https://get.docker.com | sh` isn't used,
