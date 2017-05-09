@@ -29,7 +29,7 @@ wget -O md_source/engine/api/v1.27/swagger.yaml https://raw.githubusercontent.co
 # When you change this you need to make sure to copy the previous
 # directory into a new one in the docs git and change the index.html
 wget -O md_source/engine/api/v1.28/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml || (echo "Failed 1.28 swagger download or the 1.28 directory doesn't exist" && exit -1)
-wget -O md_source/engine/api/v1.29/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.05.x/api/swagger.yaml || (echo "Failed 1.28 swagger download or the 1.29 directory doesn't exist" && exit -1)
+wget -O md_source/engine/api/v1.29/swagger.yaml https://raw.githubusercontent.com/moby/moby/17.05.x/api/swagger.yaml || (echo "Failed 1.29 swagger download or the 1.29 directory doesn't exist" && exit -1)
 
 
 # Get a few one-off files that we use directly from upstream
