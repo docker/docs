@@ -1488,6 +1488,8 @@ manuals:
     title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
+  - path: /compose/samples-for-compose/		
+    title: Samples for Compose
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
