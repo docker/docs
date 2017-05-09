@@ -253,7 +253,6 @@ see [Replicated and global
 services](/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-services)
 in the [swarm](/engine/swarm/) topics.)
 
-
     version: '3'
     services:
       worker:
