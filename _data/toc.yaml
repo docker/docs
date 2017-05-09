@@ -1830,6 +1830,8 @@ manuals:
           title: Delete images
         - path: /datacenter/dtr/2.3/guides/user/manage-images/scan-images-for-vulnerabilities/
           title: Scan images for vulnerabilities
+        - path: /datacenter/dtr/2.3/guides/user/manage-images/prevent-tags-from-being-overwritten/
+          title: Prevent tags from being overwritten
         - sectiontitle: Sign images
           section:
           - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/
