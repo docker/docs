@@ -29,7 +29,7 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
-    - path: /engine/userguide/eng-image/multistage-build/		
+    - path: /engine/userguide/eng-image/multistage-build/
       title: Use multi-stage builds (Edge only)
   - path: /docker-for-mac/install/
     title: Docker for Mac
@@ -475,7 +475,7 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.29/		
+  - path: /engine/api/v1.29/
     title: v1.29 Reference
   - sectiontitle: Previous API versions
     section:
@@ -1492,8 +1492,8 @@ manuals:
     title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
-  - path: /compose/samples-for-compose/		
-    title: Samples for Compose
+  - path: /compose/samples-for-compose/
+    title: Samples apps with Compose
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
