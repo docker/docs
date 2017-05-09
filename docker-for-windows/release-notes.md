@@ -303,15 +303,33 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.0.5 Release Notes (2017-04-13 17.05.0-ce-win8)(edge)
+### Docker Community Edition 17.0.5c-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
+
+**Upgrades**
+
+- [Docker 17.05.0-ce](https://github.com/docker/docker/releases/tag/v17.05.0-ce)
+- [Docker Compose 1.13.0](https://github.com/docker/compose/releases/tag/1.13.0)
+- [Docker Machine 1.11.0](https://github.com/docker/machine/releases/tag/v0.11.0)
+
+**Security**
+
+- Disable TCP exposition of the Daemon (tcp://localhost:2375), now an opt-in feature.
+
+**Bug fixes and minor changes**
+
+- Reset to default / uninstall also reset docker cli settings and logout user from Docker Cloud and registries
+- Detect a bitlocker policy preventing windows containers to work
+- fix an issue on filesharing when explicitly disabled on vmswitch interface
+- fix VM not starting when machine had very long name
+- Fix a bug where Windows daemon.json file was not written (fixes https://github.com/docker/for-win/issues/670)
+
+### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8) (edge)
 
 **Upgrades**
 
 - [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
 
-
-
-### Docker Community Edition 17.0.4 Release Notes (2017-04-06 17.04.0-ce-win7)(edge)
+### Docker Community Edition 17.0.4-win7 Release Notes (2017-04-06 17.04.0-ce-win7) (edge)
 
 **New**
 
@@ -328,7 +346,20 @@ We did not distribute a 1.12.4 stable release
 
 - Add patches to the kernel to fix VMBus crash
 
-### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-win3)(edge)
+### Docker Community Edition 17.04.0-ce-win6 Release Notes (2017-04-03 17.04.0-ce-rc2-win6) (edge)
+
+**Upgrades**
+
+- [Docker 17.04.0-ce-rc2](https://github.com/docker/docker/releases/tag/v17.04.0-ce-rc2)
+- [Docker Compose 1.12.0-rc2](https://github.com/docker/compose/releases/tag/1.12.0-rc2)
+- Linux Kernel 4.9.18
+
+**Bug fixes and minor changes**
+
+- Named pipe client connection should not trigger dead locks on `docker run` with data in stdin anymore
+- Buffered data should be treated correctly when docker client requests are upgraded to raw streams
+
+### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-rc1-win3) (edge)
 
 **Upgrades**
 
@@ -340,7 +371,7 @@ We did not distribute a 1.12.4 stable release
 
 - VPNKit: capture up to 64KiB of NTP traffic for diagnostics, better handling of DNS
 
-### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-win1)(edge)
+### Docker Community Edition 17.03.0 Release Notes (2017-03-06 17.03.0-ce-win1) (edge)
 
 **New**
 
@@ -363,7 +394,7 @@ We did not distribute a 1.12.4 stable release
 - Improved Firewall handling: stop listing the rules since it can take a lot of time
 - Don't rollback to the previous engine when the desired engine fails to start
 
-### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1) (edge)
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-win1) (edge)
 
 **New**
 
