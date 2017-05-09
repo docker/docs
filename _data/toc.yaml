@@ -2,7 +2,7 @@ horizontalnav:
 - title: Guides
   path: /
   node: guides
-- title: Product Manuals
+- title: Product manuals
   path: /manuals/
   node: manuals
 - title: Glossary
@@ -62,9 +62,9 @@ guides:
     - path: /docker-for-aws/why/
       title: Why Docker for AWS?
     - path: /docker-for-aws/
-      title: Setup & Prerequisites
+      title: Setup & prerequisites
     - path: /docker-for-aws/iam-permissions/
-      title: IAM Permissions
+      title: IAM permissions
     - path: /docker-for-aws/scaling/
       title: Scaling
     - path: /docker-for-aws/upgrade/
@@ -76,17 +76,17 @@ guides:
     - path: /docker-for-aws/faqs/
       title: FAQs
     - path: /docker-for-aws/opensource/
-      title: Open Source Licensing
+      title: Open source licensing
     - path: /docker-for-aws/release-notes/
-      title: Release Notes
+      title: Release notes
     - path: /docker-for-aws/archive/
-      title: Template Archive
+      title: Template archive
   - sectiontitle: Docker for Azure
     section:
     - path: /docker-for-azure/why/
       title: Why Docker for Azure?
     - path: /docker-for-azure/
-      title: Setup & Prerequisites
+      title: Setup & prerequisites
     - path: /docker-for-azure/upgrade/
       title: Upgrading
     - path: /docker-for-azure/deploy/
@@ -96,15 +96,15 @@ guides:
     - path: /docker-for-azure/faqs/
       title: FAQs
     - path: /docker-for-azure/opensource/
-      title: Open Source Licensing
+      title: Open source licensing
     - path: /docker-for-azure/release-notes/
-      title: Release Notes
+      title: Release notes
     - path: /docker-for-azure/archive/
-      title: Template Archive
-  - sectiontitle: Docker Toolbox (Legacy)
+      title: Template archive
+  - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
-      title: Toolbox Overview
+      title: Toolbox overview
     - path: /toolbox/toolbox_install_mac/
       title: Install Toolbox on Mac
     - path: /toolbox/toolbox_install_windows/
@@ -112,59 +112,37 @@ guides:
     - sectiontitle: Kitematic
       section:
       - path: /kitematic/userguide/
-        title: "Kitematic User Guide: Intro &amp; Overview"
+        title: "Kitematic user guide: intro &amp; overview"
       - path: /kitematic/nginx-web-server/
         title: Set up an Nginx web server
       - path: /kitematic/minecraft-server/
         title: Set up a Minecraft Server
       - path: /kitematic/rethinkdb-dev-database/
-        title: Creating a Local RethinkDB Database for Development
+        title: Creating a local RethinkDB database for development
       - path: /kitematic/faq/
-        title: Frequently Asked Questions
+        title: Frequently asked questions
       - path: /kitematic/known-issues/
-        title: Known Issues
+        title: Known issues
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
   - path: /release-notes/
     title: Docker release notes
-- sectiontitle: Get Started
+- sectiontitle: Get started
   section:
-  - path: /learn/
-    title: Learn Docker
-  - sectiontitle: Docker basics
+  - sectiontitle: Get started with Docker
     section:
-    - path: /engine/getstarted/
-      title: Get Started with Docker
-    - path: /engine/getstarted/step_one/
-      title: Install Docker and run hello-world
-    - path: /engine/getstarted/step_two/
-      title: Understand images &amp; containers
-    - path: /engine/getstarted/step_three/
-      title: Find &amp; run the whalesay image
-    - path: /engine/getstarted/step_four/
-      title: Build your own image
-    - path: /engine/getstarted/step_five/
-      title: Create a Docker Hub account &amp; repository
-    - path: /engine/getstarted/step_six/
-      title: Tag, push, &amp; pull your image
-    - path: /engine/getstarted/last_page/
-      title: Learning more
-  - sectiontitle: Define and deploy your app
-    section:
-    - path: /engine/getstarted-voting-app/
-      title: Sample app overview
-    - path: /engine/getstarted-voting-app/node-setup/
-      title: Set up Dockerized machines
-    - path: /engine/getstarted-voting-app/create-swarm/
-      title: Create a swarm
-    - path: /engine/getstarted-voting-app/deploy-app/
-      title: Deploy the app
-    - path: /engine/getstarted-voting-app/test-drive/
-      title: Try out the voting app
-    - path: /engine/getstarted-voting-app/customize-app/
-      title: Customize the app and redeploy
-    - path: /engine/getstarted-voting-app/cleanup/
-      title: Graceful shutdown, reboot, and clean-up
+    - title: "Part 1: Orientation"
+      path: /get-started/
+    - title: "Part 2: Containers"
+      path: /get-started/part2/
+    - title: "Part 3: Services"
+      path: /get-started/part3/
+    - title: "Part 4: Swarms"
+      path: /get-started/part4/
+    - title: "Part 5: Stacks"
+      path: /get-started/part5/
+    - title: "Part 6: Deploy your app"
+      path: /get-started/part6/
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
@@ -173,10 +151,10 @@ guides:
       title: Manage data in containers
   - path: /engine/docker-overview/
     title: Docker overview
-- sectiontitle: User Guide
+- sectiontitle: User guide
   section:
-  - path: /engine/userguide/intro/
-    title: Introduction
+  - path: /engine/userguide/
+    title: Overview
   - sectiontitle: Work with images
     section:
     - path: /engine/userguide/eng-image/dockerfile_best-practices/
@@ -185,8 +163,6 @@ guides:
       title: Create a base image
     - path: /engine/userguide/eng-image/image_management/
       title: Image management
-    - path: /engine/userguide/eng-image/multistage-build/
-      title: Use multi-stage builds (edge only)
   - sectiontitle: Docker storage drivers
     section:
     - path: /engine/userguide/storagedriver/imagesandcontainers/
@@ -240,10 +216,10 @@ guides:
   - path: /engine/breaking_changes/
     title: Breaking changes
   - path: /engine/deprecated/
-    title: Deprecated Engine Features
+    title: Deprecated Engine features
   - path: /engine/faq/
     title: FAQ
-- sectiontitle: Admin Guide
+- sectiontitle: Admin guide
   section:
   - path: /engine/admin/
     title: Configuring and running Docker
@@ -264,25 +240,25 @@ guides:
     - path: /engine/admin/logging/view_container_logs/
       title: View a container's logs
     - path: /engine/admin/logging/overview/
-      title: Configuring Logging Drivers
+      title: Configuring logging drivers
     - path: /engine/admin/logging/log_tags/
       title: Log tags for logging driver
     - path: /engine/admin/logging/logentries/
       title: Logentries logging driver
     - path: /engine/admin/logging/awslogs/
-      title: Amazon CloudWatch Logs logging driver
+      title: Amazon CloudWatch logs logging driver
     - path: /engine/admin/logging/etwlogs/
       title: ETW logging driver
     - path: /engine/admin/logging/fluentd/
       title: Fluentd logging driver
     - path: /engine/admin/logging/gcplogs/
-      title: Google Cloud Logging driver
+      title: Google Cloud logging driver
     - path: /engine/admin/logging/journald/
       title: Journald logging driver
     - path: /engine/admin/logging/splunk/
       title: Splunk logging driver
   - path: /engine/admin/dsc/
-    title: PowerShell DSC Usage
+    title: PowerShell DSC usage
   - path: /engine/admin/ansible/
     title: Using Ansible
   - path: /engine/admin/chef/
@@ -358,7 +334,7 @@ guides:
   - path: /engine/security/security/
     title: Docker security
   - path: /engine/security/non-events/
-    title: Docker Security Non-events
+    title: Docker security non-events
   - path: /engine/security/https/
     title: Protect the Docker daemon socket
   - path: /engine/security/certificates/
@@ -397,11 +373,11 @@ guides:
     path: /engine/extend/config/
   - path: /engine/extend/plugin_api/
     title: Plugins API
-- sectiontitle: Open Source at Docker
+- sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
     title: Quickstart contribution
-  - sectiontitle: Set up for Engine Development
+  - sectiontitle: Set up for Engine development
     section:
     - path: /opensource/project/who-written-for/
       title: README first
@@ -434,7 +410,7 @@ guides:
     - sectiontitle: Other ways to contribute
       section:
       - path: /opensource/ways/meetups/
-        title: Organize a Docker Meetup
+        title: Organize a Docker meetup
       - path: /opensource/ways/issues/
         title: Organize our issues
       - path: /opensource/ways/community/
@@ -458,7 +434,7 @@ guides:
     - sectiontitle: Governance
       section:
       - path: /opensource/governance/dgab-info/
-        title: Docker Governance Advisory Board
+        title: Docker governance advisory board
       - path: /opensource/governance/board-profiles/
         title: Board member profiles
       - path: /opensource/governance/conduct-code/
@@ -497,12 +473,10 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.29/
-    title: v1.29 Reference
   - path: /engine/api/v1.28/
-    title: v1.28 Reference
+    title: v1.28 reference
   - path: /engine/api/v1.27/
-    title: v1.27 Reference
+    title: v1.27 reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
@@ -853,7 +827,7 @@ reference:
       title: docker volume rm
   - path: /engine/reference/commandline/wait/
     title: docker wait
-- title: Edge Daemon CLI reference (dockerd)
+- title: Edge daemon CLI reference (dockerd)
   path: /edge/engine/reference/commandline/dockerd/
 - sectiontitle: Docker Edge Engine (docker) CLI
   section:
@@ -1238,7 +1212,7 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
-- sectiontitle: Commercially Supported Docker Engine
+- sectiontitle: Commercially supported Docker Engine
   section:
   - sectiontitle: 1.13
     section:
@@ -1265,14 +1239,14 @@ manuals:
   - path: /docker-cloud/
     title: About Docker Cloud
   - path: /docker-cloud/dockerid/
-    title: Docker Cloud Settings and Docker ID
+    title: Docker Cloud settings and Docker ID
   - path: /docker-cloud/orgs/
-    title: Organizations and Teams
+    title: Organizations and teams
 
-  - sectiontitle: Manage Builds and Images
+  - sectiontitle: Manage builds and images
     section:
     - path: /docker-cloud/builds/
-      title: Builds and Images Overview
+      title: Builds and images overview
     - path: /docker-cloud/builds/repos/
       title: Docker Cloud repositories
     - path: /docker-cloud/builds/link-source/
@@ -1280,19 +1254,19 @@ manuals:
     - path: /docker-cloud/builds/push-images/
       title: Push images to Docker Cloud
     - path: /docker-cloud/builds/image-scan/
-      title: Docker Security Scanning
+      title: Docker security scanning
     - path: /docker-cloud/builds/automated-build/
       title: Automated builds
     - path: /docker-cloud/builds/automated-testing/
       title: Automated repository tests
     - path: /docker-cloud/builds/advanced/
-      title: Advanced options for Autobuild and Autotest
-  - sectiontitle: Manage Swarms (Beta Swarm Mode)
+      title: Advanced options for autobuild and autotest
+  - sectiontitle: Manage swarms (beta swarm mode)
     section:
     - path: /docker-cloud/cloud-swarm/
       title: Overview
     - path: /docker-cloud/cloud-swarm/using-swarm-mode/
-      title: Using Swarm Mode
+      title: Using Swarm mode
     - path: /docker-cloud/cloud-swarm/register-swarms/
       title: Register existing swarms
     - path: /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
@@ -1310,7 +1284,7 @@ manuals:
   - sectiontitle: Manage Infrastructure (standard mode)
     section:
     - path: /docker-cloud/infrastructure/
-      title: Infrastructure Overview
+      title: Infrastructure overview
     - path: /docker-cloud/infrastructure/deployment-strategies/
       title: Container distribution strategies
     - path: /docker-cloud/infrastructure/link-aws/
@@ -1328,23 +1302,23 @@ manuals:
     - path: /docker-cloud/infrastructure/docker-upgrade/
       title: Upgrade Docker Engine on a node
     - path: /docker-cloud/infrastructure/byoh/
-      title: Use the Docker Cloud Agent
+      title: Use the Docker Cloud agent
     - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
       title: Using Docker Cloud and Packet.net
     - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
       title: Using Docker Cloud on AWS
-  - sectiontitle: Manage Nodes and Apps (Standard Mode)
+  - sectiontitle: Manage nodes and apps (standard mode)
     section:
     - path: /docker-cloud/standard/
       title: Overview
-    - sectiontitle: Getting Started
+    - sectiontitle: Getting started
       section:
       - path: /docker-cloud/getting-started/
         title: Getting started with Docker Cloud
       - path: /docker-cloud/getting-started/intro_cloud/
         title: Introducing Docker Cloud
       - path: /docker-cloud/getting-started/connect-infra/
-        title: Link to your Infrastructure
+        title: Link to your infrastructure
       - path: /docker-cloud/getting-started/your_first_node/
         title: Deploy your first node
       - path: /docker-cloud/getting-started/your_first_service/
@@ -1352,7 +1326,7 @@ manuals:
       - sectiontitle: Deploy an application
         section:
         - path: /docker-cloud/getting-started/deploy-app/1_introduction/
-          title: Introduction to Deploying an app in Docker Cloud
+          title: Introduction to deploying an app in Docker Cloud
         - path: /docker-cloud/getting-started/deploy-app/2_set_up/
           title: Set up your environment
         - path: /docker-cloud/getting-started/deploy-app/3_prepare_the_app/
@@ -1374,13 +1348,13 @@ manuals:
         - path: /docker-cloud/getting-started/deploy-app/11_service_stacks/
           title: Stackfiles for your service
         - path: /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
-          title: Data management with Volumes
-    - sectiontitle: Manage Applications
+          title: Data management with volumes
+    - sectiontitle: Manage applications
       section:
       - path: /docker-cloud/apps/
         title: Applications in Docker Cloud
       - path: /docker-cloud/apps/deploy-to-cloud-btn/
-        title: Add a Deploy to Docker Cloud button
+        title: Add a deploy to Docker Cloud button
       - path: /docker-cloud/apps/auto-destroy/
         title: Automatic container destroy
       - path: /docker-cloud/apps/autorestart/
@@ -1400,7 +1374,7 @@ manuals:
       - path: /docker-cloud/apps/service-scaling/
         title: Scale your service
       - path: /docker-cloud/apps/api-roles/
-        title: Service API Roles
+        title: Service API roles
       - path: /docker-cloud/apps/service-links/
         title: Service discovery and links
       - path: /docker-cloud/apps/triggers/
@@ -1417,9 +1391,9 @@ manuals:
   - path: /docker-cloud/installing-cli/
     title: The Docker Cloud CLI
   - path: /docker-cloud/docker-errors-faq/
-    title: Known Issues in Docker Cloud
+    title: Known issues in Docker Cloud
   - path: /docker-cloud/release-notes/
-    title: Release Notes
+    title: Release notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -1427,15 +1401,15 @@ manuals:
   - path: /compose/install/
     title: Install Compose
   - path: /compose/gettingstarted/
-    title: Getting Started
+    title: Getting started
   - sectiontitle: Compose (docker-compose) CLI reference
     section:
     - path: /compose/reference/overview/
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
-      title: CLI Environment Variables
+      title: CLI environment variables
     - path: /compose/completion/
-      title: Command-line Completion
+      title: Command-line completion
     - path: /compose/reference/build/
       title: build
     - path: /compose/reference/bundle/
@@ -1484,7 +1458,7 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-  - sectiontitle: Compose File Reference
+  - sectiontitle: Compose file reference
     section:
     - path: /compose/compose-file/
       title: Version 3
@@ -1495,9 +1469,9 @@ manuals:
     - path: /compose/compose-file/compose-versioning/
       title: About versions and upgrading
     - path: /compose/faq/
-      title: Frequently Asked Questions
+      title: Frequently asked questions
   - path: /compose/bundles/
-    title: Docker Stacks and Distributed Application Bundles
+    title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
     title: Using Compose with Swarm
   - path: /compose/env-file/
@@ -1511,17 +1485,17 @@ manuals:
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/link-env-deprecated/
-    title: Link Environment Variables (deprecated)
+    title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
-  - path: /compose/samples-for-compose/
-    title: Samples for Compose
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
     title: Deploy Datacenter on AWS
   - path: /datacenter/install/linux/
     title: Deploy Datacenter on Linux
+  - path: /datacenter/install/azure/
+    title: Deploy Datacenter on Azure
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.1/guides/
@@ -1901,7 +1875,7 @@ manuals:
       - path: /datacenter/ucp/2.0/guides/support/
         title: Get support
       - path: /datacenter/ucp/2.0/guides/release-notes/
-        title: Release Notes
+        title: Release notes
     - sectiontitle: Universal Control Plane 1.0
       section:
       - path: /datacenter/ucp/1.1/overview/
@@ -1978,10 +1952,10 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
           title: Deploy an app from the CLI
-      - sectiontitle: UCP Tool CLI
+      - sectiontitle: UCP tool CLI
         section:
         - path: /datacenter/ucp/1.1/reference/
-          title: UCP Tool v1.1 overview
+          title: UCP tool v1.1 overview
         - path: /datacenter/ucp/1.1/reference/backup/
           title: backup
         - path: /datacenter/ucp/1.1/reference/dump-certs/
@@ -2017,7 +1991,7 @@ manuals:
         - path: /datacenter/ucp/1.1/support/
           title: Get support
         - path: /datacenter/ucp/1.1/release_notes/
-        title: Release Notes
+        title: Release notes
     - sectiontitle: Docker Trusted Registry 2.1
       section:
       - path: /datacenter/dtr/2.1/guides/
@@ -2229,7 +2203,7 @@ manuals:
   - path: /docker-for-mac/docker-toolbox/
     title: Docker for Mac vs. Docker Toolbox
   - path: /docker-for-mac/multi-arch/
-    title: Leveraging Multi-CPU Architecture Support
+    title: Leveraging Multi-CPU architecture support
   - path: /docker-for-mac/networking/
     title: Networking
   - path: /docker-for-mac/osxfs/
@@ -2237,31 +2211,31 @@ manuals:
   - path: /docker-for-mac/osxfs-caching/
     title: Performance tuning for volume mounts (shared filesystems)
   - path: /docker-for-mac/troubleshoot/
-    title: Logs and Troubleshooting
+    title: Logs and troubleshooting
   - path: /docker-for-mac/faqs/
     title: FAQs
   - path: /docker-for-mac/opensource/
-    title: Open Source Licensing
+    title: Open source licensing
   - path: /docker-for-mac/release-notes/
-    title: Release Notes
+    title: Release notes
 - sectiontitle: Docker for Windows
   section:
   - path: /docker-for-windows/
     title: Getting started
   - path: /docker-for-windows/troubleshoot/
-    title: Logs and Troubleshooting
+    title: Logs and troubleshooting
   - path: /docker-for-windows/faqs/
     title: FAQs
   - path: /docker-for-windows/opensource/
-    title: Open Source Licensing
+    title: Open source licensing
   - path: /docker-for-windows/release-notes/
-    title: Release Notes
+    title: Release notes
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Machine
   section:
   - path: /machine/overview/
-    title: Machine Overview
+    title: Machine overview
   - path: /machine/install-machine/
     title: Install Machine
   - path: /machine/get-started/
@@ -2273,7 +2247,7 @@ manuals:
     - path: /machine/examples/ocean/
       title: Provision Digital Ocean Droplets
     - path: /machine/examples/aws/
-      title: Provision AWS EC2 Instances
+      title: Provision AWS EC2 instances
   - path: /machine/concepts/
     title: Machine concepts and help
   - sectiontitle: Machine (docker-machine) CLI
@@ -2281,7 +2255,7 @@ manuals:
     - path: /machine/reference/
       title: Machine CLI overview
     - path: /machine/completion/
-      title: Machine command-line Completion
+      title: Machine command-line completion
     - path: /machine/reference/active/
       title: active
     - path: /machine/reference/config/
@@ -2367,21 +2341,21 @@ manuals:
   - path: /notary/running_a_service/
     title: Running a Notary service
   - path: /notary/changelog/
-    title: Notary Changelog
+    title: Notary changelog
   - sectiontitle: Configuration files
     section:
     - path: /notary/reference/server-config/
-      title: Server Configuration
+      title: Server configuration
     - path: /notary/reference/signer-config/
-      title: Signer Configuration
+      title: Signer configuration
     - path: /notary/reference/client-config/
-      title: Client Configuration
+      title: Client configuration
     - path: /notary/reference/common-configs/
-      title: Common Server and Signer Configurations
+      title: Common Server and signer configurations
 - sectiontitle: Docker Registry
   section:
   - path: /registry/
-    title: Registry Overview
+    title: Registry overview
   - path: /registry/introduction/
     title: Understanding the Registry
   - path: /registry/deploying/
@@ -2393,7 +2367,7 @@ manuals:
   - sectiontitle: Recipes
     section:
     - path: /registry/recipes/
-      title: Recipes Overview
+      title: Recipes overview
     - path: /registry/recipes/apache/
       title: Authenticating proxy with apache
     - path: /registry/recipes/nginx/
@@ -2403,11 +2377,11 @@ manuals:
     - path: /registry/recipes/osx-setup-guide/
       title: Running on macOS
     - path: /registry/garbage-collection/
-      title: Garbage Collection
+      title: Garbage collection
     - path: /registry/insecure/
       title: Testing an insecure registry
   - path: /registry/deprecated/
-    title: Deprecated Features
+    title: Deprecated features
   - path: /registry/compatibility/
     title: Compatibility
   - path: /registry/help/
@@ -2415,17 +2389,17 @@ manuals:
   - sectiontitle: Registry reference
     section:
     - path: /registry/spec/api/
-      title: Registry HTTP API V2
+      title: Registry HTTP API v2
     - sectiontitle: Registry image manifests
       section:
       - path: /registry/spec/manifest-v2-1/
-        title: Image Manifest V 2, Schema 1
+        title: Image manifest v 2, schema 1
       - path: /registry/spec/manifest-v2-2/
-        title: Image Manifest V 2, Schema 2
+        title: Image manifest v 2, schema 2
     - sectiontitle: Registry storage drivers
       section:
       - path: /registry/storage-drivers/
-        title: Storage Driver overview
+        title: Storage driver overview
       - path: /registry/storage-drivers/oss/
         title: Aliyun OSS storage driver
       - path: /registry/storage-drivers/filesystem/
@@ -2443,19 +2417,19 @@ manuals:
     - sectiontitle: Registry specifications
       section:
       - path: /registry/spec/auth/
-        title: Docker Registry Token Authentication
+        title: Docker Registry token authentication
       - path: /registry/spec/auth/jwt/
-        title: Token Authentication Implementation
+        title: Token authentication implementation
       - path: /registry/spec/auth/oauth/
-        title: Oauth2 Token Authentication
+        title: Oauth2 token authentication
       - path: /registry/spec/auth/scope/
-        title: Token Scope Documentation
+        title: Token scope documentation
       - path: /registry/spec/auth/token/
-        title: Token Authentication Specification
+        title: Token authentication specification
 - sectiontitle: Docker Store
   section:
   - path: /docker-store/
-    title: Docker Store Overview
+    title: Docker Store overview
   - path: /docker-store/publish/
     title: Submit a product to Docker Store
   - path: /docker-store/faq/
@@ -2469,23 +2443,23 @@ manuals:
     - path: /docker-hub/accounts/
       title: Use Docker Hub with Docker ID
     - path: /docker-hub/orgs/
-      title: Teams &amp; Organizations
+      title: Teams &amp; organizations
     - path: /docker-hub/repos/
       title: Repositories on Docker Hub
     - path: /docker-hub/builds/
-      title: Automated Builds
+      title: Automated builds
     - path: /docker-hub/webhooks/
       title: Webhooks for automated builds
     - path: /docker-hub/bitbucket/
-      title: Automated Builds with Bitbucket
+      title: Automated builds with Bitbucket
     - path: /docker-hub/github/
-      title: Automated Builds from GitHub
+      title: Automated builds from GitHub
     - path: /docker-hub/official_repos/
-      title: Official Repositories on Docker Hub
+      title: Official repositories on Docker Hub
   - sectiontitle: Docker Swarm
     section:
     - path: /swarm/overview/
-      title: Swarm Overview
+      title: Swarm overview
     - path: /swarm/get-swarm/
       title: How to get Swarm
     - path: /swarm/install-w-machine/
