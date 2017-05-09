@@ -212,7 +212,7 @@ $ docker-machine scp docker-compose.yml myvm1:~
 $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
 ```
 
-Check the results on http://localhost and you'll see that a visitor counter is
+Check the results on either nodes IP address and you'll see that a visitor counter is
 now live and storing information on Redis.
 
 [On to Part 6 >>](part6.md){: class="button outline-btn" style="margin-bottom: 30px"}
