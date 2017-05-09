@@ -29,6 +29,8 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
+    - path: /engine/userguide/eng-image/multistage-build/		
+      title: Use multi-stage builds (Edge only)
   - path: /docker-for-mac/install/
     title: Docker for Mac
   - path: /docker-for-windows/install/
