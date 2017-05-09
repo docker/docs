@@ -74,7 +74,7 @@ $ docker run --log-driver=awslogs \
              ...
 ```
 
-> **Note:**
+> **Note**:
 > Your AWS IAM policy must include the `logs:CreateLogGroup` permission before you attempt to use `awslogs-create-group`.
 
 
@@ -86,6 +86,14 @@ See the [tag option documentation](log_tags.md) for details on all supported tem
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
 
 If not specified, the container ID is used as the log stream.
+
+{% raw %}
+> **Note**:
+> The CloudWatch log API doesn't support `:` in the log name. This can cause some issues when using the `{{ .ImageName }}` as a tag, since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
+> Template markup can be used to get the proper format. 
+> To get the image name and the first 12 characters of the container id, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
+> the output will be something like: `alpine_latest-bf0072049c76` 
+{% endraw %}
 
 
 ## Credentials
