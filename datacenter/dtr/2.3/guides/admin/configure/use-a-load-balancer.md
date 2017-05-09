@@ -23,20 +23,22 @@ or cloud-based load balancer to balance requests across multiple DTR replicas.
 Make sure you configure your load balancer to:
 
 * Load balance TCP traffic on ports 80 and 443
-* Not terminate HTTPS connections
-* Use the unauthenticated `/health` endpoint (note the lack of an `/api/v0/` in
+* Make sure the load balancer is not buffering requests
+* Make sure the load balancer is forwarding the `Host` HTTP header correctly
+* Make sure there's no timeout for idle connections, or set it to more than 10 minutes
+* Use the unauthenticated `/_ping` endpoint (note the lack of an `/api/v0/` in
 the path) on each DTR replica, to check if the replica is healthy and if it
 should remain in the load balancing pool or not
 
 ## Health check endpoints
 
-The `/health` endpoint returns a JSON object for the replica being queried of
+The `/_ping` endpoint returns a JSON object for the replica being queried of
 the form:
 
 ```json
 {
   "Error": "error message",
-  "Health": true
+  "Healthy": true
 }
 ```
 
@@ -81,7 +83,7 @@ individually at the time specified in the `"replica_timestamp"` object.
 The response also contains information about the internal DTR storage state,
 which is around 45 KB of data. This, combined with the fact that the endpoint
 requires admin credentials, means it is not particularly appropriate for load
-balance checks. Use `/health` instead for those kinds of checks.
+balance checks. Use `/_ping` instead for those kinds of checks.
 
 
 ## Configuration examples
@@ -164,13 +166,13 @@ backend dtr_stats
         stats refresh 5m
 backend dtr_upstream_servers_80
         mode tcp
-        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
+        option httpchk GET /_ping HTTP/1.1\r\nHost:\ <DTR_FQDN>
         server node01 <DTR_REPLICA_1_IP>:80 check weight 100
         server node02 <DTR_REPLICA_2_IP>:80 check weight 100
         server node03 <DTR_REPLICA_N_IP>:80 check weight 100
 backend dtr_upstream_servers_443
         mode tcp
-        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
+        option httpchk GET /_ping HTTP/1.1\r\nHost:\ <DTR_FQDN>
         server node01 <DTR_REPLICA_1_IP>:443 weight 100 check check-ssl verify none
         server node02 <DTR_REPLICA_2_IP>:443 weight 100 check check-ssl verify none
         server node03 <DTR_REPLICA_N_IP>:443 weight 100 check check-ssl verify none
@@ -200,7 +202,7 @@ backend dtr_upstream_servers_443
     "HealthCheck": {
         "HealthyThreshold": 2,
         "Interval": 10,
-        "Target": "HTTPS:443/health",
+        "Target": "HTTPS:443/_ping",
         "Timeout": 2,
         "UnhealthyThreshold": 4
     },

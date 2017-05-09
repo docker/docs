@@ -29,7 +29,7 @@ resources, and logs.
 DTR also exposes several endpoints you can use to assess if a DTR replica
 is healthy or not:
 
-* `/health`: Checks if the several components of a DTR replica are healthy, and
+* `/_ping`: Checks if the DTR replica is healthy, and
 returns a simple json response. This is useful for load balancing or other
 automated health check tasks.
 * `/nginx_status`: Returns the number of connections being handled by the
