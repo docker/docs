@@ -227,7 +227,7 @@ an error.
 
 Specify configuration related to the deployment and running of services. This
 only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
-[`docker stack deploy`](/engine/reference/commandline/stack_deploy.md), and is
+[docker stack deploy](/engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`.
 
     version: '3'
@@ -241,6 +241,7 @@ ignored by `docker-compose up` and `docker-compose run`.
             delay: 10s
           restart_policy:
             condition: on-failure
+
 
 Several sub-options are available:
 
@@ -410,6 +411,13 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [stop_signal](#stopsignal)
 - [sysctls](#sysctls)
 - [userns_mode](#usernsmode)
+
+>**Tip:** See also, the section on [how to configure volumes
+for services, swarms, and docker-stack.yml
+files](#volumes-for-services-swarms-and-stack-files).  Volumes _are_ supported
+but in order to work with swarms and services, they must be configured properly,
+as named volumes or associated with services that are constrained to nodes with
+access to the requisite volumes.
 
 ### devices
 
@@ -1123,10 +1131,11 @@ more information.
 
 > **Note**: The top-level
 > [`volumes` option](#volume-configuration-reference) defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Mount host paths or named volumes. Named volumes must be defined in the
-[top-level `volumes` key](#volume-configuration-reference).
+[top-level `volumes` key](#volume-configuration-reference). Use named volumes with [services, swarms, and stack files](#volumes-for-services-swarms-and-stack-files).
 
 #### Short syntax
 
@@ -1186,8 +1195,41 @@ volumes:
 
 > **Note:** The long syntax is new in v3.2
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+
+#### Volumes for services, swarms, and stack files
+
+When working with services, swarms, and `docker-stack.yml` files, keep in mind
+that the tasks (containers) backing a service can be deployed on any node in a
+swarm, which may be a different node each time the service is updated.
+
+In the absence of having named volumes with specified sources, Docker creates an
+anonymous volume for each task backing a service. Anonymous volumes do not
+persist after the associated containers are removed.
+
+If you want your data to persist, use a named volume and a volume driver that
+is multi-host aware, so that the data is accessible from any node. Or, set
+constraints on the service so that its tasks are deployed on a node that has the
+volume present.
+
+As an example, the `docker-stack.yml` file for the
+[votingapp sample in Docker
+Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) defines a service called `db` that runs a `postgres` database. It is
+configured as a named volume in order to persist the data on the swarm,
+_and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
+
+```
+version: "3"
+services:
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+```
 
 ### restart
 
