@@ -129,7 +129,7 @@ if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=80)
 ```
 
-Now we see that `pip install requirements.txt` installs the Flask and Redis
+Now we see that `pip install -r requirements.txt` installs the Flask and Redis
 libraries for Python, and the app prints the environment variable `NAME`, as
 well as the output of a call to `socket.gethostname()`. Finally, because Redis
 isn't running (as we've only installed the Python library, and not Redis
