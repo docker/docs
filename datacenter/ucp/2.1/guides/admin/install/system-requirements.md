@@ -22,7 +22,7 @@ all nodes must have:
 For highly-available installations, you also need a way to transfer files
 between hosts.
 
-## Ports used
+## Network requirements
 
 When installing UCP on a host, make sure the following ports are open:
 
@@ -43,6 +43,18 @@ When installing UCP on a host, make sure the following ports are open:
 | managers          |    in     | TCP 12385               | Port for the authentication service API                                           |
 | managers          |    in     | TCP 12386               | Port for the authentication worker                                                |
 | managers          |    in     | TCP 12387               | Port for the metrics service                                                      |
+
+Also, make sure the networks you're using allow the UCP components to
+communicate before they timming out.
+
+| Component                              | Timeout (ms) | Configurable |
+|:---------------------------------------|:-------------|:-------------|
+| Raft consensus between manager nodes   | 3000         | no           |
+| Gossip protocol for overlay networking | 5000         | no           |
+| etcd                                   | 5000         | yes          |
+| rethinkDB                              | 10000        | no           |
+| Stand-alone swarm                      | 90000        | no           |
+
 
 ## Compatibility and maintenance lifecycle
 
