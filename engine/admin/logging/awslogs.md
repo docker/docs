@@ -87,6 +87,12 @@ When both `awslogs-stream` and `tag` are specified, the value supplied for `awsl
 
 If not specified, the container ID is used as the log stream.
 
+> **Note:**
+> The CloudWatch log API doesn't support `:` in the log name. This can cause some issues when using the `{{ .ImageName }}` as a tag, since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
+> To remedy the above, one can use some template markup to get the proper format. 
+> e.g. to get the image name and the first 12 characters of the container id, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
+> the output will be something like: `alpine_latest-bf0072049c76` 
+
 
 ## Credentials
 
