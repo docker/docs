@@ -335,7 +335,23 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.05.0-ce-mac8, 2017-04-13 (edge)
+### Docker Community Edition 17.05.0-ce-mac9, 2017-05-09 (edge)
+
+**Upgrades**
+
+- [Docker 17.05.0-ce](https://github.com/docker/docker/releases/tag/v17.05.0-ce)
+- [Docker Compose 1.13.0](https://github.com/docker/compose/releases/tag/1.13.0)
+- [Docker Machine 1.11.0](https://github.com/docker/machine/releases/tag/v0.11.0)
+
+**Bug fixes and minor changes**
+
+- Fix GUI crash when text table view was selected and windows re-opened (fixes [https://github.com/docker/for-mac/issues/1477](https://github.com/docker/for-mac/issues/1477))
+- Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
+- More detailed virtualbox uninstall requirements (cf https://github.com/docker/for-mac/issues/1343)
+- You are now prompted for your password, if you changed it in Docker Cloud.
+- Request time sync after waking up to improve [https://github.com/docker/for-mac/issues/17](https://github.com/docker/for-mac/issues/17)
+
+### Docker Community Edition 17.05.0-ce-rc1-mac8, 2017-04-13 (edge)
 
 **Upgrades**
 
@@ -360,7 +376,25 @@ events or unexpected unmounts.
 - Add a reset to factory defaults button when application crashes
 - Toolbox import dialog now defaults to "Skip"
 
-### Docker Community Edition 17.03.1-ce-mac3, 2017-03-28 (edge)
+### Docker Community Edition 17.04.0-ce-rc2-mac6, 2017-04-03 (edge)
+
+**Upgrades**
+
+- [Docker 17.04.0-ce-rc2](https://github.com/docker/docker/releases/tag/v17.04.0-ce-rc2)
+- [Docker Compose 1.12.0-rc2](https://github.com/docker/compose/releases/tag/1.12.0-rc2)
+- Linux Kernel 4.9.18
+
+**Bug fixes and minor changes**
+
+- Buffered data should be treated correctly when Docker client requests are upgraded to raw streams
+- Removed an error message from the output related to experimental features handling
+- `vmnetd` should not crash when user home directory is on an external drive
+- Improved settings database schema handling
+- Disk trimming should work as expected
+- Diagnostics now contains more settings data
+
+
+### Docker Community Edition 17.03.1-ce-rc1-mac3, 2017-03-28 (edge)
 
 **Upgrades**
 
@@ -429,6 +463,13 @@ events or unexpected unmounts.
 - osxfs: catch EPERM when reading extended attributes of non-files
 - Added `page_poison=1` to boot args
 - Added a new disk flushing option
+
+### Beta 42 Release Notes (2017-02-09 1.13.1-beta42)
+
+**Upgrades**
+
+- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
 
 ### Beta 41 Release Notes (2017-02-07-2017-1.13.1-rc2-beta41)
 
