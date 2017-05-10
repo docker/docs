@@ -41,10 +41,10 @@ To install Compose, do the following:
     ```
     >**Use the latest Compose release number in the download command.**
     As already mentioned, the above command is an _example_, and it may become
-out-of-date once in a while. Always follow the command pattern given above it.
+out-of-date once in a while. Always follow the command pattern shown above it.
 If you cut-and-paste an example, check which release it specifies and, if
 needed, replace `$dockerComposeVersion` with the release number that you want.
-Compose releases are also listed and available for direct download on the
+Compose releases are also available for direct download on the
 [Compose repository release page on
 GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
@@ -56,15 +56,36 @@ class="_"}.
     [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
     Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
 
-    > **Note**: If you get a "Permission denied" error, your `/usr/local/bin` directory
-    > probably isn't writable and you'll need to install Compose as the superuser. Run
-    > `sudo -i`, then the two commands below, then `exit`.
+    > **Did you get a "Permission denied" error?** If so, your
+    `/usr/local/bin` directory probably isn't writable and you'll
+    need to install Compose as the superuser. Run `sudo -i`, then run the
+    download and install commands below, then `exit`.
+    {: .note-notitle}
 
-    The following is an example command illustrating the format:
+
+    Run this command to download Docker Compose, replacing
+`$dockerComposeVersion` with the specific version of Compose you want to use:
+
+    ```bash
+    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    ```
+
+    For example, to download Compose version 1.13.0, the command is:
 
     ```bash
     curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     ```
+
+    >**Use the latest Compose release number in the download command.**
+    The above command is an _example_, and it may become
+out-of-date once in a while. Always follow the command pattern shown above it.
+If you cut-and-paste an example, check which release it specifies and, if
+needed, replace `$dockerComposeVersion` with the release number that you want.
+Compose releases are also available for direct download on the
+[Compose repository release page on
+GitHub](https://github.com/docker/compose/releases){: target="_blank"
+class="_"}.
+    {: .warning-notitle}
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options).
@@ -110,12 +131,21 @@ sudo pip install docker-compose
 ### Install as a container
 
 Compose can also be run inside a container, from a small bash script wrapper.
-To install compose as a container run:
+To install compose as a container run this command. Be sure to replace the version number with the one that you want, if this example is out-of-date:
 
 ```bash
 $ curl -L --fail https://github.com/docker/compose/releases/download/1.13.0/run.sh > /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
+
+>**Use the latest Compose release number in the command.**
+The above command is an _example_, and it may become out-of-date once in a
+while. Check which release it specifies and, if needed, replace the given
+release number with the one that you want. Compose releases are also listed and
+available for direct download on the [Compose repository release page on
+GitHub](https://github.com/docker/compose/releases){: target="_blank"
+class="_"}.
+{: .warning-notitle}
 
 ## Master builds
 
