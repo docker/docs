@@ -247,6 +247,12 @@ guides:
       title: Log tags for logging driver
     - path: /engine/admin/logging/logentries/
       title: Logentries logging driver
+    - path: /engine/admin/logging/json-file/
+      title: JSON File logging driver
+    - path: /engine/admin/logging/gelf/
+      title: Graylog Extended Format (GELF) logging driver
+    - path: /engine/admin/logging/syslog/
+      title: Syslog logging driver
     - path: /engine/admin/logging/awslogs/
       title: Amazon CloudWatch logs logging driver
     - path: /engine/admin/logging/etwlogs/
