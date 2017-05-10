@@ -6,7 +6,7 @@ redirect_from:
 - /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
 ---
 
-Here you can learn about new features, bug fixes, breaking changes and
+Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
 
 You can then use [the upgrade instructions](../admin/upgrade.md),
@@ -122,11 +122,11 @@ events like image push, repository creation, and others
 
 * docker/dtr image
   * The `docker/dtr install` command now shows all the nodes that are part of a
-  UCP cluster for you choose on which node to deploy DTR
+  UCP cluster for you to choose on which node to deploy DTR
   * The install command was improved to avoid deploying DTR to a node where it
   cannot run due to port collisions
   * The `docker/dtr install --ucp-node` flag is now mandatory
-  * The install command no longer allows deploying replicas with duplicate ids
+  * The install command no longer allows deploying replicas with duplicate IDs
   * The upgrade command now validates if all tags were migrated to the latest
   version before trying to migrate blob links
 
@@ -141,7 +141,7 @@ letters
 created
 * The copy to clipboard button on the repository page now works on Firefox
 * The repository page now renders properly the repository permissions
-* You can now delete a users full name from the UI
+* You can now delete a user's full name from the UI
 * Organization administrators can now see the repositories owned by the organization
 * The garbage collection settings now show the correct cron values
 * You can now specify DTR to use port 443 when installing DTR
