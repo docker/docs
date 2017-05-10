@@ -6,21 +6,21 @@ redirect_from:
 title: Graylog Extended Format logging driver
 ---
 
-The `gelf` logging driver is a convenient format that is understood by a number of tools like [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), [Fluentd](http://www.fluentd.org/), and many more.
+The `gelf` logging driver is a convenient format that is understood by a number of tools such as
+[Graylog](https://www.graylog.org/),[Logstash](https://www.elastic.co/products/logstash), and
+[Fluentd](http://www.fluentd.org/). Many tools use this format.
 
 In GELF, every log message is a dict with the following fields:
 
-- version;
-- host (who sent the message in the first place);
-- timestamp;
-- short and long version of the message;
-- any extra field you would like!
-
-
+- version
+- host (who sent the message in the first place)
+- timestamp
+- short and long version of the message
+- any custom fields you configure yourself
 
 ## Usage
 
-You can configure the default logging driver by passing the `--log-driver`
+To use `gelf` as the default logging driver for new containers, pass the `--log-driver`
 and `--log-opt` options to the Docker daemon:
 
 ```bash
@@ -28,7 +28,7 @@ dockerd
   -–log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
 ```
 
-Or you can configure it in `/etc/docker/daemon.json` with:
+To make the configuration permanent, you can configure it in `/etc/docker/daemon.json`:
 
 ```json
 {
@@ -39,11 +39,11 @@ Or you can configure it in `/etc/docker/daemon.json` with:
 }
 ```
 
-You can set the logging driver for a specific container by using the
-`--log-driver` option to `docker run`:
+You can set the logging driver for a specific container by setting the
+`--log-driver` flag when using `docker create` or `docker run`:
 
 ```bash
-docker run \
+$ docker run \
       -–log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
       alpine echo hello world
 ```
@@ -64,7 +64,7 @@ The `gelf` logging driver supports the following options:
 
 ### Examples
 
-This example connects the container to the GELF server running at
+This example configures the container to use the GELF server running at
 `192.168.0.42` on port `12201`.
 
 ```bash
