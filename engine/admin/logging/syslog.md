@@ -6,18 +6,21 @@ redirect_from:
 title: Syslog logging driver
 ---
 
-The `syslog` logging driver routes logs to a `syslog` server.
-The `syslog` protocol uses a raw string as log message supporting a very little number of metadata, for a syslog message to be valid the syslog message must be formatted in a specific way, allowing the receiver to extract the following information:
+The `syslog` logging driver routes logs to a `syslog` server. The `syslog` protocol uses
+a raw string as the log message and supports a limited set of metadata. The syslog
+message mut be formatted in a specific way to be valid. From a valid message, the
+receiver can extract the following information:
 
-- a priority: is this a debug message, a warning, something purely informational, a critical error, etc.;
-- a timestamp indicating when the thing happened;
-- a hostname indicating where the thing happened (i.e. on which machine);
-- a facility indicating if the message comes from the mail system, the kernel, and such and such;
-- a process name and number;
+- **priority**: the logging level, such as `debug`, `warning`, `error`, `info`.
+- **timestamp**: when the event occurred.
+- **hostname**: where the event happened.
+- **facility**: which subsystem logged the message, such as `mail` or `kernel`.
+- **process name** and **process ID (PID)**: The name and ID of the process that generated the log.
 
-The format has been standardized in [RFC 5424](https://tools.ietf.org/html/rfc5424) and this logging driver implements the [ABNF reference](https://tools.ietf.org/html/rfc5424#section-6) in the following way
+The format is defined in [RFC 5424](https://tools.ietf.org/html/rfc5424) and Docker's syslog driver implements the
+[ABNF reference](https://tools.ietf.org/html/rfc5424#section-6) in the following way:
 
-```
+```none
                 TIMESTAMP SP HOSTNAME SP APP-NAME SP PROCID SP MSGID
                     +          +             +           |        +
                     |          |             |           |        |
@@ -29,7 +32,7 @@ The format has been standardized in [RFC 5424](https://tools.ietf.org/html/rfc54
 
 ## Usage
 
-You can configure the default logging driver by passing the `--log-driver` and `--log-opt` options to the Docker daemon:
+To use the `syslog` driver as the default logging driver, you can use the `--log-driver` and `--log-opt` flags when starting Docker:
 
 ```bash
 dockerd \
@@ -37,9 +40,9 @@ dockerd \
   --log-opt syslog-address=udp://1.2.3.4:1111
 ```
 
-**Please note that** the syslog-address supports both **udp** and **tcp**.
+> **Note**: The syslog-address supports both UP and TCP.
 
-Or you can configure it in `/etc/docker/daemon.json` with:
+To make the changes persistent, add the toptions to `/etc/docker/daemon.json`:
 
 
 ```json
@@ -52,7 +55,7 @@ Or you can configure it in `/etc/docker/daemon.json` with:
 ```
 
 You can set the logging driver for a specific container by using the
-`--log-driver` option to `docker run`:
+`--log-driver` flag to `docker create` or `docker run`:
 
 ```bash
 docker run \
