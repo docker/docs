@@ -5,7 +5,7 @@ keywords: docker, registry, webhooks
 ---
 
 DTR includes webhooks for common events, such as pushing a new tag or deleting
-an image.  This lets you build complex CI and CD pipelines from your own DTR
+an image. This lets you build complex CI and CD pipelines from your own DTR
 cluster.
 
 The webhook events you can subscribe to are:
@@ -48,13 +48,13 @@ In order to subscribe to events you must send an API query to
 
 The keys in the payload are:
 
-- `type`: The event type.  These are listed below.
+- `type`: The event type. These are listed below.
 - `key`: The namespace or repo to subscribe to (eg "foo/bar" to subscribe to
 pushes to repo "bar" within namespace "foo")
 - `endpoint`: The URL to send the POST payload to.
 
 Normal users **must** supply a "key" to scope a particular webhook event to
-a repository or namespace.  System administrators can choose to omit this,
+a repository or namespace. System administrators can choose to omit this,
 meaning a webhook payload will be sent for **every** repository or namespace.
 
 ### Event types
@@ -80,7 +80,7 @@ meaning a webhook payload will be sent for **every** repository or namespace.
 ### Receiving a payload
 
 Whenever a suitable action occurs DTR will send a POST request to the given
-endpoint with a JSON encoded payload.  The payload will always have the
+endpoint with a JSON encoded payload. The payload will always have the
 following wrapper:
 
 ```
@@ -92,14 +92,14 @@ following wrapper:
 ```
 
 `type` refers to the event type being sent, and `contents` refers to
-the payload of the event itself.  Each event is different, therefore the
+the payload of the event itself. Each event is different, therefore the
 structure of the JSON object in `contents` will change depending on the event
-type.  These are listed in a section below.
+type. These are listed in a section below.
 
 ### Testing payload subscriptions
 
 Before subscribing to a payload you can view and test your endpoints using
-fake data.  To send a test payload, fire a `POST` request to
+fake data. To send a test payload, fire a `POST` request to
 `/api/v0/webhooks/test` with the following payload:
 
 ```
@@ -109,8 +109,8 @@ fake data.  To send a test payload, fire a `POST` request to
 }
 ```
 
-Change `type` to the event type that you want to receive.  DTR will then send
-an example payload to the endpoint specified.  Note that the example
+Change `type` to the event type that you want to receive. DTR will then send
+an example payload to the endpoint specified. Note that the example
 payload sent is always the same.
 
 ## Content structure
@@ -195,7 +195,7 @@ present in POST payloads.
     "tag": "",                // (string) the name of the tag just pushed
     "critical": 0,            // (int) number of critical issues, where CVSS >= 7.0
     "major": 0,               // (int) number of major issues, where CVSS >= 4.0 && CVSS < 7
-    "minor": 0,               // (int) number of minor issues, where CVSS > 0 && CVSS <
+    "minor": 0,               // (int) number of minor issues, where CVSS > 0 && CVSS < 4.0
     "last_scan_status": 0,    // (int) enum; see scan status section
     "check_completed_at": "", // (string) JSON encoded timestamp of when the scan completed
   }
@@ -266,9 +266,9 @@ present in POST payloads.
 
 ### Viewing all subscriptions
 
-To view existing subscriptions make a GET request to `/api/v0/webhooks`.  As
+To view existing subscriptions make a GET request to `/api/v0/webhooks`. As
 a normal user (ie. not a system administrator), this will show all of your
-current subscriptions across every namespace and repository.  As a system
+current subscriptions across every namespace and repository. As a system
 administrator this will show **every** webhook within DTR.
 
 The API response will be in the following format:
@@ -292,9 +292,9 @@ For more information view the API documentation.
 ### Viewing subscriptions for a particular resource
 
 You can also view subscriptions for a given resource that you are an
-administrator of.  For example, if you have admin rights to the repository
+administrator of. For example, if you have admin rights to the repository
 "foo/bar" you can view all subscriptions (even other people's) from a
-particular API endpoint.  These endpoints are:
+particular API endpoint. These endpoints are:
 
 - `/api/v0/repositories/{namespace}/{repository}/webhooks`: GET to view all
 webhooks for a repository resource's events
@@ -309,5 +309,5 @@ which you would like to delete.
 
 Note that in order to delete a subscription you must be either a system
 administrator or an administrator for the resource which the payload subscribes
-to.  For example, as a normal user you can only delete subscriptions for
+to. For example, as a normal user you can only delete subscriptions for
 repositories which you are an admin of.
