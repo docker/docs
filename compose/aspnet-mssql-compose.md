@@ -145,6 +145,7 @@ configure this app to use our SQL Server database, and then create a
     }
     [...]
     ```
+    
 1.  Go to `app.csproj`. You will find a line like:
 
     ```
