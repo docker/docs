@@ -7,19 +7,22 @@ title: JSON File logging driver
 ---
 
 
-By default, the Docker Engine will capture the standard output (and standard error) of all your containers, and write them in files using the JSON format (hence the name json-file for this default logging driver). The JSON format annotates each line with its origin (stdout or stderr) and its timestamp, and keeps each container log in a separate file.
+By default, Docker captures the standard output (and standard error) of all your containers,
+and writes them in files using the JSON format. The JSON format annotates each line with its
+origin (`stdout` or `stderr`) and its timestamp. Each log file containers information about
+only one container.
 
 ## Usage
 
-You can configure the default logging driver by passing the `--log-driver`
-and `--log-opt` options to the Docker daemon:
+Docker uses the JSON File logging driver by default. To explicitly set it,
+use the `--log-driver` and `--log-opt` flags when starting Docker:
 
 ```bash
 dockerd
   -–log-driver json-file –-log-opt max-size=10m
 ```
 
-Or you can configure it in `/etc/docker/daemon.json` with:
+To make the change persistent, configure it in `/etc/docker/daemon.json`:
 
 ```json
 {
@@ -31,10 +34,10 @@ Or you can configure it in `/etc/docker/daemon.json` with:
 ```
 
 You can set the logging driver for a specific container by using the
-`--log-driver` option to `docker run`:
+`--log-driver` flag to `docker create` or `docker run`:
 
 ```bash
-docker run \
+$ docker run \
       -–log-driver json-file –-log-opt max-size=10m \
       alpine echo hello world
 ```
