@@ -84,7 +84,7 @@ the repository.
       [prerequisites](#prerequisites).
 
       ```bash
-      $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+      $ sudo sh -c 'echo "<DOCKER-EE-URL>/rhel" > /etc/yum/vars/dockerurl'
       ```
 
     - Store your RHEL version string in `/etc/yum/vars/dockerosversion`.
@@ -112,7 +112,7 @@ the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
 #### Install Docker
