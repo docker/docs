@@ -112,6 +112,9 @@ a.anchorLink {
 
 .highlighter-rouge {
     margin: 15px 0;
+    overflow-wrap: normal;
+    overflow-x: scroll;
+    display: block;
 }
 
 code {
