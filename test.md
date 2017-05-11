@@ -495,7 +495,7 @@ If we figure out how to call the icons from the CSS, we can replace the null val
 
 ><i class="glyphicon glyphicon-exclamation-sign"></i> Leave a space before your custom text
 >
-> With all Glyphicons style notes, make sure the icon isn't smashed up against your custom text. Be sure to leave a space _after_ the `</i>  and _before_ the closing backtick: `<i class="glyphicon GlypiconName"></i> `
+> With all Glyphicons style notes, make sure the icon isn't smashed up against your custom text. Be sure to leave a space _after_ the `</i>`  and _before_ the closing backtick: `<i class="glyphicon GlypiconName"></i> `
 {: .warning-vanilla}
 
 ><i class="glyphicon glyphicon-ban-circle"></i> Ouch, don't touch that hot Docker engine!
