@@ -507,7 +507,7 @@ after that is not counted.
 ## Roll back to the previous version of a service
 
 In case the updated version of a service doesn't function as expected, it's
-possible to roll back to the previous version of the service using
+possible to manually roll back to the previous version of the service using
 `docker service update`'s `--rollback` flag. This will revert the service
 to the configuration that was in place before the most recent
 `docker service update` command.
@@ -522,7 +522,50 @@ $ docker service update \
   my_web
 
 my_web
+```
 
+In Docker 17.04 and higher, you can configure a service to roll back
+automatically if a service update fails to deploy. See
+[Automatically roll back if an update fails](#automatically-roll-back-if-an-update-fails).
+
+Related to the new automatic rollback feature, in Docker 17.04 and higher,
+manual rollback is handled at the server side, rather than the client, if the
+daemon is running Docker 17.04 or higher. This allows manually-initiated
+rollbacks to respect the new rollback parameters. The client is version-aware,
+so it will still use the old method against an older daemon.
+
+Finally, in Docker 17.04 and higher, `--rollback` cannot be used in conjunction
+with other flags to `docker service update`.
+
+## Automatically roll back if an update fails
+
+You can configure a service in such a way that if an update to the service
+causes redeployment to fail, the service can automatically roll back to the
+previous configuration. This helps protect service availability. You can set
+one or more of the following flags at service creation or update. If you do not
+set a value, the default is used.
+
+| Flag                         | Default | Description                                   |
+|------------------------------|---------|-----------------------------------------------|
+|`--rollback-delay`            | `0s`    | Amount of time to wait after rolling back a task before rolling back the next one. A value of `0` means to roll back the second task immediately after the first rolled-back task deploys. |
+|`--rollback-failure-action`   | `pause` | When a task fails to roll back, whether to `pause` or `continue` trying to roll back other tasks. |
+|`--rollback-max-failure-ratio`| `0`     | The failure rate to tolerate during a rollback, specified as a floating-point number between 0 and 1. For instance, given 5 tasks, a failure ratio of `.2` would tolerate one task failing to roll back. A value of `0` means no failure are tolerated, while a value of `1` means any number of failure are tolerated. |
+|`--rollback-monitor`          | `5s`    | Duration after each task rollback to monitor for failure. If a task stops before this time period has elapsed, the rollback is considered to have failed. |
+|`--rollback-parallelism`      | `1`     | The maximum number of tasks to roll back in parallel. By default, one task is rolled back at a time. A value of `0` causes all tasks to be rolled back in parallel. |
+
+The following example configures a `redis` service to roll back automatically
+if a `docker service update` fails to deploy. Two tasks can be rolled back in
+parallel. Tasks are monitored for 20 seconds after rollback to be sure they do
+not exit, and a maximum failure ratio of 20% is tolerated. Default values are
+used for `--rollback-delay` and `--rollback-failure-action`.
+
+```bash
+$ docker service create --name=my_redis \
+                        --replicas=5 \
+                        --rollback-parallelism=2 \
+                        --rollback-monitor=20s \
+                        --rollback-max-failure-ratio=.2 \
+                        redis:latest
 ```
 
 ## Configure mounts
