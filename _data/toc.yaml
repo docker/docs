@@ -1710,6 +1710,8 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/2.2/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - path: /datacenter/ucp/2.2/reference/api/
+      title: API reference
     - sectiontitle: Release notes
       section:
       - path: /datacenter/ucp/2.2/guides/release-notes/
