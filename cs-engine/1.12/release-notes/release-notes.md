@@ -22,6 +22,12 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs11
+(11 May 2017)
+
+* Fix an issue with overlay networks L2 miss notifications not being handled in
+some cases [#1642](https://github.com/docker/libnetwork/pull/1642)
+
 ## CS Engine 1.12.6-cs10
 (6 Mar 2017)
 
