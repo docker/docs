@@ -63,7 +63,7 @@ this in a few different ways.
     PROCESS_2_STATUS=$(ps aux |grep -q my_second_process | grep -v grep)
     # If the greps above find anything, they will exit with 0 status
     # If they are not both 0, then something is wrong
-    if [ $PROCESS_1_STATUS -ne 0 -a $PROCESS_2_STATUS -ne 0 ]; then
+    if [ $PROCESS_1_STATUS -ne 0 -o $PROCESS_2_STATUS -ne 0 ]; then
       echo "One of the processes has already exited."
       exit -1
     fi
