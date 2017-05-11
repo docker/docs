@@ -20,6 +20,10 @@ blockquote > p:first-child::before {
   content: 'Note: ';
 }
 
+blockquote.note-vanilla > p:first-child::before {
+  content: '';
+}
+
 blockquote.warning {
   border-left-color: $warning-color;
 }
@@ -32,6 +36,18 @@ blockquote.warning > p:first-child::before {
   content: 'Important: ';
 }
 
+blockquote.warning-vanilla {
+  border-left-color: $warning-color;
+}
+
+blockquote.warning-vanilla > p:first-child {
+  color: $warning-color;
+}
+
+blockquote.warning-vanilla > p:first-child::before {
+  content: '';
+}
+
 blockquote.danger {
   border-left-color: $danger-color;
 }
@@ -42,6 +58,18 @@ blockquote.danger > p:first-child {
 
 blockquote.danger > p:first-child::before {
   content: 'Warning: '
+}
+
+blockquote.danger-vanilla {
+  border-left-color: $danger-color;
+}
+
+blockquote.danger-vanilla > p:first-child {
+  color: $danger-color;
+}
+
+blockquote.danger-vanilla > p:first-child::before {
+  content: ''
 }
 
 /* Maintain backwards compatibility with old
