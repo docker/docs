@@ -103,14 +103,14 @@ docker run -d -p 80:80 --name webserver nginx
 To clarify the syntax, the following two commands both expose port `80` on the
 container to port `8000` on the host:
 
-		docker run --publish 8000:80 --name webserver nginx
-		docker run --p 8000:80 --name webserver nginx
+    docker run --publish 8000:80 --name webserver nginx
+    docker run --p 8000:80 --name webserver nginx
 
 To expose all ports, use the `-P` flag. For example, the following command
 starts a container (in detached mode) and the `-P` exposes all ports on the
 container to random ports on the host.
 
-		docker run -d -P --name webserver nginx
+    docker run -d -P --name webserver nginx
 
 See the [run command](/engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
