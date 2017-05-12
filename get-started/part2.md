@@ -261,7 +261,7 @@ Once complete, the results of this upload are publicly available. From now on,
 you can use `docker run` and run your app on any machine with this command:
 
 ```shell
-docker run -p 4000:80 username/repository:tag
+docker run -p 4000:80 username/repository:tag friendlyhello
 ```
 
 > Note: If you don't specify the `:tag` portion of these commands,
