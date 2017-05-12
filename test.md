@@ -508,7 +508,7 @@ If we figure out how to call the icons from the CSS, we can replace the null val
 
 ### Test Liquid admonitions
 
-{% include content/admonitions/note.html type="warning" title="Do not do this" text="Multiline text is okay!
+{% include content/admonitions/notes.html type="warning" title="Do not do this" text="Multiline text is okay!
 
 * See?
 * It's fine!" %}
