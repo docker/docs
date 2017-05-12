@@ -508,6 +508,8 @@ If we figure out how to call the icons from the CSS, we can replace the null val
 
 ### Test Liquid admonitions
 
+We are experimenting with a different solution that uses Liquid variables. The following note makes a call to file `content/admonitions/notes.html`, where the Liquid variables are defined to format admonitions. We haven't gotten this totally working yet, and are assessing whether it's a more elegant solution or not.
+
 {% include content/admonitions/notes.html type="warning" title="Do not do this" text="Multiline text is okay!
 
 * See?
