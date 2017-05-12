@@ -177,37 +177,18 @@ If you enter a "Domain Name" into the Security settings, it needs to be DNS
 resolvable on any client daemons that are running in `insecure-registry`
 mode.
 
-To set the flag, perform the following directions for your operating system.
+To set the flag, edit the `daemon.json` file, which is located in `/etc/docker/`
+on Linux or `C:\ProgramData\docker\config\` on Windows Server. If the
+file does not yet exist, create it. Assuming the file was empty, it should have
+the following contents:
 
-#### Ubuntu
-
-On Ubuntu 14.04 LTS, customize the Docker daemon configuration with the
-`/etc/defaults/docker` file.
-
-Open or create the `/etc/defaults/docker` file, and add the
-`--insecure-registry` flag to the `DOCKER_OPTS` setting (which may need to be
-added or uncommented) as follows:
-
-```
-DOCKER_OPTS="--insecure-registry dtr.yourdomain.com"
+```json
+{
+  "insecure-registries": ["dtr.yourdomain.com"]
+}
 ```
 
-Then restart the Docker daemon with `sudo service docker restart`.
-
-#### RHEL/Centos
-
-On RHEL/Centos, customize the Docker daemon configuration with the
-`/etc/sysconfig/docker` file.
-
-Open or create the `/etc/sysconfig/docker` file, and add the
-`--insecure-registry` flag to the `OPTIONS` setting (which may need to be
-added or uncommented) as follows:
-
-```
-OPTIONS="--insecure-registry dtr.yourdomain.com"
-```
-
-Then restart the Docker daemon with `sudo service docker restart`.
+Restart Docker for the change to take effect.
 
 ### Docker Machine and Boot2Docker
 
@@ -221,7 +202,7 @@ setting as follows:
 EXTRA_ARGS="--insecure-registry dtr.yourdomain.com"
 ```
 
-Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
+Restart Docker for the change to take effect.
 
 
 ## See also
