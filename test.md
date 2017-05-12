@@ -506,6 +506,13 @@ If we figure out how to call the icons from the CSS, we can replace the null val
  super complex.
 {: .danger-vanilla}
 
+### Test Liquid admonitions
+
+{% include content/admonitions/note.html type="warning" title="Do not do this" text="Multiline text is okay!
+
+* See?
+* It's fine!" %}
+
 ## Comments
 
 You can use XML style comments, which show up in the HTML "view source", or
