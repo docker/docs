@@ -219,10 +219,10 @@ The network you created is shared between them and load-balancing. Run
 browser, hitting refresh (or just `curl` them). You'll see five possible
 container IDs all cycling by randomly, demonstrating the load-balancing.
 
-The reason both IP addresses work is that nodes in a swarm participate in an in
+The reason both IP addresses work is that nodes in a swarm participate in an
 ingress **routing mesh**. This ensures that a service deployed at a certain port
 within your swarm always has that port reserved to itself, no matter what node
-is  actually running the container. Here's a diagram of how a routing mesh for a
+is actually running the container. Here's a diagram of how a routing mesh for a
 service called `my-web` published at port `8080` on a three-node swarm would
 look:
 
