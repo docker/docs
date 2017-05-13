@@ -46,7 +46,7 @@ blockquote.important-vanilla > p:first-child {
 }
 
 blockquote.important-vanilla > p:first-child::before {
-  content: '\f05a  \00a0';
+  content: '\f06a  \00a0';
   font-family: FontAwesome;
 }
 
@@ -71,7 +71,7 @@ blockquote.warning-vanilla > p:first-child {
 }
 
 blockquote.warning-vanilla > p:first-child::before {
-  content: '\f071  \00a0';
+  content: '\f057  \00a0';
   font-family: FontAwesome;
 
 }
