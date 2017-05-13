@@ -1,19 +1,19 @@
 /*
-* Infos, notes, and warnings
+* note, important, and important admonition styles
 */
 
-$info-color: #1488C6;
-$warning-color: #aa6708;
-$danger-color: #ce4844;
+$note-color: #1488C6;
+$important-color: #aa6708;
+$warning-color: #ce4844;
 
 blockquote {
-  border-left-color: $info-color;
+  border-left-color: $note-color;
 }
 
 blockquote > p:first-child {
   margin-top: 0;
   font-weight: 700;
-  color: $info-color;
+  color: $note-color;
 }
 
 blockquote > p:first-child::before {
@@ -21,7 +21,33 @@ blockquote > p:first-child::before {
 }
 
 blockquote.note-vanilla > p:first-child::before {
-  content: '';
+  content: '\f058 \00a0';
+  font-family: FontAwesome;
+}
+
+blockquote.important {
+  border-left-color: $important-color;
+}
+
+blockquote.important > p:first-child {
+  color: $important-color;
+}
+
+blockquote.important > p:first-child::before {
+  content: 'Important: ';
+}
+
+blockquote.important-vanilla {
+  border-left-color: $important-color;
+}
+
+blockquote.important-vanilla > p:first-child {
+  color: $important-color;
+}
+
+blockquote.important-vanilla > p:first-child::before {
+  content: '\f05a  \00a0';
+  font-family: FontAwesome;
 }
 
 blockquote.warning {
@@ -33,7 +59,7 @@ blockquote.warning > p:first-child {
 }
 
 blockquote.warning > p:first-child::before {
-  content: 'Important: ';
+  content: 'Warning: ';
 }
 
 blockquote.warning-vanilla {
@@ -45,31 +71,9 @@ blockquote.warning-vanilla > p:first-child {
 }
 
 blockquote.warning-vanilla > p:first-child::before {
-  content: '';
-}
+  content: '\f071  \00a0';
+  font-family: FontAwesome;
 
-blockquote.danger {
-  border-left-color: $danger-color;
-}
-
-blockquote.danger > p:first-child {
-  color: $danger-color;
-}
-
-blockquote.danger > p:first-child::before {
-  content: 'Warning: '
-}
-
-blockquote.danger-vanilla {
-  border-left-color: $danger-color;
-}
-
-blockquote.danger-vanilla > p:first-child {
-  color: $danger-color;
-}
-
-blockquote.danger-vanilla > p:first-child::before {
-  content: ''
 }
 
 /* Maintain backwards compatibility with old
