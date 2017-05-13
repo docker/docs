@@ -1,0 +1,17 @@
+{% if include.type=="note" %}
+  {% assign glyphClass="glyphicon glyphicon-ok-sign" %}
+  {% assign blockquoteClass="note-vanilla" %}
+{% endif %}
+{% if include.type=="important"%}
+  {% assign glyphClass="glyphicon glyphicon-exclamation-sign" %}
+  {% assign blockquoteClass="warning-vanilla" %}
+{% endif %}
+{% if include.type=="warning" %}
+  {% assign glyphClass="glyphicon glyphicon-ban-circle" %}
+  {% assign blockquoteClass="danger-vanilla" %}
+{% endif %}
+
+<blockquote class="{{ blockquoteClass }}">
+<p><em class="{{ glyphClass }}"></em> {{ include.title }}</p>
+<p>{{ include.text | strip | markdownify }}</p>
+</blockquote>
