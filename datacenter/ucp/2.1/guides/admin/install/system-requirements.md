@@ -45,7 +45,7 @@ When installing UCP on a host, make sure the following ports are open:
 | managers          |    in     | TCP 12387               | Port for the metrics service                                                      |
 
 Also, make sure the networks you're using allow the UCP components to
-communicate before they timming out.
+communicate before they timing out.
 
 | Component                              | Timeout (ms) | Configurable |
 |:---------------------------------------|:-------------|:-------------|
