@@ -372,15 +372,15 @@ The new styles (with icons) are defined a way that will not impact notes
 previously formatted with the original styles (prefixed text), so notes in your
 published documents won't be adversely affected.
 
-Both styles are desribed below with examples.
+Examples of both styles are shown below.
 
 ### Examples (original styles, prefix words)
 
 Admonitions with prefixed text use the following class tags, as shown in the examples.
 
 * **Note:** No class tag is needed for standard notes.
-* **Important:** Use the `warning` class.
-* **Warning:** Use the `danger` class.
+* **Important:** Use the `important` class.
+* **Warning:** Use the `warning` class.
 
 
 > **Note**: This is a note using the old note style
@@ -394,18 +394,18 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 
 > It's not safe out there, take this Moby with you
 >
-> Add the `warning` class to your blockquotes if you want to tell users
+> Add the `important` class to your blockquotes if you want to tell users
  to be careful about something.
-{: .warning}
+{: .important}
 
 > Ouch, don't do that!
 >
-> Use the `danger` class to let people know this is dangerous or they
+> Use the `warning` class to let people know this is dangerous or they
  should pay close attention to this part of the road.
 >
 > You can also add more paragraphs here if your explanation is
  super complex.
-{: .danger}
+{: .warning}
 
 >**This is a crazy note**
 >
@@ -421,110 +421,28 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 >
 > And another sentence to top it all off.
 
-### Admonitions with Glyphicons
+### Examples with FontAwesome
 
-Let's experiment with some cute [Bootstrap
-Glypicons](http://getbootstrap.com/components/) instead of prefixed text labels. Three new classes have been added to [`_scss/notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss):
-
-<span><i class="glyphicon glyphicon-ok-sign"></i> Note text can go here.</span> (Notes use the `note-vanilla` class tag.)
-
-<span><i class="glyphicon glyphicon-exclamation-sign"></i> Text that describes **Important** admonitions can go here.</span> (Important admonitions use the `warning-vanilla`.)
-
-<span><i class="glyphicon glyphicon-ban-circle"></i> Text that describes a **Warning** situation can go here.</span> (Warning admonitions use the `danger-vanilla`.)
-
-The associated pseudo-class definitions for `p:first-child::before` for the new classes all use a null value in `content`, instead of a prefixed word. For example, the standard `warning` class to denote something "Important" uses this:
-
-```none
-blockquote.warning > p:first-child::before {
-  content: 'Important: ';
-}
-```
-
-whereas, `warning-vanilla` uses this:
-
-```none
-blockquote.warning > p:first-child::before {
-  content: '';
-}
-```
-
-So far so good!
-
-### Overhead of using Glyphicons
-
-The problem is there doesn't seem to be a way to call the icons from the CSS.
-You need to add the HTML to call icons directly in the markdown. Examples shown
-below use inline HTML to call the appropriate glypicon for the admonition type,
-with this pattern: `<i class="glyphicon GlypiconName"></i> `.
-
- |CSS class           | Icon name             |
- |--------------------|----------------------------------|
- | `note-vanilla`     | `glyphicon-ok-sign`              |
- | `warning-vanilla`  | `glyphicon-exclamation-sign`     |
- | `danger-vanilla`   | `glyphicon glyphicon-ban-circle` |
-
-
-Until we find a way to call the icons directly from the CSS, this approach will
-work, but there is a little more manual overhead involved with adding in the
-HTML prefix to each admonition in the markdown. Check out the raw
-[`test.md`](https://github.com/docker/docker.github.io/blob/master/test.md)
-file.
-
-If we figure out how to call the icons from the CSS, we can replace the null value for `content` in `p:first-child::before` with that call.
-
-### Examples with Glypicons
-
-> <i class="glyphicon glyphicon-ok-sign"></i>  Pssst, wanna know something?
+>  Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
 >
-> This is an example of a note using the `note-vanilla` tag, which gives you an icon instead of stock prefixed text so that you can write your own title.
+> This is an example of a note using the `{: .note-vanilla}` tag to get an icon instead of a "Note" prefix, and write your own note title.
 {: .note-vanilla}
 
-> <i class="glyphicon glyphicon-ok-sign"></i> Glyphicon terms of use
->
-> If we do implement the Glyphicons, we just need to include a link back to [Glyphicons](http://glyphicons.com/) per the use agreement.
->
-> This is another example of a `note-vanilla` tag.
-{: .note-vanilla}
 
-><i class="glyphicon glyphicon-exclamation-sign"></i> It's not safe out there, take this Moby with you
+> It's not safe out there, take this Moby with you
 >
-> Use the `warning-vanilla` class to get an icon and spice it up yourself with a custom title. Prefix the warning in markdown with `<i class="glyphicon glyphicon-exclamation-sign"></i> ` to get the warning icon.
-{: .warning-vanilla}
+> Use `{: .important-vanilla}` after your important to get an "important" icon.
+{: .important-vanilla}
 
-><i class="glyphicon glyphicon-exclamation-sign"></i> Leave a space before your custom text
+> Ouch, don't touch that hot Docker engine!
 >
-> With all Glyphicons style notes, make sure the icon isn't smashed up against your custom text. Be sure to leave a space _after_ the `</i>`  and _before_ the closing backtick: `<i class="glyphicon GlypiconName"></i> `
-{: .warning-vanilla}
-
-><i class="glyphicon glyphicon-ban-circle"></i> Ouch, don't touch that hot Docker engine!
->
-> Use the `danger-vanilla` class to get an icon and spice it up yourself with a custom title. Prefix the warning in markdown with `<i class="glyphicon glyphicon-ban-circle"></i> ` to get the danger icon.
+> Use `{: .warning-vanilla}` after your warning to get an icon instead of a "Warning" prefix.
 >
 > You can also add more paragraphs here if your explanation is
  super complex.
-{: .danger-vanilla}
-
-### Test Liquid admonitions
-
-We are experimenting with a different solution that uses Liquid variables. The following note makes a call to file `content/admonitions/notes.html`, where the Liquid variables are defined to format admonitions. We haven't gotten this totally working yet, and are assessing whether it's a more elegant solution or not.
-
-{% include content/admonitions/notes.html type="warning" title="Do not do this" text="Multiline text is okay!
-
-* See?
-* It's fine!" %}
-
-## Comments
-
-You can use XML style comments, which show up in the HTML "view source", or
-Liquid ones, which don't. You'll need to view the source of this file to see
-both styles.
-
-<!-- This comment will show up in the HTML source -->
-
-{% comment %}This one won't.{% endcomment %}
-
+{: .warning-vanilla}
 
 ## Code blocks
 
