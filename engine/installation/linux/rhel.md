@@ -112,7 +112,7 @@ the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
 #### Install Docker
