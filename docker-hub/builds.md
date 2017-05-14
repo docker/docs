@@ -44,7 +44,7 @@ limitation.
 
 1. Log into Docker Hub.
 
-2. Navigate to **Profile &gt; Settings  &gt; Linked Accounts & Services**.
+2. Navigate to **Profile &gt; Settings &gt; Linked Accounts & Services**.
 
 3. Click the service you want to link.
 
@@ -56,7 +56,7 @@ limitation.
 
     ![Bitbucket](images/bitbucket_creds.png)
 
-    After you grant access to your code repository, the system returns you to Docker Hub and  the link is complete.
+    After you grant access to your code repository, the system returns you to Docker Hub and the link is complete.
 
     ![Linked account](images/linked-acct.png)
 
@@ -105,7 +105,7 @@ repositories using the `docker push` command.
 
     ![GitHub](images/docker-integration.png)
 
-    A similar page appears in Bitbucket if you use that code repository.Be
+    A similar page appears in Bitbucket if you use that code repository. Be
     careful to leave the Docker integration in place. Removing it causes your
     automated builds to stop.
 
@@ -179,7 +179,7 @@ To add a new build:
 
 3. Enter the Name of the branch or tag.
 
-    You can enter a specific value or use a regex to select multiple values.  To
+    You can enter a specific value or use a regex to select multiple values. To
     see examples of regex, press the Show More link on the right of the page.
 
     ![Regexhelp](images/regex-help.png)
@@ -195,7 +195,7 @@ If you make a mistake or want to delete a build, press the - (minus sign) and th
 ## Repository links
 
 Repository links let you link one Automated Build with another. If one Automated
-Build gets updated, Docker triggers a build of the  other. This makes it easy to
+Build gets updated, Docker triggers a build of the other. This makes it easy to
 ensure that related images are kept in sync. You can link more than one image
 repository. You only need to link one side of two related builds. Linking both
 sides causes an endless build loop.
