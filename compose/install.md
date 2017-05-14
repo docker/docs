@@ -39,16 +39,16 @@ To install Compose, do the following:
     ```none
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
-    > <span><i class="glyphicon glyphicon-exclamation-sign"></i> Use the
-    latest Compose release number in the download command.
+    >  Use the latest Compose release number in the download command.
     >
     > As already mentioned, the above command is an _example_, and
     it may become out-of-date once in a while. Always follow the
     command pattern shown above it. If you cut-and-paste an example,
-    check which release it specifies and, if needed, replace `$dockerComposeVersion` with the release number that you want.
-    Compose releases are also available for direct download on
-    the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
-    {: .warning-vanilla}
+    check which release it specifies and, if needed,
+    replace `$dockerComposeVersion` with the release number that
+    you want. Compose releases are also available for direct download
+    on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+    {: .important-vanilla}
 
     Now, run the executable to install Compose.
 
@@ -56,7 +56,7 @@ To install Compose, do the following:
     [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
     Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
 
-    > <span><i class="glyphicon glyphicon-ok-sign"></i> Got a "Permission denied" error?
+    >  Got a "Permission denied" error?
     >
     If so, your `/usr/local/bin` directory probably isn't writable and
     you'll need to install Compose as the superuser. Run `sudo -i`, then
@@ -77,8 +77,7 @@ To install Compose, do the following:
     curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     ```
 
-    > <span><i class="glyphicon glyphicon-exclamation-sign"></i> Use the
-    latest Compose release number in the download command.
+    > Use the latest Compose release number in the download command.
     >
     The above command is an _example_, and it may become out-of-date once
     in a while. Always follow the command pattern shown above it. If
@@ -87,7 +86,7 @@ To install Compose, do the following:
     you want. Compose releases are also available for direct download on
     the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
-    {: .warning-vanilla}
+    {: .important-vanilla}
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options).
@@ -128,7 +127,7 @@ if you are not using virtualenv,
 sudo pip install docker-compose
 ```
 
-> <span><i class="glyphicon glyphicon-ok-sign"></i> pip version 6.0 or greater is required.
+> pip version 6.0 or greater is required.
 
 ### Install as a container
 
@@ -140,8 +139,7 @@ $ curl -L --fail https://github.com/docker/compose/releases/download/{{site.comp
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-> <span><i class="glyphicon glyphicon-exclamation-sign"></i> Use the
-latest Compose release number in the download command.
+>  Use the latest Compose release number in the download command.
 >
 The above command is an _example_, and it may become out-of-date once in a
 while. Check which release it specifies and, if needed, replace the given
@@ -149,7 +147,7 @@ release number with the one that you want. Compose releases are also listed and
 available for direct download on the [Compose repository release page on
 GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
-{: .warning-vanilla}
+{: .important-vanilla}
 
 ## Master builds
 
@@ -197,7 +195,7 @@ To uninstall Docker Compose if you installed using `pip`:
 pip uninstall docker-compose
 ```
 
-> <span><i class="glyphicon glyphicon-ok-sign"></i> Got a "Permission denied" error?
+> Got a "Permission denied" error?
 >
 > If you get a "Permission denied" error using either of the above
 > methods, you probably do not have the proper permissions to remove
