@@ -764,6 +764,27 @@ Logging options are key-value pairs. An example of `syslog` options:
     options:
       syslog-address: "tcp://192.168.0.42:123"
 
+To limit the amount of logs stored there are two options key-value pairs:
+
+    options:
+      max-size: "200k"
+      max-file: "10"
+
+This example would store log files until the reach a `max-size` of 200kB, and then rotate them.
+The amount of individual log files stored is specified by the `max-file` value. As logs grow
+beyond the max limits, older log files are removed to allow storage of new logs.
+
+An example `docker-compose.yml` file that limits logging storage
+
+    services:
+      some-service:
+        image: some-service
+        logging:
+          driver: "json-file"
+          options:
+            max-size: "200k"
+            max-file: "10"
+
 ### network_mode
 
 Network mode. Use the same values as the docker client `--net` parameter, plus
