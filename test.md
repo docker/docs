@@ -365,11 +365,11 @@ Bootstrap JS are loaded.
 
 Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
-support to broad categories of admonitions: those with prefixed text (**Note:**,
+support two broad categories of admonitions: those with prefixed text (**Note:**,
 **Important:**, **Warning**) and those with prefixed icons.
 
-The new styles (with icons) are defined a way that will not impact notes
-previously formatted with the original styles (prefixed text), so notes in your
+The new styles (with icons) are defined in a way that will not impact admonitions 
+formatted with the original styles (prefixed text), so notes in your
 published documents won't be adversely affected.
 
 Examples of both styles are shown below.
@@ -421,7 +421,7 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 >
 > And another sentence to top it all off.
 
-### Examples with FontAwesome
+### Examples with FontAwesome icons
 
 >  Pssst, wanna know something?
 >
