@@ -41,7 +41,7 @@ Provide your Docker ID and user name and click **LOG IN** or click **Skip for no
 ## Container list
 
 Kitematic lists all running and stopped containers on the left side, underneath
-the "New Container" link.
+the **New Container** link.
 
 The container list includes all containers, even those not started by Kitematic,
 giving you a quick over-view of the state of your Docker daemon.
