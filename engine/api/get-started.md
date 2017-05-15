@@ -622,7 +622,7 @@ Commit containers to create images from their contents:
 ```python
 import docker
 client = docker.from_env()
-container = client.run("alpine", ["touch", "/helloworld"], detached=True)
+container = client.containers.run("alpine", ["touch", "/helloworld"], detach=True)
 container.wait()
 image = container.commit("helloworld")
 print image.id
