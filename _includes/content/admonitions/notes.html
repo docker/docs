@@ -1,12 +1,3 @@
-{% if include.type=="note" %}
-{% assign glyphClass="glyphicon glyphicon-ok-sign" %}
-{% assign blockquoteClass="note-vanilla" %}
-{% else if include.type=="warning"%}
-{% assign glyphClass="glyphicon glyphicon-exclamation-sign" %}
-{% assign blockquoteClass="warning-vanilla" %}
-{% else if include.type=="danger"%}
-{% assign glyphClass="glyphicon glyphicon-ban-circle" %}
-{% assign blockquoteClass="danger-vanilla" %}
-{%endif %}
+# PLACEHOLDER FOR LIQUID VARIABLES SOLUTION FOR ADMONITIONS ICONS
 
-<blockquote class="{{ blockquoteClass }}"><i class="{{ glyphClass }}"></i><b>{{ include.title }}</b><p>{{ include.text | markdownify }}</p></blockquote>
+
