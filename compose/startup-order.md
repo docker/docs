@@ -71,8 +71,11 @@ script:
         >&2 echo "Postgres is up - executing command"
         exec $cmd
 
-    You can use this as a wrapper script as in the previous example, by setting
-    `command: ["./wait-for-postgres.sh", "db", "python", "app.py"]`.
+    You can use this as a wrapper script as in the previous example, by setting:
+
+    ```none
+    command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+    ```
 
 
 ## Compose documentation
