@@ -36,26 +36,29 @@ driver names:
 |VFS           |`vfs`                  |
 |ZFS           |`zfs`                  |
 
-To find out which storage driver is set on the daemon, you use the
-`docker info` command:
+To find out which storage driver is set on the daemon, look for the
+**Storage Driver** line in the output of `docker info`:
 
-    $ docker info
+```bash
+$ docker info
 
-    Containers: 0
-    Images: 0
-    Storage Driver: overlay
-     Backing Filesystem: extfs
-    Execution Driver: native-0.2
-    Logging Driver: json-file
-    Kernel Version: 3.19.0-15-generic
-    Operating System: Ubuntu 15.04
-    ... output truncated ...
+Containers: 0
+Images: 0
+Storage Driver: overlay
+ Backing Filesystem: extfs
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.19.0-15-generic
+Operating System: Ubuntu 15.04
+<output truncated>
+```
 
-The `info` subcommand reveals that the Docker daemon is using the `overlay`
+In this example, the Docker daemon is using the `overlay`
 storage driver with a `Backing Filesystem` value of `extfs`. The `extfs` value
-means that the `overlay` storage driver is operating on top of an existing
-(ext) filesystem. The backing filesystem refers to the filesystem that was used
- to create the Docker host's local storage area under `/var/lib/docker`.
+means that the `overlay` storage driver is operating on top of an `ext2fs` or
+`ext3fs` filesystem, which is common on Linux. The backing filesystem refers to
+the filesystem that was used to create the Docker host's local storage area
+under `/var/lib/docker`.
 
 Which storage driver you use, in part, depends on the backing filesystem you
 plan to use for your Docker host's local storage area. Some storage drivers can
@@ -80,47 +83,71 @@ backing filesystem:
 > "Disabled on" means some storage drivers can not run over certain backing
 > filesystem.
 
-You can set the storage driver by passing the `--storage-driver=<name>` option
-to the `dockerd` command line, or by setting the option on the
-`DOCKER_OPTS` line in the `/etc/default/docker` file.
+You can set the storage driver by setting the option in the `daemon.json`
+file, which is located in `/etc/docker/` on Linux and
+`C:\ProgramData\docker\config\` on Windows Server. If you use Docker for Mac or
+Docker for Windows, click the Docker icon, choose **Preferences**, and choose
+**Daemon** on Docker for Mac or Docker for Windows.
 
-The following command shows how to start the Docker daemon with the
-`devicemapper` storage driver using the `dockerd` command:
+If the `daemon.json` file does not exist, create it. Assuming there are no other
+settings in the file, it should have the following contents:
 
-    $ dockerd --storage-driver=devicemapper &
+```json
+{
+  "storage-driver": "devicemapper"
+}
+```
 
-    $ docker info
+You can specify any valid storage driver in place of `devicemapper`.
 
-    Containers: 0
-    Images: 0
-    Storage Driver: devicemapper
-     Pool Name: docker-252:0-147544-pool
-     Pool Blocksize: 65.54 kB
-     Backing Filesystem: extfs
-     Data file: /dev/loop0
-     Metadata file: /dev/loop1
-     Data Space Used: 1.821 GB
-     Data Space Total: 107.4 GB
-     Data Space Available: 3.174 GB
-     Metadata Space Used: 1.479 MB
-     Metadata Space Total: 2.147 GB
-     Metadata Space Available: 2.146 GB
-     Thin Pool Minimum Free Space: 10.74 GB
-     Udev Sync Supported: true
-     Deferred Removal Enabled: false
-     Data loop file: /var/lib/docker/devicemapper/devicemapper/data
-     Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
-     Library Version: 1.02.90 (2014-09-01)
-    Execution Driver: native-0.2
-    Logging Driver: json-file
-    Kernel Version: 3.19.0-15-generic
-    Operating System: Ubuntu 15.04
-    <output truncated>
+> **Note**: Docker for Mac and Docker for Windows only support `overlay2`
+> `aufs`, `overlay`, or `vfs`. The last two are **not** recommended. Currently,
+> `aufs` is the default in stable releases and `overlay2` is the default in
+> Edge releases.
+> In addition, before you change the default storage driver on Docker for Mac or
+> Docker for Windows, it is recommended to do a factory reset to wipe the
+> old storage location, since you will not be able to access it after you change
+> the storage driver. If you need to save any containers, use `docker save`
+> before doing the reset. 
+
+Restart Docker for the changes to take effect.
+
+Alternatively, you can run the `dockerd` command manually and pass the
+`--storage-driver=<name>` option to try the setting without making it persistent.
+
+After Docker starts, look for the **Storage Driver** line in the output of
+`docker info` to verify your configuration.
+
+```bash
+$ docker info
+
+Containers: 0
+Images: 0
+Storage Driver: devicemapper
+ Pool Name: docker-252:0-147544-pool
+ Pool Blocksize: 65.54 kB
+ Backing Filesystem: extfs
+ Data file: /dev/loop0
+ Metadata file: /dev/loop1
+ Data Space Used: 1.821 GB
+ Data Space Total: 107.4 GB
+ Data Space Available: 3.174 GB
+ Metadata Space Used: 1.479 MB
+ Metadata Space Total: 2.147 GB
+ Metadata Space Available: 2.146 GB
+ Thin Pool Minimum Free Space: 10.74 GB
+ Udev Sync Supported: true
+ Deferred Removal Enabled: false
+ Data loop file: /var/lib/docker/devicemapper/devicemapper/data
+ Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
+ Library Version: 1.02.90 (2014-09-01)
+<output truncated>
+```
 
 Your choice of storage driver can affect the performance of your containerized
-applications. So it's important to understand the different storage driver
-options available and select the right one for your application. Later, in this
- page you'll find some advice for choosing an appropriate driver.
+applications, and the supported storage drivers depend on your operating system
+and distribution. It's important to understand the different storage driver
+options available and choose the best one for your situation.
 
 ## Shared storage systems and the storage driver
 
