@@ -139,7 +139,7 @@ In this section, you set up the database connection for Django.
 
         DATABASES = {
             'default': {
-                'ENGINE': 'django.db.backends.postgresql',
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'postgres',
                 'USER': 'postgres',
                 'HOST': 'db',
