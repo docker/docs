@@ -12,6 +12,11 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 ## Usage
 
     $ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b test-this
+    
+When passing a boolean value to any option, the argument requires a slightly different format.
+
+    $ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b --digitalocean-size 1gb --digitalocean-backups=true test-this
+    
 
 ## Options
 
