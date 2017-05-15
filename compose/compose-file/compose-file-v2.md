@@ -894,14 +894,19 @@ then read-write will be used.
      - container:container_name
      - container:container_name:rw
 
-> **Note**: The `container:...` formats are only supported in the
-> [version 2 file format](compose-versioning.md#version-2). In [version 1](compose-versioning.md#version-1), you can use
+> **Notes**
+>
+>* The `container:...` formats are only supported in the
+> [version 2 file format](compose-versioning.md#version-2).
+>
+>* In [version 1](compose-versioning.md#version-1), you can use
 > container names without marking them as such:
 >
->     - service_name
->     - service_name:ro
->     - container_name
->     - container_name:rw
+>     - `service_name`
+>     - `service_name:ro`
+>     - `container_name`
+>     - `container_name:rw`
+{: .note-vanilla}
 
 ### restart
 

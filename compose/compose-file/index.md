@@ -49,7 +49,8 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
@@ -456,7 +457,7 @@ Simple example:
       db:
         image: postgres
 
-> **Note**: There are several things to be aware of when using `depends_on`:
+> There are several things to be aware of when using `depends_on`:
 >
 > - `depends_on` will not wait for `db` and `redis` to be "ready" before
 >   starting `web` - only until they have been started. If you need to wait
@@ -468,6 +469,7 @@ Simple example:
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
+{: .note-vanilla}
 
 
 ### dns
@@ -611,13 +613,14 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
 > **Notes:**
 >
->* If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
-> externally-created containers must be connected to at least one of the same
-> networks as the service which is linking to them. Starting with Version 2, [links](compose-file-v2#links) are a legacy option. We recommend using [networks](#networks) instead.
+> If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
+must be connected to at least one of the same networks as the service which is
+linking to them. Starting with Version 2, [links](compose-file-v2#links) are a
+legacy option. We recommend using [networks](#networks) instead.
 >
->* This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+with a (version 3) Compose file.
+{: .note-vanilla}
 
 ### extra_hosts
 
@@ -723,7 +726,7 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Notes:**
+> **Notes**
 >
 > * If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
@@ -732,6 +735,7 @@ Links also express dependency between services in the same way as
 > *  This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{: .note-vanilla}
 
 ### logging
 
@@ -764,17 +768,18 @@ Logging options are key-value pairs. An example of `syslog` options:
     options:
       syslog-address: "tcp://192.168.0.42:123"
 
-To limit the amount of logs stored there are two options key-value pairs:
+The default driver [json-file](/engine/admin/logging/overview.md#json-file), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
 
     options:
       max-size: "200k"
       max-file: "10"
 
-This example would store log files until the reach a `max-size` of 200kB, and then rotate them.
-The amount of individual log files stored is specified by the `max-file` value. As logs grow
-beyond the max limits, older log files are removed to allow storage of new logs.
+The example shown above would store log files until they reach a `max-size` of
+200kB, and then rotate them. The amount of individual log files stored is
+specified by the `max-file` value. As logs grow beyond the max limits, older log
+files are removed to allow storage of new logs.
 
-An example `docker-compose.yml` file that limits logging storage
+Here is an example `docker-compose.yml` file that limits logging storage:
 
     services:
       some-service:
@@ -784,6 +789,15 @@ An example `docker-compose.yml` file that limits logging storage
           options:
             max-size: "200k"
             max-file: "10"
+
+> Logging options available depend on which logging driver you use
+>
+> The above example for controlling log files and sizes uses options
+specific to the `json-file` driver. These particular options are not
+available on other logging drivers. For a full list of supported
+logging drivers and their options, see
+[logging drivers](/engine/admin/logging/overview.md).
+{: .note-vanilla}
 
 ### network_mode
 
@@ -796,11 +810,15 @@ the special form `service:[service name]`.
     network_mode: "service:[service name]"
     network_mode: "container:[container name/id]"
 
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
-
-> **Note**: `network_mode: "host"` cannot be mixed with [links](#links).
+> **Notes**
+>
+>* This option is ignored when
+[deploying a stack in swarm
+ mode](/engine/reference/commandline/stack_deploy.md) with a (version 3) Compose
+ file.
+>
+>* `network_mode: "host"` cannot be mixed with [links](#links).
+{: .note-vanilla}
 
 ### networks
 
@@ -988,13 +1006,14 @@ container access to the secret and mounts it at `/run/secrets/<secret_name>`
 within the container. The source name and destination mountpoint are both set
 to the secret name.
 
-> **Warning**:
+> Limitations of short syntax in Docker 1.13.1
+>
 > Due to a bug in Docker 1.13.1, using the short syntax currently
 > mounts the secret with permissions `000`, which means secrets defined using
 > the short syntax are unreadable within the container if the command does not
 > run as the `root` user. The workaround is to use the long syntax instead if
 > you use Docker 1.13.1 and the secret must be read by a non-`root` user.
-{:.warning}
+{: .warning-vanilla}
 
 The following example uses the short syntax to grant the `redis` service
 access to the `my_secret` and `my_other_secret` secrets. The value of
