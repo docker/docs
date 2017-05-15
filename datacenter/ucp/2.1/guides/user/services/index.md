@@ -119,7 +119,7 @@ have a `deploy:` key, which schedules the containers on certain nodes, defines
 their restart behavior, configures the number of replicas, and so on. These
 features are provided by the [Compose V3 file format](/compose/compose-file/index.md).
 
-Give the application a name (such as "VotingApp," used here), and click
+Give the application a name (such as "VotingApp" used here), and click
 **Create**.
 
 Once UCP deploys the application, click on **VotingApp** or go to **Services** on the left navigation,
