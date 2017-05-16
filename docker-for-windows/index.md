@@ -56,7 +56,7 @@ The next few steps take you through some examples. These are just suggestions fo
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     ```
 
-    Here is an example of command output for  `docker version`.
+    Here is an example of command output for `docker version`.
 
     ```none
     PS C:\Users\Docker> docker version
@@ -78,7 +78,7 @@ The next few steps take you through some examples. These are just suggestions fo
     Experimental: true
     ```
 
-    Here is an example of command output for  `docker info`.
+    Here is an example of command output for `docker info`.
 
     ```none
     PS C:\Users\Docker> docker info
@@ -444,9 +444,9 @@ http_proxy=http://proxy.example.com:3128
 no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
 ### Docker daemon
@@ -580,7 +580,7 @@ If you are interested in working with Windows containers, here are some guides t
 
   > **Disclaimer:** This lab is still in work, and is based off of the blog, but
   > you can test and leverage the example walkthroughs now, if you want to start
-  > experimenting. Please checking back as the lab evolves.
+  > experimenting. Please check back as the lab evolves.
 
 * This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
 [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
