@@ -793,9 +793,9 @@ Here is an example `docker-compose.yml` file that limits logging storage:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-specific to the [`json-file` driver](/engine/admin/logging/overview.md#json-file). These particular options are not
-available on other logging drivers. For a full list of supported
-logging drivers and their options, see
+specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
+These particular options are not available on other logging drivers.
+For a full list of supported logging drivers and their options, see
 [logging drivers](/engine/admin/logging/overview.md).
 {: .note-vanilla}
 
