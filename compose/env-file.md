@@ -35,9 +35,19 @@ variables](reference/envvars.md):
 - `DOCKER_HOST`
 - `DOCKER_TLS_VERIFY`
 
-> **Note**: Values present in the environment at runtime will always override
-> those defined inside the `.env` file. Similarly, values passed via
-> command-line arguments take precedence as well.
+> **Notes**
+>
+> * Values present in the environment at runtime will always override
+those defined inside the `.env` file. Similarly, values passed via command-line
+arguments take precedence as well.
+>
+> * Environment variables defined in the `.env` file are not
+automatically visible inside containers. To set container-applicable
+environment variables, follow the guidelines in the topic [Environment variables
+in Compose](/compose/environment-variables.md), which describes how to pass
+shell environment variables through to containers, define environment variables
+in Compose files, and more.
+{: .note-vanilla}
 
 ## More Compose documentation
 

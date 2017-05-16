@@ -368,7 +368,7 @@ Current styles for admonitions in
 support two broad categories of admonitions: those with prefixed text (**Note:**,
 **Important:**, **Warning**) and those with prefixed icons.
 
-The new styles (with icons) are defined in a way that will not impact admonitions 
+The new styles (with icons) are defined in a way that will not impact admonitions
 formatted with the original styles (prefixed text), so notes in your
 published documents won't be adversely affected.
 
@@ -443,6 +443,17 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 > You can also add more paragraphs here if your explanation is
  super complex.
 {: .warning-vanilla}
+
+### Examples with both prefixed word and icon
+
+The current CSS also supports this kind of of admonition.
+
+> **Notes**
+>
+> * This is a note about a thing.
+>
+> *  This is another note about the same thing.
+{: .note-vanilla}
 
 ## Code blocks
 

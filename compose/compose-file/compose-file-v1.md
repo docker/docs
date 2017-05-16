@@ -43,12 +43,16 @@ context.
 
     build: ./dir
 
-> **Note**: In the [version 1 file format](compose-versioning.md#version-1), `build` is different in
-> two ways:
+> **Notes**
 >
-> 1.   Only the string form (`build: .`) is allowed - not the object form that is allowed in Version 2 and up.
-> 2.   Using `build` together with [`image`](#image) is not allowed. Attempting to do so
->     results in an error.
+> In [version 1 file format](compose-versioning.md#version-1),
+`build` is  different in two ways:
+>
+>*  Only the string form (`build: .`) is allowed - not the object
+>   form that is allowed in Version 2 and up.
+> * Using `build` together with [`image`](#image) is not allowed.
+Attempting to do so results in an error.
+{: .note-vanilla}
 
 #### dockerfile
 
@@ -60,12 +64,13 @@ specified.
       build: .
       dockerfile: Dockerfile-alternate
 
-> **Note**: In the [version 1 file format](compose-versioning.md#version-1), `dockerfile` is
-> different from newer versions in two ways:
+> **Note**
 >
->  1.  It appears alongside `build`, not as a sub-option:
+> In the [version 1 file format](compose-versioning.md#version-1), `dockerfile` is different from newer versions in two ways:
 >
->  2.  Using `dockerfile` together with [`image`](#image) is not allowed. Attempting to do so results in an error.
+>* It appears alongside `build`, not as a sub-option:
+>
+>*  Using `dockerfile` together with [`image`](#image) is not allowed. Attempting to do so results in an error.
 
 ### cap_add, cap_drop
 
