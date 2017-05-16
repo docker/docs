@@ -73,7 +73,7 @@ a new service that will be started after the docker daemon service has started.
 
 If you intend to use this as a system service, put the above contents in a file
 in the `/etc/systemd/system` directory, e.g.
-`/etc/systemd/system/docker-container@.service`.
+`/etc/systemd/system/docker-container@redis_server.service`.
 
 If you need to pass options to the redis container (such as `--env`),
 then you'll need to use `docker run` rather than `docker start`. This will
