@@ -1259,6 +1259,7 @@ services:
     restart: "no"
     restart: always
     restart: on-failure
+    restart: unless-stopped
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
