@@ -48,9 +48,9 @@ context.
 > In [version 1 file format](compose-versioning.md#version-1),
 `build` is  different in two ways:
 >
->*   Only the string form (`build: .`) is allowed - not the object
-> form that is allowed in Version 2 and up.
-> *   Using `build` together with [`image`](#image) is not allowed.
+>*  Only the string form (`build: .`) is allowed - not the object
+>   form that is allowed in Version 2 and up.
+> * Using `build` together with [`image`](#image) is not allowed.
 Attempting to do so results in an error.
 {: .note-vanilla}
 
