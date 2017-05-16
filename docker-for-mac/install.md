@@ -29,7 +29,7 @@ experimental mode. We recommend that you disable experimental features for
 apps in production.
 
 On both channels, we welcome your <a
-href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>)
+href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>
 to help us as the apps evolve.
 
 For more about Stable and Edge channels, see the
