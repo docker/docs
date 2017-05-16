@@ -756,9 +756,9 @@ The default value is json-file.
     driver: "syslog"
     driver: "none"
 
-> **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
-> `docker-compose up` and `docker-compose logs`. Using any other driver will not
-> print any logs.
+> **Note**: Only the `json-file` and `journald` drivers make the logs
+available directly from `docker-compose up` and `docker-compose logs`.
+Using any other driver will not print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
 
@@ -793,7 +793,7 @@ Here is an example `docker-compose.yml` file that limits logging storage:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-specific to the `json-file` driver. These particular options are not
+specific to the [`json-file` driver](/engine/admin/logging/overview.md#json-file). These particular options are not
 available on other logging drivers. For a full list of supported
 logging drivers and their options, see
 [logging drivers](/engine/admin/logging/overview.md).
