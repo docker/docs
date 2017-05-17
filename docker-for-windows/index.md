@@ -303,12 +303,15 @@ When Docker is running, the Docker whale is displayed. By default, the Docker
 whale icon is placed in the Notifications area. If it is hidden, click the up
 arrow on the taskbar to show it.
 
->**Tip**: You can pin the whale outside of the notification box so that it is
-always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
-right-click an empty portion of the taskbar, select Settings, and choose
-display options through taskbar settings for notifications.
+> You can dock the whale on the taskbar so it is always visible
 >
-![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+> You can pin the whale outside of the notification box so that it is
+  always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
+  right-click an empty portion of the taskbar, select Settings, and choose
+  display options through taskbar settings for notifications.
+>
+> ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+{: .note-vanilla}
 
 ![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
 
