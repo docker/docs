@@ -18,13 +18,15 @@ behave differently between default `bridge` network and
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
 
->**Warning**: The `--link` flag is a deprecated legacy feature of Docker. It may eventually
+>**Warning**:
+>The `--link` flag is a deprecated legacy feature of Docker. It may eventually
 be removed. Unless you absolutely need to continue using it, we recommend that you use
 user-defined networks to facilitate communication between two containers instead of using
 `--link`. One feature that user-defined networks do not support that you can do
 with `--link` is sharing environmental variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
+{:.warning}
 
 ## Connect using network port mapping
 
@@ -231,6 +233,7 @@ target container of information related to the source container.
 > from Docker within a container are made available to *any* container
 > that links to it. This could have serious security implications if sensitive
 > data is stored in them.
+{:.warning}
 
 Docker sets an `<alias>_NAME` environment variable for each target container
 listed in the `--link` parameter. For example, if a new container called

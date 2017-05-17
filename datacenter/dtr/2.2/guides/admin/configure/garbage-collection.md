@@ -10,26 +10,26 @@ title: Docker Trusted Registry 2.2 Garbage Collection
 unused layers
 2. GC can be configured to run automatically with a cron schedule, and can also
 be run manually. Only admins can configure these
-3. When GC runs DTR will be placed in read-only mode.  Pulls will work but
+3. When GC runs DTR will be placed in read-only mode. Pulls will work but
 pushes will fail
 4. The UI will show when GC is running, and an admin can stop GC within the UI
 
 **Important notes**
 
-The GC cron schedule is set to run in **UTC time**.  Containers typically run in
+The GC cron schedule is set to run in **UTC time**. Containers typically run in
 UTC time (unless the system time is mounted), therefore remember that the cron
 schedule will run based off of UTC time when configuring.
 
-GC puts DTR into read only mode; pulls succeed while pushes fail.  Pushing an
+GC puts DTR into read-only mode; pulls succeed while pushes fail. Pushing an
 image while GC runs may lead to undefined behavior and data loss, therefore
-this is disabled for safety.  For this reason it's generally best practice to
+this is disabled for safety. For this reason, it's generally best practice to
 ensure GC runs in the early morning on a Saturday or Sunday night.
 
 
 ## Setting up garbage collection
 
 You can set up GC if you're an admin by hitting "Settings" in the UI then
-choosing "Garbage Collection".  By default, GC will be disabled, showing this
+choosing "Garbage Collection". By default, GC will be disabled, showing this
 screen:
 
 ![](../../images/garbage-collection-1.png){: .with-border}
@@ -52,14 +52,14 @@ the schedule ("Save") or save the schedule *and* start GC immediately ("Save
 
 ## Stopping GC while it's running
 
-When GC runs the garbage collection settings page looks as follows:
+When GC runs the garbage collection, the settings page looks as follows:
 
 ![](../../images/garbage-collection-3.png){: .with-border}
 
 Note the global banner visible to all users, ensuring everyone knows that GC is
 running.
 
-An admin can stop the current GC process by hitting "Stop".  This safely shuts
+An admin can stop the current GC process by hitting "Stop". This safely shuts
 down the running GC job and moves the registry into read-write mode, ensuring
 pushes work as expected.
 
@@ -70,13 +70,13 @@ pushes work as expected.
 Each image stored in DTR is made up of multiple files:
 
 - A list of "layers", which represent the image's filesystem
-- The "config" file, which dictates the OS, architecture and other image
+- The "config" file, which dictates the OS, architecture, and other image
 metadata
 - The "manifest", which is pulled first and lists all layers and the config file
 for the image.
 
-All of these files are stored in a content-addressable manner.  We take the
-sha256 hash of the file's content and use the hash as the filename.  This means
+All of these files are stored in a content-addressable manner. We take the
+sha256 hash of the file's content and use the hash as the filename. This means
 that if tag `example.com/user/blog:1.11.0` and `example.com/user/blog:latest`
 use the same layers we only store them once.
 
@@ -88,9 +88,9 @@ If we delete `example.com/user/blog:latest` but *not*
 `example.com/user/blog:1.11.0` we expect that `example.com/user/blog:1.11.0`
 can still be pulled.
 
-This means that we can't delete layers when tags or manifests are deleted.  
+This means that we can't delete layers when tags or manifests are deleted. 
 Instead, we need to pause writing and take reference counts to see how many
-times a file is used.  If the file is never used only then is it safe to delete.
+times a file is used. If the file is never used only then is it safe to delete.
 
 This is the basis of our "mark and sweep" collection:
 

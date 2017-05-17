@@ -1,6 +1,6 @@
 ---
 description: Configure logging driver.
-keywords: docker, logging, driver, Fluentd
+keywords: docker, logging, driver
 redirect_from:
 - /engine/reference/logging/overview/
 title: Configure logging drivers
@@ -131,12 +131,12 @@ $ docker run -it --log-driver none alpine ash
 | Option            | Description | Example value |
 |-------------------|-------------|---------------|
 | `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
-| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
+| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reached, log messages will be dropped. | `--log-opt max-buffer-size 5m`
 
 ## `json-file`
 
 `json-file` is the default logging driver, and returns logging output in JSON
-format.
+format. For detailed information on working with this logging driver, see [the json-file](json-file.md) reference documentation.
 
 ### Options
 
@@ -148,6 +148,7 @@ The `json-file` logging driver supports the following logging options:
 | `max-file` | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. | `--log-opt max-file=3` |
 | `labels`   | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`      | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 > **Note**: If `max-size` and `max-file` are set, `docker logs` only returns the
 > log lines from the newest log file.
@@ -163,6 +164,9 @@ $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 
 ## `syslog`
 
+The `syslog` logging driver routes logs to a `syslog` server.
+For detailed information on working with this logging driver, see [the syslog logging driver](syslog.md) reference documentation.
+
 ### Options
 
 The following logging options are supported for the `syslog` logging driver:
@@ -174,11 +178,12 @@ The following logging options are supported for the `syslog` logging driver:
 | `syslog-tls-ca-cert` | The absolute path to the trust certificates signed by the CA. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem` |
 | `syslog-tls-cert`    | The absolute path to the TLS certificate file. **Ignored if the address protocol is not `tcp+tls`**. | `--log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem` |
 | `syslog-tls-key`     | The absolute path to the TLS key file. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem` |
-| `syslog-tls-skip-verify`    | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-skip-verify=true` |
+| `syslog-tls-skip`    | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-skip-verify=true` |
 | `tag`                | A string that is appended to the `APP-NAME` in the `syslog` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
 | `syslog-format`      | The `syslog` message format to use. If not specified the local UNIX syslog format is used, without a specified hostname. Specify `rfc3164` for the RFC-3164 compatible format, `rfc5424` for RFC-5424 compatible format, or `rfc5424micro` for RFC-5424 compatible format with microsecond timestamp resolution. | `--log-opt syslog-format=rfc5424micro` |
 | `labels`             | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 ### Examples
 
@@ -200,9 +205,9 @@ trust certificate, certificate, and key to use.
 $ docker run \
          --log-driver=syslog \
          --log-opt syslog-address=tcp+tls://192.168.0.42:123 \
-         --log-opt syslog-tls-ca-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
-         --log-opt syslog-tls-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/cert.pem \
-         --log-opt syslog-tls-key=syslog-tls-ca-cert=/etc/ca-certificates/custom/key.pem \
+         --log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
+         --log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem \
+         --log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem \
          alpine ash
 ```
 
@@ -219,6 +224,7 @@ driver, see [the journald logging driver](journald.md) reference documentation.
 | `tag`      | A template for setting the `CONTAINER_TAG` value in `journald` logs. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
 | `labels`   | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`      | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 
 ### Examples
@@ -230,6 +236,8 @@ $ docker run \
 ```
 
 ## `gelf`
+
+The `gelf` logging driver is a convenient format that is understood by a number of tools like [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), [Fluentd](http://www.fluentd.org/), and many more. For detailed information on working with this logging driver, see [the Graylog Extended Format logging driver](gelf.md) reference documentation.
 
 ### Options
 
@@ -243,6 +251,7 @@ The `gelf` logging driver supports the following options:
 | `tag`                | A string that is appended to the `APP-NAME` in the `gelf` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
 | `labels`             | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 
 ### Examples
@@ -272,6 +281,7 @@ The `fluentd` logging driver supports the following options:
 | `fluentd-max-retries`  | The maximum number of connection attempts before the container stops due to failure to connect. Defaults to `1073741824`, which is effectively infinite. | `--log-opt fluentd-max-retries=200` |
 | `fluentd-async-connect`| If set to `false`, Docker blocks on initial connection and the container stops if it cannot connect. Defaults to `false`. | `--log-opt fluentd-async-connect=false` |
 | `tag`                  | A string that is appended to the `APP-NAME` in the `fluentd` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 ### Examples
 
@@ -353,6 +363,7 @@ The `splunk` logging driver **allows** the following options:
 | `tag`                       | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for information about customizing the log tag format. | {% raw %}`--log-opt tag="{{.Name}}/{{.FullID}}"`{% endraw %} |
 | `labels`                    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 
 ### Examples
@@ -412,6 +423,7 @@ options:
 | `log-cmd`              | | `--log-opt log-cmd=true` | Whether to log the command that started the container. Defaults to `false`. | `--log-opt log-cmd=false` |
 | `labels`               | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                  | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| `env-regex`| Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). | `--log-opt env-regex=^(os|customer)` |
 
 ### Examples
 

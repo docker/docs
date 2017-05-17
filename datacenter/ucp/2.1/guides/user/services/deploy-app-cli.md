@@ -121,10 +121,7 @@ volumes:
 > You can define services in this YAML file that feature a `deploy:` key, which
 schedules the containers on certain nodes, defines their restart behavior,
 configures the number of replicas, and so on. These features are provided by the
-Compose V3 file format, which is currently in beta. You can [read the
-pre-release documentation for Compose V3 on Docker's preview URL for the
-upcoming Compose
-documentation](http://docker-docs-vnext-compose.netlify.com/compose/compose-file/#/deploy).
+[Compose V3 file format](/compose/compose-file/index.md).
 
 In your command line, navigate to the place where you've created the
 `docker-compose.yml` file and deploy the application to UCP by running `docker

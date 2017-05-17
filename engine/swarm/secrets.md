@@ -45,11 +45,13 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for secrets as for the rest of the swarm
 management data.
 
->**Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
+>**Warning**:
+>Raft data is encrypted in Docker 1.13 and higher. If any of your
 Swarm managers run an earlier version, and one of those managers becomes the
 manager of the swarm, the secrets will be stored unencrypted in that node's Raft
 logs. Before adding any secrets, update all of your manager nodes to Docker 1.13
 to prevent secrets from being written to plain-text Raft logs.
+{:.warning}
 
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem at
@@ -846,3 +848,66 @@ the information from a Docker-managed secret instead of being passed directly.
 >**Note**: Docker secrets do not set environment variables directly. This was a
 conscious decision, because environment variables can unintentionally be leaked
 between containers (for instance, if you use `--link`).
+
+## Use Secrets in Compose
+
+```
+version: '3.1'
+
+services:
+   db:
+     image: mysql:latest
+     volumes:
+       - db_data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_root_password
+       - db_password
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+     secrets:
+       - db_password
+
+
+secrets:
+   db_password:
+     file: db_password.txt
+   db_root_password:
+     file: db_root_password.txt
+
+volumes:
+    db_data:
+```
+
+This example creates a simple WordPress site using two secrets in
+a compose file.
+
+The keyword `secrets:` defines two secrets `db_password:` and `db_root_password:`.
+
+When deploying, Docker will create these two secrets and populate them with the
+content from the file specified in the compose file.
+
+The db service uses both secrets, and the wordpress is using one.
+
+When you deploy, Docker will mount a file under `/run/secrets/<secret_name>` in the
+services. These files are never persisted in disk, they're managed in memory
+
+Each service has environment variables to specify where the service should look for
+that secret data.
+
+More information on short and long syntax for secrets can be found at
+[Compose file version 3 reference](/compose/compose-file/index.md#secrets).
+

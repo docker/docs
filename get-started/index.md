@@ -112,8 +112,8 @@ Consider this diagram comparing virtual machines to containers:
 ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
 
 Virtual machines run guest operating systems -- note the OS layer in each box.
-This is resource intensive, and the resulting disk image and appication state is
-an entangelment of OS settings, system-installed dependencies, OS security
+This is resource intensive, and the resulting disk image and application state is
+an entanglement of OS settings, system-installed dependencies, OS security
 patches, and other easy-to-lose, hard-to-replicate ephemera.
 
 ### Container diagram
@@ -152,12 +152,11 @@ To generate this message, Docker took the following steps:
 Now would also be a good time to make sure you are using version 1.13 or higher
 
 ```
-$ docker version
-
-Docker version 17.03.1-ce, build c6d412e
+$ docker --version
+Docker version 17.05.0-ce-rc1, build 2878a85
 ```
 
-If you see a messages like the ones above, you're ready to begin the journey.
+If you see messages like the ones above, you're ready to begin the journey.
 
 ## Conclusion
 

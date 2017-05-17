@@ -30,7 +30,7 @@ machines running Docker, and deployed an application to it, with containers
 running in concert on multiple machines.
 
 Here in part 5, you'll reach the top of the hierarchy of distributed
-applications: the **stack**. A stack is a group of interelated services that
+applications: the **stack**. A stack is a group of interrelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
 application (though very complex applications may want to use multiple stacks).
@@ -162,7 +162,7 @@ services:
   redis:
     image: redis
     ports:
-      - "6379:6739"
+      - "6379:6379"
     volumes:
       - ./data:/data
     deploy:
@@ -212,7 +212,7 @@ $ docker-machine scp docker-compose.yml myvm1:~
 $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
 ```
 
-Check the results on http://localhost and you'll see that a visitor counter is
+Check the results on either nodes IP address and you'll see that a visitor counter is
 now live and storing information on Redis.
 
 [On to Part 6 >>](part6.md){: class="button outline-btn" style="margin-bottom: 30px"}

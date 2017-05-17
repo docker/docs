@@ -183,6 +183,17 @@ Introduces the following additional parameters:
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
 
+### Version 2.2
+
+An upgrade of [version 2.1](#version-21) that introduces new parameters only
+available with Docker Engine version **1.13.0+**. This version also allows
+to specify default scale numbers inside the service's configuration.
+
+Introduces the following additional parameters:
+
+- [`init`](compose-file-v2.md#init)
+- [`scale`](compose-file-v2.md#scale)
+
 ### Version 3
 
 Designed to be cross-compatible between Compose and the Docker Engine's

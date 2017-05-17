@@ -20,8 +20,8 @@ COPY . md_source
 ## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 
 # Engine
-ENV ENGINE_SVN_BRANCH="branches/17.03.x"
-ENV ENGINE_BRANCH="17.03.x"
+ENV ENGINE_SVN_BRANCH="branches/17.05.x"
+ENV ENGINE_BRANCH="17.05.x"
 
 # Distribution
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -32,3 +32,4 @@ RUN md_source/_scripts/fetch-upstream-resources.sh \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
 	&& rm -rf md_source
+

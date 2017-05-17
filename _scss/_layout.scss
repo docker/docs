@@ -3,9 +3,7 @@
 * layout
 *
 */
-#wrapper {
-    transition: all 0.5s ease;
-}
+
 /*
 *
 * branding *********************************************************************
@@ -109,6 +107,7 @@
 }
 .col-content {
     flex: 1;
+    transition: all 0.5s ease;
 }
 .col-nav,
 .col-toc {
@@ -123,7 +122,7 @@
 @media only screen and (min-width: 1000px) {
     .col-nav,
     .col-toc {
-        flex: 0 0 17em;
+        flex: 0 0 19em;
     }
 }
 
@@ -139,8 +138,6 @@
 }
 
 section.section {
-    // min-width: 380px;
-    // max-width: 850px;
     margin: 0 auto;
 }
 

@@ -142,13 +142,13 @@ might be interesting. You can use them with Markdown or HTML images.
 
 Some tables in markdown and html.
 
-| Permission level | Access        |
-| ---------------- | ------------- |
-| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. | |
-|                  | Previous cell is empty. A `--flag` in mono text. |
-| Read             | Pull |
-| Read/Write       | Pull, push |
-| Admin            | All of the above, plus update description, create and delete |
+| Permission level                                                         | Access                                                       |
+|:-------------------------------------------------------------------------|:-------------------------------------------------------------|
+| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. |                                                              |
+|                                                                          | Previous cell is empty. A `--flag` in mono text.             |
+| Read                                                                     | Pull                                                         |
+| Read/Write                                                               | Pull, push                                                   |
+| Admin                                                                    | All of the above, plus update description, create and delete |
 
 The alignment of the cells in the source doesn't really matter. The ending pipe
 character is optional (unless the last cell is supposed to be empty). The header
@@ -184,6 +184,18 @@ only need to do it on the first one. If you have a `<th>`, set it there.
   </td>
   </tr>
 </table>
+
+## Glossary links and content
+
+The glossary source lives in the documentation repository
+[docker.github.io](https://github.com/docker/docker.github.io) in
+`_data/glossary.yaml`. The glossary publishes to
+[https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
+
+To update glossary content, edit `_data/glossary.yaml`.
+
+To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
+example, [swarm](glossary.md?term=swarm)).
 
 ## Mixing Markdown and HTML
 
@@ -351,29 +363,51 @@ Bootstrap JS are loaded.
 
 ## Admonitions (notes)
 
+Current styles for admonitions in
+[`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
+support two broad categories of admonitions: those with prefixed text (**Note:**,
+**Important:**, **Warning**) and those with prefixed icons.
+
+The new styles (with icons) are defined in a way that will not impact admonitions
+formatted with the original styles (prefixed text), so notes in your
+published documents won't be adversely affected.
+
+Examples of both styles are shown below.
+
+### Examples (original styles, prefix words)
+
+Admonitions with prefixed text use the following class tags, as shown in the examples.
+
+* **Note:** No class tag is needed for standard notes.
+* **Important:** Use the `important` class.
+* **Warning:** Use the `warning` class.
+
+
 > **Note**: This is a note using the old note style
 
-> **This is a note using the new style**
->
-> And you include a small description here telling users to be on the lookout
+> **Note**: This is a note using
+> the old style and has multiple lines, but a single paragraph
 
-> **Be careful out there**
+> Pssst, wanna know something?
 >
-> Add the `warning` class to your blockquotes if you want to tell users
-> to be careful about something.
-{: .warning}
+> You include a small description here telling users to be on the lookout
 
-> **Ouch, don't do that!**
+> It's not safe out there, take this Moby with you
 >
-> Use the `danger` class to let people know this is dangerous or they
-> should pay close attention to this part of the road.
+> Add the `important` class to your blockquotes if you want to tell users
+ to be careful about something.
+{: .important}
+
+> Ouch, don't do that!
+>
+> Use the `warning` class to let people know this is dangerous or they
+ should pay close attention to this part of the road.
 >
 > You can also add more paragraphs here if your explanation is
-> super complex.
-{: .danger}
+ super complex.
+{: .warning}
 
-
-> **This is a crazy note**
+>**This is a crazy note**
 >
 > This note has tons of content in it:
 >
@@ -387,17 +421,39 @@ Bootstrap JS are loaded.
 >
 > And another sentence to top it all off.
 
+### Examples with FontAwesome icons
 
-## Comments
+>  Pssst, wanna know something?
+>
+> You include a small description here telling users to be on the lookout
+>
+> This is an example of a note using the `{: .note-vanilla}` tag to get an icon instead of a "Note" prefix, and write your own note title.
+{: .note-vanilla}
 
-You can use XML style comments, which show up in the HTML "view source", or
-Liquid ones, which don't. You'll need to view the source of this file to see
-both styles.
 
-<!-- This comment will show up in the HTML source -->
+> It's not safe out there, take this Moby with you
+>
+> Use `{: .important-vanilla}` after your important to get an "important" icon.
+{: .important-vanilla}
 
-{% comment %}This one won't.{% endcomment %}
+> Ouch, don't touch that hot Docker engine!
+>
+> Use `{: .warning-vanilla}` after your warning to get an icon instead of a "Warning" prefix.
+>
+> You can also add more paragraphs here if your explanation is
+ super complex.
+{: .warning-vanilla}
 
+### Examples with both prefixed word and icon
+
+The current CSS also supports this kind of of admonition.
+
+> **Notes**
+>
+> * This is a note about a thing.
+>
+> *  This is another note about the same thing.
+{: .note-vanilla}
 
 ## Code blocks
 

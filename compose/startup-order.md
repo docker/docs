@@ -28,12 +28,13 @@ startup and whenever a connection is lost for any reason. However, if you don't
 need this level of resilience, you can work around the problem with a wrapper
 script:
 
--   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it)
-    or [dockerize](https://github.com/jwilder/dockerize). These are small
+-   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
+    [dockerize](https://github.com/jwilder/dockerize) or sh-compatible
+    [wait-for](https://github.com/Eficode/wait-for). These are small
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
 
-    For example, to use `wait-for-it.sh` to wrap your service's command:
+    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
 
         version: "2"
         services:
@@ -70,8 +71,11 @@ script:
         >&2 echo "Postgres is up - executing command"
         exec $cmd
 
-    You can use this as a wrapper script as in the previous example, by setting
-    `command: ["./wait-for-postgres.sh", "db", "python", "app.py"]`.
+    You can use this as a wrapper script as in the previous example, by setting:
+
+    ```none
+    command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+    ```
 
 
 ## Compose documentation

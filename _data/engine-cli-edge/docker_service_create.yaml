@@ -8,32 +8,33 @@ pname: docker service
 plink: docker_service.yaml
 options:
 - option: constraint
-  default_value: '[]'
   description: Placement constraints
 - option: container-label
-  default_value: '[]'
   description: Container labels
+- option: credential-spec
+  description: Credential spec for managed service account (Windows only)
+- option: detach
+  shorthand: d
+  default_value: "true"
+  description: |
+    Exit immediately instead of waiting for the service to converge
 - option: dns
-  default_value: '[]'
   description: Set custom DNS servers
 - option: dns-option
-  default_value: '[]'
   description: Set DNS options
 - option: dns-search
-  default_value: '[]'
   description: Set custom DNS search domains
 - option: endpoint-mode
   default_value: vip
   description: Endpoint mode (vip or dnsrr)
+- option: entrypoint
+  description: Overwrite the default ENTRYPOINT of the image
 - option: env
   shorthand: e
-  default_value: '[]'
   description: Set environment variables
 - option: env-file
-  default_value: '[]'
   description: Read in a file of environment variables
 - option: group
-  default_value: '[]'
   description: Set one or more supplementary user groups for the container
 - option: health-cmd
   description: Command to run to check health
@@ -42,19 +43,19 @@ options:
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
+- option: health-start-period
+  description: |
+    Start period for the container to initialize before counting retries towards unstable (ns|us|ms|s|m|h)
 - option: health-timeout
   description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
 - option: host
-  default_value: '[]'
   description: Set one or more custom host-to-IP mappings (host:ip)
 - option: hostname
   description: Container hostname
 - option: label
   shorthand: l
-  default_value: '[]'
   description: Service labels
 - option: limit-cpu
-  default_value: "0.000"
   description: Limit CPUs
 - option: limit-memory
   default_value: "0"
@@ -62,7 +63,6 @@ options:
 - option: log-driver
   description: Logging driver for service
 - option: log-opt
-  default_value: '[]'
   description: Logging driver options
 - option: mode
   default_value: replicated
@@ -72,7 +72,6 @@ options:
 - option: name
   description: Service name
 - option: network
-  default_value: '[]'
   description: Network attachments
 - option: no-healthcheck
   default_value: "false"
@@ -82,21 +81,25 @@ options:
 - option: publish
   shorthand: p
   description: Publish a port as a node port
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Suppress progress output
 - option: read-only
   default_value: "false"
   description: Mount the container's root filesystem as read only
 - option: replicas
   description: Number of tasks
 - option: reserve-cpu
-  default_value: "0.000"
   description: Reserve CPUs
 - option: reserve-memory
   default_value: "0"
   description: Reserve Memory
 - option: restart-condition
-  description: Restart when condition is met ("none"|"on-failure"|"any")
+  description: |
+    Restart when condition is met ("none"|"on-failure"|"any") (default "any")
 - option: restart-delay
-  description: Delay between restart attempts (ns|us|ms|s|m|h)
+  description: Delay between restart attempts (ns|us|ms|s|m|h) (default 5s)
 - option: restart-max-attempts
   description: Maximum number of restarts before giving up
 - option: restart-window
@@ -105,15 +108,18 @@ options:
   default_value: 0s
   description: Delay between task rollbacks (ns|us|ms|s|m|h) (default 0s)
 - option: rollback-failure-action
-  default_value: pause
-  description: Action on rollback failure ("pause"|"continue")
+  description: |
+    Action on rollback failure ("pause"|"continue") (default "pause")
 - option: rollback-max-failure-ratio
   default_value: "0"
-  description: Failure rate to tolerate during a rollback
+  description: Failure rate to tolerate during a rollback (default 0)
 - option: rollback-monitor
   default_value: 0s
   description: |
-    Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h) (default 0s)
+    Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h) (default 5s)
+- option: rollback-order
+  description: |
+    Rollback order ("start-first"|"stop-first") (default "stop-first")
 - option: rollback-parallelism
   default_value: "1"
   description: |
@@ -122,7 +128,7 @@ options:
   description: Specify secrets to expose to the service
 - option: stop-grace-period
   description: |
-    Time to wait before force killing a container (ns|us|ms|s|m|h)
+    Time to wait before force killing a container (ns|us|ms|s|m|h) (default 10s)
 - option: stop-signal
   description: Signal to stop the container
 - option: tty
@@ -133,15 +139,18 @@ options:
   default_value: 0s
   description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
 - option: update-failure-action
-  default_value: pause
-  description: Action on update failure ("pause"|"continue"|"rollback")
+  description: |
+    Action on update failure ("pause"|"continue"|"rollback") (default "pause")
 - option: update-max-failure-ratio
   default_value: "0"
-  description: Failure rate to tolerate during an update
+  description: Failure rate to tolerate during an update (default 0)
 - option: update-monitor
   default_value: 0s
   description: |
-    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 0s)
+    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 5s)
+- option: update-order
+  description: |
+    Update order ("start-first"|"stop-first") (default "stop-first")
 - option: update-parallelism
   default_value: "1"
   description: |
@@ -495,7 +504,7 @@ examples: |-
         Options specific to a given volume driver, which will be passed to the
         driver when creating the volume. Options are provided as a comma-separated
         list of key/value pairs, for example,
-        <tt>volume-opt=some-option=some-value,some-other-option=some-other-value</tt>.
+        <tt>volume-opt=some-option=some-value,volume-opt=some-other-option=some-other-value</tt>.
         For available options for a given driver, refer to that driver's
         documentation.
       </td>
@@ -898,6 +907,5 @@ examples: |-
   $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
 
   x3ti0erg11rjpg64m75kej2mz-hosttempl
-  {% endraw %}
   ```
 

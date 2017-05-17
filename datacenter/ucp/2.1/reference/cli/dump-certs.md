@@ -11,7 +11,7 @@ Print the public certificates used by this UCP web server
 This command outputs the public certificates for the UCP web server running on
 this node. By default it prints the contents of the ca.pem and cert.pem files.
 
-When integrating UCP and DTR, use this command with the '--cluster --ca' flags
+When integrating UCP and DTR, use this command with the `--cluster --ca` flags
 to configure DTR.
 
 

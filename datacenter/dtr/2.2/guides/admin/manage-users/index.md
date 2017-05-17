@@ -22,7 +22,7 @@ repositories. For that:
 
 * Extend the permissions by adding the user to a team.
 
-    To extend a user's permission and manage their permissions over repositories,
+    To extend a user's permission and manage the user's permissions over repositories,
     you add the user to a team.
     A team defines the permissions users have for a set of repositories.
 
@@ -39,7 +39,7 @@ delegate the management of a set of repositories and user permissions to the
 organization administrators.
 
 An organization owns a set of repositories, and defines a set of teams. With
-teams you can define fine-grain permissions that a team of
+teams you can define fine-grained permissions that a team of
 user has for a set of repositories.
 
 ![](../../images/authentication-authorization-1.svg)

@@ -162,7 +162,7 @@ Want to go deeper? Here are some resources we recommend:
 
 - [Samples](/samples/): Our samples include multiple examples of popular software
   running in containers, and some good labs that teach best practices.
-- [User Guide](/engine/userguide/): The user guide has serveral examples that
+- [User Guide](/engine/userguide/): The user guide has several examples that
   explain networking and storage in greater depth than was covered here.
 - [Admin Guide](/engine/admin/): Covers how to manage a Dockerized production
   environment.

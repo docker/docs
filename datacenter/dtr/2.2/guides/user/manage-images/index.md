@@ -30,7 +30,7 @@ Click **Save** to create the repository.
 
 When creating a repository in DTR, the full name of the repository becomes
 `<dtr-domain-name>/<user-or-org>/<repository-name>`. In this example, the full
-name of our repository will be `dtr.company.org/dave.lauper/golang`.
+name of our repository will be `dtr.local:4443/admin/golang`.
 
 ## Where to go next
 

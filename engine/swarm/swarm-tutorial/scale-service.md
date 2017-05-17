@@ -6,8 +6,8 @@ notoc: true
 ---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
-to use the Docker CLI to scale the number of service ps in
-the swarm.
+to use the Docker CLI to scale the number of containers in
+the service. Containers running in a service are called "tasks."
 
 1.  If you haven't already, open a terminal and ssh into the machine where you
     run your manager node. For example, the tutorial uses a machine named

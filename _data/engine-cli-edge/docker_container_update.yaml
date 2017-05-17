@@ -25,6 +25,8 @@ options:
   shorthand: c
   default_value: "0"
   description: CPU shares (relative weight)
+- option: cpus
+  description: Number of CPUs
 - option: cpuset-cpus
   description: CPUs in which to allow execution (0-3, 0,1)
 - option: cpuset-mems

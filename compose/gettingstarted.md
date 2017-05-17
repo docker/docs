@@ -38,6 +38,8 @@ provided by Docker images.
         if __name__ == "__main__":
             app.run(host="0.0.0.0", debug=True)
 
+      In this example, `redis` is the hostname of the redis container on the application's network. We use the default port for Redis, `6379`.
+
 3.  Create another file called `requirements.txt` in your project directory and
     paste this in:
 

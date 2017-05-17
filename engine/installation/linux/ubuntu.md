@@ -243,10 +243,12 @@ Docker EE.
     </div>
 
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > **Warning**:
+    > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
+    {:.warning}
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. This output is truncated. List the
@@ -327,7 +329,7 @@ a new file each time you want to upgrade Docker.
     <div id="ce-install-from-package-docker" class="tab-pane fade in active" markdown="1">
 
     Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-    Ubuntu version, browse to `stable/pool/stable/`, choose either `amd64` or
+    Ubuntu version, browse to `pool/stable/`, choose either `amd64` or
     `armhf`,and download the `.deb` file for the Docker version you want to
     install and for your version of Ubuntu.
 

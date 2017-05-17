@@ -10,11 +10,12 @@ install package includes everything you need to run Docker on a Windows system.
 This topic describes pre-install considerations, and how to download and install
 Docker for Windows.<br><br>
 
-> **Already have Docker for Windows?** If you already have Docker for
+> **Already have Docker for Windows?**
+> If you already have Docker for
 Windows installed, and are ready to get started, skip to
 [Get started with Docker for Windows](index.md) for a quick tour of
 the command line, settings, and tools.
->
+
 >**Looking for Release Notes?** [Get release notes for all
 versions here](release-notes.md).
 
@@ -87,27 +88,27 @@ of prerequisites.
 
 ##  What to know before you install
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled,
-VirtualBox will no longer work, but any VirtualBox VM images will remain.
-VirtualBox VMs created with `docker-machine` (including the `default` one
-typically created during Toolbox install) will no longer start. These VMs cannot
-be used side-by-side with Docker for Windows. However, you can still use
+If your system does not satisfy these requirements, you can install
+[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
+Hyper-V.
+
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer
+will enable it for you, if needed, which requires a reboot. After Hyper-V is
+enabled, VirtualBox will no longer work, but any VirtualBox VM images will
+remain. VirtualBox VMs created with `docker-machine` (including the `default`
+one typically created during Toolbox install) will no longer start. These VMs
+cannot be used side-by-side with Docker for Windows. However, you can still use
 `docker-machine` to manage remote VMs.
+<p />
+* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
+detail see [Virtualization must be
+enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
 <p />
 * Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
 Windows accounts will use the same VM to build and run containers. In the
 future, Docker for Windows will better isolate user content.
-<p />
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a
-reboot). If your system does not satisfy these requirements, you can install
-[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
-Hyper-V.
-<p />
-* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
-detail see [Virtualization must be
-enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
 * Nested virtualization scenarios, such as running Docker for Windows
 on a VMWare or Parallels instance, might work, but come with no

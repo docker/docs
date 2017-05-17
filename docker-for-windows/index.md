@@ -20,8 +20,8 @@ systems.
 
 > **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
 and beta channels, system requirements, and download/install information.
->
-**Looking for system requirements?** Check out
+
+>**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
@@ -240,7 +240,7 @@ PowerShell Module as follows.
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
     ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-    
+
     When asked if you want to allow this app to make changes to your device,
     click **Yes**.
 
@@ -303,12 +303,15 @@ When Docker is running, the Docker whale is displayed. By default, the Docker
 whale icon is placed in the Notifications area. If it is hidden, click the up
 arrow on the taskbar to show it.
 
->**Tip**: You can pin the whale outside of the notification box so that it is
-always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
-right-click an empty portion of the taskbar, select Settings, and choose
-display options through taskbar settings for notifications.
+> You can dock the whale on the taskbar so it is always visible
 >
-![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+> You can pin the whale outside of the notification box so that it is
+  always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
+  right-click an empty portion of the taskbar, select Settings, and choose
+  display options through taskbar settings for notifications.
+>
+> ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+{: .note-vanilla}
 
 ![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
 

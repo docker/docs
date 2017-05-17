@@ -25,119 +25,21 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
-The best way to quickly grok the layout and syntax of a Compose file is to
-read [Get started with Docker Compose](/compose/gettingstarted/) and to look
-at files for [applications on GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
-A good place to start is the
-version 3 Compose stack file we use for the voting app sample to illustrate
-multi-container apps, service definitions, swarm mode, the `deploy` key, and the
-`docker stack deploy` command. Click to show/hide the example file below. This
-file is fully explained in the [voting app sample
-tutorial](/engine/getstarted-voting-app/index.md).
+The best way to grok the layout and syntax of a Compose file is to
+read [Get started with Docker Compose](/compose/gettingstarted/) and look
+at files included in [sample applications](https://docs.docker.com/samples/).
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+A good place to start is the [Getting Started](/get-started/index.md) tutorial
+which uses version 3 Compose stack files to implement multi-container apps,
+service definitions, and swarm mode. Here are some Compose files used in the
+tutorial.
 
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h5>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
-      <div class="panel-body">
-      <pre><code>
-      version: "3"
-      services:
+- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
 
-        redis:
-          image: redis:alpine
-          ports:
-            - "6379"
-          networks:
-            - frontend
-          deploy:
-            replicas: 2
-            update_config:
-              parallelism: 2
-              delay: 10s
-            restart_policy:
-              condition: on-failure
-        db:
-          image: postgres:9.4
-          volumes:
-            - db-data:/var/lib/postgresql/data
-          networks:
-            - backend
-          deploy:
-            placement:
-              constraints: [node.role == manager]
-        vote:
-          image: dockersamples/examplevotingapp_vote:before
-          ports:
-            - 5000:80
-          networks:
-            - frontend
-          depends_on:
-            - redis
-          deploy:
-            replicas: 2
-            update_config:
-              parallelism: 2
-            restart_policy:
-              condition: on-failure
-        result:
-          image: dockersamples/examplevotingapp_result:before
-          ports:
-            - 5001:80
-          networks:
-            - backend
-          depends_on:
-            - db
-          deploy:
-            replicas: 1
-            update_config:
-              parallelism: 2
-              delay: 10s
-            restart_policy:
-              condition: on-failure
+- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
 
-        worker:
-          image: dockersamples/examplevotingapp_worker
-          networks:
-            - frontend
-            - backend
-          deploy:
-            mode: replicated
-            replicas: 1
-            labels: [APP=VOTING]
-            restart_policy:
-              condition: on-failure
-              delay: 10s
-              max_attempts: 3
-              window: 120s
-            placement:
-              constraints: [node.role == manager]
+Another example of a Compose file is included in the Docker Labs topic, [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
 
-        visualizer:
-          image: dockersamples/visualizer:stable
-          ports:
-            - "8080:8080"
-          stop_grace_period: 1m30s
-          volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock"
-          deploy:
-            placement:
-              constraints: [node.role == manager]
-
-      networks:
-        frontend:
-        backend:
-
-      volumes:
-        db-data:
-    </code></pre>
-      </div>
-    </div>
-  </div>
-</div>
 
 ## Service configuration reference
 
@@ -147,7 +49,8 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
@@ -201,7 +104,8 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose will build and tag it with a generated name, and use that image thereafter.
+Compose will build and tag it with a generated name, and use that image
+thereafter.
 
     build:
       context: ./dir
@@ -310,9 +214,13 @@ Specify a custom container name, rather than a generated default name.
 
     container_name: my-web-container
 
-Because Docker container names must be unique, you cannot scale a service
-beyond 1 container if you have specified a custom name. Attempting to do so
-results in an error.
+Because Docker container names must be unique, you cannot scale a service beyond
+1 container if you have specified a custom name. Attempting to do so results in
+an error.
+
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### deploy
 
@@ -320,33 +228,55 @@ results in an error.
 
 Specify configuration related to the deployment and running of services. This
 only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
-[`docker stack deploy`](/engine/reference/commandline/stack_deploy.md), and is
+[docker stack deploy](/engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`.
 
-    deploy:
-      replicas: 6
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
+    version: '3'
+    services:
+      redis:
+        image: redis:alpine
+        deploy:
+          replicas: 6
+          update_config:
+            parallelism: 2
+            delay: 10s
+          restart_policy:
+            condition: on-failure
+
 
 Several sub-options are available:
 
 #### mode
 
 Either `global` (exactly one container per swarm node) or `replicated` (a
-specified number of containers). The default is `replicated`.
+specified number of containers). The default is `replicated`. (To learn more,
+see [Replicated and global
+services](/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-services)
+in the [swarm](/engine/swarm/) topics.)
 
-    mode: global
+
+    version: '3'
+    services:
+      worker:
+        image: dockersamples/examplevotingapp_worker
+        deploy:
+          mode: global
 
 #### replicas
 
 If the service is `replicated` (which is the default), specify the number of
 containers that should be running at any given time.
 
-    mode: replicated
-    replicas: 6
+    version: '3'
+    services:
+      worker:
+        image: dockersamples/examplevotingapp_worker
+        networks:
+          - frontend
+          - backend
+        deploy:
+          mode: replicated
+          replicas: 6
 
 #### placement
 
@@ -355,10 +285,15 @@ available types of constraints, see the
 [docker service create](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
 documentation.
 
-    placement:
-      constraints:
-        - node.role == manager
-        - engine.labels.operatingsystem == ubuntu 14.04
+    version: '3'
+    services:
+      db:
+        image: postgres
+        deploy:
+          placement:
+            constraints:
+              - node.role == manager
+              - engine.labels.operatingsystem == ubuntu 14.04
 
 #### update_config
 
@@ -372,10 +307,18 @@ updates.
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 
-```
-    update_config:
-      parallelism: 2
-      delay: 10s
+```none
+version: '3'
+services:
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    depends_on:
+      - redis
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
 ```
 
 #### resources
@@ -385,16 +328,21 @@ options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`).
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker service create](/engine/reference/commandline/service_create.md) counterpart.
 
-```
-resources:
-  limits:
-    cpus: '0.001'
-    memory: 50M
-  reservations:
-    cpus: '0.0001'
-    memory: 20M
+```none
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      resources:
+        limits:
+          cpus: '0.001'
+          memory: 50M
+        reservations:
+          cpus: '0.0001'
+          memory: 20M
 ```
 
 #### restart_policy
@@ -411,12 +359,17 @@ Configures if and how to restart containers when they exit. Replaces
   specified as a [duration](#specifying-durations) (default:
   decide immediately).
 
-```
-    restart_policy:
-      condition: on-failure
-      delay: 5s
-      max_attempts: 3
-      window: 120s
+```none
+version: "3"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 ```
 
 #### labels
@@ -440,6 +393,32 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
         image: web
         labels:
           com.example.description: "This label will appear on all containers for the web service"
+
+#### Not supported for `docker stack deploy`
+
+The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
+
+- [build](#build)
+- [cgroup_parent](#cgroup-parent)
+- [container_name](#containername)
+- [devices](#devices)
+- [dns](#devices)
+- [dns_search](#dnssearch)
+- [tmpfs](#tmpfs)
+- [external_links](#externallinks)
+- [links](#links)
+- [network_mode](#networkmode)
+- [security_opt](#securityopt)
+- [stop_signal](#stopsignal)
+- [sysctls](#sysctls)
+- [userns_mode](#usernsmode)
+
+>**Tip:** See also, the section on [how to configure volumes
+for services, swarms, and docker-stack.yml
+files](#volumes-for-services-swarms-and-stack-files).  Volumes _are_ supported
+but in order to work with swarms and services, they must be configured properly,
+as named volumes or associated with services that are constrained to nodes with
+access to the requisite volumes.
 
 ### devices
 
@@ -466,7 +445,7 @@ Express dependency between services, which has two effects:
 
 Simple example:
 
-    version: '2'
+    version: '3'
     services:
       web:
         build: .
@@ -478,7 +457,7 @@ Simple example:
       db:
         image: postgres
 
-> **Note**: There are several things to be aware of when using `depends_on`:
+> There are several things to be aware of when using `depends_on`:
 >
 > - `depends_on` will not wait for `db` and `redis` to be "ready" before
 >   starting `web` - only until they have been started. If you need to wait
@@ -490,6 +469,7 @@ Simple example:
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
+{: .note-vanilla}
 
 
 ### dns
@@ -633,13 +613,14 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
 > **Notes:**
 >
->* If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
-> externally-created containers must be connected to at least one of the same
-> networks as the service which is linking to them. Starting with Version 2, [links](compose-file-v2#links) are a legacy option. We recommend using [networks](#networks) instead.
+> If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
+must be connected to at least one of the same networks as the service which is
+linking to them. Starting with Version 2, [links](compose-file-v2#links) are a
+legacy option. We recommend using [networks](#networks) instead.
 >
->* This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+with a (version 3) Compose file.
+{: .note-vanilla}
 
 ### extra_hosts
 
@@ -745,7 +726,7 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Notes:**
+> **Notes**
 >
 > * If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
@@ -754,6 +735,7 @@ Links also express dependency between services in the same way as
 > *  This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{: .note-vanilla}
 
 ### logging
 
@@ -774,9 +756,9 @@ The default value is json-file.
     driver: "syslog"
     driver: "none"
 
-> **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
-> `docker-compose up` and `docker-compose logs`. Using any other driver will not
-> print any logs.
+> **Note**: Only the `json-file` and `journald` drivers make the logs
+available directly from `docker-compose up` and `docker-compose logs`.
+Using any other driver will not print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
 
@@ -785,6 +767,37 @@ Logging options are key-value pairs. An example of `syslog` options:
     driver: "syslog"
     options:
       syslog-address: "tcp://192.168.0.42:123"
+
+The default driver [json-file](/engine/admin/logging/overview.md#json-file), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
+
+    options:
+      max-size: "200k"
+      max-file: "10"
+
+The example shown above would store log files until they reach a `max-size` of
+200kB, and then rotate them. The amount of individual log files stored is
+specified by the `max-file` value. As logs grow beyond the max limits, older log
+files are removed to allow storage of new logs.
+
+Here is an example `docker-compose.yml` file that limits logging storage:
+
+    services:
+      some-service:
+        image: some-service
+        logging:
+          driver: "json-file"
+          options:
+            max-size: "200k"
+            max-file: "10"
+
+> Logging options available depend on which logging driver you use
+>
+> The above example for controlling log files and sizes uses options
+specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
+These particular options are not available on other logging drivers.
+For a full list of supported logging drivers and their options, see
+[logging drivers](/engine/admin/logging/overview.md).
+{: .note-vanilla}
 
 ### network_mode
 
@@ -797,9 +810,15 @@ the special form `service:[service name]`.
     network_mode: "service:[service name]"
     network_mode: "container:[container name/id]"
 
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> **Notes**
+>
+>* This option is ignored when
+[deploying a stack in swarm
+ mode](/engine/reference/commandline/stack_deploy.md) with a (version 3) Compose
+ file.
+>
+>* `network_mode: "host"` cannot be mixed with [links](#links).
+{: .note-vanilla}
 
 ### networks
 
@@ -846,7 +865,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
       worker:
         build: ./worker
         networks:
-        - legacy
+          - legacy
 
       db:
         image: mysql
@@ -954,16 +973,16 @@ port (a random host port will be chosen).
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
 
-- `target`: the publicly exposed port
-- `published`: the port inside the container
+- `target`: the port inside the container
+- `published`: the publicly exposed port
 - `protocol`: the port protocol (`tcp` or `udp`)
 - `mode`: `host` for publishing a host port on each node, or `ingress` for a swarm
    mode port which will be load balanced.
 
 ```none
 ports:
-  - target: 8080
-    published: 80
+  - target: 80
+    published: 8080
     protocol: tcp
     mode: host
 
@@ -987,11 +1006,14 @@ container access to the secret and mounts it at `/run/secrets/<secret_name>`
 within the container. The source name and destination mountpoint are both set
 to the secret name.
 
-> **Warning**: Due to a bug in Docker 1.13.1, using the short syntax currently
+> Limitations of short syntax in Docker 1.13.1
+>
+> Due to a bug in Docker 1.13.1, using the short syntax currently
 > mounts the secret with permissions `000`, which means secrets defined using
 > the short syntax are unreadable within the container if the command does not
 > run as the `root` user. The workaround is to use the long syntax instead if
 > you use Docker 1.13.1 and the secret must be read by a non-`root` user.
+{: .warning-vanilla}
 
 The following example uses the short syntax to grant the `redis` service
 access to the `my_secret` and `my_other_secret` secrets. The value of
@@ -1149,10 +1171,11 @@ more information.
 
 > **Note**: The top-level
 > [`volumes` option](#volume-configuration-reference) defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Mount host paths or named volumes. Named volumes must be defined in the
-[top-level `volumes` key](#volume-configuration-reference).
+[top-level `volumes` key](#volume-configuration-reference). Use named volumes with [services, swarms, and stack files](#volumes-for-services-swarms-and-stack-files).
 
 #### Short syntax
 
@@ -1210,18 +1233,51 @@ volumes:
     target: /opt/app/static
 ```
 
-### restart
-
-`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error. 
-
-      - restart: no
-      - restart: always
-      - restart: on-failure
-
 > **Note:** The long syntax is new in v3.2
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+
+#### Volumes for services, swarms, and stack files
+
+When working with services, swarms, and `docker-stack.yml` files, keep in mind
+that the tasks (containers) backing a service can be deployed on any node in a
+swarm, which may be a different node each time the service is updated.
+
+In the absence of having named volumes with specified sources, Docker creates an
+anonymous volume for each task backing a service. Anonymous volumes do not
+persist after the associated containers are removed.
+
+If you want your data to persist, use a named volume and a volume driver that
+is multi-host aware, so that the data is accessible from any node. Or, set
+constraints on the service so that its tasks are deployed on a node that has the
+volume present.
+
+As an example, the `docker-stack.yml` file for the
+[votingapp sample in Docker
+Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) defines a service called `db` that runs a `postgres` database. It is
+configured as a named volume in order to persist the data on the swarm,
+_and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
+
+```
+version: "3"
+services:
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+```
+
+### restart
+
+`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+
+    restart: "no"
+    restart: always
+    restart: on-failure
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 

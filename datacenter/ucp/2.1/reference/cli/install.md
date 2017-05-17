@@ -14,19 +14,19 @@ Docker Universal Control Plane (UCP).
 When installing UCP you can customize:
 
   * The certificates used by the UCP web server. Create a volume
-    named 'ucp-controller-server-certs' and copy the ca.pem, cert.pem, and key.pem
+    named `ucp-controller-server-certs` and copy the ca.pem, cert.pem, and key.pem
     files to the root directory. Then run the install command with the
-    '--external-server-cert' flag.
+    `--external-server-cert` flag.
 
   * The license used by UCP, by bind-mounting the file at
-    '/config/docker_subscription.lic' in the tool.  E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
-    or by specifying with '--license "$(cat license.lic)"
+    `/config/docker_subscription.lic` in the tool. E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
+    or by specifying with `--license "$(cat license.lic)"`
 
 If you're joining more nodes to this swarm, open the following ports in your
 firewall:
 
-  * 443 or the '--controller-port'
-  * 2376 or the '--swarm-port'
+  * 443 or the `--controller-port`
+  * 2376 or the `--swarm-port`
   * 12376, 12379, 12380, 12381, 12382, 12383, 12384, 12385, 12386, 12387
   * 4789 (udp) and 7946 (tcp/udp) for overlay networking
 
@@ -49,7 +49,7 @@ firewall:
 |`--dns-opt`|Set DNS options for the UCP containers|
 |`--dns-search`|Set custom DNS search domains for the UCP containers|
 |`--unlock-key`|The unlock key for this swarm-mode cluster, if one exists.|
-|`--pull`|Pull UCP images: 'always', when 'missing', or 'never'|
+|`--pull`|Pull UCP images: `always`, when `missing`, or `never`|
 |`--registry-username`|Username to use when pulling images|
 |`--registry-password`|Password to use when pulling images|
 |`--kv-timeout`|Timeout in milliseconds for the key-value store|

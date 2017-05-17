@@ -42,12 +42,12 @@ In the **UCP web UI**, navigate to **Resources**, and click **Secrets**.
 
 ![](../../images/manage-secrets-1.png){: .with-border}
 
-Click **Create Secret** to create a new secret. Once you create the secret
+Click **Create Secret** to create a new secret. Once you create the secret,
 you won't be able to edit it or see the secret data again.
 
 ![](../../images/manage-secrets-2.png){: .with-border}
 
-Assign a unique name to the service and set its value. You can optionally define
+Assign a unique name to the secret and set its value. You can optionally define
 a permission label so that other users have permission to use this secret. Also
 note that a service and secret must have the same permission label (or both
 must have no permission label at all) in order to be used together.
@@ -132,7 +132,7 @@ Since secrets are immutable in the sense that you cannot change the data
 they store after they are created, we can use the following process to achieve
 this:
 
-1. Create a new service with a different password
+1. Create a new secret with a different password
 2. Update all the services that are using the old secret to use the new one
 instead
 3. Delete the old secret
@@ -172,6 +172,10 @@ the file with the content of `wordpress-password-v2` be mounted in
 
 Then do the same thing for the WordPress service. After this is done, the
 WordPress application is running and using the new password.
+
+## Managing secrets through the CLI
+
+You can find additional documentation on managing secrets through the CLI at [How Docker manages secrets](/engine/swarm/secrets/#read-more-about-docker-secret-commands).
 
 ## Where to go next
 

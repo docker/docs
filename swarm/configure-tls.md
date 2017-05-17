@@ -335,20 +335,22 @@ On `node1` and `node2` (your Swarm nodes), do the following:
     $ sudo su
     ```
 
-2. Edit Docker Engine configuration file.
+2.  Add the following configuration keys to the `/etc/docker/daemon.json`. If the
+    file does not yet exist, create it.
 
-    If you are following along with these instructions and using Ubuntu 14.04
-    LTS, the configuration file is `/etc/default/docker`. The Docker Engine
-    configuration file may be different depending on the Linux distribution you
-    are using.
+    ```json
+    {
+      "hosts": ["tcp://0.0.0.0:2376"],
+      "tlsverify": "true",
+      "tlscacert": "/home/ubuntu/.certs/ca.pem",
+      "tlscert": "/home/ubuntu/.certs/cert.pem",
+      "tlskey": "/home/ubuntu/.certs/key.pem"
+    }
+    ```
 
-3. Add the following options to the `DOCKER_OPTS` line.
+    Restart Docker for the changes to take effect. If the file is not valid JSON,
+    Docker will not start and will emit an error.
 
-         -H tcp://0.0.0.0:2376 --tlsverify --tlscacert=/home/ubuntu/.certs/ca.pem --tlscert=/home/ubuntu/.certs/cert.pem --tlskey=/home/ubuntu/.certs/key.pem
-
-2. Restart the Docker Engine daemon.
-
-         $ service docker restart
 
 3. Repeat the procedure on `node2` as well.
 

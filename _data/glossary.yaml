@@ -212,6 +212,9 @@ repository: |
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
+SSH: |
+  SSH (secure shell) is a secure protocol for accessing remote machines and applications. It
+  provides authentication and encrypts data communication over insecure networks such as the Internet. SSH uses public/private key pairs to authenticate logins.
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
   you want to run your application containers in a swarm. At the most basic level

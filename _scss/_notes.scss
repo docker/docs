@@ -1,35 +1,88 @@
 /*
-* Infos, notes, and warnings
+* note, important, and important admonition styles
 */
 
-$info-color: #1488C6;
-$warning-color: #aa6708;
-$danger-color: #ce4844;
+$note-color: #1488C6;
+$important-color: #aa6708;
+$warning-color: #ce4844;
 
 blockquote {
-  border-left-color: $info-color;
+  border-left-color: $note-color;
 }
 
 blockquote > p:first-child {
   margin-top: 0;
+  font-weight: 700;
+  color: $note-color;
 }
 
-blockquote > p > strong {
-  color: $info-color;
+blockquote > p:first-child::before {
+  content: 'Note: ';
+}
+
+blockquote.note-vanilla > p:first-child::before {
+  content: '\f058 \00a0';
+  font-family: FontAwesome;
+}
+
+blockquote.important {
+  border-left-color: $important-color;
+}
+
+blockquote.important > p:first-child {
+  color: $important-color;
+}
+
+blockquote.important > p:first-child::before {
+  content: 'Important: ';
+}
+
+blockquote.important-vanilla {
+  border-left-color: $important-color;
+}
+
+blockquote.important-vanilla > p:first-child {
+  color: $important-color;
+}
+
+blockquote.important-vanilla > p:first-child::before {
+  content: '\f06a  \00a0';
+  font-family: FontAwesome;
 }
 
 blockquote.warning {
   border-left-color: $warning-color;
 }
 
-blockquote.warning > p > strong {
+blockquote.warning > p:first-child {
   color: $warning-color;
 }
 
-blockquote.danger {
-  border-left-color: $danger-color;
+blockquote.warning > p:first-child::before {
+  content: 'Warning: ';
 }
 
-blockquote.danger > p > strong {
-  color: $danger-color;
+blockquote.warning-vanilla {
+  border-left-color: $warning-color;
+}
+
+blockquote.warning-vanilla > p:first-child {
+  color: $warning-color;
+}
+
+blockquote.warning-vanilla > p:first-child::before {
+  content: '\f057  \00a0';
+  font-family: FontAwesome;
+
+}
+
+/* Maintain backwards compatibility with old
+*  note style
+*/
+blockquote > p:only-child {
+  font-weight: inherit;
+  color: inherit;
+}
+blockquote > p:only-child::before {
+  content: none;
 }

@@ -16,7 +16,7 @@ horizontalnav:
   node: samples
 
 guides:
-- title: "Docs hackathon: April 17-22nd, 2017"
+- title: Docs hackathon results
   path: /hackathon/
 - sectiontitle: Get Docker
   section:
@@ -29,6 +29,8 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
+    - path: /engine/userguide/eng-image/multistage-build/
+      title: Use multi-stage builds (Edge only)
   - path: /docker-for-mac/install/
     title: Docker for Mac
   - path: /docker-for-windows/install/
@@ -223,6 +225,8 @@ guides:
   section:
   - path: /engine/admin/
     title: Configuring and running Docker
+  - path: /engine/admin/prometheus/
+    title: Collect Docker metrics with Prometheus
   - path: /engine/admin/host_integration/
     title: Automatically start containers
   - path: /engine/admin/resource_constraints/
@@ -245,6 +249,12 @@ guides:
       title: Log tags for logging driver
     - path: /engine/admin/logging/logentries/
       title: Logentries logging driver
+    - path: /engine/admin/logging/json-file/
+      title: JSON File logging driver
+    - path: /engine/admin/logging/gelf/
+      title: Graylog Extended Format (GELF) logging driver
+    - path: /engine/admin/logging/syslog/
+      title: Syslog logging driver
     - path: /engine/admin/logging/awslogs/
       title: Amazon CloudWatch logs logging driver
     - path: /engine/admin/logging/etwlogs/
@@ -265,8 +275,8 @@ guides:
     title: Using Chef
   - path: /engine/admin/puppet/
     title: Using Puppet
-  - path: /engine/admin/using_supervisord/
-    title: Using Supervisor with Docker
+  - path: /engine/admin/multi-service_container/
+    title: Run multiple services in a container
   - path: /engine/admin/runmetrics/
     title: Runtime metrics
   - path: /engine/admin/ambassador_pattern_linking/
@@ -369,6 +379,8 @@ guides:
     title: Docker network driver plugins
   - path: /engine/extend/plugins_volume/
     title: Volume plugins
+  - title: Plugin configuration
+    path: /engine/extend/config/
   - path: /engine/extend/plugin_api/
     title: Plugins API
 - sectiontitle: Open source at Docker
@@ -471,14 +483,16 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.28/
-    title: v1.28 reference
-  - path: /engine/api/v1.27/
-    title: v1.27 reference
+  - path: /engine/api/v1.29/
+    title: v1.29 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.28/
+      title: v1.28 reference
+    - path: /engine/api/v1.27/
+      title: v1.27 reference
     - path: /engine/api/v1.26/
       title: v1.26 reference
     - path: /engine/api/v1.25/
@@ -1270,13 +1284,19 @@ manuals:
       title: Using Swarm mode
     - path: /docker-cloud/cloud-swarm/register-swarms/
       title: Register existing swarms
-    - path: /docker-cloud/cloud-swarm/create-cloud-swarm/
-      title: Create a new swarm in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
+      title: Create a new swarm on Amazon Web Services in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-azure/
+      title: Create a new swarm on Microsoft Azure in Docker Cloud
     - path: /docker-cloud/cloud-swarm/connect-to-swarm/
       title: Connect to a swarm through Docker Cloud
     - path: /docker-cloud/cloud-swarm/link-aws-swarm/
-      title: Link to Amazon Web Services to create swarms
-  - sectiontitle: Manage infrastructure (standard mode)
+      title: Link Amazon Web Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/link-azure-swarm/
+      title: Link Microsoft Azure Cloud Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/ssh-key-setup/
+      title: Set up SSH keys
+  - sectiontitle: Manage Infrastructure (standard mode)
     section:
     - path: /docker-cloud/infrastructure/
       title: Infrastructure overview
@@ -1483,6 +1503,8 @@ manuals:
     title: Link environment variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
+  - path: /compose/samples-for-compose/
+    title: Samples apps with Compose
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
@@ -1678,7 +1700,7 @@ manuals:
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/
-          title: Create and manage users
+          title: Authentication and authorization
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
           title: Create and manage users
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
@@ -2203,6 +2225,8 @@ manuals:
     title: Networking
   - path: /docker-for-mac/osxfs/
     title: File system sharing
+  - path: /docker-for-mac/osxfs-caching/
+    title: Performance tuning for volume mounts (shared filesystems)
   - path: /docker-for-mac/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-mac/faqs/

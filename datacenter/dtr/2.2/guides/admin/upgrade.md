@@ -18,22 +18,18 @@ support upgrades according to the following rules:
   version. We also strongly recommend upgrading to the latest minor/patch
   version for your major version first.
 
-|From| To| Description| Supported|
-|:----|:---|:------------|----------|
-| 2.2.0 | 2.2.1 | patch upgrade | yes |
-| 2.2.0 | 2.2.2 | skip patch version | yes |
-| 2.2.2 | 2.2.1 | patch downgrade | no |
-| 2.1.0 | 2.2.0 | minor upgrade | yes |
-| 2.1.1 | 2.2.0 | minor upgrade | yes |
-| 2.1.2 | 2.2.2 | minor upgrade | yes |
-| 2.0.1 | 2.2.0 | skip minor version | no |
-| 2.2.0 | 2.1.0 | minor downgrade | no |
-| 1.4.3 | 2.0.0 | major upgrade | yes |
-| 1.4.3 | 2.0.3 | major upgrade | yes |
-| 1.4.3 | 3.0.0 | skip major version | no |
-| 1.4.1 | 2.0.3 | major upgrade from an old version | no |
-| 1.4.3 | 2.1.0 | major upgrade skipping minor version | no |
-| 2.0.0 | 1.4.3 | major downgrade | no |
+| Description                          | From  | To        | Supported |
+|:-------------------------------------|:------|:----------|:----------|
+| patch upgrade                        | x.y.0 | x.y.1     | yes       |
+| skip patch version                   | x.y.0 | x.y.2     | yes       |
+| patch downgrade                      | x.y.2 | x.y.1     | no        |
+| minor upgrade                        | x.y.* | x.y+1.*   | yes       |
+| skip minor version                   | x.y.* | x.y+2.*   | no        |
+| minor downgrade                      | x.y.* | x.y-1.*   | no        |
+| skip major version                   | x.*.* | x+2.*.*   | no        |
+| major downgrade                      | x.*.* | x-1.*.*   | no        |
+| major upgrade                        | x.y.z | x+1.0.0   | yes       |
+| major upgrade skipping minor version | x.y.z | x+1.y+1.z | no        |
 
 There may be at most a few seconds of interruption during the upgrade of a
 DTR cluster. Schedule the upgrade to take place outside business peak hours
@@ -44,6 +40,12 @@ to ensure the impact on your business is close to none.
 Before starting your upgrade planning, make sure that the version of UCP you are
 using is supported by the version of DTR you are trying to upgrade to. <!--(TODO:
 link to the compatibility matrix)-->
+
+> **Warning**
+>
+> Before performing any upgrade it’s important to backup. See
+> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery.md).
+{: .warning}
 
 ### Step 1. Upgrade DTR to 2.1 if necessary
 
@@ -58,7 +60,7 @@ $ docker pull {{ page.docker_image }}
 ```
 
 If the node you're upgrading doesn't have access to the internet, you can
-follow the [offline installation documentation](../install/install-offline.md)
+follow the [offline installation documentation](install/install-offline.md)
 to get the images.
 
 Once you have the latest image on your machine (and the images on the target
@@ -72,7 +74,7 @@ $ docker run -it --rm \
 
 By default the upgrade command runs in interactive mode and prompts you for
 any necessary information. You can also check the
-[reference documentation](../../../reference/cli/index.md) for other existing flags.
+[reference documentation](../../reference/cli/index.md) for other existing flags.
 
 The upgrade command will start replacing every container in your DTR cluster,
 one replica at a time. It will also perform certain data migrations. If anything

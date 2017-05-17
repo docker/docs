@@ -5,7 +5,7 @@ keywords: ectd, rethinkdb, key, value, store, database, ucp
 ---
 
 UCP automatically tries to heal itself by monitoring it's internal
-components and trying to bring them to an healthy state.
+components and trying to bring them to a healthy state.
 
 In most cases, if a single UCP component is persistently in a
 failed state, you should be able to restore the cluster to a healthy state by
@@ -76,7 +76,7 @@ To learn more about the `etcdctl` utility, check the
 
 ## RethinkDB Database
 
-User and organization data for Docker Datacenter is stored in a RetinkDB
+User and organization data for Docker Datacenter is stored in a RethinkDB
 database which is replicated across all manager nodes in the UCP cluster.
 
 Replication and failover of this database is typically handled automatically by

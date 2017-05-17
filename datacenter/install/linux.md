@@ -28,20 +28,11 @@ Also make sure the hosts are running one of these operating systems:
 [Learn more about the Docker Datacenter system requirements](../ucp/2.1/guides/admin/install/system-requirements.md)
 
 
-### Step 2: Install CS Docker Engine
+### Step 1: Install Docker EE Container Engine
 
-Install the commercially supported Docker Engine on all hosts you want to manage
-with Docker Datacenter.
+Install the Docker Enterprise Edition container engine on all hosts you want to manage by following [these instructions](/engine/installation/).
 
-Log in to each host using ssh, and install CS Docker Engine:
-
-```bash
-curl -SLf https://packages.docker.com/1.13/install.sh  | sh
-```
-
-[You can also install CS Docker Engine using a package manager](/cs-engine/1.13/index.md).
-
-### Step 3: Install Universal Control Plane
+### Step 2: Install Universal Control Plane
 
 Docker Universal Control Plane (UCP) allows managing from a centralized place
 your images, applications, networks, and other computing resources.
@@ -62,7 +53,7 @@ for any necessary configuration values.
 [Learn more about the UCP installation](../ucp/2.1/guides/admin/install/index.md).
 
 
-### Step 4: License your installation
+### Step 3: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
 to the UCP web UI, log in with your administrator credentials and upload your
@@ -72,7 +63,7 @@ license.
 
 [Get a free trial license if you don't have one](https://store.docker.com/bundles/docker-datacenter).
 
-### Step 5: Join more nodes to UCP
+### Step 4: Join more nodes to UCP
 
 Join more nodes so that you can manage them from UCP.
 Go to the **UCP web UI**, navigate to the **Resources** page, and go to
@@ -93,7 +84,7 @@ Copy the command to your clipboard, and run it on every node that you want
 to be managed by UCP. After you run the command in the node, the node
 will show up in the UP web UI.
 
-### Step 6: Install Docker Trusted Registry
+### Step 5: Install Docker Trusted Registry
 
 Docker Trusted Registry (DTR) is a private image registry so that you can
 manage who has access to your Docker images. DTR needs to be installed on

@@ -62,7 +62,7 @@ du -hs <path-to-volume>
 
 ## NFS
 
-You can configure your DTR replicas to store images on a NFS partition, so that
+You can configure your DTR replicas to store images on an NFS partition, so that
 all replicas can share the same storage backend.
 
 [Learn how to configure DTR with NFS](nfs.md).

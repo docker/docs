@@ -28,6 +28,8 @@ For example, suppose your app is in a directory called `myapp`, and your `docker
           - "8000:8000"
       db:
         image: postgres
+        ports:
+          - "8001:5432"
 
 When you run `docker-compose up`, the following happens:
 
@@ -42,7 +44,15 @@ get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
 
-Because `web` explicitly maps a port, it's also accessible from the outside world via port 8000 on your Docker host's network interface.
+It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
+In the above example, for `db`, the `HOST_PORT` is `8001` and the container port is
+`5432` (postgres default). Networked service-to-service
+communication use the `CONTAINER_PORT`. When `HOST_PORT` is defined,
+the service is accessible outside the swarm as well.
+
+Within the `web` container, your connection string to `db` would look like
+`postgres://db:5432`, and from the host machine, the connection string would
+look like `postgres://{DOCKER_IP}:8001`.
 
 ## Updating containers
 
@@ -67,6 +77,8 @@ Links allow you to define extra aliases by which a service is reachable from ano
 See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
+
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode consult the [Docker Stacks](/compose/bundles.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
@@ -97,16 +109,16 @@ Here's an example Compose file defining two custom networks. The `proxy` service
         networks:
           - backend
 
-     networks:
-       frontend:
-         # Use a custom driver
-         driver: custom-driver-1
-       backend:
-         # Use a custom driver which takes special options
-         driver: custom-driver-2
-         driver_opts:
-           foo: "1"
-           bar: "2"
+    networks:
+      frontend:
+        # Use a custom driver
+        driver: custom-driver-1
+      backend:
+        # Use a custom driver which takes special options
+        driver: custom-driver-2
+        driver_opts:
+          foo: "1"
+          bar: "2"
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
 
@@ -129,8 +141,8 @@ Instead of (or as well as) specifying your own networks, you can also change the
       db:
         image: postgres
 
-      networks:
-        default:
+    networks:
+      default:
         # Use a custom driver
         driver: custom-driver-1
 

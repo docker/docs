@@ -145,32 +145,11 @@ from the repository.
 
     **armhf**:
 
-    You can choose between two methods for `armhf`. You can use the same method
-    as Debian, setting up the repository and using `apt-get install`, or you can
-    use a convenience script, which requires privileged access, but sets up the
-    repository for you and installs the packages for Bash auto-completion.
-
-    - Setting up the repository directly:
-
-      ```bash
-      $ echo "deb [arch=armhf] https://apt.dockerproject.org/repo \
-          raspbian-jessie main" | \
-          sudo tee /etc/apt/sources.list.d/docker.list
-      ```
-
-    - Using the convenience script:
-
-      ```bash
-      $ curl -sSL https://get.docker.com > install.sh
-
-      $ sudo bash ./install.sh
-      ```
-
-      > **Warning**: Always audit scripts downloaded from the internet before
-      > running them locally.
-      
-      If you use this method, Docker is installed and starts automatically.
-      Skip to step 4 below.
+    ```bash
+    $ echo "deb [arch=armhf] {{ download-url-base }} \
+         $(lsb_release -cs) stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
+    ```
 
 4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
@@ -187,7 +166,8 @@ from the repository.
 
 #### Install Docker CE
 
-> **NOTE**: Docker CE is not available on raspbian-jessie, scroll down to follow the Raspian steps.
+> **NOTE**: On Debian for ARM you can continue following this step. For Raspbian,
+  scroll down to follow its specific steps.
 
 1.  Update the `apt` package index.
 
@@ -204,10 +184,12 @@ from the repository.
     $ sudo apt-get install docker-ce
     ```
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > **Warning**:
+    > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
+    {:.warning}
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. This output is truncated. List the
@@ -236,8 +218,16 @@ from the repository.
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
+    **amd64**:
+
     ```bash
     $ sudo docker run hello-world
+    ```
+
+    **armhf**:
+
+    ```bash
+    $ sudo docker run armhf/hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -255,9 +245,9 @@ To upgrade Docker, first run `sudo apt-get update`, then follow the
 to install.
 
 
-### Install on Raspian (Raspberry Pi)
+### Install on Raspbian (Raspberry Pi)
 >**Warning**: This isn't necessary if you used the recommended
->```bash $ curl -sSL https://get.docker.com | sh ``` command!
+>`$ curl -sSL https://get.docker.com | sh` command!
 
 Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
 see `docker.list` if you:
@@ -289,10 +279,10 @@ installing Docker.
     ```bash
     $ sudo apt-get install docker
     ```
-    > **NOTE**: By default, Docker on Raspian is Docker Community Edition, so
+    > **NOTE**: By default, Docker on Raspbian is Docker Community Edition, so
     > there is no need to specify docker-ce.
 
-    > **NOTE**: If ```bash $ curl -sSL https://get.docker.com | sh ``` isn't used,
+    > **NOTE**: If `curl -sSL https://get.docker.com | sh` isn't used,
     > then docker won't have auto-completion! You'll have to add it manually.
 
 3.  Verify that Docker is installed correctly by running the `hello-world`
@@ -304,6 +294,20 @@ installing Docker.
 
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
+
+#### (Optional) Install Docker Compose for Raspbian
+
+This functionality is provided by [Hypriot](https://blog.hypriot.com/). Add the Hypriot repo:
+
+```bash
+curl -s https://packagecloud.io/install/repositories/Hypriot/Schatzkiste/script.deb.sh | sudo bash
+```
+
+Install `docker-compose`:
+
+```bash
+sudo apt-get install docker-compose
+```
 
 ### Install from a package
 

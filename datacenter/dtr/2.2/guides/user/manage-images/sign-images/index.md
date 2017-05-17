@@ -47,7 +47,7 @@ have to do the same procedure for every one of them.
 ### Configure your Notary client
 
 Start by [configuring your Notary client](../../access-dtr/configure-your-notary-client.md).
-This ensures the Docker an Notary CLI clients know about your UCP private keys.
+This ensures the Docker and Notary CLI clients know about your UCP private keys.
 
 ### Initialize the trust metadata
 

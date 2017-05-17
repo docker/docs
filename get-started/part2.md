@@ -109,7 +109,7 @@ import os
 import socket
 
 # Connect to Redis
-redis = Redis(host="redis", db=0)
+redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 app = Flask(__name__)
 
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=80)
 ```
 
-Now we see that `pip install requirements.txt` installs the Flask and Redis
+Now we see that `pip install -r requirements.txt` installs the Flask and Redis
 libraries for Python, and the app prints the environment variable `NAME`, as
 well as the output of a call to `socket.gethostname()`. Finally, because Redis
 isn't running (as we've only installed the Python library, and not Redis
@@ -273,7 +273,7 @@ and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and the host machine doesn't have to
 install anything but Docker to run it.
 
-## Conclusion of part one
+## Conclusion of part two
 
 That's all for this page. In the next section, we will learn how to scale our
 application by running this container in a **service**.

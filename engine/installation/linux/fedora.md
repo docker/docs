@@ -124,10 +124,12 @@ the repository.
     $ sudo dnf install docker-ce
     ```
 
-    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > **Warning**:
+    > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `dnf install` or
     > `dnf update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
+    {:.warning}
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions. This
