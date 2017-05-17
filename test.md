@@ -521,10 +521,12 @@ end
 
 ### JSON
 
-Warning: Syntax highlighting breaks easily for JSON if the code you present is
-not a valid JSON document. Try running your snippet through [this
-linter](http://jsonlint.com/) to make sure it's valid, and remember: there is no
-syntax for comments in JSON!
+> **Warning**:
+> Syntax highlighting breaks easily for JSON if the code you present is
+> not a valid JSON document. Try running your snippet through [this
+> linter](http://jsonlint.com/) to make sure it's valid, and remember: there is no
+> syntax for comments in JSON!
+{:.warning}
 
 ```json
 "server": {
