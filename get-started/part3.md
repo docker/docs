@@ -122,6 +122,11 @@ your browser and hit refresh a few times. Either way, you'll see the container
 ID randomly change, demonstrating the load-balancing; with each request, one of
 the five replicas is chosen at random to respond.
 
+
+>**Note**: At this stage, it may take up to 30 seconds for the containers to respond to HTTP
+> requests. This is not indicitive of Docker or swarm performance, but rather an unmet
+> Redis dependency that we will address later in the tutorial.
+
 ## Scale the app
 
 You can scale the app by changing the `replicas` value in `docker-compose.yml`,
