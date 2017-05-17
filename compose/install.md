@@ -58,7 +58,7 @@ To install Compose, do the following:
 
     >  Got a "Permission denied" error?
     >
-    If so, your `/usr/local/bin` directory probably isn't writable and
+    If so, your `/usr/bin` directory probably isn't writable and
     you'll need to install Compose as the superuser. Run `sudo -i`, then
     run the download and install commands below, then `exit`.
     {: .note-vanilla}
@@ -68,13 +68,13 @@ To install Compose, do the following:
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
-    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
     ```
 
     For example, to download Compose version {{site.compose_current}}, the command is:
 
     ```bash
-    curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
@@ -94,7 +94,7 @@ class="_"}.
 5.  Apply executable permissions to the binary:
 
     ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
+    sudo chmod +x /usr/bin/docker-compose
     ```
 
 6.  Optionally, install [command completion](completion.md) for the
