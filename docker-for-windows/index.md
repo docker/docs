@@ -385,6 +385,7 @@ for workarounds and more detail.
 > Docker Machine nodes. See
 > [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 > in the FAQs.
+{: .note-vanilla}
 
 See also
 [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
