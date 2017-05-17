@@ -25,12 +25,12 @@ A: Two different download channels are available for Docker for Windows:
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
   for Windows comes with the latest released version of Docker Engine. The
-  release schedule is synched with Docker Engine releases and hotfixes.  On the
+  release schedule is synched with Docker Engine releases and hotfixes. On the
   Stable channel, you can select whether to send usage statistics and other data.
 
 * The **Edge channel** provides an installer with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the Edge
+  Docker Engine. Bugs, crashes, and issues are more likely to occur with the Edge
   app, but you get a chance to preview new functionality, experiment, and provide
   feedback as the apps evolve. Releases are typically more frequent than for
   Stable, often one or more per month. Usage statistics and crash reports are
@@ -157,7 +157,7 @@ if an enterprise SSL certificate is trusted by the user on the host, it will be
 trusted by Docker for Windows.
 
 To learn more, see the GitHub issue [Allow user to add custom Certificate
-Authorities ](https://github.com/docker/for-win/issues/48).
+Authorities](https://github.com/docker/for-win/issues/48).
 
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
@@ -207,7 +207,7 @@ Windows to work.
 ### Why does Docker for Windows fail to start when firewalls or anti-virus software is installed?
 
 Some firewalls and anti-virus software might be incompatible with Hyper-V and
-some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker
+some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
 for Windows. See details and workarounds in
 [Docker fails to start when firewall or anti-virus software is installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
 in [Troubleshooting](/docker-for-windows/troubleshoot.md).
