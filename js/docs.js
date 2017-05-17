@@ -289,3 +289,5 @@ window.onload = function() {
     $('.nav-tabs > li > a[data-group="'+ group +'"]').tab('show');
   })
 };
+
+$('.glossLink').popover();

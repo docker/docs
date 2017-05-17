@@ -21,6 +21,9 @@ like so:
 To see a definition for a term, and all topics in the documentation that have
 been tagged with that term, click any entry below:
 
-{% for entry in site.data.glossary %}
-- [{{ entry[0] }}](/glossary/?term={{ entry[0]}})
+{% for entry in site.data.glossary %}- [{{ entry[0] }}]
+{% endfor %}
+
+{% for entry in site.data.glossary %}[{{ entry[0] }}]: /glossary/?term={{ entry[0] }}
+{: class="glossLink" data-content="{{ entry[1] | markdownify | strip_html | strip | truncatewords: 50, "..."}}" data-trigger="hover" id="popoverData{{ forloop.index }}" rel="popover" data-placement="bottom" data-original-title="Definition of: {{ entry[0]}}"}
 {% endfor %}
