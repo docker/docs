@@ -12,6 +12,10 @@ if (current[0]) {
       current[0].scrollIntoView(true);
       body[0].scrollIntoView(true);
     }
+    // library hack
+    if (document.location.pathname.indexOf("/samples/") > -1){
+      $(".currentPage").closest("ul").addClass("in");
+    }
   }
 
 function highlightRightNav(heading)
