@@ -364,22 +364,31 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
-> **Tip**: Shared drives are only required for volume mounting
+> Tips on shared drives and permissions
+>
+> * Shared drives are only required for volume mounting
 > [Linux containers](#switch-between-windows-and-linux-containers), and not for
 > Windows containers. For Linux containers, you need to share the drive where
 > your project is located (i.e., where the Dockerfile and volume are located).
 > Runtime errors such as file not found or cannot start service may indicate
 > shared drives are needed. (See also
 > [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
+>
+> * You cannot control (`chmod`) permissions on shared volumes for deployed containers. Docker for Windows sets permissions to a default value of
+[0770](http://permissions-calculator.org/decode/0770/) (read, write, execute permissions for
+`user` and `group`, none for other). This is not configurable. See the
+troubleshooting topic [Permissions errors on data directories for shared
+volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes)
+for workarounds and more detail.
+>
+> * You can share local drives with your _containers_ but not with
+> Docker Machine nodes. See
+> [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
+> in the FAQs.
 
 See also
 [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
 in Troubleshooting.
-
-> **Note**: You can share local drives with your _containers_ but not with
-> Docker Machine nodes. See
-> [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
-> in the FAQs.
 
 #### Firewall rules for shared drives
 
