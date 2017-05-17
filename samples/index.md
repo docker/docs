@@ -1,11 +1,6 @@
 ---
 title: Samples
-notoc: true
 ---
-
-## Docker samples
-
-The following samples were developed by Docker and the Docker community.
 
 {% assign labsbase = "https://github.com/docker/labs/tree/master" %}
 
@@ -28,6 +23,17 @@ repository]({{ labsbase }}).
 | [Docker for ASP.NET and Windows containers]({{ labsbase }}/windows/readme.md){: target="_blank"} | Docker supports Windows containers, too! Learn how to run ASP.NET, SQL Server, and more in these tutorials. |
 | [Docker Security]({{ labsbase }}/security/README.md){: target="_blank"} | How to take advantage of a Docker security features. |
 | [Building a 12-factor application with Docker]({{ labsbase}}/12factor){: target="_blank"} | Use Docker to create an app that conforms to Heroku's "12 factors for cloud-native applications." |
+
+## Library references
+
+These docs are imported from the
+[the official Docker Library docs](https://github.com/docker-library/docs/),
+and help you use of some of the most popular software that has been
+"Dockerized."
+
+| Software | Description |
+{% for thisPage in site.pages %}{% if thisPage.url contains "/samples/" and thisPage.url != "/samples/" %}| [{{ thisPage.title }}]({{ thisPage.url }}) | {% capture shortxt %}{% include_relative library/{{ thisPage.repo }}/README-short.txt %}{% endcapture %}{{ shortxt | strip }} |
+{% endif %}{% endfor %}
 
 ## Sample applications
 
