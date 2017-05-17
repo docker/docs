@@ -136,7 +136,7 @@ isn't running (as we've only installed the Python library, and not Redis
 itself), we should expect that the attempt to use it here will fail and produce
 the error message.
 
-> *Note*: Accessing the name of the host when inside a container retrieves the
+> **Note**: Accessing the name of the host when inside a container retrieves the
 container ID, which is like the process ID for a running executable.
 
 ## Build the App
