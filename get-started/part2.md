@@ -183,9 +183,12 @@ But that message is coming from inside the container, which doesn't know you
 mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
 
-Use a web browser or a `curl` command in your shell, to see the content of the
-URLm, including "Hello World" text, the container ID, and the Redis error
-message.
+Go to that URL in a web browser to see the content of the URL, including "Hello
+World" text, the container ID, and the Redis error message.
+
+![](images/app-in-browser.png)
+
+You can also use the `curl` command in a shell to view the same content.
 
 ```bash
 $ curl http://localhost:4000
@@ -226,8 +229,8 @@ docker stop 1fa4ab2cf395
 
 ## Share your image
 
-To demonstrate the portability of what we just created, let's upload our build
-and run it somewhere else. After all, you'll need to learn how to push to
+To demonstrate the portability of what we just created, let's upload our built
+image and run it somewhere else. After all, you'll need to learn how to push to
 registries to make deployment of containers actually happen.
 
 A registry is a collection of repositories, and a repository is a collection of
@@ -240,10 +243,12 @@ and pre-configured, but there are many public ones to choose from, and you can
 even set up your own private registry using [Docker Trusted
 Registry](/datacenter/dtr/2.2/guides/).
 
+### Log in with your Docker ID
+
 If you don't have a Docker account, sign up for one at
 [cloud.docker.com](https://cloud.docker.com/). Make note of your username.
 
-Log in your local machine.
+Log in to the Docker public registry on your local machine.
 
 ```shell
 docker login
