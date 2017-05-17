@@ -179,10 +179,18 @@ docker run -p 4000:80 friendlyhello
 ```
 
 You should see a notice that Python is serving your app at `http://0.0.0.0:80`.
-But that message coming from inside the container, which doesn't know you mapped
-port 80 of that container to 4000, making the correct URL
-`http://localhost:4000`. Go there, and you'll see the "Hello World" text, the
-container ID, and the Redis error message.
+But that message is coming from inside the container, which doesn't know you
+mapped port 80 of that container to 4000, making the correct URL
+`http://localhost:4000`.
+
+Use a web browser or a `curl` command in your shell, to see the content of the
+URLm, including "Hello World" text, the container ID, and the Redis error
+message.
+
+```bash
+$ curl http://localhost:4000
+<h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
+```
 
 > **Note**: This port remapping of `4000:80` is to demonstrate the difference
 between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
@@ -223,9 +231,9 @@ and run it somewhere else. After all, you'll need to learn how to push to
 registries to make deployment of containers actually happen.
 
 A registry is a collection of repositories, and a repository is a collection of
-images -- sort of like a GitHub repository, except the code is already built. An
-account on a registry can create many repositories. The `docker` CLI is
-preconfigured to use Docker's public registry by default.
+images &#8212; sort of like a GitHub repository, except the code is already
+built. An account on a registry can create many repositories. The `docker` CLI
+is preconfigured to use Docker's public registry by default.
 
 > **Note**: We'll be using Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
@@ -241,30 +249,80 @@ Log in your local machine.
 docker login
 ```
 
-Now, publish your image. The notation for associating a local image with a
-repository on a registry, is `username/repository:tag`. The `:tag` is optional,
-but recommended; it's the mechanism that registries use to give Docker images a
-version. So, putting all that together, enter your username, and repo
-and tag names, so your existing image will upload to your desired destination:
+### Tag the image
+
+The notation for associating a local image with a repository on a registry is
+`username/repository:tag`. The tag is optional, but recommended, since it is
+the mechanism that registries use to give Docker images a version. Give the
+repository and tag meaningful names for the context, such as
+`get-started:part1`. This will put the image in the `get-started` repository and
+tag it as `part1`.
+
+Now, put it all together to tag the image. Run `docker tag image` with your
+username, repository, and tag names so that the image will upload to your
+desired destination. The syntax of the command is:
 
 ```shell
-docker tag friendlyhello username/repository:tag
+docker tag image username/repository:tag
 ```
 
-Upload your tagged image:
+For example:
+
+```shell
+docker tag friendlyhello john/get-started:part1
+```
+
+Run `docker images` to see your newly tagged image.
+
+```shell
+$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
+john/get-started         part1               d9e555c53008        3 minutes ago       195MB
+python                   2.7-slim            1c7128a655f6        5 days ago          183MB
+...
+```
+
+### Publish the image
+
+Upload your tagged image to the repository:
 
 ```shell
 docker push username/repository:tag
 ```
 
-Once complete, the results of this upload are publicly available. From now on,
-you can use `docker run` and run your app on any machine with this command:
+Once complete, the results of this upload are publicly available. If you log in
+to [Docker Hub](https://hub.docker.com/), you will see the new image there, with
+its pull command.
+
+### Pull and run the image from the remote repository
+
+From now on, you can use `docker run` and run your app on any machine with this
+command:
 
 ```shell
 docker run -p 4000:80 username/repository:tag
 ```
 
-> Note: If you don't specify the `:tag` portion of these commands,
+If the image isn't available locally on the machine, Docker will pull it from the repository.
+
+```shell
+$ docker run -p 4000:80 john/get-started:part1
+Unable to find image 'john/get-started:part1' locally
+part1: Pulling from orangesnap/get-started
+10a267c67f42: Already exists
+f68a39a6a5e4: Already exists
+9beaffc0cf19: Already exists
+3c1fe835fb6b: Already exists
+4c9f1fa8fcb8: Already exists
+ee7d8f576a14: Already exists
+fbccdcced46e: Already exists
+Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
+Status: Downloaded newer image for john/get-started:part1
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+```
+
+>  **Note**: If you don't specify the `:tag` portion of these commands,
   the tag of `:latest` will be assumed, both when you build and when you run
   images.
 
@@ -287,8 +345,8 @@ Here's [a terminal recording of what was covered on this page](https://asciinema
 
 <script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
 
-Here is a list of the basic commands from this page, and some related ones if
-you'd like to explore a bit before moving on.
+Here is a list of the basic Docker commands from this page, and some related
+ones if you'd like to explore a bit before moving on.
 
 ```shell
 docker build -t friendlyname .  # Create image using this directory's Dockerfile
