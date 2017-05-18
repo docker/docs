@@ -123,6 +123,20 @@ See also [Docker Engine API](/engine/api.md) and the Docker for Windows forums
 topic
 [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
 
+### Can I change permissions on shared volumes for container-specific deployment requirements?
+
+No, at this point, Docker for Windows does not enable you to control (`chmod`)
+the Unix-style permissions on [shared
+volumes](/docker-for-windows/index.md#shared-drives) for deployed containers,
+but rather sets permissions to a default value of
+[0770](http://permissions-calculator.org/decode/0770/) (`read`, `write`,
+`execute` permissions for `user` and `group`, none for other) which is not
+configurable.
+
+For workarounds and to learn more, please see [Permissions errors on data
+directories for shared
+volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+
 ### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
 Currently, `inotify` does not work on Docker for Windows. This is a known issue.
