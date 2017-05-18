@@ -46,7 +46,7 @@ $ # The environment variables have been unset.
 The output described above is intended for the shells `bash` and `zsh` (if
 you're not sure which shell you're using, there's a very good possibility that
 it's `bash`). However, these are not the only shells which Docker Machine
-supports. Depending of the environment you're running your command into we will print them for the proper system.
+supports. Depending of the environment you're running your command into, we will print them for the proper system.
  We support `bash`, `cmd`, `powershell` and `emacs`.
 
 If you are using `fish` and the `SHELL` environment variable is correctly set to
@@ -63,8 +63,8 @@ set -x DOCKER_MACHINE_NAME overlay
 ```
 
 If you are on Windows and using either PowerShell or `cmd.exe`, `docker-machine env`
- Docker Machine should now detect your shell automatically. If the automagic detection does not work you
-  can still override it using the `--shell` flag for `docker-machine env`.
+ Docker Machine should now detect your shell automatically. If the automatic detection does not work, you
+ can still override it using the `--shell` flag for `docker-machine env`.
 
 For PowerShell:
 
