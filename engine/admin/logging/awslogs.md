@@ -97,7 +97,11 @@ $ docker run --log-driver=awslogs \
 ### aws-datetime-format
 
 The `aws-datetime-format` option defines a multiline start pattern in [Python
-`strftime` format](http://strftime.org). One example of a use case for using
+`strftime` format](http://strftime.org). A log message consists of a line that
+matches the pattern and any following lines that don't match the pattern. Thus
+the matched line is the delimiter between log messages.
+
+One example of a use case for using
 this format is for parsing output such as a stack dump, which might otherwise
 be logged in multiple entries. The correct pattern allows it to be captured in a
 single entry.
@@ -105,31 +109,121 @@ single entry.
 This option always takes precedence if both `awslogs-datetime-format` and
 `awslogs-multiline-pattern` are configured.
 
-For example:
+
+> **Note**:
+> Multiline logging performs regular expression parsing and matching of all log
+> messages, which may have a negative impact on logging performance.
+
+Consider the following log stream, where new log messages start with a
+timestamp:
+
+```none
+[May 01, 2017 19:00:01] A message was logged
+[May 01, 2017 19:00:04] Another multiline message was logged
+Some random message
+with some random words
+[May 01, 2017 19:01:32] Another message was logged
+```
+
+The format can be expressed as a `strftime` expression of
+`[%b %d, %Y %H:%M:%S]`, and the `awslogs-datetime-format` value can be set to
+that expression:
 
 ```bash
-$ docker run -it --rm \
-  --log-driver=awslogs \
-  --log-opt awslogs-group=test \
-  --log-opt awslogs-datetime-format='%Y-%m-%d' \
-  awslogtest:latest /test2.sh
+$ docker run --log-driver=awslogs \
+             --log-opt awslogs-region=us-east-1 \
+             --log-opt awslogs-group=myLogGroup \
+             --log-opt awslogs-datetime-format='[%b %d, %Y %H:%M:%S]' \
+             ...
 ```
+
+This will parse the logs into the following CloudWatch log events:
+
+```none
+# First event
+[May 01, 2017 19:00:01] A message was logged
+
+# Second event
+[May 01, 2017 19:00:04] Another multiline message was logged
+Some random message
+with some random words
+
+# Third event
+[May 01, 2017 19:01:32] Another message was logged
+```
+
+The following `strftime` codes are supported:
+
+| Code | Meaning                                                          | Example  |
+|:-----|:-----------------------------------------------------------------|:---------|
+| `%a` | Weekday abbreviated name.                                        | Mon      |
+| `%A` | Weekday full name.                                               | Monday   |
+| `%w` | Weekday as a decimal number where 0 is Sunday and 6 is Saturday. | 0        |
+| `%d` | Day of the month as a zero-padded decimal number.                | 08       |
+| `%b` | Month abbreviated name.                                          | Feb      |
+| `%B` | Month full name.                                                 | February |
+| `%m` | Month as a zero-padded decimal number.                           | 02       |
+| `%Y` | Year with century as a decimal number.                           | 2008     |
+| `%y` | Year without century as a zero-padded decimal number.            | 08       |
+| `%H` | Hour (24-hour clock) as a zero-padded decimal number.            | 19       |
+| `%I` | Hour (12-hour clock) as a zero-padded decimal number.            | 07       |
+| `%p` | AM or PM.                                                        | AM       |
+| `%M` | Minute as a zero-padded decimal number.                          | 57       |
+| `%S` | Second as a zero-padded decimal number.                          | 04       |
+| `%L` | Milliseconds as a zero-padded decimal number.                    | 123      |
+| `%f` | Microsecond as a zero-padded decimal number.                     | 000345   |
+| `%z` | UTC offset in the form +HHMM or -HHMM.                           | +1300    |
+| `%Z` | Time zone name.                                                  | PST      |
+| `%j` | Day of the year as a zero-padded decimal number.                 | 363      |
 
 ### aws-multiline-pattern
 
 The `aws-multiline-pattern` option defines a multiline start pattern using a
-regular expression. This option is ignored if `awslogs-datetime-format` is also
-configured.
+regular expression. A log message consists of a line that matches the pattern
+and any following lines that don't match the pattern. Thus the matched line is
+the delimiter between log messages.
 
-For example:
+This option is ignored if `awslogs-datetime-format` is also configured.
+
+> **Note**:
+> Multiline logging performs regular expression parsing and matching of all log
+> messages. This may have a negative impact on logging performance.
+
+For example, to process the following log stream where new log messages start with the pattern `INFO`:
+
+Consider the following log stream, where each log message should start with the
+patther `INFO`:
+
+```none
+INFO A message was logged
+INFO Another multiline message was logged
+     Some random message
+INFO Another message was logged
+```
+
+Use the following value for `awslogs-multiline-pattern`, to match lines that
+start with `INFO`.
 
 ```bash
-$ docker run -it --rm \
-  --log-driver=awslogs \
-  --log-opt awslogs-group=test \
-  --log-opt awslogs-multiline-pattern='^ABCD' \
-  awslogtest:latest /test1.sh
+$ docker run --log-driver=awslogs \
+             --log-opt awslogs-region=us-east-1 \
+             --log-opt awslogs-group=myLogGroup \
+             --log-opt awslogs-multiline-pattern='^INFO' \
+             ...
+```
 
+This will parse the logs into the following CloudWatch log events:
+
+```none
+# First event
+INFO A message was logged
+
+# Second event
+INFO Another multiline message was logged
+     Some random message
+
+# Third event
+INFO Another message was logged
 ```
 
 ### tag
