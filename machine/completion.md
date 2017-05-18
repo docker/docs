@@ -1,6 +1,6 @@
 ---
 description: Install Machine command-line completion
-keywords: machine, docker, orchestration, cli,  reference
+keywords: machine, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
@@ -34,7 +34,7 @@ Completion will be available upon next login.
 
 ### Zsh
 
-Place the completion scripts in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`
+Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`
 
     mkdir -p ~/.zsh/completion
     curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/zsh/_docker > ~/.zsh/completion/_docker-machine
