@@ -48,7 +48,7 @@ can use in email or the forum to reference the upload.
 
 ### Permissions errors on data directories for shared volumes
 
-Docker for Windows sets permissions on shared volumes to a default value of
+Docker for Windows sets permissions on [shared volumes](/docker-for-windows/index.md#shared-drives) to a default value of
 [0770](http://permissions-calculator.org/decode/0770/) (`read`, `write`,
 `execute` permissions for `user` and `group`, none for other). If you are
 working with applications that require permissions different than this default,
@@ -58,17 +58,21 @@ you will likely get errors similar to the following.
 Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0770 so that the directory cannot be listed by other users.
 ```
 
-The default permissions on shared volumes are not configurable. If you are working with applications that require permissions different from the
-shared volume defaults at container runtime, you need to either use
-non-host-mounted volumes or find a way to make the applications work with the
-default file permissions.
+The default permissions on shared volumes are not configurable. If you are
+working with applications that require permissions different from the shared
+volume defaults at container runtime, you need to either use non-host-mounted
+volumes or find a way to make the applications work with the default file
+permissions.
 
 Docker for Windows currrently implements host-mounted volumes based on the
 [Microsoft SMB
 protocol](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx),
 which does not support fine-grained, `chmod` control over these permissions.
 
-For more background and discussion, please see the GitHub issue [Controlling
+See also, [Can I change permissions on shared volumes for container-specific
+deployment
+requirements?](/docker-for-windows/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+in the FAQs, and for more of an explanation, the GitHub issue, [Controlling
 Unix-style perms on directories passed through from shared Windows
 drives](https://github.com/docker/docker.github.io/issues/3298).
 

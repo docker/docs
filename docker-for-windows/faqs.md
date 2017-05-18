@@ -126,8 +126,9 @@ topic
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 No, at this point, Docker for Windows does not enable you to control (`chmod`)
-the Unix-style permissions on shared volumes for deployed containers, but rather
-sets permissions to a default value of
+the Unix-style permissions on [shared
+volumes](/docker-for-windows/index.md#shared-drives) for deployed containers,
+but rather sets permissions to a default value of
 [0770](http://permissions-calculator.org/decode/0770/) (`read`, `write`,
 `execute` permissions for `user` and `group`, none for other) which is not
 configurable.
