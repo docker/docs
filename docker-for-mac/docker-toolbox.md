@@ -12,10 +12,10 @@ coexist.
 
 ## The Docker Toolbox environment
 
-Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in
+Docker Toolbox installs `docker`, `docker-compose`, and `docker-machine` in
 `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time,
 Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`,
-running the `boot2docker` Linux distribution, with  [Docker Engine](/engine/)
+running the `boot2docker` Linux distribution, with [Docker Engine](/engine/)
 with certificates located on your Mac at
 `$HOME/.docker/machine/machines/default`.
 
@@ -158,7 +158,7 @@ is running a different version of server.
     default          *        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.1
     docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.10.0
 
-You might also run into a similar situation with Docker Universal Control Plan (UCP).
+You might also run into a similar situation with Docker Universal Control Plane (UCP).
 
 There are a few ways to address this problem and keep using your older machines. One solution is to use a version manager like [DVM](https://github.com/getcarina/dvm).
 
