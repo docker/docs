@@ -67,7 +67,7 @@ If you already have your AWS account connected to Docker Cloud and used the lega
 5.  On the next page, click **Custom Policy** and click **Select**.
 6.  On the **Policy Editor** page that appears, give the policy a name like `dockercloud-swarm-policy`.
 7.  In the **Policy Document** section, copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
-8.  Click **Create Policy**.
+8.  Click **Apply Policy**.
 9.  Select and copy the **Role ARN** on the role screen.
     It shouldn't have changed, but you'll use it to re-link your account.
 
