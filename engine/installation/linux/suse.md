@@ -1,9 +1,9 @@
 ---
-description: Instructions for installing Docker on OpenSUSE and SLES
+description: Instructions for installing Docker on SLES
 keywords: Docker, Docker documentation, requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
-title: Get Docker for and SLES
+title: Get Docker for SLES
 ---
 
 {% assign minor-version = "17.03" %}
@@ -35,6 +35,8 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 ### OS requirements
 
 To install Docker, you need the 64-bit version of SLES 12.x.
+
+Docker is not supported on OpenSUSE.
 
 ### Uninstall old versions
 
