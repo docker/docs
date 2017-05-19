@@ -569,7 +569,7 @@ These Official Repositories have exemplary `Dockerfile`s:
 * [Go](https://hub.docker.com/_/golang/)
 * [Perl](https://hub.docker.com/_/perl/)
 * [Hy](https://hub.docker.com/_/hylang/)
-* [Rails](https://hub.docker.com/_/rails)
+* [Ruby](https://hub.docker.com/_/ruby/)
 
 ## Additional resources:
 
