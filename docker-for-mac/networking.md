@@ -78,11 +78,10 @@ There are two scenarios that the above limitations will affect:
 
 #### I want to connect from a container to a service on the host
 
-The Mac has a changing IP address (or none if you have no network access). Our
-current recommendation is to attach an unused IP to the `lo0` interface on the
-Mac; for example: `sudo ifconfig lo0 alias 10.200.10.1/24`, and make sure that
-your service is listening on this address or `0.0.0.0` (ie not `127.0.0.1`).
-Then containers can connect to this address.
+The Mac has a changing IP address (or none if you have no network access). From
+17.06 onwards our recommendation is to connect to the special Mac-only DNS
+name `docker.for.mac.localhost` which will resolve to the internal IP address
+used by the host.
 
 #### I want to connect to a container from the Mac
 
