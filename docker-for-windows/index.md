@@ -405,7 +405,7 @@ machine that runs Linux containers.
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
 do not need to open port 445 on any other network. By default, allow connections
-to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
+to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine). If the firewall rules appear to be open, consider [reinstalling the File and Print Sharing service on the virtual network adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
 
 ### Advanced
 
