@@ -89,6 +89,33 @@ First, Compose will build the image for the `web` service using the `Dockerfile`
       drwxr-xr-x   3 root  root   102 Feb 13 23:43 vendor
 
 
+TBD here is the list when you leave off `skip-bundle`:
+
+```
+$ ls -l
+total 64
+-rw-r--r--   1 vmb  staff   223 May 19 11:05 Dockerfile
+-rw-r--r--   1 vmb  staff  1738 May 19 11:06 Gemfile
+-rw-r--r--   1 vmb  staff  4306 May 19 11:07 Gemfile.lock
+-rw-r--r--   1 vmb  staff   374 May 19 11:06 README.md
+-rw-r--r--   1 vmb  staff   227 May 19 11:06 Rakefile
+drwxr-xr-x  10 vmb  staff   340 May 19 11:06 app
+drwxr-xr-x   8 vmb  staff   272 May 19 11:07 bin
+drwxr-xr-x  14 vmb  staff   476 May 19 11:06 config
+-rw-r--r--   1 vmb  staff   130 May 19 11:06 config.ru
+drwxr-xr-x   3 vmb  staff   102 May 19 11:06 db
+-rw-r--r--   1 vmb  staff   212 May 19 11:06 docker-compose.yml
+drwxr-xr-x   5 vmb  staff   170 May 16 15:05 getstart
+drwxr-xr-x   4 vmb  staff   136 May 19 11:06 lib
+drwxr-xr-x   3 vmb  staff   102 May 19 11:06 log
+drwxr-xr-x   9 vmb  staff   306 May 19 11:06 public
+drwxr-xr-x  20 vmb  staff   680 May 19 11:04 rails
+drwxr-xr-x   2 vmb  staff    68 May 19 11:05 rails-new
+drwxr-xr-x   9 vmb  staff   306 May 19 11:06 test
+drwxr-xr-x   4 vmb  staff   136 May 19 11:06 tmp
+drwxr-xr-x   3 vmb  staff   102 May 19 11:06 vendor
+```
+
 If you are running Docker on Linux, the files `rails new`  created are owned by
 root. This happens because the container runs as the root user. Change the
 ownership of the new files.
@@ -152,7 +179,7 @@ Finally, you need to create the database. In another terminal, run:
 Here is an example of the output from that command:
 
 ```none
-victoriabialas at snapair in ~/sandbox/rails
+vmb at snapair in ~/sandbox/rails
 $ docker-compose run web rake db:create
 Starting rails_db_1 ... done
 Created database 'myapp_development'
@@ -174,7 +201,7 @@ To stop the application, run `docker-compose down` your project directory. This
 is a clean way to stop the application.
 
 ```
-victoriabialas at snapair in ~/sandbox/rails
+vmb at snapair in ~/sandbox/rails
 $ docker-compose down
 Stopping rails_web_1 ... done
 Stopping rails_db_1 ... done
@@ -193,6 +220,10 @@ the file `tmp/pids/server.pid`, and then re-start the application with
 `docker-compose up`.
 
 To restart the application, run `docker-compose up` in the project directory.
+
+Finally, you need to create the database. In another terminal, run:
+
+    docker-compose run web rake db:create
 
 
 ## More Compose documentation
