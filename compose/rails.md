@@ -42,7 +42,7 @@ one's Docker image (the database just runs on a pre-made PostgreSQL image, and
 the web app is built from the current directory), and the configuration needed
 to link them together and expose the web app's port.
 
-    version: '2'
+    version: '3'
     services:
       db:
         image: postgres
@@ -114,18 +114,20 @@ align with the defaults set by the `postgres` image.
 
 Replace the contents of `config/database.yml` with the following:
 
-    development: &default
-      adapter: postgresql
-      encoding: unicode
-      database: myapp_development
-      pool: 5
-      username: postgres
-      password:
-      host: db
+```none
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: myapp_development
+  pool: 5
+  username: postgres
+  password:
+  host: db
 
-    test:
-      <<: *default
-      database: myapp_test
+test:
+  <<: *default
+  database: myapp_test
+```
 
 You can now boot the app with:
 
@@ -147,15 +149,50 @@ Finally, you need to create the database. In another terminal, run:
 
     docker-compose run web rake db:create
 
-That's it. Your app should now be running on port 3000 on your Docker daemon. If you're using [Docker Machine](/machine/overview.md), then `docker-machine ip MACHINE_VM` returns the Docker host IP address.
+Here is an example of the output from that command:
+
+```none
+victoriabialas at snapair in ~/sandbox/rails
+$ docker-compose run web rake db:create
+Starting rails_db_1 ... done
+Created database 'myapp_development'
+Created database 'myapp_test'
+```
+
+That's it. Your app should now be running on port 3000 on your Docker daemon. On
+Docker for Mac and Docker for Windows, go to `http://localhost:3000` on a web
+browser to see the Rails Welcome. If you are using [Docker
+Machine](/machine/overview.md), then `docker-machine ip MACHINE_VM` returns the
+Docker host IP address, to which you can append the port
+(`<Docker-Host-IP>:3000`).
 
 ![Rails example](images/rails-welcome.png)
 
->**Note**: If you stop the example application and attempt to restart it, you might get the
-following error: `web_1 | A server is already running. Check
-/myapp/tmp/pids/server.pid.` One way to resolve this is to delete the file
-`tmp/pids/server.pid`, and then re-start the application with `docker-compose
-up`.
+### Stopping, starting, and rebuilding the application
+
+To stop the application, run `docker-compose down` your project directory. This
+is a clean way to stop the application.
+
+```
+victoriabialas at snapair in ~/sandbox/rails
+$ docker-compose down
+Stopping rails_web_1 ... done
+Stopping rails_db_1 ... done
+Removing rails_web_run_1 ... done
+Removing rails_web_1 ... done
+Removing rails_db_1 ... done
+Removing network rails_default
+
+```
+
+You can also stop the application with `Ctrl-C` in the same shell in which you
+executed the `docker-compose up`.  If you stop the app this way, and attempt to
+restart it, you might get the following error: `web_1 | A server is already
+running. Check /myapp/tmp/pids/server.pid.` One way to resolve this is to delete
+the file `tmp/pids/server.pid`, and then re-start the application with
+`docker-compose up`.
+
+To restart the application, run `docker-compose up` in the project directory.
 
 
 ## More Compose documentation
