@@ -1,8 +1,13 @@
 ---
 description: Learn how select the proper storage driver for your container.
-keywords: container, storage, driver, AUFS, btfs, devicemapper, zvfs, overlay, overlay2
+keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2
 title: Docker storage drivers
 ---
+
+Ideally, very little data is written to a container's writable layer, and you
+use Docker volumes to write data. However, some workloads require you to be able
+to write to the container's writable layer. This is where storage drivers come
+in.
 
 Docker uses a series of different storage drivers to manage the filesystems
 within images and running containers. These storage drivers are different from

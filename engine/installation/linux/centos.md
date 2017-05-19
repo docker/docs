@@ -31,14 +31,14 @@ URL when you see the placeholder text `<DOCKER-EE-URL>`.
 To learn more about Docker EE, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
-### OS requirements
-
-To install Docker, you need the 64-bit version of CentOS 7.
-
 In addition, you must use the `devicemapper` storage driver if you use Docker EE
 or CS-Engine. On production systems, you must use `direct-lvm` mode, which
 requires one or more dedicated block devices. Fast storage such as solid-state
 media (SSD) is recommended.
+
+### OS requirements
+
+To install Docker, you need the 64-bit version of CentOS 7.
 
 ### Uninstall old versions
 

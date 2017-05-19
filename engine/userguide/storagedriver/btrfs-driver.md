@@ -16,14 +16,14 @@ easily combine multiple physical block devices into a single Btrfs filesystem.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**: The `btrfs` storage driver is only supported on Docker CE on Ubuntu,
-> and Docker EE / CS Engine on SLES.
+> **Note**: The `btrfs` storage driver is only supported on Docker CE on Ubuntu
+> or Debian, and Docker EE / CS Engine on SLES.
 
 ## Prerequisites
 
 `btrfs` is supported if you meet the following prerequisites:
 
-- **Docker CE**. For Docker CE, `btrfs` is only supported on Ubuntu.
+- **Docker CE**: For Docker CE, `btrfs` is only recommended on Ubuntu or Debian.
 
 - **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
   See the
@@ -229,7 +229,7 @@ same as reads performed against a subvolume.
 - **Modifying existing files**: Updating an existing file in a container is a copy-on-write
   operation (*redirect-on-write* is the Btrfs terminology). The original data is
   read from the layer where the file currently exists, and only the modified
-  blocks are written into the container's writable layer. Next, the Btrfs driver\
+  blocks are written into the container's writable layer. Next, the Btrfs driver
   updates the filesystem metadata in the snapshot to point to this new data.
   This behavior incurs very little overhead.
 
@@ -245,7 +245,13 @@ performance.
 ## Btrfs and Docker performance
 
 There are several factors that influence Docker's performance under the `btrfs`
- storage driver.
+storage driver.
+
+> **Note**: Many of these factors are mitigated by using Docker volumes for
+> write-heavy workloads, rather than relying on storing data in the container's
+> writable layer. However, in the case of Btrfs, Docker volumes will still suffer
+> from these draw-backs unless `/var/lib/docker/volumes/` is **not** backed by
+> Btrfs.
 
 - **Page caching**. Btrfs does not support page cache sharing. This means that
   each process accessing the same file copies the file into the Docker hosts's

@@ -27,13 +27,13 @@ OverlayFS is supported if you meet the following prerequisites:
   for a list of supported storage drivers for each Docker EE platform.
 
 - Version 4.0 or higher of the Linux kernel. If you use an older kernel, you
-  will need to use the `overlay1` driver, which is not recommended.
+  will need to use the `overlay` driver, which is not recommended.
 
 - The following backing filesystems are supported:
-  - `ext4`
-  - `xfs` but only with `d_type=true` enabled. Use `xfs_info` to verify that
-    the `ftype` option is set to `1`. To format an `xfs` filesystem correctly,
-    use the flag `-n ftype=1`.
+  - `ext4` (RHEL 7.1 only)
+  - `xfs` (RHEL 7.2 and higher), but only with `d_type=true` enabled. Use
+    `xfs_info` to verify that the `ftype` option is set to `1`. To format an
+    `xfs` filesystem correctly, use the flag `-n ftype=1`.
 
 - Changing the storage driver will make any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
@@ -78,6 +78,19 @@ Before following this procedure, you must first meet all the
     ```
 
     If you need to use the legacy `overlay` driver, specify it instead.
+
+    To use `overlay2` on CentOS (Docker CE only), you must also set the storage
+    option `overlay2.override_kernel_check`. In this case the `daemon.json`
+    would look like this:
+
+    ```json
+    {
+      "storage-driver": "overlay2",
+      "storage-opts": [
+        "overlay2.override_kernel_check=true"
+      ]
+    }
+    ```
 
     Docker will not start if the `daemon.json` file contains badly-formed JSON.
 

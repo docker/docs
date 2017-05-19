@@ -4,6 +4,11 @@ keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
 title: Select a storage driver
 ---
 
+Ideally, very little data is written to a container's writable layer, and you
+use Docker volumes to write data. However, some workloads require you to be able
+to write to the container's writable layer. This is where storage drivers come
+in.
+
 Docker supports several different storage drivers, using a pluggable
 architecture. The storage driver controls how images and containers are stored
 and managed on your Docker host.
@@ -57,6 +62,11 @@ configurations work on recent versions of the Linux distribution:
 | Docker CE on Debian  | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`                                 |
 | Docker CE on CentOS  | `devicemapper`                                                                                 |
 | Docker CE on Fedora  | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental)        |
+
+When in doubt, the best all-around configuration is to use a modern Linux
+distribution with a kernel that supports the `overlay2` storage driver, and to
+use Docker volumes for write-heavy workloads instead of relying on writing data
+to the container's writable layer.
 
 ### Docker for Mac and Docker for Windows
 
