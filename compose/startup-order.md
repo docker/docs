@@ -34,7 +34,7 @@ script:
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
 
-    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
+    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
 
         version: "2"
         services:
