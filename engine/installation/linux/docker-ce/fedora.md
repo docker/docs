@@ -1,14 +1,15 @@
 ---
-description: Instructions for installing Docker on Fedora
-keywords: Docker, Docker documentation, requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
+description: Instructions for installing Docker CE on Fedora
+keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/fedora/
-title: Get Docker for Fedora
+- /engine/installation/linux/fedora/
+title: Get Docker CE for Fedora
 ---
 
 {% assign minor-version = "17.03" %}
 
-To get started with Docker on Fedora, make sure you
+To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
 
@@ -60,9 +61,9 @@ You can install Docker CE in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install and update Docker from
-the repository.
+Before you install Docker CE for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker CE
+from the repository.
 
 #### Set up the repository
 
@@ -117,7 +118,7 @@ the repository.
     `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
     key.
 
-2.  Install the latest version of Docker, or go to the next step to install a
+2.  Install the latest version of Docker CE, or go to the next step to install a
     specific version.
 
     ```bash
@@ -131,7 +132,7 @@ the repository.
     > which may not be appropriate for your stability needs.
     {:.warning}
 
-3.  On production systems, you should install a specific version of Docker
+3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
@@ -140,7 +141,7 @@ the repository.
     > source packages as well, omit the `.x86_64` from the package name.
 
     ```bash
-    $ dnf list docker-ce.x86_64  --showduplicates |sort -r
+    $ dnf list docker-ce.x86_64  --showduplicates | sort -r
 
     docker-ce.x86_64  {{ minor-version }}.0.fc24                               docker-ce-stable  
     ```
@@ -173,13 +174,15 @@ the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
-users to run Docker commands and for other optional configuration steps.
+Docker CE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to
+[Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker, first run `sudo dnf makecache fast`, then follow the
+To upgrade Docker CE, first run `sudo dnf makecache fast`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
@@ -187,7 +190,7 @@ to install.
 
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You will need to download
-a new file each time you want to upgrade Docker.
+a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
     version of Fedora. Go to `x86_64/stable/Packages/`
@@ -196,7 +199,7 @@ a new file each time you want to upgrade Docker.
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the URL to `edge`.
 
-2.  Install Docker, changing the path below to the path where you downloaded
+2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
@@ -224,13 +227,13 @@ Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker
+#### Upgrade Docker CE
 
-To upgrade Docker, download the newer package file and repeat the
+To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 
-## Uninstall Docker
+## Uninstall Docker CE
 
 1.  Uninstall the Docker package:
 
@@ -250,6 +253,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).

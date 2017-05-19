@@ -1,15 +1,16 @@
 ---
-description: Instructions for installing Docker on Debian
-keywords: Docker, Docker documentation, requirements, apt, installation, debian, install, uninstall, upgrade, update
+description: Instructions for installing Docker CE on Debian
+keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
-title: Get Docker for Debian
+- /engine/installation/linux/debian/
+title: Get Docker CE for Debian
 ---
 
 {% assign minor-version = "17.03" %}
 
-To get started with Docker on Debian, make sure you
+To get started with Docker CE on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
 
@@ -23,7 +24,7 @@ and distributions for different Docker editions, see
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Debian or
+To install Docker CE, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
 - Stretch (testing)
@@ -39,7 +40,7 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine
+$ sudo apt-get remove docker docker-engine docker.io
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -166,8 +167,8 @@ from the repository.
 
 #### Install Docker CE
 
-> **NOTE**: On Debian for ARM you can continue following this step. For Raspbian,
-  scroll down to follow its specific steps.
+> **Note**: On Debian for ARM you can continue following this step. For Raspbian,
+> scroll down to follow its specific steps.
 
 1.  Update the `apt` package index.
 
@@ -175,10 +176,8 @@ from the repository.
     $ sudo apt-get update
     ```
 
-2.  Install the latest version of Docker, or go to the next step to install a
+2.  Install the latest version of Docker CE, or go to the next step to install a
     specific version. Any existing installation of Docker is replaced.
-
-    Use this command to install the latest version of Docker:
 
     ```bash
     $ sudo apt-get install docker-ce
@@ -191,7 +190,7 @@ from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning}
 
-3.  On production systems, you should install a specific version of Docker
+3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. This output is truncated. List the
     available versions:
 
@@ -240,7 +239,7 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker, first run `sudo apt-get update`, then follow the
+To upgrade Docker CE, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
@@ -271,21 +270,21 @@ installing Docker.
     ```bash
     $ sudo apt-get update
     ```
-2.  Install the latest version of Docker, or go to the next step to install a
-    specific version. Any existing installation of Docker is replaced.
+
+2.  Install the latest version of Docker CE, or go to the next step to install a
+    specific version. Any existing installation of Docker CE is replaced.
 
     Use this command to install the latest version of Docker:
 
     ```bash
     $ sudo apt-get install docker-engine
     ```
-    > **NOTE**: By default, Docker on Raspbian is Docker Community Edition, so
-    > there is no need to specify docker-ce.
+    > **Note**: By default, Docker on Raspbian is Docker Community Edition.
 
-    > **NOTE**: If `curl -sSL https://get.docker.com | sh` isn't used,
+    > **Note**: If `curl -sSL https://get.docker.com | sh` isn't used,
     > then docker won't have auto-completion! You'll have to add it manually.
 
-3.  Verify that Docker is installed correctly by running the `hello-world`
+3.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -316,8 +315,8 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 a new file each time you want to upgrade Docker.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
-    choose your Debian version, browse to `stable/pool/stable/`, choose either
-    `amd64` or `armhf`,and download the `.deb` file for the Docker version you
+    choose your Debian version, browse to `pool/stable/`, choose either
+    `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
     want to install and for your version of Debian.
 
     > **Note**: To install an **edge**  package, change the word
@@ -348,14 +347,14 @@ commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
-#### Upgrade Docker
+#### Upgrade Docker CE
 
 To upgrade Docker, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
-## Uninstall Docker
+## Uninstall Docker CE
 
-1.  Uninstall the Docker package:
+1.  Uninstall the Docker CE package:
 
     ```bash
     $ sudo apt-get purge docker-ce
@@ -373,6 +372,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).

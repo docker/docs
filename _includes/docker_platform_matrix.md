@@ -1,16 +1,16 @@
 {% assign green-check = '![yes](/engine/installation/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-
-| Platform                                                           | Docker CE x86_64  | Docker CE ARM     | Docker EE         |
-|:-------------------------------------------------------------------|:------------------|:------------------|:------------------|
-| [Ubuntu](/engine/installation/linux/ubuntu.md)                     | {{ green-check }} | {{ green-check }} | {{ green-check }} |
-| [Debian](/engine/installation/linux/debian.md)                     | {{ green-check }} | {{ green-check }} |                   |
-| [Red Hat Enterprise Linux](/engine/installation/linux/rhel.md)     |                   |                   | {{ green-check }} |
-| [CentOS](/engine/installation/linux/centos.md)                     | {{ green-check }} |                   | {{ green-check }} |
-| [Fedora](/engine/installation/linux/fedora.md)                     | {{ green-check }} |                   |                   |
-| [Oracle Linux](/engine/installation/linux/oracle.md)               |                   |                   | {{ green-check }} |
-| [SUSE Linux Enterprise Server](/engine/installation/linux/suse.md) |                   |                   | {{ green-check }} |
-| [Microsoft Windows Server 2016](/docker-ee-for-windows/install/)   |                   |                   | {{ green-check }} |
-| [Microsoft Windows 10](/docker-for-windows/)                       | {{ green-check }} |                   |                   |
-| [macOS](/docker-for-mac/)                                          | {{ green-check }} |                   |                   |
-| [Microsoft Azure](/docker-for-azure/)                              | {{ green-check }} |                   | {{ green-check }} |
-| [Amazon Web Services](/docker-for-aws/)                            | {{ green-check }} |                   | {{ green-check }} |
+{% assign install-prefix = '/engine/installation/linux' %}
+| Platform                                                              | Docker CE x86_64                                             | Docker CE ARM                                                 | Docker EE                                                    |
+|:----------------------------------------------------------------------|:-------------------------------------------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------|
+| [Ubuntu]({{ install-prefix }}/ubuntu.md)                              | [{{ green-check }}]({{ install-prefix }}/docker-ce/ubuntu.md)| [{{ green-check }}]({{ install-prefix }}/docker-ce/ubuntu.md) | [{{ green-check }}]({{ install-prefix }}/docker-ee/ubuntu.md)|
+| [Debian]({{ install-prefix }}/docker-ce/debian.md)                    | [{{ green-check }}]({{ install-prefix }}/docker-ce/debian.md)| [{{ green-check }}]({{ install-prefix }}/docker-ce/debian.md) |                                                              |
+| [Red Hat Enterprise Linux]({{ install-prefix }}/docker-ee/rhel.md)    |                                                              |                                                               | [{{ green-check }}]({{ install-prefix }}/docker-ee/rhel.md)  |
+| [CentOS]({{ install-prefix }}/centos.md)                              | [{{ green-check }}]({{ install-prefix }}/docker-ce/centos.md)|                                                               | [{{ green-check }}]({{ install-prefix }}/docker-ee/centos.md)|
+| [Fedora]({{ install-prefix }}/docker-ce/fedora.md)                    | [{{ green-check }}]({{ install-prefix }}/docker-ce/fedora.md)|                                                               |                                                              |
+| [Oracle Linux]({{ install-prefix }}/docker-ee/oracle.md)              |                                                              |                                                               | [{{ green-check }}]({{ install-prefix }}/docker-ee/oracle.md)|
+| [SUSE Linux Enterprise Server]({{ install-prefix }}/docker-ee/suse.md)|                                                              |                                                               | [{{ green-check }}]({{ install-prefix }}/docker-ee/suse.md)  |
+| [Microsoft Windows Server 2016](/docker-ee-for-windows/install/)      |                                                              |                                                               | [{{ green-check }}](/docker-ee-for-windows/install/)         |
+| [Microsoft Windows 10](/docker-for-windows/)                          | [{{ green-check }}](/docker-for-windows/)                    |                                                               |                                                              |
+| [macOS](/docker-for-mac/)                                             | [{{ green-check }}](/docker-for-mac/)                        |                                                               |                                                              |
+| [Microsoft Azure](/docker-for-azure/)                                 | [{{ green-check }}](/docker-for-azure/)                      |                                                               | [{{ green-check }}](/docker-for-azure/)                      |
+| [Amazon Web Services](/docker-for-aws/)                               | [{{ green-check }}](/docker-for-aws/)                        |                                                               | [{{ green-check }}](/docker-for-aws/)                        |
