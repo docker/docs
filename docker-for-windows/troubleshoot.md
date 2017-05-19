@@ -6,7 +6,7 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-Here is information about how to diagnose and troubleshoot problems, send logs
+Here is information about how to diagnose and troubleshoot problems, send logs,
 and communicate with the Docker for Windows team, use our forums and Knowledge
 Hub, browse and log issues on GitHub, and find workarounds for known problems.
 
@@ -185,7 +185,7 @@ RUN commands in Docker files.
 Docker containers and `docker build` run in a Unix environment, so files in
 containers must use Unix style line endings: `\n`, _not_ Windows style: `\r\n`.
 Keep this in mind when authoring files such as shell scripts using Windows
-tools, where the default is likely to be Windows style line endings.  These
+tools, where the default is likely to be Windows style line endings. These
 commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
@@ -241,7 +241,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note**:  Be sure to quit and then restart Docker for Windows before attempting to start containers.
+	> **Note**: Be sure to quit and then restart Docker for Windows before attempting to start containers.
 
 4.  Try to start the container again:
 
@@ -289,7 +289,7 @@ Containers](https://github.com/docker/labs/blob/master/windows/windows-container
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker for Windows. However, if you install Docker
-this way, you cannot develop or run Linux containers.  If you try to run a Linux
+this way, you cannot develop or run Linux containers. If you try to run a Linux
 container on the native Docker daemon, an error occurs:
 
   ```none
@@ -392,9 +392,9 @@ Nehalem based Mac Pros and so do newer generations of Intel processors.
 #### Typical failures we see with nested virtualization
 
 * Slow boot time of the Linux VM. If you look in the logs, you'll see
-some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds  to
+some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds to
 boot the Linux VM; roughly the time between the `Connected` log entry and the `*
-Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Window
+Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Windows
 VM, this may take considerably longer. We have a timeout of 60s or so. If the VM
 hasn't started by that time, we retry. If the retry fails we print an error. You
 may be able to work around this by providing more resources to the Windows VM.
@@ -426,8 +426,8 @@ We are currently investigating this issue.
 
 #### Networking issues on pre Beta 10 versions
 Docker for Windows Beta 10 and later fixed a number of issues around the
-networking setup.  If you still experience networking issue, this may be related
-to previous Docker for Windows installations.  In this case, please quit Docker
+networking setup. If you still experience networking issue, this may be related
+to previous Docker for Windows installations. In this case, please quit Docker
 for Windows and perform the following steps:
 
 ##### 1. Remove multiple `DockerNAT` VMswitches
@@ -527,11 +527,11 @@ For the `hello-world-nginx` example and others, Docker for Windows must be runni
 ### How to solve `port already allocated` errors
 
 If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated` or
-  `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
+ `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
 
 These errors are often caused by some other software on Windows using those
 ports. To discover the identity of this software, either use the `resmon.exe`
-GUI and click  "Network" and then "Listening Ports" or in a powershell use
+GUI and click "Network" and then "Listening Ports" or in a powershell use
 `netstat -aon | find /i "listening "` to discover the PID of the process
 currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
@@ -539,7 +539,7 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+**Some firewalls and anti-virus software might be incompatible with Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
