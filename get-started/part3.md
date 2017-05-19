@@ -119,8 +119,8 @@ docker stack ps getstartedlab
 
 You can run `curl http://localhost` several times in a row, or go to that URL in
 your browser and hit refresh a few times. Either way, you'll see the container
-ID randomly change, demonstrating the load-balancing; with each request, one of
-the five replicas is chosen at random to respond.
+ID change, demonstrating the load-balancing; with each request, one of
+the five replicas is chosen, in a round-robin fashion, to respond.
 
 ## Scale the app
 
