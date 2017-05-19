@@ -18,7 +18,9 @@ which has potential performance advantages over the `aufs` storage driver.
 
 > **Note**: Even though AUFS is used by default if it is present in the Linux
 > kernel, it is not supported on some distributions and Docker editions. See
-> [Prerequisites](#prerequisites) > for more information.
+> [Prerequisites](#prerequisites) > for more information about supported
+> platforms, and see also
+> [the order of preferences for storage drivers](selectadriver.md#storage-driver-order).
 
 ## Prerequisites
 

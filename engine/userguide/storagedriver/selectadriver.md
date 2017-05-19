@@ -17,6 +17,34 @@ After you have read the [storage driver overview](imagesandcontainers.md), the
 next step is to choose the best storage driver for your workloads. In making
 this decision, there are three high-level factors to consider:
 
+- If multiple storage drivers are supported in your kernel, Docker has a
+  prioritized list of which storage driver to use if no storage driver is
+  explicitly configured, assuming that the prerequisites for that storage driver
+  are met:
+
+  - If `aufs` is available, default to it, because it is the oldest storage
+    driver. However, it is not universally available.
+
+  - If possible, the storage driver with the least amount of configuration is
+    used, such as `btrfs` or `zfs`. Each of these relies on the backing
+    filesystem being configured correctly.
+
+  - Otherwise, try to use the storage driver with the best overall performance
+    and stability in the most usual scenarios.
+
+    - `overlay2` is preferred, followed by `overlay`. Neither of these requires
+      extra configuration.
+
+    - `devicemapper` is next, but requires `direct-lvm` for production
+      environments, because `loopback-lvm`, while zero-configuration, has very
+      poor performance.
+
+  The selection order is defined in Docker's source code. You can see the order
+  for Docker 17.03 by looking at
+  [the source code](https://github.com/moby/moby/blob/v17.03.1-ce/daemon/graphdriver/driver_linux.go#L54-L63).
+  For a different Docker version, change the URL to that version.
+  {: id="storage-driver-order" }
+
 - Your choice may be limited by your Docker edition, operating system, and
   distribution. For instance, `aufs` is only supported on Ubuntu and Debian,
   while `btrfs` is only supported on SLES, which is only supported with Docker
