@@ -6,6 +6,10 @@ redirect_from:
 - /engine/installation/linux/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
+- /engine/installation/linux/other/
+- /engine/installation/linux/archlinux/
+- /engine/installation/linux/cruxlinux/
+- /engine/installation/linux/gentoolinux/
 title: Install Docker
 ---
 
