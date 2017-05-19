@@ -22,6 +22,38 @@ guides:
   section:
   - path: /engine/installation/
     title: Install Docker
+  - sectiontitle: Docker EE
+    section:
+    - path: /engine/installation/windows/docker-ee/
+      title: Windows Server
+    - path: /engine/installation/linux/docker-ee/ubuntu/
+      title: Ubuntu
+    - path: /engine/installation/linux/docker-ee/rhel/
+      title: RHEL
+    - path: /engine/installation/linux/docker-ee/centos/
+      title: CentOS
+    - path: /engine/installation/linux/docker-ee/oracle/
+      title: Oracle Linux
+    - path: /engine/installation/linux/docker-ee/suse/
+      title: SLES
+  - sectiontitle: Docker CE
+    section:
+    - path: /docker-for-mac/install/
+      title: Mac
+    - path: /docker-for-windows/install/
+      title: Windows
+    - path: /engine/installation/linux/docker-ce/ubuntu/
+      title: Ubuntu
+    - path: /engine/installation/linux/docker-ce/debian/
+      title: Debian
+    - path: /engine/installation/linux/docker-ce/centos/
+      title: CentOS
+    - path: /engine/installation/linux/docker-ce/fedora/
+      title: Fedora
+    - path: /engine/installation/linux/docker-ce/binaries/
+      title: Binaries
+  - path: /engine/installation/linux/linux-postinstall/
+    title: Optional Linux post-installation steps
   - sectiontitle: Docker Edge
     section:
     - path: /edge/
@@ -31,34 +63,6 @@ guides:
       nosync: true
     - path: /engine/userguide/eng-image/multistage-build/
       title: Use multi-stage builds (Edge only)
-  - path: /docker-for-mac/install/
-    title: Docker for Mac
-  - path: /docker-for-windows/install/
-    title: Docker for Windows
-  - path: /docker-ee-for-windows/install/
-    title: Docker EE for Windows Server
-  - sectiontitle: Docker for Linux
-    section:
-    - path: /engine/installation/linux/ubuntu/
-      title: Ubuntu
-    - path: /engine/installation/linux/rhel/
-      title: Red Hat Enterprise Linux
-    - path: /engine/installation/linux/centos/
-      title: CentOS
-    - path: /engine/installation/linux/fedora/
-      title: Fedora
-    - path: /engine/installation/linux/debian/
-      title: Debian
-    - path: /engine/installation/linux/oracle/
-      title: Oracle Linux
-    - path: /engine/installation/linux/suse/
-      title: SuSE Linux Enterprise
-    - path: /engine/installation/linux/other/
-      title: Other Linux distributions
-    - path: /engine/installation/binaries/
-      title: Installation from binaries
-    - path: /engine/installation/linux/linux-postinstall/
-      title: Optional post-installation steps
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/why/
