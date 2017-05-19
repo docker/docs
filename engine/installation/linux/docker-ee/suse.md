@@ -1,9 +1,10 @@
 ---
-description: Instructions for installing Docker on SLES
-keywords: Docker, Docker documentation, requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
+description: Instructions for installing Docker EE on SLES
+keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
-title: Get Docker for SLES
+- /engine/installation/linux/suse/
+title: Get Docker EE for SLES
 ---
 
 {% assign minor-version = "17.03" %}
@@ -34,10 +35,10 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of SLES 12.x. Docker is not
+To install Docker EE, you need the 64-bit version of SLES 12.x. Docker EE is not
 supported on OpenSUSE.
 
-The only supported storage driver for Docker on SLES is `btrfs`, which will be
+The only supported storage driver for Docker EE on SLES is `btrfs`, which will be
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
 BTRFS filesystem.
 
@@ -64,8 +65,9 @@ networks, are preserved. The Docker EE package is now called `docker-ee`.
 
 ## Configure the btrfs filesystem
 
-If the filesystem which hosts `/var/lib/docker/` is not a BTRFS filesystem,
-you must configure a BTRFS filesystem and mount it on `/var/lib/docker/`:
+By default, SLES formats the `/` filesystem using BTRFS. If the filesystem which
+hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
+BTRFS filesystem and mount it on `/var/lib/docker/`:
 
 1.  Format your dedicated block device or devices as a Btrfs filesystem. This
     example assumes that you are using two block devices called `/dev/xvdf` and
@@ -90,9 +92,9 @@ you must configure a BTRFS filesystem and mount it on `/var/lib/docker/`:
     entry to `/etc/fstab`.
 
 
-## Install Docker
+## Install Docker EE
 
-You can install Docker in different ways, depending on your needs:
+You can install Docker EE in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -105,9 +107,9 @@ You can install Docker in different ways, depending on your needs:
 
 ### Install using the repository
 
-Before you install Docker for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install and update Docker from
-the repository.
+Before you install Docker EE for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker EE
+from the repository.
 
 #### Set up the repository
 
@@ -153,7 +155,7 @@ the repository.
     $ sudo service docker start
     ```
 
-3.  On production systems, you should install a specific version of Docker
+3.  On production systems, you should install a specific version of Docker EE
     instead of always using the latest. List the available versions. The
     following example only lists binary packages and is truncated. To also list
     source packages, omit the `-t package` flag from the command.
@@ -180,7 +182,7 @@ the repository.
     $ sudo zypper install docker-ee-<VERSION_STRING>
     ```
 
-4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
     the `/` filesystem is not using BTRFS.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
@@ -224,9 +226,9 @@ to install.
 
 ### Install from a package
 
-If you cannot use the official Docker repository to install Docker, you can
+If you cannot use the official Docker repository to install Docker EE, you can
 download the `.rpm` file for your release and install it manually. You will
-need to download a new file each time you want to upgrade Docker.
+need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
@@ -246,7 +248,7 @@ need to download a new file each time you want to upgrade Docker.
     $ sudo zypper install /path/to/package.rpm
     ```
 
-4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
     the `/` filesystem is not using BTRFS.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
@@ -288,7 +290,7 @@ To upgrade Docker EE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `zypper update`
 instead of `zypper install`, and pointing to the new file.
 
-## Uninstall Docker
+## Uninstall Docker EE
 
 1.  Uninstall the Docker EE package using the following command.
 
@@ -304,12 +306,13 @@ instead of `zypper install`, and pointing to the new file.
     $ sudo rm -rf /var/lib/docker/*
     ```
 
-    As an alternative, you can unmount and format the `btrfs` filesystem.
+    If you used a separate BTRFS filesystem to host the contents of
+    `/var/lib/docker/`, you can unmount and format the `btrfs` filesystem.
 
 You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).
