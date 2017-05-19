@@ -36,7 +36,7 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 
 To install Docker, you need the 64-bit version of SLES 12.x.
 
-openSUSE is not currently supported.
+Docker is not supported on OpenSUSE.
 
 ### Uninstall old versions
 
