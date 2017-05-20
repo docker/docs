@@ -44,7 +44,7 @@ script:
               - "80:8000"
             depends_on:
               - "db"
-            command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+            command: ["./wait-for-it.sh", "db", "--", "python", "app.py"]
           db:
             image: postgres
 
