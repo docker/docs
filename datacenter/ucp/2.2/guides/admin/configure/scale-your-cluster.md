@@ -61,6 +61,9 @@ you want to join to the cluster, and **run the command** on that host.
 After you run the join command in the node, the node starts being displayed
 in UCP.
 
+To add Windows nodes, follow the instructions in
+[Join Windows worker nodes to a swarm](join-windows-worker-nodes.md). 
+
 ## Remove nodes from the cluster
 
 1. If the target node is a manager, you will need to first demote the node into

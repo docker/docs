@@ -1614,6 +1614,8 @@ manuals:
           title: Use your own TLS certificates
         - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
           title: Scale your cluster
+        - path: /datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/
+          title: Scale your cluster with Windows nodes
         - path: /datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/
           title: Set up high availability
         - path: /datacenter/ucp/2.2/guides/admin/configure/use-a-load-balancer/
