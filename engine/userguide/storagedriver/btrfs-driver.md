@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of Btrfs driver.
 keywords: 'container, storage, driver, Btrfs '
-title: Docker and Btrfs in practice
+title: Use the BTRFS storage driver
 ---
 
 Btrfs is a next generation copy-on-write filesystem that supports many advanced

@@ -108,13 +108,13 @@ With regard to Docker, the backing filesystem is the filesystem where
 `/var/lib/docker/` is located. Some storage drivers only work with specific
 backing filesystems.
 
-| Storage driver | Supported backing filesystems                               |
-|----------------|-------------------------------------------------------------|
-| `overlay`, `overlay2` | `ext4`, `xfs`                                        |
-| `aufs`                | `ext4, `xfs`                                         |
-| `devicemapper`        | `direct-lvm`                                         |
-| `btrfs`               | `btrfs`                                              |
-| `zfs`                 | `zfs`                                                |
+| Storage driver        | Supported backing filesystems  |
+|-----------------------|--------------------------------|
+| `overlay`, `overlay2` | `ext4`, `xfs`                  |
+| `aufs`                | `ext4`, `xfs`                  |
+| `devicemapper`        | `direct-lvm`                   |
+| `btrfs`               | `btrfs`                        |
+| `zfs`                 | `zfs`                          |
 
 
 ## Other considerations

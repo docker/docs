@@ -165,22 +165,22 @@ guides:
       title: Create a base image
     - path: /engine/userguide/eng-image/image_management/
       title: Image management
-  - sectiontitle: Docker storage drivers
+  - sectiontitle: Store data within containers
     section:
     - path: /engine/userguide/storagedriver/imagesandcontainers/
-      title: Understand images, containers, and storage drivers
+      title: About images, containers, and storage drivers
     - path: /engine/userguide/storagedriver/selectadriver/
       title: Select a storage driver
     - path: /engine/userguide/storagedriver/aufs-driver/
-      title: AUFS storage driver in practice
+      title: Use the AUFS storage driver
     - path: /engine/userguide/storagedriver/btrfs-driver/
-      title: Btrfs storage in practice
+      title: Use the Btrfs storage driver
     - path: /engine/userguide/storagedriver/device-mapper-driver/
-      title: Device mapper storage in practice
+      title: Use the Device mapper storage driver
     - path: /engine/userguide/storagedriver/overlayfs-driver/
-      title: OverlayFS storage in practice
+      title: Use the OverlayFS storage driver
     - path: /engine/userguide/storagedriver/zfs-driver/
-      title: ZFS storage in practice
+      title: Use the ZFS storage driver
   - sectiontitle: Network configuration
     section:
     - path: /engine/userguide/networking/

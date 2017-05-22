@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of ZFS driver.
 keywords: 'container, storage, driver, ZFS '
-title: Docker and ZFS in practice
+title: Use the ZFS storage driver
 ---
 
 ZFS is a next generation filesystem that supports many advanced storage

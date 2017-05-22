@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
 keywords: container, storage, driver, device mapper
-title: Docker and the Device Mapper storage driver
+title: Use the Device Mapper storage driver
 ---
 
 Device Mapper is a kernel-based framework that underpins many advanced

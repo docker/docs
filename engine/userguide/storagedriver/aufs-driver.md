@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
 keywords: 'container, storage, driver, AUFS '
-title: Docker and AUFS in practice
+title: Use the AUFS storage driver
 ---
 
 AUFS a *union filesystem*. The `aufs` storage driver is the default storage
