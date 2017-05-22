@@ -35,7 +35,7 @@ provider.
 
     >**Tip:** For Docker Cloud, use all lower case letters for swarm names. No spaces, capitalized letters, or special characters other than `.`, `_`, or `-` are allowed. AWS does not accept underscores in the name `_`.
 
-4.  Select Amazon Web Services as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, and provide an App name.
+4.  Select Amazon Web Services as the service provider and select a channel (`Stable` or `Edge`) from the drop-down menu.
 
     You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
 
