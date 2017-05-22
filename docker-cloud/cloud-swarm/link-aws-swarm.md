@@ -18,7 +18,7 @@ the new policy to your existing role by following the instructions
 
 ## Create a dockercloud-swarm-role role with an embedded policy
 
-1.  Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
+1.  Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>. Click on Create new role
 
 2.  Select **Role for Cross-Account Access**, and in the submenu that opens select **Provide access between your AWS account and a 3rd party AWS account**.
 
@@ -27,9 +27,9 @@ the new policy to your existing role by following the instructions
 
     This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
 
-5.  Leave **Require MFA** unchecked.
+5.  Leave **Require MFA** unchecked. Click **Next Step**.
 
-6.  On the next screen, do not select a policy. Click **Next**.
+6.  On the next screen, do not select a policy. Click **Next Step**.
 
     You will add the policy in a later step.
 
@@ -41,7 +41,7 @@ the new policy to your existing role by following the instructions
     you might have `dockercloud-swarm-role-moby` and
     `dockercloud-swarm-role-teamawesome`.
 
-8.  On the next page click **Create Role**.
+8.  Click **Create Role**.
 
     AWS IAM creates the new role and returns you to the **Roles** list.
 
