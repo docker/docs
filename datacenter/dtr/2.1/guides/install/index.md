@@ -42,12 +42,23 @@ $ docker pull docker/dtr
 $ docker run -it --rm \
   docker/dtr install \
   --ucp-node <ucp-node-name> \
-  --ucp-insecure-tls
+  --ucp-insecure-tls \
+  --dtr-external-url <node-ip-address>:444 \
+  --replica-https-port 444 \
+  --ucp-url <node-ip-address>
 ```
 
 Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
-DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
+DTR. Locate ucp-node-name by running the following command:
+```
+$ docker node ls
+```
+
+`--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
+
+UCP and DTR both use port 443 by default. Above command changes DTR port from
+default port(443) to 444.
 
 By default the install command runs in interactive mode and prompts for
 additional information like:
