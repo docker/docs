@@ -54,18 +54,18 @@ exit
 docker-machine restart
 ```
 
-## Crash Reporting
+## Crash reporting
 
 Provisioning a host is a complex matter that can fail for a lot of reasons. Your
 workstation may have a wide variety of shell, network configuration, VPN, proxy
-or firewall issues.  There are also reasons from the other end of the chain:
+or firewall issues. There are also reasons from the other end of the chain:
 your cloud provider or the network in between.
 
 To help `docker-machine` be as stable as possible, we added a monitoring of
 crashes whenever you try to `create` or `upgrade` a host. This will send, over
 HTTPS, to Bugsnag some information about your `docker-machine` version, build,
 OS, ARCH, the path to your current shell and, the history of the last command as
-you could see it with a `--debug` option.  This data is sent to help us pinpoint
+you could see it with a `--debug` option. This data is sent to help us pinpoint
 recurring issues with `docker-machine` and will only be transmitted in the case
 of a crash of `docker-machine`.
 
