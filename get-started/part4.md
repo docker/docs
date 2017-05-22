@@ -238,7 +238,7 @@ look:
 ## Iterating and scaling your app
 
 From here you can do everything you learned about in part 3: scale the app by
-changing the `docker-compose.yml` file, or change the app behavior be editing
+changing the `docker-compose.yml` file, or change the app behavior by editing
 code. In either case, simply running `docker stack deploy` again deploys these
 changes. You can tear down the stack with `docker stack rm`. You can also join
 any machine, physical or virtual, to this swarm, using the same
