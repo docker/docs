@@ -83,7 +83,7 @@ To switch to Docker hosts:
   # eval $(docker-machine env -u)
   ```
 
-* If you are using Docker Machine, and want to switch to one of your local VMs,  be sure to unset `DOCKER_TLS_VERIFY`. Best practice is similar to the previous step.  Run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. Follow this with `docker machine ls` to view your current machines, then connect to the one you want with `docker-machine env my-local-machine` and run the given `eval` command. For example:
+* If you are using Docker Machine, and want to switch to one of your local VMs,  be sure to unset `DOCKER_TLS_VERIFY`. Best practice is similar to the previous step.  Run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. Follow this with `docker-machine ls` to view your current machines, then connect to the one you want with `docker-machine env my-local-machine` and run the given `eval` command. For example:
 
   ```
   $ docker-machine env my-local-machine
