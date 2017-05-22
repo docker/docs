@@ -178,10 +178,10 @@ Docker host IP address, to which you can append the port
 
 ### Stopping, starting, and rebuilding the application
 
-To stop the application, run `docker-compose down` your project directory. (You
-can use the same terminal window in which you started the database, or another
-one where you have access to a command prompt.) This is a clean way to stop the
-application.
+To stop the application, run `docker-compose down` in your project directory.
+You can use the same terminal window in which you started the database, or
+another one where you have access to a command prompt. This is a clean way to
+stop the application.
 
 ```
 vmb at snapair in ~/sandbox/rails
@@ -197,10 +197,15 @@ Removing network rails_default
 
 You can also stop the application with `Ctrl-C` in the same shell in which you
 executed the `docker-compose up`.  If you stop the app this way, and attempt to
-restart it, you might get the following error: `web_1 | A server is already
-running. Check /myapp/tmp/pids/server.pid.` To resolve this, delete
-the file `tmp/pids/server.pid`, and then re-start the application with
-`docker-compose up`.
+restart it, you might get the following error:
+
+```
+web_1 | A server is already
+running. Check /myapp/tmp/pids/server.pid.
+```
+
+To resolve this, delete the file `tmp/pids/server.pid`, and then re-start the
+application with `docker-compose up`.
 
 To restart the application:
 
