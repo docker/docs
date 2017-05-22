@@ -51,8 +51,9 @@ Btrfs Filesystem as Btrfs.
   btrfs
   ```
 
-  If support is not included, install the `btrfsprogs` package (SLES) or
-  `btrfs-tools` package (Ubuntu).
+- To manage BTRFS filesystems at the level of the operating system, you need the
+  `btrfs` command. If you do not have this command, install the `btrfsprogs`
+  package (SLES) or `btrfs-tools` package (Ubuntu).
 
 ## Configure Docker to use the btrfs storage driver
 

@@ -551,19 +551,19 @@ block device and other parameters to suit your situation.
     Volume group "docker" successfully extended
     ```
 
-3.  Extend the `thinpool/data` logical volume. This command uses 100% of the
-    volume right away, without auto-extend. If you needed to extend the
-    `thinpool/metadata` logical volume instead, substitute it.
+3.  Extend the `docker/thinpool` logical volume. This command uses 100% of the
+    volume right away, without auto-extend. To extend the metadata thinpool
+    instead, use `docker/thinpool_tmeta`.
 
     ```bash
-    $ sudo lvextend  -l+100%FREE -n thinpool/data
+    $ sudo lvextend -l+100%FREE -n docker/thinpool
 
     Size of logical volume docker/thinpool_tdata changed from 95.00 GiB (24319 extents) to 198.00 GiB (50688 extents).
     Logical volume docker/thinpool_tdata successfully resized.
     ```
 
 4.  Verify the new thin pool size using the `Data Space Available` field in the
-    output of `docker info`. If you extnded the `thinpool/metadata` logical
+    output of `docker info`. If you extended the `docker/thinpool_tmeta` logical
     volume instead, look for `Metadata Space Available`.
 
     ```bash
@@ -611,7 +611,8 @@ $ mount |grep devicemapper
 /dev/xvda1 on /var/lib/docker/devicemapper type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 ```
 
-When you use `devicemapper`, Docker stores image and layer contents in
+When you use `devicemapper`, Docker stores image and layer contents in the
+thinpool, and exposes them to containers by mounting them under
 subdirectories of `/var/lib/docker/devicemapper/`.
 
 ### Image and container layers on-disk
@@ -726,7 +727,7 @@ use `loop-lvm`, the blocks may not be freed. This is another reason not to use
 
 - **`allocate-on demand` performance impact**:
 
-  The `devicemapper` storage driver uses an `allocte-on-demand` operation to
+  The `devicemapper` storage driver uses an `allocate-on-demand` operation to
   allocate new blocks from the thin pool into to a container's writable layer.
   Each block is 64KB, so this is the minimum amount of space that will be used
   for a write.
