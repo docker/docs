@@ -11,7 +11,7 @@ Toolbox](/toolbox/overview.md).
 
 If you want only Docker Machine, you can install the Machine binaries directly
 by following the instructions in the next section. You can find the latest
-versions of the binaries are on the <a
+versions of the binaries on the <a
 href="https://github.com/docker/machine/releases/" target="_blank">
 docker/machine release page</a> on GitHub.
 
