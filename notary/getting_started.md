@@ -19,7 +19,7 @@ and signing interface to create signed collections and configure trusted publish
 With Notary anyone can provide trust over arbitrary collections of data. Using
 <a href="https://www.theupdateframework.com/" target="_blank">The Update Framework (TUF)</a>
 as the underlying security framework, Notary takes care of the operations necessary
-to create, manage and distribute the metadata necessary to ensure the integrity and
+to create, manage, and distribute the metadata necessary to ensure the integrity and
 freshness of your content.
 
 ## Install Notary
