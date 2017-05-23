@@ -34,7 +34,12 @@ Linux.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of RHEL 7, running on an x86 hardware platform.
+To install Docker, you need the 64-bit version of RHEL 7, running on an x86
+hardware platform.
+
+In addition, you must use the `devicemapper` storage driver. On production
+systems, you must use `direct-lvm` mode, which requires one or more dedicated
+block devices. Fast storage such as solid-state media (SSD) is recommended.
 
 ### Uninstall old versions
 
@@ -101,10 +106,12 @@ the repository.
       $ sudo sh -c 'echo "<VERSION-STRING>" > /etc/yum/vars/dockerosversion'
       ```
 
-3.  Install `yum-utils`, which provides the `yum-config-manager` utility:
+3.  Install required packages. `yum-utils` provides the `yum-config-manager`
+    utility, and `device-mapper-persistent-data` and `lvm2` are required by the
+    `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils
+    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     ```
 
 4.  Use the following command to add the **stable** repository:
@@ -164,13 +171,27 @@ the repository.
     $ sudo yum -y install docker-ee-<VERSION_STRING>
     ```
 
-4.  Start Docker.
+4.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+    that the file was empty, add the following contents.
+
+    ```json
+    {
+      "storage-driver": "devicemapper"
+    }
+    ```
+
+5.  For production systems, you must use `direct-lvm` mode, which requires you
+    to prepare the block devices. Follow the procedure in the
+    [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
+    **before starting Docker**.
+
+6.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker EE is installed correctly by running the `hello-world`
+7.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -213,13 +234,27 @@ need to download a new file each time you want to upgrade Docker.
     $ sudo yum install /path/to/package.rpm
     ```
 
-3.  Start Docker.
+3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+    that the file was empty, add the following contents.
+
+    ```json
+    {
+      "storage-driver": "devicemapper"
+    }
+    ```
+
+4.  For production systems, you must use `direct-lvm` mode, which requires you
+    to prepare the block devices. Follow the procedure in the
+    [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
+    **before starting Docker**.
+
+5.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+6.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -256,6 +291,9 @@ instead of `yum -y install`, and pointing to the new file.
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
+
+3.  If desired, remove the `devicemapper` thin pool and reformat the block
+    devices that were part of it.
 
 You must delete any edited configuration files manually.
 

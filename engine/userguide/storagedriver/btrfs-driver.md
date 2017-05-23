@@ -1,70 +1,192 @@
 ---
 description: Learn how to optimize your use of Btrfs driver.
 keywords: 'container, storage, driver, Btrfs '
-title: Docker and Btrfs in practice
+title: Use the BTRFS storage driver
 ---
 
 Btrfs is a next generation copy-on-write filesystem that supports many advanced
 storage technologies that make it a good fit for Docker. Btrfs is included in
-the mainline Linux kernel and its on-disk-format is now considered stable.
-However, many of its features are still under heavy development and users
-should consider it a fast-moving target.
+the mainline Linux kernel.
 
 Docker's `btrfs` storage driver leverages many Btrfs features for image and
-container management. Among these features are thin provisioning,
-copy-on-write, and snapshotting.
+container management. Among these features are block-level operations, thin
+provisioning, copy-on-write snapshots, and ease of administration. You can
+easily combine multiple physical block devices into a single Btrfs filesystem.
 
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
- Btrfs Filesystem as Btrfs.
+Btrfs Filesystem as Btrfs.
 
-> **Note**: Btrfs is not supported on every Linux version and Docker edition.
-> It is only supported on Docker CE on Ubuntu, and Docker EE / CS Engine on SLES.
+> **Note**: The `btrfs` storage driver is only supported on Docker CE on Ubuntu
+> or Debian, and Docker EE / CS Engine on SLES.
 
-## The future of Btrfs
+## Prerequisites
 
-Btrfs has been long hailed as the future of Linux filesystems. With full
-support in the mainline Linux kernel, a stable on-disk-format, and active
-development with a focus on stability, this is now becoming more of a reality.
+`btrfs` is supported if you meet the following prerequisites:
 
-As far as Docker on the Linux platform goes, many people see the `btrfs`
-storage driver as a potential long-term replacement for the `devicemapper`
-storage driver. However, at the time of writing, the `devicemapper` storage
-driver should be considered safer, more stable, and more *production ready*.
-You should only consider the `btrfs` driver for production deployments if you
-understand it well and have existing experience with Btrfs.
+- **Docker CE**: For Docker CE, `btrfs` is only recommended on Ubuntu or Debian.
 
-## Image layering and sharing with Btrfs
+- **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
+  See the
+  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix)
+  for all supported configurations for commercially-supported Docker.
 
-Docker leverages Btrfs *subvolumes* and *snapshots* for managing the on-disk
-components of image and container layers.  Btrfs subvolumes look and feel like
-a normal Unix filesystem. As such, they can have their own internal directory
-structure that hooks into the wider Unix filesystem.
+- Changing the storage driver will make any containers you have already
+  created inaccessible on the local system. Use `docker save` to save containers,
+  and push existing images to Docker Hub or a private repository, so that you
+  not need to re-create them later.
 
-Subvolumes are natively copy-on-write and have space allocated to them
-on-demand from an underlying storage pool. They can also be nested and snapped.
- The diagram below shows 4 subvolumes. 'Subvolume 2' and 'Subvolume 3' are
-nested, whereas 'Subvolume 4' shows its own internal directory tree.
+- `btrfs` requires a dedicated block storage device such as a physical disk. This
+  block device must be formatted for Btrfs and mounted into `/var/lib/docker/`.
+  The configuration instructions below walk you through this procedure. By
+  default, the SLES `/` filesystem is formatted with BTRFS, so for SLES, you do
+  not need to use a separate block device, but you can choose to do so for
+  performance reasons.
 
-![](images/btfs_subvolume.jpg)
+- `btrfs` support must exist in your kernel. To check this, run the following
+  command:
 
-Snapshots are a point-in-time read-write copy of an entire subvolume. They
-exist directly below the subvolume they were created from. You can create
-snapshots of snapshots as shown in the diagram below.
+  ```bash
+  $ sudo cat /proc/filesystems | grep btrfs
 
-![](images/btfs_snapshots.jpg)
+  btrfs
+  ```
 
-Btrfs allocates space to subvolumes and snapshots on demand from an underlying
-pool of storage. The unit of allocation is referred to as a *chunk*, and
-*chunks* are normally ~1GB in size.
+- To manage BTRFS filesystems at the level of the operating system, you need the
+  `btrfs` command. If you do not have this command, install the `btrfsprogs`
+  package (SLES) or `btrfs-tools` package (Ubuntu).
 
-Snapshots are first-class citizens in a Btrfs filesystem. This means that they
-look, feel, and operate just like regular subvolumes. The technology required
-to create them is built directly into the Btrfs filesystem thanks to its
-native copy-on-write design. This means that Btrfs snapshots are space
-efficient with little or no performance overhead. The diagram below shows a
-subvolume and its snapshot sharing the same data.
+## Configure Docker to use the btrfs storage driver
 
-![](images/btfs_pool.jpg)
+This procedure is essentially identical on SLES and Ubuntu.
+
+1.  Stop Docker.
+
+2.  Copy the contents of `/var/lib/docker/` to a backup location, then empty
+    the contents of `/var/lib/docker/`:
+
+    ```bash
+    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
+    $ sudo rm -rf /var/lib/docker/*
+    ```
+
+3.  Format your dedicated block device or devices as a Btrfs filesystem. This
+    example assumes that you are using two block devices called `/dev/xvdf` and
+    `/dev/xvdg`. Double-check the block device names because this is a
+    destructive operation.
+
+    ```bash
+    $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
+    ```
+
+    There are many more options for Btrfs, including striping and RAID. See the
+    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
+
+4.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
+    can specify any of the block devices used to create the Btrfs filesystem.
+
+    ```bash
+    $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
+    ```
+
+    Don't forget to make the change permanent across reboots by adding an
+    entry to `/etc/fstab`.
+
+5.  Copy the contents of `/var/lib/docker.bk` to `/var/lib/docker/`.
+
+    ```bash
+    $ sudo cp -au /var/lib/docker.bk/* /var/lib/docker/
+    ```
+
+6.  Configure Docker to use the `btrfs` storage driver. This is required even
+    though `/var/lib/docker/` is now using a Btrfs filesystem.
+    Edit or create the file `/etc/docker/daemon.json`. If it is a new file, add
+    the following contents. If it is an existing file, add the key and value
+    only, being careful to end the line with a comma if it is not the final
+    line before an ending curly bracket (`}`).
+
+    ```json
+    {
+      "storage-driver": "btrfs"
+    }
+    ```
+
+7.  Start Docker. After it is running, verify that `btrfs` is being used as the
+    storage driver.
+
+    ```bash
+    $ docker info
+
+    Containers: 0
+     Running: 0
+     Paused: 0
+     Stopped: 0
+    Images: 0
+    Server Version: 17.03.1-ce
+    Storage Driver: btrfs
+     Build Version: Btrfs v4.4
+     Library Version: 101
+    <output truncated>
+    ```
+
+8.  When you are ready, remove the `/var/lib/docker.bk` directory.
+
+## Manage a Btrfs volume
+
+One of the benefits of Btrfs is the ease of managing Btrfs filesystems without
+the need to unmount the filesystem or restart Docker.
+
+When space gets low, Btrfs automatically expands the volume in *chunks* of
+roughly 1 GB.
+
+To add a block device to a Btrfs volume, use the `btrfs device add` and
+`btrfs filesystem balance` commands.
+
+```bash
+$ sudo btrfs device add /dev/svdh /var/lib/docker
+
+$ sudo btrfs filesystem balance /var/lib/docker
+```
+
+> **Note**: While you can do these operations with Docker running, performance
+> will suffer. It might be best to plan an outage window to balance the Btrfs
+> filesystem.
+
+## How the `btrfs` storage driver works
+
+The `btrfs` storage driver works differently from `devicemapper` or other
+storage drivers in that your entire `/var/lib/docker/` directory is stored on a
+Btrfs volume.
+
+### Image and container layers on-disk
+
+Information about image layers and writable container layers is stored in
+`/var/lib/docker/btrfs/subvolumes/`. This subdirectory contains one directory
+per image or container layer, with the unified filesystem built from a layer
+plus all its parent layers. Subvolumes are natively copy-on-write and have space
+allocated to them on-demand from an underlying storage pool. They can also be
+nested and snapshotted. The diagram below shows 4 subvolumes. 'Subvolume 2' and
+'Subvolume 3' are nested, whereas 'Subvolume 4' shows its own internal directory
+tree.
+
+![subvolume example](images/btfs_subvolume.jpg)
+
+Only the base layer of an image is stored as a true subvolume. All the other
+layers are stored as snapshots, which only contain the differences introduced
+in that layer. You can create snapshots of snapshots as shown in the diagram
+below.
+
+![snapshots diagram](images/btfs_snapshots.jpg)
+
+On disk, snapshots look and feel just like subvolumes, but in reality they are
+much smaller and more space-efficient. Copy-on-write is used to maximize storage
+efficiency and minimize layer size, and writes in the container's writable layer
+are managed at the block level. The following image shows a subvolume and its
+snapshot sharing data.
+
+![snapshot and subvolume sharing data](images/btfs_pool.jpg)
+
+For maximum efficiency, when a container needs more space, it is allocated in
+*chunks* of roughly 1 GB in size.
 
 Docker's `btrfs` storage driver stores every image layer and container in its
 own Btrfs subvolume or snapshot. The base layer of an image is stored as a
@@ -76,330 +198,111 @@ This is shown in the diagram below.
 The high level process for creating images and containers on Docker hosts
 running the `btrfs` driver is as follows:
 
-1. The image's base layer is stored in a Btrfs *subvolume* under
-`/var/lib/docker/btrfs/subvolumes`.
+1.  The image's base layer is stored in a Btrfs *subvolume* under
+    `/var/lib/docker/btrfs/subvolumes`.
 
-2. Subsequent image layers are stored as a Btrfs *snapshot* of the parent
-layer's subvolume or snapshot.
+2.  Subsequent image layers are stored as a Btrfs *snapshot* of the parent
+    layer's subvolume or snapshot, but with the changes introduced by this
+    layer. These differences are stored at the block level.
 
-    The diagram below shows a three-layer image. The base layer is a subvolume.
- Layer 1 is a snapshot of the base layer's subvolume. Layer 2 is a snapshot of
-Layer 1's snapshot.
+3.  The container's writable layer is a Btrfs snapshot of the final image layer,
+    with the differences introduced by the running container. These differences
+    are stored at the block level.
 
-    ![](images/btfs_constructs.jpg)
+## How container reads and writes work with `btrfs`
 
-As of Docker 1.10, image layer IDs no longer correspond to directory names
-under `/var/lib/docker/`.
-
-## Image and container on-disk constructs
-
-Image layers and containers are visible in the Docker host's filesystem at
-`/var/lib/docker/btrfs/subvolumes/`. However, as previously stated, directory
-names no longer correspond to image layer IDs. That said, directories for
-containers are present even for containers with a stopped status. This is
-because the `btrfs` storage driver mounts a default, top-level subvolume at
-`/var/lib/docker/subvolumes`. All other subvolumes and snapshots exist below
-that as Btrfs filesystem objects and not as individual mounts.
-
-Because Btrfs works at the filesystem level and not the block level, each image
-and container layer can be browsed in the filesystem using normal Unix
-commands. The example below shows a truncated output of an `ls -l` command for an
-image layer:
-
-    $ ls -l /var/lib/docker/btrfs/subvolumes/0a17decee4139b0de68478f149cc16346f5e711c5ae3bb969895f22dd6723751/
-
-    total 0
-    drwxr-xr-x 1 root root 1372 Oct  9 08:39 bin
-    drwxr-xr-x 1 root root    0 Apr 10  2014 boot
-    drwxr-xr-x 1 root root  882 Oct  9 08:38 dev
-    drwxr-xr-x 1 root root 2040 Oct 12 17:27 etc
-    drwxr-xr-x 1 root root    0 Apr 10  2014 home
-    ...output truncated...
-
-## Container reads and writes with Btrfs
+### Reading files
 
 A container is a space-efficient snapshot of an image. Metadata in the snapshot
 points to the actual data blocks in the storage pool. This is the same as with
 a subvolume. Therefore, reads performed against a snapshot are essentially the
-same as reads performed against a subvolume. As a result, no performance
-overhead is incurred from the Btrfs driver.
+same as reads performed against a subvolume.
 
-Writing a new file to a container invokes an allocate-on-demand operation to
-allocate new data block to the container's snapshot. The file is then written to
-this new space. The allocate-on-demand operation is native to all writes with
-Btrfs and is the same as writing new data to a subvolume. As a result, writing
-new files to a container's snapshot operates at native Btrfs speeds.
+### Writing files
 
-Updating an existing file in a container causes a copy-on-write operation
-(technically *redirect-on-write*). The driver leaves the original data and
-allocates new space to the snapshot. The updated data is written to this new
-space. Then, the driver updates the filesystem metadata in the snapshot to
-point to this new data. The original data is preserved in-place for subvolumes
-and snapshots further up the tree. This behavior is native to copy-on-write
-filesystems like Btrfs and incurs very little overhead.
+- **Writing new files**: Writing a new file to a container invokes an allocate-on-demand
+  operation to allocate new data block to the container's snapshot. The file is
+  then written to this new space. The allocate-on-demand operation is native to
+  all writes with Btrfs and is the same as writing new data to a subvolume. As a
+  result, writing new files to a container's snapshot operates at native Btrfs
+  speeds.
+
+- **Modifying existing files**: Updating an existing file in a container is a copy-on-write
+  operation (*redirect-on-write* is the Btrfs terminology). The original data is
+  read from the layer where the file currently exists, and only the modified
+  blocks are written into the container's writable layer. Next, the Btrfs driver
+  updates the filesystem metadata in the snapshot to point to this new data.
+  This behavior incurs very little overhead.
+
+- **Deleting files or directories**: If a container deletes a file or directory
+  that exists in a lower layer, Btrfs masks the existence of the file or
+  directory in the lower layer. If a container creates a file and then deletes
+  it, this operation is performed in the Btrfs filesystem itself and the space
+  is reclaimed.
 
 With Btrfs, writing and updating lots of small files can result in slow
-performance. More on this later.
-
-## Configure Docker with Btrfs
-
-The `btrfs` storage driver only operates on a Docker host where
-`/var/lib/docker` is mounted as a Btrfs filesystem. The following procedure
-shows  how to configure Btrfs on Ubuntu 14.04 LTS.
-
-### Prerequisites
-
-If you have already used the Docker daemon on your Docker host and have images
-you want to keep, `push` them to Docker Hub or your private Docker Trusted
-Registry before attempting this procedure.
-
-Stop the Docker daemon. Then, ensure that you have a spare block device at
-`/dev/xvdb`. The device identifier may be different in your environment and you
- should substitute your own values throughout the procedure.
-
-The procedure also assumes your kernel has the appropriate Btrfs modules
-loaded. To verify this, use the following command:
-
-    $ cat /proc/filesystems | grep btrfs
-
-	        btrfs
-
-### Configure Btrfs on Ubuntu
-
-> **Note**: Btrfs is not supported on Docker EE or Docker CS Engine for Ubuntu.
-
-1.  Install the `btrfs-tools` package.
-
-    ```bash
-    $ sudo apt-get install btrfs-tools
-    ```
-
-2.  Format the Btrfs filesystem across a pool of one or more devices by passing
-    the devices to the `mkfs.btrfs` command. Replace `<DEVICE>` with the
-    actual device names.
-
-    ```bash
-    $ sudo mkfs.btrfs -f /dev/<DEVICE> /dev/<DEVICE> /dev/<DEVICE>
-    ```
-
-    There are many more options for Btrfs, including striping and RAID. See the
-    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
-
-3.  Stop Docker and back up the contents of `/var/lib/docker/`.
-
-    ```bash
-    $ sudo service docker stop
-    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
-    $ sudo rm -rf /var/lib/docker/*
-    ```
-
-4.  Configure the Btrfs volume to automatically mount to `/var/lib/docker`.
-    As root (`sudo` may not be sufficient), edit `/etc/fstab` and add the
-    following line at the end, Replace `/dev/<DEVICE>` with any one of the devices
-    you used in step 2. You can choose to specify the device's UUID instead of the
-    device path. Refer to `man 5 fstab` for more information.
-
-    ```none
-    /dev/<DEVICE> /var/lib/docker btrfs defaults 0 1
-    ```
-
-5.  Mount the Btrfs volume:
-
-    ```bash
-    $ sudo mount /var/lib/docker
-    ```
-
-    Copy the old Docker contents to `/var/lib/docker`.
-
-    ```bash
-    $ sudo cp -r /var/lib/docker.bk/* /var/lib/docker
-    ```
-
-6.  Configure Docker so that it realizes it is using Btrfs for graph storage.
-    Edit or create the file `/etc/docker/daemon.json`. If it is a new file, add
-    the following contents. If it is an existing file, add the key and value
-    only, being careful to end the line with a comma if it is not the final
-    line before an ending curly bracket (`}`).
-
-    ```json
-    {
-      "storage-driver": "btrfs"
-    }
-    ```
-
-7.  Start Docker.
-
-    ```bash
-    $ sudo service docker start
-    ```
-
-    Verify that Btrfs is being used with the following command:
-
-    ```bash
-    $ docker info |grep Storage
-
-    Storage Driver: btrfs
-    ```
-
-8.  After you have verified that Docker is working as expected, remove the
-    backup copy of the Docker files.
-
-    ```bash
-    $ sudo rm -rf /var/lib/docker.bk
-    ```
-
-### Configure Btrfs on SLES
-
-1.  Install the Btrfs utilities.
-
-    ```bash
-    $ sudo zypper install btrfsprogs
-    ```
-
-2.  Format the Btrfs filesystem across a pool of one or more devices by passing
-    the devices to the `mkfs.btrfs` command. Replace `<DEVICE>` with the
-    actual device names.
-
-    ```bash
-    $ sudo mkfs.btrfs -f /dev/<DEVICE> /dev/<DEVICE> /dev/<DEVICE>
-    ```
-
-    There are many more options for Btrfs, including striping and RAID. See the
-    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
-
-3.  Stop Docker and back up the contents of `/var/lib/docker/`.
-
-    ```bash
-    $ sudo service docker stop
-    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
-    $ sudo rm -rf /var/lib/docker/*
-    ```
-
-4.  Configure the Btrfs volume to automatically mount to `/var/lib/docker`.
-    As root (`sudo` may not be sufficient), edit `/etc/fstab` and add the
-    following line at the end, Replace `/dev/<DEVICE>` with any one of the devices
-    you used in step 2. You can choose to specify the device's UUID instead of the
-    device path. Refer to `man 5 fstab` for more information.
-
-    ```none
-    /dev/<DEVICE> /var/lib/docker btrfs defaults 0 1
-    ```
-
-    Save the file.
-
-5.  Mount the Btrfs volume:
-
-    ```bash
-    $ sudo mount /var/lib/docker
-    ```
-
-    Copy the old Docker contents to `/var/lib/docker`.
-
-    ```bash
-    $ sudo cp -r /var/lib/docker.bk/* /var/lib/docker
-    ```
-
-6.  Configure Docker so that it realizes it is using Btrfs for graph storage.
-    Edit or create the file `/etc/docker/daemon.json`. If it is a new file, add
-    the following contents. If it is an existing file, add the key and value
-    only, being careful to end the line with a comma if it is not the final
-    line before an ending curly bracket (`}`).
-
-    ```json
-    {
-      "storage-driver": "btrfs"
-    }
-    ```
-
-7.  Start Docker.
-
-    ```bash
-    $ sudo service docker start
-    ```
-
-    Verify that Btrfs is being used with the following command:
-
-    ```bash
-    $ docker info |grep Storage
-
-    Storage Driver: btrfs
-    ```
-
-8.  After you have verified that Docker is working as expected, remove the
-    backup copy of the Docker files.
-
-    ```bash
-    $ sudo rm -rf /var/lib/docker.bk
-    ```
+performance.
 
 ## Btrfs and Docker performance
 
 There are several factors that influence Docker's performance under the `btrfs`
- storage driver.
+storage driver.
+
+> **Note**: Many of these factors are mitigated by using Docker volumes for
+> write-heavy workloads, rather than relying on storing data in the container's
+> writable layer. However, in the case of Btrfs, Docker volumes will still suffer
+> from these draw-backs unless `/var/lib/docker/volumes/` is **not** backed by
+> Btrfs.
 
 - **Page caching**. Btrfs does not support page cache sharing. This means that
-*n* containers accessing the same file require *n* copies to be cached. As a
-result, the `btrfs` driver may not be the best choice for PaaS and other high
-density container use cases.
+  each process accessing the same file copies the file into the Docker hosts's
+  memory. As a result, the `btrfs` driver may not be the best choice
+  high-density use cases such as PaaS.
 
-- **Small writes**. Containers performing lots of small writes (including
-Docker hosts that start and stop many containers) can lead to poor use of Btrfs
- chunks. This can ultimately lead to out-of-space conditions on your Docker
-host and stop working. This is currently a major drawback to use current
-versions of Btrfs.
+- **Small writes**. Containers performing lots of small writes (this usage
+  pattern matches what happens when you start and stop many containers in a short
+  period of time, as well) can lead to poor use of Btrfs chunks. This can
+  prematurely fill the Btrfs filesystem and lead to out-of-space conditions on
+  your Docker host. Use `btrfs filesys show` to closely monitor the amount of
+  free space on your Btrfs device.
 
-    If you use the `btrfs` storage driver, closely monitor the free space on
-your Btrfs filesystem using the `btrfs filesys show` command. Do not trust the
-output of normal Unix commands such as `df`; always use the Btrfs native
-commands.
-
-- **Sequential writes**. Btrfs writes data to disk via journaling technique.
-This can impact sequential writes, where performance can be up to half.
+- **Sequential writes**. Btrfs uses a journaling technique when writing to disk.
+  This can impact the performance of sequential writes, reducing performance by
+  up to 50%.
 
 - **Fragmentation**. Fragmentation is a natural byproduct of copy-on-write
-filesystems like Btrfs. Many small random writes can compound this issue. It
-can manifest as CPU spikes on Docker hosts using SSD media and head thrashing
-on Docker hosts using spinning media. Both of these result in poor performance.
+  filesystems like Btrfs. Many small random writes can compound this issue.
+  Fragmentation can manifest as CPU spikes when using SSDs or head thrashing
+  when using spinning disks. Either of these issues can harm performance.
 
-    Recent versions of Btrfs allow you to specify `autodefrag` as a mount
-option. This mode attempts to detect random writes and defragment them. You
-should perform your own tests before enabling this option on your Docker hosts.
- Some tests have shown this option has a negative performance impact on Docker
-hosts performing lots of small writes (including systems that start and stop
-many containers).
+  If your Linux kernel version is 3.9 or higher, you can enable the `autodefrag`
+  feature when mounting a Btrfs volume. Test this feature on your own workloads
+  before deploying it into production, as some tests have shown a negative
+  impact on performance.
 
-- **Solid State Devices (SSD)**. Btrfs has native optimizations for SSD media.
-To enable these, mount with the `-o ssd` mount option. These optimizations
-include enhanced SSD write performance by avoiding things like *seek
-optimizations* that have no use on SSD media.
+- **SSD performance**: Btrfs includes native optimizations for SSD media.
+  To enable these features, mount the Btrfs filesystem with the `-o ssd` mount
+  option. These optimizations include enhanced SSD write performance by avoiding
+  optimization such as *seek optimizations* which do not apply to solid-state
+  media.
 
-    Btrfs also supports the TRIM/Discard primitives. However, mounting with the
-`-o discard` mount option can cause performance issues. Therefore, it is
-recommended you perform your own tests before using this option.
+- **Balance Btrfs filesystems often**: Use operating system utilities such as a
+  `cron` job to balance the Btrfs filesystem regularly, during non-peak hours.
+  This reclaims unallocated blocks and helps to prevent the filesystem from
+  filling up unnecessarily. You cannot rebalance a totally full Btrfs
+  filesystem unless you add additional physical block devices to the filesystem.
+  See the
+  [BTRFS Wiki](https://btrfs.wiki.kernel.org/index.php/Balance_Filters#Balancing_to_fix_filesystem_full_errors).
 
-- **Use Data Volumes**. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur
-any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you should place heavy write workloads on data
-volumes.
+- **Use fast storage**: Solid-state drives (SSDs) provide faster reads and
+  writes than spinning disks.
 
-- **Balance BTRFS**. Enable a cronjob to rebalance your BTRFS devices. e.g.
-Spread the subvolume's blocks evenly across your raid devices, and reclaim
-unused blocks. Without doing this, snapshots and subvolumes that docker
-removes will leave allocated blocks fillingup the BTRFS root volume. Once full
-you won't be able to re-balance, resulting in a potentially unrecoverable
-state without adding an additional storage device. If you would rather not
-automate this with crond, another option is to run a re-balance manually
-outside peak use times since the operation can be disk I/O intensive. This
-command will claim all chunks that are 1% used or less:
-
-  $ sudo btrfs filesystem balance start -dusage=1 /var/lib/docker
-
-  Dumping filters: flags 0x1, state 0x0, force is off
-  DATA (flags 0x2): balancing, usage=1
-  Done, had to relocate 673 out of 842 chunks
-
-More information on this topic can be read on the [BTRFS Wiki](https://btrfs.wiki.kernel.org/index.php/Balance_Filters#Balancing_to_fix_filesystem_full_errors).
+- **Use volumes for write-heavy workloads**: Volumes provide the best and most
+  predictable performance for write-heavy workloads. This is because they bypass
+  the storage driver and do not incur any of the potential overheads introduced
+  by thin provisioning and copy-on-write. Volumes have other benefits, such as
+  allowing you to share data among containers and persisting even when no
+  running container is using them.
 
 ## Related Information
 
