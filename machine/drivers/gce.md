@@ -5,7 +5,7 @@ title: Google Compute Engine
 ---
 
 Create machines on [Google Compute Engine](https://cloud.google.com/compute/).
-You will need a Google account and a project id.
+You will need a Google account and a project ID.
 See <https://cloud.google.com/compute/docs/projects> for details on projects.
 
 ### Credentials
@@ -20,7 +20,7 @@ through the oauth2 process with `gcloud auth login`.
 
 ### Example
 
-To create a machine instance, specify `--driver google`, the project id and the machine name.
+To create a machine instance, specify `--driver google`, the project ID and the machine name.
 
     $ gcloud auth login
     $ docker-machine create --driver google --google-project PROJECT_ID vm01
@@ -32,7 +32,7 @@ To create a machine instance, specify `--driver google`, the project id and the 
 
 ### Options
 
- -   `--google-project`: **required** The id of your project to use when launching the instance.
+ -   `--google-project`: **required** The ID of your project to use when launching the instance.
  -   `--google-zone`: The zone to launch the instance.
  -   `--google-machine-type`: The type of instance.
  -   `--google-machine-image`: The absolute URL to a base VM image to instantiate.
@@ -41,8 +41,8 @@ To create a machine instance, specify `--driver google`, the project id and the 
  -   `--google-disk-size`: The disk size of instance.
  -   `--google-disk-type`: The disk type of instance.
  -   `--google-address`: Instance's static external IP (name or IP).
- -   `--google-network`: Specify network in which to provision vm.
- -   `--google-subnetwork`: Specify subnetwork in which to provision vm.
+ -   `--google-network`: Specify network in which to provision VM.
+ -   `--google-subnetwork`: Specify subnetwork in which to provision VM.
  -   `--google-preemptible`: Instance preemptibility.
  -   `--google-tags`: Instance tags (comma-separated).
  -   `--google-use-internal-ip`: When this option is used during create it will make docker-machine use internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network e.g. while deploying swarm.
