@@ -16,6 +16,8 @@ If you haven't yet linked Docker Cloud to Azure, follow the steps in [Link Micro
 linked, it will show up on the **Swarms -> Create** page as a connected service
 provider.
 
+> **Note**: If you are using a Microsoft Azure Visual Studio MSDN subscription you'll need to enable "Programmatic Deployments" on the Docker CE VM Azure Marketplace item. Instructions can be found here https://azure.microsoft.com/en-us/blog/working-with-marketplace-images-on-azure-resource-manager/
+
 ![](images/azure-creds-cloud.png)
 
 ## Create a swarm
