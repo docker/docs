@@ -303,6 +303,12 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.0.5c-win11 Release Notes (2017-05-12 17.05.0-ce-win11) (edge)
+
+**Upgrades**
+
+- security fix for CVE-2017-7308  
+
 ### Docker Community Edition 17.0.5c-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
 
 **Upgrades**

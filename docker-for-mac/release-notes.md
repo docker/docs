@@ -335,6 +335,12 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
+
+**Upgrades**
+
+- security fix for CVE-2017-7308
+
 ### Docker Community Edition 17.05.0-ce-mac9, 2017-05-09 (edge)
 
 **Upgrades**
