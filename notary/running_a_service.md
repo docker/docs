@@ -24,7 +24,7 @@ $ docker-compose up
 
 This will build the development Notary server and Notary signer images, and
 start up containers for the Notary server, Notary signer, and the MySQL
-database that both of them share.  The MySQL data is stored in a volume.
+database that both of them share. The MySQL data is stored in a volume.
 
 Notary server and Notary signer communicate over mutually authenticated TLS
 (using the self-signed testing certs in the repository), and Notary server
@@ -65,7 +65,7 @@ on your development service, you probably want to change those defaults.
 ### Running with different command line arguments
 
 You can override the `docker run` command for the image if you want to pass
-different command line options.  Both Notary server and Notary signer take
+different command line options. Both Notary server and Notary signer take
 the following command line arguments:
 
 - `-config=<config file>` - specify the path to the JSON configuration file.
@@ -117,13 +117,13 @@ configuration JSON.
 Note that you cannot override a key whose value is another map.
 For instance, setting
 `NOTARY_SERVER_STORAGE='{"storage": {"backend": "memory"}}'` will not
-set in-memory storage.  It just fails to parse.  You can only override keys
+set in-memory storage. It just fails to parse. You can only override keys
 whose values are strings or numbers.
 
 For example, let's say that you wanted to run a single Notary server instance:
 
 - with your own TLS cert and keys
-- with a local, in-memory signer service rather than using Notary signer,
+- with a local, in-memory signer service rather than using Notary signer
 - using a local, in-memory TUF metadata store rather than using MySQL
 - produce JSON-formatted logs
 
