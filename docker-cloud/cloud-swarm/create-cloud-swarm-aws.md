@@ -39,7 +39,7 @@ provider.
 
     You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
 
-    In this example, we'll use the `Stable` channel, and use "voting_app" as our application name.
+    In this example, we'll use the `Stable` channel.
 
     ![](images/aws-create-swarm-0.png)
 
