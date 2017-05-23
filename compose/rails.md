@@ -72,7 +72,7 @@ using `docker-compose run`:
 
 First, Compose will build the image for the `web` service using the `Dockerfile`. Then it will run `rails new` inside a new container, using that image. Once it's done, you should have generated a fresh app:
 
-```
+```none
 $ ls -l
 total 64
 -rw-r--r--   1 vmb  staff   223 May 19 11:05 Dockerfile
@@ -176,14 +176,14 @@ Docker host IP address, to which you can append the port
 
 ![Rails example](images/rails-welcome.png)
 
-### Stopping, starting, and rebuilding the application
+### Stop the application
 
 To stop the application, run `docker-compose down` in your project directory.
 You can use the same terminal window in which you started the database, or
 another one where you have access to a command prompt. This is a clean way to
 stop the application.
 
-```
+```none
 vmb at snapair in ~/sandbox/rails
 $ docker-compose down
 Stopping rails_web_1 ... done
@@ -199,7 +199,7 @@ You can also stop the application with `Ctrl-C` in the same shell in which you
 executed the `docker-compose up`.  If you stop the app this way, and attempt to
 restart it, you might get the following error:
 
-```
+```none
 web_1 | A server is already
 running. Check /myapp/tmp/pids/server.pid.
 ```
@@ -207,18 +207,24 @@ running. Check /myapp/tmp/pids/server.pid.
 To resolve this, delete the file `tmp/pids/server.pid`, and then re-start the
 application with `docker-compose up`.
 
+### Restart the application
+
 To restart the application:
 
 1. Run `docker-compose up` in the project directory.
 2. Run this command in another terminal to restart the database: `docker-compose run web rake db:create`
 
+### Rebuild the application
+
 If you make changes to the Gemfile or the Compose file to try out some different
 configurations, you will need to rebuild. For example, suppose you want to
-change the exposed port on the `localhost` from `3000` in our first example to
+change the exposed port on the local host from `3000` in our first example to
 `3001`. You would make the change to the Compose file to expose port `3000` on
 the container through a new port, `3001`, on the host, and save the changes:
 
-    ``` ports: - "3001:3000" ```
+```none
+ports: - "3001:3000"
+```
 
 Then rebuild with `docker-compose up --build`, and restart the database:
 `docker-compose run web rake db:create`.
