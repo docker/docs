@@ -25,7 +25,8 @@ the new policy to your existing role by following the instructions
 3.  In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
 4.  In the **External ID** field, enter the namespace you will be linking.
 
-    This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
+    This will either be your Docker Cloud username, or if you are using Organizations in Docker Cloud, the organization name.
+    Failure to use the correct name will result in the following error message: `Invalid AWS credentials or insufficient EC2 permissions` when attempting to link your Docker account to your AWS account.
 
 5.  Leave **Require MFA** unchecked.
 
