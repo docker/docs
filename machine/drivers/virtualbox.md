@@ -32,11 +32,11 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-boot2docker-url`: The URL of the boot2docker image. Defaults to the latest available version.
 -   `--virtualbox-import-boot2docker-vm`: The name of a Boot2Docker VM to import.
 -   `--virtualbox-hostonly-cidr`: The CIDR of the host only adapter.
--   `--virtualbox-hostonly-nictype`: Host Only Network Adapter Type. Possible values are are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
+-   `--virtualbox-hostonly-nictype`: Host Only Network Adapter Type. Possible values are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III), and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-hostonly-nicpromisc`: Host Only Network Adapter Promiscuous Mode. Possible options are deny , allow-vms, allow-all
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
--   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
+-   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the VM is started
 -   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location. Format: `dir:name`
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
@@ -57,11 +57,11 @@ downloaded already. You could also just get an ISO straight from the Internet
 using the `http://` form.
 
 To customize the host only adapter, you can use the `--virtualbox-hostonly-cidr`
-flag.  This will specify the host IP and Machine will calculate the VirtualBox
+flag. This will specify the host IP and Machine will calculate the VirtualBox
 DHCP server address (a random IP on the subnet between `.1` and `.25`) so
 it does not clash with the specified host IP.
 Machine will also specify the DHCP lower bound to `.100` and the upper bound
-to `.254`.  For example, a specified CIDR of `192.168.24.1/24` would have a
+to `.254`. For example, a specified CIDR of `192.168.24.1/24` would have a
 DHCP server between `192.168.24.2-25`, a lower bound of `192.168.24.100` and
 upper bound of `192.168.24.254`.
 
