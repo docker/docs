@@ -22,7 +22,10 @@ the new policy to your existing role by following the instructions
 
 2.  Select **Role for cross-account access**, and in the submenu that opens select **Provide access between your AWS account and a 3rd party AWS account**.
 
+  ![](images/aws-swarm-iam-role-1.png)
+
 3.  In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
+
 4.  In the **External ID** field, enter the namespace you will be linking.
 
     This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
@@ -46,37 +49,58 @@ the new policy to your existing role by following the instructions
     AWS IAM creates the new role and returns you to the **Roles** list.
 
 9.  Click the name of the role you just created to view its details.
+
 10. On the **Permissions** tab, click the carat icon next to **Inline Policies** to expand the section.
+
 11. In the **Inline Policies** section, click the link to create a policy.
+
 12. On the next page, click **Custom Policy** and click **Select**.
+
 13. On the **Policy Editor** page that appears, give the policy a name like `dockercloud-swarm-policy`.
+
 14. In the **Policy Document** section, copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
-15. Click **Create Policy**.
-16. Back on the role view, review your entries and copy the full **Role ARN** string.
+
+15. Click **Apply Policy**.
+
+16. Back on the role view, click into the new role to view details, and copy the full **Role ARN** string.
 
     The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. You'll use the ARN in the next step.
 
+    ![](images/aws-swarm-iam-role-2.png)
+
 ## Attach a policy for legacy AWS links
 
-If you already have your AWS account connected to Docker Cloud and used the legacy node cluster functionality you will need to create and attach a new policy, and re-link your account.
+If you already have your AWS account connected to Docker Cloud and used the
+legacy node cluster functionality you will need to create and attach a new
+policy, and re-link your account.
 
 1.  Go to the AWS IAM Roles list at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
+
 2.  Click your existing version of the `dockercloud-role`.
+
 3.  On the **Permissions** tab, click the carat icon next to **Inline Policies** to expand the section.
+
 4.  Click the link in the **Inline Policies** section to create a policy.
+
 5.  On the next page, click **Custom Policy** and click **Select**.
+
 6.  On the **Policy Editor** page that appears, give the policy a name like `dockercloud-swarm-policy`.
+
 7.  In the **Policy Document** section, copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
-8.  Click **Apply Policy**.
-9.  Select and copy the **Role ARN** on the role screen.
+
+8.  Click **Validate Policy**.
+
+9.  If the validation succeeds, click **Apply Policy**.
+
+10.  Select and copy the **Role ARN** on the role screen.
     It shouldn't have changed, but you'll use it to re-link your account.
 
 Because you edited the role's permissions, you need to re-link to your account.
 Back in Docker Cloud, click the account menu and select **Cloud Settings**, and
-in the **Service providers** section, click the green plug icon to unlink your
+in the **Service providers** section, click the green plug icon to _unlink_ your
 AWS account.
 
-Then follow the instructions below to re-link your account.
+Then, follow the instructions below to re-link your account.
 
 ## Add your AWS account credentials to Docker Cloud
 
