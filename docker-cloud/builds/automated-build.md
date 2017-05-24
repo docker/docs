@@ -6,7 +6,7 @@ redirect_from:
 title: Automated builds
 ---
 
-[![Automated Builds with Docker Cloud](images/video-auto-builds-docker-cloud.png)](https://youtu.be/sl2mfyjnkXk "Automated Builds with Docker Cloud"){:target="_blank"}
+[![Automated Builds with Docker Cloud](images/video-auto-builds-docker-cloud.png)](https://youtu.be/sl2mfyjnkXk "Automated Builds with Docker Cloud"){:target="_blank" class="_"}
 
 > **Note**: Docker Cloud's Build functionality is in BETA.
 
