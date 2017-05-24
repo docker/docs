@@ -91,7 +91,7 @@ intensive. It may take some time to complete, and during this time, Docker will
 not respond to other requests. If this is a problem, you can use a
 [migration tool](https://github.com/docker/v1.10-migrator/releases) to migrate
 existing images to the new format before upgrading Docker. This avoids
-downtime and allows you to distribute migraated images to systems that have
+downtime and allows you to distribute migrated images to systems that have
 already been upgraded. For more information, see
 [https://github.com/docker/v1.10-migrator/releases](https://github.com/docker/v1.10-migrator/releases).
 
@@ -121,7 +121,7 @@ multiple containers sharing the same Ubuntu 15.04 image.
 ![](images/sharing-layers.jpg)
 
 > **Note**: If you need multiple images to have shared access to the exact
-> asme data, store this data in a Docker volume and mount it into your
+> same data, store this data in a Docker volume and mount it into your
 > containers.
 
 Docker uses storage drivers to manage the contents of the image layers and the
@@ -304,11 +304,11 @@ layers are the same.
 When you start a container, a thin writable container layer is added on top of
 the other layers. Any changes the container makes to the filesystem are stored
 here. Any files the container does not change do not get copied to this writable
-layer. This means that the writable layer is as mall as possible.
+layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For The default `aufs` driver and the `overlay` and `overlay2`
+storage driver. For the default `aufs` driver and the `overlay` and `overlay2`
 drivers, the copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
