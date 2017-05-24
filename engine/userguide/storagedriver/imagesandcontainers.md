@@ -304,7 +304,7 @@ layers are the same.
 When you start a container, a thin writable container layer is added on top of
 the other layers. Any changes the container makes to the filesystem are stored
 here. Any files the container does not change do not get copied to this writable
-layer. This means that the writable layer is as mall as possible.
+layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
