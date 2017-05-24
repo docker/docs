@@ -218,22 +218,22 @@ To restart the application:
 
 If you make changes to the Gemfile or the Compose file to try out some different
 configurations, you will need to rebuild. Some changes will require only
-`docker-compose up --build`, but a full rebuild requires you to re-run
-`docker-compose run web bundle install`, followed by `docker-compose up
---build`.
+`docker-compose up --build`, but a full rebuild requires a re-run of
+`docker-compose run web bundle install` to sync changes in the `Gemfile.lock` to
+the host, followed by `docker-compose up --build`.
 
 Here is an example of the first case, where a full rebuild is not necessary.
-Suppose you want to change the exposed port on the local host from `3000` in our
-first example to `3001`. Make the change to the Compose file to expose port
-`3000` on the container through a new port, `3001`, on the host, and save the
-changes:
+Suppose you simply want to change the exposed port on the local host from `3000`
+in our first example to `3001`. Make the change to the Compose file to expose
+port `3000` on the container through a new port, `3001`, on the host, and save
+the changes:
 
 ```none
 ports: - "3001:3000"
 ```
 
-Now, rebuild with `docker-compose up --build`, and restart the database:
-`docker-compose run web rake db:create`.
+Now, rebuild and restart the app with `docker-compose up --build`, then restart
+the database: `docker-compose run web rake db:create`.
 
 Inside the container, your app is running on the same port as before `3000`, but
 the Rails Welcome is now available on `http://localhost:3001` on your local
