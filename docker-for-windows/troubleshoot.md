@@ -48,14 +48,15 @@ can use in email or the forum to reference the upload.
 
 ### Permissions errors on data directories for shared volumes
 
-Docker for Windows sets permissions on [shared volumes](/docker-for-windows/index.md#shared-drives) to a default value of
-[0770](http://permissions-calculator.org/decode/0770/) (`read`, `write`,
-`execute` permissions for `user` and `group`, none for other). If you are
+Docker for Windows sets permissions on [shared
+volumes](/docker-for-windows/index.md#shared-drives) to a default value of
+[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
+`execute` permissions for `user`, `read` and `execute` for `group`). If you are
 working with applications that require permissions different than this default,
 you will likely get errors similar to the following.
 
 ```
-Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0770 so that the directory cannot be listed by other users.
+Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0755 so that the directory cannot be listed by other users.
 ```
 
 The default permissions on shared volumes are not configurable. If you are
