@@ -161,11 +161,10 @@ can take over 15 minutes to complete.
    Copying nested executables into bundles/1.12.0-dev/binary
    ```
 
-7. Copy the binary to the container's **/usr/bin/** directory.
+7. Copy the binary to the container's **/usr/local/bin/** directory.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
-   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/latest/binary-daemon/docker* /usr/local/bin/
    ```
 
 8. Start the Engine daemon running in the background.
