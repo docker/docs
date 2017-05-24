@@ -175,7 +175,7 @@ ebf814eccfe98f2704660ca1d844e4348db3b5ccc637eb905d4818fbfb00a06a
 The directory names do not correspond to the layer IDs (this has been true since
 Docker 1.10).
 
-Now imagine that you have to different Dockerfiles. You use the first one to
+Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
 
 ```conf
