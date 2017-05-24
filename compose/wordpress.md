@@ -60,7 +60,12 @@ Compose to set up and run WordPress. Before starting, you'll need to have
         db_data:
     ```
 
-    **NOTE**: The docker volume `db_data` will persist any updates made by wordpress to the database. [Learn more about docker volumes](../engine/tutorials/dockervolumes.md)
+   > **Notes:**
+   >
+   * The docker volume `db_data` will persist any updates made by wordpress to the database. [Learn more about docker volumes](../engine/tutorials/dockervolumes.md)
+   >
+   * WordPress Multisite works only on ports `80` and/or `443`.
+   {: .note-vanilla}
 
 ### Build the project
 
@@ -88,15 +93,22 @@ This pulls the needed images, and starts the wordpress and database containers, 
     Creating my_wordpress_db_1
     Creating my_wordpress_wordpress_1
 
+> **Note:** WordPress Multisite works only on ports `80` and/or `443`.
+If you get an error message about binding `0.0.0.0` to port `80` or `443`
+(depending on which one you specified), it is likely that the port you
+configured for WordPress is already in use by another service.
+
 ### Bring up WordPress in a web browser
 
-If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
+If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM`
+gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a
+browser.
 
 At this point, WordPress should be running on port `8000` of your Docker Host,
 and you can complete the "famous five-minute installation" as a WordPress
 administrator.
 
-**NOTE**: The WordPress site will not be immediately available on port `8000`
+> **Note:** The WordPress site will not be immediately available on port `8000`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
 
@@ -105,9 +117,12 @@ minutes before the first load.
 ![WordPress Welcome](images/wordpress-welcome.png)
 
 ### Shutdown/Clean up
+
 `docker-compose down` will remove the containers and default network, but
-preserve your wordpress database. `docker-compose down --volumes` will remove
-the containers, default network, and the wordpress database.
+preserve your Wordpress database.
+
+`docker-compose down --volumes` will remove
+the containers, default network, and the Wordpress database.
 
 ## More Compose documentation
 
