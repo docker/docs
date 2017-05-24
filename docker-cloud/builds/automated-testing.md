@@ -79,11 +79,10 @@ Docker repository, regardless of the Autotest settings.
     * `Internal pull requests`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
     * `Internal and external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
 
-    > **Note**: For security purposes, autotest on _external pull requests_ is
-    disabled on public repositories. If you select this option on a public
-    repository, tests will still run on _internal_ pull requests (for example
-    from one branch into another inside the code repository) but not on for
-    external pull requests.
+    > **Note**: For security purposes, autotest on _external pull requests_ is 
+    limited on public repositories. Private images will not be pulled and environment 
+    variables defined in Docker Cloud will not be available. Automated builds will 
+    continue to work as usual.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.
