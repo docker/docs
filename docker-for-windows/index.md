@@ -374,12 +374,13 @@ access the mounted volumes.
 > shared drives are needed. (See also
 > [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
-> * You cannot control (`chmod`) permissions on shared volumes for deployed containers. Docker for Windows sets permissions to a default value of
-[0770](http://permissions-calculator.org/decode/0770/) (read, write, execute permissions for
-`user` and `group`, none for other). This is not configurable. See the
-troubleshooting topic [Permissions errors on data directories for shared
-volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes)
-for workarounds and more detail.
+> * You cannot control (`chmod`) permissions on shared volumes for
+deployed containers. Docker for Windows sets permissions to a default value of
+[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
+`execute` permissions for `user`, `read` and `execute` for `group`). This is not
+configurable. See the troubleshooting topic [Permissions errors on data
+directories for shared
+volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) for workarounds and more detail.
 >
 > * You can share local drives with your _containers_ but not with
 > Docker Machine nodes. See
