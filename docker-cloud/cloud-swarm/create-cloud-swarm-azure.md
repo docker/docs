@@ -18,12 +18,11 @@ provider.
 
 ![](images/azure-creds-cloud.png)
 
-> If you are using a Microsoft Azure Visual Studio MSDN
+> **Note:** If you are using a Microsoft Azure Visual Studio MSDN
 subscription, you need to enable _programmatic deployments_ on the Docker CE
 VM Azure Marketplace item. See the Microsoft Azure blog post on [Working with
 Marketplace Images on Azure Resource
-Manager](https://azure.microsoft.com/en-us/blog/working-with-marketplace-images-on-azure-resource-manager/) for instructions on how to do this.
-{: .important-vanilla}
+Manager](https://azure.microsoft.com/en-us/blog/working-with-marketplace-images-on-azure-resource-manager/){: target="_blank" class="_"} for instructions on how to do this.
 
 ## Create a swarm
 
