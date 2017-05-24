@@ -64,12 +64,11 @@ storage driver is configured, Docker uses it by default.
     <truncated output>
     ```
 
-3.  If you are using a different storage driver, then it means that either AUFS
-    is not included in the kernel (in which case a different default driver will
-    be used) or that means that Docker has been explicitly configured to use a
-    different driver. Check `/etc/docker/daemon.json` or the output of
-    `ps auxw |grep dockerd` to see if Docker has been started with the
-    `--storage-driver` flag.
+3.  If you are using a different storage driver, either AUFS is not included in
+    the kernel (in which case a different default driver will be used) or that
+    Docker has been explicitly configured to use a different driver. Check
+    `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
+    if Docker has been started with the `--storage-driver` flag.
 
 
 ## How the `aufs` storage driver works
@@ -112,6 +111,9 @@ Status: Downloaded newer image for ubuntu:latest
 
 #### The image layers
 
+> **Warning**: Do not directly manipulate any files or directories within
+> `/var/lib/docker/`. These files and directories are managed by Docker.
+
 All of the information about the image and container layers is stored in
 subdirectories of `/var/lib/docker/aufs/`.
 
@@ -128,10 +130,6 @@ subdirectories of `/var/lib/docker/aufs/`.
 
 If a container is running, the contents of `/var/lib/docker/aufs/` change in the
 following ways:
-
-> **Note**: If you see files or directories which end in `-init`, these are used
-> to prepare the container to use bind mounts, and should be considered an
-> implementation detail.
 
 - `diff/`: Differences introduced in the writable container layer, such as new
    or modified files.

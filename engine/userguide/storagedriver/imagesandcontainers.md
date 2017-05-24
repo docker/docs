@@ -43,68 +43,11 @@ new files, modifying existing files, and deleting files, are written to this thi
 writable container layer. The diagram below shows a container based on the Ubuntu
 15.04 image.
 
-The diagram below shows a container with the Ubuntu 15.04 image comprising 4
-stacked image layers, and the writable container layer on top.
-
 ![Docker image layers](images/container-layers.jpg)
 
 A _storage driver_ handles the details about the way these layers interact with
 each other. Different storage drivers are available, which have advantages
 and disadvantages in different situations.
-
-### Content addressable storage
-
-If you are already running Docker 1.10 or higher, you can skip this section and
-go straight to [Containers and layers](#containers-and-layers).
-
-Docker 1.10 introduced a new content addressable storage model. This is a
-completely new way to address image and layer data on disk. Previously, image
-and layer data was referenced and stored using a randomly generated UUID. In
-the new model this is replaced by a secure *content hash*.
-
-The new model improves security, provides a built-in way to avoid ID
-collisions, and guarantees data integrity after pull, push, load, and save
-operations. It also enables better sharing of layers by allowing many images to
-freely share their layers even if they didn’t come from the same build.
-
-The diagram below shows an updated version of the previous diagram,
-highlighting the changes implemented by Docker 1.10.
-
-![](images/container-layers-cas.jpg)
-
-All image layer IDs are cryptographic hashes, whereas the container ID is still
-a randomly generated UUID.
-
-The new model requires you to migrate existing images from Docker 1.9 and
-earlier, and it includes several changes to the filesystem structure of images
-and layers. If you are already running Docker 1.10 or higher, you can skip this
-section.
-
-Images created within Docker 1.9 or earlier need to be migrated before they can
-be used with the new model. This migration involves calculating new secure
-checksums and is performed automatically the first time you start an updated
-Docker daemon. After the migration is complete, all images and tags will have
-brand new secure IDs.
-
-Although the migration is automatic and transparent, it is computationally
-intensive. It may take some time to complete, and during this time, Docker will
-not respond to other requests. If this is a problem, you can use a
-[migration tool](https://github.com/docker/v1.10-migrator/releases) to migrate
-existing images to the new format before upgrading Docker. This avoids
-downtime and allows you to distribute migrated images to systems that have
-already been upgraded. For more information, see
-[https://github.com/docker/v1.10-migrator/releases](https://github.com/docker/v1.10-migrator/releases).
-
-During the migration, you need to expose your Docker host's data directory to
-the migration container. If you are using the default Docker data path, use a
-command like the following:
-
-```bash
-$ sudo docker run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
-```
-
-If you use the `devicemapper` storage driver, you need to include the
-`--privileged` option so that the container has access to your storage devices.
 
 ## Container and layers
 

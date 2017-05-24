@@ -100,7 +100,7 @@ to the container's writable layer.
 
 Docker for Mac and Docker for Windows only support `overlay2` `aufs`, or
 `overlay`. However, `overlay` is not recommended. `aufs` is the default in
-stable releases and `overlay2` is the default in Edge releases. In addition,
+stable releases and `overlay2` is the default in Edge releases.
 
 ## Supported backing filesystems
 
@@ -149,7 +149,7 @@ Each Docker storage driver is based on a Linux filesystem or volume manager. Be
 sure to follow existing best practices for operating your storage driver
 (filesystem or volume manager) on top of your shared storage system. For
 example, if using the ZFS storage driver on top of a shared storage system, be
-sure to follow best practices for operating aZFS filesystems on top of that
+sure to follow best practices for operating ZFS filesystems on top of that
 specific shared storage system.
 
 ### Stability
