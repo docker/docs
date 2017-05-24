@@ -5,6 +5,8 @@ keywords: swarm mode, swarms, create swarm, Cloud, Azure
 title: Create a new swarm on Microsoft Azure in Docker Cloud
 ---
 
+[![Deploying Swarms on Microsoft Azure with Docker Cloud](images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+
 {% include content/cloud-swarm-overview.md %}
 
 ## Link Docker Cloud to your service provider

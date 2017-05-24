@@ -67,7 +67,7 @@ culpa qui officia deserunt mollit anim id est laborum.
 ### Links
 
 - [a markdown link](https://docker.com/)
-
+https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
@@ -102,6 +102,18 @@ might be interesting. You can use them with Markdown or HTML images.
 
 - The same one, but using HTML: <img class="img-thumbnail" src="/images/footer_moby_icon.png" alt="a pretty wide image as a thumbnail, using HTML"/>
 
+## Videos
+
+You can add a link to a YouTube video like this:
+
+[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+
+To make the `.png` shown above, first take a screen snap of the YouTube video
+you want to use, then use a graphics app to overlay a play button onto the
+image.
+
+For the overlay, you can use the play button at
+[/docker-cloud/images/](https://github.com/docker/docker.github.io/tree/master/docker-cloud/images).
 
 ## Lists
 
