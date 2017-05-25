@@ -1,7 +1,8 @@
 ---
 description: Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker.
 keywords: dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql
-title: "Quickstart: Compose and ASP.NET Core with SQL Server"
+title: |-
+  Quickstart: Compose and ASP.NET Core with SQL Server
 ---
 
 This quick-start guide demonstrates how to use Docker Engine on Linux and Docker
