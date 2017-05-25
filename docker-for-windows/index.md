@@ -262,7 +262,7 @@ PowerShell Module as follows.
     Install-Module posh-docker
     ```
 
-    Or, to install the module for the current user only:
+    Or, to install the module for the current user only, type:
 
     ```ps
     Install-Module -Scope CurrentUser posh-docker
@@ -299,9 +299,9 @@ PowerShell Module as follows.
     Notepad $PROFILE
     ```
 
-Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
-as `start`, `stop`, `run`, and their options, along with container and image
-names should now auto-complete.
+Open a new PowerShell session. Now, when you press tab after typing the first
+few letters, Docker commands such as `start`, `stop`, `run`, and their options,
+along with container and image names should now auto-complete.
 
 ## Docker Settings
 
