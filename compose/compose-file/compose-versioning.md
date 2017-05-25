@@ -9,11 +9,11 @@ networks, and volumes for a Docker application.
 
 The Compose file formats are now described in these references, specific to each version.
 
-| **Reference file**       | **What changed in this version** |
-|  -------------------     |    ------------------            |
-|[Version 3](index.md) (most current, and recommended) |[Version 3 updates](#version-3) |
-| [Version 2](compose-file-v2.md)  |[Version 2 updates](#version-2) |
-| [Version 1](compose-file-v1.md) | [Version 1 updates](#version-1) |
+| **Reference file**                                    | **What changed in this version** |
+|:------------------------------------------------------|:---------------------------------|
+| [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
+| [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
+| [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
 
 The topics below explain the differences among the versions, Docker Engine
 compatibility, and [how to upgrade](#upgrading).
