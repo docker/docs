@@ -188,7 +188,8 @@ between services and startup order.
 ### Version 2.1
 
 An upgrade of [version 2](#version-2) that introduces new parameters only
-available with Docker Engine version **1.12.0+**
+available with Docker Engine version **1.12.0+**. Version 2.1 files are
+supported by **Compose 1.9.0+**
 
 Introduces the following additional parameters:
 
@@ -204,8 +205,9 @@ Introduces the following additional parameters:
 ### Version 2.2
 
 An upgrade of [version 2.1](#version-21) that introduces new parameters only
-available with Docker Engine version **1.13.0+**. This version also allows
-to specify default scale numbers inside the service's configuration.
+available with Docker Engine version **1.13.0+**.  Version 2.2 files are 
+supported by **Compose 1.13.0+**. This version also allows you to specify
+default scale numbers inside the service's configuration.
 
 Introduces the following additional parameters:
 
