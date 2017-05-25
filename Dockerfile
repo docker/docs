@@ -5,7 +5,7 @@ FROM starefossen/github-pages:137
 
 # Install nginx
 
-RUN apk add nginx && apk add git
+RUN apk add nginx && apk add git && apk add subversion && apk add wget
 
 # Forward nginx request and error logs to docker log collector
 
