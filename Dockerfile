@@ -1,7 +1,7 @@
 FROM docs/docker.github.io:docs-base
 
-# docs-base contains: GitHub Pages, nginx, and the docs archives, running on
-# Debian Jesse. See the contents of docs-base at:
+# docs-base contains: GitHub Pages, nginx, wget, svn, and the docs archives,
+# running on Alpine. See the contents of docs-base at:
 # https://github.com/docker/docker.github.io/tree/docs-base
 
 # First, build non-edge (all of this is duplicated later -- that is on purpose)
@@ -32,4 +32,3 @@ RUN md_source/_scripts/fetch-upstream-resources.sh \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
 	&& rm -rf md_source
-
