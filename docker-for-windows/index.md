@@ -249,29 +249,35 @@ PowerShell Module as follows.
     to allow downloaded scripts signed by trusted publishers to run on your
     computer. To do so, type this at the PowerShell prompt.
 
-    ```none
+    ```ps
     Set-ExecutionPolicy RemoteSigned
     ```
 
     To check that the policy is set properly, run `get-executionpolicy`, which
     should return `RemoteSigned`.
 
-3.  To install auto-completion of commands for PowerShell, type:
+3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
 
-    ```none
+    ```ps
     Install-Module posh-docker
+    ```
+
+    Or, to install the module for the current user only, type:
+
+    ```ps
+    Install-Module -Scope CurrentUser posh-docker
     ```
 
 4.  After installation to enable autocompletion for the current PowerShell only, type:
 
-    ```none
+    ```ps
     Import-Module posh-docker
     ```
 
 5.  To make tab completion persistent across all PowerShell sessions, add the
     command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
-    ```none
+    ```ps
     if (-Not (Test-Path $PROFILE)) {
         New-Item $PROFILE –Type File –Force
     }
@@ -282,20 +288,20 @@ PowerShell Module as follows.
     This creates a `$PROFILE` if one does not already exist, and adds this line
     into the file:
 
-    ```none
+    ```ps
     Import-Module posh-docker
     ```
 
     To check that the file was properly created, or simply edit it manually,
     type this in PowerShell:
 
-    ```none
+    ```ps
     Notepad $PROFILE
     ```
 
-Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
-as `start`, `stop`, `run`, and their options, along with container and image
-names should now auto-complete.
+Open a new PowerShell session. Now, when you press tab after typing the first
+few letters, Docker commands such as `start`, `stop`, `run`, and their options,
+along with container and image names should now auto-complete.
 
 ## Docker Settings
 
@@ -447,7 +453,7 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
-```none
+```ps
 PS C:\Users\jdoe> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
