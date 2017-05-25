@@ -1,19 +1,11 @@
-FROM starefossen/github-pages:112
+FROM starefossen/github-pages:137
 
 # This is the source for docs/docs-base. Push to that location to ensure that
 # the production image gets your update :)
 
 # Install nginx
 
-ENV NGINX_VERSION 1.11.9-1~jessie
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
-						ca-certificates \
-						nginx=${NGINX_VERSION} \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apk add nginx && apk add git
 
 # Forward nginx request and error logs to docker log collector
 
@@ -80,4 +72,4 @@ COPY index.html target
 
 # Serve the site (target), which is now all static HTML
 
-CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && exec nginx
+CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && nginx -g 'pid /tmp/nginx.pid;'
