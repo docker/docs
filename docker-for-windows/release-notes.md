@@ -23,7 +23,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- security fix for CVE-2017-7308  
+- Security fix for CVE-2017-7308  
 
 ### Docker Community Edition 17.03.0, 2017-03-02 (stable)
 
@@ -313,7 +313,7 @@ We did not distribute a 1.12.4 stable release
 
 **Upgrades**
 
-- security fix for CVE-2017-7308  
+- Security fix for CVE-2017-7308  
 
 ### Docker Community Edition 17.0.5c-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
 

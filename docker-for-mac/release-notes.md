@@ -23,7 +23,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- security fix for CVE-2017-7308
+- Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29 (stable)
 
@@ -359,7 +359,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-- security fix for CVE-2017-7308
+- Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.05.0-ce-mac9, 2017-05-09 (edge)
 
