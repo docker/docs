@@ -71,7 +71,7 @@ restart Docker. This method works for every Docker platform. The following
   "tls": true,
   "tlscert": "/var/docker/server.pem",
   "tlskey": "/var/docker/serverkey.pem",
-  "hosts": "tcp://192.168.59.3:2376"
+  "hosts": ["tcp://192.168.59.3:2376"]
 }
 ```
 
