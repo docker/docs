@@ -19,6 +19,12 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.03.1-ce-win12  2017-05-12 (stable)
+
+**Upgrades**
+
+- security fix for CVE-2017-7308  
+
 ### Docker Community Edition 17.03.0, 2017-03-02 (stable)
 
 **New**

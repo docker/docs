@@ -19,6 +19,26 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12 (stable)
+
+**Upgrades**
+
+- security fix for CVE-2017-7308
+
+### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29 (stable)
+
+**Upgrades**
+
+- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+
+
+### Docker Community Edition 17.03.1-ce-mac4, 2017-03-28 (stable)
+
+**Hotfixes**
+
+- Set the ethernet MTU to 1500 to prevent a hyperkit crash
+- Fix docker build on private images
+
 ### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (stable)
 
 **Hotfixes**
