@@ -34,7 +34,8 @@ and the [Dockerfile reference](/engine/reference/builder.md).
 Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
-    source 'https://rubygems.org' gem 'rails', '5.0.0.1'
+    source 'https://rubygems.org' 
+    gem 'rails', '5.0.0.1'
 
 You'll need an empty `Gemfile.lock` in order to build our `Dockerfile`.
 
