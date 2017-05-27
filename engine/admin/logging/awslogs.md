@@ -201,8 +201,7 @@ INFO Another multiline message was logged
 INFO Another message was logged
 ```
 
-Use the following value for `awslogs-multiline-pattern`, to match lines that
-start with `INFO`.
+You can use the strftime expression of `[%b %d, %Y %H:%M:%S]`:
 
 ```bash
 $ docker run --log-driver=awslogs \
