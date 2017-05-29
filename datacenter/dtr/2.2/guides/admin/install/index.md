@@ -32,6 +32,8 @@ You can't install DTR on a standalone Docker Engine.
 To install DTR you use the `docker/dtr` image. This image has commands to
 install, configure, and backup DTR.
 
+Download an offline bundle from UCP. This will set up the proper certificates.
+
 Run the following command to install DTR:
 
 ```none
