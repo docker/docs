@@ -78,7 +78,7 @@ that you've installed using that node's root CA material.
 
     ```bash
     $ docker run --rm -it \
-      --name ucp \
+      --name ucp --privileged\
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp:<version> \
       upgrade --interactive
