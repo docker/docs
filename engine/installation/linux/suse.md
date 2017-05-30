@@ -180,9 +180,12 @@ the repository.
     $ sudo zypper install docker-ee-<VERSION_STRING>
     ```
 
-4.  Configure Docker to use the `btrfs` filesystem. Edit the file
-    `/etc/docker/daemon.json` (create it if it does not exist) and add the
-    following contents:
+4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+    `storage-driver` has no harmful side effects.
+
+    Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
+    add the following contents:
 
     ```json
     {
@@ -243,9 +246,12 @@ need to download a new file each time you want to upgrade Docker.
     $ sudo zypper install /path/to/package.rpm
     ```
 
-4.  Configure Docker to use the `btrfs` filesystem. Edit the file
-    `/etc/docker/daemon.json` (create it if it does not exist) and add the
-    following contents:
+4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+    `storage-driver` has no harmful side effects.
+
+    Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
+    add the following contents:
 
     ```json
     {

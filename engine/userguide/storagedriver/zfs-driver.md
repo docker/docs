@@ -87,7 +87,7 @@ use unless you have substantial experience with ZFS on Linux.
 
     Save and close the file.
 
-4.  Start docker. Use `docker info` to verify that the storage driver is `zfs`.
+4.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
 
     ```bash
     $ sudo docker info
@@ -105,8 +105,8 @@ use unless you have substantial experience with ZFS on Linux.
        Space Available: 103498395648
        Parent Quota: no
        Compression: off
-      <output truncated>
-      ```
+    <output truncated>
+    ```
 
 ## Manage `zfs`
 

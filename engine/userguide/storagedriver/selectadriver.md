@@ -98,9 +98,9 @@ to the container's writable layer.
 
 ### Docker for Mac and Docker for Windows
 
-Docker for Mac and Docker for Windows only support `overlay2` `aufs`, or
-`overlay`. However, `overlay` is not recommended. `aufs` is the default in
-stable releases and `overlay2` is the default in Edge releases. In addition,
+Docker for Mac and Docker for Windows are intended for development, rather
+than production. Modifying the storage driver on these platforms is not
+supported.
 
 ## Supported backing filesystems
 
@@ -149,7 +149,7 @@ Each Docker storage driver is based on a Linux filesystem or volume manager. Be
 sure to follow existing best practices for operating your storage driver
 (filesystem or volume manager) on top of your shared storage system. For
 example, if using the ZFS storage driver on top of a shared storage system, be
-sure to follow best practices for operating aZFS filesystems on top of that
+sure to follow best practices for operating ZFS filesystems on top of that
 specific shared storage system.
 
 ### Stability
@@ -198,9 +198,8 @@ Storage Driver: overlay
 
 To set the storage driver, set the option in the `daemon.json`
 file, which is located in `/etc/docker/` on Linux and
-`C:\ProgramData\docker\config\` on Windows Server. If you use Docker for Mac or
-Docker for Windows, click the Docker icon, choose **Preferences**, and choose
-**Daemon** on Docker for Mac or Docker for Windows.
+`C:\ProgramData\docker\config\` on Windows Server. Changing the storage driver
+on Docker for Mac or Docker for Windows is not supported.
 
 If the `daemon.json` file does not exist, create it. Assuming there are no other
 settings in the file, it should have the following contents:
@@ -215,14 +214,6 @@ You can specify any valid storage driver in place of `devicemapper`.
 
 Restart Docker for the changes to take effect. After restarting, run
 `docker info` again to verify that the new storage driver is being used.
-
-### Extra steps for Docker for Mac or Docker for Windows
-
-Before you change the default storage driver on Docker for Mac or Docker for
-Windows, it is recommended to do a factory reset to wipe the old storage
-location, since you will not be able to access it after you change the storage
-driver. If you need to save any containers, use `docker save` before doing the
-reset.
 
 ## Related information
 

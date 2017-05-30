@@ -203,16 +203,16 @@ assumes that the Docker daemon is in the `stopped` state.
     the thin pool, using the `lgconvert` command.
 
     ```none
-      $ sudo lvconvert -y \
-      --zero n \
-      -c 512K \
-      --thinpool docker/thinpool \
-      --poolmetadata docker/thinpoolmeta
+    $ sudo lvconvert -y \
+    --zero n \
+    -c 512K \
+    --thinpool docker/thinpool \
+    --poolmetadata docker/thinpoolmeta
 
-      WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to thin pool's data and metadata volumes with metadata wiping.
-      THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
-      Converted docker/thinpool to thin pool.
-      ```
+    WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to thin pool's data and metadata volumes with metadata wiping.
+    THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
+    Converted docker/thinpool to thin pool.
+    ```
 
 8.  Create an LVM profile that will enable automatic extension of the thin
     pool. Edit the file `/etc/lvm/profile/docker-thinpool.profile` and add the
@@ -247,12 +247,12 @@ assumes that the Docker daemon is in the `stopped` state.
     The example below will add 20% more capacity when the disk usage reaches
     80%.
 
-      ```none
-      activation {
-        thin_pool_autoextend_threshold=80
-        thin_pool_autoextend_percent=20
-      }
-      ```
+    ```none
+    activation {
+      thin_pool_autoextend_threshold=80
+      thin_pool_autoextend_percent=20
+    }
+    ```
 
     Save the file.
 
@@ -303,7 +303,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 13. Start Docker.
 
- 	  **systemd**:
+    **systemd**:
 
     ```bash
     $ sudo systemctl start docker
@@ -487,19 +487,15 @@ thin pool is 100 GB, and is increased to 200 GB.
     a.  Get the pool name first. The pool name is the first field, delimited by
         ` :`. This command extracts it.
 
-        ```bash
-        $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+            $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
 
-        docker-8:1-123141-pool
-        ```
+            docker-8:1-123141-pool
 
     b.  Dump the device mapper table for the thin pool.
 
-        ```bash
-        $ sudo dmsetup table docker-8:1-123141-pool
+            $ sudo dmsetup table docker-8:1-123141-pool
 
-        0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
-        ```
+            0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
 
     c.  Calculate the total sectors of the thin pool using the second field
         of the output. The number is expressed in 512-k sectors. A 100G file has
@@ -509,13 +505,12 @@ thin pool is 100 GB, and is increased to 200 GB.
     d.  Reload the thin pool with the new sector number, using the following
         three `dmsetup`  commands.
 
-        ```bash
-        $ sudo dmsetup suspend docker-8:1-123141-pool
+            $ sudo dmsetup suspend docker-8:1-123141-pool
 
-        $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
+            $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
 
-        $ sudo dmsetup resume docker-8:1-123141-pool
-        ```
+            $ sudo dmsetup resume docker-8:1-123141-pool
+
 
 #### Resize a direct-lvm thin pool
 
