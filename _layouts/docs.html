@@ -49,7 +49,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta property="og:image" content="/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+	<meta property="og:updated_time"itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.com"/>
@@ -59,7 +59,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="twitter:description" property="og:description" itemprop="description" content="{{ content | strip_html | truncatewords: 30}}" />
 	<meta name="twitter:image:src" content="/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+	<meta property="article:published_time" itemprop="datePublished" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
