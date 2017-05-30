@@ -22,7 +22,8 @@ example webhook below generates an HTTP POST that delivers a JSON payload:
         "..."
     ],
     "pushed_at": 1.417566161e+09,
-    "pusher": "trustedbuilder"
+    "pusher": "trustedbuilder",
+    "tag": "latest"
   },
   "repository": {
     "comment_count": "0",
