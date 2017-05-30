@@ -13,12 +13,15 @@ Compose to set up and run WordPress. Before starting, you'll need to have
 
 1. Create an empty project directory.
 
-    You can name the directory something easy for you to remember. This directory is the context for your application image. The directory should only contain resources to build that image.
+    You can name the directory something easy for you to remember.
+    This directory is the context for your application image. The
+    directory should only contain resources to build that image.
 
     This project directory will contain a `docker-compose.yml` file which will
     be complete in itself for a good starter wordpress project.
 
-    >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+    >**Tip**: You can use either a `.yml` or `.yaml` extension for
+    this file. They both work.
 
 2. Change directories into your project directory.
 
@@ -60,18 +63,20 @@ Compose to set up and run WordPress. Before starting, you'll need to have
         db_data:
     ```
 
-   > **Notes:**
+   > **Notes**:
    >
-   * The docker volume `db_data` will persist any updates made by wordpress to the database. [Learn more about docker volumes](../engine/tutorials/dockervolumes.md)
+   * The docker volume `db_data` persists any updates made by Wordpress
+   to the database. [Learn more about docker volumes](/engine/tutorials/dockervolumes.md)
    >
-   * WordPress Multisite works only on ports `80` and/or `443`.
+   * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
 
 ### Build the project
 
 Now, run `docker-compose up -d` from your project directory.
 
-This pulls the needed images, and starts the wordpress and database containers, as shown in the example below.
+This pulls the needed images, and starts the wordpress and database
+containers, as shown in the example below.
 
     $ docker-compose up -d
     Creating network "my_wordpress_default" with the default driver
@@ -100,10 +105,6 @@ configured for WordPress is already in use by another service.
 
 ### Bring up WordPress in a web browser
 
-If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM`
-gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a
-browser.
-
 At this point, WordPress should be running on port `8000` of your Docker Host,
 and you can complete the "famous five-minute installation" as a WordPress
 administrator.
@@ -112,17 +113,25 @@ administrator.
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
 
+If you are using [Docker Machine](/machine/), you can run the command
+`docker-machine ip MACHINE_VM` to get the machine address, and then open
+`http://MACHINE_VM_IP:8000` in a web browser.
+
+If you are using Docker for Mac or Docker for Windows, you can use
+`http://localhost` as the IP address, and open `http://localhost:8000` in a web
+browser.
+
 ![Choose language for WordPress install](images/wordpress-lang.png)
 
 ![WordPress Welcome](images/wordpress-welcome.png)
 
 ### Shutdown/Clean up
 
-`docker-compose down` will remove the containers and default network, but
-preserve your Wordpress database.
+The command `docker-compose down` removes the containers and default network,
+but preserves your Wordpress database.
 
-`docker-compose down --volumes` will remove
-the containers, default network, and the Wordpress database.
+The command `docker-compose down --volumes` removes the containers, default
+network, and the Wordpress database.
 
 ## More Compose documentation
 
