@@ -128,8 +128,8 @@ browser.
 
 ### Shutdown and Cleanup
 
-The command `docker-compose down` removes the containers and default network,
-but preserves your Wordpress database.
+The command [docker-compose down](/compose/reference/down/) removes the
+containers and default network, but preserves your Wordpress database.
 
 The command `docker-compose down --volumes` removes the containers, default
 network, and the Wordpress database.

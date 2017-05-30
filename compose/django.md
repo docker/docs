@@ -90,7 +90,8 @@ In this step, you create a Django starter project by building the image from the
 
 1. Change to the root of your project directory.
 
-2. Create the Django project using the `docker-compose` command.
+2. Create the Django project by running
+the [docker-compose run](/compose/reference/run/) command as follows.
 
         docker-compose run web django-admin.py startproject composeexample .
 
@@ -156,7 +157,7 @@ In this section, you set up the database connection for Django.
 
 3.  Save and close the file.
 
-4.  Run the `docker-compose up` command from the top level directory for your project.
+4.  Run the [docker-compose up](/compose/reference/up/) command from the top level directory for your project.
 
     ```none
     $ docker-compose up
@@ -223,7 +224,7 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       Killing test_db_1 ... done
       ```
 
-    * Or, for a more elegant shutdown, switch to a different shell, and run `docker-compose down` from the top level of your Django sample project directory.
+    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](/compose/reference/down/) from the top level of your Django sample project directory.
 
       ```none
       vmb at mymachine in ~/sandbox/django

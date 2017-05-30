@@ -66,7 +66,7 @@ to link them together and expose the web app's port.
 ### Build the project
 
 With those four files in place, you can now generate the Rails skeleton app
-using `docker-compose run`:
+using [docker-compose run](/compose/reference/run/):
 
     docker-compose run web rails new . --force --database=postgresql
 
@@ -139,7 +139,7 @@ test:
 
 You can now boot the app with:
 
-    docker-compose up
+    [docker-compose up](/compose/reference/up/)
 
 If all's well, you should see some PostgreSQL output, and then—after a few
 seconds—the familiar refrain:
@@ -178,10 +178,10 @@ Docker host IP address, to which you can append the port
 
 ### Stop the application
 
-To stop the application, run `docker-compose down` in your project directory.
-You can use the same terminal window in which you started the database, or
-another one where you have access to a command prompt. This is a clean way to
-stop the application.
+To stop the application, run [docker-compose down](/compose/reference/down/) in
+your project directory. You can use the same terminal window in which you
+started the database, or another one where you have access to a command prompt.
+This is a clean way to stop the application.
 
 ```none
 vmb at snapair in ~/sandbox/rails
