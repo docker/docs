@@ -17,7 +17,8 @@ Options:
 ```
 
 Services are built once and then tagged, by default as `project_service`, e.g.,
-`composetest_db`. If the compose file specify an image name, the image will be
+`composetest_db`. If the compose file specify an
+[image](/compose/compose-file/index.md#image) name, the image will be
 tagged with that name, substituting any variables beforehand. See [variable
 substitution](#variable-substitution)
 
