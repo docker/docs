@@ -125,7 +125,7 @@ browser.
 
 ![WordPress Welcome](images/wordpress-welcome.png)
 
-### Shutdown/Clean up
+### Shutdown and Cleanup
 
 The command `docker-compose down` removes the containers and default network,
 but preserves your Wordpress database.
