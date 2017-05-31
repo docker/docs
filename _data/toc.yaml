@@ -334,7 +334,7 @@ guides:
   - path: /engine/swarm/swarm_manager_locking/
     title: Lock your swarm
   - path: /engine/swarm/networking/
-    title: Attach services to an overlay network
+    title: Manage swarm service networks
   - path: /engine/swarm/admin_guide/
     title: Swarm administration guide
   - path: /engine/swarm/raft/
