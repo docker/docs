@@ -58,6 +58,34 @@ frequency for nodes to renew their certificates. The minimum rotation value is 1
 hour. Refer to the [docker swarm update](../../reference/commandline/swarm_update.md)
 CLI reference.
 
+## Rotating the CA certificate
+
+In the event that a cluster CA key or a manager node is compromised, the swarm root
+CA can be rotated so that none of the nodes will trust certificates signed by the old
+root CA anymore.
+
+You can run `docker swarm ca --rotate` to tell swarm to generate a new CA certificate
+and key.  If you prefer, you can pass the `--ca-cert` and `--external-ca` flags to specify
+the root certificate and a root CA external to the swarm.  Alternately, you can pass the
+`--ca-cert` and `--ca-key` flags to specify the exact certificate and key you would like
+the swarm to use.
+
+When the command is issued, swarm will generate a cross-signed certificate (a version of the
+new root CA certificate that is signed with the old root CA certificate), and use this
+as an intermediate certificate for all new node certificates.  This is so nodes that still
+trust the old root CA will be able to validate a certificate that is signed by the
+new root CA.
+
+During a root rotation, swarm will also tell all nodes (>= 17.06) to immediately renew
+TLS certificates. Once every node in the swarm has a TLS certificate signed by the new CA,
+(which may take a little while, depending on the number of nodes) swarm will forget about
+the old CA certificate and key material and tell all the nodes to trust the new CA
+certificate only.  This will also cause a change in the swarm's join tokens - the previous
+join tokens will no longer be valid.
+
+From this point on, all new node certificates issued will be signed with the new root CA,
+and will not contain any intermediates.
+
 ## Learn More
 
 * Read about how [nodes](nodes.md) work.
