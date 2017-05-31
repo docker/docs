@@ -214,35 +214,20 @@ assumes that the Docker daemon is in the `stopped` state.
     Converted docker/thinpool to thin pool.
     ```
 
-8.  Create an LVM profile that will enable automatic extension of the thin
-    pool. Edit the file `/etc/lvm/profile/docker-thinpool.profile` and add the
-    following contents:
-
-    ```none
-    thin_pool_autoextend_threshold = 80
-    ```
-
-    If desired, set a different value. The value refers to the percentage of
-    space that needs to be used before LVM attempts to auto-extend the available
-    space. To disable automatic extension entirely, set the value to `100`. This
-    is not recommended.
-
-    Save the file.
-
-7.  Configure autoextension of thin pools via an `lvm` profile.
+8.  Configure autoextension of thin pools via an `lvm` profile.
 
     ```bash
     $ sudo vi /etc/lvm/profile/docker-thinpool.profile
     ```
 
-8.  Specify `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
+9.  Specify `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
     values.
 
     `thin_pool_autoextend_threshold` is the percentage of space used before `lvm`
-    attempts to autoextend the available space (0 = disabled).
+    attempts to autoextend the available space (100 = disabled, not recommended).
 
     `thin_pool_autoextend_percent` is the amount of space to add to the device
-    when automatically extending (100 = disabled).
+    when automatically extending (0 = disabled).
 
     The example below will add 20% more capacity when the disk usage reaches
     80%.
@@ -256,7 +241,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     Save the file.
 
-9.  Apply the LVM profile, using the `lvchange` command.
+10.  Apply the LVM profile, using the `lvchange` command.
 
     ```bash
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
@@ -264,7 +249,7 @@ assumes that the Docker daemon is in the `stopped` state.
     Logical volume docker/thinpool changed.
     ```
 
-10. Enable monitoring for logical volumes on your host. Without this step,
+11. Enable monitoring for logical volumes on your host. Without this step,
     automatic extension will not occur even in the presence of the LVM profile.
 
     ```bash
@@ -274,7 +259,7 @@ assumes that the Docker daemon is in the `stopped` state.
     thinpool docker twi-a-t--- 95.00g             0.00   0.01                             monitored
     ```
 
-11. If you have ever run Docker on this host before, or if `/var/lib/docker/`
+12. If you have ever run Docker on this host before, or if `/var/lib/docker/`
     exists, move it out of the way so that Docker can use the new LVM pool to
     store the contents of image and containers.
 
@@ -286,7 +271,7 @@ assumes that the Docker daemon is in the `stopped` state.
     If any of the following steps fail and you need to restore, you can remove
     `/var/lib/docker` and replace it with `/var/lib/docker.bk`.
 
-12. Edit `/etc/docker/daemon.json` and configure the options needed for the
+13. Edit `/etc/docker/daemon.json` and configure the options needed for the
     `devicemapper` storage driver. If the file was previously empty, it should
     now contain the following contents:
 
@@ -301,7 +286,7 @@ assumes that the Docker daemon is in the `stopped` state.
     }
     ```
 
-13. Start Docker.
+14. Start Docker.
 
     **systemd**:
 
@@ -315,7 +300,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ sudo service docker start
     ```
 
-14. Verify that Docker is using the new configuration using `docker info`.
+15. Verify that Docker is using the new configuration using `docker info`.
 
     ```bash
     $ docker info
@@ -351,7 +336,7 @@ assumes that the Docker daemon is in the `stopped` state.
     If Docker is configured correctly, the `Data file` and `Metadata file` will
     be blank, and the pool name will be `docker-thinpool`.
 
-15. After you have verified that the configuration is correct, you can remove the
+16. After you have verified that the configuration is correct, you can remove the
     `/var/lib/docker.bk` directory which contains the previous configuration.
 
     ```bash
