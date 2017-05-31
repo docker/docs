@@ -227,8 +227,8 @@ guides:
     title: Configuring and running Docker
   - path: /engine/admin/prometheus/
     title: Collect Docker metrics with Prometheus
-  - path: /engine/admin/host_integration/
-    title: Automatically start containers
+  - path: /engine/admin/start-containers-automatically/
+    title: Start containers automatically
   - path: /engine/admin/resource_constraints/
     title: Limit a container's resources
   - path: /engine/admin/live-restore/
