@@ -44,7 +44,7 @@ Keep the following in mind when using restart policies:
 - A restart policy only takes effect after a container starts successfully. In
   this case, starting successfully means that the container is up for at least
   10 seconds and Docker has started monitoring it. This prevents a container
-  which does not start at all from into a restart loop.
+  which does not start at all from going into a restart loop.
 
 - If you manually stop a container, its restart policy is ignored until the
   Docker daemon restarts or the container is manually restarted. This is another
