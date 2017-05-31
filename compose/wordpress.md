@@ -34,7 +34,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
     mount for data persistence:
 
     ```none
-    version: '2'
+    version: '3'
 
     services:
        db:
@@ -75,8 +75,9 @@ Compose to set up and run WordPress. Before starting, you'll need to have
 
 Now, run `docker-compose up -d` from your project directory.
 
-This pulls the needed images, and starts the wordpress and database
-containers, as shown in the example below.
+This runs [docker-compose up](/compose/reference/up/) in detached mode, pulls
+the needed images, and starts the wordpress and database containers, as shown in
+the example below.
 
     $ docker-compose up -d
     Creating network "my_wordpress_default" with the default driver
@@ -127,8 +128,8 @@ browser.
 
 ### Shutdown and Cleanup
 
-The command `docker-compose down` removes the containers and default network,
-but preserves your Wordpress database.
+The command [docker-compose down](/compose/reference/down/) removes the
+containers and default network, but preserves your Wordpress database.
 
 The command `docker-compose down --volumes` removes the containers, default
 network, and the Wordpress database.
