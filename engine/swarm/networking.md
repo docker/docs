@@ -4,15 +4,14 @@ keywords: swarm, networking, ingress, overlay, service discovery
 title: Manage swarm service networks
 ---
 
-Docker swarms generate two different kinds of traffic:
+A Docker swarm generates two different kinds of traffic:
 
-- **Control and management plane traffic**: This includes information about
-  swarm management, such as joining and leaving the swarm. This traffic is
-  always encrypted to protect the integrity of the swarm itself.
+- **Control and management plane traffic**: This includes swarm management
+  messages, such as requests to join or leave the swarm. This traffic is
+  always encrypted.
 
-- **Application data plane traffic**: This includes communication between swarm
-  tasks and other tasks, between tasks and containers, and between tasks and
-  external clients.
+- **Application data plane traffic**: This includes container traffic and
+  traffic to and from external clients.
 
 This topic discusses how to manage the application data for your swarm services.
 For more details about swarm networking in general, see the
@@ -40,8 +39,8 @@ The following three network concepts are important to swarm services:
 
 - The **docker_gwbridge** is a bridge network that connects the overlay
   networks (including the `ingress` network) to an individual Docker daemon's
-  physical network. By default, each task of a service is connected to its local
-  Docker daemon host's `docker_gwbridge` network.
+  physical network. By default, each container a service is running is connected
+  to its local Docker daemon host's `docker_gwbridge` network.
 
   The `docker_gwbridge` network is created automatically when you initialize or
   join a swarm. Most users do not need to customize its configuration, but
@@ -108,7 +107,7 @@ participating in the swarm can access this network.
 
 The network's subnet and gateway are dynamically configured when a service
 connects to the network for the first time. The following example shows
-the same network as above, but with three task containers of a `redis` service
+the same network as above, but with three containers of a `redis` service
 connected to it.
 
 ```bash
@@ -219,14 +218,14 @@ $ docker service create \
   nginx
 ```
 
-Service task containers connected to an overlay network can communicate with
+Service containers connected to an overlay network can communicate with
 each other across it.
 
 To see which networks a service is connected to, use `docker service ls` to find
 the name of the service, then `docker service ps <service-name>` to list the
-networks. Alternately, to see which task containers are connected to a network,
-use `docker network inspect <network-name>`. You can run these commands from
-any swarm node which is joined to the swarm and is in a `running` state.
+networks. Alternately, to see which services' containers are connected to a
+network, use `docker network inspect <network-name>`. You can run these commands
+from any swarm node which is joined to the swarm and is in a `running` state.
 
 ### Configure service discovery
 
@@ -242,19 +241,19 @@ the WordPress HTTP port.
 Service discovery can work in two different ways, using a virtual IP (VIP) or
 DNS round robin (DNSRR). You can configure this per service.
 
-- By default, when you attach a service to a network, Docker assigns the service
-  a virtual IP (VIP), which is the "front end" for clients to reach the service.
-  Docker keeps a list of all worker nodes in the service, and routes requests
-  between the client and one of the nodes. Each request from the client might be
-  routed to a different node. This mechanism uses a protocol called `gossip`.
+- By default, when you attach a service to a network and that service publishes
+  one or more ports, Docker assigns the service a virtual IP (VIP), which is the
+  "front end" for clients to reach the service. Docker keeps a list of all
+  worker nodes in the service, and routes requests between the client and one of
+  the nodes. Each request from the client might be routed to a different node.
 
 - If you configure a service to use DNS round-robin (DNSRR) service discovery,
   there is not a single virtual IP. Instead, Docker sets up DNS entries for the
   service such that a DNS query for the service name returns a list of IP
   addresses, and the client connects directly to one of these.
 
-  You should only use DNSRR service discovery if your service uses an external
-  load balancer. To configure a service to use DNSRR, use the flag
+  DNS round-robin is useful in cases where you want to use your own load
+  balancer. To configure a service to use DNSRR, use the flag
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
 
@@ -265,17 +264,22 @@ DNS round robin (DNSRR). You can configure this per service.
 Most users never need to configure the `ingress` network, but Docker 17.05 and
 higher allow you to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
-other TCP settings such as the MTU.
+other low-level network settings such as the MTU.
 
-Customizing the `ingress` network involves removing and recreating it. During
-the time that no `ingress` network exists, existing services continue to
-function but are not load-balanced. This effects services which publish ports,
-such as a WordPress service which publishes port 80.
+Customizing the `ingress` network involves removing and recreating it. This is
+usually done before you create any services in the swarm. If you have existing
+services which publish ports, those services need to be removed before you can
+remove the `ingress` network.
 
-1.  Inspect the `ingress` network using `docker network inspect`, and stop any
-    services which are connected to it. These are services that publish ports,
-    such as a WordPress service which publishes port 80. If all such services
-    are not stopped, the next step will fail.
+During the time that no `ingress` network exists, existing services which do not
+publish ports will continue to function but are not load-balanced. This affects
+services which publish ports, such as a WordPress service which publishes port
+80.
+
+1.  Inspect the `ingress` network using `docker network inspect ingress`, and
+    remove any services whose containers are connected to it. These are services
+    that publish ports, such as a WordPress service which publishes port 80. If
+    all such services are not stopped, the next step will fail.
 
 2.  Remove the existing `ingress` network:
 
