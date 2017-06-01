@@ -18,6 +18,14 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs4
+(01 Jun 2017)
+
+Backports all fixes from [17.03.2](https://github.com/moby/moby/releases/tag/v17.03.2-ce)
+
+*Note*: This release includes a fix for potential data loss under certain
+circumstances with the local (built-in) volume driver.
+
 ## CS Engine 1.13.1-cs3
 (23 Feb 2017)
 
