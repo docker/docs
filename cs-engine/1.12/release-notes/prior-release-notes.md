@@ -13,6 +13,11 @@ Docker Engine release notes. It includes issues, fixes, and new features.
 
 Refer to the [detailed list](https://github.com/moby/moby/releases) of all changes since the release of CS Engine 1.10.3-cs3
 
+## CS Engine 1.10.3-cs5
+(1 Jun 2017)
+
+* Fix issue where a failed unmount can lead to data loss on local volume remove [#32327](https://github.com/moby/moby/pull/32327)
+
 ## CS Engine 1.10.3-cs4
 (12 Jan 2017)
 
