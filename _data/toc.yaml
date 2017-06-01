@@ -320,7 +320,7 @@ guides:
     - path: /engine/swarm/how-swarm-mode-works/services/
       title: How services work
     - path: /engine/swarm/how-swarm-mode-works/pki/
-      title: Mnage swarm security with PKI
+      title: Manage swarm security with PKI
   - path: /engine/swarm/swarm-mode/
     title: Run Docker Engine in swarm mode
   - path: /engine/swarm/join-nodes/

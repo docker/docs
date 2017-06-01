@@ -19,9 +19,9 @@ externally-generated root CA, using the the `--external-ca` flag of the
 The manager node also generates two tokens to use when you join additional nodes
 to the swarm: one **worker token** and one **manager token**. Each token
 includes the digest of the root CA's certificate and a randomly generated
-secret. When a node joins the swarm, it uses the digest to validate the root CA
-certificate from the remote manager. It uses the secret to ensure the node is an
-approved node.
+secret. When a node joins the swarm, the joining node uses the digest to
+validate the root CA certificate from the remote manager. The remote manager
+uses the secret to ensure the joining node is an approved node.
 
 Each time a new node joins the swarm, the manager issues a certificate to the
 node. The certificate contains a randomly generated node ID to identify the node
@@ -66,9 +66,9 @@ signed by the old root CA anymore.
 
 Run `docker swarm ca --rotate` to generate a new CA certificate and key. If you
 prefer, you can pass the `--ca-cert` and `--external-ca` flags to specify the
-root certificate and a use root CA external to the swarm. Alternately, you can
-pass the `--ca-cert` and `--ca-key` flags to specify the exact certificate and
-key you would like the swarm to use.
+root certificate and and to use a root CA external to the swarm. Alternately,
+you can pass the `--ca-cert` and `--ca-key` flags to specify the exact
+certificate and key you would like the swarm to use.
 
 When you issue the `docker swarm ca --rotate` command, the following things
 happen in sequence:
@@ -77,11 +77,17 @@ happen in sequence:
     the new root CA certificate is signed with the old root CA certificate.
     This cross-signed certificate is used as an intermediate certificate for all
     new node certificates. This ensures that nodes that still trust the old root
-    CA will be able to validate a certificate signed by tne new CA.
+    CA will be able to validate a certificate signed by the new CA.
 
 2.  In Docker 17.06 and higher, Docker also tells all nodes to immediately
     renew their TLS certificates. This process may take several minutes,
     depending on the number of nodes in the swarm.
+
+    > **Note**: If your swarm has nodes with different Docker versions, the
+    > following two things are true:
+    > - Only a manager running Docker 17.06 or higher will tell nodes to renew
+    >   their TLS certificates.
+    > - Only nodes running Docker 17.06 or higher will obey this directive.
 
 3.  After every node in the swarm has a new TLS certificate signed by the new CA,
     Docker will forget about the old CA certificate and key material, and tell
