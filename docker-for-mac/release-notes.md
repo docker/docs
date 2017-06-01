@@ -355,6 +355,31 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-rc1-ce-mac13, 2017-06-01 (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-rc1-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc1)
+- [Docker Credential Helpers 0.5.1](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.1)
+- `qcow-tool` v0.10.0 (improve the performance of `compact`: `mirage/ocaml-qcow#94`)
+- OSX Yosemite 10.10 is marked as deprecated
+- Linux Kernel 4.9.30
+
+**New**
+
+- GUI Option to opt out of credential store
+- GUI option to reset docker data without losing all settings (fixes [Docker for Mac issue 1309](https://github.com/docker/for-mac/issues/1309))
+- Add an experimental DNS name for the host: `docker.for.mac.localhost`
+- Support for client (i.e. "login") certificates for authenticating registry access (fixes [Docker for Mac issue 1320](https://github.com/docker/for-mac/issues/1320))
+
+**Bug fixes and minor changes**
+
+- Resync HTTP(S) proxy settings on application start
+- Interpret system proxy setting of localhost correctly (see [Docker for Mac issue 1511](https://github.com/docker/for-mac/issues/1511))
+- All docker binaries bundled with Docker for Mac are now signed
+- Display all docker cloud organizations and repositories in the whale menu (fixes [Docker for Mac issue 1538 ](https://github.com/docker/for-mac/issues/1538))
+- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+
 ### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
 
 **Upgrades**
@@ -387,6 +412,7 @@ events or unexpected unmounts.
 ### Docker Community Edition 17.04.0-ce-mac7, 2017-04-06 (edge)
 
 **New**
+
 - osxfs: support for `cached` mount flag to improve performance of macOS mounts when strict consistency is not necessary
 
 **Upgrades**

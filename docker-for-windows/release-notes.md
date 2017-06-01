@@ -309,13 +309,35 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.0.5c-win11 Release Notes (2017-05-12 17.05.0-ce-win11) (edge)
+### Docker Community Edition 17.06.0-win13 Release Notes (2017-06-01 17.06.0-rc1-ce-win13) (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-rc1-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc1)
+- [Docker Credential Helpers 0.5.1](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.1)
+- Linux Kernel 4.9.30
+
+**New**
+
+- Sharing a drive can be done on demand, the first time a mount is requested
+- Add an experimental DNS name for the host: `docker.for.win.localhost`
+- Support for client (i.e. "login") certificates for authenticating
+registry access (fixes [Docker for Windows issue 569](https://github.com/docker/for-win/issues/569))
+
+**Bug fixes and minor changes**
+
+- Many processes that were running in admin mode are now running within the user identity
+- Cloud federation command lines now opens in the user home directory
+- Named pipes are now created with more constrained security descriptors to improve security
+- Security fix : Users must be part of a specific group "docker-users" to run Docker for windows
+
+### Docker Community Edition 17.0.5-win11 Release Notes (2017-05-12 17.05.0-ce-win11) (edge)
 
 **Upgrades**
 
 - Security fix for CVE-2017-7308  
 
-### Docker Community Edition 17.0.5c-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
+### Docker Community Edition 17.0.5-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
 
 **Upgrades**
 
@@ -333,7 +355,7 @@ We did not distribute a 1.12.4 stable release
 - Detect a bitlocker policy preventing windows containers to work
 - fix an issue on filesharing when explicitly disabled on vmswitch interface
 - fix VM not starting when machine had very long name
-- Fix a bug where Windows daemon.json file was not written (fixes https://github.com/docker/for-win/issues/670)
+- Fix a bug where Windows daemon.json file was not written (fixes [Docker for Windows issue 670](https://github.com/docker/for-win/issues/670))
 
 ### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8) (edge)
 
