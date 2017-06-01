@@ -22,6 +22,11 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs12
+(1 Jun 2017)
+
+* Fix issue where a failed unmount can lead to data loss on local volume remove [#32327](https://github.com/moby/moby/pull/32327)
+
 ## CS Engine 1.12.6-cs11
 (11 May 2017)
 

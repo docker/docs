@@ -18,6 +18,11 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs4
+(1 Jun 2017)
+
+* Fix issue where a failed unmount can lead to data loss on local volume remove [#32327](https://github.com/moby/moby/pull/32327)
+
 ## CS Engine 1.13.1-cs3
 (23 Feb 2017)
 
