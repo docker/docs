@@ -11,11 +11,11 @@ description: Learn how to create clusters of Dockerized machines.
 - Unless you're on a Windows system that has Hyper-V, such as Windows 10, [install VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your host
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
-- Make sure you have pushed the container you created to a registry, as
-  instructed; we'll be using it here.
-- Ensure your image is working by
-  running this and visiting `http://localhost/` (slotting in your info for
-  `username`, `repo`, and `tag`):
+- Make sure you have published the `friendlyhello` image you created by
+pushing it to a registry, as described in [Share your
+image](/get-started/part2.md#share-your-image). We will be using that shared
+image here.
+- Make sure the image works as a deployed container. Run it with the following command, and then visit `http://localhost/` (slotting in your info for `username`, `repo`, and `tag`):
 
   ```
   docker run -p 80:80 username/repo:tag
@@ -34,7 +34,7 @@ by joining multiple machines into a "Dockerized" cluster called a **swarm**.
 
 ## Understanding Swarm clusters
 
-A swarm is a group of machines that are running Docker and have been joined into
+A swarm is a group of machines that are running Docker and joined into
 a cluster. After that has happened, you continue to run the Docker commands
 you're used to, but now they are executed on a cluster by a **swarm manager**.
 The machines in a swarm can be physical or virtual. After joining a swarm, they
@@ -49,18 +49,18 @@ file, just like the one you have already been using.
 Swarm managers are the only machines in a swarm that can execute your commands,
 or authorize other machines to join the swarm as **workers**. Workers are just
 there to provide capacity and do not have the authority to tell any other
-machine what it can and can't do.
+machine what it can and cannot do.
 
-Up until now you have been using Docker in a single-host mode on your local
+Up until now, you have been using Docker in a single-host mode on your local
 machine. But Docker also can be switched into **swarm mode**, and that's what
 enables the use of swarms. Enabling swarm mode instantly makes the current
 machine a swarm manager. From then on, Docker will run the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
 {% capture local-instructions %}
-You now have two VMs created, named `myvm1` and `myvm2`. The first one will act
-as the manager, which executes `docker` commands and authenticates workers to
-join the swarm, and the second will be a worker.
+You now have two VMs created, named `myvm1` and `myvm2` (as `docker machine ls`
+shows). The first one will act as the manager, which executes `docker` commands
+and authenticates workers to join the swarm, and the second will be a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
@@ -77,7 +77,7 @@ To add a worker to this swarm, run the following command:
   <ip>:<port>
 ```
 
-> Getting an error about needing to use `--advertise-addr`?
+> Got an error about needing to use `--advertise-addr`?
 >
 > Copy the
 > IP address for `myvm1` by running `docker-machine ls`, then run the
@@ -87,6 +87,7 @@ To add a worker to this swarm, run the following command:
 > ```
 > docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"
 > ```
+{: .note-vanilla}
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -107,6 +108,17 @@ Congratulations, you have created your first swarm.
 to open a terminal session on that VM. Type `exit` when you're ready to return
 to the host shell prompt. It may be easier to paste the join command in that
 way.
+
+You can `ssh` into your manager (`myvm1`), and type `docker node ls`:
+
+```
+docker@myvm1:~$ docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active              
+rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
+```
+
+Type `exit` to get back out of that machine.
 
 {% endcapture %}
 
@@ -159,7 +171,7 @@ $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 A swarm is made up of multiple nodes, which can be either physical or virtual
 machines. The basic concept is simple enough: run `docker swarm init` to enable
 swarm mode and make your current machine a swarm manager, then run
-`docker swarm join` on other machines to have them join the swarm as a worker.
+`docker swarm join` on other machines to have them join the swarm as workers.
 Choose a tab below to see how this plays out in various contexts. We'll use VMs
 to quickly create a two-machine cluster and turn it into a swarm.
 
@@ -229,26 +241,50 @@ look:
 
 ![routing mesh diagram](/engine/swarm/images/ingress-routing-mesh.png)
 
-> **Note**: If you're having any connectivity trouble, keep in mind that in
-> order to use the ingress network in the swarm, you need to have
-> the following ports open between the swarm nodes before you enable swarm mode:
+> Having connectivity trouble?
+>
+> Keep in mind that in order to use the ingress network in the swarm,
+> you need to have the following ports open between the swarm nodes
+> before you enable swarm mode:
 >
 > - Port 7946 TCP/UDP for container network discovery.
 > - Port 4789 UDP for the container ingress network.
+{: .note-vanilla}
 
 ## Iterating and scaling your app
 
-From here you can do everything you learned about in part 3: scale the app by
-changing the `docker-compose.yml` file, or change the app behavior by editing
-code. In either case, simply running `docker stack deploy` again deploys these
-changes. You can tear down the stack with `docker stack rm`. You can also join
-any machine, physical or virtual, to this swarm, using the same
-`docker swarm join` command you used on `myvm2`, and capacity will be added to
-your cluster; just run `docker stack deploy` afterwards and your app will take
-advantage of the new resources.
+From here you can do everything you learned about in part 3.
+
+Scale the app by changing the `docker-compose.yml` file.
+
+Change the app behavior by editing code.
+
+In either case, simply run `docker stack deploy` again to deploy these
+changes.
+
+You can join any machine, physical or virtual, to this swarm, using the
+same `docker swarm join` command you used on `myvm2`, and capacity will be added
+to your cluster. Just run `docker stack deploy` afterwards, and your app will
+take advantage of the new resources.
+
+## Cleanup
+
+You can tear down the stack with `docker stack rm`. For example:
+
+```
+docker-machine ssh myvm1 "docker stack rm getstartedlab"
+```
+
+> Keep the swarm or remove it?
+>
+> At some point later, you can remove this swarm if you want to with
+> `docker-machine ssh myvm2 "docker swarm leave"` on the worker
+> and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
+> manager, but _you'll need this swarm for part 5, so please keep it
+> around for now_.
+{: .note-vanilla}
 
 [On to Part 5 >>](part5.md){: class="button outline-btn" style="margin-bottom: 30px"}
-
 
 ## Recap and cheat sheet (optional)
 
