@@ -396,8 +396,8 @@ volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volum
 > in the FAQs.
 {: .note-vanilla}
 
-See also
-[Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
+See also [Verify domain user has permissions for shared
+drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
 in Troubleshooting.
 
 #### Firewall rules for shared drives
@@ -409,7 +409,6 @@ machine that runs Linux containers.
 the following message when you try to add a shared drive: ![Port 445
 blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
 
-
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
 do not need to open port 445 on any other network. By default, allow connections
@@ -417,6 +416,22 @@ to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
 If the firewall rules appear to be open, consider [reinstalling the File and
 Print Sharing service on the virtual network
 adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
+
+#### Shared drives on demand (Edge feature)
+
+On current Edge releases, sharing a drive can be done "on demand", the first
+time a particular mount is requested.
+
+If you run a Docker command from a shell with a volume mount (as shown in the
+example below) or kick off a Compose file that includes volume mounts, you get a
+popup asking if you want to share the specified drive.
+
+You can select to **Share it**, in which case it is added your Docker for
+Windows [Shared Drives list](/docker-for-windows/index.md#shared-drives) and
+available to containers. Alternatively, you can opt not to share it by hitting
+Cancel.
+
+![ ](/docker-for-windows/images/shared-drive-on-demand.png)
 
 ### Advanced
 
