@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: windows, beta, alpha, tutorial
+keywords: windows, beta, edge, alpha, tutorial
 redirect_from:
 - /winkit/getting-started/
 - /winkit/
@@ -11,6 +11,8 @@ redirect_from:
 - /engine/installation/windows/
 - /docker-for-windows/index/
 title: Get started with Docker for Windows
+toc_max: 4
+toc_min: 1
 ---
 Welcome to Docker for Windows!
 
@@ -19,7 +21,7 @@ Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
 > **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
-and beta channels, system requirements, and download/install information.
+and edge channels, system requirements, and download/install information.
 
 >**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
@@ -403,16 +405,18 @@ in Troubleshooting.
 Shared drives require port 445 to be open between the host machine and the virtual
 machine that runs Linux containers.
 
-> **Note**: In Docker for Windows Beta 29 and higher,
-> Docker detects if port 445 is closed and shows the following message when you
-> try to add a shared drive:
-> ![Port 445 blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
+> **Note**: Docker detects if port 445 is closed and shows
+the following message when you try to add a shared drive: ![Port 445
+blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
 
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
 do not need to open port 445 on any other network. By default, allow connections
-to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine). If the firewall rules appear to be open, consider [reinstalling the File and Print Sharing service on the virtual network adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
+to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
+If the firewall rules appear to be open, consider [reinstalling the File and
+Print Sharing service on the virtual network
+adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
 
 ### Advanced
 
@@ -486,17 +490,18 @@ some of the common settings to make it easier to configure them.
 
 #### Experimental mode
 
-Starting with Stable 1.13.0 and Beta 34, both Docker for Windows Stable and Beta
-releases have the experimental version of Docker Engine enabled, described
-in the [Docker Experimental Features README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
+Both Docker for Windows Stable and Edge releases have the experimental version
+of Docker Engine enabled, described in the [Docker Experimental Features
+README](https://github.com/moby/moby/blob/master/experimental/README.md) on
+GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
 experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Betas, and never released
-on Stable.
+others may be modified or pulled from subsequent Edge releases, and never
+released on Stable.
 
-On both Beta and Stable releases, you can toggle **experimental mode** on and
+On both Edge and Stable releases, you can toggle **experimental mode** on and
 off. If you toggle it off, Docker for Windows uses the current generally
 available release of Docker Engine.
 
@@ -527,13 +532,13 @@ Server:
 
 #### Custom registries
 
-Also starting with with Beta 34 and Stable 1.13.0, you can set up your own
-[registries](/registry/introduction.md) on the **Basic** Daemon settings.
+You can set up your own [registries](/registry/introduction.md) on the **Basic**
+Daemon settings.
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up your
-own insecure [registry](/registry/introduction.md). Add URLs for insecure
+Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
+your own insecure [registry](/registry/introduction.md). Add URLs for insecure
 registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
 the FAQs.)
