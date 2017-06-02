@@ -1,6 +1,6 @@
 ---
 description: Docker Hub Automated Builds using Bitbucket
-keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, bitbucket
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds, automated builds, bitbucket
 title: Configure automated builds with Bitbucket
 ---
 
@@ -15,8 +15,8 @@ link your [Docker Hub](https://hub.docker.com/account/authorized-services/)
 account to a Bitbucket account. This will allow the registry to see your
 Bitbucket repositories.
 
-To add, remove or view your linked account, go to the "Linked Accounts &
-Services" section of your Hub profile "Settings".
+To add, remove or view your linked account, go to the **Linked Accounts &
+Services** section of your Hub profile **Settings**.
 
 ![authorized-services](images/authorized-services.png)
 
