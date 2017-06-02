@@ -182,6 +182,7 @@ Introduces the following additional parameters:
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
+- [`pids_limit`](compose-file-v2.md#pidslimit)
 
 ### Version 2.2
 
@@ -240,6 +241,7 @@ several options have been removed:
 
 -   `extends`: This option has been removed for `version: "3.x"` Compose files.
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
+-   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 
 ### Version 1 to 2.x
 
