@@ -29,7 +29,7 @@ You can apply to become a Docker Store publisher by filling out
 the form [here](https://store.docker.com/publisher/signup). When you've been
 accepted to the program, you'll set up a publisher profile and submit your
 images for review. Learn more about the publisher duties and requirements
-[here](https://success.docker.com/Store)
+[here](https://success.docker.com/Store).
 
 ## Docker Store billing Frequently Asked Questions
 
@@ -59,7 +59,7 @@ Click the user icon menu in the upper right corner, and click
 **Billing**. Click the **Payment methods** tab to update your credit card and
 contact information.
 
-If you are updating the card details for an organization, be sure the select the
+If you are updating the card details for an organization, be sure to select the
 organization name from the **Account** menu before updating the information.
 
 ### How does cancellation work? Do you offer refunds?
