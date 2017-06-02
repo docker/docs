@@ -65,7 +65,7 @@ Docker depend on Docker containers, you can use a process manager such as
 
 A process manager runs within the container and checks whether a process is
 running and starts it if not. It is not Docker-aware, but just monitors
-operating system processes withink the container.
+operating system processes within the container.
 
 Docker does not recommend this approach, because it is not platform-dependent
 and even differs within different versions of a given Linux distribution.
