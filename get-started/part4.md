@@ -69,12 +69,7 @@ this:
 ```
 $ docker-machine ssh myvm1 "docker swarm init"
 Swarm initialized: current node <node ID> is now a manager.
-
-To add a worker to this swarm, run the following command:
-
-  docker swarm join \
-  --token <token> \
-  <ip>:<port>
+...
 ```
 
 > Getting an error about needing to use `--advertise-addr`?
@@ -88,15 +83,15 @@ To add a worker to this swarm, run the following command:
 > docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"
 > ```
 
-As you can see, the response to `docker swarm init` contains a pre-configured
-`docker swarm join` command for you to run on any nodes you want to add. Copy
-this command, and send it to `myvm2` via `docker-machine ssh` to have `myvm2`
-join your new swarm as a worker:
+The response to `docker swarm init` contains a `docker swarm join` command 
+that is pre-configured with the token, ip, and port for you to run on any nodes 
+you want to add. Copy this command, and send it to `myvm2` via `docker-machine ssh` 
+to have `myvm2` join your new swarm as a worker For example:
 
 ```
 $ docker-machine ssh myvm2 "docker swarm join \
---token <token> \
-<ip>:<port>"
+--token SWMTKN-1-2m7louzbos1r84wugi4zig4bluvxj9k7a7hasr408gzx3rqsi8-84dbb3tqck4q5wh5496cveymh \
+192.168.99.100:2377"
 
 This node joined a swarm as a worker.
 ```
