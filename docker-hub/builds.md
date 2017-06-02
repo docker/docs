@@ -50,7 +50,7 @@ limitation.
 
     The system prompts you to choose between Public and Private and Limited Access. The Public and Private connection type is required if you want to use the Automated Builds.
 
-4. Press Select under Public and Private connection type.
+4. Press **Select** under Public and Private connection type.
 
     The system prompts you to enter your service credentials (Bitbucket or GitHub) to login. For example, Bitbucket's prompt looks like this:
 
@@ -76,7 +76,7 @@ repositories using the `docker push` command.
 
 4. Pick the project to build.
 
-    The system displays the Create Automated Build dialog.
+    The system displays the **Create Automated Build** dialog.
 
     ![Create dialog](images/create-dialog1.png)
 
@@ -188,9 +188,9 @@ To add a new build:
 
 5. Specify a Tag Name.
 
-6. Press Save Changes.
+6. Press **Save Changes**.
 
-If you make a mistake or want to delete a build, press the - (minus sign) and then Save Changes.
+If you make a mistake or want to delete a build, press the - (minus sign) and then **Save Changes**.
 
 ## Repository links
 
@@ -208,7 +208,7 @@ To add a link:
 
     A remote repository name should be either an official repository name such as `ubuntu` or a public repository name `namespace/repoName`.
 
-3. Press Add.
+3. Press **Add**.
 
     ![Links](images/repo_links.png)
 
