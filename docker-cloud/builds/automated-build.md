@@ -70,10 +70,7 @@ the code repository service where the image's source code is stored.
     **Docker Version** used to build this repository. You can choose between
     the **Stable** and **Edge** versions of Docker.
 
-    Selecting **Edge** lets you to take advantage of [multi-stage builds](/engine/userguide/eng-image/multistage-build/). This requires
-    you to have a `Dockerfile.multi`, and to specify this file in
-    the `Dockerfile location` field of `Build Rules`. For more information
-    and examples, see the topic on how to [use multi-stage builds](/engine/userguide/eng-image/multistage-build/#use-multi-stage-builds).
+    Selecting **Edge** lets you to take advantage of [multi-stage builds](/engine/userguide/eng-image/multistage-build/). For more information and examples, see the topic on how to [use multi-stage builds](/engine/userguide/eng-image/multistage-build/#use-multi-stage-builds).
 
     You can learn more about **stable** and **edge** channels in the
     [Install Docker overview](https://docs.docker.com/engine/installation/)
