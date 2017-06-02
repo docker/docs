@@ -348,6 +348,41 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 5.  Initialize or join the swarm.
 
+## Use a separate interface for control and data traffic
+
+By default, all swarm traffic is sent over the same interface, including control
+and management traffic for maintaining the swarm itself and data traffic to and
+from the service containers.
+
+In Docker 17.06 and higher, it is possible to separate this traffic by passing
+the `--datapath-addr` flag when initializing or joining the swarm. If there are
+multiple interfaces, `--advertise-addr` must be specified explicitly, and
+`--datapath-addr` defaults to `--advertise-addr` if not specified. Traffic about
+joining, leaving, and managing the swarm will be sent over the
+`--advertise-addr` interface, and traffic among a service's containers will be
+sent over the `--datapath-addr` interface. These flags can take an IP address or
+a network device name, such as `eth0`.
+
+This example initializes a swarm with a separate `--datapath-addr`. It assumes
+that your Docker host has two different network interfaces: 10.0.0.1 should be
+used for control and management traffic and 192.168.0.1 should be used for
+traffic relating to services.
+
+```bash
+$ docker swarm init --advertise-addr 10.0.0.1 --datapath-addr 192.168.0.1
+```
+
+This example joins the swarm managed by host `192.168.99.100:2377` and sets the
+`--advertise-addr` flag to `eth0` and the `--datapath-addr` flag to `eth1`.
+
+```bash
+$ docker swarm join \
+  --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
+  --advertise-addr eth0 \
+  --datapath-addr eth1 \
+  192.168.99.100:2377
+```
+
 ## Learn More
 
 * [Deploy services to a swarm](services.md)
