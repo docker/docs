@@ -215,27 +215,17 @@ assumes that the Docker daemon is in the `stopped` state.
     ```
 
 8.  Create an LVM profile that will enable automatic extension of the thin
-    pool. Edit the file `/etc/lvm/profile/docker-thinpool.profile` and add the
-    following contents:
+    pool via an `lvm` profile. Edit the file `/etc/lvm/profile/docker-thinpool.profile`
+    and add the following contents:
 
     ```none
-    thin_pool_autoextend_threshold = 80
+    activation {
+      thin_pool_autoextend_threshold=80
+      thin_pool_autoextend_percent=20
+    }
     ```
 
-    If desired, set a different value. The value refers to the percentage of
-    space that needs to be used before LVM attempts to auto-extend the available
-    space. To disable automatic extension entirely, set the value to `100`. This
-    is not recommended.
-
-    Save the file.
-
-7.  Configure autoextension of thin pools via an `lvm` profile.
-
-    ```bash
-    $ sudo vi /etc/lvm/profile/docker-thinpool.profile
-    ```
-
-8.  Specify `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
+    Specify appropriate `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
     values.
 
     `thin_pool_autoextend_threshold` is the percentage of space used before `lvm`
@@ -244,15 +234,7 @@ assumes that the Docker daemon is in the `stopped` state.
     `thin_pool_autoextend_percent` is the amount of space to add to the device
     when automatically extending (100 = disabled).
 
-    The example below will add 20% more capacity when the disk usage reaches
-    80%.
-
-    ```none
-    activation {
-      thin_pool_autoextend_threshold=80
-      thin_pool_autoextend_percent=20
-    }
-    ```
+    The example shown will add 20% more capacity when the disk usage reaches 80%.
 
     Save the file.
 
