@@ -144,11 +144,11 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     ```
 
 4.  Use the following command to add the **stable** repository:
-
+       
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/centos/docker-ee.repo
     ```
 
 #### Install Docker
