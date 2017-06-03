@@ -7,17 +7,24 @@ description: Learn how to create clusters of Dockerized machines.
 
 ## Prerequisites
 
-- [Install Docker version 1.13 or higher](/engine/installation/).
-- Unless you're on a Windows system that has Hyper-V, such as Windows 10, [install VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your host
+- [Install Docker version 1.13 or higher](/engine/installation/index.md).
+
+- Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
+
+- Get [Docker Machine](/machine/overview.md), which is pre-installed with
+[Docker for Mac](/docker-for-mac/index.md) and [Docker for
+Windows](/docker-for-windows/index.md), but on Linux systems you need to
+[install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, use [Docker
+Toolbox](https://docs.docker.com/toolbox/overview.md).
+
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have published the `friendlyhello` image you created by
-pushing it to a registry, as described in [Share your
-image](/get-started/part2.md#share-your-image). We will be using that shared
-image here.
-- Make sure the image works as a deployed container. Run it with the following command, and then visit `http://localhost/` (slotting in your info for `username`, `repo`, and `tag`):
+[pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
+- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+`repo`, and `tag`):
 
-  ```
+  ```shell
   docker run -p 80:80 username/repo:tag
   ```
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
@@ -66,7 +73,7 @@ You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
 this:
 
-```
+```shell
 $ docker-machine ssh myvm1 "docker swarm init"
 Swarm initialized: current node <node ID> is now a manager.
 
@@ -94,7 +101,7 @@ As you can see, the response to `docker swarm init` contains a pre-configured
 this command, and send it to `myvm2` via `docker-machine ssh` to have `myvm2`
 join your new swarm as a worker:
 
-```
+```shell
 $ docker-machine ssh myvm2 "docker swarm join \
 --token <token> \
 <ip>:<port>"
@@ -109,9 +116,9 @@ to open a terminal session on that VM. Type `exit` when you're ready to return
 to the host shell prompt. It may be easier to paste the join command in that
 way.
 
-You can `ssh` into your manager (`myvm1`), and type `docker node ls`:
+Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node ls` to view the nodes in this swarm:
 
-```
+```shell
 docker@myvm1:~$ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
 brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active              
@@ -119,6 +126,13 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
 ```
 
 Type `exit` to get back out of that machine.
+
+Alternatively, wrap commands in `docker-machine ssh` to keep from having to directly log in and out. For example:
+
+```shell
+docker-machine ssh myvm1 "docker node ls"
+```
+
 
 {% endcapture %}
 
@@ -158,7 +172,7 @@ able to connect to each other.
 Now, create a couple of virtual machines using our node management tool,
 `docker-machine`:
 
-```none
+```shell
 $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
 $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 ```

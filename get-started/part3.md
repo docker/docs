@@ -7,16 +7,23 @@ description: Learn how to define load-balanced and scalable service that runs co
 
 ## Prerequisites
 
-- [Install Docker version 1.13 or higher](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/index.md).
+
+- Get [Docker Compose](/compose/overview.md). On [Docker for Mac](/docker-for-mac/index.md) and [Docker for
+Windows](/docker-for-windows/index.md) it's pre-installed so you are good-to-go,
+but on Linux systems you will need to [install it
+directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
+_without Hyper-V_, use [Docker
+Toolbox](https://docs.docker.com/toolbox/overview.md).
+
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have published the `friendlyhello` image you created by
-pushing it to a registry, as described in [Share your
-image](/get-started/part2.md#share-your-image). We will be using that shared
-image here.
-- Make sure the image works as a deployed container. Run it with the following command, and then visit `http://localhost/` (slotting in your info for `username`, `repo`, and `tag`):
+[pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
+- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+`repo`, and `tag`):
 
-  ```
+  ```shell
   docker run -p 80:80 username/repo:tag
   ```
 
@@ -32,14 +39,15 @@ must go one level up in the hierarchy of a distributed application: the
 
 ## Understanding services
 
-In a distributed application, different pieces of the app are called
-"services." For example, if you imagine a video sharing site, it probably includes a service for storing application data in a database, a service
-for video transcoding in the background after a user uploads something, a
-service for the front-end, and so on.
+In a distributed application, different pieces of the app are called "services."
+For example, if you imagine a video sharing site, it probably includes a service
+for storing application data in a database, a service for video transcoding in
+the background after a user uploads something, a service for the front-end, and
+so on.
 
 Services are really just "containers in production." A service only runs one
-image, but it codifies the way that image runs -- what ports it should use, how
-many replicas of the container should run so the service has the capacity it
+image, but it codifies the way that image runs&8212;what ports it should use,
+how many replicas of the container should run so the service has the capacity it
 needs, and so on. Scaling a service changes the number of container instances
 running that piece of software, assigning more computing resources to the
 service in the process.
@@ -63,6 +71,7 @@ Save this file as `docker-compose.yml` wherever you want. Be sure you have
 version: "3"
 services:
   web:
+    # replace username/repo:tag with your name and image details
     image: username/repository:tag
     deploy:
       replicas: 5
@@ -98,7 +107,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 Before we can use the `docker stack deploy` command we'll first run
 
-```
+```shell
 docker swarm init
 ```
 
@@ -108,13 +117,13 @@ docker swarm init
 Now let's run it. You have to give your app a name -- here it is set to
 `getstartedlab` :
 
-```
+```shell
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
 See a list of the five containers you just launched:
 
-```
+```shell
 docker stack ps getstartedlab
 ```
 
@@ -133,7 +142,7 @@ the five replicas is chosen, in a round-robin fashion, to respond.
 You can scale the app by changing the `replicas` value in `docker-compose.yml`,
 saving the change, and re-running the `docker stack deploy` command:
 
-```
+```shell
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
@@ -147,7 +156,7 @@ running containers.
 
 Take the app down with `docker stack rm`:
 
-```
+```shell
 docker stack rm getstartedlab
 ```
 

@@ -12,7 +12,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 - Read the orientation in [Part 1](index.md).
 - Give your environment a quick test run to make sure you're all set up:
 
-  ```
+  ```shell
   docker run hello-world
   ```
 
@@ -139,7 +139,7 @@ the error message.
 > **Note**: Accessing the name of the host when inside a container retrieves the
 container ID, which is like the process ID for a running executable.
 
-## Build the App
+## Build the app
 
 That's it! You don't need Python or anything in `requirements.txt` on your
 system, nor will building or running this image install them on your system. It
@@ -183,15 +183,17 @@ But that message is coming from inside the container, which doesn't know you
 mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
 
-Go to that URL in a web browser to see the content of the URL, including "Hello
-World" text, the container ID, and the Redis error message.
+Go to that URL in a web browser to see the display content served up on a
+web page, including "Hello World" text, the container ID, and the Redis error
+message.
 
-![](images/app-in-browser.png)
+![Hello World in browser](images/app-in-browser.png)
 
 You can also use the `curl` command in a shell to view the same content.
 
-```bash
+```shell
 $ curl http://localhost:4000
+
 <h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
 ```
 
@@ -231,12 +233,11 @@ docker stop 1fa4ab2cf395
 
 To demonstrate the portability of what we just created, let's upload our built
 image and run it somewhere else. After all, you'll need to learn how to push to
-registries to make deployment of containers actually happen.
+registries when you want to deploy containers to production.
 
 A registry is a collection of repositories, and a repository is a collection of
-images &#8212; sort of like a GitHub repository, except the code is already
-built. An account on a registry can create many repositories. The `docker` CLI
-is preconfigured to use Docker's public registry by default.
+images&#8212;sort of like a GitHub repository, except the code is already
+built. An account on a registry can create many repositories. The `docker` CLI uses Docker's public registry by default.
 
 > **Note**: We'll be using Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
@@ -245,8 +246,7 @@ Registry](/datacenter/dtr/2.2/guides/).
 
 ### Log in with your Docker ID
 
-If you don't have a Docker account, sign up for one at
-[cloud.docker.com](https://cloud.docker.com/). Make note of your username.
+If you don't have a Docker account, sign up for one at [cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }. Make note of your username.
 
 Log in to the Docker public registry on your local machine.
 
@@ -277,7 +277,7 @@ For example:
 docker tag friendlyhello john/get-started:part1
 ```
 
-Run `docker images` to see your newly tagged image.
+Run [docker images](/engine/reference/commandline/images/) to see your newly tagged image. (You can also use `docker image ls`.)
 
 ```shell
 $ docker images
@@ -327,9 +327,9 @@ Status: Downloaded newer image for john/get-started:part1
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 
->  **Note**: If you don't specify the `:tag` portion of these commands,
+> **Note**: If you don't specify the `:tag` portion of these commands,
   the tag of `:latest` will be assumed, both when you build and when you run
-  images.
+  images. Docker will use the last version of the image that ran without a tag specified (not necessarily the most recent image).
 
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
