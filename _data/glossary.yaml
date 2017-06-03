@@ -130,7 +130,7 @@ ENTRYPOINT: |
     ```
 
   In practice, `ENTRYPOINT` is not often overridden. However, specifying the
-  `ENTRYPOINT` can make your images more fiexible and easier to reuse.
+  `ENTRYPOINT` can make your images more flexible and easier to reuse.
 filesystem: |
   A file system is the method an operating system uses to name files
   and assign them locations for efficient storage and retrieval.
