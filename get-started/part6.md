@@ -60,9 +60,13 @@ First, link Docker Cloud with your cloud provider:
 
 After your cloud provider is all set up, create a Swarm:
 
-* If you're on AWS you
+* If you're on Amazon Web Services (AWS) you
   can [automatically create a
-  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create AWS Swarm');"}.
+  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-aws/){: onclick="ga('send', 'event', 'Get Started Referral AWS', 'Cloud', 'Create AWS Swarm');"}.
+
+* If you are on Microsoft Azure, you can [automatically create a
+swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="ga('send', 'event', 'Get Started Referral Azure', 'Cloud', 'Create Azure Swarm');"}.
+
 * Otherwise, [create your nodes](/docker-cloud/getting-started/your_first_node/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create Nodes');"}
   in the Docker Cloud UI, and run the `docker swarm init` and `docker swarm join`
   commands you learned in [part 4](part4.md) over [SSH via Docker
