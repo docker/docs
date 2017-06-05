@@ -24,6 +24,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 > [Internet Connection Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
 >
 > * This reference page includes an [example](hyper-v.md#example) that shows how to use an elevated (Administrator-level) PowerShell and how to create and use an external network switch.
+{: .note-vanilla}
 
 ## Usage
 

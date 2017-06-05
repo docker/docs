@@ -40,9 +40,13 @@ Therefore, you cannot run the two solutions simultaneously. But you can still
 use `docker-machine` to create more local VMs by using the Microsoft Hyper-V
 driver.
 
-* The only prerequisite is to have Docker for Windows installed. If you want to create multiple local machines, use the
-Microsoft `hyperv` driver to create them. (See the [Docker Machine driver for
-Microsoft Hyper-V](drivers/hyper-v.md).)
+The prerequisites are:
+
+* Have Docker for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+
+* Set up the Hyper-V driver to use an external virtual network switch See
+the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
+which includes an /machine/drivers/hyper-v.md#example of how to do this.
 
 #### If you are using Docker for Mac
 
