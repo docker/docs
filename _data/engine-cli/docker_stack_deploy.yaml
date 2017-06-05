@@ -13,6 +13,9 @@ options:
 - option: compose-file
   shorthand: c
   description: Path to a Compose file
+- option: prune
+  default_value: "false"
+  description: Prune services that are no longer referenced
 - option: with-registry-auth
   default_value: "false"
   description: Send registry authentication details to Swarm agents

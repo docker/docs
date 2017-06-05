@@ -20,7 +20,9 @@ long: "Login to a registry.\n\n### Login to a self-hosted registry\n\nIf you wan
   Apple macOS keychain: https://github.com/docker/docker-credential-helpers/releases\n-
   Microsoft Windows Credential Manager: https://github.com/docker/docker-credential-helpers/releases\n\nYou
   need to specify the credentials store in `$HOME/.docker/config.json`\nto tell the
-  docker engine to use it:\n\n```json\n{\n\t\"credsStore\": \"osxkeychain\"\n}\n```\n\nIf
+  docker engine to use it. The value of the config property should be\nthe suffix
+  of the program to use (i.e. everything after `docker-credential-`).\nFor example,
+  to use `docker-credential-osxkeychain`:\n\n```json\n{\n\t\"credsStore\": \"osxkeychain\"\n}\n```\n\nIf
   you are currently logged in, run `docker logout` to remove\nthe credentials from
   the file and run `docker login` again.\n\n### Credential helper protocol\n\nCredential
   helpers can be any program or script that follows a very simple protocol.\nThis
