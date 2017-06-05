@@ -133,17 +133,7 @@ real-world example, continue to
     This is a config
     ```
 
-5.  Verify that the config is **not** available if you commit the container.
-
-    ```none
-    $ docker commit $(docker ps --filter name=redis -q) committed_redis
-
-    $ docker run --rm -it committed_redis cat /my-config
-
-    cat: can't open '/my-config': No such file or directory
-    ```
-
-6.  Try removing the config. The removal fails because the `redis` service is
+5.  Try removing the config. The removal fails because the `redis` service is
     running and has access to the config.
 
     ```bash
@@ -159,14 +149,14 @@ real-world example, continue to
     Error response from daemon: rpc error: code = 3 desc = config 'my-config' is
     in use by the following service: redis ```
 
-7.  Remove access to the config from the running `redis` service by updating the
+6.  Remove access to the config from the running `redis` service by updating the
     service.
 
     ```bash
     $ docker service update --config-rm my-config redis
     ```
 
-8.  Repeat steps 3 and 4 again, verifying that the service no longer has access
+7.  Repeat steps 3 and 4 again, verifying that the service no longer has access
     to the config. The container ID will be different, because the
     `service update` command redeploys the service.
 
@@ -176,7 +166,7 @@ real-world example, continue to
     cat: can't open '/my-config': No such file or directory
     ```
 
-7.  Stop and remove the service, and remove the config from Docker.
+8.  Stop and remove the service, and remove the config from Docker.
 
     ```bash
     $ docker service rm redis
