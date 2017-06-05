@@ -204,6 +204,99 @@ The command can also be a list, in a manner similar to
 
     command: ["bundle", "exec", "thin", "-p", "3000"]
 
+### configs
+
+Grant access to configs on a per-service basis using the per-service `configs`
+configuration. Two different syntax variants are supported.
+
+> **Note**: The config must already exist or be
+> [defined in the top-level `configs` configuration](#configs-configuration-reference)
+> of this stack file, or stack deployment will fail.
+
+#### Short syntax
+
+The short syntax variant only specifies the config name. This grants the
+container access to the config and mounts it at `/<config_name>`
+within the container. The source name and destination mountpoint are both set
+to the config name.
+
+The following example uses the short syntax to grant the `redis` service
+access to the `my_config` and `my_other_config` configs. The value of
+`my_config` is set to the contents of the file `./my_config.txt`, and
+`my_other_config` is defined as an external resource, which means that it has
+already been defined in Docker, either by running the `docker config create`
+command or by another stack deployment. If the external config does not exist,
+the stack deployment fails with a `config not found` error.
+
+> **Note**: `config` definitions are only supported in version 3.3 and higher
+>  of the compose file format.
+
+```none
+version: "3.3"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    configs:
+      - my_config
+      - my_other_config
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+```
+
+#### Long syntax
+
+The long syntax provides more granularity in how the config is created within
+the service's task containers.
+
+- `source`: The name of the config as it exists in Docker.
+- `target`: The path and name of the file that will be mounted in the service's
+  task containers. service's task containers. Defaults to `/<source>` if not
+  specified.
+- `uid` and `gid`: The numeric UID or GID which will own the mounted config file
+  within in the service's task containers. Both default to `0` on Linux if not
+  specified. Not supported on Windows.
+- `mode`: The permissions for the file that will be mounted within the service's
+  task containers, in octal notation. For instance, `0444`
+  represents world-readable. The default is `0444`. Configs cannot be writable
+  because they are mounted in a temporary filesystem, so if you set the writable
+  bit, it is ignored. The executable bit can be set. If you aren't familiar with
+  UNIX file permission modes, you may find this
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  useful.
+
+The following example sets the name of `my_config` to `redis_config` within the
+container, sets the mode to `0440` (group-readable) and sets the user and group
+to `103`. The `redis` service does not have access to the `my_other_config`
+config.
+
+```none
+version: "3.3"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - source: my_config
+        target: /redis_config
+        uid: '103'
+        gid: '103'
+        mode: 0440
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+```
+
+You can grant a service access to multiple configs and you can mix long and
+short syntax. Defining a config does not imply granting a service access to it.
+
 ### cgroup_parent
 
 Specify an optional parent cgroup for the container.
@@ -1598,6 +1691,49 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+## configs configuration reference
+
+The top-level `configs` declaration defines or references
+[configs](/engine/swarm/configs.md) which can be granted to the services in this
+stack. The source of the config is either `file` or `external`.
+
+- `file`: The config is created with the contents of the file at the specified
+  path.
+- `external`: If set to true, specifies that this config has already been
+  created. Docker will not attempt to create it, and if it does not exist, a
+  `config not found` error occurs.
+
+In this example, `my_first_config` will be created (as
+`<stack_name>_my_first_config)`when the stack is deployed,
+and `my_second_config` already exists in Docker.
+
+```none
+configs:
+  my_first_config:
+    file: ./config_data
+  my_second_config:
+    external: true
+```
+
+Another variant for external configs is when the name of the config in Docker
+is different from the name that will exist within the service. The following
+example modifies the previous one to use the external config called
+`redis_config`.
+
+```none
+configs:
+  my_first_config:
+    file: ./config_data
+  my_second_config:
+    external:
+      name: redis_config
+```
+
+You still need to [grant access to the config](#configs) to each service in the
+stack.
+
+
+
 ## secrets configuration reference
 
 The top-level `secrets` declaration defines or references
@@ -1620,6 +1756,20 @@ secrets:
     file: ./secret_data
   my_second_secret:
     external: true
+```
+
+Another variant for external secrets is when the name of the secret in Docker
+is different from the name that will exist within the service. The following
+example modifies the previous one to use the external secret called
+`redis_secret`.
+
+```none
+secrets:
+  my_first_secret:
+    file: ./secret_data
+  my_second_secret:
+    external:
+      name: redis_secret
 ```
 
 You still need to [grant access to the secrets](#secrets) to each service in the
