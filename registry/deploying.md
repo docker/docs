@@ -22,7 +22,13 @@ Use a command like the following to start the registry container:
 $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 
-You can now use it with docker.
+The registry is now ready to use.
+
+> **Warning**: These first few examples show registry configurations that are
+> only appropriate for testing. A production-ready registry must be protected by
+> TLS and should ideally use an access-control mechanism. Keep reading and then
+> continue to the [configuration guide](confguration.md) to deploy a
+> production-ready registry.
 
 ## Copy an image from Docker Hub to your registry
 
@@ -425,7 +431,9 @@ following:
   In Docker 17.06 and higher, you can configure the Docker daemon to allow
   pushing non-distributable layers to private registries, in this scenario.
   **This is only useful in air-gapped set-ups in the presence of
-  non-distributable images.**
+  non-distributable images, or in extremely bandwidth-limited situations.**
+  You are responsible for ensuring that you are in compliance with the terms of
+  use for non-distributable layers.
 
   1.  Edit the `daemon.json` file, which is located in `/etc/docker/` on Linux
       hosts and `C:\ProgramData\docker\config\daemon.json` on Windows Server.
@@ -451,7 +459,7 @@ following:
       >  **Warning**: Non-distributable artifacts typically have restrictions on
       > how and where they can be distributed and shared. Only use this feature
       > to push artifacts to private registries and ensure that you are in
-      > compliance with > any terms that cover redistributing non-distributable
+      > compliance with any terms that cover redistributing non-distributable
       > artifacts.
 
 
