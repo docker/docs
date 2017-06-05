@@ -37,6 +37,32 @@ development, test, and production swarms with the same secret name. Your
 containers only need to know the name of the secret in order to function in all
 three environments.
 
+### Windows support
+
+Docker 17.06 and higher include support for secrets on Windows containers.
+Where there are differences in the implementations, they are called out in the
+examples below. Keep the following notable differences in mind:
+
+- Microsoft Windows has no built-in driver for managing RAM disks, so within
+  running Windows containers, secrets **are** persisted in clear text to the
+  container's root disk. However, the secrets are explicitly removed when a
+  container stops. In addition, Windows does not support persisting a running
+  container as an image using `docker commit` or similar commands.
+
+- Secret files with custom targets are not directly bind-mounted into Windows
+  containers, since Windows does not support non-directory file bind-mounts.
+  Instead, secrets for a container are all mounted in
+  `C:\ProgramData\Docker\internal\secrets` (an implementation detail which
+  should not be relied upon by applications) within the container. Symbolic
+  links are used to point from there to the desired target of the secret within
+  the container. The default target is `C:\ProgramData\Docker\secrets`.
+
+- When creating a service which uses Windows containers, the options to specify
+  UID, GID, and mode are not supported for secrets. Secrets are currently only
+  accessible by administrators and and users with `system` access within the
+  container.
+
+
 ## How Docker manages secrets
 
 When you add a secret to the swarm, Docker sends the secret to the swarm manager
@@ -56,9 +82,12 @@ management data.
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem. The
 location of the mount point within the container defaults to
-`/run/secrets/<secret_name>`, but you can specify a custom location in Docker
-17.06 and higher. You can update a service to grant it access to additional
-secrets or revoke its access to a given secret at any time.
+`/run/secrets/<secret_name>` in Linux containers, or
+`C:\ProgramData\Docker\secrets` in Windows containers. You can specify a custom
+location in Docker 17.06 and higher.
+
+You can update a service to grant it access to additional secrets or revoke its
+access to a given secret at any time.
 
 A node only has access to (encrypted) secrets if the node is a swarm manager or
 if it is running service tasks which have been granted access to the secret.
@@ -100,7 +129,9 @@ a similar way, see
 [Build support for Docker Secrets into your images](#build-support-for-docker-secrets-into-your-images).
 
 > **Note**: These examples use a single-Engine swarm and unscaled services for
-> simplicity.
+> simplicity. The examples use Linux containers, but Windows containers also
+> support secrets in Docker 17.06 and higher.
+> See [Windows support](#windows-support).
 
 ### Simple example: Get started with secrets
 
@@ -219,6 +250,69 @@ real-world example, continue to
     $ docker service rm redis
 
     $ docker secret rm my_secret_data
+    ```
+
+### Simple example: Use secrets in a Windows service
+
+This is a very simple example which shows how to use secrets with a Windows
+container running on Docker 17.06 EE on  Microsoft Windows Server 2013 or Docker
+for Mac 17.06 on Microsoft Windows 10. This example simply dumps the contents of
+all secrets granted to the container.
+
+This example assumes that you have PowerShell installed.
+
+1.  If you have not already done so, initialize or join the swarm.
+
+    ```powershell
+    PS> docker swarm init
+    ```
+
+2.  Copy the following into a file called `Dockerfile`:
+
+    ```conf
+    FROM microsoft/nanoserver
+    RUN ["powershell", "cat, "C:\\ProgramData\Docker\secrets\*.*"]
+    ```
+
+    The `RUN` line will output the contents of any files within the default
+    secrets directory within Windows containers. If no secrets have been
+    granted to the service, no output will be shown.
+
+3.  Build the Dockerfile with the tag `secret-test`.
+
+    ```powershell
+    PS> docker build -t secret-test .
+    ```
+
+4.  Create a secret:
+
+    ```powershell
+    PS> "this is a test" | docker secret create win-secret -
+    ```
+
+5.  Create a service using the `secret-test` image and grant it access to the
+    `win-secret` secret.
+
+    ```powershell
+    PS> docker service create --name my-win-service --secret win-secret secret-test
+    ```
+
+6.  View the logs for the service:
+
+    ```powershell
+    PS> docker service logs my-win-service
+    ```
+
+    The contents of the secret should be shown.
+
+7.  Remove the service, the secret, and the image.
+
+    ```powershell
+    PS> docker service rm my-win-service
+
+    PS> docker secret rm win-secret
+
+    PS> docker image remove secret-test
     ```
 
 ### Intermediate example: Use secrets with a Nginx service
@@ -727,7 +821,6 @@ line.
 
 8.  Do not clean up any services or secrets if you intend to proceed to the next
     example, which demonstrates how to rotate the MySQL root password.
-
 
 ### Example: Rotate a secret
 
