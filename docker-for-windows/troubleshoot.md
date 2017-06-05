@@ -285,7 +285,7 @@ Task Manager.
 See also, the user reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74)
 
-### Networking and Wifi problems upon Docker for Windows install
+### Networking and WiFi problems upon Docker for Windows install
 
 Some users have encountered networking issues during install and startup of
 Docker for Windows. For example, upon install or auto-reboot, network adapters
