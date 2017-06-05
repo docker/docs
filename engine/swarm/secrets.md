@@ -26,8 +26,8 @@ runtime but you don't want to store in the image or in source control, such as:
 - Generic strings or binary content (up to 500 kb in size)
 
 > **Note**: Docker secrets are only available to swarm services, not to
-> standalone containers. To use this feature, consider adapting your container to
-> run as a service with a scale of 1.
+> standalone containers. To use this feature, consider adapting your container
+> to run as a service with a scale of 1.
 
 Another use case for using secrets is to provide a layer of abstraction between
 the container and a set of credentials. Consider a scenario where you have
@@ -45,18 +45,20 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for secrets as for the rest of the swarm
 management data.
 
->**Warning**:
->Raft data is encrypted in Docker 1.13 and higher. If any of your
-Swarm managers run an earlier version, and one of those managers becomes the
-manager of the swarm, the secrets will be stored unencrypted in that node's Raft
-logs. Before adding any secrets, update all of your manager nodes to Docker 1.13
-to prevent secrets from being written to plain-text Raft logs.
+> **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
+> Swarm managers run an earlier version, and one of those managers becomes the
+> manager of the swarm, the secrets will be stored unencrypted in that node's
+> Raft logs. Before adding any secrets, update all of your manager nodes to
+> Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
+> logs.
 {:.warning}
 
 When you grant a newly-created or running service access to a secret, the
-decrypted secret is mounted into the container in an in-memory filesystem at
-`/run/secrets/<secret_name>`. You can update a service to grant it access to
-additional secrets or revoke its access to a given secret at any time.
+decrypted secret is mounted into the container in an in-memory filesystem. The
+location of the mount point within the container defaults to
+`/run/secrets/<secret_name>`, but you can specify a custom location in Docker
+17.06 and higher. You can update a service to grant it access to additional
+secrets or revoke its access to a given secret at any time.
 
 A node only has access to (encrypted) secrets if the node is a swarm manager or
 if it is running service tasks which have been granted access to the secret.
@@ -82,12 +84,12 @@ the mount point of the secret within a given container.
 Use these links to read about specific commands, or continue to the
 [example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
 
-- [`docker secret create`](../reference/commandline/secret_create.md)
-- [`docker secret inspect`](../reference/commandline/secret_inspect.md)
-- [`docker secret ls`](../reference/commandline/secret_ls.md)
-- [`docker secret rm`](../reference/commandline/secret_rm.md)
-- [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`docker secret create`](/engine/reference/commandline/secret_create.md)
+- [`docker secret inspect`](/engine/reference/commandline/secret_inspect.md)
+- [`docker secret ls`](/engine/reference/commandline/secret_ls.md)
+- [`docker secret rm`](/engine/reference/commandline/secret_rm.md)
+- [`--secret`](/engine/reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
+- [`--secret-add` and `--secret-rm`](/engine/reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
 
 ## Examples
 
@@ -170,7 +172,7 @@ real-world example, continue to
 
 5.  Verify that the secret is **not** available if you commit the container.
 
-    ```bash
+    ```none
     $ docker commit $(docker ps --filter name=redis -q) committed_redis
 
     $ docker run --rm -it committed_redis cat /run/secrets/my_secret_data
@@ -178,8 +180,8 @@ real-world example, continue to
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
     ```
 
-6.  Try removing the secret. The removal fails because the `redis` is running
-    and has access to the secret.
+6.  Try removing the secret. The removal fails because the `redis` service is
+    running and has access to the secret.
 
     ```bash
 
@@ -205,7 +207,7 @@ real-world example, continue to
     to the secret. The container ID will be different, because the
     `service update` command redeploys the service.
 
-    ```bash
+    ```none
     $ docker exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
@@ -374,24 +376,46 @@ generate the site key and certificate, name the files `site.key` and
     > This example does not require a custom image. It puts the `site.conf`
     > into place and runs the container all in one step.
 
-    ```bash
-    $ docker service create \
-         --name nginx \
-         --secret site.key \
-         --secret site.crt \
-         --secret site.conf \
-         --publish 3000:443 \
-         nginx:latest \
-         sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
-    ```
+    Docker 17.06 and higher allow you to specify a custom location for a secret
+    within the container. The older version of this command requires you to
+    create a symbolic link to the true location of the `site.conf` file so that
+    Nginx can read it, but the newer version does not require this. The older
+    example is preserved so that you can see the difference.
 
-    This uses the short syntax for the `--secret` flag, which creates files in
+    - **Docker 17.06 and higher**:
+
+      ```bash
+      $ docker service create \
+           --name nginx \
+           --secret site.key \
+           --secret site.crt \
+           --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
+           --publish 3000:443 \
+           nginx:latest \
+           sh -c "exec nginx -g 'daemon off;'"
+      ```
+
+    - **Docker 17.05 and earlier**:
+
+      ```bash
+      $ docker service create \
+           --name nginx \
+           --secret site.key \
+           --secret site.crt \
+           --secret site.conf \
+           --publish 3000:443 \
+           nginx:latest \
+           sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
+      ```
+
+    The first example shows both the short and long syntax for secrets, and the
+    second example shows only the short syntax.  The short syntax creates files in
     `/run/secrets/` with the same name as the secret. Within the running
     containers, the following three files now exist:
 
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
-    - `/run/secrets/site.conf`
+    - `/etc/nginx/conf.d/site.conf` (or `/run/secrets/site.conf` if you used the second example)
 
 5.  Verify that the Nginx service is running.
 
@@ -851,7 +875,7 @@ between containers (for instance, if you use `--link`).
 
 ## Use Secrets in Compose
 
-```
+```yaml
 version: '3.1'
 
 services:
@@ -895,7 +919,8 @@ volumes:
 This example creates a simple WordPress site using two secrets in
 a compose file.
 
-The keyword `secrets:` defines two secrets `db_password:` and `db_root_password:`.
+The keyword `secrets:` defines two secrets `db_password:` and
+`db_root_password:`.
 
 When deploying, Docker will create these two secrets and populate them with the
 content from the file specified in the compose file.
@@ -903,10 +928,10 @@ content from the file specified in the compose file.
 The db service uses both secrets, and the wordpress is using one.
 
 When you deploy, Docker will mount a file under `/run/secrets/<secret_name>` in the
-services. These files are never persisted in disk, they're managed in memory
+services. These files are never persisted in disk, but are managed in memory.
 
-Each service has environment variables to specify where the service should look for
-that secret data.
+Each service uses environment variables to specify where the service should look
+for that secret data.
 
 More information on short and long syntax for secrets can be found at
 [Compose file version 3 reference](/compose/compose-file/index.md#secrets).
