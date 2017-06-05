@@ -124,7 +124,7 @@ the five replicas is chosen, in a round-robin fashion, to respond.
 
 
 >**Note**: At this stage, it may take up to 30 seconds for the containers to respond to HTTP
-> requests. This is not indicitive of Docker or swarm performance, but rather an unmet
+> requests. This is not indicative of Docker or swarm performance, but rather an unmet
 > Redis dependency that we will address later in the tutorial.
 
 ## Scale the app
