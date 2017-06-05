@@ -809,6 +809,8 @@ reference:
     section:
     - path: /engine/reference/commandline/swarm/
       title: docker swarm
+    - path: /engine/reference/commandline/swarm_ca/
+      title: docker swarm ca
     - path: /engine/reference/commandline/swarm_init/
       title: docker swarm init
     - path: /engine/reference/commandline/swarm_join-token/

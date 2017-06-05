@@ -1,6 +1,6 @@
 command: docker container attach
-short: Attach to a running container
-long: Attach to a running container
+short: Attach local standard input, output, and error streams to a running container
+long: Attach local standard input, output, and error streams to a running container
 usage: docker container attach [OPTIONS] CONTAINER
 pname: docker container
 plink: docker_container.yaml

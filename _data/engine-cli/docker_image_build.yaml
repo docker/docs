@@ -5,8 +5,9 @@ usage: docker image build [OPTIONS] PATH | URL | -
 pname: docker image
 plink: docker_image.yaml
 options:
+- option: add-host
+  description: Add a custom host-to-IP mapping (host:ip)
 - option: build-arg
-  default_value: '[]'
   description: Set build-time variables
 - option: cache-from
   default_value: '[]'
@@ -39,15 +40,18 @@ options:
 - option: force-rm
   default_value: "false"
   description: Always remove intermediate containers
+- option: iidfile
+  description: Write the image ID to the file
 - option: isolation
   description: Container isolation technology
 - option: label
-  default_value: '[]'
   description: Set metadata for an image
 - option: memory
   shorthand: m
+  default_value: "0"
   description: Memory limit
 - option: memory-swap
+  default_value: "0"
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: network
@@ -71,14 +75,16 @@ options:
   default_value: '[]'
   description: Security options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: squash
   default_value: "false"
   description: Squash newly built layers into a single new layer
 - option: tag
   shorthand: t
-  default_value: '[]'
   description: Name and optionally a tag in the 'name:tag' format
+- option: target
+  description: Set the target build stage to build.
 - option: ulimit
   default_value: '[]'
   description: Ulimit options

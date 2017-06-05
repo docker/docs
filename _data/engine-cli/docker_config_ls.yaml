@@ -1,0 +1,18 @@
+command: docker config ls
+aliases: list
+short: List configs
+long: List configs
+usage: docker config ls [OPTIONS]
+pname: docker config
+plink: docker_config.yaml
+options:
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: format
+  description: Pretty-print configs using a Go template
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display IDs
+

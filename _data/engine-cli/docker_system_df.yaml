@@ -7,6 +7,8 @@ usage: docker system df [OPTIONS]
 pname: docker system
 plink: docker_system.yaml
 options:
+- option: format
+  description: Pretty-print images using a Go template
 - option: verbose
   shorthand: v
   default_value: "false"

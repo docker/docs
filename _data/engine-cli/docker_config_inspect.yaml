@@ -1,0 +1,14 @@
+command: docker config inspect
+short: Display detailed information on one or more configuration files
+long: Display detailed information on one or more configuration files
+usage: docker config inspect [OPTIONS] CONFIG [CONFIG...]
+pname: docker config
+plink: docker_config.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template
+- option: pretty
+  default_value: "false"
+  description: Print the information in a human friendly format
+
