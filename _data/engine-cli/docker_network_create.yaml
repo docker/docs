@@ -58,6 +58,11 @@ options:
 - option: aux-address
   default_value: map[]
   description: Auxiliary IPv4 or IPv6 addresses used by Network driver
+- option: config-from
+  description: The network from which copying the configuration
+- option: config-only
+  default_value: "false"
+  description: Create a configuration only network
 - option: driver
   shorthand: d
   default_value: bridge
@@ -65,6 +70,9 @@ options:
 - option: gateway
   default_value: '[]'
   description: IPv4 or IPv6 Gateway for the master subnet
+- option: ingress
+  default_value: "false"
+  description: Create swarm routing-mesh network
 - option: internal
   default_value: "false"
   description: Restrict external access to the network
@@ -81,12 +89,13 @@ options:
   default_value: "false"
   description: Enable IPv6 networking
 - option: label
-  default_value: '[]'
   description: Set metadata on a network
 - option: opt
   shorthand: o
   default_value: map[]
   description: Set driver specific options
+- option: scope
+  description: Control the network's scope
 - option: subnet
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment
@@ -195,4 +204,21 @@ examples: |-
   connects a bridge network to it to provide external connectivity. If you want
   to create an externally isolated `overlay` network, you can specify the
   `--internal` option.
+
+  ### Network ingress mode
+
+  You can create the network which will be used to provide the routing-mesh in the
+  swarm cluster. You do so by specifying `--ingress` when creating the network. Only
+  one ingress network can be created at the time. The network can be removed only
+  if no services depend on it. Any option available when creating a overlay network
+  is also available when creating the ingress network, besides the `--attachable` option.
+
+  ```bash
+  $ docker network create -d overlay \
+    --subnet=10.11.0.0/16 \
+    --ingress \
+    --opt com.docker.network.mtu=9216 \
+    --opt encrypted=true \
+    my-ingress-network
+  ```
 
