@@ -152,7 +152,7 @@ Override the default command.
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 
-    command: [bundle, exec, thin, -p, 3000]
+    command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 
