@@ -1,12 +1,9 @@
 command: docker inspect
 short: Return low-level information on Docker objects
 long: |-
-  By default, `docker inspect` will render all results in a JSON array. If the container and
-  image have the same name, this will return container JSON for unspecified type.
-  If a format is specified, the given template will be executed for each result.
+  ker inspect provides detailed information on constructs controlled by Docker.
 
-  Go's [text/template](http://golang.org/pkg/text/template/) package
-  describes all the details of the format.
+  By default, `docker inspect` will render results in a JSON array.
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 pname: docker
 plink: docker.yaml

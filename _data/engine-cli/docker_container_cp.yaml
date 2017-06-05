@@ -12,6 +12,10 @@ usage: "docker container cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker c
 pname: docker container
 plink: docker_container.yaml
 options:
+- option: archive
+  shorthand: a
+  default_value: "false"
+  description: Archive mode (copy all uid/gid information)
 - option: follow-link
   shorthand: L
   default_value: "false"
