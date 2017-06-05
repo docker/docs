@@ -10,12 +10,18 @@ options:
 - option: filter
   shorthand: f
   description: Filter output based on conditions provided
+- option: format
+  description: Pretty-print tasks using a Go template
 - option: no-resolve
   default_value: "false"
   description: Do not map IDs to Names
 - option: no-trunc
   default_value: "false"
   description: Do not truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display task IDs
 examples: |-
   ```bash
   $ docker node ps swarm-manager1
@@ -85,5 +91,37 @@ examples: |-
 
   #### desired-state
 
-  The `desired-state` filter can take the values `running`, `shutdown`, and `accepted`.
+  The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
+
+
+  ### Formatting
+
+  The formatting options (`--format`) pretty-prints tasks output
+  using a Go template.
+
+  Valid placeholders for the Go template are listed below:
+
+  Placeholder     | Description
+  ----------------|------------------------------------------------------------------------------------------
+  `.Name`         | Task name
+  `.Image`        | Task image
+  `.Node`         | Node ID
+  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
+  `.CurrentState` | Current state of the task
+  `.Error`        | Error
+  `.Ports`        | Task published ports
+
+  When using the `--format` option, the `node ps` command will either
+  output the data exactly as the template declares or, when using the
+  `table` directive, includes column headers as well.
+
+  The following example uses a template without headers and outputs the
+  `Name` and `Image` entries separated by a colon for all tasks:
+
+  ```bash
+  $ docker node ps --format "{{.Name}}: {{.Image}}"
+  top.1: busybox
+  top.2: busybox
+  top.3: busybox
+  ```
 

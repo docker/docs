@@ -19,7 +19,6 @@ examples: |-
 
   ```bash
   $ docker plugin inspect -f {{.Settings.Env}} tiborvass/sample-volume-plugin
-
   [DEBUG=0]
 
   $ docker plugin set tiborvass/sample-volume-plugin DEBUG=1
@@ -53,11 +52,13 @@ examples: |-
 
   ```bash
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
   /dev/foo
 
   $ docker plugins set myplugin mydevice.path=/dev/bar
 
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
   /dev/bar
   ```
 
@@ -66,15 +67,17 @@ examples: |-
 
   ### Change the source of the arguments
 
-  The following example change the source of the args on the `myplugin` plugin.
+  The following example change the value of the args on the `myplugin` plugin.
 
   ```bash
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
   ["foo", "bar"]
 
-  $ docker plugins set myplugin args="foo bar baz"
+  $ docker plugins set myplugin myargs="foo bar baz"
 
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
   ["foo", "bar", "baz"]
   ```
 

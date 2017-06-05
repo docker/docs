@@ -10,6 +10,12 @@ plink: docker_swarm.yaml
 options:
 - option: advertise-addr
   description: 'Advertised address (format: <ip|interface>[:port])'
+- option: availability
+  default_value: active
+  description: Availability of the node ("active"|"pause"|"drain")
+- option: data-path-addr
+  description: |
+    Address or interface to use for data path traffic (format: <ip|interface>)
 - option: listen-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
@@ -75,7 +81,25 @@ examples: |-
 
   This flag is generally not necessary when joining an existing swarm.
 
+  ### `--data-path-addr`
+
+  This flag specifies the address that global scope network drivers will publish towards
+  other nodes in order to reach the containers running on this node.
+  Using this parameter it is then possible to separate the container's data traffic from the
+  management traffic of the cluster.
+  If unspecified, Docker will use the same IP address or interface that is used for the
+  advertise address.
+
   ### `--token string`
 
-  Secret value required for nodes to join the swar
+  Secret value required for nodes to join the swarm
+
+  ### `--availability`
+
+  This flag specifies the availability of the node at the time the node joins a master.
+  Possible availability values are `active`, `pause`, or `drain`.
+
+  This flag is useful in certain situations. For example, a cluster may want to have
+  dedicated manager nodes that are not served as worker nodes. This could be achieved
+  by passing `--availability=drain` to `docker swarm join`.
 

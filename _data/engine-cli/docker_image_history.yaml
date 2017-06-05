@@ -5,6 +5,8 @@ usage: docker image history [OPTIONS] IMAGE
 pname: docker image
 plink: docker_image.yaml
 options:
+- option: format
+  description: Pretty-print images using a Go template
 - option: human
   shorthand: H
   default_value: "true"

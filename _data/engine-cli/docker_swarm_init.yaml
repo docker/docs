@@ -13,9 +13,15 @@ options:
   default_value: "false"
   description: |
     Enable manager autolocking (requiring an unlock key to start a stopped manager)
+- option: availability
+  default_value: active
+  description: Availability of the node ("active"|"pause"|"drain")
 - option: cert-expiry
   default_value: 2160h0m0s
   description: Validity period for node certificates (ns|us|ms|s|m|h)
+- option: data-path-addr
+  description: |
+    Address or interface to use for data path traffic (format: <ip|interface>)
 - option: dispatcher-heartbeat
   default_value: 5s
   description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
@@ -113,6 +119,15 @@ examples: |-
   Specifying a port is optional. If the value is a bare IP address or interface
   name, the default port 2377 will be used.
 
+  ### `--data-path-addr`
+
+  This flag specifies the address that global scope network drivers will publish towards
+  other nodes in order to reach the containers running on this node.
+  Using this parameter it is then possible to separate the container's data traffic from the
+  management traffic of the cluster.
+  If unspecified, Docker will use the same IP address or interface that is used for the
+  advertise address.
+
   ### `--task-history-limit`
 
   This flag sets up task history retention limit.
@@ -131,4 +146,13 @@ examples: |-
   Snapshots compact the Raft log and allow for more efficient transfer of the
   state to new managers. However, there is a performance cost to taking snapshots
   frequently.
+
+  ### `--availability`
+
+  This flag specifies the availability of the node at the time the node joins a master.
+  Possible availability values are `active`, `pause`, or `drain`.
+
+  This flag is useful in certain situations. For example, a cluster may want to have
+  dedicated manager nodes that are not served as worker nodes. This could be achieved
+  by passing `--availability=drain` to `docker swarm init`.
 

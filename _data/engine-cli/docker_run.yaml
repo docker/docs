@@ -17,11 +17,9 @@ pname: docker
 plink: docker.yaml
 options:
 - option: add-host
-  default_value: '[]'
   description: Add a custom host-to-IP mapping (host:ip)
 - option: attach
   shorthand: a
-  default_value: '[]'
   description: Attach to STDIN, STDOUT or STDERR
 - option: blkio-weight
   default_value: "0"
@@ -31,10 +29,8 @@ options:
   default_value: '[]'
   description: Block IO weight (relative device weight)
 - option: cap-add
-  default_value: '[]'
   description: Add Linux capabilities
 - option: cap-drop
-  default_value: '[]'
   description: Drop Linux capabilities
 - option: cgroup-parent
   description: Optional parent cgroup for the container
@@ -63,14 +59,11 @@ options:
   default_value: "0"
   description: CPU shares (relative weight)
 - option: cpus
-  default_value: "0.000"
   description: Number of CPUs
 - option: cpuset-cpus
   description: CPUs in which to allow execution (0-3, 0,1)
 - option: cpuset-mems
   description: MEMs in which to allow execution (0-3, 0,1)
-- option: credentialspec
-  description: Credential spec for managed service account (Windows only)
 - option: detach
   shorthand: d
   default_value: "false"
@@ -78,8 +71,9 @@ options:
 - option: detach-keys
   description: Override the key sequence for detaching a container
 - option: device
-  default_value: '[]'
   description: Add a host device to the container
+- option: device-cgroup-rule
+  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -96,44 +90,40 @@ options:
   default_value: "true"
   description: Skip image verification
 - option: dns
-  default_value: '[]'
   description: Set custom DNS servers
 - option: dns-opt
-  default_value: '[]'
   description: Set DNS options
 - option: dns-option
-  default_value: '[]'
   description: Set DNS options
 - option: dns-search
-  default_value: '[]'
   description: Set custom DNS search domains
 - option: entrypoint
   description: Overwrite the default ENTRYPOINT of the image
 - option: env
   shorthand: e
-  default_value: '[]'
   description: Set environment variables
 - option: env-file
-  default_value: '[]'
   description: Read in a file of environment variables
 - option: expose
-  default_value: '[]'
   description: Expose a port or a range of ports
 - option: group-add
-  default_value: '[]'
   description: Add additional groups to join
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
   default_value: 0s
-  description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
+  description: Time between running the check (ms|s|m|h) (default 0s)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
+- option: health-start-period
+  default_value: 0s
+  description: |
+    Start period for the container to initialize before starting health-retries countdown (ms|s|m|h) (default 0s)
 - option: health-timeout
   default_value: 0s
   description: |
-    Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
+    Maximum time to allow one check to run (ms|s|m|h) (default 0s)
 - option: help
   default_value: "false"
   description: Print usage
@@ -144,72 +134,70 @@ options:
   default_value: "false"
   description: |
     Run an init inside the container that forwards signals and reaps processes
-- option: init-path
-  description: Path to the docker-init binary
 - option: interactive
   shorthand: i
   default_value: "false"
   description: Keep STDIN open even if not attached
 - option: io-maxbandwidth
+  default_value: "0"
   description: |
     Maximum IO bandwidth limit for the system drive (Windows only)
 - option: io-maxiops
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
   description: Container isolation technology
 - option: kernel-memory
+  default_value: "0"
   description: Kernel memory limit
 - option: label
   shorthand: l
-  default_value: '[]'
   description: Set meta data on a container
 - option: label-file
-  default_value: '[]'
   description: Read in a line delimited file of labels
 - option: link
-  default_value: '[]'
   description: Add link to another container
 - option: link-local-ip
-  default_value: '[]'
   description: Container IPv4/IPv6 link-local addresses
 - option: log-driver
   description: Logging driver for the container
 - option: log-opt
-  default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
+  default_value: "0"
   description: Memory limit
 - option: memory-reservation
+  default_value: "0"
   description: Memory soft limit
 - option: memory-swap
+  default_value: "0"
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: memory-swappiness
   default_value: "-1"
   description: Tune container memory swappiness (0 to 100)
+- option: mount
+  description: Attach a filesystem mount to the container
 - option: name
   description: Assign a name to the container
 - option: net
   default_value: default
   description: Connect a container to a network
 - option: net-alias
-  default_value: '[]'
   description: Add network-scoped alias for the container
 - option: network
   default_value: default
   description: Connect a container to a network
 - option: network-alias
-  default_value: '[]'
   description: Add network-scoped alias for the container
 - option: no-healthcheck
   default_value: "false"
@@ -230,7 +218,6 @@ options:
   description: Give extended privileges to this container
 - option: publish
   shorthand: p
-  default_value: '[]'
   description: Publish a container's port(s) to the host
 - option: publish-all
   shorthand: P
@@ -248,27 +235,25 @@ options:
 - option: runtime
   description: Runtime to use for this container
 - option: security-opt
-  default_value: '[]'
   description: Security Options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: sig-proxy
   default_value: "true"
   description: Proxy received signals to the process
 - option: stop-signal
   default_value: SIGTERM
-  description: Signal to stop a container, SIGTERM by default
+  description: Signal to stop a container
 - option: stop-timeout
   default_value: "0"
   description: Timeout (in seconds) to stop a container
 - option: storage-opt
-  default_value: '[]'
   description: Storage driver options for the container
 - option: sysctl
   default_value: map[]
   description: Sysctl options
 - option: tmpfs
-  default_value: '[]'
   description: Mount a tmpfs directory
 - option: tty
   shorthand: t
@@ -286,12 +271,10 @@ options:
   description: UTS namespace to use
 - option: volume
   shorthand: v
-  default_value: '[]'
   description: Bind mount a volume
 - option: volume-driver
   description: Optional volume driver for the container
 - option: volumes-from
-  default_value: '[]'
   description: Mount volumes from the specified container(s)
 - option: workdir
   shorthand: w
@@ -451,6 +434,29 @@ examples: |-
 
   For in-depth information about volumes, refer to [manage data in containers](https://docs.docker.com/engine/tutorials/dockervolumes/)
 
+
+  ### Add bind-mounts or volumes using the --mount flag
+
+  The `--mount` flag allows you to mount volumes, host-directories and `tmpfs`
+  mounts in a container.
+
+  The `--mount` flag supports most options that are supported by the `-v` or the
+  `--volume` flag, but uses a different syntax. For in-depth information on the
+  `--mount` flag, and a comparison between `--volume` and `--mount`, refer to
+  the [service create command reference](service_create.md#add-bind-mounts-or-volumes).
+
+  Even though there is no plan to deprecate `--volume`, usage of `--mount` is recommended.
+
+  Examples:
+
+  ```bash
+  $ docker run --read-only --mount type=volume,target=/icanwrite busybox touch /icanwrite/here
+  ```
+
+  ```bash
+  $ docker run -t -i --mount type=bind,src=/data,dst=/data busybox sh
+  ```
+
   ### Publish or expose port (-p, --expose)
 
   ```bash
@@ -475,75 +481,49 @@ examples: |-
   $ docker run -e MYVAR1 --env MYVAR2=foo --env-file ./env.list ubuntu bash
   ```
 
-  This sets simple (non-array) environmental variables in the container. For
-  illustration all three
-  flags are shown here. Where `-e`, `--env` take an environment variable and
-  value, or if no `=` is provided, then that variable's current value, set via
-  `export`, is passed through (i.e. `$MYVAR1` from the host is set to `$MYVAR1`
-  in the container). When no `=` is provided and that variable is not defined
-  in the client's environment then that variable will be removed from the
-  container's list of environment variables. All three flags, `-e`, `--env` and
-  `--env-file` can be repeated.
+  Use the `-e`, `--env`, and `--env-file` flags to set simple (non-array)
+  environment variables in the container you're running, or overwrite variables
+  that are defined in the Dockerfile of the image you're running.
 
-  Regardless of the order of these three flags, the `--env-file` are processed
-  first, and then `-e`, `--env` flags. This way, the `-e` or `--env` will
-  override variables as needed.
+  You can define the variable and its value when running the container:
 
   ```bash
-  $ cat ./env.list
-  TEST_FOO=BAR
-  $ docker run --env TEST_FOO="This is a test" --env-file ./env.list busybox env | grep TEST_FOO
-  TEST_FOO=This is a test
+  $ docker run --env VAR1=value1 --env VAR2=value2 ubuntu env | grep VAR
+  VAR1=value1
+  VAR2=value2
   ```
 
-  The `--env-file` flag takes a filename as an argument and expects each line
-  to be in the `VAR=VAL` format, mimicking the argument passed to `--env`. Comment
-  lines need only be prefixed with `#`
-
-  An example of a file passed with `--env-file`
+  You can also use variables that you've exported to your local environment:
 
   ```bash
-  $ cat ./env.list
-  TEST_FOO=BAR
+  export VAR1=value1
+  export VAR2=value2
 
-  # this is a comment
-  TEST_APP_DEST_HOST=10.10.0.127
-  TEST_APP_DEST_PORT=8888
-  _TEST_BAR=FOO
-  TEST_APP_42=magic
-  helloWorld=true
-  123qwe=bar
-  org.spring.config=something
+  $ docker run --env VAR1 --env VAR2 ubuntu env | grep VAR
+  VAR1=value1
+  VAR2=value2
+  ```
 
-  # pass through this variable from the caller
-  TEST_PASSTHROUGH
-  $ TEST_PASSTHROUGH=howdy docker run --env-file ./env.list busybox env
-  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  HOSTNAME=5198e0745561
-  TEST_FOO=BAR
-  TEST_APP_DEST_HOST=10.10.0.127
-  TEST_APP_DEST_PORT=8888
-  _TEST_BAR=FOO
-  TEST_APP_42=magic
-  helloWorld=true
-  TEST_PASSTHROUGH=howdy
-  HOME=/root
-  123qwe=bar
-  org.spring.config=something
+  When running the command, the Docker CLI client checks the value the variable
+  has in your local environment and passes it to the container.
+  If no `=` is provided and that variable is not exported in your local
+  environment, the variable won't be set in the container.
 
-  $ docker run --env-file ./env.list busybox env
-  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  HOSTNAME=5198e0745561
-  TEST_FOO=BAR
-  TEST_APP_DEST_HOST=10.10.0.127
-  TEST_APP_DEST_PORT=8888
-  _TEST_BAR=FOO
-  TEST_APP_42=magic
-  helloWorld=true
-  TEST_PASSTHROUGH=
-  HOME=/root
-  123qwe=bar
-  org.spring.config=something
+  You can also load the environment variables from a file. This file should use
+  the syntax `<variable>=value` (which sets the variable to the given value) or
+  `<variable>` (which takes the value from the local environment), and `#` for comments.
+
+  ```bash
+  $ cat env.list
+  # This is a comment
+  VAR1=value1
+  VAR2=value2
+  USER
+
+  $ docker run --env-file env.list ubuntu env | grep VAR
+  VAR1=value1
+  VAR2=value2
+  USER=denis
   ```
 
   ### Set metadata on container (-l, --label, --label-file)
@@ -725,11 +705,11 @@ examples: |-
   policy controls whether the Docker daemon restarts a container after exit.
   Docker supports the following restart policies:
 
-  | Policy            | Result                                  |
-  |-------------------|-----------------------------------------|
-  | `no`              | Do not automatically restart the container when it exits. This is the default. |
-  | `failure`         | Restart only if the container exits with a non-zero exit status. Optionally, limit the number of restart retries the Docker daemon attempts. |
-  | `always`          | Always restart the container regardless of the exit status. When you specify always, the Docker daemon will try to restart the container indefinitely. The container will also always start on daemon startup, regardless of the current state of the container. |
+  | Policy    | Result                                                                                                                                                                                                                                                           |
+  |:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `no`      | Do not automatically restart the container when it exits. This is the default.                                                                                                                                                                                   |
+  | `failure` | Restart only if the container exits with a non-zero exit status. Optionally, limit the number of restart retries the Docker daemon attempts.                                                                                                                     |
+  | `always`  | Always restart the container regardless of the exit status. When you specify always, the Docker daemon will try to restart the container indefinitely. The container will also always start on daemon startup, regardless of the current state of the container. |
 
   ```bash
   $ docker run --restart=always redis
@@ -841,38 +821,45 @@ examples: |-
   ### Specify isolation technology for container (--isolation)
 
   This option is useful in situations where you are running Docker containers on
-  Microsoft Windows. The `--isolation <value>` option sets a container's isolation
-  technology. On Linux, the only supported is the `default` option which uses
+  Windows. The `--isolation <value>` option sets a container's isolation technology.
+  On Linux, the only supported is the `default` option which uses
   Linux namespaces. These two commands are equivalent on Linux:
 
-  ```
+  ```bash
   $ docker run -d busybox top
   $ docker run -d --isolation default busybox top
   ```
 
-  On Microsoft Windows, can take any of these values:
+  On Windows, `--isolation` can take one of these values:
 
 
-  | Value     | Description                                                                                                                                                   |
-  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`   | Hyper-V hypervisor partition-based isolation.                                                                                                                  |
+  | Value     | Description                                                                                |
+  |:----------|:-------------------------------------------------------------------------------------------|
+  | `default` | Use the value specified by the Docker daemon's `--exec-opt` or system default (see below). |
+  | `process` | Shared-kernel namespace isolation (not supported on Windows client operating systems).     |
+  | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                              |
 
-  On Windows, the default isolation for client is `hyperv`, and for server is
-  `process`. Therefore when running on Windows server without a `daemon` option
-  set, these two commands are equivalent:
+  The default isolation on Windows server operating systems is `process`. The default (and only supported)
+  isolation on Windows client operating systems is `hyperv`. An attempt to start a container on a client
+  operating system with `--isolation process` will fail.
+
+  On Windows server, assuming the default configuration, these commands are equivalent
+  and result in `process` isolation:
+
+  ```PowerShell
+  PS C:\> docker run -d microsoft/nanoserver powershell echo process
+  PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo process
+  PS C:\> docker run -d --isolation process microsoft/nanoserver powershell echo process
   ```
-  $ docker run -d --isolation default busybox top
-  $ docker run -d --isolation process busybox top
-  ```
 
-  If you have set the `--exec-opt isolation=hyperv` option on the Docker `daemon`,
-  if running on Windows server, any of these commands also result in `hyperv` isolation:
+  If you have set the `--exec-opt isolation=hyperv` option on the Docker `daemon`, or
+  are running against a Windows client-based daemon, these commands are equivalent and
+  result in `hyperv` isolation:
 
-  ```
-  $ docker run -d --isolation default busybox top
-  $ docker run -d --isolation hyperv busybox top
+  ```PowerShell
+  PS C:\> docker run -d microsoft/nanoserver powershell echo hyperv
+  PS C:\> docker run -d --isolation default microsoft/nanoserver powershell echo hyperv
+  PS C:\> docker run -d --isolation hyperv microsoft/nanoserver powershell echo hyperv
   ```
 
   ### Configure namespaced kernel parameters (sysctls) at runtime

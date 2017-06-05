@@ -1,7 +1,12 @@
 command: docker service logs
-short: Fetch the logs of a service
+short: Fetch the logs of a service or task
 long: |-
   The `docker service logs` command batch-retrieves logs present at the time of execution.
+
+  The `docker service logs` command can be used with either the name or ID of a
+  service, or with the ID of a task. If a service is passed, it will display logs
+  for all of the containers in that service. If a task is passed, it will only
+  display logs from that particular task.
 
   > **Note**: This command is only functional for services that are started with
   > the `json-file` or `journald` logging driver.
@@ -36,7 +41,7 @@ long: |-
   seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
   fraction of a second no more than nine digits long. You can combine the
   `--since` option with either or both of the `--follow` or `--tail` options.
-usage: docker service logs [OPTIONS] SERVICE
+usage: docker service logs [OPTIONS] SERVICE|TASK
 pname: docker service
 plink: docker_service.yaml
 options:
@@ -49,9 +54,19 @@ options:
   description: Follow log output
 - option: no-resolve
   default_value: "false"
-  description: Do not map IDs to Names
+  description: Do not map IDs to Names in output
+- option: no-task-ids
+  default_value: "false"
+  description: Do not include task IDs in output
+- option: no-trunc
+  default_value: "false"
+  description: Do not truncate output
+- option: raw
+  default_value: "false"
+  description: Do not neatly format logs
 - option: since
-  description: Show logs since timestamp
+  description: |
+    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
 - option: tail
   default_value: all
   description: Number of lines to show from the end of the logs
