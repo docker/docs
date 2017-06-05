@@ -331,6 +331,8 @@ guides:
     title: Manage nodes in a swarm
   - path: /engine/swarm/services/
     title: Deploy services to a swarm
+  - path: /engine/swarm/configs/
+    title: Store service configuration data
   - path: /engine/swarm/secrets/
     title: Manage sensitive data with Docker secrets
   - path: /engine/swarm/swarm_manager_locking/
@@ -539,6 +541,18 @@ reference:
       title: docker checkpoint rm
   - path: /engine/reference/commandline/commit/
     title: docker commit
+  - sectiontitle: docker config *
+    section:
+    - path: /engine/reference/commandline/config/
+      title: docker config
+    - path: /engine/reference/commandline/config_create/
+      title: docker config create
+    - path: /engine/reference/commandline/config_inspect/
+      title: docker config inspect
+    - path: /engine/reference/commandline/config_ls/
+      title: docker config ls
+    - path: /engine/reference/commandline/config_rm/
+      title: docker config rm
   - sectiontitle: docker container *
     section:
     - path: /engine/reference/commandline/container/
