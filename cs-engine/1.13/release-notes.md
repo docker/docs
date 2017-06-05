@@ -27,7 +27,7 @@ Backports all fixes from [17.03.2](https://github.com/moby/moby/releases/tag/v17
 circumstances with the local (built-in) volume driver.
 
 ## CS Engine 1.13.1-cs3
-(23 Feb 2017)
+(30 Mar 2017)
 
 Backports all fixes from 17.03.1
 
