@@ -51,7 +51,7 @@ communicate before they timing out.
 |:---------------------------------------|:-------------|:-------------|
 | Raft consensus between manager nodes   | 3000         | no           |
 | Gossip protocol for overlay networking | 5000         | no           |
-| etcd                                   | 5000         | yes          |
+| etcd                                   | 500          | yes          |
 | rethinkDB                              | 10000        | no           |
 | Stand-alone swarm                      | 90000        | no           |
 
