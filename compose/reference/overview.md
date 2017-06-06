@@ -19,7 +19,7 @@ Usage:
   docker-compose -h|--help
 
 Options:
-  -f, --file FILE             Specify an alternate compose file (default: docker-compose.yml)
+  -f, --file FILE             Specify an alternate Compose file (default: docker-compose.yml)
   -p, --project-name NAME     Specify an alternate project name (default: directory name)
   --verbose                   Show more output
   -v, --version               Print version and exit
@@ -34,12 +34,12 @@ Options:
                               in the client certificate (for example if your docker host
                               is an IP address)
   --project-directory PATH    Specify an alternate working directory
-                              (default: the path of the compose file)
+                              (default: the path of the Compose file)
 
 Commands:
   build              Build or rebuild services
   bundle             Generate a Docker bundle from the Compose file
-  config             Validate and view the compose file
+  config             Validate and view the Compose file
   create             Create services
   down               Stop and remove containers, networks, images, and volumes
   events             Receive real time events from containers

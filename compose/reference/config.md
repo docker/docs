@@ -16,4 +16,4 @@ Options:
     --volumes                Print the volume names, one per line.
 ```
 
-Validate and view the compose file.
+Validate and view the Compose file.
