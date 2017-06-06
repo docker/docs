@@ -1229,6 +1229,8 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
+  - path: /enterprise/release-notes/
+    title: Release Notes
 - sectiontitle: Commercially supported Docker Engine
   section:
   - sectiontitle: 1.13
