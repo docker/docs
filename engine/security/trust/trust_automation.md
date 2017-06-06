@@ -4,7 +4,7 @@ keywords: trust, security, docker,  documentation, automation
 title: Automation with content trust
 ---
 
-Your automation systems that pull or build images can also work with trust. Any automation environment must set `DOCKER_TRUST_ENABLED` either manually or in a scripted fashion before processing images.
+Your automation systems that pull or build images can also work with trust. Any automation environment must set `DOCKER_CONTENT_TRUST` either manually or in a scripted fashion before processing images.
 
 ## Bypass requests for passphrases
 
