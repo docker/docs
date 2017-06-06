@@ -30,7 +30,7 @@ Specify the path to a Compose file. If not provided, Compose looks for a file na
 `docker-compose.yml` in the current directory and then each parent directory in
 succession until a file by that name is found.
 
-This variable supports multiple compose files separated by a path separator (on
+This variable supports multiple Compose files separated by a path separator (on
 Linux and macOS the path separator is `:`, on Windows it is `;`). For example:
 `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. The path separator
 can also be customized using `COMPOSE_PATH_SEPARATOR`.
