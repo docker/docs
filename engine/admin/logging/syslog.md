@@ -40,7 +40,7 @@ dockerd \
   --log-opt syslog-address=udp://1.2.3.4:1111
 ```
 
-> **Note**: The syslog-address supports both UP and TCP.
+> **Note**: The syslog-address supports both UDP and TCP.
 
 To make the changes persistent, add the toptions to `/etc/docker/daemon.json`:
 
