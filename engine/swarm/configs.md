@@ -13,9 +13,10 @@ as possible, without the need to bind-mount configuration files into the
 containers or use environment variables.
 
 Configs operate in a similar way to [secrets](secrets.md), except that they are
-not encrypted at rest. Configs can be added or removed from a service at any
-time, and services can share a config. You can even use configs in conjunction
-with environment variables or labels, for maximum flexibility.
+not encrypted at rest and are mounted directly into the container's filesystem
+without the use of RAM disks. Configs can be added or removed from a service at
+any time, and services can share a config. You can even use configs in
+conjunction with environment variables or labels, for maximum flexibility.
 
 > **Note**: Docker configs are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
@@ -32,12 +33,12 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for configs as for the rest of the swarm
 management data.
 
-When you grant a newly-created or running service access to a config, the
-config is mounted as a file in the container, in an in-memory filesystem. The
-location of the mount point within the container defaults to
-`/<config-name>` in Linux containers. In Windows containers, configs are all
-mounted into `C:\ProgramData\Docker\configs` and symbolic links are created to
-the desired location, which defaults to `C:\<config-name>`.
+When you grant a newly-created or running service access to a config, the config
+is mounted as a file in the container. The location of the mount point within
+the container defaults to `/<config-name>` in Linux containers. In Windows
+containers, configs are all mounted into `C:\ProgramData\Docker\configs` and
+symbolic links are created to the desired location, which defaults to
+`C:\<config-name>`.
 
 You can update a service to grant it access to additional configs or revoke its
 access to a given config at any time.
@@ -98,7 +99,7 @@ real-world example, continue to
     you can customize the file name on the container using the `target` option.
 
     ```bash
-    $ docker service  create --name="redis" --config="my-config" redis:alpine
+    $ docker service  create --name redis --config my-config redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
@@ -155,14 +156,14 @@ real-world example, continue to
 
     $ docker config rm my-config
 
-    Error response from daemon: rpc error: code = 3 desc = config 'my-config' is in use by the following service: redis
-    ```
+    Error response from daemon: rpc error: code = 3 desc = config 'my-config' is
+    in use by the following service: redis ```
 
 7.  Remove access to the config from the running `redis` service by updating the
     service.
 
     ```bash
-    $ docker service update --config-rm="my-config" redis
+    $ docker service update --config-rm my-config redis
     ```
 
 8.  Repeat steps 3 and 4 again, verifying that the service no longer has access
@@ -181,6 +182,57 @@ real-world example, continue to
     $ docker service rm redis
 
     $ docker config rm my-config
+    ```
+
+### Simple example: Use configs in a Windows service
+
+This is a very simple example which shows how to use configs with a Microsoft
+IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
+for Mac 17.06 on Microsoft Windows 10. It stores the webpage in a config.
+
+This example assumes that you have PowerShell installed.
+
+1.  Save the following into a new file `index.html`.
+
+    ```html
+    <html>
+      <head><title>Hello Docker</title></head>
+      <body>
+        <p>Hello Docker! You have deployed a HTML page.</p>
+      </body>
+    </html>
+    ```
+2.  If you have not already done so, initialize or join the swarm.
+
+    ```powershell
+    PS> docker swarm init
+    ```
+
+3.  Save the `index.html` file as a swarm config named `homepage`.
+
+    ```powershell
+    PS> docker config create homepage index.html
+    ```
+
+4.  Create an IIS service and grant it access to the `homepage` config.
+
+    ```powershell
+    PS> docker service create
+        --name my-iis
+        -p 8000:8000
+        --config src=homepage,target="\inetpub\wwwroot\index.html"
+        microsoft/iis:nanoserver  
+    ```
+ 
+5.  Access the IIS service at `http://localhost:8000/`. It should serve
+    the HTML content from the first step.
+
+6.  Remove the service and the config.
+
+    ```powershell
+    PS> docker service rm my-iis
+
+    PS> docker config rm homepage
     ```
 
 ### Advanced example: Use configs with a Nginx service
