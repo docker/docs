@@ -21,6 +21,7 @@ description: Learn how to create clusters of Dockerized machines.
   docker run -p 80:80 username/repo:tag
   ```
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
+- [Install Docker Machine version 0.11.0 or higher](https://github.com/docker/machine/releases).
 
 ## Introduction
 
