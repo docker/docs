@@ -37,6 +37,11 @@ development, test, and production swarms with the same secret name. Your
 containers only need to know the name of the secret in order to function in all
 three environments.
 
+You can also use secrets to manage non-sensitive data, such as configuration
+files. However, Docker 17.06 and higher support the use of [configs](configs.md)
+for storing non-sensitive data. Configs are mounted into the container's
+filesystem directly, without the use of a RAM disk.
+
 ### Windows support
 
 Docker 17.06 and higher include support for secrets on Windows containers.
@@ -48,6 +53,11 @@ examples below. Keep the following notable differences in mind:
   container's root disk. However, the secrets are explicitly removed when a
   container stops. In addition, Windows does not support persisting a running
   container as an image using `docker commit` or similar commands.
+
+- On Windows, we recommend enabling
+  [BitLocker](https://technet.microsoft.com/en-us/library/cc732774(v=ws.11).aspx)
+  on the volume containing the Docker root directory on the host machine to
+  ensure that secrets for running containers are encrypted at rest.
 
 - Secret files with custom targets are not directly bind-mounted into Windows
   containers, since Windows does not support non-directory file bind-mounts.
@@ -152,7 +162,7 @@ real-world example, continue to
     you can customize the file name on the container using the `target` option.
 
     ```bash
-    $ docker service  create --name="redis" --secret="my_secret_data" redis:alpine
+    $ docker service  create --name redis --secret my_secret_data redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
@@ -224,14 +234,15 @@ real-world example, continue to
 
     $ docker secret rm my_secret_data
 
-    Error response from daemon: rpc error: code = 3 desc = secret 'my_secret_data' is in use by the following service: redis
+    Error response from daemon: rpc error: code = 3 desc = secret
+    'my_secret_data' is in use by the following service: redis
     ```
 
 7.  Remove access to the secret from the running `redis` service by updating the
     service.
 
     ```bash
-    $ docker service update --secret-rm="my_secret_data" redis
+    $ docker service update --secret-rm my_secret_data redis
     ```
 
 8.  Repeat steps 3 and 4 again, verifying that the service no longer has access
@@ -254,64 +265,58 @@ real-world example, continue to
 
 ### Simple example: Use secrets in a Windows service
 
-This is a very simple example which shows how to use secrets with a Windows
-container running on Docker 17.06 EE on  Microsoft Windows Server 2013 or Docker
-for Mac 17.06 on Microsoft Windows 10. This example simply dumps the contents of
-all secrets granted to the container.
+This is a very simple example which shows how to use secrets with a Microsoft
+IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
+for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
+webpage in a secret.
 
 This example assumes that you have PowerShell installed.
 
-1.  If you have not already done so, initialize or join the swarm.
+1.  Save the following into a new file `index.html`.
+
+    ```html
+    <html>
+      <head><title>Hello Docker</title></head>
+      <body>
+        <p>Hello Docker! You have deployed a HTML page.</p>
+      </body>
+    </html>
+    ```
+2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
     PS> docker swarm init
     ```
 
-2.  Copy the following into a file called `Dockerfile`:
-
-    ```conf
-    FROM microsoft/nanoserver
-    RUN ["powershell", "cat, "C:\\ProgramData\Docker\secrets\*.*"]
-    ```
-
-    The `RUN` line will output the contents of any files within the default
-    secrets directory within Windows containers. If no secrets have been
-    granted to the service, no output will be shown.
-
-3.  Build the Dockerfile with the tag `secret-test`.
+3.  Save the `index.html` file as a swarm secret named `homepage`.
 
     ```powershell
-    PS> docker build -t secret-test .
+    PS> docker secret create homepage index.html
     ```
 
-4.  Create a secret:
+4.  Create an IIS service and grant it access to the `homepage` secret.
 
     ```powershell
-    PS> "this is a test" | docker secret create win-secret -
+    PS> docker service create
+        --name my-iis
+        -p 8000:8000
+        --secret src=homepage,target="\inetpub\wwwroot\index.html"
+        microsoft/iis:nanoserver  
     ```
 
-5.  Create a service using the `secret-test` image and grant it access to the
-    `win-secret` secret.
+    > **Note**: There is technically no reason to use secrets for this
+    > example. With Docker 17.06 and higher, [configs](configs.md) are
+    > a better fit. This example is for illustration only.
+
+5.  Access the IIS service at `http://localhost:8000/`. It should serve
+    the HTML content from the first step.
+
+6.  Remove the service and the secret.
 
     ```powershell
-    PS> docker service create --name my-win-service --secret win-secret secret-test
-    ```
+    PS> docker service rm my-iis
 
-6.  View the logs for the service:
-
-    ```powershell
-    PS> docker service logs my-win-service
-    ```
-
-    The contents of the secret should be shown.
-
-7.  Remove the service, the secret, and the image.
-
-    ```powershell
-    PS> docker service rm my-win-service
-
-    PS> docker secret rm win-secret
-
+    PS> docker secret rm homepage
     PS> docker image remove secret-test
     ```
 
