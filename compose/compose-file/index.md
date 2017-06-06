@@ -912,29 +912,6 @@ An example:
           -
             subnet: 2001:3984:3989::/64
 
-#### link_local_ips
-
-Specify a list of link-local IPs. Link-local IPs are special IPs which belong
-to a well known subnet and are purely managed by the operator, usually
-dependent on the architecture where they are deployed. Therefore they are not
-managed by docker (IPAM driver).
-
-Example usage:
-
-    version: '2.1'
-    services:
-      app:
-        image: busybox
-        command: top
-        networks:
-          app_net:
-            link_local_ips:
-              - 57.123.22.11
-              - 57.123.22.13
-    networks:
-      app_net:
-        driver: bridge
-
 ### pid
 
     pid: "host"
