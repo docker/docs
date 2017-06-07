@@ -70,8 +70,9 @@ middleware:
                 - https://<asia-cache-url>
           cas:
             - /certs/asia-cache-ca.pem
+            - /certs/dtr-ca.pem
 ```
 
-Since the China cache doesn't need to communicate directly with DTR,
-it only needs to trust the CA certificates for the next hop, in this case
-the CA certificate used by the Asia cache.
+Adding the CA for the upstream DTR is a good idea. 
+Similarly, the China cache will need to be registered with DTR. Please see [deploy a simple cache](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/#deploy-a-simple-cache) for how to use the API. 
+Ultimately the downstream cache needs to be configured for the user in question. 
