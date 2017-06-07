@@ -542,7 +542,7 @@ Add environment variables from a file. Can be a single value or a list.
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
 
-Environment variables specified in `environment` override these values.
+Environment variables specified in [environment](#environment) override these values.
 
     env_file: .env
 
@@ -562,9 +562,37 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
-The value of `VAL` is used as is and not modified at all. For example if the value is
-surrounded by quotes (as is often the case of shell variables), the quotes will be
-included in the value passed to Compose.
+The value of `VAL` is used as is and not modified at all. For example if the
+value is surrounded by quotes (as is often the case of shell variables), the
+quotes will be included in the value passed to Compose.
+
+Keep in mind that the order of files in the list is significant in determining
+the value assigned to a variable that shows up more than once. For example,
+given the following declaration in `docker_compose.yml`:
+
+```yaml
+services:
+  some-service:
+    env_file:
+      - a.env
+      - b.env
+```
+
+And the following files:
+
+```none
+# a.env
+VAR=1
+```
+
+and
+
+```none
+# b.env
+VAR=hello
+```
+
+$VAR will be `hello`.
 
 ### environment
 
