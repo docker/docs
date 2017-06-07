@@ -67,8 +67,7 @@ python-dev`
 #### Install on macOS
 
 We recommend installing Docker CLI for macOS using Homebrew. If you don't have
-`brew` installed, follow the instructions here: <a href="http://brew.sh"
-target="_blank">http://brew.sh</a>
+`brew` installed, follow the instructions here: [http://brew.sh](http://brew.sh){: target="_blank" class="_"}
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -128,7 +127,7 @@ For example:
 $ DOCKERCLOUD_NAMESPACE=myteam docker container ps
 ```
 
-To learn more, see the [Docker Cloud CLI README](https://github.com/moby/mobycloud-cli#namespace).
+To learn more, see the [Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
 
 
 ## Upgrade the docker-cloud CLI
