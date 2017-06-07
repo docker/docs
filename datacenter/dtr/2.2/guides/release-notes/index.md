@@ -19,12 +19,12 @@ to upgrade your installation to the latest release.
 **Bugs fixed**
 
 * High impact
-  * Fixed content cache chaining
+  * Fixed issued with multi-level cache chaining not working with content cache
   * Fixed pulling by a user whose content cache was deleted
   * Add support for us-east-2 and other new AWS regions
 * Low impact
-  * Fixed jobrunner crash when rethinkdb is restarted
-  * Removed warnings about rethinkdb using swap
+  * Fixed jobrunner crash when RethinkDB is restarted
+  * Removed spurious warnings about RethinkDB using swap
 
 ## DTR 2.2.4
 
