@@ -265,18 +265,69 @@ Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor
 specific, but typically the BIOS option is called `Virtualization Technology
 (VTx)` or similar.
 
+Once Hyper-V is enabled, it will show up as such on "Turn Windows features on or
+off".
+
+![Hyper-V on Windows features](images/hyper-v-enable-status.png )
+
 ### Virtualization must be enabled
 
 In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
 
-If, at some point, if you manually uninstall Hyper-V or disable virtualization, Docker for Windows will not start.
+If, at some point, if you manually uninstall Hyper-V or disable virtualization,
+Docker for Windows will not start.
 
-Verify that virtualization is enabled on Task Manager.
+Verify that virtualization is enabled by checking the Performance tab on the
+Task Manager.
 
 ![Task Manager](images/win-virtualization-enabled.png)
 
 See also, the user reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74)
+
+### Networking and WiFi problems upon Docker for Windows install
+
+Some users have encountered networking issues during install and startup of
+Docker for Windows. For example, upon install or auto-reboot, network adapters
+and/or WiFi gets disabled. In some scenarios, problems are due to having
+VirtualBox or its network adapters still installed, but in other scenarios this
+is not the case. (See also, Docker for Windows issue on GitHub: [Enabling
+Hyper-V feature turns my wi-fi off
+](https://github.com/docker/for-win/issues/139).)
+
+Here are some steps to take if you encounter similar problems:
+
+1.	Make sure virtualization is enabled, as described in the [Virtualization
+troubleshooting topic](#virtualization-must-be-enabled).
+
+2.	Make sure the Hyper-V is installed and enabled, as described in the previous
+[Hyper-V troubleshooting topic](#hyper-v).
+
+3.	Check your network switches to see if `DockerNAT` is enabled.
+
+	Open the **Hyper-V Manager**. (On Windows 10, just search for the
+	Hyper-V Manager in the search field in the lower left search field.)
+
+	Select the Virtual Switch Manager on the left-side **Actions** panel.
+
+	![Hyper-V manager](images/hyperv-manager.png)
+
+4.	Set up an external network switch. If you plan at any point to use [Docker
+Machine](/machine/overview.md) to set up multiple local VMs, you will need this
+anyway, as described in the topic on the [Hyper-V driver for [Docker
+Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT` with
+this switch.
+
+5.	If previous steps fail to solve the problems, follow steps on the
+[Cleanup README]((https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md)).
+
+	>Read full description of consequences before you run Windows cleanup script
+	>
+  >The cleanup command has a `-Cleanup` flag and a
+	 `-ForceDeleteAllSwitches` flag. Be sure to read the whole page
+	 before running any scripts, especially the warnings with regard
+	 to the `-ForceDeleteAllSwitches` option.
+	 {: .warning-vanilla}
 
 ### Windows containers and Windows Server 2016
 
