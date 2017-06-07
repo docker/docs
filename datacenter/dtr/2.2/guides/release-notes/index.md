@@ -12,6 +12,20 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.5
+
+(6 June 2017)
+
+**Bugs fixed**
+
+* High impact
+  * Fixed content cache chaining
+  * Fixed pulling by a user whose content cache was deleted
+  * Add support for us-east-2 and other new AWS regions
+* Low impact
+  * Fixed jobrunner crash when rethinkdb is restarted
+  * Removed warnings about rethinkdb using swap
+
 ## DTR 2.2.4
 
 (13 April 2017)
