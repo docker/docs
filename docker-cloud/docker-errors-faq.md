@@ -10,7 +10,7 @@ This is a list of known issues with current versions of Docker Engine along with
 
 ---
 
-## Error message: Get i/o timeout
+## Error: Get i/o timeout
 
 <!-- span tag prevents irritating autolinker from interpreting this as a link -->
 
@@ -33,7 +33,7 @@ Retry the operation, or if the error persists, use another DNS resolver. You can
 
 ---
 
-## Error message: 500 Server Error: userland proxy
+## Error: 500 Server Error: userland proxy
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: Error starting userland proxy: listen tcp 0.0.0.0:\<port>: bind: address already in use")*
 
@@ -51,7 +51,7 @@ Either choose another port, or SSH into the node and manually stop the process w
 
 ---
 
-## Error message: 500 Server Error: bind failed
+## Error: 500 Server Error: bind failed
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: Bind for 0.0.0.0:\<port> failed: port is already allocated")*
 
@@ -69,7 +69,7 @@ Either choose another port, or SSH into the node and manually stop the container
 
 ---
 
-## Error message: 500 Server Error: cannot start, executable not found
+## Error: 500 Server Error: cannot start, executable not found
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: [8] System error: exec: "\<path>": executable file not found in $PATH")*
 
@@ -87,7 +87,7 @@ Edit the service to fix the run command.
 
 ---
 
-## Error message: Timeout when pulling image from the registry
+## Error: Timeout when pulling image from the registry
 
 *Timeout when pulling image from the registry*
 
@@ -97,8 +97,34 @@ Timeouts occur when pulling the image takes more than 10 minutes. This can somet
 
 #### GitHub link
 
-<a href="https://github.com/moby/moby/issues/12823" target="_blank">docker/docker#12823</a>
+
+[docker/docker#12823](https://github.com/moby/moby/issues/12823){: target="_blank" class="_" }
 
 #### Workaround
 
-Restart the `dockercloud-agent` service (`sudo service dockercloud-agent restart`) on the node, or restart the node.
+Restart the `dockercloud-agent` service (`sudo service dockercloud-agent
+restart`) on the node, or restart the node.
+
+---
+
+## Error: Problems installing and running Docker Cloud with Anaconda Python 3.5.2 on Windows hosts
+
+#### Description
+
+* Some users have encountered problems installing and/or running Docker Cloud with Anaconda Python 3.5.2 on a Windows host
+
+* Some users running Python on Windows have encountered problems running `docker-cloud` inside a container using `docker run`.
+
+#### GitHub link
+
+[docker/for-win#368](https://github.com/docker/for-win/issues/368){: target="_blank" class="_" }
+
+[docker/dockercloud-cli#45](https://github.com/docker/dockercloud-cli/issues/45){: target="_blank" class"_" }
+
+#### Workarounds
+
+* If you encounter problems with the installation, please try using a different version of Python.
+
+* Before attempting to run `docker-cloud` in a container with `docker run`, make
+sure that you [have Linux containers
+enabled](/docker-for-windows/index.md#switch-between-windows-and-linux-containers){: target="_blank" class"_" }.
