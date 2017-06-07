@@ -30,11 +30,16 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Zesty 17.04 (LTS)
 - Yakkety 16.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on both `x86_64` and `armhf` architectures.
+Docker CE is supported on Ubuntu on `x86_64`, `armhf`, and `s390x` (IBM z
+Systems) architectures.
+
+> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial,
+> Yakkety, and Zesty.
 
 ### Uninstall old versions
 
@@ -106,7 +111,7 @@ the repository.
         software-properties-common
     ```
 
-2.  Add Docker's official GPG key:
+3.  Add Docker's official GPG key:
 
     ```bash
     $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
@@ -123,7 +128,7 @@ the repository.
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-3.  Use the following command to set up the **stable** repository. You always
+4.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install **edge** builds
     as well.
 
@@ -152,6 +157,16 @@ the repository.
        $(lsb_release -cs) \
        stable"
     ```
+
+    **s390x**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=s390x] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
@@ -229,10 +244,10 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker CE.
 
-1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/), choose your
-    Ubuntu version, browse to `pool/stable/`, choose either `amd64` or
-    `armhf`,and download the `.deb` file for the Docker version you want to
-    install and for your version of Ubuntu.
+1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
+    choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
+    `armhf`, or `s390x`. Download the `.deb` file for the Docker version you
+    want to install and for your version of Ubuntu.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
