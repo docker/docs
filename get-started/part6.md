@@ -69,7 +69,8 @@ After your cloud provider is all set up, create a Swarm:
   Cloud](/docker-cloud/infrastructure/ssh-into-a-node/). Finally, [enable Swarm
   Mode](/docker-cloud/cloud-swarm/using-swarm-mode/) by clicking the toggle at
   the top of the screen, and [register the
-  swarm](/docker-cloud/cloud-swarm/register-swarms/) you just made.
+  swarm](/docker-cloud/cloud-swarm/register-swarms/) you just made.
+* Please note that if you are [Using the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'BYOH');"}, this provider does not support the swarm mode. You can [register your own existing swarms](/docker-cloud/cloud-swarm/register-swarms/) with Docker Cloud.
 
 ### Deploy your app
 
