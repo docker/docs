@@ -18,7 +18,7 @@ data backend.
 ## Provision the service
 
 The first step is to provision the data service itself. Run this command to
-create and run the Redis service using the <a href="https://github.com/docker-library/redis/" target ="_blank">redis</a>
+create and run the Redis service using the [redis](https://github.com/docker-library/redis/){: target="_blank" class="_"}
 image:
 
 ```none

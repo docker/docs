@@ -107,7 +107,24 @@ restart`) on the node, or restart the node.
 
 ---
 
-## Error: Problems installing and running Docker Cloud with Anaconda Python 3.5.2 on Windows hosts
+## Error: Docker Cloud CLI does not currently support Python 3
+
+#### Description
+
+The `docker-cloud` command line interface (CLI) does not currently support Python 3.x
+
+
+#### GitHub link
+
+[docker/docker-cloud#21](https://github.com/docker/dockercloud-cli/issues/21){: target="_blank" class="_"}
+
+#### Workarounds
+
+* Please use Python 2.x with the Docker Cloud CLI.
+
+---
+
+## Error: Problems installing and running Docker Cloud with Python 3
 
 #### Description
 
@@ -123,7 +140,7 @@ restart`) on the node, or restart the node.
 
 #### Workarounds
 
-* If you encounter problems with the installation, please try using a different version of Python.
+* If you encounter problems with the installation, please use Python 2.x.
 
 * Before attempting to run `docker-cloud` in a container with `docker run`, make
 sure that you [have Linux containers

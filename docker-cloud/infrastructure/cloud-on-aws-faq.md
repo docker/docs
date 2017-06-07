@@ -6,21 +6,30 @@ redirect_from:
 title: Use Docker Cloud on AWS
 ---
 
-This section answers frequently asked questions about using Docker Cloud with Amazon Web Services (AWS).
+This section answers frequently asked questions about using Docker Cloud with
+Amazon Web Services (AWS).
 
 ## I can't get my account to link to Docker Cloud. How do I troubleshoot it?
 
-To validate your AWS Security Credentials, Docker Cloud tries to dry-run an instance on every region. Credentials are marked as valid if the operation succeeds at least in one of the regions. If you get the following message `Invalid AWS credentials or insufficient EC2 permissions` follow these steps to troubleshoot it:
+To validate your AWS Security Credentials, Docker Cloud tries to dry-run an
+instance on every region. Credentials are marked as valid if the operation
+succeeds at least in one of the regions. If you get the following message
+`Invalid AWS credentials or insufficient EC2 permissions` follow these steps to
+troubleshoot it:
 
-1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>.
-2. <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html" target="_blank">Configure the CLI</a> with your security credentials.
+1. [Download AWS CLI](https://aws.amazon.com/cli/){: target="_blank" class="_"}.
+2. [Configure the CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html){: target="_blank" class="_"} with your security credentials.
 2.  Run the following command:
 
     ```
     aws ec2 run-instances --dry-run --image-id ami-4d883350 --instance-type m3.medium
     ```
 
-This will try to dry-run an Ubuntu 14.04 LTS 64-bit in `sa-east-1` (Sao Paulo, South America). You can look for the AMI in the region you want to deploy to <a href="http://cloud-images.ubuntu.com/locator/ec2/" target="_blank">here</a>). It should show you the error message. If your configuration is correct, you will see the following message:
+This will try to dry-run an Ubuntu 14.04 LTS 64-bit in `sa-east-1` (Sao Paulo,
+South America). You can look for the AMI in the region you want to deploy to
+[here](http://cloud-images.ubuntu.com/locator/ec2/){: target="_blank"
+class="_"}. It should show you the error message. If your configuration is
+correct, you will see the following message:
 
 ```
 A client error (DryRunOperation) occurred when calling the RunInstances operation: Request would have succeeded, but DryRun flag is set.
@@ -28,7 +37,12 @@ A client error (DryRunOperation) occurred when calling the RunInstances operatio
 
 ## "AWS returned an error: unauthorized operation" using instance profiles to deploy node clusters
 
-This error occurs when you are using an instance profile that has more permissions than the IAM user you are using with Docker Cloud. You can fix this by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the `dockercloud` service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>.
+This error occurs when you are using an instance profile that has more
+permissions than the IAM user you are using with Docker Cloud. You can fix this
+by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the
+`dockercloud` service user. You can read more about this
+[here](http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission){:
+target="_blank" class="_"}.
 
 ## What objects does Docker Cloud create in my EC2 account?
 
@@ -86,9 +100,14 @@ with some examples:
 
 ### We allow Docker Cloud to manage VPCs and subnets
 
-Docker Cloud can take over VPC and subnet management for you when you deploy a node cluster.
+Docker Cloud can take over VPC and subnet management for you when you deploy a
+node cluster.
 
-For example, assume this is the first time you're deploying a node cluster. You delegate deployment management to Docker Cloud in the Sao Paulo (South America, `sa-east-1`) region. You don't send any `provider_options` using the API, and you leave the VPC, subnet, security groups and IAM role values set to their defaults on the dashboard. In this situation:
+For example, assume this is the first time you're deploying a node cluster. You
+delegate deployment management to Docker Cloud in the Sao Paulo (South America,
+`sa-east-1`) region. You don't send any `provider_options` using the API, and
+you leave the VPC, subnet, security groups and IAM role values set to their
+defaults on the dashboard. In this situation:
 
 1. Docker Cloud looks for a VPC called `dc-vpc`. The VPC does not exist on the first try, so Docker Cloud creates it and a `dc-gateway`, which attaches to the VPC.
 2. Docker Cloud retrieves all subnets in the VPC. No subnets exist on the first try.
@@ -149,8 +168,8 @@ If you chose a custom security group, remember to open port 22.
 
 ## How do I back up my Docker container volumes to AWS S3?
 
-Use the <a href="https://hub.docker.com/r/dockercloud/dockup/"
-target="_blank">dockercloud/dockup</a> utility image to back up your volumes.
-You only need to run it taking the volumes of the container you want to back up
-with `volumes-from` and pass it the environment configuration of the container.
-You can find more information in its Github repository.
+Use the [dockercloud/dockup](https://hub.docker.com/r/dockercloud/dockup/){:
+target="_blank" class="_"} utility image to back up your volumes. You only need
+to run it taking the volumes of the container you want to back up with
+`volumes-from` and pass it the environment configuration of the container. You
+can find more information in its Github repository.
