@@ -753,7 +753,7 @@ $ docker service create \
 > with single quotes (`'`).
 >
 > For example, the `local` driver accepts mount options as a comma-separated
-> list in the `o` parameter. This example shows the correcty to escape the list.
+> list in the `o` parameter. This example shows the correct way to escape the list.
 >
 >     $ docker service create \
 >          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
