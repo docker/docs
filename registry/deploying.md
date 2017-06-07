@@ -118,7 +118,7 @@ registries to separate areas of concern, you can customize the registry's
 port settings. This example runs the registry on port 5001 and also names it
 `registry-test`. Remember, the first part of the `-p` value is the host port
 and the second part is the port within the container. Within the container, the
-registry always listens on port `5000`.
+registry listens on port `5000` by default.
 
 ```bash
 $ docker run -d \
@@ -127,39 +127,57 @@ $ docker run -d \
   registry:2
 ```
 
+If you want to change the port the registry listens on within the container, you 
+can use the environment variable `REGISTRY_HTTP_ADDR` to change it. This command
+causes the registry to listen on port 5001 within the container:
+
+```bash
+$ docker run -d \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
+  -p 5001:5001 \
+  --name registry-test \
+  registry:2
+```
+
+
 ## Storage customization
 
 ### Customize the storage location
 
-By default, your registry data is persisted as a
-[docker volume](/engine/tutorials/dockervolumes.md) on the host filesystem.
-Just as any other container, you can use a bind mount instead. The following
-example bind-mounts the current working directory into the registry container
-at `/var/lib/registry/`.
+By default, your registry data is persisted as a [docker
+volume](/engine/tutorials/dockervolumes.md) on the host filesystem.  If you want
+to store your registry contents at a specific location on your host filesystem,
+such as if you have an SSD or SAN mounted into a particular directory, you might
+decide to use a bind mount instead.  A bind mount is more dependent on the
+filesystem layout of the Docker host, but more performant in many situations.
+The following example bind-mounts the host directory `/mnt/registry` into the
+registry container at `/var/lib/registry/`.
 
 ```bash
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
   --name registry \
-  -v `pwd`/data:/var/lib/registry \
+  -v /mnt/registry:/var/lib/registry \
   registry:2
 ```
 
 ### Customize the storage back-end
 
-Instead of the local filesystem, you can use a different storage back-end by
-making use of [storage drivers](./storage-drivers/index.md). For instance, you
-can store your registry in an Amazon S3 bucket or on Google Cloud Platform. For
-more information, see
-[storage configuration options](./configuration.md#storage).
-
+By default, the registry stores its data on the local filesystem, whether you
+use a bind mount or a volume. You can store the registry data in an Amazon S3
+bucket, Google Cloud Platform, or on another storage back-end by using [storage
+drivers](./storage-drivers/index.md).  For more information, see [storage
+configuration options](./configuration.md#storage).
 
 ## Run an externally-accessible registry
 
 Running a registry only accessible on `localhost` has limited usefulness. In
 order to make your registry accessible to external hosts, you must first secure
 it using TLS.
+
+This example is extended in [Run a registry as a
+service](#run-a-registry-as-a-service) below.
 
 ### Get a certificate
 
@@ -192,16 +210,17 @@ If you have been issued an _intermediate_ certificate instead, see
 3.  Restart the registry, directing it to use the TLS certificate. This command
     bind-mounts the `certs/` directory into the container at `/certs/`, and sets
     environment variables that tell the container where to find the `domain.crt`
-    and `domain.key` file.
+    and `domain.key` file. The registry runs on port 80.
 
     ```bash
     $ docker run -d \
-      -p 5000:5000 \
       --restart=always \
       --name registry \
       -v `pwd`/certs:/certs \
+      -e REGISTRY_HTTP_ADDR=0.0.0.0:80 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+      -p 80:80 \
       registry:2
     ```
 
@@ -210,9 +229,9 @@ If you have been issued an _intermediate_ certificate instead, see
 
     ```bash
     $ docker pull ubuntu:16.04
-    $ docker tag ubuntu:16.04 myregistrydomain.com:5000/my-ubuntu
-    $ docker push myregistrydomain.com:5000/my-ubuntu
-    $ docker pull myregistrydomain.com:5000/my-ubuntu
+    $ docker tag ubuntu:16.04 myregistrydomain.com/my-ubuntu
+    $ docker push myregistrydomain.com/my-ubuntu
+    $ docker pull myregistrydomain.com/my-ubuntu
     ```
 
 #### Use an intermediate certificate
@@ -239,8 +258,78 @@ and the relevant section of the
 ### Use an insecure registry (testing only)
 
 It is possible to use a self-signed certificate, or to use our registry
-insecurely. **This is for testing only.** See
-[run an insecure registry](insecure.md).
+insecurely. Unless you have set up verification for your self-signed
+certificate, this is for testing only. See [run an insecure
+registry](insecure.md).
+
+## Run the registry as a service
+
+[Swarm services](/engine/swarm/services.md)  provide several advantages over
+standalone containers. They use a declarative model, which means that you define
+the desired state and Docker works to keep your service in that state. Services
+provide automatic load balancing scaling, and the ability to control the
+distribution of your service, among other advantages. Services also allow you to
+store sensitive data such as TLS certificates in
+[secrets](/engine/swarm/secrets.md).
+
+The storage back-end you use determines whether you use a fully scaled service
+or a service with either only a single node or a node constraint.
+
+- If you use a distributed storage driver, such as Amazon S3, you can use a
+  fully replicated service. Each worker can write to the storage back-end
+  without causing write conflicts.
+
+- If you use a local bind mount or volume, each worker node will write to its
+  own storage location, which means that each registry will contain a different
+  data set. You can solve this problem by using a single-replica service and a
+  node constraint to ensure that only a single worker is writing to the bind
+  mount.
+
+The following example starts a registry as a single-replica service, which is
+accessible on any swarm node on port 80. It assumes you are using the same
+TLS certificates as in the previous examples.
+
+First, save the TLS certificate and key as secrets:
+
+```bash
+$ docker secret create domain.crt certs/domain.crt
+
+$ docker secret create domain.key certs/domain.key
+```
+
+Next, add a label to the node where you want to run the registry.
+To get the node's name, use `docker node ls`. Substitute your node's name for
+`node1` below.
+
+```bash
+$ docker node update --label-add registry=true node1
+```
+
+Next, create the service, granting it access to the two secrets and constraining
+it to only run on nodes with the label `registry=true`. Besides the constraint,
+you are also specifying that only a single replica should run at a time. The
+exammple bind-mounts `/mnt/registry` on the swarm node to `/var/lib/registry/`
+within the container.
+
+By default, secrets are mounted into a service at `/run/<secret-name>`.
+
+```bash
+$ docker service create \
+  --name registry \
+  --secret domain.crt \
+  --secret domain.key \
+  --label registry=true \
+  -v /mnt/registry:/var/lib/registry \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:80 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/run/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/run/domain.key \
+  -p 80:80 \
+  --replicas 1 \
+  registry:2
+```
+
+You can access the service on port 80 of any swarm node. Docker sends the
+requests to the node which is running the service.
 
 ## Load Balancing Considerations
 
@@ -305,7 +394,8 @@ This example uses native basic authentication using `htpasswd` to store the
 secrets.
 
 > **Warning**:
-> You **cannot** use authentication with an insecure registry. You must
+> You **cannot** use authentication with authentication schemes that send
+> credentials as clear text. You must
 > [configure TLS first](deploying.md#running-a-domain-registry) for
 > authentication to work.
 {:.warning}
