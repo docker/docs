@@ -2387,7 +2387,7 @@ manuals:
   - path: /registry/introduction/
     title: Understanding the Registry
   - path: /registry/deploying/
-    title: Deploying a registry server
+    title: Deploy a registry server
   - path: /registry/configuration/
     title: Configuring a registry
   - path: /registry/notifications/
