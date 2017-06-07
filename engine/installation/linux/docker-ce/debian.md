@@ -85,7 +85,13 @@ from the repository.
 
 {% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
-1.  Install packages to allow `apt` to use a repository over HTTPS:
+1.  Update the `apt` package index:
+
+    ```bash
+    $ sudo apt-get update
+    ```
+
+2.  Install packages to allow `apt` to use a repository over HTTPS:
 
     **Jessie or Stretch**:
 
@@ -108,7 +114,7 @@ from the repository.
          python-software-properties
     ```
 
-2.  Add Docker's official GPG key:
+3.  Add Docker's official GPG key:
 
     ```bash
     $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
@@ -125,7 +131,7 @@ from the repository.
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-3.  Use the following command to set up the **stable** repository. You always
+4.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install **edge** builds
     as well.
 
@@ -152,7 +158,7 @@ from the repository.
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
-4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
+5.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
     running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
     line like the following, and comment it out or remove it:

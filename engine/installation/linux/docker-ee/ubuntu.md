@@ -94,17 +94,23 @@ from the repository.
 
 #### Set up the repository
 
-1.  Install packages to allow `apt` to use a repository over HTTPS:
+1.  Update the `apt` package index:
 
-  ```bash
-  $ sudo apt-get install \
-      apt-transport-https \
-      ca-certificates \
-      curl \
-      software-properties-common
-  ```
+    ```bash
+    $ sudo apt-get update
+    ```
 
-2.  Add Docker's official GPG key using your customer Docker EE repository URL:
+2.  Install packages to allow `apt` to use a repository over HTTPS:
+
+    ```bash
+    $ sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+    ```
+
+3.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
     ```bash
     $ curl -fsSL <DOCKER-EE-URL>/gpg | sudo apt-key add -
@@ -121,7 +127,7 @@ from the repository.
     sub   4096R/91A29FA3 2017-02-22
     ```
 
-3.  Use the following command to set up the **stable** repository, replacing
+4.  Use the following command to set up the **stable** repository, replacing
     `<DOCKER-EE-URL>` with the URL you noted down in the
     [prerequisites](#prerequisites).
 
