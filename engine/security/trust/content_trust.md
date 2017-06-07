@@ -11,7 +11,7 @@ operates on. You use Docker Engine to push and pull images (data) to a public or
 gives you the ability to verify both the integrity and the publisher of all the
 data received from a registry over any channel.
 
-## Understand trust in Docker
+## Understanding trust in Docker
 
 Content trust allows operations with a remote Docker registry to enforce
 client-side signing and verification of image tags. Content trust provides the
