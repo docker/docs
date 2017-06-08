@@ -674,7 +674,7 @@ or create one.
 
 ![Docker Cloud sign-in](images/docker-cloud-menu.png)
 
-Then use the Docker for Mac menu to create, view, or navigate directly to your
+Then use the Docker for Windows menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
 
 Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
