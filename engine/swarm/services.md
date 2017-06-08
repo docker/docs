@@ -522,6 +522,18 @@ the requirement (for instance, if you request 4 CPUs and no node in the swarm
 has 4 CPUs), the service remains in a pending state until a node is available to
 run its tasks.
 
+#### Out Of Memory Exceptions (OOME)
+
+If your service attempts to use more memory than the swarm node has available,
+you may experience an Out Of Memory Exception (OOME) and a container, or the
+Docker daemon, might be killed by the kernel OOM killer. To prevent this from
+happening. ensure that your application runs on hosts with adequate memory and
+see
+[Understand the risks of running out of memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+
+Swarm services allow you to use resource constraints, placement preferences, and
+labels to ensure that your service is deployed to the appropriate swarm nodes.
+
 ### Specify service placement preferences (--placement-pref)
 
 {% include edge_only.md section="feature" %}
