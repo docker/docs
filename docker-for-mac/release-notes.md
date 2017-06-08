@@ -221,9 +221,9 @@ We did not distribute a 1.12.4 stable release
 **File sharing**
 
 - osxfs: Fixed the prohibition of chown on read-only or mode 0 files, (fixes
-  [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117),
-  [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263),
-  [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633))
+  [docker/for-mac#117](https://github.com/docker/for-mac/issues/117),
+  [docker/for-mac#263](https://github.com/docker/for-mac/issues/263),
+  [docker/for-mac#633](https://github.com/docker/for-mac/issues/633))
 
 - osxfs: Fixed race causing some reads to run forever
 
@@ -231,7 +231,7 @@ We did not distribute a 1.12.4 stable release
 
 **Moby**
 
-- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
+- Increase default ulimit for memlock (fixes [docker/for-mac#801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
 
@@ -251,12 +251,12 @@ We did not distribute a 1.12.4 stable release
 **General**
 
  * Fixed communications glitch when UI talks to com.docker.vmnetd
- Fixes [https://github.com/docker/for-mac/issues/90](https://github.com/docker/for-mac/issues/90)
+ Fixes [docker/for-mac#90](https://github.com/docker/for-mac/issues/90)
 
  * `docker-diagnose`: display and record the time the diagnosis was captured
 
  * Don't compute the container folder in `com.docker.vmnetd`
-   Fixes [https://github.com/docker/for-mac/issues/47](https://github.com/docker/for-mac/issues/47)
+   Fixes [docker/for-mac#47](https://github.com/docker/for-mac/issues/47)
 
  * Warn the user if BlueStacks is installed (potential kernel panic)
 
@@ -278,7 +278,7 @@ We did not distribute a 1.12.4 stable release
 
 * Allow ports to be bound on host addresses other than `0.0.0.0` and `127.0.0.1`
   Fixes issue reported in
-  [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68)
+  [docker/for-mac#68](https://github.com/docker/for-mac/issues/68)
 
 * Use Mac System Configuration database to detect DNS
 
@@ -355,6 +355,14 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-rc2-ce-mac14, 2017-06-08 (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-rc2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc2)
+- [Docker Machine 0.12.0](https://github.com/docker/machine/releases/tag/v0.12.0)
+- [Docker compose 1.14.0-rc2](https://github.com/docker/compose/releases/tag/1.14.0-rc2)
+
 ### Docker Community Edition 17.06.0-rc1-ce-mac13, 2017-06-01 (edge)
 
 **Upgrades**
@@ -368,16 +376,16 @@ events or unexpected unmounts.
 **New**
 
 - GUI Option to opt out of credential store
-- GUI option to reset docker data without losing all settings (fixes [Docker for Mac issue 1309](https://github.com/docker/for-mac/issues/1309))
+- GUI option to reset docker data without losing all settings (fixes [docker/for-mac#1309](https://github.com/docker/for-mac/issues/1309))
 - Add an experimental DNS name for the host: `docker.for.mac.localhost`
-- Support for client (i.e. "login") certificates for authenticating registry access (fixes [Docker for Mac issue 1320](https://github.com/docker/for-mac/issues/1320))
+- Support for client (i.e. "login") certificates for authenticating registry access (fixes [docker/for-mac#1320](https://github.com/docker/for-mac/issues/1320))
 
 **Bug fixes and minor changes**
 
 - Resync HTTP(S) proxy settings on application start
-- Interpret system proxy setting of localhost correctly (see [Docker for Mac issue 1511](https://github.com/docker/for-mac/issues/1511))
+- Interpret system proxy setting of localhost correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All docker binaries bundled with Docker for Mac are now signed
-- Display all docker cloud organizations and repositories in the whale menu (fixes [Docker for Mac issue 1538 ](https://github.com/docker/for-mac/issues/1538))
+- Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
 - OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
 
 ### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
@@ -396,11 +404,11 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-- Fix GUI crash when text table view was selected and windows re-opened (fixes [https://github.com/docker/for-mac/issues/1477](https://github.com/docker/for-mac/issues/1477))
+- Fix GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
 - Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
-- More detailed virtualbox uninstall requirements (cf https://github.com/docker/for-mac/issues/1343)
+- More detailed virtualbox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
 - You are now prompted for your password, if you changed it in Docker Cloud.
-- Request time sync after waking up to improve [https://github.com/docker/for-mac/issues/17](https://github.com/docker/for-mac/issues/17)
+- Request time sync after waking up to improve [docker/for-mac#17](https://github.com/docker/for-mac/issues/17)
 
 ### Docker Community Edition 17.05.0-ce-rc1-mac8, 2017-04-13 (edge)
 
@@ -825,10 +833,10 @@ events or unexpected unmounts.
 - Fix an issue where the whale animation during setting change was inconsistent
 - Fix an issue where some windows stayed hidden behind another app
 - Fix application of system or custom proxy settings over container restart
-- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801) )
+- Increase default ulimit for memlock (fixes [docker/for-mac#801](https://github.com/docker/for-mac/issues/801) )
 - Fix an issue where the Docker status would continue to be
       yellow/animated after the VM had started correctly
-- osxfs: fix the prohibition of chown on read-only or mode 0 files (fixes [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117), [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263), [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633) )
+- osxfs: fix the prohibition of chown on read-only or mode 0 files (fixes [docker/for-mac#117](https://github.com/docker/for-mac/issues/117), [docker/for-mac#263](https://github.com/docker/for-mac/issues/263), [docker/for-mac#633](https://github.com/docker/for-mac/issues/633) )
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
@@ -881,7 +889,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Fixed communications glitch when UI talks to `com.docker.vmnetd`. Fixes [https://github.com/docker/for-mac/issues/90](https://github.com/docker/for-mac/issues/90)
+* Fixed communications glitch when UI talks to `com.docker.vmnetd`. Fixes [docker/for-mac#90](https://github.com/docker/for-mac/issues/90)
 
 * UI fix for macOs 10.12
 
@@ -893,9 +901,9 @@ events or unexpected unmounts.
 
 * `docker-diagnose` displays and records the time the diagnosis was captured
 
-* Ports are allowed to bind to host addresses other than `0.0.0.0` and `127.0.0.1`. Fixes issue reported in [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68).
+* Ports are allowed to bind to host addresses other than `0.0.0.0` and `127.0.0.1`. Fixes issue reported in [docker/for-mac#68](https://github.com/docker/for-mac/issues/68).
 
-* We no longer compute the container folder in `com.docker.vmnetd`. Fixes [https://github.com/docker/for-mac/issues/47](https://github.com/docker/for-mac/issues/47).
+* We no longer compute the container folder in `com.docker.vmnetd`. Fixes [docker/for-mac#47](https://github.com/docker/for-mac/issues/47).
 
 **Known Issues**
 

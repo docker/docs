@@ -309,6 +309,24 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-win14 Release Notes (2017-06-08 17.06.0-rc2-ce-win14) (edge)
+
+**Upgrades**
+
+  - [Docker 17.06.0-rc2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc2)
+  - [Docker Machine 0.12.0](https://github.com/docker/machine/releases/tag/v0.12.0)
+  - [Docker compose 1.14.0-rc2](https://github.com/docker/compose/releases/tag/1.14.0-rc2)
+
+**New**
+
+- Added reset to defaults button in error report window
+- Unified login between Docker CLI and Docker Hub, Docker Cloud.
+
+**Bug fixes and minor changes**
+
+- Fixed group access check for users logged in with Active Directory (fixes [docker/for-win#785](https://github.com/docker/for-win/issues/785))
+- Check environment variables and add some warnings in logs if they can cause docker to fail
+
 ### Docker Community Edition 17.06.0-win13 Release Notes (2017-06-01 17.06.0-rc1-ce-win13) (edge)
 
 **Upgrades**
@@ -322,7 +340,7 @@ We did not distribute a 1.12.4 stable release
 - Sharing a drive can be done on demand, the first time a mount is requested
 - Add an experimental DNS name for the host: `docker.for.win.localhost`
 - Support for client (i.e. "login") certificates for authenticating
-registry access (fixes [Docker for Windows issue 569](https://github.com/docker/for-win/issues/569))
+registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/issues/569))
 
 **Bug fixes and minor changes**
 
@@ -355,7 +373,7 @@ registry access (fixes [Docker for Windows issue 569](https://github.com/docker/
 - Detect a bitlocker policy preventing windows containers to work
 - fix an issue on filesharing when explicitly disabled on vmswitch interface
 - fix VM not starting when machine had very long name
-- Fix a bug where Windows daemon.json file was not written (fixes [Docker for Windows issue 670](https://github.com/docker/for-win/issues/670))
+- Fix a bug where Windows daemon.json file was not written (fixes [docker/for-win#670](https://github.com/docker/for-win/issues/670))
 
 ### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8) (edge)
 
