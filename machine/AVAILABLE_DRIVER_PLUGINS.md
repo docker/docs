@@ -153,6 +153,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>NTT Communications Enterprise Cloud</td>
+      <td>
+        <a href="https://github.com/mittz/docker-machine-driver-ecl">
+          https://github.com/mittz/docker-machine-driver-ecl
+        </a>
+      </td>
+      <td>
+        <a href="https://github.com/mittz">Hayahito Kawamitsu</a>
+      </td>
+      <td>
+        <a href="mailto:halation3@gmail.com">halation3@gmail.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>GleSYS Internet Services</td>
       <td>
         <a href="https://github.com/glesys/docker-machine-driver-glesys">
