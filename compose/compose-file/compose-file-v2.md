@@ -8,6 +8,8 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 2 of the Compose file format.
 
 For a Compose/Docker Engine compatibility matrix, and detailed guidelines on

@@ -8,11 +8,14 @@ toc_max: 2
 toc_min: 1
 ---
 
-This is a list of known issues with current versions of Docker Engine along with our recommended workaround. You might encounter these errors in Docker Cloud.
+This is a list of known issues with current versions of Docker Engine along with
+our recommended workaround. You might encounter these errors in Docker Cloud.
+
+## Errors and messages
 
 ---
 
-## Error: Get i/o timeout
+## Get i/o timeout
 
 <!-- span tag prevents irritating autolinker from interpreting this as a link -->
 
@@ -35,7 +38,7 @@ Retry the operation, or if the error persists, use another DNS resolver. You can
 
 ---
 
-## Error: 500 Server Error: userland proxy
+## 500 Server Error: userland proxy
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: Error starting userland proxy: listen tcp 0.0.0.0:\<port>: bind: address already in use")*
 
@@ -56,7 +59,7 @@ which is using the port that you are trying to use.
 
 ---
 
-## Error: 500 Server Error: bind failed
+## 500 Server Error: bind failed
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: Bind for 0.0.0.0:\<port> failed: port is already allocated")*
 
@@ -76,7 +79,7 @@ which is using the port that you are trying to use.
 
 ---
 
-## Error: 500 Server Error: cannot start, executable not found
+## 500 Server Error: cannot start, executable not found
 
 *500 Server Error: Internal Server Error ("Cannot start container \<id>: [8] System error: exec: "\<path>": executable file not found in $PATH")*
 
@@ -95,7 +98,7 @@ Edit the service to fix the run command.
 
 ---
 
-## Error: Timeout when pulling image from the registry
+## Timeout when pulling image from the registry
 
 *Timeout when pulling image from the registry*
 
@@ -117,7 +120,7 @@ restart`) on the node, or restart the node.
 
 ---
 
-## Error: Docker Cloud CLI does not currently support Python 3
+## Docker Cloud CLI does not currently support Python 3
 
 ### Description
 
@@ -135,7 +138,7 @@ Python 3.x
 
 ---
 
-## Error: Problems installing and running Docker Cloud with Python 3
+## Problems installing and running Docker Cloud with Python 3
 
 ### Description
 

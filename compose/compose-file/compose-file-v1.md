@@ -8,6 +8,8 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 1 of the Compose file format. This is the oldest
 version.
 
