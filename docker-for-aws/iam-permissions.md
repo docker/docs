@@ -116,6 +116,7 @@ follow the link for more information.
                 "ec2:GetConsoleScreenshot",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:ModifyVpcAttribute",
+                "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:RebootInstances",
                 "ec2:ReleaseAddress",
                 "ec2:ReleaseHosts",
@@ -213,6 +214,16 @@ follow the link for more information.
                 "logs:GetLogEvents",
                 "logs:PutLogEvents",
                 "logs:PutRetentionPolicy"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "Stmt1481924989004",
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:*",
             ],
             "Resource": [
                 "*"
