@@ -125,7 +125,7 @@ explanation and list of prerequisites.
 
 * **What the install includes**: The installation provides
   [Docker Engine](/engine/userguide/), Docker CLI client,
-  [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
+  [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 
 ## Install and Run Docker for Mac
 
