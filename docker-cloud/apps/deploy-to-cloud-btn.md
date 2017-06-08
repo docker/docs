@@ -14,9 +14,9 @@ be used anywhere else.
 
 > **Note**: You must be _logged in_ to Docker Cloud for the button to work correctly. If you are not logged in, you'll see a 404 error instead.
 
-This is an example button to deploy our <a href="https://github.com/moby/mobycloud-quickstart-python" target="_blank">python quickstart</a>:
+This is an example button to deploy our [python quickstart](https://github.com/docker/dockercloud-quickstart-python){: target="_blank" class="_"}:
 
-<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/moby/mobycloud-quickstart-python" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
+<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/moby/mobycloud-quickstart-python" target="_blank" class="_"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
 
 The button redirects the user to the **Launch new Stack** wizard, with the stack
 definition already filled with the contents of any of the following files (which

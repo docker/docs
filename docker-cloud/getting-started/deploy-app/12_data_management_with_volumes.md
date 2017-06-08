@@ -65,7 +65,7 @@ redis --redeploy
 
 This command defines two new environment variables in the **redis** service and
 then redeploys the service so they take effect. You can learn more about our
-open source `redis` image <a href="https://github.com/docker-library/redis/" target ="_blank">here</a>.
+open source `redis` image [here](https://github.com/docker-library/redis/){: target="_blank" class="_"}.
 
 With these settings, Redis can create and store its data in a volume. The volume is in `/data`.
 

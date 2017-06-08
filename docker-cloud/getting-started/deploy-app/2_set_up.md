@@ -36,6 +36,13 @@ package manager, which is a package manager for
 `setuptools`, but will need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
 
+  > The Docker Cloud CLI does not currently support Python 3.x.
+  >
+  > We recommend using Python 2.x with Docker Cloud. To learn more,
+  see the Python and CLI issues described in
+  [Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
+  {: .note-vanilla}
+
 * If you do not have Python or `pip` installed, you can either [install
 Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this
 [standalone pip

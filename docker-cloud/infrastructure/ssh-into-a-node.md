@@ -8,11 +8,17 @@ redirect_from:
 title: SSH into a Docker Cloud-managed node
 ---
 
-You can add a public SSH key to the *authorized_keys* file in each of your nodes so you can access Docker Cloud provisioned nodes. The quickest way to do this is to run our **<a href="https://hub.docker.com/r/dockercloud/authorizedkeys" target="_blank">dockercloud/authorizedkeys</a>)** container image.
+You can add a public SSH key to the *authorized_keys* file in each of your nodes
+so you can access Docker Cloud provisioned nodes. The quickest way to do this is
+to run our **<a href="https://hub.docker.com/r/dockercloud/authorizedkeys"
+target="_blank">dockercloud/authorizedkeys</a>)** container image.
 
 ## Create pair of keys
 
-First, generate a keypair using `ssh-keygen -t rsa`. If you have an existing keypair you prefer to use, you can skip this step, copy the public key to your clipboard and continue on to [create the authorizedkeys stack](ssh-into-a-node.md#create-a-stack-in-docker-cloud).
+First, generate a keypair using `ssh-keygen -t rsa`. If you have an existing
+keypair you prefer to use, you can skip this step, copy the public key to your
+clipboard and continue on to [create the authorizedkeys
+stack](ssh-into-a-node.md#create-a-stack-in-docker-cloud).
 
 ```none
 $ ssh-keygen -t rsa
@@ -52,7 +58,7 @@ Next, we'll run the **authorizedkeys** service.
 You can create a new stack in Docker Cloud and enter the following stackfile to create the service manually.
 
 You can also click the button below to automatically create a new stack in Docker Cloud with the **authorizedkeys** service mostly configured. (Either way you still need to add your public key.)
-<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/moby/mobycloud-authorizedkeys" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
+<a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/docker/dockercloud-authorizedkeys" target="_blank" class="_"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
 
 
 ```yml
