@@ -151,6 +151,27 @@ local user is `samstevens` and the domain user is `merlin`.
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
 
+### Volume mounts from host paths use a `nobrl` option to override database locking  
+
+You may encounter problems using volume mounts on the host, depending on the
+database software and which options are enabled. Docker for Windows uses
+[SMB/CIFS
+protocols](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx)
+to mount host paths, and mounts them with the `nobrl` option, which prevents
+lock requests from being sent to the database server
+([docker/for-win#11](https://github.com/docker/for-win/issues/11)). This is done
+to ensure container access to database files shared from the host. Although it
+solves the over-the-network database access problem, this "unlocked" strategy
+can interfere with other aspects of database functionality (for example,
+write-ahead logging (WAL) with SQLite, as described in
+[docker/for-win#1886](https://github.com/Sonarr/Sonarr/issues/1886)).
+
+We recommend that you avoid using shared drives for volume mounts from the host
+if possible, and instead create a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+
 ### Local security policies can block shared drives and cause login errors
 
 You need permissions to mount shared drives in order to use the Docker for

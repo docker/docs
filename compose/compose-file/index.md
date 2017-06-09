@@ -1359,12 +1359,16 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 ## Volume configuration reference
 
-While it is possible to declare volumes on the fly as part of the service
-declaration, this section allows you to create named volumes that can be
-reused across multiple services (without relying on `volumes_from`), and are
-easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
-subcommand documentation for more information.
+While it is possible to declare volumes on the file as part of the service
+declaration, this section allows you to create named volumes that can be reused
+across multiple services (without relying on
+[`volumes_from`](/compose/compose-file/compose-file-v2#volumes_from)), and are
+easily retrieved and inspected using the docker command line or API. See the
+[docker volume](/engine/reference/commandline/volume_create.md) subcommand
+documentation for more information.
+
+See [Docker Volumes](/engine/userguide/dockervolumes.md) and [Volume
+Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed

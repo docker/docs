@@ -394,6 +394,16 @@ volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volum
 > Docker Machine nodes. See
 > [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 > in the FAQs.
+>
+> * We recommend that you do not mount databases on the Windows host,
+but rather define and use a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+There are a number of issues with using host-mounted volumes and network paths
+for database files. See the troubleshooting topic, [Volume mounts from host
+paths use a `nobrl` option to override database
+locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 {: .note-vanilla}
 
 See also [Verify domain user has permissions for shared
