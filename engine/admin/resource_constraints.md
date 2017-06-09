@@ -14,6 +14,43 @@ on when you should set such limits and the possible implications of setting them
 
 ## Memory
 
+### Understand the risks of running out of memory
+
+It is important not to allow a running container to consume too much of the
+host machine's memory. On Linux hosts, if the kernel detects that there is not
+enough memory to perform important system functions, it throws an `OOME`, or
+`Out Of Memory Exception`, and starts killing processes in order to free up
+memory. Any process is subject to killing, including Docker and other important
+applications. This can effectively bring the entire system down if the wrong
+process is killed.
+
+Docker attempts to mitigate these risks by adjusting the OOM priority on the
+Docker daemon so that it will be less likely to be killed than other processes
+on the system. The OOM priority on containers is not adjusted. This makes it more
+likely that an individual container will be killed than that the Docker daemon
+or other system processes will be killed. You should not try to circumvent
+these safeguards by manually setting `--oom-score-adj` to an extreme negative
+number on the daemon or a container, or by setting `--oom-disable-kill` on a
+container.
+
+For more information about the Linux kernel's OOM management, see
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" }.  
+
+You can mitigate the risk of system instability due to OOME by:
+
+- Perform tests to understand the memory requirements of your application before
+  placing it into production.
+- Ensure that your application runs only on hosts with adequate resources.
+- Limit the amount of memory your container can use, as described below.
+- Be mindful when configuring swap on your Docker hosts. Swap is slower and
+  less performant than memory but can provide a buffer against running out of
+  system memory. 
+- Consider converting your container to a [service](/engine/swarm/services.md),
+  and using service-level constraints and node labels to ensure that the
+  application runs only on hosts with enough memory
+
+### Limit a container's access to memory
+
 Docker can enforce hard memory limits, which allow the container to use no more
 than a given amount of user or system memory, or soft limits, which allow the
 container to use as much memory as it needs unless certain conditions are met,
