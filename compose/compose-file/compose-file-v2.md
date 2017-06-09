@@ -1083,6 +1083,9 @@ The default driver depends on how the Docker Engine you're using is configured,
 but in most instances it will be `bridge` on a single host and `overlay` on a
 Swarm.
 
+**Note:** although `driver` can be left blank to use the default, explicitly
+settings `driver: default` is invalid.
+
 The Docker Engine will return an error if the driver is not available.
 
     driver: overlay
