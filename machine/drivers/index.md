@@ -18,4 +18,4 @@ title: Drivers
 -   [VMware vCloud Air](vm-cloud.md)
 -   [VMware Fusion](vm-fusion.md)
 -   [VMware vSphere](vsphere.md)
--   [vmwareworkstation](https://github.com/pecigonzalo/docker-machine-vmwareworkstation) (unofficial, not supported by Docker)
+-   [VMware Workstation](https://github.com/pecigonzalo/docker-machine-vmwareworkstation) (unofficial plugin, not supported by Docker)
