@@ -56,7 +56,7 @@ See <a href="../machine/drivers/" target="_blank">Docker Machine driver referenc
 
 ## Adding a host without a driver
 
-You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow than an host provisioned by docker-machine
+You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow as on a host provisioned by docker-machine
 
     $ docker-machine create --driver none --url=tcp://50.134.234.20:2376 custombox
     $ docker-machine ls
