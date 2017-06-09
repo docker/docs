@@ -1,6 +1,6 @@
 ---
 description: How do we connect docker containers within and across hosts ?
-keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+keywords: network, networking, iptables, user-defined networks, bridge, firewall, ports
 redirect_from:
 - /engine/userguide/networking/dockernetworks/
 - /articles/networking/
@@ -11,6 +11,9 @@ This section provides an overview of Docker's default networking behavior,
 including the type of networks created by default and how to create your own
 user-defined networks. It also describes the resources required to create
 networks on a single host or across a cluster of hosts.
+
+For details about how Docker interacts with `iptables` on Linux hosts, see
+[Docker and `iptables`](#docker-and-iptables).
 
 ## Default Networks
 
@@ -549,6 +552,34 @@ see [Legacy Links](default_network/dockerlinks.md) for link feature
 in default `bridge` network and the
 [linking containers in user-defined networks](work-with-networks.md#linking-containers-in-user-defined-networks)
 for links functionality in user-defined networks.
+
+## Docker and iptables
+
+Linux hosts use a kernel module called `iptables` to manage access to network
+devices, including routing, port forwarding, network address translation (NAT),
+and other concerns. Docker modifies `iptables` rules when you start or stop
+containers which publish ports, when you create or modify networks or attach
+containers to them, or for other network-related operations.
+
+Full discussion of `iptables` is out of scope for this topic. To see which
+`iptables` rules are in effect at any time, you can use `iptables -L`. Multiple
+tables exist, and you can list a specific table, such as `nat`, `prerouting`, or
+`postrouting`, using a command such as `iptables -t nat -L`. For full
+documentation about `iptables`, see
+[netflilter/iptables](https://netfilter.org/documentation/){: target="_blank" class="_" }.
+
+Typically, `iptables` rules are created by an initialization script or a daemon
+process such as `firewalld`. The rules do not persist across a system reboot, so
+the script or utility must run when the system boots, typically at run-level 3
+or directly after the network is initialized. Consult the networking
+documentation for your Linux distribution for suggestions about the appropriate
+way to make `iptables` rules persistent.
+
+Through Docker startup, network creation, container creation, and other actions
+Docker dynamically manages `iptables` rules. In Docker 17.06 and higher, you can
+add rules to a new table called `DOCKER-USER` and Docker will not modify these
+rules when it starts or stops. This can be useful if you need to pre-populate
+`iptables` rules relating to containers or services that are not yet running.
 
 ## Related information
 
