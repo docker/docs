@@ -1431,6 +1431,18 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-volume
 
+> External volumes are always created with docker stack deploy
+>
+External volumes that do not exist _will be created_ if you use [docker stack
+deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
+(instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
+volume is automatically created when it is defined by a service. As service
+tasks are scheduled on new nodes,
+[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) creates the
+volume on the local node. To learn more, see
+[moby/moby#29976](https://github.com/moby/moby/issues/29976).
+{: .note-vanilla}
+
 ### labels
 
 Add metadata to containers using
