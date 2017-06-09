@@ -243,7 +243,6 @@ Docker EE.
     </div>
 
 
-    > **Warning**:
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
