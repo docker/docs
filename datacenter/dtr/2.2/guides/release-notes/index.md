@@ -19,7 +19,7 @@ to upgrade your installation to the latest release.
 **Bugs fixed**
 
 * High impact
-  * Fixed issued with multi-level cache chaining not working with content cache
+  * Fixed issue with multi-level cache chaining not working with content cache
   * Fixed pulling by a user whose content cache was deleted
   * Add support for us-east-2 and other new AWS regions
 * Low impact
