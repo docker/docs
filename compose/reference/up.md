@@ -50,3 +50,6 @@ flag.
 
 If you want to force Compose to stop and recreate all containers, use the
 `--force-recreate` flag.
+
+If the command encounters an error, it returns 1.
+If user press `ctrl` + `C`, causing kill of containers, it returns 2.
