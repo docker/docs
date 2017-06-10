@@ -152,7 +152,7 @@ any containers.
 Now, re-run the `docker stack ps` command to see the deployed instances reconfigured. For example, if you scaled up the replicas, there will be more
 running containers.
 
-### Take down the app and the swarm
+## Take down the app and the swarm
 
 Take the app down with `docker stack rm`:
 
