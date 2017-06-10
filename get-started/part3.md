@@ -1,22 +1,29 @@
 ---
 title: "Get Started, Part 3: Services"
 keywords: services, replicas, scale, ports, compose, compose file, stack, networking
-description: Learn how to define load-balanced and scalable service that runs containers. 
+description: Learn how to define load-balanced and scalable service that runs containers.
 ---
 {% include_relative nav.html selected="3" %}
 
 ## Prerequisites
 
-- [Install Docker version 1.13 or higher](/engine/installation/).
+- [Install Docker version 1.13 or higher](/engine/installation/index.md).
+
+- Get [Docker Compose](/compose/overview.md). On [Docker for Mac](/docker-for-mac/index.md) and [Docker for
+Windows](/docker-for-windows/index.md) it's pre-installed so you are good-to-go,
+but on Linux systems you will need to [install it
+directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
+_without Hyper-V_, use [Docker
+Toolbox](https://docs.docker.com/toolbox/overview.md).
+
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
-- Make sure you have pushed the container you created to a registry, as
-  instructed; we'll be using it here.
-- Ensure your image is working by
-  running this and visiting `http://localhost/` (slotting in your info for
-  `username`, `repo`, and `tag`):
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
+- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+`repo`, and `tag`):
 
-  ```
+  ```shell
   docker run -p 80:80 username/repo:tag
   ```
 
@@ -32,15 +39,15 @@ must go one level up in the hierarchy of a distributed application: the
 
 ## Understanding services
 
-In a distributed application, different pieces of the app are called
-"services." For example, if you imagine a video sharing site, there will
-probably be a service for storing application data in a database, a service
-for video transcoding in the background after a user uploads something, a
-service for the front-end, and so on.
+In a distributed application, different pieces of the app are called "services."
+For example, if you imagine a video sharing site, it probably includes a service
+for storing application data in a database, a service for video transcoding in
+the background after a user uploads something, a service for the front-end, and
+so on.
 
-A service really just means, "containers in production." A service only runs one
-image, but it codifies the way that image runs -- what ports it should use, how
-many replicas of the container should run so the service has the capacity it
+Services are really just "containers in production." A service only runs one
+image, but it codifies the way that image runs&8212;what ports it should use,
+how many replicas of the container should run so the service has the capacity it
 needs, and so on. Scaling a service changes the number of container instances
 running that piece of software, assigning more computing resources to the
 service in the process.
@@ -56,13 +63,15 @@ should behave in production.
 ### `docker-compose.yml`
 
 Save this file as `docker-compose.yml` wherever you want. Be sure you have
-pushed the image you created in [Part 2](part2.md) to a registry, and use
-that info to replace `username/repo:tag`:
+[pushed the image](/get-started/part2.md#share-your-image) you created in [Part
+2](part2.md) to a registry, and update this `.yml` by replacing
+`username/repo:tag` with your image details.
 
 ```yaml
 version: "3"
 services:
   web:
+    # replace username/repo:tag with your name and image details
     image: username/repository:tag
     deploy:
       replicas: 5
@@ -82,7 +91,8 @@ networks:
 
 This `docker-compose.yml` file tells Docker to do the following:
 
-- Run five instances of [the image we uploaded in step 2](part2.md) as a service
+- Pull [the image we uploaded in step 2](part2.md) from the registry.
+- Run five instances of that image as a service
   called `web`, limiting each one to use, at most, 10% of the CPU (across all
   cores), and 50MB of RAM.
 - Immediately restart containers if one fails.
@@ -95,9 +105,9 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 ## Run your new load-balanced app
 
-Before we can use the `docker stack deploy` command we'll first run 
+Before we can use the `docker stack deploy` command we'll first run
 
-```
+```shell
 docker swarm init
 ```
 
@@ -107,13 +117,13 @@ docker swarm init
 Now let's run it. You have to give your app a name -- here it is set to
 `getstartedlab` :
 
-```
+```shell
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
 See a list of the five containers you just launched:
 
-```
+```shell
 docker stack ps getstartedlab
 ```
 
@@ -132,29 +142,35 @@ the five replicas is chosen, in a round-robin fashion, to respond.
 You can scale the app by changing the `replicas` value in `docker-compose.yml`,
 saving the change, and re-running the `docker stack deploy` command:
 
-```
+```shell
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
 Docker will do an in-place update, no need to tear the stack down first or kill
 any containers.
 
-### Take down the app
+Now, re-run the `docker stack ps` command to see the deployed instances reconfigured. For example, if you scaled up the replicas, there will be more
+running containers.
+
+### Take down the app and the swarm
 
 Take the app down with `docker stack rm`:
 
-```
+```shell
 docker stack rm getstartedlab
 ```
 
-It's as easy as that to stand up and scale your app with Docker. You've taken
-a huge step towards learning how to run containers in production. Up next,
-you will learn how to run this app on a cluster of machines.
+This removes the app, but our one-node swarm is still up and running (as shown
+by `docker node ls`). Take down the swarm with `docker swarm leave --force`.
 
-> Note: Compose files like this are used to define applications with Docker, and
-can be uploaded to cloud providers using [Docker Cloud](/docker-cloud/), or on
-any hardware or cloud provider you choose with [Docker Enterprise
-Edition](https://www.docker.com/enterprise-edition).
+It's as easy as that to stand up and scale your app with Docker. You've taken a
+huge step towards learning how to run containers in production. Up next, you
+will learn how to run this app as a bonafide swarm on a cluster of Docker
+machines.
+
+> **Note**: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using [Docker
+Cloud](/docker-cloud/), or on any hardware or cloud provider you choose with
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
 
 [On to "Part 4" >>](part4.md){: class="button outline-btn" style="margin-bottom: 30px"}
 

@@ -8,32 +8,32 @@ description: Deploy your app to production using Docker CE or EE.
 ## Prerequisites
 
 - [Install Docker version 1.13 or higher](/engine/installation/).
+- Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
+- Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have pushed the container you created to a registry, as
   instructed; we'll be using it here.
-- Ensure your image is working by
-  running this and visiting `http://localhost/` (slotting in your info for
-  `username`, `repo`, and `tag`):
+- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+`repo`, and `tag`):
 
-  ```
+  ```shell
   docker run -p 80:80 username/repo:tag
   ```
-- Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5/#persisting-data) handy.
+- Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5.md#persisting-data) handy.
 
 ## Introduction
 
 You've been editing the same Compose file for this entire tutorial. Well, we
-have good news: that Compose file works just as well in production as it does
-on your machine. Here, we go through some options for running your
+have good news. That Compose file works just as well in production as it does
+on your machine. Here, we'll go through some options for running your
 Dockerized application.
 
 ## Choose an option
 
 {% capture cloud %}
 If you're okay with using Docker Community Edition in
-production, you can use Docker Cloud to help manage your app on popular
-cloud providers such as Amazon Web Services, DigitalOcean, and Microsoft Azure.
+production, you can use Docker Cloud to help manage your app on popular service providers such as Amazon Web Services, DigitalOcean, and Microsoft Azure.
 
 To set up and deploy:
 
@@ -60,9 +60,13 @@ First, link Docker Cloud with your cloud provider:
 
 After your cloud provider is all set up, create a Swarm:
 
-* If you're on AWS you
+* If you're on Amazon Web Services (AWS) you
   can [automatically create a
-  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create AWS Swarm');"}.
+  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-aws/){: onclick="ga('send', 'event', 'Get Started Referral AWS', 'Cloud', 'Create AWS Swarm');"}.
+
+* If you are on Microsoft Azure, you can [automatically create a
+swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="ga('send', 'event', 'Get Started Referral Azure', 'Cloud', 'Create Azure Swarm');"}.
+
 * Otherwise, [create your nodes](/docker-cloud/getting-started/your_first_node/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create Nodes');"}
   in the Docker Cloud UI, and run the `docker swarm init` and `docker swarm join`
   commands you learned in [part 4](part4.md) over [SSH via Docker
