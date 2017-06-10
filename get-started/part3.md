@@ -20,7 +20,7 @@ Toolbox](https://docs.docker.com/toolbox/overview.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have published the `friendlyhello` image you created by
 [pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
-- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+- Be sure your image works as a deployed container by running this command, and visiting `http://localhost/` (slotting in your info for `username`,
 `repo`, and `tag`):
 
   ```shell
@@ -46,7 +46,7 @@ the background after a user uploads something, a service for the front-end, and
 so on.
 
 Services are really just "containers in production." A service only runs one
-image, but it codifies the way that image runs&8212;what ports it should use,
+image, but it codifies the way that image runs&#8212;what ports it should use,
 how many replicas of the container should run so the service has the capacity it
 needs, and so on. Scaling a service changes the number of container instances
 running that piece of software, assigning more computing resources to the
