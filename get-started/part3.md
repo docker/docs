@@ -24,7 +24,7 @@ Toolbox](https://docs.docker.com/toolbox/overview.md).
 `repo`, and `tag`):
 
   ```shell
-  docker run -p 80:80 username/repo:tag
+  docker run -p 80:80 username/repository:tag
   ```
 
 ## Introduction
