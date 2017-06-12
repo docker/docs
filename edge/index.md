@@ -48,7 +48,7 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 
 ##### API and CLI
 
-- Add [version 1.29](/engine/reference/api/v1.29/) of the Docker API.
+- Add [version 1.29](/engine/api/v1.29/) of the Docker API.
 - Add `--mount` flag to `docker run` and `docker create`
   {% include github-pr.md pr="32251" %}
 - Add the ability to specify `--type=secret` in `docker inspect`
@@ -179,7 +179,7 @@ The following major features and changes are included in Docker CE Edge 17.04.
 
 ##### API and CLI
 
-- Add [version 1.28](/engine/reference/api/v1.28/) of the Docker API.
+- Add [version 1.28](/engine/api/v1.28/) of the Docker API.
 
 - Add `--device-cgroup-rule` flag to give containers access to devices that appear
   after the container is started. {% include github-pr.md pr="22563" %}
