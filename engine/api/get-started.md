@@ -586,6 +586,8 @@ func main() {
 		panic(err)
 	}
 
+  defer out.Close()
+
 	io.Copy(os.Stdout, out)
 }
 ```
@@ -606,6 +608,101 @@ $ curl --unix-socket /var/run/docker.sock \
 </div>
 </div> <!-- end tab-content -->
 
+
+### Pull images with authentication
+
+Pull images, like `docker pull`, with authentication:
+
+> **Note**: Credentials are sent in the clear. Docker's official registries use
+> HTTPS. Private registries should also be configured to use HTTPS.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab-pullimages-auth-python" data-group="python">Python</a></li>
+  <li><a data-toggle="tab" data-target="#tab-pullimages-auth-go" data-group="go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#tab-pullimages-auth-curl" data-group="curl">Curl</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="tab-pullimages-auth-python" class="tab-pane fade in active" markdown="1">
+
+```python
+import docker
+client = docker.from_env()
+image = client.images.pull("alpine", auth_config=['username','password'])
+print image.id
+```
+
+</div>
+
+<div id="tab-pullimages-auth-go" class="tab-pane fade" markdown="1">
+
+```go
+package main
+
+import (
+	"io"
+	"os"
+  "encoding/json"
+  "encoding/base64"
+
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
+)
+
+
+func main() {
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
+
+  authConfig := types.AuthConfig{
+      Username: "username",
+      Password: "password",
+  }
+  encodedJSON, err := json.Marshal(authConfig)
+  if err != nil {
+      return err
+  }
+  authStr := base64.URLEncoding.EncodeToString(encodedJSON)
+
+	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{RegistryAUth:
+  authStr})
+	if err != nil {
+		panic(err)
+	}
+
+  defer out.Close()
+	io.Copy(os.Stdout, out)
+}
+```
+
+</div>
+
+<div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
+
+This example will leave the credentials in your shell's history, so consider
+this a naive implementation. The credentials are passed as a Base-64-encoded
+JSON structure.
+
+```bash
+$ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "string"}' | base64)
+
+$ curl --unix-socket /var/run/docker.sock \
+  -H "Content-Type: application/tar" 
+  -X POST "http:/v1.24/images/create?fromImage=alpine"
+  -H "X-Registry-Auth"
+  -d "$JSON"
+{"status":"Pulling from library/alpine","id":"3.1"}
+{"status":"Pulling fs layer","progressDetail":{},"id":"8f13703509f7"}
+{"status":"Downloading","progressDetail":{"current":32768,"total":2244027},"progress":"[\u003e                                                  ] 32.77 kB/2.244 MB","id":"8f13703509f7"}
+...
+```
+
+</div>
+</div> <!-- end tab-content -->
 ### Commit containers
 
 Commit containers to create images from their contents:
