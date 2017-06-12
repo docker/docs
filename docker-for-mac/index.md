@@ -10,6 +10,7 @@ redirect_from:
 - /installation/mac/
 - /engine/installation/mac/
 - /docker-for-mac/index/
+- /docker-for-mac/osx/
 title: Get started with Docker for Mac
 toc_max: 4
 toc_min: 1
