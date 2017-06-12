@@ -575,11 +575,11 @@ or directly after the network is initialized. Consult the networking
 documentation for your Linux distribution for suggestions about the appropriate
 way to make `iptables` rules persistent.
 
-Through Docker startup, network creation, container creation, and other actions
-Docker dynamically manages `iptables` rules. In Docker 17.06 and higher, you can
-add rules to a new table called `DOCKER-USER` and Docker will not modify these
-rules when it starts or stops. This can be useful if you need to pre-populate
-`iptables` rules relating to containers or services that are not yet running.
+Docker dynamically manages `iptables` rules for the daemon, as well as your
+containers, services, and networks. In Docker 17.06 and higher, you can add
+rules to a new table called `DOCKER-USER`, and these rules will be loaded before
+any rules Docker creates automatically. This can be useful if you need to
+pre-populate `iptables` rules that need to be in place before Docker runs.
 
 ## Related information
 
