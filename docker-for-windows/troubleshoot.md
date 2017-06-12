@@ -55,7 +55,7 @@ volumes](/docker-for-windows/index.md#shared-drives) to a default value of
 working with applications that require permissions different than this default,
 you will likely get errors similar to the following.
 
-```
+```none
 Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0755 so that the directory cannot be listed by other users.
 ```
 
@@ -107,10 +107,10 @@ containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
-use to set up shared drives. (See [Shared Drives](index.md#shared-drives).) If
-you run `docker` commands and tasks under a different username than the one used
-to set up shared drives, your containers will not have permissions to access the
-mounted volumes. The volumes will show as empty.
+use to set up [shared drives](index.md#shared-drives). If you run `docker`
+commands and tasks under a different username than the one used to set up shared
+drives, your containers will not have permissions to access the mounted volumes.
+The volumes will show as empty.
 
 The solution to this is to switch to the domain user account and reset
 credentials on shared drives.
@@ -151,6 +151,33 @@ local user is `samstevens` and the domain user is `merlin`.
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
 
+### Volume mounts from host paths use a `nobrl` option to override database locking  
+
+You may encounter problems using volume mounts on the host, depending on the
+database software and which options are enabled. Docker for Windows uses
+[SMB/CIFS
+protocols](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx)
+to mount host paths, and mounts them with the `nobrl` option, which prevents
+lock requests from being sent to the database server
+([docker/for-win#11](https://github.com/docker/for-win/issues/11),
+[docker/for-win#694](https://github.com/docker/for-win/issues/694)). This is
+done to ensure container access to database files shared from the host. Although
+it solves the over-the-network database access problem, this "unlocked" strategy
+can interfere with other aspects of database functionality (for example,
+write-ahead logging (WAL) with SQLite, as described in
+[docker/for-win#1886](https://github.com/Sonarr/Sonarr/issues/1886)).
+
+If possible, avoid using shared drives for volume mounts on the host with network paths, and
+instead mount on the MobyVM, or create a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+See also, the [volumes key under service
+configuration](/compose/compose-file/index.md#volumes) and the [volume
+configuration
+reference](/compose/compose-file/index.md#volume-configuration-reference) in the
+Compose file documentation.
+
 ### Local security policies can block shared drives and cause login errors
 
 You need permissions to mount shared drives in order to use the Docker for
@@ -162,7 +189,7 @@ these permissions to use the feature.
 
 Here are snip-its from example error messages:
 
-```
+```none
 Logon failure: the user has not been granted the requested logon type at
 this computer.
 
@@ -191,7 +218,9 @@ commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
 
-For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/moby/moby/issues/24388">Docker RUN fails to execute shell script (https://github.com/moby/moby/issues/24388)</a>.
+For an example of this issue and the resolution, see this issue on GitHub:
+[Docker RUN fails to execute shell
+script](https://github.com/moby/moby/issues/24388).
 
 ### Recreate or update your containers after Beta 18 upgrade
 

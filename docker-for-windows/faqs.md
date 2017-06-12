@@ -196,7 +196,7 @@ Started topic.
 
 To learn more about using Docker for Windows and Docker Machine, see
 [What to know before you install](install.md#what-to-know-before-you-install) in the Getting Started topic. For more about Docker Machine itself, see
-[What is Docker Machine?](/machine/overview.md#what-is-docker-machine)
+[What is Docker Machine?](/machine/overview.md#what-is-docker-machine), and the [Hyper-V driver](/machine/drivers/hyper-v.md) for Docker Machine.
 
 ### How do I run Windows containers on Docker on Windows Server 2016?
 

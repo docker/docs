@@ -372,17 +372,27 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
-> Tips on shared drives and permissions
+> Tips on shared drives, permissions, and volume mounts
 >
-> * Shared drives are only required for volume mounting
-> [Linux containers](#switch-between-windows-and-linux-containers), and not for
-> Windows containers. For Linux containers, you need to share the drive where
-> your project is located (i.e., where the Dockerfile and volume are located).
-> Runtime errors such as file not found or cannot start service may indicate
-> shared drives are needed. (See also
-> [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
+ * Shared drives are only required for volume mounting
+ [Linux containers](#switch-between-windows-and-linux-containers), not for
+ Windows containers. For Linux containers, you need to share the drive where
+ your project is located (i.e., where the Dockerfile and volume are located).
+ Runtime errors such as file not found or cannot start service may indicate
+ shared drives are needed. (See also
+ [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
-> * You cannot control (`chmod`) permissions on shared volumes for
+* If possible, avoid volume mounts from the Windows host, and instead  mount on
+the MobyVM, or use a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+There are a number of issues with using host-mounted volumes and network paths
+for database files. Please see the troubleshooting topic on [Volume mounts from
+host paths use a nobrl option to override database
+locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+>
+ * You cannot control (`chmod`) permissions on shared volumes for
 deployed containers. Docker for Windows sets permissions to a default value of
 [0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
 `execute` permissions for `user`, `read` and `execute` for `group`). This is not
@@ -390,15 +400,14 @@ configurable. See the troubleshooting topic [Permissions errors on data
 directories for shared
 volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) for workarounds and more detail.
 >
-> * You can share local drives with your _containers_ but not with
-> Docker Machine nodes. See
-> [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
-> in the FAQs.
+ * Make sure that the domain user has permissions to shared drives,
+ as described in the troubleshooting topic ([Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)).
+>
+ * You can share local drives with your _containers_ but not with Docker Machine
+nodes. See [Can I share local drives and filesystem with my Docker Machine
+VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms) in the FAQs.
+>
 {: .note-vanilla}
-
-See also [Verify domain user has permissions for shared
-drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
-in Troubleshooting.
 
 #### Firewall rules for shared drives
 
