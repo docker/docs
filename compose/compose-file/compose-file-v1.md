@@ -13,9 +13,10 @@ toc_min: 1
 These topics describe version 1 of the Compose file format. This is the oldest
 version.
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
-versions and upgrading, see
-[Compose file versions and upgrading](compose-versioning.md).
+## Compose and Docker compatibility matrix
+
+For a Compose/Docker Engine compatibility matrix, and detailed guidelines
+on releases, versions, and upgrading, see [Compose file versions and upgrading](compose-versioning.md).
 
 ## Service configuration reference
 
