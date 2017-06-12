@@ -24,7 +24,7 @@ Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere) V
 -   `--vmwarevsphere-datastore`: Datastore for Docker VM.
 -   `--vmwarevsphere-datacenter`: Datacenter for Docker VM (must be set to `ha-datacenter` when connecting to a single host).
 -   `--vmwarevsphere-pool`: Resource pool for Docker VM.
--   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM will be instantiated (use <cluster>/* or <cluster>/<host> if using a cluster).
+-   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM will be instantiated. This can be omitted if using a cluster with DRS.
 
 The VMware vSphere driver uses the latest boot2docker image.
 
