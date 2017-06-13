@@ -111,7 +111,7 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
 
 7. Give the new role a name, such as `dockercloud-role`.
 
-    > **Note**: You must use one role per Docker Cloud account namespace, so if you will be using nodes from a single AWS account for multiple Docker Cloud accounts, you should add an identifying the namespace to the end of the name. For example, you might have `dockercloud-role-moby` and `dockercloud-role-teamawesome`.
+    > **Note**: You must use one role per Docker Cloud account namespace, so if you will be using nodes from a single AWS account for multiple Docker Cloud accounts, you should add an identifying the namespace to the end of the name. For example, you might have `dockercloud-role-docker` and `dockercloud-role-teamawesome`.
 
 8.  Click **Create Role**.
 
