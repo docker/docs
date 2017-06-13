@@ -359,8 +359,12 @@ $ docker service create --name my_web \
 
 Three tasks will run on up to three nodes. You don't need to know which nodes
 are running the tasks; connecting to port 8080 on **any** of the 10 nodes will
-connect you to one of the three `nginx` tasks. You can test this using `curl`
-(the HTML output is truncated):
+connect you to one of the three `nginx` tasks. You can test this using `curl`.
+The following example assumes that `localhost` is one of the swarm nodes. If
+this is not the case, or `localhost` does not resolve to an IP address on your
+host, substitute the host's IP address or resolvable host name.
+
+The HTML output is truncated:
 
 ```bash
 $ curl localhost:8080
