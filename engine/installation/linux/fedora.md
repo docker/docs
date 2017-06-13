@@ -136,7 +136,7 @@ the repository.
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
 
-    > **Note**: This `yum list` command only shows binary packages. To show
+    > **Note**: This `dnf list` command only shows binary packages. To show
     > source packages as well, omit the `.x86_64` from the package name.
 
     ```bash
