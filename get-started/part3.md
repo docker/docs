@@ -103,6 +103,19 @@ This `docker-compose.yml` file tells Docker to do the following:
 - Define the `webnet` network with the default settings (which is a
   load-balanced overlay network).
 
+Notice that we've set the Compose file version to version 3. This essentially
+makes it [swarm mode](/engine/swarm/index.md) compatible. We can make use of the
+[deploy key](/compose/compose-file/index.md#deploy) (only available on [Compose
+file formats v3](/compose/compose-file/index.md) and up), and run the file with
+the `docker stack deploy` command. You could use `docker-compose up` to run
+version 3 files _with non swarm configurations_, but we're focusing on a stack
+deployment since we are building up to a swarm example.
+
+You can name the Compose file anything you want to make it logically meaningful
+to you; `docker-compose.yml` is simply a standard name. We could have just as
+easily called this file `docker-stack.yml` or something more specific to our
+project.
+
 ## Run your new load-balanced app
 
 Before we can use the `docker stack deploy` command we'll first run
