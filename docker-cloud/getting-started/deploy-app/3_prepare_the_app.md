@@ -16,14 +16,14 @@ install Python or Go to follow the tutorial.
 **Python quickstart**
 
 ```bash
-$ git clone https://github.com/moby/mobycloud-quickstart-python.git
+$ git clone https://github.com/docker/dockercloud-quickstart-python.git
 $ cd dockercloud-quickstart-python
 ```
 
 **Go quickstart**
 
 ```bash
-$ git clone https://github.com/moby/mobycloud-quickstart-go.git
+$ git clone https://github.com/docker/dockercloud-quickstart-go.git
 $ cd dockercloud-quickstart-go
 ```
 
