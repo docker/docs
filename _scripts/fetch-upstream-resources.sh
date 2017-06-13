@@ -35,6 +35,7 @@ wget -O md_source/engine/api/v1.29/swagger.yaml https://raw.githubusercontent.co
 # Get a few one-off files that we use directly from upstream
 wget -O md_source/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker/"$ENGINE_BRANCH"/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit -1)
 wget -O md_source/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/"$ENGINE_BRANCH"/docs/reference/run.md || (echo "Failed engine/reference/run.md download" && exit -1)
+wget -O md_source/edge/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/v17.05.0-ce/docs/reference/run.md || (echo "Failed engine/reference/run.md download" && exit -1)
 wget -O md_source/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/"$ENGINE_BRANCH"/docs/reference/commandline/cli.md || (echo "Failed engine/reference/commandline/cli.md download" && exit -1)
 wget -O md_source/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/"$ENGINE_BRANCH"/docs/deprecated.md || (echo "Failed engine/deprecated.md download" && exit -1)
 wget -O md_source/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/"$DISTRIBUTION_BRANCH"/docs/configuration.md || (echo "Failed registry/configuration.md download" && exit -1)
