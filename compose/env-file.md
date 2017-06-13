@@ -15,7 +15,7 @@ These syntax rules apply to the `.env` file:
 * Compose expects each line in an `env` file to be in `VAR=VAL` format.
 * Lines beginning with `#` (i.e. comments) are ignored.
 * Blank lines are ignored.
-* There is no special handling of quotation marks.
+* There is no special handling of quotation marks (i.e. **they will be part of the VAL**, you have been warned ;) ).
 
 ## Compose file and CLI variables
 
