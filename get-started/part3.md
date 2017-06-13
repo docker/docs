@@ -20,7 +20,7 @@ Toolbox](https://docs.docker.com/toolbox/overview.md).
 - Learn how to create containers in [Part 2](part2.md).
 - Make sure you have published the `friendlyhello` image you created by
 [pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
-- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
+- Be sure your image works as a deployed container by running this command, and visiting `http://localhost/` (slotting in your info for `username`,
 `repo`, and `tag`):
 
   ```shell
