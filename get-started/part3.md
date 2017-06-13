@@ -92,20 +92,44 @@ networks:
 This `docker-compose.yml` file tells Docker to do the following:
 
 - Pull [the image we uploaded in step 2](part2.md) from the registry.
+
 - Run five instances of that image as a service
   called `web`, limiting each one to use, at most, 10% of the CPU (across all
   cores), and 50MB of RAM.
+
 - Immediately restart containers if one fails.
+
 - Map port 80 on the host to `web`'s port 80.
+
 - Instruct `web`'s containers to share port 80 via a load-balanced network
   called `webnet`. (Internally, the containers themselves will publish to
   `web`'s port 80 at an ephemeral port.)
+
 - Define the `webnet` network with the default settings (which is a
   load-balanced overlay network).
 
+
+> Wondering about Compose file versions, names, and commands?
+>
+Notice that set the Compose file to `version: "3"`. This essentially makes it
+[swarm mode](/engine/swarm/index.md) compatible. We can make use of the [deploy
+key](/compose/compose-file/index.md#deploy) (only available on [Compose file
+formats version 3.x](/compose/compose-file/index.md) and up) and its sub-options
+to load balance and optimize performance for each service (e.g., `web`). We can
+run the file with the `docker stack deploy` command (also only supported on
+Compose files version 3.x and up). You could use `docker-compose up` to run
+version 3 files with _non swarm_ configurations, but we are focusing on a stack
+deployment since we are building up to a swarm example.
+>
+You can name the Compose file anything you want to make it logically meaningful
+to you; `docker-compose.yml` is simply a standard name. We could just as easily
+have called this file `docker-stack.yml` or something more specific to our
+project.
+{: .note-vanilla}
+
 ## Run your new load-balanced app
 
-Before we can use the `docker stack deploy` command we'll first run
+Before we can use the `docker stack deploy` command we'll first run:
 
 ```shell
 docker swarm init
@@ -114,8 +138,8 @@ docker swarm init
 >**Note**: We'll get into the meaning of that command in [part 4](part4.md).
 > If you don't run `docker swarm init` you'll get an error that "this node is not a swarm manager."
 
-Now let's run it. You have to give your app a name -- here it is set to
-`getstartedlab` :
+Now let's run it. You have to give your app a name. Here, it is set to
+`getstartedlab`:
 
 ```shell
 docker stack deploy -c docker-compose.yml getstartedlab
