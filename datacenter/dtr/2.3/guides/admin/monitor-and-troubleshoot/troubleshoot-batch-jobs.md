@@ -44,9 +44,9 @@ DTR has several types of jobs.
 | tagmigration               | Tag migration is used to sync tag and manifest information from the blobstore into the database. This information is used to for information in the API, UI, and also for GC                                                                                 |
 | bloblinkmigration          | bloblinkmigration is a 2.1 to 2.1 upgrade process that adds references for blobs to repositories in the database                                                                                                                                             |
 | license_update             | License update checks for license expiration extensions if online license updates are enabled                                                                                                                                                                |
-| nautilus_scan_check        | An image security scanning job. This job does not perform the actual scanning, rather it spawns `nautilus_scan_check_single` jobs (one for each layer in the image). Once all of the `nautilus_scan_check_single` jobs are complete, this job will terminate |
-| nautilus_scan_check_single | A security scanning job for a particular layer given by the `parameter: SHA256SUM`. This job breaks up the layer into components and checks each component for vulnerabilities                                                                               |
-| nautilus_update_db         | A job that is created to update DTR's vulnerability database. It uses an Internet connection to check for database updates through `https://dss-cve-updates.docker.com/` and updates the `dtr-scanningstore` container if there is a new update available    |
+| scan_check        | An image security scanning job. This job does not perform the actual scanning, rather it spawns `scan_check_single` jobs (one for each layer in the image). Once all of the `scan_check_single` jobs are complete, this job will terminate |
+| scan_check_single | A security scanning job for a particular layer given by the `parameter: SHA256SUM`. This job breaks up the layer into components and checks each component for vulnerabilities                                                                               |
+| update_db         | A job that is created to update DTR's vulnerability database. It uses an Internet connection to check for database updates through `https://dss-cve-updates.docker.com/` and updates the `dtr-scanningstore` container if there is a new update available    |
 | webhook                    | A job that is used to dispatch a webhook payload to a single endpoint                                                                                                                                                                                        |
 
 ## Job status
@@ -170,7 +170,7 @@ looks like this:
 	"status": "done",
 	"scheduledAt": "2017-02-17T01:09:47.771Z",
 	"lastUpdated": "2017-02-17T01:10:14.117Z",
-	"action": "nautilus_scan_check_single",
+	"action": "scan_check_single",
 	"retriesLeft": 0,
 	"retriesTotal": 0,
 	"capacityMap": {
@@ -215,7 +215,7 @@ see those jobs using the `GET /api/v0/crons` endpoint:
     },
     {
       "id": "b1c1e61e-1e74-4677-8e4a-2a7dacefffdc",
-      "action": "nautilus_update_db",
+      "action": "update_db",
       "schedule": "0 0 3 * * *",
       "retries": 0,
       "capacityMap": null,
