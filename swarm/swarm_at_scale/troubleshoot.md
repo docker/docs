@@ -26,7 +26,7 @@ following sections cover different failure scenarios:
 
 In it's current configuration, the Swarm cluster only has single manager
 container running on a single node. If the container exits or the node fails,
-you will not be able to administer the cluster until you either; fix it, or
+you will not be able to administer the cluster until you either fix it, or
 replace it.
 
 If the failure is the Swarm manager container unexpectedly exiting, Docker will
@@ -90,9 +90,9 @@ server containers running". In this scenario, if the number of web containers
 drops below 10, the tool will attempt to start more.
 
 In our simple voting-app example, the front-end is scalable and serviced by a
-load balancer. In the event that on the of the two web containers fails (or the
-node that is hosting it), the load balancer will stop routing requests to it and
-send all requests the surviving web container. This solution is highly scalable
+load balancer. In the event that one of the two web containers fails (or the
+node that is hosting it fails), the load balancer will stop routing requests to it and
+send all requests to the surviving web container. This solution is highly scalable
 meaning you can have up to *n* web containers behind the load balancer.
 
 ## Interlock load balancer failures
@@ -134,7 +134,7 @@ infrastructure. You should also consider deploying more.
 
 ## Redis failures
 
-If the a `redis` container fails, it's partnered `voting-app` container will
+If the `redis` container fails, its partnered `voting-app` container will
 not function correctly. The best solution in this instance might be to configure
 health monitoring that verifies the ability to write to each Redis instance. If
 an unhealthy `redis` instance is encountered, remove the `voting-app` and
