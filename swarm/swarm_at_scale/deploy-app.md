@@ -252,7 +252,7 @@ Now, you can test your application.
 ## Extra Credit: Deployment with Docker Compose
 
 Up to this point, you've deployed each application container individually. This
-can be cumbersome especially because they are several different containers and
+can be cumbersome especially because there are several different containers and
 starting them is order dependent. For example, that database should be running
 before the worker.
 
