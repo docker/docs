@@ -2319,6 +2319,8 @@ manuals:
       title: url
   - sectiontitle: Machine drivers
     section:
+    - path: /machine/drivers/
+      title: Drivers overview
     - path: /machine/drivers/os-base/
       title: Driver options and operating system defaults
     - path: /machine/drivers/aws/
