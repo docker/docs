@@ -15,8 +15,11 @@ version.
 
 ## Compose and Docker compatibility matrix
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines
-on releases, versions, and upgrading, see [Compose file versions and upgrading](compose-versioning.md).
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+table below is a quick look. For full details on what each version includes and
+how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+
+{% include content/compose-matrix.md %}
 
 ## Service configuration reference
 

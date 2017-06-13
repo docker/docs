@@ -20,7 +20,24 @@ compatibility, and [how to upgrade](#upgrading).
 
 ## Compatibility matrix
 
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
+
 {% include content/compose-matrix.md %}
+
+> Looking for more detail on Docker and Compose compatibility?
+>
+> We recommend keeping up-to-date with newer releases as much as possible.
+However, if you are using an older version of Docker and want to determine which
+Compose release is compatible, please refer to the [Compose release
+notes](https://github.com/docker/compose/releases/). Each set of release notes
+gives finer-tuned detail on which versions of Docker Engine are supported, along
+with compatible Compose file format versions. (See also, the discussion in
+[issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
+{: .note-vanilla}
+
+For details on versions and how to upgrade, see
+[Versioning](compose-versioning.md#versioning) and
+[Upgrading](compose-versioning.md#upgrading).
 
 ## Versioning
 
