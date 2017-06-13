@@ -65,7 +65,7 @@ machine a swarm manager. From then on, Docker will run the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
 {% capture local-instructions %}
-You now have two VMs created, named `myvm1` and `myvm2` (as `docker machine ls`
+You now have two VMs created, named `myvm1` and `myvm2` (as `docker-machine ls`
 shows). The first one will act as the manager, which executes `docker` commands
 and authenticates workers to join the swarm, and the second will be a worker.
 
