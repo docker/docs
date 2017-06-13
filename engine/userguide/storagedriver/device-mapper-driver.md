@@ -200,7 +200,7 @@ assumes that the Docker daemon is in the `stopped` state.
     ```
 
 7.  Convert the volumes to a thin pool and a storage location for metadata for
-    the thin pool, using the `lgconvert` command.
+    the thin pool, using the `lvconvert` command.
 
     ```none
     $ sudo lvconvert -y \
