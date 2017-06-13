@@ -259,6 +259,8 @@ several options have been removed:
 -   `extends`: This option has been removed for `version: "3.x"` Compose files.
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
+-   `link_local_ips` in `networks`: This option has not been introduced in
+    `version: "3.x"` Compose files.
 
 ### Version 1 to 2.x
 
