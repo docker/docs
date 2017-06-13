@@ -73,6 +73,7 @@ middleware:
             - /certs/dtr-ca.pem
 ```
 
-Adding the CA for the upstream DTR is a good idea. 
-Similarly, the China cache will need to be registered with DTR. Please see [deploy a simple cache](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/#deploy-a-simple-cache) for how to use the API. 
+Please note that DTR's CA is needed for the downstream cache. 
+
+Similarly, the China cache will need to be registered with DTR. Please see [deploy a simple cache](/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/#deploy-a-simple-cache) for how to use the API. 
 Ultimately the downstream cache needs to be configured for the user in question. 
