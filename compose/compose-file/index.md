@@ -415,19 +415,19 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
 The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
 
 - [build](#build)
-- [cgroup_parent](#cgroup-parent)
-- [container_name](#containername)
+- [cgroup_parent](#cgroup_parent)
+- [container_name](#container_name)
 - [devices](#devices)
 - [dns](#devices)
-- [dns_search](#dnssearch)
+- [dns_search](#dns_search)
 - [tmpfs](#tmpfs)
-- [external_links](#externallinks)
+- [external_links](#external_links)
 - [links](#links)
-- [network_mode](#networkmode)
-- [security_opt](#securityopt)
-- [stop_signal](#stopsignal)
+- [network_mode](#network_mode)
+- [security_opt](#security_opt)
+- [stop_signal](#stop_signal)
 - [sysctls](#sysctls)
-- [userns_mode](#usernsmode)
+- [userns_mode](#userns_mode)
 
 >**Tip:** See also, the section on [how to configure volumes
 for services, swarms, and docker-stack.yml
