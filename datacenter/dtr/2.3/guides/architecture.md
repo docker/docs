@@ -31,7 +31,7 @@ When you install DTR on a node, the following containers are started:
 | dtr-api-&lt;replica_id&gt;           | Executes the DTR business logic. It serves the DTR web application, and API                                                        |
 | dtr-garant-&lt;replica_id&gt;        | Manages DTR authentication                                                                                                         |
 | dtr-jobrunner-&lt;replica_id&gt;     | Runs cleanup jobs in the background                                                                                                |
-| dtr-nautilusstore-&lt;replica_id&gt; | Stores security scanning data                                                                                                      |
+| dtr-scanningstore-&lt;replica_id&gt; | Stores security scanning data                                                                                                      |
 | dtr-nginx-&lt;replica_id&gt;         | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host   |
 | dtr-notary-server-&lt;replica_id&gt; | Receives, validates, and serves content trust metadata, and is consulted when pushing or pulling to DTR with content trust enabled |
 | dtr-notary-signer-&lt;replica_id&gt; | Performs server-side timestamp and snapshot signing for content trust metadata                                                     |
@@ -58,7 +58,7 @@ DTR uses these named volumes for persisting data:
 |:--------------------------------------|:---------------------------------------------------------------------------------|
 | dtr-ca-&lt;replica_id&gt;             | Root key material for the DTR root CA that issues certificates                   |
 | dtr-notary-&lt;replica_id&gt;         | Certificate and keys for the Notary components                                   |
-| dtr-nautilus-store-&lt;replica_id&gt; | Vulnerability scans data                                                         |
+| dtr-postgres-&lt;replica_id&gt;       | Vulnerability scans data                                                         |
 | dtr-registry-&lt;replica_id&gt;       | Docker images data, if DTR is configured to store images on the local filesystem |
 | dtr-rethink-&lt;replica_id&gt;        | Repository metadata                                                              |
 | dtr-nfs-registry-&lt;replica_id&gt;   | Docker images data, if DTR is configured to store images on NFS                  |
