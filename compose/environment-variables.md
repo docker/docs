@@ -67,7 +67,7 @@ You can set default values for any environment variables referenced in the Compo
     TAG=v1.5
 
     $ cat docker-compose.yml
-    version: '2.0'
+    version: '3'
     services:
       web:
         image: "webapp:${TAG}"
@@ -75,7 +75,7 @@ You can set default values for any environment variables referenced in the Compo
 When you run `docker-compose up`, the `web` service defined above uses the image `webapp:v1.5`. You can verify this with the [config command](reference/config.md), which prints your resolved application config to the terminal:
 
     $ docker-compose config
-    version: '2.0'
+    version: '3'
     services:
       web:
         image: 'webapp:v1.5'
@@ -84,23 +84,35 @@ Values in the shell take precedence over those specified in the `.env` file. If 
 
     $ export TAG=v2.0
     $ docker-compose config
-    version: '2.0'
+    version: '3'
     services:
       web:
         image: 'webapp:v2.0'
    
-When values are provided with both with shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken from environment file first and then from environment key:
+When values are provided with both with shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken **from environment key first and then from environment file, then from a `Dockerfile` `ENV`–entry**:
 
+    $ cat ./Docker/api/api.env
+    NODE_ENV=test
+    
     $ cat docker-compose.yml
-    version: '2.0'
+    version: '3'
     services:
-      web:
-        image: 'webapp:v1.5'
+      api:
+        image: 'node:6-alpine'
         env_file:
-         - ./test
+         - ./Docker/api/api.env
         environment:
-         - var=1
+         - NODE_ENV=production
 
+You can test this with for e.g. a _NodeJS_ container in the CLI:
+
+    $ docker-compose exec api node
+    > process.env.NODE_ENV
+    'production'
+
+Having any `ARG` or `ENV` setting in a `Dockerfile` will evaluate only if there is _no_ Docker _Compose_ entry for `environment` or `env_file`.
+
+_Spcecifics for NodeJS containers:_ If you have a `package.json` entry for `script:start` like `NODE_ENV=test node server.js`, then this will overrule _any_ setting in your `docker-compose.yml` file.
 
 ## Configuring Compose using environment variables
 
