@@ -4,10 +4,12 @@ keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
 redirect_from:
 - /compose/reference/docker-compose/
 title: Overview of docker-compose CLI
-notoc: true
 ---
 
 This page provides the usage information for the `docker-compose` Command.
+
+## Command options overview and help
+
 You can also see this information by running `docker-compose --help` from the
 command line.
 
@@ -66,12 +68,17 @@ Commands:
 
 ```
 
-The Docker Compose binary. You use this command to build and manage multiple
-services in Docker containers.
+You can use Docker Compose binary, `docker-compose [-f <arg>...] [options]
+[COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers.
 
-Use the `-f` flag to specify the location of a Compose configuration file. You
-can supply multiple `-f` configuration files. When you supply multiple files,
-Compose combines them into a single configuration. Compose builds the
+## Use `-f` to specify name and path of one or more Compose files
+
+Use the `-f` flag to specify the location of a Compose configuration file.
+
+### Specifying multiple Compose files
+
+You can supply multiple `-f` configuration files. When you supply multiple
+files, Compose combines them into a single configuration. Compose builds the
 configuration in the order you supply the files. Subsequent files override and
 add to their predecessors.
 
@@ -104,24 +111,75 @@ webapp:
 ```
 
 Use a `-f` with `-` (dash) as the filename to read the configuration from
-stdin. When stdin is used all paths in the configuration are
+`stdin`. When `stdin` is used all paths in the configuration are
 relative to the current working directory.
 
 The `-f` flag is optional. If you don't provide this flag on the command line,
 Compose traverses the working directory and its parent directories looking for a
-`docker-compose.yml` and a `docker-compose.override.yml` file. You must
-supply at least the `docker-compose.yml` file. If both files are present on the
-same directory level, Compose combines the two files into a single configuration.
+`docker-compose.yml` and a `docker-compose.override.yml` file. You must supply
+at least the `docker-compose.yml` file. If both files are present on the same
+directory level, Compose combines the two files into a single configuration.
+
 The configuration in the `docker-compose.override.yml` file is applied over and
 in addition to the values in the `docker-compose.yml` file.
 
-See also the `COMPOSE_FILE` [environment variable](envvars.md#compose-file).
+### Specifying a path to a single Compose file
+
+You can use `-f` flag to specify a path to Compose file that is not located in
+the current directory, either from the command line or by setting up a
+[COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or in
+an environment file.
+
+For an example of using the `-f` option at the command line, suppose you are
+running the [Compose Rails sample](https://docs.docker.com/compose/rails/), and
+have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
+use a command like [docker-compose pull](/compose/reference/pull.md) to get the
+postgress image for the `db` service from anywhere by using the `-f` flag as
+follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
+
+Here's the full example:
+
+```
+$ docker-compose -f ~/sandbox/rails/docker-compose.yml pull db
+Pulling db (postgres:latest)...
+latest: Pulling from library/postgres
+ef0380f84d05: Pull complete
+50cf91dc1db8: Pull complete
+d3add4cd115c: Pull complete
+467830d8a616: Pull complete
+089b9db7dc57: Pull complete
+6fba0a36935c: Pull complete
+81ef0e73c953: Pull complete
+338a6c4894dc: Pull complete
+15853f32f67c: Pull complete
+044c83d92898: Pull complete
+17301519f133: Pull complete
+dcca70822752: Pull complete
+cecf11b8ccf3: Pull complete
+Digest: sha256:1364924c753d5ff7e2260cd34dc4ba05ebd40ee8193391220be0f9901d4e1651
+Status: Downloaded newer image for postgres:latest
+```
+
+## Use `-p` to specify a project name
 
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the `COMPOSE_PROJECT_NAME` [environment variable](
-envvars.md#compose-project-name).
+directory name. See also the [COMPOSE_PROJECT_NAME environment variable](
+envvars.md#compose_project_name).
+
+## Set up environment variables
+
+You can set [environment variables](envvars.md) for various
+`docker-compose` options, including the `-f` and `-p` flags.
+
+For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
+relates to the `-f` flag, and [COMPOSE_PROJECT_NAME environment
+variable](envvars.md#compose_project_name) relates to the `-p` flag.
+
+Also, you can set some of these variables in an [environment
+file](/compose/env-file.md).
 
 ## Where to go next
 
 * [CLI environment variables](envvars.md)
+* [Declare default environment variables in file](/compose/env-file.md)
