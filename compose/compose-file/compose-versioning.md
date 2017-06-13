@@ -30,7 +30,7 @@ There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
 However, if you are using an older version of Docker and want to determine which
 Compose release is compatible, please refer to the [Compose release
 notes](https://github.com/docker/compose/releases/). Each set of release notes
-gives finer-tuned detail on which versions of Docker Engine are supported, along
+gives details on which versions of Docker Engine are supported, along
 with compatible Compose file format versions. (See also, the discussion in
 [issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
 {: .note-vanilla}
