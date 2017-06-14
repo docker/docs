@@ -99,6 +99,48 @@ To switch back to the deployed swarm, re-run the `export DOCKER_HOST` command wi
 
 To learn more, see [Unset environment variables in the current shell](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
+## Use Docker for Mac and Windows (Edge) to connect to swarms
+
+On Docker for Mac and Docker for Windows current Edge releases,
+you can access your Docker Cloud account and connect directly to your swarms through their menus.
+
+* See [Docker Cloud (Edge feature) in Docker for Mac topics](/docker-for-mac/#docker-cloud-edge-feature)
+
+* See [Docker Cloud (Edge feature) in Docker for Windows topics](/docker-for-windows/#docker-cloud-edge-feature)
+
+> **Tip**: This is different from using Docker for Mac or Windows with
+Docker Machine as described in previous examples. Here, we are
+by-passing Docker Machine, and using the desktop Moby VM directly, so
+there is no need to manually set shell environment variables.
+
+This works the same way on both Docker for Mac and Docker for Windows.
+
+Here is an example, showing the Docker for Mac UI.
+
+1.  Make sure you are logged in to your Docker Cloud account on the desktop app.
+
+    ![Docker for Mac Cloud login](images/d4mac-cloud-login.png)
+
+2.  Choose the swarm you want from the menu.
+
+    ![Docker for Mac Cloud login](images/d4mac-swarm-connect.png)
+
+3.  A new terminal window opens and connects to the swarm you chose. The swarm name is shown at the prompt. For this example, we connected to `vote-swarm`.
+
+    ```shell
+    [vote-swarm] ~
+    ```  
+
+4.  Now, you can run `docker node ls` to verify that the swarm is running.
+
+    ```shell
+    [vote-swarm] ~ $ docker node ls
+    ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
+    7ex8inrg8xzgonaunwp35zxfl     ip-172-31-6-204.us-west-1.compute.internal    Ready               Active              
+    ec3kxibdxqhgw5aele7x853er *   ip-172-31-0-178.us-west-1.compute.internal    Ready               Active              Leader
+    z4ngrierv27wdm6oy0z3t9r1z     ip-172-31-31-240.us-west-1.compute.internal   Ready               Active              
+    ```  
+
 ## Reconnect a swarm
 
 If you accidentally unregister a swarm from Docker Cloud, or decide that you
