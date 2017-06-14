@@ -14,24 +14,25 @@ only one container.
 
 ## Usage
 
-Docker uses the JSON File logging driver by default. To explicitly set it,
-use the `--log-driver` and `--log-opt` flags when starting Docker:
+To use the `syslog` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
++configuring Docker using `daemon.json`, see
++[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-```bash
-dockerd
-  -–log-driver json-file –-log-opt max-size=10m
-```
-
-To make the change persistent, configure it in `/etc/docker/daemon.json`:
+The following example sets the log driver to `json-file` and sets the `max-size`
+option.
 
 ```json
 {
   "log-driver": "json-file",
-  "log-opts":  {
+  "log-opts": {
     "max-size": "10m"
   }
 }
-```
+
+Restart Docker for the changes to take effect.
 
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker create` or `docker run`:
@@ -46,12 +47,13 @@ $ docker run \
 
 The `json-file` logging driver supports the following logging options:
 
-| Option     | Description              | Example  value                            |
-|------------|--------------------------|-------------------------------------------|
-| `max-size` | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). | `--log-opt max-size=10m` |
-| `max-file` | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. | `--log-opt max-file=3` |
-| `labels`   | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
-| `env`      | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| Option      | Description                                                                                                                                                                                    | Example  value                           |
+|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`).                                                       | `--log-opt max-size=10m`                 |
+| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. | `--log-opt max-file=3`                   |
+| `labels`    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).                           | `--log-opt labels=production_status,geo` |
+| `env`       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md).            | `--log-opt env=os,customer`              |
+| `env-regex` | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                   | `--log-opt env-regex=^(os|customer).`    |
 
 > **Note**: If `max-size` and `max-file` are set, `docker logs` only returns the
 > log lines from the newest log file.
