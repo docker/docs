@@ -102,7 +102,7 @@ To learn more, see [Unset environment variables in the current shell](/machine/g
 ## Use Docker for Mac and Windows (Edge) to connect to swarms
 
 On Docker for Mac and Docker for Windows current Edge releases,
-you can access your Docker Cloud account and connect directly to your swarms through their menus.
+you can access your Docker Cloud account and connect directly to your swarms through those Docker desktop application menus.
 
 * See [Docker Cloud (Edge feature) in Docker for Mac topics](/docker-for-mac/#docker-cloud-edge-feature)
 
