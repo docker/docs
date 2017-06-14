@@ -19,15 +19,21 @@ For example, you use `swarm` with the `manage` subcommand to create a Swarm mana
 The `swarm` command has the following options:
 
 * `--debug` — Enable debug mode. Display messages that you can use to debug a Swarm node. For example:
-        time="2016-02-17T17:57:40Z" level=fatal msg="discovery required to join a cluster. See 'swarm join --help'."
+ 
+  ```       
+  time="2016-02-17T17:57:40Z" level=fatal msg="discovery required to join a cluster. See 'swarm join --help'."
+  ```      
+       
   The environment variable for this option is `[$DEBUG]`.
 * `--log-level "<value>"` or `-l "<value>"` — Set the log level. Where `<value>` is: `debug`, `info`, `warn`, `error`, `fatal`, or `panic`. The default value is `info`.
 * `--experimental` — Enable experimental features.
 * `--help` or `-h` — Display help.
 *  `--version` or `-v` — Display the version. For example:
-        $ docker run swarm --version
-        swarm version 1.1.0 (a0fd82b)
 
+   ```        
+   $ docker run swarm --version
+   swarm version 1.1.0 (a0fd82b)
+   ```
 ## Commands
 
 The `swarm` command has the following subcommands:
