@@ -19,7 +19,7 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 4.  In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
 
-    You will be asked to provide you Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
+    You will be asked to provide your Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
     ```
     $ docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST dockercloud/client orangesnap/vote-swarm
