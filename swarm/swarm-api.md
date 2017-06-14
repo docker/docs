@@ -2,7 +2,7 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Swarm API
-keywords: docker, swarm, clustering,  api
+keywords: docker, swarm, clustering, api
 redirect_from:
 - /api/swarm-api/
 - /swarm/api/
@@ -144,7 +144,7 @@ Be aware that tokens are short-lived and will expire quickly.
 
 ### Authenticate using username and password
 
-> **Note**: this authentication method stores your credentials unencrypted
+> **Note**: This authentication method stores your credentials unencrypted
 > on the filesystem. Refer to [Authenticate using registry tokens](swarm-api.md#authenticate-using-registry-tokens)
 > for a more secure approach.
 
