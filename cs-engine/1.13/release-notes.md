@@ -18,6 +18,21 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs5
+(14 Jun 2017)
+
+* Fixed a bug in the built-in swarm-mode orchestration, which can lead to
+high memory usage from the Docker daemon, causing the node to run out of
+memory [#2215](https://github.com/docker/swarmkit/pull/2215)
+* Fixed a problem that caused an 'address already in use' error when deploying
+a container
+* Fixed a concurrency problem in the Docker daemon, causing the daemon to
+crash [#33456](https://github.com/moby/moby/pull/33456)
+* Fixed a race condition problem causing the internal DNS resolution to return
+incorrect IPs for tasks
+* Fixed a problem causing containers to not be able to communicate on overlay
+networks [#1789](https://github.com/docker/libnetwork/pull/1789)
+
 ## CS Engine 1.13.1-cs4
 (01 Jun 2017)
 
