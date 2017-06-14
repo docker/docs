@@ -529,11 +529,11 @@ network and user-defined bridge networks.
   host machine. It will fail if port 8080 is not available.
 
   ```bash
-  $ docker run -it -p 80:8080 nginx
+  $ docker run -it -p 8080:80 nginx
 
   $ docker ps
 
-  b9788c7adca3        nginx               "nginx -g 'daemon ..."   43 hours ago        Up 3 seconds        80/tcp, 443/tcp, 0.0.0.0:80->8080/tcp   goofy_brahmagupta
+  b9788c7adca3        nginx               "nginx -g 'daemon ..."   43 hours ago        Up 3 seconds        80/tcp, 443/tcp, 0.0.0.0:8080->80/tcp   goofy_brahmagupta
   ```
 
 ## Links
