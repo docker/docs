@@ -6,10 +6,18 @@ title: Connect to a swarm through Docker Cloud
 ---
 
 Docker Cloud allows you to connect your local Docker Engine to any swarm you
-have access to in Docker Cloud. To do this, you run a proxy container in your
-local Docker instance, which connects to a manager node on the target swarm.
+have access to in Docker Cloud. There are a couple of different ways to do this,
+depending on how you are running Docker on your local system:
 
-## Connect to a swarm
+- [Connect to a swarm with a Docker Cloud generated run command](#connect-to-a-swarm-with-a-docker-cloud-generated-run-command)
+- [Use Docker for Mac or Docker for Windows (Edge) to connect to swarms](#use-docker-for-mac-or-windows-edge-to-connect-to-swarms)
+
+## Connect to a swarm with a Docker Cloud generated run command
+
+On platforms other than Docker for Mac or Docker for Windows (Edge channel), you
+can connect to a swarm manually at the command line by running a proxy container
+in your local Docker instance, which connects to a manager node on the target
+swarm.
 
 1.  Log in to Docker Cloud in your web browser.
 2.  Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
@@ -67,11 +75,14 @@ local Docker instance, which connects to a manager node on the target swarm.
 7.  Now that your swarm is set up, try out the example to [deploy a service to the swarm](/engine/swarm/swarm-tutorial/deploy-service/),
 and other subsequent tasks in the Swarm getting started tutorial.
 
-## Switch between your swarm and Docker hosts in the same shell
+### Switch between your swarm and Docker hosts in the same shell
 
 To switch to Docker hosts:
 
-* If you are running Docker for Mac or Docker for Windows, and want to connect to the Docker Engine for those apps, run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. For example:
+* If you are running Docker for Mac or Docker for Windows, and want to
+connect to the Docker Engine for those apps, run `docker-machine env -u`
+as a preview, then run the unset command: `eval $(docker-machine env -u)`.
+For example:
 
   ```
   $ docker-machine env -u
@@ -99,7 +110,7 @@ To switch back to the deployed swarm, re-run the `export DOCKER_HOST` command wi
 
 To learn more, see [Unset environment variables in the current shell](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
-## Use Docker for Mac and Windows (Edge) to connect to swarms
+## Use Docker for Mac or Windows (Edge) to connect to swarms
 
 On Docker for Mac and Docker for Windows current Edge releases,
 you can access your Docker Cloud account and connect directly to your swarms through those Docker desktop application menus.
