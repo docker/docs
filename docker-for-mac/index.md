@@ -364,8 +364,8 @@ To report bugs or problems, log on to [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues), where you can review
 community reported issues, and file new ones. See [Diagnose problems, send
 feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
-As a part of reporting issues on GitHub, we can help you troubleshoot the log
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As a part of reporting issues on GitHub, we can help you troubleshoot
+the log
 data.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
@@ -384,9 +384,13 @@ distributed as Docker Images.
 
 ## Docker Cloud (Edge feature)
 
->**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-mac). On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
+>**Note:** Integrated Docker Cloud access is currently available only on
+the [Edge channel](install.md#download-docker-for-mac). On stable, you'll
+need to log onto [Docker Cloud](https://cloud.docker.com/) independently
+for now.
 
-You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Mac.
+You can access your [Docker Cloud](/docker-cloud/index.md) account from within
+Docker for Mac.
 
 ![Docker Cloud](images/docker-cloud.png)
 
