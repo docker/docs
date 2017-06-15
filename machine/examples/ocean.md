@@ -4,6 +4,22 @@ keywords: docker, machine, cloud, digital ocean
 title: Digital Ocean example
 ---
 
+> Try out Docker Cloud!
+>
+> We suggest using [Docker Cloud](https://cloud.docker.com/) as the
+most up-to-date way to run Docker on your cloud providers. To get started, see
+[Docker Cloud docs home page](/docker-cloud/index.md), [Docker Cloud Settings
+and Docker ID](/docker-cloud/dockerid.md), and [Link a DigitalOcean account to
+Docker Cloud](/docker-cloud/infrastructure/link-do.md). If you are running Edge
+channel Docker for Mac or Windows, you can access your Docker Cloud account from
+those Docker desktop applications. See Docker Cloud (Edge feature) on
+[Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
+[Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
+>
+> Docker Machine will still work as described below, but Docker Cloud
+supercedes Machine for this purpose.
+{: .important}
+
 Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
 
 ### Step 1. Create a Digital Ocean account

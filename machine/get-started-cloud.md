@@ -4,7 +4,7 @@ keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, ra
 title: Use Docker Machine to provision hosts on cloud providers
 ---
 
-> Try out Docker Cloud
+> Try out Docker Cloud!
 >
 > We suggest using [Docker Cloud](https://cloud.docker.com/) as the
 most up-to-date way to run Docker on your cloud providers. To get started, see
@@ -15,6 +15,9 @@ Docker for Mac or Windows, you can access your Docker Cloud account from those
 Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
+>
+> Docker Machine will still work as described here, but Docker Cloud supercedes Machine for this purpose.
+{: .important}
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
 
