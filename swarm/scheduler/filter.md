@@ -70,9 +70,9 @@ these default tags or custom labels. The Swarm scheduler looks for matching node
 on the cluster and starts the container there. This approach has several
 practical applications:
 
-* Schedule based on specific host properties, for example,`storage=ssd` schedules
+* Schedule based on specific host properties, for example, `storage=ssd` schedules
   containers on specific hardware.
-* Force containers to run in a given location, for example region=us-east`.
+* Force containers to run in a given location, for example `region=us-east`.
 * Create logical cluster partitions by splitting a cluster into
   sub-clusters with different properties, for example `environment=production`.
 
@@ -96,11 +96,11 @@ $ swarm join --advertise=192.168.0.43:2375 token://XXXXXXXXXXXXXXXXXX
 ```
 
 Once the nodes are joined to a cluster, the Swarm manager pulls their respective
-tags.  Moving forward, the manager takes the tags into account when scheduling
+tags. Moving forward, the manager takes the tags into account when scheduling
 new containers.
 
 Continuing the previous example, assuming your cluster with `node-1` and
-`node-2`, you can run a MySQL server container on the cluster.  When you run the
+`node-2`, you can run a MySQL server container on the cluster. When you run the
 container, you can use a `constraint` to ensure the database gets good I/O
 performance. You do this by filtering for nodes with flash drives:
 
@@ -114,7 +114,7 @@ f8b693db9cd6        mysql:latest        "mysqld"            Less than a second a
 ```
 
 In this example, the manager selected all nodes that met the `storage=ssd`
-constraint and applied resource management on top of them.   Only `node-1` was
+constraint and applied resource management on top of them. Only `node-1` was
 selected because it's the only host running flash.
 
 Suppose you want to run an Nginx frontend in a cluster. In this case, you wouldn't want flash drives because the frontend mostly writes logs to disk.
@@ -194,7 +194,7 @@ Use an `affinity` filter to create "attractions" between containers. For
 example, you can run a container and instruct Swarm to schedule it next to
 another container based on these affinities:
 
-* container name or id
+* container name or ID
 * an image on the host
 * a custom label applied to the container
 
@@ -230,7 +230,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 963841b138d8        logger:latest       "logger"            Less than a second ago   running                                             node-1/logger
 ```
 
-Because of `name` affinity, the  `logger` container ends up on `node-1` along
+Because of `name` affinity, the `logger` container ends up on `node-1` along
 with the `frontend` container. Instead of the `frontend` name you could have
 supplied its ID as follows:
 
@@ -332,7 +332,7 @@ cannot be done (because the dependent container doesn't exist, or because the
 node doesn't have enough resources), it will prevent the container creation.
 
 The combination of multiple dependencies are honored if possible. For
-instance, if you specify `--volumes-from=A --net=container:B`,  the scheduler
+instance, if you specify `--volumes-from=A --net=container:B`, the scheduler
 attempts to co-locate the container on the same node as `A` and `B`. If those
 containers are running on different nodes, Swarm does not schedule the container.
 
@@ -407,7 +407,7 @@ after deleting `prickly_englbart`.
 
 A container running with `--net=host` differs from the default
 `bridge` mode as the `host` mode does not perform any port binding. Instead,
-host mode requires that you  explicitly expose one or more port numbers.  You
+host mode requires that you explicitly expose one or more port numbers. You
 expose a port using `EXPOSE` in the `Dockerfile` or `--expose` on the command
 line. Swarm makes use of this information in conjunction with the `host` mode to
 choose an available node for a new container.
@@ -441,7 +441,7 @@ $  docker tcp://<manager_ip:manager_port> run -d --expose=80 --net=host nginx
 FATA[0000] Error response from daemon: unable to find a node with port 80/tcp available in the Host mode
 ```
 
-However, port binding to the different value, for example  `81`, is still allowed.
+However, port binding to the different value, for example `81`, is still allowed.
 
 ```bash
 $  docker tcp://<manager_ip:manager_port> run -d -p 81:80 nginx:latest
@@ -505,10 +505,10 @@ The following examples illustrate some possible expressions:
 * `constraint:node!=/node-[01]/` matches all nodes, except `node-0` and `node-1`.
 * `constraint:node!=/foo\[bar\]/` matches all nodes, except `foo[bar]`. You can see the use of escape characters here.
 * `constraint:node==/(?i)node1/` matches node `node1` case-insensitive. So `NoDe1` or `NODE1` also match.
-* `affinity:image==~redis` tries to match for nodes running container with a `redis` image
-* `constraint:region==~us*` searches for nodes in the cluster belonging to the `us` region
-* `affinity:container!=~redis*` schedule a new `redis5` container to a node
-without a container that satisfies `redis*`
+* `affinity:image==~redis` tries to match for nodes running container with a `redis` image.
+* `constraint:region==~us*` searches for nodes in the cluster belonging to the `us` region.
+* `affinity:container!=~redis*` schedules a new `redis5` container to a node
+without a container that satisfies `redis*`.
 
 ## Related information
 
