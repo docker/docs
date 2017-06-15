@@ -672,19 +672,24 @@ distributed as Docker Images.
 
 ### Docker Cloud (Edge feature)
 
-You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Windows.
+>**Note:** Integrated Docker Cloud access is currently available only on
+the [Edge channel](install.md#download-docker-for-windows).  On stable,
+you'll need to log onto [Docker Cloud](https://cloud.docker.com/)
+independently for now.
+
+You can access your [Docker Cloud](/docker-cloud/index.md) account from
+within Docker for Windows.
 
 ![Docker Cloud](images/docker-cloud.png)
-
->**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-windows).  On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
 
 From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
 or create one.
 
 ![Docker Cloud sign-in](images/docker-cloud-menu.png)
 
-Then use the Docker for Windows menu to create, view, or navigate directly to your
-Cloud resources, including **organizations**, **repositories**, and **swarms**.
+Then use the Docker for Windows menu to create, view, or navigate directly to
+your Cloud resources, including **organizations**, **repositories**, and
+**swarms**.
 
 Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
