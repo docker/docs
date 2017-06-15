@@ -137,6 +137,52 @@ below to configure Docker to use the `devicemapper` storage driver in
   and push existing images to Docker Hub or a private repository, so that you
   not need to re-create them later.
 
+#### Allow Docker to configure loop-lvm mode
+
+In Docker 17.06 and higher, Docker can manage the block device for you,
+simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh
+Docker set-ups only.** You can only use a single block device. If you need to
+use multiple block devices, [configure loop-lvm mode
+manually](#configure-loop-lvm-mode-manually) instead. The following new
+configuration options have been added:
+
+| Option                          | Description                                                                                                                                                                        | Required? | Default | Example                            |
+| ---                             | ---                                                                                                                                                                                | ---       | ---     | ---                                |
+| `dm.directlvm_device`           | The path to the block device to configure for `direct-lvm`.                                                                                                                        | Yes       |         | `dm.directlvm_device="/dev/xvdf"`  |
+| `dm.thinp_percent`              | The percentage of space to use for storage from the passed in block device.                                                                                                        | No        | 95      | `dm.thinp_percent=95`              |
+| `dm.thinp_metapercent`          | The percentage of space to for metadata storage from the passed=in block device.                                                                                                   | No        | 1       | `dm.thinp_metapercent=1`           |
+| `dm.thinp_autoextend_threshold` | The threshold for when lvm should automatically extend the thin pool as a percentage of the total storage space.                                                                   | No        | 80      | `dm.thinp_autoextend_threshold=80` |
+| `dm.thinp_autoextend_percent`   | The percentage to increase the thin pool by when an autoextend is triggered.                                                                                                       | No        | 20      | `dm.thinp_autoextend_percent=20`   |
+| `dm.directlvm_device_force`     | Whether to format the block device even if a filesystem already exists on it. If set to `false` and a filesystem is present, an error is logged and the filesystem is left intact. | No        | false   | `dm.directlvm_device_force=true`   |
+
+Edit the `daemon.json` file and set the appropriate options, then restart Docker
+for the changes to take effect. The following `daemon.json` sets all of the
+options in the table above.
+
+```json
+{
+  "storage-driver": "devicemapper",
+  "storage-opts": [
+    "dm.directlvm_device": "/dev/xdf",
+    "dm.thinp_percent": 95,
+    "dm.thinp_metapercent": 1,
+    "dm.thinp_autoextend_threshold": 80,
+    "dm.thinp_autoextend_percent": 20,
+    "dm.directlvm_device_force": false 
+  ]
+}
+```
+
+Restart Docker for the changes to take effect. Docker invokes the commands to
+configure the block device for you.
+
+> **Warning**: Changing these values after Docker has prepared the block device
+> for you is not supported and will cause an error.
+
+You still need to [perform periodic maintenance tasks](#manage-devicemapper).
+
+#### Configure loop-lvm mode manually
+
 The procedure below will create a logical volume configured as a thin pool to
 use as backing for the storage pool. It assumes that you have a spare block
 device at `/dev/xvdf` with enough free space to complete the task. The device
@@ -343,7 +389,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ rm -rf /var/lib/docker.bk
     ```
 
-## Manage `devicemapper`
+## Manage devicemapper
 
 ### Monitor the thin pool
 
