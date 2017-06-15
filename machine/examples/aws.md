@@ -19,7 +19,7 @@ from those Docker desktop applications. See Docker Cloud (Edge feature) on
 >
 > Docker Machine will still work as described here, but Docker Cloud
 supercedes Machine for this purpose.
-{: .important}
+{: .important-vanilla}
 
 Follow along with this example to create a Dockerized [Amazon Web Services (AWS)](https://aws.amazon.com/) EC2 instance.
 

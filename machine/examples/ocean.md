@@ -18,7 +18,7 @@ those Docker desktop applications. See Docker Cloud (Edge feature) on
 >
 > Docker Machine will still work as described below, but Docker Cloud
 supercedes Machine for this purpose.
-{: .important}
+{: .important-vanilla}
 
 Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
 
