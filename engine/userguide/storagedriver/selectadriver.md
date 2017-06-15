@@ -1,5 +1,5 @@
 ---
-description: Learn how select the proper storage driver for your container.
+description: Learn how to select the proper storage driver for your container.
 keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
 title: Select a storage driver
 ---
