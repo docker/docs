@@ -76,8 +76,8 @@ For production systems, see
     $ sudo systemctl start docker
     ```
 
-4.  Verify that the daemon is using the `devicemapper` storage driver.
-    Use the `docker info` command and look for `Storage Driver`
+4.  Verify that the daemon is using the `devicemapper` storage driver. Use the
+    `docker info` command and look for `Storage Driver`.
 
     ```bash
     $ docker info
@@ -209,7 +209,8 @@ assumes that the Docker daemon is in the `stopped` state.
     --thinpool docker/thinpool \
     --poolmetadata docker/thinpoolmeta
 
-    WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to thin pool's data and metadata volumes with metadata wiping.
+    WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to
+    thin pool's data and metadata volumes with metadata wiping.
     THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
     Converted docker/thinpool to thin pool.
     ```
@@ -241,7 +242,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     Save the file.
 
-10.  Apply the LVM profile, using the `lvchange` command.
+10. Apply the LVM profile, using the `lvchange` command.
 
     ```bash
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
@@ -274,6 +275,10 @@ assumes that the Docker daemon is in the `stopped` state.
 13. Edit `/etc/docker/daemon.json` and configure the options needed for the
     `devicemapper` storage driver. If the file was previously empty, it should
     now contain the following contents:
+
+    > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`,
+    > is not yet supported on RHEL, CentOS, or Ubuntu 14.04 when using the
+    > default kernel version 3.18.
 
     ```json
     {
