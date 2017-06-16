@@ -18,15 +18,17 @@ Windows](/docker-for-windows/index.md), but on Linux systems you need to
 Toolbox](https://docs.docker.com/toolbox/overview.md).
 
 - Read the orientation in [Part 1](index.md).
-- Learn how to create containers in [Part 2](part2.md).
-- Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We will be using that shared image here.
-- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
-`repo`, and `tag`):
 
-  ```shell
-  docker run -p 80:80 username/repo:tag
-  ```
+- Learn how to create containers in [Part 2](part2.md).
+
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
+be using that shared image here.
+
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+username/repo:tag`, then visit `http://localhost/`.
+
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
 
 ## Introduction
