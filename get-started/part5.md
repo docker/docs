@@ -13,6 +13,7 @@ description: Learn how to create a multi-container application that uses all the
 - Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
+
 - Make sure you have published the `friendlyhello` image you created by
 [pushing it to a registry](/get-started/part2.md#share-your-image). We'll
 use that shared image here.
