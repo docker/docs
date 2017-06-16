@@ -131,8 +131,6 @@ guides:
         title: Known issues
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
-  - path: /release-notes/
-    title: Docker release notes
 - sectiontitle: Get started
   section:
   - sectiontitle: Get started with Docker
@@ -157,6 +155,10 @@ guides:
       title: Manage data in containers
   - path: /engine/docker-overview/
     title: Docker overview
+  - path: /release-notes/docker-ce/
+    title: Docker CE release notes
+  - path: /release-notes/docker-engine/
+    title: Docker Engine release notes
 - sectiontitle: User guide
   section:
   - path: /engine/userguide/
@@ -463,6 +465,9 @@ guides:
     title: Where to chat or get help
   - path: /opensource/doc-style/
     title: Style guide for Docker documentation
+- path: /release-notes/
+  nosync: true
+  title: Release notes
 - path: /docsarchive/
   title: View the docs archives
 
@@ -1529,6 +1534,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /release-notes/docker-compose/
+    title: Docker Compose release notes
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
@@ -2373,6 +2380,8 @@ manuals:
       title: VMware vSphere
   - path: /machine/migrate-to-machine/
     title: Migrate from Boot2Docker to Machine
+  - path: /release-notes/docker-machine/
+    title: Docker Machine release notes
 - sectiontitle: Docker Notary
   section:
   - path: /notary/getting_started/
@@ -2477,6 +2486,8 @@ manuals:
     title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
+- path: /release-notes/
+  title: Release notes
 - sectiontitle: Superseded products and tools
   section:
   - sectiontitle: Docker Hub
@@ -2499,7 +2510,7 @@ manuals:
       title: Automated builds from GitHub
     - path: /docker-hub/official_repos/
       title: Official repositories on Docker Hub
-  - sectiontitle: Docker Swarm
+  - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
       title: Swarm overview
@@ -2559,3 +2570,5 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes
