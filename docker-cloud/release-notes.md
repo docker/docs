@@ -71,7 +71,7 @@ The following release notes document changes since [Tutum v0.19.5](https://suppo
 
 ### Fixed
 
-- **Overlay network**: we have fixed an memory limit issue on the overlay network containers that were causing containers to not attach to the overlay network under certain circumstances.
+- **Overlay network**: we have fixed a memory limit issue on the overlay network containers that was causing containers to not attach to the overlay network under certain circumstances.
 - **Scale up trigger**: we have fixed an issue where sometimes containers created by using a "scale up" trigger didn't inherit the service configuration and marked all other containers in the service with the "redeployment needed" flag.
 
 ### Known issues
