@@ -12,14 +12,15 @@ description: Deploy your app to production using Docker CE or EE.
 - Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
-- Make sure you have pushed the container you created to a registry, as
-  instructed; we'll be using it here.
-- Be sure your image works as a deployed container by running this command, and visting `http://localhost/` (slotting in your info for `username`,
-`repo`, and `tag`):
 
-  ```shell
-  docker run -p 80:80 username/repo:tag
-  ```
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
+be using that shared image here.
+
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+username/repo:tag`, then visit `http://localhost/`.
+
 - Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5.md#persisting-data) handy.
 
 ## Introduction
