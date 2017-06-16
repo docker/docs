@@ -551,13 +551,13 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 ### links
 
 Link to containers in another service. Either specify both the service name and
-a link alias (`SERVICE:ALIAS`), or just the service name.
+a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
     web:
       links:
-       - db
-       - db:database
-       - redis
+       - "db"
+       - "db:database"
+       - "redis"
 
 Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
