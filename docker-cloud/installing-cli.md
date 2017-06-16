@@ -37,13 +37,13 @@ You can install the CLI locally using the [pip](https://pip.pypa.io/en/stable/)
 package manager, which is a package manager for
 [Python](https://www.python.org/) applications.
 
-* If you already have 2.x or Python 3.x installed, you probably have `pip` and
+* If you already have Python 2.x or 3.x installed, you probably have `pip` and
 `setuptools`, but will need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
 
 > The Docker Cloud CLI does not currently support Python 3.x.
 >
-> we recommend using Python 2.x.  To learn more,
+> we recommend using Python 2.x. To learn more,
 see the Python and CLI issues described in
 [Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
 {: .note-vanilla}
