@@ -7,7 +7,7 @@ redirect_from:
 title: Set up your environment
 ---
 
-In this step you install the Docker Cloud CLI so interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
+In this step you install the Docker Cloud CLI to interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
 
 ## Install the Docker Cloud CLI
 
