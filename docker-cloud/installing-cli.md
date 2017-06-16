@@ -24,7 +24,7 @@ If you have Docker Engine installed locally, you can run the following `docker`
 command in your shell regardless of which operating system you are using.
 
 ```none
-docker run dockercloud/cli -h
+$ docker run dockercloud/cli -h
 ```
 
 This command runs the `docker-cloud` CLI image in a container for you. Learn
@@ -61,8 +61,11 @@ $ pip install docker-cloud
 ```
 
 If you encounter errors on Linux machines, make sure that `python-dev` is
-installed. For example, on Ubuntu, run the following command: `apt-get install
-python-dev`
+installed. For example, on Ubuntu, run the following command: 
+
+```
+$ apt-get install python-dev
+```
 
 #### Install on macOS
 
