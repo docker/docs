@@ -355,6 +355,14 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-rc4-ce-mac15, 2017-06-16 (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-rc4-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc4)
+- [Docker Credential Helpers 0.5.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.2)
+- Linux Kernel 4.9.31
+
 ### Docker Community Edition 17.06.0-rc2-ce-mac14, 2017-06-08 (edge)
 
 **Upgrades**
