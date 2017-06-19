@@ -36,7 +36,10 @@ completion.
 ## MacPorts Bash Completion
 
 If you're using MacPorts you'll need to slightly modify your steps to the
-following Run `sudo port install bash-completion` to install bash completion.
+following:
+
+Run `sudo port install bash-completion` to install bash completion.
+Add the following lines to `~/.bash_profile`:
 
 ```shell
 if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
