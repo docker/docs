@@ -16,7 +16,7 @@ Each Docker daemon has a default logging driver, which each container uses
 unless you configure it to use a different logging driver.
 
 In addition to using the logging drivers included with Docker, you can also
-implement and use [logging driver plugins](/engine/admin/reference/logging/plugins.md).
+implement and use [logging driver plugins](/engine/admin/logging/plugins.md).
 Logging driver plugins are available in Docker 17.05 and higher.
 
 {% include edge_only.md section="feature" %}
