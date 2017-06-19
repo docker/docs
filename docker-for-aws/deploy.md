@@ -149,7 +149,7 @@ This tool internally makes use of docker global-mode service that runs a task on
 
 ### Distributed Application Bundles
 
-To deploy complex multi-container apps, you can use [distributed application bundles](https://github.com/moby/moby/blob/master/experimental/docker-stacks-and-bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
+To deploy complex multi-container apps, you can use [distributed application bundles](/compose/bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
 
 A good sample app to test application bundles is the [Docker voting app](https://github.com/docker/example-voting-app).
 
