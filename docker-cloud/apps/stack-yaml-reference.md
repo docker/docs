@@ -32,9 +32,9 @@ redis:
   image: redis
 ```
 
-Each key defined in `docker-cloud.yml` creates a service with that name in Docker Cloud. In the example above, three services are created: `lb`, `web` and `redis`. Each service is a dictionary whose possible keys are documented below.
+Each key defined in `docker-cloud.yml` creates a service with that name in Docker Cloud. In the example above, three services are created: `lb`, `web`, and `redis`. Each service is a dictionary whose possible keys are documented below.
 
- The `image` key is mandatory. Other keys are optional and are analogous to their [Docker Cloud Service API](/apidocs/docker-cloud.md#create-a-new-service) counterparts.
+The `image` key is mandatory. Other keys are optional and are analogous to their [Docker Cloud Service API](/apidocs/docker-cloud.md#create-a-new-service) counterparts.
 
 ## image (required)
 
@@ -287,7 +287,11 @@ volumes:
 ```
 
 ## volumes_from
-Mount all of the volumes from another service by specifying a service unique name. If the target service belongs to this stack its service unique name is its service name. If the target service does not belong to any stack its service unique name is its service name. If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
+Mount all of the volumes from another service by specifying a service unique name. 
+
+- If the target service belongs to this stack its service unique name is its service name. 
+- If the target service does not belong to any stack its service unique name is its service name. 
+- If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
 
 ```yml
 volumes_from:
