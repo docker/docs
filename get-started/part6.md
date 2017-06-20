@@ -63,10 +63,10 @@ After your cloud provider is all set up, create a Swarm:
 
 * If you're on Amazon Web Services (AWS) you
   can [automatically create a
-  swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-aws/){: onclick="ga('send', 'event', 'Get Started Referral AWS', 'Cloud', 'Create AWS Swarm');"}.
+  swarm on AWS](/docker-cloud/cloud-swarm/create-cloud-swarm-aws/){: onclick="ga('send', 'event', 'Get Started Referral AWS', 'Cloud', 'Create AWS Swarm');"}.
 
 * If you are on Microsoft Azure, you can [automatically create a
-swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="ga('send', 'event', 'Get Started Referral Azure', 'Cloud', 'Create Azure Swarm');"}.
+swarm on Azure](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="ga('send', 'event', 'Get Started Referral Azure', 'Cloud', 'Create Azure Swarm');"}.
 
 * Otherwise, [create your nodes](/docker-cloud/getting-started/your_first_node/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create Nodes');"}
   in the Docker Cloud UI, and run the `docker swarm init` and `docker swarm join`
@@ -79,14 +79,19 @@ swarm](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="ga('send'
 ### Deploy your app
 
 [Connect to your swarm via Docker
-Cloud](/docker-cloud/cloud-swarm/connect-to-swarm/). This opens a terminal whose
-context is your local machine, but whose Docker commands are routed up to the
-swarm running on your cloud provider. This is a little different from the
-paradigm you've been following, where you were slinging commands via SSH; now,
-you can directly access both your local file system and your remote swarm,
-enabling some very tidy-looking commands:
+Cloud](/docker-cloud/cloud-swarm/connect-to-swarm.md). On Docker for
+Mac or Docker for Windows (Edge releases), you can [connect to your swarms
+directly through the desktop app
+menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windows-edge-to-connect-to-swarms).
 
-```
+Either way, this opens a terminal whose context is your local machine, but whose
+Docker commands are routed up to the swarm running on your cloud service
+provider. This is a little different from the paradigm you've been following,
+where you were sending commands via SSH. Now, you can directly access both your
+local file system and your remote swarm, enabling some very tidy-looking
+commands:
+
+```shell
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
