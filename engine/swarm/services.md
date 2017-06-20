@@ -850,10 +850,11 @@ This example sets the template of the created containers based on the
 service's name and the ID of the node where the container is running:
 
 ```bash
+{% raw %}
 $ docker service create --name hosttempl \
                         --hostname="{{.Node.ID}}-{{.Service.Name}}"\
                          busybox top
-
+{% endraw %}
 ```
 
 To see the result of using the template, use the `docker service ps` and
@@ -867,7 +868,9 @@ wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31
 ```
 
 ```bash
+{% raw %}
 $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
+{% endraw %}
 ```
 
 ## Learn More
