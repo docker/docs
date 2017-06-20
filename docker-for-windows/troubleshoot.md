@@ -348,7 +348,7 @@ Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT` with
 this switch.
 
 5.	If previous steps fail to solve the problems, follow steps on the
-[Cleanup README]((https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md)).
+[Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
 
 	>Read full description of consequences before you run Windows cleanup script
 	>
