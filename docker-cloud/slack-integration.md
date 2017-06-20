@@ -26,7 +26,7 @@ Before you begin, make sure that you are signed into the Slack team that you wan
 5. Select the channel that will receive notifications.
 6. Click **Authorize**.
 
-    Once you click Authorize, you should see a message in the Slack channel notifying you of the new integration.
+    Once you click **Authorize**, you should see a message in the Slack channel notifying you of the new integration.
 
     ![](images/slack-oauth-authorize.png)
 
@@ -40,7 +40,7 @@ Once configured, choose a notification level:
 
 Enjoy your new Slack channel integration!
 
-## Editing a Slack integration
+## Edit a Slack integration
 
 * Click **Cloud Settings** in the lower left, scroll down to **Notifications**, and locate the **Slack** section. From here you can choose a new notification level, or remove the integration.
 
