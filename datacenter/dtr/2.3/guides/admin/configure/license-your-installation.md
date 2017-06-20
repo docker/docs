@@ -36,4 +36,4 @@ Click the **Apply new license** button, and upload your new license file.
 
 ## Where to go next
 
-* [Use your own TLS certificates](use-your-own-tls-certificates.md)
+* [Enable single sign-on](enable-single-sign-on.md)
