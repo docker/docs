@@ -2,7 +2,7 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Swarm discovery
-keywords: docker, swarm, clustering,  discovery
+keywords: docker, swarm, clustering, discovery
 title: Docker Swarm discovery
 ---
 
@@ -12,7 +12,7 @@ This page describes the different types of hosted discovery available to you. Th
 
 ## Using a distributed key/value store
 
-The recommended way to do node discovery in Swarm is Docker's libkv project. The libkv project is an abstraction layer over existing distributed key/value stores.  As of this writing, the project supports:
+The recommended way to do node discovery in Swarm is Docker's libkv project. The libkv project is an abstraction layer over existing distributed key/value stores. As of this writing, the project supports:
 
 * Consul 0.5.1 or higher
 * Etcd 2.0 or higher
@@ -96,13 +96,13 @@ This works the same way for the Swarm `manage` and `list` commands.
 
 ## A static file or list of nodes
 
-> **Note***: This discovery method is incompatible with replicating Swarm
+> **Note**: This discovery method is incompatible with replicating Swarm
 managers. If you require replication, you should use a hosted discovery key
 store.
 
 You can use a static file or list of nodes for your discovery backend. The file must be stored on a host that is accessible from the Swarm manager. You can also pass a node list as an option when you start Swarm.
 
-Both the static file and the `nodes` option support an IP address ranges. To specify a range supply a pattern, for example, `10.0.0.[10:200]` refers to nodes starting from `10.0.0.10` to `10.0.0.200`.  For example for the `file` discovery method.
+Both the static file and the `nodes` option support an IP address range. To specify a range supply a pattern, for example, `10.0.0.[10:200]` refers to nodes starting from `10.0.0.10` to `10.0.0.200`. For example for the `file` discovery method.
 
         $ echo "10.0.0.[11:100]:2375"   >> /tmp/my_cluster
         $ echo "10.0.1.[15:20]:2375"    >> /tmp/my_cluster
@@ -169,7 +169,7 @@ Or with node discovery:
 ## Docker Hub as a hosted discovery service
 
 > **Warning**:
-> The Docker Hub Hosted Discovery Service **is not recommended** for production use. It's intended to be used for testing/development. See the  discovery backends for production use.
+> The Docker Hub Hosted Discovery Service **is not recommended** for production use. It's intended to be used for testing/development. See the discovery backends for production use.
 {:.warning}
 
 This example uses the hosted discovery service on Docker Hub. Using
