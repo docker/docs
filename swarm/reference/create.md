@@ -15,6 +15,6 @@ Later, when you use [`manage`](manage.md) or [`join`](join.md) to create Swarm m
 
 Some documentation also refers to the discovery token as a *cluster_id*.
 
-> Warning: Docker Hub's hosted discovery backend is not recommended for production use. It’s intended only for testing/development.
+> **Warning**: Docker Hub's hosted discovery backend is not recommended for production use. It’s intended only for testing/development.
 
 For more information and examples about this and other discovery backends, see the [Docker Swarm Discovery](../discovery.md) topic.
