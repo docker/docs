@@ -19,7 +19,7 @@ various APIs, CLIs, and file formats.
 
 | CLI                                                   | Description                                                                                                      |
 |:------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| [Engine CLI](/engine/reference/commandline/cli/)          | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands. |
+| [Engine CLI](/engine/reference/commandline/cli/)          | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands|
 | [Compose CLI](/compose/reference/overview/)           | The CLI for Docker Compose, which allows you to build and run multi-container applications                       |
 | [Machine CLI](/machine/reference/)                    | Manages virtual machines that are pre-configured to run Docker                                                   |
 | [UCP CLI](/datacenter/ucp/2.1/reference/cli/index.md) | Manages a Universal Control Plane instance                                                                       |
