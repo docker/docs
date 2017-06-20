@@ -131,8 +131,15 @@ guides:
         title: Known issues
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
-  - path: /release-notes/
-    title: Docker release notes
+  - sectiontitle: Release notes
+    section:
+      - path: /enterprise/release-notes/
+        title: Docker EE
+        nosync: true
+      - path: /release-notes/docker-ce/
+        title: Docker CE
+        nosync: true
+
 - sectiontitle: Get started
   section:
   - sectiontitle: Get started with Docker
@@ -1529,6 +1536,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /release-notes/docker-compose/
+    title: Docker Compose release notes
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/
@@ -2373,6 +2382,8 @@ manuals:
       title: VMware vSphere
   - path: /machine/migrate-to-machine/
     title: Migrate from Boot2Docker to Machine
+  - path: /release-notes/docker-machine/
+    title: Docker Machine release notes
 - sectiontitle: Docker Notary
   section:
   - path: /notary/getting_started/
@@ -2477,6 +2488,44 @@ manuals:
     title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
+- sectiontitle: Release notes
+  section:
+    - path: /release-notes/
+      title: Overview
+    - path: /enterprise/release-notes/
+      title: Docker EE
+      nosync: true
+    - path: /release-notes/docker-ce/
+      title: Docker CE
+    - path: /cs-engine/1.13/release-notes/
+      title: CS Docker Engine
+      nosync: true
+    - path: /release-notes/docker-engine/
+      title: Docker Engine
+    - path: /docker-for-mac/release-notes/
+      title: Docker for Mac
+      nosync: true
+    - path: /docker-for-windows/release-notes/
+      title: Docker for Windows
+      nosync: true
+    - path: /release-notes/docker-compose/
+      title: Docker Compose
+      nosync: true
+    - path: /docker-cloud/release-notes/
+      title: Docker Cloud
+      nosync: true
+    - path: /docker-for-aws/release-notes/
+      title: Docker for AWS
+      nosync: true
+    - path: /docker-for-azure/release-notes/
+      title: Docker for Azure
+      nosync: true
+    - path: /release-notes/docker-machine/
+      title: Docker Machine release notes
+      nosync: true
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes
+      nosync: true
 - sectiontitle: Superseded products and tools
   section:
   - sectiontitle: Docker Hub
@@ -2499,7 +2548,7 @@ manuals:
       title: Automated builds from GitHub
     - path: /docker-hub/official_repos/
       title: Official repositories on Docker Hub
-  - sectiontitle: Docker Swarm
+  - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
       title: Swarm overview
@@ -2559,3 +2608,5 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes
