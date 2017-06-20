@@ -188,10 +188,12 @@ For a complete explanation of how to do this, see the blog post
 ### How do I add client certificates?
 
 Starting with Docker for Mac 17.06.0-ce, you do not have to push your
-certificates with `git` commands anymore.
+certificates with `git` commands anymore. You can put your client certificates
+in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 When the Docker for Mac application starts up, it copies certificates from your
-Mac folder to `~/.docker/certs.d` in the database.
+Mac folders to `~/.docker/certs.d` in the database.
 
 ### How do I reduce the size of Docker.qcow2?
 
