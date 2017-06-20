@@ -68,13 +68,15 @@ To install Compose, do the following:
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
-    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /tmp/docker-compose \
+    && sudo cp /tmp/docker-compose /usr/local/bin/docker-compose
     ```
 
     For example, to download Compose version {{site.compose_current}}, the command is:
 
     ```bash
-    curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /tmp/docker-compose \
+    && sudo cp /tmp/docker-compose /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
