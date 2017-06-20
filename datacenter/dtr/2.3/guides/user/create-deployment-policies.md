@@ -43,8 +43,6 @@ DTR allows defining the following criteria:
 | Tag name        | If the tag name contains                           |
 | Vulnerabilities | If the image has vulnerabilities                   |
 | License         | If the image uses an intellectual property license |
-| Architecture    | If the image was built for a specific architecture |
-| OS              | If the image uses a specific operating system      |
 
 Then, select where to push the image to if it meets all the criteria.
 Select the **organization** and **repository** where the image is going to be
