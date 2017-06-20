@@ -128,14 +128,18 @@ align with the defaults set by the `postgres` image.
 Replace the contents of `config/database.yml` with the following:
 
 ```none
-development: &default
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: myapp_development
-  pool: 5
+  host: db
   username: postgres
   password:
-  host: db
+  pool: 5
+
+development:
+  <<: *default
+  database: myapp_development
+
 
 test:
   <<: *default
