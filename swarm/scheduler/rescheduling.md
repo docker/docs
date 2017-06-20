@@ -13,7 +13,7 @@ running on fail.
 ## Rescheduling policies
 
 You set the reschedule policy when you start a container. You can do this with
-the `reschedule` environment variable  or the
+the `reschedule` environment variable or the
 `com.docker.swarm.reschedule-policies` label. If you don't specify a policy, the
 default rescheduling policy is `off` which means that Swarm does not restart a
 container when a node fails.
@@ -33,7 +33,7 @@ $ docker run -d -l 'com.docker.swarm.reschedule-policies=["on-node-failure"]' re
 ## Review reschedule logs
 
 You can use the `docker logs` command to review the rescheduled container
-actions.  To do this, use the following command syntax:
+actions. To do this, use the following command syntax:
 
 ```bash
 docker logs SWARM_MANAGER_CONTAINER_ID
