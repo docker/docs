@@ -672,7 +672,7 @@ func main() {
   }
   encodedJSON, err := json.Marshal(authConfig)
   if err != nil {
-      return err
+      panic(err)
   }
   authStr := base64.URLEncoding.EncodeToString(encodedJSON)
 
