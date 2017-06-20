@@ -185,6 +185,14 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 For a complete explanation of how to do this, see the blog post
 [Adding Self-signed Registry Certs to Docker & Docker for Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
+### How do I add client certificates?
+
+Starting with Docker for Mac 17.06.0-ce, you do not have to push your
+certificates with `git` commands anymore.
+
+When the Docker for Mac application starts up, it copies certificates from your
+Mac folder to `~/.docker/certs.d` in the database.
+
 ### How do I reduce the size of Docker.qcow2?
 
 By default Docker for Mac stores containers and images in a file
