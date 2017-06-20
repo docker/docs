@@ -352,7 +352,6 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:justin.canington@nobistech.net">justin.canington@nobistech.net</a><br>
-
         <a href=
         "mailto:andrew.ayers@nobistech.net">andrew.ayers@nobistech.net</a>
       </td>

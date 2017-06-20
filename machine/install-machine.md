@@ -11,7 +11,7 @@ Toolbox](/toolbox/overview.md).
 
 If you want only Docker Machine, you can install the Machine binaries directly
 by following the instructions in the next section. You can find the latest
-versions of the binaries are on the <a
+versions of the binaries on the <a
 href="https://github.com/docker/machine/releases/" target="_blank">
 docker/machine release page</a> on GitHub.
 
@@ -25,24 +25,24 @@ docker/machine release page</a> on GitHub.
     If you are running on **macOS**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-    chmod +x /usr/local/bin/docker-machine
+    $ curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+  chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running on **Linux**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
-      chmod +x /tmp/docker-machine &&
-      sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+    $ curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+    chmod +x /tmp/docker-machine &&
+    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
     If you are running with **Windows** with git bash:
 
     ```console
     $ if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
-  curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
-  chmod +x "$HOME/bin/docker-machine.exe"
+curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
+chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
     Otherwise, download one of the releases from the <a href="https://github.com/docker/machine/releases/" target="_blank"> docker/machine release page</a> directly.
@@ -50,7 +50,7 @@ docker/machine release page</a> on GitHub.
 3.  Check the installation by displaying the Machine version:
 
         $ docker-machine version
-        docker-machine version 0.10.0, build 76ed2a6
+        docker-machine version 0.12.0, build 45c69ad
 
 ## Installing bash completion scripts
 

@@ -97,7 +97,7 @@ you've created in volumes isn't lost.
 
 If you use `docker-compose` on a Windows machine, see
 [Environment variables](reference/envvars.md) and adjust the necessary environment
-variables for you specific needs.
+variables for your specific needs.
 
 
 ### Only recreate containers that have changed

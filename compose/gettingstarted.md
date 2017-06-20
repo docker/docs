@@ -38,6 +38,8 @@ provided by Docker images.
         if __name__ == "__main__":
             app.run(host="0.0.0.0", debug=True)
 
+      In this example, `redis` is the hostname of the redis container on the application's network. We use the default port for Redis, `6379`.
+
 3.  Create another file called `requirements.txt` in your project directory and
     paste this in:
 
@@ -95,7 +97,7 @@ This Compose file defines two services, `web` and `redis`. The web service:
 
 * Uses an image that's built from the `Dockerfile` in the current directory.
 * Forwards the exposed port 5000 on the container to port 5000 on the host
-  machine.
+  machine. We use the default port for the Flask web server, `5000`.
 * Mounts the project directory on the host to `/code` inside the container,
   allowing you to modify the code without having to rebuild the image.
 

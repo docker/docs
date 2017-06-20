@@ -34,7 +34,7 @@ instructions for [macOS](/docker-for-mac/) or
 
 Machine supports installing on AWS, Digital Ocean, Google Cloud Platform, IBM
 Softlayer, Microsoft Azure and Hyper-V, OpenStack, Rackspace, VirtualBox, VMware
-Fusion&reg;, vCloud&reg; Air<sup>TM</sup> and vSphere&reg;.  In this example,
+Fusion&reg;, vCloud&reg; Air<sup>TM</sup> and vSphere&reg;. In this example,
 you'll use VirtualBox to run several VMs based on the `boot2docker.iso` image.
 This image is a small-footprint Linux distribution for running Engine.
 
@@ -42,7 +42,7 @@ The Toolbox installation gives you VirtualBox and the `boot2docker.iso` image
 you need. It also gives you the ability provision on all the systems Machine
 supports.
 
-**Note**:These examples assume you are using macOS or Windows, if you like you can also
+**Note**: These examples assume you are using macOS or Windows, if you like you can also
 [install Docker Machine directly on a Linux system](/machine/install-machine).
 
 ## Provision a host to generate a Swarm token
@@ -87,7 +87,7 @@ Status: Downloaded newer image for swarm
 
 The output of the `swarm create` command is a cluster token. Copy the token to a
 safe place you will remember. Once you have the token, you can provision the
-Swarm nodes and join them to the cluster_id.  The rest of this documentation,
+Swarm nodes and join them to the cluster_id. The rest of this documentation,
 refers to this token as the `SWARM_CLUSTER_TOKEN`.
 
 ## Provision Swarm nodes
@@ -123,7 +123,7 @@ example.
 >**Note**: These command rely on Docker Swarm's hosted discovery service, Docker
 Hub. If Docker Hub or your network is having issues, these commands may fail.
 Check the [Docker Hub status page](http://status.docker.com/) for service
-availability. If the problem Docker Hub, you can wait for it to recover or
+availability. If the problem is Docker Hub, you can wait for it to recover or
 configure other types of discovery backends.
 
 ## Connect node environments with Machine
@@ -180,5 +180,5 @@ Name: swarm-manager
 
 * [Evaluate Swarm in a sandbox](install-w-machine.md)
 * [Build a Swarm cluster for production](install-manual.md)
-* [Swarm Discovery](discovery.md)
+* [Swarm discovery](discovery.md)
 * [Docker Machine](/machine/index.md) documentation

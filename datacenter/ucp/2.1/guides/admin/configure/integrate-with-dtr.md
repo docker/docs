@@ -89,7 +89,7 @@ trying to pull and push images from your local Docker installation to DTR.
     so that you can push and pull images. Set it as **private**, and save
     the changes.
 
-    ![](../images/dtr-integration-1.png)
+    ![](/datacenter/ucp/2.1/guides/images/dtr-integration-1.png)
 
 2.  Pull the `hello-world` image from Docker Store, re-tag it, and push it to the
 DTR repository you created.
@@ -121,7 +121,7 @@ DTR repository you created.
 
     You can also check that the tag exists on the DTR web UI.
 
-    ![](../images/dtr-integration-2.png)
+    ![](/datacenter/ucp/2.1/guides/images/dtr-integration-2.png)
 
 
 ## 3. Configure UCP Docker Engines

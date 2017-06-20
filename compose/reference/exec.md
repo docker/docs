@@ -11,7 +11,7 @@ Usage: exec [options] SERVICE COMMAND [ARGS...]
 Options:
 -d                Detached mode: Run command in the background.
 --privileged      Give extended privileges to the process.
---user USER       Run the command as this user.
+-u, --user USER   Run the command as this user.
 -T                Disable pseudo-tty allocation. By default `docker-compose exec`
                   allocates a TTY.
 --index=index     index of the container if there are multiple

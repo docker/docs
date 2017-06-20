@@ -2,7 +2,7 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Swarm and transport layer security
-keywords: docker, swarm, TLS, discovery, security,  certificates
+keywords: docker, swarm, TLS, discovery, security, certificates
 title: Configure Docker Swarm for TLS
 ---
 
@@ -45,9 +45,9 @@ or in the public cloud. The following table lists each server name and its purpo
 |-------------|------------------------------------------------|
 | `ca`      | Acts as the Certificate Authority (CA) server. |
 | `swarm`   | Acts as the Swarm Manager.                     |
-| `node1`   | Act as a Swarm node.                           |
-| `node2`   | Act as a Swarm node.                           |
-| `client`  | Acts as a remote Docker Engine client          |
+| `node1`   | Acts as a Swarm node.                           |
+| `node2`   | Acts as a Swarm node.                           |
+| `client`  | Acts as a remote Docker Engine client.          |
 
 Make sure that you have SSH access to all 5 servers and that they can communicate with each other using DNS name resolution. In particular:
 
@@ -63,7 +63,7 @@ LTS.
 
 ## Step 2: Create a Certificate Authority (CA) server
 
->**Note**:If you already have access to a CA and certificates, and are comfortable working with them, you should skip this step and go to the next.
+>**Note**: If you already have access to a CA and certificates, and are comfortable working with them, you should skip this step and go to the next.
 
 In this step, you configure a Linux server as a CA. You use this CA to create
 and sign keys. This step included so that readers without access to an existing
@@ -139,14 +139,14 @@ Certificate:
 <output truncated>
 ```
 
-Later, you'll use this to certificate to sign keys for other servers in the
+Later, you'll use this certificate to sign keys for other servers in the
 infrastructure.
 
 ## Step 3: Create and sign keys
 
 Now that you have a working CA, you need to create key pairs for the Swarm
 Manager, Swarm nodes, and remote Docker Engine client. The commands and process
-to create key pairs is identical for all servers.  You'll create the following keys:
+to create key pairs is identical for all servers. You'll create the following keys:
 
 | Key | Description |
 | --- | ----------- |
@@ -237,7 +237,7 @@ To inspect a public key (cert):
 openssl x509 -in <key-name> -noout -text
 ```
 
-The following commands shows the partial contents of the Swarm Manager's public
+The following command shows the partial contents of the Swarm Manager's public
  `swarm-cert.pem` key.
 
 ```
@@ -297,7 +297,7 @@ follows on each node:
 
     >**Note**: You may need to provide authentication for the `scp` commands to work. For example, AWS EC2 instances use certificate-based authentication. To copy the files to an EC2 instance associated with a public key called `nigel.pem`, modify the `scp` command as follows: `scp -i /path/to/nigel.pem ./ca.pem ubuntu@swarm:/home/ubuntu/.certs/ca.pem`.
 
-3.  Repeat step 2 for each remaining  server in the infrastructure.
+3.  Repeat step 2 for each remaining server in the infrastructure.
 
     * `node1`
     * `node2`
@@ -335,20 +335,22 @@ On `node1` and `node2` (your Swarm nodes), do the following:
     $ sudo su
     ```
 
-2. Edit Docker Engine configuration file.
+2.  Add the following configuration keys to the `/etc/docker/daemon.json`. If the
+    file does not yet exist, create it.
 
-    If you are following along with these instructions and using Ubuntu 14.04
-    LTS, the configuration file is `/etc/default/docker`. The Docker Engine
-    configuration file may be different depending on the Linux distribution you
-    are using.
+    ```json
+    {
+      "hosts": ["tcp://0.0.0.0:2376"],
+      "tlsverify": "true",
+      "tlscacert": "/home/ubuntu/.certs/ca.pem",
+      "tlscert": "/home/ubuntu/.certs/cert.pem",
+      "tlskey": "/home/ubuntu/.certs/key.pem"
+    }
+    ```
 
-3. Add the following options to the `DOCKER_OPTS` line.
+    Restart Docker for the changes to take effect. If the file is not valid JSON,
+    Docker will not start and will emit an error.
 
-         -H tcp://0.0.0.0:2376 --tlsverify --tlscacert=/home/ubuntu/.certs/ca.pem --tlscert=/home/ubuntu/.certs/cert.pem --tlskey=/home/ubuntu/.certs/key.pem
-
-2. Restart the Docker Engine daemon.
-
-         $ service docker restart
 
 3. Repeat the procedure on `node2` as well.
 
@@ -492,6 +494,7 @@ your Docker Engine client.
 6.  Set the following variables:
 
     | Variable | Description |
+    | -------- | ----------- |
     | `DOCKER_HOST` | Sets the Docker host and TCP port to send all Engine commands to. |
     | `DOCKER_TLS_VERIFY` | Tells Engine to use TLS. |
     | `DOCKER_CERT_PATH` | Specifies the location of TLS keys. |

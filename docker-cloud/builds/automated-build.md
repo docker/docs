@@ -6,7 +6,7 @@ redirect_from:
 title: Automated builds
 ---
 
-[![Automated Builds with Docker Cloud](images/video-auto-builds-docker-cloud.png)](https://youtu.be/sl2mfyjnkXk "Automated Builds with Docker Cloud"){:target="_blank"}
+[![Automated Builds with Docker Cloud](images/video-auto-builds-docker-cloud.png)](https://youtu.be/sl2mfyjnkXk "Automated Builds with Docker Cloud"){:target="_blank" class="_"}
 
 > **Note**: Docker Cloud's Build functionality is in BETA.
 
@@ -58,17 +58,28 @@ the code repository service where the image's source code is stored.
 
 5. Choose where to run your build processes.
 
-    You can either run the process on your own infrastructure and optionally
-    [set up specific nodes to build on](automated-build.md#set-up-builder-nodes), or you can use the
-    hosted build service offered on Docker Cloud's infrastructure. If you use
-    Docker's infrastructure, select a builder size to run the build process on.
-    This hosted build service is free while it is in Beta.
+    You can either run the process on your own infrastructure and optionally [set up specific nodes to build on](automated-build.md#set-up-builder-nodes), or select **Build on Docker Cloud’s infrastructure** you can use the hosted build service
+    offered on Docker Cloud's infrastructure. If you use
+    Docker's infrastructure, select a builder size to run the build
+    process on. This hosted build service is free while it is in Beta.
 
     ![](images/edit-repository-builds.png)
 
-6. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+6.  If in the previous step you selected **Build on Docker
+    Cloud’s infrastructure**, then you are given the option to select the
+    **Docker Version** used to build this repository. You can choose between
+    the **Stable** and **Edge** versions of Docker.
 
-8.  Review the default **Build Rules**, and optionally click the **plus sign** to add and configure more build rules.
+    Selecting **Edge** lets you to take advantage of [multi-stage builds](/engine/userguide/eng-image/multistage-build/). For more information and examples, see the topic on how to [use multi-stage builds](/engine/userguide/eng-image/multistage-build/#use-multi-stage-builds).
+
+    You can learn more about **stable** and **edge** channels in the
+    [Install Docker overview](https://docs.docker.com/engine/installation/)
+    and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+
+7.  Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+
+8.  Review the default **Build Rules**, and optionally click the
+**plus sign** to add and configure more build rules.
 
     _Build rules_ control what Docker Cloud builds into images from the contents
     of the source code repository, and how the resulting images are tagged
@@ -87,7 +98,10 @@ the code repository service where the image's source code is stored.
 
 10. For each branch or tag, enable or disable the **Build Caching** toggle.
 
-    [Build caching](/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have many dependencies. You might want to leave build caching disabled to make sure all of your dependencies are resolved at build time, or if you have a large layer that is quicker to build locally.
+    [Build caching](/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have
+    many dependencies. You might want to leave build caching disabled to
+    make sure all of your dependencies are resolved at build time, or if
+    you have a large layer that is quicker to build locally.
 
 11. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.
@@ -98,33 +112,36 @@ run an initial test.
 
 ### Set up build rules
 
+By default when you set up autobuilds, a basic build rule is created for you.
+This default rule watches for changes to the `master` branch in your source code
+repository, and builds the `master` branch into a Docker image tagged with
+`latest`. You
 
-By default when you set up autobuilds, a basic build rule is created for you. This default rule watches for changes to the `master` branch in your source code repository, and builds the `master` branch into a Docker image tagged with `latest`. You
+In the **Build Rules** section, enter one or more sources to build.
 
+For each source:
 
-8.  In the **Build Rules** section, enter one or more sources to build.
-
-    For each source:
-
-    * Select the **Source type** to build either a **tag** or a
+* Select the **Source type** to build either a **tag** or a
     **branch**. This tells the build system what to look for in the source code
     repository.
 
-    * Enter the name of the **Source** branch or tag you want to build.
+* Enter the name of the **Source** branch or tag you want to build.
 
-      The first time you configure automated builds, a default build rule is set up for you. This default set builds from the `Branch` in your source code called `master`, and creates a Docker image tagged with `latest`.
+  The first time you configure automated builds, a default build rule is set up
+  for you. This default set builds from the `Branch` in your source code called
+  `master`, and creates a Docker image tagged with `latest`.
 
-      You can also use a regex to select which source branches or tags to build.
-      To learn more, see
-      [regexes](automated-build.md#regexes-and-automated-builds).
+  You can also use a regex to select which source branches or tags to build.
+  To learn more, see
+  [regexes](automated-build.md#regexes-and-automated-builds).
 
-    * Enter the tag to apply to Docker images built from this source.
+* Enter the tag to apply to Docker images built from this source.
 
-      If you configured a regex to select the source, you can reference the
-      capture groups and use its result as part of the tag. To learn more, see
-      [regexes](automated-build.md#regexes-and-automated-builds).
+  If you configured a regex to select the source, you can reference the
+  capture groups and use its result as part of the tag. To learn more, see
+  [regexes](automated-build.md#regexes-and-automated-builds).
 
-    * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
+* Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
 > **Note:** When Docker Cloud pulls a branch from a source code repository, it performs
 a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md)

@@ -6,10 +6,8 @@ pname: docker image
 plink: docker_image.yaml
 options:
 - option: add-host
-  default_value: '[]'
   description: Add a custom host-to-IP mapping (host:ip)
 - option: build-arg
-  default_value: '[]'
   description: Set build-time variables
 - option: cache-from
   default_value: '[]'
@@ -45,7 +43,6 @@ options:
 - option: isolation
   description: Container isolation technology
 - option: label
-  default_value: '[]'
   description: Set metadata for an image
 - option: memory
   shorthand: m
@@ -83,8 +80,9 @@ options:
   description: Squash newly built layers into a single new layer
 - option: tag
   shorthand: t
-  default_value: '[]'
   description: Name and optionally a tag in the 'name:tag' format
+- option: target
+  description: Set the target build stage to build.
 - option: ulimit
   default_value: '[]'
   description: Ulimit options

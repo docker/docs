@@ -1,9 +1,9 @@
 ---
-description: Instructions for installing Docker on OpenSUSE and SLES
+description: Instructions for installing Docker on SLES
 keywords: Docker, Docker documentation, requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
-title: Get Docker for and SLES
+title: Get Docker for SLES
 ---
 
 {% assign minor-version = "17.03" %}
@@ -34,7 +34,12 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of SLES 12.x.
+To install Docker, you need the 64-bit version of SLES 12.x. Docker is not
+supported on OpenSUSE.
+
+The only supported storage driver for Docker on SLES is `btrfs`, which will be
+used by default if the underlying filesystem hosting `/var/lib/docker/` is a
+BTRFS filesystem.
 
 ### Uninstall old versions
 
@@ -56,6 +61,34 @@ It's OK if `zypper` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker EE package is now called `docker-ee`.
+
+## Configure the btrfs filesystem
+
+If the filesystem which hosts `/var/lib/docker/` is not a BTRFS filesystem,
+you must configure a BTRFS filesystem and mount it on `/var/lib/docker/`:
+
+1.  Format your dedicated block device or devices as a Btrfs filesystem. This
+    example assumes that you are using two block devices called `/dev/xvdf` and
+    `/dev/xvdg`. Double-check the block device names because this is a
+    destructive operation.
+
+    ```bash
+    $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
+    ```
+
+    There are many more options for Btrfs, including striping and RAID. See the
+    [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
+
+2.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
+    can specify any of the block devices used to create the Btrfs filesystem.
+
+    ```bash
+    $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
+    ```
+
+    Don't forget to make the change permanent across reboots by adding an
+    entry to `/etc/fstab`.
+
 
 ## Install Docker
 
@@ -147,13 +180,28 @@ the repository.
     $ sudo zypper install docker-ee-<VERSION_STRING>
     ```
 
-    Start Docker:
+4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+    `storage-driver` has no harmful side effects.
+
+    Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
+    add the following contents:
+
+    ```json
+    {
+      "storage-driver": "btrfs"
+    }
+    ```
+
+    Save and close the file.
+
+5.  Start Docker:
 
     ```bash
     $ sudo service docker start
     ```
 
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -198,13 +246,28 @@ need to download a new file each time you want to upgrade Docker.
     $ sudo zypper install /path/to/package.rpm
     ```
 
-    Start Docker:
+4.  Configure Docker to use the `btrfs` filesystem. **This is only required if
+    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+    `storage-driver` has no harmful side effects.
+
+    Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
+    add the following contents:
+
+    ```json
+    {
+      "storage-driver": "btrfs"
+    }
+    ```
+
+    Save and close the file.
+
+5.  Start Docker:
 
     ```bash
     $ sudo service docker start
     ```
 
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -238,8 +301,10 @@ instead of `zypper install`, and pointing to the new file.
     volumes:
 
     ```bash
-    $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/docker/*
     ```
+
+    As an alternative, you can unmount and format the `btrfs` filesystem.
 
 You must delete any edited configuration files manually.
 

@@ -14,10 +14,25 @@ and Command Line Tools](http://docs.aws.amazon.com/cli/latest/reference/logs/ind
 
 ## Usage
 
-You can configure the default logging driver by passing the `--log-driver`
-option to the Docker daemon:
+To use the `awslogs` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
+configuring Docker using `daemon.json`, see
+[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+The following example sets the log driver to `awslogs` and sets the
+`awslogs-region` option.
 
-    dockerd --log-driver=awslogs
+```json
+{
+  "log-driver": "awslogs",
+  "log-opts": {
+    "awslogs-region": "us-east-1"
+  }
+}
+```
+
+Restart Docker for the changes to take effect.
 
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
@@ -26,7 +41,9 @@ You can set the logging driver for a specific container by using the
 
 ## Amazon CloudWatch Logs options
 
-You can use the `--log-opt NAME=VALUE` flag to specify Amazon CloudWatch Logs logging driver options.
+You can add logging options to the `daemon.json` to set Docker-wide defaults,
+or use the `--log-opt NAME=VALUE` flag to specify Amazon CloudWatch Logs
+logging driver options when starting a container.
 
 ### awslogs-region
 
@@ -74,9 +91,46 @@ $ docker run --log-driver=awslogs \
              ...
 ```
 
-> **Note:**
+> **Note**:
 > Your AWS IAM policy must include the `logs:CreateLogGroup` permission before you attempt to use `awslogs-create-group`.
 
+### aws-datetime-format
+
+The `aws-datetime-format` option defines a multiline start pattern in [Python
+`strftime` format](http://strftime.org). One example of a use case for using
+this format is for parsing output such as a stack dump, which might otherwise
+be logged in multiple entries. The correct pattern allows it to be captured in a
+single entry.
+
+This option always takes precedence if both `awslogs-datetime-format` and
+`awslogs-multiline-pattern` are configured.
+
+For example:
+
+```bash
+$ docker run -it --rm \
+  --log-driver=awslogs \
+  --log-opt awslogs-group=test \
+  --log-opt awslogs-datetime-format='%Y-%m-%d' \
+  awslogtest:latest /test2.sh
+```
+
+### aws-multiline-pattern
+
+The `aws-multiline-pattern` option defines a multiline start pattern using a
+regular expression. This option is ignored if `awslogs-datetime-format` is also
+configured.
+
+For example:
+
+```bash
+$ docker run -it --rm \
+  --log-driver=awslogs \
+  --log-opt awslogs-group=test \
+  --log-opt awslogs-multiline-pattern='^ABCD' \
+  awslogtest:latest /test1.sh
+
+```
 
 ### tag
 
@@ -86,6 +140,14 @@ See the [tag option documentation](log_tags.md) for details on all supported tem
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
 
 If not specified, the container ID is used as the log stream.
+
+{% raw %}
+> **Note**:
+> The CloudWatch log API doesn't support `:` in the log name. This can cause some issues when using the `{{ .ImageName }}` as a tag, since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
+> Template markup can be used to get the proper format.
+> To get the image name and the first 12 characters of the container id, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
+> the output will be something like: `alpine_latest-bf0072049c76`
+{% endraw %}
 
 
 ## Credentials

@@ -6,7 +6,7 @@ redirect_from:
 title: Automated repository tests
 ---
 
-[![Automated Tests with Docker Cloud](images/video-auto-tests-docker-cloud.png)](https://www.youtube.com/watch?v=KX6PD2MANRI "Automated Tests with Docker Cloud"){:target="_blank"}
+[![Automated Tests with Docker Cloud](images/video-auto-tests-docker-cloud.png)](https://www.youtube.com/watch?v=KX6PD2MANRI "Automated Tests with Docker Cloud"){:target="_blank" class="_"}
 
 Docker Cloud can automatically test changes to your source code repositories
 using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests on each pull request to the source code
@@ -35,11 +35,19 @@ The example above builds the repository, and runs the `run_tests.sh` file inside
 a container using the built image.
 
 You can define any number of linked services in this file. The only requirement
-is that `sut` is defined. Its return code determines if tests passed or not:
-tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
+is that `sut` is defined. Its return code determines if tests passed or not.
+Tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
+
+> **Note**: Only the `sut` service and all other services listed in `depends_on`
+are started. For instance, if you have services that poll for changes in other
+services, be sure to include the polling services in the `depends_on` list to
+make sure all of your services start.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file
-that ends in `.test.yml` is used for testing, and the tests run sequentially. You can also use [custom build hooks](advanced.md#override-build-test-or-push-commands) to further customize your test behavior.
+that ends in `.test.yml` is used for testing, and the tests run sequentially.
+You can also use [custom build
+hooks](advanced.md#override-build-test-or-push-commands) to further customize
+your test behavior.
 
 > **Note**: If you enable Automated builds, they will also run any tests defined
 in the `test.yml` files.
@@ -75,15 +83,21 @@ Docker repository, regardless of the Autotest settings.
 
     The following options are available:
 
-    * `Off`: No additional test builds. Tests only run if they're configured as part of an automated build.
-    * `Internal pull requests`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
-    * `Internal and external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
+    * `Off`: No additional test builds. Tests only run if they're configured
+    as part of an automated build.
+
+    * `Internal pull requests`: Run a test build for any pull requests
+    to branches that match a build rule, but only when the pull request comes
+    from the same source repository.
+
+    * `Internal and external pull requests`: Run a test build for any
+    pull requests to branches that match a build rule, including when the
+    pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
-    disabled on public repositories. If you select this option on a public
-    repository, tests will still run on _internal_ pull requests (for example
-    from one branch into another inside the code repository) but not on for
-    external pull requests.
+    limited on public repositories. Private images will not be pulled and
+    environment  variables defined in Docker Cloud will not be
+    available. Automated builds will  continue to work as usual.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.

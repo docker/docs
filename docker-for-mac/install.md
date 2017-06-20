@@ -13,7 +13,7 @@ Mac.<br><br>
 Docker for Mac installed, and are ready to get started, skip to
 [Get started with Docker for Mac](index.md) for a quick tour of
 the command line, preferences, and tools.
->
+
 >**Looking for Release Notes?** [Get release notes for all versions here](release-notes.md).
 
 ## Download Docker for Mac
@@ -29,7 +29,7 @@ experimental mode. We recommend that you disable experimental features for
 apps in production.
 
 On both channels, we welcome your <a
-href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>)
+href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>
 to help us as the apps evolve.
 
 For more about Stable and Edge channels, see the
@@ -125,7 +125,7 @@ explanation and list of prerequisites.
 
 * **What the install includes**: The installation provides
   [Docker Engine](/engine/userguide/), Docker CLI client,
-  [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
+  [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 
 ## Install and Run Docker for Mac
 

@@ -16,7 +16,7 @@ Docker Hub users can publish new images.
 ### Creating and viewing organizations
 
 You can see which organizations you belong to and add new organizations by
-clicking "Organizations" in the top nav bar.
+clicking **Organizations** in the top nav bar.
 
 ![organizations](images/orgs.png)
 

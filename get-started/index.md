@@ -92,10 +92,10 @@ An **image** is a lightweight, stand-alone, executable package that includes
 everything needed to run a piece of software, including the code, a runtime,
 libraries, environment variables, and config files.
 
-A **container** is a runtime instance of an image -- what the image becomes in
-memory when actually executed. It runs completely isolated from the host
-environment by default, only accessing host files and ports if configured to
-do so.
+A **container** is a runtime instance of an image&#8212;what the image becomes
+in memory when actually executed. It runs completely isolated from the host
+environment by default, only accessing host files and ports if configured to do
+so.
 
 Containers run apps natively on the host machine's kernel. They have better
 performance characteristics than virtual machines that only get virtual access
@@ -111,21 +111,21 @@ Consider this diagram comparing virtual machines to containers:
 
 ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
 
-Virtual machines run guest operating systems -- note the OS layer in each box.
-This is resource intensive, and the resulting disk image and application state is
-an entanglement of OS settings, system-installed dependencies, OS security
-patches, and other easy-to-lose, hard-to-replicate ephemera.
+Virtual machines run guest operating systems&#8212;note the OS layer in each
+box. This is resource intensive, and the resulting disk image and application
+state is an entanglement of OS settings, system-installed dependencies, OS
+security patches, and other easy-to-lose, hard-to-replicate ephemera.
 
 ### Container diagram
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
 
 Containers can share a single kernel, and the only information that needs to be
-in a container image is the executable and its package dependencies, which
-never need to be installed on the host system. These processes run like native
+in a container image is the executable and its package dependencies, which never
+need to be installed on the host system. These processes run like native
 processes, and you can manage them individually by running commands like `docker
-ps` -- just like you would run `ps` on Linux to see active processes. Finally,
-because they contain all their dependencies, there is no configuration
+ps`&#8212;just like you would run `ps` on Linux to see active processes.
+Finally, because they contain all their dependencies, there is no configuration
 entanglement; a containerized app "runs anywhere."
 
 ## Setup
@@ -135,11 +135,11 @@ installed.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%; clear: left;"}
 <div style="clear:left"></div>
-> **Note** version 1.13 or higher is required
+> **Note**: version 1.13 or higher is required
 
 You should be able to run `docker run hello-world` and see a response like this:
 
-```
+```shell
 $ docker run hello-world
 
 Hello from Docker!
@@ -149,22 +149,23 @@ To generate this message, Docker took the following steps:
 ...(snipped)...
 ```
 
-Now would also be a good time to make sure you are using version 1.13 or higher
+Now would also be a good time to make sure you are using version 1.13 or higher. Run `docker --version` to check it out.
 
-```
+```shell
 $ docker --version
 Docker version 17.05.0-ce-rc1, build 2878a85
 ```
 
-If you see messages like the ones above, you're ready to begin the journey.
+If you see messages like the ones above, you are ready to begin your journey.
 
 ## Conclusion
 
 The unit of scale being an individual, portable executable has vast
-implications. It means that CI/CD can push updates to one part of a distributed
-application, system dependencies aren't a thing you worry about, resource
-density is increased, and orchestrating scaling behavior is a matter of spinning
-up new executables, not new VM hosts. We'll be learning about all of those
-things, but first let's learn to walk.
+implications. It means CI/CD can push updates to any part of a distributed
+application, system dependencies are not an issue, and resource density is
+increased. Orchestration of scaling behavior is a matter of spinning up new
+executables, not new VM hosts.
+
+We'll be learning about all of these things, but first let's learn to walk.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}

@@ -10,7 +10,6 @@ options:
   description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
 - option: change
   shorthand: c
-  default_value: '[]'
   description: Apply Dockerfile instruction to the created image
 - option: message
   shorthand: m

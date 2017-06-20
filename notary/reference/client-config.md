@@ -126,7 +126,7 @@ by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
 describes this validation flow:
 
 <center>
-![Trust pinning flow](../images/trust-pinning-flow.png)
+<img src="https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png"></img>
 </center>
 
 Only one trust pinning option will be used to validate a GUN even if multiple

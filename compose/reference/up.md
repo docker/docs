@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```
-Usage: up [options] [SERVICE...]
+Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
     -d                         Detached mode: Run containers in the background,
@@ -30,6 +30,8 @@ Options:
                                the Compose file
     --exit-code-from SERVICE   Return the exit code of the selected service container.
                                Implies --abort-on-container-exit.
+    --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
+                               setting in the Compose file if present.
 ```
 
 Builds, (re)creates, starts, and attaches to containers for a service.
@@ -48,3 +50,7 @@ flag.
 
 If you want to force Compose to stop and recreate all containers, use the
 `--force-recreate` flag.
+
+If the command encounters an error, it returns `1`.
+If user press `ctrl` + `C`, causing stop of the containers, it returns `0`.
+If user press `ctrl` + `C` two time, forcing kill of containers, it returns `2`.

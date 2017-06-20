@@ -4,11 +4,27 @@ keywords: docker, machine, cloud, digital ocean
 title: Digital Ocean example
 ---
 
-Follow along with this example to create a Dockerized <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> Droplet (cloud host).
+> Try out Docker Cloud!
+>
+> We suggest using [Docker Cloud](https://cloud.docker.com/) as the
+most up-to-date way to run Docker on your cloud providers. To get started, see
+[Docker Cloud docs home page](/docker-cloud/index.md), [Docker Cloud Settings
+and Docker ID](/docker-cloud/dockerid.md), and [Link a DigitalOcean account to
+Docker Cloud](/docker-cloud/infrastructure/link-do.md). If you are running Edge
+channel Docker for Mac or Windows, you can access your Docker Cloud account from
+those Docker desktop applications. See Docker Cloud (Edge feature) on
+[Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
+[Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
+>
+> Docker Machine will still work as described below, but Docker Cloud
+supercedes Machine for this purpose.
+{: .important-vanilla}
+
+Follow along with this example to create a Dockerized [Digital Ocean](https://digitalocean.com) Droplet (cloud host).
 
 ### Step 1. Create a Digital Ocean account
 
-If you have not done so already, go to <a href="https://digitalocean.com" target="_blank">Digital Ocean</a>, create an account, and log in.
+If you have not done so already, go to [Digital Ocean](https://digitalocean.com), create an account, and log in.
 
 ### Step 2. Generate a personal access token
 
@@ -70,7 +86,7 @@ To generate your access token:
         default          -        virtualbox     Running   tcp://192.168.99.100:2376
         docker-sandbox   *        digitalocean   Running   tcp://45.55.139.48:2376
 
-    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
+    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (\*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
 
 ### Step 4. Run Docker commands on the Droplet
 

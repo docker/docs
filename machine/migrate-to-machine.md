@@ -5,7 +5,7 @@ title: Migrate from Boot2Docker to Machine
 ---
 
 If you were using Boot2Docker previously, you have a pre-existing Docker
-`boot2docker-vm` VM on your local system.  To allow Docker Machine to manage
+`boot2docker-vm` VM on your local system. To allow Docker Machine to manage
 this older VM, you must migrate it.
 
 1.  Open a terminal or the Docker CLI on your system.
@@ -34,7 +34,7 @@ and what it does:
 | config        | inspect          | Prints machine configuration details.                                             |
 | status        | ls               | Lists all machines and their status.                                              |
 | info          | inspect          | Displays a machine's details.                                                     |
-| ip            | ip               | Displays the machine's ip address.                                                |
+| ip            | ip               | Displays the machine's IP address.                                                |
 | shellinit     | env              | Displays shell commands needed to configure your shell to interact with a machine |
 | delete        | rm               | Removes a machine.                                                                |
 | download      | -                | Not applicable.                                                                   |

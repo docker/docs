@@ -25,12 +25,12 @@ A: Two different download channels are available for Docker for Windows:
 * The **Stable channel** provides a general availability release-ready installer
   for a fully baked and tested, more reliable app. The Stable version of Docker
   for Windows comes with the latest released version of Docker Engine. The
-  release schedule is synched with Docker Engine releases and hotfixes.  On the
+  release schedule is synched with Docker Engine releases and hotfixes. On the
   Stable channel, you can select whether to send usage statistics and other data.
 
 * The **Edge channel** provides an installer with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the Edge
+  Docker Engine. Bugs, crashes, and issues are more likely to occur with the Edge
   app, but you get a chance to preview new functionality, experiment, and provide
   feedback as the apps evolve. Releases are typically more frequent than for
   Stable, often one or more per month. Usage statistics and crash reports are
@@ -123,6 +123,20 @@ See also [Docker Engine API](/engine/api.md) and the Docker for Windows forums
 topic
 [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
 
+### Can I change permissions on shared volumes for container-specific deployment requirements?
+
+No, at this point, Docker for Windows does not enable you to control (`chmod`)
+the Unix-style permissions on [shared
+volumes](/docker-for-windows/index.md#shared-drives) for deployed containers,
+but rather sets permissions to a default value of
+[0755](http://permissions-calculator.org/decode/0755/)
+(`read`, `write`, `execute` permissions for `user`, `read` and `execute`
+for `group`) which is not configurable.
+
+For workarounds and to learn more, please see [Permissions errors on data
+directories for shared
+volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+
 ### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
 Currently, `inotify` does not work on Docker for Windows. This is a known issue.
@@ -157,7 +171,7 @@ if an enterprise SSL certificate is trusted by the user on the host, it will be
 trusted by Docker for Windows.
 
 To learn more, see the GitHub issue [Allow user to add custom Certificate
-Authorities ](https://github.com/docker/for-win/issues/48).
+Authorities](https://github.com/docker/for-win/issues/48).
 
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
@@ -182,7 +196,7 @@ Started topic.
 
 To learn more about using Docker for Windows and Docker Machine, see
 [What to know before you install](install.md#what-to-know-before-you-install) in the Getting Started topic. For more about Docker Machine itself, see
-[What is Docker Machine?](/machine/overview.md#what-is-docker-machine)
+[What is Docker Machine?](/machine/overview.md#what-is-docker-machine), and the [Hyper-V driver](/machine/drivers/hyper-v.md) for Docker Machine.
 
 ### How do I run Windows containers on Docker on Windows Server 2016?
 
@@ -207,7 +221,7 @@ Windows to work.
 ### Why does Docker for Windows fail to start when firewalls or anti-virus software is installed?
 
 Some firewalls and anti-virus software might be incompatible with Hyper-V and
-some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker
+some Windows 10 builds (possibly, the Anniversary Update), which impacts Docker
 for Windows. See details and workarounds in
 [Docker fails to start when firewall or anti-virus software is installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
 in [Troubleshooting](/docker-for-windows/troubleshoot.md).

@@ -40,7 +40,7 @@ this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
 
 If you have subscribed to a webhook (see [Manage webhooks](../create-and-manage-webhooks.md))
-for scan completed/scan failed, then you will received the results of the scan
+for scan completed/scan failed, then you will receive the results of the scan
 as a json to the specified endpoint.
 
 Most scans complete within an hour, however larger repositories may take longer
@@ -103,6 +103,7 @@ The **Images** tab for each repository includes a summary of the most recent
 scan results for each image.
 
 ![](../../images/scanning-images-4.png){: .with-border}
+
 - A green shield icon with a check mark indicates that the scan did not find
 any vulnerabilities.
 - A red or orange shield icon indicates that vulnerabilities were found, and
@@ -163,7 +164,7 @@ equivalent, less vulnerable base layer. You might also decide that the
 vulnerability or exposure is acceptable.
 
 Address vulnerabilities in your repositories by updating the images to use
-updated and corrected versions of vulnerable components, or by using a different
+updated and corrected versions of vulnerable components, or by using different
 components that provide the same functionality. When you have updated the source
 code, run a build to create a new image, tag the image, and push the updated
 image to your DTR instance. You can then re-scan the image to confirm that you

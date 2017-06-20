@@ -145,6 +145,22 @@ configure this app to use our SQL Server database, and then create a
     }
     [...]
     ```
+    
+1.  Go to `app.csproj`. You will find a line like:
+
+    ```
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" />
+    ```
+
+    The generated project uses sqlite by default. To use SQL Server, add this line to
+    `app.csproj`:
+
+    ```
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
+    ```
+    
+    The Sqlite dependency was at version 1.1.2 at the time of this writing. Use the same
+    version for the SQL Server dependency.
 
 1.  Ready! You can now run the `docker-compose build` command.
 

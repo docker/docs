@@ -1,0 +1,3 @@
+{% if include.tocToGenerate=="library"%}{% for thisPage in site.pages %}{% if thisPage.url contains "/samples/" and thisPage.url != "/samples/" %}
+<li><a href="{{ thisPage.url}}"{% if page.url==thisPage.url %}{% assign topicFound="true" %} class="active currentPage"{% endif %}>{{ thisPage.title }}</a></li>
+{% endif %}{% endfor %}{% endif %}

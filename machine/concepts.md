@@ -8,7 +8,7 @@ Docker Machine allows you to provision Docker machines in a variety of environme
 
 ## Drivers for creating machines
 
-To create a virtual machine, you supply Docker Machine with the name of the driver you want use. The driver determines where the virtual machine is created. For example, on a local Mac or Windows system, the driver is typically Oracle VirtualBox. For provisioning physical machines, a generic driver is provided. For cloud providers, Docker Machine supports drivers such as AWS, Microsoft Azure, Digital Ocean, and many more. The Docker Machine reference includes a complete [list of supported drivers](drivers/index.md).
+To create a virtual machine, you supply Docker Machine with the name of the driver you want to use. The driver determines where the virtual machine is created. For example, on a local Mac or Windows system, the driver is typically Oracle VirtualBox. For provisioning physical machines, a generic driver is provided. For cloud providers, Docker Machine supports drivers such as AWS, Microsoft Azure, Digital Ocean, and many more. The Docker Machine reference includes a complete [list of supported drivers](drivers/index.md).
 
 ## Default base operating systems for local and cloud hosts
 
@@ -54,18 +54,18 @@ exit
 docker-machine restart
 ```
 
-## Crash Reporting
+## Crash reporting
 
 Provisioning a host is a complex matter that can fail for a lot of reasons. Your
 workstation may have a wide variety of shell, network configuration, VPN, proxy
-or firewall issues.  There are also reasons from the other end of the chain:
+or firewall issues. There are also reasons from the other end of the chain:
 your cloud provider or the network in between.
 
 To help `docker-machine` be as stable as possible, we added a monitoring of
 crashes whenever you try to `create` or `upgrade` a host. This will send, over
 HTTPS, to Bugsnag some information about your `docker-machine` version, build,
 OS, ARCH, the path to your current shell and, the history of the last command as
-you could see it with a `--debug` option.  This data is sent to help us pinpoint
+you could see it with a `--debug` option. This data is sent to help us pinpoint
 recurring issues with `docker-machine` and will only be transmitted in the case
 of a crash of `docker-machine`.
 

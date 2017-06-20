@@ -31,7 +31,7 @@ A: Two different download channels are available for Docker for Mac:
 
 * The **Edge channel** provides an installer with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the Edge
+  Docker Engine. Bugs, crashes, and issues are more likely to occur with the Edge
   app, but you get a chance to preview new functionality, experiment, and provide
   feedback as the apps evolve. Releases are typically more frequent than for
   Stable, often one or more per month. Usage statistics and crash reports are sent
@@ -152,7 +152,7 @@ under
 [Known Limitations, Use Cases, and Workarounds](networking.md#known-limitations-use-cases-and-workarounds)
 in the Networking topic.
 
-### How do I to connect to a container from the Mac?
+### How do I connect to a container from the Mac?
 
 Our current recommendation is to publish a port, or to connect from another
 container. Note that this is what you have to do even on Linux if the container
@@ -202,7 +202,7 @@ removing unneeded containers and images with the following commands:
 - `docker ps -a`: list all containers
 - `docker image ls`: list all images
 - `docker system prune`: (new in 1.13): deletes all stopped containers, all
-  volumes not used by at least one container and all images without at least one
+  volumes not used by at least one container, and all images without at least one
   referring container.
 
 Note the `Docker.qcow2` will not shrink in size immediately.

@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: mac, beta, alpha, tutorial
+keywords: mac, beta, edge, alpha, tutorial
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -10,7 +10,10 @@ redirect_from:
 - /installation/mac/
 - /engine/installation/mac/
 - /docker-for-mac/index/
+- /docker-for-mac/osx/
 title: Get started with Docker for Mac
+toc_max: 4
+toc_min: 1
 ---
 
 Welcome to Docker for Mac!
@@ -18,10 +21,10 @@ Welcome to Docker for Mac!
 Docker is a full development platform for creating containerized apps, and
 Docker for Mac is the best way to get started with Docker on a Mac.
 
-> **Got Docker for Mac?** If you have not yet installed Docker for Mac, please see [Install Docker for Mac](install.md) for an explanation of stable and beta
+> **Got Docker for Mac?** If you have not yet installed Docker for Mac, please see [Install Docker for Mac](install.md) for an explanation of stable and edge
 channels, system requirements, and download/install information.
->
-**Looking for system requirements?** Check out
+
+>**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
@@ -131,6 +134,16 @@ You can set the following runtime options.
   Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
   more information in some cases, even with auto-send enabled.
 
+#### Choose whether to store Docker credentials on Mac keychain (Edge feature)
+
+In current Edge releases, you have an additonal option to **Securely store
+Docker logins in MacOS keychain**. This is enabled by default, and on Stable
+releases you have no option to disable it. So the effect of this is that on Edge
+releases, you can "opt out" of storing your Docker login credentials by
+disabling this.
+
+![Opt in or out of storing credentials in keychain](images/settings-edge.png)
+
 ### File sharing
 
 You can decide which directories on your Mac to share with containers.
@@ -177,19 +190,18 @@ the total available memory on your Mac. You can increase the RAM on the app to
 get faster performance by setting this number higher (for example to `3`) or
 lower (to `1`) if you want Docker for Mac to use less memory.
 
-#### Storage location
+#### Disk image location (storage)
 
-You can specify the **storage location** of the Linux volume; i.e., where
+You can specify the **Disk image location** of the Linux volume; i.e., where
 containers and images are stored.
 
-##### Disk image location (Beta)
+You can move the disk image location.
 
-Starting with Beta 39, _storage image_ is referred to as _disk image_, and is tracked by the app.  If you attempt to move the disk image to a location that already has one, you will get a prompt asking if you want to use the existing image or replace it. For Beta releases going forward, the labels on this dialog were updated as follows.
+If you attempt to move the disk image to a location that
+already has one, you will get a prompt asking if you want to use the existing
+image or replace it.
 
-*  **Storage location** is renamed to **Disk image location**
-*  **Change location** button is renamed to **move disk image**
-
-![Beta Advanced settings](images/settings-advanced-beta.png)
+![Advanced settings](images/settings-advanced-beta.png)
 
 ### HTTP proxy settings
 
@@ -219,18 +231,18 @@ some of the common settings to make it easier to configure them.
 
 #### Experimental mode
 
-Starting with Stable 1.13.0 and Beta 31, both Docker for Mac Stable and Beta
-releases have experimental features enabled on Docker Engine, as described in
-the [Docker Experimental Features
-README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
+Both Docker for Mac Stable and Edge releases have experimental features enabled
+on Docker Engine, as described in the [Docker Experimental Features
+README](https://github.com/moby/moby/blob/master/experimental/README.md) on
+GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
 experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Betas, and never released
-on Stable.
+others may be modified or pulled from subsequent Edge releases, and never
+released on Stable.
 
-On both Beta and Stable releases, you can toggle **experimental mode** on and
+On both Edge and Stable releases, you can toggle **experimental mode** on and
 off. If you toggle it off, Docker for Mac uses the current generally available
 release of Docker Engine.
 
@@ -307,6 +319,18 @@ Docker uninstalled successfully. You can move the Docker application to the tras
 You might want to use the command-line uninstall if, for example, you find that
 the app is non-functional, and you cannot uninstall it from the menu.
 
+### Reset Docker data (Edge feature)
+
+In current Edge releases, you have an additonal reset option to **Remove all
+data**.
+
+This option removes/resets all Docker data _without_ a reset to factory defaults
+(which would cause you to lose settings). This is an update per Edge release
+17.06.0-rc1-ce-mac13, and fixes [Docker for Mac issue
+1309](https://github.com/docker/for-mac/issues/1309)).
+
+![Uninstall or reset Docker Edge features](images/settings-uninstall-edge.png)
+
 ## Installing bash completion
 
 If you are using
@@ -340,8 +364,8 @@ To report bugs or problems, log on to [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues), where you can review
 community reported issues, and file new ones. See [Diagnose problems, send
 feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
-As a part of reporting issues on GitHub, we can help you troubleshoot the log
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As a part of reporting issues on GitHub, we can help you troubleshoot
+the log
 data.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
@@ -360,9 +384,13 @@ distributed as Docker Images.
 
 ## Docker Cloud (Edge feature)
 
->**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-mac). On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
+>**Note:** Integrated Docker Cloud access is currently available only on
+the [Edge channel](install.md#download-docker-for-mac). On stable, you'll
+need to log onto [Docker Cloud](https://cloud.docker.com/) independently
+for now.
 
-You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Mac.
+You can access your [Docker Cloud](/docker-cloud/index.md) account from within
+Docker for Mac.
 
 ![Docker Cloud](images/docker-cloud.png)
 

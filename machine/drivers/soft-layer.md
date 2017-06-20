@@ -7,7 +7,7 @@ title: IBM Softlayer
 Create machines on [Softlayer](http://softlayer.com).
 
 You need to generate an API key in the softlayer control panel.
-[Retrieve your API key](http://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key)
+[Retrieve your API key](http://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
 
 ## Usage
 
@@ -17,7 +17,7 @@ You need to generate an API key in the softlayer control panel.
 
 -   `--softlayer-memory`: Memory for host in MB.
 -   `--softlayer-disk-size`: A value of `0` will set the SoftLayer default.
--   `--softlayer-user`: **required** Username for your SoftLayer account, api key needs to match this user.
+-   `--softlayer-user`: **required** Username for your SoftLayer account, API key needs to match this user.
 -   `--softlayer-api-key`: **required** API key for your user account.
 -   `--softlayer-region`: SoftLayer region.
 -   `--softlayer-cpu`: Number of CPUs for the machine.

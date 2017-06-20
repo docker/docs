@@ -1,0 +1,22 @@
+---
+layout: docs
+toc_min: 1
+noratings: true
+---
+{% capture fileToUse %}{% if page.file %}{{ page.file }}{% else %}README.md{% endif %}{% endcapture %}
+{% capture ghrepo %}{% include_relative library/{{ page.repo }}/github-repo %}{% endcapture %}
+{% capture markdowncontent %}
+{% include_relative library/{{ page.repo }}/README-short.txt %}
+
+GitHub repo: [{{ ghrepo | strip }}]({{ ghrepo | strip}}){: target="_blank"}
+
+> **Library reference**
+>
+> This content is imported from
+> [the official Docker Library docs](https://github.com/docker-library/docs/tree/master/{{ page.repo}}/),
+> and is provided by the original uploader. You can view the Docker Store page for this repo at
+> [https://store.docker.com/images/{{ page.repo }}](https://store.docker.com/images/{{ page.repo }}).
+
+{% include_relative library/{{ page.repo }}/{{ fileToUse }} %}
+{% endcapture %}
+{{ markdowncontent | markdownify }}

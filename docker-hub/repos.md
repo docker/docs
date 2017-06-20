@@ -88,7 +88,7 @@ In order to push a repository to the Docker Hub, you need to
 name your local image using your Docker Hub username, and the
 repository name that you created in the previous step.
 You can add multiple images to a repository, by adding a specific `:<tag>` to
-it (for example `docs/base:testing`). If its not specified, the tag defaults to
+it (for example `docs/base:testing`). If it's not specified, the tag defaults to
 `latest`.
 You can name your local images either when you build it, using
 `docker build -t <hub-user>/<repo-name>[:<tag>]`,
@@ -146,7 +146,7 @@ your [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
 
-> *Note:* You need to be signed in and have access to work with a
+> **Note**: You need to be signed in and have access to work with a
 > private repository.
 
 Private repositories are just like public ones. However, it isn't possible to
@@ -240,7 +240,7 @@ To help you debug or simply view the results of your webhook(s), view the
 
 The following parameters are recognized in callback data:
 
-* `state` (required): Accepted values are `success`, `failure` and `error`.
+* `state` (required): Accepted values are `success`, `failure`, and `error`.
   If the state isn't `success`, the webhook chain will be interrupted.
 * `description`: A string containing miscellaneous information that will be
   available on the Docker Hub. Maximum 255 characters.

@@ -140,8 +140,8 @@ Volume mounting requires shared drives for projects that live outside of the
 ### Recreate or update your containers after Beta 18 upgrade
 
 Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
-RC3. (For more information, see
-https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
+RC3. (For more information, see [https://github.com/moby/moby/issues/24343#issuecomment-230623542]
+(https://github.com/moby/moby/issues/24343#issuecomment-230623542).)
 
 You may get the following error when you try to start a container created with
 pre-Beta 18 Docker for Mac applications.
@@ -189,7 +189,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note**:  Be sure to quit and then restart Docker for Mac before attempting to start containers.
+	> **Note**: Be sure to quit and then restart Docker for Mac before attempting to start containers.
 
 4. Try to start the container again:
 
@@ -279,7 +279,7 @@ ${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
 is showing in the menu bar, and that you run the Docker commands in a shell that
 is connected to the Docker for Mac Engine (not Engine from Toolbox). Otherwise,
 you might start the webserver container but get a "web page not available" error
-when you go to `localhost`.  For more on distinguishing between the two
+when you go to `localhost`. For more on distinguishing between the two
 environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 <p></p>
@@ -335,8 +335,8 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 <a name="bind-mounted-dirs"></a>
 
 * There are a number of issues with the performance of directories
-  bind-mounted with `osxfs`.  In particular, writes of small blocks, and
-  traversals of large directories are currently slow.  Additionally,
+  bind-mounted with `osxfs`. In particular, writes of small blocks, and
+  traversals of large directories are currently slow. Additionally,
   containers that perform large numbers of directory operations, such as
   repeated scans of large directory trees, may suffer from poor
   performance. Applications that behave in this way include:

@@ -20,7 +20,24 @@ compatibility, and [how to upgrade](#upgrading).
 
 ## Compatibility matrix
 
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
+
 {% include content/compose-matrix.md %}
+
+> Looking for more detail on Docker and Compose compatibility?
+>
+> We recommend keeping up-to-date with newer releases as much as possible.
+However, if you are using an older version of Docker and want to determine which
+Compose release is compatible, please refer to the [Compose release
+notes](https://github.com/docker/compose/releases/). Each set of release notes
+gives details on which versions of Docker Engine are supported, along
+with compatible Compose file format versions. (See also, the discussion in
+[issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
+{: .note-vanilla}
+
+For details on versions and how to upgrade, see
+[Versioning](compose-versioning.md#versioning) and
+[Upgrading](compose-versioning.md#upgrading).
 
 ## Versioning
 
@@ -182,6 +199,18 @@ Introduces the following additional parameters:
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
+- [`pids_limit`](compose-file-v2.md#pidslimit)
+
+### Version 2.2
+
+An upgrade of [version 2.1](#version-21) that introduces new parameters only
+available with Docker Engine version **1.13.0+**. This version also allows
+to specify default scale numbers inside the service's configuration.
+
+Introduces the following additional parameters:
+
+- [`init`](compose-file-v2.md#init)
+- [`scale`](compose-file-v2.md#scale)
 
 ### Version 3
 
@@ -229,6 +258,9 @@ several options have been removed:
 
 -   `extends`: This option has been removed for `version: "3.x"` Compose files.
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
+-   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
+-   `link_local_ips` in `networks`: This option has not been introduced in
+    `version: "3.x"` Compose files.
 
 ### Version 1 to 2.x
 

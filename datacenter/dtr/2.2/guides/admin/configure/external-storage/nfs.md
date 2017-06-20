@@ -44,9 +44,9 @@ configuration, so you don't need to specify it again.
 ### Reconfigure DTR to use NFS
 
 If you're upgrading from a previous version of DTR and are already using
-NFS you can continue using the same configurations.
+NFS, you can continue using the same configurations.
 
-If you want to start using the new DTR built-in support for NFS you can
+If you want to start using the new DTR built-in support for NFS, you can
 reconfigure DTR:
 
 ```none

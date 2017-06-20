@@ -53,4 +53,3 @@ stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the
 [Docker credential helpers](https://github.com/moby/moby-credential-helpers).
 {:.warning}
->>>>>>> Update index.md

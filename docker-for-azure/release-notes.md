@@ -49,10 +49,19 @@ Release date: 1/18/2017
 
 ## Edge Channel
 
-### 17.04.0-edge CE
-Release date: 04/06/2017
+### 17.05.0-edge CE
+
+Release date: 05/08/2017
 
 {{azure_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.05.0 CE](https://github.com/moby/moby/releases/tag/v17.05.0-ce)
+
+### 17.04.0-edge CE
+
+Release date: 04/06/2017
 
 **New**
 
@@ -60,6 +69,7 @@ Release date: 04/06/2017
 - Fixed bugs in the way container logs are uploaded to File Storage in the storage account for logs
 
 ### 17.03.0-edge CE
+
 Release date: 03/01/2017
 
 **New**

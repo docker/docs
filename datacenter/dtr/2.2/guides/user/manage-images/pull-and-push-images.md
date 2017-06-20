@@ -4,7 +4,7 @@ description: Learn how to pull and push images to Docker Trusted Registry.
 keywords: docker, registry, push, pull
 ---
 
-You interact with Docker Trusted registry in the same way you interact with
+You interact with Docker Trusted Registry in the same way you interact with
 Docker Hub or any other registry:
 
 * `docker login <dtr-url>`: authenticates you on DTR
@@ -35,13 +35,13 @@ $ docker pull dtr.local:4443/admin/golang:1.7
 
 ## Push an image
 
-Before you can push an image to DTR you need to [create a repository](index.md)
+Before you can push an image to DTR, you need to [create a repository](index.md)
 to store the image. In this example the full name of our repository is
 `dtr.local/admin/golang`.
 
 ### Tag the image
 
-In this example we'll pull the Golang image from Docker Hub and tag with with
+In this example we'll pull the Golang image from Docker Hub and tag with
 the full DTR and repository name. A tag defines where the image was pulled
 from, and where it will be pushed to.
 

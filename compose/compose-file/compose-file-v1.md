@@ -8,12 +8,18 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 1 of the Compose file format. This is the oldest
 version.
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
-versions and upgrading, see
-[Compose file versions and upgrading](compose-versioning.md).
+## Compose and Docker compatibility matrix
+
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+table below is a quick look. For full details on what each version includes and
+how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+
+{% include content/compose-matrix.md %}
 
 ## Service configuration reference
 
@@ -43,12 +49,16 @@ context.
 
     build: ./dir
 
-> **Note**: In the [version 1 file format](compose-versioning.md#version-1), `build` is different in
-> two ways:
+> **Notes**
 >
-> 1.   Only the string form (`build: .`) is allowed - not the object form that is allowed in Version 2 and up.
-> 2.   Using `build` together with [`image`](#image) is not allowed. Attempting to do so
->     results in an error.
+> In [version 1 file format](compose-versioning.md#version-1),
+`build` is  different in two ways:
+>
+>*  Only the string form (`build: .`) is allowed - not the object
+>   form that is allowed in Version 2 and up.
+> * Using `build` together with [`image`](#image) is not allowed.
+Attempting to do so results in an error.
+{: .note-vanilla}
 
 #### dockerfile
 
@@ -60,12 +70,13 @@ specified.
       build: .
       dockerfile: Dockerfile-alternate
 
-> **Note**: In the [version 1 file format](compose-versioning.md#version-1), `dockerfile` is
-> different from newer versions in two ways:
+> **Note**
 >
->  1.  It appears alongside `build`, not as a sub-option:
+> In the [version 1 file format](compose-versioning.md#version-1), `dockerfile` is different from newer versions in two ways:
 >
->  2.  Using `dockerfile` together with [`image`](#image) is not allowed. Attempting to do so results in an error.
+>* It appears alongside `build`, not as a sub-option:
+>
+>*  Using `dockerfile` together with [`image`](#image) is not allowed. Attempting to do so results in an error.
 
 ### cap_add, cap_drop
 
@@ -92,7 +103,7 @@ Override the default command.
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 
-    command: [bundle, exec, thin, -p, 3000]
+    command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 

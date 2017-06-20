@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: windows, beta, alpha, tutorial
+keywords: windows, beta, edge, alpha, tutorial
 redirect_from:
 - /winkit/getting-started/
 - /winkit/
@@ -11,6 +11,8 @@ redirect_from:
 - /engine/installation/windows/
 - /docker-for-windows/index/
 title: Get started with Docker for Windows
+toc_max: 4
+toc_min: 1
 ---
 Welcome to Docker for Windows!
 
@@ -19,9 +21,9 @@ Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
 > **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
-and beta channels, system requirements, and download/install information.
->
-**Looking for system requirements?** Check out
+and edge channels, system requirements, and download/install information.
+
+>**Looking for system requirements?** Check out
 [What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
@@ -56,7 +58,7 @@ The next few steps take you through some examples. These are just suggestions fo
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     ```
 
-    Here is an example of command output for  `docker version`.
+    Here is an example of command output for `docker version`.
 
     ```none
     PS C:\Users\Docker> docker version
@@ -78,7 +80,7 @@ The next few steps take you through some examples. These are just suggestions fo
     Experimental: true
     ```
 
-    Here is an example of command output for  `docker info`.
+    Here is an example of command output for `docker info`.
 
     ```none
     PS C:\Users\Docker> docker info
@@ -240,7 +242,7 @@ PowerShell Module as follows.
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
     ![Run PowerShell as administrator](/docker-for-windows/images/PowerShell-as-admin.png)
-    
+
     When asked if you want to allow this app to make changes to your device,
     click **Yes**.
 
@@ -249,29 +251,35 @@ PowerShell Module as follows.
     to allow downloaded scripts signed by trusted publishers to run on your
     computer. To do so, type this at the PowerShell prompt.
 
-    ```none
+    ```ps
     Set-ExecutionPolicy RemoteSigned
     ```
 
     To check that the policy is set properly, run `get-executionpolicy`, which
     should return `RemoteSigned`.
 
-3.  To install auto-completion of commands for PowerShell, type:
+3.  To install the `posh-docker` PowerShell module for auto-completion of Docker commands, type:
 
-    ```none
+    ```ps
     Install-Module posh-docker
+    ```
+
+    Or, to install the module for the current user only, type:
+
+    ```ps
+    Install-Module -Scope CurrentUser posh-docker
     ```
 
 4.  After installation to enable autocompletion for the current PowerShell only, type:
 
-    ```none
+    ```ps
     Import-Module posh-docker
     ```
 
 5.  To make tab completion persistent across all PowerShell sessions, add the
     command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
-    ```none
+    ```ps
     if (-Not (Test-Path $PROFILE)) {
         New-Item $PROFILE –Type File –Force
     }
@@ -282,20 +290,20 @@ PowerShell Module as follows.
     This creates a `$PROFILE` if one does not already exist, and adds this line
     into the file:
 
-    ```none
+    ```ps
     Import-Module posh-docker
     ```
 
     To check that the file was properly created, or simply edit it manually,
     type this in PowerShell:
 
-    ```none
+    ```ps
     Notepad $PROFILE
     ```
 
-Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
-as `start`, `stop`, `run`, and their options, along with container and image
-names should now auto-complete.
+Open a new PowerShell session. Now, when you press tab after typing the first
+few letters, Docker commands such as `start`, `stop`, `run`, and their options,
+along with container and image names should now auto-complete.
 
 ## Docker Settings
 
@@ -303,12 +311,15 @@ When Docker is running, the Docker whale is displayed. By default, the Docker
 whale icon is placed in the Notifications area. If it is hidden, click the up
 arrow on the taskbar to show it.
 
->**Tip**: You can pin the whale outside of the notification box so that it is
-always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
-right-click an empty portion of the taskbar, select Settings, and choose
-display options through taskbar settings for notifications.
+> You can dock the whale on the taskbar so it is always visible
 >
-![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+> You can pin the whale outside of the notification box so that it is
+  always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
+  right-click an empty portion of the taskbar, select Settings, and choose
+  display options through taskbar settings for notifications.
+>
+> ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
+{: .note-vanilla}
 
 ![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
 
@@ -361,38 +372,75 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
-> **Tip**: Shared drives are only required for volume mounting
-> [Linux containers](#switch-between-windows-and-linux-containers), and not for
-> Windows containers. For Linux containers, you need to share the drive where
-> your project is located (i.e., where the Dockerfile and volume are located).
-> Runtime errors such as file not found or cannot start service may indicate
-> shared drives are needed. (See also
-> [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
-
-See also
-[Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
-in Troubleshooting.
-
-> **Note**: You can share local drives with your _containers_ but not with
-> Docker Machine nodes. See
-> [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
-> in the FAQs.
+> Tips on shared drives, permissions, and volume mounts
+>
+ * Shared drives are only required for volume mounting
+ [Linux containers](#switch-between-windows-and-linux-containers), not for
+ Windows containers. For Linux containers, you need to share the drive where
+ your project is located (i.e., where the Dockerfile and volume are located).
+ Runtime errors such as file not found or cannot start service may indicate
+ shared drives are needed. (See also
+ [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
+>
+* If possible, avoid volume mounts from the Windows host, and instead  mount on
+the MobyVM, or use a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+There are a number of issues with using host-mounted volumes and network paths
+for database files. Please see the troubleshooting topic on [Volume mounts from
+host paths use a nobrl option to override database
+locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+>
+ * You cannot control (`chmod`) permissions on shared volumes for
+deployed containers. Docker for Windows sets permissions to a default value of
+[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
+`execute` permissions for `user`, `read` and `execute` for `group`). This is not
+configurable. See the troubleshooting topic [Permissions errors on data
+directories for shared
+volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) for workarounds and more detail.
+>
+ * Make sure that the domain user has permissions to shared drives,
+ as described in the troubleshooting topic ([Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)).
+>
+ * You can share local drives with your _containers_ but not with Docker Machine
+nodes. See [Can I share local drives and filesystem with my Docker Machine
+VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms) in the FAQs.
+>
+{: .note-vanilla}
 
 #### Firewall rules for shared drives
 
 Shared drives require port 445 to be open between the host machine and the virtual
 machine that runs Linux containers.
 
-> **Note**: In Docker for Windows Beta 29 and higher,
-> Docker detects if port 445 is closed and shows the following message when you
-> try to add a shared drive:
-> ![Port 445 blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
-
+> **Note**: Docker detects if port 445 is closed and shows
+the following message when you try to add a shared drive: ![Port 445
+blocked](/docker-for-windows/images/drive_sharing_firewall_blocked.png)
 
 To share the drive, allow connections between the Windows host machine and the
 virtual machine in Windows Firewall or your third party firewall software. You
 do not need to open port 445 on any other network. By default, allow connections
 to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
+If the firewall rules appear to be open, consider [reinstalling the File and
+Print Sharing service on the virtual network
+adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
+
+#### Shared drives on demand (Edge feature)
+
+On current Edge releases, sharing a drive can be done "on demand", the first
+time a particular mount is requested.
+
+If you run a Docker command from a shell with a volume mount (as shown in the
+example below) or kick off a Compose file that includes volume mounts, you get a
+popup asking if you want to share the specified drive.
+
+You can select to **Share it**, in which case it is added your Docker for
+Windows [Shared Drives list](/docker-for-windows/index.md#shared-drives) and
+available to containers. Alternatively, you can opt not to share it by hitting
+Cancel.
+
+![ ](/docker-for-windows/images/shared-drive-on-demand.png)
 
 ### Advanced
 
@@ -433,7 +481,7 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
-```none
+```ps
 PS C:\Users\jdoe> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
@@ -444,9 +492,9 @@ http_proxy=http://proxy.example.com:3128
 no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 <p id="daemon-experimental-mode" />
 ### Docker daemon
@@ -466,17 +514,18 @@ some of the common settings to make it easier to configure them.
 
 #### Experimental mode
 
-Starting with Stable 1.13.0 and Beta 34, both Docker for Windows Stable and Beta
-releases have the experimental version of Docker Engine enabled, described
-in the [Docker Experimental Features README](https://github.com/moby/moby/blob/master/experimental/README.md) on GitHub.
+Both Docker for Windows Stable and Edge releases have the experimental version
+of Docker Engine enabled, described in the [Docker Experimental Features
+README](https://github.com/moby/moby/blob/master/experimental/README.md) on
+GitHub.
 
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
 experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Betas, and never released
-on Stable.
+others may be modified or pulled from subsequent Edge releases, and never
+released on Stable.
 
-On both Beta and Stable releases, you can toggle **experimental mode** on and
+On both Edge and Stable releases, you can toggle **experimental mode** on and
 off. If you toggle it off, Docker for Windows uses the current generally
 available release of Docker Engine.
 
@@ -507,13 +556,13 @@ Server:
 
 #### Custom registries
 
-Also starting with with Beta 34 and Stable 1.13.0, you can set up your own
-[registries](/registry/introduction.md) on the **Basic** Daemon settings.
+You can set up your own [registries](/registry/introduction.md) on the **Basic**
+Daemon settings.
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up your
-own insecure [registry](/registry/introduction.md). Add URLs for insecure
+Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
+your own insecure [registry](/registry/introduction.md). Add URLs for insecure
 registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
 the FAQs.)
@@ -580,7 +629,7 @@ If you are interested in working with Windows containers, here are some guides t
 
   > **Disclaimer:** This lab is still in work, and is based off of the blog, but
   > you can test and leverage the example walkthroughs now, if you want to start
-  > experimenting. Please checking back as the lab evolves.
+  > experimenting. Please check back as the lab evolves.
 
 * This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
 [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
@@ -623,19 +672,24 @@ distributed as Docker Images.
 
 ### Docker Cloud (Edge feature)
 
-You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Windows.
+>**Note:** Integrated Docker Cloud access is currently available only on
+the [Edge channel](install.md#download-docker-for-windows).  On stable,
+you'll need to log onto [Docker Cloud](https://cloud.docker.com/)
+independently for now.
+
+You can access your [Docker Cloud](/docker-cloud/index.md) account from
+within Docker for Windows.
 
 ![Docker Cloud](images/docker-cloud.png)
-
->**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-windows).  On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
 
 From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
 or create one.
 
 ![Docker Cloud sign-in](images/docker-cloud-menu.png)
 
-Then use the Docker for Mac menu to create, view, or navigate directly to your
-Cloud resources, including **organizations**, **repositories**, and **swarms**.
+Then use the Docker for Windows menu to create, view, or navigate directly to
+your Cloud resources, including **organizations**, **repositories**, and
+**swarms**.
 
 Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 

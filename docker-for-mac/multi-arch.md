@@ -8,11 +8,11 @@ notoc: true
 ---
 
 Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
-containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`
+containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`,
 and even `s390x`.
 
 This should just work without any configuration, but the containers you run need
-to have the appropriate `qemu` binary inside the container before you can do
+to have the appropriate `qemu` binary inside before you can do
 this. (See <a href="http://wiki.qemu.org/" target="_blank">QEMU</a> for more
 information.)
 

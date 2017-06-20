@@ -1,251 +1,234 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
 keywords: 'container, storage, driver, AUFS '
-title: Docker and AUFS in practice
+title: Use the AUFS storage driver
 ---
 
-AUFS was the first storage driver in use with Docker. As a result, it has a
-long and close history with Docker, is very stable, has a lot of real-world
-deployments, and has strong community support. AUFS has several features that
-make it a good choice for Docker. These features enable:
+AUFS a *union filesystem*. The `aufs` storage driver is the default storage
+driver used for managing images and layers on Docker for Ubuntu, and for
+Debian versions prior to Stretch. For Debian Stretch,
+[overlay2](overlayfs-driver.md) is the default.
 
-- Fast container startup times.
-- Efficient use of storage.
-- Efficient use of memory.
+AUFS is the most mature storage driver used by Docker. It provides fast
+container startup time, as well as efficient usage of memory and storage.
 
-Despite its capabilities and long history with Docker, some Linux distributions
- do not support AUFS. This is usually because AUFS is not included in the
-mainline (upstream) Linux kernel.
+If your Linux kernel is version 4.0 or higher, and you use Docker CE, consider
+using the newer [overlay2](overlayfs-driver.md){: target="_blank" class="_" },
+which has potential performance advantages over the `aufs` storage driver.
 
-The following sections examine some AUFS features and how they relate to
-Docker.
+> **Note**: Even though AUFS is used by default if it is present in the Linux
+> kernel, it is not supported on some distributions and Docker editions. See
+> [Prerequisites](#prerequisites) > for more information about supported
+> platforms, and see also
+> [the order of preferences for storage drivers](selectadriver.md#storage-driver-order).
 
-## Image layering and sharing with AUFS
+## Prerequisites
 
-AUFS is a *unification filesystem*. This means that it takes multiple
-directories on a single Linux host, stacks them on top of each other, and
-provides a single unified view. To achieve this, AUFS uses a *union mount*.
+- For Docker CE, AUFS is supported on Ubuntu, and on Debian versions prior to
+  Stretch.
+- For Docker EE, AUFS is supported on Ubuntu.
+- If you use Ubuntu, you need to
+  [install extra packages](/engine/installation/linux/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
+  to add the AUFS module to the kernel. If you do not install these packages,
+  you will need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
+  or `overlay2` on Ubuntu 16.04 and higher, which is also supported.
+- AUFS cannot use the following backing filesystems: `aufs`, `btrfs`, or
+  `ecryptfs`. This means that the filesystem which contains
+  `/var/lib/docker/aufs` cannot be one of these filesystem types.
 
-AUFS stacks multiple directories and exposes them as a unified view through a
-single mount point. All of the directories in the stack, as well as the union
-mount point, must all exist on the same Linux host. AUFS refers to each
-directory that it stacks as a *branch*.
 
-Within Docker, AUFS union mounts enable image layering. The AUFS storage driver
- implements Docker image layers using this union mount system. AUFS branches
-correspond to Docker image layers. The diagram below shows a Docker container
-based on the `ubuntu:latest` image.
+## Configure Docker with the `aufs` storage driver
 
-![](images/aufs_layers.jpg)
+If the AUFS driver is loaded into the kernel when you start Docker, and no other
+storage driver is configured, Docker uses it by default.
 
-This diagram shows that each image layer, and the container layer, is
-represented in the Docker hosts filesystem as a directory under
-`/var/lib/docker/`. The union mount point provides the unified view of all
-layers. As of Docker 1.10, image layer IDs do not correspond to the names of
-the directories that contain their data.
+1.  Use the following command to verify that your kernel supports AUFS.
 
-AUFS also supports the copy-on-write technology (CoW). Not all storage drivers
-do.
+    ```bash
+    $ grep aufs /proc/filesystems
 
-## Container reads and writes with AUFS
+    nodev   aufs
+    ```
 
-Docker leverages AUFS CoW technology to enable image sharing and minimize the
-use of disk space. AUFS works at the file level. This means that all AUFS CoW
-operations copy entire files - even if only a small part of the file is being
-modified. This behavior can have a noticeable impact on container performance,
- especially if the files being copied are large, below a lot of image layers,
-or the CoW operation must search a deep directory tree.
+2.  Check which storage driver Docker is using.
 
-Consider, for example, an application running in a container needs to add a
-single new value to a large key-value store (file). If this is the first time
-the file is modified, it does not yet exist in the container's top writable
-layer. So, the CoW must *copy up* the file from the underlying image. The AUFS
-storage driver searches each image layer for the file. The search order is from
- top to bottom. When it is found, the entire file is *copied up* to the
-container's top writable layer. From there, it can be opened and modified.
+    ```bash
+    $ docker info
 
-Larger files obviously take longer to *copy up* than smaller files, and files
-that exist in lower image layers take longer to locate than those in higher
-layers. However, a *copy up* operation only occurs once per file on any given
-container. Subsequent reads and writes happen against the file's copy already
-*copied-up* to the container's top layer.
+    <truncated output>
+    Storage Driver: aufs
+     Root Dir: /var/lib/docker/aufs
+     Backing Filesystem: extfs
+     Dirs: 0
+     Dirperm1 Supported: true
+    <truncated output>
+    ```
 
-## Deleting files with the AUFS storage driver
+3.  If you are using a different storage driver, either AUFS is not included in
+    the kernel (in which case a different default driver will be used) or that
+    Docker has been explicitly configured to use a different driver. Check
+    `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
+    if Docker has been started with the `--storage-driver` flag.
 
-The AUFS storage driver deletes a file from a container by placing a *whiteout
-file* in the container's top layer. The whiteout file effectively obscures the
-existence of the file in the read-only image layers below. The simplified
-diagram below shows a container based on an image with three image layers.
 
-![](images/aufs_delete.jpg)
+## How the `aufs` storage driver works
 
-The `file3` was deleted from the container. So, the AUFS storage driver  placed
-a whiteout file in the container's top layer. This whiteout file effectively
-"deletes" `file3` from the container by obscuring any of the original file's
-existence in the image's read-only layers. This works the same no matter which
-of the image's read-only layers the file exists in.
+AUFS is a *union filesystem*, which means that it layers multiple directories on
+a single Linux host and presents them as a single directory. These directories
+are called _branches_ in AUFS terminology, and _layers_ in Docker terminology.
+The unification process is referred to a a _union mount_.
 
-## Renaming directories with the AUFS storage driver
+The diagram below shows a Docker container based on the `ubuntu:latest` image.
 
-Calling `rename(2)` for a directory is not fully supported on AUFS. It returns
-`EXDEV` ("cross-device link not permitted"), even when both of the source and
-the destination path are on a same AUFS layer, unless the directory has no
-children.
+![Layers of an Ubuntu container](images/aufs_layers.jpg)
 
-So your application has to be designed so that it can handle `EXDEV` and fall
-back to a "copy and unlink" strategy.
+Each image layer, and the container layer, are represented on the Docker host as
+subdirectories within `/var/lib/docker/`. The union mount provides the unified
+view of all layers. The directory names do not directly correspond to the IDs
+of the layers themselves.
 
-## Configure Docker with AUFS
+AUFS uses the Copy-on-Write (CoW) strategy to maximize storage efficiency and
+minimize overhead.
 
-### Prerequisites
+### Example: Image and container on-disk constructs
 
-You can only use the AUFS storage driver on Linux systems with AUFS installed.
-Use the following command to determine if your system supports AUFS.
+The following `docker pull` command shows a Docker host downloading a Docker
+image comprising five layers.
 
 ```bash
-$ grep aufs /proc/filesystems
+$ docker pull ubuntu
 
-nodev   aufs
+Using default tag: latest
+latest: Pulling from library/ubuntu
+b6f892c0043b: Pull complete
+55010f332b04: Pull complete
+2955fb827c94: Pull complete
+3deef3fcbd30: Pull complete
+cf9722e506aa: Pull complete
+Digest: sha256:382452f82a8bbd34443b2c727650af46aced0f94a44463c62a9848133ecb1aa8
+Status: Downloaded newer image for ubuntu:latest
 ```
 
-This output indicates the system supports AUFS. If you get no output, your system does
-not support AUFS. To address this:
+#### The image layers
 
-- Upgrade your host system's kernel to 3.13 or higher. It is recommended to install the
-  kernel headers when you upgrade.
+> **Warning**: Do not directly manipulate any files or directories within
+> `/var/lib/docker/`. These files and directories are managed by Docker.
 
-- **Ubuntu or Debian**: In addition to updating the kernel if necessary, install the
-  `linux-image-extra-*` packages:
-  
-  ```bash
-  $ sudo apt-get install linux-image-extra-$(uname -r) \
-                         linux-image-extra-virtual
-  ```
+All of the information about the image and container layers is stored in
+subdirectories of `/var/lib/docker/aufs/`.
 
-### Configuration
+- `diff/`: the **contents** of each layer, each stored in a separate
+  subdirectory
+- `layers/`: metadata about how image layers are stacked. This directory
+  contains one file for each image or container layer on the Docker host. Each
+  file contains the IDs of all the layers below it in the stack (its parents).
+- `mnt/`: Mount points, one per image or container layer, which are used to
+  assemble and mount the unified filesystem for a container. For images, which
+  are read-only, these directories will always be empty.
 
-When you have verified that you meet the prerequisites, instruct the Docker daemon to use
-AUFS by starting the Docker daemon with the flag `--storage-driver=aufs`:
+#### The container layer
 
-```bash
-$ sudo dockerd --storage-driver=aufs &
-```
+If a container is running, the contents of `/var/lib/docker/aufs/` change in the
+following ways:
 
-To make the change permanent, you can edit the Docker configuration file and add the
-`--storage-driver=aufs` option to the `DOCKER_OPTS` line.
+- `diff/`: Differences introduced in the writable container layer, such as new
+   or modified files.
+- `layers/`: Metadata about the writable container layer's parent layers.
+- `mnt/`: A mount point for each running container's unified filesystem, exactly
+  as it appears from within the container.
 
-```none
-# Use DOCKER_OPTS to modify the daemon startup options.
-DOCKER_OPTS="--storage-driver=aufs"
-```
+## How container reads and writes work with `aufs`
 
-After the daemon starts, verify the default storage driver using the `docker info`
-command:
+### Reading files
 
-```bash
-$ sudo docker info
+Consider three scenarios where a container opens a file for read access with
+overlay.
 
-Containers: 1
-Images: 4
-Storage Driver: aufs
- Root Dir: /var/lib/docker/aufs
- Backing Filesystem: extfs
- Dirs: 6
- Dirperm1 Supported: false
-Execution Driver: native-0.2
-...output truncated...
-```
+- **The file does not exist in the container layer**: If a container opens a
+  file for read access and the file does not already exist in the container
+  layer, the storage driver searches for the file in the image layers,
+  starting with the layer just below the container layer. It is read from the
+  layer where it is found.
 
-Look for the `Storage Driver` line. If its value is `aufs`, the Docker daemon is
-using the AUFS storage driver on top of the filesystem listed on the
-`Backing Filesystem` line.
+- **The file only exists in the container layer**: If a container opens a file
+  for read access and the file exists in the container layer, it is read from
+  there.
 
-## Local storage and AUFS
+- **The file exists in both the container layer and the image layer**: If a
+  container opens a file for read access and the file exists in the container
+  layer and one or more image layers, the file is read from the container layer.
+  Files in the container layer obscure files with the same name in the image
+  layers.
 
-As the `dockerd` runs with the AUFS driver, the driver stores images and
-containers within the Docker host's local storage area under
-`/var/lib/docker/aufs/`.
+### Modifying files or directories
 
-### Images
+Consider some scenarios where files in a container are modified.
 
-Image layers and their contents are stored under
-`/var/lib/docker/aufs/diff/`. With Docker 1.10 and higher, image layer IDs do
-not correspond to directory names.
+- **Writing to a file for the first time**: The first time a container writes
+  to an existing file, that file does not exist in the container (`upperdir`).
+  The `aufs` driver performs a *copy_up* operation to copy the file from the
+  image layer where it exists to the writable container layer. The container
+  then writes the changes to the new copy of the file in the container layer.
 
-The `/var/lib/docker/aufs/layers/` directory contains metadata about how image
-layers are stacked. This directory contains one file for every image or
-container layer on the Docker host (though file names no longer match image
-layer IDs). Inside each file are the names of the directories that exist below
-it in the stack.
+  However, AUFS works at the file level rather than the block level. This
+  means that all copy_up operations copy the entire file, even if the file is
+  very large and only a small part of it is being modified. This can have a
+  noticeable impact on container write performance. AUFS, which can suffer
+  noticeable latencies when searching for files in images with many layers.
+  However, it is worth noting that the copy_up operation only occurs the first
+  time a given file is written to. Subsequent writes to the same file operate
+  against the copy of the file already copied up to the container.
 
-The command below shows the contents of a metadata file in
-`/var/lib/docker/aufs/layers/` that lists the three directories that are
-stacked below it in the union mount. Remember, these directory names do no map
-to image layer IDs with Docker 1.10 and higher.
+- **Deleting files and directories**:
 
-    $ cat /var/lib/docker/aufs/layers/91e54dfb11794fad694460162bf0cb0a4fa710cfa3f60979c177d920813e267c
+  - When a _file_ is deleted within a container, a *whiteout* file is created
+    in the container layer. The version of the file in the image layer is not
+    deleted (because the image layers are read-only). However, the whiteout
+    file prevents it from being available to the container.
 
-    d74508fb6632491cea586a1fd7d748dfc5274cd6fdfedee309ecdcbc2bf5cb82
-    c22013c8472965aa5b62559f2b540cd440716ef149756e7b958a1b2aba421e87
-    d3a1f33e8a5a513092f01bb7eb1c2abf4d711e5105390a3fe1ae2248cfde1391
+  - When a _directory_ is deleted within a container, an _opaque file_ is
+    created in the container layer. This works in the same way as a
+    whiteout file and effectively prevents the directory from being accessed,
+    even though it still exists in the image layer.
 
-The base layer in an image has no image layers below it, so its file is empty.
-
-### Containers
-
-Running containers are mounted below `/var/lib/docker/aufs/mnt/<container-id>`.
- This is where the AUFS union mount point that exposes the container and all
-underlying image layers as a single unified view exists. If a container is not
-running, it still has a directory here but it is empty. This is because AUFS
-only mounts a container when it is running. With Docker 1.10 and higher,
- container IDs no longer correspond to directory names under
-`/var/lib/docker/aufs/mnt/<container-id>`.
-
-Container metadata and various config files that are placed into the running
-container are stored in `/var/lib/docker/containers/<container-id>`. Files in
-this directory exist for all containers on the system, including ones that are
-stopped. However, when a container is running the container's log files are
-also in this directory.
-
-A container's thin writable layer is stored in a directory under
-`/var/lib/docker/aufs/diff/`. With Docker 1.10 and higher, container IDs no
-longer correspond to directory names. However, the containers thin writable
-layer still exists here and is stacked by AUFS as the top writable layer
-and is where all changes to the container are stored. The directory exists even
- if the container is stopped. This means that restarting a container will not
-lose changes made to it. Once a container is deleted, its thin writable layer
-in this directory is deleted.
+- **Renaming directories**: Calling `rename(2)` for a directory is not fully
+  supported on AUFS. It returns `EXDEV` ("cross-device link not permitted"),
+  even when both of the source and the destination path are on a same AUFS
+  layer, unless the directory has no children. Your application needs to be
+  designed to handle `EXDEV` and fall back to a "copy and unlink" strategy.
 
 ## AUFS and Docker performance
 
 To summarize some of the performance related aspects already mentioned:
 
-- The AUFS storage driver is a good choice for PaaS and other similar use-cases
- where container density is important. This is because AUFS efficiently shares
-images between multiple running containers, enabling fast container start times
- and minimal use of disk space.
+- The AUFS storage driver is less performant than the `overlay2` driver, but is
+  a good choice for PaaS and other similar use-cases where container density is
+  important. This is because AUFS efficiently shares images between multiple
+  running containers, enabling fast container start times and minimal use of
+  disk space.
 
 - The underlying mechanics of how AUFS shares files between image layers and
-containers uses the systems page cache very efficiently.
+  containers uses the page cache very efficiently.
 
 - The AUFS storage driver can introduce significant latencies into container
-write performance. This is because the first time a container writes to any
-file, the file has to be located and copied into the containers top writable
-layer. These latencies increase and are compounded when these files exist below
- many image layers and the files themselves are large.
+  write performance. This is because the first time a container writes to any
+  file, the file has to be located and copied into the containers top writable
+  layer. These latencies increase and are compounded when these files exist below
+  many image layers and the files themselves are large.
 
-One final point. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur
-any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you may want to place heavy write workloads on
-data volumes.
+### Performance best practices
 
-## AUFS compatibility
+The following generic performance best practices also apply to AUFS.
 
-To summarize the AUFS's aspect which is incompatible with other filesystems:
+- **Solid State Devices (SSD)** provide faster reads and writes than spinning
+  disks.
 
-- The AUFS does not fully support the `rename(2)` system call. Your application
-needs to detect its failure and fall back to a "copy and unlink" strategy.
+- **Use volumes for write-heavy workloads**: Volumes provide the best and most
+  predictable performance for write-heavy workloads. This is because they bypass
+  the storage driver and do not incur any of the potential overheads introduced
+  by thin provisioning and copy-on-write. Volumes have other benefits, such as
+  allowing you to share data among containers and persisting even when no
+  running container is using them.
 
 ## Related information
 

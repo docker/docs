@@ -12,7 +12,6 @@ options:
   default_value: local
   description: Specify volume driver name
 - option: label
-  default_value: '[]'
   description: Set metadata for a volume
 - option: name
   description: Specify volume name

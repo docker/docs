@@ -21,9 +21,10 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 > driver. Hyper-V can share an external network interface (aka
 > bridging), see [this blog](http://blogs.technet.com/b/canitpro/archive/2014/03/11/step-by-step-enabling-hyper-v-for-use-on-windows-8-1.aspx).
 > If you would like to use NAT, create an internal network, and use
-> [Internet Connection  Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
+> [Internet Connection Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
 >
 > * This reference page includes an [example](hyper-v.md#example) that shows how to use an elevated (Administrator-level) PowerShell and how to create and use an external network switch.
+{: .note-vanilla}
 
 ## Usage
 
@@ -55,11 +56,11 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 1. Make sure Hyper-V is enabled
 
-  Hyper-V is automatically enabled on a Docker for Windows install. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
+ Hyper-V is automatically enabled on a Docker for Windows install. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
 
 #### 2. Set up a new external network switch (Optional)
 
-> **Note**: If you already have a external network switch you can skip this setup and use that one.
+> **Note**: If you already have an external network switch you can skip this setup and use that one.
 
 Make sure you have Ethernet connectivity while you are doing this.
 
@@ -126,7 +127,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
       PS C:\WINDOWS\system32>
       ```
 
-*   Use the same process, driver and network switch to create the other nodes.
+*   Use the same process, driver, and network switch to create the other nodes.
 
     For our example, the commands will look like this:
 

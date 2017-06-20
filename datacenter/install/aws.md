@@ -9,38 +9,9 @@ AWS. It deploys multiple nodes with Docker Enterprise Edition, and then installs
 highly available versions of Universal Control Plane and Docker Trusted
 Registry.
 
-![ddc_aws.svg](/images/ddc_aws.svg)
+## Prerequisites for deploying Docker EE for AWS
 
-## How it Works
-
-The solution uses an Amazon AWS CloudFormation template to create everything
-that you need from scratch. The template first starts off by creating a new VPC
-along with its subnets and security groups. Once the networking is set up, it
-will create two Auto Scaling groups, one for the managers and one for the
-workers, and set the desired capacity that was selected in the CloudFormation
-setup form. The Managers will start up first and create a Swarm manager quorum
-using Raft. The workers will then start up and join the swarm one by one, until
-all of the workers are up and running. At this point you will have a number of
-managers and workers in your swarm, that are ready to handle your application
-deployments. It then bootstraps UCP controllers on manager nodes and UCP agents
-on worker nodes. Next, it installs DTR on the manager nodes and configures it
-to use an S3 bucket as an image storage backend. Three ELBs, one for UCP, one
-for DTR and a third for your applications, are launched and automatically
-configured to provide resilient loadbalancing across multiple AZs.
-The application ELB gets automatically updated when services are launched or
-removed. While UCP and DTR ELBs are configured for HTTPS only.
-
-Both manager and worker nodes are part of separate ASG groups to allow you to
-scale your cluster when needed. If you increase the number of instances running
-in your worker Auto Scaling group (via the AWS console, or updating the
-  CloudFormation configuration), the new nodes that will start up will
-  automatically join the swarm. This architecture ensures that both manager
-  and worker nodes are spread across multiple AZs for resiliency and
-  high-availability. The template is adjustable and upgradeable meaning you can
-  adjust your configuration (e.g instance types or Docker engine version).
-
-## Prerequisites
-
+-   A [Docker Enterprise Edition](https://store.docker.com/editions/enterprise/docker-ee-trial?tab=description) license. You can get a 30-day free trial subscription from the [Docker Store](https://store.docker.com/editions/enterprise/docker-ee-trial?plan=free-trial&plan=free-trial&tab=description). For questions on licenses, contact [sales@docker.com](mailto:sales@docker.com).
 - Access to an AWS account with permissions to use CloudFormation and creating the following objects
     - EC2 instances + Auto Scaling groups
     - IAM profiles
@@ -50,96 +21,33 @@ in your worker Auto Scaling group (via the AWS console, or updating the
     - ELB
     - CloudWatch Log Group
     - S3 Bucket
-
 - SSH key in AWS in the region where you want to deploy (required to access the completed Docker install)
 - AWS account that supports EC2-VPC
 
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
+## Provision the Docker EE for AWS CloudFormation Stack
 
-## Cloudformation Parameters
+1. **Find the Docker EE for AWS Standard/Advanced listing on the AWS Marketplace**
+  - In a web browser, go to the [AWS Marketplace listing for Docker EE for AWS](https://aws.amazon.com/marketplace/pp/B06XCFDF9K) page.
+  - Click on **Continue** to continue to the **Launch on EC2** dialog.
+  - Choose your **Region** then click **Launch with CloudFormation Console**.
+  - If not already logged in, you will be prompted to log into your AWS account.
 
-Here are the required configuration parameters for the Cloudformation template:
+2. **Create the Stack via CloudFormation**
+  - You should now be in the AWS CloudFormation wizard (as seen below). Hit **next** to continue.
+  ![aws_stack_welcome.png](../images/aws_stack_welcome.png)
 
-**KeyName**
-SSH key that will be used when you SSH into the manager nodes. The key needs to
-be configured in the same region you launch the Cloudformation template in.
+  - In the Specify Details page, fill out any **missing parameters** as seen below:
+    - Your preferred SSH key to access the cluster nodes
+    - Your desired administrator password
+    - Your Docker Enterprise Edition license (optional, can be done later). This can be found on the [Docker Store](https://store.docker.com/?overlay=subscriptions) under your subscriptions. Copy and paste the contents of your `.lic` file into this dialog.
 
-**InstanceType**
-The EC2 instance type for your Worker nodes
-
-**ManagerInstanceType**
-The EC2 instance type for your Manager nodes. The larger your swarm, the larger
-the instance size you should use.
-
-**ClusterSize**
-The number of Workers you want in your swarm (1-1000)
-
-**ManagerSize**
-The number of Managers in your swarm. You can pick either 3 or 5 managers
-
-**DDCUsernameSet**
-Docker Datacenter Username
-
-**DDCPasswordSet**
-Docker Datacenter Password
-
-**License**
-Docker Datacenter License in JSON format or an S3 URL to download it. You can
-get a trial license [here](https://store.docker.com/bundles/docker-datacenter)
-
-**EnableSystemPrune**
-
-Enable if you want Docker for AWS to automatically cleanup unused space on your swarm nodes.
-
-When enabled, `docker system prune` will run staggered every day, starting at 1:42AM UTC on both workers and managers. The prune times are staggered slightly so that not all nodes will be pruned at the same time. This limits resource spikes on the swarm.
-
-Pruning removes the following:
-
-- All stopped containers
-- All volumes not used by at least one container
-- All dangling images
-- All unused networks
-
-**WorkerDiskSize**
-Size of Workers's ephemeral storage volume in GiB (20 - 1024).
-
-**WorkerDiskType**
-Worker ephemeral storage volume type ("standard", "gp2").
-
-**ManagerDiskSize**
-Size of Manager's ephemeral storage volume in GiB (20 - 1024)
-
-**ManagerDiskType**
-Manager ephemeral storage volume type ("standard", "gp2")
-
-## Software Versions
-
-- UCP: `2.1.1`
-- DTR: `2.2.3`
-- Docker Enterprise Edition 17.03
-
-## System containers
-Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker EE for AWS will work correctly.
-
-## Supported Regions
-
-- ap-northeast-1
-- ap-northeast-2
-- ap-south-1
-- ap-southeast-1
-- ap-southeast-2
-- eu-central-1
-- eu-west-1
-- sa-east-1
-- us-east-1
-- us-east-2
-- us-west-1
-- us-west-2
-
-## AMIs
-Docker Enterprise Edition for AWS currently only supports our custom AMI,
-which is a highly optimized AMI built specifically for running Docker on AWS
+    ![aws_stack_details.png](../images/aws_stack_details.png)
+  - Click **Next** to continue to the options page. Leave this as-is.
+  - Click **Next** to review your changes.
+  - Finally, acknowledge any capabilities and click **Create** to finish:
+  ![aws_stack_details.png](../images/aws_stack_finish.png)
 
 ## Accessing Docker EE for AWS (Standard/Advanced)
 
@@ -275,6 +183,116 @@ provides multiple advantages to easily deploy and access your application.
       --label com.docker.ucp.mesh.http.8080=external_route=http://foo.example.com,internal_port=8080 \
       ehazlett/docker-demo:dcus
     ```
+
+
+## How it Works
+
+The solution uses an Amazon AWS CloudFormation template to create everything
+that you need from scratch. The template first starts off by creating a new VPC
+along with its subnets and security groups. Once the networking is set up, it
+will create two Auto Scaling groups, one for the managers and one for the
+workers, and set the desired capacity that was selected in the CloudFormation
+setup form. The Managers will start up first and create a Swarm manager quorum
+using Raft. The workers will then start up and join the swarm one by one, until
+all of the workers are up and running. At this point you will have a number of
+managers and workers in your swarm, that are ready to handle your application
+deployments. It then bootstraps UCP controllers on manager nodes and UCP agents
+on worker nodes. Next, it installs DTR on the manager nodes and configures it
+to use an S3 bucket as an image storage backend. Three ELBs, one for UCP, one
+for DTR and a third for your applications, are launched and automatically
+configured to provide resilient loadbalancing across multiple AZs.
+The application ELB gets automatically updated when services are launched or
+removed. While UCP and DTR ELBs are configured for HTTPS only.
+
+Both manager and worker nodes are part of separate ASG groups to allow you to
+scale your cluster when needed. If you increase the number of instances running
+in your worker Auto Scaling group (via the AWS console, or updating the
+  CloudFormation configuration), the new nodes that will start up will
+  automatically join the swarm. This architecture ensures that both manager
+  and worker nodes are spread across multiple AZs for resiliency and
+  high-availability. The template is adjustable and upgradeable meaning you can
+  adjust your configuration (e.g instance types or Docker engine version).
+
+  ![`ddc_aws`.svg](../images/ddc_aws.svg)
+
+
+## Cloudformation Parameters
+
+Here are the required configuration parameters for the Cloudformation template:
+
+**KeyName**
+SSH key that will be used when you SSH into the manager nodes. The key needs to
+be configured in the same region you launch the Cloudformation template in.
+
+**InstanceType**
+The EC2 instance type for your Worker nodes
+
+**ManagerInstanceType**
+The EC2 instance type for your Manager nodes. The larger your swarm, the larger
+the instance size you should use.
+
+**ClusterSize**
+The number of Workers you want in your swarm (1-1000)
+
+**ManagerSize**
+The number of Managers in your swarm. You can pick either 3 or 5 managers
+
+**DDCUsernameSet**
+Docker Datacenter Username
+
+**DDCPasswordSet**
+Docker Datacenter Password
+
+**License**
+Docker Datacenter License in JSON format or an S3 URL to download it. You can
+get a trial license [here](https://store.docker.com/bundles/docker-datacenter)
+
+**EnableSystemPrune**
+
+Enable if you want Docker for AWS to automatically cleanup unused space on your swarm nodes.
+
+When enabled, `docker system prune` will run staggered every day, starting at 1:42AM UTC on both workers and managers. The prune times are staggered slightly so that not all nodes will be pruned at the same time. This limits resource spikes on the swarm.
+
+Pruning removes the following:
+
+- All stopped containers
+- All volumes not used by at least one container
+- All dangling images
+- All unused networks
+
+**WorkerDiskSize**
+Size of Workers's ephemeral storage volume in GiB (20 - 1024).
+
+**WorkerDiskType**
+Worker ephemeral storage volume type ("standard", "gp2").
+
+**ManagerDiskSize**
+Size of Manager's ephemeral storage volume in GiB (20 - 1024)
+
+**ManagerDiskType**
+Manager ephemeral storage volume type ("standard", "gp2")
+
+## System containers
+Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker EE for AWS will work correctly.
+
+## Supported Regions
+
+- ap-northeast-1
+- ap-northeast-2
+- ap-south-1
+- ap-southeast-1
+- ap-southeast-2
+- eu-central-1
+- eu-west-1
+- sa-east-1
+- us-east-1
+- us-east-2
+- us-west-1
+- us-west-2
+
+## AMIs
+Docker Enterprise Edition for AWS currently only supports our custom AMI,
+which is a highly optimized AMI built specifically for running Docker on AWS
 
 #### Non-Swarm Mode Container Based Applications
 

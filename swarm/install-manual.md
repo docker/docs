@@ -109,40 +109,32 @@ To create the instances do the following:
 
 ## Step 3. Install Engine on each node
 
-In this step, you install Docker Engine on each node. By installing Engine, you enable the Swarm manager to address the nodes via the Engine CLI and API.
+1.  [Install Docker](/engine/installation/){: target="_blank" class="_"} on each
+    host, using the appropriate instructions for your operating system and
+    distribution.
 
-SSH to each node in turn and do the following.
+2.  Edit `/etc/docker/daemon.json`. Create it if it does not exist. Assuming the
+    file was empty, its contents should be:
 
-1. Update the yum packages.
+    ```json
+    {
+      "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]
+    }
+    ```
 
-    Keep an eye out for the "y/n/abort" prompt:
+    Start or restart Docker for the changes to take effect.
 
-        $ sudo yum update
+    ```bash
+    $ sudo systemctl start docker
+    ```
 
-2. Run the installation script.
+3.  Give the `ec2-user` root privileges:
 
-        $ curl -sSL https://get.docker.com/ | sh
+    ```bash
+    $ sudo usermod -aG docker ec2-user
+    ```
 
-3. Edit `/etc/sysconfig/docker` and add `"-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"`
-   to the `OPTIONS` variable.
-
-4. Start Docker.
-
-       $ sudo /etc/init.d/docker start
-
-4. Verify that Docker Engine is installed correctly by running a container with the
-   `hello-world` image.
-
-       $ sudo docker run hello-world
-
-   The output should display a "Hello World" message and other text without any
-   error messages.
-
-5. Give the `ec2-user` root privileges:
-
-       $ sudo usermod -aG docker ec2-user
-
-6. Enter `logout`.
+4. Log out of the host.
 
 #### Troubleshooting
 

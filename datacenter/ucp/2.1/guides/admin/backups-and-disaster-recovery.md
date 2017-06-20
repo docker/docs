@@ -49,7 +49,7 @@ The example below shows how to create a backup of a UCP manager node and
 verify its contents:
 
 ```none
-# Create a backup, encrypt it, and store it on /tmp/backup.tar
+# Create a backup and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.docker_image }} backup --interactive > /tmp/backup.tar
@@ -77,7 +77,7 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 ## Restore your cluster
 
 The restore command can be used to create a new UCP cluster from a backup file.
-When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
+When restoring, make sure you use the same version of the `docker/ucp` image that you've used to create the backup.
 After the restore operation is complete, the following data will be recovered
 from the backup file:
 

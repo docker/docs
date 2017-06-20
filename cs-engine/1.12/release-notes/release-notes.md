@@ -22,6 +22,19 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs12
+(01 Jun 2017)
+
+* Fix an issue where if a volume using the local volume driver which has
+mount options fails to unmount on container exit, the data in the mount may be
+lost if the user attempts to subsequently remove the volume. [#32327](https://github.com/docker/docker/pulls/32327)
+
+## CS Engine 1.12.6-cs11
+(11 May 2017)
+
+* Fix an issue with overlay networks L2 miss notifications not being handled in
+some cases [#1642](https://github.com/docker/libnetwork/pull/1642)
+
 ## CS Engine 1.12.6-cs10
 (6 Mar 2017)
 
@@ -114,6 +127,13 @@ This release addresses the following issues:
 * [#25962](https://github.com/docker/docker/pull/25962) Allow normal containers
 to connect to swarm-mode overlay network
 * Various bug fixes in swarm mode networking
+
+## CS Engine 1.11.2-cs8
+(01 Jun 2017)
+
+* Fix an issue where if a volume using the local volume driver which has
+mount options fails to unmount on container exit, the data in the mount may be
+lost if the user attempts to subsequently remove the volume. [#32327](https://github.com/docker/docker/pulls/32327)
 
 ## CS Engine 1.11.2-cs7
 (24 Jan 2017)

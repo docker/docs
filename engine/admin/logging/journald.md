@@ -1,5 +1,5 @@
 ---
-description: Describes how to use the fluentd logging driver.
+description: Describes how to use the Journald logging driver.
 keywords: Journald, docker, logging, driver
 redirect_from:
 - /engine/reference/logging/journald/
@@ -14,22 +14,32 @@ Log entries can be retrieved using the `journalctl` command, through use of the
 In addition to the text of the log message itself, the `journald` log driver
 stores the following metadata in the journal with each message:
 
-| Field                       | Description |
-------------------------------|-------------|
-| `CONTAINER_ID`              | The container ID truncated to 12 characters. |
-| `CONTAINER_ID_FULL`         | The full 64-character container ID. |
+| Field                       | Description                                                                                                                                            |
+|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CONTAINER_ID`              | The container ID truncated to 12 characters.                                                                                                           |
+| `CONTAINER_ID_FULL`         | The full 64-character container ID.                                                                                                                    |
 | `CONTAINER_NAME`            | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
-| `CONTAINER_TAG`             | The container tag ([log tag option documentation](log_tags.md)). |
-| `CONTAINER_PARTIAL_MESSAGE` | A field that flags log integrity. Improve logging of long log lines. |
+| `CONTAINER_TAG`             | The container tag ([log tag option documentation](log_tags.md)).                                                                                       |
+| `CONTAINER_PARTIAL_MESSAGE` | A field that flags log integrity. Improve logging of long log lines.                                                                                   |
 
 ## Usage
 
-Configure the default logging driver by passing the `--log-driver` option to the
-Docker daemon:
+To use the `journald` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
++configuring Docker using `daemon.json`, see
++[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-```bash
-$ dockerd --log-driver=journald
+The following example sets the log driver to `journald`:
+
+```json
+{
+  "log-driver": "journald"
+}
 ```
+
+Restart Docker for the changes to take effect.
 
 To configure the logging driver for a specific container, use the `--log-driver`
 flag on the `docker run` command.
@@ -48,12 +58,16 @@ driver options.
 Specify template to set `CONTAINER_TAG` value in `journald` logs. Refer to
 [log tag option documentation](log_tags.md) to customize the log tag format.
 
-### `labels` and `env`
+### `labels`, `env`, and `eng-regex`
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
 precedence. Each option adds additional metadata to the journal with each
 message.
+
+`env-regex` is similar to and compatible with `env`. Set it to a regular
+expression to match logging-related environment variables. It is used for
+advanced [log tag options](log_tags.md).
 
 ## Note regarding container names
 

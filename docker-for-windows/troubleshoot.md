@@ -6,7 +6,7 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-Here is information about how to diagnose and troubleshoot problems, send logs
+Here is information about how to diagnose and troubleshoot problems, send logs,
 and communicate with the Docker for Windows team, use our forums and Knowledge
 Hub, browse and log issues on GitHub, and find workarounds for known problems.
 
@@ -46,6 +46,37 @@ can use in email or the forum to reference the upload.
 
 ## Troubleshooting
 
+### Permissions errors on data directories for shared volumes
+
+Docker for Windows sets permissions on [shared
+volumes](/docker-for-windows/index.md#shared-drives) to a default value of
+[0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
+`execute` permissions for `user`, `read` and `execute` for `group`). If you are
+working with applications that require permissions different than this default,
+you will likely get errors similar to the following.
+
+```none
+Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0755 so that the directory cannot be listed by other users.
+```
+
+The default permissions on shared volumes are not configurable. If you are
+working with applications that require permissions different from the shared
+volume defaults at container runtime, you need to either use non-host-mounted
+volumes or find a way to make the applications work with the default file
+permissions.
+
+Docker for Windows currrently implements host-mounted volumes based on the
+[Microsoft SMB
+protocol](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx),
+which does not support fine-grained, `chmod` control over these permissions.
+
+See also, [Can I change permissions on shared volumes for container-specific
+deployment
+requirements?](/docker-for-windows/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+in the FAQs, and for more of an explanation, the GitHub issue, [Controlling
+Unix-style perms on directories passed through from shared Windows
+drives](https://github.com/docker/docker.github.io/issues/3298).
+
 ### inotify on shared drives does not work
 
 Currently, `inotify` does not work on Docker for Windows. This will become
@@ -76,10 +107,10 @@ containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
-use to set up shared drives. (See [Shared Drives](index.md#shared-drives).) If
-you run `docker` commands and tasks under a different username than the one used
-to set up shared drives, your containers will not have permissions to access the
-mounted volumes. The volumes will show as empty.
+use to set up [shared drives](index.md#shared-drives). If you run `docker`
+commands and tasks under a different username than the one used to set up shared
+drives, your containers will not have permissions to access the mounted volumes.
+The volumes will show as empty.
 
 The solution to this is to switch to the domain user account and reset
 credentials on shared drives.
@@ -120,6 +151,33 @@ local user is `samstevens` and the domain user is `merlin`.
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
 
+### Volume mounts from host paths use a `nobrl` option to override database locking  
+
+You may encounter problems using volume mounts on the host, depending on the
+database software and which options are enabled. Docker for Windows uses
+[SMB/CIFS
+protocols](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx)
+to mount host paths, and mounts them with the `nobrl` option, which prevents
+lock requests from being sent to the database server
+([docker/for-win#11](https://github.com/docker/for-win/issues/11),
+[docker/for-win#694](https://github.com/docker/for-win/issues/694)). This is
+done to ensure container access to database files shared from the host. Although
+it solves the over-the-network database access problem, this "unlocked" strategy
+can interfere with other aspects of database functionality (for example,
+write-ahead logging (WAL) with SQLite, as described in
+[docker/for-win#1886](https://github.com/Sonarr/Sonarr/issues/1886)).
+
+If possible, avoid using shared drives for volume mounts on the host with network paths, and
+instead mount on the MobyVM, or create a [data
+volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+(named volume) or [data
+container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
+See also, the [volumes key under service
+configuration](/compose/compose-file/index.md#volumes) and the [volume
+configuration
+reference](/compose/compose-file/index.md#volume-configuration-reference) in the
+Compose file documentation.
+
 ### Local security policies can block shared drives and cause login errors
 
 You need permissions to mount shared drives in order to use the Docker for
@@ -131,7 +189,7 @@ these permissions to use the feature.
 
 Here are snip-its from example error messages:
 
-```
+```none
 Logon failure: the user has not been granted the requested logon type at
 this computer.
 
@@ -155,12 +213,14 @@ RUN commands in Docker files.
 Docker containers and `docker build` run in a Unix environment, so files in
 containers must use Unix style line endings: `\n`, _not_ Windows style: `\r\n`.
 Keep this in mind when authoring files such as shell scripts using Windows
-tools, where the default is likely to be Windows style line endings.  These
+tools, where the default is likely to be Windows style line endings. These
 commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
 
-For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/moby/moby/issues/24388">Docker RUN fails to execute shell script (https://github.com/moby/moby/issues/24388)</a>.
+For an example of this issue and the resolution, see this issue on GitHub:
+[Docker RUN fails to execute shell
+script](https://github.com/moby/moby/issues/24388).
 
 ### Recreate or update your containers after Beta 18 upgrade
 
@@ -211,7 +271,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note**:  Be sure to quit and then restart Docker for Windows before attempting to start containers.
+	> **Note**: Be sure to quit and then restart Docker for Windows before attempting to start containers.
 
 4.  Try to start the container again:
 
@@ -234,18 +294,69 @@ Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor
 specific, but typically the BIOS option is called `Virtualization Technology
 (VTx)` or similar.
 
+Once Hyper-V is enabled, it will show up as such on "Turn Windows features on or
+off".
+
+![Hyper-V on Windows features](images/hyper-v-enable-status.png )
+
 ### Virtualization must be enabled
 
 In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
 
-If, at some point, if you manually uninstall Hyper-V or disable virtualization, Docker for Windows will not start.
+If, at some point, if you manually uninstall Hyper-V or disable virtualization,
+Docker for Windows will not start.
 
-Verify that virtualization is enabled on Task Manager.
+Verify that virtualization is enabled by checking the Performance tab on the
+Task Manager.
 
 ![Task Manager](images/win-virtualization-enabled.png)
 
 See also, the user reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74)
+
+### Networking and WiFi problems upon Docker for Windows install
+
+Some users have encountered networking issues during install and startup of
+Docker for Windows. For example, upon install or auto-reboot, network adapters
+and/or WiFi gets disabled. In some scenarios, problems are due to having
+VirtualBox or its network adapters still installed, but in other scenarios this
+is not the case. (See also, Docker for Windows issue on GitHub: [Enabling
+Hyper-V feature turns my wi-fi off
+](https://github.com/docker/for-win/issues/139).)
+
+Here are some steps to take if you encounter similar problems:
+
+1.	Make sure virtualization is enabled, as described in the [Virtualization
+troubleshooting topic](#virtualization-must-be-enabled).
+
+2.	Make sure the Hyper-V is installed and enabled, as described in the previous
+[Hyper-V troubleshooting topic](#hyper-v).
+
+3.	Check your network switches to see if `DockerNAT` is enabled.
+
+	Open the **Hyper-V Manager**. (On Windows 10, just search for the
+	Hyper-V Manager in the search field in the lower left search field.)
+
+	Select the Virtual Switch Manager on the left-side **Actions** panel.
+
+	![Hyper-V manager](images/hyperv-manager.png)
+
+4.	Set up an external network switch. If you plan at any point to use [Docker
+Machine](/machine/overview.md) to set up multiple local VMs, you will need this
+anyway, as described in the topic on the [Hyper-V driver for [Docker
+Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT` with
+this switch.
+
+5.	If previous steps fail to solve the problems, follow steps on the
+[Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
+
+	>Read full description of consequences before you run Windows cleanup script
+	>
+  >The cleanup command has a `-Cleanup` flag and a
+	 `-ForceDeleteAllSwitches` flag. Be sure to read the whole page
+	 before running any scripts, especially the warnings with regard
+	 to the `-ForceDeleteAllSwitches` option.
+	 {: .warning-vanilla}
 
 ### Windows containers and Windows Server 2016
 
@@ -259,7 +370,7 @@ Containers](https://github.com/docker/labs/blob/master/windows/windows-container
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker for Windows. However, if you install Docker
-this way, you cannot develop or run Linux containers.  If you try to run a Linux
+this way, you cannot develop or run Linux containers. If you try to run a Linux
 container on the native Docker daemon, an error occurs:
 
   ```none
@@ -362,9 +473,9 @@ Nehalem based Mac Pros and so do newer generations of Intel processors.
 #### Typical failures we see with nested virtualization
 
 * Slow boot time of the Linux VM. If you look in the logs, you'll see
-some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds  to
+some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds to
 boot the Linux VM; roughly the time between the `Connected` log entry and the `*
-Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Window
+Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Windows
 VM, this may take considerably longer. We have a timeout of 60s or so. If the VM
 hasn't started by that time, we retry. If the retry fails we print an error. You
 may be able to work around this by providing more resources to the Windows VM.
@@ -396,8 +507,8 @@ We are currently investigating this issue.
 
 #### Networking issues on pre Beta 10 versions
 Docker for Windows Beta 10 and later fixed a number of issues around the
-networking setup.  If you still experience networking issue, this may be related
-to previous Docker for Windows installations.  In this case, please quit Docker
+networking setup. If you still experience networking issue, this may be related
+to previous Docker for Windows installations. In this case, please quit Docker
 for Windows and perform the following steps:
 
 ##### 1. Remove multiple `DockerNAT` VMswitches
@@ -497,11 +608,11 @@ For the `hello-world-nginx` example and others, Docker for Windows must be runni
 ### How to solve `port already allocated` errors
 
 If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated` or
-  `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
+ `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
 
 These errors are often caused by some other software on Windows using those
 ports. To discover the identity of this software, either use the `resmon.exe`
-GUI and click  "Network" and then "Listening Ports" or in a powershell use
+GUI and click "Network" and then "Listening Ports" or in a powershell use
 `netstat -aon | find /i "listening "` to discover the PID of the process
 currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
@@ -509,7 +620,7 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+**Some firewalls and anti-virus software might be incompatible with Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)

@@ -12,6 +12,34 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.4
+
+(4 May 2017)
+
+**Bug Fixes**
+
+* Core
+	* Fixed an issue where updating the UCP server certificates, the web UI would
+	report success, but not make any changes
+	* UCP no longer shows an `invalid memory address` or `nil pointer dereference
+	panic` when inspecting containers created with Docker 1.10 or older
+	* It is no longer possible to create a service with the same published ingress
+	port as the UCP controller's port, thereby rendering UCP inaccessible
+	* Fixed an issue where usernames with special language characters (such as ä)
+	were unable to login to the system
+	* Fixed an issue where a Compose stack deploy could not update an existing service
+	due to access control conflicts with the `com.docker.ucp.access.owner` label
+
+* docker/ucp image
+	* UCP support dumps now include `docker stats` output
+
+* UI/UX
+	* Fixed an issue where an application deployed using `docker stack deploy`
+	in the CLI did not show up in the web UI
+	* Fixed an issue where deploying a Compose application via UI with a slow network
+	connection might display a websocket error despite successful deployment
+
+
 ## Version 2.1.3
 
 (4 Apr 2017)

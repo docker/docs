@@ -67,7 +67,7 @@ culpa qui officia deserunt mollit anim id est laborum.
 ### Links
 
 - [a markdown link](https://docker.com/)
-
+https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
@@ -102,6 +102,18 @@ might be interesting. You can use them with Markdown or HTML images.
 
 - The same one, but using HTML: <img class="img-thumbnail" src="/images/footer_moby_icon.png" alt="a pretty wide image as a thumbnail, using HTML"/>
 
+## Videos
+
+You can add a link to a YouTube video like this:
+
+[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+
+To make the `.png` shown above, first take a screen snap of the YouTube video
+you want to use, then use a graphics app to overlay a play button onto the
+image.
+
+For the overlay, you can use the play button at
+[/docker-cloud/images/](https://github.com/docker/docker.github.io/tree/master/docker-cloud/images).
 
 ## Lists
 
@@ -363,6 +375,26 @@ Bootstrap JS are loaded.
 
 ## Admonitions (notes)
 
+Current styles for admonitions in
+[`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
+support two broad categories of admonitions: those with prefixed text (**Note:**,
+**Important:**, **Warning**) and those with prefixed icons.
+
+The new styles (with icons) are defined in a way that will not impact admonitions
+formatted with the original styles (prefixed text), so notes in your
+published documents won't be adversely affected.
+
+Examples of both styles are shown below.
+
+### Examples (original styles, prefix words)
+
+Admonitions with prefixed text use the following class tags, as shown in the examples.
+
+* **Note:** No class tag is needed for standard notes.
+* **Important:** Use the `important` class.
+* **Warning:** Use the `warning` class.
+
+
 > **Note**: This is a note using the old note style
 
 > **Note**: This is a note using
@@ -374,21 +406,20 @@ Bootstrap JS are loaded.
 
 > It's not safe out there, take this Moby with you
 >
-> Add the `warning` class to your blockquotes if you want to tell users
-> to be careful about something.
-{: .warning}
+> Add the `important` class to your blockquotes if you want to tell users
+ to be careful about something.
+{: .important}
 
 > Ouch, don't do that!
 >
-> Use the `danger` class to let people know this is dangerous or they
-> should pay close attention to this part of the road.
+> Use the `warning` class to let people know this is dangerous or they
+ should pay close attention to this part of the road.
 >
 > You can also add more paragraphs here if your explanation is
-> super complex.
-{: .danger}
+ super complex.
+{: .warning}
 
-
-> **This is a crazy note**
+>**This is a crazy note**
 >
 > This note has tons of content in it:
 >
@@ -402,17 +433,39 @@ Bootstrap JS are loaded.
 >
 > And another sentence to top it all off.
 
+### Examples with FontAwesome icons
 
-## Comments
+>  Pssst, wanna know something?
+>
+> You include a small description here telling users to be on the lookout
+>
+> This is an example of a note using the `{: .note-vanilla}` tag to get an icon instead of a "Note" prefix, and write your own note title.
+{: .note-vanilla}
 
-You can use XML style comments, which show up in the HTML "view source", or
-Liquid ones, which don't. You'll need to view the source of this file to see
-both styles.
 
-<!-- This comment will show up in the HTML source -->
+> It's not safe out there, take this Moby with you
+>
+> Use `{: .important-vanilla}` after your important to get an "important" icon.
+{: .important-vanilla}
 
-{% comment %}This one won't.{% endcomment %}
+> Ouch, don't touch that hot Docker engine!
+>
+> Use `{: .warning-vanilla}` after your warning to get an icon instead of a "Warning" prefix.
+>
+> You can also add more paragraphs here if your explanation is
+ super complex.
+{: .warning-vanilla}
 
+### Examples with both prefixed word and icon
+
+The current CSS also supports this kind of of admonition.
+
+> **Notes**
+>
+> * This is a note about a thing.
+>
+> *  This is another note about the same thing.
+{: .note-vanilla}
 
 ## Code blocks
 

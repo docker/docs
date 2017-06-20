@@ -98,9 +98,9 @@ $ notary key passwd <key_id>
 ## Rotate keys
 
 If one of the private keys is compromised you can rotate that key, so that
-images that were signed with those keys stop being trusted.
+images that were signed with that key stop being trusted.
 
-For keys that are kept offline and managed by the Notary CLI client, such the
+For keys that are kept offline and managed by the Notary CLI client, such as the
 keys with the root, targets, and snapshot roles, you can rotate them with:
 
 ```bash

@@ -270,7 +270,7 @@ recommendations.
         s3cmd=1.1.* \
      && rm -rf /var/lib/apt/lists/*
 
-The `s3cmd` instructions specifies a version `1.1.0*`. If the image previously
+The `s3cmd` instructions specifies a version `1.1.*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensure the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
@@ -513,11 +513,19 @@ parts of your image.
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
-like `RUN groupadd -r postgres && useradd -r -g postgres postgres`.
+like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
 
 > **Note**: Users and groups in an image get a non-deterministic
 > UID/GID in that the “next” UID/GID gets assigned regardless of image
 > rebuilds. So, if it’s critical, you should assign an explicit UID/GID.
+
+> **Note**: Due to an [unresolved bug](https://github.com/golang/go/issues/13548)
+> in the Go archive/tar package's handling of sparse files, attempting to
+> create a user with a sufficiently large UID inside a Docker container can
+> lead to disk exhaustion as `/var/log/faillog` in the container layer is
+> filled with NUL (\0) characters.  Passing the `--no-log-init` flag to
+> useradd works around this issue.  The Debian/Ubuntu `adduser` wrapper
+> does not support the `--no-log-init` flag and should be avoided.
 
 You should avoid installing or using `sudo` since it has unpredictable TTY and
 signal-forwarding behavior that can cause more problems than it solves. If
@@ -569,7 +577,7 @@ These Official Repositories have exemplary `Dockerfile`s:
 * [Go](https://hub.docker.com/_/golang/)
 * [Perl](https://hub.docker.com/_/perl/)
 * [Hy](https://hub.docker.com/_/hylang/)
-* [Rails](https://hub.docker.com/_/rails)
+* [Ruby](https://hub.docker.com/_/ruby/)
 
 ## Additional resources:
 

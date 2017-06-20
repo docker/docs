@@ -12,12 +12,16 @@ Docker host inside of a local virtual machine.
 With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
-Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
+Docker workflows. You can use these applications to run Docker natively on your
+local system without using Docker Machine at all. (See [Docker for Mac vs.
+Docker Toolbox](/docker-for-mac/docker-toolbox.md) for an explanation on the Mac
+side.)
 
-However, if you want to create _multiple_ local machines, you need Docker Machine, which is still available to create and manage machines for
-power users or multi-node experimentation. Both Docker for Mac and Docker for
-Windows include the newest version of Docker Machine, so when you install either
-of these, you get `docker-machine`.
+For now, however, if you want to create _multiple_ local machines, you still
+need Docker Machine to create and manage machines for multi-node
+experimentation. Both Docker for Mac and Docker for Windows include the newest
+version of Docker Machine, so when you install either of these, you get
+`docker-machine`.
 
 The new solutions come with their own native virtualization solutions rather
 than Oracle VirtualBox, so keep the following considerations in mind when using
@@ -33,10 +37,16 @@ Docker for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
 for virtualization, and Hyper-V is not compatible with Oracle VirtualBox.
 Therefore, you cannot run the two solutions simultaneously. But you can still
-use `docker-machine` to create more local VMs by using the Microsoft Hyper-V driver.
+use `docker-machine` to create more local VMs by using the Microsoft Hyper-V
+driver.
 
-* If you are using Docker for Windows, the only prerequisite is to have Docker for Windows installed. If you want to create multiple local machines, use the Microsoft `hyperv` driver to create them. (See the [Docker Machine driver for Microsoft
-Hyper-V](drivers/hyper-v.md).)
+The prerequisites are:
+
+* Have Docker for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+
+* Set up the Hyper-V driver to use an external virtual network switch See
+the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
+which includes an /machine/drivers/hyper-v.md#example of how to do this.
 
 #### If you are using Docker for Mac
 
@@ -61,15 +71,14 @@ Docker for Mac and Docker for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
 Toolbox.
 
-* If you are using Docker Toolbox on either Mac or an older version Windows system
-  (without Hyper-V), you will use the `virtualbox` driver to create a local
-  machine based on Oracle [VirtualBox(https://www.virtualbox.org/){: target="_blank" class="_"}.
-  (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
+* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), you will use the `virtualbox` driver to create a local
+machine based on Oracle [VirtualBox](https://www.virtualbox.org/){:
+target="_blank" class="_"}.  (See the [Docker Machine driver for Oracle
+VirtualBox](drivers/virtualbox.md).)
 
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot
-  run Docker for Windows (for example Windows 8 Pro), you must use the
-  `hyperv` driver to create local machines. (See the
-  [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md).)
+* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot run Docker for Windows (for example Windows 8 Pro), you must use the
+`hyperv` driver to create local machines. (See the [Docker Machine driver for
+Microsoft Hyper-V](drivers/hyper-v.md).)
 
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
   correctly installed on your system. If you used
@@ -168,7 +177,10 @@ choose another name for this new machine.
       Instead, see [the `env` command's documentation](/machine/reference/env.md){: target="_blank" class="_"}
       to learn how to set the environment variables for your shell.
 
-    This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.
+    This sets environment variables for the current shell that the Docker
+    client will read which specify the TLS settings. You need to do this
+    each time you open a new shell or restart your machine. (See also, how to
+      [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).)
 
     You can now run Docker commands on this host.
 
@@ -275,6 +287,71 @@ Commands that follow this style are:
         - `docker-machine url`
 
 For machines other than `default`, and commands other than those listed above, you must always specify the name explicitly as an argument.
+
+## Unset environment variables in the current shell
+
+You might want to use the current shell to connect to a different Docker Engine.
+This would be the case if, for example, you are [running Docker for Mac
+concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to
+talk to two different Docker Engines, or running swarms on Docker Cloud and want
+to [switch between managing the swarm and using Docker
+hosts](/docker-cloud/cloud-swarm/connect-to-swarm.md#switch-between-your-swarm-and-docker-hosts-in-the-same-shell).
+In both scenarios, you have the option to switch the environment for the current
+shell to talk to different Docker engines.
+
+1.  Run `env|grep DOCKER` to check whether DOCKER environment variables are set.
+
+    ```none
+    $ env | grep DOCKER
+    DOCKER_HOST=tcp://192.168.99.100:2376
+    DOCKER_MACHINE_NAME=default
+    DOCKER_TLS_VERIFY=1
+    DOCKER_CERT_PATH=/Users/victoriabialas/.docker/machine/machines/default
+    ```
+
+    If it returns output (as shown in the example), you can unset the `DOCKER` environment variables.
+
+2.  Use one of two methods to unset DOCKER environment variables in the current shell.
+
+    * Run the `unset` command on the following `DOCKER` environment variables.
+
+      ```none
+      unset DOCKER_TLS_VERIFY
+      unset DOCKER_CERT_PATH
+      unset DOCKER_MACHINE_NAME
+      unset DOCKER_HOST
+      ```
+
+    * Alternatively, run a shortcut command `docker-machine env -u` to show the command you need to run to unset all DOCKER variables:
+
+      ```none
+      $ docker-machine env -u
+      unset DOCKER_TLS_VERIFY
+      unset DOCKER_HOST
+      unset DOCKER_CERT_PATH
+      unset DOCKER_MACHINE_NAME
+      # Run this command to configure your shell:
+      # eval $(docker-machine env -u)
+      ```
+
+      Run `eval $(docker-machine env -u)` to unset all DOCKER variables in the current shell.
+
+3. Now, after running either of the above commands, this command should return no output.
+
+    ```
+    $ env | grep DOCKER
+    ```
+
+    If you are running Docker for Mac, you can run Docker commands to talk
+    to the Docker Engine installed with that app.
+
+    If you are running swarms on Docker Cloud, you can re-run the `export`
+    command you used to connect to the swarm.
+
+    Since [Docker for Windows is incompatible with
+    Toolbox](/docker-for-windows/install.md#what-to-know-before-you-install),
+    this scenario isn't applicable because Docker for Windows uses the Docker
+    Engine and Docker Machine that come with it.
 
 ## Start local machines on startup
 

@@ -411,7 +411,7 @@ generate the site key and certificate, name the files `site.key` and
     server, and that the correct TLS certificate is being used.
 
     ```bash
-    $ curl --cacert root-ca.crt https://0.0.0.0:3000
+    $ curl --cacert root-ca.crt https://localhost:3000
 
     <!DOCTYPE html>
     <html>
@@ -441,7 +441,7 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
     ```bash
-    $ openssl s_client -connect 0.0.0.0:3000 -CAfile root-ca.crt
+    $ openssl s_client -connect localhost:3000 -CAfile root-ca.crt
 
     CONNECTED(00000003)
     depth=1 /C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA

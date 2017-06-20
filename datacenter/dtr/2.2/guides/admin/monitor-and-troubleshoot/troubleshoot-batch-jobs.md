@@ -64,7 +64,7 @@ Jobs can be in one of the following status:
 | deleted         | The job and logs have been removed                                                                                                        |
 | worker_dead     | The worker for this job has been declared `dead` and the job will not continue                                                            |
 | worker_shutdown | The worker that was running this job has been gracefully stopped                                                                          |
-| worker          | resurrection| The worker for this job has reconnected to the database and will cancel these jobs                                          |
+| worker_resurrection| The worker for this job has reconnected to the database and will cancel these jobs                                          |
 
 ## Job capacity
 
