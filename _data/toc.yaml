@@ -1748,6 +1748,8 @@ manuals:
           title: License your installation
         - path: /datacenter/dtr/2.3/guides/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
+        - path: /datacenter/dtr/2.3/guides/admin/configure/enable-single-sign-on/
+          title: Enable single sign-on
         - sectiontitle: External storage
           section:
           - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/
