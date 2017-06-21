@@ -564,7 +564,7 @@ public or private images or [Docker Trusted
 Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
 your own insecure [registry](/registry/introduction.md). Add URLs for insecure
 registries and registry mirrors on which to host your images. (See also, [How do
-I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.)
 
 #### Edit the daemon configuration file
