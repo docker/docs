@@ -1644,6 +1644,14 @@ manuals:
           title: Create and manage users
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/create-and-manage-teams/
           title: Create and manage teams
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
+          title: Deploy a service with view-only access across an organization
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-nodes-between-teams/
+          title: Isolate swarm nodes between two different teams
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-volumes-between-teams/
+          title: Isolate volumes between two different teams
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/manage-access-with-collections/
+          title: Manage access to resources by using collections
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/permission-levels/
           title: Permission levels
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/recover-a-user-password/
