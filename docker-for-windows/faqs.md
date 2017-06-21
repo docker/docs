@@ -160,27 +160,6 @@ To learn more about the reasons for this limitation, see the following discussio
 
 ### How do I add custom CA certificates?
 
-Starting with  Docker for Windows 1.12.1, 2016-09-16 (Stable) and Beta 26
-(2016-09-14 1.12.1-beta26), all trusted certificate
-authorities (CAs) (root or intermediate) are supported.
-
-For full information on adding server and client side certs, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
-the Getting Started topic.
-
-### How do I add client certificates?
-
-Starting with Docker for Mac 17.06.0-ce, you do not have to push your
-certificates with `git` commands anymore. You can put your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
-
-For full information on adding server and client side certs, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
-the Getting Started topic.
-
-### How do I add custom CA certificates?
-
 Starting with Docker for Windows 1.12.1, 2016-09-16 (Stable) and Beta 26
 (2016-09-14 1.12.1-beta26), all trusted CAs (root or intermediate) are
 supported. Docker recognizes certs stored under Trust Root Certification
@@ -201,8 +180,19 @@ certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-When the Docker for Mac application starts up, it copies certificates from your
-Mac folders to `~/.docker/certs.d` in the database.
+When the Docker for Windows application starts up, it copies certificates from
+your Windows folders to `~/.docker/certs.d` in the database.
+
+> * You need to restart Docker for Mac after making any changes to
+ the keychain or to the `~/.docker/certs.d` directory in order for
+ the changes to take effect.
+>
+> * The registry cannot be listed as an _insecure registry_ (see [Docker
+Daemon](/docker-for-windows/index.md#docker-daemon)). Docker for Windows will
+ignore certificates listed under insecure registries, and will not send client
+certificates. Commands like `docker run <someImage>` that attempt to pull from
+the registry will produce error messages on the command line, as well as on the
+registry.
 
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
