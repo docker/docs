@@ -173,6 +173,16 @@ trusted by Docker for Windows.
 To learn more, see the GitHub issue [Allow user to add custom Certificate
 Authorities](https://github.com/docker/for-win/issues/48).
 
+### How do I add client certificates?
+
+Starting with Docker for Windows 17.06.0-ce, you do not have to push your
+certificates with `git` commands anymore. You can put your client certificates
+in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
+
+When the Docker for Mac application starts up, it copies certificates from your
+Mac folders to `~/.docker/certs.d` in the database.
+
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
 Networking is not yet fully Stable across network changes and system sleep

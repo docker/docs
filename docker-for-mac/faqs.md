@@ -182,6 +182,13 @@ Mac. Here is an example.
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 
+Or, if you prefer to add the certificate to your own local keychain only (rather
+than for all users), run this command instead:
+
+```
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
+```
+
 For a complete explanation of how to do this, see the blog post
 [Adding Self-signed Registry Certs to Docker & Docker for Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
