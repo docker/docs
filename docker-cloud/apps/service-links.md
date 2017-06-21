@@ -236,7 +236,7 @@ In the example above, you will also find the following environment variables in 
 
 Where:
 
-* `WEB_DOCKERCLOUD_API_URL` is the Docker Cloud API resource URI of the linked service. Because this is a link, the link name i the environment variable prefix.
+* `WEB_DOCKERCLOUD_API_URL` is the Docker Cloud API resource URL of the linked service. Because this is a link, the link name is the environment variable prefix.
 
 * `DOCKERCLOUD_SERVICE_API_URI` and `DOCKERCLOUD_SERVICE_API_URL` are the Docker Cloud API resource URI and URL of the service running in the container.
 

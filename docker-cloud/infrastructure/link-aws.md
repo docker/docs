@@ -49,7 +49,7 @@ Create an access control policy that will grant specific privileges to Docker Cl
     }
     ```
 
-    To limit the user to a specific region, use the [policy below](link-aws.md#limit-dockercloud-user-to-a-specific-ec2-region) instead.
+    To limit the user to a specific region, use the [policy below](link-aws.md#limit-dockercloud-policy-to-a-specific-ec2-region) instead.
 
     `ec2:*` allows the user to perform any operation in EC2.
 
@@ -58,7 +58,7 @@ Create an access control policy that will grant specific privileges to Docker Cl
     > **Note**: You cannot use an instance profile that has more permissions than the IAM user you are using with Docker Cloud. If you do that, you will get an "unauthorized operation" error. You can fix this issue by adding the `"Action":"iam:PassRole"` permission to the policy for the service user. You can read more about this [here](http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission){: target="_blank" class="_"}.
 
 6.  Click **Validate Policy**.
-7.  If the validation is successful click **Create Policy**.
+7.  If the validation succeeds, click **Create Policy**.
 
 ### Limit dockercloud-policy to a specific EC2 region
 
@@ -92,34 +92,44 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
 ```
 
 ## Create a dockercloud-role role
-1. Go to the AWS IAM Role creation panel at <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
 
-2.  Select **Role for Cross-Account Access**, and in the submenu that opens select **Allows IAM users from a 3rd party AWS account to access this account**.
+1. Go to the AWS IAM Role creation panel at <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>  Click **Create new role**.
+
+2.  Select **Role for cross-account access**, and in the submenu that opens select **Provide access between your AWS account and a 3rd party AWS account**.
 
     ![](images/aws-iam-role-1.png)
 
 3. In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
+
 4. In the **External ID** field, enter your Docker Cloud username.
 
-    If you're linking to nodes for an organization, enter the organization name.
+   This might be your Docker ID username, or if you are using Organizations in Docker Cloud enter the organization name.
 
-5. Leave **Require MFA** unchecked.
-6. On the next screen, select the `dockercloud-policy` you created to attach to the role.
+5. Leave **Require MFA** unchecked. Click **Next Step**.
+
+6. On the next screen, select the `dockercloud-policy` you created to attach to the role. Click **Next Step**.
+
 7. Give the new role a name, such as `dockercloud-role`.
 
-    > **Note**: You must use one role per Docker Cloud account namespace, so if you will be using nodes from a single AWS account for multiple Docker Cloud accounts, you should add an identifying the namespace to the end of the name. For example, you might have `dockercloud-role-moby` and `dockercloud-role-teamawesome`.
-8. On next page review your entries and copy the full **Role ARN** string.
+    > **Note**: You must use one role per Docker Cloud account namespace, so if you will be using nodes from a single AWS account for multiple Docker Cloud accounts, you should add an identifying the namespace to the end of the name. For example, you might have `dockercloud-role-docker` and `dockercloud-role-teamawesome`.
 
-    The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-role`. You'll use the ARN in the next step. If you forget to copy the ARN here, view the Role in IAM to see its related information including the ARN.
+8.  Click **Create Role**.
 
-9. Click **Create Role**.
+    AWS IAM creates the new role and returns you to the **Roles** list.
+
+9. Click into the new role to view details, and copy the full **Role ARN** string.
+
+    The ARN string should look something like
+    `arn:aws:iam::123456789123:role/dockercloud-role`. You'll use the
+    ARN in the next step. If you forget to copy the ARN here, view the
+    Role in IAM to see its related information including the ARN.
 
     ![](images/aws-iam-role-2.png)
 
 ## Add AWS account credentials
 
-Once you've created a `dockercloud-policy`, attached it to a
-`dockercloud-role`, and have the role's Role ARN, go back to Docker Cloud to connect the account.
+Once you've created a `dockercloud-policy`, attached it to a `dockercloud-role`,
+and have the role's Role ARN, go back to Docker Cloud to connect the account.
 
 1. In Docker Cloud, click **Cloud settings** at the lower left.
 2. In the Cloud Providers section, click the plug icon next to Amazon Web Services.

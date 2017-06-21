@@ -12,10 +12,22 @@ in Splunk Enterprise and Splunk Cloud.
 
 ## Usage
 
-You can configure the default logging driver by passing the `--log-driver`
-option to the Docker daemon:
+To use the `splunk` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
++configuring Docker using `daemon.json`, see
++[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-    dockerd --log-driver=splunk
+The following example sets the log driver to `splunk`.
+
+```json
+{
+  "log-driver": "splunk"
+}
+```
+
+Restart Docker for the changes to take effect.
 
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
@@ -27,23 +39,24 @@ You can set the logging driver for a specific container by using the
 You can use the `--log-opt NAME=VALUE` flag to specify these additional Splunk
 logging driver options:
 
-| Option                      | Required | Description                                                                                                                                                                                                             |
-|-----------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `splunk-token`              | required | Splunk HTTP Event Collector token.                                                                                                                                                                                      |
-| `splunk-url`                | required | Path to your Splunk Enterprise, self-service Splunk Cloud instance, or Splunk Cloud managed cluster (including port and scheme used by HTTP Event Collector) in one of the following formats: `https://your_splunk_instance:8088` or `https://input-prd-p-XXXXXXX.cloud.splunk.com:8088` or `https://http-inputs-XXXXXXXX.splunkcloud.com`.  |
-| `splunk-source`             | optional | Event source.                                                                                                                                                                                                           |
-| `splunk-sourcetype`         | optional | Event source type.                                                                                                                                                                                                      |
-| `splunk-index`              | optional | Event index.                                                                                                                                                                                                            |
-| `splunk-capath`             | optional | Path to root certificate.                                                                                                                                                                                               |
-| `splunk-caname`             | optional | Name to use for validating server certificate; by default the hostname of the `splunk-url` will be used.                                                                                                                |
-| `splunk-insecureskipverify` | optional | Ignore server certificate validation.                                                                                                                                                                                   |
-| `splunk-format`             | optional | Message format. Can be `inline`, `json` or `raw`. Defaults to `inline`.                                                                                                                                                 |
-| `splunk-verify-connection`  | optional | Verify on start, that docker can connect to Splunk server. Defaults to true.                                                                                                                                            |
-| `splunk-gzip`               | optional | Enable/disable gzip compression to send events to Splunk Enterprise or Splunk Cloud instance. Defaults to false.                                                                                                         |
-| `splunk-gzip-level`         | optional | Set compression level for gzip. Valid values are -1 (default), 0 (no compression), 1 (best speed) ... 9 (best compression). Defaults to [DefaultCompression](https://golang.org/pkg/compress/gzip/#DefaultCompression). |
-| `tag`                       | optional | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.      |
-| `labels`                    | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for container.                                                                                               |
-| `env`                       | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for container.                                                                             |
+| Option                      | Required | Description                                                                                                                                                                                                                                                                                                                                 |
+|:----------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `splunk-token`              | required | Splunk HTTP Event Collector token.                                                                                                                                                                                                                                                                                                          |
+| `splunk-url`                | required | Path to your Splunk Enterprise, self-service Splunk Cloud instance, or Splunk Cloud managed cluster (including port and scheme used by HTTP Event Collector) in one of the following formats: `https://your_splunk_instance:8088` or `https://input-prd-p-XXXXXXX.cloud.splunk.com:8088` or `https://http-inputs-XXXXXXXX.splunkcloud.com`. |
+| `splunk-source`             | optional | Event source.                                                                                                                                                                                                                                                                                                                               |
+| `splunk-sourcetype`         | optional | Event source type.                                                                                                                                                                                                                                                                                                                          |
+| `splunk-index`              | optional | Event index.                                                                                                                                                                                                                                                                                                                                |
+| `splunk-capath`             | optional | Path to root certificate.                                                                                                                                                                                                                                                                                                                   |
+| `splunk-caname`             | optional | Name to use for validating server certificate; by default the hostname of the `splunk-url` will be used.                                                                                                                                                                                                                                    |
+| `splunk-insecureskipverify` | optional | Ignore server certificate validation.                                                                                                                                                                                                                                                                                                       |
+| `splunk-format`             | optional | Message format. Can be `inline`, `json` or `raw`. Defaults to `inline`.                                                                                                                                                                                                                                                                     |
+| `splunk-verify-connection`  | optional | Verify on start, that docker can connect to Splunk server. Defaults to true.                                                                                                                                                                                                                                                                |
+| `splunk-gzip`               | optional | Enable/disable gzip compression to send events to Splunk Enterprise or Splunk Cloud instance. Defaults to false.                                                                                                                                                                                                                            |
+| `splunk-gzip-level`         | optional | Set compression level for gzip. Valid values are -1 (default), 0 (no compression), 1 (best speed) ... 9 (best compression). Defaults to [DefaultCompression](https://golang.org/pkg/compress/gzip/#DefaultCompression).                                                                                                                     |
+| `tag`                       | optional | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.                                                                                                     |
+| `labels`                    | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for container.                                                                                                                                                                                                                   |
+| `env`                       | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for container.                                                                                                                                                                                                 |
+| `env-regex`                 | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                                                                                |
 
 If there is collision between `label` and `env` keys, the value of the `env` takes precedence.
 Both options add additional fields to the attributes of a logging message.
@@ -143,7 +156,7 @@ MyImage/MyContainer env1=val1 label1=label1 {"foo": "bar"}
 Splunk Logging Driver allows you to configure few advanced options by specifying next environment variables for the Docker daemon.
 
 | Environment variable name                        | Default value | Description                                                                                                                                        |
-|--------------------------------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-------------------------------------------------|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | `SPLUNK_LOGGING_DRIVER_POST_MESSAGES_FREQUENCY`  | `5s`          | If there is nothing to batch how often driver will post messages. You can think about this as the maximum time to wait for more messages to batch. |
 | `SPLUNK_LOGGING_DRIVER_POST_MESSAGES_BATCH_SIZE` | `1000`        | How many messages driver should wait before sending them in one batch.                                                                             |
 | `SPLUNK_LOGGING_DRIVER_BUFFER_MAX`               | `10 * 1000`   | If driver cannot connect to remote server, what is the maximum amount of messages it can hold in buffer for retries.                               |

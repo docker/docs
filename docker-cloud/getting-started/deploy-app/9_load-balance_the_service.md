@@ -14,7 +14,7 @@ the application.
 
 In this example, you need a load balancer that will forward incoming requests to
 both container #1 (web-1) and container #2 (web-2). For this tutorial, you'll
-use <a href="https://github.com/moby/mobycloud-haproxy" target="_blank">Docker Cloud's HAProxy image</a> to load balance, but you could also use other custom load balancers.
+use [Docker Cloud's HAProxy image](ttps://github.com/moby/mobycloud-haproxy){: target="_blank" class="_"} to load balance, but you could also use other custom load balancers.
 
 You can configure and run the `haproxy` load balancer service from the command line using a command like the example below. (If you are using the Go quickstart, edit the `link-service` value before running the command.)
 

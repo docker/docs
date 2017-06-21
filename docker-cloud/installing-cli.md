@@ -24,12 +24,12 @@ If you have Docker Engine installed locally, you can run the following `docker`
 command in your shell regardless of which operating system you are using.
 
 ```none
-docker run dockercloud/cli -h
+$ docker run dockercloud/cli -h
 ```
 
 This command runs the `docker-cloud` CLI image in a container for you. Learn
 more about how to use this container
-[here](https://github.com/moby/mobycloud-cli#docker-image).
+[here](https://github.com/docker/dockercloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
@@ -37,9 +37,16 @@ You can install the CLI locally using the [pip](https://pip.pypa.io/en/stable/)
 package manager, which is a package manager for
 [Python](https://www.python.org/) applications.
 
-* If you already have 2.x or Python 3.x installed, you probably have `pip` and
+* If you already have Python 2.x or 3.x installed, you probably have `pip` and
 `setuptools`, but will need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
+
+> The Docker Cloud CLI does not currently support Python 3.x.
+>
+> we recommend using Python 2.x. To learn more,
+see the Python and CLI issues described in
+[Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
+{: .note-vanilla}
 
 * If you do not have Python or `pip` installed, you can either [install
 Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this
@@ -54,14 +61,16 @@ $ pip install docker-cloud
 ```
 
 If you encounter errors on Linux machines, make sure that `python-dev` is
-installed. For example, on Ubuntu, run the following command: `apt-get install
-python-dev`
+installed. For example, on Ubuntu, run the following command: 
+
+```
+$ apt-get install python-dev
+```
 
 #### Install on macOS
 
 We recommend installing Docker CLI for macOS using Homebrew. If you don't have
-`brew` installed, follow the instructions here: <a href="http://brew.sh"
-target="_blank">http://brew.sh</a>
+`brew` installed, follow the instructions here: [http://brew.sh](http://brew.sh){: target="_blank" class="_"}
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -121,7 +130,7 @@ For example:
 $ DOCKERCLOUD_NAMESPACE=myteam docker container ps
 ```
 
-To learn more, see the [Docker Cloud CLI README](https://github.com/moby/mobycloud-cli#namespace).
+To learn more, see the [Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
 
 
 ## Upgrade the docker-cloud CLI

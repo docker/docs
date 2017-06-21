@@ -217,7 +217,7 @@ allow you to take advantage of the loadbalancer.
     frontend node. Requests to `http://results.myenterprise.example.com` go just to the
     single `dbstore` node where the `example-voting-app-result-app` is running.
 
-3. On your local host, edit `/etc/hosts` file add the resolution for both these
+3. On your local host, edit `/etc/hosts` file to add the resolution for both these
 sites.
 
 4. Save and close the `/etc/hosts` file.
@@ -252,7 +252,7 @@ Now, you can test your application.
 ## Extra Credit: Deployment with Docker Compose
 
 Up to this point, you've deployed each application container individually. This
-can be cumbersome especially because their are several different containers and
+can be cumbersome especially because there are several different containers and
 starting them is order dependent. For example, that database should be running
 before the worker.
 

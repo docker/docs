@@ -1,77 +1,214 @@
 ---
 description: Use swarm mode networking features
-keywords: guide, swarm mode, swarm, network
-title: Attach services to an overlay network
+keywords: swarm, networking, ingress, overlay, service discovery
+title: Manage swarm service networks
 ---
 
-Docker Engine swarm mode natively supports **overlay networks**, so you can
-enable container-to-container networks. When you use swarm mode, you don't need
-an external key-value store. Features of swarm mode overlay networks include the
-following:
+A Docker swarm generates two different kinds of traffic:
 
-* You can attach multiple services to the same network.
-* By default, **service discovery** assigns a virtual IP address (VIP) and DNS
-entry to each service in the swarm, making it available by its service name to
-containers on the same network.
-* You can configure the service to use DNS round-robin instead of a VIP.
+- **Control and management plane traffic**: This includes swarm management
+  messages, such as requests to join or leave the swarm. This traffic is
+  always encrypted.
 
-In order to use overlay networks in the swarm, you need to have the following
-ports open between the swarm nodes before you enable swarm mode:
+- **Application data plane traffic**: This includes container traffic and
+  traffic to and from external clients.
+
+This topic discusses how to manage the application data for your swarm services.
+For more details about swarm networking in general, see the
+[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }.
+
+The following three network concepts are important to swarm services:
+
+- **Overlay networks** manage communications among the Docker daemons
+  participating in the swarm. You can create overlay networks, in the same way
+  as user-defined networks for standalone containers. You can attach a service
+  to one or more existing overlay networks as well, to enable service-to-service
+  communication. Overlay networks are Docker networks that use the `overlay`
+  network driver.
+
+- The **ingress network** is a special overlay network that facilitates
+  load balancing among a service's nodes. When any swarm node receives a
+  request on a published port, it hands that request off to a module called
+  `IPVS`. `IPVS` keeps track of all the IP addresses participating in that
+  service, selects one of them, and routes the request to it, over the
+  `ingress` network.
+
+  The `ingress` network is created automatically when you initialize or join a
+  swarm. Most users do not need to customize its configuration, but Docker 17.05
+  and higher allows you to do so.
+
+- The **docker_gwbridge** is a bridge network that connects the overlay
+  networks (including the `ingress` network) to an individual Docker daemon's
+  physical network. By default, each container a service is running is connected
+  to its local Docker daemon host's `docker_gwbridge` network.
+
+  The `docker_gwbridge` network is created automatically when you initialize or
+  join a swarm. Most users do not need to customize its configuration, but
+  Docker allows you to do so.
+
+
+## Firewall considerations
+
+Docker daemons participating in a swarm need the ability to communicate with
+each other over the following ports:
 
 * Port `7946` TCP/UDP for container network discovery.
 * Port `4789` UDP for the container overlay network.
 
-## Create an overlay network in a swarm
+## Create an overlay network
 
-When you run Docker Engine in swarm mode, you can run `docker network create`
-from a manager node to create an overlay network. For instance, to create a
-network named `my-network`:
+To create an overlay network, specify the `overlay` driver when using the
+`docker network create` command:
 
+```bash
+$ docker network create \
+  --driver overlay \
+  my-network
 ```
+
+The above command doesn't specify any custom options, so Docker assigns a
+subnet and uses default options. You can see information about the network using
+`docker network inspect`.
+
+When no containers are connected to the overlay network, its configuration is
+not very exciting:
+
+```json
+$ docker network inspect my-network
+[
+    {
+        "Name": "my-network",
+        "Id": "fsf1dmx3i9q75an49z36jycxd",
+        "Created": "0001-01-01T00:00:00Z",
+        "Scope": "swarm",
+        "Driver": "overlay",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": []
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "Containers": null,
+        "Options": {
+            "com.docker.network.driver.overlay.vxlanid_list": "4097"
+        },
+        "Labels": null
+    }
+]
+```
+
+In the above output, notice that the driver is `overlay` and that the scope is
+`swarm`, rather than `local`, `host`, or `global` scopes you might see in
+other types of Docker networks. This scope indicates that only hosts which are
+participating in the swarm can access this network.
+
+The network's subnet and gateway are dynamically configured when a service
+connects to the network for the first time. The following example shows
+the same network as above, but with three containers of a `redis` service
+connected to it.
+
+```bash
+$ docker network inspect my-network
+[
+    {
+        "Name": "my-network",
+        "Id": "fsf1dmx3i9q75an49z36jycxd",
+        "Created": "2017-05-31T18:35:58.877628262Z",
+        "Scope": "swarm",
+        "Driver": "overlay",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "10.0.0.0/24",
+                    "Gateway": "10.0.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "Containers": {
+            "0e08442918814c2275c31321f877a47569ba3447498db10e25d234e47773756d": {
+                "Name": "my-redis.1.ka6oo5cfmxbe6mq8qat2djgyj",
+                "EndpointID": "950ce63a3ace13fe7ef40724afbdb297a50642b6d47f83a5ca8636d44039e1dd",
+                "MacAddress": "02:42:0a:00:00:03",
+                "IPv4Address": "10.0.0.3/24",
+                "IPv6Address": ""
+            },
+            "88d55505c2a02632c1e0e42930bcde7e2fa6e3cce074507908dc4b827016b833": {
+                "Name": "my-redis.2.s7vlybipal9xlmjfqnt6qwz5e",
+                "EndpointID": "dd822cb68bcd4ae172e29c321ced70b731b9994eee5a4ad1d807d9ae80ecc365",
+                "MacAddress": "02:42:0a:00:00:05",
+                "IPv4Address": "10.0.0.5/24",
+                "IPv6Address": ""
+            },
+            "9ed165407384f1276e5cfb0e065e7914adbf2658794fd861cfb9b991eddca754": {
+                "Name": "my-redis.3.hbz3uk3hi5gb61xhxol27hl7d",
+                "EndpointID": "f62c686a34c9f4d70a47b869576c37dffe5200732e1dd6609b488581634cf5d2",
+                "MacAddress": "02:42:0a:00:00:04",
+                "IPv4Address": "10.0.0.4/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.driver.overlay.vxlanid_list": "4097"
+        },
+        "Labels": {},
+        "Peers": [
+            {
+                "Name": "moby-e57c567e25e2",
+                "IP": "192.168.65.2"
+            }
+        ]
+    }
+]
+```
+
+### Customize an overlay network
+
+There may be situations where you don't want to use the default configuration
+for an overlay network. For a full list of configurable options, run the
+command `docker network create --help`. The following are some of the most
+common options to change.
+
+#### Configure the subnet and gateway
+
+By default, the network's subnet and gateway are configured automatically when
+the first service is connected to the network. You can configure these when
+creating a network using the `--subnet` and `--gateway` flags. The following
+example extends the previous one by configuring the subnet and gateway.
+
+```bash
 $ docker network create \
   --driver overlay \
   --subnet 10.0.9.0/24 \
-  --opt encrypted \
+  --gateway 10.0.9.99 \
   my-network
-
-273d53261bcdfda5f198587974dae3827e947ccd7e74a41bf1f482ad17fa0d33
 ```
 
-By default nodes in the swarm encrypt traffic between themselves and other
-nodes. The optional `--opt encrypted` flag enables an additional layer of
-encryption in the overlay driver for vxlan traffic between containers on
-different nodes. For more information, refer to
+#### Configure encryption of application data
+
+Management and control plane data related to a swarm is always encrypted.
+For more details about the encryption mechanisms, see the
 [Docker swarm mode overlay network security model](/engine/userguide/networking/overlay-security-model.md).
 
-The `--subnet` flag specifies the subnet for use with the overlay network. When
-you don't specify a subnet, the swarm manager automatically chooses a subnet and
-assigns it to the network. On some older kernels, including kernel 3.10,
-automatically assigned addresses may overlap with another subnet in your
-infrastructure. Such overlaps can cause connectivity issues or failures with containers connected to the network.
+Application data among swarm nodes is not encrypted by default. To encrypt this
+traffic on a given overlay network, use the `--opt encrypted` flag on `docker
+network create`. This enables IPSEC encryption at the level of the vxlan. This
+encryption imposes a non-negligible performance penalty, so you should test this
+option before using it in production.
 
-Before you attach a service to the network, the network only extends to manager
-nodes. You can run `docker network ls` to view the network:
-
-```bash
-$ docker network ls
-
-NETWORK ID          NAME        DRIVER   SCOPE
-f9145f09b38b        bridge      bridge   local
-..snip..
-273d53261bcd        my-network  overlay  swarm
-```
-
-The `swarm` scope indicates that the network is available for use with services
-deployed to the swarm. After you create a service attached to the network, the
-swarm only extends the network to worker nodes where the scheduler places tasks
-for the service. On workers without tasks running for a service attached to the
-network, `network ls` does not display the network.
 
 ## Attach a service to an overlay network
 
-To attach a service to an overlay network, pass the `--network` flag when you
-create a service. For example to create an nginx service attached to a
-network called `my-network`:
+To attach a service to an existingoverlay network, pass the `--network` flag to
+`docker service create`, or the `--network-add` flag to `docker service update`.
 
 ```bash
 $ docker service create \
@@ -81,223 +218,140 @@ $ docker service create \
   nginx
 ```
 
->**Note**: You have to create the network before you can attach a service to it.
+Service containers connected to an overlay network can communicate with
+each other across it.
 
-The containers for the tasks in the service can connect to one another on the
-overlay network. The swarm extends the network to all the nodes with `Running`
-tasks for the service.
+To see which networks a service is connected to, use `docker service ls` to find
+the name of the service, then `docker service ps <service-name>` to list the
+networks. Alternately, to see which services' containers are connected to a
+network, use `docker network inspect <network-name>`. You can run these commands
+from any swarm node which is joined to the swarm and is in a `running` state.
 
-From a manager node, run `docker service ps <SERVICE>` to view the nodes where
-tasks are running for the service:
+### Configure service discovery
 
-```bash
-$ docker service ps my-web
+**Service discovery** is the mechanism Docker uses to route a request from your
+service's external clients to an individual swarm node, without the client
+needing to know how many nodes are participating in the service or their
+IP addresses or ports. You don't need to publish ports which are used between
+services on the same network. For instance, if you have a WordPress service
+which stores its data in a MySQL service, and they are connected to the same
+overlay network, you do not need to publish the MySQL port to the client, only
+the WordPress HTTP port.
 
-NAME                                IMAGE  NODE   DESIRED STATE  CURRENT STATE               ERROR
-my-web.1.63s86gf6a0ms34mvboniev7bs  nginx  node1  Running        Running 58 seconds ago
-my-web.2.6b3q2qbjveo4zauc6xig7au10  nginx  node2  Running        Running 58 seconds ago
-my-web.3.66u2hcrz0miqpc8h0y0f3v7aw  nginx  node3  Running        Running about a minute ago
-```
+Service discovery can work in two different ways, using a virtual IP (VIP) or
+DNS round robin (DNSRR). You can configure this per service.
 
-![service vip image](images/service-vip.png)
+- By default, when you attach a service to a network and that service publishes
+  one or more ports, Docker assigns the service a virtual IP (VIP), which is the
+  "front end" for clients to reach the service. Docker keeps a list of all
+  worker nodes in the service, and routes requests between the client and one of
+  the nodes. Each request from the client might be routed to a different node.
 
-You can inspect the network from any node with a `Running` task for a service
-attached to the network:
+- If you configure a service to use DNS round-robin (DNSRR) service discovery,
+  there is not a single virtual IP. Instead, Docker sets up DNS entries for the
+  service such that a DNS query for the service name returns a list of IP
+  addresses, and the client connects directly to one of these.
 
-```bash
-$ docker network inspect <NETWORK>
-```
+  DNS round-robin is useful in cases where you want to use your own load
+  balancer. To configure a service to use DNSRR, use the flag
+  `--endpoint-mode dnsrr` when creating a new service or updating an existing
+  one.
 
-The network information includes a list of the containers on the node that are
-attached to the network. For instance:
+## Customize the ingress network
 
-```bash
-$ docker network inspect my-network
-[
-    {
-        "Name": "my-network",
-        "Id": "273d53261bcdfda5f198587974dae3827e947ccd7e74a41bf1f482ad17fa0d33",
-        "Scope": "swarm",
-        "Driver": "overlay",
-        "EnableIPv6": false,
-        "IPAM": {
-            "Driver": "default",
-            "Options": null,
-            "Config": [
-                {
-                    "Subnet": "10.0.9.0/24",
-                    "Gateway": "10.0.9.1"
-                }
-            ]
-        },
-        "Internal": false,
-        "Containers": {
-            "404d1dec939a021678132a35259c3604b9657649437e59060621a17edae7a819": {
-                "Name": "my-web.1.63s86gf6a0ms34mvboniev7bs",
-                "EndpointID": "3c9588d04db9bc2bf8749cb079689a3072c44c68e544944cbea8e4bc20eb7de7",
-                "MacAddress": "02:42:0a:00:09:03",
-                "IPv4Address": "10.0.9.3/24",
-                "IPv6Address": ""
-            }
-        },
-        "Options": {
-            "com.docker.network.driver.overlay.vxlanid_list": "257"
-        },
-        "Labels": {}
-    }
-]
-```
+{% include edge_only.md section="feature" %}
 
-In the example above, the container `my-web.1.63s86gf6a0ms34mvboniev7bs` for the
-`my-web` service is attached to the `my-network` network on node1.
+Most users never need to configure the `ingress` network, but Docker 17.05 and
+higher allow you to do so. This can be useful if the automatically-chosen subnet
+conflicts with one that already exists on your network, or you need to customize
+other low-level network settings such as the MTU.
 
-## Use swarm mode service discovery
+Customizing the `ingress` network involves removing and recreating it. This is
+usually done before you create any services in the swarm. If you have existing
+services which publish ports, those services need to be removed before you can
+remove the `ingress` network.
 
-By default, when you create a service attached to a network, the swarm assigns
-the service a VIP. The VIP maps to a DNS alias based upon the service name.
-Containers on the network share DNS mappings for the service via gossip so any container on the network can access the service via its service
-name.
+During the time that no `ingress` network exists, existing services which do not
+publish ports will continue to function but are not load-balanced. This affects
+services which publish ports, such as a WordPress service which publishes port
+80.
 
->**Note**: Service discovery will only work if your services are attached to a user-created overlay network (see top of this article). When a swarm is initialized, an `ingress` network is created if it does not exist. This network is not used by containers directly, but to enable the routing mesh functionality in swarm mode.
+1.  Inspect the `ingress` network using `docker network inspect ingress`, and
+    remove any services whose containers are connected to it. These are services
+    that publish ports, such as a WordPress service which publishes port 80. If
+    all such services are not stopped, the next step will fail.
 
-You don't need to expose service-specific ports to make the service
-available to other services on the same overlay network. The swarm's internal
-load balancer automatically distributes requests to the service VIP among the
-active tasks.
-
-You can inspect the service to view the virtual IP. For example:
-
-```bash
-$ docker service inspect \
-  --format='{% raw %}{{json .Endpoint.VirtualIPs}}{% endraw %}' \
-  my-web
-
-[{"NetworkID":"7m2rjx0a97n88wzr4nu8772r3" "Addr":"10.0.0.2/24"}]
-```
-
-The following example shows how you can add a `busybox` service on the same
-network as the `nginx` service and the busybox service is able to access `nginx`
-using the DNS name `my-web`:
-
-1.  From a manager node, deploy a busybox service to the same network as
-`my-web`:
+2.  Remove the existing `ingress` network:
 
     ```bash
-    $ docker service create \
-      --name my-busybox \
-      --network my-network \
-      busybox \
-      sleep 3000
+    $ docker network rm ingress
+
+    WARNING! Before removing the routing-mesh network, make sure all the nodes
+    in your swarm run the same docker engine version. Otherwise, removal may not
+    be effective and functionality of newly create ingress networks will be
+    impaired.
+    Are you sure you want to continue? [y/N]
     ```
 
-2.  Lookup the node where `my-busybox` is running:
+3.  Create a new overlay network using the `--ingress` flag, along  with the
+    custom options you want to set. This example sets the MTU to 1200, sets
+    the subnet to `10.11.0.0/16`, and sets the gateway to `10.11.0.2`.
 
     ```bash
-    $ docker service ps my-busybox
-
-    NAME                                    IMAGE    NODE   DESIRED STATE  CURRENT STATE          ERROR
-    my-busybox.1.1dok2cmx2mln5hbqve8ilnair  busybox  node1  Running        Running 5 seconds ago
+    $ docker network create \
+      -d overlay \
+      --ingress \
+      --subnet=10.11.0.0/16 \
+      --gateway=10.11.0.2 \
+      --opt com.docker.network.mtu=1200 \
+      my-ingress
     ```
 
-3.  From the node where the busybox task is running, open an interactive shell to
-the busybox container:
+    > **Note**: You can name your `ingress` network something other than
+    > `ingress`, but you can only have one. An attempt to create a second one
+    > will fail.
+
+4.  Restart the services that you stopped in the first step.
+
+## Customize the docker_gwbridge
+
+The `docker_gwbridge` is a virtual bridge that connects the overlay networks
+(including the `ingress` network) to an individual Docker daemon's physical
+network. Docker creates it automatically when you initialize a swarm or join a
+Docker host to a swarm, but it is not a Docker device. It exists in the kernel
+of the Docker host. If you need to customize its settings, you must do so before
+joining the Docker host to the swarm, or after temporarily removing the host
+from the swarm.
+
+You need to have the `brctl` application installed on your operating system in
+order to delete an existing bridge. The package name is `bridge-utils`.
+
+1.  Stop Docker.
+
+2.  Use the `brctl show docker_gwbridge` command to check whether a bridge
+    device exists called `docker_gwbridge`. If so, remove it using
+    `brctl delbr docker_gwbridge`.
+
+3.  Start Docker. Do not join or initialize the swarm.
+
+4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
+    This example uses the subnet `10.11.0.0/16`. For a full list of customizable
+    options, see [Bridge driver options](/engine/reference/commandline/network_create.md#bridge-driver-options).
 
     ```bash
-    $ docker exec -it my-busybox.1.1dok2cmx2mln5hbqve8ilnair /bin/sh
+    $ docker network create \
+    --subnet 10.11.0.0/16 \
+    --opt com.docker.network.bridge.name=docker_gwbridge \
+    --opt com.docker.network.bridge.enable_icc=false \
+    docker_gwbridge
     ```
 
-    You can deduce the container name as `<TASK-NAME>`+`<ID>`. Alternatively,
-    you can run `docker ps` on the node where the task is running.
-
-4.  From inside the busybox container, query the DNS to view the VIP for the
-`my-web` service:
-
-    ```bash
-    $ nslookup my-web
-
-    Server:    127.0.0.11
-    Address 1: 127.0.0.11
-
-    Name:      my-web
-    Address 1: 10.0.9.2 ip-10-0-9-2.us-west-2.compute.internal
-    ```
-
-    >**Note**: the examples here use `nslookup`, but you can use `dig` or any
-    available DNS query tool.
-
-5.  From inside the busybox container, query the DNS using a special query
-&lt;tasks.SERVICE-NAME&gt; to find the IP addresses of all the containers for the
-`my-web` service:
-
-    ```bash
-    $ nslookup tasks.my-web
-
-    Server:    127.0.0.11
-    Address 1: 127.0.0.11
-
-    Name:      tasks.my-web
-    Address 1: 10.0.9.4 my-web.2.6b3q2qbjveo4zauc6xig7au10.my-network
-    Address 2: 10.0.9.3 my-web.1.63s86gf6a0ms34mvboniev7bs.my-network
-    Address 3: 10.0.9.5 my-web.3.66u2hcrz0miqpc8h0y0f3v7aw.my-network
-    ```
-
-6.  From inside the busybox container, run `wget` to access the nginx web server
-running in the `my-web` service:
-
-    ```bash
-    $ wget -O- my-web
-
-    Connecting to my-web (10.0.9.2:80)
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Welcome to nginx!</title>
-    ...snip...
-    ```
-
-    The swarm load balancer automatically routes the HTTP request to the
-    service's VIP to an active task. It distributes subsequent requests to
-    other tasks using round-robin selection.
-
-## Use DNS round-robin for a service
-
-You can configure the service to use DNS round-robin directly without using a
-VIP, by setting the `--endpoint-mode dnsrr` when you create the service. DNS round-robin is useful in cases where you want to use your own load balancer.
-
-The following example shows a service with `dnsrr` endpoint mode:
-
-```bash
-$ docker service create \
-  --replicas 3 \
-  --name my-dnsrr-service \
-  --network my-network \
-  --endpoint-mode dnsrr \
-  nginx
-```
-
-When you query the DNS for the service name, the DNS service returns the IP
-addresses for all the task containers:
-
-```bash
-$ nslookup my-dnsrr-service
-Server:    127.0.0.11
-Address 1: 127.0.0.11
-
-Name:      my-dnsrr
-Address 1: 10.0.9.8 my-dnsrr-service.1.bd3a67p61by5dfdkyk7kog7pr.my-network
-Address 2: 10.0.9.10 my-dnsrr-service.3.0sb1jxr99bywbvzac8xyw73b1.my-network
-Address 3: 10.0.9.9 my-dnsrr-service.2.am6fx47p3bropyy2dy4f8hofb.my-network
-```
-
-## Confirm VIP connectivity
-
-In general we recommend you use `dig`, `nslookup`, or another DNS query tool to
-test access to the service name via DNS. Because a VIP is a logical IP, `ping`
-is not the right tool to confirm VIP connectivity.
+5.  Initialize or join the swarm.
 
 ## Learn More
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](/engine/reference/commandline/docker.md)
+* [Docker CLI reference](/engine/reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }

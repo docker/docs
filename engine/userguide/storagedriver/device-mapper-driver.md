@@ -76,8 +76,8 @@ For production systems, see
     $ sudo systemctl start docker
     ```
 
-4.  Verify that the daemon is using the `devicemapper` storage driver.
-    Use the `docker info` command and look for `Storage Driver`
+4.  Verify that the daemon is using the `devicemapper` storage driver. Use the
+    `docker info` command and look for `Storage Driver`.
 
     ```bash
     $ docker info
@@ -200,63 +200,49 @@ assumes that the Docker daemon is in the `stopped` state.
     ```
 
 7.  Convert the volumes to a thin pool and a storage location for metadata for
-    the thin pool, using the `lgconvert` command.
+    the thin pool, using the `lvconvert` command.
 
     ```none
-      $ sudo lvconvert -y \
-      --zero n \
-      -c 512K \
-      --thinpool docker/thinpool \
-      --poolmetadata docker/thinpoolmeta
+    $ sudo lvconvert -y \
+    --zero n \
+    -c 512K \
+    --thinpool docker/thinpool \
+    --poolmetadata docker/thinpoolmeta
 
-      WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to thin pool's data and metadata volumes with metadata wiping.
-      THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
-      Converted docker/thinpool to thin pool.
-      ```
-
-8.  Create an LVM profile that will enable automatic extension of the thin
-    pool. Edit the file `/etc/lvm/profile/docker-thinpool.profile` and add the
-    following contents:
-
-    ```none
-    thin_pool_autoextend_threshold = 80
+    WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to
+    thin pool's data and metadata volumes with metadata wiping.
+    THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
+    Converted docker/thinpool to thin pool.
     ```
 
-    If desired, set a different value. The value refers to the percentage of
-    space that needs to be used before LVM attempts to auto-extend the available
-    space. To disable automatic extension entirely, set the value to `100`. This
-    is not recommended.
-
-    Save the file.
-
-7.  Configure autoextension of thin pools via an `lvm` profile.
+8.  Configure autoextension of thin pools via an `lvm` profile.
 
     ```bash
     $ sudo vi /etc/lvm/profile/docker-thinpool.profile
     ```
 
-8.  Specify `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
+9.  Specify `thin_pool_autoextend_threshold` and `thin_pool_autoextend_percent`
     values.
 
     `thin_pool_autoextend_threshold` is the percentage of space used before `lvm`
-    attempts to autoextend the available space (0 = disabled).
+    attempts to autoextend the available space (100 = disabled, not recommended).
 
     `thin_pool_autoextend_percent` is the amount of space to add to the device
-    when automatically extending (100 = disabled).
+    when automatically extending (0 = disabled).
 
     The example below will add 20% more capacity when the disk usage reaches
     80%.
 
-      ```none
-      activation {
-        thin_pool_autoextend_threshold=80
-        thin_pool_autoextend_percent=20
-      }
-      ```
+    ```none
+    activation {
+      thin_pool_autoextend_threshold=80
+      thin_pool_autoextend_percent=20
+    }
+    ```
 
     Save the file.
 
-9.  Apply the LVM profile, using the `lvchange` command.
+10. Apply the LVM profile, using the `lvchange` command.
 
     ```bash
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
@@ -264,7 +250,7 @@ assumes that the Docker daemon is in the `stopped` state.
     Logical volume docker/thinpool changed.
     ```
 
-10. Enable monitoring for logical volumes on your host. Without this step,
+11. Enable monitoring for logical volumes on your host. Without this step,
     automatic extension will not occur even in the presence of the LVM profile.
 
     ```bash
@@ -274,7 +260,7 @@ assumes that the Docker daemon is in the `stopped` state.
     thinpool docker twi-a-t--- 95.00g             0.00   0.01                             monitored
     ```
 
-11. If you have ever run Docker on this host before, or if `/var/lib/docker/`
+12. If you have ever run Docker on this host before, or if `/var/lib/docker/`
     exists, move it out of the way so that Docker can use the new LVM pool to
     store the contents of image and containers.
 
@@ -286,9 +272,13 @@ assumes that the Docker daemon is in the `stopped` state.
     If any of the following steps fail and you need to restore, you can remove
     `/var/lib/docker` and replace it with `/var/lib/docker.bk`.
 
-12. Edit `/etc/docker/daemon.json` and configure the options needed for the
+13. Edit `/etc/docker/daemon.json` and configure the options needed for the
     `devicemapper` storage driver. If the file was previously empty, it should
     now contain the following contents:
+
+    > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`,
+    > is not yet supported on RHEL, CentOS, or Ubuntu 14.04 when using the
+    > default kernel version 3.18.
 
     ```json
     {
@@ -301,9 +291,9 @@ assumes that the Docker daemon is in the `stopped` state.
     }
     ```
 
-13. Start Docker.
+14. Start Docker.
 
- 	  **systemd**:
+    **systemd**:
 
     ```bash
     $ sudo systemctl start docker
@@ -315,7 +305,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ sudo service docker start
     ```
 
-14. Verify that Docker is using the new configuration using `docker info`.
+15. Verify that Docker is using the new configuration using `docker info`.
 
     ```bash
     $ docker info
@@ -351,7 +341,7 @@ assumes that the Docker daemon is in the `stopped` state.
     If Docker is configured correctly, the `Data file` and `Metadata file` will
     be blank, and the pool name will be `docker-thinpool`.
 
-15. After you have verified that the configuration is correct, you can remove the
+16. After you have verified that the configuration is correct, you can remove the
     `/var/lib/docker.bk` directory which contains the previous configuration.
 
     ```bash
@@ -487,19 +477,15 @@ thin pool is 100 GB, and is increased to 200 GB.
     a.  Get the pool name first. The pool name is the first field, delimited by
         ` :`. This command extracts it.
 
-        ```bash
-        $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+            $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
 
-        docker-8:1-123141-pool
-        ```
+            docker-8:1-123141-pool
 
     b.  Dump the device mapper table for the thin pool.
 
-        ```bash
-        $ sudo dmsetup table docker-8:1-123141-pool
+            $ sudo dmsetup table docker-8:1-123141-pool
 
-        0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
-        ```
+            0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
 
     c.  Calculate the total sectors of the thin pool using the second field
         of the output. The number is expressed in 512-k sectors. A 100G file has
@@ -509,13 +495,12 @@ thin pool is 100 GB, and is increased to 200 GB.
     d.  Reload the thin pool with the new sector number, using the following
         three `dmsetup`  commands.
 
-        ```bash
-        $ sudo dmsetup suspend docker-8:1-123141-pool
+            $ sudo dmsetup suspend docker-8:1-123141-pool
 
-        $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
+            $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
 
-        $ sudo dmsetup resume docker-8:1-123141-pool
-        ```
+            $ sudo dmsetup resume docker-8:1-123141-pool
+
 
 #### Resize a direct-lvm thin pool
 

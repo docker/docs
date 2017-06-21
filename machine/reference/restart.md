@@ -15,7 +15,7 @@ Description:
 
 Restart a machine. Oftentimes this is equivalent to
 `docker-machine stop; docker-machine start`. But some cloud driver try to implement a clever restart which keeps the same
-ip address.
+IP address.
 
 ```
 $ docker-machine restart dev

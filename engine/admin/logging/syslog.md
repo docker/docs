@@ -32,50 +32,56 @@ The format is defined in [RFC 5424](https://tools.ietf.org/html/rfc5424) and Doc
 
 ## Usage
 
-To use the `syslog` driver as the default logging driver, you can use the `--log-driver` and `--log-opt` flags when starting Docker:
+To use the `syslog` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
++configuring Docker using `daemon.json`, see
++[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-```bash
-dockerd \
-  --log-driver syslog \
-  --log-opt syslog-address=udp://1.2.3.4:1111
-```
-
-> **Note**: The syslog-address supports both UP and TCP.
-
-To make the changes persistent, add the toptions to `/etc/docker/daemon.json`:
-
+The following example sets the log driver to `syslog` and sets the
+`syslog-address` option.
 
 ```json
 {
   "log-driver": "syslog",
-  "log-opts":  {
+  "log-opts": {
     "syslog": "udp://1.2.3.4:1111"
   }
 }
 ```
+
+Restart Docker for the changes to take effect.
+
+> **Note**: The syslog-address supports both UDP and TCP.
 
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker create` or `docker run`:
 
 ```bash
 docker run \
-      -–log-driver syslog –-log-opt syslog=udp://1.2.3.4:1111 \
+      -–log-driver syslog –-log-opt syslog-address=udp://1.2.3.4:1111 \
       alpine echo hello world
 ```
 
 ## Options
 
-The following logging options are supported for the `syslog` logging driver:
+The following logging options are supported as options for the `syslog` logging
+driver. They can be set as defaults in the `daemon.json`, by adding them as
+key-value pairs to the `log-opts` JSON array. They can also be set on a given
+container by adding a `--log-opt <key>=<value>` flag for each option when
+starting the container.
 
-| Option               | Description              | Example value                             |
-|----------------------|--------------------------|-------------------------------------------|
-| `syslog-address`     | The address of an external `syslog` server. The URI specifier may be `[tcp|udp|tcp+tls]://host:port`, `unix://path`, or `unixgram://path`. If the transport is `tcp`, `udp`, or `tcp+tls`, the default port is `514`.| `--log-opt syslog-address=tcp+tls://192.168.1.3:514`, `--log-opt syslog-address=unix:///tmp/syslog.sock` |
-| `syslog-facility`    | The `syslog` facility to use. Can be the number or name for any valid `syslog` facility. See the [syslog documentation](https://tools.ietf.org/html/rfc5424#section-6.2.1). | `--log-opt syslog-facility=daemon` |
-| `syslog-tls-ca-cert` | The absolute path to the trust certificates signed by the CA. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem` |
-| `syslog-tls-cert`    | The absolute path to the TLS certificate file. **Ignored if the address protocol is not `tcp+tls`**. | `--log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem` |
-| `syslog-tls-key`     | The absolute path to the TLS key file. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem` |
-| `syslog-tls-skip`    | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-skip-verify=true` |
-| `tag`                | A string that is appended to the `APP-NAME` in the `syslog` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format. | `--log-opt tag=mailer` |
-| `syslog-format`      | The `syslog` message format to use. If not specified the local UNIX syslog format is used, without a specified hostname. Specify `rfc3164` for the RFC-3164 compatible format, `rfc5424` for RFC-5424 compatible format, or `rfc5424micro` for RFC-5424 compatible format with microsecond timestamp resolution. | `--log-opt syslog-format=rfc5424micro` |
-| `labels`             | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
-| `env`                | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
+| Option                   | Description                                                                                                                                                                                                                                                                                                      | Example value                                                                                                                                                                                                                                        |
+|:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `syslog-address`         | The address of an external `syslog` server. The URI specifier may be `[tcp                                                                                                                                                                                                                                       | udp|tcp+tls]://host:port`, `unix://path`, or `unixgram://path`. If the transport is `tcp`, `udp`, or `tcp+tls`, the default port is `514`.| `--log-opt syslog-address=tcp+tls://192.168.1.3:514`, `--log-opt syslog-address=unix:///tmp/syslog.sock` |
+| `syslog-facility`        | The `syslog` facility to use. Can be the number or name for any valid `syslog` facility. See the [syslog documentation](https://tools.ietf.org/html/rfc5424#section-6.2.1).                                                                                                                                      | `--log-opt syslog-facility=daemon`                                                                                                                                                                                                                   |
+| `syslog-tls-ca-cert`     | The absolute path to the trust certificates signed by the CA. **Ignored if the address protocol is not `tcp+tls`.**                                                                                                                                                                                              | `--log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem`                                                                                                                                                                                    |
+| `syslog-tls-cert`        | The absolute path to the TLS certificate file. **Ignored if the address protocol is not `tcp+tls`**.                                                                                                                                                                                                             | `--log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem`                                                                                                                                                                                     |
+| `syslog-tls-key`         | The absolute path to the TLS key file. **Ignored if the address protocol is not `tcp+tls`.**                                                                                                                                                                                                                     | `--log-opt syslog-tls-key=/etc/ca-certificates/custom/key.pem`                                                                                                                                                                                       |
+| `syslog-tls-skip-verify` | If set to `true`, TLS verification is skipped when connecting to the `syslog` daemon. Defaults to `false`. **Ignored if the address protocol is not `tcp+tls`.**                                                                                                                                                 | `--log-opt syslog-tls-skip-verify=true`                                                                                                                                                                                                              |
+| `tag`                    | A string that is appended to the `APP-NAME` in the `syslog` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.                                                       | `--log-opt tag=mailer`                                                                                                                                                                                                                               |
+| `syslog-format`          | The `syslog` message format to use. If not specified the local UNIX syslog format is used, without a specified hostname. Specify `rfc3164` for the RFC-3164 compatible format, `rfc5424` for RFC-5424 compatible format, or `rfc5424micro` for RFC-5424 compatible format with microsecond timestamp resolution. | `--log-opt syslog-format=rfc5424micro`                                                                                                                                                                                                               |
+| `labels`                 | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).                                                                                                                                             | `--log-opt labels=production_status,geo`                                                                                                                                                                                                             |
+| `env`                    | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md).                                                                                                                              | `--log-opt env=os,customer`                                                                                                                                                                                                                          |
+| `env-regex`              | Applies when starting the Docker daemon. Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                            | `--log-opt env-regex=^(os|customer).                                                                                                                                                                                                                 |

@@ -9,12 +9,18 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 3 of the Compose file format. This is the newest
 version.
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
-versions and upgrading, see
-[Compose file versions and upgrading](compose-versioning.md).
+## Compose and Docker compatibility matrix
+
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+table below is a quick look. For full details on what each version includes and
+how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+
+{% include content/compose-matrix.md %}
 
 ## Compose file structure and examples
 
@@ -196,7 +202,7 @@ Override the default command.
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 
-    command: [bundle, exec, thin, -p, 3000]
+    command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 
@@ -345,6 +351,16 @@ services:
           memory: 20M
 ```
 
+##### Out Of Memory Exceptions (OOME)
+
+If your services or containers attempt to use more memory than the system has
+available, you may experience an Out Of Memory Exception (OOME) and a container,
+or the Docker daemon, might be killed by the kernel OOM killer. To prevent this
+from happening, ensure that your application runs on hosts with adequate memory
+and see [Understand the risks of running out of
+memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+
+
 #### restart_policy
 
 Configures if and how to restart containers when they exit. Replaces
@@ -399,19 +415,19 @@ To set labels on containers instead, use the `labels` key outside of `deploy`:
 The following sub-options (supported for `docker compose up` and `docker compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
 
 - [build](#build)
-- [cgroup_parent](#cgroup-parent)
-- [container_name](#containername)
+- [cgroup_parent](#cgroup_parent)
+- [container_name](#container_name)
 - [devices](#devices)
 - [dns](#devices)
-- [dns_search](#dnssearch)
+- [dns_search](#dns_search)
 - [tmpfs](#tmpfs)
-- [external_links](#externallinks)
+- [external_links](#external_links)
 - [links](#links)
-- [network_mode](#networkmode)
-- [security_opt](#securityopt)
-- [stop_signal](#stopsignal)
+- [network_mode](#network_mode)
+- [security_opt](#security_opt)
+- [stop_signal](#stop_signal)
 - [sysctls](#sysctls)
-- [userns_mode](#usernsmode)
+- [userns_mode](#userns_mode)
 
 >**Tip:** See also, the section on [how to configure volumes
 for services, swarms, and docker-stack.yml
@@ -542,7 +558,7 @@ Add environment variables from a file. Can be a single value or a list.
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
 
-Environment variables specified in `environment` override these values.
+Environment variables specified in [environment](#environment) override these values.
 
     env_file: .env
 
@@ -562,9 +578,37 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
-The value of `VAL` is used as is and not modified at all. For example if the value is
-surrounded by quotes (as is often the case of shell variables), the quotes will be
-included in the value passed to Compose.
+The value of `VAL` is used as is and not modified at all. For example if the
+value is surrounded by quotes (as is often the case of shell variables), the
+quotes will be included in the value passed to Compose.
+
+Keep in mind that the order of files in the list is significant in determining
+the value assigned to a variable that shows up more than once. For example,
+given the following declaration in `docker_compose.yml`:
+
+```yaml
+services:
+  some-service:
+    env_file:
+      - a.env
+      - b.env
+```
+
+And the following files:
+
+```none
+# a.env
+VAR=1
+```
+
+and
+
+```none
+# b.env
+VAR=hello
+```
+
+$VAR will be `hello`.
 
 ### environment
 
@@ -912,29 +956,6 @@ An example:
           -
             subnet: 2001:3984:3989::/64
 
-#### link_local_ips
-
-Specify a list of link-local IPs. Link-local IPs are special IPs which belong
-to a well known subnet and are purely managed by the operator, usually
-dependent on the architecture where they are deployed. Therefore they are not
-managed by docker (IPAM driver).
-
-Example usage:
-
-    version: '2.1'
-    services:
-      app:
-        image: busybox
-        command: top
-        networks:
-          app_net:
-            link_local_ips:
-              - 57.123.22.11
-              - 57.123.22.13
-    networks:
-      app_net:
-        driver: bridge
-
 ### pid
 
     pid: "host"
@@ -1170,9 +1191,9 @@ more information.
 ### volumes
 
 > **Note**: The top-level
-> [`volumes` option](#volume-configuration-reference) defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+> [volumes](#volume-configuration-reference) option defines
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. (See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.)
 
 Mount host paths or named volumes. Named volumes must be defined in the
 [top-level `volumes` key](#volume-configuration-reference). Use named volumes with [services, swarms, and stack files](#volumes-for-services-swarms-and-stack-files).
@@ -1319,12 +1340,15 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 ## Volume configuration reference
 
-While it is possible to declare volumes on the fly as part of the service
-declaration, this section allows you to create named volumes that can be
-reused across multiple services (without relying on `volumes_from`), and are
-easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
-subcommand documentation for more information.
+While it is possible to declare [volumes](#volumes) on the file as part of the
+service declaration, this section allows you to create named volumes (without
+relying on `volumes_from`) that can be reused across multiple services, and are
+easily retrieved and inspected using the docker command line or API. See the
+[docker volume](/engine/reference/commandline/volume_create.md) subcommand
+documentation for more information.
+
+See [Docker Volumes](/engine/userguide/dockervolumes.md) and [Volume
+Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
@@ -1400,6 +1424,18 @@ refer to it within the Compose file:
       data:
         external:
           name: actual-name-of-volume
+
+> External volumes are always created with docker stack deploy
+>
+External volumes that do not exist _will be created_ if you use [docker stack
+deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
+(instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
+volume is automatically created when it is defined by a service. As service
+tasks are scheduled on new nodes,
+[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) creates the
+volume on the local node. To learn more, see
+[moby/moby#29976](https://github.com/moby/moby/issues/29976).
+{: .note-vanilla}
 
 ### labels
 

@@ -5,7 +5,7 @@ title: Organize our issues
 ---
 
 The Docker projects use GitHub issues to record issues and feature requests that
-come in from contributors.  Help us organize our work by triaging. Triage is the
+come in from contributors. Help us organize our work by triaging. Triage is the
 process of reviewing incoming issue tickets, gathering more information about
 the issue, and verifying whether or not the issue is valid.
 
@@ -34,6 +34,7 @@ Follow these steps:
    notification go to your GitHub or email inbox. Some of repositories you can watch are:
 
    | Repository | Description |
+   |----------  |-------------|
    | [docker/docker](https://github.com/moby/moby) | Docker the open-source application container engine |
    | [docker/machine](https://github.com/docker/machine) | Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center. |
    | [kitematic/kitematic](https://github.com/kitematic/kitematic) | Kitematic is a simple application for managing Docker containers on macOS and Windows. |

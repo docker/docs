@@ -40,9 +40,13 @@ Therefore, you cannot run the two solutions simultaneously. But you can still
 use `docker-machine` to create more local VMs by using the Microsoft Hyper-V
 driver.
 
-* The only prerequisite is to have Docker for Windows installed. If you want to create multiple local machines, use the
-Microsoft `hyperv` driver to create them. (See the [Docker Machine driver for
-Microsoft Hyper-V](drivers/hyper-v.md).)
+The prerequisites are:
+
+* Have Docker for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker for Windows](/docker-for-windows/install.md#what-to-know-before-you-install)).
+
+* Set up the Hyper-V driver to use an external virtual network switch See
+the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
+which includes an /machine/drivers/hyper-v.md#example of how to do this.
 
 #### If you are using Docker for Mac
 
@@ -286,11 +290,18 @@ For machines other than `default`, and commands other than those listed above, y
 
 ## Unset environment variables in the current shell
 
-You might want to use the current shell to connect to a different Docker Engine. This would be the case if, for example, you are [running Docker for Mac concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to talk to two different Docker Engines, or running swarms on Docker Cloud and want to [switch between managing the swarm and using Docker hosts](/docker-cloud/cloud-swarm/connect-to-swarm.md#switch-between-your-swarm-and-docker-hosts-in-the-same-shell). In both scenarios, you have the option to switch the environment for the current shell to talk to different Docker engines.
+You might want to use the current shell to connect to a different Docker Engine.
+This would be the case if, for example, you are [running Docker for Mac
+concurrent with Docker Toolbox](/docker-for-mac/docker-toolbox.md) and want to
+talk to two different Docker Engines, or running swarms on Docker Cloud and want
+to [switch between managing the swarm and using Docker
+hosts](/docker-cloud/cloud-swarm/connect-to-swarm.md#switch-between-your-swarm-and-docker-hosts-in-the-same-shell).
+In both scenarios, you have the option to switch the environment for the current
+shell to talk to different Docker engines.
 
 1.  Run `env|grep DOCKER` to check whether DOCKER environment variables are set.
 
-    ```
+    ```none
     $ env | grep DOCKER
     DOCKER_HOST=tcp://192.168.99.100:2376
     DOCKER_MACHINE_NAME=default
@@ -304,26 +315,26 @@ You might want to use the current shell to connect to a different Docker Engine.
 
     * Run the `unset` command on the following `DOCKER` environment variables.
 
-      ```
+      ```none
       unset DOCKER_TLS_VERIFY
       unset DOCKER_CERT_PATH
       unset DOCKER_MACHINE_NAME
       unset DOCKER_HOST
       ```
 
-    *  Alternatively, run a shortcut command `docker-machine env -u` to show the command you need to run to unset all DOCKER variables:
+    * Alternatively, run a shortcut command `docker-machine env -u` to show the command you need to run to unset all DOCKER variables:
 
-        ```
-        $ docker-machine env -u
-        unset DOCKER_TLS_VERIFY
-        unset DOCKER_HOST
-        unset DOCKER_CERT_PATH
-        unset DOCKER_MACHINE_NAME
-        # Run this command to configure your shell:
-        # eval $(docker-machine env -u)
-        ```
+      ```none
+      $ docker-machine env -u
+      unset DOCKER_TLS_VERIFY
+      unset DOCKER_HOST
+      unset DOCKER_CERT_PATH
+      unset DOCKER_MACHINE_NAME
+      # Run this command to configure your shell:
+      # eval $(docker-machine env -u)
+      ```
 
-        Run `eval $(docker-machine env -u)` to unset all DOCKER variables in the current shell.
+      Run `eval $(docker-machine env -u)` to unset all DOCKER variables in the current shell.
 
 3. Now, after running either of the above commands, this command should return no output.
 

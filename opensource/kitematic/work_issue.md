@@ -47,7 +47,7 @@ To do this, edit the container `General Settings` layout.
 
     ![Javascript to display container id in kitematic](images/settings-code-example.png)
 
-5.  Save the code changes, restart Kitematic.
+5.  Save the code changes, and restart Kitematic.
 
     ```
     $ npm start

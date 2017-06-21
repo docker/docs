@@ -26,20 +26,20 @@ If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
 To run this tutorial, you need the following:
 
-* [three networked host machines](#three-networked-host-machines)
+* [three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
 * [Docker Engine 1.12 or later installed](#docker-engine-1-12-or-newer)
 * [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
-* [open ports between the hosts](#open-ports-between-the-hosts)
+* [open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 
 ### Three networked host machines
 
-The tutorial uses three networked host machines as nodes in the swarm. These can
-be virtual machines on your PC, in a data center, or on a cloud service
-provider. This tutorial uses the following machine names:
+This tutorial requires three Linux hosts which have Docker installed and can
+communicate over a network. These can be physical machines, virtual machines,
+Amazon EC2 instances, or hosted in some other way.
 
-* manager1
-* worker1
-* worker2
+One of these machines will be a manager (called `manager1`) and two of them will
+be workers (`worker1` and `worker2`).
+
 
 >**Note**: You can follow many of the tutorial steps to test single-node swarm
 as well, in which case you need only one host. Multi-node commands will not

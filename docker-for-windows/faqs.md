@@ -129,9 +129,9 @@ No, at this point, Docker for Windows does not enable you to control (`chmod`)
 the Unix-style permissions on [shared
 volumes](/docker-for-windows/index.md#shared-drives) for deployed containers,
 but rather sets permissions to a default value of
-[0770](http://permissions-calculator.org/decode/0770/) (`read`, `write`,
-`execute` permissions for `user` and `group`, none for other) which is not
-configurable.
+[0755](http://permissions-calculator.org/decode/0755/)
+(`read`, `write`, `execute` permissions for `user`, `read` and `execute`
+for `group`) which is not configurable.
 
 For workarounds and to learn more, please see [Permissions errors on data
 directories for shared
@@ -196,7 +196,7 @@ Started topic.
 
 To learn more about using Docker for Windows and Docker Machine, see
 [What to know before you install](install.md#what-to-know-before-you-install) in the Getting Started topic. For more about Docker Machine itself, see
-[What is Docker Machine?](/machine/overview.md#what-is-docker-machine)
+[What is Docker Machine?](/machine/overview.md#what-is-docker-machine), and the [Hyper-V driver](/machine/drivers/hyper-v.md) for Docker Machine.
 
 ### How do I run Windows containers on Docker on Windows Server 2016?
 

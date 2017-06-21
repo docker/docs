@@ -1,5 +1,5 @@
 ---
-description: Learn how select the proper storage driver for your container.
+description: Learn how to select the proper storage driver for your container.
 keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2
 title: Docker storage drivers
 ---
@@ -18,7 +18,7 @@ Docker relies on driver technology to manage the storage and interactions
 associated with images and the containers that run them. This section contains
 the following pages:
 
-* [About mages, containers, and storage drivers](imagesandcontainers.md)
+* [About images, containers, and storage drivers](imagesandcontainers.md)
 * [Select a storage driver](selectadriver.md)
 * [AUFS storage driver in practice](aufs-driver.md)
 * [Btrfs storage driver in practice](btrfs-driver.md)

@@ -1,13 +1,18 @@
-There are several versions of the Compose file format – 1, 2, 2.1 and 3. For
-details on versions and how to upgrade, see
-[Versioning](compose-versioning.md#versioning) and
-[Upgrading](compose-versioning.md#upgrading).
-
 This table shows which Compose file versions support specific Docker releases.
 
 | **Compose file format** | **Docker Engine release** |
 |  -------------------    |    ------------------     |
-|      3.0 ; 3.1          |       1.13.0+             |
+|      3.3                |       17.06.0+            |
+|      3.0 - 3.2          |       1.13.0+             |
+|      2.2                |       1.13.0+             |
 |      2.1                |       1.12.0+             |
 |      2.0                |       1.10.0+             |
 |      1.0                |       1.9.1.+             |
+
+In addition to Compose file format versions shown in the table, the Compose
+itself is on a release schedule, as shown in [Compose
+releases](https://github.com/docker/compose/releases/), but file format versions
+do not necessairly increment with each release. For example, Compose file format
+3.0 was first introduced in [Compose release
+1.10.0](https://github.com/docker/compose/releases/tag/1.10.0), and versioned
+gradually in subsequent releases.

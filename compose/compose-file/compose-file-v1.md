@@ -8,12 +8,18 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 1 of the Compose file format. This is the oldest
 version.
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
-versions and upgrading, see
-[Compose file versions and upgrading](compose-versioning.md).
+## Compose and Docker compatibility matrix
+
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+table below is a quick look. For full details on what each version includes and
+how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+
+{% include content/compose-matrix.md %}
 
 ## Service configuration reference
 
@@ -97,7 +103,7 @@ Override the default command.
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 
-    command: [bundle, exec, thin, -p, 3000]
+    command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 

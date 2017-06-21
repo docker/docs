@@ -48,7 +48,7 @@ different repositories or namespaces.
 **Save and continue**
 
 We'll ask for a lot of information to display on your product page, and we know
-that you may not be have all of it available right away. As you fill out your
+that you may not have all of it available right away. As you fill out your
 product information, you can always save your work and come back to work on it
 later, before you submit it.
 
@@ -179,7 +179,7 @@ When your product's image is secure and the product information meets our
 quality guidelines, you'll receive an email notification that the product is
 ready to publish to the Docker Store.
 
-Once you receive this email you can go to the Docker Store and click "Publish"
+Once you receive this email you can go to the Docker Store and click **Publish**
 to make your product available.
 
 > **Tip**: Docker does not automatically make the approved product available. This means you can time the product's release on the Docker Store with announcements or marketing activity.

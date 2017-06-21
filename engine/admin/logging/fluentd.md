@@ -16,11 +16,11 @@ destinations.
 In addition to the log message itself, the `fluentd` log
 driver sends the following metadata in the structured log message:
 
-| Field            | Description                         |
--------------------|-------------------------------------|
-| `container_id`   | The full 64-character container ID. |
-| `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries.                                         |
-| `source`         | `stdout` or `stderr`                |
+| Field            | Description                                                                                                                                            |
+|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container_id`   | The full 64-character container ID.                                                                                                                    |
+| `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
+| `source`         | `stdout` or `stderr`                                                                                                                                   |
 
 The `docker logs` command is not available for this logging driver.
 
@@ -32,10 +32,26 @@ Some options are supported by specifying `--log-opt` as many times as needed:
  - `tag`: specify tag for fluentd message, which interpret some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
 
 
-Configure the default logging driver by passing the
-`--log-driver` option to the Docker daemon:
+ To use the `fluentd` driver as the default logging driver, set the `log-driver`
+ and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+ located in `/etc/docker/` on Linux hosts or
+ `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
+ +configuring Docker using `daemon.json`, see
+ +[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-    dockerd --log-driver=fluentd
+The following example sets the log driver to `fluentd` and sets the
+`fluentd-address` option.
+
+ ```json
+ {
+   "log-driver": "fluentd",
+   "log-opts": {
+     "fluentd-address": "fluentdhost:24224"
+   }
+ }
+ ```
+
+ Restart Docker for the changes to take effect.
 
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
@@ -73,13 +89,34 @@ Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
 
-### labels and env
+### labels, env, and env-regex
 
-The `labels` and `env` options each take a comma-separated list of keys. If there is collision between `label` and `env` keys, the value of the `env` takes precedence. Both options add additional fields to the extra attributes of a logging message.
+The `labels` and `env` options each take a comma-separated list of keys. If
+there is collision between `label` and `env` keys, the value of the `env` takes
+precedence. Both options add additional fields to the extra attributes of a
+logging message.
+
+The `env-regex` option is similar to and compatible with `env`. Its value is a
+regular expression to match logging-related environment variables. It is used
+for advanced [log tag options](log_tags.md).
 
 ### fluentd-async-connect
 
-Docker connects to Fluentd in the background. Messages are buffered until the connection is established.
+Docker connects to Fluentd in the background. Messages are buffered until the
+connection is established.
+
+### fluentd-buffer-limit
+
+The amount of data to buffer before flushing to disk. Defaults the amount of RAM
+available to the container.
+
+### fluentd-retry-wait
+
+How long to wait between retries. Defaults to 1 second.
+
+### fluentd-max-retries
+
+The maximum number of retries. Defaults to 10.
 
 ## Fluentd daemon management with Docker
 

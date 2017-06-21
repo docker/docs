@@ -14,7 +14,7 @@ review</a>.
 
 Now that you’ve had some practice, try adding another feature to Kitematic on your own.
 
-As you learned in the previous exercise, adding the container ID to the container Settings tab is fairly simple.
+As you learned in the previous exercise, adding the container ID to the container **Settings** tab is fairly simple.
 
 Let's provide another missing piece of information for Kitematic users:
 

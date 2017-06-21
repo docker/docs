@@ -43,68 +43,11 @@ new files, modifying existing files, and deleting files, are written to this thi
 writable container layer. The diagram below shows a container based on the Ubuntu
 15.04 image.
 
-The diagram below shows a container with the Ubuntu 15.04 image comprising 4
-stacked image layers, and the writable container layer on top.
-
 ![Docker image layers](images/container-layers.jpg)
 
 A _storage driver_ handles the details about the way these layers interact with
 each other. Different storage drivers are available, which have advantages
 and disadvantages in different situations.
-
-### Content addressable storage
-
-If you are already running Docker 1.10 or higher, you can skip this section and
-go straight to [Containers and layers](#containers-and-layers).
-
-Docker 1.10 introduced a new content addressable storage model. This is a
-completely new way to address image and layer data on disk. Previously, image
-and layer data was referenced and stored using a randomly generated UUID. In
-the new model this is replaced by a secure *content hash*.
-
-The new model improves security, provides a built-in way to avoid ID
-collisions, and guarantees data integrity after pull, push, load, and save
-operations. It also enables better sharing of layers by allowing many images to
-freely share their layers even if they didn’t come from the same build.
-
-The diagram below shows an updated version of the previous diagram,
-highlighting the changes implemented by Docker 1.10.
-
-![](images/container-layers-cas.jpg)
-
-All image layer IDs are cryptographic hashes, whereas the container ID is still
-a randomly generated UUID.
-
-The new model requires you to migrate existing images from Docker 1.9 and
-earlier, and it includes several changes to the filesystem structure of images
-and layers. If you are already running Docker 1.10 or higher, you can skip this
-section.
-
-Images created within Docker 1.9 or earlier need to be migrated before they can
-be used with the new model. This migration involves calculating new secure
-checksums and is performed automatically the first time you start an updated
-Docker daemon. After the migration is complete, all images and tags will have
-brand new secure IDs.
-
-Although the migration is automatic and transparent, it is computationally
-intensive. It may take some time to complete, and during this time, Docker will
-not respond to other requests. If this is a problem, you can use a
-[migration tool](https://github.com/docker/v1.10-migrator/releases) to migrate
-existing images to the new format before upgrading Docker. This avoids
-downtime and allows you to distribute migraated images to systems that have
-already been upgraded. For more information, see
-[https://github.com/docker/v1.10-migrator/releases](https://github.com/docker/v1.10-migrator/releases).
-
-During the migration, you need to expose your Docker host's data directory to
-the migration container. If you are using the default Docker data path, use a
-command like the following:
-
-```bash
-$ sudo docker run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
-```
-
-If you use the `devicemapper` storage driver, you need to include the
-`--privileged` option so that the container has access to your storage devices.
 
 ## Container and layers
 
@@ -121,13 +64,46 @@ multiple containers sharing the same Ubuntu 15.04 image.
 ![](images/sharing-layers.jpg)
 
 > **Note**: If you need multiple images to have shared access to the exact
-> asme data, store this data in a Docker volume and mount it into your
+> same data, store this data in a Docker volume and mount it into your
 > containers.
 
 Docker uses storage drivers to manage the contents of the image layers and the
 writable container layer. Each storage driver handles the implementation
 differently, but all drivers use stackable image layers and the copy-on-write
 (CoW) strategy.
+
+## Container size on disk
+
+To view the approximate size of a running container, you can use the `docker ps`
+command. Two different columns relate to size.
+
+- `size`: the amount of data (on disk) that is used for the writable layer of
+  each container
+
+- `virtual size`: the amount of data used for the read-only image data
+  used by the container. Multiple containers may share some or all read-only
+  image data. Two containers started from the same image share 100% of the
+  read-only data, while two containers with different images which have layers
+  in common share those common layers. Therefore, you can't just total the
+  virtual sizes. This will over-estimate the total disk usage by a potentially
+  non-trivial amount.
+
+The total disk space used by all of the running containers on disk is some
+combination of each container's `size` and the `virtual size` values. If
+multiple containers have exactly the same `virtual size`, they are likely
+started from the same exact image.
+
+This also does not count the following additional ways a container can take up
+disk space:
+
+- Disk space used for log files if you use the `json-file` logging driver. This
+  can be non-trivial if your container generates a large amount of logging data
+  and log rotation is not configured.
+- Volumes and bind mounts used by the container.
+- Disk space used for the container's configuration files, which are typically
+  small.
+- Memory written to disk (if swapping is enabled).
+- Checkpoints, if you're using the experimental checkpoint/restore feature.
 
 ## The copy-on-write (CoW) strategy
 
@@ -175,7 +151,7 @@ ebf814eccfe98f2704660ca1d844e4348db3b5ccc637eb905d4818fbfb00a06a
 The directory names do not correspond to the layer IDs (this has been true since
 Docker 1.10).
 
-Now imagine that you have to different Dockerfiles. You use the first one to
+Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
 
 ```conf
@@ -304,11 +280,11 @@ layers are the same.
 When you start a container, a thin writable container layer is added on top of
 the other layers. Any changes the container makes to the filesystem are stored
 here. Any files the container does not change do not get copied to this writable
-layer. This means that the writable layer is as mall as possible.
+layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For The default `aufs` driver and the `overlay` and `overlay2`
+storage driver. For the default `aufs` driver and the `overlay` and `overlay2`
 drivers, the copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts

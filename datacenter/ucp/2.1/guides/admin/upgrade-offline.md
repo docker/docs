@@ -51,10 +51,10 @@ For each machine that you want to manage with UCP:
 ## Upgrade UCP
 
 Now that the offline hosts have all the images needed to upgrade UCP,
-you can [upgrade Docker UCP](index.md).
+you can [upgrade Docker UCP](upgrade.md).
 
 
 ## Where to go next
 
-* [Upgrade UCP](index.md)
+* [Upgrade UCP](upgrade.md)
 * [Release Notes](release-notes.md)

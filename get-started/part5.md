@@ -9,19 +9,31 @@ description: Learn how to create a multi-container application that uses all the
 ## Prerequisites
 
 - [Install Docker version 1.13 or higher](/engine/installation/).
+- Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
+- Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
 - Read the orientation in [Part 1](index.md).
 - Learn how to create containers in [Part 2](part2.md).
-- Make sure you have pushed the container you created to a registry, as
-  instructed; we'll be using it here.
-- Ensure your image is working by
-  running this and visiting `http://localhost/` (slotting in your info for
-  `username`, `repo`, and `tag`):
 
-  ```
-  docker run -p 80:80 username/repo:tag
-  ```
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
+use that shared image here.
+
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+username/repo:tag`, then visit `http://localhost/`.
+
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
-- Have the swarm you created in [part 4](part4.md) running and ready.
+
+- Make sure that the machines you set up in [part 4](part4.md) are running
+and ready. Run `docker-machine ls` to verify this. If the machines are
+stopped, run `docker-machine start myvm1` to boot the manager, followed
+by `docker-machine start myvm2` to boot the worker.
+
+- Have the swarm you created in [part 4](part4.md) running and ready. Run
+`docker-machine ssh myvm1 "docker node ls"` to verify this. If the swarm is up,
+both nodes will report a `ready` status. If not, reinitialze the swarm and join
+the worker as described in [Set up your
+swarm](/get-started/part4.md#set-up-your-swarm).
 
 ## Introduction
 
@@ -38,182 +50,208 @@ application (though very complex applications may want to use multiple stacks).
 Some good news is, you have technically been working with stacks since part 3,
 when you created a Compose file and used `docker stack deploy`. But that was a
 single service stack running on a single host, which is not usually what takes
-place in production. Here, you're going to take what you've learned and make
+place in production. Here, you will take what you've learned, make
 multiple services relate to each other, and run them on multiple machines.
 
-This is the home stretch, so congratulate yourself!
+You're doing great, this is the home stretch!
 
-## Adding a new service and redeploying.
+## Add a new service and redeploy
 
 It's easy to add services to our `docker-compose.yml` file. First, let's add
 a free visualizer service that lets us look at how our swarm is scheduling
-containers. Open up `docker-compose.yml` in an editor and replace its contents
-with the following:
+containers.
 
-```yaml
-version: "3"
-services:
-  web:
-    image: username/repo:tag
-    deploy:
-      replicas: 5
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 50M
-    ports:
-      - "80:80"
+1.  Open up `docker-compose.yml` in an editor and replace its contents
+with the following. Be sure to replace `username/repo:tag` with your image details.
+
+    ```yaml
+    version: "3"
+    services:
+      web:
+        # replace username/repo:tag with your name and image details
+        image: username/repo:tag
+        deploy:
+          replicas: 5
+          restart_policy:
+            condition: on-failure
+          resources:
+            limits:
+              cpus: "0.1"
+              memory: 50M
+        ports:
+          - "80:80"
+        networks:
+          - webnet
+      visualizer:
+        image: dockersamples/visualizer:stable
+        ports:
+          - "8080:8080"
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+        deploy:
+          placement:
+            constraints: [node.role == manager]
+        networks:
+          - webnet
     networks:
-      - webnet
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
+      webnet:
+    ```
+
+    The only thing new here is the peer service to `web`, named `visualizer`.
+    You'll see two new things here: a `volumes` key, giving the visualizer
+    access to the host's socket file for Docker, and a `placement` key, ensuring
+    that this service only ever runs on a swarm manager -- never a worker.
+    That's because this container, built from [an open source project created by
+    Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays
+    Docker services running on a swarm in a diagram.
+
+    We'll talk more about placement constraints and volumes in a moment.
+
+2.  Copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
+
+    ```shell
+    docker-machine scp docker-compose.yml myvm1:~
+    ```
+
+3.  Re-run the `docker stack deploy` command on the manager, and
+whatever services need updating will be updated:
+
+    ```shell
+    $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+    Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
+    Updating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
+    ```
+
+4.  Take a look at the visualizer.
+
+    You saw in the Compose file that `visualizer` runs on port 8080. Get the
+    IP address of one of your nodes by running `docker-machine ls`. Go
+    to either IP address at port 8080 and you will see the visualizer running:
+
+    ![Visualizer screenshot](images/get-started-visualizer1.png)
+
+    The single copy of `visualizer` is running on the manager as you expect, and
+    the five instances of `web` are spread out across the swarm. You can
+    corroborate this visualization by running `docker stack ps <stack>`:
+
+    ```shell
+    docker-machine ssh myvm1 "docker stack ps getstartedlab"
+    ```
+
+    The visualizer is a standalone service that can run in any app
+    that includes it in the stack. It doesn't depend on anything else.
+    Now let's create a service that *does* have a dependency: the Redis
+    service that will provide a visitor counter.
+
+## Persist the data
+
+Let's go through the same workflow once more to add a Redis database for storing
+app data.
+
+1.  Save this new `docker-compose.yml` file, which finally adds a
+Redis service.  Be sure to replace `username/repo:tag` with your image details.
+
+    ```yaml
+    version: "3"
+    services:
+      web:
+        # replace username/repo:tag with your name and image details
+        image: username/repo:tag
+        deploy:
+          replicas: 5
+          restart_policy:
+            condition: on-failure
+          resources:
+            limits:
+              cpus: "0.1"
+              memory: 50M
+        ports:
+          - "80:80"
+        networks:
+          - webnet
+      visualizer:
+        image: dockersamples/visualizer:stable
+        ports:
+          - "8080:8080"
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+        deploy:
+          placement:
+            constraints: [node.role == manager]
+        networks:
+          - webnet
+      redis:
+        image: redis
+        ports:
+          - "6379:6379"
+        volumes:
+          - ./data:/data
+        deploy:
+          placement:
+            constraints: [node.role == manager]
+        networks:
+          - webnet
     networks:
-      - webnet
-networks:
-  webnet:
-```
+      webnet:
+    ```
 
-The only thing new here is the peer service to `web`, named `visualizer`. You'll
-see two new things here: a `volumes` key, giving the visualizer access to the
-host's socket file for Docker, and a `placement` key, ensuring that this service
-only ever runs on a swarm manager -- never a worker. That's because this
-container, built from [an open source project created by
-Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays Docker
-services running on a swarm in a diagram.
+    Redis has an official image in the Docker library and has been granted the
+    short `image` name of just `redis`, so no `username/repo` notation here. The
+    Redis port, 6379, has been pre-configured by Redis to be exposed from the
+    container to the host, and here in our Compose file we expose it from the
+    host to the world, so you can actually enter the IP for any of your nodes
+    into Redis Desktop Manager and manage this Redis instance, if you so choose.
 
-We'll talk more about placement constraints and volumes in a moment. But for
-now, copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
+    Most importantly, there are a couple of things in the `redis` specification
+    that make data persist between deployments of this stack:
 
-```
-docker-machine scp docker-compose.yml myvm1:~
-```
+    - `redis` always runs on the manager, so it's always using the
+    same filesystem.
+    - `redis` accesses an arbitrary directory in the host's file system
+    as `/data` inside the container, which is where Redis stores data.
 
-Now just re-run the `docker stack deploy` command on the manager, and whatever
-services need updating will be updated:
+    Together, this is creating a "source of truth" in your host's physical
+    filesystem for the Redis data. Without this, Redis would store its data in
+    `/data` inside the container's filesystem, which would get wiped out if that
+    container were ever redeployed.
 
-```
-$ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
-Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
-Updating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
-```
+    This source of truth has two components:
 
-You saw in the Compose file that `visualizer` runs on port 8080. Get the IP
-address of the one of your nodes by running `docker-machine ls`. Go to either IP
-address @ port 8080 and you will see the visualizer running:
+    - The placement constraint you put on the Redis service, ensuring that it
+      always uses the same host.
+    - The volume you created that lets the container access `./data` (on the host)
+      as `/data` (inside the Redis container). While containers come and go, the
+      files stored on `./data` on the specified host will persist, enabling
+      continuity.
 
-![Visualizer screenshot](get-started-visualizer1.png)
+    You are ready to deploy your new Redis-using stack.
 
-The single copy of `visualizer` is running on the manager as you expect, and the
-five instances of `web` are spread out across the swarm. You can corroborate
-this visualization by running `docker stack ps <stack>`:
+2.  Create a `./data` directory on the manager:
 
-```
-docker-machine ssh myvm1 "docker stack ps getstartedlab"
-```
+    ```shell
+    $ docker-machine ssh myvm1 "mkdir ./data"
+    ```
 
-The visualizer is a standalone service that can run in any app that includes it
-in the stack. It doesn't depend on anything else. Now let's create a service
-that *does* have a dependency: the Redis service that will provide a visitor
-counter.
+3.  Copy over the new `docker-compose.yml` file with `docker-machine scp`:
 
+    ```shell
+    $ docker-machine scp docker-compose.yml myvm1:~
+    ```
 
-## Persisting data
+4.  Run `docker stack deploy` one more time.
 
-Go through the same workflow once more. Save this new `docker-compose.yml` file,
-which finally adds a Redis service.
+    ```shell
+    $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+    ```
 
-```yaml
-version: "3"
-services:
-  web:
-    image: username/repo:tag
-    deploy:
-      replicas: 5
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 50M
-    ports:
-      - "80:80"
-    networks:
-      - webnet
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-    networks:
-      - webnet
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./data:/data
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-    networks:
-      - webnet
-networks:
-  webnet:
-```
+5.  Check the web page at `http://localhost` and you'll see the results of the visitor counter, which is now live and storing information on Redis.
 
-Redis has an official image in the Docker library and has been granted the short
-`image` name of just `redis`, so no `username/repo` notation here. The Redis
-port, 6379, has been pre-configured by Redis to be exposed from the container to
-the host, and here in our Compose file we expose it from the host to the world,
-so you can actually enter the IP for any of your nodes into Redis Desktop
-Manager and manage this Redis instance, if you so choose.
+    ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
-Most importantly, there are a couple of things in the `redis` specification that
-make data persist between deployments of this stack:
+    Also, check the visualizer at port 8080 on either node's IP address, and you'll see the `redis` service running along with the `web` and `visualizer` services.
 
-- `redis` always runs on the manager, so it's always using the same filesystem.
-- `redis` accesses an arbitrary directory in the host's file system as `/data`
-  inside the container, which is where Redis stores data.
+    ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 
-Together, this is creating a "source of truth" in your host's physical
-filesystem for the Redis data. Without this, Redis would store its data in
-`/data` inside the container's filesystem, which would get wiped out if that
-container were ever redeployed.
-
-This source of truth has two components:
-
-- The placement constraint you put on the Redis service, ensuring that it
-  always uses the same host.
-- The volume you created that lets the container access `./data` (on the host)
-  as `/data` (inside the Redis container). While containers come and go, the
-  files stored on `./data` on the specified host will persist, enabling
-  continuity.
-
-To deploy your new Redis-using stack, create `./data` on the manager, copy over
-the new `docker-compose.yml` file with `docker-machine scp`, and run
-`docker stack deploy` one more time.
-
-```
-$ docker-machine ssh myvm1 "mkdir ./data"
-$ docker-machine scp docker-compose.yml myvm1:~
-$ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
-```
-
-Check the results on either nodes IP address and you'll see that a visitor counter is
-now live and storing information on Redis.
 
 [On to Part 6 >>](part6.md){: class="button outline-btn" style="margin-bottom: 30px"}
 

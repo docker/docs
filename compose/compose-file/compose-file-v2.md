@@ -8,11 +8,17 @@ toc_max: 4
 toc_min: 1
 ---
 
+## Reference and guidelines
+
 These topics describe version 2 of the Compose file format.
 
-For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
-versions and upgrading, see
-[Compose file versions and upgrading](compose-versioning.md).
+## Compose and Docker compatibility matrix
+
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+table below is a quick look. For full details on what each version includes and
+how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+
+{% include content/compose-matrix.md %}
 
 ## Service configuration reference
 
@@ -152,7 +158,7 @@ Override the default command.
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 
-    command: [bundle, exec, thin, -p, 3000]
+    command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 
@@ -545,13 +551,13 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 ### links
 
 Link to containers in another service. Either specify both the service name and
-a link alias (`SERVICE:ALIAS`), or just the service name.
+a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
     web:
       links:
-       - db
-       - db:database
-       - redis
+       - "db"
+       - "db:database"
+       - "redis"
 
 Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.

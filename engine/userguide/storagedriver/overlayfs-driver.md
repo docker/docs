@@ -129,7 +129,7 @@ If you are still using the `overlay` driver rather than `overlay2`, see
 
 OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called _layers_ and the unification
-process is referred to a a _union mount_. OverlayFS refers to the lower directory
+process is referred to as a _union mount_. OverlayFS refers to the lower directory
 as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
@@ -484,19 +484,19 @@ The following generic performance best practices also apply to OverlayFS.
 To summarize the OverlayFS's aspect which is incompatible with other
 filesystems:
 
-- **open(2)**. OverlayFS only implements a subset of the POSIX standards.
-This can result in certain OverlayFS operations breaking POSIX standards. One
-such operation is the *copy-up* operation. Suppose that  your application calls
-`fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
-your application expects `fd1` and `fd2` to refer to the same file. However, due
-to a copy-up operation that occurs after the first calling to `open(2)`, the
-descriptors refer to different files.
+- **open(2)**: OverlayFS only implements a subset of the POSIX standards.
+  This can result in certain OverlayFS operations breaking POSIX standards. One
+  such operation is the *copy-up* operation. Suppose that  your application calls
+  `fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
+  your application expects `fd1` and `fd2` to refer to the same file. However, due
+  to a copy-up operation that occurs after the first calling to `open(2)`, the
+  descriptors refer to different files.
 
-`yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
-If the `yum-plugin-ovl` package is not available in your distribution (e.g.
-RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*`
-before running `yum install`.
+  `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
+  If the `yum-plugin-ovl` package is not available in your distribution (e.g.
+  RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*`
+  before running `yum install`.
 
-- **rename(2)**. OverlayFS does not fully support the `rename(2)` system call.
-Your application needs to detect its failure and fall back to a "copy and
-unlink" strategy.
+- **rename(2)**: OverlayFS does not fully support the `rename(2)` system call.
+  Your application needs to detect its failure and fall back to a "copy and
+  unlink" strategy.

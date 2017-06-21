@@ -6,10 +6,18 @@ title: Connect to a swarm through Docker Cloud
 ---
 
 Docker Cloud allows you to connect your local Docker Engine to any swarm you
-have access to in Docker Cloud. To do this, you run a proxy container in your
-local Docker instance, which connects to a manager node on the target swarm.
+have access to in Docker Cloud. There are a couple of different ways to do this,
+depending on how you are running Docker on your local system:
 
-## Connect to a swarm
+- [Connect to a swarm with a Docker Cloud generated run command](#connect-to-a-swarm-with-a-docker-cloud-generated-run-command)
+- [Use Docker for Mac or Docker for Windows (Edge) to connect to swarms](#use-docker-for-mac-or-windows-edge-to-connect-to-swarms)
+
+## Connect to a swarm with a Docker Cloud generated run command
+
+On platforms other than Docker for Mac or Docker for Windows (Edge channel), you
+can connect to a swarm manually at the command line by running a proxy container
+in your local Docker instance, which connects to a manager node on the target
+swarm.
 
 1.  Log in to Docker Cloud in your web browser.
 2.  Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
@@ -19,7 +27,7 @@ local Docker instance, which connects to a manager node on the target swarm.
 
 4.  In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
 
-    You will be asked to provide you Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
+    You will be asked to provide your Docker ID and password, then the local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
     ```
     $ docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST dockercloud/client orangesnap/vote-swarm
@@ -67,11 +75,14 @@ local Docker instance, which connects to a manager node on the target swarm.
 7.  Now that your swarm is set up, try out the example to [deploy a service to the swarm](/engine/swarm/swarm-tutorial/deploy-service/),
 and other subsequent tasks in the Swarm getting started tutorial.
 
-## Switch between your swarm and Docker hosts in the same shell
+### Switch between your swarm and Docker hosts in the same shell
 
 To switch to Docker hosts:
 
-* If you are running Docker for Mac or Docker for Windows, and want to connect to the Docker Engine for those apps, run `docker-machine env -u` as a preview, then run the unset command: `eval $(docker-machine env -u)`. For example:
+* If you are running Docker for Mac or Docker for Windows, and want to
+connect to the Docker Engine for those apps, run `docker-machine env -u`
+as a preview, then run the unset command: `eval $(docker-machine env -u)`.
+For example:
 
   ```
   $ docker-machine env -u
@@ -98,6 +109,48 @@ To switch to Docker hosts:
 To switch back to the deployed swarm, re-run the `export DOCKER_HOST` command with the  connection port for the swarm you want to work with. (For example, `export DOCKER_HOST=tcp://127.0.0.1:32770`)
 
 To learn more, see [Unset environment variables in the current shell](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+
+## Use Docker for Mac or Windows (Edge) to connect to swarms
+
+On Docker for Mac and Docker for Windows current Edge releases,
+you can access your Docker Cloud account and connect directly to your swarms through those Docker desktop application menus.
+
+* See [Docker Cloud (Edge feature) in Docker for Mac topics](/docker-for-mac/#docker-cloud-edge-feature)
+
+* See [Docker Cloud (Edge feature) in Docker for Windows topics](/docker-for-windows/#docker-cloud-edge-feature)
+
+> **Tip**: This is different from using Docker for Mac or Windows with
+Docker Machine as described in previous examples. Here, we are
+by-passing Docker Machine, and using the desktop Moby VM directly, so
+there is no need to manually set shell environment variables.
+
+This works the same way on both Docker for Mac and Docker for Windows.
+
+Here is an example, showing the Docker for Mac UI.
+
+1.  Make sure you are logged in to your Docker Cloud account on the desktop app.
+
+    ![Docker for Mac Cloud login](images/d4mac-cloud-login.png)
+
+2.  Choose the swarm you want from the menu.
+
+    ![Docker for Mac Cloud login](images/d4mac-swarm-connect.png)
+
+3.  A new terminal window opens and connects to the swarm you chose. The swarm name is shown at the prompt. For this example, we connected to `vote-swarm`.
+
+    ```shell
+    [vote-swarm] ~
+    ```  
+
+4.  Now, you can run `docker node ls` to verify that the swarm is running.
+
+    ```shell
+    [vote-swarm] ~ $ docker node ls
+    ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS
+    7ex8inrg8xzgonaunwp35zxfl     ip-172-31-6-204.us-west-1.compute.internal    Ready               Active              
+    ec3kxibdxqhgw5aele7x853er *   ip-172-31-0-178.us-west-1.compute.internal    Ready               Active              Leader
+    z4ngrierv27wdm6oy0z3t9r1z     ip-172-31-31-240.us-west-1.compute.internal   Ready               Active              
+    ```  
 
 ## Reconnect a swarm
 

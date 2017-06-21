@@ -7,7 +7,7 @@ redirect_from:
 title: Set up your environment
 ---
 
-In this step you install the Docker Cloud CLI so interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
+In this step you install the Docker Cloud CLI to interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
 
 ## Install the Docker Cloud CLI
 
@@ -24,7 +24,7 @@ docker run dockercloud/cli -h
 
 This command runs the `docker-cloud` CLI image in a container for you. Learn
 more about how to use this container
-[here](https://github.com/moby/mobycloud-cli#docker-image).
+[here](https://github.com/docker/dockercloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
@@ -35,6 +35,13 @@ package manager, which is a package manager for
 * If you already have 2.x or Python 3.x installed, you probably have `pip` and
 `setuptools`, but will need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
+
+  > The Docker Cloud CLI does not currently support Python 3.x.
+  >
+  > We recommend using Python 2.x with Docker Cloud. To learn more,
+  see the Python and CLI issues described in
+  [Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
+  {: .note-vanilla}
 
 * If you do not have Python or `pip` installed, you can either [install
 Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this

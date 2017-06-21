@@ -5,6 +5,8 @@ keywords: swarm mode, swarms, create swarm, Cloud, Azure
 title: Create a new swarm on Microsoft Azure in Docker Cloud
 ---
 
+[![Deploying Swarms on Microsoft Azure with Docker Cloud](images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
+
 {% include content/cloud-swarm-overview.md %}
 
 ## Link Docker Cloud to your service provider
@@ -17,6 +19,12 @@ linked, it will show up on the **Swarms -> Create** page as a connected service
 provider.
 
 ![](images/azure-creds-cloud.png)
+
+> **Note:** If you are using a Microsoft Azure Visual Studio MSDN
+subscription, you need to enable _programmatic deployments_ on the Docker CE
+VM Azure Marketplace item. See the Microsoft Azure blog post on [Working with
+Marketplace Images on Azure Resource
+Manager](https://azure.microsoft.com/en-us/blog/working-with-marketplace-images-on-azure-resource-manager/){: target="_blank" class="_"} for instructions on how to do this.
 
 ## Create a swarm
 

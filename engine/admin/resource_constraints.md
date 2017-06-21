@@ -14,6 +14,43 @@ on when you should set such limits and the possible implications of setting them
 
 ## Memory
 
+### Understand the risks of running out of memory
+
+It is important not to allow a running container to consume too much of the
+host machine's memory. On Linux hosts, if the kernel detects that there is not
+enough memory to perform important system functions, it throws an `OOME`, or
+`Out Of Memory Exception`, and starts killing processes in order to free up
+memory. Any process is subject to killing, including Docker and other important
+applications. This can effectively bring the entire system down if the wrong
+process is killed.
+
+Docker attempts to mitigate these risks by adjusting the OOM priority on the
+Docker daemon so that it will be less likely to be killed than other processes
+on the system. The OOM priority on containers is not adjusted. This makes it more
+likely that an individual container will be killed than that the Docker daemon
+or other system processes will be killed. You should not try to circumvent
+these safeguards by manually setting `--oom-score-adj` to an extreme negative
+number on the daemon or a container, or by setting `--oom-disable-kill` on a
+container.
+
+For more information about the Linux kernel's OOM management, see
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" }.  
+
+You can mitigate the risk of system instability due to OOME by:
+
+- Perform tests to understand the memory requirements of your application before
+  placing it into production.
+- Ensure that your application runs only on hosts with adequate resources.
+- Limit the amount of memory your container can use, as described below.
+- Be mindful when configuring swap on your Docker hosts. Swap is slower and
+  less performant than memory but can provide a buffer against running out of
+  system memory. 
+- Consider converting your container to a [service](/engine/swarm/services.md),
+  and using service-level constraints and node labels to ensure that the
+  application runs only on hosts with enough memory
+
+### Limit a container's access to memory
+
 Docker can enforce hard memory limits, which allow the container to use no more
 than a given amount of user or system memory, or soft limits, which allow the
 container to use as much memory as it needs unless certain conditions are met,
@@ -27,10 +64,10 @@ Most of these options take a positive integer, followed by a suffix of `b`, `k`,
 | Option                | Description                 |
 |-----------------------|-----------------------------|
 | `-m` or `--memory=` | The maximum amount of memory the container can use. If you set this option, the minimum allowed value is `4m` (4 megabyte). |
-| `--memory-swap`*    | The amount of memory this container is allowed to swap to disk. See [`--memory-swap` details](resource_constraints.md#memory-swap-details). |
-| `--memory-swappiness` | By default, the host kernel can swap out a percentage of anonymous pages used by a container. You can set `--memory-swappiness` to a value between 0 and 100, to tune this percentage. See [`--memory-swappiness` details](resource_constraints.md#memory-swappiness-details). |
+| `--memory-swap`*    | The amount of memory this container is allowed to swap to disk. See [`--memory-swap` details](resource_constraints.md#--memory-swap-details). |
+| `--memory-swappiness` | By default, the host kernel can swap out a percentage of anonymous pages used by a container. You can set `--memory-swappiness` to a value between 0 and 100, to tune this percentage. See [`--memory-swappiness` details](resource_constraints.md#--memory-swappiness-details). |
 | `--memory-reservation` | Allows you to specify a soft limit smaller than `--memory` which is activated when Docker detects contention or low memory on the host machine. If you use `--memory-reservation`, it must be set lower than `--memory` in order for it to take precedence. Because it is a soft limit, it does not guarantee that the container will not exceed the limit. |
-| `--kernel-memory` | The maximum amount of kernel memory the container can use. The minimum allowed value is `4m`. Because kernel memory cannot be swapped out, a container which is starved of kernel memory may block host machine resources, which can have side effects on the host machine and on other containers. See [`--kernel-memory` details](resource_constraints.md#kernel-memory-details). |
+| `--kernel-memory` | The maximum amount of kernel memory the container can use. The minimum allowed value is `4m`. Because kernel memory cannot be swapped out, a container which is starved of kernel memory may block host machine resources, which can have side effects on the host machine and on other containers. See [`--kernel-memory` details](resource_constraints.md#--kernel-memory-details). |
 | `--oom-kill-disable` | By default, if an out-of-memory (OOM) error occurs, the kernel kills processes in a container. To change this behavior, use the `--oom-kill-disable` option. Only disable the OOM killer on containers where you have also set the `-m/--memory` option. If the `-m` flag is not set, the host can run out of memory and the kernel may need to kill the host system's processes to free memory. |
 
 For more information about cgroups and memory in general, see the documentation

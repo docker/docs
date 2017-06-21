@@ -277,7 +277,7 @@ installing Docker.
     Use this command to install the latest version of Docker:
 
     ```bash
-    $ sudo apt-get install docker
+    $ sudo apt-get install docker-engine
     ```
     > **NOTE**: By default, Docker on Raspbian is Docker Community Edition, so
     > there is no need to specify docker-ce.
