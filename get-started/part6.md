@@ -81,7 +81,7 @@ Ready to create a swarm?
   swarm](/docker-cloud/cloud-swarm/register-swarms/) you just created.
 
 > **Note**: If you are [Using the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md){: onclick="ga('send', 'event', 'Get
-Started Referral', 'Cloud', 'BYOH');"}, this provider does not support the swarm
+Started Referral', 'Cloud', 'BYOH');"}, this provider does not support swarm
 mode. You can [register your own existing
 swarms](/docker-cloud/cloud-swarm/register-swarms/) with Docker Cloud.
 
