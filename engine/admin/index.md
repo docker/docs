@@ -75,6 +75,133 @@ restart Docker. This method works for every Docker platform. The following
 }
 ```
 
+## Isolate containers within a user namespace
+
+Linux namespaces provide isolation for running processes, limiting their access
+to system resources without the running process being aware of the limitations.
+For more information on Linux namespaces, see
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" };
+
+The best practice for preventing privilege-escalation attacks from within a
+container is to configure your container's applications to run as unprivileged
+users. For containers whose processes must run as the `root` user within the
+container, you can re-map this user to a less-privileged user on the Docker
+host.
+
+This re-mapping is relatively transparent to the container, but introduces some
+configuration complexity when the container needs access to privileged resources
+on the Docker host, such as bind mounts into areas of the filesystem that the
+system user cannot write to.
+
+### Prerequisites
+
+1.  The username or user ID (and optionally group name or group ID) must exist
+    already. Typically, this means that the relevant entries need to be in
+    `/etc/password` and `/etc/group`, but if you are using a different
+    authentication back-end, this requirement may translate differently.
+
+    To verify this, use the `id` command:
+
+    ```bash
+    $ id testuser
+    
+    uid=1001(testuser) gid=1001(testuser) groups=1001(testuser)
+    ```
+
+2.  If there are any locations on the Docker host where the unprivileged
+    user needs to write, adjust the permissions of those locations
+    accordingly.
+
+3.  The way the namespace remapping is handled on the host is using two files,
+    `/etc/subuid` and `/etc/subgid`. These files are typically managed
+    automatically when you add or remove users or groups, but on a few
+    distributions such as RHEL and CentOS 7.3, you may need to manage these
+    files manually.
+
+    Each file contains three fields: the username or ID of the user, followed by
+    a beginning UID or GID (which is treated as UID or GID 0 within the namespace)
+    and a maxumum number of UIDs or GIDs available to the user. For instance,
+    given the following entry:
+
+    ```none
+    testuser:231072:65536
+    ```
+   
+    This means that user-namespaced processes started by `testuser` will be owne
+    by host UID `231072` (which will look like UID `0` inside the namespace)
+    through 296608 (231072 + 65536). These ranges should not overlap, to ensure
+    that namespaced processes cannot access each other's namespaces.
+
+    After adding your user, check `/etc/subuid` and `/etc/subgid` to see if your
+    user has an entry in each. If not, you need to add it, being careful to
+    avoid overlap.
+
+4.  Enabling `userns-remap` will effectively mask existing image and container
+    layers, as well as other Docker objects within `/var/lib/docker/`. This is
+    because Docker needs to adjust the ownership of these resources and actually
+    stores them in a subdirectory within `/var/lib/docker/`. It is best to enable
+    this feature on a new Docker installation rather than an existing one.
+
+    Along the same lines, if you disable `userns-remap` you will not see any
+    of the resources created while it was enabled.
+
+#### Enable userns-remap
+
+1.  Edit `/etc/docker/daemon.json`. Assuming the file was previously empty, the
+    following entry will enable `userns-remap` using user and group called
+    `testuser`. You can address the user and group by ID or name. You only need to
+    specify the group name or ID if it is different from the user name or ID.
+
+    ```json
+    {
+      "userns-remap": "testuser"
+    }
+    ```
+
+    Save the file and restart Docker.
+
+2.  Verify that previous images are not available using the `docker image ls`
+    command. The output should be empty.
+
+3.  Start a container from the `hello-world` image.
+
+    ```bash
+    $ docker run hello-world
+    ```
+
+4.  Verify that a namespaced directory exists within `/var/lib/docker/` named
+    with the UID and GID of the namespaced user, owned by that UID and GID,
+    and not group-or-world-readable. Some of the subdirectories are still
+    owned by `root` and have different permissions.
+
+    ```bash
+    $ sudo ls -ld /var/lib/docker/231072.231072/
+
+    drwx------ 11 231072 231072 11 Jun 21 21:19 /var/lib/docker/231072.231072/
+
+    $ sudo ls -l /var/lib/docker/231072.231072/
+
+    total 14
+    drwx------ 5 231072 231072 5 Jun 21 21:19 aufs
+    drwx------ 3 231072 231072 3 Jun 21 21:21 containers
+    drwx------ 3 root   root   3 Jun 21 21:19 image
+    drwxr-x--- 3 root   root   3 Jun 21 21:19 network
+    drwx------ 4 root   root   4 Jun 21 21:19 plugins
+    drwx------ 2 root   root   2 Jun 21 21:19 swarm
+    drwx------ 2 231072 231072 2 Jun 21 21:21 tmp
+    drwx------ 2 root   root   2 Jun 21 21:19 trust
+    drwx------ 2 231072 231072 3 Jun 21 21:19 volumes
+    ```
+
+    Your directory listing may have some differences, especially if you
+    user a different container storage driver than `aufs`.
+
+    The directories which are owned by the remapped user are used instead
+    of the same directories directly beneath `/var/lib/docker/` and the
+    unused versions (such as `/var/lib/docker/tmp/` in the example here)
+    can be removed. Docker will not use them while `userns-remap` is
+    enabled.
+
 ## Troubleshoot the daemon
 
 You can enable debugging on the daemon to learn about the runtime activity of
