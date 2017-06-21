@@ -380,8 +380,8 @@ Current styles for admonitions in
 support two broad categories of admonitions: those with prefixed text (**Note:**,
 **Important:**, **Warning**) and those with prefixed icons.
 
-The new styles (with icons) are defined in a way that will not impact admonitions
-formatted with the original styles (prefixed text), so notes in your
+The new styles (with icons) are defined in a way that will not impact
+admonitions formatted with the original styles (prefixed text), so notes in your
 published documents won't be adversely affected.
 
 Examples of both styles are shown below.
