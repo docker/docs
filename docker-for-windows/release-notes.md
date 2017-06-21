@@ -309,6 +309,13 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-win16 Release Notes (2017-06-21 17.06.0-rc5-ce-win16) (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-ce-rc5](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc5)
+ - [Docker compose 1.14.0](https://github.com/docker/compose/releases/tag/1.14.0)
+
 ### Docker Community Edition 17.06.0-win15 Release Notes (2017-06-16 17.06.0-rc4-ce-win15) (edge)
 
 **Upgrades**
