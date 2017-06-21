@@ -135,13 +135,12 @@ Docker EE.
       need the **stable** repository, even if you want to install **edge** builds
       as well.
 
-      > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-      > Ubuntu distribution, such as `xenial`.
-      >
-      > Sometimes, in a distribution like Linux Mint, you might have to change
-      > `$(lsb_release -cs)` to your parent Ubuntu distribution. For
-      > example: If you are using `Linux Mint Rafaela`, you could use
-      > `trusty`.
+      > **Note**: The `lsb_release -cs` sub-command below returns the
+      name of your Ubuntu distribution, such as `xenial`. Sometimes,
+      in a distribution like Linux Mint, you might have to
+      change `$(lsb_release -cs)` to your parent Ubuntu distribution.
+      For example: If you are using `Linux Mint Rafaela`, you could use
+      `trusty`.
 
       **amd64**:
 
@@ -243,11 +242,11 @@ Docker EE.
     </div>
 
 
-    > If you have multiple Docker repositories enabled, installing
+    > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command will always install the highest possible version,
+    > `apt-get update` command will always install the newest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {: .warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. This output is truncated. List the
