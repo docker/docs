@@ -48,7 +48,12 @@ To set up and deploy:
 
 ### Connect Docker Cloud
 
-First, link Docker Cloud with your cloud provider:
+You can run Docker Cloud in [standard
+mode](/docker-cloud/infrastructure/index.md) or in [Swarm
+mode](/docker-cloud/cloud-swarm/index.md).
+
+If you are running Docker Cloud in standard mode, follow instructions below to
+link your service provider to Docker Cloud.
 
 * [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'AWS');"}
 * [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'DigitalOcean');"}
@@ -57,9 +62,13 @@ First, link Docker Cloud with your cloud provider:
 * [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'SoftLayer');"}
 * [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'BYOH');"}
 
+If you are running in Swarm mode (recommended for Amazon Web Services or
+Microsoft Azure), then skip to the next section on how to [create your
+swarm](#create-your-swarm).
+
 ### Create your swarm
 
-After your cloud provider is all set up, create a Swarm:
+Ready to create a swarm?
 
 * If you're on Amazon Web Services (AWS) you
   can [automatically create a
@@ -74,7 +83,12 @@ swarm on Azure](/docker-cloud/cloud-swarm/create-cloud-swarm-azure/){: onclick="
   Cloud](/docker-cloud/infrastructure/ssh-into-a-node/). Finally, [enable Swarm
   Mode](/docker-cloud/cloud-swarm/using-swarm-mode/) by clicking the toggle at
   the top of the screen, and [register the
-  swarm](/docker-cloud/cloud-swarm/register-swarms/) you just made.
+  swarm](/docker-cloud/cloud-swarm/register-swarms/) you just created.
+
+> **Note**: If you are [Using the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md){: onclick="ga('send', 'event', 'Get
+Started Referral', 'Cloud', 'BYOH');"}, this provider does not support swarm
+mode. You can [register your own existing
+swarms](/docker-cloud/cloud-swarm/register-swarms/) with Docker Cloud.
 
 ### Deploy your app
 
