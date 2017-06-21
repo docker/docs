@@ -67,6 +67,8 @@ swarm](#create-your-swarm).
 
 ### Create your swarm
 
+Ready to create a swarm?
+
 * If you're on AWS you
   can [automatically create a
   swarm](/docker-cloud/cloud-swarm/create-cloud-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Create AWS Swarm');"}.
