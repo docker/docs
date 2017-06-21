@@ -49,9 +49,9 @@ can use in email or the forum to reference the upload.
 ### Make sure certificates are set up correctly
 
 Docker for Windows will ignore certificates listed under insecure registries,
-and will not send client certificates to them. Commands like `docker run
-<someImage>` that attempt to pull from the registry will produce error messages
-on the command line, like this:
+and will not send client certificates to them. Commands like `docker run` that
+attempt to pull from the registry will produce error messages on the command
+line, like this:
 
 ```
 Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"

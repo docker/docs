@@ -118,6 +118,28 @@ auto-generated reports on packages.
 
 ## Troubleshooting
 
+### Make sure certificates are set up correctly
+
+Docker for Mac will ignore certificates listed under insecure registries, and
+will not send client certificates to them. Commands like `docker run` that
+attempt to pull from the registry will produce error messages on the command
+line, like this:
+
+```bash
+Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
+```
+
+As well as on the registry. For example:
+
+```config
+2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
+2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
+```
+
+For more about using client and server side certificates, see [Adding
+security certificates](/docker-for-mac/index.md#adding-security-certificates) in
+the Getting Started topic.
+
 ### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app
 
 If, after installing Docker for Mac, you [change the name of your macOS user
@@ -136,28 +158,6 @@ need to enable [file sharing](index.md#file-sharing).
 Volume mounting requires shared drives for projects that live outside of the
 `/Users` directory. Go to <img src="images/whale-x.png"> --> **Preferences** -->
 **File sharing** and share the drive that contains the Dockerfile and volume.
-
-### Make sure certificates are set up correctly
-
-Docker for Mac will ignore certificates listed under insecure registries, and
-will not send client certificates to them. Commands like `docker run
-<someImage>` that attempt to pull from the registry will produce error messages
-on the command line, like this:
-
-```
-Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
-```
-
-As well as on the registry. For example:
-
-```
-2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
-2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
-```
-
-For more about using client and server side certificates, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
-the Getting Started topic.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
@@ -232,7 +232,11 @@ in the Apple Hypervisor Framework documentation about supported hardware:
 To check if your Mac supports the Hypervisor framework, run this command in a
 terminal window.
 
-``` sysctl kern.hv_support ``` If your Mac supports the Hypervisor Framework,
+```bash
+sysctl kern.hv_support
+```
+
+If your Mac supports the Hypervisor Framework,
 the command will print `kern.hv_support: 1`.
 
 If not, the command will print `kern.hv_support: 0`.

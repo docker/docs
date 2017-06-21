@@ -389,7 +389,7 @@ Mac folders to `~/.docker/certs.d` in the database.
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
 Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac will ignore
 certificates listed under insecure registries, and will not send client
-certificates. Commands like `docker run <someImage>` that attempt to pull from
+certificates. Commands like `docker run` that attempt to pull from
 the registry will produce error messages on the command line, as well as on the
 registry.
 
