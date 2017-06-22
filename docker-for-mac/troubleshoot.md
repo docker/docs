@@ -137,7 +137,7 @@ As well as on the registry. For example:
 ```
 
 For more about using client and server side certificates, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
+TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app

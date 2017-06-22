@@ -334,7 +334,7 @@ This option removes/resets all Docker data _without_ a reset to factory defaults
 
 ![Uninstall or reset Docker Edge features](images/settings-uninstall-edge.png)
 
-## Adding security certificates
+## Adding TLS certificates
 
 You can add server side (registry) and client side certificates to verify the identity of these entities.
 
@@ -379,8 +379,8 @@ certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-When the Docker for Mac application starts up, it copies certificates from your
-Mac folders to `~/.docker/certs.d` in the database.
+When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
+folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker for Mac `xhyve` virtual machine).
 
 > * You need to restart Docker for Mac after making any changes to
  the keychain or to the `~/.docker/certs.d` directory in order for
@@ -400,10 +400,22 @@ certificate to your Mac OS system login:
 
 ```
 /Users/<user>/.docker/certs.d/
-└── 192.168.203.139:5858
+└── <MyRegistry>:<Port>
    ├── ca.crt
    ├── client.cert
    └── client.key
+```
+
+The following further illustrates and explains a configuration with custom
+certificates:
+
+```
+/etc/docker/certs.d/        <-- Certificate directory
+└── localhost:5000          <-- Hostname:port
+   ├── client.cert          <-- Client certificate
+   ├── client.key           <-- Client key
+   └── ca.crt               <-- Certificate authority that signed
+                                the registry certificate
 ```
 
 You can also have this directory structure, as long as the CA certificate is
@@ -411,10 +423,13 @@ also in your keychain.
 
 ```
 /Users/<user>/.docker/certs.d/
-└── 192.168.203.139:5858
+└── <MyRegistry>:<Port>
     ├── client.cert
     └── client.key
 ```
+
+To learn more, see [Verify repository client with
+certificates](/engine/security/certificates.md) in the Docker Engine topics.
 
 ## Installing bash completion
 

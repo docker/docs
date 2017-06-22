@@ -170,7 +170,7 @@ Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
 For full information on adding server and client side certs, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
+TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### How do I add client certificates?
@@ -181,7 +181,7 @@ in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 For full information on adding server and client side certs, see [Adding
-security certificates](/docker-for-mac/index.md#adding-security-certificates) in
+TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
 ### How do I reduce the size of Docker.qcow2?
