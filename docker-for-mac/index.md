@@ -380,7 +380,8 @@ in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
-folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker for Mac `xhyve` virtual machine).
+folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
+for Mac `xhyve` virtual machine).
 
 > * You need to restart Docker for Mac after making any changes to
  the keychain or to the `~/.docker/certs.d` directory in order for
