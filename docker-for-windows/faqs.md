@@ -184,7 +184,7 @@ When the Docker for Windows application starts up, it copies the
 `~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
 directory on Moby (the Docker for Windows virtual machine running on Hyper-V).
 
-> * You need to restart Docker for Mac after making any changes to
+> * You need to restart Docker for Windows after making any changes to
  the keychain or to the `~/.docker/certs.d` directory in order for
  the changes to take effect.
 >
