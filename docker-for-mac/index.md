@@ -340,7 +340,7 @@ You can add server side (registry) and client side certificates to verify the id
 
 ### Adding custom CA certificates (server side)
 
-All trusted certificate authorities (CAs) (root or intermediate) are supported.
+All trusted Certificate Authorities (CAs) (root or intermediate) are supported.
 Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
 Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
 SSL certificate is trusted by the user on the host, it will be trusted by Docker
@@ -374,9 +374,8 @@ Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac
 
 ### Adding client certificates
 
-Starting with Docker for Mac 17.06.0-ce, you do not have to push your
-certificates with `git` commands anymore. You can put your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+You can put your client certificates in
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`

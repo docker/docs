@@ -161,17 +161,18 @@ To learn more about the reasons for this limitation, see the following discussio
 ### How do I add custom CA certificates?
 
 Starting with Docker for Windows 1.12.1, 2016-09-16 (Stable) and Beta 26
-(2016-09-14 1.12.1-beta26), all trusted CAs (root or intermediate) are
-supported. Docker recognizes certs stored under Trust Root Certification
-Authorities or Intermediate Certification Authorities.
+(2016-09-14 1.12.1-beta26), all trusted Certificate Authorities (CA) (root or
+intermediate) are supported. Docker recognizes certs stored under Trust Root
+Certification Authorities or Intermediate Certification Authorities.
 
 Docker for Windows creates a certificate bundle of all user-trusted CAs based on
 the Windows certificate store, and appends it to Moby trusted certificates. So
 if an enterprise SSL certificate is trusted by the user on the host, it will be
 trusted by Docker for Windows.
 
-To learn more, see the GitHub issue [Allow user to add custom Certificate
-Authorities](https://github.com/docker/for-win/issues/48).
+To learn more about how to install a CA root certificate for the registry, see
+[Verify repository client with certificates](/engine/security/certificates.md)
+in the Docker Engine topics.
 
 ### How do I add client certificates?
 
@@ -194,6 +195,10 @@ ignore certificates listed under insecure registries, and will not send client
 certificates. Commands like `docker run` that attempt to pull from
 the registry will produce error messages on the command line, as well as on the
 registry.
+
+To learn more about how to set the client TLS certificate for verification, see
+[Verify repository client with certificates](/engine/security/certificates.md)
+in the Docker Engine topics.
 
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
