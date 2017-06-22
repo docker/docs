@@ -2451,6 +2451,8 @@ manuals:
     title: Docker Store overview
   - path: /docker-store/publish/
     title: Submit a product to Docker Store
+  - title: Docker Store Trust Chain
+    path: /docker-store/trustchain/
   - path: /docker-store/faq/
     title: Docker Store FAQs
 - sectiontitle: Superseded products and tools
