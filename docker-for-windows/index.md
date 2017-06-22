@@ -753,8 +753,9 @@ behavior, and steps to reproduce the issue.
 
 ## Adding TLS certificates
 
-You can add server side (registry) and client side certificates to verify the
-identity of these entities.
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
 
 To learn more, see [How do I add custom CA
 certificates?](/docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)

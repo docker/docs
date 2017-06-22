@@ -336,11 +336,13 @@ This option removes/resets all Docker data _without_ a reset to factory defaults
 
 ## Adding TLS certificates
 
-You can add server side (registry) and client side certificates to verify the identity of these entities.
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
 
 ### Adding custom CA certificates (server side)
 
-All trusted Certificate Authorities (CAs) (root or intermediate) are supported.
+All trusted CAs (root or intermediate) are supported.
 Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
 Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
 SSL certificate is trusted by the user on the host, it will be trusted by Docker
@@ -428,8 +430,10 @@ also in your keychain.
     └── client.key
 ```
 
-To learn more, see [Verify repository client with
-certificates](/engine/security/certificates.md) in the Docker Engine topics.
+To learn more about how to install a CA root certificate for the registry and
+how to set the client TLS certificate for verification, see [Verify repository
+client with certificates](/engine/security/certificates.md) in the Docker Engine
+topics.
 
 ## Installing bash completion
 
