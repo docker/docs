@@ -12,7 +12,7 @@ safe: false
 lsi: false
 url: https://docs.docker.com
 keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13"]
-compose_current: 1.13.0
+compose_current: 1.14.0
 
 gems:
   - jekyll-redirect-from
