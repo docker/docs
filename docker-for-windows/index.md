@@ -564,7 +564,7 @@ public or private images or [Docker Trusted
 Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
 your own insecure [registry](/registry/introduction.md). Add URLs for insecure
 registries and registry mirrors on which to host your images. (See also, [How do
-I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates) in
 the FAQs.)
 
 #### Edit the daemon configuration file
@@ -751,11 +751,17 @@ behavior, and steps to reproduce the issue.
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is
   useful in cases where Docker stops working or becomes unresponsive.
 
-<!-- ### Going back to Toolbox
+## Adding TLS certificates
 
-If you want to go back to using Docker Toolbox, you have to disable the Hyper-V Windows feature. To do this, go to the Windows **Control Panel -> Programs and Features -> Turn Windows Features on or off**, uncheck Hyper-V, and click **OK**. You can then use `docker-machine` and VirtualBox to run Docker containers.
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
 
-[These instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install), which explain how to *enable* Hyper-V, show you how to get to the on/off controls for the Hyper-V feature. -->
+To learn more, see [How do I add custom CA
+certificates?](/docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client
+certificates?](/docker-for-windows/faqs.md#how-do-i-add-client-certificates) in
+the FAQs.
 
 ## Where to go next
 

@@ -277,9 +277,12 @@ As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
 Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
 your own insecure [registry](/registry/introduction.md). Add URLs for insecure
-registries and registry mirrors on which to host your images. (See also,
-[How do I add custom CA certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates)
-in the FAQs.)
+registries and registry mirrors on which to host your images.
+
+See also, [How do I add custom CA
+certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates) and
+[How do I add client
+certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates) in the FAQs.
 
 #### Edit the daemon configuration file
 
@@ -331,14 +334,115 @@ This option removes/resets all Docker data _without_ a reset to factory defaults
 
 ![Uninstall or reset Docker Edge features](images/settings-uninstall-edge.png)
 
+## Adding TLS certificates
+
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
+
+### Adding custom CA certificates (server side)
+
+All trusted CAs (root or intermediate) are supported.
+Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
+Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
+SSL certificate is trusted by the user on the host, it will be trusted by Docker
+for Mac.
+
+To manually add a custom, self-signed certificate, start by adding
+the certificate to the Mac’s keychain, which will be picked up by Docker for
+Mac. Here is an example.
+
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
+```
+
+Or, if you prefer to add the certificate to your own local keychain only (rather
+than for all users), run this command instead:
+
+```
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
+```
+
+See also, [Directory structures for
+certificates](#directory-structures-for-certificates).
+
+> **Note:** You need to restart Docker for Mac after making any changes to
+the keychain or to the `~/.docker/certs.d` directory in order for
+the changes to take effect.
+
+For a complete explanation of how to do this, see the blog post [Adding
+Self-signed Registry Certs to Docker & Docker for
+Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
+
+### Adding client certificates
+
+You can put your client certificates in
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
+
+When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
+folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
+for Mac `xhyve` virtual machine).
+
+> * You need to restart Docker for Mac after making any changes to
+ the keychain or to the `~/.docker/certs.d` directory in order for
+ the changes to take effect.
+>
+> * The registry cannot be listed as an _insecure registry_ (see [Docker
+Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac will ignore
+certificates listed under insecure registries, and will not send client
+certificates. Commands like `docker run` that attempt to pull from
+the registry will produce error messages on the command line, as well as on the
+registry.
+
+### Directory structures for certificates
+
+If you have this directory structure, you do not need to manually add the CA
+certificate to your Mac OS system login:
+
+```
+/Users/<user>/.docker/certs.d/
+└── <MyRegistry>:<Port>
+   ├── ca.crt
+   ├── client.cert
+   └── client.key
+```
+
+The following further illustrates and explains a configuration with custom
+certificates:
+
+```
+/etc/docker/certs.d/        <-- Certificate directory
+└── localhost:5000          <-- Hostname:port
+   ├── client.cert          <-- Client certificate
+   ├── client.key           <-- Client key
+   └── ca.crt               <-- Certificate authority that signed
+                                the registry certificate
+```
+
+You can also have this directory structure, as long as the CA certificate is
+also in your keychain.
+
+```
+/Users/<user>/.docker/certs.d/
+└── <MyRegistry>:<Port>
+    ├── client.cert
+    └── client.key
+```
+
+To learn more about how to install a CA root certificate for the registry and
+how to set the client TLS certificate for verification, see [Verify repository
+client with certificates](/engine/security/certificates.md) in the Docker Engine
+topics.
+
 ## Installing bash completion
 
-If you are using
-[bash completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
-such as
-[homebrew bash-completion on Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/)
- bash completion scripts for the following commands may be found inside
- `Docker.app`, in the `Contents/Resources/etc/` directory:
+If you are using [bash
+completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
+such as [homebrew bash-completion on
+Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/) bash
+completion scripts for the following commands may be found inside `Docker.app`,
+in the `Contents/Resources/etc/` directory:
 
 - docker
 - docker-machine

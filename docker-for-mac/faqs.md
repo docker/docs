@@ -169,21 +169,20 @@ in the Networking topic.
 Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate
 authorities (CAs) (root or intermediate) are supported.
 
-Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
-Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
-SSL certificate is trusted by the user on the host, it will be trusted by Docker
-for Mac.
+For full information on adding server and client side certs, see [Adding
+TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+the Getting Started topic.
 
-To manually add a custom, self-signed certificate, start by adding
-the certificate to the Mac’s keychain, which will be picked up by Docker for
-Mac. Here is an example.
+### How do I add client certificates?
 
-```bash
-sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
-```
+Starting with Docker for Mac 17.06.0-ce, you do not have to push your
+certificates with `git` commands anymore. You can put your client certificates
+in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
-For a complete explanation of how to do this, see the blog post
-[Adding Self-signed Registry Certs to Docker & Docker for Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
+For full information on adding server and client side certs, see [Adding
+TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
+the Getting Started topic.
 
 ### How do I reduce the size of Docker.qcow2?
 
