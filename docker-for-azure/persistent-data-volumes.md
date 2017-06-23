@@ -8,11 +8,9 @@ title: Docker for Azure persistent data volumes
 
 ## What is Cloudstor?
 
-Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-configured in swarms deployed on Docker for Azure. Swarm tasks use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled or migrated to. Cloudstor relies on shared storage infrastructure provided by Azure to allow swarm tasks to create/mount their persistent volumes on any node in the swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
+Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-configured in Docker Swarms deployed on Docker for Azure. Docker Swarm tasks can use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled on or migrated to. Cloudstor relies on shared storage infrastructure provided by Azure to allow swarm tasks to create/mount their persistent volumes on any node in the Docker Swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
 
 ## Use Cloudstor
-
-> **Note**: Cloudstor is currently only pre-installed and pre-configured in the edge channel distribution of Docker for Azure v17.03.
 
 After creating a swarm on Docker for Azure and connecting to any manager using SSH, verify that Cloudstor is already installed and configured for the stack/resource group:
 
@@ -46,10 +44,10 @@ docker service create --replicas 5 --name ping2 \
 {% endraw %}
 ```
 
-Here the templatized notation is used to indicate to Docker Swarm that a unique volume be created and mounted for each replica/task of the service `ping2`. After initial creation of the volumes corresponding to the tasks they are attached to (in the nodes the tasks are scheduled in), if a task is rescheduled on a different node, Docker Swarm will interact with the Cloudstor plugin to create and mount the volume corresponding to the task on the node the task got scheduled on. It's highly recommended that you use the `.Task.Slot` template to make sure task N always gets access to vol N no matter which node it is executing on/scheduled to.
+Here the templatized notation is used to indicate to Docker Swarm that a unique volume be created and mounted for each replica/task of the service `ping2`. After initial creation of the volumes corresponding to the tasks that will use them (in the nodes the tasks are scheduled in), if a task is rescheduled on a different node, Docker Swarm will interact with the Cloudstor plugin to create and mount the volume corresponding to the task on the node the task got scheduled on. It's highly recommended that you use the `.Task.Slot` template to make sure task N always gets access to vol N no matter which node it is executing on/scheduled to.
 
 In the above example, each task has it's own volume mounted at `/mydata/` and the files under there are unique to the task mounting the volume.
 
 #### List or remove volumes created by Cloudstor
 
-You can use `docker volume ls` to enumerate all volumes created on a node including those backed by Cloudstor. Note that if a swarm service task starts off in a node and has a Cloudstor volume associated and later gets rescheduled to a different node, `docker volume ls` in the initial node will continue to list the Cloudstor volume that was created for the task that no longer executes on the node although the volume is mounted elsewhere. Do NOT prune/rm the volumes that gets enumerated on a node without any tasks associated since these actions will result in data loss if the same volume is mounted in another node (i.e. the volume shows up in the `docker volume ls` output on another node in the swarm). We can try to detect this and block/handle in post-Beta.
+You can use `docker volume ls` on any node to enumerate all volumes created by Cloudstor across the swarm. Do NOT prune/rm the volumes that gets enumerated on a node without any tasks associated since these actions will result in data loss if the same volume is mounted in another node (i.e. the volume shows up in the `docker volume ls` output on another node in the swarm).
