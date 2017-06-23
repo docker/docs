@@ -172,10 +172,10 @@ You'll now be able to log into UCP and DTR.
 * Core
   * Administrators can now configure the frequency with which UCP polls metrics.
   Use `docker service update --env-add METRICS_SCRAPE_INTERVAL=10m ucp-agent`,
-  and the frequency can be in s/m/h/d.
+  and the frequency can be in s/m/h.
   * Administrators can now configure the frequency with which UCP gathers disk usage data.
   Use `docker service update --env-add METRICS_DISK_USAGE_INTERVAL=12h ucp-agent`,
-  and the frequency can be in s/m/h/d.
+  and the frequency can be in s/m/h.
   * Support for syncing users and teams from multiple LDAP servers/domains
   (e.g. a separate server to use for `dc=domain2,dc=example,dc=com`)
   * Support for limiting the number of maximum concurrent login sessions any
