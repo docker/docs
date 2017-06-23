@@ -226,6 +226,17 @@ several more.
 
 - Added: [deploy](index.md#deploy)
 
+### Version 3.3
+
+An upgrade of [version 3](#version-3) that introduces new parameters only available
+with Docker Engine version **17.06.0+**
+
+Introduces the following additional parameters:
+
+- [build `labels`](index.md#build)
+- [`credential_spec`](index.md#credential_spec)
+- [`configs`](index.md#configs)
+
 ## Upgrading
 
 ### Version 2.x to 3.x
