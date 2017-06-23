@@ -74,8 +74,13 @@ differently, but all drivers use stackable image layers and the copy-on-write
 
 ## Container size on disk
 
-To view the approximate size of a running container, you can use the `docker ps`
+To view the approximate size of a running container, you can use the `docker ps -s`
 command. Two different columns relate to size.
+
+```bash
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES               SIZE
+947070ad93c2        alpine              "sh"                33 seconds ago      Up 32 seconds                           happy_ride          5.55 MB (virtual 10.4 MB)
+```
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
   each container
