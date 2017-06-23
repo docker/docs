@@ -953,7 +953,7 @@ Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
 > **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
-> `cpu_count, `cpu_percent`, `cpus`.
+> `cpu_count`, `cpu_percent`, `cpus`.
 
     cpu_count: 2
     cpu_percent: 50
