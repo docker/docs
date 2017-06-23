@@ -23,14 +23,14 @@ instruction in the image's Dockerfile. Each layer except the very last one is
 read-only. Consider the following Dockerfile:
 
 ```conf
-FROM ubuntu:15.10
+FROM ubuntu:15.04
 COPY . /app
 RUN make /app
 CMD python /app/app.py
 ```
 
 This Dockerfile contains four commands, each of which creates a layer.  The
-`FROM` statement starts out by creating a layer from the `ubuntu:15.10` image.
+`FROM` statement starts out by creating a layer from the `ubuntu:15.04` image.
 The `COPY` command adds some files from your Docker client's current directory.
 The `RUN` command builds your application using the `make` command. Finally,
 the last layer specifies what command to run within the container.
@@ -74,8 +74,13 @@ differently, but all drivers use stackable image layers and the copy-on-write
 
 ## Container size on disk
 
-To view the approximate size of a running container, you can use the `docker ps`
+To view the approximate size of a running container, you can use the `docker ps -s`
 command. Two different columns relate to size.
+
+```bash
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES               SIZE
+947070ad93c2        alpine              "sh"                33 seconds ago      Up 32 seconds                           happy_ride          5.55 MB (virtual 10.4 MB)
+```
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
   each container
