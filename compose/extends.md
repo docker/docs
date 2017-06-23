@@ -163,7 +163,14 @@ backup, include the `docker-compose.admin.yml` as well.
 
 ## Extending services
 
-> Up to version 2.1 , version 3.x does not support `extends` yet.
+> The `extends` keyword is supported in earlier Compose file formats
+up to Compose file version 2.1 (see [extends
+in v1](/compose/compose-file/compose-file-v1.md#extends) and
+[extends in v2](/compose/compose-file/compose-file-v2.md#extends)),
+but is not supported in Compose version 3.x. See the [Version 3
+summary](/compose/compose-file/compose-versioning.md#version-3) of keys added
+and removed, along with information on [how to
+upgrade](/compose/compose-file/compose-versioning.md#upgrading).)
 
 Docker Compose's `extends` keyword enables sharing of common configurations
 among different files, or even different projects entirely. Extending services
