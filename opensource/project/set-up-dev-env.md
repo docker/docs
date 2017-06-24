@@ -46,7 +46,7 @@ To remove unnecessary artifacts:
 
    As of Docker Engine version 1.13 you can now use the `docker system prune` command to achieve this:
 
-   ```none 
+   ```none
    $ docker system prune -a
    ```
 
@@ -161,11 +161,11 @@ can take over 15 minutes to complete.
    Copying nested executables into bundles/1.12.0-dev/binary
    ```
 
-7. Copy the binary to the container's **/usr/bin/** directory.
+7. Run `make install`, which copies the binary to the container's
+   `/usr/local/bin/` directory.
 
    ```none
-   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
-   root@a8b2885ab900:/go/src/github.com/moby/moby# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   root@a8b2885ab900:/go/src/github.com/moby/moby# make install
    ```
 
 8. Start the Engine daemon running in the background.
@@ -243,7 +243,7 @@ you have:
   your development container
 
 Running the `make BIND_DIR=. shell` command mounted your local Docker repository source into
-your Docker container. 
+your Docker container.
 
    > **Note**: Inspecting the `Dockerfile` shows a `COPY . /go/src/github.com/docker/docker` instruction, suggesting that dynamic code changes will _not_ be reflected in the container. However inspecting the `Makefile` shows that the current working directory _will_ be mounted via a `-v` volume mount.
 
