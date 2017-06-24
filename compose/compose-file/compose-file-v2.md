@@ -137,6 +137,31 @@ at build time is the value in the environment where Compose is running.
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
 
+#### labels
+
+> Added in [version 2.1](compose-versioning.md#version-21) file format
+
+Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
+You can use either an array or a dictionary.
+
+It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
+those used by other software.
+
+    build:
+      context: .
+      labels:
+        com.example.description: "Accounting webapp"
+        com.example.department: "Finance"
+        com.example.label-with-empty-value: ""
+
+
+    build:
+      context: .
+      labels:
+        - "com.example.description=Accounting webapp"
+        - "com.example.department=Finance"
+        - "com.example.label-with-empty-value"
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -922,11 +947,17 @@ then read-write will be used.
       - restart: always
       - restart: on-failure
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
+> **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
+> `cpu_count`, `cpu_percent`, `cpus`.
+
+    cpu_count: 2
+    cpu_percent: 50
+    cpus: 0.5
     cpu_shares: 73
     cpu_quota: 50000
     cpuset: 0,1

@@ -177,6 +177,31 @@ A list of images that the engine will use for cache resolution.
         - alpine:latest
         - corp/web_app:3.14
 
+#### labels
+
+> **Note:** This option is new in v3.3
+
+Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
+You can use either an array or a dictionary.
+
+It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
+those used by other software.
+
+    build:
+      context: .
+      labels:
+        com.example.description: "Accounting webapp"
+        com.example.department: "Finance"
+        com.example.label-with-empty-value: ""
+
+
+    build:
+      context: .
+      labels:
+        - "com.example.description=Accounting webapp"
+        - "com.example.department=Finance"
+        - "com.example.label-with-empty-value"
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -227,6 +252,18 @@ an error.
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+
+### credential_spec
+
+> **Note:** this option was added in v3.3
+
+Configure the credential spec for managed service account (Windows only).
+
+    credential_spec:
+      file: c:/WINDOWS/my-credential-spec.txt
+
+    credential_spec:
+      registry: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
 
 ### deploy
 
