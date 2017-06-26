@@ -4,8 +4,6 @@ keywords: images, containers, best practices
 title: Use multi-stage builds
 ---
 
-{% include edge_only.md section="page" %}
-
 Multi-stage builds are a new feature in Docker 17.05, and they will be exciting
 to anyone who has struggled to optimize Dockerfiles while keeping them easy to
 read and maintain.
@@ -156,4 +154,3 @@ CMD ["./app"]
 - Check out the blog post
   [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/)
   for full source code and a walk-through of these examples.
-- Check out other features available in [Docker Edge](/edge/)
