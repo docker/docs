@@ -39,7 +39,7 @@ Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zs
 
 ```shell
 mkdir -p ~/.zsh/completion
-curl -L https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/_docker > ~/.zsh/completion/_docker-machine
+curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
 ```
 
 Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:
