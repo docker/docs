@@ -2,7 +2,7 @@
 title: Docker CE Edge documentation
 description: Information about current Docker Edge releases
 keywords: engine, edge, installation
-current_edge: 17.05
+current_edge: 17.06
 ---
 
 The current Docker CE Edge release is {{ page.current_edge }}. The Docker CE
@@ -27,14 +27,26 @@ available until a Docker CE Stable release incorporates the feature**.
 ### Docker CE Edge new features
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#1705">17.05</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#1706">17.06</a></li>
+  <li><a data-toggle="tab" data-target="#1705">17.05</a></li>
   <li><a data-toggle="tab" data-target="#1704">17.04</a></li>
 </ul>
 
 <div markdown="1" class="tab-content">
 
-<div markdown="1" id="1705" class="tab-pane fade in active">
+<div markdown="1" id="1706" class="tab-pane fade in active">
+#### Docker CE Edge 17.06
+
+Docker 17.06 CE Edge is identical to
+[Docker 17.06 CE Stable](/release-notes/docker-ce.md). Docker 17.04 CE Edge
+and Docker 17.05 CE Edge are no longer supported.
+
+</div>
+
+<div markdown="1" id="1705" class="tab-pane fade in">
 #### Docker CE Edge 17.05
+
+Docker CE Edge 17.05 is no longer supported.
 
 The following major features and changes are included in Docker CE Edge 17.05.
 **Docker CE Edge 17.05 also includes the features from Docker CE Edge 17.04.**
@@ -172,6 +184,8 @@ Continue reading, or go straight to [API and CLI](#api-and-cli),
 <div markdown="1" id="1704" class="tab-pane fade">
 
 #### Docker CE Edge 17.04
+
+Docker CE Edge 17.04 is no longer supported.
 
 The following major features and changes are included in Docker CE Edge 17.04.
 
