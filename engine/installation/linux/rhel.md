@@ -114,7 +114,31 @@ the repository.
     $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     ```
 
-4.  Use the following command to add the **stable** repository:
+4. Enable the `extras` RHEL repository. This ensures access to the
+   `container-selinux` package which is required by `docker-ee`.
+
+   ```bash
+   $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
+   ```
+
+   Depending on cloud provider, you may also need to enable another repository.
+
+   For AWS:
+
+   ```bash
+   $ sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+   ```
+
+   >> **Note**: `REGION` here is literal, and does *not* represent the region
+   >> your machine is running in.
+
+   For Azure:
+
+   ```bash
+   $ sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
+   ```
+
+5.  Use the following command to add the **stable** repository:
 
     ```bash
     $ sudo yum-config-manager \
