@@ -502,12 +502,14 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.29/
-    title: v1.29 Reference
+  - path: /engine/api/v1.30/
+    title: v1.30 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.29/
+      title: v1.29 Reference
     - path: /engine/api/v1.28/
       title: v1.28 reference
     - path: /engine/api/v1.27/
