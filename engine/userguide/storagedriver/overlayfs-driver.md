@@ -489,7 +489,7 @@ filesystems:
   such operation is the *copy-up* operation. Suppose that  your application calls
   `fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
   your application expects `fd1` and `fd2` to refer to the same file. However, due
-  to a copy-up operation that occurs after the first calling to `open(2)`, the
+  to a copy-up operation that occurs after the second calling to `open(2)`, the
   descriptors refer to different files.
 
   `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
