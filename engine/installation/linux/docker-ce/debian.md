@@ -132,8 +132,10 @@ from the repository.
     ```
 
 4.  Use the following command to set up the **stable** repository. You always
-    need the **stable** repository, even if you want to install **edge** builds
-    as well.
+    need the **stable** repository, even if you want to install builds from the
+    **edge** or **testing** repositories as well. To add the **edge** or
+    **testing** repository, add the word `edge` or `testing` (or both) after the
+    word `stable` in the commands below.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Debian distribution, such as `jessie`.
@@ -169,6 +171,9 @@ from the repository.
 
     Save and exit the file.
 
+    > **Note**: Starting with Docker 17.06, stable releases are also pushed to
+    > the **edge** and **testing** repositories.
+    
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
