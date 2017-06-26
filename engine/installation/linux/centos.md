@@ -96,7 +96,14 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     ```
 
-2.  Use the following command to set up the **stable** repository. You always
+2.  Enable the `extras` CentOS repository. This ensures access to the
+    `container-selinux` package which is required by `docker-ce`.
+
+    ```bash
+    $ sudo yum-config-manager --enable extras
+    ```
+
+3.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install **edge** builds
     as well.
 
@@ -106,7 +113,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
         {{ download-url-base }}/docker-ce.repo
     ```
 
-3.  **Optional**: Enable the **edge** repository. This repository is included
+4.  **Optional**: Enable the **edge** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
     it alongside the stable repository.
 
@@ -136,7 +143,14 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
     ```
 
-3.  Install required packages. `yum-utils` provides the `yum-config-manager`
+3.  Enable the `extras` CentOS repository. This ensures access to the
+    `container-selinux` package which is required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable extras
+    ```
+
+4.  Install required packages. `yum-utils` provides the `yum-config-manager`
     utility, and `device-mapper-persistent-data` and `lvm2` are required by the
     `devicemapper` storage driver.
 
@@ -144,7 +158,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     ```
 
-4.  Use the following command to add the **stable** repository:
+5.  Use the following command to add the **stable** repository:
 
     ```bash
     $ sudo yum-config-manager \
