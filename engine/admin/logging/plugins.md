@@ -4,8 +4,6 @@ title: Use a logging driver plugin
 keywords: logging, driver, plugins, monitoring
 ---
 
-{% include edge_only.md section="page" %}
-
 Docker logging plugins allow you to extend and customize Docker's logging
 capabilities beyond those of the [built-in logging drivers](overview.md).
 A logging service provider can

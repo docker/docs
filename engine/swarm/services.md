@@ -472,7 +472,6 @@ flag. For more information, see
 
 ### Control service scale and placement
 
-{% include edge_only.md section="options" %}
 Swarm mode has two types of services: replicated and global. For replicated
 services, you specify the number of replica tasks for the swarm manager to
 schedule onto available nodes. For global services, the scheduler places one
@@ -539,8 +538,6 @@ Swarm services allow you to use resource constraints, placement preferences, and
 labels to ensure that your service is deployed to the appropriate swarm nodes.
 
 ### Specify service placement preferences (--placement-pref)
-
-{% include edge_only.md section="feature" %}
 
 You can set up the service to divide tasks evenly over different categories of
 nodes. One example of where this can be useful is to balance tasks over a set
