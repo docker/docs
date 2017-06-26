@@ -61,8 +61,6 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
-    - path: /engine/userguide/eng-image/multistage-build/
-      title: Use multi-stage builds (Edge only)
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/why/
@@ -174,6 +172,8 @@ guides:
       title: Best practices for writing Dockerfiles
     - path: /engine/userguide/eng-image/baseimages/
       title: Create a base image
+    - path: /engine/userguide/eng-image/multistage-build/
+      title: Use multi-stage builds
     - path: /engine/userguide/eng-image/image_management/
       title: Image management
   - sectiontitle: Store data within containers
