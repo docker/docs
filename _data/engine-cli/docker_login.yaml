@@ -59,9 +59,6 @@ usage: docker login [OPTIONS] [SERVER]
 pname: docker
 plink: docker.yaml
 options:
-- option: email
-  shorthand: e
-  description: Email
 - option: password
   shorthand: p
   description: Password
