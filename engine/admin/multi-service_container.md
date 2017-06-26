@@ -59,9 +59,9 @@ this in a few different ways.
   # Otherwise it will loop forever, waking up every 60 seconds
   
   while /bin/true; do
-    ps aux |grep -q my_first_process |grep -v grep
+    ps aux |grep my_first_process |grep -q -v grep
     PROCESS_1_STATUS=$?
-    ps aux |grep -q my_second_process |grep -v grep
+    ps aux |grep my_second_process |grep -q -v grep
     PROCESS_2_STATUS=$?
     # If the greps above find anything, they will exit with 0 status
     # If they are not both 0, then something is wrong
