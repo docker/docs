@@ -171,7 +171,7 @@ In the second network, tagged and isolated by the Docker host, `eth0.60` is the 
 docker network  create  -d macvlan \
     --subnet=192.168.60.0/24 \
     --gateway=192.168.60.1 \
-    -o parent=eth0.60 -o \
+    -o parent=eth0.60 \
     -o macvlan_mode=bridge macvlan60
 
 # In two separate terminals, start a Docker container and the containers can now ping one another.
