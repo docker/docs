@@ -35,7 +35,10 @@ To run this tutorial, you need the following:
 
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
-Amazon EC2 instances, or hosted in some other way.
+Amazon EC2 instances, or hosted in some other way. You can even use Docker Machine
+from a Linux, Mac, or Windows host. Check out
+[Getting started - Swarms](/get-started/part4.md#prerequisites)
+for one possible set-up for the hosts.
 
 One of these machines will be a manager (called `manager1`) and two of them will
 be workers (`worker1` and `worker2`).
