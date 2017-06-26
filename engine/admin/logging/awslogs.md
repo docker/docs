@@ -77,8 +77,6 @@ specified, the container ID is used as the log stream.
 
 ### awslogs-create-group
 
-{% include edge_only.md section="option" %}
-
 Log driver will return an error by default if the log group does not exist. However, you can set the
 `awslogs-create-group` to `true` to automatically create the log group as needed.
 The `awslogs-create-group` option defaults to `false`.

@@ -259,8 +259,6 @@ DNS round robin (DNSRR). You can configure this per service.
 
 ## Customize the ingress network
 
-{% include edge_only.md section="feature" %}
-
 Most users never need to configure the `ingress` network, but Docker 17.05 and
 higher allow you to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
