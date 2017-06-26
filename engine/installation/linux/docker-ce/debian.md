@@ -8,7 +8,7 @@ redirect_from:
 title: Get Docker CE for Debian
 ---
 
-{% assign minor-version = "17.03" %}
+{% assign minor-version = "17.06" %}
 
 To get started with Docker CE on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
