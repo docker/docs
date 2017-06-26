@@ -75,6 +75,14 @@ restart Docker. This method works for every Docker platform. The following
 }
 ```
 
+Many specific configuration options are discussed throughout the Docker
+documentation. Some places to go next include:
+
+- [Automatically start containers](/engine/admin/host_integration.md)
+- [Limit a container's resources](/engine/admin/resource_constraints.md)
+- [Configure storage drivers](/engine/userguide/storagedriver/index.md)
+- [Container security](/engine/security/index.md)
+
 ## Troubleshoot the daemon
 
 You can enable debugging on the daemon to learn about the runtime activity of
@@ -99,14 +107,14 @@ The daemon logs may help you diagnose problems. The logs may be saved in one of
 a few locations, depending on the operating system configuration and the logging
 subsystem used:
 
-| Operating system | Location |
-|------------------|----------|
-| RHEL, Oracle Linux | `/var/log/messages` |
-| Debian           | `/var/log/daemon.log` |
-| Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service` |
-| Ubuntu 14.10-    | `/var/log/upstart/docker.log` |
-| macOS            | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
-| Windows          | `AppData\Local` |
+| Operating system      | Location                                                                                 |
+|:----------------------|:-----------------------------------------------------------------------------------------|
+| RHEL, Oracle Linux    | `/var/log/messages`                                                                      |
+| Debian                | `/var/log/daemon.log`                                                                    |
+| Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service`                                           |
+| Ubuntu 14.10-         | `/var/log/upstart/docker.log`                                                            |
+| macOS                 | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
+| Windows               | `AppData\Local`                                                                          |
 
 
 ### Enable debugging

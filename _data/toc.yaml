@@ -167,6 +167,8 @@ guides:
       title: Image management
   - sectiontitle: Store data within containers
     section:
+    - path: /engine/userguide/storagedriver/
+      title: Storage driver overview
     - path: /engine/userguide/storagedriver/imagesandcontainers/
       title: About images, containers, and storage drivers
     - path: /engine/userguide/storagedriver/selectadriver/
@@ -369,6 +371,8 @@ guides:
     title: AppArmor security profiles for Docker
   - path: /engine/security/seccomp/
     title: Seccomp security profiles for Docker
+  - path: /engine/security/userns-remap/
+    title: Isolate containers with a user namespace
 - sectiontitle: Extend Engine
   section:
   - path: /engine/extend/
