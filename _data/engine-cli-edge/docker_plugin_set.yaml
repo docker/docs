@@ -52,11 +52,13 @@ examples: |-
 
   ```bash
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
   /dev/foo
 
   $ docker plugins set myplugin mydevice.path=/dev/bar
 
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
   /dev/bar
   ```
 
@@ -69,11 +71,13 @@ examples: |-
 
   ```bash
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
   ["foo", "bar"]
 
   $ docker plugins set myplugin myargs="foo bar baz"
 
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
   ["foo", "bar", "baz"]
   ```
 

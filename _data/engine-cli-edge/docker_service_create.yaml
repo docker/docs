@@ -7,6 +7,8 @@ usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker service
 plink: docker_service.yaml
 options:
+- option: config
+  description: Specify configurations to expose to the service
 - option: constraint
   description: Placement constraints
 - option: container-label
@@ -39,15 +41,15 @@ options:
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
-  description: Time between running the check (ns|us|ms|s|m|h)
+  description: Time between running the check (ms|s|m|h)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-start-period
   description: |
-    Start period for the container to initialize before counting retries towards unstable (ns|us|ms|s|m|h)
+    Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
 - option: health-timeout
-  description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
+  description: Maximum time to allow one check to run (ms|s|m|h)
 - option: host
   description: Set one or more custom host-to-IP mappings (host:ip)
 - option: hostname
@@ -76,6 +78,10 @@ options:
 - option: no-healthcheck
   default_value: "false"
   description: Disable any container-specified HEALTHCHECK
+- option: no-resolve-image
+  default_value: "false"
+  description: |
+    Do not query the registry to resolve image digest and supported platforms
 - option: placement-pref
   description: Add a placement preference
 - option: publish

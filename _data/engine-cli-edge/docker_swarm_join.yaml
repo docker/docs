@@ -13,6 +13,9 @@ options:
 - option: availability
   default_value: active
   description: Availability of the node ("active"|"pause"|"drain")
+- option: data-path-addr
+  description: |
+    Address or interface to use for data path traffic (format: <ip|interface>)
 - option: listen-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
@@ -77,6 +80,15 @@ examples: |-
   name, the default port 2377 will be used.
 
   This flag is generally not necessary when joining an existing swarm.
+
+  ### `--data-path-addr`
+
+  This flag specifies the address that global scope network drivers will publish towards
+  other nodes in order to reach the containers running on this node.
+  Using this parameter it is then possible to separate the container's data traffic from the
+  management traffic of the cluster.
+  If unspecified, Docker will use the same IP address or interface that is used for the
+  advertise address.
 
   ### `--token string`
 

@@ -40,6 +40,8 @@ options:
 - option: force-rm
   default_value: "false"
   description: Always remove intermediate containers
+- option: iidfile
+  description: Write the image ID to the file
 - option: isolation
   description: Container isolation technology
 - option: label

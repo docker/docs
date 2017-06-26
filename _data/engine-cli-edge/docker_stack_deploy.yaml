@@ -16,6 +16,10 @@ options:
 - option: prune
   default_value: "false"
   description: Prune services that are no longer referenced
+- option: resolve-image
+  default_value: always
+  description: |
+    Query the registry to resolve image digest and supported platforms ("always"|"changed"|"never")
 - option: with-registry-auth
   default_value: "false"
   description: Send registry authentication details to Swarm agents
