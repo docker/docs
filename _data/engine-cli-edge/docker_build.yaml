@@ -13,17 +13,22 @@ long: |-
   ### Git repositories
 
   When the `URL` parameter points to the location of a Git repository, the
-  repository acts as the build context. The system recursively clones the
-  repository and its submodules using a `git clone --depth 1 --recursive`
-  command. This command runs in a temporary directory on your local host. After
-  the command succeeds, the directory is sent to the Docker daemon as the
-  context. Local clones give you the ability to access private repositories using
-  local user credentials, VPN's, and so forth.
+  repository acts as the build context. The system recursively fetches the
+  repository and its submodules. The commit history is not preserved. A
+  repository is first pulled into a temporary directory on your local host. After
+  the that succeeds, the directory is sent to the Docker daemon as the context.
+  Local copy gives you the ability to access private repositories using local
+  user credentials, VPN's, and so forth.
+
+  > **Note:**
+  > If the `URL` parameter contains a fragment the system will recursively clone
+  > the repository and its submodules using a `git clone --recursive` command.
 
   Git URLs accept context configuration in their fragment section, separated by a
   colon `:`.  The first part represents the reference that Git will check out,
-  this can be either a branch, a tag, or a commit SHA. The second part represents
-  a subdirectory inside the repository that will be used as a build context.
+  this can be either a branch, a tag, or a remote reference. The second part
+  represents a subdirectory inside the repository that will be used as a build
+  context.
 
   For example, run this command to use a directory called `docker` in the branch
   `container`:
@@ -40,12 +45,11 @@ long: |-
   `myrepo.git`                    | `refs/heads/master`   | `/`
   `myrepo.git#mytag`              | `refs/tags/mytag`     | `/`
   `myrepo.git#mybranch`           | `refs/heads/mybranch` | `/`
-  `myrepo.git#abcdef`             | `sha1 = abcdef`       | `/`
+  `myrepo.git#pull/42/head`       | `refs/pull/42/head`   | `/`
   `myrepo.git#:myfolder`          | `refs/heads/master`   | `/myfolder`
   `myrepo.git#master:myfolder`    | `refs/heads/master`   | `/myfolder`
   `myrepo.git#mytag:myfolder`     | `refs/tags/mytag`     | `/myfolder`
   `myrepo.git#mybranch:myfolder`  | `refs/heads/mybranch` | `/myfolder`
-  `myrepo.git#abcdef:myfolder`    | `sha1 = abcdef`       | `/myfolder`
 
 
   ### Tarball contexts
@@ -138,6 +142,8 @@ options:
 - option: force-rm
   default_value: "false"
   description: Always remove intermediate containers
+- option: iidfile
+  description: Write the image ID to the file
 - option: isolation
   description: Container isolation technology
 - option: label
@@ -247,9 +253,11 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   use the following:\n\n```bash\n$ docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1
   .\n```\n\n### Specify a Dockerfile (-f)\n\n```bash\n$ docker build -f Dockerfile.debug
   .\n```\n\nThis will use a file called `Dockerfile.debug` for the build instructions\ninstead
-  of `Dockerfile`.\n\n```bash\n$ docker build -f dockerfiles/Dockerfile.debug -t myapp_debug
-  .\n$ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .\n```\n\nThe above
-  commands will build the current build context (as specified by the\n`.`) twice,
+  of `Dockerfile`.\n\n```bash\n$ curl example.com/remote/Dockerfile | docker build
+  -f - .\n```\n\nThe above command will use the current directory as the build context
+  and read\na Dockerfile from stdin.\n\n```bash\n$ docker build -f dockerfiles/Dockerfile.debug
+  -t myapp_debug .\n$ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .\n```\n\nThe
+  above commands will build the current build context (as specified by the\n`.`) twice,
   once using a debug version of a `Dockerfile` and once using a\nproduction version.\n\n```bash\n$
   cd /home/me/myapp/some/dir/really/deep\n$ docker build -f /home/me/myapp/dockerfiles/debug
   /home/me/myapp\n$ docker build -f ../../../../dockerfiles/debug /home/me/myapp\n```\n\nThese
@@ -297,36 +305,42 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   Add entries to container hosts file (--add-host)\n\nYou can add other hosts into
   a container's `/etc/hosts` file by using one or\nmore `--add-host` flags. This example
   adds a static address for a host named\n`docker`:\n\n    $ docker build --add-host=docker:10.180.0.1
-  .\n\n### Squash an image's layers (--squash) **Experimental Only**\n\n#### Overview\n\nOnce
-  the image is built, squash the new layers into a new image with a single\nnew layer.
-  Squashing does not destroy any existing image, rather it creates a new\nimage with
-  the content of the squashed layers. This effectively makes it look\nlike all `Dockerfile`
-  commands were created with a single layer. The build\ncache is preserved with this
-  method.\n\n**Note**: using this option means the new image will not be able to take\nadvantage
-  of layer sharing with other images and may use significantly more\nspace.\n\n**Note**:
-  using this option you may see significantly more space used due to\nstoring two
-  copies of the image, one for the build cache with all the cache\nlayers in tact,
-  and one for the squashed version.\n\n#### Prerequisites\n\nThe example on this page
-  is using experimental mode in Docker 1.13.\n\nExperimental mode can be enabled by
-  using the `--experimental` flag when starting the Docker daemon or setting `experimental:
-  true` in the `daemon.json` configuration file.\n\nBy default, experimental mode
-  is disabled. To see the current configuration, use the `docker version` command.\n\n```none\n\nServer:\n
-  Version:      1.13.1\n API version:  1.26 (minimum version 1.12)\n Go version:   go1.7.5\n
-  Git commit:   092cba3\n Built:        Wed Feb  8 06:35:24 2017\n OS/Arch:      linux/amd64\n
-  Experimental: false\n\n [...]\n\n```\n\nTo enable experimental mode, users need
-  to restart the docker daemon with the experimental flag enabled.\n\n#### Enable
-  Docker experimental\n\nExperimental features are now included in the standard Docker
-  binaries as of version 1.13.0. For enabling experimental features, you need to start
-  the Docker daemon with `--experimental` flag. You can also enable the daemon flag
-  via /etc/docker/daemon.json. e.g.\n\n```\n\n{\n    \"experimental\": true\n}\n\n```\nThen
-  make sure the experimental flag is enabled:\n\n```bash\n\n$ docker version -f '{{.Server.Experimental}}'\ntrue\n\n```\n\n####
-  Build an image with `--squash` argument\n\nThe following is an example of docker
-  build with `--squash` argument\n\n```Dockerfile\n\nFROM busybox\nRUN echo hello
-  > /hello\nRUN echo world >> /hello\nRUN touch remove_me /remove_me\nENV HELLO world\nRUN
-  rm /remove_me\n\n```\nAn image named `test` is built with `--squash` argument.\n\n```bash\n\n$
-  docker build --squash -t test .\n\n[...]\n\n```\n\nIf everything is right, the history
-  will look like this:\n\n```bash\n$ docker history test \n\nIMAGE               CREATED
-  \            CREATED BY                                      SIZE                COMMENT\n4e10cb5b4cac
+  .\n\n### Specifying target build stage (--target)\n\nWhen building a Dockerfile
+  with multiple build stages, `--target` can be used to\nspecify an intermediate build
+  stage by name as a final stage for the resulting\nimage. Commands after the target
+  stage will be skipped.\n\n```Dockerfile\nFROM debian AS build-env\n...\n\nFROM alpine
+  AS production-env\n...\n```\n\n```bash\n$ docker build -t mybuildimage --target
+  build-env .\n```\n\n### Squash an image's layers (--squash) **Experimental Only**\n\n####
+  Overview\n\nOnce the image is built, squash the new layers into a new image with
+  a single\nnew layer. Squashing does not destroy any existing image, rather it creates
+  a new\nimage with the content of the squashed layers. This effectively makes it
+  look\nlike all `Dockerfile` commands were created with a single layer. The build\ncache
+  is preserved with this method.\n\n**Note**: using this option means the new image
+  will not be able to take\nadvantage of layer sharing with other images and may use
+  significantly more\nspace.\n\n**Note**: using this option you may see significantly
+  more space used due to\nstoring two copies of the image, one for the build cache
+  with all the cache\nlayers in tact, and one for the squashed version.\n\n#### Prerequisites\n\nThe
+  example on this page is using experimental mode in Docker 1.13.\n\nExperimental
+  mode can be enabled by using the `--experimental` flag when starting the Docker
+  daemon or setting `experimental: true` in the `daemon.json` configuration file.\n\nBy
+  default, experimental mode is disabled. To see the current configuration, use the
+  `docker version` command.\n\n```none\n\nServer:\n Version:      1.13.1\n API version:
+  \ 1.26 (minimum version 1.12)\n Go version:   go1.7.5\n Git commit:   092cba3\n
+  Built:        Wed Feb  8 06:35:24 2017\n OS/Arch:      linux/amd64\n Experimental:
+  false\n\n [...]\n\n```\n\nTo enable experimental mode, users need to restart the
+  docker daemon with the experimental flag enabled.\n\n#### Enable Docker experimental\n\nExperimental
+  features are now included in the standard Docker binaries as of version 1.13.0.
+  For enabling experimental features, you need to start the Docker daemon with `--experimental`
+  flag. You can also enable the daemon flag via /etc/docker/daemon.json. e.g.\n\n```\n\n{\n
+  \   \"experimental\": true\n}\n\n```\nThen make sure the experimental flag is enabled:\n\n```bash\n\n$
+  docker version -f '{{.Server.Experimental}}'\ntrue\n\n```\n\n#### Build an image
+  with `--squash` argument\n\nThe following is an example of docker build with `--squash`
+  argument\n\n```Dockerfile\n\nFROM busybox\nRUN echo hello > /hello\nRUN echo world
+  >> /hello\nRUN touch remove_me /remove_me\nENV HELLO world\nRUN rm /remove_me\n\n```\nAn
+  image named `test` is built with `--squash` argument.\n\n```bash\n\n$ docker build
+  --squash -t test .\n\n[...]\n\n```\n\nIf everything is right, the history will look
+  like this:\n\n```bash\n$ docker history test \n\nIMAGE               CREATED             CREATED
+  BY                                      SIZE                COMMENT\n4e10cb5b4cac
   \       3 seconds ago                                                       12 B
   \               merge sha256:88a7b0112a41826885df0e7072698006ee8f621c6ab99fca7fe9151d7b599702
   to sha256:47bcc53f74dc94b1920f0b34f6036096526296767650f223433fe65c35f149eb\n<missing>

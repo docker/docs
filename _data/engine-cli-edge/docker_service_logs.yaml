@@ -45,6 +45,9 @@ usage: docker service logs [OPTIONS] SERVICE|TASK
 pname: docker service
 plink: docker_service.yaml
 options:
+- option: details
+  default_value: "false"
+  description: Show extra details provided to logs
 - option: follow
   shorthand: f
   default_value: "false"
@@ -58,6 +61,9 @@ options:
 - option: no-trunc
   default_value: "false"
   description: Do not truncate output
+- option: raw
+  default_value: "false"
+  description: Do not neatly format logs
 - option: since
   description: |
     Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)

@@ -58,6 +58,11 @@ options:
 - option: aux-address
   default_value: map[]
   description: Auxiliary IPv4 or IPv6 addresses used by Network driver
+- option: config-from
+  description: The network from which copying the configuration
+- option: config-only
+  default_value: "false"
+  description: Create a configuration only network
 - option: driver
   shorthand: d
   default_value: bridge
@@ -89,6 +94,8 @@ options:
   shorthand: o
   default_value: map[]
   description: Set driver specific options
+- option: scope
+  description: Control the network's scope
 - option: subnet
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment

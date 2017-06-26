@@ -106,18 +106,18 @@ options:
   description: Command to run to check health
 - option: health-interval
   default_value: 0s
-  description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
+  description: Time between running the check (ms|s|m|h) (default 0s)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-start-period
   default_value: 0s
   description: |
-    Start period for the container to initialize before starting health-retries countdown (ns|us|ms|s|m|h) (default 0s)
+    Start period for the container to initialize before starting health-retries countdown (ms|s|m|h) (default 0s)
 - option: health-timeout
   default_value: 0s
   description: |
-    Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
+    Maximum time to allow one check to run (ms|s|m|h) (default 0s)
 - option: help
   default_value: "false"
   description: Print usage
@@ -128,8 +128,6 @@ options:
   default_value: "false"
   description: |
     Run an init inside the container that forwards signals and reaps processes
-- option: init-path
-  description: Path to the docker-init binary
 - option: interactive
   shorthand: i
   default_value: "false"

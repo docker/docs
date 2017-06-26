@@ -901,6 +901,18 @@ reference:
       title: docker checkpoint rm
   - path: /edge/engine/reference/commandline/commit/
     title: docker commit
+  - sectiontitle: docker config *
+    section:
+    - path: /edge/engine/reference/commandline/config/
+      title: docker config
+    - path: /edge/engine/reference/commandline/config_create/
+      title: docker config create
+    - path: /edge/engine/reference/commandline/config_inspect/
+      title: docker config inspect
+    - path: /edge/engine/reference/commandline/config_ls/
+      title: docker config ls
+    - path: /edge/engine/reference/commandline/config_rm/
+      title: docker config rm
   - sectiontitle: docker container *
     section:
     - path: /edge/engine/reference/commandline/container/
@@ -1153,6 +1165,8 @@ reference:
     section:
     - path: /edge/engine/reference/commandline/swarm/
       title: docker swarm
+    - path: /edge/engine/reference/commandline/swarm_ca/
+      title: docker swarm ca
     - path: /edge/engine/reference/commandline/swarm_init/
       title: docker swarm init
     - path: /edge/engine/reference/commandline/swarm_join-token/

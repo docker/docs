@@ -11,7 +11,7 @@ options:
   default_value: "false"
   description: Remove all unused images not just dangling ones
 - option: filter
-  description: Provide filter values (e.g. 'until=<timestamp>')
+  description: Provide filter values (e.g. 'label=<key>=<value>')
 - option: force
   shorthand: f
   default_value: "false"
@@ -35,15 +35,21 @@ examples: "```bash\n$ docker system prune -a\n\nWARNING! This will remove:\n\t- 
   format is of \"key=value\". If there is more\nthan one filter, then pass multiple
   flags (e.g., `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe currently supported
   filters are:\n\n* until (`<timestamp>`) - only remove containers, images, and networks
-  created before given timestamp\n\nThe `until` filter can be Unix timestamps, date
-  formatted\ntimestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed\nrelative
-  to the daemon machine’s time. Supported formats for date\nformatted time stamps
-  include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,\n`2006-01-02T15:04:05.999999999`,
+  created before given timestamp\n* label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`,
+  or `label!=<key>=<value>`) - only remove containers, images, networks, and volumes
+  with (or without, in case `label!=...` is used) the specified labels.\n\nThe `until`
+  filter can be Unix timestamps, date formatted\ntimestamps, or Go duration strings
+  (e.g. `10m`, `1h30m`) computed\nrelative to the daemon machine’s time. Supported
+  formats for date\nformatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,\n`2006-01-02T15:04:05.999999999`,
   `2006-01-02Z07:00`, and `2006-01-02`. The local\ntimezone on the daemon will be
   used if you do not provide either a `Z` or a\n`+-00:00` timezone offset at the end
   of the timestamp.  When providing Unix\ntimestamps enter seconds[.nanoseconds],
   where seconds is the number of seconds\nthat have elapsed since January 1, 1970
   (midnight UTC/GMT), not counting leap\nseconds (aka Unix epoch or Unix time), and
   the optional .nanoseconds field is a\nfraction of a second no more than nine digits
-  long."
+  long.\n\nThe `label` filter accepts two formats. One is the `label=...` (`label=<key>`
+  or `label=<key>=<value>`),\nwhich removes containers, images, networks, and volumes
+  with the specified labels. The other\nformat is the `label!=...` (`label!=<key>`
+  or `label!=<key>=<value>`), which removes\ncontainers, images, networks, and volumes
+  without the specified labels."
 
