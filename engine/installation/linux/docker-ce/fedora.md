@@ -7,7 +7,7 @@ redirect_from:
 title: Get Docker CE for Fedora
 ---
 
-{% assign minor-version = "17.03" %}
+{% assign minor-version = "17.06" %}
 
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
