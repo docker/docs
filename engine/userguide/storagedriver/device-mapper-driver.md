@@ -135,7 +135,7 @@ below to configure Docker to use the `devicemapper` storage driver in
 > **Warning**: Changing the storage driver will make any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
-  not need to re-create them later.
+  don't need to recreate them later.
 
 The procedure below will create a logical volume configured as a thin pool to
 use as backing for the storage pool. It assumes that you have a spare block
