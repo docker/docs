@@ -489,13 +489,19 @@ filesystems:
   such operation is the *copy-up* operation. Suppose that  your application calls
   `fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
   your application expects `fd1` and `fd2` to refer to the same file. However, due
-  to a copy-up operation that occurs after the first calling to `open(2)`, the
-  descriptors refer to different files.
+  to a copy-up operation that occurs after the second calling to `open(2)`, the
+  descriptors refer to different files. The `fd1` continues to reference the file
+  in the image (`lowerdir`) and the `fd2` references the file in the container
+  (`upperdir`). A workaround for this is to `touch` the files which causes the
+  copy-up operation to happen. All subsequent `open(2)` operations regardless of 
+  read-only or read-write access mode will be referencing the file in the 
+  container (`upperdir`).
 
   `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
-  If the `yum-plugin-ovl` package is not available in your distribution (e.g.
-  RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*`
-  before running `yum install`.
+  If the `yum-plugin-ovl` package is not available in your distribution such as
+  RHEL/CentOS prior to 6.8 or 7.2, you may need to run `touch /var/lib/rpm/*`
+  before running `yum install`. This package implements the `touch` workaround
+  referenced above for `yum`.
 
 - **rename(2)**: OverlayFS does not fully support the `rename(2)` system call.
   Your application needs to detect its failure and fall back to a "copy and
