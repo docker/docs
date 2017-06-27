@@ -1,6 +1,6 @@
 ---
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords: Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub, official repo
+keywords: parent image, images, dockerfile, best practices, hub, official repo
 redirect_from:
 - /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
@@ -110,7 +110,7 @@ However, if you do let Docker use its cache then it is very important to
 understand when it will, and will not, find a matching image. The basic rules
 that Docker will follow are outlined below:
 
-* Starting with a base image that is already in the cache, the next
+* Starting with a parent image that is already in the cache, the next
 instruction is compared against all child images derived from that base
 image to see if one of them was built using the exact same instruction. If
 not, the cache is invalidated.
@@ -201,8 +201,8 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the base images won't upgrade inside an unprivileged
-container. If a package contained in the base image is out-of-date, you should
+“essential” packages from the parent images won't upgrade inside an unprivileged
+container. If a package contained in the parent image is out-of-date, you should
 contact its maintainers.
 If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.

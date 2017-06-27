@@ -60,7 +60,7 @@ Create an empty directory and put this file in it, with the name `Dockerfile`.
 Take note of the comments that explain each statement.
 
 ```conf
-# Use an official Python runtime as a base image
+# Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
 # Set the working directory to /app

@@ -58,7 +58,7 @@ You can download two types of images from the Docker Store:
 ## What version do I need?
 
 In many cases there will be multiple versions of an image available. Some
-versions may offer smaller base image sizes, or address specific security
+versions may offer smaller parent image sizes, or address specific security
 vulnerabilities.
 
 To see a list of an image's versions, click **View all versions**.

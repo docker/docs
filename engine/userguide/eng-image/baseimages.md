@@ -1,26 +1,38 @@
 ---
 description: How to create base images
-keywords: Examples, Usage, base image, docker, documentation,  examples
+keywords: images, base image, examples
 redirect_from:
 - /engine/articles/baseimages/
 title: Create a base image
 ---
 
-So you want to create your own [*Base Image*](../../reference/glossary.md#base-image)? Great!
+Most Dockerfiles start from a parent image. If you need to completely control
+the contents of your image, you might need to create a base image instead.
+Here's the difference:
 
-The specific process will depend heavily on the Linux distribution you
-want to package. We have some examples below, and you are encouraged to
-submit pull requests to contribute new ones.
+- A [parent image](/reference/glossary.md#parent-image) is the image that your
+  image is based on. It refers to the contents of the `FROM` directive in the
+  Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
+  image. Most Dockerfiles start from a parent image, rather than a base image.
+  However, the terms are sometimes used interchangeably.
+
+- A [base image](/reference/glossary.md#base-image) either has no `FROM` line
+  in its Dockerfile, or has `FROM scratch`.
+
+This topic shows you several ways to create a base image. The specific process
+will depend heavily on the Linux distribution you want to package. We have some
+examples below, and you are encouraged to submit pull requests to contribute new
+ones.
 
 ## Create a full image using tar
 
 In general, you'll want to start with a working machine that is running
-the distribution you'd like to package as a base image, though that is
+the distribution you'd like to package as a parent image, though that is
 not required for some tools like Debian's
 [Debootstrap](https://wiki.debian.org/Debootstrap), which you can also
 use to build Ubuntu images.
 
-It can be as simple as this to create an Ubuntu base image:
+It can be as simple as this to create an Ubuntu parent image:
 
     $ sudo debootstrap raring raring > /dev/null
     $ sudo tar -C raring -c . | docker import - raring
@@ -34,7 +46,7 @@ It can be as simple as this to create an Ubuntu base image:
     DISTRIB_CODENAME=raring
     DISTRIB_DESCRIPTION="Ubuntu 13.04"
 
-There are more example scripts for creating base images in the Docker
+There are more example scripts for creating parent images in the Docker
 GitHub Repo:
 
  - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage-busybox.sh)
@@ -45,7 +57,7 @@ GitHub Repo:
  - [Debian / Ubuntu](
    https://github.com/moby/moby/blob/master/contrib/mkimage-debootstrap.sh)
 
-## Creating a simple base image using scratch
+## Creating a simple parent image using scratch
 
 You can use Docker's reserved, minimal image, `scratch`, as a starting point for building containers. Using the `scratch` "image" signals to the build process that you want the next command in the `Dockerfile` to be the first filesystem layer in your image.
 

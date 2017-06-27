@@ -239,7 +239,7 @@ Use these instructions to update APT-based systems.
     $ sudo apt-get update && sudo apt-get install apt-transport-https
     ```
 
-4.  Install additional virtual drivers not in the base image.
+4.  Install additional virtual drivers not in the parent image.
 
     ```bash
     $ sudo apt-get install -y linux-image-extra-virtual
