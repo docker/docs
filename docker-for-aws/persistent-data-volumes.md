@@ -8,13 +8,17 @@ title: Docker for AWS persistent data volumes
 
 ## What is Cloudstor?
 
-Cloudstor is a modern volume plugin managed by Docker. It comes pre-installed and pre-configured in Docker Swarms deployed through Docker for AWS. Docker Swarm tasks as well as regular containers can use a volume created through Cloudstor to mount a persistent data volume. In Docker for AWS, Cloudstor can be used with two `backing` options: `local` (that uses EBS) and `shared` (that uses EFS) described below.
+Cloudstor is a modern volume plugin built by Docker. It comes pre-installed and pre-configured in Docker Swarms deployed through Docker for AWS. Docker Swarm mode tasks as well as regular Docker containers can use a volume created with Cloudstor to mount a persistent data volume. In Docker for AWS, Cloudstor has two `backing` options: `relocatable` (that uses EBS) and `shared` (that uses EFS) described below. Using the Docker swarm CLI (to create a service along with the persistent volumes for the tasks), it is possible to create the following:
+1. Unique `relocatable` Cloudstor volumes mounted by each task in a swarm mode service.
+2. Global `shared` Cloudstor volumes mounted by all tasks in a swarm mode service.
+3. Unique `shared` Cloudstor volumes mounted by each task in a swarm mode service.
+Example for the above are detailed down below.
 
-## Local Cloudstor volumes
+## Relocatable Cloudstor volumes
 
- Workloads running in a Docker Service that require access to low latency/high IOPs persistent storage (e.g. a database engine) can use a `local` Cloudstor volume backed by EBS. It is possible to configure the specific type of EBS volume supported by AWS (e.g. gp2, io1, st1, sc1) that the workload requires during volume creation. Each `local` Cloudstor volume is backed by a single EBS volume. If a swarm task using a `local` Cloudstor volume gets rescheduled to another node within the same availability zone (as the node where the task was running on), Cloudstor takes care of detaching and re-attaching the backing EBS volume to the target node. If the swarm task gets rescheduled to a node in a different availability zone (from the node where the task was originally running), Cloudstor will transfer the contents of the backing EBS volume using a snapshot to the destination availability zone as well as clean up the EBS volume in the original Availability Zone. To minimize the time necessary to create the snapshot to transfer data across availability zones, Cloudstor periodically takes snapshots of the EBS volumes to ensure there is never a large amount of diff that will need to get transferred as part of the snapshot necessary during a cross availability zone task reschedule. Typically the snapshot based transfer process across availability zones takes a few minutes and for extremely write-heavy workloads (e.g. writing > 20 GB of fresh/new data within minutes), this may take several minutes. 
+ Workloads running in a Docker Service that require access to low latency/high IOPs persistent storage (e.g. a database engine) can use a `relocatable` Cloudstor volume backed by EBS. The type of EBS volume (e.g. gp2, io1, st1, sc1) that the workload requires  can be specified during volume creation. Each `relocatable` Cloudstor volume is backed by a single EBS volume. If a swarm task using a `relocatable` Cloudstor volume gets rescheduled to another node within the same availability zone (as the node where the task was running on), Cloudstor takes care of detaching and re-attaching the backing EBS volume to the target node. If the swarm task gets rescheduled to a node in a different availability zone (from the node where the task was originally running), Cloudstor will transfer the contents of the backing EBS volume using a snapshot to the destination availability zone as well as clean up the EBS volume in the original Availability Zone. To minimize the time necessary to create the snapshot to transfer data across availability zones, Cloudstor periodically takes snapshots of the EBS volumes to ensure there is never a large amount of diff that will need to get transferred as part of the snapshot necessary during a cross availability zone task reschedule. Typically the snapshot based transfer process across availability zones takes about 2 to 5 minutes unless the work load is write heavy. For extremely write-heavy workloads generating several GBs of fresh/new data within minutes, the transfer may take more than 5 minutes. The time required to snapshot and transfer increases sharply beyond 10 minutes if more than 20 GB of diff data has been generated since the last snapshot interval. Note that a swarm task is not started until the volume it mounts becomes available.
  
- Sharing/mounting the same Cloudstor volume backed by EBS among multiple tasks is not a supported scenario and will lead to data loss. If you need a Cloudstor volume to share data between tasks please read below for EFS backed `shared` volume options. `local` Cloudstor backed by EBS is supported on all AWS regions that support EBS. It is the default "backing" option if EFS support is not selected during setup/installation or if EFS is not supported in a region.
+ Sharing/mounting the same Cloudstor volume backed by EBS among multiple tasks is not a supported scenario and will lead to data loss. If you need a Cloudstor volume to share data between tasks please read below for EFS backed `shared` volume options. `relocatable` Cloudstor backed by EBS is supported on all AWS regions that support EBS. The default `backing` option is `relocatable` if EFS support is not selected during setup/installation or if EFS is not supported in a region.
 
 ## Shared Cloudstor volumes 
 
@@ -66,7 +70,7 @@ docker volume create -d "cloudstor:aws" --opt backing=shared mysharedvol1
 
 ### Use a unique volume per task (using EBS):
 
-A unique `local` Cloudstor volume backed by a specified type of EBS can be created and mounted for each task in a swarm service using a templatized notation with the `docker service create` CLI. Creation of new EBS volumes typically takes a few minutes.  The volume options (besides `backing=local` indicating `local` EBS backed volumes) are:
+A unique `relocatable` Cloudstor volume backed by a specified type of EBS can be created and mounted for each task in a swarm service using a templatized notation with the `docker service create` CLI. Creation of new EBS volumes typically takes a few minutes.  The volume options (besides `backing=local` indicating `relocatable` EBS backed volumes) are:
 1. `size` : Required parameter that indicates the size of the EBS volumes to create in GB. 
 2. `ebstype` : Optional parameter that indicates the type of the EBS volumes to create, for example gp2, io1, st1, sc1. The default `ebstype` is Standard/Magnetic. For further details about EBS volume types, please see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html. 
 3. `iops` : Required if `ebstype` specified is `io1` i.e. provisioned IOPs. Needs to be in the appropriate range as required by EBS. 
@@ -92,11 +96,11 @@ docker volume create -d "cloudstor:aws" --opt ebstype=io1 --opt size=25 --opt io
 {% endraw %}
 ```
 
-Sharing the same `local` Cloudstor volume across multiple tasks of a service or across multiple independent containers is not supported when `backing=local` is specified. Trying to do so in containers across multiple nodes will result in IO errors.
+Sharing the same `relocatable` Cloudstor volume across multiple tasks of a service or across multiple independent containers is not supported when `backing=local` is specified. Trying to do so in containers across multiple nodes will result in IO errors.
 
 ### Use a unique volume per task (using EFS with EFS support present and enabled):
 
-It is possible to use the templatized notation to indicate to Docker Swarm that a unique EFS backed volume be created and mounted for each replica/task of a service. Example:
+It is possible to use the templatized notation to indicate to Docker Swarm that a unique EFS backed volume be created and mounted for each replica/task of a service. This is a useful option if you already have too many EBS volumes or want to reduce the amount of time it takes to transfer volume data across availability zones. Example:
 
 ```bash
 {% raw %}
@@ -115,3 +119,5 @@ It is highly recommended that you use the `.Task.Slot` template to make sure tas
 ### List or remove volumes created by Cloudstor
 
 You can use `docker volume ls` on any node to enumerate all volumes created by Cloudstor across the swarm. You can use `docker volume rm [volume name]` to remove a cloudstor volume from any node. Please be aware that if you remove a volume from one node please make sure it is not under active usage in another node as those tasks/containers in another node will lose access to their data.
+
+Before deleting a Docker4AWS stack through CloudFormation, it is recommended that you remove all `relocatable` Cloudstor volumes using `docker volume rm` from within the stack. EBS volumes corresponding to `relocatable` Cloudstor volumes will not be deleted as part of the CloudFormation stack deletion. To list any `relocatable` Cloudstor volumes and delete them after a Docker4AWS stack (in which the volumes where created) has been deleted, go to the AWS portal or CLI and set a filter with tag key set to `StackID` and the tag value set to the md5 hash of the CloudFormation Stack ID (typical format: arn:aws:cloudformation:us-west-2:ID:stack/swarmname/GUID)
