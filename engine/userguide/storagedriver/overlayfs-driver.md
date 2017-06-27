@@ -498,10 +498,10 @@ filesystems:
   container (`upperdir`).
 
   `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
-  If the `yum-plugin-ovl` package is not available in your distribution (e.g.
-  RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*`
+  If the `yum-plugin-ovl` package is not available in your distribution such as
+  RHEL/CentOS prior to 6.8 or 7.2, you may need to run `touch /var/lib/rpm/*`
   before running `yum install`. This package implements the `touch` workaround
-  referenced above.
+  referenced above for `yum`.
 
 - **rename(2)**: OverlayFS does not fully support the `rename(2)` system call.
   Your application needs to detect its failure and fall back to a "copy and
