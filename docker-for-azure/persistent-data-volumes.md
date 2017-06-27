@@ -8,7 +8,7 @@ title: Docker for Azure persistent data volumes
 
 ## What is Cloudstor?
 
-Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-configured in Docker Swarms deployed on Docker for Azure. Docker Swarm tasks can use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled on or migrated to. Cloudstor relies on shared storage infrastructure provided by Azure to allow swarm tasks to create/mount their persistent volumes on any node in the Docker Swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
+Cloudstor is a modern volume plugin built by Docker. It comes pre-installed and pre-configured in Docker Swarms deployed through Docker for Azure. Docker Swarm mode tasks as well as regular Docker containers can use a volume created with Cloudstor to mount a persistent data volume. The volume  stays attached to the swarm tasks no matter which swarm node they get scheduled on or migrated to. Cloudstor relies on shared storage infrastructure provided by Azure (specifically File Storage shares exposed over SMB) to allow swarm tasks to create/mount their persistent volumes on any node in the Docker Swarm. In a future release we will introduce support for direct attached/relocatable storage to satisfy very low latency/high IOPs requirements.
 
 ## Use Cloudstor
 
@@ -24,6 +24,8 @@ The following examples show how to create swarm services that require data persi
 
 ### Share the same volume between tasks:
 
+Cloudstor volumes can be created to share access to persistent data across all tasks in a swarm service running in multiple nodes. Example:
+
 ```bash
 docker service create --replicas 5 --name ping1 \
     --mount type=volume,volume-driver=cloudstor:azure,source=sharedvol1,destination=/shareddata \
@@ -35,6 +37,8 @@ Here all replicas/tasks of the service `ping1` share the same persistent volume 
 With the above example, you can make sure that the volume is indeed shared by logging into one of the containers in one swarm node, writing to a file under `/shareddata/` and reading the file under `/shareddata/` from another container (in the same node or a different node).
 
 ### Use a unique volume per task:
+
+It is possible to use the templatized notation to indicate to Docker Swarm that a unique Cloudstor volume be created and mounted for each replica/task of a service. This may be useful if the tasks write to the same file under the same path which may lead to corruption in case of shared storage. Example:
 
 ```bash
 {% raw %}
@@ -48,6 +52,25 @@ Here the templatized notation is used to indicate to Docker Swarm that a unique 
 
 In the above example, each task has it's own volume mounted at `/mydata/` and the files under there are unique to the task mounting the volume.
 
+### Volume options
+
+Cloudstor creates a new File Share in Azure File Storage for each volume and uses SMB to mount them. SMB however is fairly limited in the area of being compatible with generic Unix file ownership and permissions related operations. Certain workloads (e.g. Jenkins, Gitlab) define specific users and groups that perform different file operations and requires the Cloudstor volume to be mounted with the corresponding UID/GID. To allow for this scenario as well as greater control over default file permissions, Cloudstor exposes the following volume options that map to SMB parameters used for mounting the backing file share.
+
+1. `uid` : User ID that will own all files on the volume. Default: 0 = root
+2. `gid` : Group ID that will own all files on the volume. Default: 0 = root
+3. `filemode` : Permissions for all files on the volume. Default: 0777
+4. `dirmode` : Permissions for all directories on the volume. Default: 0777
+5. `share` : Name to associate with file share so that the share can be easily located in the Azure Storage Account. Default: MD5 hash of volume name
+
+Example usage with `uid` set to 1000 and share name set to `sharedvol` rather than a md5 hash:
+
+```bash
+docker service create --replicas 5 --name ping1 \
+    --mount type=volume,volume-driver=cloudstor:azure,source=sharedvol1,destination=/shareddata,volume-opt=uid=1000,volume-opt=share=s
+haredvol \
+    alpine ping docker.com
+```
+
 #### List or remove volumes created by Cloudstor
 
-You can use `docker volume ls` on any node to enumerate all volumes created by Cloudstor across the swarm. Do NOT prune/rm the volumes that gets enumerated on a node without any tasks associated since these actions will result in data loss if the same volume is mounted in another node (i.e. the volume shows up in the `docker volume ls` output on another node in the swarm).
+You can use `docker volume ls` on any node to enumerate all volumes created by Cloudstor across the swarm. You can use `docker volume rm [volume name]` to remove a cloudstor volume from any node. Please be aware that if you remove a volume from one node it may still be under active usage in another node and those tasks in the other node will lose access to their data.
