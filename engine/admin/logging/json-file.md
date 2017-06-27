@@ -14,7 +14,7 @@ only one container.
 
 ## Usage
 
-To use the `syslog` driver as the default logging driver, set the `log-driver`
+To use the `json-file` driver as the default logging driver, set the `log-driver`
 and `log-opt` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
