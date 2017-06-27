@@ -239,8 +239,9 @@ guides:
     title: Control and configure Docker with systemd
   - path: /engine/admin/formatting/
     title: Format command and log output
-  - path: /engine/admin/registry_mirror/
+  - path: /registry/recipes/mirror/
     title: Run a local registry mirror
+    nosync: true
   - sectiontitle: Logging
     section:
     - path: /engine/admin/logging/view_container_logs/
