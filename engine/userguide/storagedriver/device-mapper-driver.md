@@ -137,13 +137,13 @@ below to configure Docker to use the `devicemapper` storage driver in
   and push existing images to Docker Hub or a private repository, so that you
   don't need to recreate them later.
 
-#### Allow Docker to configure loop-lvm mode
+#### Allow Docker to configure direct-lvm mode
 
 In Docker 17.06 and higher, Docker can manage the block device for you,
 simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh
 Docker set-ups only.** You can only use a single block device. If you need to
-use multiple block devices, [configure loop-lvm mode
-manually](#configure-loop-lvm-mode-manually) instead. The following new
+use multiple block devices, [configure direct-lvm mode
+manually](#configure-direct-lvm-mode-manually) instead. The following new
 configuration options have been added:
 
 | Option                          | Description                                                                                                                                                                        | Required? | Default | Example                            |
@@ -181,7 +181,7 @@ configure the block device for you.
 
 You still need to [perform periodic maintenance tasks](#manage-devicemapper).
 
-#### Configure loop-lvm mode manually
+#### Configure direct-lvm mode manually
 
 The procedure below will create a logical volume configured as a thin pool to
 use as backing for the storage pool. It assumes that you have a spare block
