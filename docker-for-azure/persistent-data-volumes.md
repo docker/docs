@@ -9,7 +9,7 @@ title: Docker for Azure persistent data volumes
 ## What is Cloudstor?
 
 
-Cloudstor a modern volume plugin managed by Docker. It comes pre-installed and
+Cloudstor a modern volume plugin built by Docker. It comes pre-installed and
 pre-configured in Docker Swarms deployed on Docker for Azure. Docker swarm mode
 tasks and regular Docker containers can use a volume created with Cloudstor to
 mount a persistent data volume. The volume stays attached to the swarm tasks no
@@ -77,13 +77,11 @@ create and mount a unique Cloudstor volume for each task in a swarm service.
 It is possible to use the templatized notation to indicate to Docker Swarm that a unique Cloudstor volume be created and mounted for each replica/task of a service. This may be useful if the tasks write to the same file under the same path which may lead to corruption in case of shared storage. Example:
 
 ```bash
-{% raw %}
 $ docker service create \
   --replicas 5 \
   --name ping2 \
   --mount type=volume,volume-driver=cloudstor:azure,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
   alpine ping docker.com
-{% endraw %}
 ```
 
 A unique volume is created and mounted for each task participating in the
@@ -101,11 +99,11 @@ on/scheduled to.
 ### Volume options
 
 Cloudstor creates a new File Share in Azure File Storage for each volume and
-uses SMB to mount these File Shares. SMB has limited  compatibility with generic
-Unix file ownership and permissions-related operations. Certain workloads, such
+uses SMB to mount these File Shares. SMB has limited compatibility with generic
+Unix file ownership and permissions-related operations. Certain containers, such
 as Jenkins and Gitlab, define specific users and groups which perform different
-file operations, and these types of workloads require the Cloudstor volume to be
-mounted with the corresponding UID/GID. Cloudstor allows for this scenario and
+file operations. These types of workloads require the Cloudstor volume to be
+mounted with the UID/GID of the user specified in the Dockerfile or setup scripts. Cloudstor allows for this scenario and
 provides greater control over default file permissions by exposing the following
 volume options that map to SMB parameters used for mounting the backing file
 share.
@@ -118,7 +116,7 @@ share.
 | `dirmode`  | Permissions for all directories on the volume.                                                          | `0777`                  |
 | `share`    | Name to associate with file share so that the share can be easily located in the Azure Storage Account. | MD5 hash of volume name |
 
-This example sets `uid` set to 1000 and `share` to `sharedvol` rather than a md5 hash:
+This example sets `uid` to 1000 and `share` to `sharedvol` rather than a md5 hash:
 
 ```bash
 $ docker service create \
