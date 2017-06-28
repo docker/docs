@@ -430,7 +430,7 @@ adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewa
 
 #### Shared drives on demand
 
-Sharing a drive can be done "on demand", the first time a particular mount is
+You can share a drive "on demand" the first time a particular mount is
 requested.
 
 If you run a Docker command from a shell with a volume mount (as shown in the
@@ -692,8 +692,8 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
-Also, here is a direct link to the [Docker Cloud
-site](https://cloud.docker.com/).
+Need a direct link to Cloud? [Take me to Docker
+Cloud](https://cloud.docker.com/).
 
 ### Giving feedback and getting help
 
