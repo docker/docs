@@ -1646,8 +1646,10 @@ manuals:
           title: Create and manage teams
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
           title: Deploy a service with view-only access across an organization
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-nodes-between-teams/
-          title: Isolate swarm nodes between two different teams
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
+          title: Deploy a service with view-only access across an organization
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/grant-permissions/
+          title: Grant permissions to users based on roles
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-volumes-between-teams/
           title: Isolate volumes between two different teams
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/manage-access-with-collections/
