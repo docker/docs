@@ -18,7 +18,7 @@ log in with the recovery admin password.
 
 To configure UCP to create and authenticate users using an LDAP directory,
 go to the **UCP web UI**, navigate to the **Admin Settings** page, and click the
-**Auth** tab.
+**Authentication** tab.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 

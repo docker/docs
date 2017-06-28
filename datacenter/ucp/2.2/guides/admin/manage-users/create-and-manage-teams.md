@@ -1,30 +1,34 @@
 ---
+title: Create and manage teams
 description: Learn how to create and manage user permissions, using teams in
   your Docker Universal Control Plane cluster.
 keywords: authorize, authentication, users, teams, groups, sync, UCP, Docker
-title: Create and manage teams
 ---
 
-You can extend the user's default permissions by granting them fine-grain
+You can extend the user's default permissions by granting them fine-grained
 permissions over resources. You do this by adding the user to a team.
-A team defines the permissions users have for resources that have the label
-`com.docker.ucp.access.label` applied to them. Keep in mind that a label can
-be applied to multiple teams with different permission levels. 
 
 To create a new team, go to the **UCP web UI**, and navigate to the
-**Users & Teams** page.
+**Organizations** page.
 
 ![](../../images/create-and-manage-teams-1.png){: .with-border}
 
-Click the **Create** button to create a new team, and assign it a name.
+If you want to put the team in a new organization, click
+**Create Organization** and give the new organization a name, like
+"engineering". Click **Create** to create it. 
+
+In the list, click the organization where you want to create the new team.
+Name the team, give it an optional description, and click **Create** to
+create a new team.
 
 ![](../../images/create-and-manage-teams-2.png){: .with-border}
 
 ## Add users to a team
 
-You can now add and remove users from the team.
-Navigate to the **Members** tab, and click the **Add User to Team** button.
-Then choose the list of users that you want to add to the team.
+You can now add and remove users from the team. In the current organization's
+teams list, click the new team, and in the right pane, click the vertical
+dots icon. In the popup menu, click **Add Users**, and choose the users that
+you want to add to the team.
 
 ![](../../images/create-and-manage-teams-3.png){: .with-border}
 
@@ -72,26 +76,17 @@ are fully synced.
 
 ## Manage team permissions
 
-To manage the permissions of the team, click the **Permissions** tab.
-Here you can specify a list of labels and the permission level users will have
-for resources with those labels.
+Create a grant to manage the team's permissions. [Learn how to grant permissions to users based on roles](grant-permissions.md).
 
 ![](../../images/create-and-manage-teams-4.png){: .with-border}
 
-In the example above, members of the 'Operations' team have permissions to
-create and edit resources that have the labels
-`com.docker.ucp.access.label=operations` applied, but can only view resources
-that have the `com.docker.ucp.access.label=blog` label.
-
-There are four permission levels available:
-
-| Team permission level | Description                                                                                                                                       |
-|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
-| `No Access`           | The user can't view resources with this label.                                                                                                    |
-| `View Only`           | The user can view but can't create resources with this label.                                                                                     |
-| `Restricted Control`  | The user can view and create resources with this label. The user can't run `docker exec`, or services that require privileged access to the host. |
-| `Full Control`        | The user can view and create resources with this label, without any restriction.                                                                  |
+In the example above, members of the "Operations" team have permissions to
+create and edit resources.
 
 ## Where to go next
 
-* [UCP permission levels](permission-levels.md)
+-  [UCP permission levels](permission-levels.md)
+-  [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
+-  [Isolate swarm nodes between two different teams](isolate-nodes-between-teams.md)
+
+

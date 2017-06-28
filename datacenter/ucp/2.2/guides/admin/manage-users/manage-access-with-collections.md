@@ -113,7 +113,3 @@ If you want to isolate nodes against other teams, place these nodes in
 new collections, and assign the `Scheduler` role, which contains the
 `Node Schedule` permission, to the two teams. For more info, see
 [Isolate swarm nodes between two different teams](isolate-nodes-between-teams.md).
-
-
-
- 
