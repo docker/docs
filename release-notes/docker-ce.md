@@ -12,7 +12,7 @@ For Docker releases prior to 17.03.0, see
 
 [Learn about Docker releases](/engine/installation.md).
 
-## 17.06.0-ce (2017-06-22)
+## 17.06.0-ce (2017-06-28)
 
 > **Note**: Docker 17.06 by default disables communication with legacy (v1)
 > registries. If you require interaction with registries that have not yet
