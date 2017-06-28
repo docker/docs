@@ -53,6 +53,7 @@ to link them together and expose the web app's port.
         image: postgres
       web:
         build: .
+        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
         command: bundle exec rails s -p 3000 -b '0.0.0.0'
         volumes:
           - .:/myapp
@@ -219,16 +220,7 @@ Removing network rails_default
 ```
 
 You can also stop the application with `Ctrl-C` in the same shell in which you
-executed the `docker-compose up`.  If you stop the app this way, and attempt to
-restart it, you might get the following error:
-
-```none
-web_1 | A server is already
-running. Check /myapp/tmp/pids/server.pid.
-```
-
-To resolve this, delete the file `tmp/pids/server.pid`, and then re-start the
-application with `docker-compose up`.
+executed the `docker-compose up`.
 
 ### Restart the application
 
