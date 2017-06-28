@@ -4,7 +4,7 @@ keywords: azure, microsoft, iaas, tutorial
 title: Docker for Azure Upgrades
 ---
 
-Docker for Azure supports upgrading from one version to the next. To upgrade, apply a new version of the Azure ARM template that powers Docker for Azure. An upgrade of Docker for Azure involves:
+Docker for Azure supports upgrading from one version to the next within a specific channel. Upgrading across channels (for example, from `edge` to `stable` or `test` to `edge` is not supported). To upgrade to a certain version, please run the upgrade container corresponding to the version you wish to upgrade to. An upgrade of Docker for Azure involves:
 
  * Upgrading the VHD backing the manager and worker nodes (the Docker engine ships in the VHD)
  * Upgrading service containers in the manager and worker nodes
@@ -14,15 +14,20 @@ Docker for Azure supports upgrading from one version to the next. To upgrade, ap
 
  * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during the upgrade
  * You can only upgrade one version at a time. Skipping a version during an upgrade is not supported. Downgrades are not tested.
+ * Upgrades across channel is not supported.
  * Ensure there are no nodes in the swarm in "down" status. If there are such nodes in the swarm, please remove them from the swarm using `docker node rm node-id`
 
 ## Upgrading
 
 New releases are announced on the [Release Notes](release-notes.md) page.
 
-To initiate an upgrade, SSH into a manager node and issue the following command:
+To initiate an upgrade, SSH into a manager node and run the container corresponding to the version you want to upgrade to:
 
-    upgrade.sh https://download.docker.com/azure/stable/Docker.tmpl
+    docker run -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -ti docker4x/upgrade-azure:version-tag
+
+For example, to upgrade from 17.03 CE stable release to 17.06.0, you need to invoke:
+
+    docker run -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -ti docker4x/upgrade-azure:17.06.0-ce-azure1
 
 This will initiate a rolling upgrade of the Docker swarm and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade. Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because they are not Docker Swarm services but are known only to the individual Docker engines.
 
