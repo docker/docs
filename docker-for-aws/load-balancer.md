@@ -1,7 +1,7 @@
 ---
 description: Load Balancer
 keywords: aws load balancer elb
-title: Docker for AWS Load Balancer Configuration
+title: Configure the Docker for AWS load balancer
 ---
 
 {% include d4a_buttons.md %}
@@ -82,7 +82,7 @@ $ docker service create \
    yourname/your-image:latest
 ```
 
-#### SSL Listen on port 8080
+#### SSL listen on port 8080
 
 ```bash
 $ docker service create \
