@@ -27,7 +27,13 @@ You add a label to your service to tell swarm that you want to use a given ACM c
 Start a service and listen on the ELB with ports `80` and `443`. Port `443` is served using the SSL from the ACM given in label `com.docker.aws.lb.arn`
 
 ```bash
-docker service create --name demo --detach=true --publish 80:80 --publish 443:80 --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963" yourname/your-image:latest
+$ docker service create \
+  --name demo \
+  --detach=true \
+  --publish 80:80 \
+  --publish 443:80 \
+  --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963" \
+  yourname/your-image:latest
 ```
 
 By default when you add an ACM ARN as a label, it listens on port `443`. If you want to change which port to listen too you append an `@` symbol and a list of ports you want to expose.
@@ -55,25 +61,36 @@ com.docker.aws.lb.arn="arn:...@444,8080"
 listen for HTTP on ports 80 and HTTPS on 444
 
 ```bash
-docker service create --name demo --detach=true --publish 80:80 --publish 444:80 \
-   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@444" \
+$ docker service create \
+  --name demo \
+  --detach=true \
+  --publish 80:80 \
+  --publish 444:80 \
+  --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@444" \
    yourname/your-image:latest
 ```
 
 #### SSL listen on port 444 and 443
 
 ```bash
-docker service create --name demo --detach=true --publish 80:80 --publish 444:80 \
-   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@443,444" \
+$ docker service create \
+  --name demo \
+  --detach=true \
+  --publish 80:80 \
+  --publish 444:80 \
+  --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@443,444" \
    yourname/your-image:latest
 ```
 
 #### SSL Listen on port 8080
 
 ```bash
-docker service create --name demo --detach=true --publish 8080:80 \
-   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@8080" \
-   yourname/your-image:latest
+$ docker service create \
+  --name demo \
+  --detach=true \
+  --publish 8080:80 \
+  --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@8080" \
+  yourname/your-image:latest
 ```
 
 ### Add a CNAME for your ELB
@@ -88,4 +105,4 @@ Once you have your ELB setup, with the correct listeners and certificates, you n
 
 ## Can I manually change the ELB configuration?
 
-No, if you make any manual changes to the ELB, they are removed the next time we update the ELB configuration based on any swarm changes. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the ELB manually, they could conflict with what is in swarm, and cause issues.
+No. If you make any manual changes to the ELB, they are removed the next time we update the ELB configuration based on any swarm changes. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the ELB manually, they could conflict with what is in swarm, and cause issues.
