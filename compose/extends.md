@@ -170,7 +170,7 @@ in v1](/compose/compose-file/compose-file-v1.md#extends) and
 but is not supported in Compose version 3.x. See the [Version 3
 summary](/compose/compose-file/compose-versioning.md#version-3) of keys added
 and removed, along with information on [how to
-upgrade](/compose/compose-file/compose-versioning.md#upgrading).)
+upgrade](/compose/compose-file/compose-versioning.md#upgrading).
 
 Docker Compose's `extends` keyword enables sharing of common configurations
 among different files, or even different projects entirely. Extending services
@@ -295,7 +295,9 @@ replaces the old value.
     # result
     command: python otherapp.py
 
-> **Note**: In the case of `build` and `image`, when using
+>  `build` and `image` in Compose file version 1
+>
+> In the case of `build` and `image`, when using
 > [version 1 of the Compose file format](compose-file.md#version-1), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.
