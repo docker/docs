@@ -14,6 +14,13 @@ For Docker releases prior to 17.03.0, see
 
 ## 17.06.0-ce (2017-06-28)
 
+> **Note**: Docker 17.06.0 has an issue in the image builder causing a change in the behavior
+> of the `ADD` instruction of Dockerfile when referencing a remote `.tar.gz` file. The issue will be
+> fixed in Docker 17.06.1.
+
+> **Note**: Starting with Docker CE 17.06, Ubuntu packages are also available for IBM z Systems
+> using the s390x architecture.
+
 > **Note**: Docker 17.06 by default disables communication with legacy (v1)
 > registries. If you require interaction with registries that have not yet
 > migrated to the v2 protocol, set the `--disable-legacy-registry=false` daemon
