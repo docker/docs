@@ -101,7 +101,7 @@ on/scheduled to.
 Cloudstor creates a new File Share in Azure File Storage for each volume and
 uses SMB to mount these File Shares. SMB has limited compatibility with generic
 Unix file ownership and permissions-related operations. Certain containers, such
-as Jenkins and Gitlab, define specific users and groups which perform different
+as `jenkins` and `gitlab`, define specific users and groups which perform different
 file operations. These types of workloads require the Cloudstor volume to be
 mounted with the UID/GID of the user specified in the Dockerfile or setup scripts. Cloudstor allows for this scenario and
 provides greater control over default file permissions by exposing the following
