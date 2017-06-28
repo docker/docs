@@ -75,6 +75,8 @@ guides:
       title: Deploy your app
     - path: /docker-for-aws/persistent-data-volumes/
       title: Persistent data volumes
+    - path: /docker-for-aws/load-balancer/
+      title: Load balancer
     - path: /docker-for-aws/faqs/
       title: FAQs
     - path: /docker-for-aws/opensource/

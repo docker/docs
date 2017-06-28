@@ -8,11 +8,28 @@ title: Docker for AWS Release Notes
 
 ## Stable Channel
 
+### 17.06.0 CE
+
+Release date: 06/28/2017
+
+{{aws_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+- Fixed an issue with load balancer controller that caused the ELB health check to fail.
+- Added VPCID output when a VPC is created
+- Added CloudStor support (EFS (in regions that support EFS), and EBS) for [persistent storage volumes](persistent-data-volumes.md)
+- Added CloudFormation parameter to enable/disable CloudStor
+- Changed the AutoScaleGroup Manager max size to 6, so that it correctly upgrades with 5 managers
+- Added lambda support for Mumbai
+- Removed the ELB Name to allow for longer stack names
+- Added i3 EC2 instance types
+- [Bring your own VPC] Added a VPC CIDR Parameter
+
 ### 17.03.1 CE
 
 Release date: 03/30/2017
-
-{{aws_blue_latest}}
 
 **New**
 
@@ -47,6 +64,20 @@ Release date: 01/18/2017
 - Change ELB health check from TCP to HTTP
 
 ## Edge Channel
+
+### 17.06.0-edge CE
+
+Release date: 06/28/2017
+
+{{aws_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+- Fixed an issue with load balancer controller that caused the ELB health check to fail.
+- Changed the AutoScaleGroup Manager max size to 6, so that it correctly upgrades with 5 managers
+- Added Beta support for [adding AWS ACM certificates to the ELB to support SSL/TLS traffic](load-balancer.md)
+
 
 ### 17.05.0-edge CE
 
