@@ -8,7 +8,7 @@ title: Configure the Docker for AWS load balancer
 
 ## How does it work?
 
-When you create a service any ports that are exposed with `-p` are automatically exposed through the platform load balancer:
+When you create a service, any ports that are exposed with `-p` are automatically exposed through the platform load balancer:
 
 ```bash
 $ docker service create --name nginx -p 80:80 nginx
@@ -24,7 +24,7 @@ You add a label to your service to tell swarm that you want to use a given ACM c
 
 ### Examples
 
-Start a service and listen on the ELB with ports `80` and `443`. Port `443` is served using the SSL from the ACM given in label `com.docker.aws.lb.arn`
+Start a service and listen on the ELB with ports `80` and `443`. Port `443` is served using a SSL certificate from ACM, which is referenced by the ARN that is described in the service label `com.docker.aws.lb.arn`
 
 ```bash
 $ docker service create \
