@@ -14,8 +14,8 @@ mode tasks and regular Docker containers can use a volume created with
 Cloudstor to mount a persistent data volume. In Docker for AWS, Cloudstor has
 two `backing` options:
 
-- `relocatable` data volumes are backed by EBS.
-- `shared` data volumes are backed by EFS.
+- `relocatable` data volumes which are backed by EBS.
+- `shared` data volumes which are backed by EFS.
 
 When you use the Docker CLI to create a swarm service along with the persistent
 volumes used by the service tasks, you can create three different types of
@@ -132,22 +132,18 @@ The only option available for EFS is `perfmode`. You can set `perfmode` to
 `maxio` for high IO throughput:
 
 ```bash
-{% raw %}
 $ docker service create \
   --replicas 5 \
   --name ping3 \
-  --mount type=volume,volume-driver=docker4x/cloudstor:aws-v{{ edition_version }},source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
+  --mount type=volume,volume-driver=docker4x/cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
   alpine ping docker.com
-{% endraw %}
 ```
 
 You can also create `shared` Cloudstor volumes using the
 `docker volume create` CLI:
 
 ```bash
-{% raw %}
 $ docker volume create -d "cloudstor:aws" --opt backing=shared mysharedvol1
-{% endraw %}
 ```
 
 ### Use a unique volume per task using EBS
@@ -167,16 +163,14 @@ the following volume options are available:
 Example usage:
 
 ```bash
-{% raw %}
 $ docker service create \
   --replicas 5 \
   --name ping3 \
   --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata,volume-opt=backing=local,volume-opt=size=25,volume-opt=ebstype=gp2 \
   alpine ping docker.com
-{% endraw %}
 ```
 
-This example creates and mounts a distinct Cloudstor volume backed by 25 GB EBS
+The above example creates and mounts a distinct Cloudstor volume backed by 25 GB EBS
 volumes of type `gp2` for each task of the `ping3` service. Each task mounts its
 own volume at `/mydata/` and all files under that mountpoint are unique to the
 task mounting the volume.
@@ -198,14 +192,14 @@ $ docker volume create \
   --opt ebstype=io1 \
   --opt size=25 \
   --opt iops=1000 \
-  --opt backing=local \
+  --opt backing=relocatable \
   mylocalvol1
 {% endraw %}
 ```
 
 Sharing the same `relocatable` Cloudstor volume across multiple tasks of a
 service or across multiple independent containers is not supported when
-`backing=local` is specified. Attempting to do so will result in IO errors.
+`backing=relocatable` is specified. Attempting to do so will result in IO errors.
 
 ### Use a unique volume per task using EFS
 
@@ -215,13 +209,11 @@ you already have too many EBS volumes or want to reduce the amount of time it
 takes to transfer volume data across availability zones.
 
 ```bash
-{% raw %}
 $ docker service create \
   --replicas 5 \
   --name ping2 \
   --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
   alpine ping docker.com
-{% endraw %}
 ```
 
 Here, each task has mounts its own volume at `/mydata/` and the files under that
