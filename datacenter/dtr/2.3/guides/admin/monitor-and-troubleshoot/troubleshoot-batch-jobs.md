@@ -46,7 +46,8 @@ DTR has several types of jobs.
 | license_update             | License update checks for license expiration extensions if online license updates are enabled                                                                                                                                                                |
 | scan_check        | An image security scanning job. This job does not perform the actual scanning, rather it spawns `scan_check_single` jobs (one for each layer in the image). Once all of the `scan_check_single` jobs are complete, this job will terminate |
 | scan_check_single | A security scanning job for a particular layer given by the `parameter: SHA256SUM`. This job breaks up the layer into components and checks each component for vulnerabilities                                                                               |
-| update_db         | A job that is created to update DTR's vulnerability database. It uses an Internet connection to check for database updates through `https://dss-cve-updates.docker.com/` and updates the `dtr-scanningstore` container if there is a new update available    |
+| scan_check_all         | A security scanning job that updates all of the currently scanned images to display the latest vulnerabilities |
+| update_vuln_db         | A job that is created to update DTR's vulnerability database. It uses an Internet connection to check for database updates through `https://dss-cve-updates.docker.com/` and updates the `dtr-scanningstore` container if there is a new update available    |
 | webhook                    | A job that is used to dispatch a webhook payload to a single endpoint                                                                                                                                                                                        |
 
 ## Job status
