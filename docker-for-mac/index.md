@@ -495,7 +495,7 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
 Need a direct link to Cloud? [Take me to Docker
-Cloud](https://cloud.docker.com/).
+Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ## Where to go next
 
