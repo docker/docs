@@ -21,7 +21,7 @@ of. We'll use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
     #
     # VERSION       0.1.1
 
-    # Use the Ubuntu base image provided by dotCloud
+    # Use the Ubuntu parent image provided by dotCloud
     FROM ubuntu:trusty
 
 After that, we install the curl which is used to download the repository setup

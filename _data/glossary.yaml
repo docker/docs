@@ -199,6 +199,11 @@ overlay storage driver: |
   OverlayFS is a [filesystem](#filesystem) service for Linux which implements a
   [union mount](http://en.wikipedia.org/wiki/Union_mount) for other file systems.
   It is supported by the Docker daemon as a storage driver.
+parent image: |
+  An image's **parent image** is the image designated in the `FROM` directive
+  in the image's Dockerfile. All subsequent commands are applied to this parent
+  image. A Dockerfile with no `FROM` directive has no parent image, and is called
+  a **base image**.
 registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.

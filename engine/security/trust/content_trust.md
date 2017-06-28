@@ -154,7 +154,7 @@ In an environment where `DOCKER_CONTENT_TRUST` is set, you can use the
 `--disable-content-trust` flag to run individual operations on tagged images
 without content trust on an as-needed basis.
 
-Consider the following Dockerfile that uses an untrusted base image:
+Consider the following Dockerfile that uses an untrusted parent image:
 
 ```
 $  cat Dockerfile

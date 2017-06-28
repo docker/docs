@@ -2,7 +2,7 @@
 #
 # VERSION       0.1.1
 
-# Use the Ubuntu base image provided by dotCloud
+# Use the Ubuntu parent image provided by dotCloud
 FROM ubuntu:trusty
 
 # Install Riak repository before we do apt-get update, so that update happens
