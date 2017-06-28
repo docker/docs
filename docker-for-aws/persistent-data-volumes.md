@@ -135,7 +135,7 @@ The only option available for EFS is `perfmode`. You can set `perfmode` to
 $ docker service create \
   --replicas 5 \
   --name ping3 \
-  --mount type=volume,volume-driver=docker4x/cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
+  --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
   alpine ping docker.com
 ```
 
