@@ -1056,6 +1056,7 @@ long: |
       "dns-search": [],
       "exec-opts": [],
       "exec-root": "",
+      "experimental": false,
       "fixed-cidr": "",
       "fixed-cidr-v6": "",
       "graph": "",
@@ -1298,6 +1299,9 @@ options:
 - option: exec-root
   default_value: /var/run/docker
   description: Root directory for execution state files
+- option: experimental
+  default_value: false
+  description: Enable experimental features
 - option: fixed-cidr
   description: IPv4 subnet for fixed IPs
 - option: fixed-cidr-v6
