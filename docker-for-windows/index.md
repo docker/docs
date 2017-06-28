@@ -327,7 +327,9 @@ To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
 
->**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-windows). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
+>**Note:** The above example shows a user signed in for integrated
+Docker Cloud access. To learn more about the feature, see
+[Docker Cloud](#docker-cloud).
 
 The **Settings** dialogs provide options to allow Docker auto-start,
 automatically check for updates, share local drives with Docker containers,
@@ -426,10 +428,10 @@ If the firewall rules appear to be open, consider [reinstalling the File and
 Print Sharing service on the virtual network
 adapter.](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051)
 
-#### Shared drives on demand (Edge feature)
+#### Shared drives on demand
 
-On current Edge releases, sharing a drive can be done "on demand", the first
-time a particular mount is requested.
+Sharing a drive can be done "on demand", the first time a particular mount is
+requested.
 
 If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
@@ -661,21 +663,14 @@ because they do not apply to Windows containers:
 
 ### Docker Store
 
-Choose **Docker Store** from the Docker for Windows menu
-to get to the Docker app downloads site.
-[Docker store](https://store.docker.com/) is a
-component of the next-generation Docker Hub, and the best place
-to find compliant, trusted commercial and free software
-distributed as Docker Images.
+Choose **Docker Store** from the Docker for Windows menu to get to the Docker
+app downloads site. [Docker store](https://store.docker.com/) is a component of
+the next-generation Docker Hub, and the best place to find compliant, trusted
+commercial and free software distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-### Docker Cloud (Edge feature)
-
->**Note:** Integrated Docker Cloud access is currently available only on
-the [Edge channel](install.md#download-docker-for-windows).  On stable,
-you'll need to log onto [Docker Cloud](https://cloud.docker.com/)
-independently for now.
+### Docker Cloud
 
 You can access your [Docker Cloud](/docker-cloud/index.md) account from
 within Docker for Windows.
@@ -696,6 +691,9 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
+
+Also, here is a direct link to the [Docker Cloud
+site](https://cloud.docker.com/).
 
 ### Giving feedback and getting help
 
