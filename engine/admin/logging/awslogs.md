@@ -92,9 +92,9 @@ $ docker run --log-driver=awslogs \
 > **Note**:
 > Your AWS IAM policy must include the `logs:CreateLogGroup` permission before you attempt to use `awslogs-create-group`.
 
-### aws-datetime-format
+### awslogs-datetime-format
 
-The `aws-datetime-format` option defines a multiline start pattern in [Python
+The `awslogs-datetime-format` option defines a multiline start pattern in [Python
 `strftime` format](http://strftime.org). A log message consists of a line that
 matches the pattern and any following lines that don't match the pattern. Thus
 the matched line is the delimiter between log messages.
@@ -174,9 +174,9 @@ The following `strftime` codes are supported:
 | `%Z` | Time zone name.                                                  | PST      |
 | `%j` | Day of the year as a zero-padded decimal number.                 | 363      |
 
-### aws-multiline-pattern
+### awslogs-multiline-pattern
 
-The `aws-multiline-pattern` option defines a multiline start pattern using a
+The `awslogs-multiline-pattern` option defines a multiline start pattern using a
 regular expression. A log message consists of a line that matches the pattern
 and any following lines that don't match the pattern. Thus the matched line is
 the delimiter between log messages.
