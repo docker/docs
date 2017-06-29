@@ -220,9 +220,10 @@ Designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md), version 3 removes several options and adds
 several more.
 
-- Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`, `cpuset`,
-  `mem_limit`, `memswap_limit`, `extends`, `group_add`. See the [upgrading](#upgrading)
-  guide for how to migrate away from these.
+- Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
+`cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
+the [upgrading](#upgrading) guide for how to migrate away from these.
+(For more information on `extends`, please see [Extending services](/compose/extends.md#extending-services).)
 
 - Added: [deploy](index.md#deploy)
 
@@ -269,7 +270,8 @@ several options have been removed:
     `deploy`. Note that `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
--   `extends`: This option has been removed for `version: "3.x"` Compose files. For more information, please see [Extending services](/compose/extends.md#extending-services).
+-   `extends`: This option has been removed for `version: "3.x"`
+Compose files. (For more information, please see [Extending services](/compose/extends.md#extending-services).)
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
