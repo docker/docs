@@ -8,11 +8,21 @@ title: Docker for Azure Release Notes
 
 ## Stable Channel
 
+### 17.06.0 CE
+
+Release date: 06/28/2017
+
+{{azure_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Introduced a new way to kick off upgrades through a container. The old upgrade.sh is no longer supported.
+- Introduced new SMB mount related parameters for Cloudstor volumes [persistent storage volumes](persistent-data-volumes.md).
+
 ### 17.03.1 CE
 
 Release date: 03/30/2017
-
-{{azure_blue_latest}}
 
 **New**
 
@@ -49,11 +59,21 @@ Release date: 1/18/2017
 
 ## Edge Channel
 
+### 17.06.0-edge CE
+
+Release date: 06/28/2017
+
+{{azure_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Introduced a new way to kick off upgrades through a container. The old upgrade.sh is no longer supported.
+- Introduced new SMB mount related parameters for Cloudstor volumes [persistent storage volumes](persistent-data-volumes.md).
+
 ### 17.05.0-edge CE
 
 Release date: 05/08/2017
-
-{{azure_blue_edge}}
 
 **New**
 
