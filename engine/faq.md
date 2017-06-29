@@ -55,7 +55,7 @@ offers a high-level tool with several powerful functionalities:
  an application and all its dependencies into a single object called a container. This container can be
  transferred to any Docker-enabled machine. The container can be executed there with the
  guarantee that the execution environment exposed to the application will be the
- same in development, tesing, and production. LXC implements process sandboxing, which is an important pre-requisite
+ same in development, testing, and production. LXC implements process sandboxing, which is an important pre-requisite
  for portable deployment, but is not sufficient for portable deployment.
  If you sent me a copy of your application installed in a custom LXC
  configuration, it would almost certainly not run on my machine the way it does
