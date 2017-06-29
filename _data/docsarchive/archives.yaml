@@ -1,7 +1,10 @@
 - archive:
-  name: v17.03
+  name: v17.06
   image: docs/docker.github.io:latest
   current: true
+- archive:
+  name: v17.03
+  image: docs/docker.github.io:v17.03
 - archive:
   name: v1.13
   image: docs/docker.github.io:v1.13
