@@ -99,7 +99,7 @@ This `docker-compose.yml` file tells Docker to do the following:
   called `web`, limiting each one to use, at most, 10% of the CPU (across all
   cores), and 50MB of RAM.
 
-- Immediately restart containers if one fails.
+- Immediately restart containers which fail.
 
 - Map port 80 on the host to `web`'s port 80.
 
