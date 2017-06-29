@@ -72,6 +72,30 @@ You need to verify Microsoft Azure terms of use and manually enable your Azure s
 
 You are now ready to deploy a swarm!
 
+## Link an Azure Organization as Global Admin
+
+For members of Azure Organizations, the gobal administrator needs to first link
+their account and grant permissions to Docker Cloud in order for individual
+user accounts to link to Docker Cloud with their subscription IDs.
+
+The Global Admin steps are as follows:
+
+1.  Go to [Microsoft Azure](https://portal.azure.com/), find your
+    Subscription ID for Global Admin rights (**Azure -> Billing ->
+    Subscriptions -> Subscriptions ID**), and copy the ID.
+
+2.  On Docker Cloud, go to **Cloud Settings -> Service Providers**.
+
+    ![](images/azure-global-admin-plugin.png)
+
+3. Click **Global Admin**, paste your Global Admin Subscription ID from
+Azure into the field, and click **Save**.
+
+    ![](images/azure-global-admin-permissions.png)
+
+   Azure Organization members can now link their user accounts to
+   Docker Cloud per the individual user instructions above.
+
 ## Where to go next
 
 **Ready to create swarms on Azure?** See [Create a new swarm on Microsoft Azure in Docker Cloud](create-cloud-swarm-azure.md).
