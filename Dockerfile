@@ -20,8 +20,8 @@ COPY . md_source
 ## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 
 # Engine
-ENV ENGINE_SVN_BRANCH="branches/17.05.x"
-ENV ENGINE_BRANCH="17.05.x"
+ENV ENGINE_SVN_BRANCH="branches/17.06.x"
+ENV ENGINE_BRANCH="17.06.x"
 
 # Distribution
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
