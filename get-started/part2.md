@@ -202,7 +202,7 @@ between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
 `docker run -p`. In later steps, we'll just map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
-Hit `CTRL+C` in your terminal to quit.
+Hit `CTRL+C` in your terminal to quit STDOUT from the container and run `docker ps` to get the container id to stop it with `docker stop [container id]`.
 
 Now let's run the app in the background, in detached mode:
 
