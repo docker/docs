@@ -205,7 +205,7 @@ Introduces the following additional parameters:
 ### Version 2.2
 
 An upgrade of [version 2.1](#version-21) that introduces new parameters only
-available with Docker Engine version **1.13.0+**.  Version 2.2 files are 
+available with Docker Engine version **1.13.0+**.  Version 2.2 files are
 supported by **Compose 1.13.0+**. This version also allows you to specify
 default scale numbers inside the service's configuration.
 
@@ -269,7 +269,7 @@ several options have been removed:
     `deploy`. Note that `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
--   `extends`: This option has been removed for `version: "3.x"` Compose files.
+-   `extends`: This option has been removed for `version: "3.x"` Compose files. For more information, please see [Extending services](/compose/extends.md#extending-services).
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
