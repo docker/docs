@@ -41,8 +41,8 @@ Microsoft Azure.
 
     ![](images/azure-id-wizard.png)
 
-    >**Tip:** If you are a member of an Azure Organization, the
-    Global Admin must first link to Docker Cloud as described in
+    >**Tip:** If you are a member of an Azure Organization, your
+    admninistrator must first link to Docker Cloud as described in
     [Link an Azure Organization as Global Admin](#link-an-azure-organization-as-global-admin).
 
 3.  Provide your subscription ID and click **Save**.
