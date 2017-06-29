@@ -19,6 +19,44 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker CommunityEdition 17.06.0-ce-win18 2017-06-28 (stable)
+
+**Upgrades**
+
+- [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+- [Docker Credential Helpers 0.5.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.2)
+- [Docker Machine 0.12.0](https://github.com/docker/machine/releases/tag/v0.12.0)
+- [Docker compose 1.14.0](https://github.com/docker/compose/releases/tag/1.14.0)
+- Linux Kernel 4.9.31
+
+**New**
+
+- Windows Server 2016 support
+- Windows 10586 is marked as deprecated; it will not be supported going forward in stable releases
+- Integration with Docker Cloud, with the ability to control remote Swarms from the local command line interface (CLI) and view your repositories
+- Unified login between the Docker CLI and Docker Hub, Docker Cloud.
+- Sharing a drive can be done on demand, the first time a mount is requested
+- Add an experimental DNS name for the host: docker.for.win.localhost
+- Support for client (i.e. "login") certificates for authenticating registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/issues/569))
+- New installer experience
+
+**Bug fixes and minor changes**
+
+- Fixed group access check for users logged in with Active Directory (fixes [docker/for-win#785](https://github.com/docker/for-win/issues/785))
+- Check environment variables and add some warnings in logs if they can cause docker to fail
+- Many processes that were running in admin mode are now running within the user identity
+- Cloud federation command lines now opens in the user home directory
+- Named pipes are now created with more constrained security descriptors to improve security
+- Security fix : Users must be part of a specific group "docker-users" to run Docker for windows
+- Reset to default / uninstall also reset docker cli settings and logout user from Docker Cloud and registries
+- Detect a bitlocker policy preventing windows containers to work
+- Fixed an issue on filesharing when explicitly disabled on vmswitch interface
+- Fixed VM not starting when machine had very long name
+- Fixed a bug where Windows daemon.json file was not written (fixes [docker/for-win#670](https://github.com/docker/for-win/issues/670))
+- Added patches to the kernel to fix VMBus crash
+- Named pipe client connection should not trigger dead locks on `docker run` with data in stdin anymore
+- Buffered data should be treated correctly when docker client requests are upgraded to raw streams
+
 ### Docker Community Edition 17.03.1-ce-win12  2017-05-12 (stable)
 
 **Upgrades**
@@ -309,6 +347,12 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-win17 Release Notes (2017-06-28 17.06.0-win17) (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+
 ### Docker Community Edition 17.06.0-win16 Release Notes (2017-06-21 17.06.0-rc5-ce-win16) (edge)
 
 **Upgrades**
@@ -387,9 +431,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 - Reset to default / uninstall also reset docker cli settings and logout user from Docker Cloud and registries
 - Detect a bitlocker policy preventing windows containers to work
-- fix an issue on filesharing when explicitly disabled on vmswitch interface
-- fix VM not starting when machine had very long name
-- Fix a bug where Windows daemon.json file was not written (fixes [docker/for-win#670](https://github.com/docker/for-win/issues/670))
+- Fixed an issue on filesharing when explicitly disabled on vmswitch interface
+- Fixed VM not starting when machine had very long name
+- Fixed a bug where Windows daemon.json file was not written (fixes [docker/for-win#670](https://github.com/docker/for-win/issues/670))
 
 ### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8) (edge)
 
@@ -412,7 +456,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 **Bug fixes and minor changes**
 
-- Add patches to the kernel to fix VMBus crash
+- Added patches to the kernel to fix VMBus crash
 
 ### Docker Community Edition 17.04.0-ce-win6 Release Notes (2017-04-03 17.04.0-ce-rc2-win6) (edge)
 

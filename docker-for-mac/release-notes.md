@@ -19,6 +19,49 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28 (stable)
+
+**Upgrades**
+
+- [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+- [Docker Credential Helpers 0.5.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.2)
+- [Docker Machine 0.12.0](https://github.com/docker/machine/releases/tag/v0.12.0)
+- [Docker compose 1.14.0](https://github.com/docker/compose/releases/tag/1.14.0)
+- qcow-tool v0.10.0 (improve the performance of `compact`: mirage/ocaml-qcow#94)
+- OSX Yosemite 10.10 is marked as deprecated
+- Linux Kernel 4.9.31
+
+**New**
+
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories.
+- GUI Option to opt out of credential store
+- GUI option to reset Docker data without losing all settings (fixes [docker/for-mac#1309](https://github.com/docker/for-mac/issues/1309))
+- Add an experimental DNS name for the host: `docker.for.mac.localhost`
+- Support for client (i.e. "login") certificates for authenticating registry access (fixes [docker/for-mac#1320](https://github.com/docker/for-mac/issues/1320))
+- OSXFS: support for `cached` mount flag to improve performance of macOS mounts when strict consistency is not necessary
+
+**Bug fixes and minor changes**
+
+- Resync HTTP(S) proxy settings on application start
+- Interpret system proxy setting of `localhost` correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
+- All Docker binaries bundled with Docker for Mac are now signed
+- Display all Docker Cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
+- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+- Fixed GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
+- Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
+- More detailed VirtualBox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
+- Request time sync after waking up to improve [docker/for-mac#17](https://github.com/docker/for-mac/issues/17)
+- VPNKit: Improved DNS timeout handling (fixes [docker/for-mac#202](https://github.com/docker/vpnkit/issues/202))
+- VPNKit: Use DNSServiceRef API by default (only enabled for new installs or after factory reset)
+- Add a reset to factory defaults button when application crashes
+- Toolbox import dialog now defaults to "Skip"
+- Buffered data should be treated correctly when Docker client requests are upgraded to raw streams
+- Removed an error message from the output related to experimental features handling
+- `vmnetd` should not crash when user home directory is on an external drive
+- Improved settings database schema handling
+- Disk trimming should work as expected
+- Diagnostics now contains more settings data
+
 ### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12 (stable)
 
 **Upgrades**
@@ -355,6 +398,12 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-ce-mac17, 2017-06-28 (edge)
+
+**Upgrades**
+
+- [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
+
 ### Docker Community Edition 17.06.0-rc5-ce-mac16, 2017-06-21 (edge)
 
 **Upgrades**
@@ -419,9 +468,9 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-- Fix GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
+- Fixed GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
 - Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
-- More detailed virtualbox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
+- More detailed VirtualBox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
 - You are now prompted for your password, if you changed it in Docker Cloud.
 - Request time sync after waking up to improve [docker/for-mac#17](https://github.com/docker/for-mac/issues/17)
 
@@ -436,7 +485,7 @@ events or unexpected unmounts.
 
 **New**
 
-- osxfs: support for `cached` mount flag to improve performance of macOS mounts when strict consistency is not necessary
+- OSXFS: support for `cached` mount flag to improve performance of macOS mounts when strict consistency is not necessary
 
 **Upgrades**
 
@@ -446,7 +495,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-- VPNKit: Improve DNS timeout handling (fixes https://github.com/docker/vpnkit/issues/202)
+- VPNKit: Improved DNS timeout handling (fixes [docker/for-mac#202](https://github.com/docker/vpnkit/issues/202))
 - VPNKit: Use DNSServiceRef API by default (only enabled for new installs or after factory reset)
 - Add a reset to factory defaults button when application crashes
 - Toolbox import dialog now defaults to "Skip"
@@ -1321,7 +1370,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Upgrades**
 
-* docker-compose 1.7.1 (see <a href="https://github.com/docker/compose/releases/tag/1.7.1" target="_blank"> changelog</a>)
+* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1){: target="_blank" class="_" })
 * Linux kernel 4.4.9
 
 **Bug fixes and minor changes**
@@ -1337,7 +1386,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
   - Fixes to disk formatting scripts
   - Linux kernel upgrade to 4.4.9
 
-## Beta 10 Release (2016-05-03 1.11.0-beta10)
+### Beta 10 Release (2016-05-03 1.11.0-beta10)
 
 **New**
 
@@ -1511,7 +1560,7 @@ lead to `Docker.app` not starting on reboot
 
 - File system/sharing: Support `inotify` events so that file system events on the Mac will trigger file system activations inside Linux containers
 
-- Install Docker Machine as a part of Docker for Mac install in ``/usr/local`
+- Install Docker Machine as a part of Docker for Mac install in `/usr/local`
 
 - Added animated popover window to help first-time users get started
 

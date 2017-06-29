@@ -107,7 +107,9 @@ the menu bar.
 
 You can set the following runtime options.
 
->**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-mac). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
+>**Note:** The above example shows a user signed in for integrated
+Docker Cloud access. To learn more about the feature,
+see [Docker Cloud](#docker-cloud).
 
 ### General
 
@@ -125,24 +127,17 @@ You can set the following runtime options.
   disable the check for updates, you can still find out about updates manually
   by choosing ![whale-x](/docker-for-mac/images/whale-x.png) -> **Check for Updates**
 
-* Check **Exclude VM from Time Machine backups** to prevent Time Machine
-  from backing up the Docker for Mac virtual machine.
+* Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
+
+* You have the option to **Securely store Docker logins in MacOS keychain**,
+  enabled by default. To "opt out" of storing your Docker login credentials,
+  uncheck this option.
 
 * **Send usage statistics** &mdash; You can set Docker for Mac to auto-send
   diagnostics, crash reports, and usage data. This information can help Docker
   improve the application and get more context for troubleshooting problems.
   Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
   more information in some cases, even with auto-send enabled.
-
-#### Choose whether to store Docker credentials on Mac keychain (Edge feature)
-
-In current Edge releases, you have an additonal option to **Securely store
-Docker logins in MacOS keychain**. This is enabled by default, and on Stable
-releases you have no option to disable it. So the effect of this is that on Edge
-releases, you can "opt out" of storing your Docker login credentials by
-disabling this.
-
-![Opt in or out of storing credentials in keychain](images/settings-edge.png)
 
 ### File sharing
 
@@ -304,13 +299,19 @@ the menu bar, then click **Uninstall / Reset** on the Preferences dialog.
 
 ![Uninstall or reset Docker](images/settings-uninstall.png)
 
+* **Remove all data** - This option removes/resets all Docker data _without_
+a reset to factory defaults (which would cause you to lose settings).
+
 * **Uninstall** - Choose this option to remove Docker for Mac from your system.
 
 * **Reset to factory defaults** - Choose this option to reset all options on
   Docker for Mac to its initial state, the same as when it was first installed.
 
-You can uninstall Docker for Mac from the command line with this command:
-`<DockerforMacPath> --uninstall`. If Docker is installed in the default
+
+### Uninstall from the command line
+
+Alternatively, you can uninstall Docker for Mac from the command line with this
+command: `<DockerforMacPath> --uninstall`. If Docker is installed in the default
 location, the following command will provide a clean uninstall.
 
 ```shell
@@ -321,18 +322,6 @@ Docker uninstalled successfully. You can move the Docker application to the tras
 
 You might want to use the command-line uninstall if, for example, you find that
 the app is non-functional, and you cannot uninstall it from the menu.
-
-### Reset Docker data (Edge feature)
-
-In current Edge releases, you have an additonal reset option to **Remove all
-data**.
-
-This option removes/resets all Docker data _without_ a reset to factory defaults
-(which would cause you to lose settings). This is an update per Edge release
-17.06.0-rc1-ce-mac13, and fixes [Docker for Mac issue
-1309](https://github.com/docker/for-mac/issues/1309)).
-
-![Uninstall or reset Docker Edge features](images/settings-uninstall-edge.png)
 
 ## Adding TLS certificates
 
@@ -477,21 +466,14 @@ options at the bottom of each docs page.
 
 ## Docker Store
 
-Choose **Docker Store** from the Docker for Mac menu
-to get to the Docker app downloads site.
-[Docker store](https://store.docker.com/) is a
-component of the next-generation Docker Hub, and the best place
-to find compliant, trusted commercial and free software
-distributed as Docker Images.
+Choose **Docker Store** from the Docker for Mac menu to get to the Docker app
+downloads site. [Docker store](https://store.docker.com/) is a component of the
+next-generation Docker Hub, and the best place to find compliant, trusted
+commercial and free software distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-## Docker Cloud (Edge feature)
-
->**Note:** Integrated Docker Cloud access is currently available only on
-the [Edge channel](install.md#download-docker-for-mac). On stable, you'll
-need to log onto [Docker Cloud](https://cloud.docker.com/) independently
-for now.
+## Docker Cloud
 
 You can access your [Docker Cloud](/docker-cloud/index.md) account from within
 Docker for Mac.
@@ -511,6 +493,9 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
+
+Need a direct link to Cloud? [Take me to Docker
+Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ## Where to go next
 
