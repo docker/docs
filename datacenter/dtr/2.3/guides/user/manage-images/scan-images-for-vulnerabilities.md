@@ -4,7 +4,7 @@ description: Learn how to scan your Docker images for vulnerabilities.
 keywords: docker, registry, scan, vulnerability
 ---
 
-[![Image Security Scanning](../../images/scanning_video.png)](https://www.youtube.com/watch?v=121poCB0Nn8 "Images Security Scanning"){:target="_blank"}
+[![Image Security Scanning](../../images/scanning_video.png)](https://www.youtube.com/watch?v=121poCB0Nn8 "Images Security Scanning"){: target="_blank" ._}
 
 Docker Trusted Registry can scan images in your repositories to verify that they
 are free from known security vulnerabilities or exposures, using Docker Security
@@ -23,28 +23,24 @@ a new scan.
 ## The Docker Security Scan process
 
 Scans run either on demand when a user clicks the **Start a Scan** links or
-**Scan** button (see [Manual scanning](#manual-scanning) below), or automatically 
+**Scan** button (see [Manual scanning](#manual-scanning) below), or automatically
 on any `docker push` to the repository.
 
 First the scanner performs a binary scan on each layer of the image, identifies
 the software components in each layer, and indexes the SHA of each component in a
-bill-of-materials. A binary scan evaluates the components on a bit-by-bit level, 
-so vulnerable components are discovered even if they are statically-linked or 
+bill-of-materials. A binary scan evaluates the components on a bit-by-bit level,
+so vulnerable components are discovered even if they are statically-linked or
 under a different name.
-
-[//]: # (Placeholder for DSS workflow. @sarahpark is working on the diagram.)
 
 The scan then compares the SHA of each component against the US National
 Vulnerability Database that is installed on your DTR instance. When
 this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
 
-If you have subscribed to a webhook (see [Manage webhooks](../create-and-manage-webhooks.md))
-for scan completed/scan failed, then you will received the results of the scan
-as a json to the specified endpoint.
-
-Most scans complete within an hour, however larger repositories may take longer
-to scan depending on your system resources.
+DTR scans both Linux and Windows images, but by default Docker doesn't push
+image layers for Windows images so DTR won't be able to scan them.
+If you want DTR to scan your Windows images, [configure Docker to always push
+image layers](pull-and-push-images.md).
 
 ## Security scan on push
 
