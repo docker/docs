@@ -1,0 +1,6 @@
+{% assign green-check = '![yes](/engine/installation/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign install-prefix = '/engine/installation/linux' %}
+| Platform                                                              | Docker CE x86_64                                             | Docker CE ARM                                                 | Docker EE                                                    |
+|:----------------------------------------------------------------------|:-------------------------------------------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------|
+| [Amazon Web Services](/docker-for-aws/)                               | [{{ green-check }}](/docker-for-aws/)                        |                                                               | [{{ green-check }}](/docker-for-aws/)                        |
+| [Microsoft Azure](/docker-for-azure/)                                 | [{{ green-check }}](/docker-for-azure/)                      |                                                               | [{{ green-check }}](/docker-for-azure/)                      |
