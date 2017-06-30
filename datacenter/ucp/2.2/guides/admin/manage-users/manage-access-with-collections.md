@@ -39,9 +39,9 @@ allowed against the target.
 
 UCP provides a number of built-in collections.
 
--  `/` or `/Swarm` - The root swarm collection. All resources in the
+-  `/` - The path to the `Swarm` collection. All resources in the
    cluster are here. Resources that aren't in a collection are assigned
-   to the root `/Swarm` directory.
+   to the `/` directory.
 -  `/System` - The system collection, which contains UCP managers, DTR nodes,
    and UCP/DTR system services. By default, only admins have access to the 
    system collection, but you can change this.
@@ -60,8 +60,9 @@ in UI preferences. When a user deploys a resource in the web UI, the
 preselected option is the default collection, but this can be changed.
 
 Users can't deploy a resource without a collection.  When deploying a
-resource in CLI without an access label, UCP automatically puts the user’s
-default collection label on the resource.
+resource in CLI without an access label, UCP automatically places the
+resource in the user's default collection.
+[Learn how to add labels to cluster nodes](/datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
 
 When using Docker Compose, the system applies default collection labels
 across all resources in the stack, unless the `com.docker.ucp.access.label`
@@ -69,8 +70,10 @@ has been set explicitly.
 
 ## Collections and labels
 
-Label limitations still apply to collections. You can't modify collections
-after resource creation for containers, networks, and volumes. You can
+Resources are marked as being in a collection by using labels.
+Some resource types don't have editable labels, so you can't move resources
+like this across collections. You can't modify collections after
+resource creation for containers, networks, and volumes, but you can
 update labels for services, nodes, secrets, and configs. 
 
 For editable resources, like services, secrets, nodes, and configs,
