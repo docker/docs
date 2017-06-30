@@ -21,7 +21,7 @@ be using that shared image here.
 slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
 username/repo:tag`, then visit `http://localhost/`.
 
-- Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5.md#persisting-data) handy.
+- Have [the final version of `docker-compose.yml` from Part 5](/get-started/part5.md#persist-the-data) handy.
 
 ## Introduction
 
