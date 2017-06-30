@@ -20,11 +20,11 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Create archive; check out each version, create HTML under target/$VER, tweak links
 # Nuke the archive_source directory. Only keep the target directory.
 
-ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13 v17.03"
+ENV VERSIONS="v17.03 v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
 
 ## Use shallow clone and shallow check-outs to only get the tip of each branch
 
-RUN git clone --depth 1 https://www.github.com/docker/docker.github.io archive_source; \
+RUN git clone --depth 1 --recursive https://www.github.com/docker/docker.github.io archive_source; \
   for VER in $VERSIONS; do \
     git --git-dir=./archive_source/.git --work-tree=./archive_source fetch origin ${VER}:${VER} --depth 1 \
     && git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
