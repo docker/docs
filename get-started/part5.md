@@ -244,7 +244,7 @@ Redis service.  Be sure to replace `username/repo:tag` with your image details.
     $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
     ```
 
-5.  Check the web page at `http://localhost` and you'll see the results of the visitor counter, which is now live and storing information on Redis.
+5.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
