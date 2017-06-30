@@ -199,7 +199,7 @@ INFO Another multiline message was logged
 INFO Another message was logged
 ```
 
-You can use the strftime expression of `[%b %d, %Y %H:%M:%S]`:
+You can use the regular expression of `^INFO`:
 
 ```bash
 $ docker run --log-driver=awslogs \
