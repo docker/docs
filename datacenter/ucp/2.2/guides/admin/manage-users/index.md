@@ -1,6 +1,6 @@
 ---
-title: Authentication and authorization
-description: Manage access to containers, services, volumes, and networks by using role-based access control
+title: Authentication
+description: Manage access to containers, services, volumes, and networks by using role-based access control.
 keywords: ucp, grant, role, permission, authentication, authorization
 ---
 
@@ -19,6 +19,12 @@ A grant defines who (subject) has how much access (role)
 to a set of resources (collection).
 [Learn how to grant permissions to users based on roles](grant-permissions.md).
 
+An administrator is a user who can manage grants, subjects, roles, and
+collections. An administrator identifies which operations can be performed
+against specific resources and who can perform these actions. An administrator
+can create and manage role assignments against subject in the system.
+Only an administrator can manage subjects, grants, roles, and collections. 
+
 ## Subjects
 
 A subject represents a user, team, or organization. A subject is granted a
@@ -32,11 +38,6 @@ role for a collection of resources.
     team itself. A team exists only as part of an organization, and all of its
     members must be members of the organization. Team members share
     organization permissions. A team can be in one organization only.
--   **Administrator**: A person who identifies which operations can be
-    performed against specific resources and who can perform these actions.
-    An administrator can create and manage role assignments against any user,
-    team, and organization in the system. Only administrators can manage
-    grants. 
 
 ## Roles
 
@@ -51,7 +52,7 @@ Docker EE enables controlling access to swarm resources by using
 *collections*. A collection is a grouping of swarm resources, like
 volumes, networks, secrets, and services, that you access by specifying
 a directory-like path. 
-[Learn to manage access to resources by using collections](manage-access-with-collections.md).
+[Manage access to resources by using collections](manage-access-with-collections.md).
 
 ## Transition from UCP 2.1 access control
 
