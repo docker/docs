@@ -15,7 +15,7 @@ To get started with Docker EE on CentOS, make sure you
 ## Prerequisites
 
 Docker CE users should go to
-[Get docker CE for CentOS](/engine/installatioin/linux/docker-ce/centos.md)
+[Get docker CE for CentOS](/engine/installation/linux/docker-ce/centos.md)
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
