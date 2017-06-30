@@ -203,7 +203,7 @@ addresses from `2001:db8:2::/64`. Host2 has three routes configured:
 - Route all traffic to `2001:db8:1::/64` via Host1 with IP `2001:db8:0::1`
 
 The difference to Host1 is that the network `2001:db8:2::/64` is directly
-attached to the host via its `docker0` interface whereas it reaches
+attached to Host2 via its `docker0` interface whereas Host2 reaches
 `2001:db8:1::/64` via Host1's IPv6 address `2001:db8::1`.
 
 This way every container is able to contact every other container. The
