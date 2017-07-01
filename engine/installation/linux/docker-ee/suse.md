@@ -20,7 +20,7 @@ To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
 repository URL associated with your trial or subscription. To get this information:
 
-- Go to [https://store.docker.com/?overlay=subscriptions](https://store.docker.com/?overlay=subscriptions).
+- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
   **Docker Enterprise Edition for SUSE Linux Enterprise Server** section.
 - Copy the URL from the field labeled
