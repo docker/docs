@@ -13,7 +13,13 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 
     $ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b test-this
     
-When passing a boolean value to any option, the argument requires a slightly different format.
+### When explicitly passing environment variables 
+     
+    export DIGITALOCEAN_ACCESS_TOKEN="yourtoken"; export DIGITALOCEAN_SSH_KEY_FINGERPRINT="from your DO's profile security-ssh keys"; \ export DIGITALOCEAN_IMAGE="centos-7-x64"; export DIGITALOCEAN_REGION="tor1"
+     
+    $ docker-machine create --driver digitalocean --digitalocean-access-token $DIGITALOCEAN_ACCESS_TOKEN --digitalocean-ssh-key-fingerprint $DIGITALOCEAN_SSH_KEY_FINGERPRINT --digitalocean-image $DIGITALOCEAN_IMAGE --digitalocean-region $DIGITALOCEAN_REGION
+    
+### When passing a boolean value to any option, the argument requires a slightly different format.
 
     $ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b --digitalocean-size 1gb --digitalocean-backups=true test-this
     
