@@ -109,7 +109,7 @@ Once you've created the a `dockercloud-swarm-policy`, added the
 `dockercloud-swarm-role` inline, and have the role's Role ARN, go back to Docker
 Cloud to connect the account.
 
-1.  In Docker Cloud, click the account menu at upper right and select **Cloud settings**.
+1.  In Docker Cloud, click the account menu at the upper right and select **Cloud settings**.
 2.  In the **Service providers** section, click the plug icon next to Amazon Web Services.
 
     ![](images/aws-arn-wizard.png)

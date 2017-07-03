@@ -33,7 +33,7 @@ copy it from your Azure Dashboard.
 
 Go to Docker Cloud to connect the account.
 
-1.  In Docker Cloud, click the account menu at upper right and
+1.  In Docker Cloud, click the account menu at the upper right and
 select **Cloud settings**.
 
 2.  In the **Service Providers** section, click the plug icon next to
@@ -81,9 +81,10 @@ You are now ready to deploy a swarm!
 
 ## Link an Azure Organization as Global Admin
 
-For members of Azure Organizations, the gobal administrator needs to first link
-their account and grant permissions to Docker Cloud in order for individual
-user accounts to link to Docker Cloud with their subscription IDs.
+For members of Azure Organizations, your gobal administrator first needs to link
+their account and grant permissions to Docker Cloud for the organization as a
+whole. Then, you can link your individual user account to Docker Cloud with your
+subscription ID.
 
 The Global Admin steps are as follows:
 
