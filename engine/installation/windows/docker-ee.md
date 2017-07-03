@@ -2,6 +2,8 @@
 description: How to install Docker EE for Windows
 keywords: windows, windows server, install, download
 title: Install Docker Enterprise Edition for Windows Server 2016
+redirect_from:
+- /docker-ee-for-windows/install/
 ---
 
 Docker Enterprise Edition for Windows Server 2016 (*Docker EE*) enables native

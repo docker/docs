@@ -158,7 +158,7 @@ essentially involves two steps:
 1. [Get Docker Enterprise Edition for your server's OS from Docker Store](https://store.docker.com/search?offering=enterprise&type=edition){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Get Docker EE for your OS');"}.
 2. Follow the [instructions to install Datacenter on your own host](/datacenter/install/linux/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'BYOH setup guide');"}.
 
-> **Note**: Running Windows containers? View our [Windows Server setup guide](/docker-ee-for-windows/install/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
+> **Note**: Running Windows containers? View our [Windows Server setup guide](/engine/installation/windows/docker-ee.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
 
 {{ enterprisedeployapp }}
 {% endcapture %}
