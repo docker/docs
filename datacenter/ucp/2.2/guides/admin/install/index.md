@@ -1,36 +1,31 @@
 ---
-description: Learn how to install Docker Universal Control Plane on production
-keywords: Universal Control Plane, UCP, install
 title: Install UCP for production
+description: Learn how to install Docker Universal Control Plane on production.
+keywords: Universal Control Plane, UCP, install, Docker EE
 ---
 
-Docker Universal Control Plane (UCP) is a containerized application that can be
-installed on-premise or on a cloud infrastructure.
+Docker Universal Control Plane (UCP) is a containerized application that you
+can install on-premise or on a cloud infrastructure.
 
 ## Step 1: Validate the system requirements
 
-The first step to installing UCP, is ensuring your
-infrastructure has all the [requirements UCP needs to run](system-requirements.md). You also need to ensure that all nodes (physical or virtual) are running the same version of CS Docker Engine.
+The first step to installing UCP is ensuring that your infrastructure has all
+of the [requirements UCP needs to run](system-requirements.md).
+Also, you need to ensure that all nodes, physical and virtual, are running
+the same version of Docker Enterprise Edition.
 
-
-## Step 2: Install CS Docker on all nodes
+## Step 2: Install Docker EE on all nodes
 
 UCP is a containerized application that requires the commercially supported
 Docker Engine to run.
 
-For each host that you plan to manage with UCP:
+Install Docker EE on each host that you plan to manage with UCP.
+View the [supported platforms](/engine/installation/#supported-platforms)
+and click a check icon to get platform-specific instructions for installing
+Docker EE.
 
-1.  Log in to that host using ssh.
-2.  Install Docker Engine 1.13:
-
-    ```bash
-    curl -SLf https://packages.docker.com/1.13/install.sh  | sh
-    ```
-
-    [You can also install Docker Engine using a package manager](/cs-engine/1.13/index.md).
-
-Make sure you install the same Docker Engine version on all the nodes. Also,
-if you're creating virtual machine templates with Docker Engine already
+Make sure you install the same Docker EE version on all the nodes. Also,
+if you're creating virtual machine templates with Docker EE already
 installed, make sure the `/etc/docker/key.json` file is not included in the
 virtual machine image. When provisioning the virtual machine, restart the Docker
 daemon to generate a new `/etc/docker/key.json` file.
@@ -50,8 +45,8 @@ UCP.
 
 ## Step 4: Install UCP
 
-To install UCP you use the `docker/ucp` image, which has commands to install and
-manage UCP.
+To install UCP, you use the `docker/ucp` image, which has commands to install
+and manage UCP.
 
 To install UCP:
 
@@ -78,16 +73,24 @@ To install UCP:
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI, log in with your administrator credentials and upload your
-license.
+Now that UCP is installed, you need to license it.
 
-![](../../../../../images/try-ddc-1.png){: .with-border}
+1.  Go to the
+    [Docker Store](https://www.docker.com/enterprise-edition)
+    and buy a Docker EE subscription, or get a free trial license.  
+
+2.  In your browser, navigate to the UCP web UI, log in with your
+    administrator credentials and upload your license. Navigate to the
+    **Admin Settings** page and in the left pane, click **License**.
+
+    ![](../../images/license-ucp.png){: .with-border}
+
+3.  Click **Upload License** and navigate to your license (.lic) file.
+    When you're finished selecting the license, UCP updates with the new
+    settings.  
 
 If you're registered in the beta program and don't have a license yet, you
 can get it from your [Docker Store subscriptions](https://store.docker.com/?overlay=subscriptions).
-
-<!-- If you don't have a license yet, [learn how to get a free trial license](license.md). -->
 
 ## Step 6: Join manager nodes
 
@@ -98,40 +101,45 @@ join more manager nodes to it. Manager nodes are the nodes in the swarm
 that perform the orchestration and swarm management tasks, and dispatch tasks
 for worker nodes to execute.
 
-To join manager nodes to the swarm, go to the **UCP web UI**, navigate to
-the **Resources** page, and go to the **Nodes** section.
+To join manager nodes to the swarm,  
 
-![](../../images/step-6-one-node.png){: .with-border}
+1.  In the UCP web UI, navigate to the **Nodes** page, and click the
+    **Add Node** button to add a new node.
 
-Click the **Add Node** button to add a new node.
+    ![](../../images/nodes-page-ucp.png){: .with-border}
 
-![](../../../../../images/try-ddc-3.png){: .with-border}
+2.  In the **Add Node** page, check **Add node as a manager** to turn this node
+    into a manager and replicate UCP for high-availability.
 
-Check the 'Add node as a manager' to turn this node into a manager and replicate
-UCP for high-availability.
-Set the 'Use a custom listen address' option if you want to customize the
-network and port where this node will listen for swarm management traffic. By
-default the node listens on port 2377.
-Set the 'Use a custom advertise address' option if you want to customize the
-network and port this node will advertise to other swarm members so that they
-can reach it.
+3.  If you want to customize the network and port where the new node listens
+    for swarm management traffic, click **Use a custom listen address**. Enter
+    the IP address and port for the node to listen for inbound cluster
+    management traffic. The format is `interface:port` or `ip:port`.
+    The default is `0.0.0.0:2377`.
 
-For each manager node that you want to join to UCP, log in to that
-node using ssh, and run the join command that is displayed on UCP.
+4.  If you want to customize the network and port that the new node advertises
+    to other swarm members for API access, click
+    **Use a custom advertise address** and enter the IP address and port.
+    By default, this is also the outbound address used by the new node to
+    contact UCP. The joining node should be able to contact itself at this
+    address. The format is `interface:port` or `ip:port`.
 
-![](../../images/step-6-two-nodes.png){: .with-border}
+    Click the copy icon ![](../../images/copy-swarm-token.png) to copy the
+    `docker swarm join` command that nodes use to join the swarm.
 
-After you run the join command in the node, the node starts being displayed
-in UCP.
+    ![](../../images/add-node-ucp.png){: .with-border}
+
+5.  For each manager node that you want to join to the swarm, log in using
+    ssh and run the join command that you copied. After the join command
+    completes, the node appears on the **Nodes** page in the UCP web UI.
 
 ## Step 7: Join worker nodes
 
 Skip this step if you don't want to add more nodes to run and scale your apps.
 
 To add more computational resources to your swarm, you can join worker nodes.
-These nodes execute tasks assigned to them by the manager nodes. For this,
-use the same steps as before, but don't check the 'Add node as a manager'
-option.
+These nodes execute tasks assigned to them by the manager nodes. Follow the
+same steps as before, but don't check the **Add node as a manager** option.
 
 ## Where to go next
 
