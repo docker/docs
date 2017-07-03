@@ -28,7 +28,7 @@ For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.m
   </tr>
   <tr valign="top">
     <td width="50%">This deployment is fully baked and tested, and comes with the latest CE version of Docker. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>Stable is released quarterly and is for users that want an easier-to-maintain release pace.</td>
-    <td width="50%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/moby/moby/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month <br><br>We collect usage data on edges across the board.</td>
+    <td width="50%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month <br><br>We collect usage data on edges across the board.</td>
   </tr>
   <tr valign="top">
   <td width="50%">
@@ -74,7 +74,7 @@ and down or deploy apps on your swarm that require configuration of the Azure Lo
 containerized helper script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
 1.  Download the latest version of `docker4x/create-sp-azure` to your local environment:
-   
+
    ```bash
    docker pull docker4x/create-sp-azure:latest
    ```
@@ -94,7 +94,7 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
    If you have multiple Azure subscriptions, make sure to create the
    Service Principal with the subscription ID that you will be using
    to deploy Docker for Azure.
-   
+
    | Argument | Description | Example values |
    |----------|-------------|---------|
    | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. | `sp1` |
@@ -104,7 +104,7 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
 - **Docker Community Edition for Azure**: `rg-name` and `rg-region` are optional, but specifying them is recommended
   so that the Azure resource group is created up front and the service principal is scoped to that specific resource
   group.
-  
+
 - **Docker Enterprise Edition for Azure**: The Azure Marketplace portal does not currently allow users to specify an
   existing resource group to use when deploying resources. Do not specify `rg-name` and `rg-region`, because you need
   a Service Principal that is scoped throughout your account.
