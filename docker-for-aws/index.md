@@ -165,6 +165,9 @@ Docker for AWS starts with a CloudFormation template that will create everything
 
 The CloudFormation template first creates a new VPC along with subnets and security groups. After the networking set-up completes, two Auto Scaling Groups are created, one for the managers and one for the workers, and the configured capacity setting is applied. Managers start first and create a quorum using Raft, then the workers start and join the swarm one at a time. At this point, the swarm is comprised of X number of managers and Y number of workers, and you can deploy your applications. See the [deployment](deploy.md) docs for your next steps.
 
+> To [log into your nodes using SSH](/docker-for-aws/deploy.md#connecting-via-ssh),
+> use the `docker` user rather than `root` or `ec2-user`.
+
 If you increase the number of instances running in your worker Auto Scaling Group (via the AWS console, or updating the CloudFormation configuration), the new nodes that will start up will automatically join the swarm.
 
 Elastic Load Balancers (ELBs) are set up to help with routing traffic to your swarm.
