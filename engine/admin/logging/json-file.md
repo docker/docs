@@ -31,6 +31,7 @@ option.
     "max-size": "10m"
   }
 }
+```
 
 Restart Docker for the changes to take effect.
 
