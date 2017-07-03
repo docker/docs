@@ -20,7 +20,7 @@ Docker Community Edition (Docker CE) is not supported on Oracle Linux.
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
 repository URL associated with your trial or subscription. To get this information:
 
-- Go to [https://store.docker.com/?overlay=subscriptions](https://store.docker.com/?overlay=subscriptions).
+- Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
   **Docker Enterprise Edition for Oracle Linux** section.
 - Copy the URL from the field labeled
