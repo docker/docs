@@ -41,6 +41,9 @@ Systems) architectures.
 > **`s390x` limitations**: System Z is only supported on Ubuntu Xenial,
 > Yakkety, and Zesty.
 
+### Location of .deb files
+Go here for the .deb files: `http://apt.dockerproject.org/repo/pool/main/d/docker-engine/` and download the appropriate package for your OS version.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
