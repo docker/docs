@@ -153,7 +153,7 @@ $ docker volume create -d "cloudstor:aws" --opt backing=shared mysharedvol1
 If EBS is available and enabled, you can use a templatized notation with the
 `docker service create` CLI to create and mount a unique `relocatable` Cloudstor
 volume backed by a specified type of EBS for each task in a swarm service. New
-EBS volumes typically take a few minutes to be created. Besides `backing=local`,
+EBS volumes typically take a few minutes to be created. Besides `backing=relocateable`,
 the following volume options are available:
 
 | Option    | Description                                                                                                                                                                                                                                                                                                    |
@@ -169,7 +169,7 @@ Example usage:
 $ docker service create \
   --replicas 5 \
   --name ping3 \
-  --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata,volume-opt=backing=local,volume-opt=size=25,volume-opt=ebstype=gp2 \
+  --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata,volume-opt=backing=relocateable,volume-opt=size=25,volume-opt=ebstype=gp2 \
   alpine ping docker.com
 {% endraw %}
 ```
