@@ -11,18 +11,21 @@ for the bash and zsh shell.
 
 ### Bash
 
-Make sure bash completion is installed. If you use a current Linux in a
-non-minimal installation, bash completion should be available. On a Mac, install
-with `brew install bash-completion`.
+Make sure bash completion is installed.
+
+*  On a current Linux OS (in a non-minimal installation), bash completion should be
+available.
+
+*  On a Mac, install with `brew install bash-completion`.
 
 Place the completion script in `/etc/bash_completion.d/`
-(`/usr/local/etc/bash_completion.d/` on a Mac):
+(or `/usr/local/etc/bash_completion.d/` on a Mac):
 
 ```shell
 curl -L https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 ```
 
-Then add the following to your `~/.bash_profile`:
+On a Mac, add the following to your `~/.bash_profile`:
 
 ```shell
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
