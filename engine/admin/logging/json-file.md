@@ -9,7 +9,7 @@ title: JSON File logging driver
 
 By default, Docker captures the standard output (and standard error) of all your containers,
 and writes them in files using the JSON format. The JSON format annotates each line with its
-origin (`stdout` or `stderr`) and its timestamp. Each log file containers information about
+origin (`stdout` or `stderr`) and its timestamp. Each log file contains information about
 only one container.
 
 ## Usage
