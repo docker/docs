@@ -179,7 +179,7 @@ See [Namespaces](osxfs.md#namespaces) in the topic on
 
 #### CPUs
 
-By default, Docker for Mac is set to use 2 processors. You can increase
+By default, Docker for Mac is set to use half the number of processors available on the host machine. You can increase
 processing power for the app by setting this to a higher number, or lower it to
 have Docker for Mac use fewer computing resources.
 
