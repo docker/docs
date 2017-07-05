@@ -688,7 +688,8 @@ Add environment variables from a file. Can be a single value or a list.
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
 
-Environment variables specified in [environment](#environment) _**override**_ these values.
+Environment variables specified in [environment](#environment) _**override**_
+these values.
 
     env_file: .env
 
