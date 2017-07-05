@@ -517,10 +517,12 @@ network and user-defined bridge networks.
   machine where you run the image.
 
   This example publishes port 80 in the container to a random high
-  port (in this case, `32768`) on the host machine.
+  port (in this case, `32768`) on the host machine. The `-d` flag causes the
+  container to run in the background so you can issue the `docker ps`
+  command.
 
   ```bash
-  $ docker run -it -p 80 nginx
+  $ docker run -it -d -p 80 nginx
 
   $ docker ps
 
@@ -532,7 +534,7 @@ network and user-defined bridge networks.
   host machine. It will fail if port 8080 is not available.
 
   ```bash
-  $ docker run -it -p 8080:80 nginx
+  $ docker run -it -d -p 8080:80 nginx
 
   $ docker ps
 
