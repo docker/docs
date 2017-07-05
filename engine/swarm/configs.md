@@ -147,7 +147,8 @@ real-world example, continue to
     $ docker config rm my-config
 
     Error response from daemon: rpc error: code = 3 desc = config 'my-config' is
-    in use by the following service: redis ```
+    in use by the following service: redis 
+    ```
 
 6.  Remove access to the config from the running `redis` service by updating the
     service.
