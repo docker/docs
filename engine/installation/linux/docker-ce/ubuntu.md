@@ -30,7 +30,7 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Zesty 17.04 (LTS)
+- Zesty 17.04
 - Yakkety 16.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
