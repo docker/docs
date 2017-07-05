@@ -56,7 +56,7 @@ Make sure you're running DTR 2.1. If that's not the case, [upgrade your installa
 Then pull the latest version of DTR:
 
 ```none
-$ docker pull {{ page.docker_image }}
+$ docker pull docker/dtr:{{ page.dtr_version_patch }}
 ```
 
 If the node you're upgrading doesn't have access to the internet, you can
@@ -68,7 +68,7 @@ nodes if upgrading offline), run the upgrade command:
 
 ```none
 $ docker run -it --rm \
-  {{ page.docker_image }} upgrade \
+  docker/dtr{{ page.dtr_version_patch }} upgrade \
   --ucp-insecure-tls
 ```
 

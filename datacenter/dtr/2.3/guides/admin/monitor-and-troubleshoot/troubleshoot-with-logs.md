@@ -74,7 +74,7 @@ and join a new one. Start by running:
 
 ```none
 docker run -it --rm \
-  {{ page.docker_image }} remove \
+  docker/dtr:{{ page.dtr_version_patch }} remove \
   --ucp-insecure-tls
 ```
 
@@ -82,7 +82,7 @@ And then:
 
 ```none
 docker run -it --rm \
-  {{ page.docker_image }} join \
+  docker/dtr:{{ page.dtr_version_patch }} join \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```

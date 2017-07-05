@@ -9,7 +9,7 @@ replica. To do that, you just run the destroy command once per replica:
 
 ```none
 docker run -it --rm \
-  {{ page.docker_image }} destroy \
+  docker/dtr:{{ page.dtr_version_patch }} destroy \
   --ucp-insecure-tls
 ```
 
