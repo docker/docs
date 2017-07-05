@@ -32,6 +32,11 @@
 <a class="button outline-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/test/Docker-no-vpc.tmpl" data-rel="{{ d4a_test }}" target="blank">Deploy Docker Community Edition (CE) for AWS (test)<br/><small>uses your existing VPC</small></a>
 {% endcapture %}
 
+{% capture aws_blue_vpc_latest %}
+<a class="button outline-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker-no-vpc.tmpl" data-rel="{{ d4a_stable }}" target="blank">Deploy Docker Community Edition (CE) for AWS (stable)<br/><small>uses your existing VPC</small></a>
+<div class="clearfix"></div>
+{% endcapture %}
+
 {% capture azure_blue_latest %}
 <a class="button outline-btn azure-deploy" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="{{ d4a_stable }}" target="blank">Deploy Docker Community Edition (CE) for Azure (stable)</a>
 <div class="clearfix"></div>
