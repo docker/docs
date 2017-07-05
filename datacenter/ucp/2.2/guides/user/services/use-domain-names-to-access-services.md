@@ -1,17 +1,17 @@
 ---
 title: Use domain names to access services
 description: Learn how to configure your services to make them accessible using a hostname instead of IP addresses and ports.
-keywords: ucp, services, http, dns
+keywords: ucp, services, http, dns, https, routing
 redirect_from:
 - /datacenter/ucp/2.1/guides/user/services/use-hostnames-to-access-your-service/
 ---
 
-You can make it easier for users to access your HTTP and HTTPS services, by
+You can make it easier for users to access your HTTP and HTTPS services by
 making them accessible from a domain name, instead of an IP address.
 
 ![http routing mesh](../../images/use-domain-names-2.svg)
 
-In this example, we're going to deploy a Wordpress service and make it accessible
+In this example, we're going to deploy a WordPress service and make it accessible
 to users at `http://wordpress.example.org`.
 
 ## Enable the HTTP routing mesh
@@ -20,22 +20,41 @@ Before you start, make sure an administrator user has
 [enabled the HTTP routing mesh service](../../admin/configure/use-domain-names-to-access-services.md).
 You also need permissions to attach services to the `ucp-hrm` network.
 
-## Deploy Wordpress
+## Deploy WordPress
 
-Log in the **UCP web UI**, navigate to the **Services** page, and click
-**Create a service**. Then create a Wordpress service with the following
-configurations:
+Log in the UCP web UI, navigate to the **Services** page, and click
+**Create Service**. Then create a WordPress service with the following
+configuration:
 
 | Field             | Value                 |
 |:------------------|:----------------------|
 | Service name      | wordpress             |
 | Image name        | wordpress:latest      |
+
+In the left pane, click **Network**. In the **Ports** section, click **Publish Port**
+and assign the following values.
+
+
+| Field             | Value                 |
+|:------------------|:----------------------|
 | Internal port     | 80                    |
 | Protocol          | tcp                   |
 | Publish Mode      | ingress               |
 | Public port       | 8000                  |
+
+Click **Add Hostname based routes** and assign the routing values.
+
+| Field             | Value                 |
+|:------------------|:----------------------|
 | External scheme   | http://               |
 | Routing mesh host | wordpress.example.com |
+
+Click **Confirm** to assign the network configuration.
+
+Finally, you need to connect the service to the `ucp-hrm` network. This is
+what ensures traffic sent to the HTTP routing mesh is redirected to your
+service. In the **Networks** section, click **Attach Network** and select
+`ucp-hrm` from the dropdown list.
 
 When creating the service, make sure to publish both internal and public ports.
 This maps the port 80 on the container running the service, to port 8000 on the
@@ -43,24 +62,13 @@ ingress routing mesh.
 
 ![](../../images/use-domain-names-4.png){: .with-border}
 
-Then click the **Add hostname based route** to set the hostname that will
-resolve to the service.
-
-![](../../images/use-domain-names-5.png){: .with-border}
-
-Finally, you need to connect the service to the `ucp-hrm` network. This is
-what ensures traffic send to the HTTP routing mesh is redirected to your
-service.
-
-![](../../images/use-domain-names-6.png){: .with-border}
-
-Click **Deploy now** to deploy your service. Once the service is deployed,
+Click **Create** to deploy your service. Once the service is deployed,
 the HTTP routing mesh service is reconfigured to redirect HTTP requests with
-the hostname set to `wordpress.example.org`, to the Wordpress service.
+the hostname set to `wordpress.example.org`, to the WordPress service.
 
 ## Add a DNS entry
 
-Now that Wordpress is deployed, add a new DNS entry that maps
+Now that WordPress is deployed, add a new DNS entry that maps
 `wordpress.example.org` to the IP address of any node in the UCP cluster.
 When testing locally, you can also change your `/etc/hosts` file to
 create this mapping, instead of using a DNS service.
@@ -71,7 +79,7 @@ Once this is done, you can access the wordpress service from your browser.
 
 ## From the CLI
 
-To deploy the Wordpress service from the CLI, you need to add labels to the
+To deploy the WordPress service from the CLI, you need to add labels to the
 service that are specific to the HTTP routing mesh.
 
 Once you get your [UCP client bundle](../access-ucp/cli-based-access.md), you
@@ -95,16 +103,24 @@ to your services.
 
 The HTTP routing mesh can route to a service, as long as that service:
 
-* Is attached to a network that has the `com.docker.ucp.mesh.http` label. You can use the default ucp-hrm network or create your own.
-* Publishes the ports that you want to route to
-* Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
-the ports to route to
+*  Is attached to a network that has the `com.docker.ucp.mesh.http` label.
+   You can use the default `ucp-hrm` network or create your own.
+*  Publishes the ports that you want to route to.
+*  Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
+   the ports to route to.
 
 ### Service labels
 
 The HTTP routing mesh label that you apply to your services needs to have a list
 of keys and values separated by a comma, specifying how to route the traffic to
-your service. The label syntax looks like this:
+your service.
+
+The label for the WordPress service you just created looks like this:
+
+-  Key: `com.docker.ucp.mesh.http.80-1`
+-  Value: `internal_port=8000,external_route=http://wordpress.example.com` 
+
+The label syntax looks like this:
 
 ```none
 com.docker.ucp.mesh.http[.label-number]=<key-1>=<value-1>,<key-2>=<value-2>
