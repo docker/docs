@@ -163,12 +163,12 @@ options in the table above.
 {
   "storage-driver": "devicemapper",
   "storage-opts": [
-    "dm.directlvm_device": "/dev/xdf",
-    "dm.thinp_percent": 95,
-    "dm.thinp_metapercent": 1,
-    "dm.thinp_autoextend_threshold": 80,
-    "dm.thinp_autoextend_percent": 20,
-    "dm.directlvm_device_force": false 
+    "dm.directlvm_device=/dev/xdf",
+    "dm.thinp_percent=95",
+    "dm.thinp_metapercent=1",
+    "dm.thinp_autoextend_threshold=80",
+    "dm.thinp_autoextend_percent=20",
+    "dm.directlvm_device_force=false" 
   ]
 }
 ```
