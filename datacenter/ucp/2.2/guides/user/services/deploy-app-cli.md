@@ -1,8 +1,7 @@
 ---
-description: Learn how to deploy containerized applications on a swarm, with Docker
-  Universal Control Plane.
-keywords: deploy, application
 title: Deploy an app from the CLI
+description: Learn how to deploy containerized applications on a swarm, with Docker Universal Control Plane.
+keywords: ucp, deploy, application, stack, service, compose
 ---
 
 With Docker Universal Control Plane you can deploy your apps from the CLI,
@@ -11,20 +10,21 @@ application that allows users to vote on whether they prefer cats or dogs.
 
 ## Get a client certificate bundle
 
-Docker UCP secures your Docker swarm with role-based access control, so that
-only authorized users can deploy applications. To be able to run Docker commands
-on a swarm managed by UCP, you need to configure your Docker CLI client to
-authenticate to UCP using client certificates.
-
+Docker UCP secures your Docker swarm with
+[role-based access control](../../admin/manage-users/index.md),
+so that only authorized users can deploy applications. To be able to run Docker
+commands on a swarm managed by UCP, you need to configure your Docker CLI
+client to authenticate to UCP using client certificates. 
 [Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).
 
-## Deploy the voting app
+## Deploy the voting application
 
 The application we're going to deploy is composed of several services:
 
 * `vote`: The web application that presents the voting interface via port 5000
 * `result`: A web application that displays the voting results via port 5001
-* `visualizer`: A web application that shows a map of the deployment of the various services across the available nodes via port 8080
+* `visualizer`: A web application that shows a map of the deployment of the
+  various services across the available nodes via port 8080
 * `redis`: Collects raw voting data and stores it in a key/value queue
 * `db`: A PostgreSQL service which provides permanent storage on a host volume
 * `worker`: A background service that transfers votes from the queue to permanent storage
@@ -120,15 +120,13 @@ volumes:
 
 > You can define services in this YAML file that feature a `deploy:` key, which
 schedules the containers on certain nodes, defines their restart behavior,
-configures the number of replicas, and so on. These features are provided by the
-Compose V3 file format, which is currently in beta. You can [read the
-pre-release documentation for Compose V3 on Docker's preview URL for the
-upcoming Compose
-documentation](http://docker-docs-vnext-compose.netlify.com/compose/compose-file/#/deploy).
+configures the number of replicas, and so on. These features are provided
+by the Compose V3 file format.
+[Learn about Compose files](/compose/compose-file/).
 
 In your command line, navigate to the place where you've created the
 `docker-compose.yml` file and deploy the application to UCP by running `docker
-stack deploy` and giving the application a name, such as "VotingApp" used here:
+stack deploy` and giving the application a name, like "VotingApp":
 
 ```bash
 docker stack deploy --compose-file docker-compose.yml VotingApp
@@ -148,9 +146,10 @@ op3z6z5ri4k3  VotingApp_worker      replicated  1/2       manomarks/examplevotin
 umoqinuwegzj  VotingApp_vote        replicated  6/6       manomarks/examplevotingapp_vote:latest
 ```
 
-As you saw earlier, a service called `visualizer` was deployed and published to
-port 8080. Visiting that port accesses the running instance of the `visualizer`
-service in your browser, which shows a map of how this application was deployed:
+As you saw earlier, a service called `VotingApp_visualizer` was deployed and
+published to port 8080. Visiting that port accesses the running instance of
+the visualizer service in your browser, which shows a map of how this application
+was deployed:
 
 ![Screenshot of visualizer](../../images/deployed_visualizer_detail.png){: .with-border}
 
