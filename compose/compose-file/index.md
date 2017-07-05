@@ -688,7 +688,8 @@ Add environment variables from a file. Can be a single value or a list.
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
 
-Environment variables specified in [environment](#environment) override these values.
+Environment variables specified in [environment](#environment) _override_
+these values.
 
     env_file: .env
 
@@ -712,9 +713,12 @@ The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
 quotes will be included in the value passed to Compose.
 
-Keep in mind that the order of files in the list is significant in determining
-the value assigned to a variable that shows up more than once. For example,
-given the following declaration in `docker_compose.yml`:
+Keep in mind that _the order of files in the list is significant in determining
+the value assigned to a variable that shows up more than once_. The files in the
+list are processed from the top down. For the same variable specified in file
+`a.env` and assigned a different value in file `b.env`, if `b.env` is
+listed below (after), then the value from `b.env` stands. For example, given the
+following declaration in `docker_compose.yml`:
 
 ```yaml
 services:
