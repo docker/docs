@@ -1,11 +1,9 @@
 ---
+title: Create and manage organizations in DTR
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
 keywords: docker, registry, security, permissions, organizations
-title: Create and manage organizations in DTR
 ---
-
-<!-- TODO: review page for v2.2 -->
 
 When a user creates a repository, only that user has permissions to make changes
 to the repository.

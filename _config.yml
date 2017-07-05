@@ -103,9 +103,8 @@ defaults:
   - scope:
       path: "datacenter/dtr/2.3"
     values:
-      ucp_version: "2.2"
-      dtr_version: "2.3"
-      docker_image: "docker/dtr:2.3.0"
+      dtr_version_minor: "2.3"
+      dtr_version_patch: "2.3.0"
   - scope:
       path: "datacenter/dtr/2.2"
     values:

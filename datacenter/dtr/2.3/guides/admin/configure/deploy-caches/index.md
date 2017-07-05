@@ -2,9 +2,8 @@
 title: Deploy DTR caches
 description: Learn how to deploy and configure DTR caches, so that users can pull images faster.
 keywords: docker, registry, dtr, cache
-redirect_from:
-  - /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
 ---
+
 
 You can configure DTR to have multiple caches. Once you've deployed caches,
 users can configure their DTR user account to specify which cache to pull from.
@@ -185,7 +184,7 @@ docker run --detach --restart always \
   --publish 5000:5000 \
   --volume $(pwd)/dtr-ca.pem:/certs/dtr-ca.pem \
   --volume $(pwd)/config.yml:/config.yml \
-  docker/dtr-content-cache:<version> /config.yml
+  docker/dtr-content-cache:{{ page.dtr_version_patch }} /config.yml
 ```
 
 You can also run the command in interactive mode instead of detached by

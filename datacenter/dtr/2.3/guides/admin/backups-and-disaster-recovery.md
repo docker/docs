@@ -4,6 +4,9 @@ description: Learn how to back up your Docker Trusted Registry cluster, and to r
 keywords: docker, registry, high-availability, backup, recovery
 ---
 
+{% assign image_backup_file = "backup-images.tar" %}
+{% assign metadata_backup_file = "backup-metadata.tar" %}
+
 DTR needs that a majority (n/2 + 1) of its replicas are healthy at all times
 for it to work. So if a majority of replicas is unhealthy or lost, the only
 way to restore DTR to a working state, is by recovering from a backup. This
@@ -32,12 +35,12 @@ command backups up the following data:
 
 | Data                               | Backed up | Description                                                    |
 |:-----------------------------------|:----------|:---------------------------------------------------------------|
-| Configurations                     | yes       |                                                                |
-| Repository metadata                | yes       |                                                                |
-| Access control to repos and images | yes       |                                                                |
-| Notary data                        | yes       |                                                                |
-| Scan results                       | yes       |                                                                |
-| Certificates and keys              | yes       |                                                                |
+| Configurations                     | yes       | DTR settings                                                   |
+| Repository metadata                | yes       | Metadata like image architecture and size                      |
+| Access control to repos and images | yes       | Data about who has access to which images                      |
+| Notary data                        | yes       | Signatures and digests for images that are signed              |
+| Scan results                       | yes       | Information about vulnerabilities in your images               |
+| Certificates and keys              | yes       | TLS certificates and keys used by DTR                          |
 | Image content                      | no        | Needs to be backed up separately, depends on DTR configuration |
 | Users, orgs, teams                 | no        | Create a UCP backup to backup this data                        |
 | Vulnerability database             | no        | Can be re-downloaded after a restore                           |
@@ -63,7 +66,8 @@ you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
-tar -cf /tmp/backup-images.tar dtr-registry-<replica-id>
+sudo tar -cf {{ image_backup_file }} \
+$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
 ```
 
 If you're using a different storage backend, follow the best practices
@@ -79,16 +83,15 @@ command, replacing the placeholders for the real values:
 read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  docker/dtr:<version> backup \
+  docker/dtr:{{ page.dtr_version_patch }} backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \
-  --existing-replica-id <replica-id> > /tmp/backup-metadata.tar
+  --existing-replica-id <replica-id> > backup-metadata.tar
 ```
 
 Where:
 
-* `<version>`, the version of DTR you're running
 * `<ucp-url>` is the url you use to access UCP
 * `<ucp-username>` is the username of a UCP administrator
 * `<replica-id>` is the id of the DTR replica to backup
@@ -103,7 +106,7 @@ without affecting your users. Also, the backup contains sensitive information
 like private keys, so you can encrypt the backup by running:
 
 ```none
-gpg --symmetric /tmp/backup-metadata.tar
+gpg --symmetric {{ backup-metadata.tar }}
 ```
 
 This prompts you for a password to encrypt the backup, copies the backup file
@@ -115,7 +118,7 @@ To validate that the backup was correctly performed, you can print the contents
 of the tar file created. The backup of the images should look like:
 
 ```none
-tar -tf /tmp/backup-images.tar
+tar -tf {{ image_backup_file }}
 
 dtr-backup-v2.2.3/
 dtr-backup-v2.2.3/rethink/
@@ -125,7 +128,7 @@ dtr-backup-v2.2.3/rethink/layers/
 And the backup of the DTR metadata should look like:
 
 ```none
-tar -tf /tmp/backup-metadata.tar
+tar -tf {{ backup-metadata.tar }}
 
 # The archive should look like this
 dtr-backup-v2.2.1/
@@ -171,7 +174,7 @@ Start by removing any DTR container that is still running:
 
 ```none
 docker run -it --rm \
-  docker/dtr:<version> destroy \
+  docker/dtr:{{ page.dtr_version_patch }} destroy \
   --ucp-insecure-tls
 ```
 
@@ -181,7 +184,7 @@ If you had DTR configured to store images on the local filesystem, you can
 extract your backup:
 
 ```none
-sudo tar -xzf /tmp/image-backup.tar -C /var/lib/docker/volumes
+sudo tar -xzf {{ image_backup_file }} -C /var/lib/docker/volumes
 ```
 
 If you're using a different storage backend, follow the best practices
@@ -202,18 +205,17 @@ placeholders for the real values:
 read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  docker/dtr:<version> restore \
+  docker/dtr:{{ page.dtr_version_patch }} restore \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \
   --ucp-node <hostname> \
   --replica-id <replica-id> \
-  --dtr-external-url <dtr-external-url> < /tmp/backup-metadata.tar
+  --dtr-external-url <dtr-external-url> < {{ metadata_backup_file }}
 ```
 
 Where:
 
-* `<version>`, the version of DTR you're running
 * `<ucp-url>` is the url you use to access UCP
 * `<ucp-username>` is the username of a UCP administrator
 * `<hostname>` is the hostname of the node where you've restored the images

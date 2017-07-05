@@ -1,6 +1,6 @@
 ---
-title: DTR 2.2 release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry {{ page.dtr_version }}
+title: DTR {{ page.dtr_version_minor }} release notes
+description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry {{ page.dtr_version_minor }}
 keywords: docker trusted registry, whats new, release notes
 redirect_from:
 - /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
