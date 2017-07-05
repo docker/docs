@@ -306,7 +306,7 @@ services:
     image: redis:latest
     deploy:
       replicas: 1
-    secrets:
+    configs:
       - source: my_config
         target: /redis_config
         uid: '103'
