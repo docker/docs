@@ -12,6 +12,20 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.6
+
+(3 July 2017)
+
+**Bugs fixed**
+
+* High impact
+  * Updated security scanner to reduce false positives for Red Hat Enterprise Linux.  This change introduces a new vulnerability database format.
+* Low impact
+  * Fixed displaying the correct scanning database version in the admin page.
+  * Fixed issue with returning the wrong error code when a user doesn't have access to a repository.
+  * Fixed handling carriage returns in certificates pasted from Windows clients.
+  * Fixed certificate issue when reusing replica IDs after restoring from a backup.
+
 ## DTR 2.2.5
 
 (6 June 2017)
