@@ -49,13 +49,13 @@ It can be as simple as this to create an Ubuntu parent image:
 There are more example scripts for creating parent images in the Docker
 GitHub Repo:
 
- - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage-busybox.sh)
+ - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
  - CentOS / Scientific Linux CERN (SLC) [on Debian/Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage-rinse.sh) or
+   https://github.com/moby/moby/blob/master/contrib/mkimage/rinse) or
    [on CentOS/RHEL/SLC/etc.](
    https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh)
  - [Debian / Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage-debootstrap.sh)
+   https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
 
 ## Creating a simple parent image using scratch
 
