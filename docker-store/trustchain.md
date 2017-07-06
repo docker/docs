@@ -42,7 +42,7 @@ image certification and publishing process as outlined below:
     DOCKER_CONTENT_TRUST=1 docker pull <image>
     ```
 
-2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](/engine/security/trust/content_trust/#understand-trust-in-docker](https://docs.docker.com/engine/security/trust/content_trust/#understand-trust-in-docker).
+2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](/engine/security/trust/content_trust/#understand-trust-in-docker).
 
 3. Upon a successful signature verification, Docker pulls the original image to a private, internal staging area only accessible to the Docker Store certification team
 
@@ -56,4 +56,4 @@ image certification and publishing process as outlined below:
     DOCKER_CONTENT_TRUST=1 docker run <image>
     ```
 
-![image alt text](images/image_0.png)
+![Store Trust Chain signing process](images/image_0.png)
