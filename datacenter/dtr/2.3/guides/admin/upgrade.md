@@ -41,15 +41,14 @@ Before starting your upgrade planning, make sure that the version of UCP you are
 using is supported by the version of DTR you are trying to upgrade to. <!--(TODO:
 link to the compatibility matrix)-->
 
-> **Warning**
+> Backup DTR before upgrading
 >
 > Before performing any upgrade it’s important to backup. See
 > [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery.md).
-{: .warning}
 
-### Step 1. Upgrade DTR to 2.1 if necessary
+### Step 1. Upgrade DTR to 2.2 if necessary
 
-Make sure you're running DTR 2.1. If that's not the case, [upgrade your installation to the 2.1 version](/datacenter/dtr/2.1/guides/install/upgrade/.md).
+Make sure you're running DTR 2.2. If that's not the case, [upgrade your installation to the 2.2 version](/datacenter/dtr/2.2/guides/admin/upgrade.md).
 
 ### Step 2. Upgrade DTR
 
