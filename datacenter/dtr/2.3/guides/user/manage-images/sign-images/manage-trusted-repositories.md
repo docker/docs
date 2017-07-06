@@ -2,8 +2,6 @@
 title: Manage trusted repositories
 description: Learn how to use the Notary CLI client to manage trusted repositories
 keywords: dtr, trust, notary, security
-redirect_from:
-  - /datacenter/dtr/2.2/guides/user/manage-images/manage-trusted-repositories/
 ---
 
 Once you

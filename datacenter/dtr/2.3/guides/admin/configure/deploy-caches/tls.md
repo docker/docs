@@ -75,7 +75,7 @@ docker run --detach --restart always \
   --volume $(pwd)/dtr-cache-key.pem:/certs/dtr-cache-key.pem \
   --volume $(pwd)/dtr-ca.pem:/certs/dtr-ca.pem \
   --volume $(pwd)/config.yml:/config.yml \
-  docker/dtr-content-cache:<version> /config.yml
+  docker/dtr-content-cache:{{ page.dtr_version_patch }} /config.yml
 ```
 
 ## Use Let's Encrypt

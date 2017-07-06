@@ -1,8 +1,8 @@
 ---
+title: Configure DTR image storage
 description: Storage configuration for Docker Trusted Registry
 keywords: docker, documentation, about, technology, understanding, configuration,
   storage, storage drivers, Azure, S3, Swift, enterprise, hub, registry
-title: Configure DTR image storage
 ---
 
 By default DTR uses the local filesystem of the node where it is running to
@@ -40,7 +40,7 @@ The format of this configuration file is similar to the one used by
 
 ## Local filesystem
 
-By default, DTR creates a volume names `dtr-registry-<replica-id>` to store
+By default, DTR creates a volume named `dtr-registry-<replica-id>` to store
 your images using the local filesystem. You can customize the name and path of
 the volume used by DTR, using the `docker/dtr reconfigure --dtr-storage-volume`
 option.
@@ -57,7 +57,8 @@ can ssh into the node where DTR is deployed and run:
 docker volume inspect dtr-registry-<replica-id>
 
 # Check the disk usage
-du -hs <path-to-volume>
+sudo du -hs \
+$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<dtr-replica>))
 ```
 
 ## NFS
