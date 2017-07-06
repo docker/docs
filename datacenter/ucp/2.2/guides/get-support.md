@@ -1,12 +1,11 @@
 ---
-description: Your Docker subscription gives you access to prioritized support. You
-  can file tickets via email, your the support portal.
-keywords: Docker, support, help
 title: Get support
+description: Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.
+keywords: Docker, support, help
 ---
 
-Your Docker Data Center, or Universal Control Plane subscription gives you
-access to prioritized support. The service levels depend on your subscription.
+Your Docker Enterprise Edition subscription gives you access to prioritized
+support. The service levels depend on your subscription.
 
 If you need help, you can file a ticket via:
 
@@ -21,8 +20,8 @@ support dump:
 
 ## From the UI
 
-1. Log into the UCP UI with an administrator account.
-2. On the top-right menu, **click your username**, and choose **Support Dump**.
+1. Log into the UCP web UI with an administrator account.
+2. In the top-left menu, click your username and choose **Support Dump**.
 
 ![](images/get-support-1.png){: .with-border}
 
@@ -35,10 +34,10 @@ and run:
 docker run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.docker_image }} \
+  {{ page.ucp_latest_image }} \
   support > docker-support.tgz
 ```
 
 This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
-from all the manager nodes.
+from all of the manager nodes.

@@ -9,8 +9,11 @@ use a specific secret in their services and which users can delete the secret.
 
 ## Grant access to a secret
 
-As with most resources managed by UCP, the way to grant permission to a set
-of users to use a secret, is by applying the `com.docker.ucp.access.label` to
+As with other resources managed by UCP, the way to grant permission to a set
+of users to use a secret is by creating a grant against the collection that
+contains the secret.
+
+is by applying the `com.docker.ucp.access.label` to
 the secret.
 
 ![](../../images/grant-access-secrets-1.png){: .with-border}

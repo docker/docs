@@ -1,26 +1,22 @@
 ---
 title: Manage secrets
 description: Learn how to manage your passwords, certificates, or other secrets in a secure way with Docker Datacenter
-keywords: Docker, UCP, secrets, secrets management
+keywords: UCP, secrets, secrets management
 ---
 
-[![Secrets](../../images/secrets_video.png)](https://www.youtube.com/watch?v=8CaiJ9uZEk8 "Working with Secrets"){:target="_blank"}
-
-When deploying and orchestrating services, you often need to configure those
-services with sensitive information like passwords, TLS certificates, or
-private keys.
+When deploying and orchestrating services, you often need to configure them
+with sensitive information like passwords, TLS certificates, or private keys.
 
 Universal Control Plane allows you to store this sensitive information, also
-know as secrets, in a secure way. It also gives you role-based access control
+known as *secrets*, in a secure way. It also gives you role-based access control
 so that you can control which users can use a secret in their services
 and which ones can manage the secret.
 
 UCP extends the functionality provided by Docker Engine, so you can continue
 using the same workflows and tools you already use, like the Docker CLI client.
+[Learn how to use secrets with Docker](/engine/swarm/secrets/).
 
-<!-- todo: add link when 1.13 is available [Learn how to use secrets with Docker](/engine/swarm/secrets/) -->
-
-In this example we're going to deploy a WordPress application that's composed of
+In this example, we're going to deploy a WordPress application that's composed of
 two services:
 
 * wordpress: The service that runs Apache, PHP, and WordPress
@@ -28,17 +24,19 @@ two services:
 
 Instead of configuring our services to use a plain text password stored in an
 environment variable, we're going to create a secret to store the password.
-When we deploy those services we'll attach the secret to them, which creates
-a file with the password inside the container running the service. Our services
-will be able to use that file, but no one else will be able to see the
-plain text password.
+When we deploy those services, we'll attach the secret to them, which creates
+a file with the password inside the container running the service.
+Our services will be able to use that file, but no one else will be able
+to see the plain text password.
 
 To make things simpler, we're not going to configure the database service to
 persist data. When the service stops, the data is lost.
 
 ## Create a secret
 
-In the **UCP web UI**, navigate to **Resources**, and click **Secrets**.
+In the UCP web UI, navigate to **Secrets** page and click **Create Secret**
+to create a new secret. Once you create the secret you won't be able to edit
+it or see the secret data again.
 
 ![](../../images/manage-secrets-1.png){: .with-border}
 

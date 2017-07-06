@@ -1,22 +1,23 @@
 ---
+title: UCP architecture
 description: Learn about the architecture of Docker Universal Control Plane.
 keywords: docker, ucp, architecture
-title: UCP architecture
 ---
 
-Universal Control Plane is a containerized application that runs on [Docker Enterprise Edition](/enterprise/index.md) and extends its functionality to
-make it easier to deploy, configure, and monitor your applications at scale.
+Universal Control Plane is a containerized application that runs on
+[Docker Enterprise Edition](/enterprise/index.md) and extends its functionality
+to make it easier to deploy, configure, and monitor your applications at scale.
 
-It also secures Docker with role-based access control so that only authorized
+UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your Docker cluster.
 
 ![](images/architecture-1.svg)
 
-Once Universal Control Plane (UCP) is deployed, developers and IT operations
-no longer interact with Docker Engine directly, but interact with UCP instead.
-Since UCP exposes the standard Docker API this is all done transparently, so
-that you can use the tools you already know and love like the Docker CLI client
-and Docker Compose.
+Once Universal Control Plane (UCP) instance is deployed, developers and IT
+operations no longer interact with Docker Engine directly, but interact with
+UCP instead. Since UCP exposes the standard Docker API, this is all done
+transparently, so that you can use the tools you already know and love, like
+the Docker CLI client and Docker Compose.
 
 
 ## Under the hood
@@ -26,31 +27,38 @@ by Docker.
 
 ![](images/architecture-2.svg)
 
-A swarm is a collection of nodes that are in the same Docker swarm. [Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two modes: Manager or Worker. If nodes are not already running in a swarm when installing UCP, nodes will be configured to run in swarm mode.
+A swarm is a collection of nodes that are in the same Docker cluster.
+[Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
+modes: Manager or Worker. If nodes are not already running in a swarm when
+installing UCP, nodes will be configured to run in swarm mode.
 
 When you deploy UCP, it starts running a globally scheduled service called
-`ucp-agent`. This service monitors the node where it is running and starts
-and stops UCP services, based on whether that node is a
+`ucp-agent`. This service monitors the node where it's running and starts
+and stops UCP services, based on whether the node is a
 [manager or a worker node](/engine/swarm/key-concepts.md).
 
 If the node is a:
 
 * **Manager**: the `ucp-agent` service automatically starts serving all UCP
-components including the UCP web UI and data stores used by UCP. The `ucp-agent` accomplishes this by [deploying several containers](#ucp-components-in-manager-nodes) on the node. By promoting a node to manager, UCP automatically becomes highly available and fault tolerant.
-* **Worker**: on worker nodes the `ucp-agent` service starts serving a proxy
-service that ensures only authorized users and other UCP services can run Docker
-commands in that node. The `ucp-agent` only deploys a [subset of containers](#ucp-components-in-worker-nodes) on worker nodes.
-
+  components, including the UCP web UI and data stores used by UCP. The
+  `ucp-agent` accomplishes this by
+  [deploying several containers](#ucp-components-in-manager-nodes)
+  on the node. By promoting a node to manager, UCP automatically becomes
+  highly available and fault tolerant.
+* **Worker**: on worker nodes, the `ucp-agent` service starts serving a proxy
+  service that ensures only authorized users and other UCP services can run
+  Docker commands in that node. The `ucp-agent` deploys a
+  [subset of containers](#ucp-components-in-worker-nodes) on worker nodes.
 
 ## UCP internal components
 
 The core component of UCP is a globally-scheduled service called `ucp-agent`.
-When you install UCP on a node, or join a node to a swarm that is being managed
+When you install UCP on a node, or join a node to a swarm that's being managed
 by UCP, the `ucp-agent` service starts running on that node.
 
 Once this service is running, it deploys containers with other UCP components,
-and ensures they keep running. The UCP components that are deployed
-on a node depend on whether that node is a manager or a worker.
+and it ensures they keep running. The UCP components that are deployed
+on a node depend on whether the node is a manager or a worker.
 
 ### UCP components in manager nodes
 
@@ -71,8 +79,6 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | ucp-metrics         | Used to collect and process metrics for a node, like the disk space available                                                                                                                     |
 | ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                 |
 | ucp-swarm-manager   | Used to provide backwards-compatibility with Docker Swarm                                                                                                                                         |
-
-
 
 
 ### UCP components in worker nodes
@@ -120,7 +126,7 @@ By default, the data for these volumes can be found at
 
 There are two ways to interact with UCP: the web UI or the CLI.
 
-You can use the UCP web UI to manage your cluster, grant and revoke user
+You can use the UCP web UI to manage your swarm, grant and revoke user
 permissions, deploy, configure, manage, and monitor your applications.
 
 ![](images/architecture-3.svg)
