@@ -22,7 +22,7 @@ You also need permissions to attach services to the `ucp-hrm` network.
 
 ## Deploy WordPress
 
-Log in the UCP web UI, navigate to the **Services** page, and click
+Log in to the UCP web UI, navigate to the **Services** page, and click
 **Create Service**. Then create a WordPress service with the following
 configuration:
 
