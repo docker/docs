@@ -1,15 +1,15 @@
 This table shows which Compose file versions support specific Docker releases.
 
-| **Compose file format** | **Docker Engine release** |
-|  -------------------    |    ------------------     |
-|      3.3                |       17.06.0+            |
-|      3.2                |       17.04.0+            |
-|      3.1                |       1.13.1+             |
-|      3.0                |       1.13.0+             |
-|      2.2                |       1.13.0+             |
-|      2.1                |       1.12.0+             |
-|      2.0                |       1.10.0+             |
-|      1.0                |       1.9.1.+             |
+| **Compose file format** | **Docker Engine release** | **Docker Compose release** |
+|  -------------------    |    ------------------     |    -------------------     |
+|      3.3                |       17.06.0+            |           1.14.0+          |
+|      3.2                |       17.04.0+            |           1.12.0+          |
+|      3.1                |       1.13.1+             |           1.11.1+          |
+|      3.0                |       1.13.0+             |           1.10.0+          |
+|      2.2                |       1.13.0+             |           1.13.0+          |
+|      2.1                |       1.12.0+             |           1.9.0+           |
+|      2.0                |       1.10.0+             |           1.6.0+           |
+|      1.0                |       1.9.1.+             |           1.0.0+           |
 
 In addition to Compose file format versions shown in the table, the Compose
 itself is on a release schedule, as shown in [Compose
