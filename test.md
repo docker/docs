@@ -11,9 +11,10 @@ automatically inserted.
 
 ## Heading 2
 
-This is the highest heading included in the right-nav. To include more heading
-levels, set `toc_min: 1` in the page-s front-matter. You can go all the way to
-6, but if `toc_min` is geater than `toc_max` then no headings will show.
+This is the highest heading included in the right navigation bar.
+To include more heading levels, set `toc_min: 1` in the page-s front-matter.
+You can go all the way to 6, but if `toc_min` is geater than `toc_max` then no
+headings will show.
 
 ### Heading 3
 
