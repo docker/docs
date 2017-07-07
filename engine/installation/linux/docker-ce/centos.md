@@ -130,6 +130,51 @@ from the repository.
     ```bash
     $ sudo yum install docker-ce
     ```
+    >**Exception**: While installation on centos may get issue as below:
+    ```bash
+    $ yum install docker-ce
+      Loaded plugins: fastestmirror, langpacks
+      docker-ce-edge                                                                                                                                   | 2.9 kB  00:00:00
+      docker-ce-stable                                                                                                                                 | 2.9 kB  00:00:00
+      Loading mirror speeds from cached hostfile
+      Package docker-ce-selinux is obsoleted by docker-ce, trying to install docker-ce-17.06.0.ce-1.el7.centos.x86_64 instead
+      Resolving Dependencies
+      --> Running transaction check
+      ---> Package docker-ce.x86_64 0:17.06.0.ce-1.el7.centos will be installed
+      --> Processing Dependency: container-selinux >= 2.9 for package: docker-ce-17.06.0.ce-1.el7.centos.x86_64
+      --> Finished Dependency Resolution
+      Error: Package: docker-ce-17.06.0.ce-1.el7.centos.x86_64 (docker-ce-edge)
+           Requires: container-selinux >= 2.9
+      You could try using --skip-broken to work around the problem
+      You could try running: rpm -Va --nofiles --nodigest
+    ```
+    If you face issue above as such follow the steps below:
+    1. Create a yum repo as below.
+      ```bash
+      $cat /etc/yum.repos.d/centosupdates.repo
+       [centosupdates]
+       name=centosupdates
+       baseurl=http://mirror.centos.org/centos/7/updates/x86_64/
+       enabled=1
+      ```
+      ```bash
+      $cat /etc/yum.repos.d/centosextra.repo
+       [centosextra]
+       name=centosextra
+       baseurl=http://mirror.centos.org/centos/7/extras/x86_64/
+       enabled=1
+      ```
+      2. Now update and install the packages as below:
+      ```bash
+      yum  update  policycoreutils
+      yum  install policycoreutils-python
+      yum  install container-selinux
+      ```
+      3. Now install docker
+       ```bash
+          $ sudo yum install docker-ce
+       ```
+
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `yum install` or
