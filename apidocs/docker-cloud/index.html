@@ -210,7 +210,7 @@ set this globally, or specify it before each CLI command. To learn more, see the
 
 <p>An action represents an API call by a user. Details of the API call such as timestamp, origin IP address, and user agent are logged in the action object.</p>
 
-<p>Simple API calls that do not require asynchronous execution will return immediately with the appropiate HTTP error code and an action object will be created either in <code class="prettyprint">Success</code> or <code class="prettyprint">Failed</code> states. API calls that do require asynchronous execution will return HTTP code <code class="prettyprint">202 Accepted</code> immediately and create an action object in <code class="prettyprint">In progress</code> state, which will change to <code class="prettyprint">Success</code> or <code class="prettyprint">Failed</code> state depending on the outcome of the operation being performed. In both cases the response will include a <code class="prettyprint">X-DockerCloud-Action-URI</code> header with the resource URI of the created action.</p>
+<p>Simple API calls that do not require asynchronous execution will return immediately with the appropriate HTTP error code and an action object will be created either in <code class="prettyprint">Success</code> or <code class="prettyprint">Failed</code> states. API calls that do require asynchronous execution will return HTTP code <code class="prettyprint">202 Accepted</code> immediately and create an action object in <code class="prettyprint">In progress</code> state, which will change to <code class="prettyprint">Success</code> or <code class="prettyprint">Failed</code> state depending on the outcome of the operation being performed. In both cases the response will include a <code class="prettyprint">X-DockerCloud-Action-URI</code> header with the resource URI of the created action.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -1452,7 +1452,7 @@ set this globally, or specify it before each CLI command. To learn more, see the
 
 <ul>
 <li><code class="prettyprint">id</code>: AWS VPC identifier of the target VPC where the nodes of the cluster will be deployed (required)</li>
-<li><code class="prettyprint">subnets</code>: a list of target subnet indentifiers inside selected VPC. If you specify more than one subnet, Docker Cloud will balance among all of them following a high-availability schema (optional)</li>
+<li><code class="prettyprint">subnets</code>: a list of target subnet identifiers inside selected VPC. If you specify more than one subnet, Docker Cloud will balance among all of them following a high-availability schema (optional)</li>
 <li><code class="prettyprint">security_groups</code>: the security group that will be applied to every node of the cluster (optional)</li>
 </ul></li>
 <li><code class="prettyprint">iam</code>: IAM-related options (optional)
@@ -5265,7 +5265,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </tr>
 <tr>
 <td>roles</td>
-<td>List of Docker Cloud roles asigned to this container (see <a href="/docker-cloud/apps/api-roles/">API roles</a> for more information))</td>
+<td>List of Docker Cloud roles assigned to this container (see <a href="/docker-cloud/apps/api-roles/">API roles</a> for more information))</td>
 </tr>
 <tr>
 <td>linked_to_container</td>
@@ -6328,7 +6328,7 @@ container.execute("ls", handler=msg_handler)
 </tr>
 <tr>
 <td style="text-align: left">action</td>
-<td style="text-align: left">Type of action that was executed on the object. Posible values: <code class="prettyprint">create</code>, <code class="prettyprint">update</code> or <code class="prettyprint">delete</code></td>
+<td style="text-align: left">Type of action that was executed on the object. Possible values: <code class="prettyprint">create</code>, <code class="prettyprint">update</code> or <code class="prettyprint">delete</code></td>
 </tr>
 <tr>
 <td style="text-align: left">parents</td>
