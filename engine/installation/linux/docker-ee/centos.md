@@ -49,8 +49,8 @@ if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
 ```bash
 $ sudo yum remove docker \
                   docker-common \
-                  container-selinux \
                   docker-selinux \
+                  docker-engine-selinux \
                   docker-engine \
                   docker-ce
 ```
