@@ -39,6 +39,7 @@ using CloudFormation. For more about stable and edge channels, see the
   <tr valign="top">
   <td width="33%">
   {{aws_blue_latest}}
+  {{aws_blue_vpc_latest}}
   </td>
   <td width="34%">
   {{aws_blue_edge}}
