@@ -1,7 +1,7 @@
 ---
 title: docker/dtr backup
-keywords: docker, dtr, cli, backup
 description: Create a backup of DTR
+keywords: dtr, cli, backup
 ---
 
 Create a backup of DTR
@@ -37,15 +37,16 @@ Note:
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug`|Enable debug mode for additional logging|
-|`--existing-replica-id`|The ID of an existing DTR replica|
-|`--hub-password`|Password to use when pulling images|
-|`--hub-username`|Username to use when pulling images|
-|`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--ucp-insecure-tls`|Disable TLS verification for UCP|
-|`--ucp-password`|The UCP administrator password|
-|`--ucp-url`|The UCP URL including domain and port|
-|`--ucp-username`|The UCP administrator username|
+| Option                        | Environment Variable      | Description                                                                          |
+|:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
+| `--debug` | $DEBUG | Enable debug mode for additional logs. |
+| `--enzi-ca` | $ENZI_TLS_CA | Use a PEM-encoded TLS CA certificate for Enzi. |
+| `--enzi-insecure-tls` | $ENZI_TLS_INSECURE | Disable TLS verification for Enzi. |
+| `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica.To safely remove a DTR replica from the cluster, the remove command needs to notify  a healthy replica about the replica that's about to be removed.. |
+| `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
+| `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use --ucp-ca "$(cat ca.pem)". |
+| `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP.The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to man-in-the-middle attacks.  For production deployments, use --ucp-ca "$(cat ca.pem)" instead. |
+| `--ucp-password` | $UCP_PASSWORD | The UCP administrator password. |
+| `--ucp-url` | $UCP_URL | The UCP URL including domain and port. |
+| `--ucp-username` | $UCP_USERNAME | The UCP administrator username. |
 
