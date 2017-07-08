@@ -1,7 +1,7 @@
 ---
 title: docker/dtr images
-keywords: docker, dtr, cli, images
 description: List all the images necessary to install DTR
+keywords: dtr, cli, images
 ---
 
 List all the images necessary to install DTR
