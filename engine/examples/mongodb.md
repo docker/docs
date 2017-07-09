@@ -156,7 +156,12 @@ $ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo
 # Dockerized MongoDB, lean and mean!
 # Usage: docker run --name <name for container> -d <user-name>/<repository> --noprealloc --smallfiles
 $ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo --smallfiles
+```
+> **Warning!**: This can expose the mongo instance to all interfaces even when ufw is active and the net.ip binding for the mongodb instance is set to 127.0.0.1 which is the default.
 
+> `$ docker run -p 127.0.0.1:27017:27017 --name mongo_instance_001 -d my/repo` is one workaround. See [this askubuntu post](https://askubuntu.com/a/652572/323247).
+
+```
 # Checking out the logs of a MongoDB container
 # Usage: docker logs <name for container>
 $ docker logs mongo_instance_001
