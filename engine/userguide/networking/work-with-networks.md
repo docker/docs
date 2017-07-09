@@ -982,7 +982,7 @@ disconnect` command.
     network.
 
     ```bash
-    / # ping container1
+    / # ping 172.17.0.2
     PING container1 (172.17.0.2): 56 data bytes
     64 bytes from 172.17.0.2: seq=0 ttl=64 time=0.119 ms
     64 bytes from 172.17.0.2: seq=1 ttl=64 time=0.174 ms
