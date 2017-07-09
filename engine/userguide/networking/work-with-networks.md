@@ -749,7 +749,7 @@ The following example illustrates this limitation.
 
 
 4.  Try to reach these aliases from `container4` (which is connected to both
-    these networks) and `container5` (which is connected only to `isolated_nw`).
+    these networks) and `container3` (which is connected only to `isolated_nw`).
 
     ```bash
     $ docker attach container4
@@ -769,14 +769,14 @@ The following example illustrates this limitation.
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
     ```bash
-    $ docker attach container5
+    $ docker attach container3
 
     / # ping -w 4 scoped-app
     ping: bad address 'scoped-app'
 
     ```
 
-    Detach from `container5` and leave it running using `CTRL-p CTRL-q`.
+    Detach from `container3` and leave it running using `CTRL-p CTRL-q`.
 
 This shows that an alias is scoped to the network where it is defined, and only
 containers connected to that network can access the alias.
