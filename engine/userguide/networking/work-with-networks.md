@@ -670,7 +670,7 @@ The following example illustrates these points.
     ```
 
     You can no longer reach containers on the `isolated_nw` network from `container5`.
-    However, you can still reach `container4` (from `container4`) using the alias
+    However, you can still reach `container5` (from `container4`) using the alias
     `foo`.
 
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
