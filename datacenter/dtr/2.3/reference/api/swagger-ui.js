@@ -4,6 +4,17 @@
  * @link http://swagger.io
  * @license Apache-2.0
  */
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 (function(){'use strict';
 
 window.SwaggerUi = Backbone.Router.extend({
@@ -400,7 +411,7 @@ window.Docs = {
 
 		// If shebang has an operation nickname in it..
 		// e.g. /docs/#!/words/get_search
-		var fragments = $.param.fragment().split('/');
+		var fragments = location.hash.substring(1).split('/');
 		fragments.shift(); // get rid of the bang
 
 		switch (fragments.length) {
@@ -410,7 +421,7 @@ window.Docs = {
           var dom_id = 'resource_' + fragments[0];
 
           Docs.expandEndpointListForResource(fragments[0]);
-          $("#"+dom_id).slideto({highlight: false});
+          //$("#"+dom_id).slideto({highlight: false});
         }
 				break;
 			case 2:
@@ -418,7 +429,7 @@ window.Docs = {
 
         // Expand Resource
         Docs.expandEndpointListForResource(fragments[0]);
-        $("#"+dom_id).slideto({highlight: false});
+        //$("#"+dom_id).slideto({highlight: false});
 
         // Expand operation
 				var li_dom_id = fragments.join('_');
@@ -426,7 +437,7 @@ window.Docs = {
 
 
 				Docs.expandOperation($('#'+li_content_dom_id));
-				$('#'+li_dom_id).slideto({highlight: false});
+				//$('#'+li_dom_id).slideto({highlight: false});
 				break;
 		}
 
@@ -4806,6 +4817,10 @@ Operation.prototype.asCurl = function (args1, args2) {
   var results = [];
 
   results.push('-X ' + this.method.toUpperCase());
+  var user = getParameterByName('user');
+  if (user) {
+      results.push('--user ' + user);
+  }
 
   if (obj.headers) {
     var key;
@@ -31933,7 +31948,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     var elem = $('#' + Docs.escapeResourceName(this.parentId + '_' + this.nickname + '_content'));
     if (elem.is(':visible')){
       event.preventDefault();
-      $.bbq.pushState('#/', 2);
+      //$.bbq.pushState('#/', 2);
       Docs.collapseOperation(elem);
     } else {
       Docs.expandOperation(elem);
