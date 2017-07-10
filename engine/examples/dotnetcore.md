@@ -11,6 +11,7 @@ asp.net core title: Dockerizing a .NET application
 This example demonstrates how to dockerize an ASP.NET Core application.
 
 ## Why build ASP.NET Core?
+
 - [Open-source](https://github.com/aspnet/home)
 - Develop and run your ASP.NET Core apps cross-platform on Windows, MacOS and
   Linux
@@ -22,15 +23,16 @@ This example demonstrates how to dockerize an ASP.NET Core application.
 - Designed to provide an optimized development framework for apps that are
   deployed to the cloud or run on-premise
 - Modular components with minimal overhead retain flexibility while 
-  constructing
-  your solutions
+constructing your solutions
 
 ## Prerequisites
+
 This example assumes you already have an ASP.NET Core app 
 on your machine. If you are new to ASP.NET you can follow a [simple 
 tutorial](https://www.asp.net/get-started) to initialize a project or clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker-samples/tree/master/aspnetapp).
 
 ## Create a Dockerfile for an ASP.NET Core application
+
 1.  Create a `Dockerfile` in your project folder.
 2.  Add the text below to your `Dockerfile` for either Linux or [Windows
    Containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/).
@@ -61,8 +63,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 4.  To make your build context as small as possible add a [`.dockerignore`
    file](https://docs.docker.com/engine/reference/builder/#dockerignore-file) 
-   to
-   your project folder and copy the following into it.
+   to your project folder and copy the following into it.
 
 ```dockerignore
 bin\
@@ -70,15 +71,17 @@ obj\
 ```
 
 ## Build and run the Docker image
+
 1.  In the command prompt and navigate to your project folder.
 2.  Use the following commands to build and run your Docker image:
 
 ```console
-docker build -t aspnetapp .
-docker run -d -p 80:80 aspnetapp
+$ docker build -t aspnetapp .
+$ docker run -d -p 8080:80 --name myapp aspnetapp
 ```
 
 ## View the web page running from a container
+
 * Go to [localhost:80](http://localhost:80) to access your app in a web browser.
 * If you are using the Nano [Windows
   Container](https://docs.docker.com/docker-for-windows/) and have not updated
@@ -88,13 +91,12 @@ docker run -d -p 80:80 aspnetapp
   (Network Address Translation). You must hit the IP of the container
   directly. You can get the IP address of your container with the following
   steps:
-  1.  Run `docker ps` and copy the hash of your container ID.
-  2.  Run `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}"
-     HASH` where `HASH` is replaced with your container ID.
-  3.  Copy the container ip address and paste into your browser with port 80.
-     (Ex: 172.16.240.197:80)
+  1.  Run `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" myapp`
+  2.  Copy the container ip address and paste into your browser with port 80. 
+  (e.g.: `172.16.240.197`:80)
 
 ## Further reading
+
   - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
   - [Microsoft ASP.NET Core on Docker
     Hub](https://hub.docker.com/r/microsoft/aspnetcore/)
