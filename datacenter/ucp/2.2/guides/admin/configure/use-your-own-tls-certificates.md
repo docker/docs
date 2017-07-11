@@ -1,14 +1,13 @@
 ---
-description: Learn how to configure Docker Universal Control Plane to use your own
-  certificates.
-keywords: Universal Control Plane, UCP, certificate, authentication, tls
 title: Use your own TLS certificates
+description: Learn how to configure Docker Universal Control Plane to use your own certificates.
+keywords: Universal Control Plane, UCP, certificate, authentication, tls
 ---
 
 All UCP services are exposed using HTTPS, to ensure all communications between
-clients and UCP are encrypted. By default this is done using self-signed TLS
+clients and UCP are encrypted. By default, this is done using self-signed TLS
 certificates that are not trusted by client tools like web browsers. So when
-you try to access UCP, your browser will warn that it doesn't trust UCP or that
+you try to access UCP, your browser warns that it doesn't trust UCP or that
 UCP has an invalid certificate.
 
 ![invalid certificate](../../images/use-externally-signed-certs-1.png)
@@ -29,11 +28,12 @@ happen outside business peak hours. Your applications will continue running
 normally, but existing UCP client certificates will become invalid, so users
 will have to download new ones to [access UCP from the CLI](../../user/access-ucp/cli-based-access.md).
 
-## Customize the UCP TLS certificates
+## Configure UCP to use your own TLS certificates and keys
 
-To configure UCP to use your own TLS certificates and keys, go to the
-**UCP web UI**, navigate to the **Admin Settings** page,
-and click **Certificates**.
+In the UCP web UI, log in with administrator credentials and
+navigate to the **Admin Settings** page. 
+
+  In the left pane, click **Certificates**.
 
 ![](../../images/use-externally-signed-certs-2.png)
 
@@ -45,15 +45,15 @@ certificates, in this order.
 * A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. 
 Encrypted keys should have `ENCRYPTED` in the first line.
 
-Finally, click **Update** for the changes to take effect.
+Finally, click **Save** for the changes to take effect.
 
-After replacing the TLS certificates your users won't be able to authenticate
+After replacing the TLS certificates, your users won't be able to authenticate
 with their old client certificate bundles. Ask your users to go to the UCP
 web UI and [get new client certificate bundles](../../user/access-ucp/cli-based-access.md).
 
 If you deployed Docker Trusted Registry, you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
-[Learn how to configure DTR](/datacenter/dtr/2.2/reference/cli/reconfigure.md).
+[Learn how to configure DTR](/datacenter/dtr/2.3/reference/cli/reconfigure.md).
 
 ## Where to go next
 

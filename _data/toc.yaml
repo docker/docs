@@ -1615,7 +1615,7 @@ manuals:
         - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
           title: Scale your cluster
         - path: /datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/
-          title: Scale your cluster with Windows nodes
+          title: Join Windows worker nodes to a swarm
         - path: /datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/
           title: Set up high availability
         - path: /datacenter/ucp/2.2/guides/admin/configure/use-a-load-balancer/
@@ -1634,6 +1634,8 @@ manuals:
           title: Use domain names to access services
         - path: /datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/
           title: Run only the images you trust
+        - path: /datacenter/ucp/2.2/guides/admin/configure/integrate-with-dtr/
+          title: Integrate with Docker Trusted Registry
         - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/
           title: Integrate with LDAP
       - sectiontitle: Manage users
@@ -1646,10 +1648,10 @@ manuals:
           title: Create and manage teams
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
           title: Deploy a service with view-only access across an organization
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
-          title: Deploy a service with view-only access across an organization
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/grant-permissions/
           title: Grant permissions to users based on roles
+        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-nodes-between-teams/
+          title: Isolate swarm nodes between two different teams
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-volumes-between-teams/
           title: Isolate volumes between two different teams
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/manage-access-with-collections/

@@ -1,18 +1,16 @@
 ---
+title: Configure UCP logging
 description: Learn how to configure Docker Universal Control Plane to store your logs
   on an external log system.
 keywords: docker, ucp, integrate, logs
-title: Configure UCP logging
 ---
-
-## Configure UCP logging
 
 You can configure UCP for sending logs to a remote logging service:
 
-1. Log in to UCP with an administrator account
-2. Navigate to the **Settings** page
+1. Log in to UCP with an administrator account.
+2. Navigate to the **Admin Settings** page.
 3. Set the information about your logging server, and click
-**Enable Remote Logging**
+   **Enable Remote Logging**
 
 ![](../../images/configure-logs-1.png){: .with-border}
 
@@ -51,7 +49,7 @@ field for indexing.
 
 When deployed in a production environment, you should secure your ELK
 stack. UCP does not do this itself, but there are a number of 3rd party
-options that can accomplish this (e.g. Shield plug-in for Kibana)
+options that can accomplish this, like the Shield plug-in for Kibana.
 
 ## Where to go next
 

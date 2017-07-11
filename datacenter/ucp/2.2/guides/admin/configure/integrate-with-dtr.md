@@ -4,9 +4,9 @@ keywords: trusted, registry, integrate, UCP, DTR
 title: Integrate with Docker Trusted Registry
 ---
 
-Once you deploy Docker Trusted Registry (DTR), you can use it to store your Docker
-images and deploy services to UCP using those images.
-[Learn how deploy DTR](/datacenter/dtr/2.1/guides/install/index.md).
+Once you deploy Docker Trusted Registry (DTR), you can use it to store your
+Docker images and deploy services to UCP using these images.
+[Learn how to deploy DTR](/datacenter/dtr/2.3/guides/install/index.md).
 
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR).
 This means that you can deploy services from the UCP web UI, using Docker
@@ -15,7 +15,7 @@ images that are stored in DTR. You can also use a
 CLI.
 
 If you've configured DTR to use TLS certificates issued by a globally-trusted
-certificate authority you can skip this since all clients will automatically
+certificate authority, you can skip this, since all clients will automatically
 trust the TLS certificates used by DTR.
 
 If you're using the DTR default configurations or configured DTR to use
@@ -23,9 +23,10 @@ self-signed certificates, you need to configure all hosts that want to push
 or pull Docker images from DTR. This includes:
 
 * All UCP nodes
-* Your local computer or any other that wants to push or pull Docker images from DTR
+* Your local computer or any other that wants to push or pull Docker images
+  from DTR
 
-If your host is not configured to trust the DTR TLS certificates, you'll get an
+If your host isn't configured to trust the DTR TLS certificates, you'll get an
 error like:
 
 ```none
@@ -44,13 +45,13 @@ system:
 
   In your browser navigate to `https://<dtr-url>/ca` to download the TLS
   certificate used by DTR. Then
-  [add that certificate to the macOS trust store](https://support.apple.com/kb/PH18677?locale=en_US).
+  [add this certificate to the macOS trust store](https://support.apple.com/kb/PH18677?locale=en_US).
 
 * For Windows:
 
   In your browser navigate to `https://<dtr-url>/ca` to download the TLS
   certificate used by DTR. Then
-  [add that certificate to the Windows trust store](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+  [add this certificate to the Windows trust store](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
 
 * For Ubuntu:
 
@@ -80,8 +81,8 @@ system:
 
 ## 2. Test your local setup
 
-The best way to confirm that your computer is correctly configured, is by
-trying to pull and push images from your local Docker installation to DTR.
+To confirm that your computer is configured correctly, try to pull and push
+images from your local Docker installation to DTR.
 
 1.  Create a test repository on DTR.
 

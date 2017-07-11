@@ -8,7 +8,7 @@ keywords: authorize, authentication, users, teams, groups, sync, UCP, Docker
 You can extend the user's default permissions by granting them fine-grained
 permissions over resources. You do this by adding the user to a team.
 
-To create a new team, go to the **UCP web UI**, and navigate to the
+To create a new team, go to the UCP web UI, and navigate to the
 **Organizations** page.
 
 ![](../../images/create-and-manage-teams-1.png){: .with-border}
@@ -32,13 +32,13 @@ you want to add to the team.
 
 ![](../../images/create-and-manage-teams-3.png){: .with-border}
 
-## Sync team members with your organization's LDAP directory.
+## Sync team members with your organization's LDAP directory
 
 If UCP is configured to sync users with your organization's LDAP directory
 server, you will have the option to enable syncing the new team's members when
 creating a new team or when modifying settings of an existing team.
 [Learn how to configure integration with an LDAP directory](../configure/external-auth/index.md).
-Enabling this option will expand the form with additional field for configuring
+Enabling this option will expand the form with additional fields for configuring
 the sync of team members.
 
 ![](../../images/create-and-manage-teams-5.png){: .with-border}
@@ -54,7 +54,7 @@ synced to match the membership of the group.
 | Field                  | Description                                                                                           |
 |:-----------------------|:------------------------------------------------------------------------------------------------------|
 | Group DN               | This specifies the distinguished name of the group from which to select users.                        |
-| Group member attribute | The value of this group attribute corresponds to the distinguished names of the members of the group. |
+| Group Member Attribute | The value of this group attribute corresponds to the distinguished names of the members of the group. |
 
 **Match LDAP Search Results**
 
@@ -62,13 +62,13 @@ This option specifies that team members should be synced using a search query
 against your organization's LDAP directory. The team's membership will be
 synced to match the users in the search results.
 
-| Field         | Description                                                                                                                                            |
-|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Base DN       | The distinguished name of the node in the directory tree where the search should start looking for users.                                              |
-| Search scope  | Whether to perform the LDAP search on a single level of the LDAP tree, or search through the full LDAP tree starting at the Base DN.                   |
-| Search Filter | The LDAP search filter used to find users. If you leave this field empty, all existing users in the search scope will be added as members of the team. |
+| Field                                    | Description                                                                                                                                            |
+| :--------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base DN                                  | The distinguished name of the node in the directory tree where the search should start looking for users.                                              |
+| Search subtree instead of just one level | Whether to perform the LDAP search on a single level of the LDAP tree, or search through the full LDAP tree starting at the Base DN.                   |
+| Filter                                   | The LDAP search filter used to find users. If you leave this field empty, all existing users in the search scope will be added as members of the team. |
 
-**Immediately Sync Team Members**
+**Sync Now**
 
 Select this option to immediately run an LDAP sync operation after saving the
 configuration for the team. It may take a moment before the members of the team
@@ -76,12 +76,14 @@ are fully synced.
 
 ## Manage team permissions
 
-Create a grant to manage the team's permissions. [Learn how to grant permissions to users based on roles](grant-permissions.md).
+Create a grant to manage the team's permissions.
+[Learn how to grant permissions to users based on roles](grant-permissions.md).
 
 ![](../../images/create-and-manage-teams-4.png){: .with-border}
 
-In the example above, members of the "Operations" team have permissions to
-create and edit resources.
+In the example above, members of the `Data Center` team have
+`Restricted Control` permissions to create and edit resources in
+the `Data Center Resources` collection.
 
 ## Where to go next
 
