@@ -118,11 +118,11 @@ volumes:
   db-data:
 ```
 
-> You can define services in this YAML file that feature a `deploy:` key, which
-schedules the containers on certain nodes, defines their restart behavior,
-configures the number of replicas, and so on. These features are provided
-by the Compose V3 file format.
-[Learn about Compose files](/compose/compose-file/).
+>  You can define services in this YAML file that feature a `deploy:` key, which
+>  schedules the containers on certain nodes, defines their restart behavior,
+>  configures the number of replicas, and so on. These features are provided
+>  by the Compose V3 file format.
+>  [Learn about Compose files](/compose/compose-file/).
 
 In your command line, navigate to the place where you've created the
 `docker-compose.yml` file and deploy the application to UCP by running `docker

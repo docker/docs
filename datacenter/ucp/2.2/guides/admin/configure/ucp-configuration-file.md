@@ -1,7 +1,7 @@
 ---
+title: UCP configuration file
 description: Configure UCP deployments.
 keywords: docker enterprise edition, ucp, universal control plane, swarm, cluster configuration, deploy
-title: UCP configuration file
 ---
 
 Override the default UCP settings by providing a configuration file when you create 
@@ -16,116 +16,98 @@ Specify your configuration settings in a TOML file. For more info, see
 
 ## Example configuration file
 
-Here's an example TOML config file that shows how to configure UCP settings.
+You can see an example TOML config file that shows how to configure UCP
+settings. From the command line, run UCP with the `example-config` option:
 
-```
-// ExampleConfig contains an example config to help users understand how to configure UCP.
-
-[[registries]]
-
-# The address used to connect to the DTR instance tied to this UCP cluster.
-host_address="example.com:444"
-
-# The DTR instance's OpenID Connect Client ID, as registered with our auth provider.
-service_id=""
-
-# The root CA bundle for the DTR instance (if using a custom CA).
-ca_bundle="-----BEGIN CERTIFICATE-----\nMIIEyjCCArKgAwIBAgIRAJYDdNEtRX3njQ4JJVCuaScwDQYJKoZIhvcNAQELBQAw\n..."
-
-[scheduling_configuration]
-
-# Allow admins to schedule containers on managers
-# Set to true to allow admins to schedule on manager
-enable_admin_ucp_scheduling=true
-
-# Allow non-admin users to schedule containers on managers
-# Set to true to allow users to schedule on managers
-enable_user_ucp_scheduling=true
-
-[tracking_configuration]
-
-# Disable analytics of usage information
-# Set to true to disable analytics
-disable_usageinfo=false
-
-# Disable analytics of API call information
-# Set to true to disable analytics
-disable_tracking=false
-
-# Anonymize analytic data
-# Set to true to hide your license ID
-anonymize_tracking=false
-
-[trust_configuration]
-
-# Require images be signed by content trust
-require_content_trust=false
-
-# Specify users or teams which must sign images
-require_signature_from=["team1", "team2"]
-
-[log_configuration]
-
-# Specify the protocol to use for remote logging
-protocol="tcp"
-
-# Specify a remote syslog server to send UCP controller logs to
-# if omitted, controller logs will be sent through the default
-# docker daemon logging driver from the ucp-controller container
-host="example.com"
-
-# Set the logging level for UCP components - uses syslog levels
-level="DEBUG"
-
-[license_configuration]
-
-# Enable attempted automatic license renewal when the license nears expiration
-# If disabled, you must manually upload renewed licesnse after expiration.
-auto_refresh=true
-
-[cluster_config]
-
-# Configures the port the ucp-controller listens to
-controller_port=443
-
-# Configures the port the ucp-swarm-manager listens to
-swarm_port=2376
-
-# Configures Swarm scheduler strategy for container scheduling
-# This does not affect swarm-mode services
-swarm_strategy="spread"
-
-# Configures DNS settings for the UCP components
-dns=[]
-dns_opt=[]
-dns_search=[]
-
-# Turn on specialized debugging endpoints for profiling UCP performance
-profiling_enabled=false
-
-# Tune the KV store timeout and snapshot settings
-kv_timeout=5000 # milliseconds
-kv_snapshot_count=20000
-
-# Specify an optional external LB for default links to services with expose ports in the UI
-external_service_lb="example.com"
-
-# Adjust the metrics retention time
-metrics_retention_time="24h"
-
-# Set the interval for how frequently managers gather metrics from nodes in the cluster
-metrics_scrape_interval="1m"
-
-# Set the interval for how frequently storage metrics are gathered
-# this operation can be expensive when large volumes are present
-metrics_disk_usage_interval="2h"
+```bash
+$ docker container run --rm docker/ucp:2.2.0-latest example-config
 ```
 
-## Config file and web UI
+## Configuration file and web UI
 
 Admin users can open the UCP web UI, navigate to **Admin Settings**, 
 and change UCP settings there. In most cases, the web UI is a front end 
 for modifying this config file.
+
+## auth table
+
+| Parameter               | Required | Description                                                                                                                                                                        |
+| ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `backend`               | no       | The name of the authorization backend to use, either `managed` or `ldap`. The default is `managed`.                                                                                |
+| `default_new_user_role` | no       | The role that new users get for their private collections. Values are `admin`, `viewonly`, `scheduler`, `restrictedcontrol`, or `fullcontrol`. The default is `restrictedcontrol`. |
+
+
+## auth.sessions
+
+| Parameter                   | Required | Description                                                                                                                                                                                                                                                                              |
+| --------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 4320, which is 72 hours.                                                                                                                                                                                                        |
+| `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 1440, which is 24 hours.                                                   |
+| `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit,  the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5. |
+
+## auth.ldap (optional)
+
+| Parameter               | Required | Description                                                                                                                                                        |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `server_url`            | no       | The URL of the LDAP server.                                                                                                                                        |
+| `no_simple_pagination`  | no       | Set to `true` if the LDAP server doesn't support the Simple Paged Results control extension (RFC 2696). The default is `false`.                                     |
+| `start_tls`             | no       | Set to `true` to use StartTLS to secure the connection to the server, ignored if the server URL scheme is 'ldaps://'. The default is `false`.                                                   |
+| `root_certs`            | no       | A root certificate PEM bundle to use when establishing a TLS connection to the server.                                                                             |
+| `tls_skip_verify`       | no       | Set to `true` to skip verifying the server's certificate when establishing a TLS connection, which isn't recommended unless testing on a secure network. The default is `false`. |
+| `reader_dn`             | no       | The distinguished name the system uses to bind to the LDAP server when performing searches.                                                                        |
+| `reader_password`       | no       | The password that the system uses to bind to the LDAP server when performing searches.                                                                             |
+| `sync_schedule`         | no       | The scheduled time for automatic LDAP sync jobs, in CRON format with seconds omitted, default is @hourly if empty or omitted.                                      |
+| `jit_user_provisioning` | no       | Whether to only create user accounts upon first login (recommended). The default is `true`.                                                                        |
+
+
+## auth.ldap.additional_domains array (optional)
+
+A list of additional LDAP domains and corresponding server configs from which
+to sync users and team members. This is an advanced feature which most
+environments don't need.
+
+| Parameter              | Required | Description                                                                                                                                                                                                                                                                 |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `domain`               | no       | The root domain component of this server, for example, `dc=example,dc=com`. A longest-suffix match of the base DN for LDAP searches is used to select which LDAP server to use for search requests. If no matching domain is found, the default LDAP server config is used. |
+| `server_url`           | no       | The URL of the LDAP server for the current additional domain.                                                                                                                                                                                                               |
+| `no_simple_pagination` | no       | Set to true if the LDAP server for this additional domain does not support the Simple Paged Results control extension (RFC 2696). The default is `false`.                                                                                                                   |
+| `server_url`           | no       | The URL of the LDAP server.                                                                                                                                                                                                                                                 |
+| `start_tls`            | no       | Whether to use StartTLS to secure the connection to the server, ignored if the server URL scheme is 'ldaps://'.                                                                                                                                                             |
+| `root_certs`           | no       | A root certificate PEM bundle to use when establishing a TLS connection to the server for the current additional domain.                                                                                                                                                    |
+| `tls_skip_verify`      | no       | Whether to skip verifying the additional domain server's certificate when establishing a TLS connection, not recommended unless testing on a secure network. The default is `true`.                                                                                         |
+| `reader_dn`            | no       | The distinguished name the system uses to bind to the LDAP server when performing searches under the additional domain.                                                                                                                                                     |
+| `reader_password`      | no       | The password that the system uses to bind to the LDAP server when performing searches under the additional domain.                                                                                                                                                          |
+
+## auth.ldap.user_search_configs array (optional)
+
+Settings for syncing users.
+
+| Parameter                 | Required | Description                                                                                                                                                                                                                                                                          |
+| ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `base_dn`                 | no       | The distinguished name of the element from which the LDAP server will search for users, for example, `ou=people,dc=example,dc=com`.                                                                                                                                                  |
+| `scope_subtree`           | no       | Set to `true` to search for users in the entire subtree of the base DN. Set to `false` to search only one level under the base DN. The default is `false`.                                                                                                                           |
+| `username_attr`           | no       | The name of the attribute of the LDAP user element which should be selected as the username. The default is `uid`.                                                                                                                                                                   |
+| `full_name_attr`          | no       | The name of the attribute of the LDAP user element which should be selected as the full name of the user. The default is `cn`.                                                                                                                                                       |
+| `filter`                  | no       | The LDAP search filter used to select user elements, for example, `(&(objectClass=person)(objectClass=user))`. May be left blank.                                                                                                                                                    |
+| `match_group`             | no       | Whether to additionally filter users to those who are direct members of a group. The default is `true`.                                                                                                                                                                              |
+| `match_group_dn`          | no       | The distinguished name of the LDAP group, for example, `cn=ddc-users,ou=groups,dc=example,dc=com`. Required if `matchGroup` is `true`.                                                                                                                                               |
+| `match_group_member_attr` | no       | The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if `matchGroup` is `true`. The default is `member`.                                                                                                                         |
+| `match_group_iterate`     | no       | Set to `true` to to get all of the user attributes by iterating through the group members and performing a lookup for each one separately. Use this instead of searching users first, then applying the group selection filter. Ignored if `matchGroup` is `false`. The default is `false`. |
+
+## auth.ldap.admin_sync_opts (optional)
+
+Settings for syncing system admininistrator users.
+
+| Parameter              | Required | Description                                                                                                                                                                                               |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enable_sync`          | no       | Set to `true` to to enable syncing admins. If `false`, all other fields in this table are ignored. The default is `true`.                                                                                 |
+| `select_group_members` | no       | Set to `true` to sync using a group DN and member attribute selection. Set to `false` to use a search filter. The default is `true`.                                                                      |
+| `group_dn`             | no       | The distinguished name of the LDAP group, for example, `cn=ddc-admins,ou=groups,dc=example,dc=com`. Required if `select_group_members` is `true`.                                                         |
+| `group_member_attr`    | no       | The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if `select_group_members` is `true`. The default is `member`.                                    |
+| `search_base_dn`       | no       | The distinguished name of the element from which the LDAP server will search for users, for example, `ou=people,dc=example,dc=com`. Required if `select_group_members` is `false`.                        |
+| `search_scope_subtree` | no       | Set to `true` to search for users in the entire subtree of the base DN. Set to `false` to search only one level under the base DN. The default is `false`. Required if `select_group_members` is `false`. |
+| `search_filter`        | no       | The LDAP search filter used to select users if `select_group_members` is `false`, for example, `(memberOf=cn=ddc-admins,ou=groups,dc=example,dc=com)`. May be left blank.                                 |
+
 
 ## registries array (required)
 
