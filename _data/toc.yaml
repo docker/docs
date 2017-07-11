@@ -1866,12 +1866,8 @@ manuals:
         title: Create deployment policies
     - path: /datacenter/dtr/2.3/reference/api/
       title: API reference
-    - sectiontitle: Release notes
-      section:
-      - path: /datacenter/dtr/2.3/guides/release-notes/
-        title: Release notes
-      - path: /datacenter/dtr/2.3/guides/release-notes/incompatibilities-and-breaking-changes/
-        title: Incompatibilities and breaking changes
+    - path: /datacenter/dtr/2.3/guides/release-notes/
+      title: Release notes  
     - path: /datacenter/dtr/2.3/guides/support/
       title: Get support
   - sectiontitle: Previous versions
