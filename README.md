@@ -137,8 +137,7 @@ You have three options:
        git clone https://github.com/docker/docker.github.io.git
        ```
 
-    b. Install Ruby 2.3 or later as described in [Installing Ruby]
-    (https://www.ruby-lang.org/en/documentation/installation/).
+    b. Install Ruby 2.3 or later as described in [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
 
     c. Install Bundler:
 
