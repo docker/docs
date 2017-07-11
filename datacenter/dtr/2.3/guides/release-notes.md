@@ -1,6 +1,6 @@
 ---
-title: DTR {{ page.dtr_version_minor }} release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry {{ page.dtr_version_minor }}
+title: DTR 2.3 release notes
+description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry 2.3
 keywords: docker trusted registry, whats new, release notes
 ---
 
