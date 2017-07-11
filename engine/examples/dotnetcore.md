@@ -82,7 +82,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 
 ## View the web page running from a container
 
-* Go to [localhost:80](http://localhost:80) to access your app in a web browser.
+* Go to [localhost:8080](http://localhost:8080) to access your app in a web browser.
 * If you are using the Nano [Windows
   Container](https://docs.docker.com/docker-for-windows/) and have not updated
    to the Windows Creator Update there is a bug affecting how [Windows 10 
@@ -92,8 +92,8 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
   directly. You can get the IP address of your container with the following
   steps:
   1.  Run `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" myapp`
-  2.  Copy the container ip address and paste into your browser with port 80. 
-  (e.g.: `172.16.240.197`:80)
+  2.  Copy the container ip address and paste into your browser. 
+  (For example, `172.16.240.197`)
 
 ## Further reading
 
