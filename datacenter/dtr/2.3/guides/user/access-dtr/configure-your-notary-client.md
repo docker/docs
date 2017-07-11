@@ -102,7 +102,7 @@ repository.
 
 The last step in configuring the Notary CLI client is to import the private
 key of your UCP client bundle.
-[Get a new client bundle if you don't have one yet](/datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access.md).
+[Get a new client bundle if you don't have one yet](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
 
 Import the private key in your UCP bundle into the Notary CLI client:
 

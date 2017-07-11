@@ -39,7 +39,7 @@ The member of the IT ops team then asks the QA team for their public key
 certificate files that are part of their UCP client bundle.
 
 If they don't have a UCP client bundle,
-[they can download a new one](/datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access.md).
+[they can download a new one](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
 
 ## Delegate image signing
 
