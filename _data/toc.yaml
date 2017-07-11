@@ -1796,6 +1796,8 @@ manuals:
           title: Create and manage users
         - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-teams/
           title: Create and manage teams
+        - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-orgs/
+          title: Create and manage organizations
         - path: /datacenter/dtr/2.3/guides/admin/manage-users/permission-levels/
           title: Permission levels
       - sectiontitle: Monitor and troubleshoot
@@ -1867,7 +1869,7 @@ manuals:
     - path: /datacenter/dtr/2.3/reference/api/
       title: API reference
     - path: /datacenter/dtr/2.3/guides/release-notes/
-      title: Release notes  
+      title: Release notes
     - path: /datacenter/dtr/2.3/guides/support/
       title: Get support
   - sectiontitle: Previous versions
