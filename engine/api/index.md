@@ -143,4 +143,4 @@ programming languages and by hitting the API directly with `curl`:
   </div>
 </div>
 
-To learn more, take a look at the [getting started guide](getting-started.md)
+To learn more, take a look at the [getting started guide](getting-started.md).
