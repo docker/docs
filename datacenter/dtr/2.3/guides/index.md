@@ -30,10 +30,10 @@ and metadata such that if a machine fails, DTR continues to operate and can be r
 
 ## Efficiency
 
-DTR has the ability to [cache images closer to users](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/)
+DTR has the ability to [cache images closer to users](../admin/configure/deploy-caches/index.md)
 to reduce the amount of bandwidth used during docker pulls.
 
-DTR has the ability to [clean up unreferenced manifests and layers](https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/garbage-collection/).
+DTR has the ability to [clean up unreferenced manifests and layers](../configure/garbage-collection.md).
 
 ## Built-in access control
 

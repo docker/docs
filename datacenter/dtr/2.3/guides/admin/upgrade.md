@@ -38,13 +38,12 @@ to ensure the impact on your business is close to none.
 ## Minor upgrade
 
 Before starting your upgrade planning, make sure that the version of UCP you are
-using is supported by the version of DTR you are trying to upgrade to. <!--(TODO:
-link to the compatibility matrix)-->
+using is supported by the version of DTR you are trying to upgrade to.
 
 > Backup DTR before upgrading
 >
 > Before performing any upgrade it’s important to backup. See
-> [DTR backups and recovery](/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery.md).
+> [DTR backups and recovery](backups-and-disaster-recovery.md).
 
 ### Step 1. Upgrade DTR to 2.2 if necessary
 
@@ -59,7 +58,7 @@ $ docker pull docker/dtr:{{ page.dtr_version_patch }}
 ```
 
 If the node you're upgrading doesn't have access to the internet, you can
-follow the [offline installation documentation](../install/install-offline.md)
+follow the [offline installation documentation](install/install-offline.md)
 to get the images.
 
 Once you have the latest image on your machine (and the images on the target

@@ -120,9 +120,9 @@ of the tar file created. The backup of the images should look like:
 ```none
 tar -tf {{ image_backup_file }}
 
-dtr-backup-v2.2.3/
-dtr-backup-v2.2.3/rethink/
-dtr-backup-v2.2.3/rethink/layers/
+dtr-backup-v{{ page.dtr_version_patch }}/
+dtr-backup-v{{ page.dtr_version_patch }}/rethink/
+dtr-backup-v{{ page.dtr_version_patch }}/rethink/layers/
 ```
 
 And the backup of the DTR metadata should look like:
@@ -131,10 +131,10 @@ And the backup of the DTR metadata should look like:
 tar -tf {{ backup-metadata.tar }}
 
 # The archive should look like this
-dtr-backup-v2.2.1/
-dtr-backup-v2.2.1/rethink/
-dtr-backup-v2.2.1/rethink/properties/
-dtr-backup-v2.2.1/rethink/properties/0
+dtr-backup-v{{ page.dtr_version_patch }}/
+dtr-backup-v{{ page.dtr_version_patch }}/rethink/
+dtr-backup-v{{ page.dtr_version_patch }}/rethink/properties/
+dtr-backup-v{{ page.dtr_version_patch }}/rethink/properties/0
 ```
 
 If you've encrypted the metadata backup, you can use:

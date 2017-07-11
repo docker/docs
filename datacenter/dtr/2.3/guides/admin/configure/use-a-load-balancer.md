@@ -58,7 +58,7 @@ the health of every replica in a cluster, querying each replica individiually is
 the preferred way to do it in real time.
 
 The `/api/v0/meta/cluster_status`
-[endpoint](https://docs.docker.com/datacenter/dtr/2.2/reference/api/)
+[endpoint](../../../reference/api)
 returns a JSON object for the entire cluster *as observed* by the replica being
 queried, and it takes the form:
 
