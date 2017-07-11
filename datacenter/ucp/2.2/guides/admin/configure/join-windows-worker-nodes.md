@@ -1,11 +1,11 @@
 ---
 title: Join Windows worker nodes to a swarm
-description: Join worker nodes that are running on Windows Server 2016 to a swarm managed by UCP. 
+description: Join worker nodes that are running on Windows Server 2016 to a swarm managed by UCP.
 keywords: UCP, swarm, Windows, cluster
 ---
 
 UCP supports worker nodes that run on Windows Server 2016. Only worker nodes
-are supported on Windows, and all manager nodes in the swarm must run on Linux. 
+are supported on Windows, and all manager nodes in the swarm must run on Linux.
 
 Follow these steps to enable a worker node on Windows.
 
@@ -35,7 +35,7 @@ UCP.
 >
 >  For internal development, install the dev binaries in the zip archive at
 >  [windows/amd64/docker-17.06.0-dev.zip](https://master.dockerproject.org/windows/amd64/docker-17.06.0-dev.zip),
->  because you need version 17.06 or later to join a UCP swarm. For Beta, the binaries 
+>  because you need version 17.06 or later to join a UCP swarm. For Beta, the binaries
 >  will be available publicly at [download.docker.com](https://download.docker.com/components/engine/windows-server).
 
 ## Configure the Windows node
@@ -44,7 +44,7 @@ Follow these steps to configure the docker daemon and the Windows environment.
 
 1.  Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 2.  Run the Windows worker setup script provided with `ucp-agent-win`.
-3.  Join the swarm with the token provided by the UCP web UI. 
+3.  Join the swarm with the token provided by the UCP web UI.
 
 ### Pull the Windows-specific images
 
@@ -58,7 +58,7 @@ dockerorcadev/ucp-dsinfo-win:2.2.0-5213679
 ```
 
 On Windows Server 2016, in a PowerShell terminal running as Administrator,
-log in to Docker Hub with the `docker login` command and pull the listed images. 
+log in to Docker Hub with the `docker login` command and pull the listed images.
 
 ```ps
 PS> docker pull dockerorcadev/ucp-agent-win:2.2.0-5213679
@@ -80,17 +80,17 @@ instance of Windows Server that will be a worker node.
 >  Internal development
 >
 >  For internal development, you need to
->  [run these commands manually](#configure-a-windows-worker-node-manually), 
+>  [run these commands manually](#configure-a-windows-worker-node-manually),
 >  because the script assumes access to public images. You need to be logged in
 >  to Docker Hub.
 
-### Compatibility with daemon.json 
+### Compatibility with daemon.json
 
 The script may be incompatible with installations that use a config file at
 `C:\ProgramData\docker\config\daemon.json`. If you use such a file, make sure
 that the daemon runs on port 2376 and that it uses certificates located in
 `C:\ProgramData\docker\daemoncerts`. If certificates don't exist in this
-directory, run `ucp-agent-win generate-certs`, as shown in Step 2 of the 
+directory, run `ucp-agent-win generate-certs`, as shown in Step 2 of the
 [Set up certs for the dockerd service](#set-up-certs-for-the-dockerd-service)
 procedure.
 
@@ -153,10 +153,12 @@ PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow 
 
 1.  Create the directory `C:\ProgramData\docker\daemoncerts`.
 2.  In a PowerShell terminal running as Administrator, run the following command
-    to generate certificates. 
+    to generate certificates.
+
     ```ps
     PS> docker run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs dockerorcadev/ucp-agent-win:2.2.0-5213679 generate-certs
     ```
+
 3.  To set up certificates, run the following commands to stop and unregister the
     `dockerd` service, register the service with the certificates, and restart the service.
 
@@ -175,3 +177,26 @@ The `dockerd` service and the Windows environment are now configured to join a U
 ```
 Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
 ```
+
+## Windows nodes limitations
+
+Some features are not yet supported on Windows nodes:
+
+* Networking
+  * The swarm mode routing mesh can't be used on Windows nodes. You can can expose
+  a port for your service in the host where it is running, and use the HTTP
+  routing mesh to make your service accessible using a domain name.
+  * Encrypted networks are not supported. If you've upgraded from a previous
+  version, you'll also need to recreate the `ucp-hrm` network to make it
+  unencrypted.
+* Secrets
+  * When using secrets with Windows services, Windows stores temporary secret
+  files on disk. You can use BitLocker on the volume containing the Docker
+  root directory to encrypt the secret data at rest.
+  * When creating a service which uses Windows containers, the options to
+  specify UID, GID, and mode are not supported for secrets. Secrets are
+  currently only accessible by administrators and and users with system access
+  within the container.
+* Mounts
+  * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
+  instead.
