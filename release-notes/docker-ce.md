@@ -46,7 +46,7 @@ For Docker releases prior to 17.03.0, see
 + Add support for csv format options to `--network` and `--network-add` [#docker/cli/62](https://github.com/docker/cli/pull/62) [#33130](https://github.com/moby/moby/pull/33130)
 - Fix stack compose bind-mount volumes on Windows [#docker/cli/136](https://github.com/docker/cli/pull/136)
 - Correctly handle a Docker daemon without registry info [#docker/cli/126](https://github.com/docker/cli/pull/126)
-+ Allow --detach and --quiet flags when using --rollback [#docker/cli/144](https://github.com/docker/cli/pull/144)
++ Allow `--detach` and `--quiet` flags when using --rollback [#docker/cli/144](https://github.com/docker/cli/pull/144)
 + Remove deprecated `--email` flag from `docker login` [#docker/cli/143](https://github.com/docker/cli/pull/143)
 * Adjusted `docker stats` memory output [#docker/cli/80](https://github.com/docker/cli/pull/80)
 
@@ -61,10 +61,10 @@ For Docker releases prior to 17.03.0, see
 
 ### Networking
 
-+ Add Support swarm-mode services with node-local networks such as macvlan, ipvlan, bridge, host  [#32981](https://github.com/moby/moby/pull/32981)
-+ Pass driver-options to network drivers on service creation [#32981] (https://github.com/moby/moby/pull/33130)
-+ Isolate Swarm Control-plane traffic from Application data traffic using --data-path-addr [#32717] (https://github.com/moby/moby/pull/32717)
-* Several improvments to  Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
++ Add Support swarm-mode services with node-local networks such as macvlan, ipvlan, bridge, host [#32981](https://github.com/moby/moby/pull/32981)
++ Pass driver-options to network drivers on service creation [#32981](https://github.com/moby/moby/pull/33130)
++ Isolate Swarm Control-plane traffic from Application data traffic using --data-path-addr [#32717](https://github.com/moby/moby/pull/32717)
+* Several improvments to Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
 
 ### Packaging
 
@@ -151,7 +151,7 @@ For Docker releases prior to 17.03.0, see
 
 - Fix `--api-cors-header` being ignored if `--api-enable-cors` is not set [#32174](https://github.com/docker/docker/pull/32174)
 - Cleanup docker tmp dir on start [#31741](https://github.com/docker/docker/pull/31741)
-- Deprecate `--graph` flag in favor or `--data-root`  [#28696](https://github.com/docker/docker/pull/28696)
+- Deprecate `--graph` flag in favor or `--data-root` [#28696](https://github.com/docker/docker/pull/28696)
 
 ### Logging
 
@@ -189,7 +189,7 @@ For Docker releases prior to 17.03.0, see
 * Add `--prune` option to `docker stack deploy` to remove services that are no longer defined in the docker-compose file [#31302](https://github.com/docker/docker/pull/31302)
 * Add `PORTS` column for `docker service ls` when using `ingress` mode [#30813](https://github.com/docker/docker/pull/30813)
 - Fix unnescessary re-deploying of tasks when environment-variables are used [#32364](https://github.com/docker/docker/pull/32364)
-- Fix `docker stack deploy` not supporting `endpoint_mode` when deploying from a docker compose file  [#32333](https://github.com/docker/docker/pull/32333)
+- Fix `docker stack deploy` not supporting `endpoint_mode` when deploying from a docker compose file [#32333](https://github.com/docker/docker/pull/32333)
 - Proceed with startup if cluster component cannot be created to allow recovering from a broken swarm setup [#31631](https://github.com/docker/docker/pull/31631)
 
 ### Security
@@ -253,7 +253,7 @@ For Docker releases prior to 17.03.0, see
 
 * Handle paused container when restoring without live-restore set [#31704](https://github.com/docker/docker/pull/31704)
 - Do not allow sub second in healthcheck options in Dockerfile [#31177](https://github.com/docker/docker/pull/31177)
-* Support name and id prefix in  `secret update` [#30856](https://github.com/docker/docker/pull/30856)
+* Support name and id prefix in `secret update` [#30856](https://github.com/docker/docker/pull/30856)
 * Use binary frame for websocket attach endpoint [#30460](https://github.com/docker/docker/pull/30460)
 * Fix linux mount calls not applying propagation type changes [#30416](https://github.com/docker/docker/pull/30416)
 * Fix ExecIds leak on failed `exec -i` [#30340](https://github.com/docker/docker/pull/30340)
@@ -350,7 +350,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 ### Runtime
 
 * Fix a deadlock in docker logs [#30223](https://github.com/docker/docker/pull/30223)
-* Fix cpu spin waiting for log write events [#31070](https://github.com/docker/docker/pull/31070)
+* Fix CPU spin waiting for log write events [#31070](https://github.com/docker/docker/pull/31070)
 * Fix a possible crash when using journald [#31231](https://github.com/docker/docker/pull/31231) [#31263](https://github.com/docker/docker/pull/31263)
 * Fix a panic on close of nil channel [#31274](https://github.com/docker/docker/pull/31274)
 * Fix duplicate mount point for `--volumes-from` in `docker run` [#29563](https://github.com/docker/docker/pull/29563)
