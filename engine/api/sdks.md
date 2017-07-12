@@ -36,7 +36,7 @@ To see how to start using it, [head to the getting started guide](getting-starte
 
 ## Other languages
 
-There a number of community supported libraries available for other languages. They have not been tested by the Docker maintainers for compatibility, so if you run into any issues, file them with the library maintainers.
+There are a number of community supported libraries available for other languages. They have not been tested by the Docker maintainers for compatibility, so if you run into any issues, file them with the library maintainers.
 
 | Language      | Library |
 | ------------- |---------|
