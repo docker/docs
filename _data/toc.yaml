@@ -1680,6 +1680,8 @@ manuals:
           title: backup
         - path: /datacenter/ucp/2.2/reference/cli/dump-certs/
           title: dump-certs
+        - path: /datacenter/ucp/2.2/reference/cli/example-config/
+          title: example-config
         - path: /datacenter/ucp/2.2/reference/cli/fingerprint/
           title: fingerprint
         - path: /datacenter/ucp/2.2/reference/cli/id/

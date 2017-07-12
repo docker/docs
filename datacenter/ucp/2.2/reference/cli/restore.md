@@ -6,6 +6,16 @@ keywords: docker, ucp, cli, restore
 
 Restore a UCP cluster from a backup
 
+## Usage
+
+```
+docker run --rm -i \
+        --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp \
+        restore [command options] < backup.tar
+```
+
 ## Description
 
 This command installs a new UCP cluster that is populated with the state of

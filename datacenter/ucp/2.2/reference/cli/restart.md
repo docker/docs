@@ -6,6 +6,16 @@ keywords: docker, ucp, cli, restart
 
 Start or restart UCP components running on this node
 
+## Usage
+
+```
+docker run --rm -it \
+        --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp \
+        restart [command options]
+```
+
 ## Options
 
 | Option                    | Description                |

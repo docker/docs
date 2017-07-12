@@ -6,6 +6,16 @@ keywords: docker, ucp, cli, backup
 
 Create a backup of a UCP manager node
 
+## Usage
+
+```bash
+docker run --rm -i \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    backup [command options] > backup.tar
+```
+
 ## Description
 
 This command creates a tar file with the contents of the volumes used by

@@ -6,6 +6,16 @@ keywords: docker, ucp, cli, images
 
 Verify the UCP images on this node
 
+## Usage
+
+```
+docker run --rm -it \
+        --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp \
+        images [command options]
+```
+
 ## Description
 
 This command checks the UCP images that are available in this node, and pulls
