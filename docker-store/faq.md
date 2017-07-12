@@ -31,7 +31,7 @@ accepted to the program, you'll set up a publisher profile and submit your
 images for review. Learn more about the publisher duties and requirements
 [here](https://success.docker.com/Store).
 
-## Docker Store billing Frequently Asked Questions
+## Docker Store billing frequently asked questions
 
 ### What forms of payment do you accept?
 
