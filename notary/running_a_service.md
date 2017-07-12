@@ -200,6 +200,44 @@ environment.
 The sample private key files in the Notary repository are obviously public knowledge
 and using them in a production deployment is highly insecure.
 
+### Certificates on CentOS
+
+For CentOS 6 and CentOS 7, use the following steps to add trusted root
+certificates.
+
+1.  Install the `ca-certificates` package: 
+    
+    ```bash
+    $ yum install ca-certificates
+    ```
+
+2.  Use the `update-ca-trust` command with the `force-enable` option
+    to enable dynamic CA configuration:
+
+    ```bash
+    $ update-ca-trust force-enable
+    ```
+
+3.  Copy the certificate to the `/etc/pki/ca-trust/source/anchors/` directory:
+
+    ```bash
+    $ cp your-cert.crt /etc/pki/ca-trust/source/anchors/`
+    ```
+
+4.  Use the `update-ca-trust` command to produce updated versions of the
+    consolidated configuration files:
+
+    ```bash
+    $ update-ca-trust extract
+    ```
+
+For CentOS 5, just add your certificate to the bundle. Append your trusted
+certificate to the bundle file at `/etc/pki/tls/certs/ca-bundle.crt`:
+
+```bash
+$ cat your-cert.crt >> /etc/pki/tls/certs/ca-bundle.crt
+```
+
 ### Databases
 
 The server and signer each require a database. These should be separate databases
