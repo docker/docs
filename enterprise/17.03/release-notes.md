@@ -20,7 +20,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.2-ce) of all changes since the release of Docker EE 17.03.1-ee-3
 
-*Note*: This release includes a fix for potential data loss under certain
+**Note**: This release includes a fix for potential data loss under certain
 circumstances with the local (built-in) volume driver.
 
 ## Docker EE 17.03.1-ee-3
@@ -29,7 +29,7 @@ circumstances with the local (built-in) volume driver.
 * Fix an issue with the SELinux policy for Oracle Linux [#31501](https://github.com/docker/docker/pull/31501)
 
 ## Docker EE 17.03.1-ee-2
-(28 March 2017)
+(28 Mar 2017)
 
 * Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
 
