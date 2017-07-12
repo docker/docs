@@ -13,7 +13,18 @@ The next step is creating a backup policy and disaster recovery plan.
 
 ## Backup policy
 
-As part of your backup policy you should regularly create backups of UCP.
+As part of your backup policy you should regularly create backups of swarm and
+UCP.
+
+When you create a UCP backup, you're only saving:
+
+* Users, teams, and permissions.
+* All UCP configuration options available under `Admin Settings`, such as the
+DDC subscription license, scheduling options, Content Trust and authentication
+backends.
+
+So you need to also create a backup of swarm, to make sure you also save
+information about services, networks, volumes, and other swarm resources.
 
 To create a UCP backup, you can run the `{{ page.docker_image }} backup` command
 on a single UCP manager. This command creates a tar archive with the
@@ -34,8 +45,8 @@ be disconnected.
 Additionally, if UCP is not configured for high availability, you will be
 temporarily unable to:
 
-* Log in to the UCP Web UI
-* Perform CLI operations using existing client bundles
+* Log in to the UCP Web UI.
+* Perform CLI operations using existing client bundles.
 
 To minimize the impact of the backup policy on your business, you should:
 
@@ -43,10 +54,13 @@ To minimize the impact of the backup policy on your business, you should:
 across multiple UCP manager nodes.
 * Schedule the backup to take place outside business hours.
 
-## Backup command
+## Backup the swarm
 
-The example below shows how to create a backup of a UCP manager node and
-verify its contents:
+Start by [making a backup of your Docker Swarm](engine/swarm/admin_guide.md/#back-up-the-swarm).
+
+## Backup UCP
+
+Once you have a backup of your swarm, you can then create a backup of UCP:
 
 ```none
 # Create a backup and store it on /tmp/backup.tar
@@ -74,17 +88,18 @@ $ docker run --rm -i --name ucp \
 $ gpg --decrypt /tmp/backup.tar | tar --list
 ```
 
-## Restore your cluster
+## Restore the swarm
+
+The first step in restoring UCP from a backup, is to
+[restore the swarm](/engine/swarm/admin_guide.md/#recover-from-disaster).
+
+## Restore UCP
+
+Once you've restored the swarm state, you can restore UCP from a backup.
 
 The restore command can be used to create a new UCP cluster from a backup file.
-When restoring, make sure you use the same version of the `docker/ucp` image that you've used to create the backup.
-After the restore operation is complete, the following data will be recovered
-from the backup file:
-
-* Users, teams, and permissions.
-* All UCP configuration options available under `Admin Settings`, such as the
-DDC subscription license, scheduling options, Content Trust and authentication
-backends.
+When restoring, make sure you use the same version of the `docker/ucp` image
+that you've used to create the backup.
 
 There are two ways to restore a UCP cluster:
 
@@ -148,7 +163,7 @@ manager failures, the system should be configured for [high availability](config
    `uninstall-ucp` command.
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
-   command. 
+   command.
 6. If any nodes are listed as `down`, you'll have to manually [remove these
    nodes](../configure/scale-your-cluster.md) from the cluster and then re-join
    them using a `docker swarm join` operation with the cluster's new join-token.
