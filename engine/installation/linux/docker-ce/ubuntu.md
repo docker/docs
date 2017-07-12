@@ -232,7 +232,7 @@ the repository.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](linux-postinstall.md) to allow
+Continue to [Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
