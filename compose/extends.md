@@ -24,14 +24,14 @@ contains your base configuration. The override file, as its name implies, can
 contain configuration overrides for existing services or entirely new
 services.
 
-If a service is defined in both files Compose merges the configurations using
+If a service is defined in both files, Compose merges the configurations using
 the rules described in [Adding and overriding
 configuration](extends.md#adding-and-overriding-configuration).
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the [`docker-compose`
-command reference](./reference/overview.md) for more information about
+command reference](/compose/reference/overview.md) for more information about
 using `-f`.
 
 When you use multiple configuration files, you must make sure all paths in the
