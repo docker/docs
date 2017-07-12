@@ -6,6 +6,16 @@ keywords: docker, ucp, cli, dump-certs
 
 Print the public certificates used by this UCP web server
 
+## Usage
+
+```
+docker run --rm \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    dump-certs [command options]
+ ```
+
 ## Description
 
 This command outputs the public certificates for the UCP web server running on

@@ -4,16 +4,29 @@ description: Upgrade the UCP components on this node
 keywords: docker, ucp, cli, upgrade
 ---
 
-Upgrade the UCP components on this node
+Upgrade the UCP cluster
+
+## Usage
+
+```
+ docker run --rm -it \
+        --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp \
+        upgrade [command options]
+```
 
 ## Description
 
-This commands upgrades the UCP running on this node.
+This command upgrades the UCP running on this node.
 To upgrade UCP:
 
   * Upgrade the Docker Engine in all nodes (optional)
   * Run the upgrade command in all manager nodes
   * Run the upgrade command in all worker nodes
+
+Before performing an upgrade, you should perform a backup by using the 
+[backup](backup.md) command.
 
 After upgrading UCP in a node, go to the UCP web UI and confirm the node is
 healthy, before upgrading other nodes.
