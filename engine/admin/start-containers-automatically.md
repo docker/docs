@@ -67,7 +67,7 @@ A process manager runs within the container and checks whether a process is
 running and starts it if not. It is not Docker-aware, but just monitors
 operating system processes within the container.
 
-Docker does not recommend this approach, because it is not platform-dependent
+Docker does not recommend this approach, because it is platform-dependent
 and even differs within different versions of a given Linux distribution.
 
 > **Warning**: Do not try to combine Docker restart policies with host-level
