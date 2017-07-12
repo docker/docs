@@ -106,7 +106,7 @@ avoid these situations.
     user has an entry in each. If not, you need to add it, being careful to
     avoid overlap.
 
-    If you want to user the `dockremap` user automatically created by Docker,
+    If you want to use the `dockremap` user automatically created by Docker,
     you'll need to check for the `dockremap` entry in these files **after**
     configuring and restarting Docker.
 
