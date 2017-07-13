@@ -32,5 +32,5 @@ This command upgrades DTR 2.0.0 or later to the current version of this image.
 |`--ucp-password`|The UCP administrator password|
 |`--ucp-url`|The UCP URL including domain and port|
 |`--ucp-username`|The UCP administrator username|
-|`--unsafe-upgrade`|Perform the upgrade ignoring version checks.|
+|`--unsafe-upgrade`|Perform the upgrade ignoring version checks|
 
