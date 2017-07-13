@@ -100,10 +100,6 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ## Preferences
 
-This is test calling the class from the `scss` file in the `img` tag (instead of
-embedding the style directly like the previous tests) here, ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} but it does not
-work. This file does not seem to be reading the `scss` file.
-
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar.
 
