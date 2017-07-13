@@ -8,7 +8,7 @@ title: Quickstart code contribution
 
 If you'd like to improve the code of any of Docker's projects, we would love to
 have your contributions. All of our projects' code repositories are on
-[Gitnub](https://github.com/docker){: target="_blank" class="_"}.
+[Github](https://github.com/docker){: target="_blank" class="_"}.
 
 If you want to contribute to the `moby/moby` repository you should be familiar
 with or interested in learning Go. If you know other languages, investigate our
