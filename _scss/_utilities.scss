@@ -58,6 +58,9 @@ i.fa.fa-outdent {
     padding: 0px 15px 10px 15px;
 }
 
+img.inline {
+    display: inline;
+}
 
 /*
 * Search *********************************************************************
@@ -259,4 +262,3 @@ div#autocompleteResults span {
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
     display: none!important;
 }
-

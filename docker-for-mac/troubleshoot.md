@@ -22,8 +22,8 @@ GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
 or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
 can help you troubleshoot the log data.
 
-Choose <img src="../images/whale-x.png"> --> **Diagnose & Feedback** from the
-menu bar.
+Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+**Diagnose & Feedback** from the menu bar.
 
 ![Diagnose problems](images/settings-diagnose.png)
 
@@ -156,8 +156,9 @@ start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
 need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to <img src="images/whale-x.png"> --> **Preferences** -->
-**File sharing** and share the drive that contains the Dockerfile and volume.
+`/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
+.inline} --> **Preferences** --> **File sharing** and share the drive that
+contains the Dockerfile and volume.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
@@ -278,7 +279,10 @@ know before you install](install.md#what-to-know-before-you-install).
 
 * If Docker for Mac fails to install or start properly:
 
-  * Make sure you quit Docker for Mac before installing a new version of the application ( <img src="../images/whale-x.png"> --> **Quit Docker**). Otherwise, you will get an "application in use" error when you try to copy the new app from the `.dmg` to `/Applications`.
+  * Make sure you quit Docker for Mac before installing a new version
+  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you will get an
+  "application in use" error when you try to copy the new app
+  from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from the previously installed version.
 
@@ -337,11 +341,20 @@ Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DN
 
 <p></p>
 
-* Docker does not auto-start on login even when it is enabled in <img src="../images/whale-x.png"> --> **Preferences**. This is related to a set of issues with Docker helper, registration, and versioning.
+* Docker does not auto-start on login even when it is enabled in
+![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This is related to a set of issues with Docker
+helper, registration, and versioning.
 
 <p></p>
 
-* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
+* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you
+are developing with tools that have conflicts with `HyperKit`, such as [Intel
+Hardware Accelerated Execution Manager
+(HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
+the current workaround is not to run them at the same time. You can pause
+`HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This
+will allow you to continue work with the other tools and prevent `HyperKit` from
+interfering.
 
 <p></p>
 

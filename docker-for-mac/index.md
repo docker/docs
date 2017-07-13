@@ -100,8 +100,8 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ## Preferences
 
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
-the menu bar.
+Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
+**Preferences** from the menu bar.
 
 ![Docker context menu](images/menu-prefs-selected.png)
 
@@ -122,10 +122,10 @@ see [Docker Cloud](#docker-cloud).
   open your session.
 
 * Docker for Mac is set to **automatically check for updates**  and notify
-  you when an update is available. If an update is found, click **OK** to
-  accept and install it (or cancel to keep the current version). If you
-  disable the check for updates, you can still find out about updates manually
-  by choosing ![whale-x](/docker-for-mac/images/whale-x.png) -> **Check for Updates**
+  you when an update is available. If an update is found, click **OK** to accept
+and install it (or cancel to keep the current version). If you disable the check
+for updates, you can still find out about updates manually by choosing ![whale
+menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**
 
 * Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
 
@@ -294,8 +294,9 @@ choose to discard or not apply changes when asked.
 ![Docker Daemon](/docker-for-mac/images/settings-daemon-beta.png)
 
 ## Uninstall or reset
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
-the menu bar, then click **Uninstall / Reset** on the Preferences dialog.
+Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
+**Preferences** from the menu bar, then click **Uninstall / Reset** on the
+Preferences dialog.
 
 ![Uninstall or reset Docker](images/settings-uninstall.png)
 
