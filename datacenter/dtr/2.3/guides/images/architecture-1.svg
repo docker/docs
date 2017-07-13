@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
     <title>architecture-1</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
@@ -30,8 +30,8 @@
                     </g>
                     <g id="docker" transform="translate(0.000000, 76.000000)">
                         <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="524" height="34" rx="2"></rect>
-                        <text id="CS-Docker-Engine" font-family="OpenSans, Open Sans" font-size="14" font-weight="normal" fill="#FFFFFF">
-                            <tspan x="205.464355" y="23">CS Docker Engine</tspan>
+                        <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="14" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="205.936035" y="23">Docker Engine EE</tspan>
                         </text>
                     </g>
                     <g id="ucp" transform="translate(0.000000, 38.000000)">
