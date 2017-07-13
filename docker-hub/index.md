@@ -71,7 +71,7 @@ Docker Hub contains a number of [Official
 Repositories](http://hub.docker.com/explore/). These are public, certified
 repositories from vendors and contributors to Docker. They contain Docker images
 from vendors like Canonical, Oracle, and Red Hat that you can use as the basis
-to building your applications and services.
+to build your applications and services.
 
 With Official Repositories you know you're using an optimized and
 up-to-date image that was built by experts to power your applications.
