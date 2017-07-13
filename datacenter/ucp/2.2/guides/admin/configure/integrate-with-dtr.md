@@ -1,7 +1,7 @@
 ---
-description: Integrate UCP with Docker Trusted Registry
-keywords: trusted, registry, integrate, UCP, DTR
 title: Integrate with Docker Trusted Registry
+description: Integrate UCP with Docker Trusted Registry
+keywords: trust, registry, integrate, UCP, DTR
 ---
 
 Once you deploy Docker Trusted Registry (DTR), you can use it to store your
@@ -133,7 +133,7 @@ that are stored in DTR.
 
 For each UCP node:
 
-1.  Log into the node as an administrator, using ssh
+1.  Log into the node as an administrator, using ssh.
 2.  Configure the system to trust the DTR TLS certificates, following the same
 steps as you used to configure your local computer.
 
