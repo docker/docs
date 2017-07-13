@@ -145,16 +145,14 @@ explanation and list of prerequisites.
 
 	  ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
 
-	  If you just installed the app, you also get a success message with suggested
-next steps and a link to this documentation. Click the whale (<div
-class="image-inline"><img src="/docker-for-mac/images/whale-x.png" /></div>) in
-the status bar to dismiss this popup.
+    If you just installed the app, you also get a success message with suggested
+    next steps and a link to this documentation. Click the whale (![whale
+    menu](/docker-for-mac/images/whale-x.png){: .inline}) in the status bar to
+    dismiss this popup.
 
 	  ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
 
-3.  Click the whale (<div class="image-inline"><img
-src="/docker-for-mac/images/whale-x.png" /></div>) to get Preferences and other
-options.
+3.  Click the whale (![whale menu](/docker-for-mac/images/whale-x.png){: .inline}) to get Preferences and other options.
 
 	  ![Docker context menu](images/menu.png)
 

@@ -6,9 +6,8 @@ notoc: true
 ---
 
 Docker Desktop Editions are built using open source software. For details on the
-licensing, choose <div class="image-inline"><img
-src="/docker-for-mac/images/whale-x.png" /></div> -->&nbsp;**About** from within
-the application, then click **Acknowledgements**.
+licensing, choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
+-->&nbsp;**About** from within the application, then click **Acknowledgements**.
 
 Docker Desktop Editions distribute some components that are licensed under the
 GNU General Public License. You can download the source for these components

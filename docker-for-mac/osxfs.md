@@ -57,9 +57,9 @@ bin	dev	home	lib32	libx32	mnt	proc	run	srv	tmp	var
 
 By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and
 `/tmp` directly. To add or remove directory trees that are exported to Docker,
-use the **File sharing** tab in Docker preferences <div
-class="image-inline"><img src="/docker-for-mac/images/whale-x.png" /></div> ->
-**Preferences** -> **File sharing**. (See [Preferences](index.md#preferences).)
+use the **File sharing** tab in Docker preferences ![whale
+menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Preferences** ->
+**File sharing**. (See [Preferences](index.md#preferences).)
 
 All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker

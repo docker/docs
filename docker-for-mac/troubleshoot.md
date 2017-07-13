@@ -22,9 +22,8 @@ GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
 or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
 can help you troubleshoot the log data.
 
-Choose <div class="image-inline"><img src="/docker-for-mac/images/whale-x.png"
-/></div> --> **Diagnose & Feedback** from the
-menu bar.
+Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+**Diagnose & Feedback** from the menu bar.
 
 ![Diagnose problems](images/settings-diagnose.png)
 
@@ -157,9 +156,9 @@ start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
 need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to <div class="image-inline"><img
-src="/docker-for-mac/images/whale-x.png" /></div> --> **Preferences** --> **File
-sharing** and share the drive that contains the Dockerfile and volume.
+`/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
+.inline} --> **Preferences** --> **File sharing** and share the drive that
+contains the Dockerfile and volume.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
@@ -281,8 +280,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version
-  of the application ( <div class="image-inline"><img src="/docker-for-mac/images/whale-x.png"
-  /></div> --> **Quit Docker**). Otherwise, you will get an
+  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you will get an
   "application in use" error when you try to copy the new app
   from the `.dmg` to `/Applications`.
 
@@ -343,8 +341,9 @@ Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DN
 
 <p></p>
 
-* Docker does not auto-start on login even when it is enabled in <div class="image-inline"><img src="/docker-for-mac/images/whale-x.png"
-/></div> --> **Preferences**. This is related to a set of issues with Docker helper, registration, and versioning.
+* Docker does not auto-start on login even when it is enabled in
+![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This is related to a set of issues with Docker
+helper, registration, and versioning.
 
 <p></p>
 

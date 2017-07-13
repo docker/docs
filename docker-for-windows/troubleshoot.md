@@ -120,10 +120,11 @@ application file is not found, a volume mount is denied, or a service cannot
 start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might need
 to enable [shared drives](index.md#shared-drives).
 
-Volume mounting requires shared drives for Linux containers (not for Windows
-containers). Go to <div class="image-inline"><img
-src="/docker-for-mac/images/whale-x.png" /></div> --> **Settings** --> **Shared
-Drives** and share the drive that contains the Dockerfile and volume.
+Volume mounting requires shared drives for Linux containers
+(not for Windows containers). Go to
+![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
+**Settings** --> **Shared Drives** and share the drive that
+contains the Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 
