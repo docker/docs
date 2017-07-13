@@ -34,17 +34,17 @@ use to build Ubuntu images.
 
 It can be as simple as this to create an Ubuntu parent image:
 
-    $ sudo debootstrap raring raring > /dev/null
-    $ sudo tar -C raring -c . | docker import - raring
+    $ sudo debootstrap xenial xenial > /dev/null
+    $ sudo tar -C xenial -c . | docker import - xenial
 
     a29c15f1bf7a
 
-    $ docker run raring cat /etc/lsb-release
+    $ docker run xenial cat /etc/lsb-release
 
     DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=13.04
-    DISTRIB_CODENAME=raring
-    DISTRIB_DESCRIPTION="Ubuntu 13.04"
+    DISTRIB_RELEASE=16.04
+    DISTRIB_CODENAME=xenial
+    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 
 There are more example scripts for creating parent images in the Docker
 GitHub Repo:
