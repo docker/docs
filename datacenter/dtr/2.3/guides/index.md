@@ -1,7 +1,7 @@
 ---
 description: Learn how to install, configure, and use Docker Trusted Registry.
 keywords: docker, registry, repository, images
-title: Docker Trusted Registry 2.2 overview
+title: Docker Trusted Registry overview
 ---
 
 Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
