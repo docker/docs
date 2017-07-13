@@ -100,8 +100,36 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ## Preferences
 
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
-the menu bar.
+### Josh look here
+
+<div style="background: red;">
+    The inline styles for this div should make it red. Just testing inline styles.
+</div>
+
+This is a test for an inline image using `div` and embedded CSS for `display:
+auto;">` <div style="display: auto;"> <img
+src="/docker-for-mac/images/whale-x.png" /> and now the sentence ends. The
+div's show up, so not good.
+
+This is a test for an inline image using just the `img` tag instead of `div` and
+embedded CSS for `display: auto;` <img
+src="/docker-for-mac/images/whale-x.png" style="display: inline;" /> and now the
+sentence ends. This works!
+
+This is a test for an inline image using just the `img` tag instead of `div` and
+embedded CSS for `display: inline;` <img
+src="/docker-for-mac/images/whale-x.png" style="display: inline;" /> and now the
+sentence ends. This also works!
+
+This is test calling the class from the `scss` file in the `img` tag (instead of
+embedding the style directly like the previous tests) here: <img
+src="/docker-for-mac/images/whale-x.png" class="image-inline" /> but it does not
+work. This file does not seem to be reading the `scss` file.
+
+**END OF IMG AND CSS TESTS**
+
+Choose <img src="/docker-for-mac/images/whale-x.png" class="image-inline" /> ->
+**Preferences** from the menu bar.
 
 ![Docker context menu](images/menu-prefs-selected.png)
 
@@ -122,10 +150,10 @@ see [Docker Cloud](#docker-cloud).
   open your session.
 
 * Docker for Mac is set to **automatically check for updates**  and notify
-  you when an update is available. If an update is found, click **OK** to
-  accept and install it (or cancel to keep the current version). If you
-  disable the check for updates, you can still find out about updates manually
-  by choosing ![whale-x](/docker-for-mac/images/whale-x.png) -> **Check for Updates**
+  you when an update is available. If an update is found, click **OK** to accept
+and install it (or cancel to keep the current version). If you disable the check
+for updates, you can still find out about updates manually by choosing <img src="/docker-for-mac/images/whale-x.png" class="image-inline" /> ->
+**Check for Updates**
 
 * Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
 
@@ -294,7 +322,8 @@ choose to discard or not apply changes when asked.
 ![Docker Daemon](/docker-for-mac/images/settings-daemon-beta.png)
 
 ## Uninstall or reset
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
+Choose <div class="image-inline"><img src="/docker-for-mac/images/whale-x.png"
+/></div> --> **Preferences** from
 the menu bar, then click **Uninstall / Reset** on the Preferences dialog.
 
 ![Uninstall or reset Docker](images/settings-uninstall.png)

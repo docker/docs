@@ -5,9 +5,10 @@ title: Open source components and licensing
 notoc: true
 ---
 
-Docker Desktop Editions are built using open source software. For
-details on the licensing, choose <img src="../images/whale-x.png">
--->&nbsp;**About** from within the application, then click **Acknowledgements**.
+Docker Desktop Editions are built using open source software. For details on the
+licensing, choose <div class="image-inline"><img
+src="/docker-for-mac/images/whale-x.png" /></div> -->&nbsp;**About** from within
+the application, then click **Acknowledgements**.
 
 Docker Desktop Editions distribute some components that are licensed under the
 GNU General Public License. You can download the source for these components
