@@ -40,7 +40,7 @@ You can set the logging driver for a specific container by using the
 
 ```bash
 $ docker run \
-      -–log-driver json-file –-log-opt max-size=10m \
+      -–log-driver json-file --log-opt max-size=10m \
       alpine echo hello world
 ```
 
