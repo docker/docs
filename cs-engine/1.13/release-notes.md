@@ -23,7 +23,7 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 Backports all fixes from [17.03.2](https://github.com/moby/moby/releases/tag/v17.03.2-ce)
 
-*Note*: This release includes a fix for potential data loss under certain
+**Note**: This release includes a fix for potential data loss under certain
 circumstances with the local (built-in) volume driver.
 
 ## CS Engine 1.13.1-cs3
@@ -57,7 +57,7 @@ Backports all fixes from 17.03.1
 ### Runtime
 
 * Fix a deadlock in docker logs [#30223](https://github.com/docker/docker/pull/30223)
-* Fix cpu spin waiting for log write events [#31070](https://github.com/docker/docker/pull/31070)
+* Fix CPU spin waiting for log write events [#31070](https://github.com/docker/docker/pull/31070)
 * Fix a possible crash when using journald [#31231](https://github.com/docker/docker/pull/31231) [#31263](https://github.com/docker/docker/pull/31231)
 * Fix a panic on close of nil channel [#31274](https://github.com/docker/docker/pull/31274)
 * Fix duplicate mount point for `--volumes-from` in `docker run` [#29563](https://github.com/docker/docker/pull/29563)
