@@ -47,7 +47,7 @@ The output described above is intended for the shells `bash` and `zsh` (if
 you're not sure which shell you're using, there's a very good possibility that
 it's `bash`). However, these are not the only shells which Docker Machine
 supports. Docker Machine detects the shells available in your environment and lists them.
-Docker supports `bash`, `cmd`, `powershell` and `emacs`.
+Docker supports `bash`, `cmd`, `powershell`, and `emacs`.
 
 If you are using `fish` and the `SHELL` environment variable is correctly set to
 the path where `fish` is located, `docker-machine env name` will print out the
