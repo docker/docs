@@ -33,6 +33,14 @@ Also, make sure the hosts are running one of these operating systems:
 
 Install the Docker Enterprise Edition container engine on all hosts you want to manage by following [these instructions](/engine/installation/index.md).
 
+> Access Docker EE for Beta testing
+>
+> For the Beta release, install Docker EE version 17.06-EE-RC1. The
+> packages are available in the `test` channel of the Docker Store repo,
+> and your Beta license gives you access to this channel. For Windows
+> worker nodes, download the zip archive at
+> [download.docker.com](https://download.docker.com/)
+
 ### Step 2: Install Universal Control Plane
 
 Docker Universal Control Plane (UCP) allows managing from a centralized place

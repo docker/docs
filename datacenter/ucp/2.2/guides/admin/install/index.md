@@ -24,6 +24,14 @@ View the [supported platforms](/engine/installation/#supported-platforms)
 and click a check icon to get platform-specific instructions for installing
 Docker EE.
 
+> Access Docker EE for Beta testing
+>
+> For the Beta release, install Docker EE version 17.06-EE-RC1. The
+> packages are available in the `test` channel of the Docker Store repo,
+> and your Beta license gives you access to this channel. Download the zip
+> archive for Windows worker nodes at
+> [download.docker.com](https://download.docker.com/)
+
 Make sure you install the same Docker EE version on all the nodes. Also,
 if you're creating virtual machine templates with Docker EE already
 installed, make sure the `/etc/docker/key.json` file is not included in the
