@@ -9,7 +9,7 @@ notoc: true
 ---
 
 Docker Cloud now allows you to connect to clusters of Docker Engines running on
-v17.06 [swarm mode](/engine/swarm/).
+Docker 17.06 [swarm mode](/engine/swarm/).
 
 With Beta Swarm Mode in Docker Cloud, you can provision swarms to popular cloud
 providers, or register existing swarms to Docker Cloud. Use your Docker ID to
