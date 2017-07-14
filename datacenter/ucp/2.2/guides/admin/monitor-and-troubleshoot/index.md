@@ -1,8 +1,7 @@
 ---
-title: Monitor the cluster status
-description: Monitor your Docker Universal Control Plane installation, and learn how
-  to troubleshoot it.
-keywords: Docker, UCP, troubleshoot
+title: Monitor the swarm status
+description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
+keywords: UCP, troubleshoot, health, swarm
 ---
 
 You can monitor the status of UCP by using the web UI or the CLI.
@@ -10,7 +9,7 @@ You can also use the `_ping` endpoint to build monitoring automation.
 
 ## Check status from the UI
 
-The first place to check the status of UCP is the **UCP web UI**, since it
+The first place to check the status of UCP is the UCP web UI, since it
 shows warnings for situations that require your immediate attention.
 Administrators might see more warnings than regular users.
 
@@ -22,7 +21,11 @@ managed by UCP are healthy or not.
 ![UCP dashboard](../../images/monitor-ucp-1.png){: .with-border}
 
 Each node has a status message explaining any problems with the node.
+In this example, a Windows worker node is down. 
 [Learn more about node status](troubleshoot-node-messages.md).
+Click the node to get more info on its status. In the details pane, click
+**Actions** and select **Agent logs** to see the log entries from the
+node. 
 
 
 ## Check status from the CLI

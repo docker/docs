@@ -1,14 +1,14 @@
 ---
-title: Troubleshoot cluster configurations
+title: Troubleshoot swarm configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords: ectd, rethinkdb, key, value, store, database, ucp
+keywords:  troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, swarm
 ---
 
-UCP automatically tries to heal itself by monitoring it's internal
+UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
 
-In most cases, if a single UCP component is persistently in a
-failed state, you should be able to restore the cluster to a healthy state by
+In most cases, if a single UCP component is in a failed state persistently,
+you should be able to restore the cluster to a healthy state by
 removing the unhealthy node from the cluster and joining it again.
 [Lean how to remove and join modes](../configure/scale-your-cluster.md).
 
@@ -16,10 +16,11 @@ removing the unhealthy node from the cluster and joining it again.
 
 UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
 key-value store and [RethinkDB](https://rethinkdb.com/) database that are
-replicated on all manager nodes of the UCP cluster. These data stores are for
-internal use only, and should not be used by other applications.
+replicated on all manager nodes of the UCP swarm. These data stores are for
+internal use only and should not be used by other applications.
 
 ### With the HTTP API
+
 In this example we'll use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
@@ -32,18 +33,19 @@ $ sudo apt-get update && apt-get install curl jq
 1. Use a client bundle to authenticate your requests.
 [Learn more](../../user/access-ucp/cli-based-access.md).
 
-2. Use the REST API to access the cluster configurations.
+2. Use the REST API to access the cluster configurations. The $DOCKER_HOST
+   and $DOCKER_CERT_PATH environment variables are set when using the client
+   bundle.
 
-```bash
-# $DOCKER_HOST and $DOCKER_CERT_PATH are set when using the client bundle
-$ export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
+   ```bash
+   $ export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
 
-$ curl -s \
-    --cert ${DOCKER_CERT_PATH}/cert.pem \
-    --key ${DOCKER_CERT_PATH}/key.pem \
-    --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${KV_URL}/v2/keys | jq "."
-```
+   $ curl -s \
+        --cert ${DOCKER_CERT_PATH}/cert.pem \
+        --key ${DOCKER_CERT_PATH}/key.pem \
+        --cacert ${DOCKER_CERT_PATH}/ca.pem \
+        ${KV_URL}/v2/keys | jq "."
+   ```
 
 To learn more about the key-value store REST API check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
@@ -69,15 +71,16 @@ member ca3c1bb18f1b30bf is healthy: got healthy result from https://192.168.122.
 cluster is healthy
 ```
 
-On failure the command exits with an error code, and no output.
+On failure, the command exits with an error code and no output.
 
 To learn more about the `etcdctl` utility, check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 ## RethinkDB Database
 
-User and organization data for Docker Datacenter is stored in a RethinkDB
-database which is replicated across all manager nodes in the UCP cluster.
+User and organization data for Docker Enterprise Edition is stored in a
+RethinkDB database which is replicated across all manager nodes in the UCP
+swarm.
 
 Replication and failover of this database is typically handled automatically by
 UCP's own configuration management processes, but detailed database status and
@@ -98,6 +101,23 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # in the RethinkDB cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
 {% endraw %}
+
+Server Status: [
+  {
+    "ID": "ffa9cd5a-3370-4ccd-a21f-d7437c90e900",
+    "Name": "ucp_auth_store_192_168_1_25",
+    "Network": {
+      "CanonicalAddresses": [
+        {
+          "Host": "192.168.1.25",
+          "Port": 12384
+        }
+      ],
+      "TimeConnected": "2017-07-14T17:21:44.198Z"
+    }
+  }
+]
+...
 ```
 
 ### Manually reconfigure database replication
@@ -114,6 +134,13 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # number of replicas equal to the number of manager nodes in the cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
 {% endraw %}
+
+time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..." 
+time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]" 
+time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1" 
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..." 
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\"" 
+...
 ```
 
 ## Where to go next
