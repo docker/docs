@@ -8,15 +8,12 @@ title: Swarms in Docker Cloud (Beta)
 notoc: true
 ---
 
-Docker Cloud now allows you to connect to clusters
-of Docker Engines running in v1.13
-[swarm mode](/engine/swarm/).
+Docker Cloud now allows you to connect to clusters of Docker Engines running on
+v17.06 [swarm mode](/engine/swarm/).
 
-With Beta Swarm Mode in Docker Cloud, you can
-provision swarms to popular cloud providers, or
-register existing swarms to Docker Cloud.
-Use your Docker ID to authenticate and securely access
-personal or team swarms.
+With Beta Swarm Mode in Docker Cloud, you can provision swarms to popular cloud
+providers, or register existing swarms to Docker Cloud. Use your Docker ID to
+authenticate and securely access personal or team swarms.
 
 * [Using Swarm Mode with Docker Cloud](using-swarm-mode.md)
 
