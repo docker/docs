@@ -10,20 +10,22 @@ the internet or not.
 The only difference when installing on an offline host is that instead of
 pulling the UCP images from Docker Hub, you use a computer that's connected
 to the internet to download a single package with all the images. Then you
-copy this package to the host where you upgrade UCP. 
+copy this package to the host where you upgrade UCP.
 
 ## Versions available
 
-{% include components/ddc_url_list.html %}
+Use a computer with internet access to download the UCP package from the
+following links.
+
+{% include components/ddc_url_list_2.html product="ucp" version="2.2" %}
 
 ## Download the offline package
 
-Use a computer with internet access to download a single package with all
-UCP components:
+You can also use these links to get the UCP package from the command
+line:
 
 ```bash
-$ wget <package-url> -O ucp.tar.gz
-$ wget <package-url> -O dtr.tar.gz
+$ wget <ucp-package-url> -O ucp.tar.gz
 ```
 
 Now that you have the package in your local machine, you can transfer it to
@@ -34,20 +36,18 @@ For each machine that you want to manage with UCP:
 1.  Copy the offline package to the machine.
 
     ```bash
-    $ scp ucp.tar.gz <user>@<host>:/tmp
-    $ scp dtr.tar.gz <user>@<host>:/tmp
+    $ scp ucp.tar.gz <user>@<host>
     ```
 
 2.  Use ssh to log in to the hosts where you transferred the package.
 
-3.  Load the UCP and DTR images.
+3.  Load the UCP images.
 
     Once the package is transferred to the hosts, you can use the
     `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
     $ docker load < ucp.tar.gz
-    $ docker load < dtr.tar.gz
     ```
 
 ## Upgrade UCP

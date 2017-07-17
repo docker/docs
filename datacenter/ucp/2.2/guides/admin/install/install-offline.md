@@ -24,48 +24,40 @@ installation will fail.
 
 ## Versions available
 
-{% include components/ddc_url_list.html %}
+Use a computer with internet access to download the UCP package from the
+following links.
+
+{% include components/ddc_url_list_2.html product="ucp" version="2.2" %}
 
 ## Download the offline package
 
-Use a computer with internet access to download the packages with all
-Docker Enterprise Edition components. Get the latest binary packages 
-for UCP and DTR from the following links. 
-
-### Versions available
-
-{% include components/ddc_url_list.html %}
-
-You can also use these links to get the UCP and DTR binaries from the command 
+You can also use these links to get the UCP package from the command
 line:
 
 ```bash
 $ wget <ucp-package-url> -O ucp.tar.gz
-$ wget <dtr-package-url> -O dtr.tar.gz
 ```
 
-Now that you have the packages on your local machine, you can transfer them to
-the machines where you want to install UCP and DTR.
+Now that you have the package in your local machine, you can transfer it to
+the machines where you want to install UCP.
 
 For each machine that you want to manage with UCP:
 
-1.  Copy the Docker EE package to the machine.
+1.  Copy the UCP package to the machine.
 
     ```bash
-    $ scp ucp.tar.gz <user>@<host>:/tmp
-    $ scp dtr.tar.gz <user>@<host>:/tmp
+    $ scp ucp.tar.gz <user>@<host>
     ```
 
 2.  Use ssh to log in to the hosts where you transferred the package.
 
-3.  Load the Docker EE images.
+3.  Load the UCP images.
 
     Once the package is transferred to the hosts, you can use the
     `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
     $ docker load < ucp.tar.gz
-    $ docker load < dtr.tar.gz
     ```
 
 Follow the same steps for the DTR binaries.
@@ -73,7 +65,7 @@ Follow the same steps for the DTR binaries.
 ## Install UCP
 
 Now that the offline hosts have all the images needed to install UCP,
-you can [install Docker UCP on one of the manager nodes](index.md). 
+you can [install Docker UCP on one of the manager nodes](index.md).
 
 
 ## Where to go next
