@@ -6,7 +6,9 @@ base image: |
   An image that has no parent is a **base image**.
 boot2docker: |
   [boot2docker](http://boot2docker.io/) is a lightweight Linux distribution made
-  specifically to run Docker containers. The boot2docker management tool for Mac and Windows was deprecated and replaced by [`docker-machine`](#machine) which you can install with the Docker Toolbox.
+  specifically to run Docker containers. The boot2docker management tool for Mac
+  and Windows was deprecated and replaced by [`docker-machine`](#machine) which
+  you can install with the Docker Toolbox.
 btrfs: |
   btrfs (B-tree file system) is a Linux [filesystem](#filesystem) that Docker
   supports as a storage backend. It is a [copy-on-write](http://en.wikipedia.org/wiki/Copy-on-write)
@@ -21,6 +23,10 @@ cgroups: |
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
   *Also known as : control groups*
+collection: |
+  A collection is a group of swarm resources that Docker EE uses for role-based
+  access control. Collections enable organizing permissions for resources like
+  nodes, services, containers, volumes, networks, and secrets. [Learn how to manage collections](/datacenter/ucp/2.2/guides/admin/manage-users/manage-access-with-collections.md).
 Compose: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
   running complex applications with Docker. With compose, you define a
@@ -67,18 +73,19 @@ Docker: |
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
-Docker Datacenter: |
-  The Docker Datacenter is subscription-based service enabling enterprises to leverage a
-  platform built by Docker, for Docker. The Docker native tools are integrated to create
-  an on premises CaaS platform, allowing organizations to save time and seamlessly take
-  applications built in dev to production.
+Docker Enterprise Edition: |
+  Docker Enterprise Edition (Docker EE) is a platform to build, ship, and run
+  containerized applications, that you can deploy in the cloud or on-premise. It
+  includes a tested and certified version of Docker, web UIs for managing
+  your app resources, and support.
 Docker for Mac: |
-  [Docker for Mac](/docker-for-mac/) is an easy-to-install,
-  lightweight Docker development environment designed specifically for the Mac. A
-  native Mac application, Docker for Mac uses the macOS Hypervisor framework,
-  networking, and filesystem. It's the best solution if you want to build, debug,
-  test, package, and ship Dockerized applications on a Mac. Docker for Mac
-  supersedes [Docker Toolbox](#toolbox) as state-of-the-art Docker on macOS.
+  [Docker for Mac](/docker-for-mac/) is an easy-to-install, lightweight
+  Docker development environment designed specifically for the Mac. A native
+  Mac application, Docker for Mac uses the macOS Hypervisor
+  framework, networking, and filesystem. It's the best solution if you want
+  to build, debug, test, package, and ship Dockerized applications on a
+  Mac. Docker for Mac supersedes [Docker Toolbox](#toolbox) as
+  state-of-the-art Docker on macOS.
 Docker for Windows: |
   [Docker for Windows](/docker-for-windows/) is an
   easy-to-install, lightweight Docker development environment designed
@@ -140,6 +147,11 @@ filesystem: |
   - Linux : ext4, aufs, btrfs, zfs
   - Windows : NTFS
   - macOS : HFS+
+grant: |
+  A grant enables role-based access control for managing how users and
+  organizations access Docker EE swarm resources. A grant is made up of a
+  subject, a role, and a collection. For more about grants and role-based access
+  control, see [Grant permissions to users based on roles](/datacenter/ucp/2.2/guides/admin/manage-users/grant-permissions.md).
 image: |
   Docker images are the basis of [containers](#container). An Image is an
   ordered collection of root filesystem changes and the corresponding
@@ -217,9 +229,22 @@ repository: |
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
+role: |
+  A role is a set of permitted API operations on a collection of Docker EE swarm
+  resources. As part of a grant, a role is assigned to a subject (a user, team, or
+  organization) and a collection. For more about roles, see [Roles and
+  permission levels](/datacenter/ucp/2.2/guides/admin/manage-users/permission-levels.md).
+role-based access control: |
+  Role-based access control enables managing how Docker EE users can access
+  swarm resources. UCP administrators create grants to control how users access
+  resource collections. A grant is made up of a subject, a role, and a collection.
+  A grant defines who (subject) has how much access (role) to a set of resources
+  (collection). For more about role-based access control, see
+  [Authentication](/datacenter/ucp/2.2/guides/admin/manage-users/index.md).
 SSH: |
-  SSH (secure shell) is a secure protocol for accessing remote machines and applications. It
-  provides authentication and encrypts data communication over insecure networks such as the Internet. SSH uses public/private key pairs to authenticate logins.
+  SSH (secure shell) is a secure protocol for accessing remote machines and applications.
+  It provides authentication and encrypts data communication over insecure networks such
+  as the Internet. SSH uses public/private key pairs to authenticate logins.
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
   you want to run your application containers in a swarm. At the most basic level
@@ -242,6 +267,10 @@ service discovery: |
   You don’t need to expose service-specific ports to make the service available to
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
+subject: |
+  A subject represents a user, team, or organization in Docker EE. A subject is
+  granted a role for access to a collection of swarm resources.
+  For more about role-based access, see [Authentication](/datacenter/ucp/2.2/guides/admin/manage-users/index.md).
 swarm: |
   A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm-mode).
 Docker Swarm: |
