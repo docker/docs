@@ -15,15 +15,14 @@ all the images. Then you copy that package to the host where you’ll install DT
 
 ## Versions available
 
-{% include components/ddc_url_list.html %}
+{% include components/ddc_url_list_2.html product="dtr" version="2.3" %}
 
 ## Download the offline package
 
-Use a computer with internet access to download a single package with all
-Docker Datacenter components:
+Use a computer with internet access to download a package with all DTR images:
 
 ```bash
-$ wget <package-url> -O docker-datacenter.tar.gz
+$ wget <package-url> -O dtr.tar.gz
 ```
 
 Now that you have the package in your local machine, you can transfer it to
@@ -31,21 +30,21 @@ the machines where you want to install DTR.
 
 For each machine where you want to install DTR:
 
-1.  Copy the Docker Datacenter package to that machine.
+1.  Copy the DTR package to that machine.
 
     ```bash
-    $ scp docker-datacenter.tar.gz <user>@<host>:/tmp
+    $ scp dtr.tar.gz <user>@<host>
     ```
 
 2.  Use ssh to login into the hosts where you transferred the package.
 
-3.  Load the Docker Datacenter images.
+3.  Load the DTR images.
 
     Once the package is transferred to the hosts, you can use the
     `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
-    $ docker load < docker-datacenter.tar.gz
+    $ docker load < dtr.tar.gz
     ```
 
 ## Install DTR
