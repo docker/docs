@@ -1728,12 +1728,8 @@ manuals:
           title: Grant access to secrets
     - path: /datacenter/ucp/2.2/reference/api/
       title: API reference
-    - sectiontitle: Release notes
-      section:
-      - path: /datacenter/ucp/2.2/guides/release-notes/
-        title: Release notes
-      - path: /datacenter/ucp/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
-        title: Incompatibilities and breaking changes
+    - path: /datacenter/ucp/2.2/guides/release-notes/
+      title: Release notes
     - path: /datacenter/ucp/2.2/guides/get-support/
       title: Get support
   - sectiontitle: Docker Trusted Registry
