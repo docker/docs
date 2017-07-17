@@ -28,7 +28,7 @@ These ports are configurable when installing DTR.
 
 Docker Datacenter is a software subscription that includes 3 products:
 
-* CS Docker Engine,
+* Docker Engine EE,
 * Docker Trusted Registry,
 * Docker Universal Control Plane.
 
