@@ -35,11 +35,11 @@ Install the Docker Enterprise Edition container engine on all hosts you want to 
 
 > Access Docker EE for Beta testing
 >
-> For the Beta release, install Docker EE version 17.06-EE-RC1. The
+> For the Beta release, install Docker EE version 17.06.1-ee-1-rc1. The
 > packages are available in the `test` channel of the Docker Store repo,
 > and your Beta license gives you access to this channel. For Windows
 > worker nodes, download the zip archive at
-> [download.docker.com](https://download.docker.com/)
+> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip).
 
 ### Step 2: Install Universal Control Plane
 
@@ -51,7 +51,7 @@ Use ssh to log in to the host where you want to install UCP and run:
 ```bash
 $ docker container run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_latest_image }} install \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
   --host-address <node-ip-address> \
   --interactive
 ```
@@ -102,7 +102,7 @@ Use ssh to log in to the host where you already installed UCP, and run:
 
 ```bash
 $ docker container run -it --rm \
-  {{ page.dtr_latest_image }} install \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
   --ucp-node <node-hostname> \
   --ucp-insecure-tls
 ```

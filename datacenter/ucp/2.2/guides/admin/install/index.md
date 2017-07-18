@@ -26,11 +26,11 @@ Docker EE.
 
 > Access Docker EE for Beta testing
 >
-> For the Beta release, install Docker EE version 17.06-EE-RC1. The
+> For the Beta release, install Docker EE version 17.06.1-ee-1-rc1. The
 > packages are available in the `test` channel of the Docker Store repo,
-> and your Beta license gives you access to this channel. Download the zip
-> archive for Windows worker nodes at
-> [download.docker.com](https://download.docker.com/)
+> and your Beta license gives you access to this channel. For Windows
+> worker nodes, download the zip archive at
+> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip).
 
 Make sure you install the same Docker EE version on all the nodes. Also,
 if you're creating virtual machine templates with Docker EE already
@@ -64,12 +64,12 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull {{ page.ucp_latest_image }}
+    $ docker pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
     # Install UCP
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      {{ page.ucp_latest_image }} install \
+      {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
       --host-address <node-ip-address> \
       --interactive
     ```
