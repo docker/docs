@@ -2,8 +2,6 @@
 title: Use domain names to access services
 description: Learn how to configure your services to make them accessible using a hostname instead of IP addresses and ports.
 keywords: ucp, services, http, dns, https, routing
-redirect_from:
-- /datacenter/ucp/2.1/guides/user/services/use-hostnames-to-access-your-service/
 ---
 
 You can make it easier for users to access your HTTP and HTTPS services by
@@ -26,21 +24,21 @@ Log in to the UCP web UI, navigate to the **Services** page, and click
 **Create Service**. Then create a WordPress service with the following
 configuration:
 
-| Field             | Value                 |
-|:------------------|:----------------------|
-| Service name      | wordpress             |
-| Image name        | wordpress:latest      |
+| Field        | Value            |
+|:-------------|:-----------------|
+| Service name | wordpress        |
+| Image name   | wordpress:latest |
 
 In the left pane, click **Network**. In the **Ports** section, click **Publish Port**
 and assign the following values.
 
 
-| Field             | Value                 |
-|:------------------|:----------------------|
-| Internal port     | 80                    |
-| Protocol          | tcp                   |
-| Publish Mode      | ingress               |
-| Public port       | 8000                  |
+| Field         | Value   |
+|:--------------|:--------|
+| Internal port | 80      |
+| Protocol      | tcp     |
+| Publish Mode  | ingress |
+| Public port   | 8000    |
 
 Click **Add Hostname based routes** and assign the routing values.
 
@@ -118,7 +116,7 @@ your service.
 The label for the WordPress service you just created looks like this:
 
 -  Key: `com.docker.ucp.mesh.http.80-1`
--  Value: `internal_port=8000,external_route=http://wordpress.example.com` 
+-  Value: `internal_port=8000,external_route=http://wordpress.example.com`
 
 The label syntax looks like this:
 
@@ -139,13 +137,13 @@ com.docker.ucp.mesh.http.2=<key-1>=<value-1>
 The keys and values in your label are what defined the route configuration.
 These keys are supported:
 
-| Key             | Mandatory                                 | Values                                   | Description                                                                                              |
-|:----------------|:------------------------------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------|
-| external_route  | yes                                       | http://domain-name or sni://domain-name  | The external URL to route to this service                                                                |
-| internal_port   | yes, if the port published multiple ports | port-number                              | The internal port to use for the service                                                                 |
-| sticky_sessions | no                                        | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
-| redirect        | no                                        | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
-| include_forwarded_for        | no                                        | true | If present, include the X-Forwarded-For header in requests             |
+| Key                   | Mandatory                                 | Values                                   | Description                                                                                              |
+|:----------------------|:------------------------------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| external_route        | yes                                       | http://domain-name or sni://domain-name  | The external URL to route to this service                                                                |
+| internal_port         | yes, if the port published multiple ports | port-number                              | The internal port to use for the service                                                                 |
+| sticky_sessions       | no                                        | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
+| redirect              | no                                        | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
+| include_forwarded_for | no                                        | true                                     | If present, include the X-Forwarded-For header in requests                                               |
 
 
 ### Sticky sessions
