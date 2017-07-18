@@ -21,14 +21,14 @@ repository]({{ labsbase }}).
 | [Live Debugging a Node.js application in Docker]({{ labsbase }}/developer-tools/nodejs-debugging){: target="_blank"} | Node developers can use Docker to build a development environment where they can run, test, and live debug code running within a container. |
 | [Dockerizing a Node.js application]({{ labsbase }}/developer-tools/nodejs/porting/){: target="_blank"} | This tutorial starts with a simple Node.js application and details the steps needed to Dockerize it and ensure its scalability. |
 | [Docker for ASP.NET and Windows containers]({{ labsbase }}/windows/readme.md){: target="_blank"} | Docker supports Windows containers, too! Learn how to run ASP.NET, SQL Server, and more in these tutorials. |
-| [Docker Security]({{ labsbase }}/security/README.md){: target="_blank"} | How to take advantage of a Docker security features. |
+| [Docker Security]({{ labsbase }}/security/README.md){: target="_blank"} | How to take advantage of Docker security features. |
 | [Building a 12-factor application with Docker]({{ labsbase}}/12factor){: target="_blank"} | Use Docker to create an app that conforms to Heroku's "12 factors for cloud-native applications." |
 
 ## Library references
 
-These docs are imported from the
+These docs are imported from
 [the official Docker Library docs](https://github.com/docker-library/docs/),
-and help you use of some of the most popular software that has been
+and help you use some of the most popular software that has been
 "Dockerized."
 
 | Software | Description |
