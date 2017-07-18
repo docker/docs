@@ -18,7 +18,7 @@ Use SSH to log into a UCP node, and run:
 ```none
 docker run -it --rm \
   --net dtr-ol --name overlay-test1 \
-  --entrypoint sh docker/dtr
+  --entrypoint sh {{ page.dtr_org }}/{{ page.dtr_repo }}
 ```
 
 Then use SSH to log into another UCP node and run:
@@ -26,7 +26,7 @@ Then use SSH to log into another UCP node and run:
 ```none
 docker run -it --rm \
   --net dtr-ol --name overlay-test2 \
-  --entrypoint ping docker/dtr -c 3 overlay-test1
+  --entrypoint ping {{ page.dtr_org }}/{{ page.dtr_repo }} -c 3 overlay-test1
 ```
 
 If the second command succeeds, it means that overlay networking is working
@@ -74,7 +74,7 @@ and join a new one. Start by running:
 
 ```none
 docker run -it --rm \
-  docker/dtr:{{ page.dtr_version_patch }} remove \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
   --ucp-insecure-tls
 ```
 
@@ -82,7 +82,7 @@ And then:
 
 ```none
 docker run -it --rm \
-  docker/dtr:{{ page.dtr_version_patch }} join \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```

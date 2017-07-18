@@ -33,7 +33,7 @@ This allows you to recover if something goes wrong during the upgrade process.
 ## Upgrade Docker Engine
 
 For each node that is part of your cluster, upgrade the Docker Engine
-installed on that node to Docker Engine version 17.06 or higher. Be sure 
+installed on that node to Docker Engine version 17.06 or higher. Be sure
 to install the Docker Enterprise Edition.
 
 Starting with the manager nodes, and then worker nodes:
@@ -80,12 +80,12 @@ To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
 ```
 # Get the latest version of UCP
-$ docker pull {{ page.docker_image }}
+$ docker pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
 $ docker run --rm -it \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_latest_image }} \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
   upgrade --interactive
 ```
 

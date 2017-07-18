@@ -15,7 +15,7 @@ The next step is creating a backup policy and disaster recovery plan.
 
 As part of your backup policy you should regularly create backups of UCP.
 
-To create a UCP backup, you can run the `{{ page.docker_image }} backup` command
+To create a UCP backup, you can run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
 contents of all the [volumes used by UCP](../architecture.md) to persist data
 and streams it to stdout.
@@ -52,7 +52,7 @@ verify its contents:
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.docker_image }} backup --interactive > /tmp/backup.tar
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
 
 # Ensure the backup is a valid tar and list its contents
 # In a valid backup file, over 100 files should appear in the list
@@ -67,7 +67,7 @@ following example:
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.docker_image }} backup --interactive \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive \
   --passphrase "secret" > /tmp/backup.tar
 
 # Decrypt the backup and list its contents
@@ -102,7 +102,7 @@ file, presumed to be located at `/tmp/backup.tar`:
 ```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  {{ page.docker_image }} restore < /tmp/backup.tar
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore < /tmp/backup.tar
 ```
 
 If the backup file is encrypted with a passphrase, you will need to provide the
@@ -111,7 +111,7 @@ passphrase to the restore operation:
 ```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  {{ page.docker_image }} restore --passphrase "secret" < /tmp/backup.tar
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore --passphrase "secret" < /tmp/backup.tar
 ```
 
 The restore command may also be invoked in interactive mode, in which case the
@@ -122,7 +122,7 @@ stdin:
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /tmp/backup.tar:/config/backup.tar \
-  {{ page.docker_image }} restore -i
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore -i
 ```
 
 ## Disaster recovery
@@ -148,7 +148,7 @@ manager failures, the system should be configured for [high availability](config
    `uninstall-ucp` command.
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
-   command. 
+   command.
 6. If any nodes are listed as `down`, you'll have to manually [remove these
    nodes](../configure/scale-your-cluster.md) from the cluster and then re-join
    them using a `docker swarm join` operation with the cluster's new join-token.

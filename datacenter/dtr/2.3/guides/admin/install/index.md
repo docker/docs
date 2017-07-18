@@ -29,18 +29,18 @@ You can't install DTR on a standalone Docker Engine.
 
 ## Step 3. Install DTR
 
-To install DTR you use the `docker/dtr` image. This image has commands to
+To install DTR you use the `{{ page.dtr_org }}/{{ page.dtr_repo }}` image. This image has commands to
 install, configure, and backup DTR.
 
 Run the following command to install DTR:
 
 ```none
 # Pull the latest version of DTR
-$ docker pull docker/dtr{{ page.dtr_version_patch }}
+$ docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}{{ page.dtr_version }}
 
 # Install DTR
 $ docker run -it --rm \
-  docker/dtr:{{ page.dtr_version_patch }} install \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} install \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
@@ -119,7 +119,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
     ```none
     docker run -it --rm \
-      docker/dtr:{{ page.dtr_version_patch }} join \
+      {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```

@@ -29,7 +29,7 @@ command:
 $ docker run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --name ucp \
-  {{ page.ucp_latest_image }} uninstall-ucp --interactive
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} uninstall-ucp --interactive
 ```
 
 This runs the uninstall command in interactive mode, so that you are prompted
