@@ -56,12 +56,11 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory for your project. We called ours `getstart/`, but you
+Create an empty directory. We called ours `getstart/`, but you
 can use any name you want.
 
-Change directories (`cd`) into your project directory, create a new file called
-`Dockerfile`, copy-and-paste the following content into that file, and save it.
-(Take note of the comments that explain each statement in your new Dockerfile.)
+Change directories (`cd`) into the new directory, create a file called
+`Dockerfile`, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.
 
 ```conf
 # Use an official Python runtime as a parent image
@@ -91,12 +90,8 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 
 ## The app itself
 
-Let's create two more files, `requirements.txt` and `app.py`, and put them in
-the same project folder with the `Dockerfile`. This will complete our app, which
-as you can see is quite simple. When the above `Dockerfile` is built into an
-image, `app.py` and `requirements.txt` will be present because of `Dockerfile`'s
-`ADD` command, and the output from `app.py` will be accessible over HTTP thanks
-to the `EXPOSE` command.
+Create two more files, `requirements.txt` and `app.py`, and put them in
+the same folder with the `Dockerfile`. This will complete our app.
 
 The contents for these two new files is given below.
 
@@ -153,7 +148,7 @@ you have.
 
 ## Build the app
 
-We are ready to build the app. Make sure you are still at the top level of your new project directory. Here's what `ls` should show:
+We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
 
 ```shell
 $ ls
