@@ -24,7 +24,7 @@ restore procedure for the Docker images stored in your registry, taking in
 consideration whether your DTR installation is configured to store images on
 the local filesystem or using a cloud provider.
 
-After restoring, you can add more DTR replicas by using the the `join` command.
+After restoring, you can add more DTR replicas by using the `join` command.
 
 
 ## Options
@@ -37,16 +37,16 @@ After restoring, you can add more DTR replicas by using the the `join` command.
 |`--dtr-external-url`|URL of the host or load balancer clients use to reach DTR. Format https://host[:port]|
 |`--dtr-key`|Use a PEM-encoded TLS private key for DTR. If not provided, one will be generated at install time.|
 |`--dtr-storage-volume`|Full path or volume name to store Docker images in the local filesystem|
-|`--enable-pprof`|Enables pprof profiling of the server|
+|`--enable-pprof`|Enable pprof profiling of the server|
 |`--extra-envs`|Environment variables or swarm constraints for DTR containers. Format var=val[&var=val]|
 |`--http-proxy`|The HTTP proxy used for outgoing requests|
 |`--https-proxy`|The HTTPS proxy used for outgoing requests|
 |`--hub-password`|Password to use when pulling images|
 |`--hub-username`|Username to use when pulling images|
-|`--log-host`|Endpoint to send logs to, required if --log-protocol is tcp or udp|
+|`--log-host`|Endpoint to send logs to, required if `--log-protocol` is tcp or udp|
 |`--log-level`|Log level for container logs. Default: INFO|
 |`--log-protocol`|The protocol for sending container logs: tcp, tcp+tls, udp or internal. Default: internal|
-|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip|hostname>/<mountpoint>|
+|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip\|hostname>/<mountpoint>|
 |`--no-proxy`|Don't use a proxy for these domains. Format acme.org[, acme.com]|
 |`--replica-http-port`|The public HTTP port for the DTR replica. Default is 80|
 |`--replica-https-port`|The public HTTPS port for the DTR replica. Default is 443|
