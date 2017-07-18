@@ -34,7 +34,7 @@ and run:
 docker run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_latest_image }} \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
   support > docker-support.tgz
 ```
 

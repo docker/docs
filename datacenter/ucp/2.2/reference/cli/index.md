@@ -23,24 +23,24 @@ Additional help is available for each command with the `--help` flag.
 docker run -it --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    {{ page.ucp_latest_image }} \
+    {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
     command [command arguments]
 ```
 
 ## Commands
 
-| Option          | Description                                               |
-|:----------------|:----------------------------------------------------------|
-| `install`       | Install UCP on this node                                  |
-| `restart`       | Start or restart UCP components running on this node      |
-| `stop`          | Stop UCP components running on this node                  |
-| `upgrade`       | Upgrade the UCP cluster                                   |
-| `images`        | Verify the UCP images on this node                        |
-| `uninstall-ucp` | Uninstall UCP from this swarm                             |
-| `dump-certs`    | Print the public certificates used by this UCP web server |
-| `fingerprint`   | Print the TLS fingerprint for this UCP web server         |
-| `support`       | Create a support dump for this UCP node                   |
-| `id`            | Print the ID of UCP running on this node                  |
-| `backup`        | Create a backup of a UCP manager node                     |
-| `restore`       | Restore a UCP cluster from a backup                       |
-| `example-config`| Display an example configuration file for UCP             |
+| Option           | Description                                               |
+|:-----------------|:----------------------------------------------------------|
+| `install`        | Install UCP on this node                                  |
+| `restart`        | Start or restart UCP components running on this node      |
+| `stop`           | Stop UCP components running on this node                  |
+| `upgrade`        | Upgrade the UCP cluster                                   |
+| `images`         | Verify the UCP images on this node                        |
+| `uninstall-ucp`  | Uninstall UCP from this swarm                             |
+| `dump-certs`     | Print the public certificates used by this UCP web server |
+| `fingerprint`    | Print the TLS fingerprint for this UCP web server         |
+| `support`        | Create a support dump for this UCP node                   |
+| `id`             | Print the ID of UCP running on this node                  |
+| `backup`         | Create a backup of a UCP manager node                     |
+| `restore`        | Restore a UCP cluster from a backup                       |
+| `example-config` | Display an example configuration file for UCP             |

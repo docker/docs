@@ -83,7 +83,7 @@ command, replacing the placeholders for the real values:
 read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  docker/dtr:{{ page.dtr_version_patch }} backup \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \
@@ -120,9 +120,9 @@ of the tar file created. The backup of the images should look like:
 ```none
 tar -tf {{ image_backup_file }}
 
-dtr-backup-v{{ page.dtr_version_patch }}/
-dtr-backup-v{{ page.dtr_version_patch }}/rethink/
-dtr-backup-v{{ page.dtr_version_patch }}/rethink/layers/
+dtr-backup-v{{ page.dtr_version }}/
+dtr-backup-v{{ page.dtr_version }}/rethink/
+dtr-backup-v{{ page.dtr_version }}/rethink/layers/
 ```
 
 And the backup of the DTR metadata should look like:
@@ -131,10 +131,10 @@ And the backup of the DTR metadata should look like:
 tar -tf {{ backup-metadata.tar }}
 
 # The archive should look like this
-dtr-backup-v{{ page.dtr_version_patch }}/
-dtr-backup-v{{ page.dtr_version_patch }}/rethink/
-dtr-backup-v{{ page.dtr_version_patch }}/rethink/properties/
-dtr-backup-v{{ page.dtr_version_patch }}/rethink/properties/0
+dtr-backup-v{{ page.dtr_version }}/
+dtr-backup-v{{ page.dtr_version }}/rethink/
+dtr-backup-v{{ page.dtr_version }}/rethink/properties/
+dtr-backup-v{{ page.dtr_version }}/rethink/properties/0
 ```
 
 If you've encrypted the metadata backup, you can use:
@@ -174,7 +174,7 @@ Start by removing any DTR container that is still running:
 
 ```none
 docker run -it --rm \
-  docker/dtr:{{ page.dtr_version_patch }} destroy \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} destroy \
   --ucp-insecure-tls
 ```
 
@@ -205,7 +205,7 @@ placeholders for the real values:
 read -sp 'ucp password: ' UCP_PASSWORD; \
 docker run -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
-  docker/dtr:{{ page.dtr_version_patch }} restore \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} restore \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \

@@ -184,7 +184,7 @@ docker run --detach --restart always \
   --publish 5000:5000 \
   --volume $(pwd)/dtr-ca.pem:/certs/dtr-ca.pem \
   --volume $(pwd)/config.yml:/config.yml \
-  docker/dtr-content-cache:{{ page.dtr_version_patch }} /config.yml
+  {{ page.dtr_org }}/dtr-content-cache:{{ page.dtr_version }} /config.yml
 ```
 
 You can also run the command in interactive mode instead of detached by
