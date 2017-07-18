@@ -38,10 +38,10 @@ time, configure your DTR for high-availability.
 |`--https-proxy`|The HTTPS proxy used for outgoing requests|
 |`--hub-password`|Password to use when pulling images|
 |`--hub-username`|Username to use when pulling images|
-|`--log-host`|Endpoint to send logs to, required if --log-protocol is tcp or udp|
+|`--log-host`|Endpoint to send logs to, required if `--log-protocol` is tcp or udp|
 |`--log-level`|Log level for container logs. Default: INFO|
 |`--log-protocol`|The protocol for sending container logs: tcp, tcp+tls, udp or internal. Default: internal|
-|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip|hostname>/<mountpoint>|
+|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip\|hostname>/<mountpoint>|
 |`--no-proxy`|Don't use a proxy for these domains. Format acme.org[, acme.com]|
 |`--replica-http-port`|The public HTTP port for the DTR replica. Default is 80|
 |`--replica-https-port`|The public HTTPS port for the DTR replica. Default is 443|
