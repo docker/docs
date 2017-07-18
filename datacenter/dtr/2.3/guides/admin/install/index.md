@@ -36,7 +36,7 @@ Run the following command to install DTR:
 
 ```none
 # Pull the latest version of DTR
-$ docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}{{ page.dtr_version }}
+$ docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 
 # Install DTR
 $ docker run -it --rm \
