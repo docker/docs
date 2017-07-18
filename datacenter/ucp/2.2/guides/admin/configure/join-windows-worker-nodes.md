@@ -31,12 +31,11 @@ UCP requires Docker EE version 17.06 or later.
 on a Windows Server 2016 instance to enable joining a swarm that's managed by
 UCP.
 
->  Internal development
+> Access Docker EE for Beta testing
 >
->  For internal development, install the dev binaries in the zip archive at
->  [windows/amd64/docker-17.06.0-dev.zip](https://master.dockerproject.org/windows/amd64/docker-17.06.0-dev.zip),
->  because you need version 17.06 or later to join a UCP swarm. For Beta, the binaries
->  will be available publicly at [download.docker.com](https://download.docker.com/components/engine/windows-server).
+> For Beta testing, install the binaries in the zip archive at
+> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip),
+> because you need version 17.06-ee or higher to join a UCP swarm.
 
 ## Configure the Windows node
 
@@ -52,17 +51,17 @@ On a manager node, run the following command to list the images that are require
 on Windows nodes.
 
 ```bash
-$ docker container run --rm dockerorcadev/ucp:2.2.0-latest images --list --image-version dev: --enable-windows
-dockerorcadev/ucp-agent-win:2.2.0-5213679
-dockerorcadev/ucp-dsinfo-win:2.2.0-5213679
+$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --image-version dev: --enable-windows
+{{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
+{{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
 On Windows Server 2016, in a PowerShell terminal running as Administrator,
 log in to Docker Hub with the `docker login` command and pull the listed images.
 
 ```ps
-PS> docker pull dockerorcadev/ucp-agent-win:2.2.0-5213679
-PS> docker pull dockerorcadev/ucp-dsinfo-win:2.2.0-5213679
+PS> docker pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} 
+PS> docker pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
 ### Run the Windows node setup script
@@ -71,18 +70,11 @@ You need to open ports 2376 and 12376, and create certificates
 for the Docker daemon to communicate securely. Run this command:
 
 ```ps
-PS> docker run --rm dockerorcadev/ucp-agent-win:2.2.0-5213679 windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+PS> docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
 ```
 
 The Windows node is ready to join the swarm. Run the setup script on each
 instance of Windows Server that will be a worker node.
-
->  Internal development
->
->  For internal development, you need to
->  [run these commands manually](#configure-a-windows-worker-node-manually),
->  because the script assumes access to public images. You need to be logged in
->  to Docker Hub.
 
 ### Compatibility with daemon.json
 
@@ -133,7 +125,7 @@ To see the script, you can run the `windows-script` command without piping
 to the `Invoke-Expression` cmdlet.
 
 ```ps
-PS> docker run --rm dockerorcadev/ucp-agent-win:2.2.0-latest windows-script
+PS> docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
 ```
 
 ### Open ports in the Windows firewall
@@ -156,7 +148,7 @@ PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow 
     to generate certificates.
 
     ```ps
-    PS> docker run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs dockerorcadev/ucp-agent-win:2.2.0-5213679 generate-certs
+    PS> docker run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} generate-certs
     ```
 
 3.  To set up certificates, run the following commands to stop and unregister the

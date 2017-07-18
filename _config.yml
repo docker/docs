@@ -98,8 +98,8 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.0"
-      dtr_latest_image: "docker/dtr:2.3.0"
+      ucp_latest_image: "docker/ucp:2.2.0-beta1"
+      dtr_latest_image: "docker/dtr:2.3.0-beta1"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
