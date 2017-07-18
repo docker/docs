@@ -76,7 +76,7 @@ from the repository.
     $ sudo dnf -y install dnf-plugins-core
     ```
 
-2.  se the following command to set up the **stable** repository. You always
+2.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install builds from the
     **edge** or **testing** repositories as well.
 
@@ -98,7 +98,7 @@ from the repository.
     $ sudo dnf config-manager --set-enabled docker-ce-testing
     ```
 
-    ou can disable the **edge** or **testing** repository by running the
+    You can disable the **edge** or **testing** repository by running the
     `dnf config-manager` command with the `--disable` flag. To re-enable it, use
     the `--enable` flag. The following command disables the **edge** repository.
 
