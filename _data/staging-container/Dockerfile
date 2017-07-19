@@ -1,4 +1,4 @@
-FROM starefossen/github-pages:112
+FROM starefossen/github-pages:137
 
 VOLUME /usr/src/app
 
