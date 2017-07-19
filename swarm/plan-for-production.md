@@ -103,7 +103,7 @@ securely configure your network.
 
 All production environments should be highly available, meaning they are
 continuously operational over long periods of time. To achieve high
-availability, an environment must the survive failures of its individual
+availability, an environment must survive failures of its individual
 component parts.
 
 The following sections discuss some technologies and best practices that can
