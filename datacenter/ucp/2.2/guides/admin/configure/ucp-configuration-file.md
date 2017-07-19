@@ -1,18 +1,32 @@
 ---
 title: UCP configuration file
 description: Configure UCP deployments.
-keywords: docker enterprise edition, ucp, universal control plane, swarm, cluster configuration, deploy
+keywords: docker enterprise edition, ucp, universal control plane, swarm, configuration, deploy
 ---
 
-Override the default UCP settings by providing a configuration file when you create 
-UCP manager nodes. This is useful for scripted installations.
+Override the default UCP settings by providing a configuration file when you
+create UCP manager nodes. This is useful for scripted installations.
 
-```bash
-$ docker config create --name ...  <ucp.cfg>
-```
+## UCP configuration file 
 
-Specify your configuration settings in a TOML file. For more info, see
-[Tom's Obvious, Minimal Language](https://github.com/toml-lang/toml/blob/master/README.md). 
+The `ucp-agent` service uses a configuration file to set up UCP.
+You can use the configuration file in different ways to set up your UCP
+swarms.
+
+- Install one swarm and use the UCP web UI to configure it as desired,
+  extract the configuration file, edit it as needed, and use the edited
+  config file to make copies to multiple other swarms.
+- Install a UCP swarm, extract and edit the configuration file, and use the 
+  CLI to apply the new configuration to the same swarm.
+- Run the `example-config` command, edit the example configuration file, and
+  apply the file at install time or after installation.
+
+Specify your configuration settings in a TOML file.
+[Learn about Tom's Obvious, Minimal Language](https://github.com/toml-lang/toml/blob/master/README.md). 
+
+The configuration has a versioned naming convention, with a trailing decimal
+number that increases with each version, like `com.docker.ucp.config-1`. The
+`ucp-agent` service maps the configuration to the file at `/etc/ucp/ucp.toml`.
 
 ## Example configuration file
 
@@ -20,7 +34,23 @@ You can see an example TOML config file that shows how to configure UCP
 settings. From the command line, run UCP with the `example-config` option:
 
 ```bash
-$ docker container run --rm docker/ucp:2.2.0-latest example-config
+$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
+```
+
+## Inspect and create configurations
+
+Use the `docker config inspect` command to view the current settings and emit
+them to a file.
+
+```bash
+$ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
+```
+
+Use the `docker config create` command to read the settings that are specified
+in a TOML file and create a new configuration.   
+
+```bash
+$ docker config create --name ...  <ucp-config.toml>
 ```
 
 ## Configuration file and web UI

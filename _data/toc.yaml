@@ -1638,6 +1638,8 @@ manuals:
           title: Integrate with Docker Trusted Registry
         - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/
           title: Integrate with LDAP
+        - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file
+          title: Integrate with LDAP by using a configuration file
       - sectiontitle: Manage users
         section:
         - path: /datacenter/ucp/2.2/guides/admin/manage-users/

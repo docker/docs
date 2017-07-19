@@ -134,3 +134,4 @@ LDAP directory.
 -  [Create and manage users](../../manage-users/create-and-manage-users.md)
 -  [Create and manage teams](../../manage-users/create-and-manage-teams.md)
 -  [UCP permission levels](../../permission-levels.md)
+-  [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)
