@@ -50,3 +50,11 @@ and the API is fully interactive within the UCP UI.
   * Detail panels for resources no longer slide out and cover the main panel
 
 **Known Issues**
+
+* You can't integrate with LDAP through the web UI. Use the CLI instead <!-- link to more info -->
+* The web UI works with Chrome and Firefox. Internet Explorer and Safari
+support will be added for GA
+* When you upload a non-beta license, UCP fails silently. Use a beta license instead
+* Windows workers
+  * The web UI is not showing logs for Windows workers
+  * The web UI doesn't allow allow draining, pausing, or removing Windows nodes
