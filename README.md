@@ -111,7 +111,7 @@ You have three options:
 1.  On your local machine, clone this repo and run our staging container:
 
     ```bash
-    git clone https://github.com/docker/docker.github.io.git
+    git clone --recursive https://github.com/docker/docker.github.io.git
     cd docker.github.io
     docker-compose up
     ```
@@ -134,7 +134,7 @@ You have three options:
     a. Clone this repo by running:
 
        ```bash
-       git clone https://github.com/docker/docker.github.io.git
+       git clone --recursive https://github.com/docker/docker.github.io.git
        ```
 
     b. Install Ruby 2.3 or later as described in [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).

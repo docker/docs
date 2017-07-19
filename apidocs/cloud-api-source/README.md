@@ -11,7 +11,7 @@ If you find a typo or mismatch between the API and this documentation, please se
 To run it locally:
 
 ```none
-$ git clone https://github.com/docker/docker.github.io.git
+$ git clone --recursive https://github.com/docker/docker.github.io.git
 $ make release
 ```
 
