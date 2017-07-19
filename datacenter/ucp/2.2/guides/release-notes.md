@@ -51,7 +51,7 @@ and the API is fully interactive within the UCP UI.
 
 **Known Issues**
 
-* You can't integrate with LDAP through the web UI. Use the CLI instead <!-- link to more info -->
+* You can't integrate with LDAP through the web UI. [Use the CLI instead](admin/configure/external-auth/enable-ldap-config-file.md).
 * The web UI works with Chrome and Firefox. Internet Explorer and Safari
 support will be added for GA
 * When you upload a non-beta license, UCP fails silently. Use a beta license instead
