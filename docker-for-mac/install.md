@@ -127,14 +127,14 @@ explanation and list of prerequisites.
   [Docker Engine](/engine/userguide/), Docker CLI client,
   [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 
-## Install and Run Docker for Mac
+## Install and run Docker for Mac
 
 1.  Double-click `Docker.dmg` to open the installer, then drag Moby the whale to
     the Applications folder.
 
 	  ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
 
-2.  Double-click `Docker.app` in the Applications folder to start Docker.  (In the example below, the Applications folder is in "grid" view mode.)
+2.  Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
 
 	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
