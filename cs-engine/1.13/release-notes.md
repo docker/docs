@@ -18,6 +18,26 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs5
+(21 Jul 2017)
+
+* Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
+* Prevent data race on `docker network connect/disconnect` [#33456](https://github.com/moby/moby/pull/33456)
+* Improve service discovery reliability [#1796](https://github.com/docker/libnetwork/pull/1796) [#18078](https://github.com/docker/libnetwork/pull/1808)
+* Fix resource leak in swarm mode [#2215](https://github.com/docker/swarmkit/pull/2215)
+* Optimize `docker system df` for volumes on NFS [#33620](https://github.com/moby/moby/pull/33620)
+* Fix validation bug with host-mode ports in swarm mode [#2177](https://github.com/docker/swarmkit/pull/2177)
+* Fix potential crash in swarm mode [#2268](https://github.com/docker/swarmkit/pull/2268)
+* Improve network control-plane reliability [#1704](https://github.com/docker/libnetwork/pull/1704)
+* Do not error out when selinux relabeling is not supported on volume filesystem [#33831](https://github.com/moby/moby/pull/33831)
+* Remove debugging code for aufs ebusy errors [#31665](https://github.com/moby/moby/pull/31665)
+* Prevent resource leak on healthchecks [#33781](https://github.com/moby/moby/pull/33781)
+* Fix issue where containerd supervisor may exit prematurely [#32590](https://github.com/moby/moby/pull/32590)
+* Fix potential containerd crash [#2](https://github.com/docker/containerd/pull/2)
+* Ensure server details are set in client even when an error is returned [#33827](https://github.com/moby/moby/pull/33827)
+* Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
+* Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
+
 ## CS Engine 1.13.1-cs4
 (01 Jun 2017)
 
