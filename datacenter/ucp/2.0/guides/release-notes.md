@@ -12,6 +12,18 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.0.4
+
+(17 July 2017)
+
+**Security Update**
+
+* Remediated a privilege escalation where an authenticated user could obtain
+admin-level privileges
+
+This issue affects UCP versions 2.0.0-2.0.3 and 2.1.0-2.1.4. The were discovered
+by our development team during internal testing.
+
 ## Version 2.0.3
 
 (8 Feb 2017)

@@ -12,6 +12,60 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.5
+
+(20 July 2017)
+
+**Security Update**
+
+* Remediated a privilege escalation where an authenticated user could obtain
+admin-level privileges
+
+This issue affects UCP versions 2.0.0-2.0.3 and 2.1.0-2.1.4. It was discovered
+by our development team during internal testing
+
+**Bug Fixes**
+
+* Core
+    * Fixed an issue where clients misusing the events API (e.g. slowly reading
+    or failing to read events) leads to unresponsive behavior from the cluster
+    * Fixed an issue where app services pulling DTR private images using
+    integrated single-sign-on would fail due to token expiration
+    * UCP resource metrics now correctly display CPU utilization on newer Linux
+    kernels
+    * Fixed an issue where UCP incorrectly reported 100% memory usage on a node
+    due to the usage of memory constraints on containers
+    * Network and volume label filters now work correctly on UCP (for example
+    when using `docker volume ls --filter label="foo"="bar")`
+    * UCP can now be installed correctly when SELinux enforcement mode is
+    enabled (e.g. `--selinux-enabled`)
+    * Fixed an issue where rejoining (or demoting and promoting) a manager node
+    caused `ucp-kv` to become unhealthy due to a stale KV cache
+    * UCP now exposes a Registry field in `docker info` output, so that
+    deploying with registry credentials (e.g. `docker stack deploy --with-registry-auth`
+    now works correctly
+    * UCP now reports percentage progress while pulling images
+    * `docker images -f dangling=true` now correctly lists untagged `<none>`
+    images instead of listing all images
+    * Added a network diagnostic tool to `ucp-dsinfo` image to aid in troubleshooting
+    issues related to overlay networks
+    * Added additional diagnostic information about `docker stacks` to support dumps
+    for troubleshooting purposes
+    * UCP now provides a more informative warning banner and clearer logs when
+    `ucp-auth-store` is unhealthy
+    * Reduced the default cache size for `ucp-auth-store` to free up memory on the UCP manager.
+    This cache can be adjusted via the `RethinkDBCacheSize` parameter in the UCP Config API
+    * Various performance improvements made to `ucp-auth-store` to reduce overhead when the API
+    is being repeatedly accessed in a short period of time
+    * Fixed an issue where one `ucp-auth-store` instances would fail to join the HA
+    cluster if started in the wrong order
+    * Fixed an issue where a UCP manager might get stuck in a restart loop due to
+    being unable to correctly access the root CA
+    * Fixed an issue where users with view-only permissions received an access denied
+    error when attempting to deploy stacks via the Compose UI, despite having been granted 
+    label access to do so
+
+
 ## Version 2.1.4
 
 (4 May 2017)
