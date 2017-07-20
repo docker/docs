@@ -36,7 +36,7 @@ meets the prerequisites:
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
 - [XZ Utils](http://tukaani.org/xz/) 4.9 or higher
-- a [properly mounted](
+- A [properly mounted](
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
   `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount
   point is not sufficient. See Github issues
