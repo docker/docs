@@ -17,7 +17,7 @@ To get started with Docker EE on Ubuntu, make sure you
 ## Prerequisites
 
 Docker CE users should go to
-[Get docker CE for CentOS](/engine/installation/linux/docker-ce/ubuntu.md)
+[Get docker CE for Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md)
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
