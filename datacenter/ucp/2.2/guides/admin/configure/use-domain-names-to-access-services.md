@@ -78,5 +78,5 @@ requests.
 
 ## Where to go next
 
-- [Use domain names to access services](/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/use-domain-names-to-access-services.md)
+- [Use your own TLS certificates](use-your-own-tls-certificates.md)
 - [Run only the images you trust](run-only-the-images-you-trust.md)

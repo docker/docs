@@ -122,10 +122,12 @@ their restart behavior, configures the number of replicas, and so on. These
 features are provided by the Compose V3 file format.
 [Learn about Compose files](/compose/compose-file/).
 
-Click **Create** to build and deploy the application. When you see the **Created successfully** message, click **Done**.
+Click **Create** to build and deploy the application. When you see the
+**Created successfully** message, click **Done**.
 
 In the left pane, click **Services** to see the details of the services that
-you deployed across your nodes. Click the `VotingApp_vote` service and find the **Published Endpoint** field in the details pane. Click the link to visit
+you deployed across your nodes. Click the `VotingApp_vote` service and find
+the **Published Endpoint** field in the details pane. Click the link to visit
 the voting page, which is published on port `5000`.
 
 ![Screenshot of deployed service](../../images/deployed_visualizer.png){: .with-border}

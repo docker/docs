@@ -21,7 +21,8 @@ support dump:
 ## From the UI
 
 1. Log into the UCP web UI with an administrator account.
-2. In the top-left menu, click your username and choose **Support Dump**.
+2. In the top-left menu, click your username and choose
+   **Download Logs**.
 
 ![](images/get-support-1.png){: .with-border}
 

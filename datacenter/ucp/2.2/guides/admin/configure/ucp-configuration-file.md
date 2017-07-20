@@ -43,7 +43,9 @@ Use the `docker config inspect` command to view the current settings and emit
 them to a file.
 
 ```bash
+{% raw %}
 $ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
+{% endraw %}
 ```
 
 Use the `docker config create` command to read the settings that are specified

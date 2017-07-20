@@ -62,7 +62,7 @@ preselected option is the default collection, but this can be changed.
 Users can't deploy a resource without a collection.  When deploying a
 resource in CLI without an access label, UCP automatically places the
 resource in the user's default collection.
-[Learn how to add labels to cluster nodes](/datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
+[Learn how to add labels to cluster nodes](../configure/add-labels-to-cluster-nodes/).
 
 When using Docker Compose, the system applies default collection labels
 across all resources in the stack, unless the `com.docker.ucp.access.label`
