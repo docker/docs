@@ -13,6 +13,18 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.7
+
+(17 July 2017)
+
+**Bugs fixed**
+
+* Fixed registry DoS vulnerability.  CVE-2017-11468.  Severity: high
+* Fixed small memory leak when handling batch jobs.  Severity: small
+
+**General improvements**
+* Added registry pprof endpoint if pprof is enabled.
+
 ## DTR 2.1.6
 
 (13 April 2017)

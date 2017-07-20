@@ -12,6 +12,19 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.7
+
+(17 July 2017)
+
+**Bugs fixed**
+
+* Fixed registry DoS vulnerability.  CVE-2017-11468.  Severity: high
+* Fix issue with `docker/dtr` operations in UCP clusters with failed nodes.
+This prevented DTR from being installed or reconfigured.  Severity: medium
+* Silenced incorrect error log in registry container.  Severity: low
+* Remove unused permissions dropdown on teams pages.  Severity: low
+
+
 ## DTR 2.2.6
 
 (3 July 2017)
