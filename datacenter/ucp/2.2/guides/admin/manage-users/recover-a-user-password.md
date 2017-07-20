@@ -1,5 +1,5 @@
 ---
-title: Recover a user password
+title: Reset a user password
 description: Learn how to recover your Docker Datacenter credentials
 keywords: docker, ucp, authentication
 ---
@@ -9,10 +9,14 @@ other users.
 
 If that user is being managed using an LDAP service, you need to change the
 user password on that system. If the user account is managed using UCP,
-log in with administrator credentials to the **UCP web UI**, navigate to
-the **User Management** tab, and choose the user whose password you want to change.
+log in with administrator credentials to the UCP web UI, navigate to
+the **Users** page, and choose the user whose password you want to change.
+In the details pane, click **Configure** and select **Security** from the
+dropdown.
 
 ![](../../images/recover-a-user-password-1.png){: .with-border}
+
+Update the user's password and click **Save**.
 
 If you're an administrator and forgot your password, you can ask other users
 with administrator credentials to change your password.

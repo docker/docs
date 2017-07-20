@@ -24,13 +24,17 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
     configuration from the `ucp-agent` service.
 
     ```bash
+    {% raw %}
     $ CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ range $config := .Spec.TaskTemplate.ContainerSpec.Configs }}{{ $config.ConfigName }}{{ "\n" }}{{ end }}' ucp-agent | grep 'com.docker.ucp.config-')
+    {% endraw %}
     ```
 
 2.  Get the current configuration and save it to a TOML file.
 
     ```bash
+    {% raw %}
     $ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > config.toml
+    {% endraw %}
     ```
 
 3.  Use the output of the `example-config` command as a guide to edit your

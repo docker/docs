@@ -47,22 +47,21 @@ Click **Add Hostname based routes** and assign the routing values.
 | External scheme   | http://               |
 | Routing mesh host | wordpress.example.com |
 
-Click **Confirm** to assign the network configuration.
-
 Finally, you need to connect the service to the `ucp-hrm` network. This is
 what ensures traffic sent to the HTTP routing mesh is redirected to your
 service. In the **Networks** section, click **Attach Network** and select
 `ucp-hrm` from the dropdown list.
 
 When creating the service, make sure to publish both internal and public ports.
-This maps the port 80 on the container running the service, to port 8000 on the
-ingress routing mesh.
+This example maps the port 80 on the container running the service, to port 8000
+on the ingress routing mesh.
 
 ![](../../images/use-domain-names-4.png){: .with-border}
 
-Click **Create** to deploy your service. Once the service is deployed,
-the HTTP routing mesh service is reconfigured to redirect HTTP requests with
-the hostname set to `wordpress.example.org`, to the WordPress service.
+Click **Confirm** to assign the network configuration, and click **Create**
+to deploy your service. Once the service is deployed, the HTTP routing mesh
+service is reconfigured to redirect HTTP requests with the hostname set to
+`wordpress.example.org`, to the WordPress service.
 
 ## Add a DNS entry
 

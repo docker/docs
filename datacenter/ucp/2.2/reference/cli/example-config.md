@@ -19,4 +19,4 @@ docker run --rm -i \
 ## Description
 
 This command emits an example configuration file for setting up UCP.
-[Learn about ](../../guides/admin/configure/ucp-configuration-file.md). 
+[Learn about UCP configuration files](../../guides/admin/configure/ucp-configuration-file.md). 

@@ -26,19 +26,25 @@ create a new team.
 ## Add users to a team
 
 You can now add and remove users from the team. In the current organization's
-teams list, click the new team, and in the right pane, click the vertical
-dots icon. In the popup menu, click **Add Users**, and choose the users that
-you want to add to the team.
+teams list, click the new team, and in the details pane, click **Add Users**. 
+Choose the users that you want to add to the team, and when you're done, click
+**Add Users**.
 
 ![](../../images/create-and-manage-teams-3.png){: .with-border}
 
 ## Sync team members with your organization's LDAP directory
 
+> Beta version of Docker EE
+> 
+> In the public Beta version of Docker EE, you can't use the UCP web UI to
+> integrate with LDAP. Instead, you need to use a
+> [UCP configuration file](../configure/external-auth/enable-ldap-config-file.md). 
+
 If UCP is configured to sync users with your organization's LDAP directory
 server, you will have the option to enable syncing the new team's members when
 creating a new team or when modifying settings of an existing team.
 [Learn how to configure integration with an LDAP directory](../configure/external-auth/index.md).
-Enabling this option will expand the form with additional fields for configuring
+Enabling this option expands the form with additional fields for configuring
 the sync of team members.
 
 ![](../../images/create-and-manage-teams-5.png){: .with-border}

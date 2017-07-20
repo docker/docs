@@ -19,6 +19,12 @@ log in with the recovery admin password.
 
 ## Configure the LDAP integration
 
+> Beta version of Docker EE
+> 
+> In the public Beta version of Docker EE, you can't use the UCP web UI to
+> integrate with LDAP. Instead, you need to use a
+> [UCP configuration file](enable-ldap-config-file.md). 
+
 To configure UCP to create and authenticate users using an LDAP directory,
 go to the UCP web UI, navigate to the **Admin Settings** page and click 
 **Authentication & Authorization** to select the method used to create and

@@ -100,7 +100,6 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This command will output detailed status of all servers and database tables
 # in the RethinkDB cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
-{% endraw %}
 
 Server Status: [
   {
@@ -118,6 +117,7 @@ Server Status: [
   }
 ]
 ...
+{% endraw %}
 ```
 
 ### Manually reconfigure database replication
@@ -133,7 +133,6 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This reconfigure-db command will repair the RethinkDB cluster to have a
 # number of replicas equal to the number of manager nodes in the cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
-{% endraw %}
 
 time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..." 
 time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]" 
@@ -141,6 +140,7 @@ time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to
 time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..." 
 time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\"" 
 ...
+{% endraw %}
 ```
 
 ## Where to go next

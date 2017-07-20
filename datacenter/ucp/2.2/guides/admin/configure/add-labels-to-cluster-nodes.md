@@ -128,7 +128,7 @@ To check if a service has deployment constraints, navigate to the
 In the details pane, click **Constraints** to list the constraint labels.
 
 To edit the labels on the service, click **Configure** and select
-**Environment** 
+**Environment**. 
 
 ![](../../images/add-constraint-to-service.png)
 
