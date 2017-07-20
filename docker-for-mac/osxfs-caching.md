@@ -28,8 +28,8 @@ Performance](https://stories.amazee.io/docker-on-mac-performance-docker-machine-
 gives a nice, quick summary.
 
 For information on how to configure these options in a Compose file, see
-[Performance tuning for volume
-mounts](/compose/compose-file.md#performance-tuning-for-volume-mounts-docker-for-mac)
+[Caching options for volume
+mounts](/compose/compose-file.md#caching-options-for-volume-mounts-docker-for-mac)
 the Docker Compose topics.
 
 ## Performance implications of host-container file system consistency

@@ -1426,7 +1426,7 @@ services:
         constraints: [node.role == manager]
 ```
 
-#### Performance tuning for volume mounts (Docker for Mac)
+#### Caching options for volume mounts (Docker for Mac)
 
 On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
 configure container-and-host consistency requirements for bind-mounted
