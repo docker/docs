@@ -218,7 +218,7 @@ can change the location of the configuration file using the `--config-file`
 daemon flag. The documentation below assumes the configuration file is located
 at `/etc/docker/daemon.json`.
 
-1. .  Create or edit the Docker daemon configuration file, which defaults to
+1.  Create or edit the Docker daemon configuration file, which defaults to
     `/etc/docker/daemon.json` file, which controls the Docker daemon
     configuration.
 
