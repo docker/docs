@@ -50,7 +50,7 @@ installed, uninstall them, along with associated dependencies.
 $ sudo yum remove docker \
                   docker-common \
                   docker-selinux \
-                  docker-engine-selinux
+                  docker-engine-selinux \
                   docker-engine
 ```
 
@@ -143,7 +143,7 @@ from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/<OS-Type>/docker-ee.repo
     ```
 
 #### Install Docker EE
