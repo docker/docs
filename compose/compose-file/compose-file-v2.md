@@ -162,6 +162,23 @@ those used by other software.
         - "com.example.department=Finance"
         - "com.example.label-with-empty-value"
 
+#### network
+
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+
+Set the network containers will connect to for the `RUN` instructions during
+build.
+
+    build:
+      context: .
+      network: host
+
+
+    build:
+      context: .
+      network: custom_network_1
+
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -761,11 +778,20 @@ Example usage:
 ### pid
 
     pid: "host"
+    pid: "container:custom_container_1"
+    pid: "service:foobar"
 
-Sets the PID mode to the host PID mode.  This turns on sharing between
-container and the host operating system the PID address space.  Containers
-launched with this flag will be able to access and manipulate other
-containers in the bare-metal machine's namespace and vise-versa.
+If set to one of the following forms: `container:<container_name>`,
+`service:<service_name>`, the service will share the PID address space of the
+designated container or service.
+
+If set to "host", the service's PID mode will be the host PID mode.  This turns
+on sharing between container and the host operating system the PID address
+space. Containers launched with this flag will be able to access and manipulate
+other containers in the bare-metal machine's namespace and vise-versa.
+
+> **Note**: the `service:` and `container:` forms require
+> [version 2.1](compose-versioning.md#version-21) or above
 
 ### pids_limit
 
@@ -824,6 +850,15 @@ SIGTERM. Setting an alternative signal using `stop_signal` will cause
 `stop` to send that signal instead.
 
     stop_signal: SIGUSR1
+
+### storage_opt
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
+
+Set storage driver options for this service.
+
+    storage_opt:
+      size: '1G'
 
 ### sysctls
 
