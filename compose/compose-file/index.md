@@ -1426,9 +1426,50 @@ services:
         constraints: [node.role == manager]
 ```
 
+#### Caching options for volume mounts (Docker for Mac)
+
+On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
+configure container-and-host consistency requirements for bind-mounted
+directories in Compose files to allow for better performance on read/write of
+volume mounts. These options address issues specific to `osxfs` file sharing,
+and therefore are only applicable on Docker for Mac.
+
+The flags are:
+
+* `consistent`: Full consistency. The container runtime and the
+host maintain an identical view of the mount at all times.  This is the default.
+
+* `cached`: The host's view of the mount is authoritative. There may be
+delays before updates made on the host are visible within a container.
+
+* `delegated`: The container runtime's view of the mount is
+authoritative. There may be delays before updates made in a container
+are visible on the host.
+
+Here is an example of configuring a volume as `cached`:
+
+```
+version: '3'
+services:
+  php:
+    image: php:7.1-fpm
+    ports:
+      - 9000
+    volumes:
+      - .:/var/www/project:cached
+```
+
+Full detail on these flags, the problems they solve, and their
+`docker run` counterparts is in the Docker for Mac topic [Performance tuning for
+volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
+
+
 ### restart
 
-`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+`no` is the default restart policy, and it will not restart a container under
+any circumstance. When `always` is specified, the container always restarts. The
+`on-failure` policy restarts a container if the exit code indicates an
+on-failure error.
 
     restart: "no"
     restart: always

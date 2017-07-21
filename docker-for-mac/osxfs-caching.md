@@ -15,7 +15,22 @@ of mounted volume access on Docker for Mac. These options begin to solve some of
 the challenges discussed in [Performance issues, solutions, and
 roadmap](/docker-for-mac/osxfs.md#performance-issues-solutions-and-roadmap).
 
-> **Tip:** Release notes for Docker CE Edge 17.04 are [here](https://github.com/moby/moby/releases/tag/v17.04.0-ce), and the associated pull request for the additional `docker run -v` flags is [here](https://github.com/moby/moby/pull/31047).
+> **Tip:** Release notes for Docker CE Edge 17.04 are
+[here](https://github.com/moby/moby/releases/tag/v17.04.0-ce), and the
+associated pull request for the additional `docker run -v` flags is
+[here](https://github.com/moby/moby/pull/31047).
+
+The following topics describe the challenges of bind-mounted volumes on `osxfs`,
+and the caching options provided to optimize performance.
+
+This blog post on  [Docker on Mac
+Performance](https://stories.amazee.io/docker-on-mac-performance-docker-machine-vs-docker-for-mac-4c64c0afdf99)
+gives a nice, quick summary.
+
+For information on how to configure these options in a Compose file, see
+[Caching options for volume
+mounts](/compose/compose-file.md#caching-options-for-volume-mounts-docker-for-mac)
+the Docker Compose topics.
 
 ## Performance implications of host-container file system consistency
 
@@ -67,9 +82,10 @@ there is no need for writes to build artifacts within the container to
 be immediately reflected on the host file system.  Distinguishing between
 these two cases makes it possible to significantly improve performance.
 
-There are three broad scenarios to consider, based on which you can dial in the level of consistency you need.  In each case, the container
-has an internally-consistent view of bind-mounted directories, but in
-two cases temporary discrepancies are allowed between container and host.
+There are three broad scenarios to consider, based on which you can dial in the
+level of consistency you need.  In each case, the container has an
+internally-consistent view of bind-mounted directories, but in two cases
+temporary discrepancies are allowed between container and host.
 
  * `consistent`: perfect consistency  
    (host and container have an identical view of the mount at all times)
@@ -82,10 +98,12 @@ two cases temporary discrepancies are allowed between container and host.
 
 ## Examples
 
-Each of these configurations (`consistent`, `cached`, `delegated`) can be specified as a suffix to the [`-v`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
-option of [`docker run`](https://docs.docker.com/engine/reference/run.md).
-For example, to bind-mount `/Users/yallop/project` in a container under
-the path `/project`, you might run the following command:
+Each of these configurations (`consistent`, `cached`, `delegated`) can be
+specified as a suffix to the
+[`-v`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
+option of [`docker run`](https://docs.docker.com/engine/reference/run.md). For
+example, to bind-mount `/Users/yallop/project` in a container under the path
+`/project`, you might run the following command:
 
 ```
 docker run -v /Users/yallop/project:/project:cached alpine command
