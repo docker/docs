@@ -115,8 +115,6 @@ com.docker.aws.lb.arn="arn:...@HTTPS:443"
 com.docker.aws.lb.arn="arn:...@443"
 ```
 
-#### A SSL (TCP) listener on port 443
-
 ```none
 com.docker.aws.lb.arn="arn:...@SSL:443"
 ```
