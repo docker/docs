@@ -1431,7 +1431,8 @@ services:
 On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
 configure container-and-host consistency requirements for bind-mounted
 directories in Compose files to allow for better performance on read/write of
-volume mounts. These options address issues specific to `osxfs` file sharing, and therefore are only applicable on Docker for Mac.
+volume mounts. These options address issues specific to `osxfs` file sharing,
+and therefore are only applicable on Docker for Mac.
 
 The flags are:
 
