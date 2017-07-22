@@ -18,6 +18,14 @@ svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/d
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api md_source/engine/api || (echo "Failed engine/api download" && exit -1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec md_source/registry/spec || (echo "Failed registry/spec download" && exit -1)
 
+# Get the Library docs
+svn co https://github.com/docker-library/docs/trunk md_source/_samples/library || (echo "Failed library download" && exit -1)
+FILES=$(find md_source/_samples/library -type f -name '*.md')
+for f in $FILES
+do
+  sed -i '1i ---\n---' $f
+  # take action on each file.
+done
 
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
