@@ -95,13 +95,11 @@ $ docker service create \
 
 ### HTTPS vs SSL load balancer protocols
 
-The elastic load balancer allows you to configure which protocol your listener will support. Originally, only `TCP` and `SSL` was supported. This was limiting because when you use `TCP` or `SSL` it doesn't include the HTTP headers that most applications use to determine the requestor's original IP address. `TCP` and `SSL` does support the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but most applications aren't setup to support it.
+Docker for AWS version 17.07.0 and later also support the `HTTPS` listener protocol when using ACM certificates.
 
-Starting with `Docker for AWS 17.07.0` it is now possible to specify if you want `HTTPS` or `SSL` as the load balancer protocol when using an ACM certificate. If you do not specify the protocol it will default to `SSL (TCP)` so that it is backwards compatible with older versions. The only valid options are `HTTPS` or `SSL`, if you put any other value, it will default to `SSL`.
+Use the `HTTPS` protocol if your app relies on checking the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header for resolving the client IP address. Note that the client IP is also available with `SSL` by using the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but many apps and app frameworks don't support this.
 
-Using `HTTPS` will send along some extra headers including the IP address of the client in the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header.
-
-When using the `HTTPS` load balancer protocol, the instance protocol will be `HTTP`, and it will be `TCP` when using `SSL (TCP)`.
+The only valid options are `HTTPS` and `SSL`. Specifying any other value will cause `SSL` to be selected. For backwards compatibility the default protocol is `SSL`.
 
 #### A HTTPS listener on port 443
 
