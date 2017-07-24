@@ -4,33 +4,36 @@
 # Replicates the non-archive functionality of the Dockerfile
 
 # First build master
-ENGINE_SVN_BRANCH="branches/17.03.x"
-ENGINE_BRANCH="17.03.x"
+ENGINE_SVN_BRANCH="branches/17.06"
+ENGINE_BRANCH="17.06"
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 DISTRIBUTION_BRANCH="release/2.6"
 
-svn co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/extend engine/extend \
-	&& wget -O engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
-	&& wget -O engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
-	&& wget -O engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.20.md \
-	&& wget -O engine/api/v1.21.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.21.md \
-	&& wget -O engine/api/v1.22.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.22.md \
-	&& wget -O engine/api/v1.23.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.23.md \
-	&& wget -O engine/api/v1.24.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.24.md \
-	&& wget -O engine/api/version-history.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/version-history.md \
-	&& wget -O engine/reference/glossary.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/glossary.md \
-	&& wget -O engine/reference/builder.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/builder.md \
-	&& wget -O engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
-	&& wget -O engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
-	&& wget -O engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
+svn co https://github.com/docker/docker-ce/$ENGINE_SVN_BRANCH/components/cli/docs/extend engine/extend \
+	&& wget -O engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.18.md \
+	&& wget -O engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.19.md \
+	&& wget -O engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.20.md \
+	&& wget -O engine/api/v1.21.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.21.md \
+	&& wget -O engine/api/v1.22.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.22.md \
+	&& wget -O engine/api/v1.23.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.23.md \
+	&& wget -O engine/api/v1.24.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/v1.24.md \
+	&& wget -O engine/api/version-history.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/api/version-history.md \
+	&& wget -O engine/reference/glossary.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/reference/glossary.md \
+	&& wget -O engine/reference/builder.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/reference/builder.md \
+	&& wget -O engine/reference/run.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/reference/run.md \
+	&& wget -O engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/reference/commandline/cli.md \
+	&& wget -O engine/deprecated.md https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/cli/docs/deprecated.md \
 	&& svn co https://github.com/docker/distribution/$DISTRIBUTION_SVN_BRANCH/docs/spec registry/spec \
 	&& rm registry/spec/api.md.tmpl \
 	&& wget -O registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
 	&& rm -rf apidocs/cloud-api-source \
 	&& rm -rf tests \
-  && wget -O engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
-  && wget -O engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml \
-  && wget -O engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+	&& wget -O engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
+	&& wget -O engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml \
+	&& wget -O engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.1-ce/api/swagger.yaml \
+	&& wget -O engine/api/v1.28/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml \
+	&& wget -O engine/api/v1.29/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.05.0-ce/api/swagger.yaml \
+	&& wget -O engine/api/v1.30/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/$ENGINE_BRANCH/components/engine/api/swagger.yaml \
 	&& jekyll build -d site --config _config.yml \
 	&& rm -rf site/apidocs/layouts \
 	&& find site -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g'
@@ -39,8 +42,8 @@ echo "Jekyll site in site/"
 
 # Then build edge
 
-ENGINE_SVN_BRANCH="branches/17.04.x"
-ENGINE_BRANCH="17.04.x"
+ENGINE_SVN_BRANCH="branches/17.05.x"
+ENGINE_BRANCH="17.05.x"
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 DISTRIBUTION_BRANCH="release/2.6"
 
@@ -65,9 +68,11 @@ svn co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/extend engine/ex
   && rm -rf tests \
   && wget -O engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
   && wget -O engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml \
-  && wget -O engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+  && wget -O engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.1-ce/api/swagger.yaml \
+  && wget -O engine/api/v1.28/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml \
+  && wget -O engine/api/v1.29/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
   && jekyll build -d site/edge --config _config-edge.yml \
-	&& echo "Jekyll site in site/edge"
+  && echo "Jekyll site in site/edge" \
   && rm -rf site/edge/apidocs/layouts \
   && find site/edge -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g'
 
