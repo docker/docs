@@ -1,123 +1,171 @@
 ---
-title: Isolate swarm nodes between two different teams
+title: Isolate swarm nodes to a specific team
 description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication
 ---
 
 With Docker EE Advanced, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
-different users.
+different users. To control access to nodes, move them to dedicated collections
+where you can grant access to specific users, teams, and organizations.
 
-In this example, two teams get access to two different node collections, 
-and UCP access control ensures that the teams can't view or use each other's
-container resources. You need at least two worker nodes to complete this
-example.
+In this example, a team gets access to a node collection and a resource
+collection, and UCP access control ensures that the team members can't view
+or use swarm resources that aren't in their collection.
 
-1.  Create an `Ops` team and a `QA` team.
-2.  Create `/Prod` and `/Staging` collections for the two teams.
-3.  Assign worker nodes to one collection or the other.
-4.  Grant the `Ops` and `QA` teams access against their
-    corresponding collections.
+You need a Docker EE Advanced license and at least two worker nodes to
+complete this example.
 
-## Create two teams
+1.  Create an `Ops` team and assign a user to it.
+2.  Create a `/Prod` collection for the team's node.
+3.  Assign a worker node to the `/Prod` collection.
+4.  Grant the `Ops` teams access to its collection.
 
-Click the **Organizations** link in the web UI to create two teams in your
-organization, named "Ops" and "QA". For more info, see
-[Create and manage teams](create-and-manage-teams.md). 
+## Create a team
 
-## Create resource collections
+In the web UI, navigate to the **Organizations & Teams** page to create a team
+named "Ops" in your organization. Add a user who isn't a UCP administrator to
+the team.
+[Learn to create and manage teams](create-and-manage-teams.md). 
 
-In this example, the Ops and QA teams use two different node groups,
-which they access through corresponding resource collections.
+## Create a node collection and a resource collection
 
-1.  In the left pane, click **Collections** to show all of the resource
+In this example, the Ops team uses an assigned group of nodes, which it
+accesses through a collection. Also, the team has a separate collection
+for its resources. 
+
+Create two collections: one for the team's worker nodes and another for the
+team's resources.
+
+1.  Navigate to the **Collections** page to view all of the resource
     collections in the swarm.
-2.  Click **Create collection**, and in the **Collection Name** textbox, enter
-    "Prod".
+2.  Click **Create collection** and name the new collection "Prod".
 3.  Click **Create** to create the collection.
-4.  Find **Prod** in the list, and click **View collection**.
-5.  Click **Create collection**, and in the **Collection Name** textbox, enter
-    "ApplicationA". This creates a sub-collection for access control. 
-6.  Navigate to the collections list by clicking **Collections** in the left pane
-    or at the top of the page.
-7.  Click **Create collection** again, and in the **Collection Name** textbox, enter
-    "Staging". Also, create a sub-collection named "ApplicationA".
+4.  Find **Prod** in the list, and click **View children**.
+5.  Click **Create collection**, and name the child collection 
+    "Webserver". This creates a sub-collection for access control. 
 
-You've created four new collections. The `/Prod` and `/Staging` collections
-are for the worker nodes, and the `/Prod/ApplicationA` and `/Staging/ApplicationA`
-sub-collections are for access control to an application that will be deployed on the corresponding worker nodes.
+You've created two new collections. The `/Prod` collection is for the worker
+nodes, and the `/Prod/Webserver` sub-collection is for access control to
+an application that you'll deploy on the corresponding worker nodes.
 
-## Move worker nodes to collections 
+## Move a worker node to a collection 
 
-By default, worker nodes are located in the `/Shared` collection. To control
-access to nodes, move them to dedicated collections where you can grant 
-access to specific users, teams, and organizations.
+By default, worker nodes are located in the `/Shared` collection.
+Worker nodes that are running DTR are assigned to the `/System` collection.
+To control access to the team's nodes, move them to a dedicated collection.
 
-Move worker nodes by changing the value of the access label key,
- `com.docker.ucp.access.label`, to a different collection.
+Move a worker node by changing the value of its access label key,
+`com.docker.ucp.access.label`, to a different collection.
 
-1.  In the left pane, click **Nodes** to view all of the nodes in the swarm.
-2.  Click a worker node, and in the details pane on the right, click **Edit**. 
-3.  In the **Labels** section, find the access label with the value `/Shared` and
-    change it to `/Prod`. 
+1.  Navigate to the **Nodes** page to view all of the nodes in the swarm.
+2.  Click a worker node, and in the details pane, find its **Collection**.
+    If it's in the `/System` collection, click another worker node,
+    because you can't move nodes that are in the `/System` collection. By
+    default, worker nodes are assigned to the `/Shared` collection.  
+3.  When you've found an available node, in the details pane, click
+    **Configure**. 
+3.  In the **Labels** section, find `com.docker.ucp.access.label` and change
+    its value from `/Shared` to `/Prod`. 
 4.  Click **Save** to move the node to the `/Prod` collection.
-5.  Repeat the previous steps for another worker node, and move it to the 
-    `/Staging` collection. 
 
-> Note: If you're not running Docker EE Advanced, you'll get the following 
+> Docker EE Advanced required
+>
+> If you don't have a Docker EE Advanced license, you'll get the following 
 > error message when you try to change the access label: 
-> Nodes must be in either the shared or system collection without an advanced license.
+> **Nodes must be in either the shared or system collection without an advanced license.**
+> [Get a Docker EE Advanced license](https://www.docker.com/pricing).
 
-## Grant access for specific teams
+![](../../images/isolate-nodes-1.png)
 
-You'll need four grants to control access to nodes and container resources:
+## Grant access for a team
 
--  Grant the `Ops` team the `Scheduler` role against the `/Prod` nodes.
--  Grant the `Ops` team the `Restricted Control` role against the `/Prod/ApplicationA` resources.
--  Grant the `QA` team the `Scheduler` role against the `/Staging` nodes.
--  Grant the `QA` team the `Restricted Control` role against the `/Staging/ApplicationA` resources.
+You'll need two grants to control access to nodes and container resources:
 
-These are the steps for creating the grants for the resource collections.  
+-  Grant the `Ops` team the `Restricted Control` role for the `/Prod/Webserver`
+   resources.
+-  Grant the `Ops` team the `Scheduler` role against the nodes in the `/Prod`
+   collection.
 
-1.  Navigate to **User Management > Manage Grants** and click **Create grant**.
-2.  In the left pane, click **Collections**, navigate to **/Prod/ApplicationA**,
-    and click **Select**.
-3.  Click **Roles**, and select **Restricted Control** in the dropdown list.
-4.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
-    select **Ops** from the **Team** dropdown. 
-5.  Click **Create** to grant permissions to the Ops team.
-6.  Click **Create grant** and repeat the previous steps for the **/Staging/ApplicationA**
-    collection and the QA team.
+Create two grants for team access to the two collections:
 
-The same workflow applies for creating the grants against the node collections. 
-Apply the `Scheduler` role to the `/Prod` and `/Staging` collections.
+1.  Navigate to the **Grants** page and click **Create Grant**.
+2.  In the left pane, click **Collections**, and in the **Swarm** collection,
+    click **View Children**.
+3.  In the **Prod** collection, click **View Children**.
+4.  In the **Webserver** collection, click **Select Collection**.  
+5.  In the left pane, click **Roles**, and select **Restricted Control**
+    in the dropdown.
+6.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
+7.  Select your organization, and in the **Team** dropdown, select **Ops**. 
+8.  Click **Create** to grant the Ops team access to the `/Prod/Webserver`
+    collection. 
 
-With these four grants in place, members of the Staging team won't be able
-to view or use the `/Prod` nodes, and members of the Ops team won't be able
-to view or use the `/Staging` nodes.
+The same steps apply for the nodes in the `/Prod` collection.
 
-## Access control in action
+1.  Navigate to the **Grants** page and click **Create Grant**.
+2.  In the left pane, click **Collections**, and in the **Swarm** collection,
+    click **View Children**.
+3.  In the **Prod** collection, click **Select Collection**.
+4.  In the left pane, click **Roles**, and in the dropdown, select **Scheduler**.
+5.  In the left pane, click **Subjects**, and under **Select subject type**, click
+    **Organizations**.
+6.  Select your organization, and in the **Team** dropdown, select **Ops** . 
+7.  Click **Create** to grant the Ops team `Scheduler` access to the nodes in the
+    `/Prod` collection. 
 
-You can see access control in action with the following two scenarios.
+![](../../images/isolate-nodes-2.png)
 
-### Create production workloads
+## Deploy a service as a team member
 
-Users on the Prod team have permissions to create workloads on the `/Prod`
-nodes. 
+Your swarm is ready to show role-based access control in action. When a user
+deploys a service, UCP assigns its resources to the user's default collection.
+From the target collection of a resource, UCP walks up the ancestor collections
+until it finds nodes that the user has `Scheduler` access to. In this example,
+UCP assigns the user's service to the `/Prod/Webserver` collection and schedules
+tasks on nodes in the `/Prod` collection. 
 
-1.  Log in as a user on the Prod team.
-2.  Change the user's default collection to `/Prod/ApplicationA`.
-3.  Run `docker stack deploy` with any compose/stack file.
-4.  All resources are deployed under `/Prod/ApplicationA`, and the
-    containers are scheduled only on the nodes under `/Prod`.
+As a user on the Ops team, set your default collection to `/Prod/Webserver`.
 
-### New users can't inspect isolated nodes and container resources
+1.  Log in as a user on the Ops team.
+2.  Navigate to the **Collections** page, and in the **Prod** collection,
+    click **View Children**. 
+3.  In the **Webserver** collection, click the **More Options** icon and
+    select **Set to default**.
 
-1.  Create a new user.
-2.  Log in as the new user.
-3.  Ensure that the `/Shared` collection has at least one worker node.
-4.  As the new user, run `docker stack deploy <stack-name>`.
-5.  The new workload is deployed on the nodes under `/Shared` and under
-    the user's private collection.
-6.  The new user can't view any of the nodes under `/Prod` or `/Shared`.
+Deploy a service automatically to worker nodes in the `/Prod` collection.
+All resources are deployed under the user's default collection,
+`/Prod/Webserver`, and the containers are scheduled only on the nodes under
+`/Prod`.
+
+1.  Navigate to the **Services** page, and click **Create Service**.
+2.  Name the service "NGINX", use the "nginx:latest" image, and click
+    **Create**.
+3.  When the **nginx** service status is green, click the service. In the
+    details view, click **Inspect Resource**, and in the dropdown, select
+    **Containers**.
+4.  Click the **NGINX** container, and in the details pane, confirm that its
+    **Collection** is **/Prod/Webserver**.
+
+    ![](../../images/isolate-nodes-3.png)
+
+5.  Click **Inspect Resource**, and in the dropdown, select **Nodes**.
+6.  Click the node, and in the details pane, confirm that its **Collection**
+    is **/Prod**.
+
+    ![](../../images/isolate-nodes-4.png)
+
+## Alternative: Use a grant instead of the default collection
+
+Another approach is to use a grant instead of changing the user's default
+collection. An administrator can create a grant for a role that has the
+`Service Create` permission against the `/Prod/Webserver` collection or a child
+collection. In this case, the user sets the value of the service's access label,
+`com.docker.ucp.access.label`, to the new collection or one of its children
+that has a `Service Create` grant for the user.
+
+## Where to go next
+
+- [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
+- [Deploy a service with view-only access across an organization](deploy-view-only-service.md)
 

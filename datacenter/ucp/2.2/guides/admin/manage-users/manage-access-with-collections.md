@@ -68,6 +68,15 @@ When using Docker Compose, the system applies default collection labels
 across all resources in the stack, unless the `com.docker.ucp.access.label`
 has been set explicitly.
 
+> Default collections and collections labels
+> 
+> Setting a default collection is most helpful for users who deploy stacks
+> and don't want to edit the contents of their compose files. Also, setting
+> a default collection is useful for users who work only on a well-defined
+> slice of the system. On the other hand, setting the collection label for
+> every resource works best for users who have versatile roles in the system,
+> like administrators.
+
 ## Collections and labels
 
 Resources are marked as being in a collection by using labels.
