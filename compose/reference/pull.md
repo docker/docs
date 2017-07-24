@@ -11,6 +11,7 @@ Usage: pull [options] [SERVICE...]
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
     --parallel              Pull multiple images in parallel.
+    --quiet                 Pull without printing progress information
 ```
 
 Pulls an image associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
