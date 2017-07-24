@@ -2,7 +2,7 @@
 
 The files in this directory are stub files which include the file
 `/_includes/cli.md`, which parses YAML files generated from the
-[`moby/moby`](https://github.com/moby/moby) repository. The YAML files
+[`docker/cli`](https://github.com/docker/cli) repository. The YAML files
 are parsed into output files like
 [https://docs.docker.com/engine/reference/commandline/build/](https://docs.docker.com/engine/reference/commandline/build/).
 
@@ -14,7 +14,7 @@ The output files are composed from two sources:
   the CLI source code in that repository.
 
 - The **Extended Description** and **Examples** sections are pulled into the
-  YAML from the files in [https://github.com/moby/moby/tree/master/docs/reference/commandline](https://github.com/moby/moby/tree/master/docs/reference/commandline)
+  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline)
   Specifically, the Markdown inside the `## Description` and `## Examples`
   headings are parsed. Please submit corrections to the text in that repository.
 
