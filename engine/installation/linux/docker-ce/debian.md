@@ -173,7 +173,7 @@ from the repository.
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **testing** repositories.
-    
+
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
@@ -194,12 +194,13 @@ from the repository.
     $ sudo apt-get install docker-ce
     ```
 
-    > **Warning**:
+    > Got multiple Docker repositories?
+    >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. This output is truncated. List the
@@ -256,8 +257,10 @@ to install.
 
 
 ### Install on Raspbian (Raspberry Pi)
->**Warning**: This isn't necessary if you used the recommended
->`$ curl -sSL https://get.docker.com | sh` command!
+
+> **Note**: This isn't necessary if you used the recommended
+>`$ curl -sSL https://get.docker.com | sh` command.
+{: .important-vanilla}
 
 Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
 see `docker.list` if you:

@@ -108,7 +108,7 @@ from the repository.
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **testing** repositories.
-    
+
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
@@ -132,12 +132,13 @@ from the repository.
     $ sudo dnf install docker-ce
     ```
 
-    > **Warning**:
+    > Got multiple Docker repositories?
+    >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `dnf install` or
     > `dnf update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This

@@ -135,12 +135,10 @@ the repository.
     word `stable` in the commands below.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`.
-    >
-    > Sometimes, in a distribution like Linux Mint, you might have to change
-    > `$(lsb_release -cs)` to your parent Ubuntu distribution. For
-    > example: If you are using `Linux Mint Rafaela`, you could use
-    > `trusty`.
+    > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
+    > like Linux Mint, you might have to change `$(lsb_release -cs)`
+    > to your parent Ubuntu distribution. For example, if you are using
+    >  `Linux Mint Rafaela`, you could use `trusty`.
 
     **amd64**:
 
@@ -171,7 +169,7 @@ the repository.
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **testing** repositories.
-    
+
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
 
@@ -190,12 +188,13 @@ the repository.
     $ sudo apt-get install docker-ce
     ```
 
-    > **Warning**:
+    > Got multiple Docker repositories?
+    >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. This output is truncated. List the

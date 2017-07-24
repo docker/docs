@@ -55,11 +55,12 @@ either of the two. This helps improve security and blocks certain
 types of exploits. Review the documentation for your Linux distribution for
 instructions for enabling and configuring AppArmor or SELinux.
 
-> **Warning**:
+> Security Warning
+>
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
-{:.warning}
+{:.warning-vanilla}
 
 ##### Docker daemon considerations
 
