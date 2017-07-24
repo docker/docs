@@ -80,7 +80,7 @@ Docker Cloud allows you to define build environment variables either in the hook
 In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Cloud build settings. `$IMAGE_NAME` is a variable that we provide with the name of the image being built.
 
 ```none
-docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME
+docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME .
 ```
 
 > **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build.md) command
@@ -117,10 +117,10 @@ docker push $DOCKER_REPO:$SOURCE_COMMIT
 
 When Docker Cloud pulls a branch from a source code repository, it performs
 a shallow clone (only the tip of the specified branch).  This has the advantage
-of minimizing the amount of data transfer necessary from the repository and 
-speeding up the build because it pulls only the minimal code necessary. 
+of minimizing the amount of data transfer necessary from the repository and
+speeding up the build because it pulls only the minimal code necessary.
 
-Because of this, if you need to perform a custom action that relies on a different 
+Because of this, if you need to perform a custom action that relies on a different
 branch (such as a `post_push` hook), you won't be able checkout that branch, unless
 you do one of the following:
 
