@@ -89,7 +89,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
   (Network Address Translation). You must hit the IP of the container
   directly. You can get the IP address of your container with the following
   steps:
-  1.  Run `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" myapp`
+  1.  Run `docker inspect -f "{% raw %}{{ .NetworkSettings.Networks.nat.IPAddress }}{% endraw %}" myapp`
   2.  Copy the container ip address and paste into your browser.
   (For example, `172.16.240.197`)
 
