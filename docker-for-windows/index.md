@@ -237,6 +237,13 @@ If you would like to have handy tab completion for Docker commands, you can
 install the [`posh-docker`](https://github.com/samneirinck/posh-docker)
 PowerShell Module as follows.
 
+> Prerequisite Notes
+>
+> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/). If you get a prompt to install it, please do so.
+>
+> * Make sure you have administrator permissions to run an elevated PowerShell.
+{: .note-vanilla}
+
 1.  Start an "elevated" PowerShell (i.e., run it as administrator).
 
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
