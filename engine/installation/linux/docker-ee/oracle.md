@@ -145,7 +145,7 @@ from the repository.
     The contents of the list depend upon which repositories you have enabled.
     Choose a specific version to install. The second column is the version string.
     The third column is the repository name, which indicates which repository the
-    package is from and by extension extension its stability level. To install a
+    package is from and by extension its stability level. To install a
     specific version, append the version string to the package name and separate
     them by a hyphen (`-`):
 
