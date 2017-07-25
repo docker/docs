@@ -8,7 +8,7 @@ Print the ID of UCP running on this node
 
 ## Usage
 ```
-docker run --rm \
+docker container run --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \

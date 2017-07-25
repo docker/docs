@@ -9,7 +9,7 @@ Uninstall UCP from this swarm
 ## Usage
 
 ```
- docker run --rm -it \
+ docker container run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp \

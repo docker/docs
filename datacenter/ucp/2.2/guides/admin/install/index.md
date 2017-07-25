@@ -64,10 +64,10 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+    $ docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
     # Install UCP
-    $ docker run --rm -it --name ucp \
+    $ docker container run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
       --host-address <node-ip-address> \

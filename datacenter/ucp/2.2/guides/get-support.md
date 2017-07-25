@@ -32,7 +32,7 @@ To get the support dump from the CLI, use SSH to log into a UCP manager node
 and run:
 
 ```none
-docker run --rm \
+docker container run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \

@@ -23,19 +23,19 @@ deployment which can be used for logging.
 ```none
 docker volume create --name orca-elasticsearch-data
 
-docker run -d \
+docker container run -d \
     --name elasticsearch \
     -v orca-elasticsearch-data:/usr/share/elasticsearch/data \
     elasticsearch elasticsearch -Des.network.host=0.0.0.0
 
-docker run -d \
+docker container run -d \
     -p 514:514 \
     --name logstash \
     --link elasticsearch:es \
     logstash \
     sh -c "logstash -e 'input { syslog { } } output { stdout { } elasticsearch { hosts => [ \"es\" ] } } filter { json { source => \"message\" } }'"
 
-docker run -d \
+docker container run -d \
     --name kibana \
     --link elasticsearch:elasticsearch \
     -p 5601:5601 \

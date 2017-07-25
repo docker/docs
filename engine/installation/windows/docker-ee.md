@@ -34,7 +34,7 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
 2.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
-    PS> docker run hello-world:nanoserver
+    PS> docker container run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
@@ -79,7 +79,7 @@ register, and start the Docker service.
     $null = Install-WindowsFeature containers
 
     # Add Docker to the path for the current session.
-    PS> $env:path += "$env:ProgramFiles\docker"
+    PS> $env:path += ";$env:ProgramFiles\docker"
 
     # Optionally, modify PATH to persist across sessions.
     PS> $newPath = "$env:ProgramFiles\docker;" +
@@ -99,7 +99,7 @@ register, and start the Docker service.
 3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
-    PS> docker run hello-world:nanoserver
+    PS> docker container run hello-world:nanoserver
     ```
 
 

@@ -9,7 +9,7 @@ Create a support dump for this UCP node
 ## Usage
 
 ```
-docker run --rm \
+docker container run --rm \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp \

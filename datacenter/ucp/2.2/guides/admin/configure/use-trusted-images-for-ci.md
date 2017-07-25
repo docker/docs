@@ -26,9 +26,9 @@ While still logged in as an admin, navigate to "Admin Settings" and select the "
 subsection. Select the checkbox to enable content trust and in the select box that appears,
 select the "CI" team we have just created. Save the settings.
 
-This policy will require that every image that referenced in a `docker pull`, `docker run`,
-or `docker service create` must be signed by a key corresponding to a member of the "CI" team.
-In this case, the only member is the "jenkins" user.
+This policy will require that every image that referenced in a `docker image pull`,
+`docker container run`, or `docker service create` must be signed by a key corresponding
+to a member of the "CI" team. In this case, the only member is the "jenkins" user.
 
 ## Create keys for the Jenkins user
 
@@ -63,7 +63,7 @@ configuration directory. Typically this is found at `~/.docker/trust`.
 
 There are two ways to enable content trust: globally, and per operation. To enabled content
 trust globally, set the environment variable `DOCKER_CONTENT_TRUST=1`. To enable on a per
-operation basis, wherever you run `docker push` in your Jenkins scripts, add the flag
+operation basis, wherever you run `docker image push` in your Jenkins scripts, add the flag
 `--disable-content-trust=false`. You may wish to use this second option if you only want
 to sign some images.
 
@@ -92,12 +92,12 @@ notary -s https://my_notary_server.com -d ~/.docker/trust publish my_repository
 N.B. the `-s` flag provides the server hosting a notary service. If you are operating against
 Docker Hub, this will be `https://notary.docker.io`. If you are operating against your own DTR
 instance, this will be the same hostname you use in image names when running docker commands preceded
-by the `https://` scheme. For example, if you would run `docker push my_dtr:4443/me/an_image` the value
+by the `https://` scheme. For example, if you would run `docker image push my_dtr:4443/me/an_image` the value
 of the `-s` flag would be expected to be `https://my_dtr:4443`.
 
 N.B. if you are using DTR, the name of the repository should be identical to the full name you use
-in a `docker push` command. If however you use Docker Hub, the name you use in a `docker push`
-must be preceded by `docker.io/`. i.e. if you ran `docker push me/alpine`, you would
+in a `docker image push` command. If however you use Docker Hub, the name you use in a `docker image push`
+must be preceded by `docker.io/`. i.e. if you ran `docker image push me/alpine`, you would
 `notary init docker.io/me/alpine`.
 
 For brevity, we will exclude the `-s` and `-d` flags from subsequent command, but be aware you
@@ -144,6 +144,6 @@ now use the key we imported to sign any images we push to this repository.
 
 Through either the Docker CLI, or the UCP browser interface, we will find that any images
 that do not meet our signing policy cannot be used. The signing policy we set up requires
-that the "CI" team must have signed any image we attempt to `docker pull`, `docker run`,
+that the "CI" team must have signed any image we attempt to `docker image pull`, `docker container run`,
 or `docker service create`, and the only member of that team is the "jenkins" user. This
 restricts us to only running images that were published by our Jenkins CI system.

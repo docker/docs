@@ -80,9 +80,9 @@ To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
 ```
 # Get the latest version of UCP
-$ docker pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+$ docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
-$ docker run --rm -it \
+$ docker container run --rm -it \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
