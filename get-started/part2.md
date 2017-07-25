@@ -90,10 +90,12 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 
 ## The app itself
 
-Create two more files, `requirements.txt` and `app.py`, and put them in
-the same folder with the `Dockerfile`. This will complete our app.
-
-The contents for these two new files is given below.
+Create two more files, `requirements.txt` and `app.py`, and put them in the same
+folder with the `Dockerfile`. This completes our app, which as you can see is
+quite simple. When the above `Dockerfile` is built into an image, `app.py` and
+`requirements.txt` will be present because of that `Dockerfile`'s `ADD` command,
+and the output from `app.py` will be accessible over HTTP thanks to the `EXPOSE`
+command.
 
 ### `requirements.txt`
 
