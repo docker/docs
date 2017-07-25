@@ -239,7 +239,7 @@ PowerShell Module as follows.
 
 > Prerequisite Notes
 >
-> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" }. If you get a prompt to install it, please do so.
+> * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
 >
 > * Make sure you have administrator permissions to run an elevated PowerShell.
 {: .note-vanilla}
