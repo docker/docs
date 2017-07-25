@@ -19,7 +19,9 @@ Docker CE users should go to
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. To get this information:
+repository URL associated with your trial or subscription. These instructions
+work for Docker EE for CentOS and for Docker EE for Linux, which includes access
+to Docker EE for all Linux distributions.To get this information:
 
 - Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
@@ -88,7 +90,7 @@ EE from the repository.
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>/centos" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Install required packages. `yum-utils` provides the `yum-config-manager`
@@ -104,7 +106,7 @@ EE from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/centos/docker-ee.repo
     ```
 
 #### Install Docker EE
@@ -210,8 +212,8 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to the Docker EE repository URL associated with your trial or
     subscription in your browser. Go to
-    `7/x86_64/stable-{{ minor-version }}/Packages/` and download the `.rpm`
-    file for the Docker version you want to install.
+    `centos/7/x86_64/stable-{{ minor-version }}/Packages/` and download the
+    `.rpm` file for the Docker version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker EE package.

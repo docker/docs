@@ -18,7 +18,9 @@ To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 ### Docker EE URL
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. To get this information:
+repository URL associated with your trial or subscription. These instructions
+work for Docker EE for SLES and for Docker EE for Linux, which includes access
+to Docker EE for all Linux distributions. To get this information:
 
 - Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
@@ -118,14 +120,14 @@ from the repository.
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/12.3/x86_64/stable-{{ minor-version }} \
+        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ minor-version }} \
         docker-ee-stable
     ```
 
 2.  Import the GPG key from the repository.
 
     ```bash
-    $ sudo rpm --import <DOCKER-EE-URL/gpg
+    $ sudo rpm --import <DOCKER-EE-URL/sles/gpg
     ```
 
 #### Install Docker EE
@@ -232,13 +234,13 @@ need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `12.3/x86_64/stable-{{ minor-version }}` and download the `.rpm` file for
+    `sles/12.3/x86_64/stable-{{ minor-version }}` and download the `.rpm` file for
     the Docker version you want to install.
 
 2.  Import Docker's official GPG key:
 
     ```bash
-    $ sudo rpm --import <DOCKER-EE-URL>/gpg
+    $ sudo rpm --import <DOCKER-EE-URL>/sles/gpg
     ```
 
 3.  Install Docker EE, changing the path below to the path where you downloaded

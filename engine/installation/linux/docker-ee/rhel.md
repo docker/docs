@@ -19,7 +19,9 @@ Docker Community Edition (Docker CE) is not supported on RHEL.
 ### Docker EE repository URL
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. To get this information:
+repository URL associated with your trial or subscription. These instructions
+work for Docker EE for RHEL and for Docker EE for Linux, which includes access
+to Docker EE for all Linux distributions. To get this information:
 
 - Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
@@ -89,7 +91,7 @@ from the repository.
       [prerequisites](#prerequisites).
 
       ```bash
-      $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+      $ sudo sh -c 'echo "<DOCKER-EE-URL>/rhel" > /etc/yum/vars/dockerurl'
       ```
 
     - Store your RHEL version string in `/etc/yum/vars/dockerosversion`.
@@ -143,7 +145,7 @@ from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
 #### Install Docker EE
@@ -244,8 +246,8 @@ need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
-    for the Docker version you want to install.
+    `rhel/7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm`
+    file for the Docker version you want to install.
 
     > **Note**: If you have trouble with `selinux` using the packages under the
     > `7` directory, try choosing the version-specific directory instead, such
