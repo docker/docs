@@ -67,7 +67,7 @@ properly. For more information, see
 
 ## Setting things up
 
-Read again [the requirements](index.md#requirements).
+Read again [the requirements](../index.md#requirements).
 
 Ready?
 
