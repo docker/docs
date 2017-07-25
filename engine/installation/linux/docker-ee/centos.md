@@ -130,12 +130,11 @@ EE from the repository.
     $ sudo yum install docker-ee
     ```
 
-    > **Warning**:
-    > If you have multiple Docker repositories enabled, installing
+    > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `yum install` or
     > `yum update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker EE
     instead of always using the latest. List the available versions. This
