@@ -357,7 +357,7 @@ a new file each time you want to upgrade Docker.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
+commands. Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
