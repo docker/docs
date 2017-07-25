@@ -56,8 +56,8 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory and put this file in it, with the name `Dockerfile`.
-Take note of the comments that explain each statement.
+Create an empty directory. Change directories (`cd`) into the new directory, create a file called
+`Dockerfile`, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.
 
 ```conf
 # Use an official Python runtime as a parent image
@@ -82,16 +82,17 @@ ENV NAME World
 CMD ["python", "app.py"]
 ```
 
-This `Dockerfile` refers to a couple of things we haven't created yet, namely
-`app.py` and `requirements.txt`. Let's get those in place next.
+This `Dockerfile` refers to a couple of files we haven't created yet, namely
+`app.py` and `requirements.txt`. Let's create those next.
 
 ## The app itself
 
-Grab these two files and place them in the same folder as `Dockerfile`.
-This completes our app, which as you can see is quite simple. When the above
-`Dockerfile` is built into an image, `app.py` and `requirements.txt` will be
-present because of that `Dockerfile`'s `ADD` command, and the output from
-`app.py` will be accessible over HTTP thanks to the `EXPOSE` command.
+Create two more files, `requirements.txt` and `app.py`, and put them in the same
+folder with the `Dockerfile`. This completes our app, which as you can see is
+quite simple. When the above `Dockerfile` is built into an image, `app.py` and
+`requirements.txt` will be present because of that `Dockerfile`'s `ADD` command,
+and the output from `app.py` will be accessible over HTTP thanks to the `EXPOSE`
+command.
 
 ### `requirements.txt`
 
@@ -139,14 +140,14 @@ the error message.
 > **Note**: Accessing the name of the host when inside a container retrieves the
 container ID, which is like the process ID for a running executable.
 
-## Build the app
-
 That's it! You don't need Python or anything in `requirements.txt` on your
 system, nor will building or running this image install them on your system. It
 doesn't seem like you've really set up an environment with Python and Flask, but
 you have.
 
-Here's what `ls` should show:
+## Build the app
+
+We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
 
 ```shell
 $ ls
@@ -171,8 +172,8 @@ friendlyhello         latest              326387cea398
 
 ## Run the app
 
-Run the app, mapping your machine's port 4000 to the container's `EXPOSE`d port 80
-using `-p`:
+Run the app, mapping your machine's port 4000 to the container's `EXPOSE`d port
+80 using `-p`:
 
 ```shell
 docker run -p 4000:80 friendlyhello
@@ -236,8 +237,9 @@ image and run it somewhere else. After all, you'll need to learn how to push to
 registries when you want to deploy containers to production.
 
 A registry is a collection of repositories, and a repository is a collection of
-images&#8212;sort of like a GitHub repository, except the code is already
-built. An account on a registry can create many repositories. The `docker` CLI uses Docker's public registry by default.
+images&#8212;sort of like a GitHub repository, except the code is already built.
+An account on a registry can create many repositories. The `docker` CLI uses
+Docker's public registry by default.
 
 > **Note**: We'll be using Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
@@ -246,7 +248,9 @@ Registry](/datacenter/dtr/2.2/guides/).
 
 ### Log in with your Docker ID
 
-If you don't have a Docker account, sign up for one at [cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }. Make note of your username.
+If you don't have a Docker account, sign up for one at
+[cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }.
+Make note of your username.
 
 Log in to the Docker public registry on your local machine.
 
@@ -277,7 +281,8 @@ For example:
 docker tag friendlyhello john/get-started:part1
 ```
 
-Run [docker images](/engine/reference/commandline/images/) to see your newly tagged image. (You can also use `docker image ls`.)
+Run [docker images](/engine/reference/commandline/images/) to see your newly
+tagged image. (You can also use `docker image ls`.)
 
 ```shell
 $ docker images
@@ -309,7 +314,8 @@ command:
 docker run -p 4000:80 username/repository:tag
 ```
 
-If the image isn't available locally on the machine, Docker will pull it from the repository.
+If the image isn't available locally on the machine, Docker will pull it from
+the repository.
 
 ```shell
 $ docker run -p 4000:80 john/get-started:part1
@@ -341,14 +347,18 @@ install anything but Docker to run it.
 That's all for this page. In the next section, we will learn how to scale our
 application by running this container in a **service**.
 
-[Continue to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px"}
+[Continue to Part 3 >>](part3.md){: class="button outline-btn"
+style="margin-bottom: 30px"}
 
 
 ## Recap and cheat sheet (optional)
 
-Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):
+Here's [a terminal recording of what was covered on this
+page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):
 
-<script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
+<script type="text/javascript"
+src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js"
+id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
 
 Here is a list of the basic Docker commands from this page, and some related
 ones if you'd like to explore a bit before moving on.
