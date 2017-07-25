@@ -51,8 +51,8 @@ installed, uninstall them, along with associated dependencies.
 
 ```bash
 $ sudo yum remove docker \
-                  docker-engine
-                  docker-engine-selinux \
+                  docker-engine \
+                  docker-engine-selinux
 ```
 
 It's OK if `yum` reports that none of these packages are installed.
@@ -96,7 +96,7 @@ from the repository.
     `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2 container-selinux
     ```
 
 4.  Use the following command to add the **stable** repository:
