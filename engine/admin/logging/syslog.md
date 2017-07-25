@@ -8,7 +8,7 @@ title: Syslog logging driver
 
 The `syslog` logging driver routes logs to a `syslog` server. The `syslog` protocol uses
 a raw string as the log message and supports a limited set of metadata. The syslog
-message mut be formatted in a specific way to be valid. From a valid message, the
+message must be formatted in a specific way to be valid. From a valid message, the
 receiver can extract the following information:
 
 - **priority**: the logging level, such as `debug`, `warning`, `error`, `info`.
