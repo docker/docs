@@ -41,6 +41,9 @@ Systems) architectures.
 > **`s390x` limitations**: System Z is only supported on Ubuntu Xenial,
 > Yakkety, and Zesty.
 
+### Locating the .deb files
+If you need to download the **.deb** packages manually go to `https://download.docker.com/linux/ubuntu/dists`, select your target distribution, and then go to the **pool** directory to find the packages needed for your architecture. For example, For stable build of Ubuntu Trusty amd64 the URL would be `https://download.docker.com/linux/ubuntu/dists/trusty/pool/stable/amd64/`.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
