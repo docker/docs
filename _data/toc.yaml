@@ -553,8 +553,6 @@ reference:
       title: docker checkpoint
     - path: /engine/reference/commandline/checkpoint_create/
       title: docker checkpoint create
-    - path: /engine/reference/commandline/checkpoint_create/
-      title: docker checkpoint create
     - path: /engine/reference/commandline/checkpoint_ls/
       title: docker checkpoint ls
     - path: /engine/reference/commandline/checkpoint_rm/
