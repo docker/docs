@@ -22,7 +22,6 @@ gems:
   - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-relative-links
-  - jekyll-readme-index
 
 defaults:
   - scope:
