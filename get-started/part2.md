@@ -56,10 +56,7 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. We called ours `getstart/`, but you
-can use any name you want.
-
-Change directories (`cd`) into the new directory, create a file called
+Create an empty directory. Change directories (`cd`) into the new directory, create a file called
 `Dockerfile`, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.
 
 ```conf
