@@ -40,9 +40,9 @@ specially useful if the UCP web application is not working.
     ```bash
     $ docker ps -a
     CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS                     PORTS                                                                             NAMES
-    8b77cfa87889        dockerorcadev/ucp-agent:2.2.0-latest      "/bin/ucp-agent re..."   3 hours ago         Exited (0) 3 hours ago                                                                                       ucp-reconcile
-    b844cf76a7a5        dockerorcadev/ucp-agent:2.2.0-latest      "/bin/ucp-agent agent"   3 hours ago         Up 3 hours                 2376/tcp                                                                          ucp-agent.tahzo3m4xjwhtsn6l3n8oc2bf.xx2hf6dg4zrphgvy2eohtpns9
-    de5b45871acb        dockerorcadev/ucp-controller:2.2.0-latest "/bin/controller s..."   3 hours ago         Up 3 hours (unhealthy)     0.0.0.0:443->8080/tcp                                                             ucp-controller
+    8b77cfa87889        docker/ucp-agent:2.2.0-latest             "/bin/ucp-agent re..."   3 hours ago         Exited (0) 3 hours ago                                                                                       ucp-reconcile
+    b844cf76a7a5        docker/ucp-agent:2.2.0-latest             "/bin/ucp-agent agent"   3 hours ago         Up 3 hours                 2376/tcp                                                                          ucp-agent.tahzo3m4xjwhtsn6l3n8oc2bf.xx2hf6dg4zrphgvy2eohtpns9
+    de5b45871acb        docker/ucp-controller:2.2.0-latest        "/bin/controller s..."   3 hours ago         Up 3 hours (unhealthy)     0.0.0.0:443->8080/tcp                                                             ucp-controller
     ...
     ```
 

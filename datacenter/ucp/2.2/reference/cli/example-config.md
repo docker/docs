@@ -9,7 +9,7 @@ Display an example configuration file for UCP
 ## Usage
 
 ```
-docker run --rm -i \
+docker container run --rm -i \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \

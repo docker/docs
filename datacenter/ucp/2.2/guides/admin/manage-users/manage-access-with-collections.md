@@ -116,7 +116,7 @@ networks, containers, and services, the system identifies a set of
 of the resource, like `/Shared/Private/hans`, and it tries to find the parent
 that's closest to the root that the user has the `Node Schedule` permission on.
 
-For example, when a user with a default configuration runs `docker run nginx`,
+For example, when a user with a default configuration runs `docker container run nginx`,
 the system interprets this to mean, "Create an `nginx` container under the
 user's default collection, which is at `/Shared/Private/hans`, and deploy it
 on one of the nodes under `/Shared`.

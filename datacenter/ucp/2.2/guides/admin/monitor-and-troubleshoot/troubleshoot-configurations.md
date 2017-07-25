@@ -99,7 +99,7 @@ NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
 VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This command will output detailed status of all servers and database tables
 # in the RethinkDB cluster.
-docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
+docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
 
 Server Status: [
   {
@@ -132,7 +132,7 @@ NUM_MANAGERS=$(docker node ls --filter role=manager -q | wc -l)
 VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This reconfigure-db command will repair the RethinkDB cluster to have a
 # number of replicas equal to the number of manager nodes in the cluster.
-docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
+docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
 
 time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..." 
 time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]" 

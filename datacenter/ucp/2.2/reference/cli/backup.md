@@ -9,7 +9,7 @@ Create a backup of a UCP manager node
 ## Usage
 
 ```bash
-docker run --rm -i \
+docker container run --rm -i \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \

@@ -9,7 +9,7 @@ Install UCP on this node
 ## Usage
 
 ```bash
-docker run --rm -it \
+docker container run --rm -it \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
@@ -41,7 +41,7 @@ firewall:
   * 4789 (udp) and 7946 (tcp/udp) for overlay networking
 
 If you have SELinux policies enabled for your Docker install, you will need to
-use `docker run --rm -it --security-opt label=disable ...` when running this
+use `docker container run --rm -it --security-opt label=disable ...` when running this
 command.
 
 ## Options

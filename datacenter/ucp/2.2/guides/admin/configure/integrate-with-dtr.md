@@ -97,7 +97,7 @@ DTR repository you created.
 
     ```none
     # Pull hello-world from Docker Store
-    docker pull hello-world:latest
+    docker image pull hello-world:latest
 
     # Re-tag it
     docker tag hello-world:latest <dtr-domain>/<user>/hello-world:latest
@@ -106,7 +106,7 @@ DTR repository you created.
     docker login <dtr-domain>
 
     # Push your image to DTR
-    docker push <dtr-domain>/<user>/hello-world:latest
+    docker image push <dtr-domain>/<user>/hello-world:latest
     ```
 
 3.  Validate that your image is now stored in DTR.

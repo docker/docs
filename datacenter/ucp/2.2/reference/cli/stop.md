@@ -9,7 +9,7 @@ Stop UCP components running on this node
 ## Usage
 
 ```
-docker run --rm -it \
+docker container run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp \

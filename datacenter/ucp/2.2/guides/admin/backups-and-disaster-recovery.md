@@ -50,7 +50,7 @@ verify its contents:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker run --rm -i --name ucp \
+$ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
 
@@ -65,7 +65,7 @@ following example:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker run --rm -i --name ucp \
+$ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive \
   --passphrase "secret" > /tmp/backup.tar
@@ -100,7 +100,7 @@ The example below shows how to restore a UCP cluster from an existing backup
 file, presumed to be located at `/tmp/backup.tar`:
 
 ```none
-$ docker run --rm -i --name ucp \
+$ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore < /tmp/backup.tar
 ```
@@ -109,7 +109,7 @@ If the backup file is encrypted with a passphrase, you will need to provide the
 passphrase to the restore operation:
 
 ```none
-$ docker run --rm -i --name ucp \
+$ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore --passphrase "secret" < /tmp/backup.tar
 ```
@@ -119,7 +119,7 @@ backup file should be mounted to the container rather than streamed through
 stdin:
 
 ```none
-$ docker run --rm -i --name ucp \
+$ docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /tmp/backup.tar:/config/backup.tar \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore -i

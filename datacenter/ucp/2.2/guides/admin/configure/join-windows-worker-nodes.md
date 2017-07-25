@@ -60,8 +60,8 @@ On Windows Server 2016, in a PowerShell terminal running as Administrator,
 log in to Docker Hub with the `docker login` command and pull the listed images.
 
 ```ps
-PS> docker pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} 
-PS> docker pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
+PS> docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} 
+PS> docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
 ### Run the Windows node setup script
@@ -70,8 +70,12 @@ You need to open ports 2376 and 12376, and create certificates
 for the Docker daemon to communicate securely. Run this command:
 
 ```ps
-PS> docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
 ```
+
+> Docker daemon restart
+> 
+> When you run `windows-script`, the Docker service is unavailable temporarily.  
 
 The Windows node is ready to join the swarm. Run the setup script on each
 instance of Windows Server that will be a worker node.
@@ -125,8 +129,9 @@ To see the script, you can run the `windows-script` command without piping
 to the `Invoke-Expression` cmdlet.
 
 ```ps
-PS> docker run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
+PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
 ```
+
 
 ### Open ports in the Windows firewall
 
@@ -148,7 +153,7 @@ PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow 
     to generate certificates.
 
     ```ps
-    PS> docker run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} generate-certs
+    PS> docker container run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} generate-certs
     ```
 
 3.  To set up certificates, run the following commands to stop and unregister the
