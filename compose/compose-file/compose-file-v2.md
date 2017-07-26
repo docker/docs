@@ -1304,9 +1304,6 @@ refer to it within the Compose file:
 
 ## Variable substitution
 
-
-## Variable substitution
-
 Your configuration options can contain environment variables. Compose uses the
 variable values from the shell environment in which `docker-compose` is run. For
 example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply this
