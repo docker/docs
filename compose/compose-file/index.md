@@ -382,6 +382,91 @@ ignored by `docker-compose up` and `docker-compose run`.
 
 Several sub-options are available:
 
+#### endpoint_mode
+
+Specify a service discovery method for external clients connecting to a swarm.
+
+> **[Version 3.3](compose-versioning.md#version-3) only.**
+
+* `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP),
+which acts as the “front end” for clients to reach the service on a
+network. Docker routes requests between the client and available worker
+nodes for the service, without client knowledge of how many nodes
+are participating in the service or their IP addresses or ports.
+(This is the default.)
+
+* `endpoint_mode: dnsrr` -  DNS round-robin (DNSRR) service discovery does
+not use a single virtual IP. Docker sets up DNS entries for the service
+such that a DNS query for the service name returns a list of IP addresses,
+and the client connects directly to one of these. DNS round-robin is useful
+in cases where you want to use your own load balancer, or for Hybrid
+Windows and Linux applications.
+
+    version: "3.3"
+    services:
+
+      wordpress:
+        image: wordpress
+        ports:
+          - 8080:80
+        networks:
+          - overlay
+        deploy:
+          mode: replicated
+          replicas: 2
+          endpoint_mode: vip
+
+      mysql:
+        image: mysql
+        volumes:
+           - db-data:/var/lib/mysql/data
+        networks:
+           - overlay
+        deploy:
+          mode: replicated
+          replicas: 2
+          endpoint_mode: dnsrr
+
+    volumes:
+      db-data:
+
+    networks:
+      overlay:
+
+The options for `endpoint_mode` also work as flags on the swarm mode CLI command
+[docker service create](/engine/reference/commandline/service_create.md). For a
+quick list of all swarm related `docker` commands, see [Swarm mode CLI
+commands](/engine/swarm.md#swarm-mode-key-concepts-and-tutorial).  
+
+To learn more about service discovery and networking in swarm mode, see
+[Configure service
+discovery](/engine/swarm/networking.md#configure-service-discovery) in the swarm
+mode topics.
+
+
+#### labels
+
+Specify labels for the service. These labels will *only* be set on the service,
+and *not* on any containers for the service.
+
+    version: "3"
+    services:
+      web:
+        image: web
+        deploy:
+          labels:
+            com.example.description: "This label will appear on the web service"
+
+To set labels on containers instead, use the `labels` key outside of `deploy`:
+
+    version: "3"
+    services:
+      web:
+        image: web
+        labels:
+          com.example.description: "This label will appear on all containers for the web service"
+
+
 #### mode
 
 Either `global` (exactly one container per swarm node) or `replicated` (a
@@ -397,22 +482,6 @@ in the [swarm](/engine/swarm/) topics.)
         image: dockersamples/examplevotingapp_worker
         deploy:
           mode: global
-
-#### replicas
-
-If the service is `replicated` (which is the default), specify the number of
-containers that should be running at any given time.
-
-    version: '3'
-    services:
-      worker:
-        image: dockersamples/examplevotingapp_worker
-        networks:
-          - frontend
-          - backend
-        deploy:
-          mode: replicated
-          replicas: 6
 
 #### placement
 
@@ -431,31 +500,21 @@ documentation.
               - node.role == manager
               - engine.labels.operatingsystem == ubuntu 14.04
 
-#### update_config
+#### replicas
 
-Configures how the service should be updated. Useful for configuring rolling
-updates.
+If the service is `replicated` (which is the default), specify the number of
+containers that should be running at any given time.
 
-- `parallelism`: The number of containers to update at a time.
-- `delay`: The time to wait between updating a group of containers.
-- `failure_action`: What to do if an update fails. One of `continue` or `pause`
-  (default: `pause`).
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
-- `max_failure_ratio`: Failure rate to tolerate during an update.
-
-```none
-version: '3'
-services:
-  vote:
-    image: dockersamples/examplevotingapp_vote:before
-    depends_on:
-      - redis
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 2
-        delay: 10s
-```
+    version: '3'
+    services:
+      worker:
+        image: dockersamples/examplevotingapp_worker
+        networks:
+          - frontend
+          - backend
+        deploy:
+          mode: replicated
+          replicas: 6
 
 #### resources
 
@@ -518,27 +577,31 @@ services:
         window: 120s
 ```
 
-#### labels
+#### update_config
 
-Specify labels for the service. These labels will *only* be set on the service,
-and *not* on any containers for the service.
+Configures how the service should be updated. Useful for configuring rolling
+updates.
 
-    version: "3"
-    services:
-      web:
-        image: web
-        deploy:
-          labels:
-            com.example.description: "This label will appear on the web service"
+- `parallelism`: The number of containers to update at a time.
+- `delay`: The time to wait between updating a group of containers.
+- `failure_action`: What to do if an update fails. One of `continue` or `pause`
+  (default: `pause`).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `max_failure_ratio`: Failure rate to tolerate during an update.
 
-To set labels on containers instead, use the `labels` key outside of `deploy`:
-
-    version: "3"
-    services:
-      web:
-        image: web
-        labels:
-          com.example.description: "This label will appear on all containers for the web service"
+```none
+version: '3'
+services:
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    depends_on:
+      - redis
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+```
 
 #### Not supported for `docker stack deploy`
 
