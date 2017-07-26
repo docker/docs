@@ -50,7 +50,7 @@ Click to show/hide the example Compose file below.
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
-      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h5>
+      <h5 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 <i class="fa fa-chevron-down"></i></a> </h5>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
       <div class="panel-body">
@@ -138,11 +138,11 @@ services:
       placement:
         constraints: [node.role == manager]
 
-  networks:
+networks:
     frontend:
     backend:
 
-  volumes:
+volumes:
     db-data:
     </code></pre>
       </div>
