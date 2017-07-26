@@ -229,14 +229,15 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 ### Version 3.3
 
-An upgrade of [version 3](#version-3) that introduces new parameters only available
-with Docker Engine version **17.06.0+**
+An upgrade of [version 3](#version-3) that introduces new parameters only
+available with Docker Engine version **17.06.0+**
 
 Introduces the following additional parameters:
 
 - [build `labels`](index.md#build)
-- [`credential_spec`](index.md#credential_spec)
+- [`credential_spec`](index.md#credentialspec)
 - [`configs`](index.md#configs)
+- [deploy `endpoint_mode`](index.md#endpointmode)
 
 ## Upgrading
 
