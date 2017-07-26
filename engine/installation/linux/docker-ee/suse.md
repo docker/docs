@@ -118,14 +118,14 @@ from the repository.
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/12.3/x86_64/stable-{{ minor-version }} \
+        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ minor-version }} \
         docker-ee-stable
     ```
 
 2.  Import the GPG key from the repository.
 
     ```bash
-    $ sudo rpm --import <DOCKER-EE-URL/gpg
+    $ sudo rpm --import <DOCKER-EE-URL>/sles/gpg
     ```
 
 #### Install Docker EE
