@@ -31,15 +31,13 @@ To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
 - Zesty 17.04
-- Yakkety 16.10
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
 Docker CE is supported on Ubuntu on `x86_64`, `armhf`, and `s390x` (IBM z
 Systems) architectures.
 
-> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial,
-> Yakkety, and Zesty.
+> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial and Zesty.
 
 ### Uninstall old versions
 
