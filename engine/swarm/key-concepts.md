@@ -44,7 +44,7 @@ worker.
 
 ## Services and tasks
 
-A **service** is the definition of the tasks to execute on the worker nodes. It
+A **service** is the definition of the tasks to execute on the manager or worker nodes. It
 is the central structure of the swarm system and the primary root of user
 interaction with the swarm.
 
