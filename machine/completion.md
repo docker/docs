@@ -7,7 +7,7 @@ title: Command-line completion
 Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
-## Installing Command Completion
+## Install command completion
 
 ### Bash
 
