@@ -209,16 +209,15 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~debian-jessie | {{ download-url-base}} jessie/stable amd64 Packages
+    docker-ce | {{ minor-version }}.0~ce-0~debian | {{ download-url-base}} jessie/stable amd64 Packages
     ```
 
-    The contents of the list depend upon which repositories are enabled,
-    and will be specific to your version of Debian (indicated by the `jessie`
-    suffix on the version, in this example). Choose a specific version to
-    install. The second column is the version string. The third column is the
-    repository name, which indicates which repository the package is from and
-    by extension its stability level. To install a specific version, append the
-    version string to the package name and separate them by an equals sign (`=`):
+    The contents of the list depend upon which repositories are enabled. Choose
+    a specific version to install. The second column is the version string. The
+    third column is the repository name, which indicates which repository the
+    package is from and by extension its stability level. To install a specific
+    version, append the version string to the package name and separate them by
+    an equals sign (`=`):
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION_STRING>
@@ -331,7 +330,7 @@ a new file each time you want to upgrade Docker.
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
     choose your Debian version, browse to `pool/stable/`, choose either
     `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
-    want to install and for your version of Debian.
+    want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.

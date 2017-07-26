@@ -201,16 +201,15 @@ the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~ubuntu-xenial | {{ download-url-base }} xenial/stable amd64 Packages
+    docker-ce | {{ minor-version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
     ```
 
-    The contents of the list depend upon which repositories are enabled,
-    and will be specific to your version of Ubuntu (indicated by the `xenial`
-    suffix on the version, in this example). Choose a specific version to
-    install. The second column is the version string. The third column is the
-    repository name, which indicates which repository the package is from and
-    by extension its stability level. To install a specific version, append the
-    version string to the package name and separate them by an equals sign (`=`):
+    The contents of the list depend upon which repositories are enabled. Choose
+    a specific version to install. The second column is the version string. The
+    third column is the repository name, which indicates which repository the
+    package is from and by extension its stability level. To install a specific
+    version, append the version string to the package name and separate them by
+    an equals sign (`=`):
 
     ```bash
     $ sudo apt-get install docker-ce=<VERSION>
@@ -248,7 +247,7 @@ a new file each time you want to upgrade Docker CE.
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
     choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
     `armhf`, or `s390x`. Download the `.deb` file for the Docker version you
-    want to install and for your version of Ubuntu.
+    want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
