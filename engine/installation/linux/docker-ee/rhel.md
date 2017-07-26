@@ -188,7 +188,7 @@ from the repository.
     on the version, in this example). Choose a specific version to install. The
     second column is the version string. The third column is the repository
     name, which indicates which repository the package is from and by extension
-    extension its stability level. To install a specific version, append the
+    its stability level. To install a specific version, append the
     version string to the package name and separate them by a hyphen (`-`):
 
     ```bash
