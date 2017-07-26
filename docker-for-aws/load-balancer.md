@@ -93,14 +93,51 @@ $ docker service create \
   yourname/your-image:latest
 ```
 
+### HTTPS vs SSL load balancer protocols
+
+Docker for AWS version 17.07.0 and later also support the `HTTPS` listener protocol when using ACM certificates.
+
+Use the `HTTPS` protocol if your app relies on checking the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header for resolving the client IP address. Note that the client IP is also available with `SSL` by using the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but many apps and app frameworks don't support this.
+
+The only valid options are `HTTPS` and `SSL`. Specifying any other value will cause `SSL` to be selected. For backwards compatibility the default protocol is `SSL`.
+
+#### A HTTPS listener on port 443
+
+```none
+com.docker.aws.lb.arn="arn:...@HTTPS:443"
+```
+
+#### A SSL (TCP) listener on port 443
+
+```none
+com.docker.aws.lb.arn="arn:...@443"
+```
+
+```none
+com.docker.aws.lb.arn="arn:...@SSL:443"
+```
+
+#### A HTTPS listener on port 443, and a SSL (TCP) listener on port 8080
+
+```none
+com.docker.aws.lb.arn="arn:...@HTTPS:443,8080"
+```
+
+#### A SSL (TCP) listener on port 443 and 8080
+
+Since BAD isn't a valid option, it will revert back to a SSL (TCP) port for 443.
+
+```none
+com.docker.aws.lb.arn="arn:...@BAD:443,8080"
+```
+
 ### Add a CNAME for your ELB
 
 Once you have your ELB setup, with the correct listeners and certificates, you need to add a DNS CNAME that points to your ELB at your DNS provider.
 
 ### ELB SSL limitations
 
-- There can only be one SSL certificate per ELB, so that means you can only have one label per swarm. If you add more than one `com.docker.aws.lb.arn` label per swarm the last one loaded overwrites the other one.
-- If you remove the service that has the `com.docker.aws.lb.arn` label, it is removed from the ELB.
+- If you remove the service that has the `com.docker.aws.lb.arn` label, that listener and certificate is removed from the ELB.
 - If you edit the ELB config directly from the dashboard, the changes are removed after the next update.
 
 ## Can I manually change the ELB configuration?
