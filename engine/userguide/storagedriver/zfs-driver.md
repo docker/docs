@@ -198,7 +198,7 @@ When you start a container, the following steps happen in order:
     128k.
 
 
-## How container reads and writes work with `devicemapper`
+## How container reads and writes work with `zfs`
 
 ### Reading files
 
