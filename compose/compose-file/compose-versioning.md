@@ -189,7 +189,7 @@ between services and startup order.
 
 An upgrade of [version 2](#version-2) that introduces new parameters only
 available with Docker Engine version **1.12.0+**. Version 2.1 files are
-supported by **Compose 1.9.0+**
+supported by **Compose 1.9.0+**.
 
 Introduces the following additional parameters:
 
@@ -230,7 +230,7 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 ### Version 3.3
 
 An upgrade of [version 3](#version-3) that introduces new parameters only
-available with Docker Engine version **17.06.0+**
+available with Docker Engine version **17.06.0+**, and higher.
 
 Introduces the following additional parameters:
 
