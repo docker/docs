@@ -42,7 +42,19 @@ $ docker run \
   docker4x/upgrade-azure:17.06.0-ce-azure1
 ```
 
-This initiates a rolling upgrade of the Docker swarm. Service state is maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade. Single containers which are not part of services (for example, containers started with `docker run`) are **not** preserved during an upgrade. This is because they are not Docker  services but are known only to the individual Docker engine where they are running.
+If you are already on a version more recent than 17.06.1 CE or 17.07.0 CE, you can use `upgrade.sh` to initiate the upgrade:
+
+```bash
+$ upgrade.sh YY.MM.X-ce-azureC
+```
+
+This example upgrades Docker for Azure from 17.06.1 CE Edge to 17.07.0 CE Edge:
+
+```bash
+$ upgrade.sh 17.07.0-ce-azure1
+```
+
+This initiates a rolling upgrade of the Docker swarm. Service state is maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade. Single containers which are not part of services (for example, containers started with `docker run`) are **not** preserved during an upgrade. This is because they are not Docker services but are known only to the individual Docker engine where they are running.
 
 ## Monitoring
 
