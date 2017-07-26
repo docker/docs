@@ -48,13 +48,13 @@ $ docker run \
 
 The `json-file` logging driver supports the following logging options:
 
-| Option      | Description                                                                                                                                                                                    | Example  value                           |
-|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
-| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`).                                                       | `--log-opt max-size=10m`                 |
-| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. | `--log-opt max-file=3`                   |
-| `labels`    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).                           | `--log-opt labels=production_status,geo` |
-| `env`       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md).            | `--log-opt env=os,customer`              |
-| `env-regex` | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                   | `--log-opt env-regex=^(os|customer).`    |
+| Option      | Description                                                                                                                                                                                                   | Example  value                           |
+|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+| `max-size`  | The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`). Defaults to -1 (unlimited).                                          | `--log-opt max-size=10m`                 |
+| `max-file`  | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. **Only effective when `max-size` is also set.** A positive integer. Defaults to 1. | `--log-opt max-file=3`                   |
+| `labels`    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).                                          | `--log-opt labels=production_status,geo` |
+| `env`       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md).                           | `--log-opt env=os,customer`              |
+| `env-regex` | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                  | `--log-opt env-regex=^(os|customer).`    |
 
 > **Note**: If `max-size` and `max-file` are set, `docker logs` only returns the
 > log lines from the newest log file.
