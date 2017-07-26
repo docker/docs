@@ -1269,7 +1269,43 @@ refer to it within the Compose file:
 
 ## Variable substitution
 
-{% include content/compose-var-sub.md %}
+
+## Variable substitution
+
+Your configuration options can contain environment variables. Compose uses the
+variable values from the shell environment in which `docker-compose` is run. For
+example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply this
+configuration:
+
+    db:
+      image: "postgres:${POSTGRES_VERSION}"
+
+When you run `docker-compose up` with this configuration, Compose looks for the
+`POSTGRES_VERSION` environment variable in the shell and substitutes its value
+in. For this example, Compose resolves the `image` to `postgres:9.3` before
+running the configuration.
+
+If an environment variable is not set, Compose substitutes with an empty
+string. In the example above, if `POSTGRES_VERSION` is not set, the value for
+the `image` option is `postgres:`.
+
+Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Extended shell-style
+features, such as `${VARIABLE-default}` and `${VARIABLE/foo/bar}`, are not
+supported.
+
+You can use a `$$` (double-dollar sign) when your configuration needs a literal
+dollar sign. This also prevents Compose from interpolating a value, so a `$$`
+allows you to refer to environment variables that you don't want processed by
+Compose.
+
+    web:
+      build: .
+      command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+
+If you forget and use a single dollar sign (`$`), Compose interprets the value as an environment variable and will warn you:
+
+  The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
+
 
 ## Compose documentation
 
