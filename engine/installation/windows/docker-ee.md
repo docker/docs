@@ -56,7 +56,7 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
     ```
 
 
-## Using a script to install Docker EE
+## Use a script to install Docker EE
 
 Use the following steps when you want to install manually, script automated
 installs, or install on air-gapped systems.
@@ -114,7 +114,7 @@ If you want to install Docker EE by using [OneGet](https://github.com/oneget/one
 follow the steps described in [Windows Containers on Windows
 Server](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/quick-start-windows-server).
 
-##  What to know before you install
+## What to know before you install
 
 * **What the Docker EE for Windows install includes**: The installation
 provides [Docker Engine](/engine/userguide/intro.md) and the
