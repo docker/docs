@@ -37,6 +37,7 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 -   `--digitalocean-ssh-user`: SSH username.
 -   `--digitalocean-ssh-port`: SSH port.
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
+-   `--digitalocean-tags`: Comma-separated list of tags to apply to the Droplet, see [Droplet tagging](https://developers.digitalocean.com/documentation/v2/#tags)
 
 The DigitalOcean driver will use `ubuntu-16-04-x64` as the default image.
 
@@ -55,3 +56,4 @@ The DigitalOcean driver will use `ubuntu-16-04-x64` as the default image.
 | `--digitalocean-ssh-user`           | `DIGITALOCEAN_SSH_USER`           | `root`             |
 | `--digitalocean-ssh-port`           | `DIGITALOCEAN_SSH_PORT`           | 22                 |
 | `--digitalocean-ssh-key-fingerprint`| `DIGITALOCEAN_SSH_KEY_FINGERPRINT`| -                  |
+| `--digitalocean-tags`               | `DIGITALOCEAN_TAGS`               | -                  |
