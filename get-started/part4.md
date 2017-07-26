@@ -71,7 +71,14 @@ You now have two VMs created, named `myvm1` and `myvm2` (as `docker-machine ls`
 shows). The first one will act as the manager, which executes `docker` commands
 and authenticates workers to join the swarm, and the second will be a worker.
 
-You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
+Before sending commands to these VMs, you must set up the environment for the Docker client.
+
+```shell
+$ docker-machine env myvm1
+$ docker-machine env myvm2
+```
+
+Now you can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
 this:
 
