@@ -5,9 +5,14 @@ description: Learn how to make your tags immutable and don't allow users to
 keywords: docker, registry, immutable
 ---
 
+{% assign domain="dtr.example.org" %}
+{% assign org="library" %}
+{% assign repo="wordpress" %}
+{% assign tag="latest" %}
+
 By default, users with access to push to a repository, can push the same tag
 multiple times to the same repository.
-As an example, a user pushes an image to `site/wordpress:4.7`, and later another
+As an example, a user pushes an image to `{{ org }}/{{ repo }}:{{ tag }}`, and later another
 user can push the image with exactly the same name but different functionality.
 This might make it difficult to trace back the image to the build that generated
 it.
@@ -27,8 +32,8 @@ From now on, users will get an error message when trying to push a tag
 that already exists:
 
 ```none
-docker push dtr.example.org/site/wordpress:4.7
-unknown: tag=4.7 cannot be overwritten because dtr.example.org/site/wordpress is an immutable repository
+docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
+unknown: tag={{ tag }} cannot be overwritten because {{ domain }}/{{ org }}/{{ repo }} is an immutable repository
 ```
 
 ## Where to go next

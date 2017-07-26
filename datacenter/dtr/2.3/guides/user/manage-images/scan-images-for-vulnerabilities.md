@@ -57,19 +57,9 @@ If your repository owner enabled Docker Security Scanning but disabled automatic
 scanning, you can manually start a scan for images in repositories to which you
 have `write` access.
 
-To start a security scan:
+To start a security scan, navigate to the **tag details**.
 
-1. Navigate to the repository.
-2. Click the **Images** tab.
-3. Locate the image tag that you want to scan.
-4. In the **Vulnerabilities** column, click **Start a scan**.
-![](../../images/scanning-images-1.png){: .with-border}
-
-You can also start a scan from the image details screen:
-
-1. Click **View Details** on the desired image tag.
-2. Click **Scan** on the right-hand side, above the layers table.
-![](../../images/scanning-images-2.png){: .with-border}
+![](../../images/scan-images-for-vulns-1.png){: .with-border}
 
 DTR begins the scanning process. You will need to refresh the page to see the
 results once the scan is complete.
@@ -89,7 +79,7 @@ To change the repository scanning mode:
 1. Navigate to the repository, and click the **Settings** tab.
 2. Scroll down to the **Image scanning** section.
 3. Select the desired scanning mode.
-![](../../images/security-scanning-setup-5.png){: .with-border}
+![](../../images/scan-images-for-vulns-2.png){: .with-border}
 
 ## View security scan results
 
@@ -98,7 +88,7 @@ Once DTR has run a security scan for an image, you can view the results.
 The **Images** tab for each repository includes a summary of the most recent
 scan results for each image.
 
-![](../../images/scanning-images-4.png){: .with-border}
+![](../../images/scan-images-for-vulns-3.png){: .with-border}
 - A green shield icon with a check mark indicates that the scan did not find
 any vulnerabilities.
 - A red or orange shield icon indicates that vulnerabilities were found, and
@@ -127,7 +117,7 @@ by the Dockerfile.
     > **Tip**: The layers view can be long, so be sure
     to scroll down if you don't immediately see the reported vulnerabilities.
 
-   ![](../../images/scanning-images-5.png){: .with-border}
+   ![](../../images/scan-images-for-vulns-4.png){: .with-border}
 
 - The **Components** view lists the individual component libraries indexed by
 the scanning system, in order of severity and number of vulnerabilities found,
@@ -139,7 +129,7 @@ most vulnerable first.
     the scan report provides details on each one. The component details also
     include the license type used by the component, and the filepath to the
     component in the image.
-![](../../images/scanning-images-6.png){: .with-border}
+![](../../images/scan-images-for-vulns-5.png){: .with-border}
 
 ### What do I do next?
 

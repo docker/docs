@@ -1,8 +1,7 @@
 ---
 title: Configure DTR image storage
 description: Storage configuration for Docker Trusted Registry
-keywords: docker, documentation, about, technology, understanding, configuration,
-  storage, storage drivers, Azure, S3, Swift, enterprise, hub, registry
+keywords: storage drivers, NFS, Azure, S3
 ---
 
 By default DTR uses the local filesystem of the node where it is running to
