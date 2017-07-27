@@ -1,0 +1,1029 @@
+documentation_complete: false
+schema_version: 3.1.0
+name: Docker Enterprise Edition (Engine)
+references:
+  - name: Docker Enterprise Edition (Engine) Installation Documentation
+    path: https://docs.docker.com/engine/installation/
+    type: URL
+  - name: Docker Engine Release Notes
+    path: https://docs.docker.com/release-notes/
+    type: URL
+  - name: Configuring and Running Docker on Various Distributions
+    path: https://docs.docker.com/engine/admin/
+    type: URL
+  - name: Docker Engine Security
+    path: https://docs.docker.com/engine/security/security/
+    type: URL
+  - name: Securing Docker Datacenter and Security Best Practices
+    path: https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Securing_Docker_Datacenter_and_Security_Best_Practices
+    type: URL
+satisfies:
+  - control_key: AC-2 (12)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'To assist the organization in meeting the requirements of this
+          control, Docker Enterprise Edition can be configured to aggregate
+          container and daemon events via a number of logging drivers.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/view_container_logs/
+          - https://docs.docker.com/engine/admin/logging/overview/
+          - https://docs.docker.com/engine/admin/logging/log_tags/'
+    standard_key: NIST-800-53
+
+  - control_key: AC-4
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to control the flow of information
+          that originates from applications running in containers. Supporting
+          documentation can be found at the following resources:
+
+          - https://docs.docker.com/engine/userguide/networking/
+          - http://success.docker.com/Datacenter/Apply/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks'
+    standard_key: NIST-800-53
+
+  - control_key: AC-4 (8)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to control the flow of
+          information that originates from applications running in containers
+          per organization-defined security policy filters. Supporting
+          documentation can be found at the following resources:
+
+          - https://docs.docker.com/engine/userguide/networking/
+          - http://success.docker.com/Datacenter/Apply/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks
+          
+          There are also third-party behavioral activity monitoring tools (e.g.
+          Sysdig Falco <http://www.sysdig.org/falco/>) that can be used
+          alongside Docker Enterprise Edition to satisfy this control''s
+          requirements.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-4 (21)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+      - organization
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to separate the flow of
+          information that originates from applications running in containers.
+          Supporting documentation can be found at the following resources:
+
+          - https://docs.docker.com/engine/userguide/networking/
+          - http://success.docker.com/Datacenter/Apply/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks'
+    standard_key: NIST-800-53
+
+  - control_key: AC-17 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition logs and controls all local and remote
+          access events. In addition, auditing can be configured on the
+          underlying operating system to meet this control.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-17 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'All remote access sessions to Docker Enterprise Edition are protected
+          with Transport Layer Security (TLS) 1.2. In addition to this, all
+          communication to Docker Enterprise Edition is enforced by way of
+          two-way mutual TLS authentication.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-17 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'A combination of managed load balancers, firewalls and access control
+          lists, and virtual networking resources can be used to ensure traffic
+          destined for Docker Enterprise Edition is routed through managed network access
+          control points.'
+    standard_key: NIST-800-53
+
+  - control_key: AC-17 (9)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - organization
+    narrative:
+      - text: |
+          'Built-in firewall technology in Docker Enterprise Edition's underlying
+          operating system can be used to force the disconnection of remote
+          connections to the host. In addition, Docker Enterprise Edition provides the
+          option to pause or drain a node in the cluster, which subsequently
+          stops and/or removes sessions to the node. Individual services and/or
+          applications running on Docker Enterprise Edition can also be stopped and/or
+          removed.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-2
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'Both Universal Control Plane and Docker Trusted Registry backend
+          service containers, all of which reside on Docker Enterprise Edition,
+          log all of the event types indicated by this control (as explained by
+          their component narratives). These and other application containers
+          that reside on Docker Enterprise Edition can be configured to log data
+          via an appropriate Docker logging driver. Instructions for configuring
+          logging drivers can be found at the following resource:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-3
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Both Universal Control Plane and Docker Trusted Registry are
+          pre-configured to take advantage of Docker Enterprise Edition''s
+          built-in logging mechanisms. A sample audit event recorded by Docker
+          Enterprise Edition has been provided below:
+
+          {"level":"info","license_key":"123456789123456789123456789","msg":"eNZi:Password
+          based auth
+          suceeded","remote_addr":"192.168.33.1:55905","time":"2016-11-09T22:41:01Z","type":"auth
+          ok","username":"dockeruser"}
+          
+          Additional documentation can be referenced at the following resource:
+          
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+  
+  - control_key: AU-3 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can subsequently be used to interpolate the information defined
+          by this control from the logged audit records. Additional
+          documentation can be found at the following resource:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-3 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can subsequently be used to interpolate the information defined
+          by this control from the logged audit records. Additional
+          documentation can be found at the following resource:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-5
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can be used to interpolate the information defined by this
+          control and also be configured to alert on any audit processing
+          failures. Additional information can be found at the following
+          resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-5 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can subsequently be configured to warn the organization when the
+          allocated log storage is full. Additional information can be found at
+          the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-5 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack.  The
+          logging stack can subsequently be configured to warn the organization
+          when audit log failures occur. Additional information can be found at
+          the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-6 (4)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The
+          organization can subsequently centrally review and analyze all of the
+          Docker EE audit records. Additional information can be found at the
+          following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-7
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can subsequently be used to facilitate the audit reduction and
+          report generation requirements of this control. Additional information
+          can be found at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+      - key: b
+        text: |
+          'The underlying operating system chosen to support Docker Enterprise
+          Edition should be certified to ensure that logs are not altered during
+          generation and transmission to a remote logging stack.'
+    standard_key: NIST-800-53
+  
+  - control_key: AU-7 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. The logging
+          stack can subsequently be configured to parse information by
+          organization-defined audit fields. Additional information can be found
+          at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-8
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - organization
+    narrative:
+      - key: a
+        text: |
+          'Docker Enterprise Edition uses the system clock of the underlying
+          operating system on which it runs. This behavior cannot be modified.'
+      - key: b
+        text: |
+          'The underlying operating system on which Docker Enterprise Edition
+          runs should be configured such that its system clock uses Coordinated
+          Universal Time (UTC) as indicated by this control. Refer to the
+          operating system's instructions for doing so.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-8 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'The underlying operating system on which Docker Enterprise Edition runs should
+          be configured such that its system clock compares itself with an
+          authoritative time source as indicated by this control. This can be
+          accomplished by utilizing the Network Time Protocol (NTP). Refer to
+          the operating system's instructions for doing so.'
+      - key: b
+        text: |
+          'The underlying operating system on which Docker Enterprise Edition
+          runs should be configured such that its system clock synchronizes
+          itself to an authoritative time source as defined by part (a) of this
+          control any time the time difference exceeds that of the
+          organization-defined time period. This can be accomplished by
+          utilizing the Network Time Protocol (NTP). Refer to the operating
+          system's instructions for doing so.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-9
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'On the underlying Linux operating system supporting Docker Enterprise
+          Edition, only root and sudo users and users that have been added to
+          the "docker" group have the ability to access the logs generated by
+          UCP backend service containers. Should the organization decide to
+          configure Docker Enterprise Edition to use a logging driver other than
+          the default json-file driver, the organization is subsequently
+          responsible for configuring the chosen logging stack per the
+          provisions of this control. Additional information can be found at the
+          following resources:
+          
+          - https://docs.docker.com/engine/admin/logging/overview/
+
+          In addition, for Linux operating systems supporting Docker Enterprise
+          Edition that use the systemd daemon, it is imperative that the Journal
+          is secured per the requirements of this control. The same applies for
+          Linux operating systems supporting Docker Enterprise Edition that
+          instead use upstart.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-9 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to use a logging driver
+          that can subsequently meet the backup requirements of this control.
+          Additional information can be found at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-9 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured to use a logging driver
+          that can subsequently meet the encryption mechanisms required by this
+          control. Additional information can be found at the following
+          resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-10
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition includes functionality known as Docker
+          Content Trust which allows one to cryptographically sign Docker
+          images. It enforces client-side signing and verification of image tags
+          and provides the ability to use digital signatures for data sent to
+          and received from Docker Trusted Registry. This ultimately provides
+          one with the ability to verify both the integrity and the publisher of
+          all data received from DTR over any channel. With Docker Content
+          Trust, an organization can enforce signature verification of all
+          content and prohibit unsigned and unapproved content from being
+          manipulated; thus supproting the non-repudiation requirements of this
+          control. Additional information can be found at the following
+          resources:
+
+          - https://docs.docker.com/engine/security/trust/content_trust/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-11
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization will be responsible for meeting the requirements of
+          this control. To assist with these requirements, Docker Enterprise
+          Edition can be configured to use a logging driver that stores data in
+          a location for the duration specified by this control. Additional
+          information can be found at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-12
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - key: a
+        text: |
+          'Both Universal Control Plane and Docker Trusted Registry backend
+          service containers, all of which reside on Docker Enterprise Edition,
+          log all of the event types indicated by this AU-2 a. These and other
+          application containers that reside on Docker Enterprise Edition can be
+          configured to log data via an appropriate Docker logging driver.
+          Additional information can be found at the following resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/
+
+          The underlying Linux operating system supporting Docker Enterprise
+          Edition can be configured to audit Docker-specific events with the
+          auditd daemon. Refer to the specific Linux distribution in use for
+          instructions on configuring this service.'
+      - key: b
+        text: |
+          'Using auditd on the Linux operating system supporting CS Docker
+          Engine, the organization can configure audit rules to select which
+          Docker-specific events are to be audited. Refer to the specific Linux
+          distribution in use for instructions on configuring this service.'
+    standard_key: NIST-800-53
+
+  - control_key: AU-12 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. This
+          logging stack can subsequently be used to compile audit records in to
+          a system-wide audit trail that is time-correlated per the requirements
+          of this control. Additional information can be found at the following
+          resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: AU-12 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be configured with various logging
+          drivers to send audit events to an external logging stack. This
+          logging stack can subsequently be used to meet the requirements of
+          this control. Additional information can be found at the following
+          resources:
+
+          - https://docs.docker.com/engine/admin/logging/overview/'
+    standard_key: NIST-800-53
+
+  - control_key: CA-7
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing Docker
+          Enterprise Edition and for helping the organization meet the
+          continuous monitoring requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-1
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing Docker
+          Enterprise Edition and for helping the organization meet the
+          configurmation management requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-2
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing Docker
+          Enterprise Edition and for helping the organization meet the
+          configurmation management requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-2 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing Docker
+          Enterprise Edition and for helping the organization meet the
+          configurmation management requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-2 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing Docker
+          Enterprise Edition and for helping the organization meet the
+          configurmation management requirements of this control. CIS regularly
+          updates their benchmark to reflect the latest updates in the stable
+          release of Docker Engine. Various configuration management tools such
+          as Inspec (http://inspec.io/) can be used to audit Docker Enterprise
+          Edition system configuration to ensure that the secure baseline
+          configurations have been applied in an automated fashion. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-2 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          configurmation management requirements of this control. CIS regularly
+          updates their benchmark to reflect the latest updates in the stable
+          release of Docker Engine. Various configuration management tools such
+          as Inspec (http://inspec.io/) can be used to audit Docker Enterprise
+          Edition system configuration to ensure that the secure baseline
+          configurations have been applied in an automated fashion and can be
+          rolled back as required by this control. Additional information can be
+          found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-3
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          configurmation management change control requirements of this control.
+          Additional information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-3 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          configurmation management change control requirements of this control.
+          Various configuration management tools such as Inspec
+          (http://inspec.io/) can be used to audit Docker Enterprise Edition
+          system configuration to ensure that the secure baseline configurations
+          have been applied in an automated fashion. Additional information can
+          be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-3 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          configurmation management change control requirements of this control.
+          Various configuration management tools such as Inspec
+          (http://inspec.io/) can be used to audit Docker Enterprise Edition
+          system configuration to ensure that the secure baseline configurations
+          have been applied in an automated fashion. Additional information can
+          be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-3 (6)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          cryptography management requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-5 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          system change requirements of this control. Additional information can
+          be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: CM-5 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Before installing Docker Enterprise Edition, ensure that your
+          supporting Linux operating system''s packager manager supports package
+          signature verification and that it is enabled. It is also required
+          that you import the Docker public key for CS packages so as to
+          retrieve the validated and signed package from Docker, Inc. Refer to
+          your Linux OS documentation for instructions on completing the above
+          steps.
+
+          In addition, Docker Content Trust is a capability provided by CS
+          Docker Engine that enforces client-side signing and verification of
+          Docker image tags. It provides the ability to use digital signatures
+          for data sent to and received from Docker Trusted Registry and the
+          public Docker Store. These signatures allow client-side verification
+          of the integrity and publisher of specific image tags. When enabling
+          Docker Content Trust in Docker Enterprise Edition you can enforce the
+          use of signed Docker images. Additional information can be found at
+          the following resources:
+          
+          - https://docs.docker.com/engine/security/trust/content_trust/'
+    standard_key: NIST-800-53
+
+  - control_key: CM-6 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. The organization can incorporate the use of an external
+          configuration management system to meet the requirements of this
+          control.'
+    standard_key: NIST-800-53
+
+  - control_key: CM-7 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'In order to restrict which Docker images can be used to deploy
+          applications to Docker Enterprise Edition, the organization must define a list
+          of allowed base Docker images and make them available via Docker
+          Trusted Registry. The organization must also prevent users from being
+          able to pull Docker images from untrusted sources.'
+    standard_key: NIST-800-53
+
+  - control_key: CM-7 (5)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The organization is responsible for meeting the requirements of this
+          control. To assist with these requirements and in order to restrict
+          which Docker images can be used to deploy applications to CS Docker
+          Engine, the organization must define a list of allowed base Docker
+          images and make them available via Docker Trusted Registry. The
+          organization must also prevent users from being able to pull Docker
+          images from untrusted sources.'
+    standard_key: NIST-800-53
+
+  - control_key: CM-9
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'The CIS Docker Benchmark can be used as a baseline for securing
+          Docker Enterprise Edition and for helping the organization meet the
+          configuration management plan requirements of this control. Additional
+          information can be found at the following resources:
+          
+          - https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf
+          - http://www.cisecurity.org/critical-controls/tools/CISControlsv4_MaptoNIST800-53rev4.xlsx
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Controls_from_the_CIS_Benchmark'
+    standard_key: NIST-800-53
+
+  - control_key: IA-3
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'In order for other CS Engine nodes to be able to join a cluster
+          managed by Universal Control Plane, they must be identified and
+          authenticated via either a manager or worker token. Use of the token
+          includes trust on first use mutual TLS.'
+    standard_key: NIST-800-53
+
+  - control_key: SA-10 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Content Trust gives you the ability to verify both the
+          integrity and the publisher of all the data received from a Docker
+          Trusted Registry over any channel. It allows operations with a remote
+          DTR instance to enforce client-side signing and verification of image
+          tags. It provides for the ability to use digital signatures for data
+          sent to and receive from remote DTR instances. These signatures allow
+          client-side verification of the integrity and publisher of specific
+          image tags.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-7 (20)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition is designed to run application containers
+          whose content can be completely isolated/segregated from other
+          application containers within the same node/cluster. This is
+          accomplished by way of Linux kernel primitives and various security
+          profiles that can be applied to the underlying host OS. Additional
+          information can be found at the following resources:
+          
+          - https://docs.docker.com/engine/security/security/
+          - https://docs.docker.com/engine/userguide/networking/overlay-security-model/
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Engine_and_Node_Security'
+    standard_key: NIST-800-53
+
+  - control_key: SC-12 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be installed on the following operating systems:
+          CentOS 7.1+, Red Hat Enterprise Linux 7.0+, Ubuntu 14.04 LTS+, and
+          SUSE Linux Enterprise 12+. In order to meet the requirements of this
+          control, reference the chosen operating system's documentation to
+          ensure it is configured in FIPS mode.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-13
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be installed on the following operating systems:
+          CentOS 7.1+, Red Hat Enterprise Linux 7.0+, Ubuntu 14.04 LTS+, and
+          SUSE Linux Enterprise 12+. In order to meet the requirements of this
+          control, reference the chosen operating system's documentation to
+          ensure it is configured in FIPS mode.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-23
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'All remote access sessions to Docker Enterprise Edition are protected with
+          Transport Layer Security (TLS) 1.2 with the AES GCM cipher. In
+          addition to this, all communication to and between Docker Enterprise Editions
+          is enforced by way of two-way mutual TLS authentication.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-28
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'All remote access sessions to Docker Enterprise Edition are protected
+          with Transport Layer Security (TLS) 1.2 with the AES GCM cipher. In
+          addition to this, all communication to/from and between Docker
+          Enterprise Edition nodes is enforced by way of two-way mutual TLS
+          authentication. All Swarm Mode manager nodes in a Docker Enterprise
+          Edition cluster store state metadata and user secrets encrypted at
+          rest using the AES GCM cipher.'
+    standard_key: NIST-800-53
+
+  - control_key: SC-28 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'All remote access sessions to Docker Enterprise Edition are protected with
+          Transport Layer Security (TLS) 1.2 with the AES GCM cipher. In
+          addition to this, all communication to and between Docker Enterprise Editions
+          is enforced by way of two-way mutual TLS authentication.'
+    standard_key: NIST-800-53
+
+  - control_key: SI-3 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Docker Enterprise Edition packages for supported underlying operating
+          systems can only be obtained from Docker, Inc. The Docker EE
+          repositories from which Docker EE packages are obtained are protected
+          with official GPG keys. Each Docker package is also validated with a
+          signature definition.'
+    standard_key: NIST-800-53
+
+  - control_key: SI-11
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'All error messages generated via the logging mechanisms of the Docker
+          Enterprise Edition engine are displayed such that they meet the
+          requirements of this control. Only users that are authorized the
+          appropriate level of access can view these error messages.'
+    standard_key: NIST-800-53
+
+  - control_key: SI-16
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - organization
+    narrative:
+      - text: |
+          'Docker Enterprise Edition can be installed on the following operating systems:
+          CentOS 7.1+, Red Hat Enterprise Linux 7.0+, Ubuntu 14.04 LTS+, and
+          SUSE Linux Enterprise 12+. In order to meet the requirements of this
+          control, reference the chosen operating system's security
+          documentation for information regarding the protection of memory from
+          unauthorized code execution.'
+    standard_key: NIST-800-53

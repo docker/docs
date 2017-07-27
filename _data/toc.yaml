@@ -395,6 +395,16 @@ guides:
     title: Seccomp security profiles for Docker
   - path: /engine/security/userns-remap/
     title: Isolate containers with a user namespace
+- sectiontitle: Standards and compliance
+  section:
+  - path: /compliance/
+    title: Docker standards and compliance
+  - path: /compliance/nist/800_53/
+    title: NIST 800-53
+  - path: /compliance/fedramp/
+    title: FedRAMP
+  - path: /compliance/cis/
+    title: CIS
 - sectiontitle: Extend Engine
   section:
   - path: /engine/extend/
@@ -495,6 +505,48 @@ reference:
 - title: Cloud stack file reference
   path: /docker-cloud/apps/stack-yaml-reference/
   nosync: true
+- sectiontitle: Compliance control reference
+  section:
+  - sectiontitle: NIST 800-53
+    section:
+    - path: /compliance/reference/800-53/
+      title: Overview
+    - path: /compliance/reference/800-53/ac/
+      title: Access Control
+    - path: /compliance/reference/800-53/au/
+      title: Audit and Accountability
+    - path: /compliance/reference/800-53/at/
+      title: Awareness and Training
+    - path: /compliance/reference/800-53/cm/
+      title: Configuration Management
+    - path: /compliance/reference/800-53/cp/
+      title: Contingency Planning
+    - path: /compliance/reference/800-53/ia/
+      title: Identification and Authentication
+    - path: /compliance/reference/800-53/ir/
+      title: Incident Response
+    - path: /compliance/reference/800-53/ma/
+      title: Maintenance
+    - path: /compliance/reference/800-53/mp/
+      title: Media Protection
+    - path: /compliance/reference/800-53/ps/
+      title: Personnel Security
+    - path: /compliance/reference/800-53/pe/
+      title: Physical and Environmental Protection
+    - path: /compliance/reference/800-53/pl/
+      title: Planning
+    - path: /compliance/reference/800-53/pm/
+      title: Program Management
+    - path: /compliance/reference/800-53/ra/
+      title: Risk Assessment
+    - path: /compliance/reference/800-53/ca/
+      title: Security Assessment and Authorization
+    - path: /compliance/reference/800-53/sc/
+      title: System and Communications Protection
+    - path: /compliance/reference/800-53/si/
+      title: System and Information Integrity
+    - path: /compliance/reference/800-53/sa/
+      title: System and Services Acquisition
 - title: Compose file reference
   path: /compose/compose-file/
   nosync: true

@@ -1,0 +1,85 @@
+documentation_complete: false
+schema_version: 3.1.0
+name: Docker Security Scanning (DSS)
+references:
+  - name: DSS Documentation
+    path: https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
+    type: URL
+satisfies:
+  - control_key: RA-5 (1)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'To assist the orgnization in meeting the requirements of this control, the Docker Security Scanning (DSS) component of Docker Trusted Registry
+          (DTR) that is included with the Docker Enterprise Edition Advanced
+          tier can be used to scan Docker images for vulnerabilities against
+          known vulnerability databases. Scans can be triggered either manually
+          or when Docker images are pushed to DTR.'
+    standard_key: NIST-800-53
+
+  - control_key: RA-5 (2)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'To assist the orgnization in meeting the requirements of this
+          control, the Docker Security Scanning component of Docker Trusted
+          Registry (DTR) that is included with the Docker Enterprise Edition
+          Advanced tier compiles a bill of materials (BOM) for each Docker image
+          that it scans. DSS is also synchronized to an aggregate listing of
+          known vulnerabilities that is compiled from both the MITRE and NVD CVE
+          databases. Additional information can be found at the following resources:
+          
+          - https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
+          - https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Image_Scanning'
+    standard_key: NIST-800-53
+
+  - control_key: RA-5 (3)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'To assist the orgnization in meeting the requirements of this
+          control, the Docker Security Scanning component of Docker Trusted
+          Registry (DTR) that is included with the Docker Enterprise Edition
+          Advanced tier identifies vulnerabilities in a Docker image and marks
+          them against predefined criticality levels; critical major and minor.'
+    standard_key: NIST-800-53
+
+  - control_key: RA-5 (5)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'Only the appropriate users that the organization has provided Docker
+          Trusted Registry access to are able to view and interpret
+          vulnerability scan results.'
+    standard_key: NIST-800-53
+
+  - control_key: RA-5 (6)
+    covered_by: []
+    implementation_statuses:
+      - complete
+    control_origins:
+      - Docker Enterprise Edition (EE) system
+    narrative:
+      - text: |
+          'For each Docker image pushed to Docker Trusted Registry at a given
+          time, Docker Security Scaninng retains a list of vulnerabilities
+          detected. The DTR API can be queried to retrieve the vulnerability
+          scan results over a period of time for a given Docker image such that
+          the results can be compared per the requirements of this control.'
+    standard_key: NIST-800-53
