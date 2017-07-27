@@ -115,7 +115,7 @@ By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 | ca-central-1   | ami-ca6ddfae |
 | cn-north-1     | ami-79eb2214 |
 | eu-west-1      | ami-8aa67cf9 |
-| eu-central-1   | ami-ab0210c7 |
+| eu-central-1   | ami-fe408091 |
 | sa-east-1      | ami-185de774 |
 | us-east-1      | ami-26d5af4c |
 | us-west-1      | ami-9cbcd2fc |
