@@ -42,10 +42,10 @@ example sets two configurable options on the `json-file` logging driver:
 ```json
 {
   "log-driver": "json-file",
-  "log-opts": [
-    "labels=production_status",
-    "env=os,customer"
-  ]
+  "log-opts": {
+    "labels": "production_status",
+    "env": "os,customer"
+  }
 }
 ```
 
