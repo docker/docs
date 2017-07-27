@@ -22,6 +22,13 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs13
+(28 Jul 2017)
+
+* Fix packaging issue where packages were missing a `containerd` patch.
+  This resolves an issue with a deadlock in containerd related to healtchecks.
+* Fix a deadlock on cancelling healthcecks. [#28462](https://github.com/moby/moby/pull/28462)
+
 ## CS Engine 1.12.6-cs12
 (01 Jun 2017)
 
