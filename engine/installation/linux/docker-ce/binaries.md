@@ -72,21 +72,17 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 ### Install static binaries
 
-1.  Download the static binary archive. You can download either the latest
-    release binaries or a specific version. To find the download link, see the
-    [release notes](https://github.com/moby/moby/releases) for the version
-    of Docker you want to install. You can choose a `tar.gz` archive or `zip`
-    archive.
+1.  Download the static binary archive. Go to
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/x86_64/)
+    (or change `stable` to `edge` or `test`),
+    choose your hardware platform, and download the `.tgz` file relating to the
+    version of Docker CE you want to install.
 
-2.  Extract the archive using `tar` or `unzip`, depending on the format you
-    downloaded. The `dockerd` and `docker` binaries are extracted.
+2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
+    binaries are extracted.
 
     ```bash
     $ tar xzvf /path/to/<FILE>.tar.gz
-    ```
-
-    ```bash
-    $ unzip /path/to/<FILE>.zip
     ```
 
 3.  **Optional**: Move the binaries to a directory on your executable path, such
@@ -104,7 +100,8 @@ instructions for enabling and configuring AppArmor or SELinux.
     ```
 
     If you need to start the daemon with additional options, modify the above
-    command accordingly.
+    command accordingly or create and edit the file `/etc/docker/daemon.json`
+    to add the custom configuration options.
 
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
@@ -127,23 +124,20 @@ instructions for enabling and configuring AppArmor or SELinux.
 The macOS binary includes the Docker client only. It does not include the
 `dockerd` daemon.
 
-1.  Download the static binary archive. You can download either the latest
-    release binaries or a specific version. To find the download link, see the
-    [release notes](https://github.com/moby/moby/releases) for the version
-    of Docker you want to install. You can choose a `tar.gz` archive or
-    `zip` archive.
+1.  Download the static binary archive. Go to
+    [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
+    (or change `stable` to `edge` or `test`),
+    and download the `.tgz` file relating to the version of Docker CE you want
+    to install.
 
-2.  Extract the archive using `tar` or `unzip`, depending on the format you
-    downloaded. The `docker` binary is extracted.
+2.  Extract the archive using the `tar` utility. The `docker` binary is
+    extracted.
 
     ```bash
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
-    ```bash
-    $ unzip /path/to/<FILE>.zip
-    ```
-3.  **Optional**: Move the binaries to a directory on your executable path, such
+3.  **Optional**: Move the binary to a directory on your executable path, such
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
 
@@ -152,7 +146,8 @@ The macOS binary includes the Docker client only. It does not include the
     ```
 
 4.  Verify that Docker is installed correctly by running the `hello-world`
-    image.
+    image. The value of `<hostname>` is a hostname or IP address running the
+    Docker daemon and accessible to the client.
 
     ```bash
     $ sudo docker -H <hostname> run hello-world
@@ -164,24 +159,21 @@ The macOS binary includes the Docker client only. It does not include the
 
 ## Install server and client binaries on Windows
 
-You can install Docker from binaries on Windows Server 2016 or Windows 10.
-
-- To install both client and server binaries, download the 64-bit binary. The
-  archive includes `x86_64` in the path.
-
-- To install the client only, download the 32-bit binary. The archive includes
-  `i386` in the path.
+You can install Docker from binaries on Windows Server 2016 or Windows 10. Both
+the `dockerd.exe` and `docker.exe` binaries are included.
 
 1.  Use the following PowerShell commands to install and start Docker:
 
     ```none
-    Invoke-WebRequest https://get.docker.com/builds/Windows/x86_64/docker-{{ minor-version }}.0-ce.zip -UseBasicParsing -OutFile docker.zip
-    Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
-    Remove-Item -Force docker.zip
+    PS C:\> Invoke-WebRequest https://download.docker.com/win/static/stable/x86_64//docker-{{ minor-version }}.0-ce.zip -UseBasicParsing -OutFile docker.zip
 
-    dockerd --register-service
+    PS C:\> Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
 
-    Start-Service docker
+    PS C:\> Remove-Item -Force docker.zip
+
+    PS C:\> dockerd --register-service
+
+    PS C:\> Start-Service docker
     ```
 
 2.  Verify that Docker is installed correctly by running the `hello-world`
@@ -189,7 +181,7 @@ You can install Docker from binaries on Windows Server 2016 or Windows 10.
 
 
     ```none
-    docker run hello-world:nanoserver
+    PS C:\> docker run hello-world:nanoserver
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -197,10 +189,10 @@ You can install Docker from binaries on Windows Server 2016 or Windows 10.
 
 ## Upgrade static binaries
 
-To upgrade your manual installation of Docker Engine on Linux, first stop any
-`dockerd` processes running locally, then follow the
-[regular installation steps](#get-the-linux-binaries), overwriting any existing
-`dockerd` or `docker` binaries with the newer versions.
+To upgrade your manual installation of Docker CE, first stop any
+`dockerd` or `dockerd.exe`  processes running locally, then follow the
+regular installation steps to install the new version on top of the existing
+version.
 
 ## Next steps
 

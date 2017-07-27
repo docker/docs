@@ -18,7 +18,9 @@ Docker Community Edition (Docker CE) is not supported on Oracle Linux.
 ### Docker EE repository URL
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. To get this information:
+repository URL associated with your trial or subscription. These instructions
+work for Docker EE for Oracle Linux and for Docker EE for Linux, which includes
+access to Docker EE for all Linux distributions.To get this information:
 
 - Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
@@ -49,8 +51,8 @@ installed, uninstall them, along with associated dependencies.
 
 ```bash
 $ sudo yum remove docker \
-                  docker-engine
-                  docker-engine-selinux \
+                  docker-engine \
+                  docker-engine-selinux
 ```
 
 It's OK if `yum` reports that none of these packages are installed.
@@ -86,7 +88,7 @@ from the repository.
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>/oraclelinux" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Install required packages. `yum-utils` provides the `yum-config-manager`
@@ -94,7 +96,7 @@ from the repository.
     `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2 container-selinux
     ```
 
 4.  Use the following command to add the **stable** repository:
@@ -102,7 +104,7 @@ from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/oraclelinux/docker-ee.repo
     ```
 
 #### Install Docker EE
@@ -202,8 +204,8 @@ need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Browse to
-    `7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
-    for the Docker version you want to install.
+    `oraclelinux/7/x86_64/stable-{{ minor-version }}/Packages` and download the
+    `.rpm` file for the Docker version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker package.

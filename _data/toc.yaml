@@ -52,6 +52,12 @@ guides:
       title: Fedora
     - path: /engine/installation/linux/docker-ce/binaries/
       title: Binaries
+  - sectiontitle: Platforms supporting Docker EE and Docker CE
+    section:
+    - path: /engine/installation/linux/centos/
+      title: CentOS
+    - path: /engine/installation/linux/ubuntu/
+      title: Ubuntu
   - path: /engine/installation/linux/linux-postinstall/
     title: Optional Linux post-installation steps
   - sectiontitle: Docker Edge

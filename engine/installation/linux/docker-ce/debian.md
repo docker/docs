@@ -71,9 +71,13 @@ You can install Docker CE in different ways, depending on your needs:
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 
-- Some users download the DEB package and install it manually and manage
+- Some users download the DEB package and
+  [install it manually](#install-from-a-package) and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
+
+- In testing and development environments, some users choose to use automated
+  [convenience scripts](#install-using-the-convenience-script) to install Docker.
 
 ### Install using the repository
 
@@ -356,7 +360,7 @@ a new file each time you want to upgrade Docker.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
+commands. Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -364,6 +368,8 @@ configuration steps.
 
 To upgrade Docker, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
+
+{% include install-script.md %}
 
 ## Uninstall Docker CE
 

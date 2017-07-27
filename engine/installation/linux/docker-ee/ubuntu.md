@@ -21,7 +21,9 @@ Docker CE users should go to
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
-repository URL associated with your trial or subscription. To get this information:
+repository URL associated with your trial or subscription. These instructions
+work for Docker EE for Ubuntu and for Docker EE for Linux, which includes access
+to Docker EE for all Linux distributions. To get this information:
 
 - Go to [https://store.docker.com/my-content](https://store.docker.com/my-content).
 - Choose **Get Details** / **Setup Instructions** within the
@@ -113,13 +115,13 @@ from the repository.
 3.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
     ```bash
-    $ curl -fsSL <DOCKER-EE-URL>/gpg | sudo apt-key add -
+    $ curl -fsSL <DOCKER-EE-URL>/ubuntu/gpg | sudo apt-key add -
     ```
 
     Verify that the key fingerprint is `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
 
     ```bash
-    $ apt-key fingerprint 0EBFCD88
+    $ apt-key fingerprint 6D085F96
 
     pub   4096R/6D085F96 2017-02-22
         Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
@@ -137,7 +139,7 @@ from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] <DOCKER-EE-URL> \
+       "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
        $(lsb_release -cs) \
        stable-{{ minor-version }}"
     ```
@@ -159,12 +161,11 @@ from the repository.
     $ sudo apt-get install docker-ee
     ```
 
-    > **Warning**:
-    > If you have multiple Docker repositories enabled, installing
+    > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker EE
     instead of always using the latest. This output is truncated. List the
@@ -173,7 +174,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ee
 
-    docker-ee | {{ minor-version }}.0~ee-0~ubuntu-xenial | {{ download-url-base}} xenial/stable amd64 Packages
+    docker-ee | {{ minor-version }}.0~ee-0~ubuntu-xenial | <DOCKER-EE-URL>/ubuntu xenial/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
@@ -219,7 +220,7 @@ a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+    `ubuntu/x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
     Docker EE version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
