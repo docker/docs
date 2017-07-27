@@ -1672,6 +1672,8 @@ manuals:
           title: Troubleshoot with logs
         - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
+        - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
+          title: Troubleshoot swarm task states
       - path: /datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - sectiontitle: CLI reference
