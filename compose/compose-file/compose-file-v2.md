@@ -178,6 +178,12 @@ build.
       context: .
       network: custom_network_1
 
+#### target
+
+> Added in [version 2.3](compose-versioning.md#version-23) file format
+
+Sets the name of the build-stage to build in a
+[multi-stage Dockerfile](/engine/userguide/eng-image/multistage-build.md).
 
 ### cap_add, cap_drop
 
