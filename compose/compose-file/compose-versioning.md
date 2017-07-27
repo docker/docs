@@ -274,6 +274,8 @@ several options have been removed:
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
     `version: "3.x"` Compose files.
+-   `init`: This option has not been added for `version: "3.x"` Compose files because Swarm services do not support custom init yet.
+
 
 ### Version 1 to 2.x
 
