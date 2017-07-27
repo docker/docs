@@ -1,7 +1,7 @@
 ---
 description: Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.
 keywords: dockerize, dockerizing, dotnet, .NET, Core, article, example, platform, installation, containers, images, image, dockerfile, build, asp.net, asp.net core
-title: Dockerize a .NET application
+title: Dockerize a .NET Core application
 ---
 
 ## Introduction
