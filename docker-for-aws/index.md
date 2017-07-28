@@ -1,4 +1,3 @@
----
 description: Setup & Prerequisites
 keywords: aws, amazon, iaas, tutorial
 title: Docker for AWS Setup & Prerequisites
@@ -33,7 +32,7 @@ using CloudFormation. For more about stable and edge channels, see the
   </tr>
   <tr valign="top">
     <td width="33%">This deployment is fully baked and tested, and comes with the latest CE version of Docker. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>Stable is released quarterly and is for users that want an easier-to-maintain release pace.</td>
-    <td width="34%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month <br><br>We collect usage data on edges across the board.</td>
+    <td width="34%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month. <br><br>We collect usage data on edges across the board.</td>
     <td width="33%">This is the test channel. It is used for testing release candidates for upcoming releases. Use this channel if you want to test out the new releases before they are available.</td>
   </tr>
   <tr valign="top">
@@ -62,7 +61,7 @@ There are two ways to deploy Docker for AWS:
 We recommend allowing Docker for AWS to create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
 
 #### Create a new VPC
-This approach creates a new VPC, subnets, gateways and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+This approach creates a new VPC, subnets, gateways, and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
 
 All you need to do is run the CloudFormation template, answer some questions, and you are good to go.
 
@@ -71,7 +70,7 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 
 1. Pick a VPC in a region you want to use.
 
-2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables
+2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables.
 
 3. You need to have three different subnets, ideally each in their own availability zone. If you are running in a region with only two Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have three or more Availability Zones.
 
@@ -90,7 +89,7 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 - SSH key in AWS in the region where you want to deploy (required to access the completed Docker install)
 - AWS account that support EC2-VPC (See the [FAQ for details about EC2-Classic](faqs.md))
 
-For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
 Note that the China and US Gov Cloud AWS partitions are not currently supported.
 
@@ -133,7 +132,7 @@ Pruning removes the following:
 Enable if you want Docker to send your container logs to CloudWatch. ("yes", "no") Defaults to yes.
 
 ##### WorkerDiskSize
-Size of Workers's ephemeral storage volume in GiB (20 - 1024).
+Size of Workers' ephemeral storage volume in GiB (20 - 1024).
 
 ##### WorkerDiskType
 Worker ephemeral storage volume type ("standard", "gp2").
