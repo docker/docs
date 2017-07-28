@@ -47,7 +47,7 @@ Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md
 Click to show/hide the example Compose file below.
 
 <div class="panel panel-default">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Compose file version 3
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
