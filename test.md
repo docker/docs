@@ -341,7 +341,8 @@ You can use the Bootstrap and CSS to add expand/collapse accordions. This
 implementation makes use of the `.panel-heading` classes in
 [`_utilities.scss`](/_scss/_utilities.scss), along with [FontAwesome
 icons](http://fontawesome.io/cheatsheet/){: target="_blank" class="_" }
-fa-caret-down &#xf0d7; and fa-caret-up &#xf0d8;.
+<i class="fa fa-caret-down" aria-hidden="true"></i> (fa-caret-down) and
+<i class="fa fa-caret-up" aria-hidden="true"></i> (fa-caret-up).
 
 Adding `block` to the `div` class `collapse` gives you some padding around the
 sample content. This works nicely for standard text. If you have a code sample,
@@ -349,7 +350,7 @@ the padding renders as white space around the code block grey background. If we
 don't like this effect, we can remove `block` for code samples.
 
 The `style="cursor: pointer"` tag enables the expand/collapse functionality to
-work on mobile.
+work on mobile. (You can use the [Xcode iPhone simulator](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html#//apple_ref/doc/uid/TP40012848-CH5-SW4){: target="_blank" class="_" } to test on mobile.)
 
 There are a lot of samples out there for Bootstrap accordions. This is the model
 we used: [PPxOJX accordion sample with HTML and
@@ -358,11 +359,14 @@ another example, but it uses Javascript, whereas the implementation shown
 [here](https://www.bootply.com/89084){: target="_blank" class="_" } is Bootstrap
 and CSS only.)
 
-> **Tip**: For each drop-down, the value for `data-target` and
-`collapse` `id` must match, and must be unique per page. In this example,
+> Make sure `data-target`'s and `id`'s match, and are unique
+>
+>For each drop-down, the value for `data-target` and
+`collapse` `id` must match, and id's must be unique per page. In this example,
 we name these `collapseSample1` and `collapseSample2`. Check out the
 [Compose file structure example](/compose/compose-file/index.md#compose-file-structure-and-examples)
 to see another example.
+{: .important-vanilla}
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
