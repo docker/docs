@@ -220,7 +220,7 @@ $ docker service create \
 {% endraw %}
 ```
 
-Here, each task has mounts its own volume at `/mydata/` and the files under that
+Here, each task has mounted its own volume at `/mydata/` and the files under that
 mountpoint are unique to that task.
 
 When a task with only `shared` EFS volumes mounted is rescheduled on a different
