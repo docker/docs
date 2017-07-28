@@ -338,7 +338,7 @@ then it will take up the whole row.</div>
 ### Expand/Collapse accordions
 
 You can use the Bootstrap and CSS to add expand/collapse accordions. This
-implementation makes use of `.panel-heading` classes in
+implementation makes use of the `.panel-heading` classes in
 [`_utilities.scss`](/_scss/_utilities.scss), along with [FontAwesome
 icons](http://fontawesome.io/cheatsheet/){: target="_blank" class="_" }
 fa-caret-down &#xf0d7; and fa-caret-up &#xf0d8;.
@@ -347,6 +347,9 @@ Adding `block` to the `div` class `collapse` gives you some padding around the
 sample content. This works nicely for standard text. If you have a code sample,
 the padding renders as white space around the code block grey background. If we
 don't like this effect, we can remove `block` for code samples.
+
+The `style="cursor: pointer"` tag enables the expand/collapse functionality to
+work on mobile.
 
 There are a lot of samples out there for Bootstrap accordions. This is the model
 we used: [PPxOJX accordion sample with HTML and
@@ -362,8 +365,8 @@ we name these `collapseSample1` and `collapseSample2`. Check out the
 to see another example.
 
 <div class="panel panel-default">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1">
-    Example Compose file version 3
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+    Docker hello-world example
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
@@ -396,7 +399,7 @@ For more examples and ideas, visit:
 
 </code></pre>
     </div>
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"> Another Sample <i class="chevron fa fa-fw"></i></div>
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample2">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
