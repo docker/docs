@@ -62,6 +62,19 @@ img.inline {
     display: inline;
 }
 
+.panel-heading .chevron:after {
+    content: "\f0d8";
+}
+
+.panel-heading.collapsed .chevron:after {
+    content: "\f0d7";
+}
+
+.panel-heading:hover{
+    background: #fafdfe;
+}
+
+
 /*
 * Search *********************************************************************
 *
