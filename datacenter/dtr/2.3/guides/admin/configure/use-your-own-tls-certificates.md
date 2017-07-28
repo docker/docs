@@ -20,7 +20,7 @@ To configure DTR to use your own certificates and keys, go to the
 **DTR web UI**, navigate to the **Settings** page, and scroll down to the
 **Domain** section.
 
-![](../../images/use-your-certificates-1.png)
+![](../../images/use-your-certificates-1.png){: .with-border}
 
 
 Set the DTR domain name and upload the certificates and key:

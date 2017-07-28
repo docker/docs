@@ -20,7 +20,7 @@ DTR installation:
 Go to [Docker Store](https://store.docker.com/editions/enterprise/docker-ee-trial)
 and download your license.
 
-![](../../images/license-1.png)
+![](../../images/license-1.png){: .with-border}
 
 
 ## License your installation
@@ -29,7 +29,7 @@ Once you've downloaded the license file, you can apply it to your DTR
 installation. Navigate to the **DTR web UI**, and then go to the **Settings
 page**.
 
-![](../../images/license-2.png)
+![](../../images/license-2.png){: .with-border}
 
 Click the **Apply new license** button, and upload your new license file.
 

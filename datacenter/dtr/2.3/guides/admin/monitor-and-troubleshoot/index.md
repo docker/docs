@@ -14,17 +14,17 @@ navigate to the **Stacks** page.
 If you have DTR set up for high-availability, then all the DTR replicas are
 displayed.
 
-![](../../images/monitor-1.png)
+![](../../images/monitor-1.png){: .with-border}
 
 To check the containers for the DTR replica, **click the replica** you want
 to inspect, click **Inspect Resource**, and choose **Containers**.
 
-![](../../images/monitor-2.png)
+![](../../images/monitor-2.png){: .with-border}
 
 Now you can drill into each DTR container to see it's logs and find the root
 cause of the problem.
 
-![](../../images/monitor-2.png)
+![](../../images/monitor-2.png){: .with-border}
 
 ## Health checks
 

@@ -26,7 +26,7 @@ name.
 To make tags immutable, in the **DTR web UI**, navigate to the
 **repository settings** page, and change **immutability** to **on**.
 
-![](../../images/immutable-repo-1.png)
+![](../../images/immutable-repo-1.png){: .with-border}
 
 From now on, users will get an error message when trying to push a tag
 that already exists:

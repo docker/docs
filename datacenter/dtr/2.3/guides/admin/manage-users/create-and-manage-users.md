@@ -13,11 +13,11 @@ versa.
 To create a new user, go to the **DTR web UI**, and navigate to the **Users**
 page.
 
-![](../../images/create-manage-users-1.png)
+![](../../images/create-manage-users-1.png){: .with-border}
 
 Click the **New user** button, and fill-in the user information.
 
-![](../../images/create-manage-users-2.png)
+![](../../images/create-manage-users-2.png){: .with-border}
 
 Check the **Trusted Registry admin** option, if you want to grant permissions
 for the user to change Docker Datacenter configurations.
