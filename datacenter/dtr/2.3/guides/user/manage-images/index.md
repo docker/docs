@@ -14,7 +14,7 @@ In this example, we'll create the 'golang' repository in DTR.
 To create a new repository, navigate to the **DTR web application**, and click
 the **New repository** button.
 
-![](../../images/create-repository-1.png)
+![](../../images/create-repository-1.png){: .with-border}
 
 Add a **name and description** for the repository, and choose whether your
 repository is public or private:
@@ -24,7 +24,7 @@ repository is public or private:
   * Private repositories can only be seen by users that have been granted
   permissions to that repository.
 
-![](../../images/create-repository-2.png)
+![](../../images/create-repository-2.png){: .with-border}
 
 Click **Save** to create the repository.
 

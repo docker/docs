@@ -67,12 +67,12 @@ In your browser, navigate to the Docker **Universal Control Plane**
 web UI, and navigate to the **Applications** screen. DTR should be listed
 as an application.
 
-![](../../images/install-dtr-1.png)
+![](../../images/install-dtr-1.png){: .with-border}
 
 You can also access the **DTR web UI**, to make sure it is working. In your
 browser, navigate to the address where you installed DTR.
 
-![](../../images/install-dtr-2.png)
+![](../../images/install-dtr-2.png){: .with-border}
 
 
 ## Step 5. Configure DTR
@@ -84,7 +84,7 @@ After installing DTR, you should configure:
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
-  ![](../../images/install-dtr-3.png)
+  ![](../../images/install-dtr-3.png){: .with-border}
 
 
 ## Step 6. Test pushing and pulling
@@ -130,7 +130,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
     web UI, and navigate to the **Applications** screen. All replicas should
     be displayed.
 
-    ![](../../images/install-dtr-4.png)
+    ![](../../images/install-dtr-4.png){: .with-border}
 
 ## See also
 
