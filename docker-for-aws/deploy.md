@@ -7,7 +7,7 @@ title: Deploy your app on Docker for AWS
 ## Connecting to your manager nodes
 
 This section will walk you through connecting to your installation and deploying
-applications.  Instructions are included for both AWS and Azure, so be sure to
+applications. Instructions are included for both AWS and Azure, so be sure to
 follow the instructions for the cloud provider of your choice in each section.
 
 First, you will obtain the public IP address for a manager node. Any manager
@@ -19,7 +19,7 @@ Once you've deployed Docker on AWS, go to the "Outputs" tab for the stack in
 CloudFormation.
 
 The "Managers" output is a URL you can use to see the available manager nodes of
-the swarm in your AWS console.  Once present on this page, you can see the
+the swarm in your AWS console. Once present on this page, you can see the
 "Public IP" of each manager node in the table and/or "Description" tab if you
 click on the instance.
 
@@ -101,7 +101,7 @@ $ ssh-add -K ~/.ssh/your_key
 
 You can then enable SSH forwarding per-session using the `-A` flag for the ssh command.
 
-Connecting to the Manager.
+Connect to the Manager.
 ```
 $ ssh -A docker@<manager ip>
 ```
