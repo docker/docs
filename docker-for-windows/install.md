@@ -26,14 +26,10 @@ download installers from the **Stable** or **Edge** channel.
 
 Both Stable and Edge installers come with <a
 href="https://github.com/moby/moby/blob/master/experimental/README.md">
-experimental features in Docker Engine</a> enabled by default and configurable
-on [Docker Daemon preferences](index.md#daemon-experimental-mode) for
-experimental mode. We recommend that you disable experimental features for
-apps in production.
+experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on and off in [preferences](index.md#daemon-experimental-mode).
 
-On both channels, we welcome your
-[feedback](index.md#giving-feedback-and-getting-help) to help us as the apps
-evolve.
+We welcome your
+[feedback](index.md#giving-feedback-and-getting-help) to help us improve Docker for Windows.
 
 For more about Stable and Edge channels, see the
 [FAQs](/docker-for-windows/faqs.md#questions-about-stable-and-edge-channels).
@@ -45,15 +41,12 @@ For more about Stable and Edge channels, see the
     <th style="font-size: x-large; font-family: arial;">Legacy Edge installer</th>
   </tr>
   <tr valign="top">
-    <td width="33%">This installer is fully baked and tested. This is the
-    best channel to use if you want a reliable platform to work with. These releases follow the Docker Engine stable releases.<br><br>
-   On this channel, you can select whether to send usage
-   statistics and other data. <br><br>Stable builds are released once per quarter.
+    <td width="33%">Stable is the best channel to use if you want a reliable platform to work with. Stable releases track the Docker platform stable releases.<br><br>
+   On this channel, you can select whether to send usage statistics and other data. <br><br>Stable releases happen once per quarter.
     </td>
-    <td width="33%">This new installer includes experimental support for Windows Server 2016 as a part of the latest Edge release of
-    Docker for Windows and Engine. <br><br>Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
+    <td width="33%">This new installer includes experimental support for Windows Server 2016 for users that use Windows Server as their development environment. <br><br>Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
     </td>
-    <td width="33%">We recommend that all Edge users try the new installer. <br><br>However, if you have problems with the new installer experience, you can use the legacy Edge installer and still get all other Edge features.
+    <td width="33%">We recommend that all Edge users try the new installer. <br><br>However, if you have problems with the new installer, you can use the legacy Edge installer and still get all other Edge features.
     </td>
   </tr>
   <tr valign="top">
@@ -77,10 +70,12 @@ For more about Stable and Edge channels, see the
   </tr>
 </table>
 
-* Docker for Windows requires 64bit Windows 10 Pro and Microsoft Hyper-V. Please see [What to know before you install](/docker-for-windows/#what-to-know-before-you-install) for a full list
+* The Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/engine/installation/windows/docker-ee/). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/engine/installation/).
+
+* Docker for Windows requires 64bit Windows 10 Pro with Hyper-V available. Please see [What to know before you install](/docker-for-windows/#what-to-know-before-you-install) for a full list
 of prerequisites.
 
-* You can switch between Edge and Stable versions, but you must have only one
+* You can switch between Edge and Stable versions, but you can only have one
    app installed at a time. Also, you will need to save images and export
    containers you want to keep before uninstalling the current version before
    installing another. For more about this, see the [FAQs about Stable and Edge
@@ -88,12 +83,11 @@ of prerequisites.
 
 ##  What to know before you install
 
-If your system does not satisfy these requirements, you can install
+If your system does not meet the requirements to run Docker for Windows, you can install
 [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
 Hyper-V.
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer
-will enable it for you, if needed, which requires a reboot. After Hyper-V is
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run.  The Docker for Windows installer will enable Hyper-V for you, if needed, and restart your machine. After Hyper-V is
 enabled, VirtualBox will no longer work, but any VirtualBox VM images will
 remain. VirtualBox VMs created with `docker-machine` (including the `default`
 one typically created during Toolbox install) will no longer start. These VMs
