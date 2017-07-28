@@ -29,6 +29,20 @@ tree: false
 // Replace the subscriptionKey string value with your valid subscription key.
 var subscriptionKey = "a71972579d8640d38b3bc859d7c4f1c3";
 var customconfig = "3956951448";
+var first = 'First'; // Override for Chinese.
+var last = 'Last';
+var prev = 'Prev';
+var next = 'Next';
+var mkt = "en-us";
+
+/* CN Version:
+
+first: '首页',
+last: '尾页',
+prev: '上页',
+next: '下页',
+
+*/
 
 function doBingPagingSearch(page) {
 
@@ -48,7 +62,7 @@ function doBingPagingSearch(page) {
             "q": searchText,
             "customconfig": customconfig,
             "responseFilter": "Webpages",
-            "mkt": "en-us",
+            "mkt": mkt,
             "safesearch": "Moderate",
             "count": "10",
             "offset": startPos,
@@ -72,10 +86,10 @@ function doBingPagingSearch(page) {
                 var paginationOpts = {
                     totalPages: totalPageNum,
                     visiblePages: 5,
-                    first: '首页',
-                    last: '尾页',
-                    prev: '上页',
-                    next: '下页',
+                    first: first,
+                    last: last,
+                    prev: prev,
+                    next: next,
                     initiateStartPageClick: false,
                     onPageClick: function (event, page) {
                         doBingPagingSearch(page);
