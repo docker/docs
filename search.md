@@ -34,6 +34,7 @@ var last = 'Last';
 var prev = 'Prev';
 var next = 'Next';
 var mkt = "en-us";
+var noResultHtml = 'No results found...';
 
 /* CN Version:
 
@@ -41,7 +42,7 @@ first: '首页',
 last: '尾页',
 prev: '上页',
 next: '下页',
-
+var noResultHtml = '没有结果!';
 */
 
 function doBingPagingSearch(page) {
@@ -126,7 +127,7 @@ function doBingPagingSearch(page) {
 
                 $("#search-result").html(searchResultHtml);
             } else {
-                var noResultHtml = '没有结果!';
+
                 $("#search-result").html(noResultHtml);
             }
 
