@@ -31,10 +31,6 @@ a section in the configuration file such as `build`, `deploy`, `depends_on`,
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
 
-The best way to grok the layout and syntax of a Compose file is to
-read [Get started with Docker Compose](/compose/gettingstarted/) and look
-at files included in [sample applications](https://docs.docker.com/samples/).
-
 A good place to start is the [Getting Started](/get-started/index.md) tutorial
 which uses version 3 Compose stack files to implement multi-container apps,
 service definitions, and swarm mode. Here are some Compose files used in the
@@ -44,8 +40,110 @@ tutorial.
 
 - [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
 
-Another example of a Compose file is included in the Docker Labs topic, [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
+Another good example is the Compose file for the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
+Click to show/hide the example Compose file below.
 
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+    Example Compose file version 3
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapseSample1">
+<pre><code>
+version: "3"
+services:
+
+redis:
+  image: redis:alpine
+  ports:
+    - "6379"
+  networks:
+    - frontend
+  deploy:
+    replicas: 2
+    update_config:
+      parallelism: 2
+      delay: 10s
+    restart_policy:
+      condition: on-failure
+db:
+  image: postgres:9.4
+  volumes:
+    - db-data:/var/lib/postgresql/data
+  networks:
+    - backend
+  deploy:
+    placement:
+      constraints: [node.role == manager]
+vote:
+  image: dockersamples/examplevotingapp_vote:before
+  ports:
+    - 5000:80
+  networks:
+    - frontend
+  depends_on:
+    - redis
+  deploy:
+    replicas: 2
+    update_config:
+      parallelism: 2
+    restart_policy:
+      condition: on-failure
+result:
+  image: dockersamples/examplevotingapp_result:before
+  ports:
+    - 5001:80
+  networks:
+    - backend
+  depends_on:
+    - db
+  deploy:
+    replicas: 1
+    update_config:
+      parallelism: 2
+      delay: 10s
+    restart_policy:
+      condition: on-failure
+
+worker:
+  image: dockersamples/examplevotingapp_worker
+  networks:
+    - frontend
+    - backend
+  deploy:
+    mode: replicated
+    replicas: 1
+    labels: [APP=VOTING]
+    restart_policy:
+      condition: on-failure
+      delay: 10s
+      max_attempts: 3
+      window: 120s
+    placement:
+      constraints: [node.role == manager]
+
+visualizer:
+  image: dockersamples/visualizer:stable
+  ports:
+    - "8080:8080"
+  stop_grace_period: 1m30s
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+  deploy:
+    placement:
+      constraints: [node.role == manager]
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
+</code></pre>
+    </div>
+</div>
 
 ## Service configuration reference
 
@@ -79,16 +177,28 @@ definition in version 3.
 Configuration options that are applied at build time.
 
 `build` can be specified either as a string containing a path to the build
-context, or an object with the path specified under [context](#context) and
-optionally [dockerfile](#dockerfile) and [args](#args).
+context:
 
+```none
+version: '2'
+services:
+  webapp:
     build: ./dir
+```
 
+Or, as an an object with the path specified under [context](#context) and
+optionally [Dockerfile](#dockerfile) and [args](#args):
+
+```none
+version: '2'
+services:
+  webapp:
     build:
       context: ./dir
       dockerfile: Dockerfile-alternate
       args:
         buildno: 1
+```
 
 If you specify `image` as well as `build`, then Compose names the built image
 with the `webapp` and optional `tag` specified in `image`:
@@ -783,7 +893,7 @@ list are processed from the top down. For the same variable specified in file
 listed below (after), then the value from `b.env` stands. For example, given the
 following declaration in `docker_compose.yml`:
 
-```yaml
+```none
 services:
   some-service:
     env_file:
@@ -1093,7 +1203,10 @@ The general format is shown here.
             aliases:
              - alias2
 
-In the example below, three services are provided (`web`, `worker`, and `db`), along with two networks (`new` and `legacy`). The `db` service is reachable at the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on the `legacy` network.
+In the example below, three services are provided (`web`, `worker`, and `db`),
+along with two networks (`new` and `legacy`). The `db` service is reachable at
+the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
+the `legacy` network.
 
     version: '2'
 
@@ -1387,13 +1500,53 @@ more information.
 
 ### volumes
 
+Mount host paths or named volumes, specified as sub-options to a service.
+
+You can mount a host path as part of a definition for a single service, and
+there is no need to define it in the top level `volumes` key.
+
+But, if you want to reuse a volume across multiple services, then define a named
+volume in the [top-level `volumes` key](#volume-configuration-reference). Use
+named volumes with [services, swarms, and stack
+files](#volumes-for-services-swarms-and-stack-files).
+
 > **Note**: The top-level
-> [volumes](#volume-configuration-reference) option defines
+> [volumes](#volume-configuration-reference) key defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. (See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.)
 
-Mount host paths or named volumes. Named volumes must be defined in the
-[top-level `volumes` key](#volume-configuration-reference). Use named volumes with [services, swarms, and stack files](#volumes-for-services-swarms-and-stack-files).
+This example shows a named volume (`db-data`) being used by the `postgres` service, and a mounted volume for a single service (under the `redis` service).
+
+```none
+version: "3"
+
+services:
+
+  web:
+    nginx:alpine
+    ports:
+    - "80:80"
+
+  postgres:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/db
+
+  backup:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/backup/data
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+
+volumes:
+  db-data:
+```
 
 #### Short syntax
 
@@ -1440,6 +1593,16 @@ expressed in the short form.
 
 
 ```none
+version: "3"
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+
+networks:
+  webnet:
+
 volumes:
   - type: volume
     source: mydata
@@ -1475,7 +1638,7 @@ Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md)
 configured as a named volume in order to persist the data on the swarm,
 _and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
 
-```
+```none
 version: "3"
 services:
   db:
@@ -1511,7 +1674,7 @@ are visible on the host.
 
 Here is an example of configuring a volume as `cached`:
 
-```
+```none
 version: '3'
 services:
   php:
@@ -1525,7 +1688,6 @@ services:
 Full detail on these flags, the problems they solve, and their
 `docker run` counterparts is in the Docker for Mac topic [Performance tuning for
 volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
-
 
 ### restart
 

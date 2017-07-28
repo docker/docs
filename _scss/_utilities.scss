@@ -58,9 +58,36 @@ i.fa.fa-outdent {
     padding: 0px 15px 10px 15px;
 }
 
+
+/*
+*
+* Inline graphics and icons (like the whale menu icon in d4mac, d4win)
+*
+*/
+
 img.inline {
     display: inline;
 }
+
+
+/*
+*
+* Bootstrap expand/collapse accordions
+*
+*/
+
+.panel-heading .chevron:after {
+    content: "\f0d8";
+}
+
+.panel-heading.collapsed .chevron:after {
+    content: "\f0d7";
+}
+
+.panel-heading:hover{
+    background: #fafdfe;
+}
+
 
 /*
 * Search *********************************************************************

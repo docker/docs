@@ -335,6 +335,86 @@ then it will take up the whole row.</div>
 then it will take up the whole row.</div>
 </div>
 
+### Expand/Collapse accordions
+
+You can use the Bootstrap and CSS to add expand/collapse accordions. This
+implementation makes use of the `.panel-heading` classes in
+[`_utilities.scss`](/_scss/_utilities.scss), along with [FontAwesome
+icons](http://fontawesome.io/cheatsheet/){: target="_blank" class="_" }
+<i class="fa fa-caret-down" aria-hidden="true"></i> (fa-caret-down) and
+<i class="fa fa-caret-up" aria-hidden="true"></i> (fa-caret-up).
+
+Adding `block` to the `div` class `collapse` gives you some padding around the
+sample content. This works nicely for standard text. If you have a code sample,
+the padding renders as white space around the code block grey background. If we
+don't like this effect, we can remove `block` for code samples.
+
+The `style="cursor: pointer"` tag enables the expand/collapse functionality to
+work on mobile. (You can use the [Xcode iPhone simulator](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html#//apple_ref/doc/uid/TP40012848-CH5-SW4){: target="_blank" class="_" } to test on mobile.)
+
+There are a lot of samples out there for Bootstrap accordions. This is the model
+we used: [PPxOJX accordion sample with HTML and
+CSS](https://codepen.io/anon/pen/PPxOJX){: target="_blank" class="_" }. (Here is
+another example, but it uses Javascript, whereas the implementation shown
+[here](https://www.bootply.com/89084){: target="_blank" class="_" } is Bootstrap
+and CSS only.)
+
+> Make sure `data-target`'s and `id`'s match, and are unique
+>
+>For each drop-down, the value for `data-target` and
+`collapse` `id` must match, and id's must be unique per page. In this example,
+we name these `collapseSample1` and `collapseSample2`. Check out the
+[Compose file structure example](/compose/compose-file/index.md#compose-file-structure-and-examples)
+to see another example.
+{: .important-vanilla}
+
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+    Docker hello-world example
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapseSample1">
+<pre><code>
+$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+b04784fba78d: Pull complete
+Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://cloud.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+
+</code></pre>
+    </div>
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapseSample2">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
+
 ### Columnar text
 
 You can use the CSS `column-count` to flow your text into multiple columns.
