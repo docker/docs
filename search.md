@@ -25,24 +25,132 @@ tree: false
 
 <div id="glossaryMatch"></div>
 
-<div id="my-cse1">
-<script>
-  (function() {
-    var cx = '005610573923180467403:iwlnuvjqpv4';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-
-<gcse:searchresults-only></gcse:searchresults-only>
-</div>
-
 <script defer>
+// Replace the subscriptionKey string value with your valid subscription key.
+var subscriptionKey = "a71972579d8640d38b3bc859d7c4f1c3";
+var customconfig = "3956951448";
+
+function doBingPagingSearch(page) {
+
+    var searchText = decodeURI(getQueryString().q);
+    if (searchText != "undefined" && searchText != '') {
+        if (page == "undefined") {
+            page = 1;
+            startPos = 0;
+        } else {
+            startPos = (page - 1) * 10;
+        }
+
+        var bingEndPoint = "https://api.cognitive.microsoft.com/bingcustomsearch/v5.0/search";
+
+        // Request parameters.
+        var reqParams = {
+            "q": searchText,
+            "customconfig": customconfig,
+            "responseFilter": "Webpages",
+            "mkt": "en-us",
+            "safesearch": "Moderate",
+            "count": "10",
+            "offset": startPos,
+        };
+
+        $.ajax({
+            url: bingEndPoint + "?" + $.param(reqParams),
+            beforeSend: function (xhrObj) {
+            xhrObj.setRequestHeader("Content-Type", "application/json");
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            },
+            type: "GET",
+        })
+        .done(function (data) {
+            var pageHits = data.webPages.value;
+            var totalPageHits = data.webPages.totalEstimatedMatches;
+
+            if (totalPageHits != 0) {
+                var totalPageNum = Math.ceil(totalPageHits / 10);
+                var $pagination = $('#pagination-result');
+                var paginationOpts = {
+                    totalPages: totalPageNum,
+                    visiblePages: 5,
+                    first: '首页',
+                    last: '尾页',
+                    prev: '上页',
+                    next: '下页',
+                    initiateStartPageClick: false,
+                    onPageClick: function (event, page) {
+                        doBingPagingSearch(page);
+                    }
+                };
+
+                $pagination.twbsPagination(paginationOpts);
+
+                var searchResult = "<div class='result-total'>总共 "+ totalPageHits + " 条结果</div>";
+
+                for (var i = 0; i < pageHits.length; i++) {
+                    var item = pageHits[i];
+
+                    var title = item.name;
+                    var url = item.url;
+                    var desc = item.snippet;
+                    var descHtml = "<div class='result-desc'>" + desc + "</div>";
+
+                    // hightlight keywords start
+                    searchText = searchText.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+                    var pattern = new RegExp("(" + searchText + ")", "gi");
+
+                    title = title.replace(pattern, "<b>$1</b>");
+                    title = title.replace(/(<b>[^<>]*)((<[^>]+>)+)([^<>]*<\/b>)/, "$1</b>$2<b>$4");
+                    // hightlight keywords end
+
+                    var titleHtml = "<a class='result-title' href='" + url + "'>" + title + "</a>";
+
+                    var urlHtml = "<div class='result-url'>" + url + "</div>";
+
+                    searchResultHtml += "<div class='result-wrap'>" + titleHtml + urlHtml + descHtml + "</div>";
+
+                }
+
+                $("#search-result").html(searchResultHtml);
+            } else {
+                var noResultHtml = '没有结果!';
+                $("#search-result").html(noResultHtml);
+            }
+
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+            errorString += (jqXHR.responseText === "") ? "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
+            jQuery.parseJSON(jqXHR.responseText).message : jQuery.parseJSON(jqXHR.responseText).error.message;
+            console.log(errorString);
+        });
+    }
+}
+
+function getQueryString() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
 setTimeout(function(){
+
+  $(document).ready(function () {
+
+      $(document).ajaxStart(function(){
+          $("#ajax_loading").show();
+      }).ajaxComplete(function(){
+          $("#ajax_loading").hide();
+      });
+
+      doBingPagingSearch();
+
+  });
+
   $(document).ready(function() {
     if (decodeURI(queryString().q) != "undefined" && decodeURI(queryString().q) && decodeURI(queryString().q).length > 0) {
       $("#st-search-input").val(decodeURI(queryString().q));
