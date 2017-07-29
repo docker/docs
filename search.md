@@ -9,18 +9,7 @@ tree: false
 ---
 
 <style type='text/css'>
-#my-cse1 { all: initial !important; all: default !important; }
-#my-cse1 table, #my-cse1 table tr, #my-cse1 table tr th, #my-cse1 table tr td, .gs-bidi-start-align { border: 0px !important; padding: 0px !important; line-height: initial !important; margin: 0px !important; }
-.gs-snippet { margin-top: 0px !important; margin-bottom: 0px !important; padding: 0px !important; color: #999}
-.gs-webResult .gs-result .gs-no-results-result { padding: 10px !important; }
-.gs-per-result-labels { display: none !important; }
-.gsc-url-top, .gsc-thumbnail-inside, .gs-spelling { padding: 0px !important; }
-.gcsc-branding { padding-right: 0px !important; }
-.gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea { border-color: #CCC !important; }
-.gcs-input, #gsc-i-id1 { padding: 5px 5px 5px 5px !important; }
-#gscb_a, .gscb_a { padding: 3px 0px 0px 0px !important;}
-.gsc-control-cse, .gsc-control-cse-en { padding: 0px !important; }
-.gsc-result-info { padding-bottom: 0px !important; }
+
 </style>
 
 <div id="glossaryMatch"></div>
@@ -29,6 +18,7 @@ tree: false
 // Replace the subscriptionKey string value with your valid subscription key.
 var subscriptionKey = "a71972579d8640d38b3bc859d7c4f1c3";
 var customconfig = "3956951448";
+
 var first = 'First'; // Override for Chinese.
 var last = 'Last';
 var prev = 'Prev';
@@ -80,8 +70,8 @@ function doBingPagingSearch(page) {
         .done(function (data) {
             var pageHits = data.webPages.value;
             var totalPageHits = data.webPages.totalEstimatedMatches;
-
-            if (totalPageHits != 0) {
+            console.log("pageHits: ",pageHits,"totalPageHits: ",totalPageHits);
+            if (totalPageHits > 0) {
                 var totalPageNum = Math.ceil(totalPageHits / 10);
                 var $pagination = $('#pagination-result');
                 var paginationOpts = {
@@ -98,9 +88,7 @@ function doBingPagingSearch(page) {
                 };
 
                 $pagination.twbsPagination(paginationOpts);
-
-                var searchResult = "<div class='result-total'>总共 "+ totalPageHits + " 条结果</div>";
-
+                var searchResultHtml = "";
                 for (var i = 0; i < pageHits.length; i++) {
                     var item = pageHits[i];
 
@@ -133,9 +121,11 @@ function doBingPagingSearch(page) {
 
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-            var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+            var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): " + jqXHR.responseText;
+            /*
             errorString += (jqXHR.responseText === "") ? "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
             jQuery.parseJSON(jqXHR.responseText).message : jQuery.parseJSON(jqXHR.responseText).error.message;
+            */
             console.log(errorString);
         });
     }
@@ -156,17 +146,13 @@ setTimeout(function(){
 
   $(document).ready(function () {
 
-      $(document).ajaxStart(function(){
-          $("#ajax_loading").show();
-      }).ajaxComplete(function(){
-          $("#ajax_loading").hide();
-      });
+    $(document).ajaxStart(function(){
+        $("#ajax_loading").show();
+    }).ajaxComplete(function(){
+        $("#ajax_loading").hide();
+    });
+    doBingPagingSearch(1);
 
-      doBingPagingSearch();
-
-  });
-
-  $(document).ready(function() {
     if (decodeURI(queryString().q) != "undefined" && decodeURI(queryString().q) && decodeURI(queryString().q).length > 0) {
       $("#st-search-input").val(decodeURI(queryString().q));
       $("#st-search-input").focus();
@@ -175,3 +161,12 @@ setTimeout(function(){
   });
 }, 1);
 </script>
+<script>var $ = jQuery.noConflict();</script>
+<div id="my-cse1">
+  <div id="search-result"></div>
+  <nav aria-label="Page navigation">
+    <ul class="pagination" id="pagination-result">
+    </ul>
+  </nav>
+  <gcse:searchresults-only></gcse:searchresults-only>
+</div>
