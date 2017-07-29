@@ -70,9 +70,9 @@ For more about Stable and Edge channels, see the
   </tr>
 </table>
 
-* The Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/engine/installation/windows/docker-ee/). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/engine/installation/).
+* The Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/engine/installation/windows/docker-ee.md). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/engine/installation/index.md).
 
-* Docker for Windows requires 64bit Windows 10 Pro with Hyper-V available. Please see [What to know before you install](/docker-for-windows/#what-to-know-before-you-install) for a full list
+* Docker for Windows requires 64bit Windows 10 Pro with Hyper-V available. Please see [What to know before you install](/docker-for-windows/install.md#what-to-know-before-you-install) for a full list
 of prerequisites.
 
 * You can switch between Edge and Stable versions, but you can only have one
