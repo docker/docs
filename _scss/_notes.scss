@@ -25,8 +25,16 @@ blockquote.note-vanilla > p:first-child::before {
   font-family: FontAwesome;
 }
 
+blockquote.note {
+  border-left-color: $note-color;
+  content: '\f058 \00a0';
+  font-family: FontAwesome;
+}
+
 blockquote.important {
   border-left-color: $important-color;
+  content: '\f06a  \00a0';
+  font-family: FontAwesome;
 }
 
 blockquote.important > p:first-child {
@@ -50,12 +58,17 @@ blockquote.important-vanilla > p:first-child::before {
   font-family: FontAwesome;
 }
 
+/***
 blockquote.warning {
   border-left-color: $warning-color;
 }
+***/
 
 blockquote.warning > p:first-child {
   color: $warning-color;
+  border-left-color: $warning-color;
+  content: '\f057  \00a0';
+  font-family: FontAwesome;
 }
 
 blockquote.warning > p:first-child::before {
