@@ -58,7 +58,6 @@ context.
 >   form that is allowed in Version 2 and up.
 > * Using `build` together with [`image`](#image) is not allowed.
 Attempting to do so results in an error.
-{: .note}
 
 #### dockerfile
 
