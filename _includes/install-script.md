@@ -29,9 +29,11 @@ install the latest stable release of Docker CE on Linux. To install the latest
 testing version, use [test.docker.com](https://test.docker.com/) instead. In
 each of the commands below, replace each occurrence of `get` with `test`.
 
-> **Warning**: Always examine scripts downloaded from the internet  before
+> **Warning**:
+>
+Always examine scripts downloaded from the internet before
 > running them locally.
-{:.warning-vanilla}
+{:.warning}
 
 ```bash
 $ curl -fsSL get.docker.com -o get-docker.sh

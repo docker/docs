@@ -1004,7 +1004,6 @@ then read-write will be used.
 >     - `service_name:ro`
 >     - `container_name`
 >     - `container_name:rw`
-{: .note-vanilla}
 
 ### restart
 

@@ -6,43 +6,82 @@ $note-color: #1488C6;
 $important-color: #aa6708;
 $warning-color: #ce4844;
 
+
+/*** Blocquotes with no Liquid tag get $note-color sidebar
+***/
 blockquote {
   border-left-color: $note-color;
 }
 
+/*** First paragraph of a multi-paragraph blockquote is bold and defaults to $note-color if not tagged differently
+***/
 blockquote > p:first-child {
   margin-top: 0;
   font-weight: 700;
   color: $note-color;
 }
 
+/*** This used to prepend "Note" to title of any multi-paragraph blockquote, now it adds the note icon instead
+***/
 blockquote > p:first-child::before {
-  content: 'Note: ';
-}
-
-blockquote.note-vanilla > p:first-child::before {
   content: '\f058 \00a0';
   font-family: FontAwesome;
 }
 
-blockquote.note {
-  border-left-color: $note-color;
-  content: '\f058 \00a0';
-  font-family: FontAwesome;
-}
-
+/*** Blockquotes with important tag get $important-color sidebar
+***/
 blockquote.important {
   border-left-color: $important-color;
-  content: '\f06a  \00a0';
-  font-family: FontAwesome;
 }
 
+/*** First paragraph of a multi-paragraph .important blockquote inherits bold, and is $important-color
+***/
 blockquote.important > p:first-child {
   color: $important-color;
 }
 
+/*** This used to prepend "Important" to important admonitions, now it adds the important icon instead
+***/
 blockquote.important > p:first-child::before {
-  content: 'Important: ';
+  content: '\f06a  \00a0';
+  font-family: FontAwesome;
+}
+
+/*** Blockquotes with warning tag get $warning-color sidebar
+***/
+blockquote.warning {
+  border-left-color: $warning-color;
+}
+
+
+/*** First paragraph of a multi-paragraph .warning blockquote inherits bold, and is $warning-color
+***/
+blockquote.warning > p:first-child {
+  color: $warning-color;
+}
+
+/*** This used to prepend the "Warning" text as content, now it adds the warning icon instead
+***/
+blockquote.warning > p:first-child::before {
+  content: '\f057  \00a0';
+  font-family: FontAwesome;
+}
+
+/* Maintain backwards compatibility with old
+*  note style
+*/
+blockquote > p:only-child {
+  font-weight: inherit;
+  color: inherit;
+}
+blockquote > p:only-child::before {
+  content: none;
+}
+
+/*** Vanilla styles, soon to be removed when it's clear there is no impact to current docset***/
+blockquote.note-vanilla > p:first-child::before {
+  content: '\f058 \00a0';
+  font-family: FontAwesome;
 }
 
 blockquote.important-vanilla {
@@ -58,23 +97,6 @@ blockquote.important-vanilla > p:first-child::before {
   font-family: FontAwesome;
 }
 
-/***
-blockquote.warning {
-  border-left-color: $warning-color;
-}
-***/
-
-blockquote.warning > p:first-child {
-  color: $warning-color;
-  border-left-color: $warning-color;
-  content: '\f057  \00a0';
-  font-family: FontAwesome;
-}
-
-blockquote.warning > p:first-child::before {
-  content: 'Warning: ';
-}
-
 blockquote.warning-vanilla {
   border-left-color: $warning-color;
 }
@@ -87,15 +109,4 @@ blockquote.warning-vanilla > p:first-child::before {
   content: '\f057  \00a0';
   font-family: FontAwesome;
 
-}
-
-/* Maintain backwards compatibility with old
-*  note style
-*/
-blockquote > p:only-child {
-  font-weight: inherit;
-  color: inherit;
-}
-blockquote > p:only-child::before {
-  content: none;
 }

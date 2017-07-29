@@ -46,7 +46,6 @@ package manager, which is a package manager for
 > we recommend using Python 2.x. To learn more,
 see the Python and CLI issues described in
 [Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
-{: .note-vanilla}
 
 * If you do not have Python or `pip` installed, you can either [install
 Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this
@@ -61,7 +60,7 @@ $ pip install docker-cloud
 ```
 
 If you encounter errors on Linux machines, make sure that `python-dev` is
-installed. For example, on Ubuntu, run the following command: 
+installed. For example, on Ubuntu, run the following command:
 
 ```
 $ apt-get install python-dev

@@ -199,7 +199,6 @@ In this section, you set up the database connection for Django.
     >
     > Please note this value is **not** safe for production usage.  Refer to the
      [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
-     {: .note-vanilla}
 
 5.  List running containers.
 

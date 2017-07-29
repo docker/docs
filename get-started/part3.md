@@ -127,7 +127,6 @@ You can name the Compose file anything you want to make it logically meaningful
 to you; `docker-compose.yml` is simply a standard name. We could just as easily
 have called this file `docker-stack.yml` or something more specific to our
 project.
-{: .note-vanilla}
 
 ## Run your new load-balanced app
 

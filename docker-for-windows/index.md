@@ -242,7 +242,6 @@ PowerShell Module as follows.
 > * Depending on your setup, you might need the [NuGet package manager](https://www.nuget.org/){: target="_blank" class="_" } so you might get a prompt to install it.
 >
 > * Make sure you have administrator permissions to run an elevated PowerShell.
-{: .note-vanilla}
 
 1.  Start an "elevated" PowerShell (i.e., run it as administrator).
 
@@ -326,7 +325,6 @@ arrow on the taskbar to show it.
   display options through taskbar settings for notifications.
 >
 > ![whale pinned to taskbar](/docker-for-windows/images/whale-taskbar.png)
-{: .note-vanilla}
 
 ![Showing hidden apps in the taskbar](/docker-for-windows/images/whale-systray.png)
 
@@ -416,7 +414,6 @@ volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volum
 nodes. See [Can I share local drives and filesystem with my Docker Machine
 VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms) in the FAQs.
 >
-{: .note-vanilla}
 
 #### Firewall rules for shared drives
 

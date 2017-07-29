@@ -17,7 +17,7 @@ Docker desktop applications. See Docker Cloud (Edge feature) on
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
 > Docker Machine will still work as described here, but Docker Cloud supercedes Machine for this purpose.
-{: .important-vanilla}
+{: .important}
 
 Docker Machine driver plugins are available for many cloud platforms, so you can
 use Machine to provision cloud hosts. When you use Docker Machine for
@@ -121,7 +121,7 @@ You can register an already existing docker host by passing the daemon url. With
 clusters, but this is legacy. [Swarm mode](/engine/swarm/index.md), built
 into Docker Engine, supercedes Machine provisioning of swarm clusters. The
 topics below show you how to get started with the new swarm mode.
-{: .important-vanilla}
+{: .important}
 
 You can use Docker Machine to create local virtual hosts on which to deploy
 and test [swarm mode](/engine/swarm/index.md) clusters.

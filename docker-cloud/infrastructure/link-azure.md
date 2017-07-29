@@ -11,7 +11,6 @@ notoc: true
 > **Legacy instructions**:
 >
 > This topic has been superseded by [the Azure instructions that enable swarm mode](/docker-cloud/cloud-swarm/link-azure-swarm.md).
-{: .note-vanilla}
 
 You can link your Microsoft Azure account to your Docker Cloud account to deploy
 **nodes** and **node clusters** using Docker Cloud's Dashboard, API, or CLI. You

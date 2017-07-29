@@ -33,7 +33,7 @@ notes](https://github.com/docker/compose/releases/). Each set of release notes
 gives details on which versions of Docker Engine are supported, along
 with compatible Compose file format versions. (See also, the discussion in
 [issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
-{: .note-vanilla}
+
 
 For details on versions and how to upgrade, see
 [Versioning](compose-versioning.md#versioning) and

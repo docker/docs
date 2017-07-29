@@ -46,7 +46,6 @@ environment variables, follow the guidelines in the topic [Environment variables
 in Compose](/compose/environment-variables.md), which describes how to pass
 shell environment variables through to containers, define environment variables
 in Compose files, and more.
-{: .note-vanilla}
 
 ## More Compose documentation
 
