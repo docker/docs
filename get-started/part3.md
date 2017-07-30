@@ -175,7 +175,7 @@ docker stack deploy -c docker-compose.yml getstartedlab
 Docker will do an in-place update, no need to tear the stack down first or kill
 any containers.
 
-Now, re-run the `docker stack ps` command to see the deployed instances reconfigured. For example, if you scaled up the replicas, there will be more
+Now, re-run the `docker stack ps getstartedlab` command to see the deployed instances reconfigured. For example, if you scaled up the replicas, there will be more
 running containers.
 
 ### Take down the app and the swarm
