@@ -186,7 +186,7 @@ services:
     build: ./dir
 ```
 
-Or, as an an object with the path specified under [context](#context) and
+Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```none
