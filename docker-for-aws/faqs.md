@@ -17,7 +17,7 @@ Two different download channels are available for Docker for AWS:
 
 * The **edge channel** provides a deployment with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the edge
+  Docker Engine. Bugs, crashes, and issues are more likely to occur with the edge
   cluster, but you get a chance to preview new functionality, experiment, and provide
   feedback as the deployment evolve. Releases are typically more frequent than for
   stable, often one or more per month. Usage statistics and crash reports are sent
@@ -29,7 +29,7 @@ No, at this time we only support the default Docker for AWS AMI.
 
 ## How can I use Docker for AWS with an AWS account in an EC2-Classic region?
 
-If you have an AWS account that was created before **December 4th, 2013** you have what is known as an **EC2-Classic** account on regions where you have previously deployed resources. **EC2-Classic** accounts don't have default VPC's or the associated subnets, etc. This causes a problem when using our CloudFormation template  because we are using the [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html) function they provide to determine which availability zones you have access to. When used in a region where you have **EC2-Classic**, this function will return all availability zones for a region, even ones you don't have access to. When you have an **EC2-VPC** account, it will return only the availability zones you have access to.
+If you have an AWS account that was created before **December 4th, 2013** you have what is known as an **EC2-Classic** account on regions where you have previously deployed resources. **EC2-Classic** accounts don't have default VPC's or the associated subnets, etc. This causes a problem when using our CloudFormation template because we are using the [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html) function they provide to determine which availability zones you have access to. When used in a region where you have **EC2-Classic**, this function will return all availability zones for a region, even ones you don't have access to. When you have an **EC2-VPC** account, it will return only the availability zones you have access to.
 
 This will cause an error like the following:
 
@@ -41,7 +41,7 @@ There isn't anything we can do right now to fix this issue, we have contacted Am
 
 ### How to tell if you are in the EC2-Classic region.
 
-This AWS documentation page will describe how you can tell if you have EC2-Classic, EC2-VPC or both.  http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+[This AWS documentation page](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html) will describe how you can tell if you have EC2-Classic, EC2-VPC or both.
 
 ### Possible fixes to the EC2-Classic region issue:
 There are a few workarounds that you can try to get Docker for AWS up and running for you.
@@ -112,7 +112,7 @@ Docker for AWS determines the correct amount of Availability Zone's to use based
 
 ## What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
-For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
 ## Where are my container logs?
 
