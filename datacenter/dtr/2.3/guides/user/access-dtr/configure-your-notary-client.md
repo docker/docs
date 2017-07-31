@@ -1,7 +1,7 @@
 ---
 title: Configure your Notary client
 description: Learn how to configure your Notary client to push and pull images from Docker Trusted Registry.
-keywords: docker, registry, notary, trust
+keywords: registry, notary, trust
 ---
 
 The Docker CLI client makes it easy to sign images but to streamline that

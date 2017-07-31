@@ -1,7 +1,7 @@
 ---
 title: Use your own TLS certificates
 description: Learn how to configure Docker Trusted Registry with your own TLS certificates.
-keywords: docker, dtr, tls
+keywords: dtr, tls
 ---
 
 

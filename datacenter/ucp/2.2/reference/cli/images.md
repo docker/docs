@@ -1,7 +1,7 @@
 ---
 title: docker/ucp images
 description: Verify the UCP images on this node
-keywords: docker, ucp, cli, images
+keywords: ucp, cli, images
 ---
 
 Verify the UCP images on this node

@@ -1,7 +1,7 @@
 ---
-description: Learn about the architecture of Docker Trusted Registry.
-keywords: docker, registry, dtr, architecture
 title: DTR architecture
+description: Learn about the architecture of Docker Trusted Registry.
+keywords: registry, dtr, architecture
 ---
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a

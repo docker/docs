@@ -1,7 +1,7 @@
 ---
 title: Scan images for vulnerabilities
 description: Learn how to scan your Docker images for vulnerabilities.
-keywords: docker, registry, scan, vulnerability
+keywords: registry, scan, vulnerability
 ---
 
 [![Image Security Scanning](../../images/scanning_video.png)](https://www.youtube.com/watch?v=121poCB0Nn8 "Images Security Scanning"){: target="_blank" ._}

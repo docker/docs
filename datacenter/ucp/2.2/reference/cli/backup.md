@@ -1,7 +1,7 @@
 ---
 title: docker/ucp backup
 description: Create a backup of a UCP manager node
-keywords: docker, ucp, cli, backup
+keywords: ucp, cli, backup
 ---
 
 Create a backup of a UCP manager node

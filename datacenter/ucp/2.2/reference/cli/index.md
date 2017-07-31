@@ -1,7 +1,7 @@
 ---
 title: docker/ucp overview
 description: Learn about the commands available in the docker/ucp image.
-keywords: docker, ucp, cli, ucp
+keywords: ucp, cli, ucp
 ---
 
 This image has commands to install and manage

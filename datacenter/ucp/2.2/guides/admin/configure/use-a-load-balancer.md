@@ -1,7 +1,7 @@
 ---
 title: Use a load balancer
 description: Learn how to set up a load balancer to access the UCP web UI using an hostname.
-keywords: Docker, UCP, high-availability, load balancer
+keywords: UCP, high-availability, load balancer
 ---
 
 Once you've joined multiple manager nodes for high-availability, you can

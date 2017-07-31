@@ -1,7 +1,7 @@
 ---
 title: docker/ucp id
 description: Print the ID of UCP running on this node
-keywords: docker, ucp, cli, id
+keywords: ucp, cli, id
 ---
 
 Print the ID of UCP running on this node

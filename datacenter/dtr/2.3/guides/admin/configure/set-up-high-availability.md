@@ -1,7 +1,7 @@
 ---
 title: Set up high availability
 description: Lean how to scale Docker Trusted Registry by adding and removing replicas.
-keywords: docker, dtr, install, deploy
+keywords: dtr, install, deploy
 ---
 
 Docker Trusted Registry is designed to scale horizontally as your usage

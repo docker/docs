@@ -1,7 +1,7 @@
 ---
 title: Delete images
 description: Learn how to delete images from Docker Trusted Registry.
-keywords: docker, registry, delete
+keywords: registry, delete
 ---
 
 To delete an image, go to the **DTR web UI**, and navigate to the image

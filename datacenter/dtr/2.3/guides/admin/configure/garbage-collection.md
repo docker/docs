@@ -1,7 +1,7 @@
 ---
 description: Configure garbage collection in Docker Trusted Registry
-keywords: docker, registry, garbage collection, gc, space, disk space
 title: Docker Trusted Registry 2.2 Garbage Collection
+keywords: registry, garbage collection, gc, space, disk space
 ---
 
 #### TL;DR

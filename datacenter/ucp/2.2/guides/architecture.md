@@ -1,7 +1,7 @@
 ---
 title: UCP architecture
 description: Learn about the architecture of Docker Universal Control Plane.
-keywords: docker, ucp, architecture
+keywords: ucp, architecture
 ---
 
 Universal Control Plane is a containerized application that runs on

@@ -1,7 +1,7 @@
 ---
-description: Learn how to install Docker Trusted Registry for production.
-keywords: docker, dtr, registry, install
 title: Install Docker Trusted Registry
+description: Learn how to install Docker Trusted Registry for production.
+keywords: dtr, registry, install
 ---
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a

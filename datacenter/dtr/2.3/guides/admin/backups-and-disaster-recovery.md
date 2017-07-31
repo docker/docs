@@ -1,7 +1,7 @@
 ---
 title: DTR backups and recovery
 description: Learn how to back up your Docker Trusted Registry cluster, and to recover your cluster from an existing backup.
-keywords: docker, registry, high-availability, backup, recovery
+keywords: registry, high-availability, backup, recovery
 ---
 
 {% assign image_backup_file = "backup-images.tar" %}

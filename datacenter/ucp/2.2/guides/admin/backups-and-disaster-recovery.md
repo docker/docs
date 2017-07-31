@@ -1,7 +1,7 @@
 ---
 description: Learn how to backup your Docker Universal Control Plane cluster, and
   to recover your cluster from an existing backup.
-keywords: docker, ucp, backup, restore, recovery
+keywords: ucp, backup, restore, recovery
 title: Backups and disaster recovery
 ---
 

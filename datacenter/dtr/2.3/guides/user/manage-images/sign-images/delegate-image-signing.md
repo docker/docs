@@ -1,7 +1,7 @@
 ---
 title: Delegate image signing
 description: Learn how to grant permission for others to sign images in Docker Trusted Registry.
-keywords: docker, registry, sign, trust
+keywords: registry, sign, trust
 ---
 
 Instead of signing all the images yourself, you can delegate that task

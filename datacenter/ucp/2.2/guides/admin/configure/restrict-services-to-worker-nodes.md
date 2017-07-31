@@ -1,7 +1,7 @@
 ---
 title: Restrict services to worker nodes
 description: Learn how to configure Universal Control Plane to only allow running services in worker nodes.
-keywords: docker, ucp, configuration, worker
+keywords: ucp, configuration, worker
 ---
 
 You can configure UCP to only allow users to deploy and run services in

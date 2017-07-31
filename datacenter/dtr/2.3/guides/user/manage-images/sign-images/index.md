@@ -1,7 +1,7 @@
 ---
 title: Sign an image
 description: Learn how to sign the images you push to Docker Trusted Registry.
-keywords: docker, registry, sign, trust
+keywords: registry, sign, trust
 ---
 
 By default, when you push an image to DTR, the Docker CLI client doesn't

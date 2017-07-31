@@ -2,7 +2,7 @@
 title: Prevent tags from being overwritten
 description: Learn how to make your tags immutable and don't allow users to
   overwrite a tag if it already exists
-keywords: docker, registry, immutable
+keywords: registry, immutable
 ---
 
 {% assign domain="dtr.example.org" %}

@@ -1,7 +1,7 @@
 ---
 title: Deploy DTR caches
 description: Learn how to deploy and configure DTR caches, so that users can pull images faster.
-keywords: docker, registry, dtr, cache
+keywords: registry, dtr, cache
 ---
 
 

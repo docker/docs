@@ -1,7 +1,7 @@
 ---
 title: Grant access to secrets
 description: Learn how to use role-based access control to grant permissions to secrets in Docker Datacenter
-keywords: Docker, UCP, secrets, secrets management
+keywords: UCP, secrets, secrets management
 ---
 
 UCP gives you role-based access control so that you can specify which users can

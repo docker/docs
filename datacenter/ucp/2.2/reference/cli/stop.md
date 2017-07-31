@@ -1,7 +1,7 @@
 ---
 title: docker/ucp stop
 description: Stop UCP components running on this node
-keywords: docker, ucp, cli, stop
+keywords: ucp, cli, stop
 ---
 
 Stop UCP components running on this node
