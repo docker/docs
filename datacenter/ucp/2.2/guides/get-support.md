@@ -42,3 +42,9 @@ docker container run --rm \
 This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
 from all of the manager nodes.
+
+On Windows worker nodes, run the following command to generate a local support dump:
+
+```ps
+PS> docker run --name windowssupport -v 'C:\ProgramData\docker\daemoncerts:C:\ProgramData\docker\daemoncerts' -v 'C:\Windows\system32\winevt\logs:C:\eventlogs:ro' docker/ucp-dsinfo-win; docker cp windowssupport:'C:\dsinfo' .; docker rm -f windowssupport
+```
