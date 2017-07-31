@@ -12,6 +12,61 @@ For Docker releases prior to 17.03.0, see
 
 [Learn about Docker releases](/engine/installation.md).
 
+## 17.06.1-ce (2017-08-15)
+
+### Builder
+
+* Fix a regression, where `ADD` from remote URL's extracted archives [#89](https://github.com/docker/docker-ce/pull/89)
+* Fix handling of remote "git@" notation [#100](https://github.com/docker/docker-ce/pull/100)
+* Fix copy `--from` conflict with force pull [#86](https://github.com/docker/docker-ce/pull/86)
+
+### Client
+
+* Make pruning volumes optional when running `docker system prune`, and add a `--volumes` flag [#109](https://github.com/docker/docker-ce/pull/109)
+* Show progress of replicated tasks before they are assigned [#97](https://github.com/docker/docker-ce/pull/97)
+* Fix `docker wait` hanging if the container does not exist [#106](https://github.com/docker/docker-ce/pull/106)
+* If `docker swarm ca` is called without the `--rotate` flag, warn if other flags are passed [#110](https://github.com/docker/docker-ce/pull/110)
+* Fix API version negotiation not working if the daemon returns an error [#115](https://github.com/docker/docker-ce/pull/115)
+* Print an error if "until" filter is combined with "--volumes" on system prune [#154](https://github.com/docker/docker-ce/pull/154)
+
+### Logging
+
+* Fix stderr logging for `journald` and `syslog` [#95](https://github.com/docker/docker-ce/pull/95)
+* Fix log readers can block writes indefinitely [#98](https://github.com/docker/docker-ce/pull/98)
+* Fix `awslogs` driver repeating last event [#151](https://github.com/docker/docker-ce/pull/151)
+
+### Networking
+
+* Fix issue with driver options not received by network drivers [#127](https://github.com/docker/docker-ce/pull/127)
+
+### Plugins
+
+* Make plugin removes more resilient to failure [#91](https://github.com/docker/docker-ce/pull/91)
+
+### Runtime
+
+* Prevent a `goroutine` leak when `healthcheck` gets stopped [#90](https://github.com/docker/docker-ce/pull/90)
+* Do not error on relabel when relabel not supported [#92](https://github.com/docker/docker-ce/pull/92)
+* Limit max backoff delay to 2 seconds for GRPC connection [#94](https://github.com/docker/docker-ce/pull/94)
+* Fix issue preventing containers to run when memory cgroup was specified due to bug in certain kernels [#102](https://github.com/docker/docker-ce/pull/102)
+* Fix container not responding to SIGKILL when paused [#102](https://github.com/docker/docker-ce/pull/102)
+* Improve error message if an image for an incompatible OS is loaded [#108](https://github.com/docker/docker-ce/pull/108)
+* Fix a handle leak in `go-winio` [#112](https://github.com/docker/docker-ce/pull/112)
+* Fix issue upon upgrade, preventing docker from showing running containers when `--live-restore` is enabled [#117](https://github.com/docker/docker-ce/pull/117)
+* Fix bug where services using secrets would fail to start on daemons using the `userns-remap` feature [#121](https://github.com/docker/docker-ce/pull/121)
+* Fix error handling with `not-exist` errors on remove [#142](https://github.com/docker/docker-ce/pull/142)
+* Fix REST API Swagger representation cannot be loaded with SwaggerUI [#156](https://github.com/docker/docker-ce/pull/156)
+
+### Security
+
+* Redact secret data on secret creation [#99](https://github.com/docker/docker-ce/pull/99)
+
+### Swarm mode
+
+* Do not add duplicate platform information to service spec [#107](https://github.com/docker/docker-ce/pull/107)
+* Cluster update and memory issue fixes [#114](https://github.com/docker/docker-ce/pull/114)
+* Changing get network request to return predefined network in swarm [#150](https://github.com/docker/docker-ce/pull/150)
+
 ## 17.06.0-ce (2017-06-28)
 
 > **Note**: Docker 17.06.0 has an issue in the image builder causing a change in the behavior
