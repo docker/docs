@@ -64,19 +64,19 @@ examples: "### Search images by name\n\nThis example displays images with a name
   made from scratch. Comes in git and cURL flavors.   8                    [OK]\n```\n\n###
   Limit search results (--limit)\n\nThe flag `--limit` is the maximum number of results
   returned by a search. This value could\nbe in the range between 1 and 100. The default
-  value of `--limit` is 25.\n\n\n### Filtering\n\nThe filtering flag (`-f` or `--filter`)
+  value of `--limit` is 25.\n\n### Filtering\n\nThe filtering flag (`-f` or `--filter`)
   format is a `key=value` pair. If there is more\nthan one filter, then pass multiple
   flags (e.g. `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe currently supported
-  filters are:\n\n* stars (int - number of stars the image has)\n* is-automated (true|false)
-  - is the image automated or not\n* is-official (true|false) - is the image official
-  or not\n\n\n#### stars\n\nThis example displays images with a name containing 'busybox'
-  and at\nleast 3 stars:\n\n```bash\n$ docker search --filter stars=3 busybox\n\nNAME
-  \                DESCRIPTION                                     STARS     OFFICIAL
-  \  AUTOMATED\nbusybox              Busybox base image.                             325
+  filters are:\n\n* stars (int - number of stars the image has)\n* is-automated (boolean
+  - true or false) - is the image automated or not\n* is-official (boolean - true
+  or false) - is the image official or not\n\n#### stars\n\nThis example displays
+  images with a name containing 'busybox' and at\nleast 3 stars:\n\n```bash\n$ docker
+  search --filter stars=3 busybox\n\nNAME                 DESCRIPTION                                     STARS
+  \    OFFICIAL   AUTOMATED\nbusybox              Busybox base image.                             325
   \      [OK]       \nprogrium/busybox                                                     50
   \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
-  made...   8                    [OK]\n```\n\n\n#### is-automated\n\nThis example
-  displays images with a name containing 'busybox'\nand are automated builds:\n\n```bash\n$
+  made...   8                    [OK]\n```\n\n#### is-automated\n\nThis example displays
+  images with a name containing 'busybox'\nand are automated builds:\n\n```bash\n$
   docker search --filter is-automated busybox\n\nNAME                 DESCRIPTION
   \                                    STARS     OFFICIAL   AUTOMATED\nprogrium/busybox
   \                                                    50                   [OK]\nradial/busyboxplus

@@ -37,7 +37,7 @@ examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME   
   following filter matches nodes with the `foo` label regardless of its value.\n\n```bash\n$
   docker node ls -f \"label=foo\"\n\nID                         HOSTNAME       STATUS
   \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready
-  \  Active\n```\n\n#### membersip\n\nThe `membership` filter matches nodes based
+  \  Active\n```\n\n#### membership\n\nThe `membership` filter matches nodes based
   on the presence of a `membership` and a value\n`accepted` or `pending`.\n\nThe following
   filter matches nodes with the `membership` of `accepted`.\n\n```bash\n$ docker node
   ls -f \"membership=accepted\"\n\nID                           HOSTNAME        STATUS
