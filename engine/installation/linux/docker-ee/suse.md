@@ -11,7 +11,7 @@ title: Get Docker EE for SLES
 
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ee).
 
 ## Prerequisites
 
@@ -130,7 +130,7 @@ from the repository.
     $ sudo rpm --import <DOCKER-EE-URL/sles/gpg
     ```
 
-#### Install Docker EE
+#### Install Docker
 
 1.  Update the `zypper` package index.
 

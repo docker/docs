@@ -10,7 +10,7 @@ title: Get Docker EE for Red Hat Enterprise Linux
 
 To get started with Docker EE on Red Hat Enterprise Linux (RHEL), make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ee).
 
 ## Prerequisites
 
@@ -148,7 +148,7 @@ from the repository.
         <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
-#### Install Docker EE
+#### Install Docker
 
 1.  Update the `yum` package index.
 

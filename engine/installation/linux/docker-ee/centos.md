@@ -109,7 +109,7 @@ EE from the repository.
         <DOCKER-EE-URL>/centos/docker-ee.repo
     ```
 
-#### Install Docker EE
+#### Install Docker
 
 1.  Update the `yum` package index.
 

@@ -11,7 +11,7 @@ title: Get Docker CE for Fedora
 
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 
@@ -115,7 +115,7 @@ from the repository.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
-#### Install Docker CE
+#### Install Docker
 
 1.  Update the `dnf` package index.
 

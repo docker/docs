@@ -9,7 +9,7 @@ title: Get Docker EE for Oracle Linux
 
 To get started with Docker EE on Oracle Linux, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ee).
 
 ## Prerequisites
 
@@ -107,7 +107,7 @@ from the repository.
         <DOCKER-EE-URL>/oraclelinux/docker-ee.repo
     ```
 
-#### Install Docker EE
+#### Install Docker
 
 1.  Update the `yum` package index.
 
