@@ -100,6 +100,11 @@ controls these labels, and you don't need to manage them.
 Collections get generic default names, but you can give them meaningful names,
 like "Dev", "Test", and "Prod".
 
+A *stack* is a group of resources identified by a label. You can place the
+stack's resources in multiple collections. Resources are placed in the user's
+default collection unless you specify an explicit `com.docker.ucp.access.label`
+within the stack/compose file.
+
 ## Control access to nodes
 
 The Docker EE Advanced license enables access control on worker nodes.
