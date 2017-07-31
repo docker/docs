@@ -347,6 +347,38 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.06.0-win17 Release Notes (2017-07-31 17.06.0-win17) (edge)
+
+**Upgrades**
+
+- [Docker 17.07.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc1)
+- [Docker compose 1.15.0](https://github.com/docker/compose/releases/tag/1.15.0)
+- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
+- Linux Kernel 4.9.38
+
+**New**
+
+- Windows Docker daemon is now started as service for better lifecycle management
+
+**Bug fixes and minor changes**
+
+- Keep Docker info in the same place as before in the registry, used by Visual Studio 2017 (Fixes [docker/for-win#939](https://github.com/docker/for-win/issues/939))
+- Fix `config.json` not being released properly (Fixes [docker/for-win#867](https://github.com/docker/for-win/issues/867))
+- Do not anymore move credentials in credential store at startup
+
+### Docker Community Edition 17.06.1-ce-rc1-win20 Release Notes (2017-07-18 17.06.1-win20) (edge)
+
+**Upgrades**
+
+- [Docker 17.06.1-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce-rc1)
+- Linux Kernel 4.9.36
+- AUFS 20170703
+
+**Bug fixes and minor changes**
+
+- Fix locked container id file (Fixes [docker/for-win#818](https://github.com/docker/for-win/issues/818))
+- Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859))
+
 ### Docker Community Edition 17.06.0-win17 Release Notes (2017-06-28 17.06.0-win17) (edge)
 
 **Upgrades**

@@ -398,6 +398,35 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.07.0-ce-rc1-mac21, 2017-07-31 (edge)
+
+**Upgrades**
+
+- [Docker 17.07.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc1)
+- [Docker compose 1.15.0](https://github.com/docker/compose/releases/tag/1.15.0)
+- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
+- Linux Kernel 4.9.38
+
+  **New**
+
+- Transparent proxy using macOS system proxies (if defined) directly
+- GUI settings are now stored in `~/Library/Group\ Containers/group.com.docker/settings.json`. `daemon.json` in now a file in `~/.docker/`
+- You can now change the default IP address used by Hyperkit if it collides with your network
+
+**Bug fixes and minor changes**
+
+- Add daemon options validation
+- Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
+- Support paging of Docker Cloud [repositories](/docker-cloud/builds/repos.md) and [organizations](/docker-cloud/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+
+### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18 (edge)
+
+**Upgrades**
+
+- [Docker 17.06.1-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce-rc1)
+- Linux Kernel 4.9.36
+- AUFS 20170703
+
 ### Docker Community Edition 17.06.0-ce-mac17, 2017-06-28 (edge)
 
 **Upgrades**
