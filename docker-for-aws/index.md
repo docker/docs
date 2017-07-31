@@ -1,4 +1,3 @@
----
 description: Setup & Prerequisites
 keywords: aws, amazon, iaas, tutorial
 title: Docker for AWS Setup & Prerequisites
