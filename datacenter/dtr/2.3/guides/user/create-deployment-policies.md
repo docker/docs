@@ -3,7 +3,7 @@ title: Create deployment polices
 description: Learn how to create a deployment policies that can automatically
   promote an image to production if it passes all tests and doesn't have
   vulnerabilities.
-keywords: docker, registry, promotion, pipeline
+keywords: registry, promotion, pipeline
 ---
 
 Once you've made changes to your application and want to make them available

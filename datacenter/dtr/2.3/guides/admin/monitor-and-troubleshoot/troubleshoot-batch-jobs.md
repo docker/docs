@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot batch jobs
 description: Learn how Docker Trusted Registry run batch jobs, so that you can troubleshoot when something goes wrong
-keywords: docker, dtr, troubleshoot
+keywords: dtr, troubleshoot
 ---
 
 DTR uses a job queue to schedule batch jobs. A job is placed on this work queue,

@@ -1,7 +1,7 @@
 ---
 title: Use a cache
 description: Learn how to configure your Docker Trusted Registry account to pull images from a cache for faster download times.
-keywords: docker, registry, cache
+keywords: registry, cache
 ---
 
 Docker Trusted Registry can be configured to have one or more caches. This

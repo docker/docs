@@ -1,7 +1,7 @@
 ---
 title: Use a load balancer
 description: Learn how to configure a load balancer to balance user requests across multiple Docker Trusted Registry replicas.
-keywords: docker, dtr, load balancer
+keywords: dtr, load balancer
 ---
 
 Once you’ve joined multiple DTR replicas nodes for

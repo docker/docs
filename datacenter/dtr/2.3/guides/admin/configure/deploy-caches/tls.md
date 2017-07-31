@@ -1,7 +1,7 @@
 ---
 title: Deploy caches with TLS
 description: Learn how to deploy and secure caches for Docker Trusted Registry, leveraging TLS
-keywords: docker, dtr, tls
+keywords: dtr, tls
 ---
 
 When running DTR caches on a production environment, you should secure them

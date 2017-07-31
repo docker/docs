@@ -2,7 +2,7 @@
 title: Universal Control Plane overview
 description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
   management solution from Docker.
-keywords: docker, ucp, overview, orchestration, clustering
+keywords: ucp, overview, orchestration, clustering
 ---
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management

@@ -1,7 +1,7 @@
 ---
 title: Pull and push images
 description: Learn how to pull and push images to Docker Trusted Registry.
-keywords: docker, registry, push, pull
+keywords: registry, push, pull
 ---
 
 {% assign domain="dtr.example.org" %}

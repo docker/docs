@@ -1,7 +1,7 @@
 ---
 title: Chain multiple caches
 description: Learn how to deploy and chain multiple caches for Docker Trusted Registry, to cover multiple regions or offices
-keywords: docker, dtr, tls
+keywords: dtr, tls
 ---
 
 If your users are distributed geographically, consider chaining multiple DTR

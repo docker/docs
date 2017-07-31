@@ -1,8 +1,8 @@
 ---
+title: Create and manage teams in DTR
 description: Learn how to manage teams to enforce fine-grain access control in Docker
   Trusted Registry.
-keywords: docker, registry, security, permissions, teams
-title: Create and manage teams in DTR
+keywords: registry, security, permissions, teams
 ---
 
 You can extend a user's default permissions by granting them individual

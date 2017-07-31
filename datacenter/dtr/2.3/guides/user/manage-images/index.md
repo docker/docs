@@ -1,7 +1,7 @@
 ---
 title: Create a repository
 description: Learn how to create new repositories in Docker Trusted Registry.
-keywords: docker, registry, repository
+keywords: registry, repository
 ---
 
 Since DTR is secure by default, you need to create the image repository before

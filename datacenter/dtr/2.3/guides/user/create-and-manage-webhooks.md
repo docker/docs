@@ -1,7 +1,7 @@
 ---
 title: Manage webhooks
 description: Learn how to create, configure, and test webhooks in Docker Trusted Registry.
-keywords: docker, registry, webhooks
+keywords: registry, webhooks
 ---
 
 DTR has webhooks so that you can run custom login when an event happens. This

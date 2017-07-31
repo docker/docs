@@ -1,7 +1,7 @@
 ---
 title: docker/ucp upgrade
 description: Upgrade the UCP components on this node
-keywords: docker, ucp, cli, upgrade
+keywords: ucp, cli, upgrade
 ---
 
 Upgrade the UCP cluster

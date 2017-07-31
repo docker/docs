@@ -1,7 +1,7 @@
 ---
-description: Learn how to troubleshoot your DTR installation.
-keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
+description: Learn how to troubleshoot your DTR installation.
+keywords: registry, monitor, troubleshoot
 ---
 
 This guide contains tips and tricks for troubleshooting DTR problems.

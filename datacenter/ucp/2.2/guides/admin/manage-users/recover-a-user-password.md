@@ -1,7 +1,7 @@
 ---
 title: Reset a user password
 description: Learn how to recover your Docker Datacenter credentials
-keywords: docker, ucp, authentication
+keywords: ucp, authentication
 ---
 
 If you have administrator credentials to UCP, you can reset the password of
