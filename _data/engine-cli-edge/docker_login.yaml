@@ -62,6 +62,9 @@ options:
 - option: password
   shorthand: p
   description: Password
+- option: password-stdin
+  default_value: "false"
+  description: Take the password from stdin
 - option: username
   shorthand: u
   description: Username
