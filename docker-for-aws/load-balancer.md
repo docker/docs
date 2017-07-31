@@ -56,9 +56,9 @@ com.docker.aws.lb.arn="arn:...@444"
 com.docker.aws.lb.arn="arn:...@444,8080"
 ```
 
-### More full examples:
+### More full examples
 
-listen for HTTP on ports 80 and HTTPS on 444
+Listen for HTTP on ports 80 and HTTPS on 444
 
 ```bash
 $ docker service create \
