@@ -16,6 +16,9 @@ options:
   shorthand: f
   default_value: "false"
   description: Do not prompt for confirmation
+- option: volumes
+  default_value: "false"
+  description: Prune volumes
 examples: "```bash\n$ docker system prune -a\n\nWARNING! This will remove:\n\t- all
   stopped containers\n\t- all volumes not used by at least one container\n\t- all
   networks not used by at least one container\n\t- all images without at least one
