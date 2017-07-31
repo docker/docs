@@ -9,6 +9,12 @@ long: |-
 usage: docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS...]
 pname: docker service
 plink: docker_service.yaml
+options:
+- option: detach
+  shorthand: d
+  default_value: "true"
+  description: |
+    Exit immediately instead of waiting for the service to converge
 examples: |-
   ### Scale a single service
 
