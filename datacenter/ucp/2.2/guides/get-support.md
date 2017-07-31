@@ -48,3 +48,6 @@ On Windows worker nodes, run the following command to generate a local support d
 ```ps
 PS> docker run --name windowssupport -v 'C:\ProgramData\docker\daemoncerts:C:\ProgramData\docker\daemoncerts' -v 'C:\Windows\system32\winevt\logs:C:\eventlogs:ro' docker/ucp-dsinfo-win; docker cp windowssupport:'C:\dsinfo' .; docker rm -f windowssupport
 ```
+
+This command creates a directory named `dsinfo` in your current directory.
+If you want an archive file, you need to create it from the `dsinfo` directory.
