@@ -375,7 +375,7 @@ Links also express dependency between services in the same way as
 ### log_driver
 
 > [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
-> [logging](index.md#logging).
+> [logging](/compose/compose-file/index.md#logging).
 
 Specify a log driver. The default is `json-file`.
 
@@ -384,7 +384,7 @@ Specify a log driver. The default is `json-file`.
 ### log_opt
 
 > [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
-> [logging](index.md#logging).
+> [logging](/compose/compose-file/index.md#logging).
 
 Specify logging options as key-value pairs. An example of `syslog` options:
 
@@ -394,7 +394,7 @@ Specify logging options as key-value pairs. An example of `syslog` options:
 ### net
 
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
-> [network_mode](index.md#networkmode) and [networks](index.md#networks).
+> [network_mode](/compose/compose-file/index.md#networkmode) and [networks](/compose/compose-file/index.md#networks).
 
 Network mode. Use the same values as the docker client `--net` parameter.
 The `container:...` form can take a service name instead of a container name or

@@ -46,7 +46,7 @@ This AWS documentation page will describe how you can tell if you have EC2-Class
 ### Possible fixes to the EC2-Classic region issue:
 There are a few workarounds that you can try to get Docker for AWS up and running for you.
 
-1. Create your own VPC, then [install Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc).
+1. Create your own VPC, then [install Docker for AWS with a pre-existing VPC](/docker-for-aws/index.md#install-with-an-existing-vpc).
 2. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.
 3. Create an new AWS account, all new accounts will be setup using **EC2-VPC** and will not have this problem.
 4. Contact AWS support to convert your **EC2-Classic** account to a **EC2-VPC** account. For more information checkout the following answer for **"Q. I really want a default VPC for my existing EC2 account. Is that possible?"** on https://aws.amazon.com/vpc/faqs/#Default_VPCs
@@ -61,7 +61,7 @@ There are a few workarounds that you can try to get Docker for AWS up and runnin
 
 ## Can I use my existing VPC?
 
-Yes, see [install Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc) for more info.
+Yes, see [install Docker for AWS with a pre-existing VPC](/docker-for-aws/index.md#install-with-an-existing-vpc) for more info.
 
 ## Recommended VPC and subnet setup
 

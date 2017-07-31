@@ -75,18 +75,18 @@ These differences are explained below.
 ### Version 1
 
 Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](index.md#service-configuration-reference) are
+files, all the [services](/compose/compose-file/index.md#service-configuration-reference) are
 declared at the root of the document.
 
 Version 1 is supported by **Compose up to 1.6.x**. It will be deprecated in a
 future Compose release.
 
 Version 1 files cannot declare named
-[volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
-[build arguments](index.md#args).
+[volumes](/compose/compose-file/index.md#volume-configuration-reference), [networks](/compose/compose-file/index.md#network-configuration-reference) or
+[build arguments](/compose/compose-file/index.md#args).
 
-Compose does not take advantage of [networking](index.md#networking.md) when you use
-version 1: every container is placed on the default `bridge` network and is
+Compose does not take advantage of [networking](/compose/networking.md) when you
+use version 1: every container is placed on the default `bridge` network and is
 reachable from every other container at its IP address. You will need to use
 [links](compose-file-v1.md#links) to enable discovery between containers.
 
@@ -225,7 +225,7 @@ several more.
 the [upgrading](#upgrading) guide for how to migrate away from these.
 (For more information on `extends`, please see [Extending services](/compose/extends.md#extending-services).)
 
-- Added: [deploy](index.md#deploy)
+- Added: [deploy](/compose/compose-file/index.md#deploy)
 
 ### Version 3.3
 
@@ -234,10 +234,10 @@ available with Docker Engine version **17.06.0+**, and higher.
 
 Introduces the following additional parameters:
 
-- [build `labels`](index.md#build)
-- [`credential_spec`](index.md#credentialspec)
-- [`configs`](index.md#configs)
-- [deploy `endpoint_mode`](index.md#endpointmode)
+- [build `labels`](/compose/compose-file/index.md#build)
+- [`credential_spec`](/compose/compose-file/index.md#credentialspec)
+- [`configs`](/compose/compose-file/index.md#configs)
+- [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
 
 ## Upgrading
 
@@ -248,7 +248,7 @@ several options have been removed:
 
 -   `volume_driver`: Instead of setting the volume driver on the service, define
     a volume using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
     and specify the driver there.
 
         version: "3"
@@ -262,12 +262,12 @@ several options have been removed:
             driver: mydriver
 
 -   `volumes_from`: To share a volume between services, define it using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](/compose/compose-file/index.md#volume-configuration-reference)
     and reference it from each service that shares it using the
-    [service-level `volumes` option](index.md#volumes-volumedriver).
+    [service-level `volumes` option](/compose/compose-file/index.md#volumes-volumedriver).
 
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
-    have been replaced by the [resources](index.md#resources) key under
+    have been replaced by the [resources](/compose/compose-file/index.md#resources) key under
     `deploy`. Note that `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 

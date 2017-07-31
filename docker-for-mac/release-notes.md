@@ -637,7 +637,7 @@ events or unexpected unmounts.
 
 **New**
 
-- More options when moving disk image (see [Storage location](index.md#storage-location) under Advanced preference settings)
+- More options when moving disk image (see [Storage location](/docker-for-mac/index.md#storage-location) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -820,9 +820,9 @@ events or unexpected unmounts.
 
 **New**
 
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [[Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [[Daemon Advanced (JSON configuration file)](/docker-for-mac/index.md#daemon-advanced-json-configuration-file).
 
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#daemon-basic-experimental-mode-and-registries).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](/docker-for-mac/index.md#daemon-basic-experimental-mode-and-registries).
 
 **Upgrades**
 
@@ -1116,7 +1116,7 @@ events or unexpected unmounts.
 
 **New**
 
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](index.md#download-docker-for-mac).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](/docker-for-mac/index.md#download-docker-for-mac).
 
 **Upgrades**
 
