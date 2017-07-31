@@ -182,6 +182,9 @@ options:
 - option: squash
   default_value: "false"
   description: Squash newly built layers into a single new layer
+- option: stream
+  default_value: "false"
+  description: Stream attaches to server to negotiate build context
 - option: tag
   shorthand: t
   description: Name and optionally a tag in the 'name:tag' format

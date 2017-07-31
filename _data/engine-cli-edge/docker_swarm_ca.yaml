@@ -1,5 +1,5 @@
 command: docker swarm ca
-short: Manage root CA
+short: Display and rotate the root CA
 long: View or rotate the current swarm CA certificate. This command must target a
   manager node.
 usage: docker swarm ca [OPTIONS]
