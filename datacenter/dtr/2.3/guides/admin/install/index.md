@@ -52,8 +52,6 @@ by UCP.
 By default the install command runs in interactive mode and prompts for
 additional information like:
 
-* DTR external url: the url clients use to read DTR. If you're using a load
-balancer for DTR, this is the IP address or DNS name of the load balancer
 * UCP url: the url clients use to reach UCP
 * UCP username and password: administrator credentials for UCP
 
