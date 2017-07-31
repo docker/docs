@@ -18,6 +18,7 @@ DISTRIBUTION_BRANCH="release/2.6"
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend md_source/engine/extend || (echo "Failed engine/extend download" && exit -1)
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api md_source/engine/api || (echo "Failed engine/api download" && exit -1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec md_source/registry/spec || (echo "Failed registry/spec download" && exit -1)
+svn co https://github.com/docker/compliance/trunk/docs/compliance md_source/compliance || (echo "Failed docker/compliance download" && exit -1)
 
 # Get the Library docs
 svn co https://github.com/docker-library/docs/trunk md_source/_samples/library || (echo "Failed library download" && exit -1)

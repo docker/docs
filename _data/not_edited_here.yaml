@@ -37,3 +37,7 @@ overrides:
 - path: /registry/spec/
   description: Docker Registry API references
   source: https://github.com/docker/distribution/tree/release/2.5/docs/spec/
+
+- path: /compliance/
+  description: Docker compliance
+  source: https://github.com/docker/compliance/tree/master/docs/compliance
