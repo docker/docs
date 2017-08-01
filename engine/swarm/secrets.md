@@ -475,8 +475,10 @@ generate the site key and certificate, name the files `site.key` and
     > This example does not require a custom image. It puts the `site.conf`
     > into place and runs the container all in one step.
 
-    Docker 17.06 and higher allow you to specify a custom location for a secret
-    within the container. The older version of this command requires you to
+    In Docker 17.05 and earlier, secrets are always located within the
+    `/run/secrets/` directory. Docker 17.06 and higher allow you to specify a
+    custom location for a secret within the container. The two examples below
+    illustrate the difference. The older version of this command requires you to
     create a symbolic link to the true location of the `site.conf` file so that
     Nginx can read it, but the newer version does not require this. The older
     example is preserved so that you can see the difference.
@@ -508,7 +510,7 @@ generate the site key and certificate, name the files `site.key` and
       ```
 
     The first example shows both the short and long syntax for secrets, and the
-    second example shows only the short syntax.  The short syntax creates files in
+    second example shows only the short syntax. The short syntax creates files in
     `/run/secrets/` with the same name as the secret. Within the running
     containers, the following three files now exist:
 
