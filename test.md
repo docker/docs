@@ -457,18 +457,22 @@ Bootstrap JS are loaded.
 
 Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
-support two broad categories of admonitions: those with prefixed text (**Note:**,
-**Important:**, **Warning**) and those with prefixed icons.
+support these broad categories of admonitions:
 
-The new styles (with icons) are defined in a way that will not impact
-admonitions formatted with the original styles (prefixed text), so notes in your
-published documents won't be adversely affected.
+- Notes in the old style (no Liquid tag required)
+- Notes with a prefixed icon (no Liquid tag required)
+- Important and Warning admonitions, which take `{: .important}` and `{: .warning}` tags, respectively
+
+The new styles include prepended icons, color sidebars, and bold color titles
+for multi-paragraph notes, but no auto-prepended text. These are defined in a
+way that will not impact admonitions formatted with the original styles, so
+notes in your published documents won't be adversely affected.
 
 Examples of both styles are shown below.
 
 ### Examples (original styles, prefix words)
 
-Admonitions with prefixed text use the following class tags, as shown in the examples.
+Admonitions with prefixed icons use the following class tags, as shown in the examples.
 
 * **Note:** No class tag is needed for standard notes.
 * **Important:** Use the `important` class.
@@ -476,9 +480,6 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 
 
 > **Note**: This is a note using the old note style
-
-> **Note**: This is a note using
-> the old style and has multiple lines, but a single paragraph
 
 > Pssst, wanna know something?
 >
@@ -513,39 +514,11 @@ Admonitions with prefixed text use the following class tags, as shown in the exa
 >
 > And another sentence to top it all off.
 
-### Examples with FontAwesome icons
+> **Important**: Single paragraph important note with the prefix word "important" manually typed in as bold at the beginning.
+{: .important}
 
->  Pssst, wanna know something?
->
-> You include a small description here telling users to be on the lookout
->
-> This is an example of a note using the `{: .note-vanilla}` tag to get an icon instead of a "Note" prefix, and write your own note title.
-{: .note-vanilla}
-
-
-> It's not safe out there, take this Moby with you
->
-> Use `{: .important-vanilla}` after your important to get an "important" icon.
-{: .important-vanilla}
-
-> Ouch, don't touch that hot Docker engine!
->
-> Use `{: .warning-vanilla}` after your warning to get an icon instead of a "Warning" prefix.
->
-> You can also add more paragraphs here if your explanation is
- super complex.
-{: .warning-vanilla}
-
-### Examples with both prefixed word and icon
-
-The current CSS also supports this kind of of admonition.
-
-> **Notes**
->
-> * This is a note about a thing.
->
-> *  This is another note about the same thing.
-{: .note-vanilla}
+> **Warning**: Single paragraph warning with the prefix word "warning" manually typed in as bold at the beginning.
+{: .warning}
 
 ## Code blocks
 

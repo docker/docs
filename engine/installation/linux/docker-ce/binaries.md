@@ -60,7 +60,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
-{:.warning-vanilla}
+{:.warning}
 
 ##### Docker daemon considerations
 

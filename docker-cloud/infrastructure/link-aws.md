@@ -10,7 +10,6 @@ title: Link an Amazon Web Services account
 > **Legacy instructions**:
 >
 > This topic has been superseded by [the AWS instructions that enable swarm mode](/docker-cloud/cloud-swarm/link-aws-swarm.md).
-{: .note-vanilla}
 
 You can create a role with AWS IAM (Identity and Access Management) so that
 Docker Cloud can provision and manage **node clusters** and **nodes** on your

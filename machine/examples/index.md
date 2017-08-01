@@ -18,7 +18,7 @@ Docker desktop applications. See Docker Cloud (Edge feature) on
 >
 > Docker Machine will still work as described here, but Docker Cloud
 supercedes Machine for this purpose.
-{: .important-vanilla}
+{: .important}
 
 -   [Digital Ocean Example](ocean.md)
 -   [AWS Example](aws.md)

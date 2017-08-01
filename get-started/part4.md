@@ -96,7 +96,6 @@ To add a worker to this swarm, run the following command:
 > ```
 > docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"
 > ```
-{: .note-vanilla}
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -265,7 +264,6 @@ look:
 >
 > - Port 7946 TCP/UDP for container network discovery.
 > - Port 4789 UDP for the container ingress network.
-{: .note-vanilla}
 
 ## Iterating and scaling your app
 
@@ -298,7 +296,6 @@ docker-machine ssh myvm1 "docker stack rm getstartedlab"
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
 > manager, but _you'll need this swarm for part 5, so please keep it
 > around for now_.
-{: .note-vanilla}
 
 [On to Part 5 >>](part5.md){: class="button outline-btn" style="margin-bottom: 30px"}
 

@@ -196,7 +196,7 @@ the repository.
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning-vanilla}
+    {:.warning}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. This output is truncated. List the

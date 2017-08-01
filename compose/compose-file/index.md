@@ -788,7 +788,6 @@ Simple example:
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
-{: .note-vanilla}
 
 
 ### dns
@@ -971,7 +970,6 @@ legacy option. We recommend using [networks](#networks) instead.
 >
 > This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 with a (version 3) Compose file.
-{: .note-vanilla}
 
 ### extra_hosts
 
@@ -1086,7 +1084,6 @@ Links also express dependency between services in the same way as
 > *  This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
-{: .note-vanilla}
 
 ### logging
 
@@ -1148,7 +1145,6 @@ specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
 These particular options are not available on other logging drivers.
 For a full list of supported logging drivers and their options, see
 [logging drivers](/engine/admin/logging/overview.md).
-{: .note-vanilla}
 
 ### network_mode
 
@@ -1169,7 +1165,6 @@ the special form `service:[service name]`.
  file.
 >
 >* `network_mode: "host"` cannot be mixed with [links](#links).
-{: .note-vanilla}
 
 ### networks
 
@@ -1344,7 +1339,7 @@ to the secret name.
 > the short syntax are unreadable within the container if the command does not
 > run as the `root` user. The workaround is to use the long syntax instead if
 > you use Docker 1.13.1 and the secret must be read by a non-`root` user.
-{: .warning-vanilla}
+{: .warning}
 
 The following example uses the short syntax to grant the `redis` service
 access to the `my_secret` and `my_other_secret` secrets. The value of
@@ -1835,7 +1830,6 @@ tasks are scheduled on new nodes,
 [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) creates the
 volume on the local node. To learn more, see
 [moby/moby#29976](https://github.com/moby/moby/issues/29976).
-{: .note-vanilla}
 
 ### labels
 

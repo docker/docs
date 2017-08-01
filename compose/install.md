@@ -48,7 +48,7 @@ To install Compose, do the following:
     replace `$dockerComposeVersion` with the release number that
     you want. Compose releases are also available for direct download
     on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
-    {: .important-vanilla}
+    {: .important}
 
     Now, run the executable to install Compose.
 
@@ -61,7 +61,6 @@ To install Compose, do the following:
     If so, your `/usr/local/bin` directory probably isn't writable and
     you'll need to install Compose as the superuser. Run `sudo -i`, then
     run the download and install commands below, then `exit`.
-    {: .note-vanilla}
 
 
     Run this command to download Docker Compose, replacing
@@ -86,7 +85,7 @@ To install Compose, do the following:
     you want. Compose releases are also available for direct download on
     the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
-    {: .important-vanilla}
+    {: .important}
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options).
@@ -147,7 +146,7 @@ release number with the one that you want. Compose releases are also listed and
 available for direct download on the [Compose repository release page on
 GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
-{: .important-vanilla}
+{: .important}
 
 ## Master builds
 
@@ -201,7 +200,6 @@ pip uninstall docker-compose
 > methods, you probably do not have the proper permissions to remove
 > `docker-compose`. To force the removal, prepend `sudo` to either of the above
 > commands and run again.
-{: .note-vanilla}
 
 
 ## Where to go next

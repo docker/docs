@@ -382,7 +382,7 @@ this switch.
 	 `-ForceDeleteAllSwitches` flag. Be sure to read the whole page
 	 before running any scripts, especially the warnings with regard
 	 to the `-ForceDeleteAllSwitches` option.
-	 {: .warning-vanilla}
+	 {: .warning}
 
 ### Windows containers and Windows Server 2016
 
