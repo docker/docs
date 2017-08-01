@@ -72,7 +72,7 @@ real values.
 
 Note that in the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you won't be able to access the node and if you were logged in, your SSH connection will drop.
 
-## Post Upgrade
+## Post upgrade
 
 After the upgrade, the IP address and the port needed to SSH into the manager nodes do not change. However, the host identity of the manager nodes does change as the VMs get reimaged. So when you try to SSH in after a successful upgrade, your SSH client may suspect a Man-In-The-Middle attack. You will need to delete the old entries in your SSH client's store [typically `~/.ssh/known_hosts`] for new SSH connections to succeed to the upgraded manager nodes.
 
