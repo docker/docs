@@ -228,7 +228,7 @@ To learn more about using Docker for Windows and Docker Machine, see
 ### How do I run Windows containers on Docker on Windows Server 2016?
 
 See [About Windows containers and Windows Server
-2016](index.md#about-windows-containers-and-windows-server-2016).
+2016](/docker-for-windows/index.md#about-windows-containers-and-windows-server-2016).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows

@@ -23,7 +23,7 @@ documentation, on [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
 troubleshoot the log data. See [Diagnose and
-Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to
+Feedback](/docker-for-windows/index.md#diagnose-and-feedback) to learn about diagnostics and how to
 create new issues on GitHub.
 
 ## Checking the Logs
@@ -118,7 +118,7 @@ applications](https://github.com/remy/nodemon#application-isnt-restarting)
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, a volume mount is denied, or a service cannot
 start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might need
-to enable [shared drives](index.md#shared-drives).
+to enable [shared drives](/docker-for-windows/index.md#shared-drives).
 
 Volume mounting requires shared drives for Linux containers
 (not for Windows containers). Go to
@@ -129,11 +129,11 @@ contains the Dockerfile and volume.
 ### Verify domain user has permissions for shared drives (volumes)
 
 >**Tip**: Shared drives are only required for volume mounting [Linux
-containers](index.md#switch-between-windows-and-linux-containers),
+containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
-use to set up [shared drives](index.md#shared-drives). If you run `docker`
+use to set up [shared drives](/docker-for-windows/index.md#shared-drives). If you run `docker`
 commands and tasks under a different username than the one used to set up shared
 drives, your containers will not have permissions to access the mounted volumes.
 The volumes will show as empty.
@@ -162,7 +162,7 @@ local user is `samstevens` and the domain user is `merlin`.
 
 		net share c /delete
 
-4. Re-share the drive via the [Shared Drives dialog](index.md#shared-drives), and provide the Windows domain user account credentials.
+4. Re-share the drive via the [Shared Drives dialog](/docker-for-windows/index.md#shared-drives), and provide the Windows domain user account credentials.
 
 5. Re-run `net share c`.
 
@@ -207,7 +207,7 @@ Compose file documentation.
 ### Local security policies can block shared drives and cause login errors
 
 You need permissions to mount shared drives in order to use the Docker for
-Windows [shared drives](index.md#shared-drives) feature.
+Windows [shared drives](/docker-for-windows/index.md#shared-drives) feature.
 
 If local policy prevents this, you will get errors when you attempt to enable
 shared drives on Docker. This is not something Docker can resolve, you do need
@@ -388,7 +388,7 @@ this switch.
 
 If you have questions about how to set up and run Windows containers on Windows
 Server 2016 or Windows 10, see [About Windows containers and Windows Server
-2016](index.md#about-windows-containers-and-windows-server-2016).
+2016](/docker-for-windows/index.md#about-windows-containers-and-windows-server-2016).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows
@@ -527,7 +527,7 @@ Here is an example command and error message:
 	C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
 	See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
 
-As an immediate workaround to this problem, reset the DNS server to use the Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings** -> **Network** dialog, as described in the topic [Network](index.md#network). Docker will automatically restart when you apply this setting, which could take some time.
+As an immediate workaround to this problem, reset the DNS server to use the Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings** -> **Network** dialog, as described in the topic [Network](/docker-for-windows/index.md#network). Docker will automatically restart when you apply this setting, which could take some time.
 
 We are currently investigating this issue.
 
@@ -574,8 +574,8 @@ the adapter.
 
 By default, Docker for Windows uses an internal network prefix of
 `10.0.75.0/24`. Should this clash with your normal network setup, you can change
-the prefix from the **Settings** menu. See the [Network](index.md#network) topic
-under [Settings](index.md#docker-settings).
+the prefix from the **Settings** menu. See the [Network](/docker-for-windows/index.md#network) topic
+under [Settings](/docker-for-windows/index.md#docker-settings).
 
 #### NAT/IP configuration issues on pre Beta 15 versions
 
@@ -583,13 +583,13 @@ As of Beta 15, Docker for Windows is no longer using a switch with a NAT
 configuration. The notes below are left here only for older Beta versions.
 
 As of Beta14, networking for Docker for Windows is configurable through the UI.
-See the [Network](index.md#network) topic under
-[Settings](index.md#docker-settings).
+See the [Network](/docker-for-windows/index.md#network) topic under
+[Settings](/docker-for-windows/index.md#docker-settings).
 
 By default, Docker for Windows uses an internal Hyper-V switch with a NAT
 configuration with a `10.0.75.0/24` prefix. You can change the prefix used (as
 well as the DNS server) via the **Settings** menu as described in the
-[Network](index.md#network) topic.
+[Network](/docker-for-windows/index.md#network) topic.
 
 If you have additional Hyper-V VMs and they are attached to their own NAT
 prefixes, the prefixes need to be managed carefully, due to limitation of the

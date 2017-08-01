@@ -123,7 +123,7 @@ Release date: 02/16/2017
 **New**
 
 - Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
-- Added a second CloudFormation template that allows you to [install Docker for AWS into a pre-existing VPC](index.md#install-into-an-existing-vpc).
+- Added a second CloudFormation template that allows you to [install Docker for AWS into a pre-existing VPC](/docker-for-aws/index.md#install-into-an-existing-vpc).
 - Added Swarm wide support for [persistent storage volumes](persistent-data-volumes.md)
 - Added the following engine labels
     - **os** (linux)

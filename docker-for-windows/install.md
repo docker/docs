@@ -26,10 +26,10 @@ download installers from the **Stable** or **Edge** channel.
 
 Both Stable and Edge installers come with <a
 href="https://github.com/moby/moby/blob/master/experimental/README.md">
-experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on and off in [preferences](index.md#daemon-experimental-mode).
+experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on and off in [preferences](/docker-for-windows/index.md#daemon-experimental-mode).
 
 We welcome your
-[feedback](index.md#giving-feedback-and-getting-help) to help us improve Docker for Windows.
+[feedback](/docker-for-windows/index.md#giving-feedback-and-getting-help) to help us improve Docker for Windows.
 
 For more about Stable and Edge channels, see the
 [FAQs](/docker-for-windows/faqs.md#questions-about-stable-and-edge-channels).

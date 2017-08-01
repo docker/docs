@@ -731,9 +731,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 **New**
 
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for [Windows containers
-mode](index.md#switch-between-windows-and-linux-containers-beta-feature). (See
+mode](/docker-for-windows/index.md#switch-between-windows-and-linux-containers-beta-feature). (See
 [About the Docker Windows containers specific
-dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+dialogs](/docker-for-windows/index.md#about-the-docker-windows-containers-specific-dialogs).)
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -1071,7 +1071,7 @@ Unreleased. See Beta 23 for changes.
 
 **New**
 
-* Docker for Windows is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](index.md#download-docker-for-windows).
+* Docker for Windows is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](/docker-for-windows/index.md#download-docker-for-windows).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 

@@ -93,7 +93,7 @@ container. Note that this is what you have to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting
-Started](index.md#explore-the-application-and-run-examples) is an example of this.
+Started](/docker-for-mac/index.md#explore-the-application-and-run-examples) is an example of this.
 
 ```bash
 $ docker run -d -p 80:80 --name webserver nginx

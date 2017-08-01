@@ -153,7 +153,7 @@ See also, the discussion on the issue [docker/for-mac#1209](https://github.com/d
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, a volume mount is denied, or a service cannot
 start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
-need to enable [file sharing](index.md#file-sharing).
+need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
 `/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
@@ -257,7 +257,7 @@ know before you install](install.md#what-to-know-before-you-install).
         Pulling repository docker.io/library/busybox
         Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/busybox/images. You may want to check your internet connection or if you are behind a proxy.
 
-    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the beta channel, a workaround is provided that auto-filters out the IPv6 addresses in DNS server lists and enables successful network accesss. For example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only workaround action needed for users is to [upgrade to Docker for Mac stable v1.12.1 or newer, or Beta 24 or newer](index.md#download-docker-for-mac).
+    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the beta channel, a workaround is provided that auto-filters out the IPv6 addresses in DNS server lists and enables successful network accesss. For example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only workaround action needed for users is to [upgrade to Docker for Mac stable v1.12.1 or newer, or Beta 24 or newer](/docker-for-mac/install.md#download-docker-for-mac).
 
     On releases with the workaround included to filter out / truncate IPv6 addresses from the DNS list, the above command should run properly:
 
