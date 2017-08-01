@@ -113,7 +113,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 > Wondering about Compose file versions, names, and commands?
 >
-Notice that set the Compose file to `version: "3"`. This essentially makes it
+Notice that we set the Compose file to `version: "3"`. This essentially makes it
 [swarm mode](/engine/swarm/index.md) compatible. We can make use of the [deploy
 key](/compose/compose-file/index.md#deploy) (only available on [Compose file
 formats version 3.x](/compose/compose-file/index.md) and up) and its sub-options
