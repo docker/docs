@@ -363,23 +363,25 @@ To configure UFW and allow incoming connections on the Docker port:
 
 ### `Your kernel does not support cgroup swap limit capabilities`
 
-You may see messages similar to the following when working with an image:
+On Ubuntu or Debian hosts, You may see messages similar to the following when
+working with an image.
 
 ```none
 WARNING: Your kernel does not support swap limit capabilities. Limitation discarded.
 ```
 
-If you don't need these capabilities, you can ignore the warning. You can
-enable these capabilities in your kernel by following these instructions. Memory
-and swap accounting incur an overhead of about 1% of the total available
-memory and a 10% overall performance degradation, even if Docker is not running.
+This warning does not occur on RPM-based systems, which enable these
+capabilities by default.
 
-1.  Log into Ubuntu as a user with `sudo` privileges.
+If you don't need these capabilities, you can ignore the warning. You can enable
+these capabilities on Ubuntu or Debian by following these instructions. Memory
+and swap accounting incur an overhead of about 1% of the total available memory
+and a 10% overall performance degradation, even if Docker is not running.
 
-2.  Edit the `/etc/default/grub` file.
+1.  Log into the Ubuntu or Debian host as a user with `sudo` privileges.
 
-3.  Add or edit the `GRUB_CMDLINE_LINUX` line to add the following two key-value
-    pairs:
+2.  Edit the `/etc/default/grub` file. Add or edit the `GRUB_CMDLINE_LINUX` line
+    to add the following two key-value pairs:
 
     ```none
     GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
@@ -387,7 +389,7 @@ memory and a 10% overall performance degradation, even if Docker is not running.
 
     Save and close the file.
 
-4.  Update GRUB.
+3.  Update GRUB.
 
     ```bash
     $ sudo update-grub
@@ -396,8 +398,7 @@ memory and a 10% overall performance degradation, even if Docker is not running.
     If your GRUB configuration file has incorrect syntax, an error will occur.
     In this case, repeat steps 3 and 4.
 
-6.  Reboot your system. Memory and swap accounting are enabled and the warning
-    does not occur.
+    The changes will take effect when the system is rebooted.
 
 ## Next steps
 
