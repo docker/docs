@@ -4,7 +4,7 @@ description: Learn how to configure Universal Control Plane to only allow runnin
 keywords: ucp, configuration, worker
 ---
 
-You can configure UCP to only allow users to deploy and run services in
+You can configure UCP to allow users to deploy and run services only in
 worker nodes. This ensures all cluster management functionality stays
 performant, and makes the cluster more secure.
 
@@ -13,13 +13,16 @@ is running, it won't be able to affect other nodes in the cluster, or
 any cluster management functionality.
 
 To restrict users from deploying to manager nodes, log in with administrator
-credentials to the **UCP web UI**, navigate to the **Admin Settings**
+credentials to the UCP web UI, navigate to the **Admin Settings**
 page, and choose **Scheduler**.
 
 ![](../../images/restrict-services-to-worker-nodes-1.png){: .with-border}
 
 You can then choose if user services should be allowed to run on manager nodes
 or not.
+
+Having a grant with the `Scheduler` role against the `/` collection takes
+precedence over any other grants with `Node Schedule` on subcollections.
 
 ## Where to go next
 
