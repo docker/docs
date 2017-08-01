@@ -258,7 +258,8 @@ div#autocompleteResults span {
 {
   list-style-type: none;
   width: 400px;
-  padding:0px;
+/* commented out 0px padding to allow inherit padding, search results on autocompleteList were getting smashed up against left margin due to this */
+/*  padding:0px; */
   margin-bottom: 0px;
 }
 .autoCompleteResult {
