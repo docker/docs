@@ -136,6 +136,9 @@ from the repository.
     $ sudo yum -y install docker-ee
     ```
 
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
+
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions.
     This example uses the `sort -r` command to sort the results by version
@@ -227,6 +230,9 @@ need to download a new file each time you want to upgrade Docker EE.
     ```bash
     $ sudo yum install /path/to/package.rpm
     ```
+
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
 
 3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
     that the file was empty, add the following contents.
