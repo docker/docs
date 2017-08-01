@@ -6,7 +6,7 @@ title: Docker for AWS Release Notes
 
 {% include d4a_buttons.md %}
 
-## Stable Channel
+## Stable channel
 
 ### 17.06.0 CE
 
@@ -63,7 +63,7 @@ Release date: 01/18/2017
 - Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Change ELB health check from TCP to HTTP
 
-## Edge Channel
+## Edge channel
 
 ### 17.06.0-edge CE
 
@@ -330,7 +330,7 @@ Release date: 7/13/2016
  * To assist with debugging, the Docker Engine API is available internally in the AWS VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
  * Likewise, swarm-mode is configured to auto-accept both manager and worker nodes inside the VPC. This policy will be changed to be more restrictive by default in the future.
 
-## Test Channel
+## Test channel
 
 ### 17.05.0-ce-rc1
 
@@ -344,6 +344,6 @@ Release date: 04/12/2017
 - Terminated instances will now automatically be removed from the Swarm.
 - [Bug Fix] [meta-server] fixed crashing issue, when an instance had no public IP address.
 
-## Template Archive
+## Template archive
 
 If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).
