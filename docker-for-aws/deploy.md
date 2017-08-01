@@ -13,7 +13,7 @@ follow the instructions for the cloud provider of your choice in each section.
 First, you will obtain the public IP address for a manager node. Any manager
 node can be used for administrating the swarm.
 
-##### Manager Public IP on AWS
+### Manager Public IP on AWS
 
 Once you've deployed Docker on AWS, go to the "Outputs" tab for the stack in
 CloudFormation.
@@ -23,27 +23,36 @@ the swarm in your AWS console. Once present on this page, you can see the
 "Public IP" of each manager node in the table and/or "Description" tab if you
 click on the instance.
 
-![](img/managers.png)
+![managers](img/managers.png)
 
-## Connecting via SSH
+## Connect via SSH
 
-#### Manager nodes
+### Manager nodes
 
 Obtain the public IP and/or port for the manager node as instructed above and
 using the provided SSH key to begin administrating your swarm:
 
-    $ ssh -i <path-to-ssh-key> docker@<ssh-host>
-    Welcome to Docker!
+```bash
+$ ssh -i <path-to-ssh-key> docker@<ssh-host>
+
+Welcome to Docker!
+```
 
 Once you are logged into the container you can run Docker commands on the swarm:
 
-    $ docker info
-    $ docker node ls
+```bash
+$ docker info
+
+$ docker node ls
+```
 
 You can also tunnel the Docker socket over SSH to remotely run commands on the cluster (requires [OpenSSH 6.7](https://lwn.net/Articles/609321/) or later):
 
-    $ ssh -i <path-to-ssh-key> -NL localhost:2374:/var/run/docker.sock docker@<ssh-host> &
-    $ docker -H localhost:2374 info
+```bash
+$ ssh -i <path-to-ssh-key> -NL localhost:2374:/var/run/docker.sock docker@<ssh-host> &
+
+$ docker -H localhost:2374 info
+```
 
 If you don't want to pass `-H` when using the tunnel, you can set the `DOCKER_HOST` environment variable to point to the localhost tunnel opening.
 
@@ -59,7 +68,7 @@ network. Make sure you have SSH agent forwarding enabled (see below). If you run
 the `docker node ls` command you can see the full list of nodes in your swarm.
 You can then `ssh docker@<worker-host>` to get access to that node.
 
-##### AWS
+#### AWS
 
 Use the `HOSTNAME` reported in `docker node ls` directly.
 
@@ -72,7 +81,7 @@ a3d4vdn9b277p7bszd0lz8grp *  ip-172-31-31-40.us-east-2.compute.internal   Ready 
 $ ssh docker@ip-172-31-31-40.us-east-2.compute.internal
 ```
 
-##### Using SSH agent forwarding
+#### Use SSH agent forwarding
 
 SSH agent forwarding allows you to forward along your ssh keys when connecting from one node to another. This eliminates the need for installing your private key on all nodes you might want to connect from.
 
@@ -83,26 +92,27 @@ If your haven't added your ssh key to the `ssh-agent` you will also need to do t
 
 To see the keys in the agent already, run:
 
-```
+```bash
 $ ssh-add -L
 ```
 
 If you don't see your key, add it like this.
 
-```
+```bash
 $ ssh-add ~/.ssh/your_key
 ```
 
 On Mac OS X, the `ssh-agent` will forget this key, once it gets restarted. But you can import your SSH key into your Keychain like this. This will have your key survive restarts.
 
-```
+```bash
 $ ssh-add -K ~/.ssh/your_key
 ```
 
 You can then enable SSH forwarding per-session using the `-A` flag for the ssh command.
 
 Connect to the Manager.
-```
+
+```bash
 $ ssh -A docker@<manager ip>
 ```
 
@@ -111,7 +121,7 @@ To always have it turned on for a given host, you can edit your ssh config file
 
 Example configuration:
 
-```
+```conf
 Host manager0
   HostName <manager ip>
   ForwardAgent yes
@@ -119,7 +129,7 @@ Host manager0
 
 To SSH in to the manager with the above settings:
 
-```
+```bash
 $ ssh docker@manager0
 ```
 
