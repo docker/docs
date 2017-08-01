@@ -84,17 +84,32 @@ For Docker CE, only some configurations are tested, and your operating system's
 kernel may not support every storage driver. In general, the following
 configurations work on recent versions of the Linux distribution:
 
-| Linux distribution   | Supported storage drivers            |
-|----------------------|--------------------------------------|
-| Docker CE on Ubuntu  | `aufs`, `devicemapper`, `overlay2` (Ubuntu 14.04.4 or later, 16.04 or later), `overlay`, `zfs` |
-| Docker CE on Debian  | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`                                 |
-| Docker CE on CentOS  | `devicemapper`                                                                                 |
-| Docker CE on Fedora  | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental)        |
+| Linux distribution  | Recommended storage drivers                                                                    |
+|:--------------------|:-----------------------------------------------------------------------------------------------|
+| Docker CE on Ubuntu | `aufs`, `devicemapper`, `overlay2` (Ubuntu 14.04.4 or later, 16.04 or later), `overlay`, `zfs` |
+| Docker CE on Debian | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`                                 |
+| Docker CE on CentOS | `devicemapper`                                                                                 |
+| Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental)        |
 
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to
 use Docker volumes for write-heavy workloads instead of relying on writing data
 to the container's writable layer.
+
+> **Expectations for non-recommended storage drivers**: Commercial support is
+> not available for Docker CE, and you can technically use any storage driver
+> that is available for your platform. For instance, you can use `btrfs` with
+> Docker CE, even though it is not recommended on any platform for Docker CE,
+> and you do so at your own risk.
+>
+> The recommendations in the table above are based on automated regression
+> testing and the configurations that are known to work for a large number of
+> users. If you use a recommended configuration and find a reproducible issue,
+> it is likely to be fixed very quickly. If the driver that you want to use is
+> not recommended according to this table, you can run it at your own risk. You
+> can and should still report any issues you run into. However, such issues will
+> have a lower priority than issues encountered when using a recommended
+> configuration..
 
 ### Docker for Mac and Docker for Windows
 
@@ -108,13 +123,13 @@ With regard to Docker, the backing filesystem is the filesystem where
 `/var/lib/docker/` is located. Some storage drivers only work with specific
 backing filesystems.
 
-| Storage driver        | Supported backing filesystems  |
-|-----------------------|--------------------------------|
-| `overlay`, `overlay2` | `ext4`, `xfs`                  |
-| `aufs`                | `ext4`, `xfs`                  |
-| `devicemapper`        | `direct-lvm`                   |
-| `btrfs`               | `btrfs`                        |
-| `zfs`                 | `zfs`                          |
+| Storage driver        | Supported backing filesystems |
+|:----------------------|:------------------------------|
+| `overlay`, `overlay2` | `ext4`, `xfs`                 |
+| `aufs`                | `ext4`, `xfs`                 |
+| `devicemapper`        | `direct-lvm`                  |
+| `btrfs`               | `btrfs`                       |
+| `zfs`                 | `zfs`                         |
 
 
 ## Other considerations
