@@ -77,36 +77,3 @@ blockquote > p:only-child {
 blockquote > p:only-child::before {
   content: none;
 }
-
-/*** Vanilla styles, soon to be removed when it's clear there is no impact to current docset***/
-blockquote.note-vanilla > p:first-child::before {
-  content: '\f058 \00a0';
-  font-family: FontAwesome;
-}
-
-blockquote.important-vanilla {
-  border-left-color: $important-color;
-}
-
-blockquote.important-vanilla > p:first-child {
-  color: $important-color;
-}
-
-blockquote.important-vanilla > p:first-child::before {
-  content: '\f06a  \00a0';
-  font-family: FontAwesome;
-}
-
-blockquote.warning-vanilla {
-  border-left-color: $warning-color;
-}
-
-blockquote.warning-vanilla > p:first-child {
-  color: $warning-color;
-}
-
-blockquote.warning-vanilla > p:first-child::before {
-  content: '\f057  \00a0';
-  font-family: FontAwesome;
-
-}
