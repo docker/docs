@@ -12,7 +12,7 @@ title: Get Docker EE for Ubuntu
 
 To get started with Docker EE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ee).
 
 ## Prerequisites
 

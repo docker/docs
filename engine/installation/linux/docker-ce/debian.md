@@ -12,7 +12,7 @@ title: Get Docker CE for Debian
 
 To get started with Docker CE on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 

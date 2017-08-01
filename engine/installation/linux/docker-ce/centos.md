@@ -10,7 +10,7 @@ title: Get Docker CE for CentOS
 
 To get started with Docker CE on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 

@@ -12,7 +12,7 @@ title: Get Docker CE for Ubuntu
 
 To get started with Docker CE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 
@@ -231,8 +231,8 @@ the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](../linux-postinstall.md) to allow
+Docker CE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Linux postinstall](../linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
