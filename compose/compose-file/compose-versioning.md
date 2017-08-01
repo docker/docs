@@ -214,6 +214,16 @@ Introduces the following additional parameters:
 - [`init`](compose-file-v2.md#init)
 - [`scale`](compose-file-v2.md#scale)
 
+### Version 2.3
+
+An upgrade of [version 2.2](#version-22) that introduces new parameters only
+available with Docker Engine version **17.06+**.  Version 2.3 files are
+supported by **Compose 17.06+**.
+
+Introduces the following additional parameters:
+
+- [`target`](compose-file-v2.md#target)
+
 ### Version 3
 
 Designed to be cross-compatible between Compose and the Docker Engine's
