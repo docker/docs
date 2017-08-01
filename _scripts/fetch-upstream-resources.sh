@@ -8,6 +8,7 @@
 # Engine stable
 ENGINE_SVN_BRANCH="branches/17.06"
 ENGINE_BRANCH="17.06"
+ENGINE_EDGE_BRANCH="17.07"
 
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -78,6 +79,9 @@ wget -O md_source/engine/api/v1.29/swagger.yaml https://raw.githubusercontent.co
 # New location for swagger.yaml for 17.06
 wget -O md_source/engine/api/v1.30/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.06/components/engine/api/swagger.yaml || (echo "Failed 1.30 swagger download or the 1.30 directory doesn't exist" && exit -1)
 
+# Get dockerd.md for stable and edge, from upstream
+wget -O md_source/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch stable dockerd.md" && exit -1)
+wget -O md_source/edge/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_EDGE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch edge dockerd.md" && exit -1)
 
 # Get a few one-off files that we use directly from upstream
 wget -O md_source/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit -1)
