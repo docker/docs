@@ -16,3 +16,7 @@ https://www.github.com/docker/cli
   {% include edge_only.md section="cliref" %}
 {% endif %}
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}
+
+## More info
+
+[Store configuration data using Docker Configs](/engine/swarm/configs.md)
