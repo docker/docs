@@ -61,7 +61,7 @@ that has a connection.
 
     ```ps
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.03/docker-17.03.0-ee.zip
+    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
