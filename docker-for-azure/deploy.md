@@ -7,7 +7,7 @@ title: Deploy your app on Docker for Azure
 ## Connecting to your manager nodes
 
 This section will walk you through connecting to your installation and deploying
-applications.  Instructions are included for both AWS and Azure, so be sure to
+applications. Instructions are included for both AWS and Azure, so be sure to
 follow the instructions for the cloud provider of your choice in each section.
 
 First, you will obtain the public IP address for a manager node. Any manager
@@ -31,7 +31,7 @@ node) that you can use to log in to each manager node.
 #### Manager nodes
 
 Obtain the public IP and/or port for the manager node as instructed above and
-using the provided SSH key to begin administrating your swarm and the unique port associated with a manager:
+use the provided SSH key to begin administrating your swarm and the unique port associated with a manager:
 
     $ ssh -i <path-to-ssh-key> -p <ssh-port> docker@<ip>
     Welcome to Docker!
@@ -150,7 +150,7 @@ There are cases (such as installing a volume plugin) wherein a docker command ma
 
 Usage : `swarm-exec {Docker command}`
 
-The following will install a test plugin in all the nodes in the cluster
+The following will install a test plugin in all the nodes in the cluster.
 
 Example : `swarm-exec docker plugin install --grant-all-permissions mavenugo/test-docker-netplugin`
 
