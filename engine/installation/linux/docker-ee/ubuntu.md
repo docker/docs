@@ -144,7 +144,7 @@ from the repository.
        stable-{{ minor-version }}"
     ```
 
-#### Install Docker
+#### Install Docker EE
 
 1.  Update the `apt` package index.
 

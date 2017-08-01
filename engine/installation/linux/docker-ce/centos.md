@@ -114,7 +114,7 @@ from the repository.
 
     [Learn about **stable** and **edge** builds](/engine/installation/).
 
-#### Install Docker
+#### Install Docker CE
 
 1.  Update the `yum` package index.
 

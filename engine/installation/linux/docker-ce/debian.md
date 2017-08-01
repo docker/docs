@@ -180,7 +180,7 @@ from the repository.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
-#### Install Docker
+#### Install Docker CE
 
 > **Note**: On Debian for ARM you can continue following this step. For Raspbian,
 > scroll down to follow its specific steps.

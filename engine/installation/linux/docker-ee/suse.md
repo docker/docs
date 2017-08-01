@@ -130,7 +130,7 @@ from the repository.
     $ sudo rpm --import <DOCKER-EE-URL/sles/gpg
     ```
 
-#### Install Docker
+#### Install Docker EE
 
 1.  Update the `zypper` package index.
 

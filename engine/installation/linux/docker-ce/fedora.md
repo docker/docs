@@ -115,7 +115,7 @@ from the repository.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
-#### Install Docker
+#### Install Docker CE
 
 1.  Update the `dnf` package index.
 

@@ -148,7 +148,7 @@ from the repository.
         <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
-#### Install Docker
+#### Install Docker EE
 
 1.  Update the `yum` package index.
 
