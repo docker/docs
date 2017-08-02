@@ -198,6 +198,8 @@ guides:
       title: Use the OverlayFS storage driver
     - path: /engine/userguide/storagedriver/zfs-driver/
       title: Use the ZFS storage driver
+    - path: /engine/userguide/storagedriver/vfs-driver/
+      title: Use the VFS storage driver
   - sectiontitle: Network configuration
     section:
     - path: /engine/userguide/networking/
