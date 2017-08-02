@@ -132,8 +132,8 @@ the repository.
 
 4.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install builds from the
-    **edge** or **testing** repositories as well. To add the **edge** or
-    **testing** repository, add the word `edge` or `testing` (or both) after the
+    **edge** or **test** repositories as well. To add the **edge** or
+    **test** repository, add the word `edge` or `test` (or both) after the
     word `stable` in the commands below.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
@@ -170,7 +170,7 @@ the repository.
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **testing** repositories.
+    > the **edge** and **test** repositories.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
@@ -227,9 +227,9 @@ the repository.
     ```bash
     $ sudo docker run hello-world
     ```
-    
+
     or if you run on armhf:
-    
+
     ```bash
     $ sudo docker run armhf/hello-world
     ```
