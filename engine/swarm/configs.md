@@ -357,7 +357,7 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 3.  Save the `site.conf` file in a Docker config. The first parameter is the
-    name of the secret, and the second parameter is the file to read it from.
+    name of the config, and the second parameter is the file to read it from.
 
     ```bash
     $ docker config create site.conf site.conf
