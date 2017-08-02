@@ -227,7 +227,9 @@ the repository.
     ```bash
     $ sudo docker run hello-world
     ```
+    
     or if you run on armhf:
+    
     ```bash
     $ sudo docker run armhf/hello-world
     ```
