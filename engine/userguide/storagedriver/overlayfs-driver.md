@@ -92,6 +92,11 @@ Before following this procedure, you must first meet all the
     }
     ```
 
+    See all storage options for each storage driver:
+
+    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
+    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+
     Docker will not start if the `daemon.json` file contains badly-formed JSON.
 
 5.  Start Docker.
@@ -493,8 +498,8 @@ filesystems:
   descriptors refer to different files. The `fd1` continues to reference the file
   in the image (`lowerdir`) and the `fd2` references the file in the container
   (`upperdir`). A workaround for this is to `touch` the files which causes the
-  copy-up operation to happen. All subsequent `open(2)` operations regardless of 
-  read-only or read-write access mode will be referencing the file in the 
+  copy-up operation to happen. All subsequent `open(2)` operations regardless of
+  read-only or read-write access mode will be referencing the file in the
   container (`upperdir`).
 
   `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
