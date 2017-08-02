@@ -13,7 +13,7 @@ Compose is a tool for defining and running multi-container Docker applications. 
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Get started with Drupal](https://docs.docker.com/samples/drupal/)
+- [Get started with Drupal](/samples/drupal/)
 - [Frequently asked questions](faq.md)
 - [Command-line reference](./reference/index.md)
 - [Compose file reference](/compose/compose-file/index.md)
