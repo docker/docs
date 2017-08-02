@@ -68,6 +68,11 @@ For production systems, see
     }
     ```
 
+    See all storage options for each storage driver:
+
+    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
+    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+
     Docker will not start if the `daemon.json` file contains badly-formed JSON.
 
 3.  Start Docker.
@@ -147,7 +152,7 @@ manually](#configure-direct-lvm-mode-manually) instead. The following new
 configuration options have been added:
 
 | Option                          | Description                                                                                                                                                                        | Required? | Default | Example                            |
-| ---                             | ---                                                                                                                                                                                | ---       | ---     | ---                                |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:--------|:-----------------------------------|
 | `dm.directlvm_device`           | The path to the block device to configure for `direct-lvm`.                                                                                                                        | Yes       |         | `dm.directlvm_device="/dev/xvdf"`  |
 | `dm.thinp_percent`              | The percentage of space to use for storage from the passed in block device.                                                                                                        | No        | 95      | `dm.thinp_percent=95`              |
 | `dm.thinp_metapercent`          | The percentage of space to for metadata storage from the passed=in block device.                                                                                                   | No        | 1       | `dm.thinp_metapercent=1`           |
@@ -168,10 +173,15 @@ options in the table above.
     "dm.thinp_metapercent=1",
     "dm.thinp_autoextend_threshold=80",
     "dm.thinp_autoextend_percent=20",
-    "dm.directlvm_device_force=false" 
+    "dm.directlvm_device_force=false"
   ]
 }
 ```
+
+See all storage options for each storage driver:
+
+- [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
+- [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
