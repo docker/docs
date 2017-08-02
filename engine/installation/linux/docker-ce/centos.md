@@ -81,7 +81,7 @@ from the repository.
 
 2.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install builds from the
-    **edge** or **testing** repositories as well.
+    **edge** or **test** repositories as well.
 
     ```bash
     $ sudo yum-config-manager \
@@ -89,7 +89,7 @@ from the repository.
         {{ download-url-base }}/docker-ce.repo
     ```
 
-3.  **Optional**: Enable the **edge** and **testing** repositories. These
+3.  **Optional**: Enable the **edge** and **test** repositories. These
     repositories are included in the `docker.repo` file above but are disabled
     by default. You can enable them alongside the stable repository.
 
@@ -98,10 +98,10 @@ from the repository.
     ```
 
     ```bash
-    $ sudo yum-config-manager --enable docker-ce-testing
+    $ sudo yum-config-manager --enable docker-ce-test
     ```
 
-    You can disable the **edge** or **testing** repository by running the
+    You can disable the **edge** or **test** repository by running the
     `yum-config-manager` command with the `--disable` flag. To re-enable it, use
     the `--enable` flag. The following command disables the **edge** repository.
 
@@ -110,7 +110,7 @@ from the repository.
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **testing** repositories.
+    > the **edge** and **test** repositories.
 
     [Learn about **stable** and **edge** builds](/engine/installation/).
 
