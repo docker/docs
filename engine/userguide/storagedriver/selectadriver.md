@@ -84,17 +84,21 @@ For Docker CE, only some configurations are tested, and your operating system's
 kernel may not support every storage driver. In general, the following
 configurations work on recent versions of the Linux distribution:
 
-| Linux distribution  | Recommended storage drivers                                                                    |
-|:--------------------|:-----------------------------------------------------------------------------------------------|
-| Docker CE on Ubuntu | `aufs`, `devicemapper`, `overlay2` (Ubuntu 14.04.4 or later, 16.04 or later), `overlay`, `zfs` |
-| Docker CE on Debian | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`                                 |
-| Docker CE on CentOS | `devicemapper`                                                                                 |
-| Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental)        |
+| Linux distribution  | Recommended storage drivers                                                                           |
+|:--------------------|:------------------------------------------------------------------------------------------------------|
+| Docker CE on Ubuntu | `aufs`, `devicemapper`, `overlay2` (Ubuntu 14.04.4 or later, 16.04 or later), `overlay`, `zfs`, `vfs` |
+| Docker CE on Debian | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`, `vfs`                                 |
+| Docker CE on CentOS | `devicemapper`, `vfs`                                                                                 |
+| Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental), `vfs`        |
 
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to
 use Docker volumes for write-heavy workloads instead of relying on writing data
 to the container's writable layer.
+
+The `vfs` storage driver is usually not the best choice. Before using the `vfs`
+storage driver, be sure to read about
+[its performance and storage characteristics and limitations](vfs-driver.md).
 
 > **Expectations for non-recommended storage drivers**: Commercial support is
 > not available for Docker CE, and you can technically use any storage driver
