@@ -227,6 +227,12 @@ the repository.
     ```bash
     $ sudo docker run hello-world
     ```
+    
+    or if you run on armhf:
+    
+    ```bash
+    $ sudo docker run armhf/hello-world
+    ```
 
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
