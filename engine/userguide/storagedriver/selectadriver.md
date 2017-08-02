@@ -109,7 +109,7 @@ to the container's writable layer.
 > not recommended according to this table, you can run it at your own risk. You
 > can and should still report any issues you run into. However, such issues will
 > have a lower priority than issues encountered when using a recommended
-> configuration..
+> configuration.
 
 ### Docker for Mac and Docker for Windows
 
