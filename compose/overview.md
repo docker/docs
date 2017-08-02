@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 ---
 
+>**Looking for Compose file reference?** [Find the latest version here](/compose/compose-file/index.md).
+
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a Compose file to configure your application's services.
 Then, using a single command, you create and start all the services
