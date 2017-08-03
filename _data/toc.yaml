@@ -252,6 +252,8 @@ guides:
     title: Start containers automatically
   - path: /engine/admin/resource_constraints/
     title: Limit a container's resources
+  - path: /engine/admin/pruning/
+    title: Prune unused Docker objects
   - path: /engine/admin/live-restore/
     title: Keep containers alive during daemon downtime
   - path: /engine/admin/systemd/
