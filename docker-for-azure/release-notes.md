@@ -6,7 +6,7 @@ title: Docker for Azure Release Notes
 
 {% include d4a_buttons.md %}
 
-## Stable Channel
+## Stable channel
 
 ### 17.06.0 CE
 
@@ -47,7 +47,7 @@ Release date: 02/08/2017
 
 ### 1.13.0-1
 
-Release date: 1/18/2017
+Release date: 01/18/2017
 
 **New**
 
@@ -57,7 +57,7 @@ Release date: 1/18/2017
 - Added support to scale the number of nodes in manager and worker vm scale sets through Azure UI/CLI for managing the number of nodes in a scale set
 - Improved logging and remote diagnostics mechanisms for system containers
 
-## Edge Channel
+## Edge channel
 
 ### 17.06.0-edge CE
 
@@ -142,7 +142,7 @@ Release date: 10/17/2016
 
 ### 1.12.1-beta5
 
-Release date: 8/19/2016
+Release date: 08/19/2016
 
 **New**
 
@@ -154,7 +154,7 @@ Release date: 8/19/2016
 
 ### 1.12.0-beta4
 
-Release date: 8/9/2016
+Release date: 08/09/2016
 
 **New**
 
@@ -164,6 +164,6 @@ Release date: 8/9/2016
 
  * To assist with debugging, the Docker Engine API is available internally in the Azure VPC on TCP port 2375. These ports cannot be accessed from outside the cluster, but could be used from within the cluster to obtain privileged access on other cluster nodes. In future releases, direct remote access to the Docker API will not be available.
 
-## Template Archive
+## Template archive
 
 If you are looking for templates from older releases, please check out the [template archive](/docker-for-azure/archive.md).
