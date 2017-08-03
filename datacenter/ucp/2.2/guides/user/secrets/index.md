@@ -1,7 +1,7 @@
 ---
 title: Manage secrets
-description: Learn how to manage your passwords, certificates, or other secrets in a secure way with Docker Datacenter
-keywords: UCP, secrets, secrets management
+description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker Datacenter
+keywords: UCP, secret, password, certificate, private key
 ---
 
 When deploying and orchestrating services, you often need to configure them
@@ -61,27 +61,33 @@ that they're going to use to communicate with one another.
 
 Navigate to the **Networks** page, and create the `wordpress-network` with the
 default configurations.
+]
 
 ![](../../images/manage-secrets-3.png){: .with-border}
 
-Start by creating the MySQL service. Navigate to the **Services** page, click
-**Create Service**, and choose **Use Wizard**. Use the following configurations:
+Now create the MySQL service:
 
-| Field                      | Value                              |
-|:---------------------------|:-----------------------------------|
-| Service name               | wordpress-db                       |
-| Image name                 | mysql:5.7                          |
-| Attached network           | wordpress-network                  |
-| Secret                     | wordpress-password-v1              |
-| Environment variable name  | MYSQL_ROOT_PASSWORD_FILE           |
-| Environment variable value | /run/secrets/wordpress-password-v1 |
+1. Navigate to the **Services** page and click **Create Service**. Name the 
+   service "wordpress-db", and for the **Task Template**, use the "mysql:5.7"
+   image.
+2. In the left pane, click **Network**. In the **Networks** section, click
+   **Attach Network**, and in the dropdown, select **wordpress-network**.
+3. In the left pane, click **Environment**. The Environment page is where you
+   assign secrets, environment variables, and labels to the service.
+4. In the **Secrets** section, click **Use Secret**, and in the **Secret Name**
+   dropdown, select **wordpress-password-v1**. Click **Confirm** to associate
+   the secret with the service.
+5. In the **Environment Variable**, click **Add Environment Variable** and enter
+   the string "MYSQL_ROOT_PASSWORD_FILE=/run/secrets/wordpress-password-v1" to
+   create an environment variable that holds the path to the password file in
+   the container.
+6. If you specified a permission label on the secret, you must set the same
+   permission label on this service. If the secret doesn't have a permission
+   label, then this service also can't have a permission label.
+7. Click **Create** to deploy the MySQL service.
 
-Remember, if you specified a permission label on the secret, you must also set
-the same permission label on this service. If the secret does not have a
-permission label, then this service must also not have a permission label.
-
-This creates a MySQL service that's attached to the `wordpress-network` network,
-and that uses the `wordpress-password-v1`, which by default will create a file
+This creates a MySQL service that's attached to the `wordpress-network` network
+and that uses the `wordpress-password-v1` secret. By default, this creates a file
 with the same name at `/run/secrets/<secret-name>` inside the container running
 the service.
 
@@ -91,27 +97,32 @@ the root password.
 
 ![](../../images/manage-secrets-4.png){: .with-border}
 
-Click the **Deploy Now** button to deploy the MySQL service.
-
 Now that the MySQL service is running, we can deploy a WordPress service that
-uses MySQL has a storage backend. Deploy a service with the following
-configurations:
+uses MySQL as a storage backend:
 
-| Field                | Value                                                         |
-|:---------------------|:--------------------------------------------------------------|
-| Service name         | wordpress                                                     |
-| Image name           | wordpress:latest                                              |
-| Published ports      | target: 80, ingress:8000                                      |
-| Attached network     | wordpress-network                                             |
-| Secret               | wordpress-password-v1              						   |
-| Environment variable | WORDPRESS_DB_HOST=wordpress-db:3306                           |
-| Environment variable | WORDPRESS_DB_PASSWORD_FILE=/run/secrets/wordpress-password-v1 |
+1. Navigate to the **Services** page and click **Create Service**. Name the 
+   service "wordpress", and for the **Task Template**, use the
+   "wordpress:latest" image.
+2. In the left pane, click **Network**. In the **Networks** section, click
+   **Attach Network**, and in the dropdown, select **wordpress-network**.
+3. In the left pane, click **Environment**.
+4. In the **Secrets** section, click **Use Secret**, and in the **Secret Name**
+   dropdown, select **wordpress-password-v1**. Click **Confirm** to associate
+   the secret with the service.
+5. In the **Environment Variable**, click **Add Environment Variable** and enter
+   the string "WORDPRESS_DB_PASSWORD_FILE=/run/secrets/wordpress-password-v1" to
+   create an environment variable that holds the path to the password file in
+   the container.
+6. Add another environment variable and enter the string
+   "WORDPRESS_DB_HOST=wordpress-db:3306".
+7. If you specified a permission label on the secret, you must set the same
+   permission label on this service. If the secret doesn't have a permission
+   label, then this service also can't have a permission label.
+8. Click **Create** to deploy the WordPress service.
 
 This creates the WordPress service attached to the same network as the MySQL
 service so that they can communicate, and maps the port 80 of the service to
 port 8000 of the swarm routing mesh.
-
-Click the **Deploy Now** button to deploy the WordPress service.
 
 ![](../../images/manage-secrets-5.png){: .with-border}
 
@@ -122,26 +133,26 @@ IP address of any node in your UCP cluster, on port 8000.
 
 ## Update a secret
 
-If the secret gets compromised you'll need to rotate it so that your services
-start using a new secret. In this case we need to change the password we're
+If the secret gets compromised, you'll need to rotate it so that your services
+start using a new secret. In this case, we need to change the password we're
 using and update the MySQL and WordPress services to use the new password.
 
-Since secrets are immutable in the sense that you cannot change the data
+Since secrets are immutable in the sense that you can't change the data
 they store after they are created, we can use the following process to achieve
 this:
 
-1. Create a new secret with a different password
+1. Create a new secret with a different password.
 2. Update all the services that are using the old secret to use the new one
-instead
-3. Delete the old secret
+   instead.
+3. Delete the old secret.
 
-So let's rotate the secret we've created. Navigate to the **Secrets** screen
-and create a new service called `wordpress-password-v2`.
+Let's rotate the secret we've created. Navigate to the **Secrets** screen
+and create a new service named `wordpress-password-v2`.
 
 ![](../../images/manage-secrets-7.png){: .with-border}
 
-This example is simple and we know which services we need to update, but in the
-real world that might not always be the case.
+This example is simple, and we know which services we need to update,
+but in the real world, this might not always be the case.
 If you navigate to the secret `wordpress-password-v1` details page, you can
 see which services you need to update.
 
@@ -155,16 +166,18 @@ a file at `/run/secrets/wordpress-password-v1` which won't exist after we
 update the service. So we have two options:
 
 1. Update the environment variable to have the value
-`/run/secrets/wordpress-password-v2`
+`/run/secrets/wordpress-password-v2`, or
 2. Instead of mounting the secret file in `/run/secrets/wordpress-password-v2`
 (the default), we can customize it to be mounted in `/run/secrets/wordpress-password-v1`
 instead. This way we don't need to change the environment variable. This is
 what we're going to do.
 
-When adding the secret to the services, instead of leaving the 'Target Name'
+When adding the secret to the services, instead of leaving the **Target Name**
 field with the default value, set it with `wordpress-password-v1`. This will make
 the file with the content of `wordpress-password-v2` be mounted in
 `/run/secrets/wordpress-password-v1`.
+
+Delete the `wordpress-password-v1` secret, and click **Update**.
 
 ![](../../images/manage-secrets-9.png){: .with-border}
 

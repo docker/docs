@@ -1,19 +1,16 @@
 ---
-title: Grant access to secrets
-description: Learn how to use role-based access control to grant permissions to secrets in Docker Datacenter
-keywords: UCP, secrets, secrets management
+title: Give access to secrets
+description: Learn how to use labels to give permissions to secrets in Docker UCP.
+keywords: UCP, secret, password, certificate, private key
 ---
 
-UCP gives you role-based access control so that you can specify which users can
-use a specific secret in their services and which users can delete the secret.
+UCP gives you access control, so that you can specify which users can use a
+specific secret in their services and which users can delete the secret.
 
 ## Grant access to a secret
 
-As with other resources managed by UCP, the way to grant permission to a set
-of users to use a secret is by creating a grant against the collection that
-contains the secret.
-
-is by applying the `com.docker.ucp.access.label` to
+As with other resources managed by UCP, the way to give permission to a set
+of users to use a secret is by applying the `com.docker.ucp.access.label` to
 the secret.
 
 ![](../../images/grant-access-secrets-1.png){: .with-border}
@@ -21,7 +18,7 @@ the secret.
 Users that are part of a team with access to that label will be able to see
 and use the secret.
 
-In this example, if Jenny is part of a team that has 'Restricted Control' over
+In this example, if Jenny is part of a team that has `Restricted Control` over
 the `com.docker.ucp.access.label=blog` label, she will be able to use the
 secret in her services, as long as the service also has the same label.
 
