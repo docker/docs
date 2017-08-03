@@ -61,7 +61,6 @@ that they're going to use to communicate with one another.
 
 Navigate to the **Networks** page, and create the `wordpress-network` with the
 default configurations.
-]
 
 ![](../../images/manage-secrets-3.png){: .with-border}
 
