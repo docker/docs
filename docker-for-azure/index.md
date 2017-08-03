@@ -20,7 +20,7 @@ This deployment is fully baked and tested, and comes with the latest Enterprise 
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
 then choose from the stable or edge channel to bootstrap Docker for Azure using Azure Resource Manager.
-For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-edge-channels)
+For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-edge-channels).
 <table style="width:100%">
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
@@ -52,7 +52,7 @@ Docker for Azure is installed with an Azure template that configures Docker in s
 
 #### Configuration options
 
-##### Manager Count
+##### Manager count
 The number of Managers in your swarm. You can pick either 1, 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There are no failover guarantees with 1 manager — if the single manager fails the swarm will go down as well. Additionally, upgrading single-manager swarms is not currently guaranteed to succeed.
 
 We recommend at least 3 managers, and if you have a lot of workers, you should pick 5 managers.
@@ -63,10 +63,10 @@ The VM type for your manager nodes. The larger your swarm, the larger the VM siz
 ##### Worker VM size
 The VM type for your worker nodes.
 
-##### Worker Count
+##### Worker count
 The number of workers you want in your swarm (1-100).
 
-#### Service Principal
+#### Service principal
 
 A [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
 is required to set up Docker for Azure. The Service Principal is used to invoke Azure APIs as you scale the number of nodes up
@@ -79,7 +79,7 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
    docker pull docker4x/create-sp-azure:latest
    ```
 
-2. Run the `sp-azure` script with the following arguments:
+2.  Run the `sp-azure` script with the following arguments:
 
    ```bash
    $ docker run -ti docker4x/create-sp-azure sp-name [rg-name rg-region]
