@@ -46,7 +46,7 @@ The following example sets the log driver to `syslog` and sets the
 {
   "log-driver": "syslog",
   "log-opts": {
-    "syslog": "udp://1.2.3.4:1111"
+    "syslog-address": "udp://1.2.3.4:1111"
   }
 }
 ```
