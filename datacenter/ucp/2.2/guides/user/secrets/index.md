@@ -146,15 +146,16 @@ this:
    instead.
 3. Delete the old secret.
 
-Let's rotate the secret we've created. Navigate to the **Secrets** screen
-and create a new service named `wordpress-password-v2`.
+Let's rotate the secret we've created. Navigate to the **Secrets** page
+and create a new secret named `wordpress-password-v2`.
 
 ![](../../images/manage-secrets-7.png){: .with-border}
 
 This example is simple, and we know which services we need to update,
 but in the real world, this might not always be the case.
-If you navigate to the secret `wordpress-password-v1` details page, you can
-see which services you need to update.
+
+Click the **wordpress-password-v1** secret. In the details pane,
+click **Inspect Resource**, and in the dropdown, select **Services**.
 
 ![](../../images/manage-secrets-8.png){: .with-border}
 
@@ -168,7 +169,7 @@ update the service. So we have two options:
 1. Update the environment variable to have the value
 `/run/secrets/wordpress-password-v2`, or
 2. Instead of mounting the secret file in `/run/secrets/wordpress-password-v2`
-(the default), we can customize it to be mounted in `/run/secrets/wordpress-password-v1`
+(the default), we can customize it to be mounted in`/run/secrets/wordpress-password-v1`
 instead. This way we don't need to change the environment variable. This is
 what we're going to do.
 
