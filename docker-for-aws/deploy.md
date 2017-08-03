@@ -4,7 +4,7 @@ keywords: aws, amazon, iaas, deploy
 title: Deploy your app on Docker for AWS
 ---
 
-## Connecting to your manager nodes
+## Connect to your manager nodes
 
 This section will walk you through connecting to your installation and deploying
 applications. Instructions are included for both AWS and Azure, so be sure to
@@ -133,7 +133,7 @@ To SSH in to the manager with the above settings:
 $ ssh docker@manager0
 ```
 
-## Running apps
+## Run apps
 
 You can now start creating containers and services.
 
