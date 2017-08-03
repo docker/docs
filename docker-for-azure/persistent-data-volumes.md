@@ -9,7 +9,7 @@ title: Docker for Azure persistent data volumes
 ## What is Cloudstor?
 
 
-Cloudstor a modern volume plugin built by Docker. It comes pre-installed and
+Cloudstor is a modern volume plugin built by Docker. It comes pre-installed and
 pre-configured in Docker Swarms deployed on Docker for Azure. Docker swarm mode
 tasks and regular Docker containers can use a volume created with Cloudstor to
 mount a persistent data volume. The volume stays attached to the swarm tasks no
@@ -19,7 +19,7 @@ shares exposed over SMB) to allow swarm tasks to create/mount their persistent
 volumes on any node in the swarm.
 
 > **Note**: Direct attached storage, which is used to satisfy very low latency /
-> high IOPS requirements,  is not yet supported.
+> high IOPS requirements, is not yet supported.
 
 You can share the same volume among tasks running the same service, or you can
 use a unique volume for each task.
