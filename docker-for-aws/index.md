@@ -1,7 +1,7 @@
 ---
 description: Setup & Prerequisites
 keywords: aws, amazon, iaas, tutorial
-title: Docker for AWS Setup & Prerequisites
+title: Docker for AWS setup & prerequisites
 redirect_from:
 - /engine/installation/cloud/cloud-ex-aws/
 - /engine/installation/amazon/
