@@ -55,7 +55,7 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 
     * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 
-## Next Steps
+## Next steps
 
 * Try the [Get started](/get-started/) tutorial.
 
