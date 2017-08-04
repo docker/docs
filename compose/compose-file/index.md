@@ -24,8 +24,6 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Compose file structure and examples
 
-Click to show/hide the Compose file for the Docker Labs voting app sample.
-
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Compose file version 3
