@@ -17,7 +17,7 @@ Two different download channels are available for Docker for Azure:
 
 * The **edge channel** provides a deployment with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the edge
+  Docker Engine. Bugs, crashes, and issues are more likely to occur with the edge
   cluster, but you get a chance to preview new functionality, experiment, and provide
   feedback as the deployment evolve. Releases are typically more frequent than for
   stable, often one or more per month. Usage statistics and crash reports are sent
@@ -73,7 +73,7 @@ $ sudo ping 10.0.0.4
 
 
 ## What are the different Azure Regions?
-All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft.com/en-us/regions/)
+All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft.com/en-us/regions/).
 An excerpt of the above regions to use when you create your service principal are:
 
 ```none
