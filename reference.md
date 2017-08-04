@@ -30,7 +30,6 @@ various APIs, CLIs, and file formats.
 | API                                                        | Description                                                                            |
 |:-----------------------------------------------------------|:---------------------------------------------------------------------------------------|
 | [Cloud API](/apidocs/docker-cloud/)                        | Enables programmatic management of your Docker application running on a cloud provider |
-| [Docker ID accounts API](/docker-id/api-reference/)        | An API for accessing and updating Docker ID accounts                                   |
 | [Engine API](/engine/api/)                                 | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
 | [Registry API](/registry/spec/api/)                        | Facilitates distribution of images to the engine                                       |
 | [Trusted Registry API](/datacenter/dtr/2.2/reference/api/) | Provides programmatic access to a trusted registry                                     |
