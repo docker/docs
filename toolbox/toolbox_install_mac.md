@@ -27,7 +27,7 @@ Docker Toolbox includes the following Docker tools:
 Because the Docker Engine daemon uses Linux-specific
 kernel features, you can't run Docker Engine natively on
 macOS with Docker Toolbox. Instead, you must use the
-Docker Machine command,  `docker-machine`,  to create and
+Docker Machine command, `docker-machine`, to create and
 attach to a small Linux VM on your machine. This VM hosts
 Docker Engine for you on your Mac.
 
@@ -196,7 +196,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them.  So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on a Mac, do the following:
 
@@ -252,7 +252,7 @@ To uninstall Toolbox on a Mac, do the following:
 7. Uninstall Oracle VirtualBox, which is
 installed as a part of the Toolbox install.
 
-## Next Steps
+## Next steps
 
 * Try the [Get started](/get-started/) tutorial.
 
