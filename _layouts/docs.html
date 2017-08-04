@@ -230,23 +230,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	});
 	</script>
 
-<!-- Testing Play with Docker based on training repo (uses local copy of js/sdk.js and xterm.js)
-
-<script src="{{site.baseurl}}/js/xterm.js"></script>
-<script src="{{site.baseurl}}/js/sdk.js?v=1"></script>
-<script>
-    pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: '{{page.image}}'
-});
-</script> -->
-
-
-<!-- Testing Play with Docker from docker.github.io repo (uses external link to pwd.js) jquery-resizable.min.js". Not needed for docs and removed: jquery-resizable.min.js and panel-left specification on pwd.newSession-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="https://rawgit.com/play-with-docker/sdk/master/dist/pwd.js"></script>
-<script>
-    pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: '{{page.image}}'
-});
-</script>
 </body>
 
 </html>
