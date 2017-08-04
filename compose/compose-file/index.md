@@ -24,28 +24,6 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Compose file structure and examples
 
-The topics on this reference page are organized alphabetically by top-level key
-to reflect the structure of the Compose file itself. Top-level keys that define
-a section in the configuration file such as `build`, `deploy`, `depends_on`,
-`networks`, and so on, are listed with the options that support them as
-sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
-Compose file.
-
-A good place to start is the [Getting Started](/get-started/index.md) tutorial
-which uses version 3 Compose stack files to implement multi-container apps,
-service definitions, and swarm mode. Here are some Compose files used in the
-tutorial.
-
-- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
-
-- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
-
-Another good example is the Compose file for the voting app sample used in the
-[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
-topic on [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
-Click to show/hide the example Compose file below.
-
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Example Compose file version 3
@@ -144,6 +122,27 @@ volumes:
 </code></pre>
     </div>
 </div>
+
+The topics on this reference page are organized alphabetically by top-level key
+to reflect the structure of the Compose file itself. Top-level keys that define
+a section in the configuration file such as `build`, `deploy`, `depends_on`,
+`networks`, and so on, are listed with the options that support them as
+sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
+Compose file.
+
+A good place to start is the [Getting Started](/get-started/index.md) tutorial
+which uses version 3 Compose stack files to implement multi-container apps,
+service definitions, and swarm mode. Here are some Compose files used in the
+tutorial.
+
+- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
+
+- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
+
+Another good reference is the Compose file for the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
 
 ## Service configuration reference
 
