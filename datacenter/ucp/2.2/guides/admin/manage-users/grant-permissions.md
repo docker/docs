@@ -34,5 +34,8 @@ grants. Administrators create grants on the **Manage Grants** page.
 4.  In the left pane, click **Subjects**. Click **All Users** to create a grant
     for a specific user, or click **Organizations** to create a grant for an
     organization or a team.
-5.  Select a user, team, or organization and click **Create**. 
+5.  Select a user, team, or organization and click **Create**.
 
+By default, all new users are placed in the `docker-datacenter` organization.
+If you want to apply a grant to all UCP users, create a grant with the
+`docker-datacenter` org as a subject.
