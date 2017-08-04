@@ -28,7 +28,7 @@ Docker Toolbox includes the following Docker tools:
 Because the Docker Engine daemon uses Linux-specific
 kernel features, you can't run Docker Engine natively
 on Windows. Instead, you must use the Docker Machine
-command,  `docker-machine`, to create and attach to a
+command, `docker-machine`, to create and attach to a
 small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
@@ -141,7 +141,7 @@ In this step, you start Docker Toolbox and run a simple Docker command.
 
     The terminal runs a special `bash` environment instead of the standard Windows command prompt. The `bash` environment is required by Docker.
 
-3.  Make the terminal active by click your mouse next to the `$` prompt.
+3.  Make the terminal active by clicking your mouse next to the `$` prompt.
 
     If you aren't familiar with a terminal window, here are some quick tips.
 
@@ -195,7 +195,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them.  So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on Windows, do the following:
 
@@ -243,7 +243,7 @@ To uninstall Toolbox on Windows, do the following:
 6. Uninstall Oracle VirtualBox, which is
   installed as a part of the Toolbox install.
 
-## Next Steps
+## Next steps
 
 * Try out the [Get started](/get-started/) tutorial.
 
