@@ -24,11 +24,6 @@ gems:
   - jekyll-relative-links
 
 defaults:
-  - scope:
-      path: "samples/library"
-      type: pages
-    values:
-      layout: library
   -
     scope:
       path: ""
