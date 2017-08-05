@@ -4,13 +4,16 @@ svn co https://github.com/docker-library/docs/trunk _samples/library || (echo "F
 FILES=$(find _samples/library -type f -name 'README.md')
 for f in $FILES
 do
-  echo "Adding empty front-matter to ${f} ..."
-  echo --- >> front-matter.txt
-  echo title: $f >> front-matter.txt
-  echo keywords: library, sample, $f >> front-matter.txt
-  echo layout: library >> front-matter.txt
-  echo --- >> front-matter.txt
-  cat front-matter.txt README.md > index.md
+  curdir=$(dirname "${f}")
+  justcurdir="${curdir##*/}"
+  echo "Adding front-matter to ${f} ..."
+  echo --- >> $(dirname "${f}")/front-matter.txt
+  echo title: "${justcurdir}" >> $(dirname "${f}")/front-matter.txt
+  echo keywords: library, sample, ${justcurdir} >> $(dirname "${f}")/front-matter.txt
+  echo layout: library >> $(dirname "${f}")/front-matter.txt
+  echo --- >> $(dirname "${f}")/front-matter.txt
+  cat $(dirname "${f}")/front-matter.txt $(dirname "${f}")/README.md > $(dirname "${f}")/index.md
+  rm -rf $(dirname "${f}")/front-matter.txt
   #sed -i '1i ---\nlayout: library\ntitle: ${f}\nkeywords: library, sample, ${f}\n---' $f
   # take action on each file.
 done
