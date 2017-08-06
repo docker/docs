@@ -143,7 +143,3 @@ $ az group deployment create --resource-group docker-resource-group --name docke
 ```
 
 Parameters can be provided interactively, on the command line, or via a parameters file. For more info on how to use the Azure CLI, visit the [Deploy resources with Resource Manager templates and Azure CLI](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli) page.
-
-
-
-
