@@ -1,11 +1,11 @@
 ---
 advisory: kitematic
 description: Documentation covering common questions users have about Kitematic
-keywords: docker, documentation, about, technology, kitematic,  gui
+keywords: docker, documentation, about, technology, kitematic, gui
 title: 'Kitematic: Frequently asked questions (FAQ)'
 ---
 
-### Is Kitematic Open Source?
+### Is Kitematic open source?
 
 Yes! Our source code is available on
 [GitHub](https://github.com/kitematic/kitematic). Kitematic is open source
@@ -24,7 +24,7 @@ the Docker Engine API.
 ### Which platforms does Kitematic support?
 
 Right now Kitematic works on macOS and Windows. Linux is planned in the
-future.  Review our product <a
+future. Review our product <a
 href="https://github.com/kitematic/kitematic/blob/master/ROADMAP.md">roadmap</a>.
 
 ### Why does Kitematic collect usage analytics and bug reports?
@@ -39,7 +39,7 @@ You can opt-out of this anytime via the in-app preferences.
 
 - Personal information: any information that would allow us to determine a
   specific user of Kitematic
-- Information or data relating to code, containers or Docker images opened via
+- Information or data relating to code, containers, or Docker images opened via
   Kitematic.
 
 #### What we DO collect
@@ -57,7 +57,7 @@ You can opt-out of this anytime via the in-app preferences.
 We'd love to answer any more questions about this. Feel free to reach us at
 kitematic@docker.com or to open an issue on GitHub.
 
-## Next Steps
+## Next steps
 
 For information about known issues in the current release of Kitematic, take a
 look at the [Known issues](./known-issues.md).
