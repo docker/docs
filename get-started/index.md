@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 1: Orientation and Setup"
+title: "Get Started, Part 1: Orientation and setup"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers
 description: Get oriented on some basics of Docker before diving into the walkthrough.
 redirect_from:
