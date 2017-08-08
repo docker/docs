@@ -53,7 +53,7 @@ $ sudo service docker restart
 
 ```bash
 # Download the DTR CA certificate
-$ curl -k https://<dtr-domain-name>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
+$ sudo curl -k https://<dtr-domain-name>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
 # Refresh the list of certificates to trust
 $ sudo update-ca-trust
 # Restart the Docker daemon
