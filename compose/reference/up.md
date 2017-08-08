@@ -51,6 +51,6 @@ flag.
 If you want to force Compose to stop and recreate all containers, use the
 `--force-recreate` flag.
 
-If the command encounters an error, it returns `1`.
-If user press `ctrl` + `C`, causing stop of the containers, it returns `0`.
-If user press `ctrl` + `C` two time, forcing kill of containers, it returns `2`.
+If the process encounters an error, the exit code for this command is `1`.  
+If the process is interrupted using `SIGINT` (`ctrl` + `C`) or `SIGTERM`, the containers are stopped, and the exit code is `0`.  
+If `SIGINT` or `SIGTERM` is sent again during this shutdown phase, the running containers are killed, and the exit code is `2`.
