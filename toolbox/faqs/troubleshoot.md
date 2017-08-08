@@ -35,7 +35,7 @@ Here are some quick solutions to help get back on track. These examples assume t
 
 #### Regenerate certificates
 
-Some errors explicitly tell you to regenerate certificates. You might also try this for other errors that are certificate and /or connectivity related.
+Some errors explicitly tell you to regenerate certificates. You might also try this for other errors that are certificate and/or connectivity related.
 
       $ docker-machine regenerate-certs default
         Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
@@ -66,7 +66,7 @@ Run `docker-machine ls` to verify that the machine is running and that this comm
       Are you sure? (y/n): y
       Successfully removed default
 
-You can use the command `docker-machine create` command with the `virtualbox` driver to create a new machine called `default` (or any name you want for the machine).
+You can use the `docker-machine create` command with the `virtualbox` driver to create a new machine called `default` (or any name you want for the machine).
 
     $ docker-machine create --driver virtualbox default
       Running pre-create checks...
@@ -97,9 +97,9 @@ Here are examples of this type of error:
       $ docker run ubuntu echo "hi"
       An error occurred trying to connect: Post https://192.168.99.100:2376/v1.20/containers/create: Forbidden
 
-### Configuring HTTP proxy settings on Docker machines
+### Configure HTTP proxy settings on Docker machines
 
-When Toolbox creates virtual machines (VMs) it runs `start.sh`, where it gets values for `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`, and passes them as `create` options to create the `default machine`.
+When Toolbox creates virtual machines (VMs) it runs `start.sh`, where it gets values for `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, and passes them as `create` options to create the `default machine`.
 
 You can reconfigure HTTP proxy settings for private networks on already-created Docker machines (e.g., `default`), then change the configuration when you are using the same system on a different network.
 
