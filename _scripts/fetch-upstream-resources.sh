@@ -50,7 +50,7 @@ do
     echo GitHub repo: \["${gitrepo}"\]\("${gitrepo}"\)\{: target="_blank"\} >> ${curdir}/front-matter.txt
     echo >> ${curdir}/front-matter.txt
   fi
-  cat ${curdir}/front-matter.txt _samples/boilerplate.txt > ${curdir}/header.txt
+  cat ${curdir}/front-matter.txt md_source/_samples/boilerplate.txt > ${curdir}/header.txt
   echo {% raw %} >> ${curdir}/header.txt
   cat ${curdir}/header.txt ${curdir}/README.md > ${curdir}/index.md
   echo {% endraw %} >> ${curdir}/index.md
