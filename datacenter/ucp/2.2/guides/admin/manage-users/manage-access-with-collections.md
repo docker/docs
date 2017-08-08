@@ -53,6 +53,8 @@ UCP provides a number of built-in collections.
 -  `/Shared/Legacy` - After updating from UCP 2.1, all legacy access control
    labels are stored here.
 
+![](../../images/collections-diagram.svg)
+
 ## Default collections
 
 A user always has a default collection. The user can select the default
@@ -108,6 +110,8 @@ within the stack/compose file.
 ## Control access to nodes
 
 The Docker EE Advanced license enables access control on worker nodes.
+
+![](../../images/isolate-nodes-diagram.svg)
 
 When you deploy a resource with a collection, UCP sets a constraint implicitly
 based on what nodes the collection, and any ancestor collections, can access. 

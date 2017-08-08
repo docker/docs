@@ -21,6 +21,8 @@ complete this example.
 3.  Assign a worker node to the `/Prod` collection.
 4.  Grant the `Ops` teams access to its collection.
 
+![](../../images/isolate-nodes-diagram.svg)
+
 ## Create a team
 
 In the web UI, navigate to the **Organizations & Teams** page to create a team
