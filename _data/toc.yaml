@@ -1260,28 +1260,16 @@ samples:
     title: ASP.NET Core + SQL Server on Linux
   - path: /engine/examples/couchdb_data_volumes/
     title: CouchDB
-  - path: /samples/couchbase/
-    title: Couchbase
-    nosync: true
   - path: /compose/django/
     title: Django and PostgreSQL
-  - path: /samples/mongo/
-    nosync: true
-    title: MongoDB
   - path: /engine/examples/postgresql_service/
     title: PostgreSQL
   - path: /compose/rails/
     title: Rails and PostgreSQL
-  - path: /samples/redis/
-    title: Redis
-    nosync: true
   - path: /engine/examples/running_riak_service/
     title: Riak
   - path: /engine/examples/running_ssh_service/
     title: SSHd
-  - path: /samples/wordpress/
-    title: WordPress
-    nosync: true
 
 manuals:
 - sectiontitle: Docker Enterprise Edition
