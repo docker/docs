@@ -41,8 +41,11 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-For volumes, if you need to specify volume driver options, you must use
-`--mount`.
+> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> be more familiar with the `-v` or `--volume` syntax, but are encouraged to
+> use `--mount`, because research has shown it to be easier to use.
+
+If you need to specify volume driver options, you must use `--mount`.
 
 - `-v` or `--volume`: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
@@ -73,12 +76,13 @@ For volumes, if you need to specify volume driver options, you must use
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
-The examples below show both the `-v` and `--mount` syntax where possible.
+The examples below show both the `--mount` and `-v` syntax where possible, and
+    `--mount` is presented first.
 
 ### Differences between `-v` and `--mount` behavior
 
 As opposed to bind mounts, all options for volumes are available for both
-`-v` and `--mount` flags.
+`--mount` and `-v` flags.
 
 ## Create and manage volumes
 
@@ -131,13 +135,12 @@ The `-v` and `--mount` examples below produce the same result. You can't run
 them both unless you remove the `devtest` container and the `myvol2` volume
 after running the first one.
 
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  -v myvol2:/app \
-  nginx:latest
-```
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-run"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-run" class="tab-pane fade in active" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -146,6 +149,20 @@ $ docker run -d \
   --mount source=myvol2,target=/app \
   nginx:latest
 ```
+
+</div><!--mount-->
+<div id="v-run" class="tab-pane fade" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name devtest \
+  -v myvol2:/app \
+  nginx:latest
+```
+
+</div><!--volume-->
+</div><!--tab-content-->
 
 Use `docker inspect devtest` to verify that the volume was created and mounted
 correctly. Look for the `Mounts` section:
@@ -197,9 +214,25 @@ new volume `nginx-vol` with the contents of the container's
 `/usr/share/nginx/html` directory, which is where Nginx stores its default HTML
 content.
 
-Both examples do exactly the same thing, but the first example uses the `-v`
-flag, while the second uses the `--mount` flag. To try both examples, remove the
-`nginxtest` container and the `nginx-vol` volume after the first run.
+The `--mount` and `-v` examples have the same end result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-empty-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-empty-run"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name=nginxtest \
+  --mount source=nginx-vol,destination=/usr/share/nginx/html \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-empty-run" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -209,13 +242,11 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name=nginxtest \
-  --mount source=nginx-vol,destination=/usr/share/nginx/html \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
+
+After running either of these examples, run the following commands to clean up the
+containers and volumes.
 
 ```bash
 $ docker container stop devtest
@@ -239,8 +270,25 @@ volume, by adding `ro` to the (empty by default) list of options, after the
 mount point within the container. Where multiple options are present, separate
 them by commas.
 
-The first example uses `-v` and the second example does the same thing with
-`--mount`.
+The `--mount` and `-v` examples have the same result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-readonly"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-readonly"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-readonly" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name=nginxtest \
+  --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-readonly" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -250,13 +298,8 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name=nginxtest \
-  --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 Use `docker inspect nginxtest` to verify that the bind mount was created
 correctly. Look for the `Mounts` section:

@@ -28,6 +28,10 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
+> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> be more familiar with the `-v` or `--volume` syntax, but are encouraged to
+> use `--mount`, because research has shown it to be easier to use.
+
 - `-v` or `--volume`: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   is not immediately obvious.
@@ -62,7 +66,8 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - The `--mount` flag does not support `z` or `Z` options for modifying
     selinux labels.
 
-The examples below show both the `-v` and `--mount` syntax where possible.
+The examples below show both the `--mount` and `-v` syntax where possible, and
+`--mount` is presented first.
 
 ### Differences between `-v` and `--mount` behavior
 
@@ -89,8 +94,27 @@ directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
 
-The `-v` and `--mount` examples below produce the same result. You can't run
-them both unless you remove the `devtest` container after running the first one.
+The `--mount` and `-v` examples below produce the same result. You
+can't run them both unless you remove the `devtest` container after running the
+first one.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-run"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-run" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name devtest \
+  --mount source=$(pwd)/target,target=/app \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-run" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -100,13 +124,8 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount source=$(pwd)/target,target=/app \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 Use `docker inspect devtest` to verify that the bind mount was created
 correctly. Look for the `Mounts` section:
@@ -148,8 +167,28 @@ This example is contrived to be extreme, but will replace the contents of the
 container's `/usr/` directory with the `/tmp/` directory on the host machine. In
 most cases, this would result in a non-functioning container.
 
-The first example uses `-v` and the second example does the same thing with
-`--mount`.
+The `--mount` and `-v` examples have the same end result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-empty-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-empty-run"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name broken-container \
+  --mount source=/tmp,target=/usr \
+  nginx:latest
+
+docker: Error response from daemon: oci runtime error: container_linux.go:262:
+starting container process caused "exec: \"nginx\": executable file not found in $PATH".
+```
+
+</div><!--mount-->
+<div id="v-empty-run" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -162,16 +201,8 @@ docker: Error response from daemon: oci runtime error: container_linux.go:262:
 starting container process caused "exec: \"nginx\": executable file not found in $PATH".
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name broken-container \
-  --mount source=/tmp,target=/usr \
-  nginx:latest
-
-docker: Error response from daemon: oci runtime error: container_linux.go:262:
-starting container process caused "exec: \"nginx\": executable file not found in $PATH".
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 The container is created but does not start. Remove it:
 
@@ -191,8 +222,25 @@ bind mount, by adding `ro` to the (empty by default) list of options, after the
 mount point within the container. Where multiple options are present, separate
 them by commas.
 
-The first example uses `-v` and the second example does the same thing with
-`--mount`.
+The `--mount` and `-v` examples have the same result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-readonly"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-readonly"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-readonly" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name devtest \
+  --mount source=$(pwd)/target,target=/app,readonly \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-readonly" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -202,13 +250,8 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount source=$(pwd)/target,target=/app,readonly \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 Use `docker inspect devtest` to verify that the bind mount was created
 correctly. Look for the `Mounts` section:
@@ -267,8 +310,26 @@ The following example mounts the `target/` directory into the container twice,
 and the second mount sets both the `ro` option and the `rslave` bind propagation
 option.
 
-The first example uses `-v` and the second example does the same thing with
-`--mount`.
+The `--mount` and `-v` examples have the same result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-propagation"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-propagation"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-propagation" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name devtest \
+  --mount source=$(pwd)/target,target=/app \
+  --mount source=$(pwd)/target,target=/app2,readonly,bind-propagation=rslave \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-propagation" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -279,14 +340,8 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount source=$(pwd)/target,target=/app \
-  --mount source=$(pwd)/target,target=/app2,readonly,bind-propagation=rslave \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 Now if you create `/app/foo/`, `/app2/foo/` will also exist.
 
@@ -342,7 +397,25 @@ per-mount, per-container basis. The following options are available:
 
 These options are completely ignored on all host operating systems except macOS.
 
-The following two examples both set the `consistency` level to `cached`.
+The `--mount` and `-v` examples have the same result.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-consistency"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="v-consistency"><code>-v</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-consistency" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker run -d \
+  -it \
+  --name devtest \
+  --mount source=$(pwd)/target,destination=/app,consistency=cached \
+  nginx:latest
+```
+
+</div><!--mount-->
+<div id="v-consistency" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker run -d \
@@ -352,13 +425,8 @@ $ docker run -d \
   nginx:latest
 ```
 
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount source=$(pwd)/target,destination=/app,consistency=cached \
-  nginx:latest
-```
+</div><!--volume-->
+</div><!--tab-content-->
 
 ## Next steps
 
