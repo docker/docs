@@ -10,7 +10,7 @@ In this tutorial, you will:
 - Create a RethinkDB Container for Development
 - (Advanced) Clone a small Node.js application and write data into RethinkDB.
 
-### Setting up RethinkDB in Kitematic
+### Set up RethinkDB in Kitematic
 
 First, if you haven't yet done so, [download and start
 Kitematic](index.md). Once open, the app should look like
@@ -35,7 +35,7 @@ host `localhost` and port `32783` (in this example - ports may be different
 for you). This means you can now reach RethinkDB via a client driver at
 `127.0.0.1:32783`. Again, this IP address may be different for you.
 
-### (Advanced) Saving Data into RethinkDB with a local Node.js App
+### (Advanced) Save Data into RethinkDB with a local Node.js App
 
 Now, you'll create the RethinkDB example chat application running on your local
 macOS system to test drive your new containerized database.
@@ -43,7 +43,7 @@ macOS system to test drive your new containerized database.
 First, if you don't have it yet, [download and install
 Node.js](http://nodejs.org/).
 
-> **Note**: this example needs Xcode installed. We'll replace it with something
+> **Note**: This example needs Xcode installed. We'll replace it with something
 > with fewer dependencies soon.
 
 In your terminal, type:
