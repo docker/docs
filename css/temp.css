@@ -40,3 +40,6 @@
   margin-bottom: 20px;
 }
 
+code[class*="."] {
+    cursor: pointer;
+}
