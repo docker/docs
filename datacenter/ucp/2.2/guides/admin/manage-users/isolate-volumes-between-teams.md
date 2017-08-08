@@ -14,6 +14,8 @@ nodes.
 3.  Create grants to manage access to the collections.
 4.  Team members create volumes that are specific to their team.
 
+![](../../images/isolate-volumes-diagram.svg)
+
 ## Create two teams
 
 Navigate to the **Organizations & Teams** page to create two teams in your
