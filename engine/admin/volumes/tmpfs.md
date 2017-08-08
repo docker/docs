@@ -32,10 +32,10 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 > be more familiar with the `--tmpfs` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 
-- `--tmpfs`: Mounts a `tmpfs` mount without allowing you to specify any
+- **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone  containers.
 
-- `--mount`: Consists of multiple key-value pairs, separated by commas and each
+- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
@@ -70,8 +70,8 @@ To use a `tmpfs` mount in a container, use the `--tmpfs` flag, or use the
 second uses the `--tmpfs` flag.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-run"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="tmpfs-run"><code>--tmpfs</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#tmpfs-run"><code>--tmpfs</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">

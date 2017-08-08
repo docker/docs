@@ -47,7 +47,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 
 If you need to specify volume driver options, you must use `--mount`.
 
-- `-v` or `--volume`: Consists of three fields, separated by colon characters
+- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   is not immediately obvious.
   - In the case of named volumes, the first field is the name of the volume, and is
@@ -58,7 +58,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
 
-- `--mount`: Consists of multiple key-value pairs, separated by commas and each
+- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
@@ -136,8 +136,8 @@ them both unless you remove the `devtest` container and the `myvol2` volume
 after running the first one.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-run"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-run"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-run"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
@@ -217,8 +217,8 @@ content.
 The `--mount` and `-v` examples have the same end result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-empty-run"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-empty-run"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-empty-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-empty-run"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
@@ -273,8 +273,8 @@ them by commas.
 The `--mount` and `-v` examples have the same result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-readonly"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-readonly"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-readonly"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-readonly"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">

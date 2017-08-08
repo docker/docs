@@ -32,7 +32,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 
-- `-v` or `--volume`: Consists of three fields, separated by colon characters
+- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   is not immediately obvious.
   - In the case of bind mounts, the first field is the path to the file or
@@ -43,7 +43,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
     as `ro`, `consistent`, `delegated`, `cached`, `z`, and `Z`. These options
     are discussed below.
 
-- `--mount`: Consists of multiple key-value pairs, separated by commas and each
+- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
@@ -99,8 +99,8 @@ can't run them both unless you remove the `devtest` container after running the
 first one.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-run"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-run"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-run"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
@@ -170,8 +170,8 @@ most cases, this would result in a non-functioning container.
 The `--mount` and `-v` examples have the same end result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-empty-run"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-empty-run"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-empty-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-empty-run"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
@@ -225,8 +225,8 @@ them by commas.
 The `--mount` and `-v` examples have the same result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-readonly"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-readonly"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-readonly"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-readonly"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
@@ -313,8 +313,8 @@ option.
 The `--mount` and `-v` examples have the same result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-propagation"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-propagation"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-propagation"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-propagation"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-propagation" class="tab-pane fade in active" markdown="1">
@@ -400,8 +400,8 @@ These options are completely ignored on all host operating systems except macOS.
 The `--mount` and `-v` examples have the same result.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="mount-consistency"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="v-consistency"><code>-v</code></a></li>
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-consistency"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#v-consistency"><code>-v</code></a></li>
 </ul>
 <div class="tab-content">
 <div id="mount-consistency" class="tab-pane fade in active" markdown="1">
