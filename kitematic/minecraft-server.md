@@ -8,7 +8,7 @@ title: 'Kitematic tutorial: Set up a Minecraft server'
 This is a quick tutorial demonstrating how to set up a local Minecraft server
 using Kitematic and Docker.
 
-### Create Minecraft Server Container
+### Create Minecraft server container
 
 First, if you haven't yet done so, [download and start
 Kitematic](index.md). Once installed and running, the app should look like this:
@@ -66,7 +66,7 @@ Restart your container by clicking the "Restart" button.
 Go back to your Minecraft client and join your server. The new map should load.
 
 
-## Next Steps
+## Next steps
 
 For an example using Kitematic to run Nginx, take a look at the [Nginx web
 server](./nginx-web-server.md) page.
