@@ -1,7 +1,7 @@
 ---
 advisory: kitematic
 description: Information about known issues in Kitematic
-keywords: docker, documentation, about, technology, kitematic,  gui
+keywords: docker, documentation, about, technology, kitematic, gui
 title: 'Kitematic: Known issues'
 ---
 
@@ -10,7 +10,7 @@ VM reliably with VirtualBox can be tricky. We are working on this problem.
 
 Below are a list of common errors and solutions that work for most people.
 
-## Setup Error or Hanging at 99%
+## Setup error or hanging at 99%
 
 Sometimes Kitematic doesn't set up VirtualBox properly. Retrying the setup
 usually works (via one of the two retry buttons). If not, try the following
@@ -23,7 +23,7 @@ Then re-open Kitematic. This usually fixes the issue, but if it persists, feel
 free to view our <a href="https://github.com/kitematic/kitematic/issues?q=is%3Aopen+is%3Aissue+label%3Abug">existing GitHub
 issues</a>.
 
-## Contributing Fixes
+## Contribute fixes
 
 We're always looking for help to make Kitematic better and more reliable! Visit
 [our GitHub page](https://github.com/kitematic/kitematic) for docs on how to
@@ -35,7 +35,7 @@ VirtualBox. We're still working on a stronger integration with this project.
 Their [GitHub repo](https://github.com/docker/machine) is a great place to start
 if you're looking to help fix specific issues around VM provisioning.
 
-## View All Issues
+## View all issues
 
 For a full list of Kitematic bugs or issues see our <a href="https://github.com/kitematic/kitematic/issues?q=is%3Aopen+is%3Aissue+label%3Abug">existing GitHub
 issues</a> labeled as `bug`.
