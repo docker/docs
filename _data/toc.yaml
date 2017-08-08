@@ -305,7 +305,7 @@ guides:
     title: Runtime metrics
   - path: /engine/admin/ambassador_pattern_linking/
     title: Link via an ambassador container
-- sectiontitle: Storage Guide
+- sectiontitle: Manage application data
   section:
     - path: /engine/admin/volumes/
       title: Storage overview
