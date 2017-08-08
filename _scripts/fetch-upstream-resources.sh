@@ -18,49 +18,6 @@ svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/d
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api md_source/engine/api || (echo "Failed engine/api download" && exit -1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec md_source/registry/spec || (echo "Failed registry/spec download" && exit -1)
 
-# Get the Library docs
-svn co https://github.com/docker-library/docs/trunk md_source/_samples/library || (echo "Failed library download" && exit -1)
-# Remove symlinks to maintainer.md because they break jekyll and we don't use em
-find md_source/_samples/library -maxdepth 9  -type l -delete
-# Loop through the README.md files, turn them into rich index.md files
-FILES=$(find md_source/_samples/library -type f -name 'README.md')
-for f in $FILES
-do
-  curdir=$(dirname "${f}")
-  justcurdir="${curdir##*/}"
-  if [ -e ${curdir}/README-short.txt ]
-  then
-    # shortrm=$(<${curdir}/README-short.txt)
-    shortrm=$(cat ${curdir}/README-short.txt)
-  fi
-  echo "Adding front-matter to ${f} ..."
-  echo --- >> ${curdir}/front-matter.txt
-  echo title: "${justcurdir}" >> ${curdir}/front-matter.txt
-  echo keywords: library, sample, ${justcurdir} >> ${curdir}/front-matter.txt
-  echo repo: "${justcurdir}" >> ${curdir}/front-matter.txt
-  echo layout: docs >> ${curdir}/front-matter.txt
-  echo permalink: /samples/library/${justcurdir}/ >> ${curdir}/front-matter.txt
-  echo description: \| >> ${curdir}/front-matter.txt
-  echo \ \ ${shortrm} >> ${curdir}/front-matter.txt
-  echo --- >> ${curdir}/front-matter.txt
-  echo >> ${curdir}/front-matter.txt
-  echo ${shortrm} >> ${curdir}/front-matter.txt
-  echo >> ${curdir}/front-matter.txt
-  if [ -e ${curdir}/github-repo ]
-  then
-    # gitrepo=$(<${curdir}/github-repo)
-    gitrepo=$(cat ${curdir}/github-repo)
-    echo >> ${curdir}/front-matter.txt
-    echo GitHub repo: \["${gitrepo}"\]\("${gitrepo}"\)\{: target="_blank"\} >> ${curdir}/front-matter.txt
-    echo >> ${curdir}/front-matter.txt
-  fi
-  cat ${curdir}/front-matter.txt md_source/_samples/boilerplate.txt > ${curdir}/header.txt
-  echo {% raw %} >> ${curdir}/header.txt
-  cat ${curdir}/header.txt ${curdir}/README.md > ${curdir}/index.md
-  echo {% endraw %} >> ${curdir}/index.md
-  rm -rf ${curdir}/front-matter.txt
-  rm -rf ${curdir}/header.txt
-done
 
 # Get the Engine APIs that are in Swagger
 # Be careful with the locations on Github for these
@@ -90,4 +47,3 @@ wget -O md_source/registry/configuration.md https://raw.githubusercontent.com/do
 rm md_source/registry/spec/api.md.tmpl
 rm -rf md_source/apidocs/cloud-api-source
 rm -rf md_source/tests
-rm md_source/_samples/library/index.md
