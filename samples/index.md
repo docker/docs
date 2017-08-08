@@ -29,11 +29,12 @@ repository]({{ labsbase }}).
 These docs are imported from
 [the official Docker Library docs](https://github.com/docker-library/docs/),
 and help you use some of the most popular software that has been
-"Dockerized."
+"Dockerized" into Docker images.
 
-| Software | Description |
-{% for thisPage in site.pages %}{% if thisPage.url contains "/samples/" and thisPage.url != "/samples/" %}| [{{ thisPage.title }}]({{ thisPage.url }}) | {% capture shortxt %}{% include_relative library/{{ thisPage.repo }}/README-short.txt %}{% endcapture %}{{ shortxt | strip }} |
-{% endif %}{% endfor %}
+| Image name | Description |
+| ---------- | ----------- |
+{% for page in site.samples %}| [{{ page.title }}]({{ page.url }}) | {{ page.description | strip }} |
+{% endfor %}
 
 ## Sample applications
 
