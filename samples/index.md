@@ -45,12 +45,8 @@ Run popular software using Docker.
 | [apt-cacher-ng](/engine/examples/apt-cacher-ng) | Run a Dockerized apt-cacher-ng instance. |
 | [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose) | Run a Dockerized ASP.NET Core + SQL Server environment. |
 | [CouchDB](/engine/examples/couchdb_data_volumes) | Run a Dockerized CouchDB instance. |
-| [Couchbase](/engine/examples/couchbase) | Run a Dockerized Couchbase instance. |
 | [Django + PostgreSQL](/compose/django/) | Run a Dockerized Django + PostgreSQL environment. |
-| [MongoDB](/engine/examples/mongodb) | Run a Dockerized MongoDB instance. |
 | [PostgreSQL](/engine/examples/postgresql_service) | Run a Dockerized PosgreSQL instance. |
 | [Rails + PostgreSQL](/compose/rails/) | Run a Dockerized Rails + PostgreSQL environment. |
-| [Redis](/engine/examples/running_redis_service) | Run a Dockerized Redis instance. |
 | [Riak](/engine/examples/running_riak_service) | Run a Dockerized Riak instance. |
 | [SSHd](/engine/examples/running_ssh_service) | Run a Dockerized SSHd instance. |
-| [WordPress](/compose/wordpress/) | Run a Dockerized WordPress instance. |
