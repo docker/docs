@@ -16,7 +16,7 @@ Let's get to it!
 
 ![2048 game](images/nginx-2048.png)
 
-#### Running the Nginx Web Server Container
+#### Run the Nginx web server container
 
 First, if you haven't yet done so, [download and start
 Kitematic](index.md). Once installed and running, the app should look like this:
@@ -39,7 +39,7 @@ result in your own browser.
 image from the Docker Hub and then created and ran a Docker Nginx container from
 this image.
 
-#### Viewing the Website Data in Finder
+#### View the website data in Finder
 
 This container exposes website data via a _Docker volume_. Kitematic makes
 managing Docker volumes easy - you can edit the data in Finder or with your
@@ -55,7 +55,7 @@ being served by the container.
 
 ![Nginx data folder](images/nginx-data-folder.png)
 
-#### Serving Your Own Website Data
+#### Serve your own website data
 
 Now let's try serving a more interesting website. [Download the zipped
 files](https://github.com/gabrielecirulli/2048/archive/master.zip) for 2048, a
@@ -75,7 +75,7 @@ Kitematic can map Docker container volumes to directories on your
 Mac. In this case you changed the container's volume data via the Finder to
 serve a website we downloaded.
 
-## Next Steps
+## Next steps
 
 For an example using Kitematic to run a Local RethinkDB database, take a look at
 the [RethinkDB development Database](./rethinkdb-dev-database.md) example.
