@@ -306,8 +306,8 @@ examples: |-
 
   ### Add bind-mounts or volumes
 
-  Docker supports two different kinds of mounts, which allow containers to read to
-  or write from files or directories on other containers or the host operating
+  Docker supports two different kinds of mounts, which allow containers to read
+  from or write to files or directories on other containers or the host operating
   system. These types are _data volumes_ (often referred to simply as volumes) and
   _bind-mounts_.
 
