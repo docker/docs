@@ -131,7 +131,7 @@ whatever services need updating will be updated:
     ![Visualizer screenshot](images/get-started-visualizer1.png)
 
     The single copy of `visualizer` is running on the manager as you expect, and
-    the five instances of `web` are spread out across the swarm. You can
+    the 5 instances of `web` are spread out across the swarm. You can
     corroborate this visualization by running `docker stack ps <stack>`:
 
     ```shell
@@ -149,7 +149,7 @@ Let's go through the same workflow once more to add a Redis database for storing
 app data.
 
 1.  Save this new `docker-compose.yml` file, which finally adds a
-Redis service.  Be sure to replace `username/repo:tag` with your image details.
+Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ```yaml
     version: "3"
