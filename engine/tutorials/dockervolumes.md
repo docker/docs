@@ -1,6 +1,6 @@
 ---
 description: How to manage data inside your Docker containers.
-keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+keywords: Examples, Usage, volume, docker, documentation, user guide, data, volumes
 redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
@@ -95,7 +95,7 @@ $ docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.
 ```
 
 This command mounts the host directory, `/src/webapp`, into the container at
-`/webapp`.  If the path `/webapp` already exists inside the container's
+`/webapp`. If the path `/webapp` already exists inside the container's
 image, the `/src/webapp` mount overlays but does not remove the pre-existing
 content. Once the mount is removed, the content is accessible again. This is
 consistent with the expected behavior of the `mount` command.
@@ -116,7 +116,7 @@ the `foo` specification, the Docker Engine creates a named volume.
 
 If you are using Docker Machine on Mac or Windows, your Docker Engine daemon has only
 limited access to your macOS or Windows filesystem. Docker Machine tries to
-auto-share your `/Users` (macOS) or `C:\Users` (Windows) directory.  So, you can
+auto-share your `/Users` (macOS) or `C:\Users` (Windows) directory. So, you can
 mount files or directories on macOS using.
 
 ```bash
@@ -160,7 +160,7 @@ $ docker run -d -P --name web -v /src/webapp:/webapp:cached training/webapp pyth
 
 The `cached` option typically improves the performance of read-heavy workloads
 on Docker for Mac, at the cost of some temporary inconsistency between the host
-and the container.  On other platforms, `cached` currently has no effect.  The
+and the container. On other platforms, `cached` currently has no effect. The
 article [User-guided caching in Docker for
 Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/)
 gives more details about the behavior of `cached` on macOS.
@@ -237,7 +237,7 @@ Only the current container can use a private volume.
 
 ### Mount a host file as a data volume
 
-The `-v` flag can also be used to mount a single file  - instead of *just*
+The `-v` flag can also be used to mount a single file - instead of *just*
 directories - from the host machine.
 
 ```bash
@@ -255,7 +255,7 @@ history of the commands typed while in the container.
 > you want to edit the mounted file, it is often easiest to instead mount the
 > parent directory.
 
-## Creating and mounting a data volume container
+## Create and mount a data volume container
 
 If you have some persistent data that you want to share between
 containers, or want to use from non-persistent containers, it's best to
@@ -301,7 +301,7 @@ $ docker run -d --name db3 --volumes-from db1 training/postgres
 
 If you remove containers that mount volumes, including the initial `dbstore`
 container, or the subsequent containers `db1` and `db2`, the volumes will not
-be deleted.  To delete the volume from disk, you must explicitly call
+be deleted. To delete the volume from disk, you must explicitly call
 `docker rm -v` against the last container with a reference to the volume. This
 allows you to upgrade, or effectively migrate data volumes between containers.
 
@@ -316,7 +316,7 @@ allows you to upgrade, or effectively migrate data volumes between containers.
 ## Backup, restore, or migrate data volumes
 
 Another useful function we can perform with volumes is use them for
-backups, restores or migrations.  You do this by using the
+backups, restores, or migrations. You do this by using the
 `--volumes-from` flag to create a new container that mounts that volume,
 like so:
 
@@ -344,7 +344,7 @@ Then un-tar the backup file in the new container`s data volume.
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
-You can use the techniques above to automate backup, migration and
+You can use the techniques above to automate backup, migration, and
 restore testing using your preferred tools.
 
 ## List all volumes
@@ -380,7 +380,7 @@ To remove all unused volumes and free up space,
 $ docker volume prune
 ```
 
-it will remove all unused volumes which are not associated with any container.
+It will remove all unused volumes which are not associated with any container.
 
 ## Important tips on using shared volumes
 
