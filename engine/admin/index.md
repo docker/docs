@@ -174,6 +174,9 @@ by sending a `SIGUSR1` signal to the daemon.
   Run the executable with the flag `--pid=<PID of daemon>`.
 
 This will force a stack trace to be logged but will not stop the daemon.
+Daemon logs will show the stack trace or the path to a file containing the
+stack trace if it was logged to a file.
+
 
 The daemon will continue operating after handling the `SIGUSR1` signal and
 dumping the stack traces to the log. The stack traces can be used to determine
