@@ -49,11 +49,15 @@ and any custom roles that administrators have created. In the **Roles**
 list, click a role to see the API operations that it uses. For example, the
 `Scheduler` role has two of the node operations, `Schedule` and `View`.
 
+## Create a custom role
+
 Click **Create role** to create a custom role and define the API operations
 that it uses. When you create a custom role, all of the APIs that you can use
 are listed on the **Create Role** page. For example, you can create a custom
-role that uses the node operations, `Update`, and `View`, and you might give
-it a name like "Node Operator".
+role that uses the node operations, `Schedule`, `Update`, and `View`, and you
+might give it a name like "Node Operator".
+
+![](../../images/custom-role.png)
 
 You can give a role a global name, like "Remove Images", which might enable 
 the **Remove** and **Force Remove** operations for images. You can apply a
