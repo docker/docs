@@ -12,7 +12,7 @@ Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
 
 - On desktop systems like Docker for Mac and Windows, Docker Compose is
-included as part of those desktop installs. Skip down to [Install Compose on Linux systems](#install-compose-on-linux-systems).
+included as part of those desktop installs. Skip down to [Install Compose on Mac or Windows systems](#install-compose-on-mac-or-windows-systems).
 
 - On Linux systems, first install the
 [Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
@@ -70,7 +70,7 @@ Docker Compose. To do so, follow these steps:
 
 ## Install Compose on Linux systems
 
-On **Linux**, you can download the Docker Compose binary from  the [Compose
+On **Linux**, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
 running the `curl` command in your terminal to download the binaries. These step
