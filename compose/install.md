@@ -32,35 +32,40 @@ Server 2016** (with [Docker EE for Windows Server
 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
 Docker Compose.
 
-To do this, start an "elevated" PowerShell (run it as administrator). Search
-for PowerShell, right-click, and choose **Run as administrator**. When asked
-if you want to allow this app to make changes to your device, click **Yes**.
+To do this, follow these steps:
 
-Run the following command to download Docker Compose, replacing
-`$dockerComposeVersion` with the specific version of Compose you want to use:
+1.  Start an "elevated" PowerShell (run it as administrator).
 
-```none
-Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
-```
+    Search for PowerShell, right-click, and choose
+    **Run as administrator**. When asked if you want to allow this app
+    to make changes to your device, click **Yes**.
 
-For example, to download Compose version {{ site.compose_current }}, the command
-is:
+    In PowerShell, run the following command to download
+    Docker Compose, replacing `$dockerComposeVersion` with the specific
+    version of Compose you want to use:
 
-```none
-Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
-```
->  Use the latest Compose release number in the download command.
->
-> As already mentioned, the above command is an _example_, and
-it may become out-of-date once in a while. Always follow the
-command pattern shown above it. If you cut-and-paste an example,
-check which release it specifies and, if needed,
-replace `$dockerComposeVersion` with the release number that
-you want. Compose releases are also available for direct download
-on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
-{: .important}
+    ```none
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    ```
 
-Now, run the executable to install Compose.
+    For example, to download Compose version {{ site.compose_current }},
+    the command is:
+
+    ```none
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    ```
+    >  Use the latest Compose release number in the download command.
+    >
+    > As already mentioned, the above command is an _example_, and
+    it may become out-of-date once in a while. Always follow the
+    command pattern shown above it. If you cut-and-paste an example,
+    check which release it specifies and, if needed,
+    replace `$dockerComposeVersion` with the release number that
+    you want. Compose releases are also available for direct download
+    on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+    {: .important}
+
+3.  Run the executable to install Compose.
 
 ## Install Compose on Linux systems
 
