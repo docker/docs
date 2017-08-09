@@ -164,8 +164,6 @@ guides:
     section:
     - path: /engine/tutorials/networkingcontainers/
       title: Network containers
-    - path: /engine/tutorials/dockervolumes/
-      title: Manage data in containers
   - path: /engine/docker-overview/
     title: Docker overview
 - sectiontitle: User guide
@@ -305,6 +303,19 @@ guides:
     title: Runtime metrics
   - path: /engine/admin/ambassador_pattern_linking/
     title: Link via an ambassador container
+- sectiontitle: Manage application data
+  section:
+    - path: /engine/admin/volumes/
+      title: Storage overview
+    - path: /engine/admin/volumes/volumes/
+      title: Volumes
+    - path: /engine/admin/volumes/bind-mounts/
+      title: Bind mounts
+    - path: /engine/admin/volumes/tmpfs/
+      title: tmpfs mounts
+    - path: /engine/userguide/storagedriver/
+      title: Container storage drivers
+      nosync: true
 - sectiontitle: Troubleshoot Docker Engine
   section:
   - path: /engine/admin/troubleshooting_volume_errors/
