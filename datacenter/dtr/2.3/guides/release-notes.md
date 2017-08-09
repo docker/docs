@@ -33,6 +33,7 @@ This allows pulling different images with the same tag such as Linux and Windows
 
 * The users page is now paginated to decrease long load times.
 * Fixed the login page to be more resilient to improperly configured domain names.
+Now you can always use the `/login` URL to bypass SSO misconfiguration issues.
 
 ### docker/dtr
 
@@ -50,9 +51,4 @@ verification.
 * Simplified content cache configuration.
 * Removed old, insecure 3des from the cipher list.
 * Allow refresh tokens with basic auth when using the DTR API.
-* Added the ability to automatically rescan any previously scanned image.
-
-## Known issues
-
-* The web UI works best with Chrome and Firefox. Full support for
-Internet Explorer will be added on the GA release
+* Added the ability to rescan all previously scanned images at once.
