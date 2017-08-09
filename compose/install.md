@@ -21,18 +21,18 @@ Linux](#install-compose-on-linux-systems).
 
 ## Install Compose on Mac or Windows systems
 
-**[Docker for Mac](/docker-for-mac/install.md)**,
-**[Docker for Windows](/docker-for-windows/install.md)**, and
-**[Docker Toolbox](/toolbox/overview.md)** include Docker Compose,
-so most Mac and Windows users do not need to install Docker Compose
-separately.
+**Docker for Mac**, **Docker for Windows**, and **Docker Toolbox**
+already include Compose along with other Docker apps, so most Mac
+and Windows users do not need to install Docker Compose separately.
+Docker install instructions for these are here:
 
-If you are running the Docker daemon and client directly on **Microsoft Windows
-Server 2016** (with [Docker EE for Windows Server
-2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
-Docker Compose.
+* [Get Docker for Mac](/docker-for-mac/install.md)
+* [Get Docker for Windows](/docker-for-windows/install.md)
+* [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
-To do this, follow these steps:
+**If you are running the Docker daemon and client directly on Microsoft
+Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
+Docker Compose. To do so, follow these steps:
 
 1.  Start an "elevated" PowerShell (run it as administrator).
 
