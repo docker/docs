@@ -109,9 +109,14 @@ within the stack/compose file.
 
 ## Control access to nodes
 
-The Docker EE Advanced license enables access control on worker nodes.
+The Docker EE Advanced license enables access control on worker nodes. Admin
+users can move worker nodes from the default `/Shared` collection into other
+collections and create corresponding grants for scheduling tasks. 
 
-![](../../images/isolate-nodes-diagram.svg)
+In this example, an administrator has moved worker nodes to a `/prod`
+collection:
+
+![](../../images/containers-and-nodes-diagram.svg) 
 
 When you deploy a resource with a collection, UCP sets a constraint implicitly
 based on what nodes the collection, and any ancestor collections, can access. 
@@ -126,11 +131,11 @@ of the resource, like `/Shared/Private/hans`, and it tries to find the parent
 that's closest to the root that the user has the `Node Schedule` permission on.
 
 For example, when a user with a default configuration runs `docker container run nginx`,
-the system interprets this to mean, "Create an `nginx` container under the
+the system interprets this to mean, "Create an NGINX container under the
 user's default collection, which is at `/Shared/Private/hans`, and deploy it
 on one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in
 new collections, and assign the `Scheduler` role, which contains the
-`Node Schedule` permission, to the two teams. For more info, see
-[Isolate swarm nodes between two different teams](isolate-nodes-between-teams.md).
+`Node Schedule` permission, to the team. 
+[Isolate swarm nodes to a specific team](isolate-nodes-between-teams.md).
