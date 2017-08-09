@@ -16,8 +16,6 @@ horizontalnav:
   node: samples
 
 guides:
-- title: Docs hackathon results
-  path: /hackathon/
 - sectiontitle: Get Docker
   section:
   - path: /engine/installation/
@@ -485,8 +483,12 @@ guides:
     title: Where to chat or get help
   - path: /opensource/doc-style/
     title: Style guide for Docker documentation
-- path: /docsarchive/
-  title: View the docs archives
+- sectiontitle:
+  section:
+  - path: /docsarchive/
+    title: View the docs archives
+  - title: Docs hackathon results
+    path: /hackathon/
 
 reference:
 - title: Dockerfile reference
