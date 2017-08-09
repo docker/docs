@@ -1506,7 +1506,7 @@ files](#volumes-for-services-swarms-and-stack-files).
 
 > **Note**: The top-level
 > [volumes](#volume-configuration-reference) key defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 This example shows a named volume (`mydata`) being used by the `web` service,
@@ -1550,7 +1550,7 @@ volumes:
 > to demonstrate mounted volumes. It is explained in [Part
 > 5](/get-started/part5.md#add-a-new-service-and-redeploy) of that topic.
 >
-> See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
+> See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
 > Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 
@@ -1753,7 +1753,7 @@ easily retrieved and inspected using the docker command line or API. See the
 [docker volume](/engine/reference/commandline/volume_create.md) subcommand
 documentation for more information.
 
-See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
+See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
