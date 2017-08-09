@@ -389,8 +389,7 @@ the service's task containers.
 
 - `source`: The name of the config as it exists in Docker.
 - `target`: The path and name of the file that will be mounted in the service's
-  task containers. service's task containers. Defaults to `/<source>` if not
-  specified.
+  task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID which will own the mounted config file
   within in the service's task containers. Both default to `0` on Linux if not
   specified. Not supported on Windows.
