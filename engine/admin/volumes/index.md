@@ -17,16 +17,33 @@ are some downsides:
   kernel. This extra abstraction reduces performance as compared to using
   _data volumes_, which write directly to the host filesystem.
 
-A data volume is a directory usually located on the Docker host
-and made available to containers at runtime. A data volume may also be located
-remotely or on a cloud provider if you use a volume plugin that supports this.
-Most of the information in this topic and linked topics relates to data that is
-stored locally on the host machine.
+Docker offers three different ways to mount data into a container from the
+Docker host: _volumes_, _bind mounts_, or _`tmpfs` volumes_. When in doubt,
+volumes are almost always the right choice. Keep reading for more information
+about each mechanism for mounting data into containers.
 
-**In a production environment, data volumes are almost always the best way to
-persist your application's data and state.**
+## Choose the right type of mount
 
-There are three different ways to mount data into a container:
+No matter which type of mount you choose to use, the data looks the same from
+within the container. It is exposed as either a directory or an individual file
+in the container's filesystem.
+
+An easy way to visualize the difference among volumes, bind mounts, and `tmpfs`
+mounts is to think about where the data lives on the Docker host:
+
+- **Volumes** are stored in a part of the host filesystem which is _managed by
+  Docker_ (`/var/lib/docker/volumes/` on Linux). Non-Docker processes should not
+  modify this part of the filesystem. Volumes are the best way to persist data
+  in Docker.
+
+- **Bind mounts** may be stored *anywhere* on the host system. They may even be
+  important system files or directories. Non-Docker processes on the Docker host
+  or a Docker container can modify them at any time.
+
+- **`tmpfs` mounts** are stored in the host system's memory only, and are never
+  written to the host system's filesystem.
+
+### More details about mount types
 
 - **[Volumes](volumes.md)**: Created and managed by Docker. You can create a
   volume explicitly using the `docker volume create` command, or Docker can
