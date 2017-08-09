@@ -8,7 +8,8 @@ You can run Compose on macOS, Windows and 64-bit Linux.
 
 ## Prerequisites
 
-You need to install Docker first, before you install and run Docker Compose.
+Docker Compose relies on Docker Engine for any meaningful work, so make sure you
+have Docker Engine installed either locally or remote, depending on your setup.
 
 - On desktop systems like Docker for Mac and Windows, Docker Compose is
 included as part of those desktop installs. Skip down to [Install Compose on Linux systems](#install-compose-on-linux-systems).
