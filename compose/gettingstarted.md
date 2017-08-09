@@ -82,7 +82,7 @@ and the [Dockerfile reference](/engine/reference/builder.md).
 Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 
-    version: '2'
+    version: '3'
     services:
       web:
         build: .
