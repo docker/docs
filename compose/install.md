@@ -14,7 +14,7 @@ You need to install Docker first, before you install and run Docker Compose.
 included as part of those desktop installs. Skip down to [Install Compose on Linux systems](#install-compose-on-linux-systems).
 
 - On Linux systems, first install the
-[Docker server](/engine/installation/index.md#server){: target="_blank" class="_"}
+[Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing [installing Compose on
 Linux](#install-compose-on-linux-systems).
