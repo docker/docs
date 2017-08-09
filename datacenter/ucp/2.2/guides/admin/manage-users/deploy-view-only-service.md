@@ -11,6 +11,8 @@ collection that contains one service.
 2. Create a collection for the view-only service.
 3. Create a grant to manage user access to the collection. 
 
+![](../../images/view-only-access-diagram.svg)
+
 ## Create an organization
 
 In this example, you create an organization and a team, and you add one user
