@@ -1506,11 +1506,11 @@ files](#volumes-for-services-swarms-and-stack-files).
 
 > **Note**: The top-level
 > [volumes](#volume-configuration-reference) key defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. (See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.)
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
+Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
-This example shows a named volume (`db-data`) being used by the `postgres`
-service, and a mounted volume for a single service (under the `redis` service).
+This example shows a named volume (`mydata`) being used by the `web` service,
+and a mounted volume for a single service (under the `visualizer` service).
 
 ```none
 version: "3.2"
@@ -1529,12 +1529,30 @@ services:
         source: ./static
         target: /opt/app/static
 
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
 networks:
   webnet:
 
 volumes:
   mydata:
 ```
+
+> **Tips**:
+>
+> The visualizer service in the above example is borrowed from the
+> [Get Started tutorial](/get-started/index,nd) and just used here
+> to demonstrate mounted volumes. It is explained in [Part
+> 5](/get-started/part5.md#add-a-new-service-and-redeploy) of that topic.
+>
+> See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
+> Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+
 
 #### Short syntax
 
@@ -1735,7 +1753,7 @@ easily retrieved and inspected using the docker command line or API. See the
 [docker volume](/engine/reference/commandline/volume_create.md) subcommand
 documentation for more information.
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and [Volume
+See [Manage data in Docker](/engine/admin/volumes/index.md) and [Volume
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
