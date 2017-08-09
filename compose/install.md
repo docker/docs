@@ -4,37 +4,53 @@ keywords: compose, orchestration, install, installation, docker, documentation
 title: Install Docker Compose
 ---
 
-You can run Compose on macOS, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
+You can run Compose on macOS, Windows and 64-bit Linux.
 
-To install Compose, do the following:
+## Prerequisites
 
-1.  Install Docker Engine:
+Docker Compose relies on Docker Engine for any meaningful work, so make sure you
+have Docker Engine installed either locally or remote, depending on your setup.
 
-    * [Mac installation](/docker-for-mac/index.md){: target="_blank" class="_"}
+- On desktop systems like Docker for Mac and Windows, Docker Compose is
+included as part of those desktop installs. Skip down to [Install Compose on Mac or Windows systems](#install-compose-on-mac-or-windows-systems).
 
-    * [Windows installation](/docker-for-windows/index.md){: target="_blank" class="_"}
+- On Linux systems, first install the
+[Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
+for your OS as described on the Get Docker page, then come back here for
+instructions on installing [installing Compose on
+Linux](#install-compose-on-linux-systems).
 
-    * [Ubuntu installation](/engine/installation/linux/ubuntu.md){: target="_blank" class="_"}
+## Install Compose on Mac or Windows systems
 
-    * [Other systems](/engine/installation/index.md){: target="_blank" class="_"}
+**Docker for Mac**, **Docker for Windows**, and **Docker Toolbox**
+already include Compose along with other Docker apps, so most Mac
+and Windows users do not need to install Compose separately.
+Docker install instructions for these are here:
 
-2.  **[Docker for Mac](/docker-for-mac/install.md)**, **[Docker for Windows](/docker-for-windows/install.md)**, and **[Docker Toolbox](/toolbox/overview.md)** include Docker Compose, so most Mac and Windows users do not need to install Docker Compose separately.
+* [Get Docker for Mac](/docker-for-mac/install.md)
+* [Get Docker for Windows](/docker-for-windows/install.md)
+* [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
-    If you are running the Docker daemon and client directly on
-    **Microsoft Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install Docker Compose.
+**If you are running the Docker daemon and client directly on Microsoft
+Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
+Docker Compose. To do so, follow these steps:
 
-    To do this, start an "elevated" PowerShell (run it as administrator). Search
-    for PowerShell, right-click, and choose **Run as administrator**. When asked
-    if you want to allow this app to make changes to your device, click **Yes**.
+1.  Start an "elevated" PowerShell (run it as administrator).
 
-    Run the following command to download Docker Compose, replacing
-`$dockerComposeVersion` with the specific version of Compose you want to use:
+    Search for PowerShell, right-click, and choose
+    **Run as administrator**. When asked if you want to allow this app
+    to make changes to your device, click **Yes**.
+
+    In PowerShell, run the following command to download
+    Docker Compose, replacing `$dockerComposeVersion` with the specific
+    version of Compose you want to use:
 
     ```none
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
 
-    For example, to download Compose version {{ site.compose_current }}, the command is:
+    For example, to download Compose version {{ site.compose_current }},
+    the command is:
 
     ```none
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
@@ -50,31 +66,35 @@ To install Compose, do the following:
     on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
     {: .important}
 
-    Now, run the executable to install Compose.
+3.  Run the executable to install Compose.
 
-3.  On **Linux**, you can download the Docker Compose binary from the
-    [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
-    Follow the instructions from the link, which involve running the `curl` command in your terminal to download the binaries.
+## Install Compose on Linux systems
 
-    >  Got a "Permission denied" error?
-    >
-    If so, your `/usr/local/bin` directory probably isn't writable and
-    you'll need to install Compose as the superuser. Run `sudo -i`, then
-    run the download and install commands below, then `exit`.
+On **Linux**, you can download the Docker Compose binary from the [Compose
+repository release page on GitHub](https://github.com/docker/compose/releases){:
+target="_blank" class="_"}. Follow the instructions from the link, which involve
+running the `curl` command in your terminal to download the binaries. These step
+by step instructions are also included below.
 
-
-    Run this command to download Docker Compose, replacing
+1.  Run this command to download Docker Compose, replacing
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
     curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     ```
 
-    For example, to download Compose version {{site.compose_current}}, the command is:
+    For example, to download Compose version {{site.compose_current}}, the command
+    is:
 
     ```bash
     curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     ```
+
+    >  Got a "Permission denied" error?
+    >
+    If so, your `/usr/local/bin` directory probably isn't writable and
+    you'll need to install Compose as the superuser. Run `sudo -i`, then
+    run the download and install commands below, then `exit`.
 
     > Use the latest Compose release number in the download command.
     >
@@ -84,22 +104,22 @@ To install Compose, do the following:
     if needed, replace `$dockerComposeVersion` with the release number that
     you want. Compose releases are also available for direct download on
     the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank"
-class="_"}.
+    class="_"}.
     {: .important}
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options).
 
-5.  Apply executable permissions to the binary:
+2.  Apply executable permissions to the binary:
 
     ```bash
     sudo chmod +x /usr/local/bin/docker-compose
     ```
 
-6.  Optionally, install [command completion](completion.md) for the
+3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
 
-7.  Test the installation.
+4.  Test the installation.
 
     ```bash
     $ docker-compose --version
