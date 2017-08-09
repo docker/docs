@@ -23,7 +23,7 @@ Linux](#install-compose-on-linux-systems).
 
 **Docker for Mac**, **Docker for Windows**, and **Docker Toolbox**
 already include Compose along with other Docker apps, so most Mac
-and Windows users do not need to install Docker Compose separately.
+and Windows users do not need to install Compose separately.
 Docker install instructions for these are here:
 
 * [Get Docker for Mac](/docker-for-mac/install.md)
