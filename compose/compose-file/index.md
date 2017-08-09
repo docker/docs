@@ -1509,37 +1509,31 @@ files](#volumes-for-services-swarms-and-stack-files).
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. (See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.)
 
-This example shows a named volume (`db-data`) being used by the `postgres` service, and a mounted volume for a single service (under the `redis` service).
+This example shows a named volume (`db-data`) being used by the `postgres`
+service, and a mounted volume for a single service (under the `redis` service).
 
 ```none
-version: "3"
-
+version: "3.2"
 services:
-
   web:
-    nginx:alpine
+    image: nginx:alpine
     ports:
-    - "80:80"
-
-  postgres:
-    image: postgres:9.4
+      - "80:80"
     volumes:
-      - db-data:/var/lib/db
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./static
+        target: /opt/app/static
 
-  backup:
-    image: postgres:9.4
-    volumes:
-      - db-data:/var/lib/backup/data
-
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./data:/data
+networks:
+  webnet:
 
 volumes:
-  db-data:
+  mydata:
 ```
 
 #### Short syntax
