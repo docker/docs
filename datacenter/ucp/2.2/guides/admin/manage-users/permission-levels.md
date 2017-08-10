@@ -57,7 +57,7 @@ are listed on the **Create Role** page. For example, you can create a custom
 role that uses the node operations, `Schedule`, `Update`, and `View`, and you
 might give it a name like "Node Operator".
 
-![](../../images/custom-role.png)
+![](../../images/custom-role.png){: .with-border}
 
 You can give a role a global name, like "Remove Images", which might enable 
 the **Remove** and **Force Remove** operations for images. You can apply a

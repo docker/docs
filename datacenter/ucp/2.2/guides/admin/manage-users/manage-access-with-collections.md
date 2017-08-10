@@ -53,7 +53,12 @@ UCP provides a number of built-in collections.
 -  `/Shared/Legacy` - After updating from UCP 2.1, all legacy access control
    labels are stored here.
 
-![](../../images/collections-diagram.svg)
+![](../../images/collections-diagram.svg){: .with-border}
+
+This diagram shows the `/System` and `/Shared` collections that are created
+by UCP. User private collections are children of the `/Shared/private`
+collection. Also, an admin user has created a `/prod` collection and its
+`/webserver` child collection. 
 
 ## Default collections
 

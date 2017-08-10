@@ -21,7 +21,7 @@ complete this example.
 3.  Assign a worker node to the `/Prod` collection.
 4.  Grant the `Ops` teams access to its collection.
 
-![](../../images/isolate-nodes-diagram.svg)
+![](../../images/isolate-nodes-diagram.svg){: .with-border}
 
 ## Create a team
 
@@ -78,7 +78,7 @@ Move a worker node by changing the value of its access label key,
 > **Nodes must be in either the shared or system collection without an advanced license.**
 > [Get a Docker EE Advanced license](https://www.docker.com/pricing).
 
-![](../../images/isolate-nodes-1.png)
+![](../../images/isolate-nodes-1.png){: .with-border}
 
 ## Grant access for a team
 
@@ -116,7 +116,7 @@ The same steps apply for the nodes in the `/Prod` collection.
 7.  Click **Create** to grant the Ops team `Scheduler` access to the nodes in the
     `/Prod` collection. 
 
-![](../../images/isolate-nodes-2.png)
+![](../../images/isolate-nodes-2.png){: .with-border}
 
 ## Deploy a service as a team member
 
@@ -149,13 +149,13 @@ All resources are deployed under the user's default collection,
 4.  Click the **NGINX** container, and in the details pane, confirm that its
     **Collection** is **/Prod/Webserver**.
 
-    ![](../../images/isolate-nodes-3.png)
+    ![](../../images/isolate-nodes-3.png){: .with-border}
 
 5.  Click **Inspect Resource**, and in the dropdown, select **Nodes**.
 6.  Click the node, and in the details pane, confirm that its **Collection**
     is **/Prod**.
 
-    ![](../../images/isolate-nodes-4.png)
+    ![](../../images/isolate-nodes-4.png){: .with-border}
 
 ## Alternative: Use a grant instead of the default collection
 
