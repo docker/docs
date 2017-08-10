@@ -65,8 +65,8 @@ This procedure is essentially identical on SLES and Ubuntu.
     the contents of `/var/lib/docker/`:
 
     ```bash
-    $ sudo cp -au /var/lib/docker /var/lib/docker.bk
-    $ sudo rm -rf /var/lib/docker/*
+    $ sudo mv /var/lib/docker /var/lib/docker.bk
+    $ sudo mkdir  /var/lib/docker/
     ```
 
 3.  Format your dedicated block device or devices as a Btrfs filesystem. This
