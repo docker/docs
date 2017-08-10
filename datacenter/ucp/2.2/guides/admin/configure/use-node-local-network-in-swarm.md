@@ -17,17 +17,8 @@ as attachable, you can attach containers.
 ## Use UCP to create node-specific networks
 
 Always use UCP to create node-specific networks. You can use the UCP web UI 
-or the CLI (with an admin bundle), but don't side-band to the Docker engines
-directly, otherwise your networks may be mislabelled and become inaccessible.
-
-When you create a config network *without* UCP, you `ssh` to each node in the
-swarm, and `docker network create --config-only ...` for each back-end network.
-Then, on a manager node, you create the central network once, with the
-`--config-from` option.
-
-Don't do this when you're using UCP. You must create the node-specific networks
-through the UCP web UI or CLI. In either case, you should create all of the
-config-only networks before you create the config-from network.
+or the CLI (with an admin bundle). If you create the networks without UCP,
+the networks won't have the right access labels and won't be available in UCP.
 
 ## Create a MAC VLAN network
 
@@ -36,6 +27,8 @@ config-only networks before you create the config-from network.
 3. Name the network "macvlan".
 4. In the **Driver** dropdown,. select **Macvlan**.
 5. In the **Macvlan Configure** section, select  the configuration option.
+   Create all of the config-only networks before you create the config-from
+   network.
 
    - **Config Only**: Prefix the `config-only` network name with a node hostname
    prefix, like `node1/my-cfg-network`, `node2/my-cfg-network`, *etc*. This is
