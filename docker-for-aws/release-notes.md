@@ -1,7 +1,7 @@
 ---
 description: Release notes
 keywords: aws, amazon, iaas, release, edge, stable
-title: Docker for AWS Release Notes
+title: Docker for AWS release notes
 ---
 
 {% include d4a_buttons.md %}
