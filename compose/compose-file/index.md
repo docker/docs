@@ -1545,12 +1545,12 @@ volumes:
 
 > **Tips**:
 >
-> The visualizer service in the above example is borrowed from the
+> * The visualizer service in the above example is borrowed from the
 > [Get Started tutorial](/get-started/index,nd) and just used here
 > to demonstrate mounted volumes. It is explained in [Part
 > 5](/get-started/part5.md#add-a-new-service-and-redeploy) of that topic.
 >
-> See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
+> * See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
 > Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 
