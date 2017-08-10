@@ -38,7 +38,7 @@ to use labels as a mechanism for automation.
 
 - Do not use a domain in your label key without the domain owner's permission.
 
-- The `com.docker.*`, `io.docker.*` and `org.dockerproject.*` namespaces are
+- The `com.docker.*`, `io.docker.*`, and `org.dockerproject.*` namespaces are
   reserved by Docker for internal use.
 
 - Label keys should begin and end with a lower-case letter and should only
@@ -64,7 +64,7 @@ Since Docker does not deserialize the value, you cannot treat a JSON or XML
 document as a nested structure when querying or filtering by label value unless
 you build this functionality into third-party tooling.
 
-# Managing labels on objects
+# Manage labels on objects
 
 Each type of object with support for labels has mechanisms for adding and
 managing them and using them as they relate to that type of object. These links
