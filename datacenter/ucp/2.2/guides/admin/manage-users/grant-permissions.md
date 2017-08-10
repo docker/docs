@@ -13,7 +13,7 @@ to a set of resources (collection). Each grant is a 1:1:1 mapping of
 subject, role, collection. For example, you can grant the "Prod Team" 
 "Restricted Control" permissions for the "/Production" collection.
 
-![](../../images/ucp-grant-model.png)
+![](../../images/ucp-grant-model.png){: .with-border}
 
 The usual workflow for creating grants has four steps.
 
@@ -39,3 +39,7 @@ grants. Administrators create grants on the **Manage Grants** page.
 By default, all new users are placed in the `docker-datacenter` organization.
 If you want to apply a grant to all UCP users, create a grant with the
 `docker-datacenter` org as a subject.
+
+## Where to go next
+
+- [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
