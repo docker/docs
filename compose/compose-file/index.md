@@ -1510,7 +1510,11 @@ files](#volumes-for-services-swarms-and-stack-files).
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 This example shows a named volume (`mydata`) being used by the `web` service,
-and a bind mount defined for a single service (first path under `db` service `volumes`). The second path under `db` service `volumes` (starting with `dbdata`) uses the old string format for mounting a named volume.
+and a bind mount defined for a single service (first path under `db` service
+`volumes`). The `db` service also uses a named volume called `dbdata` (second
+path under `db` service `volumes`), but defines it using the old string format
+for mounting a named volume. Named volumes must be listed under the top-level
+`volumes` key, as shown.
 
 ```none
 version: "3.2"
@@ -1533,21 +1537,12 @@ services:
       - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
       - "dbdata:/var/lib/postgresql/data"
 
-networks:
-  webnet:
-
 volumes:
   mydata:
+  dbdata:
 ```
 
-> **Tips**:
->
-> * The visualizer service in the above example is borrowed from the
-> [Get Started tutorial](/get-started/index,nd) and just used here
-> to demonstrate mounted volumes. It is explained in [Part
-> 5](/get-started/part5.md#add-a-new-service-and-redeploy) of that topic.
->
-> * See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
+> **Note**: See [Use Volumes](/engine/admin/volumes/volumes.md) and [Volume
 > Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 
