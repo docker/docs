@@ -39,7 +39,7 @@ must go one level up in the hierarchy of a distributed application: the
 - **Services** (you are here)
 - Container (covered in [part 2](part2.md))
 
-## Understand services
+## About services
 
 In a distributed application, different pieces of the app are called "services."
 For example, if you imagine a video sharing site, it probably includes a service
