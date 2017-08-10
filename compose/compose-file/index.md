@@ -1510,7 +1510,7 @@ files](#volumes-for-services-swarms-and-stack-files).
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 This example shows a named volume (`mydata`) being used by the `web` service,
-and a mounted volume for a single service (under the `visualizer` service).
+and a bind mount defined for a single service (under the `visualizer` service).
 
 ```none
 version: "3.2"
