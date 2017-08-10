@@ -1,6 +1,6 @@
 ---
 description: How to network Docker containers.
-keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+keywords: Examples, Usage, volume, docker, documentation, user guide, data, volumes
 redirect_from:
 - /engine/userguide/containers/networkigncontainers/
 - /engine/userguide/networkigncontainers/
@@ -80,11 +80,11 @@ $ docker network inspect bridge
 ]
 ```
 
-You can remove a container from a network by disconnecting the container. To do this, you supply both the network name and the container name. You can also use the container id. In this example, though, the name is faster.
+You can remove a container from a network by disconnecting the container. To do this, you supply both the network name and the container name. You can also use the container ID. In this example, though, the name is faster.
 
     $ docker network disconnect bridge networktest
 
-While you can disconnect a container from a network, you cannot remove the  builtin `bridge` network named `bridge`. Networks are natural ways to isolate containers from other containers or other networks. So, as you get more experienced with Docker, you'll want to create your own networks.
+While you can disconnect a container from a network, you cannot remove the builtin `bridge` network named `bridge`. Networks are natural ways to isolate containers from other containers or other networks. So, as you get more experienced with Docker, you'll want to create your own networks.
 
 ## Create your own bridge network
 
@@ -190,7 +190,7 @@ Docker networking allows you to attach a container to as many networks as you li
 
 ![bridge3](bridge3.png)
 
-Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP Address.
+Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
 
     $ docker exec -it db bash
 
