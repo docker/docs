@@ -24,6 +24,8 @@ container's writable layer, because using a volume does not increase the size of
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
+![volumes on the Docker host](images/types-of-mounts-volume.png)
+
 If your container generates non-persistent state data, consider using a
 [tmpfs mount](tmpfs.md) to avoid storing the data anywhere permanently, and to
 increase the container's performance by avoiding writing into the container's
