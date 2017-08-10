@@ -223,4 +223,3 @@ Restart Docker for the changes to take effect. After restarting, run
 * [`overlay` and `overlay2` storage drivers in practice](overlayfs-driver.md)
 * [`btrfs` storage driver in practice](btrfs-driver.md)
 * [`zfs` storage driver in practice](zfs-driver.md)
-* [Device Mapper storage driver in practice](device-mapper-driver.md)
