@@ -99,7 +99,7 @@ the reason each syscall is blocked rather than white-listed.
 | `process_vm_writev` | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
 | `ptrace`            | Tracing/profiling syscall, which could leak a lot of information on the host. Already blocked by dropping `CAP_PTRACE`. |
 | `query_module`      | Deny manipulation and functions on kernel modules. Obsolete.                                                  |
-| `quotactl`          | Quota syscall which could let containers disable their own resource limits or process accounting. Also gated by `CAP_SYS_ADMIN`. |
+| `quotactl`          | Manipulates per-user, per-group, and per-project limits on filesystem quotas. Already gated by `CAP_SYS_ADMIN`. |
 | `reboot`            | Don't let containers reboot the host. Also gated by `CAP_SYS_BOOT`.                                           |
 | `request_key`       | Prevent containers from using the kernel keyring, which is not namespaced.                                    |
 | `set_mempolicy`     | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                       |
