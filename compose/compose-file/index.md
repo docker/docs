@@ -1510,15 +1510,13 @@ files](#volumes-for-services-swarms-and-stack-files).
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 This example shows a named volume (`mydata`) being used by the `web` service,
-and a bind mount defined for a single service (under the `visualizer` service).
+and a bind mount defined for a single service (first path under `db` service `volumes`). The second path under `db` service `volumes` (starting with `dbdata`) uses the old string format for mounting a named volume.
 
 ```none
 version: "3.2"
 services:
   web:
     image: nginx:alpine
-    ports:
-      - "80:80"
     volumes:
       - type: volume
         source: mydata
@@ -1529,12 +1527,11 @@ services:
         source: ./static
         target: /opt/app/static
 
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
+  db:
+    image: postgres:latest
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
 
 networks:
   webnet:
