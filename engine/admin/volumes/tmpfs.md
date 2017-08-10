@@ -20,6 +20,8 @@ machine's memory (or swap, if memory is low). When the container stops, the
 `tmpfs` mount is removed. If a container is committed, the `tmpfs` mount is not
 saved.
 
+![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
+
 ## Choosing the --tmpfs or --mount flag
 
 Originally, the `--tmpfs` flag was used for standalone containers and
