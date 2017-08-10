@@ -32,7 +32,7 @@ Docker supports some special template markup you can use when specifying a tag's
 For example, specifying a {% raw %}`--log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"`{% endraw %} value yields `syslog` log lines like:
 
 ```none
-Aug  7 18:33:19 HOSTNAME docker/hello-world/foobar/5790672ab6a0[9103]: Hello from Docker.
+Aug  7 18:33:19 HOSTNAME hello-world/foobar/5790672ab6a0[9103]: Hello from Docker.
 ```
 
 At startup time, the system sets the `container_name` field and {% raw %}`{{.Name}}`{% endraw %} in
@@ -59,6 +59,6 @@ $ docker run -it --rm \
 ```
 
 ```none
-Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: + exec app
-Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
+Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: + exec app
+Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
 ```
