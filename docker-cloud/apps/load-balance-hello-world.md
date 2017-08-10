@@ -48,7 +48,7 @@ ready to continue and launch our web service.
 
 1. Click **Services** in the left hand menu, and click **Create**.
 
-3. Click the **rocket icon** and select the **dockercloud/hello-world** image.
+3. Click the **rocket icon** at the top of page, and select the **dockercloud/hello-world** image.
 
     ![](images/lbd-hello-world-jumpstart.png)
 
@@ -96,8 +96,7 @@ browser and view the **dockercloud/hello-world** web page. Note the hostname fo
 
     ![](images/lbd-hostname-1.png)
 
-3. Click other endpoints and check the hostnames. You'll see different hostnames
-which match the container name (web-2, web-3, and so on).
+3. Click other endpoints and check the hostnames. You'll see different hostnames which match the container name (web-2, web-3, and so on).
 
 ## Launch the load balancer
 
@@ -193,7 +192,3 @@ Docker Cloud automatically assigns a DNS endpoint to all services. This endpoint
 routes to all of the containers of that service. You can use the DNS endpoint to
 load balance your load balancer. To learn more, read up on [service
 links](service-links.md).
-
-You can try this by pointing your web browser to
-*servicename.username.svc.dockerapp.io* or using *dig* or *nslookup* to see how
-the service endpoint resolves.
