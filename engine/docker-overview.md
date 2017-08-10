@@ -1,6 +1,6 @@
 ---
 description: Docker explained in depth
-keywords: docker, introduction, documentation, about, technology,  understanding
+keywords: docker, introduction, documentation, about, technology, understanding
 redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
@@ -69,7 +69,7 @@ standardized environments using local containers which provide your applications
 and services. Containers are great for continuous integration and continuous
 development (CI/CD) workflows.
 
-Consider the following example scenario.
+Consider the following example scenario:
 
 - Your developers write code locally and share their work with their colleagues
   using Docker containers.
@@ -175,8 +175,8 @@ or other underlying subsystems are from other containers or from the host
 machine.
 
 A container is defined by its image as well as any configuration options you
-provide to it when you create or run it.  When a container stops, any changes to
-its state that are not stored in persistent storage disappears.
+provide to it when you create or run it. When a container stops, any changes to
+its state that are not stored in persistent storage disappear.
 
 ##### Example `docker run` command
 
@@ -230,7 +230,7 @@ features of the Linux kernel to deliver its functionality.
 
 ### Namespaces
 Docker uses a technology called `namespaces` to provide the isolated workspace
-called the *container*.  When you run a container, Docker creates a set of
+called the *container*. When you run a container, Docker creates a set of
 *namespaces* for that container.
 
 These namespaces provide a layer of isolation. Each aspect of a container runs
@@ -267,8 +267,8 @@ the future, Docker may support other container formats by integrating with
 technologies such as BSD Jails or Solaris Zones.
 
 ## Next steps
-- Read about [Installing Docker Engine](installation/index.md#installation).
-- Get hands-on experience with the [Get Started With Docker](getstarted/index.md)
+- Read about [Install Docker Engine](installation/index.md#installation).
+- Get hands-on experience with the [Get started with Docker](getstarted/index.md)
     tutorial.
 - Check out examples and deep dive topics in the
-    [Docker Engine User Guide](userguide/index.md).
+    [Docker Engine user guide](userguide/index.md).
