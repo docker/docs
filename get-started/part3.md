@@ -95,7 +95,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 - Pull [the image we uploaded in step 2](part2.md) from the registry.
 
-- Run five instances of that image as a service
+- Run 5 instances of that image as a service
   called `web`, limiting each one to use, at most, 10% of the CPU (across all
   cores), and 50MB of RAM.
 
@@ -146,7 +146,7 @@ Now let's run it. You have to give your app a name. Here, it is set to
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
-See a list of the five containers you just launched:
+See a list of the 5 containers you just launched:
 
 ```shell
 docker stack ps getstartedlab
@@ -155,7 +155,7 @@ docker stack ps getstartedlab
 You can run `curl http://localhost` several times in a row, or go to that URL in
 your browser and hit refresh a few times. Either way, you'll see the container
 ID change, demonstrating the load-balancing; with each request, one of
-the five replicas is chosen, in a round-robin fashion, to respond.
+the 5 replicas is chosen, in a round-robin fashion, to respond.
 
 
 >**Note**: At this stage, it may take up to 30 seconds for the containers to respond to HTTP
