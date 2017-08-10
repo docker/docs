@@ -57,7 +57,7 @@ GitHub Repo:
  - [Debian / Ubuntu](
    https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
 
-## Creating a simple parent image using scratch
+## Create a simple parent image using scratch
 
 You can use Docker's reserved, minimal image, `scratch`, as a starting point for building containers. Using the `scratch` "image" signals to the build process that you want the next command in the `Dockerfile` to be the first filesystem layer in your image.
 
@@ -67,9 +67,10 @@ While `scratch` appears in Docker's repository on the hub, you can't pull it, ru
     ADD hello /
     CMD ["/hello"]
 
-Assuming you built the "hello" executable example [from the Docker GitHub example C-source code](https://github.com/docker-library/hello-world/blob/master/hello.c), and you compiled it with the `-static` flag, you can then build this Docker image using: `docker build --tag hello .`  
+Assuming you built the "hello" executable example [from the Docker GitHub example C-source code](https://github.com/docker-library/hello-world/blob/master/hello.c), and you compiled it with the `-static` flag, you can then build this Docker image using: `docker build --tag hello .`
 
-NOTE: Because Docker for Mac and Docker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up with a Linux binary. Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
+> **Note**: Because Docker for Mac and Docker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up
+> with a Linux binary. Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
 
     $ docker run --rm -it -v $PWD:/build ubuntu:16.04
     container# apt-get update && apt-get install build-essential
