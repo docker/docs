@@ -84,10 +84,32 @@ are fully synced.
 
 Create a grant to manage the team's permissions.
 [Learn how to grant permissions to users based on roles](grant-permissions.md).
+In this example, you'll create a collection for the "Data Center" team, 
+where they can deploy services and resources, and you'll create a grant that
+gives the team permission to access the collection.
+
+![](../../images/team-grant-diagram.svg){: .with-border}
+
+1.  Navigate to the **Organizations & Teams** page.
+2.  Select **docker-datacenter**, and click **Create Team**. Name the team
+    "Data Center", and click **Create**.
+3.  Navigate to the **Collections** page.
+4.  Click **Create Collection**, name the collection "Data Center Resources",
+    and click **Create**.
+5.  Navigate to the **Grants** page, and click **Create Grant**.
+6.  Find **Swarm** in the collections list, and click **View Children**.
+7.  Find **Data Center Resources**, and click **Select Collection**.
+8.  In the left pane, click **Roles** and in the **Role** dropdown, select
+    **Restricted Control**.   
+9.  In the left pane, click **Subjects** and select the **Organizations**
+    subject type. 
+10. In the **Organization** dropdown, select **docker-datacenter**, and in the
+   **Teams** dropdown, select **Data Center**.
+11. Click **Create** to create the grant. 
 
 ![](../../images/create-and-manage-teams-4.png){: .with-border}
 
-In the example above, members of the `Data Center` team have
+In this example, you gave members of the `Data Center` team
 `Restricted Control` permissions to create and edit resources in
 the `Data Center Resources` collection.
 
