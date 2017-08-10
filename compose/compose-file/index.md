@@ -1506,41 +1506,45 @@ files](#volumes-for-services-swarms-and-stack-files).
 
 > **Note**: The top-level
 > [volumes](#volume-configuration-reference) key defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. (See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for general information on volumes.)
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
+Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
-This example shows a named volume (`db-data`) being used by the `postgres` service, and a mounted volume for a single service (under the `redis` service).
+This example shows a named volume (`mydata`) being used by the `web` service,
+and a bind mount defined for a single service (first path under `db` service
+`volumes`). The `db` service also uses a named volume called `dbdata` (second
+path under `db` service `volumes`), but defines it using the old string format
+for mounting a named volume. Named volumes must be listed under the top-level
+`volumes` key, as shown.
 
 ```none
-version: "3"
-
+version: "3.2"
 services:
-
   web:
-    nginx:alpine
-    ports:
-    - "80:80"
-
-  postgres:
-    image: postgres:9.4
+    image: nginx:alpine
     volumes:
-      - db-data:/var/lib/db
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./static
+        target: /opt/app/static
 
-  backup:
-    image: postgres:9.4
+  db:
+    image: postgres:latest
     volumes:
-      - db-data:/var/lib/backup/data
-
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./data:/data
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
 
 volumes:
-  db-data:
+  mydata:
+  dbdata:
 ```
+
+> **Note**: See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
+> Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+
 
 #### Short syntax
 
@@ -1741,7 +1745,7 @@ easily retrieved and inspected using the docker command line or API. See the
 [docker volume](/engine/reference/commandline/volume_create.md) subcommand
 documentation for more information.
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and [Volume
+See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
 Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 Here's an example of a two-service setup where a database's data directory is
