@@ -39,7 +39,7 @@ must go one level up in the hierarchy of a distributed application: the
 - **Services** (you are here)
 - Container (covered in [part 2](part2.md))
 
-## Understanding services
+## About services
 
 In a distributed application, different pieces of the app are called "services."
 For example, if you imagine a video sharing site, it probably includes a service
@@ -57,7 +57,7 @@ service in the process.
 Luckily it's very easy to define, run, and scale services with the Docker
 platform -- just write a `docker-compose.yml` file.
 
-## Your first `docker-compose.yml` File
+## Your first `docker-compose.yml` file
 
 A `docker-compose.yml` file is a YAML file that defines how Docker containers
 should behave in production.
