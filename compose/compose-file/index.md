@@ -692,7 +692,7 @@ updates.
 
 - `parallelism`: The number of containers to update at a time.
 - `delay`: The time to wait between updating a group of containers.
-- `failure_action`: What to do if an update fails. One of `continue` or `pause`
+- `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause`
   (default: `pause`).
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
