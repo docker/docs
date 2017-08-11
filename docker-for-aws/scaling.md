@@ -1,7 +1,7 @@
 ---
 description: Scaling your stack
 keywords: aws, amazon, iaas, tutorial
-title: Modifying Docker install on AWS
+title: Modify Docker install on AWS
 ---
 
 ## Scaling workers
