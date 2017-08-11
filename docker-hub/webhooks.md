@@ -9,7 +9,7 @@ cause an action in another application in response to an event in the
 repository. Docker Hub webhooks fire when an image is built in, or a new tag
 added to, your automated build repository.
 
-Configure webhooks on https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settings/webhooks/.
+Configure webhooks on `https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settings/webhooks/`.
 
 With your webhook, you specify a target URL and a JSON payload to deliver. The
 example webhook below generates an HTTP POST that delivers a JSON payload:
