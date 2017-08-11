@@ -1,7 +1,7 @@
 ---
 description: Frequently asked questions
 keywords: aws faqs
-title: Docker for AWS Frequently asked questions (FAQ)
+title: Docker for AWS frequently asked questions (FAQ)
 toc_max: 2
 ---
 
