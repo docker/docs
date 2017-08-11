@@ -55,7 +55,7 @@ mode](/docker-cloud/cloud-swarm/index.md).
 If you are running Docker Cloud in standard mode, follow instructions below to
 link your service provider to Docker Cloud.
 
-* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm/){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'AWS');"}
+* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'AWS');"}
 * [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'DigitalOcean');"}
 * [Microsoft Azure setup guide](/docker-cloud/infrastructure/link-azure.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Azure');"}
 * [Packet setup guide](/docker-cloud/infrastructure/link-packet.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Cloud', 'Packet');"}
