@@ -18,8 +18,8 @@ For Docker releases prior to 17.03.0, see
 > of the `ADD` instruction of Dockerfile when referencing a remote `.tar.gz` file. The issue will be
 > fixed in Docker 17.06.1.
 
-> **Note**: Starting with Docker CE 17.06, Ubuntu packages are also available for IBM z Systems
-> using the s390x architecture.
+> **Note**: Starting with Docker CE 17.06, Ubuntu packages are also available
+> for IBM Z using the s390x architecture.
 
 > **Note**: Docker 17.06 by default disables communication with legacy (v1)
 > registries. If you require interaction with registries that have not yet
