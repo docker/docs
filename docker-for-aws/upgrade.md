@@ -1,7 +1,7 @@
 ---
 description: Upgrading your stack
 keywords: aws, amazon, iaas, tutorial
-title: Docker for AWS Upgrades
+title: Docker for AWS upgrades
 ---
 
 To upgrade, apply a new version of the AWS Cloudformation template that powers Docker for AWS. Depending on changes in the next version, an upgrade involves:
