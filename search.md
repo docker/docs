@@ -21,6 +21,7 @@ tree: false
 #gscb_a, .gscb_a { padding: 3px 0px 0px 0px !important;}
 .gsc-control-cse, .gsc-control-cse-en { padding: 0px !important; }
 .gsc-result-info { padding-bottom: 0px !important; }
+.gsc-adBlock { display: none; }
 </style>
 
 <div id="glossaryMatch"></div>
