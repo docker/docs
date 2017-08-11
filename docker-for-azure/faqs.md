@@ -1,7 +1,7 @@
 ---
 description: Frequently asked questions
 keywords: azure faqs
-title: Docker for Azure Frequently asked questions (FAQ)
+title: Docker for Azure frequently asked questions (FAQ)
 toc_max: 2
 ---
 
