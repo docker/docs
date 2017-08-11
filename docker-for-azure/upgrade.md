@@ -1,7 +1,7 @@
 ---
 description: Upgrading your stack
 keywords: azure, microsoft, iaas, tutorial
-title: Docker for Azure Upgrades
+title: Docker for Azure upgrades
 ---
 
 Docker for Azure supports upgrading from one version to the next within a specific channel. Upgrading across channels (for example, from `edge` to `stable` or `test` to `edge`) is not supported. To upgrade to a specific version, run the upgrade container corresponding to the target version for the upgrade. An upgrade of Docker for Azure involves:
