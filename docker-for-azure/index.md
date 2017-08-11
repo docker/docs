@@ -130,13 +130,21 @@ Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. Dur
 
 You can also invoke the Docker for Azure template from the [Azure CLI](https://docs.microsoft.com/cs-cz/cli/azure/install-azure-cli):
 
-The [Docker for Azure Template](https://download.docker.com/azure/stable/Docker.tmpl) provides default values for the amount and type of managers / worker nodes, but you'll need to provide some input like
+The [Docker for Azure Template](https://download.docker.com/azure/stable/Docker.tmpl) provides default values for the amount and type of managers / worker nodes, but you'll need to provide the following input :
 
 - AppID
 - AppSecret
 - Public SSH Key
 
-Here is an example of how to use the CLI. Make sure you populate all of the parameters and their values. It's important that the AppID / AppSecret that you obtained from the `docker4x/create-sp-azure` helper script matches the resource-group defined below:
+Below is an example of how to use the CLI. Make sure you populate all requested parameter values.
+
+The command below assumes there is a resource group called `docker-resource-group` present. This resource group can be created 
+
+- Via the Azure Portal web interface
+- Via the Azure CLI (`az group create --name docker-resource-group`)
+- Via the `docker4x/create-sp-azure` container mentioned above.
+
+If you use the AppID / AppSecret from the `docker4x/create-sp-azure` helper script, it's important it was created for the same resource-group.
 
 ```bash
 $ az group deployment create --resource-group docker-resource-group --name docker.template --template-uri https://download.docker.com/azure/stable/Docker.tmpl
