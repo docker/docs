@@ -12,11 +12,6 @@ includes everything you need to run Docker on Windows Server 2016.
 This topic describes pre-install considerations, and how to download and
 install Docker EE.
 
-> **Already have Docker EE for Windows?** If you already have Docker EE for
-Windows installed, and you're ready to get started, skip to
-[Get started with Docker for Windows](/docker-for-windows/index.md) for a quick
-tour of the command line, settings, and tools.
->
 >**Looking for Release Notes?** [Get release notes for all
 versions here](https://docs.docker.com/release-notes/) or subscribe to the
 [releases feed on the Docker Blog](http://blog.docker.com/category/engineering/docker-releases/).
