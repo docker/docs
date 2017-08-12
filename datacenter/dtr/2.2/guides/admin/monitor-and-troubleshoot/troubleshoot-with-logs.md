@@ -40,7 +40,7 @@ You can run this test with any overlay network, and any Docker image that has
 
 DTR uses RethinkDB for persisting data and replicating it across replicas.
 It might be helpful to connect directly to the RethinkDB instance running on a
-DTR replica to check the DTR internal state.
+DTR replica to check the DTR internal state. 
 
 Use SSH to log into a node that is running a DTR replica, and run the following
 command, replacing `$REPLICA_ID` by the ID of the DTR replica running on that
@@ -51,13 +51,46 @@ docker run -it --rm \
   --net dtr-ol \
   -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
   $REPLICA_ID
+>
 ```
-
-This starts an interactive prompt where you can run RethinkDB queries like:
+This container connects to the local DTR replica and launches a RethinkDB client 
+that can be used to inspect the contents of the DB. RethinkDB 
+stores data in different databases that contain multiple tables. The `rethinkcli`
+tool will launch an interactive prompt where you can run RethinkDB 
+queries as in the following example.
 
 ```none
+# List all the DBs in RethinkDB
+> r.dbList()
+[ 'dtr2',
+  'jobrunner',
+  'notaryserver',
+  'notarysigner',
+  'rethinkdb' ]
+
+# List the tables in the dtr2 db
+> r.db('dtr2').tableList()
+[ 'client_tokens',
+  'events',
+  'manifests',
+  'namespace_team_access',
+  'properties',
+  'repositories',
+  'repository_team_access',
+  'tags' ]
+  
+# List the entries in the repositories table
 > r.db('dtr2').table('repositories')
+[ { id: '19f1240a-08d8-4979-a898-6b0b5b2338d8',
+    name: 'my-test-repo',
+    namespaceAccountID: '924bf131-6213-43fa-a5ed-d73c7ccf392e',
+    pk: 'cf5e8bf1197e281c747f27e203e42e22721d5c0870b06dfb1060ad0970e99ada',
+    visibility: 'public' },
+
+...
 ```
+
+Note that indvidual DBs and tables may change in DTR from version to version, but `dbList()` and `tableList()` can always be used to explore the contents and data structure.
 
 [Learn more about RethinkDB queries](https://www.rethinkdb.com/docs/guide/javascript/).
 
