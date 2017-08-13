@@ -111,7 +111,7 @@ first one.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app \
+  --mount source="$(pwd)"/target,target=/app \
   nginx:latest
 ```
 
@@ -122,7 +122,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v $(pwd)/target:/app \
+  -v "$(pwd)"/target:/app \
   nginx:latest
 ```
 
@@ -237,7 +237,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app,readonly \
+  --mount source="$(pwd)"/target,target=/app,readonly \
   nginx:latest
 ```
 
@@ -248,7 +248,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v $(pwd)/target:/app:ro \
+  -v "$(pwd)"/target:/app:ro \
   nginx:latest
 ```
 
@@ -325,8 +325,8 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app \
-  --mount source=$(pwd)/target,target=/app2,readonly,bind-propagation=rslave \
+  --mount source="$(pwd)"/target,target=/app \
+  --mount source="$(pwd)"/target,target=/app2,readonly,bind-propagation=rslave \
   nginx:latest
 ```
 
@@ -337,8 +337,8 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v $(pwd)/target:/app \
-  -v $(pwd)/target:/app2:ro,rslave \
+  -v "$(pwd)"/target:/app \
+  -v "$(pwd)"/target:/app2:ro,rslave \
   nginx:latest
 ```
 
@@ -371,7 +371,7 @@ It is not possible to modify the selinux label using the `--mount` flag.
 $ docker run -d \
   -it \
   --name devtest \
-  -v $(pwd)/target:/app:z \
+  -v "$(pwd)"/target:/app:z \
   nginx:latest
 ```
 
@@ -412,7 +412,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,destination=/app,consistency=cached \
+  --mount source="$(pwd)"/target,destination=/app,consistency=cached \
   nginx:latest
 ```
 
@@ -423,7 +423,7 @@ $ docker run -d \
 $ docker run -d \
   -it \
   --name devtest \
-  -v $(pwd)/target:/app:cached \
+  -v "$(pwd)"/target:/app:cached \
   nginx:latest
 ```
 
