@@ -510,36 +510,38 @@ and the client connects directly to one of these. DNS round-robin is useful
 in cases where you want to use your own load balancer, or for Hybrid
 Windows and Linux applications.
 
-    version: "3.3"
-    services:
+```yaml
+version: "3.3"
 
-      wordpress:
-        image: wordpress
-        ports:
-          - 8080:80
-        networks:
-          - overlay
-        deploy:
-          mode: replicated
-          replicas: 2
-          endpoint_mode: vip
-
-      mysql:
-        image: mysql
-        volumes:
-           - db-data:/var/lib/mysql/data
-        networks:
-           - overlay
-        deploy:
-          mode: replicated
-          replicas: 2
-          endpoint_mode: dnsrr
-
-    volumes:
-      db-data:
-
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
     networks:
-      overlay:
+      - overlay
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: vip
+
+  mysql:
+    image: mysql
+    volumes:
+       - db-data:/var/lib/mysql/data
+    networks:
+       - overlay
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: dnsrr
+
+volumes:
+  db-data:
+
+networks:
+  overlay:
+```
 
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
 [docker service create](/engine/reference/commandline/service_create.md). For a
