@@ -267,8 +267,8 @@ the future, Docker may support other container formats by integrating with
 technologies such as BSD Jails or Solaris Zones.
 
 ## Next steps
-- Read about [Install Docker Engine](installation/index.md#installation).
-- Get hands-on experience with the [Get started with Docker](getstarted/index.md)
+- Read about [Installing Docker](installation/index.md#installation).
+- Get hands-on experience with the [Getting started with Docker](getstarted/index.md)
     tutorial.
 - Check out examples and deep dive topics in the
     [Docker Engine user guide](userguide/index.md).
