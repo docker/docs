@@ -8,7 +8,7 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.2.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release-notes/index.md) for this version.
+[release notes](../../release-notes/index.md) for this version.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -27,7 +27,7 @@ This can lead to misconfigurations that are difficult to troubleshoot.
 Before starting an upgrade, make sure that your swarm is healthy. If a problem
 occurs this makes it easier to find and troubleshoot any problems.
 
-[Create a backup](backups-and-disaster-recovery.md) of your swarm.
+[Create a backup](../backups-and-disaster-recovery.md) of your swarm.
 This allows you to recover if something goes wrong during the upgrade process.
 
 ## Upgrade Docker Engine
@@ -99,4 +99,4 @@ all the nodes managed by UCP are healthy.
 
 ## Where to go next
 
-* [UCP release notes](../release-notes/index.md)
+* [UCP release notes](../../release-notes/index.md)
