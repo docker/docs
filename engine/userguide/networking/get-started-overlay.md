@@ -6,7 +6,7 @@ title: Get started with multi-host networking
 
 This article uses an example to explain the basics of creating a multi-host
 network. Docker Engine supports multi-host networking out-of-the-box through the
-`overlay` network driver.  Unlike `bridge` networks, overlay networks require
+`overlay` network driver. Unlike `bridge` networks, overlay networks require
 some pre-existing conditions before you can create one:
 
 * [Docker Engine running in swarm mode](#overlay-networking-and-swarm-mode)
@@ -51,7 +51,7 @@ See also [Attach services to an overlay network](../../swarm/networking.md).
 
 ## Overlay networking with an external key-value store
 
-To use an Docker engine with an external key-value store, you need the
+To use a Docker engine with an external key-value store, you need the
 following:
 
 * Access to the key-value store. Docker supports Consul, Etcd, and ZooKeeper
@@ -209,7 +209,7 @@ To create an overlay network
 
 	You only need to create the network on a single host in the cluster. In this case, you used the swarm master but you could easily have run it on any host in the cluster.
 
-> **Note** : It is highly recommended to use the `--subnet` option when creating
+> **Note**: It is highly recommended to use the `--subnet` option when creating
 > a network. If the `--subnet` is not specified, the docker daemon automatically
 > chooses and assigns a subnet for the network and it could overlap with another subnet
 > in your infrastructure that is not managed by docker. Such overlaps can cause
