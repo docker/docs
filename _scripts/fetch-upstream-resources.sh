@@ -40,6 +40,8 @@ do
   echo repo: "${justcurdir}" >> ${curdir}/front-matter.txt
   echo layout: docs >> ${curdir}/front-matter.txt
   echo permalink: /samples/library/${justcurdir}/ >> ${curdir}/front-matter.txt
+  echo redirect_from: >> ${curdir}/front-matter.txt
+  echo - /samples/${curdir} >> ${curdir}/front-matter.txt
   echo description: \| >> ${curdir}/front-matter.txt
   echo \ \ ${shortrm} >> ${curdir}/front-matter.txt
   echo --- >> ${curdir}/front-matter.txt
