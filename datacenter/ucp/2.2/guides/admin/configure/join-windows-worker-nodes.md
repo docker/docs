@@ -34,7 +34,7 @@ UCP.
 > Access Docker EE for Beta testing
 >
 > For Beta testing, install the binaries in the zip archive at
-> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip),
+> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc4.zip),
 > because you need version 17.06-ee or higher to join a UCP swarm.
 
 ## Configure the Windows node
