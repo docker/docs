@@ -29,10 +29,9 @@ production-ready application.
 | Product | Description |
 | ------- | ----------- |
 | [Docker Cloud](/docker-cloud/) | Manages multi-container applications and host resources running on a cloud provider (such as Amazon Web Services) |
-| [Universal Control Plane (UCP)](/datacenter/ucp/2.1/guides/) | Manages multi-container applications on a custom host installation (on-premise, on a cloud provider) |
-| [Docker Trusted Registry (DTR)](/datacenter/dtr/2.2/guides/) | Runs a private repository of container images and makes them available to a UCP instance |
+| [Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) | Manages your Docker swarm on-premise, or on the cloud |
+| [Docker Trusted Registry (DTR)](/datacenter/dtr/2.3/guides/) | Securely stores and scans your Docker images |
 | [Docker Store](/docker-store/) | Public, Docker-hosted registry that distributes free and paid images from various publishers |
-| [CS Docker Engine](/cs-engine/install) | The commercially-supported version of Docker that excludes experimental features and includes customer support |
 
 ## Superseded products and tools
 
