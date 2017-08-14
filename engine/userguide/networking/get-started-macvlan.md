@@ -18,10 +18,10 @@ Macvlan offers a number of unique features and plenty of room for further innova
 
 - Kernel requirements:
 
- - To check your current kernel version, use `uname -r` to display your kernel version
- - Macvlan Linux kernel v3.9–3.19 and 4.0+
+   - To check your current kernel version, use `uname -r` to display your kernel version
+   - Macvlan Linux kernel v3.9–3.19 and 4.0+
 
-## Macvlan Bridge Mode Example Usage
+## Macvlan Bridge Mode example usage
 
 Macvlan Bridge mode has a unique MAC address per container used to track MAC to port mappings by the Docker host.
 
@@ -31,7 +31,7 @@ Macvlan Bridge mode has a unique MAC address per container used to track MAC to 
 
 - Each Macvlan Bridge mode Docker network is isolated from one another and there can be only one network attached to a parent interface at a time. There is a theoretical limit of 4,094 sub-interfaces per host adaptor that a Docker network could be attached to.
 
-- Any container inside the same subnet can talk to any other container in the same network without a  gateway in `macvlan bridge`.
+- Any container inside the same subnet can talk to any other container in the same network without a gateway in `macvlan bridge`.
 
 - The same `docker network` commands apply to the vlan drivers.
 
@@ -41,7 +41,7 @@ In the following example, `eth0` on the docker host has an IP on the `172.16.86.
 
 ![Simple Macvlan Bridge Mode Example](images/macvlan_bridge_simple.svg)
 
-**Note** For Macvlan bridge mode the subnet values need to match the NIC's interface of the Docker host. For example, Use the same subnet and gateway of the Docker host ethernet interface that is specified by the `-o parent=` option.
+> **Note**: For Macvlan bridge mode the subnet values need to match the NIC's interface of the Docker host. For example, Use the same subnet and gateway of the Docker host ethernet interface that is specified by the `-o parent=` option.
 
 - The parent interface used in this example is `eth0` and it is on the subnet `172.16.86.0/24`. The containers in the `docker network` will also need to be on this same subnet as the parent `-o parent=`. The gateway is an external router on the network, not any ip masquerading or any other local proxy.
 
@@ -73,7 +73,7 @@ ping -c 4 172.16.86.10
 
 ```
 
- Take a look at the containers ip and routing table:
+ Take a look at the containers IP and routing table:
 
 ```
 
@@ -122,11 +122,11 @@ The network can then be deleted with:
 docker network rm <network_name or id>
 ```
 
-- **Note**: In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
+> **Note**: In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
 
 For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
 
-## Macvlan 802.1q Trunk Bridge Mode Example Usage
+## Macvlan 802.1q Trunk Bridge Mode example usage
 
 VLANs (Virtual Local Area Networks) have long been a primary means of virtualizing data center networks and are still in virtually all existing networks today. VLANs work by tagging a Layer-2 isolation domain with a 12-bit identifier ranging from 1-4094 that is inserted into a packet header that enables a logical grouping of a single or multiple subnets of both IPv4 and IPv6. It is very common for network operators to separate traffic using VLANs based on a subnet(s) function or security profile such as `web`, `db` or any other isolation needs.
 
