@@ -6,8 +6,8 @@
 - product: "ucp"
   version: "2.2"
   tar-files:
-    - description: "2.2.0-beta 1 Linux"
-      url: https://packages.docker.com/caas/ucp_images_2.2.0-beta1.tar.gz
+    - description: "2.2.0-beta 2 Linux"
+      url: https://packages.docker.com/caas/ucp_images_2.2.0-beta2.tar.gz
     - description: "2.2.0-beta 1 IBM Z"
       url: https://packages.docker.com/caas/ucp_images_s390x_2.2.0-beta1.tar.gz
     - description: "2.2.0-beta 1 Windows"
