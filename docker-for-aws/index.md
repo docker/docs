@@ -5,6 +5,7 @@ title: Docker for AWS setup & prerequisites
 redirect_from:
 - /engine/installation/cloud/cloud-ex-aws/
 - /engine/installation/amazon/
+- /datacenter/install/aws/
 ---
 
 {% include d4a_buttons.md %}

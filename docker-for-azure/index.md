@@ -4,6 +4,7 @@ keywords: azure, microsoft, iaas, tutorial
 title: Docker for Azure Setup & Prerequisites
 redirect_from:
 - /engine/installation/azure/
+- /datacenter/install/azure/
 ---
 
 {% include d4a_buttons.md %}
