@@ -26,11 +26,11 @@ Docker EE.
 
 > Access Docker EE for Beta testing
 >
-> For the Beta release, install Docker EE version 17.06.1-ee-1-rc1. The
+> For the Beta release, install Docker EE version 17.06.1-ee-1-rc4. The
 > packages are available in the `test` channel of the Docker Store repo,
 > and your Beta license gives you access to this channel. For Windows
 > worker nodes, download the zip archive at
-> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc1.zip).
+> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc4.zip).
 
 Make sure you install the same Docker EE version on all the nodes. Also,
 if you're creating virtual machine templates with Docker EE already
