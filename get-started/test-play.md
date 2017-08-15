@@ -1,18 +1,15 @@
 ---
-title: "Play with Docker"
+title: "Vicky's Play with Docker"
 keywords: get started
 description: Play with Docker tests
 ---
+{% include pwd.html %}
 
 ## Play with Docker Test 1
 
 Here is a play with Docker terminal.
-
-<div id="myTerm" style="width 500px; height: 500px;"></div>
-<script src="https://rawgit.com/play-with-docker/sdk/master/dist/pwd.js"></script>
-<script>
-    pwd.newSession([{selector: '#myTerm'}]);
-</script>
+<div id="term1" class="term1" style="height: 300px; width: 400px; position: fixed; right: 20px; top: 100px; z-index:100;"></div>
+<div id="term2" class="term2" style="height: 300px; width: 400px; position: fixed; right: 20px; top: 425px; z-index:100;"></div>
 
 
 ## Play with Docker Test 2
@@ -20,14 +17,14 @@ Here is a play with Docker terminal.
 ```.term1
 docker container run hello-world
 ```
+```.term2
+docker container run hello-world
 ```
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-03f4658f8b78: Pull complete
-a3ed95caeb02: Pull complete
-Digest: sha256:8be990ef2aeb16dbcb9271ddfe2610fa6658d13f6dfb8bc72074cc1ca36966a7
-Status: Downloaded newer image for hello-world:latest
 
-Hello from Docker.
-This message shows that your installation appears to be working correctly.
-```
+<script>
+pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: ''});
+// If you can get a local running version of PWD, use
+// pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: ''}, baseUrl: 'http://localhost');
+// Directions for running locally: github.com/play-with-docker/play-with-docker
+
+</script>

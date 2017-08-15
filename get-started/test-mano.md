@@ -1,5 +1,5 @@
 ---
-title: "Play with Docker"
+title: "Mano's Play with Docker"
 keywords: get started
 description: Play with Docker tests
 ---
@@ -25,8 +25,8 @@ docker container run hello-world
 ```
 
 <script>
-        pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: ''});
-// If you can get a local running version of PWD, use 
+pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: ''});
+// If you can get a local running version of PWD, use
 // pwd.newSession([{selector: '.term1'}, {selector: '.term2'}, {selector: '.term3'}], {ImageName: ''}, baseUrl: 'http://localhost');
 // Directions for running locally: github.com/play-with-docker/play-with-docker
 
