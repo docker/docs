@@ -150,7 +150,7 @@ app in the search results, and click it (or hit Return).
 When the whale in the status bar stays steady, Docker is up-and-running, and
 accessible from any terminal window.
 
-![whale on taskbar](docker-for-windows/images/whale-taskbar-circle.png)
+![whale on taskbar](/docker-for-windows/images/whale-taskbar-circle.png)
 
 If the whale is hidden in the Notifications area, click the up arrow on the
 taskbar to show it. To learn more, see [Docker
