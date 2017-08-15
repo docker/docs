@@ -15,7 +15,7 @@ networks on a single host or across a cluster of hosts.
 For details about how Docker interacts with `iptables` on Linux hosts, see
 [Docker and `iptables`](#docker-and-iptables).
 
-## Default Networks
+## Default networks
 
 When you install Docker, it creates three networks automatically. You can list
 these networks using the `docker network ls` command:
@@ -333,7 +333,7 @@ c5ee82f76de3        isolated_nw         bridge
 
 ```
 
-After you create the network, you can launch containers on it using  the
+After you create the network, you can launch containers on it using the
 `docker run --network=<NETWORK>` option.
 
 ```none
@@ -469,7 +469,7 @@ daemon. Using network plugins is an advanced topic.
 
 Network plugins follow the same restrictions and installation rules as other
 plugins. All plugins use the plugin API, and have a lifecycle that encompasses
-installation, starting, stopping and activation.
+installation, starting, stopping, and activation.
 
 Once you have created and installed a custom network driver, you can create
 a network which uses that driver with the `--driver` flag.
