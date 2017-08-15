@@ -36,8 +36,8 @@ To learn more about Docker EE, see
 
 ### OS requirements
 
-To install Docker EE, you need the 64-bit version of RHEL 7, running on an x86
-hardware platform.
+To install Docker EE, you need the 64-bit version of RHEL 7 running on an x86
+hardware platform, or `s390x` (IBM Z) architecture.
 
 In addition, you must use the `devicemapper` storage driver. On production
 systems, you must use `direct-lvm` mode, which requires one or more dedicated
