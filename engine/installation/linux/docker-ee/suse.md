@@ -7,7 +7,7 @@ redirect_from:
 title: Get Docker EE for SLES
 ---
 
-{% assign minor-version = "17.03" %}
+{% assign minor-version = "17.06" %}
 
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 [meet the prerequisites](#prerequisites), then
