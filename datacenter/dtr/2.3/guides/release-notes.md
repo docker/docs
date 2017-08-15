@@ -16,15 +16,13 @@ to upgrade your installation to the latest release.
 
 ### New Features
 
-* Repositories can now be configured to be “immutable” in that any existing
-image can not be overwritten or deleted.
+* Repositories can now be marked “immutable”. Tags for images in immutable repos cannot be changed or updated.
 * You can now define promotion policies, to automatically copy images from one
 repository to another.
 * DTR now has UX for easily creating webhooks for events in repositories such
 as image pushes, scans, deletions, and promotions.
 * Added support for scanning Windows images for vulnerabilities.
-* Support was added for handling manifest-lists for multi-architecture images.
-This allows pulling different images with the same tag such as Linux and Windows.
+* Support was added for handling manifest-lists for multi-architecture images. This lets you manage images for different operating systems (eg. Linux and Windows) and CPU architectures (eg. x86_64 and s390x) under a single tag.
 * You can now use the web UI in Chinese.
 
 ##  General Improvements
