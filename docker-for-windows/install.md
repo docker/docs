@@ -147,9 +147,14 @@ app in the search results, and click it (or hit Return).
 
 ![search for Docker app](/docker-for-windows/images/docker-app-search.png)
 
-When the app finishes the startup process, the whale in the status bar will stay
-steady with containers loaded to indicate that Docker is running, and accessible
-from a terminal.
+When the whale in the status bar stays steady, Docker is up-and-running, and
+accessible from any terminal window.
+
+![whale on taskbar](docker-for-windows/images/whale-taskbar-circle.png)
+
+If the whale is hidden in the Notifications area, click the up arrow on the
+taskbar to show it. To learn more, see [Docker
+Settings](/docker-for-windows/index.md#docker-settings.md).
 
 If you just installed the app, you also get a popup success message with
 suggested next steps, and a link to this documentation.
