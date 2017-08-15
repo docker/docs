@@ -153,8 +153,7 @@ accessible from any terminal window.
 ![whale on taskbar](/docker-for-windows/images/whale-taskbar-circle.png)
 
 If the whale is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker
-Settings](/docker-for-windows/index.md#docker-settings.md).
+taskbar to show it. To learn more, see [Docker Settings](/docker-for-windows/index.md#docker-settings).
 
 If you just installed the app, you also get a popup success message with
 suggested next steps, and a link to this documentation.
