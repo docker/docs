@@ -142,15 +142,22 @@ Windows containers.
 
 ## Start Docker for Windows
 
-When the installation finishes, Docker starts automatically.
+Docker will not start automatically. To start it, search for Docker, select the
+app in the search results, and click it (or hit Return).
 
-The whale in the status bar indicates that Docker is running, and accessible from a terminal.
+![search for Docker app](/docker-for-windows/images/docker-app-search.png)
 
-If you just installed the app, you also get a popup success message with suggested next steps, and a link to this documentation.
+When the app finishes the startup process, the whale in the status bar will stay
+steady with containers loaded to indicate that Docker is running, and accessible
+from a terminal.
+
+If you just installed the app, you also get a popup success message with
+suggested next steps, and a link to this documentation.
 
 ![Startup information](/docker-for-windows/images/win-install-success-popup-cloud.png)
 
-When initialization is complete, select **About Docker** from the notification area icon to verify that you have the latest version.
+When initialization is complete, select **About Docker** from the notification
+area icon to verify that you have the latest version.
 
 Congratulations! You are up and running with Docker for Windows.
 
