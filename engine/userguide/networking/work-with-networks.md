@@ -79,7 +79,7 @@ network by default. You can override this default and specify a subnetwork
 directly using the `--subnet` option. On a `bridge` network you can only
 specify a single subnet. An `overlay` network supports multiple subnets.
 
-> **Note** : It is highly recommended to use the `--subnet` option while creating
+> **Note**: It is highly recommended to use the `--subnet` option while creating
 > a network. If the `--subnet` is not specified, the docker daemon automatically
 > chooses and assigns a subnet for the network and it could overlap with another subnet
 > in your infrastructure that is not managed by docker. Such overlaps can cause
@@ -110,7 +110,7 @@ The `bridge` driver accepts the following options:
 |--------------------------------------------------|-------------|-------------------------------------------------------|
 | `com.docker.network.bridge.name`                 | -           | bridge name to be used when creating the Linux bridge |
 | `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` | Enable IP masquerading                                |
-| `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or Disable Inter Container Connectivity        |
+| `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or disable inter container connectivity        |
 | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | Default IP when binding container ports               |
 | `com.docker.network.driver.mtu`                  | `--mtu`     | Set the containers network MTU                        |
 
@@ -120,7 +120,7 @@ The following arguments can be passed to `docker network create` for any network
 
 | Argument     | Equivalent | Description                              |
 |--------------|------------|------------------------------------------|
-| `--internal` | -          | Restricts external access to the network |
+| `--internal` | -          | Restrict external access to the network |
 | `--ipv6`     | `--ipv6`   | Enable IPv6 networking                   |
 
 The following example uses `-o` to bind to a specific IP address when binding
@@ -258,7 +258,7 @@ needed.
 
     As long as the IP address you specify for the container is part of the
     network's subnet, you can assign an IPv4 or IPv6 address to a container
-    when connecting it to a network, by using the `--ip` or `--ip6` flag. when
+    when connecting it to a network, by using the `--ip` or `--ip6` flag. When
     you specify an IP address in this way while using a user-defined network,
     the configuration is preserved as part of the container's configuration and
     will be applied when the container is reloaded. Assigned IP addresses are
@@ -327,7 +327,7 @@ needed.
    }
    ```
 
-   Notice that `container2` belongs to two networks.  It joined the default `bridge`
+   Notice that `container2` belongs to two networks. It joined the default `bridge`
    network when you launched it and you connected it to the `isolated_nw` in
    step 3.
 
@@ -344,7 +344,7 @@ needed.
     $ docker attach container2
     ```
 
-    Use the `ifconfig` command to examine the container's networking stack. you
+    Use the `ifconfig` command to examine the container's networking stack. You
     should see two ethernet interfaces, one for the default `bridge` network,
     and the other for the `isolated_nw` network.
 
@@ -447,7 +447,7 @@ needed.
 >You can connect a container to a network even if the container is not running.
 However, `docker network inspect` only displays information on running containers.
 
-### Linking containers without using user-defined networks
+### Link containers without using user-defined networks
 
 After you complete the steps in
 [Basic container networking examples](#basic-container-networking-examples),
@@ -782,7 +782,7 @@ This shows that an alias is scoped to the network where it is defined, and only
 containers connected to that network can access the alias.
 
 
-#### Resolving multiple containers to a single alias
+#### Resolve multiple containers to a single alias
 
 Multiple containers can share the same network-scoped alias within the same
 network. This provides a sort of DNS round-robin high availability. This may not
@@ -884,7 +884,7 @@ The following example illustrates how to set up and use network aliases.
     Stop the ping with `CTRL+C`. Detach from `container4` and leave it running
     using `CTRL-p CTRL-q`.
 
-## Disconnecting containers
+## Disconnect containers
 
 You can disconnect a container from a network at any time using the `docker network
 disconnect` command.
@@ -1001,7 +1001,7 @@ disconnect` command.
     $ docker rm container4 container5 container6 container7
     ```
 
-### Handling stale network endpoints
+### Handle stale network endpoints
 
 In some scenarios, such as ungraceful docker daemon restarts in a
 multi-host network, the daemon cannot clean up stale connectivity endpoints.
