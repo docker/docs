@@ -458,13 +458,28 @@ an error.
 
 > **Note:** this option was added in v3.3
 
-Configure the credential spec for managed service account (Windows only).
+Configure the credential spec for managed service account. This option is only
+used for services using Windows containers. The `credential_spec` must be in the
+format `file://<filename>` or `registry://<value-name>`.
+
+When using `file:`, the referenced file must be present in the `CredentialSpecs`
+subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\`
+on Windows. The following example loads the credential spec from a file named
+`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`:
 
     credential_spec:
-      file: c:/WINDOWS/my-credential-spec.txt
+      file: my-credential-spec.json
+
+When using `registry:`, the credential spec is read from the Windows registry on
+the daemon's host. A registry value with the given name must be located in:
+
+    HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
+
+The following example load the credential spec from a value named `my-credential-spec`
+in the registry:
 
     credential_spec:
-      registry: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
+      registry: my-credential-spec
 
 ### deploy
 
