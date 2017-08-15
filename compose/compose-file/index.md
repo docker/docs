@@ -1581,7 +1581,7 @@ expressed in the short form.
 
 
 ```none
-version: "3"
+version: "3.2"
 services:
   web:
     image: nginx:alpine
