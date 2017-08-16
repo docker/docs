@@ -25,28 +25,36 @@ as image pushes, scans, deletions, and promotions.
 * Support was added for handling manifest-lists for multi-architecture images. This lets you manage images for different operating systems (eg. Linux and Windows) and CPU architectures (eg. x86_64 and s390x) under a single tag.
 * You can now use the web UI in Chinese.
 
-##  General Improvements
+###  General Improvements
 
-### UI/UX
+#### UI/UX
 
 * The users page is now paginated to decrease long load times.
 * Fixed the login page to be more resilient to improperly configured domain names.
 Now you can always use the `/login` URL to bypass SSO misconfiguration issues.
+* 
 
-### docker/dtr
+#### docker/dtr
 
 * Removed requiring the `--dtr-external-url` flag during DTR installation.
 * Improved error handling.
 * Added extended help to the installer with the `--help-extended` flag.
+* We check kernel versions on install to help avoid known kernel bugs.
 
-### Storage
+#### Storage
 * Preserve the NFS hostname instead of resolving it during DTR installation.
 * Allow using S3 compatible storage with customized certificates or without TLS
 verification.
 
-### Misc
+#### Misc
 
 * Simplified content cache configuration.
 * Removed old, insecure 3des from the cipher list.
 * Allow refresh tokens with basic auth when using the DTR API.
 * Added the ability to rescan all previously scanned images at once.
+* Fixed issue with configs not being picked up by containers sometimes which previously required a restart of all containers.
+
+### Known issues
+
+* When running DTR 2.3.0 + UCP 2.1.x, UCP users cannot pull images from DTR without logging in first.
+* When using SSO with UCP 2.1.0, you have to log into DTR and UCP separately
