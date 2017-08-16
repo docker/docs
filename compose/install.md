@@ -12,31 +12,50 @@ Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
 
 - On desktop systems like Docker for Mac and Windows, Docker Compose is
-included as part of those desktop installs. Skip down to [Install Compose on Mac or Windows systems](#install-compose-on-mac-or-windows-systems).
+included as part of those desktop installs.
 
 - On Linux systems, first install the
 [Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
-instructions on installing [installing Compose on
-Linux](#install-compose-on-linux-systems).
+instructions on installing Compose on
+Linux systems.
 
-## Install Compose on Mac or Windows systems
+## Install Compose
 
-**Docker for Mac**, **Docker for Windows**, and **Docker Toolbox**
-already include Compose along with other Docker apps, so most Mac
-and Windows users do not need to install Compose separately.
+Follow the instructions below to install Compose on Mac, Windows, Windows Server
+2016, or Linux systems, or find out about alternatives like using the `pip`
+Python package manager or installing Compose as a container.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#mac">Mac</a></li>
+  <a data-toggle="tab" data-target="#win">Windows</a></li>
+  <a data-toggle="tab" data-target="#windows-server">Microsoft Windows Server 2016</a></li>
+  <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
+  <li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
+</ul>
+<div class="tab-content">
+<div id="mac" class="tab-pane fade in active"  markdown="1">
+**Docker for Mac** and **Docker Toolbox** already include Compose along
+with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
 * [Get Docker for Mac](/docker-for-mac/install.md)
+* [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+</div>
+<div id="win" class="tab-pane fade in active"  markdown="1">
+**Docker for Windows** and **Docker Toolbox** already include Compose
+along with other Docker apps, so most Windows users do not need to
+install Compose separately. Docker install instructions for these are here:
+
 * [Get Docker for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
-
+</div>
+<div id="windows-server" class="tab-pane fade in active"  markdown="1">
 **If you are running the Docker daemon and client directly on Microsoft
 Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
 Docker Compose. To do so, follow these steps:
 
 1.  Start an "elevated" PowerShell (run it as administrator).
-
     Search for PowerShell, right-click, and choose
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
@@ -67,9 +86,9 @@ Docker Compose. To do so, follow these steps:
     {: .important}
 
 3.  Run the executable to install Compose.
+</div>
 
-## Install Compose on Linux systems
-
+<div id="linux" class="tab-pane fade"  markdown="1">
 On **Linux**, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
@@ -124,18 +143,23 @@ by step instructions are also included below.
     ```bash
     $ docker-compose --version
     docker-compose version {{site.compose_current}}, build 1719ceb
-    ```
+    ```  
+</div>
+<div id="alternatives" class="tab-pane fade"  markdown="1">
 
-## Alternative install options
+- [Install using pip](#install-using-pip)
+- [Install as a container](#install-as-a-container)
 
 ### Install using pip
 
-Compose can be installed from [pypi](https://pypi.python.org/pypi/docker-compose)
-using `pip`. If you install using `pip`, we recommend that you use a
-[virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating systems
-have python system packages that conflict with docker-compose dependencies. See
-the [virtualenv tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
-to get started.
+Compose can be installed from
+[pypi](https://pypi.python.org/pypi/docker-compose) using `pip`. If you install
+using `pip`, we recommend that you use a
+[virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
+systems have python system packages that conflict with docker-compose
+dependencies. See the [virtualenv
+tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to get
+started.
 
 ```bash
 pip install docker-compose
@@ -150,8 +174,9 @@ sudo pip install docker-compose
 
 ### Install as a container
 
-Compose can also be run inside a container, from a small bash script wrapper.
-To install compose as a container run this command. Be sure to replace the version number with the one that you want, if this example is out-of-date:
+Compose can also be run inside a container, from a small bash script wrapper. To
+install compose as a container run this command. Be sure to replace the version
+number with the one that you want, if this example is out-of-date:
 
 ```bash
 $ curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_current}}/run.sh > /usr/local/bin/docker-compose
@@ -168,10 +193,13 @@ GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
 {: .important}
 
+</div>
+</div>
+
 ## Master builds
 
-If you're interested in trying out a pre-release build you can download a
-binary from
+If you're interested in trying out a pre-release build you can download a binary
+from
 [https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/).
 Pre-release builds allow you to try out new features before they are released,
 but may be less stable.
@@ -179,15 +207,16 @@ but may be less stable.
 
 ## Upgrading
 
-If you're upgrading from Compose 1.2 or earlier, you'll need to remove or migrate
-your existing containers after upgrading Compose. This is because, as of version
-1.3, Compose uses Docker labels to keep track of containers, and so they need to
-be recreated with labels added.
+If you're upgrading from Compose 1.2 or earlier, you'll need to remove or
+migrate your existing containers after upgrading Compose. This is because, as of
+version 1.3, Compose uses Docker labels to keep track of containers, and so they
+need to be recreated with labels added.
 
 If Compose detects containers that were created without labels, it will refuse
 to run so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
-to preserve) you can use compose 1.5.x to migrate them with the following command:
+to preserve) you can use compose 1.5.x to migrate them with the following
+command:
 
 ```bash
 docker-compose migrate-to-labels
