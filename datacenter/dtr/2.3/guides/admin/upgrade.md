@@ -66,7 +66,7 @@ nodes if upgrading offline), run the upgrade command:
 
 ```none
 $ docker run -it --rm \
-  {{ page.dtr_org }}/{{ page.dtr_repo }}{{ page.dtr_version }} upgrade \
+  {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} upgrade \
   --ucp-insecure-tls
 ```
 
