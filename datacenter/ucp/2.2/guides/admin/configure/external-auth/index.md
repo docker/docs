@@ -13,17 +13,10 @@ If you enable LDAP, UCP uses a remote directory server to create users
 automatically, and all logins are forwarded to the directory server.
 
 When you switch from built-in authentication to LDAP authentication,
-all manually created users whose usernames do not match any LDAP search results
-become inactive with the exception of the recovery admin user which can still
-log in with the recovery admin password.
+all manually created users whose usernames don't match any LDAP search results
+are still available.
 
 ## Configure the LDAP integration
-
-> Beta version of Docker EE
-> 
-> In the public Beta version of Docker EE, you can't use the UCP web UI to
-> integrate with LDAP. Instead, you need to use a
-> [UCP configuration file](enable-ldap-config-file.md). 
 
 To configure UCP to create and authenticate users using an LDAP directory,
 go to the UCP web UI, navigate to the **Admin Settings** page and click 

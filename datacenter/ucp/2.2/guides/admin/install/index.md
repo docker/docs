@@ -21,16 +21,8 @@ Docker Engine to run.
 
 Install Docker EE on each host that you plan to manage with UCP.
 View the [supported platforms](/engine/installation/#supported-platforms)
-and click a check icon to get platform-specific instructions for installing
+and click on your platform to get platform-specific instructions for installing
 Docker EE.
-
-> Access Docker EE for Beta testing
->
-> For the Beta release, install Docker EE version 17.06.1-ee-1-rc4. The
-> packages are available in the `test` channel of the Docker Store repo,
-> and your Beta license gives you access to this channel. For Windows
-> worker nodes, download the zip archive at
-> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc4.zip).
 
 Make sure you install the same Docker EE version on all the nodes. Also,
 if you're creating virtual machine templates with Docker EE already
@@ -96,9 +88,6 @@ Now that UCP is installed, you need to license it.
 3.  Click **Upload License** and navigate to your license (.lic) file.
     When you're finished selecting the license, UCP updates with the new
     settings.  
-
-If you're registered in the beta program and don't have a license yet, you
-can get it from your [Docker Store subscriptions](https://store.docker.com/?overlay=subscriptions).
 
 ## Step 6: Join manager nodes
 

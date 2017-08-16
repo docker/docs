@@ -1,17 +1,17 @@
 ---
-title: Deploy DDC on Linux servers
-description: Learn how to get a trial license and install Docker Datacenter
-keywords: datacenter, ucp, dtr, install, orchestration
+title: Deploy Enterprise Edition on Linux servers
+description: Learn how to get a trial license and install Docker Enterprise Edition.
+keywords: ucp, dtr, install, orchestration
 redirect_from:
 - /datacenter/try/
 ---
 
-The best way to try Docker Datacenter for yourself is to get the [30-day
-trial available at the Docker Store](https://store.docker.com/bundles/docker-datacenter).
+The best way to try Docker Enterprise Edition for yourself is to get the [30-day
+trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
 
-Once you get your trial license, you can install Docker Datacenter in your
+Once you get your trial license, you can install Docker EE on your
 Linux servers. Make sure all the hosts you want to manage with Docker
-Datacenter have a minimum of:
+EE have a minimum of:
 
 * [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
@@ -26,20 +26,12 @@ Also, make sure the hosts are running one of these operating systems:
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
 
-[Learn more about the Docker Datacenter system requirements](../ucp/2.2/guides/admin/install/system-requirements.md)
-
+[Learn more about Docker EE system requirements](../ucp/2.2/guides/admin/install/system-requirements.md)
 
 ### Step 1: Install Docker EE Container Engine
 
-Install the Docker Enterprise Edition container engine on all hosts you want to manage by following [these instructions](/engine/installation/index.md).
-
-> Access Docker EE for Beta testing
->
-> For the Beta release, install Docker EE version 17.06.1-ee-1-rc4. The
-> packages are available in the `test` channel of the Docker Store repo,
-> and your Beta license gives you access to this channel. For Windows
-> worker nodes, download the zip archive at
-> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc4.zip).
+Install the Docker Enterprise Edition container engine on all hosts you want
+to manage by following [these instructions](/engine/installation/index.md).
 
 ### Step 2: Install Universal Control Plane
 
