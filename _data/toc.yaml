@@ -1460,7 +1460,7 @@ manuals:
       title: Get support
     - sectiontitle: Previous versions
       section:
-      - sectiontitle: Universal Control Plane 2.2
+      - sectiontitle: Universal Control Plane 2.1
         section:
         - path: /datacenter/ucp/2.1/guides/
           title: Universal Control Plane overview
