@@ -111,7 +111,7 @@ first one.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app \
+  --mount type=bind,source=$(pwd)/target,target=/app \
   nginx:latest
 ```
 
@@ -182,7 +182,7 @@ The `--mount` and `-v` examples have the same end result.
 $ docker run -d \
   -it \
   --name broken-container \
-  --mount source=/tmp,target=/usr \
+  --mount type=bind,source=/tmp,target=/usr \
   nginx:latest
 
 docker: Error response from daemon: oci runtime error: container_linux.go:262:
@@ -237,7 +237,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app,readonly \
+  --mount type=bind,source=$(pwd)/target,target=/app,readonly \
   nginx:latest
 ```
 
@@ -325,8 +325,8 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,target=/app \
-  --mount source=$(pwd)/target,target=/app2,readonly,bind-propagation=rslave \
+  --mount type=bind,source=$(pwd)/target,target=/app \
+  --mount type=bind,source=$(pwd)/target,target=/app2,readonly,bind-propagation=rslave \
   nginx:latest
 ```
 
@@ -412,7 +412,7 @@ The `--mount` and `-v` examples have the same result.
 $ docker run -d \
   -it \
   --name devtest \
-  --mount source=$(pwd)/target,destination=/app,consistency=cached \
+  --mount type=bind,source=$(pwd)/target,destination=/app,consistency=cached \
   nginx:latest
 ```
 
