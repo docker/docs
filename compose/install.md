@@ -28,7 +28,7 @@ Python package manager or installing Compose as a container.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#mac">Mac</a></li>
-  <a data-toggle="tab" data-target="#win">Windows</a></li>
+  <li><a data-toggle="tab" data-target="#win">Windows</a></li>
   <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
   <li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
 </ul>
