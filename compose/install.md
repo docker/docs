@@ -2,7 +2,7 @@
 description: How to install Docker Compose
 keywords: compose, orchestration, install, installation, docker, documentation
 title: Install Docker Compose
-toc_max: 4
+toc_max: 2
 ---
 
 You can run Compose on macOS, Windows and 64-bit Linux.
