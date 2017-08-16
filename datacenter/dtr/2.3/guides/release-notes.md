@@ -1,5 +1,5 @@
 ---
-title: DTR release notes
+title: DTR 2.3 release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
 ---
@@ -10,7 +10,7 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
-## DTR 2.3.0 beta 1
+## DTR 2.3.0
 
 (17 July 2017)
 
