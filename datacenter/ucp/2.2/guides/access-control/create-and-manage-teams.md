@@ -11,7 +11,7 @@ permissions over resources. You do this by adding the user to a team.
 To create a new team, go to the UCP web UI, and navigate to the
 **Organizations** page.
 
-![](../../images/create-and-manage-teams-1.png){: .with-border}
+![](../images/create-and-manage-teams-1.png){: .with-border}
 
 If you want to put the team in a new organization, click
 **Create Organization** and give the new organization a name, like
@@ -21,7 +21,7 @@ In the list, click the organization where you want to create the new team.
 Name the team, give it an optional description, and click **Create** to
 create a new team.
 
-![](../../images/create-and-manage-teams-2.png){: .with-border}
+![](../images/create-and-manage-teams-2.png){: .with-border}
 
 ## Add users to a team
 
@@ -30,7 +30,7 @@ teams list, click the new team, and in the details pane, click **Add Users**.
 Choose the users that you want to add to the team, and when you're done, click
 **Add Users**.
 
-![](../../images/create-and-manage-teams-3.png){: .with-border}
+![](../images/create-and-manage-teams-3.png){: .with-border}
 
 ## Sync team members with your organization's LDAP directory
 
@@ -41,7 +41,7 @@ creating a new team or when modifying settings of an existing team.
 Enabling this option expands the form with additional fields for configuring
 the sync of team members.
 
-![](../../images/create-and-manage-teams-5.png){: .with-border}
+![](../images/create-and-manage-teams-5.png){: .with-border}
 
 There are two methods for matching group members from an LDAP directory:
 
@@ -82,7 +82,7 @@ In this example, you'll create a collection for the "Data Center" team,
 where they can deploy services and resources, and you'll create a grant that
 gives the team permission to access the collection.
 
-![](../../images/team-grant-diagram.svg){: .with-border}
+![](../images/team-grant-diagram.svg){: .with-border}
 
 1.  Navigate to the **Organizations & Teams** page.
 2.  Select **docker-datacenter**, and click **Create Team**. Name the team
@@ -101,7 +101,7 @@ gives the team permission to access the collection.
    **Teams** dropdown, select **Data Center**.
 11. Click **Create** to create the grant. 
 
-![](../../images/create-and-manage-teams-4.png){: .with-border}
+![](../images/create-and-manage-teams-4.png){: .with-border}
 
 In this example, you gave members of the `Data Center` team
 `Restricted Control` permissions to create and edit resources in

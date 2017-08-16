@@ -64,5 +64,5 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
 
 ## Where to go next
 
--  [Create and manage users](../../manage-users/create-and-manage-users.md)
--  [Create and manage teams](../../manage-users/create-and-manage-teams.md)
+-  [Create and manage users](../../../access-control/create-and-manage-users.md)
+-  [Create and manage teams](../../../access-control/create-and-manage-teams.md)

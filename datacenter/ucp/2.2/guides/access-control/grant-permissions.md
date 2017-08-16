@@ -13,7 +13,7 @@ to a set of resources (collection). Each grant is a 1:1:1 mapping of
 subject, role, collection. For example, you can grant the "Prod Team" 
 "Restricted Control" permissions for the "/Production" collection.
 
-![](../../images/ucp-grant-model.png){: .with-border}
+![](../images/ucp-grant-model.png){: .with-border}
 
 The usual workflow for creating grants has four steps.
 

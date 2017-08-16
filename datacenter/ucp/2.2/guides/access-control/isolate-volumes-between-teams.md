@@ -14,7 +14,7 @@ nodes.
 3.  Create grants to manage access to the collections.
 4.  Team members create volumes that are specific to their team.
 
-![](../../images/isolate-volumes-diagram.svg){: .with-border}
+![](../images/isolate-volumes-diagram.svg){: .with-border}
 
 ## Create two teams
 
@@ -57,7 +57,7 @@ with the `/Shared/prod-volumes` collection.
 6.  Click **Create Grant** and repeat the previous steps for the **/Shared/prod-volumes**
     collection and the Prod team.
 
-![](../../images/isolate-volumes-1.png){: .with-border}
+![](../images/isolate-volumes-1.png){: .with-border}
 
 With the collections and grants in place, users can sign in and create volumes
 in their assigned collections.
@@ -78,18 +78,18 @@ Team members have permission to create volumes in their assigned collection.
     to create a "prod-data" volume assigned to the `/Shared/prod-volumes`
     collection.
 
-![](../../images/isolate-volumes-2.png){: .with-border}
+![](../images/isolate-volumes-2.png){: .with-border}
 
 Now you can see role-based access control in action for volumes. The user on
 the Prod team can't see the Dev team's volumes, and if you log in again as a
 user on the Dev team, you won't see the Prod team's volumes.
 
-![](../../images/isolate-volumes-3.png){: .with-border}
+![](../images/isolate-volumes-3.png){: .with-border}
 
 Sign in with a UCP administrator account, and you see all of the volumes
 created by the Dev and Prod users.
 
-![](../../images/isolate-volumes-4.png){: .with-border}
+![](../images/isolate-volumes-4.png){: .with-border}
 
 ## Where to go next
 
