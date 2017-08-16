@@ -36,7 +36,7 @@ docker container run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
-  support > docker-support.tgz
+  support --log-driver none > docker-support.tgz
 ```
 
 This support dump only contains logs for the node where you're running the
