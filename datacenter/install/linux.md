@@ -94,7 +94,7 @@ Use ssh to log in to the host where you already installed UCP, and run:
 
 ```bash
 $ docker container run -it --rm \
-  {{ page.ucp_latest_image }} install \
+  {{ page.dtr_latest_image }} install \
   --ucp-node <node-hostname> \
   --ucp-insecure-tls
 ```
