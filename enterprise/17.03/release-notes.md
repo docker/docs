@@ -1,7 +1,7 @@
 ---
 title: Docker EE 17.03 release notes
-description: Docker Enterprise Edition release notes
-keywords: docker, docker-ee, engine, install, release notes, enterprise
+description: Docker Enterprise Edition 17.03 release notes
+keywords: docker ee, release notes, upgrade
 redirect_from:
 - /enterprise/release-notes/
 ---
