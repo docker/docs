@@ -27,8 +27,6 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 2016, or Linux systems, or find out about alternatives like using the `pip`
 Python package manager or installing Compose as a container.
 
-Here are some tabs:
-
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#tab1">Mac</a></li>
 <li><a data-toggle="tab" data-target="#tab2">Windows</a></li>
@@ -37,7 +35,6 @@ Here are some tabs:
 </ul>
 <div class="tab-content">
 <div id="tab1" class="tab-pane fade in active" markdown="1">
-TAB 1 CONTENT
 ### Install Compose on macOS
 
 **Docker for Mac** and **Docker Toolbox** already include Compose along
@@ -48,7 +45,6 @@ Docker install instructions for these are here:
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 </div>
 <div id="tab2" class="tab-pane fade" markdown="1">
-TAB 2 CONTENT
 ### Install Compose on Windows systems
 
 **Docker for Windows** and **Docker Toolbox** already include Compose
@@ -95,7 +91,6 @@ Docker Compose. To do so, follow these steps:
 2.  Run the executable to install Compose.
 </div>
 <div id="tab3" class="tab-pane fade" markdown="1">
-TAB 3 CONTENT
 ### Install Compose on Linux systems
 
 On **Linux**, you can download the Docker Compose binary from the [Compose
@@ -157,7 +152,6 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
     ```  
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
-TAB 4 CONTENT
 ### Alternative install options
 
 - [Install using pip](#install-using-pip)
