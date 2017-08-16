@@ -29,7 +29,6 @@ Python package manager or installing Compose as a container.
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#mac">Mac</a></li>
   <a data-toggle="tab" data-target="#win">Windows</a></li>
-  <a data-toggle="tab" data-target="#windows-server">Microsoft Windows Server 2016</a></li>
   <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
   <li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
 </ul>
@@ -49,8 +48,7 @@ install Compose separately. Docker install instructions for these are here:
 
 * [Get Docker for Windows](/docker-for-windows/install.md)
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
-</div>
-<div id="windows-server" class="tab-pane fade in active"  markdown="1">
+
 **If you are running the Docker daemon and client directly on Microsoft
 Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
 Docker Compose. To do so, follow these steps:
@@ -87,7 +85,6 @@ Docker Compose. To do so, follow these steps:
 
 3.  Run the executable to install Compose.
 </div>
-
 <div id="linux" class="tab-pane fade"  markdown="1">
 On **Linux**, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
