@@ -1294,8 +1294,12 @@ manuals:
     nosync: true
   - path: /enterprise/telemetry/
     title: Manage usage data collection
-  - path: /enterprise/release-notes/
-    title: Release Notes
+  - sectiontitle: Release notes
+    section:
+    - path: /enterprise/17.03/release-notes/
+      title: "17.03"
+    - path: /enterprise/17.06/
+      title: "17.06"
   - path: /datacenter/install/linux/
     title: Deploy Docker EE standard on Linux
   - sectiontitle: Universal Control Plane
@@ -2820,7 +2824,7 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - path: /enterprise/release-notes/
+    - path: /enterprise/17.06/
       title: Docker EE
       nosync: true
     - path: /release-notes/docker-ce/
