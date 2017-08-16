@@ -1,5 +1,6 @@
 ---
 name: Manage usage data collection
+title: Manage usage data collection
 description: Understand and manage usage data collected by Docker EE and sent to Docker.
 keywords: enterprise, telemetry, data collection
 ---
