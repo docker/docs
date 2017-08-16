@@ -18,7 +18,7 @@ connected to the bridge and all traffic coming from and going to the container
 flows over the bridge to the Docker daemon, which handles routing on behalf of
 the container.
 
-Docker configures `docker0` with an IP address, netmask and IP allocation range.
+Docker configures `docker0` with an IP address, netmask, and IP allocation range.
 Containers which are connected to the default bridge are allocated IP addresses
 within this range. Certain default settings apply to the default bridge unless
 you specify otherwise. For instance, the default maximum transmission unit (MTU),
@@ -73,7 +73,7 @@ each:
 Once you have one or more containers up and running, you can confirm that Docker
 has properly connected them to the `docker0` bridge by running the `brctl`
 command on the host machine and looking at the `interfaces` column of the
-output.  This example shows a `docker0` bridge with two containers connected:
+output. This example shows a `docker0` bridge with two containers connected:
 
 ```bash
 $ sudo brctl show
@@ -87,9 +87,9 @@ If the `brctl` command is not installed on your Docker host, then on Ubuntu you
 should be able to run `sudo apt-get install bridge-utils` to install it.
 
 Finally, the `docker0` Ethernet bridge settings are used every time you create a
-new container.  Docker selects a free IP address from the range available on the
+new container. Docker selects a free IP address from the range available on the
 bridge each time you `docker run` a new container, and configures the
-container's `eth0` interface with that IP address and the bridge's netmask.  The
+container's `eth0` interface with that IP address and the bridge's netmask. The
 Docker host's own IP address on the bridge is used as the default gateway by
 which each container reaches the rest of the Internet.
 
