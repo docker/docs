@@ -12,7 +12,7 @@ to upgrade your installation to the latest release.
 
 ## DTR 2.3.0
 
-(17 July 2017)
+(16 August 2017)
 
 ### New Features
 
