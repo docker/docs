@@ -1,5 +1,5 @@
 ---
-title: UCP 2.1 release notes
+title: UCP 2.2 release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
