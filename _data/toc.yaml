@@ -1292,6 +1292,8 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
+  - path: /enterprise/telemetry/
+    title: Manage usage data collection
   - path: /enterprise/release-notes/
     title: Release Notes
   - path: /datacenter/install/linux/
