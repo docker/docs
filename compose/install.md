@@ -2,6 +2,7 @@
 description: How to install Docker Compose
 keywords: compose, orchestration, install, installation, docker, documentation
 title: Install Docker Compose
+toc_max: 4
 ---
 
 You can run Compose on macOS, Windows and 64-bit Linux.
@@ -34,6 +35,8 @@ Python package manager or installing Compose as a container.
 </ul>
 <div class="tab-content">
 <div id="mac" class="tab-pane fade in active"  markdown="1">
+### Install Compose on macOS
+
 **Docker for Mac** and **Docker Toolbox** already include Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
@@ -42,6 +45,8 @@ Docker install instructions for these are here:
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 </div>
 <div id="win" class="tab-pane fade in active"  markdown="1">
+### Install Compose on Windows systems
+
 **Docker for Windows** and **Docker Toolbox** already include Compose
 along with other Docker apps, so most Windows users do not need to
 install Compose separately. Docker install instructions for these are here:
@@ -83,9 +88,11 @@ Docker Compose. To do so, follow these steps:
     on the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
     {: .important}
 
-3.  Run the executable to install Compose.
+2.  Run the executable to install Compose.
 </div>
 <div id="linux" class="tab-pane fade"  markdown="1">
+### Install Compose on Linux systems
+
 On **Linux**, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
 target="_blank" class="_"}. Follow the instructions from the link, which involve
@@ -143,11 +150,12 @@ by step instructions are also included below.
     ```  
 </div>
 <div id="alternatives" class="tab-pane fade"  markdown="1">
+### Alternative install options
 
 - [Install using pip](#install-using-pip)
 - [Install as a container](#install-as-a-container)
 
-### Install using pip
+#### Install using pip
 
 Compose can be installed from
 [pypi](https://pypi.python.org/pypi/docker-compose) using `pip`. If you install
@@ -169,7 +177,7 @@ sudo pip install docker-compose
 
 > pip version 6.0 or greater is required.
 
-### Install as a container
+#### Install as a container
 
 Compose can also be run inside a container, from a small bash script wrapper. To
 install compose as a container run this command. Be sure to replace the version
