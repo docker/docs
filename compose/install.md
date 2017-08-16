@@ -28,13 +28,13 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 Python package manager or installing Compose as a container.
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#tab1">Mac</a></li>
-<li><a data-toggle="tab" data-target="#tab2">Windows</a></li>
-<li><a data-toggle="tab" data-target="#tab3">Linux</a></li>
-<li><a data-toggle="tab" data-target="#tab4">Alternative Install Options</a></li>
+<li class="active"><a data-toggle="tab" data-target="#macOS">Mac</a></li>
+<li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+<li><a data-toggle="tab" data-target="#linux">Linux</a></li>
+<li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
 </ul>
 <div class="tab-content">
-<div id="tab1" class="tab-pane fade in active" markdown="1">
+<div id="macOS" class="tab-pane fade in active" markdown="1">
 ### Install Compose on macOS
 
 **Docker for Mac** and **Docker Toolbox** already include Compose along
@@ -44,7 +44,7 @@ Docker install instructions for these are here:
   * [Get Docker for Mac](/docker-for-mac/install.md)
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 </div>
-<div id="tab2" class="tab-pane fade" markdown="1">
+<div id="windows" class="tab-pane fade" markdown="1">
 ### Install Compose on Windows systems
 
 **Docker for Windows** and **Docker Toolbox** already include Compose
@@ -90,7 +90,7 @@ Docker Compose. To do so, follow these steps:
 
 2.  Run the executable to install Compose.
 </div>
-<div id="tab3" class="tab-pane fade" markdown="1">
+<div id="linux" class="tab-pane fade" markdown="1">
 ### Install Compose on Linux systems
 
 On **Linux**, you can download the Docker Compose binary from the [Compose
@@ -151,7 +151,7 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
     docker-compose version {{site.compose_current}}, build 1719ceb
     ```  
 </div>
-<div id="tab4" class="tab-pane fade" markdown="1">
+<div id="alternatives" class="tab-pane fade" markdown="1">
 ### Alternative install options
 
 - [Install using pip](#install-using-pip)
