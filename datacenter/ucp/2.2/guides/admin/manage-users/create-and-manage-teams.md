@@ -34,12 +34,6 @@ Choose the users that you want to add to the team, and when you're done, click
 
 ## Sync team members with your organization's LDAP directory
 
-> Beta version of Docker EE
-> 
-> In the public Beta version of Docker EE, you can't use the UCP web UI to
-> integrate with LDAP. Instead, you need to use a
-> [UCP configuration file](../configure/external-auth/enable-ldap-config-file.md). 
-
 If UCP is configured to sync users with your organization's LDAP directory
 server, you will have the option to enable syncing the new team's members when
 creating a new team or when modifying settings of an existing team.

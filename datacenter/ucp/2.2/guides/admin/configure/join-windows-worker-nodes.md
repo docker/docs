@@ -20,22 +20,11 @@ Install UCP on a Linux distribution.
 [Learn how to install UCP on production](../install/index.md).
 UCP requires Docker EE version 17.06 or later.
 
->  Internal development
->
->  For internal development, you need to `docker login` and pull
->  the UCP images manually. For Beta, the images will be available publicly.
-
 ## Install Docker EE on Windows Server 2016
 
 [Install Docker EE](/docker-ee-for-windows/install/#using-a-script-to-install-docker-ee)
 on a Windows Server 2016 instance to enable joining a swarm that's managed by
 UCP.
-
-> Access Docker EE for Beta testing
->
-> For Beta testing, install the binaries in the zip archive at
-> [download.docker.com](https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1-rc4.zip),
-> because you need version 17.06-ee or higher to join a UCP swarm.
 
 ## Configure the Windows node
 
