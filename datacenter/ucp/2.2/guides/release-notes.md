@@ -36,9 +36,9 @@ different teams can only view and deploy on the nodes to which they have access.
 This is only available with an EE Advanced license.
 * Enhancements to the user management system:
   * UCP now supports the user concept of organizations, which are groups of teams.
-  * Users can now specify a default collection which automatically applies.
-  access control labels to all CLI deploy commands when no label is specified
-  by the user.
+  * Users can now specify a default collection which automatically applies
+  access control labels to all CLI deploy commands when no label is specified by
+  the user.
 * Support for UCP workers running Windows Server 2016, and the ability to deploy
 Windows-based containerized applications on the cluster.
   * [Read the documentation](admin/configure/join-windows-worker-nodes/index.md)
