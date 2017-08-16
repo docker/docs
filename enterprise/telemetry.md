@@ -9,7 +9,7 @@ Docker EE 17.06 and higher include a telemetry plugin which is enabled by
 default on Ubuntu. This plugin sends Docker information about your running
 system so that we can improve Docker EE. For details about the telemetry plugin
 and the types of data it collects, see the
-[`telemetry` plugin documentation](hhttps://store.docker.com/community/images/docker/telemetry).
+[`telemetry` plugin documentation](https://store.docker.com/community/images/docker/telemetry).
 
 If your Docker instance runs in an environment with no internet connectivity,
 the plugin does not collect or attempt to send any information to Docker.
