@@ -172,7 +172,7 @@ friendlyhello         latest              326387cea398
 
 ## Run the app
 
-Run the app, mapping your machine's port 4000 to the container's `EXPOSE`d port
+Run the app, mapping your machine's port 4000 to the container's published port
 80 using `-p`:
 
 ```shell
