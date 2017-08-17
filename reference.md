@@ -32,7 +32,8 @@ various APIs, CLIs, and file formats.
 | [Cloud API](/apidocs/docker-cloud/)                        | Enables programmatic management of your Docker application running on a cloud provider |
 | [Engine API](/engine/api/)                                 | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
 | [Registry API](/registry/spec/api/)                        | Facilitates distribution of images to the engine                                       |
-| [Trusted Registry API](/datacenter/dtr/2.2/reference/api/) | Provides programmatic access to a trusted registry                                     |
+| [Trusted Registry API](/datacenter/dtr/2.3/reference/api/) | Provides programmatic access to a trusted registry                                     |
+| [UCP API](/datacenter/ucp/2.2/reference/api)               | Provides programmatic access to a Universal Control Plane instance                     |
 
 
 ## Drivers and specifications

@@ -2,18 +2,22 @@
 description: Smoketest page
 title: Testing page
 hide_from_sitemap: true
+toc_min: 1
 ---
 
 # Heading 1
 
 Most pages don't actually have a H1 heading. The page title from the metadata is
-automatically inserted.
+automatically inserted. We have included it here to show all heading levels, and
+set front matter as `toc_min: 1` so that it shows in the navigation bar (on-page
+topics).
 
 ## Heading 2
 
-This is the highest heading included in the right-nav. To include more heading
-levels, set `toc_min: 1` in the page-s front-matter. You can go all the way to
-6, but if `toc_min` is geater than `toc_max` then no headings will show.
+By default, this is the highest heading included in the right navigation bar. To
+include more heading levels, set `toc_min: 1` in the page's front-matter (as is
+done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
+geater than `toc_max` then no headings will show.
 
 ### Heading 3
 
@@ -250,6 +254,9 @@ You can nest captures within each other to represent more complex logic with Liq
 
 ## Bootstrap and CSS tricks
 
+Here are cool components you can include on Docs pages using
+[Bootstrap](http://getbootstrap.com/) and [CSS](https://www.w3schools.com/css/).
+
 ### Tabs
 
 Here are some tabs:
@@ -259,11 +266,14 @@ Here are some tabs:
   <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
-  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
-  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT<hr></div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT<hr></div>
 </div>
 
 You need to adjust the `id` and `data-target` values to match your use case.
+
+The `<hr>`'s are included simply to add visual separation between tabbed content
+and the other topics on the page.
 
 If you have Markdown inside the content of the `<div>`, just add `markdown="1"`
 as an attribute in the HTML for the `<div>` and Kramdown will render it.
@@ -278,12 +288,14 @@ as an attribute in the HTML for the `<div>` and Kramdown will render it.
 
 - list item 1
 - list item 2
+<hr>
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 #### Another Markdown header
 
 - list item 3
 - list item 4
+<hr>
 </div>
 </div>
 
@@ -303,8 +315,8 @@ other tab set to match.
   <li><a data-toggle="tab" data-target="#python" data-group="python">Python</a></li>
 </ul>
 <div class="tab-content">
-  <div id="go" class="tab-pane fade in active">Go content here</div>
-  <div id="python" class="tab-pane fade in">Python content here</div>
+  <div id="go" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python" class="tab-pane fade in">Python content here<hr></div>
 </div>
 
 And some content between the two sets, just for fun...
@@ -314,8 +326,8 @@ And some content between the two sets, just for fun...
   <li><a data-toggle="tab" data-target="#python-2" data-group="python">Python</a></li>
 </ul>
 <div class="tab-content">
-  <div id="go-2" class="tab-pane fade in active">Go content here</div>
-  <div id="python-2" class="tab-pane fade in">Python content here</div>
+  <div id="go-2" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python-2" class="tab-pane fade in">Python content here<hr></div>
 </div>
 
 
@@ -324,7 +336,6 @@ And some content between the two sets, just for fun...
 In a Bootstrap row, your columns need to add up to 12. Here are three cards in
 a row, each of which takes up 1/3 (4/12) of the row. You need a couple `<br />`s
 to clear the row before.<br /><br />
-
 
 <div class="row">
   <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
@@ -555,7 +566,7 @@ $ some other command
 $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
 
-### GO
+### Go
 
 ```go
 incoming := map[string]interface{}{

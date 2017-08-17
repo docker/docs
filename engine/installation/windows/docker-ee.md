@@ -27,14 +27,16 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
 
     ```ps
     PS> Install-Module -Name DockerMsftProvider -Force
-    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+    PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
+    PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Location https://download.docker.com/components/engine/windows-server/index.json
+    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force
     PS> Restart-Computer -Force
     ```
 
 2.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
-    PS> docker run hello-world:nanoserver
+    PS> docker container run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
@@ -57,16 +59,16 @@ Use the following steps when you want to install manually, script automated
 installs, or install on air-gapped systems.
 
 1.  In a PowerShell command prompt, download the installer archive on a machine
-that has a connection.
+    that has a connection.
 
     ```ps
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.03/docker-17.03.0-ee.zip
+    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1.zip
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
-PowerShell command prompt, use the following commands to extract the archive,
-register, and start the Docker service.
+    PowerShell command prompt, use the following commands to extract the archive,
+    register, and start the Docker service.
 
     ```ps
     # Extract the archive.
@@ -79,7 +81,7 @@ register, and start the Docker service.
     $null = Install-WindowsFeature containers
 
     # Add Docker to the path for the current session.
-    PS> $env:path += "$env:ProgramFiles\docker"
+    PS> $env:path += ";$env:ProgramFiles\docker"
 
     # Optionally, modify PATH to persist across sessions.
     PS> $newPath = "$env:ProgramFiles\docker;" +
@@ -92,16 +94,28 @@ register, and start the Docker service.
     # Register the Docker daemon as a service.
     PS> dockerd --register-service
 
-    # Start the daemon.
+    # Start the Docker service.
     PS> Start-Service docker
     ```
 
 3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
-    PS> docker run hello-world:nanoserver
+    PS> docker container run hello-world:nanoserver
     ```
 
+## Update Docker EE
+
+To update Docker EE on Windows Server 2016:
+
+```ps
+PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
+PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Erroraction Ignore -Location https://download.docker.com/components/engine/windows-server/index.json
+PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
+
+# Start the Docker service.
+PS> Start-Service Docker
+```
 
 ## Install Docker EE using OneGet
 

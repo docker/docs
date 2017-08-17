@@ -95,72 +95,75 @@ defaults:
       path: "toolbox"
     values:
       assignee: "londoncalling"
-  -
-    scope:
+  - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.1.5"
-      dtr_latest_image: "docker/dtr:2.2.7"
-  -
-    scope:
+      ucp_latest_image: "docker/ucp:2.2.0"
+      dtr_latest_image: "docker/dtr:2.3.0"
+  - scope:
+      path: "datacenter/dtr/2.3"
+    values:
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.3.0"
+  - scope:
       path: "datacenter/dtr/2.2"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/dtr:2.2.7"
-  -
-    scope:
+  - scope:
       path: "datacenter/dtr/2.1"
     values:
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
-  -
-    scope:
+  - scope:
       path: "datacenter/dtr/2.0"
     values:
       hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
-  -
-    scope:
+  - scope:
+      path: "datacenter/ucp/2.2"
+    values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "2.2.0"
+  - scope:
       path: "datacenter/ucp/2.1"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/ucp:2.1.5"
-  -
-    scope:
+  - scope:
       path: "datacenter/ucp/2.0"
     values:
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
       docker_image: "docker/ucp:2.0.3"
-  -
-    scope:
+  - scope:
       path: "datacenter/ucp/1.1"
     values:
       hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
-  -
-    scope:
+  - scope:
       path: "apidocs/v1.3.3"
     values:
       hide_from_sitemap: true
-  -
-    scope:
+  - scope:
       path: "apidocs/v1.4.0"
     values:
       hide_from_sitemap: true
-  -
-    scope:
+  - scope:
       path: "apidocs/v2.0.0"
     values:
       hide_from_sitemap: true
-  -
-    scope:
+  - scope:
       path: "apidocs/v2.0.1"
     values:
       hide_from_sitemap: true

@@ -8,7 +8,7 @@ redirect_from:
 title: Get Docker EE for Ubuntu
 ---
 
-{% assign minor-version = "17.03" %}
+{% assign minor-version = "17.06" %}
 
 To get started with Docker EE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
@@ -43,7 +43,7 @@ To install Docker EE, you need the 64-bit version of one of these Ubuntu version
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker EE is supported on `x86_64` architectures.
+Docker EE is supported on `x86_64` and `s390x` (IBM Z) architectures.
 
 The only supported storage driver for Docker EE on Ubuntu is `aufs`.
 
@@ -137,9 +137,20 @@ from the repository.
     > Ubuntu distribution, such as `xenial`.
     >
 
+    **amd64**:
+
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
+       $(lsb_release -cs) \
+       stable-{{ minor-version }}"
+    ```
+
+    **s390x**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=s390x] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable-{{ minor-version }}"
     ```
@@ -208,9 +219,17 @@ steps.
 
 #### Upgrade Docker EE
 
-To upgrade Docker EE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
-to install.
+To upgrade Docker EE:
+
+1.  If upgrading to a new major Docker EE version (such as when going from
+    Docker 17.03.x to Docker 17.06.x),
+    [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
+
+2.  Run `sudo apt-get update`.
+
+3.  Follow the
+    [installation instructions](#install-docker), choosing the new version you want
+    to install.
 
 ### Install from a package
 

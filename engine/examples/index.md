@@ -8,10 +8,8 @@ redirect_from:
 
 This section contains the following:
 
-* [Dockerizing MongoDB](mongodb.md)
 * [Dockerizing PostgreSQL](postgresql_service.md)
 * [Dockerizing a CouchDB service](couchdb_data_volumes.md)
-* [Dockerizing a Redis service](running_redis_service.md)
 * [Dockerizing an apt-cacher-ng service](apt-cacher-ng.md)
 * [Dockerizing a .NET Core application](dotnetcore.md)
 * [Get Started](/get-started/)
