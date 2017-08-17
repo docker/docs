@@ -510,7 +510,7 @@ and the client connects directly to one of these. DNS round-robin is useful
 in cases where you want to use your own load balancer, or for Hybrid
 Windows and Linux applications.
 
-```yaml
+```none
 version: "3.3"
 
 services:
