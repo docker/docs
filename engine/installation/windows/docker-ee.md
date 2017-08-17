@@ -26,8 +26,10 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
 1.  Open a PowerShell command prompt, and type the following commands.
 
     ```ps
-    PS> Install-Module -Name DockerMsftProvider -Force
-    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+    PS> Install-Module -Name DockerMsftProvider -Force -Erroraction Ignore
+    PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
+    PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Erroraction Ignore -Location https://download.docker.com/components/engine/windows-server/index.json
+    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force
     PS> Restart-Computer -Force
     ```
 
