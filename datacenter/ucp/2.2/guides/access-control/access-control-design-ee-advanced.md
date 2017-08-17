@@ -28,7 +28,7 @@ licensing allows nodes to be placed in different collections so that resources
 can be scheduled and isolated on disparate physical or virtual hardware
 resources.
 
-## Team Access Requirements
+## Team access requirements
 
 As in the [Introductory Multitenancy Tutorial](access-control-design-ee-standard.md)
 OrcaBank still has three application teams, `payments`, `mobile`, and `db` that
@@ -51,7 +51,7 @@ separate physical infrastructure.
 - `mobile` has the same rights as the `payments` team, with respect to the
   Mobile applications.
 
-## Role Composition
+## Role composition
 
 OrcaBank will use the same roles as in the Introductory Tutorial. An `ops` role
 will provide them with the ability to deploy, destroy, and view any kind of
@@ -63,7 +63,7 @@ are offered by the `db` collection to the other app teams.
 ![image](../images/design-access-control-adv-0.png){: .with-border}
 
 
-## Collection Architecture
+## Collection architecture
 
 The previous tutorial had separate collections for each application team.
 In this Access Control redesign there will be collections for each zone,
@@ -88,7 +88,7 @@ The resulting collection architecture takes the following tree representation:
     └── payments
 ```
 
-## Grant Composition
+## Grant composition
 
 OrcaBank will now be granting teams diverse roles to different collections.
 Multiple grants per team are required to grant this kind of access. Each of
@@ -98,7 +98,7 @@ ability to share some resources with the `db` collection.
 
 ![image](../images/design-access-control-adv-grant-composition.png){: .with-border}
 
-## OrcaBank Access Architecture
+## OrcaBank access architecture
 
 The resulting access architecture provides the appropriate physical segmentation
 between Production and Staging. Applications will be scheduled only on the UCP
@@ -108,7 +108,7 @@ boundaries to access the databases in the `/prod/db` collection.
 
 ![image](../images/design-access-control-adv-architecture.png){: .with-border}
 
-### DB Team
+### DB team
 
 The OrcaBank `db` team is responsible for deploying and managing the full
 lifecycle of the databases that are in Production. They have the full set of
@@ -116,7 +116,7 @@ operations against all database resources.
 
 ![image](../images/design-access-control-adv-db.png){: .with-border}
 
-### Mobile Team
+### Mobile team
 
 The `mobile` team is responsible for deploying their full application stack in
 staging. In production they deploy their own applications but utilize the

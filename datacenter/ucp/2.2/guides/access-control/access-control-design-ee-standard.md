@@ -13,7 +13,7 @@ This tutorial introduces many concepts include collections, grants, centralized
 LDAP/AD, and also the ability for resources to be shared between different teams
 and across collections.
 
-## Team Access Requirements
+## Team access requirements
 
 OrcaBank has organized their application teams to specialize more and provide
 shared services to other applications. A `db` team was created just to manage
@@ -30,7 +30,7 @@ able to deploy and manage the lifecycle of their own applications.
 - `mobile` has the same rights as the `payments` team, with respect to the
   Mobile applications.
 
-## Role Composition
+## Role composition
 
 OrcaBank will use a combination of default and custom roles, roles which they
 have created specifically for their use case. They are using the default
@@ -45,7 +45,7 @@ themselves.
 
 ![image](../images/design-access-control-adv-0.png){: .with-border}
 
-## Collection Architecture
+## Collection architecture
 
 OrcaBank will also create some collections that fit the organizational structure
 of the company. Since all applications will share the same physical resources,
@@ -69,7 +69,7 @@ allows an app team to access shared `db` resources without providing access
 to _all_ `db` resources. At the same time _all_ `db` resources will be managed
 by a single `db` team.
 
-## LDAP/AD Integration
+## LDAP/AD integration
 
 OrcaBank has standardized on LDAP for centralized authentication to help their
 identity team scale across all the platforms they manage. As a result LDAP
@@ -78,7 +78,7 @@ integration. As a result users can be added to or removed from UCP teams via
 LDAP which can be managed centrally by OrcaBank's identity team. The following
 grant composition shows how LDAP groups are mapped to UCP teams .
 
-## Grant Composition
+## Grant composition
 
 Two grants are applied for each application team, allowing each team to fully
 manage their own apps in their collection, but also have limited access against
@@ -88,7 +88,7 @@ resources.
 
 ![image](../images/design-access-control-adv-1.png){: .with-border}
 
-## OrcaBank Access Architecture
+## OrcaBank access architecture
 
 The resulting access architecture shows applications connecting across
 collection boundaries. Multiple grants per team allow Mobile applications and
@@ -99,7 +99,7 @@ worker nodes. Node segmentation is discussed in the [next tutorial](#).
 
 ![image](../images/design-access-control-adv-2.png){: .with-border}
 
-### DB Team
+### DB team
 
 The `db` team is responsible for deploying and managing the full lifecycle
 of the databases used by the application teams. They have the full set of
@@ -107,7 +107,7 @@ operations against all database resources.
 
 ![image](../images/design-access-control-adv-3.png){: .with-border}
 
-### Mobile Team
+### Mobile team
 
 The `mobile` team is responsible for deploying their own application stack,
 minus the database tier which is managed by the `db` team. 
