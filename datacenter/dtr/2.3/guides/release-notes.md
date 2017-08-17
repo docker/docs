@@ -14,7 +14,7 @@ to upgrade your installation to the latest release.
 
 (16 August 2017)
 
-### New Features
+### New features
 
 * Repositories can now be marked “immutable”. Tags for images in immutable repos cannot be changed or updated.
 * You can now define promotion policies, to automatically copy images from one
@@ -25,14 +25,13 @@ as image pushes, scans, deletions, and promotions.
 * Support was added for handling manifest-lists for multi-architecture images. This lets you manage images for different operating systems (eg. Linux and Windows) and CPU architectures (eg. x86_64 and s390x) under a single tag.
 * You can now use the web UI in Chinese.
 
-###  General Improvements
+##  General improvements
 
 #### UI/UX
 
 * The users page is now paginated to decrease long load times.
 * Fixed the login page to be more resilient to improperly configured domain names.
 Now you can always use the `/login` URL to bypass SSO misconfiguration issues.
-* 
 
 #### docker/dtr
 
@@ -57,4 +56,6 @@ verification.
 ### Known issues
 
 * When running DTR 2.3.0 + UCP 2.1.x, UCP users cannot pull images from DTR without logging in first.
-* When using SSO with UCP 2.1.0, you have to log into DTR and UCP separately
+* When using SSO with UCP 2.1.0, you have to log into DTR and UCP separately.
+* Some users are displayed as inactive when they are actually active. This only
+happens when using pagination, and can be fixed by refreshing the browser.
