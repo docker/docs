@@ -252,9 +252,9 @@ After running either of these examples, run the following commands to clean up t
 containers and volumes.
 
 ```bash
-$ docker container stop devtest
+$ docker container stop nginxtest
 
-$ docker container rm devtest
+$ docker container rm nginxtest
 
 $ docker volume rm nginx-vol
 ```
@@ -325,9 +325,9 @@ correctly. Look for the `Mounts` section:
 Stop and remove the container, and remove the volume:
 
 ```bash
-$ docker container stop devtest
+$ docker container stop nginxtest
 
-$ docker container rm devtest
+$ docker container rm nginxtest
 
 $ docker volume rm nginx-vol
 ```
