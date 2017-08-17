@@ -827,7 +827,7 @@ installing docker, please make sure to update them accordingly.
 * Add container's short-id as default network alias [#21901](https://github.com/docker/docker/pull/21901)
 * `run` options `--dns` and `--net=host` are no longer mutually exclusive [#22408](https://github.com/docker/docker/pull/22408)
 - Fix DNS issue when renaming containers with generated names [#22716](https://github.com/docker/docker/pull/22716)
-- Allow both `{% raw %network inspect -f {{.Id}}` and `network inspect -f {{.ID}}{% endraw %}` to address inconsistency with inspect output [#23226](https://github.com/docker/docker/pull/23226)
+- Allow both `{% raw %}network inspect -f {{.Id}}` and `network inspect -f {{.ID}}{% endraw %}` to address inconsistency with inspect output [#23226](https://github.com/docker/docker/pull/23226)
 
 ### Plugins (experimental)
 
