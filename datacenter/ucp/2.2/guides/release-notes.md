@@ -69,6 +69,15 @@ and the API is fully interactive within the UCP UI.
   is to do a page refresh which completes the configuration change.
   * Removing stacks from the UI may cause certain resources to not be deleted,
   including networks or volumes. Workaround is to delete the resources directly.
+  * When you create a network and check 'Enable hostname based routing', the web
+  UI doesn't apply the HRM labels to the network. As a workaround,
+  [create the network using the CLI](https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/#service-labels).
+  * The web UI does not currently persist changes to session timeout settings.
+  As a workaround you can update the settings from the CLI, by [adapting these instructions for the
+  session timeout](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/).
+* docker/ucp
+  * The `support` command does not currently produce a valid support dump. As a
+  workaround you can create support dumps with an [older version of docker/ucp](https://docs.docker.com/datacenter/ucp/2.1/guides/get-support/#from-the-cli).
 * Windows issues
   * Disk related metrics do not display for Windows worker nodes.
   * If upgrading from an existing deployment, ensure that HRM is using a non-encrypted
