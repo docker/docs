@@ -105,23 +105,17 @@ by step instructions are also included below.
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
-    curl -L
+    sudo curl -L
 https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname
--s`-`uname -m` > /usr/local/bin/docker-compose
+-s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
     For example, to download Compose version {{site.compose_current}}, the command
     is:
 
     ```bash
-    curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
-
-    >  Got a "Permission denied" error?
-    >
-    If so, your `/usr/local/bin` directory probably isn't writable and
-    you'll need to install Compose as the superuser. Run `sudo -i`, then
-    run the download and install commands below, then `exit`.
 
     > Use the latest Compose release number in the download command.
     >
@@ -189,7 +183,7 @@ install compose as a container run this command. Be sure to replace the version
 number with the one that you want, if this example is out-of-date:
 
 ```bash
-$ curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_current}}/run.sh > /usr/local/bin/docker-compose
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_current}}/run.sh -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
