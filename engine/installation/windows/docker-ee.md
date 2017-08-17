@@ -57,7 +57,7 @@ Use the following steps when you want to install manually, script automated
 installs, or install on air-gapped systems.
 
 1.  In a PowerShell command prompt, download the installer archive on a machine
-that has a connection.
+    that has a connection.
 
     ```ps
     # On an online machine, download the zip file.
@@ -65,8 +65,8 @@ that has a connection.
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
-PowerShell command prompt, use the following commands to extract the archive,
-register, and start the Docker service.
+    PowerShell command prompt, use the following commands to extract the archive,
+    register, and start the Docker service.
 
     ```ps
     # Extract the archive.
@@ -92,7 +92,7 @@ register, and start the Docker service.
     # Register the Docker daemon as a service.
     PS> dockerd --register-service
 
-    # Start the daemon.
+    # Start the Docker service.
     PS> Start-Service docker
     ```
 
@@ -102,6 +102,23 @@ register, and start the Docker service.
     PS> docker container run hello-world:nanoserver
     ```
 
+## Update Docker EE
+
+To update Docker EE on Windows Server 2016:
+
+```ps
+# Get the version that's installed.
+PS> Get-Package -Name Docker -ProviderName DockerMsftProvider
+
+# Find the updated version.
+PS> Find-Package -Name Docker -ProviderName DockerMsftProvider
+
+# Install the updated version.
+PS> Install-Package -Name Docker -ProviderName DockerMsftProvider -Update -Force
+
+# Start the Docker service.
+PS> Start-Service Docker
+```
 
 ## Install Docker EE using OneGet
 
