@@ -5,11 +5,11 @@ title: Get started with multi-host networking
 ---
 
 This article uses an example to explain the basics of creating a multi-host
-network. Docker Engine supports multi-host networking out-of-the-box through the
-`overlay` network driver.  Unlike `bridge` networks, overlay networks require
+network. Docker supports multi-host networking out-of-the-box through the
+`overlay` network driver. Unlike `bridge` networks, overlay networks require
 some pre-existing conditions before you can create one:
 
-* [Docker Engine running in swarm mode](#overlay-networking-and-swarm-mode)
+* [Docker running in swarm mode](#overlay-networking-and-swarm-mode)
 
 OR
 
@@ -17,14 +17,14 @@ OR
 
 ## Overlay networking and swarm mode
 
-Using docker engine running in [swarm mode](../../swarm/swarm-mode.md), you can create an overlay network on a manager node.
+Using Docker running in [swarm mode](../../swarm/swarm-mode.md), you can create an overlay network on a manager node.
 
 The swarm makes the overlay network available only to nodes in the swarm that
 require it for a service. When you create a service that uses an overlay
 network, the manager node automatically extends the overlay network to nodes
 that run service tasks.
 
-To learn more about running Docker Engine in swarm mode, refer to the
+To learn more about running Docker in swarm mode, refer to the
 [Swarm mode overview](../../swarm/index.md).
 
 The example below shows how to create a network and use it for a service from a manager node in the swarm:
@@ -51,7 +51,7 @@ See also [Attach services to an overlay network](../../swarm/networking.md).
 
 ## Overlay networking with an external key-value store
 
-To use an Docker engine with an external key-value store, you need the
+To use a Docker engine with an external key-value store, you need the
 following:
 
 * Access to the key-value store. Docker supports Consul, Etcd, and ZooKeeper
@@ -124,7 +124,7 @@ key-value stores. This example uses Consul.
 Keep your terminal open and move onto the next step.
 
 
-### Create a Swarm cluster
+### Create a swarm cluster
 
 In this step, you use `docker-machine` to provision the hosts for your network.
 At this point, you won't actually create the network. You'll create several
@@ -132,7 +132,7 @@ machines in VirtualBox. One of the machines will act as the swarm master;
 you'll create that first. As you create each host, you'll pass the Engine on
 that machine options that are needed by the `overlay` network driver.
 
-1. Create a swarm master.
+1.  Create a swarm master.
 
 		$ docker-machine create \
 		-d virtualbox \
@@ -144,7 +144,7 @@ that machine options that are needed by the `overlay` network driver.
 
 	At creation time, you supply the Engine `daemon` with the `--cluster-store` option. This option tells the Engine the location of the key-value store for the `overlay` network. The bash expansion `$(docker-machine ip mh-keystore)` resolves to the IP address of the Consul server you created in "STEP 1". The `--cluster-advertise` option advertises the machine on the network.
 
-2. Create another host and add it to the swarm cluster.
+2.  Create another host and add it to the swarm cluster.
 
 		$ docker-machine create -d virtualbox \
 			--swarm \
@@ -153,7 +153,7 @@ that machine options that are needed by the `overlay` network driver.
 			--engine-opt="cluster-advertise=eth1:2376" \
 		  mhs-demo1
 
-3. List your machines to confirm they are all up and running.
+3.  List your machines to confirm they are all up and running.
 
 		$ docker-machine ls
 
@@ -171,13 +171,13 @@ Leave your terminal open and go onto the next step.
 
 To create an overlay network
 
-1. Set your docker environment to the swarm master.
+1.  Set your docker environment to the swarm master.
 
 		$ eval $(docker-machine env --swarm mhs-demo0)
 
-	Using the `--swarm` flag with `docker-machine` restricts the `docker` commands to swarm information alone.
-
-2. Use the `docker info` command to view the swarm.
+    Using the `--swarm` flag with `docker-machine` restricts the `docker` commands to swarm information alone.
+ 
+2.  Use the `docker info` command to view the swarm.
 
 		$ docker info
 
@@ -203,19 +203,20 @@ To create an overlay network
 
 	From this information, you can see that you are running three containers and two images on the Master.
 
-3. Create your `overlay` network.
+3.  Create your `overlay` network.
 
 		$ docker network create --driver overlay --subnet=10.0.9.0/24 my-net
 
-	You only need to create the network on a single host in the cluster. In this case, you used the swarm master but you could easily have run it on any host in the cluster.
+    You only need to create the network on a single host in the cluster. In this case,
+    you used the swarm master but you could easily have run it on any host in the cluster.
 
-> **Note** : It is highly recommended to use the `--subnet` option when creating
-> a network. If the `--subnet` is not specified, the docker daemon automatically
-> chooses and assigns a subnet for the network and it could overlap with another subnet
-> in your infrastructure that is not managed by docker. Such overlaps can cause
-> connectivity issues or failures when containers are connected to that network.
+    > **Note**: It is highly recommended to use the `--subnet` option when creating
+    > a network. If the `--subnet` is not specified, the docker daemon automatically
+    > chooses and assigns a subnet for the network and it could overlap with another subnet
+    > in your infrastructure that is not managed by docker. Such overlaps can cause
+    > connectivity issues or failures when containers are connected to that network.
 
-4. Check that the network is running:
+4.  Check that the network is running:
 
 		$ docker network ls
 
@@ -228,11 +229,11 @@ To create an overlay network
 		d0bb78cbe7bd        mhs-demo1/bridge    bridge
 		1c0eb8f69ebb        mhs-demo1/none      null
 
-	As you are in the swarm master environment, you see all the networks on all
-	the swarm agents: the default networks on each engine and the single overlay
-	network. Notice that each `NETWORK ID` is unique.
+    As you are in the swarm master environment, you see all the networks on all
+    the swarm agents: the default networks on each engine and the single overlay
+    network. Notice that each `NETWORK ID` is unique.
 
-5. Switch to each swarm agent in turn and list the networks.
+5.  Switch to each swarm agent in turn and list the networks.
 
 		$ eval $(docker-machine env mhs-demo0)
 
@@ -254,22 +255,22 @@ To create an overlay network
 		412c2496d0eb        host                host
 		6b07d0be843f        my-net              overlay
 
-  Both agents report they have the `my-net` network with the `6b07d0be843f` ID.
-	You now have a multi-host container network running!
+Both agents report they have the `my-net` network with the `6b07d0be843f` ID.
+You now have a multi-host container network running!
 
-### Run an application on your Network
+### Run an application on your network
 
 Once your network is created, you can start a container on any of the hosts and it automatically is part of the network.
 
-1. Point your environment to the swarm master.
+1.  Point your environment to the swarm master.
 
 		$ eval $(docker-machine env --swarm mhs-demo0)
 
-2. Start an Nginx web server on the `mhs-demo0` instance.
+2.  Start an Nginx web server on the `mhs-demo0` instance.
 
 		$ docker run -itd --name=web --network=my-net --env="constraint:node==mhs-demo0" nginx
 
-4. Run a BusyBox instance on the `mhs-demo1` instance and get the contents of the Nginx server's home page.
+4.  Run a BusyBox instance on the `mhs-demo1` instance and get the contents of the Nginx server's home page.
 
 		$ docker run -it --rm --network=my-net --env="constraint:node==mhs-demo1" busybox wget -O- http://web
 
@@ -315,11 +316,11 @@ Additionally, containers connected to the multi-host network are automatically
 connected to the `docker_gwbridge` network. This network allows the containers
 to have external connectivity outside of their cluster.
 
-1. Change your environment to the swarm agent.
+1.  Change your environment to the swarm agent.
 
 		$ eval $(docker-machine env mhs-demo1)
 
-2. View the `docker_gwbridge` network, by listing the networks.
+2.  View the `docker_gwbridge` network, by listing the networks.
 
 		$ docker network ls
 
@@ -330,7 +331,7 @@ to have external connectivity outside of their cluster.
 		1aeead6dd890        host                host
 		e1dbd5dff8be        docker_gwbridge     bridge
 
-3. Repeat steps 1 and 2 on the swarm master.
+3.  Repeat steps 1 and 2 on the swarm master.
 
 		$ eval $(docker-machine env mhs-demo0)
 
@@ -343,7 +344,7 @@ to have external connectivity outside of their cluster.
 		412c2496d0eb        host                host
 		97102a22e8d2        docker_gwbridge     bridge
 
-2. Check the Nginx container's network interfaces.
+2.  Check the Nginx container's network interfaces.
 
 		$ docker exec web ip addr
 
@@ -370,7 +371,7 @@ to have external connectivity outside of their cluster.
 	the `my-net` overlay network. While the `eth1` interface represents the
 	container interface that is connected to the `docker_gwbridge` network.
 
-### Extra Credit with Docker Compose
+### Extra credit with Docker Compose
 
 Please refer to the Networking feature introduced in
 [Compose V2 format](/compose/networking/)
