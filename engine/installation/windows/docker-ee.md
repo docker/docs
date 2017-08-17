@@ -27,7 +27,9 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
 
     ```ps
     PS> Install-Module -Name DockerMsftProvider -Force
-    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+    PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
+    PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Location https://download.docker.com/components/engine/windows-server/index.json
+    PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force
     PS> Restart-Computer -Force
     ```
 
@@ -107,14 +109,9 @@ installs, or install on air-gapped systems.
 To update Docker EE on Windows Server 2016:
 
 ```ps
-# Get the version that's installed.
-PS> Get-Package -Name Docker -ProviderName DockerMsftProvider
-
-# Find the updated version.
-PS> Find-Package -Name Docker -ProviderName DockerMsftProvider
-
-# Install the updated version.
-PS> Install-Package -Name Docker -ProviderName DockerMsftProvider -Update -Force
+PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
+PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Erroraction Ignore -Location https://download.docker.com/components/engine/windows-server/index.json
+PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
 
 # Start the Docker service.
 PS> Start-Service Docker
