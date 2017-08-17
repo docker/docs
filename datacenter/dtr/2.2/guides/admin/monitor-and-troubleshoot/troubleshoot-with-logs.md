@@ -42,8 +42,12 @@ DTR uses RethinkDB for persisting data and replicating it across replicas.
 It might be helpful to connect directly to the RethinkDB instance running on a
 DTR replica to check the DTR internal state. 
 
+> **Warning**: Modifying RethinkDB directly is not supported and may cause
+> problems.
+{: .warning }
+
 Use SSH to log into a node that is running a DTR replica, and run the following
-command, replacing `$REPLICA_ID` by the ID of the DTR replica running on that
+command, replacing `$REPLICA_ID` with the ID of the DTR replica running on that
 node:
 
 ```none
@@ -53,11 +57,12 @@ docker run -it --rm \
   $REPLICA_ID
 >
 ```
+
 This container connects to the local DTR replica and launches a RethinkDB client 
 that can be used to inspect the contents of the DB. RethinkDB 
 stores data in different databases that contain multiple tables. The `rethinkcli`
-tool will launch an interactive prompt where you can run RethinkDB 
-queries as in the following example.
+tool launches an interactive prompt where you can run RethinkDB 
+queries such as:
 
 ```none
 # List all the DBs in RethinkDB
@@ -86,11 +91,12 @@ queries as in the following example.
     namespaceAccountID: '924bf131-6213-43fa-a5ed-d73c7ccf392e',
     pk: 'cf5e8bf1197e281c747f27e203e42e22721d5c0870b06dfb1060ad0970e99ada',
     visibility: 'public' },
-
 ...
 ```
 
-Note that indvidual DBs and tables may change in DTR from version to version, but `dbList()` and `tableList()` can always be used to explore the contents and data structure.
+Indvidual DBs and tables are a private implementation detail and may change in DTR
+from version to version, but you can always use `dbList()` and `tableList()` to explore
+the contents and data structure.
 
 [Learn more about RethinkDB queries](https://www.rethinkdb.com/docs/guide/javascript/).
 
