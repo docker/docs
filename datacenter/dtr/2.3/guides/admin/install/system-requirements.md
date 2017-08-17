@@ -9,8 +9,10 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Software requirements
 
-You can only install DTR on a node that is being managed by Docker Universal
-Control Plane.
+You can install DTR on-premises or on a cloud provider. To install DTR,
+all nodes must:
+* Be managed by a Docker Universal Control Plane deployment,
+* Have a fixed hostname.
 
 ## Ports used
 
