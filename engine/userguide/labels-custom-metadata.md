@@ -18,14 +18,14 @@ You can use labels to organize your images, record licensing information, annota
 relationships between containers, volumes, and networks, or in any way that makes
 sense for your business or application.
 
-# Label keys and values
+## Label keys and values
 
 A label is a key-value pair, stored as a string. You can specify multiple labels
 for an object, but each key-value pair must be unique within an object. If the
 same key is given multiple values, the most-recently-written value overwrites
 all previous values.
 
-## Key format recommendations
+### Key format recommendations
 
 A label _key_ is the left-hand side of the key-value pair. Keys are alphanumeric
 strings which may contain periods (`.`) and hyphens (`-`). Most Docker users use
@@ -52,7 +52,7 @@ to use labels as a mechanism for automation.
 These guidelines are not currently enforced and additional guidelines may apply
 to specific use cases.
 
-## Value guidelines
+### Value guidelines
 
 Label values can contain any data type that can be represented as a string,
 including (but not limited to) JSON, XML, CSV, or YAML. The only requirement is
@@ -64,7 +64,7 @@ Since Docker does not deserialize the value, you cannot treat a JSON or XML
 document as a nested structure when querying or filtering by label value unless
 you build this functionality into third-party tooling.
 
-# Manage labels on objects
+## Manage labels on objects
 
 Each type of object with support for labels has mechanisms for adding and
 managing them and using them as they relate to that type of object. These links
