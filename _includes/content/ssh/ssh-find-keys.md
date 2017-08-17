@@ -40,6 +40,7 @@
 
 {% endcapture %}
 {{ mac-content-find | markdownify }}
+<hr>
 </div>
 
 <div id="win-find-keys" class="tab-pane fade">
@@ -77,6 +78,7 @@
 
 {% endcapture %}
 {{ win-content-find | markdownify }}
+<hr>
 </div>
 
 <div id="linux-find-keys" class="tab-pane fade">
@@ -114,5 +116,6 @@
 
 {% endcapture %}
 {{ linux-content-find | markdownify }}
+<hr>
 </div>
 </div>

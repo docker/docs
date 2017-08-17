@@ -38,6 +38,7 @@ passphrases in your keychain.
 
 {% endcapture %}
 {{ mac-content-add | markdownify }}
+<hr>
 </div>
 
 <div id="win-add-keys" class="tab-pane fade">
@@ -63,6 +64,7 @@ passphrases in your keychain.
 
 {% endcapture %}
 {{ win-content-add | markdownify }}
+<hr>
 </div>
 
 <div id="linux-add-keys" class="tab-pane fade">
@@ -88,5 +90,6 @@ passphrases in your keychain.
 
 {% endcapture %}
 {{ linux-content-add | markdownify }}
+<hr>
 </div>
 </div>

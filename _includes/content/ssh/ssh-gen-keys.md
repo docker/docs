@@ -36,6 +36,7 @@
     ```
 {% endcapture %}
 {{ mac-content-gen | markdownify }}
+<hr>
 </div>
 
 <div id="win-key-gen" class="tab-pane fade">
@@ -69,6 +70,7 @@
     ```
 {% endcapture %}
 {{ win-content-gen | markdownify }}
+<hr>
 </div>
 
 <div id="linux-key-gen" class="tab-pane fade">
@@ -102,5 +104,6 @@
     ```
 {% endcapture %}
 {{ linux-content-gen | markdownify }}
+<hr>
 </div>
 </div>

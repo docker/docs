@@ -24,6 +24,7 @@ For example: `$ atom ~/.ssh/id_rsa.pub`
 
 {% endcapture %}
 {{ mac-content-copy | markdownify }}
+<hr>
 </div>
 
 <div id="win-copy-keys" class="tab-pane fade">
@@ -45,6 +46,7 @@ For example: `$ notepad ~/.ssh/id_rsa.pub`
 
 {% endcapture %}
 {{ win-content-copy | markdownify }}
+<hr>
 </div>
 
 <div id="linux-copy-keys" class="tab-pane fade">
@@ -69,5 +71,6 @@ For example: `$ vi ~/.ssh/id_rsa.pub`
 
 {% endcapture %}
 {{ linux-content-copy | markdownify }}
+<hr>
 </div>
 </div>
