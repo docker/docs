@@ -24,7 +24,7 @@ target     prot opt source               destination
 MASQUERADE  all  --  172.17.0.0/16       0.0.0.0/0
 ...
 ```
-The Docker server creates a masquerade rule that let containers connect to IP
+The Docker server creates a masquerade rule that lets containers connect to IP
 addresses in the outside world.
 
 If you want containers to accept incoming connections, you will need to provide
