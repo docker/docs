@@ -152,7 +152,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] {{ download-url-base }} \
        $(lsb_release -cs) \
-       stable"
+       stable-{{ minor-version }}"
     ```
 
 #### Install Docker EE
@@ -219,9 +219,17 @@ steps.
 
 #### Upgrade Docker EE
 
-To upgrade Docker EE, first run `sudo apt-get update`, then follow the
-[installation instructions](#install-docker), choosing the new version you want
-to install.
+To upgrade Docker EE:
+
+1.  If upgrading to a new major Docker EE version (such as when going from
+    Docker 17.03.x to Docker 17.06.x),
+    [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
+
+2.  Run `sudo apt-get update`.
+
+3.  Follow the
+    [installation instructions](#install-docker), choosing the new version you want
+    to install.
 
 ### Install from a package
 
