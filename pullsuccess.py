@@ -42,8 +42,8 @@ for page in soup.find_all('page'):
         headingList=['h1','h2','h3','h4','h5','h6']
         headingTypeIndex = 0
         for headingType in headingList:
+            headerIndex = 0
             for header in rawhtml.find_all(headingType):
-                headerIndex = 0
                 header.attrs = {'id': str(headingTypeIndex) + '-' + str(headerIndex) }
                 # print header
                 headerIndex = headerIndex + 1
