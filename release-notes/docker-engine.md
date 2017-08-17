@@ -1371,7 +1371,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 
 - Fix `docker login` on windows (#17738)
 - Fix bug with `docker inspect` output when not connected to daemon (#17715)
-- Fix `{% raw %docker inspect -f {{.HostConfig.Dns}} somecontainer{% endraw %}` (#17680)
+- Fix `{% raw %}docker inspect -f {{.HostConfig.Dns}} somecontainer{% endraw %}` (#17680)
 
 ### Builder
 
