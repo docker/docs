@@ -33,13 +33,13 @@ possible for a manifest list to be used for targeting multiple
 architectures/platforms. Moving to the new manifest format will be completely
 transparent.
 
-## Preparing for upgrade
+## Prepare for upgrade
 
 To make your current images accessible to the new model we have to migrate them
 to content addressable storage. This means calculating the secure checksums for
 your current data.
 
-All your current images, tags and containers are automatically migrated to the
+All your current images, tags, and containers are automatically migrated to the
 new foundation the first time you start Docker Engine 1.10. Before loading your
 container, the daemon will calculate all needed checksums for your current data,
 and after it has completed, all your images and tags will have brand new secure
@@ -50,7 +50,7 @@ can take time if you have lots of image data.** On average you should assume
 that migrator can process data at a speed of 100MB/s. During this time your
 Docker daemon won’t be ready to respond to requests.
 
-## Minimizing migration time
+## Minimize migration time
 
 If you can accept this one time hit, then upgrading Docker Engine and restarting
 the daemon will transparently migrate your images. However, if you want to
