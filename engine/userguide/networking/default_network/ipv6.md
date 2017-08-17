@@ -28,7 +28,7 @@ specify an IPv6 subnet to pick the addresses from. Set the IPv6 subnet via the
 `--fixed-cidr-v6` parameter when starting Docker daemon:
 
 ```
-dockerd --ipv6 --fixed-cidr-v6="2001:db8:1::/64"
+dockerd --ipv6 --fixed-cidr-v6=2001:db8:1::/64
 ```
 
 The subnet for Docker containers should at least have a size of `/80`. This way
