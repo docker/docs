@@ -30,7 +30,7 @@ Now configure your LDAP directory integration.
 
 Click the dropdown to select the permission level assigned by default to
 the private collections of new users.
-[Learn more about permission levels](../../manage-users/permission-levels.md).                                    
+[Learn more about permission levels](../../../access-control/permission-levels.md).                                    
 
 ## LDAP domains
 
@@ -130,7 +130,7 @@ LDAP directory.
 
 ## Where to go next
 
--  [Create and manage users](../../manage-users/create-and-manage-users.md)
--  [Create and manage teams](../../manage-users/create-and-manage-teams.md)
--  [UCP permission levels](../../permission-levels.md)
+-  [Create and manage users](../../../access-control/create-and-manage-users.md)
+-  [Create and manage teams](../../../access-control/create-and-manage-teams.md)
+-  [UCP permission levels](../../../access-control/permission-levels.md)
 -  [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)

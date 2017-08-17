@@ -53,7 +53,7 @@ UCP provides a number of built-in collections.
 -  `/Shared/Legacy` - After updating from UCP 2.1, all legacy access control
    labels are stored here.
 
-![](../../images/collections-diagram.svg){: .with-border}
+![](../images/collections-diagram.svg){: .with-border}
 
 This diagram shows the `/System` and `/Shared` collections that are created
 by UCP. User private collections are children of the `/Shared/private`
@@ -69,7 +69,7 @@ preselected option is the default collection, but this can be changed.
 Users can't deploy a resource without a collection.  When deploying a
 resource in CLI without an access label, UCP automatically places the
 resource in the user's default collection.
-[Learn how to add labels to cluster nodes](../configure/add-labels-to-cluster-nodes/).
+[Learn how to add labels to cluster nodes](../admin/configure/add-labels-to-cluster-nodes/).
 
 When using Docker Compose, the system applies default collection labels
 across all resources in the stack, unless the `com.docker.ucp.access.label`
@@ -121,7 +121,7 @@ collections and create corresponding grants for scheduling tasks.
 In this example, an administrator has moved worker nodes to a `/prod`
 collection:
 
-![](../../images/containers-and-nodes-diagram.svg) 
+![](../images/containers-and-nodes-diagram.svg) 
 
 When you deploy a resource with a collection, UCP sets a constraint implicitly
 based on what nodes the collection, and any ancestor collections, can access. 

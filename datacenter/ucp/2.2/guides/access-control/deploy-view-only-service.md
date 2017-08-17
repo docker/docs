@@ -11,7 +11,7 @@ collection that contains one service.
 2. Create a collection for the view-only service.
 3. Create a grant to manage user access to the collection. 
 
-![](../../images/view-only-access-diagram.svg)
+![](../images/view-only-access-diagram.svg)
 
 ## Create an organization
 
@@ -34,7 +34,7 @@ who isn't an administrator to the team.
 3.  Click **Create collection** and name the collection "View-only services".
 4.  Click **Create** to create the collection.
 
-![](../../images/deploy-view-only-service-1.png)
+![](../images/deploy-view-only-service-1.png)
 
 The `/Shared/View-only services` collection is ready to use for access 
 control.
@@ -56,7 +56,7 @@ collection.
 5.  Click **Create** to add the "WordPress" service to the collection and
     deploy it.
 
-![](../../images/deploy-view-only-service-3.png)
+![](../images/deploy-view-only-service-3.png)
 
 You're ready to create a grant for controlling access to the "WordPress" service.
 
@@ -74,7 +74,7 @@ Currently, users who aren't administrators can't access the
     In the dropdown, select **engineering**. 
 5.  Click **Create** to grant permissions to the organization.
 
-![](../../images/deploy-view-only-service-4.png)
+![](../images/deploy-view-only-service-4.png)
 
 Everything is in place to show role-based access control in action.
 
@@ -89,7 +89,7 @@ as a non-admin user in the organization and trying to delete the service.
 3.  In the details pane, confirm that the service's collection is
     **/Shared/View-only services**.
 
-    ![](../../images/deploy-view-only-service-2.png)
+    ![](../images/deploy-view-only-service-2.png)
     
 4.  Click the checkbox next to the **WordPress** service, click **Actions**,
     and select **Remove**. You get an error message, because the user

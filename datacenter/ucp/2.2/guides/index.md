@@ -61,7 +61,7 @@ You can also deploy and monitor your applications and services.
 Docker UCP has its own built-in authentication mechanism and integrates with
 LDAP services. It also has role-based access control (RBAC), so that you can
 control who can access and make changes to your swarm and applications.
-[Learn about role-based access control](admin/manage-users/index.md).
+[Learn about role-based access control](access-control/index.md).
 
 ![](images/overview-3.png){: .with-border}
 

@@ -39,7 +39,7 @@ The system provides the following default roles:
 | `Scheduler`          | The user can view nodes and schedule workloads on them. Worker nodes and manager nodes are affected by `Scheduler` grants. Having `Scheduler` access doesn't allow the user to view workloads on these nodes. They need the appropriate resource permissions, like `Container View`. By default, all users get a grant with the `Scheduler` role against the `/Shared` collection. |
 | `Full Control`       | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users' containers. |
 
-![Diagram showing UCP permission levels](../../images/permissions-ucp.png)
+![Diagram showing UCP permission levels](../images/permissions-ucp.png)
 
 Administrators can create a custom role that has Docker API permissions
 that specify the API actions that a subject may perform.
@@ -57,7 +57,7 @@ are listed on the **Create Role** page. For example, you can create a custom
 role that uses the node operations, `Schedule`, `Update`, and `View`, and you
 might give it a name like "Node Operator".
 
-![](../../images/custom-role.png){: .with-border}
+![](../images/custom-role.png){: .with-border}
 
 You can give a role a global name, like "Remove Images", which might enable 
 the **Remove** and **Force Remove** operations for images. You can apply a

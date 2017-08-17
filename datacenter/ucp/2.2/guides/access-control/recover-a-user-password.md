@@ -14,7 +14,7 @@ the **Users** page, and choose the user whose password you want to change.
 In the details pane, click **Configure** and select **Security** from the
 dropdown.
 
-![](../../images/recover-a-user-password-1.png){: .with-border}
+![](../images/recover-a-user-password-1.png){: .with-border}
 
 Update the user's password and click **Save**.
 

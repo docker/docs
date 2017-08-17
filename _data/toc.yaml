@@ -1362,28 +1362,6 @@ manuals:
           title: Use domain names to access services
         - path: /datacenter/ucp/2.2/guides/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
-      - sectiontitle: Manage users
-        section:
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/
-          title: Authentication and authorization
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/create-and-manage-users/
-          title: Create and manage users
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/create-and-manage-teams/
-          title: Create and manage teams
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/deploy-view-only-service/
-          title: Deploy a service with view-only access across an organization
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/grant-permissions/
-          title: Grant permissions to users based on roles
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-nodes-between-teams/
-          title: Isolate swarm nodes to a specific team
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/isolate-volumes-between-teams/
-          title: Isolate volumes between two different teams
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/manage-access-with-collections/
-          title: Manage access to resources by using collections
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/permission-levels/
-          title: Permission levels
-        - path: /datacenter/ucp/2.2/guides/admin/manage-users/recover-a-user-password/
-          title: Recover a user password
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/
@@ -1428,6 +1406,34 @@ manuals:
           title: uninstall-ucp
         - path: /datacenter/ucp/2.2/reference/cli/upgrade/
           title: upgrade
+    - sectiontitle: Access control
+      section:
+      - path: /datacenter/ucp/2.2/guides/access-control/
+        title: Access control model
+      - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-users/
+        title: Create and manage users
+      - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /datacenter/ucp/2.2/guides/access-control/deploy-view-only-service/
+        title: Deploy a service with view-only access across an organization
+      - path: /datacenter/ucp/2.2/guides/access-control/grant-permissions/
+        title: Grant permissions to users based on roles
+      - path: /datacenter/ucp/2.2/guides/access-control/isolate-nodes-between-teams/
+        title: Isolate swarm nodes to a specific team
+      - path: /datacenter/ucp/2.2/guides/access-control/isolate-volumes-between-teams/
+        title: Isolate volumes between two different teams
+      - path: /datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/
+        title: Manage access to resources by using collections
+      - path: /datacenter/ucp/2.2/guides/access-control/access-control-node/
+        title: Node access control
+      - path: /datacenter/ucp/2.2/guides/access-control/permission-levels/
+        title: Permission levels
+      - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-standard/
+        title: Access control design with Docker EE Standard
+      - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-advanced/
+        title: Access control design with Docker EE Advanced
+      - path: /datacenter/ucp/2.2/guides/access-control/recover-a-user-password/
+        title: Recover a user password
     - sectiontitle: User guides
       section:
       - sectiontitle: Access UCP

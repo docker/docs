@@ -11,7 +11,7 @@ way, from your browser.
 
 
 Docker UCP secures your swarm by using
-[role-based access control](../../admin/manage-users/index.md).
+[role-based access control](../../access-control/index.md).
 From the browser, administrators can:
 
 * Manage swarm configurations,
@@ -27,5 +27,5 @@ containers, and only when they're granted access by an administrator.
 
 # Where to go next
 
-* [Authorization](../../admin/manage-users/index.md)
+* [Authorization](../../access-control/index.md)
 * [Access UCP from the CLI](cli-based-access.md)

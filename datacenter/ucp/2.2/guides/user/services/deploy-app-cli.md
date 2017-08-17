@@ -11,7 +11,7 @@ application that allows users to vote on whether they prefer cats or dogs.
 ## Get a client certificate bundle
 
 Docker UCP secures your Docker swarm with
-[role-based access control](../../admin/manage-users/index.md),
+[role-based access control](../../access-control/index.md),
 so that only authorized users can deploy applications. To be able to run Docker
 commands on a swarm managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates. 
