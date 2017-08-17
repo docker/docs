@@ -193,7 +193,7 @@ three routes configured:
 Host1 also acts as a router on OSI layer 3. When one of the network clients
 tries to contact a target that is specified in Host1's routing table Host1 will
 forward the traffic accordingly. It acts as a router for all networks it knows:
-`2001:db8::/64`, `2001:db8:1::/64` and `2001:db8:2::/64`.
+`2001:db8::/64`, `2001:db8:1::/64`, and `2001:db8:2::/64`.
 
 On Host2 we have nearly the same configuration. Host2's containers will get IPv6
 addresses from `2001:db8:2::/64`. Host2 has three routes configured:
@@ -234,7 +234,7 @@ on every host.
 In this scenario containers of the same host can communicate directly with each
 other. The traffic between containers on different hosts will be routed via
 their hosts and the router. For example packet from `Container1-1` to
-`Container2-1` will be routed through `Host1`, `Router` and `Host2` until it
+`Container2-1` will be routed through `Host1`, `Router`, and `Host2` until it
 arrives at `Container2-1`.
 
 To keep the IPv6 addresses short in this example a `/48` network is assigned to
