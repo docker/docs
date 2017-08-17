@@ -260,11 +260,14 @@ Here are some tabs:
   <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
 </ul>
 <div class="tab-content">
-  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
-  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT<hr></div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT<hr></div>
 </div>
 
 You need to adjust the `id` and `data-target` values to match your use case.
+
+The `<hr>`'s are included simply to add visual separation between tabbed content
+and the other topics on the page.
 
 If you have Markdown inside the content of the `<div>`, just add `markdown="1"`
 as an attribute in the HTML for the `<div>` and Kramdown will render it.
@@ -279,12 +282,14 @@ as an attribute in the HTML for the `<div>` and Kramdown will render it.
 
 - list item 1
 - list item 2
+<hr>
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 #### Another Markdown header
 
 - list item 3
 - list item 4
+<hr>
 </div>
 </div>
 
@@ -304,8 +309,8 @@ other tab set to match.
   <li><a data-toggle="tab" data-target="#python" data-group="python">Python</a></li>
 </ul>
 <div class="tab-content">
-  <div id="go" class="tab-pane fade in active">Go content here</div>
-  <div id="python" class="tab-pane fade in">Python content here</div>
+  <div id="go" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python" class="tab-pane fade in">Python content here<hr></div>
 </div>
 
 And some content between the two sets, just for fun...
@@ -315,8 +320,8 @@ And some content between the two sets, just for fun...
   <li><a data-toggle="tab" data-target="#python-2" data-group="python">Python</a></li>
 </ul>
 <div class="tab-content">
-  <div id="go-2" class="tab-pane fade in active">Go content here</div>
-  <div id="python-2" class="tab-pane fade in">Python content here</div>
+  <div id="go-2" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python-2" class="tab-pane fade in">Python content here<hr></div>
 </div>
 
 
