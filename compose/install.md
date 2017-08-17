@@ -43,6 +43,7 @@ Docker install instructions for these are here:
 
   * [Get Docker for Mac](/docker-for-mac/install.md)
   * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+<hr>
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 ### Install Compose on Windows systems
@@ -89,6 +90,7 @@ Docker Compose. To do so, follow these steps:
     {: .important}
 
 2.  Run the executable to install Compose.
+<hr>
 </div>
 <div id="linux" class="tab-pane fade" markdown="1">
 ### Install Compose on Linux systems
@@ -150,6 +152,7 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
     $ docker-compose --version
     docker-compose version {{site.compose_current}}, build 1719ceb
     ```  
+<hr>
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 ### Alternative install options
@@ -199,6 +202,7 @@ available for direct download on the [Compose repository release page on
 GitHub](https://github.com/docker/compose/releases){: target="_blank"
 class="_"}.
 {: .important}
+<hr>
 </div>
 </div>
 
