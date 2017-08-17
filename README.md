@@ -169,10 +169,28 @@ You have three options:
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
 
-3.  Use Github Pages, with or without a local clone. Fork this repo in GitHub,
-    change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and
-    make changes to the Markdown files in your `master` branch. Browse to
-    https://\<YOUR_GITHUB_USERNAME\>.github.io/ to preview the changes.
+## Read these docs offline
+
+To read the docs offline, you can use either a standalone container or a swarm service.
+To see all available tags, go to
+[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+The following examples use the `latest` tag:
+    
+- Run a single container:
+
+  ```bash
+  docker run  -it -p 4000:4000 docs/docker.github.io:latest
+  ```
+
+- Run a swarm service:
+
+  ```bash
+  docker service create -p 4000:4000 --name localdocs --replicas 1 docs/docker.github.io:latest
+  ```
+
+  This example uses only a single replica, but you could run as many replicas as you'd like.
+
+Either way, you can now access the docs at port 4000 on your Docker host.
 
 ## Important files
 
