@@ -46,6 +46,12 @@ Docker EE. On production systems, you must use `direct-lvm` mode, which
 requires one or more dedicated block devices. Fast storage such as solid-state
 media (SSD) is recommended.
 
+> **Docker EE will not install on Oracle Linux with `selinux` enabled!**
+>
+> If you have `selinux` enabled and you attempt to install Docker EE 17.06.1,
+> you will get an error that the `container-selinux` package cannot be found.
+{:.warning }
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
