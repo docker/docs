@@ -13,7 +13,7 @@ Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
+[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks).
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
@@ -218,11 +218,11 @@ recipient container in two ways:
 
 Docker creates several environment variables when you link containers. Docker
 automatically creates environment variables in the target container based on
-the `--link` parameters.  It will also expose all environment variables
+the `--link` parameters. It will also expose all environment variables
 originating from Docker from the source container. These include variables from:
 
 * the `ENV` commands in the source container's Dockerfile
-* the `-e`, `--env` and `--env-file` options on the `docker run`
+* the `-e`, `--env`, and `--env-file` options on the `docker run`
 command when the source container is started
 
 These environment variables enable programmatic discovery from within the
@@ -241,7 +241,7 @@ listed in the `--link` parameter. For example, if a new container called
 then Docker creates a `WEBDB_NAME=/web/webdb` variable in the `web` container.
 
 Docker also defines a set of environment variables for each port exposed by the
-source container.  Each variable has a unique prefix in the form:
+source container. Each variable has a unique prefix in the form:
 
 `<name>_PORT_<port>_<protocol>`
 
@@ -266,8 +266,8 @@ that Docker creates 12 environment variables, 3 for each port.
 
 Additionally, Docker creates an environment variable called `<alias>_PORT`.
 This variable contains the URL of the source container's first exposed port.
-The  'first' port is defined as the exposed port with the lowest number.
-For example, consider the `WEBDB_PORT=tcp://172.17.0.82:5432` variable.  If
+The 'first' port is defined as the exposed port with the lowest number.
+For example, consider the `WEBDB_PORT=tcp://172.17.0.82:5432` variable. If
 that port is used for both tcp and udp, then the tcp one is specified.
 
 Finally, Docker also exposes each Docker originated environment variable
