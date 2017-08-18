@@ -168,7 +168,7 @@ CMD /app/hello.sh
 ```
 
 The second image contains all the layers from the first image, plus a new layer
-with the `RUN` instruction, and a read-write container layer. Docker already
+with the `CMD` instruction, and a read-write container layer. Docker already
 has all the layers from the first image, so it does not need to pull them again.
 The two images will share any layers they have in common.
 
