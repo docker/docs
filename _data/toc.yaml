@@ -2588,6 +2588,7 @@ manuals:
     title: Getting started
   - path: /docker-for-mac/install/
     title: Install Docker for Mac
+    nosync: true
   - path: /docker-for-mac/docker-toolbox/
     title: Docker for Mac vs. Docker Toolbox
   - path: /docker-for-mac/multi-arch/
@@ -2612,6 +2613,7 @@ manuals:
     title: Getting started
   - path: /docker-for-windows/install/
     title: Install Docker for Windows
+    nosync: true
   - path: /docker-for-windows/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-windows/faqs/
