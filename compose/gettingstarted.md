@@ -226,6 +226,9 @@ on Docker for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
 for Mac, and the general examples on how to [Manage data in
 containers](../engine/tutorials/dockervolumes.md).
 
+Check the `Hello World` message in a web browser again, and refresh to see the
+count increment.
+
 ## Step 7: Update the application
 
 Because the application code is now mounted into the container using a volume,
