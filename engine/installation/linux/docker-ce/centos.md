@@ -27,6 +27,10 @@ To learn more about Docker EE, see
 
 To install Docker CE, you need the 64-bit version of CentOS 7.
 
+The `centos-extras` repository must be enabled. This repository is enabled by
+default, but if you have disabled it, you need to
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
