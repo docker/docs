@@ -530,7 +530,7 @@ run its tasks.
 If your service attempts to use more memory than the swarm node has available,
 you may experience an Out Of Memory Exception (OOME) and a container, or the
 Docker daemon, might be killed by the kernel OOM killer. To prevent this from
-happening. ensure that your application runs on hosts with adequate memory and
+happening, ensure that your application runs on hosts with adequate memory and
 see
 [Understand the risks of running out of memory](/engine/admin/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 
