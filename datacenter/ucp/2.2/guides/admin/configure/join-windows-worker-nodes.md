@@ -40,7 +40,7 @@ On a manager node, run the following command to list the images that are require
 on Windows nodes.
 
 ```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --image-version dev: --enable-windows
+$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows
 {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
@@ -49,7 +49,7 @@ On Windows Server 2016, in a PowerShell terminal running as Administrator,
 log in to Docker Hub with the `docker login` command and pull the listed images.
 
 ```ps
-PS> docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} 
+PS> docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
 PS> docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
@@ -63,7 +63,7 @@ PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_versi
 ```
 
 > Docker daemon restart
-> 
+>
 > When you run `windows-script`, the Docker service is unavailable temporarily.  
 
 The Windows node is ready to join the swarm. Run the setup script on each
