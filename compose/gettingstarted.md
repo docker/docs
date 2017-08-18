@@ -213,21 +213,28 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ...
 ```
 
->**Tip**: If your project is outside of the `Users` directory (`cd ~`), then you
+Check the `Hello World` message in a web browser again, and refresh to see the
+count increment.
+
+> Shared folders, volumes, and bind mounts
+>
+> * If your project is outside of the `Users` directory (`cd ~`), then you
 need to share the drive or location of the Dockerfile and volume you are using.
 If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
 Docker for Windows that uses [Linux
-containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature).
-For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
+containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature). For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
 on Docker for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
 for Mac, and the general examples on how to [Manage data in
 containers](../engine/tutorials/dockervolumes.md).
-
-Check the `Hello World` message in a web browser again, and refresh to see the
-count increment.
+>
+> * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
+ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
+requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
+need VirtualBox.
+{: .important}
 
 ## Step 7: Update the application
 
@@ -245,11 +252,6 @@ to rebuild the image.
     counter should still be incrementing.
 
     ![hello world in browser](images/quick-hello-world-3.png)
-
->**Note:** If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
-ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
-need VirtualBox.
 
 ## Step 8: Experiment with some other commands
 
