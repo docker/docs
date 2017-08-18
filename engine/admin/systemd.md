@@ -1,6 +1,6 @@
 ---
 description: Controlling and configuring Docker using systemd
-keywords: docker, daemon, systemd,  configuration
+keywords: docker, daemon, systemd, configuration
 redirect_from:
 - /engine/articles/systemd/
 - /articles/systemd/
@@ -48,7 +48,7 @@ a [HTTP proxy](#http-proxy).
 
 ### Runtime directory and storage driver
 
-You may want to control the disk space used for Docker images, containers
+You may want to control the disk space used for Docker images, containers,
 and volumes by moving it to a separate partition.
 
 To accomplish this, set the following flags in the `daemon.json` file:
@@ -134,7 +134,7 @@ you will need to add this configuration in the Docker systemd service file.
     Environment=HTTPS_PROXY=https://proxy.example.com:443/
     ```
 
-## Manually creating the systemd unit files
+## Manually create the systemd unit files
 
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files
