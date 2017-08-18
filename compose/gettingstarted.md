@@ -103,7 +103,7 @@ Hub registry.
 
 ## Step 4: Build and run your app with Compose
 
-1.  From your project directory, start up your application.
+1.  From your project directory, start up your application by running `docker-compose up`.
 
     ```
     $ docker-compose up
@@ -132,19 +132,22 @@ Hub registry.
 
 2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
 
-    If you're using Docker on Linux natively, then the web app should
-    now be listening on port 5000 on your Docker daemon host.
-    If `http://0.0.0.0:5000` doesn't resolve, you can also
-    try `http://localhost:5000`.
+    If you're using Docker natively on Linux, Docker for Mac, or Docker
+    for Windows, then the web app should now be listening on port 5000
+    on your Docker daemon host. Point your web browser to `http://localhost:5000` to find the `Hello World` message. If this
+    doesn't resolve, you can also try `http://0.0.0.0:5000`.
 
-    If you're using Docker Machine on a Mac, use  
-    `docker-machine ip MACHINE_VM` to get the IP address of your
-    Docker host. Then, open `http://MACHINE_VM_IP:5000` in a browser.
+    If you're using Docker Machine on a Mac, use `docker-machine ip
+    MACHINE_VM` to get the IP address of your Docker host. Then, open
+    `http://MACHINE_VM_IP:5000` in a browser.
 
     You should see a message in your browser saying:
+
     ```
     Hello World! I have been seen 1 times.
     ```
+
+    ![hello world in browser](images/quick-hello-world-1.png)
 
 3.  Refresh the page.
 
@@ -153,6 +156,8 @@ Hub registry.
     ```
     Hello World! I have been seen 2 times.
     ```
+
+    ![hello world in browser](images/quick-hello-world-2.png)
 
 4.  Switch to another terminal window, and type `docker image ls` to
     list local images.
@@ -169,13 +174,13 @@ Hub registry.
 
     You can inspect images with `docker inspect <tag or id>`.
 
-5.  Stop the application, either by running `docker-compose down` from
-within your project directory in the second terminal, or CTRL+C in the
-original terminal where you started the app.
+5.  Stop the application, either by running `docker-compose down`
+from within your project directory in the second terminal, or by
+hitting CTRL+C in the original terminal where you started the app.
 
-## Step 5: Edit the Compose file to add a host mount as a volume
+## Step 5: Edit the Compose file to add a bind mount
 
-Edit `docker-compose.yml` in your project directory to add a volume mount for the `web` service:
+Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
 
     version: '3'
     services:
@@ -236,6 +241,8 @@ to rebuild the image.
 2.  Refresh the app in your browser. The greeting should be updated, and the
     counter should still be incrementing.
 
+    ![hello world in browser](images/quick-hello-world-3.png)
+
 >**Note:** If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
 requirements for [Docker for Windows](/docker-for-windows/install.md) and do not
@@ -282,6 +289,7 @@ At this point, you have seen the basics of how Compose works.
 ## Where to go next
 
 - Next, try the quick start guide for [Django](django.md),
-  [Rails](rails.md), or [WordPress](/samples/library/wordpress/).
+  [Rails](rails.md), or [WordPress](/samples/library/wordpress/)
 - [Explore the full list of Compose commands](./reference/)
 - [Compose configuration file reference](compose-file/)
+- To learn more about volumes and bind mounts, see [Manage data in Docker](/engine/admin/volumes/index.md)
