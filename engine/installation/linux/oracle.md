@@ -85,7 +85,7 @@ the repository.
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>/oraclelinux" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Install required packages. `yum-utils` provides the `yum-config-manager`
@@ -101,7 +101,7 @@ the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/oraclelinux/docker-ee.repo
     ```
 
 #### Install Docker EE
@@ -201,7 +201,7 @@ need to download a new file each time you want to upgrade Docker.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Browse to
-    `7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
+    `oraclelinux/7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
     for the Docker version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
