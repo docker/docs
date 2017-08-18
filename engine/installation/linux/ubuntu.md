@@ -176,7 +176,7 @@ Docker EE.
   2.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
       ```bash
-      $ curl -fsSL <DOCKER-EE-URL>/gpg | sudo apt-key add -
+      $ curl -fsSL <DOCKER-EE-URL>/ubuntu/gpg | sudo apt-key add -
       ```
 
       Verify that the key fingerprint is `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
@@ -200,7 +200,7 @@ Docker EE.
 
       ```bash
       $ sudo add-apt-repository \
-         "deb [arch=amd64] <DOCKER-EE-URL> \
+         "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
          $(lsb_release -cs) \
          stable-{{ minor-version }}"
       ```
@@ -340,7 +340,7 @@ a new file each time you want to upgrade Docker.
 
     Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+    `ubuntu/x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
     Docker version you want to install.
 
     </div>

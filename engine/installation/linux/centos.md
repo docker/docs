@@ -140,7 +140,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>/centos" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Enable the `extras` CentOS repository. This ensures access to the
@@ -163,7 +163,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/centos/docker-ee.repo
     ```
 
 #### Install Docker
@@ -284,7 +284,7 @@ a new file each time you want to upgrade Docker.
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
       trial or subscription in your browser. Go to
-      `7/x86_64/stable-{{ minor-version }}/Packages/` and download the `.rpm`
+      `centos/7/x86_64/stable-{{ minor-version }}/Packages/` and download the `.rpm`
       file for the Docker version you want to install.
 
 2.  Install Docker, changing the path below to the path where you downloaded

@@ -89,7 +89,7 @@ the repository.
       [prerequisites](#prerequisites).
 
       ```bash
-      $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+      $ sudo sh -c 'echo "<DOCKER-EE-URL>/rhel" > /etc/yum/vars/dockerurl'
       ```
 
     - Store your RHEL version string in `/etc/yum/vars/dockerosversion`.
@@ -143,7 +143,7 @@ the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        <DOCKER-EE-URL>/docker-ee.repo
+        <DOCKER-EE-URL>/rhel/docker-ee.repo
     ```
 
 #### Install Docker
@@ -244,7 +244,7 @@ need to download a new file each time you want to upgrade Docker.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
+    `rhel/7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm` file
     for the Docker version you want to install.
 
     > **Note**: If you have trouble with `selinux` using the packages under the
