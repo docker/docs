@@ -4,6 +4,105 @@ description: Release notes for Docker Compose
 keywords: release notes, compose
 toc_max: 2
 ---
+## 1.15.0 (2017-07-26)
+
+### New features
+
+#### Compose file version 2.2
+
+- Added support for the `network` parameter in build configurations.
+
+#### Compose file version 2.1 and up
+
+- The `pid` option in a service's definition now supports a `service:<name>`
+  value.
+
+- Added support for the `storage_opt` parameter in in service definitions.
+  This option is not available for the v3 format
+
+#### All formats
+
+- Added `--quiet` flag to `docker-compose pull`, suppressing progress output
+
+- Some improvements to CLI output
+
+### Bugfixes
+
+- Volumes specified through the `--volume` flag of `docker-compose run` now
+  complement volumes declared in the service's defintion instead of replacing
+  them
+
+- Fixed a bug where using multiple Compose files would unset the scale value
+  defined inside the Compose file.
+
+- Fixed an issue where the `credHelpers` entries in the `config.json` file
+  were not being honored by Compose
+
+- Fixed a bug where using multiple Compose files with port declarations
+  would cause failures in Python 3 environments
+
+- Fixed a bug where some proxy-related options present in the user's
+  environment would prevent Compose from running
+
+- Fixed an issue where the output of `docker-compose config` would be invalid
+  if the original file used `Y` or `N` values
+
+- Fixed an issue preventing `up` operations on a previously created stack on
+  Windows Engine.
+
+## 1.14.0 (2017-06-19)
+
+### New features
+
+#### Compose file version 3.3
+
+- Introduced version 3.3 of the `docker-compose.yml` specification.
+  This version requires to be used with Docker Engine 17.06.0 or above.
+  Note: the `credential_spec` and `configs` keys only apply to Swarm services
+  and will be ignored by Compose
+
+#### Compose file version 2.2
+
+- Added the following parameters in service definitions: `cpu_count`,
+  `cpu_percent`, `cpus`
+
+#### Compose file version 2.1
+
+- Added support for build labels. This feature is also available in the
+  2.2 and 3.3 formats.
+
+#### All formats
+
+- Added shorthand `-u` for `--user` flag in `docker-compose exec`
+
+- Differences in labels between the Compose file and remote network
+  will now print a warning instead of preventing redeployment.
+
+### Bugfixes
+
+- Fixed a bug where service's dependencies were being rescaled to their
+  default scale when running a `docker-compose run` command
+
+- Fixed a bug where `docker-compose rm` with the `--stop` flag was not
+  behaving properly when provided with a list of services to remove
+
+- Fixed a bug where `cache_from` in the build section would be ignored when
+  using more than one Compose file.
+
+- Fixed a bug that prevented binding the same port to different IPs when
+  using more than one Compose file.
+
+- Fixed a bug where override files would not be picked up by Compose if they
+  had the `.yaml` extension
+
+- Fixed a bug on Windows Engine where networks would be incorrectly flagged
+  for recreation
+
+- Fixed a bug where services declaring ports would cause crashes on some
+  versions of Python 3
+
+- Fixed a bug where the output of `docker-compose config` would sometimes
+  contain invalid port definitions
 
 ## 1.13.0 (2017-05-02)
 
