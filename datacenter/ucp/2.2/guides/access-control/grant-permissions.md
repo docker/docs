@@ -7,13 +7,13 @@ keywords: ucp, grant, role, permission, authentication, authorization
 If you're a UCP administrator, you can create *grants* to control how users 
 and organizations access swarm resources.
 
+![](../images/ucp-grant-model-0.svg){: .with-border}
+
 A grant is made up of a *subject*, a *role*, and a *resource collection*.
 A grant defines who (subject) has how much access (role) 
 to a set of resources (collection). Each grant is a 1:1:1 mapping of 
 subject, role, collection. For example, you can grant the "Prod Team" 
 "Restricted Control" permissions for the "/Production" collection.
-
-![](../images/ucp-grant-model.png){: .with-border}
 
 The usual workflow for creating grants has four steps.
 
@@ -22,6 +22,8 @@ The usual workflow for creating grants has four steps.
 2.  Organize swarm resources into separate collections that each team uses.
 3.  Optionally, create custom roles for specific permissions to the Docker API.
 4.  Grant role-based access to collections for your teams.
+
+![](../images/ucp-grant-model.svg){: .with-border}
 
 ## Create a grant
 
