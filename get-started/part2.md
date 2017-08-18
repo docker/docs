@@ -213,11 +213,11 @@ docker run -d -p 4000:80 friendlyhello
 
 You get the long container ID for your app and then are kicked back to your
 terminal. Your container is running in the background. You can also see the
-abbreviated container ID with `docker ps` (and both work interchangeably when
+abbreviated container ID with `docker container ls` (and both work interchangeably when
 running commands):
 
 ```shell
-$ docker ps
+$ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED
 1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
 ```
@@ -318,6 +318,10 @@ If the image isn't available locally on the machine, Docker will pull it from
 the repository.
 
 ```shell
+docker image rm <image id>
+```
+
+```shell
 $ docker run -p 4000:80 john/get-started:part1
 Unable to find image 'john/get-started:part1' locally
 part1: Pulling from orangesnap/get-started
@@ -367,15 +371,15 @@ ones if you'd like to explore a bit before moving on.
 docker build -t friendlyname .  # Create image using this directory's Dockerfile
 docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
 docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
-docker ps                                 # See a list of all running containers
-docker stop <hash>                     # Gracefully stop the specified container
-docker ps -a           # See a list of all containers, even the ones not running
-docker kill <hash>                   # Force shutdown of the specified container
-docker rm <hash>              # Remove the specified container from this machine
-docker rm $(docker ps -a -q)           # Remove all containers from this machine
-docker images -a                               # Show all images on this machine
-docker rmi <imagename>            # Remove the specified image from this machine
-docker rmi $(docker images -q)             # Remove all images from this machine
+docker container ls                                # List all running containers
+docker container ls -a             # List all containers, even those not running
+docker container stop <hash>           # Gracefully stop the specified container
+docker container kill <hash>         # Force shutdown of the specified container
+docker container rm <hash>        # Remove specified container from this machine
+docker container rm $(docker container ls -a -q)         # Remove all containers
+docker image ls -a                             # List all images on this machine
+docker image rm <image id>            # Remove specified image from this machine
+docker image rm $(docker image ls -a -q)   # Remove all images from this machine
 docker login             # Log in this CLI session using your Docker credentials
 docker tag <image> username/repository:tag  # Tag <image> for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
