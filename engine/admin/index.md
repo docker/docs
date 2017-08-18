@@ -17,7 +17,7 @@ daemon if you run into issues.
 The command to start Docker depends on your operating system. Check the correct
 page under [Install Docker](/engine/installation/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](/engine/installation/linux/linux-postinstall.md#configure-docker-to-start-on-boot)
+[Configure Docker to start on boot](/engine/installation/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Start the daemon manually
 
@@ -153,7 +153,7 @@ Docker platform.
 
 Instead of following this procedure, you can also stop the Docker daemon and
 restart it manually with the `-D` flag. However, this may result in Docker
-restarting with a different environment than the one the hosts's startup scripts
+restarting with a different environment than the one the hosts' startup scripts
 will create, and this may make debugging more difficult.
 
 ### Force a stack trace to be logged
