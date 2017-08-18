@@ -77,7 +77,7 @@ and the API is fully interactive within the UCP UI.
   session timeout](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/).
 * docker/ucp
   * The `support` command does not currently produce a valid support dump. As a
-  workaround you can create support dumps with an [older version of docker/ucp](https://docs.docker.com/datacenter/ucp/2.1/guides/get-support/#from-the-cli).
+  workaround you can download a support dumps from the web UI.
 * Windows issues
   * Disk related metrics do not display for Windows worker nodes.
   * If upgrading from an existing deployment, ensure that HRM is using a non-encrypted
