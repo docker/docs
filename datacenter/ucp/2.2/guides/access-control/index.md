@@ -19,7 +19,7 @@ A grant defines who (subject) has how much access (role)
 to a set of resources (collection).
 [Learn how to grant permissions to users based on roles](grant-permissions.md).
 
-![](../images/ucp-grant-model.png)
+![](../images/ucp-grant-model.svg)
 
 An administrator is a user who can manage grants, subjects, roles, and
 collections. An administrator identifies which operations can be performed
