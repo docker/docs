@@ -599,7 +599,7 @@ Linux VM.
 
 You can select which daemon (Linux or Windows) the Docker
 CLI talks to. Select **Switch to Windows containers** to toggle to Windows
-containers. Select **Switch to Linux containers**.
+containers. Select **Switch to Linux containers** to toggle back to the default, Linux containers.
 
 ![Windows-Linux container types switch](images/config-popup-win-linux-switch.png)
 

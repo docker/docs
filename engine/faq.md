@@ -24,24 +24,33 @@ https://github.com/moby/moby/blob/master/LICENSE)
 
 ### Does Docker run on Linux, macOS, or Windows?
 
-The Docker Engine client runs natively on Linux, macOS, and Windows. By default, these
-clients connect to a local Docker daemon running in a virtual environment managed
-by Docker, which provides the required features to run Linux-based containers within
-OS X or Windows, or Windows-based containers on Windows.
+The Docker Engine client runs natively on Linux, macOS, and Windows. By default,
+these clients connect to a local Docker daemon running in a virtual environment
+managed by Docker, which provides the required features to run Linux-based
+containers within OS X or Windows, and Windows-based containers on Windows.
 
 If your version of macOS or Windows does not include the required virtualization
 technology, you can use Docker Machine to work around these limitations.
 
-You can run Windows-based **containers** on Windows Server 2016 and
-Windows 10. Windows-based containers require a Windows kernel to run, in the same
-way that Linux-based containers require a Linux kernel to run. You can even run
-Windows-based containers on a Windows virtual machine running on an macOS or Linux
-host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite, Windows
-Server 2016, or Windows 10.
+You can run Windows-based **containers** on Windows Server 2016 and Windows 10.
+Windows-based containers require a Windows kernel to run, in the same way that
+Linux-based containers require a Linux kernel to run. You can even run
+Windows-based containers on a Windows virtual machine running on an macOS or
+Linux host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite,
+Windows Server 2016, or Windows 10.
+
+To learn more about Docker on Windows platforms, see the all the topics in
+[Install Docker for Windows](/docker-for-windows/install.md) and
+[Install Docker Enterprise Edition for Windows Server 2016](/engine/installation/windows/docker-ee.md).
 
 ### How do containers compare to virtual machines?
 
-Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second.
+Containers and virtual machines (VMs) are complementary. VMs excel at providing
+extreme isolation (for example with hostile tenant applications where you need
+the ultimate break out prevention). Containers operate at the process level,
+which makes them very lightweight and perfect as a unit of software delivery.
+While VMs take minutes to boot, containers can often be started in less than a
+second.
 
 ### What does Docker technology add to just plain LXC?
 
