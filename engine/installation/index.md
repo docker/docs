@@ -10,6 +10,8 @@ redirect_from:
 - /engine/installation/linux/archlinux/
 - /engine/installation/linux/cruxlinux/
 - /engine/installation/linux/gentoolinux/
+- /engine/installation/linux/docker-ce/
+- /engine/installation/linux/docker-ee/
 title: Install Docker
 ---
 

@@ -18,8 +18,8 @@ versions here](https://docs.docker.com/release-notes/) or subscribe to the
 
 ## Install Docker EE
 
-Docker EE for Windows requires Windows Server 2016. See [What to know before
-you install](/docker-ee-for-windows/#what-to-know-before-you-install) for a
+Docker EE for Windows requires Windows Server 2016. See
+[What to know before you install](#what-to-know-before-you-install) for a
 full list of prerequisites. To install Docker Community Edition (*Docker CE*)
 on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/install.md).
 

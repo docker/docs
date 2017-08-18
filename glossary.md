@@ -6,6 +6,7 @@ notoc: true
 noratings: true
 redirect_from:
 - /engine/reference/glossary/
+- /reference/glossary/
 ---
 <!--
 To edit/add/remove glossary entries, visit the YAML file at:

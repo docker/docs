@@ -2,6 +2,9 @@
 description: Overview of contributing
 keywords: open, source, contributing, overview
 title: Open Source at Docker
+redirect_from:
+- /contributing/
+- /contributing/contributing/
 ---
 
 Contributing to the Docker project or to any open source project can be a
