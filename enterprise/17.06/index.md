@@ -16,13 +16,20 @@ adopted as quickly for consistency and compatibility reasons.
 
 ## 17.06.1-ee (2017-08-16)
 
-> **Note**: Starting with Docker EE 17.06.1, Ubuntu, SLES, RHEL packages are
-> also available for IBM Z using the s390x architecture.
+### Important notes about this release
 
-> **Note**: Docker 17.06 by default disables communication with legacy (v1)
-> registries. If you require interaction with registries that have not yet
-> migrated to the v2 protocol, set the `--disable-legacy-registry=false` daemon
-> option. Interaction with v1 registries will be removed in Docker 17.12.
+- Starting with Docker EE 17.06.1, Ubuntu, SLES, RHEL packages are also available
+  for IBM Z using the s390x architecture.
+  
+- Docker EE 17.06.1 includes a new [telemetry plugin](/enterprise/telemetry/)
+  which is enabled by default on Ubuntu hosts. For more details, including how to
+  opt out, see [the documentation(/enterprise/telemetry/).
+
+- Docker 17.06 by default disables communication with legacy (v1)
+  registries. If you require interaction with registries that have not yet
+  migrated to the v2 protocol, set the `--disable-legacy-registry=false` daemon
+  option. Interaction with v1 registries will be removed in Docker 17.12.
+
 
 ### Builder
 
