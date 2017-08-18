@@ -1,0 +1,75 @@
+---
+title: "How do you set custom docker daemon options in the Docker Cloud Agent?"
+id: 753
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/753/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudagent"
+- tag: "platform:linux"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_you_set_custom_docker_daemon_options_in_the_Docker_Cloud_Agent?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <ul>
+  <li>
+   How do you set custom docker daemon options in the Docker Cloud Agent?
+  </li>
+  <li>
+   Can I customize the docker engine options used by the Docker Cloud Agent?
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_do_you_set_custom_docker_daemon_options_in_the_Docker_Cloud_Agent?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  Options can be passed to the Docker daemon that the Docker Cloud Agent runs by:
+ </p>
+ <ol>
+  <li>
+   Stop the agent
+  </li>
+  <li>
+   Run
+   <code>
+    dockercloud-agent -docker-opts &lt;extra opts&gt;
+   </code>
+   where
+   <code>
+    &lt;extra opts&gt;
+   </code>
+   are the options you would like to be passed to the Docker daemon
+  </li>
+  <li>
+   Restart the agent
+  </li>
+ </ol>
+ <p>
+  These extra options will get stored in the
+  <code>
+   /etc/dockercloud/agent/dockercloud-agent.conf
+  </code>
+  file and will be in effect for all future runs of the Docker Cloud Agent. The options currently in effect can be confirmed after restarting the Cloud Agent by running
+  <code>
+   ps
+  </code>
+  <code>
+   faux | grep
+  </code>
+  <code>
+   docker
+  </code>
+  on the command line and reviewing the options shown for the Docker daemon process.
+ </p>
+</div>
+{% endraw %}

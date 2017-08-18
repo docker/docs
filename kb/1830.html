@@ -1,0 +1,90 @@
+---
+title: "Upgrading to Docker 17.03 (or DDC on Engine 1.13)"
+id: 1830
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1830/contents
+tags:
+- tag: "article:question"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.13.1-cs1"
+---
+{% raw %}
+<p>
+ As written in the
+ <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/">
+  documentation
+ </a>
+ , when upgrading to Docker 17.03 or Docker Engine 1.13, the components must be upgraded in a specific order: first upgrade CS Engine on all nodes, followed by UCP, followed by DTR.
+</p>
+<p>
+ The upgrade process for each component usually requires you to upgrade sequentially from one release to the next. For example, upgrading to CS Engine 1.11.z would require you to be currently running CS Engine 1.10.z, and likewise upgrading to DTR 2.1.z would require you to be currently using DTR 2.0.z. This means that if you wanted to jump two versions of a product, you would usually have to sequentially upgrade using the versions in between.
+</p>
+<p>
+ In the specific cases of Docker 17.03 and CS Engine 1.13 (UCP 2.1.z and DTR 2.2.z), however, there are some exceptions which allow you to skip some sequential upgrades. Here are the cases:
+</p>
+<ul>
+ <li>
+  <strong>
+   CS Engine
+  </strong>
+  : You
+  <strong>
+   can
+  </strong>
+  upgrade directly from CS Engine 1.11.z to CS Engine 1.13.z (skipping 1.12.z). You can also upgrade from Engine 1.12.z to 1.13.z, as usual.
+ </li>
+ <li>
+  <strong>
+   UCP
+  </strong>
+  : You
+  <strong>
+   can
+  </strong>
+  upgrade directly from UCP 1.1.z to UCP 2.1.z (skipping 2.0.z). You can also upgrade from UCP 2.0.z to 2.1.z, as usual.
+ </li>
+ <li>
+  <strong>
+   DTR
+  </strong>
+  : You
+  <strong>
+   cannot
+  </strong>
+  skip upgrades with DTR. You must upgrade from DTR 2.1.z to 2.2.z. If you are currently on DTR 2.0.z, you need to upgrade first to 2.1.z and then to 2.2.z.
+ </li>
+</ul>
+<p>
+ Docker CS Engine 1.13 has several architectural improvements that provide increased stability. Thus, if you are currently running CS Engine 1.11.z and UCP 1.1.z, Docker recommends skipping CS Engine 1.12.z and UCP 2.0.z and instead upgrading directly to CS Engine 1.13.z and UCP 2.1.z. Please note that this guideline is for
+ <strong>
+  the specific case
+ </strong>
+ of upgrading to Engine 1.13 and UCP 2.1. In future versions, you can expect that upgrades should be done with sequential versions, as usual.
+</p>
+<p>
+ As always, Docker recommends using the latest ".z" patch versions within a given release in order to ensure the highest possible stability, security, and quality.
+</p>
+<blockquote>
+ <p>
+  There is known issue in UCP versions 2.1.0, 2.1.1, and 2.1.2 where upgrading from UCP 1.1.z can cause swarm to leave worker nodes in a pending state:
+  <code>
+   [Pending] Completing node registration.
+  </code>
+ </p>
+ <p>
+  There are two workarounds for rectifying this issue:
+ </p>
+ <p class="mt-indent-1">
+  A. When upgrading from UCP 1.1.z, first upgrade to UCP 2.0.z, and then to UCP 2.1.z. This will prevent the issue from occurring in the first place and is the recommended upgrade path.
+ </p>
+ <p class="mt-indent-1">
+  B. If you have already upgraded from UCP 1.1.z directly to UCP 2.1.z, you can rectify the issue by restarting the ucp-swarm-manager container on each of your UCP controller nodes.
+ </p>
+ <p>
+  This known issue will be fully rectified in the UCP 2.1.3 patch release.
+ </p>
+</blockquote>
+
+{% endraw %}

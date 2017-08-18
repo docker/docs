@@ -1,0 +1,50 @@
+---
+title: "Is it possible to increase the number of nodes to more than 10 on Docker Cloud?"
+id: 1055
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1055/contents
+tags:
+- tag: "article:topic"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Is_it_possible_to_increase_the_number_of_nodes_to_more_than_10_or_the_size_of_nodes_in_an_existing_cluster_on_Docker_Cloud?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <ul>
+  <li>
+   Is it possible to increase the number of nodes to more than 10 on Docker Cloud?
+  </li>
+  <li>
+   Is it possible to increase the size of nodes in an existing cluster on Docker Cloud? (e.g. from a t2.small to m4.large)
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Is_it_possible_to_increase_the_number_of_nodes_to_more_than_10_or_the_size_of_nodes_in_an_existing_cluster_on_Docker_Cloud?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  It is possible to increase the maximum number of nodes on Docker Cloud. However, it is not possible to increase the number of nodes per cluster currently.
+ </p>
+ <p>
+  All the quotas on your account page (
+  <a class="link-https" href="https://cloud.docker.com/account/#quota" rel="freeklink" target="_blank" title="https://cloud.docker.com/account/#quota">
+   https://cloud.docker.com/account/#quota
+  </a>
+  ) are qualified for adjustment by
+  <a class="link-https" href="https://support.docker.com/" rel="external nofollow" target="_blank" title="https://support.docker.com/">
+   opening a support case
+  </a>
+  .
+ </p>
+ <p>
+  As for increasing the size of nodes in an existing cluster, the only method to achieve that currently is to rebuild the cluster as the node size can only be adjusted during cluster creation.
+ </p>
+</div>
+{% endraw %}

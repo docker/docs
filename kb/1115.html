@@ -1,0 +1,61 @@
+---
+title: "FAQ: Docker Security Scanning"
+id: 1115
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1115/contents
+tags:
+- tag: "article:topic"
+- tag: "product:cloud"
+---
+{% raw %}
+<p>
+ Docker Cloud can scan images in private repositories to verify that they are free from known security vulnerabilities or exposures, and report the results of the scan for each image tag. To learn more, see
+ <em>
+  <a class="link-https" href="https://docs.docker.com/docker-cloud/builds/image-scan/" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-cloud/builds/image-scan/">
+   Security scanning in Docker Cloud
+  </a>
+ </em>
+ .
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/FAQ:_Docker_Security_Scanning">
+ <span id="Q._Does_Docker_Security_Scanning_support_teams_and_organizations.3F">
+ </span>
+ <h4 id="3-0">
+  Q. Does Docker Security Scanning support teams and organizations?
+ </h4>
+ <p>
+  Currently, Docker Cloud does not provide support for creating teams or organizations. Docker Security Scanning will be made available to teams and organizations when those features are available.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/FAQ:_Docker_Security_Scanning">
+ <span id="Q._Will_Docker_Security_Scanning_check_public_repositories.3F">
+ </span>
+ <h4 id="3-1">
+  Q. Will Docker Security Scanning check public repositories?
+ </h4>
+ <p>
+  Currently, all official repositories are continuously scanned and private repositories are scanned during a push. In the future, we will extend this to public repositories. Stay tuned!
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/FAQ:_Docker_Security_Scanning">
+ <span id="Q._Which_CVE_databases_does_Docker_Security_Scanning_use.3F">
+ </span>
+ <h4 id="3-2">
+  Q. Which CVE databases does Docker Security Scanning use?
+ </h4>
+ <p>
+  Docker Security Scanning uses all the major Common Vulnerabilities and Exposures (CVE) databases such as MITRE, NIST NVD, and others.
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="Cloud/FAQ:_Docker_Security_Scanning">
+ <span id="Q._Does_Docker_Security_Scanning_support_Microsoft_Windows_images.3F">
+ </span>
+ <h4 id="3-3">
+  Q. Does Docker Security Scanning support Microsoft Windows images?
+ </h4>
+ <p>
+  Yes, Docker Security Scanning will scan images based on Microsoft Windows.
+ </p>
+</div>
+{% endraw %}

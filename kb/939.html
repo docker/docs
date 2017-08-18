@@ -1,0 +1,24 @@
+---
+title: "Why can't I log into Docker Cloud with my organization account?"
+id: 939
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/939/contents
+tags:
+- tag: "article:question"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ You cannot directly log into Docker Cloud or Docker Hub with an organization account. Instead, login with a user account that is a member of a team in the organization. You can then deploy repositories from that organization onto your nodes if you have the necessary permissions to access them.
+</p>
+<p>
+ If the organization account had nodes and services running on Docker Cloud prior to being converted, you may no longer have access to them. Please
+ <a class="link-https" href="https://support.docker.com/" rel="external nofollow" target="_blank" title="https://support.docker.com/">
+  open a support request
+ </a>
+ so we can recover your Stackfiles and you can deploy them on new nodes controlled by another user account you own.
+</p>
+
+{% endraw %}

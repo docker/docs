@@ -1,0 +1,45 @@
+---
+title: "What happens if I restart a node in the AWS console?"
+id: 579
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/579/contents
+tags:
+- tag: "article:topic"
+- tag: "aws"
+- tag: "component:cloudagent"
+- tag: "Docker Cloud"
+- tag: "Docker Cloud Agent"
+- tag: "nodes"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/What_happens_if_I_restart_a_node_in_the_AWS_console?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  What happens if I restart a node in the AWS console?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/What_happens_if_I_restart_a_node_in_the_AWS_console?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  After the node boots up, the Docker Cloud Agent tries to contact the Cloud API and register itself with the new IP. Docker Cloud automatically updates the DNS of the node and the containers on it to use the new IP. The node’s state changes from
+  <code>
+   Unreachable
+  </code>
+  to
+  <code>
+   Deployed
+  </code>
+  .
+ </p>
+</div>
+{% endraw %}

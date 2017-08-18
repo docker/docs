@@ -1,0 +1,43 @@
+---
+title: "How do I switch a repository from an Automated Build to a regular repository?"
+id: 664
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/664/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "product:datacenter"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_I_switch_a_repository_from_an_Automated_Build_to_a_regular_repository?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  How do I switch a repository from an Automated Build to a regular repository?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_do_I_switch_a_repository_from_an_Automated_Build_to_a_regular_repository?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  The only way to take a repository that is not an automated build and make it into a regular repository is to delete the automated build repo and then re-create the repository as a normal one.
+ </p>
+ <p>
+  You can pull all the tags associated with this repository, remove the automated build, and then re-push everything.
+ </p>
+ <p>
+  To delete the build, log in to
+  <a class="external" href="http://hub.docker.com/" rel="external nofollow" target="_blank" title="http://hub.docker.com/">
+   hub.docker.com
+  </a>
+  and click on the "Details" for the automated build you'd like to delete. Next, click on "Settings". Finally, choose the "Delete" option.
+ </p>
+</div>
+{% endraw %}

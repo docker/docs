@@ -1,0 +1,60 @@
+---
+title: "Failed to start Auth Data Store"
+id: 1253
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1253/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "Installation"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.11.1-cs1"
+- tag: "testedon:ucp-1.1.1"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Failed_to_start_Auth_Data_Store">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  I receive this error during a clean installation of UCP:
+ </p>
+ <pre>
+<code>Failed to start Auth Data Store. Run "docker logs ucp-auth-store" for more details.</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Failed_to_start_Auth_Data_Store">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-1">
+  Resolution
+ </h3>
+ <p>
+  There's a known issue originating from Docker Engine 1.11 where the hostname of a UCP node cannot be more than
+  <strong>
+   48 characters
+  </strong>
+  long.
+ </p>
+ <p>
+  To resolve this issue, shorten your domain name to make it 48 characters or less.
+ </p>
+ <p>
+  <strong>
+   Note
+  </strong>
+  : This issue is only valid with
+  <strong>
+   UCP 1.1.1
+  </strong>
+  and
+  <strong>
+   Docker Engine 1.11
+  </strong>
+ </p>
+</div>
+{% endraw %}

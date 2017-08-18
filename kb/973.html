@@ -1,0 +1,48 @@
+---
+title: "Why do I get intermittent failures when I try to push to repositories on Docker Hub?"
+id: 973
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/973/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "DNS"
+- tag: "hub"
+- tag: "platform:linux"
+- tag: "product:cloud"
+- tag: "push"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_do_I_get_intermittent_failures_when_I_try_to_push_to_repositories_on_Docker_Hub?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  Why do I get intermittent failures when I try and upload to repositories on Docker Hub?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Why_do_I_get_intermittent_failures_when_I_try_to_push_to_repositories_on_Docker_Hub?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p dir="auto">
+  This can sometimes occur due to DNS resolution problems on the client machine. Try changing the default DNS servers in
+  <code>
+   /etc/resolv.conf
+  </code>
+  to use Google's public DNS resolvers:
+ </p>
+ <pre>
+<code>nameserver 8.8.8.8
+nameserver 8.8.4.4
+</code></pre>
+ <p>
+  If this resolves the issue then additional investigation of the original DNS servers may be needed.
+ </p>
+</div>
+{% endraw %}

@@ -1,0 +1,55 @@
+---
+title: "I get x509: certificate signed by unknown authority error when I try to login to my DTR with default certificates"
+id: 1251
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1251/contents
+tags:
+- tag: "article:howto"
+- tag: "certificate"
+- tag: "component:dtr"
+- tag: "DTR"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p dir="auto">
+ This error message means that you do not have a trusted certificate. You need to trust the default certificates generated during your Docker Trusted Registry (DTR) installation.
+</p>
+<p dir="auto">
+ You can do so by running these commands on the nodes from where you want to access your DTR (be sure to replace
+ <code>
+  <span class="replaceabletext">
+   &lt;my-dtr-domain&gt;
+  </span>
+ </code>
+ with your DTR Domain name.):
+</p>
+<div class="mt-section" id="section_1" mt-section-origin='KBase/I_get_"x509:_certificate_signed_by_unknown_authority"_error_when_I_try_to_login_to_my_DTR_with_default_certificates'>
+ <span id="CentOS.2FRHEL">
+ </span>
+ <h4 id="3-0">
+  CentOS/RHEL
+ </h4>
+ <pre>
+<code>export DOMAIN_NAME=<span class="replaceabletext">&lt;my-dtr-domain&gt;</span>
+openssl s_client -connect $DOMAIN_NAME:443 -showcerts &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM | tee /etc/pki/ca-trust/source/anchors/$DOMAIN_NAME.crt
+update-ca-trust
+/bin/systemctl restart docker.service
+</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin='KBase/I_get_"x509:_certificate_signed_by_unknown_authority"_error_when_I_try_to_login_to_my_DTR_with_default_certificates'>
+ <span id="Ubuntu">
+ </span>
+ <h4 id="3-1">
+  Ubuntu
+ </h4>
+ <pre>
+<code>export DOMAIN_NAME=<span class="replaceabletext">&lt;my-dtr-domain&gt;</span>
+openssl s_client -connect $DOMAIN_NAME:443 -showcerts &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM | tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt
+update-ca-certificates
+service docker restart</code>
+</pre>
+</div>
+{% endraw %}

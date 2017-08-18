@@ -1,0 +1,104 @@
+---
+title: "Why do my TLS certificates not work with Docker Compose?"
+id: 1433
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1433/contents
+tags:
+- tag: "article:question"
+- tag: "component:compose"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Different TLS clients are picky about different situations. Usually when the
+ <code>
+  docker-py
+ </code>
+ client (that
+ <code>
+  docker-compose
+ </code>
+ uses) has this issue, there's a certificate out of place.
+</p>
+<p>
+ Double check that the following are inside your
+ <code>
+  ucp-controller-server-certs
+ </code>
+ volume:
+</p>
+<ul>
+ <li>
+  <code>
+   ca.pem
+  </code>
+  - This should have exactly one certificate, and that should be the root certificate authority for the whole chain.
+ </li>
+ <li>
+  <code>
+   cert.pem
+  </code>
+  - This should have the actual certificate for UCP, and
+  <strong>
+   all
+  </strong>
+  its intermediate certificates. The server certificate should be at the top. The next certificate should be the next certificate in the chain. The last certificate should be signed by the root certificate that appears in
+  <code>
+   ca.pem
+  </code>
+  .
+ </li>
+ <li>
+  <code>
+   key.pem*
+  </code>
+  - This should have only the private key file and nothing else.
+ </li>
+</ul>
+<p>
+ For example, if my server certificate is for ucp.example.com, and it is signed by 'Acme Intermediary G3 CA' which is in turn signed by 'Acme Root G3 CA', which in turn is signed by itself, then I'd expect the following to be the case:
+</p>
+<ul type="disc">
+ <li>
+  <code>
+   ca.pem
+  </code>
+  - This should have the 'Acme Root G3 CA' certificate only.
+ </li>
+ <li>
+  <code>
+   cert.pem
+  </code>
+  - This would have the 'ucp.example.com' certificate, followed by 'Acme Intermediary G3 CA'.
+ </li>
+ <li>
+  <code>
+   key.pem*
+  </code>
+  - This would have the private key for 'ucp.example.com'.
+ </li>
+</ul>
+<p>
+ Similarly, in the DTR graphical interface where you can upload certificates, the same holds true but for the
+ <strong>
+  TLS CA
+ </strong>
+ and
+ <strong>
+  TLS certificate
+ </strong>
+ fields, respectively.
+</p>
+<blockquote>
+ <strong>
+  NOTE:
+ </strong>
+ <code>
+  key.pem
+ </code>
+ should never be shared with a third party, including Docker Support.
+</blockquote>
+
+{% endraw %}

@@ -1,0 +1,33 @@
+---
+title: "On DTR 2.2.1, why does the dtr-api container steadily use memory until DTR is unavailable?"
+id: 1929
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1929/contents
+tags:
+- tag: "article:question"
+- tag: "component:dtr"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-2.2.1"
+- tag: "usecase:caas"
+---
+{% raw %}
+<p>
+ On DTR 2.2.1, the
+ <code>
+  dtr-api
+ </code>
+ container has been known to steadily use memory until DTR is unavailable, even if the cluster is not busy.
+</p>
+<p>
+ This has been resolved in DTR 2.2.3. Upgrading to DTR 2.2.3 will fix this issue. For details on upgrading DTR, refer to the following:
+</p>
+<p>
+ <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/" rel="external nofollow" target="_blank">
+  https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/
+ </a>
+</p>
+
+{% endraw %}

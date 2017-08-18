@@ -1,0 +1,23 @@
+---
+title: "Why are memory metrics not being reported?"
+id: 1758
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1758/contents
+tags:
+- tag: "article:errors"
+- tag: "component:csengine"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "special:ownership"
+---
+{% raw %}
+<p>
+ In order to report accurate memory metrics, Docker Engine needs certain kernel settings to be enabled. Ubuntu and Debian are commonly missing these settings; you can learn how to enable them in this
+ <a class="link-https" href="https://docs.docker.com/v1.12/engine/installation/linux/ubuntulinux/#/enable-memory-and-swap-accounting" rel="external nofollow" target="_blank" title="https://docs.docker.com/v1.12/engine/installation/linux/ubuntulinux/#/enable-memory-and-swap-accounting">
+  installation documentation
+ </a>
+ .
+</p>
+
+{% endraw %}
