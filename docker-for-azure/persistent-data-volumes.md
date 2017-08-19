@@ -37,6 +37,42 @@ ID                  NAME                        DESCRIPTION                     
 f416c95c0dcc        cloudstor:azure             cloud storage plugin for Docker   true
 ```
 
+### Install Cloudstor
+
+If Cloudstor is not installed, you need to find the lastest version [here](https://store.docker.com/community/images/docker4x/cloudstor/tags)
+> **Note**: We will use the 17.05.0-ce-azure2 version in our example, feel free to replace with the current version
+
+For configuring the plugin, you will need a Storage Account on Azure name and access key. You can find on your Storage Account > Access Keys page:
+![Azure Portal](img/azure-storage-key.png)
+
+> **Note**: If you use Docker on Linux, the Account Storage should have `Secure transfer required` disabled, it's not supported by Linux for now.
+![Azure Portal](img/azure-storage-configuration.png)
+
+On each swarm node, install the plugin:
+
+```bash
+docker plugin install docker4x/cloudstor:17.05.0-ce-azure2 \
+    --alias cloudstor:azure \
+    CLOUD_PLATFORM=AZURE \
+    AZURE_STORAGE_ACCOUNT_KEY="mmpwuGgnSKHodND...." \
+    AZURE_STORAGE_ACCOUNT="myswarmstorage"
+
+Plugin "docker4x/cloudstor:17.05.0-ce-azure2" is requesting the following privileges:
+ - network: [host]
+ - mount: [/dev]
+ - allow-all-devices: [true]
+services:
+ - capabilities: [CAP_SYS_ADMIN CAP_DAC_OVERRIDE CAP_DAC_READ_SEARCH]
+Do you grant the above permissions? [y/N] y
+17.05.0-ce-azure2: Pulling from docker4x/cloudstor
+1f90a29ccfcb: Verifying Checksum
+1f90a29ccfcb: Download complete
+Digest: sha256:aa2ae6026e8f5c84d3992e239ec7eec2c578090f10528a51bd8c311d5da48c7a
+Status: Downloaded newer image for docker4x/cloudstor:17.05.0-ce-azure2
+Installed plugin docker4x/cloudstor:17.05.0-ce-azure2
+```
+
+
 The following examples show how to create swarm services that require data
 persistence using the `--mount` flag and specifying Cloudstor as the volume
 driver.
