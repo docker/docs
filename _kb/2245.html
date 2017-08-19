@@ -1,0 +1,326 @@
+---
+title: "DTR upgrade fails"
+id: 2245
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2245/
+source: https://success.docker.com/@api/deki/pages/2245/contents
+tags:
+- tag: "[DTR 2.1.4 to DTR 2.2.4]"
+- tag: "[DTR 2.2.4 to DTR 2.2.5]"
+- tag: "article:errors"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When upgrading DTR fails, the following errors might appear.
+</p>
+<pre>
+FATA[0897] Failed to replace containers: failed to wait for rethink to be healthy Failed to wait for replica to settle on table blob_repository in db dtr2: gorethink: Timed out while waiting for tables. in:
+r.DB("dtr2").Table("blob_repository").Wait(timeout=600, wait_for="all_replicas_ready")
+ERRO[0939] Upgrade has failed. Try running it again.    
+FATA[0939] Failed to execute phase2: Phase 2 returned non-zero status: 1 
+</pre>
+<ul>
+</ul>
+<ul>
+</ul>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/DTR_upgrade_fails">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  Tested on below scenarios:
+ </p>
+ <ul>
+  <li>
+   [DTR 2.1.4 to DTR 2.2.4]
+  </li>
+  <li>
+   [DTR 2.2.4 to DTR 2.2.5]
+  </li>
+ </ul>
+ <p>
+  Before performing an upgrade make sure you understand and follow the following requirements:
+ </p>
+ <ul>
+  <li>
+   <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/">
+    DTR upgrade
+   </a>
+  </li>
+  <li>
+   DTR uses
+   <a class="external" href="http://semver.org/" rel="external nofollow" target="_blank">
+    semantic versioning
+   </a>
+   and we aim to achieve specific guarantees while upgrading between versions.
+  </li>
+ </ul>
+ <p>
+  <strong>
+   Downgrading is not supported.
+  </strong>
+ </p>
+ <p>
+  Given a version number
+  <code>
+   X.Y.Z
+  </code>
+  - (
+  <strong>
+   MAJOR.MINOR.PATCH
+  </strong>
+  ):
+ </p>
+ <ol>
+  <li>
+   <strong>
+    MAJOR
+   </strong>
+   version - incompatible API changes
+  </li>
+  <li>
+   <strong>
+    MINOR
+   </strong>
+   version - add functionality in a backwards-compatible manner
+  </li>
+  <li>
+   <strong>
+    PATCH
+   </strong>
+   version - backwards-compatible bug fixes
+  </li>
+ </ol>
+ <p>
+  <strong>
+   Upgrades are supported according to the following rules:
+  </strong>
+ </p>
+ <ul>
+  <li>
+   When upgrading from one patch version to another you can skip patch versions because no data migration is done for patch versions.
+  </li>
+  <li>
+   When upgrading between minor versions, you can’t skip versions, but you can upgrade from any patch versions of the previous minor version to any patch version of the current minor version.
+  </li>
+  <li>
+   When upgrading between major versions you also have to upgrade one major version at a time, but you have to upgrade to the earliest available minor version. We also strongly recommend upgrading to the latest minor/patch version for your major version first.
+  </li>
+ </ul>
+ <table>
+  <thead>
+   <tr>
+    <th>
+     Description
+    </th>
+    <th>
+     From
+    </th>
+    <th>
+     To
+    </th>
+    <th>
+     Supported
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     patch upgrade
+    </td>
+    <td>
+     x.y.0
+    </td>
+    <td>
+     x.y.1
+    </td>
+    <td>
+     yes
+    </td>
+   </tr>
+   <tr>
+    <td>
+     skip patch version
+    </td>
+    <td>
+     x.y.0
+    </td>
+    <td>
+     x.y.2
+    </td>
+    <td>
+     yes
+    </td>
+   </tr>
+   <tr>
+    <td>
+     patch downgrade
+    </td>
+    <td>
+     x.y.2
+    </td>
+    <td>
+     x.y.1
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+   <tr>
+    <td>
+     minor upgrade
+    </td>
+    <td>
+     x.y.*
+    </td>
+    <td>
+     x.y+1.*
+    </td>
+    <td>
+     yes
+    </td>
+   </tr>
+   <tr>
+    <td>
+     skip minor version
+    </td>
+    <td>
+     x.y.*
+    </td>
+    <td>
+     x.y+2.*
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+   <tr>
+    <td>
+     minor downgrade
+    </td>
+    <td>
+     x.y.*
+    </td>
+    <td>
+     x.y-1.*
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+   <tr>
+    <td>
+     skip major version
+    </td>
+    <td>
+     x.
+     <em>
+      .
+     </em>
+    </td>
+    <td>
+     x+2.
+     <em>
+      .
+     </em>
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+   <tr>
+    <td>
+     major downgrade
+    </td>
+    <td>
+     x.
+     <em>
+      .
+     </em>
+    </td>
+    <td>
+     x-1.
+     <em>
+      .
+     </em>
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+   <tr>
+    <td>
+     major upgrade
+    </td>
+    <td>
+     x.y.z
+    </td>
+    <td>
+     x+1.0.0
+    </td>
+    <td>
+     yes
+    </td>
+   </tr>
+   <tr>
+    <td>
+     major upgrade skipping minor version
+    </td>
+    <td>
+     x.y.z
+    </td>
+    <td>
+     x+1.y+1.z
+    </td>
+    <td>
+     no
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/DTR_upgrade_fails">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  <strong>
+   If upgrading DTR fails with any of the above errors, restart the DTR nodes 1 by 1 and run upgrade again:
+  </strong>
+ </p>
+ <ol>
+  <li>
+   Restart one of the DTR nodes and
+   <em>
+    wait for it to come back up and running
+   </em>
+   .
+  </li>
+  <li>
+   Make sure the DTR UI can be accessed before moving to next step.
+  </li>
+  <li>
+   Repeat steps 1 and 2 until all DTR nodes have been restarted.
+  </li>
+  <li>
+   Run upgrade command again, replacing the version you want to upgrade to:
+  </li>
+ </ol>
+ <pre>
+<code>docker run -it --rm \ 
+docker/dtr<span class="replaceabletext">:X:Y:Z </span>upgrade \ 
+--ucp-insecure-tls</code>
+</pre>
+</div>
+{% endraw %}

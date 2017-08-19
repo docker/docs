@@ -1,0 +1,137 @@
+---
+title: "services.servicename.ports.0 must be a string or number when performing a docker stack deploy"
+id: 2223
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2223/
+source: https://success.docker.com/@api/deki/pages/2223/contents
+tags:
+- tag: "article:errors"
+- tag: "component:swarm"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:docker-17.03"
+- tag: "usecase:devops"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin='KBase/"services.servicename.ports.0_must_be_a_string_or_number"_when_performing_a_docker_stack_deploy'>
+ <span id="Issues">
+ </span>
+ <h2 id="1-0">
+  Issues
+ </h2>
+ <ul>
+  <li>
+   When specifying ports using the long mode syntax the following error is observed:
+  </li>
+ </ul>
+ <pre>
+<code># docker stack deploy -c docker-compose.yml example
+services.web.ports.0 must be a string or number
+</code></pre>
+ <ul>
+  <li>
+   I am unable to configure host mode networking in a compose file, ingress is always set as the
+   <code>
+    PublishMode
+   </code>
+   following a
+   <code>
+    docker stack deploy
+   </code>
+   .
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin='KBase/"services.servicename.ports.0_must_be_a_string_or_number"_when_performing_a_docker_stack_deploy'>
+ <span id="Prerequisites">
+ </span>
+ <h1 id="0-0">
+  Prerequisites
+ </h1>
+ <p>
+  This issue effects the Docker Engine in Docker EE 17.03 and lower.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin='KBase/"services.servicename.ports.0_must_be_a_string_or_number"_when_performing_a_docker_stack_deploy'>
+ <span id="Steps">
+ </span>
+ <h1 id="0-1">
+  Steps
+ </h1>
+ <p>
+  If you are interested in configuring a different networking mode, do note that there is currently no way to specify networking modes in a Docker Compose v3 file. The only way to specify host mode networking is to utilize compose v3.2, which is only supported in Docker Engine 17.04 and higher.
+ </p>
+ <p>
+  If you are running Docker Engine 17.04 or higher, ensure you've configured the
+  <code>
+   version:
+  </code>
+  section of the compose file to:
+  <code>
+   version: 3.2
+  </code>
+  .
+ </p>
+ <div class="mt-section" id="section_4" mt-section-origin='KBase/"services.servicename.ports.0_must_be_a_string_or_number"_when_performing_a_docker_stack_deploy'>
+  <span id="Workarounds">
+  </span>
+  <h3 id="2-0">
+   Workarounds
+  </h3>
+  <ul>
+   <li>
+    Use short mode syntax in compose files for port declaration, for example:
+   </li>
+  </ul>
+  <pre>
+<code>services:
+  nginx:
+    image: nginx:latest
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+    ports:
+      - target: 80
+        published: 8001
+        protocol: tcp
+    networks:
+      - nginx_frontend
+
+networks:
+   nginx_frontend:
+</code></pre>
+  <p>
+   would be:
+  </p>
+  <pre>
+<code>services:
+  nginx:
+    image: nginx:latest
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+    ports:
+      - "8001:80"
+    networks:
+      - nginx_frontend
+</code></pre>
+  <ul>
+   <li>
+    If you are attempting to configure a specific networking mode, such as host mode, you will need to use the
+    <code>
+     docker service update
+    </code>
+    command following deployment to perform the port declaration. For example, after deploying a web service where the target port is 80 and the published port is 8001, the syntax to update the mode from the default of ingress to host mode would be:
+   </li>
+  </ul>
+  <pre>
+<code>docker service update example_web --publish-rm 8001:80 --publish-add "mode=host,target=80,published=8001"
+</code></pre>
+ </div>
+</div>
+{% endraw %}

@@ -1,0 +1,62 @@
+---
+title: "Does Docker Cloud have a list of IP addresses that we can whitelist on our firewall?"
+id: 1295
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1295/
+source: https://success.docker.com/@api/deki/pages/1295/contents
+tags:
+- tag: "article:topic"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Does_Docker_Cloud_have_a_list_of_IP_addresses_that_we_can_whitelist_on_our_firewall?">
+ <span id="Question">
+ </span>
+ <h3 id="2-0">
+  Question
+ </h3>
+ <p>
+  We are trying to set up a firewall that only allow connections to the Docker Cloud service from a specific/range of public IP addresses. Does Docker Cloud have fixed IP addresses or anything like that available?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Does_Docker_Cloud_have_a_list_of_IP_addresses_that_we_can_whitelist_on_our_firewall?">
+ <span id="Answer">
+ </span>
+ <h3 id="2-1">
+  Answer
+ </h3>
+ <p>
+  Yes, use the following IP addresses for connections to the Docker Cloud service:
+ </p>
+ <pre>
+<code>52.204.126.235/32
+52.6.30.174/32
+52.205.192.142/32
+52.205.2.114/32
+</code>
+</pre>
+ <p>
+  Please note that you need to keep the following ports open on your host:
+ </p>
+ <ul>
+  <li class="template:tag-insert">
+   <code>
+    6783/tcp
+   </code>
+  </li>
+  <li class="template:tag-insert">
+   <code>
+    6783/udp
+   </code>
+  </li>
+  <li class="template:tag-insert">
+   <code>
+    2375/tcp
+   </code>
+  </li>
+ </ul>
+</div>
+{% endraw %}

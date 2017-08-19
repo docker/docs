@@ -1498,10 +1498,13 @@ manuals:
     nosync: true
   - path: /docker-cloud/installing-cli/
     title: The Docker Cloud CLI
-  - path: /docker-cloud/docker-errors-faq/
-    title: Known issues in Docker Cloud
   - path: /docker-cloud/release-notes/
     title: Release notes
+  - sectiontitle: Troubleshoot Docker Cloud
+    section:
+    - path: /docker-cloud/docker-errors-faq/
+      title: Known issues in Docker Cloud
+    - tagpull: "product:cloud"
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -1608,6 +1611,8 @@ manuals:
     title: Deploy Datacenter on Linux
   - path: /datacenter/install/azure/
     title: Deploy Datacenter on Azure
+  - title: "Docker Datacenter Compatibility Matrix"
+    path: /kb/928/
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.1/guides/
@@ -2308,6 +2313,9 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
+  - sectiontitle: Troubleshoot Docker Datacenter
+    section:
+    - tagpull: "product:datacenter"
 - sectiontitle: Docker for Mac
   section:
   - path: /docker-for-mac/

@@ -1,0 +1,92 @@
+---
+title: "How can I add a user programmatically in UCP?"
+id: 1435
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1435/
+source: https://success.docker.com/@api/deki/pages/1435/contents
+tags:
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-1.1.2"
+---
+{% raw %}
+<p>
+ You can add a user programmatically in UCP by using the UCP API along with the
+ <code>
+  curl
+ </code>
+ command.
+</p>
+<p>
+ First, get a UUID token for authentication:
+</p>
+<pre>
+<code>curl -k -s -H "Content-Type: application/json" -X POST -d '{"username": "<span class="replaceabletext">admin-username</span>", "password": "<span class="replaceabletext">admin-password</span>"}' 'https://ucp-url/auth/login'</code>
+</pre>
+<p>
+ After retrieving the UUID token, you can add a user this way:
+</p>
+<pre>
+<code>curl -k -H "Authorization: Bearer {auth-token}" -X POST https://ucp-url/api/accounts -d '{"username":"<span class="replaceabletext">username</span>", "password":"<span class="replaceabletext">password</span>", "first_name":"<span class="replaceabletext">firstname</span>", "role":<span class="replaceabletext">1</span>, "admin":<span class="replaceabletext">true</span>}'</code>
+</pre>
+<p>
+ For the role parameter, use one of the following values:
+</p>
+<table border="1" cellpadding="1" cellspacing="1" class="mt-responsive-table">
+ <tbody>
+  <tr>
+   <td class="mt-noheading mt-column-width-15">
+    <strong>
+     Number
+    </strong>
+   </td>
+   <td class="mt-noheading mt-column-width-85">
+    <strong>
+     Value
+    </strong>
+   </td>
+  </tr>
+  <tr>
+   <td class="mt-noheading mt-column-width-15">
+    0
+   </td>
+   <td class="mt-noheading mt-column-width-85">
+    No Access
+   </td>
+  </tr>
+  <tr>
+   <td class="mt-noheading mt-column-width-15">
+    1
+   </td>
+   <td class="mt-noheading mt-column-width-85">
+    View Only
+   </td>
+  </tr>
+  <tr>
+   <td class="mt-noheading mt-column-width-15">
+    2
+   </td>
+   <td class="mt-noheading mt-column-width-85">
+    Restricted Control
+   </td>
+  </tr>
+  <tr>
+   <td class="mt-noheading mt-column-width-15">
+    3
+   </td>
+   <td class="mt-noheading mt-column-width-85">
+    Full Control
+   </td>
+  </tr>
+ </tbody>
+</table>
+<p>
+ Note: The UCP API is experimental and is subject to change in future versions, possibly affecting backwards compatibility.
+</p>
+
+{% endraw %}

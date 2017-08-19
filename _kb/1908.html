@@ -1,0 +1,2358 @@
+---
+title: "Docker Reference Architecture: Securing Docker EE and Security Best Practices"
+id: 1908
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1908/
+source: https://success.docker.com/@api/deki/pages/1908/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.13.1-cs1"
+- tag: "testedon:docker-17.03"
+- tag: "testedon:dtr-2.2.1"
+- tag: "testedon:ucp-2.1.0"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Andy Clemenko and Paul Novarese";
+/*]]>*/
+</script>
+<p>
+ <a name="introduction">
+ </a>
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  Docker lives by “Secure by Default.” With Docker Enterprise Edition (Docker EE), the default configuration and policies provide a solid foundation for a secure environment. However, they can easily be changed to meet the specific needs of your organization.
+ </p>
+ <p>
+  Docker focuses on three key areas of container security:
+  <em>
+   secure access
+  </em>
+  ,
+  <em>
+   secure content
+  </em>
+  , and
+  <em>
+   secure platform
+  </em>
+  . This results in having isolation and containment features not only built into Docker EE but also enabled out of the box. The attack surface area of the Linux kernel is reduced, the containment capabilities of the Docker daemon are improved, and you build, ship, and run safer applications.
+ </p>
+ <p>
+  <a name="what-you-will-learn">
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="What_You_Will_Learn">
+ </span>
+ <h2 id="1-1">
+  What You Will Learn
+ </h2>
+ <p>
+  This document outlines the default security of Docker EE as well as best practices for further securing Universal Control Plane and Docker Trusted Registry. New features introduced in Docker CS Engine 1.13 such as image signing and verification with Docker Content Trust and secrets are also explored.
+ </p>
+ <blockquote>
+  <p>
+   <em>
+    Note:
+   </em>
+   This document addresses Docker 17.03 or greater (including Docker CS Engine 1.13) and a Linux host OS with kernel 3.10 or greater.
+  </p>
+ </blockquote>
+ <p>
+  <a name="prerequisites">
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-2">
+  Prerequisites
+ </h2>
+ <p>
+  Before continuing, become familiar with
+  <a class="link-https" href="https://docs.docker.com/engine/understanding-docker/" rel="external nofollow" target="_blank">
+   Docker Concepts from the Docker docs
+  </a>
+  .
+ </p>
+ <p>
+  <a name="abbreviations">
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="Abbreviations">
+ </span>
+ <h2 id="1-3">
+  Abbreviations
+ </h2>
+ <p>
+  The following abbreviations are used in this document:
+ </p>
+ <ul>
+  <li>
+   DDC = Docker Datacenter (UCP and DTR)
+  </li>
+  <li>
+   UCP = Universal Control Plane
+  </li>
+  <li>
+   DTR = Docker Trusted Registry
+  </li>
+  <li>
+   DCT = Docker Content Trust
+  </li>
+  <li>
+   RBAC = Role Based Access Controls
+  </li>
+  <li>
+   CA = Certificate Authority
+  </li>
+  <li>
+   CS = Docker Commercially Supported Engine
+  </li>
+  <li>
+   HA = High Availability
+  </li>
+  <li>
+   BOM = Bill of Materials
+  </li>
+  <li>
+   CLI = Command Line Interface
+  </li>
+ </ul>
+ <p>
+  <a name="node">
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="Engine_and_Node_Security">
+ </span>
+ <h2 id="1-4">
+  Engine and Node Security
+ </h2>
+ <p>
+  There are already several resources that cover the basics of Docker Engine security.
+ </p>
+ <ul>
+  <li>
+   <a class="link-https" href="https://docs.docker.com/engine/security/security/" rel="external nofollow" target="_blank">
+    Docker Security Documentation
+   </a>
+   covers the fundamentals, such as namespaces and control groups, the attack surface of the Docker daemon, and other kernel security features.
+  </li>
+  <li>
+   <a class="link-https" href="https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf" rel="external nofollow" target="_blank">
+    CIS Docker 1.13 Benchmark
+   </a>
+   covers the various security-related options in Docker Engine.
+  </li>
+  <li>
+   <a class="link-https" href="https://github.com/docker/docker-bench-security" rel="external nofollow" target="_blank">
+    Docker Bench Security
+   </a>
+   is a script that audits your configuration of Docker Engine against the CIS Benchmark.
+  </li>
+ </ul>
+ <p>
+  <a name="choice-os">
+  </a>
+ </p>
+ <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Choice_of_Operating_Systems">
+  </span>
+  <h3 id="2-0">
+   Choice of Operating Systems
+  </h3>
+  <p>
+   Docker CS Engine 1.13 (which is a required prerequisite for installing UCP and included with Docker EE) is supported on the following host operating systems:
+  </p>
+  <ul>
+   <li>
+    RHEL/CentOS/Oracle Linux 7.1/7.2/7.3 (YUM-based systems)
+   </li>
+   <li>
+    Ubuntu 14.04 LTS, 16.04 LTS
+   </li>
+   <li>
+    SUSE Linux Enterprise 12
+   </li>
+  </ul>
+  <p>
+   For other versions, check out the
+   <a href="https://success.docker.com/Policies/Compatibility_Matrix" rel="internal">
+    official Docker support matrix
+   </a>
+   .
+  </p>
+  <p>
+   To take advantage of the built-in security configurations and policies, run the latest version Docker CS Engine. Also ensure that you update the OS with all of the latest patches. In all cases it is highly recommended to remove as much unnecessary software as possible.
+  </p>
+  <p>
+   <a name="limit-access-to-node">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Limit_Root_Access_to_Node">
+  </span>
+  <h3 id="2-1">
+   Limit Root Access to Node
+  </h3>
+  <p>
+   Docker EE uses a completely separate authentication backend from the host, providing a clear separation of duties. Docker EE can leverage an existing LDAP/AD infrastructure for authentication. It even utilizes
+   <a class="mt-self-link" href="#ucp-rbac" rel="internal">
+    RBAC Labels
+   </a>
+   to control access to objects like images and running containers, meaning teams of users can be given full access to running containers. With this access, the users can watch the logs and execute a shell inside the running container. The user never needs to log into the host. Limiting the number of users that have access to the host reduces the attack surface.
+  </p>
+  <p>
+   <a name="remote-access-daemon">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Remote_Access_to_Daemon">
+  </span>
+  <h3 id="2-2">
+   Remote Access to Daemon
+  </h3>
+  <p>
+   Don't enable the remote daemon socket. If you must open it for Engine, then ALWAYS secure it with certs. When using Universal Control Plane, you should not open the daemon socket. If you must, be sure to review the
+   <a class="link-https" href="https://docs.docker.com/engine/security/https/" rel="external nofollow" target="_blank">
+    instructions for securing the daemon socket
+   </a>
+   .
+  </p>
+  <p>
+   <a name="privileged-containers">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Privileged_Containers">
+  </span>
+  <h3 id="2-3">
+   Privileged Containers
+  </h3>
+  <p>
+   Avoid running privileged containers if at all possible. Running a container privileged gives the container access to ALL the host namespaces (i.e. net, pid, and others). This gives full control of the host to the container. Keep your infrastructure secure by keeping the container and host authentication separate.
+  </p>
+  <p>
+   <a name="container-uid">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Container_UID_Management">
+  </span>
+  <h3 id="2-4">
+   Container UID Management
+  </h3>
+  <p>
+   By default the user inside the container is root. Using a defense in depth model, it is recommended that not all containers run as root. An easy way to mitigate this is to use the
+   <code>
+    --user
+   </code>
+   declaration at run time. The container runs as the specified user, essentially removing root access.
+  </p>
+  <p>
+   Also keep in mind that the UID/GID combination for a file inside a container is the same outside of the container. In the following example, a container is running with a UID of 10000 and GID of 10000. If the user touches a file such as
+   <code>
+    /tmp/secret_file
+   </code>
+   , on a BIND-mounted directory, the UID/GID of the file is the same both inside and outside of the container as shown:
+  </p>
+  <pre>
+<code>root @ ~  docker run --rm -it -v /tmp:/tmp --user 10000:10000 alpine sh
+/ $ whoami
+whoami: unknown uid 10000
+/ $ touch /tmp/secret_file
+/ $ ls -asl /tmp/secret_file 
+     0 -rw-r--r--    1 10000    10000            0 Jan 26 13:48 /tmp/secret_file
+/ $ exit
+root @ ~  ls -asl /tmp/secret_file 
+0 -rw-r--r-- 1 10000 10000 0 Jan 26 08:48 /tmp/secret_file
+</code></pre>
+  <p>
+   Developers should
+   <code>
+    root
+   </code>
+   as little as possible inside the container. Developers should create their app containers with the
+   <code>
+    USER
+   </code>
+   declaration in their Dockerfiles.
+  </p>
+  <p>
+   <a name="seccomp">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Seccomp">
+  </span>
+  <h3 id="2-5">
+   Seccomp
+  </h3>
+  <blockquote>
+   <p>
+    <em>
+     Note:
+    </em>
+    Seccomp for Docker CS Engine is available starting with RHEL/CentOS 7 and SLES 12.
+   </p>
+  </blockquote>
+  <p>
+   Seccomp (short for
+   <strong>
+    Secure Computing Mode
+   </strong>
+   ) is a security feature of the Linux kernel, used to restrict the syscalls available to a given process. This facility has been in the kernel in various forms since 2.6.12 and has been available in Docker Engine since 1.10. The current implementation in Docker Engine provides a default set of restricted syscalls and also allows syscalls to be filtered via either a whitelist or a blacklist on a per-container basis (i.e. different filters can be applied to different containers running in the same Engine). Seccomp profiles are applied at container creation time and cannot be altered for running containers.
+  </p>
+  <p>
+   Out of the box, Docker comes with a default Seccomp profile that works extremely well for the vast majority of use cases. In general, applying custom profiles is not recommended unless absolutely necessary. More information about building custom profiles and applying them can be found in the
+   <a class="link-https" href="https://docs.docker.com/engine/security/seccomp/" rel="external nofollow" target="_blank">
+    Docker Seccomp docs
+   </a>
+   .
+  </p>
+  <p>
+   To check if your kernel supports seccomp:
+  </p>
+  <pre>
+<code>cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=
+</code></pre>
+  <p>
+   Look for the following in the output:
+  </p>
+  <pre>
+<code>CONFIG_SECCOMP=y
+</code></pre>
+  <p>
+   <a name="apparmor-selinux">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="AppArmor_.2F_SELinux">
+  </span>
+  <h3 id="2-6">
+   AppArmor / SELinux
+  </h3>
+  <p>
+   AppArmor and SELinux are similar to Seccomp in regards to use profiles. They differ in their execution though. The profile languages used by AppArmor and SELinux are different. AppArmor is only on Debian-based distributions such as Debian and Ubuntu. SELinux is available on Fedora/RHEL/CentOS/Oracle Linux. Rather than a simple list of system calls and arguments, both allow for defining actors (generally processes), actions (reading files, network operations), and targets (files, IPs, protocols, etc.). Both are Linux kernel security modules, and both support mandatory access controls (MAC).
+  </p>
+  <p>
+   They need to be enabled on the host, while SELinux can be enabled at the daemon level.
+  </p>
+  <p>
+   To enable SELinux in the Docker daemon modify
+   <code>
+    /etc/docker/daemon.json
+   </code>
+   and add the following:
+  </p>
+  <pre>
+<code>"selinux-enabled": true
+</code></pre>
+  <blockquote>
+   <p>
+    <strong>
+     Note
+    </strong>
+    Remember that the file
+    <code>
+     daemon.json
+    </code>
+    is JSON-based and needs opening and closing braces —
+    <code>
+     { }
+    </code>
+    .
+   </p>
+  </blockquote>
+  <p>
+   To check to see if SELinux is enabled:
+  </p>
+  <pre>
+<code>docker info |grep -A 3 "Security Options"
+</code></pre>
+  <p>
+   You should see
+   <code>
+    selinux
+   </code>
+   in the output if it is enabled:
+  </p>
+  <pre>
+<code>Security Options:
+ seccomp
+  Profile: default
+ selinux
+</code></pre>
+  <p>
+   AppArmor is not applied to the Docker daemon. Apparmor profiles need to be applied at container run time:
+  </p>
+  <pre>
+<code>docker run --rm -it --security-opt apparmor=docker-default hello-world
+</code></pre>
+  <p>
+   There are some good resources for installing and setting up AppArmor/SELinux such as:
+  </p>
+  <ul>
+   <li>
+    <a class="external" href="http://www.tecmint.com/mandatory-access-control-with-selinux-or-apparmor-linux/" rel="external nofollow" target="_blank">
+     Techmint - Implementing Mandatory Access Control with SELinux or AppArmor in Linux
+    </a>
+   </li>
+   <li>
+    <a class="link-https" href="https://www.cyberciti.biz/tips/selinux-vs-apparmor-vs-grsecurity.html" rel="external nofollow" target="_blank">
+     nixCraft - Linux Kernel Security (SELinux vs AppArmor vs Grsecurity)
+    </a>
+   </li>
+  </ul>
+  <p>
+   Bottom line is that you should always use AppArmor or SELinux for their supported operating systems.
+  </p>
+  <p>
+   <a name="capabilities">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Runtime_Privilege_and_Linux_Capabilities_.E2.80.94_Advanced_Tooling">
+  </span>
+  <h3 id="2-7">
+   Runtime Privilege and Linux Capabilities — Advanced Tooling
+  </h3>
+  <blockquote>
+   <p>
+    <em>
+     Starting with kernel 2.2, Linux divides the privileges traditionally associated with superuser into distinct units, known as capabilities, which can be independently enabled and disabled.
+    </em>
+    —
+    <a class="external" href="http://man7.org/linux/man-pages/man7/capabilities.7.html" rel="external nofollow" target="_blank">
+     Capabilities man page
+    </a>
+   </p>
+  </blockquote>
+  <p>
+   Linux capabilities are an even more granular way of reducing surface area. Docker Engine has a default list of capabilities that are kept for newly-created containers, and by using the
+   <code>
+    --cap-drop
+   </code>
+   option for
+   <code>
+    docker run
+   </code>
+   , users can exclude additional capabilities from being used by processes inside the container on a capability-by-capability basis. All privileges can be dropped with the
+   <code>
+    --user
+   </code>
+   option.
+  </p>
+  <p>
+   Likewise, capabilities that are by default not granted to new containers can be added with the
+   <code>
+    --cap-add
+   </code>
+   option, though this is discouraged unless absolutely necessary. Using
+   <code>
+    --cap-add=ALL
+   </code>
+   is highly discouraged.
+  </p>
+  <p>
+   More details can be found in the
+   <a class="link-https" href="https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities" rel="external nofollow" target="_blank">
+    Docker Run Reference
+   </a>
+   .
+  </p>
+  <p>
+   <a name="cis-controls">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Controls_from_the_CIS_Benchmark">
+  </span>
+  <h3 id="2-8">
+   Controls from the CIS Benchmark
+  </h3>
+  <p>
+   There are many good practices that you can apply from the
+   <a class="link-https" href="https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf" rel="external nofollow" target="_blank" title="Center for Internet Security Docker 1.13 Benchmark">
+    CIS Docker 1.13 Benchmark
+   </a>
+   . Some of the controls may not be applicable to your environment. To apply these controls, edit the Engine settings. Editing the Engine setting in
+   <code>
+    /etc/docker/daemon.json
+   </code>
+   is the best choice for most of these controls. Refer to the
+   <a class="link-https" href="https://docs.docker.com/engine/reference/commandline/dockerd/#/daemon-configuration-file" rel="external nofollow" target="_blank">
+    daemon.json guide
+   </a>
+   for details.
+  </p>
+  <p>
+   Let's look at some of them.
+  </p>
+  <p>
+   <a name="logging">
+   </a>
+  </p>
+  <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Apply_Centralized_Logging_.E2.80.94_CIS_1.13_Benchmark_:_Section_2.12">
+   </span>
+   <h4 id="3-0">
+    Apply Centralized Logging — CIS 1.13 Benchmark : Section 2.12
+   </h4>
+   <p>
+    Having a central location for all Engine and container logs is recommended. This provides "off-node" access to all the logs, empowering developers without having to grant them SSH access.
+   </p>
+   <p>
+    To enable centralized logging, modify
+    <code>
+     /etc/docker/daemon.json
+    </code>
+    and add the following:
+   </p>
+   <pre>
+<code>"log-level": "syslog",  
+"log-opts": {syslog-address=tcp://192.x.x.x},  
+</code></pre>
+   <p>
+    Then restart the daemon:
+   </p>
+   <pre>
+<code>sudo systemctl restart docker
+</code></pre>
+   <p>
+    <a name="dct">
+    </a>
+   </p>
+  </div>
+  <div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Enable_Content_Trust_.E2.80.94_CIS_1.13_Benchmark_:_Section_4.5">
+   </span>
+   <h4 id="3-1">
+    Enable Content Trust — CIS 1.13 Benchmark : Section 4.5
+   </h4>
+   <p>
+    Content Trust is the cryptographic guarantee that the image pulled is the correct image. Content Trust is enabled by Notary.
+    <a class="mt-self-link" href="#dtr-notary" rel="internal">
+     Signing images with Notary is discussed
+    </a>
+    later in this document.
+   </p>
+   <p>
+    First, you need some basic background. When transferring data among networked systems, trust is a central concern. In particular, when communicating over an untrusted medium such as the Internet, it is critical to ensure the integrity and the publisher of all the data a system operates on. You use Docker Engine to push and pull images (data) to a public or private registry. Content Trust gives you the ability to verify both the integrity and the publisher of all the data received from a registry over any channel. Content Trust is available from Docker Hub, DDC 2.0 (DTR 2.10) and higher, and Docker EE 17.03 and higher. To enable it, add the following shell variable:
+   </p>
+   <pre>
+<code>export DOCKER_CONTENT_TRUST=1
+</code></pre>
+   <p>
+    <a name="docker-bench">
+    </a>
+   </p>
+  </div>
+ </div>
+ <div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Audit_with_Docker_Bench">
+  </span>
+  <h3 id="2-9">
+   Audit with Docker Bench
+  </h3>
+  <p>
+   <a class="link-https" href="https://store.docker.com/community/images/docker/docker-bench-security" rel="external nofollow" target="_blank">
+    Docker Bench Security
+   </a>
+   is a script that checks for dozens of common best practices around deploying Docker containers in production. The tests are all automated and are inspired by the
+   <a class="link-https" href="https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.13.0_Benchmark_v1.0.0.pdf" rel="external nofollow" target="_blank" title="Center for Internet Security Docker 1.13 Benchmark">
+    CIS 1.13 Benchmark
+   </a>
+   .
+  </p>
+  <p>
+   Here is how to run it :
+  </p>
+  <pre>
+<code>docker run -it --net host --pid host --cap-add audit_control -v /var/lib:/var/lib \
+  -v /var/run/docker.sock:/var/run/docker.sock -v /usr/lib/systemd:/usr/lib/systemd \
+  -v /etc:/etc --label docker_bench_security docker/docker-bench-security
+</code></pre>
+  <p>
+   Here is an example output:
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-0.jpeg"/>
+  </p>
+  <p>
+   The output is straightforward. There is a status message, CIS Benchmark Control number, and description fields. Look for the
+   <code>
+    [WARN]
+   </code>
+   messages. The biggest section to pay attention to is
+   <code>
+    1 - Host Configuration
+   </code>
+   . Keep in mind that this tool is designed to audit Docker Engine and is a good starting point. Docker Bench Security is NOT intended for auditing the setup of UCP/DTR. There are a few controls that, when enabled, break UCP and DTR.
+  </p>
+  <p>
+   The following controls are not needed because they affect the operation of UCP/DTR:
+  </p>
+  <ul>
+   <li>
+    2.1 Restrict network traffic between containers — Needed for container communication
+   </li>
+   <li>
+    2.6 Configure TLS authentication for Docker daemon — Should not be enabled as it is not needed
+   </li>
+   <li>
+    2.8 Enable user namespace support — Currently not supported with UCP/DTR
+   </li>
+   <li>
+    2.15 Do not enable Swarm mode, if not needed — Swarm mode is the underlying orchestration framework
+   </li>
+   <li>
+    2.18 Disable Userland Proxy — Disabling the proxy affects how the routing mesh works
+   </li>
+  </ul>
+  <p>
+   <a name="ucp">
+   </a>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="UCP_Security">
+ </span>
+ <h2 id="1-5">
+  UCP Security
+ </h2>
+ <p>
+  Universal Control Plane is configured to be "Secure by default." It uses two Certificate Authorities with Mutual TLS. UCP sets up two CAs. One CA is used for ALL internal communication between managers and workers. The second CA is for the end user communication. Two communication paths are vital to keeping the traffic segregated. The use of Mutual TLS is automatic between the manager and worker nodes. Mutual TLS is where both the client and the server verify the identity of each other. Another important note is that the worker nodes are unprivileged, meaning they do not have access to the cluster state or secrets. When adding nodes to the UCP cluster you need to use a join token. The token itself incorporates a checksum of the CA cert so the new node can verify it's talking to the right swarm.
+ </p>
+ <p>
+  <img alt="" class="internal" src="/_kb/images/1908-1.png"/>
+ </p>
+ <p>
+  <a name="ucp-network">
+  </a>
+ </p>
+ <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Networking">
+  </span>
+  <h3 id="2-10">
+   Networking
+  </h3>
+  <p>
+   Networking can be an important part of a Docker EE deployment. The basic rule of thumb is not to have firewalls between the manager and worker nodes. When deploying to a cloud infrastructure, low latency is a must between nodes. Low latency ensures the databases are able to keep quorum. When a software, or hardware, firewall is deployed between the nodes the following ports need to be opened.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-2.jpeg"/>
+  </p>
+  <p>
+   <a name="ucp-auth">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Authentication">
+  </span>
+  <h3 id="2-11">
+   Authentication
+  </h3>
+  <p>
+   Docker EE features a single sign-on for the entire DDC cluster, which is accomplished via shared authentication service for UCP and DTR. The single sign is provided out of the box with AuthN or via an externally-managed LDAP/AD authentication service. Both authentication backends provide the same level of control. When available, a corporate LDAP service can provide a smoother account experience for users. Refer to the
+   <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/" rel="external nofollow" target="_blank">
+    LDAP/AD configuration docs
+   </a>
+   and
+   <a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Docker_EE_Best_Practices_and_Design_Considerations" rel="internal">
+    Docker EE Best Practices and Design Considerations
+   </a>
+   for instructions and best practices while configuring LDAP authentication.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-3.png"/>
+  </p>
+  <p>
+   <a name="ucp-cert">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="External_Certificates">
+  </span>
+  <h3 id="2-12">
+   External Certificates
+  </h3>
+  <p>
+   Using external certificates is a good option when integrating with a corporate environment. Using external, officially-signed certificates simplifies having to distribute Certificate Authority certificates. One best practice is to use the Certificate Authority (CA) for your organization. You can reduce the number of certificates by adding multiple Subject Alternative Names (SANs) to a single certificate. This allows the certificate to be valid for multiple URLs. For example, you can set up a certificate for
+   <code>
+    ucp.example.com
+   </code>
+   ,
+   <code>
+    dtr.example.com
+   </code>
+   , and all the underlying hostnames and IP addresses. One certificate/key pair makes deploying certs easier.
+  </p>
+  <p>
+   To add an external certificate, go to
+   <strong>
+    Admin Settings --&gt; Certificates
+   </strong>
+   in the UCP web interface and add the CA, Cert, and Key.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-4.jpeg"/>
+  </p>
+  <p>
+   More detailed
+   <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/" rel="external nofollow" target="_blank">
+    instructions for adding external certificates
+   </a>
+   are available in the Docker docs.
+  </p>
+  <p>
+   <a name="token-rotate">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_22" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Join_Token_Rotation">
+  </span>
+  <h3 id="2-13">
+   Join Token Rotation
+  </h3>
+  <p>
+   Depending on how you have built your DDC cluster, you may have the token stored in an insecure location. To alleviate any concerns, join tokens can be rotated once the cluster is built. To rotate the keys, go to the
+   <strong>
+    Admin Settings --&gt; Swarm Mode Parameters
+   </strong>
+   page, expand the
+   <strong>
+    Join Tokens
+   </strong>
+   tick, and hit the
+   <strong>
+    Rotate
+   </strong>
+   button.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-5.jpeg"/>
+  </p>
+  <p>
+   <a name="ucp-key">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_23" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Node_Certificate_Expiration">
+  </span>
+  <h3 id="2-14">
+   Node Certificate Expiration
+  </h3>
+  <p>
+   UCP's management plane uses a private CA and certificates for all internal communication. The client certificates are automatically rotated on a schedule. Key rotation is a strong method for reducing the effect of a compromised node. You have the option to reduce the time interval, with the default being 90 days. Shorter intervals add stress to the UCP cluster. Similar to rotating the join tokens, go to
+   <strong>
+    Admin Settings --&gt; Swarm Mode Parameters
+   </strong>
+   and scroll down.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-6.jpeg"/>
+  </p>
+  <p>
+   <a name="ucp-client-bundles">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_24" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Client_Certificate_Bundles">
+  </span>
+  <h3 id="2-15">
+   Client Certificate Bundles
+  </h3>
+  <p>
+   Universal Control Plane makes it easy to create a client certificate bundle for use with the Docker client. The client bundle allows end users to create objects and deploy services from a local Docker client. To create a client bundle, log into UCP and click
+   <strong>
+    Profile
+   </strong>
+   in the upper right hand corner.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-7.jpeg"/>
+  </p>
+  <p>
+   From here a client bundle can be created and downloaded. Inside the bundle are the files necessary for talking to the UCP cluster directly.
+  </p>
+  <p>
+   Navigate to the directory where you downloaded the user bundle, and unzip it.
+  </p>
+  <pre>
+<code>unzip ucp-bundle-admin.zip
+</code></pre>
+  <p>
+   Then run the
+   <code>
+    env.sh
+   </code>
+   script:
+  </p>
+  <pre>
+<code>eval $(&lt;env.sh)
+</code></pre>
+  <p>
+   Verify the changes:
+  </p>
+  <pre>
+<code>docker info
+</code></pre>
+  <p>
+   The
+   <code>
+    env.sh
+   </code>
+   script updates the
+   <code>
+    DOCKER_HOST
+   </code>
+   environment variable to make your local Docker CLI communicate with UCP. It also updates the
+   <code>
+    DOCKER_CERT_PATH
+   </code>
+   environment variables to use the client certificates that are included in the client bundle you downloaded.
+  </p>
+  <p>
+   From now on, when you use the Docker CLI client, it includes your client certificates as part of the request to the Docker Engine. You can now use the Docker CLI to create services, networks, volumes, and other resources on a Swarm managed by UCP.
+  </p>
+  <p>
+   To stop talking to the UCP cluster run the following command:
+  </p>
+  <pre>
+<code>unset DOCKER_HOST DOCKER_TLS_VERIFY DOCKER_CERT_PATH
+</code></pre>
+  <p>
+   Run
+   <code>
+    docker info
+   </code>
+   to verify that you are talking to the local daemon.
+  </p>
+  <p>
+   <a name="ucp-rbac">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_25" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="RBAC">
+  </span>
+  <h3 id="2-16">
+   RBAC
+  </h3>
+  <p>
+   Role Based Access Control is HIGHLY recommended for limiting user access. With RBAC, administrators have the ability to limit users' access to images and running containers. Universal Control Plane uses "teams" and "labels" to apply the different levels of permissions. Users are applied across both DTR and UCP, making management simple. Additionally, integration of LDAP/AD can use existing groups to populate teams.
+  </p>
+  <p>
+   RBAC for Docker EE has two fundamental types of users: administrators and regular users. Administrators can make changes to the UCP cluster, while regular users have permissions that range from no access to full control over volumes, networks, images, secrets, and containers. Administrators can choose one of four permission levels ranging from no access to full control as a default for regular users.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-8.jpeg"/>
+  </p>
+  <p>
+   Teams and labels give the administrator fine-grain control over permissions. Each team can have multiple labels. Each label has a key of
+   <code>
+    com.docker.ucp.access.label
+   </code>
+   . The label is then applied to the containers, services, networks, secrets, and volumes.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-9.jpeg"/>
+  </p>
+  <p>
+   Here is a better view of the permissions levels.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-10.png"/>
+  </p>
+  <p>
+   As you can see, labels are necessary for implementing RBAC. Since a team can have multiple labels, it is a good idea to be as descriptive as possible. Remember the label is going to be applied to the network, volumes, secrets, and even the running containers.
+  </p>
+  <p>
+   Here are some good label examples:
+  </p>
+  <ul>
+   <li>
+    Development team for the CRM production app:
+    <code>
+     com.docker.ucp.access.label=CRM_prod
+    </code>
+   </li>
+   <li>
+    Development team for the CRM development app:
+    <code>
+     com.docker.ucp.access.label=CRM_dev
+    </code>
+   </li>
+   <li>
+    Development Team for the Billing production app:
+    <code>
+     com.docker.ucp.access.label=Billing_prod
+    </code>
+   </li>
+   <li>
+    Development team for the Billing development app:
+    <code>
+     com.docker.ucp.access.label=Billing_dev
+    </code>
+   </li>
+  </ul>
+  <p>
+   All of the RBAC permissions are managed in the
+   <strong>
+    User Management
+   </strong>
+   tab. For example, a team called
+   <code>
+    crm
+   </code>
+   can be created:
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-11.jpeg"/>
+  </p>
+  <p>
+   A permission label for RBAC also needs to be created. Click on the new team name, and then go to the
+   <strong>
+    Permissions
+   </strong>
+   tab. Create
+   <strong>
+    CRM_prod
+   </strong>
+   , and set the permissions to
+   <strong>
+    Full Control
+   </strong>
+   .
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-12.jpeg"/>
+  </p>
+  <p>
+   Having separate labels within a team can provide logical separation between apps and even environments. For example, limit access the CRM team has to the objects labeled
+   <code>
+    CRM_prod
+   </code>
+   , and give full control to objects labeled
+   <code>
+    CRM_dev
+   </code>
+   .
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-13.jpeg"/>
+  </p>
+  <p>
+   Alternatively, you can use the same label across different teams providing different levels of access:
+  </p>
+  <ul>
+   <li>
+    Developer Team —
+    <strong>
+     Restricted Control
+    </strong>
+    --&gt;
+    <code>
+     com.docker.ucp.access.label=awesome_app
+    </code>
+   </li>
+   <li>
+    Operations Team —
+    <strong>
+     Full Control
+    </strong>
+    --&gt;
+    <code>
+     com.docker.ucp.access.label=awesome_app
+    </code>
+   </li>
+   <li>
+    IA/Security Team —
+    <strong>
+     View Only
+    </strong>
+    --&gt;
+    <code>
+     com.docker.ucp.access.label=awesome_app
+    </code>
+   </li>
+  </ul>
+  <p>
+   This method gives different capabilities to objects that carry the label
+   <code>
+    com.docker.ucp.access.label=awesome_app
+   </code>
+   . Basically, any team can have its permission set on ANY Label. If the label is not added to that team, then they won't see the label or have access to the resources.
+  </p>
+  <p>
+   <a name="ucp-secrets">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_26" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Secrets">
+  </span>
+  <h3 id="2-17">
+   Secrets
+  </h3>
+  <p>
+   Secrets are new starting with Docker CS Engine 1.13. A
+   <em>
+    secret
+   </em>
+   is a blob of data such as a password, SSH private key, SSL certificate, or another piece of data that should not be transmitted over a network. Secrets are stored unencrypted in a Dockerfile or stored in your application's source code. In Docker CS Engine 1.13 and higher as well as Docker EE 17.03 and higher, you can use Docker secrets to centrally manage this data and securely transmit it to only those containers that need access to it. Secrets follow a Least Privileged Distribution model and are encrypted at rest and in transit in a Docker swarm. A given secret is only accessible to those services which have been granted explicit access to it and only while those service tasks are running.
+  </p>
+  <p>
+   Secrets requires a Swarm mode cluster. You can use secrets to manage any sensitive data which a container needs at runtime but you don't want to store in the image or in source control such as:
+  </p>
+  <ul>
+   <li>
+    Usernames and passwords
+   </li>
+   <li>
+    TLS certificates and keys
+   </li>
+   <li>
+    SSH keys
+   </li>
+   <li>
+    Other important data such as the name of a database or internal server
+   </li>
+   <li>
+    Generic strings or binary content (up to 500 kb in size)
+   </li>
+  </ul>
+  <blockquote>
+   <p>
+    <strong>
+     Note
+    </strong>
+    : Docker secrets are only available to Swarm services, not to standalone containers. To use this feature, consider adapting your container to run as a service with a scale of 1.
+   </p>
+  </blockquote>
+  <p>
+   Another use case for using secrets is to provide a layer of abstraction between the container and a set of credentials. Consider a scenario where you have separate development, test, and production environments for your application. Each of these environments can have different credentials, stored in the development, test, and production swarms with the same secret name. Your containers only need to know the name of the secret to function in all three environments.
+  </p>
+  <p>
+   When you add a secret to the swarm, Docker sends the secret to the Swarm manager over a mutual TLS connection. The secret is stored in the Raft log, which is encrypted. The entire Raft log is replicated across the other managers, ensuring the same high availability guarantees for secrets as for the rest of the swarm management data.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-14.jpeg"/>
+  </p>
+  <p>
+   When you grant a newly-created or running service access to a secret, the decrypted secret is mounted into the container in an in-memory filesystem at
+   <code>
+    /run/secrets/&lt;secret_name&gt;
+   </code>
+   . You can update a service to grant it access to additional secrets or revoke its access to a given secret at any time.
+  </p>
+  <p>
+   A node only has access to (encrypted) secrets if the node is a swarm manager or if it is running service tasks which have been granted access to the secret. When a container task stops running, the decrypted secrets shared to it are unmounted from the in-memory filesystem for that container and flushed from the node's memory.
+  </p>
+  <p>
+   If a node loses connectivity to the swarm while it is running a task container with access to a secret, the task container still has access to its secrets but cannot receive updates until the node reconnects to the swarm.
+  </p>
+  <p>
+   Docker EE's strong RBAC system can tie
+   <em>
+    secrets
+   </em>
+   into it with the exact same labels demonstrated before, meaning you should always limit the scope of each secret to a specific team. If you don't apply ANY labels, the default label is the owner.
+  </p>
+  <p>
+   For example, you can add TLS certificates as secrets. Using the same RBAC example teams as previously mentioned, the following example adds
+   <code>
+    ca.pem
+   </code>
+   ,
+   <code>
+    cert.pub
+   </code>
+   , and
+   <code>
+    cert.pem
+   </code>
+   to the secrets vault. Notice the use of the label
+   <code>
+    com.docker.ucp.access.label=CRM_prod
+   </code>
+   . This is important for enforcing the RBAC rules. Also note the use of the team name in the naming of the secret. For another idea for updating or rolling back secrets, consider adding a version number or date to the secret name. This is made easier by the ability to control the mount point of the secret within a given container. This also prevents teams from trying to use the same secret name. The following adds the CA's public certificate in pem format as a secret named
+   <code>
+    CRM.ca.pem.v1
+   </code>
+   .
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-15.jpeg"/>
+  </p>
+  <p>
+   From the following page you can see permissions and what services are actively using this secret:
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-16.jpeg"/>
+  </p>
+  <p>
+   Secrets are only available to services. The following creates an
+   <code>
+    nginx
+   </code>
+   service. The service and the secret MUST have the same permission label. If they don't match, UCP won't allow you to deploy.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-17.jpeg"/>
+  </p>
+  <p>
+   Click
+   <strong>
+    Next
+   </strong>
+   , and go to the
+   <strong>
+    Environment
+   </strong>
+   tab. Click the
+   <strong>
+    + Use a secret
+   </strong>
+   . The advanced settings allow you to set the UID/GID and file mode for the secret when it is mounted. Binaries and tar balls can be added as secrets, with a file size up to 500KB.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-18.jpeg"/>
+  </p>
+  <p>
+   When using the CLI the option,
+   <code>
+    --secret source=,target=,mode=
+   </code>
+   needs to be added to the
+   <code>
+    docker service create
+   </code>
+   command as follows:
+  </p>
+  <pre>
+<code>docker service create \
+--secret source=CRM.ca.pem,target=ca.pem \ 
+--secret source=CRM.cert.pub,target=cert.pub \
+--secret source=CRM.cert.pem,target=cert.pem \
+-l com.docker.ucp.access.label=CRM_prod -p 443 --name nginx nginx
+</code></pre>
+  <p>
+   Notice that the secrets are mounted to
+   <code>
+    /run/secrets/
+   </code>
+   . Because of labels in our example, only administrators and the crm team have access to this container and secret.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-19.jpeg"/>
+  </p>
+  <p>
+   Changing secrets is as easy as removing the current version and creating it again. Please keep in mind that you need to be sure the labels on the new secret are correct.
+  </p>
+  <p>
+   <a name="ucp-logging">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_27" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Logging">
+  </span>
+  <h3 id="2-18">
+   Logging
+  </h3>
+  <p>
+   Since UCP is deployed as a containerized application, it uses the Engine logging configuration automatically. However, there is an easier way to configure logging across the cluster if you are using a syslog format. In
+   <strong>
+    Admin Settings --&gt; Logs
+   </strong>
+   you can set the logging level and destination.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-20.jpeg"/>
+  </p>
+  <p>
+   This is a great way to point all the logs to Splunk or an ELK (Elasticsearch Logstash Kibana) stack.
+  </p>
+  <p>
+   <a name="dtr">
+   </a>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_28" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="DTR_Security">
+ </span>
+ <h2 id="1-6">
+  DTR Security
+ </h2>
+ <p>
+  Docker Trusted Registry continues the "Secure by Default" theme with two new strong features: Image Signing (via the Notary project) and Image Scanning. Additionally, DTR shares authentication with UCP, which simplifies setup and provides strong RBAC without any effort.
+ </p>
+ <p>
+  DTR stores metadata and layer data in two separate locations. The metadata is stored locally in a database that is shared between replicas. The layer data is stored in a configurable location.
+ </p>
+ <p>
+  <a name="dtr-cert">
+  </a>
+ </p>
+ <div class="mt-section" id="section_29" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="External_Certificates_2">
+  </span>
+  <h3 id="2-19">
+   External Certificates
+  </h3>
+  <p>
+   Just as with UCP, DTR can use fully-signed company certificates or self-signed certs. You can use the Certificate Authority (CA) for your organization. To reduce the number of certificates, you can add multiple Subject Alternative Names (SANs) to a single certificate. This allows the certificate to be valid for multiple URLs. For example, when setting up a certificate for
+   <code>
+    ucp.example.com
+   </code>
+   , add SANs of
+   <code>
+    dtr.example.com
+   </code>
+   and all the underlying hostnames and IP addresses. Using this technique allows the same certificate to be used for both UCP and DTR.
+  </p>
+  <p>
+   External certificates are added to DTR by going to
+   <strong>
+    Settings
+   </strong>
+   --&gt;
+   <strong>
+    Domain
+   </strong>
+   --&gt;
+   <strong>
+    Show TLS Settings
+   </strong>
+   .
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-21.jpeg"/>
+  </p>
+  <p>
+   For more instructions for adding external certificates, refer to the
+   <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/" rel="external nofollow" target="_blank">
+    Docker docs
+   </a>
+   .
+  </p>
+  <p>
+   <a name="dtr-storage">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_30" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Storage_Backend_.E2.80.94_S3_or_NFS">
+  </span>
+  <h3 id="2-20">
+   Storage Backend — S3 or NFS
+  </h3>
+  <p>
+   The choice of storage backend for DTR has affects on both performance and security. Your choices are as follows:
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Type
+     </th>
+     <th>
+      Pros
+     </th>
+     <th>
+      Cons
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      Local Filesystem
+     </td>
+     <td>
+      Fast and Local. Pairs great with local block storage.
+     </td>
+     <td>
+      Requires bare metal or ephemeral volumes. NOT good for HA.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      S3
+     </td>
+     <td>
+      Great for HA and HTTPS communications. Several third party servers available. Can be encrypted at rest.
+     </td>
+     <td>
+      Requires maintaining or paying for an external S3 compliant service.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Azure
+     </td>
+     <td>
+      Can be configured to act as a local but have redundancy within Azure Storage.
+     </td>
+     <td>
+      Requires Azure cloud account.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Swift
+     </td>
+     <td>
+      Similar to S3 being an object store.
+     </td>
+     <td>
+      Requires OpenStack infrastructure for service.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Google Cloud Storage
+     </td>
+     <td>
+      Similar to S3 being an object store. Can be encrypted at rest.
+     </td>
+     <td>
+      Requires a Google Cloud account.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      NFS
+     </td>
+     <td>
+      Easy to setup/integrate with existing infrastructure.
+     </td>
+     <td>
+      Slower due to network calls.
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <p>
+   To change the settings, go to
+   <strong>
+    Settings
+   </strong>
+   --&gt;
+   <strong>
+    Storage
+   </strong>
+   in UCP.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-22.jpeg"/>
+  </p>
+  <p>
+   Your choice of storage is highly influenced by where you are deploying Docker EE because it is important to place DTR's backend storage as close as possible to DTR itself. You should always ensure that you are using HTTPS (TLS). Also consider how are you going to backup DTR's images. When in doubt, use a secure object store, such as S3 or similar. Object stores provide the best balance between security and ease of use and also make it easy for HA DTR setups.
+  </p>
+  <p>
+   <a name="dtr-garbage">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_31" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Garbage_Collection">
+  </span>
+  <h3 id="2-21">
+   Garbage Collection
+  </h3>
+  <p>
+   Garbage collection is an often-overlooked area from a security standpoint. Old, out-of-date images may contain security flaws or exploitable vulnerabilities, so removing unnecessary images is important. Garbage collection is a feature that ensures that unused images (and layers) are removed. Garbage collection is a substantial process, so it's best to run at times when the system is least utilized. Scheduling a regular collection time in
+   <strong>
+    Settings
+   </strong>
+   --&gt;
+   <strong>
+    Garbage Collection
+   </strong>
+   is the best approach to ensuring unnecessary images are removed.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-23.jpeg"/>
+  </p>
+  <p>
+   <a name="dtr-rbac">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_32" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Organizations_.E2.80.94_RBAC">
+  </span>
+  <h3 id="2-22">
+   Organizations — RBAC
+  </h3>
+  <p>
+   Since Universal Control Plane and Docker Trusted Registry utilize the same authentication backend, users are shared between the two. This simplifies user management. However, there is a slight difference in how teams are handled. Universal Control Plane uses "Teams" to organize users. Docker Trusted Registry uses "organizations." This is due to how the repositories are handled. Similar to UCP's user management, organizations need to be created.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-24.jpeg"/>
+  </p>
+  <p>
+   Once the organizations are created, DTR has the ability to add teams within the organization.
+  </p>
+  <p>
+   Here’s an overview of the permission levels available in DTR:
+  </p>
+  <ul>
+   <li>
+    Anonymous users: Can search and pull public repositories
+   </li>
+   <li>
+    Users: Can search and pull public repos, and create and manage their own repositories
+   </li>
+   <li>
+    Team member: Can do everything a user can do, plus has the permissions of the teams the user is member of
+   </li>
+   <li>
+    Team admin: Can do everything a team member can do, and can also add members to the team
+   </li>
+   <li>
+    Organization admin: Can do everything a team admin can do, can create new teams, and add members to the organization
+   </li>
+   <li>
+    DDC admin: Can manage anything across UCP and DTR
+   </li>
+  </ul>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-25.jpeg"/>
+  </p>
+  <p>
+   For example, an organization named
+   <code>
+    crm
+   </code>
+   , a team named
+   <code>
+    prod
+   </code>
+   , and a repository named
+   <code>
+    crm/awesome_app
+   </code>
+   were created. Permissions can now be applied to the images themselves.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-26.jpeg"/>
+  </p>
+  <p>
+   This chart shows the different permission levels:
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-27.jpeg"/>
+  </p>
+  <p>
+   It is important to limit the number of users that have access to images. Applying the permission levels correctly is important.
+  </p>
+  <p>
+   <a name="dtr-notary">
+   </a>
+  </p>
+ </div>
+ <div class="mt-section" id="section_33" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Content_Trust.2FImage_Signing_.E2.80.94_Notary">
+  </span>
+  <h3 id="2-23">
+   Content Trust/Image Signing — Notary
+  </h3>
+  <p>
+   <em>
+    Notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
+   </em>
+  </p>
+  <p>
+   Docker Content Trust/Notary provides a cryptographic signature for each image. The signature provides security so that the image you want is the image you get. If you are curious about what makes Notary secure, read about
+   <a class="link-https" href="https://docs.docker.com/notary/service_architecture/" rel="external nofollow" target="_blank">
+    Notary's Architecture
+   </a>
+   . Since Docker EE is "Secure by Default," Docker Trusted Registry comes with the Notary server out of the box.
+  </p>
+  <p>
+   In addition, Docker Content Trust enables you to institute the concept of threshold signing and gating for the releases. Under this model, software is not released until all necessary parties (or a quorum) sign off. This can be enforced by requiring (and verifying) the needed signatures for an image. This policy ensures that the image has made it through the whole process: if someone tries to make it skip a step, the image will lack a necessary signature, thus preventing deployment of that image.
+  </p>
+  <p>
+   The following examples shows the basic usage of Notary. To use image signing, you need to create a repository in DTR and enable it on your local Docker Engine. First, enable the client, and sign an image:
+  </p>
+  <pre>
+<code>root @ ~  export DOCKER_CONTENT_TRUST=1
+root @ ~  docker tag alpine dtr.example.com/admin/alpine:signed 
+root @ ~  docker push dtr.example.com/admin/alpine:signed
+The push refers to a repository [dtr.example.com/admin/alpine]
+865e1c468a35: Layer already exists 
+e0cfcaccf697: Layer already exists 
+e2d4ee32e967: Layer already exists 
+60ab55d3379d: Layer already exists 
+signed: digest: sha256:131d77d4ccf5916a94d026e2f5865a2e2acefd56fc6debceb83e50cf24eb4e99 size: 1156
+Signing and pushing trust metadata
+You are about to create a new root signing key passphrase. This passphrase
+will be used to protect the most sensitive key in your signing system. Please
+choose a long, complex passphrase and be careful to keep the password and the
+key file itself secure and backed up. It is highly recommended that you use a
+password manager to generate the passphrase and keep it safe. There will be no
+way to recover this key. You can find the key in your config directory.
+Enter passphrase for new root key with ID 44d193b: 
+Repeat passphrase for new root key with ID 44d193b: 
+Enter passphrase for new repository key with ID 2a0738c (dtr.example.com/admin/alpine): 
+Repeat passphrase for new repository key with ID 2a0738c (dtr.example.com/admin/alpine): 
+Finished initializing "dtr.example.com/admin/alpine"
+Successfully signed "dtr.example.com/admin/alpine":signed
+
+</code></pre>
+  <p>
+   The above does the following:
+  </p>
+  <ul>
+   <li>
+    Enables Content Trust with
+    <code>
+     export DOCKER_CONTENT_TRUST=1
+    </code>
+    .
+   </li>
+   <li>
+    Tags an image destined for DTR with
+    <code>
+     docker tag alpine dtr.example.com/admin/alpine:signed
+    </code>
+   </li>
+   <li>
+    Pushes the image with the tag "signed" :
+    <code>
+     docker push dtr.example.com/admin/alpine:signed
+    </code>
+   </li>
+   <li>
+    The Docker client starts the push to DTR. Since there is no local root key (certificate), one needs to be created with a passphrase.
+    <code>
+     Enter passphrase for new root key with ID 44d193b:
+    </code>
+   </li>
+   <li>
+    A repository key is created with a passphrase.
+    <code>
+     Enter passphrase for new repository key with ID f93c4a5 (dtr.example.com/admin/alpine):
+    </code>
+   </li>
+  </ul>
+  <p>
+   When re-pushing signed images to DTR, you do not have to create the keys again. You are prompted for the image passphrase.
+  </p>
+  <pre>
+<code>root @ ~  docker push dtr.example.com/admin/alpine:signed
+The push refers to a repository [dtr.example.com/admin/alpine]
+60ab55d3379d: Layer already exists 
+signed: digest: sha256:3952dc48dcc4136ccdde37fbef7e250346538a55a0366e3fccc683336377e372 size: 528
+Signing and pushing trust metadata
+Enter passphrase for repository key with ID 2a0738c: 
+Successfully signed "dtr.example.com/admin/alpine":signed
+</code></pre>
+  <p>
+   A successfully signed image has a green check mark in the DTR GUI.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-28.jpeg"/>
+  </p>
+  <p>
+   <a name="dtr-key-management">
+   </a>
+  </p>
+  <div class="mt-section" id="section_34" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Key_Management">
+   </span>
+   <h4 id="3-2">
+    Key Management
+   </h4>
+   <p>
+    Docker and Notary clients store state in its
+    <code>
+     trust_dir
+    </code>
+    directory, which is
+    <code>
+     ~/.docker/trust
+    </code>
+    when enabling Docker Content Trust. This directory is where all the keys are stored. All the keys are encrypted at rest. It is VERY important to protect that directory with permissions.
+   </p>
+   <p>
+    The
+    <code>
+     root_keys
+    </code>
+    subdirectory within
+    <code>
+     private
+    </code>
+    stores root private keys, while
+    <code>
+     tuf_keys
+    </code>
+    stores targets, snapshots, and delegations private keys.
+   </p>
+   <p>
+    Interacting with your local keys requires you to install the Notary client. Binaries can be found at
+    <a class="link-https" href="https://github.com/docker/notary/releases" rel="external nofollow" target="_blank">
+     https://github.com/docker/notary/releases
+    </a>
+    . Here is a quick script to add it your system.
+   </p>
+   <pre>
+<code>wget -O /usr/local/bin/notary https://github.com/docker/notary/releases/download/v0.4.3/notary-Linux-amd64
+chmod 755 /usr/local/bin/notary
+</code></pre>
+   <p>
+    At the same time, getting the notary client DTR's CA public key is also needed.
+   </p>
+   <pre>
+<code>mkdir -o ~/.docker/tls/dtr.example.com; curl -sk https://dtr.example.com/ca -o ~/.docker/tls/dtr.example.com/ca.crt
+</code></pre>
+   <p>
+    It is easy to simplify the notary command with an alias.
+   </p>
+   <pre>
+<code>alias notary="notary -s https://dtr.example.com -d ~/.docker/trust --tlscacert ~/.docker/tls/dtr.example.com/ca.crt"
+</code></pre>
+   <p>
+    With the alias in place, run
+    <code>
+     notary key list
+    </code>
+    to show the local keys and where they are stored.
+   </p>
+   <pre>
+<code>ROLE       GUN                          KEY ID                                                              LOCATION
+----       ---                          ------                                                              --------
+root                                    44d193b5954facdb5f21584537774b9732cfea91e5d7531075822c58f979cc93    /root/.docker/trust/private
+targets    ...ullet.com/admin/alpine    2a0738c4f75e97d3a5bbd48d3e166da5f624ccb86899479ce2381d4e268834ee    /root/.docker/trust/private
+</code></pre>
+   <p>
+    To make the keys more secure it is recommended to always store the
+    <code>
+     root_keys
+    </code>
+    offline, meaning, not on the machine used to sign the images. If that machine were to get compromised then they would have everything needed to sign "bad" images. Yubikey is a really good method for storing keys offline.
+   </p>
+   <p>
+    <a name="notary-yubikey">
+    </a>
+   </p>
+   <div class="mt-section" id="section_35" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+    <span id="Use_a_Yubikey">
+    </span>
+    <h5 id="4-0">
+     Use a Yubikey
+    </h5>
+    <p>
+     Notary can be used with a hardware token storage device called a
+     <a class="link-https" href="https://www.yubico.com/products/yubikey-hardware/" rel="external nofollow" target="_blank">
+      Yubikey
+     </a>
+     . The Yubikey must be prioritized to store root keys and requires user touch-input for signing. This creates a two-factor authentication for signing images. Note that Yubikey support is included with the Docker Engine 1.11 client for use with Docker Content Trust. The specific use is to have all of your developers use Yubikeys with their workstations. You can get more information about Yubikeys from the
+     <a class="link-https" href="https://docs.docker.com/notary/advanced_usage/#/use-a-yubikey" rel="external nofollow" target="_blank">
+      Docker docs
+     </a>
+     .
+    </p>
+    <p>
+     <a name="notary-jenkins">
+     </a>
+    </p>
+   </div>
+   <div class="mt-section" id="section_36" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+    <span id="Signing_with_Jenkins">
+    </span>
+    <h5 id="4-1">
+     Signing with Jenkins
+    </h5>
+    <p>
+     When teams get large it becomes harder to manage all the developer keys. One method for reducing the management load is to not let developers sign images. Using Jenkins to sign all the images that are destined for production eliminates most of the key management. The keys on the Jenkins server still need to be protected and backed up.
+    </p>
+    <p>
+     The first step is to create a user account for your CI system. For example, assume Jenkins is the CI system. As an admin user logged in to UCP, navigate to
+     <strong>
+      User Management
+     </strong>
+     and select
+     <strong>
+      Add User
+     </strong>
+     . Create a user with the name
+     <code>
+      jenkins
+     </code>
+     and set a strong password.
+    </p>
+    <p>
+     Next, create a team called
+     <code>
+      CI
+     </code>
+     and add the
+     <code>
+      jenkins
+     </code>
+     user to this team. The signing policy is team based, so the
+     <code>
+      jenkins
+     </code>
+     user must be in a team.
+    </p>
+    <p>
+     <img alt="" class="internal" src="/_kb/images/1908-29.jpeg"/>
+    </p>
+    <p>
+     While still logged in as an admin, navigate to
+     <strong>
+      Admin Settings
+     </strong>
+     and select the
+     <strong>
+      Content Trust
+     </strong>
+     subsection. Select the checkbox to enable Content Trust and in the select box that appears, select the
+     <code>
+      CI
+     </code>
+     team that was just created. Save the settings.
+    </p>
+    <p>
+     This policy requires every image that is referenced in a
+     <code>
+      docker pull
+     </code>
+     ,
+     <code>
+      docker run
+     </code>
+     , or
+     <code>
+      docker service create
+     </code>
+     must be signed by a key corresponding to a member of the
+     <code>
+      CI
+     </code>
+     team. In this case, the only member is the
+     <code>
+      jenkins
+     </code>
+     user.
+    </p>
+    <p>
+     <img alt="" class="internal" src="/_kb/images/1908-30.jpeg"/>
+    </p>
+    <p>
+     The signing policy implementation uses the certificates issued in user client bundles to connect a signature to a user. Using an incognito browser window (or otherwise), log into the
+     <code>
+      jenkins
+     </code>
+     user account you created earlier. Download a client bundle for this user. It is also recommended that you change the description associated with the public key stored in UCP such that you can identify in the future which key is being used for signing.
+    </p>
+    <p>
+     Please note each time a user retrieves a new client bundle, a new keypair is generated. It is therefore necessary to keep track of a specific bundle that a user chooses to designate as the user's signing bundle.
+    </p>
+    <p>
+     Once you have decompressed the client bundle, the only two files you need for the purposes of signing are
+     <code>
+      cert.pem
+     </code>
+     and
+     <code>
+      key.pem
+     </code>
+     . These represent the public and private parts of the user’s signing identity respectively. Load the
+     <code>
+      key.pem
+     </code>
+     file onto the Jenkins servers, and use
+     <code>
+      cert.pem
+     </code>
+     to create delegations for the
+     <code>
+      jenkins
+     </code>
+     user in our Trusted Collection.
+    </p>
+    <p>
+     On the Jenkins server, use the notary client to load keys. Simply run
+     <code>
+      notary -d /path/to/.docker/trust key import /path/to/key.pem
+     </code>
+     . You will be asked to set a password to encrypt the key on disk. For automated signing, this password can be configured into the environment under the variable name
+     <code>
+      DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE
+     </code>
+     . The
+     <code>
+      -d
+     </code>
+     flag to the command specifies the path to the trust subdirectory within the server’s Docker configuration directory. Typically this is found at
+     <code>
+      ~/.docker/trust
+     </code>
+     .
+    </p>
+    <p>
+     There are two ways to enable Content Trust: globally and per operation. To enabled Content Trust globally, set the environment variable
+     <code>
+      DOCKER_CONTENT_TRUST=1
+     </code>
+     . To enable on a per operation basis, wherever you run
+     <code>
+      docker push
+     </code>
+     in your Jenkins scripts, add the flag
+     <code>
+      --disable-content-trust=false
+     </code>
+     . You may wish to use this second option if you only want to sign some images.
+    </p>
+    <p>
+     The Jenkins server is now prepared to sign images, but you need to create delegations referencing the key to give it the necessary permissions.
+    </p>
+    <p>
+     Any commands displayed in this section should not be run from the Jenkins server. You will most likely want to run them from your local system.
+    </p>
+    <p>
+     If this is a new repository, create it in Docker Trusted Registry (DTR).
+    </p>
+    <p>
+     Next, initialize the trust data and create the delegation that provides the Jenkins key with permissions to sign content. The following commands initialize the trust data and rotate snapshotting responsibilities to the server. This is necessary to ensure human involvement it not required to publish new content.
+    </p>
+    <p>
+     Create an alias to streamline all of the following commands. The alias sets the server and the default trust store location. Adding the CA for DTR's TLS certificate is needed if the certificate is signed by a root server.
+    </p>
+    <pre>
+<code>alias notary="notary -s https://dtr.example.com -d ~/.docker/trust --tlscacert ~/.docker/tls/dtr.example.com/ca.crt"
+</code></pre>
+    <p>
+     Initialize the repository if you have not pushed a signed image:
+    </p>
+    <pre>
+<code>notary init dtr.example.com/admin/alpine
+notary key rotate dtr.example.com/admin/alpine snapshot -r
+notary publish dtr.example.com/admin/alpine
+</code></pre>
+    <p>
+     Now that the repository is initialized, create the delegations for Jenkins. Docker Content Trust treats a delegation role called targets/releases specially. It considers this delegation to contain the canonical list of published images for the repository. It is therefore generally desirable to add all users to this delegation with the following command:
+    </p>
+    <pre>
+<code>notary delegation add dtr.example.com/admin/alpine targets/releases --all-paths /path/to/cert.pem
+</code></pre>
+    <p>
+     This solves a number of prioritization problems that would result from needing to determine which delegation should ultimately be trusted for a specific image. However, because it is anticipated that any user will be able to sign the targets/releases role, it is not trusted in determining if a signing policy has been met. Therefore it is also necessary to create a delegation specifically for Jenkins:
+    </p>
+    <pre>
+<code>notary delegation add dtr.example.com/admin/alpine targets/jenkins --all-paths /path/to/cert.pem
+</code></pre>
+    <p>
+     Next publish both these updates (remember to add the correct
+     <code>
+      -s
+     </code>
+     and
+     <code>
+      -d
+     </code>
+     flags):
+    </p>
+    <pre>
+<code>notary publish dtr.example.com/admin/alpine
+</code></pre>
+    <blockquote>
+     <p>
+      Informational (Advanced): When including the targets/releases role in determining if a signing policy had been met, there is the potential of images being opportunistically deployed when an appropriate user signs it. In the scenario described so far, only images signed by the
+      <code>
+       CI
+      </code>
+      team (containing only the
+      <code>
+       jenkins
+      </code>
+      user) should be deployable. If a user “Moby” could also sign images but was not part of the
+      <code>
+       CI
+      </code>
+      team, he might sign and publish a new target/release that contained his image. UCP would refuse to deploy this image because it was not signed by the
+      <code>
+       CI
+      </code>
+      team. However, the next time Jenkins published an image, it would update and sign the targets/releases role as whole, enabling “Moby” to deploy his image.
+     </p>
+    </blockquote>
+    <p>
+     <a name="notary-delegate">
+     </a>
+    </p>
+   </div>
+   <div class="mt-section" id="section_37" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+    <span id="Key_Delegation">
+    </span>
+    <h5 id="4-2">
+     Key Delegation
+    </h5>
+    <p>
+     Similar to delegating a key for Jenkins, you can delegate multiple keys for teams. There are a few tricks for this. When adding a delegation, it is recommended to add the delegation for the targets/releases role as well as a role to indicate the team.
+    </p>
+    <p>
+     <img alt="" class="internal" src="/_kb/images/1908-31.jpeg"/>
+    </p>
+    <p>
+     For example, with these three teams: developer, qa, and devops in the targets/releases role, it would be best to add each to the targets/releases role and also create a role for each key:
+    </p>
+    <pre>
+<code>#Keep in mind the '-p' is to automatically publish.
+# create delegation for the targets/releases role for each of the keys
+notary delegation add -p dtr.exampleexample.com/admin/alpine targets/releases --all-paths ~/developer.pem ~/qa.pem ~/devops.pem
+
+# create delegation to the targets/developer role
+notary delegation add -p dtr.example.com/admin/alpine targets/developer --all-paths ~/developer.pem
+
+# create delegation to the targets/qa role
+notary delegation add -p dtr.example.com/admin/alpine targets/qa --all-paths ~/qa.pem
+
+# create delegation to the targets/devops role
+notary delegation add -p dtr.example.com/admin/alpine targets/devops --all-paths ~/devops.pem
+</code></pre>
+    <p>
+     This is ideal so in the case of everyone pushing to the same tag, you end up with the same hash in targets/developer, targets/qa, and targets/devops, and then whoever signed last also signed the same hash into targets/releases. Without the signature on targets/releases, you can't pull the image and having individual roles for each, you get additional data about which signatures are actually in place based off of which key.
+    </p>
+    <p>
+     <a name="notary-lost">
+     </a>
+    </p>
+   </div>
+   <div class="mt-section" id="section_38" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+    <span id="Lost_key.3F_Rotate_it.3F">
+    </span>
+    <h5 id="4-3">
+     Lost key? Rotate it?
+    </h5>
+    <p>
+     If you lost your root or signing key, all hope is not lost. The keys can simply be rotated. Then re-pushing the image will trigger a resigning.
+    </p>
+    <p>
+     To rotate the "targets" (signing) key:
+    </p>
+    <pre>
+<code>root @ ~  notary key rotate dtr.example.com/admin/alpine targets
+Enter passphrase for new targets key with ID 00aeaf3 (dtr.example.com/admin/alpine): 
+Repeat passphrase for new targets key with ID 00aeaf3 (dtr.example.com/admin/alpine): 
+Enter username: admin
+Enter password: 
+Enter passphrase for root key with ID 2a0738c: 
+Successfully rotated targets key for repository dtr.example.com/admin/alpine
+</code></pre>
+    <p>
+     Notice you have to enter a new passphrase for the target key. Also note that Notary removes the old targets key and replaces it with the new one. The behavior is a little different for the root key. Notary keeps the old root key to ensure your downstream clients can transition. Next, rotate the root key:
+    </p>
+    <pre>
+<code>root @ ~  notary key rotate dtr.example.com/admin/alpine root
+Warning: you are about to rotate your root key.
+
+You must use your old key to sign this root rotation. We recommend that
+you sign all your future root changes with this key as well, so that
+clients can have a smoother update process. Please do not delete
+this key after rotating.
+
+Are you sure you want to proceed?  (yes/no)  yes
+You are about to create a new root signing key passphrase. This passphrase
+will be used to protect the most sensitive key in your signing system. Please
+choose a long, complex passphrase and be careful to keep the password and the
+key file itself secure and backed up. It is highly recommended that you use a
+password manager to generate the passphrase and keep it safe. There will be no
+way to recover this key. You can find the key in your config directory.
+Enter passphrase for new root key with ID 75cb534: 
+Repeat passphrase for new root key with ID 75cb534: 
+Enter username: admin
+Enter password: 
+Successfully rotated root key for repository dtr.example.com/admin/alpine
+</code></pre>
+    <p>
+     Remember to keep the keys private, and when you can, use a hardware token like a Yubikey. Currently only the Yubikey version 4 is compatible.
+    </p>
+    <p>
+     <a name="dtr-key-list">
+     </a>
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_39" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Key_Verification">
+   </span>
+   <h4 id="3-3">
+    Key Verification
+   </h4>
+   <p>
+    There are some more useful notary commands to list and even unsign images:
+   </p>
+   <pre>
+<code>### verify image is signed
+notary list dtr.example.com/admin/alpine -r targets/releases
+notary list dtr.example.com/admin/alpine -r targets/admin
+
+### unsign image
+notary remove -p dtr.example.com/admin/alpine latest -r targets/releases
+notary remove -p dtr.example.com/admin/alpine latest -r targets/admin
+
+### verify image is no longer signed
+notary list dtr.example.com/admin/alpine -r targets/releases
+notary list dtr.example.com/admin/alpine -r targets/admin
+</code></pre>
+   <p>
+    <a name="dtr-scan">
+    </a>
+   </p>
+  </div>
+ </div>
+ <div class="mt-section" id="section_40" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+  <span id="Image_Scanning">
+  </span>
+  <h3 id="2-24">
+   Image Scanning
+  </h3>
+  <p>
+   Starting with version 2.2.0, DTR includes on-premises image scanning. The on-prem scanning engine within DTR scans images against the
+   <a class="link-https" href="https://cve.mitre.org/" rel="external nofollow" target="_blank">
+    CVE Database
+   </a>
+   . First, the scanner performs a binary scan on each layer of the image, identifies the software components in each layer, and indexes the SHA of each component. This binary scan evaluates the components on a bit-by-bit basis, so vulnerable components are discovered regardless of filename, whether or not they're included on a distribution manifest or in a package manager, whether they are statically or dynamically linked, or even if they are from the base image OS distribution.
+  </p>
+  <p>
+   The scan then compares the SHA of each component against the CVE database (a "dictionary" of known information security vulnerabilities). When the CVE database is updated, the scanning service reviews the indexed components for any that match newly discovered vulnerabilities. Most scans complete within a few minutes, however larger repositories may take longer to scan depending on your system resources. The scanning engine gives you a central point to scan all the images and delivers a Bill of Materials (BOM), which can be coupled with
+   <a class="mt-self-link" href="#dtr-notary" rel="internal">
+    Notary
+   </a>
+   to ensure an extremely secure supply chain for your images.
+  </p>
+  <p>
+   <img alt="" class="internal" src="/_kb/images/1908-32.png"/>
+  </p>
+  <p>
+   <a name="dtr-scan-setup">
+   </a>
+  </p>
+  <div class="mt-section" id="section_41" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Setup_Image_Scanning">
+   </span>
+   <h4 id="3-4">
+    Setup Image Scanning
+   </h4>
+   <p>
+    Before you begin, make sure that you or your organization has purchased a DTR license that includes Docker Security Scanning,and that your Docker ID can access and download this license from the Docker Store.
+   </p>
+   <p>
+    To enable Image Scanning, go to
+    <strong>
+     Settings --&gt; Security
+    </strong>
+    , select
+    <strong>
+     Enable Scanning
+    </strong>
+    , and then select whether to use the Docker-supplied CVE database (
+    <strong>
+     Online
+    </strong>
+    — the default option) or use a locally-uploaded file (
+    <strong>
+     Offline
+    </strong>
+    — this option is only recommended for environments that are isolated from the Internet or otherwise can't connect to Docker for consistent updates). Once enabled in online mode, DTR downloads the CVE database from Docker, which may take a while for the initial sync. If your installation cannot access
+    <code>
+     <a class="link-https" href="https://dss-cve-updates.docker.com/" rel="external nofollow" target="_blank" title="https://dss-cve-updates.docker.com/">
+      https://dss-cve-updates.docker.com/
+     </a>
+    </code>
+    you must manually upload a
+    <code>
+     .tar
+    </code>
+    file containing the security database.
+   </p>
+   <ul>
+    <li>
+     If you are using
+     <strong>
+      Online
+     </strong>
+     mode, the DTR instance contacts a Docker server, download the latest vulnerability database, and install it. Scanning can begin once this process completes.
+    </li>
+    <li>
+     If you are using
+     <strong>
+      Offline
+     </strong>
+     mode, use the instructions in
+     <strong>
+      Update scanning database - offline mode
+     </strong>
+     to upload an initial security database.
+    </li>
+   </ul>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-33.jpeg"/>
+   </p>
+   <p>
+    By default, when Security Scanning is enabled, new repositories automatically scan on
+    <code>
+     docker push
+    </code>
+    , but any repositories that existed before scanning was enabled are set to "scan manually" mode by default. If these repositories are still in use, you can change this setting from each repository's
+    <strong>
+     Settings
+    </strong>
+    page.
+   </p>
+   <p>
+    <a name="dtr-scan-offline">
+    </a>
+   </p>
+  </div>
+  <div class="mt-section" id="section_42" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="CVE_Offline_Database">
+   </span>
+   <h4 id="3-5">
+    CVE Offline Database
+   </h4>
+   <p>
+    If your DTR instance cannot contact the update server, you can download and install a
+    <code>
+     .tar
+    </code>
+    file that contains the database updates. These offline CVE database files are handled through the
+    <a class="link-https" href="https://store.docker.com/" rel="external nofollow" target="_blank">
+     Docker Store
+    </a>
+    .
+   </p>
+   <p>
+    <a name="dtr-scan-results">
+    </a>
+   </p>
+  </div>
+  <div class="mt-section" id="section_43" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Scanning_Results">
+   </span>
+   <h4 id="3-6">
+    Scanning Results
+   </h4>
+   <p>
+    To see the results of the scans, navigate to the repository itself, then click
+    <strong>
+     Images
+    </strong>
+    . A clean image scan has a green checkmark shield icon:
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-34.jpeg"/>
+   </p>
+   <p>
+    A vulnerable image scan has a red warning shield:
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-35.jpeg"/>
+   </p>
+   <p>
+    There are two views for the scanning results,
+    <strong>
+     Layers
+    </strong>
+    and
+    <strong>
+     Components
+    </strong>
+    . The
+    <strong>
+     Layers
+    </strong>
+    view shows which layer of the image had the vulnerable binary. This is extremely useful when diagnosing where the vulnerability is in the Dockerfile:
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-36.jpeg"/>
+   </p>
+   <p>
+    The vulnerable binary is displayed, along with all the other contents of the layer, when you click the layer itself. In this example there are two vulnerable binaries:
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-37.jpeg"/>
+   </p>
+   <p>
+    Click the vulnerable image to see the
+    <strong>
+     Components
+    </strong>
+    view. From the
+    <strong>
+     Component
+    </strong>
+    view the CVE number, a link to CVE database, file path, layers affected, severity, and description of severity are available:
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-38.jpeg"/>
+   </p>
+   <p>
+    Now you can take action against and vulnerable binary/layer/image.
+   </p>
+   <p>
+    If you discover vulnerable components, check if there is an updated version available where the security vulnerability has been addressed. If necessary, contact the component's maintainers to ensure that the vulnerability is being addressed in a future version or patch update.
+   </p>
+   <p>
+    If the vulnerability is in a
+    <code>
+     base layer
+    </code>
+    (such as an operating system) you might not be able to correct the issue in the image. In this case, you might need to switch to a different version of the base layer, or you might find an equivalent, less vulnerable base layer. You might also decide that the vulnerability or exposure is acceptable.
+   </p>
+   <p>
+    Address vulnerabilities in your repositories by updating the images to use updated and corrected versions of vulnerable components, or by using a different components that provide the same functionality. When you have updated the source code, run a build to create a new image, tag the image, and push the updated image to your DTR instance. You can then re-scan the image to confirm that you have addressed the vulnerabilities.
+   </p>
+   <p>
+    What happens when there are new vulnerabilities released? There are actually two phases. The first phase is to fingerprint the image's binaries and layers into hashes. The second phase is to compare the hashes with the CVE database. The fingerprinting phase takes the longest amount of time to complete. Comparing the hashes is very quick. When there is a new CVE database, DTR simply compares the existing hashes with the new database. This process is also very quick. The scan results are always updated.
+   </p>
+   <p>
+    <a name="dtr-webhooks">
+    </a>
+   </p>
+  </div>
+  <div class="mt-section" id="section_44" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+   <span id="Webhooks">
+   </span>
+   <h4 id="3-7">
+    Webhooks
+   </h4>
+   <p>
+    DTR includes webhooks for common events, such as pushing a new tag or deleting an image. This allows you to build complex CI and CD pipelines from your own DTR cluster. Currently all the webhook administration is handled through the API.
+   </p>
+   <p>
+    The webhook events you can subscribe to are as follows:
+   </p>
+   <p>
+    Repository specific events:
+   </p>
+   <ul>
+    <li>
+     Tag push
+    </li>
+    <li>
+     Tag delete
+    </li>
+    <li>
+     Manifest push
+    </li>
+    <li>
+     Manifest delete
+    </li>
+    <li>
+     Security scan completed
+    </li>
+    <li>
+     Security scan failed
+    </li>
+   </ul>
+   <p>
+    Namespace specific events:
+   </p>
+   <ul>
+    <li>
+     Repo events (created/updated/deleted)
+    </li>
+   </ul>
+   <p>
+    Global events:
+   </p>
+   <ul>
+    <li>
+     Security scanner update complete
+    </li>
+   </ul>
+   <p>
+    To subscribe to an event you need to be at least an admin of the particular repository (for repository events) or namespace (for namespace events). A global administrator can subscribe to any event. For example, a user must be an admin of repository to subscribe to its tag push events.
+   </p>
+   <p>
+    More information about webhooks can be found in the
+    <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/webhooks/" rel="external nofollow" target="_blank">
+     Docker docs
+    </a>
+    . DTR also presents the API by going to the menu under the login in the upper right, and then
+    <strong>
+     API docs
+    </strong>
+    .
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-39.jpeg"/>
+   </p>
+   <p>
+    In the API docs you can see all sorts of examples for extending DTR. Near the bottom is the webhooks section. Examples and even a "Try it out" function is available.
+   </p>
+   <p>
+    <img alt="" class="internal" src="/_kb/images/1908-40.jpeg"/>
+   </p>
+   <p>
+    <a name="putting-it-all-together">
+    </a>
+   </p>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_45" mt-section-origin="Architecture/Docker_Reference_Architecture:_Securing_Docker_EE_and_Security_Best_Practices">
+ <span id="Summary">
+ </span>
+ <h2 id="1-7">
+  Summary
+ </h2>
+ <p>
+  From limiting root access to nodes to using RBAC for UCP and DTR to storing secrets securely, this document provides all the security information you need to create a secure, customized, containerized infrastructure.
+ </p>
+ <p>
+  <em>
+   Document Version: 1.1.1
+  </em>
+ </p>
+ <p>
+  <em>
+   Tested on: Docker EE 17.03, Docker CS Engine 1.13, DTR version 2.2.1, UCP 2.1.0
+  </em>
+ </p>
+</div>
+{% endraw %}

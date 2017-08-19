@@ -1,0 +1,87 @@
+---
+title: "How to properly start and stop a Docker Cluster for maintenance (patching)"
+id: 2185
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2185/
+source: https://success.docker.com/@api/deki/pages/2185/contents
+tags:
+- tag: "article:howto"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ This is a brief guide to present how to properly start and stop the cluster for maintenance items such as server patching.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_properly_start_and_stop_a_Docker_Cluster_for_maintenance_(patching)">
+ <span id="Steps">
+ </span>
+ <h2 id="1-0">
+  Steps
+ </h2>
+ <p>
+  To properly start and stop the Docker cluster for server maintenance, you will need to perform backups and perform the maintenance on each node, one node at a time. Perform the maintenance on all the worker nodes first, one at a time, and then move on to the manager nodes, one at a time.
+ </p>
+ <p>
+  Do so using the following steps:
+ </p>
+ <ol>
+  <li>
+   Ensure you have backed up UCP and DTR, respective to the versions you have installed. Here are some docs to assist with the backups:
+   <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/">
+    https://docs.docker.com/datacenter/u...ster-recovery/
+   </a>
+   &amp;
+   <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/">
+    https://docs.docker.com/datacenter/d...ster-recovery/
+   </a>
+   .
+  </li>
+  <li>
+   After backups have been created, choose the "worker" node you plan on patching first.
+  </li>
+  <li>
+   You must first drain the node. Draining the node ensures that everything is stopped that is currently running on that node and rescheduled to other workers. In the UCP UI, go to
+   <strong>
+    Resources
+   </strong>
+   &gt;
+   <strong>
+    Nodes
+   </strong>
+   and select the node.
+   <p>
+    <a class="thumb" href="https://success.docker.com/@api/deki/files/558/KB1.png?revision=1" rel="internal" title="Diagram 1">
+     <img alt="Diagram 1" class="internal default" height="219px" src="/_kb/images/2185-0.png" style="width: 550px; height: 219px;" width="550px"/>
+    </a>
+   </p>
+  </li>
+  <li>
+   In the window that pops up, select
+   <strong>
+    Availability
+   </strong>
+   &gt;
+   <strong>
+    Drain
+   </strong>
+   .
+   <p>
+    <a class="thumb" href="https://success.docker.com/@api/deki/files/559/KB2.png?revision=1" rel="internal" title="Diagram 2">
+     <img alt="Diagram 2" class="internal default" height="290px" src="/_kb/images/2185-1.png" style="width: 550px; height: 290px;" width="550px"/>
+    </a>
+   </p>
+  </li>
+  <li>
+   Once the node is drained, you can proceed with the maintenance of the node. Bring the node back up and repeat for all the other worker nodes.
+  </li>
+  <li>
+   Once all of the "workers" are patched and brought online, repeat the same process with the managers.
+  </li>
+  <li>
+   Ensure that before you proceed to the next manager, the current manager being worked on is backed up and in a healthy state.
+  </li>
+ </ol>
+</div>
+{% endraw %}

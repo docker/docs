@@ -1,0 +1,81 @@
+---
+title: "Why does my Docker Cloud automated build fail after working on my local machine?"
+id: 948
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/948/
+source: https://success.docker.com/@api/deki/pages/948/contents
+tags:
+- tag: "article:topic"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Docker_Cloud_Automated_Build_-_Why_does_my_build_is_failing_but_works_fine_on_my_local_machine?">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  If your build keeps failing on Docker Cloud Automated Build but it builds successfully on your local machine, you most like are using a node with insufficient memory to build your image.
+ </p>
+ <p>
+  <span>
+   The automated build feature on Cloud behaves differently from Docker Hub. On Cloud, builds are performed on one of your nodes on Docker Cloud, whereas builds triggered on Docker Hub are built on dedicated build clusters for Docker Hub.
+  </span>
+ </p>
+ <p>
+  This is an example error message during the building process:
+ </p>
+ <pre>
+<span>g++: internal compiler error: Killed (program cc1plus)</span>
+</pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Docker_Cloud_Automated_Build_-_Why_does_my_build_is_failing_but_works_fine_on_my_local_machine?">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  To solve this issue, add a new node with larger specs (at least 4GB of memory) and tag it with the
+  <span class="mt-font-courier-new">
+   builder
+  </span>
+  deploy tag, so that all automated builds trigger on Cloud are built using that node:
+ </p>
+ <ol>
+  <li>
+   Launch a new node cluster
+  </li>
+  <li>
+   Add the tag
+   <span class="mt-font-courier-new">
+    builder
+   </span>
+   under
+   <strong>
+    Deploy tags
+   </strong>
+  </li>
+  <li>
+   Make sure to select a node type with at least 4GB of RAM
+  </li>
+  <li>
+   Launch node cluster
+  </li>
+  <li>
+   Rebuild your image
+  </li>
+ </ol>
+ <p>
+  To read more about Automated Builds on Cloud:
+  <a href="https://docs.docker.com/docker-cloud/feature-reference/automated-build/" rel="noreferrer">
+   https://docs.docker.com/docker-cloud/feature-reference/automated-build/
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}

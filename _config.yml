@@ -17,6 +17,8 @@ compose_current: 1.14.0
 collections:
   samples:
     output: true
+  kb:
+    output: true
 
 gems:
   - jekyll-redirect-from

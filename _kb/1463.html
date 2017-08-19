@@ -1,0 +1,200 @@
+---
+title: "Troubleshooting External Certificates for UCP/DTR"
+id: 1463
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1463/
+source: https://success.docker.com/@api/deki/pages/1463/contents
+tags:
+- tag: "article:tutorial"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Troubleshooting_External_Certificates_for_UCP//DTR">
+ <span id="Goal">
+ </span>
+ <h2 id="1-0">
+  Goal
+ </h2>
+ <p>
+  During installation, UCP/DTR creates certificates if not supplied. This guide assumes you are providing your own signed certificates. Specifically, this guide helps you
+ </p>
+ <ol>
+  <li>
+   Understand what the files are used for and why
+  </li>
+  <li>
+   Troubleshoot certificate files for use with UCP/DTR
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Troubleshooting_External_Certificates_for_UCP//DTR">
+ <span id="Understanding_Certificates_for_UCP">
+ </span>
+ <h2 id="1-1">
+  Understanding Certificates for UCP
+ </h2>
+ <p>
+  UCP has two sets of certificates — one for the front door (aka the external site) and another set for the internal cluster communication. This guide ONLY discusses the external set.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Troubleshooting_External_Certificates_for_UCP//DTR">
+ <span id="Understanding_the_Files">
+ </span>
+ <h2 id="1-2">
+  Understanding the Files
+ </h2>
+ <p id="Playingwithcustomercerts.-Structure:">
+  Lets start with understanding what files are needed to request a signed certificate for UCP. Note these are not the same as the files that will be used later in configuring UCP external certificates.  There are three files that you need:
+ </p>
+ <ol>
+  <li>
+   <code>
+    ca.pem
+   </code>
+   (CA) : This is the public certificate of the signing authority. Since the signing authority can be chained, you will need the intermediate certificates to be included into this file. If there are intermediates, then you should see at least two cert blocks.
+  </li>
+  <li>
+   <code>
+    cert.crt
+   </code>
+   (CERT) : This is your public certificate received from the Certificate Authority.
+  </li>
+  <li>
+   <code>
+    cert.key
+   </code>
+   (KEY) : This is your private certificate used to sign your Certificate Signing Request (CSR).
+  </li>
+ </ol>
+ <p>
+  Why are there three files? Well, let's start by looking at the CERT and the KEY. This is YOUR key pair. If someone wanted to send you an encrypted message, they can use your Public Certificate to encrypt. Then you can decrypt it with your Private Key. How do you get a key pair?
+ </p>
+ <p>
+  Start by creating a key private key:
+ </p>
+ <pre>
+<code>openssl genrsa -out key.pem 2048</code>
+</pre>
+ <p>
+  Now that you have a private key file named
+  <code>
+   key.pem
+  </code>
+  , use that KEY to create a Certificate Signing Request (CSR):
+ </p>
+ <pre>
+<code>openssl req -new -sha256 -key key.pem -out moby.csr</code>
+</pre>
+ <p>
+  You will see output similar to the following. Provide the information at each prompt:
+ </p>
+ <pre>
+You are about to be asked to enter information that will be incorporated into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank For some fields there will be a default value, If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:<span class="replaceabletext">US
+</span>State or Province Name (full name) [Some-State]:<span class="replaceabletext">Maryland
+</span>Locality Name (eg, city) []:<span class="replaceabletext">Annapolis
+</span>Organization Name (eg, company) [Internet Widgits Pty Ltd]:<span class="replaceabletext">Docker Solutions
+</span>Organizational Unit Name (eg, section) []:<span class="replaceabletext">Customer Success
+</span>Common Name (e.g. server FQDN or YOUR name) []:<span class="replaceabletext">example.com
+</span>Email Address []:<span class="replaceabletext">mailto:me@example.com</span>
+Please enter the following 'extra' attributes to be sent with your certificate request
+A challenge password []: An optional company name []:<span class="replaceabletext">Docker</span></pre>
+ <p>
+  Great. You now have two files,
+  <code>
+   key.pem
+  </code>
+  (KEY) and
+  <code>
+   moby.csr
+  </code>
+  (CSR). Next, send the CSR to your desired signing authority (i.e. Verisign, Digicert, or internal company signer). Once signed we will receive the public cert file (CERT). We should also receive the certificate authorities public cert (CA). You will need this to prove who you are. Once done you should have 4 files : KEY, CA, CSR, and CERT.
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Troubleshooting_External_Certificates_for_UCP//DTR">
+ <span id="Troubleshooting">
+ </span>
+ <h2 id="1-3">
+  Troubleshooting
+ </h2>
+ <p>
+  There are quite a few issues that can come up with certificates. You need to look for a few things:
+ </p>
+ <ol>
+  <li>
+   Is your CERT signed by the CA?
+  </li>
+  <li>
+   Is it the correct CA for your company?
+  </li>
+  <li>
+   Has your CERT expired?
+  </li>
+  <li>
+   Do you have all the intermediate CAs in the CA file?
+  </li>
+ </ol>
+ <p>
+  Here are some steps on how to check/verify the files.
+ </p>
+ <p>
+  First, look at the CA to ensure that it is valid. Use the following command to look at the text of the certificate:
+ </p>
+ <pre>
+<code>openssl x509 -noout -text -in cert.pem | less</code>
+</pre>
+ <p>
+  IF both the
+  <code>
+   ca.pem
+  </code>
+  (CA) and the
+  <code>
+   cert.pem
+  </code>
+  (CERT) check out, you can they verify that the CA signed the CERT:
+ </p>
+ <pre>
+<code>openssl verify -verbose -CAfile ca.pem cert.pem</code>
+</pre>
+ <p>
+  This should give a VERY good idea if the files are good and that the CERT is signed by the CA.
+ </p>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="KBase/Troubleshooting_External_Certificates_for_UCP//DTR">
+ <span id="Remote_Troubleshooting">
+ </span>
+ <h2 id="1-4">
+  Remote Troubleshooting
+ </h2>
+ <p>
+  If you need to troubleshoot a running system there are some openSSL commands that will let you do this.
+ </p>
+ <p>
+  To check the CERT of a specific domain:
+ </p>
+ <pre>
+<code>echo "" | openssl s_client -connect <span class="replaceabletext">example.com</span>:443 | openssl x509 -noout -text
+</code>
+</pre>
+ <p>
+  To parse the output to check for Subject Alternative Names (SANs).
+ </p>
+ <pre>
+<code>echo "" | openssl s_client -connect <span class="replaceabletext">example.com</span>:443  | openssl x509 -noout -text | grep "DNS\|IP"</code>
+</pre>
+ <p>
+  The
+  <code>
+   openssl s_client
+  </code>
+  command has a few options that can help diagnosing SSL/TLS issues. You can verify the remote CERT with a local CA. This can help check for bad CAs loaded on the server.
+ </p>
+</div>
+{% endraw %}

@@ -1,0 +1,132 @@
+---
+title: "Risk of data loss when volume is removed"
+id: 2080
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2080/
+source: https://success.docker.com/@api/deki/pages/2080/contents
+tags:
+- tag: "expires:nextrelease"
+---
+{% raw %}
+<p dir="ltr">
+ A bug was identified in the Docker platform that can cause loss of data on volumes when they are removed. The bug is triggered if a volume cannot be unmounted once it’s no longer used by any Docker containers, leaving the volume in an incorrect state. If such a volume is removed with
+ <code>
+  docker volume rm
+ </code>
+ , the data in the backing store is lost.
+</p>
+<p dir="ltr">
+ The bug will typically be triggered if using
+ <a class="link-https" href="https://docs.docker.com/engine/reference/commandline/volume_create/#driver-specific-options" rel="external nofollow" target="_blank">
+  local volumes with mount options
+ </a>
+ or using NFS-backed volumes. Volumes that use external drivers (volume plugins) are not affected.
+</p>
+<p dir="ltr">
+ The bug can also be triggered if using Docker Trusted Registry (DTR) with NFS storage — if you installed DTR with the
+ <code>
+  --nfs-storage-url
+ </code>
+ option or if you manually mounted an NFS share in DTR.
+</p>
+<p dir="ltr">
+ When DTR is using NFS
+ <code>
+  join
+ </code>
+ ,
+ <code>
+  reconfigure
+ </code>
+ ,
+ <code>
+  remove
+ </code>
+ or
+ <code>
+  destroy
+ </code>
+ , operations can result in DTR data loss.
+</p>
+<p dir="ltr">
+ An update that fixes the bug will be made available for all Docker versions starting from 1.11 and later, and the bug will also be fixed in the upcoming Docker 17.06 release.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Risk_of_data_loss_when_volume_is_removed">
+ <span id="Impact">
+ </span>
+ <h2 id="1-0">
+  Impact
+ </h2>
+ <p dir="ltr">
+  The bug affects all versions of Docker with volume support, including 1.11, 1.12, 1.13, 17.03 and earlier releases. Updates will be made available to all Docker versions starting from 1.11.
+ </p>
+ <p dir="ltr">
+  Docker Universal Control Plane and Docker Trusted Registry do not require separate updates, and you can continue to use your currently deployed version of UCP and DTR. Only the Docker EE platform (previously Docker CS Engine) itself requires updates to fix the bug.
+ </p>
+ <p dir="ltr">
+  If you are not using local or NFS volumes with Docker, no update is required. Docker encourages customers stay current and up-to-date with new Docker releases.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Risk_of_data_loss_when_volume_is_removed">
+ <span id="Mitigation">
+ </span>
+ <h2 id="1-1">
+  Mitigation
+ </h2>
+ <p dir="ltr">
+  Docker will make updates available to Docker 17.03, 1.13, 1.12 and 1.11.
+ </p>
+ <p dir="ltr">
+  Until updates from Docker are ready, the following temporary workarounds are available:
+ </p>
+ <ol dir="ltr">
+  <li>
+   Before running
+   <code>
+    docker volume rm
+   </code>
+   , check the mount table with
+   <code>
+    mount -l
+   </code>
+   and manually unmount volumes with
+   <code>
+    umount /var/lib/docker/volumes/&lt;name&gt;/_data
+   </code>
+   .
+  </li>
+  <li>
+   If using DTR with NFS, avoid
+   <code>
+    join
+   </code>
+   ,
+   <code>
+    reconfigure
+   </code>
+   ,
+   <code>
+    remove
+   </code>
+   or
+   <code>
+    destroy
+   </code>
+   operations until an update is available.
+  </li>
+  <li>
+   For DTR, pre-create the volume as a Docker NFS volume instead of manually mounting an NFS share over the volume directory.
+  </li>
+ </ol>
+ <p>
+  <br/>
+  Please contact our
+  <a class="link-https" href="https://support.docker.com" rel="external nofollow" target="_blank" title="https://support.docker.com">
+   Support
+  </a>
+  if you have any questions or concerns.
+ </p>
+</div>
+{% endraw %}

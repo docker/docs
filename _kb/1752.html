@@ -1,0 +1,61 @@
+---
+title: "The ucp-auth-worker-data volume is using up too much storage on my UCP controllers. How can I resolve this?"
+id: 1752
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1752/
+source: https://success.docker.com/@api/deki/pages/1752/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:pending-ed"
+- tag: "usecase:infraopt"
+---
+{% raw %}
+<p>
+ <strong>
+  The ucp-auth-worker-data volume can store a huge amount of logging data
+ </strong>
+ . By default, up to 500 job logs are stored, and log severity is set to "Info" by default. The logs can become an issue with storage if a "Debug" severity level is used, or if there is already insufficient storage space available for Docker volumes prior to installing UCP.
+</p>
+<p>
+ The following method can be used to resolve issues with insufficient space for the ucp-auth-worker-data volume:
+</p>
+<ol>
+ <li>
+  Stop the ucp-auth-worker container.
+ </li>
+ <li>
+  Remove the logs in
+  <code>
+   /var/lib/docker/volumes/ucp-au&lt;wbr/&gt;th-worker-data/_data/jobs
+  </code>
+  (but do not attempt to remove the ucp-auth-worker-data volume).
+ </li>
+ <li>
+  Restart the ucp-auth-worker container.
+ </li>
+ <li>
+  Modify the severity level to be less aggressive in logging via the UCP dashboard (
+  <strong>
+   Admin Settings
+  </strong>
+  &gt;
+  <strong>
+   Logs
+  </strong>
+  &gt;
+  <strong>
+   Log Severity Level
+  </strong>
+  ) or set up a remote log server as described in the
+  <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/" rel="freeklink" title="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/">
+   documentation
+  </a>
+  .
+ </li>
+</ol>
+
+{% endraw %}

@@ -1,0 +1,95 @@
+---
+title: "Error retreiving usage metrics observed in UCP UI"
+id: 2187
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2187/
+source: https://success.docker.com/@api/deki/pages/2187/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:devops"
+---
+{% raw %}
+<ul>
+ <li>
+  The following usage metrics errors can be observed from the UCP UI:
+ </li>
+</ul>
+<pre>
+Error retrieving cpu usage metrics
+Error retrieving memory usage metrics
+Error retrieving disk usage metrics
+</pre>
+<p>
+ <img alt="" class="internal default" height="306px" src="/_kb/images/2187-0.png" style="width: 485px; height: 306px;" width="485px"/>
+</p>
+<ul>
+ <li>
+  The
+  <code>
+   ucp-metrics
+  </code>
+  container does not start and appears to be
+  <code>
+   Exited
+  </code>
+  in
+  <code>
+   docker ps -a
+  </code>
+  output:
+ </li>
+</ul>
+<pre>
+<code>$ docker ps -a --filter name=ucp-metrics
+CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS                         PORTS               NAMES
+bfafbfc679e4        docker/ucp-metrics:2.1.4   "/bin/entrypoint.s..."   4 days ago          Exited (1) About an hour ago                       ucp-metrics
+</code></pre>
+<ul>
+ <li>
+  Running the
+  <code>
+   docker logs
+  </code>
+  command against the
+  <code>
+   ucp-metrics
+  </code>
+  container reveals the following error:
+ </li>
+</ul>
+<pre>
+<code>$ docker logs -t ucp-metrics 
+2017-07-10T23:43:59.173335762Z time="2017-07-10T23:43:59Z" level=error msg="Error opening memory series storage: leveldb/storage: corrupted or incomplete meta file" source="main.go:181"
+</code></pre>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Error_retreiving_usage_metrics_observed_in_UCP_UI">
+ <span id="Steps">
+ </span>
+ <h1 id="0-0">
+  Steps
+ </h1>
+ <p>
+  Clear the corrupted metrics database using the commands below. All historical metrics will unfortunately be lost in this procedure:
+ </p>
+ <pre>
+<code># docker run --rm -it -v ucp-metrics-data:/data alpine sh
+# rm -rf /data/* 
+CTRL+C
+</code></pre>
+ <p>
+  Remove the metrics container and trigger the ucp-reconciler to run and reconcile the metrics container again:
+ </p>
+ <pre>
+<code># docker rm ucp-metrics -f
+# docker start ucp-reconcile 
+# docker logs -f ucp-reconcile
+</code></pre>
+ <p>
+  Once the reconciliation completes, metrics should be functional on this UCP node once again.
+ </p>
+</div>
+{% endraw %}

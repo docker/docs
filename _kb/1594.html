@@ -1,0 +1,43 @@
+---
+title: "UCP is running devicemapper in a mode that isn't recommended for production workloads"
+id: 1594
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1594/
+source: https://success.docker.com/@api/deki/pages/1594/contents
+tags:
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "special:ownership"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Docker hosts running the devicemapper storage driver default to a configuration mode known as
+ <code>
+  loop-lvm
+ </code>
+ . This mode uses sparse files to build the thin pool used by image and container snapshots. The mode is designed to work out-of-the-box with no additional configuration. UCP production deployments should not run under
+ <code>
+  loop-lvm
+ </code>
+ mode.
+</p>
+<p>
+ The preferred configuration for UCP production deployments is
+ <code>
+  direct-lvm
+ </code>
+ . To configure
+ <code>
+  direct-lvm
+ </code>
+ , please check the following link:
+ <a class="link-https" href="https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#configure-direct-lvm-mode-for-production" rel="external nofollow" target="_blank">
+  https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#configure-direct-lvm-mode-for-production
+ </a>
+</p>
+
+{% endraw %}

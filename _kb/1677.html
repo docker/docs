@@ -1,0 +1,23 @@
+---
+title: "Can multiple UCP clusters share one DTR?"
+id: 1677
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1677/
+source: https://success.docker.com/@api/deki/pages/1677/contents
+tags:
+- tag: "article:question"
+- tag: "expires:futurerelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Currently, a DTR instance can only be associated with one UCP cluster (one-to-one mapping). Multiple UCP clusters can't share a single DTR instance.
+</p>
+<p>
+ This configuration constraint my change in the future. In the meantime, it is possible to pull images from a DTR instance that's associated with one UCP cluster using a worker node in another cluster, however DTR/UCP integration features such as Docker Content Trust are only available to the UCP cluster associated with the DTR instance.
+</p>
+
+{% endraw %}

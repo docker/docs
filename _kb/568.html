@@ -1,0 +1,47 @@
+---
+title: "What happens if I restart a node in the Packet.net portal?"
+id: 568
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/568/
+source: https://success.docker.com/@api/deki/pages/568/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudagent"
+- tag: "Docker Cloud"
+- tag: "Docker Cloud Agent"
+- tag: "nodes"
+- tag: "packet.net"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/What_happens_if_I_restart_a_node_in_the_Packet.net_portal?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  What happens if I restart a node in the Packet.net portal?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/What_happens_if_I_restart_a_node_in_the_Packet.net_portal?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  After the node boots up, Docker Cloud Agent tries to contact our API and register itself with the new IP. Cloud then automatically updates the DNS of the node and the containers on it to use the new IP. The node changes state from
+  <code>
+   Unreachable
+  </code>
+  to
+  <code>
+   Deployed
+  </code>
+  .
+ </p>
+</div>
+{% endraw %}

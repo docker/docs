@@ -1,0 +1,91 @@
+---
+title: "What is the correct format to name and tag DTR repositories?"
+id: 2261
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2261/
+source: https://success.docker.com/@api/deki/pages/2261/contents
+tags:
+- tag: "article:question"
+- tag: "component:dtr"
+- tag: "DTR"
+- tag: "dtr naming syntax"
+- tag: "multiple depth namespace"
+- tag: "naming repositories"
+- tag: "product:datacenter"
+- tag: "push"
+- tag: "stage:reviewed"
+- tag: "tag"
+---
+{% raw %}
+<p>
+ DTR requires you to create the repo first before you can push to it (which is different than Docker Hub), so make certain your repo exists before pushing to it.
+</p>
+<p>
+ DTR only supports repository names and tags in the form of:
+</p>
+<ul>
+ <li>
+  <span class="replaceabletext">
+   &lt;hostname&gt;
+  </span>
+  <strong>
+   /
+  </strong>
+  <span class="replaceabletext">
+   &lt;namepsace&gt;
+  </span>
+  <strong>
+   /
+  </strong>
+  <span class="replaceabletext">
+   &lt;repository&gt;
+  </span>
+ </li>
+ <li>
+  <span class="replaceabletext">
+   &lt;hostname&gt;
+  </span>
+  <strong>
+   /
+  </strong>
+  <span class="replaceabletext">
+   &lt;namepsace&gt;
+  </span>
+  <strong>
+   /
+  </strong>
+  <span class="replaceabletext">
+   &lt;repository&gt;
+  </span>
+  <strong>
+   :
+  </strong>
+  <span class="replaceabletext">
+   &lt;tag&gt;
+  </span>
+ </li>
+</ul>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/What_is_the_correct_format_to_name_and_tag_DTR_repositories?">
+ <span id="example_of_pull_tag_and_push:">
+ </span>
+ <h4 id="3-0">
+  example of pull tag and push:
+ </h4>
+ <pre>
+docker pull <span class="replaceabletext">busybox</span>
+docker login <span class="replaceabletext">10.0.2.15</span> (sign in as admin)
+
+docker tag <span class="replaceabletext">busybox 10.0.2.15</span><strong>/</strong><span class="replaceabletext">admin</span><strong>/</strong><span class="replaceabletext">hello-world</span>
+docker push <span class="replaceabletext">10.0.2.15</span><strong>/</strong><span class="replaceabletext">admin</span><strong>/</strong><span class="replaceabletext">hello-world
+</span>
+                    OR
+                  
+docker tag <span class="replaceabletext">busybox 10.0.2.15</span><strong>/</strong><span class="replaceabletext">admin</span><strong>/</strong><span class="replaceabletext">hello-world</span><strong>:</strong><span class="replaceabletext">1</span>
+docker push <span class="replaceabletext">10.0.2.15</span><strong>/</strong><span class="replaceabletext">admin</span><strong>/</strong><span class="replaceabletext">hello-world</span><strong>:</strong><span class="replaceabletext">1</span>
+</pre>
+ <p>
+ </p>
+</div>
+{% endraw %}

@@ -1,0 +1,146 @@
+---
+title: "How do I provide an externally-generated security certificate during the UCP command line installation?"
+id: 1305
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1305/
+source: https://success.docker.com/@api/deki/pages/1305/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-1.1.1"
+- tag: "testedon:ucp-1.1.2"
+---
+{% raw %}
+<p>
+ By default, the UCP installation process secures the cluster via self-signed TLS certificates. For production usage, you should provide your own externally-generated, signed certificates. This article show how to provide externally-generated, signed certificates while installing UCP on the command line.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_do_I_provide_an_externally-generated_security_certificate_during_the_UCP_command_line_installation?">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  This article assumes the following:
+ </p>
+ <ul>
+  <li>
+   You are installing UCP via the command line as described in
+   <a class="link-https" href="https://docs.docker.com/ucp/installation/install-production/#step-5-install-the-ucp-controller" rel="external nofollow" target="_blank" title="Install UCP for production">
+    Install UCP for production
+   </a>
+   from the Docker docs.
+  </li>
+  <li>
+   You have a set of externally-generated, signed TLS certificates for your domain.
+  </li>
+  <li>
+   You are using UCP 1.1.1 and higher.
+  </li>
+ </ul>
+ <p>
+  <em>
+   <strong>
+    NOTE:
+   </strong>
+  </em>
+  This option was named
+  <code>
+   external-ucp-ca
+  </code>
+  in UCP 1.1.0 and earlier.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_do_I_provide_an_externally-generated_security_certificate_during_the_UCP_command_line_installation?">
+ <span id="Steps">
+ </span>
+ <h2 id="1-1">
+  Steps
+ </h2>
+ <p>
+  To specify an externally-generated and signed certificate for the UCP controller during a command line installation, use the
+  <code>
+   --external-server-cert
+  </code>
+  option.
+ </p>
+ <p>
+  The cert files in the storage volume named
+  <code>
+   ucp-controller-server-certs
+  </code>
+  will be used when the
+  <code>
+   --external-server-cert
+  </code>
+  option is specified.
+ </p>
+ <ol>
+  <li>
+   First, create a storage volume named
+   <code>
+    ucp-controller-server-certs
+   </code>
+   with
+   <code>
+    ca.pem
+   </code>
+   ,
+   <code>
+    cert.pem
+   </code>
+   , and
+   <code>
+    key.pem
+   </code>
+   in the root directory before running the install. It must contain the following:
+   <ul type="disc">
+    <li type="disc">
+     <code>
+      ca.pem
+     </code>
+     - This should have exactly one certificate, and that should be the root certificate authority for the whole chain.
+    </li>
+    <li type="disc">
+     <code>
+      cert.pem
+     </code>
+     - This should have the actual certificate for UCP, and
+     <strong>
+      all
+     </strong>
+     its intermediate certificates. The actual certificate should be at the top. The next certificate should be the next certificate in the chain. The last certificate should be signed by the root certificate that appears in
+     <code>
+      ca.pem,/code&gt;.
+     </code>
+    </li>
+    <li type="disc">
+     <code>
+      key.pem
+     </code>
+     - This should have only the private key file and nothing else.
+    </li>
+   </ul>
+  </li>
+  <li>
+   Then, when installing UCP, use the
+   <code>
+    --external-server-cert
+   </code>
+   option (shown in red):
+   <pre>
+<code>docker run --rm -it \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  <span class="replaceabletext">--external-server-cert</span> \
+  docker/ucp \
+  install [command options]</code>
+</pre>
+  </li>
+ </ol>
+</div>
+{% endraw %}

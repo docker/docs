@@ -1,0 +1,35 @@
+---
+title: "Cannot perform security scans because no vulnerability database was found"
+id: 1759
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1759/
+source: https://success.docker.com/@api/deki/pages/1759/contents
+tags:
+- tag: "article:errors"
+- tag: "component:dtr"
+- tag: "product:datacenter"
+- tag: "special:ownership"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ If Docker Trusted Registry is displaying a banner with the message:
+</p>
+<pre>
+Cannot perform security scans because no vulnerability database was found
+</pre>
+<p>
+ It means that the vulnerability database is empty, so it's not possible to scan your images for vulnerabilities. Make sure your node can reach
+ <a class="link-https" href="https://dss-cve-updates.docker.com/" rel="external nofollow" target="_blank">
+  https://dss-cve-updates.docker.com/
+ </a>
+ , or
+ <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/#/update-the-cve-scanning-database" rel="external nofollow" target="_blank">
+  download an offline version to update your vulnerability database
+ </a>
+ .
+</p>
+
+{% endraw %}

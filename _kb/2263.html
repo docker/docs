@@ -1,0 +1,265 @@
+---
+title: "Upgrade an entire cluster with CentOS, Docker Engine, UCP, and DTR"
+id: 2263
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2263/
+source: https://success.docker.com/@api/deki/pages/2263/contents
+tags:
+- tag: "article:tutorial"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  Upgrading an entire cluster can be difficult. This guide is intended to provide step-by-step instructions. The upgrade should happen in the following order: Engine and kernel, UCP, and then DTR. Details to follow.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  The guide assumes the following:
+ </p>
+ <ul>
+  <li>
+   <p>
+    All nodes are CentOS based.
+   </p>
+  </li>
+  <li>
+   <p>
+    All nodes have Internet access.
+   </p>
+  </li>
+  <li>
+   <p>
+    All nodes are healthy and online.
+   </p>
+  </li>
+ </ul>
+ <p>
+  Obviously there are dozens of permutations of OS and networking. The step order and ideas can easily be applied in most environments. It should be noted that a complete cluster upgrade of OS, Engine, UCP, and DTR should be performed during a maintenance window. The maintenance window should prevent any changes from jeopardizing the upgrade results.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="Step_1_-_Upgrade_Engine_and_OS">
+ </span>
+ <h2 id="1-2">
+  Step 1 - Upgrade Engine and OS
+ </h2>
+ <p>
+  Before starting please note there is
+  <strong>
+   NO PROMOTION
+  </strong>
+  or
+  <strong>
+   DEMOTION
+  </strong>
+  of managers and workers! Because of the timing, this can cause a loss of quorum resulting in the need to restore. The restore procedures will require extra time, SO take it slow and be methodical.
+ </p>
+ <p>
+  <strong>
+   Starting with the first Manager :
+  </strong>
+ </p>
+ <ol>
+  <li>
+   Stop Docker Engine.
+   <code>
+    sudo systemctl stop docker
+   </code>
+  </li>
+  <li>
+   Upgrade the OS and Engine.
+   <code>
+    sudo yum update -y
+   </code>
+   If there was a kernel update you will need to reboot the node and skip step 3.
+  </li>
+  <li>
+   Start Docker Engine.
+   <code>
+    sudo systemctl start docker
+   </code>
+  </li>
+  <li>
+   Verify the Manager node is up and healthy. On node :
+   <code>
+    sudo docker node ls
+   </code>
+   and verify the manager is healthy.
+   <br/>
+   <strong>
+    Please wait for the rebooted/upgraded manager to become active and healthy in the cluster before proceeding.
+   </strong>
+  </li>
+ </ol>
+ <p>
+  <strong>
+   Then repeat with the next Manager if it exists.
+  </strong>
+ </p>
+ <p>
+  Once all the managers have been upgraded, proceed with the DTR servers.
+ </p>
+ <p>
+  <strong>
+   Continuing with the first DTR replica :
+  </strong>
+ </p>
+ <ol>
+  <li>
+   Stop Docker Engine.
+   <code>
+    sudo systemctl stop docker
+   </code>
+  </li>
+  <li>
+   Upgrade the OS and Engine.
+   <code>
+    sudo yum update -y
+   </code>
+   If there was a kernel update you will need to reboot the node and skip step 3.
+  </li>
+  <li>
+   Start Docker Engine.
+   <code>
+    sudo systemctl start docker
+   </code>
+   <br/>
+   <strong>
+    Please wait for the rebooted/upgraded DTR replica to become active and healthy in the cluster before proceeding.
+   </strong>
+  </li>
+ </ol>
+ <p>
+  <strong>
+   Then repeat with the next DTR replica if it exists.
+  </strong>
+ </p>
+ <p>
+  Once all the DTR replicas have been upgraded, proceed with the rest of the workers.
+ </p>
+ <p>
+  <strong>
+   Next we can proceed with the rest of the Workers :
+  </strong>
+  Let's assume a graceful action.
+ </p>
+ <ol>
+  <li>
+   From a
+   <strong>
+    Manager
+   </strong>
+   node:
+   <code>
+    sudo docker node update --availability drain $NODE_NAME
+   </code>
+  </li>
+  <li>
+   From the
+   <strong>
+    Worker
+   </strong>
+   node, stop Docker Engine.
+   <code>
+    sudo systemctl stop docker
+   </code>
+  </li>
+  <li>
+   Upgrade the OS and Engine.
+   <code>
+    sudo yum update -y
+   </code>
+   If there was a kernel update you will need to reboot the node and skip step 4.
+  </li>
+  <li>
+   If node was not rebooted, start Docker Engine.
+   <code>
+    sudo systemctl start docker
+   </code>
+  </li>
+  <li>
+   If the node was rebooted, from a
+   <strong>
+    Manager
+   </strong>
+   node:
+   <code>
+    sudo docker node update --availability active $NODE_NAME
+   </code>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="Step_2_-_Upgrade_UCP">
+ </span>
+ <h2 id="1-3">
+  Step 2 - Upgrade UCP
+ </h2>
+ <p>
+  Now that the OS and Engine are updated, follow the main documentation for upgrading UCP. The UCP upgrade will not interrupt the applications running within the cluster. It is also worth noting that NO configuration changes should be made during the upgrade.
+ </p>
+ <p>
+  <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/#upgrade-ucp" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/#upgrade-ucp">
+   https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/#upgrade-ucp
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="Step_3_-_Upgrade_DTR">
+ </span>
+ <h2 id="1-4">
+  Step 3 - Upgrade DTR
+ </h2>
+ <p>
+  Now that the OS, Engine, and UCP are updated, follow the main documentation for upgrading DTR. Please keep in mind the DTR upgrade will prevent push and pull functions to complete.
+ </p>
+ <p>
+  <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/#step-1-upgrade-dtr-to-21-if-necessary" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/#step-1-upgrade-dtr-to-21-if-necessary">
+   https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/#step-1-upgrade-dtr-to-21-if-necessary
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_6" mt-section-origin="KBase/Upgrade_an_entire_cluster_with_CentOS,_Docker_Engine,_UCP,_and_DTR">
+ <span id="What's_Next.3F">
+ </span>
+ <h2 id="1-5">
+  What's Next?
+ </h2>
+ <p>
+  The next step should be to perform another backup of UCP and DTR. Ideally save the new backups under a different version name. Please do follow the documentation closely.
+ </p>
+ <ul>
+  <li>
+   UCP backup procedures :
+   <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/#backup-command" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/#backup-command">
+    https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/#backup-command
+   </a>
+  </li>
+  <li>
+   DTR backup procedures :
+   <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#back-up-dtr-data" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#back-up-dtr-data">
+    https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#back-up-dtr-data
+   </a>
+  </li>
+ </ul>
+ <p>
+  If you run into trouble at any point in the guide please feel free to contact support, forums, or our slack channels.
+ </p>
+</div>
+{% endraw %}

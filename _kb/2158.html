@@ -1,0 +1,113 @@
+---
+title: "Multiple DTRs shown when only one exists"
+id: 2158
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2158/
+source: https://success.docker.com/@api/deki/pages/2158/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When changing the name of DTR through the
+ <code>
+  reconfigure
+ </code>
+ command, a stale DTR entry may be found in the UCP UI under
+ <strong>
+  Admin Settings
+ </strong>
+ &gt;
+ <strong>
+  DTR
+ </strong>
+ . The stale entry in the following image has been highlighted.
+</p>
+<div class="figure">
+ <img alt="d5358184-0e52-11e7-83bb-ea114c8e19fef.png" class="internal.default internal" src="/_kb/images/2158-0.png"/>
+</div>
+<p>
+ This behavior has been reported to Docker Engineering under issue id
+ <code>
+  dhe-deploy/4918
+ </code>
+ .
+</p>
+<p>
+ Perform the following steps using
+ <code>
+  etcdctl
+ </code>
+ to remove the stale entry.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Multiple_DTRs_shown_when_only_one_exists">
+ <span id="On_one_manager_node:">
+ </span>
+ <h4 id="3-0">
+  On one manager node:
+ </h4>
+ <ol>
+  <li>
+   <p>
+    Define a temporary alias that can be used to run
+    <code>
+     etcdctl
+    </code>
+    for convenience:
+   </p>
+   <pre>
+<code>alias etcdctl="docker exec -it ucp-kv /bin/etcdctl --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem --endpoints https://localhost:2379"</code></pre>
+  </li>
+  <li>
+   <p>
+    List all known DTR entries in
+    <code>
+     etcd
+    </code>
+    :
+   </p>
+   <pre>
+<code>etcdctl ls /orca/v1/config/ |grep trustedregistry</code></pre>
+  </li>
+  <li>
+   <p>
+    Remove the defunct entry:
+   </p>
+   <pre>
+<code>etcdctl rm /orca/v1/config/trustedregistry_name.of.dtr.from.step.2</code></pre>
+  </li>
+  <li>
+   <p>
+    Confirm the entry has been removed:
+   </p>
+   <pre>
+<code>etcdctl ls /orca/v1/config/ |grep trustedregistry</code></pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Multiple_DTRs_shown_when_only_one_exists">
+ <span id="On_each_manager.2C_one_at_a_time:">
+ </span>
+ <h4 id="3-1">
+  On each manager, one at a time:
+ </h4>
+ <ol>
+  <li>
+   <p>
+    Restart the
+    <code>
+     ucp-controller
+    </code>
+    container:
+   </p>
+   <pre>
+<code>docker restart ucp-controller</code></pre>
+  </li>
+ </ol>
+</div>
+{% endraw %}

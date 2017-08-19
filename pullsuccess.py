@@ -5,9 +5,9 @@ import imghdr
 import shutil
 import base64
 
-call(["rm", "-rf", "kb"])
-call(["mkdir", "kb"])
-call(["mkdir", "kb/images"])
+call(["rm", "-rf", "_kb"])
+call(["mkdir", "_kb"])
+call(["mkdir", "_kb/images"])
 requrl = "https://success.docker.com/@api/deki/pages/"
 response = urllib2.urlopen(requrl)
 soup = BeautifulSoup(response, 'lxml')
@@ -27,6 +27,8 @@ for page in soup.find_all('page'):
         fileout += 'id: ' + page['id'] + '\n'
         fileout += 'draftstate: ' + page['draft.state'] + '\n'
         fileout += 'deleted: '  + page['deleted'] + '\n'
+        fileout += 'layout: docs\n'
+        fileout += 'permalink: /kb/' + page['id'] + '/\n'
         fileout += 'source: https://success.docker.com/@api/deki/pages/' + page['id'] + '/contents' + '\n'
         fileout += 'tags:' + '\n'
         for thistag in metadatasoup.find_all('tag'):
@@ -75,7 +77,7 @@ for page in soup.find_all('page'):
                     head, data = rawimgdata.split(',', 1)
                     file_ext = head.split(';')[0].split('/')[1]
                     imgData = base64.b64decode(data)
-            newFileName = 'kb/images/' + page['id'] + '-' + str(imageIndex)
+            newFileName = '_kb/images/' + page['id'] + '-' + str(imageIndex)
             output = open(newFileName,'wb')
             output.write(imgData)
             output.close()
@@ -86,7 +88,7 @@ for page in soup.find_all('page'):
             imageIndex = imageIndex + 1
         fileout += rawhtml.prettify() + '\n'
         fileout += '{% endraw %}\n'
-        f = open('kb/' + page['id'] + '.html', 'w+')
+        f = open('_kb/' + page['id'] + '.html', 'w+')
         f.write(fileout.encode('utf8'))
         f.close
-        print 'Success writing kb/' + page['id'] + '.html'
+        print 'Success writing _kb/' + page['id'] + '.html'

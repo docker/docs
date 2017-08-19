@@ -1,0 +1,46 @@
+---
+title: "How can I get into a Packet.net node managed by Docker Cloud?"
+id: 570
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/570/
+source: https://success.docker.com/@api/deki/pages/570/contents
+tags:
+- tag: "article:topic"
+- tag: "Docker Cloud"
+- tag: "node"
+- tag: "packet.net"
+- tag: "product:cloud"
+- tag: "SSH"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_can_I_get_into_a_Packet.net_node_managed_by_Docker_Cloud?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  How can I get into a Packet.net node managed by Docker Cloud?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_can_I_get_into_a_Packet.net_node_managed_by_Docker_Cloud?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  Packet.net copies SSH keys into the created device, so you can upload to Packet.net's portal your own SSH public key and then SSH into the node with the user
+  <code>
+   root
+  </code>
+  . You can also get into the node with Packet's console. You can also use a container to copy your SSH keys into the node, as explained in
+  <a class="link-https" href="https://docs.docker.com/docker-cloud/tutorials/ssh-into-a-node/" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-cloud/tutorials/ssh-into-a-node/">
+   SSHing into a Docker Cloud-managed node
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}

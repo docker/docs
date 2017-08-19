@@ -1,0 +1,89 @@
+---
+title: "DTR warning Cannot perform security scans because no vulnerability database was found"
+id: 2179
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2179/
+source: https://success.docker.com/@api/deki/pages/2179/contents
+tags:
+- tag: "article:errors"
+- tag: "component:dtr"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ The warning message
+ <code>
+  Cannot perform security scans because no vulnerability database was found.
+ </code>
+ is not expected during normal operations. Some systems will generate this warning when Security Scanning is first enabled, or if it is enabled in Offline mode, but the vulnerability database has not yet been uploaded. The warning is expected to go away once the database is first loaded into DTR.
+</p>
+<p>
+ If you see this warning during normal operations, and DTR has successfully scanned images in the past, to troubleshoot this problem in more depth, it is helpful to obtain a set of logs (with timestamps) for the container that's performing the scanning. That will require a combination of UI actions and a fairly simple command run on one of the nodes.
+</p>
+<ol>
+ <li>
+  Go to
+  <strong>
+   UCP
+  </strong>
+  -&gt;
+  <strong>
+   Resources
+  </strong>
+  -&gt;
+  <strong>
+   Containers.
+  </strong>
+ </li>
+ <li>
+  In the search box in the upper right hand, enter
+  <code>
+   dtr-scanning
+  </code>
+  . This should isolate the
+  <code>
+   dtr-scanningstore
+  </code>
+  container.
+ </li>
+ <li>
+  Note the node where the container is running (under the
+  <strong>
+   Node
+  </strong>
+  column).
+ </li>
+ <li>
+  Log into that node using an account that can run the
+  <code>
+   docker
+  </code>
+  CLI.
+ </li>
+ <li>
+  Run the following command:
+  <pre>
+docker ps | grep scanning</pre>
+  This should provide a container ID and confirm the container is actually running on that node.
+ </li>
+ <li>
+  Run the following command:
+  <pre>
+docker logs -t [container_id] &gt; /var/tmp/scanning.log.txt</pre>
+  replacing the
+  <code>
+   [container_id]
+  </code>
+  with the ID you found. A sample command would look like this:
+  <pre>
+# docker logs -t 3f53fb440398 &gt; /var/tmp/scanning.log.txt</pre>
+ </li>
+</ol>
+<p>
+ The resulting log file will help determine if there's anything unexpected going on with the scanning database.
+</p>
+
+{% endraw %}

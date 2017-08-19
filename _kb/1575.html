@@ -1,0 +1,53 @@
+---
+title: "UCP is unable to install because of a port conflict"
+id: 1575
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1575/
+source: https://success.docker.com/@api/deki/pages/1575/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "special:ownership"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.0.0"
+---
+{% raw %}
+<blockquote>
+ This only affects UCP 2.0.0 or later versions.
+</blockquote>
+<p>
+ UCP requires a specific range of ports to install, which are described in detail at the
+ <a class="link-https" href="https://docs.docker.com/ucp/installation/system-requirements" rel="external nofollow" target="_blank">
+  Systems Requirements
+ </a>
+ page. If the UCP installation fails to complete with a port-check error, please make sure these ports are available and that the host's
+ <code>
+  --advertise-addr
+ </code>
+ , if provided during the join operation, is routable from the host itself.
+</p>
+<p>
+ Finally, if the node has changed IP addresses since the
+ <code>
+  docker swarm join
+ </code>
+ operation was performed and you are observing port check failures during promotion to manager, the node will need to be rejoined to the cluster. This can be accomplished by first removing the node with the following sequence of operations, performed from another manager node:
+</p>
+<pre>
+docker node demote
+docker node rm --force
+</pre>
+<p>
+ Then we can safely rejoin the new node by running the following operations:
+</p>
+<pre>
+docker swarm leave
+docker swarm join ...
+</pre>
+<p>
+</p>
+
+{% endraw %}

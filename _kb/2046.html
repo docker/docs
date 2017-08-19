@@ -1,0 +1,2989 @@
+---
+title: "Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks"
+id: 2046
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2046/
+source: https://success.docker.com/@api/deki/pages/2046/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.12.3-cs3"
+- tag: "testedon:cse-1.13.1-cs1"
+- tag: "testedon:docker-17.03.0-ee-1"
+- tag: "testedon:ucp-2.0.0"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+esvar authorByline = "Mark Church";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="What_You_Will_Learn">
+ </span>
+ <h2 id="1-0">
+  What You Will Learn
+ </h2>
+ <p>
+  Docker containers wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries – anything that can be installed on a server. This guarantees that the software will always run the same, regardless of its environment. By default, containers isolate applications from one another and the underlying infrastructure, while providing an added layer of protection for the application.
+ </p>
+ <p>
+  What if the applications need to communicate with each other, the host, or an external network? How do you design a network to allow for proper connectivity while maintaining application portability, service discovery, load balancing, security, performance, and scalability? This document addresses these network design challenges as well as the tools available and common deployment patterns. It does not specify or recommend physical network design but provides options for how to design Docker networks while considering the constraints of the application and the physical network.
+ </p>
+ <div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Prerequisites">
+  </span>
+  <h3 id="2-0">
+   Prerequisites
+  </h3>
+  <p>
+   Before continuing, being familiar with Docker concepts and Docker Swarm is recommended:
+  </p>
+  <ul>
+   <li>
+    <a class="link-https" href="https://docs.docker.com/engine/understanding-docker/" rel="external nofollow" target="_blank">
+     Docker concepts
+    </a>
+   </li>
+   <li>
+    <a class="link-https" href="https://docs.docker.com/engine/swarm/" rel="external nofollow" target="_blank">
+     Docker Swarm
+    </a>
+    and
+    <a class="link-https" href="https://docs.docker.com/engine/swarm/key-concepts/#/services-and-tasks" rel="external nofollow" target="_blank">
+     Swarm mode concepts
+    </a>
+   </li>
+  </ul>
+ </div>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Challenges_of_Networking_Containers_and_Microservices">
+ </span>
+ <h2 id="1-1">
+  <a name="challenges">
+  </a>
+  Challenges of Networking Containers and Microservices
+ </h2>
+ <p>
+  Microservices practices have increased the scale of applications which has put even more importance on the methods of connectivity and isolation provided to applications. The Docker networking philosophy is application driven. It aims to provide options and flexibility to the network operators as well as the right level of abstraction to the application developers.
+ </p>
+ <p>
+  Like any design, network design is a balancing act.
+  <strong>
+   Docker EE
+  </strong>
+  and the Docker ecosystem provide multiple tools to network engineers to achieve the best balance for their applications and environments. Each option provides different benefits and tradeoffs. The remainder of this guide details each of these choices so network engineers can understand what might be best for their environments.
+ </p>
+ <p>
+  Docker has developed a new way of delivering applications, and with that, containers have also changed some aspects of how networking is approached. The following topics are common design themes for containerized applications:
+ </p>
+ <ul>
+  <li>
+   <p>
+    <strong>
+     Portability
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I guarantee maximum portability across diverse network environments while taking advantage of unique network characteristics?
+     </em>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Service Discovery
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I know where services are living as they are scaled up and down?
+     </em>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Load Balancing
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I share load across services as services themselves are brought up and scaled?
+     </em>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Security
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I segment to prevent the wrong containers from accessing each other?
+     </em>
+    </li>
+    <li>
+     <em>
+      How do I guarantee that a container with application and cluster control traffic is secure?
+     </em>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Performance
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I provide advanced network services while minimizing latency and maximizing bandwidth?
+     </em>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Scalability
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <em>
+      How do I ensure that none of these characteristics are sacrificed when scaling applications across many hosts?
+     </em>
+    </li>
+   </ul>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="The_Container_Networking_Model">
+ </span>
+ <h2 id="1-2">
+  <a name="cnm">
+  </a>
+  The Container Networking Model
+ </h2>
+ <p>
+  The Docker networking architecture is built on a set of interfaces called the
+  <em>
+   Container Networking Model
+  </em>
+  (CNM). The philosophy of CNM is to provide application portability across diverse infrastructures. This model strikes a balance to achieve application portability and also takes advantage of special features and capabilities of the infrastructure.
+ </p>
+ <p>
+  <img alt="Container Networking Model" class="internal" src="/_kb/images/2046-0.png"/>
+ </p>
+ <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="CNM_Constructs">
+  </span>
+  <h3 id="2-1">
+   CNM Constructs
+  </h3>
+  <p>
+   There are several high-level constructs in the CNM. They are all OS and infrastructure agnostic so that applications can have a uniform experience no matter the infrastructure stack.
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Sandbox
+    </strong>
+    — A Sandbox contains the configuration of a container's network stack. This includes management of the container's interfaces, routing table, and DNS settings. An implementation of a Sandbox could be a Linux Network Namespace, a FreeBSD Jail, or other similar concept. A Sandbox may contain many endpoints from multiple networks.
+   </li>
+   <li>
+    <strong>
+     Endpoint
+    </strong>
+    — An Endpoint joins a Sandbox to a Network. The Endpoint construct exists so the actual connection to the network can be abstracted away from the application. This helps maintain portability so that a service can use different types of network drivers without being concerned with how it's connected to that network.
+   </li>
+   <li>
+    <strong>
+     Network
+    </strong>
+    — The CNM does not specify a Network in terms of the OSI model. An implementation of a Network could be a Linux bridge, a VLAN, etc. A Network is a collection of endpoints that have connectivity between them. Endpoints that are not connected to a network do not have connectivity on a network.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="CNM_Driver_Interfaces">
+  </span>
+  <h3 id="2-2">
+   CNM Driver Interfaces
+  </h3>
+  <p>
+   The Container Networking Model provides two pluggable and open interfaces that can be used by users, the community, and vendors to leverage additional functionality, visibility, or control in the network.
+  </p>
+  <p>
+   The following network drivers exist:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Network Drivers
+    </strong>
+    — Docker Network Drivers provide the actual implementation that makes networks work. They are pluggable so that different drivers can be used and interchanged easily to support different use cases. Multiple network drivers can be used on a given Docker Engine or Cluster concurrently, but each Docker network is only instantiated through a single network driver. There are two broad types of CNM network drivers:
+    <ul>
+     <li>
+      <strong>
+       Native Network Drivers
+      </strong>
+      — Native Network Drivers are a native part of the Docker Engine and are provided by Docker. There are multiple drivers to choose from that support different capabilities like overlay networks or local bridges.
+     </li>
+     <li>
+      <strong>
+       Remote Network Drivers
+      </strong>
+      — Remote Network Drivers are network drivers created by the community and other vendors. These drivers can be used to provide integration with incumbent software and hardware. Users can also create their own drivers in cases where they desire specific functionality that is not supported by an existing network driver.
+     </li>
+    </ul>
+   </li>
+   <li>
+    <strong>
+     IPAM Drivers
+    </strong>
+    — Docker has a native IP Address Management Driver that provides default subnets or IP addresses for networks and endpoints if they are not specified. IP addressing can also be manually assigned through network, container, and service create commands. Remote IPAM drivers also exist and provide integration to existing IPAM tools.
+   </li>
+  </ul>
+  <p>
+   <img alt="CNM API" class="internal" src="/_kb/images/2046-1.png"/>
+  </p>
+ </div>
+ <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Docker_Native_Network_Drivers">
+  </span>
+  <h3 id="2-3">
+   Docker Native Network Drivers
+  </h3>
+  <p>
+   The Docker native network drivers are part of Docker Engine and don't require any extra modules. They are invoked and used through standard
+   <code>
+    docker network
+   </code>
+   commands. The following native network drivers exist.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Driver
+     </th>
+     <th>
+      Description
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      <strong>
+       Host
+      </strong>
+     </td>
+     <td>
+      With the
+      <code>
+       host
+      </code>
+      driver, a container uses the networking stack of the host. There is no namespace separation, and all interfaces on the host can be used directly by the container
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <strong>
+       Bridge
+      </strong>
+     </td>
+     <td>
+      The
+      <code>
+       bridge
+      </code>
+      driver creates a Linux bridge on the host that is managed by Docker. By default containers on a bridge can communicate with each other. External access to containers can also be configured through the
+      <code>
+       bridge
+      </code>
+      driver
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <strong>
+       Overlay
+      </strong>
+     </td>
+     <td>
+      The
+      <code>
+       overlay
+      </code>
+      driver creates an overlay network that supports multi-host networks out of the box. It uses a combination of local Linux bridges and VXLAN to overlay container-to-container communications over physical network infrastructure
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <strong>
+       MACVLAN
+      </strong>
+     </td>
+     <td>
+      The
+      <code>
+       macvlan
+      </code>
+      driver uses the MACVLAN bridge mode to establish a connection between container interfaces and a parent host interface (or sub-interfaces). It can be used to provide IP addresses to containers that are routable on the physical network. Additionally VLANs can be trunked to the
+      <code>
+       macvlan
+      </code>
+      driver to enforce Layer 2 container segmentation
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <strong>
+       None
+      </strong>
+     </td>
+     <td>
+      The
+      <code>
+       none
+      </code>
+      driver gives a container its own networking stack and network namespace but does not configure interfaces inside the container. Without additional configuration, the container is completely isolated from the host networking stack
+     </td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Network_Scope">
+  </span>
+  <h3 id="2-4">
+   Network Scope
+  </h3>
+  <p>
+   As seen in the
+   <code>
+    docker network ls
+   </code>
+   output, Docker network drivers have a concept of
+   <em>
+    scope
+   </em>
+   . The network scope is the domain of the driver which can be the
+   <code>
+    local
+   </code>
+   or
+   <code>
+    swarm
+   </code>
+   scope. Local scope drivers provide connectivity and network services (such as DNS or IPAM) within the scope of the host. Swarm scope drivers provide connectivity and network services across a swarm cluster. Swarm scope networks have the same network ID across the entire cluster while local scope networks have a unique network ID on each host.
+  </p>
+  <pre>
+<code>$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+1475f03fbecb        bridge              bridge              local
+e2d8a4bd86cb        docker_gwbridge     bridge              local
+407c477060e7        host                host                local
+f4zr3zrswlyg        ingress             overlay             swarm
+c97909a4b198        none                null                local
+</code></pre>
+ </div>
+ <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Docker_Remote_Network_Drivers">
+  </span>
+  <h3 id="2-5">
+   Docker Remote Network Drivers
+  </h3>
+  <p>
+   The following community- and vendor-created remote network drivers are compatible with CNM. Each provides unique capabilities and network services for containers.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Driver
+     </th>
+     <th>
+      Description
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      <a class="external" href="http://contiv.github.io/" rel="external nofollow" target="_blank">
+       <strong>
+        contiv
+       </strong>
+      </a>
+     </td>
+     <td>
+      An open source network plugin led by Cisco Systems to provide infrastructure and security policies for multi-tenant microservices deployments. Contiv also provides integration for non-container workloads and with physical networks, such as ACI. Contiv implements remote network and IPAM drivers.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <a class="link-https" href="https://www.weave.works/docs/net/latest/introducing-weave/" rel="external nofollow" target="_blank">
+       <strong>
+        weave
+       </strong>
+      </a>
+     </td>
+     <td>
+      A network plugin that creates a virtual network that connects Docker containers across multiple hosts or clouds. Weave provides automatic discovery of applications, can operate on partially connected networks, does not require an external cluster store, and is operations friendly.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <a class="link-https" href="https://www.projectcalico.org/" rel="external nofollow" target="_blank">
+       <strong>
+        calico
+       </strong>
+      </a>
+     </td>
+     <td>
+      An open source solution for virtual networking in cloud datacenters. It targets datacenters where most of the workloads (VMs, containers, or bare metal servers) only require IP connectivity. Calico provides this connectivity using standard IP routing. Isolation between workloads — whether according to tenant ownership or any finer grained policy — is achieved via iptables programming on the servers hosting the source and destination workloads.
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <a class="link-https" href="https://github.com/openstack/kuryr" rel="external nofollow" target="_blank">
+       <strong>
+        kuryr
+       </strong>
+      </a>
+     </td>
+     <td>
+      A network plugin developed as part of the OpenStack Kuryr project. It implements the Docker networking (libnetwork) remote driver API by utilizing Neutron, the OpenStack networking service. Kuryr includes an IPAM driver as well.
+     </td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+ <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Docker_Remote_IPAM_Drivers">
+  </span>
+  <h3 id="2-6">
+   Docker Remote IPAM Drivers
+  </h3>
+  <p>
+   Community and vendor created IPAM drivers can also be used to provide integrations with existing systems or special capabilities.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Driver
+     </th>
+     <th>
+      Description
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      <a class="link-https" href="https://hub.docker.com/r/infoblox/ipam-driver/" rel="external nofollow" target="_blank">
+       <strong>
+        infoblox
+       </strong>
+      </a>
+     </td>
+     <td>
+      An open source IPAM plugin that provides integration with existing Infoblox tools.
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <blockquote>
+   <p>
+    There are many Docker plugins that exist and more are being created all the time. Docker maintains a list of the
+    <a class="link-https" href="https://docs.docker.com/engine/extend/legacy_plugins/" rel="external nofollow" target="_blank">
+     most common plugins
+    </a>
+    .
+   </p>
+  </blockquote>
+ </div>
+</div>
+<div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Linux_Network_Fundamentals">
+ </span>
+ <h2 id="1-3">
+  <a name="drivers">
+  </a>
+  <a name="linuxnetworking">
+  </a>
+  Linux Network Fundamentals
+ </h2>
+ <p>
+  The Linux kernel features an extremely mature and performant implementation of the TCP/IP stack (in addition to other native kernel features like DNS and VXLAN). Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put,
+  <em>
+   Docker networking
+   <b>
+    is
+   </b>
+   Linux networking.
+  </em>
+ </p>
+ <p>
+  This implementation of existing Linux kernel features ensures high performance and robustness. Most importantly, it provides portability across many distributions and versions, which enhances application portability.
+ </p>
+ <p>
+  There are several Linux networking building blocks which Docker uses to implement its native CNM network drivers. This list includes
+  <strong>
+   Linux bridges
+  </strong>
+  ,
+  <strong>
+   network namespaces
+  </strong>
+  ,
+  <strong>
+   veth pairs
+  </strong>
+  , and
+  <strong>
+   iptables
+  </strong>
+  . The combination of these tools, implemented as network drivers, provides the forwarding rules, network segmentation, and management tools for complex network policy.
+ </p>
+ <div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="The_Linux_Bridge">
+  </span>
+  <h3 id="2-7">
+   <a name="linuxbridge">
+   </a>
+   The Linux Bridge
+  </h3>
+  <p>
+   A
+   <strong>
+    Linux bridge
+   </strong>
+   is a Layer 2 device that is the virtual implementation of a physical switch inside the Linux kernel. It forwards traffic based on MAC addresses which it learns dynamically by inspecting traffic. Linux bridges are used extensively in many of the Docker network drivers. A Linux bridge is not to be confused with the
+   <code>
+    bridge
+   </code>
+   Docker network driver which is a higher level implementation of the Linux bridge.
+  </p>
+ </div>
+ <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Network_Namespaces">
+  </span>
+  <h3 id="2-8">
+   Network Namespaces
+  </h3>
+  <p>
+   A Linux
+   <strong>
+    network namespace
+   </strong>
+   is an isolated network stack in the kernel with its own interfaces, routes, and firewall rules. It is a security aspect of containers and Linux, used to isolate containers. In networking terminology they are akin to a VRF that segments the network control and data plane inside the host. Network namespaces ensure that two containers on the same host aren't able to communicate with each other or even the host itself unless configured to do so via Docker networks. Typically, CNM network drivers implement separate namespaces for each container. However, containers can share the same network namespace or even be a part of the host's network namespace. The host network namespace containers the host interfaces and host routing table. This network namespace is called the global network namespace.
+  </p>
+ </div>
+ <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Virtual_Ethernet_Devices">
+  </span>
+  <h3 id="2-9">
+   Virtual Ethernet Devices
+  </h3>
+  <p>
+   A
+   <strong>
+    virtual ethernet device
+   </strong>
+   or
+   <strong>
+    veth
+   </strong>
+   is a Linux networking interface that acts as a connecting wire between two network namespaces. A veth is a full duplex link that has a single interface in each namespace. Traffic in one interface is directed out the other interface. Docker network drivers utilize veths to provide explicit connections between namespaces when Docker networks are created. When a container is attached to a Docker network, one end of the veth is placed inside the container (usually seen as the
+   <code>
+    ethX
+   </code>
+   interface) while the other is attached to the Docker network.
+  </p>
+ </div>
+ <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="iptables">
+  </span>
+  <h3 id="2-10">
+   iptables
+  </h3>
+  <p>
+   <strong>
+    <code>
+     iptables
+    </code>
+   </strong>
+   is the native packet filtering system that has been a part of the Linux kernel since version 2.4. It's a feature rich L3/L4 firewall that provides rule chains for packet marking, masquerading, and dropping. The native Docker network drivers utilize
+   <code>
+    iptables
+   </code>
+   extensively to segment network traffic, provide host port mapping, and to mark traffic for load balancing decisions.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Docker_Network_Control_Plane">
+ </span>
+ <h2 id="1-4">
+  <a name="controlplane">
+  </a>
+  Docker Network Control Plane
+ </h2>
+ <p>
+  The Docker-distributed network control plane manages the state of Swarm-scoped Docker networks in addition to propagating control plane data. It is a built-in capability of Docker Swarm clusters and does not require any extra components such as an external KV store. The control plane uses a
+  <a class="link-https" href="https://en.wikipedia.org/wiki/Gossip_protocol" rel="external nofollow" target="_blank">
+   Gossip
+  </a>
+  protocol based on
+  <a class="link-https" href="https://www.cs.cornell.edu/~asdas/research/dsn02-swim.pdf" rel="external nofollow" target="_blank">
+   SWIM
+  </a>
+  to propagate network state information and topology across Docker container clusters. The Gossip protocol is highly efficient at reaching eventual consistency within the cluster while maintaining constant rates of message size, failure detection times, and convergence time across very large scale clusters. This ensures that the network is able to scale across many nodes without introducing scaling issues such as slow convergence or false positive node failures.
+ </p>
+ <p>
+  The control plane is highly secure, providing confidentiality, integrity, and authentication through encrypted channels. It is also scoped per network which greatly reduces the updates that any given host receives.
+ </p>
+ <p>
+  <span class="float-right">
+   <img alt="Docker Network Control Plane" class="internal" src="/_kb/images/2046-2.png"/>
+  </span>
+ </p>
+ <p>
+  It is composed of several components that work together to achieve fast convergence across large scale networks. The distributed nature of the control plane ensures that cluster controller failures don't affect network performance.
+ </p>
+ <p>
+  The Docker network control plane components are as follows:
+ </p>
+ <ul>
+  <li>
+   <strong>
+    Message Dissemination
+   </strong>
+   updates nodes in a peer-to-peer fashion fanning out the information in each exchange to a larger group of nodes. Fixed intervals and size of peer groups ensures that network usage is constant even as the size of the cluster scales. Exponential information propagation across peers ensures that convergence is fast and bounded across any cluster size.
+  </li>
+  <li>
+   <strong>
+    Failure Detection
+   </strong>
+   utilizes direct and indirect hello messages to rule out network congestion and specific paths from causing false positive node failures.
+  </li>
+  <li>
+   <strong>
+    Full State Syncs
+   </strong>
+   occur periodically to achieve consistency faster and resolve network partitions.
+  </li>
+  <li>
+   <strong>
+    Topology Aware
+   </strong>
+   algorithms understand the relative latency between themselves and other peers. This is used to optimize the peer groups which makes convergence faster and more efficient.
+  </li>
+  <li>
+   <strong>
+    Control Plane Encryption
+   </strong>
+   protects against man in the middle and other attacks that could compromise network security.
+  </li>
+ </ul>
+ <blockquote>
+  <p>
+   The Docker Network Control Plane is a component of
+   <a class="link-https" href="https://docs.docker.com/engine/swarm/" rel="external nofollow" target="_blank">
+    Swarm
+   </a>
+   and requires a Swarm cluster to operate.
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Docker_Host_Network_Driver">
+ </span>
+ <h2 id="1-5">
+  <a name="hostdriver">
+  </a>
+  Docker Host Network Driver
+ </h2>
+ <p>
+  The
+  <code>
+   host
+  </code>
+  network driver is most familiar to those new to Docker because it's the same networking configuration that Linux uses without Docker.
+  <code>
+   --net=host
+  </code>
+  effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system.
+ </p>
+ <p>
+  Typically with other networking drivers, each container is placed in its own
+  <em>
+   network namespace
+  </em>
+  (or sandbox) to provide complete network isolation from each other. With the
+  <code>
+   host
+  </code>
+  driver containers are all in the same host network namespace and use the network interfaces and IP stack of the host. All containers in the
+  <code>
+   host
+  </code>
+  network are able to communicate with each other on the host interfaces. From a networking standpoint this is equivalent to multiple processes running on a host without containers. Because they are using the same host interfaces, no two containers are able to bind to the same TCP port. This may cause port contention if multiple containers are being scheduled on the same host.
+ </p>
+ <p>
+  <img alt="Host Driver" class="internal" src="/_kb/images/2046-3.png"/>
+ </p>
+ <pre>
+<code class="bash">#Create containers on the host network
+$ docker run -itd --net host --name C1 alpine sh
+$ docker run -itd --net host --name nginx
+
+#Show host eth0
+$ ip add | grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 9001 qdisc mq state UP group default qlen 1000
+    inet 172.31.21.213/20 brd 172.31.31.255 scope global eth0
+
+#Show eth0 from C1
+$ docker run -it --net host --name C1 alpine ip add | grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 9001 qdisc mq state UP qlen 1000
+    inet 172.31.21.213/20 brd 172.31.31.255 scope global eth0
+
+#Contact the nginx container through localhost on C1
+$ curl localhost
+!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+...
+
+</code></pre>
+ <p>
+  In this example, the host,
+  <code>
+   C1
+  </code>
+  and
+  <code>
+   nginx
+  </code>
+  all share the same interface for
+  <code>
+   eth0
+  </code>
+  when containers use the
+  <code>
+   host
+  </code>
+  network. This makes
+  <code>
+   host
+  </code>
+  ill suited for multi-tenant or highly secure applications.
+  <code>
+   host
+  </code>
+  containers have network access to every other container on the host. Communicate is possible between containers using
+  <code>
+   localhost
+  </code>
+  as shown in the example when
+  <code>
+   curl nginx
+  </code>
+  is executed from
+  <code>
+   C1
+  </code>
+  .
+ </p>
+ <p>
+  With the
+  <code>
+   host
+  </code>
+  driver, Docker does not manage any portion of the container networking stack such as port mapping or routing rules. This means that common networking flags like
+  <code>
+   -p
+  </code>
+  and
+  <code>
+   --icc
+  </code>
+  have no meaning for the
+  <code>
+   host
+  </code>
+  driver. They are ignored. This does make the
+  <code>
+   host
+  </code>
+  networking the simplest and lowest latency of the networking drivers. The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.
+ </p>
+ <p>
+  Full host access and no automated policy management may make the
+  <code>
+   host
+  </code>
+  driver a difficult fit as a general network driver. However,
+  <code>
+   host
+  </code>
+  does have some interesting properties that may be applicable for use cases such as ultra high performance applications or application troubleshooting.
+ </p>
+</div>
+<div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Docker_Bridge_Network_Driver">
+ </span>
+ <h2 id="1-6">
+  <a name="drivers">
+  </a>
+  Docker Bridge Network Driver
+ </h2>
+ <p>
+  This section explains the default Docker bridge network as well as user-defined bridge networks.
+ </p>
+ <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Default_Docker_Bridge_Network">
+  </span>
+  <h3 id="2-11">
+   Default Docker Bridge Network
+  </h3>
+  <p>
+   On any host running Docker Engine, there is, by default, a local Docker network named
+   <code>
+    bridge
+   </code>
+   . This network is created using a
+   <code>
+    bridge
+   </code>
+   network driver which instantiates a Linux bridge called
+   <code>
+    docker0
+   </code>
+   . This may sound confusing.
+  </p>
+  <ul>
+   <li>
+    <code>
+     bridge
+    </code>
+    is the name of the Docker network
+   </li>
+   <li>
+    <code>
+     bridge
+    </code>
+    is the network driver, or template, from which this network is created
+   </li>
+   <li>
+    <code>
+     docker0
+    </code>
+    is the name of the Linux bridge that is the kernel building block used to implement this network
+   </li>
+  </ul>
+  <p>
+   On a standalone Docker host,
+   <code>
+    bridge
+   </code>
+   is the default network that containers connect to if no other network is specified. In the following example a container is created with no network parameters. Docker Engine connects it to the
+   <code>
+    bridge
+   </code>
+   network by default. Inside the container, notice
+   <code>
+    eth0
+   </code>
+   which is created by the
+   <code>
+    bridge
+   </code>
+   driver and given an address by the Docker native IPAM driver.
+  </p>
+  <pre>
+<code class="bash">#Create a busybox container named "c1" and show its IP addresses
+host $ docker run -it --name c1 busybox sh
+c1 # ip address
+4: eth0@if5: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.2/16 scope global eth0
+...
+</code></pre>
+  <blockquote>
+   <p>
+    A container interface's MAC address is dynamically generated and embeds the IP address to avoid collision. Here
+    <code>
+     ac:11:00:02
+    </code>
+    corresponds to
+    <code>
+     172.17.0.2
+    </code>
+    .
+   </p>
+  </blockquote>
+  <p>
+   The tool
+   <code>
+    brctl
+   </code>
+   on the host shows the Linux bridges that exist in the host network namespace. It shows a single bridge called
+   <code>
+    docker0
+   </code>
+   .
+   <code>
+    docker0
+   </code>
+   has one interface,
+   <code>
+    vetha3788c4
+   </code>
+   , which provides connectivity from the bridge to the
+   <code>
+    eth0
+   </code>
+   interface inside container
+   <code>
+    c1
+   </code>
+   .
+  </p>
+  <pre>
+<code>host $ brctl show
+bridge name      bridge id            STP enabled    interfaces
+docker0          8000.0242504b5200    no             vethb64e8b8
+</code></pre>
+  <p>
+   Inside container
+   <code>
+    c1
+   </code>
+   , the container routing table directs traffic to
+   <code>
+    eth0
+   </code>
+   of the container and thus the
+   <code>
+    docker0
+   </code>
+   bridge.
+  </p>
+  <pre>
+<code class="bash">c1# ip route
+default via 172.17.0.1 dev eth0
+172.17.0.0/16 dev eth0  src 172.17.0.2
+</code></pre>
+  <p>
+   A container can have zero to many interfaces depending on how many networks it is connected to. Each Docker network can only have a single interface per container.
+  </p>
+  <p>
+   <img alt="Default Docker Bridge Network" class="internal" src="/_kb/images/2046-4.png"/>
+  </p>
+  <p>
+   As shown in the host routing table, the IP interfaces in the global network namespace now include
+   <code>
+    docker0
+   </code>
+   . The host routing table provides connectivity between
+   <code>
+    docker0
+   </code>
+   and
+   <code>
+    eth0
+   </code>
+   on the external network, completing the path from inside the container to the external network.
+  </p>
+  <pre>
+<code class="bash">host $ ip route
+default via 172.31.16.1 dev eth0
+172.17.0.0/16 dev docker0  proto kernel  scope link  src 172.17.42.1
+172.31.16.0/20 dev eth0  proto kernel  scope link  src 172.31.16.102
+</code></pre>
+  <p>
+   By default
+   <code>
+    bridge
+   </code>
+   is assigned one subnet from the ranges 172.[17-31].0.0/16 or 192.168.[0-240].0/20 which does not overlap with any existing host interface. The default
+   <code>
+    bridge
+   </code>
+   network can also be configured to use user-supplied address ranges. Also, an existing Linux bridge can be used for the
+   <code>
+    bridge
+   </code>
+   network rather than Docker creating one. Go to the
+   <a class="link-https" href="https://docs.docker.com/engine/userguide/networking/default_network/custom-docker0/" rel="external nofollow" target="_blank">
+    Docker Engine docs
+   </a>
+   for more information about customizing
+   <code>
+    bridge
+   </code>
+   .
+  </p>
+  <blockquote>
+   <p>
+    The default
+    <code>
+     bridge
+    </code>
+    network is the only network that supports legacy
+    <a class="link-https" href="https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/" rel="external nofollow" target="_blank">
+     links
+    </a>
+    . Name-based service discovery and user-provided IP addresses are
+    <strong>
+     not
+    </strong>
+    supported by the default
+    <code>
+     bridge
+    </code>
+    network.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="User-Defined_Bridge_Networks">
+  </span>
+  <h3 id="2-12">
+   <a name="userdefined">
+   </a>
+   User-Defined Bridge Networks
+  </h3>
+  <p>
+   In addition to the default networks, users can create their own networks called
+   <strong>
+    user-defined networks
+   </strong>
+   of any network driver type. In the case of user-defined
+   <code>
+    bridge
+   </code>
+   networks, a new Linux bridge is setup on the host. Unlike the default
+   <code>
+    bridge
+   </code>
+   network, user-defined networks supports manual IP address and subnet assignment. If an assignment isn't given, then Docker's default IPAM driver assigns the next subnet available in the private IP space.
+  </p>
+  <p>
+   <img alt="User-Defined Bridge Network" class="internal" src="/_kb/images/2046-5.png"/>
+  </p>
+  <p>
+   Below a user-defined
+   <code>
+    bridge
+   </code>
+   network is created with two containers attached to it. A subnet is specified, and the network is named
+   <code>
+    my_bridge
+   </code>
+   . One container is not given IP parameters, so the IPAM driver assigns it the next available IP in the subnet. The other container has its IP specified.
+  </p>
+  <pre>
+<code>$ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
+$ docker run -itd --name c2 --net my_bridge busybox sh
+$ docker run -itd --name c3 --net my_bridge --ip 10.0.0.254 busybox sh
+</code></pre>
+  <p>
+   <code>
+    brctl
+   </code>
+   now shows a second Linux bridge on the host. The name of the Linux bridge,
+   <code>
+    br-4bcc22f5e5b9
+   </code>
+   , matches the Network ID of the
+   <code>
+    my_bridge
+   </code>
+   network.
+   <code>
+    my_bridge
+   </code>
+   also has two
+   <code>
+    veth
+   </code>
+   interfaces connected to containers
+   <code>
+    c2
+   </code>
+   and
+   <code>
+    c3
+   </code>
+   .
+  </p>
+  <pre>
+<code>$ brctl show
+bridge name      bridge id            STP enabled    interfaces
+br-b5db4578d8c9  8000.02428d936bb1    no             vethc9b3282
+                                                     vethf3ba8b5
+docker0          8000.0242504b5200    no             vethb64e8b8
+
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+b5db4578d8c9        my_bridge           bridge              local
+e1cac9da3116        bridge              bridge              local
+...
+</code></pre>
+  <p>
+   Listing the global network namespace interfaces shows the Linux networking circuitry that's been instantiated by Docker Engine. Each
+   <code>
+    veth
+   </code>
+   and Linux bridge interface appears as a link between one of the Linux bridges and the container network namespaces.
+  </p>
+  <pre>
+<code class="bash">$ ip link
+
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 9001 
+3: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+5: vethb64e8b8@if4: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+6: br-b5db4578d8c9: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+8: vethc9b3282@if7: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+10: vethf3ba8b5@if9: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+...
+</code></pre>
+ </div>
+ <div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="External_Access_for_Standalone_Containers">
+  </span>
+  <h3 id="2-13">
+   External Access for Standalone Containers
+  </h3>
+  <p>
+   By default all containers on the same Docker network (multi-host swarm scope or local scope) have connectivity with each other on all ports. Communication between different Docker networks and and container ingress traffic that originates from outside Docker is firewalled. This is a fundamental security aspect that protects container applications from the outside world and from each other. This is outlined in more detail in
+   <a class="mt-self-link" href="#security" rel="internal">
+    Network Security
+   </a>
+  </p>
+  <p>
+   For most types of Docker networks (
+   <code>
+    bridge
+   </code>
+   and
+   <code>
+    overlay
+   </code>
+   included) external ingress access for applications must be explicitly granted. This is done through internal port mapping. Docker publishes ports exposed on host interfaces to internal container interfaces. The following diagram depicts ingress (bottom arrow) and egress (top arrow) traffic to container
+   <code>
+    C2
+   </code>
+   . Outbound (egress) container traffic is allowed by default. Egress connections initiated by containers are masqueraded/SNATed to an ephemeral port (
+   <em>
+    typically in the range of 32768 to 60999
+   </em>
+   ). Return traffic on this connection is allowed, and thus the container uses the best routable IP address of the host on the ephemeral port.
+  </p>
+  <p>
+   Ingress access is provided through explicit port publishing. Port publishing is done by Docker Engine and can be controlled through UCP or the Engine CLI. A specific or randomly chosen port can be configured to expose a service or container. The port can be set to listen on a specific (or all) host interfaces, and all traffic is mapped from this port to a port and interface inside the container.
+  </p>
+  <pre>
+<code>$ docker run -d --name C2 --net my_bridge -p 5000:80 nginx
+</code></pre>
+  <p>
+   <img alt="Port Mapping and Masquerading" class="internal" src="/_kb/images/2046-6.png"/>
+  </p>
+  <p>
+   External access is configured using
+   <code>
+    --publish
+   </code>
+   /
+   <code>
+    -p
+   </code>
+   in the Docker CLI or UCP. After running the above command, the diagram shows that container
+   <code>
+    C2
+   </code>
+   is connected to the
+   <code>
+    my_bridge
+   </code>
+   network and has an IP address of
+   <code>
+    10.0.0.2
+   </code>
+   . The container advertises its service to the outside world on port
+   <code>
+    5000
+   </code>
+   of the host interface
+   <code>
+    192.168.0.2
+   </code>
+   . All traffic going to this interface:port is port published to
+   <code>
+    10.0.0.2:80
+   </code>
+   of the container interface.
+  </p>
+  <p>
+   Outbound traffic initiated by the container is masqueraded so that it is sourced from ephemeral port
+   <code>
+    32768
+   </code>
+   on the host interface
+   <code>
+    192.168.0.2
+   </code>
+   . Return traffic uses the same IP address and port for its destination and is masqueraded internally back to the container address:port
+   <code>
+    10.0.0.2:33920
+   </code>
+   . When using port publishing, external traffic on the network always uses the host IP and exposed port and never the container IP and internal port.
+  </p>
+  <p>
+   For information about exposing containers and services in a cluster of Docker Engines read
+   <a class="mt-self-link" href="#swarm-external" rel="internal">
+    External Access for Swarm Services
+   </a>
+   .
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_22" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Overlay_Driver_Network_Architecture">
+ </span>
+ <h2 id="1-7">
+  <a name="overlaydriver">
+  </a>
+  Overlay Driver Network Architecture
+ </h2>
+ <p>
+  The native Docker
+  <code>
+   overlay
+  </code>
+  network driver radically simplifies many of the challenges in multi-host networking. With the
+  <code>
+   overlay
+  </code>
+  driver, multi-host networks are first-class citizens inside Docker without external provisioning or components.
+  <code>
+   overlay
+  </code>
+  uses the Swarm-distributed control plane to provide centralized management, stability, and security across very large scale clusters.
+ </p>
+ <div class="mt-section" id="section_23" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="VXLAN_Data_Plane">
+  </span>
+  <h3 id="2-14">
+   VXLAN Data Plane
+  </h3>
+  <p>
+   The
+   <code>
+    overlay
+   </code>
+   driver utilizes an industry-standard VXLAN data plane that decouples the container network from the underlying physical network (the
+   <em>
+    underlay
+   </em>
+   ). The Docker overlay network encapsulates container traffic in a VXLAN header which allows the traffic to traverse the physical Layer 2 or Layer 3 network. The overlay makes network segmentation dynamic and easy to control no matter what the underlying physical topology. Use of the standard IETF VXLAN header promotes standard tooling to inspect and analyze network traffic.
+  </p>
+  <blockquote>
+   <p>
+    VXLAN has been a part of the Linux kernel since version 3.7, and Docker uses the native VXLAN features of the kernel to create overlay networks. The Docker overlay datapath is entirely in kernel space. This results in fewer context switches, less CPU overhead, and a low-latency, direct traffic path between applications and the physical NIC.
+   </p>
+  </blockquote>
+  <p>
+   IETF VXLAN (
+   <a class="link-https" href="https://datatracker.ietf.org/doc/rfc7348/" rel="external nofollow" target="_blank">
+    RFC 7348
+   </a>
+   ) is a data-layer encapsulation format that overlays Layer 2 segments over Layer 3 networks. VXLAN is designed to be used in standard IP networks and can support large-scale, multi-tenant designs on shared physical network infrastructure. Existing on-premises and cloud-based networks can support VXLAN transparently.
+  </p>
+  <p>
+   VXLAN is defined as a MAC-in-UDP encapsulation that places container Layer 2 frames inside an underlay IP/UDP header. The underlay IP/UDP header provides the transport between hosts on the underlay network. The overlay is the stateless VXLAN tunnel that exists as point-to-multipoint connections between each host participating in a given overlay network. Because the overlay is independent of the underlay topology, applications become more portable. Thus, network policy and connectivity can be transported with the application whether it is on-premises, on a developer desktop, or in a public cloud.
+  </p>
+  <p>
+   <img alt="Packet Flow for an Overlay Network" class="internal" src="/_kb/images/2046-7.png"/>
+  </p>
+  <p>
+   In this diagram, the packet flow on an overlay network is shown. Here are the steps that take place when
+   <code>
+    c1
+   </code>
+   sends
+   <code>
+    c2
+   </code>
+   packets across their shared overlay network:
+  </p>
+  <ul>
+   <li>
+    <code>
+     c1
+    </code>
+    does a DNS lookup for
+    <code>
+     c2
+    </code>
+    . Since both containers are on the same overlay network the Docker Engine local DNS server resolves
+    <code>
+     c2
+    </code>
+    to its overlay IP address
+    <code>
+     10.0.0.3
+    </code>
+    .
+   </li>
+   <li>
+    An overlay network is a L2 segment so
+    <code>
+     c1
+    </code>
+    generates an L2 frame destined for the MAC address of
+    <code>
+     c2
+    </code>
+    .
+   </li>
+   <li>
+    The frame is encapsulated with a VXLAN header by the
+    <code>
+     overlay
+    </code>
+    network driver. The distributed overlay control plane manages the locations and state of each VXLAN tunnel endpoint so it knows that
+    <code>
+     c2
+    </code>
+    resides on
+    <code>
+     host-B
+    </code>
+    at the physical address of
+    <code>
+     192.168.0.3
+    </code>
+    . That address becomes the destination address of the underlay IP header.
+   </li>
+   <li>
+    Once encapsulated the packet is sent. The physical network is responsible of routing or bridging the VXLAN packet to the correct host.
+   </li>
+   <li>
+    The packet arrives at the
+    <code>
+     eth0
+    </code>
+    interface of
+    <code>
+     host-B
+    </code>
+    and is decapsulated by the
+    <code>
+     overlay
+    </code>
+    network driver. The original L2 frame from
+    <code>
+     c1
+    </code>
+    is passed to
+    <code>
+     c2
+    </code>
+    's
+    <code>
+     eth0
+    </code>
+    interface and up to the listening application.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_24" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Overlay_Driver_Internal_Architecture">
+  </span>
+  <h3 id="2-15">
+   Overlay Driver Internal Architecture
+  </h3>
+  <p>
+   The Docker Swarm control plane automates all of the provisioning for an overlay network. No VXLAN configuration or Linux networking configuration is required. Data-plane encryption, an optional feature of overlays, is also automatically configured by the overlay driver as networks are created. The user or network operator only has to define the network (
+   <code>
+    docker network create -d overlay ...
+   </code>
+   ) and attach containers to that network.
+  </p>
+  <p>
+   <span class="float-right">
+    <img alt="Overlay Network Created by Docker Swarm" class="internal" src="/_kb/images/2046-8.png"/>
+   </span>
+  </p>
+  <p>
+   During overlay network creation, Docker Engine creates the network infrastructure required for overlays on each host. A Linux bridge is created per overlay along with its associated VXLAN interfaces. The Docker Engine intelligently instantiates overlay networks on hosts only when a container attached to that network is scheduled on the host. This prevents sprawl of overlay networks where connected containers do not exist.
+  </p>
+  <p>
+   The following example creates an overlay network and attaches a container to that network. The Docker Swarm/UCP automatically creates the overlay network.
+   <em>
+    The following example requires Swarm or UCP to be set up beforehand.
+   </em>
+  </p>
+  <pre>
+<code class="bash">#Create an overlay named "ovnet" with the overlay driver
+$ docker network create -d overlay --subnet 10.1.0.0/24 ovnet
+
+#Create a service from an nginx image and connect it to the "ovnet" overlay network
+$ docker service create --network ovnet nginx
+</code></pre>
+  <p>
+   When the overlay network is created, notice that several interfaces and bridges are created inside the host as well as two interfaces inside this container.
+  </p>
+  <pre>
+<code class="bash"># Peek into the container of this service to see its internal interfaces
+conatiner$ ip address
+
+#docker_gwbridge network     
+52: eth0@if55: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 
+    link/ether 02:42:ac:14:00:06 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.6/16 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:acff:fe14:6/64 scope link
+       valid_lft forever preferred_lft forever
+
+#overlay network interface
+54: eth1@if53: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1450 
+    link/ether 02:42:0a:01:00:03 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.0.3/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet 10.1.0.2/32 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:aff:fe01:3/64 scope link
+       valid_lft forever preferred_lft forever
+</code></pre>
+  <p>
+   Two interfaces have been created inside the container that correspond to two bridges that now exist on the host. On overlay networks, each container has at least two interfaces that connect it to the
+   <code>
+    overlay
+   </code>
+   and the
+   <code>
+    docker_gwbridge
+   </code>
+   respectively.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th align="center">
+      Bridge
+     </th>
+     <th>
+      Purpose
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td align="center">
+      <strong>
+       overlay
+      </strong>
+     </td>
+     <td>
+      The ingress and egress point to the overlay network that VXLAN encapsulates and (optionally) encrypts traffic going between containers on the same overlay network. It extends the overlay across all hosts participating in this particular overlay. One existd per overlay subnet on a host, and it has the same name that a particular overlay network is given.
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <strong>
+       docker_gwbridge
+      </strong>
+     </td>
+     <td>
+      The egress bridge for traffic leaving the cluster. Only one
+      <code>
+       docker_gwbridge
+      </code>
+      exists per host. Container-to-Container traffic is blocked on this bridge allowing ingress/egress traffic flows only.
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <blockquote>
+   <p>
+    The Docker Overlay driver has existed since Docker Engine 1.9, and an external K/V store was required to manage state for the network. Docker Engine 1.12 integrated the control plane state into Docker Engine so that an external store is no longer required. 1.12 also introduced several new features including encryption and service load balancing. Networking features that are introduced require a Docker Engine version that supports them, and using these features with older versions of Docker Engine is not supported.
+   </p>
+  </blockquote>
+ </div>
+</div>
+<div class="mt-section" id="section_25" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="External_Access_for_Docker_Services">
+ </span>
+ <h2 id="1-8">
+  <a name="swarm-external">
+  </a>
+  External Access for Docker Services
+ </h2>
+ <p>
+  Swarm &amp; UCP provide access to services from outside the cluster port publishing. Ingress and egress for services do not depend on centralized gateways, but distributed ingres/egress on the host where the specific service task is running. There are two modes of port publishing for services,
+  <code>
+   host
+  </code>
+  mode and
+  <code>
+   ingress
+  </code>
+  mode.
+ </p>
+ <div class="mt-section" id="section_26" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Ingress_Mode_Service_Publishing">
+  </span>
+  <h4 id="3-0">
+   Ingress Mode Service Publishing
+  </h4>
+  <p>
+   <code>
+    ingress
+   </code>
+   mode port publishing utilizes the
+   <a class="mt-self-link" href="#routingmesh" rel="internal">
+    Swarm Routing Mesh
+   </a>
+   to apply load balancing across the tasks in a service. Ingress mode publishes the exposed port on
+   <em>
+    every
+   </em>
+   UCP/Swarm node. Ingress traffic to the published port is load balanced by the Routing Mesh and directed via round robin load balancing to one of the
+   <em>
+    healthy
+   </em>
+   tasks of the service. Even if a given host is not running a service task, the port is published on the host and is load balanced to a host that has a task.
+  </p>
+  <pre>
+<code>$ docker service create --replicas 2 --publish mode=ingress,target=80,published=8080 nginx
+</code></pre>
+  <blockquote>
+   <p>
+    <code>
+     mode=ingress
+    </code>
+    is the default mode for services. This command can also be accomplished with the shorthand version
+    <code>
+     -p 80:8080
+    </code>
+    . Port
+    <code>
+     8080
+    </code>
+    is exposed on every host on the cluster and load balanced to the two containers in this service.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_27" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Host_Mode_Service_Publishing">
+  </span>
+  <h4 id="3-1">
+   Host Mode Service Publishing
+  </h4>
+  <p>
+   <code>
+    host
+   </code>
+   mode port publishing exposes ports only on the host where specific service tasks are running. The port is mapped directly to the container on that host. Only a single task of a given service can run on each host to prevent port collision.
+  </p>
+  <pre>
+<code>$ docker service create --replicas 2 --publish mode=host,target=80,published=8080 nginx
+</code></pre>
+  <blockquote>
+   <p>
+    <code>
+     host
+    </code>
+    mode requires the
+    <code>
+     mode=host
+    </code>
+    flag. It publishes port
+    <code>
+     8080
+    </code>
+    locally on the hosts where these two containers are running. It does not apply load balancing, so traffic to those nodes are directed only to the local container. This can cause port collision if there are not enough ports available for the number of replicas.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_28" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Ingress_Design">
+  </span>
+  <h4 id="3-2">
+   Ingress Design
+  </h4>
+  <p>
+   There are many good use-cases for either publishing mode.
+   <code>
+    ingress
+   </code>
+   mode works well for services that have multiple replicas and require load balancing between those replicas.
+   <code>
+    host
+   </code>
+   mode works well if external service discovery is already provided by another tool. Another good use case for
+   <code>
+    host
+   </code>
+   mode is for global containers that exist once per host. These containers may expose specific information about a the local host (such as monitoring or logging) that are only relevant for that host and so you would not want to load balance when accessing that service.
+  </p>
+  <p>
+   <img alt="Ingress Mode vs Host Mode" class="internal" src="/_kb/images/2046-9.png"/>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_29" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="MACVLAN">
+ </span>
+ <h2 id="1-9">
+  <a name="macvlandriver">
+  </a>
+  MACVLAN
+ </h2>
+ <p>
+  The
+  <code>
+   macvlan
+  </code>
+  driver is a new implementation of the tried and true network virtualization technique. The Linux implementations are extremely lightweight because rather than using a Linux bridge for isolation, they are simply associated with a Linux Ethernet interface or sub-interface to enforce separation between networks and connectivity to the physical network.
+ </p>
+ <p>
+  MACVLAN offers a number of unique features and capabilities. It has positive performance implications by virtue of having a very simple and lightweight architecture. Rather than port mapping, the MACVLAN driver provides direct access between containers and the physical network. It also allows containers to receive routable IP addresses that are on the subnet of the physical network.
+ </p>
+ <p>
+  MACVLAN use-cases may include:
+ </p>
+ <ul>
+  <li>
+   Very low-latency applications
+  </li>
+  <li>
+   Network design that requires containers be on the same subnet as and using IPs as the external host network
+  </li>
+ </ul>
+ <p>
+  The
+  <code>
+   macvlan
+  </code>
+  driver uses the concept of a parent interface. This interface can be a physical interface such as
+  <code>
+   eth0
+  </code>
+  , a sub-interface for 802.1q VLAN tagging like
+  <code>
+   eth0.10
+  </code>
+  (
+  <code>
+   .10
+  </code>
+  representing
+  <code>
+   VLAN 10
+  </code>
+  ), or even a bonded host adaptor which bundles two Ethernet interfaces into a single logical interface.
+ </p>
+ <p>
+  A gateway address is required during MACVLAN network configuration. The gateway must be external to the host provided by the network infrastructure. MACVLAN networks allow access between containers on the same network. Access between different MACVLAN networks on the same host is not possible without routing outside the host.
+ </p>
+ <p>
+  <span class="float-right">
+   <img alt="Connecting Containers with a MACVLAN Network" class="internal" src="/_kb/images/2046-10.png"/>
+  </span>
+ </p>
+ <p>
+  This example binds a MACVLAN network to
+  <code>
+   eth0
+  </code>
+  on the host. It also attaches two containers to the
+  <code>
+   mvnet
+  </code>
+  MACVLAN network and shows that they can ping between themselves. Each container has an address on the
+  <code>
+   192.168.0.0/24
+  </code>
+  physical network subnet and its default gateway is an interface in the physical network.
+ </p>
+ <pre>
+<code class="bash">#Creation of MACVLAN network "mvnet" bound to eth0 on the host 
+$ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 mvnet
+
+#Creation of containers on the "mvnet" network
+$ docker run -itd --name c1 --net mvnet --ip 192.168.0.3 busybox sh
+$ docker run -it --name c2 --net mvnet --ip 192.168.0.4 busybox sh
+/ # ping 192.168.0.3
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.052 ms
+</code></pre>
+ <p>
+  As you can see in this diagram,
+  <code>
+   c1
+  </code>
+  and
+  <code>
+   c2
+  </code>
+  are attached via the MACVLAN network called
+  <code>
+   macvlan
+  </code>
+  attached to
+  <code>
+   eth0
+  </code>
+  on the host.
+ </p>
+ <div class="mt-section" id="section_30" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="VLAN_Trunking_with_MACVLAN">
+  </span>
+  <h3 id="2-16">
+   VLAN Trunking with MACVLAN
+  </h3>
+  <p>
+   Trunking 802.1q to a Linux host is notoriously painful for many in operations. It requires configuration file changes in order to be persistent through a reboot. If a bridge is involved, a physical NIC needs to be moved into the bridge, and the bridge then gets the IP address. The
+   <code>
+    macvlan
+   </code>
+   driver completely manages sub-interfaces and other components of the MACVLAN network through creation, destruction, and host reboots.
+  </p>
+  <p>
+   <span class="float-right">
+    <img alt="VLAN Trunking with MACVLAN" class="internal" src="/_kb/images/2046-11.png"/>
+   </span>
+  </p>
+  <p>
+   When the
+   <code>
+    macvlan
+   </code>
+   driver is instantiated with sub-interfaces it allows VLAN trunking to the host and segments containers at L2. The
+   <code>
+    macvlan
+   </code>
+   driver automatically creates the sub-interfaces and connects them to the container interfaces. As a result each container is in a different VLAN, and communication is not possible between them unless traffic is routed in the physical network.
+  </p>
+  <pre>
+<code class="bash">#Creation of  macvlan10 network in VLAN 10
+$ docker network create -d macvlan --subnet 192.168.10.0/24 --gateway 192.168.10.1 -o parent=eth0.10 macvlan10
+
+#Creation of  macvlan20 network in VLAN 20
+$ docker network create -d macvlan --subnet 192.168.20.0/24 --gateway 192.168.20.1 -o parent=eth0.20 macvlan20
+
+#Creation of containers on separate MACVLAN networks
+$ docker run -itd --name c1--net macvlan10 --ip 192.168.10.2 busybox sh
+$ docker run -it --name c2--net macvlan20 --ip 192.168.20.2 busybox sh
+</code></pre>
+  <p>
+   In the preceding configuration we've created two separate networks using the
+   <code>
+    macvlan
+   </code>
+   driver that are configured to use a sub-interface as their parent interface. The
+   <code>
+    macvlan
+   </code>
+   driver creates the sub-interfaces and connects them between the host's
+   <code>
+    eth0
+   </code>
+   and the container interfaces. The host interface and upstream switch must be set to
+   <code>
+    switchport mode trunk
+   </code>
+   so that VLANs are tagged going across the interface. One or more containers can be connected to a given MACVLAN network to create complex network policies that are segmented via L2.
+  </p>
+  <blockquote>
+   <p>
+    Because multiple MAC addresses are living behind a single host interface you might need to enable promiscuous mode on the interface depending on the NIC's support for MAC filtering.
+   </p>
+  </blockquote>
+ </div>
+</div>
+<div class="mt-section" id="section_31" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="None_(Isolated)_Network_Driver">
+ </span>
+ <h2 id="1-10">
+  <a name="nonedriver">
+  </a>
+  None (Isolated) Network Driver
+ </h2>
+ <p>
+  Similar to the
+  <code>
+   host
+  </code>
+  network driver, the
+  <code>
+   none
+  </code>
+  network driver is essentially an unmanaged networking option. Docker Engine does not create interfaces inside the container, establish port mapping, or install routes for connectivity. A container using
+  <code>
+   --net=none
+  </code>
+  is completely isolated from other containers and the host. The networking admin or external tools must be responsible for providing this plumbing. A container using
+  <code>
+   none
+  </code>
+  only has a loopback interface and no other interfaces.
+ </p>
+ <p>
+  Unlike the
+  <code>
+   host
+  </code>
+  driver, the
+  <code>
+   none
+  </code>
+  driver creates a separate namespace for each container. This guarantees container network isolation between any containers and the host.
+ </p>
+ <blockquote>
+  <p>
+   Containers using
+   <code>
+    --net=none
+   </code>
+   or
+   <code>
+    --net=host
+   </code>
+   cannot be connected to any other Docker networks.
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_32" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Physical_Network_Design_Requirements">
+ </span>
+ <h2 id="1-11">
+  <a name="requirements">
+  </a>
+  Physical Network Design Requirements
+ </h2>
+ <p>
+  Docker EE and Docker networking are designed to run over common data center network infrastructure and topologies. Its centralized controller and fault-tolerant cluster guarantee compatibility across a wide range of network environments. The components that provide networking functionality (network provisioning, MAC learning, overlay encryption) are either a part of Docker Engine, UCP, or the Linux kernel itself. No extra components or special networking features are required to run any of the native Docker networking drivers.
+ </p>
+ <p>
+  More specifically, the Docker native network drivers have NO requirements for:
+ </p>
+ <ul>
+  <li>
+   Multicast
+  </li>
+  <li>
+   External key-value stores
+  </li>
+  <li>
+   Specific routing protocols
+  </li>
+  <li>
+   Layer 2 adjacencies between hosts
+  </li>
+  <li>
+   Specific topologies such as spine &amp; leaf, traditional 3-tier, and PoD designs. Any of these topologies are supported.
+  </li>
+ </ul>
+ <p>
+  This is in line with the Container Networking Model which promotes application portability across all environments while still achieving the performance and policy required of applications.
+ </p>
+</div>
+<div class="mt-section" id="section_33" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Swarm_Native_Service_Discovery">
+ </span>
+ <h2 id="1-12">
+  <a name="sd">
+  </a>
+  Swarm Native Service Discovery
+ </h2>
+ <p>
+  Docker uses embedded DNS to provide service discovery for containers running on a single Docker Engine and
+  <code>
+   tasks
+  </code>
+  running in a Docker Swarm. Docker Engine has an internal DNS server that provides name resolution to all of the containers on the host in user-defined bridge, overlay, and MACVLAN networks. Each Docker container ( or
+  <code>
+   task
+  </code>
+  in Swarm mode) has a DNS resolver that forwards DNS queries to Docker Engine, which acts as a DNS server. Docker Engine then checks if the DNS query belongs to a container or
+  <code>
+   service
+  </code>
+  on network(s) that the requesting container belongs to. If it does, then Docker Engine looks up the IP address that matches a container,
+  <code>
+   task
+  </code>
+  , or
+  <code>
+   service
+  </code>
+  's
+  <strong>
+   name
+  </strong>
+  in its key-value store and returns that IP or
+  <code>
+   service
+  </code>
+  Virtual IP (VIP) back to the requester.
+ </p>
+ <p>
+  Service discovery is
+  <em>
+   network-scoped
+  </em>
+  , meaning only containers or tasks that are on the same network can use the embedded DNS functionality. Containers not on the same network cannot resolve each other's addresses. Additionally, only the nodes that have containers or tasks on a particular network store that network's DNS entries. This promotes security and performance.
+ </p>
+ <p>
+  If the destination container or
+  <code>
+   service
+  </code>
+  does not belong on the same network(s) as the source container, then Docker Engine forwards the DNS query to the configured default DNS server.
+ </p>
+ <p>
+  <img alt="Service Discovery" class="internal" src="/_kb/images/2046-12.png"/>
+ </p>
+ <p>
+  In this example there is a service of two containers called
+  <code>
+   myservice
+  </code>
+  . A second service (
+  <code>
+   client
+  </code>
+  ) exists on the same network. The
+  <code>
+   client
+  </code>
+  executes two
+  <code>
+   curl
+  </code>
+  operations for
+  <code>
+   docker.com
+  </code>
+  and
+  <code>
+   myservice
+  </code>
+  . These are the resulting actions:
+ </p>
+ <ul>
+  <li>
+   DNS queries are initiated by
+   <code>
+    client
+   </code>
+   for
+   <code>
+    docker.com
+   </code>
+   and
+   <code>
+    myservice
+   </code>
+   .
+  </li>
+  <li>
+   The container's built-in resolver intercepts the DNS queries on
+   <code>
+    127.0.0.11:53
+   </code>
+   and sends them to Docker Engine's DNS server.
+  </li>
+  <li>
+   <code>
+    myservice
+   </code>
+   resolves to the Virtual IP (VIP) of that service which is internally load balanced to the individual task IP addresses. Container names resolve as well, albeit directly to their IP addresses.
+  </li>
+  <li>
+   <code>
+    docker.com
+   </code>
+   does not exist as a service name in the
+   <code>
+    mynet
+   </code>
+   network and so the request is forwarded to the configured default DNS server.
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_34" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Docker_Native_Load_Balancing">
+ </span>
+ <h2 id="1-13">
+  <a name="lb">
+  </a>
+  Docker Native Load Balancing
+ </h2>
+ <p>
+  Docker Swarm clusters have built-in internal and external load balancing capabilities that are built right in to the engine. Internal load balancing provides for load balancing between containers within the same Swarm or UCP cluster. External load balancing provides for the load balancing of ingress traffic entering a cluster.
+ </p>
+ <div class="mt-section" id="section_35" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="UCP_Internal_Load_Balancing">
+  </span>
+  <h3 id="2-17">
+   UCP Internal Load Balancing
+  </h3>
+  <p>
+   Internal load balancing is instantiated automatically when Docker services are created. When services are created in a Docker Swarm cluster, they are automatically assigned a Virtual IP (VIP) that is part of the service's network. The VIP is returned when resolving the service's name. Traffic to that VIP is automatically sent to all healthy tasks of that service across the overlay network. This approach avoids any client-side load balancing because only a single IP is returned to the client. Docker takes care of routing and equally distributing the traffic across the healthy service tasks.
+  </p>
+  <p>
+   <img alt="Internal Load Balancing" class="internal" src="/_kb/images/2046-13.png"/>
+  </p>
+  <p>
+   To see the VIP, run a
+   <code>
+    docker service inspect my_service
+   </code>
+   as follows:
+  </p>
+  <pre>
+<code># Create an overlay network called mynet
+$ docker network create -d overlay mynet
+a59umzkdj2r0ua7x8jxd84dhr
+
+# Create myservice with 2 replicas as part of that network
+$ docker service create --network mynet --name myservice --replicas 2 busybox ping localhost
+8t5r8cr0f0h6k2c3k7ih4l6f5
+
+# See the VIP that was created for that service
+$ docker service inspect myservice
+...
+
+"VirtualIPs": [
+                {
+                    "NetworkID": "a59umzkdj2r0ua7x8jxd84dhr",
+                    "Addr": "10.0.0.3/24"
+                },
+]
+
+</code></pre>
+  <blockquote>
+   <p>
+    DNS round robin (DNS RR) load balancing is another load balancing option for services (configured with
+    <code>
+     --endpoint-mode
+    </code>
+    ). In DNS RR mode a VIP is not created for each service. The Docker DNS server resolves a service name to individual container IPs in round robin fashion.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_36" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="UCP_External_L4_Load_Balancing_(Docker_Routing_Mesh)">
+  </span>
+  <h3 id="2-18">
+   <a name="routingmesh">
+   </a>
+   UCP External L4 Load Balancing (Docker Routing Mesh)
+  </h3>
+  <p>
+   You can expose services externally by using the
+   <code>
+    --publish
+   </code>
+   flag when creating or updating the service. Publishing ports in Docker Swarm mode means that every node in your cluster is listening on that port. But what happens if the service's task isn't on the node that is listening on that port?
+  </p>
+  <p>
+   This is where routing mesh comes into play. Routing mesh is a new feature in Docker 1.12 that combines
+   <code>
+    ipvs
+   </code>
+   and
+   <code>
+    iptables
+   </code>
+   to create a powerful cluster-wide transport-layer (L4) load balancer. It allows all the Swarm nodes to accept connections on the services' published ports. When any Swarm node receives traffic destined to the published TCP/UDP port of a running
+   <code>
+    service
+   </code>
+   , it forwards it to service's VIP using a pre-defined overlay network called
+   <code>
+    ingress
+   </code>
+   . The
+   <code>
+    ingress
+   </code>
+   network behaves similarly to other overlay networks but its sole purpose is to transport mesh routing traffic from external clients to cluster services. It uses the same VIP-based internal load balancing as described in the previous section.
+  </p>
+  <p>
+   Once you launch services, you can create an external DNS record for your applications and map it to any or all Docker Swarm nodes. You do not need to worry about where your container is running as all nodes in your cluster look as one with the routing mesh routing feature.
+  </p>
+  <pre>
+<code>#Create a service with two replicas and export port 8000 on the cluster
+$ docker service create --name app --replicas 2 --network appnet -p 8000:80 nginx
+</code></pre>
+  <p>
+   <img alt="Routing Mess" class="internal" src="/_kb/images/2046-14.png"/>
+  </p>
+  <p>
+   This diagram illustrates how the Routing Mesh works.
+  </p>
+  <ul>
+   <li>
+    A service is created with two replicas, and it is port mapped externally to port
+    <code>
+     8000
+    </code>
+    .
+   </li>
+   <li>
+    The routing mesh exposes port
+    <code>
+     8000
+    </code>
+    on each host in the cluster.
+   </li>
+   <li>
+    Traffic destined for the
+    <code>
+     app
+    </code>
+    can enter on any host. In this case the external LB sends the traffic to a host without a service replica.
+   </li>
+   <li>
+    The kernel's IPVS load balancer redirects traffic on the
+    <code>
+     ingress
+    </code>
+    overlay network to a healthy service replica.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_37" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="UCP_External_L7_Load_Balancing_(HTTP_Routing_Mesh)">
+  </span>
+  <h3 id="2-19">
+   UCP External L7 Load Balancing (HTTP Routing Mesh)
+  </h3>
+  <p>
+   UCP provides L7 HTTP/HTTPS load balancing through the HTTP Routing Mesh. URLs can be load balanced to services and load balanced across the service replicas.
+  </p>
+  <p>
+   <img alt="Routing Mess" class="internal" src="/_kb/images/2046-15.png"/>
+  </p>
+  <p>
+   Go to the
+   <a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing" rel="internal">
+    UCP Load Balancing Reference Architecture
+   </a>
+   understand more about the UCP L7 LB design.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_38" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Docker_Network_Security_and_Encryption">
+ </span>
+ <h2 id="1-14">
+  <a name="security">
+  </a>
+  Docker Network Security and Encryption
+ </h2>
+ <p>
+  Network security is a top-of-mind consideration when designing and implementing containerized workloads with Docker. In this section, key security considerations when deploying Docker networks are covered.
+ </p>
+ <div class="mt-section" id="section_39" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Network_Segmentation_and_Data_Plane_Security">
+  </span>
+  <h3 id="2-20">
+   Network Segmentation and Data Plane Security
+  </h3>
+  <p>
+   Docker manages distributed firewall rules to segment Docker networks and prevent malicious access to container resources. By default, Docker networks are segmented from each other to prevent traffic between them. This approach provides true network isolation at Layer 3.
+  </p>
+  <p>
+   The Docker engine manages host firewall rules that prevent access between networks and manages ports for exposed containers. In a Swarm &amp; UCP clusters this creates a distributed firewall that dynmically protects applications as they are schedued in the cluster.
+  </p>
+  <p>
+   This table outlines some of the access policies with Docker networks.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th align="center">
+      Path
+     </th>
+     <th>
+      Access
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td align="center">
+      <strong>
+       Within a Docker Network
+      </strong>
+     </td>
+     <td>
+      Access is permited between all containers on all ports on the same Docker network. This applies for all network types - swarm scope, local scope, built-in, and remote drivers.
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <strong>
+       Between Docker Networks
+      </strong>
+     </td>
+     <td>
+      Access is denied between Docker networks by distributed host firewall rules that are managed by the Docker engine. Containers can be attached to multiple networks to communicate between different Docker networks. Network connectivity between Docker networks can also be managed external to the host.
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <strong>
+       Egress From Docker Network
+      </strong>
+     </td>
+     <td>
+      Traffic originating from inside a Docker nework destined for outside a Docker host is permitted. The host's local, stateful firewall tracks connections to permit responses for that connection.
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <strong>
+       Ingress to Docker Network
+      </strong>
+     </td>
+     <td>
+      Ingress traffic is denied by default. Port exposure through
+      <code>
+       host
+      </code>
+      ports or
+      <code>
+       ingress
+      </code>
+      mode ports provides explicit ingress access.
+      <br/>
+      <br/>
+      An exception to this is the MACVLAN driver which operates in the same IP space as the external network and is fully open within that network. Other remote drivers that operate similarly to MACVLAN may also allow ingress traffic.
+     </td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+ <div class="mt-section" id="section_40" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Control_Plane_Security">
+  </span>
+  <h3 id="2-21">
+   Control Plane Security
+  </h3>
+  <p>
+   Docker Swarm comes with integrated PKI. All managers and nodes in the Swarm have a cryptographically signed identity in the form of a signed certificate. All manager-to-manager and manager-to-node control communication is secured out of the box with TLS. There is no need to generate certs externally or set up any CAs manually to get end-to-end control plane traffic secured in Docker Swarm mode. Certificates are periodically and automatically rotated.
+  </p>
+ </div>
+ <div class="mt-section" id="section_41" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Data_Plane_Network_Encryption">
+  </span>
+  <h3 id="2-22">
+   Data Plane Network Encryption
+  </h3>
+  <p>
+   Docker supports IPSec encryption for overlay networks out-of-the-box. The Swarm &amp; UCP managed IPSec tunnels encrypt network traffic as it leaves the source container and decrypts it as it enters the destination container. This ensures that your application traffic is highly secure when it's in transit regardless of the underlying networks. In a hybrid, multi-tenant, or multi-cloud environment, it is crucial to ensure data is secure as it traverses networks you might not have control over.
+  </p>
+  <p>
+   This diagram illustrates how to secure communication between two containers running on different hosts in a Docker Swarm.
+  </p>
+  <p>
+   <img alt="Secure Communications between 2 Containers on Different Hosts" class="internal" src="/_kb/images/2046-16.png"/>
+  </p>
+  <p>
+   This feature works can be enabled per network at the time of creation by adding the
+   <code>
+    --opt encrypted=true
+   </code>
+   option (e.g
+   <code>
+    docker network create -d overlay --opt encrypted=true &lt;NETWORK_NAME&gt;
+   </code>
+   ). After the network gets created, you can launch services on that network (e.g
+   <code>
+    docker service create --network &lt;NETWORK_NAME&gt; &lt;IMAGE&gt; &lt;COMMAND&gt;
+   </code>
+   ). When two tasks of the same services are created on two different hosts, an IPsec tunnel is created between them and traffic gets encrypted as it leaves the source host and gets decrypted as it enters the destination host.
+  </p>
+  <p>
+   The Swarm leader periodically regenerates a symmetrical key and distributes it securely to all cluster nodes. This key is used by IPsec to encrypt and decrypt data plane traffic. The encryption is implemented via IPSec in host-to-host transport mode using AES-GCM.
+  </p>
+ </div>
+ <div class="mt-section" id="section_42" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Management_Plane_Security_.26_RBAC_with_UCP">
+  </span>
+  <h3 id="2-23">
+   Management Plane Security &amp; RBAC with UCP
+  </h3>
+  <p>
+   When creating networks with UCP, teams and labels define access to container resources. Resource permission labels define who can view, configure, and use certain Docker networks.
+  </p>
+  <p>
+   <img alt="UCP Network" class="internal" src="/_kb/images/2046-17.png"/>
+  </p>
+  <p>
+   This UCP screenshot shows the use of the label
+   <code>
+    production-team
+   </code>
+   to control access to this network to only members of that team. Additionally, options like network encryption can be toggled via UCP.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_43" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="IP_Address_Management">
+ </span>
+ <h2 id="1-15">
+  <a name="ipam">
+  </a>
+  IP Address Management
+ </h2>
+ <p>
+  The Container Networking Model (CNM) provides flexibility in how IP addresses are managed. There are two methods for IP address management.
+ </p>
+ <ul>
+  <li>
+   CNM has a native IPAM driver that does simple allocation of IP addresses globally for a cluster and prevents overlapping allocations. The native IPAM driver is what is used by default if no other driver is specified.
+  </li>
+  <li>
+   CNM has interfaces to use remote IPAM drivers from other vendors and the community. These drivers can provide integration into existing vendor or self-built IPAM tools.
+  </li>
+ </ul>
+ <p>
+  Manual configuration of container IP addresses and network subnets can be done using UCP, the CLI, or Docker APIs. The address request goes through the chosen driver which then decides how to process the request.
+ </p>
+ <p>
+  Subnet size and design is largely dependent on a given application and the specific network driver. IP address space design is covered in more depth for each
+  <a class="mt-self-link" href="#models" rel="internal">
+   Network Deployment Model
+  </a>
+  in the next section. The uses of port mapping, overlays, and MACVLAN all have implications on how IP addressing is arranged. In general, container addressing falls into two buckets. Internal container networks (bridge and overlay) address containers with IP addresses that are not routable on the physical network by default. MACVLAN networks provide IP addresses to containers that are on the subnet of the physical network. Thus, traffic from container interfaces can be routable on the physical network. It is important to note that subnets for internal networks (bridge, overlay) should not conflict with the IP space of the physical underlay network. Overlapping address space can cause traffic to not reach its destination.
+ </p>
+</div>
+<div class="mt-section" id="section_44" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Network_Troubleshooting">
+ </span>
+ <h2 id="1-16">
+  <a name="tshoot">
+  </a>
+  Network Troubleshooting
+ </h2>
+ <p>
+  Docker network troubleshooting can be difficult for devops and network engineers. With proper understanding of how Docker networking works and the right set of tools, you can troubleshoot and resolve these network issues. One recommended way is to use the
+  <a class="link-https" href="https://github.com/nicolaka/netshoot" rel="external nofollow" target="_blank">
+   netshoot
+  </a>
+  container to troubleshoot network problems. The
+  <code>
+   netshoot
+  </code>
+  container has a set of powerful networking troubleshooting tools that can be used to troubleshoot Docker network issues.
+ </p>
+ <p>
+  The power of using a troubleshooting container like netshoot is that the network troubleshooting tools are portable. The
+  <code>
+   netshoot
+  </code>
+  container can be attached to any network, can be placed in the host network namespace, or in another container's network namespace to inspect any viewpoint of the host network.
+ </p>
+ <p>
+  It containers the following tools and more:
+ </p>
+ <ul>
+  <li>
+   iperf
+  </li>
+  <li>
+   tcpdump
+  </li>
+  <li>
+   netstat
+  </li>
+  <li>
+   iftop
+  </li>
+  <li>
+   drill
+  </li>
+  <li>
+   util-linux(nsenter)
+  </li>
+  <li>
+   curl
+  </li>
+  <li>
+   nmap
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_45" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Network_Deployment_Models">
+ </span>
+ <h2 id="1-17">
+  <a name="pets">
+  </a>
+  Network Deployment Models
+ </h2>
+ <p>
+  The following example uses a fictional app called
+  <strong>
+   <a class="link-https" href="https://github.com/mark-church/docker-pets" rel="external nofollow" target="_blank">
+    Docker Pets
+   </a>
+  </strong>
+  to illustrate the
+  <strong>
+   Network Deployment Models
+  </strong>
+  . It serves up images of pets on a web page while counting the number of hits to the page in a backend database.
+ </p>
+ <ul>
+  <li>
+   <code>
+    web
+   </code>
+   is a front-end web server based on the
+   <code>
+    chrch/docker-pets:1.0
+   </code>
+   image
+  </li>
+  <li>
+   <code>
+    db
+   </code>
+   is a
+   <code>
+    consul
+   </code>
+   backend
+  </li>
+ </ul>
+ <p>
+  <code>
+   chrch/docker-pets
+  </code>
+  expects an environment variable
+  <code>
+   DB
+  </code>
+  that tells it how to find the backend
+  <code>
+   db
+  </code>
+  service.
+ </p>
+ <div class="mt-section" id="section_46" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Bridge_Driver_on_a_Single_Host">
+  </span>
+  <h3 id="2-24">
+   <a name="bridgemodel">
+   </a>
+   Bridge Driver on a Single Host
+  </h3>
+  <p>
+   This model is the default behavior of the native Docker
+   <code>
+    bridge
+   </code>
+   network driver. The
+   <code>
+    bridge
+   </code>
+   driver creates a private network internal to the host and provides an external port mapping on a host interface for external connectivity.
+  </p>
+  <pre>
+<code class="bash">$ docker network create -d bridge petsBridge
+
+$ docker run -d --net petsBridge --name db consul
+
+$ docker run -it --env "DB=db" --net petsBridge --name web -p 8000:5000 chrch/docker-pets:1.0
+Starting web container e750c649a6b5
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+</code></pre>
+  <blockquote>
+   <p>
+    When an IP address is not specified, port mapping is exposed on all interfaces of a host. In this case the container's application is exposed on
+    <code>
+     0.0.0.0:8000
+    </code>
+    . To provide a specific IP address to advertise on use the flag
+    <code>
+     -p IP:host_port:container_port
+    </code>
+    . More options to expose ports can be found in the
+    <a class="link-https" href="https://docs.docker.com/engine/reference/run/#/expose-incoming-ports" rel="external nofollow" target="_blank">
+     Docker docs
+    </a>
+    .
+   </p>
+  </blockquote>
+  <p>
+  </p>
+  <p>
+   <img alt="Pet App using Bridge Driver" class="internal" src="/_kb/images/2046-18.png"/>
+  </p>
+  <p>
+  </p>
+  <p>
+   The application is exposed locally on this host on port
+   <code>
+    8000
+   </code>
+   on all of its interfaces. Also supplied is
+   <code>
+    DB=db
+   </code>
+   , providing the name of the backend container. The Docker Engine's built-in DNS resolves this container name to the IP address of
+   <code>
+    db
+   </code>
+   . Since
+   <code>
+    bridge
+   </code>
+   is a local driver, the scope of DNS resolution is only on a single host.
+  </p>
+  <p>
+   The output below shows us that our containers have been assigned private IPs from the
+   <code>
+    172.19.0.0/24
+   </code>
+   IP space of the
+   <code>
+    petsBridge
+   </code>
+   network. Docker uses the built-in IPAM driver to provide an IP from the appropriate subnet if no other IPAM driver is specified.
+  </p>
+  <pre>
+<code>$ docker inspect --format {{.NetworkSettings.Networks.petsBridge.IPAddress}} web
+172.19.0.3
+
+$ docker inspect --format {{.NetworkSettings.Networks.petsBridge.IPAddress}} db
+172.19.0.2
+</code></pre>
+  <p>
+   These IP addresses are used internally for communication internal to the
+   <code>
+    petsBridge
+   </code>
+   network. These IPs are never exposed outside of the host.
+  </p>
+ </div>
+ <div class="mt-section" id="section_47" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Multi-Host_Bridge_Driver_with_External_Service_Discovery">
+  </span>
+  <h3 id="2-25">
+   Multi-Host Bridge Driver with External Service Discovery
+  </h3>
+  <p>
+   Because the
+   <code>
+    bridge
+   </code>
+   driver is a local scope driver, multi-host networking requires a multi-host service discovery solution. External SD registers the location and status of a container or service and then allows other services to discover that location. Because the bridge driver exposes ports for external access, external SD stores the
+   <code>
+    host-ip:port
+   </code>
+   as the location of a given container.
+  </p>
+  <p>
+   In the following example, the location of each service is manually configured, simulating external service discovery. The location of the
+   <code>
+    db
+   </code>
+   service is passed to
+   <code>
+    web
+   </code>
+   via the
+   <code>
+    DB
+   </code>
+   environment variable.
+  </p>
+  <pre>
+<code>#Create the backend db service and expose it on port 8500
+host-A $ docker run -d -p 8500:8500 --name db consul
+
+#Display the host IP of host-A
+host-A $ ip add show eth0 | grep inet
+    inet 172.31.21.237/20 brd 172.31.31.255 scope global eth0
+    inet6 fe80::4db:c8ff:fea0:b129/64 scope link
+
+#Create the frontend web service and expose it on port 8000 of host-B
+host-B $ docker run -d -p 8000:5000 -e 'DB=172.31.21.237:8500' --name web chrch/docker-pets:1.0
+</code></pre>
+  <p>
+   The
+   <code>
+    web
+   </code>
+   service should now be serving its web page on port
+   <code>
+    8000
+   </code>
+   of
+   <code>
+    host-B
+   </code>
+   IP address.
+  </p>
+  <p>
+   <img alt="Pet App with Multi-Host Bridge Driver" class="internal" src="/_kb/images/2046-19.png"/>
+  </p>
+  <blockquote>
+   <p>
+    In this example we don't specify a network to use, so the default Docker
+    <code>
+     bridge
+    </code>
+    network is selected automatically.
+   </p>
+  </blockquote>
+  <p>
+   When we configure the location of
+   <code>
+    db
+   </code>
+   at
+   <code>
+    172.31.21.237:8500
+   </code>
+   , we are creating a form of
+   <strong>
+    service discovery
+   </strong>
+   . We are statically configuring the location of the
+   <code>
+    db
+   </code>
+   service for the
+   <code>
+    web
+   </code>
+   service. In the single host example, this was done automatically because Docker Engine provided built-in DNS resolution for the container names. In this multi-host example we are doing the service discovery manually.
+  </p>
+  <p>
+   The hardcoding of application location is not recommended for production. External service discovery tools exist that provide these mappings dynamically as containers are created and destroyed in a cluster. Some examples are
+   <a class="link-https" href="https://www.consul.io/" rel="external nofollow" target="_blank">
+    Consul
+   </a>
+   and
+   <a class="link-https" href="https://coreos.com/etcd/" rel="external nofollow" target="_blank">
+    etcd
+   </a>
+   .
+  </p>
+  <p>
+   The next section examines the
+   <code>
+    overlay
+   </code>
+   driver scenario, which provides global service discovery across a cluster as a built-in feature. This simplicity is a major advantage of the
+   <code>
+    overlay
+   </code>
+   driver, as opposed to using multiple external tools to provide network services.
+  </p>
+ </div>
+ <div class="mt-section" id="section_48" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Multi-Host_with_Overlay_Driver">
+  </span>
+  <h3 id="2-26">
+   <a name="overlaymodel">
+   </a>
+   Multi-Host with Overlay Driver
+  </h3>
+  <p>
+   This model utilizes the native
+   <code>
+    overlay
+   </code>
+   driver to provide multi-host connectivity out of the box. The default settings of the overlay driver provide external connectivity to the outside world as well as internal connectivity and service discovery within a container application. The
+   <a class="mt-self-link" href="#overlayarch" rel="internal">
+    Overlay Driver Architecture
+   </a>
+   section reviews the internals of the Overlay driver which you should review before reading this section.
+  </p>
+  <p>
+   This example re-uses the previous
+   <code>
+    docker-pets
+   </code>
+   application. Set up a Docker swarm prior to following this example. For instructions on how to set up a Swarm read the
+   <a class="link-https" href="https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/" rel="external nofollow" target="_blank">
+    Docker docs
+   </a>
+   . After the Swarm is set up, use the
+   <code>
+    docker service create
+   </code>
+   command to create containers and networks to be managed by the Swarm.
+  </p>
+  <p>
+   The following shows how to inspect your Swarm, create an overlay network, and then provision some services on that overlay network. All of these commands are run on a UCP/swarm controller node.
+  </p>
+  <pre>
+<code class="bash">#Display the nodes participating in this swarm cluster that was already created
+$ docker node ls
+ID                           HOSTNAME          STATUS  AVAILABILITY  MANAGER STATUS
+a8dwuh6gy5898z3yeuvxaetjo    host-B  Ready   Active
+elgt0bfuikjrntv3c33hr0752 *  host-A  Ready   Active        Leader
+
+#Create the dognet overlay network
+host-A $ docker network create -d overlay petsOverlay
+
+#Create the backend service and place it on the dognet network
+host-A $ docker service create --network petsOverlay --name db consul
+
+#Create the frontend service and expose it on port 8000 externally
+host-A $ docker service create --network petsOverlay -p 8000:5000 -e 'DB=db' --name web chrch/docker-pets:1.0
+
+host-A $ docker service ls
+ID            NAME  MODE        REPLICAS  IMAGE
+lxnjfo2dnjxq  db    replicated  1/1       consul:latest
+t222cnez6n7h  web   replicated  0/1       chrch/docker-pets:1.0
+</code></pre>
+  <p>
+   <img alt="Pets App with Overlay Network" class="internal" src="/_kb/images/2046-20.png"/>
+  </p>
+  <p>
+   As in the single-host bridge example, we pass in
+   <code>
+    DB=db
+   </code>
+   as an environment variable to the
+   <code>
+    web
+   </code>
+   service. The overlay driver resolves the service name
+   <code>
+    db
+   </code>
+   to the overlay IP address of the container. Communication between
+   <code>
+    web
+   </code>
+   and
+   <code>
+    db
+   </code>
+   occurs exclusively using the overlay IP subnet.
+  </p>
+  <blockquote>
+   <p>
+    Inside overlay and bridge networks, all TCP and UDP ports to containers are open and accessible to all other containers attached to the overlay network.
+   </p>
+  </blockquote>
+  <p>
+   The
+   <code>
+    web
+   </code>
+   service is exposed on port
+   <code>
+    8000
+   </code>
+   , and the
+   <strong>
+    routing mesh
+   </strong>
+   exposes port
+   <code>
+    8000
+   </code>
+   on every host in the Swarm cluster. Test if the application is working by going to
+   <code>
+    &lt;host-A&gt;:8000
+   </code>
+   or
+   <code>
+    &lt;host-B&gt;:8000
+   </code>
+   in the browser.
+  </p>
+  <div class="mt-section" id="section_49" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+   <span id="Overlay_Benefits_and_Use_Cases">
+   </span>
+   <h4 id="3-3">
+    Overlay Benefits and Use Cases
+   </h4>
+   <ul>
+    <li>
+     Very simple multi-host connectivity for small and large deployments
+    </li>
+    <li>
+     Provides service discovery and load balancing with no extra configuration or components
+    </li>
+    <li>
+     Useful for east-west micro-segmentation via encrypted overlays
+    </li>
+    <li>
+     Routing mesh can be used to advertise a service across an entire cluster
+    </li>
+   </ul>
+  </div>
+ </div>
+ <div class="mt-section" id="section_50" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+  <span id="Tutorial_App:_MACVLAN_Bridge_Mode">
+  </span>
+  <h3 id="2-27">
+   <a name="macvlanmodel">
+   </a>
+   Tutorial App: MACVLAN Bridge Mode
+  </h3>
+  <p>
+   There may be cases where the application or network environment requires containers to have routable IP addresses that are a part of the underlay subnets. The MACVLAN driver provides an implementation that makes this possible. As described in the
+   <a class="mt-self-link" href="#macvlan" rel="internal">
+    MACVLAN Architecture section
+   </a>
+   , a MACVLAN network binds itself to a host interface. This can be a physical interface, a logical sub-interface, or a bonded logical interface. It acts as a virtual switch and provides communication between containers on the same MACVLAN network. Each container receives a unique MAC address and an IP address of the physical network that the node is attached to.
+  </p>
+  <p>
+   <img alt="Pets App on a MACVLAN Network" class="internal" src="/_kb/images/2046-21.png"/>
+  </p>
+  <p>
+   In this example, the Pets application is deployed on to
+   <code>
+    host-A
+   </code>
+   and
+   <code>
+    host-B
+   </code>
+   .
+  </p>
+  <pre>
+<code class="bash">#Creation of local macvlan network on both hosts
+host-A $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 petsMacvlan
+host-B $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 petsMacvlan
+
+#Creation of db container on host-B
+host-B $ docker run -d --net petsMacvlan --ip 192.168.0.5 --name db consul
+
+#Creation of web container on host-A
+host-A $ docker run -it --net petsMacvlan --ip 192.168.0.4 -e 'DB=192.168.0.5:8500' --name web chrch/docker-pets:1.0
+</code></pre>
+  <p>
+   This may look very similar to the multi-host bridge example but there are a couple notable differences:
+  </p>
+  <ul>
+   <li>
+    The reference from
+    <code>
+     web
+    </code>
+    to
+    <code>
+     db
+    </code>
+    uses the IP address of
+    <code>
+     db
+    </code>
+    itself as oppossed to the host IP. Remember that with
+    <code>
+     macvlan
+    </code>
+    container IPs are routable on the underlay network.
+   </li>
+   <li>
+    We do not expose any ports for
+    <code>
+     db
+    </code>
+    or
+    <code>
+     web
+    </code>
+    because any ports opened in the container are immediately be reachable using the container IP address.
+   </li>
+  </ul>
+  <p>
+   While the
+   <code>
+    macvlan
+   </code>
+   driver offers these unique advantages, one area that it sacrifices is portability. MACVLAN configuration and deployment is heavily tied to the underlay network. Container addressing must adhere to the physical location of container placement in addition to preventing overlapping address assignment. Because of this, care must be taken to manage IPAM externally to a MACVLAN network. Overlapping IP addressing or incorrect subnets can lead to loss of container connectivity.
+  </p>
+  <div class="mt-section" id="section_51" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+   <span id="MACVLAN_Benefits_and_Use_Cases">
+   </span>
+   <h4 id="3-4">
+    MACVLAN Benefits and Use Cases
+   </h4>
+   <ul>
+    <li>
+     Very low latency applications can benefit from the
+     <code>
+      macvlan
+     </code>
+     driver because it does not utilize NAT.
+    </li>
+    <li>
+     MACVLAN can provide an IP per container, which may be a requirement in some environments.
+    </li>
+    <li>
+     More careful consideration for IPAM must be taken in to account.
+    </li>
+   </ul>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_52" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
+ <span id="Conclusion">
+ </span>
+ <h2 id="1-18">
+  Conclusion
+ </h2>
+ <p>
+  Docker is a quickly evolving technology, and the networking options are growing to satisfy more and more use cases every day. Incumbent networking vendors, pure-play SDN vendors, and Docker itself are all contributors to this space. Tighter integration with the physical network, network monitoring, and encryption are all areas of much interest and innovation.
+ </p>
+ <p>
+  This document detailed some but not all of the possible deployments and CNM network drivers that exist. While there are many individual drivers and even more ways to configure those drivers, we hope you can see that there are only a few common models routinely deployed. Understanding the tradeoffs with each model is key to long term success.
+ </p>
+ <p>
+  <em>
+   Document Version: 1.2
+  </em>
+ </p>
+ <p>
+  <em>
+   Tested on: Docker EE 17.03.0-ee-1
+  </em>
+ </p>
+</div>
+{% endraw %}

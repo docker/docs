@@ -1,0 +1,81 @@
+---
+title: "How do I add a node back after removing it using the Docker Cloud CLI tool?"
+id: 1101
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1101/
+source: https://success.docker.com/@api/deki/pages/1101/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudcli"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ After removing a node from Docker Cloud using the Docker Cloud CLI tool (
+ <code>
+  docker-cloud node rm
+  <span class="replaceabletext">
+   &lt;node-UUID&gt;
+  </span>
+ </code>
+ ), you might see the following error when trying to add the node back:
+</p>
+<pre>
+ERROR: Docker Cloud Agent is already installed in this host
+If the node failed to register properly with Docker Cloud, try to restart the agent by executing:
+service dockercloud-agent restart
+and check the logs at /var/log/dockercloud/agent.log for possible errors. 
+If the problem persists, please contact us at support@docker.com 
+</pre>
+<p>
+ There error might occur for 2 reasons:
+</p>
+<ol>
+ <li>
+  Configuration file from the previous agent installation is affecting the new installation.
+ </li>
+ <li>
+  You are trying to add a node, but you have zero node allocations left.
+ </li>
+</ol>
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_I_add_a_node_back_after_removing_it_using_the_Docker_Cloud_CLI_tool?">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-0">
+  Resolution
+ </h2>
+ <p>
+  If this issue is because the configuration file from the previous agent installation is affecting the new installation, assuming that your host is running
+  <strong>
+   Ubuntu/Debian
+  </strong>
+  , you can run the following commands to fix the issue:
+ </p>
+ <pre>
+sudo apt-get remove dockercloud-agent
+sudo apt-get purge dockercloud-agent
+</pre>
+ <p>
+  The first command uninstalls the agent, and the second command removes all remaining configuration files from the previous installation.
+ </p>
+ <p>
+  Once done, try creating the node again by running the command given by Cloud when you click the
+  <strong>
+   Bring your own node
+  </strong>
+  button. The command looks something similar to this:
+ </p>
+ <pre>
+curl -Ls https://get.cloud.docker.com/ | sudo -H sh -s 487aa1350fc242eda12ccdcad2818935
+</pre>
+ <p>
+  If you are attempting to add a node to Docker Cloud without node allocations, you can add nodes by going to your Account Settings:
+  <a class="link-https" href="https://cloud.docker.com/account/#plan" rel="freeklink" title="https://cloud.docker.com/account/#plan">
+   https://cloud.docker.com/account/#plan
+  </a>
+ </p>
+</div>
+{% endraw %}

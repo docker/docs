@@ -1,0 +1,33 @@
+---
+title: "When using a VM template to add a node to UCP, why does the status show pending?"
+id: 1732
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1732/
+source: https://success.docker.com/@api/deki/pages/1732/contents
+tags:
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:infraopt"
+---
+{% raw %}
+<p>
+ When using a VM template to add a node to UCP, the status of the node in the UCP UI shows the node in a pending state. When accessing the dashboard, nodes may disappear as well.
+</p>
+<p>
+ To successfully add the node to the cluster, check that the VM template doesn't include the
+ <code>
+  /etc/docker/key.json
+ </code>
+ file. If it is, remove it, and restart the Docker daemon. The
+ <code>
+  key.json
+ </code>
+ is used as the id of the node, and having multiple nodes with the same id will produce dashboard symptoms.
+</p>
+
+{% endraw %}

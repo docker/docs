@@ -1,0 +1,115 @@
+---
+title: "How can I customize VPC/IAM elements in Docker Cloud using the dashboard?"
+id: 576
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/576/
+source: https://success.docker.com/@api/deki/pages/576/contents
+tags:
+- tag: "article:topic"
+- tag: "aws"
+- tag: "dashboard"
+- tag: "Docker Cloud"
+- tag: "IAM"
+- tag: "product:cloud"
+- tag: "VPC"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_can_I_customize_VPC//IAM_elements_in_Docker_Cloud_using_the_dashboard?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  How can I customize VPC/IAM elements in Docker Cloud using the dashboard?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_can_I_customize_VPC//IAM_elements_in_Docker_Cloud_using_the_dashboard?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  As part of the deprecation of Classic platform, users have now the ability to choose any of the elements explained above through the API or the dashboard.
+ </p>
+ <p>
+  In the launch node cluster view, you can choose:
+ </p>
+ <ul>
+  <li>
+   VPC dropdown:
+   <ol>
+    <li>
+     <code>
+      Auto
+     </code>
+     - Delegates to Docker Cloud the creation of the VPC.
+    </li>
+    <li>
+     <code>
+      vpc-XXXX (dc-vpc)
+     </code>
+     - Docker Cloud’s default VPC. It will be present if you have already deployed nodes to that region. Note that you can choose subnets and security groups with it. See “Which objects does Docker Cloud create in my EC2 account” for detailed info.
+    </li>
+    <li>
+     <code>
+      vpc-XXXX
+     </code>
+     - You can select one of the VPCs already created by you. If you tag name them, it will be displayed too.
+    </li>
+   </ol>
+  </li>
+  <li>
+   Subnets dropdown:
+   <ol>
+    <li>
+     <code>
+      Auto
+     </code>
+     - Delegates the management of the subnets to Docker Cloud. Will create them if they do not exist or will use the ones tagged with
+     <code>
+      dc-subnet
+     </code>
+     .
+    </li>
+    <li>
+     Multiple selection of existing subnets. “See How does Docker Cloud balance my nodes among different availability zones?” section for detailed info.
+    </li>
+   </ol>
+  </li>
+  <li>
+   Security groups dropdown:
+   <ol>
+    <li>
+     <code>
+      Auto
+     </code>
+    </li>
+    <li>
+     Multiple selection of existing security groups.
+    </li>
+   </ol>
+  </li>
+  <li>
+   IAM roles dropdown:
+   <ol>
+    <li>
+     <code>
+      None
+     </code>
+     - Docker Cloud does not apply any instance profiles to the node.
+    </li>
+    <li>
+     <code>
+      my_instance_role_name
+     </code>
+     - You can select one of the IAM roles already created by you.
+    </li>
+   </ol>
+  </li>
+ </ul>
+</div>
+{% endraw %}

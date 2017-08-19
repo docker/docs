@@ -1,0 +1,75 @@
+---
+title: "Curl command error when configuring the load-balancing solution on a dedicated UCP node using Interlock + NGINX/NGINX+"
+id: 1647
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1647/
+source: https://success.docker.com/@api/deki/pages/1647/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Curl_command_error_when_configuring_the_load-balancing_solution_on_a_dedicated_UCP_node_using_Interlock___NGINX//NGINX">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  When configuring the load-balancing solution on a dedicated UCP node using Interlock + NGINX/NGINX+, incorrect curl syntax will cause errors similar to the following:
+ </p>
+ <pre>
+curl: (6) Couldn't resolve host '='
+curl: (6) Couldn't resolve host ''
+curl: (6) Couldn't resolve host 'dockerURL'
+curl: (6) Couldn't resolve host '='
+curl: (1) Protocol "tcp" not supported or disabled in libcurl
+</pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Curl_command_error_when_configuring_the_load-balancing_solution_on_a_dedicated_UCP_node_using_Interlock___NGINX//NGINX">
+ <span id="Diagnostic_Steps">
+ </span>
+ <h3 id="2-1">
+  Diagnostic Steps
+ </h3>
+ <p>
+  Proper syntax can be found in
+  <a class="mt-disabled" rel="broken" target="_blank" title="Datacenter/Apply/Reference_Architecture%253A_Service_Discovery_and_Load-Balancing_with_Docker_Universal_Control_Plane_(UCP)">
+   Reference Architecture: Service Discovery and Load-Balancing with Docker Universal Control Plane (UCP)
+  </a>
+ </p>
+ <p>
+  For example, in this instance, the closing single quote for the value should be placed at the end, not after listenAddr:
+ </p>
+ <pre>
+<code><span class="replaceabletext"> value='listenAddr'</span> = ":8080" dockerURL = "tcp://1.2.3.4.example.com:2376" \
+  {"action":"set","node":
+  {"key":"/interlock/v1/config","value":"listenAddr","modifiedIndex":194110,"createdIndex":194110},"prevNode":
+  {"key":"/interlock/v1/config","value":"","modifiedIndex":194099,"createdIndex":194099}}</code>
+</pre>
+ <p>
+  The correct syntax would be:
+ </p>
+ <pre>
+<code><span class="replaceabletext">value='listenAddr = </span>":8080" dockerURL = "tcp://slx‐dockermaster01.uncg.edu:2376" \
+  {"action":"set","node":
+  {"key":"/interlock/v1/config","value":"listenAddr","modifiedIndex":194110,"createdIndex":194110},"prevNode":
+  {"key":"/interlock/v1/config","value":"","modifiedIndex":194099,"createdIndex":194099}}<span class="replaceabletext">'</span>
+</code>
+</pre>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Curl_command_error_when_configuring_the_load-balancing_solution_on_a_dedicated_UCP_node_using_Interlock___NGINX//NGINX">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-2">
+  Resolution
+ </h3>
+ <p>
+  Fix the syntax, and rerun the curl command. If further errors or different errors persist review the syntax again.
+ </p>
+</div>
+{% endraw %}

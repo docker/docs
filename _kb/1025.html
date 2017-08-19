@@ -1,0 +1,82 @@
+---
+title: "Why can’t I push images to Docker Hub after logging in?"
+id: 1025
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1025/
+source: https://success.docker.com/@api/deki/pages/1025/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "https://docs.docker.com/engine/installation/"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ After logging in, if you receive the following error when trying to push images to Docker Hub, you have some issues with the authentication payload:
+</p>
+<pre>
+unauthorized: authentication required</pre>
+<p>
+ Perform a simple check on the
+ <code>
+  ~/.docker/config.json
+ </code>
+ file and ensure that the endpoint is correct. The correct configuration should look something like this:
+</p>
+<pre>
+{
+   "auths": {
+           "<span class="replaceabletext">https://index.docker.io/v1/</span>": {
+                   "auth": "Y2hlcnlscTI2OkNoZXJRMjYqKg==",
+                   "email": "example@example.com"
+           }
+   }}
+</pre>
+<p>
+ Take note that the authentication endpoint should be
+ <code>
+  <span class="replaceabletext">
+   <a class="link-https" href="https://index.docker.io/v1/" rel="freeklink" title="https://index.docker.io/v1/">
+    https://index.docker.io/v1/
+   </a>
+  </span>
+ </code>
+ . The remaining payload (
+ <code>
+  <strong>
+   auth
+  </strong>
+ </code>
+ and
+ <code>
+  <strong>
+   email
+  </strong>
+ </code>
+ ) will vary from user to user.
+</p>
+<p>
+ In addition, please ensure that you are pushing the images with the following syntax:
+</p>
+<pre>
+
+<code>docker push <span class="replaceabletext">&lt;namespace&gt;<span class="replaceabletext">/<span class="replaceabletext">&lt;image&gt;<span class="replaceabletext">:<span class="replaceabletext">&lt;tag&gt;
+</span></span></span></span></span></code>
+</pre>
+<p>
+ For example:
+</p>
+<pre>
+<code>docker push mydockerid/hello-world:latest</code></pre>
+<p>
+ Note: This issue commonly arises when you are using Docker Engines that are not from
+ <a class="link-https" href="https://docs.docker.com/engine/installation/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/installation/">
+  https://docs.docker.com/engine/installation/
+ </a>
+ .
+</p>
+
+{% endraw %}

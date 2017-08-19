@@ -1,0 +1,43 @@
+---
+title: "How do I mount a volume read only with Docker Cloud?"
+id: 941
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/941/
+source: https://success.docker.com/@api/deki/pages/941/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When you are using the wizard to add volumes you will need to:
+</p>
+<ul>
+ <li>
+  Add both a container path and a host path in the
+  <strong>
+   add volume
+  </strong>
+  section.
+ </li>
+ <li>
+  Click the
+  <strong>
+   add
+  </strong>
+  button.
+ </li>
+ <li>
+  After the path is added, click the '
+  <em>
+   green checkmark
+  </em>
+  ' in the writable column to disable write.
+ </li>
+</ul>
+
+{% endraw %}

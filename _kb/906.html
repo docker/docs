@@ -1,0 +1,97 @@
+---
+title: "Why can't I see my GitHub repositories when creating a new automated build?"
+id: 906
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/906/
+source: https://success.docker.com/@api/deki/pages/906/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "expires:futurerelease"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ If you're unable to see/select your GitHub
+ <span style="font-size: 16px;">
+  repositories when attempting to create an automated build, the possible causes include the following:
+ </span>
+</p>
+<ul>
+ <li>
+  Your GitHub link is corrupted.
+ </li>
+ <li>
+  The profile for your GitHub organization's people page is not set to public.
+ </li>
+</ul>
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_can't_I_see_my_GitHub_repositories_when_creating_a_new_automated_build?">
+ <span id="Resolution">
+ </span>
+ <h1 id="0-0">
+  Resolution
+ </h1>
+ <p>
+  The following steps should resolve the problem:
+ </p>
+ <ul>
+  <li>
+   Unlink your GitHub account at Docker Hub:
+   <a class="link-https" href="https://hub.docker.com/account/authorized-services/" rel="external nofollow" target="_blank">
+    https://hub.docker.com/account/authorized-services/
+   </a>
+  </li>
+  <li>
+   Revoke the
+   <strong>
+    Docker Hub Registry
+   </strong>
+   application on your account at github.com:
+   <a class="link-https" href="https://github.com/settings/applications" rel="external nofollow" target="_blank">
+    https://github.com/settings/applications
+   </a>
+  </li>
+  <li>
+   Link to your GitHub account again using
+   <strong>
+    Public &amp; Private Access
+   </strong>
+   :
+   <a class="link-https" href="https://hub.docker.com/account/authorized-services/" rel="external nofollow" target="_blank">
+    https://hub.docker.com/account/authorized-services/
+   </a>
+  </li>
+  <li>
+   On the
+   <strong>
+    Authorize Application
+   </strong>
+   page, make sure that all of the organizations you need access to have a green check mark. Otherwise click the
+   <strong>
+    Request Access
+   </strong>
+   button.
+  </li>
+ </ul>
+ <p>
+  NOTE: If you selected "Limited Access" when linking to your GitHub account, you need to trigger your build manually or create a GitHub webhook. Details can be found at
+  <a class="link-https" href="https://docs.docker.com/docker-hub/github/#auto-builds-and-limited-linked-github-accounts" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-hub/github/#auto-builds-and-limited-linked-github-accounts">
+   https://docs.docker.com/docker-hub/github/#auto-builds-and-limited-linked-github-accounts
+  </a>
+ </p>
+ <p>
+  Also, if you're using a GitHub organization, your profile on your organization's people page (
+  <a class="link-https" href="https://github.com/orgs/%3Cyour-org%3E/people" rel="external nofollow" target="_blank" title="https://github.com/orgs/%3Cyour-org%3E/people">
+   https://github.com/orgs/
+   <span class="replaceabletext">
+    &lt;your-org&gt;
+   </span>
+   /people
+  </a>
+  ) has to be set to public.
+ </p>
+</div>
+{% endraw %}

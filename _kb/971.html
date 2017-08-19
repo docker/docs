@@ -1,0 +1,139 @@
+---
+title: "How do I use API V2 with DTR?"
+id: 971
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/971/
+source: https://success.docker.com/@api/deki/pages/971/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "V2 Registry API"
+---
+{% raw %}
+<p>
+ To use the V2 Registry API with Docker Trusted Registry, use the following steps:
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_do_I_use_API_V2_with_DTR?">
+ <span id="Step_1">
+ </span>
+ <h2 id="1-0">
+  Step 1
+ </h2>
+ <p>
+  Set the following environment variables:
+ </p>
+ <pre>
+<code>username=admin
+
+password=<span class="replaceabletext">&lt;my-password&gt;</span>
+
+host=<span class="replaceabletext">dtr.example.com</span>
+
+reponame=admin/java-hello-world
+
+tag=latest</code></pre>
+ <div class="mt-section" id="section_2" mt-section-origin="KBase/How_do_I_use_API_V2_with_DTR?">
+  <span id="Step_2">
+  </span>
+  <h3 id="2-0">
+   Step 2
+  </h3>
+  <p>
+   Get the tokens:
+  </p>
+  <pre>
+<code>curl -u $username:$password "$host/auth/v2/token/?service=$host&amp;scope=repository:$reponame:pull"</code></pre>
+  <p>
+   Notice the `token` being returned in JSON. Paste that in
+   <a class="link-https" href="https://jwt.io/" rel="external nofollow" target="_blank" title="https://jwt.io/">
+    JWT
+   </a>
+   and verify that the `pull` permission exists. For example:
+   <img alt="" class="internal" height="1082px" src="/_kb/images/971-0.png" style="width: 1215px; height: 1082px;" width="1215px"/>
+  </p>
+  <p>
+   Then set the token:
+  </p>
+  <pre>
+<code>token=eyJhbGciOiJFUzI1NiIsImp3ayI6eyJjcnYiOiJQLTI1NiIsImtpZCI6Ik5OWlg6S0g3VjpGQkpUOjRCQUg6V0VZTDpGMlY0OlJIV0o6QURGMzpVQUFFOjdKRVA6NlRBVTpGQ0FPIiwia3R5IjoiRUMiLCJ4IjoiekFYQURJOWcxMkx1NW1jMVBvZVlnNW9zX2UyeDZDcTk5UVpSQzFBTmZOcyIsInkiOiJ5U2JHd09ZLWpsbFkydWo2dUlrTXc5cm5SZi1YU0RNS2lfNlkzNmhLcjYwIn0sInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6ImFkbWluL2phdmEtaGVsbG8td29ybGQiLCJhY3Rpb25zIjpbInB1bGwiXX1dLCJhdWQiOiJkdHIuc2FiaW5iYXN5YWwuY29tIiwiZXhwIjoxNDU5OTgzMjUyUCJpYXQiOjE0NTk5ODI5NTIsImlzcyI6ImR0ci5zYWJpbmJhc3lhbC5jb20iLCJqdGkiOiJJTWt0WWNSY1dOVXJZUDRSNTBMZSIsIm5iZiI6MTQ1OTk4Mjk1Miwic3ViIjoiYWRtaW4ifQ.K76uZMHVHiq7CtYPZSpJwfCcV5QGH2ZmMTV8S3TLTGcJdfdxc8rWyE8F1xhjngIrSk2YYntgu3jwg2BLZNz0wg</code></pre>
+ </div>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_do_I_use_API_V2_with_DTR?">
+ <span id="Step_3">
+ </span>
+ <h2 id="1-1">
+  Step 3
+ </h2>
+ <p>
+  Finally test if the manifest is returned:
+ </p>
+ <pre>
+<code>curl -H "Authorization: Bearer $token" "<a class="link-https" href="https://$host/v2/$reponame/manifests/$tag" rel="freeklink" title="https://$host/v2/$reponame/manifests/$tag">https://$host/v2/$reponame/manifests/$tag</a>"</code></pre>
+ <p>
+  The manifests are shown:
+ </p>
+ <pre>
+<code>{
+
+   "name": "admin/java-hello-world",
+
+   "tag": "latest",
+
+   "architecture": "amd64",
+
+   "fsLayers": [
+
+      {
+
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+
+      },
+
+      {
+
+...
+
+...
+
+   "schemaVersion": 1,
+
+   "signatures": [
+
+      {
+
+         "header": {
+
+            "jwk": {
+
+               "crv": "P-256",
+
+               "kid": "LDGX:VCCH:O36I:BTIZ:VU4Z:7UIW:OCOG:UDFA:LMVH:GJBQ:NTLY:ZITJ",
+
+               "kty": "EC",
+
+               "x": "mii7zsB5a-wzuxh7q1D-ngdE-qsr_zuG7fx-r_XZ4fw",
+
+               "y": "tkXiuXUa5HoavLxNwUQqKM5IeW-Q4A62Kun68nkYcFY"
+
+            },
+
+            "alg": "ES256"
+
+         },
+
+         "signature": "H939ST-lsPnc1AIfvkK-S5wN4mUe6VNXgRn3e1Py96awiWWHHwakz2g3_iXrI78PWH3F2i-YbHpWwmpReSXg1w",
+
+         "protected": "eyJmb3JtYXRMZW5ndGgiOjM0MTQ2LCJmb3JtYXRUYWlsIjoiQ24wIiwidGltZSI6IjIwMTYtMDItMDJUMDA6MzM6MjRaIn0"
+
+      }
+
+   ]
+
+}</code></pre>
+</div>
+{% endraw %}

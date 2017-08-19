@@ -1,0 +1,64 @@
+---
+title: "Why is my available data space less than expected?"
+id: 1202
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1202/
+source: https://success.docker.com/@api/deki/pages/1202/contents
+tags:
+- tag: "article:question"
+- tag: "component:engine"
+- tag: "devicemapper"
+- tag: "engine"
+- tag: "loop"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "storage"
+---
+{% raw %}
+<p>
+ The
+ <code>
+  docker info
+ </code>
+ command shows available data space. Sometimes, the available space reported is less than the total space minus the used space due to the loop device.
+</p>
+<p>
+ For example, in this output, you can see that the devicemapper storage driver is being used.
+</p>
+<pre>
+<code>Storage Driver: devicemapper</code>
+<code>...
+Data Space Used: 1.482 GB
+Data Space Total: 107.4 GB
+Data Space Available: 3.84 GB
+...
+</code>
+<code>Data loop file: /var/lib/docker/devicemapper/devicemapper/data
+WARNING: Usage of loopback devices is strongly discouraged for production use. 
+Either use `--storage-opt dm.thinpooldev` or 
+use `--storage-opt dm.no_warn_on_loop_devices=true` to suppress this warning.
+...
+
+</code>
+</pre>
+<p>
+ This loop device is effectively a sparse storage device. You can read about the details on the
+ <a href="https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/" rel="noreferrer">
+  docs.docker.com
+ </a>
+ .
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Why_is_my_available_data_space_less_than_expected?">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-0">
+  Resolution
+ </h3>
+ <p>
+  The "available" number reflects how much space you physically have remaining. Additionally, it is important to note that the loop device consumes physical space and will cause the numbers to not add up correctly.  You may want to consider adding additional space into the LVM pool used as the Device Mapper, as you may experience data integrity issues when you consume all of the physical space.
+ </p>
+</div>
+{% endraw %}

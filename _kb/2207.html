@@ -1,0 +1,181 @@
+---
+title: "Error: A firewall is blocking file sharing between Windows and the containers"
+id: 2207
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2207/
+source: https://success.docker.com/@api/deki/pages/2207/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "D4W"
+- tag: "DNS"
+- tag: "Error"
+- tag: "Firewall"
+- tag: "Mount"
+- tag: "Network"
+- tag: "platform:windows"
+- tag: "stage:reviewed"
+- tag: "Volume"
+- tag: "Windows"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Error:_A_firewall_is_blocking_file_sharing_between_Windows_and_the_containers">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  When you try to share a drive through the Docker for Windows GUI, you can receive a firewall error when Docker can't connect to the drive through the DockerNat network:
+ </p>
+ <p>
+  <code>
+   Error: A firewall is blocking file Sharing between Windows and the containers
+   <br/>
+   <br/>
+   [08:31:08.187][ApiProxy ][Info ] Cancel connection...
+   <br/>
+   [08:31:08.191][SambaShare ][Error ] Unable to mount C drive: firewall is blocking
+   <br/>
+   [08:31:08.191][SambaShare ][Info ] Removing share C
+  </code>
+ </p>
+ <p>
+  <img alt="" class="internal default" height="229px" src="/_kb/images/2207-0.png" style="width: 350px; height: 229px;" width="350px"/>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Error:_A_firewall_is_blocking_file_sharing_between_Windows_and_the_containers">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Docker for Windows version  17.06.0-ce-win18 12627
+  </li>
+  <li>
+   Windows 10
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Error:_A_firewall_is_blocking_file_sharing_between_Windows_and_the_containers">
+ <span id="Troubleshooting_Steps_and_Explanation">
+ </span>
+ <h2 id="1-2">
+  Troubleshooting Steps and Explanation
+ </h2>
+ <p>
+  There could be a few issues that cause this error. This is not an exhaustive list, but it may help.
+ </p>
+ <p>
+  Drives aren't accessed directly through Windows Explorer. They are accessed through an internal virtual network called DockerNAT.
+ </p>
+ <p>
+  DockerNAT uses SMB sharing and CIFS protocols to share volumes and translate file structures between Windows and your Linux containers over UDP ports 137 and 138 and TCP ports 139 and 445   By default, DockerNat uses 10.0.75.1 and 10.0.75.2 internally, but this can be changed or verified through the GUI under
+  <strong>
+   Network Settings
+  </strong>
+  .
+ </p>
+ <p>
+  Basically this means that even though Docker is locally installed, it accesses your C: drive over the network like this \\10.0.75.1\C:\$ instead of like this C:\$.
+ </p>
+ <ol>
+  <li>
+   Check to see if the correct firewall rules are enabled.  Docker auto creates local Windows firewall rules on installation, but specifically check that
+   <strong>
+    File and Printer Sharing
+   </strong>
+   is not blocked.
+   <ol>
+    <li>
+     Windows GUI:
+     <strong>
+      File and Printer Sharing (NB-Session-In)
+     </strong>
+     and
+     <strong>
+      File and Printer Sharing (SMB-In)
+     </strong>
+    </li>
+    <li>
+     Or you can check using Powershell:
+     <code>
+      Get-NetFirewallRule –DisplayGroup "File and Printer Sharing"
+     </code>
+    </li>
+   </ol>
+  </li>
+  <li>
+   Check Connectivity.
+   <ol>
+    <li>
+     Can you connect to 10.0.75.1 445 via telnet?
+    </li>
+    <li>
+     Are you listening on port 445 and 139?
+     <code>
+      netstat -ao | find "445"
+     </code>
+    </li>
+    <li>
+     Is everything disconnected?  What are the results of a
+     <code>
+      docker login
+     </code>
+     command?
+    </li>
+   </ol>
+  </li>
+  <li>
+   Check Docker network DNS settings.
+   <ol>
+    <li>
+     Right click the whale icon in your systray.
+    </li>
+    <li>
+     Go to
+     <strong>
+      Settings
+     </strong>
+     . Change DNS server to a fixed address:
+     <code>
+      8.8.8.8
+     </code>
+    </li>
+    <li>
+     To trigger a network refresh in Docker change to fixed, click
+     <strong>
+      Apply
+     </strong>
+     then toggle back to auto and apply again.
+    </li>
+   </ol>
+  </li>
+  <li>
+   Make sure that the DockerNAT network is trusted in your AV firewall or Endpoint protection software.
+   <ol>
+    <li>
+     IP range:  10.0.75.1/24     Adapter and Network name:  (vEthernet (DockerNAT))
+    </li>
+   </ol>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Error:_A_firewall_is_blocking_file_sharing_between_Windows_and_the_containers">
+ <span id="What's_Next">
+ </span>
+ <h2 id="1-3">
+  What's Next
+ </h2>
+ <p>
+  If it still isn't working, file an issue with Docker using the Diagnose and Feedback option.
+ </p>
+</div>
+{% endraw %}

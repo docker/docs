@@ -1,0 +1,55 @@
+---
+title: "Which objects does Docker Cloud create in my Packet.net account?"
+id: 566
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/566/
+source: https://success.docker.com/@api/deki/pages/566/contents
+tags:
+- tag: "article:topic"
+- tag: "deploys"
+- tag: "Docker Cloud"
+- tag: "packet.net"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Which_objects_does_Docker_Cloud_create_in_my_Packet.net_account?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  Which objects does Docker Cloud create in my Packet.net account?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Which_objects_does_Docker_Cloud_create_in_my_Packet.net_account?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  Docker Cloud creates a project named “Docker Cloud” which contains all the devices that Docker Cloud deploys, no matter what type of device you chose.
+ </p>
+ <p>
+  Device storage is organized the following way:
+ </p>
+ <ul>
+  <li>
+   Type 1 devices have a RAID 1 of two SSD drives mounted in “/”
+  </li>
+  <li>
+   Type 3 devices also have a RAID 1 of two SSD drives mounted in “/”, and also offers two NVMe drives without being mounted. Docker Cloud mounts a RAID 1 in “/var/lib/docker”.
+  </li>
+ </ul>
+ <p>
+  An SSH keypair named
+  <code>
+   dockercloud-&lt;uuid&gt;
+  </code>
+  is created if no key is found in your account.
+ </p>
+</div>
+{% endraw %}

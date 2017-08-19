@@ -1,0 +1,82 @@
+---
+title: "Where are the Docker daemon logs?"
+id: 625
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/625/
+source: https://success.docker.com/@api/deki/pages/625/contents
+tags:
+- tag: "article:question"
+- tag: "component:engine"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Where the Docker daemon logs are stored
+ <span>
+  depends on your OS. Here is a list of some of the more common OSes along with where the Docker daemon logs are located for each:
+ </span>
+</p>
+<ul>
+ <li>
+  <span>
+   Ubuntu —
+  </span>
+  <code>
+   /var/log/upstart/docker.log
+  </code>
+ </li>
+ <li>
+  <span>
+   Boot2Docker —
+  </span>
+  <code>
+   /var/log/docker.log
+  </code>
+ </li>
+ <li>
+  <span>
+   Debian GNU/Linux —
+  </span>
+  <code>
+   /var/log/daemon.log
+  </code>
+ </li>
+ <li>
+  <span>
+   CentOS —
+  </span>
+  <code>
+   /var/log/messages | grep docker
+  </code>
+ </li>
+ <li>
+  <span>
+   Fedora —
+  </span>
+  <code>
+   journalctl -u docker.service
+  </code>
+ </li>
+ <li>
+  <span>
+   Red Hat Enterprise Linux Server —
+  </span>
+  <code>
+   /var/log/messages | grep docker
+  </code>
+ </li>
+ <li>
+  Windows (PowerShell)
+  <span>
+   —
+  </span>
+  <code>
+   Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-30) | Sort-Object Index | Format-Table Index,TimeWritten,Message | Out-String -Width 2048 | Out-File ~/EventLog_Docker.log
+  </code>
+ </li>
+</ul>
+
+{% endraw %}

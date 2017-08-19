@@ -1,0 +1,112 @@
+---
+title: "Docker for Windows freezes with invalid daemon settings"
+id: 2247
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2247/
+source: https://success.docker.com/@api/deki/pages/2247/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "Daemon"
+- tag: "Docker for Windows"
+- tag: "Error"
+- tag: "GUI"
+- tag: "platform:windows"
+- tag: "stage:reviewed"
+- tag: "Windows 10"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Docker_for_Windows_freezes_with_invalid_daemon_settings">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  Docker for Windows gives you the ability to configure the Docker daemon through the GUI.  Normally it will warn you if there are invalid settings, but occasionally it might let you proceed with a bad configuration.  When that happens - Docker hangs up on restarting and cannot be started again even if you manually terminate it. This article walks you through recovering Docker.
+  <em>
+   <strong>
+    WARNING - You will lose data.  Any Daemon changes or shared drive settings will be reset.
+   </strong>
+  </em>
+ </p>
+ <p>
+  The following example includes an invalid configuration change that Docker accepted.  Docker is hung on restarting and eventually errors out:
+ </p>
+ <p>
+  <img alt="" class="internal default" height="414px" src="/_kb/images/2247-0.png" style="width: 699px; height: 414px;" width="699px"/>
+ </p>
+ <p>
+  Eventually, Docker will crash with this message.
+ </p>
+ <p>
+  <img alt="" class="internal default" height="394px" src="/_kb/images/2247-1.png" style="width: 609px; height: 394px;" width="609px"/>
+ </p>
+ <p>
+  <span class="mt-font-size-12">
+   Even restarting your computer won't help - Docker still has the invalid config and can't start:
+  </span>
+ </p>
+ <p>
+  <img alt="" class="internal default" src="/_kb/images/2247-2.png"/>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Docker_for_Windows_freezes_with_invalid_daemon_settings">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  To fix the invalid setting and restart Docker for Windows, use the following steps:
+ </p>
+ <p>
+  <em>
+   <strong>
+    WARNING - You will lose data.  Any Daemon changes or shared drive settings will be reset.
+   </strong>
+  </em>
+ </p>
+ <ol>
+  <li>
+   Stop the Docker for Windows service:
+   <p>
+    <img alt="" class="internal default" height="274px" src="/_kb/images/2247-3.png" style="width: 817px; height: 274px;" width="817px"/>
+   </p>
+  </li>
+  <li>
+   Stop the
+   <code>
+    Docker for Windows.exe
+   </code>
+   process:
+   <p>
+    <img alt="" class="internal default" height="360px" src="/_kb/images/2247-4.png" style="width: 628px; height: 360px;" width="628px"/>
+   </p>
+  </li>
+  <li>
+   Navigate to
+   <code>
+    C:\Users\Username\AppData\Roaming\Docker
+   </code>
+   and either delete or rename the
+   <code>
+    settings.json
+   </code>
+   file.
+   <p>
+    <img alt="" class="internal default" height="328px" src="/_kb/images/2247-5.png" style="width: 673px; height: 328px;" width="673px"/>
+   </p>
+  </li>
+  <li>
+   Restart Docker — Your system will recognize that the Docker for Windows service is not running and will pop-up a window that allows you to start it. It will also recreate the
+   <code>
+    settings.json
+   </code>
+   file based on the default template.
+  </li>
+ </ol>
+</div>
+{% endraw %}

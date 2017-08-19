@@ -1,0 +1,273 @@
+---
+title: "Docker Datacenter"
+id: 686
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/686/
+source: https://success.docker.com/@api/deki/pages/686/contents
+tags:
+- tag: "article:topic-category"
+- tag: "product:datacenter"
+---
+{% raw %}
+<style type="text/css">
+ /*<![CDATA[*/
+.mt-dynamic-search-container {
+    text-align: center;
+}
+
+#mt-dynamic-search {
+    width: 75%;
+    font-size: 150%;
+    box-sizing: content-box;
+}
+
+.mt-dynamic-search-results {
+    z-index: 500;
+    position: absolute;
+    margin-top: 0.1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0em;
+    background-color: #fff;
+    -webkit-box-shadow: 0 8px 6px -6px black; 
+    -moz-box-shadow: 0 8px 6px -6px black; 
+    box-shadow: 0 8px 6px -6px black;
+    text-align: left;
+    display: none;
+}
+
+.mt-dynamic-search-results .mt-result-title {
+    font-size: 1.1em;
+}
+
+.mt-dynamic-search-results .mt-results-target {
+    padding: 1em;
+}
+
+.mt-dynamic-search-results .mt-result-summary {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 0.75em;
+}
+
+.mt-results-see-more {
+    display: block;
+    padding: 0 1em 1em 1em;
+    font-weight: bold;
+    text-align: center;
+}
+/*]]>*/
+</style>
+<p>
+ The Docker Datacenter subscription enables enterprises to leverage a platform built by Docker, for Docker. The Docker native tools are integrated to create an on premises CaaS platform, allowing organizations to save time and seamlessly take  applications built in dev to production.
+</p>
+<p>
+ Docker Datacenter is an integrated solution including open source software, commercial software, the integrations between them, full Docker API support, validated configurations and commercial  support for your Docker Datacenter environment. A pluggable  architecture allows flexibility in compute, networking and storage  providers used in your CaaS infrastructure without disrupting the  application code. Leverage existing technology investments with  Docker Datacenter. The open APIs allow your Docker Datacenter CaaS to easily integrate into your existing systems like LDAP/AD, monitoring, logging and more.
+</p>
+<p>
+</p>
+<div class="mt-dynamic-search-container">
+ <input class="mt-dynamic-search" id="mt-dynamic-search" placeholder="How can we help you?" type="text"/>
+</div>
+<script type="text/javascript">
+ /*<![CDATA[*/
+var MAX_RESULTS = 5;
+var SUMMARY_LENGTH = 200;
+var SEARCH_DELAY = 300
+
+function alignInputAndResults () {
+    var inputoffset = $('#mt-dynamic-search').position();
+    $('.mt-dynamic-search-results').css({ left: inputoffset['left'], position: 'absolute' });
+    
+    var inputwidth = $('#mt-dynamic-search').width();
+    $('.mt-dynamic-search-results').css({ width: inputwidth });
+//    $('.mt-dynamic-search-results').width(inputwidth);
+}
+
+$(document).ready( function() {
+    var timer = null;
+
+    // ADD ELEMENTS BELOW SEARCH INPUT - AKA SEARCH RESULTS
+    $resultbox = $('<div></div>');
+    $resultstarget = $('<div></div>');
+    $resultsmore = $('<a></a>');
+    
+    // PREPARE SEARCH RESULT ELEMENTS
+    $resultbox.addClass('mt-dynamic-search-results');
+    $resultstarget.addClass('mt-results-target');
+    $resultsmore.addClass('mt-results-see-more');
+    $resultsmore.text('More Results');
+    
+    // GROUP SEARCH RESULT ELEMENTS
+    $resultbox.append($resultstarget);
+    $resultbox.append($resultsmore);
+    
+    // POSITION SEARCH RESULT ELEMENTS
+    $('#mt-dynamic-search').after($resultbox);
+    
+    // HIDE THE SEARCH RESULTS WHEN CLICKED OUTSIDE THE RESULTS BOX
+    $('body').click(function(e) {
+        if(!e) {
+            e = window.event;
+        }
+        var x = e.target || e.srcElement;
+        if(x.id !== 'mt-dynamic-search') {
+            $('.mt-dynamic-search-results').hide();
+        }    
+    });
+    
+    // SHOW THE PREVIOUSLY SEARCHED RESULTS WHEN A USER CLICKS BACK IN THE SEARCH INPUT
+    $('#mt-dynamic-search').click(function() {
+        var query = $(this).val();
+        var empty = $('.mt-dynamic-search-results').hasClass('empty');
+
+        if(!empty && query.length >= 3) {
+            // SIZE THE SEARCH RESULT ELEMENTS
+            alignInputAndResults();
+            $('.mt-dynamic-search-results').show();
+        }
+    });
+    
+    // DISPLAY THE MATCHING SEARCH RESULTS ON KEYUP (min 3 characters)
+    // &origin= parameter added to URL for HelpRequest Analytics
+    $('#mt-dynamic-search').keyup(function() {
+        window.clearTimeout(timer); 
+        query = $(this).val();
+
+        if(query.length >= 3) {
+            timer = window.setTimeout(function() {
+                $.ajax({
+                    url: "/@api/deki/site/query?q=" + encodeURIComponent(query) + " tag:(article\:topic)&dream.out.format=json&constraint=type:(wiki -document -image - binary)&limit=" + MAX_RESULTS + "&origin=autocompletesearch",
+                    type: 'GET',
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    processResults(response);
+                })
+                .fail(function(response) {
+                    $('.mt-dynamic-search-results').hide();
+                });
+            }, SEARCH_DELAY);
+        } else {
+            $('.mt-dynamic-search-results').hide();
+        }
+    });
+});
+
+function processResults(json) {
+    var query = $("#mt-dynamic-search").val();
+    var count = json['@querycount'];
+    var entries = json.result;
+    
+    // EMPTY THE RESULTS TARGET & UPDATE THE "SHOW MORE" link
+    $('.mt-dynamic-search-results .mt-results-target').empty();
+    
+    // PROCESS RESULTS
+    if (count > 0) {
+        $(entries).each(function(entry){
+            var entry = $(this)[0];
+
+            var title = entry.title;
+            if (typeof entry.content !== 'undefined') {
+                var summary = entry.content;
+            } else {
+                summary = " ";
+            }
+            var url = entry.uri;
+
+            // reduce the summary text to predetermined max length
+            if (summary.length > SUMMARY_LENGTH) {
+                var summary = (summary.substr(0, SUMMARY_LENGTH) + "...");
+            }
+
+            // create the results content
+            $resultsumm = $('<span></span>');
+            $resultsumm.text(summary);
+            $resultsumm.addClass('mt-result-summary');
+
+            $resultlink = $('<a></a>');
+            $resultlink.prop('href',(url + '?origin=autocompletesearch'));
+            $resultlink.text(title);
+            $resultlink.addClass('mt-result-title');
+ 
+            $resultlinkbox = $('<div></div>');
+            $resultlinkbox.append($resultlink);
+            $resultlinkbox.append($resultsumm);
+
+            $('.mt-results-see-more').prop('href', '/Special:Search?q=' + encodeURIComponent(query));
+
+            // add result elements to the page
+            $('.mt-dynamic-search-results .mt-results-target').append($resultlinkbox);
+        }); 
+
+        // put results on the page
+        alignInputAndResults();
+        $('.mt-dynamic-search-results').show();
+        $('.mt-dynamic-search-results').removeClass('empty');
+    } else {
+        $('.mt-dynamic-search-results').hide();
+        $('.mt-dynamic-search-results').addClass('empty');
+    }
+};
+/*]]>*/
+</script>
+<p>
+</p>
+<div class="mt-category-container mt-subpage-listings-container noindex">
+ <ul class="mt-sortable-listings-container" data-page-id="686" data-user-can-edit="false" id="mt-sortable">
+  <li class="mt-sortable-listing mt-sortable-listing-detailed" data-page-id="689">
+   <dl class="mt-listing-detailed mt-edit-section">
+    <dt class="mt-listing-detailed-title">
+     <a class="internal" href="https://success.docker.com/Datacenter/Apply" rel="internal" title="Apply">
+      <span class="mt-icon-article-topic-guide">
+      </span>
+      Apply
+     </a>
+    </dt>
+    <dd class="mt-listing-detailed-image mt-hide-image">
+     <a class="internal" href="https://success.docker.com/Datacenter/Apply" rel="internal" title="Apply">
+      <span class="mt-sortable-listing-image mt-image-placeholder">
+       <span>
+        No image available
+       </span>
+      </span>
+     </a>
+    </dd>
+    <dd class="mt-listing-detailed-overview">
+     Get it done with tutorials, how-tos, and best practices from experienced Docker practitioners.
+    </dd>
+    <dd class="mt-listing-detailed-subpages">
+     <ul class="mt-listings-simple">
+      <li class="mt-show-more-listing">
+       <a class="mt-listing-detailed-subpage-title internal" href="https://success.docker.com/Datacenter/Apply/CI%2F%2FCD_Reference_Architecture_with_Docker" rel="internal" title="CI/CD Reference Architecture with Docker">
+        <span class="mt-icon-article-topic">
+        </span>
+        CI/CD Reference Architecture with Docker
+       </a>
+      </li>
+     </ul>
+    </dd>
+   </dl>
+  </li>
+ </ul>
+ <script id="mt-localizations-ordered-subpages" type="application/json">
+  /*<![CDATA[*/{"MindTouch.IDF3.label.drag-n-drop.placeholder":"Drag","MindTouch.IDF3.label.reveal.showAll":"Show all","MindTouch.IDF3.label.reveal.showLess":"Show less"}/*]]>*/
+ </script>
+</div>
+<script type="text/javascript">
+ /*<![CDATA[*/
+/*
+var detail_elements = $('#elm-main-content').find('.mt-listing-detailed-title').find(":contains('Update')");
+detail_elements.parent().parent().find('ul').prepend('' +
+    '<li class="mt-show-more-listing">' +
+    '    <a class="mt-listing-detailed-subpage-title" href="http://blog.docker.com/2015/12/docker-trusted-registry-online-meetup/" rel="external">Docker Trusted Registry 1.4.1 New Features Demo</a>' +
+    '</li>' +
+    '');
+*/
+/*]]>*/
+</script>
+<script data-mindtouch-module="true" src="https://success.docker.com/@cdn/deki/javascript/out/standalone/ui.widget.lsfOrderedSubpages.js" type="text/javascript">
+</script>
+{% endraw %}

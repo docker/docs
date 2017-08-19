@@ -1,0 +1,56 @@
+---
+title: "How can I remove a failed controller node from a UCP cluster?"
+id: 1257
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1257/
+source: https://success.docker.com/@api/deki/pages/1257/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-1.1.1"
+- tag: "testedon:ucp-1.1.2"
+---
+{% raw %}
+<p dir="auto">
+ To remove a failed controller from a UCP cluster, use the following steps.
+</p>
+<p dir="auto">
+ First, go to one of your controller nodes and check if the failed controller node still shows up:
+</p>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem ls /orca/v1/controllers</code></pre>
+<p>
+ You should find the failed node. Then run this command to actually remove it from the UI:
+</p>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem rm /orca/v1/controllers/&lt;node-ip&gt;</code></pre>
+<p dir="auto">
+ This should get rid of the controller node in the UI. However, you might still see references to the failed node when the ucp-controller container tries to create a PKI. In that case, remove the failed node permanently using these two commands:
+</p>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem rm /orca/v1/config/clusterca_&lt;node-ip&gt;:12381</code></pre>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem rm /orca/v1/config/clientca_&lt;node-ip&gt;:12382</code></pre>
+<p dir="auto">
+ If the failed node's Docker daemon is still running and reachable on the same network as the UCP cluster, Docker Swarm might sometimes reconnect to the same network again, and the node might be relisted with the following command:
+</p>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem ls /docker/nodes</code></pre>
+<p dir="auto">
+ If that happens, you can rejoin the node again, and then remove it once more. Alternatively, you can terminate the Docker daemon on that failed node, and then remove it again with the following command:
+</p>
+<pre>
+<code>sudo docker exec -it ucp-kv etcdctl --endpoint <a class="link-https" href="https://127.0.0.1:2379" rel="freeklink" title="https://127.0.0.1:2379">https://127.0.0.1:2379</a> --ca-file /etc/docker/ssl/ca.pem --cert-file /etc/docker/ssl/cert.pem --key-file /etc/docker/ssl/key.pem rm /docker/nodes/&lt;node-ip&gt;</code></pre>
+<p dir="auto">
+ <strong>
+  NOTE
+ </strong>
+ This procedure has been tested to work with UCP `1.1.2`. Newer versions may not work exactly like this.
+</p>
+
+{% endraw %}

@@ -1,0 +1,97 @@
+---
+title: "How can I connect to the host from inside a container?"
+id: 1232
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1232/
+source: https://success.docker.com/@api/deki/pages/1232/contents
+tags:
+- tag: "article:howto"
+- tag: "platform:mac"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ To connect to the host system from inside a container, setup a bridge network with a static IP address accessible from within the container.
+</p>
+<p>
+ For example, if your host system is Mac OS X:
+</p>
+<ol>
+ <li>
+  Go into
+  <strong>
+   Network
+  </strong>
+  under
+  <strong>
+   System Preferences
+  </strong>
+  .
+ </li>
+ <li>
+  Click on the gear icon and choose
+  <strong>
+   Manage Virtual Interfaces
+  </strong>
+  .
+ </li>
+ <li>
+  Click on the
+  <strong>
+   +
+  </strong>
+  button and choose
+  <strong>
+   New Bridge
+  </strong>
+  .
+ </li>
+ <li>
+  Give it a name and do *NOT* include any other interfaces on your system.
+ </li>
+ <li>
+  Click
+  <strong>
+   Create
+  </strong>
+  . It will appear in the list of your interfaces on the left in the
+  <strong>
+   Network
+  </strong>
+  panel.
+ </li>
+ <li>
+  Click on it, and change
+  <strong>
+   Configure IPv4
+  </strong>
+  from
+  <strong>
+   Using DHCP
+  </strong>
+  to
+  <strong>
+   Manually
+  </strong>
+  .
+ </li>
+ <li>
+  Enter an IP that will not conflict with any network you might connect to into the
+  <strong>
+   IP Address
+  </strong>
+  field. Click
+  <strong>
+   Apply
+  </strong>
+  .
+ </li>
+</ol>
+<p>
+ This works because as your traffic exits the container, the normal OSX routing rules are applied, and that IP address is locally available.
+</p>
+
+{% endraw %}

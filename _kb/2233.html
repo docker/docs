@@ -1,0 +1,40 @@
+---
+title: "Docker Universal Control Plane Windows nodes"
+id: 2233
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2233/
+source: https://success.docker.com/@api/deki/pages/2233/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "platform:windows"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Joao Fernandes";
+/*]]>*/
+</script>
+<p>
+ Before adding a Windows node to your UCP cluster, you must set up the Docker daemon on that Windows node to listen to a specific port, and you must open up certain firewall settings. You can do this by running a Powershell script that is included with UCP.
+</p>
+<p>
+ It is recommended that you run this script on every Windows node before installing UCP.
+</p>
+<p>
+ Run the script in a Powershell console:
+</p>
+<pre>
+<code>docker run --rm docker/ucp-agent-win windows-script:2.2.0 | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+</code></pre>
+<p>
+ If you'd just like to see what the script does before running it, you can run:
+</p>
+<pre>
+<code>docker run --rm docker/ucp-agent-win windows-script</code></pre>
+
+{% endraw %}

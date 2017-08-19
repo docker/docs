@@ -1,0 +1,152 @@
+---
+title: "How do I change the docker gwbridge address?"
+id: 1675
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1675/
+source: https://success.docker.com/@api/deki/pages/1675/contents
+tags:
+- tag: "article:howto"
+- tag: "component:swarm"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ The
+ <code>
+  docker_gwbridge
+ </code>
+ interface provides default gateway functionality for all containers attached to the
+ <code>
+  docker_gwbridge
+ </code>
+ network. It is created on each Docker host when they are joined to a swarm cluster.
+</p>
+<p>
+ If the IP address of the interface
+ <code>
+  docker_gwbridge
+ </code>
+ conflicts with an address on your network, it can be changed on a host-by-host basis.
+</p>
+<blockquote>
+ <strong>
+  Warning:
+ </strong>
+ Modifying an existing member of a cluster involves stopping the containers attached to the
+ <code>
+  docker_gwbridge
+ </code>
+ network.
+</blockquote>
+<p>
+ To alter the subnet of this interface, create the subnet, stop the containers attached to the
+ <code>
+  docker_gwbridge
+ </code>
+ network, remove the network, re-add it with the desired address, and restart the containers attached to it as follows (must be done on a host-by-host basis):
+</p>
+<ol>
+ <li>
+  <p>
+   List all containers on the
+   <code>
+    docker_gwbridge
+   </code>
+   network attached to this host:
+  </p>
+  <pre>
+<code>docker network inspect --format '{{range $key, $val := .Containers}} {{$key}}{{end}}' docker_gwbridge | \
+xargs -d' ' -I {} -n1 docker ps --format {{.Names}} -f id={}
+</code></pre>
+  <p>
+   If it is operationally acceptable to stop these containers, save their names to a convenience variable called so they can be restarted later.  If it is not acceptable to stop these containers, do not proceed with the procedure.
+  </p>
+  <pre>
+<code>gwbridge_users=$(docker network inspect --format '{{range $key, $val := .Containers}} {{$key}}{{end}}' docker_gwbridge | \
+xargs -d' ' -I {} -n1 docker ps --format {{.Names}} -f id={})</code></pre>
+ </li>
+ <li>
+  <p>
+   Stop all containers using the
+   <code>
+    docker_gwbridge
+   </code>
+   network using the convenience variable defined in step 1.
+  </p>
+  <pre>
+<code>echo "$gwbridge_users" | xargs docker stop
+</code></pre>
+ </li>
+ <li>
+  <p>
+   Remove the
+   <code>
+    docker_gwbridge
+   </code>
+   network:
+  </p>
+  <pre>
+<code>docker network rm docker_gwbridge
+</code></pre>
+ </li>
+ <li>
+  <p>
+   Define two shell variables,
+   <code>
+    SUBNET
+   </code>
+   and
+   <code>
+    GATEWAY
+   </code>
+   , with the desired network and gateway address:
+  </p>
+  <pre>
+<code>SUBNET=<span class="replaceabletext">172.20.0.0/20</span>
+GATEWAY=<span class="replaceabletext">172.20.0.1</span></code></pre>
+ </li>
+ <li>
+  <p>
+   Recreate the
+   <code>
+    docker_gwbridge
+   </code>
+   network using the desired prefix, setting to the desired values:
+  </p>
+  <pre>
+<code>docker network create  \
+--subnet=${SUBNET}     \
+--gateway ${GATEWAY}   \
+-o com.docker.network.bridge.enable_icc=false \ 
+-o com.docker.network.bridge.name=docker_gwbridge \
+-o com.docker.network.bridge.enable_ip_masquerade=true  
+docker_gwbridge</code>
+</pre>
+ </li>
+ <li>
+  <p>
+   (Optional) Confirm the settings on
+   <code>
+    docker_gwbridge
+   </code>
+   :
+  </p>
+  <pre>
+<code>docker network inspect docker_gwbridge --format '{{range $k, $v := index .IPAM.Config 0}}{{.| printf "%s: %s " $k}}{{end}}'
+</code></pre>
+ </li>
+ <li>
+  <p>
+   Start containers that were stopped in step 1:
+  </p>
+  <pre>
+<code>echo "$gwbridge_users" | xargs docker start
+</code></pre>
+ </li>
+</ol>
+
+{% endraw %}

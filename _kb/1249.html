@@ -1,0 +1,102 @@
+---
+title: "How to find the debug logs when a DTR push/pull fails"
+id: 1249
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1249/
+source: https://success.docker.com/@api/deki/pages/1249/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "debug logs"
+- tag: "DTR"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ If a push/pull to your DTR fails, look for information in the debug logs from the
+ <code>
+  ucp-controller
+ </code>
+ container.
+</p>
+<p>
+ To enable debug logs on the UCP controller, go to the
+ <strong>
+  Settings
+ </strong>
+ page in the UCP UI. Under the
+ <strong>
+  Logs
+ </strong>
+ Settings tab, select
+ <strong>
+  DEBUG
+ </strong>
+ from the
+ <strong>
+  LEVEL
+ </strong>
+ dropdown and click the
+ <strong>
+  Enable Remote Logging
+ </strong>
+ button. It is okay to leave the other fields blank.
+</p>
+<p>
+ Next, access a shell on the UCP Controller host. Run
+ <code>
+  docker
+ </code>
+ <code>
+  logs -f ucp-controller 2&gt;&amp;1 | ucp-controller.log
+ </code>
+ . While this runs, try the
+ <code>
+  docker push/pull ...
+ </code>
+ command that failed (using the Docker client configured to use the UCP cert bundle as before). It will fail again, but now there should be debug logs on the controller container as a result.
+</p>
+<p>
+ Next, press
+ <code>
+  Ctrl+C
+ </code>
+ in the other shell to interrupt the
+ <code>
+  docker logs -f ...
+ </code>
+ process. The
+ <code>
+  ucp-controller.log
+ </code>
+ file generated should include the debug logs from the failed push/pull.
+</p>
+<blockquote>
+ <strong>
+  NOTE:
+ </strong>
+ If you have more than one controller, for example 3 controllers, then go directly to each controller and set it — in your browser, go to
+ <code>
+  <a class="link-https" href="https://controller-ip-1" rel="freeklink" title="https://controller-ip-1">
+   https://controller-ip-1
+  </a>
+ </code>
+ ,
+ <code>
+  <a class="link-https" href="https://controller-ip-2" rel="freeklink" title="https://controller-ip-2">
+   https://controller-ip-2
+  </a>
+ </code>
+ , and
+ <code>
+  <a class="link-https" href="https://controller-ip-3" rel="freeklink" title="https://controller-ip-3">
+   https://controller-ip-3
+  </a>
+ </code>
+ and enable debugging on each one.
+</blockquote>
+
+{% endraw %}
