@@ -1,0 +1,133 @@
+---
+title: "How do I create a DTR admin user if I don't already have one?"
+id: 331
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/331/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_do_I_create_a_DTR_admin_user_if_I_don't_already_have_one?">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  When installing Docker Trusted Registry it's possible to create an admin user that does not have admin rights. This will prevent you from logging into the admin web interface. You can recover from this by running a special recovery container.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_do_I_create_a_DTR_admin_user_if_I_don't_already_have_one?">
+ <span id="Symptoms">
+ </span>
+ <h3 id="2-1">
+  Symptoms
+ </h3>
+ <p>
+  You can't log into your DTR web interface.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_do_I_create_a_DTR_admin_user_if_I_don't_already_have_one?">
+ <span id="Diagnostic_Steps">
+ </span>
+ <h3 id="2-2">
+  Diagnostic Steps
+ </h3>
+ <ol>
+  <li>
+   Point your browser to http://
+   <span class="replaceabletext">
+    &lt;dtr-host-ip&gt;/
+   </span>
+  </li>
+  <li>
+   Try logging in with the user you created during installation.
+  </li>
+  <li>
+   Access is denied.
+  </li>
+  <li>
+   However, you can confirm that the DTR admin container is still running by executing the following command on the DTR host:
+   <pre>
+<code>docker ps</code>
+</pre>
+   <p>
+    You should see output similar to the following with the status for
+    <code>
+     trusted-registry
+    </code>
+    containers showing that they are up and running:
+   </p>
+   <pre>
+<code>CONTAINER ID        IMAGE                                          COMMAND                  CREATED             STATUS                          PORTS                                      NAMES
+1ce30a0943a0        docker/trusted-registry-garant:1.4.3           "garant /config/garan"   2 hours ago         Up 2 hours                                                                 docker_trusted_registry_auth_server
+923f02f750c0        docker/trusted-registry-log-aggregator:1.4.3   "log-aggregator"         2 hours ago         Up 2 hours                                                                 docker_trusted_registry_log_aggregator
+036c069ed1f0        docker/trusted-registry-admin-server:1.4.3     "server"                 2 hours ago         Up 2 hours                      80/tcp                                     docker_trusted_registry_admin_server
+df12e70aaf35        docker/trusted-registry-nginx:1.4.3            "watcher"                2 hours ago         Up 2 hours                      0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp   docker_trusted_registry_load_balancer
+9641ff478ab7        docker/trusted-registry-index:1.4.3            "server"                 2 hours ago         Up 2 hours                                                                 docker_trusted_registry_registry_index
+f99e64c70105        postgres:9.4.1                                 "/docker-entrypoint.s"   2 hours ago         Up 2 hours                      5432/tcp                                   docker_trusted_registry_postgres
+</code>
+</pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/How_do_I_create_a_DTR_admin_user_if_I_don't_already_have_one?">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-3">
+  Resolution
+ </h3>
+ <p>
+  To solve this problem, log into the DTR admin web interface using an ambassador container, create an admin user with admin rights, and then stop the ambassador container.
+ </p>
+ <ol>
+  <li>
+   Make sure you are logged into the host that is running the DTR admin container.
+  </li>
+  <li>
+   Make sure you are logged in as a user that's a member of the
+   <code>
+    docker
+   </code>
+   group, or have root privileges. Otherwise, you may have to add the prefix
+   <code>
+    sudo
+   </code>
+   to the
+   <code>
+    docker run
+   </code>
+   command below.
+  </li>
+  <li>
+   You can run an
+   <a class="link-https" href="https://docs.docker.com/engine/admin/ambassador_pattern_linking/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/admin/ambassador_pattern_linking/">
+    ambassador container
+   </a>
+   to get temporary, insecure access to your DTR instance by executing the following command:
+   <pre>
+docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+</pre>
+  </li>
+  <li>
+   This will give you access on port 9999 to your DTR instance:
+   <code>
+    http://
+    <span class="replaceabletext">
+     &lt;dtr-host-up&gt;
+    </span>
+    :9999/admin/
+   </code>
+   .
+  </li>
+  <li>
+   Make sure you stop the ambassador container once you've given your user correct permissions.
+  </li>
+ </ol>
+</div>
+{% endraw %}

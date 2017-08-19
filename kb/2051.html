@@ -1,0 +1,62 @@
+---
+title: "When attempting to restore a UCP backup an invalid tar header error occurs"
+id: 2051
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2051/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "expires:futurerelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:devops"
+---
+{% raw %}
+<p>
+ When attempting to restore a UCP backup
+ <code>
+  tar
+ </code>
+ created with the
+ <code>
+  backup
+ </code>
+ command, the following
+ <code>
+  invalid tar header
+ </code>
+ error usually means that you are missing the passphrase:
+</p>
+<pre>
+<code>time="2017-05-08T15:33:14Z" level=info msg="Parsing backup file"
+time="2017-05-08T15:33:14Z" level=fatal msg="unable to parse backup file: [archive/tar:invalid tar header]"
+</code></pre>
+<p>
+ This issue can sometimes occur if a
+ <code>
+  backup
+ </code>
+ is encrypted with the optional passphrase flag for UCP. If the same passphrase is not provided during the restore procedure, the restore will be unable to parse the backup file.
+</p>
+<p>
+ To fix this error, ensure that you are using the
+ <code>
+  --passphrase
+ </code>
+ flag during the restore.
+</p>
+<pre>
+<code>docker run --rm -i --name ucp -v \
+/var/run/docker.sock:/var/run/docker.sock -v backup.tar:/config/backup.tar \
+docker/ucp:2.1.4 restore -i --passphrase <span class="mt-color-ff0000">&lt;your_passphrase&gt;</span>
+</code></pre>
+<blockquote>
+ A feature request has been opened to help make the
+ <code>
+  fatal msg
+ </code>
+ that appears during this issue less ambiguous. This feature should arrive in a future release of UCP.
+</blockquote>
+
+{% endraw %}

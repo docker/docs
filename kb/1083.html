@@ -1,0 +1,43 @@
+---
+title: "UCP reports it has no valid CAs. What should I do?"
+id: 1083
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1083/contents
+tags:
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "special:ownership"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When Docker Universal Control Plane is deployed in a Highly Available configuration, you may choose to replicate the Root CA certificates and private keys to zero or more controllers. During the initial Controller installation, this Root CA material is generated. If all the Controller(s) containing this Root CA material are offline, users can not download new certificate bundles, and new nodes can not be joined to the cluster until at least one Controller with the root material is available. Existing nodes and user bundles will continue to work.
+</p>
+<p>
+ To recover you should revive the initial controller, or replica with Root CA material.
+</p>
+<p>
+ If you are unable to recover this controller, you may use the
+ <code>
+  docker/ucp
+ </code>
+ tools
+ <code>
+  regen-certs
+ </code>
+ command with
+ <code>
+  --root-ca-only
+ </code>
+ , however, after regenerating the Root CA material, all users will have to download new bundles, and all nodes must be re-joined to the cluster.
+</p>
+<blockquote>
+ To learn more about the Certificate Authority features of UCP, visit
+ <a class="external" href="http://docs.docker.com/ucp/high-availability/replicate-cas/" rel="external nofollow" target="_blank">
+  http://docs.docker.com/ucp/high-availability/replicate-cas/
+ </a>
+</blockquote>
+
+{% endraw %}

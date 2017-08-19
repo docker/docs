@@ -1,0 +1,66 @@
+---
+title: "Docker Cloud Agent fail - Invalid Token"
+id: 890
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/890/contents
+tags:
+- tag: "article:topic"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Docker_Cloud_Agent_fail_-_Invalid_Token">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  If you are trying to register your own node to Docker Cloud but the registration fails with the error message
+  <span>
+   <span class="mt-font-courier-new">
+    Token is invalid
+   </span>
+   in the log, you need to generate a new BYON token.
+  </span>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Docker_Cloud_Agent_fail_-_Invalid_Token">
+ <span id="Symptoms">
+ </span>
+ <h3 id="2-1">
+  Symptoms
+ </h3>
+ <p>
+  When trying to register your own node to Docker Cloud, the following error message appears:
+ </p>
+ <pre>
+2016/03/10 09:48:10 Registering in Docker Cloud via PATCH: https://cloud.docker.com/api/agent/v1/node/a9b962b9-eee4-4029-b523-6e5729946941
+2016/03/10 09:48:11 PATCH error 401 :either UUID (a9b962b9-eee4-4029-b523-6e5729946941) or <span class="replaceabletext">Token is invalid</span>
+</pre>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/Docker_Cloud_Agent_fail_-_Invalid_Token">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-2">
+  Resolution
+ </h3>
+ <ol>
+  <li>
+   Obtain a new token by executing the following command:
+   <pre>
+docker-cloud node byo</pre>
+  </li>
+  <li>
+   This command will give you the command needed to bring your own node, including the token.
+   <pre>
+Docker Cloud lets you use your own servers as nodes to run containers. For this you have to install our agent.
+	Run the  following  command on your server:
+	
+
+	curl -Ls https://get.cloud.docker.com/ | sudo -H sh -s 63ad1c63ec5d431a9b31133e37e8a614</pre>
+  </li>
+ </ol>
+</div>
+{% endraw %}

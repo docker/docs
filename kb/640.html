@@ -1,0 +1,52 @@
+---
+title: "What should I include when opening a support ticket?"
+id: 640
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/640/contents
+tags:
+- tag: "article:question"
+- tag: "product:datacenter"
+- tag: "special:improvement"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ <span>
+  To assist you better, it is recommended that you provide a short summary of your Docker use case as well as a detailed description of the issue you are facing.
+ </span>
+</p>
+<p>
+ Additionally, it helps speed the troubleshooting process when information about your Docker configuration and host environment is provided. For Docker EE, this can be done by using a UCP support dump, which is an archive that contains UCP system logs and diagnostic information. To obtain a support dump:
+</p>
+<ol>
+ <li>
+  Log into the UCP UI with an administrator account.
+ </li>
+ <li>
+  On the top-right menu, click your username, and choose
+  <strong>
+   Support Dump
+  </strong>
+  . An archive will be downloaded via your browser after a brief time interval.
+ </li>
+</ol>
+<p>
+ If the user interface is not accessible, you may perform the following steps instead to obtain a single-node version of the UCP support dump:
+</p>
+<ol>
+ <li>
+  Obtain direct CLI access to the Docker daemon on a UCP manager node.
+ </li>
+ <li>
+  Run the CLI support tool with the following command:
+  <pre>
+docker run --rm \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:<span class="replaceabletext">2.1.4</span> \
+  support &gt; docker-support-$HOSTNAME.tgz</pre>
+ </li>
+</ol>
+
+{% endraw %}

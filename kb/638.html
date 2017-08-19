@@ -1,0 +1,117 @@
+---
+title: "Can’t access new GitHub organization for automated builds"
+id: 638
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/638/contents
+tags:
+- tag: "article:topic"
+- tag: "Automated Builds"
+- tag: "component:hub"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Can’t_access_new_GitHub_organization_for_Automated_builds">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  After creating an Automated Build from a GitHub organization and making changes, the settings aren't correct, and the GitHub organization is not accessible from Docker Hub.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Can’t_access_new_GitHub_organization_for_Automated_builds">
+ <span id="Scenario">
+ </span>
+ <h3 id="2-1">
+  Scenario
+ </h3>
+ <p>
+  Created a new organization on GitHub
+  <br/>
+  Created a repository inside the new organization
+ </p>
+ <div class="cooked">
+  <p>
+   In Docker Hub:
+   <br/>
+   - GitHub account is linked to Docker Hub for Automated Builds
+   <br/>
+   - A new repo is created for Automated Builds
+  </p>
+  <p>
+   Issue: can't see that new organization
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/Can’t_access_new_GitHub_organization_for_Automated_builds">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-2">
+  Resolution
+ </h3>
+ <p>
+  You may need to revoke the GitHub access and then request access on your repos when relinking.
+ </p>
+ <p>
+  You should do the following:
+ </p>
+ <ol>
+  <li>
+   Unlink your GitHub account at Docker Hub:
+   <a class="link-https" href="https://hub.docker.com/account/authorized-services/" rel="external nofollow" target="_blank" title="https://hub.docker.com/account/authorized-services/">
+    https://hub.docker.com/account/authorized-services/
+   </a>
+  </li>
+  <li>
+   Revoke the
+   <strong>
+    Docker Hub Registry
+   </strong>
+   application on your GitHub account:
+   <a class="link-https" href="https://github.com/settings/applications" rel="external nofollow" target="_blank">
+    https://github.com/settings/applications
+    <span class="badge badge-notification clicks" title="26 clicks">
+     26
+    </span>
+   </a>
+  </li>
+  <li>
+   Link to your GitHub account again using
+   <strong>
+    Public &amp; Private Access
+   </strong>
+   :
+   <a class="link-https" href="https://hub.docker.com/account/authorized-services/" rel="external nofollow" target="_blank" title="https://hub.docker.com/account/authorized-services/">
+    https://hub.docker.com/account/authorized-services/
+   </a>
+  </li>
+  <li>
+   On the
+   <strong>
+    Authorize Application
+   </strong>
+   page, make sure that all of the organizations you need access to have a green check mark, otherwise click the
+   <strong>
+    Request Access
+   </strong>
+   button.
+  </li>
+ </ol>
+ <p>
+  Note: There has been a change with the GitHub API, so public and private access is required at the moment. We do have an internal ticket open to fix the
+  <strong>
+   limited
+  </strong>
+  access.
+ </p>
+ <p>
+  Also, if you're using a GitHub organization, your profile on your organization's people page (
+  <a class="link-https" href="https://github.com/orgs/**your-org**/people" rel="freeklink" title="https://github.com/orgs/**your-org**/people">
+   https://github.com/orgs/**your-org**/people
+  </a>
+  ) has to be set to public.
+ </p>
+</div>
+{% endraw %}

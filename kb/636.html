@@ -1,0 +1,115 @@
+---
+title: "How do I change my Docker username?"
+id: 636
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/636/contents
+tags:
+- tag: "article:nontechnical"
+- tag: "expires:futurerelease"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Account renames have been temporarily suspended due to system migration. To change your Docker username, make a copy of your existing images, request your old Docker account to be disabled, create a new Docker username, and restore your images and Automatic Builds to your new Docker account.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_I_change_my_Docker_Hub_username?">
+ <span id="Preparation">
+ </span>
+ <h3 id="2-0">
+  Preparation
+ </h3>
+ <p>
+  Before requesting your old Docker username to be disabled:
+ </p>
+ <ol>
+  <li>
+   Download any images (and tags) you wish to keep by running the following command:
+   <code>
+    docker pull -a &lt;image&gt;
+   </code>
+  </li>
+  <li>
+   <a href="https://success.docker.com/Cloud/Solve/How_do_I_delete_a_repository%3F" rel="internal" target="_blank" title="How Do I Delete a Repository">
+    Delete all repositories
+   </a>
+   associated with your account.
+  </li>
+  <li>
+   If you have an active Docker subscription, downgrade to the free plan.
+  </li>
+  <li>
+   If you have a license key,
+   <a href="https://success.docker.com/KBase/How_do_I_download_my_Docker_license_key%3F" rel="internal" target="_blank" title="How to download your Docker license key">
+    download the key
+   </a>
+   from your Docker Hub account. The download link will no longer be available after the rename.
+  </li>
+  <li>
+   If you belong to an organization, remove yourself from the organization.
+  </li>
+  <li>
+   If you are the sole owner of an organization, either remove yourself from the organization or add someone to the "owners" team and then remove yourself from the organization.
+  </li>
+  <li>
+   Unlink your Github and Bitbucket accounts.
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_do_I_change_my_Docker_Hub_username?">
+ <span id="Renaming">
+ </span>
+ <h3 id="2-1">
+  Renaming
+ </h3>
+ <p>
+  Once you have completed the preparation steps, contact Support to disable your Docker username. If you have a current subscription, go to the
+  <a class="link-https" href="https://support.docker.com" rel="external nofollow" target="_blank" title="https://support.docker.com">
+   Docker Support Site
+  </a>
+  . Otherwise, go to the
+  <a href="/Help" rel="internal" target="_blank" title="Customer Service">
+   Customer Service Request
+  </a>
+  form.
+ </p>
+ <p>
+  Docker Support will then proceed to deactivate your account, remove the associated email addresses, and notify you when you can create a new account. Once your email address has been removed from the old account, you may then proceed with creating a new account using that email address.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/How_do_I_change_my_Docker_Hub_username?">
+ <span id="Repopulating">
+ </span>
+ <h3 id="2-2">
+  <span class="mt-font-size-20" style="color:rgb(37, 67, 86);font-family:Geomanist Book;">
+   Repopulating
+  </span>
+ </h3>
+ <p>
+  After creating your new account, you can restore images and add additional email addresses to the account.
+ </p>
+ <ol>
+  <li>
+   Run
+   <code>
+    docker tag
+   </code>
+   for all of your images with your new account name.
+  </li>
+  <li>
+   Run
+   <code>
+    docker push
+   </code>
+   for each of your images to push to your new Docker Hub account.
+  </li>
+  <li>
+   If you created any Automated Builds, recreate them on the new account.
+  </li>
+  <li>
+   Add any additional email addresses to the account.
+  </li>
+ </ol>
+</div>
+{% endraw %}

@@ -1,0 +1,88 @@
+---
+title: "When installing Docker UCP the 'Check your firewall settings' error occurs"
+id: 2015
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2015/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:devops"
+---
+{% raw %}
+<p>
+ When installing UCP the following error appears when access to required ports is denied:
+</p>
+<pre>
+<code>FATA[0036] the following required ports are blocked on your host: 12387, 4789, 12381, 12386, 443, 2376, 12379, 12380, 12376, 12382, 12383, 12384, 12385.  Check your firewall settings
+</code></pre>
+<p>
+ The error may be prefaced by the following messages:
+</p>
+<pre>
+<code>DEBU[0003] Failed again to launch port test container: Error response from daemon: driver failed programming        external connectivity on endpoint ucp-port-check-12376       (62c342d0feae5876ad4660eddcdc818c9e8eb47473eeef524639f62c05b16965):  (iptables failed: iptables --wait -t nat -A      DOCKER -p tcp -d 0/0 --dport 12376 -j DNAT --to-destination 172.17.0.8:2376 ! -i docker0: iptables: No chain/target/  match by that name. (exit status 1))</code>
+</pre>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/When_installing_Docker_UCP_the_'Check_your_firewall_settings'_error_occurs">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-0">
+  Resolution
+ </h2>
+ <p>
+  The error message produced in this issue is a general message that appears when any of the port checks UCP attempts to make during installation fail.
+ </p>
+ <ol>
+  <li>
+   To troubleshoot this issue, enable debugging during the UCP install with the
+   <code>
+    -D
+   </code>
+   flag:
+   <pre>
+<code>$ sudo docker run --rm -it \
+--name ucp -v /var/run/docker.sock:/var/run/docker.sock \
+docker/ucp install -i --host-address 10.0.168.195 -D
+</code></pre>
+  </li>
+  <li>
+   The debugging output should give you an idea of which ports are failing:
+   <pre>
+<code>DEBU[0003] Failed again to launch port test container: Error response from daemon: driver failed programming external connectivity on endpoint ucp-port-check-12376 (62c342d0feae5876ad4660eddcdc818c9e8eb47473eeef524639f62c05b16965):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 12376 -j DNAT --to-destination 172.17.0.8:2376 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1))
+</code></pre>
+  </li>
+  <li>
+   Check your firewall settings to make sure the required ports are opened.
+  </li>
+  <li>
+   You might also need to flush existing iptables then restart Docker Engine to refill the iptables with the correct
+   <code style="font-size: 14px;">
+    DOCKER
+   </code>
+   chain entries:
+   <pre>
+<code>$ sudo iptables -F &amp;&amp; sudo systemctl restart docker.service
+</code></pre>
+  </li>
+  <li>
+   Finally, attempt to install UCP again.
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/When_installing_Docker_UCP_the_'Check_your_firewall_settings'_error_occurs">
+ <span id="What's_Next">
+ </span>
+ <h2 id="1-1">
+  What's Next
+ </h2>
+ <p>
+  If these steps do not resolve your issue, see:
+  <a href="https://success.docker.com/KBase/UCP_is_unable_to_install_because_of_a_port_conflict" rel="internal">
+   UCP is unable to install because of a port conflict
+  </a>
+ </p>
+</div>
+{% endraw %}

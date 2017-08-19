@@ -1,0 +1,76 @@
+---
+title: "How do I change the location that DTR 2.0 saves images?"
+id: 1170
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1170/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-2.0.0"
+---
+{% raw %}
+<p dir="auto">
+ To change the location that DTR 2.0 uses to save image, stop DTR and Docker Engine, change the mount point, and start DTR:
+</p>
+<ol dir="ltr">
+ <li>
+  Stop DTR.
+ </li>
+ <li>
+  Find the backing location of the volume. For example, if your instance ID is
+  <code>
+   a9c967ae5ef2
+  </code>
+  , the volume will be called
+  <code>
+   dtr-registry-a9c967ae5ef2
+  </code>
+  and will be stored at
+  <code>
+   /var/lib/docker/volumes/dtr-registry-a9c967ae5ef2/_data
+  </code>
+  . You can verify the volume name and location using the following 2 commands:
+  <pre>
+<code>docker volume ls
+docker volume inspect</code></pre>
+ </li>
+ <li>
+  Stop Docker Engine. Usually this can be done with one of the following commands, depending on your operating system:
+  <pre>
+<code>sudo systemctl stop docker.service
+sudo service docker stop</code></pre>
+ </li>
+ <li>
+  Next, do a bind mount to this location. For example, to make
+  <code>
+   /opt/bigdisk
+  </code>
+  the backing store for the volume:
+  <pre>
+<code>mount -o bind /opt/bigdisk /var/lib/docker/volumes/dtr-registry-a9c967ae5ef2/_data</code></pre>
+ </li>
+ <li>
+  Add this bind mount to your
+  <code>
+   /etc/fstab
+  </code>
+  so it will be in place on a reboot.
+ </li>
+ <li>
+  Restart Docker Engine. DTR will be started by up automatically with Engine:
+  <pre>
+<code>sudo systemctl start docker.service
+sudo service docker start</code></pre>
+ </li>
+ <li>
+  The named volume should be backed by your new location. Verify with the following commands as before:
+  <pre>
+<code>docker volume ls
+docker volume inspect</code></pre>
+ </li>
+</ol>
+
+{% endraw %}

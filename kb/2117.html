@@ -1,0 +1,44 @@
+---
+title: "Trouble stopping Docker Cloud from spawning nodes on AWS after adding/creating a swarm"
+id: 2117
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2117/contents
+tags:
+- tag: "article:question"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ <strong>
+  Issue
+ </strong>
+</p>
+<p>
+ Trouble stopping Docker Cloud from spawning nodes on AWS after adding/creating a swarm.
+</p>
+<p>
+ <strong>
+  Diagnostics
+ </strong>
+</p>
+<p>
+ Unregistered swarm from Docker Cloud and removed the access permissions in the settings. They simply get re-created when removed in AWS.
+</p>
+<p>
+ <strong>
+  Resolution
+ </strong>
+</p>
+<p>
+ Unregistering a swarm from Docker Cloud will not terminate the swarm. You must directly access the swarm to terminate it.
+</p>
+<blockquote>
+ Docker for AWS creates auto scaling groups, so you will need to destroy the stack created in the CloudFormation section. As of now, from Docker Cloud we do not remove swarms in the provider.
+</blockquote>
+<p>
+ Terminating a swarm from Docker Cloud will terminate the swarm on the corresponding provider.
+</p>
+
+{% endraw %}

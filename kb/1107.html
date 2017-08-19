@@ -1,0 +1,108 @@
+---
+title: "Getting unauthorized: authentication required when trying to push image to DTR"
+id: 1107
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1107/contents
+tags:
+- tag: "article:topic"
+- tag: "component:dtr"
+- tag: "expires:futurerelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-1.4.0"
+- tag: "testedon:dtr-1.4.1"
+- tag: "testedon:dtr-1.4.2"
+- tag: "testedon:dtr-1.4.3"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin='KBase/Getting_"unauthorized:_authentication_required"_when_trying_to_push_image_to_DTR'>
+ <span id="Overview">
+ </span>
+ <h1 id="0-0">
+  Overview
+ </h1>
+ <p>
+  When trying to push an image to DTR even after successfully logging in, I get:
+ </p>
+ <pre>
+<code>unauthorized: authentication required</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin='KBase/Getting_"unauthorized:_authentication_required"_when_trying_to_push_image_to_DTR'>
+ <span id="Resolution">
+ </span>
+ <h1 id="0-1">
+  Resolution
+ </h1>
+ <p>
+  It is possible that the way you are trying to push the image is incorrect. One important thing to note is that with DTR version 1.4.x, you need to create the repositories with UI/API calls before you can actually push to DTR.
+  <br/>
+  <br/>
+  For example, to push your custom image
+  <code>
+   test
+  </code>
+  :
+ </p>
+ <ul>
+  <li>
+   First go to WebUI and create a repo named
+   <code>
+    test
+   </code>
+   under
+   <code>
+    admin
+   </code>
+   (i.e.
+   <code>
+    admin/test
+   </code>
+   )
+  </li>
+  <li>
+   <code>
+    docker pull busybox
+   </code>
+  </li>
+  <li>
+   <code>
+    docker tag busybox
+    <span class="replaceabletext">
+     &lt;your-dtr-instance&gt;
+    </span>
+    /admin/test:tag1
+   </code>
+  </li>
+  <li>
+   <code>
+    docker push
+    <span class="replaceabletext">
+     &lt;your-dtr-instance&gt;
+    </span>
+    /admin/test:tag1
+   </code>
+  </li>
+ </ul>
+ <p>
+  If you need to push a new image, say
+  <strong>
+   my-busybox
+  </strong>
+  , then you will first need to create it using Web UI or API calls, under the proper user/organization, and then push the image using:
+ </p>
+ <pre>
+<code>docker push <span class="replaceabletext">&lt;your-dtr-instance&gt;</span>/<span class="replaceabletext">&lt;user-name&gt;</span>/my-busybox</code></pre>
+ <p>
+  With DTR 1.4.x and above, the repository must be created from the UI or API first. Creating repositories on push are disallowed for the following reasons:
+ </p>
+ <ol>
+  <li>
+   To discourage security leaks where a private image is accidentally pushed to a non-existent repository, thus created as a public repository
+  </li>
+  <li>
+   To prevent the accidental creation of repositories due to a typo
+  </li>
+ </ol>
+</div>
+{% endraw %}

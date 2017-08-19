@@ -305,21 +305,31 @@ guides:
     title: Link via an ambassador container
 - sectiontitle: Manage application data
   section:
-    - path: /engine/admin/volumes/
-      title: Storage overview
-    - path: /engine/admin/volumes/volumes/
-      title: Volumes
-    - path: /engine/admin/volumes/bind-mounts/
-      title: Bind mounts
-    - path: /engine/admin/volumes/tmpfs/
-      title: tmpfs mounts
-    - path: /engine/userguide/storagedriver/
-      title: Container storage drivers
-      nosync: true
-- sectiontitle: Troubleshoot Docker Engine
-  section:
+  - path: /engine/admin/volumes/
+    title: Storage overview
+  - path: /engine/admin/volumes/volumes/
+    title: Volumes
+  - path: /engine/admin/volumes/bind-mounts/
+    title: Bind mounts
+  - path: /engine/admin/volumes/tmpfs/
+    title: tmpfs mounts
+  - path: /engine/userguide/storagedriver/
+    title: Container storage drivers
+    nosync: true
   - path: /engine/admin/troubleshooting_volume_errors/
     title: Troubleshoot volume problems
+- sectiontitle: Migrate to Docker
+  section:
+  - title: "Part 1: Overview of migration process"
+    path: /mta/
+  - title: "Part 2: Containerizing application components"
+    path: /mta/containerizing-components/
+  - title: "Part 3: Infrastructure considerations"
+    path: /mta/infrastructure-considerations/
+  - title: "Part 4: Modern methodologies and automation"
+    path: /mta/modern-methodologies-automation/
+  - title: "Part 5: Migrating to microservices"
+    path: /mta/migrating-microservices/
 - sectiontitle: Manage a swarm
   section:
   - path: /engine/swarm/
@@ -422,6 +432,22 @@ guides:
     path: /engine/extend/config/
   - path: /engine/extend/plugin_api/
     title: Plugins API
+- sectiontitle: "Reference architectures"
+  section:
+  - title: Designing Scalable, Portable Docker Container Networks
+    path: /kb/2046/
+  - title: Development Pipeline Best Practices Using Docker EE
+    path: /kb/1885/
+  - title: Docker EE Best Practices and Design Considerations
+    path: /kb/1911/
+  - title: Docker Logging Design and Best Practices
+    path: /kb/2238/
+  - title: Securing Docker EE and Security Best Practices
+    path: /kb/1908/
+  - title: Service Discovery and Load Balancing with Docker Universal Control Plane (UCP)
+    path: /kb/1421/
+  - title: Universal Control Plane 2.0 Service Discovery and Load Balancing
+    path: /kb/1960/
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/

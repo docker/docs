@@ -1,0 +1,55 @@
+---
+title: "ID duplicated error message when adding a node to UCP and the status is Pending"
+id: 2085
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2085/contents
+tags:
+- tag: "article:errors"
+- tag: "component:csengine"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/ID_duplicated_error_message_when_adding_a_node_to_UCP_and_the_status_is_Pending">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  When trying to add a node to a cluster,  the following error occurs with the status of the node showing pending in the UCP UI:
+ </p>
+ <pre>
+<code>ID duplicated</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/ID_duplicated_error_message_when_adding_a_node_to_UCP_and_the_status_is_Pending">
+ <span id="Solution">
+ </span>
+ <h2 id="1-1">
+  Solution
+ </h2>
+ <p>
+  Most likely what has happened is the Engine IDs have been duplicated, prior to joining the UCP Swarm cluster. In most cases, this is a consequence of cloning VMs with Engine already installed. The Engine ID is generated on Docker's first run and stored in
+  <code>
+   /etc/docker/key.json
+  </code>
+  . When creating a VM template, make sure
+  <code>
+   /etc/docker/key.json
+  </code>
+  is
+  <i>
+   not
+  </i>
+  included in the image.
+ </p>
+ <p>
+  To recover the existing installation, remove
+  <code>
+   /etc/docker/key.json
+  </code>
+  and restart Docker on each node.
+ </p>
+</div>
+{% endraw %}
