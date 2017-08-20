@@ -318,7 +318,7 @@ guides:
     nosync: true
   - path: /engine/admin/troubleshooting_volume_errors/
     title: Troubleshoot volume problems
-- sectiontitle: Migrate to Docker
+- sectiontitle: Migrate Traditional Apps
   section:
   - title: "Part 1: Overview of migration process"
     path: /mta/
@@ -330,6 +330,14 @@ guides:
     path: /mta/modern-methodologies-automation/
   - title: "Part 5: Migrating to microservices"
     path: /mta/migrating-microservices/
+  - sectiontitle: Guides for migrating specific stacks
+    section:
+    - title: Azure/Microsoft stack
+      path: /mta/stacks/azure/
+    - title: Oracle stack
+      path: /mta/stacks/oracle/
+    - title: SAP stack
+      path: /mta/stacks/sap/
 - sectiontitle: Manage a swarm
   section:
   - path: /engine/swarm/
