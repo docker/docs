@@ -29,6 +29,7 @@ for page in soup.find_all('page'):
         fileout += 'deleted: '  + page['deleted'] + '\n'
         fileout += 'layout: docs\n'
         fileout += 'permalink: /kb/' + page['id'] + '/\n'
+        fileout += 'originalpath: ' + page.find('uri.ui').string + '\n'
         fileout += 'source: https://success.docker.com/@api/deki/pages/' + page['id'] + '/contents' + '\n'
         fileout += 'tags:' + '\n'
         for thistag in metadatasoup.find_all('tag'):
@@ -62,6 +63,14 @@ for page in soup.find_all('page'):
                 if thisin['href'][0]=="#":
                     if thisin.parent.parent.name=="ol":
                         thisin.parent.parent.extract()
+        # rewrite links
+        for link in rawhtml.find_all('a'):
+            if link.has_attr('href'):
+                link['href'] = link['href'].replace('https://docs.docker.com','')
+                for thisPage in soup.find_all('page'):
+                    if link['href'] in thisPage.find('uri.ui').string:
+                        print link['href'] + ' changed to: ' + '/kb/' +  thisPage['id'] + '/'
+                        link['href'] = '/kb/' +  thisPage['id'] + '/'
         # save all images
         user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
         headers = { 'User-Agent' : user_agent }
