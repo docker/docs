@@ -311,6 +311,34 @@ those used by other software.
         - "com.example.department=Finance"
         - "com.example.label-with-empty-value"
 
+#### network
+
+> **Note:** This option is new in v3.4
+
+Set the network containers will connect to for the `RUN` instructions during
+build.
+
+    build:
+      context: .
+      network: host
+
+
+    build:
+      context: .
+      network: custom_network_1
+
+#### target
+
+> **Note:** This option is new in v3.4
+
+Build the specified target as defined inside the `Dockerfile`. See the
+[multi-stage build docs](engine/userguide/eng-image/multistage-build.md) for
+details.
+
+      build:
+        context: .
+        target: prod
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -1861,6 +1889,24 @@ conflicting with those used by other software.
       - "com.example.department=IT/Ops"
       - "com.example.label-with-empty-value"
 
+### name
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34)
+
+Set a custom name for this volume.
+
+    version: '3.4'
+    volumes:
+      data:
+        name: my-app-data
+
+It can also be used in conjuction with the `external` property:
+
+    version: '3.4'
+    volumes:
+      data:
+        external: true
+        name: my-app-data
 
 ## Network configuration reference
 

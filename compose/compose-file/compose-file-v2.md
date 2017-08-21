@@ -46,6 +46,64 @@ full details.
 This section contains a list of all configuration options supported by a service
 definition in version 2.
 
+### blkio_config
+
+A set of configuration options to set block IO limits for this service.
+
+    version: '2.2'
+    services:
+      foo:
+        image: busybox
+        blkio_config:
+          weight: 300
+          weight_device:
+            - path: /dev/sda
+              weight: 400
+          device_read_bps:
+            - path: /dev/sdb
+              rate: '12mb'
+          device_read_iops:
+            - path: /dev/sdb
+              rate: 120
+          device_write_bps:
+            - path: /dev/sdb
+              rate: '1024k'
+          device_write_iops:
+            - path: /dev/sdb
+              rate: 30
+
+#### device_read_bps, device_write_bps
+
+Set a limit in bytes per second for read / write operations on a given device.
+Each item in the list must have two keys:
+
+* `path`, defining the symbolic path to the affected device
+* `rate`, either as an integer value representing the number of bytes or as
+  a string expressing a [byte value](#specifying-byte-values).
+
+#### device_read_iops, device_write_iops
+
+Set a limit in operations per second for read / write operations on a given
+device. Each item in the list must have two keys:
+
+* `path`, defining the symbolic path to the affected device
+* `rate`, as an integer value representing the permitted number of operations
+  per second.
+
+#### weight
+
+Modify the proportion of bandwidth allocated to this service relative to other
+services. Takes an integer value between 10 and 1000, with 500 being the
+default.
+
+#### weight_device
+
+Fine-tune bandwidth allocation by device. Each item in the list must have
+two keys:
+
+* `path`, defining the symbolic path to the affected device
+* `weight`, an integer value between 10 and 1000
+
 ### build
 
 Configuration options that are applied at build time.
@@ -182,8 +240,14 @@ build.
 
 > Added in [version 2.3](compose-versioning.md#version-23) file format
 
-Sets the name of the build-stage to build in a
-[multi-stage Dockerfile](/engine/userguide/eng-image/multistage-build.md).
+
+Build the specified stage as defined inside the `Dockerfile`. See the
+[multi-stage build docs](engine/userguide/eng-image/multistage-build.md) for
+details.
+
+      build:
+        context: .
+        target: prod
 
 ### cap_add, cap_drop
 
@@ -546,8 +610,9 @@ for details on how healthchecks work.
       interval: 1m30s
       timeout: 10s
       retries: 3
+      start_period: 40s
 
-`interval` and `timeout` are specified as
+`interval`, `timeout` and `start_period` are specified as
 [durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
@@ -566,6 +631,9 @@ true`. This is equivalent to specifying `test: ["NONE"]`.
 
     healthcheck:
       disable: true
+
+> **Note**: The `start_period` option is a more recent feature and is only
+> available with the [2.3 file format](compose-versioning.md#version-23).
 
 ### image
 
@@ -1071,6 +1139,21 @@ format that looks like this:
 
 The supported units are `us`, `ms`, `s`, `m` and `h`.
 
+## Specifying byte values
+
+Some configuration options, such as the `device_read_bps` sub-option for
+[`blkio_config`](#blkioconfig), accept a byte value as a string in a format
+that looks like this:
+
+    2b
+    1024kb
+    2048k
+    300m
+    1gb
+
+The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
+`mb` and `gb`. Please note that decimal values are not supported at this time.
+
 ## Volume configuration reference
 
 While it is possible to declare volumes on the fly as part of the service
@@ -1084,7 +1167,7 @@ Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
 up:
 
-    version: "3"
+    version: "2.2"
 
     services:
       db:
@@ -1155,6 +1238,9 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-volume
 
+> **Note**: In newer versions of Compose, the `external.name` property is
+> deprecated in favor of simply using the `name` property.
+
 ### labels
 
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
@@ -1176,6 +1262,25 @@ conflicting with those used by other software.
       - "com.example.department=IT/Ops"
       - "com.example.label-with-empty-value"
 
+
+### name
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21)
+
+Set a custom name for this volume.
+
+    version: '2.1'
+    volumes:
+      data:
+        name: my-app-data
+
+It can also be used in conjuction with the `external` property:
+
+    version: '2.1'
+    volumes:
+      data:
+        external: true
+        name: my-app-data
 
 ## Network configuration reference
 

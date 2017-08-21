@@ -46,7 +46,7 @@ There are currently three versions of the Compose file format:
 - Version 1, the legacy format. This is specified by
 omitting a `version` key at the root of the YAML.
 
-- Version 2.x. This is specified with a `version: '2'` or `version: '2.1'` entry at the root of the YAML.
+- Version 2.x. This is specified with a `version: '2'` or `version: '2.1'`, etc., entry at the root of the YAML.
 
 - Version 3.x, the latest and recommended version, designed to
 be cross-compatible between Compose and the Docker Engine's
@@ -197,6 +197,7 @@ Introduces the following additional parameters:
 - [`isolation`](compose-file-v2.md#isolation)
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
   [networks](compose-file-v2.md#network-configuration-reference)
+- `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
@@ -217,12 +218,13 @@ Introduces the following additional parameters:
 ### Version 2.3
 
 An upgrade of [version 2.2](#version-22) that introduces new parameters only
-available with Docker Engine version **17.06+**.  Version 2.3 files are
-supported by **Compose 17.06+**.
+available with Docker Engine version **17.06.0+**. Version 2.3 files are
+supported by **Compose 1.16.0+**.
 
 Introduces the following additional parameters:
 
-- [`target`](compose-file-v2.md#target)
+- [`target`](compose-file-v2.md#target) for [build configurations](compose-file-v2.md#build)
+- `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 
 ### Version 3
 
@@ -248,6 +250,16 @@ Introduces the following additional parameters:
 - [`credential_spec`](/compose/compose-file/index.md#credentialspec)
 - [`configs`](/compose/compose-file/index.md#configs)
 - [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
+
+### Version 3.4
+
+An upgrade of [version 3](#version-3).
+
+Introduces the following additional parameters:
+
+- [build `target` and `network`](/compose/compose-file/index.md#build)
+- `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
+- `order` for [`update_config`](/compose/compose-file/index.md#updateconfig) in `deploy`.
 
 ## Upgrading
 
