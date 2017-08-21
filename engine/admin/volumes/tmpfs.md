@@ -5,7 +5,7 @@ keywords: storage, persistence, data persistence, tmpfs
 ---
 
 [Volumes](volumes.md) and [bind mounts](bind-mounts.md) are mounted into the
-container's filesystem by default, and their contents are stored on on the host
+container's filesystem by default, and their contents are stored on the host
 machine.
 
 There may be cases where you do not want to store a container's data on the host
