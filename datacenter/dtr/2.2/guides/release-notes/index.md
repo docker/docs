@@ -12,6 +12,26 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.8
+
+(24 August 2017)
+
+**New features**
+
+* Added UI support to configure if users should be redirected to the storage
+backend when pulling and pushing images.
+
+**Bugs fixed**
+
+* High severity:
+  * Fixed issue with bootstrapper operations on UCP 2.2.0 (the issue is fixed in
+  UCP 2.2.1 as well).
+  * Fixed issue where containers would stop watching for new configuration and
+  needed to be manually restarted.
+* Low severity:
+  * Improved validations when installing DTR, to prevent installing DTR on
+  old kernels with known bugs.
+
 ## DTR 2.2.7
 
 (17 July 2017)
