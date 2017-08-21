@@ -50,7 +50,7 @@ Use the following tables to choose the best installation path for you.
 {% include docker_cloud_matrix.md %}
 
 See also [Docker Cloud](#docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
+Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
 
 ### Server
 
