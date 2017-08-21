@@ -568,7 +568,7 @@ Full discussion of `iptables` is out of scope for this topic. To see which
 tables exist, and you can list a specific table, such as `nat`, `prerouting`, or
 `postrouting`, using a command such as `iptables -t nat -L`. For full
 documentation about `iptables`, see
-[netflilter/iptables](https://netfilter.org/documentation/){: target="_blank" class="_" }.
+[netfilter/iptables](https://netfilter.org/documentation/){: target="_blank" class="_" }.
 
 Typically, `iptables` rules are created by an initialization script or a daemon
 process such as `firewalld`. The rules do not persist across a system reboot, so
