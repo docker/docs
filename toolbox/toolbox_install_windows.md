@@ -125,7 +125,7 @@ installer.
 
 ## Step 3: Verify your installation
 
-The installer places Docker Toolbox, VirtualBox, and Kitematic in your
+The installer adds Docker Toolbox, VirtualBox, and Kitematic to your
 **Applications** folder. In this step, you start Docker Toolbox and run a simple
 Docker command.
 
