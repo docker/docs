@@ -15,9 +15,9 @@ versions of the binaries on the [docker/machine release
 page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
 on GitHub.
 
-## Installing Machine Directly
+## Installing Machine directly
 
-1.  Install [the Docker binary](/engine/installation/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
