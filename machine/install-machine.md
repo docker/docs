@@ -44,7 +44,7 @@ curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machi
 chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
-    > The above command will work on Windows _only if_ you use a
+    > The above command will work on Windows only if you use a
     terminal emulater such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
 
