@@ -77,9 +77,10 @@ To verify your machine meets these requirements, do the following:
     <br><br>
 3. Verify your Windows OS is 64-bit (x64)
 
-   How you do this verification depends on your Windows version.  For details, see the Windows
-    article [How to determine whether a computer is running a 32-bit version or 64-bit version
-    of the Windows operating system](https://support.microsoft.com/en-us/kb/827218).
+   How you do this verification depends on your Windows version.  
+   For details, see the Windows article [How to determine whether
+   a computer is running a 32-bit version or 64-bit version of the
+   Windows operating system](https://support.microsoft.com/en-us/kb/827218).
 
 ## Step 2: Install Docker Toolbox
 
@@ -95,7 +96,7 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-1. Go to the <a href="https://www.docker.com/toolbox" target="_blank">Docker Toolbox</a> page.
+1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
 
 2. Click the installer link to download.
 
@@ -124,14 +125,15 @@ installer.
 
 ## Step 3: Verify your installation
 
-The installer places Docker Toolbox and VirtualBox in your **Applications** folder.
-In this step, you start Docker Toolbox and run a simple Docker command.
+The installer adds Docker Toolbox, VirtualBox, and Kitematic to your
+**Applications** folder. In this step, you start Docker Toolbox and run a simple
+Docker command.
 
-1. On your Desktop, find the Docker Toolbox icon.
+1. On your Desktop, find the Docker QuickStart Terminal icon.
 
     ![Desktop](images/icon-set.png)
 
-2. Click the icon to launch a Docker Toolbox terminal.
+2. Click the Docker QuickStart icon to launch a pre-configured Docker Toolbox terminal.
 
     If the system displays a **User Account Control** prompt to allow VirtualBox to make changes to your computer. Choose **Yes**.
 
