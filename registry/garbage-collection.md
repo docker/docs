@@ -72,7 +72,7 @@ collection. Layer `a` had one reference removed but will not be garbage
 collected as it is still referenced by manifest `A`. The blob representing
 manifest `B` will also be eligible for garbage collection.
 
-After garbage collection has been run manifest `A` and its blobs remain.
+After garbage collection has been run, manifest `A` and its blobs remain.
 
 ```
 A -----> a
@@ -80,7 +80,7 @@ A -----> a
 ```
 
 
-## How Garbage Collection works
+## How Garbage Collection works?
 
 Garbage collection runs in two phases. First, in the 'mark' phase, the process
 scans all the manifests in the registry. From these manifests, it constructs a
@@ -90,7 +90,7 @@ the blobs and if a blob's content address digest is not in the mark set, the
 process will delete it.
 
 
-> **NOTE**: You should ensure that the registry is in read-only mode or not running at
+> **Note**: You should ensure that the registry is in read-only mode or not running at
 > all. If you were to upload an image while garbage collection is running, there is the
 > risk that the image's layers will be mistakenly deleted, leading to a corrupted image.
 
@@ -100,7 +100,7 @@ action and this manual process will no longer apply.
 
 
 
-# Running garbage collection
+## Run garbage collection
 
 Garbage collection can be run as follows
 
