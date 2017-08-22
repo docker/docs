@@ -50,7 +50,7 @@ verify its contents:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --rm -i --name ucp \
+$ docker container run --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
 
@@ -65,7 +65,7 @@ following example:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --rm -i --name ucp \
+$ docker container run --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive \
   --passphrase "secret" > /tmp/backup.tar

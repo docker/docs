@@ -83,7 +83,7 @@ command, replacing the placeholders for the real values:
 
 ```none
 read -sp 'ucp password: ' UCP_PASSWORD; \
-docker run -i --rm \
+docker run --log-driver none -i --rm \
   --env UCP_PASSWORD=$UCP_PASSWORD \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} backup \
   --ucp-url <ucp-url> \
