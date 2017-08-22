@@ -9,7 +9,7 @@ Create a backup of DTR
 ## Usage
 
 ```bash
-docker run -i --rm docker/dtr \
+docker run --log-driver none -i --rm docker/dtr \
     backup [command options] > backup.tar
 ```
 
