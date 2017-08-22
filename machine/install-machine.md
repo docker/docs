@@ -1,6 +1,6 @@
 ---
 description: How to install Docker Machine
-keywords: machine, orchestration, install, installation, docker, documentation
+keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine
 title: Install Docker Machine
 ---
 
@@ -76,7 +76,7 @@ PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 
 You can find additional documentation in the comments at the [top of each script](https://github.com/docker/machine/tree/master/contrib/completion/bash){: target="_blank" class="_"}.
 
-### How to uninstall
+### How to uninstall Docker Machine
 
 To uninstall Docker Machine:
 
