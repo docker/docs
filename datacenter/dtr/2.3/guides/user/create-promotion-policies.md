@@ -1,9 +1,11 @@
 ---
-title: Create deployment polices
-description: Learn how to create a deployment policies that can automatically
+title: Create promotion polices
+description: Learn how to create a promotion policies that can automatically
   promote an image to production if it passes all tests and doesn't have
   vulnerabilities.
 keywords: registry, promotion, pipeline
+redirect_from:
+- /datacenter/dtr/2.3/guides/user/create-deployment-policies/
 ---
 
 Once you've made changes to your application and want to make them available

@@ -2008,8 +2008,8 @@ manuals:
             title: Manage trusted repositories
       - path: /datacenter/dtr/2.3/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
-      - path: /datacenter/dtr/2.3/guides/user/create-deployment-policies/
-        title: Create deployment policies
+      - path: /datacenter/dtr/2.3/guides/user/create-promotion-policies/
+        title: Create promotion policies
     - path: /datacenter/dtr/2.3/reference/api/
       title: API reference
     - path: /datacenter/dtr/2.3/guides/release-notes/
