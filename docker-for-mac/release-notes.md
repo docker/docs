@@ -445,7 +445,7 @@ events or unexpected unmounts.
 - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
 - Linux Kernel 4.9.38
 
-  **New**
+**New**
 
 - Transparent proxy using macOS system proxies (if defined) directly
 - GUI settings are now stored in `~/Library/Group\ Containers/group.com.docker/settings.json`. `daemon.json` in now a file in `~/.docker/`
