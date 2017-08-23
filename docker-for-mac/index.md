@@ -53,7 +53,7 @@ docker-machine version 0.10.0, build 76ed2a6
     Docker is working as expected.
 
 	  Some good commands to try are `docker version` to check that you have the
-    latest release installed, and `docker ps` and `docker run hello-world` to
+    latest release installed, and `docker ps` and `docker login` and `docker run hello-world` to
     verify that Docker is running.
 
 2.  For something more adventurous, start a Dockerized web server.
