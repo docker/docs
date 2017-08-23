@@ -27,7 +27,7 @@ The new solutions come with their own native virtualization solutions rather
 than Oracle VirtualBox, so keep the following considerations in mind when using
 Machine to create local VMs.
 
-* **Docker for Mac** - You can use `docker-machine create` with the `virtualbox` driver to create additional local machines.
+* **Docker for Mac** - You can use `docker-machine create` with the `xhyve` or `virtualbox` driver to create additional local machines.
 
 * **Docker for Windows** - You can use `docker-machine create` with the `hyperv` driver to create additional local machines.
 
@@ -55,15 +55,21 @@ lightweight macOS virtualization solution built on top of the
 [Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
 10.10 Yosemite and higher.
 
-Currently, there is no `docker-machine create` driver for HyperKit, so you will
-use `virtualbox` driver to create local machines. (See the [Docker Machine
-driver for Oracle VirtualBox](drivers/virtualbox.md).) Note that you can run
-both HyperKit and Oracle VirtualBox on the same system. To learn more, see
-[Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
+Mac docker-machine can use HyperKit driver, you must first install him.
 
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
-  correctly installed on your system (either as part of an earlier Toolbox install,
-  or manual install).
+```
+$ brew install docker-machine-driver-xhyve
+
+# docker-machine-driver-xhyve need root owner and uid
+$ sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+$ sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+```
+
+Then use the `docker-machine create --driver=xhyve` to create your machine .
+
+If you want to use virtualbox driver. See the Docker Machine driver for Oracle VirtualBox. Note that you can run both HyperKit and Oracle VirtualBox on the same system. To learn more, see Docker for Mac vs. Docker Toolbox.
+
+- Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="blank" class=""} correctly installed on your system (either as part of an earlier Toolbox install, or manual install).
 
 #### If you are using Docker Toolbox
 
