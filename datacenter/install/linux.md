@@ -53,6 +53,8 @@ for any necessary configuration values.
 
 [Learn more about the UCP installation](../ucp/2.2/guides/admin/install/index.md).
 
+>**What about Windows?** When you have UCP installed, you can
+[join Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
 
 ### Step 3: License your installation
 

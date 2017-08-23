@@ -1,6 +1,6 @@
 ---
 description: How to install Docker EE for Windows
-keywords: windows, windows server, install, download
+keywords: Windows, Windows Server, install, download, ucp, Docker EE
 title: Install Docker Enterprise Edition for Windows Server 2016
 redirect_from:
 - /docker-ee-for-windows/install/
@@ -16,12 +16,19 @@ install Docker EE.
 versions here](https://docs.docker.com/release-notes/) or subscribe to the
 [releases feed on the Docker Blog](http://blog.docker.com/category/engineering/docker-releases/).
 
+## Docker Universal Control Plane and Windows
+
+With Docker EE, your Windows nodes can join swarms that are managed
+by Docker Universal Control Plane (UCP). When you have Docker EE installed
+on Windows Server 2016 and you have a
+[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can 
+[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/). 
+
 ## Install Docker EE
 
 Docker EE for Windows requires Windows Server 2016. See
 [What to know before you install](#what-to-know-before-you-install) for a
-full list of prerequisites. To install Docker Community Edition (*Docker CE*)
-on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/install.md).
+full list of prerequisites.
 
 1.  Open a PowerShell command prompt, and type the following commands.
 
