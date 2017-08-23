@@ -6,6 +6,20 @@ title: Docker for Azure Release Notes
 
 {% include d4a_buttons.md %}
 
+## Enterprise Edition
+[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}
+
+[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
+
+### 17.06 EE
+
+- Docker engine 17.06 EE
+- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank"}
+
+### 17.03 EE
+
+- Docker engine 17.03 EE
+
 ## Stable channel
 
 ### 17.06.0 CE
