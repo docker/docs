@@ -5,7 +5,7 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-{% assign composeversion = '0.15.0' %}
+{% assign composeversion = '1.15.0' %}
 
 You can run Compose on macOS, Windows and 64-bit Linux.
 
