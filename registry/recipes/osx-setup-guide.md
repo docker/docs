@@ -44,6 +44,7 @@ If you want to understand, you should read [How to Write Go Code](https://golang
 ## Build the binary
 
     GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
+    sudo mkdir -p /usr/local/libexec
     sudo cp bin/registry /usr/local/libexec/registry
 
 ## Setup
