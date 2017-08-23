@@ -32,10 +32,12 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
     PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force
     PS> Restart-Computer -Force
     ```
-2.  Update your Windows 
+2.  Update your Windows configuration.
+
     ```ps
     PS> sconfig
     ```
+    
     Select option `6) Download and Install Updates`.  Swarm requires update [KB4015217](
     https://support.microsoft.com/en-us/help/4015217/windows-10-update-kb4015217)
      
@@ -57,7 +59,6 @@ on a Windows 10 machine, see [Install Docker for Windows](/docker-for-windows/in
     This message shows that your installation appears to be working correctly.
     <snip>
     ```
-
 
 ## Use a script to install Docker EE
 
