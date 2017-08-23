@@ -95,8 +95,6 @@ for any necessary configuration values.
 Once the upgrade finishes, navigate to the UCP web UI and make sure that
 all the nodes managed by UCP are healthy.
 
-![](../../images/upgrade-ucp-4.png)
-
 ## Where to go next
 
 * [UCP release notes](../../release-notes/index.md)
