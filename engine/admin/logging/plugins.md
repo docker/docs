@@ -34,7 +34,7 @@ After the plugin is installed, you can configure a container to use the plugin
 as its logging driver by specifying the `--log-driver` flag to `docker run`, as
 detailed in the
 [logging overview](overview.md#configure-the-logging-driver-for-a-container).
-If the logging driver supports additional options, you an specify them using
+If the logging driver supports additional options, you can specify them using
 one or more `--log-opt` flags with the option name as the key and the option
 value as the value.
 
