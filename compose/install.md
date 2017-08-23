@@ -5,6 +5,8 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
+{% assign composeversion = '0.15.0' %}
+
 You can run Compose on macOS, Windows and 64-bit Linux.
 
 ## Prerequisites
@@ -72,11 +74,11 @@ Docker Compose. To do so, follow these steps:
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
 
-    For example, to download Compose version {{ site.compose_current }},
+    For example, to download Compose version {{composeversion}},
     the command is:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
     >  Use the latest Compose release number in the download command.
     >
@@ -110,11 +112,11 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
 -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
-    For example, to download Compose version {{site.compose_current}}, the command
+    For example, to download Compose version {{composeversion}}, the command
     is:
 
     ```bash
-    sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_current}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
@@ -144,7 +146,7 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_current}}, build 1719ceb
+    docker-compose version {{composeversion}}, build 1719ceb
     ```  
 <hr>
 </div>
@@ -183,7 +185,7 @@ install compose as a container run this command. Be sure to replace the version
 number with the one that you want, if this example is out-of-date:
 
 ```bash
-$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_current}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{composeversion}}/run.sh -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
