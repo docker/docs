@@ -19,51 +19,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
-### Docker Community Edition 17.07.0-ce-rc3-mac23, 2017-08-21 (stable)
-
-**Upgrades**
-
-- [Docker 17.07.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc3)
-
-**New**
-
-- VPNKit: Added support for ping!
-- VPNKit: Added slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled
-- VPNKit: Bridge mode is default everywhere now
-
-**Bug fixes and minor changes**
-
-- VPNKit: Improved the logging around the Unix domain socket connections
-- VPNKit: Automatically trim whitespace from int or bool database keys
-
-### Docker Community Edition 17.07.0-ce-rc2-mac22, 2017-08-11 (stable)
-
-* Upgrades
-  - [Docker 17.07.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc2)
-  - Linux Kernel 4.9.41
-
-### Docker Community Edition 17.07.0-ce-rc1-mac21, 2017-07-31 (stable)
-
-**Upgrades**
-
-- [Docker 17.07.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc1)
-- [Docker compose 1.15.0](https://github.com/docker/compose/releases/tag/1.15.0)
-- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
-- Linux Kernel 4.9.38
-
-**New**
-
-- Transparent proxy using macOS system proxies (if defined) directly
-- GUI settings are now stored in `~/Library/Group\ Containers/group.com.docker/settings.json`. `daemon.json` in now a file in `~/.docker/`
-- You can now change the default IP address used by Hyperkit if it collides with your network
-
-**Bug fixes and minor changes**
-
-- Add daemon options validation
-- Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of docker-cloud repositories & orgs. Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
-
-### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18 (stable)
+### Docker Community Edition 17.06.1-ce-mac20, 2017-08-21 (stable)
 
 **Upgrades**
 
@@ -471,7 +427,7 @@ events or unexpected unmounts.
 **Bug fixes and minor changes**
 
 - VPNKit: Improved the logging around the Unix domain socket connections
-- VPNKit: Automatically trim whitespace from int or bool database keys
+- VPNKit: Automatically trim whitespace from `int` or `bool` database keys
 
 ### Docker Community Edition 17.07.0-ce-rc2-mac22, 2017-08-11 (edge)
 

@@ -19,51 +19,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
-### Docker Community Edition 17.07.0-ce-rc3-win23 2017-08-21 (stable)
-
-**Upgrades**
-
-- [Docker 17.07.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc3)
-
-**New**
-
-- Store Linux daemon configuration in `~\.docker\daemon.json` instead of settings file
-- Store Windows daemon configuration in C:\ProgramData\Docker\config\daemon.json instead of settings file
-- VPNKit: Added support for ping!
-- VPNKit: Added `slirp/port-max-idle-timeout` to allow the timeout to be adjusted or even disabled
-- VPNKit: Bridge mode is default everywhere now
-
-* Bug fixes and minor changes
-- VPNKit: Improved the logging around the Unix domain socket connections
-- VPNKit: Automatically trim whitespace from int or bool database keys
-
-### Docker Community Edition 17.07.0-ce-rc2-win22 2017-08-11 (stable)
-
-**Upgrades**
-
-- [Docker 17.07.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc2)
-- Linux Kernel 4.9.41
-
-### Docker Community Edition 17.07.0-ce-rc1-win21 2017-07-31 (stable)
-
-**Upgrades**
-
-- [Docker 17.07.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc1)
-- [Docker compose 1.15.0](https://github.com/docker/compose/releases/tag/1.15.0)
-- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
-- Linux Kernel 4.9.38
-
-**New**
-
-- Windows Docker daemon is now started as service for better lifecycle management
-
-**Bug fixes and minor**
-
-- Keep Docker info in the same place as before in the registry, used by Visual Studio 2017 (Fixes [docker/for-win#939](https://github.com/docker/for-win/issues/939))
-- Fixed `config.json` not being released properly (Fixes [docker/for-win#867](https://github.com/docker/for-win/issues/867))
-- Do not move credentials in credential store at startup
-
-### Docker Community Edition 17.06.1-ce-rc1-win20 2017-07-18 (stable)
+### Docker Community Edition 17.06.1-ce-rc1-win20 2017-08-21 (stable)
 
 **Upgrades**
 
@@ -404,7 +360,7 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.06.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23) (edge)
+### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23) (edge)
 
 **Upgrades**
 
@@ -412,15 +368,16 @@ We did not distribute a 1.12.4 stable release
 
 **New**
 
-- Store Linux daemon configuration in ~\.docker\daemon.json instead of settings file
-- Store Windows daemon configuration in C:\ProgramData\Docker\config\daemon.json instead of settings file
+- Store Linux daemon configuration in `~\.docker\daemon.json` instead of settings file
+- Store Windows daemon configuration in `C:\ProgramData\Docker\config\daemon.json` instead of settings file
 - VPNKit: Added support for ping!
-- VPNKit: Added slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled
+- VPNKit: Added `slirp/port-max-idle-timeout` to allow the timeout to be adjusted or even disabled
 - VPNKit: Bridge mode is default everywhere now
 
-* Bug fixes and minor changes
+**Bug fixes and minor changes**
+
 - VPNKit: Improved the logging around the Unix domain socket connections
-- VPNKit: Automatically trim whitespace from int or bool database keys
+- VPNKit: Automatically trim whitespace from `int` or `bool` database keys
 
 ### Docker Community Edition 17.07.0-ce-rc2-win22 Release Notes (2017-08-11 17.06.0-win22) (edge)
 
@@ -428,7 +385,6 @@ We did not distribute a 1.12.4 stable release
 
 - [Docker 17.07.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc2)
 - Linux Kernel 4.9.41
-
 
 ### Docker Community Edition 17.07.0-ce-rc1-win21 Release Notes (2017-07-31 17.07.0-win21) (edge)
 
