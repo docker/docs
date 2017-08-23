@@ -1,6 +1,6 @@
 ---
 description: Change log / release notes per release
-keywords: pinata, alpha, tutorial
+keywords: Docker for Mac, edge, stable, release notes
 redirect_from:
 - /mackit/release-notes/
 title: Docker for Mac release notes

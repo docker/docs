@@ -1,6 +1,6 @@
 ---
 description: Change log / release notes per release
-keywords: pinata, alpha, tutorial
+keywords: Docker for Windows, edge, stable, release notes
 redirect_from:
 - /winkit/release-notes/
 title: Docker for Windows Release notes
