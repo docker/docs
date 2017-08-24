@@ -49,7 +49,7 @@ logging driver options when starting a container.
 
 The `awslogs` logging driver sends your Docker logs to a specific region. Use
 the `awslogs-region` log option or the `AWS_REGION` environment variable to set
-the region.  By default, if your Docker daemon is running on an EC2 instance
+the region. By default, if your Docker daemon is running on an EC2 instance
 and no region is set, the driver uses the instance's region.
 
     docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
@@ -58,7 +58,7 @@ and no region is set, the driver uses the instance's region.
 
 You must specify a
 [log group](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
-for the `awslogs` logging driver.  You can specify the log group with the
+for the `awslogs` logging driver. You can specify the log group with the
 `awslogs-group` log option:
 
     docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
@@ -67,12 +67,12 @@ for the `awslogs` logging driver.  You can specify the log group with the
 
 To configure which
 [log stream](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
-should be used, you can specify the `awslogs-stream` log option.  If not
+should be used, you can specify the `awslogs-stream` log option. If not
 specified, the container ID is used as the log stream.
 
 > **Note**:
 > Log streams within a given log group should only be used by one container
-> at a time.  Using the same log stream for multiple containers concurrently
+> at a time. Using the same log stream for multiple containers concurrently
 > can cause reduced logging performance.
 
 ### awslogs-create-group
@@ -168,7 +168,7 @@ The following `strftime` codes are supported:
 | `%p` | AM or PM.                                                        | AM       |
 | `%M` | Minute as a zero-padded decimal number.                          | 57       |
 | `%S` | Second as a zero-padded decimal number.                          | 04       |
-| `%L` | Milliseconds as a zero-padded decimal number.                    | 123      |
+| `%L` | Millisecond as a zero-padded decimal number.                    | 123      |
 | `%f` | Microsecond as a zero-padded decimal number.                     | 000345   |
 | `%z` | UTC offset in the form +HHMM or -HHMM.                           | +1300    |
 | `%Z` | Time zone name.                                                  | PST      |
@@ -236,7 +236,7 @@ If not specified, the container ID is used as the log stream.
 > **Note**:
 > The CloudWatch log API doesn't support `:` in the log name. This can cause some issues when using the `{{ .ImageName }}` as a tag, since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
 > Template markup can be used to get the proper format.
-> To get the image name and the first 12 characters of the container id, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
+> To get the image name and the first 12 characters of the container ID, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
 > the output will be something like: `alpine_latest-bf0072049c76`
 {% endraw %}
 
