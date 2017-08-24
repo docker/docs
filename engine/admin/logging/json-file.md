@@ -17,7 +17,13 @@ only one container.
 To use the `json-file` driver as the default logging driver, set the `log-driver`
 and `log-opt` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. If Docker for Mac, You need to
+```bash
+screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+```
+and then you'll be able to find logfile at /var/lib/docker/<your docker container id>.
+
+For more about
 +configuring Docker using `daemon.json`, see
 +[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
