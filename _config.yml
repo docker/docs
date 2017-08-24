@@ -97,21 +97,21 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.0"
-      dtr_latest_image: "docker/dtr:2.3.0"
+      ucp_latest_image: "docker/ucp:2.2.1"
+      dtr_latest_image: "docker/dtr:2.3.1"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.0"
+      dtr_version: "2.3.1"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.7"
+      docker_image: "docker/dtr:2.2.8"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -129,7 +129,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.0"
+      ucp_version: "2.2.1"
   - scope:
       path: "datacenter/ucp/2.1"
     values:
