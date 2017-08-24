@@ -412,6 +412,20 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.07.0-ce-rc4-mac25, 2017-08-24 (edge)
+
+**Upgrades**
+
+- [Docker 17.07.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc4)
+- [Docker compose 1.16.0-rc1](https://github.com/docker/compose/releases/tag/1.16.0-rc1)
+
+**Bug fixes and minor changes**
+
+- Fixed string validation in daemon options (related to [docker/for-mac#1971](https://github.com/docker/for-mac/issues/1971))
+- VPNKit: Fixed a bug which causes a socket to leak if the corresponding
+TCP connection is idle for more than 5 minutes (related to
+[docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
+
 ### Docker Community Edition 17.07.0-ce-rc3-mac23, 2017-08-21 (edge)
 
 **Upgrades**
