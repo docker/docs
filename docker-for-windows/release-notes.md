@@ -360,6 +360,23 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.07.0-rc4-win25 Release Notes (2017-08-24 17.07.0-win25) (edge)
+
+**Upgrades**
+
+- [Docker 17.07.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc4)
+- [Docker compose 1.16.0-rc1](https://github.com/docker/compose/releases/tag/1.16.0-rc1)
+
+**Bug fixes and minor changes**
+
+- VPNKit: Fixed a bug which causes a socket to leak if the corresponding
+TCP connection is idle for more than 5 minutes (related to
+[docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
+
+> **Note**: The link above goes to Docker for Mac issues because a
+Mac user reported this problem, which applied to both Mac and Windows
+and was fixed on both.
+
 ### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23) (edge)
 
 **Upgrades**
