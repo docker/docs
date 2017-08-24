@@ -12,7 +12,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for Azure
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-<a class="button outline-btn" href="https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for Azure</a>
+[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn”}
 
 
 ## Docker Community Edition (CE) for Azure

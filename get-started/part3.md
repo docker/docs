@@ -197,7 +197,7 @@ machines.
 Cloud](/docker-cloud/), or on any hardware or cloud provider you choose with
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
 
-[On to "Part 4" >>](part4.md){: class="button outline-btn" style="margin-bottom: 30px"}
+[On to "Part 4" >>](part4.md){: class="button outline-btn"}
 
 ## Recap and cheat sheet (optional)
 

@@ -297,7 +297,7 @@ docker-machine ssh myvm1 "docker stack rm getstartedlab"
 > manager, but _you'll need this swarm for part 5, so please keep it
 > around for now_.
 
-[On to Part 5 >>](part5.md){: class="button outline-btn" style="margin-bottom: 30px"}
+[On to Part 5 >>](part5.md){: class="button outline-btn"}
 
 ## Recap and cheat sheet (optional)
 

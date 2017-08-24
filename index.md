@@ -14,7 +14,7 @@ Try our new multi-part walkthrough that goes from writing your first app,
 data storage, networking, and swarms, ending with your app running on
 production servers in the cloud. Total reading time is less than an hour!
 
-[Get started with Docker](/get-started/){: class="button outline-btn" style="margin-bottom:30px"}
+[Get started with Docker](/get-started/){: class="button outline-btn"}
 
 {% if site.edge == true %}
 {% capture ce-edge-section %}
