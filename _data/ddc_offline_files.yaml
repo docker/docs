@@ -18,8 +18,6 @@
       url: https://packages.docker.com/caas/ucp_images_2.1.1.tar.gz
     - description: "UCP 2.1.0"
       url: https://packages.docker.com/caas/ucp_images_2.1.0.tar.gz
-    - description: "DTR 2.2.8"
-      url: https://packages.docker.com/caas/dtr-2.2.8.tar.gz
     - description: "DTR 2.2.7"
       url: https://packages.docker.com/caas/dtr-2.2.7.tar.gz
     - description: "DTR 2.2.6"

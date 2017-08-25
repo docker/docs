@@ -6,12 +6,6 @@
 - product: "ucp"
   version: "2.2"
   tar-files:
-    - description: "2.2.1 Linux"
-      url: https://packages.docker.com/caas/ucp_images_2.2.1.tar.gz
-    - description: "2.2.1 IBM Z"
-      url: https://packages.docker.com/caas/ucp_images_s390x_2.2.1.tar.gz
-    - description: "2.2.1 Windows"
-      url: https://packages.docker.com/caas/ucp_images_win_2.2.1.tar.gz
     - description: "2.2.0 Linux"
       url: https://packages.docker.com/caas/ucp_images_2.2.0.tar.gz
     - description: "2.2.0 IBM Z"
@@ -23,5 +17,3 @@
   tar-files:
     - description: "DTR 2.3.0"
       url: https://packages.docker.com/caas/dtr-2.3.0.tar.gz
-    - description: "DTR 2.3.1"
-      url: https://packages.docker.com/caas/dtr-2.3.1.tar.gz
