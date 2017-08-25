@@ -22,6 +22,16 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
+### 17.06.1 CE
+
+Release date: 08/17/2017
+
+{{aws_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce){: target="_blank"}
+
 ### 17.06.0 CE
 
 Release date: 06/28/2017

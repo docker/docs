@@ -21,6 +21,10 @@ a.button.outline-btn {
     display: inline-block;
 }
 
+a.button.outline-btn.min-hgt {
+    min-height: 85px;
+}
+
 .button {
     margin: 10px 10px 10px 0;
     font-family: Geomanist Book;
