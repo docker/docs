@@ -32,14 +32,14 @@ $ docker run \
   docker4x/upgrade-azure:version-tag
 ```
 
-For example, this command upgrades from 17.03 CE stable release to 17.06.0 CE stable:
+For example, this command upgrades from 17.03 CE or 17.06.0 CE stable release to 17.06.1 CE stable:
 
 ```bash
 $ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /usr/bin/docker:/usr/bin/docker \
   -ti \
-  docker4x/upgrade-azure:17.06.0-ce-azure1
+  docker4x/upgrade-azure:17.06.1-ce-azure1
 ```
 
 This initiates a rolling upgrade of the Docker swarm. Service state is maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade. Single containers which are not part of services (for example, containers started with `docker run`) are **not** preserved during an upgrade. This is because they are not Docker  services but are known only to the individual Docker engine where they are running.
