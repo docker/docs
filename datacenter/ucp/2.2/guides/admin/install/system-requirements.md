@@ -51,6 +51,17 @@ When installing UCP on a host, make sure the following ports are open:
 | managers          |    in     | TCP 12386               | Port for the authentication worker                                                |
 | managers          |    in     | TCP 12387               | Port for the metrics service                                                      |
 
+Also, make sure the networks you're using allow the UCP components enough time
+to communicate before they time out.
+
+| Component                              | Timeout (ms) | Configurable |
+|:---------------------------------------|:-------------|:-------------|
+| Raft consensus between manager nodes   | 3000         | no           |
+| Gossip protocol for overlay networking | 5000         | no           |
+| etcd                                   | 500          | yes          |
+| RethinkDB                              | 10000        | no           |
+| Stand-alone swarm                      | 90000        | no           |
+
 ## Compatibility and maintenance lifecycle
 
 Docker EE is a software subscription that includes 3 products:
