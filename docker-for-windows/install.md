@@ -38,37 +38,31 @@ For more about Stable and Edge channels, see the
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
     <th style="font-size: x-large; font-family: arial;">Edge channel</th>
-    <th style="font-size: x-large; font-family: arial;">Legacy Edge installer</th>
   </tr>
   <tr valign="top">
     <td width="33%">Stable is the best channel to use if you want a reliable platform to work with. Stable releases track the Docker platform stable releases.<br><br>
    On this channel, you can select whether to send usage statistics and other data. <br><br>Stable releases happen once per quarter.
     </td>
-    <td width="33%">This new installer includes experimental support for Windows Server 2016 for users that use Windows Server as their development environment. <br><br>Use this channel if you want to get experimental features faster, and can weather some instability and bugs. We collect all usage data on Edge releases across the board. <br><br>Edge builds are released once per month.
-    </td>
-    <td width="33%">We recommend that all Edge users try the new installer. <br><br>However, if you have problems with the new installer, you can use the legacy Edge installer and still get all other Edge features.
+    <td width="33%">Use the Edge channel if you want to get experimental features faster, and can weather some instability and bugs. We collect usage data on Edge releases. <br><br>Edge builds are released once per month.
     </td>
   </tr>
   <tr valign="top">
-  <td width="33%">
-  <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
-  </td>
-  <td width="33%">
-  <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Edge)</a>
-  </td>
-  <td width="33%">
-  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge) (legacy installer)</a>
-  </td>
+    <td width="33%">
+      <a class="button outline-btn" href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Stable)</a>
+    </td>
+    <td width="33%">
+      <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Edge)</a>
+    </td>
   </tr>
   <tr valign="top">
-  <td width="33%"><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Stable InstallDocker.msi SHA256</font></a>
+    <td width="33%"><a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Stable installer SHA256</font></a>
   </td>
-  <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: New Edge InstallDocker.exe SHA256</font></a>
-  </td>
-  <td width="33%"><a href="https://download.docker.com/win/edge/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Legacy Edge InstallDocker.msi SHA256</font></a>
-  </td>
+    <td width="33%"><a href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Edge installer SHA256</font></a>
+    </td>
   </tr>
 </table>
+
+* Legacy (`.msi`) installers are available for [Edge](https://download.docker.com/win/edge/InstallDocker.msi) and [Stable](https://download.docker.com/win/stable/InstallDocker.msi) channels.
 
 * The Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/engine/installation/windows/docker-ee.md). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/engine/installation/index.md).
 
