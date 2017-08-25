@@ -41,7 +41,7 @@ This log driver does not implement a reader so it is incompatible with
 
 If Docker detects that it is running in a Google Cloud Project, it will discover
 configuration from the
-[instance metadata service](https://cloud.google.com/compute/docs/metadata){: target="_blank" class="_"}
+[instance metadata service](https://cloud.google.com/compute/docs/metadata){: target="_blank" class="_"}.
 Otherwise, the user must specify
 which project to log to using the `--gcp-project` log option and Docker will
 attempt to obtain credentials from the
@@ -50,7 +50,7 @@ The `--gcp-project` flag takes precedence over information discovered from the
 metadata server so a Docker daemon running in a Google Cloud Project can be
 overridden to log to a different Google Cloud Project using `--gcp-project`.
 
-Docker fetches the values for zone, instance name and instance id from Google
+Docker fetches the values for zone, instance name and instance ID from Google
 Cloud metadata server. Those values can be provided via options if metadata
 server is not available. They will not override the values from metadata server.
 
