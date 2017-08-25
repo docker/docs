@@ -6,7 +6,37 @@ title: Docker for Azure Release Notes
 
 {% include d4a_buttons.md %}
 
+## Enterprise Edition
+[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}
+
+[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
+
+### 17.06 EE
+
+- Docker engine 17.06 EE
+- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank"}
+- UCP 2.2.0 
+- DTR 2.3.0
+
+### 17.03 EE
+
+- Docker engine 17.03 EE
+- UCP 2.1.5
+- DTR 2.2.7
+
 ## Stable channel
+
+### 17.06.1 CE
+
+Release date: 08/17/2017
+
+{{aws_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce){: target="_blank"}
+- Improvements to CloudStor support
+- Azure agent logs are limited to 50mb with proper logrotation
 
 ### 17.06.0 CE
 

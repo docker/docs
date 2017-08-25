@@ -351,8 +351,7 @@ install anything but Docker to run it.
 That's all for this page. In the next section, we will learn how to scale our
 application by running this container in a **service**.
 
-[Continue to Part 3 >>](part3.md){: class="button outline-btn"
-style="margin-bottom: 30px"}
+[Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
 
 ## Recap and cheat sheet (optional)

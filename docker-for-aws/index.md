@@ -13,7 +13,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for AWS
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-<a class="button outline-btn" href="https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for AWS</a>
+[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
 
 
 ## Docker Community Edition (CE) for AWS
@@ -30,12 +30,10 @@ using CloudFormation. For more about stable and edge channels, see the
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
     <th style="font-size: x-large; font-family: arial">Edge channel</th>
-    <th style="font-size: x-large; font-family: arial">Test channel</th>
   </tr>
   <tr valign="top">
     <td width="33%">This deployment is fully baked and tested, and comes with the latest CE version of Docker. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>Stable is released quarterly and is for users that want an easier-to-maintain release pace.</td>
     <td width="34%">This deployment offers cutting edge features of the CE version of Docker and comes with experimental features turned on, described in the <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">Docker Experimental Features README</a> on GitHub. (Adjust the branch or tag in the URL to match your version.)<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. Edge is for users wanting a drop of the latest and greatest features every month. <br><br>We collect usage data on edges across the board.</td>
-    <td width="33%">This is the test channel. It is used for testing release candidates for upcoming releases. Use this channel if you want to test out the new releases before they are available.</td>
   </tr>
   <tr valign="top">
   <td width="33%">
@@ -46,12 +44,13 @@ using CloudFormation. For more about stable and edge channels, see the
   {{aws_blue_edge}}
   {{aws_blue_vpc_edge}}
   </td>
-  <td width="34%">
-  {{aws_blue_test}}
-  {{aws_blue_vpc_test}}
-  </td>
   </tr>
 </table>
+
+
+#### Test Channel
+<p>This is the test channel. It is used for testing release candidates for upcoming releases. Use this channel if you want to test out the new releases before they are available.</p>
+{{aws_blue_test}}
 
 ### Deployment options
 

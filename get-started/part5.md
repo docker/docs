@@ -253,7 +253,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 
 
-[On to Part 6 >>](part6.md){: class="button outline-btn" style="margin-bottom: 30px"}
+[On to Part 6 >>](part6.md){: class="button outline-btn"}
 
 ## Recap (optional)
 

@@ -16,6 +16,13 @@ a.button {
 
 a.button.outline-btn {
     color: #0087C8;
+    float: none;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+a.button.outline-btn.min-hgt {
+    min-height: 85px;
 }
 
 .button {

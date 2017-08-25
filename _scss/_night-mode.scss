@@ -138,6 +138,9 @@ body.night {
     }
     a.button.outline-btn {
         color: #a7e2ff;
+        float: none;
+        margin-bottom: 30px;
+        display: inline-block;
     }
     .component img, .component-full-icon img {
         opacity: 1;

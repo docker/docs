@@ -133,7 +133,7 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right:100%; clear: left;"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
 > **Note**: version 1.13 or higher is required
 
