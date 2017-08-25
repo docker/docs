@@ -48,7 +48,7 @@ For more about Stable and Edge channels, see the
   </tr>
   <tr valign="top">
     <td width="33%">
-      <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
+      <a class="button outline-btn" href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Stable)</a>
     </td>
     <td width="33%">
       <a class="button outline-btn" href="https://download.docker.com/win/edge/Docker%20for%20Windows%20Installer.exe">Get Docker for Windows (Edge)</a>
