@@ -146,7 +146,8 @@ Now let's run it. You have to give your app a name. Here, it is set to
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
-Our single service stack is running 5 container instances of our deployed image on one host. Let's investigate.
+Our single service stack is running 5 container instances of our deployed image
+on one host. Let's investigate.
 
 Get the service ID for the one service in our application:
 
@@ -154,7 +155,8 @@ Get the service ID for the one service in our application:
 docker service ls
 ```
 
-Swarm runs tasks that, in this case, spawn containers. Tasks have state and their own IDs:
+Swarm runs tasks that, in this case, spawn containers. Tasks have state and
+their own IDs:
 
 ```shell
 docker service ps <service>
@@ -200,7 +202,8 @@ docker stack deploy -c docker-compose.yml getstartedlab
 Docker will do an in-place update, no need to tear the stack down first or kill
 any containers.
 
-Now, re-run `docker container ls -q` to see the deployed instances reconfigured. For example, if you scaled up the replicas, there will be more running containers.
+Now, re-run `docker container ls -q` to see the deployed instances reconfigured.
+For example, if you scaled up the replicas, more containers are started.
 
 ### Take down the app and the swarm
 
