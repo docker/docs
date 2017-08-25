@@ -76,7 +76,7 @@ was set at startup. If you use `docker rename` to rename a container, the new
 name **is not reflected** in the journal entries. Journal entries will continue
 to use the original name.
 
-## Retrieving log messages with `journalctl`
+## Retrieve log messages with `journalctl`
 
 Use the `journalctl` command to retrieve log messages. You can apply filter
 expressions to limit the retrieved messages to those associated with a specific
@@ -100,7 +100,7 @@ to return the log messages in JSON format.
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 
-## Retrieving log messages with the `journal` API
+## Retrieve log messages with the `journal` API
 
 This example uses the `systemd` Python module to retrieve container
 logs:
