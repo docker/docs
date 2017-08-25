@@ -15,6 +15,16 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## Docker EE 17.03.2-ee-6
+(2017-08-24)
+
+* Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
+* Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
+* Improve network db stability under stressful situations [docker/libnetwork#1860](https://github.com/docker/libnetwork/pull/1860)
+* Enable TCP Keep-Alive in Docker client [docker/cli#415](https://github.com/docker/cli/pull/415)
+* Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
+* Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
+
 ## Docker EE 17.03.2-ee5
 (20 Jul 2017)
 
