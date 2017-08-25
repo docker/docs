@@ -14,23 +14,28 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
-## 17.06.1-ee-1 (2017-08-16)
+## 17.06.1-ee-2
+(2017-08-24)
 
-### Important notes about this release
+### Client
 
-- Starting with Docker EE 17.06.1, Ubuntu, SLES, RHEL packages are also available
-  for IBM Z using the s390x architecture.
+- Enable TCP Keep-Alive in Docker client [#415](https://github.com/docker/cli/pull/415)
 
-- Docker EE 17.06.1 includes a new [telemetry plugin](/enterprise/telemetry/)
-  which is enabled by default on Ubuntu hosts. For more details, including how to
-  opt out, see [the documentation](/enterprise/telemetry/).
+### Networking
 
-- Docker 17.06 by default disables communication with legacy (v1)
-  registries. If you require interaction with registries that have not yet
-  migrated to the v2 protocol, set the `--disable-legacy-registry=false` daemon
-  option. Interaction with v1 registries will be removed in Docker 17.12.
+- Lock goroutine to OS thread while changing NS [#1911](https://github.com/docker/libnetwork/pull/1911)
 
-## 17.06.1-ee (2017-08-16)
+### Runtime
+
+- devmapper: ensure that UdevWait is called after calls to setCookie [#33732](https://github.com/moby/moby/pull/33732)
+- aufs: ensure diff layers are correctly removed to prevent leftover files from using up storage [#34587](https://github.com/moby/moby/pull/34587)
+
+### Swarm mode
+
+- Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
+
+## 17.06.1-ee
+(2017-08-16)
 
 ### Important notes about this release
 
