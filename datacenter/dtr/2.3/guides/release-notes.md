@@ -11,6 +11,15 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.3.2
+
+(25 August 2017)
+
+* High severity:
+  * Add the ability to upgrade from 2.3.0 or 2.3.1
+
+### Bugs fixed
+
 ## DTR 2.3.1
 
 (24 August 2017)
@@ -30,6 +39,10 @@ to upgrade your installation to the latest release.
   * The promotion policy creating form was sometimes disabled. This has been
   fixed.
   * Fixed bug that made users show as inactive, when they were actually active.
+
+### Known issues
+
+* You can't upgrade from 2.3.0 to 2.3.1. Please upgrade to 2.3.2 directly.
 
 ## DTR 2.3.0
 
