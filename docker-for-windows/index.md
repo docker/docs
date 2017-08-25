@@ -522,7 +522,7 @@ some of the common settings to make it easier to configure them.
 
 Both Docker for Windows Stable and Edge releases have the experimental version
 of Docker Engine enabled, described in the [Docker Experimental Features
-README](https://github.com/moby/moby/blob/master/experimental/README.md) on
+README](https://github.com/docker/cli/blob/master/experimental/README.md) on
 GitHub.
 
 Experimental features are not appropriate for production environments or
