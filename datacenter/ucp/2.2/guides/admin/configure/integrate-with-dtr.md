@@ -6,7 +6,7 @@ keywords: trust, registry, integrate, UCP, DTR
 
 Once you deploy Docker Trusted Registry (DTR), you can use it to store your
 Docker images and deploy services to UCP using these images.
-[Learn how to deploy DTR](/datacenter/dtr/2.3/guides/install/index.md).
+[Learn how to deploy DTR](/datacenter/dtr/2.3/guides/admin/install/index.md).
 
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR).
 This means that you can deploy services from the UCP web UI, using Docker
