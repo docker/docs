@@ -18,6 +18,15 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs6 (2017-08-24)
+
+* Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
+* Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
+* Improve network db stability under stressful situations [docker/libnetwork#1860](https://github.com/docker/libnetwork/pull/1860)
+* Enable TCP Keep-Alive in Docker client [docker/cli#415](https://github.com/docker/cli/pull/415)
+* Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
+* Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
+
 ## CS Engine 1.13.1-cs5
 (21 Jul 2017)
 
