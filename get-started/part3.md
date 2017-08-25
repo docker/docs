@@ -155,12 +155,15 @@ Get the service ID for the one service in our application:
 docker service ls
 ```
 
-Swarm runs tasks that, in this case, spawn containers. Tasks have state and
-their own IDs:
+Swarm for Docker runs tasks that spawn containers. Tasks have state and their
+own IDs:
 
 ```shell
 docker service ps <service>
 ```
+
+>**Note**: SwarmKit tasks do not need to be containers (you can redefine them),
+> but for Docker they are.
 
 Let's inspect one task and limit the ouput to container ID:
 
@@ -203,7 +206,8 @@ Docker will do an in-place update, no need to tear the stack down first or kill
 any containers.
 
 Now, re-run `docker container ls -q` to see the deployed instances reconfigured.
-For example, if you scaled up the replicas, more containers are started.
+If you scaled up the replicas, more tasks, and hence, more containers, are
+started.
 
 ### Take down the app and the swarm
 
