@@ -32,14 +32,14 @@ $ docker run \
   docker4x/upgrade-azure:version-tag
 ```
 
-For example, this command upgrades from 17.03 CE stable release to 17.06.0 CE stable:
+For example, this command upgrades from 17.03 CE or 17.06.0 CE stable release to 17.06.1 CE stable:
 
 ```bash
 $ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /usr/bin/docker:/usr/bin/docker \
   -ti \
-  docker4x/upgrade-azure:17.06.0-ce-azure1
+  docker4x/upgrade-azure:17.06.1-ce-azure1
 ```
 
 If you are already on a version more recent than 17.06.1 CE or 17.07.0 CE, you can use `upgrade.sh` to initiate the upgrade:
