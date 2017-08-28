@@ -29,7 +29,7 @@ The `docker logs` command is not available for this logging driver.
 Some options are supported by specifying `--log-opt` as many times as needed:
 
  - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
- - `tag`: specify tag for fluentd message, which interpret some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
+ - `tag`: specify a tag for fluentd message, which interprets some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
 
 
  To use the `fluentd` driver as the default logging driver, set the `log-driver`
@@ -107,7 +107,7 @@ connection is established.
 
 ### fluentd-buffer-limit
 
-The amount of data to buffer before flushing to disk. Defaults the amount of RAM
+The amount of data to buffer before flushing to disk. Defaults to the amount of RAM
 available to the container.
 
 ### fluentd-retry-wait
@@ -130,7 +130,7 @@ especially useful if you want to aggregate multiple container logs on each
 host then, later, transfer the logs to another Fluentd node to create an
 aggregate store.
 
-### Testing container loggers
+### Test container loggers
 
 1. Write a configuration file (`test.conf`) to dump input logs:
 
