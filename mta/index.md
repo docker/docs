@@ -14,7 +14,7 @@ Docker for Mac is the best way to get started with Docker on a Mac.
 
 * Containerizing app components
 
-* Infrastructure
+* Infrastructure considerations
 
 * Modern methodologies and automation
 
