@@ -34,7 +34,7 @@ versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64` (`amd64`), `armhf`, and `s390x` (IBM Z) architectures.
+Docker CE is supported on Ubuntu on `amd64` (`x86_64`), `armhf`, and `s390x` (IBM Z) architectures.
 
 > **`s390x` limitations**: IBM Z is only supported on Ubuntu Xenial and Zesty.
 
