@@ -1,6 +1,6 @@
 ---
 description: Installation and using Docker via Chef
-keywords: chef, installation, usage, docker,  documentation
+keywords: chef, installation, usage, docker, documentation
 redirect_from:
 - /engine/articles/chef/
 title: Use Chef
@@ -45,7 +45,7 @@ docker_container 'an echo server' do
 end
 ```
 
-## Getting Started
+## Getting started
 Here's a quick example of pulling the latest image and running a
 container with exposed ports.
 
