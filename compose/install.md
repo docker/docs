@@ -107,7 +107,8 @@ by step instructions are also included below.
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
-    sudo curl -L
+    sudo -i
+    curl -L
 https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname
 -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
@@ -116,7 +117,8 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
     is:
 
     ```bash
-    sudo curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo -i
+    curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
