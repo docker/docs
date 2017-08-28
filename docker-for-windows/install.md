@@ -25,7 +25,7 @@ If you have not already done so, please install Docker for Windows. You can
 download installers from the **Stable** or **Edge** channel.
 
 Both Stable and Edge installers come with <a
-href="https://github.com/moby/moby/blob/master/experimental/README.md">
+href="https://github.com/docker/cli/blob/master/experimental/README.md">
 experimental features in Docker Engine</a> enabled by default. Experimental mode can be toggled on and off in [preferences](/docker-for-windows/index.md#daemon-experimental-mode).
 
 We welcome your
