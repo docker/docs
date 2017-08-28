@@ -1,6 +1,6 @@
 ---
 description: Installation and using Docker via Ansible
-keywords: ansible, installation, usage, docker,  documentation
+keywords: ansible, installation, usage, docker, documentation
 title: Use Ansible
 ---
 
@@ -60,5 +60,5 @@ as [a variable](https://docs.ansible.com/ansible/playbooks_variables.html).
 The documentation for the `ansible_container` module is present at
 [docs.ansible.com](https://docs.ansible.com/ansible/docker_container_module.html).
 
-Documentation covering Docker images, networks and services is also present
+Documentation covering Docker images, networks, and services is also present
 at [docs.ansible.com](https://docs.ansible.com/ansible/list_of_cloud_modules.html#docker).
