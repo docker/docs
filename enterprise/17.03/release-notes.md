@@ -25,7 +25,7 @@ adopted as quickly for consistency and compatibility reasons.
 * Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
 * Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## Docker EE 17.03.2-ee5
+## Docker EE 17.03.2-ee-5
 (20 Jul 2017)
 
 * Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
