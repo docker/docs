@@ -82,12 +82,25 @@ using `10.10.10.20` and `127.0.0.1`:
 
     $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 > extfile.cnf
 
+Set the Docker daemon key's extended usage attributes to only be used for
+server authentication:
+
+    $ echo extendedKeyUsage = serverAuth > extfile.cnf
+
+Now, generate the key:
+
     $ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
       -CAcreateserial -out server-cert.pem -extfile extfile.cnf
     Signature ok
     subject=/CN=your.host.com
     Getting CA Private Key
     Enter pass phrase for ca-key.pem:
+
+[Authorization plugins](../extend/plugins_authorization) offer more
+fine-grained control to supplement authentication from mutual TLS. In addition
+to other information described in the above document, authorization plugins
+running on a Docker daemon receive the certificate information for connecting
+Docker clients.
 
 For client authentication, create a client key and certificate signing
 request:
