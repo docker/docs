@@ -126,3 +126,7 @@ You are now ready to deploy a swarm!
 **Ready to create swarms on AWS?** See [Create a new swarm on Amazon Web Services in Docker Cloud](create-cloud-swarm-aws.md).
 
 You can get an overivew of topics on [swarms in Docker Cloud](index.md).
+
+**Using Standard Mode to managing Docker nodes on AWS?** If you are
+setting up nodes on AWS in [Standard Mode](/docker-cloud/standard/),
+go back to [What's next in Standard Mode](/docker-cloud/infrastructure/link-aws.md##whats-next).
