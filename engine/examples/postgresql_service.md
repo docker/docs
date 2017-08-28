@@ -4,10 +4,6 @@ keywords: docker, example, package installation,  postgresql
 title: Dockerize PostgreSQL
 ---
 
-> **Note**:
-> - **If you don't like sudo** then see [*Giving non-root
->   access*](../installation/binaries.md#giving-non-root-access)
-
 ## Installing PostgreSQL on Docker
 
 Assuming there is no Docker image that suits your needs on the [Docker
