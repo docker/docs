@@ -1,12 +1,12 @@
 ---
 description: Installing and using Puppet
-keywords: puppet, installation, usage, docker,  documentation
+keywords: puppet, installation, usage, docker, documentation
 redirect_from:
 - /engine/articles/puppet/
 title: Use Puppet
 ---
 
-> *Note:* Please note this is a community contributed installation path. The
+> **Note**: Please note this is a community contributed installation path. The
 > only `official` installation is using the
 > [*Ubuntu*](../installation/linux/ubuntulinux.md) installation
 > path. This version may sometimes be out of date.
@@ -90,6 +90,6 @@ Run also contains a number of optional parameters:
       dns          => ['8.8.8.8', '8.8.4.4'],
     }
 
-> *Note:*
-> The `ports`, `env`, `dns` and `volumes` attributes can be set with either a single
+> **Note**:
+> The `ports`, `env`, `dns`, and `volumes` attributes can be set with either a single
 > string or as above with an array of values.
