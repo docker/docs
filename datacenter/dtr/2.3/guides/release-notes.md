@@ -15,10 +15,10 @@ to upgrade your installation to the latest release.
 
 (25 August 2017)
 
+### Bugs fixed
+
 * High severity:
   * Add the ability to upgrade from 2.3.0 or 2.3.1
-
-### Bugs fixed
 
 ## DTR 2.3.1
 
