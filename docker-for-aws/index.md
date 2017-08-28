@@ -13,7 +13,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for AWS
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
+[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
 
 ## Docker Community Edition (CE) for AWS
@@ -182,3 +182,7 @@ The `docker logs` and `docker service logs` commands are not supported on Docker
 ### System containers
 
 Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, Docker for AWS will not work correctly.
+
+### Uninstalling or removing a stack
+
+To uninstall Docker for AWS, log on to the [AWS Console](https://aws.amazon.com/){: target="_blank" class="_"}, navigate to **Management Tools -> CloudFormation -> Actions -> Delete Stack**, and select the Docker stack you want to remove.

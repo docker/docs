@@ -150,3 +150,10 @@ $ sudo ping 10.0.0.4
 ```
 
 > **Note**: Access to Docker for AWS and Azure happens through a shell container that itself runs on Docker.
+
+## How do I uninstall Docker for AWS?
+
+You can remove the Docker for AWS setup and stacks through the [AWS
+Console](https://console.aws.amazon.com/console/home){: target="_blank"
+class="_"} on the CloudFormation page. See [Uninstalling or removing a
+stack](/docker-for-aws/index.md#uninstalling-or-removing-a-stack).
