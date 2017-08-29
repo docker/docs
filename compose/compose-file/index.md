@@ -1089,7 +1089,7 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](#dependson), so they determine the order of service startup.
+[depends_on](#depends_on), so they determine the order of service startup.
 
 > **Notes**
 >

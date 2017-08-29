@@ -166,7 +166,7 @@ Several other options were added to support networking, such as:
 
 * [`aliases`](compose-file-v2.md#aliases)
 
-* The [`depends_on`](compose-file-v2.md#dependson) option can be used in place of links to indicate dependencies
+* The [`depends_on`](compose-file-v2.md#depends_on) option can be used in place of links to indicate dependencies
 between services and startup order.
 
       version: '2'
