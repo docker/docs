@@ -76,13 +76,13 @@ name) matches the hostname you will use to connect to Docker:
 
 Next, we're going to sign the public key with our CA:
 
-Since TLS connections can be made via IP address as well as DNS name, they need
-to be specified when creating the certificate. For example, to allow connections
+Since TLS connections can be made via IP address as well as DNS name, the IP addresses
+need to be specified when creating the certificate. For example, to allow connections
 using `10.10.10.20` and `127.0.0.1`:
 
     $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 > extfile.cnf
 
-Set the Docker daemon key's extended usage attributes to only be used for
+Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
 
     $ echo extendedKeyUsage = serverAuth > extfile.cnf
