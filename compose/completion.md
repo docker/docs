@@ -38,9 +38,7 @@ fi
 You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
-## MacPorts Bash Completion
-
-If you're using MacPorts you'll need to slightly modify your steps to the
+If you're using MacPorts instead of brew you'll need to slightly modify your steps to the
 following:
 
 Run `sudo port install bash-completion` to install bash completion.
