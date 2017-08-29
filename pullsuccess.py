@@ -87,12 +87,13 @@ for page in soup.find_all('page'):
                     file_ext = head.split(';')[0].split('/')[1]
                     imgData = base64.b64decode(data)
             newFileName = '_kb/images/' + page['id'] + '-' + str(imageIndex)
+            newSrcName = '/kb/images/' + page['id'] + '-' + str(imageIndex)
             output = open(newFileName,'wb')
             output.write(imgData)
             output.close()
             newImageFileExt = imghdr.what(newFileName)
             shutil.move(newFileName, newFileName + '.' + newImageFileExt)
-            img['src'] = '/' + newFileName + '.' + newImageFileExt
+            img['src'] = newSrcName + '.' + newImageFileExt
             print 'Saved: ' + newFileName + '.' + newImageFileExt
             imageIndex = imageIndex + 1
         fileout += rawhtml.prettify() + '\n'

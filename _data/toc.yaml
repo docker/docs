@@ -442,6 +442,8 @@ guides:
     title: Plugins API
 - sectiontitle: "Reference architectures"
   section:
+  - title: Overview
+    path: /reference-architectures/
   - title: Designing Scalable, Portable Docker Container Networks
     path: /kb/2046/
   - title: Development Pipeline Best Practices Using Docker EE

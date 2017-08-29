@@ -603,7 +603,7 @@ root @ ~  ls -asl /tmp/secret_file
    Here is an example output:
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-0.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-0.jpeg"/>
   </p>
   <p>
    The output is straightforward. There is a status message, CIS Benchmark Control number, and description fields. Look for the
@@ -652,7 +652,7 @@ root @ ~  ls -asl /tmp/secret_file
   Universal Control Plane is configured to be "Secure by default." It uses two Certificate Authorities with Mutual TLS. UCP sets up two CAs. One CA is used for ALL internal communication between managers and workers. The second CA is for the end user communication. Two communication paths are vital to keeping the traffic segregated. The use of Mutual TLS is automatic between the manager and worker nodes. Mutual TLS is where both the client and the server verify the identity of each other. Another important note is that the worker nodes are unprivileged, meaning they do not have access to the cluster state or secrets. When adding nodes to the UCP cluster you need to use a join token. The token itself incorporates a checksum of the CA cert so the new node can verify it's talking to the right swarm.
  </p>
  <p>
-  <img alt="" class="internal" src="/_kb/images/1908-1.png"/>
+  <img alt="" class="internal" src="/kb/images/1908-1.png"/>
  </p>
  <p>
   <a name="ucp-network">
@@ -668,7 +668,7 @@ root @ ~  ls -asl /tmp/secret_file
    Networking can be an important part of a Docker EE deployment. The basic rule of thumb is not to have firewalls between the manager and worker nodes. When deploying to a cloud infrastructure, low latency is a must between nodes. Low latency ensures the databases are able to keep quorum. When a software, or hardware, firewall is deployed between the nodes the following ports need to be opened.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-2.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-2.jpeg"/>
   </p>
   <p>
    <a name="ucp-auth">
@@ -693,7 +693,7 @@ root @ ~  ls -asl /tmp/secret_file
    for instructions and best practices while configuring LDAP authentication.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-3.png"/>
+   <img alt="" class="internal" src="/kb/images/1908-3.png"/>
   </p>
   <p>
    <a name="ucp-cert">
@@ -725,7 +725,7 @@ root @ ~  ls -asl /tmp/secret_file
    in the UCP web interface and add the CA, Cert, and Key.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-4.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-4.jpeg"/>
   </p>
   <p>
    More detailed
@@ -761,7 +761,7 @@ root @ ~  ls -asl /tmp/secret_file
    button.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-5.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-5.jpeg"/>
   </p>
   <p>
    <a name="ucp-key">
@@ -782,7 +782,7 @@ root @ ~  ls -asl /tmp/secret_file
    and scroll down.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-6.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-6.jpeg"/>
   </p>
   <p>
    <a name="ucp-client-bundles">
@@ -803,7 +803,7 @@ root @ ~  ls -asl /tmp/secret_file
    in the upper right hand corner.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-7.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-7.jpeg"/>
   </p>
   <p>
    From here a client bundle can be created and downloaded. Inside the bundle are the files necessary for talking to the UCP cluster directly.
@@ -879,7 +879,7 @@ root @ ~  ls -asl /tmp/secret_file
    RBAC for Docker EE has two fundamental types of users: administrators and regular users. Administrators can make changes to the UCP cluster, while regular users have permissions that range from no access to full control over volumes, networks, images, secrets, and containers. Administrators can choose one of four permission levels ranging from no access to full control as a default for regular users.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-8.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-8.jpeg"/>
   </p>
   <p>
    Teams and labels give the administrator fine-grain control over permissions. Each team can have multiple labels. Each label has a key of
@@ -889,13 +889,13 @@ root @ ~  ls -asl /tmp/secret_file
    . The label is then applied to the containers, services, networks, secrets, and volumes.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-9.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-9.jpeg"/>
   </p>
   <p>
    Here is a better view of the permissions levels.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-10.png"/>
+   <img alt="" class="internal" src="/kb/images/1908-10.png"/>
   </p>
   <p>
    As you can see, labels are necessary for implementing RBAC. Since a team can have multiple labels, it is a good idea to be as descriptive as possible. Remember the label is going to be applied to the network, volumes, secrets, and even the running containers.
@@ -941,7 +941,7 @@ root @ ~  ls -asl /tmp/secret_file
    can be created:
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-11.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-11.jpeg"/>
   </p>
   <p>
    A permission label for RBAC also needs to be created. Click on the new team name, and then go to the
@@ -959,7 +959,7 @@ root @ ~  ls -asl /tmp/secret_file
    .
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-12.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-12.jpeg"/>
   </p>
   <p>
    Having separate labels within a team can provide logical separation between apps and even environments. For example, limit access the CRM team has to the objects labeled
@@ -973,7 +973,7 @@ root @ ~  ls -asl /tmp/secret_file
    .
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-13.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-13.jpeg"/>
   </p>
   <p>
    Alternatively, you can use the same label across different teams providing different levels of access:
@@ -1070,7 +1070,7 @@ root @ ~  ls -asl /tmp/secret_file
    When you add a secret to the swarm, Docker sends the secret to the Swarm manager over a mutual TLS connection. The secret is stored in the Raft log, which is encrypted. The entire Raft log is replicated across the other managers, ensuring the same high availability guarantees for secrets as for the rest of the swarm management data.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-14.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-14.jpeg"/>
   </p>
   <p>
    When you grant a newly-created or running service access to a secret, the decrypted secret is mounted into the container in an in-memory filesystem at
@@ -1116,13 +1116,13 @@ root @ ~  ls -asl /tmp/secret_file
    .
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-15.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-15.jpeg"/>
   </p>
   <p>
    From the following page you can see permissions and what services are actively using this secret:
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-16.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-16.jpeg"/>
   </p>
   <p>
    Secrets are only available to services. The following creates an
@@ -1132,7 +1132,7 @@ root @ ~  ls -asl /tmp/secret_file
    service. The service and the secret MUST have the same permission label. If they don't match, UCP won't allow you to deploy.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-17.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-17.jpeg"/>
   </p>
   <p>
    Click
@@ -1150,7 +1150,7 @@ root @ ~  ls -asl /tmp/secret_file
    . The advanced settings allow you to set the UID/GID and file mode for the secret when it is mounted. Binaries and tar balls can be added as secrets, with a file size up to 500KB.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-18.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-18.jpeg"/>
   </p>
   <p>
    When using the CLI the option,
@@ -1178,7 +1178,7 @@ root @ ~  ls -asl /tmp/secret_file
    . Because of labels in our example, only administrators and the crm team have access to this container and secret.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-19.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-19.jpeg"/>
   </p>
   <p>
    Changing secrets is as easy as removing the current version and creating it again. Please keep in mind that you need to be sure the labels on the new secret are correct.
@@ -1202,7 +1202,7 @@ root @ ~  ls -asl /tmp/secret_file
    you can set the logging level and destination.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-20.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-20.jpeg"/>
   </p>
   <p>
    This is a great way to point all the logs to Splunk or an ELK (Elasticsearch Logstash Kibana) stack.
@@ -1262,7 +1262,7 @@ root @ ~  ls -asl /tmp/secret_file
    .
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-21.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-21.jpeg"/>
   </p>
   <p>
    For more instructions for adding external certificates, refer to the
@@ -1380,7 +1380,7 @@ root @ ~  ls -asl /tmp/secret_file
    in UCP.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-22.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-22.jpeg"/>
   </p>
   <p>
    Your choice of storage is highly influenced by where you are deploying Docker EE because it is important to place DTR's backend storage as close as possible to DTR itself. You should always ensure that you are using HTTPS (TLS). Also consider how are you going to backup DTR's images. When in doubt, use a secure object store, such as S3 or similar. Object stores provide the best balance between security and ease of use and also make it easy for HA DTR setups.
@@ -1408,7 +1408,7 @@ root @ ~  ls -asl /tmp/secret_file
    is the best approach to ensuring unnecessary images are removed.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-23.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-23.jpeg"/>
   </p>
   <p>
    <a name="dtr-rbac">
@@ -1425,7 +1425,7 @@ root @ ~  ls -asl /tmp/secret_file
    Since Universal Control Plane and Docker Trusted Registry utilize the same authentication backend, users are shared between the two. This simplifies user management. However, there is a slight difference in how teams are handled. Universal Control Plane uses "Teams" to organize users. Docker Trusted Registry uses "organizations." This is due to how the repositories are handled. Similar to UCP's user management, organizations need to be created.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-24.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-24.jpeg"/>
   </p>
   <p>
    Once the organizations are created, DTR has the ability to add teams within the organization.
@@ -1454,7 +1454,7 @@ root @ ~  ls -asl /tmp/secret_file
    </li>
   </ul>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-25.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-25.jpeg"/>
   </p>
   <p>
    For example, an organization named
@@ -1472,13 +1472,13 @@ root @ ~  ls -asl /tmp/secret_file
    were created. Permissions can now be applied to the images themselves.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-26.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-26.jpeg"/>
   </p>
   <p>
    This chart shows the different permission levels:
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-27.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-27.jpeg"/>
   </p>
   <p>
    It is important to limit the number of users that have access to images. Applying the permission levels correctly is important.
@@ -1589,7 +1589,7 @@ Successfully signed "dtr.example.com/admin/alpine":signed
    A successfully signed image has a green check mark in the DTR GUI.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-28.jpeg"/>
+   <img alt="" class="internal" src="/kb/images/1908-28.jpeg"/>
   </p>
   <p>
    <a name="dtr-key-management">
@@ -1736,7 +1736,7 @@ targets    ...ullet.com/admin/alpine    2a0738c4f75e97d3a5bbd48d3e166da5f624ccb8
      user must be in a team.
     </p>
     <p>
-     <img alt="" class="internal" src="/_kb/images/1908-29.jpeg"/>
+     <img alt="" class="internal" src="/kb/images/1908-29.jpeg"/>
     </p>
     <p>
      While still logged in as an admin, navigate to
@@ -1777,7 +1777,7 @@ targets    ...ullet.com/admin/alpine    2a0738c4f75e97d3a5bbd48d3e166da5f624ccb8
      user.
     </p>
     <p>
-     <img alt="" class="internal" src="/_kb/images/1908-30.jpeg"/>
+     <img alt="" class="internal" src="/kb/images/1908-30.jpeg"/>
     </p>
     <p>
      The signing policy implementation uses the certificates issued in user client bundles to connect a signature to a user. Using an incognito browser window (or otherwise), log into the
@@ -1934,7 +1934,7 @@ notary publish dtr.example.com/admin/alpine
      Similar to delegating a key for Jenkins, you can delegate multiple keys for teams. There are a few tricks for this. When adding a delegation, it is recommended to add the delegation for the targets/releases role as well as a role to indicate the team.
     </p>
     <p>
-     <img alt="" class="internal" src="/_kb/images/1908-31.jpeg"/>
+     <img alt="" class="internal" src="/kb/images/1908-31.jpeg"/>
     </p>
     <p>
      For example, with these three teams: developer, qa, and devops in the targets/releases role, it would be best to add each to the targets/releases role and also create a role for each key:
@@ -2065,7 +2065,7 @@ notary list dtr.example.com/admin/alpine -r targets/admin
    to ensure an extremely secure supply chain for your images.
   </p>
   <p>
-   <img alt="" class="internal" src="/_kb/images/1908-32.png"/>
+   <img alt="" class="internal" src="/kb/images/1908-32.png"/>
   </p>
   <p>
    <a name="dtr-scan-setup">
@@ -2130,7 +2130,7 @@ notary list dtr.example.com/admin/alpine -r targets/admin
     </li>
    </ul>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-33.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-33.jpeg"/>
    </p>
    <p>
     By default, when Security Scanning is enabled, new repositories automatically scan on
@@ -2184,13 +2184,13 @@ notary list dtr.example.com/admin/alpine -r targets/admin
     . A clean image scan has a green checkmark shield icon:
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-34.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-34.jpeg"/>
    </p>
    <p>
     A vulnerable image scan has a red warning shield:
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-35.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-35.jpeg"/>
    </p>
    <p>
     There are two views for the scanning results,
@@ -2208,13 +2208,13 @@ notary list dtr.example.com/admin/alpine -r targets/admin
     view shows which layer of the image had the vulnerable binary. This is extremely useful when diagnosing where the vulnerability is in the Dockerfile:
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-36.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-36.jpeg"/>
    </p>
    <p>
     The vulnerable binary is displayed, along with all the other contents of the layer, when you click the layer itself. In this example there are two vulnerable binaries:
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-37.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-37.jpeg"/>
    </p>
    <p>
     Click the vulnerable image to see the
@@ -2228,7 +2228,7 @@ notary list dtr.example.com/admin/alpine -r targets/admin
     view the CVE number, a link to CVE database, file path, layers affected, severity, and description of severity are available:
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-38.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-38.jpeg"/>
    </p>
    <p>
     Now you can take action against and vulnerable binary/layer/image.
@@ -2320,13 +2320,13 @@ notary list dtr.example.com/admin/alpine -r targets/admin
     .
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-39.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-39.jpeg"/>
    </p>
    <p>
     In the API docs you can see all sorts of examples for extending DTR. Near the bottom is the webhooks section. Examples and even a "Try it out" function is available.
    </p>
    <p>
-    <img alt="" class="internal" src="/_kb/images/1908-40.jpeg"/>
+    <img alt="" class="internal" src="/kb/images/1908-40.jpeg"/>
    </p>
    <p>
     <a name="putting-it-all-together">

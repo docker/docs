@@ -50,7 +50,7 @@ tags:
   To use the first option, you simply need to plug in a valid domain name (e.g dtr.enterprise.com) for DTR and restart it. A new certificate for that specific domain name will be generated and used. See Below:
  </p>
  <p>
-  <img height="240" src="/_kb/images/675-0.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
+  <img height="240" src="/kb/images/675-0.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
  </p>
  <p>
   If you would like to use your own CA-signed certificate, you need to ensure it’s in the right format. DTR expects a PEM-encoded certificate and key. DTR also expects the full certificate chain. For example, if your SSL certificate provider/issuer provided you the certificated with DER, P7B, PK7S..etc, you would need to first convert the full certificate to PEM (see
@@ -138,7 +138,7 @@ tags:
   If you have installed a CA-signed certificate on your DTR instance and are experiencing errors during login via the Docker CLI such as:
  </p>
  <p>
-  <img src="/_kb/images/675-1.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
+  <img src="/kb/images/675-1.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
  </p>
  <p>
   This could be due to “lack of trust” by not of having the DTR CA certificate present on the client Docker daemon host.  Assuming you have correctly uploaded a valid certificate onto your DTR instance, a secure TLS connection can be established by validating your client against your DTR instance using two preferred options:

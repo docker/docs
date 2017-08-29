@@ -257,7 +257,7 @@ networks:
    </li>
   </ul>
   <p>
-   <img alt="Prerequisite Working Environment" class="internal" src="/_kb/images/1421-0.png"/>
+   <img alt="Prerequisite Working Environment" class="internal" src="/kb/images/1421-0.png"/>
   </p>
   <p>
    <strong>
@@ -375,7 +375,7 @@ networks:
    UCP controllers are stateless by design. All UCP controllers accept requests and then forward them to the underlying Swarm Manager. Any controller failure when UCP is deployed in HA will not have any impact on your UCP cluster, both from UCP web access (UI) or Docker client requests using the CLI. However, if you're statically mapping a DNS record to a primary UCP controller's IP address and that controller goes down, you will not be able to reach UCP. For that reason, it is recommended to deploy a UCP controller load balancer. An upstream load balancer can distribute all UCP requests to all three controllers behind it. Similarly, if you're deploying UCP in a public cloud, you can create a load balancer directly from the cloud provider (For example, AWS ELB or Azure Load Balancer)
   </p>
   <p>
-   <img alt="UCP Load Balancer" class="internal" src="/_kb/images/1421-1.png"/>
+   <img alt="UCP Load Balancer" class="internal" src="/kb/images/1421-1.png"/>
   </p>
   <p>
    As a sample reference, an HAProxy load balancer config file is as follows:
@@ -568,7 +568,7 @@ backend servers
    .
   </p>
   <p>
-   <img alt="Intra Cluster Traffic" class="internal" src="/_kb/images/1421-2.png"/>
+   <img alt="Intra Cluster Traffic" class="internal" src="/kb/images/1421-2.png"/>
   </p>
  </div>
  <div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)">
@@ -619,7 +619,7 @@ backend servers
   These steps provide the necessary service registration and load balancing solution that can be used by any developer when deploying their applications on UCP. Follow these step-by-step procedures to configure your UCP cluster based on your preferred industry-standard load balancing backend (NGINX). The following diagram shows the load balancing solution.
  </p>
  <p>
-  <img alt="Load Balancing Solution" class="internal" src="/_kb/images/1421-3.png"/>
+  <img alt="Load Balancing Solution" class="internal" src="/kb/images/1421-3.png"/>
  </p>
  <p>
   The following steps provide a guideline to configuring the load-balancing solution on a dedicated UCP node using Interlock + NGINX/NGINX+:
@@ -1059,8 +1059,8 @@ Creating and starting 10 ... done
   </li>
  </ol>
  <p>
-  <img alt="" class="internal" src="/_kb/images/1421-4.png"/>
-  <img alt="" class="internal" src="/_kb/images/1421-5.png"/>
+  <img alt="" class="internal" src="/kb/images/1421-4.png"/>
+  <img alt="" class="internal" src="/kb/images/1421-5.png"/>
  </p>
 </div>
 <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)">

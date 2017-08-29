@@ -189,7 +189,7 @@ esvar authorByline = "Mark Church";
   (CNM). The philosophy of CNM is to provide application portability across diverse infrastructures. This model strikes a balance to achieve application portability and also takes advantage of special features and capabilities of the infrastructure.
  </p>
  <p>
-  <img alt="Container Networking Model" class="internal" src="/_kb/images/2046-0.png"/>
+  <img alt="Container Networking Model" class="internal" src="/kb/images/2046-0.png"/>
  </p>
  <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
   <span id="CNM_Constructs">
@@ -262,7 +262,7 @@ esvar authorByline = "Mark Church";
    </li>
   </ul>
   <p>
-   <img alt="CNM API" class="internal" src="/_kb/images/2046-1.png"/>
+   <img alt="CNM API" class="internal" src="/kb/images/2046-1.png"/>
   </p>
  </div>
  <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Designing_Scalable,_Portable_Docker_Container_Networks">
@@ -666,7 +666,7 @@ c97909a4b198        none                null                local
  </p>
  <p>
   <span class="float-right">
-   <img alt="Docker Network Control Plane" class="internal" src="/_kb/images/2046-2.png"/>
+   <img alt="Docker Network Control Plane" class="internal" src="/kb/images/2046-2.png"/>
   </span>
  </p>
  <p>
@@ -752,7 +752,7 @@ c97909a4b198        none                null                local
   network are able to communicate with each other on the host interfaces. From a networking standpoint this is equivalent to multiple processes running on a host without containers. Because they are using the same host interfaces, no two containers are able to bind to the same TCP port. This may cause port contention if multiple containers are being scheduled on the same host.
  </p>
  <p>
-  <img alt="Host Driver" class="internal" src="/_kb/images/2046-3.png"/>
+  <img alt="Host Driver" class="internal" src="/kb/images/2046-3.png"/>
  </p>
  <pre>
 <code class="bash">#Create containers on the host network
@@ -1001,7 +1001,7 @@ default via 172.17.0.1 dev eth0
    A container can have zero to many interfaces depending on how many networks it is connected to. Each Docker network can only have a single interface per container.
   </p>
   <p>
-   <img alt="Default Docker Bridge Network" class="internal" src="/_kb/images/2046-4.png"/>
+   <img alt="Default Docker Bridge Network" class="internal" src="/kb/images/2046-4.png"/>
   </p>
   <p>
    As shown in the host routing table, the IP interfaces in the global network namespace now include
@@ -1093,7 +1093,7 @@ default via 172.31.16.1 dev eth0
    network, user-defined networks supports manual IP address and subnet assignment. If an assignment isn't given, then Docker's default IPAM driver assigns the next subnet available in the private IP space.
   </p>
   <p>
-   <img alt="User-Defined Bridge Network" class="internal" src="/_kb/images/2046-5.png"/>
+   <img alt="User-Defined Bridge Network" class="internal" src="/kb/images/2046-5.png"/>
   </p>
   <p>
    Below a user-defined
@@ -1212,7 +1212,7 @@ e1cac9da3116        bridge              bridge              local
 <code>$ docker run -d --name C2 --net my_bridge -p 5000:80 nginx
 </code></pre>
   <p>
-   <img alt="Port Mapping and Masquerading" class="internal" src="/_kb/images/2046-6.png"/>
+   <img alt="Port Mapping and Masquerading" class="internal" src="/kb/images/2046-6.png"/>
   </p>
   <p>
    External access is configured using
@@ -1329,7 +1329,7 @@ e1cac9da3116        bridge              bridge              local
    VXLAN is defined as a MAC-in-UDP encapsulation that places container Layer 2 frames inside an underlay IP/UDP header. The underlay IP/UDP header provides the transport between hosts on the underlay network. The overlay is the stateless VXLAN tunnel that exists as point-to-multipoint connections between each host participating in a given overlay network. Because the overlay is independent of the underlay topology, applications become more portable. Thus, network policy and connectivity can be transported with the application whether it is on-premises, on a developer desktop, or in a public cloud.
   </p>
   <p>
-   <img alt="Packet Flow for an Overlay Network" class="internal" src="/_kb/images/2046-7.png"/>
+   <img alt="Packet Flow for an Overlay Network" class="internal" src="/kb/images/2046-7.png"/>
   </p>
   <p>
    In this diagram, the packet flow on an overlay network is shown. Here are the steps that take place when
@@ -1438,7 +1438,7 @@ e1cac9da3116        bridge              bridge              local
   </p>
   <p>
    <span class="float-right">
-    <img alt="Overlay Network Created by Docker Swarm" class="internal" src="/_kb/images/2046-8.png"/>
+    <img alt="Overlay Network Created by Docker Swarm" class="internal" src="/kb/images/2046-8.png"/>
    </span>
   </p>
   <p>
@@ -1655,7 +1655,7 @@ conatiner$ ip address
    mode is for global containers that exist once per host. These containers may expose specific information about a the local host (such as monitoring or logging) that are only relevant for that host and so you would not want to load balance when accessing that service.
   </p>
   <p>
-   <img alt="Ingress Mode vs Host Mode" class="internal" src="/_kb/images/2046-9.png"/>
+   <img alt="Ingress Mode vs Host Mode" class="internal" src="/kb/images/2046-9.png"/>
   </p>
  </div>
 </div>
@@ -1716,7 +1716,7 @@ conatiner$ ip address
  </p>
  <p>
   <span class="float-right">
-   <img alt="Connecting Containers with a MACVLAN Network" class="internal" src="/_kb/images/2046-10.png"/>
+   <img alt="Connecting Containers with a MACVLAN Network" class="internal" src="/kb/images/2046-10.png"/>
   </span>
  </p>
  <p>
@@ -1779,7 +1779,7 @@ PING 127.0.0.1 (127.0.0.1): 56 data bytes
   </p>
   <p>
    <span class="float-right">
-    <img alt="VLAN Trunking with MACVLAN" class="internal" src="/_kb/images/2046-11.png"/>
+    <img alt="VLAN Trunking with MACVLAN" class="internal" src="/kb/images/2046-11.png"/>
    </span>
   </p>
   <p>
@@ -1971,7 +1971,7 @@ $ docker run -it --name c2--net macvlan20 --ip 192.168.20.2 busybox sh
   does not belong on the same network(s) as the source container, then Docker Engine forwards the DNS query to the configured default DNS server.
  </p>
  <p>
-  <img alt="Service Discovery" class="internal" src="/_kb/images/2046-12.png"/>
+  <img alt="Service Discovery" class="internal" src="/kb/images/2046-12.png"/>
  </p>
  <p>
   In this example there is a service of two containers called
@@ -2062,7 +2062,7 @@ $ docker run -it --name c2--net macvlan20 --ip 192.168.20.2 busybox sh
    Internal load balancing is instantiated automatically when Docker services are created. When services are created in a Docker Swarm cluster, they are automatically assigned a Virtual IP (VIP) that is part of the service's network. The VIP is returned when resolving the service's name. Traffic to that VIP is automatically sent to all healthy tasks of that service across the overlay network. This approach avoids any client-side load balancing because only a single IP is returned to the client. Docker takes care of routing and equally distributing the traffic across the healthy service tasks.
   </p>
   <p>
-   <img alt="Internal Load Balancing" class="internal" src="/_kb/images/2046-13.png"/>
+   <img alt="Internal Load Balancing" class="internal" src="/kb/images/2046-13.png"/>
   </p>
   <p>
    To see the VIP, run a
@@ -2148,7 +2148,7 @@ $ docker service inspect myservice
 $ docker service create --name app --replicas 2 --network appnet -p 8000:80 nginx
 </code></pre>
   <p>
-   <img alt="Routing Mess" class="internal" src="/_kb/images/2046-14.png"/>
+   <img alt="Routing Mess" class="internal" src="/kb/images/2046-14.png"/>
   </p>
   <p>
    This diagram illustrates how the Routing Mesh works.
@@ -2194,7 +2194,7 @@ $ docker service create --name app --replicas 2 --network appnet -p 8000:80 ngin
    UCP provides L7 HTTP/HTTPS load balancing through the HTTP Routing Mesh. URLs can be load balanced to services and load balanced across the service replicas.
   </p>
   <p>
-   <img alt="Routing Mess" class="internal" src="/_kb/images/2046-15.png"/>
+   <img alt="Routing Mess" class="internal" src="/kb/images/2046-15.png"/>
   </p>
   <p>
    Go to the
@@ -2320,7 +2320,7 @@ $ docker service create --name app --replicas 2 --network appnet -p 8000:80 ngin
    This diagram illustrates how to secure communication between two containers running on different hosts in a Docker Swarm.
   </p>
   <p>
-   <img alt="Secure Communications between 2 Containers on Different Hosts" class="internal" src="/_kb/images/2046-16.png"/>
+   <img alt="Secure Communications between 2 Containers on Different Hosts" class="internal" src="/kb/images/2046-16.png"/>
   </p>
   <p>
    This feature works can be enabled per network at the time of creation by adding the
@@ -2351,7 +2351,7 @@ $ docker service create --name app --replicas 2 --network appnet -p 8000:80 ngin
    When creating networks with UCP, teams and labels define access to container resources. Resource permission labels define who can view, configure, and use certain Docker networks.
   </p>
   <p>
-   <img alt="UCP Network" class="internal" src="/_kb/images/2046-17.png"/>
+   <img alt="UCP Network" class="internal" src="/kb/images/2046-17.png"/>
   </p>
   <p>
    This UCP screenshot shows the use of the label
@@ -2553,7 +2553,7 @@ Starting web container e750c649a6b5
   <p>
   </p>
   <p>
-   <img alt="Pet App using Bridge Driver" class="internal" src="/_kb/images/2046-18.png"/>
+   <img alt="Pet App using Bridge Driver" class="internal" src="/kb/images/2046-18.png"/>
   </p>
   <p>
   </p>
@@ -2662,7 +2662,7 @@ host-B $ docker run -d -p 8000:5000 -e 'DB=172.31.21.237:8500' --name web chrch/
    IP address.
   </p>
   <p>
-   <img alt="Pet App with Multi-Host Bridge Driver" class="internal" src="/_kb/images/2046-19.png"/>
+   <img alt="Pet App with Multi-Host Bridge Driver" class="internal" src="/kb/images/2046-19.png"/>
   </p>
   <blockquote>
    <p>
@@ -2778,7 +2778,7 @@ lxnjfo2dnjxq  db    replicated  1/1       consul:latest
 t222cnez6n7h  web   replicated  0/1       chrch/docker-pets:1.0
 </code></pre>
   <p>
-   <img alt="Pets App with Overlay Network" class="internal" src="/_kb/images/2046-20.png"/>
+   <img alt="Pets App with Overlay Network" class="internal" src="/kb/images/2046-20.png"/>
   </p>
   <p>
    As in the single-host bridge example, we pass in
@@ -2873,7 +2873,7 @@ t222cnez6n7h  web   replicated  0/1       chrch/docker-pets:1.0
    , a MACVLAN network binds itself to a host interface. This can be a physical interface, a logical sub-interface, or a bonded logical interface. It acts as a virtual switch and provides communication between containers on the same MACVLAN network. Each container receives a unique MAC address and an IP address of the physical network that the node is attached to.
   </p>
   <p>
-   <img alt="Pets App on a MACVLAN Network" class="internal" src="/_kb/images/2046-21.png"/>
+   <img alt="Pets App on a MACVLAN Network" class="internal" src="/kb/images/2046-21.png"/>
   </p>
   <p>
    In this example, the Pets application is deployed on to

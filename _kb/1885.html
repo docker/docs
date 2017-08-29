@@ -63,7 +63,7 @@ var authorByline = "Lee Namba";
    A typical enterprise has separate development and operations teams and may have some level of DevOps adoption. In general, operations teams are responsible for delivering and supporting the infrastructure up to the operating systems and even middleware components. Development teams are responsible for building and maintaining the applications. There is also some type of continuous integration (CI) for automated build and testing as well as continuous delivery (CD) for deploying versions to the different environments.
   </p>
   <p>
-   <img alt="General Organization" class="internal" src="/_kb/images/1885-0.png"/>
+   <img alt="General Organization" class="internal" src="/kb/images/1885-0.png"/>
   </p>
  </div>
  <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
@@ -76,7 +76,7 @@ var authorByline = "Lee Namba";
    A typical CI/CD workflow is shown in the following diagram:
   </p>
   <p>
-   <img alt="General Workflow" class="internal" src="/_kb/images/1885-1.png"/>
+   <img alt="General Workflow" class="internal" src="/kb/images/1885-1.png"/>
   </p>
   <p>
    It starts on the left-hand side with development teams building applications. A CI/CD system then runs unit tests, packages the applications and builds Docker images on the Docker Universal Control Plane (UCP). If all tests pass, the images can be signed using
@@ -168,7 +168,7 @@ var authorByline = "Lee Namba";
   Developers and application teams usually use different repositories within the organization to develop, deploy, and test their applications. This section discusses the following diagram of a typical developer workflow using Docker EE as well as their interactions with the repositories:
  </p>
  <p>
-  <img alt="Developer Workflow" class="internal" src="/_kb/images/1885-2.png"/>
+  <img alt="Developer Workflow" class="internal" src="/kb/images/1885-2.png"/>
  </p>
  <p>
   A typical developer workflow follows these steps:
@@ -389,7 +389,7 @@ $ docker service create --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0
   A CI/CD platform uses different systems within the organization to automatically build, deploy, and test applications. This section discusses a typical CI/CD workflow using Docker EE and their interactions with those repositories as showing in the following illustration:
  </p>
  <p>
-  <img alt="CI/CD Workflow" class="internal" src="/_kb/images/1885-3.png"/>
+  <img alt="CI/CD Workflow" class="internal" src="/kb/images/1885-3.png"/>
  </p>
  <p>
   A typical CI/CD workflow follows these steps:
@@ -485,7 +485,7 @@ $ docker service create --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0
   The operations workflow usually consists of two parts. It starts at the beginning of the entire development pipeline creating base images for development teams to use, and it ends with pulling and deploying the production ready images from the developer teams. The workflow for creating base images is the same as the developer workflow, so it is not shown here. However, the following diagram illustrates a typical Operations workflow for deploying images in production:
  </p>
  <p>
-  <img alt="Ops Workflow" class="internal" src="/_kb/images/1885-4.png"/>
+  <img alt="Ops Workflow" class="internal" src="/kb/images/1885-4.png"/>
  </p>
  <p>
   A typical operations workflow follows these steps:
@@ -788,7 +788,7 @@ $ docker service create --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0
     Similarly with microservices, the same criteria apply. For example, consider a microservice that depends on a logging agent to push logs to a centralized logging database. The following diagram shows two different strategies for a high availability deployment for the microservice.
    </p>
    <p>
-    <img alt="Image Granularity" class="internal" src="/_kb/images/1885-5.png"/>
+    <img alt="Image Granularity" class="internal" src="/kb/images/1885-5.png"/>
    </p>
    <p>
     If the microservice and logging agent are loosely coupled, they can be run in separate containers such as in the configuration on the left. However, if the service and the logging agent are tightly coupled and their release lifecycles are identical, then putting the two processes in the same container can simplify deployments and upgrades as illustrated in the configuration on the right. To manage multiple processes there are several lightweight init systems for containers such as dumb-init and runit.
@@ -946,7 +946,7 @@ $ docker service create --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0
    Docker images natively provide inheritance. One of the benefits of deriving from base images is that any changes to a base or upstream image are inherited by the child image simply by rebuilding that image without any change to the child Dockerfile. By using inheritance, an enterprise can very simple enforce policies with no changes to their many applications’ Dockerfiles. Typically, an enterprise will develop a hierarchy of base images depending on how diverse their technology stacks are. The following is an example of an image hierarchy.
   </p>
   <p>
-   <img alt="Image Hierarchy" class="internal" src="/_kb/images/1885-6.png"/>
+   <img alt="Image Hierarchy" class="internal" src="/kb/images/1885-6.png"/>
   </p>
   <p>
    On the left are the enterprise-wide base images typically provided by the global operations team, and on the right are the application images. Even on the application side, depending on how large an application or program is, there can be a hierarchy as well.

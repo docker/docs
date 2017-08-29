@@ -104,7 +104,7 @@ var authorByline = "Andrew Hromis";
   and the source container are not on the same network, Docker Engine forwards the DNS query to the default DNS server.
  </p>
  <p>
-  <img alt="Service Discovery" class="internal" src="/_kb/images/1960-0.png"/>
+  <img alt="Service Discovery" class="internal" src="/kb/images/1960-0.png"/>
  </p>
  <p>
   In this example, there is a service of two containers called
@@ -184,7 +184,7 @@ var authorByline = "Andrew Hromis";
   When services are created in a Docker Swarm cluster, they are automatically assigned a Virtual IP (VIP) that is part of the service's network. The VIP is returned when resolving the service's name. Traffic to the VIP is automatically sent to all healthy tasks of that service across the overlay network. This approach avoids any client-side load balancing because only a single IP is returned to the client. Docker takes care of routing and equally distributes the traffic across the healthy service tasks.
  </p>
  <p>
-  <img alt="Internal Load Balancing" class="internal" src="/_kb/images/1960-1.png"/>
+  <img alt="Internal Load Balancing" class="internal" src="/kb/images/1960-1.png"/>
  </p>
  <p>
   To get the VIP of a service, run the
@@ -268,7 +268,7 @@ $ docker service inspect myservice
 $ docker service create --name app --replicas 2 --network appnet --publish 8000:80 nginx
 </code></pre>
  <p>
-  <img alt="Routing Mesh" class="internal" src="/_kb/images/1960-2.png"/>
+  <img alt="Routing Mesh" class="internal" src="/kb/images/1960-2.png"/>
  </p>
  <p>
   This diagram illustrates how the routing mesh works.
@@ -361,7 +361,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
   Below is a diagram that displays a higher level view of how the swarm mode routing mesh and HRM work together.
  </p>
  <p>
-  <img alt="HRM High Level" class="internal" src="/_kb/images/1960-3.png"/>
+  <img alt="HRM High Level" class="internal" src="/kb/images/1960-3.png"/>
  </p>
  <ul>
   <li>
@@ -382,7 +382,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
   Looking closer, you can see what the HRM is doing. The following graphic represents a closer look of the previous diagram.
  </p>
  <p>
-  <img alt="HRM Up Close" class="internal" src="/_kb/images/1960-4.png"/>
+  <img alt="HRM Up Close" class="internal" src="/kb/images/1960-4.png"/>
  </p>
  <ul>
   <li>
@@ -441,7 +441,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
    The following diagram shows an example with wildcard DNS:
   </p>
   <p>
-   <img alt="HRM Wildcard DNS" class="internal" src="/_kb/images/1960-5.png"/>
+   <img alt="HRM Wildcard DNS" class="internal" src="/kb/images/1960-5.png"/>
   </p>
  </div>
  <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
@@ -480,7 +480,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
    </li>
   </ol>
   <p>
-   <img alt="UCP HRM DNS" class="internal" src="/_kb/images/1960-6.png"/>
+   <img alt="UCP HRM DNS" class="internal" src="/kb/images/1960-6.png"/>
   </p>
   <p>
    Once enabled, UCP creates a service on the swarm cluster to route traffic to the specified container based on the HTTP
@@ -555,7 +555,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
    when creating a network.
   </p>
   <p>
-   <img alt="UCP Enable hostname routing" class="internal" src="/_kb/images/1960-7.png"/>
+   <img alt="UCP Enable hostname routing" class="internal" src="/kb/images/1960-7.png"/>
   </p>
  </div>
  <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
@@ -646,7 +646,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
    </li>
   </ol>
   <p>
-   <img alt="UCP HRM DNS" class="internal" src="/_kb/images/1960-8.png"/>
+   <img alt="UCP HRM DNS" class="internal" src="/kb/images/1960-8.png"/>
   </p>
   <p>
    Which nodes should be used to route traffic, managers, or workers? There are a few ways to approach that question.
@@ -842,7 +842,7 @@ $ docker service create --name app --replicas 2 --network appnet --publish 8000:
      .
     </p>
     <p>
-     <img alt="UCP HRM Debug Logging" class="internal" src="/_kb/images/1960-9.png"/>
+     <img alt="UCP HRM Debug Logging" class="internal" src="/kb/images/1960-9.png"/>
     </p>
    </li>
    <li>
@@ -1057,7 +1057,7 @@ networks:
    variable when deploying through the UI.
   </p>
   <p>
-   <img alt="UCP UI Stack Deploy" class="internal" src="/_kb/images/1960-10.png"/>
+   <img alt="UCP UI Stack Deploy" class="internal" src="/kb/images/1960-10.png"/>
   </p>
   <p>
    Once HRM discovers the newly created service, it will list it in the UCP. Go to
@@ -1075,7 +1075,7 @@ networks:
    .
   </p>
   <p>
-   <img alt="HRM Configured Hosts" class="internal" src="/_kb/images/1960-11.png"/>
+   <img alt="HRM Configured Hosts" class="internal" src="/kb/images/1960-11.png"/>
   </p>
   <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
    <span id="HRM_Service_Deployment_Breakdown">
@@ -1299,7 +1299,7 @@ networks:
     When accessing and logging into the application, you should see a page similar to the following:
    </p>
    <p>
-    <img alt="Session Example Screenshot" class="internal" src="/_kb/images/1960-12.png"/>
+    <img alt="Session Example Screenshot" class="internal" src="/kb/images/1960-12.png"/>
    </p>
    <p>
     This is the same as the HTTP routing example but with the additional key value entry of
@@ -1408,7 +1408,7 @@ networks:
     </li>
    </ol>
    <p>
-    <img alt="Session ID Redis Screenshot" class="internal" src="/_kb/images/1960-13.png"/>
+    <img alt="Session ID Redis Screenshot" class="internal" src="/kb/images/1960-13.png"/>
    </p>
   </div>
  </div>
