@@ -19,6 +19,8 @@ the plugin does not collect or attempt to send any information to Docker.
 If you do not wish to send any usage data to Docker, you can disable the plugin,
 either using the Docker CLI or using Universal Control Plane.
 
+ > **Note**: If you're using Docker EE Standard or Advanced with Universal Control Plane, use Universal Control Plane (UCP) to enable and disable metrics. Only use the CLI if you do not have UCP. UCP will re-enable the telemitry plugin for hosts where it was disabled with the CLI.
+
 ### Use the Docker CLI
 
 To disable the telemetry plugin, use the `docker plugin disable` command:
