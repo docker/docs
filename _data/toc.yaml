@@ -134,7 +134,7 @@ guides:
       - path: /kitematic/known-issues/
         title: Known issues
     - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
+      title: Troubleshoot Docker Toolbox
   - sectiontitle: Release notes
     section:
       - path: /enterprise/release-notes/
@@ -458,6 +458,28 @@ guides:
     path: /kb/1421/
   - title: Universal Control Plane 2.0 Service Discovery and Load Balancing
     path: /kb/1960/
+- sectiontitle: Troubleshooting
+  section:
+  - title: "Troubleshooting overview"
+    path: /troubleshoot/
+  - title: "Troubleshoot Docker Cloud"
+    path: /troubleshoot/docker-cloud/
+    nosync: true
+  - title: "Troubleshoot Docker Hub"
+    path: /troubleshoot/docker-hub/
+    nosync: true
+  - title: "Troubleshoot Docker Trusted Registry"
+    path: /troubleshoot/docker-trusted-registry/
+    nosync: true
+  - title: "Troubleshoot Universal Control Plane"
+    path: /troubleshoot/universal-control-plane/
+    nosync: true
+  - title: "Troubleshoot Docker Datacenter"
+    path: /troubleshoot/docker-datacenter/
+    nosync: true
+  - sectiontitle: "Knowledge base"
+    section:
+    - knowledgebase: true
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
@@ -1510,11 +1532,10 @@ manuals:
     title: The Docker Cloud CLI
   - path: /docker-cloud/release-notes/
     title: Release notes
-  - sectiontitle: Troubleshoot Docker Cloud
-    section:
-    - path: /docker-cloud/docker-errors-faq/
-      title: Known issues in Docker Cloud
-    - tagpull: "product:cloud"
+  - path: /docker-cloud/docker-errors-faq/
+    title: Known issues in Docker Cloud
+  - title: Troubleshoot Docker Cloud
+    path: /troubleshoot/docker-cloud/
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -1757,6 +1778,8 @@ manuals:
         title: Incompatibilities and breaking changes
     - path: /datacenter/ucp/2.1/guides/get-support/
       title: Get support
+    - title: Troubleshoot Universal Control Plane
+      path: /troubleshoot/universal-control-plane/
   - sectiontitle: Docker Trusted Registry
     section:
     - path: /datacenter/dtr/2.2/guides/
@@ -1889,6 +1912,8 @@ manuals:
         title: Incompatibilities and breaking changes
     - path: /datacenter/dtr/2.2/guides/support/
       title: Get support
+    - title: Troubleshoot Docker Trusted Registry
+      path: /troubleshoot/docker-trusted-registry/
   - sectiontitle: Previous versions
     section:
     - sectiontitle: Universal Control Plane 2.0
@@ -2323,9 +2348,8 @@ manuals:
           title: API v1.3.3
       - path: /datacenter/dtr/2.0/support/
         title: Get support
-  - sectiontitle: Troubleshoot Docker Datacenter
-    section:
-    - tagpull: "product:datacenter"
+  - title: Troubleshoot Docker Datacenter
+    path: /troubleshoot/docker-datacenter/
 - sectiontitle: Docker for Mac
   section:
   - path: /docker-for-mac/
@@ -2630,6 +2654,8 @@ manuals:
       title: Automated builds from GitHub
     - path: /docker-hub/official_repos/
       title: Official repositories on Docker Hub
+    - title: Troubleshoot Docker Hub
+      path: /troubleshoot/docker-hub/
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/

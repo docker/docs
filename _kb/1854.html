@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1854/
+originalpath: https://success.docker.com/KBase/Can_two_DTR_instances_on_different_clusters_share_the_same_backend_metadata%3F
 source: https://success.docker.com/@api/deki/pages/1854/contents
 tags:
 - tag: "article:question"
@@ -13,7 +14,7 @@ tags:
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Back to: Docker Trusted Registry</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  No, it is not possible to have two separate DTR instances sharing the same backend metadata. If you want registry information replicated across multiple DTR hosts with shared backend metadata, they need to be replicas of one another in the same cluster. Using two separate DTR instances which are sharing the same backend (e.g. mounted via network volume) is very likely to cause some corruption at some point. The proper way to configure multiple DTR hosts is to set them up as replicas in a cluster to ensure they stay in sync.
 </p>
 

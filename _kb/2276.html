@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/2276/
+originalpath: https://success.docker.com/KBase/How_can_I_gain_root_level_CLI_access_to_a_Docker_for_AWS_instance%3F
 source: https://success.docker.com/@api/deki/pages/2276/contents
 tags:
 - tag: "article:howto"
@@ -12,7 +13,10 @@ tags:
 ---
 {% raw %}
 <p>
- When a user gains SSH access to a Docker for AWS node, in actuality the user's access is only within a SSH container deployed on the node. As a result, many non-Docker CLI commands are run within the container itself and not at a host level. Users can run CLI commands at the host level by performing an additional step as outlined in this article.
+ When a user gains SSH access to a Docker for AWS or Azure node, in actuality the user's access is only within a SSH container deployed on the node. As a result, many non-Docker CLI commands are run within the container itself and not at a host level. Users can run CLI commands at the host level by performing an additional step as outlined in this article.
+</p>
+<p>
+ Note: not all configuration changes made at the host level persists across reboots - these steps are provided primarily to assist with debugging.
 </p>
 <div class="mt-section" id="section_1" mt-section-origin="KBase/How_can_I_gain_root_level_CLI_access_to_a_Docker_for_AWS_instance?">
  <span id="Prerequisites">
@@ -48,7 +52,7 @@ tags:
    Via SSH
   </h3>
   <p>
-   To gain access to the host level of a Docker for AWS node via SSH, log into the Docker for AWS node using your Docker username and your private key file. After doing so, start a privileged container to enable shell access on the host using nsenter (
+   To gain access to the host level of a Docker for AWS or Azure node via SSH, log into the Docker for AWS or Azure node using your Docker username and your private key file. After doing so, start a privileged container to enable shell access on the host using nsenter (
    <a class="link-https" href="https://github.com/jpetazzo/nsenter" rel="external nofollow" target="_blank" title="https://github.com/jpetazzo/nsenter">
     https://github.com/jpetazzo/nsenter
    </a>
@@ -66,7 +70,7 @@ docker run -it --privileged --pid=host debian nsenter -t 1 -m -u -n -i sh
   </h3>
   <div class="replaceabletext style-wrap">
    <p>
-    To gain access to the host level of a Docker for AWS node via the UCP admin client bundle, run the same command as mentioned previously but with a node constraint to specify which node you're targeting. For example, if you intend to run it on a node named
+    To gain access to the host level of a Docker for AWS or Azure node via the UCP admin client bundle, run the same command as mentioned previously but with a node constraint to specify which node you're targeting. For example, if you intend to run it on a node named
     <code>
      node1
     </code>

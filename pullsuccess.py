@@ -5,12 +5,17 @@ import imghdr
 import shutil
 import base64
 
+# docker run -it --rm --name pullsuccess -v "$PWD":/app -w /app docs/pullsuccess python pullsuccess.py
+
 call(["rm", "-rf", "_kb"])
 call(["mkdir", "_kb"])
 call(["mkdir", "_kb/images"])
 requrl = "https://success.docker.com/@api/deki/pages/"
 response = urllib2.urlopen(requrl)
 soup = BeautifulSoup(response, 'lxml')
+keytags = ["component:ucp","component:dtr","component:hub","product:cloud","product:datacenter"]
+keytitles = ["Universal Control Plane", "Docker Trusted Registry", "Docker Hub", "Docker Cloud", "Docker Datacenter"]
+keyurls = ["/troubleshoot/universal-control-plane/","/troubleshoot/docker-trusted-registry/","/troubleshoot/docker-hub/","/troubleshoot/docker-cloud/","/troubleshoot/docker-datacenter/"]
 for page in soup.find_all('page'):
     fileout = '';
     skipme = False
@@ -69,7 +74,7 @@ for page in soup.find_all('page'):
                 link['href'] = link['href'].replace('https://docs.docker.com','')
                 for thisPage in soup.find_all('page'):
                     if link['href'] in thisPage.find('uri.ui').string:
-                        print link['href'] + ' changed to: ' + '/kb/' +  thisPage['id'] + '/'
+                        #print link['href'] + ' changed to: ' + '/kb/' +  thisPage['id'] + '/'
                         link['href'] = '/kb/' +  thisPage['id'] + '/'
         # save all images
         user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
@@ -96,6 +101,12 @@ for page in soup.find_all('page'):
             img['src'] = newSrcName + '.' + newImageFileExt
             print 'Saved: ' + newFileName + '.' + newImageFileExt
             imageIndex = imageIndex + 1
+        # Insert navigation
+        for thistag in metadatasoup.find_all('tag'):
+            for idx, val in enumerate(keytags):
+                print thistag['value'] + '(thistag["value"]) comparing to (val)' + val
+                if thistag['value']==val:
+                    fileout += '<a href="' + keyurls[idx] + '" class="button outline-btn">Back to: ' + keytitles[idx] + '</a>'
         fileout += rawhtml.prettify() + '\n'
         fileout += '{% endraw %}\n'
         f = open('_kb/' + page['id'] + '.html', 'w+')

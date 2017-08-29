@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1283/
+originalpath: https://success.docker.com/KBase/Can_UCP_run_in_a_boot2docker_virtualbox%3F
 source: https://success.docker.com/@api/deki/pages/1283/contents
 tags:
 - tag: "article:question"
@@ -13,7 +14,7 @@ tags:
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Back to: Universal Control Plane</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  No, running a UCP cluster in a boot2docker virtualbox is not supported and not recommended.
 </p>
 <div class="mt-section" id="section_1" mt-section-origin="KBase/Can_UCP_run_in_a_boot2docker_virtualbox?">
@@ -24,7 +25,7 @@ tags:
  </h2>
  <p>
   UCP must run on
-  <a class="link-https" href="https://docs.docker.com/cs-engine/" rel="external nofollow" target="_blank" title="Docker CS Engine">
+  <a class="link-https" href="/cs-engine/" rel="external nofollow" target="_blank" title="Docker CS Engine">
    Docker CS Engine
   </a>
   . CS Engine does not run on the boot2docker distro that Docker Machine's virtualbox and vmwarefusion drivers use.

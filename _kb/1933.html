@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1933/
+originalpath: https://success.docker.com/KBase/For_DTR%2C_how_do_I_remove_3DES_from_SSL_cipers_to_meet_security_requirements%3F
 source: https://success.docker.com/@api/deki/pages/1933/contents
 tags:
 - tag: "article:howto"
@@ -15,7 +16,7 @@ tags:
 - tag: "testedon:dtr-2.2.3"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Back to: Docker Trusted Registry</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  This article explains how to remove SSL ciphers that use the 3DES encryption suite from Docker Trusted Registry prior to version 2.3. If your security standards require you to remove SSL ciphers that use 3DES encryption, consider upgrading to DTR 2.3 or higher instead of performing these steps.
 </p>
 <div class="mt-section" id="section_1" mt-section-origin="KBase/For_DTR,_how_do_I_remove_3DES_from_SSL_cipers_to_meet_security_requirements?">
@@ -107,7 +108,7 @@ $ docker tag dtr-nginx-hack docker/dtr-nginx:2.2.3</dtr-nginx>
   7. Backup DTR after fully reading the documentation:
  </p>
  <p class="mt-indent-1">
-  <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#backup-dtr-data" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#backup-dtr-data">
+  <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#backup-dtr-data" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#backup-dtr-data">
    DTR backups and recovery
   </a>
  </p>
@@ -118,7 +119,7 @@ $ docker tag dtr-nginx-hack docker/dtr-nginx:2.2.3</dtr-nginx>
   8. Test the DTR backup:
  </p>
  <p class="mt-indent-1">
-  <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#testing-backups" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#testing-backups">
+  <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#testing-backups" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#testing-backups">
    DTR backups and recovery
   </a>
  </p>
@@ -126,7 +127,7 @@ $ docker tag dtr-nginx-hack docker/dtr-nginx:2.2.3</dtr-nginx>
   9. Uninstall DTR:
  </p>
  <p class="mt-indent-1">
-  <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/uninstall/" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/uninstall/">
+  <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/install/uninstall/" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/uninstall/">
    Uninstall Docker Trusted Registry
   </a>
  </p>
@@ -134,7 +135,7 @@ $ docker tag dtr-nginx-hack docker/dtr-nginx:2.2.3</dtr-nginx>
   10. Restore DTR:
  </p>
  <p>
-  <a class="link-https" href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#restore-dtr-data" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#restore-dtr-data">
+  <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#restore-dtr-data" rel="freeklink" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/#restore-dtr-data">
    Restore DTR data
   </a>
  </p>

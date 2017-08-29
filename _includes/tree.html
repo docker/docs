@@ -1,7 +1,6 @@
 {% assign foundBranch="false" %}
 {% for item in tree %}
   {% if item.generateTOC=="library"%}{% for thisPage in site.samples %}<li><a href="{{ thisPage.url}}"{% if page.url==thisPage.url %}{% assign topicFound="true" %} class="active currentPage"{% endif %}>{{ thisPage.title }}</a></li>{% endfor %}
-  {% elsif item.tagpull %}{% for thispage in site.kb %}{% for thistag in thispage.tags %}{% if thistag.tag == item.tagpull %}<li><a href="{{ thispage.url }}"{% if thispage.url == page.url %} class="active currentPage"{% endif %}>{{ thispage.title }}</a></li>{% endif %}{% endfor %}{% endfor %}
   {% elsif item.sectiontitle %}{% if foundBranch=="false" %}{% capture treeString %}{{ item.section | downcase }}{% endcapture %}{% capture pageURLString %}"{{ page.url }}"{% endcapture %}{% else %}{% assign treeString="" %}{% endif %}
       <li><a data-target="#item{{ forloop.index }}" data-toggle="collapse" data-parent="#stacked-menu"{% if treeString contains pageURLString %}{% assign foundBranch="true"%} aria-expanded="true"{% else %} class="collapsed" aria-expanded="false"{% endif %}>{{ item.sectiontitle }}<span class="caret arrow"></span></a>
       <ul class="nav collapse{% if foundBranch == "true" %} in{% endif %}" id="#item{{ forloop.index }}" aria-expanded="{% if foundBranch == "true" %}true{% else %}false{% endif %}">{% assign tree = item.section %}{% include tree.html %}</ul>

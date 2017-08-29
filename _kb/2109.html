@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/2109/
+originalpath: https://success.docker.com/KBase/How_do_I_change_the_UCP_Controller_Port%3F
 source: https://success.docker.com/@api/deki/pages/2109/contents
 tags:
 - tag: "article:howto"
@@ -14,7 +15,7 @@ tags:
 - tag: "testedon:ucp-2.0.0"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Back to: Universal Control Plane</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  By default UCP listens on port 443.  To change the port UCP is listening on, navigate in the Web UI to
  <strong>
   Admin Settings
@@ -28,7 +29,7 @@ tags:
   Controller Port
  </strong>
  .  This setting was introduced in UCP 2.0.0 and can only be changed through the Web UI.  Applying a change to this setting will result in UCP controllers restarting and may briefly interrupt UCP availability.  If using a
- <a class="link-https" href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/">
+ <a class="link-https" href="/datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/">
   load balancer for UCP
  </a>
  , the load balancer will also need to be reconfigured to accommodate this change.

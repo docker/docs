@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1469/
+originalpath: https://success.docker.com/KBase/How_do__I_replace_the_TLS_certificates_for_UCP%3F
 source: https://success.docker.com/@api/deki/pages/1469/contents
 tags:
 - tag: "article:howto"
@@ -13,7 +14,7 @@ tags:
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Back to: Universal Control Plane</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  Docker Universal Control Plane uses TLS to encrypt the traffic between users and your cluster. By default this is done using self-signed certificates.
 </p>
 <p>
@@ -52,7 +53,7 @@ docker restart ucp-controller</pre>
  </li>
  <li>
   Communicate the change to users. Ask users to log into UCP and
-  <a class="link-https" href="https://docs.docker.com/ucp/access-ucp/cli-based-access/" rel="external nofollow" target="_blank" title="https://docs.docker.com/ucp/access-ucp/cli-based-access/">
+  <a class="link-https" href="/ucp/access-ucp/cli-based-access/" rel="external nofollow" target="_blank" title="https://docs.docker.com/ucp/access-ucp/cli-based-access/">
    download the updated certificate client bundle
   </a>
   .

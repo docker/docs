@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/2189/
+originalpath: https://success.docker.com/KBase/How_do_I_create_a_support_dump%3F
 source: https://success.docker.com/@api/deki/pages/2189/contents
 tags:
 - tag: "article:howto"
@@ -12,7 +13,7 @@ tags:
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<div class="mt-section" id="section_1" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_do_I_create_a_support_dump?">
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><div class="mt-section" id="section_1" mt-section-origin="KBase/How_do_I_create_a_support_dump?">
  <span id="Issue">
  </span>
  <h2 id="1-0">
@@ -22,7 +23,7 @@ tags:
   Docker Technical Support has asked me to create and upload a "Support Dump." What is that, and how do I create one?
  </p>
 </div>
-<div class="mt-section" id="section_2" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_do_I_create_a_support_dump?">
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_do_I_create_a_support_dump?">
  <span id="Prerequisites">
  </span>
  <h2 id="1-1">
@@ -40,7 +41,7 @@ tags:
   </li>
  </ul>
 </div>
-<div class="mt-section" id="section_3" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_do_I_create_a_support_dump?">
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_do_I_create_a_support_dump?">
  <span id="Steps">
  </span>
  <h2 id="1-2">
@@ -85,7 +86,7 @@ tags:
 docker run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:<span class="replaceabletext">2.1.4</span> \
+  docker/ucp:<span class="replaceabletext">2.1.6</span> \
   support &gt; docker-support-<span class="replaceabletext">HOSTNAME</span>.tgz</pre>
   </li>
  </ol>

@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1958/
+originalpath: https://success.docker.com/KBase/DTR_2.2.x_installation_appears_successful%2C_can't_get_to_UI%2C_dtr-nginx_containers_restarting
 source: https://success.docker.com/@api/deki/pages/1958/contents
 tags:
 - tag: "article:errors"
@@ -16,7 +17,7 @@ tags:
 - tag: "usecase:caas"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Back to: Docker Trusted Registry</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><p>
  When installing DTR 2.2.0 and higher on RHEL 7.2, the installation completes, but with the following warning:
 </p>
 <pre>
@@ -41,7 +42,7 @@ INFO[0199] Installation is complete </pre>
 </p>
 <p>
  Download and manually install the newer version of libseccomp (2.2.1), install DTR, and then the dtr-nginx container will start successfully. Refer to
- <a class="link-https" href="https://docs.docker.com/engine/security/seccomp/#passing-a-profile-for-a-container" rel="freeklink" title="https://docs.docker.com/engine/security/seccomp/#passing-a-profile-for-a-container">
+ <a class="link-https" href="/engine/security/seccomp/#passing-a-profile-for-a-container" rel="freeklink" title="https://docs.docker.com/engine/security/seccomp/#passing-a-profile-for-a-container">
   https://docs.docker.com/engine/secur...or-a-container
  </a>
  for details.

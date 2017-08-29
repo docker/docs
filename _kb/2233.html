@@ -5,16 +5,18 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/2233/
+originalpath: https://success.docker.com/KBase/Docker_Universal_Control_Plane_Windows_nodes
 source: https://success.docker.com/@api/deki/pages/2233/contents
 tags:
 - tag: "article:howto"
 - tag: "component:ucp"
+- tag: "expires:nextrelease"
 - tag: "platform:windows"
 - tag: "product:datacenter"
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<script type="text/javascript">
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Back to: Universal Control Plane</a><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Back to: Docker Datacenter</a><script type="text/javascript">
  /*<![CDATA[*/
 var authorByline = "Joao Fernandes";
 /*]]>*/
@@ -29,12 +31,12 @@ var authorByline = "Joao Fernandes";
  Run the script in a Powershell console:
 </p>
 <pre>
-<code>docker run --rm docker/ucp-agent-win windows-script:2.2.0 | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+<code>docker run --rm docker/ucp-agent-win:2.2.0 windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
 </code></pre>
 <p>
  If you'd just like to see what the script does before running it, you can run:
 </p>
 <pre>
-<code>docker run --rm docker/ucp-agent-win windows-script</code></pre>
+<code>docker run --rm docker/ucp-agent-win:2.2.0 windows-script</code></pre>
 
 {% endraw %}

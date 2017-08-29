@@ -5,6 +5,7 @@ draftstate: inactive
 deleted: false
 layout: docs
 permalink: /kb/1025/
+originalpath: https://success.docker.com/Cloud/Solve/Why_can%E2%80%99t_I_push_images_to_Docker_Hub_after_logging_in%3F
 source: https://success.docker.com/@api/deki/pages/1025/contents
 tags:
 - tag: "article:topic"
@@ -14,7 +15,7 @@ tags:
 - tag: "stage:reviewed"
 ---
 {% raw %}
-<p>
+<a href="/troubleshoot/docker-hub/" class="button outline-btn">Back to: Docker Hub</a><a href="/troubleshoot/docker-cloud/" class="button outline-btn">Back to: Docker Cloud</a><p>
  After logging in, if you receive the following error when trying to push images to Docker Hub, you have some issues with the authentication payload:
 </p>
 <pre>
@@ -73,7 +74,7 @@ unauthorized: authentication required</pre>
 <code>docker push mydockerid/hello-world:latest</code></pre>
 <p>
  Note: This issue commonly arises when you are using Docker Engines that are not from
- <a class="link-https" href="https://docs.docker.com/engine/installation/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/installation/">
+ <a class="link-https" href="/engine/installation/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/installation/">
   https://docs.docker.com/engine/installation/
  </a>
  .
