@@ -19,7 +19,7 @@ are still available.
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users using an LDAP directory,
-go to the UCP web UI, navigate to the **Admin Settings** page and click 
+go to the UCP web UI, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
 
@@ -48,7 +48,7 @@ Click **Add LDAP Domain** to show the LDAP server configuration settings.
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
-Click **Confirm** to add your LDAP domain. 
+Click **Confirm** to add your LDAP domain.
 
 ## LDAP user search configurations
 
@@ -90,7 +90,7 @@ LDAP user, and clicking the **Test** button.
 | Enable sync of admin users | This option specifies that system admins should be synced directly with members of a group in your organization's LDAP directory. The admins will be synced to match the membership of the group. The configured recovery admin user will also remain a system admin.    |
 
 Once you've configured the LDAP integration, UCP synchronizes users based on
-the interval you've defined starting at the top of the hour. When the 
+the interval you've defined starting at the top of the hour. When the
 synchronization runs, UCP stores logs that can help you troubleshoot when
 something goes wrong.
 
@@ -125,8 +125,8 @@ UCP does not query, or store any additional data from the directory server.
 ## Sync teams
 
 UCP enables syncing teams with a search query or group in your organization's
-LDAP directory. 
-[Sync team members with your organization's LDAP directory](../../manage-users/create-and-manage-teams.md).
+LDAP directory.
+[Sync team members with your organization's LDAP directory](../../../access-control/create-and-manage-teams.md).
 
 ## Where to go next
 
