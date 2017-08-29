@@ -155,14 +155,14 @@ Get the service ID for the one service in our application:
 docker service ls
 ```
 
-Docker Swarm runs tasks that spawn containers. Tasks have state and their own
+Docker swarms run tasks that spawn containers. Tasks have state and their own
 IDs:
 
 ```shell
 docker service ps <service>
 ```
 
->**Note**: Docker Swarm is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker Swarm tasks are defined to spawn them. 
+>**Note**: Docker's support for swarms is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker swarm tasks are defined to spawn them. 
 
 Let's inspect one task and limit the ouput to container ID:
 
