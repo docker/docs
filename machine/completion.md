@@ -23,13 +23,13 @@ Place the completion script in `/etc/bash_completion.d/` as follows:
 *   On a Mac:
 
     ```shell
-    curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash > `brew --prefix`/etc/bash_completion.d/docker-machine
+    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash -o `brew --prefix`/etc/bash_completion.d/docker-machine
     ```
 
 *   On a standard Linux installation:
 
     ```shell
-    curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash > /etc/bash_completion.d/docker-machine
+    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
     ```
 
 Completion will be available upon next login.
