@@ -141,7 +141,7 @@ the repository.
     > to your parent Ubuntu distribution. For example, if you are using
     >  `Linux Mint Rafaela`, you could use `trusty`.
 
-    **amd64**:
+    **amd64 / x86_64**:
 
     ```bash
     $ sudo add-apt-repository \
