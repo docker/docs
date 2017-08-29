@@ -7,15 +7,32 @@ The Docker platform is comprised of a family of tools and products. After
 learning the general principles of the Docker workflow under [Guides](/), you
 can find the documentation for these tools and products here.
 
+## Supported platforms
+
+Docker CE and EE are available on multiple platforms, on cloud and on-premises.
+Use the following tables to choose the best installation path for you.
+
+### Desktop
+
+{% include docker_desktop_matrix.md %}
+
+### Cloud
+
+{% include docker_cloud_matrix.md %}
+
+See also [Docker Cloud](#docker-cloud) for setup instructions for
+Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
+
+### Server
+
+{% include docker_platform_matrix.md %}
+
 ## Tools
 
 Free downloadables that help your device use Docker containers.
 
 | Tool | Description |
 | ---- | ----------- |
-| [Docker for Mac](/docker-for-mac/) | Docker desktop solution that includes everything a developer needs to create and test applications on a Mac |
-| [Docker for Windows](/docker-for-windows) | Docker desktop solution that includes everything a developer needs to create and test applications on a Windows system|
-| [Docker for Linux](/engine/installation/#on-linux) | Installation guides for running Docker on all supported Linux distros. |
 | [Docker Compose](/compose/overview/) | Enables you to define, build, and run multi-container applications |
 | [Docker Machine](/machine/overview/) | Enables you to provision and manage Dockerized hosts.|
 | [Docker Notary](/notary/getting_started/) | Allows the signing of container images to enable Docker Content Trust |
