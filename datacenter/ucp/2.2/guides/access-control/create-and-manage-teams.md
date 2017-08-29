@@ -37,7 +37,7 @@ Choose the users that you want to add to the team, and when you're done, click
 If UCP is configured to sync users with your organization's LDAP directory
 server, you will have the option to enable syncing the new team's members when
 creating a new team or when modifying settings of an existing team.
-[Learn how to configure integration with an LDAP directory](../configure/external-auth/index.md).
+[Learn how to configure integration with an LDAP directory](../admin/configure/external-auth/index.md).
 Enabling this option expands the form with additional fields for configuring
 the sync of team members.
 
