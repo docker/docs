@@ -87,6 +87,8 @@ The examples below show both the `--mount` and `-v` syntax where possible, and
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
 
+When using volumes with services, only `--mount` is supported.
+
 ## Create and manage volumes
 
 Unlike a bind mount, you can create and manage volumes outside the scope of any
@@ -198,7 +200,7 @@ $ docker container rm devtest
 $ docker volume rm myvol2
 ```
 
-## Start a service with volumes
+### Start a service with volumes
 
 When you start a service and define a volume, each service container will use its own
 local volume. None of the containers can share this data if you use the `local`
@@ -230,7 +232,7 @@ Remove the service, which stops all its tasks:
 $ docker service rm devtest-service
 ```
 
-### Syntax differences for services
+#### Syntax differences for services
 
 The `docker service create` command does not support the `-v` or `--volume` flag.
 When mounting a volume into a service's containers, you must use the `--mount`
