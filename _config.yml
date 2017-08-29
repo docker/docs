@@ -47,6 +47,10 @@ defaults:
     values:
       assignee: "joaofnfernandes"
   - scope:
+      path: "datacenter/ucp"
+    values:
+      assignee: "jimgalasyn"
+  - scope:
       path: "docker-cloud"
     values:
       assignee: "londoncalling"
