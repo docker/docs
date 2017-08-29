@@ -162,18 +162,18 @@ IDs:
 docker service ps <service>
 ```
 
->**Note**: Docker's support for swarms is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker swarm tasks are defined to spawn them. 
+>**Note**: Docker's support for swarms is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker swarm tasks are defined to spawn them.
 
 Let's inspect one task and limit the ouput to container ID:
 
 ```shell
-docker inspect --format='{{.Status.ContainerStatus.ContainerID}}' <task>
+docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task>
 ```
 
 Vice versa, inspect the container ID, and extract the task ID:
 
 ```shell
-docker inspect --format="{{index .Config.Labels \"com.docker.swarm.task.id\"}}" <container>
+docker inspect --format="{% raw %}{{index .Config.Labels \"com.docker.swarm.task.id\"}}{% endraw %}" <container>
 ```
 
 Now list all 5 containers:
