@@ -85,6 +85,10 @@ wget -O md_source/engine/api/v1.31/swagger.yaml https://raw.githubusercontent.co
 wget -O md_source/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch stable dockerd.md" && exit -1)
 wget -O md_source/edge/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_EDGE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch edge dockerd.md" && exit -1)
 
+# Add an admonition to the edge dockerd file
+EDGE_DOCKERD_INCLUDE='{% include edge_only.md section=\"dockerd\" %}'
+sed -i "s/^#\ daemon/${EDGE_DOCKERD_INCLUDE}/1" md_source/edge/engine/reference/commandline/dockerd.md
+
 # Get a few one-off files that we use directly from upstream
 wget -O md_source/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit -1)
 wget -O md_source/engine/reference/run.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/run.md || (echo "Failed engine/reference/run.md download" && exit -1)
