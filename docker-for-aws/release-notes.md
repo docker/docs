@@ -7,15 +7,15 @@ title: Docker for AWS release notes
 {% include d4a_buttons.md %}
 
 ## Enterprise Edition
-[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}
+[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank" class="_"}
 
-[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
+[Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
 ### 17.06 EE
 
 - Docker engine 17.06 EE
-- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank"}
-- UCP 2.2.0 
+- For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank" class="_"}
+- UCP 2.2.0
 - DTR 2.3.0
 
 ### 17.03 EE
@@ -35,7 +35,7 @@ Release date: 08/17/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce){: target="_blank"}
+- Docker Engine upgraded to [Docker 17.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce){: target="_blank" class="_"}
 - Improvements to CloudStor support
 - Added SSL support at the LB level
 
@@ -45,7 +45,7 @@ Release date: 06/28/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce){: target="_blank"}
+- Docker Engine upgraded to [Docker 17.06.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce){: target="_blank" class="_"}
 - Fixed an issue with load balancer controller that caused the ELB health check to fail.
 - Added VPCID output when a VPC is created
 - Added CloudStor support (EFS (in regions that support EFS), and EBS) for [persistent storage volumes](persistent-data-volumes.md)
@@ -62,7 +62,7 @@ Release date: 03/30/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md){: target="_blank"}
+- Docker Engine upgraded to [Docker 17.03.1 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md){: target="_blank" class="_"}
 - Updated AZ for Sao Paulo
 
 ### 17.03.0 CE
@@ -71,7 +71,7 @@ Release date: 03/01/2017
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md){: target="_blank"}
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md){: target="_blank" class="_"}
 - Added r4 EC2 instance types
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 

@@ -83,12 +83,15 @@ $ ssh docker@ip-172-31-31-40.us-east-2.compute.internal
 
 #### Use SSH agent forwarding
 
-SSH agent forwarding allows you to forward along your ssh keys when connecting from one node to another. This eliminates the need for installing your private key on all nodes you might want to connect from.
+SSH agent forwarding allows you to forward along your ssh keys when connecting
+from one node to another. This eliminates the need for installing your private
+key on all nodes you might want to connect from.
 
 You can use this feature to SSH into worker nodes from a manager node without
 installing keys directly on the manager.
 
-If your haven't added your ssh key to the `ssh-agent` you will also need to do this first.
+If your haven't added your ssh key to the `ssh-agent` you will also need to do
+this first.
 
 To see the keys in the agent already, run:
 
@@ -102,13 +105,16 @@ If you don't see your key, add it like this.
 $ ssh-add ~/.ssh/your_key
 ```
 
-On Mac OS X, the `ssh-agent` will forget this key, once it gets restarted. But you can import your SSH key into your Keychain like this. This will have your key survive restarts.
+On macOS, the `ssh-agent` will forget this key, once it gets restarted. But
+you can import your SSH key into your Keychain like this. This will have your
+key survive restarts.
 
 ```bash
 $ ssh-add -K ~/.ssh/your_key
 ```
 
-You can then enable SSH forwarding per-session using the `-A` flag for the ssh command.
+You can then enable SSH forwarding per-session using the `-A` flag for the ssh
+command.
 
 Connect to the Manager.
 
@@ -139,11 +145,13 @@ You can now start creating containers and services.
 
     $ docker run hello-world
 
-You can run websites too. Ports exposed with `-p` are automatically exposed through the platform load balancer:
+You can run websites too. Ports exposed with `-p` are automatically exposed
+through the platform load balancer:
 
     $ docker service create --name nginx -p 80:80 nginx
 
-Once up, find the `DefaultDNSTarget` output in either the AWS or Azure portals to access the site.
+Once up, find the `DefaultDNSTarget` output in either the AWS or Azure portals
+to access the site.
 
 ### Execute docker commands in all swarm nodes
 
@@ -153,23 +161,39 @@ Usage : `swarm-exec {Docker command}`
 
 The following will install a test plugin in all the nodes in the cluster
 
-Example : `swarm-exec docker plugin install --grant-all-permissions mavenugo/test-docker-netplugin`
+Example : `swarm-exec docker plugin install --grant-all-permissions
+mavenugo/test-docker-netplugin`
 
-This tool internally makes use of docker global-mode service that runs a task on each of the nodes in the cluster. This task in turn executes your docker command. The global-mode service also guarantees that when a new node is added to the cluster or during upgrades, a new task is executed on that node and hence the docker command will be automatically executed.
+This tool internally makes use of docker global-mode service that runs a task on
+each of the nodes in the cluster. This task in turn executes your docker
+command. The global-mode service also guarantees that when a new node is added
+to the cluster or during upgrades, a new task is executed on that node and hence
+the docker command will be automatically executed.
 
 ### Distributed Application Bundles
 
-To deploy complex multi-container apps, you can use [distributed application bundles](/compose/bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
+To deploy complex multi-container apps, you can use [distributed application
+bundles](/compose/bundles.md). You can either run `docker deploy` to deploy a
+bundle on your machine over an SSH tunnel, or copy the bundle (for example using
+`scp`) to a manager node, SSH into the manager and then run `docker deploy` (if
+you have multiple managers, you have to ensure that your session is on one that
+has the bundle file).
 
-A good sample app to test application bundles is the [Docker voting app](https://github.com/docker/example-voting-app).
+A good sample app to test application bundles is the [Docker voting
+app](https://github.com/docker/example-voting-app).
 
-By default, apps deployed with bundles do not have ports publicly exposed. Update port mappings for services, and Docker will automatically wire up the underlying platform load balancers:
+By default, apps deployed with bundles do not have ports publicly exposed.
+Update port mappings for services, and Docker will automatically wire up the
+underlying platform load balancers:
 
     docker service update --publish-add 80:80 <example-service>
 
 ### Images in private repos
 
-To create swarm services using images in private repos, first make sure you're authenticated and have access to the private repo, then create the service with the `--with-registry-auth` flag (the example below assumes you're using Docker Hub):
+To create swarm services using images in private repos, first make sure you're
+authenticated and have access to the private repo, then create the service with
+the `--with-registry-auth` flag (the example below assumes you're using Docker
+Hub):
 
     docker login
     ...
