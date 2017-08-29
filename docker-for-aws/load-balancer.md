@@ -14,17 +14,23 @@ When you create a service, any ports that are exposed with `-p` are automaticall
 $ docker service create --name nginx -p 80:80 nginx
 ```
 
-This opens up port 80 on the Elastic Load Balancer (ELB) and direct any traffic on that port, to your swarm service.
+This opens up port 80 on the Elastic Load Balancer (ELB) and direct any traffic
+on that port, to your swarm service.
 
 ## How can I configure my load balancer to support SSL/TLS traffic?
 
-Docker uses [Amazons' ACM service](https://aws.amazon.com/certificate-manager/), which provides free SSL/TLS certificates, and can be used with ELBs. You need to create a new certificate for your domain, and get the ARN for that certificate.
+Docker uses [Amazons' ACM service](https://aws.amazon.com/certificate-manager/),
+which provides free SSL/TLS certificates, and can be used with ELBs. You need to
+create a new certificate for your domain, and get the ARN for that certificate.
 
-You add a label to your service to tell swarm that you want to use a given ACM cert for SSL connections to your service.
+You add a label to your service to tell swarm that you want to use a given ACM
+cert for SSL connections to your service.
 
 ### Examples
 
-Start a service and listen on the ELB with ports `80` and `443`. Port `443` is served using a SSL certificate from ACM, which is referenced by the ARN that is described in the service label `com.docker.aws.lb.arn`
+Start a service and listen on the ELB with ports `80` and `443`. Port `443` is
+served using a SSL certificate from ACM, which is referenced by the ARN that is
+described in the service label `com.docker.aws.lb.arn`
 
 ```bash
 $ docker service create \
@@ -95,7 +101,8 @@ $ docker service create \
 
 ### Add a CNAME for your ELB
 
-Once you have your ELB setup, with the correct listeners and certificates, you need to add a DNS CNAME that points to your ELB at your DNS provider.
+Once you have your ELB setup, with the correct listeners and certificates, you
+need to add a DNS CNAME that points to your ELB at your DNS provider.
 
 ### ELB SSL limitations
 
@@ -105,4 +112,8 @@ Once you have your ELB setup, with the correct listeners and certificates, you n
 
 ## Can I manually change the ELB configuration?
 
-No. If you make any manual changes to the ELB, they are removed the next time we update the ELB configuration based on any swarm changes. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the ELB manually, they could conflict with what is in swarm, and cause issues.
+No. If you make any manual changes to the ELB, they are removed the next time we
+update the ELB configuration based on any swarm changes. This is because the
+swarm service configuration is the source of record for service ports. If you
+add listeners to the ELB manually, they could conflict with what is in swarm,
+and cause issues.

@@ -153,8 +153,8 @@ $ docker volume create -d "cloudstor:aws" --opt backing=shared mysharedvol1
 If EBS is available and enabled, you can use a templatized notation with the
 `docker service create` CLI to create and mount a unique `relocatable` Cloudstor
 volume backed by a specified type of EBS for each task in a swarm service. New
-EBS volumes typically take a few minutes to be created. Besides `backing=relocatable`,
-the following volume options are available:
+EBS volumes typically take a few minutes to be created. Besides
+`backing=relocatable`, the following volume options are available:
 
 | Option    | Description                                                                                                                                                                                                                                                                                                    |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -220,8 +220,8 @@ $ docker service create \
 {% endraw %}
 ```
 
-Here, each task has mounted its own volume at `/mydata/` and the files under that
-mountpoint are unique to that task.
+Here, each task has mounted its own volume at `/mydata/` and the files under
+that mountpoint are unique to that task.
 
 When a task with only `shared` EFS volumes mounted is rescheduled on a different
 node, Docker interacts with the Cloudstor plugin to create and mount the volume

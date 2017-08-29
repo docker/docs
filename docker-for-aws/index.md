@@ -11,9 +11,12 @@ redirect_from:
 {% include d4a_buttons.md %}
 
 ## Docker Enterprise Edition (EE) for AWS
-This deployment is fully baked and tested, and comes with the latest Enterprise
-Edition version of Docker. <br/>This release is maintained and receives
-<strong>security and critical bugfixes for one year</strong>.
+
+This deployment is fully baked and tested, and comes with the latest Docker
+Enterprise Edition for AWS.
+
+This release is maintained and receives **security and critical bug fixes for
+one year**.
 
 [Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn blank_"}
 
@@ -51,9 +54,10 @@ using CloudFormation. For more about stable and edge channels, see the
 
 
 #### Test Channel
-<p>This is the test channel. It is used for testing release candidates for
+
+This is the test channel. It is used for testing release candidates for
 upcoming releases. Use this channel if you want to test out the new releases
-before they are available.</p>
+before they are available.
 {{aws_blue_test}}
 
 ### Deployment options
@@ -103,7 +107,7 @@ Note that the China and US Gov Cloud AWS partitions are not currently supported.
 ### Configuration
 
 Docker for AWS is installed with a CloudFormation template that configures
-Docker in swarm-mode, running on instances backed custom AMIs. There are two
+Docker in swarm mode, running on instances backed by custom AMIs. There are two
 ways you can deploy Docker for AWS. You can use the AWS Management Console
 (browser based), or use the AWS CLI. Both have the following configuration
 options.
@@ -111,26 +115,34 @@ options.
 #### Configuration options
 
 ##### KeyName
+
 Pick the SSH key that will be used when you SSH into the manager nodes.
 
 ##### InstanceType
+
 The EC2 instance type for your worker nodes.
 
 ##### ManagerInstanceType
+
 The EC2 instance type for your manager nodes. The larger your swarm, the larger
 the instance size you should use.
 
 ##### ClusterSize
+
 The number of workers you want in your swarm (0-1000).
 
 ##### ManagerSize
-The number of Managers in your swarm. You can pick either 1, 3 or 5 managers. We
-only recommend 1 manager for testing and dev setups. There are no failover
-guarantees with 1 manager — if the single manager fails the swarm will go down
-as well. Additionally, upgrading single-manager swarms is not currently
-guaranteed to succeed.
 
-We recommend at least 3 managers, and if you have a lot of workers, you should pick 5 managers.
+The number of managers in your swarm. On Docker CE, you can select either 1,
+3 or 5 managers. We only recommend 1 manager for testing and dev setups. There
+are no failover guarantees with 1 manager — if the single manager fails the
+swarm will go down as well. Additionally, upgrading single-manager swarms is not
+currently guaranteed to succeed.
+
+On Docker EE, you can choose to run with 3 or 5 managers.
+
+We recommend at least 3 managers, and if you have a lot of workers, you should
+use 5 managers.
 
 ##### EnableSystemPrune
 
@@ -149,22 +161,28 @@ Pruning removes the following:
 - All unused networks
 
 ##### EnableCloudWatchLogs
+
 Enable if you want Docker to send your container logs to CloudWatch. ("yes",
 "no") Defaults to yes.
 
 ##### WorkerDiskSize
+
 Size of Workers' ephemeral storage volume in GiB (20 - 1024).
 
 ##### WorkerDiskType
+
 Worker ephemeral storage volume type ("standard", "gp2").
 
 ##### ManagerDiskSize
+
 Size of Manager's ephemeral storage volume in GiB (20 - 1024)
 
 ##### ManagerDiskType
+
 Manager ephemeral storage volume type ("standard", "gp2")
 
 #### Installing with the AWS Management Console
+
 The simplest way to use the template is to use one of the
 [Quickstart](#docker-community-edition-ce-for-aws) options with the
 CloudFormation section of the AWS Management Console.
@@ -172,6 +190,7 @@ CloudFormation section of the AWS Management Console.
 ![create a stack](img/aws-select-template.png)
 
 #### Installing with the CLI
+
 You can also invoke the Docker for AWS CloudFormation template from the AWS CLI:
 
 Here is an example of how to use the CLI. Make sure you populate all of the
