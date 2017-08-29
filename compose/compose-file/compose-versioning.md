@@ -251,16 +251,6 @@ Introduces the following additional parameters:
 - [`configs`](/compose/compose-file/index.md#configs)
 - [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
 
-### Version 3.4
-
-An upgrade of [version 3](#version-3).
-
-Introduces the following additional parameters:
-
-- [build `target` and `network`](/compose/compose-file/index.md#build)
-- `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
-- `order` for [`update_config`](/compose/compose-file/index.md#updateconfig) in `deploy`.
-
 ## Upgrading
 
 ### Version 2.x to 3.x
