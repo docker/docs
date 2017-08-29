@@ -77,7 +77,7 @@ installs, or install on air-gapped systems.
 
     ```ps
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-1.zip
+    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-2.zip
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
