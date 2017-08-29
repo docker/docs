@@ -198,6 +198,38 @@ $ docker container rm devtest
 $ docker volume rm myvol2
 ```
 
+## Start a service with volumes
+
+When you start a service and define a volume, each service container will use its own
+local volume. None of the containers can share this data if you use the `local`
+volume driver, but some volume drivers do support shared storage. Docker for AWS and
+Docker for Azure both support persistent storage using the Cloudstor plugin.
+
+The following example starts a `nginx` service with four replicas, each of which
+uses a local volume called `myvol2`.
+
+```bash
+$ docker service create -d \
+  --name devtest-service \
+  --mount source=myvol2,target=/app \
+  nginx:latest
+```
+
+Use `docker service ps devtest-service` to verify that the service is running:
+
+```bash
+$ docker service ps devtest-service
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago   
+```
+
+Remove the service, which stops all its tasks:
+
+```bash
+$ docker service rm devtest-service
+```
+
 ### Syntax differences for services
 
 The `docker service create` command does not support the `-v` or `--volume` flag.
