@@ -30,11 +30,21 @@ Now configure your LDAP directory integration.
 
 Click the dropdown to select the permission level assigned by default to
 the private collections of new users.
-[Learn more about permission levels](../../../access-control/permission-levels.md).                                    
+[Learn more about permission levels](../../../access-control/permission-levels.md).
 
-## LDAP domains
+## Login Session Controls
 
-Click **Add LDAP Domain** to show the LDAP server configuration settings.
+|          Field          |                                                                                      Description                                                                                       |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lifetime Hours          | The maxiumum length of a login session. When this time expires, UCP invalidates the session, and the user must authenticate again to establish a new session. The default is 72 hours. |
+| Renewal Threshold Hours | The time to wait before UCP renews the session automatically. Typically, this occurs during a user session and is independent of session activity. The default is 24 hours.            |
+| Per User Limit          | The maximum number of simultaneous logins for a user.                                                                                                                                  |
+
+## LDAP Enabled
+
+Click **Yes** to enable integrating UCP users and teams with LDAP servers.  
+
+## LDAP server
 
 | Field                 | Description                                                                                                                                                               |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -44,11 +54,13 @@ Click **Add LDAP Domain** to show the LDAP server configuration settings.
 | Use Start TLS         | Whether to authenticate/encrypt the connection after connecting to the LDAP server over TCP. If you set the LDAP Server URL field with `ldaps://`, this field is ignored. |
 | Skip TLS verification | Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.                              |
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
-
+| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default valu eof `true` is recommended. |
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
 Click **Confirm** to add your LDAP domain.
+
+ To integrate with more LDAP servers, click **Add LDAP Domain**.
 
 ## LDAP user search configurations
 
@@ -95,15 +107,6 @@ synchronization runs, UCP stores logs that can help you troubleshoot when
 something goes wrong.
 
 You can also manually synchronize users by clicking **Sync Now**.
-
-## Login Session Controls
-
-| Field                   | Description                                                                                                                                                                            |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lifetime Hours          | The maxiumum length of a login session. When this time expires, UCP invalidates the session, and the user must authenticate again to establish a new session. The default is 72 hours. |
-| Renewal Threshold Hours | The time to wait before UCP renews the session automatically. Typically, this occurs during a user session and is independent of session activity. The default is 24 hours.            |
-| Per User Limit          | The maximum number of simultaneous logins for a user.                                                                                                                                  |
-
 
 ## Revoke user access
 
