@@ -78,7 +78,7 @@ PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 
 You can find additional documentation in the comments at the [top of each script](https://github.com/docker/machine/tree/master/contrib/completion/bash){: target="_blank" class="_"}.
 
-### How to uninstall Docker Machine
+## How to uninstall Docker Machine
 
 To uninstall Docker Machine:
 
