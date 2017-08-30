@@ -35,7 +35,7 @@ writable layer.
 Volumes use `rprivate` bind propagation, and bind propagation is not
 configurable for volumes.
 
-## Choosing the -v or --mount flag
+## Choose the -v or --mount flag
 
 Originally, the `-v` or `--volume` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker
@@ -238,7 +238,7 @@ The `docker service create` command does not support the `-v` or `--volume` flag
 When mounting a volume into a service's containers, you must use the `--mount`
 flag.
 
-### Populating a volume using a container
+### Populate a volume using a container
 
 If you start a container which creates a new volume, as above, and the container
 has files or directories in the directory to be mounted (such as `/app/` above),
