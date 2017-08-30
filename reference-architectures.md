@@ -1,6 +1,7 @@
 ---
 title: Reference architectures
 ---
+
 <h3><a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)">Service Discovery and Load Balancing with Docker Universal Control Plane (UCP)</a></h3>
 <p>This reference architecture provides guidance towards a supported high availability configuration of UCP with dynamic service discovery and load balancing.</p>
 

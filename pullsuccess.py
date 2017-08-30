@@ -104,7 +104,7 @@ for page in soup.find_all('page'):
         # Insert navigation
         for thistag in metadatasoup.find_all('tag'):
             for idx, val in enumerate(keytags):
-                print thistag['value'] + '(thistag["value"]) comparing to (val)' + val
+                #print thistag['value'] + '(thistag["value"]) comparing to (val)' + val
                 if thistag['value']==val:
                     fileout += '<a href="' + keyurls[idx] + '" class="button outline-btn">Back to: ' + keytitles[idx] + '</a>'
         fileout += rawhtml.prettify() + '\n'

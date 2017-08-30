@@ -16,5 +16,12 @@ layout: null
 "title":{{ page.title | jsonify }},
 "description":{{ page.description | strip | jsonify }},
 "keywords":{{ page.keywords | jsonify }}
+}{% endfor %}
+{% for page in site.samples %},
+{
+"url":{{ page.url | jsonify }},
+"title":{{ page.title | jsonify }},
+"description":{{ page.description | strip | jsonify }},
+"keywords":{{ page.keywords | jsonify }}
 }
 {% endfor %}]}
