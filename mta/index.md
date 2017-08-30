@@ -14,6 +14,22 @@ Also, check out the [blog post introducing the Docker MTA program
 here](https://blog.docker.com/2017/04/modernizing-traditional-apps-with-docker/){:
 target="_blank" class="_"}, which goes into more detail.
 
+## Working outline for this docset
+
+* Overview
+
+* Containerizing app components
+
+* Infrastructure considerations
+
+* Modern methodologies and automation
+
+* Migrating microservices
+
+* Stack migration guides
+
+* Use cases
+
 ## Legacy apps limit potential
 
 IT organizations continue to spend 80% of their budget on simply maintaining
@@ -58,3 +74,5 @@ Docker EE gives legacy apps modern capabilities, making them efficient, portable
 * Migrating microservices
 
 * Stack migration guides
+
+* Use cases
