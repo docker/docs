@@ -407,7 +407,7 @@ must use the `--mount` flag to mount the volume, rather than `-v`.**
 
 ```bash
 $ docker run -d \
-  --it \
+  -it \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
   --mount src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
