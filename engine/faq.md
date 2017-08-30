@@ -3,54 +3,14 @@ description: Most frequently asked questions.
 keywords: faq, questions, documentation,  docker
 redirect_from:
 - /engine/misc/faq/
-title: Docker Engine frequently asked questions (FAQ)
+title: Docker frequently asked questions (FAQ)
 ---
 
-If you don't see your question here, feel free to submit new ones to
-<docs@docker.com>.  Or, you can fork [the
-repo](https://github.com/moby/moby) and contribute them yourself by editing
-the documentation sources.
+### Does Docker run on Linux, macOS, and Windows?
 
+You can run both Linux and Windows programs and excutables in Docker containers. The Docker platform runs natively on Linux (on x84-64, ARM and many other CPU architectures) and on Windows (x86-64).
 
-### How much does Engine cost?
-
-Docker Engine is 100% free. It is open source, so you can use it without paying.
-
-### What open source license are you using?
-
-We are using the Apache License Version 2.0, see it here:
-[https://github.com/moby/moby/blob/master/LICENSE](
-https://github.com/moby/moby/blob/master/LICENSE)
-
-### Does Docker run on Linux, macOS, or Windows?
-
-The Docker Engine client runs natively on Linux, macOS, and Windows. By default,
-these clients connect to a local Docker daemon running in a virtual environment
-managed by Docker, which provides the required features to run Linux-based
-containers within OS X or Windows, and Windows-based containers on Windows.
-
-If your version of macOS or Windows does not include the required virtualization
-technology, you can use Docker Machine to work around these limitations.
-
-You can run Windows-based **containers** on Windows Server 2016 and Windows 10.
-Windows-based containers require a Windows kernel to run, in the same way that
-Linux-based containers require a Linux kernel to run. You can even run
-Windows-based containers on a Windows virtual machine running on an macOS or
-Linux host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite,
-Windows Server 2016, or Windows 10.
-
-To learn more about Docker on Windows platforms, see the all the topics in
-[Install Docker for Windows](/docker-for-windows/install.md) and
-[Install Docker Enterprise Edition for Windows Server 2016](/engine/installation/windows/docker-ee.md).
-
-### How do containers compare to virtual machines?
-
-Containers and virtual machines (VMs) are complementary. VMs excel at providing
-extreme isolation (for example with hostile tenant applications where you need
-the ultimate break out prevention). Containers operate at the process level,
-which makes them very lightweight and perfect as a unit of software delivery.
-While VMs take minutes to boot, containers can often be started in less than a
-second.
+Docker Inc. has products that let you build and run containers on Linux, Windows and OS X.
 
 ### What does Docker technology add to just plain LXC?
 
@@ -136,15 +96,12 @@ container persists even after the container halts.
 
 Some of the largest server farms in the world today are based on containers.
 Large web deployments like Google and Twitter, and platform providers such as
-Heroku and dotCloud all run on container technology, at a scale of hundreds of
-thousands or even millions of containers running in parallel.
+Heroku run on container technology, at a scale of hundreds of
+thousands or even millions of containers.
 
 ### How do I connect Docker containers?
 
 Currently the recommended way to connect containers is via the Docker network feature. You can see details of how to [work with Docker networks here](userguide/networking/work-with-networks.md).
-
-Also useful for more flexible service portability is the [Ambassador linking
-pattern](admin/ambassador_pattern_linking.md).
 
 ### How do I run more than one process in a Docker container?
 
