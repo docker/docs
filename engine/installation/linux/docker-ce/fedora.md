@@ -29,6 +29,10 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 - 25
 - 26
 
+<!---TODO: Remove below note once 17.09.0 GA for Fedora 26--->
+> **Note**: Fedora 26 packages are currently only available in the **edge** 
+> and **test** repositories.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
@@ -94,6 +98,10 @@ from the repository.
 3.  **Optional**: Enable the **edge** and **test** repositories. These
     repositories are included in the `docker.repo` file above but are disabled
     by default. You can enable them alongside the stable repository.
+    
+    <!---TODO: Remove below note once 17.09.0 GA for Fedora 26--->
+    > **Note**: Fedora 26 packages are currently only available in the **edge** 
+    > and **test** repositories.
 
     ```bash
     $ sudo dnf config-manager --set-enabled docker-ce-edge
