@@ -10,7 +10,7 @@ title: Docker frequently asked questions (FAQ)
 
 You can run both Linux and Windows programs and excutables in Docker containers. The Docker platform runs natively on Linux (on x84-64, ARM and many other CPU architectures) and on Windows (x86-64).
 
-Docker Inc. has products that let you build and run containers on Linux, Windows and OS X.
+Docker Inc. builds products that let you build and run containers on Linux, Windows and OS X.
 
 ### What does Docker technology add to just plain LXC?
 
