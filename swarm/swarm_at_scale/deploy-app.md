@@ -132,7 +132,7 @@ command below, look for the value constraint.
    --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==dbstore \
    --net="voteapp" \
-   --name results-app docker/example-voting-app-result-app
+   --name results-app docker/example-voting-app-result
    ```
 
 7. Start the voting application twice; once on each frontend node.
@@ -144,7 +144,7 @@ command below, look for the value constraint.
    --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==frontend01 \
    --net="voteapp" \
-   --name voting-app01 docker/example-voting-app-voting-app
+   --name voting-app01 docker/example-voting-app-vote
    ```
 
     And again on the other frontend node.
@@ -156,7 +156,7 @@ command below, look for the value constraint.
    --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==frontend02 \
    --net="voteapp" \
-   --name voting-app02 docker/example-voting-app-voting-app
+   --name voting-app02 docker/example-voting-app-vote
    ```
 
 
@@ -215,7 +215,7 @@ allow you to take advantage of the loadbalancer.
 
     The `http://vote.myenterprise.example.com` site configuration should point to either
     frontend node. Requests to `http://results.myenterprise.example.com` go just to the
-    single `dbstore` node where the `example-voting-app-result-app` is running.
+    single `dbstore` node where the `example-voting-app-result` is running.
 
 3. On your local host, edit `/etc/hosts` file to add the resolution for both these
 sites.
@@ -336,17 +336,17 @@ the containers at once. This extra credit
    frontend02: Pulling docker/example-voting-app-worker:latest... : downloaded
    worker01: Pulling docker/example-voting-app-worker:latest... : downloaded
    Creating scale_worker_1
-   Pulling voting-app (docker/example-voting-app-voting-app:latest)...
-   dbstore: Pulling docker/example-voting-app-voting-app:latest... : downloaded
-   frontend01: Pulling docker/example-voting-app-voting-app:latest... : downloaded
-   frontend02: Pulling docker/example-voting-app-voting-app:latest... : downloaded
-   worker01: Pulling docker/example-voting-app-voting-app:latest... : downloaded
+   Pulling voting-app (docker/example-voting-app-vote:latest)...
+   dbstore: Pulling docker/example-voting-app-vote:latest... : downloaded
+   frontend01: Pulling docker/example-voting-app-vote:latest... : downloaded
+   frontend02: Pulling docker/example-voting-app-vote:latest... : downloaded
+   worker01: Pulling docker/example-voting-app-vote:latest... : downloaded
    Creating scale_voting-app_1
-   Pulling result-app (docker/example-voting-app-result-app:latest)...
-   dbstore: Pulling docker/example-voting-app-result-app:latest... : downloaded
-   frontend01: Pulling docker/example-voting-app-result-app:latest... : downloaded
-   frontend02: Pulling docker/example-voting-app-result-app:latest... : downloaded
-   worker01: Pulling docker/example-voting-app-result-app:latest... : downloaded
+   Pulling result-app (docker/example-voting-app-result:latest)...
+   dbstore: Pulling docker/example-voting-app-result:latest... : downloaded
+   frontend01: Pulling docker/example-voting-app-result:latest... : downloaded
+   frontend02: Pulling docker/example-voting-app-result:latest... : downloaded
+   worker01: Pulling docker/example-voting-app-result:latest... : downloaded
    Creating scale_result-app_1
    ```
 
@@ -355,11 +355,11 @@ the containers at once. This extra credit
    ```bash
    $ docker -H $(docker-machine ip manager):3376 ps
    CONTAINER ID        IMAGE                                  COMMAND                  CREATED             STATUS              PORTS                            NAMES
-   b71555033caa        docker/example-voting-app-result-app   "node server.js"         6 seconds ago       Up 4 seconds        192.168.99.104:32774->80/tcp     frontend01/scale_result-app_1
+   b71555033caa        docker/example-voting-app-result   "node server.js"         6 seconds ago       Up 4 seconds        192.168.99.104:32774->80/tcp     frontend01/scale_result-app_1
    cf29ea21475d        docker/example-voting-app-worker       "/usr/lib/jvm/java-7-"   6 seconds ago       Up 4 seconds                                         worker01/scale_worker_1
    98414cd40ab9        redis                                  "/entrypoint.sh redis"   7 seconds ago       Up 5 seconds        192.168.99.105:32774->6379/tcp   frontend02/redis
    1f214acb77ae        postgres:9.4                           "/docker-entrypoint.s"   7 seconds ago       Up 5 seconds        5432/tcp                         frontend01/db
-   1a4b8f7ce4a9        docker/example-voting-app-voting-app   "python app.py"          7 seconds ago       Up 5 seconds        192.168.99.107:32772->80/tcp     dbstore/scale_voting-app_1
+   1a4b8f7ce4a9        docker/example-voting-app-vote   "python app.py"          7 seconds ago       Up 5 seconds        192.168.99.107:32772->80/tcp     dbstore/scale_voting-app_1
    ```
 
     When you started the services manually, you had a
