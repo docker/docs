@@ -69,7 +69,7 @@ You can install Docker CE in different ways, depending on your needs:
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
   from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
+  recommended approach, except for Raspbian.
 
 - Some users download the DEB package and
   [install it manually](#install-from-a-package) and manage
@@ -78,6 +78,7 @@ You can install Docker CE in different ways, depending on your needs:
 
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
+  This is currently the only approach for Raspbian.
 
 ### Install using the repository
 
@@ -85,9 +86,14 @@ Before you install Docker CE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
+> **Raspbian users cannot use this method!**
+>
+> For Raspbian, installing using the repository is not yet supported. You must
+> instead use the [convenience script](#install-using-the-convenience-script).
+
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/debian" %}
+{% assign download-url-base = 'https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")' %}
 
 1.  Update the `apt` package index:
 
@@ -158,8 +164,6 @@ from the repository.
 
     **armhf**:
 
-    This also works for Raspberry Pi on Jessie and Stretch.
-
     ```bash
     $ echo "deb [arch=armhf] {{ download-url-base }} \
          $(lsb_release -cs) stable" | \
@@ -215,7 +219,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~debian | {{ download-url-base}} jessie/stable amd64 Packages
+    docker-ce | {{ minor-version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose
@@ -316,20 +320,15 @@ You can install Docker Compose using `pip`:
 $ sudo pip install docker-compose
 ```
 
-If you need to save space and install only the `docker-compose` binary, you can
-use the [Hypriot](https://blog.hypriot.com/) repository.
+[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static
+binary of `docker-compose` for Raspbian. It may not always be up to date, but if
+space is at a premium, you may find it useful. To use it, first follow Hypriot's
+[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
+then run the following command:
 
-1.  Add the Hypriot repo:
-
-    ```bash
-    curl -s https://packagecloud.io/install/repositories/Hypriot/Schatzkiste/script.deb.sh | sudo bash
-    ```
-
-2.  Install `docker-compose`:
-
-    ```bash
-    sudo apt-get install docker-compose
-    ```
+```bash
+sudo apt-get install docker-compose
+```
 
 ## Uninstall Docker CE
 
