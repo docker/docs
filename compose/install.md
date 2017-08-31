@@ -107,9 +107,7 @@ by step instructions are also included below.
 `$dockerComposeVersion` with the specific version of Compose you want to use:
 
     ```bash
-    sudo -i
-    curl -L
-https://gist.githubusercontent.com/drAlberT/f8adaa76518dba72b2c91a9d787ea76e/raw/da4affd3760d7a6226a2de5ed8e371675ac62081/update-docker-compose.sh -o update-docker-compose.sh && bash update-docker-compose.sh
+    curl -L https://gist.githubusercontent.com/drAlberT/f8adaa76518dba72b2c91a9d787ea76e/raw/da4affd3760d7a6226a2de5ed8e371675ac62081/update-docker-compose.sh | bash
     ```
 
     If you have problems installing with `curl`, see
