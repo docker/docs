@@ -1,6 +1,6 @@
 ---
 description: How to migrate microservices
-keywords: MTA, migrate microservices, legacy apps, traditional apps
+keywords: MTA, migration, microservices, legacy apps, traditional apps, modernize, services, microservices
 title: Migrate microservices
 ---
 

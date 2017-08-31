@@ -1,6 +1,6 @@
 ---
-description: Migrate traditional apps
-keywords: mac, beta, edge, alpha, tutorial
+description: MTA use cases
+keywords: MTA, migration, legacy apps, traditional apps, containers, services, microservices
 title: Use Cases
 ---
 

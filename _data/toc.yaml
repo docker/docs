@@ -297,6 +297,8 @@ guides:
       title: Stack migration guides
     - path: /mta/use-cases/
       title: Use cases
+    - path: /mta/arch-best-practices/
+      title: Overview of MTA and migration map
 - sectiontitle: Troubleshoot Docker Engine
   section:
   - path: /engine/admin/troubleshooting_volume_errors/

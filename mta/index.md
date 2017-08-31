@@ -1,16 +1,18 @@
 ---
 description: Migrate traditional apps overview
-keywords: traditional apps, legacy apps, MTA, migrate apps to containers
-title: Overview of MTA and migration map
+keywords: traditional apps, legacy apps, MTA, migration, modernize, containers
+title: Modernize traditional apps overview
 ---
 
 The Docker Modernize Traditional Applications (MTA) Program helps enterprises
 make their existing legacy apps more secure, more efficient, and readily
-portable to a hybrid cloud infrastructure.
+portable to a hybrid cloud infrastructure. Here, we give a quick overview of MTA
+concepts, and steps to migrate legacy apps and infrastructure to containerized
+solutions.
 
-Also, check out the [blog post introducing the Docker MTA program
+Check out the [blog post introducing the Docker MTA program
 here](https://blog.docker.com/2017/04/modernizing-traditional-apps-with-docker/){:
-target="_blank" class="_"}, which goes into more detail.
+target="_blank" class="_"} to learn more.
 
 ## Working outline for this docset
 
@@ -38,8 +40,8 @@ on IT budgets, making it even harder to focus on innovation.
 
 ## How Docker solves the problem
 
-Legacy apps don't have to define your capabilities. You can still achieve
-innovation goals, and bring modern behavior to your current apps without
+Legacy apps don't have to define your capabilities. You can still move forward
+on innovation goals, and bring modern behavior to your current apps without
 changing a single line of code.
 
 ![MTA time and cost savings](images/MTA.png)
@@ -68,7 +70,7 @@ Docker install platforms and overview is [here](http://docs.docker.com/engine/in
 
 ### Set up your Docker Enterprise Edition (EE) with cloud templates
 
-1.  Docker EE 30-day trial is [here](https://store.docker.com/editions/enterprise/docker-ee-trial?tab=description)
+1.  Docker EE 30-day trial is [here](https://store.docker.com/editions/enterprise/docker-ee-trial?tab=description).
 
 2.  Launch Docker EE
 
@@ -109,3 +111,5 @@ TBD
 * [Stack migration guides](/mta/stack-guides.md)
 
 * [Use cases](/mta/use-cases.md)
+
+* [Reference architecture and best practices](arch-best-practices.md)

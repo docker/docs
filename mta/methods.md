@@ -1,6 +1,6 @@
 ---
-description: How to containerize app components from traditional apps
-keywords: MTA, migrate, legacy apps, traditional apps, methodologies, automation
+description: MTA methodologies and automation
+keywords: MTA, migration, legacy apps, traditional apps, methodologies, automation, modernize, containers, services, microservices
 title: Modern methodologies and automation
 ---
 
