@@ -32,6 +32,12 @@ Then, [create a backup](backups-and-disaster-recovery.md)
 of your cluster. This will allow you to recover from an existing backup if
 something goes wrong during the upgrade process.
 
+> Upgrading and backup archives
+>
+> The backup archive is version-specific, so you can't use it during the
+> upgrade process. For example, if you create a backup archive for a UCP 2.1
+> cluster, you can't use the archive file after you upgrade to UCP 2.2.  
+
 ## Upgrade Docker Engine
 
 For each node that is part of your cluster, upgrade the Docker Engine

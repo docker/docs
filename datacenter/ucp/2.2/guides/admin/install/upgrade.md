@@ -15,7 +15,7 @@ other relevant information for upgrading to a particular version.
 ## Plan the upgrade
 
 As part of the upgrade process, you'll be upgrading the Docker Engine
-installed in each node of the cluster to version 17.06 Enterprise Edition.
+installed in each node of the swarm to version 17.06 Enterprise Edition.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
 
@@ -30,9 +30,15 @@ occurs this makes it easier to find and troubleshoot any problems.
 [Create a backup](../backups-and-disaster-recovery.md) of your swarm.
 This allows you to recover if something goes wrong during the upgrade process.
 
+> Upgrading and backup archives
+>
+> The backup archive is version-specific, so you can't use it during the
+> upgrade process. For example, if you create a backup archive for a UCP 2.1
+> swarm, you can't use the archive file after you upgrade to UCP 2.2.  
+
 ## Upgrade Docker Engine
 
-For each node that is part of your cluster, upgrade the Docker Engine
+For each node that is part of your swarm, upgrade the Docker Engine
 installed on that node to Docker Engine version 17.06 or higher. Be sure
 to install the Docker Enterprise Edition.
 
