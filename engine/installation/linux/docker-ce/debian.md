@@ -313,13 +313,10 @@ installing Docker.
 
 #### (Optional) Install Docker Compose for Raspbian
 
-This functionality is provided by [Hypriot](https://blog.hypriot.com/). Add the Hypriot repo:
-
-```bash
-curl -s https://packagecloud.io/install/repositories/Hypriot/Schatzkiste/script.deb.sh | sudo bash
-```
-
-Install `docker-compose`:
+[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static binary of
+`docker-compose` for Raspbian. To use it, first follow Hypriot's
+[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
+then run the following command:
 
 ```bash
 sudo apt-get install docker-compose
