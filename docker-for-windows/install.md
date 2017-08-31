@@ -122,13 +122,18 @@ Windows containers.
 
 ## Install Docker for Windows
 
-1. Double-click `Docker for Windows Installer.exe` to run the installer.
+1. Double-click **Docker for Windows Installer.exe** to run the installer.
 
-    If you haven't already downloaded the installer (`Docker for Windows Installer.ex`), you can get it [**here**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe). It typically downloads to your `Downloads folder`, or you can run it from the recent downloads bar at the bottom of your web browser.
+    If you haven't already downloaded the installer (`Docker for Windows Installer.exe`), you can get it from
+    [**download.docker.com**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe).
+    It typically downloads to your `Downloads folder`, or you can run it from the recent downloads bar at the
+    bottom of your web browser.
 
 2. Follow the install wizard to accept the license, authorize the installer, and proceed with the install.
 
-    You will be asked to authorize `Docker.app` with your system password during the install process. Privileged access is needed to install networking components, links to the Docker apps, and manage the Hyper-V VMs.
+    You will be asked to authorize `Docker.app` with your system password during the install process.
+    Privileged access is needed to install networking components, links to the Docker apps, and manage the
+    Hyper-V VMs.
 
 3. Click **Finish** on the setup complete dialog to launch Docker.
 
