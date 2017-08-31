@@ -137,6 +137,20 @@ For more information about adding an SSH key pair to your account, please refer 
 
 All container logs are aggregated within [AWS CloudWatch](https://aws.amazon.com/cloudwatch/).
 
+## Best practice to deploy a large cluster
+
+When deploying a cluster of more than 20 workers, it can take a very long time for AWS to deploy all of the instances (1+hrs).
+It is best to deploy a cluster of 20 workers then scale it up in the Auto-Scaling Group (ASG) once it's been deployed.
+
+Benchmark of 3 Managers (m4.large) + 200 workers (t2.medium):
+
+* Deploying (~3.1hrs)
+	* Deployment: 3 Managers + 200 workers = ~190mins
+* Scaling (~35mins)
+	* Deployment: 3 Managers + 20 workers = ~20mins
+	* Scaling: 20 workers -> 200 workers via ASG = ~15mins
+
+
 ## Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
