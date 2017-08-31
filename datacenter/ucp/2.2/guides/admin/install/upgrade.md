@@ -51,6 +51,11 @@ Starting with the manager nodes, and then worker nodes:
     In your browser, navigate to the **Nodes** page in the UCP web UI,
     and check that the node is healthy and is part of the swarm.
 
+> Swarm mode
+>
+> UCP 2.0 and higher requires swarm mode. Upgrading from a UCP 1.x version
+> enables swarm mode in Docker EE Engine.
+
 ## Upgrade UCP
 
 You can upgrade UCP from the web UI or the CLI.
