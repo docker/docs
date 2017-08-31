@@ -64,7 +64,7 @@ a 1:1:1 mapping of a Subject, a Role, and a Collection:
   networks, secrets, etc.). Collections have a hierarchical directory-like structure
   and replace the old access control labels from the previous system (though they
   still use labels in the CLI).
-  * [Read the documentation](admin/manage-users.md#transition-from-ucp-21-access-control)
+  * [Read the documentation](access-control/index.md#transition-from-ucp-21-access-control)
    for more information and examples of the new system and how your old access
    control settings are migrated during an upgrade.
 * UCP now provides access control for nodes, where an admin can enforce
