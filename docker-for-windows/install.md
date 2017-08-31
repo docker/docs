@@ -122,9 +122,9 @@ Windows containers.
 
 ## Install Docker for Windows
 
-1. Double-click `InstallDocker.msi` to run the installer.
+1. Double-click `Docker for Windows Installer.exe` to run the installer.
 
-    If you haven't already downloaded the installer (`InstallDocker.msi`), you can get it [**here**](https://download.docker.com/win/stable/InstallDocker.msi). It typically downloads to your `Downloads folder`, or you can run it from the recent downloads bar at the bottom of your web browser.
+    If you haven't already downloaded the installer (`Docker for Windows Installer.ex`), you can get it [**here**](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe). It typically downloads to your `Downloads folder`, or you can run it from the recent downloads bar at the bottom of your web browser.
 
 2. Follow the install wizard to accept the license, authorize the installer, and proceed with the install.
 
