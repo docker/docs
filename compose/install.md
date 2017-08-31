@@ -109,42 +109,16 @@ by step instructions are also included below.
     ```bash
     sudo -i
     curl -L
-https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname
--s`-`uname -m` -o /usr/local/bin/docker-compose
+https://gist.githubusercontent.com/drAlberT/f8adaa76518dba72b2c91a9d787ea76e/raw/da4affd3760d7a6226a2de5ed8e371675ac62081/update-docker-compose.sh -o update-docker-compose.sh && bash update-docker-compose.sh
     ```
-
-    For example, to download Compose version {{composeversion}}, the command
-    is:
-
-    ```bash
-    sudo -i
-    curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-    ```
-
-    > Use the latest Compose release number in the download command.
-    >
-    The above command is an _example_, and it may become out-of-date once
-    in a while. Always follow the command pattern shown above it. If
-    you cut-and-paste an example, check which release it specifies and,
-    if needed, replace `$dockerComposeVersion` with the release number that
-    you want. Compose releases are also available for direct download on
-    the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank"
-    class="_"}.
-    {: .important}
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options).
 
-2.  Apply executable permissions to the binary:
-
-    ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
-    ```
-
-3.  Optionally, install [command completion](completion.md) for the
+2.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
 
-4.  Test the installation.
+3.  Test the installation.
 
     ```bash
     $ docker-compose --version
