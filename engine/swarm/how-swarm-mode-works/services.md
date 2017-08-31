@@ -33,15 +33,15 @@ Each of the three instances of the listener is a task in the swarm.
 
 ![services diagram](../images/services-diagram.png)
 
-A container is an isolated process.  In the swarm mode model, each task invokes
+A container is an isolated process. In the swarm mode model, each task invokes
 exactly one container. A task is analogous to a “slot” where the scheduler
 places a container. Once the container is live, the scheduler recognizes that
-the task is in a running state.  If the container fails health checks or
+the task is in a running state. If the container fails health checks or
 terminates, the task terminates.
 
 ## Tasks and scheduling
 
-A task is the atomic unit of scheduling within a swarm.  When you declare a
+A task is the atomic unit of scheduling within a swarm. When you declare a
 desired service state by creating or updating a service, the orchestrator
 realizes the desired state by scheduling tasks. For instance, you define a
 service that instructs the orchestrator to keep three instances of a HTTP
@@ -52,14 +52,14 @@ fails its health check or crashes, the orchestrator creates a new replica task
 that spawns a new container.
 
 A task is a one-directional mechanism. It progresses monotonically through a
-series of states: assigned, prepared, running, etc.  If the task fails the
+series of states: assigned, prepared, running, etc. If the task fails the
 orchestrator removes the task and its container and then creates a new task to
 replace it according to the desired state specified by the service.
 
 The underlying logic of Docker swarm mode is a general purpose scheduler and
-orchestrator.  The service and task abstractions themselves are unaware of the
-containers they implement.  Hypothetically, you could implement other types of
-tasks such as virtual machine tasks or non-containerized process tasks.  The
+orchestrator. The service and task abstractions themselves are unaware of the
+containers they implement. Hypothetically, you could implement other types of
+tasks such as virtual machine tasks or non-containerized process tasks. The
 scheduler and orchestrator are agnostic about the type of task. However, the
 current version of Docker only supports container tasks.
 
@@ -74,7 +74,7 @@ A service may be configured in such a way that no node currently in the
 swarm can run its tasks. In this case, the service remains in state `pending`.
 Here are a few examples of when a service might remain in state `pending`.
 
-**Note**: If your only intention is to prevent a service from
+> **Note**: If your only intention is to prevent a service from
 being deployed, scale the service to 0 instead of trying to configure it in
 such a way that it will remain in `pending`.
 
@@ -118,7 +118,7 @@ in gray.
 
 ![global vs replicated services](../images/replicated-vs-global.png)
 
-## Learn More
+## Learn more
 
 * Read about how swarm mode [nodes](nodes.md) work.
 * Learn how [PKI](pki.md) works in swarm mode.
