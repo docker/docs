@@ -72,6 +72,17 @@ $ sudo ping 10.0.0.4
 > **Note**: Access to Docker for Azure and Azure happens through a shell container that itself runs on Docker.
 
 
+## What are the Editions containers running after deployment?
+
+In order for our editions to deploy properly and for load balancer integrations to happen, we run a few containers. They are as follow:
+
+* `init`  - Sets up the swarm and makes sure that the stack came up properly. (checks manager+worker count)
+* `agent` - This is our shell/ssh container. When you SSH into an instance, you're actually in this container
+* `meta`  - Assist in creating the swarm cluster, giving privileged instances the ability to join the swarm.
+* `l4controller` - Listens for ports exposed at the docker CLI level and opens them in the load balancer. 
+* `logger` - Our log aggregator. This allows us to send all docker logs to the storage account.
+
+
 ## What are the different Azure Regions?
 All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft.com/en-us/regions/).
 An excerpt of the above regions to use when you create your service principal are:

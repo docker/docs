@@ -170,6 +170,16 @@ $ sudo ping 10.0.0.4
 
 > **Note**: Access to Docker for AWS and Azure happens through a shell container that itself runs on Docker.
 
+
+## What are the Editions containers running after deployment?
+
+In order for our editions to deploy properly and for load balancer integrations to happen, we run a few containers. They are as follow:
+
+* `init`  - Sets up the swarm and makes sure that the stack came up properly. (checks manager+worker count)
+* `shell` - This is our shell/ssh container. When you SSH into an instance, you're actually in this container
+* `meta`  - Assist in creating the swarm cluster, giving privileged instances the ability to join the swarm.
+* `l4controller` - Listens for ports exposed at the docker CLI level and opens them in the load balancer. 
+
 ## How do I uninstall Docker for AWS?
 
 You can remove the Docker for AWS setup and stacks through the [AWS
