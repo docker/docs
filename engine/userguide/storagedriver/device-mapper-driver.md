@@ -687,7 +687,7 @@ benefits:
   images which are all based on `alpine`, the `alpine` image and all its
   parent images are only stored once each on disk.
 
-- Snapshots are an implenentation of a copy-on-write (CoW) strategy. This means
+- Snapshots are an implementation of a copy-on-write (CoW) strategy. This means
   that a given file or directory is only copied to the container's writable
   layer when it is modified or deleted by that container.
 
