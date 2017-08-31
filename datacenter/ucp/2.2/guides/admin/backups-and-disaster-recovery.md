@@ -1,6 +1,6 @@
 ---
-description: Learn how to backup your Docker Universal Control Plane cluster, and
-  to recover your cluster from an existing backup.
+description: Learn how to backup your Docker Universal Control Plane swarm, and
+  to recover your swarm from an existing backup.
 keywords: ucp, backup, restore, recovery
 title: Backups and disaster recovery
 ---
@@ -39,8 +39,8 @@ temporarily unable to:
 
 To minimize the impact of the backup policy on your business, you should:
 
-* Configure UCP for high availability. This allows load-balancing user requests
-across multiple UCP manager nodes.
+* Configure UCP for [high availability](configure/set-up-high-availability.md).
+  This allows load-balancing user requests across multiple UCP manager nodes.
 * Schedule the backup to take place outside business hours.
 
 ## Backup command
@@ -74,29 +74,46 @@ $ docker container run --log-driver none --rm -i --name ucp \
 $ gpg --decrypt /tmp/backup.tar | tar --list
 ```
 
-## Restore your cluster
+### Security-Enhanced Linux (SELinux)
 
-The restore command can be used to create a new UCP cluster from a backup file.
-When restoring, make sure you use the same version of the `docker/dtr` image that you've used to create the backup.
-After the restore operation is complete, the following data will be recovered
-from the backup file:
+For Docker EE 17.06 or higher, if the Docker engine has SELinux enabled,
+which is typical for RHEL hosts, you need to include `--security-opt label=disable`
+in the `docker` command:
+
+```bash
+$ docker container run --security-opt label=disable --log-driver none --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
+```
+
+To find out whether SELinux is enabled in the engine, view the host's
+`/etc/docker/daemon.json` file and search for the string
+`"selinux-enabled":"true"`.
+
+## Restore your swarm
+
+The restore command can be used to create a new UCP swarm from a backup file.
+When restoring, make sure you use the same version of the `docker/dtr` image that
+you've used to create the backup. After the restore operation is complete, the
+following data will be recovered from the backup file:
 
 * Users, teams, and permissions.
-* All UCP configuration options available under `Admin Settings`, such as the
-DDC subscription license, scheduling options, Content Trust and authentication
-backends.
+* All UCP configuration options available under `Admin Settings`, like the
+  Docker EE subscription license, scheduling options, content trust and
+  authentication backends.
 
-There are two ways to restore a UCP cluster:
+There are two ways to restore a UCP swarm:
 
 * On a manager node of an existing swarm, which is not part of a UCP
-installation. In this case, a UCP cluster will be restored from the backup.
-* On a docker engine that is not participating in a swarm. In this case, a new
-swarm will be created and UCP will be restored on top.
+  installation. In this case, a UCP swarm will be restored from the backup.
+* On a docker engine that isn't participating in a swarm. In this case, a new
+  swarm is created and UCP is restored on top.
 
-In order to restore an existing UCP installation from a backup, you will need to
-first uninstall UCP from the cluster by using the `uninstall-ucp` command.
+To restore an existing UCP installation from a backup, you need to
+uninstall UCP from the swarm by using the `uninstall-ucp` command.
+[Learn to uninstall a UCP swarm](install/uninstall.md).
 
-The example below shows how to restore a UCP cluster from an existing backup
+The example below shows how to restore a UCP swarm from an existing backup
 file, presumed to be located at `/tmp/backup.tar`:
 
 ```none
@@ -133,7 +150,8 @@ restored through the following disaster recovery procedure.
 
 It is important to note that this procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
-manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
+manager failures, the system should be configured for
+[high availability](configure/set-up-high-availability.md).
 
 1. On one of the remaining manager nodes, perform `docker swarm init
    --force-new-cluster`. You may also need to specify an
@@ -144,14 +162,14 @@ manager failures, the system should be configured for [high availability](config
    either terminated or suspended.
 2. Obtain a backup of one of the remaining manager nodes if one is not already
    available.
-3. If UCP is still installed on the cluster, uninstall UCP using the
+3. If UCP is still installed on the swarm, uninstall UCP using the
    `uninstall-ucp` command.
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
    command.
 6. If any nodes are listed as `down`, you'll have to manually [remove these
-   nodes](../configure/scale-your-cluster.md) from the cluster and then re-join
-   them using a `docker swarm join` operation with the cluster's new join-token.
+   nodes](../configure/scale-your-cluster.md) from the swarm and then re-join
+   them using a `docker swarm join` operation with the swarm's new join-token.
 
 ## Where to go next
 
