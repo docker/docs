@@ -160,7 +160,9 @@ Review the [requirements](/registry/recipes/index.md#requirements), then follow 
 
     ```yaml
     nginx:
-      image: "nginx:1.9"
+      # Note : Only the alpine flavour supports bcrypt
+      # Ref. https://github.com/nginxinc/docker-nginx/issues/29
+      image: "nginx:alpine"
       ports:
         - 5043:443
       links:
