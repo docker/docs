@@ -412,6 +412,13 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.07.0-ce-mac26, 2017-09-01 (edge)
+
+* Upgrades
+  - [Docker 17.07.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce)
+  - [Docker compose 1.16.0](https://github.com/docker/compose/releases/tag/1.16.0)
+  - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
+
 ### Docker Community Edition 17.07.0-ce-rc4-mac25, 2017-08-24 (edge)
 
 **Upgrades**
