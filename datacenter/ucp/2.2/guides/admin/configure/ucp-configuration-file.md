@@ -52,7 +52,7 @@ Use the `docker config create` command to read the settings that are specified
 in a TOML file and create a new configuration.   
 
 ```bash
-$ docker config create --name ...  <ucp-config.toml>
+$ docker config create <name>  <ucp-config.toml>
 ```
 
 ## Configuration file and web UI
