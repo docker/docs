@@ -151,6 +151,9 @@ Benchmark of 3 Managers (m4.large) + 200 workers (t2.medium):
 	* Scaling: 20 workers -> 200 workers via ASG = ~15mins
 
 
+> **Note**: During a Stack upgrade, you will need to match the Auto-Scaling Group worker count, otherwise AWS will scale it back down (aka type 200 workers in the input box)
+
+
 ## Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
