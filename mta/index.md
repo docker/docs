@@ -59,14 +59,35 @@ efficiency.
 
 (Source for this is [Learn More]((Source for this is Learn More on how to
 modernize apps with Docker EE from website)){: target="_blank" class="_"} on how
-to modernize apps with Docker EE from website)
+to modernize apps with Docker EE from website and [MTA Solution
+Brief](https://goto.docker.com/rs/929-FJL-178/images/SB_MTA_04.14.2017.pdf){:
+target="_blank" class="_"}.)
+
+Modernizing traditional apps can be approached in logical steps to gain
+efficiencies and benefits at ever step.
 
 ![MTA workflow](images/MTA-process.png)
+
+The migration process consists of these high-level steps:
+
+1.  Package the application into a container using Docker EE, and
+validate the it.
+
+2.  Decide where to deploy the application (for example, migrate to cloud or server refresh).
+
+3.  Deploy and confirm.
+
+4.  Integrate the container into automated builds, integration testing, and
+auto-deployment to further optimize and save time.
+
+5.  Consider splicing and reconfiguring the Dockerized app code into
+microservices, or add new services to the existing container.
+
+The subtopics go into more detail on this process.
 
 ### Get Docker
 
 Docker install platforms and overview is [here](http://docs.docker.com/engine/installation/).
-
 
 ### Set up your Docker Enterprise Edition (EE) with cloud templates
 
@@ -96,7 +117,7 @@ Docker install platforms and overview is [here](http://docs.docker.com/engine/in
 
 ### Run your app as a containerized service
 
-TBD
+Launch the app with either a [`docker run`](/engine/reference/commandline/run.md), [`docker-compose up`](/compose/reference/up.md), or [`docker stack deploy`](/engine/reference/commandline/stack_deploy.md) command.
 
 ## Where to go next
 
