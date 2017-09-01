@@ -176,7 +176,7 @@ Review the [requirements](/registry/recipes/index.md#requirements), then follow 
       ports:
         - 127.0.0.1:5000:5000
       volumes:
-        - `pwd`./data:/var/lib/registry
+        - ./data:/var/lib/registry
     ```
 
 ## Starting and stopping
