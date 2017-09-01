@@ -1610,18 +1610,18 @@ services:
     ports:
       - "80:80"
 
-networks:
-  webnet:
+    networks:
+      webnet:
 
-volumes:
-  - type: volume
-    source: mydata
-    target: /data
-    volume:
-      nocopy: true
-  - type: bind
-    source: ./static
-    target: /opt/app/static
+    volumes:
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./static
+        target: /opt/app/static
 ```
 
 > **Note:** The long syntax is new in v3.2
