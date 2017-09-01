@@ -92,6 +92,10 @@ queries such as:
     pk: 'cf5e8bf1197e281c747f27e203e42e22721d5c0870b06dfb1060ad0970e99ada',
     visibility: 'public' },
 ...
+
+# List problems detected within the rethinkdb cluster
+> r.db("rethinkdb").table("current_issues")
+...
 ```
 
 Indvidual DBs and tables are a private implementation detail and may change in DTR
