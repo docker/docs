@@ -106,9 +106,9 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
   so that the Azure resource group is created up front and the service principal is scoped to that specific resource
   group.
 
-- **Docker Enterprise Edition for Azure**: The Azure Marketplace portal does not currently allow users to specify an
-  existing resource group to use when deploying resources. Do not specify `rg-name` and `rg-region`, because you need
-  a Service Principal that is scoped throughout your account.
+- **Docker Enterprise Edition for Azure**: `rg-name` and `rg-region` are optional, but specifying them is recommended
+  so that the Azure resource group is created up front and the service principal is scoped to that specific resource
+  group.
 
 
 If the script fails, your Azure user account may not have sufficient privileges. Contact your Azure administrator.
