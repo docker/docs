@@ -4,7 +4,7 @@ keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-{% assign composeversion = '1.15.0' %}
+{% assign composeversion = '1.16.1' %}
 
 Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
