@@ -44,10 +44,10 @@ terminates, the task terminates.
 A task is the atomic unit of scheduling within a swarm.  When you declare a
 desired service state by creating or updating a service, the orchestrator
 realizes the desired state by scheduling tasks. For instance, you define a
-service that instructs the orchestrator to keep three instances of a HTTP
+service that instructs the orchestrator to keep three instances of an HTTP
 listener running at all times. The orchestrator responds by creating three
 tasks. Each task is a slot that the scheduler fills by spawning a container. The
-container is the instantiation of the task. If a HTTP listener task subsequently
+container is the instantiation of the task. If an HTTP listener task subsequently
 fails its health check or crashes, the orchestrator creates a new replica task
 that spawns a new container.
 
