@@ -37,7 +37,7 @@ defaults:
   - scope:
       path: "compose"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "cs-engine"
     values:
@@ -57,11 +57,11 @@ defaults:
   - scope:
       path: "docker-for-mac"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "docker-for-windows"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "docker-hub"
     values:
@@ -77,11 +77,11 @@ defaults:
   - scope:
       path: "kitematic"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "machine"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "notary"
     values:
@@ -97,7 +97,7 @@ defaults:
   - scope:
       path: "toolbox"
     values:
-      assignee: "londoncalling"
+      assignee: "gbarr01"
   - scope:
       path: "datacenter"
     values:
