@@ -8,11 +8,11 @@ The easiest way to deploy Notary Server is by using Docker Compose. To follow th
 
 1. Clone the Notary repository.
 
-       $ git clone git@github.com:docker/notary.git
+       git clone git@github.com:docker/notary.git
 
 2. Build and start Notary Server with the sample certificates.
 
-       $ docker-compose up -d
+       docker-compose up -d
 
 
     For more detailed documentation about how to deploy Notary Server, see the [instructions to run a Notary service](/notary/running_a_service.md) as well as [the Notary repository](https://github.com/docker/notary) for more information.
