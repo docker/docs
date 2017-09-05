@@ -1404,8 +1404,8 @@ manuals:
           title: Run only the images you trust
         - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
           title: Scale your cluster
-        - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-length/
-          title: Set the user's session length
+        - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/
+          title: Set the user's session timeout
         - path: /datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/
           title: Set up high availability
         - path: /datacenter/ucp/2.2/guides/admin/configure/store-logs-in-an-external-system/
