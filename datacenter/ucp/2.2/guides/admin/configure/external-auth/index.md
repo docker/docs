@@ -23,6 +23,8 @@ go to the UCP web UI, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
 
+![](../../../images/authentication-authorization.png)
+
 In the **LDAP Enabled** section, click **Yes** to The LDAP settings appear.
 Now configure your LDAP directory integration.
 
@@ -31,14 +33,6 @@ Now configure your LDAP directory integration.
 Click the dropdown to select the permission level assigned by default to
 the private collections of new users.
 [Learn more about permission levels](../../../access-control/permission-levels.md).
-
-## Login Session Controls
-
-|          Field          |                                                                                      Description                                                                                       |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lifetime Hours          | The maxiumum length of a login session. When this time expires, UCP invalidates the session, and the user must authenticate again to establish a new session. The default is 72 hours. |
-| Renewal Threshold Hours | The time to wait before UCP renews the session automatically. Typically, this occurs during a user session and is independent of session activity. The default is 24 hours.            |
-| Per User Limit          | The maximum number of simultaneous logins for a user.                                                                                                                                  |
 
 ## LDAP Enabled
 
