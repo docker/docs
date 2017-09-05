@@ -30,8 +30,15 @@ Now configure your LDAP directory integration.
 
 ## Default Role For All Private Collections
 
-Click the dropdown to select the permission level assigned by default to
-the private collections of new users.
+Use this setting to change the default permissions of new users. UCP applies
+the default role automatically to user accounts that are imported from an LDAP
+server.
+
+Click the dropdown to select the permission level that UCP assigns by default
+to the private collections of new users. For example, if you change the value
+to `View Only`, all users who log in for the first time after the setting is
+changed have `View Only` access to their private collections, but permissions
+remain unchanged for all existing users.
 [Learn more about permission levels](../../../access-control/permission-levels.md).
 
 ## LDAP Enabled
@@ -117,7 +124,7 @@ user which can still login with the recovery admin password.
 UCP saves a minimum amount of user data required to operate. This includes
 the value of the username and full name attributes that you have specified in
 the configuration as well as the distinguished name of each synced user.
-UCP does not query, or store any additional data from the directory server.
+UCP does not query or store any additional data from the directory server.
 
 ## Sync teams
 
