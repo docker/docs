@@ -381,7 +381,7 @@ $ docker swarm join \
   192.168.99.100:2377
 ```
 
-## Learn More
+## Learn more
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
