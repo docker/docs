@@ -19,6 +19,12 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.06.2-ce-win27 Release Notes (2017-08-31) (Stable)
+
+* Upgrades
+  - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
+  - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
+
 ### Docker Community Edition 17.06.1-ce-rc1-win20 2017-08-21 (stable)
 
 **Upgrades**
