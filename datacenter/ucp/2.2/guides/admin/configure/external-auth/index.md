@@ -28,11 +28,9 @@ authenticate users.
 In the **LDAP Enabled** section, click **Yes** to The LDAP settings appear.
 Now configure your LDAP directory integration.
 
-## Default Role For All Private Collections
+## Default role for all private collections
 
-Use this setting to change the default permissions of new users. UCP applies
-the default role automatically to user accounts that are imported from an LDAP
-server.
+Use this setting to change the default permissions of new users.
 
 Click the dropdown to select the permission level that UCP assigns by default
 to the private collections of new users. For example, if you change the value
@@ -41,7 +39,7 @@ changed have `View Only` access to their private collections, but permissions
 remain unchanged for all existing users.
 [Learn more about permission levels](../../../access-control/permission-levels.md).
 
-## LDAP Enabled
+## LDAP enabled
 
 Click **Yes** to enable integrating UCP users and teams with LDAP servers.  
 
@@ -55,7 +53,7 @@ Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 | Use Start TLS         | Whether to authenticate/encrypt the connection after connecting to the LDAP server over TCP. If you set the LDAP Server URL field with `ldaps://`, this field is ignored. |
 | Skip TLS verification | Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.                              |
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
-| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default valu eof `true` is recommended. |
+| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. |
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
@@ -84,7 +82,7 @@ again. This is useful in cases where users may be found in multiple distinct
 subtrees of your organization's directory. Any user entry which matches at
 least one of the search configurations will be synced as a user.
 
-## LDAP Test Login
+## LDAP test login
 
 | Field    | Description                                                                                                                                                                           |
 | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -95,7 +93,7 @@ Before you save the configuration changes, you should test that the integration
 is correctly configured. You can do this by providing the credentials of an
 LDAP user, and clicking the **Test** button.
 
-## LDAP Sync Configuration
+## LDAP sync configuration
 
 | Field                      | Description                                                                                                                                                                                                                                                              |
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,20 +109,22 @@ You can also manually synchronize users by clicking **Sync Now**.
 
 ## Revoke user access
 
-When a user is removed from LDAP, that user becomes inactive after the LDAP
-synchronization runs.
+When a user is removed from LDAP, the effect on the user's UCP account depends
+on the **Just-In-Time User Provisioning** setting: 
 
-Also, when you switch from the built-in authentication to using LDAP
-authentication, all manually created users whose usernames do not match any
-LDAP search results become inactive, with the exception of the recovery admin
-user which can still login with the recovery admin password.
+- **Just-In-Time User Provisioning** is `false`: Users deleted from LDAP become
+  inactive in UCP after the next LDAP synchronization runs.
+- **Just-In-Time User Provisioning** is `true`: Users deleted from LDAP can't
+  authenticate, but their UCP accounts remain active. This means that they can
+  use their client bundles to run commands. To prevent this, deactivate their
+  UCP user accounts.
 
 ## Data synced from your organization's LDAP directory
 
 UCP saves a minimum amount of user data required to operate. This includes
 the value of the username and full name attributes that you have specified in
 the configuration as well as the distinguished name of each synced user.
-UCP does not query or store any additional data from the directory server.
+UCP does not store any additional data from the directory server.
 
 ## Sync teams
 
