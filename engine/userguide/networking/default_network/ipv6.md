@@ -36,7 +36,7 @@ sets the IPv6 subnet to `2001:db8:1::/64`.
 ```json
 {
   "ipv6": true,
-  "fixed-cid4-v6": "2001:db8:1::/64"
+  "fixed-cidr-v6": "2001:db8:1::/64"
 }
 ```
 
