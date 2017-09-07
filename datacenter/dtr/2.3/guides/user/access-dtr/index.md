@@ -52,7 +52,7 @@ After adding the CA certificate to Windows, restart Docker for Windows.
 
 ```bash
 # Download the DTR CA certificate
-$ curl -k https://<dtr-domain-name>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
+$ sudo curl -k https://<dtr-domain-name>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
 # Refresh the list of certificates to trust
 $ sudo update-ca-certificates
 # Restart the Docker daemon
