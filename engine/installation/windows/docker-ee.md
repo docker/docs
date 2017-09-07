@@ -118,6 +118,18 @@ installs, or install on air-gapped systems.
     PS> docker container run hello-world:nanoserver
     ```
 
+## Install a specific version
+
+To install a specific Docker version, you can use the `MaximumVersion` and `MinimumVersion` flags. For example:
+
+```ps
+Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force -MaximumVersion 17.03
+...
+Name                           Version          Source           Summary
+----                           -------          ------           -------
+Docker                         17.03.0-ee       Docker           Contains Docker EE for use with Windows Server 2016...
+```
+
 ## Update Docker EE
 
 To update Docker EE on Windows Server 2016:
@@ -130,12 +142,6 @@ PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
 # Start the Docker service.
 PS> Start-Service Docker
 ```
-
-## Install Docker EE using OneGet
-
-If you want to install Docker EE by using [OneGet](https://github.com/oneget/oneget),
-follow the steps described in [Windows Containers on Windows
-Server](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/quick-start-windows-server).
 
 ## What to know before you install
 
