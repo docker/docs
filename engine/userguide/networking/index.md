@@ -196,9 +196,9 @@ $ docker network inspect bridge
 ```
 
 Containers connected to the default `bridge` network can communicate with each
-other by IP address. Docker does not support automatic service discovery on the
+other by IP address. **Docker does not support automatic service discovery on the
 default bridge network. If you want containers to be able to resolve IP addresses
-by container name, you should use user-defined networks instead. You can link
+by container name, you should use _user-defined networks_ instead**. You can link
 two containers together using the legacy `docker run --link` option, but this
 is not recommended in most cases.
 
