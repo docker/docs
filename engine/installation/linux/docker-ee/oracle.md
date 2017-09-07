@@ -104,7 +104,9 @@ from the repository.
     `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2 container-selinux
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
     ```
 
 4.  Use the following command to add the **stable** repository:
@@ -117,10 +119,11 @@ from the repository.
 
 #### Install Docker EE
 
-1.  Update the `yum` package index.
+1.  Install the latest version of Docker EE, or go to the next step to install a
+    specific version.
 
     ```bash
-    $ sudo yum makecache fast
+    $ sudo yum -y install docker-ee
     ```
 
     If this is the first time you have refreshed the package index since adding
@@ -129,17 +132,10 @@ from the repository.
     `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
     key.
 
-2.  Install the latest version of Docker EE, or go to the next step to install a
-    specific version.
-
-    ```bash
-    $ sudo yum -y install docker-ee
-    ```
-
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  On production systems, you should install a specific version of Docker
+2.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions.
     This example uses the `sort -r` command to sort the results by version
     number, highest to lowest. The output is truncated.
@@ -150,21 +146,26 @@ from the repository.
     ```bash
     $ yum list docker-ee.x86_64  --showduplicates | sort -r
 
-    docker-ee.x86_64  {{ minor-version }}.0.el7                               docker-ee-stable   
+    docker-ee.x86_64            {{ minor-version }}.ee.2-1.el7            docker-ee-stable-17.06
     ```
 
     The contents of the list depend upon which repositories you have enabled.
-    Choose a specific version to install. The second column is the version string.
-    The third column is the repository name, which indicates which repository the
-    package is from and by extension its stability level. To install a
-    specific version, append the version string to the package name and separate
-    them by a hyphen (`-`):
+    Choose a specific version to install. The second column is the version
+    string. You can use the entire version string, but **you need to include at
+    least to the first hyphen**. The third column is the repository name, which
+    indicates which repository the package is from and by extension its
+    stability level. To install a specific version, append the version string to
+    the package name and separate them by a hyphen (`-`):
+
+    > **Note**: The version string is the package name plus the version up to
+    > the first hyphen. In the example above, the fully qualified package name
+    > is `docker-ee-17.06.1.ee.2`.
 
     ```bash
-    $ sudo yum -y install docker-ee-<VERSION_STRING>
+    $ sudo yum -y install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
-4.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
     that the file was empty, add the following contents.
 
     ```json
@@ -173,18 +174,18 @@ from the repository.
     }
     ```
 
-5.  For production systems, you must use `direct-lvm` mode, which requires you
+4.  For production systems, you must use `direct-lvm` mode, which requires you
     to prepare the block devices. Follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
     **before starting Docker**.
 
-6.  Start the Docker daemon.
+5.  Start the Docker daemon.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-7.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash

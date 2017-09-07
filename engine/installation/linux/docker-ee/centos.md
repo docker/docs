@@ -102,32 +102,22 @@ EE from the repository.
     `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
     ```
 
 4.  Use the following command to add the **stable** repository:
 
     ```bash
     $ sudo yum-config-manager \
-        --add-repo \
-        <DOCKER-EE-URL>/centos/docker-ee.repo
+      --add-repo \
+      <DOCKER-EE-URL>/centos/docker-ee.repo
     ```
 
 #### Install Docker EE
 
-1.  Update the `yum` package index.
-
-    ```bash
-    $ sudo yum makecache fast
-    ```
-
-    If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint is
-    correct, and if so, accept the key. The fingerprint should match
-    `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
-
-2.  Install the latest version of Docker EE, or go to the next step to install a
+1.  Install the latest version of Docker EE, or go to the next step to install a
     specific version.
 
     ```bash
@@ -140,10 +130,16 @@ EE from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning}
 
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint is
+    correct, and if so, accept the key. The fingerprint should match
+    `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
+
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  On production systems, you should install a specific version of Docker EE
+2.  On production systems, you should install a specific version of Docker EE
     instead of always using the latest. List the available versions. This
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
@@ -154,25 +150,30 @@ EE from the repository.
     ```bash
     $ yum list docker-ee.x86_64  --showduplicates | sort -r
 
-    docker-ee.x86_64  {{ minor-version }}.0.el7                               docker-ee-stable  
+    docker-ee.x86_64        {{ minor-version }}.ee.2-1.el7.centos         docker-ee-stable-17.06
     ```
 
     The contents of the list depend upon which repositories are enabled, and
     will be specific to your version of CentOS (indicated by the `.el7` suffix
     on the version, in this example). Choose a specific version to install. The
-    second column is the version string. The third column is the repository
-    name, which indicates which repository the package is from and by extension
-    its stability level. To install a specific version, append the version
-    string to the package name and separate them by a hyphen (`-`):
+    second column is the version string. You can use the entire version string,
+    but **you need to include at least to the first hyphen**. The third column
+    is the repository name, which indicates which repository the package is from
+    and by extension its stability level. To install a specific version, append
+    the version string to the package name and separate them by a hyphen (`-`).
+
+    > **Note**: The version string is the package name plus the version up to
+    > the first hyphen. In the example above, the fully qualified package name
+    > is `docker-ee-17.06.1.ee.2`.
 
     ```bash
-    $ sudo yum install docker-ee-<VERSION>
+    $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
     that the file was empty, add the following contents.
 
     ```json
@@ -181,18 +182,18 @@ EE from the repository.
     }
     ```
 
-5.  For production systems, you must use `direct-lvm` mode, which requires you
+4.  For production systems, you must use `direct-lvm` mode, which requires you
     to prepare the block devices. Follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
     **before starting Docker**. Do not skip this step.
 
-6.  Start Docker.
+5.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-7.  Verify that Docker EE is installed correctly by running the `hello-world`
+6.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
