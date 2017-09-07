@@ -25,11 +25,11 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 
 ### Step 1. Sign up for AWS and configure credentials
 
-1. If you are not already an AWS user, sign up for [AWS](https://aws.amazon.com/) to create an account and get root access to EC2 cloud computers.
+1.  If you are not already an AWS user, sign up for [AWS](https://aws.amazon.com/) to create an account and get root access to EC2 cloud computers.
 
     If you have an Amazon account, you can use it as your root user account.
 
-2. Create an IAM (Identity and Access Management) administrator user, an admin group, and a key pair associated with a region.
+2.  Create an IAM (Identity and Access Management) administrator user, an admin group, and a key pair associated with a region.
 
     From the AWS menus, select **Services** > **IAM** to get started.
 
@@ -62,7 +62,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     docker-machine create --driver amazonec2 --amazonec2-open-port 8000 --amazonec2-region us-west-1 aws-sandbox
     ```
 
->**Note**: For all aws create flags, run: `docker-machine create --driver amazonec2 --help`
+    > **Note**: For all aws create flags, run: `docker-machine create --driver amazonec2 --help`
 
     **Using a credentials file**
 
@@ -107,10 +107,10 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 
     ![instance on AWS EC2 Dashboard](../img/aws-instance-east.png)
 
-> **Note**: To ensure that you see your new instance, select your region from
-> the menu in the upper right. If you did not specify a region as part of
-> `docker-machine create` (with the optional `--amazonec2-region` flag), select
-> the default, US East (N. Virginia).
+    > **Note**: To ensure that you see your new instance, select your region from
+    > the menu in the upper right. If you did not specify a region as part of
+    > `docker-machine create` (with the optional `--amazonec2-region` flag), select
+    > the default, US East (N. Virginia).
 
 4.  At the command terminal, run `docker-machine ls`.
 
@@ -164,15 +164,15 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     **Open terminal session on aws-sandbox**
 
     ```bash
-            docker-machine ssh aws-sandbox
-            sudo docker run hello-world
+    docker-machine ssh aws-sandbox
+    sudo docker run hello-world
     ```
 
     For a more interesting test, run a Dockerized webserver on your new machine.
 
-> **Note**: In this example, we use port `8000` which we added to the
-> docker-machine AWS Security Group during `docker-machine create`. To run your
-> container on another port, update the security group to reflect that.
+    > **Note**: In this example, we use port `8000` which we added to the
+    > docker-machine AWS Security Group during `docker-machine create`. To run your
+    > container on another port, update the security group to reflect that.
 
     In this example, the `-p` option is used to expose port 80 from the `nginx`
     container and make it accessible on port `8000` of the `aws-sandbox` host.
