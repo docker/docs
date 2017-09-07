@@ -51,7 +51,7 @@ mounts is to think about where the data lives on the Docker host.
   volume explicitly using the `docker volume create` command, or Docker can
   create a volume during container or service creation.
 
-  When you create a volume, it is stored within a a directory on the Docker
+  When you create a volume, it is stored within a directory on the Docker
   host. When you mount the volume into a container, this directory is what is
   mounted into the container. This is similar to the way that bind mounts work,
   except that volumes are managed by Docker and are isolated from the core
