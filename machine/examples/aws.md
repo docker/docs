@@ -82,7 +82,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     docker-machine create --driver amazonec2 --amazonec2-access-key AKI******* --amazonec2-secret-key 8T93C*******  aws-sandbox
     ```
 
-    **Expose a port**
+    **Exposing a port**
 
     To expose an inbound port to the new machine, use the flag, `--amazonec2-open-port`:
 
