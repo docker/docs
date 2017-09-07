@@ -158,7 +158,7 @@ from the repository.
     If this is the first time you have refreshed the package index since adding
     the Docker repositories, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint matches
-    `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96` and if so, accept the
+    `77fe da13 1a83 1d29 a418 d3e8 99e5 ff2e 7668 2bc9` and if so, accept the
     key.
 
 2.  On production systems, you should install a specific version of Docker EE

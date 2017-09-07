@@ -91,15 +91,22 @@ from the repository.
 
 1.  Remove any existing Docker repositories from `/etc/yum.repos.d/`.
 
-2.  Store your EE repository URL in `/etc/yum/vars/dockerurl`. Replace
-    `<DOCKER-EE-URL>` with the URL you noted down in the
-    [prerequisites](#prerequisites).
+2.  Temporarily store the Docker EE repository URL you noted down in the
+    [prerequisites](#prerequisites) in an environment variable.
+    This will not persist when the current session ends.
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>/oraclelinux" > /etc/yum/vars/dockerurl'
+    $ export DOCKERURL='<DOCKER-EE-URL>'
     ```
 
-3.  Install required packages. `yum-utils` provides the `yum-config-manager`
+3.  Store your Docker EE repository URL in a `yum` variable in `/etc/yum/vars/`.
+    This command relies on the variable you stored in the previous step.
+
+    ```bash
+    $ sudo sh -c 'echo "$DOCKERURL/oraclelinux" > /etc/yum/vars/dockerurl'
+    ```
+
+4.  Install required packages. `yum-utils` provides the `yum-config-manager`
     utility, and `device-mapper-persistent-data` and `lvm2` are required by the
     `devicemapper` storage driver.
 
@@ -109,12 +116,13 @@ from the repository.
       lvm2
     ```
 
-4.  Use the following command to add the **stable** repository:
+5.  Use the following command to add the **stable** repository. This command
+    relies on the variable you stored earlier.
 
     ```bash
     $ sudo yum-config-manager \
-        --add-repo \
-        <DOCKER-EE-URL>/oraclelinux/docker-ee.repo
+      --add-repo \
+      "$DOCKERURL/oraclelinux/docker-ee.repo"
     ```
 
 #### Install Docker EE
@@ -129,7 +137,7 @@ from the repository.
     If this is the first time you have refreshed the package index since adding
     the Docker repositories, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint matches
-    `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
+    `77fe da13 1a83 1d29 a418 d3e8 99e5 ff2e 7668 2bc9` and if so, accept the
     key.
 
     Docker is installed but not started. The `docker` group is created, but no

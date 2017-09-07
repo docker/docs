@@ -89,15 +89,22 @@ EE from the repository.
 
 1.  Remove any existing Docker repositories from `/etc/yum.repos.d/`.
 
-2.  Store your Docker EE repository URL in a `yum` variable in `/etc/yum/vars/`.
-    Replace `<DOCKER-EE-URL>` with the URL you noted down in the
-    [prerequisites](#prerequisites).
+2.  Temporarily store the Docker EE repository URL you noted down in the
+    [prerequisites](#prerequisites) in an environment variable.
+    This will not persist when the current session ends.
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>/centos" > /etc/yum/vars/dockerurl'
+    $ export DOCKERURL='<DOCKER-EE-URL>'
     ```
 
-3.  Install required packages. `yum-utils` provides the `yum-config-manager`
+3.  Store your Docker EE repository URL in a `yum` variable in `/etc/yum/vars/`.
+    This command relies on the variable you stored in the previous step.
+
+    ```bash
+    $ sudo sh -c 'echo "$DOCKERURL/centos" > /etc/yum/vars/dockerurl'
+    ```
+
+4.  Install required packages. `yum-utils` provides the `yum-config-manager`
     utility, and `device-mapper-persistent-data` and `lvm2` are required by the
     `devicemapper` storage driver.
 
@@ -107,12 +114,13 @@ EE from the repository.
       lvm2
     ```
 
-4.  Use the following command to add the **stable** repository:
+5.  Use the following command to add the **stable** repository. This command
+    relies on the variable you stored earlier.
 
     ```bash
     $ sudo yum-config-manager \
       --add-repo \
-      <DOCKER-EE-URL>/centos/docker-ee.repo
+      "$DOCKERURL/centos/docker-ee.repo"
     ```
 
 #### Install Docker EE
@@ -134,7 +142,7 @@ EE from the repository.
     the Docker repositories, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint is
     correct, and if so, accept the key. The fingerprint should match
-    `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
+    `77fe da13 1a83 1d29 a418 d3e8 99e5 ff2e 7668 2bc9`.
 
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
