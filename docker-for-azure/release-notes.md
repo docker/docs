@@ -30,6 +30,8 @@ title: Docker for Azure Release Notes
 
 Release date: 09/08/2017
 
+{{azure_blue_latest}}
+
 **New**
 
 - Docker Engine upgraded to [Docker 17.06.2 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce){: target="_blank"}
