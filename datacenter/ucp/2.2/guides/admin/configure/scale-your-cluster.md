@@ -48,8 +48,7 @@ Click **Add Node** to add a new node.
 
 ![](../../../../../images/try-ddc-3.png){: .with-border}
 
--  Check the **Add node as a manager** option if you want to add the node as
-   manager. 
+-  Click **Manager** if you want to add the node as a manager. 
 -  Check the **Use a custom listen address** option to specify the
    IP address of the host that you'll be joining to the cluster.
 -  Check the **Use a custom listen address** option to specify the
@@ -58,13 +57,13 @@ Click **Add Node** to add a new node.
 Copy the displayed command, use ssh to log into the host that you want to
 join to the cluster, and run the `docker swarm join` command on the host.
 
+To add a Windows node, click **Windows** and follow the instructions in
+[Join Windows worker nodes to a swarm](join-windows-worker-nodes.md). 
+
 After you run the join command in the node, the node is displayed in the UCP
 web UI.
 
 ![](../../images/scale-your-cluster-2.png){: .with-border}
-
-To add Windows nodes, follow the instructions in
-[Join Windows worker nodes to a swarm](join-windows-worker-nodes.md). 
 
 ## Remove nodes from the cluster
 
