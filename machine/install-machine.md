@@ -71,7 +71,7 @@ as:
 Confirm the version and save scripts to `/etc/bash_completion.d` or
 `/usr/local/etc/bash_completion.d`:
 
-```
+```bash
 scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do sudo wget https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/${i} -P /etc/bash_completion.d; done
 ```
 
