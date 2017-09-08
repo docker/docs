@@ -12,6 +12,17 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.9
+
+(Date TBD)
+
+**Bugs fixed**
+
+* High severity:
+  * Fixed issue with rethinkdbs not starting correctly after a restart in an HA cluster depending on the order of events
+* Low severity:
+  * Improved error handling in scanning
+
 ## DTR 2.2.8
 
 (24 August 2017)
