@@ -11,6 +11,8 @@ added to, your automated build repository.
 
 Configure webhooks on `https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settings/webhooks/`.
 
+![Create Webhook](/docker-hub/images/webhooks.png)
+
 With your webhook, you specify a target URL and a JSON payload to deliver. The
 example webhook below generates an HTTP POST that delivers a JSON payload:
 

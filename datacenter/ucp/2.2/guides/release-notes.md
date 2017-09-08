@@ -10,6 +10,43 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## version 2.2.2
+
+(30 August 2017)
+
+**Bug fixes**
+
+* Core
+  * Fixed an issue that caused timeouts during install, preventing UCP 2.2.1 from
+  being released.
+  * Fixed a number of issues in which access control labels and roles could not
+  be upgraded to their new format, when upgrading UCP.
+  [Learn more](https://success.docker.com/KBase/Auth_system_migration_errors).
+  * Fixed an issue that caused an upgrade with multiple manager nodes to fail
+  with RethinkDB startup errors.
+  * Fixed an issue that caused upgrades to fail due to UCP being unable to
+  remove and replace older UCP containers.
+  * Fixed an issue in which upgrade timed out due to lack of available disk space.
+  * Fixed an issue in which rescheduling of containers not belonging in services
+  could fail due to a request for a duplicate IP address.
+  * DTR containers are no longer omitted from `docker ps` commands.
+* UI/UX
+  * Fixed known issue from 2.2.0 where config changes (including LDAP/AD) take
+  an extended period to update after making changes in the UI settings.
+  * Fixed an issue where the `/apidocs` url redirected to the login page.
+  * Fixed an issue in which the UI does not redirect to a bad URL immediately
+  after an upgrade.
+  * Config and API docs now show the correct LDAP sync cron schedule format.
+* docker/ucp image
+  * Support dump now contains information about access control migrations.
+  * The `ucp-auth-store` and `ucp-auth-api` containers now report health checks.
+
+**Known issues**
+
+* When deploying compose files that use secrets, the secret definition must
+include `external: true`, otherwise the deployment fails with the error
+`unable to inspect secret`.
+
 ## Version 2.2.0
 
 (16 August 2017)
@@ -27,7 +64,7 @@ a 1:1:1 mapping of a Subject, a Role, and a Collection:
   networks, secrets, etc.). Collections have a hierarchical directory-like structure
   and replace the old access control labels from the previous system (though they
   still use labels in the CLI).
-  * [Read the documentation](admin/manage-users.md#transition-from-ucp-21-access-control)
+  * [Read the documentation](access-control/index.md#transition-from-ucp-21-access-control)
    for more information and examples of the new system and how your old access
    control settings are migrated during an upgrade.
 * UCP now provides access control for nodes, where an admin can enforce

@@ -255,6 +255,16 @@ If you cannot use the official Docker repository to install Docker EE, you can
 download the `.rpm` file for your release and install it manually. You will
 need to download a new file each time you want to upgrade Docker EE.
 
+1.  Enable the `extras` RHEL repository. This ensures access to the
+    `container-selinux` package which is required by `docker-ee`.
+
+    ```bash
+    $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
+    ```
+
+    Alternately, obtain that package manually from Red Hat.
+    There is no way to publicly browse this repository.
+
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
     `rhel/7/x86_64/stable-{{ minor-version }}/Packages` and download the `.rpm`

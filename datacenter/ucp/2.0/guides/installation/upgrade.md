@@ -60,6 +60,11 @@ Starting with the controller nodes, and then worker nodes:
     In your browser, navigate to the **UCP web UI**, and validate that the
     node is healthy and is part of the cluster.
 
+> Swarm mode
+>
+> UCP 2.0 and higher requires swarm mode. Upgrading from a UCP 1.x version
+> enables swarm mode in CS Docker Engine.
+
 ## Upgrade the first controller node
 
 Start by upgrading a controller node that has valid root CA material. This

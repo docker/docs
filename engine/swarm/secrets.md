@@ -69,7 +69,7 @@ examples below. Keep the following notable differences in mind:
 
 - When creating a service which uses Windows containers, the options to specify
   UID, GID, and mode are not supported for secrets. Secrets are currently only
-  accessible by administrators and and users with `system` access within the
+  accessible by administrators and users with `system` access within the
   container.
 
 
@@ -835,14 +835,14 @@ This example builds upon the previous one. In this scenario, you create a new
 secret with a new MySQL password, update the `mysql` and `wordpress` services to
 use it, then remove the old secret.
 
-**Note**: Changing the password on a MySQL database involves running extra
-queries or commands, as opposed to just changing a single environment variable
-or a file, since the image only sets the MySQL password if the database doesn’t
-already exist, and MySQL stores the password within a MySQL database by default.
-Rotating passwords or other secrets may involve additional steps outside of
-Docker.
+> **Note**: Changing the password on a MySQL database involves running extra
+> queries or commands, as opposed to just changing a single environment variable
+> or a file, since the image only sets the MySQL password if the database doesn’t
+> already exist, and MySQL stores the password within a MySQL database by default.
+> Rotating passwords or other secrets may involve additional steps outside of
+> Docker.
 
-1.  Create the new password and store it as a  secret named `mysql_password_v2`.
+1.  Create the new password and store it as a secret named `mysql_password_v2`.
 
     ```bash
     $ openssl rand -base64 20 | docker secret create mysql_password_v2 -

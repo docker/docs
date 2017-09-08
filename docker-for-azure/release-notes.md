@@ -26,11 +26,20 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
+### 17.06.2 CE
+
+Release date: 09/08/2017
+
+{{azure_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.06.2 CE](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce){: target="_blank"}
+- VMSS APIs updated to use 2017-03-30 to allow upgrades when customdata has changed
+
 ### 17.06.1 CE
 
 Release date: 08/17/2017
-
-{{aws_blue_latest}}
 
 **New**
 
@@ -41,8 +50,6 @@ Release date: 08/17/2017
 ### 17.06.0 CE
 
 Release date: 06/28/2017
-
-{{azure_blue_latest}}
 
 **New**
 

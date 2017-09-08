@@ -1404,6 +1404,8 @@ manuals:
           title: Run only the images you trust
         - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
           title: Scale your cluster
+        - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/
+          title: Set the user's session timeout
         - path: /datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/
           title: Set up high availability
         - path: /datacenter/ucp/2.2/guides/admin/configure/store-logs-in-an-external-system/
@@ -1966,6 +1968,8 @@ manuals:
           title: backup
         - path: /datacenter/dtr/2.3/reference/cli/destroy/
           title: destroy
+        - path: /datacenter/dtr/2.3/reference/cli/dumpcerts/
+          title: dumpcerts
         - path: /datacenter/dtr/2.3/reference/cli/images/
           title: images
         - path: /datacenter/dtr/2.3/reference/cli/install/
@@ -2100,6 +2104,8 @@ manuals:
               title: backup
             - path: /datacenter/dtr/2.2/reference/cli/destroy/
               title: destroy
+            - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
+              title: dumpcerts
             - path: /datacenter/dtr/2.2/reference/cli/images/
               title: images
             - path: /datacenter/dtr/2.2/reference/cli/install/

@@ -19,22 +19,31 @@ are still available.
 ## Configure the LDAP integration
 
 To configure UCP to create and authenticate users using an LDAP directory,
-go to the UCP web UI, navigate to the **Admin Settings** page and click 
+go to the UCP web UI, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
+
+![](../../../images/authentication-authorization.png)
 
 In the **LDAP Enabled** section, click **Yes** to The LDAP settings appear.
 Now configure your LDAP directory integration.
 
-## Default Role For All Private Collections
+## Default role for all private collections
 
-Click the dropdown to select the permission level assigned by default to
-the private collections of new users.
-[Learn more about permission levels](../../../access-control/permission-levels.md).                                    
+Use this setting to change the default permissions of new users.
 
-## LDAP domains
+Click the dropdown to select the permission level that UCP assigns by default
+to the private collections of new users. For example, if you change the value
+to `View Only`, all users who log in for the first time after the setting is
+changed have `View Only` access to their private collections, but permissions
+remain unchanged for all existing users.
+[Learn more about permission levels](../../../access-control/permission-levels.md).
 
-Click **Add LDAP Domain** to show the LDAP server configuration settings.
+## LDAP enabled
+
+Click **Yes** to enable integrating UCP users and teams with LDAP servers.  
+
+## LDAP server
 
 | Field                 | Description                                                                                                                                                               |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -44,11 +53,13 @@ Click **Add LDAP Domain** to show the LDAP server configuration settings.
 | Use Start TLS         | Whether to authenticate/encrypt the connection after connecting to the LDAP server over TCP. If you set the LDAP Server URL field with `ldaps://`, this field is ignored. |
 | Skip TLS verification | Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.                              |
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
-
+| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. |
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 
-Click **Confirm** to add your LDAP domain. 
+Click **Confirm** to add your LDAP domain.
+
+ To integrate with more LDAP servers, click **Add LDAP Domain**.
 
 ## LDAP user search configurations
 
@@ -71,7 +82,7 @@ again. This is useful in cases where users may be found in multiple distinct
 subtrees of your organization's directory. Any user entry which matches at
 least one of the search configurations will be synced as a user.
 
-## LDAP Test Login
+## LDAP test login
 
 | Field    | Description                                                                                                                                                                           |
 | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -82,7 +93,7 @@ Before you save the configuration changes, you should test that the integration
 is correctly configured. You can do this by providing the credentials of an
 LDAP user, and clicking the **Test** button.
 
-## LDAP Sync Configuration
+## LDAP sync configuration
 
 | Field                      | Description                                                                                                                                                                                                                                                              |
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -90,43 +101,36 @@ LDAP user, and clicking the **Test** button.
 | Enable sync of admin users | This option specifies that system admins should be synced directly with members of a group in your organization's LDAP directory. The admins will be synced to match the membership of the group. The configured recovery admin user will also remain a system admin.    |
 
 Once you've configured the LDAP integration, UCP synchronizes users based on
-the interval you've defined starting at the top of the hour. When the 
+the interval you've defined starting at the top of the hour. When the
 synchronization runs, UCP stores logs that can help you troubleshoot when
 something goes wrong.
 
 You can also manually synchronize users by clicking **Sync Now**.
 
-## Login Session Controls
-
-| Field                   | Description                                                                                                                                                                            |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lifetime Hours          | The maxiumum length of a login session. When this time expires, UCP invalidates the session, and the user must authenticate again to establish a new session. The default is 72 hours. |
-| Renewal Threshold Hours | The time to wait before UCP renews the session automatically. Typically, this occurs during a user session and is independent of session activity. The default is 24 hours.            |
-| Per User Limit          | The maximum number of simultaneous logins for a user.                                                                                                                                  |
-
-
 ## Revoke user access
 
-When a user is removed from LDAP, that user becomes inactive after the LDAP
-synchronization runs.
+When a user is removed from LDAP, the effect on the user's UCP account depends
+on the **Just-In-Time User Provisioning** setting: 
 
-Also, when you switch from the built-in authentication to using LDAP
-authentication, all manually created users whose usernames do not match any
-LDAP search results become inactive, with the exception of the recovery admin
-user which can still login with the recovery admin password.
+- **Just-In-Time User Provisioning** is `false`: Users deleted from LDAP become
+  inactive in UCP after the next LDAP synchronization runs.
+- **Just-In-Time User Provisioning** is `true`: Users deleted from LDAP can't
+  authenticate, but their UCP accounts remain active. This means that they can
+  use their client bundles to run commands. To prevent this, deactivate their
+  UCP user accounts.
 
 ## Data synced from your organization's LDAP directory
 
 UCP saves a minimum amount of user data required to operate. This includes
 the value of the username and full name attributes that you have specified in
 the configuration as well as the distinguished name of each synced user.
-UCP does not query, or store any additional data from the directory server.
+UCP does not store any additional data from the directory server.
 
 ## Sync teams
 
 UCP enables syncing teams with a search query or group in your organization's
-LDAP directory. 
-[Sync team members with your organization's LDAP directory](../../manage-users/create-and-manage-teams.md).
+LDAP directory.
+[Sync team members with your organization's LDAP directory](../../../access-control/create-and-manage-teams.md).
 
 ## Where to go next
 

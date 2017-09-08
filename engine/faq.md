@@ -3,54 +3,14 @@ description: Most frequently asked questions.
 keywords: faq, questions, documentation,  docker
 redirect_from:
 - /engine/misc/faq/
-title: Docker Engine frequently asked questions (FAQ)
+title: Docker frequently asked questions (FAQ)
 ---
 
-If you don't see your question here, feel free to submit new ones to
-<docs@docker.com>.  Or, you can fork [the
-repo](https://github.com/moby/moby) and contribute them yourself by editing
-the documentation sources.
+### Does Docker run on Linux, macOS, and Windows?
 
+You can run both Linux and Windows programs and excutables in Docker containers. The Docker platform runs natively on Linux (on x84-64, ARM and many other CPU architectures) and on Windows (x86-64).
 
-### How much does Engine cost?
-
-Docker Engine is 100% free. It is open source, so you can use it without paying.
-
-### What open source license are you using?
-
-We are using the Apache License Version 2.0, see it here:
-[https://github.com/moby/moby/blob/master/LICENSE](
-https://github.com/moby/moby/blob/master/LICENSE)
-
-### Does Docker run on Linux, macOS, or Windows?
-
-The Docker Engine client runs natively on Linux, macOS, and Windows. By default,
-these clients connect to a local Docker daemon running in a virtual environment
-managed by Docker, which provides the required features to run Linux-based
-containers within OS X or Windows, and Windows-based containers on Windows.
-
-If your version of macOS or Windows does not include the required virtualization
-technology, you can use Docker Machine to work around these limitations.
-
-You can run Windows-based **containers** on Windows Server 2016 and Windows 10.
-Windows-based containers require a Windows kernel to run, in the same way that
-Linux-based containers require a Linux kernel to run. You can even run
-Windows-based containers on a Windows virtual machine running on an macOS or
-Linux host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite,
-Windows Server 2016, or Windows 10.
-
-To learn more about Docker on Windows platforms, see the all the topics in
-[Install Docker for Windows](/docker-for-windows/install.md) and
-[Install Docker Enterprise Edition for Windows Server 2016](/engine/installation/windows/docker-ee.md).
-
-### How do containers compare to virtual machines?
-
-Containers and virtual machines (VMs) are complementary. VMs excel at providing
-extreme isolation (for example with hostile tenant applications where you need
-the ultimate break out prevention). Containers operate at the process level,
-which makes them very lightweight and perfect as a unit of software delivery.
-While VMs take minutes to boot, containers can often be started in less than a
-second.
+Docker Inc. builds products that let you build and run containers on Linux, Windows and macOS.
 
 ### What does Docker technology add to just plain LXC?
 
@@ -83,7 +43,7 @@ offers a high-level tool with several powerful functionalities:
 
  - *Automatic build.* Docker includes [*a tool for developers to automatically
  assemble a container from their source
- code*](reference/builder.md), with full control over application
+ code*](/engine/reference/builder/), with full control over application
  dependencies, build tools, packaging etc. They are free to use `make`, `maven`,
  `chef`, `puppet`, `salt,` Debian packages, RPMs, source tarballs, or any
  combination of the above, regardless of the configuration of the machines.
@@ -96,21 +56,20 @@ offers a high-level tool with several powerful functionalities:
  uploads and downloads, similar to `git pull`, so new versions of a container
  can be transferred by only sending diffs.
 
- - *Component re-use.* Any container can be used as a [*"parent image"*](reference/glossary.md#image) to create more specialized components. This can
- be done manually or as part of an automated build. For example you can prepare
- the ideal Python environment, and use it as a base for 10 different
- applications. Your ideal PostgreSQL setup can be re-used for all your future
- projects. And so on.
+ - *Component re-use.* Any container can be used as a [*"parent image"*](/glossary.md?term=image) to
+create more specialized components. This can be done manually or as part of an
+automated build. For example you can prepare the ideal Python environment, and
+use it as a base for 10 different applications. Your ideal PostgreSQL setup can
+be re-used for all your future projects. And so on.
 
- - *Sharing.* Docker has access to a public registry [on Docker Hub](https://hub.docker.com/)
- where thousands of people have uploaded useful images: anything from Redis,
- CouchDB, PostgreSQL to IRC bouncers to Rails app servers to Hadoop to base
- images for various Linux distros. The
- [*registry*](/registry/) also
- includes an official "standard library" of useful containers maintained by the
- Docker team. The registry itself is open-source, so anyone can deploy their own
- registry to store and transfer private containers, for internal server
- deployments for example.
+ - *Sharing.* Docker has access to a public registry [on Docker
+Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
+people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
+IRC bouncers to Rails app servers to Hadoop to base images for various Linux
+distros. The [*registry*](/registry/) also includes an official "standard
+library" of useful containers maintained by the Docker team. The registry itself
+is open-source, so anyone can deploy their own registry to store and transfer
+private containers, for internal server deployments for example.
 
  - *Tool ecosystem.* Docker defines an API for automating and customizing the
  creation and deployment of containers. There are a huge number of tools
@@ -124,7 +83,7 @@ offers a high-level tool with several powerful functionalities:
 ### What is different between a Docker container and a VM?
 
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine).
+http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" class="_"}.
 
 ### Do I lose my data when the container exits?
 
@@ -136,15 +95,12 @@ container persists even after the container halts.
 
 Some of the largest server farms in the world today are based on containers.
 Large web deployments like Google and Twitter, and platform providers such as
-Heroku and dotCloud all run on container technology, at a scale of hundreds of
-thousands or even millions of containers running in parallel.
+Heroku run on container technology, at a scale of hundreds of
+thousands or even millions of containers.
 
 ### How do I connect Docker containers?
 
 Currently the recommended way to connect containers is via the Docker network feature. You can see details of how to [work with Docker networks here](userguide/networking/work-with-networks.md).
-
-Also useful for more flexible service portability is the [Ambassador linking
-pattern](admin/ambassador_pattern_linking.md).
 
 ### How do I run more than one process in a Docker container?
 
@@ -183,12 +139,12 @@ You can learn about the project's security policy
 ### Why do I need to sign my commits to Docker with the DCO?
 
 Please read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/) on the introduction of the DCO.
+http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
 
 ### When building an image, should I prefer system libraries or bundled ones?
 
 *This is a summary of a discussion on the [docker-dev mailing list](
-https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0).*
+https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
 
 Virtually all programs depend on third-party libraries. Most frequently, they
 will use dynamic linking and some kind of package dependency, so that when
@@ -206,9 +162,9 @@ The key point about system libraries is not about saving disk or memory space.
 It is about security. All major distributions handle security seriously, by
 having dedicated security teams, following up closely with published
 vulnerabilities, and disclosing advisories themselves. (Look at the [Debian
-Security Information](https://www.debian.org/security/) for an example of those
-procedures.) Upstream developers, however, do not always implement similar
-practices.
+Security Information](https://www.debian.org/security/){: target="_blank"
+class="_"} for an example of those procedures.) Upstream developers, however, do
+not always implement similar practices.
 
 Before setting up a Docker image to compile a program from source, if you want
 to use bundled libraries, you should check if the upstream authors provide a
@@ -220,7 +176,8 @@ Likewise, before using packages built by others, you should check if the
 channels providing those packages implement similar security best practices.
 Downloading and installing an "all-in-one" .deb or .rpm sounds great at first,
 except if you have no way to figure out that it contains a copy of the OpenSSL
-library vulnerable to the [Heartbleed](http://heartbleed.com/) bug.
+library vulnerable to the [Heartbleed](http://heartbleed.com/){: target="_blank"
+class="_"} bug.
 
 ### Why is `DEBIAN_FRONTEND=noninteractive` discouraged in Dockerfiles?
 
@@ -250,7 +207,7 @@ Because of this, and because setting `DEBIAN_FRONTEND` to `noninteractive` is
 mainly a 'cosmetic' change, we *discourage* changing it.
 
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/i386/ch05s03.html.en)
+[default value](https://www.debian.org/releases/stable/i386/ch05s03.html.en){: target="_blank" class="_"}
 afterwards.
 
 ### Why do I get `Connection reset by peer` when making a request to a service running in a container?
@@ -263,9 +220,10 @@ how to do this, check the documentation for your OS.
 
 ### Why do I get `Cannot connect to the Docker daemon. Is the docker daemon running on this host?` when using docker-machine?
 
-This error points out that the docker client cannot connect to the virtual machine.
-This means that either the virtual machine that works underneath `docker-machine`
-is not running or that the client doesn't correctly point at it.
+This error points out that the docker client cannot connect to the virtual
+machine. This means that either the virtual machine that works underneath
+`docker-machine` is not running or that the client doesn't correctly point at
+it.
 
 To verify that the docker machine is running you can use the `docker-machine ls`
 command and start it with `docker-machine start` if needed.
@@ -286,12 +244,11 @@ You have to tell Docker to talk to that machine. You can do this with the
 
 You can find more answers on:
 
-
-- [Docker user mailinglist](https://groups.google.com/d/forum/docker-user)
-- [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev)
+- [Docker user mailinglist](https://groups.google.com/d/forum/docker-user){: target="_blank" class="_"}
+- [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev){: target="_blank" class="_"}
 - [IRC, docker on freenode](irc://chat.freenode.net#docker)
-- [GitHub](https://github.com/moby/moby)
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker)
-- [Join the conversation on Twitter](http://twitter.com/docker)
+- [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
+- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
+- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
 
 Looking for something else to read? Checkout the [User Guide](userguide/index.md).

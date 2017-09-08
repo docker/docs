@@ -44,7 +44,6 @@ Then source the `env.sh` script.
 
 ```bash
 $ unzip ucp-bundle-dave.lauper.zip
-$ cd ucp-bundle-dave.lauper
 $ eval $(<env.sh)
 ```
 

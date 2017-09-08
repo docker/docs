@@ -32,10 +32,12 @@ Choose the users that you want to add to the team, and when you're done, click
 
 ![](../images/create-and-manage-teams-3.png){: .with-border}
 
-## Sync team members with your organization's LDAP directory
+## Enable Sync Team Members
+
+To sync the team with your organization's LDAP directory, click **Yes**.
 
 If UCP is configured to sync users with your organization's LDAP directory
-server, you will have the option to enable syncing the new team's members when
+server, you have the option to enable syncing the new team's members when
 creating a new team or when modifying settings of an existing team.
 [Learn how to configure integration with an LDAP directory](../admin/configure/external-auth/index.md).
 Enabling this option expands the form with additional fields for configuring
@@ -45,7 +47,7 @@ the sync of team members.
 
 There are two methods for matching group members from an LDAP directory:
 
-**Match LDAP Group Members**
+**Match Group Members**
 
 This option specifies that team members should be synced directly with members
 of a group in your organization's LDAP directory. The team's membership will by
@@ -56,7 +58,7 @@ synced to match the membership of the group.
 | Group DN               | This specifies the distinguished name of the group from which to select users.                        |
 | Group Member Attribute | The value of this group attribute corresponds to the distinguished names of the members of the group. |
 
-**Match LDAP Search Results**
+**Match Search Results**
 
 This option specifies that team members should be synced using a search query
 against your organization's LDAP directory. The team's membership will be
@@ -64,13 +66,13 @@ synced to match the users in the search results.
 
 | Field                                    | Description                                                                                                                                            |
 | :--------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Base DN                                  | The distinguished name of the node in the directory tree where the search should start looking for users.                                              |
-| Search subtree instead of just one level | Whether to perform the LDAP search on a single level of the LDAP tree, or search through the full LDAP tree starting at the Base DN.                   |
-| Filter                                   | The LDAP search filter used to find users. If you leave this field empty, all existing users in the search scope will be added as members of the team. |
+| Search Base DN                           | The distinguished name of the node in the directory tree where the search should start looking for users.                                              |
+| Search Filter                            | The LDAP search filter used to find users. If you leave this field empty, all existing users in the search scope will be added as members of the team. |
+| Search subtree instead of just one level | Whether to perform the LDAP search on a single level of the LDAP tree, or search through the full LDAP tree starting at the Base DN.               |
 
-**Sync Now**
+**Immediately Sync Team Members**
 
-Select this option to immediately run an LDAP sync operation after saving the
+Select this option to run an LDAP sync operation immediately after saving the
 configuration for the team. It may take a moment before the members of the team
 are fully synced.
 

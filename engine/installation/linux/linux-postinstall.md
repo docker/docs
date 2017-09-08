@@ -2,6 +2,8 @@
 description: Optional post-installation steps for Linux
 keywords: Docker, Docker documentation, requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 title: Post-installation steps for Linux
+redirect_from:
+- /engine/installation/linux/docker-ee/linux-postinstall/
 ---
 
 

@@ -1093,7 +1093,7 @@ any service can reach any other service at that service’s name. (See also, the
 [Links topic in Networking in Compose](/compose/networking.md#links).)
 
 Links also express dependency between services in the same way as
-[depends_on](#dependson), so they determine the order of service startup.
+[depends_on](#depends_on), so they determine the order of service startup.
 
 > **Notes**
 >
@@ -1864,7 +1864,6 @@ conflicting with those used by other software.
       - "com.example.description=Database volume"
       - "com.example.department=IT/Ops"
       - "com.example.label-with-empty-value"
-
 
 ## Network configuration reference
 

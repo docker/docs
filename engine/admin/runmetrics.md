@@ -1,6 +1,6 @@
 ---
 description: Measure the behavior of running containers
-keywords: docker, metrics, CPU, memory, disk, IO, run,  runtime, stats
+keywords: docker, metrics, CPU, memory, disk, IO, run, runtime, stats
 redirect_from:
 - /engine/articles/run_metrics
 - /engine/articles/runmetrics
@@ -194,10 +194,10 @@ relevant ones:
 
 Metric                      | Description
 ----------------------------|-----------------------------------------------------------
-**blkio.sectors**           | contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
-**blkio.io_service_bytes**  | indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.
-**blkio.io_serviced**       | the number of I/O operations performed, regardless of their size. It also has 4 counters per device.
-**blkio.io_queued**         | indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this will be zero. Note that the opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which is therefore able to handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
+**blkio.sectors**           | Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
+**blkio.io_service_bytes**  | Indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.
+**blkio.io_serviced**       | The number of I/O operations performed, regardless of their size. It also has 4 counters per device.
+**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this will be zero. Note that the opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which is therefore able to handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
 
 ## Network metrics
 
@@ -373,7 +373,7 @@ network namespace.)
 
 When the container exits, `lxc-start` will try to
 delete the control groups. It will fail, since the control group is
-still in use; but that's fine. You process should now detect that it is
+still in use; but that's fine. Your process should now detect that it is
 the only one remaining in the group. Now is the right time to collect
 all the metrics you need!
 

@@ -31,7 +31,7 @@ Raspbian versions:
 - Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
-Docker CE is supported on both `x86_64` and `armhf` architectures for Jessie and
+Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` architectures for Jessie and
 Stretch.
 
 ### Uninstall old versions
@@ -147,7 +147,7 @@ from the repository.
     To also add the **edge** repository, add `edge` after `stable` on the last
     line of the command.
 
-    **amd64**:
+    **x86_64**:
 
     ```bash
     $ sudo add-apt-repository \
@@ -232,7 +232,7 @@ from the repository.
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
-    **amd64**:
+    **x86_64**:
 
     ```bash
     $ sudo docker run hello-world
@@ -313,13 +313,10 @@ installing Docker.
 
 #### (Optional) Install Docker Compose for Raspbian
 
-This functionality is provided by [Hypriot](https://blog.hypriot.com/). Add the Hypriot repo:
-
-```bash
-curl -s https://packagecloud.io/install/repositories/Hypriot/Schatzkiste/script.deb.sh | sudo bash
-```
-
-Install `docker-compose`:
+[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static binary of
+`docker-compose` for Raspbian. To use it, first follow Hypriot's
+[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
+then run the following command:
 
 ```bash
 sudo apt-get install docker-compose

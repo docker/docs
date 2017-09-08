@@ -26,6 +26,13 @@ nodes where tasks are scheduled for services attached to the overlay network.
 These tunnels also use the AES algorithm in GCM mode and manager nodes
 automatically rotate the keys every 12 hours.
 
+> **Do not attach Windows nodes to encrypted overlay networks.**
+>
+> Overlay network encryption is not supported on Windows. If a Windows node
+> attempts to connect to an encrypted overlay network, no error is detected but
+> the node will not be able to communicate.
+{: .warning }
+
 ## Swarm mode overlay networks and unmanaged containers
 
 Because the overlay networks for swarm mode use encryption keys from the manager

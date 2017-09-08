@@ -26,7 +26,7 @@ docker volume create --name orca-elasticsearch-data
 docker container run -d \
     --name elasticsearch \
     -v orca-elasticsearch-data:/usr/share/elasticsearch/data \
-    elasticsearch elasticsearch -Des.network.host=0.0.0.0
+    elasticsearch:2.4.3 elasticsearch -Des.network.host=0.0.0.0
 
 docker container run -d \
     -p 514:514 \
