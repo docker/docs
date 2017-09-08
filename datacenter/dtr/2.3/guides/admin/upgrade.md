@@ -37,13 +37,11 @@ to ensure the impact on your business is close to none.
 
 ## Minor upgrade
 
-Before starting your upgrade planning, make sure that the version of UCP you are
-using is supported by the version of DTR you are trying to upgrade to.
-
-> Backup DTR before upgrading
->
-> Before performing any upgrade it’s important to backup. See
-> [DTR backups and recovery](backups-and-disaster-recovery.md).
+Before starting your upgrade, make sure that:
+* The version of UCP you are using is supported by the version of DTR you
+are trying to upgrade to.
+* You have a recent [DTR backup](backups-and-disaster-recovery.md).
+* You [disable Docker content trust in UCP](/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust.md).
 
 ### Step 1. Upgrade DTR to 2.2 if necessary
 
