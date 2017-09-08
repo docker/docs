@@ -69,7 +69,13 @@ as:
     active machine
 
 To install the scripts, copy or link them into your `/etc/bash_completion.d` or
-`/usr/local/etc/bash_completion.d` directory. To enable the `docker-machine` shell
+`/usr/local/etc/bash_completion.d` directory.
+
+```
+scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do wget https://raw.githubusercontent.com/docker/machine/v0.12.2/contrib/completion/bash/${i}; done
+```
+
+To enable the `docker-machine` shell
 prompt, add `$(__docker_machine_ps1)` to your `PS1` setting in `~/.bashrc`.
 
 ```
