@@ -111,8 +111,8 @@ For production systems, see
       Deferred Removal Enabled: false
       Deferred Deletion Enabled: false
       Deferred Deleted Device Count: 0
-      Data loop file: /var/lib/docker/devicemapper/devicemapper/data
-      Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
+      Data loop file: /var/lib/docker/devicemapper/data
+      Metadata loop file: /var/lib/docker/devicemapper/metadata
       Library Version: 1.02.135-RHEL7 (2016-11-16)
     <output truncated>
     ```
@@ -120,7 +120,7 @@ For production systems, see
   This host is running in `loop-lvm` node, which is **not** supported on
   production systems. This is indicated by the fact that the `Data loop file`
   and a `Metadata loop file` are on files under
-  `/var/lib/docker/devicemapper/devicemapper`. These are loopback-mounted
+  `/var/lib/docker/devicemapper`. These are loopback-mounted
   sparse files. For production systems, see
   [Configure direct-lvm mode for production](#configure-direct-lvm-mode-for-production).
 
@@ -477,8 +477,8 @@ paths for `Data loop file` and `Metadata loop file`:
 ```bash
 $ docker info |grep 'loop file'
 
- Data loop file: /var/lib/docker/devicemapper/devicemapper/data
- Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
+ Data loop file: /var/lib/docker/devicemapper/data
+ Metadata loop file: /var/lib/docker/devicemapper/metadata
 ```
 
 Follow these steps to increase the size of the thin pool. In this example, the
@@ -487,7 +487,7 @@ thin pool is 100 GB, and is increased to 200 GB.
 1.  List the sizes of the devices.
 
     ```bash
-    $ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
+    $ sudo ls -lh /var/lib/docker/devicemapper/
 
     total 1175492
     -rw------- 1 root root 100G Mar 30 05:22 data
@@ -499,13 +499,13 @@ thin pool is 100 GB, and is increased to 200 GB.
     decreasing the size is a destructive operation.
 
     ```bash
-    $ sudo truncate -s 200G /var/lib/docker/devicemapper/devicemapper/data
+    $ sudo truncate -s 200G /var/lib/docker/devicemapper/data
     ```
 
 3.  Verify the file size changed.
 
     ```bash
-    $ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
+    $ sudo ls -lh /var/lib/docker/devicemapper/
 
     total 1.2G
     -rw------- 1 root root 200G Apr 14 08:47 data
