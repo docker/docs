@@ -20,8 +20,8 @@ all nodes must have:
 
 Also, make sure the nodes are running one of these operating systems:
 
-* CentOS 7.1 or 7.2
-* Red Hat Enterprise Linux 7.0, 7.1, 7.2, or 7.3
+* CentOS 7.1, 7.2, or 7.3
+* Red Hat Enterprise Linux 7.0, 7.1, 7.2, 7.3, or 7.4
 * Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
