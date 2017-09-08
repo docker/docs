@@ -418,6 +418,16 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc1)
+  - [Docker compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
+  - Linux Kernel 4.9.46
+
+* Bug fixes and minor changes
+  - VPNKit: change protocol to support error messages reported back from the server 
+
 ### Docker Community Edition 17.07.0-ce-mac26, 2017-09-01 (edge)
 
 * Upgrades
