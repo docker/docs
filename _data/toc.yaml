@@ -1968,6 +1968,8 @@ manuals:
           title: backup
         - path: /datacenter/dtr/2.3/reference/cli/destroy/
           title: destroy
+        - path: /datacenter/dtr/2.3/reference/cli/dumpcerts/
+          title: dumpcerts
         - path: /datacenter/dtr/2.3/reference/cli/images/
           title: images
         - path: /datacenter/dtr/2.3/reference/cli/install/
@@ -2102,6 +2104,8 @@ manuals:
               title: backup
             - path: /datacenter/dtr/2.2/reference/cli/destroy/
               title: destroy
+            - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
+              title: dumpcerts
             - path: /datacenter/dtr/2.2/reference/cli/images/
               title: images
             - path: /datacenter/dtr/2.2/reference/cli/install/
