@@ -139,4 +139,4 @@ steps as you used to configure your local computer.
 
 ## Where to go next
 
-* [Use externally-signed certificates](index.md)
+* [use your own externally-signed TLS certificates](index.md#customize-the-ucp-tls-certificates)

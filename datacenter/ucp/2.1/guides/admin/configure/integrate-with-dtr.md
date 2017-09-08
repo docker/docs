@@ -139,4 +139,4 @@ steps as you used to configure your local computer.
 
 ## Where to go next
 
-* [Use externally-signed certificates](index.md)
+* [Use your own TLS certificates](use-your-own-tls-certificates/.md)
