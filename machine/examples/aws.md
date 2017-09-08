@@ -64,7 +64,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 
     > **Note**: For all aws create flags, run: `docker-machine create --driver amazonec2 --help`
 
-    **Using a credentials file**
+    **Use aws credentials file**
 
     If you set your keys in a credentials file, the command looks like this to
     create an instance called `aws-sandbox`:
@@ -73,7 +73,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     docker-machine create --driver amazonec2 aws-sandbox
     ```
 
-    **Specifying keys at the command line**
+    **Specify keys at the command line**
 
     If you don't have a credentials file, you can use the flags
     `--amazonec2-access-key` and `--amazonec2-secret-key` on the command line:
@@ -82,7 +82,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     docker-machine create --driver amazonec2 --amazonec2-access-key AKI******* --amazonec2-secret-key 8T93C*******  aws-sandbox
     ```
 
-    **Exposing a port**
+    **Expose a port**
 
     To expose an inbound port to the new machine, use the flag, `--amazonec2-open-port`:
 
@@ -90,7 +90,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     docker-machine create --driver amazonec2 --amazonec2-open-port 8000 aws-sandbox
     ```
 
-    **Specifying a region**
+    **Specify a region**
 
     By default, the driver creates new instances in region us-east-1 (North
     Virginia). You can specify a different region by using the
