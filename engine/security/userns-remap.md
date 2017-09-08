@@ -251,9 +251,6 @@ The following standard Docker features are incompatible with running a Docker
 daemon with user namespaces enabled:
 
 - sharing PID or NET namespaces with the host (`--pid=host` or `--network=host`).
-- A `--read-only` container filesystem. This is a Linux kernel restriction
-  against remounting an already-mounted filesystem with modified flags when
-  inside a user namespace.
 - external (volume or storage) drivers which are unaware or incapable of using
   daemon user mappings.
 - Using the `--privileged` mode flag on `docker run` without also specifying
