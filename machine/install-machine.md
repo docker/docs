@@ -68,8 +68,14 @@ as:
 -   a function wrapper that adds a `docker-machine use` subcommand to switch the
     active machine
 
-To install the scripts, copy or link them into your `/etc/bash_completion.d` or
-`/usr/local/etc/bash_completion.d` directory. To enable the `docker-machine` shell
+Confirm the version and save scripts to `/etc/bash_completion.d` or
+`/usr/local/etc/bash_completion.d`:
+
+```bash
+scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do sudo wget https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/${i} -P /etc/bash_completion.d; done
+```
+
+To enable the `docker-machine` shell
 prompt, add `$(__docker_machine_ps1)` to your `PS1` setting in `~/.bashrc`.
 
 ```
