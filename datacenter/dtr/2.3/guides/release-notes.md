@@ -11,6 +11,19 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.3.3
+
+(Date TBD)
+
+### Bugs fixed
+
+* High severity:
+  * Fixed issue with rethinkdbs not starting correctly after a restart in an HA cluster depending on the order of events
+  * Fix issue with UCP 2.1.x pull integration
+* Low severity:
+  * Improved error handling in scanning
+  * Fixed webhooks not firing as a result of automatic promotions
+
 ## DTR 2.3.2
 
 (25 August 2017)
