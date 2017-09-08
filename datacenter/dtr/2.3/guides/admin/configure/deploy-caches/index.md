@@ -58,13 +58,9 @@ middleware:
         options:
           blobttl: 24h
           upstreams:
-            - originhost: <Externally-reachable address for the origin registry>
-              upstreamhosts:
-                - <Externally-reachable address for upstream content cache A>
-                - <Externally-reachable address for upstream content cache B>
+            - <Externally-reachable address for upstream registry or content cache in format scheme://host:port>
           cas:
-            - <Absolute path to upstream content cache A certificate>
-            - <Absolute path to upstream content cache B certificate>
+            - <Absolute path to next-hop upstream registry or content cache CA certificate in the container's filesystem>
 ```
 
 Below you can find the description for each parameter, specific to DTR caches.
@@ -104,29 +100,18 @@ this field is configured, "storage.delete.enabled" must be configured to true. P
       no
     </td>
     <td>
-      A list of absolute paths to PEM-encoded CA certificates of upstream registries.
+      An optional list of absolute paths to PEM-encoded CA certificates of upstream registries or content caches.
     </td>
   </tr>
 <tr>
   <td>
-    <code>originhost</code>
+    <code>upstreams</code>
   </td>
   <td>
     yes
   </td>
   <td>
-      An externally-reachable address for the origin registry, as a fully qualified URL.
-  </td>
-</tr>
-<tr>
-  <td>
-    <code>upstreamhosts</code>
-  </td>
-  <td>
-    no
-  </td>
-  <td>
-    A list of externally-reachable addresses for upstream registries for cache chaining. If more than one host is specified, pulls from upstream content caches will be done in round-robin order.
+      A list of externally-reachable addresses for upstream registries of content caches. If more than one host is specified, it will pull from registries in round-robin order.
   </td>
 </tr>
 </table>
@@ -159,7 +144,7 @@ middleware:
         options:
           blobttl: 24h
           upstreams:
-            - originhost: https://<dtr-url>
+            - https://<dtr-url>
           cas:
             - /certs/dtr-ca.pem
 ```
