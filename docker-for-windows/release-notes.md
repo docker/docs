@@ -366,6 +366,23 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-rc1-win28 2017-09-07 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc1)
+  - [Docker compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
+  - Linux Kernel 4.9.46
+
+* New
+  - Add `Skip This version` button in update window
+
+* Bug fixes and minor changes
+  - VPNKit: change protocol to support error messages reported back from the server 
+  - Reset to default stops all engines and removes settings including all daemon.json files
+  - Better backend service checks (related to https://github.com/docker/for-win/issues/953)
+  - Fix auto updates checkbox, no need to restart the application
+  - Fix check for updates menu when auto updates was disable
+
 ### Docker Community Edition 17.07.0-win26 Release Notes (2017-09-01 17.07.0-win26) (edge)
 
 * Upgrades
