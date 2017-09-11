@@ -60,7 +60,11 @@ You can install Docker CE in different ways, depending on your needs:
 - Some users download the RPM package and
   [install it manually](#install-from-a-package) and manage
   upgrades completely manually. This is useful in situations such as installing
-  Docker on air-gapped systems with no access to the internet.
+  Docker on air-gapped systems with no access to the internet. In these situations, 
+  you may also need to determine the required dependencies without being able to query 
+  a repository over the network, and install them manually too. One way to do this
+  is to first attempt to install the Docker package first, and have yum tell you
+  which dependencies are missing before downloading and installing those.
 
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
@@ -222,6 +226,8 @@ a new file each time you want to upgrade Docker.
     ```bash
     $ sudo yum install /path/to/package.rpm
     ```
+    Note: if you are manually installing a local package, you may need to install any
+    missing dependency rpms too, and specify them on the yum install line shown above.
 
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
