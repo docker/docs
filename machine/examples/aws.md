@@ -112,7 +112,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     > `docker-machine create` (with the optional `--amazonec2-region` flag), select
     > the default, US East (N. Virginia).
 
-4.  At the command terminal, run `docker-machine ls`.
+4.  Ensure that your new machine is the active host.
 
     ```bash
     $ docker-machine ls
@@ -122,20 +122,21 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     aws-sandbox   -           digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1
     ```
 
-    The new `aws-sandbox` instance is running, and it is the active host as
+    The new `aws-sandbox` instance is running and is the active host as
     indicated by the asterisk (\*). When you create a new machine, your command
-    shell automatically connects to it. If for some reason your new machine is
-    not the active host, you'll need to run `docker-machine env aws-sandbox`,
-    followed by `eval $(docker-machine env aws-sandbox)` to connect to it.
+    shell automatically connects to it. You can also check active status by
+    running `docker-machine active`.
 
-### Step 3. Run Docker commands on the instance
+    > **Note**: If your new machine is not the active host, connect to it by
+    running `docker-machine env aws-sandbox` and the returned eval command:
+    `eval $(docker-machine env aws-sandbox)`.
 
-1.  Inspect the remote host with `docker-machine` commands. For example,
-    `docker-machine ip <machine>` returns the host IP address and `docker-machine
-    inspect <machine>` lists all the details.
+5. Inspect the remote host. For example, `docker-machine ip <machine>` returns
+the host IP address and `docker-machine inspect <machine>` lists all the
+details.
 
     ```bash
-    $ docker-machine ip
+    $ docker-machine ip aws-sandbox
     192.168.99.100
 
     $ docker-machine inspect aws-sandbox
@@ -151,21 +152,41 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
     }
     ```
 
-2.  Run docker on the new machine with `docker-machine ssh`. You can send
-    commands from your localhost or open a terminal session on aws-sandbox
-    itself.
+### Step 3. Run Docker commands on the new instance
+You can run docker commands from a local terminal to the active docker machine.
 
-    **Send commands from local host to aws-sandbox**
+1.  Run docker on the active docker machine by downloading and running the
+hello-world image:
 
     ```bash
-    docker-machine ssh aws-sandbox 'docker run hello-world'
+    docker run hello-world
     ```
 
-    **Open terminal session on aws-sandbox**
+2. Ensure that you ran hello-world on aws-sandbox (and not localhost or some
+other machine):
+
+    Log on to aws-sandbox with ssh and list all containers. You should see
+    hello-world (with a recent exited status):
 
     ```bash
     docker-machine ssh aws-sandbox
-    sudo docker run hello-world
+    sudo docker container ls -a
+    exit
+    ```
+
+    Log off aws-sandbox and unset this machine as active. Then list images
+    again. You should not see hello-world (at least not with the same exited
+    status):
+
+    ```bash
+    eval $(docker-machine env -u)
+    docker container ls -a
+    ```
+    
+3. Reset aws-sandbox as the active docker machine:
+
+    ```bash
+    eval $(docker-machine env aws-sandbox)
     ```
 
     For a more interesting test, run a Dockerized webserver on your new machine.
