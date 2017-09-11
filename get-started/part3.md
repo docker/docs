@@ -164,7 +164,7 @@ docker service ps <service>
 
 >**Note**: Docker's support for swarms is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker swarm tasks are defined to spawn them.
 
-Let's inspect one task and limit the ouput to container ID:
+Let's inspect one task and limit the output to container ID:
 
 ```shell
 docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task>
