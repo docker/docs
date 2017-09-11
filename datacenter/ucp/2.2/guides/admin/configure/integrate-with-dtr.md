@@ -140,4 +140,4 @@ steps as you used to configure your local computer.
 
 ## Where to go next
 
-* [Use your own TLS certificates](use-your-own-tls-certificates/.md)
+* [Use your own TLS certificates](use-your-own-tls-certificates.md)
