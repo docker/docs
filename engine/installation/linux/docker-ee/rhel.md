@@ -13,7 +13,7 @@ title: Get Docker EE for Red Hat Enterprise Linux
 {% assign linux-dist-url-slug = "rhel" %}
 {% assign linux-dist-long = "Red Hat Enterprise Linux" %}
 {% assign package-format = "RPM" %}
-{% assign gpg-fingerprint = "77fe da13 1a83 1d29 a418 d3e8 99e5 ff2e 7668 2bc9" %}
+{% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
 {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 

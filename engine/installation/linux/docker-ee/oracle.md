@@ -12,7 +12,7 @@ title: Get Docker EE for Oracle Linux
 {% assign linux-dist-url-slug = "oraclelinux" %}
 {% assign linux-dist-long = "Oracle Linux" %}
 {% assign package-format = "RPM" %}
-{% assign gpg-fingerprint = "77fe da13 1a83 1d29 a418 d3e8 99e5 ff2e 7668 2bc9" %}
+{% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
 To get started with Docker EE on {{ linux-dist-long }}, make sure you
 [meet the prerequisites](#prerequisites), then

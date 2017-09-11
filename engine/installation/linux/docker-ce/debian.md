@@ -124,7 +124,9 @@ from the repository.
     $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
     ```
 
-    Verify that the key ID is `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`.
+    Verify that you now have the key with the fingerprint
+    `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
+    last 8 characters of the fingerprint.
 
     ```bash
     $ sudo apt-key fingerprint 0EBFCD88

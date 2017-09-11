@@ -12,7 +12,7 @@ title: Get Docker CE for Ubuntu
 
 To get started with Docker CE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ce).
+[install Docker](#install-docker).
 
 ## Prerequisites
 
@@ -34,9 +34,10 @@ versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64` (or `amd64`), `armhf`, and `s390x` (IBM Z) architectures.
+Docker CE is supported on Ubuntu on `x86_64`, `armhf`, and `s390x` (IBM z
+Systems) architectures.
 
-> **`s390x` limitations**: IBM Z is only supported on Ubuntu Xenial and Zesty.
+> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial and Zesty.
 
 ### Uninstall old versions
 
@@ -118,7 +119,9 @@ the repository.
     $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
     ```
 
-    Verify that the key fingerprint is `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`.
+    Verify that you now have the key with the fingerprint
+    `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
+    last 8 characters of the fingerprint.
 
     ```bash
     $ sudo apt-key fingerprint 0EBFCD88
@@ -131,8 +134,8 @@ the repository.
 
 4.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install builds from the
-    **edge** or **test** repositories as well. To add the **edge** or
-    **test** repository, add the word `edge` or `test` (or both) after the
+    **edge** or **testing** repositories as well. To add the **edge** or
+    **testing** repository, add the word `edge` or `testing` (or both) after the
     word `stable` in the commands below.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
@@ -141,7 +144,7 @@ the repository.
     > to your parent Ubuntu distribution. For example, if you are using
     >  `Linux Mint Rafaela`, you could use `trusty`.
 
-    **x86_64**:
+    **amd64**:
 
     ```bash
     $ sudo add-apt-repository \
@@ -169,7 +172,7 @@ the repository.
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **test** repositories.
+    > the **edge** and **testing** repositories.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
@@ -195,7 +198,7 @@ the repository.
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. This output is truncated. List the
@@ -227,17 +230,11 @@ the repository.
     $ sudo docker run hello-world
     ```
 
-    or if you run on armhf:
-
-    ```bash
-    $ sudo docker run armhf/hello-world
-    ```
-
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](../linux-postinstall.md) to allow
+Docker CE is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Linux postinstall](../linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 

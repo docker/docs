@@ -118,15 +118,17 @@ from the repository.
     $ curl -fsSL <DOCKER-EE-URL>/ubuntu/gpg | sudo apt-key add -
     ```
 
-    Verify that the key fingerprint is `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`.
+    Verify that you now have the key with the fingerprint
+    `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
+    last 8 characters of the fingerprint.
 
     ```bash
-    $ apt-key fingerprint 6D085F96
+    $ sudo apt-key fingerprint 6D085F96
 
-    pub   4096R/6D085F96 2017-02-22
-        Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
-    uid       [ultimate] Docker Release (EE deb) <docker@docker.com>
-    sub   4096R/91A29FA3 2017-02-22
+    pub   4096R/0EBFCD88 2017-02-22
+          Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
+    uid                  Docker Release (CE deb) <docker@docker.com>
+    sub   4096R/6D085F96 2017-02-22
     ```
 
 4.  Use the following command to set up the **stable** repository, replacing
