@@ -17,6 +17,8 @@ provided by Docker images.
 
 ## Step 1: Setup
 
+Define the application dependencies.
+
 1.  Create a directory for the project:
 
         $ mkdir composetest
@@ -45,9 +47,6 @@ provided by Docker images.
 
         flask
         redis
-
-   These define the application's dependencies.
-
 
 ## Step 2: Create a Dockerfile
 
@@ -167,7 +166,7 @@ Hub registry.
     ```
     $ docker image ls
     REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
-    composetest_web   latest              e2c21aa48cc1        4 minutes ago       93.8MB
+    composetest_web         latest              e2c21aa48cc1        4 minutes ago       93.8MB
     python                  3.4-alpine          84e6077c7ab6        7 days ago          82.5MB
     redis                   alpine              9d8fa9aa0e5b        3 weeks ago         27.5MB
     ```
