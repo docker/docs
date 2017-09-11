@@ -80,7 +80,9 @@ from the repository.
     `devicemapper` storage driver.
 
     ```bash
-    $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
     ```
 
 2.  Use the following command to set up the **stable** repository. You always
@@ -120,19 +122,7 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Update the `yum` package index.
-
-    ```bash
-    $ sudo yum makecache fast
-    ```
-
-    If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint is
-    correct, and if so, accept the key. The fingerprint should match
-    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
-
-2.  Install the latest version of Docker CE, or go to the next step to install a
+1.  Install the latest version of Docker CE, or go to the next step to install a
     specific version.
 
     ```bash
@@ -145,10 +135,16 @@ from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning}
 
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint is
+    correct, and if so, accept the key. The fingerprint should match
+    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
+
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  On production systems, you should install a specific version of Docker CE
+2.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
@@ -159,28 +155,33 @@ from the repository.
     ```bash
     $ yum list docker-ce.x86_64  --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ minor-version }}.0.el7                               docker-ce-stable  
+    docker-ce.x86_64            {{ minor-version }}.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and
     will be specific to your version of CentOS (indicated by the `.el7` suffix
     on the version, in this example). Choose a specific version to install. The
-    second column is the version string. The third column is the repository
-    name, which indicates which repository the package is from and by extension
-    its stability level. To install a specific version, append the version
-    string to the package name and separate them by a hyphen (`-`):
+    second column is the version string. You can use the entire version string,
+    but **you need to include at least to the first hyphen**. The third column
+    is the repository name, which indicates which repository the package is from
+    and by extension its stability level. To install a specific version, append
+    the version string to the package name and separate them by a hyphen (`-`).
+
+    > **Note**: The version string is the package name plus the version up to
+    > the first hyphen. In the example above, the fully qualified package name
+    > is `docker-ce-17.06.1.ce`.
 
     ```bash
-    $ sudo yum install docker-ce-<VERSION>
+    $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
-4.  Start Docker.
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
