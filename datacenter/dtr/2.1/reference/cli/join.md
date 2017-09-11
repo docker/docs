@@ -6,7 +6,12 @@ title: docker/dtr join
 
 Add a new replica to an existing DTR cluster
 
+## Usage
 
+```bash
+docker run -it --rm docker/dtr \
+    join [command options]
+```
 
 ## Description
 
