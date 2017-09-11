@@ -37,9 +37,9 @@ to use `docker logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 
 The official `nginx` image creates a symbolic link from
-`/var/log/nginx/access.log` to `/dev/stdout`, and creates another symbolic link
-from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the previous
-devices in the process. See the
+`/dev/stdout` to `/var/log/nginx/access.log`, and creates another symbolic link
+from `/dev/stderr` to `/var/log/nginx/error.log`, overwriting the log files and
+causing logs to be sent to the relevant special device instead. See the
 [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
 
 The official `httpd` driver changes the `httpd` application's configuration to
