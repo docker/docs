@@ -135,7 +135,7 @@ entity within the swarm. Do not confuse them with the docker daemon labels for
 [dockerd](../userguide/labels-custom-metadata.md#daemon-labels).
 
 Therefore, node labels can be used to limit critical tasks to nodes that meet
-certain requirements.  For example, schedule only on machines where special
+certain requirements. For example, schedule only on machines where special
 workloads should be run, such as machines that meet [PCI-SS
 compliance](https://www.pcisecuritystandards.org/).
 
@@ -157,7 +157,7 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 
-> **Note: Maintaining a quorum** Regardless of your reason to promote or demote
+> **Note**: Regardless of your reason to promote or demote
 > a node, you must always maintain a quorum of manager nodes in the
 > swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
 
@@ -236,7 +236,7 @@ For instance:
 $ docker node rm node-2
 ```
 
-## Learn More
+## Learn more
 
 * [Swarm administration guide](admin_guide.md)
 * [Docker Engine command line reference](/engine/reference/commandline/docker.md)
