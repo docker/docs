@@ -8,7 +8,7 @@ title: Log tags for logging driver
 
 The `tag` log option specifies how to format a tag that identifies the
 container's log messages. By default, the system uses the first 12 characters of
-the container id. To override this behavior, specify a `tag` option:
+the container ID. To override this behavior, specify a `tag` option:
 
 ```bash
 $ docker run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224 --log-opt tag="mailer"
@@ -19,11 +19,11 @@ Docker supports some special template markup you can use when specifying a tag's
 {% raw %}
 | Markup             | Description                                          |
 |--------------------|------------------------------------------------------|
-| `{{.ID}}`          | The first 12 characters of the container id.         |
-| `{{.FullID}}`      | The full container id.                               |
+| `{{.ID}}`          | The first 12 characters of the container ID.         |
+| `{{.FullID}}`      | The full container ID.                               |
 | `{{.Name}}`        | The container name.                                  |
-| `{{.ImageID}}`     | The first 12 characters of the container's image id. |
-| `{{.ImageFullID}}` | The container's full image identifier.               |
+| `{{.ImageID}}`     | The first 12 characters of the container's image ID. |
+| `{{.ImageFullID}}` | The container's full image ID.               |
 | `{{.ImageName}}`   | The name of the image used by the container.         |
 | `{{.DaemonName}}`  | The name of the docker program (`docker`).           |
 
