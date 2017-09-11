@@ -27,7 +27,7 @@ and distributions for different Docker editions, see
 To install Docker CE, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Stretch (stable)
+- Stretch (stable) / Raspbian Stretch
 - Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
@@ -69,7 +69,7 @@ You can install Docker CE in different ways, depending on your needs:
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
   from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
+  recommended approach, except for Raspbian.
 
 - Some users download the DEB package and
   [install it manually](#install-from-a-package) and manage
@@ -78,6 +78,7 @@ You can install Docker CE in different ways, depending on your needs:
 
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
+  This is currently the only approach for Raspbian.
 
 ### Install using the repository
 
@@ -85,9 +86,14 @@ Before you install Docker CE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
+> **Raspbian users cannot use this method!**
+>
+> For Raspbian, installing using the repository is not yet supported. You must
+> instead use the [convenience script](#install-using-the-convenience-script).
+
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/debian" %}
+{% assign download-url-base = 'https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")' %}
 
 1.  Update the `apt` package index:
 
@@ -184,8 +190,8 @@ from the repository.
 
 #### Install Docker CE
 
-> **Note**: On Debian for ARM you can continue following this step. For Raspbian,
-> scroll down to follow its specific steps.
+> **Note**: This procedure works for Debian on `x86_64` / `amd64`, Debian ARM,
+> or Raspbian.
 
 1.  Update the `apt` package index.
 
@@ -215,7 +221,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~debian | {{ download-url-base}} jessie/stable amd64 Packages
+    docker-ce | {{ minor-version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose
@@ -252,77 +258,14 @@ from the repository.
 Docker CE is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
-steps.
+steps. For Raspbian, you can optionally
+[install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
 
 #### Upgrade Docker CE
 
 To upgrade Docker CE, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
-
-
-### Install on Raspbian (Raspberry Pi)
-
-> **Note**: This isn't necessary if you used the recommended
->`$ curl -sSL https://get.docker.com | sh` command.
-{: .important}
-
-Once you have added the Docker repo to `/etc/apt/sources.list.d/`, you should
-see `docker.list` if you:
-
-```bash
-$ ls /etc/apt/sources.list.d/
-```
-
-And the contents of the `docker.list` should read:
-
-`deb [arch=armhf] https://apt.dockerproject.org/repo raspbian-jessie main`
-
-If you don't see that in `docker.list`, then either comment the line out, or
-`rm` the `docker.list` file.
-
-Once you have verified that you have the correct repository, you may continue
-installing Docker.
-
-1.  Update the `apt` package index.
-
-    ```bash
-    $ sudo apt-get update
-    ```
-
-2.  Install the latest version of Docker CE, or go to the next step to install a
-    specific version. Any existing installation of Docker CE is replaced.
-
-    Use this command to install the latest version of Docker:
-
-    ```bash
-    $ sudo apt-get install docker-engine
-    ```
-    > **Note**: By default, Docker on Raspbian is Docker Community Edition.
-
-    > **Note**: If `curl -sSL https://get.docker.com | sh` isn't used,
-    > then docker won't have auto-completion! You'll have to add it manually.
-
-3.  Verify that Docker CE is installed correctly by running the `hello-world`
-    image.
-
-    ```bash
-    $ sudo docker run hypriot/armhf-hello-world
-    ```
-
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
-
-#### (Optional) Install Docker Compose for Raspbian
-
-[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static binary of
-`docker-compose` for Raspbian. To use it, first follow Hypriot's
-[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
-then run the following command:
-
-```bash
-sudo apt-get install docker-compose
-```
 
 ### Install from a package
 
@@ -361,7 +304,8 @@ a new file each time you want to upgrade Docker.
 Docker CE is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+configuration steps. For Raspbian, you can optionally
+[install Docker Compose for Raspbian](#install-docker-compose-for-raspbian).
 
 #### Upgrade Docker CE
 
@@ -369,6 +313,24 @@ To upgrade Docker, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 
 {% include install-script.md %}
+
+## Install Docker Compose for Raspbian
+
+You can install Docker Compose using `pip`:
+
+```bash
+$ sudo pip install docker-compose
+```
+
+[Hypriot](https://hypriot.com/){: target="_blank" class="_" } provides a static
+binary of `docker-compose` for Raspbian. It may not always be up to date, but if
+space is at a premium, you may find it useful. To use it, first follow Hypriot's
+[instructions for setting up the repository](https://blog.hypriot.com/post/your-number-one-source-for-docker-on-arm/){: target="_blank" class="_" },
+then run the following command:
+
+```bash
+sudo apt-get install docker-compose
+```
 
 ## Uninstall Docker CE
 
