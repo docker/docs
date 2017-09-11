@@ -69,7 +69,7 @@ availability.
 Refer to the [`docker node update`](/engine/reference/commandline/node_update.md)
 command line reference to see how to change node availability.
 
-## Changing roles
+## Change roles
 
 You can promote a worker node to be a manager by running `docker node promote`.
 For example, you may want to promote a worker node when you
@@ -79,7 +79,7 @@ You can also demote a manager node to a worker node. See
 [node demote](/engine/reference/commandline/node_demote.md).
 
 
-## Learn More
+## Learn more
 
 * Read about how swarm mode [services](services.md) work.
 * Learn how [PKI](pki.md) works in swarm mode.
