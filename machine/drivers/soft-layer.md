@@ -30,6 +30,7 @@ You need to generate an API key in the softlayer control panel.
 -   `--softlayer-image`: OS Image to use.
 -   `--softlayer-public-vlan-id`: Your public VLAN ID.
 -   `--softlayer-private-vlan-id`: Your private VLAN ID.
+-   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (e.g., 1000, 100, 10).
 
 The SoftLayer driver will use `UBUNTU_LATEST` as the image type by default.
 
