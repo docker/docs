@@ -4,8 +4,6 @@ keywords: cadvisor, troubleshooting, volumes, bind-mounts
 title: Troubleshoot volume errors
 ---
 
-# Troubleshoot volume errors
-
 This topic discusses errors which may occur when you use Docker volumes or bind
 mounts.
 
