@@ -57,7 +57,7 @@ as [a variable](https://docs.ansible.com/ansible/playbooks_variables.html).
 
 ## Documentation
 
-The documentation for the `ansible_container` module is present at
+The documentation for the `docker_container` module is present at
 [docs.ansible.com](https://docs.ansible.com/ansible/docker_container_module.html).
 
 Documentation covering Docker images, networks, and services is also present
