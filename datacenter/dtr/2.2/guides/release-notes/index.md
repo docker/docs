@@ -14,14 +14,15 @@ to upgrade your installation to the latest release.
 
 ## DTR 2.2.9
 
-(Date TBD)
+(13 September 2017)
 
 **Bugs fixed**
 
 * High severity:
-  * Fixed issue with rethinkdbs not starting correctly after a restart in an HA cluster depending on the order of events
+  * Fixed issue with RethinkDB not starting correctly after restarting a DTR
+  replica.
 * Low severity:
-  * Improved error handling in scanning
+  * Improved error handling in the vulnerability scanner.
 
 ## DTR 2.2.8
 
