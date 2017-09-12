@@ -85,7 +85,7 @@ target="_blank">docker/docker repository</a>.
     Take a moment to familiarize yourself with the repository's contents. List
     the contents.
 
-##  Task 2. Set your signature and an upstream remote
+## Task 2. Set your signature and an upstream remote
 
 When you contribute to Docker, you must certify you agree with the
 <a href="http://developercertificate.org/" target="_blank">Developer Certificate of Origin</a>.
@@ -192,7 +192,7 @@ the branch to your fork on GitHub:
      master
    ```
 
-    The current branch has an * (asterisk) marker. So, these results shows you
+    The current branch has an * (asterisk) marker. So, these results show you
     are on the right branch.
 
 4. Create a `TEST.md` file in the repository's root.
