@@ -118,7 +118,7 @@ request:
 To make the key suitable for client authentication, create an extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth > extfile.cnf
+    $ echo extendedKeyUsage = clientAuth >> extfile.cnf
 
 Now sign the private key:
 
