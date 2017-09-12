@@ -44,4 +44,4 @@ There is a limit to the number of docker machines that an anti-affinity group ca
 | `--exoscale-availability-zone`  | `EXOSCALE_AVAILABILITY_ZONE` | `ch-dk-2`                         |
 | `--exoscale-ssh-user`           | `EXOSCALE_SSH_USER`          | `ubuntu`                          |
 | `--exoscale-userdata`           | `EXOSCALE_USERDATA`          | -                                 |
-| `--exoscale-affinity-group`     | `EXOSCALE_AFFINITY_GROUP`    | `docker-machine`                  |
+| `--exoscale-affinity-group`     | `EXOSCALE_AFFINITY_GROUP`    | -                                 |
