@@ -50,7 +50,7 @@ or using a configuration file.
 Run the Notary command with:
 
 ```bash
-notary --server https://<dtr-url> --trustDir ~/.docker/trust --tlscacert <dtr-ca.pem>
+notary --server https://<dtr-url> --trustDir ~/.docker/trust --tlscacert <dtr-ca.pem> --help
 ```
 
 Here's what the flags mean:
@@ -64,13 +64,25 @@ Here's what the flags mean:
 To avoid having to type all the flags when using the command, you can set an
 alias:
 
-```none
-# Bash
-alias notary="notary --server https://<dtr-url> --trustDir ~/.docker/trust --tlscacert <dtr-ca.pem>"
 
-# PowerShell
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab3">Bash</a></li>
+  <li><a data-toggle="tab" data-target="#tab4">PowerShell</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab3" class="tab-pane fade in active" markdown="1">
+```
+alias notary="notary --server https://<dtr-url> --trustDir ~/.docker/trust --tlscacert <dtr-ca.pem>"
+```
+<hr>
+</div>
+<div id="tab4" class="tab-pane fade" markdown="1">
+```
 set-alias notary "notary --server https://<dtr-url> --trustDir ~/.docker/trust --tlscacert <dtr-ca.pem>"
 ```
+<hr>
+</div>
+</div>
 
 ### With a configuration file
 
@@ -90,9 +102,8 @@ the following content:
 To validate your configuration, try running the `notary list` command on a
 DTR repository that already has signed images:
 
-```none
-# Assumes you've configured notary
-notary list <dtr-repository>
+```bash
+notary list <dtr-url>/<account>/<repository>
 ```
 
 The command should print a list of digests for each signed image on the
@@ -106,8 +117,7 @@ key of your UCP client bundle.
 
 Import the private key in your UCP bundle into the Notary CLI client:
 
-```none
-# Assumes you've configured notary
+```bash
 notary key import <path-to-key.pem>
 ```
 
@@ -116,7 +126,7 @@ password to encrypt it.
 
 You can validate what keys Notary knows about by running:
 
-```none
+```bash
 notary key list
 ```
 
