@@ -13,7 +13,7 @@ repositories. For that:
 
 * Start by creating a user.
 
-    Users are shared across Docker Datacenter. When you create a new user in
+    Users are shared across UCP and DTR. When you create a new user in
     Docker Universal Control Plane, that user becomes available in DTR and vice
     versa. Registered users can create and manage their own repositories.
 

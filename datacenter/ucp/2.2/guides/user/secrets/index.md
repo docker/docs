@@ -1,6 +1,6 @@
 ---
 title: Manage secrets
-description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker Datacenter
+description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE
 keywords: UCP, secret, password, certificate, private key
 ---
 
@@ -66,7 +66,7 @@ default configurations.
 
 Now create the MySQL service:
 
-1. Navigate to the **Services** page and click **Create Service**. Name the 
+1. Navigate to the **Services** page and click **Create Service**. Name the
    service "wordpress-db", and for the **Task Template**, use the "mysql:5.7"
    image.
 2. In the left pane, click **Network**. In the **Networks** section, click
@@ -99,7 +99,7 @@ the root password.
 Now that the MySQL service is running, we can deploy a WordPress service that
 uses MySQL as a storage backend:
 
-1. Navigate to the **Services** page and click **Create Service**. Name the 
+1. Navigate to the **Services** page and click **Create Service**. Name the
    service "wordpress", and for the **Task Template**, use the
    "wordpress:latest" image.
 2. In the left pane, click **Network**. In the **Networks** section, click
