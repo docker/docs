@@ -175,7 +175,7 @@ or other underlying subsystems are from other containers or from the host
 machine.
 
 A container is defined by its image as well as any configuration options you
-provide to it when you create or run it. When a container stops, any changes to
+provide to it when you create or run it. When a container is removed, any changes to
 its state that are not stored in persistent storage disappear.
 
 ##### Example `docker run` command
