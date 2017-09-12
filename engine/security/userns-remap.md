@@ -7,7 +7,7 @@ title: Isolate containers with a user namespace
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" };
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" }.
 
 The best way to prevent privilege-escalation attacks from within a container is
 to configure your container's applications to run as unprivileged users. For
@@ -126,7 +126,7 @@ avoid these situations.
     of the resources created while it was enabled.
 
 5.  Check the [limitations](#user-namespace-known-restrictions) on user
-    user namespaces to be sure your use case will be possible.
+    namespaces to be sure your use case will be possible.
 
 ## Enable userns-remap on the daemon
 
@@ -264,7 +264,7 @@ capabilities. For example, if volumes are mounted from the host, file ownership
 must be pre-arranged need read or write access to the volume contents.
 
 While the root user inside a user-namespaced container process has many of the
-expected privileges of the superuser within the  container, the Linux kernel
+expected privileges of the superuser within the container, the Linux kernel
 imposes restrictions based on internal knowledge that this is a user-namespaced
 process. One notable restriction is the inability to use the `mknod` command.
 Permission will be denied for device creation within the container when run by
