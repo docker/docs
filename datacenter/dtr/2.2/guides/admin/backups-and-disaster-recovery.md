@@ -39,7 +39,7 @@ command backs up the following data:
 | Scan results                       | yes       |                                                                |
 | Certificates and keys              | yes       |                                                                |
 | Image content                      | no        | Needs to be backed up separately, depends on DTR configuration |
-| Users, orgs, teams                 | no        | Create a UCP backup to back up this data                        |
+| Users, orgs, teams                 | no        | Create a UCP backup to back up this data                       |
 | Vulnerability database             | no        | Can be re-downloaded after a restore                           |
 
 
@@ -125,9 +125,6 @@ dtr-backup-v2.2.3/rethink/layers/
 And the backup of the DTR metadata should look like:
 
 ```none
-tar -tf /tmp/backup-metadata.tar
-
-# The archive should look like this
 dtr-backup-v2.2.1/
 dtr-backup-v2.2.1/rethink/
 dtr-backup-v2.2.1/rethink/properties/
