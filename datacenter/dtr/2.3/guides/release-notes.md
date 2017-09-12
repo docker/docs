@@ -13,16 +13,18 @@ to upgrade your installation to the latest release.
 
 ## DTR 2.3.3
 
-(Date TBD)
+(13 September 2017)
 
 ### Bugs fixed
 
 * High severity:
-  * Fixed issue with rethinkdbs not starting correctly after a restart in an HA cluster depending on the order of events
-  * Fix issue with UCP 2.1.x pull integration
+  * Fixed issue with RethinkDB not starting correctly after restarting a DTR
+  replica.
+  * Fixed issue that prevented UCP 2.1.x from being able to pull images.
 * Low severity:
-  * Improved error handling in scanning
-  * Fixed webhooks not firing as a result of automatic promotions
+  * Improved error handling in the vulnerability scanner.
+  * Fixed issue that caused webhooks not to fire when an image was automatically
+  promoted.
 
 ## DTR 2.3.2
 
