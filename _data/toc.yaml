@@ -1940,6 +1940,8 @@ manuals:
             title: Chain multiple caches
         - path: /datacenter/dtr/2.3/guides/admin/configure/garbage-collection/
           title: Garbage collection
+        - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-web-proxy/
+          title: Use a web proxy
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.3/guides/admin/manage-users/
