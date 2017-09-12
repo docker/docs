@@ -325,6 +325,19 @@ off".
 
 ![Hyper-V on Windows features](images/hyper-v-enable-status.png )
 
+#### Hyper-V driver for Docker Machine
+
+Docker for Windows comes with the legacy tool Docker Machine which uses the old
+[`boot2docker.iso`](https://github.com/boot2docker/boot2docker), and the
+[Microsoft Hyper-V driver](/machine/drivers/hyper-v.md) to create local virtual
+machines. _This is tangential to using Docker for Windows_, but if you want to
+use Docker Machine to create multiple local VMs, or to provision remote
+machines, see the [Docker Machine](/machine/index.md) topics. We mention only
+mention this here in case someone is looking for information about Docker
+Machine on Windows, which requires that Hyper-V is enabled and an external
+network switch is active [as described in the Docker Macihne driver
+example](/machine/drivers/hyper-v.md#example).
+
 ### Virtualization must be enabled
 
 In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
