@@ -96,7 +96,7 @@ which each container reaches the rest of the Internet.
 ```bash
 # The network, as seen from a container
 
-$ docker run --rm -it alpine /bin/ash
+$ docker run --rm -it alpine /bin/bash
 
 root@f38c87f2a42d:/# ip addr show eth0
 
