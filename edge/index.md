@@ -2,7 +2,7 @@
 title: Docker CE Edge documentation
 description: Information about current Docker Edge releases
 keywords: engine, edge, installation
-current_edge: 17.06
+current_edge: 17.07
 ---
 
 The current Docker CE Edge release is {{ page.current_edge }}. The Docker CE
