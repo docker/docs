@@ -207,7 +207,7 @@ option before using it in production.
 
 ## Attach a service to an overlay network
 
-To attach a service to an existingoverlay network, pass the `--network` flag to
+To attach a service to an existing overlay network, pass the `--network` flag to
 `docker service create`, or the `--network-add` flag to `docker service update`.
 
 ```bash
