@@ -13,7 +13,7 @@ For Docker releases prior to 17.03.0, see
 [Learn about Docker releases](/engine/installation.md).
 
 
-## 17.07.0-ce (2017-08-29)
+## 17.07.0-ce (2017-08-29) [[edge channel](https://docs.docker.com/edge/)]
 
 ### API & Client
 
