@@ -215,10 +215,21 @@ Storage Driver: overlay
 <output truncated>
 ```
 
-To set the storage driver, set the option in the `daemon.json`
+
+
+To set the storage driver, you can use the `--storage-driver` flag when starting
+the Docker daemon manually, or (recommended) set the option in the `daemon.json`
 file, which is located in `/etc/docker/` on Linux and
-`C:\ProgramData\docker\config\` on Windows Server. Changing the storage driver
-on Docker for Mac or Docker for Windows is not supported.
+`C:\ProgramData\docker\config\` on Windows Server.
+
+> **Note**: Using the `--storage-driver` flag when running `dockerd` manually or
+> using an init script is not recommended. We recommend setting the option in
+> the `daemon.json` file instead, because this mechanism is cross-platform,
+> and will not create configuration conflicts with the default init scripts for
+> your operating system.
+
+Changing the storage driver on Docker for Mac or Docker for Windows is not
+supported.
 
 If the `daemon.json` file does not exist, create it. Assuming there are no other
 settings in the file, it should have the following contents:
