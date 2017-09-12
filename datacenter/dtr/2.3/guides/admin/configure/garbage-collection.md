@@ -1,101 +1,85 @@
 ---
-description: Configure garbage collection in Docker Trusted Registry
-title: Docker Trusted Registry 2.2 Garbage Collection
+title: Garbage collection
+description: Save disk space by configuring the garbage collection settings in
+  Docker Trusted Registry
 keywords: registry, garbage collection, gc, space, disk space
 ---
 
-#### TL;DR
+You can configure Docker Trusted Registry to automatically delete unused image
+layers, thus saving you disk space. This process is also known as garbage collection.
 
-1. Garbage Collection (GC) reclaims disk space from your storage by deleting
-unused layers
-2. GC can be configured to run automatically with a cron schedule, and can also
-be run manually. Only admins can configure these
-3. When GC runs DTR will be placed in read-only mode.  Pulls will work but
-pushes will fail
-4. The UI will show when GC is running, and an admin can stop GC within the UI
+## How DTR deletes unused layers
 
-**Important notes**
+First you configure DTR to run a garbage collection job on a fixed schedule. At
+the scheduled time:
 
-The GC cron schedule is set to run in **UTC time**.  Containers typically run in
-UTC time (unless the system time is mounted), therefore remember that the cron
-schedule will run based off of UTC time when configuring.
+1. DTR becomes read-only. Images can be pulled, but pushes are not allowed.
+2. DTR identifies and marks all unused image layers.
+3. DTR deletes the marked image layers.
 
-GC puts DTR into read only mode; pulls succeed while pushes fail.  Pushing an
-image while GC runs may lead to undefined behavior and data loss, therefore
-this is disabled for safety.  For this reason it's generally best practice to
-ensure GC runs in the early morning on a Saturday or Sunday night.
+Since this process puts DTR in read-only mode and is CPU-intensive, you should
+run garbage collection jobs outside business peak hours.
 
+## Schedule garbage collection
 
-## Setting up garbage collection
-
-You can set up GC if you're an admin by hitting "Settings" in the UI then
-choosing "Garbage Collection".  By default, GC will be disabled, showing this
-screen:
+Navigate to the **Settings** page, and choose **Garbage collection**.
 
 ![](../../images/garbage-collection-1.png){: .with-border}
 
-Here you can configure GC to run **until it's done** or **with a timeout**.
-The timeout ensures that your registry will be in read-only mode for a maximum
-amount of time.
+Select for how long the garbage collection job should run:
+* Until done: Run the job until all unused image layers are deleted.
+* For x minutes: Only run the garbage collection job for a maximum of x minutes
+at a time.
+* Never: Never delete unused image layers.
 
-Select an option (either "Until done" or "For N minutes") and you'll have the
-option to configure GC to run via a cron job, with several default crons
-provided:
+Once you select for how long to run the garbage collection job, you can
+configure its schedule (in UTC time) using the cron format.
 
 ![](../../images/garbage-collection-2.png){: .with-border}
 
-You can also choose "Do not repeat" to disable the cron schedule entirely.
+Once everything is configured you can chose to **save & start** to immediately
+run the garbage collection job, or just **save** to run the job on the next
+scheduled interval.
 
-Once the cron schedule has been configured (or disabled), you have the option to
-the schedule ("Save") or save the schedule *and* start GC immediately ("Save
-&amp; Start").
+## Stop the garbage collection job
 
-## Stopping GC while it's running
-
-When GC runs the garbage collection settings page looks as follows:
+Once the garbage collection job starts running, a banner is displayed on the
+web UI explaining that users can't push images. If you're an administrator, you can click the banner to stop the garbage
+collection job.
 
 ![](../../images/garbage-collection-3.png){: .with-border}
 
-Note the global banner visible to all users, ensuring everyone knows that GC is
-running.
-
-An admin can stop the current GC process by hitting "Stop".  This safely shuts
-down the running GC job and moves the registry into read-write mode, ensuring
-pushes work as expected.
-
-## How does garbage collection work?
-
-### Background: how images are stored
+## Under the hood
 
 Each image stored in DTR is made up of multiple files:
 
-- A list of "layers", which represent the image's filesystem
-- The "config" file, which dictates the OS, architecture and other image
-metadata
-- The "manifest", which is pulled first and lists all layers and the config file
-for the image.
+* A list of image layers that represent the image filesystem.
+* A configuration file that contains the architecture of the image and other
+metadata.
+* A manifest file containing the list of all layers and configuration file for
+an image.
 
-All of these files are stored in a content-addressable manner.  We take the
-sha256 hash of the file's content and use the hash as the filename.  This means
-that if tag `example.com/user/blog:1.11.0` and `example.com/user/blog:latest`
-use the same layers we only store them once.
+All these files are stored in a content-addressable way in which the name of
+the file is the result of hashing the file's content. This means that if two
+image tags have exactly the same content, DTR only stores the image content
+once, even if the tag name is different.
 
-### How this impacts GC
+As an example, if `wordpress:4.8` and `wordpress:latest` have the same content,
+they will only be stored once. If you delete one of these tags, the other won't
+be deleted.
 
-Let's continue from the above example, where `example.com/user/blog:latest` and
-`example.com/user/blog:1.11.0` point to the same image and use the same layers.
-If we delete `example.com/user/blog:latest` but *not*
-`example.com/user/blog:1.11.0` we expect that `example.com/user/blog:1.11.0`
-can still be pulled.
+This means that when users delete an image tag, DTR can't delete the underlying
+files of that image tag since it's possible that there are other tags that
+also use the same files.
 
-This means that we can't delete layers when tags or manifests are deleted.  
-Instead, we need to pause writing and take reference counts to see how many
-times a file is used.  If the file is never used only then is it safe to delete.
+To delete unused image layers, DTR:
+1. Becomes read-only to make sure that no one is able to push an image, thus
+changing the underlying files in the filesystem.
+2. Check all the manifest files and keep a record of the files that are
+referenced.
+3. If a file is never referenced, that means that no image tag uses it, so it
+can be safely deleted.
 
-This is the basis of our "mark and sweep" collection:
+## Where to go next
 
-1. Iterate over all manifests in registry and record all files that are
-referenced
-2. Iterate over all file stored and check if the file is referenced by any
-manifest
-3. If the file is *not* referenced, delete it
+* [Deploy DTR caches](deploy-caches/index.md)
