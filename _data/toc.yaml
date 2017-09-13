@@ -1472,6 +1472,8 @@ manuals:
         title: Create and manage users
       - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-teams/
         title: Create and manage teams
+      - path: /datacenter/ucp/2.2/guides/access-control/deploy-stack-to-collection/
+        title: Deploy stack resources to a collection
       - path: /datacenter/ucp/2.2/guides/access-control/deploy-view-only-service/
         title: Deploy a service with view-only access across an organization
       - path: /datacenter/ucp/2.2/guides/access-control/grant-permissions/
