@@ -138,8 +138,8 @@ You can install Docker EE in different ways, depending on your needs:
     $ sudo yum -y install docker-ee
     ```
 
-    If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
+    If this is the first time you are installing a package from a recently added
+    repository, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint matches
     `{{ gpg-fingerprint }}` and if so, accept the key.
 
@@ -148,11 +148,8 @@ You can install Docker EE in different ways, depending on your needs:
     This example uses the `sort -r` command to sort the results by version
     number, highest to lowest, and is truncated.
 
-    > **Note**: This `yum list` command only shows binary packages. To show
-    > source packages as well, omit the `.x86_64` from the package name.
-
     ```bash
-    $ sudo yum list docker-ee.x86_64  --showduplicates | sort -r
+    $ sudo yum list docker-ee  --showduplicates | sort -r
 
     docker-ee.x86_64         {{ minor-version }}.ee.2-1.el7.{{ linux-dist }}          docker-ee-stable-17.06
     ```
@@ -223,9 +220,7 @@ To upgrade Docker EE:
     Docker 17.03.x to Docker 17.06.x),
     [add the new repository](#set-up-the-repository){: target="_blank" class="_" }.
 
-2.  Run `sudo yum makecache fast`.
-
-3.  Follow the
+2.  Follow the
     [installation instructions](#install-docker), choosing the new version you
     want to install.
 
