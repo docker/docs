@@ -8,7 +8,7 @@ title: Roles and permission levels
 Docker Universal Control Plane has two types of users: administrators and
 regular users. Administrators can make changes to the UCP swarm, while
 regular users have permissions that range from no access to full control over
-resources like volumes, networks, images, and containers. Users are 
+resources like volumes, networks, images, and containers. Users are
 grouped into teams and organizations.
 
 ![Diagram showing UCP permission levels](../images/role-diagram.svg)
@@ -29,9 +29,9 @@ swarm settings. This includes:
 A role is a set of permitted API operations on a collection that you
 can assign to a specific user, team, or organization by using a grant.
 
-UCP administrators view and manage roles by navigating to the **Roles** page. 
+UCP administrators view and manage roles by navigating to the **Roles** page.
 
-The system provides the following default roles: 
+The system provides the following default roles:
 
 | Built-in role        | Description |
 |----------------------|-------------|
@@ -61,7 +61,7 @@ might give it a name like "Node Operator".
 
 ![](../images/custom-role.png){: .with-border}
 
-You can give a role a global name, like "Remove Images", which might enable 
+You can give a role a global name, like "Remove Images", which might enable
 the **Remove** and **Force Remove** operations for images. You can apply a
 role with the same name to different collections.
 
@@ -70,10 +70,10 @@ Roles can't be edited, so to change a role's API operations, you must delete it
 and create it again.
 
 You can't delete a custom role if it's used in a grant. You must first delete
-the grants that use the role. 
+the grants that use the role.
 
 ## Where to go next
 
 * [Create and manage users](create-and-manage-users.md)
 * [Create and manage teams](create-and-manage-teams.md)
-* [Docker Reference Architecture: Securing Docker Datacenter and Security Best Practices](https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Securing_Docker_Datacenter_and_Security_Best_Practices)
+* [Docker Reference Architecture: Securing Docker EE and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)

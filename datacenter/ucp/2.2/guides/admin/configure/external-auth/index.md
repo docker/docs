@@ -16,9 +16,95 @@ When you switch from built-in authentication to LDAP authentication,
 all manually created users whose usernames don't match any LDAP search results
 are still available.
 
+When you enable LDAP authentication, you can choose whether UCP creates user
+accounts only when users log in for the first time. Select the 
+**Just-In-Time User Provisioning** option to ensure that the only LDAP
+accounts that exist in UCP are those that have had a user log in to UCP.
+
+## How UCP integrates with LDAP
+
+You control how UCP integrates with LDAP by creating searches for users. 
+You can specify multiple search configurations, and you can specify multiple
+LDAP servers to integrate with. Searches start with the `Base DN`, which is
+the *distinguished name* of the node in the LDAP directory tree where the
+search starts looking for users.
+
+Access LDAP settings by navigating to the **Authentication & Authorization**
+page in the UCP web UI. There are two sections for controlling LDAP searches
+and servers.
+
+- **LDAP user search configurations:** This is the section of the
+  **Authentication & Authorization** page where you specify search
+  parameters, like `Base DN`, `scope`, `filter`, the `username` attribute,
+  and the `full name` attribute. These searches are stored in a list, and
+  the ordering may be important, depending on your search configuration.
+- **LDAP server:** This is the section where you specify the URL of an LDAP
+  server, TLS configuration, and credentials for doing the search requests.
+  Also, you provide a domain for all servers but the first one. The first
+  server is considered the default domain server. Any others are associated
+  with the domain that you specify in the page.
+
+Here's what happens when UCP synchronizes with LDAP: 
+
+1. UCP creates a set of search results by iterating over each of the user
+   search configs, in the order that you specify.
+2. UCP choses an LDAP server from the list of domain servers by considering the
+   `Base DN` from the user search config and selecting the domain server that
+   has the longest domain suffix match.
+3. If no domain server has a domain suffix that matches the `Base DN` from the
+   search config, UCP uses the default domain server.
+4. UCP combines the search results into a list of users and creates UCP
+   accounts for them. If the **Just-In-Time User Provisioning** option is set,
+   user accounts are created only when users first log in.
+
+The domain server to use is determined by the `Base DN` in each search config.
+UCP doesn't perform search requests against each of the domain servers, only
+the one which has the longest matching domain suffix, or the default if there's
+no match.
+
+Here's an example. Let's say we have three LDAP domain servers:
+
+|                 Domain                 |          Server URL          |
+| -------------------------------------- | ---------------------------- |
+| *default*                              | ldaps://ldap.example.com     |
+| `dc=subsidiary1,dc=com`                | ldaps://ldap.subsidiary1.com |
+| `dc=subsidiary2,dc=subsidiary1,dc=com` | ldaps://ldap.subsidiary2.com |
+
+Here are three user search configs with the following `Base DNs`:
+
+- baseDN=`ou=people,dc=subsidiary1,dc=com`
+
+  For this search config, `dc=subsidiary1,dc=com` is the only server with a
+  domain which is a suffix, so UCP uses the server `ldaps://ldap.subsidiary1.com`
+  for the search request.
+
+- baseDN=`ou=product,dc=subsidiary2,dc=subsidiary1,dc=com`
+
+  For this search config, two of the domain servers have a domain which is a
+  suffix of this base DN, but `dc=subsidiary2,dc=subsidiary1,dc=com` is the
+  longer of the two, so UCP uses the server `ldaps://ldap.subsidiary2.com` 
+  for the search request.
+
+- baseDN=`ou=eng,dc=example,dc=com`
+
+  For this search config, there is no server with a domain specified which is
+  a suffix of this base DN, so UCP uses the default server, `ldaps://ldap.example.com`,
+  for the search request.
+
+If there are `username` collisions for the search results between domains, UCP
+uses only the first search result, so the ordering of the user search configs
+may be important. For example, if both the first and third user search configs
+result in a record with the username `jane.doe`, the first has higher
+precedence and the second is ignored. For this reason, it's important to choose
+a `username` attribute that's unique for your users across all domains.
+
+Because names may collide, it's a good idea to use something unique to the
+subsidiary, like the email address for each person. Users can log in with the
+email address, for example, `jane.doe@subsidiary1.com`.
+
 ## Configure the LDAP integration
 
-To configure UCP to create and authenticate users using an LDAP directory,
+To configure UCP to create and authenticate users by using an LDAP directory,
 go to the UCP web UI, navigate to the **Admin Settings** page and click
 **Authentication & Authorization** to select the method used to create and
 authenticate users.
@@ -53,7 +139,7 @@ Click **Yes** to enable integrating UCP users and teams with LDAP servers.
 | Use Start TLS         | Whether to authenticate/encrypt the connection after connecting to the LDAP server over TCP. If you set the LDAP Server URL field with `ldaps://`, this field is ignored. |
 | Skip TLS verification | Whether to verify the LDAP server certificate when using TLS. The connection is still encrypted but vulnerable to man-in-the-middle attacks.                              |
 | No simple pagination  | If your LDAP server doesn't support pagination.                                                                                                                           |
-| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. |
+| Just-In-Time User Provisioning | Whether to create user accounts only when users log in for the first time. The default value of `true` is recommended. If you upgraded from UCP 2.0.x, the default is `false`. |
 
 ![](../../../images/ldap-integration-1.png){: .with-border}
 

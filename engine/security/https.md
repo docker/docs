@@ -85,7 +85,7 @@ using `10.10.10.20` and `127.0.0.1`:
 Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
 
-    $ echo extendedKeyUsage = serverAuth > extfile.cnf
+    $ echo extendedKeyUsage = serverAuth >> extfile.cnf
 
 Now, generate the key:
 
@@ -118,7 +118,7 @@ request:
 To make the key suitable for client authentication, create an extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth > extfile.cnf
+    $ echo extendedKeyUsage = clientAuth >> extfile.cnf
 
 Now sign the private key:
 

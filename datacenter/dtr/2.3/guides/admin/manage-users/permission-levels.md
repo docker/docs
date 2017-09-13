@@ -9,14 +9,13 @@ repositories.
 
 ## Administrator users
 
-Users are shared across Docker Datacenter. When you create a new user in Docker
+Users are shared across UCP and DTR. When you create a new user in Docker
 Universal Control Plane, that user becomes available in DTR and vice versa.
-When you create an administrator user in DTR, that user is a Docker Datacenter
-administrator, with permissions to:
+When you create an administrator user in DTR, the user has permissions to:
 
-* Manage users across Docker Datacenter,
+* Manage users across UCP and DTR,
 * Manage DTR repositories and settings,
-* Manage the whole UCP cluster.
+* Manage UCP resources and settings.
 
 ## Team permission levels
 

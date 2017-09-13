@@ -38,7 +38,7 @@ middleware:
         options:
           blobttl: 24h
           upstreams:
-            - originhost: https://<dtr-url>
+            - https://<dtr-url>
           cas:
             - /certs/dtr-ca.pem
 ```
@@ -65,9 +65,7 @@ middleware:
         options:
           blobttl: 24h
           upstreams:
-            - originhost: https://<dtr-url>
-              upstreamhosts:
-                - https://<asia-cache-url>
+            - https://<asia-cache-url>
           cas:
             - /certs/asia-cache-ca.pem
 ```

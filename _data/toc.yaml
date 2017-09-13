@@ -1552,8 +1552,6 @@ manuals:
             section:
             - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
               title: License your installation
-            - path: /datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/
-              title: Use your own TLS certificates
             - path: /datacenter/ucp/2.1/guides/admin/configure/scale-your-cluster/
               title: Scale your cluster
             - path: /datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/
@@ -1572,8 +1570,12 @@ manuals:
               title: Use domain names to access services
             - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
               title: Run only the images you trust
+            - path: /datacenter/ucp/2.1/guides/admin/configure/integrate-with-dtr/
+              title: Integrate with Docker Trusted Registry
             - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
               title: Integrate with LDAP
+            - path: /datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
           - sectiontitle: Manage users
             section:
             - path: /datacenter/ucp/2.1/guides/admin/manage-users/

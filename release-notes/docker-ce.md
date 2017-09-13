@@ -75,6 +75,21 @@ For Docker releases prior to 17.03.0, see
 * Fix error during service creation if a network with the same name exists both as "local" and "swarm" scoped network [docker/cli#184](https://github.com/docker/cli/pull/184)
 * (experimental) Add support for plugins on swarm [moby/moby#33575](https://github.com/moby/moby/pull/33575)
 
+## 17.06.2-ce (2017-09-05)
+
+### Client
+
+- Enable TCP keepalive in the client to prevent loss of connection [docker/cli#415](https://github.com/docker/cli/pull/415)
+
+### Runtime
+
+- Devmapper: ensure UdevWait is called after calls to setCookie [moby/moby#33732](https://github.com/moby/moby/pull/33732)
+- Aufs: ensure diff layers are correctly removed to prevent leftover files from using up storage [moby/moby#34587](https://github.com/moby/moby/pull/34587)
+
+### Swarm mode
+
+- Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
+
 ## 17.06.1-ce (2017-08-15)
 
 ### Builder

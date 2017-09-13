@@ -1,6 +1,6 @@
 ---
 description: Review of the Docker Daemon attack surface
-keywords: Docker, Docker documentation,  security
+keywords: Docker, Docker documentation, security
 redirect_from:
 - /engine/articles/security/
 - /security/security/
@@ -261,7 +261,7 @@ containerization systems, these are simply kernels features that may
 be implemented in Docker as well. We welcome users to submit issues,
 pull requests, and communicate via the mailing list.
 
-## Related Information
+## Related information
 
 * [Use trusted images](../security/trust/index.md)
 * [Seccomp security profiles for Docker](../security/seccomp.md)

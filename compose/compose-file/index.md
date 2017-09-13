@@ -736,7 +736,7 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [cgroup_parent](#cgroup_parent)
 - [container_name](#container_name)
 - [devices](#devices)
-- [dns](#devices)
+- [dns](#dns)
 - [dns_search](#dns_search)
 - [tmpfs](#tmpfs)
 - [external_links](#external_links)

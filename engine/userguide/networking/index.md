@@ -196,9 +196,9 @@ $ docker network inspect bridge
 ```
 
 Containers connected to the default `bridge` network can communicate with each
-other by IP address. Docker does not support automatic service discovery on the
+other by IP address. **Docker does not support automatic service discovery on the
 default bridge network. If you want containers to be able to resolve IP addresses
-by container name, you should use user-defined networks instead. You can link
+by container name, you should use _user-defined networks_ instead**. You can link
 two containers together using the legacy `docker run --link` option, but this
 is not recommended in most cases.
 
@@ -209,7 +209,7 @@ a `#` character.
 ```none
 $ docker attach container1
 
-root@0cb243cd1293:/# ifconfig
+root@3386a527aa08:/# ifconfig
 
 eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
           inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
@@ -234,7 +234,7 @@ From inside the container, use the `ping` command to test the network connection
 to the IP address of the other container.
 
 ```none
-root@0cb243cd1293:/# ping -w3 172.17.0.3
+root@3386a527aa08:/# ping -w3 172.17.0.3
 
 PING 172.17.0.3 (172.17.0.3): 56 data bytes
 64 bytes from 172.17.0.3: seq=0 ttl=64 time=0.096 ms
@@ -250,7 +250,7 @@ Use the `cat` command to view the `/etc/hosts` file on the container. This shows
 the hostnames and IP addresses the container recognizes.
 
 ```
-root@0cb243cd1293:/# cat /etc/hosts
+root@3386a527aa08:/# cat /etc/hosts
 
 172.17.0.2	3386a527aa08
 127.0.0.1	localhost

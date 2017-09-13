@@ -11,7 +11,7 @@ title: Get Docker CE for Fedora
 
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker-ce).
+[install Docker](#install-docker).
 
 ## Prerequisites
 
@@ -27,11 +27,6 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 
 - 24
 - 25
-- 26
-
-<!---TODO: Remove below note once 17.09.0 GA for Fedora 26--->
-> **Note**: Fedora 26 packages are currently only available in the **edge** 
-> and **test** repositories.
 
 ### Uninstall old versions
 
@@ -87,7 +82,7 @@ from the repository.
 
 2.  Use the following command to set up the **stable** repository. You always
     need the **stable** repository, even if you want to install builds from the
-    **edge** or **test** repositories as well.
+    **edge** or **testing** repositories as well.
 
     ```bash
     $ sudo dnf config-manager \
@@ -95,23 +90,19 @@ from the repository.
         {{ download-url-base }}/docker-ce.repo
     ```
 
-3.  **Optional**: Enable the **edge** and **test** repositories. These
+3.  **Optional**: Enable the **edge** and **testing** repositories. These
     repositories are included in the `docker.repo` file above but are disabled
     by default. You can enable them alongside the stable repository.
-    
-    <!---TODO: Remove below note once 17.09.0 GA for Fedora 26--->
-    > **Note**: Fedora 26 packages are currently only available in the **edge** 
-    > and **test** repositories.
 
     ```bash
     $ sudo dnf config-manager --set-enabled docker-ce-edge
     ```
 
     ```bash
-    $ sudo dnf config-manager --set-enabled docker-ce-test
+    $ sudo dnf config-manager --set-enabled docker-ce-testing
     ```
 
-    You can disable the **edge** or **test** repository by running the
+    You can disable the **edge** or **testing** repository by running the
     `dnf config-manager` command with the `--disable` flag. To re-enable it, use
     the `--enable` flag. The following command disables the **edge** repository.
 
@@ -120,7 +111,7 @@ from the repository.
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
-    > the **edge** and **test** repositories.
+    > the **edge** and **testing** repositories.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
@@ -151,7 +142,7 @@ from the repository.
     > or updating without specifying a version in the `dnf install` or
     > `dnf update` command will always install the highest possible version,
     > which may not be appropriate for your stability needs.
-    {:.warning}
+    {:.warning-vanilla}
 
 3.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This

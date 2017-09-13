@@ -67,12 +67,12 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 Manager nodes use an advertise address to allow other nodes in the swarm access
 to the Swarmkit API and overlay networking. The other nodes on the swarm must be
-able to access the manager node on its advertise address IP address.
+able to access the manager node on its advertise address.
 
 If you don't specify an advertise address, Docker checks if the system has a
 single IP address. If so, Docker uses the IP address with the listening port
 `2377` by default. If the system has multiple IP addresses, you must specify the
-correct  `--advertise-addr` to enable inter-manager communication and overlay
+correct `--advertise-addr` to enable inter-manager communication and overlay
 networking:
 
 ```bash
@@ -165,7 +165,7 @@ To add a worker to this swarm, run the following command:
     192.168.99.100:2377
 ```
 
-## Learn More
+## Learn more
 
 * [Join nodes to a swarm](join-nodes.md)
 * `swarm init` [command line reference](../reference/commandline/swarm_init.md)

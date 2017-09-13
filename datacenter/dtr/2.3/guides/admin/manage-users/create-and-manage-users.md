@@ -4,9 +4,9 @@ description: Learn how to manage user permissions in Docker Trusted Registry.
 keywords: registry, security, permissions, users
 ---
 
-When using the Docker Datacenter built-in authentication, you can create users
+When using the built-in authentication, you can create users
 to grant them fine-grained permissions.
-Users are shared across Docker Datacenter. When you create a new user in
+Users are shared across UCP and DTR. When you create a new user in
 Docker Universal Control Plane, that user becomes available in DTR and vice
 versa.
 
@@ -20,7 +20,7 @@ Click the **New user** button, and fill-in the user information.
 ![](../../images/create-manage-users-2.png){: .with-border}
 
 Check the **Trusted Registry admin** option, if you want to grant permissions
-for the user to change Docker Datacenter configurations.
+for the user to be a UCP and DTR administrator.
 
 ## Where to go next
 
