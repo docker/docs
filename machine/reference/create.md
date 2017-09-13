@@ -8,6 +8,13 @@ Create a machine.  Requires the `--driver` flag to indicate which provider
 (VirtualBox, DigitalOcean, AWS, etc.) the machine should be created on, and an
 argument to indicate the name of the created machine.
 
+> Looking for the full list of available drivers?
+>
+>For a full list of drivers that work with `docker-machine create` and
+information on how to use them, see [Machine
+drivers](/machine/drivers/index.md).
+{: .important}
+
 ```none
 $ docker-machine create --driver virtualbox dev
 Creating CA: /home/username/.docker/machine/certs/ca.pem
