@@ -46,6 +46,7 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+        
   db:
     image: postgres:9.4
     volumes:
