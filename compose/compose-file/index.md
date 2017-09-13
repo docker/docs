@@ -33,28 +33,28 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 version: "3"
 services:
 
-redis:
-  image: redis:alpine
-  ports:
-    - "6379"
-  networks:
-    - frontend
-  deploy:
-    replicas: 2
-    update_config:
-      parallelism: 2
-      delay: 10s
-    restart_policy:
-      condition: on-failure
-db:
-  image: postgres:9.4
-  volumes:
-    - db-data:/var/lib/postgresql/data
-  networks:
-    - backend
-  deploy:
-    placement:
-      constraints: [node.role == manager]
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379"
+    networks:
+      - frontend
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 vote:
   image: dockersamples/examplevotingapp_vote:before
   ports:
@@ -561,7 +561,7 @@ networks:
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
 [docker service create](/engine/reference/commandline/service_create.md). For a
 quick list of all swarm related `docker` commands, see [Swarm mode CLI
-commands](/engine/swarm.md#swarm-mode-key-concepts-and-tutorial).  
+commands](/engine/swarm.md#swarm-mode-key-concepts-and-tutorial).
 
 To learn more about service discovery and networking in swarm mode, see
 [Configure service
