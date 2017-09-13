@@ -17,7 +17,7 @@ drivers](/machine/drivers/index.md).
 
 ## Example
 
-Here is an example of using the `--virtualbox` driver to create a machine.
+Here is an example of using the `--virtualbox` driver to create a machine called `dev`.
 
 ```none
 $ docker-machine create --driver virtualbox dev
