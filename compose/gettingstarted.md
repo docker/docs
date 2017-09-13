@@ -17,6 +17,8 @@ provided by Docker images.
 
 ## Step 1: Setup
 
+Define the application dependencies.
+
 1.  Create a directory for the project:
 
         $ mkdir composetest
@@ -45,9 +47,6 @@ provided by Docker images.
 
         flask
         redis
-
-   These define the application's dependencies.
-
 
 ## Step 2: Create a Dockerfile
 
@@ -132,12 +131,13 @@ Hub registry.
 
 2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
 
-    If you're using Docker natively on Linux, Docker for Mac, or Docker
-    for Windows, then the web app should now be listening on port 5000
-    on your Docker daemon host. Point your web browser to `http://localhost:5000` to find the `Hello World` message. If this
-    doesn't resolve, you can also try `http://0.0.0.0:5000`.
+    If you're using Docker natively on Linux, Docker for Mac, or Docker for
+    Windows, then the web app should now be listening on port 5000 on your
+    Docker daemon host. Point your web browser to `http://localhost:5000` to
+    find the `Hello World` message. If this doesn't resolve, you can also try
+    `http://0.0.0.0:5000`.
 
-    If you're using Docker Machine on a Mac, use `docker-machine ip
+    If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
     MACHINE_VM` to get the IP address of your Docker host. Then, open
     `http://MACHINE_VM_IP:5000` in a browser.
 
@@ -167,7 +167,7 @@ Hub registry.
     ```
     $ docker image ls
     REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
-    composetest_web   latest              e2c21aa48cc1        4 minutes ago       93.8MB
+    composetest_web         latest              e2c21aa48cc1        4 minutes ago       93.8MB
     python                  3.4-alpine          84e6077c7ab6        7 days ago          82.5MB
     redis                   alpine              9d8fa9aa0e5b        3 weeks ago         27.5MB
     ```

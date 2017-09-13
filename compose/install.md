@@ -103,33 +103,15 @@ target="_blank" class="_"}. Follow the instructions from the link, which involve
 running the `curl` command in your terminal to download the binaries. These step
 by step instructions are also included below.
 
-1.  Run this command to download Docker Compose, replacing
-`$dockerComposeVersion` with the specific version of Compose you want to use:
+1.  Run this command to download the latest version of Docker Compose:
 
     ```bash
-    sudo -i
-    curl -L
-https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname
--s`-`uname -m` -o /usr/local/bin/docker-compose
-    ```
-
-    For example, to download Compose version {{composeversion}}, the command
-    is:
-
-    ```bash
-    sudo -i
-    curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
     >
-    The above command is an _example_, and it may become out-of-date once
-    in a while. Always follow the command pattern shown above it. If
-    you cut-and-paste an example, check which release it specifies and,
-    if needed, replace `$dockerComposeVersion` with the release number that
-    you want. Compose releases are also available for direct download on
-    the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank"
-    class="_"}.
+    The above command is an _example_, and it may become out-of-date. To ensure you have the latest version, check the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
     {: .important}
 
     If you have problems installing with `curl`, see
@@ -149,7 +131,7 @@ https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker
     ```bash
     $ docker-compose --version
     docker-compose version {{composeversion}}, build 1719ceb
-    ```  
+    ```
 <hr>
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
