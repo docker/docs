@@ -156,13 +156,19 @@ Example : `swarm-exec docker plugin install --grant-all-permissions mavenugo/tes
 
 This tool internally makes use of docker global-mode service that runs a task on each of the nodes in the cluster. This task in turn executes your docker command. The global-mode service also guarantees that when a new node is added to the cluster or during upgrades, a new task is executed on that node and hence the docker command will be automatically executed.
 
-### Distributed Application Bundles
+### Docker Stack deployment
 
-To deploy complex multi-container apps, you can use [distributed application bundles](https://github.com/moby/moby/blob/master/experimental/docker-stacks-and-bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
+To deploy complex multi-container apps, you can use the `docker stack deploy` command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the `docker-compose.yml` file (for example using `scp`) to a manager node, SSH into the manager and then run `docker stack deploy` (if you have multiple managers, you have to ensure that your session is on one that has the stack file).
 
-A good sample app to test application bundles is the [Docker voting app](https://github.com/docker/example-voting-app).
+For example:
 
-By default, apps deployed with bundles do not have ports publicly exposed. Update port mappings for services, and Docker will automatically wire up the underlying platform load balancers:
+```bash
+docker stack deploy -f docker-compose.yml myapp
+```
+
+A good sample app to test deployment of stacks is the [Docker voting app](https://github.com/docker/example-voting-app).
+
+By default, apps deployed with stacks do not have ports publicly exposed. Update port mappings for services, and Docker will automatically wire up the underlying platform load balancers:
 
     docker service update --publish-add 80:80 <example-service>
 
