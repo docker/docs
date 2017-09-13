@@ -12,7 +12,7 @@ Then, with a single command, you create and start all the services
 from your configuration. To learn more about all the features of Compose
 see [the list of features](overview.md#features).
 
-Compose works in all environments: production, stating, development, testing, as
+Compose works in all environments: production, staging, development, testing, as
 well as CI workflows. You can learn more about each case in [Common Use
 Cases](overview.md#common-use-cases).
 
