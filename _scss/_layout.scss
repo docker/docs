@@ -23,7 +23,7 @@
 
 .header {
     animation: gradientswitch 80s infinite;
-    -webkit-animation: gradientswitch 80 sinfinite;
+    -webkit-animation: gradientswitch 80s infinite;
     height: $global-header-height;
     position: relative;
     z-index: 1;
