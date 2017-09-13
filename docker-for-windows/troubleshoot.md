@@ -334,8 +334,9 @@ machines. _This is tangential to using Docker for Windows_, but if you want to
 use Docker Machine to create multiple local VMs, or to provision remote
 machines, see the [Docker Machine](/machine/index.md) topics. We mention only
 mention this here in case someone is looking for information about Docker
-Machine on Windows, which requires that Hyper-V is enabled and an external
-network switch is active [as described in the Docker Macihne driver
+Machine on Windows, which requires that Hyper-V is enabled, an external network
+switch is active, and these are referenced in the flags for the `docker-machine
+create` command [as described in the Docker Machine driver
 example](/machine/drivers/hyper-v.md#example).
 
 ### Virtualization must be enabled
