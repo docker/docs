@@ -40,7 +40,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
        db:
          image: mysql:5.7
          volumes:
-           - db_data:/var/lib/mysql
+           - ./db_data:/var/lib/mysql
          restart: always
          environment:
            MYSQL_ROOT_PASSWORD: somewordpress
