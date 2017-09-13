@@ -10,6 +10,58 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.3
+
+(13 September 2017)
+
+**Bug fixes**
+
+* Core
+  * Node list will no longer show duplicated worker node entries.
+  * Volume mount options are no longer dropped when creating volumes.
+  * `docker stack deploy` with secrets specified in docker-compose file now works.
+* UI/UX
+  * Upgrade button is now greyed out and deacticated after initiating upgrade.
+  * If an error is encountered while creating a service, the UI no longer freezes.
+  * Upgrade notification fixed to have working link.
+  * "Default Role For All Private Collections" can now be updated. Updating this
+  role in the UI previously had no effect.
+  * Added notification to UI to show that an upgrade is in progress.
+  * Client bundle can now be downloaded with Safari browser.
+  * Windows nodes are no longer displayed in the DTR install UI.
+  * DTR settings state in UCP is now preserved when switching tabs. Previously,
+  un-saved state was lost when switching tabs.
+  * Fixed problem where first manager node may have IP address `0.0.0.0`,
+  causing dashboard to not update.
+  * UI for adding Windows nodes improved to include full join instructions.
+  * Node Task UI fixed. Displaying tasks for a node previously did not work.
+  * LDAP settings UI improved. Sync interval setting is now validated, a
+  never-ending update spinner been fixed and it's UI action sequencing bugs have
+  been fixed so that it's now possible to disable LDAP.
+  * Uploading Docker images in the UI now has better error messages and improved
+  validation.
+  * Containers removed in UI are now force-removed. Previously removing
+  containers would fail.
+  * DTR install instructions `--ucp-url` parameter fixed to have valid value.
+  * Deleting multiple users in succession fixed. Previously, an error would
+  result when deleting more than one user at a time.
+  * Added validation when adding DTR URL in UCP admin settings.
+  * Left-nav now shows resource counts, addressing an UI regression from UCP 2.1.
+
+**Known issues**
+
+ * Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+ instead of the correct image for the worker architecture.
+ * Agent container log is empty even though it's running correctly.
+ * Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.
+ * Attempting to load an (unsupported) `tar.gz` image results in a poor error
+ message.
+ * Searching for images in the UCP images UI doesn't work.
+ * Removing a stack may leave orphaned volumes.
+ * Storage metrics are not available for Windows.
+
+
 ## version 2.2.2
 
 (30 August 2017)
