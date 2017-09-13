@@ -15,6 +15,10 @@ information on how to use them, see [Machine
 drivers](/machine/drivers/index.md).
 {: .important}
 
+## Example
+
+Here is an example of using the `--virtualbox` driver to create a machine.
+
 ```none
 $ docker-machine create --driver virtualbox dev
 Creating CA: /home/username/.docker/machine/certs/ca.pem

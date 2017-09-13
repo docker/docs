@@ -147,4 +147,4 @@ To get started using `docker-machine` commands, see these topics:
 
 *  [Run containers and experiment with Machine commands](/machine/get-started.md#run-containers-and-experiment-with-machine-commands) and the introductory topics that follow
 
-* [Docker Machine commmand line reference](/machine/reference/index.md).
+* [Docker Machine commmand line reference](/machine/reference/index.md)
