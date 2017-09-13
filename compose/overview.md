@@ -7,14 +7,14 @@ title: Overview of Docker Compose
 >**Looking for Compose file reference?** [Find the latest version here](/compose/compose-file/index.md).
 
 Compose is a tool for defining and running multi-container Docker applications.
-With Compose, you use a Compose file to configure your application's services.
-Then, using a single command, you create and start all the services
+With Compose, you use a YAML file to configure your application's services.
+Then, with a single command, you create and start all the services
 from your configuration. To learn more about all the features of Compose
 see [the list of features](overview.md#features).
 
-Compose is great for development, testing, and staging environments, as well as
-CI workflows. You can learn more about each case in
-[Common Use Cases](overview.md#common-use-cases).
+Compose works in all environments: production, staging, development, testing, as
+well as CI workflows. You can learn more about each case in [Common Use
+Cases](overview.md#common-use-cases).
 
 Using Compose is basically a three-step process.
 
