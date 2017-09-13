@@ -34,7 +34,7 @@ You can see an example TOML config file that shows how to configure UCP
 settings. From the command line, run UCP with the `example-config` option:
 
 ```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
+$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config 
 ```
 
 ## Inspect and modify configurations
@@ -59,7 +59,7 @@ Use the `docker service update` command to remove the current configuration and
 apply the new configuration to the `ucp-agent` service.
 
 ```bash
-$ docker service update --config-rm $CURRENT_CONFIG_NAME --config-add source=<name>,target=/etc/ucp/ucp.toml
+$ docker service update --config-rm $CURRENT_CONFIG_NAME --config-add source=<name>,target=/etc/ucp/ucp.toml ucp-agent
 ```
 
 
