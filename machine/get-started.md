@@ -126,7 +126,7 @@ choose another name for this new machine.
 
     * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 
-    * On Docker for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md). (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    * On Docker for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](/machine/drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 
             $ docker-machine create --driver virtualbox default
             Running pre-create checks...

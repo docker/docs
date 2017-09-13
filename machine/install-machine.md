@@ -94,12 +94,20 @@ To uninstall Docker Machine:
 
     To remove each machine individually: `docker-machine rm <machine-name>`
 
-    To remove all machines: `docker-machine rm -f $(docker-machine ls -q)`
+    To remove all machines: `docker-machine rm -f $(docker-machine ls -q)` (you might need to use `-force` on Windows)
 
   Removing machines is an optional step because there are cases where you might
   want to save and migrate existing machines to a [Docker for
   Mac](/docker-for-mac/index.md) or [Docker for
   Windows](/docker-for-windows/index.md) environment, for example.
+
+>**Note**: As a point of information, the `config.json`, certificates,
+and other data related to each virtual machine created by `docker-machine`
+is stored in `~/.docker/machine/machines/` on Mac and Linux and in
+`~\.docker\machine\machines\` on Windows. We recommend that you do not edit or
+remove those files directly as this will only affect information for the Docker
+CLI, not the actual VMs, regardless of whether they are local or on remote
+servers.
 
 ## Where to go next
 

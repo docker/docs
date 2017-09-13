@@ -134,3 +134,17 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
     docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
     docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
     ```
+
+## Where to go next
+
+As a point of interest, the virtual machines you create with the
+[`docker-machine create`](/machine/reference/create.md) command show up in the
+Hyper-V Manager under "Virtual Machines", but you need to manage them with
+[`docker-machine`](/machine/reference/index.md) commands not through the Hyper-V
+Manager.
+
+To get started using `docker-machine` commands, see these topics:
+
+*  [Run containers and experiment with Machine commands](/machine/get-started.md#run-containers-and-experiment-with-machine-commands) and the introductory topics that follow
+
+* [Docker Machine commmand line reference](/machine/reference/index.md)
