@@ -118,33 +118,35 @@ Virtual Box VM, it maintains its configuration between uses.
 
     The terminal does a number of things to set up Docker Quickstart Terminal for you.
 
-        Last login: Sat Jul 11 20:09:45 on ttys002
-        bash '/Applications/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
-        Get http:///var/run/docker.sock/v1.19/images/json?all=1&filters=%7B%22dangling%22%3A%5B%22true%22%5D%7D: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
-        Get http:///var/run/docker.sock/v1.19/images/json?all=1: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
-        -bash: lolcat: command not found
+    ```
+    Last login: Sat Jul 11 20:09:45 on ttys002
+    bash '/Applications/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
+    Get http:///var/run/docker.sock/v1.19/images/json?all=1&filters=%7B%22dangling%22%3A%5B%22true%22%5D%7D: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
+    Get http:///var/run/docker.sock/v1.19/images/json?all=1: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
+    -bash: lolcat: command not found
 
-        mary at meepers in ~
-        $ bash '/Applications/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
-        Creating Machine dev...
-        Creating VirtualBox VM...
-        Creating SSH key...
-        Starting VirtualBox VM...
-        Starting VM...
-        To see how to connect Docker to this machine, run: docker-machine env dev
-        Starting machine dev...
-        Setting environment variables for machine dev...
+    mary at meepers in ~
+    $ bash '/Applications/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
+    Creating Machine dev...
+    Creating VirtualBox VM...
+    Creating SSH key...
+    Starting VirtualBox VM...
+    Starting VM...
+    To see how to connect Docker to this machine, run: docker-machine env dev
+    Starting machine dev...
+    Setting environment variables for machine dev...
 
-                                ##         .
-                          ## ## ##        ==
-                       ## ## ## ## ##    ===
-                   /"""""""""""""""""\___/ ===
-              ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
-                   \______ o           __/
-                     \    \         __/
-                      \____\_______/
+                            ##         .
+                      ## ## ##        ==
+                   ## ## ## ## ##    ===
+               /"""""""""""""""""\___/ ===
+          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+               \______ o           __/
+                 \    \         __/
+                  \____\_______/
 
-        The Docker Quick Start Terminal is configured to use Docker with the "default" VM.
+    The Docker Quick Start Terminal is configured to use Docker with the "default" VM.
+    ```
 
 3.  Click your mouse in the terminal window to make it active.
 
@@ -189,6 +191,39 @@ Virtual Box VM, it maintains its configuration between uses.
 
         For more examples and ideas, visit:
         https://docs.docker.com/userguide/
+
+## Optional: Add shared directories
+
+By default, Toolbox only has access to the `/Users` directory and mounts it into
+the VMs at `/Users`. If your project lives elsewhere or needs access to other
+directories on the host filesystem, you can add them.
+
+### Use the VirtualBox GUI
+
+You can configure shared folders in the VirtualBox UI.
+
+1.  Open the VirtualBox UI.
+2.  Click the **Settings** gear, then go to **Shared Folders**.
+3.  Click any existing listing under **Machine Folders** and click the **+**
+    icon. Choose the **Folder Path** on the host, the **Folder Name** for within the
+    VM, and configure any additional options you need. Chooose **Automount** if you want
+    the folder to automatically be mounted into the VM, and choose
+    **Make Permanent** for it to be considered a permanently shared folder.
+4.  Click **OK**. Click **OK** again to exit the Settings dialog.
+
+### Use the command line
+
+You can configure shared folders using a command like the following:
+
+```bash
+$ mount -t vboxsf -o uid=1000,gid=50 your-other-share-name /some/mount/location
+```
+
+This command mounts `/some/mount/location` into the VM at `/your-other-share-hame`,
+owned by UID 1000 and GID 50.
+
+> **Note**: The autommount and permanent mount options are not supported using
+> the command line.
 
 ## How to uninstall Toolbox
 
