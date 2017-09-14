@@ -73,7 +73,7 @@ To verify your machine meets these requirements, do the following:
     <br>
     **For Windows 7**
 
-    Run the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592) and follow the on-screen instructions.
+    Run a tool like the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592){: target="_blank" class="_"} or [Speccy](https://www.piriform.com/speccy){: target="_blank" class="_"}, and follow the on-screen instructions.
     <br><br>
 3. Verify your Windows OS is 64-bit (x64)
 
@@ -201,13 +201,23 @@ If your project lives elsewhere or needs access to other
 directories on the host filesystem, you can add them, using the VirtualBox UI.
 
 1.  Open the VirtualBox UI.
+
 2.  Click the **Settings** gear, then go to **Shared Folders**.
-3.  Click any existing listing under **Machine Folders** and click the **+**
-    icon. Choose the **Folder Path** on the host, the **Folder Name** for within the
-    VM, and configure any additional options you need. Chooose **Automount** if you want
-    the folder to automatically be mounted into the VM, and choose
-    **Make Permanent** for it to be considered a permanently shared folder.
-4.  Click **OK**. Click **OK** again to exit the Settings dialog.
+
+3.  Select any existing listing under **Machine Folders**, then
+    click the **+** icon.
+
+    * Choose the **Folder Path** on the host, enter the **Folder Name**
+      for within the VM (or take the default, which is the same name
+      as on the host), and configure any additional options you need.
+
+    * Choose **Auto-mount** if you want the folder to automatically
+      be mounted into the VM, and choose **Make Permanent** for it
+      to be considered a permanently shared folder.
+
+4.  Click **OK** to add the new folder to the Shared Folders list.
+
+5.  Click **OK** again to save your changes and exit the Settings dialog.
 
 
 ## How to uninstall Toolbox
