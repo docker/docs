@@ -219,7 +219,6 @@ directories on the host filesystem, you can add them, using the VirtualBox UI.
 
 5.  Click **OK** again to save your changes and exit the Settings dialog.
 
-
 ## How to uninstall Toolbox
 
 Removing Toolbox involves removing all the Docker components it includes.
