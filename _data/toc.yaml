@@ -1472,8 +1472,6 @@ manuals:
         title: Create and manage users
       - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-teams/
         title: Create and manage teams
-      - path: /datacenter/ucp/2.2/guides/access-control/deploy-stack-to-collection/
-        title: Deploy stack resources to a collection
       - path: /datacenter/ucp/2.2/guides/access-control/deploy-view-only-service/
         title: Deploy a service with view-only access across an organization
       - path: /datacenter/ucp/2.2/guides/access-control/grant-permissions/
@@ -1512,6 +1510,8 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/2.2/guides/user/services/deploy-app-cli/
           title: Deploy an app from the CLI
+        - path: /datacenter/ucp/2.2/guides/user/services/deploy-stack-to-collection/
+          title: Deploy application resources to a collection
       - sectiontitle: Secrets
         section:
         - path: /datacenter/ucp/2.2/guides/user/secrets/
