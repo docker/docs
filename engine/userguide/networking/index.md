@@ -40,7 +40,6 @@ network by default. You can see this bridge as part of a host's network stack by
 using the `ip addr show` command (or short form, `ip a`) on the host. (The
 `ifconfig` command is deprecated. It may also work or give you a `command not
 found` error, depending on your system.)
-
 ```bash
 $ ip addr show
 
@@ -53,6 +52,16 @@ docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
           collisions:0 txqueuelen:0
           RX bytes:1100 (1.1 KB)  TX bytes:648 (648.0 B)
 ```
+> Running on Docker for Mac or Docker for Windows?
+>
+> If you are using Docker for Mac or Docker for Windows, the
+`docker network ls` command will work as described above, but the
+`ifconfig` and `ip addr show` commands will give you information
+about the IP addresses for your local host, not Docker node networks.
+To use these commands to browse Docker networks, log on to a
+[Docker machine](/machine/overview.md) such as a local VM or
+cloud provider such as a [Docker machine on AWS](/machine/examples/aws.md)
+or a  [Docker machine on Digital Ocean](/machine/examples/ocean.md).
 
 > Running on Docker for Mac or Docker for Windows?
 >
