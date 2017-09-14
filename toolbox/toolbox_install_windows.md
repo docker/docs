@@ -73,7 +73,7 @@ To verify your machine meets these requirements, do the following:
     <br>
     **For Windows 7**
 
-    Run the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592) and follow the on-screen instructions.
+    Run a tool like the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592){: target="_blank" class="_"} or [Speccy](https://www.piriform.com/speccy){: target="_blank" class="_"}, and follow the on-screen instructions.
     <br><br>
 3. Verify your Windows OS is 64-bit (x64)
 
@@ -190,6 +190,34 @@ Typically, the above steps work out-of-the-box, but some scenarios can cause pro
 A Windows specific problem you might encounter has to do with the NDIS6 host network filter driver, which is known to cause issues on some Windows
 versions. For Windows Vista systems and newer, VirtualBox installs NDIS6 driver by default. Issues can range from system slowdowns to networking problems for the virtual machine (VM). If you notice problems, **re-run the Docker Toolbox installer**, and select the option to _**install VirtualBox with the NDIS5 driver**_.
 
+## Optional: Add shared directories
+
+By default, Toolbox only has access to the `C:\Users` directory and mounts it into
+the VMs at `/c/Users`.
+
+> **Note**: Within the VM path, `c` is lowercase and the `Users` is capitalized.
+
+If your project lives elsewhere or needs access to other
+directories on the host filesystem, you can add them, using the VirtualBox UI.
+
+1.  Open the VirtualBox UI.
+
+2.  Click the **Settings** gear, then go to **Shared Folders**.
+
+3.  Select any existing listing under **Machine Folders**, then
+    click the **+** icon.
+
+    * Choose the **Folder Path** on the host, enter the **Folder Name**
+      for within the VM (or take the default, which is the same name
+      as on the host), and configure any additional options you need.
+
+    * Choose **Auto-mount** if you want the folder to automatically
+      be mounted into the VM, and choose **Make Permanent** for it
+      to be considered a permanently shared folder.
+
+4.  Click **OK** to add the new folder to the Shared Folders list.
+
+5.  Click **OK** again to save your changes and exit the Settings dialog.
 
 ## How to uninstall Toolbox
 
