@@ -1622,6 +1622,12 @@ services:
       - type: bind
         source: ./static
         target: /opt/app/static
+        
+networks:
+  webnet:
+
+volumes:
+  mydata:
 ```
 
 > **Note:** The long syntax is new in v3.2
