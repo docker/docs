@@ -1,6 +1,6 @@
 ---
 description: Basic workflow for Docker contributions
-keywords: contribute, pull request, review, workflow, beginner, squash,  commit
+keywords: contribute, pull request, review, workflow, beginner, squash, commit
 title: Work on your issue
 ---
 
@@ -24,7 +24,7 @@ Follow this workflow as you work:
 
 2. Make changes in your feature branch.
 
-    Your feature branch you created in the last section. Here you use the
+    Your feature branch is created in the last section. Here you use the
     development container. If you are making a code change, you can mount your
     source into a development container and iterate that way. For documentation
     alone, you can work on your local host.
