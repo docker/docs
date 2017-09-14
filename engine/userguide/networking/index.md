@@ -35,12 +35,12 @@ your container should connect to.
 
 The `bridge` network represents the `docker0` network present in all Docker
 installations. Unless you specify otherwise with the `docker run
---network=<NETWORK>` option, the Docker daemon connects containers to this network
-by default. You can see this bridge as part of a host's network stack by using
-the `ifconfig` command on the host.
+--network=<NETWORK>` option, the Docker daemon connects containers to this
+network by default. You can see this bridge as part of a host's network stack by
+using the `ip addr show` command (or short form, `ip a`) on the host. The `ifconfig` command is deprecated, but may also work, depending on your system.
 
 ```bash
-$ ifconfig
+$ ip addr show
 
 docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
           inet addr:172.17.0.1  Bcast:0.0.0.0  Mask:255.255.0.0
@@ -51,6 +51,16 @@ docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
           collisions:0 txqueuelen:0
           RX bytes:1100 (1.1 KB)  TX bytes:648 (648.0 B)
 ```
+> Running on Docker for Mac or Docker for Windows?
+>
+> If you are using Docker for Mac or Docker for Windows, the
+`docker network ls` command will work as described above, but the
+`ifconfig` and `ip addr show` commands will give you information
+about the IP addresses for your local host, not Docker node networks. 
+To use these commands to browse Docker networks, log on to a
+[Docker machine](/machine/overview.md) such as a local VM or
+cloud provider such as a [Docker machine on AWS](/machine/examples/aws.md)
+or a  [Docker machine on Digital Ocean](/machine/examples/ocean.md).
 
 The `none` network adds a container to a container-specific network stack. That
 container lacks a network interface. Attaching to such a container and looking
