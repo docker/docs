@@ -27,11 +27,12 @@ repositories. Three permission levels are available:
 | View/ browse          |  x   |     x      |   x   |
 | Pull                  |  x   |     x      |   x   |
 | Push                  |      |     x      |   x   |
+| Start a scan          |      |     x      |   x   |
 | Delete tags           |      |     x      |   x   |
 | Edit description      |      |            |   x   |
 | Set public or private |      |            |   x   |
 | Manage user access    |      |            |   x   |
-| Delete repository     |      |            |       |
+| Delete repository     |      |            |   x   |
 
 Team permissions are additive. When a user is a member of multiple teams, they
 have the highest permission level defined by those teams.
@@ -46,7 +47,7 @@ repositories.
 * Team member: Everything a user can do, plus the permissions granted by the teams the user is member of.
 * Team admin: Everything a team member can do, and can also add members to the team.
 * Organization admin: Everything a team admin can do, can create new teams, and add members to the organization.
-* DDC admin: Can manage anything across UCP and DTR.
+* Admin: Can manage anything across UCP and DTR.
 
 ## Where to go next
 
