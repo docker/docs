@@ -56,7 +56,7 @@ docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
 
 > Running on Docker for Mac or Docker for Windows?
 >
-> If you are using Docker for Mac (or runnin Linux containers on Docker for Windows), the
+> If you are using Docker for Mac (or running Linux containers on Docker for Windows), the
 `docker network ls` command will work as described above, but the
 `ip addr show` and `ifconfig` commands may be present, but will give you information about
 the IP addresses for your local host, not Docker container networks.
