@@ -259,13 +259,13 @@ When you change a documentation source file, you should test your change
 locally to make sure your content is there and any links work correctly. You
 can build the documentation from the local host.
 
-### Building the docs for docs.docker.com
+### Build the docs for docs.docker.com
 
 You can build the docs using a Docker container or by using Jekyll directly.
 Using the Docker container requires no set-up but is slower. Using Jekyll
 directly requires you to install some prerequisites, but is faster on each build.
 
-#### Using Docker Compose
+#### Use Docker Compose
 
 The easiest way to build the docs locally on macOS, Windows, or Linux is to use
 `docker-compose`. If you have not yet installed `docker-compose`,
@@ -295,7 +295,7 @@ To start the container again, use the following command:
 $ docker-compose start docs
 ```
 
-#### Using Jekyll directly
+#### Use Jekyll directly
 
 If for some reason you are unable to use Docker Compose, you can use Jekyll directly.
 
@@ -341,7 +341,7 @@ Review your documentation changes on the local or Github Pages site. When you
 are satisfied with your changes, submit your pull request.
 
 
-### Reviewing the reference docs for your project
+### Review the reference docs for your project
 
 Some projects, such as Docker Engine, maintain reference documents, such as man
 pages, CLI command references, and API endpoint references. These files are
