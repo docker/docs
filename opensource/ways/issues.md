@@ -26,7 +26,7 @@ Docker users and contributors create new issues if they want to:
 
 Follow these steps:
 
-1. Sign up for a <a href="https://github.com" target="_blank">Github account</a>.
+1. Sign up for a [Github account](https://github.com).
 
 2. Visit a Docker repository and press the **Watch** button.
 
@@ -35,17 +35,18 @@ Follow these steps:
 
    | Repository | Description |
    |----------  |-------------|
-   | [docker/docker](https://github.com/moby/moby) | Docker is the open-source application container engine. |
+   | [moby/moby](https://github.com/moby/moby) | Moby is the open-source application container engine, not including the API or CLI. |
+   | [docker/cli](https://github.com/docker/cli) | Docker API and CLI source code and documentation generation scripts. |
    | [docker/machine](https://github.com/docker/machine) | Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center. |
    | [kitematic/kitematic](https://github.com/kitematic/kitematic) | Kitematic is a simple application for managing Docker containers on macOS and Windows. |
-   | [docker/swarm](https://github.com/docker/swarm) | Native clustering for Docker; manage several Docker hosts as a single, virtual host. |
+   | [docker/swarmkit](https://github.com/docker/swarmkit) | Orchestration for Docker. Deploy services and stacks (declarative definitions of groups of containers) to a cluster of Docker hosts. |
    | [docker/compose](https://github.com/docker/compose) | Define and run complex applications using one or many interlinked containers. |
 
-   See <a href="https://github.com/docker" target="_blank">the complete list of Docker repositories</a> on GitHub.
+   See [the complete list of Docker repositories](https://github.com/docke) on GitHub.
 
 3. Choose an issue from the [list of untriaged issues](https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+-label%3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%2Ffeature).
 
-4. Follow <a href="https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md" target="_blank">the triage process</a> to triage the issue.
+4. Follow [the triage process](https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md) to triage the issue.
 
    The triage process asks you to add both a `kind/` and a `exp/` label to each
    issue. Because you are not a Docker maintainer, you add these through comments.
@@ -54,7 +55,6 @@ Follow these steps:
    ![Example](../images/triage-label.png)
 
    For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
-   beginner writing task. For descriptions of valid labels, see <a
-   href="https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md">the triage process</a>.
+   beginner writing task. For descriptions of valid labels, see [the triage process](https://github.com/moby/moby/blob/master/project/ISSUE-TRIAGE.md).
 
 5. Triage another issue.
