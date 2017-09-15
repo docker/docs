@@ -54,49 +54,58 @@ need to update your pull request with additional changes.
 
 To update your existing pull request:
 
-1. Checkout the PR branch in your local repository.
+1.  Checkout the PR branch in your local repository.
 
     This is the branch associated with your request.
 
-2. Change one or more files and then stage your changes.
+2.  Change one or more files and then stage your changes.
 
     The command syntax is:
+    
+    ```bash
+    $ git add <path_or_filename>
+    ```
 
-    	  git add <path_or_filename>
+3.  Commit the change.
 
-3. Commit the change.
-
-    	  $ git commit --amend
+    ```bash
+    $ git commit --amend
+    ```
 
     Git opens an editor containing your last commit message.
 
-4. Adjust your last comment to reflect this new change.
+4.  Adjust your last comment to reflect this new change.
 
-        Added a new sentence per Anaud's suggestion
+    ```none
 
-        Signed-off-by: Mary Anthony <mary@docker.com>
+    Added a new sentence per Anaud's suggestion
 
-        # Please enter the commit message for your changes. Lines starting
-        # with '#' will be ignored, and an empty message aborts the commit.
-        # On branch 11038-fix-rhel-link
-        # Your branch is up-to-date with 'origin/11038-fix-rhel-link'.
-        #
-        # Changes to be committed:
-        #		modified:   docs/installation/mac.md
-        #		modified:   docs/installation/rhel.md
+    Signed-off-by: Mary Anthony <mary@docker.com>
 
-5. Force-push the change to your origin.
+    # Please enter the commit message for your changes. Lines starting
+    # with '#' will be ignored, and an empty message aborts the commit.
+    # On branch 11038-fix-rhel-link
+    # Your branch is up-to-date with 'origin/11038-fix-rhel-link'.
+    #
+    # Changes to be committed:
+    #		modified:   docs/installation/mac.md
+    #		modified:   docs/installation/rhel.md
+    ```
+
+5.  Force-push the change to your origin.
 
     Force-pushing is necessary because you amended your commit, and effectively
     changed history. The command syntax is:
+    
+    ```bash
+    $ git push -f origin <branch_name>
+    ```
 
-        git push -f origin <branch_name>
-
-6. Open your browser to your pull request on GitHub.
+6.  Open your browser to your pull request on GitHub.
 
     You should see your pull request now contains your newly pushed code.
 
-7. Add a comment to your pull request.
+7.  Add a comment to your pull request.
 
     GitHub only notifies PR participants when you comment. For example, you can
     mention that you updated your PR. Your comment alerts the maintainers that
@@ -114,11 +123,11 @@ It can take time to see a merged pull request in Docker's official release.
 A master build is available almost immediately though. Docker builds and
 updates its development binaries after each merge to `master`.
 
-1. Browse to [https://master.dockerproject.org/](https://master.dockerproject.org/){: target="_blank" class="_"}.
+1.  Browse to [https://master.dockerproject.org/](https://master.dockerproject.org/){: target="_blank" class="_"}.
 
-2. Look for the binary appropriate to your system.
+2.  Look for the binary appropriate to your system.
 
-3. Download and run the binary.
+3.  Download and run the binary.
 
     You might want to run the binary in a container though. This
     will keep your local host environment clean.
