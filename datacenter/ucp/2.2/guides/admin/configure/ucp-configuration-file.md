@@ -28,38 +28,41 @@ The configuration has a versioned naming convention, with a trailing decimal
 number that increases with each version, like `com.docker.ucp.config-1`. The
 `ucp-agent` service maps the configuration to the file at `/etc/ucp/ucp.toml`.
 
-## Example configuration file
-
-You can see an example TOML config file that shows how to configure UCP
-settings. From the command line, run UCP with the `example-config` option:
-
-```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config 
-```
-
-## Inspect and modify configurations
+## Inspect and modify existing configuration
 
 Use the `docker config inspect` command to view the current settings and emit
 them to a file.
 
 ```bash
 {% raw %}
-$ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
+# CURRENT_CONFIG_NAME will be the name of the currently active UCP configuration
+CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}')
+# Collect the current config with `docker config inspect`
+docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
 {% endraw %}
 ```
 
-Use the `docker config create` command to read the settings that are specified
-in a TOML file and create a new configuration.   
+Edit the file, then use the `docker config create` and `docker service update`
+commands to create and apply the configuration from the file.
+
 
 ```bash
-$ docker config create <name>  <ucp-config.toml>
+# NEXT_CONFIG_NAME will be the name of the new UCP configuration
+NEXT_CONFIG_NAME=${CURRENT_CONFIG_NAME%%-*}-$((${CURRENT_CONFIG_NAME##*-}+1))
+# Create the new swarm configuration from the file ucp-config.toml
+docker config create $NEXT_CONFIG_NAME  ucp-config.toml
+# Use the `docker service update` command to remove the current configuration
+# and apply the new configuration to the `ucp-agent` service.
+docker service update --config-rm $CURRENT_CONFIG_NAME --config-add source=$NEXT_CONFIG_NAME,target=/etc/ucp/ucp.toml ucp-agent
 ```
 
-Use the `docker service update` command to remove the current configuration and
-apply the new configuration to the `ucp-agent` service.
+## Example configuration file
+
+You can see an example TOML config file that shows how to configure UCP
+settings. From the command line, run UCP with the `example-config` option:
 
 ```bash
-$ docker service update --config-rm $CURRENT_CONFIG_NAME --config-add source=<name>,target=/etc/ucp/ucp.toml ucp-agent
+$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
 ```
 
 
