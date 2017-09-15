@@ -35,7 +35,7 @@ Follow these steps:
 
    | Repository | Description |
    |----------  |-------------|
-   | [docker/docker](https://github.com/moby/moby) | Docker the open-source application container engine |
+   | [docker/docker](https://github.com/moby/moby) | Docker is the open-source application container engine. |
    | [docker/machine](https://github.com/docker/machine) | Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center. |
    | [kitematic/kitematic](https://github.com/kitematic/kitematic) | Kitematic is a simple application for managing Docker containers on macOS and Windows. |
    | [docker/swarm](https://github.com/docker/swarm) | Native clustering for Docker; manage several Docker hosts as a single, virtual host. |
