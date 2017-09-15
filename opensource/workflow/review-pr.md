@@ -1,6 +1,6 @@
 ---
 description: Basic workflow for Docker contributions
-keywords: contribute, pull request, review, workflow, beginner, squash,  commit
+keywords: contribute, pull request, review, workflow, beginner, squash, commit
 title: Participate in the PR review
 ---
 
@@ -9,7 +9,7 @@ point, your code is reviewed both by our continuous integration (CI) systems and
 by our maintainers.
 
 The CI system is an automated system. The maintainers are human beings that also
-work on Docker.  You need to understand and work with both the "bots" and the
+work on Docker. You need to understand and work with both the "bots" and the
 "beings" to review your contribution.
 
 > **Note**: These guidelines apply to Docker code submissions. If you want to
@@ -62,11 +62,11 @@ To update your existing pull request:
 
     The command syntax is:
 
-    	git add <path_or_filename>
+    	  git add <path_or_filename>
 
 3. Commit the change.
 
-    	$ git commit --amend
+    	  $ git commit --amend
 
     Git opens an editor containing your last commit message.
 
