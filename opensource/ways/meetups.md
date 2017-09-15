@@ -5,7 +5,7 @@ title: Organize a Docker meetup
 ---
 
 Anyone interested in Docker can become an active member of the Docker community
-by becoming co-organizer of a Docker Meetup group.
+by becoming a co-organizer of a Docker Meetup group.
 
 If a Meetup group does not already exist in your area and you are willing to
 start a new one, the best way to proceed is to contact us so that we can create
@@ -21,7 +21,7 @@ Meetup Groups page to make sure a group does not already exist in the area.
 
 ## Get started putting on a Docker Meetup
 
-Now that you are co-organizer of a Docker Meetup Group, here are a few tips and
+Now that you are a co-organizer of a Docker Meetup Group, here are a few tips and
 suggestions to help you get started:
 
 * Attend similar DevOps or Developers Meetups to gain experience and gauge interest in Docker
