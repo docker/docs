@@ -1,6 +1,6 @@
 ---
 description: Explains workflows for refactor and design proposals
-keywords: contribute, project, design, refactor,  proposal
+keywords: contribute, project, design, refactor, proposal
 title: Advanced contributing
 ---
 
@@ -78,7 +78,7 @@ The following provides greater detail on the process:
 
 5. Create a new Markdown file in the area you wish to change.
 
-    For example, if you want to redesign our daemon create a new file under the
+    For example, if you want to redesign our daemon, create a new file under the
     `daemon/` folder.
 
 6. Name the file descriptively, for example `redesign-daemon-proposal.md`.
