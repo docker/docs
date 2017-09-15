@@ -66,8 +66,6 @@ the new policy to your existing role by following the instructions
 
 9.  On the **Permissions** tab, click **+ Add an inline policy**.
 
-10.  On the next page, click **Custom Policy** and click **Select**.
-
 11. On the next page, click **Custom Policy** and click **Select**.
 
 12. On the **Policy Editor** page that appears, give the policy a name like `dockercloud-swarm-policy`.
