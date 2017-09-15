@@ -1510,6 +1510,8 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/2.2/guides/user/services/deploy-app-cli/
           title: Deploy an app from the CLI
+        - path: /datacenter/ucp/2.2/guides/user/services/deploy-stack-to-collection/
+          title: Deploy application resources to a collection
       - sectiontitle: Secrets
         section:
         - path: /datacenter/ucp/2.2/guides/user/secrets/
