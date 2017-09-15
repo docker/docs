@@ -24,7 +24,7 @@ program code and documentation code.
 
 * Update the documentation when creating or modifying features.
 
-* Commits that fix or close an issue should reference them in the commit message
+* Commits that fix or close an issue should reference it in the commit message
   `Closes #XXXX` or `Fixes #XXXX`. Mentions help by automatically closing the
   issue on a merge.
 
