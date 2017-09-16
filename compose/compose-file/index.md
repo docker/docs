@@ -46,7 +46,7 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-        
+
   db:
     image: postgres:9.4
     volumes:
@@ -650,8 +650,12 @@ Configures resource constraints. This replaces the older resource constraint
 options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`).
 
-Each of these is a single value, analogous to its
-[docker service create](/engine/reference/commandline/service_create.md) counterpart.
+Each of these is a single value, analogous to its [docker service
+create](/engine/reference/commandline/service_create.md) counterpart.
+
+In this general example, the `redis` service is constrained to use no more than
+50M of memory and `0.001` (0.1%) of available processing time (CPU), and has
+`20M` of memory and `0.0001` CPU time reserved (as always available to it).
 
 ```none
 version: '3'
@@ -667,6 +671,20 @@ services:
           cpus: '0.0001'
           memory: 20M
 ```
+
+The topics below describe available options to set resource constraints on
+services or containers in a swarm.
+
+> Looking for options to set resources on non swarm mode containers?
+>
+> The options described here are specific to the
+`deploy` key and swarm mode. If you want to set resource constraints
+on non swarm deployments, use
+[Compose file format version 2 CPU, memory, and other resource
+options](#cpucount-cpupercent-cpushares-cpuquota-cpus-cpuset-domainname-hostname-ipc-macaddress-memlimit-memswaplimit-memswappiness-memreservation-oomscoreadj-privileged-readonly-shmsize-stdinopen-tty-user-workingdir).
+If you have further questions, please refer to the discussion on the GitHub
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513).
+{: .important}
 
 ##### Out Of Memory Exceptions (OOME)
 
