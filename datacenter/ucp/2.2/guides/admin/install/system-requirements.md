@@ -35,6 +35,7 @@ When installing UCP on a host, make sure the following ports are open:
 
 | Hosts             | Direction | Port                    | Purpose                                                                           |
 |:------------------|:---------:|:------------------------|:----------------------------------------------------------------------------------|
+| managers, workers |  in, out  | IP Protocol 50 (ESP)    | Protocol used for encrypted overlay networks                                      |
 | managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
 | managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
 | managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
