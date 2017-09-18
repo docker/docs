@@ -22,6 +22,13 @@ all nodes must have:
 For highly-available installations, you also need a way to transfer files
 between hosts.
 
+> Workloads on manager nodes
+>
+> These requirements assume that manager nodes won't run regular workloads.
+> If you plan to run additional workloads on manager nodes, you may need to 
+> provision more powerful nodes. If manager nodes become overloaded, the 
+> swarm may experience issues.
+
 ## Ports used
 
 When installing UCP on a host, make sure the following ports are open:
