@@ -681,9 +681,9 @@ services or containers in a swarm.
 `deploy` key and swarm mode. If you want to set resource constraints
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource
-options](#cpucount-cpupercent-cpushares-cpuquota-cpus-cpuset-domainname-hostname-ipc-macaddress-memlimit-memswaplimit-memswappiness-memreservation-oomscoreadj-privileged-readonly-shmsize-stdinopen-tty-user-workingdir).
+options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, please refer to the discussion on the GitHub
-issue [docker/compose/4513](https://github.com/docker/compose/issues/4513).
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
 {: .important}
 
 ##### Out Of Memory Exceptions (OOME)
