@@ -4,7 +4,7 @@ keywords: development, inception, container, image Dockerfile, dependencies, Go,
 title: Build and test Docker on Windows
 ---
 
-This page explains how to get the software you need to build, test and run the Docker source code for Windows and setup the required software and services:
+This page explains how to get the software you need to build, test, and run the Docker source code for Windows and setup the required software and services:
 
 - Windows containers
 - GitHub account
