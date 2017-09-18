@@ -324,7 +324,7 @@ docker image rm <image id>
 ```shell
 $ docker run -p 4000:80 john/get-started:part1
 Unable to find image 'john/get-started:part1' locally
-part1: Pulling from orangesnap/get-started
+part1: Pulling from john/get-started
 10a267c67f42: Already exists
 f68a39a6a5e4: Already exists
 9beaffc0cf19: Already exists
