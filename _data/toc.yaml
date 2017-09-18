@@ -243,39 +243,45 @@ guides:
           title: Overview
         - path: /develop/sdk/examples/
           title: SDK and API examples
-
 - sectiontitle: Configure networking
   section:
-  - path: /engine/userguide/networking/
-    title: Docker container networking
-  - path: /engine/userguide/networking/work-with-networks/
-    title: Work with network commands
-  - path: /engine/swarm/networking/
-    title: Manage swarm service networks
-  - path: /engine/userguide/networking/overlay-standalone-swarm/
-    title: Multi-host networking with standalone swarms
-  - path: /engine/userguide/networking/get-started-macvlan/
-    title: Get started with macvlan network driver
-  - path: /engine/userguide/networking/overlay-security-model/
-    title: Swarm mode overlay network security model
-  - path: /engine/userguide/networking/configure-dns/
-    title: Configure container DNS in user-defined networks
-  - sectiontitle: Default bridge network
-    section:
-    - path: /engine/userguide/networking/default_network/dockerlinks/
-      title: Legacy container links
-    - path: /engine/userguide/networking/default_network/binding/
-      title: Bind container ports to the host
-    - path: /engine/userguide/networking/default_network/build-bridges/
-      title: Build your own bridge
-    - path: /engine/userguide/networking/default_network/configure-dns/
-      title: Configure container DNS
-    - path: /engine/userguide/networking/default_network/custom-docker0/
-      title: Customize the docker0 bridge
-    - path: /engine/userguide/networking/default_network/container-communication/
-      title: Understand container communication
-    - path: /engine/userguide/networking/default_network/ipv6/
-      title: IPv6 with Docker
+    - path: /network/
+      title: Networking overview
+    - path: /network/bridge/
+      title: Use bridge networks
+    - path: /network/overlay/
+      title: Use overlay networks
+    - path: /network/host/
+      title: Use host networking
+    - path: /network/macvlan/
+      title: Use Macvlan networks
+    - path: /network/none/
+      title: Disable networking for a container
+    - sectiontitle: Networking tutorials
+      section:
+      - path: /network/network-tutorial-standalone/
+        title: Bridge network tutorial
+      - path: /network/network-tutorial-host/
+        title: Host networking tutorial
+      - path: /network/network-tutorial-overlay/
+        title: Overlay networking tutorial
+      - path: /network/network-tutorial-macvlan/
+        title: Macvlan network tutorial
+    - sectiontitle: Configure the daemon and containers
+      section:
+      - path: /config/daemon/ipv6/
+        title: Configure the daemon for IPv6
+      - path: /network/iptables/
+        title: Docker and iptables
+      - path: /config/containers/container-networking/
+        title: Container networking
+    - sectiontitle: Legacy networking content
+      section:
+      - path: /network/links/
+        title: (Legacy) Container links
+      - path: /network/overlay-standalone.swarm/
+        title: Overlay networks for Swarm Classic
+
 - sectiontitle: Manage application data
   section:
     - path: /storage/

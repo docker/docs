@@ -3,7 +3,8 @@ description: Use overlay for multi-host networking
 keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Multi-host networking with standalone swarms
 redirect_from:
-- engine/userguide/networking/get-started-overlay/
+- /engine/userguide/networking/get-started-overlay/
+- /engine/userguide/networking/overlay-standalone-swarm/
 ---
 
 ## Standalone swarm only!
@@ -407,15 +408,13 @@ to have external connectivity outside of their cluster.
    the `my-net` overlay network. While the `eth1` interface represents the
    container interface that is connected to the `docker_gwbridge` network.
 
-### Extra credit with Docker Compose
+## Use Docker Compose with swarm classic
 
 Refer to the Networking feature introduced in
 [Compose V2 format](/compose/networking/)
 and execute the multi-host networking scenario in the swarm cluster used above.
 
-## Related information
+## Next steps
 
-* [Understand Docker container networks](index.md)
-* [Work with network commands](work-with-networks.md)
-* [Docker Swarm overview](/swarm)
-* [Docker Machine overview](/machine)
+- [Networking overview](/network/index.md)
+- [Overlay networks](/network/overlay.md)
