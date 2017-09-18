@@ -96,7 +96,7 @@ it, in addtion to, or instead of, the default concatenated heading style.
 You can use custom targets to link to headings or even paragraphs.
 
 An example of a custom target ID in the documentation is the topic on
-[Compose file version 2 topic on CPU and other resources](/compose/compose-file-v2.md#cpu-and-other-resources).
+[Compose file version 2 topic on CPU and other resources](/compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
 It has a long heading that breaks the normal markdown linking mechanism,
 so we added a custom ID above the target heading.
 
