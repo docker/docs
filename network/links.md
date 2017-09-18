@@ -3,10 +3,26 @@ description: Learn how to connect Docker containers together.
 keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port, network
 redirect_from:
 - /userguide/dockerlinks/
+- /engine/userguide/networking/default_network/dockerlinks/
 title: Legacy container links
 ---
 
-The information in this section explains legacy container links within the Docker default `bridge` network which is created automatically when you install Docker.
+>**Warning**:
+>The `--link` flag is a legacy feature of Docker. It may eventually
+be removed. Unless you absolutely need to continue using it, we recommend that you use
+user-defined networks to facilitate communication between two containers instead of using
+`--link`. One feature that user-defined networks do not support that you can do
+with `--link` is sharing environmental variables between containers. However,
+you can use other mechanisms such as volumes to share environment variables
+between containers in a more controlled way.
+>
+> See [Differences between user-defined bridges and the default bridge](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge)
+> for some alternatives to using `--link`.
+{:.warning}
+
+The information in this section explains legacy container links within the
+Docker default `bridge` network which is created automatically when you install
+Docker.
 
 Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
@@ -17,16 +33,6 @@ behave differently between default `bridge` network and
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
-
->**Warning**:
->The `--link` flag is a legacy feature of Docker. It may eventually
-be removed. Unless you absolutely need to continue using it, we recommend that you use
-user-defined networks to facilitate communication between two containers instead of using
-`--link`. One feature that user-defined networks do not support that you can do
-with `--link` is sharing environmental variables between containers. However,
-you can use other mechanisms such as volumes to share environment variables
-between containers in a more controlled way.
-{:.warning}
 
 ## Connect using network port mapping
 
@@ -372,4 +378,3 @@ allowing linked communication to continue.
     . . .
     172.17.0.9  db
 
-# Related information
