@@ -69,7 +69,7 @@ You can install Docker EE in different ways, depending on your needs:
     This command relies on the variable you stored in the previous step.
 
     ```bash
-    $ sudo sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
+    $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
     ```
 
     {% if linux-dist == "rhel" %}
@@ -77,6 +77,10 @@ You can install Docker EE in different ways, depending on your needs:
     Store your OS version string in `/etc/yum/vars/dockerosversion`. Most users
     should use `7`, but you can also use the more specific minor version,
     starting from `7.2`.
+
+    ```bash
+    $ sudo sh -c 'echo "7" > /etc/yum/vars/dockerosversion'
+    ```
 
     {% endif %}
 
@@ -119,7 +123,7 @@ You can install Docker EE in different ways, depending on your needs:
 6.  Use the following command to add the **stable** repository:
 
     ```bash
-    $ sudo yum-config-manager \
+    $ sudo -E yum-config-manager \
         --add-repo \
         "$DOCKERURL/{{ linux-dist-url-slug }}/docker-ee.repo"
     ```
