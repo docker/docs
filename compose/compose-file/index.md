@@ -1609,10 +1609,6 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
-
-    networks:
-      webnet:
-
     volumes:
       - type: volume
         source: mydata
