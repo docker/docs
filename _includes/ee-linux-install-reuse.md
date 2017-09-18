@@ -69,7 +69,7 @@ You can install Docker EE in different ways, depending on your needs:
     This command relies on the variable you stored in the previous step.
 
     ```bash
-    $ sudo sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
+    $ sudo -E sh -c 'echo "$DOCKERURL/{{ linux-dist-url-slug }}" > /etc/yum/vars/dockerurl'
     ```
 
     {% if linux-dist == "rhel" %}
