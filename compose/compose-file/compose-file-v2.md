@@ -1088,6 +1088,8 @@ then read-write will be used.
       - restart: always
       - restart: on-failure
 
+{: id="cpu-and-other-resources"}
+
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its

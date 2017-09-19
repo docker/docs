@@ -75,6 +75,8 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
+- [a markdown link to a custom target ID](#custom-target-id)
+
 - <a href="https://docker.com/">an HTML link</a>
 
 - <a href="https://docker.com/" target="_blank" class="_">an HTML link that opens in a new window</a>
@@ -85,6 +87,18 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 (you can also specify `org=foo` to use a Github organization other than Docker).
 
+{: id="custom-target-id"}
+
+#### Using a custom target ID
+This topic has a custom target ID above its heading that can be used to link to
+it, in addtion to, or instead of, the default concatenated heading style.
+
+You can use custom targets to link to headings or even paragraphs.
+
+An example of a custom target ID in the documentation is the topic on
+[Compose file version 2 topic on CPU and other resources](/compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
+It has a long heading that breaks the normal markdown linking mechanism,
+so we added a custom ID above the target heading.
 
 ### Images
 

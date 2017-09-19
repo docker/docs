@@ -23,8 +23,6 @@ your swarm.
 |       1       |         0          |
 |       3       |         1          |
 |       5       |         2          |
-|       7       |         3          |
-
 
 For production-grade deployments, follow these rules of thumb:
 
