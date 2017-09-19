@@ -73,8 +73,8 @@ You now have two VMs created, named `myvm1` and `myvm2`:
 docker-machine ls
 ```
 
-The first one will act as the manager, which executes `docker` commands
-and authenticates workers to join the swarm, and the second will be a worker.
+The first one will act as the manager, which executes management commands and
+authenticates workers to join the swarm, and the second will be a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
@@ -94,14 +94,14 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 ```
 
 > **Note**: Ports 2376 and 2377
-> Port 2376 is the docker daemon port. Port 2377 is the swarmkit port. Run
-> `docker swarm init` and `docker swarm join` with port 2377 or no port at all.
+> Port 2376 is the Docker daemon port. Port 2377 is the swarm management port.
+> Run `docker swarm init` and `docker swarm join` with port 2377 or no port at
+> all.
 
-> The vm URLs returned by`docker-machine ls` include port 2376. Do not use this
-> port or <a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2">you
-> may experience errors</a>.
+> The VM URLs returned by`docker-machine ls` include port 2376. Do not use this
+> port or [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
 
-> To start over, run `docker swarm leave --force` from each node.
+> To start over, run `docker swarm leave` from each node.
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
