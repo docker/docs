@@ -366,6 +366,19 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-rc2-win29 2017-09-19 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc2)
+  - Linux Kernel 4.9.49
+  - AUFS 20170911
+
+* Bug fixes and minor changes
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING 
+  - Rotate logs in the VM more often (docker/for-win#244) 
+  - Vpnkit : do not block startup when ICMP permission is denied. (Fixes docker/for-win#1036, docker/for-win#1035, docker/for-win#1040)
+  - Fix minor bug on update checks
+
 ### Docker Community Edition 17.09.0-ce-rc1-win28 2017-09-07 (Edge)
 
 * Upgrades
