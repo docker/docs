@@ -1,5 +1,5 @@
 ---
-description: Use swarm mode networking features
+description: Use swarm mode overlay networking features
 keywords: swarm, networking, ingress, overlay, service discovery
 title: Manage swarm service networks
 ---
