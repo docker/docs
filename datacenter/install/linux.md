@@ -20,7 +20,7 @@ EE have a minimum of:
 
 Also, make sure the hosts are running one of these operating systems:
 
-* CentOS 7.1 or 7.2
+* CentOS 7.4
 * Red Hat Enterprise Linux 7.0, 7.1, 7.2, or 7.3
 * Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
