@@ -247,6 +247,10 @@ potential problems in communication or presentation.
 In order to write clear, useful commit messages, please follow these
 [recommendations](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message).
 
+Please don't reference pull requests or issues by number in the commit
+messages, because they will ping the original ticket every time the commit gets
+pushed anywhere (even within your own fork).
+
 ## Links
 
 For accessibility and usability reasons, avoid using phrases such as "click
