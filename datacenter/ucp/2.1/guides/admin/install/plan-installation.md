@@ -73,6 +73,12 @@ or port number.
     * Use the same load balancer with multiple virtual IPs.
 * Configure your load balancer to expose UCP or DTR on a port other than 443.
 
+If you want to install UCP in a high-availability configuration that uses
+a load balancer in front of your UCP controllers, include the appropriate IP
+address and fully qualified domain name of the load balancer's VIP by using
+one or more `--san` flags in the [install command](../../../reference/cli/install.md)
+or when you're asked for additional SANs in interactive mode.
+[Learn about high availability](../configure/set-up-high-availability.md).
 
 ## Using external CAs
 
