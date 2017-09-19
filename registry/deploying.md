@@ -309,9 +309,9 @@ Next, create the service, granting it access to the two secrets and constraining
 it to only run on nodes with the label `registry=true`. Besides the constraint,
 you are also specifying that only a single replica should run at a time. The
 example bind-mounts `/mnt/registry` on the swarm node to `/var/lib/registry/`
-within the container. As bind-mounts rely on the pre-existing source directory,
-be sure `/mnt/registry` exists on `node1` - if not, create it before running the
-following `docker service create` command.
+within the container. Bind mounts rely on the pre-existing source directory,
+so be sure `/mnt/registry` exists on `node1`. You might need to create it before
+running the following `docker service create` command.
 
 By default, secrets are mounted into a service at `/run/secrets/<secret-name>`.
 
