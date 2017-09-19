@@ -27,7 +27,8 @@ Docker CE users should go to
 
 ### OS requirements
 
-To install Docker EE, you need the 64-bit version of {{ linux-dist-long}} 7.
+To install Docker EE, you need a maintained version of CentOS 7. Archived
+versions aren't supported or tested.
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
