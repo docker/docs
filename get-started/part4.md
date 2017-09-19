@@ -31,6 +31,14 @@ username/repo:tag`, then visit `http://localhost/`.
 
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
 
+> This part of the tutorial requires command line `scp`.
+>
+> On Linux and Mac, `scp` is available by default, but on Windows you need to
+install it. There are a few ways to get it, including downloading and installing
+[Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} or
+[PowerShell/Win32-OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases){: target="_blank" class="_"}.
+{: .important}
+
 ## Introduction
 
 In [part 3](part3.md), you took an app you wrote in [part 2](part2.md), and
@@ -180,8 +188,8 @@ Now, create a couple of virtual machines using our node management tool,
 `docker-machine`:
 
 ```shell
-$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
-$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
+docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
+docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 ```
 
 {{ local-instructions }}
@@ -219,6 +227,12 @@ Copy the file `docker-compose.yml` you created in part 3 to the swarm manager
 ```
 docker-machine scp docker-compose.yml myvm1:~
 ```
+
+> Got an error message about needing a copy of the `scp` binary?
+>
+The above command will work on Windows only if you use a terminal emulater such
+as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
+which supports Linux commands like `scp`. To learn more, see the [note about `scp`](#prerequisites) at the end of the prerequisites.
 
 Now have `myvm1` use its powers as a swarm manager to deploy your app, by sending
 the same `docker stack deploy` command you used in part 3 to `myvm1` using

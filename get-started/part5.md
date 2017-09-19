@@ -35,6 +35,14 @@ both nodes will report a `ready` status. If not, reinitialze the swarm and join
 the worker as described in [Set up your
 swarm](/get-started/part4.md#set-up-your-swarm).
 
+> This part of the tutorial requires command line `scp`.
+>
+> On Linux and Mac, `scp` is available by default, but on Windows you need to
+install it. There are a few ways to get it, including downloading and installing
+[Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} or
+[PowerShell/Win32-OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases){: target="_blank" class="_"}.
+{: .important}
+
 ## Introduction
 
 In [part 4](part4.md), you learned how to set up a swarm, which is a cluster of
@@ -112,6 +120,12 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
     ```shell
     docker-machine scp docker-compose.yml myvm1:~
     ```
+
+    > Got an error message about needing a copy of the `scp` binary?
+    >
+    The above command will work on Windows only if you use a terminal emulater such
+    as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
+    which supports Linux commands like `scp`. To learn more, see the [note about `scp`](#prerequisites) at the end of the prerequisites.
 
 3.  Re-run the `docker stack deploy` command on the manager, and
 whatever services need updating will be updated:
