@@ -50,9 +50,10 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 In this example, Prometheus runs as a Docker container on the same host.
 
 Copy one of the following configuration files and save it to
-`/tmp/prometheus.yml`. This is a stock Prometheus configuration file, except
-for the addition of the Docker job definition at the bottom of the file.
-Docker for Mac and Docker for Windows need a slightly different configuration.
+`/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
+is a stock Prometheus configuration file, except for the addition of the Docker
+job definition at the bottom of the file. Docker for Mac and Docker for Windows
+need a slightly different configuration.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-config" data-group="linux">Docker for Linux</a></li>
@@ -145,12 +146,34 @@ scrape_configs:
 
 Next, start a single-replica Prometheus service using this configuration.
 
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#linux-mac-run" data-group="linux">Docker for Linux or Docker for Mac</a></li>
+<li><a data-toggle="tab" data-target="#win-run" data-group="mac">Docker for Windows or Windows Server</a></li>
+</ul>
+
+<div class="tab-content">
+
+<div id="linux-mac-run" class="tab-pane fade in active" markdown="1">
+
 ```bash
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
     --publish 9090:9090/tcp \
     prom/prometheus
 ```
+
+</div><!-- linux -->
+<div id="win-run" class="tab-pane fade" markdown="1">
+
+```powershell
+PS C:\> docker service create --replicas 1 --name my-prometheus
+    --mount type=bind,source=C:/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml
+    --publish 9090:9090/tcp
+    prom/prometheus
+```
+
+</div><!-- mac / windows -->
+</div><!-- tabs -->
 
 Verify that the Docker target is listed at http://localhost:9090/targets/.
 
