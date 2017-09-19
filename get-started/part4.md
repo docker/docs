@@ -67,8 +67,13 @@ machine a swarm manager. From then on, Docker will run the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
 {% capture local-instructions %}
-You now have two VMs created, named `myvm1` and `myvm2` (as `docker-machine ls`
-shows). The first one will act as the manager, which executes `docker` commands
+You now have two VMs created, named `myvm1` and `myvm2`:
+
+```shell
+docker-machine ls
+```
+
+The first one will act as the manager, which executes `docker` commands
 and authenticates workers to join the swarm, and the second will be a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
@@ -76,26 +81,27 @@ to become a swarm manager with `docker swarm init` and you'll see output like
 this:
 
 ```shell
-$ docker-machine ssh myvm1 "docker swarm init"
+$ docker-machine ssh myvm1 "docker swarm init --advertise-addr <myvm1 ip>"
 Swarm initialized: current node <node ID> is now a manager.
 
 To add a worker to this swarm, run the following command:
 
   docker swarm join \
   --token <token> \
-  <ip>:<port>
+  <myvm ip>:<port>
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-> Got an error about needing to use `--advertise-addr`?
->
-> Copy the
-> IP address for `myvm1` by running `docker-machine ls`, then run the
-> `docker swarm init` command again, using that IP and specifying port `2377`
-> (the port for swarm joins) with `--advertise-addr`. For example:
->
-> ```
-> docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100:2377"
-> ```
+> **Note**: Ports 2376 and 2377
+> Port 2376 is the docker daemon port. Port 2377 is the swarmkit port. Run
+> `docker swarm init` and `docker swarm join` with port 2377 or no port at all.
+
+> The vm URLs returned by`docker-machine ls` include port 2376. Do not use this
+> port or <a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2">you
+> may experience errors</a>.
+
+> To start over, run `docker swarm leave --force` from each node.
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -105,14 +111,14 @@ join your new swarm as a worker:
 ```shell
 $ docker-machine ssh myvm2 "docker swarm join \
 --token <token> \
-<ip>:<port>"
+<ip>:2377"
 
 This node joined a swarm as a worker.
 ```
 
 Congratulations, you have created your first swarm.
 
-> **Note**: You can also run `docker-machine ssh myvm2` with no command attached
+> **Note**: You can also run `docker-machine ssh myvm1` with no command attached
 to open a terminal session on that VM. Type `exit` when you're ready to return
 to the host shell prompt. It may be easier to paste the join command in that
 way.
@@ -122,7 +128,7 @@ Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node l
 ```shell
 docker@myvm1:~$ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active              
+brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
 rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
 ```
 
