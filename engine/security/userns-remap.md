@@ -179,11 +179,11 @@ $ dockerd --userns-remap="testuser:testuser"
     ```bash
     $ grep dockremap /etc/subuid
 
-    dockremap:296608:65536
+    dockremap:231072:65536
 
     $ grep dockremap /etc/subgid
 
-    dockremap:296608:65536
+    dockremap:231072:65536
     ```
 
     If these entries are not present, edit the files as the `root` user and
