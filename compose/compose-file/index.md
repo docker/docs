@@ -1042,13 +1042,12 @@ for details on how healthchecks work.
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
-
     # Hit the local web app
     test: ["CMD", "curl", "-f", "http://localhost"]
 
     # As above, but wrapped in /bin/sh. Both forms below are equivalent.
-    test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
-    test: curl -f https://localhost && echo 'cool, it works'
+    test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+    test: curl -f https://localhost || exit 1
 
 To disable any default healthcheck set by the image, you can use `disable:
 true`. This is equivalent to specifying `test: ["NONE"]`.
@@ -1757,7 +1756,7 @@ Each of these is a single value, analogous to its
 ## Specifying durations
 
 Some configuration options, such as the `interval` and `timeout` sub-options for
-[`healthcheck`](#healthcheck), accept a duration as a string in a
+[`check`](#healthcheck), accept a duration as a string in a
 format that looks like this:
 
     2.5s
