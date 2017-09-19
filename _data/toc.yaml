@@ -206,8 +206,10 @@ guides:
       title: Docker container networking
     - path: /engine/userguide/networking/work-with-networks/
       title: Work with network commands
-    - path: /engine/userguide/networking/get-started-overlay/
-      title: Get started with multi-host networking
+    - path: /engine/swarm/networking/
+      title: Manage swarm service networks
+    - path: /engine/userguide/networking/overlay-standalone-swarm/
+      title: Multi-host networking with standalone swarms
     - path: /engine/userguide/networking/get-started-macvlan/
       title: Get started with macvlan network driver
     - path: /engine/userguide/networking/overlay-security-model/
