@@ -42,7 +42,7 @@ Follow these steps:
    | [docker/swarmkit](https://github.com/docker/swarmkit) | Orchestration for Docker. Deploy services and stacks (declarative definitions of groups of containers) to a cluster of Docker hosts. |
    | [docker/compose](https://github.com/docker/compose) | Define and run complex applications using one or many interlinked containers. |
 
-   See [the complete list of Docker repositories](https://github.com/docke) on GitHub.
+   See [the complete list of Docker repositories](https://github.com/docker) on GitHub.
 
 3. Choose an issue from the [list of untriaged issues](https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+-label%3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%2Ffeature).
 
