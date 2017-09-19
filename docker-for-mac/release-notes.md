@@ -418,6 +418,17 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-rc2-mac29 2017-09-19 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc2)
+  - Linux Kernel 4.9.49
+  - AUFS 20170911
+
+* Bug fixes and minor changes
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Rotate logs in the VM more often  
+
 ### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07 (Edge)
 
 * Upgrades
