@@ -312,7 +312,7 @@ assumes that the Docker daemon is in the `stopped` state.
     ```bash
     $ sudo lvs -o+seg_monitor
 
-    LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor  
+    LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor
     thinpool docker twi-a-t--- 95.00g             0.00   0.01                             monitored
     ```
 
@@ -334,7 +334,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
     > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`,
     > is not yet supported on RHEL, CentOS, or Ubuntu 14.04 when using the
-    > default kernel version 3.18.
+    > default kernel. Support was added in the upstream kernel version 3.18.
 
     ```json
     {
@@ -639,9 +639,9 @@ NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 xvda                    202:0    0    8G  0 disk
 └─xvda1                 202:1    0    8G  0 part /
 xvdf                    202:80   0  100G  0 disk
-├─docker-thinpool_tmeta 253:0    0 1020M  0 lvm  
-│ └─docker-thinpool     253:2    0   95G  0 lvm  
-└─docker-thinpool_tdata 253:1    0   95G  0 lvm  
+├─docker-thinpool_tmeta 253:0    0 1020M  0 lvm
+│ └─docker-thinpool     253:2    0   95G  0 lvm
+└─docker-thinpool_tdata 253:1    0   95G  0 lvm
   └─docker-thinpool     253:2    0   95G  0 lvm
 ```
 
