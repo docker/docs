@@ -155,22 +155,31 @@ Get the service ID for the one service in our application:
 docker service ls
 ```
 
+You'll see output for the `web` service, prepended with your app name. If you
+named it the same as shown in this example, the name will be
+`getstartedlab_web`. The service ID is listed as well, along with the number of
+replicas, image name, and exposed ports.
+
 Docker swarms run tasks that spawn containers. Tasks have state and their own
-IDs:
+IDs. Let's list the tasks:
 
 ```shell
 docker service ps <service>
 ```
 
->**Note**: Docker's support for swarms is built using a project called SwarmKit. SwarmKit tasks do not need to be containers, but Docker swarm tasks are defined to spawn them.
+>**Note**: Docker's support for swarms is built using a project
+called SwarmKit. SwarmKit tasks do not need to be containers, but
+Docker swarm tasks are defined to spawn them.
 
-Let's inspect one task and limit the output to container ID:
+Let's inspect one of these tasks, and limit the output to container ID:
 
 ```shell
 docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task>
 ```
 
-Vice versa, inspect the container ID, and extract the task ID:
+Vice versa, you can inspect a container ID, and extract the task ID.
+
+First run `docker container ls` to get container IDs, then:
 
 ```shell
 docker inspect --format="{% raw %}{{index .Config.Labels \"com.docker.swarm.task.id\"}}{% endraw %}" <container>
@@ -185,7 +194,7 @@ docker container ls -q
 You can run `curl http://localhost` several times in a row, or go to that URL in
 your browser and hit refresh a few times. Either way, you'll see the container
 ID change, demonstrating the load-balancing; with each request, one of
-the 5 replicas is chosen, in a round-robin fashion, to respond.
+the 5 replicas is chosen, in a round-robin fashion, to respond. The container IDs will match your output from the previous command (`docker container ls -q`).
 
 
 >**Note**: At this stage, it may take up to 30 seconds for the containers to respond to HTTP

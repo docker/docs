@@ -33,7 +33,7 @@ username/repo:tag`, then visit `http://localhost/`.
 
 > This part of the tutorial requires command line `scp`.
 >
-> On Linux and Mac, `scp` is available by default, but on Windows you need to
+> On Linux and Mac, `scp` is available with the OS, but on Windows you need to
 install it. There are a few ways to get it, including downloading and installing
 [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} or
 [PowerShell/Win32-OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases){: target="_blank" class="_"}.
