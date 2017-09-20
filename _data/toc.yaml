@@ -292,7 +292,7 @@ guides:
     - path: /mta/methods/
       title: Modern methodologies and automation
     - path: /mta/migrate-services/
-      title: Migrate microservices
+      title: Migrate to microservices
     - path: /mta/stack-guides/
       title: Stack migration guides
     - path: /mta/use-cases/

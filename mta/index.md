@@ -122,7 +122,7 @@ Launch the app with either a [`docker run`](/engine/reference/commandline/run.md
 
 * [Modern methodologies and automation](/mta/methods.md)
 
-* [Migrating microservices](/mta/migrate-services.md)
+* [Migrating to microservices](/mta/migrate-services.md)
 
 * [Stack migration guides](/mta/stack-guides.md)
 
