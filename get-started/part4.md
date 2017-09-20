@@ -31,14 +31,6 @@ username/repo:tag`, then visit `http://localhost/`.
 
 - Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
 
-> This part of the tutorial requires command line `scp`.
->
-> On Linux and Mac, `scp` is available with the OS, but on Windows you need to
-install it. There are a few ways to get it, including downloading and installing
-[Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} or
-[PowerShell/Win32-OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases){: target="_blank" class="_"}.
-{: .important}
-
 ## Introduction
 
 In [part 3](part3.md), you took an app you wrote in [part 2](part2.md), and
@@ -101,12 +93,13 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-> **Note**: Ports 2376 and 2377
+> Ports 2376 and 2377
+>
 > Port 2376 is the Docker daemon port. Port 2377 is the swarm management port.
-> Run `docker swarm init` and `docker swarm join` with port 2377 or no port at
-> all.
-
-> The VM URLs returned by`docker-machine ls` include port 2376. Do not use this
+> Always run `docker swarm init` and `docker swarm join` with port 2377, or
+> no port at all (as it will then default to 2377).
+>
+> The VM URLs returned by `docker-machine ls` include port 2376. Do not use this
 > port or [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
 
 > To start over, run `docker swarm leave` from each node.
@@ -131,7 +124,8 @@ to open a terminal session on that VM. Type `exit` when you're ready to return
 to the host shell prompt. It may be easier to paste the join command in that
 way.
 
-Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node ls` to view the nodes in this swarm:
+Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node
+ls` to view the nodes in this swarm:
 
 ```shell
 docker@myvm1:~$ docker node ls
@@ -147,7 +141,6 @@ Alternatively, wrap commands in `docker-machine ssh` to keep from having to dire
 ```shell
 docker-machine ssh myvm1 "docker node ls"
 ```
-
 
 {% endcapture %}
 
@@ -228,15 +221,9 @@ Copy the file `docker-compose.yml` you created in part 3 to the swarm manager
 docker-machine scp docker-compose.yml myvm1:~
 ```
 
-> Got an error message about needing a copy of the `scp` binary?
->
-The above command will work on Windows only if you use a terminal emulater such
-as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
-which supports Linux commands like `scp`. To learn more, see the [note about `scp`](#prerequisites) at the end of the prerequisites.
-
-Now have `myvm1` use its powers as a swarm manager to deploy your app, by sending
-the same `docker stack deploy` command you used in part 3 to `myvm1` using
-`docker-machine ssh`:
+Now have `myvm1` use its powers as a swarm manager to deploy your app, by
+sending the same `docker stack deploy` command you used in part 3 to `myvm1`
+using `docker-machine ssh`:
 
 ```
 docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
@@ -321,7 +308,8 @@ docker-machine ssh myvm1 "docker stack rm getstartedlab"
 
 ## Recap and cheat sheet (optional)
 
-Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113837):
+Here's [a terminal recording of what was covered on this
+page](https://asciinema.org/a/113837):
 
 <script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async></script>
 
