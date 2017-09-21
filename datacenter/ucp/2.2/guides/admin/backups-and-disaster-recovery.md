@@ -14,11 +14,14 @@ The next step is creating a backup policy and disaster recovery plan.
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
+DTR is backed up independently.
+[Learn about DTR backups and recovery](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
 
-To create a UCP backup, you can run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
+To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
 contents of all the [volumes used by UCP](../architecture.md) to persist data
-and streams it to stdout.
+and streams it to stdout. The backup doesn't include the swarm-mode state,
+like service definitions and overlay network definitions.
 
 You only need to run the backup command on a single UCP manager node. Since UCP
 stores the same data on all manager nodes, you only need to take periodic
@@ -146,7 +149,9 @@ $ docker container run --rm -i --name ucp \
 
 In the event where half or more manager nodes are lost and cannot be recovered
 to a healthy state, the system is considered to have lost quorum and can only be
-restored through the following disaster recovery procedure.
+restored through the following disaster recovery procedure. If your cluster has
+lost quorum, you can still take a backup of one of the remaining nodes, but we
+recommend making backups regularly.
 
 It is important to note that this procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
