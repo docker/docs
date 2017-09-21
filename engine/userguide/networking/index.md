@@ -579,7 +579,7 @@ configure it in different ways:
 
 1.  On the Docker client, create or edit the file `~/.config.json` in the
     home directory of the user which starts containers. Add JSON such as the
-    following, substituting the type of proxy with `httpsproxy` or `ftpproxy` if
+    following, substituting the type of proxy with `httpsProxy` or `ftpProxy` if
     necessary, and substituting the address and port of the proxy server. You
     can configure multiple proxy servers at the same time.
 
@@ -592,8 +592,11 @@ configure it in different ways:
     {
       "proxies":
       {
-        "httpProxy": "http://127.0.0.1:3001",
-        "noProxy": "*.test.example.com,.example2.com"
+        "default":
+        {
+          "httpProxy": "http://127.0.0.1:3001",
+          "noProxy": "*.test.example.com,.example2.com"
+        }
       }
     }
     ```
