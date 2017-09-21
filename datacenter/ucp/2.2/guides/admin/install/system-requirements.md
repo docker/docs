@@ -14,7 +14,7 @@ all nodes must have:
 
 * [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher 
 * Linux kernel version 3.10 or higher
-* 4.00 GB of RAM
+* 4.00 GB of RAM (8.00 GB for manager nodes)
 * 3.00 GB of available disk space
 * A static IP address
 
