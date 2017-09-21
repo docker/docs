@@ -67,7 +67,7 @@ machine a swarm manager. From then on, Docker will run the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
 {% capture local-instructions %}
-You now have two VMs created, named `myvm1` and `myvm2`:
+You now have two VMs created, named `myvm1` and `myvm2`. List the machines and get their IP addresses:
 
 ```shell
 docker-machine ls
@@ -93,15 +93,17 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-> Ports 2376 and 2377
+> Ports 2377 and 2376
 >
-> Port 2376 is the Docker daemon port. Port 2377 is the swarm management port.
-> Always run `docker swarm init` and `docker swarm join` with port 2377, or
-> no port at all (as it will then default to 2377).
+> Always run `docker swarm init` and `docker swarm join` with port 2377
+> (the swarm management port), or no port at all and let it take the default.
 >
-> The VM URLs returned by `docker-machine ls` include port 2376. Do not use this
-> port or [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
+> The machine IP addresses returned by `docker-machine ls` include port 2376,
+> which is the Docker daemon port. Do not use this port or
+> [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
 
+> Leaving a swarm
+>
 > To start over, run `docker swarm leave` from each node.
 
 As you can see, the response to `docker swarm init` contains a pre-configured
@@ -117,29 +119,18 @@ $ docker-machine ssh myvm2 "docker swarm join \
 This node joined a swarm as a worker.
 ```
 
-Congratulations, you have created your first swarm.
+Congratulations, you have created your first swarm!
 
-> **Note**: You can also run `docker-machine ssh myvm1` with no command attached
-to open a terminal session on that VM. Type `exit` when you're ready to return
-to the host shell prompt. It may be easier to paste the join command in that
-way.
+As shown in the previous step, you can wrap Docker commands in the form of
+`docker-machine ssh <node> "<command>"`.
 
-Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node
-ls` to view the nodes in this swarm:
-
-```shell
-docker@myvm1:~$ docker node ls
-ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
-rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
-```
-
-Type `exit` to get back out of that machine.
-
-Alternatively, wrap commands in `docker-machine ssh` to keep from having to directly log in and out. For example:
+Run `docker node ls` on the manager to view the nodes in this swarm:
 
 ```shell
 docker-machine ssh myvm1 "docker node ls"
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
+rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
 ```
 
 {% endcapture %}
@@ -214,12 +205,40 @@ The hard part is over. Now you just repeat the process you used in [part
 3](part3.md) to deploy on your new swarm. Just remember that only swarm managers
 like `myvm1` execute Docker commands; workers are just for capacity.
 
-Copy the file `docker-compose.yml` you created in part 3 to the swarm manager
-`myvm1`'s home directory (alias: `~`) by using the `docker-machine scp` command:
+Make sure you are in the same directory as before, which includes the
+[`docker-compose.yml` file you created in part
+3](/get-started/part3/#docker-composeyml). You can use
+`docker-machine` commands to connect to the swarm manager and deploy the app
+based on your local copy of `docker-compose.yml` file.
+
+Type `docker-machine env myvm1`, then copy-paste and run the command provided to configure your shell to talk to `myvm1`.
+
+Mac
 
 ```
-docker-machine scp docker-compose.yml myvm1:~
+docker-machine env myvm1
+$ docker-machine env mymachine1
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/victoriabialas/.docker/machine/machines/mymachine1"
+export DOCKER_MACHINE_NAME="myvm"
+# Run this command to configure your shell:
+# eval $(docker-machine env myvm1)
 ```
+
+Windows
+
+```
+PS C:\Users\Vicky\sandbox\get-started> docker-machine env myvm1
+$Env:DOCKER_TLS_VERIFY = "1"
+$Env:DOCKER_HOST = "tcp://192.168.203.207:2376"
+$Env:DOCKER_CERT_PATH = "C:\Users\Vicky\.docker\machine\machines\myvm1"
+$Env:DOCKER_MACHINE_NAME = "myvm1"
+$Env:COMPOSE_CONVERT_WINDOWS_PATHS = "true"
+# Run this command to configure your shell:
+# & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+```
+
 
 Now have `myvm1` use its powers as a swarm manager to deploy your app, by
 sending the same `docker stack deploy` command you used in part 3 to `myvm1`
