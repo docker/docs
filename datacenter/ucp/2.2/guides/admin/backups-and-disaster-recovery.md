@@ -11,6 +11,28 @@ setting, you should
 
 The next step is creating a backup policy and disaster recovery plan.
 
+## Data managed by UCP
+
+UCP maintains data about:
+
+|         Data          |                                                  Description                                                  |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Configurations        | The UCP cluster configurations                                                                                |
+| Access control        | Permissions for teams to swarm resources                                                                      |
+| Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication |
+| Metrics data          | Monitoring data gathered by UCP                                                                               |
+
+This data is persisted on the host running UCP, using named volumes.
+[Learn more about UCP named volumes](../architecture.md).
+
+## Backup order of 
+
+Backup your Docker EE components in the following order:
+
+1. [Backup your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
+2. Backup UCP
+3. [Backup DTR](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md)
+
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
