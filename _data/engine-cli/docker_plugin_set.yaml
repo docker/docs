@@ -80,4 +80,7 @@ examples: |-
 
   ["foo", "bar", "baz"]
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

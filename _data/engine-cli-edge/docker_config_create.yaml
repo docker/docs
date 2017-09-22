@@ -7,5 +7,11 @@ plink: docker_config.yaml
 options:
 - option: label
   shorthand: l
+  value_type: list
   description: Config labels
+  deprecated: false
+  experimental: false
+deprecated: false
+min_api_version: "1.30"
+experimental: false
 

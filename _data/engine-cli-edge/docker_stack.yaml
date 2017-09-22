@@ -16,4 +16,7 @@ clink:
 - docker_stack_ps.yaml
 - docker_stack_rm.yaml
 - docker_stack_services.yaml
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

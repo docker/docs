@@ -9,16 +9,28 @@ plink: docker_volume.yaml
 options:
 - option: driver
   shorthand: d
+  value_type: string
   default_value: local
   description: Specify volume driver name
+  deprecated: false
+  experimental: false
 - option: label
+  value_type: list
   description: Set metadata for a volume
+  deprecated: false
+  experimental: false
 - option: name
+  value_type: string
   description: Specify volume name
+  deprecated: false
+  experimental: false
 - option: opt
   shorthand: o
+  value_type: map
   default_value: map[]
   description: Set driver specific options
+  deprecated: false
+  experimental: false
 examples: |-
   Create a volume and then configure the container to use it:
 
@@ -101,4 +113,7 @@ examples: |-
       --opt device=:/path/to/dir \
       foo
   ```
+deprecated: false
+min_api_version: "1.21"
+experimental: false
 

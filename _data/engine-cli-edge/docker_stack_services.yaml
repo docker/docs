@@ -9,13 +9,22 @@ plink: docker_stack.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print services using a Go template
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display IDs
+  deprecated: false
+  experimental: false
 examples: |-
   The following command shows all services in the `myapp` stack:
 
@@ -77,4 +86,7 @@ examples: |-
   0zmvwuiu3vue: replicated 10/10
   fm6uf97exkul: global 5/5
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

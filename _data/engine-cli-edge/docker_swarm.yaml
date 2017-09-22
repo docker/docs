@@ -22,4 +22,7 @@ clink:
 - docker_swarm_unlock.yaml
 - docker_swarm_unlock-key.yaml
 - docker_swarm_update.yaml
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

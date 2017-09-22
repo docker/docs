@@ -8,11 +8,17 @@ pname: docker system
 plink: docker_system.yaml
 options:
 - option: format
+  value_type: string
   description: Pretty-print images using a Go template
+  deprecated: false
+  experimental: false
 - option: verbose
   shorthand: v
+  value_type: bool
   default_value: "false"
   description: Show detailed information on space usage
+  deprecated: false
+  experimental: false
 examples: |-
   By default the command will just show a summary of the data used:
 
@@ -58,4 +64,7 @@ examples: |-
 
   > **Note**: Network information is not shown because it doesn't consume the disk
   > space.
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

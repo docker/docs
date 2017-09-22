@@ -15,8 +15,11 @@ plink: docker_swarm.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force this node to leave the swarm, ignoring warnings
+  deprecated: false
+  experimental: false
 examples: |-
   Consider the following swarm, as seen from the manager:
 
@@ -39,4 +42,7 @@ examples: |-
   affects swarm operation, but a long list of `down` nodes can clutter the node
   list. To remove an inactive node from the list, use the [`node rm`](node_rm.md)
   command.
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

@@ -58,4 +58,6 @@ examples: |-
   ```bash
   $ docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
   ```
+deprecated: false
+experimental: false
 

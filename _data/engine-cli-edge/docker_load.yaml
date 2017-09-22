@@ -9,11 +9,17 @@ plink: docker.yaml
 options:
 - option: input
   shorthand: i
+  value_type: string
   description: Read from tar archive file, instead of STDIN
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Suppress the load output
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker images
@@ -42,4 +48,6 @@ examples: |-
   fedora              heisenbug           58394af37342        7 weeks ago         385.5 MB
   fedora              latest              58394af37342        7 weeks ago         385.5 MB
   ```
+deprecated: false
+experimental: false
 

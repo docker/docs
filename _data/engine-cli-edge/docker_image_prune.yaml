@@ -8,14 +8,23 @@ plink: docker_image.yaml
 options:
 - option: all
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Remove all unused images, not just dangling ones
+  deprecated: false
+  experimental: false
 - option: filter
+  value_type: filter
   description: Provide filter values (e.g. 'until=<timestamp>')
+  deprecated: false
+  experimental: false
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
 examples: |2-
    output:
 
@@ -145,4 +154,7 @@ examples: |2-
   alpine              latest              88e169ea8f46        8 days ago           3.98 MB
   busybox             latest              e02e811dd08f        2 months ago         1.09 MB
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

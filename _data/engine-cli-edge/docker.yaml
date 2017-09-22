@@ -109,4 +109,6 @@ clink:
 - docker_version.yaml
 - docker_volume.yaml
 - docker_wait.yaml
+deprecated: false
+experimental: false
 

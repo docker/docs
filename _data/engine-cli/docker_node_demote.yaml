@@ -10,4 +10,7 @@ examples: |-
   ```bash
   $ docker node demote <node name>
   ```
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

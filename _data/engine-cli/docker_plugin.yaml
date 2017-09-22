@@ -26,4 +26,7 @@ clink:
 - docker_plugin_rm.yaml
 - docker_plugin_set.yaml
 - docker_plugin_upgrade.yaml
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

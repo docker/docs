@@ -6,6 +6,11 @@ pname: docker image
 plink: docker_image.yaml
 options:
 - option: disable-content-trust
+  value_type: bool
   default_value: "true"
   description: Skip image signing
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

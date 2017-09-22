@@ -138,13 +138,25 @@ plink: docker_system.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: since
+  value_type: string
   description: Show all events created since timestamp
+  deprecated: false
+  experimental: false
 - option: until
+  value_type: string
   description: Stream events until this timestamp
+  deprecated: false
+  experimental: false
 examples: |-
   ### Basic example
 
@@ -325,4 +337,6 @@ examples: |-
       {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
       {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
   ```
+deprecated: false
+experimental: false
 

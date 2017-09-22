@@ -18,4 +18,7 @@ clink:
 - docker_volume_ls.yaml
 - docker_volume_prune.yaml
 - docker_volume_rm.yaml
+deprecated: false
+min_api_version: "1.21"
+experimental: false
 

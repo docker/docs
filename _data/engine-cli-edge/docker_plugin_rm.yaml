@@ -12,8 +12,11 @@ plink: docker_plugin.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force the removal of an active plugin
+  deprecated: false
+  experimental: false
 examples: |-
   The following example disables and removes the `sample-volume-plugin:latest`
   plugin:
@@ -27,4 +30,7 @@ examples: |-
 
   tiborvass/sample-volume-plugin
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

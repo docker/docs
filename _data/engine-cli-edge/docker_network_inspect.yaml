@@ -9,9 +9,17 @@ plink: docker_network.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: verbose
   shorthand: v
+  value_type: bool
   default_value: "false"
   description: Verbose output for diagnostics
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

@@ -7,5 +7,10 @@ plink: docker_image.yaml
 options:
 - option: output
   shorthand: o
+  value_type: string
   description: Write to a file, instead of STDOUT
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

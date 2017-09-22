@@ -7,11 +7,17 @@ plink: docker.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force removal of the image
+  deprecated: false
+  experimental: false
 - option: no-prune
+  value_type: bool
   default_value: "false"
   description: Do not delete untagged parents
+  deprecated: false
+  experimental: false
 examples: |-
   You can remove an image using its short or long ID, its tag, or its digest. If
   an image has one or more tag referencing it, you must remove all of them before
@@ -88,4 +94,6 @@ examples: |-
   Deleted: ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2
   Deleted: df7546f9f060a2268024c8a230d8639878585defcc1bc6f79d2728a13957871b
   ```
+deprecated: false
+experimental: false
 

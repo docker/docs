@@ -172,13 +172,25 @@ plink: docker.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: since
+  value_type: string
   description: Show all events created since timestamp
+  deprecated: false
+  experimental: false
 - option: until
+  value_type: string
   description: Stream events until this timestamp
+  deprecated: false
+  experimental: false
 examples: |-
   ### Basic example
 
@@ -257,6 +269,12 @@ examples: |-
   2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
   2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
   2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+
+  $ docker events --since '2017-01-05T00:35:30' --until '2017-01-05T00:36:05'
+  2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+  2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+  2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+  2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
   ```
 
   ### Filter events by criteria
@@ -382,4 +400,6 @@ examples: |-
       {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
       {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
   ```
+deprecated: false
+experimental: false
 

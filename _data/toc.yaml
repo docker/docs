@@ -898,6 +898,8 @@ reference:
       title: docker service ls
     - path: /engine/reference/commandline/service_ps/
       title: docker service ps
+    - path: /engine/reference/commandline/service_rollback/
+      title: docker service rollback
     - path: /engine/reference/commandline/service_rm/
       title: docker service rm
     - path: /engine/reference/commandline/service_scale/
@@ -1242,6 +1244,8 @@ reference:
       title: docker service ls
     - path: /edge/engine/reference/commandline/service_ps/
       title: docker service ps
+    - path: /edge/engine/reference/commandline/service_rollback/
+      title: docker service rollback
     - path: /edge/engine/reference/commandline/service_rm/
       title: docker service rm
     - path: /edge/engine/reference/commandline/service_scale/
