@@ -224,9 +224,9 @@ like `myvm1` execute Docker commands; workers are just for capacity.
 
 So far, you've been wrapping Docker commmands in `docker-machine ssh` to talk to
 the VMs. Another option is to run `docker-machine env <machine>` to get
-and run a command that sets your current shell to talk to the Docker
+and run a command that configures your current shell to talk to the Docker
 daemon on the VM. This method works better for the next step because it allows
-you to use our local copy of the `docker-compose.yml` file to deploy the app
+you to use your local copy of the `docker-compose.yml` file to deploy the app
 "remotely" without having to copy it anywhere.
 
 Type `docker-machine env myvm1`, then copy-paste and run the command provided as
@@ -244,7 +244,7 @@ Linux, or Windows, so examples of each are shown on the tabs below.
   <div id="mac-linux-machine" class="tab-pane fade in active">
   {% capture mac-linux-machine-content %}
 
-### Docker machine shell environment on Mac or Linux
+#### Docker machine shell environment on Mac or Linux
 
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
@@ -259,11 +259,6 @@ export DOCKER_MACHINE_NAME="myvm"
 # Run this command to configure your shell:
 # eval $(docker-machine env myvm1)
 ```
-{% endcapture %}
-{{ mac-linux-machine-content | markdownify }}
-</div>
-<div id="win-machine" class="tab-pane fade">
-{% capture win-machine-content %}
 
 Run the given command to configure your shell to talk to `myvm1`.
 
@@ -281,13 +276,20 @@ myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.
 myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
 ```
 
-### Docker machine shell environment on Windows
+{% endcapture %}
+{{ mac-linux-machine-content | markdownify }}
+
+</div>
+<div id="win-machine" class="tab-pane fade">
+{% capture win-machine-content %}
+
+#### Docker machine shell environment on Windows
 
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
 
 ```shell
-PS C:\Users\Vicky\sandbox\get-started> docker-machine env myvm1
+PS C:\Users\sam\sandbox\get-started> docker-machine env myvm1
 $Env:DOCKER_TLS_VERIFY = "1"
 $Env:DOCKER_HOST = "tcp://192.168.203.207:2376"
 $Env:DOCKER_CERT_PATH = "C:\Users\sam\.docker\machine\machines\myvm1"
@@ -355,17 +357,28 @@ ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
 ```
 
-If you want to swap your `docker-machine` shell configuration to talk to
-`myvm2`, re-run `docker-machine env` in the same or a different shell to get the
-configuration for `myvm2` and run it. This is always specific to the shell in
-which you run it. If you change shells or open a new one, you will need to rerun
-the commands. You can check first with `docker-machine ls` to list the machines,
-get IP addresses, see what state they are in, and find out which one, if any,
-you are connected to. To learn more, see the [Docker Machine getting started
+> About accessing VMs with `docker-machine env` and `docker-machine ssh`
+>
+> To set your shell environment to talk to a different machine like `myvm2`,
+re-run `docker-machine env` in the same or a different shell, then run the given
+command to point to `myvm2`. This is always specific to the current shell. If
+you change to an unconfigured shell or open a new one, you need to rerun the
+commands. You can check first with `docker-machine ls` to list machines, see
+what state they are in, get IP addresses, and find out which one, if any, you
+are connected to. To learn more, see the [Docker Machine getting started
 topics](/machine/get-started.md#create-a-machine).
-
-You also have the option of wrapping the commands you used in part 3 in a call
-to `docker-machine ssh`, and they'll all work as you'd expect.
+>
+> You also have the option of wrapping Docker commands in the form of
+`docker-machine ssh <machine> "<command>"`, which logs directly into the VM but
+doesn't give you immediate access to files on your local host.
+>
+> On Mac and Linux, you can use `docker-machine scp <file> <machine>:~` to copy
+files across machines, but Windows users need a terminal emulator like [Git
+Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order
+for this to work.
+>
+> This tutorial demos both `docker-machine ssh` and `docker-machine env`, since
+these are available on all platforms via the `docker-machine` CLI.
 
 ### Accessing your cluster
 
