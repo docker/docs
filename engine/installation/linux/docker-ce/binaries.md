@@ -6,7 +6,7 @@ redirect_from:
 - /engine/installation/binaries/
 ---
 
-{% assign minor-version = "17.06" %}
+{% assign minor-version = "17.09" %}
 
 > **Note**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
