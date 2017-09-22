@@ -318,13 +318,6 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
   <hr>
 </div>
 
-> About the `docker-machine` shell environment
->
-> The Docker machine environment configuration is specific to the shell in which
-you run it. If you change shells or open a new one, you will need to rerun this
-command. You can also re-run the command in the same shell to connect to a
-different VM, such as `myvm2`. To learn more, see the [Docker Machine getting
-started topics](/machine/get-started.md#create-a-machine).
 
 ### Deploy the app on the swarm manager
 
@@ -363,8 +356,13 @@ ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 ```
 
 If you want to swap your `docker-machine` shell configuration to talk to
-`myvm2,` re-run the `docker-machine env` command in the same or a different
-shell to get the configuration for `myvm2`.
+`myvm2`, re-run `docker-machine env` in the same or a different shell to get the
+configuration for `myvm2` and run it. This is always specific to the shell in
+which you run it. If you change shells or open a new one, you will need to rerun
+the commands. You can check first with `docker-machine ls` to list the machines,
+get IP addresses, see what state they are in, and find out which one, if any,
+you are connected to. To learn more, see the [Docker Machine getting started
+topics](/machine/get-started.md#create-a-machine).
 
 You also have the option of wrapping the commands you used in part 3 in a call
 to `docker-machine ssh`, and they'll all work as you'd expect.
