@@ -12,9 +12,10 @@ Before installing, be sure your infrastructure has these requirements.
 You can install UCP on-premises or on a cloud provider. To install UCP,
 all nodes must have:
 
-* [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher 
+* [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
-* 4.00 GB of RAM (8.00 GB for manager nodes)
+* 8.00 GB of RAM for manager nodes or nodes running DTR
+* 4.00 GB of RAM for worker nodes
 * 3.00 GB of available disk space
 * A static IP address
 
@@ -32,8 +33,8 @@ between hosts.
 > Workloads on manager nodes
 >
 > These requirements assume that manager nodes won't run regular workloads.
-> If you plan to run additional workloads on manager nodes, you may need to 
-> provision more powerful nodes. If manager nodes become overloaded, the 
+> If you plan to run additional workloads on manager nodes, you may need to
+> provision more powerful nodes. If manager nodes become overloaded, the
 > swarm may experience issues.
 
 ## Ports used
@@ -89,7 +90,7 @@ UCP 2.2 requires minimum versions of the following Docker components:
 - Docker Engine 17.06 or higher
 - DTR 2.3 or higher
 
-<!-- 
+<!--
 - Docker Remote API 1.25
 - Compose 1.9
 -->

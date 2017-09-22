@@ -14,8 +14,9 @@ You can install UCP on-premises or on a cloud provider. To install UCP,
 all nodes must have:
 
 * Linux kernel version 3.10 or higher
-* CS Docker Engine 1.13, or EE Daemon 17.03 and higher 
-* 4.00 GB of RAM
+* CS Docker Engine 1.13, or EE Daemon 17.03 and higher
+* 8.00 GB of RAM for manager nodes or nodes running DTR
+* 4.00 GB of RAM for worker nodes
 * 3.00 GB of available disk space
 * A static IP address
 
@@ -25,8 +26,8 @@ between hosts.
 > Workloads on manager nodes
 >
 > These requirements assume that manager nodes won't run regular workloads.
-> If you plan to run additional workloads on manager nodes, you may need to 
-> provision more powerful nodes. If manager nodes become overloaded, the 
+> If you plan to run additional workloads on manager nodes, you may need to
+> provision more powerful nodes. If manager nodes become overloaded, the
 > swarm may experience issues.
 
 ## Network requirements
