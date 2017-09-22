@@ -7,9 +7,17 @@ plink: docker_container.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: size
   shorthand: s
+  value_type: bool
   default_value: "false"
   description: Display total file sizes
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

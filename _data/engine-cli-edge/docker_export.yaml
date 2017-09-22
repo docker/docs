@@ -14,7 +14,10 @@ plink: docker.yaml
 options:
 - option: output
   shorthand: o
+  value_type: string
   description: Write to a file, instead of STDOUT
+  deprecated: false
+  experimental: false
 examples: |-
   ch of these commands has the same result.
 
@@ -25,4 +28,6 @@ examples: |-
   ```bash
   $ docker export --output="latest.tar" red_panda
   ```
+deprecated: false
+experimental: false
 

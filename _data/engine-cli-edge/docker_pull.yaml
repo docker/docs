@@ -31,11 +31,17 @@ plink: docker.yaml
 options:
 - option: all-tags
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Download all tagged images in the repository
+  deprecated: false
+  experimental: false
 - option: disable-content-trust
+  value_type: bool
   default_value: "true"
   description: Skip image verification
+  deprecated: false
+  experimental: false
 examples: |-
   ### Pull an image from Docker Hub
 
@@ -234,4 +240,6 @@ examples: |-
   > connection between the Docker Engine daemon and the Docker Engine client
   > initiating the pull is lost. If the connection with the Engine daemon is
   > lost for other reasons than a manual interaction, the pull is also aborted.
+deprecated: false
+experimental: false
 

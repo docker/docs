@@ -11,8 +11,11 @@ pname: docker plugin
 plink: docker_plugin.yaml
 options:
 - option: disable-content-trust
+  value_type: bool
   default_value: "true"
   description: Skip image signing
+  deprecated: false
+  experimental: false
 examples: |-
   The following example shows how to push a sample `user/plugin`.
 
@@ -24,4 +27,7 @@ examples: |-
 
   $ docker plugin push user/plugin
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

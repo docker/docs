@@ -2,11 +2,17 @@ command: docker login
 short: Log in to a Docker registry
 long: "Login to a registry.\n\n### Login to a self-hosted registry\n\nIf you want
   to login to a self-hosted registry you can specify this by\nadding the server name.\n\n```bash\n$
-  docker login localhost:8080\n```\n\n### Privileged user requirement\n\n`docker login`
-  requires user to use `sudo` or be `root`, except when:\n\n1.  connecting to a remote
-  daemon, such as a `docker-machine` provisioned `docker engine`.\n2.  user is added
-  to the `docker` group.  This will impact the security of your system; the `docker`
-  group is `root` equivalent.  See [Docker Daemon Attack Surface](https://docs.docker.com/security/security/#docker-daemon-attack-surface)
+  docker login localhost:8080\n```\n\n### Provide a password using STDIN\n\nTo run
+  the `docker login` command non-interactively, you can set the\n`--password-stdin`
+  flag to provide a password through `STDIN`. Using\n`STDIN` prevents the password
+  from ending up in the shell's history,\nor log-files.\n\nThe following example reads
+  a password from a file, and passes it to the\n`docker login` command using `STDIN`:\n\n```bash\n$
+  cat ~/my_password.txt | docker login --username foo --password-stdin\n```\n\n###
+  Privileged user requirement\n\n`docker login` requires user to use `sudo` or be
+  `root`, except when:\n\n1.  connecting to a remote daemon, such as a `docker-machine`
+  provisioned `docker engine`.\n2.  user is added to the `docker` group.  This will
+  impact the security of your system; the `docker` group is `root` equivalent.  See
+  [Docker Daemon Attack Surface](https://docs.docker.com/security/security/#docker-daemon-attack-surface)
   for details.\n\nYou can log into any public or private repository for which you
   have\ncredentials.  When you log in, the command stores encoded credentials in\n`$HOME/.docker/config.json`
   on Linux or `%USERPROFILE%/.docker/config.json` on Windows.\n\n### Credentials store\n\nThe
@@ -61,8 +67,22 @@ plink: docker.yaml
 options:
 - option: password
   shorthand: p
+  value_type: string
   description: Password
+  deprecated: false
+  experimental: false
+- option: password-stdin
+  value_type: bool
+  default_value: "false"
+  description: Take the password from stdin
+  deprecated: false
+  experimental: false
 - option: username
   shorthand: u
+  value_type: string
   description: Username
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

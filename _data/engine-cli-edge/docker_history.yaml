@@ -6,18 +6,30 @@ pname: docker
 plink: docker.yaml
 options:
 - option: format
+  value_type: string
   description: Pretty-print images using a Go template
+  deprecated: false
+  experimental: false
 - option: human
   shorthand: H
+  value_type: bool
   default_value: "true"
   description: Print sizes and dates in human readable format
+  deprecated: false
+  experimental: false
 - option: no-trunc
+  value_type: bool
   default_value: "false"
   description: Don't truncate output
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only show numeric IDs
+  deprecated: false
+  experimental: false
 examples: |-
   To see how the `docker:latest` image was built:
 
@@ -79,4 +91,6 @@ examples: |-
   <missing>: 3 weeks ago
   <missing>: 3 weeks ago
   ```
+deprecated: false
+experimental: false
 

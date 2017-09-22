@@ -24,17 +24,29 @@ plink: docker.yaml
 options:
 - option: author
   shorthand: a
+  value_type: string
   description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  deprecated: false
+  experimental: false
 - option: change
   shorthand: c
+  value_type: list
   description: Apply Dockerfile instruction to the created image
+  deprecated: false
+  experimental: false
 - option: message
   shorthand: m
+  value_type: string
   description: Commit message
+  deprecated: false
+  experimental: false
 - option: pause
   shorthand: p
+  value_type: bool
   default_value: "true"
   description: Pause container during commit
+  deprecated: false
+  experimental: false
 examples: |-
   ### Commit a container
 
@@ -101,4 +113,6 @@ examples: |-
   c3f279d17e0a        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            desperate_dubinsky
   197387f1b436        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            focused_hamilton
   ```
+deprecated: false
+experimental: false
 

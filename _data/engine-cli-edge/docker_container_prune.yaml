@@ -6,11 +6,17 @@ pname: docker container
 plink: docker_container.yaml
 options:
 - option: filter
+  value_type: filter
   description: Provide filter values (e.g. 'until=<timestamp>')
+  deprecated: false
+  experimental: false
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
 examples: |-
   ### Prune containers
 
@@ -95,4 +101,7 @@ examples: |-
   CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
   53a9bc23a516        busybox             "sh"                2017-01-04 13:11:59 -0800 PST   Exited (0) 9 minutes ago
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

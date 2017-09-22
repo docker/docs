@@ -53,52 +53,105 @@ pname: docker network
 plink: docker_network.yaml
 options:
 - option: attachable
+  value_type: bool
   default_value: "false"
   description: Enable manual container attachment
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
 - option: aux-address
+  value_type: map
   default_value: map[]
   description: Auxiliary IPv4 or IPv6 addresses used by Network driver
+  deprecated: false
+  experimental: false
 - option: config-from
+  value_type: string
   description: The network from which copying the configuration
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
 - option: config-only
+  value_type: bool
   default_value: "false"
   description: Create a configuration only network
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
 - option: driver
   shorthand: d
+  value_type: string
   default_value: bridge
   description: Driver to manage the Network
+  deprecated: false
+  experimental: false
 - option: gateway
+  value_type: stringSlice
   default_value: '[]'
   description: IPv4 or IPv6 Gateway for the master subnet
+  deprecated: false
+  experimental: false
 - option: ingress
+  value_type: bool
   default_value: "false"
   description: Create swarm routing-mesh network
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
 - option: internal
+  value_type: bool
   default_value: "false"
   description: Restrict external access to the network
+  deprecated: false
+  experimental: false
 - option: ip-range
+  value_type: stringSlice
   default_value: '[]'
   description: Allocate container ip from a sub-range
+  deprecated: false
+  experimental: false
 - option: ipam-driver
+  value_type: string
   default_value: default
   description: IP Address Management Driver
+  deprecated: false
+  experimental: false
 - option: ipam-opt
+  value_type: map
   default_value: map[]
   description: Set IPAM driver specific options
+  deprecated: false
+  experimental: false
 - option: ipv6
+  value_type: bool
   default_value: "false"
   description: Enable IPv6 networking
+  deprecated: false
+  experimental: false
 - option: label
+  value_type: list
   description: Set metadata on a network
+  deprecated: false
+  experimental: false
 - option: opt
   shorthand: o
+  value_type: map
   default_value: map[]
   description: Set driver specific options
+  deprecated: false
+  experimental: false
 - option: scope
+  value_type: string
   description: Control the network's scope
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
 - option: subnet
+  value_type: stringSlice
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment
+  deprecated: false
+  experimental: false
 examples: |-
   ### Connect containers
 
@@ -217,8 +270,10 @@ examples: |-
   $ docker network create -d overlay \
     --subnet=10.11.0.0/16 \
     --ingress \
-    --opt com.docker.network.mtu=9216 \
+    --opt com.docker.network.driver.mtu=9216 \
     --opt encrypted=true \
     my-ingress-network
   ```
+deprecated: false
+experimental: false
 

@@ -13,6 +13,11 @@ plink: docker.yaml
 options:
 - option: signal
   shorthand: s
+  value_type: string
   default_value: KILL
   description: Signal to send to the container
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

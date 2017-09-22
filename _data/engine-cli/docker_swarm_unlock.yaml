@@ -13,4 +13,7 @@ examples: |-
   $ docker swarm unlock
   Please enter unlock key:
   ```
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

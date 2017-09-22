@@ -7,16 +7,25 @@ plink: docker.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force the removal of a running container (uses SIGKILL)
+  deprecated: false
+  experimental: false
 - option: link
   shorthand: l
+  value_type: bool
   default_value: "false"
   description: Remove the specified link
+  deprecated: false
+  experimental: false
 - option: volumes
   shorthand: v
+  value_type: bool
   default_value: "false"
   description: Remove the volumes associated with the container
+  deprecated: false
+  experimental: false
 examples: |-
   ### Remove a container
 
@@ -87,4 +96,6 @@ examples: |-
   In this example, the volume for `/foo` will remain intact, but the volume for
   `/bar` will be removed. The same behavior holds for volumes inherited with
   `--volumes-from`.
+deprecated: false
+experimental: false
 

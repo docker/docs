@@ -18,4 +18,6 @@ examples: |-
   ```bash
   $ docker pause my_container
   ```
+deprecated: false
+experimental: false
 

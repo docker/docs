@@ -5,4 +5,7 @@ long: Remove one or more configuration files
 usage: docker config rm CONFIG [CONFIG...]
 pname: docker config
 plink: docker_config.yaml
+deprecated: false
+min_api_version: "1.30"
+experimental: false
 

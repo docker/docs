@@ -9,10 +9,15 @@ plink: docker.yaml
 options:
 - option: time
   shorthand: t
+  value_type: int
   default_value: "10"
   description: Seconds to wait for stop before killing it
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker stop my_container
   ```
+deprecated: false
+experimental: false
 

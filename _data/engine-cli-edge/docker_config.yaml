@@ -14,4 +14,7 @@ clink:
 - docker_config_inspect.yaml
 - docker_config_ls.yaml
 - docker_config_rm.yaml
+deprecated: false
+min_api_version: "1.30"
+experimental: false
 

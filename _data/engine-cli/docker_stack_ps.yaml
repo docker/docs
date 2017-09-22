@@ -9,19 +9,34 @@ plink: docker_stack.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print tasks using a Go template
+  deprecated: false
+  experimental: false
 - option: no-resolve
+  value_type: bool
   default_value: "false"
   description: Do not map IDs to Names
+  deprecated: false
+  experimental: false
 - option: no-trunc
+  value_type: bool
   default_value: "false"
   description: Do not truncate output
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display task IDs
+  deprecated: false
+  experimental: false
 examples: |-
   ### List the tasks that are part of a stack
 
@@ -208,4 +223,7 @@ examples: |-
           "Version": {
   (...)
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

@@ -8,11 +8,17 @@ pname: docker network
 plink: docker_network.yaml
 options:
 - option: filter
+  value_type: filter
   description: Provide filter values (e.g. 'until=<timestamp>')
+  deprecated: false
+  experimental: false
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker network prune
@@ -77,4 +83,7 @@ examples: |-
   97b91972bc3b        host                host                local
   f949d337b1f5        none                null                local
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

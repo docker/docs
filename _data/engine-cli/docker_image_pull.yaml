@@ -7,9 +7,17 @@ plink: docker_image.yaml
 options:
 - option: all-tags
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Download all tagged images in the repository
+  deprecated: false
+  experimental: false
 - option: disable-content-trust
+  value_type: bool
   default_value: "true"
   description: Skip image verification
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

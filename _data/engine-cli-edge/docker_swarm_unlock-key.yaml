@@ -7,9 +7,18 @@ plink: docker_swarm.yaml
 options:
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display token
+  deprecated: false
+  experimental: false
 - option: rotate
+  value_type: bool
   default_value: "false"
   description: Rotate unlock key
+  deprecated: false
+  experimental: false
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

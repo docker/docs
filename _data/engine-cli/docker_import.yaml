@@ -19,10 +19,16 @@ plink: docker.yaml
 options:
 - option: change
   shorthand: c
+  value_type: list
   description: Apply Dockerfile instruction to the created image
+  deprecated: false
+  experimental: false
 - option: message
   shorthand: m
+  value_type: string
   description: Set commit message for imported image
+  deprecated: false
+  experimental: false
 examples: |-
   ### Import from a remote location
 
@@ -68,4 +74,6 @@ examples: |-
   the ownership of the files (especially root ownership) during the
   archiving with tar. If you are not root (or the sudo command) when you
   tar, then the ownerships might not get preserved.
+deprecated: false
+experimental: false
 
