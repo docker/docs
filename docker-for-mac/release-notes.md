@@ -418,6 +418,11 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-rc3-mac30 2017-09-22 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc3)
+
 ### Docker Community Edition 17.09.0-ce-rc2-mac29 2017-09-19 (Edge)
 
 * Upgrades
