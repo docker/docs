@@ -10,16 +10,28 @@ plink: docker_network.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Provide filter values (e.g. 'driver=bridge')
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print networks using a Go template
+  deprecated: false
+  experimental: false
 - option: no-trunc
+  value_type: bool
   default_value: "false"
   description: Do not truncate the output
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display network IDs
+  deprecated: false
+  experimental: false
 examples: "### List all networks\n\n```bash\n$ sudo docker network ls\nNETWORK ID
   \         NAME                DRIVER          SCOPE\n7fca4eb8c647        bridge
   \             bridge          local\n9f904ee27bf5        none                null
@@ -100,4 +112,6 @@ examples: "### List all networks\n\n```bash\n$ sudo docker network ls\nNETWORK I
   uses a template without headers and outputs the\n`ID` and `Driver` entries separated
   by a colon for all networks:\n\n```bash\n$ docker network ls --format \"{{.ID}}:
   {{.Driver}}\"\nafaaab448eb2: bridge\nd1584f8dc718: host\n391df270dc66: null\n```"
+deprecated: false
+experimental: false
 

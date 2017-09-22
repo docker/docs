@@ -7,9 +7,17 @@ plink: docker_image.yaml
 options:
 - option: input
   shorthand: i
+  value_type: string
   description: Read from tar archive file, instead of STDIN
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Suppress the load output
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

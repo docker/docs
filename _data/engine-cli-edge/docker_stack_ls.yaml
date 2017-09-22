@@ -7,7 +7,10 @@ pname: docker stack
 plink: docker_stack.yaml
 options:
 - option: format
+  value_type: string
   description: Pretty-print stacks using a Go template
+  deprecated: false
+  experimental: false
 examples: |-
   The following command shows all stacks and some additional information:
 
@@ -42,4 +45,7 @@ examples: |-
   web-server: 1
   web-cache: 4
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

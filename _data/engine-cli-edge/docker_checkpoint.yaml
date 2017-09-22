@@ -12,4 +12,7 @@ clink:
 - docker_checkpoint_create.yaml
 - docker_checkpoint_ls.yaml
 - docker_checkpoint_rm.yaml
+deprecated: false
+min_api_version: "1.25"
+experimental: true
 

@@ -24,7 +24,10 @@ plink: docker.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 examples: |-
   ### Show output
 
@@ -222,4 +225,6 @@ examples: |-
     http://registry-mirror.example.com:5000/
   Live Restore Enabled: false
   ```
+deprecated: false
+experimental: false
 

@@ -9,7 +9,10 @@ plink: docker_plugin.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 examples: |-
   ```none
   $ docker plugin inspect tiborvass/sample-volume-plugin:latest
@@ -130,4 +133,7 @@ examples: |-
 
   8c74c978c434745c3ade82f1bc0acf38d04990eaf494fa507c16d9f1daa99c21
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

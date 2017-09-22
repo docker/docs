@@ -10,13 +10,22 @@ plink: docker.yaml
 options:
 - option: all
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Show all containers (default shows just running)
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print images using a Go template
+  deprecated: false
+  experimental: false
 - option: no-stream
+  value_type: bool
   default_value: "false"
   description: Disable streaming stats and only pull the first result
+  deprecated: false
+  experimental: false
 examples: |-
   Running `docker stats` on all running containers against a Linux daemon.
 
@@ -121,4 +130,6 @@ examples: |-
   9c76f7834ae2        0.07%               2.746 MiB / 64 MiB
   d1ea048f04e4        0.03%               4.583 MiB / 64 MiB
   ```
+deprecated: false
+experimental: false
 

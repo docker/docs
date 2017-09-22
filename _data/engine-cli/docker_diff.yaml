@@ -41,4 +41,6 @@ examples: |-
   A /var/log/nginx/access.log
   A /var/log/nginx/error.log
   ```
+deprecated: false
+experimental: false
 

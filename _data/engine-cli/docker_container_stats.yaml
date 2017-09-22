@@ -7,11 +7,22 @@ plink: docker_container.yaml
 options:
 - option: all
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Show all containers (default shows just running)
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print images using a Go template
+  deprecated: false
+  experimental: false
 - option: no-stream
+  value_type: bool
   default_value: "false"
   description: Disable streaming stats and only pull the first result
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

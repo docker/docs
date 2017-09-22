@@ -8,8 +8,11 @@ plink: docker_node.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force remove a node from the swarm
+  deprecated: false
+  experimental: false
 examples: |-
   ### Remove a stopped node from the swarm
 
@@ -45,4 +48,7 @@ examples: |-
 
   A manager node must be demoted to a worker node (using `docker node demote`)
   before you can remove it from the swarm.
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

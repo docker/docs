@@ -4,4 +4,6 @@ long: Display the running processes of a container
 usage: docker top CONTAINER [ps OPTIONS]
 pname: docker
 plink: docker.yaml
+deprecated: false
+experimental: false
 

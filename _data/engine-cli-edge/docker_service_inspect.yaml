@@ -15,10 +15,16 @@ plink: docker_service.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: pretty
+  value_type: bool
   default_value: "false"
   description: Print the information in a human friendly format
+  deprecated: false
+  experimental: false
 examples: "### Inspect a service by name or ID\n\nYou can inspect a service, either
   by its *name*, or *ID*\n\nFor example, given the following service;\n\n```bash\n$
   docker service ls\nID            NAME   MODE        REPLICAS  IMAGE\ndmu1ept4cxcf
@@ -50,4 +56,7 @@ examples: "### Inspect a service by name or ID\n\nYou can inspect a service, eit
   option can be used to obtain specific information about a\nservice. For example,
   the following command outputs the number of replicas\nof the \"redis\" service.\n\n```bash\n$
   docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis\n\n10\n```"
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

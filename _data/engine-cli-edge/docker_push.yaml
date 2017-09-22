@@ -17,8 +17,11 @@ pname: docker
 plink: docker.yaml
 options:
 - option: disable-content-trust
+  value_type: bool
   default_value: "true"
   description: Skip image signing
+  deprecated: false
+  experimental: false
 examples: |-
   ### Push a new image to a registry
 
@@ -49,4 +52,6 @@ examples: |-
 
   You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd`
   listed.
+deprecated: false
+experimental: false
 

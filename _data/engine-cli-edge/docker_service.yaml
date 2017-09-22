@@ -11,6 +11,7 @@ cname:
 - docker service ls
 - docker service ps
 - docker service rm
+- docker service rollback
 - docker service scale
 - docker service update
 clink:
@@ -20,6 +21,10 @@ clink:
 - docker_service_ls.yaml
 - docker_service_ps.yaml
 - docker_service_rm.yaml
+- docker_service_rollback.yaml
 - docker_service_scale.yaml
 - docker_service_update.yaml
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 
