@@ -341,6 +341,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
     --opt com.docker.network.bridge.enable_icc=false \
+    --opt com.docker.network.bridge.enable_ip_masquerade=true \
     docker_gwbridge
     ```
 
