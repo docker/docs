@@ -318,7 +318,7 @@ If the image isn't available locally on the machine, Docker will pull it from
 the repository.
 
 ```shell
-docker image rm <image id>
+docker image rm -f <image id>
 ```
 
 ```shell
