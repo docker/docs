@@ -264,8 +264,8 @@ The notation for associating a local image with a repository on a registry is
 `username/repository:tag`. The tag is optional, but recommended, since it is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
-`get-started:part1`. This will put the image in the `get-started` repository and
-tag it as `part1`.
+`get-started:part2`. This will put the image in the `get-started` repository and
+tag it as `part2`.
 
 Now, put it all together to tag the image. Run `docker tag image` with your
 username, repository, and tag names so that the image will upload to your
@@ -278,7 +278,7 @@ docker tag image username/repository:tag
 For example:
 
 ```shell
-docker tag friendlyhello john/get-started:part1
+docker tag friendlyhello john/get-started:part2
 ```
 
 Run [docker images](/engine/reference/commandline/images/) to see your newly
@@ -288,7 +288,7 @@ tagged image. (You can also use `docker image ls`.)
 $ docker images
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
-john/get-started         part1               d9e555c53008        3 minutes ago       195MB
+john/get-started         part2               d9e555c53008        3 minutes ago       195MB
 python                   2.7-slim            1c7128a655f6        5 days ago          183MB
 ...
 ```
@@ -322,9 +322,9 @@ docker image rm <image id>
 ```
 
 ```shell
-$ docker run -p 4000:80 john/get-started:part1
-Unable to find image 'john/get-started:part1' locally
-part1: Pulling from john/get-started
+$ docker run -p 4000:80 john/get-started:part2
+Unable to find image 'john/get-started:part2' locally
+part2: Pulling from john/get-started
 10a267c67f42: Already exists
 f68a39a6a5e4: Already exists
 9beaffc0cf19: Already exists
@@ -333,7 +333,7 @@ f68a39a6a5e4: Already exists
 ee7d8f576a14: Already exists
 fbccdcced46e: Already exists
 Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
-Status: Downloaded newer image for john/get-started:part1
+Status: Downloaded newer image for john/get-started:part2
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 
