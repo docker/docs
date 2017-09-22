@@ -38,7 +38,6 @@ docker container run -it --rm \
 | `images`         | Verify the UCP images on this node                        |
 | `uninstall-ucp`  | Uninstall UCP from this swarm                             |
 | `dump-certs`     | Print the public certificates used by this UCP web server |
-| `fingerprint`    | Print the TLS fingerprint for this UCP web server         |
 | `support`        | Create a support dump for this UCP node                   |
 | `id`             | Print the ID of UCP running on this node                  |
 | `backup`         | Create a backup of a UCP manager node                     |
