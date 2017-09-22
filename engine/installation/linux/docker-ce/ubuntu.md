@@ -8,7 +8,7 @@ redirect_from:
 title: Get Docker CE for Ubuntu
 ---
 
-{% assign minor-version = "17.06" %}
+{% assign minor-version = "17.09" %}
 
 To get started with Docker CE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
