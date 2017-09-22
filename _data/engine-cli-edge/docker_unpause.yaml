@@ -14,4 +14,6 @@ examples: |-
   ```bash
   $ docker unpause my_container
   ```
+deprecated: false
+experimental: false
 

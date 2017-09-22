@@ -22,4 +22,6 @@ clink:
 - docker_network_ls.yaml
 - docker_network_prune.yaml
 - docker_network_rm.yaml
+deprecated: false
+experimental: false
 

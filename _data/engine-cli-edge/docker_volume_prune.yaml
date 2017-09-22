@@ -7,11 +7,17 @@ pname: docker volume
 plink: docker_volume.yaml
 options:
 - option: filter
+  value_type: filter
   description: Provide filter values (e.g. 'label=<label>')
+  deprecated: false
+  experimental: false
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker volume prune
@@ -24,4 +30,7 @@ examples: |-
 
   Total reclaimed space: 36 B
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

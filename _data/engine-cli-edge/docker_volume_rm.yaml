@@ -8,11 +8,18 @@ plink: docker_volume.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force the removal of one or more volumes
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
 examples: |-
   ```bash
     $ docker volume rm hello
     hello
   ```
+deprecated: false
+min_api_version: "1.21"
+experimental: false
 

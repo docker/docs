@@ -14,10 +14,18 @@ plink: docker_container.yaml
 options:
 - option: archive
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Archive mode (copy all uid/gid information)
+  deprecated: false
+  experimental: false
 - option: follow-link
   shorthand: L
+  value_type: bool
   default_value: "false"
   description: Always follow symbol link in SRC_PATH
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

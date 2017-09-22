@@ -6,13 +6,25 @@ pname: docker node
 plink: docker_node.yaml
 options:
 - option: availability
+  value_type: string
   description: Availability of the node ("active"|"pause"|"drain")
+  deprecated: false
+  experimental: false
 - option: label-add
+  value_type: list
   description: Add or update a node label (key=value)
+  deprecated: false
+  experimental: false
 - option: label-rm
+  value_type: list
   description: Remove a node label if exists
+  deprecated: false
+  experimental: false
 - option: role
+  value_type: string
   description: Role of the node ("worker"|"manager")
+  deprecated: false
+  experimental: false
 examples: |-
   ### Add label metadata to a node
 
@@ -46,4 +58,7 @@ examples: |-
 
   For more information about labels, refer to [apply custom
   metadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/).
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

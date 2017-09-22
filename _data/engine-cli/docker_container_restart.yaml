@@ -7,6 +7,11 @@ plink: docker_container.yaml
 options:
 - option: time
   shorthand: t
+  value_type: int
   default_value: "10"
   description: Seconds to wait for stop before killing the container
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

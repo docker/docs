@@ -11,13 +11,22 @@ plink: docker_node.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print nodes using a Go template
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display IDs
+  deprecated: false
+  experimental: false
 examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME        STATUS
   \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready
   \  Active\n38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active\ne216jshn25ckzbvmwlnh5jr3g
@@ -65,5 +74,8 @@ examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME   
   headers and outputs the\n`ID`, `Hostname`, and `TLS Status` entries separated by
   a colon for all nodes:\n\n```bash\n$ docker node ls --format \"{{.ID}}: {{.Hostname}}
   {{.TLSStatus}}\"\ne216jshn25ckzbvmwlnh5jr3g: swarm-manager1 Ready\n35o6tiywb700jesrt3dmllaza:
-  swarm-worker1 Needs Rotation  \n``"
+  swarm-worker1 Needs Rotation  \n```"
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

@@ -7,8 +7,17 @@ plink: docker_config.yaml
 options:
 - option: format
   shorthand: f
+  value_type: string
   description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
 - option: pretty
+  value_type: bool
   default_value: "false"
   description: Print the information in a human friendly format
+  deprecated: false
+  experimental: false
+deprecated: false
+min_api_version: "1.30"
+experimental: false
 

@@ -8,9 +8,17 @@ plink: docker_image.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force removal of the image
+  deprecated: false
+  experimental: false
 - option: no-prune
+  value_type: bool
   default_value: "false"
   description: Do not delete untagged parents
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

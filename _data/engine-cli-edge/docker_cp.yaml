@@ -21,7 +21,9 @@ long: |-
   the user and primary group at the destination. For example, files copied to a
   container are created with `UID:GID` of the root user. Files copied to the local
   machine are created with the `UID:GID` of the user which invoked the `docker cp`
-  command.  If you specify the `-L` option, `docker cp` follows any symbolic link
+  command. However, if you specify the `-a` option, `docker cp` sets the ownership
+  to the user and primary group at the source.
+  If you specify the `-L` option, `docker cp` follows any symbolic link
   in the `SRC_PATH`.  `docker cp` does *not* create parent directories for
   `DEST_PATH` if they do not exist.
 
@@ -70,11 +72,11 @@ long: |-
   in different ways (consider `SRC_PATH` and `DEST_PATH` are directories):
 
   ```bash
-  $ docker exec foo tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
+  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
   ```
 
   ```bash
-  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i foo tar Cxf DEST_PATH -
+  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
   ```
 
   Using `-` as the `SRC_PATH` streams the contents of `STDIN` as a tar archive.
@@ -88,10 +90,18 @@ plink: docker.yaml
 options:
 - option: archive
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Archive mode (copy all uid/gid information)
+  deprecated: false
+  experimental: false
 - option: follow-link
   shorthand: L
+  value_type: bool
   default_value: "false"
   description: Always follow symbol link in SRC_PATH
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

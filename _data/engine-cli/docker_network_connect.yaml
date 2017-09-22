@@ -9,17 +9,32 @@ pname: docker network
 plink: docker_network.yaml
 options:
 - option: alias
+  value_type: stringSlice
   default_value: '[]'
   description: Add network-scoped alias for the container
+  deprecated: false
+  experimental: false
 - option: ip
+  value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
+  deprecated: false
+  experimental: false
 - option: ip6
+  value_type: string
   description: IPv6 address (e.g., 2001:db8::33)
+  deprecated: false
+  experimental: false
 - option: link
+  value_type: list
   description: Add link to another container
+  deprecated: false
+  experimental: false
 - option: link-local-ip
+  value_type: stringSlice
   default_value: '[]'
   description: Add a link-local address for the container
+  deprecated: false
+  experimental: false
 examples: |-
   ### Connect a running container to a network
 
@@ -88,4 +103,6 @@ examples: |-
   network but launched from different Engines can also communicate in this way.
 
   You can connect a container to one or more networks. The networks need not be the same type. For example, you can connect a single container bridge and overlay networks.
+deprecated: false
+experimental: false
 

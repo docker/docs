@@ -9,10 +9,15 @@ plink: docker_network.yaml
 options:
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Force the container to disconnect from a network
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
     $ docker network disconnect multi-host-network container1
   ```
+deprecated: false
+experimental: false
 

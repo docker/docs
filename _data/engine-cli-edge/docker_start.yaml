@@ -7,20 +7,37 @@ plink: docker.yaml
 options:
 - option: attach
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Attach STDOUT/STDERR and forward signals
+  deprecated: false
+  experimental: false
 - option: checkpoint
+  value_type: string
   description: Restore from this checkpoint
+  deprecated: false
+  experimental: true
 - option: checkpoint-dir
+  value_type: string
   description: Use a custom checkpoint storage directory
+  deprecated: false
+  experimental: true
 - option: detach-keys
+  value_type: string
   description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
 - option: interactive
   shorthand: i
+  value_type: bool
   default_value: "false"
   description: Attach container's STDIN
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker start my_container
   ```
+deprecated: false
+experimental: false
 

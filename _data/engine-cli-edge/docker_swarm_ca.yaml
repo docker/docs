@@ -7,29 +7,50 @@ pname: docker swarm
 plink: docker_swarm.yaml
 options:
 - option: ca-cert
+  value_type: pem-file
   description: |
     Path to the PEM-formatted root CA certificate to use for the new cluster
+  deprecated: false
+  experimental: false
 - option: ca-key
+  value_type: pem-file
   description: |
     Path to the PEM-formatted root CA key to use for the new cluster
+  deprecated: false
+  experimental: false
 - option: cert-expiry
+  value_type: duration
   default_value: 2160h0m0s
   description: Validity period for node certificates (ns|us|ms|s|m|h)
+  deprecated: false
+  experimental: false
 - option: detach
   shorthand: d
+  value_type: bool
   default_value: "false"
   description: |
     Exit immediately instead of waiting for the root rotation to converge
+  deprecated: false
+  experimental: false
 - option: external-ca
+  value_type: external-ca
   description: Specifications of one or more certificate signing endpoints
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Suppress progress output
+  deprecated: false
+  experimental: false
 - option: rotate
+  value_type: bool
   default_value: "false"
   description: |
     Rotate the swarm CA - if no certificate or key are provided, new ones will be generated
+  deprecated: false
+  experimental: false
 examples: |-
   Run the `docker swarm ca` command without any options to view the current root CA certificate
   in PEM format.
@@ -105,4 +126,7 @@ examples: |-
 
   Initiate the root CA rotation, but do not wait for the completion of or display the
   progress of the rotation.
+deprecated: false
+min_api_version: "1.30"
+experimental: false
 

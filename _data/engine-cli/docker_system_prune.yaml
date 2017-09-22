@@ -8,17 +8,30 @@ plink: docker_system.yaml
 options:
 - option: all
   shorthand: a
+  value_type: bool
   default_value: "false"
   description: Remove all unused images not just dangling ones
+  deprecated: false
+  experimental: false
 - option: filter
+  value_type: filter
   description: Provide filter values (e.g. 'label=<key>=<value>')
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
 - option: force
   shorthand: f
+  value_type: bool
   default_value: "false"
   description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
 - option: volumes
+  value_type: bool
   default_value: "false"
   description: Prune volumes
+  deprecated: false
+  experimental: false
 examples: "```bash\n$ docker system prune -a\n\nWARNING! This will remove:\n\t- all
   stopped containers\n\t- all volumes not used by at least one container\n\t- all
   networks not used by at least one container\n\t- all images without at least one
@@ -55,4 +68,7 @@ examples: "```bash\n$ docker system prune -a\n\nWARNING! This will remove:\n\t- 
   with the specified labels. The other\nformat is the `label!=...` (`label!=<key>`
   or `label!=<key>=<value>`), which removes\ncontainers, images, networks, and volumes
   without the specified labels."
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

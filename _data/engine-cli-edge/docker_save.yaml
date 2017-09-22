@@ -10,7 +10,10 @@ plink: docker.yaml
 options:
 - option: output
   shorthand: o
+  value_type: string
   description: Write to a file, instead of STDOUT
+  deprecated: false
+  experimental: false
 examples: |-
   ### Create a backup that can then be used with `docker load`.
 
@@ -39,4 +42,6 @@ examples: |-
   ```bash
   $ docker save -o ubuntu.tar ubuntu:lucid ubuntu:saucy
   ```
+deprecated: false
+experimental: false
 

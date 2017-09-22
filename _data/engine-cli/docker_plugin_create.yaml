@@ -9,8 +9,11 @@ pname: docker plugin
 plink: docker_plugin.yaml
 options:
 - option: compress
+  value_type: bool
   default_value: "false"
   description: Compress the context using gzip
+  deprecated: false
+  experimental: false
 examples: |-
   The following example shows how to create a sample `plugin`.
 
@@ -32,4 +35,7 @@ examples: |-
   ```
 
   The plugin can subsequently be enabled for local use or pushed to the public registry.
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

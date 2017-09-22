@@ -9,20 +9,38 @@ pname: docker stack
 plink: docker_stack.yaml
 options:
 - option: bundle-file
+  value_type: string
   description: Path to a Distributed Application Bundle file
+  deprecated: false
+  experimental: true
 - option: compose-file
   shorthand: c
+  value_type: string
   description: Path to a Compose file
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
 - option: prune
+  value_type: bool
   default_value: "false"
   description: Prune services that are no longer referenced
+  deprecated: false
+  min_api_version: "1.27"
+  experimental: false
 - option: resolve-image
+  value_type: string
   default_value: always
   description: |
     Query the registry to resolve image digest and supported platforms ("always"|"changed"|"never")
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
 - option: with-registry-auth
+  value_type: bool
   default_value: "false"
   description: Send registry authentication details to Swarm agents
+  deprecated: false
+  experimental: false
 examples: |-
   ### Compose file
 
@@ -30,6 +48,23 @@ examples: |-
 
   ```bash
   $ docker stack deploy --compose-file docker-compose.yml vossibility
+
+  Ignoring unsupported options: links
+
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+
+  The Compose file can also be provided as standard input with `--compose-file -`:
+
+  ```bash
+  $ cat docker-compose.yml | docker stack deploy --compose-file - vossibility
 
   Ignoring unsupported options: links
 
@@ -105,4 +140,7 @@ examples: |-
   9gc5m4met4he  vossibility_logstash               replicated  1/1       logstash@sha256:2dc8bddd1bb4a5a34e8ebaf73749f6413c101b2edef6617f2f7713926d2141fe
   axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 

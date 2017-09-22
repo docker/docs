@@ -11,13 +11,22 @@ plink: docker_volume.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Provide filter values (e.g. 'dangling=true')
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print volumes using a Go template
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display volume names
+  deprecated: false
+  experimental: false
 examples: |-
   ### Create a volume
   ```bash
@@ -145,11 +154,11 @@ examples: |-
 
   Placeholder   | Description
   --------------|------------------------------------------------------------------------------------------
-  `.Name`       | Network name
-  `.Driver`     | Network driver
-  `.Scope`      | Network scope (local, global)
-  `.Mountpoint` | Whether the network is internal or not.
-  `.Labels`     | All labels assigned to the volume.
+  `.Name`       | Volume name
+  `.Driver`     | Volume driver
+  `.Scope`      | Volume scope (local, global)
+  `.Mountpoint` | The mount point of the volume on the host
+  `.Labels`     | All labels assigned to the volume
   `.Label`      | Value of a specific label for this volume. For example `{{.Label "project.version"}}`
 
   When using the `--format` option, the `volume ls` command will either
@@ -166,4 +175,7 @@ examples: |-
   vol2: local
   vol3: local
   ```
+deprecated: false
+min_api_version: "1.21"
+experimental: false
 

@@ -7,5 +7,11 @@ pname: docker checkpoint
 plink: docker_checkpoint.yaml
 options:
 - option: checkpoint-dir
+  value_type: string
   description: Use a custom checkpoint storage directory
+  deprecated: false
+  experimental: false
+deprecated: false
+min_api_version: "1.25"
+experimental: true
 

@@ -6,11 +6,22 @@ pname: docker container
 plink: docker_container.yaml
 options:
 - option: detach-keys
+  value_type: string
   description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
 - option: no-stdin
+  value_type: bool
   default_value: "false"
   description: Do not attach STDIN
+  deprecated: false
+  experimental: false
 - option: sig-proxy
+  value_type: bool
   default_value: "true"
   description: Proxy all received signals to the process
+  deprecated: false
+  experimental: false
+deprecated: false
+experimental: false
 

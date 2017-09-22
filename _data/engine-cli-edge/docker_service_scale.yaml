@@ -12,9 +12,13 @@ plink: docker_service.yaml
 options:
 - option: detach
   shorthand: d
+  value_type: bool
   default_value: "true"
   description: |
     Exit immediately instead of waiting for the service to converge
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
 examples: |-
   ### Scale a single service
 
@@ -74,4 +78,7 @@ examples: |-
   3pr5mlvu3fh9  frontend  replicated  5/5       nginx:alpine
   74nzcxxjv6fq  backend   replicated  3/3       redis:3.0.6
   ```
+deprecated: false
+min_api_version: "1.24"
+experimental: false
 

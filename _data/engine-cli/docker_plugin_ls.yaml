@@ -12,16 +12,28 @@ plink: docker_plugin.yaml
 options:
 - option: filter
   shorthand: f
+  value_type: filter
   description: Provide filter values (e.g. 'enabled=true')
+  deprecated: false
+  experimental: false
 - option: format
+  value_type: string
   description: Pretty-print plugins using a Go template
+  deprecated: false
+  experimental: false
 - option: no-trunc
+  value_type: bool
   default_value: "false"
   description: Don't truncate output
+  deprecated: false
+  experimental: false
 - option: quiet
   shorthand: q
+  value_type: bool
   default_value: "false"
   description: Only display plugin IDs
+  deprecated: false
+  experimental: false
 examples: |-
   ```bash
   $ docker plugin ls
@@ -51,9 +63,9 @@ examples: |-
   `ipamdriver`, `logdriver`, `metricscollector`, and `authz` are supported capabilities.
 
   ```bash
-  $ docker plugin install --disable tiborvass/no-remove
+  $ docker plugin install --disable vieux/sshfs
 
-  tiborvass/no-remove
+  Installed plugin vieux/sshfs
 
   $ docker plugin ls --filter enabled=true
 
@@ -85,6 +97,9 @@ examples: |-
   ```bash
   $ docker plugin ls --format "{{.ID}}: {{.Name}}"
 
-  4be01827a72e: tiborvass/no-remove
+  4be01827a72e: vieux/sshfs:latest
   ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
 
