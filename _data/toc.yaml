@@ -606,14 +606,16 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.31/
-    title: v1.31 Reference
-  - path: /engine/api/v1.30/
-    title: v1.30 Reference
+  - path: /engine/api/v1.32/
+    title: v1.32 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.31/
+      title: v1.31 Reference
+    - path: /engine/api/v1.30/
+      title: v1.30 Reference
     - path: /engine/api/v1.29/
       title: v1.29 Reference
     - path: /engine/api/v1.28/
