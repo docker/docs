@@ -143,9 +143,9 @@ You now have two VMs created, named `myvm1` and `myvm2`.
 
 Use this command to list the machines and get their IP addresses.
 
-```none
-`docker-machine ls`
-```none
+```shell
+docker-machine ls
+```
 
 Here is example output from this command.
 
@@ -206,7 +206,7 @@ Congratulations, you have created your first swarm!
 Run `docker node ls` on the manager to view the nodes in this swarm:
 
 ```shell
-docker-machine ssh myvm1 "docker node ls"
+$ docker-machine ssh myvm1 "docker node ls"
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
 brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
 rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
@@ -222,11 +222,13 @@ The hard part is over. Now you just repeat the process you used in [part
 3](part3.md) to deploy on your new swarm. Just remember that only swarm managers
 like `myvm1` execute Docker commands; workers are just for capacity.
 
+### Configure a `docker-machine` shell to the swarm manager
+
 So far, you've been wrapping Docker commmands in `docker-machine ssh` to talk to
 the VMs. Another option is to run `docker-machine env <machine>` to get
 and run a command that configures your current shell to talk to the Docker
 daemon on the VM. This method works better for the next step because it allows
-you to use your local copy of the `docker-compose.yml` file to deploy the app
+you to use your local `docker-compose.yml` file to deploy the app
 "remotely" without having to copy it anywhere.
 
 Type `docker-machine env myvm1`, then copy-paste and run the command provided as
@@ -320,7 +322,6 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
   <hr>
 </div>
 
-
 ### Deploy the app on the swarm manager
 
 Now that you have my `myvm1`, you can use its powers as a swarm manager to
@@ -359,26 +360,24 @@ ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 
 > About accessing VMs with `docker-machine env` and `docker-machine ssh`
 >
-> To set your shell environment to talk to a different machine like `myvm2`,
-re-run `docker-machine env` in the same or a different shell, then run the given
+> * To set your shell to talk to a different machine like `myvm2`, simply re-run
+`docker-machine env` in the same or a different shell, then run the given
 command to point to `myvm2`. This is always specific to the current shell. If
-you change to an unconfigured shell or open a new one, you need to rerun the
-commands. You can check first with `docker-machine ls` to list machines, see
-what state they are in, get IP addresses, and find out which one, if any, you
-are connected to. To learn more, see the [Docker Machine getting started
-topics](/machine/get-started.md#create-a-machine).
+you change to an unconfigured shell or open a new one, you need to re-run the
+commands. Use `docker-machine ls` to list machines, see what state they are in,
+get IP addresses, and find out which one, if any, you are connected to. To learn
+more, see the [Docker Machine getting started topics](/machine/get-started.md#create-a-machine).
 >
-> You also have the option of wrapping Docker commands in the form of
-`docker-machine ssh <machine> "<command>"`, which logs directly into the VM but
-doesn't give you immediate access to files on your local host.
+> * Alternatively, you can wrap Docker commands in the form of
+`docker-machine ssh <machine> "<command>"`, which logs directly into
+the VM but doesn't give you immediate access to files on your local host.
 >
-> On Mac and Linux, you can use `docker-machine scp <file> <machine>:~` to copy
-files across machines, but Windows users need a terminal emulator like [Git
-Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order
-for this to work.
+> * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
+to copy files across machines, but Windows users need a terminal emulator
+like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order for this to work.
 >
-> This tutorial demos both `docker-machine ssh` and `docker-machine env`, since
-these are available on all platforms via the `docker-machine` CLI.
+> This tutorial demos both `docker-machine ssh` and
+`docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
 
 ### Accessing your cluster
 
