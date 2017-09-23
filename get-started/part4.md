@@ -66,15 +66,100 @@ enables the use of swarms. Enabling swarm mode instantly makes the current
 machine a swarm manager. From then on, Docker will run the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
-{% capture local-instructions %}
-You now have two VMs created, named `myvm1` and `myvm2`:
+## Set up your swarm
+
+A swarm is made up of multiple nodes, which can be either physical or virtual
+machines. The basic concept is simple enough: run `docker swarm init` to enable
+swarm mode and make your current machine a swarm manager, then run
+`docker swarm join` on other machines to have them join the swarm as workers.
+Choose a tab below to see how this plays out in various contexts. We'll use VMs
+to quickly create a two-machine cluster and turn it into a swarm.
+
+### Create a cluster
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
+  <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
+</ul>
+<div class="tab-content">
+  <div id="local" class="tab-pane fade in active">
+{% capture local-content %}
+
+#### VMs on your local machine (Mac, Linux, Windows 7 and 8)
+
+First, you'll need a hypervisor that can create virtual machines (VMs), so
+[install Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your
+machine's OS.
+
+> **Note**: If you are on a Windows system that has Hyper-V installed,
+such as Windows 10, there is no need to install VirtualBox and you should
+use Hyper-V instead. View the instructions for Hyper-V systems by clicking
+the Hyper-V tab above. If you are using
+[Docker Toolbox](/toolbox/overview.md), you should already have
+VirtualBox installed as part of it, so you are good to go.
+
+Now, create a couple of VMs using `docker-machine`, using the VirtualBox driver:
+
+```shell
+docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2
+```
+
+{% endcapture %}
+{{ local-content | markdownify }}
+
+</div>
+<div id="localwin" class="tab-pane fade" markdown="1">
+{% capture localwin-content %}
+
+#### VMs on your local machine (Windows 10)
+
+First, quickly create a virtual switch for your virtual machines (VMs) to share,
+so they will be able to connect to each other.
+
+1. Launch Hyper-V Manager
+2. Click **Virtual Switch Manager** in the right-hand menu
+3. Click **Create Virtual Switch** of type **External**
+4. Give it the name `myswitch`, and check the box to share your host machine's
+   active network adapter
+
+Now, create a couple of VMs using our node management tool,
+`docker-machine`:
+
+```shell
+docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
+docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
+```
+
+{% endcapture %}
+{{ localwin-content | markdownify }}
+</div>
+<hr>
+</div>
+
+#### List the VMs and get their IP addresses
+
+You now have two VMs created, named `myvm1` and `myvm2`.
+
+Use this command to list the machines and get their IP addresses.
 
 ```shell
 docker-machine ls
 ```
 
-The first one will act as the manager, which executes management commands and
-authenticates workers to join the swarm, and the second will be a worker.
+Here is example output from this command.
+
+```shell
+$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce   
+myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
+```
+
+#### Initialze the swarm and add nodes
+
+The first machine will act as the manager, which executes management commands
+and authenticates workers to join the swarm, and the second will be a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
@@ -93,15 +178,15 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-> **Note**: Ports 2376 and 2377
-> Port 2376 is the Docker daemon port. Port 2377 is the swarm management port.
-> Run `docker swarm init` and `docker swarm join` with port 2377 or no port at
-> all.
+> Ports 2377 and 2376
+>
+> Always run `docker swarm init` and `docker swarm join` with port 2377
+> (the swarm management port), or no port at all and let it take the default.
+>
+> The machine IP addresses returned by `docker-machine ls` include port 2376,
+> which is the Docker daemon port. Do not use this port or
+> [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
 
-> The VM URLs returned by`docker-machine ls` include port 2376. Do not use this
-> port or [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
-
-> To start over, run `docker swarm leave` from each node.
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -116,126 +201,153 @@ $ docker-machine ssh myvm2 "docker swarm join \
 This node joined a swarm as a worker.
 ```
 
-Congratulations, you have created your first swarm.
+Congratulations, you have created your first swarm!
 
-> **Note**: You can also run `docker-machine ssh myvm1` with no command attached
-to open a terminal session on that VM. Type `exit` when you're ready to return
-to the host shell prompt. It may be easier to paste the join command in that
-way.
-
-Use `ssh` to connect to the (`docker-machine ssh myvm1`), and run `docker node ls` to view the nodes in this swarm:
+Run `docker node ls` on the manager to view the nodes in this swarm:
 
 ```shell
-docker@myvm1:~$ docker node ls
+$ docker-machine ssh myvm1 "docker node ls"
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
 brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
 rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
 ```
 
-Type `exit` to get back out of that machine.
+> Leaving a swarm
+>
+> If you want to start over, you can run `docker swarm leave` from each node.
 
-Alternatively, wrap commands in `docker-machine ssh` to keep from having to directly log in and out. For example:
-
-```shell
-docker-machine ssh myvm1 "docker node ls"
-```
-
-
-{% endcapture %}
-
-{% capture local %}
-#### VMs on your local machine (Mac, Linux, Windows 7 and 8)
-
-First, you'll need a hypervisor that can create VMs, so [install
-VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your machine's OS.
-
-> **Note**: If you're on a Windows system that has Hyper-V installed, such as
-Windows 10, there is no need to install VirtualBox and you should use Hyper-V
-instead. View the instructions for Hyper-V systems by clicking the Hyper-V tab
-above.
-
-Now, create a couple of VMs using `docker-machine`, using the VirtualBox driver:
-
-```none
-$ docker-machine create --driver virtualbox myvm1
-$ docker-machine create --driver virtualbox myvm2
-```
-
-{{ local-instructions }}
-{% endcapture %}
-
-{% capture localwin %}
-#### VMs on your local machine (Windows 10)
-
-First, quickly create a virtual switch for your VMs to share, so they will be
-able to connect to each other.
-
-1. Launch Hyper-V Manager
-2. Click **Virtual Switch Manager** in the right-hand menu
-3. Click **Create Virtual Switch** of type **External**
-4. Give it the name `myswitch`, and check the box to share your host machine's
-   active network adapter
-
-Now, create a couple of virtual machines using our node management tool,
-`docker-machine`:
-
-```shell
-$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
-$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
-```
-
-{{ local-instructions }}
-{% endcapture %}
-
-## Set up your swarm
-
-A swarm is made up of multiple nodes, which can be either physical or virtual
-machines. The basic concept is simple enough: run `docker swarm init` to enable
-swarm mode and make your current machine a swarm manager, then run
-`docker swarm join` on other machines to have them join the swarm as workers.
-Choose a tab below to see how this plays out in various contexts. We'll use VMs
-to quickly create a two-machine cluster and turn it into a swarm.
-
-### Create a cluster
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
-  <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
-</ul>
-<div class="tab-content">
-  <div id="local" class="tab-pane fade in active" markdown="1">{{ local }}</div>
-  <div id="localwin" class="tab-pane fade" markdown="1">{{ localwin }}</div>
-</div>
-
-## Deploy your app on a cluster
+## Deploy your app on the swarm cluster
 
 The hard part is over. Now you just repeat the process you used in [part
 3](part3.md) to deploy on your new swarm. Just remember that only swarm managers
 like `myvm1` execute Docker commands; workers are just for capacity.
 
-Copy the file `docker-compose.yml` you created in part 3 to the swarm manager
-`myvm1`'s home directory (alias: `~`) by using the `docker-machine scp` command:
+### Configure a `docker-machine` shell to the swarm manager
+
+So far, you've been wrapping Docker commmands in `docker-machine ssh` to talk to
+the VMs. Another option is to run `docker-machine env <machine>` to get
+and run a command that configures your current shell to talk to the Docker
+daemon on the VM. This method works better for the next step because it allows
+you to use your local `docker-compose.yml` file to deploy the app
+"remotely" without having to copy it anywhere.
+
+Type `docker-machine env myvm1`, then copy-paste and run the command provided as
+the last line of the output to configure your shell to talk to `myvm1`, the
+swarm manager.
+
+The commands to configure your shell differ depending on whether you are Mac,
+Linux, or Windows, so examples of each are shown on the tabs below.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#mac-linux-machine">Mac, Linux</a></li>
+  <li><a data-toggle="tab" href="#win-machine">Windows</a></li>
+</ul>
+<div class="tab-content">
+  <div id="mac-linux-machine" class="tab-pane fade in active">
+  {% capture mac-linux-machine-content %}
+
+#### Docker machine shell environment on Mac or Linux
+
+Run `docker-machine env myvm1` to get the command to configure your shell to
+talk to `myvm1`.
+
+```shell
+$ docker-machine env myvm1
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/sam/.docker/machine/machines/myvm1"
+export DOCKER_MACHINE_NAME="myvm1"
+# Run this command to configure your shell:
+# eval $(docker-machine env myvm1)
+```
+
+Run the given command to configure your shell to talk to `myvm1`.
+
+```shell
+eval $(docker-machine env myvm1)
+```
+
+Run `docker-machine ls` to verify that `myvm1` is now the active machine, as
+indicated by the asterisk next to it.
+
+```shell
+$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce   
+myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
+```
+
+{% endcapture %}
+{{ mac-linux-machine-content | markdownify }}
+
+</div>
+<div id="win-machine" class="tab-pane fade">
+{% capture win-machine-content %}
+
+#### Docker machine shell environment on Windows
+
+Run `docker-machine env myvm1` to get the command to configure your shell to
+talk to `myvm1`.
+
+```shell
+PS C:\Users\sam\sandbox\get-started> docker-machine env myvm1
+$Env:DOCKER_TLS_VERIFY = "1"
+$Env:DOCKER_HOST = "tcp://192.168.203.207:2376"
+$Env:DOCKER_CERT_PATH = "C:\Users\sam\.docker\machine\machines\myvm1"
+$Env:DOCKER_MACHINE_NAME = "myvm1"
+$Env:COMPOSE_CONVERT_WINDOWS_PATHS = "true"
+# Run this command to configure your shell:
+# & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+```
+
+Run the given command to configure your shell to talk to `myvm1`.
+
+```shell
+& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+```
+
+Run `docker-machine ls` to verify that `myvm1` is the active machine as indicated by the asterisk next to it.
+
+```shell
+PS C:PATH> docker-machine ls
+NAME    ACTIVE   DRIVER   STATE     URL                          SWARM   DOCKER        ERRORS
+myvm1   *        hyperv   Running   tcp://192.168.203.207:2376           v17.06.2-ce
+myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.2-ce
+```
+
+  {% endcapture %}
+  {{ win-machine-content | markdownify }}
+  </div>
+  <hr>
+</div>
+
+### Deploy the app on the swarm manager
+
+Now that you have my `myvm1`, you can use its powers as a swarm manager to
+deploy your app by using the same `docker stack deploy` command you used in part
+3 to `myvm1`, and your local copy of `docker-stack.yml.`
+
+You are connected to `myvm1` by means of the `docker-machine` shell
+configuration, and you still have access to the files on your local host. Make
+sure you are in the same directory as before, which includes the
+[`docker-compose.yml` file you created in part
+3](/get-started/part3/#docker-composeyml).
+
+Just like before, run the following command to deploy the app on `myvm1`.
 
 ```
-docker-machine scp docker-compose.yml myvm1:~
+docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
-Now have `myvm1` use its powers as a swarm manager to deploy your app, by sending
-the same `docker stack deploy` command you used in part 3 to `myvm1` using
-`docker-machine ssh`:
+And that's it, the app is deployed on a swarm cluster!
+
+Now you can use the same [docker commands you used in part
+3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
+see that the containers have been distributed between both `myvm1` and `myvm2`.
+
 
 ```
-docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
-```
-
-And that's it, the app is deployed on a cluster.
-
-Wrap all the commands you used in part 3 in a call to `docker-machine ssh`, and
-they'll all work as you'd expect. Only this time, you'll see that the containers
-have been distributed between both `myvm1` and `myvm2`.
-
-```
-$ docker-machine ssh myvm1 "docker stack ps getstartedlab"
+$ docker stack ps getstartedlab
 
 ID            NAME        IMAGE              NODE   DESIRED STATE
 jq2g3qp8nzwx  test_web.1  username/repo:tag  myvm1  Running
@@ -244,6 +356,27 @@ vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
 ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
 ```
+
+> Connecting to VMs with `docker-machine env` and `docker-machine ssh`
+>
+> * To set your shell to talk to a different machine like `myvm2`, simply re-run
+`docker-machine env` in the same or a different shell, then run the given
+command to point to `myvm2`. This is always specific to the current shell. If
+you change to an unconfigured shell or open a new one, you need to re-run the
+commands. Use `docker-machine ls` to list machines, see what state they are in,
+get IP addresses, and find out which one, if any, you are connected to. To learn
+more, see the [Docker Machine getting started topics](/machine/get-started.md#create-a-machine).
+>
+> * Alternatively, you can wrap Docker commands in the form of
+`docker-machine ssh <machine> "<command>"`, which logs directly into
+the VM but doesn't give you immediate access to files on your local host.
+>
+> * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
+to copy files across machines, but Windows users need a terminal emulator
+like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order for this to work.
+>
+> This tutorial demos both `docker-machine ssh` and
+`docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
 
 ### Accessing your cluster
 
@@ -292,7 +425,7 @@ take advantage of the new resources.
 You can tear down the stack with `docker stack rm`. For example:
 
 ```
-docker-machine ssh myvm1 "docker stack rm getstartedlab"
+docker stack rm getstartedlab
 ```
 
 > Keep the swarm or remove it?
@@ -307,7 +440,8 @@ docker-machine ssh myvm1 "docker stack rm getstartedlab"
 
 ## Recap and cheat sheet (optional)
 
-Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113837):
+Here's [a terminal recording of what was covered on this
+page](https://asciinema.org/a/113837):
 
 <script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async></script>
 

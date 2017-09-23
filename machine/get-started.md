@@ -46,7 +46,7 @@ The prerequisites are:
 
 * Set up the Hyper-V driver to use an external virtual network switch See
 the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
-which includes an /machine/drivers/hyper-v.md#example of how to do this.
+which includes an [example](/machine/drivers/hyper-v.md#example) of how to do this.
 
 #### If you are using Docker for Mac
 

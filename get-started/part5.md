@@ -107,17 +107,17 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
 
     We'll talk more about placement constraints and volumes in a moment.
 
-2.  Copy this new `docker-compose.yml` file to the swarm manager, `myvm1`:
+2.  Make sure your shell is configured to talk to `myvm1` (examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
-    ```shell
-    docker-machine scp docker-compose.yml myvm1:~
-    ```
+    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next it.
+
+    * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
 
 3.  Re-run the `docker stack deploy` command on the manager, and
 whatever services need updating will be updated:
 
     ```shell
-    $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+    $ docker stack deploy -c docker-compose.yml getstartedlab
     Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
     Updating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
     ```
@@ -135,7 +135,7 @@ whatever services need updating will be updated:
     corroborate this visualization by running `docker stack ps <stack>`:
 
     ```shell
-    docker-machine ssh myvm1 "docker stack ps getstartedlab"
+    docker stack ps getstartedlab
     ```
 
     The visualizer is a standalone service that can run in any app
@@ -229,19 +229,19 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 2.  Create a `./data` directory on the manager:
 
     ```shell
-    $ docker-machine ssh myvm1 "mkdir ./data"
+    docker-machine ssh myvm1 "mkdir ./data"
     ```
 
-3.  Copy over the new `docker-compose.yml` file with `docker-machine scp`:
+3.  Make sure your shell is configured to talk to `myvm1` (examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
-    ```shell
-    $ docker-machine scp docker-compose.yml myvm1:~
-    ```
+    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next it.
+
+    * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
 
 4.  Run `docker stack deploy` one more time.
 
     ```shell
-    $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+    docker stack deploy -c docker-compose.yml getstartedlab
     ```
 
 5.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.

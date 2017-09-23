@@ -100,10 +100,9 @@ menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windo
 
 Either way, this opens a terminal whose context is your local machine, but whose
 Docker commands are routed up to the swarm running on your cloud service
-provider. This is a little different from the paradigm you've been following,
-where you were sending commands via SSH. Now, you can directly access both your
-local file system and your remote swarm, enabling some very tidy-looking
-commands:
+provider. This is the same shell configuration method you've already learned
+with `docker-machine env`. You directly access both your local file system and
+your remote swarm, enabling pure `docker` commands:
 
 ```shell
 docker stack deploy -c docker-compose.yml getstartedlab

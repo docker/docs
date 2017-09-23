@@ -91,9 +91,12 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 #### Using a custom target ID
 This topic has a custom target ID above its heading that can be used to link to
-it, in addtion to, or instead of, the default concatenated heading style.
+it, in addtion to, or instead of, the default concatenated heading style. The
+format of this ID is `{: id="custom-target-id"}`.
 
-You can use custom targets to link to headings or even paragraphs.
+You can use custom targets to link to headings or even paragraphs. You link to
+it as you would any other link, using `#custom-target-id` as the ultimate
+target.
 
 An example of a custom target ID in the documentation is the topic on
 [Compose file version 2 topic on CPU and other resources](/compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
