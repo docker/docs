@@ -357,7 +357,7 @@ ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
 ```
 
-> About accessing VMs with `docker-machine env` and `docker-machine ssh`
+> Connecting to VMs with `docker-machine env` and `docker-machine ssh`
 >
 > * To set your shell to talk to a different machine like `myvm2`, simply re-run
 `docker-machine env` in the same or a different shell, then run the given
