@@ -231,6 +231,8 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     ```shell
     docker-machine ssh myvm1 "mkdir ./data"
     ```
+    
+    You should also create the `data` folder in the folder containing your `docker-compose` file.
 
 3.  Make sure your shell is configured to talk to `myvm1` (examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
