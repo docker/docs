@@ -77,7 +77,7 @@ To fork the master branch of Kitematic:
 
 3.  Copy your fork's clone URL from GitHub.
 
-    GitHub allows you to use HTTPS or SSH protocols for clones. You can use the `git` command line or clients like Subversion to clone a repository. This guide assume you are using the HTTPS protocol and the `git` command line. If you are comfortable with SSH and some other tool, feel free to use that instead. You'll need to convert what you see in the guide to what is appropriate to your tool.
+    GitHub allows you to use HTTPS or SSH protocols for clones. You can use the `git` command line or clients like Subversion to clone a repository. This guide assumes you are using the HTTPS protocol and the `git` command line. If you are comfortable with SSH and some other tool, feel free to use that instead. You'll need to convert what you see in the guide to what is appropriate to your tool.
 
 ## Clone your repository locally and create a branch
 
