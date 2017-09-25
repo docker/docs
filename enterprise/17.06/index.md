@@ -14,6 +14,14 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+
+## 17.06.2-ee-3
+(2017-09-22)
+
+### Swarm mode
+
+- Increase max message size to allow larger snapshots [docker/swarmkit#131](https://github.com/docker/swarmkit/pull/131)
+
 ## 17.06.1-ee-2
 (2017-08-24)
 
