@@ -24,7 +24,6 @@ to upgrade your installation to the latest release.
   * Fixed GCS storage driver configuration page
 * Low severity:
   * Improved error handling in the vulnerability scanner.
-  * We now automatically discard old logs past 20MB per container by default
 
 ## DTR 2.2.8
 
