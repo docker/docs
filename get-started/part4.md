@@ -185,7 +185,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 >
 > The machine IP addresses returned by `docker-machine ls` include port 2376,
 > which is the Docker daemon port. Do not use this port or
-> [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2).
+> [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2){: target="_blank" class="_"}.
 
 
 As you can see, the response to `docker swarm init` contains a pre-configured
