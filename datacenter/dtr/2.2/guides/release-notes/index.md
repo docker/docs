@@ -21,7 +21,7 @@ to upgrade your installation to the latest release.
 * High severity:
   * Fixed issue with RethinkDB not starting correctly after restarting a DTR
   replica.
-  * Fixed GCS storage driver configuration page
+  * Fixed GCS storage driver configuration page.
 * Low severity:
   * Improved error handling in the vulnerability scanner.
 
