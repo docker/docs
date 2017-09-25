@@ -646,9 +646,12 @@ containers that should be running at any given time.
 
 #### resources
 
-Configures resource constraints. This replaces the older resource constraint
-options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
-`cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`).
+Configures resource constraints.
+
+> **Note**: This replaces the [older resource constraint options](compose-file-v2.md#cpu-and-other-resources) for non swarm mode in
+Compose files prior to version 3 (`cpu_shares`, `cpu_quota`, `cpuset`,
+`mem_limit`, `memswap_limit`, `mem_swappiness`), as described in [Upgrading
+version 2.x to 3.x](/compose/compose-file/compose-versioning.md#upgrading).
 
 Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
@@ -1638,7 +1641,7 @@ services:
       - type: bind
         source: ./static
         target: /opt/app/static
-        
+
 networks:
   webnet:
 
