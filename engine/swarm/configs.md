@@ -179,7 +179,7 @@ real-world example, continue to
 
 This is a very simple example which shows how to use configs with a Microsoft
 IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Mac 17.06 on Microsoft Windows 10. It stores the webpage in a config.
+for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
 
 This example assumes that you have PowerShell installed.
 
