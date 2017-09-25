@@ -1609,10 +1609,10 @@ should always begin with `.` or `..`.
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
 
-- `type`: the mount type `volume` or `bind`
+- `type`: the mount type `volume`, `bind` or `tmpfs`
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
-  [top-level `volumes` key](#volume-configuration-reference)
+  [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
 - `target`: the path in the container where the volume will be mounted
 - `read_only`: flag to set the volume as read-only
 - `bind`: configure additional bind options
