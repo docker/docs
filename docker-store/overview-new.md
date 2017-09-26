@@ -81,7 +81,13 @@ Store, but will not be supported by Docker nor is it eligible for certification.
 * Content that requires a non Certified Infrastructure environment may not be
 published in the Store.
 
-TABLE GOES HERE
+
+| If your content: | Can publish on Store  | Can be certified and supported by Docker | Supported by publisher |
+|:-----|:--------|:------|:-----|
+| Works on Docker Edition  | YES | YES |  Required |                                                
+| Works on Docker Edition  | YES | NO  |  Optional |  
+| Does not work on Docker Certified Infrastructure | NO                       |   N/A       |    N/A     |
+
 
 ### Onboarding
 
