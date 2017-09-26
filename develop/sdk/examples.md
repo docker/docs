@@ -1,5 +1,5 @@
 ---
-title: Examples using the Docker API and SDKs
+title: Examples using the Docker Engine SDKs and Docker API
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
@@ -43,7 +43,7 @@ command prompt:
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-run-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-run-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-run-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-run-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -145,7 +145,7 @@ You can also run containers in the background, the equivalent of typing
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-rundetach-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-rundetach-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-rundetach-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-rundetach-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -231,7 +231,7 @@ You can use the API to list containers that are running, just like using
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-listcontainers-go" data-group="go">Go</a></li>
   <li ><a data-toggle="tab" data-target="#tab-listcontainers-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-listcontainers-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-listcontainers-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -307,7 +307,7 @@ This example stops all running containers.
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-stopcontainers-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-stopcontainers-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-stopcontainers-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-stopcontainers-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -387,7 +387,7 @@ to change the hard-coded ID of the container to print the logs for.
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-containerlogs-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-containerlogs-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-containerlogs-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-containerlogs-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -457,7 +457,7 @@ List the images on your Engine, similar to `docker images`:
 <ul class="nav nav-tabs">
   <li> class="active"<a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-listimages-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-listimages-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-listimages-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -526,7 +526,7 @@ Pull an image, like `docker pull`:
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-pullimages-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-pullimages-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-pullimages-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-pullimages-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -600,7 +600,7 @@ Pull an image, like `docker pull`, with authentication:
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-pullimages-auth-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-pullimages-auth-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-pullimages-auth-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-pullimages-auth-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">
@@ -701,7 +701,7 @@ Commit a container to create an image from its contents:
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-commit-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-commit-python" data-group="python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#tab-commit-curl" data-group="curl">Curl</a></li>
+  <li><a data-toggle="tab" data-target="#tab-commit-curl" data-group="curl">HTTP</a></li>
 </ul>
 
 <div class="tab-content">

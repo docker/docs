@@ -1,5 +1,5 @@
 ---
-title: Develop with Docker SDKs and APIs
+title: Develop with Docker Engine SDKs and API
 description: Using Docker SDKs and APIs to automate Docker tasks in your language of choice
 keywords: developing, api, sdk
 redirect_from:
@@ -148,7 +148,7 @@ Docker API directly, or using the Python or Go SDK.
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#go">Go</a></li>
   <li><a data-toggle="tab" data-target="#python">Python</a></li>
-  <li><a data-toggle="tab" data-target="#curl">curl</a></li>
+  <li><a data-toggle="tab" data-target="#curl">HTTP</a></li>
 </ul>
 <div class="tab-content">
 
