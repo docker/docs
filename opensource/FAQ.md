@@ -14,7 +14,7 @@ troubleshooting problems in your code contribution.
 - [How should I comment my code?](FAQ.md#how-should-i-comment-my-code)
 - [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch)
 
-## How do I set my signature
+## How do I set my signature?
 
 1.  Change to the root of your `docker-fork` repository.
 
@@ -34,7 +34,7 @@ troubleshooting problems in your code contribution.
     $ git config --local user.email "emailname@mycompany.com"
     ```
 
-## How do I track changes from the docker repo upstream
+## How do I track changes from the docker repo upstream?
 
 Set your local repo to track changes upstream, on the `docker` repository.
 
@@ -50,12 +50,12 @@ Set your local repo to track changes upstream, on the `docker` repository.
     $ git remote add upstream https://github.com/moby/moby.git
     ```
 
-## How do I format my Go code
+## How do I format my Go code?
 
 Run `gofmt -s -w filename.go` on each changed file before committing your changes.
 Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins) that do the formatting automatically.
 
-## What is the pre-pull request checklist
+## What is the pre-pull request checklist?
 
 * Sync and cleanly rebase on top of Docker's `master`; do not mix multiple branches
   in the pull request.
@@ -137,7 +137,7 @@ force the previous change to be overwritten.
     $ git push -f origin my-keen-feature
     ```
 
-## How do I update vendor package from upstream ?
+## How do I update vendor package from upstream?
 
 1.  If you are not using the development container, download the
     [vndr](https://github.com/LK4D4/vndr) vendoring tool. The `vndr`
