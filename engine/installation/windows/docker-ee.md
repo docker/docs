@@ -58,7 +58,7 @@ full list of prerequisites.
 
 ### (optional) Make sure you have all required updates
 
-Some advanced Docker features (like Swarm) requires that Windows is updated to include the fixes in [KB4015217](https://support.microsoft.com/en-us/help/4015217/windows-10-update-kb4015217) (or a later cumulative patch).
+Some advanced Docker features (like Swarm) require that Windows is updated to include the fixes in [KB4015217](https://support.microsoft.com/en-us/help/4015217/windows-10-update-kb4015217) (or a later cumulative patch).
 
     ```ps
     PS> sconfig
