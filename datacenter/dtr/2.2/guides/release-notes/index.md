@@ -12,6 +12,19 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.9
+
+(13 September 2017)
+
+**Bugs fixed**
+
+* High severity:
+  * Fixed issue with RethinkDB not starting correctly after restarting a DTR
+  replica.
+  * Fixed GCS storage driver configuration page.
+* Low severity:
+  * Improved error handling in the vulnerability scanner.
+
 ## DTR 2.2.8
 
 (24 August 2017)
