@@ -40,7 +40,7 @@ full list of prerequisites.
 2.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
-    PS> docker container run hello-world:nanoserver
+    docker container run hello-world:nanoserver
 
     Unable to find image 'hello-world:nanoserver' locally
     nanoserver: Pulling from library/hello-world
@@ -60,9 +60,9 @@ full list of prerequisites.
 
 Some advanced Docker features (like Swarm) require that Windows is updated to include the fixes in [KB4015217](https://support.microsoft.com/en-us/help/4015217/windows-10-update-kb4015217) (or a later cumulative patch).
 
-    ```ps
-    PS> sconfig
-    ```
+```ps
+sconfig
+```
     
 Select option `6) Download and Install Updates`.
 
