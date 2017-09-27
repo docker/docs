@@ -85,7 +85,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
       visualizer:
         image: dockersamples/visualizer:stable
         ports:
-          - "8080:8080":
+          - "8080:8080"
         volumes:
           - "/var/run/docker.sock:/var/run/docker.sock"
         deploy:
