@@ -372,7 +372,7 @@ more, see the [Docker Machine getting started topics](/machine/get-started.md#cr
 the VM but doesn't give you immediate access to files on your local host.
 >
 > * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
-to copy files across machines, but Windows users need a terminal emulator
+to copy files across machines, but Windows users need a Linux terminal emulator
 like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order for this to work.
 >
 > This tutorial demos both `docker-machine ssh` and
