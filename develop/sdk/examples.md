@@ -17,20 +17,6 @@ also try out the Docker Engine API.
 Each of these examples show how to perform a given Docker operation using the Go
 and Python SDKs and the HTTP API using `curl`.
 
-## Setup for Go examples
-
-- **One time:** If you do not currently have a Go environment set up, create
-  a `go/src` directory in your home directory.
-
-- **For each of the Go examples you want to run**:
-  1.  Copy it into a `go` file in a new subdirectory of `go/src` (such as
-      `go/src/run-container/run-container.go`).
-
-  2.  Within the subdirectory which contains the `.go` source file, run
-      `dep init`.
-
-  3.  Run `go run <source-file-name>.go`.
-
 ## Run a container
 
 This first example shows how to run a container using the Docker API. On the
@@ -54,54 +40,54 @@ command prompt:
 package main
 
 import (
-    "io"
-    "os"
+	"io"
+	"os"
 
-    "golang.docker.com/go-docker"
-    "golang.docker.com/go-docker/api/types"
-    "golang.docker.com/go-docker/api/types/container"
-    "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-    ctx := context.Background()
-    client, err := docker.NewEnvClient()
-    if err != nil {
-        panic(err)
-    }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-    _, err = client.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
-    if err != nil {
-        panic(err)
-    }
+	_, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-    resp, err := client.ContainerCreate(ctx, &container.Config{
-        Image: "alpine",
-        Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, "")
-    if err != nil {
-        panic(err)
-    }
+	resp, err := cli.ContainerCreate(ctx, &container.Config{
+		Image: "alpine",
+		Cmd:   []string{"echo", "hello world"},
+	}, nil, nil, "")
+	if err != nil {
+		panic(err)
+	}
 
-    if err := client.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
-        panic(err)
-    }
+	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+		panic(err)
+	}
 
-    statusCh, errCh := client.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
-    select {
-    case err := <-errCh:
-        if err != nil {
-            panic(err)
-        }
-    case <-statusCh:
-    }
+	statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
+	select {
+	case err := <-errCh:
+		if err != nil {
+			panic(err)
+		}
+	case <-statusCh:
+	}
 
-    out, err := client.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true})
-    if err != nil {
-        panic(err)
-    }
+	out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true})
+	if err != nil {
+		panic(err)
+	}
 
-    io.Copy(os.Stdout, out)
+	io.Copy(os.Stdout, out)
 }
 ```
 
@@ -156,43 +142,43 @@ You can also run containers in the background, the equivalent of typing
 package main
 
 import (
-  "fmt"
-  "io"
-  "os"
+	"fmt"
+	"io"
+	"os"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.docker.com/go-docker/api/types/container"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  imageName := "bfirsh/reticulate-splines"
+	imageName := "bfirsh/reticulate-splines"
 
-  out, err := client.ImagePull(ctx, imageName, types.ImagePullOptions{})
-  if err != nil {
-    panic(err)
-  }
-  io.Copy(os.Stdout, out)
+	out, err := cli.ImagePull(ctx, imageName, types.ImagePullOptions{})
+	if err != nil {
+		panic(err)
+	}
+	io.Copy(os.Stdout, out)
 
-  resp, err := client.ContainerCreate(ctx, &container.Config{
-    Image: imageName,
-  }, nil, nil, "")
-  if err != nil {
-    panic(err)
-  }
+	resp, err := cli.ContainerCreate(ctx, &container.Config{
+		Image: imageName,
+	}, nil, nil, "")
+	if err != nil {
+		panic(err)
+	}
 
-  if err := client.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
-    panic(err)
-  }
+	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+		panic(err)
+	}
 
-  fmt.Println(resp.ID)
+	fmt.Println(resp.ID)
 }
 ```
 
@@ -242,28 +228,27 @@ You can use the API to list containers that are running, just like using
 package main
 
 import (
-  "fmt"
+	"fmt"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.docker.com/go-docker/api/types/container"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  containers, err := client.ContainerList(context.Background(), types.ContainerListOptions{})
-  if err != nil {
-    panic(err)
-  }
+	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-  for _, container := range containers {
-    fmt.Println(container.ID)
-  }
+	for _, container := range containers {
+		fmt.Println(container.ID)
+	}
 }
 ```
 
@@ -318,32 +303,32 @@ This example stops all running containers.
 package main
 
 import (
-  "fmt"
+	"fmt"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  containers, err := client.ContainerList(ctx, types.ContainerListOptions{})
-  if err != nil {
-    panic(err)
-  }
+	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-  for _, container := range containers {
-    fmt.Print("Stopping container ", container.ID[:10],"... ")
-    if err := client.ContainerStop(ctx, container.ID, nil); err != nil {
-      panic(err)
-    }
-    fmt.Println("Success")
-  }
+	for _, container := range containers {
+		fmt.Print("Stopping container ", container.ID[:10], "... ")
+		if err := cli.ContainerStop(ctx, container.ID, nil); err != nil {
+			panic(err)
+		}
+		fmt.Println("Success")
+	}
 }
 ```
 
@@ -398,29 +383,29 @@ to change the hard-coded ID of the container to print the logs for.
 package main
 
 import (
-  "io"
-  "os"
+	"io"
+	"os"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  options := types.ContainerLogsOptions{ShowStdout: true}
-  // Replace this ID with a container that really exists
-  out, err := client.ContainerLogs(ctx, "f1064a8a4c82", options)
-  if err != nil {
-    panic(err)
-  }
+	options := types.ContainerLogsOptions{ShowStdout: true}
+	// Replace this ID with a container that really exists
+	out, err := cli.ContainerLogs(ctx, "f1064a8a4c82", options)
+	if err != nil {
+		panic(err)
+	}
 
-  io.Copy(os.Stdout, out)
+	io.Copy(os.Stdout, out)
 }
 ```
 
@@ -468,27 +453,27 @@ List the images on your Engine, similar to `docker images`:
 package main
 
 import (
-  "fmt"
+	"fmt"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  images, err := client.ImageList(context.Background(), types.ImageListOptions{})
-  if err != nil {
-    panic(err)
-  }
+	images, err := cli.ImageList(context.Background(), types.ImageListOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-  for _, image := range images {
-    fmt.Println(image.ID)
-  }
+	for _, image := range images {
+		fmt.Println(image.ID)
+	}
 }
 ```
 
@@ -537,29 +522,29 @@ Pull an image, like `docker pull`:
 package main
 
 import (
-  "io"
-  "os"
+	"io"
+	"os"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  out, err := client.ImagePull(ctx, "alpine", types.ImagePullOptions{})
-  if err != nil {
-    panic(err)
-  }
+	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-  defer out.Close()
+	defer out.Close()
 
-  io.Copy(os.Stdout, out)
+	io.Copy(os.Stdout, out)
 }
 ```
 
@@ -611,42 +596,40 @@ Pull an image, like `docker pull`, with authentication:
 package main
 
 import (
-  "io"
-  "os"
-  "encoding/json"
-  "encoding/base64"
+	"encoding/base64"
+	"encoding/json"
+	"io"
+	"os"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
-
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  authConfig := types.AuthConfig{
-      Username: "username",
-      Password: "password",
-  }
-  encodedJSON, err := json.Marshal(authConfig)
-  if err != nil {
-      panic(err)
-  }
-  authStr := base64.URLEncoding.EncodeToString(encodedJSON)
+	authConfig := types.AuthConfig{
+		Username: "username",
+		Password: "password",
+	}
+	encodedJSON, err := json.Marshal(authConfig)
+	if err != nil {
+		panic(err)
+	}
+	authStr := base64.URLEncoding.EncodeToString(encodedJSON)
 
-  out, err := client.ImagePull(ctx, "alpine", types.ImagePullOptions{RegistryAuth:
-  authStr})
-  if err != nil {
-    panic(err)
-  }
+	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{RegistryAuth: authStr})
+	if err != nil {
+		panic(err)
+	}
 
-  defer out.Close()
-  io.Copy(os.Stdout, out)
+	defer out.Close()
+	io.Copy(os.Stdout, out)
 }
 ```
 
@@ -712,48 +695,48 @@ Commit a container to create an image from its contents:
 package main
 
 import (
-  "fmt"
+	"fmt"
 
-  "golang.docker.com/go-docker"
-  "golang.docker.com/go-docker/api/types"
-  "golang.docker.com/go-docker/api/types/container"
-  "golang.org/x/net/context"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
+	"golang.org/x/net/context"
 )
 
 func main() {
-  ctx := context.Background()
-  client, err := docker.NewEnvClient()
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.Background()
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
 
-  createResp, err := client.ContainerCreate(ctx, &container.Config{
-    Image: "alpine",
-    Cmd:   []string{"touch", "/helloworld"},
-  }, nil, nil, "")
-  if err != nil {
-    panic(err)
-  }
+	createResp, err := cli.ContainerCreate(ctx, &container.Config{
+		Image: "alpine",
+		Cmd:   []string{"touch", "/helloworld"},
+	}, nil, nil, "")
+	if err != nil {
+		panic(err)
+	}
 
-  if err := client.ContainerStart(ctx, createResp.ID, types.ContainerStartOptions{}); err != nil {
-    panic(err)
-  }
+	if err := cli.ContainerStart(ctx, createResp.ID, types.ContainerStartOptions{}); err != nil {
+		panic(err)
+	}
 
-  statusCh, errCh := client.ContainerWait(ctx, createResp.ID, container.WaitConditionNotRunning)
-    select {
-    case err := <-errCh:
-        if err != nil {
-            panic(err)
-        }
-    case <-statusCh:
-    }
+	statusCh, errCh := cli.ContainerWait(ctx, createResp.ID, container.WaitConditionNotRunning)
+	select {
+	case err := <-errCh:
+		if err != nil {
+			panic(err)
+		}
+	case <-statusCh:
+	}
 
-  commitResp, err := client.ContainerCommit(ctx, createResp.ID, types.ContainerCommitOptions{Reference: "helloworld"})
-  if err != nil {
-    panic(err)
-  }
+	commitResp, err := cli.ContainerCommit(ctx, createResp.ID, types.ContainerCommitOptions{Reference: "helloworld"})
+	if err != nil {
+		panic(err)
+	}
 
-  fmt.Println(commitResp.ID)
+	fmt.Println(commitResp.ID)
 }
 ```
 

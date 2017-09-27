@@ -26,21 +26,11 @@ installed and coexist together.
 
 ### Go SDK
 
-If you don't have `dep` installed, follow the [official
-instructions](https://github.com/golang/dep) to install it.
+```bash
+go get github.com/docker/docker/client
+```
 
-In the same directory as your source code:
-
-- If you haven't used `dep` in your project yet, run `dep init`.
-
-- Otherwise, run the following commands:
-
-  ```bash
-  dep ensure
-  dep ensure -add golang.docker.com/go-docker@v1
-  ```
-
-[Read the full Docker Engine Go SDK reference](https://godoc.org/golang.docker.com/go-docker).
+[Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 
 ### Python SDK
 
@@ -161,15 +151,15 @@ import (
     "io"
     "os"
 
-    "golang.docker.com/go-docker"
-    "golang.docker.com/go-docker/api/types"
-    "golang.docker.com/go-docker/api/types/container"
+    "github.com/docker/docker/client"
+    "github.com/docker/docker/api/types"
+    "github.com/docker/docker/api/types/container"
     "golang.org/x/net/context"
 )
 
 func main() {
     ctx := context.Background()
-    cli, err := docker.NewEnvClient()
+    cli, err := client.NewEnvClient()
     if err != nil {
         panic(err)
     }
