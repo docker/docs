@@ -232,10 +232,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     - The placement constraint you put on the Redis service, ensuring that it
       always uses the same host.
-    - The volume you created that lets the container access `./data` (on the host)
-      as `/data` (inside the Redis container). While containers come and go, the
-      files stored on `./data` on the specified host will persist, enabling
-      continuity.
+    - The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host will persist, enabling continuity.
 
     You are ready to deploy your new Redis-using stack.
 
@@ -251,8 +248,12 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     $ docker-machine scp docker-compose.yml myvm1:~
     ```
 
-    > **Note**: For now, Windows users will need a Linux terminal emulator
-    like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order for `docker-machine scp` to work. We are researching a better solution here, but right now it looks like the Compose file needs to be located on the VM so that it looks for `~/.data/` in the right place.
+    > **Note**: Windows users will need a Linux terminal emulator like [Git
+Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order
+for `docker-machine scp` to work. We are researching a better solution here, one
+without the need to copy files over to the VM, but for now it seems that the
+Compose file needs to be located on the VM so that it looks for `./data` in the
+right place.
 
 4.  Run `docker stack deploy` one more time, this time wrapped in  `docker-machine ssh myvm1` to specifically send it to the Compose file we just placed on the manager.
 
