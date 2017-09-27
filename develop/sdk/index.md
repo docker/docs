@@ -142,7 +142,7 @@ Docker API directly, or using the Python or Go SDK.
 </ul>
 <div class="tab-content">
 
-  <div id="go" class="tab-pane fade" markdown="1">
+  <div id="go" class="tab-pane fade in active" markdown="1">
 
 ```go
 package main
@@ -200,7 +200,7 @@ func main() {
 ```
 
   </div>
-  <div id="python" class="tab-pane fade in active" markdown="1">
+  <div id="python" class="tab-pane fade" markdown="1">
 
 ```python
 import docker

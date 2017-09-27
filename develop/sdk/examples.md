@@ -550,7 +550,7 @@ func main() {
 
 </div>
 
-<div id="tab-pullimages-python" class="tab-pane fadee" markdown="1">
+<div id="tab-pullimages-python" class="tab-pane fade" markdown="1">
 
 ```python
 import docker
