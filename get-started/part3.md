@@ -192,14 +192,20 @@ docker container ls -q
 ```
 
 You can run `curl http://localhost` several times in a row, or go to that URL in
-your browser and hit refresh a few times. Either way, you'll see the container
-ID change, demonstrating the load-balancing; with each request, one of
-the 5 replicas is chosen, in a round-robin fashion, to respond. The container IDs will match your output from the previous command (`docker container ls -q`).
+your browser and hit refresh a few times.
 
+![Hello World in browser](images/app-in-browser.png)
 
->**Note**: At this stage, it may take up to 30 seconds for the containers to respond to HTTP
-> requests. This is not indicative of Docker or swarm performance, but rather an unmet
-> Redis dependency that we will address later in the tutorial.
+Either way, you'll see the container ID change, demonstrating the
+load-balancing; with each request, one of the 5 replicas is chosen, in a
+round-robin fashion, to respond. The container IDs will match your output from
+the previous command (`docker container ls -q`).
+
+>**Note**: At this stage, it may take up to 30 seconds for the containers
+to respond to HTTP requests. This is not indicative of Docker or
+swarm performance, but rather an unmet Redis dependency that we will
+address later in the tutorial. For now, the visitor counter isn't working
+for the same reason; we haven't yet added a service to persist data.
 
 ## Scale the app
 
