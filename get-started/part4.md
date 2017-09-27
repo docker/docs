@@ -381,10 +381,15 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 ### Accessing your cluster
 
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.
+
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
-browser, hitting refresh (or just `curl` them). You'll see five possible
-container IDs all cycling by randomly, demonstrating the load-balancing.
+browser, hitting refresh (or just `curl` them).
+
+![Hello World in browser](images/app-in-browser-swarm.png)
+
+You'll see five possible container IDs all cycling by randomly, demonstrating
+the load-balancing.
 
 The reason both IP addresses work is that nodes in a swarm participate in an
 ingress **routing mesh**. This ensures that a service deployed at a certain port
