@@ -135,6 +135,16 @@ guides:
         title: Known issues
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
+  - sectiontitle: Compatibility between Docker versions
+    section:
+      - path: /engine/migration/
+        title: Migrate to Docker 1.10
+      - path: /engine/breaking_changes/
+        title: Breaking changes
+      - path: /engine/deprecated/
+        title: Deprecated Docker features
+      - path: /engine/faq/
+        title: FAQ
   - sectiontitle: Release notes
     section:
       - path: /enterprise/release-notes/
@@ -166,147 +176,70 @@ guides:
       title: Network containers
   - path: /engine/docker-overview/
     title: Docker overview
-- sectiontitle: User guide
+
+- sectiontitle: Develop with Docker
   section:
-  - path: /engine/userguide/
-    title: Overview
-  - sectiontitle: Work with images
-    section:
-    - path: /engine/userguide/eng-image/dockerfile_best-practices/
-      title: Best practices for writing Dockerfiles
-    - path: /engine/userguide/eng-image/baseimages/
-      title: Create a base image
-    - path: /engine/userguide/eng-image/multistage-build/
-      title: Use multi-stage builds
-    - path: /engine/userguide/eng-image/image_management/
-      title: Image management
-  - sectiontitle: Store data within containers
-    section:
-    - path: /engine/userguide/storagedriver/
-      title: Storage driver overview
-    - path: /engine/userguide/storagedriver/imagesandcontainers/
-      title: About images, containers, and storage drivers
-    - path: /engine/userguide/storagedriver/selectadriver/
-      title: Select a storage driver
-    - path: /engine/userguide/storagedriver/aufs-driver/
-      title: Use the AUFS storage driver
-    - path: /engine/userguide/storagedriver/btrfs-driver/
-      title: Use the Btrfs storage driver
-    - path: /engine/userguide/storagedriver/device-mapper-driver/
-      title: Use the Device mapper storage driver
-    - path: /engine/userguide/storagedriver/overlayfs-driver/
-      title: Use the OverlayFS storage driver
-    - path: /engine/userguide/storagedriver/zfs-driver/
-      title: Use the ZFS storage driver
-    - path: /engine/userguide/storagedriver/vfs-driver/
-      title: Use the VFS storage driver
-  - sectiontitle: Network configuration
-    section:
-    - path: /engine/userguide/networking/
-      title: Docker container networking
-    - path: /engine/userguide/networking/work-with-networks/
-      title: Work with network commands
-    - path: /engine/swarm/networking/
-      title: Manage swarm service networks
-    - path: /engine/userguide/networking/overlay-standalone-swarm/
-      title: Multi-host networking with standalone swarms
-    - path: /engine/userguide/networking/get-started-macvlan/
-      title: Get started with macvlan network driver
-    - path: /engine/userguide/networking/overlay-security-model/
-      title: Swarm mode overlay network security model
-    - path: /engine/userguide/networking/configure-dns/
-      title: Configure container DNS in user-defined networks
-    - sectiontitle: Default bridge network
+    - sectiontitle: Develop your apps on Docker
       section:
-      - path: /engine/userguide/networking/default_network/dockerlinks/
-        title: Legacy container links
-      - path: /engine/userguide/networking/default_network/binding/
-        title: Bind container ports to the host
-      - path: /engine/userguide/networking/default_network/build-bridges/
-        title: Build your own bridge
-      - path: /engine/userguide/networking/default_network/configure-dns/
-        title: Configure container DNS
-      - path: /engine/userguide/networking/default_network/custom-docker0/
-        title: Customize the docker0 bridge
-      - path: /engine/userguide/networking/default_network/container-communication/
-        title: Understand container communication
-      - path: /engine/userguide/networking/default_network/ipv6/
-        title: IPv6 with Docker
-  - path: /engine/userguide/labels-custom-metadata/
-    title: Apply custom metadata
-  - path: /engine/migration/
-    title: Migrate to Engine 1.10
-  - path: /engine/breaking_changes/
-    title: Breaking changes
-  - path: /engine/deprecated/
-    title: Deprecated Engine features
-  - path: /engine/faq/
-    title: FAQ
-- sectiontitle: Admin guide
+        - path: /develop/
+          title: App development overview
+        - path: /develop/dev-best-practices/
+          title: App development best practices
+        - sectiontitle: Work with images
+          section:
+          - path: /engine/userguide/eng-image/dockerfile_best-practices/
+            title: Best practices for writing Dockerfiles
+          - path: /engine/userguide/eng-image/baseimages/
+            title: Create a base image
+          - path: /engine/userguide/eng-image/multistage-build/
+            title: Use multi-stage builds
+          - path: /engine/reference/builder/
+            title: Dockerfile reference
+            nosync: true
+          - path: /engine/userguide/eng-image/image_management/
+            title: Image management
+        - path: /samples/
+          title: Docker app examples
+          nosync: true
+    - sectiontitle: Develop using the Docker Engine SDKs and API
+      section:
+        - path: /develop/sdk/
+          title: Overview
+        - path: /develop/sdk/examples/
+          title: SDK and API examples
+- sectiontitle: Configure networking
   section:
-  - path: /engine/admin/
-    title: Configuring and running Docker
-  - path: /engine/admin/prometheus/
-    title: Collect Docker metrics with Prometheus
-  - path: /engine/admin/start-containers-automatically/
-    title: Start containers automatically
-  - path: /engine/admin/resource_constraints/
-    title: Limit a container's resources
-  - path: /engine/admin/pruning/
-    title: Prune unused Docker objects
-  - path: /engine/admin/live-restore/
-    title: Keep containers alive during daemon downtime
-  - path: /engine/admin/systemd/
-    title: Control and configure Docker with systemd
-  - path: /engine/admin/formatting/
-    title: Format command and log output
-  - path: /registry/recipes/mirror/
-    title: Run a local registry mirror
-    nosync: true
-  - sectiontitle: Logging
+  - path: /engine/userguide/networking/
+    title: Docker container networking
+  - path: /engine/userguide/networking/work-with-networks/
+    title: Work with network commands
+  - path: /engine/swarm/networking/
+    title: Manage swarm service networks
+  - path: /engine/userguide/networking/overlay-standalone-swarm/
+    title: Multi-host networking with standalone swarms
+  - path: /engine/userguide/networking/get-started-macvlan/
+    title: Get started with macvlan network driver
+  - path: /engine/userguide/networking/overlay-security-model/
+    title: Swarm mode overlay network security model
+  - path: /engine/userguide/networking/configure-dns/
+    title: Configure container DNS in user-defined networks
+  - sectiontitle: Default bridge network
     section:
-    - path: /engine/admin/logging/view_container_logs/
-      title: View a container's logs
-    - path: /engine/admin/logging/overview/
-      title: Configuring logging drivers
-    - path: /engine/admin/logging/plugins/
-      title: Use a logging driver plugin
-    - path: /engine/admin/logging/log_tags/
-      title: Log tags for logging driver
-    - path: /engine/admin/logging/logentries/
-      title: Logentries logging driver
-    - path: /engine/admin/logging/json-file/
-      title: JSON File logging driver
-    - path: /engine/admin/logging/gelf/
-      title: Graylog Extended Format (GELF) logging driver
-    - path: /engine/admin/logging/syslog/
-      title: Syslog logging driver
-    - path: /engine/admin/logging/awslogs/
-      title: Amazon CloudWatch logs logging driver
-    - path: /engine/admin/logging/etwlogs/
-      title: ETW logging driver
-    - path: /engine/admin/logging/fluentd/
-      title: Fluentd logging driver
-    - path: /engine/admin/logging/gcplogs/
-      title: Google Cloud logging driver
-    - path: /engine/admin/logging/journald/
-      title: Journald logging driver
-    - path: /engine/admin/logging/splunk/
-      title: Splunk logging driver
-  - path: /engine/admin/dsc/
-    title: PowerShell DSC usage
-  - path: /engine/admin/ansible/
-    title: Using Ansible
-  - path: /engine/admin/chef/
-    title: Using Chef
-  - path: /engine/admin/puppet/
-    title: Using Puppet
-  - path: /engine/admin/multi-service_container/
-    title: Run multiple services in a container
-  - path: /engine/admin/runmetrics/
-    title: Runtime metrics
-  - path: /engine/admin/ambassador_pattern_linking/
-    title: Link via an ambassador container
+    - path: /engine/userguide/networking/default_network/dockerlinks/
+      title: Legacy container links
+    - path: /engine/userguide/networking/default_network/binding/
+      title: Bind container ports to the host
+    - path: /engine/userguide/networking/default_network/build-bridges/
+      title: Build your own bridge
+    - path: /engine/userguide/networking/default_network/configure-dns/
+      title: Configure container DNS
+    - path: /engine/userguide/networking/default_network/custom-docker0/
+      title: Customize the docker0 bridge
+    - path: /engine/userguide/networking/default_network/container-communication/
+      title: Understand container communication
+    - path: /engine/userguide/networking/default_network/ipv6/
+      title: IPv6 with Docker
+
 - sectiontitle: Manage application data
   section:
     - path: /engine/admin/volumes/
@@ -317,99 +250,205 @@ guides:
       title: Bind mounts
     - path: /engine/admin/volumes/tmpfs/
       title: tmpfs mounts
-    - path: /engine/userguide/storagedriver/
-      title: Container storage drivers
-      nosync: true
-- sectiontitle: Troubleshoot Docker Engine
+    - path: /engine/admin/troubleshooting_volume_errors/
+      title: Troubleshoot volume problems
+    - sectiontitle: Store data within containers
+      section:
+      - path: /engine/userguide/storagedriver/
+        title: Storage driver overview
+      - path: /engine/userguide/storagedriver/imagesandcontainers/
+        title: About images, containers, and storage drivers
+      - path: /engine/userguide/storagedriver/selectadriver/
+        title: Select a storage driver
+      - path: /engine/userguide/storagedriver/aufs-driver/
+        title: Use the AUFS storage driver
+      - path: /engine/userguide/storagedriver/btrfs-driver/
+        title: Use the Btrfs storage driver
+      - path: /engine/userguide/storagedriver/device-mapper-driver/
+        title: Use the Device mapper storage driver
+      - path: /engine/userguide/storagedriver/overlayfs-driver/
+        title: Use the OverlayFS storage driver
+      - path: /engine/userguide/storagedriver/zfs-driver/
+        title: Use the ZFS storage driver
+      - path: /engine/userguide/storagedriver/vfs-driver/
+        title: Use the VFS storage driver
+
+- sectiontitle: Run your app in production
   section:
-  - path: /engine/admin/troubleshooting_volume_errors/
-    title: Troubleshoot volume problems
-- sectiontitle: Manage a swarm
-  section:
-  - path: /engine/swarm/
-    title: Swarm mode overview
-  - path: /engine/swarm/key-concepts/
-    title: Swarm mode key concepts
-  - sectiontitle: Get started with swarm mode
-    section:
-    - path: /engine/swarm/swarm-tutorial/
-      title: Set up for the tutorial
-    - path: /engine/swarm/swarm-tutorial/create-swarm/
-      title: Create a swarm
-    - path: /engine/swarm/swarm-tutorial/add-nodes/
-      title: Add nodes to the swarm
-    - path: /engine/swarm/swarm-tutorial/deploy-service/
-      title: Deploy a service
-    - path: /engine/swarm/swarm-tutorial/inspect-service/
-      title: Inspect the service
-    - path: /engine/swarm/swarm-tutorial/scale-service/
-      title: Scale the service
-    - path: /engine/swarm/swarm-tutorial/delete-service/
-      title: Delete the service
-    - path: /engine/swarm/swarm-tutorial/rolling-update/
-      title: Apply rolling updates
-    - path: /engine/swarm/swarm-tutorial/drain-node/
-      title: Drain a node
-    - path: /engine/swarm/ingress/
-      title: Use swarm mode routing mesh
-  - sectiontitle: How swarm mode works
-    section:
-    - path: /engine/swarm/how-swarm-mode-works/nodes/
-      title: How nodes work
-    - path: /engine/swarm/how-swarm-mode-works/services/
-      title: How services work
-    - path: /engine/swarm/how-swarm-mode-works/pki/
-      title: Manage swarm security with PKI
-  - path: /engine/swarm/swarm-mode/
-    title: Run Docker Engine in swarm mode
-  - path: /engine/swarm/join-nodes/
-    title: Join nodes to a swarm
-  - path: /engine/swarm/manage-nodes/
-    title: Manage nodes in a swarm
-  - path: /engine/swarm/services/
-    title: Deploy services to a swarm
-  - path: /engine/swarm/configs/
-    title: Store service configuration data
-  - path: /engine/swarm/secrets/
-    title: Manage sensitive data with Docker secrets
-  - path: /engine/swarm/swarm_manager_locking/
-    title: Lock your swarm
-  - path: /engine/swarm/networking/
-    title: Manage swarm service networks
-  - path: /engine/swarm/admin_guide/
-    title: Swarm administration guide
-  - path: /engine/swarm/raft/
-    title: Raft consensus in swarm mode
-- sectiontitle: Secure Engine
-  section:
-  - path: /engine/security/security/
-    title: Docker security
-  - path: /engine/security/non-events/
-    title: Docker security non-events
-  - path: /engine/security/https/
-    title: Protect the Docker daemon socket
-  - path: /engine/security/certificates/
-    title: Using certificates for repository client verification
-  - sectiontitle: Use trusted images
-    section:
-    - path: /engine/security/trust/content_trust/
-      title: Content trust in Docker
-    - path: /engine/security/trust/trust_automation/
-      title: Automation with content trust
-    - path: /engine/security/trust/trust_delegation/
-      title: Delegations for content trust
-    - path: /engine/security/trust/deploying_notary/
-      title: Deploying Notary
-    - path: /engine/security/trust/trust_key_mng/
-      title: Manage keys for content trust
-    - path: /engine/security/trust/trust_sandbox/
-      title: Play in a content trust sandbox
-  - path: /engine/security/apparmor/
-    title: AppArmor security profiles for Docker
-  - path: /engine/security/seccomp/
-    title: Seccomp security profiles for Docker
-  - path: /engine/security/userns-remap/
-    title: Isolate containers with a user namespace
+    - sectiontitle: The basics
+      section:
+      - path: /engine/userguide/
+        title: Overview
+      - path: /engine/admin/
+        title: Configuring and running Docker
+      - path: /engine/admin/prometheus/
+        title: Collect Docker metrics with Prometheus
+      - path: /engine/admin/start-containers-automatically/
+        title: Start containers automatically
+      - path: /engine/admin/resource_constraints/
+        title: Limit a container's resources
+      - path: /engine/userguide/labels-custom-metadata/
+        title: Apply custom metadata
+      - path: /engine/admin/pruning/
+        title: Prune unused Docker objects
+      - path: /engine/admin/live-restore/
+        title: Keep containers alive during daemon downtime
+      - path: /engine/admin/systemd/
+        title: Control and configure Docker with systemd
+      - path: /engine/admin/formatting/
+        title: Format command and log output
+      - path: /registry/recipes/mirror/
+        title: Run a local registry mirror
+        nosync: true
+    - sectiontitle: Logging
+      section:
+      - path: /engine/admin/logging/view_container_logs/
+        title: View a container's logs
+      - path: /engine/admin/logging/overview/
+        title: Configuring logging drivers
+      - path: /engine/admin/logging/plugins/
+        title: Use a logging driver plugin
+      - path: /engine/admin/logging/log_tags/
+        title: Log tags for logging driver
+      - path: /engine/admin/logging/logentries/
+        title: Logentries logging driver
+      - path: /engine/admin/logging/json-file/
+        title: JSON File logging driver
+      - path: /engine/admin/logging/gelf/
+        title: Graylog Extended Format (GELF) logging driver
+      - path: /engine/admin/logging/syslog/
+        title: Syslog logging driver
+      - path: /engine/admin/logging/awslogs/
+        title: Amazon CloudWatch logs logging driver
+      - path: /engine/admin/logging/etwlogs/
+        title: ETW logging driver
+      - path: /engine/admin/logging/fluentd/
+        title: Fluentd logging driver
+      - path: /engine/admin/logging/gcplogs/
+        title: Google Cloud logging driver
+      - path: /engine/admin/logging/journald/
+        title: Journald logging driver
+      - path: /engine/admin/logging/splunk/
+        title: Splunk logging driver
+    - sectiontitle: Security
+      section:
+      - path: /engine/security/security/
+        title: Docker security
+      - path: /engine/security/non-events/
+        title: Docker security non-events
+      - path: /engine/security/https/
+        title: Protect the Docker daemon socket
+      - path: /engine/security/certificates/
+        title: Using certificates for repository client verification
+      - sectiontitle: Use trusted images
+        section:
+        - path: /engine/security/trust/content_trust/
+          title: Content trust in Docker
+        - path: /engine/security/trust/trust_automation/
+          title: Automation with content trust
+        - path: /engine/security/trust/trust_delegation/
+          title: Delegations for content trust
+        - path: /engine/security/trust/deploying_notary/
+          title: Deploying Notary
+        - path: /engine/security/trust/trust_key_mng/
+          title: Manage keys for content trust
+        - path: /engine/security/trust/trust_sandbox/
+          title: Play in a content trust sandbox
+      - path: /engine/security/apparmor/
+        title: AppArmor security profiles for Docker
+      - path: /engine/security/seccomp/
+        title: Seccomp security profiles for Docker
+      - path: /engine/security/userns-remap/
+        title: Isolate containers with a user namespace
+    - sectiontitle: Scale your app
+      section:
+      - path: /engine/swarm/
+        title: Swarm mode overview
+      - path: /engine/swarm/key-concepts/
+        title: Swarm mode key concepts
+      - sectiontitle: Get started with swarm mode
+        section:
+        - path: /engine/swarm/swarm-tutorial/
+          title: Set up for the tutorial
+        - path: /engine/swarm/swarm-tutorial/create-swarm/
+          title: Create a swarm
+        - path: /engine/swarm/swarm-tutorial/add-nodes/
+          title: Add nodes to the swarm
+        - path: /engine/swarm/swarm-tutorial/deploy-service/
+          title: Deploy a service
+        - path: /engine/swarm/swarm-tutorial/inspect-service/
+          title: Inspect the service
+        - path: /engine/swarm/swarm-tutorial/scale-service/
+          title: Scale the service
+        - path: /engine/swarm/swarm-tutorial/delete-service/
+          title: Delete the service
+        - path: /engine/swarm/swarm-tutorial/rolling-update/
+          title: Apply rolling updates
+        - path: /engine/swarm/swarm-tutorial/drain-node/
+          title: Drain a node
+        - path: /engine/swarm/ingress/
+          title: Use swarm mode routing mesh
+      - sectiontitle: How swarm mode works
+        section:
+        - path: /engine/swarm/how-swarm-mode-works/nodes/
+          title: How nodes work
+        - path: /engine/swarm/how-swarm-mode-works/services/
+          title: How services work
+        - path: /engine/swarm/how-swarm-mode-works/pki/
+          title: Manage swarm security with PKI
+      - path: /engine/swarm/swarm-mode/
+        title: Run Docker in swarm mode
+      - path: /engine/swarm/join-nodes/
+        title: Join nodes to a swarm
+      - path: /engine/swarm/manage-nodes/
+        title: Manage nodes in a swarm
+      - path: /engine/swarm/services/
+        title: Deploy services to a swarm
+      - path: /engine/swarm/configs/
+        title: Store service configuration data
+      - path: /engine/swarm/secrets/
+        title: Manage sensitive data with Docker secrets
+      - path: /engine/swarm/swarm_manager_locking/
+        title: Lock your swarm
+      - path: /engine/swarm/networking/
+        title: Manage swarm service networks
+      - path: /engine/swarm/admin_guide/
+        title: Swarm administration guide
+      - path: /engine/swarm/raft/
+        title: Raft consensus in swarm mode
+    - sectiontitle: Work with external tools
+      section:
+      - path: /engine/admin/dsc/
+        title: PowerShell DSC usage
+      - path: /engine/admin/ansible/
+        title: Using Ansible
+      - path: /engine/admin/chef/
+        title: Using Chef
+      - path: /engine/admin/puppet/
+        title: Using Puppet
+      - path: /engine/admin/multi-service_container/
+        title: Run multiple services in a container
+      - path: /engine/admin/runmetrics/
+        title: Runtime metrics
+      - path: /engine/admin/ambassador_pattern_linking/
+        title: Link via an ambassador container
+    - sectiontitle: Extend Docker
+      section:
+      - path: /engine/extend/
+        title: Managed plugin system
+      - path: /engine/extend/plugins_authorization/
+        title: Access authorization plugin
+      - path: /engine/extend/legacy_plugins/
+        title: Extending Docker with plugins
+      - path: /engine/extend/plugins_network/
+        title: Docker network driver plugins
+      - path: /engine/extend/plugins_volume/
+        title: Volume plugins
+      - title: Plugin configuration
+        path: /engine/extend/config/
+      - path: /engine/extend/plugin_api/
+        title: Plugins API
+
 - sectiontitle: Standards and compliance
   section:
   - path: /compliance/
@@ -420,27 +459,12 @@ guides:
     title: FedRAMP
   - path: /compliance/cis/
     title: CIS
-- sectiontitle: Extend Engine
-  section:
-  - path: /engine/extend/
-    title: Managed plugin system
-  - path: /engine/extend/plugins_authorization/
-    title: Access authorization plugin
-  - path: /engine/extend/legacy_plugins/
-    title: Extending Engine with plugins
-  - path: /engine/extend/plugins_network/
-    title: Docker network driver plugins
-  - path: /engine/extend/plugins_volume/
-    title: Volume plugins
-  - title: Plugin configuration
-    path: /engine/extend/config/
-  - path: /engine/extend/plugin_api/
-    title: Plugins API
+
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
     title: Quickstart contribution
-  - sectiontitle: Set up for Engine development
+  - sectiontitle: Set up for Docker development
     section:
     - path: /opensource/project/who-written-for/
       title: README first
@@ -574,7 +598,7 @@ reference:
   nosync: true
 - title: Daemon CLI reference (dockerd)
   path: /engine/reference/commandline/dockerd/
-- sectiontitle: Engine API
+- sectiontitle: Docker Engine API
   section:
   - path: /engine/api/
     title: Overview
@@ -614,7 +638,7 @@ reference:
       title: v1.19 reference
     - path: /engine/api/v1.18/
       title: v1.18 reference
-- sectiontitle: Engine (docker) CLI
+- sectiontitle: Docker CLI
   section:
   - path: /engine/reference/run/
     title: Docker run reference
@@ -956,7 +980,7 @@ reference:
     title: docker wait
 - title: Edge daemon CLI reference (dockerd)
   path: /edge/engine/reference/commandline/dockerd/
-- sectiontitle: Docker Edge Engine (docker) CLI
+- sectiontitle: Docker CLI (Edge)
   section:
   - path: /edge/engine/reference/run/
     title: Docker run reference
@@ -1995,7 +2019,7 @@ manuals:
       - sectiontitle: Access DTR
         section:
         - path: /datacenter/dtr/2.3/guides/user/access-dtr/
-          title: Configure your Docker Engine
+          title: Configure your Docker daemon
         - path: /datacenter/dtr/2.3/guides/user/access-dtr/configure-your-notary-client/
           title: Configure your Notary client
         - path: /datacenter/dtr/2.3/guides/user/access-dtr/use-a-cache/
@@ -2131,7 +2155,7 @@ manuals:
           - sectiontitle: Access DTR
             section:
             - path: /datacenter/dtr/2.2/guides/user/access-dtr/
-              title: Configure your Docker Engine
+              title: Configure your Docker daemon
             - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
               title: Configure your Notary client
             - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
@@ -2223,7 +2247,7 @@ manuals:
         - sectiontitle: Repositories and images
           section:
           - path: /datacenter/dtr/2.1/guides/repos-and-images/
-            title: Configure your Docker Engine
+            title: Configure your Docker daemon
           - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
             title: Pull an image
           - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
@@ -2345,7 +2369,7 @@ manuals:
         - sectiontitle: Repositories and images
           section:
           - path: /datacenter/dtr/2.0/repos-and-images/
-            title: Configure your Docker Engine
+            title: Configure your Docker daemon
           - path: /datacenter/dtr/2.0/repos-and-images/pull-an-image/
             title: Pull an image
           - path: /datacenter/dtr/2.0/repos-and-images/push-an-image/
@@ -2458,7 +2482,7 @@ manuals:
     - path: /docker-cloud/infrastructure/ssh-into-a-node/
       title: SSH into a Docker Cloud-managed node
     - path: /docker-cloud/infrastructure/docker-upgrade/
-      title: Upgrade Docker Engine on a node
+      title: Upgrade Docker on a node
     - path: /docker-cloud/infrastructure/byoh/
       title: Use the Docker Cloud agent
     - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
@@ -2911,7 +2935,7 @@ manuals:
       title: CS Docker Engine
       nosync: true
     - path: /release-notes/docker-engine/
-      title: Docker Engine
+      title: Docker (1.13 and earlier)
     - path: /docker-for-mac/release-notes/
       title: Docker for Mac
       nosync: true
