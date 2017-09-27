@@ -472,6 +472,12 @@ break the Markdown block up. This example does it with Markdown. You can't have 
 break the Markdown block up.
 {: style="column-count: 3 "}
 
+### Badges
+
+You can have <span class="badge badge-info">badges</span>. You can also have
+<span class="badge badge-warning">yellow badges</span> or
+<span class="badge badge-danger">red badges</span>.
+
 ## Running in-page Javascript
 
 If you need to run custom Javascript within a page, and it depends upon JQuery
