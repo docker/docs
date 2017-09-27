@@ -10,6 +10,33 @@
 {{ site.data[include.datafolder][include.datafile].short }}
 {% endif %}
 
+{% if site.data[include.datafolder][include.datafile].min_api_version %}
+
+**The client and daemon API must both be at least
+{{ site.data[include.datafolder][include.datafile].min_api_version }}
+to use this command.** Use the `docker version` command on the client to check
+your client and daemon API versions.
+
+{% endif %}
+
+{% if site.data[include.datafolder][include.datafile].deprecated %}
+
+> This command is deprecated.
+>
+> It may be removed in a future Docker version.
+{: .warning }
+
+{% endif %}
+
+{% if site.data[include.datafolder][include.datafile].experimental %}
+
+> This command is experimental.
+>
+> It should not be used in production environments.
+{: .important }
+
+{% endif %}
+
 {% if site.data[include.datafolder][include.datafile].usage %}
 
 ## Usage
@@ -23,20 +50,60 @@
 
 ## Options
 
-| Name, shorthand | Default | Description |
-| ---- | ------- | ----------- |{% for option in  site.data[include.datafolder][include.datafile].options %}
-| `--{{ option.option }}{% if option.shorthand %}, -{{ option.shorthand }}{% endif %}` | {% if option.default_value and option.default_value != "[]" %}`{{ option.default_value }}`{% endif %} | {{ option.description | replace: "|","&#124;" | strip }} | {% endfor %}
+<table>
+<thead>
+  <tr>
+    <td>Name, shorthand</td>
+    <td>Default</td>
+    <td>Stability</td>
+    <td>Description</td>
+  </tr>
+</thead>
+<tbody>
+{% for option in site.data[include.datafolder][include.datafile].options %}
+  <tr>
+    <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
+    <td markdown="span">{% if option.default_value and option.default_value != "[]" %}`{{ option.default_value }}`{% endif %}</td>
+    <td markdown="span">
+    {% if option.deprecated and option.experimental %}
+      <span style="color: #ce4844">deprecated</span><span>,&nbsp;</span><span style="color: #aa6708">experimental</span>
+    {% elsif option.deprecated %}
+      <span style="color: #ce4844">deprecated</span>
+    {% elsif option.experimental %}
+      <span style="color: #aa6708">experimental</span>
+    {% else %}
+      <span>stable</span>
+    {% endif %}
+    </td>
+    <td markdown="span">{{ option.description | replace: "|","&#124;" | strip }}</td>
+  </tr>
+{% endfor %} <!-- end for option -->
+</tbody>
+</table>
 
-{% endif %}
+{% endif %} <!-- end if options -->
 
 {% if site.data[include.datafolder][include.datafile].cname %}
 
 ## Child commands
 
-| Command | Description |
-| ------- | ----------- |{% for command in site.data[include.datafolder][include.datafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[include.datafolder][dataFileName].short }} |{% endfor %}
-
+<table>
+<thead>
+  <tr>
+    <td>Command</td>
+    <td>Description</td>
+  </tr>
+</thead>
+<tbody>
+{% for command in site.data[include.datafolder][include.datafile].cname %}
+  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  <tr>
+    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
 {% endif %}
 
 {% unless site.data[include.datafolder][include.datafile].pname == include.datafile %}
@@ -47,9 +114,9 @@
 {% capture parentdatafile %}{{ site.data[include.datafolder][include.datafile].plink | replace: ".yaml", "" }}{% endcapture %}
 
 {% if site.data[include.datafolder][include.datafile].pname == "docker" %}
-{% capture parentDesc %}{{ dockerBaseDesc }}{% endcapture %}
+  {% capture parentDesc %}{{ dockerBaseDesc }}{% endcapture %}
 {% else %}
-{% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
+  {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 {% endif %}
 
 | Command | Description |
@@ -62,9 +129,23 @@
 
 ## Related commands
 
-| Command | Description |
-| ------- | ----------- |{% for command in site.data[include.datafolder][parentdatafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
-| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[include.datafolder][dataFileName].short }} |{% endfor %}
+<table>
+<thead>
+  <tr>
+    <td>Command</td>
+    <td>Description</td>
+  </tr>
+</thead>
+<tbody>
+{% for command in site.data[include.datafolder][parentdatafile].cname %}
+  {% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+  <tr>
+    <td markdown="span">[{{ command }}]({{ dataFileName | replace: "docker_","" }}/)</td>
+    <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
 
 {% endunless %}
 
