@@ -120,7 +120,7 @@ from the repository.
 
     Verify that you now have the key with the fingerprint
     `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
-    last 8 characters of the fingerprint.
+    last eight characters of the fingerprint.
 
     ```bash
     $ sudo apt-key fingerprint 6D085F96
@@ -293,6 +293,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md).
 
 - Continue with the [User Guide](/engine/userguide/index.md).
