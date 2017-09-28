@@ -185,6 +185,17 @@ com.docker.ucp.mesh.http.2=external_route=sni://example.org
 
 Because HRM forwards traffic to your application, the requests that your application receives will all appear to come from HRM's IP address. If you add `include_forwarded_for=true` in the HRM label for your service, HRM will add an HTTP header to every request called `X-Forwarded-For` that will contain the IP address that the original request came from. Note that this feature will only work if your external_route field begins with `http://`.
 
+### Default Service
+
+If you want a particular service to serve all requests that don't match an otherwise defined `external_route`, set an `external_route` to a blank hostname. For example:
+
+```none
+com.docker.ucp.mesh.http.1=external_route=http://
+com.docker.ucp.mesh.http.2=external_route=sni://
+```
+
+If you don't define `external_route=sni://` on any service, HRM will default to use the UCP controller itself as the default SNI route. If you don't define `external_route=http://` on any service, HRM will return an http 503 error.
+
 ### Keep services isolated
 
 If you want to keep the services from sharing the same network, before
