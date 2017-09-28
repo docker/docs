@@ -380,8 +380,8 @@ to have external connectivity outside of their cluster.
 
 2.  Check the Nginx container's network interfaces.
 
-    ```basj
-    $ docker exec web ip addr
+    ```bash
+    $ docker run --rm --network=container:web busybox ip addr
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
