@@ -411,14 +411,15 @@ look:
 
 ## Iterating and scaling your app
 
-From here you can do everything you learned about in part 3.
+From here you can do everything you learned about in parts 2 and 3.
 
 Scale the app by changing the `docker-compose.yml` file.
 
-Change the app behavior by editing code.
+Change the app behavior by editing code, rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish](part2.md#publish-the-image) it.
 
-In either case, simply run `docker stack deploy` again to deploy these
-changes.
+In either case, simply run `docker stack deploy` again to deploy these changes.
 
 You can join any machine, physical or virtual, to this swarm, using the
 same `docker swarm join` command you used on `myvm2`, and capacity will be added
