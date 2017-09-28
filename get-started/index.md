@@ -138,6 +138,7 @@ installed.
 > **Note**: version 1.13 or higher is required
 
 You should be able to run `docker run hello-world` and see a response like this:
+> **Note**: You may need to add your user to the `docker` group in order to call this command without sudo.
 
 ```shell
 $ docker run hello-world
