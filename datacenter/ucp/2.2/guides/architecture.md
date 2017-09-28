@@ -70,7 +70,7 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | ucp-agent           | Monitors the node and ensures the right UCP services are running                                                                                                                                  |
 | ucp-reconcile       | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. 							  |
 | ucp-auth-api        | The centralized service for identity and authentication used by UCP and DTR                                                                                                                       |
-| ucp-auth-store      | Stores authentication configurations, and data for users, organizations and teams                                                                                                                 |
+| ucp-auth-store      | Stores authentication configurations and data for users, organizations, and teams                                                                                                                 |
 | ucp-auth-worker     | Performs scheduled LDAP synchronizations and cleans authentication and authorization data                                                                                                         |
 | ucp-client-root-ca  | A certificate authority to sign client bundles                                                                                                                                                    |
 | ucp-cluster-root-ca | A certificate authority used for TLS communication between UCP components                                                                                                                         |
@@ -107,7 +107,7 @@ Docker UCP uses these named volumes to persist data in all nodes where it runs:
 | ucp-cluster-root-ca         | Root key material for the UCP root CA that issues certificates for swarm members         |
 | ucp-controller-client-certs | Certificate and keys used by the UCP web server to communicate with other UCP components |
 | ucp-controller-server-certs | Certificate and keys for the UCP web server running in the node                          |
-| ucp-kv                      | UCP configuration data, replicated across managers.                                      |
+| ucp-kv                      | UCP configuration data, replicated across managers                                      |
 | ucp-kv-certs                | Certificates and keys for the key-value store                                            |
 | ucp-metrics-data            | Monitoring data gathered by UCP                                                          |
 | ucp-metrics-inventory       | Configuration file used by the ucp-metrics service                                       |
