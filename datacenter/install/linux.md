@@ -26,7 +26,7 @@ Also, make sure the hosts are running one of these operating systems:
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
 
-[Learn more about Docker EE system requirements](../ucp/2.2/guides/admin/install/system-requirements.md)
+[Learn more about Docker EE system requirements](../ucp/2.2/guides/admin/install/system-requirements.md).
 
 ### Step 1: Install Docker EE Container Engine
 
