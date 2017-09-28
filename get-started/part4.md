@@ -415,9 +415,10 @@ From here you can do everything you learned about in parts 2 and 3.
 
 Scale the app by changing the `docker-compose.yml` file.
 
-Change the app behavior by editing code, rebuild, and push the new image.
-(To do this, follow the same steps you took earlier to [build the
-app](part2.md#build-the-app) and [publish](part2.md#publish-the-image) it.
+Change the app behavior by editing code, rebuild, and push the new image.  (To
+do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
 
 In either case, simply run `docker stack deploy` again to deploy these changes.
 
