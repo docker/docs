@@ -366,6 +366,15 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-win31 2017-09-29 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
+
+* Bug fixes and minor changes
+  - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
+  
+
 ### Docker Community Edition 17.09.0-ce-rc3-win30 2017-09-22 (Edge)
 
 * Upgrades
