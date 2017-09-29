@@ -88,7 +88,7 @@ CMD ["python", "app.py"]
 >
 > Proxy servers can block connections to your web app once it's up and running.
 > If you are behind a proxy server, add the following lines to your
-> Dockerfile, using the ENV command to specify the host and port for your
+> Dockerfile, using the `ENV` command to specify the host and port for your
 > proxy servers:
 >
 > ```conf
