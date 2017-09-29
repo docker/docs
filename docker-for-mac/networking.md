@@ -105,7 +105,7 @@ container to port `8000` on the host:
 ```bash
 $ docker run --publish 8000:80 --name webserver nginx
 
-$ docker run --p 8000:80 --name webserver nginx
+$ docker run -p 8000:80 --name webserver nginx
 ```
 
 To expose all ports, use the `-P` flag. For example, the following command
