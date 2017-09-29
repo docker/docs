@@ -22,10 +22,10 @@ to ensure there's minimal impact to your users.
 Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
-## Backup your swarm
+## Back up your swarm
 
 Before starting an upgrade, make sure that your swarm is healthy. If a problem
-occurs this makes it easier to find and troubleshoot any problems.
+occurs, this makes it easier to find and troubleshoot it.
 
 [Create a backup](../backups-and-disaster-recovery.md) of your swarm.
 This allows you to recover if something goes wrong during the upgrade process.
@@ -34,7 +34,7 @@ This allows you to recover if something goes wrong during the upgrade process.
 >
 > The backup archive is version-specific, so you can't use it during the
 > upgrade process. For example, if you create a backup archive for a UCP 2.1
-> swarm, you can't use the archive file after you upgrade to UCP 2.2.  
+> swarm, you can't use the archive file after you upgrade to UCP 2.2.
 
 ## Upgrade Docker Engine
 
@@ -60,7 +60,7 @@ Starting with the manager nodes, and then worker nodes:
 
 You can upgrade UCP from the web UI or the CLI.
 
-### Using the UI to perform an upgrade
+### Use the UI to perform an upgrade
 
 When an upgrade is available for a UCP installation, a banner appears.
 
@@ -80,12 +80,12 @@ information regarding swarm and UI availability is displayed.
 
 ![](../../images/upgrade-ucp-3.png){: .with-border}
 
-During the upgrade the UI will be unavailable, and you should wait
+During the upgrade, the UI will be unavailable, and you should wait
 until completion before continuing to interact with it. When the upgrade
 completes, you'll see a notification that a newer version of the UI
 is available and a browser refresh is required to see the latest UI.
 
-### Using the CLI to perform an upgrade
+### Use the CLI to perform an upgrade
 
 To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
