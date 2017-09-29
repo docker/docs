@@ -168,7 +168,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     services:
       web:
         # replace username/repo:tag with your name and image details
-        image:  username/repo:tag
+        image: username/repo:tag
         deploy:
           replicas: 5
           restart_policy:
