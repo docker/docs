@@ -418,6 +418,15 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-mac31 2017-09-29 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
+  - DataKit update (fix instability on High Sierra)
+
+* Bug fixes and minor changes
+  - Fix password encoding/decoding. May require to re-login to docker cloud after this version is installed. (Fixes:docker/for-mac#2008, docker/for-mac#2016, docker/for-mac#1919, docker/for-mac#712, docker/for-mac#1220).
+
 ### Docker Community Edition 17.09.0-ce-rc3-mac30 2017-09-22 (Edge)
 
 * Upgrades
