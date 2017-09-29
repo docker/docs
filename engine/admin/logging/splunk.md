@@ -16,8 +16,8 @@ You can configure Docker logging to use the `splunk` driver by default or on a
 per-container basis.
 
 To use the `splunk` driver as the default logging driver, set the keys
-`log-driver` and `log-opts` to appropriate values in `daemon.json` and restart
-Docker. For example:
+`log-driver` and `log-opts` to appropriate values in the `daemon.json`
+configuration file and restart Docker. For example:
 
 ```json
 {
@@ -35,8 +35,8 @@ The daemon.json file is located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-To use the `splunk` driver for a specific container, use the flags
-`--log-driver` and `log-opt` ('opt' without an 's') with `docker run`:
+To use the `splunk` driver for a specific container, use the commandline flags
+`--log-driver` and `log-opt` with `docker run`:
 
   ```
   docker run --log-driver=splunk --log-opt splunk-token=VALUE --log-opt splunk-url=VALUE ...
@@ -47,9 +47,9 @@ To use the `splunk` driver for a specific container, use the flags
 The following properties let you configure the splunk logging driver.
 
 - To configure the `splunk` driver across the Docker environment, edit
-  `daemon.json` with `"log-opts": {"NAME": "VALUE", ...}`.
+  `daemon.json` with the key, `"log-opts": {"NAME": "VALUE", ...}`.
 - To configure the `splunk` driver for an indiviual container, use `docker run`
-  with `--log-opt NAME=VALUE ...`.
+  with the flag, `--log-opt NAME=VALUE ...`.
 
 | Option                      | Required | Description                                                                                                                                                                                                                                                                                                                                 |
 |:----------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
