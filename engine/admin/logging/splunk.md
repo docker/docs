@@ -36,7 +36,7 @@ configuring Docker using `daemon.json`, see
 [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 To use the `splunk` driver for a specific container, use the flags
-`--log-driver` and `log-opts` with `docker run`:
+`--log-driver` and `log-opt` ('opt' without an 's') with `docker run`:
 
   ```
   docker run --log-driver=splunk --log-opt splunk-token=VALUE --log-opt splunk-url=VALUE ...
