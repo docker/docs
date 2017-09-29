@@ -40,7 +40,7 @@ Docker UCP requires each node on the cluster to have a static IP address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
-## Time Synchronization
+## Time synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
@@ -54,7 +54,7 @@ Docker UCP doesn't include a load balancer. You can configure your own
 load balancer to balance user requests across all manager nodes.
 
 If you plan to use a load balancer, you need to decide whether you'll
-add the nodes to the load balancer using their IP address or their FQDN.
+add the nodes to the load balancer using their IP addresses or their FQDNs.
 Whichever you choose, be consistent across nodes. When this is decided,
 take note of all IPs or FQDNs before starting the installation.
 
@@ -71,7 +71,7 @@ address or port number.
 
 If you want to install UCP in a high-availability configuration that uses
 a load balancer in front of your UCP controllers, include the appropriate IP
-address and fully qualified domain name of the load balancer's VIP by using
+address and FQDN of the load balancer's VIP by using
 one or more `--san` flags in the [install command](../../../reference/cli/install.md)
 or when you're asked for additional SANs in interactive mode.
 [Learn about high availability](../configure/set-up-high-availability.md).
