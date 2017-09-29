@@ -56,8 +56,10 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. Change directories (`cd`) into the new directory, create a file called
-`Dockerfile`, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.
+Create an empty directory. Change directories (`cd`) into the new directory,
+create a file called `Dockerfile`, copy-and-paste the following content into
+that file, and save it. Take note of the comments that explain each statement in
+your new Dockerfile.
 
 ```conf
 # Use an official Python runtime as a parent image
@@ -81,6 +83,17 @@ ENV NAME World
 # Run app.py when the container launches
 CMD ["python", "app.py"]
 ```
+
+> Set environment variables for proxy servers
+>
+> Proxy servers can block connections to the web app once it's up and running.
+> If you are behind a proxy server, add the following lines to your Dockerfile, using the [ENV command](/engine/reference/builder/#env) to specify the host and port for your proxy servers:
+>
+> ```conf
+> # Set proxy server, replace host:/port with values for your servers
+> ENV http_proxy host:/port
+> ENV https_proxy host:/port
+> ```
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.

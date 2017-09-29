@@ -74,7 +74,7 @@ version: "3"
 services:
   web:
     # replace username/repo:tag with your name and image details
-    image: username/repository:tag
+    image: username/repo:tag
     deploy:
       replicas: 5
       resources:
