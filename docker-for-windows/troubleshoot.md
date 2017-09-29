@@ -575,7 +575,7 @@ You might have stale NAT configurations on the system. You should remove them wi
 You might have stale Network Adapters on the system. You should remove them with the following commands on an elevated Powershell prompt:
 
 ```
-    PS C:\Users\jdoe> vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
+    PS C:\Users\jdoe> $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
     Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
 ```
 
