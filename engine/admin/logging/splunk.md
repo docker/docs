@@ -11,6 +11,7 @@ The `splunk` logging driver sends container logs to
 in Splunk Enterprise and Splunk Cloud.
 
 ## Usage
+
 You can configure Docker logging to use the `splunk` driver by default or on a
 per-container basis.
 
@@ -45,8 +46,10 @@ To use the `splunk` driver for a specific container, use the flags
 
 The following properties let you configure the splunk logging driver.
 
-- To configure the `splunk` driver across the Docker environment, edit daemon.json with `"log-opts": {"NAME": "VALUE", ...}`.
-- To configure the `splunk` driver for an indiviual container, use `docker run` with `--log-opt NAME=VALUE ...`.
+- To configure the `splunk` driver across the Docker environment, edit
+  `daemon.json` with `"log-opts": {"NAME": "VALUE", ...}`.
+- To configure the `splunk` driver for an indiviual container, use `docker run`
+  with `--log-opt NAME=VALUE ...`.
 
 | Option                      | Required | Description                                                                                                                                                                                                                                                                                                                                 |
 |:----------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
