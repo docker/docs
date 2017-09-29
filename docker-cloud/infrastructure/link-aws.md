@@ -12,7 +12,7 @@ Docker Cloud can provision and manage swarms on your behalf.
 
 ## How to create the link
 
-For instructions on how to link your Microsoft Azure account to Docker Cloud,
+For instructions on how to link your AWS account to Docker Cloud,
 see [the AWS instructions that enable swarm
 mode](/docker-cloud/cloud-swarm/link-aws-swarm.md).
 
