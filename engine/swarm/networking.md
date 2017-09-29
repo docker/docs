@@ -241,7 +241,7 @@ MySQL port to the client, only the WordPress HTTP port.
 
 Service discovery can work in two different ways: internal connection-based
 load-balancing at Layers 3 and 4 using the embedded DNS and a virtual IP (VIP),
-or external and customized request-based load-balacning at Layer 7 using DNS
+or external and customized request-based load-balancing at Layer 7 using DNS
 round robin (DNSRR). You can configure this per service.
 
 - By default, when you attach a service to a network and that service publishes
