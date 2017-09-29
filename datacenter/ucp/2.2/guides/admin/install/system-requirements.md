@@ -75,7 +75,7 @@ to communicate before they time out.
 
 ## Compatibility and maintenance lifecycle
 
-Docker EE is a software subscription that includes 3 products:
+Docker EE is a software subscription that includes three products:
 
 * Docker Engine with enterprise-grade support,
 * Docker Trusted Registry,
