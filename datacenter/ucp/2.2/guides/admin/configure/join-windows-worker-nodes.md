@@ -12,7 +12,7 @@ Follow these steps to enable a worker node on Windows.
 1.  Install UCP on a Linux distribution.
 2.  Install Docker Enterprise Edition (*Docker EE*) on Windows Server 2016.
 3.  Configure the Windows node.
-4.  Join the Windows node to the swarm.  
+4.  Join the Windows node to the swarm.
 
 ## Install UCP
 
@@ -64,7 +64,7 @@ PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_versi
 
 > Docker daemon restart
 >
-> When you run `windows-script`, the Docker service is unavailable temporarily.  
+> When you run `windows-script`, the Docker service is unavailable temporarily.
 
 The Windows node is ready to join the swarm. Run the setup script on each
 instance of Windows Server that will be a worker node.
@@ -108,7 +108,7 @@ PS> docker swarm join --token <token> <ucp-manager-ip>
 Run the `docker swarm join` command on each instance of Windows Server that
 will be a worker node.
 
-## Configure a Windows worker node manually  
+## Configure a Windows worker node manually
 
 The following sections describe how to run the commands in the setup script
 manually to configure the `dockerd` service and the Windows environment.
@@ -135,7 +135,7 @@ PS> netsh advfirewall firewall add rule name="docker_local" dir=in action=allow 
 PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow protocol=TCP localport=12376
 ```
 
-###  Set up certs for the dockerd service
+### Set up certs for the dockerd service
 
 1.  Create the directory `C:\ProgramData\docker\daemoncerts`.
 2.  In a PowerShell terminal running as Administrator, run the following command
@@ -169,7 +169,7 @@ Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker d
 Some features are not yet supported on Windows nodes:
 
 * Networking
-  * The swarm mode routing mesh can't be used on Windows nodes. You can can expose
+  * The swarm mode routing mesh can't be used on Windows nodes. You can expose
   a port for your service in the host where it is running, and use the HTTP
   routing mesh to make your service accessible using a domain name.
   * Encrypted networks are not supported. If you've upgraded from a previous
@@ -181,7 +181,7 @@ Some features are not yet supported on Windows nodes:
   root directory to encrypt the secret data at rest.
   * When creating a service which uses Windows containers, the options to
   specify UID, GID, and mode are not supported for secrets. Secrets are
-  currently only accessible by administrators and and users with system access
+  currently only accessible by administrators and users with system access
   within the container.
 * Mounts
   * On Windows, Docker can't listen on a Unix socket. Use TCP or a named pipe
