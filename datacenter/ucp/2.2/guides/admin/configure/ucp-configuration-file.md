@@ -86,7 +86,7 @@ for modifying this config file.
 | --------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `lifetime_minutes`          | no       | The initial session lifetime, in minutes. The default is 4320, which is 72 hours.                                                                                                                                                                                                        |
 | `renewal_threshold_minutes` | no       | The length of time, in minutes, before the expiration of a session where, if used, a session will be extended by the current configured lifetime from then. A zero value disables session extension. The default is 1440, which is 24 hours.                                                   |
-| `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit,  the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5. |
+| `per_user_limit`            | no       | The maximum number of sessions that a user can have active simultaneously. If creating a new session would put a user over this limit, the least recently used session will be deleted. A value of zero disables limiting the number of sessions that users may have. The default is 5. |
 
 ## auth.ldap (optional)
 
@@ -135,7 +135,7 @@ Settings for syncing users.
 | `match_group`             | no       | Whether to additionally filter users to those who are direct members of a group. The default is `true`.                                                                                                                                                                              |
 | `match_group_dn`          | no       | The distinguished name of the LDAP group, for example, `cn=ddc-users,ou=groups,dc=example,dc=com`. Required if `matchGroup` is `true`.                                                                                                                                               |
 | `match_group_member_attr` | no       | The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if `matchGroup` is `true`. The default is `member`.                                                                                                                         |
-| `match_group_iterate`     | no       | Set to `true` to to get all of the user attributes by iterating through the group members and performing a lookup for each one separately. Use this instead of searching users first, then applying the group selection filter. Ignored if `matchGroup` is `false`. The default is `false`. |
+| `match_group_iterate`     | no       | Set to `true` to get all of the user attributes by iterating through the group members and performing a lookup for each one separately. Use this instead of searching users first, then applying the group selection filter. Ignored if `matchGroup` is `false`. The default is `false`. |
 
 ## auth.ldap.admin_sync_opts (optional)
 
@@ -143,7 +143,7 @@ Settings for syncing system admininistrator users.
 
 | Parameter              | Required | Description                                                                                                                                                                                               |
 | ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enable_sync`          | no       | Set to `true` to to enable syncing admins. If `false`, all other fields in this table are ignored. The default is `true`.                                                                                 |
+| `enable_sync`          | no       | Set to `true` to enable syncing admins. If `false`, all other fields in this table are ignored. The default is `true`.                                                                                 |
 | `select_group_members` | no       | Set to `true` to sync using a group DN and member attribute selection. Set to `false` to use a search filter. The default is `true`.                                                                      |
 | `group_dn`             | no       | The distinguished name of the LDAP group, for example, `cn=ddc-admins,ou=groups,dc=example,dc=com`. Required if `select_group_members` is `true`.                                                         |
 | `group_member_attr`    | no       | The name of the LDAP group entry attribute which corresponds to distinguished names of members. Required if `select_group_members` is `true`. The default is `member`.                                    |
@@ -206,7 +206,7 @@ Specifies whether the your UCP license is automatically renewed.
 
 | Parameter      | Required | Description                                                                                                                                                                                    |
 | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auto_refresh` | no       | Set to `true` to enable attempted automatic license renewal when the license nears expiration. If disabled, you must manually upload renewed licesnse after expiration. The default is `true`. |
+| `auto_refresh` | no       | Set to `true` to enable attempted automatic license renewal when the license nears expiration. If disabled, you must manually upload renewed license after expiration. The default is `true`. |
 
 ## cluster_config table (required)
 
