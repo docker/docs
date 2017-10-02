@@ -15,13 +15,14 @@ The next step is creating a backup policy and disaster recovery plan.
 
 UCP maintains data about:
 
-|         Data          |                                                  Description                                                  |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Configurations        | The UCP cluster configurations                                                                                |
-| Access control        | Permissions for teams to swarm resources                                                                      |
-| Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication |
-| Metrics data          | Monitoring data gathered by UCP                                                                               |
-| Organizations         | Your users, teams, and orgs
+|         Data          |                                                     Description                                                      |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker EE license and swarm and client CAs |
+| Access control        | Permissions for teams to swarm resources, including collections, grants, and roles                                   |
+| Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication        |
+| Metrics data          | Monitoring data gathered by UCP                                                                                      |
+| Organizations         | Your users, teams, and orgs                                                                                          |
+| Volumes               | All [UCP named volumes](../architecture/#volumes-used-by-ucp), which include all UCP component certs and data        |
 
 This data is persisted on the host running UCP, using named volumes.
 [Learn more about UCP named volumes](../architecture.md).
