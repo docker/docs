@@ -28,7 +28,7 @@ To create a consistent backup, the backup command temporarily stops the UCP
 containers running on the node where the backup is being performed. User
 resources, such as services, containers, and stacks are not affected by this
 operation and will continue operating as expected. Any long-lasting `exec`,
-`logs`, `events` or `attach` operations on the affected manager node will
+`logs`, `events`, or `attach` operations on the affected manager node will
 be disconnected.
 
 Additionally, if UCP is not configured for high availability, you will be
@@ -99,7 +99,7 @@ following data will be recovered from the backup file:
 
 * Users, teams, and permissions.
 * All UCP configuration options available under `Admin Settings`, like the
-  Docker EE subscription license, scheduling options, content trust and
+  Docker EE subscription license, scheduling options, content trust, and
   authentication backends.
 
 There are two ways to restore a UCP swarm:
