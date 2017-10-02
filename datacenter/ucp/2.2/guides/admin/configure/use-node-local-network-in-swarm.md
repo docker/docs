@@ -25,8 +25,8 @@ the networks won't have the right access labels and won't be available in UCP.
 1. Log in as an administrator.
 2. Navigate to **Networks** and click **Create Network**.
 3. Name the network "macvlan".
-4. In the **Driver** dropdown,. select **Macvlan**.
-5. In the **Macvlan Configure** section, select  the configuration option.
+4. In the **Driver** dropdown, select **Macvlan**.
+5. In the **Macvlan Configure** section, select the configuration option.
    Create all of the config-only networks before you create the config-from
    network.
 
