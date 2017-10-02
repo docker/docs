@@ -23,7 +23,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
-  - [Docker compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
+  - [Docker Compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
   - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
   - Linux Kernel 4.9.49
