@@ -19,6 +19,39 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.0-ce-mac32 2017-10-02 (Stable)
+
+* Upgrades
+  - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
+  - [Docker compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
+  - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
+  - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.49
+  - AUFS 20170911
+  - DataKit update (fix instability on High Sierra)
+
+* New
+  - Add daemon options validation
+  - VPNKit: add support for ping!
+  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled 
+  - VPNKit: bridge mode is default everywhere now
+  - Transparent proxy using macOS system proxies (if defined) directly
+  - GUI settings are now stored in ~/Library/Group\ Containers/group.com.docker/settings.json. daemon.json in now a file in ~/.docker/
+  - You can now change the default IP address used by Hyperkit if it collides with your network
+
+* Bug fixes and minor changes
+  - Fix instability on High Sierra (docker/for-mac#2069, docker/for-mac#2062, docker/for-mac#2052, docker/for-mac#2029, docker/for-mac#2024)
+  - Fix password encoding/decoding (docker/for-mac#2008, docker/for-mac#2016, docker/for-mac#1919, docker/for-mac#712, docker/for-mac#1220).
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Rotate logs in the VM more often  
+  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: fix a bug which causes a socket to leak if the corresponding TCP connection is idle
+    for more than 5 minutes (related to [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
+  - VPNKit: improve the logging around the Unix domain socket connections
+  - VPNKit: automatically trim whitespace from int or bool database keys
+  - Diagnose can be cancelled & Improved help information. Fixes docker/for-mac#1134, docker/for-mac#1474
+  - Support paging of docker-cloud repositories & orgs. Fixes docker/for-mac#1538
+
 ### Docker Community Edition 17.06.2-ce-mac27 2017-09-06 (Stable)
 
 * Upgrades
