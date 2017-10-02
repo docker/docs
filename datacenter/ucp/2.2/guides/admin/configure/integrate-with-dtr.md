@@ -128,7 +128,7 @@ DTR repository you created.
 ## 3. Configure UCP Docker Engines
 
 You also need to configure the Docker Engine on every UCP node to trust the
-DTR TLS certificates. This allows you do deploy services to UCP using images
+DTR TLS certificates. This allows you to deploy services to UCP using images
 that are stored in DTR.
 
 For each UCP node:
