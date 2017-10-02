@@ -11,14 +11,41 @@ setting, you should
 
 The next step is creating a backup policy and disaster recovery plan.
 
+## Data managed by UCP
+
+UCP maintains data about:
+
+|         Data          |                                                     Description                                                      |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker EE license and swarm and client CAs |
+| Access control        | Permissions for teams to swarm resources, including collections, grants, and roles                                   |
+| Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication        |
+| Metrics data          | Monitoring data gathered by UCP                                                                                      |
+| Organizations         | Your users, teams, and orgs                                                                                          |
+| Volumes               | All [UCP named volumes](../architecture/#volumes-used-by-ucp), which include all UCP component certs and data        |
+
+This data is persisted on the host running UCP, using named volumes.
+[Learn more about UCP named volumes](../architecture.md).
+
+## Backup steps
+
+Backup your Docker EE components in the following order:
+
+1. [Backup your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
+2. Backup UCP
+3. [Backup DTR](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md)
+
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
+DTR is backed up independently.
+[Learn about DTR backups and recovery](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
 
-To create a UCP backup, you can run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
+To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
 contents of all the [volumes used by UCP](../architecture.md) to persist data
-and streams it to stdout.
+and streams it to stdout. The backup doesn't include the swarm-mode state,
+like service definitions and overlay network definitions.
 
 You only need to run the backup command on a single UCP manager node. Since UCP
 stores the same data on all manager nodes, you only need to take periodic
@@ -146,7 +173,9 @@ $ docker container run --rm -i --name ucp \
 
 In the event where half or more manager nodes are lost and cannot be recovered
 to a healthy state, the system is considered to have lost quorum and can only be
-restored through the following disaster recovery procedure.
+restored through the following disaster recovery procedure. If your cluster has
+lost quorum, you can still take a backup of one of the remaining nodes, but we
+recommend making backups regularly.
 
 It is important to note that this procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
