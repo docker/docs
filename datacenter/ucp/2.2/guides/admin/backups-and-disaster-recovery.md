@@ -21,11 +21,12 @@ UCP maintains data about:
 | Access control        | Permissions for teams to swarm resources                                                                      |
 | Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication |
 | Metrics data          | Monitoring data gathered by UCP                                                                               |
+| Organizations         | Your users, teams, and orgs
 
 This data is persisted on the host running UCP, using named volumes.
 [Learn more about UCP named volumes](../architecture.md).
 
-## Backup order of 
+## Backup steps
 
 Backup your Docker EE components in the following order:
 
