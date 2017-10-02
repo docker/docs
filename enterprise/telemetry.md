@@ -43,7 +43,7 @@ If you use Universal Control Plane with Docker EE, do not use the Docker CLI to
 disable the telemetry plugin. Instead, you can manage the information sent to
 Docker by going to **Admin Settings** and choosing **Usage**.
 
-![UCP admin settings Usage defaults](images/usage-defaults.png)
+![UCP admin settings Usage defaults](images/usage-defaults.png){: .with-border}
 
 To disable the telemetry plugin, disable all three options and click **Save**.
 Enabling either or both of the top two options will enable the telemetry plugin.
