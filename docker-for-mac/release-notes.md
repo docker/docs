@@ -19,6 +19,11 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.0-ce-mac33 2017-10-03 (Stable)
+
+* Bug fix
+  - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
+
 ### Docker Community Edition 17.09.0-ce-mac32 2017-10-02 (Stable)
 
 * Upgrades
