@@ -277,25 +277,29 @@ To interpret the results, refer to the
 * All Scan results will include the CVE numbers and a CVSS (Common Vulnerability Scoring System) Score.
 
   * CVE Identifiers (also referred to by the community as "CVE names," "CVE
-numbers," "CVE entries," "CVE-IDs," and "CVEs") are unique identifiers for
-publicly-known, cyber-security vulnerabilities.
+  numbers," "CVE entries," "CVE-IDs," and "CVEs") are unique identifiers for
+  publicly-known, cyber-security vulnerabilities.
 
   * The Common Vulnerability Scoring System (CVSS) provides an open
-  framework for communicating the characteristics and impacts of
-  IT vulnerabilities.  Its quantitative model ensures repeatable,
-  accurate measurement while enabling users to see the underlying
-  vulnerability characteristics that were used to generate the scores.  
-  As a result, CVSS is well-suited as a standard measurement system
-  for industries, organizations, and governments that need accurate
-  and consistent vulnerability-impact scores.  CVSS is commonly used
-  to prioritize vulnerability-remediation activities, and calculate
-  the severity of vulnerabilities discovered on systems. The
-  National Vulnerability Database (NVD) provides CVSS scores for
-  almost all known vulnerabilities.
+    framework for communicating the characteristics and impacts of
+    IT vulnerabilities.  Its quantitative model ensures repeatable,
+    accurate measurement while enabling users to see the underlying
+    vulnerability characteristics that were used to generate the scores.  
+    As a result, CVSS is well-suited as a standard measurement system
+    for industries, organizations, and governments that need accurate
+    and consistent vulnerability-impact scores.  CVSS is commonly used
+    to prioritize vulnerability-remediation activities, and calculate
+    the severity of vulnerabilities discovered on systems. The
+    National Vulnerability Database (NVD) provides CVSS scores for
+    almost all known vulnerabilities.
 
-  * Docker Classifies the Severity of Issues as:
+  * Docker classifies the severity of issues per CVSS range, Docker classification, and service level agreement (SLA) as follows.
 
-  TABLE GOES HERE
+    | CVSS range | Docker classification | SLA for fixing issues |
+    |:-----|:--------|:------|
+    | 7.0 to 10.0  | Critical | Within 72 hours of notification |                                                
+    | 4.0 to 6.9  | Major | Within 7 days of notification |  
+    | 0.1 to 3.9 | Minor | No SLA. Best-effort to fix or address in documentation. |
 
 * In addition to CVSS, the Docker Security team can identify or classify
 vulnerabilities that need to be fixed, and categorize them in the
@@ -312,7 +316,7 @@ service for new vulnerabilities.
 * A warning label shows up on the marketplace listing. An email is sent to the
 users who have downloaded and subscribed for notifications.
 
-* A Repo’s listing can stay in the Hold state for a maximum of 1 month, after
+* A Repo’s listing can stay in the "hold" state for a maximum of 1 month, after
 which the listing will be revoked.
 
 ##  Usage Audit and Reporting
@@ -401,23 +405,25 @@ required for exchange of support tickets between the publisher and Docker.
 Start by applying to be a [Docker Technology
 Partner](https://goto.docker.com/partners){: target="_blank" class="_"}
 
-Requires acceptance of partnership agreement for completion
+* Requires acceptance of partnership agreement for completion
 
-Identify commercial content that can be listed on Store and includes a support
+* Identify commercial content that can be listed on Store and includes a support
 offering
 
-Test your image against the Docker CS Engine 1.12+ or on a Docker Certified
+* Test your image against the Docker CS Engine 1.12+ or on a Docker Certified
 Infrastructure version 17.03 and above  (Plugins must run on 17.03 and above)
 
-Submit your image for Certification through the publisher portal. Docker will
+* Submit your image for Certification through the publisher portal. Docker will
 scan the image and work with you to address vulnerabilities.  Docker will also
 conduct a best practices review of the image.
 
-Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or join the Docker Limited Group.
+* Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or
+join the Docker Limited Group.
 
-Upon completion of Certification criteria, and acceptance by Docker, Publisher’s
-product page will be updated to reflect Certified status.
-Is there a fee to join the program?
+* Upon completion of Certification criteria, and acceptance by
+Docker, Publisher’s product page will be updated to reflect Certified status.
+
+#### Is there a fee to join the program?
 
 In the future, Docker may charge a small annual listing fee. This is waived for
 the initial period.

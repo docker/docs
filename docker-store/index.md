@@ -140,7 +140,8 @@ Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or jo
 
 Upon completion of Certification criteria, and acceptance by Docker, Publisher’s
 product page will be updated to reflect Certified status.
-Is there a fee to join the program?
+
+#### Is there a fee to join the program?
 
 In the future, Docker may charge a small annual listing fee. This is waived for
 the initial period.
