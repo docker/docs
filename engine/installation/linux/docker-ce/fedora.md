@@ -7,8 +7,6 @@ redirect_from:
 title: Get Docker CE for Fedora
 ---
 
-{% assign minor-version = "17.09" %}
-
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -155,7 +153,7 @@ from the repository.
     ```bash
     $ dnf list docker-ce.x86_64  --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ minor-version }}.0.fc24                               docker-ce-stable  
+    docker-ce.x86_64  {{ site.docker-ce_stable_version }}.0.fc24                               docker-ce-stable  
     ```
 
     The contents of the list depend upon which repositories are enabled, and

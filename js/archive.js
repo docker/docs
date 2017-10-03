@@ -4,7 +4,7 @@ layout: null
 
 /* Only run this if we are online*/
 if (window.navigator.onLine) {
-  var dockerVersion = 'v{{ site.engine_version }}';
+  var dockerVersion = 'v{{ site.docker-ce_stable_version }}';
   var suppressButterBar = false;
   /* This JSON file contains a current list of all docs versions of Docker */
   $.getJSON("/js/archives.json", function(result){

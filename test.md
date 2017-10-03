@@ -209,7 +209,7 @@ setting styles directly on your tables! If you set the width on a `<td>`, you
 only need to do it on the first one. If you have a `<th>`, set it there.
 
 > **Note**: If you need to have **markdown** in a **HTML** table, add
-> `markdown="1"` to the HTML for the `<td>` cells that contain the Markdown.
+> `markdown="span"` to the HTML for the `<td>` cells that contain the Markdown.
 
 <table>
   <tr>
@@ -244,6 +244,18 @@ To update glossary content, edit `_data/glossary.yaml`.
 
 To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
 example, [swarm](glossary.md?term=swarm)).
+
+## Site-wide variables
+
+Look in the top-level `_config.yml` for site-wide variables, such as
+`site.docker-ce_stable_version`. To use them, use Liquid like:
+
+```liquid
+{% raw %}{{ site.docker-ce_stable_version }}{% endraw %}
+```
+
+The current value of `site.docker-ce_stable_version` is
+{{ site.docker-ce_stable_version }}.
 
 ## Mixing Markdown and HTML
 
