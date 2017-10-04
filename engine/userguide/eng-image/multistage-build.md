@@ -4,9 +4,9 @@ keywords: images, containers, best practices
 title: Use multi-stage builds
 ---
 
-Multi-stage builds are a new feature in Docker 17.05, and they will be exciting
-to anyone who has struggled to optimize Dockerfiles while keeping them easy to
-read and maintain.
+Multi-stage builds are a new feature requiring Docker 17.05 or higher on the
+daemon and client. Multistage builds are useful to anyone who has struggled to
+optimize Dockerfiles while keeping them easy to read and maintain.
 
 > **Acknowledgment**:
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
