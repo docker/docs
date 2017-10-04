@@ -230,7 +230,7 @@ hello world
 </div>
 
 For more examples, take a look at the
-[getting started guide](getting-started.md).
+[getting started guide](examples.md).
 
 ## Unofficial libraries
 
