@@ -4,7 +4,6 @@ layout: null
 
 /* Only run this if we are online*/
 if (window.navigator.onLine) {
-  var dockerVersion = 'v{{ site.docker-ce_stable_version }}';
   var suppressButterBar = false;
   /* This JSON file contains a current list of all docs versions of Docker */
   $.getJSON("/js/archives.json", function(result){
@@ -33,10 +32,16 @@ if (window.navigator.onLine) {
       }
     });
     // only append the butterbar if we are NOT the current version
+    // Also set the isArchive variable to true if it's an archive. It defaults
+    // to true, set in _layouts/docs.html. We default to true because it looks
+    // better in CSS to show stuff than to hide stuff onLoad.
     if ( suppressButterBar == false ) {
       $( 'body' ).prepend(outerDivStart + buttonCode + listStart + listItems.join("") + listEnd + outerDivEnd);
+      isArchive = true;
+      console.log("Detected that this is an archive.");
     } else {
-      console.log("Suppressing the archive versions bar");
+      isArchive = false;
+      console.log("This is not an archive. Suppressing the archive versions bar");
     }
   });
 }
