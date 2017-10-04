@@ -56,8 +56,6 @@ The `json-file` logging driver supports the following logging options:
 | `env`       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md).                           | `--log-opt env=os,customer`              |
 | `env-regex` | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                  | `--log-opt env-regex=^(os|customer).`    |
 
-> **Note**: If `max-size` and `max-file` are set, `docker logs` only returns the
-> log lines from the newest log file.
 
 ### Examples
 
