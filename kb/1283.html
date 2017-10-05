@@ -1,0 +1,111 @@
+---
+title: "Can UCP run in a boot2docker virtualbox?"
+id: 1283
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1283/contents
+tags:
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ No, running a UCP cluster in a boot2docker virtualbox is not supported and not recommended.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Can_UCP_run_in_a_boot2docker_virtualbox?">
+ <span id="Why_not.3F">
+ </span>
+ <h2 id="1-0">
+  Why not?
+ </h2>
+ <p>
+  UCP must run on
+  <a class="link-https" href="https://docs.docker.com/cs-engine/" rel="external nofollow" target="_blank" title="Docker CS Engine">
+   Docker CS Engine
+  </a>
+  . CS Engine does not run on the boot2docker distro that Docker Machine's virtualbox and vmwarefusion drivers use.
+ </p>
+ <p>
+  The second problem is the networking model that the Docker Machine virtualbox driver uses. Each virtualbox VM that Docker Machine provisions has two network interfaces. The first one is the machine's eth0, which uses NAT mode networking. The other network interface each VM gets is attached to a virtualbox host-only network. Multiple VMs can be on this network. The problem with this is that the Docker Machine virtualbox driver does not provide a way for the guest boot2docker VM to _specify_ what IP address it should have. You may be able to install a UCP cluster across multiple VMs on this host-only network. The problem happens when these VMs reboot.
+ </p>
+ <p>
+  UCP cares very much about what IP address it is using. Almost every component needs to be aware of this IP and the IPs of other UCP nodes. Because of this, running UCP in an environment without a permanent IP address is very difficult. The DHCP service associated with this host-only networking model in virtualbox doesn't guarantee the same VM will get the same IP. Instead, it hands out IPs based on first come-first-serve basis. This race condition can and will break your UCP cluster during a future reboot.
+ </p>
+ <p>
+  Due to this combination of factors, running a UCP cluster in this sort of environment is not supported and not recommended.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Can_UCP_run_in_a_boot2docker_virtualbox?">
+ <span id="Alternatives">
+ </span>
+ <h2 id="1-1">
+  Alternatives
+ </h2>
+ <p>
+  Workarounds or alternatives will include a variety of options, but the two most important pieces will be: 1) supported distro running Docker CS Engine and 2) more stable networking configuration.
+ </p>
+ <p>
+  Here's one specific example of an alternate approach that should satisfy these requirements. We can still use virtualbox, and we can still use Docker Machine, but not the Docker Machine virtualbox driver. One approach might be to manually provision VMs in virtualbox and then use the
+  <code>
+   docker-machine
+  </code>
+  utility to install Docker using the generic driver.
+ </p>
+ <p>
+  An example acceptable process would include using Ubuntu 14.04 VMs with the following:
+ </p>
+ <ol>
+  <li>
+   NAT and host mode networking are appropriate here. The key difference is that the
+   <strong>
+    VMs should be configured with static IPs
+   </strong>
+   instead of DHCP IP addresses on the host-only network. Ideally, it would be
+   <strong>
+    attached to a host-only network
+   </strong>
+   instead of the one used by Docker Machine to avoid conflicts.
+  </li>
+  <li>
+   This should have
+   <strong>
+    passwordless sudo user only
+   </strong>
+   accessible via SSH with an SSH key.
+  </li>
+  <li>
+   At this point, utilize
+   <code>
+    docker-machine
+   </code>
+   to install Docker and set up Docker TLS:
+   <pre>
+<code>docker-machine create -d generic --generic-ip-address <span class="replaceabletext">&lt;ip&gt;</span> --generic-ssh-user <span class="replaceabletext">&lt;user&gt;</span> --generic-ssh-key <span class="replaceabletext">&lt;path/to/key&gt;</span> --engine-install-url https://packages.docker.com/<span class="replaceabletext">1.11</span>/install.sh <span class="replaceabletext">&lt;name&gt;</span></code></pre>
+   <blockquote>
+    Since the VMS were manually provisioned, instead of running
+    <code>
+     docker-machine
+    </code>
+    , alternately run the
+    <a class="link-https" href="https://packages.docker.com/1.11/install.sh" rel="freeklink" title="https://packages.docker.com/1.11/install.sh">
+     https://packages.docker.com/1.11/install.sh
+    </a>
+    script to install CS Engine. It works similar to
+    <a class="link-https" href="https://get.docker.com/" rel="freeklink" title="https://get.docker.com/">
+     https://get.docker.com/
+    </a>
+    but installs Docker CS Engine.
+   </blockquote>
+  </li>
+  <li>
+   Finally, install UCP. Be sure to pass in the static, host-only network IP addresses to the UCP tool when installing/joining using the
+   <code>
+    --host-address
+   </code>
+   option.
+  </li>
+ </ol>
+</div>
+{% endraw %}

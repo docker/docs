@@ -1,0 +1,1904 @@
+---
+title: "Docker Reference Architecture: Universal Control Plane 2.0 Service Discovery and Load Balancing"
+id: 1960
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1960/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.1.1"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Andrew Hromis";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  Service discovery registers a service and publishes its connectivity information so that other services are aware of how to connect to the service. As applications move toward microservices and service-oriented architectures, service discovery has become an integral part of any distributed system, increasing the operational complexity of these environments.
+ </p>
+ <p>
+  Docker Enterprise Edition (Docker EE) includes service discovery and load balancing capabilities to aid the devops initiatives across any organization. Service discovery and load balancing make it easy for developers to create applications that can dynamically discover each other. Also, these features simplify the scaling of applications by operations engineers.
+ </p>
+ <p>
+  Docker uses a concept called
+  <strong>
+   services
+  </strong>
+  to deploy applications. Services consist of containers created from the same image. Each service consists of tasks that execute on worker nodes and define the state of the application. When deploying a service, a service definition is included upon service creation. The service definition consists of information that includes, among other things, the containers that comprise the service, which ports are published, which networks are attached, and the number of replicas. All of these tasks together make up the desired state of the service. If a node fails a health check or if a specific service task defined in a service definition fails a health check, then the cluster reconciles the service state to another healthy node. Docker EE includes service discovery, load balancing, scaling, and reconciliation events so that this orchestration works seamlessly.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="What_You_Will_Learn">
+ </span>
+ <h2 id="1-1">
+  What You Will Learn
+ </h2>
+ <p>
+  This reference architecture covers the solutions that Docker EE provides in the topic areas of service discovery and load balancing. Docker uses DNS for service discovery as services are created, and different routing meshes are built into Docker to ensure your application remains highly available. The release of UCP 2.0 introduces a new application layer routing mesh called the
+  <strong>
+   HTTP Routing Mesh (HRM)
+  </strong>
+  that routes HTTP traffic based on DNS hostname. After reading this document, you will have a good understanding of how the HRM works and how it integrates with the other Docker service discovery and load balancing features.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="Service_Discovery_with_DNS">
+ </span>
+ <h2 id="1-2">
+  Service Discovery with DNS
+ </h2>
+ <p>
+  Docker uses embedded DNS to provide service discovery for containers running on a single Docker Engine and
+  <code>
+   tasks
+  </code>
+  running in a Docker Swarm. Docker Engine has an internal DNS server that provides name resolution to all of the containers on the host in user-defined bridge, overlay, and MACVLAN networks. Each Docker container ( or
+  <code>
+   task
+  </code>
+  in swarm mode) has a DNS resolver that forwards DNS queries to Docker Engine, which acts as a DNS server. Docker Engine then checks if the DNS query belongs to a container or
+  <code>
+   service
+  </code>
+  on each network that the requesting container belongs to. If it does, then Docker Engine looks up the IP address that matches a container's,
+  <code>
+   task
+  </code>
+  's, or
+  <code>
+   service
+  </code>
+  's
+  <strong>
+   name
+  </strong>
+  in its key-value store and returns that IP or
+  <code>
+   service
+  </code>
+  Virtual IP (VIP) back to the requester.
+ </p>
+ <p>
+  Service discovery is
+  <em>
+   network-scoped
+  </em>
+  , meaning only containers or tasks that are on the same network can use the embedded DNS functionality. Containers not on the same network cannot resolve each other's addresses. Additionally, only the nodes that have containers or tasks on a particular network store that network's DNS entries. This promotes security and performance.
+ </p>
+ <p>
+  If the destination container or
+  <code>
+   service
+  </code>
+  and the source container are not on the same network, Docker Engine forwards the DNS query to the default DNS server.
+ </p>
+ <p>
+  <img alt="Service Discovery" class="internal" src="/kb/images/1960-0.png"/>
+ </p>
+ <p>
+  In this example, there is a service of two containers called
+  <code>
+   myservice
+  </code>
+  . A second service (
+  <code>
+   client
+  </code>
+  ) exists on the same network. The
+  <code>
+   client
+  </code>
+  executes two
+  <code>
+   curl
+  </code>
+  operations for
+  <code>
+   docker.com
+  </code>
+  and
+  <code>
+   myservice
+  </code>
+  . These are the resulting actions:
+ </p>
+ <ul>
+  <li>
+   DNS queries are initiated by
+   <code>
+    client
+   </code>
+   for
+   <code>
+    docker.com
+   </code>
+   and
+   <code>
+    myservice
+   </code>
+   .
+  </li>
+  <li>
+   The container's built-in resolver intercepts the DNS queries on
+   <code>
+    127.0.0.11:53
+   </code>
+   and sends them to Docker Engine's DNS server.
+  </li>
+  <li>
+   <code>
+    myservice
+   </code>
+   resolves to the Virtual IP (VIP) of that service which is internally load balanced to the individual task IP addresses. Container names are resolved as well, albeit directly to their IP addresses.
+  </li>
+  <li>
+   <code>
+    docker.com
+   </code>
+   does not exist as a service name in the
+   <code>
+    mynet
+   </code>
+   network, so the request is forwarded to the configured default DNS server.
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="Internal_Load_Balancing">
+ </span>
+ <h2 id="1-3">
+  Internal Load Balancing
+ </h2>
+ <p>
+  When services are created in a Docker Swarm cluster, they are automatically assigned a Virtual IP (VIP) that is part of the service's network. The VIP is returned when resolving the service's name. Traffic to the VIP is automatically sent to all healthy tasks of that service across the overlay network. This approach avoids any client-side load balancing because only a single IP is returned to the client. Docker takes care of routing and equally distributes the traffic across the healthy service tasks.
+ </p>
+ <p>
+  <img alt="Internal Load Balancing" class="internal" src="/kb/images/1960-1.png"/>
+ </p>
+ <p>
+  To get the VIP of a service, run the
+  <code>
+   docker service inspect myservice
+  </code>
+  command like so:
+ </p>
+ <pre>
+<code># Create an overlay network called mynet
+$ docker network create -d overlay mynet
+a59umzkdj2r0ua7x8jxd84dhr
+
+# Create myservice with 2 replicas as part of that network
+$ docker service create --network mynet --name myservice --replicas 2 busybox ping localhost
+8t5r8cr0f0h6k2c3k7ih4l6f5
+
+# Get the VIP that was created for that service
+$ docker service inspect myservice
+...
+
+"VirtualIPs": [
+                {
+                    "NetworkID": "a59umzkdj2r0ua7x8jxd84dhr",
+                    "Addr": "10.0.0.3/24"
+                },
+]
+
+</code></pre>
+ <blockquote>
+  <p>
+   DNS round robin (DNS RR) load balancing is another load balancing option for services (configured with
+   <code>
+    --endpoint-mode
+   </code>
+   ). In DNS RR mode, a VIP is not created for each service. The Docker DNS server resolves a service name to individual container IPs in round robin fashion.
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="External_Load_Balancing_(Swarm_Mode_Routing_Mesh)">
+ </span>
+ <h2 id="1-4">
+  External Load Balancing (Swarm Mode Routing Mesh)
+ </h2>
+ <p>
+  You can expose services externally by using the
+  <code>
+   --publish
+  </code>
+  flag when creating or updating the service. Publishing ports in Docker swarm mode means that every node in your cluster is listening on that port. But what happens if the service's task isn't on the node that is listening on that port?
+ </p>
+ <p>
+  This is where routing mesh comes into play. Routing mesh is a new feature in Docker Engine 1.12 that combines
+  <code>
+   ipvs
+  </code>
+  and
+  <code>
+   iptables
+  </code>
+  to create a powerful cluster-wide transport-layer (L4) load balancer. It allows all the swarm nodes to accept connections on the services published ports. When any swarm node receives traffic destined to the published TCP/UDP port of a running
+  <code>
+   service
+  </code>
+  , it forwards the traffic to the service's VIP using a pre-defined overlay network called
+  <code>
+   ingress
+  </code>
+  . The
+  <code>
+   ingress
+  </code>
+  network behaves similarly to other overlay networks, but its sole purpose is to transport mesh routing traffic from external clients to cluster services. It uses the same VIP-based internal load balancing as described in the previous section.
+ </p>
+ <p>
+  Once you launch services, you can create an external DNS record for your applications and map it to any or all Docker swarm nodes. You do not need to worry about where your container is running as all nodes in your cluster look as one with the routing mesh routing feature.
+ </p>
+ <pre>
+<code>#Create a service with two replicas and export port 8000 on the cluster
+$ docker service create --name app --replicas 2 --network appnet --publish 8000:80 nginx
+</code></pre>
+ <p>
+  <img alt="Routing Mesh" class="internal" src="/kb/images/1960-2.png"/>
+ </p>
+ <p>
+  This diagram illustrates how the routing mesh works.
+ </p>
+ <ul>
+  <li>
+   A service is created with two replicas, and it is port mapped externally to port
+   <code>
+    8000
+   </code>
+   .
+  </li>
+  <li>
+   The routing mesh exposes port
+   <code>
+    8000
+   </code>
+   on each host in the cluster.
+  </li>
+  <li>
+   Traffic destined for the
+   <code>
+    app
+   </code>
+   can enter on any host. In this case the external LB sends the traffic to a host without a service replica.
+  </li>
+  <li>
+   The kernel's IPVS load balancer redirects traffic on the
+   <code>
+    ingress
+   </code>
+   overlay network to a healthy service replica.
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="The_HTTP_Routing_Mesh">
+ </span>
+ <h2 id="1-5">
+  The HTTP Routing Mesh
+ </h2>
+ <p>
+  The swarm mode routing mesh is great for transport-layer routing. It routes to services using the service's published ports. But what if you wanted to route traffic to services based on hostname instead? The HTTP Routing Mesh (HRM) is a new feature that enables service discovery on the application layer (L7). The HRM extends upon the swarm mode routing mesh by adding application layer capabilities such as inspecting the HTTP header. The HRM and swarm mode routing meshes are both used together for flexible and robust service delivery. The addition of the HRM allows for each service to be accessible via a DNS label passed to the service. As the service scales horizontally and more replicas are added, the service uses round-robin load balancing as well.
+ </p>
+ <p>
+  The HRM works by using the
+  <code>
+   HTTP/1.1
+  </code>
+  header field definition. Every
+  <code>
+   HTTP/1.1
+  </code>
+  TCP request contains a
+  <code>
+   Host:
+  </code>
+  header. A HTTP request header can be viewed using
+  <code>
+   curl
+  </code>
+  :
+ </p>
+ <pre>
+<code>$ curl -v docker.com
+* Rebuilt URL to: docker.com/
+*   Trying 52.20.149.52...
+* Connected to docker.com (52.20.149.52) port 80 (#0)
+&gt; GET / HTTP/1.1
+&gt; Host: docker.com
+&gt; User-Agent: curl/7.49.1
+&gt; Accept: */*
+</code></pre>
+ <p>
+  When using HRM with HTTP requests, both the swarm mode routing mesh and the HRM are used in tandem. When a service is created using the
+  <code>
+   com.docker.ucp.mesh.http
+  </code>
+  label, the HRM configuration is updated to route all HTTP requests that contain the
+  <code>
+   Host:
+  </code>
+  header specified in the
+  <code>
+   com.docker.ucp.mesh.http
+  </code>
+  label to route to the VIP of the newly created services. Since the HRM is a service, the HRM is accessible on any node in the cluster using the configured published port.
+ </p>
+ <p>
+  Below is a diagram that displays a higher level view of how the swarm mode routing mesh and HRM work together.
+ </p>
+ <p>
+  <img alt="HRM High Level" class="internal" src="/kb/images/1960-3.png"/>
+ </p>
+ <ul>
+  <li>
+   The traffic comes in from the external load balancer into the swarm mode routing mesh.
+  </li>
+  <li>
+   The HRM service is configured to listen on port 80 and 8443, so any request to port 80 or 8443 on the UCP cluster go to the HRM service.
+  </li>
+  <li>
+   All services attached to a network that is enabled for "Hostname based routing" can utilize the HRM to have traffic routed based on the HTTP
+   <code>
+    Host:
+   </code>
+   header.
+  </li>
+ </ul>
+ <p>
+  Looking closer, you can see what the HRM is doing. The following graphic represents a closer look of the previous diagram.
+ </p>
+ <p>
+  <img alt="HRM Up Close" class="internal" src="/kb/images/1960-4.png"/>
+ </p>
+ <ul>
+  <li>
+   Traffic comes in through the swarm mode routing mesh on the
+   <code>
+    ingress
+   </code>
+   network to the HRM service's published port.
+  </li>
+  <li>
+   As services are created, they are assigned VIPs on the swarm mode routing mesh (L4).
+  </li>
+  <li>
+   The HRM receives the TCP packet and inspects the HTTP header.
+   <ul>
+    <li>
+     Services that contain the label
+     <code>
+      com.docker.ucp.mesh.http
+     </code>
+     are checked to see if they match the HTTP
+     <code>
+      Host:
+     </code>
+     header.
+    </li>
+    <li>
+     If a
+     <code>
+      Host:
+     </code>
+     header and service label label match, then traffic is routed to the service's VIP using the swarm mode routing mesh (L4).
+    </li>
+   </ul>
+  </li>
+  <li>
+   If a service contains multiple replicas, then each replica container is load balanced via round-robin using the internal L4 routing mesh.
+  </li>
+ </ul>
+ <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Differences_Between_the_HRM_and_Swarm_Mode_Routing_Mesh">
+  </span>
+  <h3 id="2-0">
+   Differences Between the HRM and Swarm Mode Routing Mesh
+  </h3>
+  <p>
+   The main difference between the HRM and swarm mode routing mesh is that the HRM is intended to be used only for HTTP traffic at the application-layer, while the swarm mode routing mesh works at a lower level on the transport layer.
+  </p>
+  <p>
+   Deciding which to use depends on the application. If the application is intended to be publicly accessible and is an HTTP service, then the HRM could be a good fit. If mutual TLS is required to the back-end application, then using the transport layer would probably be preferred.
+  </p>
+  <p>
+   Another advantage of using the HRM is that less configuration is required for traffic to be routed to the service. Often times only a DNS record is needed along with setting the label on the service. If a wildcard DNS entry is used, then no configuration outside of setting the service label is necessary. In many organizations, access to load balancers and DNS is restricted. Being able to control requests to applications by just a service label can empower developers to quickly iterate over changes. With the swarm mode routing mesh, any front-end load balancer can be configured to send traffic to the service's published port.
+  </p>
+  <p>
+   The following diagram shows an example with wildcard DNS:
+  </p>
+  <p>
+   <img alt="HRM Wildcard DNS" class="internal" src="/kb/images/1960-5.png"/>
+  </p>
+ </div>
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Enabling_the_HRM">
+  </span>
+  <h3 id="2-1">
+   Enabling the HRM
+  </h3>
+  <p>
+   The HTTP Routing Mesh can be enabled from the UCP web console. To enable it:
+  </p>
+  <ol>
+   <li>
+    Login to the UCP web console.
+   </li>
+   <li>
+    Navigate to
+    <strong>
+     Admin Settings
+    </strong>
+    &gt;
+    <strong>
+     Routing Mesh
+    </strong>
+    .
+   </li>
+   <li>
+    Check
+    <strong>
+     Enable HTTP Routing Mesh
+    </strong>
+    .
+   </li>
+   <li>
+    Configure the ports for HRM to listen on, with the defaults being 80 and 8443. The HTTPS port defaults to 8443 so that it doesn't interfere with the default UCP management port (443).
+   </li>
+  </ol>
+  <p>
+   <img alt="UCP HRM DNS" class="internal" src="/kb/images/1960-6.png"/>
+  </p>
+  <p>
+   Once enabled, UCP creates a service on the swarm cluster to route traffic to the specified container based on the HTTP
+   <code>
+    Host:
+   </code>
+   header. Since the HRM service is a
+   <em>
+    swarm mode
+   </em>
+   service, every node in the UCP cluster can route traffic to the HRM by receiving traffic from ports
+   <code>
+    80
+   </code>
+   and
+   <code>
+    8443
+   </code>
+   . The HRM service exposes ports 80 and 8443 cluster-wide, and any requests on ports 80 and 8443 to the cluster are send to the HRM.
+  </p>
+ </div>
+ <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Networks_and_Access_Control">
+  </span>
+  <h3 id="2-2">
+   Networks and Access Control
+  </h3>
+  <p>
+   The HTTP routing mesh uses one or more overlay networks to communicate with the back-end services. By default, a single network is created called
+   <code>
+    ucp-hrm
+   </code>
+   , with the access control label
+   <code>
+    ucp-hrm
+   </code>
+   . Adding a service to this network either requires administrator-level access or the user must be in a group that gives them
+   <code>
+    ucp-hrm
+   </code>
+   access.
+  </p>
+  <p>
+   This default configuration does not provide any isolation between services using the HTTP routing mesh, since services share the
+   <code>
+    ucp-hrm
+   </code>
+   network.
+  </p>
+  <p>
+   Isolation between services may be implemented by creating one or more overlay networks with the label
+   <code>
+    com.docker.ucp.mesh.http
+   </code>
+   prior to enabling the HTTP Routing Mesh. Once the HRM is enabled, it is able to route to all services attached to any of these networks, but services on different networks can't communicate directly. The only way to have the HRM available on a new network is to disable and then re-enable the HRM.
+  </p>
+  <p>
+   The following is an example of creating an overlay network that contains the
+   <code>
+    com.docker.mesh.http
+   </code>
+   label. When using a UCP client bundle for an admin user, or a user with administrator privileges, you can run the following command:
+  </p>
+  <pre>
+<code>docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
+</code></pre>
+  <p>
+   The same can be accomplished with the UCP UI by selecting
+   <strong>
+    Enable hostname based routing
+   </strong>
+   when creating a network.
+  </p>
+  <p>
+   <img alt="UCP Enable hostname routing" class="internal" src="/kb/images/1960-7.png"/>
+  </p>
+ </div>
+ <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_Requirements">
+  </span>
+  <h3 id="2-3">
+   HRM Requirements
+  </h3>
+  <p>
+   There are three requirements for services to use the HRM.
+  </p>
+  <ol>
+   <li>
+    The service must be connected to a network with the
+    <code>
+     com.docker.ucp.mesh.http
+    </code>
+    label
+   </li>
+   <li>
+    The service must publish one or more ports
+   </li>
+   <li>
+    The service must contain one or more labels prefixed with
+    <code>
+     com.docker.ucp.mesh.http
+    </code>
+    to specify the ports to route
+   </li>
+  </ol>
+ </div>
+ <div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Configuring_DNS_with_the_HRM">
+  </span>
+  <h3 id="2-4">
+   Configuring DNS with the HRM
+  </h3>
+  <p>
+   This section covers how to configure DNS for services using the HRM. To use the HRM, a DNS record for the service needs to point to the UCP cluster. This can be accomplished through a variety of different ways because of the flexibility that the swarm mode routing mesh provides.
+  </p>
+  <p>
+   If a service needs to be publicly accessible for requests to
+   <code>
+    foo.example.com
+   </code>
+   , then the DNS record for that service can be configured one of the following ways:
+  </p>
+  <ol>
+   <li>
+    Configure DNS to point to any single node on the UCP cluster. All requests for
+    <code>
+     foo.example.com
+    </code>
+    will get routed through that node to the HRM.
+   </li>
+   <li>
+    Configure round-robin DNS to point to multiple nodes on the UCP cluster. Any node that receives a request for
+    <code>
+     foo.example.com
+    </code>
+    will get routed through the HRM.
+   </li>
+   <li>
+    Or, the
+    <strong>
+     best
+    </strong>
+    solution for
+    <strong>
+     high availability
+    </strong>
+    , is to configure an external HA load balancer to reside in front of the UCP cluster. There are some considerations to keep in mind when using an external HA load balancer:
+    <ul>
+     <li>
+      Set the DNS record for
+      <code>
+       foo.example.com
+      </code>
+      to point to the external load balancer.
+     </li>
+     <li>
+      The external load balancer should point to multiple UCP nodes that reside in different availability zones for increased resiliency.
+     </li>
+     <li>
+      Configure the external load balancer to perform a TCP health check on the HRM service's configured published port so that traffic will route through healthy UCP nodes.
+     </li>
+    </ul>
+   </li>
+  </ol>
+  <p>
+   <img alt="UCP HRM DNS" class="internal" src="/kb/images/1960-8.png"/>
+  </p>
+  <p>
+   Which nodes should be used to route traffic, managers, or workers? There are a few ways to approach that question.
+  </p>
+  <ol>
+   <li>
+    Routing through the manager nodes is fine for smaller deployments since managers are generally more static in nature.
+    <ul>
+     <li>
+      <strong>
+       Advantage
+      </strong>
+      : They generally don't shift around (new hosts, new IPs, etc.) often, and it is easier to keep load balancers pointing to the same nodes.
+     </li>
+     <li>
+      <strong>
+       Disadvantage
+      </strong>
+      : They are responsible for the control plane traffic. If application traffic is large, you don't want to saturate traffic to these nodes and cause adverse affects to your cluster.
+     </li>
+    </ul>
+   </li>
+   <li>
+    Routing through the worker nodes.
+    <ul>
+     <li>
+      <strong>
+       Advantage
+      </strong>
+      : They don't manage the entire cluster, so there's less additional networking overhead.
+     </li>
+     <li>
+      <strong>
+       Disadvantage
+      </strong>
+      : They fall more into the "cattle" territory when it comes to nodes. Any automation built around destroying and building nodes needs to take this into account if load balancers are pointing to worker nodes.
+     </li>
+    </ul>
+   </li>
+  </ol>
+  <p>
+   Regardless of which type of instance your front-end load balancer is directing traffic to, it's important to make sure the instances have an adequate network connection.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="HRM_Usage">
+ </span>
+ <h2 id="1-6">
+  HRM Usage
+ </h2>
+ <p>
+  Now that you have an understanding on how the HRM works and understand the requirements associated with it, this section covers the syntax for the HRM for HTTP routing, logging, monitoring, and replicas.
+ </p>
+ <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HTTP_Routing">
+  </span>
+  <h3 id="2-5">
+   HTTP Routing
+  </h3>
+  <p>
+   Services must contain a label where the key of the label begins with
+   <code>
+    com.docker.ucp.mesh.http
+   </code>
+   . If a service needs to expose multiple ports, then multiple labels can be used such as
+   <code>
+    com.docker.ucp.mesh.http.80
+   </code>
+   and
+   <code>
+    com.docker.ucp.mesh.http.443
+   </code>
+   . Here
+   <code>
+    80
+   </code>
+   and
+   <code>
+    443
+   </code>
+   are used to differentiate the HRM labels via port numbers. You can use whatever values you want, just make sure that they are different from each other and that you can keep track of them.
+  </p>
+  <p>
+   The key of the label attached to a service to be used by HRM must begin with
+   <code>
+    com.docker.ucp.mesh.http
+   </code>
+   , for example
+   <code>
+    com.docker.ucp.mesh.http.80
+   </code>
+   and
+   <code>
+    com.docker.ucp.mesh.http.443
+   </code>
+   .
+  </p>
+  <p>
+   The value of the label is a comma-separated list of key/value pairs separated by equals signs. The following pairs can be used:
+  </p>
+  <ul>
+   <li>
+    <code>
+     external_route
+    </code>
+    <strong>
+     (required)
+    </strong>
+    — The external URL to route to this service. Examples:
+    <code>
+     <a class="external" href="http://myapp.example.com" rel="freeklink" title="http://myapp.example.com">
+      http://myapp.example.com
+     </a>
+    </code>
+    and
+    <code>
+     <a class="external" href="sni://myapp.example.com" rel="freeklink" title="sni://myapp.example.com">
+      sni://myapp.example.com
+     </a>
+    </code>
+   </li>
+   <li>
+    <code>
+     internal_port
+    </code>
+    — The internal port to use for the service. This is
+    <strong>
+     required
+    </strong>
+    if more than one port is published by the service. Examples:
+    <code>
+     80
+    </code>
+    and
+    <code>
+     8443
+    </code>
+   </li>
+   <li>
+    <code>
+     sticky_sessions
+    </code>
+    — If present, use the named cookie to route the user to the same back-end task for this service. Details are in the
+    <em>
+     Sticky Sessions
+    </em>
+    section later in this document.
+   </li>
+   <li>
+    <code>
+     redirect
+    </code>
+    — If present, perform redirection to the specified URL. See the
+    <em>
+     Redirection
+    </em>
+    section later in this document.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Logging">
+  </span>
+  <h3 id="2-6">
+   Logging
+  </h3>
+  <p>
+   It's possible to log the traffic passing through HRM by performing these steps:
+  </p>
+  <ol>
+   <li>
+    In the UCP UI go to
+    <strong>
+     Admin Settings
+    </strong>
+    -&gt;
+    <strong>
+     Logs
+    </strong>
+    .
+   </li>
+   <li>
+    <p>
+     Set the
+     <strong>
+      LOG SEVERITY LEVEL
+     </strong>
+     to
+     <strong>
+      DEBUG
+     </strong>
+     .
+    </p>
+    <p>
+     <img alt="UCP HRM Debug Logging" class="internal" src="/kb/images/1960-9.png"/>
+    </p>
+   </li>
+   <li>
+    <p>
+     Update the HRM server to use any of the available
+     <a class="link-https" href="https://docs.docker.com/engine/admin/logging/overview/" rel="external nofollow" target="_blank">
+      Docker logging drivers
+     </a>
+     . Here's an example using the
+     <code>
+      syslog
+     </code>
+     driver:
+    </p>
+   </li>
+  </ol>
+  <p>
+   <code>
+    docker service update --log-driver=syslog --log-opt syslog-address=udp://&lt;ip_address&gt;:514 ucp-hrm
+   </code>
+  </p>
+ </div>
+ <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="Monitoring">
+  </span>
+  <h3 id="2-7">
+   Monitoring
+  </h3>
+  <p>
+   To monitor the HRM from a front-end load balancer, set the load balancer to monitor the exposed HRM ports on your cluster using a TCP health check. If HRM is configured to listen on the default ports of
+   <code>
+    80
+   </code>
+   and
+   <code>
+    8443
+   </code>
+   , then the front-end load balancer would need to simply perform a TCP health check on all nodes that are in its pool.
+  </p>
+ </div>
+ <div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_HA_Considerations">
+  </span>
+  <h3 id="2-8">
+   HRM HA Considerations
+  </h3>
+  <p>
+   This section discusses a few usage considerations with HRM.
+  </p>
+  <p>
+   If you are utilizing the sticky sessions feature, the stick table that HRM uses for persistence is not shared between all replicas — thus, only one replica of HRM can be run. In other words, if cookie-based persistence is used, then HRM can only be run as one replica.
+  </p>
+  <p>
+   If only HTTP routing (without sticky sessions) and HTTPS routing are going to be used, then the HRM can be scaled to more than one replica for HA purposes.
+  </p>
+  <p>
+   If you don't need to use cookie-based persistence, you can scale the HRM service to more than one replica. For example, to use 3 replicas:
+  </p>
+  <pre>
+<code>docker service update --replicas 3 ucp-hrm
+</code></pre>
+ </div>
+</div>
+<div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="HRM_Usage_Examples">
+ </span>
+ <h2 id="1-7">
+  HRM Usage Examples
+ </h2>
+ <p>
+  This section explains the following types of applications, using all of the available networking modes for HRM:
+ </p>
+ <ul>
+  <li>
+   HTTP Routing
+  </li>
+  <li>
+   Sticky Session
+  </li>
+  <li>
+   HTTPS
+  </li>
+  <li>
+   Multiple Ports
+  </li>
+  <li>
+   Redirection
+  </li>
+ </ul>
+ <p>
+  To run through these examples showcasing service discovery and load balancing, the following are required:
+ </p>
+ <ol>
+  <li>
+   A Docker client that has the UCP client bundle loaded and communicating with the UCP cluster.
+  </li>
+  <li>
+   <a class="link-https" href="https://github.com/docker/compose" rel="external nofollow" target="_blank">
+    Docker Compose
+   </a>
+   1.13.0+ installed.
+  </li>
+  <li>
+   DNS pointing to a load balancer sitting in front of your UCP cluster. If no load balancer can be used, then direct entries in your local
+   <code>
+    hosts
+   </code>
+   file to a host in your UCP cluster. If connecting directly to a host in your UCP cluster, connect them using the published HRM ports (80 and 8443 by default).
+  </li>
+ </ol>
+ <blockquote>
+  <p>
+   <strong>
+    Note:
+   </strong>
+   The repository for the sample application can be found on
+   <a class="link-https" href="https://github.com/ahromis/spring-session-docker-demo" rel="external nofollow" target="_blank">
+    GitHub
+   </a>
+   .
+  </p>
+ </blockquote>
+ <div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HTTP_Routing_Example">
+  </span>
+  <h3 id="2-9">
+   HTTP Routing Example
+  </h3>
+  <p>
+   Consider an example application that showcases service discovery and load balancing in Docker EE.
+  </p>
+  <p>
+   To deploy the application stack, run these commands with the UCP client bundle loaded:
+  </p>
+  <pre>
+<code>$ wget https://raw.githubusercontent.com/ahromis/spring-session-docker-demo/master/ucp-demo/docker-compose.hrm.http.yml
+$ DOMAIN=&lt;domain-to-route&gt; docker stack deploy -c docker-compose.hrm.http.yml hrm-http-example
+</code></pre>
+  <p>
+   Then access the example application at
+   <code>
+    http://&lt;domain-to-route&gt;
+   </code>
+   , and log into it with
+   <strong>
+    user:
+   </strong>
+   <code>
+    user
+   </code>
+   and
+   <strong>
+    password:
+   </strong>
+   <code>
+    password
+   </code>
+   .
+  </p>
+  <p>
+   This is the contents of the compose file if you just want to copy/paste into the UCP UI instead:
+  </p>
+  <pre>
+<code>version: "3.1"
+
+services:
+    redis:
+      image: redis:3.0.7
+      hostname: redis
+      networks:
+        - back-end
+      deploy:
+        mode: replicated
+        replicas: 1
+    session-example:
+      image: ahromis/session-example:0.1
+      ports:
+        - 8080
+      networks:
+        - back-end
+        - ucp-hrm
+      deploy:
+        mode: replicated
+        replicas: 5
+        labels:
+          - com.docker.ucp.mesh.http.8080=external_route=http://${DOMAIN},internal_port=8080
+
+networks:
+  back-end:
+    driver: overlay
+  ucp-hrm:
+    external:
+      name: ucp-hrm
+</code></pre>
+  <p>
+   It's possible to deploy through the UCP UI be going to
+   <strong>
+    Resources
+   </strong>
+   -&gt;
+   <strong>
+    Stacks &amp; Applications
+   </strong>
+   -&gt;
+   <strong>
+    Deploy
+   </strong>
+   . Name the stack, and copy/paste the above compose file into the open text field. Be sure to substitute the
+   <code>
+    ${DOMAIN}
+   </code>
+   variable when deploying through the UI.
+  </p>
+  <p>
+   <img alt="UCP UI Stack Deploy" class="internal" src="/kb/images/1960-10.png"/>
+  </p>
+  <p>
+   Once HRM discovers the newly created service, it will list it in the UCP. Go to
+   <strong>
+    Admin Settings
+   </strong>
+   -&gt;
+   <strong>
+    Routing Mesh
+   </strong>
+   . The new application should be listed under
+   <strong>
+    Configured Hosts
+   </strong>
+   .
+  </p>
+  <p>
+   <img alt="HRM Configured Hosts" class="internal" src="/kb/images/1960-11.png"/>
+  </p>
+  <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+   <span id="HRM_Service_Deployment_Breakdown">
+   </span>
+   <h4 id="3-0">
+    HRM Service Deployment Breakdown
+   </h4>
+   <p>
+    The HRM polls every 30 seconds, so once the application launches, HRM polls for the new service and finds it at
+    <code>
+     http://&lt;domain-to-route&gt;
+    </code>
+    .
+   </p>
+   <p>
+    When the compose file is deployed, the following happens:
+   </p>
+   <ol>
+    <li>
+     Two services are created, a front-end Spring Boot application and a Redis service to store session data.
+    </li>
+    <li>
+     A new overlay network specific to this particular application stack is created called
+     <code>
+      &lt;stack-name&gt;_backend
+     </code>
+     .
+    </li>
+    <li>
+     The Redis task creates a DNS A Record of
+     <code>
+      redis
+     </code>
+     , on the
+     <code>
+      backend
+     </code>
+     network. This DNS record directs to the IP address of the Redis container.
+     <ul>
+      <li>
+       The configuration for the front-end application doesn't need to change for every stack when accessing Redis. It remains as
+       <code>
+        spring.redis.host=redis
+       </code>
+       in the application configuration for every environment.
+      </li>
+     </ul>
+    </li>
+    <li>
+     A DNS entry of the front-end service name,
+     <code>
+      session-example
+     </code>
+     , then registers on the
+     <code>
+      ucp-hrm
+     </code>
+     network.
+    </li>
+    <li>
+     The front-end service is created and attached to the
+     <code>
+      ucp-hrm
+     </code>
+     service.
+    </li>
+    <li>
+     The declared healthy state for the service is 5 replicas, so 5 replica tasks are created.
+    </li>
+    <li>
+     The HRM polls every 30 seconds for Docker events, and it picks up the
+     <code>
+      com.docker.ucp.mesh.http.8080
+     </code>
+     label on the newly created service.
+    </li>
+    <li>
+     The HRM creates an entry so that all 5 front-end replicas are load balanced backed on the
+     <code>
+      $DOMAIN
+     </code>
+     environment variable that was passed for the stack deploy.
+    </li>
+    <li>
+     By doing a refresh of
+     <code>
+      <a class="external" href="http://$DOMAIN" rel="freeklink" title="http://$DOMAIN">
+       http://$DOMAIN
+      </a>
+     </code>
+     in a web browser, a new hostname should show up with every request. It is load balancing across all of the front-end service replicas.
+    </li>
+    <li>
+     Click on the link to log in. The credentials are
+     <strong>
+      User:
+     </strong>
+     <code>
+      user
+     </code>
+     ,
+     <strong>
+      Password:
+     </strong>
+     <code>
+      password
+     </code>
+     .
+    </li>
+   </ol>
+  </div>
+ </div>
+ <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_Sticky_Session_Example">
+  </span>
+  <h3 id="2-10">
+   HRM Sticky Session Example
+  </h3>
+  <p>
+   The HTTP Routing Mesh has the ability to route to a specific back-end service based on a named cookie. For example, if your application uses a cookie named
+   <code>
+    JSESSIONID
+   </code>
+   as the session cookie, you can persist connections to a specific service replica task by passing
+   <code>
+    sticky_sessions=JSESSIONID
+   </code>
+   to the HRM label. Sticky connections are accomplished in HRM by using stick tables, where HRM learns and uses the application session cookie to persist connections to a specific back-end replica.
+  </p>
+  <p>
+   Why would cookie-based persistence need to be used? It can reduce load on the load balancer. The load balancer picks a certain instance in the back-end pool and maintains the connection instead of having to re-route on new requests. Another use case could be for rolling deployments. When you bring in a new application server into the load balancer pool you won't have a "thundering herd" of new instances. Instead, it eases connections to the new instances into load balancing as sessions expire.
+  </p>
+  <p>
+   In general, sticky sessions are better suited for improving cache performance and lessing the load on certain aspects of the system. If you need to hit the same back-end every time because your application is not using distributed storage, then you can run into more problems down the road when Swarm Mode reschedules your tasks. It's important to keep this in mind while using application cookie-based persistence.
+  </p>
+  <blockquote>
+   <p>
+    <strong>
+     Note:
+    </strong>
+    Sticky sessions are not available when using HTTPS as the value of the cookie is encrypted in the HTTP header.
+   </p>
+  </blockquote>
+  <p>
+   To deploy the example application stack for sticky sessions, run these commands with the UCP client bundle loaded:
+  </p>
+  <pre>
+<code>wget https://raw.githubusercontent.com/ahromis/spring-session-docker-demo/master/ucp-demo/docker-compose.hrm.sticky.yml
+DOMAIN=&lt;domain-to-route&gt; docker stack deploy -c docker-compose.hrm.http.yml hrm-sticky-example
+</code></pre>
+  <p>
+   Access the example application at
+   <code>
+    http://&lt;domain-to-route&gt;
+   </code>
+   , and log into it with
+   <strong>
+    user:
+   </strong>
+   <code>
+    user
+   </code>
+   ,
+   <strong>
+    password:
+   </strong>
+   <code>
+    password
+   </code>
+   .
+  </p>
+  <p>
+   This is the contents of the compose file if you want to copy/paste into the UCP UI instead:
+  </p>
+  <pre>
+<code>version: "3.1"
+
+services:
+    redis:
+      image: redis:3.0.7
+      hostname: redis
+      networks:
+        - back-end
+      deploy:
+        mode: replicated
+        replicas: 1
+    session-example:
+      image: ahromis/session-example:0.1
+      ports:
+        - 8080
+      networks:
+        - back-end
+        - ucp-hrm
+      deploy:
+        mode: replicated
+        replicas: 5
+        labels:
+          - com.docker.ucp.mesh.http.8080=external_route=http://${DOMAIN},internal_port=8080,sticky_sessions=SESSION
+
+networks:
+  back-end:
+    driver: overlay
+  ucp-hrm:
+    external:
+      name: ucp-hrm
+</code></pre>
+  <p>
+   Be sure to substitute the
+   <code>
+    ${DOMAIN}
+   </code>
+   variable when deploying through the UI.
+  </p>
+  <div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+   <span id="HRM_Sticky_Session_Breakdown">
+   </span>
+   <h4 id="3-1">
+    HRM Sticky Session Breakdown
+   </h4>
+   <p>
+    When accessing and logging into the application, you should see a page similar to the following:
+   </p>
+   <p>
+    <img alt="Session Example Screenshot" class="internal" src="/kb/images/1960-12.png"/>
+   </p>
+   <p>
+    This is the same as the HTTP routing example but with the additional key value entry of
+    <code>
+     sticky_sessions=SESSION
+    </code>
+    .
+   </p>
+   <p>
+    What does adding
+    <code>
+     sticky_sessions
+    </code>
+    to the
+    <code>
+     com.docker.ucp.mesh.http
+    </code>
+    do?
+   </p>
+   <ol>
+    <li>
+     The HRM creates an entry so that all 5 front-end replicas have their IPs added to the configuration. In addition to this configuration, the name of the session cookie to base persistence on is added.
+    </li>
+    <li>
+     Load
+     <code>
+      <a class="external" href="http://$DOMAIN" rel="freeklink" title="http://$DOMAIN">
+       http://$DOMAIN
+      </a>
+     </code>
+     in a web browser, login with
+     <strong>
+      User:
+     </strong>
+     <code>
+      user
+     </code>
+     ,
+     <strong>
+      Password:
+     </strong>
+     <code>
+      password
+     </code>
+     . With sticky sessions, refreshing the page should show the same back-end server. Connections to the back-end instance persists based on the value of the
+     <code>
+      SESSION
+     </code>
+     cookie.
+    </li>
+   </ol>
+   <p>
+    This demo application uses Redis as the distributed storage for the session data. It's possible to see the
+    <code>
+     SESSION
+    </code>
+    cookie stored in Redis by opening a console to the Redis container in the UCP UI.
+   </p>
+   <ol>
+    <li>
+     Login to the UCP UI.
+    </li>
+    <li>
+     Click on
+     <strong>
+      Stacks &amp; Applications
+     </strong>
+     in the left-hand navigation pane.
+    </li>
+    <li>
+     Select your stack from the list.
+    </li>
+    <li>
+     Select the redis service from the list.
+    </li>
+    <li>
+     Click on
+     <strong>
+      Tasks
+     </strong>
+     on the top.
+    </li>
+    <li>
+     Select the Redis container.
+    </li>
+    <li>
+     Select
+     <strong>
+      Console
+     </strong>
+     on the top.
+    </li>
+    <li>
+     Use
+     <code>
+      sh
+     </code>
+     to connect to the console stack.
+    </li>
+    <li>
+     Run
+     <code>
+      redis-cli keys "*"
+     </code>
+     on the console.
+    </li>
+   </ol>
+   <p>
+    <img alt="Session ID Redis Screenshot" class="internal" src="/kb/images/1960-13.png"/>
+   </p>
+  </div>
+ </div>
+ <div class="mt-section" id="section_22" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_HTTPS_Example">
+  </span>
+  <h3 id="2-11">
+   HRM HTTPS Example
+  </h3>
+  <p>
+   The HTTP routing mesh has support for routing using HTTPS. Using a feature of HTTPS called
+   <em>
+    Server Name Indication
+   </em>
+   , the HRM is able to route connections to service back-ends without terminating the HTTPS connection. SNI is an extension of the TLS protocol, where the client indicates which hostname it is attempting to connect to at the start of the handshake process.
+  </p>
+  <p>
+   To use HTTPS support, no certificates for the service are provided to the HTTP routing mesh. Instead, the back-end service must handle HTTPS connections directly. Services that meet this criteria can use the SNI protocol to indicate handling of HTTPS in this manner. By terminating at the application servers, encrypted traffic goes all the way to the application. However, this also means that applications must manage the TLS certificates. By leveraging Docker secrets, certificates for application servers can be securely and easily be managed.
+  </p>
+  <p>
+   When using HRM with HTTPS, the connections are re-used to reduce the overhead of re-negotiating new TLS connections. The HTTPS connections are re-used using the SSL session ID, and they persist to a service task until the connection needs to be re-established (i.e. the application server connection timeout is reached).
+  </p>
+  <p>
+   Secrets and certificates are almost always involved when dealing with encrypted communications. Before deploying the example application, create a Java keystore.
+  </p>
+  <blockquote>
+   <p>
+    <strong>
+     Tip:
+    </strong>
+    Here's some helpful commands to create a key store for use with Java applications.
+   </p>
+  </blockquote>
+  <pre>
+<code># create PKCS#12 file format
+$ openssl pkcs12 -export -out keystore.pkcs12 -in fullchain.pem -inkey privkey.pem
+# convert PKCS file into Java keystore format
+$ docker run --rm -it -v $(pwd):/tmp -w /tmp java:8 \
+    keytool -importkeystore -srckeystore keystore.pkcs12 -srcstoretype PKCS12 -destkeystore keystore.jks
+</code></pre>
+  <p>
+   Now that a Java keystore has been created, it's time to turn it into a Docker secret so that it can securely be used by this application.
+  </p>
+  <pre>
+<code>$ docker secret create session-example_keystore.jks_v1 keystore.jks
+$ echo "&lt;your-key-store-password&gt;" | docker secret create session-example_keystore-password.txt_v1 -
+$ echo "&lt;your-key-password&gt;" | docker secret create session-example_key-password.txt_v1 -
+</code></pre>
+  <p>
+   That's it! Now the secrets are encrypted in the cluster-wide key value store. The secrets are encrypted at rest and using TLS while in motion to nodes that need the secret. Secrets can only be viewed by the application that needs to use them.
+  </p>
+  <blockquote>
+   <p>
+    <strong>
+     Tip:
+    </strong>
+    For more details on using Docker secrets please refer to the Reference Architecture covering
+    <a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices#Secrets" rel="internal">
+     DDC Security and Best Practices
+    </a>
+    .
+   </p>
+  </blockquote>
+  <p>
+   To add more context, this is what the application configuration for the example application is using:
+  </p>
+  <pre>
+<code>spring.redis.host=redis
+spring.redis.port=6379
+server.port=8443
+server.ssl.key-store=file:/run/secrets/keystore.jks
+server.ssl.key-store-password=${KEY_STORE_PASSWORD}
+server.ssl.key-password=${KEY_PASSWORD}
+</code></pre>
+  <p>
+   The environment variables are from an
+   <code>
+    ENTRYPOINT
+   </code>
+   script that reads the secrets then exposes it to Spring Boot. More information can be found in the
+   <a class="link-https" href="https://github.com/ahromis/spring-session-docker-demo" rel="external nofollow" target="_blank">
+    GitHub repository
+   </a>
+   for this application.
+  </p>
+  <p>
+   Now that the certs are securely created and stored in the Docker kv store, it's time to create a service that can use them:
+  </p>
+  <pre>
+<code>wget https://raw.githubusercontent.com/ahromis/spring-session-docker-demo/master/ucp-demo/docker-compose.hrm.ssl.yml
+DOMAIN=&lt;domain-to-route&gt; docker stack deploy -c docker-compose.hrm.http.yml hrm-sticky-example
+</code></pre>
+  <p>
+   Access the example application at
+   <code>
+    https://&lt;domain-to-route&gt;
+   </code>
+   . If you aren't using a load balancer placed in front of your UCP cluster, then use
+   <code>
+    https://&lt;domain-to-route&gt;:8443
+   </code>
+   . Then log into it with
+   <strong>
+    user:
+   </strong>
+   <code>
+    user
+   </code>
+   ,
+   <strong>
+    password:
+   </strong>
+   <code>
+    password
+   </code>
+   .
+  </p>
+  <p>
+   Here is the full compose file if you want to copy/paste from the UI instead (remember to replace the `${DOMAIN} variables):
+  </p>
+  <pre>
+<code>version: "3.1"
+
+services:
+    redis:
+      image: redis:3.0.7
+      hostname: redis
+      networks:
+        - back-end
+      deploy:
+        mode: replicated
+        replicas: 1
+    session-example:
+      image: ahromis/session-example:0.1
+      ports:
+        - 8443
+      environment:
+        - SPRING_PROFILES_ACTIVE=https
+      networks:
+        - back-end
+        - ucp-hrm
+      deploy:
+        mode: replicated
+        replicas: 5
+        labels:
+          - com.docker.ucp.mesh.http.1=external_route=http://${DOMAIN},redirect=https://${DOMAIN}
+          - com.docker.ucp.mesh.http.8443=external_route=sni://${DOMAIN},internal_port=8443
+      secrets:
+        - source: session-example_keystore.jks_v1
+          target: keystore.jks
+          mode: 0400
+        - source: session-example_keystore-password.txt_v1
+          target: keystore-password.txt
+          mode: 0400
+        - source: session-example_key-password.txt_v1
+          target: key-password.txt
+          mode: 0400
+
+networks:
+  back-end:
+    driver: overlay
+  ucp-hrm:
+    external:
+      name: ucp-hrm
+
+secrets:
+    session-example_keystore.jks_v1:
+        external: true
+    session-example_keystore-password.txt_v1:
+        external: true
+    session-example_key-password.txt_v1:
+        external: true
+</code></pre>
+  <p>
+   The above example also shows how redirection from HTTP to HTTPS can be handled by using the
+   <code>
+    redirect
+   </code>
+   keypair.
+  </p>
+  <p>
+   It's worth mentioning how easily repeatable this is, even for existing applications. Only a few simple steps need to be performed to Modernize Traditional Applications (MTA), and the application stack can be deployed multiple times with minimal configuration changes.
+  </p>
+ </div>
+ <div class="mt-section" id="section_23" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_Multiple_Ports_Example">
+  </span>
+  <h3 id="2-12">
+   HRM Multiple Ports Example
+  </h3>
+  <p>
+   Sometimes a service has multiple ports it can listen on. With HRM each listen port can be routed to independently.
+  </p>
+  <p>
+   Here's an example of a service with multiple listen ports:
+  </p>
+  <pre>
+<code>$ docker service create \
+  -l com.docker.ucp.mesh.http.8000=external_route=http://site1.example.com,internal_port=8000 \
+  -l com.docker.ucp.mesh.http.8001=external_route=http://site2.example.com,internal_port=8001 \
+  -p 8000 \
+  -p 8001 \
+  --network ucp-hrm \
+  --replicas 3
+  --name twosite ahromis/nginx-twosite:latest
+</code></pre>
+  <p>
+   In this example an Nginx service is created that has two web roots that listen on different ports. The HRM routes traffic to each of the sites independently based on the HTTP
+   <code>
+    Host:
+   </code>
+   header it receives.
+  </p>
+ </div>
+ <div class="mt-section" id="section_24" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+  <span id="HRM_Redirection_Example">
+  </span>
+  <h3 id="2-13">
+   HRM Redirection Example
+  </h3>
+  <p>
+   Redirect from HTTP to HTTPS when you want to force all connections to be secure. The redirect option indicates that all requests to this route should be redirected to another domain name using an HTTP redirect.
+  </p>
+  <p>
+   One use of this feature is for a service which only listens using HTTPS, with HTTP traffic to it being redirected to HTTPS. If the service is on example.com, then this can be accomplished with two labels:
+  </p>
+  <pre>
+<code>com.docker.ucp.mesh.http.1=external_route=http://example.com,redirect=https://example.com
+com.docker.ucp.mesh.http.2=external_route=sni://example.com
+</code></pre>
+  <p>
+   Another use is a service expecting traffic only on a single domain, but there are other domains that should be redirected to it. For example, a website that has been renamed might use this functionality. The following labels accomplish this for
+   <code>
+    new.example.com
+   </code>
+   and
+   <code>
+    old.example.com
+   </code>
+   .
+  </p>
+  <pre>
+<code>com.docker.ucp.mesh.http.1=external_route=http://old.example.com,redirect=http://new.example.com
+com.docker.ucp.mesh.http.2=external_route=http://new.example.com
+</code></pre>
+  <p>
+   Below is an example redirecting a website to a different domain using a different example application.
+  </p>
+  <pre>
+<code>$ docker service create \
+  -l com.docker.ucp.mesh.http.1=external_route=http://oldsite.example.com,redirect=http://foo.example.com \
+  -l com.docker.ucp.mesh.http.8080=external_route=http://foo.example.com,internal_port=8080 \
+  --replicas 3
+  --name lbinfo \
+  ahromis/lbinfo:latest
+</code></pre>
+ </div>
+</div>
+<div class="mt-section" id="section_25" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="Non_Swarm_Mode_Containers">
+ </span>
+ <h2 id="1-8">
+  Non Swarm Mode Containers
+ </h2>
+ <p>
+  The HRM and swarm mode routing mesh are only supported for applications deployed using "services." For non-swarm mode containers, such as containers running on pre-1.12 Docker Engines and applications deployed not using services (e.g using
+  <code>
+   docker run
+  </code>
+  ),
+  <a class="link-https" href="https://github.com/ehazlett/interlock" rel="external nofollow" target="_blank">
+   interlock
+  </a>
+  and NGINX must be used.
+ </p>
+ <p>
+  Interlock is a containerized, event-driven tool that connects to the UCP controllers and watches for events. In this case, events are the containers being spun up or going down. Interlock also looks for certain metadata that these containers have such as hostnames or labels configured for the container. It then uses the metadata to register/de-register these containers to a load-balancing back-end (NGINX). The load balancer uses updated back-end configurations to direct incoming requests to healthy containers. Both Interlock and the load balancer containers are stateless and, hence, can be scaled horizontally across multiple nodes to provide a highly-available load balancing services for all deployed applications.
+ </p>
+ <p>
+  There are three requirements for containers to use Interlock and NGINX:
+ </p>
+ <p>
+  <strong>
+   I. Interlock and NGINX need to be deployed on one or more UCP worker nodes.
+  </strong>
+ </p>
+ <p>
+  The easiest way to deploy Interlock and NGINX is by using Docker Compose in the UCP portal:
+ </p>
+ <ol>
+  <li>
+   Log into the UCP web console.
+  </li>
+  <li>
+   On top, go to the
+   <strong>
+    Resources
+   </strong>
+   tab.
+  </li>
+  <li>
+   Go to
+   <strong>
+    Applications
+   </strong>
+   in the left pane, and click the
+   <strong>
+    Deploy compose.yml
+   </strong>
+   button.
+  </li>
+  <li>
+   Enter
+   <code>
+    interlock
+   </code>
+   as the
+   <strong>
+    Application Name
+   </strong>
+   .
+  </li>
+  <li>
+   <p>
+    For the
+    <code>
+     compose.yml
+    </code>
+    file, enter the following sample
+    <code>
+     compose.yml
+    </code>
+    file. You can alter the Interlock or NGINX config as you desire. Full documentation is on
+    <a class="link-https" href="https://github.com/ehazlett/interlock/tree/master/docs" rel="external nofollow" target="_blank">
+     GitHub
+    </a>
+    .
+   </p>
+   <pre>
+
+<code>interlock:
+	    image: ehazlett/interlock:1.3.0
+	    command: -D run
+	    tty: true
+	    ports:
+	        - 8080
+	    environment:
+	        constraint:node==${UCP_NODE_NAME}:
+	        INTERLOCK_CONFIG: |
+	            ListenAddr = ":8080"
+	            DockerURL = "tcp://${UCP_CONTROLLER_IP}:2376"
+	            TLSCACert = "/certs/ca.pem"
+	            TLSCert = "/certs/cert.pem"
+	            TLSKey = "/certs/key.pem"
+	            PollInterval = "10s"
+	            [[Extensions]]
+	            Name = "nginx"
+	            ConfigPath = "/etc/nginx/nginx.conf"
+	            PidPath = "/etc/nginx/nginx.pid"
+	            MaxConn = 1024
+	            Port = 80
+	    volumes:
+	        - ucp-node-certs:/certs
+	    restart: always
+
+
+	nginx:
+	    image: nginx:latest
+	    entrypoint: nginx
+	    command: -g "daemon off;" -c /etc/nginx/nginx.conf
+	    ports:
+	        - 80:80
+	    labels:
+	        - "interlock.ext.name=nginx"
+	    restart: always
+	    environment:
+	        constraint:node==${UCP_NODE_NAME}:
+</code></pre>
+   <blockquote>
+    <p>
+     <strong>
+      Note:
+     </strong>
+     Substitute
+     <code>
+      UCP_NODE_NAME
+     </code>
+     and
+     <code>
+      UCP_CONTROLLER_IP
+     </code>
+     .
+     <code>
+      UCP_NODE_NAME
+     </code>
+     is the name of the node that you wish to run Interlock and NGINX on (as displayed under the
+     <strong>
+      Resources
+     </strong>
+     /
+     <strong>
+      Nodes
+     </strong>
+     section). The DNS name for your application(s) needs to resolve to this node.
+     <code>
+      UCP_CONTROLLER_IP
+     </code>
+     is the IP or DNS name of one or more UCP controllers.
+    </p>
+   </blockquote>
+  </li>
+  <li>
+   <p>
+    Click
+    <strong>
+     Create
+    </strong>
+    to deploy Interlock and NGINX.
+   </p>
+  </li>
+ </ol>
+ <blockquote>
+  <p>
+   <strong>
+    Note:
+   </strong>
+   You can deploy Interlock and NGINX on multiple nodes by repeating steps 3-6 above and changing the
+   <strong>
+    Application Name
+   </strong>
+   and
+   <code>
+    UCP_NODE_NAME
+   </code>
+   . This allows you to front these nodes with an external load balancer ( e.g ELB or F5) for high availability. The DNS records for your applications would then need to be registered to the external load balancer IP.
+  </p>
+ </blockquote>
+ <p>
+  <strong>
+   II. The container must publish one or more ports.
+  </strong>
+ </p>
+ <p>
+  <strong>
+   III. The container must be launched with Interlock
+   <a class="link-https" href="https://github.com/ehazlett/interlock/blob/master/docs/interlock_data.md" rel="external nofollow" target="_blank">
+    labels
+   </a>
+   .
+  </strong>
+ </p>
+ <p>
+  For example, to deploy a container that exposes port
+  <code>
+   8080
+  </code>
+  and is accessed on the DNS name
+  <code>
+   demo.app.example.com
+  </code>
+  , launch it as follows:
+ </p>
+ <pre>
+<code>docker run --name demo -p 8080 --label interlock.hostname=demo --label interlock.domain=app.example.com ehazlett/docker-demo:dcus
+</code></pre>
+ <p>
+  Once you launch your container with the correct labels and published ports, you can access it using the desired DNS name.
+ </p>
+</div>
+<div class="mt-section" id="section_26" mt-section-origin="Architecture/Docker_Reference_Architecture:_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing">
+ <span id="Summary">
+ </span>
+ <h2 id="1-9">
+  Summary
+ </h2>
+ <p>
+  The ability to scale and discover services in Docker is now easier than ever. With the service discovery and load balancing features built into Docker, engineers can spend less time creating these types of supporting capabilities on their own and more time focusing on their applications. Instead of creating API calls to set DNS for service discovery, Docker automatically handles it for you. If an application needs to be scaled, Docker takes care of adding it to the load balancer pool. By leveraging these features, organizations can deliver highly available applications in a shorter amount of time.
+ </p>
+ <p>
+  <em>
+   Document Version: 1.1.0
+  </em>
+ </p>
+ <p>
+  <em>
+   Tested on: Docker EE 17.03
+  </em>
+ </p>
+ <p>
+  <em>
+   Tested on: UCP 2.1.1
+  </em>
+ </p>
+</div>
+{% endraw %}

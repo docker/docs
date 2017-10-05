@@ -1,0 +1,143 @@
+---
+title: "Images Missing in DTR 1.4"
+id: 650
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/650/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "expires:futurerelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-1.4.0"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Images_Missing_in_DTR_1.4">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  After upgrading to DTR 1.4, the images are not visible in the web GUI, and trying to do a
+  <code>
+   docker push
+  </code>
+  results in a 500 error.
+ </p>
+ <p>
+  <span style="font-size:32px;line-height:1.2;">
+   Error Message
+  </span>
+ </p>
+ <p>
+  Repositories created in the DTR GUI show up, but their corresponding tags don't.
+ </p>
+ <p>
+  Pushes fail with a 500 error:
+ </p>
+ <pre>
+<code>$ docker push  dtr.example.com/bob/busybox:latest
+
+The push refers to a repository [dtr.example.com/bob/busybox] (len: 1)
+
+ac6a7980c6c2: Pushed
+
+c00ef186408b: Pushed
+
+latest: digest: sha256:f3b487ea1fcaaf7c9409d8005e66a70f71d98f913dc6b8b4b07592e69938ad16 size: 2742</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Images_Missing_in_DTR_1.4">
+ <span id="Diagnostic_Steps">
+ </span>
+ <h3 id="2-1">
+  Diagnostic Steps
+ </h3>
+ <ol>
+  <li>
+   Attempt to push an image while logged in with a valid user to see if you get the 500 error:
+   <br/>
+   docker login
+   <span class="replaceabletext">
+    dtr.example.com
+   </span>
+   ; docker push
+   <span class="replaceabletext">
+    dtr.example.com
+   </span>
+   /bob/busybox
+  </li>
+  <li>
+   Use ssh to connect to the DTR host. Look at
+   <code>
+    /usr/local/etc/dtr/storage.yml
+   </code>
+   . With DTR 1.4, it should have
+   <code>
+    rootdirectory: /storage
+   </code>
+   . If it has
+   <code>
+    rootdirectory: /local
+   </code>
+   , then it needs to be updated.
+  </li>
+  <li>
+   Execute
+   <code>
+    docker exec -it docker_trusted_registry_image_storage_0 find /storage
+   </code>
+   . If the output is blank, then your images need to be moved. On the DTR host, run
+   <code>
+    du -sch /var/local/dtr/image-storage/{local,storage}
+   </code>
+   . If storage is empty, then your images will need to be moved.
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Images_Missing_in_DTR_1.4">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-2">
+  Resolution
+ </h3>
+ <ol>
+  <li>
+   Stop DTR:
+   <pre>
+<code>sudo docker run --rm docker/trusted-registry stop | sudo bash</code></pre>
+  </li>
+  <li>
+   Update your
+   <code>
+    /usr/local/etc/dtr/storage.yml
+   </code>
+   file to set
+   <code>
+    rootdirectory: /storage
+   </code>
+  </li>
+  <li>
+   Move your existing files in
+   <code>
+    /var/local/dtr/image-storage/
+   </code>
+   to the correct location:
+   <pre>
+<code>mv /var/local/dtr/image-storage/storage /var/local/dtr/image-storage/storage-bak &amp;&amp; mv /var/local/dtr/image-storage/local /var/local/dtr/image-storage/storage</code></pre>
+  </li>
+  <li>
+   Start DTR:
+   <pre>
+<code>sudo docker run --rm docker/trusted-registry start | sudo bash</code></pre>
+  </li>
+  <li>
+   Verify DTR shows your old tags in the web UI.
+  </li>
+  <li>
+   Verify you can push without getting a 500 error.
+  </li>
+ </ol>
+</div>
+{% endraw %}

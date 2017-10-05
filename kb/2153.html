@@ -1,0 +1,81 @@
+---
+title: "Warning: Error loading config.json"
+id: 2153
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2153/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "config"
+- tag: "config.json"
+- tag: "Error"
+- tag: "platform:windows"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Warning:_Error_loading_config.json">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  When trying to run a Docker task or command on Windows 10, you receive the following error — in some cases the command completes:
+ </p>
+ <pre>
+<code>WARNING: Error loading config file:.docker\config.json - EOF </code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Warning:_Error_loading_config.json">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Windows 10
+  </li>
+  <li>
+   Docker for Windows
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Warning:_Error_loading_config.json">
+ <span id="Steps">
+ </span>
+ <h2 id="1-2">
+  Steps
+ </h2>
+ <ol>
+  <li>
+   Locate the
+   <code>
+    config.json
+   </code>
+   file located under the
+   <code>
+    .docker
+   </code>
+   folder in your
+   <code>
+    Users
+   </code>
+   folder.
+  </li>
+  <li>
+   If the file is empty, add
+   <code>
+    { }
+   </code>
+   to the file and save it.
+  </li>
+  <li>
+   Try the Docker task or command again.
+  </li>
+ </ol>
+</div>
+{% endraw %}

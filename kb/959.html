@@ -1,0 +1,56 @@
+---
+title: "Why don't I have the option to scale my service to multiple containers?"
+id: 959
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/959/contents
+tags:
+- tag: "article:topic"
+- tag: "Docker Cloud"
+- tag: "product:cloud"
+- tag: "scaling"
+- tag: "Services"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_don't_I_have_the_option_to_scale_my_service_to_multiple_containers?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  <span>
+   I just configured a service and cannot find the "number of containers" slider that allows scaling. Has it been moved somewhere or have I misconfigured something and hence I don't have the option to scale the service to multiple containers?
+  </span>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Why_don't_I_have_the_option_to_scale_my_service_to_multiple_containers?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  Check if the EVERY_NODE deployment strategy was selected when creating the service, since using this deployment strategy prevents manual scaling. A service with an EVERY_NODE strategy will have one container deployed on each node that matches its deploy tags. It has the following properties:
+ </p>
+ <ul type="disc">
+  <li type="disc">
+   With every new node that matches the service’s deploy tags, a new container will be deployed to it.
+  </li>
+  <li type="disc">
+   <strong>
+    It cannot be manually scaled.
+   </strong>
+  </li>
+  <li type="disc">
+   If the service uses volumes, each container on each node will have a different volume.
+  </li>
+  <li type="disc">
+   If the service is linked from another service with EVERY_NODE strategy, containers will be linked one-to-one on each node.
+  </li>
+ </ul>
+ <p>
+  Note: Currently it is not possible to change from EVERY_NODE to HIGH_AVAILABILITY or EMPTIEST_NODE and vice versa, so a new service would need to be created in order to use the new deployment strategy.
+ </p>
+</div>
+{% endraw %}

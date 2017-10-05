@@ -1,0 +1,72 @@
+---
+title: "Post upgrade UPC 2.1.0 to UCP 2.1.1 all users are unable to log into UCP and DTR"
+id: 1927
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/1927/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.1.1"
+- tag: "usecase:caas"
+---
+{% raw %}
+<p>
+ After upgrading from UPC 2.1.0 to UCP 2.1.1, you might receive the following error:
+</p>
+<p>
+ <code>
+  API Errors: ["INVALID_AUTHENTICATION_CREDENTIALS: invalid authentication credentials given - Detail: invalid session"]
+ </code>
+</p>
+<p>
+ resulting in all users not being able to log into UCP and DTR.
+</p>
+<p>
+ Resolve this issue by performing the following steps:
+</p>
+<p>
+ 1. Start by getting the current configuration for user sessions by running the following command:
+</p>
+<pre>
+<code>curl -u admin "https://<span class="replaceabletext">$UCP_HOST</span>/enzi/v0/config/sessions"</code></pre>
+<p>
+ The command will prompt for the
+ <code>
+  admin
+ </code>
+ user’s password and then return the current sessions config, similar to:
+</p>
+<pre>
+<code>{
+  "lifetimeHours": 72,
+  "renewalThresholdHours": 24,
+  "perUserLimit": 0
+}</code>
+</pre>
+<p>
+ 2. If
+ <code>
+  perUserLimit
+ </code>
+ is set to 0, use the following command to change it to a value between 1 and 100. The value of 5 is recommended. Be sure to use the same values for
+ <code>
+  lifetimeHours
+ </code>
+ and
+ <code>
+  renewalThresholdHours
+ </code>
+ as the ones found in step 1:
+</p>
+<pre>
+<code>curl -u admin "https://$UCP_HOST/enzi/v0/config/sessions" \ -X PUT \ -H 'Content-Type: application/json' \ -d '{"lifetimeHours": <span class="replaceabletext">72</span>, "renewalThresholdHours": <span class="replaceabletext">24</span>, "perUserLimit": <span class="replaceabletext">5</span>}'</code>
+</pre>
+<p>
+ 3.Try to log into UCP and DTR. You should be able to successfully log into them now.
+</p>
+
+{% endraw %}

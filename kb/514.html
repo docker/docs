@@ -1,0 +1,48 @@
+---
+title: "Why do nodes go unreachable?"
+id: 514
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/514/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudagent"
+- tag: "Docker Cloud"
+- tag: "nodes"
+- tag: "product:cloud"
+- tag: "stage:ready"
+- tag: "unreachable"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_do_nodes_go_unreachable?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  Why do nodes go unreachable?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Why_do_nodes_go_unreachable?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <div class="single-article-content article-body">
+  <p>
+   Nodes often go "unreachable" when they run out of resources (memory or CPU) and Docker Cloud cannot contact them. This can be because too many containers are deployed, or the ones deployed are taking up all resources.
+  </p>
+  <p>
+   It can also be due to a Docker memory leak that affects Docker versions 1.6 and earlier. If this is the case, please upgrade your nodes to a newer version.
+  </p>
+  <p>
+   If you have access to the node, a simple restart of the node will help mitigate.
+  </p>
+  <p>
+   If you keep seeing this behavior and you are confident it's not being caused by your containers, please let us know!
+  </p>
+ </div>
+</div>
+{% endraw %}

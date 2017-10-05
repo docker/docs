@@ -1,0 +1,34 @@
+---
+title: "I have an automated build running on Docker Cloud or Docker Hub. How do I manually stop the builds?"
+id: 950
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/950/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "expires:futurerelease"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ <span id="docs-internal-guid-b18b5015-c0ed-8020-8b87-9b62313cb95f">
+  <span>
+   There is currently no way to stop a running build.
+  </span>
+ </span>
+</p>
+<p dir="ltr">
+ <span id="docs-internal-guid-b18b5015-c0ed-8020-8b87-9b62313cb95f">
+  <span>
+   On Docker Cloud, the image building process will automatically timeout and stop after 4 hours regardless of its state. On Docker Hub, builds will timeout and stop after 2 hours.
+   <strong>
+    Note
+   </strong>
+   : Builds that time out will end up in failed state.
+  </span>
+ </span>
+</p>
+
+{% endraw %}

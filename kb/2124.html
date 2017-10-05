@@ -1,0 +1,41 @@
+---
+title: "Firewalld problems with container to container network communications"
+id: 2124
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2124/contents
+tags:
+- tag: "article:howto"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Firewalld_problems_with_container_to_container_network_communications">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  Using ssh to connect from one container to another container on a different node works. However, running
+  <code>
+   ssh
+  </code>
+  from one container to another container on the same node does not work.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Firewalld_problems_with_container_to_container_network_communications">
+ <span id="Solution">
+ </span>
+ <h2 id="1-1">
+  Solution
+ </h2>
+ <p>
+  <br/>
+  Firewalld uses the NetworkManager backend. The firewalld commands to resolve this connection issue are similar to the following:
+ </p>
+ <pre>
+<code>firewall-cmd --permanent --zone=trusted --add-interface=docker0
+firewall-cmd --permanent --zone=trusted --add-port=4243/tcp
+</code></pre>
+</div>
+{% endraw %}

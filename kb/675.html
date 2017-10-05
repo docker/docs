@@ -1,0 +1,212 @@
+---
+title: "Securing Docker Trusted Registry 1.x with TLS"
+id: 675
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/675/contents
+tags:
+- tag: "article:tutorial"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "testedon:dtr-1.4.0"
+---
+{% raw %}
+<blockquote>
+ <strong>
+  Note:
+ </strong>
+ This article only applies to DTR 1.x.
+</blockquote>
+<p>
+ Docker Trusted Registry (DTR) 1.x uses HTTP over TLS for both UI and Docker CLI connections. In order to establish a secure TLS connection, three steps are required:
+</p>
+<ol>
+ <li>
+  Obtaining the SSL Certificate and Key
+ </li>
+ <li>
+  Uploading the Certificate and Private Key to DTR
+ </li>
+ <li>
+  Trusting the Certificate
+ </li>
+</ol>
+<p>
+ Let’s take a look at each step in detail.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Securing_Docker_Trusted_Registry_1.x_with_TLS">
+ <span id="Obtaining_the_SSL_Certificate_and_Key">
+ </span>
+ <h2 id="1-0">
+  Obtaining the SSL Certificate and Key
+ </h2>
+ <p>
+  When you install Docker Trusted Registry 1.x, a self-signed certificate and key will be generated for a blank domain name. The certificate will be used to establish a secure TLS connection via the UI. To be able to login to DTR via the Docker CLI to perform pull/push operations, you need to either i) Generate a self-signed certificate with a valid Domain Name/IP or ii) Obtain a CA-signed certificate for DTR’s Fully-Qualified Domain Name (FQDN).
+ </p>
+ <p>
+  To use the first option, you simply need to plug in a valid domain name (e.g dtr.enterprise.com) for DTR and restart it. A new certificate for that specific domain name will be generated and used. See Below:
+ </p>
+ <p>
+  <img height="240" src="/kb/images/675-0.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
+ </p>
+ <p>
+  If you would like to use your own CA-signed certificate, you need to ensure it’s in the right format. DTR expects a PEM-encoded certificate and key. DTR also expects the full certificate chain. For example, if your SSL certificate provider/issuer provided you the certificated with DER, P7B, PK7S..etc, you would need to first convert the full certificate to PEM (see
+  <a class="link-https" href="https://www.sslshopper.com/article-most-common-openssl-commands.html" rel="external nofollow" target="_blank" title="https://www.sslshopper.com/article-most-common-openssl-commands.html">
+   here
+  </a>
+  for more information). Then, you need to ensure that you have the full chain of certificates included. Typically, the certificate signer/issuer will provide you with the Server Certificate and Intermediate Certificate. The certificate chain is comprised of both of these certificates.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Securing_Docker_Trusted_Registry_1.x_with_TLS">
+ <span id="Uploading_the_Certificate_and_Private_Key_to_DTR">
+ </span>
+ <h2 id="1-1">
+  Uploading the Certificate and Private Key to DTR
+ </h2>
+ <p>
+  If you decide to use the self-generated certificate, you can skip to this step and continue to "Trusting the Certificate" below.  If you are using a CA-signed certificate, by now you should have a PEM-encoded certificate chain for your DTR instance. You have two options to upload it to DTR, either through the UI or CLI.
+ </p>
+ <ul>
+  <li>
+   Using the UI: If you would like to use the UI, navigate to
+   <code>
+    Settings &gt;&gt; Security
+   </code>
+   . Then copy and paste your certificate chain and key. The certificate chain needs to be in the following format:
+  </li>
+ </ul>
+ <pre>
+-----BEGIN CERTIFICATE-----
+&lt;&lt;&lt;&lt; Server Certificate &gt;&gt;&gt;&gt;&gt;
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+&lt;&lt;&lt;&lt; Intermediate Certificate &gt;&gt;&gt;&gt;&gt;
+-----END CERTIFICATE----</pre>
+ <p>
+  If your certificate chain also includes the root certificate. You’ll will need to add it after the Intermediate Certificate. You also need to plug in the RSA Private Key.
+ </p>
+ <ul>
+  <li>
+   Using the CLI: You need to create a file called server.pem on the host that DTR is running on. The path of this file is
+   <code>
+    /usr/local/etc/dtr/ssl/server.pem
+   </code>
+   . The file should have the following format:
+  </li>
+ </ul>
+ <pre>
+-----BEGIN CERTIFICATE-----
+&lt;&lt;&lt;&lt; Server Certificate &gt;&gt;&gt;&gt;&gt;
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+&lt;&lt;&lt;&lt; Intermediate Certificate &gt;&gt;&gt;&gt;&gt;
+-----END CERTIFICATE-----
+-----BEGIN RSA PRIVATE KEY-----
+&lt;&lt;&lt;&lt; Private RSA Key &gt;&gt;&gt;&gt;&gt;
+-----END RSA PRIVATE KEY-----
+</pre>
+ <p>
+  After you add the file to the
+  <code>
+   /usr/local/etc/dtr/ssl/
+  </code>
+  directory, you need to restart DTR. You can do so from CLI using:
+ </p>
+ <pre>
+<code>sudo bash -c "$(sudo docker run docker/trusted-registry restart)"</code></pre>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Securing_Docker_Trusted_Registry_1.x_with_TLS">
+ <span id="Trusting_the_Certificate">
+ </span>
+ <h2 id="1-2">
+  Trusting the Certificate
+ </h2>
+ <p>
+  You need to ensure that DTR certificates are installed on each client Docker daemon host. If the DTR certificate was signed by a CA that is already trusted on your hosts, then you should be able to skip this step.
+ </p>
+ <p>
+  The procedure for installing the Docker Trusted Registry certificates on each Linux distribution has slightly different steps.  These steps can be referenced in the Docker Documentation at
+  <a class="link-https" href="https://docs.docker.com/docker-trusted-registry/configuration/#security" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-trusted-registry/configuration/#security">
+   https://docs.docker.com/docker-trusted-registry/configuration/#security
+  </a>
+  .
+ </p>
+ <p>
+  If you have installed a CA-signed certificate on your DTR instance and are experiencing errors during login via the Docker CLI such as:
+ </p>
+ <p>
+  <img src="/kb/images/675-1.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="624"/>
+ </p>
+ <p>
+  This could be due to “lack of trust” by not of having the DTR CA certificate present on the client Docker daemon host.  Assuming you have correctly uploaded a valid certificate onto your DTR instance, a secure TLS connection can be established by validating your client against your DTR instance using two preferred options:
+ </p>
+ <ul>
+  <li>
+   Manually adding the DTR CA certificate via CLI. You will need to create both the
+   <code>
+    /certs.d
+   </code>
+   and
+   <code>
+    <span class="replaceabletext">
+     /&lt;dtr-domain-name&gt;
+    </span>
+   </code>
+   directories to mimic this path
+   <code>
+    /etc/docker/certs.d/
+    <span class="replaceabletext">
+     &lt;dtr-domain-name&gt;
+    </span>
+   </code>
+   / (e.g.
+   <span class="replaceabletext">
+    dtr.enterprise.com
+   </span>
+   ). Next copy your
+   <code>
+    server.pem
+   </code>
+   certificate from the DTR instance to the new directory as follows:
+  </li>
+ </ul>
+ <pre>
+mkdir -p /etc/docker/certs.d/<span class="replaceabletext">&lt;dtr-domain-name&gt;</span>
+cp server.pem /etc/docker/certs.d/<span class="replaceabletext">&lt;dtr-domain-name&gt;</span>/ca.crt
+</pre>
+ <ul>
+  <li>
+   Running a Docker image that takes care of trusting the certs. This option involves running the following Docker image:
+   <a class="link-https" href="https://hub.docker.com/r/nicolaka/dtr-trust/" rel="freeklink" title="https://hub.docker.com/r/nicolaka/dtr-trust/">
+    https://hub.docker.com/r/nicolaka/dtr-trust/
+   </a>
+   in a container, which then automatically configures your client and establishes the trust needed for secure TLS as follows:
+  </li>
+ </ul>
+ <pre>
+export DTR_DOMAIN_NAME=<span class="replaceabletext">&lt;DOMAIN NAME or IP OF DTR&gt;</span>
+docker run --rm -v /etc/docker/certs.d/:/etc/docker/certs.d/ -e DTR_DOMAIN_NAME=$DTR_DOMAIN_NAME nicolaka/dtr-trust
+</pre>
+ <p>
+  Note that using one of these two options will not trust the certificate across the entire machine, so other services can’t establish a TLS handshake with DTR, just Docker.
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Securing_Docker_Trusted_Registry_1.x_with_TLS">
+ <span id="Conclusion">
+ </span>
+ <h2 id="1-3">
+  Conclusion
+ </h2>
+ <p>
+  Now you can log into your DTR instance from your Docker host and perform pull/push operations as follows:
+ </p>
+ <pre>
+$ docker login $DTR_DOMAIN_NAME
+Username: 
+Password: 
+Email: 
+Login Succeeded
+</pre>
+</div>
+{% endraw %}

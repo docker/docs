@@ -1,0 +1,317 @@
+---
+title: "Using systemd to control the Docker daemon"
+id: 819
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/819/contents
+tags:
+- tag: "article:tutorial"
+- tag: "component:engine"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "testedon:cse-1.10.2-cs1"
+- tag: "testedon:cse-1.9.0-cs1"
+---
+{% raw %}
+<p>
+ Systemd provides a standard process for controlling programs / processes on Linux hosts. In effect it has replaced
+ <code>
+  initd
+ </code>
+ . If you're using a somewhat modern Linux system (RHEL 7.x, SuSE 12, Ubuntu 15, etc), then you will encounter systemd. One of the nice things about systemd is that it is a single command that can be used to manage almost all aspects of a process. Also, systemd is easily configurable through what are known as systemd unit files.
+</p>
+<p>
+ The following explains how systemd can be used with the Docker daemon. For the most part this should not be any different from how systemd would interact with any service
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Using_systemd_to_control_the_Docker_daemon">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <ul>
+  <li>
+   A system that uses systemd
+  </li>
+  <li>
+   Docker installed, preferably the latest
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Using_systemd_to_control_the_Docker_daemon">
+ <span id="Verifying_the_Status_and_Health_of_the_Docker_Daemon">
+ </span>
+ <h2 id="1-1">
+  Verifying the Status and Health of the Docker Daemon
+ </h2>
+ <ul>
+  <li>
+   The
+   <code>
+    systemctl status
+   </code>
+   command provides not only information about whether the service / process is running (
+   <code>
+    active
+   </code>
+   ), but also whether it is
+   <code>
+    enabled
+   </code>
+   to start at boot of the machine. This in itself would have required multiple programs (
+   <code>
+    chkconfig
+   </code>
+   etc) to query. Additionally, it shows the default unit file loaded in the following line:
+   <pre>
+<code>Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)</code></pre>
+   Among other information, useful messages about the PID, memory consumed, arguments (
+   <code>
+    DOCKER_OPTS
+   </code>
+   ) and the last 10 lines (aka
+   <code>
+    tail
+   </code>
+   ) are also shown:
+   <pre>
+<code>[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2016-02-02 18:13:42 EST; 2 days ago
+     Docs: https://docs.docker.com
+ Main PID: 16915 (docker)
+   Memory: 14.7M
+   CGroup: /system.slice/docker.service
+           ├─16915 /usr/bin/docker daemon -H fd://
+           └─20162 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 3375 -container-ip 172.17.0.2 -container-port 2375
+
+Feb 03 19:51:35 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:51:35.411425044-05:00" level=info msg="GET /v1.21/conta.../json"
+Feb 03 19:51:46 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:51:46.575906700-05:00" level=info msg="GET /v1.21/version"
+Feb 03 19:57:51 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:57:51.748731356-05:00" level=info msg="GET /v1.21/conta.../json"
+Feb 03 19:57:59 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:57:59.959082130-05:00" level=info msg="POST /v1.21/cont...?t=10"
+Feb 03 19:58:03 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:58:03.958291300-05:00" level=info msg="GET /v1.21/conta...mit=1"
+Feb 03 19:58:04 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:58:04.000435804-05:00" level=info msg="GET /v1.21/conta.../json"
+Feb 03 19:58:04 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T19:58:04.001717319-05:00" level=info msg="GET /v1.21/conta...l=all"
+Feb 03 20:08:52 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T20:08:52.811916273-05:00" level=info msg="GET /v1.21/conta...mit=1"
+Feb 03 20:08:52 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T20:08:52.855966139-05:00" level=info msg="GET /v1.21/conta.../json"
+Feb 03 20:08:52 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T20:08:52.857644962-05:00" level=info msg="GET /v1.21/conta...l=all"
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre>
+  </li>
+  <li>
+   <p>
+    To enable the daemon to start at boot time or not use
+    <code>
+     sudo systemctl enable docker
+    </code>
+    and
+    <code>
+     sudo systemctl disable docker
+    </code>
+    respectively.
+   </p>
+  </li>
+ </ul>
+ <div class="mt-section" id="section_3" mt-section-origin="KBase/Using_systemd_to_control_the_Docker_daemon">
+  <span id="Overriding_Defaults_for_the_Docker_Daemon">
+  </span>
+  <h3 id="2-0">
+   Overriding Defaults for the Docker Daemon
+  </h3>
+  <ul>
+   <li>
+    By default the systemd configuration files controlling the service are under the folder
+    <code>
+     /usr/lib/systemd/system
+    </code>
+    . This is also evident in the
+    <code>
+     Loaded:
+    </code>
+    line in the output of the
+    <code>
+     systemctl status
+    </code>
+    command.
+    <pre>
+<code>[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl status docker.service | grep Loaded
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+</code></pre>
+    <p>
+     The
+     <code>
+      docker.service
+     </code>
+     file contains all the configuration options for the docker process. The options are organized under sections
+     <code>
+      [Unit]
+     </code>
+     ,
+     <code>
+      [Service]
+     </code>
+     and
+     <code>
+      [Install]
+     </code>
+     . The format of the file is very similar to an init file, with name=value pairs in each section.
+    </p>
+    <p>
+     To override the daemon options, it is recommended not to edit this file. Instead, an override file should be used. The override file would contain just the options that need to be changed along with the section heading it is under.
+    </p>
+    <p>
+     Now many instructions about
+     <code>
+      systemd
+     </code>
+     describe the need to create a separate directory tree and host the override file in that path. While this will work, it is not necessary to create it by hand, nor is it necessary to remember where exactly the override file(s) need to go. Instead it is easier to just run
+     <code>
+      systemctl edit docker
+     </code>
+     . So, say we want to modify the daemon options so that the service is accessible over the network and also have it bind to the unix socker at
+     <code>
+      /var/run/docker.sock
+     </code>
+     . We would first want to see what the option is set to currently. This can be done using the
+     <code>
+      systemctl cat
+     </code>
+     like below:
+    </p>
+    <pre>
+<code>[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl cat docker | grep ExecStart
+ExecStart=/usr/bin/docker daemon -H fd://
+[ec2-user@ip-10-0-46-113 ~]$ </code></pre>
+    <p>
+     The nice thing about the command above is that it shows a unified view of all options and takes into consideration any overrides that may have been applied.
+    </p>
+    To change the value of an option,
+    <code>
+     ExecStart
+    </code>
+    in this case, do the following:
+    <pre>
+<code>[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl edit docker</code></pre>
+    This will create the necessary directory structure under
+    <code>
+     /etc/systemd/system/docker.service.d
+    </code>
+    and open an editor (using the default editor configured for the user) to the override file. Add the section below into the editor:
+    <pre>
+<code>[Service]
+ExecStart=
+ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock</code></pre>
+    <p>
+     It was necessary to clear out
+     <code>
+      ExecStart
+     </code>
+     using
+     <code>
+      ExecStart=
+     </code>
+     before setting it to the override value. This is only required for some options and most options in the configuration file would not need to be cleared like this
+    </p>
+    <p>
+     Using
+     <code>
+      systemctl edit
+     </code>
+     also ensures that the override settings are loaded. Had you edited the file manually using
+     <code>
+      vi
+     </code>
+     etc, you would have to run
+     <code>
+      sudo systemctl daemon-reload
+     </code>
+     in order for the new settings to be loaded.
+    </p>
+    <p>
+     The only reason you may want to run the
+     <code>
+      systemctl daemon-reload
+     </code>
+     command is if you made a typo or error in the override file when you did
+     <code>
+      systemctl edit
+     </code>
+     . For this you would need to be aware of the path of the override file, which is
+     <code>
+      /etc/systemd/system/docker.service.d/override.conf
+     </code>
+     .
+    </p>
+    <p>
+     Finally, in order for the override settings to take effect, restart the daemon using
+     <code>
+      systemctl restart docker
+     </code>
+     . Again, the status of the new settings and the process health can be verified by running
+     <code>
+      systemctl status docker
+     </code>
+     .
+    </p>
+    <pre>
+<code>[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl edit docker
+[ec2-user@ip-10-0-46-113 ~]$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/docker.service.d
+           └─override.conf
+   Active: active (running) since Fri 2016-02-05 18:49:14 EST; 1min 28s ago
+     Docs: https://docs.docker.com
+ Main PID: 24850 (docker)
+   CGroup: /system.slice/docker.service
+           └─24850 /usr/bin/docker daemon -H tcp://0.0.0.0:9999
+
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.335228582-0...."
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.378558031-0...""
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.386429304-0...e"
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.419513857-0...s"
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.466389616-0...."
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: ....
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.469497693-0...."
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.469518888-0...n"
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal docker[24850]: time="2016-02-05T18:49:14.469537359-0...s3
+Feb 05 18:49:14 ip-10-0-46-113.ec2.internal systemd[1]: Started Docker Application Container Engine.
+Hint: Some lines were ellipsized, use -l to show in full.
+[ec2-user@ip-10-0-46-113 ~]$ </code></pre>
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_4" mt-section-origin="KBase/Using_systemd_to_control_the_Docker_daemon">
+  <span id="Viewing_Logs_Related_to_the_Docker_Service">
+  </span>
+  <h3 id="2-1">
+   Viewing Logs Related to the Docker Service
+  </h3>
+  <p>
+   To view logs related to the Docker service, run the following command:
+  </p>
+  <pre>
+<code>journalctl -u docker</code></pre>
+  <p>
+   The output will be similar to the following:
+  </p>
+  <pre>
+<code>ec2-user@ip-10-0-46-113 ~]$ journalctl -u docker
+-- Logs begin at Tue 2016-02-02 11:20:18 EST, end at Fri 2016-02-05 19:18:49 EST. --
+Feb 02 18:13:40 ip-10-0-46-113.ec2.internal systemd[1]: Starting Docker Application Container Engine.
+Feb 02 18:13:40 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:40.394723367-05:00"
+Feb 02 18:13:40 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:40.464672420-05:00"
+Feb 02 18:13:42 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:42.225872353-05:00"
+Feb 02 18:13:42 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:42.245163371-05:00"
+Feb 02 18:13:42 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:42.283163052-05:00"
+Feb 02 18:13:42 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-02T18:13:42.373603957-05:00"
+Feb 03 10:33:06 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T10:33:06.826177379-05:00"
+Feb 03 10:33:07 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T10:33:07.104231280-05:00"
+Feb 03 10:33:10 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T10:33:10.474069661-05:00"
+Feb 03 10:33:27 ip-10-0-46-113.ec2.internal docker[16915]: time="2016-02-03T10:33:27.031864375-05:00"
+lines 1-12...skipping...</code>
+</pre>
+ </div>
+</div>
+{% endraw %}

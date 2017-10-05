@@ -1,0 +1,38 @@
+---
+title: "When building an image from GitHub, I see the following error: Error response from daemon: Unknown instruction"
+id: 2028
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2028/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When attempting to build an image using a source repository from GitHub, the build fails with the following error:
+</p>
+<pre>
+<code>Error response from daemon: Unknown instruction</code></pre>
+<p>
+ If the build is failing for a sample command such as the following:
+</p>
+<pre>
+docker build https://github.com/user_me/my_repo</pre>
+<p>
+ Add
+ <code>
+  .git
+ </code>
+ to the end of the command to build without the
+ <code>
+  Unknown instruction
+ </code>
+ error:
+</p>
+<pre>
+docker build https://github.com/user_me/my_repo<span class="replaceabletext">.git</span></pre>
+
+{% endraw %}

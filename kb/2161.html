@@ -1,0 +1,64 @@
+---
+title: "Can't log into the UCP UI using Safari"
+id: 2161
+draftstate: inactive
+deleted: false
+source: https://success.docker.com/@api/deki/pages/2161/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When trying to log into the UCP web UI using Safari, you might be prompted for a client certificate.
+</p>
+<p>
+ This happens because UCP uses mutual TLS to ensure your data is kept safe. Most browsers, including Chrome and Firefox validate the TLS certificate presented by UCP, but don't send a client certificate to UCP, since that is optional.
+</p>
+<p>
+ Safari behaves slightly differently and always tries to send a client certificate to UCP, so you're prompted to choose one. The problem is that none of the certificates in your Keychain are trusted by UCP, so when you select a certificate, UCP won't be able to validate it, and won't be able to establish a TLS connection.
+</p>
+<p>
+ To solve this, you just need to tell Safari to not use any client certificate as shown here:
+</p>
+<p>
+ <img alt="" class="internal default" src="/kb/images/2161-0.gif"/>
+</p>
+<p>
+ If you already chose a certificate, Safari will save your preferences and automatically authenticate with the certificate you chose, so you need to clean your preferences and make Safari prompt you again for a choice:
+</p>
+<ul>
+ <li>
+  Open
+  <strong>
+   Keychain Access
+  </strong>
+  from
+  <strong>
+   Applications
+  </strong>
+  &gt;
+  <strong>
+   Utilities
+  </strong>
+ </li>
+ <li>
+  Select
+  <strong>
+   Login Keychain and All Items
+  </strong>
+ </li>
+ <li>
+  Search for "identity preference"
+ </li>
+ <li>
+  Find the entry corresponding to the UCP IP address or domain name, and delete it
+ </li>
+</ul>
+<p>
+ When you try logging into UCP, you'll be prompted for a choice.
+</p>
+
+{% endraw %}
