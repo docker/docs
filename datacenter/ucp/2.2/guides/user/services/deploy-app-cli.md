@@ -158,6 +158,13 @@ from the Compose file in play. For example, the manager node is running the
 PostgreSQL container, as configured by setting `[node.role == manager]` as a
 constraint in the `deploy` key for the `db` service.
 
+## Pull images with stack deploy
+
+Let `docker stack deploy` handle any image pulls for you, instead of using
+`docker pull`. This way, your deployment won't try to pull from nodes that
+are down. Also, when new nodes are added to the swarm, images are pulled
+automatically.
+
 ## Cleanup
 
 When you're all done, you can take down the entire stack by using `docker stack
