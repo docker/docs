@@ -8,8 +8,6 @@ redirect_from:
 title: Get Docker CE for Ubuntu
 ---
 
-{% assign minor-version = "17.09" %}
-
 To get started with Docker CE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -207,7 +205,7 @@ the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
+    docker-ce | {{ site.docker-ce_stable_version }}.0~ce-0~ubuntu | {{ download-url-base }} xenial/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose

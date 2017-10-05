@@ -4,8 +4,6 @@ keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-{% assign composeversion = '1.16.1' %}
-
 Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
@@ -24,7 +22,7 @@ Place the completion script in `/etc/bash_completion.d/`
 (or `/usr/local/etc/bash_completion.d/` on a Mac):
 
 ```shell
-sudo curl -L https://raw.githubusercontent.com/docker/compose/{{composeversion}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 ```
 
 On a Mac, add the following to your `~/.bash_profile`:
@@ -59,7 +57,7 @@ Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zs
 
 ```shell
 $ mkdir -p ~/.zsh/completion
-$ curl -L https://raw.githubusercontent.com/docker/compose/{{composeversion}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+$ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 ```
 
 Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:
