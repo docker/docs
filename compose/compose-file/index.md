@@ -1277,7 +1277,11 @@ the `legacy` network.
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+The corresponding network configuration in the
+[top-level networks section](#network-configuration-reference) must have an
+`ipam` block with subnet configurations covering each static address. If IPv6
+addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
+you must use a version 2.x Compose file, such as the one below.
 
 An example:
 
@@ -1947,6 +1951,12 @@ documentation for more information. Optional.
 ### enable_ipv6
 
 Enable IPv6 networking on this network.
+
+> Not supported in Compose File version 3
+>
+> `enable_ipv6` requires you to use a version 2 Compose file, as this directive
+> is not yet supported in Swarm mode.
+{: .warning }
 
 ### ipam
 
