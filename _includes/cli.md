@@ -65,10 +65,11 @@ your client and daemon API versions.
   {% capture min-api %}{% if option.min_api_version %}<span class="badge badge-info">API {{ option.min_api_version }}+</span>&nbsp;{% endif %}{%endcapture%}
   {% capture stability-string %}{% if option.deprecated and option.experimental %}<span class="badge badge-danger">deprecated</span>&nbsp;<span class="badge badge-warning">experimental</span>&nbsp;{% elsif option.deprecated %}<span class="badge badge-danger">deprecated</span>&nbsp;{% elsif option.experimental %}<span class="badge badge-warning">experimental</span>&nbsp;{% endif %}{% endcapture %}
   {% capture all-badges %}{% unless min-api == '' and stability-string == '' %}{{ min-api }}{{ stability-string }}<br />{% endunless %}{% endcapture %}
-
+  {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
+  {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
     <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
-    <td markdown="span">{% if option.default_value and option.default_value != "[]" %}`{{ option.default_value }}`{% endif %}</td>
+    <td markdown="span">{{ option-default }}</td>
     <td markdown="span">{{ all-badges | strip }}{{ option.description | strip }}</td>
   </tr>
 
