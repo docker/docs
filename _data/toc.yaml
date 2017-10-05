@@ -1380,6 +1380,8 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
+  - title: Try Docker EE (no install)
+    path: https://dockertrial.com
   - path: /enterprise/telemetry/
     title: Manage usage data collection
   - sectiontitle: Release notes
