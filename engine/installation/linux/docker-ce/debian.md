@@ -273,7 +273,7 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
+1.  Go to `{{ download-url-base }}/dists/`,
     choose your Debian version, browse to `pool/stable/`, choose either
     `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
     want to install.
