@@ -4,7 +4,7 @@ description: Learn how to create, configure, and test webhooks in Docker Trusted
 keywords: registry, webhooks
 ---
 
-DTR has webhooks so that you can run custom login when an event happens. This
+DTR has webhooks so that you can run custom logic when an event happens. This
 lets you build complex CI and CD pipelines with your Docker images.
 
 ## Create a webhook
