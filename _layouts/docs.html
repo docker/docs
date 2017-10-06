@@ -220,7 +220,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v{{ site.engine_version }}';
+	var dockerVersion = 'v{{ site.docker-ce_stable_version }}';
 	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
