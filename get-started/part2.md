@@ -136,7 +136,7 @@ def hello():
     except RedisError:
         visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    html = "<h3>Hello {name}!</h3>" \
+    html = "<h3>Hello, {name}!</h3>" \
            "<b>Hostname:</b> {hostname}<br/>" \
            "<b>Visits:</b> {visits}"
     return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
@@ -179,7 +179,7 @@ docker build -t friendlyhello .
 Where is your built image? It's in your machine's local Docker image registry:
 
 ```shell
-$ docker images
+$ docker image ls
 
 REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
@@ -233,16 +233,16 @@ running commands):
 
 ```shell
 $ docker container ls
-CONTAINER ID        IMAGE               COMMAND             CREATED
-1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
+CONTAINER ID        IMAGE               COMMAND             CREATED           NAMES
+1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago    practical_babbage
 ```
 
 You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
-Now use `docker stop` to end the process, using the `CONTAINER ID`, like so:
+Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
 ```shell
-docker stop 1fa4ab2cf395
+docker container stop practical_babbage
 ```
 
 ## Share your image
