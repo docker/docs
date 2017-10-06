@@ -4,7 +4,8 @@ keywords: development, inception, container, image Dockerfile, dependencies, Go,
 title: Build and test Docker on Windows
 ---
 
-This page explains how to get the software you need to build, test, and run the Docker source code for Windows and setup the required software and services:
+This page explains how to get the software you need to build, test, and run the
+Docker source code for Windows and setup the required software and services:
 
 - Windows containers
 - GitHub account
@@ -14,7 +15,9 @@ This page explains how to get the software you need to build, test, and run the 
 
 ### 1. Windows Server 2016 or Windows 10 with all Windows updates applied
 
-The major build number must be at least 14393. This can be confirmed, for example, by running the following from an elevated PowerShell prompt - this sample output is from a fully up to date machine as at mid-November 2016:
+The major build number must be at least 14393. This can be confirmed, for example,
+by running the following from an elevated PowerShell prompt - this sample output
+is from a fully up to date machine as at mid-November 2016:
 
 
     PS C:\> $(gin).WindowsBuildLabEx
@@ -26,19 +29,24 @@ https://git-scm.com/download/win.
 
 ### 3. The machine must be configured to run containers
 
-For example, by following the quick start guidance at https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start or https://github.com/docker/labs/blob/master/windows/windows-containers/Setup.md
+For example, by following the quick start guidance at
+https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start or https://github.com/docker/labs/blob/master/windows/windows-containers/Setup.md
 
 ### 4. If building in a Hyper-V VM
 
-For Windows Server 2016 using Windows Server containers as the default option, it is recommended you have at least 1GB of memory assigned;
-For Windows 10 where Hyper-V Containers are employed, you should have at least 4GB of memory assigned.
-Note also, to run Hyper-V containers in a VM, it is necessary to configure the VM for nested virtualization.
+For Windows Server 2016 using Windows Server containers as the default option,
+it is recommended you have at least 1GB of memory assigned;
+For Windows 10 where Hyper-V Containers are employed, you should have at least
+4GB of memory assigned.
+Note also, to run Hyper-V containers in a VM, it is necessary to configure the VM
+for nested virtualization.
 
 ## Usage
 
 The following steps should be run from an elevated\* Windows PowerShell prompt.
 
-\* _In a default installation of containers on Windows following the quick-start guidance at https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start, the `docker.exe` client must run elevated to be able to connect to the daemon)._
+\* _In a default installation of containers on Windows following the quick-start guidance at https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start,
+the `docker.exe` client must run elevated to be able to connect to the daemon)._
 
 ### 1. Docker Windows containers
 
@@ -51,10 +59,13 @@ Check out the [getting started documentation](https://github.com/docker/labs/blo
 
 ### 2. GitHub account
 
-To contribute to the Docker project, you need a <a href="https://github.com" target="_blank">GitHub account</a>. A free account is fine. All the Docker project repositories are public and visible to everyone.
+To contribute to the Docker project, you need a <a href="https://github.com" target="_blank">GitHub account</a>.
+A free account is fine. All the Docker project repositories are public and visible to everyone.
 
-This guide assumes that you have basic familiarity with Git and Github terminology and usage.
-Refer to [GitHub For Beginners: Don’t Get Scared, Get Started](http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1/) to get up to speed on Github.
+This guide assumes that you have basic familiarity with Git and Github terminology
+and usage.
+Refer to [GitHub For Beginners: Don’t Get Scared, Get Started](http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1/)
+to get up to speed on Github.
 
 ### 3. Git
 
@@ -73,11 +84,13 @@ In a new (to pick up the path change) PowerShell prompt, run:
     git clone https://github.com/moby/moby
     cd moby
 
-This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/moby/moby) to learn about the other software that powers the Docker platform.
+This clones the main Docker repository. Check out [Docker on GitHub](https://github.com/moby/moby)
+to learn about the other software that powers the Docker platform.
 
 ### 5. Build and run
 
-Create a builder-container with the Docker source code. You can change the source code on your system and rebuild any time:
+Create a builder-container with the Docker source code. You can change the source
+code on your system and rebuild any time:
 
     docker build -t nativebuildimage -f .\Dockerfile.windows .
     docker build -t nativebuildimage -f Dockerfile.windows -m 2GB .  # (if using Hyper-V containers)
@@ -88,7 +101,8 @@ To build Docker, run:
     docker run --name binaries -e DOCKER_GITCOMMIT=$DOCKER_GITCOMMIT nativebuildimage hack\make.ps1 -Binary
     docker run --name binaries -e DOCKER_GITCOMMIT=$DOCKER_GITCOMMIT -m 2GB nativebuildimage hack\make.ps1 -Binary  # (if using Hyper-V containers)
 
-Copy out the resulting Windows Docker daemon binary to `dockerd.exe` in the current directory:
+Copy out the resulting Windows Docker daemon binary to `dockerd.exe` in the
+current directory:
 
     docker cp binaries:C:\go\src\github.com\docker\docker\bundles\docker.exe docker.exe
     docker cp binaries:C:\go\src\github.com\docker\docker\bundles\dockerd.exe dockerd.exe
@@ -98,7 +112,8 @@ To test it, stop the system Docker daemon and start the one you just built:
     Stop-Service Docker
     .\dockerd.exe -D
 
-The other make targets work too, to run unit tests try: `docker run --rm docker-builder sh -c 'cd /c/go/src/github.com/moby/moby; hack/make.sh test-unit'`.
+The other make targets work too, to run unit tests try:
+`docker run --rm docker-builder sh -c 'cd /c/go/src/github.com/moby/moby; hack/make.sh test-unit'`.
 
 ### 6. Remove the interim binaries container
 
@@ -110,14 +125,17 @@ _(Optional)_
 
 _(Optional)_
 
-It may be useful to keep this image around if you need to build multiple times. Then you can take advantage of the builder cache to have an image which has all the components required to build the binaries already installed.
+It may be useful to keep this image around if you need to build multiple times.
+Then you can take advantage of the builder cache to have an image which has all
+the components required to build the binaries already installed.
 
     docker rmi nativebuildimage
 
 ## Validation
 
 The validation tests can only run directly on the host.
-This is because they calculate information from the git repo, but the .git directory is not passed into the image as it is excluded via `.dockerignore`.
+This is because they calculate information from the git repo, but the .git directory
+is not passed into the image as it is excluded via `.dockerignore`.
 Run the following from a Windows PowerShell prompt (elevation is not required):
 (Note Go must be installed to run these tests)
 
@@ -139,17 +157,23 @@ Then run one of the following from an (elevated) Windows PowerShell prompt:
 
 ## Windows limitations
 
-Don't attempt to use a bind mount to pass a local directory as the bundles target directory.
+Don't attempt to use a bind mount to pass a local directory as the bundles
+target directory.
 It does not work (golang attempts for follow a mapped folder incorrectly).
 Instead, use docker cp as per the example.
 
-`go.zip` is not removed from the image as it is used by the Windows CI servers to ensure the host and image are running consistent versions of go.
+`go.zip` is not removed from the image as it is used by the Windows CI servers
+to ensure the host and image are running consistent versions of go.
 
-Nanoserver support is a work in progress. Although the image will build if the `FROM` statement is updated, it will not work when running autogen through `hack\make.ps1`.
-It is suspected that the required GCC utilities (eg gcc, windres, windmc) silently quit due to the use of console hooks which are not available.
+Nanoserver support is a work in progress. Although the image will build if the
+`FROM` statement is updated, it will not work when running autogen through `hack\make.ps1`.
+It is suspected that the required GCC utilities (eg gcc, windres, windmc) silently
+quit due to the use of console hooks which are not available.
 
-The docker integration tests do not currently run in a container on Windows, predominantly due to Windows not supporting privileged mode, so anything using a volume would fail.
-They (along with the rest of the docker CI suite) can be run using https://github.com/jhowardmsft/docker-w2wCIScripts/blob/master/runCI/Invoke-DockerCI.ps1.
+The docker integration tests do not currently run in a container on Windows,
+predominantly due to Windows not supporting privileged mode, so anything using a volume would fail.
+They (along with the rest of the docker CI suite) can be run using
+https://github.com/jhowardmsft/docker-w2wCIScripts/blob/master/runCI/Invoke-DockerCI.ps1.
 
 ## Where to go next
 
