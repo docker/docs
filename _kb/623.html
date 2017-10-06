@@ -1,0 +1,76 @@
+---
+title: "How do I move repositories among organization in Docker Hub?"
+id: 623
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/623/
+originalpath: https://success.docker.com/Cloud/Solve/How_do_I_move_repositories_among_organization_in_Docker_Hub%3F
+source: https://success.docker.com/@api/deki/pages/623/contents
+tags:
+- tag: "article:howto"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_I_move_repositories_among_organization_in_Docker_Hub?">
+ <span id="Overview">
+ </span>
+ <h2 id="1-0">
+  Overview
+ </h2>
+ <p>
+  I want to move repositories among organizations in Docker Hub
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_do_I_move_repositories_among_organization_in_Docker_Hub?">
+ <span id="Goal">
+ </span>
+ <h2 id="1-1">
+  Goal
+ </h2>
+ <p>
+  After completing this how-to you will have your repositories migrated to your desired Organization
+ </p>
+ <p>
+ </p>
+ <p>
+  If you want to move your repository among organizations, then you would need to do the following:
+  <br/>
+  1. Pull your image
+  <code>
+   docker pull &lt;old-organization&gt;/&lt;repo-name&gt;:&lt;tag-name&gt;
+  </code>
+  <br/>
+  2. Set the new tag on an image
+  <br/>
+  <code>
+   docker tag &lt;old-organization&gt;/&lt;repo-name&gt;:&lt;tag-name&gt; &lt;new-organization&gt;/&lt;repo-name&gt;:&lt;tag-name&gt;
+  </code>
+  <br/>
+  3. Push the image on Docker Hub
+  <br/>
+  <code>
+   docker push &lt;new-organization&gt;/&lt;repo-name&gt;:&lt;tag-name&gt;
+  </code>
+  <br/>
+  4. Remove the image from the host
+  <br/>
+  <code>
+   docker rmi &lt;old-organization&gt;/&lt;repo-name&gt;:&lt;tag-name&gt;
+  </code>
+  <br/>
+  And also go to the Docker Hub and click on Delete Repository.
+ </p>
+ <p>
+  <strong>
+   Note
+  </strong>
+  : In order to remove an image from the host, please make sure that there are no containers actively based on it.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/How_do_I_move_repositories_among_organization_in_Docker_Hub?">
+ <span id="">
+ </span>
+ <h2 id="1-2">
+ </h2>
+</div>
+{% endraw %}

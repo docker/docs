@@ -1,0 +1,70 @@
+---
+title: "Auth system migration errors"
+id: 2234
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2234/
+originalpath: https://success.docker.com/KBase/Auth_system_migration_errors
+source: https://success.docker.com/@api/deki/pages/2234/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Joao Fernandes";
+/*]]>*/
+</script>
+<p>
+ If UCP is displaying the following warning banner:
+</p>
+<pre>
+<code>errors encountered while migrating auth system
+</code></pre>
+<p>
+ This means that UCP was upgraded from a version prior to 2.2.0. During the upgrade, UCP attempted to migrate team labels and user roles from the old authorization system to the new, collections-based auth system, but something went wrong.
+</p>
+<p>
+ To see the full list of errors, run the following command on a UCP manager node:
+</p>
+<pre>
+$ docker exec -it ucp-kv etcdctl \
+    --endpoints https://127.0.0.1:2379 \
+    --cert-file /etc/docker/ssl/cert.pem \
+    --key-file /etc/docker/ssl/key.pem \
+    --ca-file /etc/docker/ssl/ca.pem \
+    get /orca/v1/authz_migrated</pre>
+<p>
+ If you'd like to retry the migration, first figure out which node is the Swarm leader:
+</p>
+<pre>
+$ docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+gpfmosdm99lw9xiz6d4xmsdwo *   node1               Ready               Active              Leader
+gpfmosdm99lw9xiz6d4xmsdwo     node2               Ready               Active
+gpfmosdm99lw9xiz6d4xmsdwo     node3               Ready               Active</pre>
+<p>
+ Then go to the leader node and run:
+</p>
+<pre>
+$ docker exec -it ucp-kv etcdctl \
+    --endpoints https://127.0.0.1:2379 \
+    --cert-file /etc/docker/ssl/cert.pem \
+    --key-file /etc/docker/ssl/key.pem \
+    --ca-file /etc/docker/ssl/ca.pem \
+    rm /orca/v1/authz_migrated</pre>
+<p>
+ Then restart the controller on that node:
+</p>
+<pre>
+$ docker restart ucp-controller</pre>
+<p>
+ This will make the controller retry the migration.
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

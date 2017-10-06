@@ -1,0 +1,31 @@
+---
+title: "With Content Trust enabled, why do I get a no such host error for notary.docker.io?"
+id: 1852
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1852/
+originalpath: https://success.docker.com/KBase/With_Content_Trust_enabled%2C_why_do_I_get_a_%22no_such_host%22_error_for_%22notary.docker.io%22%3F
+source: https://success.docker.com/@api/deki/pages/1852/contents
+tags:
+- tag: "article:topic"
+- tag: "component:dtr"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ With Docker Content Trust capability enabled, you may see the following error:
+</p>
+<pre>
+<code>"Error creating container: Get https://notary.docker.io: dial tcp: lookup notary.docker.io <span class="replaceabletext">&lt;your_DNS&gt;</span>: no such host"</code></pre>
+<p>
+ With Docker Content Trust enabled, your cluster will only run images which have been signed by the image creator. Docker attempts to use the value of the
+ <code>
+  DOCKER_CONTENT_TRUST_SERVER
+ </code>
+ environment variable to determine which Notary server to use for image signing metadata like signatures. If you want to use the Notary service available in your DTR cluster, you do not want Docker to poll the default "notary.docker.io". In this case, you will either need to set this environment variable to your own DTR address, or leave this value empty to have Docker infer the location of your Notary service from the repository in the image name.
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

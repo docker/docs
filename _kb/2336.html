@@ -1,0 +1,85 @@
+---
+title: "Querying the results of a garbage collection (GC) job"
+id: 2336
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2336/
+originalpath: https://success.docker.com/KBase/Querying_the_results_of_a_garbage_collection_(GC)_job
+source: https://success.docker.com/@api/deki/pages/2336/contents
+tags:
+- tag: "article:howto"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ There are times where Docker support need to review the outcome of a previous Garbage Collection job. It can be used to verify orphaned data (to some extent), stale tags, manifests, etc. This article will show you how to query the results of the last completed GC job.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Querying_the_results_of_a_garbage_collection_(GC)_job">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Review the garbage collection process:
+   <a class="link-https" href="/registry/garbage-collection/" rel="external nofollow" target="_blank" title="https://docs.docker.com/registry/garbage-collection/">
+    https://docs.docker.com/registry/garbage-collection/
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Querying_the_results_of_a_garbage_collection_(GC)_job">
+ <span id="Steps">
+ </span>
+ <h2 id="1-1">
+  Steps
+ </h2>
+ <p>
+  To effectively query garbage collection data please see the commands below. Be sure to replace the following with the values for your configuration:
+ </p>
+ <ul>
+  <li>
+   <span class="replaceabletext">
+    DTR_URL
+   </span>
+   ="dtr.example.com" (Use your DTR URL)
+  </li>
+  <li>
+   <span class="replaceabletext">
+    USERNAME
+   </span>
+   ="username"
+  </li>
+  <li>
+   <span class="replaceabletext">
+    PASSWORD
+   </span>
+   ="password"
+  </li>
+  <li>
+   <span class="replaceabletext">
+    JOB_TYPE
+   </span>
+   ="job_type" (See link below for list of Job Types)
+  </li>
+ </ul>
+ <p>
+  List of job types:
+  <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/#job-types" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/#job-types">
+   https://docs.docker.com/datacenter/d...obs/#job-types
+  </a>
+ </p>
+ <pre>
+### job logs
+# get last job details
+curl -ks -X GET --header "Accept: application/json" -u ${<span class="replaceabletext">USERNAME</span>}:${<span class="replaceabletext">PASSWORD</span>} "https://${<span class="replaceabletext">DTR_URL</span>}/api/v0/jobs?action=${<span class="replaceabletext">JOB_TYPE</span>}&amp;worker=any&amp;running=any&amp;start=0" | jq -r .jobs[0]
+
+# get job job id from the last ${JOB_TYPE} job and send that to get the job logs curl -ks -X GET --header "Accept: application/json" -u ${USERNAME}:${PASSWORD} "https://${DTR_URL}/api/v0/jobs/$(curl -ks -X GET --header "Accept: application/json" -u ${<span class="replaceabletext">USERNAME</span>}:${<span class="replaceabletext">PASSWORD</span>} "https://${DTR_URL}/api/v0/jobs?action=${<span class="replaceabletext">JOB_TYPE</span>}&amp;worker=any&amp;running=any&amp;start=0" | jq -r .jobs[0].id)/logs" | jq -r .[].Data
+</pre>
+</div>
+{% endraw %}

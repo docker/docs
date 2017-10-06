@@ -1,0 +1,108 @@
+---
+title: "When configuring the Docker EE repository for the first time, 'Error parsing config' occurs"
+id: 2021
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2021/
+originalpath: https://success.docker.com/KBase/When_configuring_the_Docker_EE_repository_for_the_first_time%2C_'Error_parsing_config'_occurs
+source: https://success.docker.com/@api/deki/pages/2021/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:devops"
+---
+{% raw %}
+<p>
+ When configuring the Docker EE
+ <code>
+  yum
+ </code>
+ repository for the first time, if the
+ <code>
+  $dockerurl
+ </code>
+ environment variable is not set, the following errors will occur when
+ <code>
+  yum makecache fast
+ </code>
+ is executed:
+</p>
+<pre>
+<code>Loaded plugins: fastestmirror
+Repository 'docker-ee-stable-17.03': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-stable-17.03-debuginfo': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-stable-17.03-source': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-stable': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-stable-debuginfo': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-stable-source': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-test': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-test-debuginfo': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""
+Repository 'docker-ee-test-source': Error parsing config: Error parsing "gpgkey = '$dockerurl/gpg'": URL must be http, ftp, file or https not ""</code>
+</pre>
+<blockquote>
+ This issue is specific to environments running Red Hat Enterprise Linux and CentOS.
+</blockquote>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/When_configuring_the_Docker_EE_repository_for_the_first_time,_'Error_parsing_config'_occurs">
+ <span id="Steps">
+ </span>
+ <h2 id="1-0">
+  Steps
+ </h2>
+ <p>
+  This issue occurs when the
+  <code>
+   $dockerurl
+  </code>
+  variable has no value set or the wrong value set. The URL is blank or incorrect, and thus
+  <code>
+   yum
+  </code>
+  fails to parse it. To set this value and resolve the issue:
+ </p>
+ <ol>
+  <li>
+   Go to
+   <a class="link-https" href="/engine/installation/" rel="external nofollow" target="_blank">
+    Install Docker
+   </a>
+   and click on your distro (Red Hat Enterprise Linux or CentOS).
+  </li>
+  <li>
+   On the next page, follow the instructions to find the
+   <code>
+    DOCKER-EE-URL
+   </code>
+   value from the Docker Store.
+  </li>
+  <li>
+   <code>
+    echo
+   </code>
+   the
+   <code>
+    DOCKER-EE-URL
+   </code>
+   value for your Linux distro into the
+   <code>
+    /etc/yum/vars/dockerurl
+   </code>
+   file with:
+   <pre>
+<code>sudo echo '&lt;DOCKER-EE-URL&gt;' &gt; /etc/yum/vars/dockerurl
+</code></pre>
+  </li>
+  <li>
+   Finally, re-run
+   <code>
+    yum makecache fast
+   </code>
+   .
+  </li>
+ </ol>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

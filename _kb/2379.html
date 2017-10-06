@@ -1,0 +1,65 @@
+---
+title: "How to gather node-level I/O statistics using a container"
+id: 2379
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2379/
+originalpath: https://success.docker.com/KBase/How_to_gather_node-level_I%2F%2FO_statistics_using_a_container
+source: https://success.docker.com/@api/deki/pages/2379/contents
+tags:
+- tag: "article:howto"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_gather_node-level_I//O_statistics_using_a_container">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  <strong>
+   Node-level I/O statistics:
+  </strong>
+  In some development and production scenarios, operations teams may want to verify the performance of backend storage networks. This could be because of intermittent pull failures from the local registry, or intermittent or persistent cluster-wide failures. This article provides a simple way to gather and report on storage performance on Linux-based nodes using generally available tools.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_to_gather_node-level_I//O_statistics_using_a_container">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Linux based nodes
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_to_gather_node-level_I//O_statistics_using_a_container">
+ <span id="Steps">
+ </span>
+ <h2 id="1-2">
+  Steps
+ </h2>
+ <p>
+  Using appropriate administrative credentials, run the following command on the node you'd like to gather I/O statistics:
+ </p>
+ <pre>
+<code><span class="replaceabletext">docker run --rm -it ubuntu sh -c "apt-get update; apt-get install -y sysstat; iostat -dxm 5"</span></code></pre>
+ <p>
+  When complete, kill the container or press
+  <code>
+   Ctrl-C
+  </code>
+  to exit the container.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

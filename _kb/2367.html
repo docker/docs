@@ -1,0 +1,663 @@
+---
+title: "Troubleshooting a DTR 2.3.x cluster"
+id: 2367
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2367/
+originalpath: https://success.docker.com/KBase/What_should_I_include_when_opening_a_support_ticket%3F/How_to_start_troubleshooting_DTR_2.3.x_cluster
+source: https://success.docker.com/@api/deki/pages/2367/contents
+tags:
+- tag: "article:tutorial"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:caas"
+---
+{% raw %}
+<p>
+ This article provides direction on how to begin troubleshooting a DTR 2.3.x cluster, as well as the information to gather along the way to allow Docker Support to further assist.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  User should understand:
+ </p>
+ <ul>
+  <li>
+   DTR architecture
+  </li>
+  <li>
+   How to view logs
+  </li>
+  <li>
+   How to access Engine logs in debug mode
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Goal">
+ </span>
+ <h2 id="1-1">
+  Goal
+ </h2>
+ <p>
+  After completing these steps, youshould have a good understanding how to:
+ </p>
+ <ul>
+  <li>
+   Begin troubleshooting a DTR 2.3.x cluster
+  </li>
+  <li>
+   Capture important information along the way
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Collect_Support_Dump">
+ </span>
+ <h2 id="1-2">
+  Collect Support Dump
+ </h2>
+ <p>
+  Begin by collecting a support dump, you can mark the exact time the issue occurred and whether it’s persistent/intermittent.
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Verify_Backups">
+ </span>
+ <h2 id="1-3">
+  Verify Backups
+ </h2>
+ <p>
+  Create/verify a backup for all components if possible (DTR, UCP, Swarm, NFS):
+ </p>
+ <ul>
+  <li>
+   <a href="/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/">
+    https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
+   </a>
+  </li>
+  <li>
+   <a href="/datacenter/ucp/2.2/reference/cli/backup/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/backup/">
+    https://docs.docker.com/datacenter/ucp/2.2/reference/cli/backup/
+   </a>
+  </li>
+  <li>
+   <a href="/engine/swarm/admin_guide/#back-up-the-swarm" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm">
+    https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Ideas_for_Investigation">
+ </span>
+ <h2 id="1-4">
+  Ideas for Investigation
+ </h2>
+ <ul>
+  <li>
+   Container/service status and health
+  </li>
+  <li>
+   Container logs and inspect
+  </li>
+  <li>
+   Overlay network reachability and DNS resolution
+  </li>
+  <li>
+   Resource exhaustion (disk, cpu, memory, io, network, inode)
+  </li>
+  <li>
+   Node availability
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_6" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Determine_Where_the_Issue_May_Reside">
+ </span>
+ <h2 id="1-5">
+  Determine Where the Issue May Reside
+ </h2>
+ <p>
+  Key:
+  <b id="docs-internal-guid-1477db82-817d-d096-d5ea-543106fa0d59">
+   <span class="mt-bgcolor-00ff00">
+    Strongly related
+   </span>
+   <span class="mt-bgcolor-ffff00">
+    Related
+   </span>
+  </b>
+ </p>
+ <p>
+  This matrix describes the relationship between features of Docker Enterprise DTR 2.3.x; this is not exhaustive of all services but rather a starting point for analysis and investigation.
+ </p>
+ <table class="mt-responsive-table mt-table-big">
+  <tbody>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <span class="mt-font-size-14">
+      <strong>
+       api
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       registry
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <span class="mt-font-size-14">
+      <strong>
+       rethink
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <span class="mt-font-size-14">
+      <strong>
+       garant
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <span class="mt-font-size-14">
+      <strong>
+       nginx
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       jobrunner
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       postgres
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       notary-server
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       notary-signer
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <strong>
+       storage
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <span class="mt-font-size-14">
+      <strong>
+       ucp
+      </strong>
+     </span>
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Docker API
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Docker Login
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Web Login
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <p>
+      <span class="mt-font-size-14">
+       <strong>
+        Orgs/Teams/Users
+       </strong>
+      </span>
+     </p>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       DTR Availability
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       General DTR API
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Permissions
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Push/Pull
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Image Promotion
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <p>
+      <span class="mt-font-size-14">
+       <strong>
+        Image Scanning
+       </strong>
+      </span>
+     </p>
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Image signing
+      </strong>
+     </span>
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-15">
+     <span class="mt-font-size-14">
+      <strong>
+       Image GC
+      </strong>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-ffff00 mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-bgcolor-00ff00 mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<div class="mt-section" id="section_7" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="More_Troubleshooting">
+ </span>
+ <h2 id="1-6">
+  More Troubleshooting
+ </h2>
+ <ul>
+  <li>
+   <a class="link-https" href="/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs">
+    https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/">
+    https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_8" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Review_Logs_for_Errors">
+ </span>
+ <h2 id="1-7">
+  Review Logs for Errors
+ </h2>
+ <p>
+  Review DTR logs based upon the above matrix for errors and hints to resolution.
+ </p>
+</div>
+<div class="mt-section" id="section_9" mt-section-origin="KBase/What_should_I_include_when_opening_a_support_ticket?/How_to_start_troubleshooting_DTR_2.3.x_cluster">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-8">
+  Resolution
+ </h2>
+ <p>
+  Capture a support dump after every action taken to fix the problem. Avoid taking any actions unless you fully understand what the problem is. If the first set of actions does not fix the problem, avoid taking further actions in the same direction, as the issue might have mutated by the action, and the environment may be surfacing a different problem entirely. Resolve the issues uncovered from the logs. If unsure, find assistance from
+  <a class="external" href="http://docs.docker.com" rel="external nofollow" target="_blank" title="http://docs.docker.com">
+   docs.docker.com
+  </a>
+  or
+  <a href="/kb/1/" rel="internal" title="https://success.docker.com">
+   kbase
+  </a>
+  to move forward, collect the data captured during the process, and open a case with
+  <a class="link-https" href="https://support.docker.com" rel="external nofollow" target="_blank" title="https://support.docker.com">
+   Docker Support
+  </a>
+  .
+ </p>
+ <p>
+  Pro Tip: In the case where one of the DTR replicas has had containers accidently removed running the dtr/reconfigure command can resolve the problem:
+  <a class="link-https" href="/datacenter/dtr/2.3/reference/cli/reconfigure/#description" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/reconfigure/#description">
+   https://docs.docker.com/datacenter/dtr/2.3/reference/cli/reconfigure/#description
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

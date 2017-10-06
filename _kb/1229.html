@@ -1,0 +1,89 @@
+---
+title: "How to set the MTU on DTR nodes"
+id: 1229
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1229/
+originalpath: https://success.docker.com/KBase/How_to_set_the_MTU_on_DTR_nodes
+source: https://success.docker.com/@api/deki/pages/1229/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "DTR"
+- tag: "MTU"
+- tag: "networking"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:infraopt"
+---
+{% raw %}
+<p>
+ Docker allows you to set MTUs on all networks it creates. The way to configure the default bridge network differs from the way to configure the individual custom networks.
+</p>
+<p>
+ You can configure the bridge network using the
+ <code>
+  --mtu
+ </code>
+ flag in the daemon's start up arguments. Restarting the daemon is enough to make these changes take effect. This will work for all UCP containers.
+</p>
+<p>
+ To configure custom networks you must delete them and create them again. If you've already installed DTR, you have two options:
+</p>
+<ul type="disc">
+ <li type="disc">
+  Either uninstall DTR, re-create the networks, then install it again or
+ </li>
+ <li type="disc">
+  Stop all DTR containers, re-create the networks, then start DTR containers again.
+ </li>
+</ul>
+<p>
+ The second case is described here.
+</p>
+<p>
+ Run the following for each replica to stop all DTR containers. You can do this with the UCP client bundle, UCP's UI, or on each individual machine:
+</p>
+<pre>
+<code>docker kill dtr-etcd-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-rethinkdb-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-registry-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-api-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-nginx-<span class="replaceabletext">&lt;replica_id&gt;</span>
+</code></pre>
+<p>
+ There are two networks to re-create. One is the overlay network that spans the whole cluster. The other is the per-node
+ <code>
+  dtr-br
+ </code>
+ local bridge network.
+</p>
+<p>
+ Delete the two networks:
+</p>
+<pre>
+<code>docker network rm dtr-br # on every machine, through the UCP client bundle by prefixing the network name with the name of the machine or through UCP's UI
+docker network rm dtr-ol # once for the whole cluster
+</code></pre>
+<p>
+ After stopping all containers and deleting both networks, re-create the
+ <code>
+  dtr-br
+ </code>
+ network on all machines with the following command:
+</p>
+<pre>
+<code>docker network create --opt=com.docker.network.driver.mtu=<span class="replaceabletext">&lt;your_mtu_value&gt;</span> dtr-br
+</code></pre>
+<p>
+ Also create the overlay network (only once on any node) with the following command:
+</p>
+<pre>
+<code>docker network create --driver overlay --opt=com.docker.network.driver.mtu=<span class="replaceabletext">&lt;your_mtu_value&gt;</span> dtr-ol
+</code></pre>
+<p>
+ Finally, start all DTR containers again, and the MTUs should be set on all networks:
+</p>
+<pre>
+<code>docker start dtr-etcd-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-rethinkdb-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-registry-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-api-<span class="replaceabletext">&lt;replica_id&gt;</span> dtr-nginx-<span class="replaceabletext">&lt;replica_id&gt;</span>
+</code></pre>
+
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

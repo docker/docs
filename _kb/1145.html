@@ -1,0 +1,30 @@
+---
+title: "Why does auto deploy not work when I use a new tag on a Docker Hub image?"
+id: 1145
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1145/
+originalpath: https://success.docker.com/Cloud/Solve/Why_does_auto_deploy_not_work_when_I_use_a_new_tag_on_a_Docker_Hub_image%3F
+source: https://success.docker.com/@api/deki/pages/1145/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "expires:nextrelease"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Currently, the auto-deploy feature only triggers when you push images with the
+ <code>
+  latest
+ </code>
+ tag. If you push other tags, it will not trigger an automated re-deploy for the service.
+</p>
+<p>
+ You will need to manually stop/start the service again.
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-hub/" class="button outline-btn">Continue troubleshooting Docker Hub</a><br><a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

@@ -1,0 +1,26 @@
+---
+title: "ASCII codec can't encode character"
+id: 1146
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1146/
+originalpath: https://success.docker.com/Cloud/Solve/ASCII_codec_can't_encode_character
+source: https://success.docker.com/@api/deki/pages/1146/contents
+tags:
+- tag: "article:errors"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ When deploying with a stack file with Docker Cloud, the following error message might occur:
+</p>
+<pre>
+<code>Unexpected error executing docker command create_container: 'ascii' codec can't encode character 'some-character' in position 20: ordinal not in range(128)</code></pre>
+<p>
+ If you get this error message, double check your stack file and make sure that there isn't any extra spaces or hidden characters.
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

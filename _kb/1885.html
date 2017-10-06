@@ -1,0 +1,567 @@
+---
+title: "Docker Reference Architecture: Development Pipeline Best Practices Using Docker EE"
+id: 1885
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1885/
+originalpath: https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Development_Pipeline_Best_Practices_Using_Docker_EE
+source: https://success.docker.com/@api/deki/pages/1885/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Lee Namba";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  The Docker Container as a Service (CaaS) platform delivers a secure, managed application environment for developers to build, ship, and run enterprise applications and custom business processes. In the “build” part of this process, there are design and organizational decisions that need to be made in order to create an effective enterprise development pipeline.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="What_You_Will_Learn">
+ </span>
+ <h2 id="1-1">
+  What You Will Learn
+ </h2>
+ <p>
+  In an enterprise, there can be hundreds or even thousands of applications developed by in-house and outsourced teams. Applications can be deployed to multiple heterogeneous environments (development, test, UAT, staging, production, etc.), each of which can have very different requirements. Packaging an application in a container with its configuration and dependencies guarantees that the application will always work as designed in any environment. The purpose of this document is to provide you with typical development pipeline workflows as well as best practices for structuring your development process using Docker EE (formerly known as Docker Datacenter).
+ </p>
+ <p>
+  In this document you will learn about the general workflow and organization of the development pipeline and how Docker EE integrates with existing build systems. It also covers the specific developer, CI/CD, and operations workflows and environments.
+ </p>
+ <div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="General_Organization">
+  </span>
+  <h3 id="2-0">
+   General Organization
+  </h3>
+  <p>
+   A typical enterprise has separate development and operations teams and may have some level of DevOps adoption. In general, operations teams are responsible for delivering and supporting the infrastructure up to the operating systems and even middleware components. Development teams are responsible for building and maintaining the applications. There is also some type of continuous integration (CI) for automated build and testing as well as continuous delivery (CD) for deploying versions to the different environments.
+  </p>
+  <p>
+   <img alt="General Organization" class="internal" src="/kb/images/1885-0.png"/>
+  </p>
+ </div>
+ <div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="General_Workflow">
+  </span>
+  <h3 id="2-1">
+   General Workflow
+  </h3>
+  <p>
+   A typical CI/CD workflow is shown in the following diagram:
+  </p>
+  <p>
+   <img alt="General Workflow" class="internal" src="/kb/images/1885-1.png"/>
+  </p>
+  <p>
+   It starts on the left-hand side with development teams building applications. A CI/CD system then runs unit tests, packages the applications, and builds Docker images on the Docker Universal Control Plane (UCP). If all tests pass, the images can be signed using
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/content-trust/" rel="external nofollow" target="_blank">
+    Docker Content Trust
+   </a>
+   and shipped to Docker Trusted Registry (DTR). The images can then be run in other non-production environments for further testing. If the images pass these testing environments, they can be signed again and then deployed by the operations team to the production environment.
+  </p>
+ </div>
+ <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="UCP_Clusters">
+  </span>
+  <h3 id="2-2">
+   UCP Clusters
+  </h3>
+  <p>
+   Enterprises typically have separate production and non-production UCP clusters as previously shown. This is a natural fit with existing infrastructure organization and responsibilities. Enterprises typically have a production environment with higher security requirements, restrained operator access, a high-performance infrastructure, high-availability configurations, and full disaster recovery with multiple data centers. The non-production environment has different requirements with the main goal being testing and qualifying applications for production. The interface between the non-production and production clusters is DTR.
+  </p>
+  <p>
+   The question of whether to have a separate UCP cluster per availability zone or have one "stretched cluster" mainly depends on the network latency and bandwidth between availability zones. There could also be existing infrastructure and disaster recovery considerations to take into account.
+  </p>
+  <p>
+   In an enterprise environment where there can be hundreds of teams building and running applications, a best practice is to separate the build from the run resources. By doing this, the image building process does not affect the performance or availability of the running containers/services.
+  </p>
+  <p>
+   There are two common methods of building images using Docker EE:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Developers build images on their own machines then push them to DTR.
+    </strong>
+    - This is suitable if there is no CI/CD system and no dedicated build cluster. Developers have the freedom to push different images to DTR.
+   </li>
+   <li>
+    <strong>
+     A CI/CD process builds images on a build cluster and pushes them to DTR.
+    </strong>
+    - This is suitable if an enterprise wants to control the quality of the images pushed to DTR. Developers commit Dockerfiles to version control. They can then be analyzed and controlled for adherence to corporate standards before the CI/CD system builds the images, tests them, and pushes them to DTR. In this case, CI/CD agents should be run directly on the dedicated build nodes.
+   </li>
+  </ul>
+  <blockquote>
+   <p>
+    <strong>
+     Note:
+    </strong>
+    In the CI/CD job, it is important to insure that images are built and pushed from the same Docker node so there is no ambiguity in the image that is pushed to DTR.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="DTR_Clusters">
+  </span>
+  <h3 id="2-3">
+   DTR Clusters
+  </h3>
+  <p>
+   Unlike the separate production and non-production UCP clusters, enterprises commonly have a single master DTR cluster. This allows enforcement of enterprise processes such as
+   <a class="link-https" href="/docker-cloud/builds/image-scan/" rel="external nofollow" target="_blank">
+    Security Scanning
+   </a>
+   in a centralized place. If pulling images from globally distributed locations takes too long then you can use the
+   <a class="link-https" href="/datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/" rel="external nofollow" target="_blank">
+    DTR Content Cache
+   </a>
+   feature to create local caches.
+  </p>
+  <blockquote>
+   <p>
+    <strong>
+     Note:
+    </strong>
+    Policy enforcement on
+    <a class="link-https" href="/datacenter/ucp/2.0/guides/content-trust/" rel="external nofollow" target="_blank">
+     image signing
+    </a>
+    will not currently work if you have your DTR in a separate cluster from UCP.
+   </p>
+  </blockquote>
+ </div>
+</div>
+<div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="Developer_Workflow">
+ </span>
+ <h2 id="1-2">
+  Developer Workflow
+ </h2>
+ <p>
+  Developers and application teams usually maintain different repositories within the organization to develop, deploy, and test their applications. This section discusses the following diagram of a typical developer workflow using Docker EE as well as their interactions with the repositories:
+ </p>
+ <p>
+  <img alt="Developer Workflow" class="internal" src="/kb/images/1885-2.png"/>
+ </p>
+ <p>
+  A typical developer workflow follows these steps:
+ </p>
+ <ol>
+  <li>
+   <strong>
+    Develop Locally
+   </strong>
+   - On the developer's machine or environment the developer locally builds images, run containers, and test their containers. There are several types of files and their respective repositories that are used to build Docker images.
+   <ul>
+    <li>
+     <strong>
+      Version Control
+     </strong>
+     - This is used mainly for text-based files such as Dockerfiles,
+     <code>
+      docker-compose.yml
+     </code>
+     , and configuration files. Small binaries can also kept in the same version control. Examples of version control are git, svn, Team Foundation Server, VSTS, and Clear Case.
+    </li>
+    <li>
+     <strong>
+      Repository Manager
+     </strong>
+     - These hold larger binary files such as Maven/Java, npm, NuGet, and RubyGems. Examples include Nexus, Artifactory, and Archiva.
+    </li>
+    <li>
+     <strong>
+      Package Repository
+     </strong>
+     - These hold packaged applications specific to an operating system such as CentOS, Ubuntu, and Windows Server. Examples include yum, apt-get, and PackageManagement.
+     <br/>
+     After building an image, developers can run the container using the environment variables and configuration files for their environments. They can also run several containers together described in a
+     <code>
+      docker-compose.yml
+     </code>
+     file and test the application.
+    </li>
+   </ul>
+  </li>
+  <li>
+   <strong>
+    Push Images
+   </strong>
+   - Once an image has been tested locally, it can be pushed to the Docker Trusted Registry. The developer must have an account on DTR and can push to a registry on their user account for testing on UCP. For example:
+   <code>
+    docker push dtr.example.com/kathy.seaweed/apache2:1.0
+   </code>
+  </li>
+  <li>
+   <strong>
+    Deploy on UCP
+   </strong>
+   - The developer might want to do a test deployment on an integration environment on UCP in the case where the development machine does not have the ability or access to all the resources to run the entire application. They might also want to test whether the application scales properly if it's deployed as a service. In this case the developer would use
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/access-ucp/cli-based-access/" rel="external nofollow" target="_blank">
+    CLI-based access
+   </a>
+   to
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/applications/deploy-app-cli/" rel="external nofollow" target="_blank">
+    deploy the application on UCP
+   </a>
+   .
+   <br/>
+   Use
+   <code>
+    $ eval $(&lt;env.sh)
+   </code>
+   to point the Docker client to UCP. Then run the following commands:
+   <code>
+    $ docker run -dit --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0 $ docker-compose --project-name wordpress up -d $ docker service create --name apache2 dtr.example.com/kathy.seaweed/apache2:1.0
+   </code>
+  </li>
+  <li>
+   <strong>
+    Test the Application
+   </strong>
+   - The developer can then test the deployed application on UCP from his machine to validate the configuration of the test environment.
+  </li>
+  <li>
+   <strong>
+    Commit to Version Control
+   </strong>
+   - Once the application is tested on UCP, the developer can commit the files used to create the application, its images, and its configuration to version control. This commit triggers the CI/CD workflow.
+  </li>
+ </ol>
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="Developer_Environment_and_Tools">
+  </span>
+  <h3 id="2-4">
+   Developer Environment and Tools
+  </h3>
+  <p>
+   A developer's machine should have an edition of Docker (
+   <a class="link-https" href="/docker-for-windows/" rel="external nofollow" target="_blank">
+    Windows
+   </a>
+   ,
+   <a class="link-https" href="/docker-for-mac/" rel="external nofollow" target="_blank">
+    Mac
+   </a>
+   , or
+   <a class="link-https" href="/engine/installation/linux/" rel="external nofollow" target="_blank">
+    Linux
+   </a>
+   ) installed on it. The installation provides
+   <a class="link-https" href="/engine/userguide/intro/" rel="external nofollow" target="_blank">
+    Docker engine
+   </a>
+   ,
+   <a class="link-https" href="/engine/reference/commandline/cli/" rel="external nofollow" target="_blank">
+    Docker CLI client
+   </a>
+   ,
+   <a class="link-https" href="/compose/overview/" rel="external nofollow" target="_blank">
+    Docker Compose
+   </a>
+   , and
+   <a class="link-https" href="/notary/getting_started/" rel="external nofollow" target="_blank">
+    Docker Notary command line
+   </a>
+   .
+  </p>
+  <p>
+   In some enterprises, the version of the operating system used on developer machines is older and not compatible with Docker for Windows or Mac. In this case
+   <a class="link-https" href="/toolbox/overview/" rel="external nofollow" target="_blank">
+    Docker Toolbox
+   </a>
+   can be used.
+  </p>
+  <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+   <span id="IDE">
+   </span>
+   <h4 id="3-0">
+    IDE
+   </h4>
+   <p>
+    Docker versions do not provide a native IDE for developing with Docker. The primary interface is the command line API. However, most leading IDEs (NetBeans, Eclipse, IntelliJ, Visual Studio) have some support for Docker through plugins or add-ons. Our
+    <a class="link-https" href="https://github.com/docker/labs/tree/master/developer-tools" rel="external nofollow" target="_blank">
+     labs
+    </a>
+    contain tutorials on how to setup and use common developer tools and programming languages with Docker.
+   </p>
+   <blockquote>
+    <p>
+     <strong>
+      Tip: Optimizing images sizes.
+     </strong>
+     If an image size becomes too large, a quick way to identify where possible optimizations are is to use the
+     <code>
+      docker history &lt;image&gt;
+     </code>
+     command. It will tell you which lines in the Dockerfile added what size to the image.
+    </p>
+   </blockquote>
+  </div>
+  <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+   <span id="Docker_Client_CLI_Contexts">
+   </span>
+   <h4 id="3-1">
+    Docker Client CLI Contexts
+   </h4>
+   <p>
+    When working with Docker EE and the Docker command line, it is important to keep in mind the context that the command is running in.
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Local Docker Engine
+     </strong>
+     — This is the main context used for development of Dockerfiles and testing locally on the developer's machine.
+    </li>
+    <li>
+     <strong>
+      Remote UCP CLI
+     </strong>
+     —
+     <a class="link-https" href="/datacenter/ucp/2.0/guides/access-ucp/cli-based-access/" rel="external nofollow" target="_blank">
+      CLI-based access
+     </a>
+     is used for building and running applications on a UCP cluster.
+    </li>
+    <li>
+     <strong>
+      UCP GUI
+     </strong>
+     — The Docker EE web user interface provides an alternative to the CLI.
+    </li>
+    <li>
+     <strong>
+      Remote UCP Node
+     </strong>
+     — Sometimes it can be useful for debugging to directly connect to a node on the UCP cluster. In this case, SSH can be used, and the commands are executed on the Docker engine of the node.
+    </li>
+   </ul>
+   <p>
+    A quick way to see which context you are in is by doing an
+    <code>
+     export
+    </code>
+    command. If you have a
+    <code>
+     DOCKER_HOST
+    </code>
+    environment variable set, then you have most likely configured your UNIX session to use the UCP client bundle, meaning all Docker commands are executed on the UCP cluster.
+   </p>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="CI.2FCD_Workflow">
+ </span>
+ <h2 id="1-3">
+  CI/CD Workflow
+ </h2>
+ <p>
+  A CI/CD platform uses different systems within the organization to automatically build, deploy, and test applications. This section discusses a typical CI/CD workflow using Docker EE and the interactions with those repositories as showing in the following illustration:
+ </p>
+ <p>
+  <img alt="CI/CD Workflow" class="internal" src="/kb/images/1885-3.png"/>
+ </p>
+ <p>
+  A typical CI/CD workflow follows these steps:
+ </p>
+ <ol>
+  <li>
+   <strong>
+    Build Application
+   </strong>
+   — A change to the version control of the application triggers a build by the CI Agent. A build container is started and passed parameters specific to the application. The container can run on a separate Docker host or on UCP. The container obtains the source code from version control, runs the commands of the application's build tool, and finally pushes the resulting artifact to a Repository Manager.
+  </li>
+  <li>
+   <strong>
+    Build Image
+   </strong>
+   — The CI Agent pulls the Dockerfile and associated files to build the image from version control. The Dockerfile is setup so that the artifact built in the previous step is copied into the image. The resulting image is pushed to DTR. If
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/content-trust/" rel="external nofollow" target="_blank">
+    Docker Content Trust
+   </a>
+   has been enabled and
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/" rel="external nofollow" target="_blank">
+    Notary
+   </a>
+   has been installed, then the image is signed with the CI/CD signature.
+  </li>
+  <li>
+   <strong>
+    Deploy Application
+   </strong>
+   — The CI Agent can pull a run-time configuration from version control (e.g.
+   <code>
+    docker-compose.yml
+   </code>
+   + environment-specific configuration files) and use them to
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/applications/deploy-app-cli/" rel="external nofollow" target="_blank">
+    deploy the application on UCP
+   </a>
+   via the
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/access-ucp/cli-based-access/" rel="external nofollow" target="_blank">
+    CLI-based access
+   </a>
+   .
+  </li>
+  <li>
+   <strong>
+    Test Application
+   </strong>
+   — The CI Agent deploys a test container to test the application deployed in the previous step. If all of the tests pass, then the image can be signed with a QA signature by pulling and pushing the image to DTR. This push triggers the Operations workflow.
+  </li>
+ </ol>
+ <blockquote>
+  <p>
+   <strong>
+    Tip:
+   </strong>
+   The CI Agent can also be Dockerized, however, since it runs Docker commands, it needs access to the host's Docker Engine. This can be done by mounting the host's Docker socket, for example:
+  </p>
+ </blockquote>
+ <pre>
+<code>docker run --rm -it --name ciagent \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  ciagent:1
+</code></pre>
+ <blockquote>
+  <p>
+   <strong>
+    Tip:
+   </strong>
+   Use Docker images as build caches. When applications are built in a container, often there is a need to download dependencies to compile the application. An enterprise cache or proxy such as Nexus is also used to speed this up. To speed the build up even further you can create a "build base image" with pre-loaded common dependencies from which the build container can inherit. This avoids mounting shared volumes to cache the dependencies between build containers.
+  </p>
+ </blockquote>
+ <div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="CI.2FCD_Environment_and_Tools">
+  </span>
+  <h3 id="2-5">
+   CI/CD Environment and Tools
+  </h3>
+  <p>
+   The nodes of the CI/CD environment where Docker is used to build applications or images should have Docker Engine installed. The nodes can be labeled "build" to create a separate cluster.
+  </p>
+  <p>
+   There are many CI/CD software systems available (Jenkins, Visual Studio, Team City, etc). Most of the leading systems have some support for Docker through plugins or add-ons. However, to ensure the most flexibility in creating CI/CD workflows, it is recommended that you use the native Docker CLI or rest API for building images or deploying containers/services.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="Operations_Workflow">
+ </span>
+ <h2 id="1-4">
+  Operations Workflow
+ </h2>
+ <p>
+  The Operations workflow usually consists of two parts. It starts at the beginning of the entire development pipeline creating base images for development teams to use, and it ends with pulling and deploying the production ready images from the developer teams. The workflow for creating base images is the same as the developer workflow, so it is not shown here. However, the following diagram illustrates a typical Operations workflow for deploying images in production:
+ </p>
+ <p>
+  <img alt="Ops Workflow" class="internal" src="/kb/images/1885-4.png"/>
+ </p>
+ <p>
+  A typical Operations workflow follows these steps:
+ </p>
+ <ol>
+  <li>
+   <p>
+    <strong>
+     Deploy Application
+    </strong>
+    — The deployment to production can be triggered automatically via a change to version control for the application or it can be triggered by operations. It can also be executed manually or done by a CI/CD agent.
+    <br/>
+    A tag of the deployment configuration files specific to the production environment is pulled from version control. This includes a
+    <code>
+     docker-compose
+    </code>
+    file or scripts which deploy the services as well as configuration files. Secrets such as passwords or certificates that are specific to production environments should be added or updated. Starting with Docker 17.03 (and Docker Engine 1.13), Docker has native secrets management. The CD Agent can then deploy the production topology in UCP.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Test Application
+    </strong>
+    — The CD Agent deploys a test container to test the application deployed in the previous step. If all of the tests pass, then the application is ready to handle production load.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Balance the Load
+    </strong>
+    — Depending on the deployment pattern (Big Bang, Rolling, Canary, Blue Green, etc.), an external load balancer, DNS server, or router is reconfigured to send all or part of the requests to the newly deployed application. The older version of the application can remained deployed in case of the need to rollback. Once the new application is deemed stable, the older version can be removed.
+   </p>
+  </li>
+ </ol>
+ <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="Enterprise_Base_Images">
+  </span>
+  <h3 id="2-6">
+   Enterprise Base Images
+  </h3>
+  <p>
+   The Operations team will usually build and maintain “base images.” They typically contain the OS, middleware, and tooling to enforce enterprise policies. They might also contain any enterprise credentials used to access repositories or license servers. The development teams can then inherit from these base images by using the keyword
+   <code>
+    FROM
+   </code>
+   in their Dockerfile and then adding their application specific components, applications, and configuration to their own application images.
+  </p>
+  <blockquote>
+   <p>
+    <strong>
+     Tip:
+    </strong>
+    Squash function. Since the base images do not change that often and are widely used within an organization, minimizing their size is very important. You can use
+    <code>
+     docker build --squash -t &lt;image&gt; .
+    </code>
+    to create only one layer and optimize the size of the image. You will lose the ability to modify, so this is recommended for base images and not necessarily for application images which change often.
+   </p>
+  </blockquote>
+ </div>
+ <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+  <span id="Production_Environment">
+  </span>
+  <h3 id="2-7">
+   Production Environment
+  </h3>
+  <p>
+   The nodes of the production environment should have Docker Engine installed. For more guidelines and best practices around installing and configuring Docker EE for production please refer to
+   <a href="/kb/1911/" rel="internal">
+    Docker EE Design and Best Practices
+   </a>
+   . For best practices around security and Docker EE for production please refer to
+   <a href="/kb/1908/" rel="internal">
+    Securing Docker EE and Security Best Practices
+   </a>
+   .
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Development_Pipeline_Best_Practices_Using_Docker_EE">
+ <span id="Summary">
+ </span>
+ <h2 id="1-5">
+  Summary
+ </h2>
+ <p>
+  This document discusses the Docker development pipeline, integration with existing systems, and also covers the specific developer, CI/CD, and operations workflows and environments. Follow these best practices to create an effective enterprise development pipeline.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

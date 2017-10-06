@@ -1,0 +1,62 @@
+---
+title: "The 'docker stats' command reports incorrect memory utilization"
+id: 2209
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2209/
+originalpath: https://success.docker.com/KBase/The_'docker_stats'_command_reports_incorrect_memory_utilization
+source: https://success.docker.com/@api/deki/pages/2209/contents
+tags:
+- tag: "article:question"
+- tag: "component:engine"
+- tag: "expires:nextrelease"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ As of Docker EE 17.03, the Docker daemon
+ <code>
+  stats
+ </code>
+ endpoint incorrectly reports memory utilization as the
+ <em>
+  sum
+ </em>
+ of rss and the page cache allocated to the container.
+</p>
+<p>
+ A backport of the upstream fix (
+ <a class="link-https" href="https://github.com/docker/cli/pull/80" rel="external nofollow" target="_blank" title="https://github.com/docker/cli/pull/80">
+  https://github.com/docker/cli/pull/80
+ </a>
+ ) for this issue is being tracked by internal engineering issue
+ <code>
+  orca/7241
+ </code>
+ .   Release of the fix for Docker Enterprise Edition is currently targeted for release with version 17.06.   A backport to version 17.03 is also in progress.
+</p>
+<p>
+ The Linux kernel interface consumed by
+ <code>
+  docker stats
+ </code>
+ can be found under:
+</p>
+<pre>
+/sys/fs/cgroup/memory/docker/<span class="replaceabletext">6b073e1c654af637b2337be7bd86d464502f0aa42f98c6f2c6ac83e4b5fe177</span>/memory.stat</pre>
+<p>
+ Further documentation for this kernel interface can be found here:
+</p>
+<ul>
+ <li>
+  <a class="link-https" href="/engine/admin/runmetrics/#memory-metrics-memorystat" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/admin/runmetrics/#memory-metrics-memorystat">
+   https://docs.docker.com/engine/admin/runmetrics/#memory-metrics-memorystat
+  </a>
+ </li>
+</ul>
+
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

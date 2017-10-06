@@ -1,0 +1,94 @@
+---
+title: "Docker for Windows fails with a daemon not running message"
+id: 2236
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2236/
+originalpath: https://success.docker.com/KBase/Docker_for_Windows_fails_with_a_daemon_not_running_message
+source: https://success.docker.com/@api/deki/pages/2236/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "Daemon"
+- tag: "Docker for Windows"
+- tag: "Error"
+- tag: "Network"
+- tag: "platform:windows"
+- tag: "Services"
+- tag: "stage:reviewed"
+- tag: "Windows"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Docker_for_Windows_fails_with_a_daemon_not_running_message">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  If the Docker daemon fails to start up with Windows, or stops for some reason, you can get network connection errors or warnings regarding the Docker daemon service when you try to run any commands.
+ </p>
+ <pre>
+<code>error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.30/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on Windows, 
+the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.</code>
+</pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Docker_for_Windows_fails_with_a_daemon_not_running_message">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Windows 10
+  </li>
+  <li>
+   Docker for Windows
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Docker_for_Windows_fails_with_a_daemon_not_running_message">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-2">
+  Resolution
+ </h2>
+ <p>
+  When the Docker daemon fails to start with Windows, or stops unexpectedly during normal operations, you'll get a network connection error regarding the Docker daemon letting you know that it is unreachable.  The Docker daemon is also commonly referred to as the Docker for Windows service.  Usually, restarting the service will resolve the error.
+ </p>
+ <p>
+  <strong>
+   Option 1:
+  </strong>
+  Restart the Docker for Windows service through the Windows GUI by right clicking the service and choosing restart:
+ </p>
+ <p>
+  <img alt="" class="internal default" src="/kb/images/2236-0.png"/>
+  <strong>
+   Option 2:
+  </strong>
+  Restart the Docker for Windows Service through the command line or Powershell using an elevated prompt:
+ </p>
+ <pre>
+<code>Net stop com.docker.service
+Net start com.docker.service</code></pre>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Docker_for_Windows_fails_with_a_daemon_not_running_message">
+ <span id="What's_Next">
+ </span>
+ <h2 id="1-3">
+  What's Next
+ </h2>
+ <p>
+  If this does not resolve your issue, Please file an issue here:
+  <a class="link-https" href="https://github.com/docker/for-win/issues" rel="external nofollow" target="_blank" title="https://github.com/docker/for-win/issues">
+   https://github.com/docker/for-win/issues
+  </a>
+ </p>
+</div>
+{% endraw %}

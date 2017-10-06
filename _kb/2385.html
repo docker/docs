@@ -1,0 +1,97 @@
+---
+title: "How to properly restart DTR 2.3.x"
+id: 2385
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2385/
+originalpath: https://success.docker.com/KBase/How_to_properly_restart_DTR_2.3.x
+source: https://success.docker.com/@api/deki/pages/2385/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-2.3.0"
+---
+{% raw %}
+<p>
+ After completing these steps, you will have the ability to properly restart DTR on 2.3.x versions of the product.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_properly_restart_DTR_2.3.x">
+ <span id="Option_1">
+ </span>
+ <h1 id="0-0">
+  Option 1
+ </h1>
+ <p>
+  From the UCP UI:
+ </p>
+ <p>
+  <img alt="Screen Shot 2017-09-26 at 9.43.17 AM.png" class="internal" src="/kb/images/2385-0.png"/>
+ </p>
+ <ol>
+  <li>
+   Click
+   <strong>
+    Stacks
+   </strong>
+   in the left-side menu.
+  </li>
+  <li>
+   Choose the
+   <em>
+    application
+   </em>
+   with the replica id that corresponds to the replica to be restarted.
+  </li>
+  <li>
+   On the right choose the
+   <strong>
+    Inspect Resources
+   </strong>
+   pull down menu, and then
+   <strong>
+    Containers
+   </strong>
+   from the drop down.
+  </li>
+  <li>
+   Check the boxes for all DTR containers.
+  </li>
+  <li>
+   On the right side, choose the
+   <strong>
+    Actions
+   </strong>
+   pull-down menu, and then
+   <strong>
+    Restart
+   </strong>
+   from the drop down
+   <em>
+    .
+   </em>
+  </li>
+ </ol>
+ <p>
+  <em>
+   <img alt="Screen Shot 2017-09-26 at 9.42.59 AM.png" class="internal" src="/kb/images/2385-1.png"/>
+  </em>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_to_properly_restart_DTR_2.3.x">
+ <span id="Option_2">
+ </span>
+ <h1 id="0-1">
+  Option 2
+ </h1>
+ <p>
+  From the CLI of the replica host run the following:
+ </p>
+ <pre>
+$ sudo docker ps -qf name=dtr |xargs docker restart</pre>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

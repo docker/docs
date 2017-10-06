@@ -1,0 +1,29 @@
+---
+title: "Automated Builds Work On Hub But Not In Cloud"
+id: 1490
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1490/
+originalpath: https://success.docker.com/Cloud/Solve/Automated_Builds_Work_On_Hub_But_Not_In_Cloud
+source: https://success.docker.com/@api/deki/pages/1490/contents
+tags:
+- tag: "article:topic"
+- tag: "product:cloud"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ If your automated builds complete successfully on Docker Hub but not in Docker Cloud, the cause is usually one of the following:
+</p>
+<ul>
+ <li>
+  You're using BYON for a build node and have no nodes available.
+ </li>
+ <li>
+  A problem with a BYON. BYON builds are different because the builds run in DinD. Try changing the autobuild configuration to "Build in Docker Cloud Infrastructure." The build should be 100% compatible in Docker Cloud/Docker Hub.
+ </li>
+</ul>
+
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

@@ -1,0 +1,58 @@
+---
+title: "'--mode global' can cause platform mismatch for replica"
+id: 2313
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2313/
+originalpath: https://success.docker.com/KBase/'--mode_global'_can_cause_platform_mismatch_for_replica
+source: https://success.docker.com/@api/deki/pages/2313/contents
+tags:
+- tag: "article:errors"
+- tag: "component:swarm"
+- tag: "expires:futurerelease"
+- tag: "platform:ws"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:docker-17.06.1-ee"
+- tag: "usecase:infraopt"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/'--mode_global'_can_cause_platform_mismatch_for_replica">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  Docker 17.06 EE supports mixed platform worker nodes (for example, Linux and Windows worker nodes in the same cluster).
+ </p>
+ <p>
+  Starting in Docker 17.06 EE, the Swarm manager automatically schedules containers to worker nodes with the corresponding platform.  For example, a service that runs Windows containers will schedule replicas only to Windows worker nodes.  However, when
+  <code>
+   --mode global
+  </code>
+  is used, task will be assigned to all nodes regardless of the platform type. This might be the desired behavior for all containers.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/'--mode_global'_can_cause_platform_mismatch_for_replica">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  Task can be assigned a specific platform by adding a
+  <code>
+   constraint
+  </code>
+  like this:
+ </p>
+ <pre>
+<code>docker service create --name windowsonly `
+--mode global <span class="mt-color-ff0000">--constraint 'node.platform.os == windows'</span> `
+microsoft/nanoserver</code>
+</pre>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

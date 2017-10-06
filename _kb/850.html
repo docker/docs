@@ -1,0 +1,139 @@
+---
+title: "DTR will not start up after clean installation"
+id: 850
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/850/
+originalpath: https://success.docker.com/KBase/DTR_will_not_start_up_after_clean_installation
+source: https://success.docker.com/@api/deki/pages/850/contents
+tags:
+- tag: "article:question"
+- tag: "component:dtr"
+- tag: "DTR"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:dtr-1.4.3"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/DTR_will_not_start_up_after_clean_installation">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  After installing DTR 1.4.3, when trying accessing the web interface, an nginx error message
+  <strong>
+   502 Bad Gateway
+  </strong>
+  is seen.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/DTR_will_not_start_up_after_clean_installation">
+ <span id="Symptoms">
+ </span>
+ <h3 id="2-1">
+  Symptoms
+ </h3>
+ <ul>
+  <li>
+   Web interface gives
+   <strong>
+    502 Bad Gateway
+   </strong>
+   error
+  </li>
+  <li>
+   <code>
+    docker_trusted_registry_admin_server
+   </code>
+   container isn't running
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/DTR_will_not_start_up_after_clean_installation">
+ <span id="Diagnostic_Steps">
+ </span>
+ <h3 id="2-2">
+  Diagnostic Steps
+ </h3>
+ <p>
+  Verify that
+  <code>
+   docker_trusted_registry_admin_server
+  </code>
+  isn't running and fails to write to syslog.
+ </p>
+ <ol>
+  <li>
+   Check the running containers by running:
+   <pre>
+<code>docker ps
+</code></pre>
+   The output will look similar to the following:
+   <pre>
+<code>CONTAINER ID        IMAGE                                          COMMAND                  CREATED             STATUS                          PORTS                                      NAMES
+1ce30a0943a0        docker/trusted-registry-garant:1.4.3           "garant /config/garan"   2 hours ago         Up 2 hours                                                                 docker_trusted_registry_auth_server
+923f02f750c0        docker/trusted-registry-log-aggregator:1.4.3   "log-aggregator"         2 hours ago         Up 2 hours                                                                 docker_trusted_registry_log_aggregator
+036c069ed1f0        docker/trusted-registry-admin-server:1.4.3     "server"                 2 hours ago         <span class="replaceable">Restarting (1) 20 minutes ago</span>   80/tcp                                     docker_trusted_registry_admin_server
+df12e70aaf35        docker/trusted-registry-nginx:1.4.3            "watcher"                2 hours ago         Up 2 hours                      0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp   docker_trusted_registry_load_balancer
+9641ff478ab7        docker/trusted-registry-index:1.4.3            "server"                 2 hours ago         Up 2 hours                                                                 docker_trusted_registry_registry_index
+f99e64c70105        postgres:9.4.1                                 "/docker-entrypoint.s"   2 hours ago         Up 2 hours                      5432/tcp                                   docker_trusted_registry_postgres
+</code>
+</pre>
+  </li>
+  <li>
+   The
+   <code>
+    Restarting
+   </code>
+   status for the
+   <code>
+    docker_trusted_registry_admin_server
+   </code>
+   is a problem. Check the logs for that container with the following command:
+   <pre>
+<code>docker logs docker_trusted_registry_admin_server</code>
+</pre>
+   The output will be:
+   <pre>
+<code>INFO  [1.4.3] Initializing with an invalid license
+FATAL [1.4.3] Failed to create syslog logger error="Unix syslog delivery error"
+</code>
+</pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/DTR_will_not_start_up_after_clean_installation">
+ <span id="Resolution">
+ </span>
+ <h3 id="2-3">
+  Resolution
+ </h3>
+ <p>
+  The
+  <code>
+   Initializing with an invalid license
+  </code>
+  info message is expected since there's no license applied during installation (you have to log into the web interface to do this). However, DTR requires syslogd, and when it tries to log this info message and sees there is no syslogd running, it exits. This problem is usually encountered in minimal host OS environments (e.g. boot2docker) where syslog isn't running by default.
+ </p>
+ <p>
+  This issue can be resolved in either of the following ways:
+ </p>
+ <p>
+  1. Start syslogd. Consult your host OS documentation.
+ </p>
+ <p>
+  or
+ </p>
+ <p>
+  2. Manually load the license file by copying it to
+  <code>
+   /usr/local/etc/dtr/license.json
+  </code>
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

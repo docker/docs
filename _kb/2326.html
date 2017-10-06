@@ -1,0 +1,201 @@
+---
+title: "Containers will not start on ucp-hrm network"
+id: 2326
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2326/
+originalpath: https://success.docker.com/KBase/Containers_will_not_start_on_ucp-hrm_network
+source: https://success.docker.com/@api/deki/pages/2326/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.2.0"
+---
+{% raw %}
+<p>
+ When deploying stacks or services to the ucp-hrm network, an issue may occur where no container is created under the service.
+ <code>
+  docker service ls
+ </code>
+ will show fewer tasks scheduled than expected, and tasks scheduled under the service will show
+ <code>
+  State: "new"
+ </code>
+ with
+ <code>
+  Message: "created"
+ </code>
+ .
+</p>
+<p>
+ The cause of this issue is IP address exhaustion on the ucp-hrm network. To confirm this root cause, watch the Docker daemon logs on the swarm leader for the following error while deploying a service:
+</p>
+<pre>
+<code>dockerd[1148]: time="2017-08-18T16:52:57.658494321Z" level=error msg="Failed allocation for service22vv3642wp8txhbu4t6uk2agx" error="could not find an available IP while allocating VIP" module=node node.id=pujf6ei</code>
+</pre>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Containers_will_not_start_on_ucp-hrm_network">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-0">
+  Resolution
+ </h2>
+ <p>
+  The default subnet size for ucp-hrm is
+  <code>
+   /24
+  </code>
+  (~250 IP addresses). The resolution involves provisioning additional address space and can take one of two forms: deploying an additional network HRM network, or reconfiguring the existing
+  <code>
+   ucp-hrm
+  </code>
+  network with a larger subnet. Both approaches involve temporary downtime for the HRM service. Reconfiguring the existing network requires removing all services attached to the network, but allows services to continue referencing the same
+  <code>
+   ucp-hrm
+  </code>
+  network name.
+ </p>
+ <div class="mt-section" id="section_2" mt-section-origin="KBase/Containers_will_not_start_on_ucp-hrm_network">
+  <span id="Approach_1:_Deploy_a_new_HRM_network">
+  </span>
+  <h3 id="2-0">
+   Approach 1: Deploy a new HRM network
+  </h3>
+  <p>
+   To deploy a new HRM network, perform the following steps through a
+   <a class="link-https" href="/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/">
+    UCP client bundle
+   </a>
+   :
+  </p>
+  <ol style="list-style-type: decimal">
+   <li>
+    <p>
+     Create a new
+     <code>
+      /16
+     </code>
+     overlay network with the
+     <code>
+      com.docker.ucp.mesh.http
+     </code>
+     label.  The
+     <code>
+      subnet
+     </code>
+     ,
+     <code>
+      gateway
+     </code>
+     , and name can be configured as desired.
+    </p>
+    <pre>
+<code>docker network create -d overlay  --subnet=<span class="replaceabletext">10.1.0.0</span>/16 --gateway <span class="replaceabletext">10.1.0.1</span> --label com.docker.ucp.mesh.http=true <span class="replaceabletext">hrmnet</span></code>
+</pre>
+   </li>
+   <li>
+    <p>
+     <a class="link-https" href="/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/#enable-the-http-routing-mesh" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/#enable-the-http-routing-mesh">
+      Toggle the HRM service off and then on on the UCP UI
+     </a>
+     .
+    </p>
+   </li>
+   <li>
+    <p>
+     Attach new services to the new network name (
+     <code>
+      hrmnet
+     </code>
+     in this example).
+    </p>
+   </li>
+  </ol>
+ </div>
+ <div class="mt-section" id="section_3" mt-section-origin="KBase/Containers_will_not_start_on_ucp-hrm_network">
+  <span id="Approach_2:_Reconfigure_the_existing_ucp-hrm_network">
+  </span>
+  <h3 id="2-1">
+   Approach 2: Reconfigure the existing ucp-hrm network
+  </h3>
+  <blockquote>
+   <p>
+    Note: the following procedure requires removing services attached to the ucp-hrm network in order to recreate the network. This will involve application downtime and requires the ability to re-deploy stacks and services running on that network.
+   </p>
+  </blockquote>
+  <p>
+   Perform the following steps through a
+   <a class="link-https" href="/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/">
+    UCP client bundle
+   </a>
+   .
+  </p>
+  <ol style="list-style-type: decimal">
+   <li>
+    <p>
+     Remove all services on the
+     <code>
+      ucp-hrm
+     </code>
+     network:
+    </p>
+    <pre>
+<code>HRM_NETWORK_ID=$(docker network ls --no-trunc -qf name=ucp-hrm);
+docker service ls -q | \
+      xargs docker service inspect --format '{{ range .Spec.TaskTemplate.Networks }}{{ if eq '\"$HRM_NETWORK_ID\"' .Target }}{{ $.Spec.Name }} {{ end }}{{ end }}'  |\
+  xargs docker service rm;</code></pre>
+   </li>
+   <li>
+    <p>
+     Remove the
+     <code>
+      ucp-hrm
+     </code>
+     network:
+    </p>
+    <pre>
+<code>docker network rm ucp-hrm;</code></pre>
+   </li>
+   <li>
+    <p>
+     Re-create the
+     <code>
+      ucp-hrm
+     </code>
+     network with a
+     <code>
+      /16
+     </code>
+     network size. The
+     <code>
+      subnet
+     </code>
+     and
+     <code>
+      gateway
+     </code>
+     can be configured as desired.
+    </p>
+    <pre>
+<code>docker network create -d overlay --subnet=<span class="replaceabletext">10.1.0.0</span>/16 --gateway <span class="replaceabletext">10.1.0.1</span> --label com.docker.ucp.mesh.http=true ucp-hrm</code></pre>
+   </li>
+   <li>
+    <p>
+     <a class="link-https" href="/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/#enable-the-http-routing-mesh" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/#enable-the-http-routing-mesh">
+      Re-enable ucp-hrm in the UCP Admin UI
+     </a>
+     .
+    </p>
+   </li>
+   <li>
+    <p>
+     Re-deploy services removed in step 1.
+    </p>
+   </li>
+  </ol>
+ </div>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

@@ -1,0 +1,133 @@
+---
+title: "Running commands using the DTR 2.2.y bootstrap container fails with Did not find any potential Docker Trusted Registry replicas"
+id: 2311
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2311/
+originalpath: https://success.docker.com/KBase/Running_commands_using_the_DTR_2.2.y_bootstrap_container_fails_with_%22Did_not_find_any_potential_Docker_Trusted_Registry_replicas%22
+source: https://success.docker.com/@api/deki/pages/2311/contents
+tags:
+- tag: "article:errors"
+- tag: "component:dtr"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "usecase:caas"
+---
+{% raw %}
+<p>
+ When utilizing the DTR bootstrapper commands, for example:
+</p>
+<ul>
+ <li>
+  backup
+ </li>
+ <li>
+  restore
+ </li>
+ <li>
+  reconfigure
+ </li>
+ <li>
+  remove
+ </li>
+ <li>
+  join
+ </li>
+ <li>
+  upgrade
+ </li>
+</ul>
+<pre>
+<code>docker run it --rm docker/dtr <span class="mt-color-ff0000">COMMAND</span>
+</code></pre>
+<p>
+ on an existing DTR 2.2.y environment where UCP 2.2.0 is running, the following error occurs:
+</p>
+<pre>
+<code>ERRO[0001] Did not find any potential Docker Trusted Registry replicas.
+</code></pre>
+<div class="mt-section" id="section_1" mt-section-origin='KBase/Running_commands_using_the_DTR_2.2.y_bootstrap_container_fails_with_"Did_not_find_any_potential_Docker_Trusted_Registry_replicas"'>
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <ul>
+  <li>
+   This issue is specific to environments running:
+   <ul>
+    <li>
+     UCP 2.2.0
+    </li>
+    <li>
+     DTR 2.2.y
+    </li>
+   </ul>
+  </li>
+  <li>
+   This issue should not occur when utilizing the DTR version 2.3.0 bootstrapper to run the above commands.
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin='KBase/Running_commands_using_the_DTR_2.2.y_bootstrap_container_fails_with_"Did_not_find_any_potential_Docker_Trusted_Registry_replicas"'>
+ <span id="Root_Cause">
+ </span>
+ <h2 id="1-1">
+  Root Cause
+ </h2>
+ <p>
+  The DTR bootstrapper relies heavily on the use of
+  <code>
+   docker ps
+  </code>
+  . A recent change within UCP triggered
+  <code>
+   dtr-*
+  </code>
+  containers to be hidden as system containers, which triggers an issue inside the bootstrapper code as it relies on seeing the running containers to decide how to make changes.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin='KBase/Running_commands_using_the_DTR_2.2.y_bootstrap_container_fails_with_"Did_not_find_any_potential_Docker_Trusted_Registry_replicas"'>
+ <span id="Resolution">
+ </span>
+ <h2 id="1-2">
+  Resolution
+ </h2>
+ <p>
+  You can try to use the
+  <code>
+   --existing-replica-id
+  </code>
+  flag to workaround this issue. This flag will allow you to provide the existing replica-id of the replica you are trying to work with. You can find the existing replica id by viewing the output of
+  <code>
+   docker ps
+  </code>
+  on the host:
+ </p>
+ <pre>
+<code>docker ps --filter name=dtr | awk '{print $NF}' | sed 's/dtr-\(.*\)-//g' | grep -vi names | head -n1
+</code></pre>
+ <p>
+  However, in some cases, even with the
+  <code>
+   --existing-replica-id
+  </code>
+  flag in place, bootstrapper commands will fail. If this occurs, their are two recommendations which can be made:
+ </p>
+ <ol>
+  <li>
+   <p>
+    If DTR 2.3.0 is required: Restore UCP backups to a point in the environment pre-upgrade, where UCP 2.1.5 was installed. Use the now functional DTR bootstrapper operations to upgrade to DTR 2.3.0 then upgrade to UCP 2.2.0.
+   </p>
+  </li>
+  <li>
+   <p>
+    Or, wait for DTR 2.2.8 to be released which will resolve the issues of bootstrapper commands failing to function.
+   </p>
+  </li>
+ </ol>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

@@ -1,0 +1,42 @@
+---
+title: "How do I commit a Docker container that I have deployed in Docker Cloud?"
+id: 920
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/920/
+originalpath: https://success.docker.com/Cloud/Solve/How_do_I_commit_a_Docker_container_that_I_have_deployed_in_Docker_Cloud%3F
+source: https://success.docker.com/@api/deki/pages/920/contents
+tags:
+- tag: "article:topic"
+- tag: "Automated Build"
+- tag: "cloud"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/How_do_I_commit_a_Docker_container_that_I_have_deployed_in_Docker_Cloud?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  A container was recently deployed on Docker Cloud and some changes have been made to it. How can these changes in the container be committed to a new Docker image?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/How_do_I_commit_a_Docker_container_that_I_have_deployed_in_Docker_Cloud?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  This feature is not currently available on Docker Cloud as it's generally considered bad practice to commit running images to create new images, since there is no record of what was done within the image. We recommend either building the image locally on your own node or building them using the Automated Build service on Docker Cloud. You can read more about Docker Cloud's Automated Build features
+  <a class="link-https" href="/docker-cloud/feature-reference/automated-build/" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-cloud/feature-reference/automated-build/">
+   here
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

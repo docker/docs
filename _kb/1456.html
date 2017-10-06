@@ -1,0 +1,393 @@
+---
+title: "An Introduction to Storage Solutions for Docker CaaS"
+id: 1456
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1456/
+originalpath: https://success.docker.com/Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS
+source: https://success.docker.com/@api/deki/pages/1456/contents
+tags:
+- tag: "article:reference"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.12.1-cs1"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Ben Grissinger";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  The Docker Datacenter Container as a Service (CaaS) platform delivers a secure, managed application environment for developers to build, ship, and run enterprise applications and custom business processes. This CaaS solution often requires storage across the different phases of the Software Delivery Supply Chain.
+ </p>
+ <p>
+  A variety of storage solutions exist for enterprise use, and a rapidly growing container ecosystem continues to provide many more storage solutions for future consideration. The growing ecosystem of new storage options combined with a need to utilize existing storage essentially brings forth the critical requirement that storage must be highly adaptable and configurable to achieve the optimal platform for containerized workloads.
+ </p>
+ <p>
+  The Docker Datacenter CaaS platform provides a default prescriptive storage configuration ‘out of the box.’ This allows consumers to begin building, shipping, and running containerized applications quickly.
+ </p>
+ <p>
+  However, and perhaps most importantly, Docker Datacenter CaaS provides a pluggable “batteries included, but replaceable” architecture that allows for the implementation and configuration of storage solutions that best meet your requirements across the entire Software Delivery Supply Chain. This pluggable architecture approach for implementing storage of choice also includes the ability to interchange other critical enterprise infrastructure services in a pluggable fashion such as networking, logging, authentication, authorization, and monitoring.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Overview">
+ </span>
+ <h2 id="1-1">
+  Overview
+ </h2>
+ <p>
+  Docker separates storage use cases within Docker Datacenter CaaS into three categories:
+ </p>
+ <ul>
+  <li>
+   <p>
+    <strong>
+     Docker image run storage (graph drivers)
+    </strong>
+   </p>
+   <p>
+    Storage used for reading
+    <em>
+     image filesystem layers
+    </em>
+    from a running container state typically require IOPS and other read/write intensive operations, which leads to performance being a key storage service metric. These higher performance disk metrics often have higher costs and reduced scalability, so features such as redundancy or resiliency are sometimes traded off to manage the storage economics.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Persistent data container storage (volumes)
+    </strong>
+   </p>
+   <p>
+    Containers often require
+    <em>
+     persistent storage
+    </em>
+    for using, capturing, or saving data beyond the container life cycle. Utilizing volume storage is best to keep data for future use or permit shared consumption by other containers or services. The many volume storage solutions available provide features such as high availability, performance, sharing, and reliable read/write filesystem protocols that are supported by Docker, OS vendors, and storage vendors.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Registry "at rest" image storage (registry)
+    </strong>
+   </p>
+   <p>
+    When images are stored at rest on disk for cataloging and e-discovery purposes (as is the case for
+    <em>
+     Docker Trusted Registry
+    </em>
+    ), key storage service metrics will likely revolve around scalability, costs, redundancy, and resiliency. In the case of DTR, acute attention will likely be toward lower cost per terabyte and higher scalability Lower IOPS and perhaps fewer filesystem protocols are often traded out in exchange for lower costs.
+   </p>
+  </li>
+ </ul>
+ <p>
+  Each storage tier has specific storage requirements to achieve expected service levels across the different stages of the Software Delivery Supply Chain of a Docker Datacenter CaaS platform. Speed, scalability, high availability, recoverability, and costs are just a few of the many storage metrics that can help determine the optimal storage choice for each phase where storage is consumed.
+ </p>
+ <p>
+  This document will explore each of these three distinct storage tiers —
+  <em>
+   graph driver storage
+  </em>
+  ,
+  <em>
+   volume storage
+  </em>
+  , and
+  <em>
+   registry storage
+  </em>
+  — in further detail.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Graph_Driver_Storage">
+ </span>
+ <h2 id="1-2">
+  Graph Driver Storage
+ </h2>
+ <p>
+  On each Docker Datacenter CaaS host, graph drivers interface local storage with Docker Engine. Performance is almost always considered the key metric for graph driver storage. OS support and resiliency are almost always required as well.
+ </p>
+ <p>
+  Graph drivers must be able to act as a local registry to store and retrieve copies of image layers that make up full images. Graph drivers also act as a caching mechanism to improve storage efficiency and download times for images within the local registry. They provides a Copy on Write (CoW) filesystem which is appended to a set of read-only image layers that constitute a running container. In acceptable IO time frames, graph drivers must also be able to reliably read into memory the sets of image layers that make a running container on Docker Engine. Graph drivers arguably are the workhorse of all storage used within a Docker Datacenter CaaS. Choosing an incorrect graph driver or misconfiguration can significantly impact expected service levels of the entire Software Delivery Supply Chain.
+ </p>
+ <p>
+  <img alt="Graph Driver Diagram" class="internal" src="/kb/images/1456-0.png"/>
+ </p>
+ <p>
+  Graph Drivers also supply a writeable CoW (Copy on Write) image layer on top of read-only filesystem layers of an image that are started as a running container. The CoW filesystem created at image runtime is assigned a unique filesystem layer ID, and this unique CoW layer ID does not persist or stay with the original image after each iteration of that image being run as a container. The default execution of an image as a container is ephemeral, meaning the container runtime does not automatically persist the CoW layer as part of the original image. You can save a running container with its unique CoW layer into a new image where the CoW is then transformed to an additional read-only layer on top of the original running read image layers. While it is possible to save the CoW contents of a running container as a new image itself, doing so as a means to persist data isn’t scalable, pragmatic, or practical to pass data. The CoW filesystem is most often successfully utilized when used as a means to expand or iterate a current image state to include necessary components or code to expand the image service requirements into a repeatable and reusable image.
+ </p>
+ <p>
+  Currently, the only supported graph drivers available are built into Docker CS Engine. CS Engine is the commercially-supported version of Docker Engine. Its code base is identical to the open source Docker Engine, but it has a limited set of supported configurations. Thus, the host OS has some influence on available, supported graph drivers. There is growing interest in experimental support using pluggable volumes, but none are currently recommended or available.
+ </p>
+ <div class="mt-section" id="section_4" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+  <span id="Selecting_Graph_Drivers">
+  </span>
+  <h3 id="2-0">
+   Selecting Graph Drivers
+  </h3>
+  <p>
+   Several factors can influence the selection of a graph driver. However, there are at least two factors that must be kept in mind before trying to decide:
+  </p>
+  <ul>
+   <li>
+    Currently no single graph driver is well suited for every use case
+   </li>
+   <li>
+    Graph drivers are improving and evolving all of the time
+   </li>
+  </ul>
+  <p>
+   With these factors in mind, the following guidelines should provide some direction when selecting graph drivers:
+  </p>
+  <ol>
+   <li>
+    <p>
+     <strong>
+      Stability
+     </strong>
+    </p>
+    <ul>
+     <li>
+      <p>
+       For the most stable and hassle-free Docker experience use the default graph driver for your distribution. When Docker is installed, a default graph driver is selected and installed based on the configuration of your system. Straying from this default may increase your chances of encountering bugs and other issues. However, staying with a default configuration may not always provide the best available solution to enhance your environment to reach optimum capabilities.
+      </p>
+     </li>
+     <li>
+      <p>
+       Follow the configuration specified in the
+       <a href="/kb/928/" rel="internal">
+        Compatibility Matrix
+       </a>
+       . The Docker CS Engine set of supported configurations use the most stable and mature graph drivers. Straying from these configurations may also increase your chances of encountering bugs and issues.
+      </p>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <p>
+     <strong>
+      Experience and Expertise
+     </strong>
+    </p>
+    <ul>
+     <li>
+      Choose a graph driver that you and your team/organization have experience with. For example, if you use RHEL or one of its downstream forks, you may already have experience with LVM and Device Mapper. If you do not feel you have expertise with any of the storage drivers supported by Docker, and you want an easy-to-use stable Docker experience, you should consider using the default driver installed by your distribution’s Docker package.
+     </li>
+    </ul>
+   </li>
+   <li>
+    <p>
+     <strong>
+      Future-Proofing
+     </strong>
+    </p>
+    <ul>
+     <li>
+      <p>
+       Many people consider OverlayFS as the future of of the Docker storage driver. There are two versions of overlayFS drivers available, Overlay and Overlay2. Overlay is only available for Docker Engine 1.11 and prior while Overlay2 is available for Docker Engine 1.12 and higher. Overlay is available in the 3.18 kernel and higher. Overlay2 is only recommended for use with the 4.0 kernel. Implementation options for OverlayFS on most Linux distributions are rather limited at the time of this publication release.
+      </p>
+     </li>
+     <li>
+      <p>
+       Overlay has known documented issues with inode exhaustion and commit exhaustion. OverlayFS is currently less mature and potentially less stable and tested than some of the more mature drivers such as AUFS and Device Mapper. For this reason, you should use the OverlayFS driver with caution and expect to encounter more bugs than if you were using a more mature driver.
+      </p>
+     </li>
+    </ul>
+   </li>
+  </ol>
+ </div>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Volume_Storage">
+ </span>
+ <h2 id="1-3">
+  Volume Storage
+ </h2>
+ <p>
+  Volume storage is an extremely versatile storage solution that can be used to do many things. Generally, volume storage provides ways for an application or user to store data generated by a running container. It extends beyond the life or boundaries of an existing or running container. This storage use case is commonly referred to as persistent storage. Persistent storage is an extremely important use case, especially for things like databases, images, file and folder sharing, and big data collection activities. Volume storage can also be used to do other interesting things such as provide easy access to secrets (for example, backed by KeyWhiz) or provide configuration data to a container from a key/value store. No matter where the data comes from, this information is translated by the volume driver plugin from the backend into a filesystem that can be accessed by normal tools meant to interact with the filesystem.
+ </p>
+ <p>
+  <img alt="Volume Driver Diagram" class="internal" src="/kb/images/1456-1.png"/>
+ </p>
+ <p>
+  Many enterprises consume storage from various storage systems such as SAN and NAS arrays. These solutions often provide increased performance and availability as well as advanced storage features such as thin provisioning, duplication, encryption, and compression. They usually offer storage monitoring and management.
+ </p>
+ <p>
+  Volume drivers are used to connect storage solutions to the Docker Datacenter CaaS. You can use existing drivers or write drivers to allow the underlying storage to interface with the Docker APIs and Docker Datacenter.
+ </p>
+ <p>
+  A variety of volume driver solutions exist and can be plugged into and consumed within Docker Datacenter CaaS. There are volume storage projects from the open source community, and there are commercially-supported volume drivers available from storage vendors. Many volume driver plugins available today are software-defined and provide feature sets that are agnostic to the underlying physical storage.
+ </p>
+ <blockquote>
+  <p>
+   For a list of volume plugins, go to
+   <a class="link-https" href="/engine/extend/legacy_plugins/" rel="freeklink" title="https://docs.docker.com/engine/extend/legacy_plugins/">
+    https://docs.docker.com/engine/extend/legacy_plugins/
+   </a>
+   .
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_6" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Registry_Storage">
+ </span>
+ <h2 id="1-4">
+  Registry Storage
+ </h2>
+ <p>
+  Registry storage is the backing storage for a running image registry instance such as Docker Trusted Registry or Docker Hub. Docker Trusted Registry is an on-premises image registry service within Docker Datacenter CaaS. Docker Hub is the public SaaS image registry option offered within Docker Cloud. Image registry backing storage, regardless of location, does not typically require high IO performance metrics, but they almost always require resiliency, scalability, and low cost economics to meet expected SLAs. The public Docker Hub image registry service is a specific example where these metric choices are clearly identifiable. Docker Hub requirements for faster push and pull speeds are secondary to metrics such as scalability, resiliency, and economics. Combined, these three metrics enable Docker to most efficiently manage and support a public image registry service that has over 20 millions pull requests a day, over 5 billion pull requests over a 3+ year period, and almost a half million images stored at any one given time. There are several available on-premises, supported backing storage options for Docker Trusted Registry such as Swift, S3, Azure, and Local/Network Filesystem(NFS). These storage options can provide the same registry SLAs required by large scale operations like Docker Hub. Local storage is also an available backing storage option and is the "out of the box" default for a Docker DataCenter CaaS platform. Ultimately, local file share storage options cannot offer similar or improved service levels in the order of magnitude that object storage can provide due to filesystem restrictions such as inode limits or filesystem protocol restrictions.
+ </p>
+ <p>
+  Docker images are immutable, read only, and attached with metadata. These digital characteristics relate very well with object storage features offered in S3, Azure, etc. Object storage also provides many additional digital management features that can enhance the overall image storage experience in addition to what Docker Trusted Registry provides for managing your application images. For example, object storage can provide additional service catalog items such as multi-dc or multi-region image replication to support Disaster Recovery and Continuous Availability designs, or offer additional built-in native redundancy for enhanced image availability, backup and restore solutions, or common API capabilities. It can also provide encryption at rest and client side encryption. Because of these additional features and advantages that object storage solutions provide, it's recommended that Docker Trusted Registry be configured to utilize an object storage backing solution for highly available installations. If HA is not required, then a single local filesystem is prepared as the default backing storage configuration for DTR, but this configuration can be changed to use a backing storage solution of your choice.
+ </p>
+ <p>
+  Often NFS or NFS-like file share solutions are used as an alternative backing storage solution to Object Storage. These file share based solutions can also fulfill the backing storage requirement for High Availability of Docker Trusted Registry. Because many enterprises are very familiar with NFS or similar shared filesystem storage solutions, there are natural tendencies to use shared filesystems over object storage solutions. There are disadvantages of using NFS or comparable shared filesystems as the backing storage for your Docker images:
+ </p>
+ <ol>
+  <li>
+   NFS has many guarantees that erodes performance with too much unnecessary synchronization.
+  </li>
+  <li>
+   NFS essentially mimics a filesystem, often masking low level errors because it has no way to propagate them.
+  </li>
+  <li>
+   NFS doesn’t possess a native security model within.
+  </li>
+ </ol>
+ <p>
+  <img alt="Registry Storage Diagram" class="internal" src="/kb/images/1456-2.png"/>
+ </p>
+ <p>
+  Plugin storage options are not currently supported for registry storage, but there are a number of on-premises, S3 compliant backing storage options that are also a good fit for Docker Trusted Registry. Many partners leverage built-in S3-compliant API compatibility support as a way to have their storage service supported without having to write new code. There are also multiple shareable filesystem protocols other than NFS that are supported options such as ZFS-share on Ubuntu 16.04 LTS or btrfs on SUSE Linux Enterprise Server 12.
+ </p>
+ <p>
+  When planning a production-grade installation of Docker Trusted Registry on-premises, it's best to configure the image registry service as a highly available and redundant service, making the ability to change the backing storage of choice an imperative feature of Docker Datacenter CaaS DTR. All highly available DTR configurations do require a backing storage solution that can support a clustered set of containers requesting parallel asynchronous write requests to the physical storage itself. DTR does not assume, manage, or control any write-locking mechanisms that takes place for image/filesystem data being written to the physical underlying storage. Therefore, writes must be managed independently by the storage protocol of the backing storage itself.
+ </p>
+</div>
+<div class="mt-section" id="section_7" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Conclusion">
+ </span>
+ <h2 id="1-5">
+  Conclusion
+ </h2>
+ <p>
+  When choosing storage solutions for Docker Datacenter CaaS, consider the following:
+ </p>
+ <ol>
+  <li>
+   <p>
+    Typically, containers are described and categorized to run as one of two separate, distinct states —
+    <em>
+     stateful
+    </em>
+    and
+    <em>
+     stateless
+    </em>
+    . A
+    <em>
+     stateful
+    </em>
+    service holds requirements for capturing and storing data during a container runtime. For example, a database that presents database tables on physical storage within a container for the purpose of writing or updating data is considered a stateful service.
+    <em>
+     Stateless
+    </em>
+    containers do not possess the same requirements for data persistence within a container runtime. Any data captured or generated during runtime does not exist or does not have to be recorded. When planning for image builds, it is recommended that you determine the state of each application or service within a container. Then, determine what the storage requirements are as well as the consumption possibilities for each container within the application stack. Also determine what storage options are available or have to be purchased to provide the best results.
+   </p>
+  </li>
+  <li>
+   <p>
+    Consider implementing a service catalog that captures all labels, filters, and constraints assigned to your storage hosts. Capturing all of these definitions will help eliminate overlap or isolate resource gaps in your Docker Datacenter CaaS environment and allow you to model and plan out the most efficient and informed orchestration methods available across the entire Software Delivery Supply Chain.
+   </p>
+  </li>
+  <li>
+   <p>
+    Regardless of container state, every container possesses a writeable Copy on Write (CoW) filesystem that is presented by each Docker host. As previously covered, graph drivers are not designed to accommodate data persistence and sharing, thus misinterpretation and misuse of this space as a means to persist and reuse data can lead to unexpected results and data loss. Strongly consider early in your planning stages that applications should not use this writeable space as a means to persist data beyond the container life cycle.
+   </p>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_8" mt-section-origin="Architecture/An_Introduction_to_Storage_Solutions_for_Docker_CaaS">
+ <span id="Additional_Resources">
+ </span>
+ <h2 id="1-6">
+  Additional Resources
+ </h2>
+ <p>
+  Check out these additional resources for more information:
+ </p>
+ <ul>
+  <li>
+   <a class="link-https" href="https://www.docker.com/sites/default/files/Understanding-Docker-Data-Storage-WP-rev3.pdf" rel="external nofollow" target="_blank">
+    Whitepaper: Understanding Docker Data Storage and Persistence
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/engine/userguide/storagedriver/imagesandcontainers" rel="external nofollow" target="_blank">
+    Understanding images, containers, and storage drivers
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/docker-trusted-registry/configure/config-storage/" rel="external nofollow" target="_blank">
+    Configuring Storage for Docker Trusted Registry
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="https://github.com/docker/docker/blob/master/docs/extend/plugins.md" rel="external nofollow" target="_blank">
+    Configuring Pluggable Volume Storage
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/engine/userguide/storagedriver/selectadriver/" rel="external nofollow" target="_blank">
+    Configuring Docker Graph Drivers
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/engine/extend/plugins/#/volume-plugins" rel="external nofollow" target="_blank">
+    Volume Plugins
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="https://www.docker.com/sites/default/files/WP-%20Definitive%20Guide%20To%20Containers.pdf" rel="external nofollow" target="_blank">
+    The Definitive Guide To Docker Containers
+   </a>
+  </li>
+  <li>
+   <a href="/kb/1236/" rel="internal">
+    Docker Trusted Registry backing storage using btrfs
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/swarm/scheduler/filter/#/swarm-filters" rel="external nofollow" target="_blank">
+    Swarm Filters
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/engine/reference/builder/#/label" rel="external nofollow" target="_blank">
+    Labeling Images
+   </a>
+  </li>
+ </ul>
+ <p>
+  <em>
+   Document Version: 1.0
+  </em>
+ </p>
+ <p>
+  <em>
+   Tested on: Docker CS Engine 1.12.1-cs1
+  </em>
+ </p>
+</div>
+{% endraw %}

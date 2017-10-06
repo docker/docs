@@ -1,0 +1,104 @@
+---
+title: "What happens to my security access labels when I upgrade UCP to 2.2.x as access control changes?"
+id: 2371
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2371/
+originalpath: https://success.docker.com/KBase/What_happens_to_my_security_access_labels_when_I_upgrade_UCP_to_2.2.x_as_access_control_changes%3F
+source: https://success.docker.com/@api/deki/pages/2371/contents
+tags:
+- tag: "access control"
+- tag: "article:question"
+- tag: "component:ucp"
+- tag: "expires:futurerelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.2.0"
+- tag: "upgrading"
+- tag: "usecase:caas"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/What_happens_to_my_security_access_labels_when_I_upgrade_UCP_to_2.2.x_as_access_control_changes?">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  When upgrading to UCP 2.2.x, some might be concerned about the work done to access controls in previous versions and how is this accomplished going forward. You will no longer see an option for teams to have resource labels. Instead, you will find collection, grants, and roles along with respective labels.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/What_happens_to_my_security_access_labels_when_I_upgrade_UCP_to_2.2.x_as_access_control_changes?">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  All access control is configured through
+  <em>
+   Collections
+  </em>
+  and
+  <em>
+   Grants
+  </em>
+  in UCP 2.2.x.
+ </p>
+ <p>
+  A
+  <em>
+   Collection
+  </em>
+  can be any group of resources - images, volumes, secrets, networks, etc.
+ </p>
+ <p>
+  <em>
+   Grants
+  </em>
+  apply Roles to users/teams for each Collection.
+ </p>
+ <p>
+  All of the security labels in UCP 2.1.x have been migrated under the collection
+  <code>
+   /Shared/Legacy/&lt;labelname&gt;
+  </code>
+  .
+ </p>
+ <p>
+  Check the
+  <strong>
+   Grants
+  </strong>
+  section of the
+  <strong>
+   User Management
+  </strong>
+  page and ensure a grant exists for your team that applies a Role for the
+  <code>
+   /Shared/Legacy/&lt;labelname&gt;
+  </code>
+  collection.
+ </p>
+ <p>
+  When new resources are created, ensure the
+  <code>
+   /Shared/Legacy/&lt;labelname&gt;
+  </code>
+  collection is selected in UCP so that your team has access to these resources.
+ </p>
+ <p>
+  Refer to
+  <a class="link-https" href="/datacenter/ucp/2.2/guides/access-control/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/">
+   https://docs.docker.com/datacenter/u...ccess-control/
+  </a>
+  and the associated documents in the
+  <strong>
+   Access Control
+  </strong>
+  section of the documentation.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

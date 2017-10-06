@@ -1,0 +1,104 @@
+---
+title: "Hyper-V conflicts with VMware PowerCLI"
+id: 2149
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2149/
+originalpath: https://success.docker.com/KBase/Hyper-V_conflicts_with_VMWare_PowerCLI
+source: https://success.docker.com/@api/deki/pages/2149/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "Hyper-V"
+- tag: "platform:windows"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:docker-17.03"
+- tag: "VMware"
+- tag: "Windows"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Hyper-V_conflicts_with_VMWare_PowerCLI">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  Docker for Windows fails to start when VMware PowerCLI is installed.
+ </p>
+ <pre>
+<code>[23:03:37.931][NamedPipeServer][Error  ] Unable to execute Restart: Unable to stop: The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: 6/14/2017 11:03:37 PM    Get-VM        You are not currently connected to any servers. Please connect first using a Connect cmdlet.    
+at &lt;ScriptBlock&gt;, &lt;No file&gt;: line 4    at Docker.Backend.HyperV.RunScript(String action, Dictionary`2 parameters)
+   at Docker.Backend.ContainerEngine.Linux.DoStop()
+   at Docker.Backend.ContainerEngine.Linux.Restart(Settings settings)
+   at Docker.Core.Pipe.NamedPipeServer.&lt;&gt;c__DisplayClass8_0.&lt;Register&gt;b__0(Object[] parameters)
+   at Docker.Core.Pipe.NamedPipeServer.RunAction(String action, Object[] parameters)
+[23:03:38.601][NamedPipeClient][Error  ] Unable to send Restart: Unable to stop: The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: 6/14/2017 11:03:37 PM    Get-VM        You are not currently connected to any servers. Please connect first using a Connect cmdlet.    
+at &lt;ScriptBlock&gt;, &lt;No file&gt;: line 4
+[23:03:38.601][Notifications  ][Error  ] Unable to stop: The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: 6/14/2017 11:03:37 PM    Get-VM        You are not currently connected to any servers. Please connect first using a Connect cmdlet.    
+at &lt;ScriptBlock&gt;, &lt;No file&gt;: line 4</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Hyper-V_conflicts_with_VMWare_PowerCLI">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Windows 10
+  </li>
+  <li>
+   VMware PowerCLI
+  </li>
+  <li>
+   Docker 17.03.1 or higher
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Hyper-V_conflicts_with_VMWare_PowerCLI">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-2">
+  Resolution
+ </h2>
+ <p>
+  When you have VMware installed and you use their PowerCLI tools, it changes the syntax of commands that are used when the Engine starts. Specifically within the
+  <code>
+   MobyLinux.ps1
+  </code>
+  file. You'll need to fully qualify the cmdlets.
+ </p>
+ <blockquote>
+  Note: This is a temporary fix. The changes to this file will need to be re-applied every time you re-install or upgrade Docker for Windows.
+ </blockquote>
+ <ol>
+  <li>
+   Edit
+   <code>
+    C:\Program Files\Docker\Docker\resources\MobyLinux.ps1
+   </code>
+   to change all cmdlets to qualify them as Hyper-V.
+   <strong>
+    You'll need to find all commands.
+   </strong>
+   Here are two examples:
+   <pre>
+<code>Hyper-V\Get-VM
+Hyper-V\Get-VMHost</code></pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Hyper-V_conflicts_with_VMWare_PowerCLI">
+ <span id="">
+ </span>
+ <h2 id="1-3">
+ </h2>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

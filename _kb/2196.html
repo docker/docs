@@ -1,0 +1,79 @@
+---
+title: "How to completely remove Docker in Windows 10"
+id: 2196
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2196/
+originalpath: https://success.docker.com/KBase/How_to_completely_remove_Docker
+source: https://success.docker.com/@api/deki/pages/2196/contents
+tags:
+- tag: "article:howto"
+- tag: "component:engine"
+- tag: "D4W"
+- tag: "Docker for Windows"
+- tag: "platform:windows"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "Uninstall"
+---
+{% raw %}
+<p>
+ This article provides a script that will completely uninstall Docker along with all program information on your Windows 10 system.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_completely_remove_Docker">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <ul>
+  <li>
+   Windows 10
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_to_completely_remove_Docker">
+ <span id="Steps">
+ </span>
+ <h2 id="1-1">
+  Steps
+ </h2>
+ <p>
+  Run this script in Powershell, preferably from an elevated prompt.You can save it with a
+  <code>
+   .ps1
+  </code>
+  extension.
+ </p>
+ <pre>
+$ErrorActionPreference = "SilentlyContinue"
+
+kill -force -processname 'Docker for Windows', com.docker.db, vpnkit, com.docker.proxy, com.docker.9pdb, moby-diag-dl, dockerd
+
+try {
+    ./MobyLinux.ps1 -Destroy
+} Catch {}
+
+$service = Get-WmiObject -Class Win32_Service -Filter "Name='com.docker.service'"
+if ($service) { $service.StopService() }
+if ($service) { $service.Delete() }
+Start-Sleep -s 5
+Remove-Item -Recurse -Force "~/AppData/Local/Docker"
+Remove-Item -Recurse -Force "~/AppData/Roaming/Docker"
+if (Test-Path "C:\ProgramData\Docker") { takeown.exe /F "C:\ProgramData\Docker" /R /A /D Y }
+if (Test-Path "C:\ProgramData\Docker") { icacls "C:\ProgramData\Docker\" /T /C /grant Administrators:F }
+Remove-Item -Recurse -Force "C:\ProgramData\Docker"
+Remove-Item -Recurse -Force "C:\Program Files\Docker"
+Remove-Item -Recurse -Force "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Docker"
+Remove-Item -Force "C:\Users\Public\Desktop\Docker for Windows.lnk"
+Get-ChildItem HKLM:\software\microsoft\windows\currentversion\uninstall | % {Get-ItemProperty $_.PSPath}  | ? { $_.DisplayName -eq "Docker" } | Remove-Item -Recurse -Force
+Get-ChildItem HKLM:\software\classes\installer\products | % {Get-ItemProperty $_.pspath} | ? { $_.ProductName -eq "Docker" } | Remove-Item -Recurse -Force
+Get-Item 'HKLM:\software\Docker Inc.' | Remove-Item -Recurse -Force
+Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\Run -name "Docker for Windows" | Remove-Item -Recurse -Force
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | ForEach-Object {Get-ItemProperty $_.PSPath} | Where-Object { $_.ToString().Contains("Docker for Windows.exe") } | Remove-Item -Recurse -Force $_.PSPath
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | Where-Object { $(Get-ItemPropertyValue $_) -Contains "Docker" }
+</pre>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

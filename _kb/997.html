@@ -1,0 +1,100 @@
+---
+title: "Why are there multiple automated builds triggered when a single push is made on Bitbucket?"
+id: 997
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/997/
+originalpath: https://success.docker.com/Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket%3F
+source: https://success.docker.com/@api/deki/pages/997/contents
+tags:
+- tag: "article:topic"
+- tag: "component:hub"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+ <div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+  <span id="Overview">
+  </span>
+  <h2 id="1-0">
+   Overview
+  </h2>
+  <p>
+   There are multiple automated builds triggered when a single push is made on Bitbucket. This can be resolved by checking the number of services/webhooks linked in the Bitbucket account settings.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+ <div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+  <span id="Symptoms">
+  </span>
+  <h2 id="1-1">
+   Symptoms
+  </h2>
+  <p>
+   You can see more than one automated build entry made for a single push made.
+  </p>
+  <p>
+   <b id="docs-internal-guid-3f69f409-f6e6-652c-e453-066c1b1909e4">
+    <img height="139" src="/kb/images/997-0.png" width="624"/>
+   </b>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+ <div class="mt-section" id="section_3" mt-section-origin="Cloud/Solve/Why_are_there_multiple_automated_builds_triggered_when_a_single_push_is_made_on_Bitbucket?">
+  <span id="Resolution">
+  </span>
+  <h2 id="1-2">
+   Resolution
+  </h2>
+  <ol>
+   <li>
+    Log into your Bitbucket account.
+    <br/>
+   </li>
+   <li>
+    Navigate to the repository settings page to check for additional webhooks/services configured.
+    <br/>
+   </li>
+   <li>
+    Under ‘
+    <strong>
+     Workflow
+    </strong>
+    ’, click on
+    <strong>
+     Services
+    </strong>
+    and ensure that there are no services configured as displayed in the screenshot below:
+    <br/>
+    <b id="docs-internal-guid-3f69f409-f6e7-05d2-b1e0-cadec473c1ce">
+     <img height="329" src="/kb/images/997-1.png" width="624"/>
+    </b>
+    <br/>
+   </li>
+   <li>
+    Next, click on
+    <strong>
+     Webhooks
+    </strong>
+    and ensure that only one entry is configured as displayed in the screenshot below:
+    <br/>
+    <b id="docs-internal-guid-3f69f409-f6e7-8d5b-d724-ae84d98f62ec">
+     <img height="327" src="/kb/images/997-2.png" width="624"/>
+    </b>
+    <br/>
+   </li>
+   <li>
+    If there are any additional entries, remove them by clicking the
+    <strong>
+     Delete
+    </strong>
+    button.
+   </li>
+  </ol>
+ </div>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-hub/" class="button outline-btn">Continue troubleshooting Docker Hub</a><br><a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

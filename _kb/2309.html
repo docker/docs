@@ -1,0 +1,49 @@
+---
+title: "When upgrading from Docker EE 17.03 to Docker EE 17.06, 17.06 repo not found"
+id: 2309
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2309/
+originalpath: https://success.docker.com/KBase/When_upgrading_from_Docker_EE_17.03_to_Docker_EE_17.06%2C_17.06_repo_not_found
+source: https://success.docker.com/@api/deki/pages/2309/contents
+tags:
+- tag: "article:howto"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "upgrade"
+---
+{% raw %}
+<p>
+ When upgrading from one major release to another, such as Docker EE 17.03 to Docker EE 17.06, you need to add the new repository and then follow the installation instructions.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/When_upgrading_from_Docker_EE_17.03_to_Docker_EE_17.06,_17.06_repo_not_found">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-0">
+  Resolution
+ </h2>
+ <p>
+  To resolve this issue, add the Docker EE 17.06 repo manually. The repo name varies by platform.
+ </p>
+ <ol>
+  <li>
+   Go to the Docker Engine installation docs:
+   <a class="link-https" href="/engine/installation/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/installation/">
+    https://docs.docker.com/engine/installation/
+   </a>
+  </li>
+  <li>
+   Click on the platform on which you are upgrading Docker EE.
+  </li>
+  <li>
+   Follow the instructions in the
+   <strong>
+    SET UP THE REPOSITORY
+   </strong>
+   section for your platform.
+  </li>
+ </ol>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

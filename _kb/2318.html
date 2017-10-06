@@ -1,0 +1,1125 @@
+---
+title: "Docker Reference Architecture: Design Considerations and Best Practices to Modernize Traditional Apps (MTA) with Docker EE"
+id: 2318
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2318/
+originalpath: https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE
+source: https://success.docker.com/@api/deki/pages/2318/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:docker-17.03.0-ee-5"
+- tag: "testedon:docker-17.06.1-ee"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Lee Namba";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Introduction">
+ </span>
+ <h2 id="1-0">
+  Introduction
+ </h2>
+ <p>
+  The Docker Containers as a Service (CaaS) platform delivers a secure, managed application environment for developers to build, ship, and run enterprise applications and custom business processes. Containerize legacy apps with Docker Enterprise Edition (EE) to reduce costs, enable portability across infrastructure, and increase security.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="What_You_Will_Learn">
+ </span>
+ <h2 id="1-1">
+  What You Will Learn
+ </h2>
+ <p>
+  In an enterprise, there can be hundreds or even thousands of traditional or legacy applications developed by in-house and outsourced teams. Application technology stacks can vary from a simple Excel macro, to multi-tier J2EE, all the way to clusters of elastic microservices deployed on a hybrid cloud. Applications are also deployed to several heterogeneous environments (development, test, UAT, staging, production, etc.), each of which can have very different requirements. Packaging an application in a container with its configuration and dependencies guarantees that the application will always work as designed in any environment.
+ </p>
+ <p>
+  In this document you will learn best practices for modernizing traditional applications with Docker EE. It starts with high-level decisions such as what applications to Dockerize and methodology, then moves on to more detailed decisions such as what components to put in images, what configuration to put in containers, where to put different types of configuration, and finally how to store assets for building images and configuration in version control.
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="What_Applications_to_Modernize.3F">
+ </span>
+ <h2 id="1-2">
+  What Applications to Modernize?
+ </h2>
+ <p>
+  Deciding which applications to containerize depends on the difficulty of the Dockerizing versus the potential gains in speed, portability, compute density, etc. The following sections describe, in order of increasing difficulty, different categories of components and approaches for containerizing them.
+ </p>
+ <div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Stateless">
+  </span>
+  <h3 id="2-0">
+   Stateless
+  </h3>
+  <p>
+   In general, components which are stateless are the easiest to Dockerize because there is no need to take into account persistent data such as with databases or a shared filesystem. This is also a general best practice for microservices and allows them to scale easier as each new instance can receive requests without any synchronization of state.
+  </p>
+  <p>
+   Some examples of these are:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Web servers with static resources
+    </strong>
+    — Apache, Nginx, IIS
+   </li>
+   <li>
+    <strong>
+     Application servers with stateless applications
+    </strong>
+    — Tomcat, nodeJS, JBoss, Symphony, .NET
+   </li>
+   <li>
+    <strong>
+     Microservices
+    </strong>
+    — Spring Boot, Play
+   </li>
+   <li>
+    <strong>
+     Tools
+    </strong>
+    — Maven, Gradle, scripts, tests
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Stateful">
+  </span>
+  <h3 id="2-1">
+   Stateful
+  </h3>
+  <p>
+   Components which are stateful are not necessarily harder to Dockerize. However, because the state of the component must be stored or synchronized with other instances, there are operational considerations.
+  </p>
+  <p>
+   Some examples of these are:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Application servers with stateful applications
+    </strong>
+    — There is often a need to store user sessions in an application. Two approaches to handling this case are to use a load balancer with session affinity to ensure the user always goes to the same container instance or to use an external session persistence mechanism which all container instances share. There are also some components that provide native clustering such as portals or persistence layer caches. It is usually best to let the native software manage synchronization and states between instances. Having the instances on the same overlay network allows them to communicate with each other in a fast, secure way.
+   </li>
+   <li>
+    <strong>
+     Databases
+    </strong>
+    — Databases usually need to persist data on a filesystem. The best practice is to only containerize the database engine while keeping its data on the container host itself. This can be done using a host volume, for example:
+    <code>
+     $ docker run -dit -v /var/myapp/data:/var/lib/postgresql/data postgres
+    </code>
+   </li>
+   <li>
+    <strong>
+     Applications with shared filesystems
+    </strong>
+    - Content Management Systems (CMS) use filesystems to store documents such as PDFs, pictures, Word files, etc. This can also be done using a host volume which is often mounted to a shared filesystem so several instances of the CMS can access the files simultaneously.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Complex_Product_Installation">
+  </span>
+  <h3 id="2-2">
+   Complex Product Installation
+  </h3>
+  <p>
+   Components that have a complex production installation are usually the hardest to Dockerize because they cannot be captured in a Dockerfile.
+  </p>
+  <p>
+   Some examples of these are:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Non-scriptable installation
+    </strong>
+    — These can include GUI-only installation/configuration or products that require multi-factor authentication.
+   </li>
+   <li>
+    <strong>
+     Non-idempotent installation process
+    </strong>
+    — Some installation processes can be asynchronous where the installation script has terminated but then starts background processes. The completion of the entire installation process includes waiting for a batch process to run or a cluster to synchronize without returning a signal or clear log message.
+   </li>
+   <li>
+    <strong>
+     Installation with external dependencies
+    </strong>
+    — Some products require an external system to reply for downloading or activation. Sometimes for security reasons this can only be done on a specific network or for a specific amount of time making it difficult to script the installation process.
+   </li>
+   <li>
+    <strong>
+     Installation that requires fixed IP address
+    </strong>
+    — Some products require a fixed IP address for a callback at install time but can then be configured once installed to use a hostname or DNS name. Since container IP address are dynamically generated, the IP address could be difficult to determine at build time.
+   </li>
+  </ul>
+  <p>
+   In this case instead of building an image from a Dockerfile the image should be build by first running a base container, installing the product, and then saving the changes out to an image. An example of this is:
+  </p>
+  <pre>
+<code> $ docker commit -a "John Smith" -m "Installed CMS" mycontainer cms:2
+</code></pre>
+  <blockquote>
+   <p>
+    <strong>
+     Tip
+    </strong>
+    : Tools or Test Container. When debugging services that have dependencies on each other, it is often helpful to create a container with tools to test connectivity or the health of a component. Common cases are network tools like telnet, netcat, curl, wget, SQL clients, or logging agents. This avoids adding unnecessary debugging tools to the containers that run the production loads.
+   </p>
+  </blockquote>
+ </div>
+</div>
+<div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Methodology">
+ </span>
+ <h2 id="1-3">
+  Methodology
+ </h2>
+ <p>
+  Two different use cases for modernizing traditional applications are:
+ </p>
+ <ul>
+  <li>
+   <strong>
+    End of Life
+   </strong>
+   — Containerizing an application without further development
+  </li>
+  <li>
+   <strong>
+    Continued Development
+   </strong>
+   — Containerizing an application that has ongoing development
+  </li>
+ </ul>
+ <p>
+  Depending on the use case, the methodology for containerizing the application can change. The following sections discuss each of them.
+ </p>
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="End_of_Life">
+  </span>
+  <h3 id="2-3">
+   End of Life
+  </h3>
+  <p>
+   An application that is at its end of life has no further development or upgrades. There is no development team, and it is only maintained by operations. There is no requirement to deploy the application in multiple environments (development, test, uat, staging, production) because there are no new versions to test. To containerize this type of application, the best solution would be to copy the contents of the existing server into an image. The Docker community provides open source tools such as Image2Docker to do this, which will create a Dockerfile based upon analysis of existing Windows or Linux machines:
+  </p>
+  <ul>
+   <li>
+    <a class="link-https" href="https://github.com/docker/communitytools-image2docker-win" rel="external nofollow" target="_blank">
+     Image2Docker for Windows
+    </a>
+   </li>
+   <li>
+    <a class="link-https" href="https://github.com/docker/communitytools-image2docker-linux" rel="external nofollow" target="_blank">
+     Image2Docker for Linux
+    </a>
+   </li>
+  </ul>
+  <p>
+   Once a Dockerfile is generated with these tools, it can then be further modified and operationalized depending on the complexity of application. An image can then be built from the Dockerfile and run by an operations team in Docker EE.
+  </p>
+ </div>
+ <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Continued_Development">
+  </span>
+  <h3 id="2-4">
+   Continued Development
+  </h3>
+  <p>
+   If the application will continue to be actively developed, then there are other considerations to take into account. When containerizing an application it might be tempting to refactor, re-architect, or upgrade it at the same time. We recommend starting with a “lift and shift” approach where the application is first containerized with the minimal amount of changes possible. The application can be regression tested before further modifications are made. Some rules of thumb are:
+  </p>
+  <ul>
+   <li>
+    Keep the existing application architecture
+   </li>
+   <li>
+    Keep the same versions of OS, components, and application
+   </li>
+   <li>
+    Keep the deployment simple (static and not elastic)
+   </li>
+  </ul>
+  <p>
+   Once the application is containerized, it will then be much easier and faster to implement and track changes such as:
+  </p>
+  <ul>
+   <li>
+    Upgrade to a newer version of application server
+   </li>
+   <li>
+    Refactor to microservices
+   </li>
+   <li>
+    Dynamically scale or elastic deployment
+   </li>
+  </ul>
+  <p>
+   In a "lift and shift" scenario the choice of base libraries or components such as an application server or language version as well as the underlying OS are already determined by the legacy application. The next step is determining the best way to integrate this "stack" into a Docker image. There are several approaches to this depending on the commonality of the components, the customization of components in the application, and adherence to any enterprise support policies. There are different ways to obtain a stack of components in an image:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Open source image
+    </strong>
+    — A community image from
+    <a class="link-https" href="https://hub.docker.com" rel="external nofollow" target="_blank">
+     Docker Hub
+    </a>
+   </li>
+   <li>
+    <strong>
+     Certified image
+    </strong>
+    — A certified image from the
+    <a class="link-https" href="https://store.docker.com" rel="external nofollow" target="_blank">
+     Docker Store
+    </a>
+   </li>
+   <li>
+    <strong>
+     Enterprise image
+    </strong>
+    — An internal image built, maintained, and distributed by an enterprise-wide devops team
+   </li>
+   <li>
+    <strong>
+     Custom image
+    </strong>
+    — A custom image built for the application by the development team
+   </li>
+  </ul>
+  <p>
+   While the open source and certified images can be pulled and used "as is" the enterprise and custom images must be built from Dockerfiles. One way of creating an initial Dockerfile is to use the Image2Docker tools mentioned before. Another option is to copy the referenced Dockerfile of an image found in Docker Hub or Store.
+  </p>
+  <p>
+   The following table summarizes the advantages and disadvantages of each choice:
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+     </th>
+     <th>
+      <strong>
+       Open-source
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Certified
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Enterprise
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Custom
+      </strong>
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      Advantages
+     </td>
+     <td>
+      <ul>
+       <li>
+        Get up and running quickly
+       </li>
+       <li>
+        Community support
+       </li>
+       <li>
+        Free
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Get up and running quickly
+       </li>
+       <li>
+        Certification
+       </li>
+       <li>
+        Commercial support
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Can implement enterprise policies and tools
+       </li>
+       <li>
+        Can choose versions of stack components
+       </li>
+       <li>
+        More flexible
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Can choose versions of stack components
+       </li>
+       <li>
+        Most flexibility
+       </li>
+       <li>
+        Developers have full control over image
+       </li>
+      </ul>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Disadvantages
+     </td>
+     <td>
+      <ul>
+       <li>
+        Might not have the correct versions of stack components
+       </li>
+       <li>
+        Less flexibility
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Might not have the correct versions of stack components
+       </li>
+       <li>
+        Less flexibility
+       </li>
+       <li>
+        Cost
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Must build, test, and maintain images
+       </li>
+       <li>
+        Must provide support
+       </li>
+      </ul>
+     </td>
+     <td>
+      <ul>
+       <li>
+        Must build, test, and maintain images
+       </li>
+       <li>
+        Must provide support
+       </li>
+       <li>
+        No benefiting from enterprise-wide tools
+       </li>
+      </ul>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <p>
+   A common enterprise scenario is to use a combination of private and custom images. Typically, an enterprise will develop a hierarchy of base images depending on how diverse their technology stacks are. The next section describes this concept.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Image_Hierarchy">
+ </span>
+ <h2 id="1-4">
+  Image Hierarchy
+ </h2>
+ <p>
+  Docker images natively provide inheritance. One of the benefits of deriving from base images is that any changes to a base or upstream image are inherited by the child image simply by rebuilding that image without any change to the child Dockerfile. By using inheritance, an enterprise can very simply enforce policies with no changes to the Dockerfiles for their many applications. Typically, an enterprise will develop a hierarchy of base images depending on how diverse their technology stacks are. The following is an example of an image hierarchy.
+ </p>
+ <p>
+  <img alt="Image Hierarchy" class="internal" src="/kb/images/2318-0.png"/>
+ </p>
+ <p>
+  On the left are the enterprise-wide base images typically provided by the global operations team, and on the right are the application images. Even on the application side, depending on how large an application or program is, there can be a hierarchy as well.
+ </p>
+ <blockquote>
+  <p>
+   <strong>
+    Tip:
+   </strong>
+   Create a project base image. In a project team with a complicated application stack there are often common libraries, tools, configurations, or credentials that are specific to the project but not useful to the entire enterprise. Put these items in a "project base image" from which all project images derive.
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="What_to_Include_in_an_Image">
+ </span>
+ <h2 id="1-5">
+  What to Include in an Image
+ </h2>
+ <p>
+  Another question that arises when modernizing is what components of an application stack to put in an image. You can include an entire application stack such as the the official
+  <a class="link-https" href="https://hub.docker.com/r/gitlab/gitlab-ce/" rel="external nofollow" target="_blank">
+   GitLab image
+  </a>
+  , or you can do the opposite, which would be to break up an existing monolithic application into microservices each residing in its own image.
+ </p>
+ <div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Image_Granularity">
+  </span>
+  <h3 id="2-5">
+   Image Granularity
+  </h3>
+  <p>
+   In general, it is best to have one component per image. For example, a reverse proxy, an application server, or a database engine would each have its own image. What about an example where several web applications (e.g. war) are deployed on the same application server? Should they be separated and each have its own image or should they be in the same image? The criteria for this decision are similar to non-containerized architectural decisions:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Release Lifecycle
+    </strong>
+    — Are the application release schedules tightly coupled or are they independent?
+   </li>
+   <li>
+    <strong>
+     Runtime Lifecycle
+    </strong>
+    — If one application stops functioning should all application be stopped?
+   </li>
+   <li>
+    <strong>
+     Scalability
+    </strong>
+    — Do the applications need to be scaled separately or can they be scaled together?
+   </li>
+   <li>
+    <strong>
+     Security
+    </strong>
+    — Does one application need a higher level of security such as TLS?
+   </li>
+   <li>
+    <strong>
+     High Availability
+    </strong>
+    — Is one application mission critical needing redundancy and the others can tolerate a single point of failure and downtime?
+   </li>
+  </ul>
+  <p>
+   Existing legacy applications will already have groupings of applications per application server or machine based upon operational experience and the above criteria. In a pure “lift and shift” scenario for example the entire application server can be put in one container.
+  </p>
+  <p>
+   Similarly with microservices, the same criteria apply. For example, consider a microservice that depends on a logging agent to push logs to a centralized logging database. The following diagram shows two different strategies for a high availability deployment for the microservice.
+  </p>
+  <p>
+   <img alt="Image Granularity" class="internal" src="/kb/images/2318-1.png"/>
+  </p>
+  <p>
+   If the microservice and logging agent are loosely coupled, they can be run in separate containers such as in the configuration on the left. However, if the service and the logging agent are tightly coupled and their release lifecycles are identical, then putting the two processes in the same container can simplify deployments and upgrades as illustrated in the configuration on the right. To manage multiple processes there are several lightweight init systems for containers such as tini, dumb-init, and runit.
+  </p>
+ </div>
+ <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Hardening_Images">
+  </span>
+  <h3 id="2-6">
+   Hardening Images
+  </h3>
+  <p>
+   A question that arises frequently is which parts of the component should go into an image? The engine or server, the application itself, the configuration files? There are several main approaches:
+  </p>
+  <ul>
+   <li>
+    Create only a base image and inject the things that vary per release or environment
+   </li>
+   <li>
+    Create an image per release and inject the things that vary per environment
+   </li>
+   <li>
+    Create an image per release and environment
+   </li>
+  </ul>
+  <p>
+   In some cases, a component does not have an application associated with it or its configuration does not vary per environment, so a base image is appropriate. An example of this might be a reverse proxy or a database. In other cases such as an application which requires an application server, using a base image would require mounting a volume for a certain version of an application.
+  </p>
+  <p>
+   The following table summarizes the advantages and disadvantages of each choice:
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+     </th>
+     <th>
+      <strong>
+       Base Image
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Release Image
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Environment Image
+      </strong>
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      What's inside the image
+     </td>
+     <td>
+      OS, middleware, dependencies
+     </td>
+     <td>
+      Base image, release artifacts, configuration
+      <strong>
+       generic
+      </strong>
+      to the environment
+     </td>
+     <td>
+      Release image, configuration
+      <strong>
+       specific
+      </strong>
+      to the environment
+     </td>
+    </tr>
+    <tr>
+     <td>
+      What's outside the image
+     </td>
+     <td>
+      Release artifacts, configuration, secrets
+     </td>
+     <td>
+      Configuration
+      <strong>
+       specific
+      </strong>
+      to the environment, secrets
+     </td>
+     <td>
+      Secrets
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Advantages
+     </td>
+     <td>
+      Most flexible at run time, simple, one image for all use cases
+     </td>
+     <td>
+      Some flexibility at run time while securing a specific version of an application
+     </td>
+     <td>
+      Most portable, traceable, and secure as all dependencies are in the image
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Disadvantages
+     </td>
+     <td>
+      Less portable, traceable, and secure as dependencies are not included in the image
+     </td>
+     <td>
+      Less flexible, requires management of release images
+     </td>
+     <td>
+      Least flexible, requires management of many images
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Examples
+     </td>
+     <td>
+      Tomcat (dtr.example.com/base/tomcat7:3)
+     </td>
+     <td>
+      Tomcat + myapp-1.1.war (dtr.example.com/myapp/tomcat7:3)
+     </td>
+     <td>
+      Tomcat + myapp-1.1.war + META-INF/context.xml (dtr.example.com/myapp/tomcat7:3-dev)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <p>
+   Usually a good choice is to use a release image. This gives the best combination of a sufficiently immutable image while maintaining the flexibility of deploying to different environments and topologies. How to configure the images per different environments is discussed in the next section.
+  </p>
+  <p>
+   <a name="ConfigurationManagement">
+   </a>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Configuration_Management">
+ </span>
+ <h2 id="1-6">
+  Configuration Management
+ </h2>
+ <p>
+  A single enterprise application will typically have four to twelve environments to deploy on before going into production. Without Docker installing, configuring, and managing these environments, a configuration management system such as Puppet, Chef, Salt, Ansible, etc. would be used. Docker natively provides mechanisms through Dockerfiles and
+  <code>
+   docker-compose
+  </code>
+  files to manage the configuration of these environments as code, and thus configuration management can be handled through existing version control tools already used by development teams.
+ </p>
+ <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Environment_Topologies">
+  </span>
+  <h3 id="2-7">
+   Environment Topologies
+  </h3>
+  <p>
+   The topologies of application environments can be different in order to optimize resources. In some environments it doesn't make sense to deploy and scale all of the components in an application stack. For example, in functional testing only one instance of a web server is usually needed whereas in performance testing several instances are needed, and the configuration is tuned differently. Some common topologies are:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Development
+    </strong>
+    — A single instance per component, debug mode
+   </li>
+   <li>
+    <strong>
+     Integration, Functional testing, UAT, Demonstration
+    </strong>
+    - A single instance per component, small dataset, and integration to test external services, debug mode
+   </li>
+   <li>
+    <strong>
+     Performance Testing
+    </strong>
+    — Multiple instances per component, large dataset, performance tuning
+   </li>
+   <li>
+    <strong>
+     Robustness Testing
+    </strong>
+    — Multiple instances per component, large dataset, integration to test external services, batch processing, and disaster recovery, debug mode
+   </li>
+   <li>
+    <strong>
+     Production and Staging
+    </strong>
+    — Multiple instances per component, production dataset, integration to production external services, batch processing, and disaster recovery, performance tuning
+   </li>
+  </ul>
+  <p>
+   The configuration of components and how they are linked to each other is specified in the
+   <code>
+    docker-compose
+   </code>
+   file. Depending on the environment topology, a different
+   <code>
+    docker-compose
+   </code>
+   can be used. The
+   <a class="link-https" href="/compose/extends/#extending-services" rel="external nofollow" target="_blank">
+    extends
+   </a>
+   feature can be used to create a hierarchy of configurations. For example:
+  </p>
+  <pre>
+<code>myapp/
+  common.yml &lt;- common configurations
+  docker-compose-dev.yml &lt;- development environment specific configurations which extend common.yml
+  docker-compose-int.yml
+  docker-compose-prod.yml
+</code></pre>
+ </div>
+ <div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Configuration_Buckets">
+  </span>
+  <h3 id="2-8">
+   Configuration Buckets
+  </h3>
+  <p>
+   In a typical application stack there are tens or even hundreds of properties to configure in a variety of places. When building images and running containers or services there are many choices as to where and when a property should be set depending on how that property is used. It could be in a Dockerfile,
+   <code>
+    docker-compose
+   </code>
+   file, environment variable, environment file, property file, entry point script, etc. This can quickly become very confusing in a complicated image hierarchy especially when trying to adopt DRY principles. The following table shows some common groupings based on lifecycles to help determine where to put configurations.
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <strong>
+       When
+      </strong>
+     </th>
+     <th>
+      <strong>
+       What
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Where
+      </strong>
+     </th>
+     <th>
+      <strong>
+       Examples
+      </strong>
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      Yearly build time
+     </td>
+     <td>
+      Enterprise policies and tools
+     </td>
+     <td>
+      Enterprise base image Dockerfiles
+     </td>
+     <td>
+      <code>
+       FROM centos6.6
+      </code>
+      <br/>
+      <code>
+       RUN yum -y --noplugins install bzip2 tar sudo curl net-tools
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Monthly build time
+     </td>
+     <td>
+      Application policies and tools
+     </td>
+     <td>
+      Application base image Dockerfiles
+     </td>
+     <td>
+      <code>
+       COPY files/dynatrace-agent-6.1.0.7880-unix.jar /opt/dynatrace/
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Monthly/weekly build time
+     </td>
+     <td>
+      Application release
+     </td>
+     <td>
+      Release image Dockerfiles
+     </td>
+     <td>
+      <code>
+       COPY files/MY_APP_1.3.1-M24_1.war /opt/jboss/standalone/deployments/
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Weekly/daily deploy time
+     </td>
+     <td>
+      Static environment configuration
+     </td>
+     <td>
+      Environment variables, docker-compose, .env
+     </td>
+     <td>
+      <code>
+       environment:
+      </code>
+      <br/>
+      -
+      <code>
+       MOCK=true
+      </code>
+      <br/>
+      -
+      <code>
+       GATEWAY_URL=
+       <a class="link-https" href="https://example.com/ws" rel="external nofollow" target="_blank" title="https://example.com/ws">
+        https://example.com/ws
+       </a>
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Deploy time
+     </td>
+     <td>
+      Dynamic environment configuration
+     </td>
+     <td>
+      Secrets, entrypoint.sh, vault, CLI, volumes
+     </td>
+     <td>
+      <code>
+       $ curl -H "X-Vault-Token: f3b09679-3001-009d-2b80-9c306ab81aa6" -X GET
+       <a class="link-https" href="https://vlt.example.com:8200/v1/secret/db" rel="external nofollow" target="_blank" title="https://vlt.example.com:8200/v1/secret/db">
+        https://vlt.example.com:8200/v1/secret/db
+       </a>
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Run time
+     </td>
+     <td>
+      Elastic environment configuration
+     </td>
+     <td>
+      Service discovery, profiling, debugging, volumes
+     </td>
+     <td>
+      <code>
+       $ consul-template -consul consul.example.com:6124 \
+      </code>
+      <br/>
+      <code>
+       -template "/tmp/nginx.ctmpl:/var/nginx/nginx.conf:service nginx restart"
+      </code>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <p>
+   The process of figuring out where to configure properties is very similar to code refactoring. For example, properties and their values that are identical in child images can be abstracted into a parent image.
+  </p>
+ </div>
+ <div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Secrets_Management">
+  </span>
+  <h3 id="2-9">
+   Secrets Management
+  </h3>
+  <p>
+   Starting with Docker EE 17.03 (and Docker CS Engine 1.13), native
+   <a href="/kb/1908/" rel="internal">
+    secrets management
+   </a>
+   is supported. Secrets can be created and managed using RBAC in Docker EE. Although Docker EE can manage all secrets, there might already be an existing secrets management system, or there might be the requirement to have one central system to manage secrets in Docker and non-Docker environments. In these cases, a simple strategy to adopt for Docker environments is to create a master secret managed by Docker EE which can then be used in an entry point script to access the exiting secrets management system at startup time. The recovered secrets can then be used within the container.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Dockerfile_Best_Practices">
+ </span>
+ <h2 id="1-7">
+  Dockerfile Best Practices
+ </h2>
+ <p>
+  As the enterprise IT landscape and the Docker platform evolve, best practices around the creation of Dockerfiles have emerged. Docker keeps a list of best practices on
+  <a class="link-https" href="/engine/userguide/eng-image/dockerfile_best-practices/" rel="external nofollow" target="_blank">
+   docs.docker.com
+  </a>
+  .
+ </p>
+ <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Docker_Files_and_Version_Control">
+  </span>
+  <h3 id="2-10">
+   Docker Files and Version Control
+  </h3>
+  <p>
+   Docker truly allows the concept of "Infrastructure as Code" to be applied in practice. The files that Docker uses to build, ship, and run containers are text-based definition files and can be stored in version control. There are different text-based files related to Docker depending on what they are used for in the development pipeline.
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Files for creating images
+    </strong>
+    — Dockerfiles,
+    <code>
+     docker-compose.yml
+    </code>
+    ,
+    <code>
+     entrypoint.sh
+    </code>
+    , and configuration files
+   </li>
+   <li>
+    <strong>
+     Files for deploying containers or services
+    </strong>
+    —
+    <code>
+     docker-compose.yml
+    </code>
+    , configuration files, and run scripts
+   </li>
+  </ul>
+  <p>
+   These files are used by different teams from development to operations in the development pipeline. Organizing them in version control is important to have an efficient development pipeline.
+  </p>
+  <p>
+   If you are using a "release image" strategy, it can be a good idea to separate the files for building images and those used for running them. The files for building images can usually be kept in the same version control repository as the source code of an application. This is because release images usually follow the same lifecycle as the source code.
+  </p>
+  <p>
+   For example:
+  </p>
+  <pre>
+<code>myapp/
+  src/
+  test/
+  Dockerfile
+  docker-compose.yml &lt;- build images only
+  conf/
+    app.properties
+    app.xml
+    entrypoint.sh
+</code></pre>
+  <blockquote>
+   <p>
+    <strong>
+     Tip:
+    </strong>
+    A
+    <code>
+     docker-compose
+    </code>
+    file with only
+    <code>
+     <a class="link-https" href="/compose/compose-file/#build" rel="external nofollow" target="_blank" title="https://docs.docker.com/compose/compose-file/#build">
+      build
+     </a>
+    </code>
+    configurations for different components in an application stack can be a convenient way to build the whole application stack or individual components in one file.
+   </p>
+  </blockquote>
+  <p>
+   The files for running containers or services follow a different lifecycle, so they can be kept in a separate repository. In this example, all of the configurations for the different environments are kept in a single branch. This allows for very simple version control strategy, and configurations for all environments can be viewed in one place.
+  </p>
+  <p>
+   For example:
+  </p>
+  <pre>
+<code>myapp/
+  common.yml
+  docker-compose-dev.yml
+  docker-compose-int.yml
+  docker-compose-prod.yml
+  conf/
+    dev.env
+    int.env
+    prod.env
+</code></pre>
+  <p>
+   However, this single branch strategy quickly becomes difficult to maintain when different environments need to deploy different versions of an application. A better strategy is to have each environment's run configuration is in a separate branch. For example:
+  </p>
+  <pre>
+<code>myapp/ &lt;- int branch
+  docker-compose.yml
+  conf/
+    app.env
+</code></pre>
+  <p>
+   The advantages of this are multiple:
+  </p>
+  <ul>
+   <li>
+    Tags per release can be placed on a branch, allowing an environment to be easily rolled back to any prior tag.
+   </li>
+   <li>
+    Listing the history of changes to the configuration of a single environment becomes trivial.
+   </li>
+   <li>
+    When a new application release requires the same modification to all of the different environments and configuration files, it can be done using the merge function from the version control as opposed to copying and pasting the changes into each configuration file.
+   </li>
+  </ul>
+ </div>
+ <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+  <span id="Repositories_for_Large_Files">
+  </span>
+  <h3 id="2-11">
+   Repositories for Large Files
+  </h3>
+  <p>
+   When building Docker images, inevitably there will be large binary files that need to be used. Docker build does not let you access files outside of the context path, and it is not a good idea to store these directly in a version control, especially a distributed one such as git, as the repositories will rapidly become too large and unwieldy.
+  </p>
+  <p>
+   There are several strategies for storing large files:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Web Server
+    </strong>
+    — They can be stored on a shared filesystem, served by a web server, and then accessed by exposing them with the
+    <code>
+     ADD &lt;URL&gt; &lt;dest&gt;
+    </code>
+    command in the Dockerfile. This is the easiest method to setup, but there is no support for versions of files or RBAC on files.
+   </li>
+   <li>
+    <strong>
+     Repository Manager
+    </strong>
+    — They can be stored as files in a repository manager such as Nexus or Artifactory, which provide support for versions and RBAC.
+   </li>
+   <li>
+    <strong>
+     Centralized Version Control
+    </strong>
+    — They can be stored as files in a centralized version control system such as SVN, which eliminates the problem of pulling all versions of large binary files.
+   </li>
+   <li>
+    <strong>
+     Git Large File Storage
+    </strong>
+    — They can be stored using Git LFS. This gives you all of the benefits of git, and the Docker build is under one context. However, there is a learning curve to using Git LFS.
+   </li>
+  </ul>
+ </div>
+</div>
+<div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE">
+ <span id="Summary">
+ </span>
+ <h2 id="1-8">
+  Summary
+ </h2>
+ <p>
+  This document discusses best practices for modernizing traditional applications to Docker. It starts with high-level decisions such as what applications to Dockerize and methodology, then moves on to more detailed decisions such as what components to put in images, what configuration to put in containers, where to put different types of configuration, and finally how to store assets for building images and configuration in version control. Follow these best practices to modernize your traditional applications.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

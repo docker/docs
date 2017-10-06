@@ -1,0 +1,188 @@
+---
+title: "Technical Support"
+id: 1587
+draftstate: active
+deleted: false
+layout: docs
+permalink: /kb/1587/
+originalpath: https://success.docker.com/Support
+source: https://success.docker.com/@api/deki/pages/1587/contents
+tags:
+- tag: "article:topic-category"
+---
+{% raw %}
+<script>
+ /*<![CDATA[*/
+$(function() {
+    dscPopulateList($("#dsc-PoliciesTarget"), 'li', "tag:article\\:policy", 6);
+    dscPopulateList($("#dsc-FAQTarget"), 'li', "tag:article\\:nontechnical", 12);
+
+    // DISPLAY THE MATCHING SEARCH RESULTS ON KEYUP (min 3 characters)
+    var timer = null;
+    $('#dsc-dynamic-search').keyup(function() {
+        window.clearTimeout(timer);
+        query = $(this).val();
+
+        if(query.length >= 3) {
+            timer = window.setTimeout(function() {
+                $("#dsc-RecommendationsContainer").html('<ul id="dsc-RecommendationsTarget"></ul>');
+                dscPopulateList($("#dsc-RecommendationsTarget"), 'li', query, 4);
+            }, 250);
+        } else {
+            $("#dsc-RecommendationsContainer").empty();
+        }
+    });
+
+    // parse the url query if it exists (used in next section)
+    var urlQueries = {};
+    if (document.location.search != "") {
+        $.each(document.location.search.substr(1).split('&'), function(c, q){
+            var i = q.split('=');
+            i[0] = $("<span>" + decodeURIComponent(i[0]) + "</span>").text();
+            i[1] = $("<span>" + decodeURIComponent(i[1]) + "</span>").text().replace(/\+/g, ' ');
+            urlQueries[i[0]] = i[1];
+        });
+    }
+
+    // append the actual error to the description if available.
+    $("#dsc-cs-submit-button").click(function() {
+        if (urlQueries['ProviderId'] == "0SOG0000000XZAg") {
+            $("#dsc-cs-desc-target").val($("#dsc-cs-desc-source").val() + "\n---\n" + urlQueries['ErrorCode'] + ": " + urlQueries['ErrorDescription']);
+        } else {
+            $("#dsc-cs-desc-target").val($("#dsc-cs-desc-source").val());
+        }
+
+        $("#dsc-cs-form").submit();
+    });
+
+    // highlite the note for folks incoming from support. SSO error redirect
+    if (urlQueries['ProviderId'] == "0SOG0000000XZAg") {
+        var flashMessage = "<p>Oops! It looks like there was an issue authenticating you to the Docker Support Site:</p>";
+        flashMessage += "<p>" + urlQueries['ErrorCode'] + ": " + urlQueries['ErrorDescription'] + "</p>";
+        flashMessage += "<p>If you are a Docker EE subscriber please use the Customer Service form below to report this issue so that we can help resolve it.</p>";
+
+        Deki.Ui.EmptyFlash();
+        Deki.Ui.Flash(flashMessage);
+    }
+});
+/*]]>*/
+</script>
+<main class="main">
+ <div class="container">
+  <div class="col-md-9 col-md-offset-1">
+   <div class="mt-section" id="section_1" mt-section-origin="Support">
+    <span id="Technical_Support">
+    </span>
+    <h1 id="0-0">
+     Technical Support
+    </h1>
+    <p class="lead">
+     Access Docker's SLA-based enterprise technical support. Expert assistance you can rely on for enterprise deployments.
+    </p>
+   </div>
+  </div>
+  <div class="row block">
+   <div class="col-md-12 block">
+    <div class="mt-section" id="section_2" mt-section-origin="Support">
+     <span id="Enterprise_Edition_Support">
+     </span>
+     <h4 id="3-0">
+      Enterprise Edition Support
+     </h4>
+     <div class="row">
+      <div class="col-md-6">
+       <p>
+        Docker EE subscribers can access Docker's enterprise technical support team, manage cases, and view entitlements using the Docker Support Site.
+                            Usage information is available in the
+        <a href="/kb/1524/" rel="internal">
+         Support Site User Guide
+        </a>
+        .
+       </p>
+      </div>
+      <div class="col-md-6">
+       <ul id="dsc-PoliciesTarget">
+       </ul>
+      </div>
+     </div>
+     <div class="text-center block">
+      <a class="btn btn-primary link-https" href="https://support.docker.com/" rel="external nofollow" role="button" style="color:#fff" target="_blank">
+       Login to the Docker Support Site »
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="row" style="background-color: #FBFBFC;">
+   <div class="col-md-12 block">
+    <div class="mt-section" id="section_3" mt-section-origin="Support">
+     <span id="Customer_Service">
+     </span>
+     <h4 id="3-1">
+      Customer Service
+     </h4>
+     <div class="row">
+      <div class="col-md-6">
+       <ul id="dsc-FAQTarget">
+       </ul>
+      </div>
+      <div class="col-md-6">
+       <p>
+        Docker ID holders can obtain assistance with non-technical customer service issues using the form below.
+       </p>
+       <p>
+       </p>
+       <form action="https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" id="dsc-cs-form" method="POST">
+        <input name="orgid" type="hidden" value="00DG0000000ksDa"/>
+        <input name="recordType" type="hidden" value="012G0000001cmuo"/>
+        <input name="retURL" type="hidden" value="https://success.docker.com/?cid=asf.submitted"/>
+        <p>
+        </p>
+        <div class="mt-section" id="section_4" mt-section-origin="Support">
+         <span id="Contact_Information">
+         </span>
+         <h5 id="4-0">
+          Contact Information
+         </h5>
+         <input id="name" maxlength="80" name="name" placeholder="Full Name" required="required" size="20" type="text"/>
+         <br/>
+         <input id="email" maxlength="80" name="email" placeholder="Email Address" required="required" size="20" type="text"/>
+         <p>
+         </p>
+        </div>
+        <div class="mt-section" id="section_5" mt-section-origin="Support">
+         <span id="Subject">
+         </span>
+         <h5 id="4-1">
+          Subject
+         </h5>
+         <input id="dsc-dynamic-search" maxlength="80" name="subject" placeholder="How can we help you?" required="required" size="20" type="text"/>
+         <div id="dsc-RecommendationsContainer" style="margin-left: 1em;">
+         </div>
+         <p>
+         </p>
+        </div>
+        <div class="mt-section" id="section_6" mt-section-origin="Support">
+         <span id="Description">
+         </span>
+         <h5 id="4-2">
+          Description
+         </h5>
+         <textarea id="dsc-cs-desc-source" name="description_source" placeholder="Please describe your issue in detail."></textarea>
+         <input id="dsc-cs-desc-target" name="description" type="hidden"/>
+         <div class="mt-submit text-center">
+          <button class="btn btn-default" id="dsc-cs-submit-button" name="submit" type="submit">
+           Submit
+          </button>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</main>
+
+{% endraw %}

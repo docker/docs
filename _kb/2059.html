@@ -1,0 +1,363 @@
+---
+title: "RBAC Example/Overview"
+id: 2059
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2059/
+originalpath: https://success.docker.com/KBase/RBAC_Example%2F%2FOverview
+source: https://success.docker.com/@api/deki/pages/2059/contents
+tags:
+- tag: "article:tutorial"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:docker-17.03.0-ee-1"
+- tag: "testedon:docker-17.06.1-ee"
+- tag: "testedon:ucp-2.1.0"
+---
+{% raw %}
+<p>
+ Role-Based Access Control (RBAC) in UCP is covered in the documentation here:
+ <a class="link-https" href="/datacenter/ucp/2.1/guides/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.1/guides/">
+  https://docs.docker.com/datacenter/ucp/2.1/guides/
+ </a>
+</p>
+<p>
+ This guide expands on the concepts discussed in the documentation. It is an example of how a team of engineers might use this for their projects, and how each concept relates to their usecase.
+</p>
+<p>
+ There are two developer groups and one devops group. Each of these people might want to deploy various applications they are working on. There are two example "projects." One is called "project alpha," the other is called "project beta." In production, the beta project has some sensitive information that should not be accessed by the developers. Instead, only the head of the devops group should be allowed to access that environment.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/RBAC_Example//Overview">
+ <span id="Users">
+ </span>
+ <h4 id="3-0">
+  Users
+ </h4>
+ <p>
+  First, each person needs a user account in UCP. All accounts are created with a default access of "no access."
+ </p>
+ <ul>
+  <li>
+   billy
+  </li>
+  <li>
+   alice
+  </li>
+  <li>
+   chuck
+  </li>
+  <li>
+   dave
+  </li>
+  <li>
+   leonard
+  </li>
+  <li>
+   earl
+  </li>
+  <li>
+   frank
+  </li>
+  <li>
+   gertrude
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/RBAC_Example//Overview">
+ <span id="Teams">
+ </span>
+ <h4 id="3-1">
+  Teams
+ </h4>
+ <p>
+  Users are then organized into teams. There are two development teams. Leonard is on both teams. Technically, there is only one devops team, but only Gertrude is authorized to handle containers that have sensitive data. Because of this, creating a new team with just Gertrude in it allows Gertrude to have a different level of access.
+ </p>
+ <ul>
+  <li>
+   Dev Alpha
+   <ul>
+    <li>
+     billy
+    </li>
+    <li>
+     alice
+    </li>
+    <li>
+     leonard
+    </li>
+   </ul>
+  </li>
+  <li>
+   Dev Beta
+   <ul>
+    <li>
+     chuck
+    </li>
+    <li>
+     dave
+    </li>
+    <li>
+     leonard
+    </li>
+   </ul>
+  </li>
+  <li>
+   DevOps
+   <ul>
+    <li>
+     earl
+    </li>
+    <li>
+     frank
+    </li>
+    <li>
+     gertrude
+    </li>
+   </ul>
+  </li>
+  <li>
+   DevOps (sensitive)
+   <ul>
+    <li>
+     gertrude
+    </li>
+   </ul>
+  </li>
+ </ul>
+ <p>
+  Here's a screenshot showing how the Dev Team Alpha looks inside the user interface:
+ </p>
+ <p>
+  <img alt="" class="internal default" src="/kb/images/2059-0.png"/>
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/RBAC_Example//Overview">
+ <span id="Labels">
+ </span>
+ <h4 id="3-2">
+  Labels
+ </h4>
+ <p>
+  Each deployed unit of services gets a label. That label is unique across the entire UCP installation. There is a dev, staging, and production deploy for each project: alpha and beta. The beta project handles sensitive data.
+ </p>
+ <ul>
+  <li>
+   alpha-dev
+  </li>
+  <li>
+   alpha-staging
+  </li>
+  <li>
+   alpha-production
+  </li>
+  <li>
+   beta-dev
+  </li>
+  <li>
+   beta-staging
+  </li>
+  <li>
+   beta-production
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/RBAC_Example//Overview">
+ <span id="Permissions">
+ </span>
+ <h4 id="3-3">
+  Permissions
+ </h4>
+ <p>
+  This image illustrates what each permission is:
+  <br/>
+  <img data-base-url="https://docker.atlassian.net/wiki" data-image-height="432" data-image-src="https://docker.atlassian.net/wiki/download/attachments/135168163/permissions_ucp.png?version=1&amp;modificationDate=1494306319618&amp;cacheVersion=1&amp;api=v2" data-image-width="899" data-linked-resource-container-version="18" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="permissions_ucp.png" data-linked-resource-id="135493873" data-linked-resource-type="attachment" data-linked-resource-version="1" data-location="TAM Accounts &gt; Davita Meeting Notes &gt; permissions_ucp.png" data-unresolved-comment-count="0" height="250" src="/images/permissions_ucp.png" title="TAM Accounts &gt; Davita Meeting Notes &gt; permissions_ucp.png"/>
+ </p>
+ <p>
+ </p>
+ <p>
+  Here is how each of these permissions will map into each of these environments for each of these teams. For example, the dev team for the alpha project should have access to the alpha-dev environment and be able to do deploys. There is not anyone with "full control" permissions here because there is not anyone that needs access to the kernel, and they do not need to be able to run privileged containers. The members of the "DevOps (sensitive)" team are all also on the DevOps team, so it is only necessary to add the one permission difference that is needed. If a person is on multiple teams, the highest permission that is granted for a given resource label is applied.
+ </p>
+ <table>
+  <colgroup>
+   <col/>
+   <col/>
+   <col/>
+   <col/>
+   <col/>
+   <col/>
+   <col/>
+  </colgroup>
+  <tbody>
+   <tr>
+    <th>
+     Team \ Environment
+    </th>
+    <th>
+     alpha-dev
+    </th>
+    <th>
+     alpha-staging
+    </th>
+    <th>
+     alpha-production
+    </th>
+    <th>
+     beta-dev
+    </th>
+    <th>
+     beta-staging
+    </th>
+    <th colspan="1">
+     beta-production
+    </th>
+   </tr>
+   <tr>
+    <th>
+     Dev Team Alpha
+    </th>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td colspan="1">
+     -
+    </td>
+   </tr>
+   <tr>
+    <th>
+     Dev Team Beta
+    </th>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td colspan="1">
+     -
+    </td>
+   </tr>
+   <tr>
+    <th>
+     DevOps
+    </th>
+    <td>
+     View
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td colspan="1">
+     View
+    </td>
+   </tr>
+   <tr>
+    <th colspan="1">
+     DevOps (sensitive)
+    </th>
+    <td colspan="1">
+     -
+    </td>
+    <td colspan="1">
+     -
+    </td>
+    <td colspan="1">
+     -
+    </td>
+    <td colspan="1">
+     -
+    </td>
+    <td colspan="1">
+     -
+    </td>
+    <td colspan="1">
+     Restricted Control
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <p>
+  <br/>
+  Now, if anyone tries to access a resource that they have only "view" permissions to, they will get an "access denied" error message. If they don't have any permissions for a resource at all, the resource will not even show up. It will be like it does not exist.
+ </p>
+ <p>
+  If any of these users want to deploy a resource, they
+  <strong>
+   must
+  </strong>
+  select a label for that new resource, or they will get an error because they did not specify a label.  Any pre-existing resources
+  <b>
+   must
+  </b>
+  have a label applied to them describing who has access.
+ </p>
+ <pre>
+<code>---
+version: '3.1'
+
+services:
+  demodocker:
+    image: nginx:alpine
+    environment:
+      - DOMAIN=test.ucp.local
+    ports:
+      - 80
+      - 443
+    networks:
+      - frontend
+    volumes:
+      - static_content:/var/www/html:ro
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 1G
+      labels:
+        - com.docker.ucp.access.label=alpha-dev
+
+networks:
+  frontend:
+    labels:
+      com.docker.ucp.access.label=alpha-dev
+
+volumes:
+  static_content:
+    labels:
+      com.docker.ucp.access.label=alpha-dev</code>
+</pre>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

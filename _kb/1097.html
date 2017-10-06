@@ -1,0 +1,64 @@
+---
+title: "Docker Cloud Agent: System Containers"
+id: 1097
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1097/
+originalpath: https://success.docker.com/Cloud/Solve/Docker_Cloud_Agent%3A_System_Containers
+source: https://success.docker.com/@api/deki/pages/1097/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudagent"
+- tag: "Docker Cloud"
+- tag: "Docker Cloud Agent"
+- tag: "product:cloud"
+- tag: "system containers"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Docker_Cloud_Agent:_System_Containers">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  Why do I see running containers from images starting with
+  <code>
+   dockercloud/
+  </code>
+  on my node after installing the Docker Cloud Agent?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Docker_Cloud_Agent:_System_Containers">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  Once you install the Docker Cloud Agent, you can still use the
+  <code>
+   docker
+  </code>
+  command as you would otherwise. For example, running
+  <code>
+   docker ps
+  </code>
+  will show you a list of containers running.
+  <strong>
+   Please note
+  </strong>
+  that there will be containers running from images starting with
+  <code>
+   dockercloud/
+  </code>
+  which you may not recognize. These are
+  <strong>
+   system containers
+  </strong>
+  that Docker Cloud provisions as part of providing it's services.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

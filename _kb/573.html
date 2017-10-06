@@ -1,0 +1,149 @@
+---
+title: "What is the difference between EC2-Classic and EC2-VPC?"
+id: 573
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/573/
+originalpath: https://success.docker.com/Cloud/Solve/What_is_the_difference_between_EC2-Classic_and_EC2-VPC%3F
+source: https://success.docker.com/@api/deki/pages/573/contents
+tags:
+- tag: "article:topic"
+- tag: "aws"
+- tag: "Docker Cloud"
+- tag: "ec2"
+- tag: "ec2-classic"
+- tag: "ec2-vpc"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/What_is_the_difference_between_EC2-Classic_and_EC2-VPC?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  What is the difference between EC2-Classic &amp; EC2-VPC?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/What_is_the_difference_between_EC2-Classic_and_EC2-VPC?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  According to
+  <a class="external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html" rel="external nofollow" target="_blank">
+   Amazon EC2 documentation
+  </a>
+  there are two supported platforms to deploy your instances:
+ </p>
+ <table>
+  <thead>
+   <tr>
+    <th>
+     Platform
+    </th>
+    <th>
+     Introduced in
+    </th>
+    <th>
+     Description
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     EC2-Classic
+    </td>
+    <td>
+     The original release of Amazon EC2
+    </td>
+    <td>
+     Your instances run in a single, flat network that you share with other customers.
+    </td>
+   </tr>
+   <tr>
+    <td>
+     EC2-VPC
+    </td>
+    <td>
+     The original release of Amazon VPC
+    </td>
+    <td>
+     Your instances run in a virtual private cloud (VPC) that's logically isolated to your AWS account.
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <p>
+  Quoting the same documentation:
+ </p>
+ <pre>
+<code>Your account may support both the EC2-VPC and EC2-Classic platforms, on a region-by-region basis. If you created your account after 2013-12-04, it supports EC2-VPC only. To find out which platforms your account supports, see Supported Platforms. If your accounts supports EC2-VPC only, we create a default VPC for you. A default VPC is a VPC that is already configured and ready for you to use. [...]
+</code></pre>
+ <p>
+  Docker Cloud strives to maintain compatibility with both platforms, so the steps to deploy a managed instance launched by Docker Cloud are:
+ </p>
+ <ol>
+  <li>
+   Create an SSH keypair named
+   <code>
+    dockercloud-&lt;uuid&gt;
+   </code>
+   .
+  </li>
+  <li>
+   Try to deploy the instance in Classic platform. If you see any errors (i.e. type of instance cannot be located without a VPC, like
+   <code>
+    t2
+   </code>
+   instances), then try to deploy the instance in VPC platform.
+  </li>
+  <li>
+   In VPC platform, look for a VPC tagged with the name
+   <code>
+    dc-vpc
+   </code>
+   . If one exists, use it to deploy the instance. If one does not exist, create it, and create any elements needed for the deployment (subnets, security groups, route tables, gateways).
+  </li>
+  <li>
+   Create an EBS volume of type
+   <code>
+    gp2
+   </code>
+   with the size specified on the
+   <strong>
+    Create node cluster wizard
+   </strong>
+   or with the parameter
+   <code>
+    disk
+   </code>
+   through the
+   <a class="link-https" href="/apidocs/docker-cloud/#create-a-new-node-cluster" rel="external nofollow" target="_blank">
+    API
+   </a>
+   . This disk will be used to store Docker containers and images.
+  </li>
+ </ol>
+ <p>
+  To add a compatibility layer between Classic and VPC, Amazon detects if your account only supports VPC platform, and when you deploy an instance in Classic mode it does not fail, but places the instance in the default VPC (with a default subnet) created in the region for you. If your account only supports VPC, Docker Cloud deploys all your nodes in Amazon’s default VPC.
+ </p>
+ <p>
+  We believe that the VPC platform has greater benefits that Classic for the user, so we now only deploy to VPC. This removes step 1 in the Classic instructions. Instead, Docker Cloud always looks for a VPC tagged
+  <code>
+   dc-vpc
+  </code>
+  . This way you can now define and customize your own VPC in AWS portal, name it as
+  <code>
+   dc-vpc
+  </code>
+  and deploy a node cluster in the region the VPC was created. Docker Cloud will find it and use it! The rest of elements that Docker Cloud needs for the deployment are also customizable. You can check their tag names in the following section.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

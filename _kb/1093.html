@@ -1,0 +1,96 @@
+---
+title: "How do I test if DTR is correctly integrated with UCP?"
+id: 1093
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1093/
+originalpath: https://success.docker.com/KBase/How_do_I_test_if_DTR_is_correctly_integrated_with_UCP%3F
+source: https://success.docker.com/@api/deki/pages/1093/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "DTR"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "ucp"
+- tag: "usecase:caas"
+---
+{% raw %}
+<p>
+ To determine whether or not your DTR is correctly integrated with your UCP, first make sure you have followed the steps in
+ <a class="link-https" href="/ucp/dtr-integration/" rel="freeklink" title="https://docs.docker.com/ucp/dtr-integration/">
+  https://docs.docker.com/ucp/dtr-integration/
+ </a>
+ to integrate UCP with your DTR instance. This document also includes the steps to verify the integration.
+</p>
+<p>
+ The following steps will further help you ensure the integration. They will show you how to push an image to your DTR and then pull that image from UCP
+</p>
+<p>
+ NOTE: Replace
+ <code>
+  <span class="replaceabletext">
+   &lt;your-dtr-instance&gt;
+  </span>
+ </code>
+ with the domain name for your DTR such as
+ <code>
+  <span class="replaceabletext">
+   dtr.example.net
+  </span>
+ </code>
+ for you. Also make sure that this domain name can be reached from your UCP server before continuing.
+</p>
+<ol>
+ <li>
+  From any machine, log into your DTR, pull an image ( such as `
+  <strong>
+   busybox
+  </strong>
+  `, from Docker Hub ), and then push it to DTR:
+  <pre>
+docker login
+docker pull busybox
+docker tag busybox <span class="replaceabletext">&lt;your-dtr-instance&gt;</span>/admin/mybusybox
+docker login <span class="replaceabletext">&lt;your-dtr-instance&gt;</span>
+</pre>
+ </li>
+ <li>
+  From your UCP, create a repository named
+  <code>
+   admin/mybusybox
+  </code>
+  .
+ </li>
+ <li>
+  Push the image to your DTR:
+  <pre>
+docker push <span class="replaceabletext">&lt;your-dtr-instance&gt;</span>/admin/mybusybox
+</pre>
+ </li>
+ <li>
+  Go to the
+  <strong>
+   Containers
+  </strong>
+  page in your UCP, and click on
+  <strong>
+   +Deploy Container
+  </strong>
+  .
+ </li>
+ <li>
+  Deploy your container with the image you pushed, and click on
+  <strong>
+   Run Container
+  </strong>
+  .
+ </li>
+</ol>
+<p>
+ If the deployment is successful, that means your UCP was able to pull images from your DTR without any problem.
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

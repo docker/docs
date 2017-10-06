@@ -1,0 +1,1821 @@
+---
+title: "Docker Reference Architecture: Docker EE Best Practices and Design Considerations"
+id: 1911
+draftstate: active
+deleted: false
+layout: docs
+permalink: /kb/1911/
+originalpath: https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Docker_EE_Best_Practices_and_Design_Considerations
+source: https://success.docker.com/@api/deki/pages/1911/contents
+tags:
+- tag: "article:reference"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Anoop Kumar and Alex Drahon";
+/*]]>*/
+</script>
+<div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_1" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="Introduction">
+  </span>
+  <h2 id="1-0">
+   Introduction
+  </h2>
+  <p>
+   Docker Enterprise Edition (Docker EE) is the enterprise container platform from Docker to be used across the entire software supply chain. It is a fully-integrated solution for container-based application development, deployment, and management. With integrated end-to-end security, Docker EE enables application portability by abstracting your infrastructure so that applications can move seamlessly from development to production.
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_2" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="What_You_Will_Learn">
+  </span>
+  <h2 id="1-1">
+   What You Will Learn
+  </h2>
+  <p>
+   This reference architecture describes a standard, production-grade, Docker EE deployment. It also details the components of Docker EE, how they work, how to automate deployments, how to manage users and teams, how to provide high availability for the platform, and how to manage the infrastructure.
+  </p>
+  <p>
+   Some environment-specific configuration details are not be provided. For instance, load balancers vary greatly between cloud platforms and on-premises infrastructure platform. For these types of components, general guidelines to environment-specific resources are provided.
+   <a name="ddc-components">
+   </a>
+  </p>
+ </div>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_3" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="Understanding_Docker_Components">
+  </span>
+  <h2 id="1-2">
+   Understanding Docker Components
+  </h2>
+  <p>
+   From development to production, Docker EE provides a seamless platform for containerized applications both on-premises and on the Cloud. Docker EE is available in three tiers to meet different application needs. Both Docker EE Standard (formerly known as Docker Datacenter) and Docker EE Advanced include the following components:
+  </p>
+  <ul>
+   <li>
+    Docker CS Engine, the commercially supported Docker Engine
+   </li>
+   <li>
+    Universal Control Plane (UCP), the web-based, unified cluster and application management solution
+   </li>
+   <li>
+    Docker Trusted Registry (DTR), a resilient and secure image management repository
+   </li>
+  </ul>
+  <p>
+   Together they provide an integrated solution with the following design goals:
+  </p>
+  <ul>
+   <li>
+    Agility — the Docker API is used to interface with the platform so that operational features do not slow down application delivery
+   </li>
+   <li>
+    Portability — the platform abstracts details of the infrastructure for applications
+   </li>
+   <li>
+    Control — the environment is secure by default, provides robust access control, and logging of all operations
+   </li>
+  </ul>
+  <p>
+   To achieve these goals the platform must be resilient and highly available. This reference architecture demonstrates this robust configuration.
+  </p>
+  <div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_4" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Docker_CS_Engine">
+    </span>
+    <h3 id="2-0">
+     Docker CS Engine
+    </h3>
+    <p>
+     The building block of Docker EE, the Docker Commercially Supported Engine (CS Engine) is responsible for container-level operations, interaction with the OS, providing the Docker API, and running the Swarm cluster. The Engine is also the integration point for infrastructure, including the OS resources, networking, and storage.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_5" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Universal_Control_Plane">
+    </span>
+    <h3 id="2-1">
+     Universal Control Plane
+    </h3>
+    <p>
+     UCP extends CS Engine by providing an integrated application management platform. It is both the main interaction point for users and the integration point for applications. UCP runs an agent on all nodes in the cluster to monitor them and a set of services on the
+     <em>
+      controller nodes
+     </em>
+     . This includes
+     <em>
+      identity services
+     </em>
+     to manage users,
+     <em>
+      Certificate Authorities
+     </em>
+     (CA) for user and cluster PKI, the main
+     <em>
+      controller
+     </em>
+     providing the Web UI and API, data stores for UCP state, and a
+     <em>
+      Classic Swarm
+     </em>
+     service for backward compatibility.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_6" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Docker_Trusted_Registry">
+    </span>
+    <h3 id="2-2">
+     Docker Trusted Registry
+    </h3>
+    <p>
+     The DTR is an application managed by, and integrated with UCP, that provides Docker images distribution and security services. The DTR uses UCP's identity services to provide Single Sign-On (SSO), and establish a mutual trust to integrate with its PKI. It runs as a set of services on one or several
+     <em>
+      replicas
+     </em>
+     : the
+     <em>
+      registry
+     </em>
+     to store and distribute images, an image signing service, a Web UI, an API, and data stores for image metadata and DTR state.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_7" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Swarm_Mode">
+    </span>
+    <h3 id="2-3">
+     Swarm Mode
+    </h3>
+    <p>
+     To provide a seamless cluster based on a number of nodes, DDC relies on CS Engine's
+     <a class="link-https" href="/engine/swarm/key-concepts/" rel="external nofollow" target="_blank">
+      <em>
+       swarm mode
+      </em>
+     </a>
+     capability. Swarm mode divides nodes between
+     <em>
+      workers
+     </em>
+     , nodes running application workloads defined as services, and
+     <em>
+      managers
+     </em>
+     , nodes in charge of maintaining desired state, managing the cluster's internal PKI, and providing an API. Managers can also run workloads. In a Docker EE environment they run UCP controllers and shouldn't run anything else.
+    </p>
+    <p>
+     The Swarm mode service model provides a declarative desired state for workloads, scalable to a number of
+     <em>
+      tasks
+     </em>
+     (the service's containers), accessible through a stable resolvable name, and optionally exposing an end-point. Exposed services are accessible from any node on a cluster-wide reserved port, reaching tasks through the
+     <em>
+      routing mesh
+     </em>
+     , a fast routing layer using high-performance switching in the Linux kernel. This set of features enable internal and external discoverability for services, UCP's
+     <em>
+      HTTP Routing Mesh
+     </em>
+     (HRM) adding hostname-to-service mapping.
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_8" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="A_Standard_Deployment_Architecture">
+  </span>
+  <h2 id="1-3">
+   A Standard Deployment Architecture
+  </h2>
+  <p>
+   This section demonstrates a standard, production-level architecture for Docker EE using 10 nodes: 3 UCP controllers, 3 nodes for the DTR, and 4 worker nodes for application workloads. The number of worker nodes is arbitrary, most environments will have more depending on applications needs, it doesn't change the architecture or the cluster configuration.
+  </p>
+  <p>
+   Access to the environment is done through 3 Load Balancers (or 3 load balancer virtual hosts) with corresponding DNS entries for the UCP controllers, the DTR replicas, and the applications running in the cluster.
+  </p>
+  <p>
+   The DTR replicas use shared storage for images. S3-compatible object storage (the default) and NFS storage are both covered in this section.
+  </p>
+  <p>
+   <img alt="Standard, Production-Level Docker EE Infrastructure" class="internal" src="/kb/images/1911-0.png"/>
+  </p>
+  <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_9" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Node_Size">
+    </span>
+    <h3 id="2-4">
+     Node Size
+    </h3>
+    <p>
+     A node is a machine in the cluster (virtual or physical) with Docker Engine running on it. When provisioning each node, assign it a role: UCP Controller, DTR, or worker node so that they are protected from running application workloads.
+    </p>
+    <p>
+     To decide what size the node should be in terms of CPU, RAM, and storage resources, consider the following:
+    </p>
+    <ol>
+     <li>
+      All nodes should at least fulfill the minimal requirements for UCP 2.0: 2 GB of RAM and 3 GB of storage. More detailed requirements are in the
+      <a class="link-https" href="/datacenter/ucp/2.0/guides/installation/system-requirements/" rel="external nofollow" target="_blank">
+       UCP documentation
+      </a>
+      .
+     </li>
+     <li>
+      UCP Controller nodes should be provided with more than the minimal requirements but won't need much more if nothing else runs on them.
+     </li>
+     <li>
+      Ideal Worker nodes size will vary based on your workloads, so it is impossible to define a universal standard size.
+     </li>
+     <li>
+      Other considerations like target density (average number of container per node), whether one standard node type or several are preferred, and other operational considerations might also influence sizing.
+     </li>
+    </ol>
+    <p>
+     If possible, node size should be determined by experimentation and testing actual workloads, and they should be refined iteratively. A good starting point is to select a standard or default machine type in your environment and use this size only. If your standard machine type provides more resources than the UCP Controllers need, it makes sense to have a smaller node size for these. Whatever the starting choice, it's important to monitoring resource usage and cost to improve the model.
+    </p>
+    <p>
+     Two example scenarios:
+    </p>
+    <ul>
+     <li>
+      One standard node size: 2 VCPU, 8 GB RAM, 20 GB storage
+     </li>
+     <li>
+      Two node sizes: 2 VCPU, 8 GB RAM, 20 GB storage for UCP Controllers and 4 VCPU, 64 GB RAM, 40 GB storage for worker nodes
+     </li>
+    </ul>
+    <p>
+     Depending on your OS of choice, storage configuration for Docker Engine might require some planning. Refer to
+     <a href="/kb/928/" rel="internal">
+      the Support Matrix
+     </a>
+     to see what
+     <a class="link-https" href="/engine/userguide/storagedriver/selectadriver/" rel="external nofollow" target="_blank">
+      storage drivers
+     </a>
+     are supported for your host OS. This is especially important if you are using RHEL or CentOS, which use
+     <a class="link-https" href="/engine/userguide/storagedriver/device-mapper-driver/#/configure-direct-lvm-mode-for-production" rel="external nofollow" target="_blank">
+      device mapper with direct-lvm
+     </a>
+     .
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_10" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Load_Balancers">
+    </span>
+    <h3 id="2-5">
+     Load Balancers
+    </h3>
+    <p>
+     Load balancers configuration should be done before installation, including the creation of DNS entries. Most load balancers should work with Docker EE. The only requirements are TCP passthrough and the ability to do health checks on an HTTPS endpoint.
+    </p>
+    <p>
+     In our example architecture, the three UCP controllers ensure UCP resiliency in case of node failure or controller reconfiguration. Access to UCP through the GUI or API is always done using TLS. The load balancer is configured for simple TCP pass-through on port 443, using a custom HTTPS health check at
+     <code>
+      https://&lt;ucp_controller&gt;/_ping
+     </code>
+     .
+    </p>
+    <p>
+     Be sure to create a DNS entry for the UCP host such as
+     <code>
+      ucp.example.com
+     </code>
+     and point to the load balancer.
+    </p>
+    <p>
+     The setup for the three DTR replicas is similar to setting up the UCP controllers. Again, use TCP pass-through to port 443 on the nodes, except the health check is at
+     <code>
+      https://&lt;dtr_replica_node&gt;/health
+     </code>
+     .
+    </p>
+    <p>
+     Create a DNS entry for the DTR host such as
+     <code>
+      dtr.example.com
+     </code>
+     and point it to the load balancer. It's important to keep it as concise as possible because it will be part of the full name of images. For example,
+     <code>
+      user_a
+     </code>
+     's
+     <code>
+      webserver
+     </code>
+     image will be named
+     <code>
+      dtr.example.com/user_a/webserver
+     </code>
+     .
+    </p>
+    <p>
+     The application load balancer provides access to services HTTP endpoints exposed through UCP's HTTP Routing Mesh (HRM). HRM provides a reverse-proxy to map domain names to services that expose ports and are attached to the
+     <code>
+      ucp-hrm
+     </code>
+     overlay network. As an example, the
+     <code>
+      voting
+     </code>
+     application exposes the
+     <code>
+      vote
+     </code>
+     service's port
+     <code>
+      80
+     </code>
+     . The HRM maps
+     <code>
+      <a class="external" href="http://vote.apps.example.com" rel="external nofollow" target="_blank" title="http://vote.apps.example.com">
+       http://vote.apps.example.com
+      </a>
+     </code>
+     to this port on the
+     <code>
+      ucp-hrm
+     </code>
+     overlay network, and the application LB itself maps
+     <code>
+      *.apps.example.com
+     </code>
+     to nodes in the cluster.
+    </p>
+    <p>
+     For more details on load balancing for applications on UCP, see
+     <a href="/kb/1960/" rel="internal">
+      Universal Control Plane 2.0 Service Discovery and Load Balancing
+     </a>
+     .
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_11" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="DTR_Storage">
+    </span>
+    <h3 id="2-6">
+     DTR Storage
+    </h3>
+    <p>
+     The DTR usually needs to store a large number of images. It uses external storage (S3, NFS, etc.), not node storage so that it can be shared between DTR replicas. The DTR replicates metadata and configuration information between replicas, but not image layers themselves. To determine storage size, start with the size of the existing images used in the environment and evolve from there.
+    </p>
+    <p>
+     It's best to use an existing storage solution in your environment so that image storage can benefit from existing operations experience. If you have to chose a new solution, consider using S3-compatible object storage, which maps more closely to registry operations.
+    </p>
+    <p>
+     Refer to
+     <a href="/kb/1456/" rel="internal">
+      An Introduction to Storage Solutions for Docker CaaS
+     </a>
+     for more information about selecting storage solutions.
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_12" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="Recommendations_for_the_Docker_EE_Installation">
+  </span>
+  <h2 id="1-4">
+   Recommendations for the Docker EE Installation
+  </h2>
+  <p>
+   This section details the installation process for the architecture and provide a checklist. It is not a substitute for the documentation, which provides more details and is authoritative in any case. The goal is to help you define a repeatable (and ideally automated) process to deploy, configure, upgrade and expand your Docker EE environment.
+  </p>
+  <p>
+   The three main stages of a Docker EE Standard or Advanced installation are as follows:
+  </p>
+  <ol>
+   <li>
+    Deploying and configuring the infrastructure (hosts, network, storage)
+   </li>
+   <li>
+    Installing and configuring the Docker Engine, running as an application on the hosts
+   </li>
+   <li>
+    Installing and configuring UCP and the DTR, delivered as containers running on the Engine
+   </li>
+  </ol>
+  <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_13" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Infrastructure_Considerations">
+    </span>
+    <h3 id="2-7">
+     Infrastructure Considerations
+    </h3>
+    <p>
+     The
+     <a class="link-https" href="/datacenter/install/linux/" rel="external nofollow" target="_blank">
+      installation documentation
+     </a>
+     details infrastructure requirements for Docker EE Standard and Advanced. It is recommended to use existing or platform specific tools in your environment to provide standardized and repeatable configuration for infrastructure components.
+    </p>
+    <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_14" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Network">
+      </span>
+      <h4 id="3-0">
+       Network
+      </h4>
+      <p>
+       Docker components need to communicate over the network, and the documentation lists the
+       <a class="link-https" href="/datacenter/ucp/2.0/guides/installation/system-requirements/" rel="external nofollow" target="_blank">
+        ports that need to be open
+       </a>
+       for internal cluster communication. Misconfiguration of the cluster's internal network can lead to issues that might be difficult to track down. It's better to start with a relatively simple environment. This reference architecture assumes a single subnet for all hosts and overlay networking for containers.
+      </p>
+      <p>
+       To get more details and evaluate options, consult
+       <a href="/kb/2046/" rel="internal">
+        Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks
+       </a>
+       .
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_15" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Firewall">
+      </span>
+      <h4 id="3-1">
+       Firewall
+      </h4>
+      <p>
+       Access to Docker EE is done using port 443 only (ports 443 and 80 for DTR), whether it's to access the Web UI or the remote API. This makes external firewall configuration simple. In most cases you only need to open ports 80, 443, and 22. Port 22 is for SSH access is optional since Docker EE doesn't require SSH access. Access to applications is through a load balancer using HTTPS. If you expose other TCP services to the outside world, open these ports on the firewall. As explained in the previous section, several ports need to be open for communication inside the cluster. If you have a firewall between some nodes in the cluster, for example, to separate controllers from worker nodes, open the relevant port there too.
+      </p>
+      <p>
+       If encrypted overlay networks are used within the applications, then ESP (Encapsulating Security Payload) or IP Protocol 50 traffic should also be allowed. ESP is not based on TCP or UDP protocols, and it will be used for end to end encapsulation of security payloads / data.
+      </p>
+      <p>
+       <img alt="Docker Ports" class="internal" src="/kb/images/1911-1.png"/>
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_16" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Load_Balancers_2">
+      </span>
+      <h4 id="3-2">
+       Load Balancers
+      </h4>
+      <p>
+       Load balancers are detailed in the previous section. They must be in place before installation and must be provisioned with the right hostnames. External (load balancer) hostnames are used for HA and also for TLS certificates. It's easier not having to reconfigure them during or after installation.
+      </p>
+      <p>
+       Refer to the previous section
+       <a class="mt-self-link" href="#ddc-components" rel="internal">
+        Understanding Docker Components
+       </a>
+       for details about load balancer configuration.
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_17" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Shared_Storage">
+      </span>
+      <h4 id="3-3">
+       Shared Storage
+      </h4>
+      <p>
+       DTR shared storage, used for images in the registry, must be ready and accessible from the DTR nodes. Test it works using an S3 or NFS command line client to avoid having to debug DTR storage configuration.
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_18" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Host_Configuration">
+      </span>
+      <h4 id="3-4">
+       Host Configuration
+      </h4>
+      <p>
+       Host configuration varies based on the OS used and existing configuration standards, but there are some important steps that must be followed after OS installation:
+      </p>
+      <ol>
+       <li>
+        <strong>
+         Clock synchronization
+        </strong>
+        using NTP or similar service. Clock skew can produce hard to debug errors, especially where the Raft algorithm is used (UCP and the DTR).
+       </li>
+       <li>
+        <strong>
+         Static IPs
+        </strong>
+        are required for UCP for all hosts.
+       </li>
+       <li>
+        <strong>
+         Hostnames
+        </strong>
+        are used for node identification in the cluster. The hostname must be set in an non-ephemeral way.
+       </li>
+       <li>
+        <strong>
+         Host firewalls
+        </strong>
+        must allow intra-cluster traffic on all the ports specified in the installation docs.
+       </li>
+       <li>
+        <strong>
+         Storage
+        </strong>
+        must be configured if needed. For example, the
+        <code>
+         devicemapper
+        </code>
+        driver need a logical volume configured before Docker Engine installation.
+       </li>
+      </ol>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_19" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Docker_CS_Engine_Installation_Considerations">
+    </span>
+    <h3 id="2-8">
+     Docker CS Engine Installation Considerations
+    </h3>
+    <p>
+     Detailed installation instructions for CS Engine are
+     <a class="link-https" href="/cs-engine/1.13/" rel="external nofollow" target="_blank">
+      provided by the documentation
+     </a>
+     . To install on machines that don't have Internet access, add these package to your own private repository. After installing the package, make sure the
+     <code>
+      docker
+     </code>
+     service is configured to start on system boot.
+    </p>
+    <p>
+     The best way to change parameters for CS Engine is to use the
+     <code>
+      /etc/docker/daemon.json
+     </code>
+     configuration file. This ensures that the configuration can be reused across different systems and OS in a consistent way. See the documentation for
+     <a class="link-https" href="/engine/reference/commandline/dockerd/#/daemon-configuration-file" rel="external nofollow" target="_blank">
+      the full list of options
+     </a>
+     .
+    </p>
+    <p>
+     Make sure Engine is configured correctly by starting the
+     <code>
+      docker
+     </code>
+     service and verifying the parameters with
+     <code>
+      docker info
+     </code>
+     .
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_20" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="UCP_Installation_Considerations">
+    </span>
+    <h3 id="2-9">
+     UCP Installation Considerations
+    </h3>
+    <p>
+     The UCP installer creates a functional cluster from a set of machines running CS Engine. That includes creating a Swarm cluster and installing the UCP controllers. The default installation mode as described in the
+     <a class="link-https" href="/datacenter/ucp/2.0/guides/installation/#/step-4-install-ucp" rel="external nofollow" target="_blank">
+      Installation Guide
+     </a>
+     is interactive.
+    </p>
+    <p>
+     To perform fully-automated, repeatable deployments, provide more information to the installer:
+    </p>
+    <pre>
+<code>docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /tmp/docker_subscription.lic:/config/docker_subscription.lic \
+  -e UCP_ADMIN_PASSWORD=password --name ucp docker/ucp install --host-address IP_or_interface \
+  --san manager1.example.com --san ucp.example.com 
+</code></pre>
+    <p>
+     Each of these options are explained in the following sections.
+    </p>
+    <div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_21" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="External_Certificates">
+      </span>
+      <h4 id="3-5">
+       External Certificates
+      </h4>
+      <p>
+       By default UCP uses self-signed TLS certificates. For production deployments, it is recommended to use certificates generated by a trusted CA. In most cases, this is your organization's internal CA.
+      </p>
+      <p>
+       The certificates and keys needed are as follows:
+      </p>
+      <ol>
+       <li>
+        The root CA's public certificate
+        <code>
+         ca.pem
+        </code>
+        .
+       </li>
+       <li>
+        The TLS certificate
+        <code>
+         cert.pem
+        </code>
+        . It must also include the public certificates of any intermediate CA and have SANs for all addresses used to access UCP, including the load balancer's hostname (e.g.
+        <code>
+         ucp.example.com
+        </code>
+        ) and the individual controllers' hostnames (e.g.
+        <code>
+         ucp-controller1.example.com
+        </code>
+        ) to access them directly.
+       </li>
+       <li>
+        The TLS private key,
+        <code>
+         key.pem
+        </code>
+        .
+       </li>
+      </ol>
+      <p>
+       To add these automatically during installation, add these files with the exact names to a volume named
+       <code>
+        ucp-controller-server-certs
+       </code>
+       on the machine where you install UCP, and use the
+       <code>
+        --external-server-cert
+       </code>
+       install parameter.
+      </p>
+      <p>
+       It is also possible to add the certificates through the Web UI after installation.
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_22" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_22" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="License_File">
+      </span>
+      <h4 id="3-6">
+       License File
+      </h4>
+      <p>
+       The license file can be provided for installation via the command line as well using a bind-mount (volume) in
+       <code>
+        /config
+       </code>
+       . Specify its location with
+       <code>
+        -v /path/to/docker_subscription.lic:/config/docker_subscription.lic
+       </code>
+       .
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_23" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_23" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Admin_Password">
+      </span>
+      <h4 id="3-7">
+       Admin Password
+      </h4>
+      <p>
+       To make the installation entirely non-interactive, the admin password must be passed using the
+       <code>
+        --admin-password
+       </code>
+       install parameter. The admin username is
+       <code>
+        admin
+       </code>
+       by default. Use
+       <code>
+        --admin-username
+       </code>
+       to change it.
+      </p>
+      <p>
+       The full list of install parameters is provided in the
+       <a class="link-https" href="/datacenter/ucp/2.0/reference/cli/install/#/options" rel="external nofollow" target="_blank">
+        install command documentation
+       </a>
+       .
+      </p>
+     </div>
+    </div>
+    <div class="mt-section" id="section_24" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+     <div class="mt-section" id="section_24" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+      <span id="Adding_Nodes">
+      </span>
+      <h4 id="3-8">
+       Adding Nodes
+      </h4>
+      <p>
+       Once the installation has finished for the first controller node, the two additional controllers must be installed by joining them to the cluster. UCP configures a full controller replica on the manager node in the cluster, so the only command needed on the two controllers is a
+       <code>
+        docker swarm join
+       </code>
+       with the right token. The exact command can be obtained by running
+       <code>
+        docker swarm join-token manager
+       </code>
+       on the first controller.
+      </p>
+      <p>
+       To join the worker nodes, the equivalent command can be obtained with
+       <code>
+        docker swarm join-token worker
+       </code>
+       on any controller:
+      </p>
+      <pre>
+<code>docker swarm join-token worker
+</code></pre>
+      <p>
+       To add a worker to this swarm, run the following command:
+      </p>
+      <pre>
+<code>docker swarm join \
+--token SWMTKN-1-00gqkzjo07dxcxb53qs4brml51vm6ca2e8fjnd6dds8lyn9ng1-092vhgjxz3jixvjf081sdge3p \
+192.168.65.2:2377
+</code></pre>
+      <p>
+       To make sure everything is running correctly, log into UCP at
+       <code>
+        <a class="link-https" href="https://ucp.example.com" rel="external nofollow" target="_blank" title="https://ucp.example.com">
+         https://ucp.example.com
+        </a>
+       </code>
+       .
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="mt-section" id="section_25" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_25" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="DTR_Installation_Considerations">
+    </span>
+    <h3 id="2-10">
+     DTR Installation Considerations
+    </h3>
+    <p>
+     Installation of the DTR is similar to that of UCP. Install and configure one node, and then join replicas to form a full, highly-available setup. For installation of the first instance as well as replicas, point the installer to the node in the cluster it will install on.
+    </p>
+    <p>
+     Certificates and image storage must be configured after installation. Once shared storage is configured, the two replicas can be added with the
+     <code>
+      join
+     </code>
+     command.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_26" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_26" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Validating_the_Deployment">
+    </span>
+    <h3 id="2-11">
+     Validating the Deployment
+    </h3>
+    <p>
+     When installation of everything has finished, tests can be done to validate the deployment. Disable scheduling of workloads on UCP controllers and nodes running the DTR.
+    </p>
+    <p>
+     Basic tests to consider:
+    </p>
+    <ol>
+     <li>
+      Log in through
+      <code>
+       <a class="link-https" href="https://ucp.example.com" rel="external nofollow" target="_blank" title="https://ucp.example.com">
+        https://ucp.example.com
+       </a>
+      </code>
+      as well as directly to a manager node, eg.
+      <code>
+       <a class="link-https" href="https://manager1.example.com" rel="external nofollow" target="_blank" title="https://manager1.example.com">
+        https://manager1.example.com
+       </a>
+      </code>
+      . Make sure the cluster and all nodes are healthy.
+     </li>
+     <li>
+      Test that you can deploy an application following
+      <a class="link-https" href="/datacenter/ucp/2.0/guides/applications/" rel="external nofollow" target="_blank">
+       the example in the documentation
+      </a>
+      .
+     </li>
+     <li>
+      Test that users can download a bundle and connect to the cluster from the CLI. Test that they can use
+      <a class="link-https" href="/compose/overview/" rel="external nofollow" target="_blank">
+       docker-compose
+      </a>
+      .
+     </li>
+     <li>
+      Test DTR with a full image workflow. Make sure storage isn't misconfigured and images are stored in the right place.
+     </li>
+    </ol>
+    <p>
+     Consider building a standard automated test suite to validate new environments and updates. Just testing standard functionality should hit most configuration issues. Make sure you run these tests with a non-admin user, the test user should have similar rights as users of the platform. Measuring time taken by each test can also pinpoint issues with underlying infrastructure configuration. Fully deploying an actual application from your organization should be part of this test suite.
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_27" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_27" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="High_Availability_in_Docker_EE">
+  </span>
+  <h2 id="1-5">
+   High Availability in Docker EE
+  </h2>
+  <p>
+   In a production environment, it is vital that critical services have minimal downtime. It is important to understand how high availability (HA) is achieved in UCP and the DTR, and what to do to when it fails. UCP and DTR use the same principles to provide HA, but UCP is more directly tied to Swarm's features. The general principle is to have core services replicated in a cluster, which allows another node to take over when one fails. Load balancers make that transparent to the user by providing a stable hostname, independent of the actual node processing the request. It's the underlying clustering mechanism that provides HA.
+  </p>
+  <div class="mt-section" id="section_28" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_28" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Swarm">
+    </span>
+    <h3 id="2-12">
+     Swarm
+    </h3>
+    <p>
+     The foundation of UCP HA is provided by Swarm, the clustering functionality of Docker Engine. As detailed in the
+     <a class="link-https" href="/engine/swarm/how-swarm-mode-works/nodes/" rel="external nofollow" target="_blank">
+      Docker Engine documentation
+     </a>
+     , there are two algorithms involved in managing a Swarm cluster: a Gossip protocol for worker nodes and the Raft consensus algorithm for managers. Gossip protocols are
+     <em>
+      eventually consistent
+     </em>
+     , which means that different parts of the cluster might have different versions of a value while new information spreads in the cluster (they are also called
+     <em>
+      epidemic protocols
+     </em>
+     because information spreads like a virus). This allows for very large scale cluster because it's not necessary to wait for the whole cluster to agree on a value, while still allowing fast propagation of information to reach consistency in an acceptable time. Managers handle tasks that need to be based on highly consistent information because they need to make decisions based on global cluster and services state.
+    </p>
+    <p>
+     In practice,
+     <em>
+      high consistency
+     </em>
+     can be difficult to achieve without impeding availability because each write needs to be acknowledged by all participants, and a participant being unavailable or slow to respond will impact the whole cluster. This is explained by the
+     <a class="link-https" href="https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/" rel="external nofollow" target="_blank">
+      CAP Theorem
+     </a>
+     , which (to simplify) states that in the presence of partitions (P) in a distributed system, we have to chose between consistency (C) or availability (A). Consensus algorithms like Raft address this trade-off using a
+     <em>
+      quorum
+     </em>
+     : if a majority of participant agree on a value, it is good enough, the minority participant eventually get the new value. That means that a write needs only acknowledgement from 2 out of 3, 3 out of 5, or 4 out of 7 nodes.
+    </p>
+    <p>
+     Because of the way consensus works, an odd number of nodes is recommended when configuring Swarm. With 3 manager nodes in Swarm, the cluster can temporarily lose 1 and still have a functional cluster, with 5 you can lose 2, and so on. Conversely, you need 2 managers to acknowledge a write in a 3 manager cluster, but 3 with 5 managers, so more managers don't provide more performance or scalability — you are actually replicating more data. Having 4 managers doesn't add any benefits since you still can only lose 1 (majority is 3), and more data is replicated than with just 3. In practice, it is more fragile.
+    </p>
+    <p>
+     If you have 3 managers and lose 2, your cluster is non-functional. Existing services and containers keep running, but new requests are not processed.
+     <strong>
+      A single remaining manager in a cluster doesn't "switch" to single manager mode. It is just a minority node.
+     </strong>
+     You also cannot just promote worker nodes to manager to regain quorum. The failed nodes are still members of the consensus group and need to come back online.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_29" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_29" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="UCP">
+    </span>
+    <h3 id="2-13">
+     UCP
+    </h3>
+    <p>
+     UCP runs a global service across all cluster nodes called
+     <code>
+      ucp-agent
+     </code>
+     . This agent installs a UCP controller on all Swarm manager nodes. There is a one-to-one correspondence between Swarm managers and UCP controllers, but they have different roles. Using its agent, UCP relies on Swarm for HA, but it also includes replicated data stores that rely on their own raft consensus groups that are distinct from Swarm: ucp-auth-store, a replicated database for identity management data, and ucp-kv, a replicated key-value store for UCP configuration data.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_30" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_30" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="DTR">
+    </span>
+    <h3 id="2-14">
+     DTR
+    </h3>
+    <p>
+     The DTR has a replication model that is similar to how UCP works, but it doesn't synchronize with Swarm. It has one replicated component, its datastore, which might also have a lot of state to replicate at one time. It relies on raft consensus.
+    </p>
+    <p>
+     Both UCP controllers and DTR replicas may have a lot more state to replicate when (re)joining the cluster. Some reconfiguration operations can make a cluster member temporary unavailable. With 3 members, it's good practice to wait for the one you reconfigured to get back in sync before reconfiguring a second one, or they could lose quorum. Temporary losses in quorum are easily recoverable, but it still means the cluster is in an unhealthy state. Monitoring the state of controllers to ensure the cluster doesn't stay in that state is critical.
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_31" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_31" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="Backup_and_Restore">
+  </span>
+  <h2 id="1-6">
+   Backup and Restore
+  </h2>
+  <p>
+   The HA setup using multiple nodes works well to provide continuous availability in the case of temporary failure, including planned node downtime for maintenance. For other cases, including the loss of the full cluster, permanent loss of quorum, and data loss due to storage faults, restoring from backup is necessary.
+  </p>
+  <div class="mt-section" id="section_32" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_32" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="UCP_Backup">
+    </span>
+    <h3 id="2-15">
+     UCP Backup
+    </h3>
+    <p>
+     UCP backup is done using the
+     <code>
+      docker/ucp backup
+     </code>
+     command on a controller node. It stops the UCP containers on the node and perform a full backup of the configuration and state of UCP. Some of this information is sensitive, so you should always use the
+     <code>
+      --passphrase
+     </code>
+     option to encrypt the backup. The backup also includes the orgs, teams, and users used by DTR as well as UCP. Regular backups should be scheduled. Here is an example showing how to run the command without user input:
+    </p>
+    <pre>
+<code>UCPID=$(docker run --rm -i --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp id)
+docker run --rm -i --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp backup --id $UCPID --passphrase "secret" &gt; /tmp/backup.tar
+</code></pre>
+    <p>
+     There are two ways to use the backup: - To restore a controller using the
+     <code>
+      docker/ucp restore
+     </code>
+     command (only the backup from that controller can be used) - To install a new cluster using the
+     <code>
+      docker/ucp install --from-backup
+     </code>
+     command (preserves users and configuration)
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_33" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_33" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="DTR_Backup">
+    </span>
+    <h3 id="2-16">
+     DTR Backup
+    </h3>
+    <p>
+     A DTR backup includes configuration information, images metadata, and certificates. Images themselves need to be backed up separately directly from storage. Remember that users and organizations are managed and backed up by UCP.
+    </p>
+    <p>
+     The backup can only be used to create a new DTR, using the
+     <code>
+      docker/dtr restore
+     </code>
+     command.
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_34" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_34" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="Identity_Management">
+  </span>
+  <h2 id="1-7">
+   Identity Management
+  </h2>
+  <p>
+   Accessing resources (images, containers, volumes, networks etc) and functionality within the components of Docker EE (UCP &amp; DTR) require at a minimum, an account and a corresponding password to be accessed. Accounts within Docker EE are identities stored within an internal database, but the source of creating those accounts and the associated access control can be manual (managed or internal) or external through a connection to a directory server (LDAP) or Active Directory (AD). Managing the authorization for these accounts is an extension of coarse and fine grained permissions that are described in the sections below.
+  </p>
+  <div class="mt-section" id="section_35" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_35" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="RBAC_and_Managing_Access_to_Resources">
+    </span>
+    <h3 id="2-17">
+     RBAC and Managing Access to Resources
+    </h3>
+    <p>
+     UCP provides powerful role based access control features which can be seamlessly integrated with enterprise identity management tool sets and address enterprise security requirements. Besides facilitating both coarse-grained and fine-grained security access controls, this feature can be used as an enabler of multi-tenancy within a single UCP cluster sharing a wide range of resources grouped into collections.
+    </p>
+    <p>
+     Access permissions in UCP are managed through grants of roles to subjects over collections of those resources. Access permissions are what define what a user can or cannot do within the system.
+    </p>
+    <p>
+     The default roles in UCP are
+     <code>
+      None
+     </code>
+     ,
+     <code>
+      View Only
+     </code>
+     ,
+     <code>
+      Restricted Control
+     </code>
+     ,
+     <code>
+      Scheduler
+     </code>
+     , and
+     <code>
+      Full Control
+     </code>
+     . The description about these roles and how they relate to each other are detailed in the Reference Architecture
+     <a href="/kb/1908/" rel="internal">
+      Securing Docker EE and Security Best Practices
+     </a>
+     . Each of these roles have a set of operations that define the permissions associated with the role. Additional custom roles can be defined by combining a unique set of permissions. Custom roles can be leveraged to accommodate fine-grained access control as required for certain organizations and security controls.
+    </p>
+    <p>
+     Subjects are individual users or teams within an organization. Teams are typically backed by an LDAP/AD group or search filter. It is also possible to add users manually. But it is not possible to have a hybrid composition of users. In other words, the list of users within a team should be derived from a directory server (e.g. AD) or should be added manually, not both.
+    </p>
+    <p>
+     Collections are groupings of objects within UCP. A collection can be made up of one or many of nodes, stacks, containers, services, volumes, networks, secrets, or configs — or it can hold other collections. To associate a node or a stack or any resource with a collection, that resource should share the label
+     <code>
+      com.docker.ucp.access.label
+     </code>
+     with the collection. A resource can be associated with zero or multiple collections, and a collection can have zero or multiple resources or other child collections in it. Collections within collections allow the structuring of resource objects in a hierarchical nature and can significantly simplify access control. Access provided at a top level collection is inherited by all its children, including any child collections.
+    </p>
+    <p>
+     Consider a very simple use case for this approach. Suppose you define a top level collection called
+     <code>
+      Prod
+     </code>
+     and additional child collections corresponding to each application within
+     <code>
+      Prod
+     </code>
+     . These child collections contain the actual resource objects for the application like stacks, services, containers, volumes, networks, secrets, etc. Now suppose that all members of the IT Operations team require access to all
+     <code>
+      Prod
+     </code>
+     resources. With this setup, even if there are a high number of applications (and by extension, child collections within the
+     <code>
+      Prod
+     </code>
+     collection), the team
+     <code>
+      IT Operations
+     </code>
+     within UCP can be granted access to the
+     <code>
+      Full Control
+     </code>
+     role over the
+     <code>
+      Prod
+     </code>
+     collection alone. The access trickles down to every collection contained within the
+     <code>
+      Prod
+     </code>
+     collection. At the same time, members of a specific application development team can be provided fine-grained access to just the application collection. This model implements a traditional Role Based Access Control (RBAC), where the teams are assigned roles over specific collections of resources.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_36" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_36" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Managed_(Internal)_Authentication">
+    </span>
+    <h3 id="2-18">
+     Managed (Internal) Authentication
+    </h3>
+    <p>
+     Managed mode for authentication and authorization is the default mode in Docker EE Standard and Advanced. In this mode, accounts are directly created using the Docker EE API. User accounts can be created manually by accessing the
+     <strong>
+      User Management —&gt; Users —&gt; Create User
+     </strong>
+     form in the UCP UI. Accounts can also be created and managed in an automated fashion by making HTTP requests to the authentication and authorization RESTful service known as eNZi.
+    </p>
+    <p>
+     User management using the "Managed" mode is recommended only for demo purposes or where the number of users needing to access Docker EE is very small.
+    </p>
+    <p>
+     Pros:
+    </p>
+    <ul>
+     <li>
+      Easy and quick to setup
+     </li>
+     <li>
+      Simple to troubleshoot
+     </li>
+     <li>
+      Appropriate for a small set of users with static roles
+     </li>
+     <li>
+      Managed without leaving the UCP interface
+     </li>
+    </ul>
+    <p>
+     Cons:
+    </p>
+    <ul>
+     <li>
+      User Account management gets cumbersome for larger numbers or when roles need to be managed for several applications.
+     </li>
+     <li>
+      All lifecycle changes such as adding / removing permissions of users need to be accomplished manually user by user.
+     </li>
+     <li>
+      Users must be deleted manually, meaning access may not get cleaned up quickly, making the system less secure.
+     </li>
+     <li>
+      Sophisticated setups of integrating application creation and deployment through LDAP or external systems is not possible.
+     </li>
+    </ul>
+   </div>
+  </div>
+  <div class="mt-section" id="section_37" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_37" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="LDAP_.2F_AD_Integration">
+    </span>
+    <h3 id="2-19">
+     LDAP / AD Integration
+    </h3>
+    <p>
+     The LDAP method of user account authentication can be turned on to manage user access. As the name suggests, this mode enables automatic synchronization of user accounts from a directory server such as Active Directory or OpenLDAP.
+    </p>
+    <p>
+     This method is particularly applicable for enterprise use cases where organizations have a large set of users, typically maintained in a centralized identity store that manages both authentication and authorization. Most of these stores are based on a directory server such as Microsoft's Active Directory or a system that supports the LDAP protocol. Additionally, such enterprises already have mature processes for on-boarding, off-boarding, and managing the lifecycle of changes to user and system accounts. All these can be leveraged to provide a seamless and efficient process of access control within Docker EE.
+    </p>
+    <p>
+     Pros:
+    </p>
+    <ul>
+     <li>
+      Ability to leverage already-established access control processes to grant and revoke permissions
+     </li>
+     <li>
+      Ability to continue managing users and permissions from a centralized system based on LDAP
+     </li>
+     <li>
+      Ability to take advantage of self-cleaning nature of this mode, where non-existent LDAP users are automatically removed from Docker EE on the next sync, thereby increasing security
+     </li>
+     <li>
+      Ability to configure complex, upstream systems such as flat files, database tables using an LDAP proxy, and the automatic time-based de-provisioning of access through AD/LDAP groups
+     </li>
+    </ul>
+    <p>
+     Cons:
+    </p>
+    <ul>
+     <li>
+      Increased complexity compared to Managed mode
+     </li>
+     <li>
+      Higher admin requirements since knowledge on an external system (LDAP) is needed
+     </li>
+     <li>
+      Greater time needed to troubleshoot issues with an extra component (LDAP) in the mix
+     </li>
+     <li>
+      Unexpected changes to Docker EE due to changes made to upstream LDAP/AD systems, which can have unexpected effects on Docker EE
+     </li>
+    </ul>
+    <p>
+     A recommended best practice is to use group membership to control the access of user accounts to resources. Ideally, the management of such group membership is achieved through a centralized Identity Management or a Role Based Access Control system. This provides a standard, flexible, and scalable model to control the authentication and authorization rules within Docker EE through a centralized directory server. Through the Identity Management system, this directory server is kept in sync with user on-boarding, off-boarding, and changes in roles and responsibilities.
+    </p>
+    <p>
+     To change the mode of authentication, use the form at
+     <strong>
+      admin —&gt; Admin Settings —&gt; Authentication &amp; Authorization
+     </strong>
+     in the UCP UI. In this form, toggle the
+     <strong>
+      LDAP ENABLED
+     </strong>
+     field to
+     <strong>
+      Yes
+     </strong>
+     .
+    </p>
+    <p>
+     Accounts that are discovered and subsequently synced from the directory server can be automatically assigned default permissions on their own private collections. To assign additional permissions on non-private collection, those users need to be added to appropriate teams that have the required role(s) assigned.
+    </p>
+    <hr/>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_38" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_38" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="">
+  </span>
+  <h2 id="1-8">
+   <img alt="Auth Configuration - LDAP" class="internal" src="/kb/images/1911-2.png"/>
+  </h2>
+  <p>
+   For details about the LDAP configuration options, read the
+   <a class="link-https" href="/datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/" rel="external nofollow" target="_blank">
+    Integrate with LDAP documentation
+   </a>
+   .
+  </p>
+  <p>
+   The following list highlights important configuration options to consider when setting up LDAP authentication:
+  </p>
+  <ul>
+   <li>
+    In LDAP auth mode, when accounts are discovered, they may not get created within UCP until after the users log into the system. This is controlled by the **Just-In-Time User Provisioning** setting in the LDAP configuration. It is recommended to turn on this setting.
+   </li>
+   <li>
+    A user account on the directory server has to be configured to discover and import accounts from the directory server. This user account need not be a very powerful account. In fact, it is recommended that it is a read-only account that can view the necessary organizationalUnits (`ou`) and query for group memberships. The details for this account are configured using the fields **Reader DN** and **Reader Password**. The **Reader DN** must be in the distinguishedName format.
+   </li>
+   <li>
+    Use secure LDAP if at all possible.
+   </li>
+   <li>
+    Use the **LDAP TEST LOGIN** section of the LDAP configuration to make sure you can connect before switching to LDAP authentication.
+   </li>
+   <li>
+    Once the form is filled out and the test connection succeeds, the sync button provides an option to run a sync immediately without waiting for the next interval. Doing so initiates an LDAP connection and runs the filters to import the users.
+   </li>
+   <li>
+    After the configuration is complete and saved, it should be possible to log in using a valid LDAP/AD account that matched the sync criteria. The only supported login attributes are `uid` and `sAMAccountName`. The account should be in good standing within the LDAP/AD system for the login to be successful within Docker EE.
+   </li>
+   <li>
+    The progress / status of the sync and any errors that occur can be viewed and analyzed on the controllers by running: ``` docker logs ucp-controller ```
+   </li>
+  </ul>
+  <div class="mt-section" id="section_39" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_39" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Organizations_.26_Teams">
+    </span>
+    <h3 id="2-20">
+     Organizations &amp; Teams
+    </h3>
+    <p>
+     User accounts that exist within Docker EE, either through an LDAP sync or manually managed, can be organized into teams. Teams need to be contained within an Organization. Each team created can be granted a role on collections that will allow the members of the team to operate within the associated collection.
+    </p>
+    <p>
+     To create a team, an organization needs to be created first. An organization can be created at
+     <strong>
+      User Management —&gt; Organizations &amp; Teams —&gt; Create Organization
+     </strong>
+     .
+    </p>
+    <p>
+     Consider this example of creating an organization called
+     <code>
+      enterprise-applications
+     </code>
+     :
+    </p>
+    <hr/>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_40" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_40" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_2">
+  </span>
+  <h2 id="1-9">
+   <img alt="Create Organization" class="internal" src="/kb/images/1911-3.png"/>
+  </h2>
+  <p>
+   Teams can be created in the UCP UI by clicking on an organization and then clicking on
+   <strong>
+    Create Team
+   </strong>
+   . The same can be accomplished by using the eNZi API that is described in a later section. Members can be added to the team one-by-one. An alternative method of adding members to a team can be employed if using the LDAP Auth mode. This is based on an automatic sync of discovered accounts from the directory server that was configured to enable the LDAP Auth mode. Finer filters can be applied here which determine which discovered accounts are placed into which teams. A team can have multiple users, and a user can be a member of zero to multiple teams. Below is an example of creating two teams
+   <code>
+    Dev Team
+   </code>
+   and
+   <code>
+    Ops Team
+   </code>
+   inside the
+   <code>
+    enterprise-applications
+   </code>
+   organization.
+  </p>
+  <p>
+   Once the organization is created, teams can be created inside it.
+  </p>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_41" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_41" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_3">
+  </span>
+  <h2 id="1-10">
+   <img alt="Create Organization" class="internal" src="/kb/images/1911-4.png"/>
+  </h2>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_42" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_42" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_4">
+  </span>
+  <h2 id="1-11">
+   <img alt="Create Dev Team" class="internal default" height="287px" src="/kb/images/1911-5.jpeg" style="width: 350px; height: 287px;" width="350px"/>
+  </h2>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_43" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_43" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_5">
+  </span>
+  <h2 id="1-12">
+   <img alt="Create Ops Team" class="internal" src="/kb/images/1911-6.png"/>
+  </h2>
+  <div class="mt-section" id="section_44" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_44" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Collections">
+    </span>
+    <h3 id="2-21">
+     Collections
+    </h3>
+    <p>
+     A collection is a logical construct that can be used to arbitrarily group a set of resources as described earlier. To create a collection, use the form at
+     <strong>
+      Collections —&gt; Create Collection
+     </strong>
+     . Below is an example of creating a collection called
+     <code>
+      production
+     </code>
+     .
+    </p>
+    <hr/>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_45" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_45" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_6">
+  </span>
+  <h2 id="1-13">
+   <img alt="Create production collection" class="internal" src="/kb/images/1911-7.png"/>
+  </h2>
+  <p>
+   The
+   <code>
+    production
+   </code>
+   collection in this example is used to hold other application collections only. One such collection is the
+   <code>
+    Billing Application
+   </code>
+   which can be created inside the
+   <code>
+    production
+   </code>
+   collection by clicking on
+   <strong>
+    Collections —&gt; production —&gt; View Children —&gt; Create Collection
+   </strong>
+   as shown below.
+  </p>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_46" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_46" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_7">
+  </span>
+  <h2 id="1-14">
+   <img alt="Create billing collection" class="internal" src="/kb/images/1911-8.png"/>
+  </h2>
+  <p>
+   At this point, grants can be created to assign roles to the teams based on their functions within the collection(s).
+  </p>
+  <p>
+   It would be easier to understand with the following concrete example:
+  </p>
+  <blockquote>
+   <p>
+    Suppose you have a simple application called
+    <code>
+     www
+    </code>
+    , which is a web server based on the
+    <code>
+     nginx
+    </code>
+    official image. Also suppose that the
+    <code>
+     www
+    </code>
+    application is one of the billing applications deployed into production. There are three teams that need access to this application —
+    <code>
+     developers
+    </code>
+    ,
+    <code>
+     testers
+    </code>
+    , and
+    <code>
+     operations
+    </code>
+    . Typically,
+    <code>
+     testers
+    </code>
+    need
+    <code>
+     View Only
+    </code>
+    access and nothing more, while the
+    <code>
+     operations
+    </code>
+    team would need
+    <code>
+     Full Control
+    </code>
+    to manage and maintain the environment. The
+    <code>
+     developers
+    </code>
+    team needs access to troubleshoot, restart, and control the lifecycle of the application but should be forbidden from any other activity involving the need to access the host file systems or starting up privileged containers. This type of special access is termed
+    <code>
+     Restricted Control
+    </code>
+    .
+   </p>
+  </blockquote>
+  <div class="mt-section" id="section_47" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_47" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Grants">
+    </span>
+    <h3 id="2-22">
+     Grants
+    </h3>
+    <p>
+     Grants can be created in UCP using the wizard at
+     <strong>
+      User Management —&gt; Grants —&gt; Create Grant
+     </strong>
+     . The
+     <strong>
+      Swarm
+     </strong>
+     collection is the root of all collections. Click on
+     <strong>
+      View Children
+     </strong>
+     to display all sub-collections. The
+     <code>
+      production
+     </code>
+     collection should be one of the collections shown. Click on
+     <strong>
+      View Children
+     </strong>
+     corresponding to the
+     <code>
+      production
+     </code>
+     collection to access the
+     <code>
+      Billing Application
+     </code>
+     collection. Click on
+     <strong>
+      Select Collection
+     </strong>
+     to select it. The screen should look similar to the one below:
+    </p>
+    <hr/>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="mt-section" id="section_48" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_48" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_8">
+  </span>
+  <h2 id="1-15">
+   <img alt="Selected collection" class="internal" src="/kb/images/1911-9.png"/>
+  </h2>
+  <p>
+   This section demonstrates a typical use case that uses the principles of "least privilege / permission" as well as "separation of duties." It is intended to address the access requirements of the example application
+   <code>
+    www
+   </code>
+   described in the previous section.
+  </p>
+  <p>
+   Still in the
+   <strong>
+    Create Grant
+   </strong>
+   interface, click on
+   <strong>
+    Roles
+   </strong>
+   . Select the
+   <strong>
+    Restricted Control
+   </strong>
+   role from the dropdown. Next, click on
+   <strong>
+    Subjects
+   </strong>
+   . Select
+   <strong>
+    Organizations
+   </strong>
+   and select the
+   <code>
+    enterprise-applications
+   </code>
+   from the
+   <strong>
+    Organization
+   </strong>
+   dropdown and
+   <code>
+    Dev Team
+   </code>
+   from the
+   <strong>
+    Team
+   </strong>
+   dropdown. Click on
+   <strong>
+    Create
+   </strong>
+   .
+  </p>
+  <p>
+   Repeat the same steps to create another grant, except select only the
+   <code>
+    production
+   </code>
+   collection, select the role
+   <code>
+    Full Control
+   </code>
+   , and select
+   <code>
+    Ops Team
+   </code>
+   as the subject.
+  </p>
+  <p>
+   Repeat the same steps to create another grant, except select only the
+   <code>
+    Billing Application
+   </code>
+   collection, select the role
+   <code>
+    View Only
+   </code>
+   , and select
+   <code>
+    Test Team
+   </code>
+   as the subject.
+  </p>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_49" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_49" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_9">
+  </span>
+  <h2 id="1-16">
+   <img alt="Grants created" class="internal" src="/kb/images/1911-10.png"/>
+  </h2>
+  <p>
+   With this setup of grants as above, the teams would have appropriate levels of access based on their functions to any application within the
+   <code>
+    Billing Applications
+   </code>
+   collection.
+  </p>
+  <p>
+   To associate the
+   <code>
+    www
+   </code>
+   application with the
+   <code>
+    Billing Applications
+   </code>
+   collection, the service is created in the usual manner, except the collection is selected before creating the service as show below:
+  </p>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_50" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_50" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_10">
+  </span>
+  <h2 id="1-17">
+   <img alt="Create www service" class="internal" src="/kb/images/1911-11.png"/>
+  </h2>
+  <p>
+   Select the collection:
+  </p>
+  <hr/>
+ </div>
+</div>
+<div class="mt-section" id="section_51" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+ <div class="mt-section" id="section_51" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+  <span id="_11">
+  </span>
+  <h2 id="1-18">
+   <img alt="Select collection for service" class="internal" src="/kb/images/1911-12.png"/>
+  </h2>
+  <div class="mt-section" id="section_52" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_52" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Strategy_for_Using_LDAP_Filters">
+    </span>
+    <h3 id="2-23">
+     Strategy for Using LDAP Filters
+    </h3>
+    <p>
+     The users needing access to UCP are all sourced from the corporate Directory Server system. These users are the admin users needed to manage the Docker EE infrastructure as well as all members of each of the teams configured within UCP. Also assume that the total universe of users needing access to Docker EE (includes admins, developers, testers, and operations) is a subset of the gamut of users within the Directory Server.
+    </p>
+    <p>
+     A recommended strategy to use when organizing users is to create an overarching membership group that identifies all users of Docker EE, irrespective of which team they are a part of. Let us call this group
+     <code>
+      Docker_Users
+     </code>
+     . No user should be made a member of this group directly. Instead, the
+     <code>
+      Docker_Users
+     </code>
+     group should contain other groups and only those other groups as its members. Per our example, let us call these groups
+     <code>
+      dev
+     </code>
+     ,
+     <code>
+      test
+     </code>
+     , and
+     <code>
+      ops
+     </code>
+     . In our example, these groups are part of what is known as a
+     <em>
+      nested group
+     </em>
+     structure within the directory server. Nested groups allow the inheritance of permissions from one group to each of its sub-groups.
+    </p>
+    <blockquote>
+     <p>
+      <strong>
+       NOTE:
+      </strong>
+      Some directory servers do not support the feature of nested groups or even the
+      <code>
+       memberOf
+      </code>
+      attribute by default. If so, then they would need to be enabled. If the choice of directory server does not support these features at all, then alternate means of organizing users and querying them should be used. Microsoft Active Directory supports both these features out of the box.
+     </p>
+    </blockquote>
+    <p>
+     User accounts should be added as members of these sub-groups in the directory server. This should not impact any existing layout in the organization units or pre-existing group membership for these users. The sub-group should be used as the value of the
+     <strong>
+      Group DN
+     </strong>
+     in the defining of the teams.
+    </p>
+    <p>
+     Finally, if and when it becomes necessary to terminate all access for any user account, removing the group membership of the account from just the one group
+     <code>
+      Docker_Users
+     </code>
+     would remove all access for the user. Due to the nature of how nested groups work, all additional access within Docker is automatically cleaned — the user account is removed from any and all team memberships at the time of the next sync without need for manual intervention or additional steps. This step can be integrated into a standard on-boarding / off-boarding automated provisioning step within a corporate Identity Management system.
+    </p>
+   </div>
+  </div>
+  <div class="mt-section" id="section_53" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+   <div class="mt-section" id="section_53" mt-section-origin="Architecture/Docker_Reference_Architecture:_Docker_EE_Best_Practices_and_Design_Considerations">
+    <span id="Authentication_API_(eNZi)">
+    </span>
+    <h3 id="2-24">
+     Authentication API (eNZi)
+    </h3>
+    <p>
+     The AuthN API or eNZi (as it is known internally and pronounced N-Z) is a centralized authentication and authorization service and framework for Docker EE. This API is completely integrated and configured into Docker EE and works seamlessly with UCP as well as DTR. This is the component and service under the hood that manages accounts, teams and organizations, user sessions, permissions and access control through labels, Single-Sign-On (Web SSO) through OpenID Connect, and synchronization of account details from an external LDAP-based system into Docker EE.
+    </p>
+    <p>
+     For regular day-to-day activities, users and operators need not be concerned with the AuthN API and how it works. However, its features can be leveraged to automate many common functions and/or bypass the UCP UI altogether to manage and manipulate the data directly.
+    </p>
+    <p>
+     The RESTFul AuthN API endpoints are documented in the
+     <a class="link-https" href="/apidocs/v2.0.1/#!/accounts/func1" rel="external nofollow" target="_blank">
+      AuthN API
+     </a>
+     Docker docs.
+    </p>
+    <p>
+     Interaction with AuthN can be accomplished in two ways: via the exposed RESTful AuthN API over HTTP or via the
+     <code>
+      enzi
+     </code>
+     command.
+    </p>
+    <p>
+     For example, the command below uses
+     <code>
+      curl
+     </code>
+     and
+     <code>
+      jq
+     </code>
+     to fetch all user accounts in Docker EE via the AuthN API over HTTP:
+    </p>
+    <pre>
+<code>$ curl --silent --insecure --header "Authorization: Bearer $(curl --silent --insecure \
+     --data '{"username":"&lt;admin-username&gt;","password":"&lt;admin-password&gt;"}' \
+    https://&lt;UCP-domain-name&gt;/auth/login | jq --raw-output .auth_token)" \
+    https://&lt;UCP-domain-name&gt;/enzi/v0/accounts | jq .
+</code></pre>
+    <p>
+     The AuthN service can also be invoked on the CLI on a UCP controller. To connect into it, run the following on a UCP controller:
+    </p>
+    <pre>
+<code>$ docker exec -it ucp-auth-api sh
+</code></pre>
+    <p>
+     At the resulting prompt (
+     <code>
+      #
+     </code>
+     ), type the
+     <code>
+      enzi
+     </code>
+     command with a sub-command such as the one below to list the database table status:
+    </p>
+    <pre>
+<code># enzi db-status
+</code></pre>
+    <blockquote>
+     <p>
+      <strong>
+       Note:
+      </strong>
+      Refer to
+      <a href="/kb/1835/" rel="internal">
+       Recovering the Admin Password for Docker EE Standard and Advanced
+      </a>
+      for a detailed example.
+     </p>
+    </blockquote>
+    <p>
+     <em>
+      Document Version: 1.2
+     </em>
+    </p>
+    <p>
+     <em>
+      Tested on: Docker EE 17.06, DTR version 2.3.3, UCP 2.2.2
+     </em>
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

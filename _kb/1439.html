@@ -1,0 +1,540 @@
+---
+title: "Maintenance Lifecycle"
+id: 1439
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1439/
+originalpath: https://success.docker.com/Policies/Maintenance_Lifecycle
+source: https://success.docker.com/@api/deki/pages/1439/contents
+tags:
+- tag: "article:policy"
+- tag: "special:ownership"
+---
+{% raw %}
+<p>
+ <a class="link-https" href="https://www.docker.com/enterprise-edition" rel="external nofollow" target="_blank" title="https://www.docker.com/enterprise-edition">
+  Docker Enterprise Edition
+ </a>
+ is a subscription of software, support, and certification for enterprise dev and IT teams building and managing critical apps in production at scale. Docker EE provides a modern and trusted platform for all apps with integrated management and security across the app lifecycle, and includes three main technology components: the Docker daemon (fka "Engine"), Docker Trusted Registry (DTR), and Docker Universal Control Plane (UCP). Docker EE is validated and supported to work in specific operating environments as outlined in the
+ <a href="/kb/928/" rel="internal" title="Compatibility Matrix">
+  Docker Compatibility Matrix
+ </a>
+ , adhere to the
+ <strong>
+  Docker Maintenance Lifecycle
+ </strong>
+ , and is supported within the defined
+ <a href="/kb/1444/" rel="internal" title="Scope of Support">
+  Docker Scope of Support
+ </a>
+ and
+ <a href="/kb/961/" rel="internal" title="Commercial Support Service Levels">
+  Docker Commercial Support Service Levels
+ </a>
+ . Refer to the
+ <a class="link-https" href="https://www.docker.com/subscription-services" rel="external nofollow" target="_blank" title="https://www.docker.com/subscription-services">
+  Subscription Services
+ </a>
+ or the
+ <a class="link-https" href="https://www.docker.com/docker-software-end-user-subscription-agreement" rel="external nofollow" target="_blank" title="https://www.docker.com/docker-software-end-user-subscription-agreement">
+  End User Subscription Agreement
+ </a>
+ for more information. To view the latest updates and upgrade instructions, visit the release notes for
+ <a class="link-https" href="/docker-trusted-registry/cs-engine/release-notes/release-notes/" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-trusted-registry/cs-engine/release-notes/release-notes/">
+  daemon
+ </a>
+ ,
+ <a class="link-https" href="/docker-trusted-registry/release-notes/release-notes/" rel="external nofollow" target="_blank" title="https://docs.docker.com/docker-trusted-registry/release-notes/release-notes/">
+  DTR
+ </a>
+ , and
+ <a class="link-https" href="/ucp/release_notes/" rel="external nofollow" target="_blank" title="https://docs.docker.com/ucp/release_notes/">
+  UCP
+ </a>
+ .
+</p>
+<p>
+ This page shows all currently supported versions and the most recently EOL'd version. Versions that are older than those shown are also EOL.
+</p>
+<div class="mt-container-secondary" style="padding: 0.5em; clear: both; font-size: 0.9em;">
+ <strong>
+  Important Definitions
+ </strong>
+ <ul>
+  <li>
+   "Major Releases" (X.y.z) are vehicles for delivering major and minor feature development and enhancements to existing features. They incorporate all applicable Error corrections made in prior Major Releases, Minor Releases, and Maintenance Releases.
+  </li>
+  <li>
+   "Minor Releases" (x.Y.z) are vehicles for delivering minor feature developments, enhancements to existing features, and defect corrections. They incorporate all applicable Error corrections made in prior Minor Releases, and Maintenance Releases.
+  </li>
+  <li>
+   "Maintenance Releases" (x.y.Z) are vehicles for delivering Error corrections that are severely affecting a number of customers and cannot wait for the next major or minor release. They incorporate all applicable defect corrections made in prior Maintenance Releases.
+  </li>
+  <li>
+   "End of Life" (EOL) versions are no longer supported by Docker, updating to a later version is recommended.
+  </li>
+ </ul>
+</div>
+<p>
+</p>
+<hr/>
+<div class="mt-section" id="section_1" mt-section-origin="Policies/Maintenance_Lifecycle">
+ <span id="Docker_Daemon">
+ </span>
+ <h2 id="1-0">
+  Docker Daemon
+ </h2>
+ <table border="1" cellpadding="1" cellspacing="1" style="width: 100%; table-layout: fixed;">
+  <thead>
+   <tr>
+    <th scope="col">
+     Daemon Version
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      CSE 1.11.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      CSE 1.12.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      CSE 1.13.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      EE 17.03
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      EE 17.06
+     </strong>
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th scope="row">
+     General Availability (GA)
+    </th>
+    <td style="text-align:center;">
+     <p>
+      2016-04-27
+     </p>
+     <p>
+      (1.11.1-cs1)
+     </p>
+    </td>
+    <td style="text-align:center;">
+     <p>
+      2016-09-21
+     </p>
+     <p>
+      (1.12.1-cs1)
+     </p>
+    </td>
+    <td style="text-align:center;">
+     <p>
+      2017-02-08
+     </p>
+     <p>
+      (1.13.1-cs1)
+     </p>
+    </td>
+    <td style="text-align:center;">
+     <p>
+      2017-03-02
+     </p>
+     <p>
+      (17.03)
+     </p>
+    </td>
+    <td style="text-align:center;">
+     <p>
+      2017-08-16
+     </p>
+     <p>
+      (17.06)
+     </p>
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     End of Life (EOL)
+    </th>
+    <td style="text-align:center;">
+     <strong>
+      EOL as of 2017-03-02
+     </strong>
+    </td>
+    <td style="text-align:center;">
+     2017-11-14
+    </td>
+    <td style="text-align:center;">
+     Approximately 2017-Q4
+    </td>
+    <td style="text-align:center;">
+     2018-03-01
+    </td>
+    <td style="text-align:center;">
+     2018-08-15
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Release Frequency
+    </th>
+    <td colspan="3" rowspan="1">
+     <p style="text-align: center;">
+      Aligned with every open source Docker Engine release
+     </p>
+     <p style="text-align: center;">
+      (major and minor
+      <strong>
+       X
+      </strong>
+      .
+      <strong>
+       Y
+      </strong>
+      .z)
+     </p>
+    </td>
+    <td class="mt-align-center" rowspan="1">
+     Quarterly
+    </td>
+    <td class="mt-align-center" rowspan="1">
+     Quarterly
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Supported Lifecycle
+    </th>
+    <td rowspan="1" style="text-align:center;">
+     Current and Y-2 releases
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     Current and Y-2 releases
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     Current and Y-2 releases
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Patches and Update Frequency
+    </th>
+    <td colspan="5" rowspan="1">
+     <p style="text-align: center;">
+      As Needed:
+     </p>
+     <ul>
+      <li>
+       Maintenance Releases (x.y.
+       <strong>
+        Z
+       </strong>
+       )
+      </li>
+      <li>
+       Security patches
+      </li>
+      <li>
+       Customer hotfixes
+      </li>
+     </ul>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Policies/Maintenance_Lifecycle">
+ <span id="Universal_Control_Plane_(UCP)">
+ </span>
+ <h2 id="1-1">
+  Universal Control Plane (UCP)
+ </h2>
+ <table border="1" cellpadding="1" cellspacing="1" style="width: 100%; table-layout: fixed;">
+  <thead>
+   <tr>
+    <th scope="col">
+     UCP Version
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.0.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.1.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.2.z
+     </strong>
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th scope="row">
+     General Availability (GA)
+    </th>
+    <td>
+     <p style="text-align: center;">
+      2016-11-10
+     </p>
+     <p style="text-align: center;">
+      (2.0.0)
+     </p>
+    </td>
+    <td>
+     <p style="text-align: center;">
+      2017-02-08
+     </p>
+     <p style="text-align: center;">
+      (2.1.0)
+     </p>
+    </td>
+    <td>
+     <p class="mt-align-center">
+      2017-08-16
+     </p>
+     <p class="mt-align-center">
+      (2.2.0)
+     </p>
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     End of Life (EOL)
+    </th>
+    <td style="text-align:center;">
+     <strong>
+      EOL as of 2017-08-16
+     </strong>
+    </td>
+    <td style="text-align:center;">
+     2018-02-07
+    </td>
+    <td style="text-align:center;">
+     2018-08-15
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Release Frequency
+    </th>
+    <td colspan="3" rowspan="1">
+     <p style="text-align: center;">
+      Quarterly
+     </p>
+     <p style="text-align: center;">
+      (major and minor
+      <strong>
+       X
+      </strong>
+      .
+      <strong>
+       Y
+      </strong>
+      .z)
+     </p>
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Supported Lifecycle
+    </th>
+    <td rowspan="1" style="text-align:center;">
+     Current and Y-1 releases
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Patches and Update Frequency
+    </th>
+    <td colspan="3" rowspan="1">
+     <p style="text-align: center;">
+      As Needed:
+     </p>
+     <ul>
+      <li>
+       Maintenance Releases (x.y.
+       <strong>
+        Z
+       </strong>
+       )
+      </li>
+      <li>
+       Security patches
+      </li>
+      <li>
+       Customer hotfixes
+      </li>
+     </ul>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="Policies/Maintenance_Lifecycle">
+ <span id="Docker_Trusted_Registry_(DTR)">
+ </span>
+ <h2 id="1-2">
+  Docker Trusted Registry (DTR)
+ </h2>
+ <table border="1" cellpadding="1" cellspacing="1" style="width: 100%; table-layout: fixed;">
+  <thead>
+   <tr>
+    <th scope="col">
+     DTR Version
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.1.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.2.z
+     </strong>
+    </th>
+    <th scope="col" style="text-align:center;">
+     <strong>
+      2.3.z
+     </strong>
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th scope="row">
+     General Availability (GA)
+    </th>
+    <td>
+     <p style="text-align: center;">
+      2016-11-10
+     </p>
+     <p style="text-align: center;">
+      (2.1.0)
+     </p>
+    </td>
+    <td>
+     <p style="text-align: center;">
+      2017-02-08
+     </p>
+     <p style="text-align: center;">
+      (2.2.0)
+     </p>
+    </td>
+    <td>
+     <p class="mt-align-center">
+      2017-08-16
+     </p>
+     <p class="mt-align-center">
+      (2.3.0)
+     </p>
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     End of Life (EOL)
+    </th>
+    <td style="text-align:center;">
+     <strong>
+      EOL as of 2017-08-16
+     </strong>
+    </td>
+    <td style="text-align:center;">
+     2018-02-07
+    </td>
+    <td style="text-align:center;">
+     2018-08-15
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Release Frequency
+    </th>
+    <td colspan="3" rowspan="1">
+     <p style="text-align: center;">
+      Quarterly
+     </p>
+     <p style="text-align: center;">
+      (major and minor
+      <strong>
+       X
+      </strong>
+      .
+      <strong>
+       Y
+      </strong>
+      .z)
+     </p>
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Supported Lifecycle
+    </th>
+    <td rowspan="1" style="text-align:center;">
+     Current and Y-1 releases
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+    <td rowspan="1" style="text-align:center;">
+     1 year from release
+    </td>
+   </tr>
+   <tr>
+    <th scope="row">
+     Patches and Update Frequency
+    </th>
+    <td colspan="3" rowspan="1">
+     <p style="text-align: center;">
+      As Needed:
+     </p>
+     <ul>
+      <li>
+       Maintenance Releases (x.y.
+       <strong>
+        Z
+       </strong>
+       )
+      </li>
+      <li>
+       Security patches
+      </li>
+      <li>
+       Customer hotfixes
+      </li>
+     </ul>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+{% endraw %}

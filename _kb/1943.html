@@ -1,0 +1,123 @@
+---
+title: "How can I assign a service to Windows nodes only?"
+id: 1943
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1943/
+originalpath: https://success.docker.com/KBase/How_can_I_assign_a_service_to_Windows_nodes_only%3F
+source: https://success.docker.com/@api/deki/pages/1943/contents
+tags:
+- tag: "article:howto"
+- tag: "contraints"
+- tag: "labels"
+- tag: "platform:windows"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.13.1-cs1"
+---
+{% raw %}
+<p>
+ To run a service only on a specific subsets of nodes, use labels and the constraint parameter.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_can_I_assign_a_service_to_Windows_nodes_only?">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  Before performing these steps, you must meet the following requirements:
+ </p>
+ <ul>
+  <li>
+   Nodes are running on version 1.13 or later
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_can_I_assign_a_service_to_Windows_nodes_only?">
+ <span id="Step_1:_Label_the_Windows_Nodes">
+ </span>
+ <h2 id="1-1">
+  Step 1: Label the Windows Nodes
+ </h2>
+ <p>
+  First, all Windows nodes must be labeled using these steps for each Windows node:
+ </p>
+ <ol>
+  <li>
+   Open the following configuration file for the Docker daemon. If it doesn't exist, create the file.
+   <pre>
+<code>C:\ProgramData\docker\config\daemon.json
+</code></pre>
+  </li>
+  <li>
+   Add labels to mark it as Windows node:
+   <pre>
+ <code>{
+    "labels": ["os=windows"]
+} </code> </pre>
+  </li>
+  <li>
+   Restart Docker Engine:
+   <pre>
+<code>Restart-Service docker</code></pre>
+  </li>
+  <li>
+   Verify that the label is in place:
+   <pre>
+<code>&gt; Docker info    
+...
+Labels:
+ <span class="replaceabletext">os=windows</span>
+...</code> </pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_can_I_assign_a_service_to_Windows_nodes_only?">
+ <span id="Step_2:_Start_the_Service_with_Contraints">
+ </span>
+ <h2 id="1-2">
+  Step 2: Start the Service with Contraints
+ </h2>
+ <p>
+  By adding constraints, you can selectively assign a service to specific nodes using the following steps:
+ </p>
+ <ol>
+  <li>
+   Create a service with constraint:
+   <pre>
+<code> &gt; docker service create <span class="replaceabletext">--constraint engine.labels.os==windows</span> --name winonly microsoft/nanoserver cmd /c “ping docker.com” -n 30</code>
+</pre>
+  </li>
+  <li>
+   Make sure only nodes with the
+   <span class="replaceabletext">
+    os==windows
+   </span>
+   label were assigned:
+   <pre>
+<code> &gt; docker service ps winonly 
+ ID            NAME            IMAGE                        NODE   DESIRED STATE  CURRENT...
+ itm33*******  winonly.1       microsoft/nanoserver:latest  win00  Running        Running...
+</code> 
+</pre>
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/How_can_I_assign_a_service_to_Windows_nodes_only?">
+ <span id="What's_Next">
+ </span>
+ <h2 id="1-3">
+  What's Next
+ </h2>
+ <p>
+  There are many more options that you can set for Docker daemon.  List of all supported options for Windows can be found
+  <a class="link-https" href="/engine/reference/commandline/dockerd/#windows-configuration-file" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/reference/commandline/dockerd/#windows-configuration-file">
+   in the Docker docs
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

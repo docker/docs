@@ -82,33 +82,42 @@ for page in soup.find_all('page'):
         images = rawhtml.find_all('img')
         imageIndex = 0
         for img in images:
-            imgRequest = urllib2.Request(img['src'], headers=headers)
-            try:
-                imgData = urllib2.urlopen(imgRequest).read()
-            except urllib2.URLError, e:
-                if e.args[0]=='unknown url type: data':
-                    rawimgdata = img['src']
-                    head, data = rawimgdata.split(',', 1)
-                    file_ext = head.split(';')[0].split('/')[1]
-                    imgData = base64.b64decode(data)
-            newFileName = '_kb/images/' + page['id'] + '-' + str(imageIndex)
-            newSrcName = '/kb/images/' + page['id'] + '-' + str(imageIndex)
-            output = open(newFileName,'wb')
-            output.write(imgData)
-            output.close()
-            newImageFileExt = imghdr.what(newFileName)
-            shutil.move(newFileName, newFileName + '.' + newImageFileExt)
+            if img.has_attr('data-image-src'):
+                attribToUse = 'data-image-src'
+            else:
+                attribToUse = 'src'
+            if img[attribToUse]=='https://docker.atlassian.net/wiki/download/attachments/135168163/permissions_ucp.png?version=1&modificationDate=1494306319618&cacheVersion=1&api=v2':
+                newFileName = '/images/permissions_ucp'
+                newSrcName = '/images/permissions_ucp'
+                newImageFileExt = 'png'
+            else:
+                imgRequest = urllib2.Request(img[attribToUse], headers=headers)
+                try:
+                    imgData = urllib2.urlopen(imgRequest).read()
+                except urllib2.URLError, e:
+                    if e.args[0]=='unknown url type: data':
+                        rawimgdata = img[attribToUse]
+                        head, data = rawimgdata.split(',', 1)
+                        file_ext = head.split(';')[0].split('/')[1]
+                        imgData = base64.b64decode(data)
+                newFileName = '_kb/images/' + page['id'] + '-' + str(imageIndex)
+                newSrcName = '/kb/images/' + page['id'] + '-' + str(imageIndex)
+                output = open(newFileName,'wb')
+                output.write(imgData)
+                output.close()
+                newImageFileExt = str(imghdr.what(newFileName))
+                shutil.move(newFileName, newFileName + '.' + newImageFileExt)
             img['src'] = newSrcName + '.' + newImageFileExt
             print 'Saved: ' + newFileName + '.' + newImageFileExt
             imageIndex = imageIndex + 1
+        fileout += rawhtml.prettify() + '\n'
+        fileout += '{% endraw %}\n'
         # Insert navigation
         for thistag in metadatasoup.find_all('tag'):
             for idx, val in enumerate(keytags):
                 #print thistag['value'] + '(thistag["value"]) comparing to (val)' + val
                 if thistag['value']==val:
-                    fileout += '<a href="' + keyurls[idx] + '" class="button outline-btn">Back to: ' + keytitles[idx] + '</a>'
-        fileout += rawhtml.prettify() + '\n'
-        fileout += '{% endraw %}\n'
+                    fileout += '<a href="' + keyurls[idx] + '" class="button outline-btn">Continue troubleshooting ' + keytitles[idx] + '</a><br>'
         f = open('_kb/' + page['id'] + '.html', 'w+')
         f.write(fileout.encode('utf8'))
         f.close

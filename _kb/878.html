@@ -1,0 +1,98 @@
+---
+title: "How do I resolve a 2016/03/09 14:48:23 Registration failed, 402. Retry in 1 seconds error when starting the Docker Cloud Agent?"
+id: 878
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/878/
+originalpath: https://success.docker.com/Cloud/Solve/How_do_I_resolve_a_%222016%2F%2F03%2F%2F09_14%3A48%3A23_Registration_failed%2C_402._Retry_in_1_seconds%22_error_when_starting_the_Docker_Cloud_Agent%3F
+source: https://success.docker.com/@api/deki/pages/878/contents
+tags:
+- tag: "article:topic"
+- tag: "component:cloudagent"
+- tag: "Docker Cloud"
+- tag: "Docker Cloud Agent"
+- tag: "product:cloud"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin='Cloud/Solve/How_do_I_resolve_a_"2016//03//09_14:48:23_Registration_failed,_402._Retry_in_1_seconds"_error_when_starting_the_Docker_Cloud_Agent?'>
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  The Docker Cloud Agent is not able to connect
+  <span>
+   remotely to Docker Cloud. To fix the issue, verify the correct ports are opened in any firewalls.
+  </span>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin='Cloud/Solve/How_do_I_resolve_a_"2016//03//09_14:48:23_Registration_failed,_402._Retry_in_1_seconds"_error_when_starting_the_Docker_Cloud_Agent?'>
+ <span id="Symptoms">
+ </span>
+ <h3 id="2-1">
+  Symptoms
+ </h3>
+ <p>
+  <span>
+   A
+   <code>
+    2016
+   </code>
+   <code>
+    /03/09 14:48:23 Registration failed, 402. Retry in 1
+   </code>
+   <code>
+    seconds
+   </code>
+   error occurs when starting the Docker Cloud Agent.
+  </span>
+ </p>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin='Cloud/Solve/How_do_I_resolve_a_"2016//03//09_14:48:23_Registration_failed,_402._Retry_in_1_seconds"_error_when_starting_the_Docker_Cloud_Agent?'>
+ <span id="Resolution">
+ </span>
+ <h3 id="2-2">
+  Resolution
+ </h3>
+ <p>
+  This error may be caused by the host's firewall configuration. V
+  <span>
+   erify that the firewall has been disabled or that the following ports are opened:
+  </span>
+ </p>
+ <ul>
+  <li>
+   Required
+   <ul>
+    <li>
+     <strong>
+      6783/tcp
+     </strong>
+     and
+     <strong>
+      6783/udp
+     </strong>
+     for the node to join the private overlay network for communicating with containers on other nodes.
+    </li>
+   </ul>
+  </li>
+  <li>
+   Recommended
+   <ul>
+    <li>
+     <strong>
+      2375/tcp
+     </strong>
+     : for Docker Cloud to communicate with the Docker daemon running on the node. If port 2375 is not accessible, Docker Cloud will attempt to communicate with node through a secure reverse tunnel.
+    </li>
+    <li>
+     Of course, any ports used by the application will also need to be open.
+    </li>
+   </ul>
+  </li>
+ </ul>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

@@ -1,0 +1,124 @@
+---
+title: "Error starting containers after Docker Engine restart"
+id: 1579
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1579/
+originalpath: https://success.docker.com/KBase/Error_starting_containers_after_Docker_Engine_restart
+source: https://success.docker.com/@api/deki/pages/1579/contents
+tags:
+- tag: "article:errors"
+- tag: "component:engine"
+- tag: "expires:nextrelease"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.11.1-cs1"
+- tag: "testedon:cse-1.11.2-cs5"
+- tag: "usecase:caas"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Error_starting_containers_after_Docker_Engine_restart">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p dir="auto">
+  When launching some containers with the
+  <code>
+   restart always
+  </code>
+  setting, the containers don't come back up with a restart of the Docker service. Manually start doesn't work either. It comes back up when the Docker service is restarted a second time.
+ </p>
+ <p dir="auto">
+  This is in the
+  <code>
+   daemon.log
+  </code>
+  :
+ </p>
+ <p dir="auto">
+  <code>
+   Oct 6 23:26:21 ip-10-6-34-38 docker: time="2016-10-06T23:26:21.649221669-04:00" level=error msg="Force shutdown daemon"
+   <br/>
+   Oct 6 23:28:21 ip-10-6-34-38 docker: time="2016-10-06T23:28:21.526995237-04:00" level=error msg="Handler for POST /v1.23/containers/d60110edbc34/start returned error: rpc error: code = 6 desc = \"mkdir /run/containerd/d60110edbc342330f3c05ed2b10f523bb5a83ab80e1ef60835f07dca35fff47f: file exists\""
+   <br/>
+   Oct 6 23:30:50 ip-10-6-34-38 docker: time="2016-10-06T23:30:50.464448934-04:00" level=error msg="failed to receive event from containerd: rpc error: code = 13 desc = \"transport is closing\""
+   <br/>
+   Oct 6 23:30:53 ip-10-6-34-38 docker: time="2016-10-06T23:30:53-04:00" level=error msg="containerd: get exit status" error="containerd: process has not exited" id=d60110edbc342330f3c05ed2b10f523bb5a83ab80e1ef60835f07dca35fff47f pid=init systemPid=11450
+   <br/>
+   Oct 6 23:31:59 ip-10-6-34-38 docker: time="2016-10-06T23:31:59.747679472-04:00" level=error msg="failed to receive event from containerd: rpc error: code = 13 desc = \"transport is closing\""
+   <br/>
+   Oct 6 23:34:15 ip-10-6-34-38 docker: time="2016-10-06T23:34:15.454499564-04:00" level=error msg="failed to receive event from containerd: rpc error: code = 13 desc = \"transport is closing\""
+   <br/>
+   Oct 6 23:34:45 ip-10-6-34-38 docker: time="2016-10-06T23:34:45.829946171-04:00" level=error msg="failed to receive event from containerd: rpc error: code = 13 desc = \"transport is closing\""
+   <br/>
+   Oct 6 23:43:51 ip-10-6-34-38 docker: time="2016-10-06T23:43:51.200796857-04:00" level=error msg="failed to receive event from containerd: rpc error: code = 13 desc = \"transport is closing\""
+   <br/>
+   Oct 6 23:44:06 ip-10-6-34-38 docker: time="2016-10-06T23:44:06.197911042-04:00" level=error msg="Force shutdown daemon"
+   <br/>
+   Oct 6 23:45:53 ip-10-6-34-38 docker: time="2016-10-06T23:45:53.678123569-04:00" level=error msg="Failed to start container f16597aa8b860f594a347df1025aae4fe5d43fe0ec689650889d27c226019758: rpc error: code = 6 desc = \"mkdir /run/containerd/f16597aa8b860f594a347df1025aae4fe5d43fe0ec689650889d27c226019758: file exists\""
+   <br/>
+   Oct 6 23:45:53 ip-10-6-34-38 docker: time="2016-10-06T23:45:53.691295094-04:00" level=error msg="Failed to start container e9b034ae7d8b5816143830ca4cfcb90213d42c3a8db7ad16b9fd23665f986d61: rpc error: code = 6 desc = \"mkdir /run/containerd/e9b034ae7d8b5816143830ca4cfcb90213d42c3a8db7ad16b9fd23665f986d61: file exists\""
+   <br/>
+   Oct 6 23:45:53 ip-10-6-34-38 docker: time="2016-10-06T23:45:53.967624263-04:00" level=error msg="Failed to start container 0e595729871a9d1a0cf15651da33e96653e3de5f85884f2f40bc1d024042a245: rpc error: code = 6 desc = \"mkdir /run/containerd/0e595729871a9d1a0cf15651da33e96653e3de5f85884f2f40bc1d024042a245: file exists\""
+  </code>
+  <br/>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Error_starting_containers_after_Docker_Engine_restart">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-1">
+  Prerequisites
+ </h2>
+ <ul>
+  <li>
+   Docker CS Engine 1.11.x
+  </li>
+  <li>
+   RHEL or other systemd-based host
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Error_starting_containers_after_Docker_Engine_restart">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-2">
+  <span style="font-size:32px;">
+   Resolution
+  </span>
+ </h2>
+ <p dir="auto">
+  In your systemd
+  <code>
+   docker.conf
+  </code>
+  file, add this line to the
+  <code>
+   [Service]
+  </code>
+  section:
+  <br/>
+  <br/>
+  <code>
+   # kill only the docker process, not all processes in the cgroup
+   <br/>
+   KillMode=process
+  </code>
+  <br/>
+ </p>
+ <p dir="auto">
+  This is added by default in Docker CS Engine 1.12.
+ </p>
+ <p dir="auto">
+  Reference:
+  <a class="link-https" href="https://github.com/docker/docker/issues/25246" rel="freeklink" title="https://github.com/docker/docker/issues/25246">
+   https://github.com/docker/docker/issues/25246
+  </a>
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

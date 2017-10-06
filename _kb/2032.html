@@ -1,0 +1,40 @@
+---
+title: "Latency detected for network requests"
+id: 2032
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2032/
+originalpath: https://success.docker.com/KBase/Latency_detected_for_network_requests
+source: https://success.docker.com/@api/deki/pages/2032/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ If UCP is displaying a warning banner with the following message:
+</p>
+<pre>
+<code>network requests to <span class="replaceabletext">&lt;node&gt;</span> are taking <span class="replaceabletext">&lt;value&gt;</span> seconds</code></pre>
+<p>
+ This means that it's taking more than
+ <code>
+  2
+ </code>
+ seconds for two UCP manager nodes to communicate with one another, which can cause reliability problems for your UCP cluster. For example, this can cause internal components to think other nodes are down and trigger unnecessary leadership elections, resulting in temporary outages and reduced performance.
+</p>
+<p>
+ If you're experiencing this, you should decrease the latency of the network the UCP nodes use to communicate.
+</p>
+<p>
+ <a class="link-https" href="/datacenter/ucp/2.1/guides/admin/install/system-requirements/" rel="external nofollow" target="_blank">
+  Learn more about the maximum network latency for each UCP component
+ </a>
+ .
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

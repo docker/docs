@@ -1,0 +1,66 @@
+---
+title: "Error: UCP requires at least version 17.6.0 CS"
+id: 2376
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2376/
+originalpath: https://success.docker.com/KBase/Error%3A_UCP_requires_at_least_version_17.6.0_CS
+source: https://success.docker.com/@api/deki/pages/2376/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.13.1-cs1"
+- tag: "upgrade"
+---
+{% raw %}
+<p>
+ <strong>
+  Upgrade Error Message:
+ </strong>
+ While attempting to upgrade an older version of UCP, the upgrade fails and the following error message is generated:
+</p>
+<pre>
+<code>Your engine version 1.13.1 CS is too old. UCP requires at least version 17.6.0 CS or 17.6.0 OSS.</code></pre>
+<p>
+ Where can you find the 17.6.0 CS engine?
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Error:_UCP_requires_at_least_version_17.6.0_CS">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <p>
+  One sees this error when upgrading UCP from an earlier version, and you're currently using Docker Engine version 1.13.x CS.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Error:_UCP_requires_at_least_version_17.6.0_CS">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  <strong>
+   Background:
+  </strong>
+  The error message is incorrect and misleading. There is no Docker Engine version 17.6.0 CS or later. "CS" stands for "Commercial Support", and that release branch was retired with Engine 1.13.x. In mid- to later-2017, Docker introduced Docker Enterprise Edition (Docker EE) and also changed the version numbers to the form
+  <code>
+   YY.MM
+  </code>
+  (last two digits of the calendar year, followed by the month number), followed by
+  <code>
+   ee
+  </code>
+  or
+  <code>
+   EE
+  </code>
+  . Thus, this error message actually means that the update requires Engine version 17.06.0 EE or later. To resolve this error, locate and install an appropriate EE version of the Engine, and retry the UCP upgrade.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

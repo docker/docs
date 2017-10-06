@@ -1,0 +1,70 @@
+---
+title: "How to update DTR certs after they've expired and UI is inaccessible"
+id: 2388
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2388/
+originalpath: https://success.docker.com/KBase/How_to_update_DTR_certs_after_they've_expired_and_UI_is_inaccessible
+source: https://success.docker.com/@api/deki/pages/2388/contents
+tags:
+- tag: "article:howto"
+- tag: "component:dtr"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_update_DTR_certs_after_they've_expired_and_UI_is_inaccessible">
+ <span id="Issue">
+ </span>
+ <h2 id="1-0">
+  Issue
+ </h2>
+ <p>
+  When certs have expired they may be updated in UCP, but when attempting to update in DTR the UI is inaccessible.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_to_update_DTR_certs_after_they've_expired_and_UI_is_inaccessible">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  After completing these steps, you will have the ability to update the expired certs in DTR.
+ </p>
+ <ol>
+  <li>
+   Check all 3 replicas to verify that all DTR containers are running and not "restarting":
+   <pre>
+<code>$ sudo docker ps -a | grep dtr</code></pre>
+  </li>
+  <li>
+   Run dtr/reconfigure command passing the
+   <code>
+    --dtr-external-url
+   </code>
+   flag, providing a WRONG
+   <code>
+    dtr-external-url
+   </code>
+   . This will cause DTR to re-generate the self-signed certs.
+   <a class="link-https" href="/datacenter/dtr/2.3/reference/cli/reconfigure/#options" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/reconfigure/#options">
+    https://docs.docker.com/datacenter/dtr/2.3/reference/cli/reconfigure/#options
+   </a>
+  </li>
+  <li>
+   Run the reconfigure command again using the ACTUAL DTR URL with the
+   <code>
+    --dtr-external-url
+   </code>
+   flag. This will allow you to log into DTR UI.
+  </li>
+  <li>
+   Log into DTR and update the certs from within the UI.
+  </li>
+ </ol>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-trusted-registry/" class="button outline-btn">Continue troubleshooting Docker Trusted Registry</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

@@ -1,0 +1,280 @@
+---
+title: "ucp-hrm user permissions - Error response from daemon: access denied"
+id: 2299
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2299/
+originalpath: https://success.docker.com/KBase/ucp-hrm_user_permissions_-_Error_response_from_daemon%3A_access_denied
+source: https://success.docker.com/@api/deki/pages/2299/contents
+tags:
+- tag: "access control"
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "expires:nextrelease"
+- tag: "hrm"
+- tag: "networking"
+- tag: "product:datacenter"
+- tag: "rbac"
+- tag: "stage:reviewed"
+- tag: "testedon:ucp-2.0.0"
+- tag: "testedon:ucp-2.1.0"
+- tag: "testedon:ucp-2.1.5"
+- tag: "ucp-2.0"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Fotios Tsiadimos and Ada Mancini";
+/*]]>*/
+</script>
+<p>
+ When trying to schedule containers that use hostnamed-based routing (HRM), you might receive the following error message:
+</p>
+<pre>
+Error response from daemon: access denied
+</pre>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/ucp-hrm_user_permissions_-_Error_response_from_daemon:_access_denied">
+ <span id="Prerequisites">
+ </span>
+ <h2 id="1-0">
+  Prerequisites
+ </h2>
+ <ul>
+  <li>
+   UCP &gt;= 2.0.x &lt; 2.2.x
+  </li>
+  <li>
+   Docker Engine &gt;= CSE 1.12.z
+  </li>
+ </ul>
+ <p>
+  <a href="/kb/928/" rel="internal" title="https://success.docker.com/Policies/Compatibility_Matrix">
+   https://success.docker.com/Policies/Compatibility_Matrix
+  </a>
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/ucp-hrm_user_permissions_-_Error_response_from_daemon:_access_denied">
+ <span id="Use_Case">
+ </span>
+ <h2 id="1-1">
+  Use Case
+ </h2>
+ <p>
+  A restricted user attempts to deploy a stack or service that uses an external network, like ucp-hrm, using access labels. They supply a docker-compose.yml file similar to the one below and get Access Denied messages from UCP.  Every resource in UCP 2.0 needs a label to grant access to it.
+  <em>
+   Any external resources
+   <b>
+    must
+   </b>
+   have a label applied to them describing who has access
+  </em>
+  .
+ </p>
+ <p>
+  Below is an example set of teams with various levels of access to swarm resources.
+ </p>
+ <table>
+  <tbody>
+   <tr>
+    <th>
+     Team \ Environment
+    </th>
+    <th>
+     alpha-dev
+    </th>
+    <th>
+     alpha-staging
+    </th>
+    <th>
+     alpha-production
+    </th>
+    <th>
+     beta-dev
+    </th>
+    <th>
+     beta-staging
+    </th>
+    <th>
+     beta-production
+    </th>
+   </tr>
+   <tr>
+    <th>
+     Dev Team Alpha
+    </th>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+   </tr>
+   <tr>
+    <th>
+     Dev Team Beta
+    </th>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     -
+    </td>
+   </tr>
+   <tr>
+    <th>
+     DevOps
+    </th>
+    <td>
+     View
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+    <td>
+     Restricted Control
+    </td>
+    <td>
+     View
+    </td>
+   </tr>
+   <tr>
+    <th>
+     DevOps (sensitive)
+    </th>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     -
+    </td>
+    <td>
+     Restricted Control
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <p>
+  For example, if a member of
+  <code>
+   DevTeam-Alpha
+  </code>
+  were to attempt to deploy this stack, they might encounter an
+  <code>
+   Error response from daemon: access denied
+  </code>
+  message in the UI.
+ </p>
+ <p>
+  Since the ucp-hrm network is external to this compose stack (as shown the following compose file), it will not be created by docker-compose and access to it must be granted through the UI.
+ </p>
+ <pre>
+<code>---
+version: '3.1'
+
+services:
+  demodocker:
+    image: nginx:alpine
+    environment:
+      - DOMAIN=test.ucp.local
+    ports:
+      - 80
+      - 443
+    networks:
+      - frontend
+      - ucp-hrm
+    volumes:
+      - static_content:/var/www/html:ro
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 1G
+      labels:
+        - com.docker.ucp.access.label=alpha-dev
+        - com.docker.ucp.mesh.http.80=external_route=http://${DOMAIN},redirect=https://${DOMAIN}
+        - com.docker.ucp.mesh.http.443=external_route=sni://${DOMAIN},internal_port=443
+networks:
+  ucp-hrm:
+    external: true
+  frontend:
+    labels:
+      com.docker.ucp.access.label=alpha-dev
+
+volumes:
+  static_content:
+    labels:
+      com.docker.ucp.access.label=alpha-dev
+</code></pre>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/ucp-hrm_user_permissions_-_Error_response_from_daemon:_access_denied">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-2">
+  Resolution
+ </h2>
+ <p>
+  Since the ucp navigate to
+  <strong>
+   User Management  &gt; Teams
+  </strong>
+  on the UCP UI, choose a team you want to give access to the ucp-hrm network, then click on the
+  <strong>
+   Permissions
+  </strong>
+  tab, and add the below label:
+ </p>
+ <ul>
+  <li>
+   <strong>
+    ucp-hrm
+   </strong>
+   --&gt; Restricted Control
+  </li>
+ </ul>
+ <p>
+  <img alt="" class="internal" height="519px" src="/kb/images/2299-0.png" style="width: 912px; height: 519px;" width="912px"/>
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

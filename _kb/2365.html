@@ -1,0 +1,539 @@
+---
+title: "Troubleshooting a UCP 2.2.x cluster"
+id: 2365
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2365/
+originalpath: https://success.docker.com/KBase/Troubleshooting_a_UCP_2.2.x_cluster
+source: https://success.docker.com/@api/deki/pages/2365/contents
+tags:
+- tag: "article:tutorial"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ This article provides direction on how to begin troubleshooting a UCP 2.2.x cluster, as well as the information to gather along the way to allow support to further assist.
+</p>
+<p>
+ <span class="mt-font-size-28" style="color:rgb(37, 67, 86);font-family:Geomanist Book;">
+  Goal
+ </span>
+</p>
+<p>
+ After completing these steps, you should have a good understanding about how to
+</p>
+<ol>
+ <li>
+  Begin troubleshooting a UCP 2.2.x cluster
+ </li>
+ <li>
+  Capture important information along the way
+ </li>
+</ol>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Collect_Support_Dump">
+ </span>
+ <h2 id="1-0">
+  Collect Support Dump
+ </h2>
+ <p>
+  Begin by collecting a support dump, you can mark the exact time the issue occurred and whether it’s persistent/intermittent.
+ </p>
+ <ul>
+  <li>
+   <a href="/kb/640/" rel="internal" target="_blank" title="https://success.docker.com/KBase/What_should_I_include_when_opening_a_support_ticket%3F">
+    https://success.docker.com/KBase/What_should_I_include_when_opening_a_support_ticket%3F
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Verify_Backups">
+ </span>
+ <h2 id="1-1">
+  Verify Backups
+ </h2>
+ <p>
+  Create/verify a backup for all components if possible (UCP, DTR, Swarm, NFS):
+ </p>
+ <ul>
+  <li>
+   <a class="link-https" href="/datacenter/ucp/2.2/reference/cli/backup/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/backup/">
+    https://docs.docker.com/datacenter/ucp/2.2/reference/cli/backup/
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/">
+    https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
+   </a>
+  </li>
+  <li>
+   <a class="link-https" href="/engine/swarm/admin_guide/#back-up-the-swarm" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm">
+    https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Ideas_for_Investigation">
+ </span>
+ <h2 id="1-2">
+  Ideas for Investigation
+ </h2>
+ <ul>
+  <li>
+   Container/service status and health
+  </li>
+  <li>
+   Container logs and inspect
+  </li>
+  <li>
+   Overlay network reachability and DNS resolution
+  </li>
+  <li>
+   Resource exhaustion (disk, cpu, memory, io, network, inode)
+  </li>
+  <li>
+   Node availability
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Determine_Where_the_Issue_May_Reside">
+ </span>
+ <h2 id="1-3">
+  Determine Where the Issue May Reside
+ </h2>
+ <p>
+  Key:
+  <b id="docs-internal-guid-1477db82-817d-d096-d5ea-543106fa0d59">
+   <span class="mt-bgcolor-00ff00">
+    Strongly related
+   </span>
+   <span class="mt-bgcolor-ffff00">
+    Related
+   </span>
+  </b>
+ </p>
+ <p>
+  This matrix describes the relationship between features of Docker EE UCP 2.2.x — this is not exhaustive of all services but rather a starting point for analysis and investigation.
+ </p>
+ <table class="mt-responsive-table mt-table-big">
+  <tbody>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       Controller
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       Swarm Manager
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       auth-api
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       auth-store
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       auth-worker
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <strong>
+      <span class="mt-font-size-14">
+       etcd
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       metrics
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <strong>
+      <span class="mt-font-size-14">
+       CA's
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       agent/ reconciler
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+     <strong>
+      <span class="mt-font-size-14">
+       engine
+      </span>
+     </strong>
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       Docker API: networks, volumes, containers
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       Docker API: services, secrets, configs
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <strong>
+      <span class="mt-font-size-14">
+       Authentication Failures
+      </span>
+     </strong>
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-34df-73b0-e64c29585ff8">
+       Authorization Failures
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-6d43-eade-066ce1703910">
+       Node list timeout/errors
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-90eb-d696-5215fb64e8c0">
+       Unhealthy nodes
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-a56c-bd05-fc09f83ad144">
+       Node in [Pending]
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-bac3-dda1-b8a1672c9394">
+       “rpc error …”
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-d581-c038-6a52cc55d8ed">
+       “context deadline exceeded”
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+   <tr>
+    <td class="mt-noheading mt-column-width-10">
+     <span class="mt-font-size-14">
+      <b id="docs-internal-guid-887b3778-8154-e96a-af63-aca4c773e0fb">
+       Charts not loading data
+      </b>
+     </span>
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-column-width-5">
+    </td>
+    <td class="mt-noheading mt-bgcolor-ffff00 mt-column-width-10">
+    </td>
+    <td class="mt-noheading mt-bgcolor-00ff00 mt-column-width-5">
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<div class="mt-section" id="section_5" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="More_Troubleshooting">
+ </span>
+ <h2 id="1-4">
+  More Troubleshooting
+ </h2>
+ <ul>
+  <li>
+   <a class="link-https" href="/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations" rel="external nofollow" target="_blank" title="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations">
+    https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+   </a>
+  </li>
+ </ul>
+</div>
+<div class="mt-section" id="section_6" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Review_Logs_for_Errors_and_Resolution">
+ </span>
+ <h2 id="1-5">
+  Review Logs for Errors and Resolution
+ </h2>
+ <p>
+  Review UCP logs based upon the above matrix for errors and hints to resolution.
+ </p>
+</div>
+<div class="mt-section" id="section_7" mt-section-origin="KBase/Troubleshooting_a_UCP_2.2.x_cluster">
+ <span id="Resolve">
+ </span>
+ <h2 id="1-6">
+  Resolve
+ </h2>
+ <p>
+  Capture a support dump after every action taken to fix the problem. Avoid taking any actions unless you fully understand what the problem is. If the first set of actions does not fix the problem, avoid taking further actions in the same direction, as the issue might have mutated by the action, and the environment may be surfacing a different problem entirely. Resolve the issues uncovered from the logs. If unsure, find assistance from
+  <a class="external" href="http://docs.docker.com" rel="external nofollow" target="_blank" title="http://docs.docker.com">
+   docs.docker.com
+  </a>
+  or
+  <a href="/kb/1/" rel="internal" title="https://success.docker.com">
+   kbase
+  </a>
+  to move forward, collect the data captured during the process, and open a case with
+  <a class="link-https" href="https://support.docker.com" rel="external nofollow" target="_blank" title="https://support.docker.com">
+   Docker Support
+  </a>
+  .
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

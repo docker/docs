@@ -1,0 +1,34 @@
+---
+title: "Abort signal on Docker host putty session during Docker Engine restart"
+id: 2282
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2282/
+originalpath: https://success.docker.com/KBase/Abort_signal_on_Docker_host_putty_session_during_Docker_Engine_restart
+source: https://success.docker.com/@api/deki/pages/2282/contents
+tags:
+- tag: "article:question"
+- tag: "component:engine"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ <br/>
+ When using Putty with Linux hosts on VMWare, abort signals can occur when the Putty keepalive is too low.
+ <br/>
+ <br/>
+ In the Putty configuration window, change the Connection setting
+ <code>
+  Seconds between keepalive
+ </code>
+ to
+ <code>
+  5
+ </code>
+ .
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

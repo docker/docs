@@ -1,0 +1,55 @@
+---
+title: "Can I terminate a Docker Cloud node from the Packet.net portal?"
+id: 569
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/569/
+originalpath: https://success.docker.com/Cloud/Solve/Can_I_terminate_a_Docker_Cloud_node_from_the_Packet.net_portal%3F
+source: https://success.docker.com/@api/deki/pages/569/contents
+tags:
+- tag: "article:topic"
+- tag: "Docker Cloud"
+- tag: "node"
+- tag: "packet.net"
+- tag: "product:cloud"
+- tag: "terminate"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="Cloud/Solve/Can_I_terminate_a_Docker_Cloud_node_from_the_Packet.net_portal?">
+ <span id="Question">
+ </span>
+ <h2 id="1-0">
+  Question
+ </h2>
+ <p>
+  Can I terminate a Docker Cloud node from the Packet.net portal?
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="Cloud/Solve/Can_I_terminate_a_Docker_Cloud_node_from_the_Packet.net_portal?">
+ <span id="Answer">
+ </span>
+ <h2 id="1-1">
+  Answer
+ </h2>
+ <p>
+  If you created the node using Docker Cloud and you terminate it from the portal, all data in that node will be destroyed. Docker Cloud detects the termination and marks the node as
+  <code>
+   Terminated
+  </code>
+  . If you turn off the device, Docker Cloud marks it as
+  <code>
+   Unreachable
+  </code>
+  because the node has not been terminated but Cloud cannot contact it.
+ </p>
+ <p>
+  If you created the host yourself, added it to Docker Cloud as a “Bring Your Own Node” and then terminated it, the node will be marked as
+  <code>
+   Unreachable
+  </code>
+  until you manually remove it.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-cloud/" class="button outline-btn">Continue troubleshooting Docker Cloud</a><br>

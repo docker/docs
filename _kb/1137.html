@@ -1,0 +1,89 @@
+---
+title: "How do I enable debug logging of the Docker daemon?"
+id: 1137
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1137/
+originalpath: https://success.docker.com/KBase/How_do_I_enable_%22debug%22_logging_of_the_Docker_daemon%3F
+source: https://success.docker.com/@api/deki/pages/1137/contents
+tags:
+- tag: "article:howto"
+- tag: "centos"
+- tag: "component:engine"
+- tag: "Daemon"
+- tag: "debug"
+- tag: "logs"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "red hat"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ To enable debug logging of the Docker daemon use the following the steps:
+</p>
+<p>
+ 1. Edit
+ <code>
+  /etc/docker/daemon.json
+ </code>
+ , setting
+ <code>
+  "debug": true
+ </code>
+ . If this file does not exist, it should look like this when complete:
+</p>
+<pre>
+<code>{
+    "debug": <span class="replaceabletext">true</span>
+}
+</code></pre>
+<p>
+ 2. Send a SIGHUP signal to the Docker daemon, triggering it to reload its configuration without restarting the process.
+</p>
+<pre>
+<code>sudo kill -SIGHUP $(pidof dockerd)
+</code></pre>
+<p>
+ 3. (optional) To check that the configuration has been applied, check
+ <code>
+  docker info
+ </code>
+ . If debug is enabled, the output will show
+ <code>
+  Debug Mode (server): true
+ </code>
+ .
+</p>
+<pre>
+<code>docker info | grep -i debug.*server
+</code></pre>
+<p>
+</p>
+<p>
+ To disable debug logging, perform both steps again, setting
+ <code>
+  "debug":
+  <span class="replaceabletext">
+   false
+  </span>
+ </code>
+ .
+</p>
+<p>
+ This process works on all supported versions of Linux. Refer to the
+ <a href="/kb/928/" rel="internal" style="background-color: rgb(255, 255, 255);" title="Compatibility Matrix">
+  Compatibility Matrix
+ </a>
+ for a list of specific versions.
+</p>
+<p>
+ The product documentation for this procedure can be found here:
+ <a class="link-https" href="/engine/admin/#enable-debugging" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/admin/#enable-debugging">
+  https://docs.docker.com/engine/admin...able-debugging
+ </a>
+</p>
+
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

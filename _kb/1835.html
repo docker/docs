@@ -1,0 +1,374 @@
+---
+title: "Recovering the Admin Password for Docker EE Standard and Advanced"
+id: 1835
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1835/
+originalpath: https://success.docker.com/KBase/Recovering_the_Admin_Password_for_Docker_EE_Standard_and_Advanced
+source: https://success.docker.com/@api/deki/pages/1835/contents
+tags:
+- tag: "article:tutorial"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+- tag: "testedon:cse-1.13.1-cs1"
+- tag: "testedon:docker-17.03"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Anoop Kumar";
+/*]]>*/
+</script>
+<p>
+ The AuthN API or eNZi (as it is known internally and pronounced N-Z) is a centralized authentication and authorization service and framework for Docker EE Standard and Advanced. This API is completely integrated and configured into Docker EE and works seamlessly with UCP as well as DTR. This is the component and service under the hood that manages accounts, teams and organizations, user sessions, permissions and access control through labels, Single-Sign-On (Web SSO) through OpenID Connect, and synchronization of account details from an external LDAP-based system into Docker EE Standard and Advanced.
+</p>
+<p>
+ For regular day-to-day activities, users and operators need not be concerned with the AuthN API and how it works, however its features can be leveraged to automate many common functions and/or bypass the UCP UI altogether to manage and manipulate the data directly.
+</p>
+<p>
+ The RESTFul AuthN API endpoints are documented in the
+ <a class="link-https" href="/apidocs/v2.0.1/#!/accounts/func1" rel="external nofollow" target="_blank">
+  eNZi API
+ </a>
+ .
+</p>
+<p>
+ Interaction with eNZi can be accomplished in two ways: via the exposed RESTful eNZi API over HTTP or via the
+ <code>
+  enzi
+ </code>
+ command.
+</p>
+<p>
+ This document demonstrates how to use the
+ <code>
+  enzi
+ </code>
+ command to solve a common issue — forgetting the admin password and consequently unable to login as an admin. Such a situation would not allow the invocation of the eNZi RESTful service as well. As such it would be necessary to access the container running the
+ <code>
+  enzi
+ </code>
+ service using the
+ <code>
+  enzi
+ </code>
+ command to reset the admin user's password.
+</p>
+<p>
+ This is especially helpful when using LDAP Auth mode with only one recovery admin account configured.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/Recovering_the_Admin_Password_for_Docker_EE_Standard_and_Advanced">
+ <span id="Reset_the_Admin_Password">
+ </span>
+ <h2 id="1-0">
+  Reset the Admin Password
+ </h2>
+ <p>
+  The first option is to attempt a reset of the admin password.
+ </p>
+ <p>
+  The
+  <code>
+   passwd
+  </code>
+  command on
+  <code>
+   enzi
+  </code>
+  requires the value for
+  <code>
+   --db-addr
+  </code>
+  pointing to the RethinkDB host and port. This information can be found in the process table on the eNZi container. First, connect to the controller node:
+ </p>
+ <pre>
+<code>docker exec -it ucp-auth-api sh
+</code></pre>
+ <p>
+  At the prompt for the controller node, use the following command to view the
+  <code>
+   enzi
+  </code>
+  processes:
+ </p>
+ <pre>
+<code>ps -eaf | grep enzi
+</code></pre>
+ <p>
+  You will see output similar to the following:
+ </p>
+ <pre>
+<code>1 nobody     0:01 /usr/local/bin/enzi --debug --db-addr=10.1.1.250:12383 --jsonlog api --root-prefix=enzi
+22 nobody     0:00 grep enzi
+</code></pre>
+ <p>
+  Use the
+  <code>
+   db-addr
+  </code>
+  in the running process to specify the same value to the
+  <code>
+   enzi
+  </code>
+  command to change the admin password:
+ </p>
+ <pre>
+<code>enzi --db-addr=10.1.1.250:12383 passwd --interactive
+</code></pre>
+ <p>
+  At the prompts, enter the username of the admin you wish to reset the password for, the new password, and confirm the new password:
+ </p>
+ <pre>
+<code>Admin Username: tesla
+Admin Password:
+Confirm Admin Password:
+</code></pre>
+ <p>
+  If successful, you will see the following message:
+ </p>
+ <pre>
+<code>INFO[0021] successfully set user account password: tesla 
+</code></pre>
+ <p>
+  To run everything described as one command:
+ </p>
+ <pre>
+<code>docker exec -it ucp-auth-api enzi "$(docker inspect --format '{{ index .Args 0 }}' ucp-auth-api)" passwd --interactive
+</code></pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/Recovering_the_Admin_Password_for_Docker_EE_Standard_and_Advanced">
+ <span id="Create_Another_Admin_Account">
+ </span>
+ <h2 id="1-1">
+  Create Another Admin Account
+ </h2>
+ <p>
+  An alternative method of addressing the issue of forgotten admin password is to create another admin user with a known password and then using this newly created admin to repair the issue as shown below.
+ </p>
+ <p>
+  Again, connect to the UCP controller:
+ </p>
+ <pre>
+<code>docker exec -it ucp-auth-api sh
+</code></pre>
+ <p>
+  Then execute the following
+  <code>
+   enzi
+  </code>
+  command with the proper
+  <code>
+   db-addr
+  </code>
+  value:
+ </p>
+ <pre>
+<code>enzi --debug --db-addr=10.1.1.250:12383 create-admin --interactive
+</code></pre>
+ <p>
+  Create a new admin account using the prompts:
+ </p>
+ <pre>
+<code>Admin Username: repair-admin
+Admin Password:
+Confirm Admin Password:
+</code></pre>
+ <p>
+  If sucessful, you will see the following:
+ </p>
+ <pre>
+<code>connecting to db ...
+DEBU[0019] connecting to DB Addrs: [10.1.1.250:12383]
+creating admin user account...
+successfully created admin user account: repair-admin
+</code></pre>
+ <p>
+  Now it should be possible to login with the newly created
+  <code>
+   repair-admin
+  </code>
+  user and password..
+ </p>
+ <blockquote>
+  <p>
+   Note: Accounts created manually (like in the process above) when the Auth mode is set to
+   <code>
+    LDAP
+   </code>
+   will get disabled during the subsequent sync cycle.
+  </p>
+ </blockquote>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/Recovering_the_Admin_Password_for_Docker_EE_Standard_and_Advanced">
+ <span id="Convert_Non-Admin_Account_to_an_Admin_Account">
+ </span>
+ <h2 id="1-2">
+  Convert Non-Admin Account to an Admin Account
+ </h2>
+ <p>
+  This option requires gaining access to the eNZi database running on
+  <code>
+   rethinkdb
+  </code>
+  . Assuming there are other regular accounts in the database, this option involves the conversion of a regular non-admin account into an admin account and then using the credentials of this account to log in.
+ </p>
+ <p>
+  The
+  <code>
+   rethinkdb
+  </code>
+  instance bundled with eNZi is hardened such that it does not provide direct HTTP or console access. A possible option is to use another Docker container running a nodejs driver as a RethinkDB client, attached to the same network as the
+  <code>
+   eNZi
+  </code>
+  database, and connected to the driver port of
+  <code>
+   12383
+  </code>
+  . Standard
+  <code>
+   ReQL
+  </code>
+  commands can be run using this setup in the same way traditional databases use SQL statements. The entire process is simplified using a baked image
+  <code>
+   anoop/reticule
+  </code>
+  that acts as a RethinkDB driver based on nodejs.
+ </p>
+ <p>
+  As before, this too needs to be run on a UCP Controller node. Connect to the UCP controller node using the
+  <code>
+   anoop/reticule
+  </code>
+  image:
+ </p>
+ <pre>
+<code>docker run -it -v ucp-auth-store-certs:/tls --net container:ucp-auth-store --rm anoop/reticule &lt;your_ip_address&gt; 12383
+</code></pre>
+ <p>
+  The following DepreciationWarning can be safely ignored:
+ </p>
+ <pre>
+<code>(node:1) DeprecationWarning: Using Buffer without `new` will soon stop working. Use `new Buffer()`, or preferably `Buffer.from()`, `Buffer.allocUnsafe()` or `Buffer.alloc()` instead.
+    undefined
+</code></pre>
+ <p>
+  After successfully connecting to the UCP controller node, to look at all accounts within eNZi, connect to the eNZi database and lookup the contents of the
+  <code>
+   accounts
+  </code>
+  table to show only selected fields using the
+  <code>
+   pluck
+  </code>
+  function:
+ </p>
+ <pre>
+<code>r.db('enzi').table('accounts').pluck('name','isAdmin','isOrg','isActive')
+</code></pre>
+ <p>
+  The output will be similar to the following:
+ </p>
+ <pre>
+<code>[ { isActive: false,
+    isAdmin: false,
+    isOrg: true,
+    name: 'docker-datacenter' },
+  { isActive: true, isAdmin: true, isOrg: false, name: 'admin' },
+  { isActive: true, isAdmin: false, isOrg: false, name: 'docker' },
+</code></pre>
+ <p>
+  This output shows an organization called
+  <code>
+   docker-datacenter
+  </code>
+  , which is not useful to log into UCP, and two users — one admin account:
+  <code>
+   admin
+  </code>
+  with
+  <code>
+   isAdmin: true
+  </code>
+  , the password for which is forgotten; and one non-admin account:
+  <code>
+   docker
+  </code>
+  , the password for which is intact. To reset the forgotten admin password, use the non-admin account by escalating its permissions to become an admin account using the following command:
+ </p>
+ <pre>
+<code class="javascript">r.db('enzi').table('accounts').get(‘docker’).update({isAdmin: “true”})
+</code></pre>
+ <p>
+  Now, logging into UCP as
+  <code>
+   docker
+  </code>
+  reflects admin access, which can be used to reset or enable the admin account's access.
+ </p>
+</div>
+<div class="mt-section" id="section_4" mt-section-origin="KBase/Recovering_the_Admin_Password_for_Docker_EE_Standard_and_Advanced">
+ <span id="Create_Another_Admin_User_Using_RethinkDB">
+ </span>
+ <h2 id="1-3">
+  Create Another Admin User Using RethinkDB
+ </h2>
+ <p>
+  Finally, another option for recovering the lost admin password is to create an admin user from scratch.
+ </p>
+ <p>
+  Once again, collect to the UCP controller using the
+  <code>
+   anoop/reticule
+  </code>
+  image:
+ </p>
+ <pre>
+<code>docker run -it -v ucp-auth-store-certs:/tls --net container:ucp-auth-store --rm anoop/reticule &lt;your_ip_address&gt; 12383
+</code></pre>
+ <p>
+  Then execute the following to create the new admin user
+  <code>
+   backupadmin
+  </code>
+  :
+ </p>
+ <pre>
+<code>r.db('enzi').table('accounts').insert({
+... name: 'backupadmin',
+... id: 'backupadmin',
+... isOrg: false,
+... isAdmin: true,
+... isActive: true,
+... passwordHash: 'bcrypt$$2a$10$HEISWxBRRIJr26U0cJMwAePMP1vHO1GNbBVSPdg2zftONl/dVletW'})
+{ deleted: 0,
+  errors: 0,
+  inserted: 1,
+  replaced: 0,
+  skipped: 0,
+  unchanged: 0 }
+</code></pre>
+ <p>
+  The UCP admin console should now be accessible using
+  <code>
+   backupadmin
+  </code>
+  /
+  <code>
+   password
+  </code>
+  as the new admin credentials.
+ </p>
+ <blockquote>
+  <p>
+   Note: Accounts created manually (like in the process above) when the Auth mode is set to
+   <code>
+    LDAP
+   </code>
+   will get disabled during the subsequent sync cycle.
+  </p>
+ </blockquote>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

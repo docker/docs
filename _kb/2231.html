@@ -1,0 +1,85 @@
+---
+title: "RethinkDB cluster warnings"
+id: 2231
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2231/
+originalpath: https://success.docker.com/KBase/RethinkDB_cluster_warnings
+source: https://success.docker.com/@api/deki/pages/2231/contents
+tags:
+- tag: "article:errors"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<script type="text/javascript">
+ /*<![CDATA[*/
+var authorByline = "Joao Fernandes";
+/*]]>*/
+</script>
+<p>
+ User and organization data for Docker EE is stored in a
+ <a class="link-https" href="https://www.rethinkdb.com/" rel="external nofollow" target="_blank">
+  RethinkDB
+ </a>
+ database which is replicated across all manager nodes in the UCP cluster.
+</p>
+<p>
+ UCP constantly monitors the health of the replicas and alerts when one or more of the replicas are unhealthy.
+</p>
+<div class="mt-section" id="section_1" mt-section-origin="KBase/RethinkDB_cluster_warnings">
+ <span id="Rethinkdb_cluster_unhealthy:_n_of_m_replicas_are_healthy.">
+ </span>
+ <h3 id="2-0">
+  Rethinkdb cluster unhealthy:
+  <code>
+   n
+  </code>
+  of
+  <code>
+   m
+  </code>
+  replicas are healthy.
+ </h3>
+ <p>
+  There are currently
+  <code>
+   m
+  </code>
+  RethinkDB replicas in the system, but only
+  <code>
+   n
+  </code>
+  of them are healthy.
+ </p>
+ <ol>
+  <li>
+   You can look at the logs by running
+  </li>
+ </ol>
+ <pre>
+docker logs ucp-controller 2&gt;&amp;1 | grep "rethinkDB table status"</pre>
+ <ol start="2">
+  <li>
+   You can also try to troubleshoot by using the instructions posted
+   <a class="link-https" href="/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/#rethinkdb-database" rel="external nofollow" target="_blank">
+    here
+   </a>
+   .
+  </li>
+  <li>
+   If you cannot find what is wrong,
+   <a class="link-https" href="/datacenter/ucp/2.1/guides/get-support" rel="external nofollow" target="_blank">
+    collect the support dump and file a support ticket
+   </a>
+   .
+  </li>
+ </ol>
+ <p>
+  Since this problem is in the distributed database of UCP, you should not add or remove nodes from your cluster until the problem is solved. Otherwise, it can lead to data loss.
+ </p>
+</div>
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

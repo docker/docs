@@ -1,0 +1,64 @@
+---
+title: "How do  I replace the TLS certificates for UCP?"
+id: 1469
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/1469/
+originalpath: https://success.docker.com/KBase/How_do__I_replace_the_TLS_certificates_for_UCP%3F
+source: https://success.docker.com/@api/deki/pages/1469/contents
+tags:
+- tag: "article:howto"
+- tag: "component:ucp"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<p>
+ Docker Universal Control Plane uses TLS to encrypt the traffic between users and your cluster. By default this is done using self-signed certificates.
+</p>
+<p>
+ If you installed UCP with the default self-signed certs, you can replace them with externally-signed certs after the installation process.
+</p>
+<p>
+ To replace the server certificates used by UCP,
+ <strong>
+  for each controller node
+ </strong>
+ , in the directory where you have your keys and certificates, use the following commands:
+</p>
+<ol>
+ <li>
+  Create a container that attaches to the same volume where certificates are stored:
+  <pre>
+docker create --name replace-certs -v ucp-controller-server-certs:/data busybox</pre>
+ </li>
+ <li>
+  Copy your keys and certificates to the container's volumes:
+  <pre>
+docker cp cert.pem replace-certs:/data/cert.pem
+docker cp ca.pem replace-certs:/data/ca.pem
+docker cp key.pem replace-certs:/data/key.pem
+</pre>
+ </li>
+ <li>
+  Remove the container, since you won't need it any longer:
+  <pre>
+docker rm replace-certs</pre>
+ </li>
+ <li>
+  Restart the ucp-controller container:
+  <pre>
+docker restart ucp-controller</pre>
+ </li>
+ <li>
+  Communicate the change to users. Ask users to log into UCP and
+  <a class="link-https" href="/ucp/access-ucp/cli-based-access/" rel="external nofollow" target="_blank" title="https://docs.docker.com/ucp/access-ucp/cli-based-access/">
+   download the updated certificate client bundle
+  </a>
+  .
+ </li>
+</ol>
+
+{% endraw %}
+<a href="/troubleshoot/universal-control-plane/" class="button outline-btn">Continue troubleshooting Universal Control Plane</a><br><a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

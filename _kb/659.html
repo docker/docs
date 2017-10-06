@@ -1,0 +1,144 @@
+---
+title: "How to Remove a Signed Image with a <none> Tag"
+id: 659
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/659/
+originalpath: https://success.docker.com/KBase/How_to_Remove_a_Signed_Image_with_a_%3Cnone%3E_Tag
+source: https://success.docker.com/@api/deki/pages/659/contents
+tags:
+- tag: "article:howto"
+- tag: "component:engine"
+- tag: "Docker Content Trust"
+- tag: "engine"
+- tag: "notary"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_to_Remove_a_Signed_Image_with_a_%3Cnone%3E_Tag">
+ <span id="Overview">
+ </span>
+ <h3 id="2-0">
+  Overview
+ </h3>
+ <p>
+  When using Docker Content Trust, after pulling a signed image, there are two entries in
+  <strong>
+   <span class="mt-font-courier-new">
+    docker images
+   </span>
+  </strong>
+  output - one with the tag you requested, and one with a
+  <span class="mt-font-courier-new">
+   <strong>
+    &lt;none&gt;
+   </strong>
+  </span>
+  tag. This is normal output. There is only one image instance. However, when removing the image, both entries must be deleted in the proper order.
+ </p>
+ <p>
+  For example:
+ </p>
+ <pre>
+# <strong>export DOCKER_CONTENT_TRUST=1</strong>
+# <strong>docker pull pvnovarese/mprime:latest</strong>
+Pull (1 of 1): pvnovarese/mprime:latest@sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00
+sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00: Pulling from pvnovarese/mprime
+a3ed95caeb02: Pull complete
+546e579918ed: Pull complete
+Digest: sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00
+Status: Downloaded newer image for pvnovarese/mprime@sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00
+Tagging pvnovarese/mprime@sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00 as pvnovarese/mprime:latest
+# <strong>docker images</strong>
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+pvnovarese/mprime        latest              459769dbc7a1        5 days ago          4.461 MB
+pvnovarese/mprime        &lt;none&gt;              459769dbc7a1        5 days ago          4.461 MB
+</pre>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_to_Remove_a_Signed_Image_with_a_%3Cnone%3E_Tag">
+ <span id="Diagnostic_Steps">
+ </span>
+ <h3 id="2-1">
+  Diagnostic Steps
+ </h3>
+ <p>
+  You can see the difference in these two entries if you use the
+  <span class="mt-font-courier-new">
+   <strong>
+    --digests=true
+   </strong>
+  </span>
+  option (the untagged entry has the Docker Content Trust signature digest):
+ </p>
+ <pre>
+# <strong>docker images --digests=true</strong>
+REPOSITORY               TAG                 DIGEST                                                                    IMAGE ID            CREATED             SIZE
+pvnovarese/mprime        latest              &lt;none&gt;                                                                    459769dbc7a1        5 days ago          4.461 MB
+pvnovarese/mprime        &lt;none&gt;              sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00   459769dbc7a1        5 days ago          4.461 MB
+</pre>
+ <p>
+  You can create new containers by specifying either the tag or the digest:
+ </p>
+ <pre>
+# <strong>docker run -d pvnovarese/mprime:latest</strong>
+001df1fcc808ac490b60dbd94805433282947544d95807340e0d7a9da52e7138
+# <strong>docker run -d pvnovarese/mprime@sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00</strong>
+f83ba1e30327d34d0e05cf9d94055d69adc1bda74681b06fd8ab7f708d303f5a</pre>
+ <p>
+  <strong>
+   Note:
+  </strong>
+  in this case, specifying the tag will induce the Engine to verify the trust data before creating the container.  If only the digest is specified, then the Engine will trust that particular signature digest and immediately start the container.  You can see the details by using the
+  <span class="mt-font-courier-new">
+   <strong>
+    -D
+   </strong>
+  </span>
+  flag to enable debug output, e.g.:
+ </p>
+ <pre>
+# <strong>docker -D run -d pvnovarese/mprime:latest</strong>
+DEBU[0000] reading certificate directory: /home/pvn/.docker/tls/notary.docker.io
+   [... debug output snipped for brevity ...]
+DEBU[0001] successfully verified targets
+33e8b590c835371b43a2c32edb47cc08538097b3b35891460176052dbee05f34</pre>
+ <p>
+  compared to:
+ </p>
+ <pre>
+# <strong>docker -D run -d pvnovarese/mprime@sha256:0b315a681a6b9f14f93ab34f3c744fd547bda30a03b55263d93861671fa33b00</strong>
+17e921adb660e621a1eb05a5e291a86a538fef4bbe20f43d54f73a1e5117dd30</pre>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_to_Remove_a_Signed_Image_with_a_%3Cnone%3E_Tag">
+ <span id="Removing_the_Signed_Image">
+ </span>
+ <h3 id="2-2">
+  Removing the Signed Image
+ </h3>
+ <p>
+  If you would like to remove the signed image, the easiest method is to first remove the tagged entry, then remove the image by specifying its Image ID:
+ </p>
+ <pre>
+# <strong>docker images</strong>
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+pvnovarese/mprime        latest              459769dbc7a1        5 days ago          4.461 MB
+pvnovarese/mprime        &lt;none&gt;              459769dbc7a1        5 days ago          4.461 MB
+# <strong>docker rmi pvnovarese/mprime:latest</strong>
+Untagged: pvnovarese/mprime:latest
+# <strong>docker rmi 459769dbc7a1</strong>
+Deleted: sha256:459769dbc7a1cfb3a866102c0a527b1fb0b09b8b3a827f3f122dfd16b9fafb08
+Deleted: sha256:f73e8f96d63c018dc0669de123a80bf44986dc3451b09c2a14b9acc72a336ab7
+Deleted: sha256:5126a1af5d4c6e57a2f4b7aa10edf1628920132ef1dff9dc0032ba3653d413a2
+Deleted: sha256:2d5b0fcd6d0995b0f0b796decf69ebc4bf8192b50a7fe3796b46fa9ac1c06654
+</pre>
+ <blockquote>
+  Note: This behavior might change in future releases. Check out this GitHub issue about improving the user experience:
+  <a class="link-https" href="https://github.com/docker/docker/issues/18892" rel="external nofollow" target="_blank" title="https://github.com/docker/docker/issues/18892">
+   https://github.com/docker/docker/issues/18892
+  </a>
+ </blockquote>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>

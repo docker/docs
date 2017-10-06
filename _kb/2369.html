@@ -1,0 +1,87 @@
+---
+title: "How do I enable the remote API for dockerd"
+id: 2369
+draftstate: inactive
+deleted: false
+layout: docs
+permalink: /kb/2369/
+originalpath: https://success.docker.com/KBase/How_do_I_enable_the_remote_API_for_dockerd
+source: https://success.docker.com/@api/deki/pages/2369/contents
+tags:
+- tag: "article:howto"
+- tag: "component:engine"
+- tag: "platform:linux"
+- tag: "product:datacenter"
+- tag: "stage:reviewed"
+---
+{% raw %}
+<div class="mt-section" id="section_1" mt-section-origin="KBase/How_do_I_enable_the_remote_API_for_dockerd">
+ <span id="Overview">
+ </span>
+ <h2 id="1-0">
+  Overview
+ </h2>
+ <p>
+  The best way to include the required startup options without editing the systemd unit file in place is to use a systemd drop-in file.
+ </p>
+</div>
+<div class="mt-section" id="section_2" mt-section-origin="KBase/How_do_I_enable_the_remote_API_for_dockerd">
+ <span id="Resolution">
+ </span>
+ <h2 id="1-1">
+  Resolution
+ </h2>
+ <p>
+  After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:
+ </p>
+ <ol>
+  <li>
+   Create a file at
+   <code>
+    /etc/systemd/system/docker.service.d/startup_options.conf
+   </code>
+   with the below contents:
+   <pre>
+# /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</pre>
+   <blockquote>
+    <strong>
+     Note:
+    </strong>
+    The -H flag binds dockerd to a listening socket, either a Unix socket or a TCP port. You can specify multiple -H flags to bind to multiple sockets/ports. The default -H fd:// uses systemd's socket activation feature to refer to /lib/systemd/system/docker.socket.
+   </blockquote>
+  </li>
+  <li>
+   Reload the unit files:
+   <pre>
+$ sudo systemctl daemon-reload</pre>
+  </li>
+  <li>
+   Restart the docker daemon with new startup options:
+   <pre>
+$ sudo systemctl restart docker.service</pre>
+  </li>
+  <li>
+   Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.
+  </li>
+ </ol>
+</div>
+<div class="mt-section" id="section_3" mt-section-origin="KBase/How_do_I_enable_the_remote_API_for_dockerd">
+ <span id="Additional_Documentation">
+ </span>
+ <h1 id="0-0">
+  Additional Documentation
+ </h1>
+ <ul>
+  <li>
+   <a class="link-https" href="/engine/security/" rel="external nofollow" target="_blank" title="https://docs.docker.com/engine/security/">
+    https://docs.docker.com/engine/security/
+   </a>
+  </li>
+ </ul>
+</div>
+{% endraw %}
+<a href="/troubleshoot/docker-datacenter/" class="button outline-btn">Continue troubleshooting Docker Datacenter</a><br>
