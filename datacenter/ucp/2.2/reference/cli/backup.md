@@ -22,7 +22,7 @@ This command creates a tar file with the contents of the volumes used by
 this UCP manager node, and prints it. You can then use the `restore` command to
 restore the data from an existing backup.
 
-To create backups of a multi-node swarm, you only need to backup a single manager
+To create backups of a multi-node swarm, you only need to back up a single manager
 node. The restore operation will reconstitute a new UCP installation from the
 backup of any previous manager.
 
@@ -42,5 +42,5 @@ Note:
 |`--debug, D`|Enable debug mode|
 |`--jsonlog`|Produce json formatted output for easier parsing|
 |`--interactive, i`|Run in interactive mode and prompt for configuration values|
-|`--id`|The ID of the UCP instance to backup|
+|`--id`|The ID of the UCP instance to back up|
 |`--passphrase`|Encrypt the tar file with a passphrase|
