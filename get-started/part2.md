@@ -333,10 +333,6 @@ If the image isn't available locally on the machine, Docker will pull it from
 the repository.
 
 ```shell
-docker image rm <image id>
-```
-
-```shell
 $ docker run -p 4000:80 john/get-started:part2
 Unable to find image 'john/get-started:part2' locally
 part2: Pulling from john/get-started
