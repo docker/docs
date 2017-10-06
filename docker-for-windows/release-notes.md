@@ -403,6 +403,12 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
+
+* Bug fixes
+  - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
+  
+
 ### Docker Community Edition 17.09.0-ce-win31 2017-09-29 (Edge)
 
 * Upgrades
