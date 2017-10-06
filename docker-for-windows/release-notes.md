@@ -19,6 +19,11 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
+
+* Bug fixes
+  - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
+
 ### Docker Community Edition 17.09.0-ce-win32 2017-10-02 (Stable)
 
 * Upgrades
