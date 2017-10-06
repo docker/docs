@@ -7,6 +7,7 @@ redirect_from:
 title: Get Docker EE for Oracle Linux
 ---
 
+{% assign minor-version = "17.06" %}
 {% assign linux-dist = "oraclelinux" %}
 {% assign linux-dist-url-slug = "oraclelinux" %}
 {% assign linux-dist-long = "Oracle Linux" %}

@@ -8,6 +8,7 @@ redirect_from:
 title: Get Docker EE for Red Hat Enterprise Linux
 ---
 
+{% assign minor-version = "17.06" %}
 {% assign linux-dist = "rhel" %}
 {% assign linux-dist-url-slug = "rhel" %}
 {% assign linux-dist-long = "Red Hat Enterprise Linux" %}

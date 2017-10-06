@@ -6,6 +6,7 @@ redirect_from:
 title: Get Docker EE for CentOS
 ---
 
+{% assign minor-version = "17.06" %}
 {% assign linux-dist = "centos" %}
 {% assign linux-dist-url-slug = "centos" %}
 {% assign linux-dist-long = "Centos" %}

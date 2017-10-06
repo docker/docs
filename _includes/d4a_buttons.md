@@ -1,6 +1,7 @@
 {% assign d4a_stable = "CE-Stable-1" %}
 {% assign d4a_edge = "CE-Edge-1" %}
 {% assign d4a_test = "CE-Test-1" %}
+{% assign edition_version = "17.03.0-ce" %}
 
 
 {% capture aws_blue_latest %}

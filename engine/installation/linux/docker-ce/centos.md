@@ -6,6 +6,8 @@ redirect_from:
 title: Get Docker CE for CentOS
 ---
 
+{% assign minor-version = "17.09" %}
+
 To get started with Docker CE on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
@@ -151,7 +153,7 @@ from the repository.
     ```bash
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ site.docker-ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64            {{ minor-version }}.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and

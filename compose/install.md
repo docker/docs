@@ -5,6 +5,8 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
+{% assign composeversion = '1.16.1' %}
+
 You can run Compose on macOS, Windows and 64-bit Linux.
 
 ## Prerequisites
@@ -72,11 +74,11 @@ Docker Compose. To do so, follow these steps:
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
 
-    For example, to download Compose version {{site.compose_version}},
+    For example, to download Compose version {{composeversion}},
     the command is:
 
     ```none
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
     >  Use the latest Compose release number in the download command.
     >
@@ -104,7 +106,7 @@ by step instructions are also included below.
 1.  Run this command to download the latest version of Docker Compose:
 
     ```bash
-    sudo curl -L https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/{{composeversion}}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     ```
 
     > Use the latest Compose release number in the download command.
@@ -128,7 +130,7 @@ by step instructions are also included below.
 
     ```bash
     $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1719ceb
+    docker-compose version {{composeversion}}, build 1719ceb
     ```
 <hr>
 </div>
@@ -167,7 +169,7 @@ install compose as a container run this command. Be sure to replace the version
 number with the one that you want, if this example is out-of-date:
 
 ```bash
-$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{composeversion}}/run.sh -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
