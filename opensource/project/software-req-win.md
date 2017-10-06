@@ -90,13 +90,13 @@ To build Docker, run:
 
 Copy out the resulting Windows Docker daemon binary to `dockerd.exe` in the current directory:
 
-    docker cp binaries:C:\go\src\github.com\docker\docker\bundles\docker.exe C:\HostPath\docker.exe
-    docker cp binaries:C:\go\src\github.com\docker\docker\bundles\dockerd.exe C:\HostPath\dockerd.exe
+    docker cp binaries:C:\go\src\github.com\docker\docker\bundles\docker.exe docker.exe
+    docker cp binaries:C:\go\src\github.com\docker\docker\bundles\dockerd.exe dockerd.exe
 
 To test it, stop the system Docker daemon and start the one you just built:
 
     Stop-Service Docker
-    .\dockerd-1.13.0-dev.exe -D
+    .\dockerd.exe -D
 
 The other make targets work too, to run unit tests try: `docker run --rm docker-builder sh -c 'cd /c/go/src/github.com/moby/moby; hack/make.sh test-unit'`.
 
