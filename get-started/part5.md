@@ -125,13 +125,13 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
       & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
       ```
 
-3.  Re-run the `docker stack deploy` command on the manager, and
-whatever services need updating will be updated:
+3.  Re-run the `docker stack deploy` command on the manager:
 
     ```shell
     $ docker stack deploy -c docker-compose.yml getstartedlab
-    Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
-    Updating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
+    Creating network getstartedlab_webnet
+    Creating service getstartedlab_web
+    Creating service getstartedlab_visualizer
     ```
 
 4.  Take a look at the visualizer.
@@ -144,7 +144,7 @@ whatever services need updating will be updated:
 
     The single copy of `visualizer` is running on the manager as you expect, and
     the 5 instances of `web` are spread out across the swarm. You can
-    corroborate this visualization by running `docker stack ps <stack>`:
+    corroborate this by running `docker stack ps <stack>`:
 
     ```shell
     docker stack ps getstartedlab
@@ -241,24 +241,8 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     ```shell
     docker-machine ssh myvm1 "mkdir ./data"
     ```
-
-3.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
-
-    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next it.
-
-    * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
-
-      On **Mac or Linux** the command is:
-
-      ```shell
-      eval $(docker-machine env myvm1)
-      ```
-
-      On **Windows** the command is:
-
-      ```shell
-      & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
-      ```
+> Reminder: Only "docker" commands work on the active Docker Machine. 
+> To make a directory on myvm1, and not local host, use ssh to myvm1 or log on directly.
 
 4.  Run `docker stack deploy` one more time.
 
