@@ -456,6 +456,11 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.09.0-ce-mac34 2017-10-06 (Edge)
+
+* Bug fixes and minor changes
+  - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
+
 ### Docker Community Edition 17.09.0-ce-mac31 2017-09-29 (Edge)
 
 * Upgrades
