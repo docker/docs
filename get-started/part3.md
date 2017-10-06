@@ -133,7 +133,7 @@ project.
 Before we can use the `docker stack deploy` command we'll first run:
 
 ```shell
-docker swarm init
+docker swarm init --advertise-addr <host ip or network interface name>
 ```
 
 >**Note**: We'll get into the meaning of that command in [part 4](part4.md).
@@ -174,7 +174,7 @@ Docker swarm tasks are defined to spawn them.
 Let's inspect one of these tasks, and limit the output to container ID:
 
 ```shell
-docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task>
+docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task id>
 ```
 
 Vice versa, you can inspect a container ID, and extract the task ID.
@@ -191,7 +191,7 @@ Now list all 5 containers:
 docker container ls -q
 ```
 
-You can run `curl http://localhost` several times in a row, or go to that URL in
+You can run `for i in {1..5}; do curl http://localhost; \n; done`, or go to that URL in
 your browser and hit refresh a few times.
 
 ![Hello World in browser](images/app80-in-browser.png)
