@@ -343,18 +343,28 @@ And that's it, the app is deployed on a swarm cluster!
 
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
-see that the containers have been distributed between both `myvm1` and `myvm2`.
+see that the tasks and associated containers have been distributed across both `myvm1` and `myvm2`.
 
 
 ```
 $ docker stack ps getstartedlab
 
-ID            NAME        IMAGE              NODE   DESIRED STATE
-jq2g3qp8nzwx  test_web.1  username/repo:tag  myvm1  Running
-88wgshobzoxl  test_web.2  username/repo:tag  myvm2  Running
-vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
-ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
-0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
+ID            NAME                  IMAGE                   NODE   DESIRED STATE
+jq2g3qp8nzwx  getstartedlab_web.1   john/get-started:part2  myvm1  Running
+88wgshobzoxl  getstartedlab_web.2   john/get-started:part2  myvm2  Running
+vbb1qbkb0o2z  getstartedlab_web.3   john/get-started:part2  myvm2  Running
+ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
+0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
+```
+
+
+```
+$ docker container ls
+
+CONTAINER ID  IMAGE                   COMMAND           NAMES
+02e276107c41  john/get-started:part2  "python app.py"   getstartedlab_web.4.ghii74p9budxcgxgy2asvpacw
+f1aa918284ef  john/get-started:part2  "python app.py"   getstartedlab_web.1.jq2g3qp8nzwx30auwmpp2nt5b
+
 ```
 
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
