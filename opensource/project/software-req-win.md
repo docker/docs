@@ -43,10 +43,10 @@ for nested virtualization.
 
 ## Usage
 
-The following steps should be run from an elevated\* Windows PowerShell prompt.
+The following steps should be run from an elevated Windows PowerShell prompt.
 
-\* _In a default installation of containers on Windows following the quick-start guidance at https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start,
-the `docker.exe` client must run elevated to be able to connect to the daemon)._
+>**Note**:  In a default installation of containers on Windows following the quick-start guidance at https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start,
+the `docker.exe` client must run elevated to be able to connect to the daemon).
 
 ### 1. Docker Windows containers
 
