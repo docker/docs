@@ -4,6 +4,8 @@ keywords: machine, orchestration, install, installation, docker, documentation, 
 title: Install Docker Machine
 ---
 
+{% assign machineversion = '0.12.2' %}
+
 On macOS and Windows, Machine is installed along with other Docker products when
 you install the [Docker for Mac](/docker-for-mac/index.md), [Docker for
 Windows](/docker-for-windows/index.md), or [Docker
@@ -24,14 +26,14 @@ on GitHub.
     If you are running on **macOS**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+    $ curl -L https://github.com/docker/machine/releases/download/v{{machineversion}}/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
   chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running on **Linux**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+    $ curl -L https://github.com/docker/machine/releases/download/v{{machineversion}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
     chmod +x /tmp/docker-machine &&
     sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
     ```
@@ -40,7 +42,7 @@ on GitHub.
 
     ```console
     $ if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
-curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
+curl -L https://github.com/docker/machine/releases/download/v{{machineversion}}/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
 chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
@@ -54,7 +56,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
 3.  Check the installation by displaying the Machine version:
 
         $ docker-machine version
-        docker-machine version {{site.machine_version}}, build 9371605
+        docker-machine version {{machineversion}}, build 9371605
 
 ## Installing bash completion scripts
 
@@ -70,7 +72,7 @@ Confirm the version and save scripts to `/etc/bash_completion.d` or
 `/usr/local/etc/bash_completion.d`:
 
 ```bash
-scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do sudo wget https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/${i} -P /etc/bash_completion.d; done
+scripts=( docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash ); for i in "${scripts[@]}"; do sudo wget https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/${i} -P /etc/bash_completion.d; done
 ```
 
 To enable the `docker-machine` shell

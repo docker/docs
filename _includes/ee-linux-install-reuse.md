@@ -151,7 +151,7 @@ You can install Docker EE in different ways, depending on your needs:
     ```bash
     $ sudo yum list docker-ee  --showduplicates | sort -r
 
-    docker-ee.x86_64         {{ site.docker-ee_version }}.ee.2-1.el7.{{ linux-dist }}          docker-ee-stable-17.06
+    docker-ee.x86_64         {{ minor-version }}.ee.2-1.el7.{{ linux-dist }}          docker-ee-stable-17.06
     ```
 
     The contents of the list depend upon which repositories you have enabled,
@@ -246,7 +246,7 @@ upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker-ee_version }}/Packages` and
+    `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ minor-version }}/Packages` and
     download the `.{{ package-format | downcase }}` file for the Docker version
     you want to install.
 
