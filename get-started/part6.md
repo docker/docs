@@ -114,7 +114,7 @@ Creating service getstartedlab_visualizer
 Creating service getstartedlab_redis
 ```
 
-Your app is running on your cloud provider.
+Your app is now running on your cloud provider.
 
 You can use the swarm command line, as you've done already, to browse and manage
 the swarm. Here are some examples that should look familiar by now:
@@ -165,6 +165,8 @@ the worker nodes
 * allow inbound traffic to the `web` service on the worker nodes so that
 Hello World and Visualizer are accessible from a web browser.
 
+* allow inbound SSH traffic on the server that is running the `manager` (this may be already set on your cloud provider)
+
 {: id="table-of-ports"}
 
 These are the ports you need to expose for each service:
@@ -178,6 +180,13 @@ These are the ports you need to expose for each service:
 Methods for doing this will vary depending on your cloud provider.
 
 We'll use Amazon Web Services (AWS) as an example.
+
+> **Note**: To get the `redis` service working, you need to `ssh` into
+the cloud server where the `manager` is running, and make a `data/`
+directory in `/home/docker/` before you run `docker stack deploy`.
+Another option is to change the data path in the `docker-stack.yml` to
+a pre-existing path on the `manager` server. The example below does not
+include this step, so the `redis` service is not up in the example output.
 
 #### Example: AWS
 
@@ -194,14 +203,14 @@ to view the nodes.
 3.  Select the "Node" security group for the swarm. The group name
 will be something like this: `getstartedlab-NodeVpcSG-9HV9SMHDZT8C`.
 
-4.  Add Inbound rules for the `web` and `visualizer` services, setting the Type,
-Protocol and Port for each as shown in the [table above](#table-of-ports), and
-click **Save** to apply the rules.
+4.  Add Inbound rules for the `web`, `visualizer`, and `redis`
+services, setting the Type, Protocol and Port for each as shown in the
+[table above](#table-of-ports), and click **Save** to apply the rules.
 
     ![open web service port](images/cloud-aws-web-port-open.png)
 
-    > **Tip**: When you save the new rules, HTTP ports will be auto-created
-      for both IPv4 and IPv6 style addresses.
+    > **Tip**: When you save the new rules, HTTP and TCP
+    ports will be auto-created for both IPv4 and IPv6 style addresses.
 
     ![security groups rules](images/cloud-aws-web-and-visualizer-ports.png)
 

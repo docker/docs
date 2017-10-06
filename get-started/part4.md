@@ -431,6 +431,8 @@ take advantage of the new resources.
 
 ## Cleanup
 
+### Stacks and swarms
+
 You can tear down the stack with `docker stack rm`. For example:
 
 ```
@@ -444,6 +446,20 @@ docker stack rm getstartedlab
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
 > manager, but _you'll need this swarm for part 5, so please keep it
 > around for now_.
+
+### Unsetting docker-machine shell variable settings
+
+You can unset the `docker-machine` environment variables in your current shell
+with the following command:
+
+```
+eval $(docker-machine env -u)
+```
+
+This disconnects the shell from `docker-machine` created virtual machines,
+and allows you to continue working in the same shell, now using native `docker`
+commands (for example, on Docker for Mac or Docker for Windows). To learn more,
+see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
 [On to Part 5 >>](part5.md){: class="button outline-btn"}
 
