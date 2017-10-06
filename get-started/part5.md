@@ -242,7 +242,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     docker-machine ssh myvm1 "mkdir ./data"
     ```
 > Reminder: Only "docker" commands work on the active Docker Machine. 
-> To make a directory on myvm1, and not our local host, we must use ssh to myvm1 or log on directly.
+> To make a directory on myvm1, and not local host, use ssh to myvm1 or log on directly.
 
 4.  Run `docker stack deploy` one more time.
 
