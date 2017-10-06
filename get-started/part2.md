@@ -185,6 +185,8 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 ```
 
+> **Tip**: You can use the commands `docker images` or the newer `docker image ls` list images. They give you the same output.
+
 ## Run the app
 
 Run the app, mapping your machine's port 4000 to the container's published port
@@ -239,10 +241,10 @@ CONTAINER ID        IMAGE               COMMAND             CREATED
 
 You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
-Now use `docker stop` to end the process, using the `CONTAINER ID`, like so:
+Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
 ```shell
-docker stop 1fa4ab2cf395
+docker container stop 1fa4ab2cf395
 ```
 
 ## Share your image

@@ -343,8 +343,8 @@ And that's it, the app is deployed on a swarm cluster!
 
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
-see that the containers have been distributed between both `myvm1` and `myvm2`.
-
+see that the services (and associated containers) have been distributed between
+both `myvm1` and `myvm2`.
 
 ```
 $ docker stack ps getstartedlab
@@ -356,6 +356,8 @@ vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
 ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
 0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
 ```
+
+You can also run `docker container ls` to view container IDs.
 
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
 >
