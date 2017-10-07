@@ -66,7 +66,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
    > **Notes**:
    >
    * The docker volume `db_data` persists any updates made by Wordpress
-   to the database. [Learn more about docker volumes](/engine/tutorials/dockervolumes.md)
+   to the database. [Learn more about docker volumes](/engine/admin/volumes/volumes/)
    >
    * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
