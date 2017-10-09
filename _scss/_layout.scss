@@ -86,8 +86,6 @@
     z-index: -1;
 }
 
-
-
 .columns,
 .col-body {
     display: flex;
@@ -98,17 +96,17 @@
     order: -1;
 }
 
-// .col-content {}
-
 .col-body {
     flex-direction: row;
     flex: 1;
     min-height: 555px;
 }
+
 .col-content {
     flex: 1;
     transition: all 0.5s ease;
 }
+
 .col-nav,
 .col-toc {
     flex: 0 0 0;
@@ -117,7 +115,6 @@
 .col-toc-hidden {
     display: none;
 }
-
 
 @media only screen and (min-width: 1000px) {
     .col-nav,
@@ -154,7 +151,6 @@ section.section {
 .wrapper.right-open #sidebar-wrapper {
     width: 270px;                                                                                                                                                                            
 }
-
 
 .wrapper.right-open .page-content {
     padding-right: 190px;
