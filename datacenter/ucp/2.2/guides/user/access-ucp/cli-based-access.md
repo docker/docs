@@ -49,16 +49,16 @@ $ eval $(<env.sh)
 
 The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
 local Docker CLI communicate with UCP. It also updates the `DOCKER_CERT_PATH`
-environment variables to use the client certificates that are included in the
+environment variable to use the client certificates that are included in the
 client bundle you downloaded.
 
-> Note: The bundle includes scripts for setting up Windows nodes. To set up a
+> **Note**: The bundle includes scripts for setting up Windows nodes. To set up a
 > Windows environment, run `env.cmd` in an elevated command prompt, or run
 > `env.ps1` in an elevated PowerShell prompt.
 
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine. You can now use the
-Docker CLI to create services, networks, volumes and other resources on a swarm
+Docker CLI to create services, networks, volumes, and other resources on a swarm
 that's managed by UCP.
 
 ## Download client certificates by using the REST API
