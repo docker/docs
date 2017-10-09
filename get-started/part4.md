@@ -429,7 +429,7 @@ same `docker swarm join` command you used on `myvm2`, and capacity will be added
 to your cluster. Just run `docker stack deploy` afterwards, and your app will
 take advantage of the new resources.
 
-## Cleanup
+## Cleanup and reboot
 
 ### Stacks and swarms
 
@@ -460,6 +460,45 @@ This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`
 commands (for example, on Docker for Mac or Docker for Windows). To learn more,
 see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+
+### Restarting Docker machines
+
+If you shut down your local host, Docker machines will stop running. You can check the status of machines by running `docker-machine ls`.
+
+```
+$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+myvm1   -        virtualbox   Stopped                 Unknown
+myvm2   -        virtualbox   Stopped                 Unknown
+```
+
+To restart a machine that's stopped, run:
+
+```
+docker-machine start <machine-name>
+```
+
+For example:
+
+```
+$ docker-machine start myvm1
+Starting "myvm1"...
+(myvm1) Check network to re-create if needed...
+(myvm1) Waiting for an IP...
+Machine "myvm1" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+
+$ docker-machine start myvm2
+Starting "myvm2"...
+(myvm2) Check network to re-create if needed...
+(myvm2) Waiting for an IP...
+Machine "myvm2" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+```
 
 [On to Part 5 >>](part5.md){: class="button outline-btn"}
 

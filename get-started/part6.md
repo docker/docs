@@ -92,29 +92,41 @@ swarms](/docker-cloud/cloud-swarm/register-swarms/) with Docker Cloud.
 
 ### Deploy your app on a cloud provider
 
-[Connect to your swarm via Docker
-Cloud](/docker-cloud/cloud-swarm/connect-to-swarm.md). On Docker for
-Mac or Docker for Windows (Edge releases), you can [connect to your swarms
-directly through the desktop app
-menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windows-edge-to-connect-to-swarms).
+1. [Connect to your swarm via Docker
+Cloud](/docker-cloud/cloud-swarm/connect-to-swarm.md). There are a couple of different ways to connect:
 
-Either way, this opens a terminal whose context is your local machine, but whose
-Docker commands are routed up to the swarm running on your cloud service
-provider. You directly access both your local file system and
-your remote swarm, enabling pure `docker` commands.
+    * From the Docker Cloud web interface in Swarm mode, select Swarms at
+    the top of  the page, click the swarm you want to connect to, and copy-paste the given command into a command line terminal.
 
-Run `docker stack deploy -c docker-compose.yml getstartedlab` to deploy the app on the cloud hosted swarm.
+    ![get swarm connect command from Cloud UI](images/cloud-swarm-connect.png)
 
-```shell
-docker stack deploy -c docker-compose.yml getstartedlab
+    Or ...
 
-Creating network getstartedlab_webnet
-Creating service getstartedlab_web
-Creating service getstartedlab_visualizer
-Creating service getstartedlab_redis
-```
+    *  On Docker for Mac or Docker for Windows (Edge releases), you can [connect to your swarms directly through the desktop app
+    menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windows-edge-to-connect-to-swarms).
 
-Your app is now running on your cloud provider.
+    ![get swarm connect command from Cloud UI](images/cloud-swarm-connect-desktop.png)
+
+    Either way, this opens a terminal whose context is your local machine,
+    but whose Docker commands are routed up to the swarm running on your
+    cloud service provider. You directly access both your local file system
+    and your remote swarm, enabling pure `docker` commands.
+
+2. Run `docker stack deploy -c docker-compose.yml getstartedlab` to deploy
+the app on the cloud hosted swarm.
+
+    ```shell
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+    Creating network getstartedlab_webnet
+    Creating service getstartedlab_web
+    Creating service getstartedlab_visualizer
+    Creating service getstartedlab_redis
+    ```
+
+    Your app is now running on your cloud provider.
+
+#### Run some swarm commands to verify the deployment
 
 You can use the swarm command line, as you've done already, to browse and manage
 the swarm. Here are some examples that should look familiar by now:
@@ -181,11 +193,13 @@ Methods for doing this will vary depending on your cloud provider.
 
 We'll use Amazon Web Services (AWS) as an example.
 
-> **Note**: To get the `redis` service working, you need to `ssh` into
+> What about the redis service to persist data?
+>
+> To get the `redis` service working, you need to `ssh` into
 the cloud server where the `manager` is running, and make a `data/`
 directory in `/home/docker/` before you run `docker stack deploy`.
 Another option is to change the data path in the `docker-stack.yml` to
-a pre-existing path on the `manager` server. The example below does not
+a pre-existing path on the `manager` server. This example does not
 include this step, so the `redis` service is not up in the example output.
 
 #### Example: AWS
@@ -221,6 +235,10 @@ one of the workers, and paste it into the address bar of your web browser.
 
     Just as in the previous parts of the tutorial, the Hello World app
     displays on port `80`, and the Visualizer displays on port `8080`.
+
+    ![Hello World in browser on cloud server](images/cloud-app-in-browser.png)
+
+    ![Visualizer on cloud server](images/cloud-app-in-browser.png)
 
 {% endcapture %}
 {% capture enterpriseboilerplate %}
@@ -285,6 +303,29 @@ essentially involves two steps:
   <div id="enterprisecloud" class="tab-pane fade" markdown="1">{{ enterprisecloud }}</div>
   <div id="enterpriseonprem" class="tab-pane fade" markdown="1">{{ enterpriseonprem }}</div>
 </div>
+
+### Iteration and cleanup
+
+From here you can do everything you learned about in previous parts of the
+tutorial.
+
+* Scale the app by changing the `docker-compose.yml` file and redeploy
+on-the-fly with the `docker stack deploy` command.
+
+* Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
+
+* You can tear down the stack with `docker stack rm`. For example:
+
+  ```
+  docker stack rm getstartedlab
+  ```
+
+Unlike the scenario where you were running the swarm on local Docker machine
+VMs, your swarm and any apps deployed on it will continue to run on cloud
+servers regardless of whether you shut down your local host.
 
 ## Congratulations!
 
