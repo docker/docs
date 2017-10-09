@@ -156,8 +156,7 @@ while still being a full distribution.
 You can add labels to your image to help organize images by project, record
 licensing information, to aid in automation, or for other reasons. For each
 label, add a line beginning with `LABEL` and with one or more key-value pairs.
-The following examples show the different acceptable formats. Explanatory comments
-are included inline.
+The following examples show the different acceptable formats. Explanatory comments are included inline.
 
 >**Note**: If your string contains spaces, it must be quoted **or** the spaces
 must be escaped. If your string contains inner quote characters (`"`), escape
@@ -169,10 +168,21 @@ LABEL com.example.version="0.0.1-beta"
 LABEL vendor="ACME Incorporated"
 LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
+```
 
+An image can have more than one label. To specify multiple labels, Docker
+recommends combining labels into a single `LABEL` instruction where possible.
+Each `LABEL` instruction produces a new layer which can result in an inefficient
+image if you use many labels. This example results in a single image layer.
+
+```conf
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
+```
 
+The above can also be written as:
+
+```conf
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -181,10 +191,11 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 ```
 
-See [Understanding object labels](../labels-custom-metadata.md) for
-guidelines about acceptable label keys and values. For information about
-querying labels, refer to the items related to filtering in
-[Managing labels on objects](../labels-custom-metadata.md#managing-labels-on-objects).
+See [Understanding object labels](/engine/userguide/labels-custom-metadata.md)
+for guidelines about acceptable label keys and values. For information about
+querying labels, refer to the items related to filtering in [Managing labels on
+objects](../labels-custom-metadata.md#managing-labels-on-objects). See also
+[LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
 
 ### RUN
 
