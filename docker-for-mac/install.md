@@ -102,7 +102,8 @@ explanation and list of prerequisites.
   <p />
   - Mac must be a 2010 or newer model, with Intel's hardware support for memory
     management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
-    Unrestricted Mode.
+    Unrestricted Mode. You can check to see if your machine has this support by
+    running the command  sysctl kern.hv_support  in a terminal.
   <p />
   - OS X El Capitan 10.11 and newer macOS releases are supported. At a minimum,
     Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat
