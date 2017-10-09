@@ -26,7 +26,7 @@ In your browser, log in to the UCP web UI, and navigate to the
 Give the application a name, like "VotingApp", and in the **Mode** field,
 select **Services**. 
 
-Paste the following YAML into the **COMPOSE.YML** editor.
+Paste the following YAML into the **COMPOSE.YML** editor:
 
 ```none
 version: "3"
