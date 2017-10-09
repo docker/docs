@@ -54,8 +54,8 @@ h6 {
 
 p {
     color: $body-text-color;
-    font-family: "Open Sans", sans-serif;
-    font-size: 15px;
+    font-family: $font;
+    font-size: $body-text-size;
     line-height: 24px;
     margin: 10px 0 10px 0;
 }
