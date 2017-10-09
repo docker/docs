@@ -41,7 +41,7 @@ healthy, before upgrading other nodes.
 |`--interactive, i`|Run in interactive mode and prompt for configuration values|
 |`--admin-username`|The UCP administrator username|
 |`--admin-password`|The UCP administrator password|
-|`--pull`|Pull UCP images: 'always', when 'missing', or 'never'|
+|`--pull`|Pull UCP images: `always`, when `missing`, or `never`|
 |`--registry-username`|Username to use when pulling images|
 |`--registry-password`|Password to use when pulling images|
 |`--id`|The ID of the UCP instance to upgrade|
