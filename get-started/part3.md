@@ -201,11 +201,17 @@ load-balancing; with each request, one of the 5 replicas is chosen, in a
 round-robin fashion, to respond. The container IDs will match your output from
 the previous command (`docker container ls -q`).
 
+(Windows 10 PowerShell should already have `curl` available, but if not you can
+grab a Linux terminal emulater like [Git
+BASH](https://git-for-windows.github.io/){: target="_blank" class="_"} if you
+want to try it out. It isn't critical to the taskflow here.)
+
 >**Note**: At this stage, it may take up to 30 seconds for the containers
 to respond to HTTP requests. This is not indicative of Docker or
 swarm performance, but rather an unmet Redis dependency that we will
 address later in the tutorial. For now, the visitor counter isn't working
 for the same reason; we haven't yet added a service to persist data.
+
 
 ## Scale the app
 
