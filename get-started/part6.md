@@ -237,7 +237,7 @@ one of the workers, and paste it into the address bar of your web browser.
 
     ![Hello World in browser on cloud server](images/cloud-app-in-browser.png)
 
-    ![Visualizer on cloud server](images/cloud-app-in-browser.png)
+    ![Visualizer on cloud server](images/cloud-visualizer.png)
 
 {% endcapture %}
 {% capture enterpriseboilerplate %}
