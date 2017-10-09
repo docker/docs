@@ -102,8 +102,7 @@ Cloud](/docker-cloud/cloud-swarm/connect-to-swarm.md). There are a couple of dif
 
     Or ...
 
-    *  On Docker for Mac or Docker for Windows (Edge releases), you can [connect to your swarms directly through the desktop app
-    menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windows-edge-to-connect-to-swarms).
+    *  On Docker for Mac or Docker for Windows, you can [connect to your swarms directly through the desktop app    menus](/docker-cloud/cloud-swarm/connect-to-swarm.md#use-docker-for-mac-or-windows-edge-to-connect-to-swarms).
 
     ![get swarm connect command from Cloud UI](images/cloud-swarm-connect-desktop.png)
 
