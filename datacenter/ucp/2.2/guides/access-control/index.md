@@ -9,7 +9,7 @@ edit container resources in your swarm, like services, images, networks,
 and volumes. You can grant and manage permissions to enforce fine-grained
 access control as needed.
 
-## Grant access to swarm resources  
+## Grant access to swarm resources
 
 If you're a UCP administrator, you can create *grants* to control how users 
 and organizations access swarm resources.
@@ -51,7 +51,7 @@ roles by navigating to the **Roles** page.
 ## Resource collections
 
 Docker EE enables controlling access to swarm resources by using
-*collections*. A collection is a grouping of swarm cluster  resources that you
+*collections*. A collection is a grouping of swarm cluster resources that you
 access by specifying a directory-like path. 
 
 Swarm resources that can be placed in to a collection include:
@@ -120,7 +120,7 @@ The resulting access architecture defined by these grants is depicted below.
 
 ![image](../images/access-control-collection-architecture.png){: .with-border}
 
-There are four teams that are given access to cluster resources.
+There are four teams that are given access to cluster resources:
 
 - `security` can see, but not edit, all resources shown, as it has `View Only`
   access to the entire `/prod` collection. 
