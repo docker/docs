@@ -13,13 +13,13 @@ to upgrade your installation to the latest release.
 
 ## DTR 2.3.4
 
-(TBA)
+(12 October 2017)
 
 ### Bugs fixed
 
 * High severity
-  * Fix a bug in distribution that caused pull timeouts under load if using NFS or local storage (https://github.com/docker/distribution/pull/2299)
-  * Fix GCS configuration UI
+  * Fixed a bug in distribution that caused pull timeouts under load if using NFS or local storage (https://github.com/docker/distribution/pull/2299)
+  * Fixed GCS configuration UI
 * Low severity
   * Fixed missing show password button
   * Removed incorrectly enforced length limit on repo names from UI
