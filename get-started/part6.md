@@ -239,6 +239,29 @@ one of the workers, and paste it into the address bar of your web browser.
 
     ![Visualizer on cloud server](images/cloud-visualizer.png)
 
+### Iteration and cleanup
+
+From here you can do everything you learned about in previous parts of the
+tutorial.
+
+* Scale the app by changing the `docker-compose.yml` file and redeploy
+on-the-fly with the `docker stack deploy` command.
+
+* Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
+
+* You can tear down the stack with `docker stack rm`. For example:
+
+  ```
+  docker stack rm getstartedlab
+  ```
+
+Unlike the scenario where you were running the swarm on local Docker machine
+VMs, your swarm and any apps deployed on it will continue to run on cloud
+servers regardless of whether you shut down your local host.
+    
 {% endcapture %}
 {% capture enterpriseboilerplate %}
 Customers of Docker Enterprise Edition run a stable, commercially-supported
@@ -302,29 +325,6 @@ essentially involves two steps:
   <div id="enterprisecloud" class="tab-pane fade" markdown="1">{{ enterprisecloud }}</div>
   <div id="enterpriseonprem" class="tab-pane fade" markdown="1">{{ enterpriseonprem }}</div>
 </div>
-
-### Iteration and cleanup
-
-From here you can do everything you learned about in previous parts of the
-tutorial.
-
-* Scale the app by changing the `docker-compose.yml` file and redeploy
-on-the-fly with the `docker stack deploy` command.
-
-* Change the app behavior by editing code, then rebuild, and push the new image.
-(To do this, follow the same steps you took earlier to [build the
-app](part2.md#build-the-app) and [publish the
-image](part2.md#publish-the-image)).
-
-* You can tear down the stack with `docker stack rm`. For example:
-
-  ```
-  docker stack rm getstartedlab
-  ```
-
-Unlike the scenario where you were running the swarm on local Docker machine
-VMs, your swarm and any apps deployed on it will continue to run on cloud
-servers regardless of whether you shut down your local host.
 
 ## Congratulations!
 
