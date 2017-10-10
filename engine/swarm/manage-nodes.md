@@ -199,10 +199,10 @@ using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
 > Docker CLI or Docker Compose. In addition, it is not possible to install
 > plugins from a private repository.
 
-The [`PluginSpec`](/extend/plugin_api/#json-specification)
+The [`PluginSpec`](/engine/extend/plugin_api/#json-specification)
 is defined by the plugin developer. To add the plugin to all Docker nodes, use
 the [`service/create`](/engine/api/v1.31/#operation/ServiceCreate) API, passing
-the `PluginSpec` defined in the `TaskTemplate`.
+the `PluginSpec` JSON defined in the `TaskTemplate`.
 
 ## Leave the swarm
 
