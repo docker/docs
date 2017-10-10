@@ -527,9 +527,9 @@ network and user-defined bridge networks.
   `--expose` flag to `docker run`. Exposing ports is a way of documenting which
   ports are used, but does not actually map or open any ports. Exposing ports
   is optional.
-- You publish ports using the `PUBLISH` keyword in the Dockerfile or the
-  `--publish` flag to `docker run`. This tells Docker which ports to open on the
-  container's network interface. When a port is published, it is mapped to an
+- You publish ports using the `--publish` or `--publish-all` flag to `docker run`. 
+  This tells Docker which ports to open on the container's network interface. 
+  When a port is published, it is mapped to an
   available high-order port (higher than `30000`) on the host machine, unless
   you specify the port to map to on the host machine at runtime. You cannot
   specify the port to map to on the host machine in the Dockerfile, because
