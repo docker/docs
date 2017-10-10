@@ -350,6 +350,8 @@ configuration. Two different syntax variants are supported.
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
 > of this stack file, or stack deployment will fail.
 
+For more information on configs, see [configs](/engine/swarm/configs.md).
+
 #### Short syntax
 
 The short syntax variant only specifies the config name. This grants the
@@ -1371,6 +1373,8 @@ configuration. Two different syntax variants are supported.
 > **Note**: The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
 > of this stack file, or stack deployment will fail.
+
+For more information on secrets, see [secrets](/engine/swarm/secrets.md).
 
 #### Short syntax
 
