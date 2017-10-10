@@ -143,6 +143,12 @@ a similar way, see
 > support secrets in Docker 17.06 and higher.
 > See [Windows support](#windows-support).
 
+### Defining and using secrets in compose files
+
+Both the `docker compose` and `docker stack` commands support defining secrets
+in a compose file. See
+[the Compose file reference](/compose/compose-file/#secrets) for details.
+
 ### Simple example: Get started with secrets
 
 This simple example shows how secrets work in just a few commands. For a

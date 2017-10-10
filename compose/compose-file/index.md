@@ -350,6 +350,8 @@ configuration. Two different syntax variants are supported.
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
 > of this stack file, or stack deployment will fail.
 
+For more information on configs, see [configs](/engine/swarm/configs.md).
+
 #### Short syntax
 
 The short syntax variant only specifies the config name. This grants the
@@ -1039,12 +1041,12 @@ for details on how healthchecks work.
       timeout: 10s
       retries: 3
 
-`interval` and `timeout` are specified as
-[durations](#specifying-durations).
+`interval` and `timeout` are specified as [durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
+
     # Hit the local web app
     test: ["CMD", "curl", "-f", "http://localhost"]
 
@@ -1371,6 +1373,8 @@ configuration. Two different syntax variants are supported.
 > **Note**: The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
 > of this stack file, or stack deployment will fail.
+
+For more information on secrets, see [secrets](/engine/swarm/secrets.md).
 
 #### Short syntax
 

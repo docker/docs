@@ -13,7 +13,7 @@ docker run -it --rm \
   --ucp-insecure-tls
 ```
 
-You will be prompted for the UCP URL, UCP credentials and which replica to
+You will be prompted for the UCP URL, UCP credentials, and which replica to
 destroy.
 
 To see what options are available in the destroy command, check the

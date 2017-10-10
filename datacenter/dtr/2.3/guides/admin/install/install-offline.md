@@ -36,12 +36,12 @@ For each machine where you want to install DTR:
     $ scp dtr.tar.gz <user>@<host>
     ```
 
-2.  Use ssh to login into the hosts where you transferred the package.
+2.  Use ssh to log into the hosts where you transferred the package.
 
 3.  Load the DTR images.
 
     Once the package is transferred to the hosts, you can use the
-    `docker load` command, to load the Docker images from the tar archive:
+    `docker load` command to load the Docker images from the tar archive:
 
     ```bash
     $ docker load < dtr.tar.gz
