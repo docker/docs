@@ -28,7 +28,7 @@ These ports are configurable when installing DTR.
 
 ## Compatibility and maintenance lifecycle
 
-Docker Enterprise Edition is a software subscription that includes 3 products:
+Docker Enterprise Edition is a software subscription that includes three products:
 
 * Docker Engine EE,
 * Docker Trusted Registry,
