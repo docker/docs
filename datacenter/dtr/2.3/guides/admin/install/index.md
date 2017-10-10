@@ -29,7 +29,7 @@ You can't install DTR on a standalone Docker Engine.
 
 ## Step 3. Install DTR
 
-To install DTR you use the `{{ page.dtr_org }}/{{ page.dtr_repo }}` image. This image has commands to
+To install DTR, you use the `{{ page.dtr_org }}/{{ page.dtr_repo }}` image. This image has commands to
 install, configure, and backup DTR.
 
 Run the following command to install DTR:
@@ -52,7 +52,7 @@ by UCP.
 By default the install command runs in interactive mode and prompts for
 additional information like:
 
-* UCP url: the url clients use to reach UCP
+* UCP url: the URL clients use to reach UCP
 * UCP username and password: administrator credentials for UCP
 
 You can also provide this information to the installer command so that it
