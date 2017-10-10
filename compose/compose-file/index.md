@@ -1039,12 +1039,12 @@ for details on how healthchecks work.
       timeout: 10s
       retries: 3
 
-`interval` and `timeout` are specified as
-[durations](#specifying-durations).
+`interval` and `timeout` are specified as [durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
+
     # Hit the local web app
     test: ["CMD", "curl", "-f", "http://localhost"]
 
