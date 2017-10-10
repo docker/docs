@@ -22,7 +22,13 @@ When you run a container with the `-p` argument, for example:
 ```
 $ docker run -p 80:80 -d nginx
 ```
-Docker for Mac will make the container port available at `localhost`.
+Docker for Mac will make whatever is running on port 80 in the container (in this case, `nginx`) available on port 80 of `localhost`. In this example, the host and container ports are the same. What if you need to specify a different host port? If, for example, you already have something running on port 80 of your host machine, you can connect the container to a different port:
+
+```
+$ docker run -p 8081:80 -d nginx
+```
+
+Now, connections to `localhost:8081` will be sent to port 80 in the container. The syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
