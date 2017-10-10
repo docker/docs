@@ -37,8 +37,8 @@ configure its schedule (in UTC time) using the cron format.
 
 ![](../../images/garbage-collection-2.png){: .with-border}
 
-Once everything is configured you can chose to **save & start** to immediately
-run the garbage collection job, or just **save** to run the job on the next
+Once everything is configured you can chose to **Save & start** to immediately
+run the garbage collection job, or just **Save** to run the job on the next
 scheduled interval.
 
 ## Stop the garbage collection job
