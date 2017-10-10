@@ -71,7 +71,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
         image: postgres
       web:
         build: .
-        command: python3 manage.py runserver 0.0.0.0:8000
+        command: python3 manage.py runserver 0:8000
         volumes:
           - .:/code
         ports:
@@ -176,7 +176,7 @@ In this section, you set up the database connection for Django.
 
     web_1  | May 30, 2017 - 21:44:49
     web_1  | Django version 1.11.1, using settings 'composeexample.settings'
-    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Starting development server at http://0:8000/
     web_1  | Quit the server with CONTROL-C.
     ```
 
@@ -207,7 +207,7 @@ In this section, you set up the database connection for Django.
     ```none
     $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago      Up 9 minutes        0.0.0.0:8000->8000/tcp   django_web_1
+def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago      Up 9 minutes        0:8000->8000/tcp   django_web_1
 678ce61c79cc        postgres            "docker-entrypoint..."   20 minutes ago      Up 9 minutes        5432/tcp                 django_db_1
 
     ```
