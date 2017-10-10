@@ -88,7 +88,7 @@ key-value stores. This example uses Consul.
       --name consul
       -p "8500:8500" \
       -h "consul" \
-      consul agent -server -bootstrap
+      consul agent -server -bootstrap -client "0.0.0.0"
     ```
 
     The client starts a `consul` image running in the
