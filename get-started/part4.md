@@ -357,18 +357,6 @@ ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
 0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
 ```
 
-
-```
-$ docker container ls
-
-CONTAINER ID  IMAGE                   COMMAND           NAMES
-02e276107c41  john/get-started:part2  "python app.py"   getstartedlab_web.4.ghii74p9budxcgxgy2asvpacw
-f1aa918284ef  john/get-started:part2  "python app.py"   getstartedlab_web.1.jq2g3qp8nzwx30auwmpp2nt5b
-
-```
-
-You can also run `docker container ls` to view container IDs.
-
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
 >
 > * To set your shell to talk to a different machine like `myvm2`, simply re-run
