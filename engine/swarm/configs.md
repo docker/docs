@@ -80,6 +80,12 @@ Docker configs.
 > simplicity. The examples use Linux containers, but Windows containers also
 > support configs.
 
+### Defining and using configs in compose files
+
+Both the `docker compose` and `docker stack` commands support defining configs
+in a compose file. See
+[the Compose file reference](/compose/compose-file/#configs) for details.
+
 ### Simple example: Get started with configs
 
 This simple example shows how configs work in just a few commands. For a
@@ -147,7 +153,7 @@ real-world example, continue to
     $ docker config rm my-config
 
     Error response from daemon: rpc error: code = 3 desc = config 'my-config' is
-    in use by the following service: redis 
+    in use by the following service: redis
     ```
 
 6.  Remove access to the config from the running `redis` service by updating the
@@ -214,7 +220,7 @@ This example assumes that you have PowerShell installed.
         --config src=homepage,target="\inetpub\wwwroot\index.html"
         microsoft/iis:nanoserver  
     ```
- 
+
 5.  Access the IIS service at `http://localhost:8000/`. It should serve
     the HTML content from the first step.
 
