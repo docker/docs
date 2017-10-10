@@ -18,12 +18,13 @@ to upgrade your installation to the latest release.
 ### Bugs fixed
 
 * High severity
-  * Fixed a bug in distribution that caused pull timeouts under load if using NFS or local storage (https://github.com/docker/distribution/pull/2299)
-  * Fixed GCS configuration UI
+  * Fixed a bug in distribution that caused pull timeouts under load if using
+  NFS or local storage. [#2299](https://github.com/docker/distribution/pull/2299)
+  * Fixed GCS configuration UI.
 * Low severity
-  * Fixed missing show password button
-  * Removed incorrectly enforced length limit on repo names from UI
-  * Fixed small UI behaviour and appearance inconsistencies
+  * Fixed missing show password button.
+  * Removed incorrectly enforced length limit on repo names from UI.
+  * Fixed small UI behavior and appearance inconsistencies.
 
 ## DTR 2.3.3
 

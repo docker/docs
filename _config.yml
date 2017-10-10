@@ -110,13 +110,13 @@ defaults:
       path: "datacenter"
     values:
       ucp_latest_image: "docker/ucp:2.2.3"
-      dtr_latest_image: "docker/dtr:2.3.3"
+      dtr_latest_image: "docker/dtr:2.3.4"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.3"
+      dtr_version: "2.3.4"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
