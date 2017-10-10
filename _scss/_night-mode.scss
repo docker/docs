@@ -120,7 +120,7 @@ body.night {
         color: #f3f3f3;
         word-break: break-all;
         word-wrap: break-word;
-        background-color: rgba(0, 0, 0, 0.71) !important;
+        background-color: #0a121b !important;
         border: 1px solid $black;
         border-radius: 4px;
     }
@@ -129,6 +129,9 @@ body.night {
         color: #c1f1f0 !important;
         border-radius: 2px;
         background: #0a121b !important;
+    }
+    pre>code {
+        padding: 0px;
     }
     .nav-secondary .dropdown-btn {
         color: #d0e8ff;
