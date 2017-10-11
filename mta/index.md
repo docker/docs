@@ -1,7 +1,7 @@
 ---
-description: Migrate traditional apps overview
+description: MTA overview
 keywords: traditional apps, legacy apps, MTA, migration, modernize, containers
-title: Modernize traditional apps overview
+title: MTA overview
 ---
 
 The Docker Modernize Traditional Applications (MTA) Program helps enterprises
@@ -13,17 +13,6 @@ solutions.
 Check out the [blog post introducing the Docker MTA program
 here](https://blog.docker.com/2017/04/modernizing-traditional-apps-with-docker/){:
 target="_blank" class="_"} to learn more.
-
-## Working Docs Outline
-
-* Overview of MTA
-* MTA process flow (John’s outline)
-* Best practices for MTA: [Docker Reference Architecture: Design Considerations and Best Practices to Modernize Traditional Apps (MTA) with Docker EE](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Design_Considerations_and_Best_Practices_to_Modernize_Traditional_Apps_(MTA)_with_Docker_EE){: target="_blank" class="_"}  (link to this in KB collection, and us as a guideline for the overview and process flow, incorporating best practices)
-* Concepts of MTA stacks (app stacks, infrastructure stacks) [MTA stacks slide deck](https://docs.google.com/presentation/d/1wrpf_hmK9nuGsM3MKUMhEpSE85c8CGVIT3HVt_VFwHY/edit#slide=id.g1fb47ddf91_1_0){: target="_blank" class="_"}
-* Specific stack guides
-* MTA Toolkits (ImageToDocker conversion tool, topology tool, Cloud Physics) - See MTA Tooling PRD
-* Reference architectures
-* ROI (calculator)
 
 ## The problem with legacy apps
 
@@ -116,16 +105,10 @@ Launch the app with either a [`docker run`](/engine/reference/commandline/run.md
 
 ## Where to go next
 
-* [Containerizing app components](/mta/containerize.md)
-
-* [Infrastructure considerations](/mta/infrastructure.md)
-
-* [Modern methodologies and automation](/mta/methods.md)
-
-* [Migrating to microservices](/mta/migrate-services.md)
+* [Get MTA Kit and learn more](https://goto.docker.com/MTAkit.html){: target="_blank" class="_"}
 
 * [Stack migration guides](/mta/stack-guides.md)
 
-* [Use cases](/mta/use-cases.md)
-
 * [Reference architecture and best practices](arch-best-practices.md)
+
+* [MTA labs for Windows developers](https://github.com/docker/labs/blob/master/windows/modernize-traditional-apps/README.md){: target="_blank" class="_"}

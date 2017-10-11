@@ -281,22 +281,12 @@ guides:
     - path: /engine/userguide/storagedriver/
       title: Container storage drivers
       nosync: true
-- sectiontitle: Migrate traditional apps
+- sectiontitle: MTA
   section:
     - path: /mta/
-      title: Overview of MTA and migration map
-    - path: /mta/containerize/
-      title: Containerize app components
-    - path: /mta/infrastructure/
-      title: Infrastructure considerations
-    - path: /mta/methods/
-      title: Modern methodologies and automation
-    - path: /mta/migrate-services/
-      title: Migrate to microservices
+      title: MTA overview
     - path: /mta/stack-guides/
       title: Stack migration guides
-    - path: /mta/use-cases/
-      title: Use cases
     - path: /mta/arch-best-practices/
       title: Best practices
 - sectiontitle: Troubleshoot Docker Engine
