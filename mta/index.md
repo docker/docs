@@ -1,7 +1,7 @@
 ---
-description: Migrate traditional apps
-keywords: traditional apps, legacy apps, MTA
-title: Overview of MTA Program
+description: Migrate traditional apps overview
+keywords: traditional apps, legacy apps, MTA, migrate apps to containers
+title: Overview of MTA and migration map
 ---
 
 The Docker Modernize Traditional Applications (MTA) Program helps enterprises
@@ -16,7 +16,7 @@ target="_blank" class="_"}, which goes into more detail.
 
 ## Working outline for this docset
 
-* Overview
+* Overview of MTA and migration process
 
 * Containerizing app components
 
