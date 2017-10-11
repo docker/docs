@@ -40,7 +40,7 @@ $ docker pull {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 
 ## Push an image
 
-Before you can push an image to DTR you need to [create a repository](index.md)
+Before you can push an image to DTR, you need to [create a repository](index.md)
 to store the image. In this example the full name of our repository is
 `{{ domain }}/{{ org }}/{{ repo }}`.
 
