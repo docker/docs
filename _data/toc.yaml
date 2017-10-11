@@ -1,3 +1,5 @@
+---
+---
 horizontalnav:
 - title: Guides
   path: /
@@ -606,10 +608,12 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.32/
-    title: v1.32 Reference
-  - sectiontitle: Previous API versions
+  - path: /engine/api/latest/
+    title: v{{ latest_stable_docker_engine_api_version }} Reference
+  - sectiontitle: API reference by version
     section:
+    - path: /engine/api/v1.32/
+      title: v1.32 Reference
     - path: /engine/api/version-history/
       title: Version history overview
     - path: /engine/api/v1.31/

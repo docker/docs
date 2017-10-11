@@ -15,6 +15,7 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 
 # Component versions -- address like site.docker-ce_stable_version
 docker-ce_stable_version: "17.09"
+latest_stable_docker_engine_api_version: "1.32"
 docker-ce_edge_version: "17.09"
 docker-ee_version: "17.06"
 compose_version: "1.16.1"
