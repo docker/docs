@@ -462,7 +462,7 @@ guides:
     - path: /mta/stack-guides/
       title: Stack migration guides
     - path: /mta/arch-best-practices/
-      title: Best practices
+      title: Reference architectures
 
 - sectiontitle: Standards and compliance
   section:
