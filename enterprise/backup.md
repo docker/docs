@@ -29,3 +29,7 @@ components one by one:
 1. Docker Engine. [Learn more](/engine/swarm/admin_guide.md#recover-from-disaster).
 2. Universal Control Plane (UCP). [Learn more](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md#backup-command).
 3. Docker Trusted Registry (DTR). [Learn more](/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery.md#restore-dtr-data).
+
+## Where to go next
+
+* [Upgrade Docker EE](upgrade.md)
