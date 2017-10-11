@@ -13,7 +13,7 @@ You can configure the Docker CLI client to sign the images you push to DTR.
 This allows whoever pulls your image to validate if they are getting the image
 you created, or a forged one.
 
-To sign an image you can run:
+To sign an image, you can run:
 
 ```none
 export DOCKER_CONTENT_TRUST=1
@@ -21,7 +21,7 @@ docker push <dtr-domain>/<repository>/<image>:<tag>
 ```
 
 This pushes the image to DTR and creates trust metadata. It also creates
-public and private key pairs to sign the trust metadata, and push that metadata
+public and private key pairs to sign the trust metadata, and pushes that metadata
 to the Notary Server internal to DTR.
 
 ![image with signature](../../../images/sign-an-image-2.svg)
@@ -33,7 +33,7 @@ With the command above you'll be able to sign your DTR images, but UCP won't
 trust them because it can't tie the private key you're using to sign the images
 to your UCP account.
 
-To sign images in a way that UCP trusts them you need to:
+To sign images in a way that UCP trusts them, you need to:
 
 * Configure your Notary client
 * Initialize trust metadata for the repository
@@ -151,11 +151,11 @@ The `private` directory contains the private keys the Docker CLI client uses
 to sign the images. Make sure you create backups of this directory so that
 you don't lose your signing keys.
 
-The Docker and Notary CLI clients integrates with Yubikey. If you have a Yubikey
+The Docker and Notary CLI clients integrate with Yubikey. If you have a Yubikey
 plugged in when initializing trust for a repository, the root key is stored on
 the Yubikey instead of in the trust directory.
 When you run any command that needs the `root` key, Docker and Notary CLI
-clients look on the Yubikey first, and uses the trust directory as a fallback.
+clients look on the Yubikey first, and use the trust directory as a fallback.
 
 The `tuf` directory contains the trust metadata for the images you've
 signed. For each repository there are four files.
