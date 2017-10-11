@@ -252,7 +252,6 @@ guides:
       title: Bind mounts
     - path: /engine/admin/volumes/tmpfs/
       title: tmpfs mounts
-<<<<<<< HEAD
     - path: /engine/admin/troubleshooting_volume_errors/
       title: Troubleshoot volume problems
     - sectiontitle: Store data within containers
@@ -277,80 +276,6 @@ guides:
         title: Use the VFS storage driver
 
 - sectiontitle: Run your app in production
-=======
-    - path: /engine/userguide/storagedriver/
-      title: Container storage drivers
-      nosync: true
-- sectiontitle: MTA
-  section:
-    - path: /mta/
-      title: MTA overview
-    - path: /mta/stack-guides/
-      title: Stack migration guides
-    - path: /mta/arch-best-practices/
-      title: Best practices
-- sectiontitle: Troubleshoot Docker Engine
-  section:
-  - path: /engine/admin/troubleshooting_volume_errors/
-    title: Troubleshoot volume problems
-- sectiontitle: Manage a swarm
-  section:
-  - path: /engine/swarm/
-    title: Swarm mode overview
-  - path: /engine/swarm/key-concepts/
-    title: Swarm mode key concepts
-  - sectiontitle: Get started with swarm mode
-    section:
-    - path: /engine/swarm/swarm-tutorial/
-      title: Set up for the tutorial
-    - path: /engine/swarm/swarm-tutorial/create-swarm/
-      title: Create a swarm
-    - path: /engine/swarm/swarm-tutorial/add-nodes/
-      title: Add nodes to the swarm
-    - path: /engine/swarm/swarm-tutorial/deploy-service/
-      title: Deploy a service
-    - path: /engine/swarm/swarm-tutorial/inspect-service/
-      title: Inspect the service
-    - path: /engine/swarm/swarm-tutorial/scale-service/
-      title: Scale the service
-    - path: /engine/swarm/swarm-tutorial/delete-service/
-      title: Delete the service
-    - path: /engine/swarm/swarm-tutorial/rolling-update/
-      title: Apply rolling updates
-    - path: /engine/swarm/swarm-tutorial/drain-node/
-      title: Drain a node
-    - path: /engine/swarm/ingress/
-      title: Use swarm mode routing mesh
-  - sectiontitle: How swarm mode works
-    section:
-    - path: /engine/swarm/how-swarm-mode-works/nodes/
-      title: How nodes work
-    - path: /engine/swarm/how-swarm-mode-works/services/
-      title: How services work
-    - path: /engine/swarm/how-swarm-mode-works/pki/
-      title: Manage swarm security with PKI
-  - path: /engine/swarm/swarm-mode/
-    title: Run Docker Engine in swarm mode
-  - path: /engine/swarm/join-nodes/
-    title: Join nodes to a swarm
-  - path: /engine/swarm/manage-nodes/
-    title: Manage nodes in a swarm
-  - path: /engine/swarm/services/
-    title: Deploy services to a swarm
-  - path: /engine/swarm/configs/
-    title: Store service configuration data
-  - path: /engine/swarm/secrets/
-    title: Manage sensitive data with Docker secrets
-  - path: /engine/swarm/swarm_manager_locking/
-    title: Lock your swarm
-  - path: /engine/swarm/networking/
-    title: Manage swarm service networks
-  - path: /engine/swarm/admin_guide/
-    title: Swarm administration guide
-  - path: /engine/swarm/raft/
-    title: Raft consensus in swarm mode
-- sectiontitle: Secure Engine
->>>>>>> edb5c30dd4... adding MTA subtopic files
   section:
     - sectiontitle: The basics
       section:
@@ -529,6 +454,15 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
+
+- sectiontitle: MTA
+  section:
+    - path: /mta/
+      title: MTA overview
+    - path: /mta/stack-guides/
+      title: Stack migration guides
+    - path: /mta/arch-best-practices/
+      title: Best practices
 
 - sectiontitle: Standards and compliance
   section:
