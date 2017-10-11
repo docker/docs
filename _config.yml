@@ -13,10 +13,13 @@ lsi: false
 url: https://docs.docker.com
 keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06"]
 
-# Component versions -- address like site.docker-ce_stable_version
-docker-ce_stable_version: "17.09"
-docker-ce_edge_version: "17.09"
-docker-ee_version: "17.06"
+# Component versions -- address like site.docker_ce_stable_version
+# You can't have - characters in these for non-YAML reasons
+
+docker_ce_stable_version: "17.09"
+latest_stable_docker_engine_api_version: "1.32"
+docker_ce_edge_version: "17.09"
+docker_ee_version: "17.06"
 compose_version: "1.16.1"
 machine_version: "0.12.2"
 distribution_version: "2.6"
