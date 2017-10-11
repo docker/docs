@@ -46,7 +46,7 @@ to store the image. In this example the full name of our repository is
 
 ### Tag the image
 
-In this example we'll pull the {{ repo }} image from Docker Hub and tag with with
+In this example we'll pull the {{ repo }} image from Docker Hub and tag with
 the full DTR and repository name. A tag defines where the image was pulled
 from, and where it will be pushed to.
 
