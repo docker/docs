@@ -111,4 +111,6 @@ Launch the app with either a [`docker run`](/engine/reference/commandline/run.md
 
 * [Reference architecture and best practices](arch-best-practices.md)
 
+* [Modernizing .NET apps for IT Pros (video)](https://www.youtube.com/watch?v=gaJ9PzihAYw){: target="_blank" class="_"}
+
 * [MTA labs for Windows developers](https://github.com/docker/labs/blob/master/windows/modernize-traditional-apps/README.md){: target="_blank" class="_"}
