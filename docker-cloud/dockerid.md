@@ -1,13 +1,13 @@
 ---
 description: Using your DockerID to log in to Docker Cloud
 keywords: one, two, three
-title: Docker Cloud Settings and Docker ID
+title: Docker Cloud settings and Docker ID
 ---
 
 Docker Cloud uses your Docker ID for access and access control, and this allows
 you to link your Hub and Cloud accounts.
 
-If you already have an account on Docker Hub you can use the same credentials to
+If you already have an account on Docker Hub, you can use the same credentials to
 log in to Docker Cloud.
 
 If you don't have a [Docker ID](../docker-id/) yet, you can sign up for one from
