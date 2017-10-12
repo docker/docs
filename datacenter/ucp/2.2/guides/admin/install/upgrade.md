@@ -106,6 +106,16 @@ for any necessary configuration values.
 Once the upgrade finishes, navigate to the UCP web UI and make sure that
 all the nodes managed by UCP are healthy.
 
+## Recommended upgrade paths
+
+If you're running a UCP version that's lower than 2.1, first upgrade to the
+latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade 
+path to UCP 2.2:
+
+- From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2
+- From UCP 2.0: UCP 2.0 -> UCP 2.1 -> UCP 2.2
+- From UCP 2.1: UCP 2.1 -> UCP 2.2
+
 ## Where to go next
 
 * [UCP release notes](../../release-notes/index.md)
