@@ -13,7 +13,7 @@ released. Docker Cloud doesn't *automatically* upgrade your nodes for you
 because your containers would need to be restarted to complete the upgrade.
 Instead, we allow you to choose when you want to upgrade so you can plan for potential outage time during the restart.
 
-## Upgrading Docker Engine in a node
+## Upgrade Docker Engine in a node
 
 Before you upgrade your nodes, go to the detail page of the node that you want to upgrade. On the left side you will see a **Docker Info** section that lists the currently installed version of Docker Engine.
 
@@ -28,6 +28,6 @@ upgrade is automatically restarted, regardless of the
 restarted.
 
 
-## Upgrading nodes using the API and CLI
+## Upgrade nodes using the API and CLI
 
-See our [API and CLI documentation](/apidocs/docker-cloud.md#upgrade-docker-daemon34) for more information on how to upgrade nodes with our API, SDKs and the CLI.
+See our [API and CLI documentation](/apidocs/docker-cloud.md#upgrade-docker-daemon34) for more information on how to upgrade nodes with our API, SDKs, and the CLI.
