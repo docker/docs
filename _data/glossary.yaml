@@ -243,7 +243,7 @@ role-based access control: |
   resource collections. A grant is made up of a subject, a role, and a collection.
   A grant defines who (subject) has how much access (role) to a set of resources
   (collection). For more about role-based access control, see
-  [Authentication](/datacenter/ucp/2.2/guides/access-control/index.md).
+  [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 SSH: |
   SSH (secure shell) is a secure protocol for accessing remote machines and applications.
   It provides authentication and encrypts data communication over insecure networks such
