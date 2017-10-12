@@ -33,7 +33,7 @@ option.
 }
 ```
 
-Restart Docker for the changes to take effect.
+Restart Docker for the changes to take effect for newly created containers. Existing containers will not use the new logging configuration.
 
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker create` or `docker run`:
