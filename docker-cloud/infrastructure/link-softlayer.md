@@ -60,10 +60,10 @@ Once generated, click the **View** link under the **API Key** column, and copy t
 Once you create the new user `dockercloud-user`, have its
 credentials, and set its permissions, go back to Docker Cloud.
 
-## Add SoftLayer Account Credentials
+## Add SoftLayer account credentials
 
 To link your SoftLayer account so you can launch **nodes** from Docker Cloud,
-navigate to **Account info \> Cloud Providers**. Click **Add
+navigate to **Account info \> Cloud providers**. Click **Add
 credentials**.
 
 ![](images/softlayer-link-account.png)
