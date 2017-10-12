@@ -131,7 +131,7 @@ most vulnerable first.
     component in the image.
 ![](../../images/scan-images-for-vulns-5.png){: .with-border}
 
-### What do I do next?
+## What to do next
 
 If you find that an image in your registry contains vulnerable components, you
 can use the linked CVE scan information in each scan report to evaluate the
