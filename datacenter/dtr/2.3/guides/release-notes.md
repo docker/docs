@@ -5,7 +5,7 @@ keywords: docker trusted registry, whats new, release notes
 toc_max: 2
 ---
 
-Here you can learn about new features, bug fixes, breaking changes and
+Here you can learn about new features, bug fixes, breaking changes, and
 known issues for each DTR version.
 
 You can then use [the upgrade instructions](admin/upgrade.md),
@@ -77,7 +77,7 @@ This lets you manage images for different operating systems (eg. Linux and
   Windows) and CPU architectures (eg. x86_64 and s390x) under a single tag.
 * You can now use the web UI in Chinese.
 
-##  General improvements
+## General improvements
 
 #### UI/UX
 
