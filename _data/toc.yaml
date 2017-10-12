@@ -1392,6 +1392,10 @@ manuals:
       title: "17.06"
   - path: /datacenter/install/linux/
     title: Deploy Docker EE standard on Linux
+  - path: /enterprise/backup/
+    title: Backup Docker EE
+  - path: /enterprise/upgrade/
+    title: Upgrade Docker EE
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.2/guides/
