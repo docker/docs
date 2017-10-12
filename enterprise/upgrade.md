@@ -36,6 +36,11 @@ When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same
 time can lead to a loss of quorum, and possible data loss.
 
+Before upgrading the Docker Engine on a node, drain the node so that any
+workloads running on the node get scheduled in some other node. You can do
+this by running `docker node update --availability drain <node>` on a manager
+node.
+
 Follow the upgrade instructions for your specific distribution:
 
 * [Windows Server](/engine/installation/windows/docker-ee.md#update-docker-ee)
@@ -44,6 +49,9 @@ Follow the upgrade instructions for your specific distribution:
 * [CentOS](/engine/installation/linux/docker-ee/centos.md#upgrade-docker-ee)
 * [Oracle Linux](/engine/installation/linux/docker-ee/oracle.md#upgrade-docker-ee)
 * [SLES](/engine/installation/linux/docker-ee/suse.md#upgrade-docker-ee)
+
+Once you finish upgrading the node, make it available to run workloads. For
+this, run `docker node update --availability active <node>`.
 
 ## Upgrade UCP
 
