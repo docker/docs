@@ -40,9 +40,9 @@ file you've downloaded, and choose **Install certificate**.
 Then, select the following options:
 
 * Store location: local machine
-* Check 'place all certificates in the following store'
-* Click 'Browser', and select 'Trusted Root Certificate Authorities'
-* Click 'Finish'
+* Check **place all certificates in the following store**
+* Click **Browser**, and select **Trusted Root Certificate Authorities**
+* Click **Finish**
 
 [Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal).
 
@@ -72,7 +72,7 @@ $ sudo /bin/systemctl restart docker.service
 
 ### Boot2Docker
 
-1.  Login into the virtual machine with ssh:
+1.  Log into the virtual machine with ssh:
 
     ```bash
     docker-machine ssh <machine-name>
@@ -109,7 +109,7 @@ $ sudo /bin/systemctl restart docker.service
 
 ## Log into DTR
 
-To validate that your Docker daemon trusts DTR, trying authenticating against
+To validate that your Docker daemon trusts DTR, try authenticating against
 DTR.
 
 ```bash
