@@ -29,11 +29,11 @@ This data is persisted on the host running UCP, using named volumes.
 
 ## Backup steps
 
-Backup your Docker EE components in the following order:
+Back up your Docker EE components in the following order:
 
-1. [Backup your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
-2. Backup UCP
-3. [Backup DTR](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md)
+1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
+2. Back up UCP
+3. [Back up DTR](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md)
 
 ## Backup policy
 
