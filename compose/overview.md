@@ -184,3 +184,193 @@ individuals, we have a number of open channels for communication.
 * To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/compose/pulls).
 
 For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).
+
+#pt-BR
+---
+descrição: Introdução e Visão Geral do Compose
+palavras-chave: documentação, docs, docker, compose, orchestration, containers
+título: Visão geral do Docker Compose
+---
+
+>**Procurando por Arquivos de Referência Compose?** [Encontre a Última versão aqui](/compose/compose-file/index.md).
+
+Compose é uma ferramenta para definição e execução de aplicações Docker multi-container.
+Com Compose, você usa um arquivo YAML para configurar seus serviçoes de aplicações.
+Então, com um único comando, você creia e inicia todos os serviços
+de sua configuração. Para aprender mais sobre características do Compose
+veja [a lista de características](overview.md#features).
+
+Compose serve para vários ambientes: produção, estadiamento, desenvolvimento, teste, assim
+como CI workflows. Você pode aprender mais sobre cada caso em [Common Use
+Cases](overview.md#common-use-cases).
+
+Usaar Compose é basicamente um processo de três passos.
+
+1. Defina seu ambiente de desenvolvimento do app com um `Dockerfile` então ele pode ser reproduzido
+em qualquer lugar.
+
+2. Defina os serviços que terão seu app em `docker-compose.yml`
+assim eles podem rodar juntos em um ambiente isolado.
+
+3. Por fim, execute
+`docker-compose up` e Compose irá iniciar e executar seu app.
+
+Um `docker-compose.yml` parece com isso:
+
+    version: '3'
+    services:
+      web:
+        build: .
+        ports:
+        - "5000:5000"
+        volumes:
+        - .:/code
+        - logvolume01:/var/log
+        links:
+        - redis
+      redis:
+        image: redis
+    volumes:
+      logvolume01: {}
+
+Para mais informações sobre o arquivo Compose, veja o
+[Compose file reference](compose-file/index.md).
+
+Compose tem comandos para gerenciamente de todo ciclo de vida da sua aplicação:
+
+ * Iniciar, parar e reconstruir serviços
+ * Ver o status dos serviços em execução
+ * Transmitir o log de saída dos serviços em execução.
+ * Executar um comando liga-desliga em um serviço.
+
+## Documentação do Compose
+
+- [Instalando Compose](install.md)
+- [Iniciando](gettingstarted.md)
+- [Iniciando com Django](django.md)
+- [Iniciando com Rails](rails.md)
+- [Iniciando com WordPress](wordpress.md)
+- [Perguntas frequentes](faq.md)
+- [Linha de comando de Referência](./reference/index.md)
+- [Arquivo de referência Compose](compose-file/index.md)
+
+## Características
+
+As características do Compose que o fazem efetivo são:
+
+* [Múltiplos ambientes isolados em um único host](overview.md#Multiple-isolated-environments-on-a-single-host)
+* [Preserva o volume de dados quando os containers são criados](overview.md#preserve-volume-data-when-containers-are-created)
+* [Recria apenas os containers que tiveram mudança](overview.md#only-recreate-containers-that-have-changed)
+* [Variáveis e mudanças na composição entre ambientes](overview.md#variables-and-moving-a-composition-between-environments)
+
+### Múltiplos ambientes isolados em um único host
+
+Compose usa um nome de projeto para isolar ambientes um do outro. Você pode fazer uso do nome desse projeto em diferentes contextos:
+
+* em um dev host, para criar várias cópias de um único ambiente (ex: você pode querer executar uma cópia estável para cara branck de um projeto)
+* em um CI server, para manter as contruções sem interferências, você pode atribuir o nome do projeto a um único número.
+* em um host compartilhado ou dev host, para prever diferentes projetos de usarem os mesmos nomes de serviço, para que não interfiram um no outro.
+
+O nome do projeto por padrão é o nome base do diretório do projeto. Você pode atribuir
+um outro nome usando a
+[`-p` linha de comando](./reference/overview.md) or the
+[`COMPOSE_PROJECT_NAME` environment variable](./reference/envvars.md#compose-project-name).
+
+### Preserva o volume de dados quando containers são criados
+
+Compose preserva todo volume usado pelo seu serviço. Quando `docker-compose up`
+é executado, se for ecnontrado algum container de execuções anteriores, ele copia o volume do
+container antigo para o novo container. Esse processo assegura que nenhum dado
+que você criou no volume será perdido.
+
+Se você usa `docker-compose`em uma máquina Windows, veja
+If you use `docker-compose` on a Windows machine, see
+[Variáveis de ambiente](reference/envvars.md) e ajuste as variáveis de ambiente
+necessárias para suas necessidades específicas.
+
+
+### Recrie apenas containers que foram mudados
+
+Compose grava a configuração usada para criar um container. Quando você
+reinicia um serviço que não foi mudado, Compose reusará os containers
+existentes. Reusar containers seignifica que você pode fazer mudanças em seu
+ambiente muito rapidamente.
+
+
+### Variáveis e mobilidade de uma composição entre ambientes
+
+Compose suporta variáveis no arquivo Compose. Você pode usar essas variáveis
+para customizar sua composição para diferentes ambientes, ou diferentes usuários.
+Veja [Substituição de Variáveis](compose-file.md#variable-substitution) para mais
+detalhes.
+
+você pode extender um arquivo Compose usando o campo `extends` or criando
+vários arquivos Compose. Veja [extends](extends.md) para mais detalhes.
+
+
+## Casos de uso comuns
+
+Compode pode ser usado de diferentes formas. Alguns casos de uso comuns estão
+relacionados abaixo.
+
+
+### Ambiente de desenvolvimento
+
+Quando você está desenvolvendo software, a habilidade de executar uma aplicação em um
+ambiente isolado e a interação com este é crucial. A ferramenta linha de comando Compose
+pode ser usada para criar o ambiente e interagir com ele.
+
+O [Arquivo Compose](compose-file.md) fornece um meio de documentar e configurar
+tudo do serviço de dependências da aplicação (databases, queues, caches,
+web service APIs, etc). Usando a ferramenta linha de comando do Compose você pode criar
+e inicializar um ou amis containers para cada dependência com um único comando
+(`docker-compose up`).
+
+Juntas, essas características fornecem uma forma conveniente para desenvolvedores
+iniciarem seu projeto. Compose pode reduzir uma multi-page "Guia iniciante do
+desenvolvedor" para uma única máquina capaz de ler o arquivo Compose e alguns comandos.
+
+### Testes em ambientes automatizados
+
+Uma parte importante de qualquer aplicação ou processo de integração contínua
+é o sistema automatizado de teste. Testes automatizados fim-a-fim requerem um
+ambiente no qual possam rodar os testes. Compode fornece uma forma conveniente de criar
+e destruir ambientes de testes isolados para sua aplicação de testes. Definindo todo ambiente em um [Arquivo Compose](compose-file.md) você
+pode criar e destruir esses ambientes com apneas poucos comandos:
+
+    $ docker-compose up -d
+    $ ./run_tests
+    $ docker-compose down
+
+### Implementações em hosts únicos
+
+Compose tem focado tradicionalmente em workfloes de desenvolvimento e teste,
+mas com cada release nós estamos fazendo progresso características mais orientadas a produção. Você pode usar Compose para implementar em um docker remoto. O mecanismos Docker pode ser uma instância única provisionada com
+Compose has traditionally been focused on development and testing workflows,
+[Docker Machine](/machine/overview.md) ou um inteiro
+[Docker Swarm](/engine/swarm/index.md) cluster.
+
+Para detalhes no uso de características orientadas a produção, veja
+[compose in production](production.md) nesta documentação.
+
+
+## Notas de Release
+
+Para ver uma lista detalhada de mudanças de releases passados e atuais do Docker
+Compose, por favor acesse
+[CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md).
+
+## Conseguindo ajuda
+
+Docker Compose está em desenvolvimento. Se você precisa de ajuda, gostaria de
+contribuir, ou simplesmente que falar sobre o projeto com ideias individuais
+semelhantes, nós temos um número de canais abertos para comunicação.
+
+* Para reportar bugs ou fazer requisições em arquivos: Por favor use o [issue tracker on Github](https://github.com/docker/compose/issues).
+
+* Para discutir sobre o projeto com pessoas em tempo real: Por favor junte-se ao
+  canal `#docker-compose` em freenode IRC.
+
+* Para contribuir com mudanças de código ou documentação: por favor submeta um [pull request on Github](https://github.com/docker/compose/pulls).
+
+Para mais informações e recursos, por favor visite o [Getting Help project page](/opensource/get-help/).
