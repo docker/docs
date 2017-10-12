@@ -14,16 +14,31 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-4 (2017-10-12)
 
-## 17.06.2-ee-3
-(2017-09-22)
+### Client
+
+* Fix idempotence of `docker stack deploy` when secrets or configs are used [docker/cli#509](https://github.com/docker/cli/pull/509)
+
+### Logging
+
+* Avoid using a map for log attributes to prevent panic [moby/moby#34174](https://github.com/moby/moby/pull/34174)
+
+### Networking
+
+* Fix for garbage collection logic in NetworkDB. Entries were not properly garbage collected and deleted within the expected time [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
+* Allow configuration of max packet size in network DB to use the full available MTU. Note this will require a configuration in the docker daemon and need a dockerd restart [docker/libnetwork#1839](https://github.com/docker/libnetwork/pull/1839)
+* Overlay fix for transient IP reuse [docker/libnetwork#1935](https://github.com/docker/libnetwork/pull/1935) [docker/libnetwork#1968](https://github.com/docker/libnetwork/pull/1968)
+* Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/swarmkit/pull/1788)
+
+
+## 17.06.2-ee-3 (2017-09-22)
 
 ### Swarm mode
 
 - Increase max message size to allow larger snapshots [docker/swarmkit#131](https://github.com/docker/swarmkit/pull/131)
 
-## 17.06.1-ee-2
-(2017-08-24)
+## 17.06.1-ee-2 (2017-08-24)
 
 ### Client
 
@@ -42,8 +57,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## 17.06.1-ee
-(2017-08-16)
+## 17.06.1-ee (2017-08-16)
 
 ### Important notes about this release
 
