@@ -12,8 +12,8 @@ following components:
 2. Universal Control Plane (UCP).
 3. Docker Trusted Registry (DTR).
 
-While upgrading some of these components will become temporarily unavailable.
-So you should schedule your upgrades to take place outside business peak hours,
+While upgrading, some of these components will become temporarily unavailable.
+So you should schedule your upgrades to take place outside business peak hours
 to make sure there's no impact to your business.
 
 ## Create a backup
@@ -29,19 +29,42 @@ You may also want to check the
 [Docker EE maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
 to understand until when your version will be supported.
 
-## Upgrade Docker EE
+## Upgrade Docker Engine
 
-Start by sequentially upgrading the Docker Engine running on each node.
+To avoid application downtime, you should be running Docker in Swarm mode and
+deploying your workloads as Docker services. That way you'll be able to
+drain the nodes of any workloads before starting the upgrade.
+
+If you have workloads running as containers as opposed to swarm services,
+make sure they are configured with a [restart policy](/engine/admin/start-containers-automatically/).
+This will make sure your containers are started automatically after the upgrade.
+
+To ensure that workloads running as Swarm services have no downtime, you need to:
+
+1. Drain the node you want to upgrade so that services get scheduled in another node.
+2. Upgrade the Docker Engine on that node.
+3. Make the node available again.
+
+If you do this sequentially for every node, you'll be able to upgrade with no
+application downtime.
 When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same
 time can lead to a loss of quorum, and possible data loss.
 
-Before upgrading the Docker Engine on a node, drain the node so that any
-workloads running on the node get scheduled in some other node. You can do
-this by running `docker node update --availability drain <node>` on a manager
-node.
+### Drain the node
 
-Follow the upgrade instructions for your specific distribution:
+Start by draining the node so that services get scheduled in another node and
+continue running without downtime.
+For that, run this command on a manager node:
+
+```
+docker node update --availability drain <node>
+```
+
+### Perform the upgrade
+
+Upgrade the Docker Engine on the node by following the instructions for your
+specific distribution:
 
 * [Windows Server](/engine/installation/windows/docker-ee.md#update-docker-ee)
 * [Ubuntu](/engine/installation/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
@@ -50,8 +73,14 @@ Follow the upgrade instructions for your specific distribution:
 * [Oracle Linux](/engine/installation/linux/docker-ee/oracle.md#upgrade-docker-ee)
 * [SLES](/engine/installation/linux/docker-ee/suse.md#upgrade-docker-ee)
 
+### Make the node active
+
 Once you finish upgrading the node, make it available to run workloads. For
-this, run `docker node update --availability active <node>`.
+this, run:
+
+```
+docker node update --availability active <node>
+```
 
 ## Upgrade UCP
 
