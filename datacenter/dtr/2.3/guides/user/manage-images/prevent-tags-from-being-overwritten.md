@@ -17,14 +17,14 @@ user can push the image with exactly the same name but different functionality.
 This might make it difficult to trace back the image to the build that generated
 it.
 
-To prevent this from happening you can configure a repository to be immutable.
-Once you push a tag, DTR won't anyone else to push another tag with the same
+To prevent this from happening, you can configure a repository to be immutable.
+Once you push a tag, DTR won't allow anyone else to push another tag with the same
 name.
 
 ## Make tags immutable
 
 To make tags immutable, in the **DTR web UI**, navigate to the
-**repository settings** page, and change **immutability** to **on**.
+**repository settings** page, and change **Immutability** to **On**.
 
 ![](../../images/immutable-repo-1.png){: .with-border}
 
