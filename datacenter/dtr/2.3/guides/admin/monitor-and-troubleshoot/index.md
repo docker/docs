@@ -21,7 +21,7 @@ to inspect, click **Inspect Resource**, and choose **Containers**.
 
 ![](../../images/monitor-2.png){: .with-border}
 
-Now you can drill into each DTR container to see it's logs and find the root
+Now you can drill into each DTR container to see its logs and find the root
 cause of the problem.
 
 ![](../../images/monitor-3.png){: .with-border}
