@@ -18,7 +18,7 @@ For instructions on how to link your Microsoft Azure account to Docker Cloud,
 see [the Azure instructions that enable swarm
 mode](/docker-cloud/cloud-swarm/link-azure-swarm.md).
 
-> Note: The procedure for linking these accounts is the same, regardless
+> **Note**: The procedure for linking these accounts is the same, regardless
 of whether you are using Docker Cloud in
 [Swarm Mode](/docker-cloud/index.md) or not. If you are
 using standard mode, come back to these topics after you have linked
