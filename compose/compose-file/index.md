@@ -1007,7 +1007,7 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
 must be connected to at least one of the same networks as the service which is
-linking to them. Starting with Version 2, [links](compose-file-v2#links) are a
+linking to them. [Links](compose-file-v2#links) are a
 legacy option. We recommend using [networks](#networks) instead.
 >
 > This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
