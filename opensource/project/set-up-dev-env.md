@@ -101,7 +101,8 @@ can take over 15 minutes to complete.
 
    For [Docker Toolbox](../../toolbox/overview.md) users, use `docker-machine status your_vm_name` to make sure your VM is running. You
    may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
-   shell environment.
+   shell environment. If you use Docker for Mac 1.13 and higher, you do not need
+   to use Docker Machine.
 
 2. Change into the root of the `docker-fork` repository.
 
