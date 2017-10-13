@@ -177,10 +177,36 @@ This will force a stack trace to be logged but will not stop the daemon.
 Daemon logs will show the stack trace or the path to a file containing the
 stack trace if it was logged to a file.
 
-
 The daemon will continue operating after handling the `SIGUSR1` signal and
 dumping the stack traces to the log. The stack traces can be used to determine
 the state of all goroutines and threads within the daemon.
+
+### View stack traces
+
+The Docker daemon log can be viewed by using one of the following methods:
+
+- By running `journalctl -u docker.service` on Linux systems using `systemctl`
+- `/var/log/messages`, `/var/log/daemon.log`, or `/var/log/docker.log` on older
+  Linux systems
+- By running `Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-5) | Sort-Object Time` on Docker EE for Windows Server
+
+> **Note**: It is not possible to manually generate a stack trace on Docker for
+> Mac or Docker for Windows. However, you can click the Docker taskbar icon and
+> choose **Diagnose and feedback** to send information to Docker if you run into
+> issues.
+
+Look in the Docker logs for a message like the following:
+
+```none
+...goroutine stacks written to /var/run/docker/goroutine-stacks-2017-06-02T193336z.log
+...daemon datastructure dump written to /var/run/docker/daemon-data-2017-06-02T193336z.log
+```
+
+The locations where Docker saves these stack traces and dumps depends on your
+operating system and configuration. You may be able to get useful diagnostic
+information straight from the stack traces and dumps. Otherwise, you can provide
+this information to Docker for help diagnosing the problem.
+
 
 ## Check whether Docker is running
 
