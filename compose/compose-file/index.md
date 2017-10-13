@@ -1952,6 +1952,23 @@ documentation for more information. Optional.
         foo: "bar"
         baz: 1
 
+### attachable
+
+> **Note**: Only supported for v3.2 and higher.
+
+Only used when the `driver` is set to `overlay`. If set to `true`, then
+standalone containers can attach to this network, in addition to services. If a
+standalone container attaches to an overlay network, it can communicate with
+services and standalone containers which are also attached to the overlay
+network from other Docker daemons.
+
+```yaml
+networks:
+  mynet1:
+    driver: overlay
+    attachable: true
+```
+
 ### enable_ipv6
 
 Enable IPv6 networking on this network.
