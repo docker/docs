@@ -41,7 +41,7 @@ Docker Cloud supports two types of triggers:
 6. Use the POST request URL provided to configure the webhook in your
 application or third party service.
 
-## Revoking triggers
+## Revoke triggers
 
 To stop a trigger from automatically scaling or redeploying, you must revoke it.
 
@@ -53,6 +53,6 @@ To stop a trigger from automatically scaling or redeploying, you must revoke it.
 
 Once the trigger is revoked, it stops accepting requests.
 
-## Using triggers in the API and CLI
+## Use triggers in the API and CLI
 
 See our [API and CLI documentation](/apidocs/docker-cloud.md#triggers) to learn how to use triggers with our API and the CLI.
