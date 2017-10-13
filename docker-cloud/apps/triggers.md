@@ -6,6 +6,8 @@ redirect_from:
 title: Use triggers
 ---
 
+## What are triggers?
+
 **Triggers** are API endpoints that redeploy or scale a specific service
 whenever a `POST` HTTP request is sent to them. You can create one or more
 triggers per service.
@@ -17,8 +19,7 @@ keep their URLs secret.
 The body of the `POST` request is passed in to the new containers as an
 environment variable called `DOCKERCLOUD_TRIGGER_BODY`.
 
-
-#### Trigger types
+### Trigger types
 
 Docker Cloud supports two types of triggers:
 
