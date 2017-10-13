@@ -78,7 +78,7 @@ $ apt-get remove dockercloud-agent
 
 ## Upgrade Docker Cloud Agent
 
-To upgrade `dockercloud-agent` execute the following command on the host:
+To upgrade `dockercloud-agent`, execute the following command on the host:
 
 ```
 $ apt-get update && apt-get install -y dockercloud-agent
@@ -86,7 +86,7 @@ $ apt-get update && apt-get install -y dockercloud-agent
 
 ## Restart Docker Cloud Agent
 
-To restart the `dockercloud-agent` execute the following command from your BYON host:
+To restart the `dockercloud-agent`, execute the following command from your BYON host:
 
 ```
 $ service dockercloud-agent restart
