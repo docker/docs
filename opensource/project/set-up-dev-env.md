@@ -290,14 +290,18 @@ example, you'll edit the help for the `attach` subcommand.
 
 7. Rebuild the binary by using the command `hack/make.sh binary` in the docker development container shell.
 
-8. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell (or use the `hack/make.sh binary install-binary run` command described above).
+8. Stop Docker if it is running.
+
+9. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell (or use the `hack/make.sh binary install-binary run` command described above).
 
    ```
    cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
    cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
    ```
 
-9. To view your change, run the `docker attach --help` command in the docker development container shell.
+10. Start Docker.
+
+11. To view your change, run the `docker attach --help` command in the docker development container shell.
 
    ```bash
    root@b0cb4f22715d:/go/src/github.com/moby/moby# docker attach --help
