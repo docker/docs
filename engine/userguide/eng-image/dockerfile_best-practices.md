@@ -17,13 +17,11 @@ specific set of instructions. You can learn the basics on the
 you’re new to writing `Dockerfile`s, you should start there.
 
 This document covers the best practices and methods recommended by Docker,
-Inc. and the Docker community for creating easy-to-use, effective
-`Dockerfile`s. We strongly suggest you follow these recommendations (in fact,
-if you’re creating an Official Image, you *must* adhere to these practices).
+Inc. and the Docker community for building efficient images. To see many of
+these practices and recommendations in action, check out the Dockerfile for
+[buildpack-deps](https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile).
 
-You can see many of these practices and recommendations in action in the [buildpack-deps `Dockerfile`](https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile).
-
-> Note: for more detailed explanations of any of the Dockerfile commands
+> **Note**: for more detailed explanations of any of the Dockerfile commands
 >mentioned here, visit the [Dockerfile Reference](../../reference/builder.md) page.
 
 ## General guidelines and recommendations
@@ -40,12 +38,36 @@ stateless fashion.
 
 ### Use a .dockerignore file
 
-In most cases, it's best to put each Dockerfile in an empty directory. Then,
-add to that directory only the files needed for building the Dockerfile. To
-increase the build's performance, you can exclude files and directories by
-adding a `.dockerignore` file to that directory as well. This file supports
-exclusion patterns similar to `.gitignore` files. For information on creating one,
-see the [.dockerignore file](../../reference/builder.md#dockerignore-file).
+The current working directory where you are located when you issue a
+`docker build` command is called the _build context_, and the `Dockerfile` must
+be somewhere within this build context. By default, it is assumed to be in the
+current directory, but you can specify a different location by using the `-f`
+flag. Regardless of where the `Dockerfile` actually lives, all of the recursive
+contents of files and directories in the current directory are sent to the
+Docker daemon as the _build context_. Inadvertently including files that are not
+necessary for building the image results in a larger build context and larger
+image size. These in turn can increase build time, time to pull and push the
+image, and the runtime size of containers. To see how big your build context
+is, look for a message like the following, when you build your `Dockerfile`.
+
+```none
+Sending build context to Docker daemon  187.8MB
+```
+
+To exclude files which are not relevant to the build, without restructuring your
+source repisotiry, use a `.dockerignore` file. This file supports
+exclusion patterns similar to `.gitignore` files. For information on creating
+one, see the [.dockerignore file](../../reference/builder.md#dockerignore-file).
+In addition to using a `.dockerignore` file, check out the information below
+on [multi-stage builds](#use-multi-stage-builds).
+
+### Use multi-stage builds
+
+If you use Docker 17.05 or higher, you can use
+[multi-stage builds](/engine/userguide/eng-image/multistage-build.md) to
+drastically reduce the size of your final image, without the need to
+jump through hoops to reduce the number of intermediate layers or remove
+intermediate files during the build.
 
 ### Avoid installing unnecessary packages
 
