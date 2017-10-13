@@ -9,9 +9,13 @@ title: Define environment variables
 
 Docker lets you store data such as configuration settings, encryption keys, and external resource addresses in environment variables. Docker Cloud makes it easy to define, share, and update the environment variables for your services.
 
-At runtime, environment variables are exposed to the application inside the container. Let's look inside the app you just deployed.
+At runtime, environment variables are exposed to the application inside the container.
 
-**Python quickstart**
+## Look inside your deployed app
+
+Let's look inside the app you just deployed.
+
+### Python quickstart
 
 Open the file in `quickstart-python/app.py`, and look at the return statement in the method *hello()*. The code uses **os.getenv('NAME', "world")** to get the environment variable
 **NAME**.
@@ -20,7 +24,7 @@ Open the file in `quickstart-python/app.py`, and look at the return statement in
 return html.format(name=os.getenv('NAME', "world"), hostname=socket.gethostname(), visits=visits)
 ```
 
-**Go quickstart**
+### Go quickstart
 
 Open the file in `quickstart-go/main.go`, and look at the *fmt.Fprintf* call in the *indexHandler* method. The code uses **os.Getenv("NAME")** to get the environment variable **NAME**.
 
