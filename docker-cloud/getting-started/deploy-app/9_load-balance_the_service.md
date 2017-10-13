@@ -60,11 +60,11 @@ lb-1                   9793e58b  ▶ Running  dockercloud/haproxy:latest        
 ```
 
 You should notice an URL endpoint in the *PORT* column for haproxy-1. In the
-example above this is `lb-1.my-username.cont.dockerapp.io:80`. Open the `lb-1`
+example above, this is `lb-1.my-username.cont.dockerapp.io:80`. Open the `lb-1`
 URL in your browser or curl from the CLI.
 
-If you refresh or run curl multiple times you should see requests distributed
-between the two containers of in the `web` service. You can see which container
+If you refresh or run curl multiple times, you should see requests distributed
+between the two containers of the `web` service. You can see which container
 responds to your request in the `Hostname` section of the response.
 
 ```none
