@@ -102,6 +102,7 @@ your client and daemon API versions.
 </table>
 {% endif %}
 
+{% if site.data[include.datafolder][include.datafile].pname %}
 {% unless site.data[include.datafolder][include.datafile].pname == include.datafile %}
 
 ## Parent command
@@ -120,8 +121,9 @@ your client and daemon API versions.
 | [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
 {% endunless %}
+{% endif %}
 
-{% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" %}
+{% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" or include.datafile=="docker" %}
 
 ## Related commands
 
