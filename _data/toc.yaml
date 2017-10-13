@@ -396,6 +396,8 @@ guides:
           title: How services work
         - path: /engine/swarm/how-swarm-mode-works/pki/
           title: Manage swarm security with PKI
+        - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
+          title: Swarm task states
       - path: /engine/swarm/swarm-mode/
         title: Run Docker in swarm mode
       - path: /engine/swarm/join-nodes/
@@ -1468,8 +1470,6 @@ manuals:
           title: Troubleshoot with logs
         - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
-        - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
-          title: Troubleshoot swarm task states
       - path: /datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - sectiontitle: CLI reference
