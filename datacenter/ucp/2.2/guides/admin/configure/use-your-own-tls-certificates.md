@@ -55,23 +55,6 @@ If you deployed Docker Trusted Registry, you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
 [Learn how to configure DTR](/datacenter/dtr/2.3/reference/cli/reconfigure.md).
 
-## Certificates and compose
-
-For compose to work correctly in the UCP web UI, when you upload your own
-certificates, they must contain the IP addresses of the swarm's nodes, as SANs.
-Get the IP addresses by using the `docker node inspect` command. 
-[Learn to add SANs to swarm certificates](add-sans-to-cluster.md).
-
-If you have stable host names, you can join your nodes by specifying the
-`--advertise-addr` option:  
-
-```bash
-docker swarm join ... --advertise-addr node1.com
-``` 
-
-In this example, the `docker node inspect` command reports `node1.com`, instead
-of the IP address.
-
 ## Where to go next
 
 * [Access UCP from the CLI](../../user/access-ucp/cli-based-access.md)
