@@ -1,14 +1,16 @@
 ---
-title: Troubleshoot swarm task states
-description: Learn how to troubleshoot tasks that are scheduled on your swarm.
-keywords: ucp, troubleshoot, swarm, task, service
+title: Swarm task states
+description: Learn about tasks that are scheduled on your swarm.
+keywords: swarm, task, service
+redirect_from:
+- /datacenter/ucp/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
 ---
 
-Docker Universal Control Plane lets you create services, which can start tasks.
+Docker lets you create services, which can start tasks.
 A service is a description of a desired state, and a task does the work.
 Work is scheduled on swarm nodes in this sequence:
 
-1. Create a service by using the UCP web UI or CLI.
+1. Create a service by using `docker service create` or the UCP web UI or CLI.
 2. The request goes to a Docker manager node.
 2. The Docker manager node schedules the service to run on particular nodes. 
 3. Each service can start multiple tasks.
