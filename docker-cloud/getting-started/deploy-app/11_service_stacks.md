@@ -4,8 +4,9 @@ keywords: Python, service, stack
 redirect_from:
 - /docker-cloud/getting-started/python/11_service_stacks/
 title: Stackfiles for your service
-notoc: true
 ---
+
+## What are stack files?
 
 A stack is a logical grouping of related services that are usually deployed
 together and require each other to work as intended. If you are familiar with
