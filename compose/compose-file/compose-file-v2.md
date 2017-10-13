@@ -1415,6 +1415,49 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+#### host or none
+
+Use the host's networking stack, or no networking. Equivalent to
+`docker run --net=host` or `docker run --net=none`. Only used if you use
+`docker stack` commands. If you use the `docker compose` command,
+use [network_mode](#network_mode) instead.
+
+The syntax for using built-in networks like `host` and `none` is a little
+different. Define an external network with the name `host` or `none` (which
+Docker has already created automatically) and an alias that Compose can use
+(`hostnet` or `nonet` in these examples), then grant the service access to that
+network, using the alias.
+
+```yaml
+version: 2
+
+services:
+  web:
+    ...
+    networks:
+      hostnet: {}
+
+networks:
+  hostnet:
+    external:
+      name: host
+```
+
+```yaml
+version: 2
+
+services:
+  web:
+    ...
+    networks:
+      nonet: {}
+
+networks:
+  nonet:
+    external:
+      name: none
+```
+
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
