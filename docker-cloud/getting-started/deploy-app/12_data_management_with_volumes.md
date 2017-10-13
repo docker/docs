@@ -119,7 +119,7 @@ up, restore, or migrate a volume to a local host or a cloud storage provider.
 
 In this next step, you'll download the `/data` volume from Redis to your local host using SCP (secure copy).
 
-First, run a SSH service that mounts the volumes of the redis you want to back up:
+First, run an SSH service that mounts the volumes of the redis you want to back up:
 
 ```bash
 $ docker-cloud service run -n download -p 2222:22 -e AUTHORIZED_KEYS="$(cat ~/.ssh/id_rsa.pub)" --volumes-from redis tutum/ubuntu
