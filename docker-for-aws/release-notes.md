@@ -27,11 +27,19 @@ title: Docker for AWS release notes
 
 ## Stable channel
 
+### 17.09 CE
+
+{{aws_blue_latest}}
+
+Release date: 10/6/2017
+
+- Docker Engine upgraded to [Docker 17.09.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce){: target="_blank" class="_"}
+- CloudStor EBS updates
+- Moby mounts for early reboot support
+
 ### 17.06.1 CE
 
 Release date: 08/17/2017
-
-{{aws_blue_latest}}
 
 **New**
 
