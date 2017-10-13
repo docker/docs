@@ -96,8 +96,9 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- temp css will be removed -->
-	<link rel="stylesheet" href="/css/temp.css"> {% seo %} {% if page.hide_from_sitemap %}
-	<meta name="robots" content="noindex" />{% endif %}
+	<link rel="stylesheet" href="/css/temp.css">
+	{% seo %}
+	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
 	<header>
@@ -115,7 +116,9 @@
 							{% else %}
 								{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}{{ content }}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
+							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
+							{{ content }}
 							<!-- tags -->
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
