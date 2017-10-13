@@ -29,7 +29,7 @@ and relative path):
 
 The user can still modify the stack definition before deployment.
 
-## Adding the 'Deploy to Docker Cloud' button in GitHub
+## Add the 'Deploy to Docker Cloud' button in GitHub
 
 You can simply add the following snippet to your `README.md` file:
 
@@ -40,7 +40,7 @@ You can simply add the following snippet to your `README.md` file:
 Docker Cloud will detect the HTTP referer header and deploy the stack file found in the repository, branch and relative path where the source `README.md` file is stored.
 
 
-## Adding the 'Deploy to Docker Cloud' button in Docker Hub
+## Add the 'Deploy to Docker Cloud' button in Docker Hub
 
 If the button is displayed on the Docker Hub, Docker Cloud cannot automatically detect the source GitHub repository, branch and path. In this case, edit the repository description and add the following code:
 
@@ -51,7 +51,7 @@ If the button is displayed on the Docker Hub, Docker Cloud cannot automatically 
 where `<repo_url>` is the path to your GitHub repository (see below).
 
 
-## Adding the 'Deploy to Docker Cloud' button anywhere else
+## Add the 'Deploy to Docker Cloud' button anywhere else
 
 If you want to use the button somewhere else (i.e. from external documentation, or a landing site), you just need to create a link to the following URL:
 
