@@ -2498,9 +2498,9 @@ manuals:
     - path: /docker-cloud/infrastructure/byoh/
       title: Use the Docker Cloud agent
     - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
-      title: Using Docker Cloud and Packet.net
+      title: Use Docker Cloud and Packet.net
     - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
-      title: Using Docker Cloud on AWS
+      title: Use Docker Cloud on AWS
   - sectiontitle: Manage nodes and apps (standard mode)
     section:
     - path: /docker-cloud/standard/
