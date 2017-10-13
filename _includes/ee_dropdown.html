@@ -6,7 +6,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       {% for version in site.ucp_versions %}
-        {% if page.ucp_version contains version.version %}{% else %}<li><a href="/datacenter/ucp/{{ version.version }}">{{ version.version }}{% if version.latest %} (latest){% endif %}</a></li>{% endif %}
+        {% if page.ucp_version contains version.version %}{% else %}<li><a href="{{ version.path }}">{{ version.version }}{% if version.latest %} (latest){% endif %}</a></li>{% endif %}
       {% endfor %}
     </ul>
   </div>
@@ -20,7 +20,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       {% for version in site.dtr_versions %}
-        {% if page.dtr_version contains version.version %}{% else %}<li><a href="/datacenter/dtr/{{ version.version }}">{{ version.version }}{% if version.latest %} (latest){% endif %}</a></li>{% endif %}
+        {% if page.dtr_version contains version.version %}{% else %}<li><a href="{{ version.path }}">{{ version.version }}{% if version.latest %} (latest){% endif %}</a></li>{% endif %}
       {% endfor %}
     </ul>
   </div>

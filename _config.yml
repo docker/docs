@@ -22,18 +22,26 @@ machine_version: "0.12.2"
 distribution_version: "2.6"
 
 ucp_versions:
-  - version: 2.2
+  - version: "2.2"
     latest: true
-  - version: 2.1
-  - version: 2.0
-  - version: 1.1
+    path: /datacenter/ucp/2.2/guides/
+  - version: "2.1"
+    path: /datacenter/ucp/2.1/guides/
+  - version: "2.0"
+    path: /datacenter/ucp/2.0/guides/
+  - version: "1.1"
+    path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: 2.3
+  - version: "2.3"
     latest: true
-  - version: 2.2
-  - version: 2.1
-  - version: 2.0
+    path: /datacenter/dtr/2.3/guides/
+  - version: "2.2"
+    path: /datacenter/dtr/2.2/guides/
+  - version: "2.1"
+    path: /datacenter/dtr/2.1/guides/
+  - version: "2.0"
+    path: /datacenter/dtr/2.0/
 
 collections:
   samples:
