@@ -71,8 +71,8 @@ Because of the way networking is implemented in Docker for Mac, you cannot see a
 
 ### I cannot ping my containers
 
-Unfortunately, due to limitations in macOS, we're unable to route traffic to
-containers, and from containers back to the host.
+Docker for Mac is unable to route traffic to containers, and from containers
+back to the host.
 
 ### Per-container IP addressing is not possible
 
