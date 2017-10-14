@@ -137,3 +137,20 @@ You can use `docker volume rm [volume name]` to remove a Cloudstor volume from
 any node. If you remove a volume from one node, make sure it is not being used
 by another active node, since those tasks/containers in another node will lose
 access to their data.
+
+## Use a different storage endpoint
+
+If you need to use a different storage endpoint, such as `core.cloudapi.de`,
+you can specify it when you install the plugin:
+
+```basn
+$ docker plugin install --alias cloudstor:azure \
+  --grant-all-permissions docker4x/cloudstor:17.06.1-ce-azure1  \
+  CLOUD_PLATFORM=AZURE \
+  AZURE_STORAGE_ACCOUNT_KEY="$SA_KEY" \
+  AZURE_STORAGE_ACCOUNT="$SWARM_INFO_STORAGE_ACCOUNT" \
+  AZURE_STORAGE_ENDPOINT="core.cloudapi.de" \
+  DEBUG=1
+```
+
+By default, the Public Azure Storage endpoint is used.
