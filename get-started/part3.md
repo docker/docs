@@ -191,7 +191,7 @@ Now list all 5 containers:
 docker container ls -q
 ```
 
-You can run `curl http://localhost` several times in a row, or go to that URL in
+You can run `curl -4 http://localhost` several times in a row, or go to that URL in
 your browser and hit refresh a few times.
 
 ![Hello World in browser](images/app80-in-browser.png)
