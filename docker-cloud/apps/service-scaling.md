@@ -50,7 +50,7 @@ use [sequential scaling](service-scaling.md#sequential-deployment-and-scaling).
 
 To allow peer-aware container startup, you can enable sequential scaling mode. See [Sequential Scaling](service-scaling.md#sequential-deployment-and-scaling) for more information.
 
-## Setting the initial number of containers
+## Set the initial number of containers
 
 When you configure a service in Docker Cloud, you can specify an initial number of containers for the service before you launch.
 
@@ -58,7 +58,7 @@ When you configure a service in Docker Cloud, you can specify an initial number 
 
 Docker Cloud immediately launches as many containers as you specified.
 
-### Setting the initial containers using the API
+### Set the initial containers using the API
 
 You can specify the initial number of containers for a service when deploying it through the API:
 
@@ -72,7 +72,7 @@ POST /api/app/v1/service/ HTTP/1.1
 
 If you don’t specify the number of containers to deploy, this command defaults to `1`. See the [API documentation](/apidocs/docker-cloud.md) for more information.
 
-### Setting the initial containers using the CLI
+### Set the initial containers using the CLI
 
 You can also specify the initial number of containers for a service when deploying it using the CLI:
 
@@ -82,7 +82,7 @@ $ docker-cloud service run -t 2 [...]
 
 If you don’t specify the number of containers to deploy, the CLI uses the default value of `1`. See the [CLI documentation](/apidocs/docker-cloud.md) for more information.
 
-## Scaling an already running service
+## Scale an already running service
 
 If you need to scale a service up or down while it is running, you can change the number of containers from the service detail page:
 
@@ -96,7 +96,7 @@ If you need to scale a service up or down while it is running, you can change th
 
 ![](images/service-during-scaling.png)
 
-### Scaling a running service using the API
+### Scale a running service using the API
 
 You can scale an already running service through the API:
 
@@ -108,7 +108,7 @@ PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
 ```
 See the [scale a service API documentation](/apidocs/docker-cloud.md#scale-a-service).
 
-### Scaling a running service using the CLI
+### Scale a running service using the CLI
 
 You can also scale an already running service using the CLI:
 
