@@ -193,15 +193,15 @@ supported by **Compose 1.9.0+**.
 
 Introduces the following additional parameters:
 
-- [`link_local_ips`](compose-file-v2.md#linklocalips)
+- [`link_local_ips`](compose-file-v2.md#link_local_ips)
 - [`isolation`](compose-file-v2.md#isolation)
-- `labels` for [volumes](compose-file-v2.md#volume-configuration-reference) and
-  [networks](compose-file-v2.md#network-configuration-reference)
-- `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
+- `labels` for [volumes](compose-file-v2.md#volume-labels) and
+  [networks](compose-file-v2.md#network-labels)
+- `name` for [volumes](compose-file-v2.md#volume-name)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
-- [`pids_limit`](compose-file-v2.md#pidslimit)
+- [`pids_limit`](compose-file-v2.md#pids_limit)
 
 ### Version 2.2
 
