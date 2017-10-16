@@ -3,7 +3,7 @@ title: Swarm task states
 description: Learn about tasks that are scheduled on your swarm.
 keywords: swarm, task, service
 redirect_from:
-- /datacenter/ucp/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
+- /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
 ---
 
 Docker lets you create services, which can start tasks.
