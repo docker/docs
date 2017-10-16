@@ -9,14 +9,14 @@ title: Overview of Docker Compose
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.
 Then, with a single command, you create and start all the services
-from your configuration. To learn more about all the features of Compose
+from your configuration. To learn more about all the features of Compose,
 see [the list of features](overview.md#features).
 
 Compose works in all environments: production, staging, development, testing, as
 well as CI workflows. You can learn more about each case in [Common Use
 Cases](overview.md#common-use-cases).
 
-Using Compose is basically a three-step process.
+Using Compose is basically a three-step process:
 
 1. Define your app's environment with a `Dockerfile` so it can be reproduced
 anywhere.
@@ -50,7 +50,7 @@ For more information about the Compose file, see the
 
 Compose has commands for managing the whole lifecycle of your application:
 
- * Start, stop and rebuild services
+ * Start, stop, and rebuild services
  * View the status of running services
  * Stream the log output of running services
  * Run a one-off command on a service
@@ -121,7 +121,7 @@ You can extend a Compose file using the `extends` field or by creating multiple
 Compose files. See [extends](extends.md) for more details.
 
 
-## Common Use Cases
+## Common use cases
 
 Compose can be used in many different ways. Some common use cases are outlined
 below.
@@ -147,7 +147,7 @@ started guide" to a single machine readable Compose file and a few commands.
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file.md) you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file.md), you can create and destroy these environments in just a few commands:
 
     $ docker-compose up -d
     $ ./run_tests
@@ -164,7 +164,7 @@ For details on using production-oriented features, see
 [compose in production](production.md) in this documentation.
 
 
-## Release Notes
+## Release notes
 
 To see a detailed list of changes for past and current releases of Docker
 Compose, please refer to the
