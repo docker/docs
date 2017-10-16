@@ -92,9 +92,9 @@ CMD ["python", "app.py"]
 > proxy servers:
 >
 > ```conf
-> # Set proxy server, replace host:/port with values for your servers
-> ENV http_proxy host:/port
-> ENV https_proxy host:/port
+> # Set proxy server, replace host:port with values for your servers
+> ENV http_proxy host:port
+> ENV https_proxy host:port
 > ```
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
