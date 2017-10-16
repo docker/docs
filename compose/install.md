@@ -5,7 +5,7 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-You can run Compose on macOS, Windows and 64-bit Linux.
+You can run Compose on macOS, Windows, and 64-bit Linux.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ Docker Compose. To do so, follow these steps:
     ```none
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\docker\docker-compose.exe
     ```
-    >  Use the latest Compose release number in the download command.
+    > Use the latest Compose release number in the download command.
     >
     > As already mentioned, the above command is an _example_, and
     it may become out-of-date once in a while. Always follow the
@@ -152,7 +152,7 @@ started.
 ```bash
 pip install docker-compose
 ```
-if you are not using virtualenv,
+If you are not using virtualenv,
 
 ```bash
 sudo pip install docker-compose
@@ -186,7 +186,7 @@ class="_"}.
 
 ## Master builds
 
-If you're interested in trying out a pre-release build you can download a binary
+If you're interested in trying out a pre-release build, you can download a binary
 from
 [https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/).
 Pre-release builds allow you to try out new features before they are released,
@@ -203,7 +203,7 @@ need to be recreated with labels added.
 If Compose detects containers that were created without labels, it will refuse
 to run so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
-to preserve) you can use compose 1.5.x to migrate them with the following
+to preserve), you can use Compose 1.5.x to migrate them with the following
 command:
 
 ```bash
