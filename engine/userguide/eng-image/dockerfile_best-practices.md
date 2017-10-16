@@ -55,7 +55,7 @@ Sending build context to Docker daemon  187.8MB
 ```
 
 To exclude files which are not relevant to the build, without restructuring your
-source repisotiry, use a `.dockerignore` file. This file supports
+source repository, use a `.dockerignore` file. This file supports
 exclusion patterns similar to `.gitignore` files. For information on creating
 one, see the [.dockerignore file](../../reference/builder.md#dockerignore-file).
 In addition to using a `.dockerignore` file, check out the information below
