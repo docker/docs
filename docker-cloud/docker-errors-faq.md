@@ -125,7 +125,7 @@ restart`) on the node, or restart the node.
 ### Description
 
 The `docker-cloud` command line interface (CLI) does not currently support
-Python 3.x
+Python 3.x.
 
 
 ### GitHub link
@@ -143,7 +143,7 @@ Python 3.x
 ### Description
 
 * Some users have encountered problems installing and/or running
-Docker Cloud with Anaconda Python 3.5.2 on a Windows host
+Docker Cloud with Anaconda Python 3.5.2 on a Windows host.
 
 * Some users running Python on Windows have encountered problems
 running `docker-cloud` inside a container using `docker run`.
