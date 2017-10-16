@@ -27,7 +27,8 @@ ENV ENGINE_BRANCH="17.06.x"
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 ENV DISTRIBUTION_BRANCH="release/2.6"
 
-RUN ./md_source/_scripts/fetch-upstream-resources.sh \
+RUN apk --update add bash \
+  && bash ./md_source/_scripts/fetch-upstream-resources.sh \
 	&& jekyll build -s md_source -d target --config md_source/_config.yml \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
