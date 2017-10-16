@@ -6,7 +6,7 @@ title: Docker Cloud release notes
 
 Did you know we also have a [Release notes category](https://forums.docker.com/c/docker-cloud/release-notes) on the Docker Cloud Product forums? Now you do!
 
-## Docker Cloud June 2016 Release Notes
+## Docker Cloud June 2016 release notes
 
 In the last month we've made many small improvements to the new Docker Cloud UI, made team and organization repos from Hub visible in Docker Cloud, and enabled linking to BitBucket for automated builds.
 
@@ -18,7 +18,7 @@ We've also added significant new features to the [automated builds](builds/autom
 
 For more details, find the June post in the [release notes category](https://forums.docker.com/c/docker-cloud/release-notes), and as always, we welcome your feedback on the [Docker Cloud Product Forums](https://forums.docker.com/c/docker-cloud).
 
-## Docker Cloud May 2016 Release Notes
+## Docker Cloud May 2016 release notes
 
 In our May 2016 release, we introduced a new user interface for Docker Cloud. Please try it out and share your feedback in the [Docker Cloud Product Forums](https://forums.docker.com/c/docker-cloud)!
 
@@ -31,13 +31,13 @@ In our May 2016 release, we introduced a new user interface for Docker Cloud. Pl
 - **API docs now say CLI instead of bash** in the languages tab. You pointed out that this was confusing, so we fixed it.
 - **Removed old references to Tutum** in the documentation.
 
-### Known Issues
+### Known issues
 
 - **Documentation screen captures** in some cases still reflect the Docker Cloud 1.0 user interface. This will be updated as soon as possible.
 
 Additional [Known issues here](docker-errors-faq.md)
 
-## Docker Cloud 1.0 Release Notes
+## Docker Cloud 1.0 release notes
 **Tutum is now Docker Cloud**. Docker Cloud is a new service by Docker that implements all features previously offered by Tutum plus integration with Docker Hub Registry service and the common Docker ID credentials.
 
 The following release notes document changes since [Tutum v0.19.5](https://support.tutum.co/support/solutions/articles/5000694910-tutum-0-19-5).
