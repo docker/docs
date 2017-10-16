@@ -261,7 +261,7 @@ needed.
     when connecting it to a network, by using the `--ip` or `--ip6` flag. When
     you specify an IP address in this way while using a user-defined network,
     the configuration is preserved as part of the container's configuration and
-    will be applied when the container is reloaded. Assigned IP addresses are
+    will be applied when the container is reloaded. Assigned IP addresses are not
     preserved when using non-user-defined networks, because there is no guarantee
     that a container's subnet will not change when the Docker daemon restarts unless
     you use user-defined networks.
