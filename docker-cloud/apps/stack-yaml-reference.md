@@ -93,7 +93,7 @@ deployment_strategy: high_availability
 ```
 
 ## devices
-List of device mappings. Uses the same format as the `--device` docker client create option.
+List of device mappings. Use the same format as the `--device` docker client create option.
 
 ```yml
 devices:
@@ -289,9 +289,9 @@ volumes:
 ## volumes_from
 Mount all of the volumes from another service by specifying a service unique name. 
 
-- If the target service belongs to this stack its service unique name is its service name. 
-- If the target service does not belong to any stack its service unique name is its service name. 
-- If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
+- If the target service belongs to this stack, its service unique name is its service name. 
+- If the target service does not belong to any stack, its service unique name is its service name. 
+- If the target service belongs to another stack, its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
 
 ```yml
 volumes_from:
