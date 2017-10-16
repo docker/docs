@@ -132,6 +132,14 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 
 ## Update Docker EE
 
+> **Check that you have the Docker module**
+> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, please remove this module and use Docker's module:
+>
+> ```none
+> Unnstall-Module DockerMsftProvider -Force
+> Install-Module DockerProvider -Force
+> ```
+
 To update Docker EE on Windows Server 2016:
 
 ```ps
