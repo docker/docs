@@ -118,7 +118,7 @@ from the repository.
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker-ee_version }} \
+        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker_ee_version }} \
         docker-ee-stable
     ```
 
@@ -168,7 +168,7 @@ from the repository.
 
       S | Name          | Type    | Version                               | Arch   | Repository    
       --+---------------+---------+---------------------------------------+--------+---------------
-        | docker-ee     | package | {{ site.docker-ee_version }}-1                 | x86_64 | docker-ee-stable
+        | docker-ee     | package | {{ site.docker_ee_version }}-1                 | x86_64 | docker-ee-stable
     ```
 
     The contents of the list depend upon which repositories you have enabled.
@@ -243,7 +243,7 @@ need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `sles/12.3/x86_64/stable-{{ site.docker-ee_version }}` and download the `.rpm` file for
+    `sles/12.3/x86_64/stable-{{ site.docker_ee_version }}` and download the `.rpm` file for
     the Docker version you want to install.
 
 2.  Import Docker's official GPG key:

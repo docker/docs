@@ -219,7 +219,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker-ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
+    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose

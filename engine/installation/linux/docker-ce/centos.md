@@ -151,7 +151,7 @@ from the repository.
     ```bash
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ site.docker-ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and

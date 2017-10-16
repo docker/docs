@@ -248,14 +248,14 @@ example, [swarm](glossary.md?term=swarm)).
 ## Site-wide variables
 
 Look in the top-level `_config.yml` for site-wide variables, such as
-`site.docker-ce_stable_version`. To use them, use Liquid like:
+`site.docker_ce_stable_version`. To use them, use Liquid like:
 
 ```liquid
-{% raw %}{{ site.docker-ce_stable_version }}{% endraw %}
+{% raw %}{{ site.docker_ce_stable_version }}{% endraw %}
 ```
 
-The current value of `site.docker-ce_stable_version` is
-{{ site.docker-ce_stable_version }}.
+The current value of `site.docker_ce_stable_version` is
+{{ site.docker_ce_stable_version }}.
 
 ## Mixing Markdown and HTML
 
