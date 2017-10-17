@@ -231,14 +231,26 @@ started.
 
 ### Take down the app and the swarm
 
-Take the app down with `docker stack rm`:
+* Take the app down with `docker stack rm`:
 
-```shell
-docker stack rm getstartedlab
-```
+  ```shell
+  docker stack rm getstartedlab
+  ```
 
-This removes the app, but our one-node swarm is still up and running (as shown
-by `docker node ls`). Take down the swarm with `docker swarm leave --force`.
+  This removes the app, but our one-node swarm is still up and running
+  (as shown by `docker node ls`).
+
+* Take down the swarm.
+
+  ```
+  docker swarm leave --force
+  ```
+
+  This removes the swarm. The purpose of this is to have a clean slate
+  in preparation for the next steps, where you create a swarm on
+  virtual "Docker machines" starting from the same command shell.
+  This way, there'll be no confusion as to which Dockerized host you are
+  using or which swarm you are working with.
 
 It's as easy as that to stand up and scale your app with Docker. You've taken a
 huge step towards learning how to run containers in production. Up next, you
@@ -274,4 +286,5 @@ docker service ps <service>                  # List tasks associated with an app
 docker inspect <task or container>                   # Inspect task or container
 docker container ls -q                                      # List container IDs
 docker stack rm <appname>                             # Tear down an application
+docker swarm leave --force      # Take down a single node swarm from the manager
 ```
