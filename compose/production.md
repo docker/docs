@@ -1,7 +1,7 @@
 ---
 description: Guide to using Docker Compose in production
 keywords: compose, orchestration, containers, production
-title: Using Compose in production
+title: Use Compose in production
 ---
 
 When you define your app with Compose in development, you can use this
