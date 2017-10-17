@@ -21,7 +21,7 @@ latest_stable_docker_engine_api_version: "1.32"
 docker_ce_edge_version: "17.09"
 docker_ee_version: "17.06"
 compose_version: "1.16.1"
-machine_version: "0.12.2"
+machine_version: "0.13.0"
 distribution_version: "2.6"
 
 ucp_versions:

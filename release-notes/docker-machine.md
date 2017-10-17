@@ -5,6 +5,28 @@ keywords: release notes, machine
 toc_max: 2
 ---
 
+## 0.13.0 (2017-10-12)
+
+### General
+
+- Added new `docker-machine mount` command for mounting machine directories over SSHFS
+- Improved some logging messages
+- Fixed a bug with the `scp` command when using an identity file.
+- Fixed a parsing error that caused the boot2docker ISO cache to malfunction, forcing a new download everytime.
+
+### Drivers
+
+- `azure`
+  - `docker-machine rm` now also cleans up the associated storage account if it has no remaining storage containers.
+  - The creation process will no longer recreate the associated subnet if it already it exists.
+- `exoscale`
+  - Updated driver
+  - Removed default `docker-machine` affinity group if no other affinity group was specified
+- `virtualbox`
+  - Fixed a bug where the machine would sometimes be assigned an invalid IP address at creation time.
+- `vmwaresphere`
+  - Added support for multiple networks
+
 ## 0.12.2 (2017-7-12)
 
 ### General
