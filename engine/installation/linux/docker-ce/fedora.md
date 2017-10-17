@@ -7,8 +7,6 @@ redirect_from:
 title: Get Docker CE for Fedora
 ---
 
-{% assign minor-version = "17.09" %}
-
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -117,24 +115,18 @@ from the repository.
 
 #### Install Docker CE
 
-1.  Update the `dnf` package index.
-
-    ```bash
-    $ sudo dnf makecache fast
-    ```
-
-    If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
-    key.
-
-2.  Install the latest version of Docker CE, or go to the next step to install a
+1.  Install the latest version of Docker CE, or go to the next step to install a
     specific version.
 
     ```bash
     $ sudo dnf install docker-ce
     ```
+
+    If this is the first time you are installing a package from a recently added
+    repository, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
+    key.
 
     > Got multiple Docker repositories?
     >
@@ -144,18 +136,15 @@ from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
-3.  On production systems, you should install a specific version of Docker CE
+2.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
 
-    > **Note**: This `dnf list` command only shows binary packages. To show
-    > source packages as well, omit the `.x86_64` from the package name.
-
     ```bash
-    $ dnf list docker-ce.x86_64  --showduplicates | sort -r
+    $ dnf list docker-ce  --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ minor-version }}.0.fc24                               docker-ce-stable  
+    docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc24                               docker-ce-stable  
     ```
 
     The contents of the list depend upon which repositories are enabled, and
@@ -194,7 +183,7 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker CE, first run `sudo dnf makecache fast`, then follow the
+To upgrade Docker CE, follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
@@ -209,7 +198,7 @@ a new file each time you want to upgrade Docker CE.
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
-    > `stable` in the URL to `edge`.
+    > `stable` in the above URL to `edge`.
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.

@@ -350,6 +350,8 @@ configuration. Two different syntax variants are supported.
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
 > of this stack file, or stack deployment will fail.
 
+For more information on configs, see [configs](/engine/swarm/configs.md).
+
 #### Short syntax
 
 The short syntax variant only specifies the config name. This grants the
@@ -1005,7 +1007,7 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
 must be connected to at least one of the same networks as the service which is
-linking to them. Starting with Version 2, [links](compose-file-v2#links) are a
+linking to them. [Links](compose-file-v2#links) are a
 legacy option. We recommend using [networks](#networks) instead.
 >
 > This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
@@ -1039,12 +1041,12 @@ for details on how healthchecks work.
       timeout: 10s
       retries: 3
 
-`interval` and `timeout` are specified as
-[durations](#specifying-durations).
+`interval` and `timeout` are specified as [durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
+
     # Hit the local web app
     test: ["CMD", "curl", "-f", "http://localhost"]
 
@@ -1277,7 +1279,11 @@ the `legacy` network.
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+The corresponding network configuration in the
+[top-level networks section](#network-configuration-reference) must have an
+`ipam` block with subnet configurations covering each static address. If IPv6
+addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
+you must use a version 2.x Compose file, such as the one below.
 
 An example:
 
@@ -1367,6 +1373,8 @@ configuration. Two different syntax variants are supported.
 > **Note**: The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
 > of this stack file, or stack deployment will fail.
+
+For more information on secrets, see [secrets](/engine/swarm/secrets.md).
 
 #### Short syntax
 
@@ -1944,9 +1952,32 @@ documentation for more information. Optional.
         foo: "bar"
         baz: 1
 
+### attachable
+
+> **Note**: Only supported for v3.2 and higher.
+
+Only used when the `driver` is set to `overlay`. If set to `true`, then
+standalone containers can attach to this network, in addition to services. If a
+standalone container attaches to an overlay network, it can communicate with
+services and standalone containers which are also attached to the overlay
+network from other Docker daemons.
+
+```yaml
+networks:
+  mynet1:
+    driver: overlay
+    attachable: true
+```
+
 ### enable_ipv6
 
 Enable IPv6 networking on this network.
+
+> Not supported in Compose File version 3
+>
+> `enable_ipv6` requires you to use a version 2 Compose file, as this directive
+> is not yet supported in Swarm mode.
+{: .warning }
 
 ### ipam
 

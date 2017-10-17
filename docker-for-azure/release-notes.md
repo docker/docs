@@ -7,7 +7,7 @@ title: Docker for Azure Release Notes
 {% include d4a_buttons.md %}
 
 ## Enterprise Edition
-[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}
+[Docker Enterprise Edition Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle){: target="_blank"}<!--_-->
 
 [Deploy Docker Enterprise Edition (EE) for AWS](https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description){: target="_blank" class="button outline-btn"}
 
@@ -15,7 +15,7 @@ title: Docker for Azure Release Notes
 
 - Docker engine 17.06 EE
 - For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank"}
-- UCP 2.2.0 
+- UCP 2.2.0
 - DTR 2.3.0
 
 ### 17.03 EE
@@ -26,11 +26,20 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
+### 17.09 CE
+
+{{azure_blue_latest}}
+
+Release date: 10/6/2017
+
+- Docker Engine upgraded to [Docker 17.09.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce){: target="_blank" class="_"}
+- Moby mounts for early reboot support
+- Docker binary bundled where needed to allow easier host interchange
+- Azure VHD use full hard drive space
+
 ### 17.06.2 CE
 
 Release date: 09/08/2017
-
-{{azure_blue_latest}}
 
 **New**
 

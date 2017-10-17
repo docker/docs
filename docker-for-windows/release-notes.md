@@ -19,6 +19,48 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
+
+* Bug fixes
+  - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
+
+### Docker Community Edition 17.09.0-ce-win32 2017-10-02 (Stable)
+
+* Upgrades
+  - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
+  - [Docker Compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
+  - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
+  - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.49
+  - AUFS 20170911
+  
+* New
+  - Windows Docker daemon is now started as service for better lifecycle management
+  - Store Linux daemon configuration in ~\.docker\daemon.json instead of settings file
+  - Store Windows daemon configuration in C:\ProgramData\Docker\config\daemon.json instead of settings file
+  - VPNKit: add support for ping!
+  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled 
+  - VPNKit: bridge mode is default everywhere now
+  - Add `Skip This version` button in update window
+
+* Security fixes
+  - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
+
+* Bug fixes and minor changes
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING 
+  - Rotate logs in the VM more often (docker/for-win#244) 
+  - Reset to default stops all engines and removes settings including all daemon.json files
+  - Better backend service checks (related to https://github.com/docker/for-win/issues/953)
+  - Fix auto updates checkbox, no need to restart the application
+  - Fix check for updates menu when auto updates was disable
+  - VPNKit: do not block startup when ICMP permission is denied. (Fixes docker/for-win#1036, docker/for-win#1035, docker/for-win#1040)
+  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: fix a bug which causes a socket to leak if the corresponding TCP connection is idle
+    for more than 5 minutes (related to [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
+  - VPNKit: improve the logging around the Unix domain socket connections
+  - VPNKit: automatically trim whitespace from int or bool database keys
+  - Do not anymore move credentials in credential store at startup
+
 ### Docker Community Edition 17.06.2-ce-win27 2017-09-06 (Stable)
 
 * Upgrades
@@ -365,6 +407,21 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Edge Release Notes
+
+### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
+
+* Bug fixes
+  - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
+  
+
+### Docker Community Edition 17.09.0-ce-win31 2017-09-29 (Edge)
+
+* Upgrades
+  - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
+
+* Bug fixes and minor changes
+  - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
+  
 
 ### Docker Community Edition 17.09.0-ce-rc3-win30 2017-09-22 (Edge)
 

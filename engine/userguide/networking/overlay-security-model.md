@@ -35,32 +35,12 @@ automatically rotate the keys every 12 hours.
 
 ## Swarm mode overlay networks and unmanaged containers
 
-Because the overlay networks for swarm mode use encryption keys from the manager
-nodes to encrypt the gossip communications, only containers running as tasks in
-the swarm have access to the keys. Consequently, containers started outside of
-swarm mode using `docker run` (unmanaged containers) cannot attach to the
-overlay network.
-
-For example:
+It is possible to use the overlay network feature with both `--opt encrypted --attachable`, and attach unmanaged containers to that network:
 
 ```bash
-$ docker run --network my-multi-host-network nginx
+$ docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 
-docker: Error response from daemon: swarm-scoped network
-(my-multi-host-network) is not compatible with `docker create` or `docker
-run`. This network can only be used by a docker service.
+9s1p1sfaqtvaibq6yp7e6jsrt
 ```
 
-To work around this situation, migrate the unmanaged containers to managed
-services. For instance:
-
-```bash
-$ docker service create --network my-multi-host-network my-image
-```
-
-Because [swarm mode](../../swarm/index.md) is an optional feature, the Docker
-Engine preserves backward compatibility. You can continue to rely on a
-third-party key-value store to support overlay networking if you wish.
-However, switching to swarm-mode is strongly encouraged. In addition to the
-security benefits described in this article, swarm mode enables you to leverage
-the substantially greater scalability provided by the new services API.
+Just like services that are attached to an encrypted network, regular containers can also have the advantage of encrypted traffic when attached to a network created this way.

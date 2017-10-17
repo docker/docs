@@ -52,7 +52,7 @@ existing volumes. If you chose to reuse the volumes, the containers redeploy to 
 2. Click the checkbox to the left of the service or services you want to redeploy.
 2. From the **Actions** menu at the top right, choose **Redeploy**.
     ![](images/redeploy-service.png)
-The service begin redeploying immediately.
+The service begins redeploying immediately.
 
 <!-- DCUI-732, DCUI-728
 3. If the container uses volumes, choose whether to reuse them.

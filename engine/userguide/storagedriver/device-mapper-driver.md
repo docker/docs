@@ -449,8 +449,7 @@ resize a `loop-lvm` thin pool, avoiding the long process above. This tool is
 not guaranteed to work, but you should only be using `loop-lvm` on non-production
 systems.
 
-If you do not want to use `device_tool`, you can
-[resize the thin pool manually](#use-operating-system-utilities instead.
+If you do not want to use `device_tool`, you can [resize the thin pool manually](#use-operating-system-utilities) instead.
 
 1.  To use the tool, clone the Github repository, change to the
     `contrib/docker-device-tool`, and follow the instructions in the `README.md`

@@ -26,7 +26,7 @@ When installing UCP you can customize:
   * The certificates used by the UCP web server. Create a volume
     named 'ucp-controller-server-certs' and copy the ca.pem, cert.pem, and key.pem
     files to the root directory. Then run the install command with the
-    '--external-server-cert' flag.
+    `--external-server-cert` flag.
 
   * The license used by UCP, by bind-mounting the file at
     '/config/docker_subscription.lic' in the tool.  E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
@@ -63,7 +63,7 @@ command.
 | `--dns-search`           | Set custom DNS search domains for the UCP containers                                             |
 | `--unlock-key`           | The unlock key for this swarm-mode cluster, if one exists.                                       |
 | `--existing-config`      | Use an existing UCP config during this installation. The install fails if a config is not found. |
-| `--pull`                 | Pull UCP images: 'always', when 'missing', or 'never'                                            |
+| `--pull`                 | Pull UCP images: `always`, when `missing`, or `never`                                            |
 | `--registry-username`    | Username to use when pulling images                                                              |
 | `--registry-password`    | Password to use when pulling images                                                              |
 | `--kv-timeout`           | Timeout in milliseconds for the key-value store                                                  |
@@ -78,4 +78,4 @@ command.
 | `--external-service-lb`  | Set the external service load balancer reported in the UI                                        |
 | `--enable-profiling`     | Enable performance profiling                                                                     |
 | `--license`              | Add a license: e.g. --license "$(cat license.lic)"                                               |
-| `--force-insecure-tcp`   | Force install to continue even with unauthenticated Docker Engine ports.                         |
+| `--force-insecure-tcp`   | Force install to continue even with unauthenticated Docker Engine ports                         |

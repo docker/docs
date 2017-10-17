@@ -95,6 +95,10 @@ keep image size small:
   are only available to services rather than standalone containers. These
   features allow you to keep your images as generic as possible and to avoid
   storing sensitive data within the Docker images or containers themselves.
+- Let `docker stack deploy` handle any image pulls for you, instead of using
+  `docker pull`. This way, your deployment won't try to pull from nodes
+  that are down. Also, when new nodes are added to the swarm, images are
+  pulled automatically.
 
 There are limitations around sharing data amongst nodes of a swarm service.
 If you use [Docker for AWS](/docker-for-aws/persistent-data-volumes.md) or

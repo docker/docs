@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot swarm configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords:  troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, swarm
+keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, swarm
 ---
 
 UCP automatically tries to heal itself by monitoring its internal
@@ -33,8 +33,8 @@ $ sudo apt-get update && apt-get install curl jq
 1. Use a client bundle to authenticate your requests.
 [Learn more](../../user/access-ucp/cli-based-access.md).
 
-2. Use the REST API to access the cluster configurations. The $DOCKER_HOST
-   and $DOCKER_CERT_PATH environment variables are set when using the client
+2. Use the REST API to access the cluster configurations. The `$DOCKER_HOST`
+   and `$DOCKER_CERT_PATH` environment variables are set when using the client
    bundle.
 
    ```bash
@@ -47,7 +47,7 @@ $ sudo apt-get update && apt-get install curl jq
         ${KV_URL}/v2/keys | jq "."
    ```
 
-To learn more about the key-value store REST API check the
+To learn more about the key-value store REST API, check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 ### With the CLI client

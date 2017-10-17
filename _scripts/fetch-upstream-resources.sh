@@ -5,6 +5,21 @@
 # Relies on the following environment variables which are usually set by
 # the Dockerfile. Uncomment them here to override for debugging
 
+# Parse some variables from _config.yml and make them available to this script
+# This only finds top-level variables with _version in them that don't have any
+# leading space. This is brittle!
+while read i; do
+  # Store the key as a variable name and the value as the variable value
+  varname=$(echo "$i" | sed 's/"//g' | awk -F ':' {'print $1'} | tr -d '[:space:]')
+  varvalue=$(echo "$i" | sed 's/"//g' | awk -F ':' {'print $2'} | tr -d '[:space:]')
+  echo "Setting \$${varname} to $varvalue"
+  declare "$varname=$varvalue"
+done < <(cat md_source/_config.yml |grep '_version:' |grep '^[a-z].*')
+
+# Replace variable in toc.yml with value from above
+#echo "Replacing the string 'site.latest_stable_docker_engine_api_version' in _data/toc.yml with $latest_stable_docker_engine_api_version"
+sed -i "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" md_source/_data/toc.yaml
+
 # Engine stable
 ENGINE_SVN_BRANCH="branches/17.09"
 ENGINE_BRANCH="17.09"

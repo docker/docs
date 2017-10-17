@@ -7,7 +7,7 @@ keywords: registry, high-availability, backup, recovery
 {% assign image_backup_file = "backup-images.tar" %}
 {% assign metadata_backup_file = "backup-metadata.tar" %}
 
-DTR needs that a majority (n/2 + 1) of its replicas are healthy at all times
+DTR requires that a majority (n/2 + 1) of its replicas are healthy at all times
 for it to work. So if a majority of replicas is unhealthy or lost, the only
 way to restore DTR to a working state, is by recovering from a backup. This
 is why it's important to ensure replicas are healthy and perform frequent

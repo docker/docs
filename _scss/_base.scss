@@ -107,7 +107,7 @@ footer {
 }
 
 .footer-copyright p {
-    font-family: "Open Sans", sans-serif;
+    font-family: $font;
     font-size: 12px;
     line-height: 17px;
     color: #637986;
@@ -132,7 +132,7 @@ footer {
 }
 
 .footer_social_nav ul li:before {
-    color: #fff;
+    color: $white;
     position: absolute;
     top: 10px;
     left: 10px;
@@ -147,7 +147,7 @@ footer {
     height: 32px;
     background-color: #82949E;
     border-radius: 50px;
-    color: #fff;
+    color: $white;
     display: block;
     text-indent: 9999px;
     overflow: hidden;

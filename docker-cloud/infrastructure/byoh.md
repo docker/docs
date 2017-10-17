@@ -10,7 +10,7 @@ title: Use the Docker Cloud Agent
 
 Docker Cloud allows you to use any Linux host ("bring your own host") as a node which you can then use to deploy containers. To do this, you must install the **Docker Cloud Agent** on your Linux host so that Docker Cloud can remotely manage it.
 
-> **Note**: The Docker Cloud Agent only supports x64 architecture at this time. 
+> **Note**: The Docker Cloud Agent only supports x64 architecture at this time.
 
 The **Docker Cloud Agent** installs its own Docker binary, and automatically removes any prior installation of the Docker Engine packages. See the [Known Limitations](byoh.md#known-limitations) section for more information.
 
@@ -68,7 +68,7 @@ curl -Ls https://get.cloud.docker.com/ | sudo -H sh -s 63ad1c63ec5d431a9b31133e3
 Copy and paste this command, and execute it on your host. The host automatically
 appears in the list of nodes once the process completes.
 
-### Uninstall the Docker Cloud Agent
+## Uninstall the Docker Cloud Agent
 
 To uninstall `dockercloud-agent` from your host, execute the following command:
 
@@ -78,7 +78,7 @@ $ apt-get remove dockercloud-agent
 
 ## Upgrade Docker Cloud Agent
 
-To upgrade `dockercloud-agent` execute the following command on the host:
+To upgrade `dockercloud-agent`, execute the following command on the host:
 
 ```
 $ apt-get update && apt-get install -y dockercloud-agent
@@ -86,7 +86,7 @@ $ apt-get update && apt-get install -y dockercloud-agent
 
 ## Restart Docker Cloud Agent
 
-To restart the `dockercloud-agent` execute the following command from your BYON host:
+To restart the `dockercloud-agent`, execute the following command from your BYON host:
 
 ```
 $ service dockercloud-agent restart

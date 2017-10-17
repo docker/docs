@@ -8,7 +8,7 @@ title: Link to your infrastructure
 
 To deploy Docker Cloud nodes, you first need to grant Docker Cloud access to your infrastructure.
 
-This could mean granting access to a cloud services provider such as AWS or Azure, or installing the Docker Cloud Agent on your own hosts. Once this is done, you can provision nodes directly from within Docker Cloud using the Web UI, CLI or API.
+This could mean granting access to a cloud services provider such as AWS or Azure, or installing the Docker Cloud Agent on your own hosts. Once this is done, you can provision nodes directly from within Docker Cloud using the Web UI, CLI, or API.
 
 ## Link to a cloud service provider
 To link your cloud provider accounts, first go to your [Docker Cloud dashboard](https://cloud.docker.com/).

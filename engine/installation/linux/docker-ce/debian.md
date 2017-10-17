@@ -8,8 +8,6 @@ redirect_from:
 title: Get Docker CE for Debian
 ---
 
-{% assign minor-version = "17.09" %}
-
 To get started with Docker CE on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
@@ -221,7 +219,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ minor-version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
+    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose
@@ -273,7 +271,7 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
+1.  Go to `{{ download-url-base }}/dists/`,
     choose your Debian version, browse to `pool/stable/`, choose either
     `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
     want to install.

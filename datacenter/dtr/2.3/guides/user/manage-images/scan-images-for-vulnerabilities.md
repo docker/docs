@@ -57,7 +57,7 @@ If your repository owner enabled Docker Security Scanning but disabled automatic
 scanning, you can manually start a scan for images in repositories to which you
 have `write` access.
 
-To start a security scan, navigate to the **tag details**.
+To start a security scan, navigate to the **tag details**, and click the **Scan** button.
 
 ![](../../images/scan-images-for-vulns-1.png){: .with-border}
 
@@ -131,7 +131,7 @@ most vulnerable first.
     component in the image.
 ![](../../images/scan-images-for-vulns-5.png){: .with-border}
 
-### What do I do next?
+## What to do next
 
 If you find that an image in your registry contains vulnerable components, you
 can use the linked CVE scan information in each scan report to evaluate the
@@ -140,7 +140,7 @@ vulnerability and decide what to do.
 If you discover vulnerable components, you should check if there is an updated
 version available where the security vulnerability has been addressed. If
 necessary, you might contact the component's maintainers to ensure that the
-vulnerability is being addressed in an a future version or patch update.
+vulnerability is being addressed in a future version or patch update.
 
 If the vulnerability is in a `base layer` (such as an operating system) you
 might not be able to correct the issue in the image. In this case, you might

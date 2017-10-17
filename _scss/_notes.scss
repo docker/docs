@@ -77,3 +77,30 @@ blockquote > p:only-child {
 blockquote > p:only-child::before {
   content: none;
 }
+
+/* For Bootstrap badges */
+
+span.badge {
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+
+span.badge.badge-info {
+  background-color: $note-color;
+}
+
+span.badge.badge-danger {
+  background-color: $warning-color;
+}
+
+span.badge.badge-warning {
+  background-color: $important-color;
+}

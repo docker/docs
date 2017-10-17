@@ -80,7 +80,7 @@ Since TLS connections can be made via IP address as well as DNS name, the IP add
 need to be specified when creating the certificate. For example, to allow connections
 using `10.10.10.20` and `127.0.0.1`:
 
-    $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 > extfile.cnf
+    $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
 
 Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
@@ -105,7 +105,7 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 
-> **Note:** for simplicity of the next couple of steps, you may perform this 
+> **Note:** for simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
 
     $ openssl genrsa -out key.pem 4096
@@ -156,8 +156,8 @@ providing a certificate trusted by our CA:
 To be able to connect to Docker and validate its certificate, you now
 need to provide your client keys, certificates and trusted CA:
 
-> **Note**: This step should be run on your Docker client machine. As such, you 
-> need to copy your CA certificate, your server certificate, and your client 
+> **Note**: This step should be run on your Docker client machine. As such, you
+> need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
 
 > **Note**: replace all instances of `$HOST` in the following example with the

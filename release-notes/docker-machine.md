@@ -5,6 +5,72 @@ keywords: release notes, machine
 toc_max: 2
 ---
 
+## 0.12.2 (2017-7-12)
+
+### General
+
+* The `scp` sub-command now allows to provide an optional `user@` to the address.
+* Fixed bash completion on OS X
+
+### Drivers
+
+* `amazonec2`
+  * Updated default AMIs to the latest version of Ubuntu 16.04 LTS
+  * Fixed a bug preventing proper machine removal
+* `vmwarevsphere`
+  * Creating VMs on a DRS-enabled cluster should now work properly
+  * Fixed a bug that prevented provisioning
+* `vmwarefusion`
+  * Fixed a bug that prevented provisioning
+* `exoscale`
+  * Updated library
+
+## 0.12.1 (2017-6-30)
+
+### General
+
+- Fixed an issue with the version comparison function that prevented machines created with Engine 17.06.0 from starting properly.
+
+## 0.12.0 (2017-6-5)
+
+### General
+
+- Various bash completion improvements
+- Bump Go to version 1.8.3
+
+### Drivers
+
+- `openstack`
+    - Enable `HTTP_PROXY`
+- `digitalocean`
+    - Add support for tagging
+- `virtualbox`
+    - Scope DHCP address range based on CIDR
+- `generic`
+    - Increase default timeout
+- `google`
+    - Add subnetwork support
+
+### Provisioners
+
+- Remove restriction on `--engine-install-url` in default-to-boot2docker drivers (`virtualbox`, `vmwarefusion`, etc.)
+- Reduce provisioning time of SUSE/openSUSE systems
+
+## 0.11.0 (2017-4-25)
+
+### General
+
+- Various bugfixes and updated library dependencies
+- new `docker-machine scp --delta` to invoke `rsync` behind the scenes for more efficient transfer
+
+### Drivers
+
+- `digitalocean`
+  - Add support for tagging DigitalOcean instances.
+- `google`
+  - Add support for subnetworks
+
+
 ## 0.10.0 (2017-2-27)
 
 ### General

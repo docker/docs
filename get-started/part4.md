@@ -343,18 +343,18 @@ And that's it, the app is deployed on a swarm cluster!
 
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
-see that the containers have been distributed between both `myvm1` and `myvm2`.
-
+see that the services (and associated containers) have been distributed between
+both `myvm1` and `myvm2`.
 
 ```
 $ docker stack ps getstartedlab
 
-ID            NAME        IMAGE              NODE   DESIRED STATE
-jq2g3qp8nzwx  test_web.1  username/repo:tag  myvm1  Running
-88wgshobzoxl  test_web.2  username/repo:tag  myvm2  Running
-vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
-ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
-0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
+ID            NAME                  IMAGE                   NODE   DESIRED STATE
+jq2g3qp8nzwx  getstartedlab_web.1   john/get-started:part2  myvm1  Running
+88wgshobzoxl  getstartedlab_web.2   john/get-started:part2  myvm2  Running
+vbb1qbkb0o2z  getstartedlab_web.3   john/get-started:part2  myvm2  Running
+ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
+0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
 ```
 
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
@@ -411,21 +411,25 @@ look:
 
 ## Iterating and scaling your app
 
-From here you can do everything you learned about in part 3.
+From here you can do everything you learned about in parts 2 and 3.
 
 Scale the app by changing the `docker-compose.yml` file.
 
-Change the app behavior by editing code.
+Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
 
-In either case, simply run `docker stack deploy` again to deploy these
-changes.
+In either case, simply run `docker stack deploy` again to deploy these changes.
 
 You can join any machine, physical or virtual, to this swarm, using the
 same `docker swarm join` command you used on `myvm2`, and capacity will be added
 to your cluster. Just run `docker stack deploy` afterwards, and your app will
 take advantage of the new resources.
 
-## Cleanup
+## Cleanup and reboot
+
+### Stacks and swarms
 
 You can tear down the stack with `docker stack rm`. For example:
 
@@ -440,6 +444,59 @@ docker stack rm getstartedlab
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
 > manager, but _you'll need this swarm for part 5, so please keep it
 > around for now_.
+
+### Unsetting docker-machine shell variable settings
+
+You can unset the `docker-machine` environment variables in your current shell
+with the following command:
+
+```
+eval $(docker-machine env -u)
+```
+
+This disconnects the shell from `docker-machine` created virtual machines,
+and allows you to continue working in the same shell, now using native `docker`
+commands (for example, on Docker for Mac or Docker for Windows). To learn more,
+see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+
+### Restarting Docker machines
+
+If you shut down your local host, Docker machines will stop running. You can check the status of machines by running `docker-machine ls`.
+
+```
+$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+myvm1   -        virtualbox   Stopped                 Unknown
+myvm2   -        virtualbox   Stopped                 Unknown
+```
+
+To restart a machine that's stopped, run:
+
+```
+docker-machine start <machine-name>
+```
+
+For example:
+
+```
+$ docker-machine start myvm1
+Starting "myvm1"...
+(myvm1) Check network to re-create if needed...
+(myvm1) Waiting for an IP...
+Machine "myvm1" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+
+$ docker-machine start myvm2
+Starting "myvm2"...
+(myvm2) Check network to re-create if needed...
+(myvm2) Waiting for an IP...
+Machine "myvm2" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+```
 
 [On to Part 5 >>](part5.md){: class="button outline-btn"}
 

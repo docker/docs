@@ -7,7 +7,7 @@ redirect_from:
 title: Create a proxy or load balancer
 ---
 
-When you deploy a web service to multiple containers you might want to load
+When you deploy a web service to multiple containers, you might want to load
 balance between the containers using a proxy or load balancer.
 
 In this tutorial, you'll use the **dockercloud/hello-world** image as a sample
@@ -17,7 +17,7 @@ between eight containers in a node cluster containing four nodes.
 
 ## Create a Node Cluster
 
-First, deploy a node cluster of 4 nodes.
+First, deploy a node cluster of four nodes.
 
 1. If you have not linked to a host or cloud services provider, do that now.
 
@@ -149,7 +149,7 @@ add the link.
     ![](images/lbd-lb-envvar.png)
 
     You'll also notice that a new set of `WEB` environment variables
-    appear in the service we're about to launch. You can read more about
+    appears in the service we're about to launch. You can read more about
     service link environment variables [here](../apps/service-links.md).
 
 13. Click **Create and deploy** and confirm that the service launches.

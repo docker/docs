@@ -20,7 +20,7 @@ When launching a node you'll actually be creating a _node cluster_. Node cluster
 
 Enter the following:
 
-  -   **Name**: name for the node cluster. This can contain alphanumeric characters, dashes and underscores.
+  -   **Name**: name for the node cluster. This can contain alphanumeric characters, dashes, and underscores.
   -   **Deploy tags**: (optional) these are used to limit what can be deployed on the specific cluster. Read more about deployment tags [here](../apps/deploy-tags.md).
   -   **Provider**: the cloud provider or host to use. Only providers you have configured appear in this menu.
   -  **Region**: the region on which to provision the node cluster.

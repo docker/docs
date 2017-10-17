@@ -5,10 +5,11 @@ redirect_from:
 - /docker-cloud/getting-started/python/4_push_to_cloud_registry/
 - /docker-cloud/getting-started/golang/4_push_to_cloud_registry/
 title: Push the image to Docker Cloud's registry
-notoc: true
 ---
 
 *Skip this step if you don't have Docker Engine installed locally.*
+
+## Overview
 
 In this step you will take the image that you built in the previous step, and push it to Docker Cloud.
 
@@ -20,30 +21,33 @@ Docker ID account name. To use the CLI to interact with objects that belong to
 an [organization](/docker-cloud/orgs.md), prefix these commands with
 `DOCKERCLOUD_NAMESPACE=my-organization`. See the [CLI documentation](/docker-cloud/installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
 
+## Tag the image
 
 First tag the image. Tags in this case denote different builds of an image.
 
-**Python quickstart**
+### Python quickstart
 
 ```bash
 $ docker tag quickstart-python $DOCKER_ID_USER/quickstart-python
 ```
 
-**Go quickstart**
+### Go quickstart
 
 ```bash
 $ docker tag quickstart-go $DOCKER_ID_USER/quickstart-go
 ```
 
+## Publish the image
+
 Next, push the tagged image to the repository.
 
-**Python quickstart**
+### Python quickstart
 
 ```
 $ docker push $DOCKER_ID_USER/quickstart-python
 ```
 
-**Go quickstart**
+### Go quickstart
 
 ```
 $ docker push $DOCKER_ID_USER/quickstart-go

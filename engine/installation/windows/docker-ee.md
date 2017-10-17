@@ -123,7 +123,7 @@ installs, or install on air-gapped systems.
 To install a specific Docker version, you can use the `MaximumVersion` and `MinimumVersion` flags. For example:
 
 ```ps
-Install-Package -Name docker -ProviderName DockerMsftProvider -Source Docker -Force -MaximumVersion 17.03
+Install-Package -Name docker -ProviderName DockerProvider -Force -MaximumVersion 17.03
 ...
 Name                           Version          Source           Summary
 ----                           -------          ------           -------
@@ -132,12 +132,18 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 
 ## Update Docker EE
 
+> **Check that you have the Docker module**
+> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, please remove this module and use Docker's module:
+>
+> ```none
+> Unnstall-Module DockerMsftProvider -Force
+> Install-Module DockerProvider -Force
+> ```
+
 To update Docker EE on Windows Server 2016:
 
 ```ps
-PS> Unregister-PackageSource -ProviderName DockerMsftProvider -Name DockerDefault -Erroraction Ignore
-PS> Register-PackageSource -ProviderName DockerMsftProvider -Name Docker -Erroraction Ignore -Location https://download.docker.com/components/engine/windows-server/index.json
-PS> Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
+PS> Install-Package -Name docker -ProviderName DockerProvider -Update -Force
 
 # Start the Docker service.
 PS> Start-Service Docker

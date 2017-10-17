@@ -4,8 +4,6 @@ keywords: machine, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-{% assign machineversion = '0.12.2' %}
-
 Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
@@ -23,13 +21,13 @@ Place the completion script in `/etc/bash_completion.d/` as follows:
 *   On a Mac:
 
     ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash -o `brew --prefix`/etc/bash_completion.d/docker-machine
+    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o `brew --prefix`/etc/bash_completion.d/docker-machine
     ```
 
 *   On a standard Linux installation:
 
     ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
+    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
     ```
 
 Completion will be available upon next login.
@@ -41,7 +39,7 @@ Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zs
 
 ```shell
 mkdir -p ~/.zsh/completion
-curl -L https://raw.githubusercontent.com/docker/machine/v{{machineversion}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
+curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
 ```
 
 Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:

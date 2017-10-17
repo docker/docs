@@ -17,7 +17,7 @@ lifecycle, or the hardware resources they have.
 
 Don't create labels for authorization and permissions to resources.
 Instead, use collections to organize access to your swarm.
-[Learn about managing access with collections](../manage-access-with-collections.md).   
+[Learn about managing access with collections](../../access-control/manage-access-with-collections.md).   
 
 ## Apply labels to a node
 

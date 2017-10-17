@@ -63,6 +63,15 @@ below.
 
 {% include docker_schedule_matrix.md %}
 
+### Updates, and patches
+
+- A given Docker EE release will receive patches and updates for at least **one
+  year** after it is released.
+- A given Docker CE Stable release will receive patches and updates for **one
+  month after the next Docker CE Stable release**.
+- A given Docker CE Edge release will not receive any patches or updates after
+  a subsequent Docker CE Edge or Stable release.
+
 ### Prior releases
 
 Instructions for installing prior releases of Docker can be found in the

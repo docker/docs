@@ -6,6 +6,8 @@ redirect_from:
 title: Use triggers
 ---
 
+## What are triggers?
+
 **Triggers** are API endpoints that redeploy or scale a specific service
 whenever a `POST` HTTP request is sent to them. You can create one or more
 triggers per service.
@@ -17,8 +19,7 @@ keep their URLs secret.
 The body of the `POST` request is passed in to the new containers as an
 environment variable called `DOCKERCLOUD_TRIGGER_BODY`.
 
-
-#### Trigger types
+### Trigger types
 
 Docker Cloud supports two types of triggers:
 
@@ -41,7 +42,7 @@ Docker Cloud supports two types of triggers:
 6. Use the POST request URL provided to configure the webhook in your
 application or third party service.
 
-## Revoking triggers
+## Revoke triggers
 
 To stop a trigger from automatically scaling or redeploying, you must revoke it.
 
@@ -53,6 +54,6 @@ To stop a trigger from automatically scaling or redeploying, you must revoke it.
 
 Once the trigger is revoked, it stops accepting requests.
 
-## Using triggers in the API and CLI
+## Use triggers in the API and CLI
 
 See our [API and CLI documentation](/apidocs/docker-cloud.md#triggers) to learn how to use triggers with our API and the CLI.
