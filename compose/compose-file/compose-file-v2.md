@@ -1246,7 +1246,7 @@ refer to it within the Compose file:
 > **Note**: In newer versions of Compose, the `external.name` property is
 > deprecated in favor of simply using the `name` property.
 
-### labels  <a id="volume-labels"></a>
+### labels
 
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
 
@@ -1268,7 +1268,7 @@ conflicting with those used by other software.
       - "com.example.label-with-empty-value"
 
 
-### name <a id="volume-name"></a>
+### name
 
 > [Added in version 2.1 file format](compose-versioning.md#version-21)
 
@@ -1358,7 +1358,7 @@ By default, Docker also connects a bridge network to it to provide external
 connectivity. If you want to create an externally isolated overlay network,
 you can set this option to `true`.
 
-### labels <a id="network-labels"></a>
+### labels
 
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
 
