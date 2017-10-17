@@ -289,7 +289,7 @@ it automatically is part of the network.
       --name=web \
       --network=my-net \
       --env="constraint:node==mhs-demo0" \
-      nginx
+      nginx:alpine
     ```
 
 4.  Run a `busybox` instance on the `mhs-demo1` instance and get the contents of
