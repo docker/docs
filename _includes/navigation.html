@@ -18,7 +18,20 @@
 <div class="nav-container">
     <div id="tabs">
         <ul class="tabs">
-            {% include treebuilder.html %}
+            <!-- TOC begin -->
+            <script src="/js/toc.js"></script>
+            <script language="JavaScript">
+              for (i=0;i<docstoc.horizontalnav.length;i++)
+              {
+                document.write('<li id="' + docstoc[i].node + '"');
+                if (docstoc[i].path=='{{ page.url }}' || docstoc[docstoc[i].node].has('{{ page.url }}'))
+                {
+                  document.write(' class="active"');
+                }
+                document.write('><a href="'+docstoc[i].path+'">'+docstoc[i].title+'</a></li>\n');
+              }
+            </script>
+            <!-- TOC end -->
         </ul>
     </div>
     <div class="ctrl-right hidden-xs hidden-sm">
