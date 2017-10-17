@@ -380,7 +380,7 @@ to have external connectivity outside of their cluster.
 
 2.  Check the Nginx container's network interfaces.
 
-    ```basj
+    ```bash
     $ docker exec web ip addr
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default
@@ -403,9 +403,9 @@ to have external connectivity outside of their cluster.
         valid_lft forever preferred_lft forever
     ```
 
-  The `eth0` interface represents the container interface that is connected to
-  the `my-net` overlay network. While the `eth1` interface represents the
-  container interface that is connected to the `docker_gwbridge` network.
+   The `eth0` interface represents the container interface that is connected to
+   the `my-net` overlay network. While the `eth1` interface represents the
+   container interface that is connected to the `docker_gwbridge` network.
 
 ### Extra credit with Docker Compose
 
