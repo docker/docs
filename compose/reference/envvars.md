@@ -10,13 +10,13 @@ Variables starting with `DOCKER_` are the same as those used to configure the
 Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
 
 > **Note**: Some of these variables can also be provided using an
-> [environment file](/compose/env-file.md)
+> [environment file](/compose/env-file.md).
 
 ## COMPOSE\_PROJECT\_NAME
 
 Sets the project name. This value is prepended along with the service name to
 the container on start up. For example, if your project name is `myapp` and it
-includes two services `db` and `web` then compose starts containers named
+includes two services `db` and `web`, then Compose starts containers named
 `myapp_db_1` and `myapp_web_1` respectively.
 
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
@@ -92,7 +92,7 @@ If set, the value of the `COMPOSE_FILE` environment variable will be separated
 using this character as path separator.
 
 
-## Related Information
+## Related information
 
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
