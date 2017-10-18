@@ -223,7 +223,8 @@ supported by **Compose 1.16.0+**.
 
 Introduces the following additional parameters:
 
-- [`target`](compose-file-v2.md#target) for [build configurations](compose-file-v2.md#build)
+- [`target`](compose-file-v2.md#target) and [`shm_size`](compose-file-v2.md#shm_size)
+  for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 
 ### Version 3
@@ -250,6 +251,18 @@ Introduces the following additional parameters:
 - [`credential_spec`](/compose/compose-file/index.md#credentialspec)
 - [`configs`](/compose/compose-file/index.md#configs)
 - [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
+
+### Version 3.4
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **17.09.0** and higher.
+
+Introduces the following additional parameters:
+
+- `target` and `network` in [build configurations](index.md#build)
+- `start_period` for [`healthchecks`](index.md#healthcheck)
+- `order` for [update configurations](index.md#update_config)
+- `name` for [volumes](index.md#volume-configuration-reference)
 
 ## Upgrading
 
