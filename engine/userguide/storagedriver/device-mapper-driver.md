@@ -117,7 +117,7 @@ For production systems, see
     <output truncated>
     ```
 
-  This host is running in `loop-lvm` node, which is **not** supported on
+  This host is running in `loop-lvm` mode, which is **not** supported on
   production systems. This is indicated by the fact that the `Data loop file`
   and a `Metadata loop file` are on files under
   `/var/lib/docker/devicemapper`. These are loopback-mounted
