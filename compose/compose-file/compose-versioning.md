@@ -264,7 +264,6 @@ Introduces the following additional parameters:
 - `order` for [update configurations](/compose/compose-file/index.md#update_config)
 - `name` for [volumes](/compose/compose-file/index.md#volume-configuration-reference)
 
-
 ## Upgrading
 
 ### Version 2.x to 3.x
