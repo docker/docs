@@ -66,7 +66,7 @@ description of expected and actual behavior, and steps to reproduce the issue.
 
 <a name="logs"></a>
 
-## Checking the logs
+## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
 browse the logs yourself.
