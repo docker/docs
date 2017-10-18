@@ -236,23 +236,6 @@ build.
       context: .
       network: custom_network_1
 
-#### shm_size
-
-> Added in [version 2.3](compose-versioning.md#version-23) file format
-
-Set the size of the `/dev/shm` partition for this build's containers. Specify
-as an integer value representing the number of bytes or as a string expressing
-a [byte value](#specifying-byte-values).
-
-    build:
-      context: .
-      shm_size: '2gb'
-
-
-    build:
-      context: .
-      shm_size: 10000000
-
 #### target
 
 > Added in [version 2.3](compose-versioning.md#version-23) file format
@@ -1438,12 +1421,6 @@ refer to it within the Compose file:
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
-
-## Extension fields
-
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
-
-{% include content/compose-extfields-sub.md %}
 
 ## Compose documentation
 
