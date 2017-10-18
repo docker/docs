@@ -15,7 +15,7 @@ versions of the binaries on the [docker/machine release
 page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
 on GitHub.
 
-## Installing Machine directly
+## Install Machine directly
 
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
 
@@ -56,7 +56,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
         $ docker-machine version
         docker-machine version {{site.machine_version}}, build 9371605
 
-## Installing bash completion scripts
+## Install bash completion scripts
 
 The Machine repository supplies several `bash` scripts that add features such
 as:
