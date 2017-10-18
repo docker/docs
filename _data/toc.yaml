@@ -1314,6 +1314,16 @@ reference:
     title: docker tag
   - path: /edge/engine/reference/commandline/top/
     title: docker top
+  - sectiontitle: docker trust *
+    section:
+    - path: /edge/engine/reference/commandline/trust/
+      title: docker trust
+    - path: /edge/engine/reference/commandline/trust_revoke/
+      title: docker trust revoke
+    - path: /edge/engine/reference/commandline/trust_sign/
+      title: docker trust sign
+    - path: /edge/engine/reference/commandline/trust_view/
+      title: docker trust view
   - path: /edge/engine/reference/commandline/unpause/
     title: docker unpause
   - path: /edge/engine/reference/commandline/update/
