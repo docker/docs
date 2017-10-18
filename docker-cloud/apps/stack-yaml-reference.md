@@ -203,7 +203,7 @@ net: host
 ```
 
 ## pid
-Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system the PID address space. Containers launched with this (optional) flag will be able to access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
+Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system PID address space. Containers launched with this (optional) flag will be able to access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
 
 ```yml
 pid: "host"
