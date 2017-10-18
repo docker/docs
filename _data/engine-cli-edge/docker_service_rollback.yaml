@@ -10,7 +10,7 @@ options:
 - option: detach
   shorthand: d
   value_type: bool
-  default_value: "true"
+  default_value: "false"
   description: |
     Exit immediately instead of waiting for the service to converge
   deprecated: false
