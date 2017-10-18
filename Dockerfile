@@ -27,7 +27,7 @@ ENV ENGINE_BRANCH="17.06.x"
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 ENV DISTRIBUTION_BRANCH="release/2.6"
 
-RUN apk --update add bash \
+RUN /sbin/apk --update add bash \
   && bash ./md_source/_scripts/fetch-upstream-resources.sh \
 	&& jekyll build -s md_source -d target --config md_source/_config.yml \
 	&& rm -rf target/apidocs/layouts \
