@@ -7,6 +7,7 @@ notoc: true
 
 ```
 Creates containers for a service.
+This command is deprecated. Use the `up` command with `--no-start` instead.
 
 Usage: create [options] [SERVICE...]
 
