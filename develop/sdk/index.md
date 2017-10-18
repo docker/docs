@@ -125,6 +125,13 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
+### API version matrix
+
+Docker does not recommend running versions prior to 1.12, which means you
+are encouraged to use an API version of 1.24 or higher.
+
+{% include api-version-matrix.md %}
+
 ### Choose the SDK or API version to use
 
 Use the following guidelines to choose the SDK or API version to use in your
