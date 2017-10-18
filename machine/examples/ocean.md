@@ -34,7 +34,7 @@ To generate your access token:
 
     ![Click API in Digital Ocean console](../img/ocean_click_api.png)
 
-2.  Click **Generate New Token** to get to the token generator.
+2.  Click **Generate new token** to get to the token generator.
 
     ![Generate token](../img/ocean_gen_token.png)
 
