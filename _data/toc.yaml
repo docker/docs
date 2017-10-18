@@ -609,13 +609,15 @@ reference:
   - path: /engine/api/sdks/
     title: SDKs
   - path: /engine/api/latest/
-    title: v{{ site.latest_stable_docker_engine_api_version }} reference
+    title: v{{ site.latest_stable_docker_engine_api_version }} reference (latest stable)
   - sectiontitle: API reference by version
     section:
-    - path: /engine/api/v1.32/
-      title: v1.32 Reference
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.33/
+      title: v1.33 reference
+    - path: /engine/api/v1.32/
+      title: v1.32 Reference
     - path: /engine/api/v1.31/
       title: v1.31 Reference
     - path: /engine/api/v1.30/

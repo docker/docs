@@ -18,7 +18,7 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 
 docker_ce_stable_version: "17.09"
 latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.09"
+docker_ce_edge_version: "17.10"
 docker_ee_version: "17.06"
 compose_version: "1.16.1"
 machine_version: "0.12.2"
