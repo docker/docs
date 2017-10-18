@@ -719,6 +719,9 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 Link to containers in another service. Either specify both the service name and
 a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
+> Links are a legacy option. We recommend using
+> [networks](#networks) instead.
+
     web:
       links:
        - "db"

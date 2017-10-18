@@ -343,18 +343,18 @@ And that's it, the app is deployed on a swarm cluster!
 
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
-see that the containers have been distributed between both `myvm1` and `myvm2`.
-
+see that the services (and associated containers) have been distributed between
+both `myvm1` and `myvm2`.
 
 ```
 $ docker stack ps getstartedlab
 
-ID            NAME        IMAGE              NODE   DESIRED STATE
-jq2g3qp8nzwx  test_web.1  username/repo:tag  myvm1  Running
-88wgshobzoxl  test_web.2  username/repo:tag  myvm2  Running
-vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
-ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
-0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
+ID            NAME                  IMAGE                   NODE   DESIRED STATE
+jq2g3qp8nzwx  getstartedlab_web.1   john/get-started:part2  myvm1  Running
+88wgshobzoxl  getstartedlab_web.2   john/get-started:part2  myvm2  Running
+vbb1qbkb0o2z  getstartedlab_web.3   john/get-started:part2  myvm2  Running
+ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
+0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
 ```
 
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
@@ -381,10 +381,15 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 ### Accessing your cluster
 
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.
+
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
-browser, hitting refresh (or just `curl` them). You'll see five possible
-container IDs all cycling by randomly, demonstrating the load-balancing.
+browser, hitting refresh (or just `curl` them).
+
+![Hello World in browser](images/app-in-browser-swarm.png)
+
+You'll see five possible container IDs all cycling by randomly, demonstrating
+the load-balancing.
 
 The reason both IP addresses work is that nodes in a swarm participate in an
 ingress **routing mesh**. This ensures that a service deployed at a certain port
@@ -406,21 +411,25 @@ look:
 
 ## Iterating and scaling your app
 
-From here you can do everything you learned about in part 3.
+From here you can do everything you learned about in parts 2 and 3.
 
 Scale the app by changing the `docker-compose.yml` file.
 
-Change the app behavior by editing code.
+Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
 
-In either case, simply run `docker stack deploy` again to deploy these
-changes.
+In either case, simply run `docker stack deploy` again to deploy these changes.
 
 You can join any machine, physical or virtual, to this swarm, using the
 same `docker swarm join` command you used on `myvm2`, and capacity will be added
 to your cluster. Just run `docker stack deploy` afterwards, and your app will
 take advantage of the new resources.
 
-## Cleanup
+## Cleanup and reboot
+
+### Stacks and swarms
 
 You can tear down the stack with `docker stack rm`. For example:
 
@@ -435,6 +444,59 @@ docker stack rm getstartedlab
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
 > manager, but _you'll need this swarm for part 5, so please keep it
 > around for now_.
+
+### Unsetting docker-machine shell variable settings
+
+You can unset the `docker-machine` environment variables in your current shell
+with the following command:
+
+```
+eval $(docker-machine env -u)
+```
+
+This disconnects the shell from `docker-machine` created virtual machines,
+and allows you to continue working in the same shell, now using native `docker`
+commands (for example, on Docker for Mac or Docker for Windows). To learn more,
+see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+
+### Restarting Docker machines
+
+If you shut down your local host, Docker machines will stop running. You can check the status of machines by running `docker-machine ls`.
+
+```
+$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+myvm1   -        virtualbox   Stopped                 Unknown
+myvm2   -        virtualbox   Stopped                 Unknown
+```
+
+To restart a machine that's stopped, run:
+
+```
+docker-machine start <machine-name>
+```
+
+For example:
+
+```
+$ docker-machine start myvm1
+Starting "myvm1"...
+(myvm1) Check network to re-create if needed...
+(myvm1) Waiting for an IP...
+Machine "myvm1" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+
+$ docker-machine start myvm2
+Starting "myvm2"...
+(myvm2) Check network to re-create if needed...
+(myvm2) Waiting for an IP...
+Machine "myvm2" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+```
 
 [On to Part 5 >>](part5.md){: class="button outline-btn"}
 
@@ -453,7 +515,7 @@ which kept load-balancing requests across containers, even though they were
 running on different machines. Finally, you learned how to iterate and scale
 your app on a cluster.
 
-Here are some commands you might like to run to interact with your swarm a bit:
+Here are some commands you might like to run to interact with your swarm and your VMs a bit:
 
 ```shell
 docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
@@ -463,11 +525,18 @@ docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
 docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
 docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
 docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+docker node ls                # View nodes in swarm (while logged on to manager)
 docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
 docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+docker-machine ls # list VMs, asterisk shows which VM this shell is talking to
 docker-machine start myvm1            # Start a VM that is currently not running
+docker-machine env myvm1      # show environment variables and command for myvm1
+eval $(docker-machine env myvm1)         # Mac command to connect shell to myvm1
+& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression   # Windows command to connect shell to myvm1
+docker stack deploy -c <file> <app>  # Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
+docker-machine scp docker-compose.yml myvm1:~ # Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)
+docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app using ssh (you must have first copied the Compose file to myvm1)
+eval $(docker-machine env -u)     # Disconnect shell from VMs, use native docker
 docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
 docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
-docker-machine scp docker-compose.yml myvm1:~     # Copy file to node's home dir
-docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app
 ```

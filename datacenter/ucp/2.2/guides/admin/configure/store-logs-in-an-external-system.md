@@ -10,7 +10,7 @@ You can configure UCP for sending logs to a remote logging service:
 1. Log in to UCP with an administrator account.
 2. Navigate to the **Admin Settings** page.
 3. Set the information about your logging server, and click
-   **Enable Remote Logging**
+   **Enable Remote Logging**.
 
 ![](../../images/configure-logs-1.png){: .with-border}
 

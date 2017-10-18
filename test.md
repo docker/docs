@@ -85,7 +85,22 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 - A link to a Github PR in `docker/docker.github.io`: {% include github-pr.md repo=docker.github.io pr=9999 %}
 
-(you can also specify `org=foo` to use a Github organization other than Docker).
+  - You can specify `org=foo` to use a Github organization other than Docker
+
+- A link to an auto-generated reference page that we pull in during docs builds:
+[/engine/reference/builder/#env](/engine/reference/builder/#env).
+
+  - If you can't find a reference page in the `docker.github.io`
+  GitHub repository, but see it out on `docs.docker.com`, you can
+  surmise that it's probably auto-generated from the codebase.
+  (FYI, to view the markdown source for the file, just click
+  **Edit this page** on `docs.docker.com`. But don't use that URL in your docs.)
+
+  - Go to the file in a web browser, grab everything after the domain name
+  from the URL, and use that as the link in your docs file.
+
+  - Keep in mind that this link won't resolve until you merge the PR and
+  your docs are published on [docs.docker.com](https://docs.docker.com/).
 
 {: id="custom-target-id"}
 
@@ -194,7 +209,7 @@ setting styles directly on your tables! If you set the width on a `<td>`, you
 only need to do it on the first one. If you have a `<th>`, set it there.
 
 > **Note**: If you need to have **markdown** in a **HTML** table, add
-> `markdown="1"` to the HTML for the `<td>` cells that contain the Markdown.
+> `markdown="span"` to the HTML for the `<td>` cells that contain the Markdown.
 
 <table>
   <tr>
@@ -229,6 +244,18 @@ To update glossary content, edit `_data/glossary.yaml`.
 
 To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
 example, [swarm](glossary.md?term=swarm)).
+
+## Site-wide variables
+
+Look in the top-level `_config.yml` for site-wide variables, such as
+`site.docker_ce_stable_version`. To use them, use Liquid like:
+
+```liquid
+{% raw %}{{ site.docker_ce_stable_version }}{% endraw %}
+```
+
+The current value of `site.docker_ce_stable_version` is
+{{ site.docker_ce_stable_version }}.
 
 ## Mixing Markdown and HTML
 
@@ -471,6 +498,12 @@ break the Markdown block up. This example does it with Markdown. You can't have 
 break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
 break the Markdown block up.
 {: style="column-count: 3 "}
+
+### Badges
+
+You can have <span class="badge badge-info">badges</span>. You can also have
+<span class="badge badge-warning">yellow badges</span> or
+<span class="badge badge-danger">red badges</span>.
 
 ## Running in-page Javascript
 

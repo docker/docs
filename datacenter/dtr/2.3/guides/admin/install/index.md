@@ -24,15 +24,18 @@ to run, you need to install UCP on all the nodes where you plan to install DTR.
 DTR needs to be installed on a worker node that is being managed by UCP.
 You can't install DTR on a standalone Docker Engine.
 
-![](../../images/install-dtr-0.svg)
+![](../../images/install-dtr-1.svg)
 
 
 ## Step 3. Install DTR
 
-To install DTR you use the `{{ page.dtr_org }}/{{ page.dtr_repo }}` image. This image has commands to
-install, configure, and backup DTR.
+Once UCP is installed, navigate to the **UCP web UI**. In the **Admin Settings**,
+choose **Docker Trusted Registry**.
 
-Run the following command to install DTR:
+![](../../images/install-dtr-2.png){: .with-border}
+
+After you configure all the options, you'll have a snippet that you can use
+to deploy DTR. It should look like this:
 
 ```none
 # Pull the latest version of DTR
@@ -45,19 +48,11 @@ $ docker run -it --rm \
   --ucp-insecure-tls
 ```
 
-Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
-DTR. `--ucp-insecure-tls` tells the installer to trust the TLS certificates used
-by UCP.
-
-By default the install command runs in interactive mode and prompts for
-additional information like:
-
-* UCP url: the url clients use to reach UCP
-* UCP username and password: administrator credentials for UCP
-
-You can also provide this information to the installer command so that it
-runs without prompting.
-Check the [reference documentation to learn more](../../../reference/cli/install.md).
+You can run that snippet on any node where Docker is installed. As an example
+you can SSH into a UCP node and run the DTR installer from there. By default
+the installer runs in interactive mode and prompts you for any additional
+information that is necessary.
+[Learn more about the installer](../../../reference/cli/install.md).
 
 ## Step 4. Check that DTR is running
 
@@ -65,12 +60,12 @@ In your browser, navigate to the Docker **Universal Control Plane**
 web UI, and navigate to the **Applications** screen. DTR should be listed
 as an application.
 
-![](../../images/install-dtr-1.png){: .with-border}
+![](../../images/install-dtr-3.png){: .with-border}
 
 You can also access the **DTR web UI**, to make sure it is working. In your
 browser, navigate to the address where you installed DTR.
 
-![](../../images/install-dtr-2.png){: .with-border}
+![](../../images/install-dtr-4.png){: .with-border}
 
 
 ## Step 5. Configure DTR
@@ -82,7 +77,7 @@ After installing DTR, you should configure:
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
-  ![](../../images/install-dtr-3.png){: .with-border}
+  ![](../../images/install-dtr-5.png){: .with-border}
 
 
 ## Step 6. Test pushing and pulling
@@ -128,7 +123,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
     web UI, and navigate to the **Applications** screen. All replicas should
     be displayed.
 
-    ![](../../images/install-dtr-4.png){: .with-border}
+    ![](../../images/install-dtr-6.png){: .with-border}
 
 ## See also
 

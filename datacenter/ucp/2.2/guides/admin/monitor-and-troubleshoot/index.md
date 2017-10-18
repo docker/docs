@@ -60,7 +60,11 @@ unhealthy.
 If you're accessing the `_ping` endpoint through a load balancer, you'll have no
 way of knowing which UCP manager node is not healthy, since any manager node
 might be serving your request. Make sure you're connecting directly to the
-URL of a manager node, and not a load balancer.
+URL of a manager node, and not a load balancer. In addition, please be aware that
+pinging the endpoint with HEAD will result in a 404 error code. It is better to 
+use GET instead.
+
+
 
 ## Where to go next
 

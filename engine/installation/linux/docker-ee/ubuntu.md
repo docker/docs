@@ -8,8 +8,6 @@ redirect_from:
 title: Get Docker EE for Ubuntu
 ---
 
-{% assign minor-version = "17.06" %}
-
 To get started with Docker EE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ee).
@@ -120,7 +118,7 @@ from the repository.
 
     Verify that you now have the key with the fingerprint
     `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
-    last 8 characters of the fingerprint.
+    last eight characters of the fingerprint.
 
     ```bash
     $ sudo apt-key fingerprint 6D085F96
@@ -145,7 +143,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
        $(lsb_release -cs) \
-       stable-{{ minor-version }}"
+       stable-{{ site.docker_ee_version }}"
     ```
 
     **s390x**:
@@ -154,7 +152,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] {{ download-url-base }} \
        $(lsb_release -cs) \
-       stable-{{ minor-version }}"
+       stable-{{ site.docker_ee_version }}"
     ```
 
 #### Install Docker EE
@@ -187,7 +185,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ee
 
-    docker-ee | {{ minor-version }}.0~ee-0~ubuntu-xenial | <DOCKER-EE-URL>/ubuntu xenial/stable amd64 Packages
+    docker-ee | {{ site.docker_ee_version }}.0~ee-0~ubuntu-xenial | <DOCKER-EE-URL>/ubuntu xenial/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
@@ -241,7 +239,7 @@ a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-{{ minor-version }}` and download the `.deb` file for the
+    `ubuntu/x86_64/stable-{{ site.docker_ee_version }}` and download the `.deb` file for the
     Docker EE version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
@@ -293,6 +291,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md).
 
 - Continue with the [User Guide](/engine/userguide/index.md).

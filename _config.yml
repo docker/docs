@@ -63,7 +63,6 @@ defaults:
     values:
       layout: docs
       defaultassignee: johndmulhausen
-      enginebranch: 1.13.x
       toc_min: 2
       toc_max: 3
       tree: true
@@ -107,7 +106,7 @@ defaults:
       path: "engine"
     values:
       assignee: "mstanleyjones"
-      win_server_zip_url: "https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.1-ee-3.zip"
+      win_server_zip_url: "https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.2-ee-4.zip"
   - scope:
       path: "kitematic"
     values:
@@ -136,13 +135,14 @@ defaults:
       path: "datacenter"
     values:
       ucp_latest_image: "docker/ucp:2.2.3"
-      dtr_latest_image: "docker/dtr:2.3.3"
+      dtr_latest_image: "docker/dtr:2.3.4"
+      enterprise: true
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.3"
+      dtr_version: "2.3.4"
   - scope:
       path: "datacenter/dtr/2.2"
     values:

@@ -85,10 +85,10 @@ key-value stores. This example uses Consul.
 
     ```bash
     $  docker run -d \
-      --name consul
+      --name consul \
       -p "8500:8500" \
       -h "consul" \
-      consul agent -server -bootstrap
+      consul agent -server -bootstrap -client "0.0.0.0"
     ```
 
     The client starts a `consul` image running in the
@@ -289,7 +289,7 @@ it automatically is part of the network.
       --name=web \
       --network=my-net \
       --env="constraint:node==mhs-demo0" \
-      nginx
+      nginx:alpine
     ```
 
 4.  Run a `busybox` instance on the `mhs-demo1` instance and get the contents of
@@ -380,7 +380,7 @@ to have external connectivity outside of their cluster.
 
 2.  Check the Nginx container's network interfaces.
 
-    ```basj
+    ```bash
     $ docker exec web ip addr
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default
@@ -403,9 +403,9 @@ to have external connectivity outside of their cluster.
         valid_lft forever preferred_lft forever
     ```
 
-  The `eth0` interface represents the container interface that is connected to
-  the `my-net` overlay network. While the `eth1` interface represents the
-  container interface that is connected to the `docker_gwbridge` network.
+   The `eth0` interface represents the container interface that is connected to
+   the `my-net` overlay network. While the `eth1` interface represents the
+   container interface that is connected to the `docker_gwbridge` network.
 
 ### Extra credit with Docker Compose
 

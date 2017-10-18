@@ -193,7 +193,7 @@ Machine: |
   *Also known as : docker-machine*
 namespace: |
   A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html)
-  is a Linux kernel feature that isolates and vitualizes system resources. Processes which restricted to
+  is a Linux kernel feature that isolates and virtualizes system resources. Processes which restricted to
   a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
   are an important part of Docker's isolation model. Namespaces exist for each type of
   resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
@@ -243,7 +243,7 @@ role-based access control: |
   resource collections. A grant is made up of a subject, a role, and a collection.
   A grant defines who (subject) has how much access (role) to a set of resources
   (collection). For more about role-based access control, see
-  [Authentication](/datacenter/ucp/2.2/guides/access-control/index.md).
+  [Authentication](/datacenter/ucp/2.2/guides/access-control/).
 SSH: |
   SSH (secure shell) is a secure protocol for accessing remote machines and applications.
   It provides authentication and encrypts data communication over insecure networks such

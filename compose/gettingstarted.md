@@ -126,7 +126,7 @@ Hub registry.
     redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
     ```
 
-    Compose pulls a Redis image, builds an image for your code, and start the
+    Compose pulls a Redis image, builds an image for your code, and starts the
     services you defined. In this case, the code is statically copied into the image at build time.
 
 2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.

@@ -4,19 +4,19 @@ description: Learn how to create, configure, and test webhooks in Docker Trusted
 keywords: registry, webhooks
 ---
 
-DTR has webhooks so that you can run custom login when an event happens. This
+DTR has webhooks so that you can run custom logic when an event happens. This
 lets you build complex CI and CD pipelines with your Docker images.
 
 ## Create a webhook
 
 To create a webhook, navigate to the **repository details** page, choose
-the **webhooks** tab, and click **New Webhook**.
+the **Webhooks** tab, and click **New Webhook**.
 
 ![](../images/manage-webhooks-1.png){: .with-border}
 
-Select the event that will trigger the webhook, and set the url to send
-information about the event. Once everything is set up, click **test** for
-DTR to send a JSON payload to the url you set up, so that you can validate
+Select the event that will trigger the webhook, and set the URL to send
+information about the event. Once everything is set up, click **Test** for
+DTR to send a JSON payload to the URL you set up, so that you can validate
 that the integration is working. You'll get an event that looks like this:
 
 ```

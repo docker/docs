@@ -233,13 +233,15 @@ from any swarm node which is joined to the swarm and is in a `running` state.
 service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
-services on the same network. For instance, if you have a WordPress service
-which stores its data in a MySQL service, and they are connected to the same
-overlay network, you do not need to publish the MySQL port to the client, only
-the WordPress HTTP port.
+services on the same network. For instance, if you have a
+[WordPress service that stores its data in a MySQL service](http://training.play-with-docker.com/swarm-service-discovery/),
+and they are connected to the same overlay network, you do not need to publish
+the MySQL port to the client, only the WordPress HTTP port.
 
-Service discovery can work in two different ways, using a virtual IP (VIP) or
-DNS round robin (DNSRR). You can configure this per service.
+Service discovery can work in two different ways: internal connection-based
+load-balancing at Layers 3 and 4 using the embedded DNS and a virtual IP (VIP),
+or external and customized request-based load-balancing at Layer 7 using DNS
+round robin (DNSRR). You can configure this per service.
 
 - By default, when you attach a service to a network and that service publishes
   one or more ports, Docker assigns the service a virtual IP (VIP), which is the

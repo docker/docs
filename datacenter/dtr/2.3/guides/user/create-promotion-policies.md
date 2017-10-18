@@ -15,7 +15,7 @@ a new image, run tests, and if the image is working as expected, they'll
 promote it to production.
 
 As an example, you push the image to `docker/website-dev:3-stable`, the QA team will
-pull and test it, and push it as `docker/website-prod:latest`
+pull and test it, and push it as `docker/website-prod:latest`.
 
 DTR allows you to automate this. If the image you pushed to DTR meets certain
 criteria, like it has a specific name, and doesn't have any vulnerabilities,
@@ -31,11 +31,11 @@ In this example, we're going to create a promotion policy for the
 ## Configure your repository
 
 In the DTR **web UI**, navigate to the **repository details** and
-choose **policies**.
+choose **Policies**.
 
 ![repository policies](../images/create-deployment-policies-2.png){: .with-border}
 
-Click **new promotion policy**, and define that criteria that an image needs
+Click **New promotion policy**, and define that criteria that an image needs
 to meet to be promoted.
 
 DTR allows defining the following criteria:
@@ -48,14 +48,14 @@ DTR allows defining the following criteria:
 
 Then, select where to push the image to if it meets all the criteria.
 Select the **organization** and **repository** where the image is going to be
-push, and define the **tag**. You can use these template keywords to define
+pushed, and define the **tag**. You can use these template keywords to define
 your new tag:
 
 | Template | Description                     | Example result    |
 |:---------|:--------------------------------|:------------------|
 | %n       | The tag to promote              | 1, 4.5, latest    |
 | %A       | Day of the week                 | Sunday, Monday    |
-| %a       | Day of the week, abbreviated    | Sun, Mon , Tue    |
+| %a       | Day of the week, abbreviated    | Sun, Mon, Tue    |
 | %w       | Day of the week, as a number    | 0, 1, 6           |
 | %d       | Number for the day of the month | 01, 15, 31        |
 | %B       | Month                           | January, December |
@@ -71,7 +71,7 @@ your new tag:
 | %f       | Microsecond                     | 000000, 999999    |
 | %Z       | Name for the timezone           | UTC, PST, EST     |
 | %j       | Day of the year                 | 001, 200, 366     |
-| %W       | Week of the year                | 00, 10 , 53       |
+| %W       | Week of the year                | 00, 10, 53       |
 
 
 

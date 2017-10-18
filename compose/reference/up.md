@@ -39,7 +39,7 @@ Builds, (re)creates, starts, and attaches to containers for a service.
 
 Unless they are already running, this command also starts any linked services.
 
-The `docker-compose up` command aggregates the output of each container. When
+The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
 the command exits, all containers are stopped. Running `docker-compose up -d`
 starts the containers in the background and leaves them running.
 

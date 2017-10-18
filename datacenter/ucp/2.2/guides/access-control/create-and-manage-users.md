@@ -21,7 +21,7 @@ To create a new user, go to the UCP web UI, and navigate to the
 
 ![](../images/create-users-1.png){: .with-border}
 
-Click the **Create User** button, and fill-in the user information.
+Click the **Create user** button, and fill-in the user information.
 
 ![](../images/create-users-2.png){: .with-border}
 

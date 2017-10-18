@@ -6,8 +6,6 @@ redirect_from:
 - /engine/installation/binaries/
 ---
 
-{% assign minor-version = "17.09" %}
-
 > **Note**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
 
@@ -165,7 +163,7 @@ the `dockerd.exe` and `docker.exe` binaries are included.
 1.  Use the following PowerShell commands to install and start Docker:
 
     ```none
-    PS C:\> Invoke-WebRequest https://download.docker.com/win/static/stable/x86_64//docker-{{ minor-version }}.0-ce.zip -UseBasicParsing -OutFile docker.zip
+    PS C:\> Invoke-WebRequest https://download.docker.com/win/static/stable/x86_64//docker-{{ site.docker_ce_stable_version }}.0-ce.zip -UseBasicParsing -OutFile docker.zip
 
     PS C:\> Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
 

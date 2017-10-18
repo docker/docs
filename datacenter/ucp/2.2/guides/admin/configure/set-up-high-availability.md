@@ -33,7 +33,7 @@ For production-grade deployments, follow these rules of thumb:
   availability zone goes down.
 * Adding many manager nodes to the cluster might lead to performance
   degradation, as changes to configurations need to be replicated across all
-  manager nodes. The maximum advisable is 7 manager nodes.
+  manager nodes. The maximum advisable is seven manager nodes.
 
 ## Where to go next
 

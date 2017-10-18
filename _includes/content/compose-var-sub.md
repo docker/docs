@@ -19,6 +19,10 @@ You can set default values for environment variables using a
 [`.env` file](../env-file.md), which Compose will automatically look for. Values
 set in the shell environment will override those set in the `.env` file.
 
+> **Important**: The `.env file` feature only works when you use the
+> `docker-compose up` command and does not work with `docker stack deploy`.
+{: .important }
+
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Additionally when using
 the [2.1 file format](compose-versioning.md#version-21), it is possible to
 provide inline default values using typical shell syntax:

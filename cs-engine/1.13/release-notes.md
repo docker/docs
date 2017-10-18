@@ -18,8 +18,12 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
-## CS Engine 1.13.1-cs6
-(2017-08-24)
+## CS Engine 1.13.1-cs7 (2017-10-13)
+
+* Fix logic in network resource reaping to prevent memory leak [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
+* Increase max GRPC message size to 128MB for larger snapshots so newly added managers can successfully join [docker/swarmkit#2375](https://github.com/docker/swarmkit/pull/2375)
+
+## CS Engine 1.13.1-cs6 (2017-08-24)
 
 * Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
 * Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
@@ -28,8 +32,7 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 * Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
 * Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## CS Engine 1.13.1-cs5
-(21 Jul 2017)
+## CS Engine 1.13.1-cs5 (21 Jul 2017)
 
 * Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
 * Prevent data race on `docker network connect/disconnect` [#33456](https://github.com/moby/moby/pull/33456)
@@ -48,8 +51,7 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 * Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
 * Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
 
-## CS Engine 1.13.1-cs4
-(01 Jun 2017)
+## CS Engine 1.13.1-cs4 (01 Jun 2017)
 
 Backports all fixes from [17.03.2](https://github.com/moby/moby/releases/tag/v17.03.2-ce)
 
@@ -63,8 +65,7 @@ Backports all fixes from 17.03.1
 
 * Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
 
-## CS Engine 1.13.1-cs2
-(23 Feb 2017)
+## CS Engine 1.13.1-cs2 (23 Feb 2017)
 
 ### Client
 
@@ -102,9 +103,7 @@ Backports all fixes from 17.03.1
 * Fix problem that made rolling updates slow when `task-history-limit` was set to 1 [docker/swarmkit#1948](https://github.com/docker/swarmkit/pull/1948)
 * Restart tasks elsewhere, if appropriate, when they are shut down as a result of nodes no longer satisfying constraints [docker/swarmkit#1958](https://github.com/docker/swarmkit/pull/1958)
 
-## CS Engine 1.13.1-cs1
-
-(08 Feb 2017)
+## CS Engine 1.13.1-cs1 (08 Feb 2017)
 
 Refer to the detailed lists of changes since the release of CS Engine 1.12.6-cs8
 by reviewing the changes in [v1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)

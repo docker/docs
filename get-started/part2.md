@@ -56,8 +56,10 @@ after doing that, you can expect that the build of your app defined in this
 
 ### `Dockerfile`
 
-Create an empty directory. Change directories (`cd`) into the new directory, create a file called
-`Dockerfile`, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.
+Create an empty directory. Change directories (`cd`) into the new directory,
+create a file called `Dockerfile`, copy-and-paste the following content into
+that file, and save it. Take note of the comments that explain each statement in
+your new Dockerfile.
 
 ```conf
 # Use an official Python runtime as a parent image
@@ -81,6 +83,19 @@ ENV NAME World
 # Run app.py when the container launches
 CMD ["python", "app.py"]
 ```
+
+> Are you behind a proxy server?
+>
+> Proxy servers can block connections to your web app once it's up and running.
+> If you are behind a proxy server, add the following lines to your
+> Dockerfile, using the `ENV` command to specify the host and port for your
+> proxy servers:
+>
+> ```conf
+> # Set proxy server, replace host:/port with values for your servers
+> ENV http_proxy host:/port
+> ENV https_proxy host:/port
+> ```
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.
@@ -170,6 +185,8 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 ```
 
+> **Tip**: You can use the commands `docker images` or the newer `docker image ls` list images. They give you the same output.
+
 ## Run the app
 
 Run the app, mapping your machine's port 4000 to the container's published port
@@ -224,10 +241,10 @@ CONTAINER ID        IMAGE               COMMAND             CREATED
 
 You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
-Now use `docker stop` to end the process, using the `CONTAINER ID`, like so:
+Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
 ```shell
-docker stop 1fa4ab2cf395
+docker container stop 1fa4ab2cf395
 ```
 
 ## Share your image
@@ -316,10 +333,6 @@ docker run -p 4000:80 username/repository:tag
 
 If the image isn't available locally on the machine, Docker will pull it from
 the repository.
-
-```shell
-docker image rm <image id>
-```
 
 ```shell
 $ docker run -p 4000:80 john/get-started:part2

@@ -22,7 +22,13 @@ When you run a container with the `-p` argument, for example:
 ```
 $ docker run -p 80:80 -d nginx
 ```
-Docker for Mac will make the container port available at `localhost`.
+Docker for Mac will make whatever is running on port 80 in the container (in this case, `nginx`) available on port 80 of `localhost`. In this example, the host and container ports are the same. What if you need to specify a different host port? If, for example, you already have something running on port 80 of your host machine, you can connect the container to a different port:
+
+```
+$ docker run -p 8081:80 -d nginx
+```
+
+Now, connections to `localhost:8081` will be sent to port 80 in the container. The syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
@@ -65,8 +71,8 @@ Because of the way networking is implemented in Docker for Mac, you cannot see a
 
 ### I cannot ping my containers
 
-Unfortunately, due to limitations in macOS, we're unable to route traffic to
-containers, and from containers back to the host.
+Docker for Mac is unable to route traffic to containers, and from containers
+back to the host.
 
 ### Per-container IP addressing is not possible
 
@@ -105,7 +111,7 @@ container to port `8000` on the host:
 ```bash
 $ docker run --publish 8000:80 --name webserver nginx
 
-$ docker run --p 8000:80 --name webserver nginx
+$ docker run -p 8000:80 --name webserver nginx
 ```
 
 To expose all ports, use the `-P` flag. For example, the following command

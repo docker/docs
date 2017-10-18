@@ -6,8 +6,6 @@ redirect_from:
 title: Get Docker CE for CentOS
 ---
 
-{% assign minor-version = "17.09" %}
-
 To get started with Docker CE on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
@@ -136,8 +134,8 @@ from the repository.
     > which may not be appropriate for your stability needs.
     {:.warning}
 
-    If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
+    If this is the first time you are installing a package from a recently added
+    repository, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint is
     correct, and if so, accept the key. The fingerprint should match
     `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
@@ -150,13 +148,10 @@ from the repository.
     example uses the `sort -r` command to sort the results by version number,
     highest to lowest, and is truncated.
 
-    > **Note**: This `yum list` command only shows binary packages. To show
-    > source packages as well, omit the `.x86_64` from the package name.
-
     ```bash
-    $ yum list docker-ce.x86_64  --showduplicates | sort -r
+    $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64            {{ minor-version }}.ce-1.el7.centos             docker-ce-stable
+    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and
@@ -199,7 +194,7 @@ steps.
 
 #### Upgrade Docker CE
 
-To upgrade Docker CE, first run `sudo yum makecache fast`, then follow the
+To upgrade Docker CE, follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
@@ -214,7 +209,7 @@ a new file each time you want to upgrade Docker.
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
-    > `stable` in the > URL to `edge`.
+    > `stable` in the above URL to `edge`.
     > [Learn about **stable** and **edge** channels](/engine/installation/).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded

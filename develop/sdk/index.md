@@ -44,10 +44,16 @@ go get github.com/docker/docker/client
 
 [Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 
+## View the API reference
+
+You can
+[view the reference for the latest version of the API](/engine/api/latest/)
+or [choose a specific version](/engine/api/version-history/).
+
 ## Versioned API and SDK
 
-The version of the Docker API you should use depends upon the version of your
-Docker daemon and Docker client.
+The version of the Docker Engine API you should use depends upon the version of
+your Docker daemon and Docker client.
 
 A given version of the Docker Engine SDK supports a specific version of the
 Docker Engine API, as well as all earlier versions. If breaking changes occur,
@@ -124,8 +130,9 @@ You can specify the API version to use, in one of the following ways:
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 
-- If you're starting a new project, use the latest version, but do specify the
-  version you are using. This helps prevent surprises.
+- If you're starting a new project, use the
+  [latest version](/engine/api/latest/), but do specify the version you are
+  using. This helps prevent surprises.
 - If you need a new feature, update your code use at least the oldest version
   that supports the feature, and prefer the latest version you are able to use.
 - Otherwise, continue to use the version that your code is already using.
@@ -142,7 +149,7 @@ Docker API directly, or using the Python or Go SDK.
 </ul>
 <div class="tab-content">
 
-  <div id="go" class="tab-pane fade" markdown="1">
+  <div id="go" class="tab-pane fade in active" markdown="1">
 
 ```go
 package main
@@ -200,7 +207,7 @@ func main() {
 ```
 
   </div>
-  <div id="python" class="tab-pane fade in active" markdown="1">
+  <div id="python" class="tab-pane fade" markdown="1">
 
 ```python
 import docker
@@ -230,7 +237,7 @@ hello world
 </div>
 
 For more examples, take a look at the
-[getting started guide](getting-started.md).
+[getting started guide](examples.md).
 
 ## Unofficial libraries
 

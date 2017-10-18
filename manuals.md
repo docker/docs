@@ -34,7 +34,7 @@ Free downloadables that help your device use Docker containers.
 | Tool | Description |
 | ---- | ----------- |
 | [Docker Compose](/compose/overview/) | Enables you to define, build, and run multi-container applications |
-| [Docker Machine](/machine/overview/) | Enables you to provision and manage Dockerized hosts.|
+| [Docker Machine](/machine/overview/) | Enables you to provision and manage Dockerized hosts |
 | [Docker Notary](/notary/getting_started/) | Allows the signing of container images to enable Docker Content Trust |
 | [Docker Registry](/registry/) | The software that powers Docker Hub and Docker Store, Registry stores and distributes container images |
 

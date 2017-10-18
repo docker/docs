@@ -85,7 +85,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
       visualizer:
         image: dockersamples/visualizer:stable
         ports:
-          - "8080:8080":
+          - "8080:8080"
         volumes:
           - "/var/run/docker.sock:/var/run/docker.sock"
         deploy:
@@ -197,7 +197,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
         ports:
           - "6379:6379"
         volumes:
-          - ./data:/data
+          - /home/docker/data:/data
         deploy:
           placement:
             constraints: [node.role == manager]
@@ -242,26 +242,42 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     docker-machine ssh myvm1 "mkdir ./data"
     ```
 
-3.  This time, we need to copy over the new `docker-compose.yml` file with `docker-machine scp`:
+3.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
+
+    * Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next it.
+
+    * If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
+
+      On **Mac or Linux** the command is:
+
+      ```shell
+      eval $(docker-machine env myvm1)
+      ```
+
+      On **Windows** the command is:
+
+      ```shell
+      & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+      ```
+
+4.  Run `docker stack deploy` one more time.
 
     ```shell
-    $ docker-machine scp docker-compose.yml myvm1:~
+    $ docker stack deploy -c docker-compose.yml getstartedlab
     ```
 
-    > **Note**: Windows users will need a Linux terminal emulator like [Git
-Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order
-for `docker-machine scp` to work. We are researching a better solution here, one
-without the need to copy files over to the VM, but for now it seems that the
-Compose file needs to be located on the VM so that it looks for `./data` in the
-right place.
-
-4.  Run `docker stack deploy` one more time, this time wrapped in  `docker-machine ssh myvm1` to specifically send it to the Compose file we just placed on the manager.
+5.  Run `docker service ls` to verify that the three services are running as expected.
 
     ```shell
-    $ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+    $ docker service ls
+    ID                  NAME                       MODE                REPLICAS            IMAGE                             PORTS
+    x7uij6xb4foj        getstartedlab_redis        replicated          1/1                 redis:latest                      *:6379->6379/tcp
+    n5rvhm52ykq7        getstartedlab_visualizer   replicated          1/1                 dockersamples/visualizer:stable   *:8080->8080/tcp
+    mifd433bti1d        getstartedlab_web          replicated          5/5                 orangesnap/getstarted:latest    *:80->80/tcp
+
     ```
 
-5.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.
+6.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 

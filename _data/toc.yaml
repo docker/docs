@@ -396,6 +396,8 @@ guides:
           title: How services work
         - path: /engine/swarm/how-swarm-mode-works/pki/
           title: Manage swarm security with PKI
+        - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
+          title: Swarm task states
       - path: /engine/swarm/swarm-mode/
         title: Run Docker in swarm mode
       - path: /engine/swarm/join-nodes/
@@ -606,10 +608,12 @@ reference:
     title: Get started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.32/
-    title: v1.32 Reference
-  - sectiontitle: Previous API versions
+  - path: /engine/api/latest/
+    title: v{{ site.latest_stable_docker_engine_api_version }} reference
+  - sectiontitle: API reference by version
     section:
+    - path: /engine/api/v1.32/
+      title: v1.32 Reference
     - path: /engine/api/version-history/
       title: Version history overview
     - path: /engine/api/v1.31/
@@ -1380,6 +1384,8 @@ manuals:
   - path: /engine/installation/
     title: Install Docker EE
     nosync: true
+  - title: Try Docker EE (no install)
+    path: https://dockertrial.com
   - path: /enterprise/telemetry/
     title: Manage usage data collection
   - sectiontitle: Release notes
@@ -1390,6 +1396,10 @@ manuals:
       title: "17.06"
   - path: /datacenter/install/linux/
     title: Deploy Docker EE standard on Linux
+  - path: /enterprise/backup/
+    title: Backup Docker EE
+  - path: /enterprise/upgrade/
+    title: Upgrade Docker EE
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/2.2/guides/
@@ -1462,8 +1472,6 @@ manuals:
           title: Troubleshoot with logs
         - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
-        - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
-          title: Troubleshoot swarm task states
       - path: /datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - sectiontitle: CLI reference
@@ -2492,9 +2500,9 @@ manuals:
     - path: /docker-cloud/infrastructure/byoh/
       title: Use the Docker Cloud agent
     - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
-      title: Using Docker Cloud and Packet.net
+      title: Use Docker Cloud and Packet.net
     - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
-      title: Using Docker Cloud on AWS
+      title: Use Docker Cloud on AWS
   - sectiontitle: Manage nodes and apps (standard mode)
     section:
     - path: /docker-cloud/standard/
