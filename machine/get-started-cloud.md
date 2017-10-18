@@ -104,7 +104,7 @@ See [Available driver
 plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
 target="_blank" class="_"}.
 
-## Adding a host without a driver
+## Add a host without a driver
 
 You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow as on a host provisioned by docker-machine.
 
@@ -113,7 +113,7 @@ You can register an already existing docker host by passing the daemon url. With
     NAME        ACTIVE   DRIVER    STATE     URL
     custombox   *        none      Running   tcp://50.134.234.20:2376
 
-## Using Machine to provision Docker Swarm clusters
+## Use Machine to provision Docker Swarm clusters
 
 > Swarm mode supercedes Docker Machine provisioning of swarm clusters
 >
