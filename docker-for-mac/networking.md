@@ -53,13 +53,13 @@ http_proxy=http://proxy.example.com:3128
 no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy` and
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
 `no_proxy` environment variables are set. When your proxy configuration changes,
 Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
-using [restart policies](/engine/reference/run/#restart-policies-restart)
+using [restart policies](/engine/reference/run/#restart-policies-restart).
 
-## Known Limitations, Use Cases, and Workarounds
+## Known limitations, use cases, and workarounds
 
 Following is a summary of current limitations on the Docker for Mac networking
 stack, along with some ideas for workarounds.
