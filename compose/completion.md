@@ -7,7 +7,7 @@ title: Command-line completion
 Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
-## Installing Command Completion
+## Install command completion
 
 ### Bash
 
@@ -36,7 +36,7 @@ fi
 You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
-If you're using MacPorts instead of brew you'll need to slightly modify your steps to the
+If you're using MacPorts instead of brew, you'll need to slightly modify your steps to the
 following:
 
 Run `sudo port install bash-completion` to install bash completion.
