@@ -2189,6 +2189,12 @@ stack.
 
 {% include content/compose-var-sub.md %}
 
+## Extension fields
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34).
+
+{% include content/compose-extfields-sub.md %}
+
 ## Compose documentation
 
 - [User guide](/compose/index.md)
