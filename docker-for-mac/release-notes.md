@@ -21,15 +21,21 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06 (Stable)
 
+[Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
+
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
   
 ### Docker Community Edition 17.09.0-ce-mac33 2017-10-03 (Stable)
 
+[Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
+
 * Bug fix
   - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
 
 ### Docker Community Edition 17.09.0-ce-mac32 2017-10-02 (Stable)
+
+[Download](https://download.docker.com/mac/stable/19472/Docker.dmg)
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
