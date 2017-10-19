@@ -65,14 +65,18 @@ networks, are preserved. The Docker EE package is now called `docker-ee`.
 
 ## Configure the btrfs filesystem
 
-By default, SLES formats the `/` filesystem using BTRFS. If the filesystem which
+By default, SLES formats the `/` filesystem using BTRFS, so **most people do not
+not need to do the steps in this section**. If the filesystem which
 hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
 BTRFS filesystem and mount it on `/var/lib/docker/`:
 
 1.  Format your dedicated block device or devices as a Btrfs filesystem. This
     example assumes that you are using two block devices called `/dev/xvdf` and
-    `/dev/xvdg`. Double-check the block device names because this is a
+    `/dev/xvdg`.
+    
+    > Double-check the block device names because this is a
     destructive operation.
+    {:.warning}
 
     ```bash
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
