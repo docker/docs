@@ -51,7 +51,20 @@ It's OK if `apt-get` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
 
-### Recommended extra packages for Trusty 14.04
+### If you need to use aufs
+
+Docker CE now uses the `overlay2` storage driver by default, and it is
+recommended that you use it instead of `aufs`. If you need to use `aufs`, you
+will need to do additional preparation.
+
+#### Xenial 16.04 and newer
+
+For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
+and Docker CE will use the `overlay2` storage driver by default. If you need
+to use `aufs` instead, you need to configure it manually.
+See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
+
+#### Trusty 14.04
 
 Unless you have a strong reason not to, install the
 `linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
@@ -64,9 +77,6 @@ $ sudo apt-get install \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual
 ```
-
-For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
-and Docker CE will use the `overlay2` storage driver by default.
 
 ## Install Docker CE
 

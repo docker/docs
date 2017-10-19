@@ -91,6 +91,15 @@ configurations work on recent versions of the Linux distribution:
 | Docker CE on CentOS | `devicemapper`, `vfs`                                                                                 |
 | Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental), `vfs`        |
 
+When possible, `overlay2` is the recommended storage driver. When installing
+Docker for the first time, `overlay2` is used by default. Previously, `aufs` was
+used by default when available, but this is no longer the case. If you want to
+use `aufs` on new installations going forward, you need to explicitly configure
+it, and you may need to install extra packages, such as `linux-image-extra`.
+See [aufs](aufs-driver.md).
+
+On existing installations using `aufs`, it will continue to be used.
+
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to
 use Docker volumes for write-heavy workloads instead of relying on writing data
