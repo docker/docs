@@ -121,11 +121,11 @@ see [Docker Cloud](#docker-cloud).
   Uncheck this option if you don't want Docker to start when you
   open your session.
 
-* Docker for Mac is set to **automatically check for updates**  and notify
+* Docker for Mac is set to **automatically check for updates** and notify
   you when an update is available. If an update is found, click **OK** to accept
 and install it (or cancel to keep the current version). If you disable the check
 for updates, you can still find out about updates manually by choosing ![whale
-menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**
+menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
 
 * Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
 
@@ -324,13 +324,13 @@ Docker uninstalled successfully. You can move the Docker application to the tras
 You might want to use the command-line uninstall if, for example, you find that
 the app is non-functional, and you cannot uninstall it from the menu.
 
-## Adding TLS certificates
+## Add TLS certificates
 
 You can add trusted Certificate Authorities (CAs) (used to verify registry
 server certificates) and client certificates (used to authenticate to
 registries) to your Docker daemon.
 
-### Adding custom CA certificates (server side)
+### Add custom CA certificates (server side)
 
 All trusted CAs (root or intermediate) are supported.
 Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
@@ -364,7 +364,7 @@ For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker for
 Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
-### Adding client certificates
+### Add client certificates
 
 You can put your client certificates in
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
@@ -425,7 +425,7 @@ how to set the client TLS certificate for verification, see [Verify repository
 client with certificates](/engine/security/certificates.md) in the Docker Engine
 topics.
 
-## Installing bash completion
+## Install bash completion
 
 If you are using [bash
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
@@ -448,7 +448,7 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-comple
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
 ```
 
-## Giving feedback and getting help
+## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
 discussion, log on to our [Docker for Mac
