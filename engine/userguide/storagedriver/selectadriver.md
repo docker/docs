@@ -22,9 +22,6 @@ this decision, there are three high-level factors to consider:
   explicitly configured, assuming that the prerequisites for that storage driver
   are met:
 
-  - If `aufs` is available, default to it, because it is the oldest storage
-    driver. However, it is not universally available.
-
   - If possible, the storage driver with the least amount of configuration is
     used, such as `btrfs` or `zfs`. Each of these relies on the backing
     filesystem being configured correctly.
@@ -33,20 +30,22 @@ this decision, there are three high-level factors to consider:
     and stability in the most usual scenarios.
 
     - `overlay2` is preferred, followed by `overlay`. Neither of these requires
-      extra configuration.
+      extra configuration. `overlay2` is the default choice for Docker CE.
 
     - `devicemapper` is next, but requires `direct-lvm` for production
       environments, because `loopback-lvm`, while zero-configuration, has very
       poor performance.
 
-  The selection order is defined in Docker's source code. You can see the order
-  for Docker 17.03 by looking at
-  [the source code](https://github.com/moby/moby/blob/v17.03.1-ce/daemon/graphdriver/driver_linux.go#L54-L63).
-  For a different Docker version, change the URL to that version.
+  The selection order is defined in Moby's source code. You can see the order
+  by looking at
+  [the source code](https://github.com/docker/docker-ce/blob/master/components/engine/daemon/graphdriver/driver_linux.go#L54-L63).
+  The order may vary slightly by version. Select the branch for the version you
+  use to verify the storage driver order.
   {: id="storage-driver-order" }
 
 - Your choice may be limited by your Docker edition, operating system, and
-  distribution. For instance, `aufs` is only supported on Ubuntu and Debian,
+  distribution. For instance, `aufs` is only supported on Ubuntu and Debian, and
+  may require extra packages to be installed,
   while `btrfs` is only supported on SLES, which is only supported with Docker
   EE. See
   [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution).
