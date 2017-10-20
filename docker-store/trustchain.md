@@ -1,5 +1,5 @@
 ---
-title: Docker Store Trust Chain
+title: Docker Store trust chain
 keywords: trust, chain, store
 ---
 
