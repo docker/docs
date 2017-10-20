@@ -932,6 +932,20 @@ port (a random host port will be chosen).
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
 
+### scale
+
+> [Added in version 2.2 file format](compose-versioning.md#version-22)
+
+Specify the default number of containers to deploy for this service. Whenever
+you run `docker-compose up`, Compose will create or remove containers to match
+the specified number. This value can be overridden using the
+[`--scale`](/compose/reference/up.md) flag.
+
+    web:
+      image: busybox:latest
+      command: echo 'scaled'
+      scale: 3
+
 ### security_opt
 
 Override the default labeling scheme for each container.
