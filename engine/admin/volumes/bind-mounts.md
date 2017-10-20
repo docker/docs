@@ -362,6 +362,11 @@ Use **extreme** caution with these options. Bind-mounting a system directory
 such as `/home` or `/usr` with the `Z` option will render your host machine
 inoperable and you may need to relabel the host machine files by hand.
 
+> **Important**: When using bind mounts with services, selinux labels
+> (`:Z` and `:z`), as well as `:ro` are ignored. See
+> [moby/moby #32579](https://github.com/moby/moby/issues/32579) for details.
+{:.important}
+
 This example sets the `z` option to specify that multiple containers can share
 the bind mount's contents:
 
