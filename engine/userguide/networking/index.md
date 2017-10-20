@@ -86,15 +86,11 @@ fe00::0	ip6-localnet
 ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
-root@0cb243cd1293:/# ifconfig
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+root@0cb243cd1293:/# ip -4 addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
 
 root@0cb243cd1293:/#
 ```
@@ -229,25 +225,14 @@ a `#` character.
 ```none
 $ docker attach container1
 
-root@3386a527aa08:/# ifconfig
+root@3386a527aa08:/# ip -4 addr
 
-eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
-          inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
-          inet6 addr: fe80::42:acff:fe11:2/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
-          RX packets:16 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:1296 (1.2 KiB)  TX bytes:648 (648.0 B)
-
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+633: eth0@if634: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue
+    inet 172.17.0.2/16 scope global eth0
+       valid_lft forever preferred_lft forever
 ```
 
 From inside the container, use the `ping` command to test the network connection
@@ -527,8 +512,8 @@ network and user-defined bridge networks.
   `--expose` flag to `docker run`. Exposing ports is a way of documenting which
   ports are used, but **does not actually map or open any ports**. Exposing ports
   is optional.
-- You publish ports using the `--publish` or `--publish-all` flag to `docker run`. 
-  This tells Docker which ports to open on the container's network interface. 
+- You publish ports using the `--publish` or `--publish-all` flag to `docker run`.
+  This tells Docker which ports to open on the container's network interface.
   When a port is published, it is mapped to an
   available high-order port (higher than `30000`) on the host machine, unless
   you specify the port to map to on the host machine at runtime. You cannot
