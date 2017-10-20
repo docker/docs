@@ -15,7 +15,7 @@ repository, you need to log in using a Docker ID.
 Once you have a personal Docker ID, you can also create or join
 Docker Hub [Organizations and Teams](orgs.md).
 
-## Upgrading your account
+## Upgrade your account
 
 Free Docker Hub accounts include one private registry. If you need more private
 registries, you can [upgrade your account](https://hub.docker.com/account/billing-plans/) to a paid plan directly
