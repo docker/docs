@@ -1946,7 +1946,7 @@ Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-
 
 Use the host's networking stack, or no networking. Equivalent to
 `docker run --net=host` or `docker run --net=none`. Only used if you use
-`docker stack` commands. If you use the `docker compose` command,
+`docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
 The syntax for using built-in networks like `host` and `none` is a little
