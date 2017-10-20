@@ -93,7 +93,7 @@ deployment_strategy: high_availability
 ```
 
 ## devices
-List of device mappings. Use the same format as the `--device` docker client create option.
+List of device mappings. Uses the same format as the `--device` docker client create option.
 
 ```yml
 devices:
@@ -152,7 +152,7 @@ expose:
 ```
 
 ## extra_hosts
-Add hostname mappings. Use the same values as the docker client `--add-host` parameter.
+Add hostname mappings. Uses the same values as the docker client `--add-host` parameter.
 
 ```yml
 extra_hosts:
