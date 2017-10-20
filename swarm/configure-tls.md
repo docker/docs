@@ -11,7 +11,7 @@ Swarm Manager, and a Certificate Authority as shown below. All the Docker Engine
 hosts (`client`, `swarm`, `node1`, and `node2`) have a copy of the
 CA's certificate as well as their own key-pair signed by the CA.
 
-![](images/tls-1.jpg)
+![Swarm cluster, Docker client, CA server, Swarm Manager](images/tls-1.jpg)
 
 You will complete the following steps in this procedure:
 
@@ -307,7 +307,7 @@ follows on each node:
 
     When the copying is complete, each machine should have the following keys.
 
-    ![](images/tls-2.jpeg)
+    ![List of keys on each machine](images/tls-2.jpeg)
 
     Each node in your infrastructure should have the following files in the
     `/home/ubuntu/.certs/` directory:
