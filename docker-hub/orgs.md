@@ -13,7 +13,7 @@ Repository creation is limited to users in the organization owner's group. This
 allows you to distribute limited access Docker images, and to select which
 Docker Hub users can publish new images.
 
-### Creating and viewing organizations
+### Create and view organizations
 
 You can see which organizations you belong to and add new organizations by
 clicking **Organizations** in the top nav bar.
