@@ -1418,6 +1418,11 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+#### host or none
+
+Not supposed for version 2 `docker-compose` files. Use
+[network_mode](#network_mode) instead.
+
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
