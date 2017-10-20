@@ -66,7 +66,7 @@ networks, are preserved. The Docker EE package is now called `docker-ee`.
 ## Configure the btrfs filesystem
 
 By default, SLES formats the `/` filesystem using BTRFS, so **most people do not
-not need to do the steps in this section**. If the filesystem which
+not need to do the steps in this section**. If the filesystem that
 hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
 BTRFS filesystem and mount it on `/var/lib/docker/`:
 
