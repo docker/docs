@@ -4,7 +4,7 @@ keywords: 'container, storage, driver, AUFS '
 title: Use the AUFS storage driver
 ---
 
-AUFS a *union filesystem*. The `aufs` storage driver was previously the default
+AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
 storage driver used for managing images and layers on Docker for Ubuntu, and for
 Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
 and you use Docker CE, consider using the newer
