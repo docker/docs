@@ -21,17 +21,21 @@
 	{% assign assignee=page.defaultassignee%}
 {% endif %}
 <!-- Logic for 'edit this button' -->
-{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
-{% for entry in site.data.not_edited_here.overrides %}
-	{% if page.url contains entry.path %}
-		{% if entry.source %}
-			{% assign edit_url = entry.source %}
-		{% else %}
-			{% assign edit_url = "" %}
+{% if page.content-source %}
+	{% capture edit_url %}https://github.com/docker/docker.github.io/edit/master/{{ page.basehref }}/{{ page.content-source }}{% endcapture %}
+{$ else %}
+	{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
+	{% for entry in site.data.not_edited_here.overrides %}
+		{% if page.url contains entry.path %}
+			{% if entry.source %}
+				{% assign edit_url = entry.source %}
+			{% else %}
+				{% assign edit_url = "" %}
+			{% endif %}
+		{% break %}
 		{% endif %}
-	{% break %}
-	{% endif %}
-{% endfor %}
+	{% endfor %}
+{% endif %}
 
 <!-- End of logic for 'edit this button' -->
 
@@ -118,7 +122,9 @@
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
+							{% if page.ui_tabs or page.cli_tabs %}{% include ui_cli_template.html %}{% else %}
 							{{ content }}
+							{% endif %}
 							<!-- tags -->
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
