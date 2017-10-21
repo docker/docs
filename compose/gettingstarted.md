@@ -273,7 +273,7 @@ The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 
-    $ docker-compose run web env
+    $ docker-compose run composetest_web env
 
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which will also show you available commands.
 
