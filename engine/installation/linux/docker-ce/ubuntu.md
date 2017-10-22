@@ -10,7 +10,7 @@ title: Get Docker CE for Ubuntu
 
 To get started with Docker CE on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 
