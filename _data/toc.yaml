@@ -1436,6 +1436,8 @@ manuals:
           title: Upgrade offline
         - path: /datacenter/ucp/2.2/guides/admin/install/uninstall/
           title: Uninstall
+        - path: /datacenter/ucp/2.2/guides/admin/install/architecture-specific-images/
+          title: Architecture-specific images
       - sectiontitle: Configure
         section:
         - path: /datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/
