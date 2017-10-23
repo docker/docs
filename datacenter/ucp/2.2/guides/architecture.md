@@ -60,6 +60,12 @@ Once this service is running, it deploys containers with other UCP components,
 and it ensures they keep running. The UCP components that are deployed
 on a node depend on whether the node is a manager or a worker.
 
+> OS-specific component names
+>
+> UCP component names depend on the node's operating system. For example,
+> on Windows, the `ucp-agent` component is named `ucp-agent-win`.
+> [Learn about architecture-specific images](admin/architecture-specific-images.md).
+
 ### UCP components in manager nodes
 
 Manager nodes run all UCP services, including the web UI and data stores that

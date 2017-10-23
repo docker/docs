@@ -1,19 +1,19 @@
 ---
 title: Architecture-specific images
 description: Learn how to use images that are specific to particular hardware architectures in Docker Universal Control Plane.
-keywords: UCP, Docker EE, image, IBM z
+keywords: UCP, Docker EE, image, IBM z, Windows
 ---
 
 Docker Universal Control Plane deploys images for a number of different
-hardware architectures, including IBM z systems. Some architectures
-require pulling images that have specific tags indicating the target
+hardware architectures, including IBM z systems. Some architectures require
+pulling images that have specific tags or names indicating the target
 architecture.
 
 ## Tag for IBM z Systems
 
-Append the tag `-s390x` to a UCP system image to pull the appropriate image
-for IBM z Systems. For example, you can modify the CLI command for getting a
-[UCP support dump](..\..\get-support.md) to use an environment variable
+Append the string `-s390x` to a UCP system image tag to pull the appropriate
+image for IBM z Systems. For example, you can modify the CLI command for getting
+a [UCP support dump](..\..\get-support.md) to use an environment variable
 that indicates the current architecture:
 
 ```bash
@@ -27,9 +27,11 @@ docker container run --rm \
   support > docker-support.tgz
 ```
 
-In this case, the environment variable is named `_ARCH`, but you can use any 
+In this example, the environment variable is named `_ARCH`, but you can use any 
 valid shell name.
 
+## Images on Windows worker nodes
 
-
-
+Like UCP worker nodes on other architectures, Windows nodes run
+`docker/ucp-agent` and `docker/ucp-dsinfo` containers. On Windows, they're
+named `docker/ucp-agent-win` and `docker/ucp-dsinfo-win`.
