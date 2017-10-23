@@ -21,15 +21,21 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06 (Stable)
 
+[Download](https://download.docker.com/mac/stable/19661/Docker.dmg)
+
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
-  
+
 ### Docker Community Edition 17.09.0-ce-mac33 2017-10-03 (Stable)
+
+[Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
 
 * Bug fix
   - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
 
 ### Docker Community Edition 17.09.0-ce-mac32 2017-10-02 (Stable)
+
+[Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -43,7 +49,7 @@ about both kinds of releases, and download stable and edge product installers at
 * New
   - Add daemon options validation
   - VPNKit: add support for ping!
-  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled 
+  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled
   - VPNKit: bridge mode is default everywhere now
   - Transparent proxy using macOS system proxies (if defined) directly
   - GUI settings are now stored in ~/Library/Group\ Containers/group.com.docker/settings.json. daemon.json in now a file in ~/.docker/
@@ -54,7 +60,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix password encoding/decoding (docker/for-mac#2008, docker/for-mac#2016, docker/for-mac#1919, docker/for-mac#712, docker/for-mac#1220).
   - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
   - Rotate logs in the VM more often  
-  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: change protocol to support error messages reported back from the server
   - VPNKit: fix a bug which causes a socket to leak if the corresponding TCP connection is idle
     for more than 5 minutes (related to [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
   - VPNKit: improve the logging around the Unix domain socket connections
@@ -64,14 +70,17 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.06.2-ce-mac27 2017-09-06 (Stable)
 
+[Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
+
 * Upgrades
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
-### Docker Community Edition 17.06.1-ce-mac20, 2017-08-21 (stable)
+### Docker Community Edition 17.06.1-ce-mac24, 2017-08-21 (stable)
+
+[Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
 
 **Upgrades**
-
 - [Docker 17.06.1-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce-rc1)
 - Linux Kernel 4.9.36
 - AUFS 20170703
@@ -83,6 +92,8 @@ about both kinds of releases, and download stable and edge product installers at
 - Avoid unnecessary VM reboot (when changing proxy exclude, but no proxy set). Fixes [docker/for-mac#1809](https://github.com/docker/for-mac/issues/1809), [docker/for-mac#1801](https://github.com/docker/for-mac/issues/1801)
 
 ### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28 (stable)
+
+[Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
 
 **Upgrades**
 
@@ -127,36 +138,24 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12 (stable)
 
+[Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
+
 **Upgrades**
 
 - Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29 (stable)
 
-**Upgrades**
-
-- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
-
-
-### Docker Community Edition 17.03.1-ce-mac4, 2017-03-28 (stable)
-
-**Hotfixes**
-
-- Set the ethernet MTU to 1500 to prevent a hyperkit crash
-- Fix docker build on private images
-
-### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (stable)
-
-**Hotfixes**
-
-- Set the ethernet MTU to 1500 to prevent a hyperkit crash
-- Fix docker build on private images
+[Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
 
 **Upgrades**
 
 - [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (stable)
+
+[Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
 
 **New**
 
@@ -200,6 +199,8 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker for Mac 1.13.1, 2017-02-09 (stable)
 
+[Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
+
 **Upgrades**
 
 - [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
@@ -214,6 +215,8 @@ about both kinds of releases, and download stable and edge product installers at
 - Allow to reset faulty `daemon.json` through a link in advanced subpanel
 
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
+
+[Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
 
 **Upgrades**
 
@@ -265,6 +268,8 @@ underestimate the number of active connections
 
 ### Docker for Mac 1.12.5, 2016-12-20 (stable)
 
+[Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
+
 **Upgrades**
 
 - Docker 1.12.5
@@ -275,6 +280,8 @@ underestimate the number of active connections
 We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 1.12.3, 2016-11-09 (stable)
+
+[Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
 
 **Upgrades**
 
@@ -340,6 +347,8 @@ We did not distribute a 1.12.4 stable release
 - Increase default ulimit for memlock (fixes [docker/for-mac#801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
+
+[Download](https://download.docker.com/mac/stable/12133/Docker.dmg)
 
 **New**
 
@@ -419,6 +428,8 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 2016-08-11 1.12.0-a (stable)
 
+[Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
+
 This bug fix release contains osxfs improvements. The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
 events or unexpected unmounts.
@@ -433,23 +444,10 @@ events or unexpected unmounts.
 
 * osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
-### Docker for Mac 1.12.0-a, 2016-08-03 (stable)
-
-This bug fix release contains osxfs improvements. The fixed issues may have
-been seen as failures with apt-get and npm in containers, missed `inotify`
-events or unexpected unmounts.
-
-**Hotfixes**
-
-* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures) (docker/for-mac)
-
-* osxfs: fixed an issue causing some ATTRIB and CREATE `inotify` events to fail delivery and other `inotify` events to stop
-
-* osxfs: fixed an issue causing all `inotify` events to stop when an ancestor directory of a mounted directory was mounted
-
-* osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 ### Docker for Mac 1.12.0, 2016-07-28 (stable)
+
+[Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
 
 * First stable release
 
@@ -499,7 +497,7 @@ events or unexpected unmounts.
   - Linux Kernel 4.9.46
 
 * Bug fixes and minor changes
-  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: change protocol to support error messages reported back from the server
 
 ### Docker Community Edition 17.07.0-ce-mac26, 2017-09-01 (edge)
 
