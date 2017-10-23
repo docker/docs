@@ -51,6 +51,6 @@
 
 /* Apply solid white bg to images with text (on a transparent bg)
 so that night mode doesn't garble text on invert to gray */
-.white_bg {
+.white-bg {
   background-color: white;
 }
