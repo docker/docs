@@ -7,7 +7,7 @@
 */
 
 @media print
-{    
+{
     .footer
     {
         display: none !important;
@@ -49,10 +49,8 @@
 }
 
 
-<!-- Apply solid white bg to images with text (on a transparent bg) so that night mode doesn't garble text on invert to gray -->
-.white_bg { background-color: white; }
-
-
-
-
-
+/* Apply solid white bg to images with text (on a transparent bg)
+so that night mode doesn't garble text on invert to gray */
+.white_bg {
+  background-color: white;
+}
