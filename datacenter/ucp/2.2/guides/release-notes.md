@@ -60,6 +60,8 @@ upgrade your installation to the latest release.
  * Searching for images in the UCP images UI doesn't work.
  * Removing a stack may leave orphaned volumes.
  * Storage metrics are not available for Windows.
+ * You can't create a bridge network from the web UI. As a workaround use
+ `<node-name>/<network-name>`.
 
 
 ## version 2.2.2
