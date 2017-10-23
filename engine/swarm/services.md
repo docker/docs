@@ -581,6 +581,19 @@ You can also use the `constraint` service-level key in a `docker-compose.yml`
 file.
 
 You can specify multiple placement constraints, and they are `AND`ed together.
+
+The following example limits the service to run on nodes with `region` set to
+`east` and where `type` is not set to `devel`:
+
+```bash
+$ docker service create \
+  --name my-nginx \
+  --replicas 5 \
+  --constraint region==east \
+  --constraint type!=devel \
+  nginx
+```
+
 You can also use placement constraints in conjunction with placement preferences
 and CPU/memory constraints. Be careful not to use settings that will not be
 possible to fulfill.
