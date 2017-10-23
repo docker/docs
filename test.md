@@ -302,7 +302,7 @@ You can nest captures within each other to represent more complex logic with Liq
 
 This is an image with text on a transparent background that failed in night mode (b/c the text is garbled). To fix this, we apply a white background inline (which is converted to grayscale in _scss/_night-mode.scss).
 
-![img](machine/img/provision-use-case.png){: .white-bg' }
+![img](machine/img/provision-use-case.png){: .white-bg }
 
 ## Bootstrap and CSS tricks
 
