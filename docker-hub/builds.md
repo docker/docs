@@ -21,7 +21,7 @@ document guides you through the process of working with automated builds.
 
 ## Prerequisites
 
-To use automated builds you must have an [account on Docker Hub](accounts.md)
+To use automated builds, you must have an [account on Docker Hub](accounts.md)
 and on the hosted repository provider (GitHub or Bitbucket). If you have
 previously linked your Github or Bitbucket account, you must have chosen the
 Public and Private connection type.
@@ -85,7 +85,7 @@ repositories using the `docker push` command.
     lives at the root of your source. When it builds an image, Docker tags it with
     the branch name.
 
-6. Customize the automated build by pressing the Click here to customize this behavior link.
+6. Customize the automated build by pressing the **Click here to customize** this behavior link.
 
     ![Create dialog](images/create-dialog.png)
 
@@ -95,7 +95,7 @@ repositories using the `docker push` command.
 
     ![Create dialog](images/regex-help.png)
 
-9. Click Create.
+9. Click **Create**.
 
     The system displays the home page for your AUTOMATED BUILD.
 
