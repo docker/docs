@@ -45,7 +45,7 @@ and `--log-opt` options to the Docker daemon:
 
 ```bash
 dockerd
-  -–log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+  --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
 ```
 
 To make the configuration permanent, you can configure it in `/etc/docker/daemon.json`:
@@ -64,7 +64,7 @@ You can set the logging driver for a specific container by setting the
 
 ```bash
 $ docker run \
-      -–log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+      --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
       alpine echo hello world
 ```
 
@@ -95,5 +95,3 @@ $ docker run -dit \
              --log-opt gelf-address=udp://192.168.0.42:12201 \
              alpine sh
 ```
-
-
