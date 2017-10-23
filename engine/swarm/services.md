@@ -5,7 +5,7 @@ title: Deploy services to a swarm
 toc_max: 4
 ---
 
-Swarm services uses a *declarative* model, which means that you define the
+Swarm services use a *declarative* model, which means that you define the
 desired state of the service, and rely upon Docker to maintain this state. The
 state includes information such as (but not limited to):
 
@@ -478,25 +478,27 @@ placement of services on different nodes.
 
 - You can specify whether the service needs to run a specific number of replicas
   or should run globally on every worker node. See
-  [_replicated or global services](#replicated-or-global-services).
+  [Replicated or global services](#replicated-or-global-services).
 
 - You can configure the service's
   [CPU or memory requirements](#reserve-memory-or-cpus-for-a-service), and the
   service will only run on nodes which can meet those requirements.
 
-- You can configure the service to run only on nodes with specific (arbitrary)
-  metadata set, and **cause the deployment to fail if appropriate nodes do not
-  exist**. For instance, you could specify that your service should only run on
-  nodes where an arbitrary label `pci_compliant` is set to `true`. This is
-  referred to as [_placement constraints_](#placement-constraints).
+- [Placement constraints](#placement-constraints) let you configure the service
+  to run only on nodes with specific (arbitrary) metadata set, and cause the
+  deployment to fail if appropriate nodes do not exist. For instance, you can
+  specify that your service should only run on nodes where an arbitrary label
+  `pci_compliant` is set to `true`.
 
-- A [_placement preference_](#placement-preferences) is a little different from
-  a plaacement constraint. You can give each node an arbitrary label with a
-  range of values, and spread your service's tasks across those nodes using an
-  algorithm (currently only `spread`, which tries to place them evenly). For
-  instance, if you label each node with `rack` and a value from `1-10`, then
-  specify a placement preference keyed on `rack`, then service tasks will be
-  placed as evenly as possible across all nodes with the label `rack`.
+- [Placement preferences](#placement-preferences) let you apply an arbitrary
+  label with a range of values to each node, and spread your service's tasks
+  across those nodes using an algorithm. Currently, the only supported algorithm
+  is `spread`, which  which tries to place them evenly. For instance, if you
+  label each node with a label `rack` which has a value from 1-10, then specify
+  a placement preference keyed on `rack`, then service tasks are placed as
+  evenly as possible across all nodes with the label `rack`, after taking other
+  placement constraints, placement preferences, and other node-specific
+  limitations into account.
 
   Unlike constraints, placement preferences are best-effort, and a service will
   not fail to deploy if no nodes can satisfy the preference.
@@ -564,7 +566,7 @@ labels to ensure that your service is deployed to the appropriate swarm nodes.
 Use placement constraints to control the nodes a service can be assigned to. In
 the following example, the service only runs on nodes with the
 [label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata)
-`pci_compliant` set to `true`. If no appropriately-labelled nodes are available,
+`region` set to `east`. If no appropriately-labelled nodes are available,
 deployment will fail. The `--constraint` flag uses an equality operator
 (`==` or `!=`). It is possible that all services will run on the same node, or
 each node will only run one replica, or that some nodes won't run any replicas.
@@ -580,10 +582,9 @@ $ docker service create \
 You can also use the `constraint` service-level key in a `docker-compose.yml`
 file.
 
-You can specify multiple placement constraints, and they are `AND`ed together.
-
-The following example limits the service to run on nodes with `region` set to
-`east` and where `type` is not set to `devel`:
+If you specify multiple placement constraints, the service will only deploy onto
+nodes where they are all met. The following example limits the service to run on
+nodes with `region` set to `east` and where `type` is not set to `devel`:
 
 ```bash
 $ docker service create \
