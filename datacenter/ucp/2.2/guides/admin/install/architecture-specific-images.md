@@ -30,8 +30,12 @@ docker container run --rm \
 In this example, the environment variable is named `_ARCH`, but you can use any 
 valid shell name.
 
-## Images on Windows worker nodes
+## OS-specific component names
 
-Like UCP worker nodes on other architectures, Windows nodes run
-`docker/ucp-agent` and `docker/ucp-dsinfo` containers. On Windows, they're
-named `docker/ucp-agent-win` and `docker/ucp-dsinfo-win`.
+Some UCP component names depend on the node's operating system. Use the
+following table to ensure that you're pulling the right images for each node.
+
+| UCP component base name | Windows name   | IBM z Systems name |
+|-------------------------|----------------|--------------------|
+| ucp-agent               | ucp-agent-win  | ucp-agent-s390x    |
+| ucp-dsinfo              | ucp-dsinfo-win | ucp-dsinfo-s390x   |
