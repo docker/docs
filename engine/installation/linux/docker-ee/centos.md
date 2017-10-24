@@ -1,9 +1,9 @@
 ---
-description: Instructions for installing Docker EE on CentOS
+description: Install, upgrade and uninstall Docker EE on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/centos/
-title: Get Docker EE for CentOS
+title: Install, upgrade and uninstall Docker EE on CentOS
 ---
 
 {% assign linux-dist = "centos" %}
@@ -14,20 +14,22 @@ title: Get Docker EE for CentOS
 
 {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 
-## Prerequisites
+## Install Docker EE on CentOS
+
+### Prerequisites
 
 Docker CE users should go to
 [Get docker CE for CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/)
 **instead of this topic**.
 
-### Docker EE repository URL
+#### Docker EE repository URL
 
 {% include ee-linux-install-reuse.md section="ee-url-intro" %}
 
-### OS requirements
+#### OS requirements
 
-To install Docker EE, you need a maintained version of CentOS 7. Archived
-versions aren't supported or tested.
+To install Docker EE, you need a host running a non-archived version of CentOS 7. Archived
+CentOS versions are not supported or tested.
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
@@ -38,10 +40,13 @@ Docker EE. On production systems, you must use `direct-lvm` mode, which requires
 one or more dedicated block devices. Fast storage such as solid-state media
 (SSD) is recommended.
 
-### Uninstall old versions
+#### Uninstall old versions (if present)
 
-Older versions of Docker were called `docker` or `docker-engine`. In addition,
+Older versions of Docker were called `docker` or `docker-engine`. These should be removed. Also,
 if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
+
+The contents of `/var/lib/docker/`, including images, containers, volumes, and
+networks, are preserved when moving to Docker EE.
 
 ```bash
 $ sudo yum remove docker \
@@ -54,14 +59,11 @@ $ sudo yum remove docker \
 
 It's OK if `yum` reports that none of these packages are installed.
 
-The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker EE package is now called `docker-ee`.
-
 ## Install Docker EE
 
 {% include ee-linux-install-reuse.md section="ways-to-install" %}
 
-### Install using the repository
+### Install using online package repository
 
 Before you install Docker EE for the first time on a new host machine, you need
 to set up the Docker EE repository. Afterward, you can install and update Docker
@@ -75,15 +77,17 @@ EE from the repository.
 
 {% include ee-linux-install-reuse.md section="install-using-yum-repo" %}
 
-#### Upgrade Docker EE
-
-{% include ee-linux-install-reuse.md section="upgrade-using-yum-repo" %}
-
 ### Install from a package
 
 {% include ee-linux-install-reuse.md section="install-using-yum-package" %}
 
-#### Upgrade Docker EE
+## Upgrade Docker EE
+
+### Upgrade Docker EE using online package repo
+
+{% include ee-linux-install-reuse.md section="upgrade-using-yum-repo" %}
+
+### Upgrade Docker EE using package
 
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-package" %}
 
