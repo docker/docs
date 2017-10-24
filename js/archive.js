@@ -29,10 +29,8 @@ if (window.navigator.onLine) {
     $(document).scroll(function() {
       if ( $( 'nav' ).hasClass( 'affix' ) ) {
         $('#archive-butterbar').addClass('fixed').removeClass('top');
-        console.log("Fixed!");
       } else {
         $('#archive-butterbar').addClass('top').removeClass('fixed');
-        console.log("Top!");
       }
     });
   });
