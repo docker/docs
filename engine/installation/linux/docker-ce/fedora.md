@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 title: Get Docker CE for Fedora
+toc_max: 4
 ---
 
 To get started with Docker CE on Fedora, make sure you
