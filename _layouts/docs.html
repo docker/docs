@@ -192,19 +192,23 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<script defer src="/js/menu.js"></script>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script language="javascript">
+	// Assume there is no butterBar before loading the archive JS
+	var hasButterBar = false;
+	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
 	<script defer src="/js/docs.js"></script>
 	<script language="javascript">
 	jQuery(document).ready(function(){
-			$.getJSON( "/metadata.txt", function( data ) {
-				metadata = data;
-				hookupTOCEvents();
-				$.getJSON( "/glossary.txt", function( data ) {
-					glossary = data;
-					renderTagsPage();
-				});
+		$.getJSON( "/metadata.txt", function( data ) {
+			metadata = data;
+			hookupTOCEvents();
+			$.getJSON( "/glossary.txt", function( data ) {
+				glossary = data;
+				renderTagsPage();
 			});
+		});
 	});
 	</script>
 </body>
