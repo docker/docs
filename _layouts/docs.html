@@ -118,7 +118,53 @@
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 							{% if page.enterprise %}{% include ee_dropdown.html %}{% endif %}
+							{% if page.ui_tabs or page.cli_tabs %}
+								{{ page.description | markdownify }}
+
+								{% if page.ui_tabs %}
+
+								<h2>{{ page.title }} in the UI</h2>
+
+								<blockquote>
+								<p>These instructions require Docker Enterprise</p>
+								<p>The UI instructions shown here are for the dashboard provided with
+								<a href="/enterprise/#docker-ee-feature-tiers">Docker Enterprise Standard</a>
+								or higher.</p>
+								</blockquote>
+
+								<ul class="nav nav-tabs">{% for tab in page.ui_tabs %}
+								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#ui-{{ tab.version | slugify }}" id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %} (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>{% endfor %}
+								</ul>
+								<div class="tab-content">{% for tab in page.ui_tabs %}
+								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								</div>
+
+								{% endif %}
+								{% if page.cli_tabs %}
+
+								<h2>{{ page.title }} in the CLI</h2>
+
+								<ul class="nav nav-tabs">{% for tab in page.cli_tabs %}
+								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#cli-{{ tab.version | slugify }}" id="cli-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
+								</ul>
+								<div class="tab-content">{% for tab in page.cli_tabs %}
+								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								</div>
+
+								{% endif %}
+
+								{% if page.next_steps %}
+
+								<h2>Next steps</h2>
+
+								<ul>
+								{% for step in page.next_steps %}  <li><a href="{{ step.path }}">{{ step.title }}</a></li>
+								{% endfor %}
+								</ul>
+								{% endif %}
+							{% else %}
 							{{ content }}
+							{% endif %}
 							<!-- tags -->
 							{% unless page.notags == true %}
 							{% assign keywords = page.keywords | split:"," %}
