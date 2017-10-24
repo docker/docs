@@ -493,7 +493,7 @@ placement of services on different nodes.
 - [Placement preferences](#placement-preferences) let you apply an arbitrary
   label with a range of values to each node, and spread your service's tasks
   across those nodes using an algorithm. Currently, the only supported algorithm
-  is `spread`, which  which tries to place them evenly. For instance, if you
+  is `spread`, which tries to place them evenly. For instance, if you
   label each node with a label `rack` which has a value from 1-10, then specify
   a placement preference keyed on `rack`, then service tasks are placed as
   evenly as possible across all nodes with the label `rack`, after taking other
