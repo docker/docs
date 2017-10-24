@@ -434,6 +434,18 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.10.0-ce-win36 2017-10-24 (Edge)
+
+* Upgrades
+  - [Docker 17.10.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
+  - [Docker compose 1.17.0-rc1](https://github.com/docker/compose/releases/tag/1.17.0-rc1)
+
+* New
+  - VM entirely built with Linuxkit
+  - Experimental support for Microsoft Linux Containers On Windows, on Windows 10 RS3.
+  
+
 ### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
 
 * Bug fixes
