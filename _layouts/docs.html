@@ -21,21 +21,17 @@
 	{% assign assignee=page.defaultassignee%}
 {% endif %}
 <!-- Logic for 'edit this button' -->
-{% if page.content-source %}
-	{% capture edit_url %}https://github.com/docker/docker.github.io/edit/master/{{ page.basehref }}/{{ page.content-source }}{% endcapture %}
-{$ else %}
-	{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
-	{% for entry in site.data.not_edited_here.overrides %}
-		{% if page.url contains entry.path %}
-			{% if entry.source %}
-				{% assign edit_url = entry.source %}
-			{% else %}
-				{% assign edit_url = "" %}
-			{% endif %}
-		{% break %}
+{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
+{% for entry in site.data.not_edited_here.overrides %}
+	{% if page.url contains entry.path %}
+		{% if entry.source %}
+			{% assign edit_url = entry.source %}
+		{% else %}
+			{% assign edit_url = "" %}
 		{% endif %}
-	{% endfor %}
-{% endif %}
+	{% break %}
+	{% endif %}
+{% endfor %}
 
 <!-- End of logic for 'edit this button' -->
 
