@@ -38,7 +38,7 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 To install Docker EE, you need the 64-bit version of SLES 12.x. Docker EE is not
 supported on OpenSUSE.
 
-The only supported storage driver for Docker EE on SLES is `btrfs`, which will be
+The only supported storage driver for Docker EE on SLES is Btrfs, which will be
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
 BTRFS filesystem.
 
@@ -65,16 +65,16 @@ It's OK if `zypper` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker EE package is now called `docker-ee`.
 
-## Configure the btrfs filesystem
+## Configure the Btrfs filesystem
 
-By default, SLES formats the `/` filesystem using BTRFS, so **most people do not
+By default, SLES formats the `/` filesystem using Btrfs, so **most people do not
 not need to do the steps in this section**. If you use OS images from a cloud
 provider, you may need to do this step. If the filesystem that
 hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
 BTRFS filesystem and mount it on `/var/lib/docker/`.
 
 1.  Check whether `/` (or `/var/` or `/var/lib/` or `/var/lib/docker/` if they
-    are separate mount points) are formatted using `btrfs`. If you do not have
+    are separate mount points) are formatted using Btrfs. If you do not have
     separate mount points for any of these, a duplicate result for `/` will be
     returned.
 
@@ -85,12 +85,12 @@ BTRFS filesystem and mount it on `/var/lib/docker/`.
     You need to complete the rest of these steps **only if one of the following
     is true**:
 
-    - You have a separate `/var/` filesystem that is not formatted with `btrfs`
+    - You have a separate `/var/` filesystem that is not formatted with Btrfs
     - You do not have a separate `/var/` or `/var/lib/` or `/var/lib/docker/`
-      filesystem and `/` is not formatted with `btrfs`
+      filesystem and `/` is not formatted with Btrfs
 
-    If `/var/lib/docker` is apready a separate mount point and is not formatted
-    with `btrfs`, back up its contents so that you can restore them after step
+    If `/var/lib/docker` is already a separate mount point and is not formatted
+    with Btrfs, back up its contents so that you can restore them after step
     3.
 
 2.  Format your dedicated block device or devices as a Btrfs filesystem. This
@@ -215,7 +215,7 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
+4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
     the `/` filesystem is not using BTRFS.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
@@ -292,8 +292,8 @@ need to download a new file each time you want to upgrade Docker EE.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
-    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
+    the `/` filesystem is not using Btrfs.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
     Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
@@ -351,7 +351,7 @@ instead of `zypper install`, and pointing to the new file.
     ```
 
     If you used a separate BTRFS filesystem to host the contents of
-    `/var/lib/docker/`, you can unmount and format the `btrfs` filesystem.
+    `/var/lib/docker/`, you can unmount and format the Btrfs filesystem.
 
 You must delete any edited configuration files manually.
 
