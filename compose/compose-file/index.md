@@ -741,6 +741,9 @@ updates.
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 - `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks will briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
 
+> **Note**: `order` is only supported for v3.4 and higher of the compose
+file format.
+
 ```none
 version: '3.4'
 services:
