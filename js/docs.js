@@ -286,6 +286,9 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+// Enable glossary link popovers
+$('.glossLink').popover();
+
 // sync tabs with the same data-group
 window.onload = function() {
   $('.nav-tabs > li > a').click(function(e) {
@@ -293,5 +296,3 @@ window.onload = function() {
     $('.nav-tabs > li > a[data-group="'+ group +'"]').tab('show');
   })
 };
-
-$('.glossLink').popover();
