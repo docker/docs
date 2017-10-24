@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
 title: Get Docker EE for SLES
+toc_max: 4
 ---
 
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
@@ -73,7 +74,7 @@ BTRFS filesystem and mount it on `/var/lib/docker/`:
 1.  Format your dedicated block device or devices as a Btrfs filesystem. This
     example assumes that you are using two block devices called `/dev/xvdf` and
     `/dev/xvdg`.
-    
+
     > Double-check the block device names because this is a
     destructive operation.
     {:.warning}
