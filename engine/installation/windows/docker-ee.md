@@ -26,7 +26,10 @@ on Windows Server 2016 and you have a
 
 ## Install Docker EE
 
->**Windows Server 1709** Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues. To use UCP, for now please use the current LTSB Windows release and not 1709.
+>Windows Server 1709
+>
+>Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
+>To use UCP, for now please use the current LTSB Windows release and not 1709.
 
 
 Docker EE for Windows requires Windows Server 2016. See
