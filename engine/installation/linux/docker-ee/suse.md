@@ -42,6 +42,26 @@ The only supported storage driver for Docker EE on SLES is Btrfs, which will be
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
 BTRFS filesystem.
 
+#### Firewall configuration
+
+Docker creates a `DOCKER` iptables chain when it starts. The SUSE firewall may
+block access to this chain, which can prevent you from being able to run
+containers with published ports. You may see errors such as the following:
+
+```none
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+docker: Error response from daemon: driver failed programming external
+        connectivity on endpoint adoring_ptolemy
+        (0bb5fa80bc476f8a0d343973929bb3b7c039fc6d7cd30817e837bc2a511fce97):
+        (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 80 -j DNAT --to-destination 172.17.0.2:80 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1)).
+```
+
+If you see errors like this, adjust the start-up script order so that the
+firewall is started before Docker, and Docker stops before the firewall stops.
+See the
+[SLES documentation on init script order](https://www.suse.com/documentation/sled11/book_sle_admin/data/sec_boot_init.html).
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If you use OS
@@ -251,6 +271,9 @@ commands. Continue to [Linux postinstall](linux-postinstall.md) to configure the
 graph storage driver, allow non-privileged users to run Docker commands, and for
 other optional configuration steps.
 
+> **Important**: Be sure Docker is configured to start after the system
+> firewall. See [Firewall configuration](#firewall-configuration).
+
 #### Upgrade Docker EE
 
 To upgrade Docker EE:
@@ -327,6 +350,9 @@ Docker EE is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
+
+> **Important**: Be sure Docker is configured to start after the system
+> firewall. See [Firewall configuration](#firewall-configuration).
 
 #### Upgrade Docker EE
 
