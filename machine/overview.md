@@ -49,13 +49,13 @@ Docker Machine has these two broad use cases.
 
 * **I have an older desktop system and want to run Docker on Mac or Windows**
 
-  ![Docker Machine on Mac and Windows](img/machine-mac-win.png)
+  ![Docker Machine on Mac and Windows](img/machine-mac-win.png){: .white-bg}
 
   If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps, then you need Docker Machine in order to "run Docker" (that is, Docker Engine) locally. Installing Docker Machine on a Mac or Windows box with the [Docker Toolbox](/toolbox/overview.md) installer provisions a local virtual machine with Docker Engine, gives you the ability to connect it, and run `docker` commands.
 
 *  **I want to provision Docker hosts on remote systems**
 
-  ![Docker Machine for provisioning multiple systems](img/provision-use-case.png)
+  ![Docker Machine for provisioning multiple systems](img/provision-use-case.png){: .white-bg}
 
   Docker Engine runs natively on Linux systems. If you have a Linux box as your
   primary system, and want to run `docker` commands, all you need to do is
@@ -91,7 +91,7 @@ on Mac or Windows) or remote (as when you use Machine to provision Dockerized
 hosts on cloud providers). The Dockerized hosts themselves can be thought of,
 and are sometimes referred to as, managed "**_machines_**".
 
-![Docker Machine](img/machine.png)
+![Docker Machine](img/machine.png){: .white-bg}
 
 ## Where to go next
 
