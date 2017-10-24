@@ -298,12 +298,11 @@ You can nest captures within each other to represent more complex logic with Liq
 - In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
 - If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
 
-### Image Formatting
+### Image formatting
 
-This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline (with a class defined in css/temp.css: `.white-bg { background-color: white;}`
-) and a class defined in _scss/_night-mode.css that maintains this background: `img.white-bg { background-color: white; }`.
+This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
 
-![img](machine/img/provision-use-case.png){: .white-bg}
+![alt_text](machine/img/provision-use-case.png){: .white-bg}
 
 ## Bootstrap and CSS tricks
 
