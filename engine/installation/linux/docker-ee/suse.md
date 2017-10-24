@@ -44,11 +44,13 @@ BTRFS filesystem.
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+Older versions of Docker were called `docker` or `docker-engine`. If you use OS
+images from a cloud provider, you may need to remove the `runc` package, which
+conflicts with Docker EE. If these are installed, uninstall them, along with
+associated dependencies.
 
 ```bash
-$ sudo zypper rm docker docker-engine
+$ sudo zypper rm docker docker-engine runc
 ```
 
 If removal of the `docker-engine` package fails, use the following command
@@ -66,14 +68,35 @@ networks, are preserved. The Docker EE package is now called `docker-ee`.
 ## Configure the btrfs filesystem
 
 By default, SLES formats the `/` filesystem using BTRFS, so **most people do not
-not need to do the steps in this section**. If the filesystem that
+not need to do the steps in this section**. If you use OS images from a cloud
+provider, you may need to do this step. If the filesystem that
 hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
-BTRFS filesystem and mount it on `/var/lib/docker/`:
+BTRFS filesystem and mount it on `/var/lib/docker/`.
 
-1.  Format your dedicated block device or devices as a Btrfs filesystem. This
+1.  Check whether `/` (or `/var/` or `/var/lib/` or `/var/lib/docker/` if they
+    are separate mount points) are formatted using `btrfs`. If you do not have
+    separate mount points for any of these, a duplicate result for `/` will be
+    returned.
+
+    ```bash
+    $ df -T / /var /var/lib /var/lib/docker
+    ```
+
+    You need to complete the rest of these steps **only if one of the following
+    is true**:
+
+    - You have a separate `/var/` filesystem that is not formatted with `btrfs`
+    - You do not have a separate `/var/` or `/var/lib/` or `/var/lib/docker/`
+      filesystem and `/` is not formatted with `btrfs`
+
+    If `/var/lib/docker` is apready a separate mount point and is not formatted
+    with `btrfs`, back up its contents so that you can restore them after step
+    3.
+
+2.  Format your dedicated block device or devices as a Btrfs filesystem. This
     example assumes that you are using two block devices called `/dev/xvdf` and
-    `/dev/xvdg`.
-    
+    `/dev/xvdg`. **Make sure you are using the right device names.**
+
     > Double-check the block device names because this is a
     destructive operation.
     {:.warning}
@@ -85,7 +108,7 @@ BTRFS filesystem and mount it on `/var/lib/docker/`:
     There are many more options for Btrfs, including striping and RAID. See the
     [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
 
-2.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
+3.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
     can specify any of the block devices used to create the Btrfs filesystem.
 
     ```bash
@@ -94,6 +117,9 @@ BTRFS filesystem and mount it on `/var/lib/docker/`:
 
     Don't forget to make the change permanent across reboots by adding an
     entry to `/etc/fstab`.
+
+4.  If `/var/lib/docker` previously existed and you backed up its contents
+    during step 1, restore them onto `/var/lib/docker`.
 
 
 ## Install Docker EE
