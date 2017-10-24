@@ -69,7 +69,7 @@ interface.
 >
 >    $ sysctl net.ipv6.conf.eth0.accept_ra=2
 
-![](images/ipv6_basic_host_config.svg)
+![IPv6 basic host configuration](images/ipv6_basic_host_config.svg)
 
 Every new container will get an IPv6 address from the defined subnet, and a
 default route will be added on `eth0` in the container via the address specified
@@ -104,7 +104,7 @@ Often servers or virtual machines get a `/64` IPv6 subnet assigned (e.g.
 Docker a `/80` subnet while using a separate `/80` subnet for other applications
 on the host:
 
-![](images/ipv6_slash64_subnet_config.svg)
+![IPv6 /64 subnet configuration](images/ipv6_slash64_subnet_config.svg)
 
 In this setup the subnet `2001:db8:23:42::/64` with a range from
 `2001:db8:23:42:0:0:0:0` to `2001:db8:23:42:ffff:ffff:ffff:ffff` is attached to
@@ -152,7 +152,7 @@ The Docker subnet is within the subnet managed by your router and connected to
 found within the router subnet, and the router can communicate with these
 containers directly.
 
-![](images/ipv6_ndp_proxying.svg)
+![IPv6 NDP proxying](images/ipv6_ndp_proxying.svg)
 
 When the router wants to send an IPv6 packet to the first container, it
 transmits a _neighbor solicitation request_, asking "Who has `2001:db8::c009`?"
@@ -197,7 +197,7 @@ Using routable IPv6 addresses allows you to realize communication between
 containers on different hosts. Let's have a look at a simple Docker IPv6 cluster
 example:
 
-![](images/ipv6_switched_network_example.svg)
+![IPv6 switched network example](images/ipv6_switched_network_example.svg)
 
 The Docker hosts are in the `2001:db8:0::/64` subnet. Host1 is configured to
 provide addresses from the `2001:db8:1::/64` subnet to its containers. It has
@@ -246,7 +246,7 @@ routing information about the Docker subnets. When you add or remove a host to
 this environment you just have to update the routing table in the router - not
 on every host.
 
-![](images/ipv6_routed_network_example.png)
+![IPv6 routed network example](images/ipv6_routed_network_example.png)
 
 In this scenario containers of the same host can communicate directly with each
 other. The traffic between containers on different hosts will be routed via
