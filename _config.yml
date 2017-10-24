@@ -58,7 +58,7 @@ collections:
     output: true
 
 gems:
-#  - jekyll-redirect-from
+  - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-relative-links
 
