@@ -36,11 +36,11 @@ this decision, there are three high-level factors to consider:
       environments, because `loopback-lvm`, while zero-configuration, has very
       poor performance.
 
-  The selection order is defined in Moby's source code. You can see the order
+  The selection order is defined in Docker's source code. You can see the order
   by looking at
-  [the source code](https://github.com/docker/docker-ce/blob/master/components/engine/daemon/graphdriver/driver_linux.go#L54-L63).
-  The order may vary slightly by version. Select the branch for the version you
-  use to verify the storage driver order.
+  [the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L54-L63)
+  You can use the branch selector at the top of the file viewer to choose a
+  different branch, if you run a different version of Docker.
   {: id="storage-driver-order" }
 
 - Your choice may be limited by your Docker edition, operating system, and
