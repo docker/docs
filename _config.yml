@@ -57,7 +57,7 @@ collections:
   samples:
     output: true
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-relative-links
