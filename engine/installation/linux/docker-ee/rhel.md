@@ -6,6 +6,7 @@ redirect_from:
 - /installation/rhel/
 - /engine/installation/linux/rhel/
 title: Get Docker EE for Red Hat Enterprise Linux
+toc_max: 4
 ---
 
 {% assign linux-dist = "rhel" %}

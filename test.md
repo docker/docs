@@ -274,6 +274,8 @@ page or displaying content as "cards".
 
 ## Jekyll / Liquid tricks
 
+### Assignment
+
 This paragraph is centered and colored green by setting CSS directly on the element.
 **Even though you can do this and it's sometimes the right way to go, remember that if
 we re-skin the site, any inline styles will need to be dealt with manually!**
@@ -295,6 +297,12 @@ You can nest captures within each other to represent more complex logic with Liq
 - Things set in the page's metadata, either via the defaults in `_config.yml` or per page, are available as page variables, like `{{ page.title }}`.
 - In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
 - If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
+
+### Image formatting
+
+This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
+
+![alt_text](machine/img/provision-use-case.png){: .white-bg}
 
 ## Bootstrap and CSS tricks
 

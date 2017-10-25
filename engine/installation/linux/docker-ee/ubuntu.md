@@ -6,6 +6,7 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 title: Get Docker EE for Ubuntu
+toc_max: 4
 ---
 
 To get started with Docker EE on Ubuntu, make sure you

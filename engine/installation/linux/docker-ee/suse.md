@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
 title: Get Docker EE for SLES
+toc_max: 4
 ---
 
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you

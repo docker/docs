@@ -4,6 +4,7 @@ keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgr
 redirect_from:
 - /engine/installation/centos/
 title: Get Docker EE for CentOS
+toc_max: 4
 ---
 
 {% assign linux-dist = "centos" %}

@@ -493,7 +493,7 @@ placement of services on different nodes.
 - [Placement preferences](#placement-preferences) let you apply an arbitrary
   label with a range of values to each node, and spread your service's tasks
   across those nodes using an algorithm. Currently, the only supported algorithm
-  is `spread`, which  which tries to place them evenly. For instance, if you
+  is `spread`, which tries to place them evenly. For instance, if you
   label each node with a label `rack` which has a value from 1-10, then specify
   a placement preference keyed on `rack`, then service tasks are placed as
   evenly as possible across all nodes with the label `rack`, after taking other
@@ -501,7 +501,15 @@ placement of services on different nodes.
   limitations into account.
 
   Unlike constraints, placement preferences are best-effort, and a service will
-  not fail to deploy if no nodes can satisfy the preference.
+  not fail to deploy if no nodes can satisfy the preference. If you specify a
+  placement preference for a service, nodes that match that preference are
+  ranked higher when the swarm managers decide which nodes should run the
+  service tasks. Other factors, such as high availability of the service,
+  will also factor into which nodes are scheduled to run service tasks. For
+  example, if you have N nodes with the rack label (and then some others), and
+  your service is configured to run N+1 replicas, the +1 will be scheduled on a
+  node that doesn't already have the service on it if there is one, regardless
+  of whether that node has the `rack` label or not.
 
 
 #### Replicated or global services
@@ -509,7 +517,9 @@ placement of services on different nodes.
 Swarm mode has two types of services: replicated and global. For replicated
 services, you specify the number of replica tasks for the swarm manager to
 schedule onto available nodes. For global services, the scheduler places one
-task on each available node.
+task on each available node that meets the service's
+[placement constraints](#placement-constraints) and
+[resource requirements](#reserve-cpu-or-memory-for-a-service).
 
 You control the type of service using the `--mode` flag. If you don't specify a
 mode, the service defaults to `replicated`. For replicated services, you specify
@@ -568,8 +578,11 @@ the following example, the service only runs on nodes with the
 [label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata)
 `region` set to `east`. If no appropriately-labelled nodes are available,
 deployment will fail. The `--constraint` flag uses an equality operator
-(`==` or `!=`). It is possible that all services will run on the same node, or
-each node will only run one replica, or that some nodes won't run any replicas.
+(`==` or `!=`). For replicated services, it is possible that all services will
+run on the same node, or each node will only run one replica, or that some nodes
+won't run any replicas. For global services, the service will run on every node
+that meets the placement constraint and any
+[resource requirements](#reserve-cpu-or-memory-for-a-service).
 
 ```bash
 $ docker service create \
@@ -584,12 +597,12 @@ file.
 
 If you specify multiple placement constraints, the service will only deploy onto
 nodes where they are all met. The following example limits the service to run on
-nodes with `region` set to `east` and where `type` is not set to `devel`:
+all nodes where `region` is set to `east` and `type` is not set to `devel`:
 
 ```bash
 $ docker service create \
   --name my-nginx \
-  --replicas 5 \
+  --global \
   --constraint region==east \
   --constraint type!=devel \
   nginx
@@ -614,6 +627,8 @@ you lose a rack, the service will still be running on nodes on other racks.
 Placement preferences are not strictly enforced. If no node has the label
 you specify in your preference, the service will be deployed as though the
 preference were not set.
+
+> Placement preferences are ignored for global services.
 
 The following example sets a preference to spread the deployment across nodes
 based on the value of the `datacenter` label. If some nodes have

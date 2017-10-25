@@ -6,6 +6,7 @@ redirect_from:
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 title: Get Docker CE for Debian
+toc_max: 4
 ---
 
 To get started with Docker CE on Debian, make sure you
