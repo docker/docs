@@ -1,0 +1,13 @@
+{% assign prod_title = include.prod_title %}
+{% assign prod_url = include.prod_url %}
+<script>
+$('head').append('<title>{{ prod_title }}</title>');
+$('head').append('<meta http-equiv="refresh" content="20; URL='https://docs.docker.com/{{ prod_url }}/'" />');
+</script>
+
+<h1>{{ prod_title }}</h1>
+<p>You are viewing an archive branch of the <a href="https://docs.docker.com/">Docker documentation</a>,
+  but documentation about {{ prod_title }} is only published in the current version. If you are not
+  redirected automatically, go to
+  <a href="https://docs.docker.com/{{ prod_url }}/">https://docs.docker.com/{{ prod_url }}/</a>.</p>
+</p>
