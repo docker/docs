@@ -116,7 +116,6 @@ function eraseCookie(name) {
 }
 
 if (readCookie("night") == "true") {
-  applyNight();
   $('#switch-style').prop('checked', true);
 } else {
   applyDay();
