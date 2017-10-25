@@ -299,7 +299,7 @@ services which publish ports, such as a WordPress service which publishes port
 
     ```bash
     $ docker network create \
-      -d overlay \
+      --driver overlay \
       --ingress \
       --subnet=10.11.0.0/16 \
       --gateway=10.11.0.2 \
