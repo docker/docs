@@ -18,7 +18,7 @@ shared volumes.
 
 The container's main process is responsible for managing all processes that it
 starts. In some cases, the main process isn't well-designed, and doesn't handle
-"reaping" (stopping) child processes gracefully when the container exists. If
+"reaping" (stopping) child processes gracefully when the container exits. If
 your process falls into this category, you can use the `--init` option when you
 run the container. The `--init` flag inserts a tiny init-process into the
 container as the main process, and handles reaping of all processes when the
