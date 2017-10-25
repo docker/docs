@@ -251,20 +251,6 @@ Introduces the following additional parameters:
 - [`configs`](/compose/compose-file/index.md#configs)
 - [deploy `endpoint_mode`](/compose/compose-file/index.md#endpointmode)
 
-### Version 3.4
-
-An upgrade of [version 3](#version-3) that introduces new parameters only available with Docker version **17.06.0+**, and higher.
-
-Introduces these additional parameters:
-
-- `cache_from`, `network`, and `target` options in [build](/compose/compose-file/index.md#build) configurations
-
-- `order` parameter in the [update_config](/compose/compose-file/index.md#update_config) section
-
-- `name` parameter for setting a custom name in
-[volume](/compose/compose-file/index.md#volume-configuration-reference)
-definitions
-
 ## Upgrading
 
 ### Version 2.x to 3.x
