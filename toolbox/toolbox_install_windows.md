@@ -49,7 +49,7 @@ To verify your machine meets these requirements, do the following:
   operating system.
 
     If you have a newer system, specifically 64bit Windows 10 Pro, with
-    Enterprise and Education (1511 November update, Build 10586 or later),
+    Enterprise and Education (1607 Anniversary update, Build 14393 or later),
     consider using [Docker for Windows](/docker-for-windows) instead. It runs
     natively on the Windows, so there is no need for a pre-configured Docker
     QuickStart shell. It also uses Hyper-V for virtualization, so the
