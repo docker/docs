@@ -48,6 +48,9 @@ UCP.
 To install UCP, you use the `docker/ucp` image, which has commands to install
 and manage UCP.
 
+Please make sure you follow the [UCP System requirements](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/system-requirements/) in regards to networking ports. 
+Ensure that your hardware or software firewalls are open appropriately or disabled.
+
 To install UCP:
 
 1. Use ssh to log in to the host where you want to install UCP.
