@@ -44,7 +44,7 @@ Then source the `env.sh` script.
 
 ```bash
 $ unzip ucp-bundle-dave.lauper.zip
-$ eval $(<env.sh)
+$ eval "$(<env.sh)"
 ```
 
 The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
