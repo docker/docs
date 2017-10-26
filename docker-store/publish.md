@@ -4,18 +4,14 @@ keywords: Docker, docker, store, purchase images
 title: Submit a product to Docker Store
 ---
 
+## Publishing Content on the Docker Store
+
 To submit an image to the Docker Store, you must first [apply to
 join](https://store.docker.com/publisher/signup) our publisher program. You'll
 receive a welcome email when you're accepted into the program.
 
 Once you've been accepted, click the link in your acceptance email, or go to the
 [Docker Store](https://store.docker.com) and click **Publish a Product**.
-
------------------
-
-## NEW STUFF
-
-## Publishing Content on the Docker Store
 
 ### Permitted Content and Support Options
 
