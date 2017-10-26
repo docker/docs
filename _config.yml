@@ -113,7 +113,7 @@ defaults:
       path: "engine"
     values:
       assignee: "mstanleyjones"
-      win_server_zip_url: "https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.2-ee-4.zip"
+      win_latest_build: "docker-17.06.2-ee-4"
   - scope:
       path: "kitematic"
     values:
