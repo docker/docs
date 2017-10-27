@@ -27,20 +27,20 @@ Scans run either on demand when a user clicks the **Start a Scan** links or
 on any `docker push` to the repository.
 
 First the scanner performs a binary scan on each layer of the image, identifies
-the software components in each layer, and indexes the SHA of each component in a
-bill-of-materials. A binary scan evaluates the components on a bit-by-bit level,
-so vulnerable components are discovered even if they are statically-linked or
-under a different name.
+the software components in each layer, and indexes the SHA of each component in
+a bill-of-materials. A binary scan evaluates the components on a bit-by-bit
+level, so vulnerable components are discovered even if they are
+statically-linked or under a different name.
 
 The scan then compares the SHA of each component against the US National
 Vulnerability Database that is installed on your DTR instance. When
 this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
 
-DTR scans both Linux and Windows images, but by default Docker doesn't push
-image layers for Windows images so DTR won't be able to scan them.
-If you want DTR to scan your Windows images, [configure Docker to always push
-image layers](pull-and-push-images.md).
+DTR scans both Linux and Windows images, but but by default Docker doesn't push
+foreign image layers for Windows images so DTR won't be able to scan them. If
+you want DTR to scan your Windows images, [configure Docker to always push image
+layers](pull-and-push-images.md), and it will scan the non-foreign layers.
 
 ## Security scan on push
 
