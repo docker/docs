@@ -16,7 +16,7 @@ https://download.docker.com/azure/stable/17.06.2/Docker.tmpl
 
 ### 17.06.2
 
- * Docker EE Basic: https://download.docker.com/azure/17.06/17.06.2/Docker.tmpl
+ * Docker EE Basic: https://download.docker.com/azure/17.06/17.06.2/Docker-EE.tmpl
  * Docker EE Standard and Advanced: https://download.docker.com/azure/17.06/17.06.2/Docker-DDC.tmpl
 
 ### 17.03.2
