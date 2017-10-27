@@ -6,6 +6,10 @@ redirect_from:
 - /docker-ee-for-windows/install/
 ---
 
+{% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %}
+{% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
+
+
 Docker Enterprise Edition for Windows Server 2016 (*Docker EE*) enables native
 Docker containers on Windows Server 2016. The Docker EE installation package
 includes everything you need to run Docker on Windows Server 2016.
@@ -21,8 +25,8 @@ versions here](https://docs.docker.com/release-notes/) or subscribe to the
 With Docker EE, your Windows nodes can join swarms that are managed
 by Docker Universal Control Plane (UCP). When you have Docker EE installed
 on Windows Server 2016 and you have a
-[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can 
-[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/). 
+[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can
+[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
 
 ## Install Docker EE
 
@@ -42,7 +46,7 @@ full list of prerequisites.
     Install-Module DockerProvider -Force
     Install-Package Docker -ProviderName DockerProvider -Force
     ```
-     
+
 2.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
@@ -69,7 +73,7 @@ Some advanced Docker features (like Swarm) require that Windows is updated to in
 ```ps
 sconfig
 ```
-    
+
 Select option `6) Download and Install Updates`.
 
 ## Use a script to install Docker EE
@@ -82,8 +86,7 @@ installs, or install on air-gapped systems.
 
     ```ps
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip
-    {{ page.win_server_zip_url }}
+    PS> invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
@@ -92,10 +95,10 @@ installs, or install on air-gapped systems.
 
     ```ps
     # Extract the archive.
-    PS> Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
+    PS> Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles
 
     # Clean up the zip file.
-    PS> Remove-Item -Force docker.zip
+    PS> Remove-Item -Force {{ filename }}
 
     # Install Docker. This will require rebooting.
     $null = Install-WindowsFeature containers
