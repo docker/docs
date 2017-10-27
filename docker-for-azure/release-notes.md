@@ -105,7 +105,7 @@ Release date: 01/18/2017
 
 ## Edge channel
 
-### 17.09 CE
+### 17.10 CE
 
 {{aws_blue_edge}}
 
