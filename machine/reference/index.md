@@ -13,6 +13,7 @@ title: Docker Machine command-line reference
 -   [ip](ip.md)
 -   [kill](kill.md)
 -   [ls](ls.md)
+-   [mount](mount.md)
 -   [provision](provision.md)
 -   [regenerate-certs](regenerate-certs.md)
 -   [restart](restart.md)

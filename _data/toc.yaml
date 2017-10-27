@@ -2784,6 +2784,8 @@ manuals:
       title: kill
     - path: /machine/reference/ls/
       title: ls
+    - path: /machine/reference/mount/
+      title: mount
     - path: /machine/reference/provision/
       title: provision
     - path: /machine/reference/regenerate-certs/
