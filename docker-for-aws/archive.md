@@ -16,7 +16,7 @@ http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.06.2/Docker.tmpl
 
 ### 17.06.2
 
- * Docker EE Basic: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.2/Docker.tmpl
+ * Docker EE Basic: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.2/Docker-EE.tmpl
  * Docker EE Standard and Advanced: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.2/Docker-DDC.tmpl
 
 ### 17.03.2
