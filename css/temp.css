@@ -12,6 +12,14 @@
     {
         display: none !important;
     }
+    .col-toc
+    {
+      display: none !important;
+    }
+    .col-nav
+    {
+      display: none !important;
+    }
 }
 
 .alert-info {
