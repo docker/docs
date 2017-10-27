@@ -206,6 +206,9 @@ tab, and change the **Content Cache** settings to use the **region-us** cache.
 
 ![](../../../images/cache-docker-images-4.png){: .with-border}
 
+You can also automate this through the `/api/v0/accounts/{username}/settings`
+API.
+
 Now when you pull images, you'll be using the cache. To test this, try pulling
 an image from DTR. You can inspect the logs of the cache service, to validate
 that the cache is being used, and troubleshoot problems.
