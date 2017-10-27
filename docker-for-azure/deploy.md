@@ -18,13 +18,13 @@ node can be used for administrating the swarm.
 Once you've deployed Docker on Azure, go to the "Outputs" section of the
 resource group deployment.
 
-![](img/sshtargets.png)
+![SSH targets](img/sshtargets.png)
 
 The "SSH Targets" output is a URL to a blade that describes the IP address
 (common across all the manager nodes) and the SSH port (unique for each manager
 node) that you can use to log in to each manager node.
 
-![](img/managers.png)
+![Swarm managers](img/managers.png)
 
 ## Connecting via SSH
 
