@@ -11,7 +11,7 @@ operates on. You use Docker Engine to push and pull images (data) to a public or
 gives you the ability to verify both the integrity and the publisher of all the
 data received from a registry over any channel.
 
-## Understand trust in Docker
+## About trust in Docker
 
 Content trust allows operations with a remote Docker registry to enforce
 client-side signing and verification of image tags. Content trust provides the
@@ -29,6 +29,11 @@ Once content trust is enabled, image publishers can sign their images. Image con
 ensure that the images they use are signed. Publishers and consumers can be
 individuals alone or in organizations. Docker's content trust supports users and
 automated processes such as builds.
+
+When you enable content trust, signing occurs on the client before push and
+verification happen on the client after pull if you use Docker CE. If you use
+Docker EE with UCP, and you have configured UCP to require images to be signed
+before deploying, signing is verified by UCP.
 
 ### Image tags and content trust
 
