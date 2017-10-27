@@ -164,6 +164,38 @@ The `dockerd` service and the Windows environment are now configured to join a U
 Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
 ```
 
+## Uninstall UCP from Windows Server
+
+The following steps return the Docker Engine to its original configuration:
+
+1. Unregister the docker service and register it again without the TLS
+   certificates:
+
+   ```ps
+   Stop-Service docker
+   dockerd --unregister-service
+   dockerd -H npipe:// --register-service
+   Start-Service docker
+   ```
+
+2. Remove the `certs` directory for the docker service:
+
+   ```ps
+   Remove-Item -Recurse C:\ProgramData\docker\daemoncerts
+   ```
+
+3. Remove the firewall rules:
+
+   ```ps
+   netsh advfirewall firewall delete rule name="docker_2376_in"
+   netsh advfirewall firewall delete rule name="docker_12376_in"
+   netsh advfirewall firewall delete rule name="docker_2377_in"
+   netsh advfirewall firewall delete rule name="docker_4789_in"
+   netsh advfirewall firewall delete rule name="docker_4789_out"
+   netsh advfirewall firewall delete rule name="docker_7946_in"
+   netsh advfirewall firewall delete rule name="docker_7946_out"
+   ```
+
 ## Windows nodes limitations
 
 Some features are not yet supported on Windows nodes:
