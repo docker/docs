@@ -118,6 +118,7 @@ follow the link for more information.
                 "ec2:GetConsoleScreenshot",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:ModifyVpcAttribute",
+                "ec2:ModifySubnetAttribute",
                 "ec2:RebootInstances",
                 "ec2:ReleaseAddress",
                 "ec2:ReleaseHosts",
