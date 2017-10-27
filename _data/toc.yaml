@@ -354,6 +354,8 @@ guides:
           title: Manage keys for content trust
         - path: /engine/security/trust/trust_sandbox/
           title: Play in a content trust sandbox
+      - path: /engine/security/antivirus/
+        title: Antivirus software and Docker
       - path: /engine/security/apparmor/
         title: AppArmor security profiles for Docker
       - path: /engine/security/seccomp/
