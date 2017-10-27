@@ -275,6 +275,26 @@ The default `docker0` bridge network supports the use of port mapping and
 network. This approach is not recommended. Where possible, you should use
 [user-defined bridge networks](#user-defined-networks) instead.
 
+#### Disable the default bridge network
+
+If you do not want the default bridge network to be created at all, add the
+following to the `daemon.json` file. This only applies when the Docker daemon
+runs on a Linux host.
+
+```json
+"bridge": "none",
+"iptables": "false"
+```
+
+Restart Docker for the changes to take effect.
+
+You can also manually start the `dockerd` with the flags `--bridge=none
+--iptables=false`. However, this may not start the daemon with the same
+environment as the system init scripts, so other behaviors may be changed.
+
+Disabling the default bridge network is an advanced option that most users will
+not need.
+
 ## User-defined networks
 
 It is recommended to use user-defined bridge networks to control which
