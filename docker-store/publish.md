@@ -4,9 +4,7 @@ keywords: Docker, docker, store, purchase images
 title: Publish content on Docker Store
 ---
 
-## Publishing Content on the Docker Store
-
-### Permitted Content and Support Options
+## Permitted Content and Support Options
 
 * Content that runs on a Docker Enterprise Edition (i.e. Docker Certified
 Infrastructure) may be published in the Store.  This content may also qualify to
@@ -27,7 +25,7 @@ published in the Store.
 | Does not work on Docker Certified Infrastructure | NO                       |   N/A       |    N/A     |
 
 
-### Onboarding
+## Onboarding
 
 The publishing process for the Docker Store is straightforward, and can be
 initiated from the landing page.  You can sign in with your Docker ID, and
@@ -58,7 +56,7 @@ to the diagram below for a high-level summary:
 
 ![publishing workflow](images/publish-diagram.png)
 
-### Create Great Content
+## Create Great Content
 
 Create your content, and follow our best practices to Dockerize it.  Keep your
 images small, your layers few, and your components secure.  Please refer to the
@@ -73,7 +71,7 @@ class="_"}
 
 Here are some best practices when it comes to building vulnerability-free Docker images:
 
-#### Choose a secure base image (See your Dockerfile's `FROM:` directive)
+### Choose a secure base image (See your Dockerfile's `FROM:` directive)
 
 Many base images have a strong record of being secure, including:
 
@@ -92,7 +90,7 @@ Docker strongly recommends Alpine Linux. The founder of this Linux
 distribution is leading an initiative at Docker to provide safe, compact base
 images for all container applications.
 
-#### Remove unused components
+### Remove unused components
 
 Often, vulnerabilities exist in components that aren't actually used in the
 containerized application.  To avoid this, you can:
@@ -113,7 +111,7 @@ RUN apt-get update && \
 your Dockerfile can only be removed in the same directive (and not
 in subsequent directives in your Dockerfile).
 
-#### Keep required components up-to-date
+### Keep required components up-to-date
 
 Your images are comprised of open-source libraries and packages that amass
 vulnerabilities over time and are consequently patched.  To optimize your
@@ -126,7 +124,7 @@ version deemed to be vulnerable.
 `apt-get install ...` pull the latest versions of dependencies, which may
 include security fixes.
 
-#### Scan your own private repositories
+### Scan your own private repositories
 
 Eliminating vulnerabilities is a trial-and-error process. To speed it up,
 consider using Docker Security Scanning on your own private Docker repositories
@@ -134,7 +132,7 @@ in Docker Cloud and Docker Hub. This feature allows you to scan images you
 create on-demand, without relying on the scans provided by the Docker Publisher
 Program.
 
-### Create and maintain your publisher profile in the Store
+## Create and maintain your publisher profile in the Store
 
 Let the Docker community
 know who you are.  Add your details, your company story, and what you do.  At
@@ -147,7 +145,7 @@ the very minimum, we require:
 * Company icon/logo (square; at least 512x512px
 
 
-### Prepare your image-manifest materials
+## Prepare your image-manifest materials
 
 You must provide the namespace (including repository and tags) of a private
 repository on Docker Cloud or Hub that contains the source for your product.
@@ -170,25 +168,25 @@ discoverable:
 11. Installation instructions
 12. Link to license agreements
 
-##### How the manifest information is displayed in the UI
+#### How the manifest information is displayed in the UI
 
 (Please note that this is an approximate representation. We frequently make enhancements to the look and some elements might shift around.)
 
 ![manifest information displayed on store UI](images/subscribed.png)
 
-### Support your users
+## Support your users
 
 Docker users who download your content from the Store might need your help
 later, so be prepared for questions!  The information you provide with your
 submission will save support time in the future.
 
-#### Support information
+### Support information
 
 If you provide support along with your content, include that information.  Is
 there a support website?  What email address can users contact for help?  Are
 there self-help or troubleshooting resources available?
 
-#### Support SLA
+### Support SLA
 
 Include a Service Level Agreement (SLA) for each image you're offering for the
 Store.  An SLA is your commitment to your users about the nature and level of
