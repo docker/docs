@@ -2945,11 +2945,11 @@ manuals:
   - path: /docker-store/
     title: Docker Store overview
   - path: /docker-store/publish/
-    title: Submit a product to Docker Store
-  - title: Docker Store Trust Chain
-    path: /docker-store/trustchain/
+    title: Publish content on Docker Store
+  - path: /docker-store/trustchain/
+    title: Docker Store Trust Chain
   - path: /docker-store/faq/
-    title: Docker Store FAQs
+    title: Consumer FAQs
 - sectiontitle: Release notes
   section:
     - path: /release-notes/
