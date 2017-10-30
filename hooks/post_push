@@ -6,7 +6,7 @@ set -e
 # build and push the docs-base branch at the end of
 # a successful build of the branch
 
-if [[ $SOURCE_BRANCH =~ ^v1\.[0-9]+$ ]]; then
+if [[ $SOURCE_BRANCH =~ (^v1\.[0-9]+$|^v1[7-9]\.[0-9]+$) ]]; then
   git fetch origin docs-base:docs-base --depth 1 || ( echo "Couldn't fetch docs-base." && exit 1 )
   git checkout docs-base || ( echo "Couldn't check out docs-base." && exit 1 )
   docker build -t docs/docker.github.io:docs-base . || ( echo "Couldn't build docs-base Dockerfile." && exit 1 )
