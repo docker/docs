@@ -16,9 +16,10 @@ image for IBM z Systems. For example, you can modify the CLI command for getting
 a [UCP support dump](..\..\get-support.md) to use an environment variable
 that indicates the current architecture:
 
-{% raw %}
 ```bash
+{% raw %}
 [[ $(docker info --format='{{.Architecture}}') == s390x ]] && export _ARCH='-s390x' || export _ARCH=''
+{% endraw %}
 
 docker container run --rm \
   --name ucp \
@@ -27,7 +28,6 @@ docker container run --rm \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}${_ARCH} \
   support > docker-support.tgz
 ```
-{% endraw %}
 
 In this example, the environment variable is named `_ARCH`, but you can use any 
 valid shell name.
