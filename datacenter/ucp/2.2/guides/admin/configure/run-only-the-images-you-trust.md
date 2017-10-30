@@ -44,14 +44,18 @@ been signed. It doesn't matter who signed the image.
 
 To enforce that the image needs to be signed by specific teams, click the
 dropdown and select those teams from the list. 
-**Note**: You MUST select teams that are a part of the `docker-datacenter` org in 
-order to make use of this feature.
+
+> Team must be in docker-datacenter
+>
+> You need to select a team that's part of the `docker-datacenter` organization
+> in order to use this feature.
+{: .important}
 
 ![UCP settings](../../images/run-only-the-images-you-trust-3.png){: .with-border}
 
 If you specify multiple teams, the image needs to be signed by a member of each
 team, or someone that is a member of all those teams, again which must be a part
-of the `docker-datacenter` org.
+of the `docker-datacenter` organization.
 
 Click **Save** for UCP to start enforcing the policy. From now on, existing
 services will continue running and can be restarted if needed, but UCP will only
