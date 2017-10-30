@@ -26,9 +26,10 @@ Now you can use the directory on the machine, for mounting into containers.
 Any changes done in the local directory, will be reflected in the machine too.
 
 ```none
+$ eval $(docker-machine env dev)
 $ docker run -v /home/docker/foo:/tmp/foo busybox ls /tmp/foo
 bar
-$ docker touch foo/baz
+$ touch foo/baz
 $ docker run -v /home/docker/foo:/tmp/foo busybox ls /tmp/foo
 bar
 baz
