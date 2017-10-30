@@ -2,6 +2,9 @@
 title: Docker EE 17.06 release notes
 description: Docker Enterprise Edition 17.06 release notes
 keywords: docker ee, release notes, upgrade
+redirect_from:
+- /enterprise/release-notes/
+- /enterprise/17.06/release-notes/
 toc_max: 2
 ---
 
