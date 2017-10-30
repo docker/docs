@@ -31,7 +31,7 @@ individuals alone or in organizations. Docker's content trust supports users and
 automated processes such as builds.
 
 When you enable content trust, signing occurs on the client before push and
-verification happen on the client after pull if you use Docker CE. If you use
+verification happens on the client after pull if you use Docker CE. If you use
 Docker EE with UCP, and you have configured UCP to require images to be signed
 before deploying, signing is verified by UCP.
 
