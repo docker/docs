@@ -50,6 +50,11 @@ dropdown and select those teams from the list.
 If you specify multiple teams, the image needs to be signed by a member of each
 team, or someone that is a member of all those teams.
 
+> Signing with teams
+> 
+> Teams used for signing policy enforcement must be in the `docker-datacenter`
+> organization.
+
 Click **Save** for UCP to start enforcing the policy. From now on, existing
 services will continue running and can be restarted if needed, but UCP will only
 allow deploying new services that use a trusted image.
