@@ -148,7 +148,7 @@ IDs that numerically increment, up to the number of `replicas` you defined in
 `docker-compose.yml`. List the tasks for your service:
 
 ```shell
-docker service ps <service>
+docker service ps getstartedlab
 ```
 
 Tasks also show up if you just list all the containers on your system, though that
