@@ -57,7 +57,9 @@ successfully communicating with UCP, look for `ucp` in the `Server Version`
 returned by `docker version`.
 
 ```bash
+{% raw %}
 $ docker version --format '{{.Server.Version}}'
+{% endraw %}
 ucp/2.1.0
 ```
 

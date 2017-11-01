@@ -61,8 +61,10 @@ successfully communicating with UCP, look for `ucp` in the `Server Version`
 returned by `docker version`.
 
 ```bash
+{% raw %}
 $ docker version --format '{{.Server.Version}}'
-ucp/2.2.0
+{% endraw %}
+{{ page.ucp_repo }}/{{ page.ucp_version }}
 ```
 
 From now on, when you use the Docker CLI client, it includes your client
