@@ -56,6 +56,17 @@ client bundle you downloaded.
 > Windows environment, run `env.cmd` in an elevated command prompt, or run
 > `env.ps1` in an elevated PowerShell prompt.
 
+To verify a client certificate bundle has been loaded and the client is
+successfully communicating with UCP, look for `ucp` in the `Server Version`
+returned by `docker version`.
+
+```bash
+{% raw %}
+$ docker version --format '{{.Server.Version}}'
+{% endraw %}
+{{ page.ucp_repo }}/{{ page.ucp_version }}
+```
+
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine. You can now use the
 Docker CLI to create services, networks, volumes, and other resources on a swarm
