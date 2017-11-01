@@ -5,7 +5,7 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
-## 1.17.0 (2017-11-03)
+## 1.17.0 (2017-11-01)
 
 ### New features
 
