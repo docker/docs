@@ -153,7 +153,6 @@ guides:
       - path: /release-notes/docker-ce/
         title: Docker CE
         nosync: true
-
 - sectiontitle: Get started
   section:
   - sectiontitle: Get started with Docker
@@ -176,7 +175,6 @@ guides:
       title: Network containers
   - path: /engine/docker-overview/
     title: Docker overview
-
 - sectiontitle: Develop with Docker
   section:
     - sectiontitle: Develop your apps on Docker
@@ -239,7 +237,6 @@ guides:
       title: Understand container communication
     - path: /engine/userguide/networking/default_network/ipv6/
       title: IPv6 with Docker
-
 - sectiontitle: Manage application data
   section:
     - path: /engine/admin/volumes/
@@ -272,7 +269,6 @@ guides:
         title: Use the ZFS storage driver
       - path: /engine/userguide/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-
 - sectiontitle: Run your app in production
   section:
     - sectiontitle: The basics
@@ -450,7 +446,6 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
-
 - sectiontitle: Standards and compliance
   section:
   - path: /compliance/
@@ -461,7 +456,6 @@ guides:
     title: FedRAMP
   - path: /compliance/cis/
     title: CIS
-
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/code/
@@ -1360,15 +1354,19 @@ reference:
   nosync: true
 
 samples:
-- path: /samples/#tutorial-labs
-  title: Tutorial labs
+- title: Samples home
+  path: /samples/
+- title: Docker Enterprise walkthrough
+  path: /samples/#docker-enterprise-edition-walkthrough
+- title: Play with Docker
+  path: /samples/#play-with-docker
+- title: Tutorial labs
+  path: /samples/#tutorial-labs
 - sectiontitle: Library references
   section:
   - generateTOC: library
 - sectiontitle: Sample applications
   section:
-  - path: /samples/
-    title: Samples home
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/
