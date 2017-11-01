@@ -5,22 +5,102 @@ title: MTA overview
 ---
 
 The Docker Modernize Traditional Applications (MTA) Program helps enterprises
-make their existing legacy apps more secure, more efficient, and readily
-portable to a hybrid cloud infrastructure. Here, we give a quick overview of MTA
-concepts, and steps to migrate legacy apps and infrastructure to containerized
-solutions.
+make their existing applications more secure, efficient, and readily
+portable to a hybrid cloud infrastructure.
+
+Here, we identify the biggest problems with traditional applications, show how
+containerizing apps and infrastructure solves these problems, and describe in
+general terms the migration steps from traditional to containerized applications
+running on [Docker Enterprise
+Edition](https://www.docker.com/enterprise-edition){: target="_blank"
+class="_"}.
 
 Check out the [blog post introducing the Docker MTA program
 here](https://blog.docker.com/2017/04/modernizing-traditional-apps-with-docker/){:
 target="_blank" class="_"} to learn more.
 
-## The problem with legacy apps
+## The problem with traditional apps
 
 IT organizations often spend 80% of their budget maintaining existing
-applications and only 20% on new innovation. Enterprises have increasingly
-disparate infrastructure landscapes with x86 servers, mainframe, and multiple
-private and public clouds to manage. This fragmentation increases the pressure
-on IT budgets, making it even harder to focus on innovation.
+applications and only 20% on new innovation.
+
+Traditional apps can be any age and use any technology stack, with some common traits which makes them expensive and time-consuming to maintain.
+
+### Automated testing and deployment
+
+- no automated test suites
+- no automated deployment proceses
+
+Releasing updates requires a lot of manual work such as copying files, updating
+configurations and running installers.
+
+Manual testing and test scripts to validate new features and test for
+regressions.
+
+Large enterprise apps might need an entire weekend or more to deploy, which is
+expensive and discourages updates.
+
+Difficult to administer between deployments often needing custom logging and management with multiple tools, and manual processes. Frameworks, dependencies, and load balancing are often complex, and VMs are often underutilized, 
+
+Enterprises have increasingly disparate infrastructure landscapes with x86
+servers, mainframe, and multiple private and public clouds to manage. This
+fragmentation increases the pressure on IT budgets, making it even harder to
+focus on innovation.
+
+### VIDEO WITH ADDED CONTEXT FROM OTHER DOCS - WIP
+
+.NET video is [here](https://youtu.be/gaJ9PzihAYw){: target="_blank" class="_"}.
+
+Below is the general idea or pattern, extrapolated from the video with added
+context from other docs. Other content on this page is also extrapolated from the video.
+
+Video starting point is a .NET 3.5 app running on Windows server 2003
+
+Problems:
+
+- difficult to deploy
+- complex to maintain
+- expensive to change
+
+Ways to migrate an app to Docker
+
+- manually
+- use an automated tool like Image2Docker
+
+Docker containerized apps are portable, efficient, and secure. Once the app is migrated to Docker, you get:
+
+- a portable unit that can run in the cloud or data center the same way
+
+- an efficient and lightweight software stack, running on less infrastructure than VMs
+
+- ability to add comprehensive security into your own apps via the Docker platform
+
+Explains how you can use Docker to bring old apps into the modern world without
+changing code. With Docker, you can:
+
+- move apps to the cloud or the data center
+- move apps onto new infrastructure
+- or consolidate apps on existing infrastructure
+
+
+Docker provides certified Docker EE containers and application stacks for
+commonly used enterprise workloads. Examples of available software stacks are:
+
+- Microsoft .NET web apps
+- Oracle
+- IBM
+- SAP
+
+It can be any infrastructure. MTA Runbooks will be available for these architectures and more:
+
+- HPE
+- ALIBABA
+- Azure \ AzureStack
+- IBM
+- Oracle
+- Cisco
+- Google Cloud Platform (GCP)
+- AWS
 
 ## How Docker solves the problem
 
@@ -68,6 +148,10 @@ auto-deployment to further optimize and save time.
 microservices, or add new services to the existing container.
 
 The subtopics go into more detail on this process.
+
+### Choose an infrastructure
+
+See MTA Runbooks and per stack reference architectures at https://docker.atlassian.net/wiki/spaces/MTA/pages/139010984/MTA+Infrastructure+Stacks
 
 ### Get Docker
 
