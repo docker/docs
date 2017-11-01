@@ -455,14 +455,24 @@ guides:
       - path: /engine/extend/plugin_api/
         title: Plugins API
 
-- sectiontitle: MTA
+- sectiontitle: Migrating to Docker
   section:
-    - path: /mta/
-      title: MTA overview
-    - path: /mta/stack-guides/
-      title: Stack migration guides
-    - path: /mta/arch-best-practices/
-      title: Reference architectures
+    - sectiontitle: Migrate Traditional Applications
+      section:
+        - path: /migrate/mta/
+          title: MTA overview
+        - path: /migrate/mta/stack-guides/
+          title: Stack migration guides
+        - path: /migrate/mta/arch-best-practices/
+          title: Reference architectures
+    - sectiontitle: Run Kubernetes solutions on Docker
+      section:
+        - path: /migrate/kubernetes/
+          title: Docker for Kubernetes overview
+    - sectiontitle: Run Mesosphere solutions on Docker
+      section:
+        - path: /migrate/mesosphere/
+          title: Docker for Mesosphere overview
 
 - sectiontitle: Standards and compliance
   section:
