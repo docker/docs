@@ -207,6 +207,8 @@ message.
 
 ![Hello World in browser](images/app-in-browser.png)
 
+> **Note**: If you are using Docker Toolbox on Windows 7, use the Docker Machine IP instead of localhost, e.g. http://192.168.99.100:4000/. You can find out the address with `docker-machine ip`.
+
 You can also use the `curl` command in a shell to view the same content.
 
 ```shell
