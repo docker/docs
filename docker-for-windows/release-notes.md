@@ -434,6 +434,19 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-rc2-win37 2017-11-02 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc2)
+  - [Docker compose 1.17.0](https://github.com/docker/compose/releases/tag/1.17.0)
+  - Linuxkit blueprint updated to linuxkit/linuxkit#2633, fixes CVE-2017-15650
+
+* New
+  - Add localhost port forwarder for Windows and LCOW Containers (thanks @simonferquel)
+
+* Bug fixes and minor changes
+  - Fix centos:5 & centos:6 images not starting properly with LinuxKit VM (fixes docker/for-win#1245).
+
 ### Docker Community Edition 17.10.0-ce-win36 2017-10-24 (Edge)
 
 * Upgrades
