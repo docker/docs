@@ -17,7 +17,7 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
-## 17.06.2-ee-5 (2017-11-01)
+## 17.06.2-ee-5 (2017-11-02)
 
 ### Important notes about this release
 
