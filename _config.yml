@@ -69,7 +69,7 @@ defaults:
   - scope:
       path: "engine"
     values:
-      assignee: "mstanleyjones"
+      assignee: "mistyhacks"
   - scope:
       path: "kitematic"
     values:
@@ -89,7 +89,7 @@ defaults:
   - scope:
       path: "swarm"
     values:
-      assignee: "mstanleyjones"
+      assignee: "mistyhacks"
   - scope:
       path: "toolbox"
     values:
