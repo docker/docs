@@ -472,7 +472,7 @@ guides:
     - sectiontitle: Run Mesosphere solutions on Docker
       section:
         - path: /migrate/mesosphere/
-          title: Docker for Mesosphere overview
+          title: Docker for Measosphere overview
 
 - sectiontitle: Standards and compliance
   section:

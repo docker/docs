@@ -1,100 +1,115 @@
 ---
 description: MTA overview
 keywords: traditional apps, legacy apps, MTA, migration, modernize, containers
-title: MTA overview
+title: Migrate traditional applications
 ---
 
-The Docker Modernize Traditional Applications (MTA) Program helps enterprises
-make their existing applications more secure, efficient, and readily
-portable to a hybrid cloud infrastructure.
+Using Docker to containerize traditional applications and migrate to the Docker
+platform can help enterprises make existing apps more secure, efficient, and
+readily portable to hybrid cloud infrastructures.
 
-Here, we identify the biggest problems with traditional applications, show how
-containerizing apps and infrastructure solves these problems, and describe in
-general terms the migration steps from traditional to containerized applications
-running on [Docker Enterprise
-Edition](https://www.docker.com/enterprise-edition){: target="_blank"
-class="_"}.
+## Overview
 
-Check out the [blog post introducing the Docker MTA program
+Here, we identify the biggest problems with traditional applications, and show
+how containerizing apps and infrastructure solves these problems. We describe in
+general terms the process for Dockerizing an application, and how the resulting
+Docker app behaves in deployment. We will include links out to available
+runbooks for common app and infrastructure stacks as these come online, along
+with best practices.
+
+Ultimately, we encourage you to check out the Docker Modernize Traditional
+Applications (MTA) program. With the MTA program, you get automated tooling and
+support for converting large scale apps and infrastructure stacks to run on
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: target="_blank"
+class="_"}. Check out the [blog post introducing the Docker MTA program
 here](https://blog.docker.com/2017/04/modernizing-traditional-apps-with-docker/){:
 target="_blank" class="_"} to learn more.
+
+Ready to learn more? Let's get started.
 
 ## The problem with traditional apps
 
 IT organizations often spend 80% of their budget maintaining existing
 applications and only 20% on new innovation.
 
-Traditional apps can be any age and use any technology stack, with some common traits which makes them expensive and time-consuming to maintain.
+Traditional apps can be any age and use any technology stack, but have some
+common traits and impacts that make them expensive and time-consuming to
+maintain. Typically, these include:
 
-### Automated testing and deployment
+- No automated deployment proceses, so new releases require a lot of manual work such as copying files, updating configurations and running installers
 
-- no automated test suites
-- no automated deployment proceses
+- No test suites, so testing for regressions and validating features is manual
 
-Releasing updates requires a lot of manual work such as copying files, updating
-configurations and running installers.
+- Difficult to administer between deployments, needing custom logging,  management tools, and manual processes
 
-Manual testing and test scripts to validate new features and test for
-regressions.
+- Frameworks, dependencies, and load balancing are complex, and VMs are  underutilized
 
-Large enterprise apps might need an entire weekend or more to deploy, which is
-expensive and discourages updates.
+- Lead to increasingly fragmented infrastructure landscapes with x86 servers,
+mainframes, and multiple private and public clouds to manage. This puts pressure
+on IT budgets, and makes it even harder to focus on innovation.
 
-Difficult to administer between deployments often needing custom logging and management with multiple tools, and manual processes. Frameworks, dependencies, and load balancing are often complex, and VMs are often underutilized, 
+## How Docker solves the problem
 
-Enterprises have increasingly disparate infrastructure landscapes with x86
-servers, mainframe, and multiple private and public clouds to manage. This
-fragmentation increases the pressure on IT budgets, making it even harder to
-focus on innovation.
+Docker gives you a way to develop, package, deploy, and manage both Linux and
+Windows based apps as standardized units called
+[containers]([image](glossary.md?term=container)). The runtime version of a
+container is called a Docker [image](glossary.md?term=image).
 
-### VIDEO WITH ADDED CONTEXT FROM OTHER DOCS - WIP
+A container image is a lightweight, portable, executable package of software
+that includes everything needed to run it: code, runtime, system tools, system
+libraries, settings. Some apps might run as a single container image, others can
+be distributed as microservices across multiple orchestrated containers.
 
-.NET video is [here](https://youtu.be/gaJ9PzihAYw){: target="_blank" class="_"}.
+Moving a traditional app to Docker gives it the powers needed thrive in the
+modern landscape.
 
-Below is the general idea or pattern, extrapolated from the video with added
-context from other docs. Other content on this page is also extrapolated from the video.
+* Containerized software always runs the same, regardless of the environment.
+Containerized apps are isolated from any differences between, for example,
+development, staging, cloud, or data center environments.
 
-Video starting point is a .NET 3.5 app running on Windows server 2003
+* Containers use less resources and infrastructure than VMs.
 
-Problems:
+* The Docker platform gives you the ability to add increased security, and
+automate builds, testing, and deployment.
 
-- difficult to deploy
-- complex to maintain
-- expensive to change
+* Application stacks can run as clusters of distributed services, with load
+balancing, orchestration, health monitoring, and ability to scale.
 
-Ways to migrate an app to Docker
+Traditional apps don't have to limit your capabilities. You can move forward on
+innovation goals, and bring modern behavior to your existing apps without
+changing a single line of code.
 
-- manually
-- use an automated tool like Image2Docker
+![MTA time and cost savings](images/MTA.png)
 
-Docker containerized apps are portable, efficient, and secure. Once the app is migrated to Docker, you get:
+- Efficient (optimize capital expenMTAses and operating costs, reduce the
+  size of infrastructure by 77%)
 
-- a portable unit that can run in the cloud or data center the same way
+- Portable (infrastructure for portability and independent apps,
+  deployment frequency increases 13x or more)
 
-- an efficient and lightweight software stack, running on less infrastructure than VMs
+- Secure (reduce risk and enforce new controls, mean time to repair
+  for patching is 99% faster)
 
-- ability to add comprehensive security into your own apps via the Docker platform
+Try the [Docker ROI Calculator](https://www.docker.com/roicalculator){:
+target="_blank" class="_"} to estimate how much you can consolidate existing
+workloads, and how much you can save by moving to Docker.
 
-Explains how you can use Docker to bring old apps into the modern world without
-changing code. With Docker, you can:
+## Certified application and infrastructure stacks
 
-- move apps to the cloud or the data center
-- move apps onto new infrastructure
-- or consolidate apps on existing infrastructure
+As a part of Docker EE, Docker will provide certified containers and application
+stacks for commonly used enterprise workloads.
 
-
-Docker provides certified Docker EE containers and application stacks for
-commonly used enterprise workloads. Examples of available software stacks are:
+Examples of available architectures for application stacks are:
 
 - Microsoft .NET web apps
 - Oracle
 - IBM
 - SAP
 
-It can be any infrastructure. MTA Runbooks will be available for these architectures and more:
+MTA Runbooks will be available for these infrastructure stacks and more:
 
 - HPE
-- ALIBABA
+- Alibaba
 - Azure \ AzureStack
 - IBM
 - Oracle
@@ -102,42 +117,24 @@ It can be any infrastructure. MTA Runbooks will be available for these architect
 - Google Cloud Platform (GCP)
 - AWS
 
-## How Docker solves the problem
+## Steps to Dockerize an application
 
-Legacy apps don't have to define your capabilities. You can still move forward
-on innovation goals, and bring modern behavior to your current apps without
-changing a single line of code.
-
-![MTA time and cost savings](images/MTA.png)
-
-By containerizing the application without modifying source code,  legacy apps
-can be modernized to hybrid cloud portability, increased security and cost
-efficiency.
-
-- Efficient (optimize CapEx and OpEx costs, reduce the size of infrastructure by 77%)
-- Portable (infrastructure for portability and independent apps, deployment frequency increases 13x or more)
-- Secure (reduce risk and enforce new controls, MTTR for patching is 99% faster)
-
-
-## MTA process overview
-
-(Source for this is [Learn More]((Source for this is Learn More on how to
-modernize apps with Docker EE from website)){: target="_blank" class="_"} on how
+(Source for this is [Learn More](https://goto.docker.com/modernize.html?aliId=115713062){: target="_blank" class="_"} on how
 to modernize apps with Docker EE from website and [MTA Solution
 Brief](https://goto.docker.com/rs/929-FJL-178/images/SB_MTA_04.14.2017.pdf){:
 target="_blank" class="_"}.)
 
 Modernizing traditional apps can be approached in logical steps to gain
-efficiencies and benefits at ever step.
+efficiencies and benefits at every step.
 
 ![MTA workflow](images/MTA-process.png)
 
 The migration process consists of these high-level steps:
 
-1.  Package the application into a container using Docker EE, and
-validate the it.
+1.  Package the application into a container, and validate the it.
 
-2.  Decide where to deploy the application (for example, migrate to cloud or server refresh).
+2.  Decide where to deploy the application (for example, migrate to cloud
+  or server refresh).
 
 3.  Deploy and confirm.
 
@@ -147,11 +144,9 @@ auto-deployment to further optimize and save time.
 5.  Consider splicing and reconfiguring the Dockerized app code into
 microservices, or add new services to the existing container.
 
-The subtopics go into more detail on this process.
-
 ### Choose an infrastructure
 
-See MTA Runbooks and per stack reference architectures at https://docker.atlassian.net/wiki/spaces/MTA/pages/139010984/MTA+Infrastructure+Stacks
+Decide where you want to deploy, for example on in-house servers, data center, or cloud provider.
 
 ### Get Docker
 
@@ -187,7 +182,25 @@ Docker install platforms and overview is [here](http://docs.docker.com/engine/in
 
 Launch the app with either a [`docker run`](/engine/reference/commandline/run.md), [`docker-compose up`](/compose/reference/up.md), or [`docker stack deploy`](/engine/reference/commandline/stack_deploy.md) command.
 
+## Certified application and infrastructure stacks
+
+Docker will provide certified Docker EE containers and application stacks for
+commonly used enterprise workloads.
+
+Examples of available architectures for application stacks are:
+
+- Microsoft .NET web apps
+- Oracle
+- IBM
+- SAP
+
+Examples of infrastructure stacks are given in [Choose an infrastructure](choose-an-infrastructure).
+
 ## Where to go next
+
+* [Elton's .NET video series starts here](https://youtu.be/gaJ9PzihAYw){: target="_blank" class="_"}.
+
+* [MTA blog posts](https://blog.docker.com/search/MTA){: target="_blank" class="_"}
 
 * [Get MTA Kit and learn more](https://goto.docker.com/MTAkit.html){: target="_blank" class="_"}
 
