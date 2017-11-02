@@ -4,7 +4,7 @@ description: Learn about the commands available in the docker/dtr image.
 keywords: dtr, install, uninstall, configure
 ---
 
-This tool has commands to install, configure, and back up Docker
+This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.
 By default the tool runs in interactive mode. It prompts you for
 the values needed.
@@ -31,7 +31,7 @@ docker run -it --rm docker/dtr \
 |[destroy](destroy)| Destroy a DTR replica's data                 |
 |[restore](restore)| Install and restore DTR from an existing backup                 |
 |[backup](backup)| Create a backup of DTR                 |
-|[upgrade](upgrade)| Upgrade DTR 2.0.0 or later cluster to this version                 |
+|[upgrade](upgrade)| Upgrade DTR 2.3.x cluster to this version                 |
 |[dumpcerts](dumpcerts)| Print the TLS certificates used by DTR                 |
 |[images](images)| List all the images necessary to install DTR                 |
 

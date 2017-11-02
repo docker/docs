@@ -24,7 +24,7 @@ command.
 
 Example usage:
 
-$ docker run -it --rm dtr-internal.caas.docker.io/caas/dtr:2.4.0-alpha-008434_ge02413a install \
+$ docker run -it --rm dtr-internal.caas.docker.io/caas/dtr:2.4.0-tp5-008777_g5f14189-dirty install \
 	--ucp-node <UCP_NODE_HOSTNAME> \
 	--ucp-insecure-tls
 
