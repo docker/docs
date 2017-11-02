@@ -22,8 +22,8 @@ various APIs, CLIs, and file formats.
 | [Engine CLI](/engine/reference/commandline/cli/)          | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands|
 | [Compose CLI](/compose/reference/overview/)           | The CLI for Docker Compose, which allows you to build and run multi-container applications                       |
 | [Machine CLI](/machine/reference/)                    | Manages virtual machines that are pre-configured to run Docker                                                   |
-| [UCP CLI](/datacenter/ucp/2.1/reference/cli/index.md) | Manages a Universal Control Plane instance                                                                       |
-| [DTR CLI](/datacenter/dtr/2.2/reference/cli/index.md) | Manages a trusted registry                                                                                       |
+| [UCP CLI](/datacenter/ucp/2.2/reference/cli/index.md) | Deploy and manage Universal Control Plane                                                                       |
+| [DTR CLI](/datacenter/dtr/2.4/reference/cli/index.md) | Deploy and manage Docker Trusted Registry                                                                                       |
 
 ## Application programming interfaces (APIs)
 
@@ -32,7 +32,7 @@ various APIs, CLIs, and file formats.
 | [Cloud API](/apidocs/docker-cloud/)                        | Enables programmatic management of your Docker application running on a cloud provider |
 | [Engine API](/engine/api/)                                 | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
 | [Registry API](/registry/spec/api/)                        | Facilitates distribution of images to the engine                                       |
-| [Trusted Registry API](/datacenter/dtr/2.3/reference/api/) | Provides programmatic access to a trusted registry                                     |
+| [Trusted Registry API](/datacenter/dtr/2.4/reference/api/) | Provides programmatic access to a trusted registry                                     |
 | [UCP API](/datacenter/ucp/2.2/reference/api)               | Provides programmatic access to a Universal Control Plane instance                     |
 
 
