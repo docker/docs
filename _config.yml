@@ -113,7 +113,7 @@ defaults:
       path: "engine"
     values:
       assignee: "mstanleyjones"
-      win_latest_build: "docker-17.06.2-ee-4"
+      win_latest_build: "docker-17.06.2-ee-5"
   - scope:
       path: "kitematic"
     values:
