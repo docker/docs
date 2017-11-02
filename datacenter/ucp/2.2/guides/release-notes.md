@@ -12,7 +12,7 @@ upgrade your installation to the latest release.
 
 ## Version 2.2.4
 
-(1 November 2017)
+(2 November 2017)
 
 **News**
 
