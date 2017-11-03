@@ -155,11 +155,8 @@ To update Docker EE on Windows Server 2016:
 PS> Install-Package -Name docker -ProviderName DockerProvider -Update -Force
 ```
 
-If Docker Universal Control Plane (UCP) is installed, run the [UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes.md): 
-
-```ps
-docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
-```
+If Docker Universal Control Plane (UCP) is installed, run the
+[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script). 
 
 Start the Docker service:
 
