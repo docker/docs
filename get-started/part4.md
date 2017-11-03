@@ -156,7 +156,7 @@ myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.
 myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
 ```
 
-#### Initialze the swarm and add nodes
+#### Initialize the swarm and add nodes
 
 The first machine will act as the manager, which executes management commands
 and authenticates workers to join the swarm, and the second will be a worker.
