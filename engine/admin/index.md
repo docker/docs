@@ -83,6 +83,54 @@ documentation. Some places to go next include:
 - [Configure storage drivers](/engine/userguide/storagedriver/index.md)
 - [Container security](/engine/security/index.md)
 
+### Troubleshoot conflicts between the `daemon.json` and startup scripts
+
+If you use a `daemon.json` file and also pass options to the `dockerd`
+command manually or using start-up scripts, and these options conflict,
+Docker will fail to start with an error such as:
+
+```none
+unable to configure the Docker daemon with file /etc/docker/daemon.json:
+the following directives are specified both as a flag and in the configuration
+file: hosts: (from flag: [unix:///var/run/docker.sock], from file: [tcp://127.0.0.1:2376])
+```
+
+If you see an error similar to this one and you are starting the daemon manually with flags,
+you may need to adjust your flags or the `daemon.json` to remove the conflict.
+
+> **Note**: If you see this specific error, continue to the
+> [next section](#use-the-hosts-ky-in-daemon-json-with-systemd) for a workaround.
+
+If you are starting Docker using your operating system's init scripts, you may
+need to override the defaults in these scripts in ways that are specific to the
+operating system.
+
+#### Use the hosts key in daemon.json with systemd
+
+One notable example of a configuration conflict that is difficult to troubleshoot
+is when you want to specify a different daemon address from
+the default. Docker listens on a socket by default. On systems using `systemd` (most modern Linux
+distributions), this means that a `-H` flag is always used when starting `dockerd`. If you specify a
+`hosts` entry in the `daemon.json`, this causes a configuration conflict (as in the above message)
+and Docker fails to start.
+
+To work around this problem, create a new file `/etc/systemd/system/docker.service.d/docker.conf` with
+the following contents, to remove the `-H` argument that is used when starting the daemon by default.
+
+```none
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd
+```
+
+> **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
+> or a `-H` flag when starting Docker manually, Docker will fail to start.
+
+Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker starts
+successfully, it is now listening on the IP address specified in the `hosts` key of the
+`daemon.json` instead of a socket.
+
+
 ## Troubleshoot the daemon
 
 You can enable debugging on the daemon to learn about the runtime activity of
