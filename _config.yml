@@ -114,7 +114,7 @@ defaults:
   - scope:
       path: "engine"
     values:
-      assignee: "mstanleyjones"
+      assignee: "mistyhacks"
       win_latest_build: "docker-17.06.2-ee-5"
   - scope:
       path: "kitematic"
@@ -135,7 +135,7 @@ defaults:
   - scope:
       path: "swarm"
     values:
-      assignee: "mstanleyjones"
+      assignee: "mistyhacks"
   - scope:
       path: "toolbox"
     values:
