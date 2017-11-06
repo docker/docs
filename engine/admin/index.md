@@ -99,7 +99,7 @@ If you see an error similar to this one and you are starting the daemon manually
 you may need to adjust your flags or the `daemon.json` to remove the conflict.
 
 > **Note**: If you see this specific error, continue to the
-> [next section](#use-the-hosts-ky-in-daemon-json-with-systemd) for a workaround.
+> [next section](#use-the-hosts-eky-in-daemon-json-with-systemd) for a workaround.
 
 If you are starting Docker using your operating system's init scripts, you may
 need to override the defaults in these scripts in ways that are specific to the
@@ -109,8 +109,8 @@ operating system.
 
 One notable example of a configuration conflict that is difficult to troubleshoot
 is when you want to specify a different daemon address from
-the default. Docker listens on a socket by default. On systems using `systemd` (most modern Linux
-distributions), this means that a `-H` flag is always used when starting `dockerd`. If you specify a
+the default. Docker listens on a socket by default. On Debian and Ubuntu systems using `systemd`),
+this means that a `-H` flag is always used when starting `dockerd`. If you specify a
 `hosts` entry in the `daemon.json`, this causes a configuration conflict (as in the above message)
 and Docker fails to start.
 
@@ -122,6 +122,9 @@ the following contents, to remove the `-H` argument that is used when starting t
 ExecStart=
 ExecStart=/usr/bin/dockerd
 ```
+
+There are other times when you might need to configure `systemd` with Docker, such as
+[configuring a HTTP or HTTPS proxy](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy).
 
 > **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
 > or a `-H` flag when starting Docker manually, Docker will fail to start.
