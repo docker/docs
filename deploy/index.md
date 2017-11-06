@@ -23,14 +23,28 @@ next_steps:
 ---
 
 {% if include.ui %}
-Version-independent intro para
 
 {% if include.version=="ucp-3.0" %}
-Section 1: This topic is under construction.
+Docker Enterprise Edition (EE) is a secure, scalable, and supported container
+platform for building and orchestrating applications across multi-tenant Linux
+and Windows environments.
 
-- Step 1
-- Step 2
-- Step 3
+Docker Enterprise Edition (EE) is a Containers-as-a-Service platform for IT that manages and secures diverse applications across disparate infrastructure, both on-premises and in the cloud.
+
+
+Docker Enterprise Edition (EE) enables deploying your workloads for high
+availability (HA) onto the orchestrator of your choice. Docker EE automates
+many of the tasks that orchestration requires, like provisioning pods, 
+containers, and cluster resources. Self-healing components 
+
+Role-based access control applies to all of the orchestrators, and communcation
+within the cluster is secured with TLS. [Docker Content Trust](/engine/security/trust/content_trust/) 
+is enforced for images on all of the orchestrators. 
+
+
+Interoperability between swarm and kubernetes workloads (networking/storage)
+Fully supports all EE features including LDAP/AD, RBAC, Scanning, Signing Enforcement, Security Policies, etc.
+ 
 
 {% elsif include.version=="ucp-2.2" %}
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
