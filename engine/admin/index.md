@@ -130,6 +130,9 @@ Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker 
 successfully, it is now listening on the IP address specified in the `hosts` key of the
 `daemon.json` instead of a socket.
 
+> **Important**: Setting `hosts` in the `daemon.json` is not supported on Docker for Windows
+> or Docker for Mac.
+{:.important}
 
 ## Troubleshoot the daemon
 
