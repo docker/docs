@@ -244,14 +244,14 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the parent images won't upgrade inside an unprivileged
-container. If a package contained in the parent image is out-of-date, you should
-contact its maintainers.
-If you know there’s a particular package, `foo`, that needs to be updated, use
+“essential” packages from the parent images won't upgrade inside an
+[unprivileged container](https://docs.docker.com/engine/reference/run/#security-configuration).
+If a package contained in the parent image is out-of-date, you should contact its
+maintainers. If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.
 
-Always combine  `RUN apt-get update` with `apt-get install` in the same `RUN`
-statement, for example:
+Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
+statement. For example:
 
         RUN apt-get update && apt-get install -y \
             package-bar \
