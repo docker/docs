@@ -34,7 +34,7 @@ In addition, you must use the `devicemapper` storage driver. On production
 systems, you must use `direct-lvm` mode, which requires one or more dedicated
 block devices. Fast storage such as solid-state media (SSD) is recommended.
 
-{% capture selinux-warning %
+{% capture selinux-warning %}
 > **Warning**: There is currently no support for `selinux` on IBM Z systems. If
 > you try to install Docker EE on an IBM Z system with `selinux` enabled, you get
 > an error about the `container-selinux` package, which is missing from Red Hat's
