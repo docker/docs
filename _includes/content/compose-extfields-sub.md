@@ -24,21 +24,21 @@ configuration:
 
 You may write your Compose file as follows:
 
-version: '2.1'
-x-logging:
-  &default-logging
-  options:
-    max-size: '12m'
-    max-file: 5
-  driver: json-file
+    version: '2.1'
+    x-logging:
+      &default-logging
+      options:
+        max-size: '12m'
+        max-file: 5
+      driver: json-file
 
-services:
-  web:
-    image: myapp/web:latest
-    logging: *default-logging
-  db:
-    image: mysql:latest
-    logging: *default-logging
+    services:
+      web:
+        image: myapp/web:latest
+        logging: *default-logging
+      db:
+        image: mysql:latest
+        logging: *default-logging
 
 It is also possible to partially override values in extension fields using
 the [YAML merge type](http://yaml.org/type/merge.html). For example:
