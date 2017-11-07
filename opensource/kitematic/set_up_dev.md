@@ -6,11 +6,9 @@ title: Set up for Kitematic development
 
 Kitematic is built on top of:
 
-* <a href="http://electron.atom.io/" target="_blank"> Electron </a>
-
-* <a href="https://nodejs.org" target="_blank"> Node.js </a>
-
-* <a href="https://facebook.github.io/react/" target="_blank"> React </a> and <a href="https://facebook.github.io/react/" target="_blank"> AltJS </a> (which follows the Flux pattern)
+- [Electron](http://electron.atom.io/){: target="_blank" class="_"}
+- [Node.js](https://nodejs.org){: target="_blank" class="_"}
+- [React](https://facebook.github.io/react/){: target="_blank" class="_"} and [AltJS](http://alt.js.org/){: target="_blank" class="_"} (which follows the Flux pattern).
 
 ## Download and install NVM
 
@@ -18,8 +16,7 @@ To get started, you will need to install Node.js v4.2.1. Using Node Version Mana
 
 ### Windows:
 
-1.  Download <a href="https://github.com/coreybutler/nvm-windows/releases/"
-target="_blank">latest release</a>.
+1.  Download the [latest release](https://github.com/coreybutler/nvm-windows/releases/){: target="_blank" class="_"}.
 
 2.  Follow the installer steps to get NVM installed. Please note, you need to
 uninstall any existing versions of node.js before installing NVM for Windows;
@@ -41,7 +38,9 @@ the above installer link will have an uninstaller available.
 
     (Alternatively, you can source nvm from your current shell with the command `. ~/.nvm/nvm.sh`.)
 
-(To learn more about working with NVM, see <a href="https://github.com/creationix/nvm" target="_blank">macOS/Linux official nvm repo</a>, <a href="https://github.com/coreybutler/nvm-windows" target="_blank">Windows official nvm repo</a>, and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps" target="_blank">How To Install Node.js with NVM ON A VPS</a>.)
+
+
+    To learn more about working with NVM, see the [>macOS/Linux official nvm repo](https://github.com/creationix/nvm){: target="_blank" class="_"}, the [Windows official nvm repo](https://github.com/coreybutler/nvm-windows){: target="_blank" class="_"}, and [How To Install Node.js with NVM ON A VPS](ttps://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps){: target="_blank" class="_"}.
 
 ## Install Node.js
 
@@ -67,7 +66,7 @@ the above installer link will have an uninstaller available.
 
 To fork the master branch of Kitematic:
 
-1.  Go to the <a href="https://github.com/docker/kitematic" target="_blank">docker/kitematic repository </a>.
+1.  Go to the [docker/kitematic repository](https://github.com/docker/kitematic){: target="_blank" class="_"}.
 
 2.  Click **Fork** in the upper right corner of the GitHub interface.
 
@@ -105,7 +104,7 @@ To clone your repository and create a branch for the issue:
     $ git checkout -b 1191-branch
     ```
 
-    As previously mentioned, issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank">#1191</a> is set up as an example to use for this exercise.
+    As previously mentioned, issue [#1191](https://github.com/docker/kitematic/issues/1191)is set up as an example to use for this exercise.
 
 ## Set up your signature and upstream remote
 
@@ -134,9 +133,6 @@ You can set your signature globally or locally.
     ```
     $ git remote add upstream https://github.com/docker/kitematic.git
     ```
-
-(To learn more, see <a
-href="/opensource/project/set-up-git/#set-your-signature-and-an-upstream-remote" target="_blank"> Set up your signature and an upstream remote</a>.)
 
 ## Install dependencies, start Kitematic, and verify your setup
 Your Node.js install includes npm for package management. You'll use it to install supporting packages and start the app.
