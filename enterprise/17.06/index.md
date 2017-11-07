@@ -81,7 +81,7 @@ adopted as quickly for consistency and compatibility reasons.
 * Fix for garbage collection logic in NetworkDB. Entries were not properly garbage collected and deleted within the expected time [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
 * Allow configuration of max packet size in network DB to use the full available MTU. Note this will require a configuration in the docker daemon and need a dockerd restart [docker/libnetwork#1839](https://github.com/docker/libnetwork/pull/1839)
 * Overlay fix for transient IP reuse [docker/libnetwork#1935](https://github.com/docker/libnetwork/pull/1935) [docker/libnetwork#1968](https://github.com/docker/libnetwork/pull/1968)
-* Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/swarmkit/pull/1788)
+* Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/libnetwork/pull/1788)
 
 
 ## 17.06.2-ee-3 (2017-09-22)
