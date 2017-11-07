@@ -24,7 +24,7 @@ To fork and clone Docker:
 1. Open a browser and log into GitHub with your account.
 
 2. Go to the <a href="https://github.com/moby/moby"
-target="_blank">docker/docker repository</a>.
+target="_blank">moby/moby repository</a>.
 
 3. Click the "Fork" button in the upper right corner of the GitHub interface.
 
