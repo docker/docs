@@ -310,6 +310,22 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
+
+- sectiontitle: Deploy your app in production
+  section:
+    - path: /deploy/
+      title: Docker Enterprise Edition
+    - path: /deploy/deploy-kubernetes-workload/
+      title: Deploy a workload to a Kubernetes cluster
+    - sectiontitle: Architecture
+      section:
+      - path: /deploy/architecture/how-docker-ee-delivers-ha/
+        title: How Docker EE delivers high availability for your workloads
+      - path: /deploy/architecture/dtr-architecture/
+        title: DTR architecture
+      - path: /deploy/architecture/ucp-architecture/
+        title: UCP architecture
+
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Configure all objects
@@ -1665,6 +1681,22 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/2.2/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - sectiontitle: Interlock
+      section:
+        - title: Interlock beta overview
+          path: /datacenter/ucp/2.2/guides/interlock/
+        - title: Architecture
+          path: /datacenter/ucp/2.2/guides/interlock/architecture/
+        - title: Deploy Interlock
+          path: /datacenter/ucp/2.2/guides/interlock/install/
+        - title: Deploy Interlock offline
+          path: /datacenter/ucp/2.2/guides/interlock/install/offline/
+        - title: Route traffic to services
+          path: /datacenter/ucp/2.2/guides/interlock/use-interlock/
+        - title: Configuration reference
+          path: /datacenter/ucp/2.2/guides/interlock/configuration-reference/
+        - title: Extensions
+          path: /datacenter/ucp/2.2/guides/interlock/extensions/
     - path: /datacenter/ucp/2.2/reference/api/
       title: API reference
     - path: /datacenter/ucp/2.2/guides/release-notes/

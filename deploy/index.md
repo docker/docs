@@ -1,9 +1,9 @@
 ---
-title: Universal Control Plane
+title: Docker Enterprise Edition
 description: |
-  Learn about Docker Universal Control Plane, the enterprise-grade cluster
+  Learn about Docker Enterprise Edition, the enterprise-grade cluster
   management solution from Docker.
-keywords: ucp, overview, orchestration, clustering
+keywords: ucp, overview, orchestration, clustering, Docker EE
 redirect_from:
 - /ucp/
 ui_tabs:

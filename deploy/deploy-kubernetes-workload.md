@@ -60,8 +60,6 @@ later section.
 
 ![](images/deploy-kubernetes-workload-1.png){: .with-border}
 
-
-
 ## Inspect the deployment
 
 The Docker EE web UI shows the status of your deployment when you click the 
