@@ -2014,6 +2014,8 @@ manuals:
         section:
         - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/
           title: Monitor the cluster status
+        - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+          title: Check Notary audit logs
         - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
         - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
