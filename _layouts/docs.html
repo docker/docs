@@ -97,7 +97,18 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- temp css will be removed -->
 	<link rel="stylesheet" href="/css/temp.css">
-	{% seo %}
+	<!-- SEO stuff -->
+	<title>{{ page.title }} | Docker Documentation</title>
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="{{ page.description }}" />
+<meta property="og:description" content="{{ page.description }}" />
+<link rel="canonical" href="{{ page.url }}" />
+<meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+<meta property="og:site_name" content="Docker Documentation" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+	<!-- END SEO STUFF -->
 	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
