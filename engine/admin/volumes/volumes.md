@@ -97,7 +97,7 @@ container.
 **Create a volume**:
 
 ```bash
-$ docker volume create my-vol
+$ docker volume create --name my-vol
 ```
 
 **List volumes**:
