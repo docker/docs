@@ -1,7 +1,7 @@
 ---
 description: Overview of contributing
 keywords: open, source, contributing, overview
-title: Contribute to documentation and open source projects
+title: Contribute to documentation
 redirect_from:
 - /contributing/
 - /contributing/contributing/
@@ -43,9 +43,13 @@ work on, and the larger Docker community.
 
 We welcome your particpation to help make the documentation better!
 
+> Looking for the open source Moby project?
+>
+> See [Looking for Moby?](#looking-for-moby) below.
+
 ## How to contribute to the docs
 
-The Docker product documentation is published at
+The documentation for Docker is published at
 [docs.docker.com](https://docs.docker.com/).
 
 There are many ways to contribute:
@@ -59,9 +63,35 @@ at [docs.docker.com](https://docs.docker.com/).
 - File a documentation issue on GitHub at
 [https://github.com/docker/docker.github.io/issues](https://github.com/docker/docker.github.io/issues).
 
-- Fork the documentation, make changes or add new content on your local branch, and submit a pull request (PR) to the master branch for the docs.
+  This is similar to clicking **Request doc changes** on a published docs
+  page, but if you manually file an issue you have to fill in links to
+  the related pages.
 
-To learn more, see these topics:
+- Fork the documentation, make changes or add new content on your local
+branch, and submit a pull request (PR) to the master branch for the docs.
+
+  This is the manual, more advanced version of clicking **Edit this page**
+  on a published docs page. Initiating a docs changes in a PR from your
+  own branch gives you more flexibility, as you can submit changes to
+  multiple pages or files under a single pull request, and even create
+  new topics.
+
+## Resources and guidance
+
+We are here to help. If you are interested in contributing, but don't feel ready
+to dive in on more complex updates, we can help get you up and running.
+
+You might start by using the right-side menus on published pages:
+
+* Click **Request doc changes** on a page to automatically log an issue.
+
+* Click **Edit this page** to make a change to content, which automatically creates a PR.
+
+The issue and PR pages on GitHub give us a community space to discuss
+things, and answer any questions you might have about the problem or topic you
+are reporting on.
+
+To learn more about working on the documentation, see these topics:
 
 - [README on docker/docker.github.io](https://github.com/docker/docker.github.io/blob/master/README.md)
 
@@ -69,15 +99,18 @@ To learn more, see these topics:
 published site. It explains how to use Docs components, resources, and
 formats, and gives us a way to test and demo them.
 
-## Looking for the open source Moby project?
+## Looking for Moby?
 
-Docker [introduced the Moby
+Docker [introduced the open source Moby
 project](https://blog.docker.com/2017/04/introducing-the-moby-project/) to
-promote continued collaboration, experimentation, and development of
-container-based systems in a broader community of system builders.
+further promote collaboration, experimentation, and development of
+container-based systems in the broader community. Moby is a library of
+containerized components, a framework for assembling components into a container
+platform, and tools to build, test, and deploy artifacts. It included a
+reference assembly, which is the open base for the Docker platform.
 
-You can read about the Moby project, the open framework, and components at
-[mobyproject.org](https://mobyproject.org/).
+You can read about the Moby project, the open framework, components, and
+relationship of Docker to Moby at [mobyproject.org](https://mobyproject.org/).
 
 The Moby project lives [here](https://github.com/moby/moby).
 
@@ -85,11 +118,11 @@ See [Contribute to the Moby
 project](https://github.com/moby/moby/blob/master/CONTRIBUTING.md) to learn how
 to help work on the codebase.
 
-### Legacy fun
+## Legacy fun and practice
 
 For practice with GitHub and contributing to a codebase, read through
 [Contribute to Kitematic](/opensource/kitematic/index.md) which incorporates the
-kind of walkthrough that we originally provided as a contributor guide here.
-See also, the [Kitematic
+kind of walkthrough we originally provided as an open source contributor guide
+here. See also, the [Kitematic
 README](https://github.com/docker/kitematic/blob/master/README.md), and the
 [Kitematic user guide](/kitematic/userguide.md).
