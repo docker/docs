@@ -8,7 +8,7 @@ toc_min: 1
 Welcome to the Docker documentation test page!
 
 This is a demo of components, tags, styles, tools, and strategies we use for the
-docs. We explain the code behind the published page and demo the effect. So, if
+docs. We explain the code behind the published page and demo the effects. So, if
 you want to see, for example, how admonitions and notes are coded in markdown,
 read the section on [Admonitions (notes)](/test/#admonitions-notes) on the web
 published page and study the pre-processed `test.md` to see how they are
@@ -16,8 +16,8 @@ implemented. The Docker documentation team uses this page as "note to self"
 reminders. Since we invite docs suggestions and contributions from the
 community, we've always made the test page generally available.
 
-If you want to understand how something in the docs is coded, use this is
-a resource.
+If you want to understand how something in the docs is coded, use this is as a
+resource.
 
 If, in the course of making docs updates and suggestions, you develop a new
 strategy or component for the docs, feel free to add a demo and explanation to
