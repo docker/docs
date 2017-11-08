@@ -348,7 +348,7 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
 
-[Download](https://download.docker.com/mac/stable/12133/Docker.dmg)
+[Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
 
 **New**
 
@@ -468,7 +468,7 @@ events or unexpected unmounts.
 
 * Bug fixes and minor changes
   - Fix centos:5 & centos:6 images not starting properly with LinuxKit VM (fixes [docker/for-mac#2169](https://github.com/docker/for-mac/issues/2169)).
- 
+
 
 ### Docker Community Edition 17.10.0-ce-mac36 2017-10-24 (Edge)
 
