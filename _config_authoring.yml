@@ -6,7 +6,6 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
   toc_levels: 2..3
-incremental: true
 permalink: pretty
 safe: false
 lsi: false
@@ -15,6 +14,9 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
+
+# TO USE ME:
+# jekyll serve --incremental --config _config_authoring.yml
 
 docker_ce_stable_version: "17.09"
 latest_stable_docker_engine_api_version: "1.32"
@@ -51,10 +53,7 @@ collections:
     output: true
 
 plugins:
-  - jekyll-redirect-from
   - jekyll-seo-tag
-  - jekyll-relative-links
-  - jekyll-sitemap
 
 defaults:
   -

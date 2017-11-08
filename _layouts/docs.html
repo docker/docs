@@ -249,10 +249,12 @@
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
 	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
+	var pageURL = '{{ page.url }}';
 	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
 	<script defer src="/js/docs.js"></script>
+	<script defer src="/js/toc.js"></script>
 	<script language="javascript">
 	jQuery(document).ready(function(){
 			$.getJSON( "/metadata.txt", function( data ) {
