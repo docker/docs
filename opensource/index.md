@@ -94,6 +94,17 @@ To learn more about working on the documentation, see these topics:
 published site. It explains how to use Docs components, resources, and
 formats, and gives us a way to test and demo them.
 
+## Looking for meetups and Docker Community?
+
+Go to the [Docker Community GitHub
+repository](https://github.com/docker/community/blob/master/README.md){:
+target="_blank" class="_"} for resources and information on the community.
+
+The topics in this guide on [Other ways to contribute](/opensource/ways/)
+provide some additional information,  but it's likely you'll find the community
+information you are looking for on the GitHub repository.
+
+
 ## Looking for Moby?
 
 Docker [introduced the open source Moby

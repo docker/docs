@@ -4,6 +4,20 @@ keywords: support, community, users, irc
 title: Support the community
 ---
 
+
+## Learn about the Docker Community
+
+Go to the **[Docker Community GitHub
+repository](https://github.com/docker/community/blob/master/README.md){:
+target="_blank" class="_"}** for
+resources and information on the community. Those pages are the most
+up-to-date for finding out about the community and making connections.
+
+The topics below provide some additional links, but it's likely that everything
+you need will be on the GitHub repository.
+
+## Become a Mentor
+
 With millions of Docker users all over the world, there's always someone who
 needs a helping hand. Like many open source projects, the Docker project relies
 on community support channels like forums, IRC, and StackOverflow.  You should
