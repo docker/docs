@@ -642,7 +642,7 @@ $ docker service create \
   --placement-pref 'spread=node.labels.datacenter' \
   redis:3.0.6
 ```
-Note that nodes that are missing the label used to spread, will still receive 
+Note that nodes which are missing the label used to spread, will still receive 
 task assignments. As a group, they will receive tasks in equal proportion to 
 any of the other groups identified by a specific label value. In a sense, a 
 missing label is the same as having the label with a null value attached to it. 
