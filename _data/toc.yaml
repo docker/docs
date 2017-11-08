@@ -468,6 +468,11 @@ guides:
   section:
   - path: /opensource/
     title: Contribute to the documentation
+  - path: /test/
+    title: Learn docs components and formats
+  - path:  https://github.com/docker/docker.github.io/blob/master/README.md
+    title: README for docker.github.io
+
 - sectiontitle:
   section:
   - path: /docsarchive/
