@@ -16,8 +16,8 @@ implemented. The Docker documentation team uses this page as "note to self"
 reminders. Since we invite docs suggestions and contributions from the
 community, we've always made the test page generally available.
 
-If you want to understand how something in the docs is coded, use this is as a
-resource.
+If you want to understand how something in the docs is coded, use this page is
+as a resource.
 
 If, in the course of making docs updates and suggestions, you develop a new
 strategy or component for the docs, feel free to add a demo and explanation to
