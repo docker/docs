@@ -29,10 +29,7 @@ redirect_from:
 - /opensource/governance/dgab-info/
 - /opensource/governance/board-profiles/
 - /opensource/governance/conduct-code/
-- /opensource/ways/
-- /opensource/ways/meetups/
 - /opensource/ways/issues/
-- /opensource/ways/community/
 - /opensource/ways/test/
 
 ---
