@@ -472,6 +472,8 @@ guides:
     title: Learn docs components and formats
   - path:  https://github.com/docker/docker.github.io/blob/master/README.md
     title: README for docker.github.io
+  - path: /opensource/ways/
+    title: Other ways to contribute
 
 - sectiontitle:
   section:
