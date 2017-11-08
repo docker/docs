@@ -29,8 +29,6 @@ redirect_from:
 - /opensource/governance/dgab-info/
 - /opensource/governance/board-profiles/
 - /opensource/governance/conduct-code/
-- /opensource/ways/issues/
-- /opensource/ways/test/
 
 ---
 
