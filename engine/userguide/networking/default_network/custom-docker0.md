@@ -34,7 +34,7 @@ following settings to configure the default bridge network:
 ```json
 {
   "bip": "192.168.1.5/24",
-  "fixed-cidr": "10.20.0.0/16",
+  "fixed-cidr": "192.168.1.5/25",
   "fixed-cidr-v6": "2001:db8::/64",
   "mtu": 1500,
   "default-gateway": "10.20.1.1",
@@ -53,11 +53,11 @@ each:
 
 - `--fixed-cidr=CIDR` and `--fixed-cidr-v6=CIDRv6`: restrict the IP range from
   the `docker0` subnet, using standard CIDR notation. For example:
-  `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs, such as
-  `10.20.0.0/16`, and must be a subset of the bridge IP range (`docker0` or set
-  using `--bridge`). For example, with `--fixed-cidr=192.168.1.0/25`, IPs for
-  your containers will be chosen from the first half of addresses included in
-  the `192.168.1.0/24` subnet.
+  `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs, and must
+  be a subset of the bridge IP range (`docker0` or set
+  using `--bridge` or the `bip` key in the `daemon.json` file). For example,
+  with --fixed-cidr=192.168.1.0/25, IPs for your containers will be chosen from
+  the first half of addresses included in the 192.168.1.0/24 subnet.
 
 - `--mtu=BYTES`: override the maximum packet length on `docker0`.
 
