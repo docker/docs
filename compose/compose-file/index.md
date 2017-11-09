@@ -739,9 +739,13 @@ updates.
   (default: `pause`).
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
+- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks will briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
+
+> **Note**: `order` is only supported for v3.4 and higher of the compose
+file format.
 
 ```none
-version: '3'
+version: '3.4'
 services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -752,6 +756,7 @@ services:
       update_config:
         parallelism: 2
         delay: 10s
+        order: stop-first
 ```
 
 #### Not supported for `docker stack deploy`
@@ -1007,7 +1012,7 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
 must be connected to at least one of the same networks as the service which is
-linking to them. Starting with Version 2, [links](compose-file-v2#links) are a
+linking to them. [Links](compose-file-v2#links) are a
 legacy option. We recommend using [networks](#networks) instead.
 >
 > This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
@@ -1942,6 +1947,45 @@ discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-netw
 networking concepts lab on the [Overlay Driver Network
 Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
 
+#### host or none
+
+Use the host's networking stack, or no networking. Equivalent to
+`docker run --net=host` or `docker run --net=none`. Only used if you use
+`docker stack` commands. If you use the `docker-compose` command,
+use [network_mode](#network_mode) instead.
+
+The syntax for using built-in networks like `host` and `none` is a little
+different. Define an external network with the name `host` or `none` (which
+Docker has already created automatically) and an alias that Compose can use
+(`hostnet` or `nonet` in these examples), then grant the service access to that
+network, using the alias.
+
+```yaml
+services:
+  web:
+    ...
+    networks:
+      hostnet: {}
+
+networks:
+  hostnet:
+    external:
+      name: host
+```
+
+```yaml
+services:
+  web:
+    ...
+    networks:
+      nonet: {}
+
+networks:
+  nonet:
+    external:
+      name: none
+```
+
 ### driver_opts
 
 Specify a list of options as key-value pairs to pass to the driver for this
@@ -1951,6 +1995,23 @@ documentation for more information. Optional.
       driver_opts:
         foo: "bar"
         baz: 1
+
+### attachable
+
+> **Note**: Only supported for v3.2 and higher.
+
+Only used when the `driver` is set to `overlay`. If set to `true`, then
+standalone containers can attach to this network, in addition to services. If a
+standalone container attaches to an overlay network, it can communicate with
+services and standalone containers which are also attached to the overlay
+network from other Docker daemons.
+
+```yaml
+networks:
+  mynet1:
+    driver: overlay
+    attachable: true
+```
 
 ### enable_ipv6
 
@@ -2132,6 +2193,12 @@ stack.
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
+
+## Extension fields
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34).
+
+{% include content/compose-extfields-sub.md %}
 
 ## Compose documentation
 

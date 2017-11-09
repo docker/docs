@@ -8,25 +8,17 @@ CloudFormation templates for past releases. If starting out, please use the late
 
 ## CE (Stable)
 
-### 17.03.1
+### 17.06.2
 
-http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.03.1/Docker.tmpl
-
-### 17.03.1
-
-http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.03.1/Docker.tmpl
-
-### 17.03.0
-
-http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.03.0/Docker.tmpl
+http://editions-us-east-1.s3.amazonaws.com/aws/stable/17.06.2/Docker.tmpl
 
 ## EE
 
-### 17.06.1
+### 17.06.2
 
- * Docker EE Basic: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.1/Docker.tmpl
- * Docker EE Standard and Advanced: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.1/Docker-DDC.tmpl
+ * Docker EE Basic: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.2/Docker-EE.tmpl
+ * Docker EE Standard and Advanced: https://editions-us-east-1.s3.amazonaws.com/aws/17.06/17.06.2/Docker-DDC.tmpl
 
-### 17.03.1
+### 17.03.2
 
-https://editions-us-east-1.s3.amazonaws.com/aws/17.03/17.03.1/Docker.tmpl
+https://editions-us-east-1.s3.amazonaws.com/aws/17.03/17.03.2/Docker.tmpl

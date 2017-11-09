@@ -1,7 +1,7 @@
 ---
 description: Docker Store frequently asked questions
 keywords: Docker, docker, store, purchase images
-title: Docker Store frequently asked questions (FAQ)
+title: Consumer FAQs
 ---
 
 ### How do I log in to the Docker Store?

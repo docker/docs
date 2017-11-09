@@ -18,7 +18,7 @@ The following Autodestroy options are available:
 
 If **Autorestart** is activated, Docker Cloud evaluates whether to try restarting the container or not before evaluating **Autodestroy**.
 
-## Launching a service with Autodestroy
+## Launch a service with Autodestroy
 
 You can enable **Autodestroy** on the **Service configuration** step of the **Launch new service** wizard.
 
@@ -26,13 +26,13 @@ You can enable **Autodestroy** on the **Service configuration** step of the 
 
 Autodestroy is set to `OFF` (deactivated) by default.
 
-### Using the API or CLI
+### Use the API or CLI
 
 You can enable autodestroy when launching a service through the API or CLI.
 
 If not provided, it will have a default value of `OFF`. Check our [API documentation](/apidocs/docker-cloud.md) for more information.
 
-#### Launching with autodestroy using the API
+#### Launch with autodestroy using the API
 ```
 POST /api/app/v1/service/ HTTP/1.1
 {
@@ -41,12 +41,12 @@ POST /api/app/v1/service/ HTTP/1.1
 }
 ```
 
-#### Launching with autodestroy using the CLI
+#### Launch with autodestroy using the CLI
 ```
 $ docker-cloud service run --autodestroy ALWAYS [...]
 ```
 
-## Enabling autodestroy on an already deployed service
+## Enable autodestroy on an already deployed service
 
 You can also activate or deactivate the **Autodestroy** setting on a service
 after it has been deployed, by editing the service.
@@ -56,14 +56,14 @@ after it has been deployed, by editing the service.
 3. Select the new autodestroy setting.
 4. Click **Save**.
 
-### Using the API or CLI
+### Use the API or CLI
 
 You can set the **Autodestroy** option after the service has been
 deployed, using the API or CLI.
 
 Check our [API documentation](/apidocs/docker-cloud.md) for more information.
 
-#### Enabling autodestroy using the API
+#### Enable autodestroy using the API
 ```
 PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
 {
@@ -71,7 +71,7 @@ PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
 }
 ```
 
-#### Enabling autodestroy using the CLI
+#### Enable autodestroy using the CLI
 ```
 $ docker-cloud service set --autodestroy ALWAYS (name or uuid)
 ```

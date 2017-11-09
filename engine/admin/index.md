@@ -83,6 +83,60 @@ documentation. Some places to go next include:
 - [Configure storage drivers](/engine/userguide/storagedriver/index.md)
 - [Container security](/engine/security/index.md)
 
+### Troubleshoot conflicts between the `daemon.json` and startup scripts
+
+If you use a `daemon.json` file and also pass options to the `dockerd`
+command manually or using start-up scripts, and these options conflict,
+Docker will fail to start with an error such as:
+
+```none
+unable to configure the Docker daemon with file /etc/docker/daemon.json:
+the following directives are specified both as a flag and in the configuration
+file: hosts: (from flag: [unix:///var/run/docker.sock], from file: [tcp://127.0.0.1:2376])
+```
+
+If you see an error similar to this one and you are starting the daemon manually with flags,
+you may need to adjust your flags or the `daemon.json` to remove the conflict.
+
+> **Note**: If you see this specific error, continue to the
+> [next section](#use-the-hosts-eky-in-daemon-json-with-systemd) for a workaround.
+
+If you are starting Docker using your operating system's init scripts, you may
+need to override the defaults in these scripts in ways that are specific to the
+operating system.
+
+#### Use the hosts key in daemon.json with systemd
+
+One notable example of a configuration conflict that is difficult to troubleshoot
+is when you want to specify a different daemon address from
+the default. Docker listens on a socket by default. On Debian and Ubuntu systems using `systemd`),
+this means that a `-H` flag is always used when starting `dockerd`. If you specify a
+`hosts` entry in the `daemon.json`, this causes a configuration conflict (as in the above message)
+and Docker fails to start.
+
+To work around this problem, create a new file `/etc/systemd/system/docker.service.d/docker.conf` with
+the following contents, to remove the `-H` argument that is used when starting the daemon by default.
+
+```none
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd
+```
+
+There are other times when you might need to configure `systemd` with Docker, such as
+[configuring a HTTP or HTTPS proxy](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy).
+
+> **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
+> or a `-H` flag when starting Docker manually, Docker will fail to start.
+
+Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker starts
+successfully, it is now listening on the IP address specified in the `hosts` key of the
+`daemon.json` instead of a socket.
+
+> **Important**: Setting `hosts` in the `daemon.json` is not supported on Docker for Windows
+> or Docker for Mac.
+{:.important}
+
 ## Troubleshoot the daemon
 
 You can enable debugging on the daemon to learn about the runtime activity of
@@ -177,10 +231,36 @@ This will force a stack trace to be logged but will not stop the daemon.
 Daemon logs will show the stack trace or the path to a file containing the
 stack trace if it was logged to a file.
 
-
 The daemon will continue operating after handling the `SIGUSR1` signal and
 dumping the stack traces to the log. The stack traces can be used to determine
 the state of all goroutines and threads within the daemon.
+
+### View stack traces
+
+The Docker daemon log can be viewed by using one of the following methods:
+
+- By running `journalctl -u docker.service` on Linux systems using `systemctl`
+- `/var/log/messages`, `/var/log/daemon.log`, or `/var/log/docker.log` on older
+  Linux systems
+- By running `Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-5) | Sort-Object Time` on Docker EE for Windows Server
+
+> **Note**: It is not possible to manually generate a stack trace on Docker for
+> Mac or Docker for Windows. However, you can click the Docker taskbar icon and
+> choose **Diagnose and feedback** to send information to Docker if you run into
+> issues.
+
+Look in the Docker logs for a message like the following:
+
+```none
+...goroutine stacks written to /var/run/docker/goroutine-stacks-2017-06-02T193336z.log
+...daemon datastructure dump written to /var/run/docker/daemon-data-2017-06-02T193336z.log
+```
+
+The locations where Docker saves these stack traces and dumps depends on your
+operating system and configuration. You may be able to get useful diagnostic
+information straight from the stack traces and dumps. Otherwise, you can provide
+this information to Docker for help diagnosing the problem.
+
 
 ## Check whether Docker is running
 

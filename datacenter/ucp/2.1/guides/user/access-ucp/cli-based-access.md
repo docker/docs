@@ -52,6 +52,17 @@ local Docker CLI communicate with UCP. It also updates the `DOCKER_CERT_PATH`
 environment variable to use the client certificates that are included in the
 client bundle you downloaded.
 
+To verify a client certificate bundle has been loaded and the client is
+successfully communicating with UCP, look for `ucp` in the `Server Version`
+returned by `docker version`.
+
+```bash
+{% raw %}
+$ docker version --format '{{.Server.Version}}'
+{% endraw %}
+ucp/2.1.0
+```
+
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine.
 You can now use the Docker CLI to create services, networks, volumes, and other

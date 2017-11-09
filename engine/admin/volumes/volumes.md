@@ -65,7 +65,7 @@ If you need to specify volume driver options, you must use `--mount`.
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
-  - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type will always
     be `volume`.
   - The `source` of the mount. For named volumes, this is the name of the volume.
@@ -212,6 +212,7 @@ uses a local volume called `myvol2`.
 
 ```bash
 $ docker service create -d \
+  --replicas=4 \
   --name devtest-service \
   --mount source=myvol2,target=/app \
   nginx:latest

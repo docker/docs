@@ -86,15 +86,11 @@ fe00::0	ip6-localnet
 ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
-root@0cb243cd1293:/# ifconfig
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+root@0cb243cd1293:/# ip -4 addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
 
 root@0cb243cd1293:/#
 ```
@@ -229,25 +225,14 @@ a `#` character.
 ```none
 $ docker attach container1
 
-root@3386a527aa08:/# ifconfig
+root@3386a527aa08:/# ip -4 addr
 
-eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
-          inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
-          inet6 addr: fe80::42:acff:fe11:2/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
-          RX packets:16 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:1296 (1.2 KiB)  TX bytes:648 (648.0 B)
-
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+633: eth0@if634: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue
+    inet 172.17.0.2/16 scope global eth0
+       valid_lft forever preferred_lft forever
 ```
 
 From inside the container, use the `ping` command to test the network connection
@@ -289,6 +274,26 @@ The default `docker0` bridge network supports the use of port mapping and
 `docker run --link` to allow communications among containers in the `docker0`
 network. This approach is not recommended. Where possible, you should use
 [user-defined bridge networks](#user-defined-networks) instead.
+
+#### Disable the default bridge network
+
+If you do not want the default bridge network to be created at all, add the
+following to the `daemon.json` file. This only applies when the Docker daemon
+runs on a Linux host.
+
+```json
+"bridge": "none",
+"iptables": "false"
+```
+
+Restart Docker for the changes to take effect.
+
+You can also manually start the `dockerd` with the flags `--bridge=none
+--iptables=false`. However, this may not start the daemon with the same
+environment as the system init scripts, so other behaviors may be changed.
+
+Disabling the default bridge network is an advanced option that most users will
+not need.
 
 ## User-defined networks
 
@@ -525,16 +530,16 @@ network and user-defined bridge networks.
 
 - You expose ports using the `EXPOSE` keyword in the Dockerfile or the
   `--expose` flag to `docker run`. Exposing ports is a way of documenting which
-  ports are used, but does not actually map or open any ports. Exposing ports
+  ports are used, but **does not actually map or open any ports**. Exposing ports
   is optional.
-- You publish ports using the `PUBLISH` keyword in the Dockerfile or the
-  `--publish` flag to `docker run`. This tells Docker which ports to open on the
-  container's network interface. When a port is published, it is mapped to an
+- You publish ports using the `--publish` or `--publish-all` flag to `docker run`.
+  This tells Docker which ports to open on the container's network interface.
+  When a port is published, it is mapped to an
   available high-order port (higher than `30000`) on the host machine, unless
   you specify the port to map to on the host machine at runtime. You cannot
-  specify the port to map to on the host machine in the Dockerfile, because
-  there is no way to guarantee that the port will be available on the host
-  machine where you run the image.
+  specify the port to map to on the host machine when you build the image (in the
+  Dockerfile), because there is no way to guarantee that the port will be available
+  on the host machine where you run the image.
 
   This example publishes port 80 in the container to a random high
   port (in this case, `32768`) on the host machine. The `-d` flag causes the
@@ -579,7 +584,7 @@ configure it in different ways:
 
 1.  On the Docker client, create or edit the file `~/.config.json` in the
     home directory of the user which starts containers. Add JSON such as the
-    following, substituting the type of proxy with `httpsproxy` or `ftpproxy` if
+    following, substituting the type of proxy with `httpsProxy` or `ftpProxy` if
     necessary, and substituting the address and port of the proxy server. You
     can configure multiple proxy servers at the same time.
 
@@ -592,8 +597,11 @@ configure it in different ways:
     {
       "proxies":
       {
-        "httpProxy": "http://127.0.0.1:3001",
-        "noProxy": "*.test.example.com,.example2.com"
+        "default":
+        {
+          "httpProxy": "http://127.0.0.1:3001",
+          "noProxy": "*.test.example.com,.example2.com"
+        }
       }
     }
     ```
@@ -611,12 +619,12 @@ value. This method makes the image less portable, so if you have Docker 17.07
 or higher, you should [configure the Docker client](#configure-the-docker-client)
 instead.
 
-| Variable      | Dockerfile example                               | `docker run` Example                                |
-|:--------------|:-------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY "http://127.0.0.1:3001"`         | `--env HTTP_PROXY "http://127.0.0.1:3001"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY "https://127.0.0.1:3001"`       | `--env HTTPS_PROXY "https://127.0.0.1:3001"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY "ftp://127.0.0.1:3001"`           | `--env FTP_PROXY "ftp://127.0.0.1:3001"`            |
-| `NO_PROXY`    | `ENV NO_PROXY "*.test.example.com,.example2.com" | `--env NO_PROXY "*.test.example.com,.example2.com"` |
+| Variable      | Dockerfile example                                | `docker run` Example                                |
+|:--------------|:--------------------------------------------------|:----------------------------------------------------|
+| `HTTP_PROXY`  | `ENV HTTP_PROXY "http://127.0.0.1:3001"`          | `--env HTTP_PROXY "http://127.0.0.1:3001"`          |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY "https://127.0.0.1:3001"`        | `--env HTTPS_PROXY "https://127.0.0.1:3001"`        |
+| `FTP_PROXY`   | `ENV FTP_PROXY "ftp://127.0.0.1:3001"`            | `--env FTP_PROXY "ftp://127.0.0.1:3001"`            |
+| `NO_PROXY`    | `ENV NO_PROXY "*.test.example.com,.example2.com"` | `--env NO_PROXY "*.test.example.com,.example2.com"` |
 
 ## Links
 

@@ -6,6 +6,7 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 title: Get Docker EE for Ubuntu
+toc_max: 4
 ---
 
 To get started with Docker EE on Ubuntu, make sure you
@@ -143,7 +144,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
        $(lsb_release -cs) \
-       stable-{{ site.docker-ee_version }}"
+       stable-{{ site.docker_ee_version }}"
     ```
 
     **s390x**:
@@ -152,7 +153,7 @@ from the repository.
     $ sudo add-apt-repository \
        "deb [arch=s390x] {{ download-url-base }} \
        $(lsb_release -cs) \
-       stable-{{ site.docker-ee_version }}"
+       stable-{{ site.docker_ee_version }}"
     ```
 
 #### Install Docker EE
@@ -185,7 +186,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ee
 
-    docker-ee | {{ site.docker-ee_version }}.0~ee-0~ubuntu-xenial | <DOCKER-EE-URL>/ubuntu xenial/stable amd64 Packages
+    docker-ee | {{ site.docker_ee_version }}.0~ee-0~ubuntu-xenial | <DOCKER-EE-URL>/ubuntu xenial/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
@@ -239,7 +240,7 @@ a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `ubuntu/x86_64/stable-{{ site.docker-ee_version }}` and download the `.deb` file for the
+    `ubuntu/x86_64/stable-{{ site.docker_ee_version }}` and download the `.deb` file for the
     Docker EE version you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded

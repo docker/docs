@@ -4,20 +4,14 @@ keywords: 'container, storage, driver, AUFS '
 title: Use the AUFS storage driver
 ---
 
-AUFS a *union filesystem*. The `aufs` storage driver is the default storage
-driver used for managing images and layers on Docker for Ubuntu, and for
-Debian versions prior to Stretch. For Debian Stretch,
-[overlay2](overlayfs-driver.md) is the default.
+AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
+storage driver used for managing images and layers on Docker for Ubuntu, and for
+Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
+and you use Docker CE, consider using the newer
+[overlay2](overlayfs-driver.md){: target="_blank" class="_" }, which has
+potential performance advantages over the `aufs` storage driver.
 
-AUFS is the most mature storage driver used by Docker. It provides fast
-container startup time, as well as efficient usage of memory and storage.
-
-If your Linux kernel is version 4.0 or higher, and you use Docker CE, consider
-using the newer [overlay2](overlayfs-driver.md){: target="_blank" class="_" },
-which has potential performance advantages over the `aufs` storage driver.
-
-> **Note**: Even though AUFS is used by default if it is present in the Linux
-> kernel, it is not supported on some distributions and Docker editions. See
+> **Note**: AUFS is not supported on some distributions and Docker editions. See
 > [Prerequisites](#prerequisites) > for more information about supported
 > platforms, and see also
 > [the order of preferences for storage drivers](selectadriver.md#storage-driver-order).

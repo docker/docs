@@ -102,7 +102,6 @@ The HTTP routing mesh can route to a service, as long as that service:
 
 *  Is attached to a network that has the `com.docker.ucp.mesh.http` label.
    You can use the default `ucp-hrm` network or create your own.
-*  Publishes the ports that you want to route to.
 *  Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
    the ports to route to.
 
@@ -136,13 +135,13 @@ com.docker.ucp.mesh.http.2=<key-1>=<value-1>
 The keys and values in your label are what defined the route configuration.
 These keys are supported:
 
-| Key                   | Mandatory                                 | Values                                                            | Description                                                                                              |
-|:----------------------|:------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|
-| external_route        | yes                                       | http://domain-name, http://domain-name/path, or sni://domain-name | The external URL to route to this service                                                                |
-| internal_port         | yes, if the port published multiple ports | port-number                                                       | The internal port to use for the service                                                                 |
-| sticky_sessions       | no                                        | cookie-name                                                       | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
-| redirect              | no                                        | http://domain-name, or sni://domain-name                          | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
-| include_forwarded_for | no                                        | true                                                              | If present, include the X-Forwarded-For header in requests                                               |
+| Key                   | Mandatory                                                | Values                                                            | Description                                                                                              |
+|:----------------------|:---------------------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| external_route        | yes                                                      | http://domain-name, http://domain-name/path, or sni://domain-name | The external URL to route to this service                                                                |
+| internal_port         | yes, if the service publishes no ports or multiple ports | port-number                                                       | The internal port to use for the service                                                                 |
+| sticky_sessions       | no                                                       | cookie-name                                                       | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
+| redirect              | no                                                       | http://domain-name, or sni://domain-name                          | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
+| include_forwarded_for | no                                                       | true                                                              | If present, include the X-Forwarded-For header in requests                                               |
 
 
 ### Sticky sessions

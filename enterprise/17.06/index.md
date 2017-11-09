@@ -2,6 +2,9 @@
 title: Docker EE 17.06 release notes
 description: Docker Enterprise Edition 17.06 release notes
 keywords: docker ee, release notes, upgrade
+redirect_from:
+- /enterprise/release-notes/
+- /enterprise/17.06/release-notes/
 toc_max: 2
 ---
 
@@ -14,16 +17,80 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-5 (2017-11-02)
 
-## 17.06.2-ee-3
-(2017-09-22)
+### Important notes about this release
+
+- Starting with Docker EE 17.06.2-ee-5, Ubuntu, SLES, RHEL packages are also available
+  for IBM Power using the ppc64le architecture.
+
+- Docker EE 17.06.2-ee-5 now enables the [telemetry plugin](/enterprise/telemetry/)
+  by default on all supported Linux distributions. For more details, including how to
+  opt out, see [the documentation](/enterprise/telemetry/).
+
+### Client
+
+* Set APIVersion on the client, even when Ping fails [docker/cli#546](https://github.com/docker/cli/pull/546)
+
+### Logging
+
+* Fix "raw" mode with the Splunk logging driver [moby/moby#34520](https://github.com/moby/moby/pull/34520)
+
+### Networking
+
+* Disable hostname lookup to speed up check if chain chain exists [docker/libnetwork#1974](https://github.com/docker/libnetwork/pull/1974)
+* Handle cleanup DNS for attachable container to prevent leak in name resolution [docker/libnetwork#1989](https://github.com/docker/libnetwork/pull/1989)
+
+### Packaging
+
++ Add telemetry plugin for all linux distributions
++ Fix install of docker-ee on RHEL7 s390x by removing dependency on `container-selinux`
+
+### Runtime
+
+* Automatically set `may_detach_mounts=1` on startup [moby/moby#34886](https://github.com/moby/moby/pull/34886)
+* Fallback to use naive diff driver if enable CONFIG_OVERLAY_FS_REDIRECT_DIR [moby/moby#34342](https://github.com/moby/moby/pull/34342)
+* Set selinux label on local volumes from mounts API [moby/moby#34684](https://github.com/moby/moby/pull/34684)
+* Close pipe in overlay2 graphdriver [moby/moby#34863](https://github.com/moby/moby/pull/34863)
+* Relabel config files [moby/moby#34732](https://github.com/moby/moby/pull/34732)
++ Add support for Windows version filtering on pull of docker image [moby/moby#35090](https://github.com/moby/moby/pull/35090)
+
+### Swarm mode
+
+* Increase gRPC request timeout to 20 seconds for sending snapshots to prevent `context deadline exceeded` errors [docker/swarmkit#2391](https://github.com/docker/swarmkit/pull/2391)
+* When a node is removed, delete all of its attachment tasks so networks used by those tasks can be removed [docker/swarmkit#2414](https://github.com/docker/swarmkit/pull/2414)
+
+### Known issues
+
+ * It's recommended that users create overlay networks with `/24` blocks (the default) of 256 IP addresses when networks are used by services created using VIP-based endpoint-mode (the default). This is because of limitations with Docker Swarm [moby/moby#30820](moby/moby/issues/30820). Users should _not_ work around this by increasing the IP block size. To work around this limitation, either use `dnsrr` endpoint-mode or use multiple smaller overlay networks.
+ * Docker may experience IP exhaustion if many tasks are assigned to a single overlay network, for example if many services are attached to that network or because services on the network are scaled to many replicas. The problem may also manifest when tasks are rescheduled because of node failures. In case of node failure, Docker currently waits 24h to release overlay IP addresses. The problem can be diagnosed by looking for `failed to allocate network IP for task` messages in the Docker logs.
+* SELinux enablement is not supported for containers on IBM Z on RHEL because of missing Red Hat package.
+
+## 17.06.2-ee-4 (2017-10-12)
+
+### Client
+
+* Fix idempotence of `docker stack deploy` when secrets or configs are used [docker/cli#509](https://github.com/docker/cli/pull/509)
+
+### Logging
+
+* Avoid using a map for log attributes to prevent panic [moby/moby#34174](https://github.com/moby/moby/pull/34174)
+
+### Networking
+
+* Fix for garbage collection logic in NetworkDB. Entries were not properly garbage collected and deleted within the expected time [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
+* Allow configuration of max packet size in network DB to use the full available MTU. Note this will require a configuration in the docker daemon and need a dockerd restart [docker/libnetwork#1839](https://github.com/docker/libnetwork/pull/1839)
+* Overlay fix for transient IP reuse [docker/libnetwork#1935](https://github.com/docker/libnetwork/pull/1935) [docker/libnetwork#1968](https://github.com/docker/libnetwork/pull/1968)
+* Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/libnetwork/pull/1788)
+
+
+## 17.06.2-ee-3 (2017-09-22)
 
 ### Swarm mode
 
 - Increase max message size to allow larger snapshots [docker/swarmkit#131](https://github.com/docker/swarmkit/pull/131)
 
-## 17.06.1-ee-2
-(2017-08-24)
+## 17.06.1-ee-2 (2017-08-24)
 
 ### Client
 
@@ -42,8 +109,7 @@ adopted as quickly for consistency and compatibility reasons.
 
 - Ignore PullOptions for running tasks [#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## 17.06.1-ee
-(2017-08-16)
+## 17.06.1-ee (2017-08-16)
 
 ### Important notes about this release
 

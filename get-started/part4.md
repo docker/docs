@@ -156,7 +156,7 @@ myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.
 myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce   
 ```
 
-#### Initialze the swarm and add nodes
+#### Initialize the swarm and add nodes
 
 The first machine will act as the manager, which executes management commands
 and authenticates workers to join the swarm, and the second will be a worker.
@@ -325,7 +325,7 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 
 Now that you have my `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
-3 to `myvm1`, and your local copy of `docker-stack.yml.`
+3 to `myvm1`, and your local copy of `docker-compose.yml.`
 
 You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
@@ -515,7 +515,7 @@ which kept load-balancing requests across containers, even though they were
 running on different machines. Finally, you learned how to iterate and scale
 your app on a cluster.
 
-Here are some commands you might like to run to interact with your swarm a bit:
+Here are some commands you might like to run to interact with your swarm and your VMs a bit:
 
 ```shell
 docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
@@ -525,11 +525,18 @@ docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
 docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
 docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
 docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+docker node ls                # View nodes in swarm (while logged on to manager)
 docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
 docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+docker-machine ls # list VMs, asterisk shows which VM this shell is talking to
 docker-machine start myvm1            # Start a VM that is currently not running
+docker-machine env myvm1      # show environment variables and command for myvm1
+eval $(docker-machine env myvm1)         # Mac command to connect shell to myvm1
+& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression   # Windows command to connect shell to myvm1
+docker stack deploy -c <file> <app>  # Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
+docker-machine scp docker-compose.yml myvm1:~ # Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)
+docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app using ssh (you must have first copied the Compose file to myvm1)
+eval $(docker-machine env -u)     # Disconnect shell from VMs, use native docker
 docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
 docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
-docker-machine scp docker-compose.yml myvm1:~     # Copy file to node's home dir
-docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app
 ```

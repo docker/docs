@@ -44,7 +44,7 @@ Then source the `env.sh` script.
 
 ```bash
 $ unzip ucp-bundle-dave.lauper.zip
-$ eval $(<env.sh)
+$ eval "$(<env.sh)"
 ```
 
 The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
@@ -55,6 +55,17 @@ client bundle you downloaded.
 > **Note**: The bundle includes scripts for setting up Windows nodes. To set up a
 > Windows environment, run `env.cmd` in an elevated command prompt, or run
 > `env.ps1` in an elevated PowerShell prompt.
+
+To verify a client certificate bundle has been loaded and the client is
+successfully communicating with UCP, look for `ucp` in the `Server Version`
+returned by `docker version`.
+
+```bash
+{% raw %}
+$ docker version --format '{{.Server.Version}}'
+{% endraw %}
+{{ page.ucp_repo }}/{{ page.ucp_version }}
+```
 
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine. You can now use the

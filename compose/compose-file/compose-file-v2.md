@@ -236,6 +236,23 @@ build.
       context: .
       network: custom_network_1
 
+#### shm_size
+
+> Added in [version 2.3](compose-versioning.md#version-23) file format
+
+Set the size of the `/dev/shm` partition for this build's containers. Specify
+as an integer value representing the number of bytes or as a string expressing
+a [byte value](#specifying-byte-values).
+
+    build:
+      context: .
+      shm_size: '2gb'
+
+
+    build:
+      context: .
+      shm_size: 10000000
+
 #### target
 
 > Added in [version 2.3](compose-versioning.md#version-23) file format
@@ -702,6 +719,9 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 Link to containers in another service. Either specify both the service name and
 a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
+> Links are a legacy option. We recommend using
+> [networks](#networks) instead.
+
     web:
       links:
        - "db"
@@ -928,6 +948,20 @@ port (a random host port will be chosen).
      - "127.0.0.1:8001:8001"
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
+
+### scale
+
+> [Added in version 2.2 file format](compose-versioning.md#version-22)
+
+Specify the default number of containers to deploy for this service. Whenever
+you run `docker-compose up`, Compose will create or remove containers to match
+the specified number. This value can be overridden using the
+[`--scale`](/compose/reference/up.md) flag.
+
+    web:
+      image: busybox:latest
+      command: echo 'scaled'
+      scale: 3
 
 ### security_opt
 
@@ -1415,9 +1449,20 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+#### host or none
+
+Not supposed for version 2 `docker-compose` files. Use
+[network_mode](#network_mode) instead.
+
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
+
+## Extension fields
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21).
+
+{% include content/compose-extfields-sub.md %}
 
 ## Compose documentation
 

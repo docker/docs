@@ -72,7 +72,7 @@ WORKDIR /app
 ADD . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -92,9 +92,9 @@ CMD ["python", "app.py"]
 > proxy servers:
 >
 > ```conf
-> # Set proxy server, replace host:/port with values for your servers
-> ENV http_proxy host:/port
-> ENV https_proxy host:/port
+> # Set proxy server, replace host:port with values for your servers
+> ENV http_proxy host:port
+> ENV https_proxy host:port
 > ```
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
@@ -196,7 +196,7 @@ Run the app, mapping your machine's port 4000 to the container's published port
 docker run -p 4000:80 friendlyhello
 ```
 
-You should see a notice that Python is serving your app at `http://0.0.0.0:80`.
+You should see a message that Python is serving your app at `http://0.0.0.0:80`.
 But that message is coming from inside the container, which doesn't know you
 mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
@@ -215,12 +215,21 @@ $ curl http://localhost:4000
 <h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
 ```
 
-> **Note**: This port remapping of `4000:80` is to demonstrate the difference
+This port remapping of `4000:80` is to demonstrate the difference
 between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
 `docker run -p`. In later steps, we'll just map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
+
+ > On Windows, explicitly stop the container
+ >
+ > On Windows systems, `CTRL+C` does not stop the container. So, first
+ type `CTRL+C` to get the prompt back (or open another shell), then type
+ `docker container ls` to list the running containers, followed by
+ `docker container stop <Container NAME or ID>` to stop the
+ container. Otherwise, you'll get an error response from the daemon
+ when you try to re-run the container in the next step.
 
 Now let's run the app in the background, in detached mode:
 
@@ -272,7 +281,7 @@ Make note of your username.
 Log in to the Docker public registry on your local machine.
 
 ```shell
-docker login
+$ docker login
 ```
 
 ### Tag the image

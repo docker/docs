@@ -22,7 +22,13 @@ When you run a container with the `-p` argument, for example:
 ```
 $ docker run -p 80:80 -d nginx
 ```
-Docker for Mac will make the container port available at `localhost`.
+Docker for Mac will make whatever is running on port 80 in the container (in this case, `nginx`) available on port 80 of `localhost`. In this example, the host and container ports are the same. What if you need to specify a different host port? If, for example, you already have something running on port 80 of your host machine, you can connect the container to a different port:
+
+```
+$ docker run -p 8081:80 -d nginx
+```
+
+Now, connections to `localhost:8081` will be sent to port 80 in the container. The syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
@@ -47,13 +53,13 @@ http_proxy=http://proxy.example.com:3128
 no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy` and
+You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
 `no_proxy` environment variables are set. When your proxy configuration changes,
 Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
-using [restart policies](/engine/reference/run/#restart-policies-restart)
+using [restart policies](/engine/reference/run/#restart-policies-restart).
 
-## Known Limitations, Use Cases, and Workarounds
+## Known limitations, use cases, and workarounds
 
 Following is a summary of current limitations on the Docker for Mac networking
 stack, along with some ideas for workarounds.
@@ -65,8 +71,8 @@ Because of the way networking is implemented in Docker for Mac, you cannot see a
 
 ### I cannot ping my containers
 
-Unfortunately, due to limitations in macOS, we're unable to route traffic to
-containers, and from containers back to the host.
+Docker for Mac is unable to route traffic to containers, and from containers
+back to the host.
 
 ### Per-container IP addressing is not possible
 

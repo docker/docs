@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
 title: Get Docker EE for SLES
+toc_max: 4
 ---
 
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
@@ -38,17 +39,39 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 To install Docker EE, you need the 64-bit version of SLES 12.x. Docker EE is not
 supported on OpenSUSE.
 
-The only supported storage driver for Docker EE on SLES is `btrfs`, which will be
+The only supported storage driver for Docker EE on SLES is Btrfs, which will be
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
 BTRFS filesystem.
 
+#### Firewall configuration
+
+Docker creates a `DOCKER` iptables chain when it starts. The SUSE firewall may
+block access to this chain, which can prevent you from being able to run
+containers with published ports. You may see errors such as the following:
+
+```none
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+docker: Error response from daemon: driver failed programming external
+        connectivity on endpoint adoring_ptolemy
+        (0bb5fa80bc476f8a0d343973929bb3b7c039fc6d7cd30817e837bc2a511fce97):
+        (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 80 -j DNAT --to-destination 172.17.0.2:80 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1)).
+```
+
+If you see errors like this, adjust the start-up script order so that the
+firewall is started before Docker, and Docker stops before the firewall stops.
+See the
+[SLES documentation on init script order](https://www.suse.com/documentation/sled11/book_sle_admin/data/sec_boot_init.html).
+
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+Older versions of Docker were called `docker` or `docker-engine`. If you use OS
+images from a cloud provider, you may need to remove the `runc` package, which
+conflicts with Docker EE. If these are installed, uninstall them, along with
+associated dependencies.
 
 ```bash
-$ sudo zypper rm docker docker-engine
+$ sudo zypper rm docker docker-engine runc
 ```
 
 If removal of the `docker-engine` package fails, use the following command
@@ -63,16 +86,41 @@ It's OK if `zypper` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker EE package is now called `docker-ee`.
 
-## Configure the btrfs filesystem
+## Configure the Btrfs filesystem
 
-By default, SLES formats the `/` filesystem using BTRFS. If the filesystem which
+By default, SLES formats the `/` filesystem using Btrfs, so **most people do not
+not need to do the steps in this section**. If you use OS images from a cloud
+provider, you may need to do this step. If the filesystem that
 hosts `/var/lib/docker/` is **not** a BTRFS filesystem, you must configure a
-BTRFS filesystem and mount it on `/var/lib/docker/`:
+BTRFS filesystem and mount it on `/var/lib/docker/`.
 
-1.  Format your dedicated block device or devices as a Btrfs filesystem. This
+1.  Check whether `/` (or `/var/` or `/var/lib/` or `/var/lib/docker/` if they
+    are separate mount points) are formatted using Btrfs. If you do not have
+    separate mount points for any of these, a duplicate result for `/` will be
+    returned.
+
+    ```bash
+    $ df -T / /var /var/lib /var/lib/docker
+    ```
+
+    You need to complete the rest of these steps **only if one of the following
+    is true**:
+
+    - You have a separate `/var/` filesystem that is not formatted with Btrfs
+    - You do not have a separate `/var/` or `/var/lib/` or `/var/lib/docker/`
+      filesystem and `/` is not formatted with Btrfs
+
+    If `/var/lib/docker` is already a separate mount point and is not formatted
+    with Btrfs, back up its contents so that you can restore them after step
+    3.
+
+2.  Format your dedicated block device or devices as a Btrfs filesystem. This
     example assumes that you are using two block devices called `/dev/xvdf` and
-    `/dev/xvdg`. Double-check the block device names because this is a
+    `/dev/xvdg`. **Make sure you are using the right device names.**
+
+    > Double-check the block device names because this is a
     destructive operation.
+    {:.warning}
 
     ```bash
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
@@ -81,7 +129,7 @@ BTRFS filesystem and mount it on `/var/lib/docker/`:
     There are many more options for Btrfs, including striping and RAID. See the
     [Btrfs documentation](https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices).
 
-2.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
+3.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
     can specify any of the block devices used to create the Btrfs filesystem.
 
     ```bash
@@ -90,6 +138,9 @@ BTRFS filesystem and mount it on `/var/lib/docker/`:
 
     Don't forget to make the change permanent across reboots by adding an
     entry to `/etc/fstab`.
+
+4.  If `/var/lib/docker` previously existed and you backed up its contents
+    during step 1, restore them onto `/var/lib/docker`.
 
 
 ## Install Docker EE
@@ -118,7 +169,7 @@ from the repository.
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker-ee_version }} \
+        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker_ee_version }} \
         docker-ee-stable
     ```
 
@@ -168,7 +219,7 @@ from the repository.
 
       S | Name          | Type    | Version                               | Arch   | Repository    
       --+---------------+---------+---------------------------------------+--------+---------------
-        | docker-ee     | package | {{ site.docker-ee_version }}-1                 | x86_64 | docker-ee-stable
+        | docker-ee     | package | {{ site.docker_ee_version }}-1                 | x86_64 | docker-ee-stable
     ```
 
     The contents of the list depend upon which repositories you have enabled.
@@ -185,7 +236,7 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
+4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
     the `/` filesystem is not using BTRFS.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
@@ -221,6 +272,9 @@ commands. Continue to [Linux postinstall](linux-postinstall.md) to configure the
 graph storage driver, allow non-privileged users to run Docker commands, and for
 other optional configuration steps.
 
+> **Important**: Be sure Docker is configured to start after the system
+> firewall. See [Firewall configuration](#firewall-configuration).
+
 #### Upgrade Docker EE
 
 To upgrade Docker EE:
@@ -243,7 +297,7 @@ need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `sles/12.3/x86_64/stable-{{ site.docker-ee_version }}` and download the `.rpm` file for
+    `sles/12.3/x86_64/stable-{{ site.docker_ee_version }}` and download the `.rpm` file for
     the Docker version you want to install.
 
 2.  Import Docker's official GPG key:
@@ -262,8 +316,8 @@ need to download a new file each time you want to upgrade Docker EE.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-4.  Configure Docker EE to use the `btrfs` filesystem. **This is only required if
-    the `/` filesystem is not using BTRFS.** However, explicitly specifying the
+4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
+    the `/` filesystem is not using Btrfs.** However, explicitly specifying the
     `storage-driver` has no harmful side effects.
 
     Edit the file `/etc/docker/daemon.json` (create it if it does not exist) and
@@ -298,6 +352,9 @@ commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
+> **Important**: Be sure Docker is configured to start after the system
+> firewall. See [Firewall configuration](#firewall-configuration).
+
 #### Upgrade Docker EE
 
 To upgrade Docker EE, download the newer package file and repeat the
@@ -321,7 +378,7 @@ instead of `zypper install`, and pointing to the new file.
     ```
 
     If you used a separate BTRFS filesystem to host the contents of
-    `/var/lib/docker/`, you can unmount and format the `btrfs` filesystem.
+    `/var/lib/docker/`, you can unmount and format the Btrfs filesystem.
 
 You must delete any edited configuration files manually.
 

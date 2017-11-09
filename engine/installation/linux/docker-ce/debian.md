@@ -6,6 +6,7 @@ redirect_from:
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 title: Get Docker CE for Debian
+toc_max: 4
 ---
 
 To get started with Docker CE on Debian, make sure you
@@ -219,7 +220,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | {{ site.docker-ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
+    docker-ce | {{ site.docker_ce_stable_version }}.0~ce-0~debian | https://download.docker.com/linux/debian jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled. Choose

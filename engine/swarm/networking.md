@@ -192,6 +192,17 @@ $ docker network create \
   my-network
 ```
 
+##### Overlay network size limitations
+
+You should create overlay networks with `/24` blocks (the default), which limits
+you to 256 IP addresses, when you create networks using the default VIP-based
+endpoint-mode. This recommendation addresses
+[limitations with swarm mode](https://github.com/moby/moby/issues/30820). If you
+need more than 256 IP addresses, do not increase the IP block size. You can either
+use `dnsrr` endpoint mode with an external load balancer, or use multiple smaller
+overlay networks. See [Configure service discovery](#configure-service-discovery)
+for more information about different endpoint modes.
+
 #### Configure encryption of application data
 
 Management and control plane data related to a swarm is always encrypted.
@@ -299,7 +310,7 @@ services which publish ports, such as a WordPress service which publishes port
 
     ```bash
     $ docker network create \
-      -d overlay \
+      --driver overlay \
       --ingress \
       --subnet=10.11.0.0/16 \
       --gateway=10.11.0.2 \

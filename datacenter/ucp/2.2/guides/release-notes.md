@@ -10,6 +10,38 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.4
+
+(2 November 2017)
+
+**News**
+
+* Docker Universal Control Plane now supports running managers on IBM Z on RHEL, SLES and Ubuntu. Previously, only workers were supported on IBM Z.
+
+**Bug fixes**
+
+* Core
+  * `ucp-etcd` system images are now hidden. Previously, these system images were erroneously displayed in the images list (#9913).
+  * `disable_usageinfo` will now disable usage metrics. A regression caused this setting to not be respected (#9469).
+  * UCP now outputs "Initializing..." log messages during setup so that administrators can establish that setup or install has begun (#9336).
+  * Windows worker promotion is now blocked. Previously, Windows workers could be promoted using the CLI, which would fail (#9341).
+  * Loading gzipped images with the Docker CLI is now supported. This would previously cause a panic (#6367).
+  * Permissions are now checked when filtering nodes by container. Previously, permissions were not considered (#9239).
+  * An LDAP sync is now triggered as soon as an LDAP user is lazy-provisioned. Previously, lazy-provisioned users would not immediately be added to teams and orgs (#5674).
+
+* UI/UX
+  * License page now shows all capabilities. Previously it was not clear if a license supported Docker image scanning or not (#9946).
+  * Additional translations added for internationalization (#9559).
+  * UI for adding users to teams simplified (#8399, #9404).
+  * The grant list can now sorted and pagination in the grants view has been improved. The grants view previously had glitches on systems with many grants (#8874, #9203).
+  * Fixed problem where UI would hang when pulling images (#9380).
+  * "Max failure ratio" and "Failure action" re-introduced in service definitions. These settings were not available in UCP 2.2, but were available in previous UCP versions (#9186).
+  * Collection labels are no longer applied to UCP system services. UCP previously auto-applied labels, which was confusing (#10030)
+
+**Known issues**
+
+ * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
+
 ## Version 2.2.3
 
 (13 September 2017)
@@ -60,6 +92,8 @@ upgrade your installation to the latest release.
  * Searching for images in the UCP images UI doesn't work.
  * Removing a stack may leave orphaned volumes.
  * Storage metrics are not available for Windows.
+ * You can't create a bridge network from the web UI. As a workaround use
+ `<node-name>/<network-name>`.
 
 
 ## version 2.2.2

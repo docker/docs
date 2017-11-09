@@ -92,7 +92,7 @@ cannot be used side-by-side with Docker for Windows. However, you can still use
 detail see [Virtualization must be
 enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
-* The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
+* The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1607 Anniversary Update, Build 14393 or later). In the future we will support more versions of Windows 10.
 <p />
 * Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
 Windows accounts will use the same VM to build and run containers. In the

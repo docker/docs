@@ -219,8 +219,8 @@ other machine):
 
 ### Step 4. Use Machine to remove the instance
 
-    To remove an instance and all of its containers and images, first stop the
-    machine, then use `docker-machine rm`:
+To remove an instance and all of its containers and images, first stop the
+machine, then use `docker-machine rm`.
 
 ## Where to go next
 

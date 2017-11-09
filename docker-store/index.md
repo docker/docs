@@ -1,64 +1,74 @@
 ---
-description: Docker Store overview
-keywords: Docker, docker, store, purchase images
+description: Docker Store programs and policies for publishers
+keywords: Docker, docker, store, publishers, publish images
 title: Docker Store overview
 ---
 
 **The Docker Store is now generally available!**
 
-You can [learn more about publishing](https://success.docker.com/Store),
-or [apply to be a publisher](https://store.docker.com/publisher/signup).
+To learn more about publishing, browse the topics below along with the
+[publishers guide](publish.md), and [apply to be a
+publisher](https://store.docker.com/publisher/signup).
 
 -----------------
 
-The Docker Store is the place to find the best trusted commercial and free
-software distributed as Docker Images.
+## What is Docker Store?
 
-## Search and Browse
+For publishers, Docker Store is the best way for you to distribute and sell your
+Dockerized content. Publish your software through the Docker Store to experience
+the benefits below:
 
-Type a search in the search bar. Click one of the suggested matches, or press
-`Enter` to run a full search.
+* Access to Docker’s large and growing customer-base. Docker has
+experienced rapid adoption, and is wildly popular in dev-ops
+environments. Docker users have pulled images over four billion times,
+and they are increasingly turning to the Docker Store as the canonical
+source for high-quality, curated content.
 
-![](images/store-search.png)
+* Customers can try or buy your software, right from your product listing. Your
+content is accessible for installation, trial, and purchase from the Docker
+Store and the Docker CLI.
 
-The search returns any results that match in the image name, description, or
-publisher name. If you run a complete search, you can also limit your results by
-category.
+* Use our licensing support.  We can limit access to your software to
+a) logged-in users, b) users who have purchased a license, or
+c) all Docker users.  We’ll help you manage and control your distribution.
 
-You can also click **Browse** from the top menu to see all of the images
-available in the Store, and filter them by category.
+* We'll handle checkout.  You don’t have to set up your own digital e-commerce
+site when you sell your content through the Docker Store.  We'll even help you
+set pricing—and you can forget about the rest.
 
-![](images/store-browse.png)
+* Seamless updates and upgrades.  We tell customers when your content
+has upgrades or updates available, right inside their Docker host product.
 
-## Get an image from the Docker Store
+* It’s a win-win for our platform and publishers: great content improves our
+ecosystem, and our flexible platform helps you bring your content to market.
 
-Once you find an image you want, click **Get Image** to agree to the end-user
-agreement, then use the `docker pull` command from the image's Store listing to
-download it.
+* Achieve the Docker Certified quality mark.  Publisher container images and
+plugins that meet the quality, security, and support criteria of the program
+will display a “Docker Certified” badge within the Docker Store and external
+marketing.  
 
-![](images/store-get.png)
+### Distribution Models
 
-Some images may require that you accept the end user agreement or terms of
-service before you can pull them, and paid and subscription images may require
-that you provide billing information if you have not already done so.
+The Docker Store welcomes free and open-source content, as well as software sold
+directly by publishers.  We support the following commercial models:
 
-Once you've accepted the terms and provided billing information, you'll see a
-link to your list of subscriptions, and the `docker pull` command for the image.
-Copy this and paste it into your command shell.
+#### Paid-via-Docker Content
 
-![](images/store-pullcmd.png)
+This is content for which customers transact via Docker, as described in the
+publisher agreement.  Paid-via-Docker content includes both software than can be
+deployed on a host, as well as software that runs in the cloud and can be
+accessed by the customer via an ambassador container (containerized cloud
+services, for example).
 
-## Types of images
+#### Free Content
 
-You can download two types of images from the Docker Store:
+Free content is provided free-of-charge, and customers may pull it from the
+Docker Hub either at their discretion or upon license acceptance, at the
+publisher’s discretion.  You agree that you will not charge customers for any
+Free Content by making it available for purchase outside of the Docker Store.
 
-* **Docker Verified images**. (Recommended) These images are verified by Docker, have a high level of security, and generally subscribe to Docker best practices.
-* **Community/Hub images**. When you choose this option, you see images directly from Docker Hub. These images are not verified by Docker.
+## What's next?
 
-## What version do I need?
+* To learn about submitting products and content to Docker Store, see the [publishers guide](publish.md).
 
-In many cases there will be multiple versions of an image available. Some
-versions may offer smaller parent image sizes, or address specific security
-vulnerabilities.
-
-To see a list of an image's versions, click **View all versions**.
+* To learn about using Docker Store to download content, see the [consumer FAQs](faq.md).

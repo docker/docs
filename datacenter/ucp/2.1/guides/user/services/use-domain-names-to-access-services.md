@@ -96,7 +96,7 @@ to your services.
 The HTTP routing mesh can route to a service, as long as that service:
 
 * Is attached to a network that has the `com.docker.ucp.mesh.http` label. You can use the default ucp-hrm network or create your own.
-* Publishes the ports that you want to route to
+* Publishes the ports that you want to route to (UCP versions 2.1.0 and 2.1.1 only).
 * Has one or more labels with the prefix `com.docker.ucp.mesh.http`, specifying
 the ports to route to
 
@@ -123,12 +123,12 @@ com.docker.ucp.mesh.http.2=<key-1>=<value-1>
 The keys and values in your label are what defined the route configuration.
 These keys are supported:
 
-| Key             | Mandatory                                 | Values                                   | Description                                                                                              |
-|:----------------|:------------------------------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------|
-| external_route  | yes                                       | http://domain-name or sni://domain-name  | The external URL to route to this service                                                                |
-| internal_port   | yes, if the port published multiple ports | port-number                              | The internal port to use for the service                                                                 |
-| sticky_sessions | no                                        | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
-| redirect        | no                                        | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
+| Key             | Mandatory                                                | Values                                   | Description                                                                                              |
+|:----------------|:---------------------------------------------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| external_route  | yes                                                      | http://domain-name or sni://domain-name  | The external URL to route to this service                                                                |
+| internal_port   | yes, if the service publishes no ports or multiple ports | port-number                              | The internal port to use for the service                                                                 |
+| sticky_sessions | no                                                       | cookie-name                              | Always route a user to the same service, using HTTP cookies. This option can't be used with HTTPS routes |
+| redirect        | no                                                       | http://domain-name, or sni://domain-name | Redirect incoming requests to another route using an HTTP 301 redirect                                   |
 
 
 ### Sticky sessions

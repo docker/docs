@@ -6,6 +6,10 @@ redirect_from:
 - /docker-ee-for-windows/install/
 ---
 
+{% capture filename %}{{ page.win_latest_build }}.zip{% endcapture %}
+{% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
+
+
 Docker Enterprise Edition for Windows Server 2016 (*Docker EE*) enables native
 Docker containers on Windows Server 2016. The Docker EE installation package
 includes everything you need to run Docker on Windows Server 2016.
@@ -21,10 +25,16 @@ versions here](https://docs.docker.com/release-notes/) or subscribe to the
 With Docker EE, your Windows nodes can join swarms that are managed
 by Docker Universal Control Plane (UCP). When you have Docker EE installed
 on Windows Server 2016 and you have a
-[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can 
-[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/). 
+[UCP manager node provisioned](/datacenter/ucp/2.2/guides/admin/install/), you can
+[join your Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
 
 ## Install Docker EE
+
+>Windows Server 1709
+>
+>Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
+>To use UCP, for now please use the current LTSB Windows release and not 1709.
+
 
 Docker EE for Windows requires Windows Server 2016. See
 [What to know before you install](#what-to-know-before-you-install) for a
@@ -36,7 +46,7 @@ full list of prerequisites.
     Install-Module DockerProvider -Force
     Install-Package Docker -ProviderName DockerProvider -Force
     ```
-     
+
 2.  Test your Docker EE installation by running the `hello-world` container.
 
     ```ps
@@ -63,7 +73,7 @@ Some advanced Docker features (like Swarm) require that Windows is updated to in
 ```ps
 sconfig
 ```
-    
+
 Select option `6) Download and Install Updates`.
 
 ## Use a script to install Docker EE
@@ -76,8 +86,7 @@ installs, or install on air-gapped systems.
 
     ```ps
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile docker.zip
-    {{ page.win_server_zip_url }}
+    PS> invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
@@ -86,10 +95,10 @@ installs, or install on air-gapped systems.
 
     ```ps
     # Extract the archive.
-    PS> Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
+    PS> Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles
 
     # Clean up the zip file.
-    PS> Remove-Item -Force docker.zip
+    PS> Remove-Item -Force {{ filename }}
 
     # Install Docker. This will require rebooting.
     $null = Install-WindowsFeature containers
@@ -132,12 +141,26 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 
 ## Update Docker EE
 
+> **Check that you have the Docker module**
+> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, please remove this module and use Docker's module:
+>
+> ```none
+> Uninstall-Module DockerMsftProvider -Force
+> Install-Module DockerProvider -Force
+> ```
+
 To update Docker EE on Windows Server 2016:
 
 ```ps
 PS> Install-Package -Name docker -ProviderName DockerProvider -Update -Force
+```
 
-# Start the Docker service.
+If Docker Universal Control Plane (UCP) is installed, run the
+[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script). 
+
+Start the Docker service:
+
+```ps
 PS> Start-Service Docker
 ```
 

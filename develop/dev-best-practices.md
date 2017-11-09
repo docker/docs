@@ -75,7 +75,7 @@ keep image size small:
 - For production, use [secrets](/engine/swarm/secrets.md) to store sensitive
   application data used by services, and use [configs](/engine/swarm/configs.md)
   for non-sensitive data such as configuration files. If you currently use
-  standalone constainers, consider migrating to use single-replica services, so
+  standalone containers, consider migrating to use single-replica services, so
   that you can take advantage of these service-only features.
 
 ## Use swarm services when possible

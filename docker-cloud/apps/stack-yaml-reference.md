@@ -152,7 +152,7 @@ expose:
 ```
 
 ## extra_hosts
-Add hostname mappings. Use the same values as the docker client `--add-host` parameter.
+Add hostname mappings. Uses the same values as the docker client `--add-host` parameter.
 
 ```yml
 extra_hosts:
@@ -203,7 +203,7 @@ net: host
 ```
 
 ## pid
-Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system the PID address space. Containers launched with this (optional) flag will be able to access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
+Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system PID address space. Containers launched with this (optional) flag will be able to access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
 
 ```yml
 pid: "host"
@@ -289,9 +289,9 @@ volumes:
 ## volumes_from
 Mount all of the volumes from another service by specifying a service unique name. 
 
-- If the target service belongs to this stack its service unique name is its service name. 
-- If the target service does not belong to any stack its service unique name is its service name. 
-- If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
+- If the target service belongs to this stack, its service unique name is its service name. 
+- If the target service does not belong to any stack, its service unique name is its service name. 
+- If the target service belongs to another stack, its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
 
 ```yml
 volumes_from:

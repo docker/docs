@@ -20,14 +20,15 @@ Options:
     --no-recreate              If containers already exist, don't recreate them.
                                Incompatible with --force-recreate.
     --no-build                 Don't build an image, even if it's missing.
+    --no-start                 Don't start the services after creating them.
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was stopped.
                                Incompatible with -d.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container shutdown
                                when attached or when containers are already
                                running. (default: 10)
-    --remove-orphans           Remove containers for services not defined in
-                               the Compose file
+    --remove-orphans           Remove containers for services not
+                               defined in the Compose file
     --exit-code-from SERVICE   Return the exit code of the selected service container.
                                Implies --abort-on-container-exit.
     --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
@@ -38,7 +39,7 @@ Builds, (re)creates, starts, and attaches to containers for a service.
 
 Unless they are already running, this command also starts any linked services.
 
-The `docker-compose up` command aggregates the output of each container. When
+The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
 the command exits, all containers are stopped. Running `docker-compose up -d`
 starts the containers in the background and leaves them running.
 

@@ -8,7 +8,7 @@ Compose supports declaring default environment variables in an environment file
 named `.env` placed in the folder where the `docker-compose` command is executed
 *(current working directory)*.
 
-## Syntax Rules
+## Syntax rules
 
 These syntax rules apply to the `.env` file:
 

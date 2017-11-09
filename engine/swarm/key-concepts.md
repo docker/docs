@@ -10,19 +10,42 @@ orchestration features of Docker Engine 1.12.
 ## What is a swarm?
 
 The cluster management and orchestration features embedded in the Docker Engine
-are built using **SwarmKit**. Docker engines participating in a cluster are
-running in **swarm mode**. You enable swarm mode for an engine by either
-initializing a swarm or joining an existing swarm.
+are built using [swarmkit](https://github.com/docker/swarmkit/). Swarmkit is a
+separate project which implements Docker's orchestration layer and is used
+directly within Docker.
 
-A **swarm** is a cluster of Docker engines, or _nodes_, where you deploy
-[services](key-concepts.md#services-and-tasks). The Docker Engine CLI and API
-include commands to manage swarm nodes (e.g., add or remove nodes), and deploy
-and orchestrate services across the swarm.
+A swarm consists of multiple Docker hosts which run in **swarm mode** and act as
+managers (to manage membership and delegation) and workers (which run
+[swarm services](key-concepts.md#services-and-tasks)). A given Docker host can
+be a manager, a worker, or perform both roles. When you create a service, you
+define its optimal state (number of replicas, network and storage resources
+available to it, ports the service exposes to the outside world, and more).
+Docker works to maintain that desired state. For instance, if a worker node
+becomes unavailable, Docker schedules that node's tasks on other nodes. A _task_
+is a running container which is part of a swarm service and managed by a swarm
+manager, as opposed to a standalone container.
 
-When you run Docker without using swarm mode, you execute container
-commands. When you run the Docker in swarm mode, you orchestrate services. You can run swarm services and standalone containers on the same Docker instances.
+One of the key advantages of swarm services over standalone containers is that
+you can modify a service's configuration, including the networks and volumes it
+is connected to, without the need to manually restart the service. Docker will
+update the configuration, stop the service tasks with the out of date
+configuration, and create new ones matching the desired configuration.
 
-## What is a node?
+When Docker is running in swarm mode, you can still run standalone containers
+on any of the Docker hosts participating in the swarm, as well as swarm
+services. A key difference between standalone containers and swarm services is
+that only swarm managers can manage a swarm, while standalone containers can be
+started on any daemon. Docker daemons can participate in a swarm as managers,
+workers, or both.
+
+In the same way that you can use [Docker Compose](/compose/) to define and run
+containers, you can define and run swarm service
+[stacks](/get-started/part5.md).
+
+Keep reading for details about concepts relating to Docker swarm services,
+including nodes, services, tasks, and load balancing.
+
+## Nodes
 
 A **node** is an instance of the Docker engine participating in the swarm. You can also think of this as a Docker node. You can run one or more nodes on a single physical computer or cloud server, but production swarm deployments typically include Docker nodes distributed across multiple physical and cloud machines.
 

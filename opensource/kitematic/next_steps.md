@@ -6,10 +6,6 @@ title: Where to learn more
 
 You've just created your first pull request to Kitematic!
 
-The next
-step is to learn how to <a href="/opensource/workflow/review-pr/" target="_blank">participate in your PR's
-review</a>.
-
 ## Take the development challenge
 
 Now that you’ve had some practice, try adding another feature to Kitematic on your own.
@@ -26,12 +22,9 @@ In a terminal window, users can get this by looking at running containers with: 
 
 As an exercise, implement the code changes needed to display the current container's running command. When you are ready to share the new mini feature, create a PR for it.
 
-## Learn more about open source
-To learn more about contributing to Docker open source projects, see:
+## Where to go next
 
-* <a href="/opensource/project/who-written-for/" target="_blank">
- README first</a>
+- To learn more about contributing to open source projects, see
+[Contribute to the Moby project](https://github.com/moby/moby/blob/master/CONTRIBUTING.md).
 
-* <a href="/opensource/code/" target="_blank"> Quick start contribution </a>
-
-* <a href="/opensource/workflow/make-a-contribution/" target="_blank"> Understand how to contribute </a>
+- To learn more about contributing to Docker product documentation, see the [README on docker/docker.github.io](https://github.com/docker/docker.github.io/blob/master/README.md)

@@ -6,6 +6,30 @@
 *
 */
 
+@media print
+{
+    .footer
+    {
+        display: none !important;
+    }
+    .col-toc
+    {
+      display: none !important;
+    }
+    .col-nav
+    {
+      display: none !important;
+    }
+    .glyphicon-tags
+    {
+      display: none !important;
+    }
+    #ratings-div 
+    {
+      display: none !important;
+    }
+}
+
 .alert-info {
     border: 0;
     border-radius: 0;

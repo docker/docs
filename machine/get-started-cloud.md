@@ -9,7 +9,7 @@ title: Use Docker Machine to provision hosts on cloud providers
 > We suggest using [Docker Cloud](https://cloud.docker.com/) as the
 most up-to-date way to run Docker on your cloud providers. To get started, see
 [Docker Cloud docs home page](/docker-cloud/index.md), [Docker Cloud Settings
-and Docker ID](/docker-cloud/dockerid.md) and [Swarms in Docker Cloud
+and Docker ID](/docker-cloud/dockerid.md), and [Swarms in Docker Cloud
 (Beta)](/docker-cloud/cloud-swarm/index.md). If you are running Edge channel
 Docker for Mac or Windows, you can access your Docker Cloud account from those
 Docker desktop applications. See Docker Cloud (Edge feature) on
@@ -28,7 +28,7 @@ cloud provider.
 
 Then you provide account verification, security credentials, and configuration
 options for the providers as flags to `docker-machine create`. The flags are
-unique for each cloud-specific driver.  For instance, to pass a Digital Ocean
+unique for each cloud-specific driver. For instance, to pass a Digital Ocean
 access token you use the `--digitalocean-access-token` flag. Take a look at the
 examples below for Digital Ocean and AWS.
 
@@ -63,7 +63,7 @@ The `docker-machine create` command typically requires that you specify, at a
 minimum:
 
 * `--driver` - to indicate the provider on which to create the
-machine  (VirtualBox, DigitalOcean, AWS, and so on)
+machine (VirtualBox, DigitalOcean, AWS, and so on)
 
 * Account verification and security credentials (for cloud providers),
 specific to the cloud service you are using
@@ -104,16 +104,16 @@ See [Available driver
 plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
 target="_blank" class="_"}.
 
-## Adding a host without a driver
+## Add a host without a driver
 
-You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow as on a host provisioned by docker-machine
+You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow as on a host provisioned by docker-machine.
 
     $ docker-machine create --driver none --url=tcp://50.134.234.20:2376 custombox
     $ docker-machine ls
     NAME        ACTIVE   DRIVER    STATE     URL
     custombox   *        none      Running   tcp://50.134.234.20:2376
 
-## Using Machine to provision Docker Swarm clusters
+## Use Machine to provision Docker Swarm clusters
 
 > Swarm mode supercedes Docker Machine provisioning of swarm clusters
 >

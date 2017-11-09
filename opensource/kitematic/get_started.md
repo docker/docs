@@ -10,7 +10,7 @@ user interface (GUI) for working with containers. You can use Kitematic to creat
 
 ![Kitematic GUI](images/gui-splash-hub.png)
 
-See the <a href="/kitematic/userguide" target="_blank"> Kitematic user guide</a> to learn more about it from a user perspective.
+See the [Kitematic user guide](/kitematic/userguide) to learn more about it from a user perspective.
 
 ## We welcome your contributions!
 

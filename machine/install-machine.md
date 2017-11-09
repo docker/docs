@@ -5,9 +5,9 @@ title: Install Docker Machine
 ---
 
 On macOS and Windows, Machine is installed along with other Docker products when
-you install the [Docker for Mac](/docker-for-mac/index.md), [Docker for
-Windows](/docker-for-windows/index.md), or [Docker
-Toolbox](/toolbox/overview.md).
+you install the [Docker for Mac](/docker-for-mac/index.md),
+[Docker for Windows](/docker-for-windows/index.md), or
+[Docker Toolbox](/toolbox/overview.md).
 
 If you want only Docker Machine, you can install the Machine binaries directly
 by following the instructions in the next section. You can find the latest
@@ -15,7 +15,7 @@ versions of the binaries on the [docker/machine release
 page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
 on GitHub.
 
-## Installing Machine directly
+## Install Machine directly
 
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
 
@@ -45,7 +45,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
     > The above command will work on Windows only if you use a
-    terminal emulater such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
+    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
 
     Otherwise, download one of the releases from the [docker/machine release
@@ -56,7 +56,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
         $ docker-machine version
         docker-machine version {{site.machine_version}}, build 9371605
 
-## Installing bash completion scripts
+## Install bash completion scripts
 
 The Machine repository supplies several `bash` scripts that add features such
 as:

@@ -111,23 +111,6 @@ This `docker-compose.yml` file tells Docker to do the following:
   load-balanced overlay network).
 
 
-> Wondering about Compose file versions, names, and commands?
->
-Notice that we set the Compose file to `version: "3"`. This essentially makes it
-[swarm mode](/engine/swarm/index.md) compatible. We can make use of the [deploy
-key](/compose/compose-file/index.md#deploy) (only available on [Compose file
-formats version 3.x](/compose/compose-file/index.md) and up) and its sub-options
-to load balance and optimize performance for each service (e.g., `web`). We can
-run the file with the `docker stack deploy` command (also only supported on
-Compose files version 3.x and up). You could use `docker-compose up` to run
-version 3 files with _non swarm_ configurations, but we are focusing on a stack
-deployment since we are building up to a swarm example.
->
-You can name the Compose file anything you want to make it logically meaningful
-to you; `docker-compose.yml` is simply a standard name. We could just as easily
-have called this file `docker-stack.yml` or something more specific to our
-project.
-
 ## Run your new load-balanced app
 
 Before we can use the `docker stack deploy` command we'll first run:
@@ -160,57 +143,48 @@ named it the same as shown in this example, the name will be
 `getstartedlab_web`. The service ID is listed as well, along with the number of
 replicas, image name, and exposed ports.
 
-Docker swarms run tasks that spawn containers. Tasks have state and their own
-IDs. Let's list the tasks:
+A single container running in a service is called a **task**. Tasks are given unique
+IDs that numerically increment, up to the number of `replicas` you defined in 
+`docker-compose.yml`. List the tasks for your service:
 
 ```shell
-docker service ps <service>
+docker service ps getstartedlab_web
 ```
 
->**Note**: Docker's support for swarms is built using a project
-called SwarmKit. SwarmKit tasks do not need to be containers, but
-Docker swarm tasks are defined to spawn them.
-
-Let's inspect one of these tasks, and limit the output to container ID:
-
-```shell
-docker inspect --format='{% raw %}{{.Status.ContainerStatus.ContainerID}}{% endraw %}' <task>
-```
-
-Vice versa, you can inspect a container ID, and extract the task ID.
-
-First run `docker container ls` to get container IDs, then:
-
-```shell
-docker inspect --format="{% raw %}{{index .Config.Labels \"com.docker.swarm.task.id\"}}{% endraw %}" <container>
-```
-
-Now list all 5 containers:
+Tasks also show up if you just list all the containers on your system, though that
+will not be filtered by service:
 
 ```shell
 docker container ls -q
 ```
 
-You can run `curl http://localhost` several times in a row, or go to that URL in
+You can run `curl -4 http://localhost` several times in a row, or go to that URL in
 your browser and hit refresh a few times.
 
 ![Hello World in browser](images/app80-in-browser.png)
 
 Either way, you'll see the container ID change, demonstrating the
-load-balancing; with each request, one of the 5 replicas is chosen, in a
+load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs will match your output from
 the previous command (`docker container ls -q`).
 
-(Windows 10 PowerShell should already have `curl` available, but if not you can
-grab a Linux terminal emulater like [Git
-BASH](https://git-for-windows.github.io/){: target="_blank" class="_"} if you
-want to try it out. It isn't critical to the taskflow here.)
+> Running Windows 10?
+>
+> Windows 10 PowerShell should already have `curl` available, but if not you can
+> grab a Linux terminal emulater like
+> [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
+> or download 
+> [wget for Windows](http://gnuwin32.sourceforge.net/packages/wget.htm)
+> which is very similar.
 
->**Note**: At this stage, it may take up to 30 seconds for the containers
-to respond to HTTP requests. This is not indicative of Docker or
-swarm performance, but rather an unmet Redis dependency that we will
-address later in the tutorial. For now, the visitor counter isn't working
-for the same reason; we haven't yet added a service to persist data.
+> Slow response times?
+>
+> Depending on your environment's networking configuration, it may take up to 30 
+> seconds for the containers
+> to respond to HTTP requests. This is not indicative of Docker or
+> swarm performance, but rather an unmet Redis dependency that we will
+> address later in the tutorial. For now, the visitor counter isn't working
+> for the same reason; we haven't yet added a service to persist data.
 
 
 ## Scale the app
@@ -231,14 +205,17 @@ started.
 
 ### Take down the app and the swarm
 
-Take the app down with `docker stack rm`:
+* Take the app down with `docker stack rm`:
 
-```shell
-docker stack rm getstartedlab
-```
+  ```shell
+  docker stack rm getstartedlab
+  ```
 
-This removes the app, but our one-node swarm is still up and running (as shown
-by `docker node ls`). Take down the swarm with `docker swarm leave --force`.
+* Take down the swarm.
+
+  ```
+  docker swarm leave --force
+  ```
 
 It's as easy as that to stand up and scale your app with Docker. You've taken a
 huge step towards learning how to run containers in production. Up next, you
@@ -274,4 +251,5 @@ docker service ps <service>                  # List tasks associated with an app
 docker inspect <task or container>                   # Inspect task or container
 docker container ls -q                                      # List container IDs
 docker stack rm <appname>                             # Tear down an application
+docker swarm leave --force      # Take down a single node swarm from the manager
 ```

@@ -61,6 +61,17 @@ In order to update or roll back configs more easily, consider adding a version
 number or date to the config name. This is made easier by the ability to control
 the mount point of the config within a given container.
 
+To update a stack, make changes to your Compose file, then re-run `docker
+stack deploy -c <new-compose-file> <stack-name>`. If you use a new config in
+that file, your services will start using them. Keep in mind that configurations
+are immutable, so you won't be able to change the file for an existing service.
+Instead, you create a new config to use a different file
+
+You can run `docker stack rm` to stop the app and take down the stack. This
+removes any config that was created by `docker stack deploy` with the same stack
+name. This removes _all_ configs, including those not referenced by services and
+those remaining after a `docker service update --config-rm`.
+
 ## Read more about `docker config` commands
 
 Use these links to read about specific commands, or continue to the

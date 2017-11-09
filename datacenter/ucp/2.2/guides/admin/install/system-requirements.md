@@ -46,6 +46,7 @@ When installing UCP on a host, make sure the following ports are open:
 | managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
 | managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
 | managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
+| workers           |   out     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
 | managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
 | managers, workers |  in, out  | TCP, UDP 7946           | Port for gossip-based clustering                                                  |
 | managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
@@ -72,6 +73,14 @@ to communicate before they time out.
 | etcd                                   | 500          | yes          |
 | RethinkDB                              | 10000        | no           |
 | Stand-alone swarm                      | 90000        | no           |
+
+## Time Synchronization
+
+In distributed systems like Docker UCP, time synchronization is critical
+to ensure proper operation. As a best practice to ensure consistency between
+the engines in a UCP swarm, all engines should regularly synchronize time
+with a Network Time Protocol (NTP) server. If a server's clock is skewed,
+unexpected behavior may cause poor performance or even failures.
 
 ## Compatibility and maintenance lifecycle
 

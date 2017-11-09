@@ -23,6 +23,12 @@ options:
   description: Disable streaming stats and only pull the first result
   deprecated: false
   experimental: false
+- option: no-trunc
+  value_type: bool
+  default_value: "false"
+  description: Do not truncate output
+  deprecated: false
+  experimental: false
 deprecated: false
 experimental: false
 

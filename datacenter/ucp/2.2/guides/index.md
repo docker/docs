@@ -69,7 +69,7 @@ control who can access and make changes to your swarm and applications.
 
 Docker UCP integrates with Docker Trusted Registry so that you can keep the
 Docker images you use for your applications behind your firewall, where they
-are safe and can't be tampered.
+are safe and can't be tampered with.
 
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.

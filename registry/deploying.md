@@ -45,7 +45,7 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
     ```
 
 2.  Tag the image as `localhost:5000/my-ubuntu`. This creates an additional tag
-    for the existing image.When the first part of the tag is a hostname and
+    for the existing image. When the first part of the tag is a hostname and
     port, Docker interprets this as the location of a registry, when pushing.
 
     ```bash
@@ -145,10 +145,10 @@ $ docker run -d \
 ### Customize the storage location
 
 By default, your registry data is persisted as a [docker
-volume](/engine/tutorials/dockervolumes.md) on the host filesystem.  If you want
+volume](/engine/tutorials/dockervolumes.md) on the host filesystem. If you want
 to store your registry contents at a specific location on your host filesystem,
 such as if you have an SSD or SAN mounted into a particular directory, you might
-decide to use a bind mount instead.  A bind mount is more dependent on the
+decide to use a bind mount instead. A bind mount is more dependent on the
 filesystem layout of the Docker host, but more performant in many situations.
 The following example bind-mounts the host directory `/mnt/registry` into the
 registry container at `/var/lib/registry/`.
@@ -167,7 +167,7 @@ $ docker run -d \
 By default, the registry stores its data on the local filesystem, whether you
 use a bind mount or a volume. You can store the registry data in an Amazon S3
 bucket, Google Cloud Platform, or on another storage back-end by using [storage
-drivers](./storage-drivers/index.md).  For more information, see [storage
+drivers](./storage-drivers/index.md). For more information, see [storage
 configuration options](./configuration.md#storage).
 
 ## Run an externally-accessible registry
@@ -210,17 +210,17 @@ If you have been issued an _intermediate_ certificate instead, see
 3.  Restart the registry, directing it to use the TLS certificate. This command
     bind-mounts the `certs/` directory into the container at `/certs/`, and sets
     environment variables that tell the container where to find the `domain.crt`
-    and `domain.key` file. The registry runs on port 80.
+    and `domain.key` file. The registry runs on port 443, the default HTTPS port.
 
     ```bash
     $ docker run -d \
       --restart=always \
       --name registry \
       -v `pwd`/certs:/certs \
-      -e REGISTRY_HTTP_ADDR=0.0.0.0:80 \
+      -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
-      -p 80:80 \
+      -p 443:443 \
       registry:2
     ```
 
@@ -264,7 +264,7 @@ registry](insecure.md).
 
 ## Run the registry as a service
 
-[Swarm services](/engine/swarm/services.md)  provide several advantages over
+[Swarm services](/engine/swarm/services.md) provide several advantages over
 standalone containers. They use a declarative model, which means that you define
 the desired state and Docker works to keep your service in that state. Services
 provide automatic load balancing scaling, and the ability to control the
@@ -333,7 +333,7 @@ $ docker service create \
 You can access the service on port 80 of any swarm node. Docker sends the
 requests to the node which is running the service.
 
-## Load Balancing Considerations
+## Load balancing considerations
 
 One may want to use a load balancer to distribute load, terminate TLS or
 provide high availability. While a full load balancing setup is outside the
@@ -447,7 +447,7 @@ secrets.
     Provide the username and password from the first step.
 
     Test that you can now pull an image from the registry or push an image to
-    the registry..
+    the registry.
 
 > **X509 errors**: X509 errors usually indicate that you are attempting to use
 > a self-signed certificate without configuring the Docker daemon correctly.
@@ -548,7 +548,7 @@ following:
   4.  When you push images to the registries in the list, their
       non-distributable layers will be pushed to the registry.
 
-      >  **Warning**: Non-distributable artifacts typically have restrictions on
+      > **Warning**: Non-distributable artifacts typically have restrictions on
       > how and where they can be distributed and shared. Only use this feature
       > to push artifacts to private registries and ensure that you are in
       > compliance with any terms that cover redistributing non-distributable

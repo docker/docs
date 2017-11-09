@@ -22,9 +22,6 @@ this decision, there are three high-level factors to consider:
   explicitly configured, assuming that the prerequisites for that storage driver
   are met:
 
-  - If `aufs` is available, default to it, because it is the oldest storage
-    driver. However, it is not universally available.
-
   - If possible, the storage driver with the least amount of configuration is
     used, such as `btrfs` or `zfs`. Each of these relies on the backing
     filesystem being configured correctly.
@@ -33,20 +30,22 @@ this decision, there are three high-level factors to consider:
     and stability in the most usual scenarios.
 
     - `overlay2` is preferred, followed by `overlay`. Neither of these requires
-      extra configuration.
+      extra configuration. `overlay2` is the default choice for Docker CE.
 
     - `devicemapper` is next, but requires `direct-lvm` for production
       environments, because `loopback-lvm`, while zero-configuration, has very
       poor performance.
 
   The selection order is defined in Docker's source code. You can see the order
-  for Docker 17.03 by looking at
-  [the source code](https://github.com/moby/moby/blob/v17.03.1-ce/daemon/graphdriver/driver_linux.go#L54-L63).
-  For a different Docker version, change the URL to that version.
+  by looking at
+  [the source code for Docker CE {{ site.docker_ce_stable_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_stable_version }}/components/engine/daemon/graphdriver/driver_linux.go#L54-L63)
+  You can use the branch selector at the top of the file viewer to choose a
+  different branch, if you run a different version of Docker.
   {: id="storage-driver-order" }
 
 - Your choice may be limited by your Docker edition, operating system, and
-  distribution. For instance, `aufs` is only supported on Ubuntu and Debian,
+  distribution. For instance, `aufs` is only supported on Ubuntu and Debian, and
+  may require extra packages to be installed,
   while `btrfs` is only supported on SLES, which is only supported with Docker
   EE. See
   [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution).
@@ -90,6 +89,15 @@ configurations work on recent versions of the Linux distribution:
 | Docker CE on Debian | `aufs`, `devicemapper`, `overlay2` (Debian Stretch), `overlay`, `vfs`                                 |
 | Docker CE on CentOS | `devicemapper`, `vfs`                                                                                 |
 | Docker CE on Fedora | `devicemapper`, `overlay2` (Fedora 26 or later, experimental), `overlay` (experimental), `vfs`        |
+
+When possible, `overlay2` is the recommended storage driver. When installing
+Docker for the first time, `overlay2` is used by default. Previously, `aufs` was
+used by default when available, but this is no longer the case. If you want to
+use `aufs` on new installations going forward, you need to explicitly configure
+it, and you may need to install extra packages, such as `linux-image-extra`.
+See [aufs](aufs-driver.md).
+
+On existing installations using `aufs`, it will continue to be used.
 
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to

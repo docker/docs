@@ -20,7 +20,7 @@ Services are built once and then tagged, by default as `project_service`, e.g.,
 `composetest_db`. If the Compose file specifies an
 [image](/compose/compose-file/index.md#image) name, the image will be
 tagged with that name, substituting any variables beforehand. See [variable
-substitution](#variable-substitution)
+substitution](#variable-substitution).
 
 If you change a service's Dockerfile or the contents of its
 build directory, run `docker-compose build` to rebuild it.
