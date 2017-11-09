@@ -123,9 +123,10 @@ The following arguments can be passed to `docker network create` for any network
 | `--internal` | -          | Restrict external access to the network |
 | `--ipv6`     | `--ipv6`   | Enable IPv6 networking                   |
 
-The following example uses `-o` to bind to a specific IP address when binding
+The following example uses `-o` to bind to a specific IP address available on the host when binding
 ports, then uses `docker network inspect` to inspect the network, and finally
-attaches a new container to the new network.
+attaches a new container to the new network. Note that you should replace the IP address `172.23.0.1` shown in the
+example with an IP address available on a network interface in your host.
 
 ```bash
 $ docker network create -o "com.docker.network.bridge.host_binding_ipv4"="172.23.0.1" my-network
