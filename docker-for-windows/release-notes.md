@@ -434,6 +434,21 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-rc3-win38 2017-11-09 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc3)
+
+* New
+  - Use Microsoft localhost port forwarder for Windows and LCOW Containers when it is available (insider build RS4)
+
+* Bug fixes and minor changes
+  - Fix docker build exits successfully but fails to build image [moby/#35413](https://github.com/moby/moby/issues/35413)
+  - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
+  - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
+  - Do not propose toolbox migration popup after clicking "Try LCOW" on first startup
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)
+
 ### Docker Community Edition 17.11.0-ce-rc2-win37 2017-11-02 (Edge)
 
 * Upgrades
