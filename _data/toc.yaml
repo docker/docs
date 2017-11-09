@@ -325,6 +325,13 @@ guides:
         title: DTR architecture
       - path: /deploy/architecture/ucp-architecture/
         title: UCP architecture
+    - sectiontitle: Deploy workloads
+      section:
+      - path: /deploy/deploy-workloads/deploy-kubernetes-workload/
+        title: Deploy a workload to a Kubernetes cluster
+      - path: /deploy/deploy-workloads/manage-and-deploy-private-images/
+        title: Manage and deploy private images
+
 
 - sectiontitle: Run your app in production
   section:
