@@ -15,9 +15,9 @@ your field, you have a unique perspective that is a valuable resource to share
 with others. The Docker community, meetups, mentoring, and open source projects
 all need your participation, ideas, feedback, and vision.
 
-* [Organize a Docker Meetup](meetups.md)
-* [Support the community](community.md)
-* [Contribute to the Moby project](/opensource/index.md#looking-for-moby)
+* [Organize a Docker meetup](#organize-a-docker-meetup)
+* [Learn about the Docker Community](#learn-about-the-docker-community)
+* [Contribute to the Moby open source project](#contribute-to-the-moby-open-source-project)
 
 ## Organize a Docker meetup
 
