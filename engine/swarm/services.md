@@ -391,8 +391,11 @@ option to the `--publish` flag.
 > **Note**: If you publish a service's ports directly on the swarm node using
 > `mode=host` and also set `published=<PORT>` this creates an implicit
 > limitation that you can only run one task for that service on a given swarm
-> node. In addition, if you use `mode=host` and you do not use the
-> `--mode=global` flag on `docker service  create`, it will be difficult to know
+> node. You can work around this by specifying `published` without a port
+> definition, which causes Docker to assign a random port for each task.
+>
+> In addition, if you use `mode=host` and you do not use the
+> `--mode=global` flag on `docker service create`, it will be difficult to know
 > which nodes are running the service in order to route work to them.
 
 ##### Example: Run a `nginx` web server service on every swarm node
