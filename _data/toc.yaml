@@ -24,6 +24,8 @@ guides:
     section:
     - path: /engine/installation/windows/docker-ee/
       title: Windows Server
+    - path: /engine/installation/windows/ee-preview/
+      title: Windows Server 1709 and Windows 10 Fall Creators Update preview
     - path: /engine/installation/linux/docker-ee/ubuntu/
       title: Ubuntu
     - path: /engine/installation/linux/docker-ee/rhel/
