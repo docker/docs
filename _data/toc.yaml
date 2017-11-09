@@ -311,6 +311,41 @@ guides:
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
 
+- sectiontitle: Administer role-based access control
+  section:
+    - path: /deploy/access-control/
+      title: Access control model overview
+    - sectiontitle: User Management
+      section:
+      - path: /deploy/access-control/create-and-manage-users
+        title: Create and manage users
+      - path: /deploy/access-control/create-and-manage-teams
+        title: Create and manage teams
+      - path: /deploy/access-control/permission-levels
+        title: Learn about user permissions
+      - path: /deploy/access-control/recover-a-user-password
+        title: Reset a user password
+      - path: /deploy/access-control/grant-permissions.md
+        title: Grant role-based permissions to users and teams
+    - sectiontitle: Shared Resources
+      section:
+      - path: /deploy/access-control/manage-access-with-collections
+        title: Manage access to collections
+      - path: /deploy/access-control/node-access-control
+        title: Learn node access controls
+      - path: /deploy/access-control/isolate-nodes-between-teams
+        title: Isolate swarm nodes to specific teams
+      - path: /deploy/access-control/isolate-volumes-between-teams
+        title: Isolate volumes to specific teams
+      - path: /deploy/access-control/deploy-view-only-service
+        title: Deploy a service with view-only access
+    - sectiontitle: Examples
+      section:
+      - path: /deploy/access-control/access-control-design-ee-standard
+        title: Orcabank tutorial 1
+      - path: /deploy/access-control/access-control-design-ee-advanced
+        title: Orcabank tutorial 2
+        
 - sectiontitle: Deploy your app in production
   section:
     - path: /deploy/
@@ -331,6 +366,7 @@ guides:
         title: Deploy a workload to a Kubernetes cluster
       - path: /deploy/deploy-workloads/manage-and-deploy-private-images/
         title: Manage and deploy private images
+
 
 
 - sectiontitle: Run your app in production
