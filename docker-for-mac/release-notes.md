@@ -459,6 +459,14 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-rc3-mac38 2017-11-09 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc3)
+
+* Bug fixes and minor changes
+  - Fix docker build exits successfully but fails to build image [moby/#35413](https://github.com/moby/moby/issues/35413).
+
 ### Docker Community Edition 17.11.0-ce-rc2-mac37 2017-11-02 (Edge)
 
 * Upgrades
