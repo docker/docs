@@ -1,7 +1,7 @@
 ---
 description: Introduces Kitematic contribute topics and tour
 keywords: Kitematic, open source, contribute, contributor, tour, issue, review
-title: Contribute to Kitematic
+title: Practice contribution workflow with Kitematic
 ---
 
 * [Get started](get_started.md)
