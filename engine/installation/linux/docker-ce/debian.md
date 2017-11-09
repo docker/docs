@@ -26,6 +26,7 @@ and distributions for different Docker editions, see
 To install Docker CE, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
+- Buster (edge only)
 - Stretch (stable) / Raspbian Stretch
 - Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
