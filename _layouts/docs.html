@@ -264,19 +264,14 @@
 	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
+	<script defer src="/js/metadata.js"></script>
+	<script src="/js/glossary.js"></script>
 	<script defer src="/js/docs.js"></script>
 	<script defer src="/js/toc.js"></script>
 	<script language="javascript">
 	jQuery(document).ready(function(){
-			$.getJSON( "/metadata.txt", function( data ) {
-				metadata = data;
 				hookupTOCEvents();
-				$.getJSON( "/glossary.txt", function( data ) {
-					glossary = data;
-					renderTagsPage();
-				});
 			});
-	});
 	</script>
 </body>
 

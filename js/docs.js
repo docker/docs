@@ -56,7 +56,7 @@ function findMyTopic(tree)
       } else {
         if (branch[k].path == pageURL && !branch[k].nosync)
         {
-          console.log(branch[k].path + ' was == ' + pageURL)
+          //console.log(branch[k].path + ' was == ' + pageURL)
           thisIsIt = true;
           break;
         }
@@ -115,18 +115,29 @@ function renderNav(docstoc) {
       currentSection = docstoc.horizontalnav[i].node;
       // build vertical nav
       var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
-      if (itsHere || docstoc.horizontalnav[i].path == pageURL) walkTree(docstoc[docstoc.horizontalnav[i].node]);
-      // build horizontal nav
-      outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
-      if (docstoc.horizontalnav[i].path==pageURL || docstoc.horizontalnav[i].node==sectionToHighlight)
+      if (itsHere || docstoc.horizontalnav[i].path == pageURL)
       {
-        outputHorzTabs.push(' class="active"');
+        walkTree(docstoc[docstoc.horizontalnav[i].node]);
       }
-      outputHorzTabs.push('><a href="'+docstoc.horizontalnav[i].path+'">'+docstoc.horizontalnav[i].title+'</a></li>\n');
-    } else {
-      // glossary
     }
-    // write horizontal tabs
+    // build horizontal nav
+    outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
+    if (docstoc.horizontalnav[i].path==pageURL || docstoc.horizontalnav[i].node==sectionToHighlight)
+    {
+      outputHorzTabs.push(' class="active"');
+    }
+    outputHorzTabs.push('><a href="'+docstoc.horizontalnav[i].path+'">'+docstoc.horizontalnav[i].title+'</a></li>\n');
+  }
+  if (outputLetNav.length==0)
+  {
+    // either glossary was true or no left nav has been built; default to glossary
+
+    renderTagsPage()
+    for (var i=0;i<glossary.length;i++)
+    {
+      var highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
+      outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
+    }
   }
   document.getElementById('jsTOCHorizontal').innerHTML = outputHorzTabs.join('');
   document.getElementById('jsTOCLeftNav').innerHTML = outputLetNav.join('');

@@ -101,10 +101,10 @@ function hookupTOCEvents()
           loadPage("/search/?q=" + $("#st-search-input").val());
         } else {
           // an autocomplete result is selected
-          loadPage(metadata.pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
+          loadPage(pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
         }
       }
-      //console.log('autoCompleteShowingID:',autoCompleteShowingID,'displayingAutcompleteResults[id]:',displayingAutcompleteResults[autoCompleteShowingID],'metadata.pages[id].url:',metadata.pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
+      //console.log('autoCompleteShowingID:',autoCompleteShowingID,'displayingAutcompleteResults[id]:',displayingAutcompleteResults[autoCompleteShowingID],'pages[id].url:',pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
     }
     var searchVal = $("#st-search-input").val();
     if (lastSearch != searchVal)
@@ -115,10 +115,10 @@ function hookupTOCEvents()
       //console.log("input changed: ",$("#st-search-input").val());
 
       if (searchVal.length > 2) {
-        for (i=0;i<metadata.pages.length;i++)
+        for (i=0;i<pages.length;i++)
         {
           // search url, description, title, and keywords for search input
-          var thisPage = metadata.pages[i];
+          var thisPage = pages[i];
           var matchesTitle=0, matchesDescription=0, matchesURL=0, matchesKeywords=0;
           var matchesTitle = matches(String(thisPage.title).toUpperCase(),uppercaseSearchVal);
           //if (titleMatches > 0) console.log(uppercaseSearchVal,'matches',thisPage.title,titleMatches,'times');
@@ -148,29 +148,29 @@ function hookupTOCEvents()
         {
           //console.log(i, "of", autoCompleteResultLimit, "is underway");
           displayingAutcompleteResults.push(results[i].topic); //log results to global array
-          resultsOutput.push("<div class='autoCompleteResult' id='autoCompleteResult" + i + "' onclick='loadPage(\"" + metadata.pages[results[i].topic].url + "\")'>");
+          resultsOutput.push("<div class='autoCompleteResult' id='autoCompleteResult" + i + "' onclick='loadPage(\"" + pages[results[i].topic].url + "\")'>");
           resultsOutput.push("<ul class='autocompleteList'>");
           resultsOutput.push("<li id='autoTitle" + i + "' class='autocompleteTitle'>")
-          resultsOutput.push("<a href=" + metadata.pages[results[i].topic].url + ">" + highlightMe(metadata.pages[results[i].topic].title,searchVal) + "</a>");
+          resultsOutput.push("<a href=" + pages[results[i].topic].url + ">" + highlightMe(pages[results[i].topic].title,searchVal) + "</a>");
           resultsOutput.push("</li>");
           resultsOutput.push("<li id='autoUrl" + i + "' class='autocompleteUrl'>")
-          resultsOutput.push(highlightMe(metadata.pages[results[i].topic].url,searchVal));
+          resultsOutput.push(highlightMe(pages[results[i].topic].url,searchVal));
           resultsOutput.push("</li>");
           /*
           resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
-          resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
+          resultsOutput.push("Breadcrumb: " + breadcrumbString(pages[results[i]].url));
           resultsOutput.push("</li>");
           */
-          if (metadata.pages[results[i].topic].keywords)
+          if (pages[results[i].topic].keywords)
           {
           resultsOutput.push("<li id='autoKeywords" + i + "' class='autocompleteKeywords'>")
-          resultsOutput.push("<b>Keywords</b>: <i>" + highlightMe(metadata.pages[results[i].topic].keywords,searchVal) + "</i>");
+          resultsOutput.push("<b>Keywords</b>: <i>" + highlightMe(pages[results[i].topic].keywords,searchVal) + "</i>");
           resultsOutput.push("</li>");
           }
-          if (metadata.pages[results[i].topic].description)
+          if (pages[results[i].topic].description)
           {
           resultsOutput.push("<li id='autoDescription" + i + "' class='autocompleteDescription'>")
-          resultsOutput.push("<b>Description</b>: " + highlightMe(metadata.pages[results[i].topic].description,searchVal));
+          resultsOutput.push("<b>Description</b>: " + highlightMe(pages[results[i].topic].description,searchVal));
           resultsOutput.push("</li>");
           }
           resultsOutput.push("</ul>");
@@ -209,9 +209,9 @@ function queryString()
 function renderTopicsByTagTable(tagToLookup,divID)
 {
   var matchingPages = new Array();
-  for (i=0;i<metadata.pages.length;i++)
+  for (i=0;i<pages.length;i++)
   {
-    thisPage = metadata.pages[i];
+    thisPage = pages[i];
     if (thisPage.keywords)
     {
       var keywordArray = thisPage.keywords.toString().split(",");
@@ -230,18 +230,19 @@ function renderTopicsByTagTable(tagToLookup,divID)
     pagesOutput.push("<h2>Pages tagged with: " + tagToLookup + "</h2>");
     pagesOutput.push("<table><thead><tr><td>Page</td><td>Description</td></tr></thead><tbody>");
     for(i=0;i<matchingPages.length;i++) {
-      thisPage = metadata.pages[matchingPages[i]];
+      thisPage = pages[matchingPages[i]];
       pagesOutput.push("<tr><td><a href='" + thisPage.url + "'>" + thisPage.title + "</a></td><td>" + thisPage.description + "</td></tr>");
     }
     pagesOutput.push("</tbody></table>");
   }
   $("#" + divID).html(pagesOutput.join(""));
 }
+
+var tagToLookup;
 function renderTagsPage()
 {
   if(window.location.pathname.indexOf("/glossary/")>-1 || window.location.pathname.indexOf("/search/")>-1)
   {
-    var tagToLookup;
     if (window.location.pathname.indexOf("/glossary/")>-1)
     {
       // Get ?term=<value>
@@ -254,11 +255,11 @@ function renderTagsPage()
       tagToLookup = decodeURI(queryString().q);
     }
     // Get the term and definition
-    for (i=0;i<glossary.terms.length;i++)
+    for (i=0;i<glossary.length;i++)
     {
-      if (glossary.terms[i].term.toLowerCase()==tagToLookup.toLowerCase())
+      if (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase())
       {
-        var glossaryOutput = glossary.terms[i].def;
+        var glossaryOutput = glossary[i].def;
       }
     }
     if (glossaryOutput) {
