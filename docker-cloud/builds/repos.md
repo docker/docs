@@ -30,7 +30,7 @@ To store your images in Docker Cloud, you create a repository. All individual us
     > **Note**: You do not need to set up automated builds right away, and you can change the build settings at any time after the repository is created. If you choose not to enable automated builds, you can still push images to the repository using the `docker` or `docker-cloud` CLI.
 6. Click **Create**.
 
-  ![](images/create-repository.png)
+  ![Create repository page](images/create-repository.png)
 
 ### Repositories for Organizations
 
@@ -126,7 +126,7 @@ registry.
 
     For example, `registry.com/namespace/reponame` where `registry.com` is the
     hostname of the registry.
-    ![](images/third-party-images-modal.png)
+    ![Import repository popup](images/third-party-images-modal.png)
 
 5. Enter credentials for the registry.
 

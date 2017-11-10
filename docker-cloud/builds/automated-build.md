@@ -63,7 +63,7 @@ the code repository service where the image's source code is stored.
     Docker's infrastructure, select a builder size to run the build
     process on. This hosted build service is free while it is in Beta.
 
-    ![](images/edit-repository-builds.png)
+    ![Editing build configurations](images/edit-repository-builds.png)
 
 6.  If in the previous step you selected **Build on Docker
     Cloud’s infrastructure**, then you are given the option to select the
