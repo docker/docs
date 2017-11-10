@@ -122,13 +122,25 @@ The network can then be deleted with:
 docker network rm <network_name or id>
 ```
 
-> **Note**: In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
-> **Note**: A macvlan subinterface can be added to the Docker host's which will allow traffic between the host and docker containers. The IP address needs to be set on this subinterface, and removed from the parent address.
+> Communication with the Docker host over macvlan
+>
+> - When using macvlan, you cannot ping or communicate with the default namespace IP address.
+>   For example, if you create a container and try to ping the Docker host's `eth0`, it will
+>   **not** work. That traffic is explicitly filtered by the kernel modules themselves to
+>   offer additional provider isolation and security.
+>  
+> - A macvlan subinterface can be added to the Docker host, to allow traffic between the Docker
+>   host and containers. The IP address needs to be set on this subinterface and removed from
+>   the parent address.
+  
 ```
 ip link add mac0 link $PARENTDEV type macvlan mode bridge 
 ```
-An example of the standzas required to enable this on Debian/Ubuntu, in /etc/network/interfaces is
-```
+
+On Debian or Ubuntu, adding the following to `/etc/network/interfaces` will make this persistent.
+Consult your operating system documentation for more details.
+
+```none
 auto eno1
 iface eno1 inet manual
 
@@ -137,7 +149,9 @@ iface mac0 inet dhcp
   preup ip link add mac0 link eno1 type macvlan mode bridge
   postdown ip link del mac0 link eno1 type macvlan mode bridge
 ```
-For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
+
+For more on Docker networking commands, see 
+Working with Docker network commands](/engine/userguide/networking/work-with-networks/).
 
 ## Macvlan 802.1q Trunk Bridge Mode example usage
 
