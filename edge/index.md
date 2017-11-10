@@ -2,10 +2,9 @@
 title: Docker CE Edge documentation
 description: Information about current Docker Edge releases
 keywords: engine, edge, installation
-current_edge: 17.07
 ---
 
-The current Docker CE Edge release is {{ page.current_edge }}. The Docker CE
+The current Docker CE Edge release is {{ site.docker_ce_edge_version }}. The Docker CE
 Edge channel provides monthly releases which allow you to try new features of
 Docker and verify bug fixes quickly. Edge releases are only supported for one
 month, and a given Edge release will not receive any updates once a new edge
