@@ -40,25 +40,3 @@ the tags. If you use `docker rename` to rename a container, the new name is not
 reflected in the log messages. Instead, these messages continue to use the
 original container name.
 
-For advanced usage, the generated tag's use
-[go templates](http://golang.org/pkg/text/template/) and the container's
-[logging context](https://github.com/moby/moby/blob/17.05.x/daemon/logger/loginfo.go).
-
-As an example of what is possible with the syslog logger, if you use the following
-command, you get the output that follows:
-
-```bash
-{% raw %}
-$ docker run -it --rm \
-    --log-driver syslog \
-    --log-opt tag="{{ (.ExtraAttributes nil).SOME_ENV_VAR }}" \
-    --log-opt env=SOME_ENV_VAR \
-    -e SOME_ENV_VAR=logtester.1234 \
-    flyinprogrammer/logtester
-{% endraw %}
-```
-
-```none
-Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: + exec app
-Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
-```
