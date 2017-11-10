@@ -117,31 +117,16 @@ To find out whether SELinux is enabled in the engine, view the host's
 `/etc/docker/daemon.json` file and search for the string
 `"selinux-enabled":"true"`.
 
-## Restore your swarm
-
-The restore command can be used to create a new UCP swarm from a backup file.
-When restoring, make sure you use the same version of the `docker/ucp` image that
-you've used to create the backup. After the restore operation is complete, the
-following data will be recovered from the backup file:
-
-* Users, teams, and permissions.
-* All UCP configuration options available under `Admin Settings`, like the
-  Docker EE subscription license, scheduling options, content trust, and
-  authentication backends.
-
-There are two ways to restore a UCP swarm:
-
-* On a manager node of an existing swarm, which is not part of a UCP
-  installation. In this case, a UCP swarm will be restored from the backup.
-* On a docker engine that isn't participating in a swarm. In this case, a new
-  swarm is created and UCP is restored on top.
+## Restore UCP
 
 To restore an existing UCP installation from a backup, you need to
 uninstall UCP from the swarm by using the `uninstall-ucp` command.
-[Learn to uninstall a UCP swarm](install/uninstall.md).
+[Learn to uninstall UCP](install/uninstall.md).
 
-The example below shows how to restore a UCP swarm from an existing backup
-file, presumed to be located at `/tmp/backup.tar`:
+When restoring, make sure you use the same version of the `docker/ucp` image
+that you've used to create the backup. The example below shows how to restore
+UCP from an existing backup file, presumed to be located at
+`/tmp/backup.tar`:
 
 ```none
 $ docker container run --rm -i --name ucp \
@@ -168,6 +153,25 @@ $ docker container run --rm -i --name ucp \
   -v /tmp/backup.tar:/config/backup.tar \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore -i
 ```
+
+### UCP and Swarm
+
+UCP restore recovers the following assets from the backup file:
+
+* Users, teams, and permissions.
+* All UCP configuration options available under `Admin Settings`, like the
+  Docker EE subscription license, scheduling options, content trust, and
+  authentication backends.
+
+UCP restore does not include swarm assets such as cluster membership, services, networks,
+secrets, etc.  [Learn to backup a swarm](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm).
+
+There are two ways to restore UCP:
+
+* On a manager node of an existing swarm which does not have UCP installed.
+  In this case, UCP restore will use the existing swarm.
+* On a docker engine that isn't participating in a swarm. In this case, a new
+  swarm is created and UCP is restored on top.
 
 ## Disaster recovery
 
