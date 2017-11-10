@@ -646,6 +646,16 @@ $ docker service create \
   redis:3.0.6
 ```
 
+> Missing or null labels
+>
+> Nodes which are missing the label used to spread will still receive 
+> task assignments. As a group, these nodes will receive tasks in equal
+> proportion to  any of the other groups identified by a specific label
+> value. In a sense, a missing label is the same as having the label with
+> a null value attached to it. If the service should **only** run on
+> nodes with the label being used for the the spread preference, the
+> preference should be combined with a constraint.
+
 You can specify multiple placement preferences, and they are processed in the
 order they are encountered. The following example sets up a service with
 multiple placement preferences. Tasks are spread first over the various
