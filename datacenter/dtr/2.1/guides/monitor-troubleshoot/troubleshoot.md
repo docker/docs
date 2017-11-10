@@ -48,12 +48,11 @@ docker run \
   --rm \
   --net dtr-ol \
   --name db-proxy \
-  -l interlock.hostname=rethinkdb \
-  -l interlock.domain=demo.dckr.org \
   -v dtr-ca-$REPLICA_ID:/ca \
   -p 9999:8080 \
-  jlhawn/rethinkdb:2.3.0 \
-    proxy \
+  rethinkdb:2.3 \
+    rethinkdb \
+      proxy \
       --bind all \
       --canonical-address db-proxy \
       --driver-tls-key /ca/rethink/key.pem \
