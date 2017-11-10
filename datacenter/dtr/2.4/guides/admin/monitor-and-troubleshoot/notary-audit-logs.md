@@ -5,9 +5,9 @@ description: When you push signed images, Docker Trusted Registry keeps audit
 keywords: registry, monitor, troubleshoot
 ---
 
-DTR keeps audit logs of changes made to trusted repositories.
+Docker Content Trust (DCT) keeps audit logs of changes made to trusted repositories.
 Every time you push a signed image to a repository, or delete trust data for a
-repository, DTR logs that information.
+repository, DCT logs that information.
 
 These logs are only available from the DTR API.
 
@@ -43,8 +43,10 @@ curl --insecure --silent \
 </div>
 
 DTR returns a JSON file with a token, even when the user doesn't have access
-to the repository to which they requested the authentication token. The
-JSON file returned, has the following structure:
+to the repository to which they requested the authentication token. This token
+doesn't grant access to DTR repositories.
+
+The JSON file returned has the following structure:
 
 
 ```json
@@ -85,13 +87,13 @@ Both endpoints have the following query string parameters:
       <td>Yes</td>
       <td>String</td>
       <td>
-        <p>A non-inclusive starting index from which to start returning results. This will
+        <p>A non-inclusive starting change ID from which to start returning results. This will
         typically be the first or last change ID from the previous page of records
         requested, depending on which direction your are paging in.</p>
-        <p>The value `0` indicates records should be returned starting from the beginning
+        <p>The value <code>0</code> indicates records should be returned starting from the beginning
         of time.</p>
-        <p>The value `-1` indicates records should be returned starting from the most
-        recent record. If `-1` is provided, the implementation will also assume the
+        <p>The value <code>1</code> indicates records should be returned starting from the most
+        recent record. If <code>1</code> is provided, the implementation will also assume the
         records value is meant to be negative, regardless of the given sign.</p>
       </td>
     </tr>
@@ -100,9 +102,9 @@ Both endpoints have the following query string parameters:
       <td>Yes</td>
       <td>Signed integer</td>
       <td>
-      <p>The number of records to return. Records will always be returned in order
-      oldest to newest. A negative value indicates that number of records preceding
-      the `change_id` should be returned.</p>
+      <p>The number of records to return. A negative value indicates the number
+      of records preceding the <code>change_id</code> should be returned.
+      Records are always returned sorted from oldest to newest. </p>
       </td>
     </tr>
   </tbody>
@@ -139,9 +141,13 @@ Below is the description for each of the fields in the response:
   </thead>
   <tbody>
     <tr>
+      <td><code>count</code></td>
+      <td>The number of records returned.</td>
+    </tr>
+    <tr>
       <td><code>ID</code></td>
-      <td>The ID of the change record. Should be used in the change_id field of
-      requests to provide a non-exclusive starting index. It should be treated
+      <td>The ID of the change record. Should be used in the <code>change_id</code>
+      field of requests to provide a non-exclusive starting index. It should be treated
       as an opaque value that is guaranteed to be unique within an instance of
       notary.</td>
     </tr>
@@ -197,7 +203,7 @@ Before going through this example, make sure that you:
 * Are a DTR admin user.
 * Configured your [machine to trust DTR](../../user/access-dtr/index.md).
 * Created the `library/wordpress` repository.
-* Installed `Jq`, to make it easier to parse the JSON responses.
+* Installed `jq`, to make it easier to parse the JSON responses.
 
 ```bash
 # Pull an image from Docker Hub
@@ -231,7 +237,7 @@ Before going through this example, make sure that you:
 
 * Configured your [machine to trust DTR](../../user/access-dtr/index.md).
 * Created the `library/nginx` repository.
-* Installed `Jq`, to make it easier to parse the JSON responses.
+* Installed `jq`, to make it easier to parse the JSON responses.
 
 ```bash
 # Pull an image from Docker Hub
@@ -252,8 +258,8 @@ export TOKEN=$(curl --insecure --silent \
 'https://<dtr-url>/auth/token?realm=dtr&service=dtr&scope=repository:<dtr-url>/<repository>:pull' | jq --raw-output .token)
 
 # Get audit logs for all repositories and pretty-print it
-# If you pushed the image less than 60 seconds ago, it's possible
-# That DTR doesn't show any events. Retry the command after a while.
+# If you pushed the image less than 60 seconds ago, it's possible that
+# Docker Content Trust won't show any events. Retry the command after a while.
 curl --insecure --silent \
 --header "Authorization: Bearer $TOKEN" \
 "https://<dtr-url>/v2/<dtr-url>/<dtr-repo>/_trust/changefeed?records=10&change_id=0" | jq .
