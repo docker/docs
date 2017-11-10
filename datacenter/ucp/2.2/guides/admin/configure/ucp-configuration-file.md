@@ -99,7 +99,7 @@ for modifying this config file.
 | `tls_skip_verify`       | no       | Set to `true` to skip verifying the server's certificate when establishing a TLS connection, which isn't recommended unless testing on a secure network. The default is `false`. |
 | `reader_dn`             | no       | The distinguished name the system uses to bind to the LDAP server when performing searches.                                                                        |
 | `reader_password`       | no       | The password that the system uses to bind to the LDAP server when performing searches.                                                                             |
-| `sync_schedule`         | no       | The scheduled time for automatic LDAP sync jobs, in CRON format with seconds omitted, default is @hourly if empty or omitted.                                      |
+| `sync_schedule`         | no       | The scheduled time for automatic LDAP sync jobs, in CRON format including seconds field, default is @hourly if empty or omitted.                                      |
 | `jit_user_provisioning` | no       | Whether to only create user accounts upon first login (recommended). The default is `true`.                                                                        |
 
 
