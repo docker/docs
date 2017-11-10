@@ -56,9 +56,11 @@ function findMyTopic(tree)
       } else {
         if (branch[k].path == pageURL && !branch[k].nosync)
         {
-          //console.log(branch[k].path + ' was == ' + pageURL)
+          console.log(branch[k].path + ' was == ' + pageURL)
           thisIsIt = true;
           break;
+        } else {
+          console.log(branch[k].path + ' was != ' + pageURL)
         }
       }
     }
@@ -96,7 +98,11 @@ function walkTree(tree)
       var subTree = tree[j].section;
       walkTree(subTree);
       outputLetNav.push('</ul></li>');
+    } else if (tree[j].generateTOC) {
+      // auto-generate a TOC from a collection
+      walkTree(collectionsTOC[tree[j].generateTOC])
     } else {
+      // just a regular old topic; this is a leaf, not a branch; render a link!
       outputLetNav.push('<li><a href="' + tree[j].path + '"')
       if (tree[j].path == pageURL && !tree[j].nosync)
       {
@@ -130,12 +136,22 @@ function renderNav(docstoc) {
   }
   if (outputLetNav.length==0)
   {
+    // didn't find the current topic in the standard TOC; maybe it's a collection;
+    for (var key in collectionsTOC)
+    {
+      var itsHere = findMyTopic(collectionsTOC[key]);
+      if (itsHere) {
+        walkTree(collectionsTOC[key]);
+        break;
+      }
+    }
     // either glossary was true or no left nav has been built; default to glossary
-
+    // show pages tagged with term and highlight term in left nav if applicable
     renderTagsPage()
     for (var i=0;i<glossary.length;i++)
     {
-      var highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
+      var highlightGloss = '';
+      if (tagToLookup) highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
       outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
     }
   }
