@@ -13,6 +13,7 @@ plink: docker.yaml
 examples: |-
   ```bash
   $ docker unpause my_container
+  my_container
   ```
 deprecated: false
 experimental: false
