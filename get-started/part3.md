@@ -208,7 +208,7 @@ started.
 * Take the app down with `docker stack rm`:
 
   ```shell
-  docker stack rm getstartedlab
+  docker stack rm getstartedlab_web
   ```
 
 * Take down the swarm.
