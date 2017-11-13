@@ -57,7 +57,7 @@ you can push images to DTR.
 2.  Tag the image, using the IP address or DNS name of your DTR instance:
 
     ```bash
-    docker tag wordpress:latest 54.218.110.183:444/admin/wordpress:latest
+    docker tag wordpress:latest <dtr-url>:<port>/admin/wordpress:latest
     ```
 3.  Log in to a Docker EE manager node.
 4.  Push the tagged image to DTR:
