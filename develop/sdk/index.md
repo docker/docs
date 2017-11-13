@@ -270,7 +270,7 @@ file them with the library maintainers.
 | PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
 | Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
 | Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
-| Rust                  | [shiplift](https://github.com/softprops/shiplift)                           |
+| Rust                  | [shoplift](https://github.com/softprops/shoplift)                           |
 | Scala                 | [tugboat](https://github.com/softprops/tugboat)                             |
 | Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)               |
 | Swift                 | [docker-client-swift](https://github.com/valeriomazzeo/docker-client-swift) |
