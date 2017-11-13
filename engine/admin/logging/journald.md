@@ -111,6 +111,6 @@ import systemd.journal
 reader = systemd.journal.Reader()
 reader.add_match('CONTAINER_NAME=web')
 
-    for msg in reader:
-      print '{CONTAINER_ID_FULL}: {MESSAGE}'.format(**msg)
+for msg in reader:
+    print '{CONTAINER_ID_FULL}: {MESSAGE}'.format(**msg)
 ```
