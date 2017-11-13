@@ -144,14 +144,14 @@ defaults:
       path: "datacenter"
     values:
       ucp_latest_image: "docker/ucp:2.2.4"
-      dtr_latest_image: "docker/dtr:2.4.0"
+      dtr_latest_image: "docker/dtr:2.4.1"
       enterprise: true
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.0"
+      dtr_version: "2.4.1"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
