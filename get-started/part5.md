@@ -131,7 +131,7 @@ whatever services need updating will be updated:
     ```shell
     $ docker stack deploy -c docker-compose.yml getstartedlab
     Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
-    Updating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
+    Creating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
     ```
 
 4.  Take a look at the visualizer.
