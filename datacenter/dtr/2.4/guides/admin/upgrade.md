@@ -4,6 +4,8 @@ description: Learn how to upgrade your Docker Trusted Registry
 keywords: dtr, upgrade, install
 ---
 
+{% assign previous_version="2.3" %}
+
 DTR uses [semantic versioning](http://semver.org/) and we aim to achieve specific
 guarantees while upgrading between versions. We never support downgrading. We
 support upgrades according to the following rules:
@@ -39,13 +41,14 @@ to ensure the impact on your business is close to none.
 
 Before starting your upgrade, make sure that:
 * The version of UCP you are using is supported by the version of DTR you
-are trying to upgrade to.
+are trying to upgrade to. [Check the compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 * You have a recent [DTR backup](backups-and-disaster-recovery.md).
 * You [disable Docker content trust in UCP](/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust.md).
 
-### Step 1. Upgrade DTR to 2.2 if necessary
+### Step 1. Upgrade DTR to {{ previous_version }} if necessary
 
-Make sure you're running DTR 2.2. If that's not the case, [upgrade your installation to the 2.2 version](/datacenter/dtr/2.2/guides/admin/upgrade.md).
+Make sure you're running DTR {{ previous_version }}. If that's not the case,
+[upgrade your installation to the {{ previous_version }} version](/datacenter/dtr/{{ previous_version }}/guides/admin/upgrade.md).
 
 ### Step 2. Upgrade DTR
 
