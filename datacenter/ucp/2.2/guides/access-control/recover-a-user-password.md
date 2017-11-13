@@ -26,7 +26,7 @@ node managed by UCP, and run:
 ```none
 {% raw %}
 docker exec -it ucp-auth-api enzi \
-  "$(docker inspect --format '{{ index .Args 0 }}' ucp-auth-api)" \
+  "$(docker inspect --format '{{ .Args}}' ucp-auth-api | perl -ne 'print "$1\n" if /(--db-addr=(\d+[.:]?)+)/')" \
   passwd -i
 {% endraw %}  
 ```
