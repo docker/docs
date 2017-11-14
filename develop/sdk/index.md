@@ -252,24 +252,25 @@ There are a number of community supported libraries available for other
 languages. They have not been tested by Docker, so if you run into any issues,
 file them with the library maintainers.
 
-| Language              | Library                                                                  |
-|:----------------------|:-------------------------------------------------------------------------|
-| C                     | [libdocker](https://github.com/danielsuo/libdocker)                      |
-| C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)         |
-| C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)          |
-| Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                     |
-| Erlang                | [erldocker](https://github.com/proger/erldocker)                         |
-| Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin) |
-| Groovy                | [docker-client](https://github.com/gesellix/docker-client)               |
-| Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                   |
-| HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)            |
-| Java                  | [docker-client](https://github.com/spotify/docker-client)                |
-| Java                  | [docker-java](https://github.com/docker-java/docker-java)                |
-| NodeJS                | [dockerode](https://github.com/apocas/dockerode)                         |
-| Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                  |
-| PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                   |
-| Ruby                  | [docker-api](https://github.com/swipely/docker-api)                      |
-| Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                    |
-| Rust                  | [shiplift](https://github.com/softprops/shiplift)                        |
-| Scala                 | [tugboat](https://github.com/softprops/tugboat)                          |
-| Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)            |
+| Language              | Library                                                                     |
+|:----------------------|:----------------------------------------------------------------------------|
+| C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
+| C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
+| C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
+| Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                        |
+| Erlang                | [erldocker](https://github.com/proger/erldocker)                            |
+| Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
+| Groovy                | [docker-client](https://github.com/gesellix/docker-client)                  |
+| Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                      |
+| HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)               |
+| Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
+| Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
+| NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
+| Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
+| PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
+| Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
+| Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
+| Rust                  | [shiplift](https://github.com/softprops/shiplift)                           |
+| Scala                 | [tugboat](https://github.com/softprops/tugboat)                             |
+| Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)               |
+| Swift                 | [docker-client-swift](https://github.com/valeriomazzeo/docker-client-swift) |
