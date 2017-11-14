@@ -40,7 +40,7 @@ On a manager node, run the following command to list the images that are require
 on Windows nodes.
 
 ```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows
+docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} images --list --enable-windows
 {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
 {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
@@ -48,9 +48,9 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
 On Windows Server 2016, in a PowerShell terminal running as Administrator,
 log in to Docker Hub with the `docker login` command and pull the listed images.
 
-```ps
-PS> docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
-PS> docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
+```powershell
+docker image pull {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }}
+docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ```
 
 ### Run the Windows node setup script
@@ -58,8 +58,8 @@ PS> docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 You need to open ports 2376 and 12376, and create certificates
 for the Docker daemon to communicate securely. Run this command:
 
-```ps
-PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
+```powershell
+docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
 ```
 
 > Docker daemon restart
@@ -101,8 +101,8 @@ Now you can join the UCP cluster by using the `docker swarm join` command that's
 provided by the UCP web UI. [Learn to add nodes to your swarm](scale-your-cluster.md).
 The command looks similar to the following.
 
-```ps
-PS> docker swarm join --token <token> <ucp-manager-ip>
+```powershell
+docker swarm join --token <token> <ucp-manager-ip>
 ```
 
 Run the `docker swarm join` command on each instance of Windows Server that
@@ -117,8 +117,8 @@ The script opens ports in the firewall and sets up certificates for `dockerd`.
 To see the script, you can run the `windows-script` command without piping
 to the `Invoke-Expression` cmdlet.
 
-```ps
-PS> docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
+```powershell
+docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
 ```
 
 
@@ -130,9 +130,9 @@ TCP traffic.
 In a PowerShell terminal running as Administrator, run these commands
 to add rules to the Windows firewall.
 
-```ps
-PS> netsh advfirewall firewall add rule name="docker_local" dir=in action=allow protocol=TCP localport=2376
-PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow protocol=TCP localport=12376
+```powershell
+netsh advfirewall firewall add rule name="docker_local" dir=in action=allow protocol=TCP localport=2376
+netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow protocol=TCP localport=12376
 ```
 
 ### Set up certs for the dockerd service
@@ -141,18 +141,18 @@ PS> netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow 
 2.  In a PowerShell terminal running as Administrator, run the following command
     to generate certificates.
 
-    ```ps
-    PS> docker container run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} generate-certs
+    ```powershell
+    docker container run --rm -v C:\ProgramData\docker\daemoncerts:C:\certs {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} generate-certs
     ```
 
 3.  To set up certificates, run the following commands to stop and unregister the
     `dockerd` service, register the service with the certificates, and restart the service.
 
-    ```ps
-    PS> Stop-Service docker
-    PS> dockerd --unregister-service
-    PS> dockerd -H npipe:// -H 0.0.0.0:2376 --tlsverify --tlscacert=C:\ProgramData\docker\daemoncerts\ca.pem --tlscert=C:\ProgramData\docker\daemoncerts\cert.pem --tlskey=C:\ProgramData\docker\daemoncerts\key.pem --register-service
-    PS> Start-Service docker
+    ```powershell
+    Stop-Service docker
+    dockerd --unregister-service
+    dockerd -H npipe:// -H 0.0.0.0:2376 --tlsverify --tlscacert=C:\ProgramData\docker\daemoncerts\ca.pem --tlscert=C:\ProgramData\docker\daemoncerts\cert.pem --tlskey=C:\ProgramData\docker\daemoncerts\key.pem --register-service
+    Start-Service docker
     ```
 
 The `dockerd` service and the Windows environment are now configured to join a UCP swarm.
@@ -171,7 +171,7 @@ The following steps return the Docker Engine to its original configuration:
 1. Unregister the docker service and register it again without the TLS
    certificates:
 
-   ```ps
+   ```powershell
    Stop-Service docker
    dockerd --unregister-service
    dockerd -H npipe:// --register-service
@@ -180,13 +180,13 @@ The following steps return the Docker Engine to its original configuration:
 
 2. Remove the `certs` directory for the docker service:
 
-   ```ps
+   ```powershell
    Remove-Item -Recurse C:\ProgramData\docker\daemoncerts
    ```
 
 3. Remove the firewall rules:
 
-   ```ps
+   ```powershell
    netsh advfirewall firewall delete rule name="docker_2376_in"
    netsh advfirewall firewall delete rule name="docker_12376_in"
    netsh advfirewall firewall delete rule name="docker_2377_in"
