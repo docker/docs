@@ -56,7 +56,7 @@ each:
   `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs, and must
   be a subset of the bridge IP range (`docker0` or set
   using `--bridge` or the `bip` key in the `daemon.json` file). For example,
-  with --fixed-cidr=192.168.1.0/25, IPs for your containers will be chosen from
+  with `--fixed-cidr=192.168.1.0/25`, IPs for your containers will be chosen from
   the first half of addresses included in the 192.168.1.0/24 subnet.
 
 - `--mtu=BYTES`: override the maximum packet length on `docker0`.
