@@ -14,7 +14,7 @@ to upgrade your installation to the latest release.
 
 ## 2.2.10
 
-(13 November 2017)
+(15 November 2017)
 
 **Bugs fixed**
 
