@@ -13,7 +13,7 @@ to upgrade your installation to the latest release.
 
 ## 2.4.1
 
-(13 November 2017)
+(15 November 2017)
 
 **Bug fixes**
 
@@ -34,6 +34,12 @@ vulnerability database.
 * Improved error handling when uploading invalid vulnerability databases.
 * Improve resilience of DTR join operations.
 * Hide secrets on storage config pages.
+
+**Deprecations**
+
+* The `api/v0/imagescan/layer/{layerid}` endpoint is deprecated, and will be
+removed in DTR 2.5. You can use the
+`/api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` endpoint instead.
 
 
 ## DTR 2.4.0
