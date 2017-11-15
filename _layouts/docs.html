@@ -138,15 +138,15 @@
 								<p>These instructions require Docker Enterprise</p>
 								<p>The UI instructions shown here are for the dashboard provided with
 								<a href="/enterprise/#docker-ee-feature-tiers">Docker Enterprise Standard</a>
-								or higher.</p></blockquote>{% endcapture %}
-								{% if page.whole_page_ee %}{{ enterprise_advisory }}{% endif %}
+								or higher.</p></blockquote>
+								{% if page.whole_page_ee %}{{ enterprise_advisory }}{% endif %}{% endcapture %}
 								{% if page.intro %}{{ page.intro | markdownify }}{% else %}{{ page.description | markdownify }}{% endif %}
 
 								{% if page.ui_tabs %}
 
 								<h2>In the UI</h2>
 
-								{% unless page.whole_page_ee %}{{ enterprise_advisory %}}{% endunless %}
+								{% unless page.whole_page_ee %}{{ enterprise_advisory }}{% endunless %}
 
 								<ul class="nav nav-tabs">{% for tab in page.ui_tabs %}
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#ui-{{ tab.version | slugify }}" id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %} (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>{% endfor %}
