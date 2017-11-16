@@ -129,9 +129,9 @@ You can now start creating containers and services.
 
     $ docker run hello-world
 
-You can run websites too. Ports exposed with `-p` are automatically exposed through the platform load balancer:
+You can run websites too. Ports exposed with `--publish` are automatically exposed through the platform load balancer:
 
-    $ docker service create --name nginx -p 80:80 nginx
+    $ docker service create --name nginx --publish target=80,port=80 nginx
 
 Once up, find the `DefaultDNSTarget` output in either the AWS or Azure portals to access the site.
 
@@ -161,7 +161,7 @@ A good sample app to test deployment of stacks is the [Docker voting app](https:
 
 By default, apps deployed with stacks do not have ports publicly exposed. Update port mappings for services, and Docker will automatically wire up the underlying platform load balancers:
 
-    docker service update --publish-add 80:80 <example-service>
+    docker service update --publish-add target=80,port=80 <example-service>
 
 ### Images in private repos
 

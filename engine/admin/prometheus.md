@@ -200,7 +200,7 @@ Next, start a single-replica Prometheus service using this configuration.
 ```bash
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-    --publish 9090:9090/tcp \
+    --publish target=9090,port=9090,protocol=tcp \
     prom/prometheus
 ```
 
@@ -210,7 +210,7 @@ $ docker service create --replicas 1 --name my-prometheus \
 ```bash
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-    --publish 9090:9090/tcp \
+    --publish target=9090,port=9090,protocol=tcp \
     prom/prometheus
 ```
 
@@ -220,7 +220,7 @@ $ docker service create --replicas 1 --name my-prometheus \
 ```powershell
 PS C:\> docker service create --replicas 1 --name my-prometheus
     --mount type=bind,source=C:/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml
-    --publish 9090:9090/tcp
+    --publish target=9090,port=9090,protocol=tcp
     prom/prometheus
 ```
 

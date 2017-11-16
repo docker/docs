@@ -227,7 +227,7 @@ This example assumes that you have PowerShell installed.
     ```powershell
     PS> docker service create
         --name my-iis
-        -p 8000:8000
+        --publish target=8000,port=8000
         --config src=homepage,target="\inetpub\wwwroot\index.html"
         microsoft/iis:nanoserver  
     ```
@@ -399,7 +399,7 @@ generate the site key and certificate, name the files `site.key` and
          --secret site.key \
          --secret site.crt \
          --config source=site.conf,target=/etc/nginx/conf.d/site.conf \
-         --publish 3000:443 \
+         --publish target=3000,port=443 \
          nginx:latest \
          sh -c "exec nginx -g 'daemon off;'"
     ```

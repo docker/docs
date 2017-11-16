@@ -20,19 +20,33 @@ ports open between the swarm nodes before you enable swarm mode:
 You must also open the published port between the swarm nodes and any external
 resources, such as an external load balancer, that require access to the port.
 
+You can also [bypass the routing mesh](#bypass-the-routing-mesh) for a given
+service.
+
 ## Publish a port for a service
 
-Use the `--publish` flag to publish a port when you create a service:
+Use the `--publish` flag to publish a port when you create a service. The `port`
+is the port inside the container, and the `target` is the port to bind on the
+routing mesh. If you leave off the `target` port, a random high-numbered port is
+bound for each service task. You will need to inspect the task to determine the
+port.
 
 ```bash
 $ docker service create \
   --name <SERVICE-NAME> \
-  --publish <PUBLISHED-PORT>:<TARGET-PORT> \
+  --publish target=<PUBLISHED-PORT>,port=<CONTAINER-PORT> \
   <IMAGE>
 ```
 
-The `<TARGET-PORT>` is the port where the container listens.
+> **Note**: The older form of this syntax is a colon-separated string, where
+> the published port is first and the container port is second, such as
+> `-p 8080:80`. The new syntax is preferred because it is easier to read and
+> allows more flexibility.
+
+The `<TARGET-PORT>` is the port where the container listens. If you omit it,
+a random high-numbered port is bound.
 The `<PUBLISHED-PORT>` is the port where the swarm makes the service available.
+This parameter is required.
 
 For example, the following command publishes port 80 in the nginx container to
 port 8080 for any node in the swarm:
@@ -40,13 +54,15 @@ port 8080 for any node in the swarm:
 ```bash
 $ docker service create \
   --name my-web \
-  --publish 8080:80 \
+  --publish target=8080,port=80 \
   --replicas 2 \
   nginx
 ```
 
-When you access port 8080 on any node, the swarm load balancer routes your
-request to an active container.
+When you access port 8080 on any node, Docker routes your request to an active
+container. On the swarm nodes themselves, port 8080 may not actually be bound,
+but the routing mesh knows how to route the traffic and prevents any port
+conflicts from happening.
 
 The routing mesh listens on the published port for any IP address assigned to
 the node. For externally routable IP addresses, the port is available from
@@ -59,7 +75,7 @@ You can publish a port for an existing service using the following command:
 
 ```bash
 $ docker service update \
-  --publish-add <PUBLISHED-PORT>:<TARGET-PORT> \
+  --publish-add target=<PUBLISHED-PORT>,port=<CONTAINER-PORT> \
   <SERVICE>
 ```
 
@@ -74,39 +90,109 @@ $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 {% endraw %}
 ```
 
-The output shows the `<TARGET-PORT>` from the containers and the
+The output shows the `<CONTAINER-PORT>` from the containers and the
 `<PUBLISHED-PORT>` where nodes listen for requests for the service.
 
 ### Publish a port for TCP only or UDP only
 
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
-you publish both TCP and UDP ports, Docker 1.12.2 and earlier require you to
-add the suffix `/tcp` for TCP ports. Otherwise it is optional.
+you publish both TCP and UDP ports, If you omit the protocol specifier,
+the port is published as a TCP port. If you use the longer syntax (recommended
+  for Docker 1.13 and higher), set the `protocol` key to either `tcp` or `udp`.
 
 #### TCP only
 
-The following two commands are equivalent.
+**Long syntax:**
 
 ```bash
-$ docker service create --name dns-cache -p 53:53 dns-cache
+$ docker service create --name dns-cache \
+  --publish target=53,port=53 \
+  dns-cache
+```
 
-$ docker service create --name dns-cache -p 53:53/tcp dns-cache
+**Short syntax:**
+
+```bash
+$ docker service create --name dns-cache \
+  -p 53:53 \
+  dns-cache
 ```
 
 #### TCP and UDP
 
+**Long syntax:**
+
 ```bash
-$ docker service create --name dns-cache -p 53:53/tcp -p 53:53/udp dns-cache
+$ docker service create --name dns-cache \
+  --publish target=53,port=53 \
+  --publish target=53,port=53,protocol=udp \
+  dns-cache
+```
+
+**Short syntax:**
+
+```bash
+$ docker service create --name dns-cache \
+  -p 53:53 \
+  -p 53:53/udp \
+  dns-cache
 ```
 
 #### UDP only
 
+**Long syntax:**
+
 ```bash
-$ docker service create --name dns-cache -p 53:53/udp dns-cache
+$ docker service create --name dns-cache \
+  --publish target=53,port=53,protocol=udp \
+  dns-cache
+```
+
+**Short syntax:**
+
+```bash
+$ docker service create --name dns-cache \
+  -p 53:53/udp \
+  dns-cache
+```
+
+## Bypass the routing mesh
+
+You can bypass the routing mesh, so that when you access the bound port on a
+given node, you are always accessing the instance of the service running on
+that node. This is referred to as `host` mode. There are a few things to keep
+in mind.
+
+- If you access a node which is not running a service task, the service will not
+  be listening on that port. It is possible that nothing will be listening, or
+  that a completely different application will be listening.
+
+- If you expect to run multiple service tasks on each node (such as when you
+  have 5 nodes but run 10 replicas), you cannot specify a static target port.
+  Either allow Docker to assign a random high-numbered port (by leaving off the
+  `target`), or ensure that only a single instance of the service runs on a
+  given node, by using a global service rather than a replicated one, or by
+  using placement constraints.
+
+To bypass the routing mesh, you must use the long `--publish` service and
+set `mode` to `host`. If you omit the `mode` key or set it to `ingress`, the
+routing mesh is used. The following command creates a global service using
+`host` mode and bypassing the routing mesh.
+
+```bash
+$ docker service create --name dns-cache \
+  --publish target=53,port=53,protocol=udp,mode=host \
+  --mode global \
+  dns-cache
 ```
 
 ## Configure an external load balancer
+
+You can configure an external load balancer for swarm services, either in
+combination with the routing mesh or without using the routing mesh at all.
+
+### Using the routing mesh
 
 You can configure an external load balancer to route requests to a swarm
 service. For example, you could configure [HAProxy](http://www.haproxy.org) to
@@ -149,6 +235,16 @@ don't need to reconfigure the load balancer.
 
 You can configure any type of load balancer to route requests to swarm nodes.
 To learn more about HAProxy, see the [HAProxy documentation](https://cbonte.github.io/haproxy-dconv/).
+
+### Without the routing mesh
+
+To use an external load balancer without the routing mesh, set `--endpoint-mode`
+to `dnsrr` instead of the default value of `vip`. In this case, there is not a
+single virtual IP. Instead, Docker sets up DNS entries for the service such that
+a DNS query for the service name returns a list of IP addresses, and the client
+connects directly to one of these. You are responsible for providing the list of
+IP addresses and ports to your load balancer. See
+[Configure service discovery](networking.md@configure-service-discovery).
 
 ## Learn more
 
