@@ -37,7 +37,7 @@ ucp_versions:
 
 dtr_versions:
   - version: "2.4"
-    path: /datacenter/dtr/2.3/guides/
+    path: /datacenter/dtr/2.4/guides/
     latest: true
   - version: "2.3"
     path: /datacenter/dtr/2.3/guides/
