@@ -327,9 +327,9 @@ To install Docker from packages, use the following commands:
 #### CS Docker Engine 1.13.1
 
 {% comment %} Check on the S3 bucket for packages.docker.com for the versions. {% endcomment %}
-{% assign rpm-version = "1.13.1.cs2-1" %}
-{% assign rpm-rhel-version = "1.13.1.cs2-1" %}
-{% assign deb-version = "1.13.1~cs2-0" %}
+{% assign rpm-version = "1.13.1.cs7-1" %}
+{% assign rpm-rhel-version = "1.13.1.cs7-1" %}
+{% assign deb-version = "1.13.1~cs7-0" %}
 
 | Operating system      | Package links                                                                                                                                                                                                                                                                                                                                               |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
