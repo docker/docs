@@ -18,7 +18,7 @@ the Docker CLI to see details about the service running in the swarm.
     To see the details on the `helloworld` service:
 
     ```bash
-    $ docker service inspect --pretty helloworld
+    [manager1]$ docker service inspect --pretty helloworld
 
     ID:		9uk4639qpg7npwf3fn2aasksr
     Name:		helloworld
@@ -38,7 +38,7 @@ the Docker CLI to see details about the service running in the swarm.
     without the `--pretty` flag.
 
     ```bash
-    $ docker service inspect helloworld
+    [manager1]$ docker service inspect helloworld
     [
     {
         "ID": "9uk4639qpg7npwf3fn2aasksr",
@@ -90,7 +90,7 @@ the Docker CLI to see details about the service running in the swarm.
     service:
 
     ```bash
-    $ docker service ps helloworld
+    [manager1]$ docker service ps helloworld
 
     NAME                                    IMAGE   NODE     DESIRED STATE  LAST STATE
     helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2  Running        Running 3 minutes
@@ -111,7 +111,7 @@ the Docker CLI to see details about the service running in the swarm.
     you must ssh to that node.
 
     ```bash
-    $docker ps
+    [worker2]$docker ps
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     e609dde94e47        alpine:latest       "ping docker.com"   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35
