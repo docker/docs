@@ -14,9 +14,9 @@ all nodes must have:
 
 * [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
-* 8.00 GB of RAM for manager nodes or nodes running DTR
-* 4.00 GB of RAM for worker nodes
-* 3.00 GB of available disk space
+* 8GB of RAM for manager nodes or nodes running DTR
+* 4GB of RAM for worker nodes
+* 3GB of free disk space
 * A static IP address
 
 Also, make sure the nodes are running one of these operating systems:
