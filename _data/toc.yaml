@@ -311,7 +311,7 @@ guides:
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
 
-- sectiontitle: Administer role-based access control
+- sectiontitle: Configure user permissions
   section:
     - path: /deploy/access-control/
       title: Access control model overview
@@ -339,13 +339,13 @@ guides:
         title: Isolate volumes to specific teams
       - path: /deploy/access-control/deploy-view-only-service
         title: Deploy a service with view-only access
-    - sectiontitle: Examples
+    - sectiontitle: OrcaBank Tutorial
       section:
       - path: /deploy/access-control/access-control-design-ee-standard
         title: Orcabank tutorial 1
       - path: /deploy/access-control/access-control-design-ee-advanced
         title: Orcabank tutorial 2
-        
+
 - sectiontitle: Deploy your app in production
   section:
     - path: /deploy/

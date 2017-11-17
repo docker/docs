@@ -12,10 +12,6 @@ ui_tabs:
 ---
 
 {% if include.ui %}
-{% if include.version=="ucp-3.0" %}
-This topic is under construction.
-
-{% elsif include.version=="ucp-2.2" %}
 
 You can extend the user's default permissions by granting them fine-grained
 permissions over resources. You do this by adding the user to a team.
@@ -126,6 +122,9 @@ the `Data Center Resources` collection.
 -  [UCP permission levels](permission-levels.md)
 -  [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
 -  [Isolate swarm nodes between two different teams](isolate-nodes-between-teams.md)
+
+{% if include.version=="ucp-3.0" %}
+{% elsif include.version=="ucp-2.2" %}
 
 {% endif %}
 {% endif %}

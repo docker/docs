@@ -18,37 +18,35 @@ This topic is under construction.
 {% elsif include.version=="ucp-2.2" %}
 
 Docker EE enables controlling access to container resources by using
-*collections*. A collection is a group of swarm resources,
-like services, containers, volumes, networks, and secrets.
+*collections*. A collection is a group of swarm resources, like services,
+containers, volumes, networks, and secrets.
 
 ![](../images/collections-and-resources.svg){: .with-border}
 
-Access to collections goes through a directory structure that arranges a
-swarm's resources. To assign permissions, administrators create grants
-against directory branches.
+Access to collections goes through a directory structure that arranges a swarm's
+resources. To assign permissions, administrators create grants against directory
+branches.
 
 ## Directory paths define access to collections
 
-Access to collections is based on a directory-like structure.
-For example, the path to a user's default collection is
-`/Shared/Private/<username>`. Every user has a private collection that
-has the default permission specified by the UCP administrator.
+Access to collections is based on a directory-like structure. For example, the
+path to a user's default collection is `/Shared/Private/<username>`. Every user
+has a private collection that has the default permission specified by the UCP
+administrator.
 
-Each collection has an access label that identifies its path.
-For example, the private collection for user "hans" has a label that looks
-like this:
+Each collection has an access label that identifies its path. For example, the
+private collection for user "hans" has a label that looks like this:
 
 ```
 com.docker.ucp.access.label = /Shared/Private/hans
 ```
 
-You can nest collections. If a user has a grant against a collection,
-the grant applies to all of its child collections.
+You can nest collections. If a user has a grant against a collection, the grant
+applies to all of its child collections.
 
-For a child collection, or for a user who belongs to more than one team,
-the system concatenates permissions from multiple roles into an
-"effective role" for the user, which specifies the operations that are
-allowed against the target.
+For a child collection, or for a user who belongs to more than one team, the
+system concatenates permissions from multiple roles into an "effective role" for
+the user, which specifies the operations that are allowed against the target.
 
 ## Built-in collections
 

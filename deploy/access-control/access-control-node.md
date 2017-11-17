@@ -13,31 +13,36 @@ ui_tabs:
 
 {% if include.ui %}
 {% if include.version=="ucp-3.0" %}
-This topic is under construction.
+
+*Node access control* lets you segment scheduling and visibility by node. Node access control is available in [Docker EE Advanced](https://www.docker.com/pricing) with Swarm orchestration only.
 
 {% elsif include.version=="ucp-2.2" %}
 
-The ability to segment scheduling and visibility by node is called
-*node access control* and is a feature of Docker EE Advanced. By default,
-all nodes that aren't infrastructure nodes (UCP & DTR nodes) belong to a
-built-in collection called `/Shared`. By default, all application workloads
-in the cluster will get scheduled on nodes in the `/Shared` collection. This
-includes users that are deploying in their private collections
-(`/Shared/Private/`) and in any other collections under `/Shared`. This is
-enabled by a built-in grant that grants every UCP user the `scheduler`
-capability against the `/Shared` collection.
+*Node access control* lets you segment scheduling and visibility by node. Node access control is available in [Docker EE Advanced](https://www.docker.com/pricing).
 
-Node Access Control works by placing nodes in to custom collections outside of
-`/Shared`. If the `scheduler` capability is granted via a role to a user or
-group of users against a collection then they will be able to schedule
-containers and services on these nodes. In the following example, users with
-`scheduler` capability against `/collection1` will be able to schedule
-applications on those nodes.
+{% endif %}
 
-Note that in the directory these collections lie outside of the `/Shared`
-collection so users without grants will not have access to these collections
-unless explicitly granted access. These users will only be able to deploy
-applications on the built-in `/Shared` collection nodes.
+By default, non-infrastructure nodes (non-UCP & DTR nodes) belong to a built-in
+collection called `/Shared`. All application workloads in the cluster are
+scheduled on nodes in the `/Shared` collection. This includes those deployed in
+private collections (`/Shared/Private/`) or any other collection under
+`/Shared`.
+
+This setting is enabled by a built-in grant that assigns every UCP user the
+`scheduler` capability against the `/Shared` collection.
+
+Node Access Control works by placing nodes in custom collections (outside of
+`/Shared`). If a user or team is granted a role with the `scheduler` capability
+against a collection, then they can schedule containers and services on these
+nodes.
+
+In the following example, users with `scheduler` capability against
+`/collection1` can schedule applications on those nodes.
+
+Again, these collections lie outside of the `/Shared` collection so users
+without grants do not have access to these collections unless it is explicitly
+granted. These users can only deploy applications on the built-in `/Shared`
+collection nodes.
 
 ![image](../images/design-access-control-adv-custom-grant.png){: .with-border}
 
@@ -57,9 +62,8 @@ With the use of default collections, users, teams, and organizations can be
 constrained to what nodes and physical infrastructure they are capable of
 deploying on.
 
+
 ## Where to go next
 
 - [Isolate swarm nodes to a specific team](isolate-nodes-between-teams.md)
-
-{% endif %}
 {% endif %}
