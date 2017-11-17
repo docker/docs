@@ -38,10 +38,12 @@ if (window.navigator.onLine) {
     if ( suppressButterBar == false ) {
       $( 'body' ).prepend(outerDivStart + buttonCode + listStart + listItems.join("") + listEnd + outerDivEnd);
       isArchive = true;
-      console.log("Detected that this is an archive.");
     } else {
       isArchive = false;
-      console.log("This is not an archive. Suppressing the archive versions bar");
+      /* This is only relevant to /enterprise/index.md */
+      if (document.getElementById('ee-version-div')) {
+        document.getElementById('ee-version-div').textContent += "The latest version of Docker EE is {{ site.docker_ee_version }}.";
+      }
     }
   });
 }
