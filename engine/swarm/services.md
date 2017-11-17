@@ -354,7 +354,7 @@ three tasks on a 10-node swarm:
 ```bash
 $ docker service create --name my_web \
                         --replicas 3 \
-                        --publish 8080:80 \
+                        --publish target=8080,port=80 \
                         nginx
 ```
 
@@ -648,7 +648,7 @@ $ docker service create \
 
 > Missing or null labels
 >
-> Nodes which are missing the label used to spread will still receive 
+> Nodes which are missing the label used to spread will still receive
 > task assignments. As a group, these nodes will receive tasks in equal
 > proportion to  any of the other groups identified by a specific label
 > value. In a sense, a missing label is the same as having the label with

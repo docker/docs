@@ -266,7 +266,7 @@ round robin (DNSRR). You can configure this per service.
   addresses, and the client connects directly to one of these.
 
   DNS round-robin is useful in cases where you want to use your own load
-  balancer. To configure a service to use DNSRR, use the flag
+  balancer, such as HAProxy. To configure a service to use DNSRR, use the flag
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
 
