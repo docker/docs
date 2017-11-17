@@ -434,6 +434,16 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-rc4-win39 2017-11-17 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - Linux Kernel 4.9.60
+ 
+* Bug fixes and minor changes
+  - Increased timeout for VM boot startup to 2 minutes.
+
 ### Docker Community Edition 17.11.0-ce-rc3-win38 2017-11-09 (Edge)
 
 * Upgrades
