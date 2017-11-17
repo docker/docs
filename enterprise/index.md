@@ -11,6 +11,9 @@ and supported to provide enterprises with the most secure container platform
 in the industry. For more info about Docker EE, including purchasing
 options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/).
 
+<!-- This is populated by logic in js/archive.js -->
+<p id="ee-version-div"></p>
+
 The free Docker products continue to be available as the Docker Community
 Edition (*Docker CE*).
 
