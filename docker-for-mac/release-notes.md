@@ -459,6 +459,24 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-rc4-mac39 2017-11-17 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - Linux Kernel 4.9.60
+
+* Bug fixes and minor changes
+  - Fix login into private repository with certificate issue. (docker/for-mac#2201)
+
+* New
+  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.  
+  Existing disks are kept in qcow format, if you want to switch to raw format you need to reset to defaults. To query the space usage of the file, use a command like:  
+  `$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`  
+  `$ ls -ls Docker.raw`  
+  `3944768 -rw-r--r--@ 1 user  staff  68719476736 Nov 16 11:19 Docker.raw`  
+  The first number (`3944768`) is the allocated space in blocks; the larger number `68719476736` is the maximum total amount of space the file may consume in future in bytes.
+
 ### Docker Community Edition 17.11.0-ce-rc3-mac38 2017-11-09 (Edge)
 
 * Upgrades
