@@ -55,6 +55,16 @@ To create the `docker` group and add your user:
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
+    If you see the below warning while running an image,
+    ```none
+    WARNING: Error loading config file: /home/user/.docker/config.json - stat /home/user/.docker/config.json: permission denied
+    ```
+    change the permissions of your `~/.docker` folder as follows:
+    ```bash
+    $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+    $ sudo chmod g+rwx "/home/$USER/.docker" -R
+    ```
+
 ## Configure Docker to start on boot
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
