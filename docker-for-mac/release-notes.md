@@ -467,7 +467,7 @@ events or unexpected unmounts.
   - Linux Kernel 4.9.60
 
 * Bug fixes and minor changes
-  - Fix login into private repository with certificate issue. (docker/for-mac#2201)
+  - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
 
 * New
   - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.  
