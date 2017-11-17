@@ -17,7 +17,7 @@ integrates with LDAP directory services.
 
 > To enable LDAP and manage users and groups from your organization's directory,
 > go to Admin > Admin Settings > Authentication and Authorization.
-> [Learn how to integrate with an LDAP directory] (../configure/external-auth/index.md).
+> [Learn how to integrate with an LDAP directory](../configure/external-auth/index.md).
 
 {% if include.version=="ucp-3.0" %}
 To use UCP built-in authentication, you must manually create users. New users
@@ -31,12 +31,12 @@ To create a new user in the UCP web UI:
 4. Click **Create**.
 5. [optional] Check "Is a Docker EE Admin".
 
-![](../images/create-users-1-ucp3.png){: .with-border}
-
 > Check `Is a Docker EE Admin` to grant a user permission to change the cluster
 > configuration and manage grants, roles, and collections.
 
-![](../images/create-users-2-ucp3.png){: .with-border}
+![](../images/ucp_usermgmt_users_create01.png){: .with-border}
+
+![](../images/ucp_usermgmt_users_create02.png){: .with-border}
 
 {% elsif include.version=="ucp-2.2" %}
 To use UCP built-in authentication, you must manually create users. New users

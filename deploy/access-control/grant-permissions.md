@@ -12,21 +12,29 @@ ui_tabs:
 ---
 
 {% if include.ui %}
+UCP administrators can create *grants* to control how users and organizations
+access resources.
+
 {% if include.version=="ucp-3.0" %}
-This topic is under construction.
+## Kubernetes grants
+With Kubernetes orchestration, a grant is made up of a *subject*, a *role*, and a
+*namespace*.
+
+This section is under construction.
 
 {% elsif include.version=="ucp-2.2" %}
+{% endif %}
 
-If you're a UCP administrator, you can create *grants* to control how users
-and organizations access swarm resources.
+## Swarm grants
+With Swarm orchestration, a grant is made up of a *subject*, a *role*, and a
+*resource collection*.
 
 ![](../images/ucp-grant-model-0.svg){: .with-border}
 
-A grant is made up of a *subject*, a *role*, and a *resource collection*.
-A grant defines who (subject) has how much access (role)
-to a set of resources (collection). Each grant is a 1:1:1 mapping of
-subject, role, collection. For example, you can grant the "Prod Team"
-"Restricted Control" permissions for the "/Production" collection.
+A grant defines who (subject) has how much access (role) to a set of resources
+(collection). Each grant is a 1:1:1 mapping of subject, role, collection. For
+example, you can grant the "Prod Team" "Restricted Control" permissions for the
+"/Production" collection.
 
 The usual workflow for creating grants has four steps.
 
@@ -38,10 +46,10 @@ The usual workflow for creating grants has four steps.
 
 ![](../images/ucp-grant-model.svg){: .with-border}
 
-## Create a grant
+### Create a Swarm grant
 
-When you have your users, collections, and roles set up, you can create
-grants. Administrators create grants on the **Manage Grants** page.
+When you have your users, collections, and roles set up, you can create grants.
+Administrators create grants on the **Manage Grants** page.
 
 1.  Click **Create Grant**. All of the collections in the system are listed.
 2.  Click **Select** on the collection you want to grant access to.
@@ -51,13 +59,12 @@ grants. Administrators create grants on the **Manage Grants** page.
     organization or a team.
 5.  Select a user, team, or organization and click **Create**.
 
-By default, all new users are placed in the `docker-datacenter` organization.
-If you want to apply a grant to all UCP users, create a grant with the
+By default, all new users are placed in the `docker-datacenter` organization. If
+you want to apply a grant to all UCP users, create a grant with the
 `docker-datacenter` org as a subject.
 
 ## Where to go next
 
 - [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
 
-{% endif %}
 {% endif %}

@@ -23,29 +23,86 @@ next_steps:
 ---
 
 {% if include.ui %}
+
+With Docker Universal Control Plane (UCP), you can configure how users access
+resources by assigning role-based permissions with grants.
+
 {% if include.version=="ucp-3.0" %}
-This topic is under construction.
-With Docker Universal Control Plane, you can control who creates and edits
-resources, such as nodes, services, images, networks, and volumes. You can grant
-and manage permissions to enforce fine-grained access control as needed.
 
-## Grant access to Swarm resources
-This topic is under construction.
+UCP administrators can control who views, edits, and uses Swarm and Kubernetes
+resources. They can grant and manage permissions to enforce fine-grained access
+control as needed.
 
-## Grant access to Kubernetes resources
-This topic is under construction.
+## Grants
 
-## Transition from UCP 2.2 access control
-This topic is under construction.
+Grants define which users can access what resources. Grants are effectively
+Access Control Lists (ACLs), which, when grouped together, can provide
+comprehensive access policies for an entire organization.
+
+A grant is made up of a *subject*, *namespace*, and *role*.
+
+Administrators are users who create subjects, define namespaces by labelling
+resources, define roles by selecting allowable operations, and apply grants to
+users and teams.
+
+> Only an administrator can manage grants, subjects, roles, and resources.
+
+## Subjects
+
+A subject represents a user, team, or organization. A subject is granted a
+role that defines permitted operations against one or more resources.
+
+- **User**: A person authenticated by the authentication backend. Users can
+  belong to one or more teams and one or more organizations.
+- **Team**: A group of users that share permissions defined at the team level.
+  A team exists only as part of an organization, and all of its members
+  must be members of the organization. Team members share organization
+  permissions. A team can be in one organization only.
+- **Organization**: A group of teams that share a specific set of permissions,
+  defined by the roles of the organization.
+
+## Namespaces
+
+A namespace is ...
+
+## Roles
+
+Roles define what operations can be done by whom against which cluster
+resources. A role is a set of permitted operations against a resource that is
+assigned to a user or team with a grant.
+
+For example, the built-in role, **Restricted Control**, includes permission to
+view and schedule a node (in a granted namespace) but not update it.
+
+Most organizations use different roles to assign the right kind of access. A
+given team or user may have different roles provided to them depending on what
+resource they are accessing.
+
+You can build custom roles to meet your organizational needs or use the
+following built-in roles:
+
+- **View Only** - Users can see all cluster resources but not edit or use them.
+- **Restricted Control** - Users can view containers and run a shell inside a
+  container process (with `docker exec`) but not view or edit other resources.
+- **Full Control** - Users can perform all operations against granted resources.
+- **Scheduler** - Users can view and schedule nodes.
+
+[Learn more about roles and permissions](permission-levels.md).
 
 
 {% elsif include.version=="ucp-2.2" %}
-## Grant access to Swarm resources
 
-UCP administrators control how subjects (users, teams, organizations) access
-resources (collections) by assigning role-based permissions with *grants*.
+UCP administrators can control who views, edits, and uses resources such as
+nodes, services, images, networks, and volumes. They can grant and manage
+permissions to enforce fine-grained access control as needed.
 
-A grant is made up of a *subject*, *role*, and *resource collection*.
+
+## Grants
+Grants define which users can access what resources. Grants are effectively
+Access Control Lists (ACLs), which, when grouped together, can provide
+comprehensive access policies for an entire organization.
+
+A grant is made up of a *subject*, *resource collection*, and *role*.
 
 Administrators are users who create subjects, define collections by labelling
 resources, define roles by selecting allowable operations, and apply grants to
@@ -58,7 +115,7 @@ users and teams.
 ## Subjects
 
 A subject represents a user, team, or organization. A subject is granted a
-role for a collection of resources.
+role that defines permitted operations against one or more resources.
 
 - **User**: A person authenticated by the authentication backend. Users can
   belong to one or more teams and one or more organizations.
@@ -69,37 +126,50 @@ role for a collection of resources.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
+## Collections
+
+A collection is a group of resources that you define with labels and access by
+specifying a directory-like path.
+
+Swarm resources that can be placed into a collection include:
+
+- Application configs
+- Containers
+- Networks
+- Nodes (Physical or virtual)
+- Services
+- Secrets
+- Volumes
+
 ## Roles
 
-A role is a set of permitted API operations that you can assign to a specific
-subject and collection by using a grant. UCP administrators view and manage
-roles by navigating to the **Roles** page.
+Roles define what operations can be done by whom against which cluster
+resources. A role is a set of permitted operations against a resource that is
+assigned to a user or team with a grant.
+
+For example, the built-in role, **Restricted Control**, includes permission to view
+and schedule a node (in a granted collection) but not update it.
+
+Most organizations use different roles to assign the right kind of access. A
+given team or user may have different roles provided to them depending on what
+resource they are accessing.
+
+You can build custom roles to meet your organizational needs or use the following
+built-in roles:
+
+- **View Only** - Users can see all cluster resources but not edit or use them.
+- **Restricted Control** - Users can view containers and run a shell inside a
+  container process (with `docker exec`) but not view or edit other resources.
+- **Full Control** - Users can perform all operations against granted resources.
+- **Scheduler** - Users can view and schedule nodes.
+
 [Learn more about roles and permissions](permission-levels.md).
 
-## Resource collections
-
-Docker EE allows you to control access to cluster resources with *collections*.
-A collection is a group of resources that you access by specifying a
-directory-like path.
-
-Resources that can be placed into a collection include:
-
-- Physical or virtual nodes
-- Containers
-- Services
-- Networks
-- Volumes
-- Secrets
-- Application configs
 
 ## Collection architecture
 
-Grants define which users can access what resources. Grants are effectively
-Access Control Lists (ACLs), which, when grouped together, can provide
-comprehensive access policies for an entire organization.
-
-Before grants can be implemented, collections must be defined and group
-resources in a way that makes sense for an organization.
+Before grants can be implemented, collections must group resources in a way that
+makes sense for an organization.
 
 For example, consider an organization with two application teams, Mobile and
 Payments, which share cluster hardware resources but segregate access to their
@@ -126,49 +196,7 @@ prod (collection)
 > A subject that has access to any level in a collection hierarchy has the
 > same access to any collections below it.
 
-## Role composition
 
-Roles define what operations can be done against cluster resources. Most
-organizations use different roles to assign the right kind of access. A given
-team or user may have different roles provided to them depending on what
-resource they are accessing.
-
-UCP provides default roles and lets you build custom roles. For example, here,
-three different roles are used:
-
-- **Full Control** (default role) - Allows users to perform all operations
-  against cluster resources.
-- **View Only** (default role) - Allows users to see all cluster resources but
-  not edit or delete them.
-- **Dev** (custom role) - Allows users to view containers and run a shell inside
-  a container process (with `docker exec`) but not to view or edit any other
-  cluster resources.
-
-## Grant composition
-
-The following four grants define the access policy for the entire organization
-for this cluster. They tie together the collections that were created, the
-default and custom roles, and also teams of users that are in UCP.
-
-![image](../images/access-control-grant-composition.png){: .with-border}
-
-## Access architecture
-
-The resulting access architecture defined by these grants is depicted below.
-
-![image](../images/access-control-collection-architecture.png){: .with-border}
-
-There are four teams that are given access to cluster resources:
-
-- The `ops` team has `Full Control` against the entire `/prod` collection. It
-  can deploy, view, edit, and remove applications and application resources.
-- The `security` team has the `View Only` role. They can see, but not edit, all
-  resources in the `/prod` collection.
-- The `mobile` team has the `Dev` role against the `/prod/mobile` collection
-  only. This team can see and `exec` into their own applications, but not the
-  `payments` applications.
-- The `payments` team has the `Dev` role for the `/prod/payments` collection
-  only.
 
 ## Transition from UCP 2.1 access control
 
