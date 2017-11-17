@@ -366,8 +366,14 @@ guides:
         title: Deploy a workload to a Kubernetes cluster
       - path: /deploy/deploy-workloads/manage-and-deploy-private-images/
         title: Manage and deploy private images
-
-
+    - sectiontitle: Install and configure
+      section:
+      - path: /deploy/install-and-configure/join-nodes-to-cluster/
+        title: Join nodes to your cluster
+      - path: /deploy/install-and-configure/join-windows-nodes-to-cluster/
+        title: Join Windows worker nodes to your cluster
+      - path: /deploy/install-and-configure/set-orchestrator-type/
+        title: Set the orchestrator type for a node
 
 - sectiontitle: Run your app in production
   section:
