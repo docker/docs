@@ -23,7 +23,7 @@ Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere) V
 -   `--vmwarevsphere-network`: Network where the Docker VM will be attached.
 -   `--vmwarevsphere-datastore`: Datastore for Docker VM.
 -   `--vmwarevsphere-datacenter`: Datacenter for Docker VM (must be set to `ha-datacenter` when connecting to a single host).
--   `--vmwarevsphere-folder`: vSphere folder for the docker VM. This folder must already exist in the datacenter.
+-   `--vmwarevsphere-folder`: vSphere folder for the docker VM. This folder must already exist in the datacenter. Sub-folders may be specified using the form `folder/sub-folder` i.e. specifying the Datacenter is not required.
 -   `--vmwarevsphere-pool`: Resource pool for Docker VM.
 -   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM will be instantiated (use <cluster>/* or <cluster>/<host> if using a cluster).
 
