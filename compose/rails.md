@@ -5,8 +5,8 @@ title: "Quickstart: Compose and Rails"
 ---
 
 This Quickstart guide will show you how to use Docker Compose to set up and run
-a Rails/PostgreSQL app. Before starting, you'll need to have [Compose
-installed](install.md).
+a Rails/PostgreSQL app. Before starting, you'll need to have
+[Compose installed](install.md).
 
 ### Define the project
 
@@ -16,50 +16,86 @@ dependencies, you'll need to define exactly what needs to be included in the
 container. This is done using a file called `Dockerfile`. To begin with, the
 Dockerfile consists of:
 
-    FROM ruby:2.3.3
-    RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-    RUN mkdir /myapp
-    WORKDIR /myapp
-    ADD Gemfile /myapp/Gemfile
-    ADD Gemfile.lock /myapp/Gemfile.lock
-    RUN bundle install
-    ADD . /myapp
+```none
+FROM ruby:2.3.3
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN mkdir /myapp
+WORKDIR /myapp
+ADD Gemfile /myapp/Gemfile
+ADD Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+ADD . /myapp
+```
 
 That'll put your application code inside an image that will build a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
-how to write Dockerfiles, see the [Docker user
-guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
+how to write Dockerfiles, see the
+[Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
 and the [Dockerfile reference](/engine/reference/builder.md).
 
 Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
-    source 'https://rubygems.org'
-    gem 'rails', '5.0.0.1'
+```none
+source 'https://rubygems.org'
+gem 'rails', '5.0.0.1'
+```
 
 You'll need an empty `Gemfile.lock` in order to build our `Dockerfile`.
 
-    touch Gemfile.lock
+```bash
+touch Gemfile.lock
+```
 
-Finally, `docker-compose.yml` is where the magic happens. This file describes
+Next, create a [secret](/engine/swarm/secrets.md) to store the database
+password. This example uses a semi-random string using the `openssl` command,
+but you could also generate it using a password manager or another mechanism.
+
+```bash
+openssl rand -base64 20 | docker secret create postgres_pw -
+```
+
+The `docker-compose.yml` file is where the magic happens. This file describes
 the services that comprise your app (a database and a web app), how to get each
 one's Docker image (the database just runs on a pre-made PostgreSQL image, and
 the web app is built from the current directory), and the configuration needed
-to link them together and expose the web app's port.
+to link them together and expose the web app's port. In addition, the secret
+used to connect to the database is stored in a
+[secret](/engine/swarm/secrets.md) so that it does not need to be stored in
+clear text. The Rails configuration is also stored in a secret
 
-    version: '3'
-    services:
-      db:
-        image: postgres
-      web:
-        build: .
-        command: bundle exec rails s -p 3000 -b '0.0.0.0'
-        volumes:
-          - .:/myapp
-        ports:
-          - "3000:3000"
-        depends_on:
-          - db
+```yaml
+version: '3'
+services:
+  db:
+    image: postgres
+    secrets:
+      - postgres_pw
+    configs:
+      - postgres_db_name
+    environment:
+      POSTGRES_PASSWORD_FILE=/run/postgres_pw
+      POSTGRES_DB=/postgres_db_name
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    secrets:
+      - postgres_pw
+    configs:
+      - postgres_db_name
+secrets:
+    postgres_pw:
+      external: true
+configs:
+    postgres_db_name:
+      external: true
+```
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
 
@@ -69,7 +105,9 @@ to link them together and expose the web app's port.
 With those four files in place, you can now generate the Rails skeleton app
 using [docker-compose run](/compose/reference/run/):
 
-    docker-compose run web rails new . --force --database=postgresql
+```bash
+docker-compose run web rails new . --force --database=postgresql
+```
 
 First, Compose will build the image for the `web` service using the
 `Dockerfile`. Then it will run `rails new` inside a new container, using that
@@ -115,8 +153,9 @@ Now that you’ve got a new Gemfile, you need to build the image again. (This, a
 changes to the `Gemfile` or the Dockerfile, should be the only times you’ll need
 to rebuild.)
 
-    docker-compose build
-
+```bash
+docker-compose build
+```
 
 ### Connect the database
 
