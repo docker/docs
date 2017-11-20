@@ -18,19 +18,19 @@ Control Plane (UCP).
 
 Individual users can belong to one or more teams but each team can only be in
 one ogranziation. At the fictional startup, Acme Company, some users are on
-multiple teams; but all teams are necessarily unique.
+multiple teams; but all teams are necessarily unique:
 
 ```
 Acme Organization
 ├── DevOps Team
-│   ├── User Alex
-│   └── User Brad
+│   ├── *User Alex*
+│   └── User Bart
 ├── Infra Team
-│   ├── User Alex
-│   └── User Carl
+│   ├── *User Alex*
+│   └── User Chen
 └── Apps Team
-    ├── User Doug
-    └── User Evan
+    ├── User Deva
+    └── User Emma
 ```
 
 ## Authentication
@@ -40,16 +40,10 @@ and also integrates with LDAP directory services.
 
 > To enable LDAP and authenticate and synchronize UCP users and teams with your
 > organization's LDAP directory, see:
-> - [Synchronize users and teams with LDAP in the UI](./usermgmt-sync-teams-with-ldap.md)
-> - [Synchronize users and teams with LDAP on the backend](../configure/external-auth/index.md).
+> - [Synchronize users and teams with LDAP in the UI](usermgmt-sync-with-ldap.md)
+> - [Integrate with an LDAP Directory](../../datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
 
 To use UCP built-in authentication, you must manually create users.
-
-New users are assigned a default permission level so that they can access the
-cluster. You can optionally grant them UCP administrator permissions.
-
-You can extend the user's default permissions by granting them fine-grained
-permissions over resources. You do this by adding the user to a team.
 
 ## Build an organization architecture
 
@@ -60,7 +54,7 @@ The general flow of designing an organization of teams in UCP is:
 3. Create teams under the organization
 4. Add users to teams manually or sync with LDAP
 
-### Create organizations
+### Create an organization with teams
 
 To create an organzation in UCP:
 
@@ -69,25 +63,28 @@ To create an organzation in UCP:
 3. Input the organization name.
 4. Click **Create**.
 
-### Create teams manually
+To create teams in the organization:
 
-1. Click **Organization & Teams** under **User Management**.
-2. Click through an organization name.
-3. Click **Create Team**.
-4. Input a team name (and description).
-5. Click **Create**.
-6. Add existing users to the team. If they don't exist, see below.
-   - Click the team name.
-   - Select **Actions** > **Add Users**.
-   - Check users to include.
-   - Click **Add Users**.
+1. Click through the organization name.
+2. Click **Create Team**.
+3. Input a team name (and description).
+4. Click **Create**.
+5. Add existing users to the team. If they don't exist, see [Create users manually](#Create-users-manually).
+   - Click the team name and select **Actions** > **Add Users**.
+   - Check the users to include and click **Add Users**.
 
-> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./usermgmt-sync-teams-with-ldap).
+> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./usermgmt-sync-with-ldap).
 
 
 {% if include.version=="ucp-3.0" %}
 
-### Create users manuallly
+### Create users manually
+
+New users are assigned a default permission level so that they can access the
+cluster. You can optionally grant them UCP administrator permissions.
+
+You can extend the user's default permissions by granting them fine-grained
+permissions over resources. You do this by adding the user to a team.
 
 To manally create users in UCP:
 
@@ -108,6 +105,12 @@ To manally create users in UCP:
 
 ### Create users manuallly
 
+New users are assigned a default permission level so that they can access the
+cluster. You can optionally grant them UCP administrator permissions.
+
+You can extend the user's default permissions by granting them fine-grained
+permissions over resources. You do this by adding the user to a team.
+
 To manally create users in UCP:
 
 1. Navigate to the **Users** page.
@@ -116,16 +119,15 @@ To manally create users in UCP:
 4. Click **Create**.
 5. [optional] Check "Is a UCP admin?".
 
-![](../images/create-users-1.png){: .with-border}
-
 > A `UCP Admin` can grant users permission to change the cluster configuration
 > and manage grants, roles, and collections.
 
+![](../images/create-users-1.png){: .with-border}
 ![](../images/create-users-2.png){: .with-border}
 {% endif %}
 
 ## Where to go next
 
-- [Synchronize users and teams with LDAP](./usermgmt-sync-teams-with-ldap.md)
+- [Synchronize users and teams with LDAP](./usermgmt-sync-with-ldap.md)
 - [Create grants and authorize access to users and teams](usermgmt-grant-permissions.md).
 {% endif %}

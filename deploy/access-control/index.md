@@ -26,13 +26,15 @@ next_steps:
 {% if include.version=="ucp-3.0" %}
 
 With Docker Universal Control Plane (UCP), you can authorize how users view,
-edit, and use cluster resources by granting role-based permissions.
+edit, and use cluster resources by granting role-based permissions. Resources
+can be grouped according to an organization's needs and users can be granted
+more than one role.
 
 To authorize access to cluster resources across your organization, Docker
-administrators should take the following high-level steps:
+administrators might take the following high-level steps:
 
 - Add and configure subjects (users and teams)
-- Define customer roles (or use defaults) by adding permissions resource types
+- Define customer roles (or use defaults) by adding permissions to resource types
 - Group cluster resources into Swarm collections or Kubernetes namespaces
 - Create grants by marrying subject + role + resource
 
@@ -50,7 +52,7 @@ role that defines permitted operations against one or more resources.
 
 For more, see:
 - [Create users and teams in UCP](./usermgmt-create-subjects.md)
-- [Synchronize users and teams with LDAP](./usermgmt-sync-teams-with-ldap.md)
+- [Synchronize users and teams with LDAP](./usermgmt-sync-with-ldap.md)
 
 ## Roles
 
@@ -66,7 +68,7 @@ Most organizations use different roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Create roles that define user access to resources](./usermgmt-create-roles.md)
+For more, see: [Create roles that define user access to resources](./usermgmt-define-roles.md)
 
 ## Resources
 
@@ -86,7 +88,7 @@ holds Kubernetes resources.
 > Kubernetes resources types that can be placed into a namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
-For more, see: [Group resources into collections or namespaces](resources-create-collections-namespaces.md).
+For more, see: [Group resources into collections or namespaces](resources-group-resources.md).
 
 ## Grants
 
@@ -107,14 +109,16 @@ For more, see: [Create grants and authorize access to users and teams](usermgmt-
 
 {% elsif include.version=="ucp-2.2" %}
 
-With Docker Universal Control Plane (UCP), you can authorize how users view,
-edit, and use cluster resources by granting role-based permissions.
+With [Docker Universal Control Plane (UCP)](https://docs.docker.com/datacenter/ucp/2.2/guides/),
+you can authorize how users view, edit, and use cluster resources by granting
+role-based permissions. Resources can be grouped according to an organization's
+needs and users can be granted more than one role.
 
 To authorize access to cluster resources across your organization, Docker
-administrators should take the following high-level steps:
+administrators might take the following high-level steps:
 
 - Add and configure subjects (users and teams)
-- Define customer roles (or use defaults) by adding permissions resource types
+- Define customer roles (or use defaults) by adding permissions to resource types
 - Group cluster resources into Swarm collections
 - Create grants by marrying subject + role + resource
 
@@ -132,7 +136,7 @@ role that defines permitted operations against one or more resources.
 
 For more, see:
 - [Create users and teams in UCP](./usermgmt-create-subjects.md)
-- [Synchronize users and teams with LDAP](./usermgmt-sync-teams-with-ldap.md)
+- [Synchronize users and teams with LDAP](./usermgmt-sync-with-ldap.md)
 
 ## Roles
 
@@ -148,7 +152,7 @@ Most organizations use different roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see [Create roles that define user access to resources](./usermgmt-create-roles.md)
+For more, see [Create roles that define user access to resources](./usermgmt-define-roles.md)
 
 ## Resources
 
@@ -162,7 +166,7 @@ that path.
 > Swarm resources types that can be placed into a collection include: Containers,
 > Networks, Nodes (physical or virtual), Services, Secrets, and Volumes.
 
-For more, see: [Group resources into collections](resources-create-collections-namespaces.md).
+For more, see: [Group resources into collections](resources-group-resources.md).
 
 ## Grants
 
