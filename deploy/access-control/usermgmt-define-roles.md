@@ -1,6 +1,6 @@
 ---
-title: Create roles and set permission levels
-description: Learn how to create roles and configure user authorization in Docker Universal Control Plane.
+title: Create roles and authorize operations
+description: Learn how to create roles and set permissions in Docker Universal Control Plane.
 keywords: rbac, authorization, authentication, users, teams, UCP
 redirect_from:
 - /ucp/
@@ -12,13 +12,12 @@ ui_tabs:
 ---
 
 {% if include.ui %}
-
 {% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane has two types of users: administrators and
-regular users. Administrators can make changes to the UCP swarm, while
-regular users have permissions that range from no access to full control over
-resources such as volumes, networks, images, and containers.
+regular users. Administrators can make changes to the UCP cluster, while regular
+users have permissions that range from no access to full control over resources
+such as volumes, networks, images, and containers.
 
 Users are grouped into teams and organizations.
 
@@ -30,10 +29,10 @@ permissions to swarm resources.
 ## Administrator users
 
 In Docker UCP, only users with administrator privileges can make changes to
-swarm settings. This includes:
+cluster settings. This includes:
 
 * Managing user permissions by creating grants.
-* Managing swarm configurations, like adding and removing nodes.
+* Managing cluster configurations, like adding and removing nodes.
 
 ## Roles
 
@@ -44,13 +43,20 @@ UCP administrators view and manage roles by navigating to the **Roles** page.
 
 The system provides the following default roles:
 
-| Built-in role        | Description |
-|----------------------|-------------|
-| `None`               | The user has no access to swarm resources. This maps to the `No Access` role in UCP 2.1.x. |
-| `View Only`          | The user can view resources like services, volumes, and networks but can't create them. |
-| `Restricted Control` | The user can view and edit volumes, networks, and images but can't run a service or container in a way that might affect the node where it's running. The user can't mount a node directory and can't `exec` into containers. Also, The user can't run containers in privileged mode or with additional kernel capabilities. |
-| `Scheduler`          | The user can view nodes and schedule workloads on them. Worker nodes and manager nodes are affected by `Scheduler` grants. Having `Scheduler` access doesn't allow the user to view workloads on these nodes. They need the appropriate resource permissions, like `Container View`. By default, all users get a grant with the `Scheduler` role against the `/Shared` collection. |
-| `Full Control`       | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users' containers. |
+- **None**:  Users have no access to swarm resources. This role maps to the
+`No Access` role in UCP 2.1.x.
+- **View Only**: Users can view resources but can't create them.
+- **Restricted Control**: Users can view and edit resources but can't run a
+service or container in a way that affects the node where it's running. Users
+_cannot_: mount a node directory, `exec` into containers, or run containers in
+privileged mode or with additional kernel capabilities.
+- **Scheduler**: Users can view nodes and schedule workloads on them. Worker nodes
+and manager nodes are affected by `Scheduler` grants. By default, all users get
+a grant with the `Scheduler` role against the `/Shared` collection. Having
+`Scheduler` access doesn't allow users to view workloads on these nodes--they
+need the appropriate resource permissions such as `Container View`.
+- **Full Control**: Users can view and edit all granted resources. They can create
+containers without any restriction, but can't see the containers of other users.
 
 ![Diagram showing UCP permission levels](../images/permissions-ucp.svg)
 
@@ -70,6 +76,13 @@ are listed on the **Create Role** page. For example, you can create a custom
 role that uses the node operations, `Schedule`, `Update`, and `View`, and you
 might give it a name like "Node Operator".
 
+1. Click **Roles** under **User Management**.
+2. Click **Create Role**.
+3. Input the role name on the **Details** page.
+4. Click **Operations**.
+5. Select the permitted operations per resource type.
+6. Click **Create**.
+
 ![](../images/custom-role.png){: .with-border}
 
 You can give a role a global name, like "Remove Images", which might enable
@@ -83,19 +96,15 @@ and create it again.
 You can't delete a custom role if it's used in a grant. You must first delete
 the grants that use the role.
 
-## Where to go next
 
-* [Create and manage users](create-and-manage-users.md)
-* [Create and manage teams](create-and-manage-teams.md)
-* [Docker Reference Architecture: Securing Docker EE and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)
 
 
 {% elsif include.version=="ucp-2.2" %}
 
 Docker Universal Control Plane has two types of users: administrators and
-regular users. Administrators can make changes to the UCP swarm, while
-regular users have permissions that range from no access to full control over
-resources such as volumes, networks, images, and containers.
+regular users. Administrators can make changes to the UCP cluster, while regular
+users have permissions that range from no access to full control over resources
+such as volumes, networks, images, and containers.
 
 Users are grouped into teams and organizations.
 
@@ -107,10 +116,10 @@ permissions to swarm resources.
 ## Administrator users
 
 In Docker UCP, only users with administrator privileges can make changes to
-swarm settings. This includes:
+cluster settings. This includes:
 
 * Managing user permissions by creating grants.
-* Managing swarm configurations, like adding and removing nodes.
+* Managing cluster configurations, like adding and removing nodes.
 
 ## Roles
 
@@ -121,13 +130,20 @@ UCP administrators view and manage roles by navigating to the **Roles** page.
 
 The system provides the following default roles:
 
-| Built-in role        | Description |
-|----------------------|-------------|
-| `None`               | The user has no access to swarm resources. This maps to the `No Access` role in UCP 2.1.x. |
-| `View Only`          | The user can view resources like services, volumes, and networks but can't create them. |
-| `Restricted Control` | The user can view and edit volumes, networks, and images but can't run a service or container in a way that might affect the node where it's running. The user can't mount a node directory and can't `exec` into containers. Also, The user can't run containers in privileged mode or with additional kernel capabilities. |
-| `Scheduler`          | The user can view nodes and schedule workloads on them. Worker nodes and manager nodes are affected by `Scheduler` grants. Having `Scheduler` access doesn't allow the user to view workloads on these nodes. They need the appropriate resource permissions, like `Container View`. By default, all users get a grant with the `Scheduler` role against the `/Shared` collection. |
-| `Full Control`       | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users' containers. |
+- **None**:  Users have no access to swarm resources. This role maps to the
+`No Access` role in UCP 2.1.x.
+- **View Only**: Users can view resources but can't create them.
+- **Restricted Control**: Users can view and edit resources but can't run a
+service or container in a way that affects the node where it's running. Users
+_cannot_: mount a node directory, `exec` into containers, or run containers in
+privileged mode or with additional kernel capabilities.
+- **Scheduler**: Users can view nodes and schedule workloads on them. Worker nodes
+and manager nodes are affected by `Scheduler` grants. By default, all users get
+a grant with the `Scheduler` role against the `/Shared` collection. Having
+`Scheduler` access doesn't allow users to view workloads on these nodes--they
+need the appropriate resource permissions such as `Container View`.
+- **Full Control**: Users can view and edit all granted resources. They can create
+containers without any restriction, but can't see the containers of other users.
 
 ![Diagram showing UCP permission levels](../images/permissions-ucp.svg)
 
@@ -147,6 +163,13 @@ are listed on the **Create Role** page. For example, you can create a custom
 role that uses the node operations, `Schedule`, `Update`, and `View`, and you
 might give it a name like "Node Operator".
 
+1. Click **Roles** under **User Management**.
+2. Click **Create Role**.
+3. Input the role name on the **Details** page.
+4. Click **Operations**.
+5. Select the permitted operations per resource type.
+6. Click **Create**.
+
 ![](../images/custom-role.png){: .with-border}
 
 You can give a role a global name, like "Remove Images", which might enable
@@ -159,12 +182,12 @@ and create it again.
 
 You can't delete a custom role if it's used in a grant. You must first delete
 the grants that use the role.
+{% endif %}
 
 ## Where to go next
 
 * [Create and manage users](create-and-manage-users.md)
 * [Create and manage teams](create-and-manage-teams.md)
 * [Docker Reference Architecture: Securing Docker EE and Security Best Practices](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Securing_Docker_EE_and_Security_Best_Practices)
-
-{% endif %}
+*
 {% endif %}
