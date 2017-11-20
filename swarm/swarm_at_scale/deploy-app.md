@@ -16,7 +16,7 @@ starting a number of "Dockerized applications" running in containers.
 The diagram below shows the final application configuration including the overlay
 container network, `voteapp`.
 
-![](/swarm/images/final-result.png)
+![Voteapp deployment overview](/swarm/images/final-result.png)
 
 In this procedure you will connect containers to this network. The `voteapp`
 network is available to all Docker hosts using the Consul discovery backend.
@@ -239,7 +239,7 @@ Now, you can test your application.
 
     You should see something similar to the following:
 
-    ![](/swarm/images/vote-app-test.png)
+    ![Voting page](/swarm/images/vote-app-test.png)
 
 2. Click on one of the two voting options.
 3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
@@ -247,7 +247,7 @@ Now, you can test your application.
 
     You'll see both sides change as you switch your vote.
 
-    ![](/swarm/images/votes.gif)
+    ![Voting and results page](/swarm/images/votes.gif)
 
 ## Extra Credit: Deployment with Docker Compose
 

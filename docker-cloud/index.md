@@ -57,7 +57,7 @@ also store pre-built images, or link to your source code so it can build the
 code into Docker images, and optionally test the resulting images before pushing
 them to a repository.
 
-![](images/cloud-build.png)
+![Build configuration of repo](images/cloud-build.png)
 
 ### Swarm Management (Beta Swarm Mode)
 
@@ -67,7 +67,7 @@ provision swarms to your cloud providers. Your Docker ID authenticates and
 securely accesses personal or team swarms. Docker Cloud allows you to connect
 your local Docker Engine to any swarm you have access to in Docker Cloud.
 
-![](images//Beta-Swarm-Mode-List-View.png)
+![Swarm mode list](images//Beta-Swarm-Mode-List-View.png)
 
 ### Infrastructure management (Standard Mode)
 
@@ -76,7 +76,7 @@ Docker Cloud allows you to link to your infrastructure or cloud services
 provider so you can provision new nodes automatically. Once you have nodes set
 up, you can deploy images directly from Docker Cloud repositories.
 
-![](images/cloud-clusters.png)
+![Node clusters](images/cloud-clusters.png)
 
 ### Services, Stacks, and Applications (Standard Mode)
 
@@ -86,4 +86,4 @@ containers created from an image), or use Docker Cloud's
 [stackfiles](apps/stacks.md) to combine it with other services and
 microservices, to form a full application.
 
-![](images/cloud-stack.png)
+![Stacks/Wizard - editing yaml file](images/cloud-stack.png)

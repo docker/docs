@@ -332,7 +332,7 @@ needed.
    network when you launched it and you connected it to the `isolated_nw` in
    step 3.
 
-   ![](images/working.png)
+   ![Illustration of containers and their networks](images/working.png)
 
     eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
 

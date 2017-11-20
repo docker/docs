@@ -28,7 +28,7 @@ web frontend that sends jobs to asynchronous background workers. The
 application's design can accommodate arbitrarily large scale. The diagram below
 shows the application's high level architecture:
 
-![](../images/app-architecture.png)
+![Voting application's high level architecture](../images/app-architecture.png)
 
 All the servers are running Docker Engine. The entire application is fully
 "Dockerized" in that all services are running inside of containers.
@@ -59,7 +59,7 @@ between multiple containers across multiple Docker hosts.
 To support the application, the design calls for a Swarm cluster with a single
 Swarm manager and four nodes as shown below.
 
-![](../images/swarm-cluster-arch.png)
+![Swarm cluster architecture](../images/swarm-cluster-arch.png)
 
 All four nodes in the cluster are running the Docker daemon, as is the Swarm
 manager and the load balancer. The Swarm manager is part of the cluster and is
@@ -71,7 +71,7 @@ demonstration it is not.
 After completing the example and deploying your application, this
 is what your environment should look like.
 
-![](../images/final-result.png)
+![Overview of deployment](../images/final-result.png)
 
 As the previous diagram shows, each node in the cluster runs the following containers:
 
