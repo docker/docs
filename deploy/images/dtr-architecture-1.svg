@@ -31,7 +31,7 @@
                     <g id="docker" transform="translate(0.000000, 76.000000)">
                         <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="524" height="34" rx="2"></rect>
                         <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="14" font-weight="normal" fill="#FFFFFF">
-                            <tspan x="205.936035" y="23">Docker Engine EE</tspan>
+                            <tspan x="205.936035" y="23">Docker EE Engine</tspan>
                         </text>
                     </g>
                     <g id="ucp" transform="translate(0.000000, 38.000000)">
