@@ -310,42 +310,42 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-
-- sectiontitle: Configure user permissions
+- sectiontitle: Authorize user access
   section:
     - path: /deploy/access-control/
       title: Access control model overview
     - sectiontitle: User Management
       section:
-      - path: /deploy/access-control/create-and-manage-users
-        title: Create and manage users
-      - path: /deploy/access-control/create-and-manage-teams
-        title: Create and manage teams
-      - path: /deploy/access-control/permission-levels
-        title: Learn about user permissions
-      - path: /deploy/access-control/recover-a-user-password
+      - path: /deploy/access-control/usermgmt-create-subjects.md
+        title: Create and users and teams
+      - path: /deploy/access-control/usermgmt-sync-with-ldap.md
+        title: Synchronize teams with LDAP
+      - path: /deploy/access-control/usermgmt-create-roles.md
+        title: Create roles to authorize access
+      - path: /deploy/access-control/usermgmt-grant-permissions.md
+        title: Grant access to resources
+      - path: /deploy/access-control/usermgmt-recover-user-password
         title: Reset a user password
-      - path: /deploy/access-control/grant-permissions.md
-        title: Grant role-based permissions to users and teams
     - sectiontitle: Shared Resources
       section:
-      - path: /deploy/access-control/manage-access-with-collections
-        title: Manage access to collections
-      - path: /deploy/access-control/node-access-control
+      - path: /deploy/access-control/resources-create-collections-namespaces.md
+        title: Group resources as collections or namespaces
+      - path: /deploy/access-control/access-control-node.md
         title: Learn node access controls
       - path: /deploy/access-control/isolate-nodes-between-teams
-        title: Isolate swarm nodes to specific teams
+        title: Isolate Swarm nodes
       - path: /deploy/access-control/isolate-volumes-between-teams
-        title: Isolate volumes to specific teams
-      - path: /deploy/access-control/deploy-view-only-service
-        title: Deploy a service with view-only access
-    - sectiontitle: OrcaBank Tutorial
+        title: Isolate volumes
+    - sectiontitle: Tutorials
       section:
+      - path: /deploy/access-control/howto-deploy-wordpress-with-rbac.md
+        title: Wordpress and MySQL tutorial
+      - path: /deploy/access-control/deploy-view-only-service
+        title: Deploy service with view-only access
       - path: /deploy/access-control/access-control-design-ee-standard
-        title: Orcabank tutorial 1
+        title: Orcabank tutorial with Docker EE Standard
       - path: /deploy/access-control/access-control-design-ee-advanced
-        title: Orcabank tutorial 2
-
+        title: Orcabank tutorial with Docker EE Advanced
 - sectiontitle: Deploy your app in production
   section:
     - path: /deploy/

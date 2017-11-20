@@ -1,7 +1,7 @@
 ---
-title: Grant permissions to users based on roles
-description: Grant access to swarm resources by using role-based access control.
-keywords: ucp, grant, role, permission, authentication, authorization
+title: Create grants to authorize access to resources
+description: Learn how to grant users and teams access to cluster resources with role-based access control.
+keywords: rbac, ucp, grant, role, permission, authentication, authorization
 redirect_from:
 - /ucp/
 ui_tabs:
@@ -12,10 +12,11 @@ ui_tabs:
 ---
 
 {% if include.ui %}
+{% if include.version=="ucp-3.0" %}
+
 UCP administrators can create *grants* to control how users and organizations
 access resources.
 
-{% if include.version=="ucp-3.0" %}
 ## Kubernetes grants
 With Kubernetes orchestration, a grant is made up of a *subject*, a *role*, and a
 *namespace*.
