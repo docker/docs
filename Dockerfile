@@ -1,75 +1,86 @@
-FROM starefossen/github-pages:147
+# Get the docs-builder image so we can get the nginx config from it later
+FROM docs/docker.github.io:docs-builder AS builder
 
-# This is the source for docs/docs-base. Push to that location to ensure that
-# the production image gets your update :)
+# Get archival docs from each canonical image
+# When there is a new archive, add it here and also further down
+# where we copy out of it
+FROM docs/docker.github.io:v1.4 AS archive_v1.4
+FROM docs/docker.github.io:v1.5 AS archive_v1.5
+FROM docs/docker.github.io:v1.6 AS archive_v1.6
+FROM docs/docker.github.io:v1.7 AS archive_v1.7
+FROM docs/docker.github.io:v1.8 AS archive_v1.8
+FROM docs/docker.github.io:v1.9 AS archive_v1.9
+FROM docs/docker.github.io:v1.10 AS archive_v1.10
+FROM docs/docker.github.io:v1.11 AS archive_v1.11
+FROM docs/docker.github.io:v1.12 AS archive_v1.12
+FROM docs/docker.github.io:v1.13 AS archive_v1.13
+FROM docs/docker.github.io:v17.03 AS archive_v17.03
+FROM docs/docker.github.io:v17.06 AS archive_v17.06
 
-# Install nginx
+# Reset with nginx, so we don't get docs source in the image
+FROM nginx:alpine AS docs_base
 
-RUN apk update && apk add nginx && apk add git && apk add subversion && apk add wget
+#Get bash
+RUN apk update && apk add bash
 
-# Forward nginx request and error logs to docker log collector
+COPY fix_archives.sh /usr/bin/fix_archives.sh
+ENV TARGET=/usr/share/nginx/html
 
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+# Copy HTML from each stage above and run script to fix relative links
+COPY --from=archive_v1.4 ${TARGET} ${TARGET}/v1.4
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.4'
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=archive_v1.5 ${TARGET} ${TARGET}/v1.5
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.5'
 
-## At the end of each layer, everything we need to pass on to the next layer
-## should be in the "target" directory and we should have removed all temporary files
+COPY --from=archive_v1.6 ${TARGET} ${TARGET}/v1.6
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.6'
 
-# Create archive; check out each version, create HTML under target/$VER, tweak links
-# Nuke the archive_source directory. Only keep the target directory.
+COPY --from=archive_v1.7 ${TARGET} ${TARGET}/v1.7
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.7'
 
-ENV VERSIONS="v17.06 v17.03 v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
+COPY --from=archive_v1.8 ${TARGET} /${TARGET}/v1.8
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.8'
 
-## Use shallow clone and shallow check-outs to only get the tip of each branch
+COPY --from=archive_v1.9 ${TARGET} ${TARGET}/v1.9
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.9'
 
-RUN git clone --depth 1 --recursive https://www.github.com/docker/docker.github.io archive_source; \
-  for VER in $VERSIONS; do \
-    git --git-dir=./archive_source/.git --work-tree=./archive_source fetch origin ${VER}:${VER} --depth 1 \
-    && git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
-    && mkdir -p target/${VER} \
-    && jekyll build -s archive_source -d target/${VER} \
-		# Replace / rewrite some URLs so that links in the archive go to the correct
-	  # location. Note that the order in which these replacements are done is
-	  # important. Changing the order may result in replacements being done
-		# multiple times.
-		# First, remove the domain from URLs that include the domain
-		&& BASEURL="$VER/" \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs-stage.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs-stage.docker.com/#src="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs.docker.com/#src="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="http://docs.docker.com/#src="/#g' \
-		\
-		# Substitute https:// for schema-less resources (src="//analytics.google.com")
-		# We're replacing them to prevent them being seen as absolute paths below
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="//#href="https://#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="//#src="https://#g' \
-		\
-		# And some archive versions already have URLs starting with '/version/'
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/'"$BASEURL"'#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/'"$BASEURL"'#src="/#g' \
-		\
-		# Archived versions 1.7 and under use some absolute links, and v1.10 uses
-		# "relative" links to sources (href="./css/"). Remove those to make them
-		# work :)
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="\./#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="\./#src="/#g' \
-		\
-		# Create permalinks for archived versions
-		\
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$BASEURL"'#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$BASEURL"'#g'; \
-  done; \
-  rm -rf archive_source
+COPY --from=archive_v1.10 ${TARGET} ${TARGET}/v1.10
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.10'
+
+COPY --from=archive_v1.11 ${TARGET} ${TARGET}/v1.11
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.11'
+
+COPY --from=archive_v1.12 ${TARGET} ${TARGET}/v1.12
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.12'
+
+COPY --from=archive_v1.13 ${TARGET} ${TARGET}/v1.13
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.13'
+
+COPY --from=archive_v17.03 ${TARGET} ${TARGET}/v17.03
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v17.03'
+
+COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
+RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v17.06'
+
+## Copy the above two lines and change the three references
+## to the version, to make a new archive
 
 # This index file gets overwritten, but it serves a sort-of useful purpose in
 # making the docs/docs-base image browsable:
+COPY index.html ${TARGET}/
 
-COPY index.html target
+# Reset with nginx again, so we don't get scripts or extra apps in the final image
+FROM nginx:alpine
 
-# Serve the site (target), which is now all static HTML
+# Copy the Nginx config
+COPY --from=builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
 
-CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && nginx -g 'pid /tmp/nginx.pid;'
+# Reset TARGET since we lost it when we reset the image
+ENV TARGET=/usr/share/nginx/html
+
+# Copy the static HTML files to where Nginx will serve them
+COPY --from=docs_base ${TARGET} ${TARGET}
+
+# Serve the docs
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
