@@ -352,12 +352,10 @@ guides:
   section:
     - path: /deploy/
       title: Docker Enterprise Edition
-    - path: /deploy/deploy-kubernetes-workload/
-      title: Deploy a workload to a Kubernetes cluster
     - sectiontitle: Architecture
       section:
-      - path: /deploy/architecture/how-docker-ee-delivers-ha/
-        title: How Docker EE delivers high availability for your workloads
+      - path: /deploy/architecture/docker-ee-architecture/
+        title: Docker EE architecture
       - path: /deploy/architecture/dtr-architecture/
         title: DTR architecture
       - path: /deploy/architecture/ucp-architecture/

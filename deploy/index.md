@@ -64,7 +64,7 @@ Kubernetes in Docker EE fully supports all Docker EE features, including
 role-based access control, LDAP/AD integration, scanning, signing enforcement,
 and security policies.
 
-- Kubernetes orchestration features
+- Kubernetes orchestration full feature set
 - CNCF Certified Kubernetes conformance
 - Deploy Kubernetes apps via web UI or CLI
 - Compose Stack deploy for both Swarm and Kubernetes apps
@@ -80,6 +80,8 @@ and security policies.
 
 ### Orchestration platform
 
+![](images/docker-ee-overview-4.svg){: .with-border}
+
 - Docker EE Manager Nodes are both Swarm managers and Kubernetes masters to enable
   high availability
 - Allocate nodes for Swarm and Kubernetes workloads
@@ -90,8 +92,12 @@ and security policies.
 
 ### Secure supply chain
 
-- Image promotion with mirroring between registries
-- Signing/scanning enforcement for Kubernetes
+![](images/docker-ee-overview-3.svg){: .with-border}
+
+- Image signing and scanning of Kubernetes apps for validating and verifying content
+- Image promotion with mirroring between registries (not in Beta1) 
+- Define policies for automating image promotions across the app development
+  lifecycle of Kubernetes apps (not in Beta1)
 
 ## Centralized cluster management
 
