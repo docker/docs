@@ -152,7 +152,7 @@
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#ui-{{ tab.version | slugify }}" id="ui-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}{% if tab.orhigher %} (or higher){% endif %}{% if tab.orlower %} (or lower){% endif %}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.ui_tabs %}
-								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								  <div id="ui-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version ui="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "" | markdownify }}</div>{% endfor %}
 								</div>
 
 								{% endif %}
@@ -164,7 +164,7 @@
 								  <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#cli-{{ tab.version | slugify }}" id="cli-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.cli_tabs %}
-								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+								  <div id="cli-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version cli="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "" | markdownify }}</div>{% endfor %}
 								</div>
 
 								{% endif %}
@@ -176,7 +176,7 @@
 									<li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" data-target="#api-{{ tab.version | slugify }}" id="api-tabheader-{{ tab.version | slugify }}">{{ site.tablabels[tab.version] }}</a></li>{% endfor %}
 								</ul>
 								<div class="tab-content">{% for tab in page.api_tabs %}
-									<div id="api-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version api="true" %}{% endcapture %}{{ thistab | split: "---" | last | markdownify  }}</div>{% endfor %}
+									<div id="api-{{ tab.version | slugify }}" class="tab-pane fade{% if forloop.first %} in active{% endif %}">{% capture thistab %}{% include_relative {{ page.path | split: "/" | last }} version=tab.version api="true" %}{% endcapture %}{{ thistab | split: "---" | shift:2 | join: "" | markdownify }}</div>{% endfor %}
 								</div>
 
 								{% endif %}
