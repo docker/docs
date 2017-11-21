@@ -244,7 +244,7 @@ single virtual IP. Instead, Docker sets up DNS entries for the service such that
 a DNS query for the service name returns a list of IP addresses, and the client
 connects directly to one of these. You are responsible for providing the list of
 IP addresses and ports to your load balancer. See
-[Configure service discovery](networking.md@configure-service-discovery).
+[Configure service discovery](networking.md#configure-service-discovery).
 
 ## Learn more
 
