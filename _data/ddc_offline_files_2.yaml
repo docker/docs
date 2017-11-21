@@ -45,7 +45,7 @@
   version: "2.3"
   tar-files:
     - description: "DTR 2.3.5"
-      url: https://packages.docker.com/caas/dtr-2.3.5.tar.gz
+      url: https://packages.docker.com/caas/dtr_images_2.3.5.tar.gz
     - description: "DTR 2.3.4"
       url: https://packages.docker.com/caas/dtr-2.3.4.tar.gz
     - description: "DTR 2.3.3"
