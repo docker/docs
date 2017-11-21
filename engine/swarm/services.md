@@ -354,7 +354,7 @@ three tasks on a 10-node swarm:
 ```bash
 $ docker service create --name my_web \
                         --replicas 3 \
-                        --publish 8080:80 \
+                        --publish target=8080,port=80 \
                         nginx
 ```
 
@@ -391,8 +391,11 @@ option to the `--publish` flag.
 > **Note**: If you publish a service's ports directly on the swarm node using
 > `mode=host` and also set `published=<PORT>` this creates an implicit
 > limitation that you can only run one task for that service on a given swarm
-> node. In addition, if you use `mode=host` and you do not use the
-> `--mode=global` flag on `docker service  create`, it will be difficult to know
+> node. You can work around this by specifying `published` without a port
+> definition, which causes Docker to assign a random port for each task.
+>
+> In addition, if you use `mode=host` and you do not use the
+> `--mode=global` flag on `docker service create`, it will be difficult to know
 > which nodes are running the service in order to route work to them.
 
 ##### Example: Run a `nginx` web server service on every swarm node
@@ -642,6 +645,16 @@ $ docker service create \
   --placement-pref 'spread=node.labels.datacenter' \
   redis:3.0.6
 ```
+
+> Missing or null labels
+>
+> Nodes which are missing the label used to spread will still receive
+> task assignments. As a group, these nodes will receive tasks in equal
+> proportion to  any of the other groups identified by a specific label
+> value. In a sense, a missing label is the same as having the label with
+> a null value attached to it. If the service should **only** run on
+> nodes with the label being used for the the spread preference, the
+> preference should be combined with a constraint.
 
 You can specify multiple placement preferences, and they are processed in the
 order they are encountered. The following example sets up a service with

@@ -24,10 +24,10 @@ need to link your source code provider.
 
 3. Click the plug icon for the source provider you want to link.
 
-    ![](images/source-providers.png)
+    ![Linking source providers](images/source-providers.png)
 
 4. Review the settings for the **Docker Cloud Builder** OAuth application.
-    ![](images/link-source-github-ind.png)
+    ![Granting access to GitHub account](images/link-source-github-ind.png)
 
     >**Note**: If you are the owner of any Github organizations, you might see
     options to grant Docker Cloud access to them from this screen. You can also
@@ -56,7 +56,7 @@ from Docker Cloud, *and* from your GitHub account.
 4. Go to your GitHub account's **Settings** page.
 
 5. Click **OAuth applications** in the left navigation bar.
-    ![](images/link-source-github-ind-revoke.png)
+    ![Revoking access to GitHub account](images/link-source-github-ind-revoke.png)
 
 6. Click **Revoke** next to the Docker Cloud Builder application.
 
@@ -78,7 +78,7 @@ case, a **Grant access** button appears next to the organization name in the
 link accounts screen, as shown below.  If this button does not appear, you must
 manually grant the application's access.
 
-![](images/link-source-github-org-lite.png)
+![Granting access to GitHub organization](images/link-source-github-org-lite.png)
 
 To manually grant Docker Cloud access to a GitHub organization:
 
@@ -97,7 +97,7 @@ section at the lower left.
 5. Click the pencil icon next to Docker Cloud Builder.
 
 6. Click **Grant access** next to the organization.
-    ![](images/link-source-github-org.png)
+    ![Granting access to GitHub organization manually](images/link-source-github-org.png)
 
 ### Revoke access to a GitHub organization
 
@@ -108,7 +108,7 @@ To revoke Docker Cloud's access to an organization's GitHub repositories:
 3. From the Organization Profile menu, click **Third-party access**.
     The page displays a list of third party applications and their access status.
 4. Click the pencil icon next to Docker Cloud Builder.
-    ![](images/link-source-github-org-revoke.png)
+    ![Revoking access to GitHub organization](images/link-source-github-org-revoke.png)
 5. On the next page, click **Deny access**.
 
 ## Link to a Bitbucket user account
@@ -121,7 +121,7 @@ To revoke Docker Cloud's access to an organization's GitHub repositories:
 
 4. Click the plug icon for the source provider you want to link.
 
-    ![](images/source-providers.png)
+    ![Linking Bitbucket](images/source-providers.png)
 
 5. If necessary, log in to Bitbucket.
 

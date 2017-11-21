@@ -79,7 +79,7 @@ This trust is usually established by way of a trusted third party. The Docker En
 CLI and Docker Engine daemon in the diagram below are configured to require TLS
 authentication.
 
-![](images/trust-diagram.jpg)
+![TLS authentication diagram](images/trust-diagram.jpg)
 
 The trusted third party in this diagram is the Certificate Authority (CA)
 server. Like the country in the passport example, a CA creates, signs, issues,

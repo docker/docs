@@ -11,7 +11,7 @@ redirect_from:
 
 After you
 [install Docker](/engine/installation.md), you can
-[install the Go and Python SDKs](/develop/api/index.md#install-the-sdks) and
+[install the Go and Python SDKs](/develop/sdk/index.md#install-the-sdks) and
 also try out the Docker Engine API.
 
 Each of these examples show how to perform a given Docker operation using the Go
@@ -440,7 +440,7 @@ Reticulating spline 5...
 List the images on your Engine, similar to `docker images`:
 
 <ul class="nav nav-tabs">
-  <li> class="active"<a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>
   <li><a data-toggle="tab" data-target="#tab-listimages-python" data-group="python">Python</a></li>
   <li><a data-toggle="tab" data-target="#tab-listimages-curl" data-group="curl">HTTP</a></li>
 </ul>

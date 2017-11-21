@@ -188,7 +188,7 @@ To increase the availability of our Swarm cluster you could:
 
 This configuration is shown in the diagram below.
 
-![](../images/infrastructure-failures.jpg)
+![Swarm cluster configured for HA](../images/infrastructure-failures.jpg)
 
 This will allow us to lose an entire AZ and still have our cluster and
 application operate.
@@ -203,7 +203,7 @@ across AWS and Microsoft Azure. But you could just as easily replace one of
 those cloud providers with your own on premises data center. In these scenarios,
 network latency and reliability is key to a smooth and workable solution.
 
-![](../images/deployed-across.jpg)
+![Swarm cluster deployed across AWS and Azure](../images/deployed-across.jpg)
 
 ## Related information
 

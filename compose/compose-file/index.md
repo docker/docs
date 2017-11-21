@@ -659,8 +659,8 @@ Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
-50M of memory and `0.001` (0.1%) of available processing time (CPU), and has
-`20M` of memory and `0.0001` CPU time reserved (as always available to it).
+50M of memory and `0.50` (50%) of available processing time (CPU), and has
+`20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```none
 version: '3'
@@ -670,10 +670,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.001'
+          cpus: '0.50'
           memory: 50M
         reservations:
-          cpus: '0.0001'
+          cpus: '0.25'
           memory: 20M
 ```
 

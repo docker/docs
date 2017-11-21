@@ -24,7 +24,7 @@ You can click a resource from the Dashboard and find the subscription ID under
 **Billing -> Subscriptions -> Subscription ID** or simply click
 **Subscriptions**, then click a subscription in the list to drill down.
 
-![](images/azure-subscription-id.png)
+![Azure subscriptions page](images/azure-subscription-id.png)
 
 When you are ready to add your subscription ID to Docker Cloud,
 copy it from your Azure Dashboard.
@@ -39,10 +39,10 @@ select **Cloud settings**.
 2.  In the **Service Providers** section, click the plug icon next to
 Microsoft Azure.
 
-    ![](images/azure-id-wizard.png)
+    ![Enter Azure subscription ID popup](images/azure-id-wizard.png)
 
     >**Tip:** If you are a member of an Azure Organization, your
-    admninistrator must first link to Docker Cloud as described in
+    administrator must first link to Docker Cloud as described in
     [Link an Azure Organization as Global Admin](#link-an-azure-organization-as-global-admin).
 
 3.  Provide your subscription ID and click **Save**.
@@ -51,7 +51,7 @@ Microsoft Azure.
     the two accounts. Your Azure login credentials will automatically populate
     to Docker Cloud under **Service Providers -> Microsoft Azure**.
 
-    ![](images/azure-creds-cloud.png)
+    ![Microsoft Azure entry in Service providers list](images/azure-creds-cloud.png)
 
 ## Enable your Azure subscription for Docker Cloud
 

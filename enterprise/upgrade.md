@@ -87,11 +87,11 @@ docker node update --availability active <node>
 Once you've upgraded the Docker Engine running on all the nodes, upgrade UCP.
 You can do this from the UCP web UI.
 
-![](images/upgrade-1.png){: .with-border}
+![UCP update notification banner](images/upgrade-1.png){: .with-border}
 
 Click on the banner, and choose the version you want to upgrade to.
 
-![](images/upgrade-2.png){: .with-border}
+![UCP upgrade page - version selection](images/upgrade-2.png){: .with-border}
 
 Once you click **Upgrade UCP**, the upgrade starts. If you want you can upgrade
 UCP from the CLI instead. [Learn more](/datacenter/ucp/2.2/guides/admin/install/upgrade.md).
@@ -100,7 +100,7 @@ UCP from the CLI instead. [Learn more](/datacenter/ucp/2.2/guides/admin/install/
 
 Log in into the DTR web UI to check if there's a new version available.
 
-![](images/upgrade-3.png){: .with-border}
+![DTR settings page](images/upgrade-3.png){: .with-border}
 
 Then follow these [instructions to upgrade DTR](/datacenter/dtr/2.3/guides/admin/upgrade.md).
 When this is finished, your Docker EE has been upgraded.

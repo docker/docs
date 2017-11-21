@@ -116,6 +116,7 @@ follow the link for more information.
                 "ec2:DisassociateRouteTable",
                 "ec2:GetConsoleOutput",
                 "ec2:GetConsoleScreenshot",
+                "ec2:ImportKeyPair",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:ModifyVpcAttribute",
                 "ec2:ModifySubnetAttribute",

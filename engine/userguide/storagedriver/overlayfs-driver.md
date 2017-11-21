@@ -22,9 +22,10 @@ storage driver as `overlay` or `overlay2`.
 
 OverlayFS is supported if you meet the following prerequisites:
 
-- **Docker CE only**. OverlayFS is not supported on Docker EE. See
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix){: target="_blank" class="_"}
-  for a list of supported storage drivers for each Docker EE platform.
+- The `overlay2` driver is supported for Docker EE and recommended
+  for Docker CE.
+  
+- The `overlay` driver is allowed but not recommended for Docker CE.
 
 - Version 4.0 or higher of the Linux kernel. If you use an older kernel, you
   will need to use the `overlay` driver, which is not recommended.
@@ -43,10 +44,14 @@ OverlayFS is supported if you meet the following prerequisites:
 
 ## Configure Docker with the `overlay` or `overlay2` storage driver
 
+It is highly recommended that you use the `overlay2` driver if possible, rather
+than the `overlay` driver. The `overlay` driver is **not** supported for
+Docker EE.
+
 To configure Docker to use the `overlay` storage driver your Docker host must be
 running version 3.18 of the Linux kernel (preferably newer) with the overlay
 kernel module loaded. For the `overlay2` driver, the version of your kernel must
-be 4.0 or newer. It is highly recommended that you use `overlay2` if possible.
+be 4.0 or newer.
 
 Before following this procedure, you must first meet all the
 [prerequisites](#prerequisites).

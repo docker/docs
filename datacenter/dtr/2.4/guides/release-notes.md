@@ -11,6 +11,38 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## 2.4.1
+
+(20 November 2017)
+
+**Bug fixes**
+
+* Fixed a bug that cause certain vulnerabilities to not be found during scanning.
+* Increased speed of lock expiration in case of failed joins.
+* Fixed notification when toggling active status of webhooks.
+* Speed up detection of dead jobrunners.
+* Fixed a bug where garbage collection ran in a suboptimal mode if scheduled as
+a cron from the UI.
+* Fixed a potential issue with the way we untar files in uploads of the
+vulnerability database.
+* Fixed scanning issue with some windows images.
+
+**General improvements**
+
+* Improved resilience of garbage collection.
+* Improved logging of garbage collection.
+* Improved memory usage during backup.
+* Improved error handling when uploading invalid vulnerability databases.
+* Improve resilience of DTR join operations.
+* Hide secrets on storage config pages.
+
+**Deprecations**
+
+* The `api/v0/imagescan/layer/{layerid}` endpoint is deprecated, and will be
+removed in DTR 2.5. You can use the
+`/api/v0/imagescan/repositories/{namespace}/{reponame}/{tag}` endpoint instead.
+
+
 ## DTR 2.4.0
 
 (2 November 2017)

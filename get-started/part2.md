@@ -16,6 +16,11 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
   docker run hello-world
   ```
 
+> **Tip**: Please use up-to-date Docker versions and clients to help the
+tutorial go swimmingly. For example, legacy apps like Docker Toolbox
+might give you unexpected results for local IP addresses and older
+versions of Docker do not support all features demo'ed here.
+
 ## Introduction
 
 It's time to begin building an app the Docker way. We'll start at the bottom of
@@ -206,6 +211,10 @@ web page, including "Hello World" text, the container ID, and the Redis error
 message.
 
 ![Hello World in browser](images/app-in-browser.png)
+
+> **Note**: If you are using Docker Toolbox on Windows 7, use the Docker Machine IP
+> instead of `localhost`. For example, http://192.168.99.100:4000/. To find the IP
+> address, use the command `docker-machine ip`.
 
 You can also use the `curl` command in a shell to view the same content.
 

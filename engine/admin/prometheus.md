@@ -57,7 +57,8 @@ need a slightly different configuration.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-config" data-group="linux">Docker for Linux</a></li>
-<li><a data-toggle="tab" data-target="#mac-config" data-group="mac">Docker for Mac or Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac-config" data-group="mac">Docker for Mac</a></li>
+<li><a data-toggle="tab" data-target="#win-config" data-group="win">Docker for Windows</a></li>
 </ul>
 
 <div class="tab-content">
@@ -130,7 +131,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['docker.for.mac.localhost:9090']
 
   - job_name: 'docker'
          # metrics_path defaults to '/metrics'
@@ -140,39 +141,90 @@ scrape_configs:
       - targets: ['192.168.65.1:9323']
 ```
 
-</div><!-- mac / windows -->
+</div><!-- mac -->
+<div id="win-config" class="tab-pane fade" markdown="1">
+
+```yml
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['docker.for.win.localhost:9090']
+
+  - job_name: 'docker'
+         # metrics_path defaults to '/metrics'
+         # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['192.168.65.1:9323']
+```
+
+</div><!-- windows -->
 </div><!-- tabs -->
 
 
 Next, start a single-replica Prometheus service using this configuration.
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#linux-mac-run" data-group="linux">Docker for Linux or Docker for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-run" data-group="mac">Docker for Windows or Windows Server</a></li>
+<li class="active"><a data-toggle="tab" data-target="#linux-run" data-group="linux">Docker for Linux</a></li>
+<li class="active"><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker for Mac</a></li>
+<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker for Windows or Windows Server</a></li>
 </ul>
 
 <div class="tab-content">
 
-<div id="linux-mac-run" class="tab-pane fade in active" markdown="1">
+<div id="linux-run" class="tab-pane fade in active" markdown="1">
 
 ```bash
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-    --publish 9090:9090/tcp \
+    --publish target=9090,port=9090,protocol=tcp \
     prom/prometheus
 ```
 
 </div><!-- linux -->
+<div id="mac-run" class="tab-pane fade in active" markdown="1">
+
+```bash
+$ docker service create --replicas 1 --name my-prometheus \
+    --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+    --publish target=9090,port=9090,protocol=tcp \
+    prom/prometheus
+```
+
+</div><!-- mac -->
 <div id="win-run" class="tab-pane fade" markdown="1">
 
 ```powershell
 PS C:\> docker service create --replicas 1 --name my-prometheus
     --mount type=bind,source=C:/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml
-    --publish 9090:9090/tcp
+    --publish target=9090,port=9090,protocol=tcp
     prom/prometheus
 ```
 
-</div><!-- mac / windows -->
+</div><!-- windows -->
 </div><!-- tabs -->
 
 Verify that the Docker target is listed at http://localhost:9090/targets/.

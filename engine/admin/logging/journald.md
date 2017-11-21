@@ -100,6 +100,17 @@ to return the log messages in JSON format.
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 
+### View logs for a container with a TTY enabled
+
+If TTY is enabled on a container you may see `[10B blob data]` in the output
+when retrieving log messages.
+The reason for that is that `\r` is appended to the end of the line and
+`journalctl` doesn't strip it automatically unless `--all` is set:
+
+```bash
+$ sudo journalctl -b CONTAINER_NAME=webserver --all
+```
+
 ## Retrieve log messages with the `journal` API
 
 This example uses the `systemd` Python module to retrieve container
@@ -111,6 +122,6 @@ import systemd.journal
 reader = systemd.journal.Reader()
 reader.add_match('CONTAINER_NAME=web')
 
-    for msg in reader:
-      print '{CONTAINER_ID_FULL}: {MESSAGE}'.format(**msg)
+for msg in reader:
+    print '{CONTAINER_ID_FULL}: {MESSAGE}'.format(**msg)
 ```

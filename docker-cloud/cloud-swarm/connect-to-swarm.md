@@ -23,7 +23,7 @@ swarm.
 2.  Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
 3.  Copy the command provided in the dialog that appears.
 
-    ![](images/swarm-connect.png)
+    ![Connect to swarm popup](images/swarm-connect.png)
 
 4.  In a terminal window connected to your local Docker Engine, paste the command, and press **Enter**.
 

@@ -33,6 +33,10 @@
 - product: "dtr"
   version: "2.4"
   tar-files:
+    - description: "DTR 2.4.1 Linux x86"
+      url: https://packages.docker.com/caas/dtr_images_2.4.1.tar.gz
+    - description: "DTR 2.4.1 IBM Z"
+      url: https://packages.docker.com/caas/dtr_images_s390x_2.4.1.tar.gz
     - description: "DTR 2.4.0 Linux x86"
       url: https://packages.docker.com/caas/dtr_images_2.4.0.tar.gz
     - description: "DTR 2.4.0 IBM Z"
@@ -40,6 +44,8 @@
 - product: "dtr"
   version: "2.3"
   tar-files:
+    - description: "DTR 2.3.5"
+      url: https://packages.docker.com/caas/dtr_images_2.3.5.tar.gz
     - description: "DTR 2.3.4"
       url: https://packages.docker.com/caas/dtr-2.3.4.tar.gz
     - description: "DTR 2.3.3"

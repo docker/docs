@@ -40,7 +40,7 @@ a throwaway registry, which you can discard afterward.
 1.  Start the registry as a service on your swarm:
 
     ```bash
-    $ docker service create --name registry --publish 5000:5000 registry:2
+    $ docker service create --name registry --publish target=5000,port=5000 registry:2
     ```
 
 2.  Check its status with `docker service ls`:

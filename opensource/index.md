@@ -29,11 +29,6 @@ redirect_from:
 - /opensource/governance/dgab-info/
 - /opensource/governance/board-profiles/
 - /opensource/governance/conduct-code/
-- /opensource/ways/
-- /opensource/ways/meetups/
-- /opensource/ways/issues/
-- /opensource/ways/community/
-- /opensource/ways/test/
 
 ---
 
@@ -99,24 +94,19 @@ To learn more about working on the documentation, see these topics:
 published site. It explains how to use Docs components, resources, and
 formats, and gives us a way to test and demo them.
 
+## Looking for meetups and Docker Community?
+
+Go to the [Docker Community GitHub
+repository](https://github.com/docker/community/blob/master/README.md){:
+target="_blank" class="_"} for resources and information on the community.
+
+The topics in this guide on [Other ways to contribute](/opensource/ways/)
+provide some additional information,  but it's likely you'll find the community
+information you are looking for on the GitHub repository.
+
 ## Looking for Moby?
 
-Docker [introduced the open source Moby
-project](https://blog.docker.com/2017/04/introducing-the-moby-project/) to
-further promote collaboration, experimentation, and development of
-container-based systems in the broader community. Moby is a library of
-containerized components, a framework for assembling components into a container
-platform, and tools to build, test, and deploy artifacts. It included a
-reference assembly, which is the open base for the Docker platform.
-
-You can read about the Moby project, the open framework, components, and
-relationship of Docker to Moby at [mobyproject.org](https://mobyproject.org/).
-
-The Moby project lives [here](https://github.com/moby/moby).
-
-See [Contribute to the Moby
-project](https://github.com/moby/moby/blob/master/CONTRIBUTING.md) to learn how
-to help work on the codebase.
+{% include content/moby.md %}
 
 ## Legacy fun and practice
 

@@ -21,6 +21,7 @@ driver sends the following metadata in the structured log message:
 | `container_id`   | The full 64-character container ID.                                                                                                                    |
 | `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
 | `source`         | `stdout` or `stderr`                                                                                                                                   |
+| `log`            | The container log                                                                                                                                      |
 
 The `docker logs` command is not available for this logging driver.
 

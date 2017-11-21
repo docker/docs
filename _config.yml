@@ -18,7 +18,7 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 
 docker_ce_stable_version: "17.09"
 latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.10"
+docker_ce_edge_version: "17.11"
 docker_ee_version: "17.06"
 compose_version: "1.17.0"
 machine_version: "0.13.0"
@@ -37,7 +37,7 @@ ucp_versions:
 
 dtr_versions:
   - version: "2.4"
-    path: /datacenter/dtr/2.3/guides/
+    path: /datacenter/dtr/2.4/guides/
     latest: true
   - version: "2.3"
     path: /datacenter/dtr/2.3/guides/
@@ -144,28 +144,28 @@ defaults:
       path: "datacenter"
     values:
       ucp_latest_image: "docker/ucp:2.2.4"
-      dtr_latest_image: "docker/dtr:2.4.0"
+      dtr_latest_image: "docker/dtr:2.4.1"
       enterprise: true
   - scope:
       path: "datacenter/dtr/2.4"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.0"
+      dtr_version: "2.4.1"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.4"
+      dtr_version: "2.3.5"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.9"
+      docker_image: "docker/dtr:2.2.10"
   - scope:
       path: "datacenter/dtr/2.1"
     values:

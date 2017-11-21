@@ -12,6 +12,31 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## 2.2.10
+
+(20 November 2017)
+
+**Bugs fixed**
+
+* Fixed a bug that caused certain vulnerabilities to not be found during scanning.
+* Fixed a bug in distribution that caused pull timeouts under load if using NFS
+or local storage.
+* Fixed a bug with downloading storage yaml file on Firefox.
+* Fixed a bug where garbage collection ran in a suboptimal mode if scheduled as
+a cron from the UI.
+* Fixed a potential issue with the way we untar files in uploads of the
+vulnerability database.
+
+**General improvements**
+
+* Improved resilience of garbage collection.
+* Improved logging of garbage collection.
+* Improved memory usage during backup.
+* Improved error handling when uploading invalid vulnerability databases.
+* Improved resilience of DTR `join` operations.
+* Hide secrets on storage config pages.
+
+
 ## DTR 2.2.9
 
 (13 September 2017)

@@ -43,7 +43,7 @@ new files, modifying existing files, and deleting files, are written to this thi
 writable container layer. The diagram below shows a container based on the Ubuntu
 15.04 image.
 
-![Docker image layers](images/container-layers.jpg)
+![Layers of a container based on the Ubuntu image](images/container-layers.jpg)
 
 A _storage driver_ handles the details about the way these layers interact with
 each other. Different storage drivers are available, which have advantages
@@ -61,7 +61,7 @@ stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
 multiple containers sharing the same Ubuntu 15.04 image.
 
-![](images/sharing-layers.jpg)
+![Containers sharing same image](images/sharing-layers.jpg)
 
 > **Note**: If you need multiple images to have shared access to the exact
 > same data, store this data in a Docker volume and mount it into your
@@ -81,7 +81,8 @@ command. Two different columns relate to size.
   each container
 
 - `virtual size`: the amount of data used for the read-only image data
-  used by the container. Multiple containers may share some or all read-only
+  used by the container plus the container's writable layer `size`. 
+  Multiple containers may share some or all read-only
   image data. Two containers started from the same image share 100% of the
   read-only data, while two containers with different images which have layers
   in common share those common layers. Therefore, you can't just total the
@@ -90,8 +91,9 @@ command. Two different columns relate to size.
 
 The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
-multiple containers have exactly the same `virtual size`, they are likely
-started from the same exact image.
+multiple containers started from the same exact image, the total size on disk for 
+these containers would be SUM (`size` of containers) plus one container's 
+(`virtual size`- `size`).
 
 This also does not count the following additional ways a container can take up
 disk space:
@@ -405,7 +407,7 @@ storage area (`/var/lib/docker/...`). There is also a single shared data volume
 located at `/data` on the Docker host. This is mounted directly into both
 containers.
 
-![](images/shared-volume.jpg)
+![Shared volume across containers](images/shared-volume.jpg)
 
 Data volumes reside outside of the local storage area on the Docker host,
 further reinforcing their independence from the storage driver's control. When

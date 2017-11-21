@@ -5,18 +5,17 @@ description: Understand and manage usage data collected by Docker EE and sent to
 keywords: enterprise, telemetry, data collection
 ---
 
-Docker EE 17.06 and higher include a telemetry plugin which is enabled by
-default on Ubuntu. This plugin sends Docker information about your running
-system so that we can improve Docker EE. For details about the telemetry plugin
-and the types of data it collects, see the
+Docker EE version 17.06 and later includes a telemetry plugin. The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0 and on the rest of the EE-supported Linux distributions starting with version 17.06.2-ee-5. The telemetry plugin is not part of Docker EE for Windows Server.
+
+The telemetry plugin sends system information to Docker Inc. Docker uses this information to improve Docker EE. For details about the telemetry plugin and the types of data it collects, see the
 [`telemetry` plugin documentation](https://store.docker.com/community/images/docker/telemetry).
 
 If your Docker instance runs in an environment with no internet connectivity,
-the plugin does not collect or attempt to send any information to Docker.
+the telemetry plugin does not collect or attempt to send any information to Docker Inc.
 
 ## Manage data collection
 
-If you do not wish to send any usage data to Docker, you can disable the plugin,
+If you do not wish to send any usage data to Docker Inc., you can disable the plugin,
 either using the Docker CLI or using Universal Control Plane.
 
  > **Note**: If you're using Docker EE Standard or Advanced with Universal Control Plane, use Universal Control Plane (UCP) to enable and disable metrics. Only use the CLI if you do not have UCP. UCP will re-enable the telemetry plugin for hosts where it was disabled with the CLI.
@@ -29,7 +28,7 @@ To disable the telemetry plugin, use the `docker plugin disable` command:
 $ docker plugin disable telemetry
 ```
 
-This command needs to be run on each Docker host.
+This command must be run on each Docker host.
 
 To re-enable the telemetry plugin, you can use `docker plugin enable`.
 
@@ -47,9 +46,7 @@ Docker by going to **Admin Settings** and choosing **Usage**.
 
 To disable the telemetry plugin, disable all three options and click **Save**.
 Enabling either or both of the top two options will enable the telemetry plugin.
-You can find out more about an individual option by clicking the **?** icon next
-to it.
+You can find out more about an individual option by clicking the **?** icon.
 
-> **Note**: If you enable gathering of API statistics, the payloads are not
-> collected, but only information about which API endpoints you use.
+> **Note**: If API usage statistics are enabled, Docker only gathers aggregate stats about what API endpoints are used. API payload contents are not collected.
 
