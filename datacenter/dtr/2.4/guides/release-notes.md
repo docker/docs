@@ -13,7 +13,7 @@ to upgrade your installation to the latest release.
 
 ## 2.4.1
 
-(15 November 2017)
+(20 November 2017)
 
 **Bug fixes**
 
@@ -25,6 +25,7 @@ to upgrade your installation to the latest release.
 a cron from the UI.
 * Fixed a potential issue with the way we untar files in uploads of the
 vulnerability database.
+* Fixed scanning issue with some windows images.
 
 **General improvements**
 

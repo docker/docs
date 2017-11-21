@@ -13,7 +13,7 @@ to upgrade your installation to the latest release.
 
 ## 2.3.5
 
-(15 November 2017)
+(20 November 2017)
 
 **Bug fixes**
 
