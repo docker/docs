@@ -340,7 +340,7 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 ## 17.11.0-ce (2017-11-20)
 
-IMPORTANT: Docker CE 17.11 is the first Docker release based on
+> **Important**: Docker CE 17.11 is the first Docker release based on
 [containerd 1.0 beta](https://github.com/containerd/containerd/releases/tag/v1.0.0-beta.2).
 Docker CE 17.11 and later won't recognize containers started with
 previous Docker versions. If using
@@ -349,6 +349,7 @@ you must stop all containers before upgrading to Docker CE 17.11.
 If you don't, any containers started by Docker versions that predate
 17.11 won't be recognized by Docker after the upgrade and will keep
 running, un-managed, on the system.
+{:.important}
 
 ### Builder
 
