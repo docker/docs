@@ -50,6 +50,8 @@ The next few steps take you through some examples. These are just suggestions fo
 
 2.  Run some Docker commands, such as `docker ps`, `docker version`, and `docker info`.
 
+	**Note for Windows Users**: Remember to use double quotes (") instead of single quotes (') when specifying parameters in docker commands while using CMD/Powershell.
+
     Here is the output of `docker ps` run in a powershell. (In this example, no containers are running yet.)
 
     ```none
