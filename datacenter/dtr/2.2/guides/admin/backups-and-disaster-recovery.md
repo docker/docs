@@ -88,15 +88,19 @@ docker run -i --rm \
 
 Where:
 
-* `<version>`, the version of DTR you're running
-* `<ucp-url>` is the url you use to access UCP
-* `<ucp-username>` is the username of a UCP administrator
-* `<replica-id>` is the ID of the DTR replica to back up
+* `<version>`, the version of DTR you're running.
+* `<ucp-url>` is the url you use to access UCP.
+* `<ucp-username>` is the username of a UCP administrator.
+* `<replica-id>` is the ID of the DTR replica to back up.
 
+You can find the DTR replica IDs, by navigating to the **Stacks** page in
+the **UCP web UI**.
 
-This prompts you for the UCP password, backs up the DTR metadata and saves the
-result into a tar archive. You can learn more about the supported flags in
-the [reference documentation](../../reference/cli/backup.md).
+![replica id](../images/backup-and-disaster-recovery-1.png)
+
+The backup script prompts you for the UCP password, backs up the DTR metadata
+and saves the result into a tar archive. You can learn more about the supported
+flags in the [reference documentation](../../reference/cli/backup.md).
 
 The backup command doesn't stop DTR, so that you can take frequent backups
 without affecting your users. Also, the backup contains sensitive information
