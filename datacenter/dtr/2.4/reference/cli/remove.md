@@ -26,8 +26,6 @@ this operation.
 | Option                        | Environment Variable      | Description                                                                          |
 |:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
-| `--enzi-ca` | $ENZI_TLS_CA | Use a PEM-encoded TLS CA certificate for Enzi. |
-| `--enzi-insecure-tls` | $ENZI_TLS_INSECURE | Disable TLS verification for Enzi. |
 | `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica.To add, remove or modify DTR, you must connect to an existing  healthy replica's database.. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--replica-id` | $DTR_REMOVE_REPLICA_ID | DEPRECATED Alias for --replica-ids. |

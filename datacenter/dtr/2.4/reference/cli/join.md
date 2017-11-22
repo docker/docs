@@ -22,8 +22,6 @@ For setting DTR for high-availability, create 3, 5, or 7 replicas of DTR.
 | Option                        | Environment Variable      | Description                                                                          |
 |:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
-| `--enzi-ca` | $ENZI_TLS_CA | Use a PEM-encoded TLS CA certificate for Enzi. |
-| `--enzi-insecure-tls` | $ENZI_TLS_INSECURE | Disable TLS verification for Enzi. |
 | `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica.To add, remove or modify DTR, you must connect to an existing  healthy replica's database.. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--replica-http-port` | $REPLICA_HTTP_PORT | The public HTTP port for the DTR replica. Default is 80.This allows you to customize the HTTP port where users can reach DTR. Once users access  the HTTP port, they are redirected to use an HTTPS connection, using the port specified  with --replica-https-port. This port can also be used for unencrypted health checks. |

@@ -24,7 +24,7 @@ command.
 
 Example usage:
 
-$ docker run -it --rm dtr-internal.caas.docker.io/caas/dtr:2.4.0-tp5-008777_g5f14189-dirty install \
+$ docker run -it --rm docker/dtr:2.4.1 install \
 	--ucp-node <UCP_NODE_HOSTNAME> \
 	--ucp-insecure-tls
 
@@ -41,9 +41,6 @@ Note: Use --ucp-ca "$(cat ca.pem)" instead of --ucp-insecure-tls for a productio
 | `--dtr-key` | $DTR_KEY | Use a PEM-encoded TLS private key for DTR.By default DTR generates a self-signed TLS certificate during deployment. You can use your  own TLS private key with --dtr-key "$(cat ca.pem)". |
 | `--dtr-storage-volume` | $DTR_STORAGE_VOLUME | Customize the volume to store Docker images.By default DTR creates a volume to store the Docker images in the local  filesystem of the node where DTR is running, without high-availability. Use this flag to  specify a full path or volume name for DTR to store images. For high-availability, make  sure all DTR replicas can read and write data on this volume. If you're using NFS, use  --nfs-storage-url instead. |
 | `--enable-pprof` | $DTR_PPROF | Enables pprof profiling of the server.Once DTR is deployed with this flag, you can access the pprof endpoint for the api server  at /debug/pprof, and the registry endpoint at /registry_debug_pprof/debug/pprof. |
-| `--enzi-ca` | $ENZI_TLS_CA | Use a PEM-encoded TLS CA certificate for Enzi. |
-| `--enzi-host` | $ENZI_HOST | The Enzi host. Format host[:port]. |
-| `--enzi-insecure-tls` | $ENZI_TLS_INSECURE | Disable TLS verification for Enzi. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--http-proxy` | $DTR_HTTP_PROXY | The HTTP proxy used for outgoing requests. |
 | `--https-proxy` | $DTR_HTTPS_PROXY | The HTTPS proxy used for outgoing requests. |
