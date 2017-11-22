@@ -1,11 +1,16 @@
-# Build the docs
-FROM starefossen/github-pages:147 AS build_docs
+# Get Jekyll build env and Nginx env
+FROM docs/docker.github.io:docs-builder AS builder
+
+# Build the docs from this branch
 COPY . /source
 RUN jekyll build --source /source --destination /site
 
-# Reset with nginx, so we don't get docs source in the image
+# Reset to bare Nginx image
 FROM nginx:alpine
-# Override some nginx conf -- this gets added to default nginx conf
-COPY nginx-overrides.conf /etc/nginx/conf.d/000-default.conf
-COPY --from=build_docs /site /etc/nginx/html/
+
+# Copy the Nginx config
+COPY --from=builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
+
+# Copy the HTML to the default location for Nginx and serve it
+COPY --from=builder /site /usr/share/nginx/html
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
