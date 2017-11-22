@@ -93,12 +93,12 @@ Where:
 * `<ucp-username>` is the username of a UCP administrator.
 * `<replica-id>` is the ID of the DTR replica to back up.
 
-You can find the DTR replica IDs, by navigating to the **Stacks** page in
+You can find the DTR replica IDs by navigating to the **Stacks** page in
 the **UCP web UI**.
 
-![replica id](../images/backup-and-disaster-recovery-1.png)
+![replica id](../images/backup-and-disaster-recovery-1.png){: .with-border}
 
-The backup script prompts you for the UCP password, backs up the DTR metadata
+The backup script prompts you for the UCP password, backs up the DTR metadata,
 and saves the result into a tar archive. You can learn more about the supported
 flags in the [reference documentation](../../reference/cli/backup.md).
 
