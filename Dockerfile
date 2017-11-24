@@ -61,9 +61,10 @@ ENV  TARGET=/usr/share/nginx/html VER=v17.06
 COPY fix_archives.sh /usr/bin/fix_archives.sh
 RUN  fix_archives.sh ${TARGET} ${VER}
 
-# Reset with nginx, so we don't get docs source in the image
-FROM nginx:alpine AS docs_base
+# Reset with nginx again, so we don't get scripts or extra apps in the final image
+FROM nginx:alpine
 
+# Reset TARGET since we lost it when we reset the image
 ENV TARGET=/usr/share/nginx/html
 
 # Copy HTML from each stage above
@@ -85,15 +86,6 @@ COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
 # This index file gets overwritten, but it serves a sort-of useful purpose in
 # making the docs/docs-base image browsable:
 COPY index.html ${TARGET}/
-
-# Reset with nginx again, so we don't get scripts or extra apps in the final image
-FROM nginx:alpine
-
-# Reset TARGET since we lost it when we reset the image
-ENV TARGET=/usr/share/nginx/html
-
-# Copy the static HTML files to where Nginx will serve them
-COPY --from=docs_base ${TARGET} ${TARGET}
 
 # Copy the Nginx config
 COPY --from=docs/docker.github.io:docs-builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
