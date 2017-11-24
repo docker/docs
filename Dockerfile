@@ -20,48 +20,45 @@ FROM docs/docker.github.io:v17.06 AS archive_v17.06
 # Reset with nginx, so we don't get docs source in the image
 FROM nginx:alpine AS docs_base
 
-#Get bash
-RUN apk update && apk add bash
-
 COPY fix_archives.sh /usr/bin/fix_archives.sh
 ENV TARGET=/usr/share/nginx/html
 
 # Copy HTML from each stage above and run script to fix relative links
 COPY --from=archive_v1.4 ${TARGET} ${TARGET}/v1.4
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.4'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.4'
 
 COPY --from=archive_v1.5 ${TARGET} ${TARGET}/v1.5
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.5'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.5'
 
 COPY --from=archive_v1.6 ${TARGET} ${TARGET}/v1.6
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.6'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.6'
 
 COPY --from=archive_v1.7 ${TARGET} ${TARGET}/v1.7
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.7'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.7'
 
 COPY --from=archive_v1.8 ${TARGET} /${TARGET}/v1.8
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.8'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.8'
 
 COPY --from=archive_v1.9 ${TARGET} ${TARGET}/v1.9
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.9'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.9'
 
 COPY --from=archive_v1.10 ${TARGET} ${TARGET}/v1.10
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.10'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.10'
 
 COPY --from=archive_v1.11 ${TARGET} ${TARGET}/v1.11
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.11'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.11'
 
 COPY --from=archive_v1.12 ${TARGET} ${TARGET}/v1.12
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.12'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.12'
 
 COPY --from=archive_v1.13 ${TARGET} ${TARGET}/v1.13
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v1.13'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v1.13'
 
 COPY --from=archive_v17.03 ${TARGET} ${TARGET}/v17.03
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v17.03'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v17.03'
 
 COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
-RUN bash /usr/bin/fix_archives.sh ${TARGET} 'v17.06'
+RUN sh /usr/bin/fix_archives.sh ${TARGET} 'v17.06'
 
 ## Copy the above two lines and change the three references
 ## to the version, to make a new archive
