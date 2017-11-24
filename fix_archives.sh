@@ -1,15 +1,13 @@
 #!/bin/sh
 
+TARGET="$1"
 VER="$2"
+BASEURL="$VER/"
 
 if [ -z "$VER" ]; then
   echo "No version provided. Exiting."
   exit 1
-else
-  BASEURL="$VER/"
 fi
-
-TARGET="$1"
 
 if ! [ -d "$TARGET" ]; then
   echo "Target directory $TARGET does not exist. Exiting."
