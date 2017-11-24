@@ -67,14 +67,14 @@ COPY index.html ${TARGET}/
 # Reset with nginx again, so we don't get scripts or extra apps in the final image
 FROM nginx:alpine
 
-# Copy the Nginx config
-COPY --from=docs/docker.github.io:docs-builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
-
 # Reset TARGET since we lost it when we reset the image
 ENV TARGET=/usr/share/nginx/html
 
 # Copy the static HTML files to where Nginx will serve them
 COPY --from=docs_base ${TARGET} ${TARGET}
+
+# Copy the Nginx config
+COPY --from=docs/docker.github.io:docs-builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
 
 # Serve the docs
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
