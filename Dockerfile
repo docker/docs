@@ -136,6 +136,15 @@ RUN \
   printf "compressing svg...."; find $TARGET -type f -iname "*.svg"  -exec gzip -f -9 --keep {} +; echo "done.";\
   printf "compressing txt...."; find $TARGET -type f -iname "*.txt"  -exec gzip -f -9 --keep {} +; echo "done.";
 
+# Set `--build-arg REPORT_SIZE=1` to print the size-report during build
+ARG REPORT_SIZE
+COPY ./scripts/size_report.sh /usr/bin/
+RUN \
+  if [ -n "$REPORT_SIZE" ]; then \
+      apk add -q --no-cache coreutils; \
+      size_report.sh ${TARGET}; \
+  fi;
+
 # Reset with nginx again, so we don't get scripts or extra apps in the final image
 FROM nginx:alpine
 
