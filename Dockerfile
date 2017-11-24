@@ -99,7 +99,8 @@ RUN normalize_links.sh ${TARGET} ${VER} \
  && create_permalinks.sh ${TARGET} ${VER}
 
 # Reset with nginx again, so we don't get scripts or extra apps in the final image
-FROM nginx:alpine
+FROM nginx:alpine AS optimized
+RUN apk add --no-cache gzip
 
 # Reset TARGET since we lost it when we reset the image
 ENV TARGET=/usr/share/nginx/html
@@ -120,12 +121,36 @@ COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
 
 ## Copy the above and change the references to the version, to make a new archive
 
+# Pre-gzip files. note that the ngx_http_gzip_static_module requires  both the
+# compressed, and uncompressed files to be present see:
+# http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html
+#
+# Compressed content is roughly 80% smaller than uncompressed but will make the
+# final image 20% bigger (due to both uncompressed and compressed content being
+# included in the image)
+RUN \
+  printf "compressing html..."; find $TARGET -type f -iname "*.html" -exec gzip -f -9 --keep {} +; echo "done.";\
+  printf "compressing js....."; find $TARGET -type f -iname "*.js"   -exec gzip -f -9 --keep {} +; echo "done.";\
+  printf "compressing css...."; find $TARGET -type f -iname "*.css"  -exec gzip -f -9 --keep {} +; echo "done.";\
+  printf "compressing json..."; find $TARGET -type f -iname "*.json" -exec gzip -f -9 --keep {} +; echo "done.";\
+  printf "compressing svg...."; find $TARGET -type f -iname "*.svg"  -exec gzip -f -9 --keep {} +; echo "done.";\
+  printf "compressing txt...."; find $TARGET -type f -iname "*.txt"  -exec gzip -f -9 --keep {} +; echo "done.";
+
+# Reset with nginx again, so we don't get scripts or extra apps in the final image
+FROM nginx:alpine
+
+# Reset TARGET since we lost it when we reset the image
+ENV TARGET=/usr/share/nginx/html
+
+# Copy the static HTML files to where Nginx will serve them
+COPY --from=optimized ${TARGET} ${TARGET}
+
 # This index file gets overwritten, but it serves a sort-of useful purpose in
 # making the docs/docs-base image browsable:
 COPY index.html ${TARGET}/
 
 # Copy the Nginx config
-COPY --from=docs/docker.github.io:docs-builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
+COPY ./default.conf  /etc/nginx/conf.d/default.conf
 
 # Serve the docs
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
