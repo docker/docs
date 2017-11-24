@@ -1,6 +1,3 @@
-# Get the docs-builder image so we can get the nginx config from it later
-FROM docs/docker.github.io:docs-builder AS builder
-
 # Get archival docs from each canonical image
 # When there is a new archive, add it here and also further down
 # where we copy out of it
@@ -71,7 +68,7 @@ COPY index.html ${TARGET}/
 FROM nginx:alpine
 
 # Copy the Nginx config
-COPY --from=builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
+COPY --from=docs/docker.github.io:docs-builder /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
 
 # Reset TARGET since we lost it when we reset the image
 ENV TARGET=/usr/share/nginx/html
