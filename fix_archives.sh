@@ -33,10 +33,13 @@ printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\
 # And some archive versions already have URLs starting with '/version/'
 printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/'"$BASEURL"'#\1="/#g'
 
-# Archived versions 1.7 and under use some absolute links, and v1.10 uses
-# "relative" links to sources (href="./css/"). Remove those to make them
-# work :)
-printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)\./#\1="/#g'
+case "$VER" in v1.4|v1.5|v1.6|v1.7|v1.10)
+	# Archived versions 1.7 and under use some absolute links, and v1.10 uses
+	# "relative" links to sources (href="./css/"). Remove those to make them
+	# work :)
+	printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)\./#\1="/#g'
+	;;
+esac
 
 # Create permalinks for archived versions
 printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/#\1=\2/'"$BASEURL"'#g';
