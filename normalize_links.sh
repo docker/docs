@@ -39,7 +39,4 @@ case "$VER" in v1.4|v1.5|v1.6|v1.7|v1.10)
 	;;
 esac
 
-# Create permalinks for archived versions
-printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/#\1=\2/'"$BASEURL"'#g';
-
 echo "done"

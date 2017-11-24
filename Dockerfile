@@ -3,63 +3,64 @@
 # where we copy out of it
 FROM docs/docker.github.io:v1.4 AS archive_v1.4
 ENV  TARGET=/usr/share/nginx/html VER=v1.4
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
+
 
 FROM docs/docker.github.io:v1.5 AS archive_v1.5
 ENV  TARGET=/usr/share/nginx/html VER=v1.5
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.6 AS archive_v1.6
 ENV  TARGET=/usr/share/nginx/html VER=v1.6
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.7 AS archive_v1.7
 ENV  TARGET=/usr/share/nginx/html VER=v1.7
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.8 AS archive_v1.8
 ENV  TARGET=/usr/share/nginx/html VER=v1.8
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.9 AS archive_v1.9
 ENV  TARGET=/usr/share/nginx/html VER=v1.9
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.10 AS archive_v1.10
 ENV  TARGET=/usr/share/nginx/html VER=v1.10
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.11 AS archive_v1.11
 ENV  TARGET=/usr/share/nginx/html VER=v1.11
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.12 AS archive_v1.12
 ENV  TARGET=/usr/share/nginx/html VER=v1.12
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v1.13 AS archive_v1.13
 ENV  TARGET=/usr/share/nginx/html VER=v1.13
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v17.03 AS archive_v17.03
 ENV  TARGET=/usr/share/nginx/html VER=v17.03
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 FROM docs/docker.github.io:v17.06 AS archive_v17.06
 ENV  TARGET=/usr/share/nginx/html VER=v17.06
-COPY fix_archives.sh /usr/bin/fix_archives.sh
-RUN  fix_archives.sh ${TARGET} ${VER}
+COPY normalize_links.sh create_permalinks.sh /usr/bin/
+RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
 # Reset with nginx again, so we don't get scripts or extra apps in the final image
 FROM nginx:alpine
