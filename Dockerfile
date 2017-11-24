@@ -62,8 +62,10 @@ ENV  TARGET=/usr/share/nginx/html VER=v17.06
 COPY normalize_links.sh create_permalinks.sh /usr/bin/
 RUN  normalize_links.sh ${TARGET} ${VER}; create_permalinks.sh ${TARGET} ${VER};
 
-# Reset with nginx again, so we don't get scripts or extra apps in the final image
-FROM nginx:alpine
+## Optimization step: minify html, css, and pre-gzip content
+FROM golang:1.9-alpine AS optimized
+RUN apk add --no-cache git
+RUN go get github.com/tdewolff/minify/cmd/minify
 
 # Reset TARGET since we lost it when we reset the image
 ENV TARGET=/usr/share/nginx/html
@@ -83,6 +85,21 @@ COPY --from=archive_v17.03 ${TARGET} ${TARGET}/v17.03
 COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
 
 ## Copy the above and change the references to the version, to make a new archive
+
+# Minify assets. This benefits both the compressed, and uncompressed versions
+RUN \
+  printf "minifying html..."; minify -r --type=html --match=\.html -o $TARGET/ $TARGET || true; echo "done.";\
+  printf "minifying css...."; minify -r --type=css  --match=\.css  -o $TARGET/ $TARGET || true; echo "done.";\
+  printf "minifying json..."; minify -r --type=json --match=\.json -o $TARGET/ $TARGET || true; echo "done.";
+
+# Reset with nginx again, so we don't get scripts or extra apps in the final image
+FROM nginx:alpine
+
+# Reset TARGET since we lost it when we reset the image
+ENV TARGET=/usr/share/nginx/html
+
+# Copy the static HTML files to where Nginx will serve them
+COPY --from=optimized ${TARGET} ${TARGET}
 
 # This index file gets overwritten, but it serves a sort-of useful purpose in
 # making the docs/docs-base image browsable:
