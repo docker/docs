@@ -1,75 +1,164 @@
-FROM starefossen/github-pages:137
 
-# This is the source for docs/docs-base. Push to that location to ensure that
-# the production image gets your update :)
+# Build tdewolff/minify
+# TODO move to separate image
+FROM golang:1.9-alpine AS minifier
+RUN apk add --no-cache git
+RUN go get -d github.com/tdewolff/minify/cmd/minify \
+ && go build -v -o /usr/bin/minify github.com/tdewolff/minify/cmd/minify
 
-# Install nginx
+# TODO move to separate image
+FROM scratch AS utilities
+COPY --from=minifier /usr/bin/minify /
+COPY ./scripts/* /
 
-RUN apk update && apk add nginx && apk add git && apk add subversion && apk add wget
+# Get archival docs from each canonical image
+# When there is a new archive, add it here and also further down
+# where we copy out of it
+FROM docs/docker.github.io:v1.4 AS archive_v1.4
+ENV  TARGET=/usr/share/nginx/html VER=v1.4
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-# Forward nginx request and error logs to docker log collector
+FROM docs/docker.github.io:v1.5 AS archive_v1.5
+ENV  TARGET=/usr/share/nginx/html VER=v1.5
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+FROM docs/docker.github.io:v1.6 AS archive_v1.6
+ENV  TARGET=/usr/share/nginx/html VER=v1.6
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM docs/docker.github.io:v1.7 AS archive_v1.7
+ENV  TARGET=/usr/share/nginx/html VER=v1.7
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-## At the end of each layer, everything we need to pass on to the next layer
-## should be in the "target" directory and we should have removed all temporary files
+FROM docs/docker.github.io:v1.8 AS archive_v1.8
+ENV  TARGET=/usr/share/nginx/html VER=v1.8
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-# Create archive; check out each version, create HTML under target/$VER, tweak links
-# Nuke the archive_source directory. Only keep the target directory.
+FROM docs/docker.github.io:v1.9 AS archive_v1.9
+ENV  TARGET=/usr/share/nginx/html VER=v1.9
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-ENV VERSIONS="v17.06 v17.03 v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
+FROM docs/docker.github.io:v1.10 AS archive_v1.10
+ENV  TARGET=/usr/share/nginx/html VER=v1.10
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-## Use shallow clone and shallow check-outs to only get the tip of each branch
+FROM docs/docker.github.io:v1.11 AS archive_v1.11
+ENV  TARGET=/usr/share/nginx/html VER=v1.11
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
 
-RUN git clone --depth 1 --recursive https://www.github.com/docker/docker.github.io archive_source; \
-  for VER in $VERSIONS; do \
-    git --git-dir=./archive_source/.git --work-tree=./archive_source fetch origin ${VER}:${VER} --depth 1 \
-    && git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
-    && mkdir -p target/${VER} \
-    && jekyll build -s archive_source -d target/${VER} \
-		# Replace / rewrite some URLs so that links in the archive go to the correct
-	  # location. Note that the order in which these replacements are done is
-	  # important. Changing the order may result in replacements being done
-		# multiple times.
-		# First, remove the domain from URLs that include the domain
-		&& BASEURL="$VER/" \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs-stage.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs-stage.docker.com/#src="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs.docker.com/#src="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs.docker.com/#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="http://docs.docker.com/#src="/#g' \
-		\
-		# Substitute https:// for schema-less resources (src="//analytics.google.com")
-		# We're replacing them to prevent them being seen as absolute paths below
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="//#href="https://#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="//#src="https://#g' \
-		\
-		# And some archive versions already have URLs starting with '/version/'
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/'"$BASEURL"'#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/'"$BASEURL"'#src="/#g' \
-		\
-		# Archived versions 1.7 and under use some absolute links, and v1.10 uses
-		# "relative" links to sources (href="./css/"). Remove those to make them
-		# work :)
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="\./#href="/#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="\./#src="/#g' \
-		\
-		# Create permalinks for archived versions
-		\
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$BASEURL"'#g' \
-		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$BASEURL"'#g'; \
-  done; \
-  rm -rf archive_source
+FROM docs/docker.github.io:v1.12 AS archive_v1.12
+ENV  TARGET=/usr/share/nginx/html VER=v1.12
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
+
+FROM docs/docker.github.io:v1.13 AS archive_v1.13
+ENV  TARGET=/usr/share/nginx/html VER=v1.13
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
+
+FROM docs/docker.github.io:v17.03 AS archive_v17.03
+ENV  TARGET=/usr/share/nginx/html VER=v17.03
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
+
+FROM docs/docker.github.io:v17.06 AS archive_v17.06
+ENV  TARGET=/usr/share/nginx/html VER=v17.06
+COPY --from=utilities /* /usr/bin/
+RUN apk add -q --no-cache gzip \
+ && normalize_links.sh ${TARGET} ${VER} \
+ && minify_assets.sh ${TARGET} ${VER} \
+ && create_permalinks.sh ${TARGET} ${VER} \
+ && compress_assets.sh ${TARGET}
+
+# Reset with nginx again, so we don't get scripts or extra apps in the final image
+FROM nginx:alpine AS optimized
+
+# Reset TARGET since we lost it when we reset the image
+ENV TARGET=/usr/share/nginx/html
+
+# Copy HTML from each stage above
+COPY --from=archive_v1.4   ${TARGET} ${TARGET}/v1.4
+COPY --from=archive_v1.5   ${TARGET} ${TARGET}/v1.5
+COPY --from=archive_v1.6   ${TARGET} ${TARGET}/v1.6
+COPY --from=archive_v1.7   ${TARGET} ${TARGET}/v1.7
+COPY --from=archive_v1.8   ${TARGET} ${TARGET}/v1.8
+COPY --from=archive_v1.9   ${TARGET} ${TARGET}/v1.9
+COPY --from=archive_v1.10  ${TARGET} ${TARGET}/v1.10
+COPY --from=archive_v1.11  ${TARGET} ${TARGET}/v1.11
+COPY --from=archive_v1.12  ${TARGET} ${TARGET}/v1.12
+COPY --from=archive_v1.13  ${TARGET} ${TARGET}/v1.13
+COPY --from=archive_v17.03 ${TARGET} ${TARGET}/v17.03
+COPY --from=archive_v17.06 ${TARGET} ${TARGET}/v17.06
+
+## Copy the above and change the references to the version, to make a new archive
+
+# Set `--build-arg REPORT_SIZE=1` to print the size-report during build
+ARG REPORT_SIZE
+COPY ./scripts/size_report.sh /usr/bin/
+RUN \
+  if [ -n "$REPORT_SIZE" ]; then \
+      apk add -q --no-cache coreutils; \
+      size_report.sh ${TARGET}; \
+  fi;
 
 # This index file gets overwritten, but it serves a sort-of useful purpose in
 # making the docs/docs-base image browsable:
+COPY index.html ${TARGET}/
 
-COPY index.html target
+# Copy the Nginx config
+COPY ./default.conf  /etc/nginx/conf.d/default.conf
 
-# Serve the site (target), which is now all static HTML
-
-CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && nginx -g 'pid /tmp/nginx.pid;'
+# Serve the docs
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'

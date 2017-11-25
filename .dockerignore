@@ -1,0 +1,7 @@
+.dockerignore
+.git
+.github
+.jekyll-metadata
+tests
+_site
+Dockerfile
