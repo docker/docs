@@ -197,7 +197,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
         ports:
           - "6379:6379"
         volumes:
-          - /home/docker/data:/data
+          - ./data:/data
         deploy:
           placement:
             constraints: [node.role == manager]
