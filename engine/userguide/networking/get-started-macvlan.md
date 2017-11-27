@@ -146,8 +146,8 @@ iface eno1 inet manual
 
 auto mac0
 iface mac0 inet dhcp
-  preup ip link add mac0 link eno1 type macvlan mode bridge
-  postdown ip link del mac0 link eno1 type macvlan mode bridge
+  pre-up ip link add mac0 link eno1 type macvlan mode bridge
+  post-down ip link del mac0 link eno1 type macvlan mode bridge
 ```
 
 For more on Docker networking commands, see 
