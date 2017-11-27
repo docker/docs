@@ -38,7 +38,7 @@ adopted as quickly for consistency and compatibility reasons.
 ### Important notes about this release
 
 - Starting with Docker EE 17.06.2-ee-5, Ubuntu, SLES, RHEL packages are also available
-  for IBM POWER using the ppc64le architecture.
+  for IBM Power using the ppc64le architecture.
 
 - Docker EE 17.06.2-ee-5 now enables the [telemetry plugin](/enterprise/telemetry/)
   by default on all supported Linux distributions. For more details, including how to

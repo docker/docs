@@ -42,9 +42,10 @@ To install Docker EE, you need the 64-bit version of one of these Ubuntu version
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker EE is supported on `x86_64` (or `amd64`) and `s390x` (IBM Z) architectures.
+Docker EE is supported on `x86_64` (or `amd64`), `s390x` (IBM Z), and `ppc64el`
+(IBM Power) architectures.
 
-The only supported storage driver for Docker EE on Ubuntu is `aufs`.
+Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 
 ### Uninstall old versions
 
@@ -156,6 +157,16 @@ from the repository.
        stable-{{ site.docker_ee_version }}"
     ```
 
+    **ppc64el**:
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=ppc64el] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable-{{ site.docker_ee_version }}"
+    ```
+
+
 #### Install Docker EE
 
 1.  Update the `apt` package index.
@@ -241,7 +252,7 @@ a new file each time you want to upgrade Docker EE.
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
     `ubuntu/x86_64/stable-{{ site.docker_ee_version }}` and download the `.deb` file for the
-    Docker EE version you want to install.
+    Docker EE version and architecture you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker EE package.
