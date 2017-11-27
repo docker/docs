@@ -175,8 +175,10 @@ You can install Docker EE in different ways, depending on your needs:
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
-    that the file was empty, add the following contents.
+{% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
+3.  If you need to use `devicemapper`, edit `/etc/docker/daemon.json`. If it
+    does not yet exist, create it. Assuming that the file was empty, add the
+    following contents.
 
     ```json
     {
@@ -184,10 +186,11 @@ You can install Docker EE in different ways, depending on your needs:
     }
     ```
 
-4.  For production systems, you must use `direct-lvm` mode, which requires you
-    to prepare the block devices. Follow the procedure in the
+4.  For production systems using `devicemapper`, you must use `direct-lvm` mode,
+    which requires you to prepare the block devices. Follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
     **before starting Docker**.
+{% endif %}
 
 5.  Start Docker.
 
@@ -244,20 +247,27 @@ upgrade Docker EE.
     There is no way to publicly browse this repository.
 {% endif %}
 
+{% if linux-dist == "centos" %}
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
     `{{ linux-dist-url-slug }}/7/x86_64/stable-{{ site.docker_ee_version }}/Packages` and
     download the `.{{ package-format | downcase }}` file for the Docker version
     you want to install.
+{% endif %}
+{% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
+1.  Go to the Docker EE repository URL associated with your
+    trial or subscription in your browser. Go to
+    `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
+    architecture, and Docker version. Download the
+    `.{{ package-format | downcase }}` file from the `Packages` directory.
 
-    {% if linux-dist == "rhel" %}
-
+  {% if linux-dist == "rhel" %}
     > **Note**: If you have trouble with `selinux` using the packages under the
     > `7` directory, try choosing the version-specific directory instead, such
     > as `7.3`.
 
-
-    {% endif %}
+  {% endif %}
+{% endif %}
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker package.
@@ -269,8 +279,10 @@ upgrade Docker EE.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it.
-    Assuming that the file was empty, add the following contents.
+{% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
+3.  If you need to use `devicemapper`, edit `/etc/docker/daemon.json`. If it
+    does not yet exist, create it. Assuming that the file was empty, add the
+    following contents.
 
     ```json
     {
@@ -278,10 +290,11 @@ upgrade Docker EE.
     }
     ```
 
-4.  For production systems, you must use `direct-lvm` mode, which requires you
-    to prepare the block devices. Follow the procedure in the
+4.  For production systems using `devicemapper`, you must use `direct-lvm` mode,
+    which requires you to prepare the block devices. Follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
     **before starting Docker**.
+{% endif %}
 
 5.  Start Docker.
 

@@ -34,10 +34,10 @@ The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
 [re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
 
-In addition, you must use the `devicemapper` storage driver if you use
-Docker EE. On production systems, you must use `direct-lvm` mode, which requires
-one or more dedicated block devices. Fast storage such as solid-state media
-(SSD) is recommended.
+In addition, you must use the `overlay2` or `devicemapper` storage driver if you
+use Docker EE. On production systems using `devicemapper`, you must use
+`direct-lvm` mode, which requires one or more dedicated block devices. Fast
+storage such as solid-state media (SSD) is recommended.
 
 ### Uninstall old versions
 

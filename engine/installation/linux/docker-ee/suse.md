@@ -36,8 +36,9 @@ Docker Community Edition (Docker CE) is not supported on SLES.
 
 ### OS requirements
 
-To install Docker EE, you need the 64-bit version of SLES 12.x. Docker EE is not
-supported on OpenSUSE.
+To install Docker EE, you need the 64-bit version of SLES 12.x, running on
+`x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures. Docker EE is
+not supported on OpenSUSE.
 
 The only supported storage driver for Docker EE on SLES is Btrfs, which will be
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
@@ -167,9 +168,27 @@ from the repository.
 1.  Use the following command to set up the **stable** repository, using the
     Docker EE repository URL you located in the [prerequisites](#prerequisites).
 
+    **x86_64**:
+
     ```bash
     $ sudo zypper addrepo \
         <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker_ee_version }} \
+        docker-ee-stable
+    ```
+
+    **s390x**:
+
+    ```bash
+    $ sudo zypper addrepo \
+        <DOCKER-EE-URL>/sles/12.3/s390x/stable-{{ site.docker_ee_version }} \
+        docker-ee-stable
+    ```
+
+    **ppc64le**:
+
+    ```bash
+    $ sudo zypper addrepo \
+        <DOCKER-EE-URL>/sles/12.3/ppc64le/stable-{{ site.docker_ee_version }} \
         docker-ee-stable
     ```
 
@@ -296,9 +315,9 @@ download the `.rpm` file for your release and install it manually. You will
 need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your
-    trial or subscription in your browser. Go to
-    `sles/12.3/x86_64/stable-{{ site.docker_ee_version }}` and download the `.rpm` file for
-    the Docker version you want to install.
+    trial or subscription in your browser. Go to `sles/12.3/` choose the
+    directory corresponding to your architecture and desired Docker EE version.
+    Download the `.rpm` file from the `Packages` directory.
 
 2.  Import Docker's official GPG key:
 
@@ -313,7 +332,7 @@ need to download a new file each time you want to upgrade Docker EE.
     $ sudo zypper install /path/to/package.rpm
     ```
 
-    Docker is installed but not started. The `docker` group is created, but no
+    Docker EE is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
 4.  Configure Docker EE to use the Btrfs filesystem. **This is only required if
