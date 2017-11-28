@@ -11,7 +11,7 @@ If your registry uses globally-trusted TLS certificates, everything works
 out of the box, and you don't need to configure anything.
 If your registries use self-signed certificates or use your own Certificate
 Authority to sign the public key certificates, you need to configure UCP
-to trust those repositories.
+to trust those registries.
 
 ## Trust Docker Trusted Registry
 
@@ -34,25 +34,32 @@ To configure UCP to trust a DTR deployment, you need to update the
 -----END CERTIFICATE-----"""
 ```
 
-You only need to include the port section, if your DTR deployment is running
+You only need to include the port section if your DTR deployment is running
 on a port other than 443.
 
 You can customize and use the script below to generate a file named
 `trust-dtr.toml` with the configuration needed for your DTR deployment.
 
 ```
-# Replace this url by your DTR deployment url
-DTR_URL=https://ddc-prod-dtr.testing.dckr.io:443
-DTR_CA_URL=$DTR_URL/ca
+# Replace this url by your DTR deployment url and port
+DTR_URL=https://dtr.example.org
+DTR_PORT=443
+
+dtr_full_url=${DTR_URL}:${DTR_PORT}
+dtr_ca_url=${dtr_full_url}/ca
+
+# Strip protocol and default https port
+dtr_host_address=${dtr_full_url#"https://"}
+dtr_host_address=${dtr_host_address%":443"}
 
 # Create the registry configuration and save it it
 cat <<EOL > trust-dtr.toml
 
 [[registries]]
   # host address should not contain protocol or port if using 443
-  host_address = "$(echo $DTR_URL | sed 's/^https\{0,1\}:\/\///' | sed 's/:443$//')"
+  host_address = $dtr_host_address
   ca_bundle = """
-$(curl -sk $DTR_CA_URL)"""
+$(curl -sk $dtr_ca_url)"""
 EOL
 ```
 
