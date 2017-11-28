@@ -158,27 +158,27 @@ the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+       "deb [arch=amd64] {{ download-url-base }}/dists/\
+       $(lsb_release -cs)\
+       /stable"
     ```
 
     **armhf**:
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+       "deb [arch=armhf] {{ download-url-base }}/dists/\
+       $(lsb_release -cs)\
+       /stable"
     ```
 
     **s390x**:
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=s390x] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+       "deb [arch=s390x] {{ download-url-base }}/dists/\
+       $(lsb_release -cs)\
+       /stable"
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
