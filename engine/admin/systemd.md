@@ -75,7 +75,7 @@ you will need to add this configuration in the Docker systemd service file.
 1.  Create a systemd drop-in directory for the docker service:
 
     ```bash
-    $ mkdir -p /etc/systemd/system/docker.service.d
+    $ sudo mkdir -p /etc/systemd/system/docker.service.d
     ```
 
 2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`
