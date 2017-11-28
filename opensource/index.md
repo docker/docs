@@ -36,7 +36,7 @@ Contributing to the Docker documentation can be a rewarding experience. When you
 offer feedback, questions, edits, or new content, you help us, the projects you
 work on, and the larger Docker community.
 
-We welcome your particpation to help make the documentation better!
+We welcome your participation to help make the documentation better!
 
 > Looking for the open source Moby project?
 >
