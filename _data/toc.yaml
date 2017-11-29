@@ -311,42 +311,40 @@ guides:
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
 
-- sectiontitle: Authorize user access
+- sectiontitle: Authorize role-based access
   section:
-    - path: /deploy/access-control/
-      title: Access control model overview
-    - sectiontitle: User Management
-      section:
-      - path: /deploy/access-control/usermgmt-create-subjects/
-        title: Create and users and teams
-      - path: /deploy/access-control/usermgmt-sync-with-ldap/
-        title: Synchronize teams with LDAP
-      - path: /deploy/access-control/usermgmt-define-roles/
-        title: Create roles to authorize access
-      - path: /deploy/access-control/usermgmt-grant-permissions/
-        title: Grant access to resources
-      - path: /deploy/access-control/usermgmt-recover-user-password/
-        title: Reset a user password
-    - sectiontitle: Shared Resources
-      section:
-      - path: /deploy/access-control/resources-group-resources/
-        title: Group resources as collections or namespaces
-      - path: /deploy/access-control/access-control-node/
-        title: Learn node access controls
-      - path: /deploy/access-control/isolate-nodes-between-teams/
-        title: Isolate Swarm nodes
-      - path: /deploy/access-control/isolate-volumes-between-teams/
-        title: Isolate volumes
-    - sectiontitle: Tutorials
-      section:
-      - path: /deploy/access-control/howto-deploy-wordpress-with-rbac/
-        title: Wordpress and MySQL tutorial
-      - path: /deploy/access-control/deploy-view-only-service/
-        title: Deploy service with view-only access
-      - path: /deploy/access-control/access-control-design-ee-standard/
-        title: Orcabank tutorial with Docker EE Standard
-      - path: /deploy/access-control/access-control-design-ee-advanced/
-        title: Orcabank tutorial with Docker EE Advanced
+  - path: /deploy/rbac/
+    title: Access control model overview
+  - sectiontitle: User Management
+    section:
+    - path: /deploy/rbac/usermgmt-create-subjects/
+      title: Create and users and teams
+    - path: /deploy/rbac/usermgmt-sync-with-ldap/
+      title: Synchronize teams with LDAP
+    - path: /deploy/rbac/usermgmt-define-roles/
+      title: Define roles with permissions
+    - path: /deploy/rbac/usermgmt-grant-permissions/
+      title: Grant access to resources
+    - path: /deploy/rbac/usermgmt-recover-password/
+      title: Reset user passwords
+  - sectiontitle: Shared Resources
+    section:
+    - path: /deploy/rbac/resources-group-resources/
+      title: Group resources as collections or namespaces
+    - path: /deploy/rbac/resources-isolate-nodes/
+      title: Isolate nodes
+    - path: /deploy/rbac/resources-isolate-volumes/
+      title: Isolate volumes
+  - sectiontitle: RBAC Tutorials
+    section:
+    - path: /deploy/rbac/howto-wordpress-multitier/
+      title: Wordpress and MySQL tutorial
+    - path: /deploy/rbac/howto-wordpress-view-only/
+      title: Deploy service with view-only access
+    - path: /deploy/rbac/howto-orcabank1-standard/
+      title: Orcabank tutorial with Docker EE Standard
+    - path: /deploy/rbac/howto-orcabank2-advanced/
+      title: Orcabank tutorial with Docker EE Advanced
 
 - sectiontitle: Deploy your app in production
   section:
