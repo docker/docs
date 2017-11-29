@@ -22,15 +22,15 @@ next_steps:
 
 {% if include.ui %}
 
-With [Docker Universal Control Plane (UCP)](https://docs.docker.com/datacenter/ucp/2.2/guides/),
-you can authorize how users view, edit, and use cluster resources by granting
-role-based permissions. Resources can be grouped and isolated according to an
+The Docker Enterprise Edition UI, or the Docker Univeral Control Plane (UCP),
+lets you authorize users to view, edit, and use cluster resources by granting
+role-based permissions. Resources can be grouped and isolated inline with an
 organization's needs and users can be granted more than one role.
 
 
 {% if include.version=="ucp-3.0" %}
 
-To authorize access to cluster resources across your organization, Docker
+To authorize access to cluster resources across your organization, Docker EE
 administrators might take the following high-level steps:
 
 - Add and configure **subjects** (users and teams).
@@ -39,9 +39,11 @@ administrators might take the following high-level steps:
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
 - Create **grants** by marrying subject + role + resource.
 
+For a simple example, see [Deploy a multi-tier application with RBAC](./howto-wordpress-multitier).
+
 ## Subjects
 
-A subject represents a user, team, or organization. A subject is granted a
+A subject represents a user, team, or organization. A subject can be granted a
 role that defines permitted operations against one or more resource types.
 
 - **User**: A person authenticated by the authentication backend. Users can
@@ -76,9 +78,9 @@ For more, see: [Define roles with authorized API operations](./usermgmt-define-r
 Cluster resources are grouped into Swarm collections or Kubernetes namespaces.
 
 A collection is a directory that holds Swarm resources. You can create
-collections in UCP by defining a path and moving resources. Or you can create
-the path in UCP and use *labels* in your YAML file to assign application
-resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](/deploy/rbac/howto-wordpress-multitier/).
+collections in the Docker EE UI by defining a path and moving resources. Or you
+can create the path in the Docker EE UI and use *labels* in your YAML file to
+assign application resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](/deploy/rbac/howto-wordpress-multitier/).
 
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.
@@ -113,7 +115,7 @@ For more, see: [Grant access to cluster resources](./usermgmt-grant-permissions.
 
 {% elsif include.version=="ucp-2.2" %}
 
-To authorize access to cluster resources across your organization, Docker
+To authorize access to cluster resources across your organization, Docker EE
 administrators might take the following high-level steps:
 
 - Add and configure **subjects** (users and teams)
@@ -159,9 +161,9 @@ For more, see: [Define roles with authorized API operations](./usermgmt-define-r
 Cluster resources are grouped into Swarm collections.
 
 A collection is a directory that holds Swarm resources. You can create
-collections in UCP by defining a path and moving resources. Or you can create
-the path in UCP and use *labels* in your YAML file to assign application
-resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](./deploy/rbac/howto-wordpress-multitier/).
+collections in the Docker EE UI by defining a path and moving resources. Or you
+can create the path in the Docker EE UI and use *labels* in your YAML file to
+assign application resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](./deploy/rbac/howto-wordpress-multitier/).
 
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.

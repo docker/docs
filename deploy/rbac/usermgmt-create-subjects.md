@@ -22,8 +22,8 @@ next_steps:
 
 {% if include.ui %}
 
-Users, teams, and organizations are referred to as subjects in Docker Universal
-Control Plane (UCP).
+Users, teams, and organizations are referred to as subjects in Docker Enterprise
+Edition.
 
 Individual users can belong to one or more teams but each team can only be in
 one organization. At the fictional startup, Acme Company, all teams in the
@@ -42,10 +42,10 @@ acme-datacenter
 
 ## Authentication
 
-All users are authenticated on the backend. UCP provides built-in authentication
-and also integrates with LDAP directory services.
+All users are authenticated on the backend. Docker EE provides built-in
+authentication and also integrates with LDAP directory services.
 
-To use UCP built-in authentication, you must [create users manually](#Create-users-manually).
+To use Docker EE's built-in authentication, you must [create users manually](#Create-users-manually).
 
 > To enable LDAP and authenticate and synchronize UCP users and teams with your
 > organization's LDAP directory, see:
@@ -54,7 +54,7 @@ To use UCP built-in authentication, you must [create users manually](#Create-use
 
 ## Build an organization architecture
 
-The general flow of designing an organization with teams in UCP is:
+The general flow of designing an organization with teams in the Docker EE UI is:
 
 1. Create an organization.
 2. Add users or enable LDAP.
@@ -63,7 +63,7 @@ The general flow of designing an organization with teams in UCP is:
 
 ### Create an organization with teams
 
-To create an organzation in UCP:
+To create an organzation in the Docker EE UI:
 
 1. Click **Organization & Teams** under **User Management**.
 2. Click **Create Organization**.
@@ -88,10 +88,10 @@ To create teams in the organization:
 ### Create users manually
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](./usermgmt-grant-permissions/). You can optionally grant them UCP
+cluster. To extend a user's default permissions, add them to a team and [create grants](./usermgmt-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
-To manally create users in UCP:
+To manally create users in the Docker EE UI:
 
 1. Click **Users** under **User Management**.
 2. Click **Create User**.
@@ -111,10 +111,10 @@ To manally create users in UCP:
 ### Create users manuallly
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/usermgmt-grant-permissions/). You can optionally grant them UCP
+cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/usermgmt-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
-To manally create users in UCP:
+To manally create users in the Docker EE UI:
 
 1. Navigate to the **Users** page.
 2. Click **Create User**.

@@ -20,8 +20,8 @@ next_steps:
 
 {% if include.ui %}
 
-UCP administrators can create *grants* to control how users and organizations
-access resources.
+Docker EE administrators can create *grants* to control how users and
+organizations access resources.
 
 A grant is made up of *subject*, *role*, and *resource group*.
 
@@ -60,9 +60,10 @@ A common workflow for creating grants has four steps:
 
 ### Create a Swarm grant
 
-You can create grants after creating users, collections, and roles (if using custom roles).
+You can create grants after creating users, collections, and roles (if using
+custom roles).
 
-To create a grant in UCP:
+To create a grant in the Docker EE UI:
 
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.
@@ -73,8 +74,8 @@ To create a grant in UCP:
 4. Click **Create**.
 
 > By default, all new users are placed in the `docker-datacenter` organization.
-> To apply a grant to all UCP users, create a grant with the `docker-datacenter`
-> org as a subject.
+> To apply permissions to all Docker EE users, create a grant with the
+> `docker-datacenter` org as a subject.
 
 
 {% elsif include.version=="ucp-2.2" %}
@@ -105,7 +106,7 @@ A common workflow for creating grants has four steps:
 
 You can create grants after creating users, collections, and roles (if using custom roles).
 
-To create a grant in UCP:
+To create a grant in the Docker EE UI:
 
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.
@@ -116,8 +117,8 @@ To create a grant in UCP:
 4. Click **Create**.
 
 > By default, all new users are placed in the `docker-datacenter` organization.
-> To apply a grant to all UCP users, create a grant with the `docker-datacenter`
-> org as a subject.
+> To apply permissions to all Docker EE users, create a grant with the
+> `docker-datacenter` org as a subject.
 
 {% endif %}
 {% endif %}
