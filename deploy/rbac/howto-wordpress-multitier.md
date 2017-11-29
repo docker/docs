@@ -23,11 +23,12 @@ control (RBAC).
 ## Swarm Stack
 
 In this section, we deploy `acme-blog` as a Swarm stack of two services. See
-[Kubernetes Deployment](#kubernetes-deployment) for the same exersice with
+[Kubernetes Deployment](#kubernetes-deployment) for the same exercise with
 Kubernetes.
 
-You are the UCP admin at Acme Company and need to secure access to `acme-blog`
-and its component services,  Wordpress and MySQL. The best way to do this is to:
+You are the Docker EE admin at Acme Company and need to secure access to
+`acme-blog` and its component services,  Wordpress and MySQL. The best way to do
+this is to:
 
 - Add teams and users
 - Create collections (directories) for storing the resources of each component.
@@ -48,12 +49,13 @@ acme-datacenter
 └── ops
     └── Chad Chavez
 ```
-See [Create and configure users and teams](./usermgmt-create-subjects.md)
+See: [Create and configure users and teams](./usermgmt-create-subjects.md).
 
 ### Create collection paths
 
-Create three nested Swarm collections. First, create a collection for `acme-blog` in
-the `Shared` collection and then nest collections for wordpress and mysql resources:
+Create three nested Swarm collections. First, create a collection for
+`acme-blog` in the `Shared` collection and then nest collections for wordpress
+and mysql resources:
 
 ```
 /
@@ -66,7 +68,7 @@ the `Shared` collection and then nest collections for wordpress and mysql resour
 
 > **Tip**: To drill into a collection, click **View Children**.
 
-See [Group and isolate cluster resources](./resources-group-resources.md)
+See: [Group and isolate cluster resources](./resources-group-resources.md).
 
 ### Grant roles
 
@@ -78,11 +80,11 @@ Create three grants with built-in roles:
 
 > In this exercise we use built-in roles but you can create custom ones too.
 
-See: [Grant access to cluster resources](./usermgmt-grant-permissions.md)
+See: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
 
 ### Deploy Swarm stack with Wordpress and MySQL
 
-You've configured UCP. The `ops` team can now deploy `acme-blog`:
+You've configured Docker EE. The `ops` team can now deploy `acme-blog`:
 
 1. Click **Shared Resources** > **Stacks**.
 2. Click **Create Stack**.
@@ -145,7 +147,7 @@ networks:
 
 ### Test access
 
-Log on to UCP as each user and ensure that
+Log on to the Docker EE UI as each user and ensure that
 - `dba` (alex) can only see and access `mysql-collection`
 - `dev` (bett) can only see and access `wordpress-collection`
 - `ops` (chad) can see and access both.
@@ -168,8 +170,9 @@ In this section, we deploy `acme-blog` with Kubernetes.
 
 In this section, we deploy `acme-blog` as a Swarm stack of two services.
 
-You are the UCP admin at Acme Company and need to secure access to `acme-blog`
-and its component services,  Wordpress and MySQL. The best way to do this is to:
+You are the Docker EE admin at Acme Company and need to secure access to
+`acme-blog` and its component services,  Wordpress and MySQL. The best way to do
+this is to:
 
 - Add teams and users
 - Create collections (directories) for storing the resources of each component.
@@ -190,12 +193,13 @@ acme-datacenter
 └── ops
     └── Chad Chavez
 ```
-See [Create and configure users and teams](./usermgmt-create-subjects.md)
+See: [Create and configure users and teams](./usermgmt-create-subjects.md).
 
 ### Create collection paths
 
-Create three nested Swarm collections. First, create a collection for `acme-blog` in
-the `Shared` collection and then nest collections for wordpress and mysql resources:
+Create three nested Swarm collections. First, create a collection for
+`acme-blog` in the `Shared` collection and then nest collections for wordpress
+and mysql resources:
 
 ```
 /
@@ -220,11 +224,11 @@ Create three grants with built-in roles:
 
 > In this exercise we use built-in roles but you can create custom ones too.
 
-See: [Grant access to cluster resources](./usermgmt-grant-permissions.md)
+See: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
 
 ### Deploy Swarm stack with Wordpress and MySQL
 
-You've configured UCP. The `ops` team can now deploy `acme-blog`:
+You've configured Docker EE. The `ops` team can now deploy `acme-blog`:
 
 1. Click **Shared Resources** > **Stacks**.
 2. Click **Create Stack**.
@@ -287,7 +291,7 @@ networks:
 
 ### Test access
 
-Log on to UCP as each user and ensure that
+Log on to the Docker EE UI as each user and ensure that:
 - `dba` (alex) can only see and access `mysql-collection`
 - `dev` (bett) can only see and access `wordpress-collection`
 - `ops` (chad) can see and access both.

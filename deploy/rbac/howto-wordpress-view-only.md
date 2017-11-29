@@ -32,10 +32,10 @@ collection that contains one Swarm service.
 
 ### Create an organization
 
-Create an organization with one team, and add one user who isn't an administrator
-to the team.
+Create an organization with one team, and add one user who isn't an
+administrator to the team.
 
-1.  Log in to UCP as an administrator.
+1.  Log in to the Docker EE UI as an administrator.
 2.  Navigate to the **Organizations & Teams** page and click
     **Create Organization**. Name the new organization `engineering` and
     click **Create**.
@@ -134,10 +134,10 @@ collection that contains one Swarm service.
 
 ### Create an organization
 
-Create an organization with one team, and add one user who isn't an administrator
-to the team.
+Create an organization with one team, and add one user who isn't an
+administrator to the team.
 
-1.  Log in to UCP as an administrator.
+1.  Log in to the Docker EE UI as an administrator.
 2.  Navigate to the **Organizations & Teams** page and click
     **Create Organization**. Name the new organization `engineering` and
     click **Create**.

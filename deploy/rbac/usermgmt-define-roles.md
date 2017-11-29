@@ -24,7 +24,7 @@ Roles are applied to users and teams with grants.
 
 ![Diagram showing UCP permission levels](../images/permissions-ucp.svg)
 
- ## Default roles
+## Default roles
 
 You can define custom roles or use the following built-in roles:
 
