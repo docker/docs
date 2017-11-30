@@ -629,6 +629,8 @@ documentation.
             constraints:
               - node.role == manager
               - engine.labels.operatingsystem == ubuntu 14.04
+            preferences:
+              - spread: node.labels.zone
 
 #### replicas
 
