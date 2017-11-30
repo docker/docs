@@ -141,7 +141,7 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.7"
+      ucp_latest_image: "docker/ucp:3.0.0"
       dtr_latest_image: "docker/dtr:2.4.3"
       enterprise: true
   - scope:
@@ -174,8 +174,15 @@ defaults:
       ucp_version: "1.1"
       dtr_version: "2.0"
   - scope:
+      path: "datacenter/ucp/3.0"
+    values:
+      ucp_org: "docker"
+      ucp_repo: "ucp"
+      ucp_version: "3.0.0"
+  - scope:
       path: "datacenter/ucp/2.2"
     values:
+      hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
       ucp_version: "2.2.7"
