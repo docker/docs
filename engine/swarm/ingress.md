@@ -43,7 +43,7 @@ $ docker service create \
 > `-p 8080:80`. The new syntax is preferred because it is easier to read and
 > allows more flexibility.
 
-The `<TARGET-PORT>` is the port where the container listens. If you omit it,
+The `<CONTAINER-PORT>` is the port where the container listens. If you omit it,
 a random high-numbered port is bound.
 The `<PUBLISHED-PORT>` is the port where the swarm makes the service available.
 This parameter is required.
@@ -90,8 +90,8 @@ $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 {% endraw %}
 ```
 
-The output shows the `<CONTAINER-PORT>` from the containers and the
-`<PUBLISHED-PORT>` where nodes listen for requests for the service.
+The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containers and the
+`<PUBLISHED-PORT>` (labeled `PublishedPort`) where nodes listen for requests for the service.
 
 ### Publish a port for TCP only or UDP only
 
