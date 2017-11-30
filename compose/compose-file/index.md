@@ -691,6 +691,14 @@ services:
         reservations:
           cpus: '0.25'
           memory: 20M
+          generic_resources:
+            - discrete_resource_spec:
+                kind: 'gpu'
+                value: 2
+            - discrete_resource_spec:
+                kind: 'ssd'
+                value: 1
+
 ```
 
 The topics below describe available options to set resource constraints on
@@ -706,6 +714,23 @@ options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, please refer to the discussion on the GitHub
 issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
 {: .important}
+
+##### Generic resources
+
+Generic resources are a way to select the kind of nodes your task can land on.
+
+In a swarm cluster, nodes can advertise Generic resources as discrete values or
+as named values such as `SSD=3` or `GPU=UID1, GPU=UID2`.
+
+The Generic resources on a service allows you to request for a number of these
+Generic resources advertised by swarm nodes and have your tasks land on nodes
+with enough available resources to statisfy your request.
+
+If you request Named Generic resource(s), the resources selected are
+exposed in your container through the use of environment variables.
+E.g: `DOCKER_RESOURCE_GPU=UID1,UID2`
+
+You can only set the `generic_resources` resources' reservations field.
 
 ##### Out Of Memory Exceptions (OOME)
 
