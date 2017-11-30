@@ -145,8 +145,15 @@ defaults:
       dtr_latest_image: "docker/dtr:2.4.3"
       enterprise: true
   - scope:
+      path: "datacenter/dtr/2.5"
+    values:
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.5.0"
+  - scope:
       path: "datacenter/dtr/2.4"
     values:
+      hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
       dtr_version: "2.4.3"
