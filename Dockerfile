@@ -39,7 +39,7 @@ ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 ENV DISTRIBUTION_BRANCH="release/2.6"
 
 # Fetch upstream resources
-RUN bash ./md_source/_scripts/fetch-upstream-resources.sh
+RUN bash ./md_source/_scripts/fetch-upstream-resources.sh md_source
 ####### END UPSTREAM RESOURCES ########
 
 # Build the static HTML
