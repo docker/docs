@@ -12,6 +12,7 @@ The `logentries` logging driver sends container logs to the
 Some options are supported by specifying `--log-opt` as many times as needed:
 
  - `logentries-token`: specify the logentries log set token
+ - `line-only`: send raw payload only
 
 Configure the default logging driver by passing the
 `--log-driver` option to the Docker daemon:
@@ -45,4 +46,12 @@ You need to provide your log set token for logentries driver to work:
 
 ```bash
 $ docker run --log-driver=logentries --log-opt logentries-token=abcd1234-12ab-34cd-5678-0123456789ab
+```
+
+### line-only
+
+You could specify whether to send log message wrapped into container data (default) or to send raw log line
+
+```bash
+$ docker run --log-driver=logentries --log-opt logentries-token=abcd1234-12ab-34cd-5678-0123456789ab --log-opt line-only=true
 ```
