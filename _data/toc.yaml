@@ -470,21 +470,7 @@ guides:
     title: Contribute to documentation
   - path: /opensource/ways/
     title: Other ways to contribute
-  - sectiontitle: Practice workflow on Kitematic examples
-    section:
-    - path: /opensource/kitematic/getting_started/
-      title: Get started
-    - path: /opensource/kitematic/find_issue/
-      title: Find an issue on GitHub
-    - path: /opensource/kitematic/set_up_dev/
-      title: Set up for Kitematic development
-    - path: /opensource/kitematic/work_issue/
-      title: Develop in Kitematic (work on an issue)
-    - path: /opensource/kitematic/create_pr/
-      title: Review your branch and create a pull request (PR)
-    - path: /opensource/kitematic/next_steps/
-      title: Where to learn more
-- sectiontitle:
+- sectiontitle: 
   section:
   - path: /docsarchive/
     title: View the docs archives
