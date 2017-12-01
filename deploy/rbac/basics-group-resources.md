@@ -10,18 +10,29 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/usermgmt-create-subjects/
+- path: /deploy/rbac/basics-create-subjects/
   title: Create and configure users and teams
-- path: /deploy/rbac/usermgmt-define-roles/
+- path: /deploy/rbac/basics-define-roles/
   title: Create roles to authorize access
-- path: /deploy/rbac/usermgmt-grant-permissions/
+- path: /deploy/rbac/basics-grant-permissions/
   title: Grant access to cluster resources
-- path: /deploy/rbac/resources-isolate-volumes/
-  title: Isolate volumes
 ---
 
 {% if include.ui %}
+
 {% if include.version=="ucp-3.0" %}
+
+## Kubernetes namespace
+
+A
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+is a logical area for a Kubernetes cluster. Kuberenetes comes with a "default"
+namespace for your cluster objects (plus two more for system and public
+resources). You can create custom namespaces, but unlike Swarm collections,
+namespaces _cannot be nested_.
+
+> Resource types that can be placed into a Kubernetes namespace include: Pods,
+> Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
 ## Swarm collection
 
@@ -63,7 +74,7 @@ Docker EE provides a number of built-in collections.
 | ------------------ | --------------------------------------------------------------------------------------- |
 | `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here. |
 | `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable. |
-| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./resources-isolate-nodes/). |
+| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./howto-isolate-nodes/). |
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
@@ -77,7 +88,7 @@ collection, `/webserver`.
 
 ## Default collections
 
-Each user has a default collection which can be changed and in the Docker EE UI preferences.
+Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
 resource in the CLI without an access label, Docker EE automatically places the
@@ -114,7 +125,7 @@ deploys a resource on the user's default resource collection.
 The system uses the additional labels, `com.docker.ucp.collection.*`, to enable
 efficient resource lookups. By default, nodes have the
 `com.docker.ucp.collection.root`, `com.docker.ucp.collection.shared`, and
-`com.docker.ucp.collection.swarm` labels set to `true`. The Docker EE UI
+`com.docker.ucp.collection.swarm` labels set to `true`. UCP
 automatically controls these labels, and you don't need to manage them.
 
 Collections get generic default names, but you can give them meaningful names,
@@ -154,7 +165,7 @@ one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
-permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes-between-teams.md).
+permission, to the team. [Isolate swarm nodes to a specific team](howto-isolate-notes.md).
 
 
 {% elsif include.version=="ucp-2.2" %}
@@ -199,7 +210,7 @@ Docker EE provides a number of built-in collections.
 | ------------------ | --------------------------------------------------------------------------------------- |
 | `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here. |
 | `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable. |
-| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./resources-isolate-nodes/). |
+| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./howto-isolate-nodes/). |
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
@@ -213,7 +224,7 @@ collection, `/webserver`.
 
 ## Default collections
 
-Each user has a default collection which can be changed and in the Docker EE UI preferences.
+Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
 resource in the CLI without an access label, Docker EE automatically places the
@@ -250,7 +261,7 @@ deploys a resource on the user's default resource collection.
 The system uses the additional labels, `com.docker.ucp.collection.*`, to enable
 efficient resource lookups. By default, nodes have the
 `com.docker.ucp.collection.root`, `com.docker.ucp.collection.shared`, and
-`com.docker.ucp.collection.swarm` labels set to `true`. The Docker EE UI
+`com.docker.ucp.collection.swarm` labels set to `true`. UCP
 automatically controls these labels, and you don't need to manage them.
 
 Collections get generic default names, but you can give them meaningful names,
@@ -290,7 +301,7 @@ one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
-permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes-between-teams.md).
+permission, to the team. [Isolate swarm nodes to a specific team](howto-isolate-notes.md).
 
 {% endif %}
 {% endif %}
