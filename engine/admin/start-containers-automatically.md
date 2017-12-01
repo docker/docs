@@ -74,9 +74,9 @@ process manager for more details.
 ### Using a process manager inside containers
 
 Process managers can also run within the container to check whether a process is
-running and starts/restart it if not. These are not Docker-aware and just monitor
-operating system processes within the container.
+running and starts/restart it if not. 
 
-Docker does not recommend this approach, because it is platform-dependent
-and even differs within different versions of a given Linux distribution.
+> **Warning**: These are not Docker-aware and just monitor operating system processes within the container.
+>
+> Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
 
