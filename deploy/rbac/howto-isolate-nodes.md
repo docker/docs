@@ -12,7 +12,9 @@ ui_tabs:
 ---
 
 {% if include.ui %}
+
 {% if include.version=="ucp-3.0" %}
+
 With Docker EE Advanced, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
 different users. To control access to nodes, move them to dedicated collections

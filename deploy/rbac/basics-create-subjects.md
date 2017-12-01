@@ -10,20 +10,21 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/usermgmt-sync-with-ldap/
+- path: /deploy/rbac/basics-sync-with-ldap/
   title: Synchronize teams with LDAP
 - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/
   title: Integrate with an LDAP Directory
-- path: /deploy/rbac/usermgmt-define-roles/
-  title: Create roles to authorize access
-- path: /deploy/rbac/usermgmt-grant-permissions/
+- path: /deploy/rbac/basics-define-roles/
+  title: Define roles with authorized API operations
+- path: /deploy/rbac/basics-group-resources/
+  title: Group and isolate cluster resources
+- path: /deploy/rbac/basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 
 {% if include.ui %}
 
-Users, teams, and organizations are referred to as subjects in Docker Enterprise
-Edition.
+Users, teams, and organizations are referred to as subjects in Docker EE.
 
 Individual users can belong to one or more teams but each team can only be in
 one organization. At the fictional startup, Acme Company, all teams in the
@@ -45,16 +46,16 @@ acme-datacenter
 All users are authenticated on the backend. Docker EE provides built-in
 authentication and also integrates with LDAP directory services.
 
-To use Docker EE's built-in authentication, you must [create users manually](#Create-users-manually).
+To use Docker EE's built-in authentication, you must [create users manually](#create-users-manually).
 
 > To enable LDAP and authenticate and synchronize UCP users and teams with your
 > organization's LDAP directory, see:
-> - [Synchronize users and teams with LDAP in the UI](usermgmt-sync-with-ldap.md)
+> - [Synchronize users and teams with LDAP in the UI](basics-sync-with-ldap.md)
 > - [Integrate with an LDAP Directory](/datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
 
 ## Build an organization architecture
 
-The general flow of designing an organization with teams in the Docker EE UI is:
+The general flow of designing an organization with teams in UCP is:
 
 1. Create an organization.
 2. Add users or enable LDAP.
@@ -63,7 +64,7 @@ The general flow of designing an organization with teams in the Docker EE UI is:
 
 ### Create an organization with teams
 
-To create an organzation in the Docker EE UI:
+To create an organzation in UCP:
 
 1. Click **Organization & Teams** under **User Management**.
 2. Click **Create Organization**.
@@ -80,7 +81,7 @@ To create teams in the organization:
    - Click the team name and select **Actions** > **Add Users**.
    - Check the users to include and click **Add Users**.
 
-> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./usermgmt-sync-with-ldap).
+> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./basics-sync-with-ldap).
 
 
 {% if include.version=="ucp-3.0" %}
@@ -88,10 +89,10 @@ To create teams in the organization:
 ### Create users manually
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](./usermgmt-grant-permissions/). You can optionally grant them Docker EE
+cluster. To extend a user's default permissions, add them to a team and [create grants](./basics-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
-To manally create users in the Docker EE UI:
+To manally create users in UCP:
 
 1. Click **Users** under **User Management**.
 2. Click **Create User**.
@@ -111,10 +112,10 @@ To manally create users in the Docker EE UI:
 ### Create users manuallly
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/usermgmt-grant-permissions/). You can optionally grant them Docker EE
+cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/basics-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
-To manally create users in the Docker EE UI:
+To manally create users in UCP:
 
 1. Navigate to the **Users** page.
 2. Click **Create User**.

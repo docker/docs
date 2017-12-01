@@ -63,7 +63,7 @@ A common workflow for creating grants has four steps:
 You can create grants after creating users, collections, and roles (if using
 custom roles).
 
-To create a grant in the Docker EE UI:
+To create a grant in UCP:
 
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.
@@ -106,7 +106,7 @@ A common workflow for creating grants has four steps:
 
 You can create grants after creating users, collections, and roles (if using custom roles).
 
-To create a grant in the Docker EE UI:
+To create a grant in UCP:
 
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.

@@ -15,9 +15,9 @@ ui_tabs:
 
 ## User passwords
 
-Docker EE administrators can reset user passwords managed in the Docker EE UI:
+Docker EE administrators can reset user passwords managed in UCP:
 
-1. Log in with administrator credentials to the Docker EE UI.
+1. Log in to UCP with administrator credentials.
 2. Click **Users** under **User Management**.
 3. Select the user whose password you want to change.
 4. Select **Configure > Security**.

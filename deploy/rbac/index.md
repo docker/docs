@@ -10,27 +10,25 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/usermgmt-create-subjects/
+- path: /deploy/rbac/basics-create-subjects/
   title: Create and configure users and teams
-- path: /deploy/rbac/usermgmt-define-roles/
+- path: /deploy/rbac/basics-define-roles/
   title: Define roles with authorized API operations
-- path: /deploy/rbac/resources-group-resources/
+- path: /deploy/rbac/basics-group-resources/
   title: Group and isolate cluster resources
-- path: /deploy/rbac/usermgmt-grant-permissions/
+- path: /deploy/rbac/basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 
 {% if include.ui %}
 
-The Docker Enterprise Edition UI, or the Docker Univeral Control Plane (UCP),
+Docker Univeral Control Plane (UCP), the UI for [Docker EE](https://www.docker.com/enterprise-edition),
 lets you authorize users to view, edit, and use cluster resources by granting
-role-based permissions. Resources can be grouped and isolated inline with an
-organization's needs and users can be granted more than one role.
-
+role-based permissions against resource types.
 
 {% if include.version=="ucp-3.0" %}
 
-To authorize access to cluster resources across your organization, Docker EE
+To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
 
 - Add and configure **subjects** (users and teams).
@@ -39,7 +37,7 @@ administrators might take the following high-level steps:
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
 - Create **grants** by marrying subject + role + resource.
 
-For a simple example, see [Deploy a multi-tier application with RBAC](./howto-wordpress-multitier).
+For a simple example, see _todo_
 
 ## Subjects
 
@@ -53,9 +51,7 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see:
-- [Create and configure users and teams](./usermgmt-create-subjects.md)
-- [Synchronize users and teams with LDAP](./usermgmt-sync-with-ldap.md)
+For more, see: [Create and configure users and teams](./basics-create-subjects.md)
 
 ## Roles
 
@@ -71,16 +67,18 @@ Most organizations use multiple roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](./usermgmt-define-roles.md)
+For more, see: [Define roles with authorized API operations](./basics-define-roles.md)
 
 ## Resources
 
 Cluster resources are grouped into Swarm collections or Kubernetes namespaces.
 
 A collection is a directory that holds Swarm resources. You can create
-collections in the Docker EE UI by defining a path and moving resources. Or you
-can create the path in the Docker EE UI and use *labels* in your YAML file to
-assign application resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](/deploy/rbac/howto-wordpress-multitier/).
+collections in UCP by both defining a directory path and moving resources into
+it. Or you can create the path in UCP and use *labels* in your YAML file to
+assign application resources to that path.
+
+For an example, see _todo_
 
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.
@@ -89,12 +87,13 @@ A
 [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 is a logical area for a Kubernetes cluster. Kuberenetes comes with a "default"
 namespace for your cluster objects (plus two more for system and public
-resources).
+resources). You can create custom namespaces, but unlike Swarm collections,
+namespaces _cannot be nested_.
 
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
-For more, see: [Group and isolate cluster resources](./resources-group-resources.md).
+For more, see: [Group and isolate cluster resources](./basics-group-resources.md).
 
 ## Grants
 
@@ -110,19 +109,19 @@ Only an administrator can manage grants, subjects, roles, and resources.
 > into directories or namespaces, define roles by selecting allowable operations,
 > and apply grants to users and teams.
 
-For more, see: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
+For more, see: [Grant access to cluster resources](./basics-grant-permissions.md).
 
 
 {% elsif include.version=="ucp-2.2" %}
 
-To authorize access to cluster resources across your organization, Docker EE
+To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
 
-- Add and configure **subjects** (users and teams)
-- Define custom **roles** (or use defaults) by adding permissions to resource
-  types
-- Group cluster **resources** into Swarm collections
-- Create **grants** by marrying subject + role + resource
+- Add and configure **subjects** (users and teams).
+- Define custom **roles** (or use defaults) by adding permitted operations per
+  resource types.
+- Group cluster **resources** into Swarm collections.
+- Create **grants** by marrying subject + role + resource.
 
 ## Subjects
 
@@ -136,9 +135,7 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see:
-- [Create and configure users and teams](./usermgmt-create-subjects.md)
-- [Synchronize users and teams with LDAP](./usermgmt-sync-with-ldap.md)
+For more, see: [Create and configure users and teams](./basics-create-subjects.md)
 
 ## Roles
 
@@ -154,21 +151,23 @@ Most organizations use different roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](./usermgmt-define-roles.md)
+For more, see: [Define roles with authorized API operations](./basics-define-roles.md)
 
 ## Resources
 
 Cluster resources are grouped into Swarm collections.
 
 A collection is a directory that holds Swarm resources. You can create
-collections in the Docker EE UI by defining a path and moving resources. Or you
-can create the path in the Docker EE UI and use *labels* in your YAML file to
-assign application resources to that path. For an example, see [Deploy a multi-tier service with multiple roles](./deploy/rbac/howto-wordpress-multitier/).
+collections in UCP by both defining a directory path and moving resources into
+it. Or you can create the path in UCP and use *labels* in your YAML file to
+assign application resources to that path.
+
+For an example, see _todo_
 
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.
 
-For more, see: [Group and isolate cluster resources](./resources-group-resources.md).
+For more, see: [Group and isolate cluster resources](./basics-group-resources.md).
 
 ## Grants
 
@@ -184,21 +183,15 @@ Only an administrator can manage grants, subjects, roles, and resources.
 > into directories or namespaces, define roles by selecting allowable operations,
 > and apply grants to users and teams.
 
-For more, see: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
+For more, see: [Grant access to cluster resources](./basics-grant-permissions.md).
 
 ## Transition from UCP 2.1 access control
 
-- Your existing access labels and permissions are migrated automatically during
-  an upgrade from UCP 2.1.x.
-- Unlabeled "user-owned" resources are migrated into each user's private
-  collection, in `/Shared/Private/<username>`.
+- Access labels & permissions are migrated automatically when upgrading from UCP 2.1.x.
+- Unlabeled user-owned resources are migrated into `/Shared/Private/<username>`.
 - Old access control labels are migrated into `/Shared/Legacy/<labelname>`.
 - When deploying a resource, choose a collection instead of an access label.
 - Use grants for access control, instead of unlabeled permissions.
-
-For hands-on tutorials, see:
-- [Deploy a simple Wordpress service with RBAC](./howto-wordpress-view-only.md)
-- [Deploy a multi-tier application with RBAC](./howto-wordpress-multitier.md)
 
 {% endif %}
 {% endif %}

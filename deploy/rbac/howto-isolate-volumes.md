@@ -1,5 +1,5 @@
 ---
-title: Isolate volumes between two different teams
+title: Isolate volumes to a specific team
 description: Create grants that limit access to volumes to specific teams.
 keywords: ucp, grant, role, permission, authentication
 redirect_from:
@@ -106,7 +106,7 @@ created by the Dev and Prod users.
 
 ## Where to go next
 
-- [Isolate swarm nodes to a specific team](isolate-nodes-between-teams.md)
+- [Isolate swarm nodes to a specific team](howto-isolate-nodes.md)
 
 {% endif %}
 {% endif %}

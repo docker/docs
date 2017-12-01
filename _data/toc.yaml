@@ -315,36 +315,34 @@ guides:
   section:
   - path: /deploy/rbac/
     title: Access control model overview
-  - sectiontitle: User Management
+  - sectiontitle: The basics
     section:
-    - path: /deploy/rbac/usermgmt-create-subjects/
+    - path: /deploy/rbac/basics-create-subjects/
       title: Create and users and teams
-    - path: /deploy/rbac/usermgmt-sync-with-ldap/
-      title: Synchronize teams with LDAP
-    - path: /deploy/rbac/usermgmt-define-roles/
+    - path: /deploy/rbac/basics-define-roles/
       title: Define roles with permissions
-    - path: /deploy/rbac/usermgmt-grant-permissions/
+    - path: /deploy/rbac/basics-group-resources/
+      title: Group cluster resources
+    - path: /deploy/rbac/basics-grant-permissions/
       title: Grant access to resources
-    - path: /deploy/rbac/usermgmt-recover-password/
-      title: Reset user passwords
-  - sectiontitle: Shared Resources
+  - sectiontitle: Tutorials and use cases
     section:
-    - path: /deploy/rbac/resources-group-resources/
-      title: Group resources as collections or namespaces
-    - path: /deploy/rbac/resources-isolate-nodes/
-      title: Isolate nodes
-    - path: /deploy/rbac/resources-isolate-volumes/
+    - path: /deploy/rbac/howto-deploy-stateless-app/
+      title: Deploy stateless app with RBAC
+    - path: /deploy/rbac/basics-isolate-volumes/
       title: Isolate volumes
-  - sectiontitle: RBAC Tutorials
-    section:
-    - path: /deploy/rbac/howto-wordpress-multitier/
-      title: Wordpress and MySQL tutorial
-    - path: /deploy/rbac/howto-wordpress-view-only/
-      title: Deploy service with view-only access
+    - path: /deploy/rbac/basics-isolate-nodes/
+      title: Isolate nodes
     - path: /deploy/rbac/howto-orcabank1-standard/
       title: Orcabank example with Docker EE Standard
     - path: /deploy/rbac/howto-orcabank2-advanced/
       title: Orcabank example with Docker EE Advanced
+  - sectiontitle: User admin
+    section:
+    - path: /deploy/rbac/admin-sync-with-ldap/
+      title: Synchronize teams with LDAP
+    - path: /deploy/rbac/admin-recover-password/
+      title: Reset user passwords
 
 - sectiontitle: Deploy your app in production
   section:
