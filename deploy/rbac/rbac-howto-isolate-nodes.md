@@ -1,5 +1,5 @@
 ---
-title: Isolate swarm nodes to a specific team
+title: Isolate Swarm nodes in Docker Advanced
 description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication
 redirect_from:
@@ -9,6 +9,9 @@ ui_tabs:
   orhigher: true
 - version: ucp-2.2
   orlower: true
+next_steps:
+- path: /deploy/rbac/rbac-howto-isolate-volumes/
+  title: Isolate Volumes
 ---
 
 {% if include.ui %}
@@ -177,12 +180,6 @@ collection. In this case, the user sets the value of the service's access label,
 `com.docker.ucp.access.label`, to the new collection or one of its children
 that has a `Service Create` grant for the user.
 
-## Where to go next
-
-- [Node access control in Docker EE Advanced](access-control-node.md)
-- [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
-- [Deploy a service with view-only access across an organization](deploy-view-only-service.md)
-
 
 {% elsif include.version=="ucp-2.2" %}
 
@@ -347,12 +344,6 @@ collection. An administrator can create a grant for a role that has the
 collection. In this case, the user sets the value of the service's access label,
 `com.docker.ucp.access.label`, to the new collection or one of its children
 that has a `Service Create` grant for the user.
-
-## Where to go next
-
-- [Node access control in Docker EE Advanced](access-control-node.md)
-- [Isolate volumes between two different teams](isolate-volumes-between-teams.md)
-- [Deploy a service with view-only access across an organization](deploy-view-only-service.md)
 
 {% endif %}
 {% endif %}

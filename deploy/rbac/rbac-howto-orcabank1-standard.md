@@ -9,6 +9,9 @@ ui_tabs:
   orhigher: true
 - version: ucp-2.2
   orlower: true
+next_steps:
+- path: /deploy/rbac/rbac-howto-orcabank1-advanced/
+  title: Access control design with Docker EE Advanced
 ---
 
 {% if include.ui %}
@@ -256,10 +259,6 @@ The `mobile` team is responsible for deploying their own application stack,
 minus the database tier that is managed by the `db` team.
 
 ![image](../images/design-access-control-adv-4.png){: .with-border}
+
 {% endif %}
-
-## Where to go next
-
-- [Access control design with Docker EE Advanced](access-control-design-ee-advanced.md)
-
 {% endif %}

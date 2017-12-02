@@ -317,26 +317,26 @@ guides:
     title: Access control model overview
   - sectiontitle: The basics
     section:
-    - path: /deploy/rbac/basics-create-subjects/
+    - path: /deploy/rbac/rbac-basics-create-subjects/
       title: Create and users and teams
-    - path: /deploy/rbac/basics-define-roles/
+    - path: /deploy/rbac/rbac-basics-define-roles/
       title: Define roles with permissions
-    - path: /deploy/rbac/basics-group-resources/
+    - path: /deploy/rbac/rbac-basics-group-resources/
       title: Group cluster resources
-    - path: /deploy/rbac/basics-grant-permissions/
+    - path: /deploy/rbac/rbac-basics-grant-permissions/
       title: Grant access to resources
   - sectiontitle: Tutorials and use cases
     section:
-    - path: /deploy/rbac/howto-deploy-stateless-app/
+    - path: /deploy/rbac/rbac-howto-deploy-stateless-app/
       title: Deploy stateless app with RBAC
-    - path: /deploy/rbac/basics-isolate-volumes/
+    - path: /deploy/rbac/rbac-howto-isolate-volumes/
       title: Isolate volumes
-    - path: /deploy/rbac/basics-isolate-nodes/
+    - path: /deploy/rbac/rbac-howto-isolate-nodes/
       title: Isolate nodes
-    - path: /deploy/rbac/howto-orcabank1-standard/
-      title: Orcabank example with Docker EE Standard
-    - path: /deploy/rbac/howto-orcabank2-advanced/
-      title: Orcabank example with Docker EE Advanced
+    - path: /deploy/rbac/rbac-howto-orcabank1-standard/
+      title: Docker EE Standard Use Case
+    - path: /deploy/rbac/rbac-howto-orcabank2-advanced/
+      title: Docker EE Advanced Use Case
   - sectiontitle: User admin
     section:
     - path: /deploy/rbac/admin-sync-with-ldap/

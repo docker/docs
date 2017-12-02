@@ -10,11 +10,11 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/basics-create-subjects/
+- path: /deploy/rbac/rbac-basics-create-subjects/
   title: Create and configure users and teams
-- path: /deploy/rbac/basics-define-roles/
-  title: Create roles to authorize access
-- path: /deploy/rbac/basics-grant-permissions/
+- path: /deploy/rbac/rbac-basics-define-roles/
+  title: Define roles with authorized API operations
+- path: /deploy/rbac/rbac-basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 
@@ -34,6 +34,9 @@ namespaces _cannot be nested_.
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
+Resources are placed into a namespace when creating a kubernetes object. A drop
+down displays with all available namespaces and one must be selected.
+
 ## Swarm collection
 
 A collection is a directory of grouped resources, such as services, containers,
@@ -42,19 +45,20 @@ grants against directory branches.
 
 ![](../images/collections-and-resources.svg){: .with-border}
 
-## Access label
+### Access label
 
 Access to a collection is granted with a path defined in an access label.
 
-For example, each user has a private collection (with default permisions) and
-the path is `/Shared/Private/<username>`. The private collection for user "hans"
-would have the following access label:
+For example, each user has a private collection with the path,
+`/Shared/Private/<username>`. The  private collection for user "hans" would have
+the access label: `com.docker.ucp.access.label = /Shared/Private/hans`.
 
-```
-com.docker.ucp.access.label = /Shared/Private/hans
-```
+To deploy applications into a custom collection, you must define the collection
+first. For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/#swarm-stack). When a user
+deploys a resource without an access label, Docker EE automatically places the
+resource in the user's default collection.
 
-## Nested collections
+### Nested collections
 
 You can nest collections. If a user has a grant against a collection, the grant
 applies to all of its child collections.
@@ -63,10 +67,7 @@ For a child collection, or for a user who belongs to more than one team, the
 system concatenates permissions from multiple roles into an "effective role" for
 the user, which specifies the operations that are allowed against the target.
 
-> **Note**: Permissions are concatenated from multiple roles into an "effective
-> role".
-
-## Built-in collections
+### Built-in collections
 
 Docker EE provides a number of built-in collections.
 
@@ -78,21 +79,20 @@ Docker EE provides a number of built-in collections.
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
-
 This diagram shows the `/System` and `/Shared` collections created by Docker EE.
-User private collections are children of the `/Shared/private` collection. The
-Docker EE  administrator user created a `/prod` collection and a child
+User private collections are children of the `/Shared/private` collection. Here,
+the Docker EE  administrator user created a `/prod` collection and a child
 collection, `/webserver`.
 
 ![](../images/collections-diagram.svg){: .with-border}
 
-## Default collections
+### Default collections
 
 Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
-resource in the CLI without an access label, Docker EE automatically places the
-resource in the user's default collection.
+resource without an access label, Docker EE automatically places the resource in
+the user's default collection.
 
 [Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
 
@@ -108,19 +108,17 @@ set.
 > system, such as an adminitrator, might find it better to set custom labels for
 > each resource.
 
-## Collections and labels
+### Collections and labels
 
 Resources are marked as being in a collection by using labels. Some resource
-types don't have editable labels, so you can't move resources like this across
-collections. You can't modify collections after resource creation for
-containers, networks, and volumes, but you can update labels for services,
-nodes, secrets, and configs.
+types don't have editable labels, so you can't move them across collections.
 
-For editable resources, like services, secrets, nodes, and configs, you can
-change the `com.docker.ucp.access.label` to move resources to different
-collections. With the CLI, you can use this label to deploy resources to a
-collection other than your default collection. Omitting this label on the CLI
-deploys a resource on the user's default resource collection.
+> Can edit labels: services, nodes, secrets, and configs
+> Cannot edit labels: containers, networks, and volumes
+
+For editable resources, you can change the `com.docker.ucp.access.label` to move
+resources to different collections. For example, you may need deploy resources
+to a collection other than your default collection.
 
 The system uses the additional labels, `com.docker.ucp.collection.*`, to enable
 efficient resource lookups. By default, nodes have the
@@ -136,7 +134,7 @@ stack's resources in multiple collections. Resources are placed in the user's
 default collection unless you specify an explicit `com.docker.ucp.access.label`
 within the stack/compose file.
 
-## Control access to nodes
+### Control access to nodes
 
 The Docker EE Advanced license enables access control on worker nodes. Admin
 users can move worker nodes from the default `/Shared` collection into other
@@ -165,7 +163,7 @@ one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
-permission, to the team. [Isolate swarm nodes to a specific team](howto-isolate-notes.md).
+permission, to the team. [Isolate swarm nodes to a specific team](./rbac-howto-isolate-nodes.md).
 
 
 {% elsif include.version=="ucp-2.2" %}
@@ -178,19 +176,20 @@ grants against directory branches.
 
 ![](../images/collections-and-resources.svg){: .with-border}
 
-## Access label
+### Access label
 
 Access to a collection is granted with a path defined in an access label.
 
-For example, each user has a private collection (with default permisions) and
-the path is `/Shared/Private/<username>`. The private collection for user "hans"
-would have the following access label:
+For example, each user has a private collection with the path,
+`/Shared/Private/<username>`. The  private collection for user "hans" would have
+the access label: `com.docker.ucp.access.label = /Shared/Private/hans`.
 
-```
-com.docker.ucp.access.label = /Shared/Private/hans
-```
+To deploy applications into a custom collection, you must define the collection
+first. For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/#swarm-stack). When a user
+deploys a resource without an access label, Docker EE automatically places the
+resource in the user's default collection.
 
-## Nested collections
+### Nested collections
 
 You can nest collections. If a user has a grant against a collection, the grant
 applies to all of its child collections.
@@ -199,10 +198,7 @@ For a child collection, or for a user who belongs to more than one team, the
 system concatenates permissions from multiple roles into an "effective role" for
 the user, which specifies the operations that are allowed against the target.
 
-> **Note**: Permissions are concatenated from multiple roles into an "effective
-> role".
-
-## Built-in collections
+### Built-in collections
 
 Docker EE provides a number of built-in collections.
 
@@ -214,21 +210,20 @@ Docker EE provides a number of built-in collections.
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
-
 This diagram shows the `/System` and `/Shared` collections created by Docker EE.
-User private collections are children of the `/Shared/private` collection. The
-Docker EE  administrator user created a `/prod` collection and a child
+User private collections are children of the `/Shared/private` collection. Here,
+the Docker EE  administrator user created a `/prod` collection and a child
 collection, `/webserver`.
 
 ![](../images/collections-diagram.svg){: .with-border}
 
-## Default collections
+### Default collections
 
 Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
-resource in the CLI without an access label, Docker EE automatically places the
-resource in the user's default collection.
+resource without an access label, Docker EE automatically places the resource in
+the user's default collection.
 
 [Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
 
@@ -244,19 +239,17 @@ set.
 > system, such as an adminitrator, might find it better to set custom labels for
 > each resource.
 
-## Collections and labels
+### Collections and labels
 
 Resources are marked as being in a collection by using labels. Some resource
-types don't have editable labels, so you can't move resources like this across
-collections. You can't modify collections after resource creation for
-containers, networks, and volumes, but you can update labels for services,
-nodes, secrets, and configs.
+types don't have editable labels, so you can't move them across collections.
 
-For editable resources, like services, secrets, nodes, and configs, you can
-change the `com.docker.ucp.access.label` to move resources to different
-collections. With the CLI, you can use this label to deploy resources to a
-collection other than your default collection. Omitting this label on the CLI
-deploys a resource on the user's default resource collection.
+> Can edit labels: services, nodes, secrets, and configs
+> Cannot edit labels: containers, networks, and volumes
+
+For editable resources, you can change the `com.docker.ucp.access.label` to move
+resources to different collections. For example, you may need deploy resources
+to a collection other than your default collection.
 
 The system uses the additional labels, `com.docker.ucp.collection.*`, to enable
 efficient resource lookups. By default, nodes have the
@@ -272,7 +265,7 @@ stack's resources in multiple collections. Resources are placed in the user's
 default collection unless you specify an explicit `com.docker.ucp.access.label`
 within the stack/compose file.
 
-## Control access to nodes
+### Control access to nodes
 
 The Docker EE Advanced license enables access control on worker nodes. Admin
 users can move worker nodes from the default `/Shared` collection into other
@@ -301,7 +294,7 @@ one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
-permission, to the team. [Isolate swarm nodes to a specific team](howto-isolate-notes.md).
+permission, to the team. [Isolate swarm nodes to a specific team](./rbac-howto-isolate-nodes.md).
 
 {% endif %}
 {% endif %}
