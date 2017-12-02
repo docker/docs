@@ -32,7 +32,7 @@ You can define custom roles or use the following built-in roles:
 
 | Built-in role        | Description |
 | ---------------------| ------------------------------------------------------------------------------- |
-| `None`               | Users have no access to Swarm resources. Maps to `No Access` role in UCP 2.1.x. |
+| `None`               | Users have no access to Swarm or Kubernetes resources. Maps to `No Access` role in UCP 2.1.x. |
 | `View Only`          | Users can view resources but can't create them. |
 | `Restricted Control` | Users can view and edit resources but can't run a service or container in a way that affects the node where it's running. Users _cannot_ mount a node directory, `exec` into containers, or run containers in privileged mode or with additional kernel capabilities. |
 | `Scheduler`          | Users can view nodes (worker and manager) and schedule (not view) workloads on these nodes. By default, all users are granted the `Scheduler` role against the `/Shared` collection. (To view workloads, users need permissions such as `Container View`). |
@@ -55,7 +55,7 @@ the same name to different collections or namespaces.
 5. Select the permitted operations per resource type.
 6. Click **Create**.
 
-![](../images/custom-role.png){: .with-border}
+![](../images/custom-role-30.png){: .with-border}
 
 > **Some important rules regarding roles**:
 > - Roles are always enabled.
