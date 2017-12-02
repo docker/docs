@@ -1,5 +1,5 @@
 ---
-title: Grant access to cluster resources
+title: Grant role-access to cluster resources
 description: Learn how to grant users and teams access to cluster resources with role-based access control.
 keywords: rbac, ucp, grant, role, permission, authentication, authorization
 redirect_from:

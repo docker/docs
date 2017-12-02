@@ -19,14 +19,13 @@ team with role-based access control (RBAC).
 
 ## Scenario
 
-You are the Docker EE admin at Acme Company and need to configure permissions to
-company resources. The best way to do this is to:
+You are the Docker EE system administrator at Acme Company and need to configure
+permissions to company resources. The best way to do this is to:
 
-- Build the organization with teams and users
-- Create collections or namespaces for storing resources.
-- Create grants that specify which team can do what operations on which
-  collection or namespace.
-- Give the `ops` team the all-clear to deploy nginx.
+- Build the organization with teams and users.
+- Define roles with allowable operations per resource types (can run containers, etc.).
+- Create collections or namespaces for storing actual resources.
+- Create grants that join team + role + resources.
 
 ## Build the organization
 
@@ -43,12 +42,7 @@ acme-datacenter
     └── Chad Chavez
 ```
 
-> Easy username / passwords:
-> - alex / alexalutin
-> - bett / bettbhatia
-> - chad / chadchavez
-
-See: [Create and configure users and teams](./usermgmt-create-subjects.md).
+See: [Create and configure users and teams](./rbac-basics-create-subjects.md).
 
 ## Kubernetes deployment
 
@@ -60,7 +54,7 @@ for the same exercise with Swarm.
 Create a namespace to logically store the nginx application:
 
 1. Click **Kubernetes** > **Namespaces**.
-2. Paste the following manifest in the terminal window:
+2. Paste the following manifest in the terminal window and click **Create**.
 
 ```
 apiVersion: v1
@@ -69,16 +63,26 @@ metadata:
   name: nginx-namespace
 ```
 
-2. Click **Create**.
+### Define roles
 
+You can use the built-in roles or define your own. For this exercise, create a
+simple role for the ops team:
 
-### Grant roles
+1. Click **Roles** under **User Management**.
+2. Click **Create Role**.
+3. On the **Details** tab, name the role `Kube Deploy`.
+4. On the **Operations** tab, check all **Kubernetes Deployment Operations**.
+5. Click **Create**.
+
+See: [Create and configure users and teams](./rbac-basics-define-roles.md).
+
+### Grant access
 
 Grant the ops team (and only the ops team) access to nginx-namespace with the
-built-in role, **Full Control**.
+custom role, **Kube Deploy**.
 
 ```
-acme-datacenter/ops + Full Control + nginx-namespace
+acme-datacenter/ops + Kube Deploy + nginx-namespace
 ```
 
 ### Deploy Nginx
@@ -90,7 +94,7 @@ You've configured Docker EE. The `ops` team can now deploy `nginx`.
 3. Paste the following manifest in the terminal window and click **Create**.
 
 ```
-apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+apiVersion: apps/v1beta2  # Use apps/v1beta1 for versions < 1.8.0
 kind: Deployment
 metadata:
   name: nginx-deployment
@@ -106,7 +110,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.7.9
+        image: nginx:latest
         ports:
         - containerPort: 80
 ```
@@ -114,7 +118,6 @@ spec:
 4. Log on to UCP as each user and ensure that:
 - `dba` (alex) cannot see `nginx-namespace`.
 - `dev` (bett) cannot see `nginx-namespace`.
-
 
 ## Swarm Stack
 
@@ -134,20 +137,33 @@ Create a collection for nginx resources, nested under the `/Shared` collection:
 
 > **Tip**: To drill into a collection, click **View Children**.
 
-See: [Group and isolate cluster resources](./resources-group-resources.md).
+See: [Group and isolate cluster resources](./rbac-basics-group-resources.md).
 
-### Grant roles
+### Define roles
+
+You can use the built-in roles or define your own. For this exercise, create a
+simple role for the ops team:
+
+1. Click **Roles** under **User Management**.
+2. Click **Create Role**.
+3. On the **Details** tab, name the role `Swarm Deploy`.
+4. On the **Operations** tab, check all **Service Operations**.
+5. Click **Create**.
+
+See: [Create and configure users and teams](./rbac-basics-define-roles.md).
+
+### Grant access
 
 Grant the ops team (and only the ops team) access to nginx-collection with the
-built-in role, **Full Control**.
+built-in role, **Swarm Deploy**.
 
 ```
-acme-datacenter/ops + Full Control + /Shared/nginx-collection
+acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
 ```
 
-See: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
+See: [Grant role-access to cluster resources](./rbac-basics-grant-permissions.md).
 
-### Deploy Wordpress and MySQL with Swarm
+### Deploy Nginx
 
 You've configured Docker EE. The `ops` team can now deploy an `nginx` Swarm
 service.
@@ -174,14 +190,13 @@ team with role-based access control (RBAC).
 
 ## Scenario
 
-You are the Docker EE admin at Acme Company and need to configure permissions to
-company resources. The best way to do this is to:
+You are the Docker EE system administrator at Acme Company and need to configure
+permissions to company resources. The best way to do this is to:
 
-- Build the organization with teams and users
-- Create collections for storing resources.
-- Create grants that specify which team can do what operations on which
-  collection.
-- Give the `ops` team the all-clear to deploy nginx.
+- Build the organization with teams and users.
+- Define roles with allowable operations per resource types (can run containers, etc.).
+- Create collections or namespaces for storing actual resources.
+- Create grants that join team + role + resources.
 
 ## Build the organization
 
@@ -198,17 +213,11 @@ acme-datacenter
     └── Chad Chavez
 ```
 
-> Easy username / passwords:
-> - alex / alexalutin
-> - bett / bettbhatia
-> - chad / chadchavez
-
-See: [Create and configure users and teams](./usermgmt-create-subjects.md).
+See: [Create and configure users and teams](./rbac-basics-create-subjects.md).
 
 ## Swarm Stack
 
-In this section, we deploy `nginx` as a Swarm service. See [Kubernetes Deployment](#kubernetes-deployment)
-for the same exercise with Swarm.
+In this section, we deploy `nginx` as a Swarm service. 
 
 ### Create collection paths
 
@@ -223,20 +232,33 @@ Create a collection for nginx resources, nested under the `/Shared` collection:
 
 > **Tip**: To drill into a collection, click **View Children**.
 
-See: [Group and isolate cluster resources](./resources-group-resources.md).
+See: [Group and isolate cluster resources](./rbac-basics-group-resources.md).
 
-### Grant roles
+### Define roles
+
+You can use the built-in roles or define your own. For this exercise, create a
+simple role for the ops team:
+
+1. Click **Roles** under **User Management**.
+2. Click **Create Role**.
+3. On the **Details** tab, name the role `Swarm Deploy`.
+4. On the **Operations** tab, check all **Service Operations**.
+5. Click **Create**.
+
+See: [Create and configure users and teams](./rbac-basics-define-roles.md).
+
+### Grant access
 
 Grant the ops team (and only the ops team) access to nginx-collection with the
-built-in role, **Full Control**.
+built-in role, **Swarm Deploy**.
 
 ```
-acme-datacenter/ops + Full Control + /Shared/nginx-collection
+acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
 ```
 
-See: [Grant access to cluster resources](./usermgmt-grant-permissions.md).
+See: [Grant role-access to cluster resources](./rbac-basics-grant-permissions.md).
 
-### Deploy Wordpress and MySQL with Swarm
+### Deploy Nginx
 
 You've configured Docker EE. The `ops` team can now deploy an `nginx` Swarm
 service.
@@ -254,6 +276,6 @@ service.
 7. Log on to UCP as each user and ensure that:
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
-
+   -
 {% endif %}
 {% endif %}
