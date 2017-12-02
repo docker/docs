@@ -36,9 +36,9 @@ administrators might take the following high-level steps:
 - Define custom **roles** (or use defaults) by adding permitted operations per
   resource types.
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
-- Create **grants** by marrying subject + role + resource.
+- Create **grants** by marrying subject + role + resource group.
 
-For a simple example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/).
+For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app).
 
 ## Subjects
 
@@ -61,8 +61,8 @@ operations against a *resource type* (such as an image, container, volume) that
 is assigned to a user or team with a grant.
 
 For example, the built-in role, **Restricted Control**, includes permission to
-view and schedule a node but not update. A custom **DBA** role might include
-permissions to create, attach, view, and remove volumes.
+view and schedule nodes but not to update nodes. A custom **DBA** role might
+include permissions to r-w-x volumes and secrets.
 
 Most organizations use multiple roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
@@ -125,7 +125,9 @@ administrators might take the following high-level steps:
 - Define custom **roles** (or use defaults) by adding permitted operations per
   resource types.
 - Group cluster **resources** into Swarm collections.
-- Create **grants** by marrying subject + role + resource.
+- Create **grants** by marrying subject + role + resource group.
+
+For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app).
 
 ## Subjects
 
@@ -148,8 +150,8 @@ operations against a *resource type* (such as an image, container, volume) that
 is assigned to a user or team with a grant.
 
 For example, the built-in role, **Restricted Control**, includes permission to
-view and schedule a node but not update. A custom **DBA** role might include
-permissions to create, attach, view, and remove volumes.
+view and schedule nodes but not to update nodes. A custom **DBA** role might
+include permissions to r-w-x volumes and secrets.
 
 Most organizations use different roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what

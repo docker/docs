@@ -34,14 +34,14 @@ namespaces _cannot be nested_.
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
-Resources are placed into a namespace when creating a kubernetes object. A drop
-down displays with all available namespaces and one must be selected.
+Resources are placed into a namespace when you create a kubernetes object. A
+drop down displays all available namespaces and one must be selected.
 
 ## Swarm collection
 
 A collection is a directory of grouped resources, such as services, containers,
 volumes, networks, and secrets. To authorize access, administrators create
-grants against directory branches.
+grants against these directory branches.
 
 ![](../images/collections-and-resources.svg){: .with-border}
 
@@ -50,13 +50,13 @@ grants against directory branches.
 Access to a collection is granted with a path defined in an access label.
 
 For example, each user has a private collection with the path,
-`/Shared/Private/<username>`. The  private collection for user "hans" would have
-the access label: `com.docker.ucp.access.label = /Shared/Private/hans`.
+`/Shared/Private/<username>`. The  private collection for user "molly" would have
+the access label: `com.docker.ucp.access.label = /Shared/Private/molly`.
 
 To deploy applications into a custom collection, you must define the collection
-first. For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/#swarm-stack). When a user
-deploys a resource without an access label, Docker EE automatically places the
-resource in the user's default collection.
+first. For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app).
+When a user deploys a resource without an access label, Docker EE automatically
+places the resource in the user's default collection.
 
 ### Nested collections
 
@@ -75,7 +75,7 @@ Docker EE provides a number of built-in collections.
 | ------------------ | --------------------------------------------------------------------------------------- |
 | `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here. |
 | `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable. |
-| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./howto-isolate-nodes/). |
+| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./rbac-howto-isolate-nodes/). |
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
@@ -92,9 +92,7 @@ Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
 resource without an access label, Docker EE automatically places the resource in
-the user's default collection.
-
-[Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
+the user's default collection. [Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
 
 With Docker Compose, the system applies default collection labels across all
 resources in the stack unless `com.docker.ucp.access.label` has been explicitly
@@ -153,12 +151,12 @@ default, all users have the `Scheduler` role against the `/Shared` collection.
 When deploying a resource that isn't global, like local volumes, bridge
 networks, containers, and services, the system identifies a set of "schedulable
 nodes" for the user. The system identifies the target collection of the
-resource, like `/Shared/Private/hans`, and it tries to find the parent that's
+resource, like `/Shared/Private/molly`, and it tries to find the parent that's
 closest to the root that the user has the `Node Schedule` permission on.
 
 For example, when a user with a default configuration runs `docker container run
 nginx`, the system interprets this to mean, "Create an NGINX container under the
-user's default collection, which is at `/Shared/Private/hans`, and deploy it on
+user's default collection, which is at `/Shared/Private/molly`, and deploy it on
 one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
@@ -181,8 +179,8 @@ grants against directory branches.
 Access to a collection is granted with a path defined in an access label.
 
 For example, each user has a private collection with the path,
-`/Shared/Private/<username>`. The  private collection for user "hans" would have
-the access label: `com.docker.ucp.access.label = /Shared/Private/hans`.
+`/Shared/Private/<username>`. The  private collection for user "molly" would have
+the access label: `com.docker.ucp.access.label = /Shared/Private/molly`.
 
 To deploy applications into a custom collection, you must define the collection
 first. For an example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/#swarm-stack). When a user
@@ -206,7 +204,7 @@ Docker EE provides a number of built-in collections.
 | ------------------ | --------------------------------------------------------------------------------------- |
 | `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here. |
 | `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable. |
-| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./howto-isolate-nodes/). |
+| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./rbac-howto-isolate-nodes/). |
 | `/Shared/Private/` | Path to a user's private collection. |
 | `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower). |
 
@@ -223,9 +221,7 @@ Each user has a default collection which can be changed in UCP preferences.
 
 Users can't deploy a resource without a collection. When a user deploys a
 resource without an access label, Docker EE automatically places the resource in
-the user's default collection.
-
-[Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
+the user's default collection. [Learn how to add labels to nodes](../../datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/).
 
 With Docker Compose, the system applies default collection labels across all
 resources in the stack unless `com.docker.ucp.access.label` has been explicitly
@@ -284,12 +280,12 @@ default, all users have the `Scheduler` role against the `/Shared` collection.
 When deploying a resource that isn't global, like local volumes, bridge
 networks, containers, and services, the system identifies a set of "schedulable
 nodes" for the user. The system identifies the target collection of the
-resource, like `/Shared/Private/hans`, and it tries to find the parent that's
+resource, like `/Shared/Private/molly`, and it tries to find the parent that's
 closest to the root that the user has the `Node Schedule` permission on.
 
 For example, when a user with a default configuration runs `docker container run
 nginx`, the system interprets this to mean, "Create an NGINX container under the
-user's default collection, which is at `/Shared/Private/hans`, and deploy it on
+user's default collection, which is at `/Shared/Private/molly`, and deploy it on
 one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new

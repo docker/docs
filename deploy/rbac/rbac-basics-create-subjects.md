@@ -56,7 +56,7 @@ To use Docker EE's built-in authentication, you must [create users manually](#cr
 The general flow of designing an organization with teams in UCP is:
 
 1. Create an organization.
-2. Add users or enable LDAP.
+2. Add users or enable LDAD (for syncing users).
 3. Create teams under the organization.
 4. Add users to teams manually or sync with LDAP.
 
@@ -75,7 +75,7 @@ To create teams in the organization:
 2. Click **Create Team**.
 3. Input a team name (and description).
 4. Click **Create**.
-5. Add existing users to the team. If they don't exist, see [Integrate with an LDAP Directory](../../datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
+5. Add existing users to the team. To sync LDAP users, see: [Integrate with an LDAP Directory](../../datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
    - Click the team name and select **Actions** > **Add Users**.
    - Check the users to include and click **Add Users**.
 

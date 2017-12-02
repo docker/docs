@@ -158,16 +158,52 @@ service.
 4. On the Details tab, enter:
    - Name: `nginx-service`
    - Image: nginx:latest
-4. On the Collections tab:
+5. On the Collections tab:
    - Click `/Shared` in the breadcrumbs.
    - Select `nginx-collection`.
-5. Click **Create**.
-6. Log on to UCP as each user and ensure that:
+6. Click **Create**.
+7. Log on to UCP as each user and ensure that:
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
 
 
 {% elsif include.version=="ucp-2.2" %}
+
+This tutorial explains how to deploy a nginx web server and limit access to one
+team with role-based access control (RBAC).
+
+## Scenario
+
+You are the Docker EE admin at Acme Company and need to configure permissions to
+company resources. The best way to do this is to:
+
+- Build the organization with teams and users
+- Create collections for storing resources.
+- Create grants that specify which team can do what operations on which
+  collection.
+- Give the `ops` team the all-clear to deploy nginx.
+
+## Build the organization
+
+Add the organization, `acme-datacenter`, and create three teams according to the
+following structure:
+
+```
+acme-datacenter
+├── dba
+│   └── Alex Alutin
+├── dev
+│   └── Bett Bhatia
+└── ops
+    └── Chad Chavez
+```
+
+> Easy username / passwords:
+> - alex / alexalutin
+> - bett / bettbhatia
+> - chad / chadchavez
+
+See: [Create and configure users and teams](./usermgmt-create-subjects.md).
 
 ## Swarm Stack
 
@@ -211,11 +247,11 @@ service.
 4. On the Details tab, enter:
    - Name: `nginx-service`
    - Image: nginx:latest
-4. On the Collections tab:
+5. On the Collections tab:
    - Click `/Shared` in the breadcrumbs.
    - Select `nginx-collection`.
-5. Click **Create**.
-6. Log on to UCP as each user and ensure that:
+6. Click **Create**.
+7. Log on to UCP as each user and ensure that:
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
 
