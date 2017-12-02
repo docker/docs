@@ -10,23 +10,24 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/basics-create-subjects/
+- path: /deploy/rbac/rbac-basics-create-subjects/
   title: Create and configure users and teams
-- path: /deploy/rbac/basics-define-roles/
+- path: /deploy/rbac/rbac-basics-define-roles/
   title: Define roles with authorized API operations
-- path: /deploy/rbac/basics-group-resources/
+- path: /deploy/rbac/rbac-basics-group-resources/
   title: Group and isolate cluster resources
-- path: /deploy/rbac/basics-grant-permissions/
+- path: /deploy/rbac/rbac-basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 
 {% if include.ui %}
 
-Docker Univeral Control Plane (UCP), the UI for [Docker EE](https://www.docker.com/enterprise-edition),
-lets you authorize users to view, edit, and use cluster resources by granting
-role-based permissions against resource types.
-
 {% if include.version=="ucp-3.0" %}
+
+[Docker Univeral Control Plane (UCP)](https://docs.docker.com/datacenter/ucp/3.0/guides/),
+the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
+authorize users to view, edit, and use cluster resources by granting role-based
+permissions against resource types.
 
 To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
@@ -37,7 +38,7 @@ administrators might take the following high-level steps:
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
 - Create **grants** by marrying subject + role + resource.
 
-For a simple example, see _todo_
+For a simple example, see [Deploy stateless app with RBAC](./deploy/rbac/rbac-howto-deploy-stateless-app/).
 
 ## Subjects
 
@@ -51,7 +52,7 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see: [Create and configure users and teams](./basics-create-subjects.md)
+For more, see: [Create and configure users and teams](./rbac-basics-create-subjects.md)
 
 ## Roles
 
@@ -67,7 +68,7 @@ Most organizations use multiple roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](./basics-define-roles.md)
+For more, see: [Define roles with authorized API operations](./rbac-basics-define-roles.md)
 
 ## Resources
 
@@ -77,8 +78,6 @@ A collection is a directory that holds Swarm resources. You can create
 collections in UCP by both defining a directory path and moving resources into
 it. Or you can create the path in UCP and use *labels* in your YAML file to
 assign application resources to that path.
-
-For an example, see _todo_
 
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.
@@ -93,7 +92,7 @@ namespaces _cannot be nested_.
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
-For more, see: [Group and isolate cluster resources](./basics-group-resources.md).
+For more, see: [Group and isolate cluster resources](./rbac-basics-group-resources.md).
 
 ## Grants
 
@@ -109,10 +108,15 @@ Only an administrator can manage grants, subjects, roles, and resources.
 > into directories or namespaces, define roles by selecting allowable operations,
 > and apply grants to users and teams.
 
-For more, see: [Grant access to cluster resources](./basics-grant-permissions.md).
+For more, see: [Grant access to cluster resources](./rbac-basics-grant-permissions.md).
 
 
 {% elsif include.version=="ucp-2.2" %}
+
+[Docker Univeral Control Plane (UCP)](https://docs.docker.com/datacenter/ucp/2.2/guides/),
+the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
+authorize users to view, edit, and use cluster resources by granting role-based
+permissions against resource types.
 
 To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
@@ -135,7 +139,7 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see: [Create and configure users and teams](./basics-create-subjects.md)
+For more, see: [Create and configure users and teams](./rbac-basics-create-subjects.md)
 
 ## Roles
 
@@ -151,7 +155,7 @@ Most organizations use different roles to fine-tune the approprate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](./basics-define-roles.md)
+For more, see: [Define roles with authorized API operations](./rbac-basics-define-roles.md)
 
 ## Resources
 
@@ -162,12 +166,10 @@ collections in UCP by both defining a directory path and moving resources into
 it. Or you can create the path in UCP and use *labels* in your YAML file to
 assign application resources to that path.
 
-For an example, see _todo_
-
 > Resource types that can be placed into a Swarm collection include: Containers,
 > Networks, Nodes, Services, Secrets, and Volumes.
 
-For more, see: [Group and isolate cluster resources](./basics-group-resources.md).
+For more, see: [Group and isolate cluster resources](./rbac-basics-group-resources.md).
 
 ## Grants
 
@@ -183,7 +185,7 @@ Only an administrator can manage grants, subjects, roles, and resources.
 > into directories or namespaces, define roles by selecting allowable operations,
 > and apply grants to users and teams.
 
-For more, see: [Grant access to cluster resources](./basics-grant-permissions.md).
+For more, see: [Grant access to cluster resources](./rbac-basics-grant-permissions.md).
 
 ## Transition from UCP 2.1 access control
 

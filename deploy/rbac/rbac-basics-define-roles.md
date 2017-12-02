@@ -10,9 +10,11 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/basics-create-subjects/
+- path: /deploy/rbac/rbac-basics-create-subjects/
   title: Create and configure users and teams
-- path: /deploy/rbac/basics-grant-permissions/
+- path: /deploy/rbac/rbac-basics-group-resources/
+  title: Group and isolate cluster resources
+- path: /deploy/rbac/rbac-basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 

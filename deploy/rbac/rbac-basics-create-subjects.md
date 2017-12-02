@@ -10,15 +10,13 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: /deploy/rbac/basics-sync-with-ldap/
+- path: /deploy/rbac/admin-sync-with-ldap/
   title: Synchronize teams with LDAP
-- path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/
-  title: Integrate with an LDAP Directory
-- path: /deploy/rbac/basics-define-roles/
+- path: /deploy/rbac/rbac-basics-define-roles/
   title: Define roles with authorized API operations
-- path: /deploy/rbac/basics-group-resources/
+- path: /deploy/rbac/rbac-basics-group-resources/
   title: Group and isolate cluster resources
-- path: /deploy/rbac/basics-grant-permissions/
+- path: /deploy/rbac/rbac-basics-grant-permissions/
   title: Grant access to cluster resources
 ---
 
@@ -50,7 +48,7 @@ To use Docker EE's built-in authentication, you must [create users manually](#cr
 
 > To enable LDAP and authenticate and synchronize UCP users and teams with your
 > organization's LDAP directory, see:
-> - [Synchronize users and teams with LDAP in the UI](basics-sync-with-ldap.md)
+> - [Synchronize users and teams with LDAP in the UI](admin-sync-with-ldap.md)
 > - [Integrate with an LDAP Directory](/datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
 
 ## Build an organization architecture
@@ -81,7 +79,7 @@ To create teams in the organization:
    - Click the team name and select **Actions** > **Add Users**.
    - Check the users to include and click **Add Users**.
 
-> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./basics-sync-with-ldap).
+> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](./admin-sync-with-ldap).
 
 
 {% if include.version=="ucp-3.0" %}
@@ -89,7 +87,7 @@ To create teams in the organization:
 ### Create users manually
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](./basics-grant-permissions/). You can optionally grant them Docker EE
+cluster. To extend a user's default permissions, add them to a team and [create grants](./rbac-basics-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
 To manally create users in UCP:
@@ -112,7 +110,7 @@ To manally create users in UCP:
 ### Create users manuallly
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/basics-grant-permissions/). You can optionally grant them Docker EE
+cluster. To extend a user's default permissions, add them to a team and [create grants](/deploy/rbac/rbac-basics-grant-permissions/). You can optionally grant them Docker EE
 administrator permissions.
 
 To manally create users in UCP:

@@ -9,6 +9,9 @@ ui_tabs:
   orhigher: true
 - version: ucp-2.2
   orlower: true
+next_steps:
+- path: /deploy/rbac/rbac-howto-orcabank1-standard/
+  title: Access control design with Docker EE Standard
 ---
 
 {% if include.ui %}
@@ -36,7 +39,9 @@ scheduling and access of applications with [Node Access Control](access-control-
 > can be placed in different collections so that resources can be scheduled and
 > isolated on disparate physical or virtual hardware resources.
 
+
 {% if include.version=="ucp-3.0" %}
+
 ## Team access requirements
 
 OrcaBank still has three application teams, `payments`, `mobile`, and `db` with
