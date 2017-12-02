@@ -15,7 +15,7 @@ next_steps:
 - path: /deploy/rbac/rbac-basics-group-resources/
   title: Group and isolate cluster resources
 - path: /deploy/rbac/rbac-basics-grant-permissions/
-  title: Grant access to cluster resources
+  title: Grant role-access to cluster resources
 ---
 
 {% if include.ui %}

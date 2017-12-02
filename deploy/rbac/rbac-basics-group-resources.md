@@ -15,7 +15,7 @@ next_steps:
 - path: /deploy/rbac/rbac-basics-define-roles/
   title: Define roles with authorized API operations
 - path: /deploy/rbac/rbac-basics-grant-permissions/
-  title: Grant access to cluster resources
+  title: Grant role-access to cluster resources
 ---
 
 {% if include.ui %}

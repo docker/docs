@@ -324,7 +324,7 @@ guides:
     - path: /deploy/rbac/rbac-basics-group-resources/
       title: Group cluster resources
     - path: /deploy/rbac/rbac-basics-grant-permissions/
-      title: Grant access to resources
+      title: Grant role-access to resources
   - sectiontitle: Tutorials and use cases
     section:
     - path: /deploy/rbac/rbac-howto-deploy-stateless-app/
