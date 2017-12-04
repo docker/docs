@@ -52,7 +52,7 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
+# Build runtime image as the dotnet-sdk is no longer needed, this would make deplyments smaller
 FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY --from=build-env /app/out .
