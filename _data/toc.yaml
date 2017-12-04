@@ -1732,6 +1732,62 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/3.0/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - sectiontitle: Interlock
+      section:
+      - title: Interlock overview
+        path: /datacenter/ucp/3.0/guides/interlock/
+      - sectiontitle: Introduction
+        section:
+        - title: What is Interlock
+          path: /datacenter/ucp/3.0/guides/interlock/intro/
+        - title: Architecture
+          path: /datacenter/ucp/3.0/guides/interlock/intro/architecture/
+      - sectiontitle: Deployment
+        section:
+        - title: Get started
+          path: /datacenter/ucp/3.0/guides/interlock/install/
+        - title: Production
+          path: /datacenter/ucp/3.0/guides/interlock/install/production/
+        - title: Offline install
+          path: /datacenter/ucp/3.0/guides/interlock/install/offline/
+      - sectiontitle: Configuration
+        section:
+        - title: Interlock
+          path: /datacenter/ucp/3.0/guides/interlock/configuration/
+        - title: Service labels
+          path: /datacenter/ucp/3.0/guides/interlock/configuration/service-labels/
+      - sectiontitle: Extensions
+        section:
+        - title: Nginx
+          path: /datacenter/ucp/3.0/guides/interlock/extensions/nginx/
+        - title: HAProxy
+          path: /datacenter/ucp/3.0/guides/interlock/extensions/haproxy/
+      - sectiontitle: Deploy apps with Interlock
+        section:
+        - title: Basic deployment
+          path: /datacenter/ucp/3.0/guides/interlock/usage/
+        - title: Applications with SSL
+          path: /datacenter/ucp/3.0/guides/interlock/usage/ssl/
+        - title: Application redirects
+          path: /datacenter/ucp/3.0/guides/interlock/usage/redirects/
+        - title: Persistent (sticky) sessions
+          path: /datacenter/ucp/3.0/guides/interlock/usage/sessions/
+        - title: Websockets
+          path: /datacenter/ucp/3.0/guides/interlock/usage/websockets/
+        - title: Canary application instances
+          path: /datacenter/ucp/3.0/guides/interlock/usage/canary/
+        - title: Service clusters
+          path: /datacenter/ucp/3.0/guides/interlock/usage/service-clusters/
+        - title: Context/Path based routing
+          path: /datacenter/ucp/3.0/guides/interlock/usage/context/
+        - title: Host mode networking
+          path: /datacenter/ucp/3.0/guides/interlock/usage/host-mode-networking/
+      - sectiontitle: Operations
+        section:
+        - title: Updates
+          path: /datacenter/ucp/3.0/guides/interlock/ops/
+        - title: Tuning
+          path: /datacenter/ucp/3.0/guides/interlock/ops/tuning/
     - path: /datacenter/ucp/3.0/reference/api/
       title: API reference
     - path: /datacenter/ucp/3.0/guides/release-notes/
