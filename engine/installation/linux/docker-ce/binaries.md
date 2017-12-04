@@ -16,9 +16,7 @@ system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
-`dockerd`) and Windows Server 2016 or Windows 10 (as `dockerd.exe`). Static
-binaries for the Docker client are available for Linux and macOS (as `docker`),
-and Windows Server 2016 or Windows 10 (as `docker.exe`).
+`dockerd`). Static binaries for the Docker client are available for Linux and macOS (as `docker`).
 
 ## Install daemon and client binaries on Linux
 
@@ -149,37 +147,6 @@ The macOS binary includes the Docker client only. It does not include the
 
     ```bash
     $ sudo docker -H <hostname> run hello-world
-    ```
-
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
-
-
-## Install server and client binaries on Windows
-
-You can install Docker from binaries on Windows Server 2016 or Windows 10. Both
-the `dockerd.exe` and `docker.exe` binaries are included.
-
-1.  Use the following PowerShell commands to install and start Docker:
-
-    ```none
-    PS C:\> Invoke-WebRequest https://download.docker.com/win/static/stable/x86_64/docker-{{ site.docker_ce_stable_version }}.0-ce.zip -UseBasicParsing -OutFile docker.zip
-
-    PS C:\> Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
-
-    PS C:\> Remove-Item -Force docker.zip
-
-    PS C:\> dockerd --register-service
-
-    PS C:\> Start-Service docker
-    ```
-
-2.  Verify that Docker is installed correctly by running the `hello-world`
-    image.
-
-
-    ```none
-    PS C:\> docker run hello-world:nanoserver
     ```
 
     This command downloads a test image and runs it in a container. When the
