@@ -205,14 +205,6 @@ Feel free to link to `../foo.md` so that the docs are readable in GitHub, but ke
 `{% such as this %}` will render in raw text and not be processed. In general it's best to assume the docs are being read
 directly on [https://docs.docker.com/](https://docs.docker.com/).
 
-## Style guide
-
-If you have questions about how to write for Docker's documentation, please see
-the [style guide](https://docs.docker.com/opensource/doc-style/). The style guide provides
-guidance about grammar, syntax, formatting, styling, language, or tone. If
-something isn't clear in the guide, please submit an issue to let us know or
-submit a pull request to help us improve it.
-
 ### Testing changes and practical guidance
 
 If you want to test a style change, or if you want to see how to achieve a
