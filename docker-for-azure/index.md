@@ -74,7 +74,7 @@ is required to set up Docker for Azure. The Service Principal is used to invoke 
 and down or deploy apps on your swarm that require configuration of the Azure Load Balancer. Docker provides a
 containerized helper script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
-1.  Download the latest version of `docker4x/create-sp-azure` to your local environment:
+1.  On a Linux machie, download the latest version of `docker4x/create-sp-azure` to your local environment:
 
    ```bash
    docker pull docker4x/create-sp-azure:latest

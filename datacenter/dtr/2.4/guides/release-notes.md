@@ -26,6 +26,7 @@ a cron from the UI.
 * Fixed a potential issue with the way we untar files in uploads of the
 vulnerability database.
 * Fixed scanning issue with some windows images.
+* Fixed a bug with not backing up repository team permissions correctly.
 
 **General improvements**
 

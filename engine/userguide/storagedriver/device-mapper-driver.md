@@ -623,6 +623,16 @@ block device and other parameters to suit your situation.
     <output truncated>
     ```
 
+### Activate the `devicemapper` after reboot
+
+If you reboot the host and find that the docker service failed to start,
+you'll see the error, "Non existing device". You need to re-activate the
+logical volumes with this command:
+
+```bash
+sudo lvchange -ay docker/thinpool
+```
+
 ## How the `devicemapper` storage driver works
 
 > **Warning**: Do not directly manipulate any files or directories within

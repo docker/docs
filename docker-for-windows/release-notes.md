@@ -434,6 +434,11 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
+
 ### Docker Community Edition 17.11.0-ce-rc4-win39 2017-11-17 (Edge)
 
 * Upgrades

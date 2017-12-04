@@ -40,8 +40,6 @@ Note:
 | Option                        | Environment Variable      | Description                                                                          |
 |:------------------------------|:--------------------------|:-------------------------------------------------------------------------------------|
 | `--debug` | $DEBUG | Enable debug mode for additional logs. |
-| `--enzi-ca` | $ENZI_TLS_CA | Use a PEM-encoded TLS CA certificate for Enzi. |
-| `--enzi-insecure-tls` | $ENZI_TLS_INSECURE | Disable TLS verification for Enzi. |
 | `--existing-replica-id` | $DTR_REPLICA_ID | The ID of an existing DTR replica.To add, remove or modify DTR, you must connect to an existing  healthy replica's database.. |
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use --ucp-ca "$(cat ca.pem)". |

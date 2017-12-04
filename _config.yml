@@ -115,7 +115,7 @@ defaults:
       path: "engine"
     values:
       assignee: "mistyhacks"
-      win_latest_build: "docker-17.06.2-ee-5"
+      win_latest_build: "docker-17.06.2-ee-6"
   - scope:
       path: "kitematic"
     values:

@@ -17,6 +17,22 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
+## 17.06.2-ee-6 (2017-11-27)
+
+### Runtime
+
+* Create labels when volume exists only remotely [moby/moby#34896](https://github.com/moby/moby/pull/34896)
+* Fix leaking container/exec state [moby/moby#35484](https://github.com/moby/moby/pull/35484)
+* Protect health monitor channel to prevent panics [moby/moby#35482](https://github.com/moby/moby/pull/35482)
+* Mask `/proc/scsi` path from use in container [moby/moby#35399](https://github.com/moby/moby/pull/35399)
+* Fix memory exhaustion when a malformed image could cause the daemon to crash [moby/moby#35424](https://github.com/moby/moby/pull/35424)
+
+### Swarm mode
+
+* Fix deadlock on getting swarm info [moby/moby#35388](https://github.com/moby/moby/issues/35388)
+* Only shut down old tasks on success [docker/swarmkit#2308](https://github.com/docker/swarmkit/pull/2308)
+* Error on cluster spec name change [docker/swarmkit#2436](https://github.com/docker/swarmkit/pull/2436)
+
 ## 17.06.2-ee-5 (2017-11-02)
 
 ### Important notes about this release
