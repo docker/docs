@@ -9,23 +9,34 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Hardware and software requirements
 
-You can install UCP on-premises or on a cloud provider. To install UCP,
-all nodes must have:
+You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
+* A static IP address
+
+### Minimum requirements
+
 * 8GB of RAM for manager nodes or nodes running DTR
 * 4GB of RAM for worker nodes
 * 3GB of free disk space
-* A static IP address
+
+### Recommended production requirements
+
+ * 16GB of RAM for manager nodes or nodes running DTR
+ * 4 vCPUs for manager nodes or nodes running DTR
+ * 25-100GB of free disk space
+ 
+Note that Windows container images are typically larger than Linux ones and for that reason, you should consider provisioning more local storage for Windows nodes and for DTR setups that will store Windows container images.
 
 Also, make sure the nodes are running one of these operating systems:
 
-* A maintained version of CentOS 7. Archived versions aren't supported or tested.
+* A maintained version of CentOS 7. Archived versions aren't supported or tested
 * Red Hat Enterprise Linux 7.0, 7.1, 7.2, 7.3, or 7.4
 * Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
+* Windows Server 2016 or Windows Server 1709 (1709 will only support Docker EE Basic)
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
