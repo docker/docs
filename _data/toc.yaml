@@ -2872,7 +2872,7 @@ manuals:
   - path: /docker-for-mac/install/
     title: Install Docker for Mac
   - path: /docker-for-mac/kubernetes/
-    title: Deploy to Kubernetes
+    title: Deploy on Kubernetes
   - path: /docker-for-mac/docker-toolbox/
     title: Docker for Mac vs. Docker Toolbox
   - path: /docker-for-mac/multi-arch/

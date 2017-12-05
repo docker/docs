@@ -301,13 +301,12 @@ choose to discard or not apply changes when asked.
 for Mac 17.12.**
 
 If you are participating in the Docker beta program, you can access Docker for
-Mac 17.12 CE Edge, which includes a standalone Kubernetes server which runs on
-your Mac, so that you
-can test deploying your Docker workloads on Kubernetes. The Kubernetes client
-command, `kubectl` is also included, and is configured to connect to the local
-Kubernetes server. You can deploy using Kubernetes commands and YAML files
-or using Docker stack files and the `docker stack deploy` command or the Docker
-API..
+Mac 17.12 CE Edge, which includes a standalone Kubernetes server that runs on
+your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+The Kubernetes client command, `kubectl`, is included and is configured to
+connect to the local Kubernetes server. You can deploy your workloads with
+Kubernetes commands and YAML files or with Docker stack files and the `docker
+stack deploy` command or the Docker API.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
@@ -321,15 +320,15 @@ API..
 
   ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png)
 
-  When Kubernetes is enabled and running, an additional status bar item is
-  available at the bottom of the Docker for Mac Preferences dialog.
+  When Kubernetes is enabled and running, an additional status bar item displays
+  at the bottom of the Docker for Mac Preferences dialog.
 
   ![Kubernetes status](/docker-for-mac/images/kubernetes/kubernetes-status.png)
 
-- By default, the Kubernetes containers are hidden from commands like
-  `docker service ls`, because managing them manually is not supported. To make
-  them visible, select **Show system containers (advanced)** and click
-  **Apply and restart**. Most users will not select this option.
+- By default, Kubernetes containers are hidden from commands like `docker
+- service ls`, because managing them manually is not supported. To make them
+- visible, select **Show system containers (advanced)** and click **Apply and
+- restart**. Most users do not need this option.
 
 - To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
   The Kubernetes containers are stopped and removed, and the

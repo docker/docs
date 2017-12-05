@@ -6,12 +6,11 @@ title: Deploy to Kubernetes
 
 If you are participating in the [Docker Beta program](https://beta.docker.com/),
 you can access the beta for Docker for Mac 17.12 CE, which includes a standalone
-Kubernetes server and client, as well as Docker CLI integration.
-[You can enable this feature](/docker-for-mac/index.md#kubernetes) so that you
-can test deploying your workloads on Kubernetes. The Kubernetes server runs
-within a Docker container on your Mac, and is only for local testing. When
-Kubernetes support is enabled, you can deploy your workloads to Kubernetes,
-swarm mode, and standalone containers in parallel. Enabling or disabling the
+Kubernetes server and client, as well as Docker CLI integration. [You can enable this feature](/docker-for-mac/index.md#kubernetes) so that you can test
+deploying your workloads on Kubernetes. The Kubernetes server runs within a
+Docker container on your Mac, and is only for local testing. When Kubernetes
+support is enabled, you are able to deploy your workloads, in parallel, on
+Kubernetes, Swarm, and as standalone containers. Enabling or disabling the
 Kubernetes server does not affect your other workloads.
 
 The Kubernetes server runs locally within your Docker instance, is not
@@ -20,14 +19,14 @@ testing only.
 
 ## Use Docker commands
 
-You can deploy a stack to Kubernetes using the `docker stack deploy` command,
+You can deploy a stack on Kubernetes with the `docker stack deploy` command,
 supplying a `docker-compose.yml` file.
 
 ```bash
-$ docker stack deploy --compose-file /path/to/docker-compose.yml
+$ docker stack deploy --compose-file /path/to/docker-compose.yml mystack
 ```
 
-You can see the service deployed using the `kubectl get services` command.
+You can see the service deployed with the `kubectl get services` command.
 
 ### Specify a namespace
 
@@ -35,7 +34,7 @@ By default, the `default` namespace is used. You can specify a namespace using
 the `--namespace` flag.
 
 ```bash
-$ docker stack deploy --namespace my-app --compose-file /path/to/docker-compose.yml
+$ docker stack deploy --namespace my-app --compose-file /path/to/docker-compose.yml mystack
 ```
 
 You can then use the `kubectl get services -n my-app` to see only the services
@@ -43,19 +42,18 @@ deployed in the `my-app` namespace.
 
 ### Override the default orchestrator
 
-While you are testing Kubernetes, you may want to deploy some workloads in swarm
-mode. You can use the `DOCKER_ORCHESTRATOR` variable to override the default
-orchestrator for a given terminal session or a single Docker command. The
-variable can be unset (the default, in which case Kubernetes is the
-orchestrator) or set to `swarm` or `kubernetes`. The following command
-overrides the orchestrator for a single deployment, by setting the variable at
-the start of the command itself.
+While testing Kubernetes, you may want to deploy some workloads in Swarm mode.
+Use the `DOCKER_ORCHESTRATOR` variable to override the default orchestrator for
+a given terminal session or a single Docker command. The variable can be unset
+(the default, in which case Kubernetes is the orchestrator) or set to `swarm` or
+`kubernetes`. The following command overrides the orchestrator for a single
+deployment, by setting the variable at the start of the command itself.
 
 ```bash
 DOCKER_ORCHESTRATOR=swarm docker stack deploy --compose-file /path/to/docker-compose.yml
 ```
 
-> **Note**: Deploying the same app in Kubernetes and swarm mode may lead to
+> **Note**: Deploying the same app in Kubernetes and Swarm mode may lead to
 > conflicts with ports and service names.
 
 ## Use the kubectl command
@@ -76,8 +74,8 @@ docker-for-desktop   Ready     master    3h        v1.8.2
 
 ## Example app
 
-Docker has created the following demo app that you can deploy to swarm mode or to to
-Kubernetes using the `docker stack deploy` command.
+Docker has created the following demo app that you can deploy to swarm mode or
+to to Kubernetes using the `docker stack deploy` command.
 
 ```yaml
 version: '3.3'
