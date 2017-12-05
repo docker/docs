@@ -38,7 +38,7 @@ Docker Enterprise Edition is a software subscription that includes three product
 
 ## Hardware requirements
 
-Hardware requirements for DTR nodes are found at [UCP Hardware requirement](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/system-requirements/) 
+Hardware requirements for DTR nodes are found at [UCP Hardware requirement](/datacenter/ucp/2.2/guides/admin/install/system-requirements.md) 
 
 ## Where to go next
 
