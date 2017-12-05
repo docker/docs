@@ -109,7 +109,7 @@ access shared `db` networks and secrets.
 
 ## OrcaBank access architecture
 
-The resulting access architecture, desgined with Docker EE Advanced, provides
+The resulting access architecture, designed with Docker EE Advanced, provides
 physical segmentation between production and staging using node access control.
 
 Applications are scheduled only on UCP worker nodes in the dedicated application
