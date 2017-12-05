@@ -2,16 +2,7 @@
 title: Reset a user password
 description: Learn how to recover your Docker Datacenter credentials.
 keywords: ucp, authentication
-redirect_from:
-- /ucp/
-ui_tabs:
-- version: ucp-3.0
-  orhigher: true
-- version: ucp-2.2
-  orlower: true
 ---
-
-{% if include.ui %}
 
 ## User passwords
 
@@ -39,5 +30,3 @@ docker exec -it ucp-auth-api enzi \
   passwd -i
 {% endraw %}
 ```
-
-{% endif %}
