@@ -310,40 +310,6 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-
-- sectiontitle: Authorize role-based access
-  section:
-  - path: /deploy/rbac/
-    title: Access control model overview
-  - sectiontitle: The basics
-    section:
-    - path: /deploy/rbac/rbac-basics-create-subjects/
-      title: Create and users and teams
-    - path: /deploy/rbac/rbac-basics-define-roles/
-      title: Define roles with permissions
-    - path: /deploy/rbac/rbac-basics-group-resources/
-      title: Group cluster resources
-    - path: /deploy/rbac/rbac-basics-grant-permissions/
-      title: Grant role-access to resources
-  - sectiontitle: Tutorials and use cases
-    section:
-    - path: /deploy/rbac/rbac-howto-deploy-stateless-app/
-      title: Deploy stateless app with RBAC
-    - path: /deploy/rbac/rbac-howto-isolate-volumes/
-      title: Isolate volumes
-    - path: /deploy/rbac/rbac-howto-isolate-nodes/
-      title: Isolate nodes
-    - path: /deploy/rbac/rbac-howto-orcabank1-standard/
-      title: Docker EE Standard Use Case
-    - path: /deploy/rbac/rbac-howto-orcabank2-advanced/
-      title: Docker EE Advanced Use Case
-  - sectiontitle: User admin
-    section:
-    - path: /deploy/rbac/admin-sync-with-ldap/
-      title: Synchronize teams with LDAP
-    - path: /deploy/rbac/admin-recover-password/
-      title: Reset user passwords
-
 - sectiontitle: Deploy your app in production
   section:
     - path: /deploy/
@@ -1678,34 +1644,42 @@ manuals:
           title: uninstall-ucp
         - path: /datacenter/ucp/3.0/reference/cli/upgrade/
           title: upgrade
-    - sectiontitle: Access control
+
+
+    - sectiontitle: Authorize role-based access
       section:
-      - path: /datacenter/ucp/3.0/guides/access-control/
-        title: Access control model
-      - path: /datacenter/ucp/3.0/guides/access-control/create-and-manage-users/
-        title: Create and manage users
-      - path: /datacenter/ucp/3.0/guides/access-control/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /datacenter/ucp/3.0/guides/access-control/deploy-view-only-service/
-        title: Deploy a service with view-only access across an organization
-      - path: /datacenter/ucp/3.0/guides/access-control/grant-permissions/
-        title: Grant permissions to users based on roles
-      - path: /datacenter/ucp/3.0/guides/access-control/isolate-nodes-between-teams/
-        title: Isolate swarm nodes to a specific team
-      - path: /datacenter/ucp/3.0/guides/access-control/isolate-volumes-between-teams/
-        title: Isolate volumes between two different teams
-      - path: /datacenter/ucp/3.0/guides/access-control/manage-access-with-collections/
-        title: Manage access to resources by using collections
-      - path: /datacenter/ucp/3.0/guides/access-control/access-control-node/
-        title: Node access control
-      - path: /datacenter/ucp/3.0/guides/access-control/permission-levels/
-        title: Permission levels
-      - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-standard/
-        title: Access control design with Docker EE Standard
-      - path: /datacenter/ucp/3.0/guides/access-control/access-control-design-ee-advanced/
-        title: Access control design with Docker EE Advanced
-      - path: /datacenter/ucp/3.0/guides/access-control/recover-a-user-password/
-        title: Recover a user password
+      - path: /datacenter/ucp/3.0/guides/authorization/
+        title: Access control model overview
+      - sectiontitle: The basics
+        section:
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-create-subjects/
+          title: Create and users and teams
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-define-roles/
+          title: Define roles with permissions
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-group-resources/
+          title: Group cluster resources
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-grant-permissions/
+          title: Grant role-access to resources
+      - sectiontitle: Tutorials and use cases
+        section:
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-deploy-stateless-app/
+          title: Deploy stateless app with RBAC
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-isolate-volumes/
+          title: Isolate volumes
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-isolate-nodes/
+          title: Isolate nodes
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-orcabank1-standard/
+          title: Docker EE Standard Use Case
+        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-orcabank2-advanced/
+          title: Docker EE Advanced Use Case
+      - sectiontitle: User admin
+        section:
+        - path: /datacenter/ucp/3.0/guides/authorization/admin-sync-with-ldap/
+          title: Synchronize teams with LDAP
+        - path: /datacenter/ucp/3.0/guides/authorization/admin-recover-password/
+          title: Reset user passwords
+
+
     - sectiontitle: User guides
       section:
       - sectiontitle: Access UCP
