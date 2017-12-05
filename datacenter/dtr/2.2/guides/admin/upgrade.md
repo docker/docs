@@ -39,7 +39,7 @@ to ensure the impact on your business is close to none.
 
 Before starting your upgrade planning, make sure that the version of UCP you are
 using is supported by the version of DTR you are trying to upgrade to. This can be
-checked using the [Compatability Matrix](https://success.docker.com/Policies/Compatibility_Matrix).
+checked using the [Compatibility Matrix](https://success.docker.com/Policies/Compatibility_Matrix).
 
 > **Warning**
 >

@@ -4,7 +4,7 @@ description: Manage access to resources with role-based access control.
 keywords: ucp, grant, role, permission, authentication, authorization
 ---
 
-[Docker Univeral Control Plane (UCP)](../index.md),
+[Docker Universal Control Plane (UCP)](../index.md),
 the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
 permissions against resource types.
@@ -44,7 +44,7 @@ For example, the built-in role, **Restricted Control**, includes permission to
 view and schedule nodes but not to update nodes. A custom **DBA** role might
 include permissions to r-w-x volumes and secrets.
 
-Most organizations use multiple roles to fine-tune the approprate access. A
+Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 

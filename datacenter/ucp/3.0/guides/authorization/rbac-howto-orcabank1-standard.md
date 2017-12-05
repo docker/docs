@@ -84,7 +84,7 @@ app teams to _shared_ `db` resources.
 OrcaBank has standardized on LDAP for centralized authentication to help their
 identity team scale across all the platforms they manage.
 
-To implement LDAP authenticaiton in UCP, OrcaBank is using UCP's native LDAP/AD
+To implement LDAP authentication in UCP, OrcaBank is using UCP's native LDAP/AD
 integration to map LDAP groups directly to UCP teams. Users can be added to or
 removed from UCP teams via LDAP which can be managed centrally by OrcaBank's
 identity team.
