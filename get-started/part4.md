@@ -224,7 +224,7 @@ like `myvm1` execute Docker commands; workers are just for capacity.
 
 ### Configure a `docker-machine` shell to the swarm manager
 
-So far, you've been wrapping Docker commmands in `docker-machine ssh` to talk to
+So far, you've been wrapping Docker commands in `docker-machine ssh` to talk to
 the VMs. Another option is to run `docker-machine env <machine>` to get
 and run a command that configures your current shell to talk to the Docker
 daemon on the VM. This method works better for the next step because it allows
