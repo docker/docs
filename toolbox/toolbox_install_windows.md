@@ -5,7 +5,7 @@ keywords: docker, documentation, install, toolbox, win
 title: Install Docker Toolbox on Windows
 ---
 
-Docker Toolbox provides a way to use Docker on older
+Docker Toolbox provides a way to use Docker on
 Windows systems that do not
 meet minimal system requirements for the [Docker for
 Windows](/docker-for-windows/index.md) app.
