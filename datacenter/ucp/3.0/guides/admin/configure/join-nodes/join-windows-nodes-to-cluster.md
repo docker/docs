@@ -1,30 +1,24 @@
 ---
-title: Join Windows worker nodes to a swarm
-description: Join worker nodes that are running on Windows Server 2016 to a swarm managed by UCP.
-keywords: UCP, swarm, Windows, cluster
+title: Join Windows worker nodes to your cluster
+description: Join worker nodes that are running on Windows Server 2016 to a Docker EE cluster.
+keywords: Docker EE, UCP, cluster, scale, worker, Windows
 ---
 
-UCP supports worker nodes that run on Windows Server 2016. Only worker nodes
-are supported on Windows, and all manager nodes in the swarm must run on Linux.
+Docker Enterprise Edition supports worker nodes that run on Windows Server 2016.
+Only worker nodes are supported on Windows, and all manager nodes in the cluster
+must run on Linux.
 
 Follow these steps to enable a worker node on Windows.
 
-1.  Install UCP on a Linux distribution.
-2.  Install Docker Enterprise Edition (*Docker EE*) on Windows Server 2016.
-3.  Configure the Windows node.
-4.  Join the Windows node to the swarm.
+1.  Install Docker EE Engine on Windows Server 2016.
+2.  Configure the Windows node.
+3.  Join the Windows node to the cluster.
 
-## Install UCP
+## Install Docker EE Engine on Windows Server 2016
 
-Install UCP on a Linux distribution.
-[Learn how to install UCP on production](../install/index.md).
-UCP requires Docker EE version 17.06 or later.
-
-## Install Docker EE on Windows Server 2016
-
-[Install Docker EE](/docker-ee-for-windows/install/#using-a-script-to-install-docker-ee)
-on a Windows Server 2016 instance to enable joining a swarm that's managed by
-UCP.
+[Install Docker EE Engine](/docker-ee-for-windows/install/#using-a-script-to-install-docker-ee)
+on a Windows Server 2016 instance to enable joining a cluster that's managed by
+Docker Enterprise Edition.
 
 ## Configure the Windows node
 
@@ -32,7 +26,7 @@ Follow these steps to configure the docker daemon and the Windows environment.
 
 1.  Pull the Windows-specific image of `ucp-agent`, which is named `ucp-agent-win`.
 2.  Run the Windows worker setup script provided with `ucp-agent-win`.
-3.  Join the swarm with the token provided by the UCP web UI.
+3.  Join the cluster with the token provided by the Docker EE web UI or CLI.
 
 ### Pull the Windows-specific images
 
@@ -56,7 +50,8 @@ docker image pull {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}
 ### Run the Windows node setup script
 
 You need to open ports 2376 and 12376, and create certificates
-for the Docker daemon to communicate securely. Run this command:
+for the Docker daemon to communicate securely. Use this command to run
+the Windows node setup script:
 
 ```powershell
 docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script | powershell -noprofile -noninteractive -command 'Invoke-Expression -Command $input'
@@ -66,7 +61,7 @@ docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }
 >
 > When you run `windows-script`, the Docker service is unavailable temporarily.
 
-The Windows node is ready to join the swarm. Run the setup script on each
+The Windows node is ready to join the cluster. Run the setup script on each
 instance of Windows Server that will be a worker node.
 
 ### Compatibility with daemon.json
@@ -76,8 +71,7 @@ The script may be incompatible with installations that use a config file at
 that the daemon runs on port 2376 and that it uses certificates located in
 `C:\ProgramData\docker\daemoncerts`. If certificates don't exist in this
 directory, run `ucp-agent-win generate-certs`, as shown in Step 2 of the
-[Set up certs for the dockerd service](#set-up-certs-for-the-dockerd-service)
-procedure.
+procedure in [Set up certs for the dockerd service](#set-up-certs-for-the-dockerd-service).
 
 In the daemon.json file, set the `tlscacert`, `tlscert`, and `tlskey` options
 to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
@@ -95,17 +89,38 @@ to the corresponding files in `C:\ProgramData\docker\daemoncerts`:
 }
 ```
 
-## Join the Windows node to the swarm
+## Join the Windows node to the cluster
 
-Now you can join the UCP cluster by using the `docker swarm join` command that's
-provided by the UCP web UI. [Learn to add nodes to your swarm](scale-your-cluster.md).
-The command looks similar to the following.
+Now you can join the cluster by using the `docker cluster join` command that's
+provided by the Docker EE web UI and CLI.
+
+1.  Log in to the Docker EE web UI with an administrator account.
+2.  Navigate to the **Nodes** page.
+3.  Click **Add Node** to add a new node.
+4.  In the **Node Type** section, click **Windows**.
+5.  In the **Step 2** section, click the checkbox for 
+    "I'm ready to join my windows node." 
+6.  Check the **Use a custom listen address** option to specify the address
+    and port where new node listens for inbound cluster management traffic.
+7.  Check the **Use a custom listen address** option to specify the
+    IP address that's advertised to all members of the cluster for API access.
+
+    ![](../../../images/join-windows-nodes-to-cluster-1.png){: .with-border}
+
+Copy the displayed command. It looks similar to the following:
 
 ```powershell
-docker swarm join --token <token> <ucp-manager-ip>
+docker cluster join --token <token> <ucp-manager-ip>
 ```
 
-Run the `docker swarm join` command on each instance of Windows Server that
+You can also use the command line to get the join token. On a manager node,
+run the following command:
+
+```bash
+docker swarm join-token worker
+```
+
+Run the `docker cluster join` command on each instance of Windows Server that
 will be a worker node.
 
 ## Configure a Windows worker node manually
@@ -121,11 +136,9 @@ to the `Invoke-Expression` cmdlet.
 docker container run --rm {{ page.ucp_org }}/ucp-agent-win:{{ page.ucp_version }} windows-script
 ```
 
-
 ### Open ports in the Windows firewall
 
-UCP and Docker EE require that ports 2376 and 12376 are open for inbound
-TCP traffic.
+Docker EE requires that ports 2376 and 12376 are open for inbound TCP traffic.
 
 In a PowerShell terminal running as Administrator, run these commands
 to add rules to the Windows firewall.
@@ -155,53 +168,23 @@ netsh advfirewall firewall add rule name="docker_proxy" dir=in action=allow prot
     Start-Service docker
     ```
 
-The `dockerd` service and the Windows environment are now configured to join a UCP swarm.
+The `dockerd` service and the Windows environment are now configured to join a Docker EE cluster.
 
-> **Tip:** If the TLS certificates aren't set up correctly, the UCP web UI shows the
+> TLS certificate setup
+>
+> If the TLS certificates aren't set up correctly, the Docker EE web UI shows the
 > following warning.
-
-```
-Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
-```
-
-## Uninstall UCP from Windows Server
-
-The following steps return the Docker Engine to its original configuration:
-
-1. Unregister the docker service and register it again without the TLS
-   certificates:
-
-   ```powershell
-   Stop-Service docker
-   dockerd --unregister-service
-   dockerd -H npipe:// --register-service
-   Start-Service docker
-   ```
-
-2. Remove the `certs` directory for the docker service:
-
-   ```powershell
-   Remove-Item -Recurse C:\ProgramData\docker\daemoncerts
-   ```
-
-3. Remove the firewall rules:
-
-   ```powershell
-   netsh advfirewall firewall delete rule name="docker_2376_in"
-   netsh advfirewall firewall delete rule name="docker_12376_in"
-   netsh advfirewall firewall delete rule name="docker_2377_in"
-   netsh advfirewall firewall delete rule name="docker_4789_in"
-   netsh advfirewall firewall delete rule name="docker_4789_out"
-   netsh advfirewall firewall delete rule name="docker_7946_in"
-   netsh advfirewall firewall delete rule name="docker_7946_out"
-   ```
+> 
+> ```
+> Node WIN-NOOQV2PJGTE is a Windows node that cannot connect to its local Docker daemon.
+> ```
 
 ## Windows nodes limitations
 
 Some features are not yet supported on Windows nodes:
 
 * Networking
-  * The swarm mode routing mesh can't be used on Windows nodes. You can expose
+  * The cluster mode routing mesh can't be used on Windows nodes. You can expose
   a port for your service in the host where it is running, and use the HTTP
   routing mesh to make your service accessible using a domain name.
   * Encrypted networks are not supported. If you've upgraded from a previous

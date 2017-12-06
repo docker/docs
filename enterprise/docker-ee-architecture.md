@@ -24,7 +24,7 @@ Docker EE provides access to the full API sets of three popular orchestrators:
 - SwarmKit: Service-centric, Compose file version 3
 - "Classic" Swarm: Container-centric, Compose file version 2
 
-![](../images/docker-ee-architecture-1.svg){: .with-border}
+![](images/docker-ee-architecture-1.svg){: .with-border}
 
 Docker EE proxies the underlying API of each orchestrator, giving you access
 to all of the capabilities of each orchestrator, along with the benefits of
@@ -59,7 +59,7 @@ deployment.
   Changes to the configuration of one UCP manager node are propagated
   automatically to other nodes.
 
-![](../images/docker-ee-architecture.svg){: .with-border}
+![](images/docker-ee-architecture.svg){: .with-border}
 
 ### Universal Control Plane (UCP)
 
@@ -74,7 +74,7 @@ containers and pods across your Docker cluster.
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your cluster.
 
-![](../images/ucp-architecture-1.svg){: .with-border}
+![](images/ucp-architecture-1.svg){: .with-border}
 
 Once a UCP instance is deployed, you don't interact with Docker EE Engine
 directly. Instead, you interact with UCP. Since UCP exposes the standard
@@ -83,14 +83,14 @@ you already know and love, like `kubectl`, the Docker CLI client, and Docker
 Compose.
 [Learn about UCP architecture](ucp-architecture.md).
 
-![](../images/ucp-architecture-2.svg){: .with-border}
+![](images/ucp-architecture-2.svg){: .with-border}
 
 ### Docker Trusted Registry (DTR)
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker UCP cluster.
 
-![](../images/dtr-architecture-1.svg){: .with-border}
+![](images/dtr-architecture-1.svg){: .with-border}
 
 Once you have DTR deployed, you use your Docker CLI client to login, push, and
 pull images.
@@ -98,7 +98,7 @@ pull images.
 For high-availability, you can deploy multiple DTR replicas, one on each UCP
 worker node.
 
-![](../images/dtr-architecture-2.svg){: .with-border}
+![](images/dtr-architecture-2.svg){: .with-border}
 
 All DTR replicas run the same set of services, and changes to their configuration
 are automatically propagated to other replicas.

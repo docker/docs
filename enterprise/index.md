@@ -1,69 +1,149 @@
 ---
-title: About Docker EE
-description: Information about Docker Enterprise Edition
-keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
+title: Docker Enterprise Edition
+description: Learn about Docker Enterprise Edition, the enterprise-grade cluster
+  management solution from Docker.
+keywords: Docker EE, UCP, DTR, orchestration, cluster
 ---
 
-Docker Enterprise Edition (*Docker EE*) is designed for enterprise
-development and IT teams who build, ship, and run business-critical
-applications in production and at scale. Docker EE is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry. For more info about Docker EE, including purchasing
-options, see [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/).
+Docker Enterprise Edition (*Docker EE*) is a Containers-as-a-Service (CaaS)
+platform that enables a secure software supply chain and deploys diverse
+applications for high availability across disparate infrastructure, both
+on-premises and in the cloud.
 
-<!-- This is populated by logic in js/archive.js -->
-<p id="ee-version-div"></p>
+Docker Enterprise Edition is a secure, scalable, and supported container
+platform for building and orchestrating applications across multi-tenant Linux,
+Windows Server 2016, and IBM z Systems environments.
 
-The free Docker products continue to be available as the Docker Community
-Edition (*Docker CE*).
+Docker EE enables deploying your workloads for high availability (HA) onto the
+orchestrator of your choice. Docker EE automates many of the tasks that
+orchestration requires, like provisioning pods, containers, and cluster
+resources. Self-healing components ensure that Docker EE clusters remain highly
+available.
 
-## Supported platforms
+Role-based access control applies to Kubernetes and Swarm orchestrators, and
+communication within the cluster is secured with TLS.
+[Docker Content Trust](/engine/security/trust/content_trust/) is enforced
+for images on all of the orchestrators.
 
-The following table shows all of the platforms that are available for Docker EE.
-Each link in the first column takes you to the installation
-instructions for the corresponding platform. Docker EE is an integrated,
-supported, and certified container platform for the listed cloud providers and
-operating systems.
+Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
+solution from Docker. You install it on-premises or in your virtual private
+cloud, and it helps you manage your Docker swarm and applications through a
+single interface.
 
-{% include docker_platform_matrix.md %}
+![](images/docker-ee-overview-1.png){: .with-border}
 
-## Docker EE feature tiers
+## Docker Enterprise Edition features
 
-Docker EE is available in three tiers:
+Docker EE 18.01 provides multi-architecture orchestration for Kubernetes and
+Swarm workloads. Docker EE enables a secure software supply chain, with image
+promotion, mirroring between registries, and signing/scanning enforcement for
+Kubernetes images.
 
--  **Basic:** The Docker platform for certified infrastructure, with support
-   from Docker Inc. and certified containers and plugins from Docker Store.
--  **Standard:** Adds advanced image and container management, LDAP/AD user
-   integration, and role-based access control. Together, these features
-   comprise Docker Enterprise Edition.
--  **Advanced:** Adds
-   [Docker Security Scanning](https://blog.docker.com/2016/05/docker-security-scanning/)
-   and continuous vulnerability monitoring.
+### Kubernetes support
 
-## Docker Enterprise Edition release cycles
+Kubernetes in Docker EE fully supports all Docker EE features, including
+role-based access control, LDAP/AD integration, scanning, signing enforcement,
+and security policies.
 
-Docker EE is released quarterly. Releases use a time-based versioning
-scheme, so for example, Docker EE version 17.03 was released
-in March 2017. For schedule details, see
-[Time-based release schedule](/install/index.md#time-based-release-schedule).
+- Kubernetes orchestration full feature set
+- CNCF Certified Kubernetes conformance
+- Deploy Kubernetes apps via web UI or CLI
+- Compose Stack deploy for both Swarm and Kubernetes apps
+- Role-based access control for Kubernetes workloads
+- Docker EE install includes both Swarm and Kubernetes components across the
+  cluster, so every newly joined worker node is ready to schedule Kubernetes
+  and Swarm workloads
+- Pod-based autoscaling, to increase and decrease pod count based on CPU usage
+- Blue-Green deployments, for load balancing to different app versions
+- Ingress Controllers with Kubernetes L7 routing
+- Interoperability between Swarm and Kubernetes workloads for networking and
+  storage
 
-Each Docker EE release is supported and maintained for one year and
-receives security and critical bug fixes during this period.
+### Orchestration platform
 
-The Docker API version is independent of the Docker platform version. The API
-version doesn't change from Docker 1.13.1 to Docker 17.03. We maintain
-careful API backward compatibility and deprecate APIs and features slowly and
-conservatively. We remove features after deprecating them for a period of
-three stable releases. Docker 1.13 introduced improved interoperability
-between clients and servers using different API versions, including dynamic
-feature negotiation.
+![](images/docker-ee-overview-4.svg){: .with-border}
 
-## Upgrades and support
+- Docker EE Manager Nodes are both Swarm managers and Kubernetes masters to enable
+  high availability
+- Allocate nodes for Swarm and Kubernetes workloads
+- Single pane of glass for monitoring apps
+- Enhanced Swarm hostname routing mesh with Interlock 2.0
+- One platform-wide management plane: secure software supply chain, secure
+  multi-tenancy, and secure and highly available node management
 
-If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker EE to continue to get support. We will continue to support customers
-with valid subscriptions whether the subscription covers Docker EE or
-Commercially Supported Docker. You can choose to stay with your current
-deployed version, or you can upgrade to the latest Docker EE version. For
-more info, see [Scope of Coverage and Maintenance
-Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
+### Secure supply chain
+
+![](images/docker-ee-overview-3.svg){: .with-border}
+
+- Image signing and scanning of Kubernetes apps for validating and verifying content
+- Image promotion with mirroring between registries (not in Beta1)
+- Define policies for automating image promotions across the app development
+  lifecycle of Kubernetes apps (not in Beta1)
+
+## Centralized cluster management
+
+With Docker, you can join up to thousands of physical or virtual machines
+together to create a container cluster, allowing you to deploy your
+applications at scale. Docker EE extends the functionality provided by Docker
+Engine to make it easier to manage your cluster from a centralized place.
+
+You can manage and monitor your container cluster using a graphical web UI.
+
+## Deploy, manage, and monitor
+
+With Docker EE, you can manage from a centralized place all of the computing
+resources you have available, like nodes, volumes, and networks.
+
+You can also deploy and monitor your applications and services.
+
+## Built-in security and access control
+
+Docker EE has its own built-in authentication mechanism with role-based access
+control (RBAC), so that you can control who can access and make changes to your
+swarm and applications. Also, Docker EE authentication integrates with LDAP
+services.
+[Learn about role-based access control](access-control/index.md).
+
+![](images/docker-ee-overview-2.png){: .with-border}
+
+Docker EE integrates with Docker Trusted Registry so that you can keep the
+Docker images you use for your applications behind your firewall, where they
+are safe and can't be tampered with.
+
+You can also enforce security policies and only allow running applications
+that use Docker images you know and trust.
+
+## Docker EE and the CLI
+
+Docker EE exposes the standard Docker API, so you can continue using the tools
+that you already know, including the Docker CLI client, to deploy and manage your
+applications.
+
+For example, you can use the `docker info` command to check the
+status of a Swarm managed by Docker EE:
+
+```bash
+docker info
+
+Containers: 38
+Running: 23
+Paused: 0
+Stopped: 15
+Images: 17
+Server Version: 17.06
+...
+Swarm: active
+NodeID: ocpv7el0uz8g9q7dmw8ay4yps
+Is Manager: true
+ClusterID: tylpv1kxjtgoik2jnrg8pvkg6
+Managers: 1
+…
+```
+
+Docker EE exposes the standard Kubernetes API, and it installs the command-line
+tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
+`kubectl cluster-info`:
+
+```bash
+$ kubectl cluster-info
+```
