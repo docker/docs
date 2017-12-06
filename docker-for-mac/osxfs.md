@@ -6,23 +6,29 @@ redirect_from:
 title: File system sharing (osxfs)
 ---
 
-`osxfs` is a new shared file system solution, exclusive to Docker for Mac.
+`osxfs` is a new  shared file system solution, exclusive to Docker for Mac.
 `osxfs` provides a close-to-native user experience for bind mounting macOS file
 system trees into Docker containers. To this end, `osxfs` features a number of
 unique capabilities as well as differences from a classical Linux file system.
 
 ### Case sensitivity
 
-With Docker for Mac, file systems are shared from macOS into containers in the
-same way as they operate in macOS. As a result, if a file system on macOS is
-case-insensitive that behavior is shared by any bind mount from macOS into a
-container. The default macOS file system is HFS+ and, during installation, it is
-installed as case-insensitive by default. To get case-sensitive behavior from
-your bind mounts, you must either create and format a ramdisk or external volume
-as HFS+ with case-sensitivity or reformat your OS root partition with HFS+ with
-case-sensitivity. We do not recommend reformatting your root partition as some
-Mac software dubiously relies on case-insensitivity to function.
+With Docker for Mac, file systems operate in containers in the same way as they
+operate in macOS. If a file system on macOS is case-insensitive, that behavior
+is shared by any bind mount from macOS into a container.
 
+On macOS Sierra and lower, the default file system is **HFS+**. On macOS High
+Sierra, the default file system is **APFS**. Both are case-insensitive by
+default but available in case-sensitive and  case-insensitive variants.
+
+To get case-sensitive behavior from your bind mounts, you must either create and
+format a ramdisk or external volume as HFS+ or APFS with case-sensitivity, or
+else you must reformat your OS root partition with HFS+ or APFS with
+case-sensitivity. See the
+[APFS FAQ](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html).
+
+We do not recommend reformatting your root partition as some Mac software
+dubiously relies on case-insensitivity to function.
 
 ### Access control
 
