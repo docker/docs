@@ -55,17 +55,17 @@ When installing UCP on a host, make sure the following ports are open:
 | managers, workers |  in, out  | TCP 10248               | Port for Kubelet healthz                                                          |
 | managers, workers |  in, out  | TCP 10250               | Port for Kubelet                                                                  |
 | managers, workers |  in, out  | TCP 10256               | Port for Kubernetes proxy healthz                                                 |
-| managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
+| managers, workers |  in, out  | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
 | managers, workers |  in, out  | TCP 12378               | Port for Etcd reverse proxy                                                       |
-| managers          |    in     | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |    in     | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |    in     | TCP 12381               | Port for the certificate authority                                                |
-| managers          |    in     | TCP 12382               | Port for the UCP certificate authority                                            |
-| managers          |    in     | TCP 12383               | Port for the authentication storage backend                                       |
-| managers          |    in     | TCP 12384               | Port for the authentication storage backend for replication across managers       |
-| managers          |    in     | TCP 12385               | Port for the authentication service API                                           |
-| managers          |    in     | TCP 12386               | Port for the authentication worker                                                |
-| managers          |    in     | TCP 12387               | Port for the metrics service                                                      |
+| managers          |  in, out  | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
+| managers          |  in, out  | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
+| managers          |  in, out  | TCP 12381               | Port for the certificate authority                                                |
+| managers          |  in, out  | TCP 12382               | Port for the UCP certificate authority                                            |
+| managers          |  in, out  | TCP 12383               | Port for the authentication storage backend                                       |
+| managers          |  in, out  | TCP 12384               | Port for the authentication storage backend for replication across managers       |
+| managers          |  in, out  | TCP 12385               | Port for the authentication service API                                           |
+| managers          |  in, out  | TCP 12386               | Port for the authentication worker                                                |
+| managers          |  in, out  | TCP 12387               | Port for the metrics service                                                      |
 
 For overlay networks with encryption to work, you need to ensure that
 IP protocol 50 (ESP) traffic is allowed.
@@ -103,7 +103,7 @@ Docker EE is a software subscription that includes three products:
 
 UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
 
-- Docker Engine 17.06 or higher
+- Docker EE Engine 17.06 or higher
 - DTR 2.3 or higher
 
 <!--
