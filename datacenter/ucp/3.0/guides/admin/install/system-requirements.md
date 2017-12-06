@@ -41,15 +41,22 @@ between hosts.
 
 When installing UCP on a host, make sure the following ports are open:
 
-| Hosts             | Direction | Port                    | Purpose                                                                           |
-|:------------------|:---------:|:------------------------|:----------------------------------------------------------------------------------|
+|       Hosts       | Direction |          Port           |                                      Purpose                                      |
+| :---------------- | :-------: | :---------------------- | :-------------------------------------------------------------------------------- |
 | managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
 | managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
 | managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
 | workers           |    out    | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
+| managers, workers |  in, out  | TCP 4194                | Port for Kubelet cAdvisor                                                         |
 | managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
+| managers, workers |  in, out  | TCP 6443                | Port for Kubernetes API server                                                    |
+| managers, workers |  in, out  | TCP 6444                | Port for Kubernetes reverse proxy                                                 |
 | managers, workers |  in, out  | TCP, UDP 7946           | Port for gossip-based clustering                                                  |
+| managers, workers |  in, out  | TCP 10248               | Port for Kubelet healthz                                                          |
+| managers, workers |  in, out  | TCP 10250               | Port for Kubelet                                                                  |
+| managers, workers |  in, out  | TCP 10256               | Port for Kubernetes proxy healthz                                                 |
 | managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
+| managers, workers |  in, out  | TCP 12378               | Port for Etcd reverse proxy                                                       |
 | managers          |    in     | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
 | managers          |    in     | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
 | managers          |    in     | TCP 12381               | Port for the certificate authority                                                |
