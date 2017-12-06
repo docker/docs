@@ -16,7 +16,7 @@ to make it easier to deploy, configure, and monitor your applications at scale.
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your Docker cluster.
 
-![](../images/ucp-architecture-1.svg){: .with-border}
+![](images/ucp-architecture-1.svg){: .with-border}
 
 Once Universal Control Plane (UCP) instance is deployed, developers and IT
 operations no longer interact with Docker Engine directly, but interact with
@@ -30,7 +30,7 @@ the Docker CLI client and Docker Compose.
 Docker UCP leverages the clustering and orchestration functionality provided
 by Docker.
 
-![](../images/ucp-architecture-2.svg){: .with-border}
+![](images/ucp-architecture-2.svg){: .with-border}
 
 A swarm is a collection of nodes that are in the same Docker cluster.
 [Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
@@ -156,7 +156,7 @@ There are two ways to interact with UCP: the web UI or the CLI.
 You can use the UCP web UI to manage your swarm, grant and revoke user
 permissions, deploy, configure, manage, and monitor your applications.
 
-![](../images/ucp-architecture-3.svg){: .with-border}
+![](images/ucp-architecture-3.svg){: .with-border}
 
 UCP also exposes the standard Docker API, so you can continue using existing
 tools like the Docker CLI client. Since UCP secures your cluster with role-based

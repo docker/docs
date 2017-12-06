@@ -51,4 +51,4 @@ UCP before the certificates expire or disable swarm mode by running
 
 ## Where to go next
 
-* [Scale your cluster](../configure/scale-your-cluster.md)
+* [Join nodes to your cluster](../configure/join-nodes/index.md)

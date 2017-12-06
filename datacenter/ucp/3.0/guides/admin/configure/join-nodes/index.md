@@ -37,5 +37,5 @@ For production-grade deployments, follow these rules of thumb:
 
 ## Where to go next
 
-* [Scale your cluster](scale-your-cluster.md)
+* [Join nodes to your cluster](join-linux-nodes-to-cluster.md)
 * [Use a load balancer](use-a-load-balancer.md)

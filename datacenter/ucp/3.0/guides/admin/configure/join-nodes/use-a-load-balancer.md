@@ -8,7 +8,7 @@ Once you've joined multiple manager nodes for high-availability, you can
 configure your own load balancer to balance user requests across all
 manager nodes.
 
-![](../../images/use-a-load-balancer-1.svg)
+![](../../../images/use-a-load-balancer-1.svg)
 
 This allows users to access UCP using a centralized domain name. If
 a manager node goes down, the load balancer can detect that and stop forwarding
@@ -212,4 +212,4 @@ docker run --detach \
 
 ## Where to go next
 
-* [Add labels to cluster nodes](add-labels-to-cluster-nodes.md)
+* [Add labels to cluster nodes](../add-labels-to-cluster-nodes.md)

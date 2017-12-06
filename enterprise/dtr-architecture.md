@@ -12,7 +12,7 @@ next_steps:
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker Universal Control Plane cluster.
 
-![](../images/dtr-architecture-1.svg){: .with-border}
+![](images/dtr-architecture-1.svg){: .with-border}
 
 Once you have DTR deployed, you use your Docker CLI client to login, push, and
 pull images.
@@ -22,7 +22,7 @@ pull images.
 For high-availability you can deploy multiple DTR replicas, one on each UCP
 worker node.
 
-![](../images/dtr-architecture-2.svg){: .with-border}
+![](images/dtr-architecture-2.svg){: .with-border}
 
 All DTR replicas run the same set of services and changes to their configuration
 are automatically propagated to other replicas.
@@ -81,7 +81,7 @@ By default, Docker Trusted Registry stores images on the filesystem of the node
 where it is running, but you should configure it to use a centralized storage
 backend.
 
-![](../images/dtr-architecture-3.svg){: .with-border}
+![](images/dtr-architecture-3.svg){: .with-border}
 
 DTR supports these storage backends:
 
@@ -96,7 +96,7 @@ DTR supports these storage backends:
 
 DTR has a web UI where you can manage settings and user permissions.
 
-![](../images/dtr-architecture-4.svg){: .with-border}
+![](images/dtr-architecture-4.svg){: .with-border}
 
 You can push and pull images using the standard Docker CLI client or other tools
 that can interact with a Docker registry.

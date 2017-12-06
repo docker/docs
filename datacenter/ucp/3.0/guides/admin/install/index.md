@@ -144,4 +144,4 @@ same steps as before, but don't check the **Add node as a manager** option.
 ## Where to go next
 
 * [Use your own TLS certificates](../configure/use-your-own-tls-certificates.md)
-* [Scale your cluster](../configure/scale-your-cluster.md)
+* [Join nodes to your cluster](../configure/join-nodes/index.md)

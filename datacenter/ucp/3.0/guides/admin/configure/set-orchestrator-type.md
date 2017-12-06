@@ -1,22 +1,8 @@
 ---
 title: Set the orchestrator type for a node
-description: |
-  Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.
+description: Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.
 keywords: Docker EE, UCP, cluster, orchestrator
-ui_tabs:
-- version: ucp-3.0
-  orhigher: true
-cli_tabs:
-- version: docker-cli-linux
-next_steps:
-- path: /deploy/install-and-configure/join-nodes-to-cluster
-  title: Join nodes to your cluster
-- path: /deploy/install-and-configure/set-orchestrator-type
-  title: Change the orchestrator for a node
 ---
-{% if include.ui %}
-
-{% if include.version=="ucp-3.0" %}
 
 When you add a node to the cluster, the node's workloads are managed by a
 default orchestrator, either Docker Swarm or Kubernetes. When you install
@@ -48,7 +34,7 @@ Change a node's orchestrator type on the **Edit node** page:
     for the node.
 5.  Click **Save** to assign the node to the selected orchestrator.
 
-    ![](../images/change-orchestrator-for-node-1.png){: .with-border}
+    ![](../../images/change-orchestrator-for-node-1.png){: .with-border}
 
 ## What happens when you change a node's orchestrator
 
@@ -103,7 +89,7 @@ To set the orchestrator for new nodes:
     or **Kubernetes**.
 4.  Click **Save**.
     
-    ![](../images/join-nodes-to-cluster-1.png){: .with-border}
+    ![](../../images/join-nodes-to-cluster-1.png){: .with-border}
 
 From now on, when you join a node to the cluster, new workloads on the node
 are scheduled by the specified orchestrator type. Existing nodes in the cluster
@@ -127,16 +113,11 @@ avoid changing the orchestrator setting. If you do change the orchestrator for a
 node, your workloads are evicted, and you must deploy them again through the
 new orchestrator.
 
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
+## Set the orchestrator by using the CLI
 
 Set the orchestrator on a node by assigning the orchestrator labels,
 `com.docker.ucp.orchestrator.swarm` or `com.docker.ucp.orchestrator.kubernetes`,
 to `true`.
-
-{% if include.version=="docker-cli-linux" %}
 
 To schedule Swarm workloads on a node:
 
@@ -195,6 +176,4 @@ The value can be `swarm` or `kubernetes`.
 
 [Learn to set up Docker EE by using a config file](UCP configuration file.md).
 
-{% endif %}
-{% endif %}
 

@@ -1,23 +1,8 @@
 ---
-title: Join nodes to your cluster
-description: |
-  Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.
+title: Join Linux nodes to your cluster
+description: Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.
 keywords: Docker EE, UCP, cluster, scale, worker, manager
-ui_tabs:
-- version: ucp-3.0
-  orhigher: true
-- version: ucp-2.2
-  orlower: true  
-cli_tabs:
-- version: docker-cli-linux
-next_steps:
-- path: /deploy/install-and-configure/join-windows-nodes-to-cluster
-  title: Join Windows worker nodes to a cluster
-- path: /deploy/install-and-configure/set-orchestrator-type
-  title: Change the orchestrator for a node
 ---
-{% if include.ui %}
-{% if include.version=="ucp-3.0" %}
 
 Docker EE is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
@@ -41,7 +26,7 @@ When you join a node to a cluster, you specify its role: manager or worker.
   Manager nodes also run all Docker EE components in a replicated way, so
   by adding additional manager nodes, you're also making the cluster highly
   available.
-  [Learn more about the Docker EE architecture.](../architecture/how-docker-ee-delivers-ha.md)
+  [Learn more about the Docker EE architecture.](/enterprise/docker-ee-architecture.md)
 
 - **Worker**: Worker nodes receive and execute your services and applications.
   Having multiple worker nodes allows you to scale the computing capacity of
@@ -66,7 +51,7 @@ To join nodes to the cluster, go to the Docker EE web UI and navigate to the
 4.  Check the **Use a custom listen address** option to specify the
     IP address that's advertised to all members of the cluster for API access.
 
-![](../images/join-nodes-to-cluster-2.png){: .with-border}
+![](../../../images/join-nodes-to-cluster-2.png){: .with-border}
 
 Copy the displayed command, use SSH to log in to the host that you want to
 join to the cluster, and run the `docker swarm join` command on the host.
@@ -77,7 +62,7 @@ To add a Windows node, click **Windows** and follow the instructions in
 After you run the join command in the node, the node is displayed on the
 **Nodes** page in the Docker EE web UI. From there, you can change the node's
 cluster configuration, including its assigned orchestrator type.
-[Learn how to change the orchestrator for a node](set-orchestrator-type.md).    
+[Learn how to change the orchestrator for a node](../set-orchestrator-type.md).    
 
 ## Pause or drain a node
 
@@ -98,7 +83,7 @@ Pause or drain a node from the **Edit Node** page:
 3.  In the **Availability** section, click **Active**, **Pause**, or **Drain**.  
 4.  Click **Save** to change the availability of the node.
 
-![](../images/join-nodes-to-cluster-3.png){: .with-border}
+![](../../../images/join-nodes-to-cluster-3.png){: .with-border}
 
 ## Promote or demote a node
 
@@ -155,19 +140,10 @@ the node to leave the cluster manually. To do this, connect to the target node
 through SSH and run `docker swarm leave --force` directly against the local
 Docker EE Engine.
 
-{% elsif include.version=="ucp-2.2" %}
-
-[Learn how to scale your cluster](/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster.md).
-
-{% endif %}
-{% endif %}
-
-{% if include.cli %}
+## Join nodes by using the CLI
 
 You can use the command line to join a node to a Docker EE cluster.
 To get the join token, run the following command on a manager node:
-
-{% if include.version=="docker-cli-linux" %}
 
 ```bash
 docker swarm join-token worker
@@ -216,6 +192,4 @@ the cluster.
 docker node rm <nodeID or hostname>
 ```
 
-{% endif %}
-{% endif %}
 

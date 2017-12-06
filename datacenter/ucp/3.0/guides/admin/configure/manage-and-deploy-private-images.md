@@ -1,11 +1,7 @@
 ---
 title: Manage and deploy private images
-description: |
-  Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.
+description: Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.
 keywords: Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster
-next_steps:
-- path: /deploy/allow-creation-on-push
-  title: Allow users to create repositories when pushing
 ---
 
 Docker Enterprise Edition (EE) has its own image registry (DTR) so that
@@ -20,7 +16,7 @@ using the Kubernetes orchestrator.
 3.  In the **Installed DTRs** section, note the URL of your cluster's DTR
     instance.
 
-    ![](../images/manage-and-deploy-private-images-1.png){: .with-border}
+    ![](../../images/manage-and-deploy-private-images-1.png){: .with-border}
 
 4.  In a new browser tab, enter the URL to open the DTR web UI.
 
@@ -31,7 +27,7 @@ using the Kubernetes orchestrator.
     "wordpress".
 3.  Click **Save** to create the repository. 
 
-    ![](../images/manage-and-deploy-private-images-2.png){: .with-border}
+    ![](../../images/manage-and-deploy-private-images-2.png){: .with-border}
 
 ## Push an image to DTR
 
@@ -76,7 +72,7 @@ DTR instance.
 3.  Click **Images** to view the stored images.
 4.  Confirm that the `latest` tag is present.
 
-    ![](../images/manage-and-deploy-private-images-3.png){: .with-border}
+    ![](../../images/manage-and-deploy-private-images-3.png){: .with-border}
 
 You're ready to deploy the `wordpress:latest` image into production.
 
@@ -136,4 +132,4 @@ from outside the cluster.
     section. 
 7.  Click the URL to open the default WordPress home page.  
 
-    ![](../images/manage-and-deploy-private-images-4.png){: .with-border}
+    ![](../../images/manage-and-deploy-private-images-4.png){: .with-border}

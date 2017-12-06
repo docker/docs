@@ -310,33 +310,6 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-- sectiontitle: Deploy your app in production
-  section:
-    - path: /deploy/
-      title: Docker Enterprise Edition
-    - sectiontitle: Architecture
-      section:
-      - path: /deploy/architecture/docker-ee-architecture/
-        title: Docker EE architecture
-      - path: /deploy/architecture/-architecture/
-        title:  architecture
-      - path: /deploy/architecture/ucp-architecture/
-        title: UCP architecture
-    - sectiontitle: Deploy workloads
-      section:
-      - path: /deploy/deploy-workloads/deploy-kubernetes-workload/
-        title: Deploy a workload to a Kubernetes cluster
-      - path: /deploy/deploy-workloads/manage-and-deploy-private-images/
-        title: Manage and deploy private images
-    - sectiontitle: Install and configure
-      section:
-      - path: /deploy/install-and-configure/join-nodes-to-cluster/
-        title: Join nodes to your cluster
-      - path: /deploy/install-and-configure/join-windows-nodes-to-cluster/
-        title: Join Windows worker nodes to your cluster
-      - path: /deploy/install-and-configure/set-orchestrator-type/
-        title: Set the orchestrator type for a node
-
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Configure all objects
@@ -1521,7 +1494,9 @@ manuals:
   section:
   - path: /enterprise/
     title: About Docker EE
-  - path: /install/
+  - path: /enterprise/supported-platforms/
+    title: Supported platforms
+  - path: /engine/installation/
     title: Install Docker EE
     nosync: true
   - title: Try Docker EE (no install)
@@ -1540,12 +1515,16 @@ manuals:
     title: Backup Docker EE
   - path: /enterprise/upgrade/
     title: Upgrade Docker EE
+  - path: /enterprise/docker-ee-architecture/
+    title: Docker EE Architecture
+  - path: /enterprise/ucp-architecture/
+    title: UCP Architecture
+  - path: /enterprise/dtr-architecture/
+    title: DTR Architecture
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/3.0/guides/
       title: Universal Control Plane overview
-    - path: /datacenter/ucp/3.0/guides/architecture/
-      title: Architecture
     - sectiontitle: Administration
       section:
       - sectiontitle: Install
@@ -1572,8 +1551,6 @@ manuals:
           title: Add labels to cluster nodes
         - path: /datacenter/ucp/3.0/guides/admin/configure/add-sans-to-cluster/
           title: Add SANs to cluster certificates
-        - path: /datacenter/ucp/3.0/guides/admin/configure/join-windows-worker-nodes/
-          title: Join Windows worker nodes to a swarm
         - path: /datacenter/ucp/3.0/guides/admin/configure/integrate-with-dtr/
           title: Integrate with Docker Trusted Registry
         - path: /datacenter/ucp/3.0/guides/admin/configure/external-auth/
@@ -1586,24 +1563,32 @@ manuals:
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/3.0/guides/admin/configure/run-only-the-images-you-trust/
           title: Run only the images you trust
-        - path: /datacenter/ucp/3.0/guides/admin/configure/scale-your-cluster/
-          title: Scale your cluster
         - path: /datacenter/ucp/3.0/guides/admin/configure/set-session-timeout/
           title: Set the user's session timeout
-        - path: /datacenter/ucp/3.0/guides/admin/configure/set-up-high-availability/
-          title: Set up high availability
         - path: /datacenter/ucp/3.0/guides/admin/configure/store-logs-in-an-external-system/
           title: Store logs in an external system
         - path: /datacenter/ucp/3.0/guides/admin/configure/ucp-configuration-file/
           title: UCP configuration file
-        - path: /datacenter/ucp/3.0/guides/admin/configure/use-a-load-balancer/
-          title: Use a load balancer
         - path: /datacenter/ucp/3.0/guides/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
         - path: /datacenter/ucp/3.0/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
         - path: /datacenter/ucp/3.0/guides/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
+        - path: /datacenter/ucp/3.0/guides/admin/configure/manage-and-deploy-private-images/
+          title: Manage and deploy private images
+        - path: /datacenter/ucp/3.0/guides/admin/configure/set-orchestrator-type/
+          title: Set the orchestrator type for a node
+        - sectiontitle: Join nodes to your cluster
+          section:
+          - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/
+            title: Set up high availability
+          - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-linux-nodes-to-cluster/
+            title: Join nodes to your cluster
+          - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
+            title: Join Windows worker nodes to your cluster
+          - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/use-a-load-balancer/
+            title: Use a load balancer
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/
@@ -1700,6 +1685,8 @@ manuals:
           title: Deploy an app from the CLI
         - path: /datacenter/ucp/3.0/guides/user/services/deploy-stack-to-collection/
           title: Deploy application resources to a collection
+        - path: /datacenter/ucp/3.0/guides/user/services/deploy-kubernetes-workload/
+          title: Deploy a workload to a Kubernetes cluster
       - sectiontitle: Secrets
         section:
         - path: /datacenter/ucp/3.0/guides/user/secrets/
