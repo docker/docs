@@ -137,7 +137,7 @@ under development.
 
 Symlinks are shared unmodified. This may cause issues when symlinks contain
 paths that rely on the default case-insensitivity of the default macOS file
-system, HFS+.
+system.
 
 ### File types
 
