@@ -34,10 +34,10 @@ versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `armhf`, and `s390x` (IBM z
+Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `ppc64le` (IBM POWER) and `s390x` (IBM z
 Systems) architectures.
 
-> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial and Zesty.
+> **`ppc64le` and `s390x` limitations**: IBM Power and z Systems .debs are only available on Ubuntu Xenial and above.
 
 ### Uninstall old versions
 
@@ -175,6 +175,7 @@ the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
       <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
     </ul>
     <div class="tab-content">
@@ -193,6 +194,16 @@ the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=ppc64el] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -292,8 +303,8 @@ a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
     choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
-    `armhf`, or `s390x`. Download the `.deb` file for the Docker version you
-    want to install.
+    `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the Docker
+    version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
