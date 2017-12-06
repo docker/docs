@@ -425,12 +425,13 @@ how to set the client TLS certificate for verification, see [Verify repository
 client with certificates](/engine/security/certificates.md) in the Docker Engine
 topics.
 
-## Install bash completion
+## Install completion
 
 If you are using [bash
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
 such as [homebrew bash-completion on
-Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/) bash
+Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/), or 
+the [zsh completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
 completion scripts for the following commands may be found inside `Docker.app`,
 in the `Contents/Resources/etc/` directory:
 
@@ -439,13 +440,23 @@ in the `Contents/Resources/etc/` directory:
 - docker-compose
 
 To activate bash completion, these files need to be copied or symlinked to your
-`bash_completion.d/` directory. For example, if you use
+`bash_completion.d/` directory. For example, if you installed bash via
 [Homebrew](http://brew.sh/):
 
 ```bash
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
+```
+
+To activate zsh completion, these files need to be copied or symlinked to your 
+zsh `site-functions/` directory. For example, if you installed zsh via 
+[Homebrew](http://brew.sh/):
+
+```bash
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
 ## Give feedback and get help
