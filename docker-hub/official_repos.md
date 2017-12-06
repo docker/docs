@@ -21,10 +21,6 @@ designed to:
   and provide clear documentation to serve as a reference for other `Dockerfile`
   authors.
 
-* Ensure that security updates are applied in a timely manner. This is
-  particularly important as many Official Repositories are some of the most
-  popular on Docker Hub.
-
 * Provide a channel for software vendors to redistribute up-to-date and
   supported versions of their products. Organization accounts on Docker Hub can
   also serve this purpose, without the careful review or restrictions on what
