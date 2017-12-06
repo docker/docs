@@ -45,19 +45,29 @@ Kubernetes in Docker EE fully supports all Docker EE features, including
 role-based access control, LDAP/AD integration, scanning, signing enforcement,
 and security policies.
 
+Kubernetes features on Docker EE include:
+
 - Kubernetes orchestration full feature set
 - CNCF Certified Kubernetes conformance
-- Deploy Kubernetes apps via web UI or CLI
-- Compose Stack deploy for both Swarm and Kubernetes apps
+- Kubernetes app deployment by using web UI or CLI
+- Compose stack deployment for both Swarm and Kubernetes apps
 - Role-based access control for Kubernetes workloads
-- Docker EE install includes both Swarm and Kubernetes components across the
-  cluster, so every newly joined worker node is ready to schedule Kubernetes
-  and Swarm workloads
 - Pod-based autoscaling, to increase and decrease pod count based on CPU usage
 - Blue-Green deployments, for load balancing to different app versions
 - Ingress Controllers with Kubernetes L7 routing
 - Interoperability between Swarm and Kubernetes workloads for networking and
   storage
+
+The default Docker EE installation includes both Swarm and Kubernetes
+components across the cluster, so every newly joined worker node is ready
+to schedule Kubernetes or Swarm workloads
+
+> IBM z Systems
+> 
+> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
+> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
+> on z Systems nodes.
+{: .important}
 
 ### Orchestration platform
 
