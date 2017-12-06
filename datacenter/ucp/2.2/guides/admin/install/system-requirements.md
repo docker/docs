@@ -94,7 +94,10 @@ Docker EE is a software subscription that includes three products:
 * Docker Trusted Registry,
 * Docker Universal Control Plane.
 
-[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
+Learn more about compatibility and the maintenance lifecycle for these products:
+
+- [Compatibility Matrix](https://success.docker.com/Policies/Compatibility_Matrix)
+- [Maintenance Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle)
 
 ## Version compatibility
 
