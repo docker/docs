@@ -259,10 +259,10 @@ only available with Docker Engine version **17.09.0** and higher.
 
 Introduces the following additional parameters:
 
-- `target` and `network` in [build configurations](index.md#build)
-- `start_period` for [`healthchecks`](index.md#healthcheck)
-- `order` for [update configurations](index.md#update_config)
-- `name` for [volumes](index.md#volume-configuration-reference)
+- `target` and `network` in [build configurations](/compose/compose-file/index.md#build)
+- `start_period` for [`healthchecks`](/compose/compose-file/index.md#healthcheck)
+- `order` for [update configurations](/compose/compose-file/index.md#update_config)
+- `name` for [volumes](/compose/compose-file/index.md#volume-configuration-reference)
 
 
 ## Upgrading
