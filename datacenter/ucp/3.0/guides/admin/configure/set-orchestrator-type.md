@@ -174,6 +174,6 @@ default_node_orchestrator = "swarm"
 
 The value can be `swarm` or `kubernetes`.
 
-[Learn to set up Docker EE by using a config file](UCP configuration file.md).
+[Learn to set up Docker EE by using a config file](ucp-configuration-file.md).
 
 
