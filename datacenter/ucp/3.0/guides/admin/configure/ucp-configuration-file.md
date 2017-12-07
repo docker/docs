@@ -1,7 +1,7 @@
 ---
 title: UCP configuration file
-description: Configure UCP deployments.
-keywords: docker enterprise edition, ucp, universal control plane, swarm, configuration, deploy
+description: Set up UCP deployments by using a configuration file.
+keywords: Docker EE, UCP, configuration, config
 ---
 
 Override the default UCP settings by providing a configuration file when you
@@ -13,11 +13,11 @@ The `ucp-agent` service uses a configuration file to set up UCP.
 You can use the configuration file in different ways to set up your UCP
 swarms.
 
-- Install one swarm and use the UCP web UI to configure it as desired,
+- Install one cluster and use the UCP web UI to configure it as desired,
   extract the configuration file, edit it as needed, and use the edited
   config file to make copies to multiple other swarms.
-- Install a UCP swarm, extract and edit the configuration file, and use the 
-  CLI to apply the new configuration to the same swarm.
+- Install a UCP cluster, extract and edit the configuration file, and use the
+  CLI to apply the new configuration to the same cluster.
 - Run the `example-config` command, edit the example configuration file, and
   apply the file at install time or after installation.
 
@@ -210,7 +210,7 @@ Specifies whether the your UCP license is automatically renewed.
 
 ## cluster_config table (required)
 
-Configures the swarm cluster that the current UCP instance manages.
+Configures the cluster that the current UCP instance manages.
 
 The `dns`, `dns_opt`, and `dns_search` settings configure the DNS settings for UCP 
 components. Assigning these values overrides the settings in a container's 
@@ -229,6 +229,20 @@ components. Assigning these values overrides the settings in a container's
 | `kv_timeout`                  | no       | Sets the key-value store timeout setting, in milliseconds. The default is `5000`.                                                              |
 | `kv_snapshot_count`           | no       | Sets the key-value store snapshot count setting. The default is `20000`.                                                                       |
 | `external_service_lb`         | no       | Specifies an optional external load balancer for default links to services with exposed ports in the web UI.                                   |
+| `cni_installer_url`           | no       | Specifies the URL of a Kubernetes YAML file to be used for installing a CNI plugin. Applies only during initial installation. If empty, the default CNI plugin is used. |
 | `metrics_retention_time`      | no       | Adjusts the metrics retention time.                                                                                                            |
 | `metrics_scrape_interval`     | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                        |
 | `metrics_disk_usage_interval` | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.             |
+| `rethinkdb_cache_size`        | no       | Sets the size of the cache used by UCP's RethinkDB servers. The installed default is 512MB, but leaving this field empty or specifying `auto` instructs RethinkDB to determine a cache size automatically, which ensures a reliable operation in most scenarios. The automatic value is about half of currently available memory, but you can tune cache size manually to accommodate increased memory usage by other processes, or to maximize query performance. A larger cache improves the performance of the database, but you must consider other sources of memory consumption to avoid out-of-memory conditions. [Learn about cache size in RethinkDB](https://www.rethinkdb.com/docs/memory-usage/cache-size). |
+| `min_tls_version`             | no        | Sets the minimum TLS version for the controller to serve. Valid options are `tlsv1`, `tlsv1.0`, `tlsv1.1`, and `tlsv1.2`. An empty string defaults to TLS version 1.0. SSL version 3 is not supported. |
+
+## Kubernetes configuration flags
+
+You can set additional flags on the Kubernetes system components in the configuration file. You must ensure that any custom flags don't conflict with configuration options already set by UCP.
+
+```
+custom_kube_api_server_flags = ["--event-ttl=1h0m0s", "--service-node-port-range=30000-32767"]
+custom_kube_controller_manager_flags = ["--service-sync-period=5m0s"]
+custom_kubelet_flags = ["--http-check-frequency=20s"]
+custom_kube_scheduler_flags = ["--algorithm-provider=DefaultProvider"]
+```
