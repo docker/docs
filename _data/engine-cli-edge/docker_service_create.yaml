@@ -1041,7 +1041,7 @@ examples: |-
   for the same service as above:
 
   ```bash
-  $ docker service create --name my_web --replicas 3 --publish target=8080,port=80 nginx
+  $ docker service create --name my_web --replicas 3 --publish published=8080,target=80 nginx
   ```
 
   The options you can specify are:
@@ -1063,7 +1063,7 @@ examples: |-
   <tr>
     <td>protocol</td>
     <td><tt>--publish 8080:80</tt></td>
-    <td><tt>--publish target=8080,port=80</tt></td>
+    <td><tt>--publish published=8080,target=80</tt></td>
     <td><p>
       The container port to publish and the target port to bind it to on the
       routing mesh or directly on the node.
@@ -1072,7 +1072,7 @@ examples: |-
   <tr>
     <td>mode</td>
     <td>Not possible to set using short syntax.</td>
-    <td><tt>--publish target=8080,port=80,mode=host</tt></td>
+    <td><tt>--publish published=8080,target=80,mode=host</tt></td>
     <td><p>
       The mode to use for binding the port, either `ingress` or `host`. Defaults
       to `ingress` to use the routing mesh.
@@ -1081,7 +1081,7 @@ examples: |-
   <tr>
     <td>protocol</td>
     <td><tt>--publish 8080:80/tcp</tt></td>
-    <td><tt>--publish target=8080,port=80,protocol=tcp</tt></td>
+    <td><tt>--publish published=8080,target=80,protocol=tcp</tt></td>
     <td><p>
       The protocol to use, either `tcp` or `udp`. Defaults to `tcp`. To bind a
       port for both protocols, specify the `-p` or `--publish` flag twice.

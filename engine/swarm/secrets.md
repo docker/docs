@@ -305,7 +305,7 @@ This example assumes that you have PowerShell installed.
     ```powershell
     PS> docker service create
         --name my-iis
-        --publish target=8000,port=8000
+        --publish published=8000,target=8000
         --secret src=homepage,target="\inetpub\wwwroot\index.html"
         microsoft/iis:nanoserver  
     ```
@@ -497,7 +497,7 @@ generate the site key and certificate, name the files `site.key` and
            --secret site.key \
            --secret site.crt \
            --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
-           --publish target=3000,port=443 \
+           --publish published=3000,target=443 \
            nginx:latest \
            sh -c "exec nginx -g 'daemon off;'"
       ```
@@ -510,7 +510,7 @@ generate the site key and certificate, name the files `site.key` and
            --secret site.key \
            --secret site.crt \
            --secret site.conf \
-           --publish target=3000,port=443 \
+           --publish published=3000,target=443 \
            nginx:latest \
            sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
       ```
@@ -787,7 +787,7 @@ line.
          --name wordpress \
          --replicas 1 \
          --network mysql_private \
-         --publish target=30000,port=80 \
+         --publish published=30000,target=80 \
          --mount type=volume,source=wpdata,destination=/var/www/html \
          --secret source=mysql_password,target=wp_db_password,mode=0400 \
          -e WORDPRESS_DB_USER="wordpress" \

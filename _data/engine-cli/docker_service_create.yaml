@@ -1029,7 +1029,7 @@ examples: |-
   using the `--publish` flag:
 
   ```bash
-  $ docker service create --publish <TARGET-PORT>:<SERVICE-PORT> nginx
+  $ docker service create --publish <PUBLISHED-PORT>:<TARGET-PORT> nginx
   ```
 
   For example:

@@ -25,28 +25,28 @@ service.
 
 ## Publish a port for a service
 
-Use the `--publish` flag to publish a port when you create a service. The `port`
-is the port inside the container, and the `target` is the port to bind on the
-routing mesh. If you leave off the `target` port, a random high-numbered port is
+Use the `--publish` flag to publish a port when you create a service. `target`
+is the port inside the container, and `publish` is the port to bind on the
+routing mesh. If you leave off the `publish` port, a random high-numbered port is
 bound for each service task. You will need to inspect the task to determine the
 port.
 
 ```bash
 $ docker service create \
   --name <SERVICE-NAME> \
-  --publish target=<PUBLISHED-PORT>,port=<CONTAINER-PORT> \
+  --publish published=<PUBLISHED-PORT>,target=<CONTAINER-PORT> \
   <IMAGE>
 ```
 
 > **Note**: The older form of this syntax is a colon-separated string, where
-> the published port is first and the container port is second, such as
+> the published port is first and the target port is second, such as
 > `-p 8080:80`. The new syntax is preferred because it is easier to read and
 > allows more flexibility.
 
-The `<CONTAINER-PORT>` is the port where the container listens. If you omit it,
-a random high-numbered port is bound.
 The `<PUBLISHED-PORT>` is the port where the swarm makes the service available.
-This parameter is required.
+If you omit it, a random high-numbered port is bound.
+The `<CONTAINER-PORT>` is the port where the container listens. This parameter
+is required.
 
 For example, the following command publishes port 80 in the nginx container to
 port 8080 for any node in the swarm:
@@ -54,7 +54,7 @@ port 8080 for any node in the swarm:
 ```bash
 $ docker service create \
   --name my-web \
-  --publish target=8080,port=80 \
+  --publish published=8080,target=80 \
   --replicas 2 \
   nginx
 ```
@@ -75,7 +75,7 @@ You can publish a port for an existing service using the following command:
 
 ```bash
 $ docker service update \
-  --publish-add target=<PUBLISHED-PORT>,port=<CONTAINER-PORT> \
+  --publish-add published=<PUBLISHED-PORT>,target=<CONTAINER-PORT> \
   <SERVICE>
 ```
 
@@ -107,7 +107,7 @@ the port is published as a TCP port. If you use the longer syntax (recommended
 
 ```bash
 $ docker service create --name dns-cache \
-  --publish target=53,port=53 \
+  --publish published=53,target=53 \
   dns-cache
 ```
 
@@ -125,8 +125,8 @@ $ docker service create --name dns-cache \
 
 ```bash
 $ docker service create --name dns-cache \
-  --publish target=53,port=53 \
-  --publish target=53,port=53,protocol=udp \
+  --publish published=53,target=53 \
+  --publish published=53,target=53,protocol=udp \
   dns-cache
 ```
 
@@ -145,7 +145,7 @@ $ docker service create --name dns-cache \
 
 ```bash
 $ docker service create --name dns-cache \
-  --publish target=53,port=53,protocol=udp \
+  --publish published=53,target=53,protocol=udp \
   dns-cache
 ```
 
@@ -182,7 +182,7 @@ routing mesh is used. The following command creates a global service using
 
 ```bash
 $ docker service create --name dns-cache \
-  --publish target=53,port=53,protocol=udp,mode=host \
+  --publish published=53,target=53,protocol=udp,mode=host \
   --mode global \
   dns-cache
 ```
