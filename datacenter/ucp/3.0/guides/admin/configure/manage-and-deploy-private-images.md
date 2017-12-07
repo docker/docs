@@ -38,8 +38,8 @@ is in DTR, only authorized users can change it.
 To push images to DTR, you need CLI access to a licensed installation of
 Docker EE.
 
-- [License your installation](/datacenter/ucp/2.2/guides/admin/configure/license-your-installation.md).
-- [Set up your Docker CLI](/datacenter/ucp/2.2/guides//user/access-ucp/cli-based-access.md).
+- [License your installation](license-your-installation.md).
+- [Set up your Docker CLI](/datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access.md).
 
 When you're set up for CLI-based access to a licensed Docker EE instance,
 you can push images to DTR.
