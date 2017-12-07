@@ -164,12 +164,12 @@ An array of tables that specifies the DTR instances that the current UCP instanc
 
 ## scheduling_configuration table (optional)
 
-Specifies the users who can schedule containers on manager nodes. 
+Specifies scheduling options and the default orchestrator for new nodes. 
 
 | Parameter                     | Required | Description                                                                                        |
 | ----------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
 | `enable_admin_ucp_scheduling` | no       | Set to `true` to allow admins to schedule on containers on manager nodes. The default is `false`.  |
-| `enable_user_ucp_scheduling`  | no       | Set to `true` to allow non-admin users to schedule containers on managers. The default is `false`. |
+| `default_node_orchestrator`   | no       | Sets the type of orchestrator to use for new nodes that are joined to the cluster. Can be `swarm` or `kubernetes`. The default is `swarm`. |
 
 ## tracking_configuration table (optional)
 
@@ -238,7 +238,9 @@ components. Assigning these values overrides the settings in a container's
 
 ## Kubernetes configuration flags
 
-You can set additional flags on the Kubernetes system components in the configuration file. You must ensure that any custom flags don't conflict with configuration options already set by UCP.
+You can set additional flags on the Kubernetes system components in the
+`cluster_config` table. You must ensure that any custom flags don't
+conflict with configuration options already set by UCP.
 
 ```
 custom_kube_api_server_flags = ["--event-ttl=1h0m0s", "--service-node-port-range=30000-32767"]
