@@ -32,6 +32,4 @@ docker run -it --rm docker/dtr \
 |[restore](restore)| Install and restore DTR from an existing backup                 |
 |[backup](backup)| Create a backup of DTR                 |
 |[upgrade](upgrade)| Upgrade DTR 2.3.x cluster to this version                 |
-|[dumpcerts](dumpcerts)| Print the TLS certificates used by DTR                 |
 |[images](images)| List all the images necessary to install DTR                 |
-
