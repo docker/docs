@@ -4,7 +4,7 @@ description: Learn how to architect multitenancy with Docker Enterprise Edition 
 keywords: authorize, authentication, users, teams, groups, sync, UCP, role, access control
 ---
 
-Go through the [Docker Enterprise Standard tutorial](rbac-howto-orcabank1-standard.md),
+Go through the [Docker Enterprise Standard tutorial](ee-standard.md),
 before continuing here with Docker Enterprise Advanced.
 
 In the first tutorial, the fictional company, OrcaBank, designed an architecture
@@ -21,9 +21,9 @@ apps from their dev cluster to staging for testing, and then to production.
 
 Second, production applications are no longer permitted to share any physical
 infrastructure with non-production infrastructure. OrcaBank segments the
-scheduling and access of applications with [Node Access Control](rbac-howto-isolate-nodes.md).
+scheduling and access of applications with [Node Access Control](isolate-nodes.md).
 
-> [Node Access Control](rbac-howto-isolate-nodes.md) is a feature of Docker EE
+> [Node Access Control](isolate-nodes.md) is a feature of Docker EE
 > Advanced and provides secure multi-tenancy with node-based isolation. Nodes
 > can be placed in different collections so that resources can be scheduled and
 > isolated on disparate physical or virtual hardware resources.
@@ -136,4 +136,4 @@ that are provided by the `db` team.
 
 ## Next steps
 
-* [Access control design with Docker EE Standard](rbac-howto-orcabank1-standard.md)
+* [Access control design with Docker EE Standard](ee-standard.md)

@@ -1629,42 +1629,36 @@ manuals:
           title: uninstall-ucp
         - path: /datacenter/ucp/3.0/reference/cli/upgrade/
           title: upgrade
-
-
     - sectiontitle: Authorize role-based access
       section:
       - path: /datacenter/ucp/3.0/guides/authorization/
         title: Access control model overview
       - sectiontitle: The basics
         section:
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-create-subjects/
-          title: Create and users and teams
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-define-roles/
-          title: Define roles with permissions
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-group-resources/
-          title: Group cluster resources
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-basics-grant-permissions/
-          title: Grant role-access to resources
+        - path: /datacenter/ucp/3.0/guides/authorization/create-users-and-teams-manually/
+          title: Create users and teams manually
+        - path: /datacenter/ucp/3.0/guides/authorization/create-teams-with-ldap/
+          title: Create teams with LDAP
+        - path: /datacenter/ucp/3.0/guides/authorization/define-roles/
+          title: Define roles with authorized API operations
+        - path: /datacenter/ucp/3.0/guides/authorization/group-resources/
+          title: Group and isolate cluster resources
+        - path: /datacenter/ucp/3.0/guides/authorization/grant-permissions/
+          title: Grant role-access to cluster resources
+        - path: /datacenter/ucp/3.0/guides/authorization/reset-user-password/
+          title: Reset user passwords
       - sectiontitle: Tutorials and use cases
         section:
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-deploy-stateless-app/
+        - path: /datacenter/ucp/3.0/guides/authorization/deploy-stateless-app/
           title: Deploy stateless app with RBAC
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-isolate-volumes/
+        - path: /datacenter/ucp/3.0/guides/authorization/isolate-volumes/
           title: Isolate volumes
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-isolate-nodes/
+        - path: /datacenter/ucp/3.0/guides/authorization/isolate-nodes/
           title: Isolate nodes
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-orcabank1-standard/
-          title: Docker EE Standard Use Case
-        - path: /datacenter/ucp/3.0/guides/authorization/rbac-howto-orcabank2-advanced/
-          title: Docker EE Advanced Use Case
-      - sectiontitle: User admin
-        section:
-        - path: /datacenter/ucp/3.0/guides/authorization/admin-sync-with-ldap/
-          title: Synchronize teams with LDAP
-        - path: /datacenter/ucp/3.0/guides/authorization/admin-recover-password/
-          title: Reset user passwords
-
-
+        - path: /datacenter/ucp/3.0/guides/authorization/ee-standard/
+          title: Docker EE Standard use case
+        - path: /datacenter/ucp/3.0/guides/authorization/ee-advanced/
+          title: Docker EE Advanced use case
     - sectiontitle: User guides
       section:
       - sectiontitle: Access UCP

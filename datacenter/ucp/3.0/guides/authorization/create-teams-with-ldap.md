@@ -1,5 +1,5 @@
 ---
-title: Synchronize users and teams with LDAP
+title: Create teams with LDAP
 description: Learn how to enable LDAP and sync users and teams in Docker Universal Control Plane.
 keywords: authorize, authentication, users, teams, UCP, Docker, LDAP
 ---

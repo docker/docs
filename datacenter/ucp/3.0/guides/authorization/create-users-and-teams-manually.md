@@ -1,5 +1,5 @@
 ---
-title: Create and configure users and teams
+title: Create users and teams manually
 description: Learn how to add users and define teams in Docker Universal Control Plane.
 keywords: rbac, authorize, authentication, users, teams, UCP, Docker
 ---
@@ -30,7 +30,7 @@ To use Docker EE's built-in authentication, you must [create users manually](#cr
 
 > To enable LDAP and authenticate and synchronize UCP users and teams with your
 > organization's LDAP directory, see:
-> - [Synchronize users and teams with LDAP in the UI](admin-sync-with-ldap.md)
+> - [Synchronize users and teams with LDAP in the UI](create-teams-with-ldap.md)
 > - [Integrate with an LDAP Directory](../admin/configure/external-auth/index.md).
 
 ## Build an organization architecture
@@ -61,12 +61,12 @@ To create teams in the organization:
    - Click the team name and select **Actions** > **Add Users**.
    - Check the users to include and click **Add Users**.
 
-> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](admin-sync-with-ldap).
+> **Note**: To sync teams with groups in an LDAP server, see [Sync Teams with LDAP](create-teams-with-ldap.md).
 
 ### Create users manually
 
 New users are assigned a default permission level so that they can access the
-cluster. To extend a user's default permissions, add them to a team and [create grants](rbac-basics-grant-permissions.md). You can optionally grant them Docker EE
+cluster. To extend a user's default permissions, add them to a team and [create grants](grant-permissions.md). You can optionally grant them Docker EE
 administrator permissions.
 
 To manally create users in UCP:
@@ -86,7 +86,7 @@ To manally create users in UCP:
 
 # Next steps
 
-* [Synchronize teams with LDAP](admin-sync-with-ldap.md)
-* [Define roles with authorized API operations](rbac-basics-define-roles.md)
-* [Group and isolate cluster resources](rbac-basics-group-resources.md)
-* [Grant role-access to cluster resources](rbac-basics-grant-permissions.md)
+* [Synchronize teams with LDAP](create-teams-with-ldap.md)
+* [Define roles with authorized API operations](define-roles.md)
+* [Group and isolate cluster resources](group-resources.md)
+* [Grant role-access to cluster resources](grant-permissions.md)
