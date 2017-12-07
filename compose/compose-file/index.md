@@ -1291,6 +1291,7 @@ The corresponding network configuration in the
 `ipam` block with subnet configurations covering each static address. If IPv6
 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
 you must use a version 2.x Compose file, such as the one below.
+> **Note**: These options do not currently work in docker swarm mode
 
 An example:
 
