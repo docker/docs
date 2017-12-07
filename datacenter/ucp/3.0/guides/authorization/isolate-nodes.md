@@ -28,7 +28,7 @@ complete this example.
 In the web UI, navigate to the **Organizations & Teams** page to create a team
 named "Ops" in your organization. Add a user who isn't a UCP administrator to
 the team.
-[Learn to create and manage teams](rbac-basics-create-subjects.md).
+[Learn to create and manage teams](create-users-and-teams-manually.md).
 
 ## Create a node collection and a resource collection
 
@@ -168,4 +168,4 @@ that has a `Service Create` grant for the user.
 
 ## Next steps
 
-* [Isolate volumes](rbac-howto-isolate-volumes.md)
+* [Isolate volumes](isolate-volumes.md)

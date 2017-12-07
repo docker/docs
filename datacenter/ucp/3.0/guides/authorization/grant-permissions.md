@@ -69,4 +69,4 @@ To create a grant in UCP:
 
 ## Next steps
 
-* [Deploy a simple stateless app with RBAC](rbac-howto-deploy-stateless-app.md)
+* [Deploy a simple stateless app with RBAC](deploy-stateless-app.md)

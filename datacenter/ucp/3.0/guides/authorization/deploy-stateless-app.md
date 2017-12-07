@@ -32,7 +32,7 @@ acme-datacenter
     └── Chad Chavez
 ```
 
-See: [Create and configure users and teams](rbac-basics-create-subjects.md).
+See: [Create and configure users and teams](create-users-and-teams-manually.md).
 
 ## Kubernetes deployment
 
@@ -64,7 +64,7 @@ simple role for the ops team:
 4. On the **Operations** tab, check all **Kubernetes Deployment Operations**.
 5. Click **Create**.
 
-See: [Create and configure users and teams](rbac-basics-define-roles.md).
+See: [Create and configure users and teams](define-roles.md).
 
 ### Grant access
 
@@ -127,7 +127,7 @@ Create a collection for nginx resources, nested under the `/Shared` collection:
 
 > **Tip**: To drill into a collection, click **View Children**.
 
-See: [Group and isolate cluster resources](rbac-basics-group-resources.md).
+See: [Group and isolate cluster resources](group-resources.md).
 
 ### Define roles
 
@@ -140,7 +140,7 @@ simple role for the ops team:
 4. On the **Operations** tab, check all **Service Operations**.
 5. Click **Create**.
 
-See: [Create and configure users and teams](rbac-basics-define-roles.md).
+See: [Create and configure users and teams](define-roles.md).
 
 ### Grant access
 
@@ -151,7 +151,7 @@ built-in role, **Swarm Deploy**.
 acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
 ```
 
-See: [Grant role-access to cluster resources](rbac-basics-grant-permissions.md).
+See: [Grant role-access to cluster resources](grant-permissions.md).
 
 ### Deploy Nginx
 

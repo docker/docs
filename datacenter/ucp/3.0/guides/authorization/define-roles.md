@@ -48,6 +48,6 @@ the same name to different collections or namespaces.
 
 ## Next steps
 
-* [Create and configure users and teams](rbac-basics-create-subjects.md)
-* [Group and isolate cluster resources](rbac-basics-group-resources.md)
-* [Grant role-access to cluster resources](rbac-basics-grant-permissions.md)
+* [Create and configure users and teams](create-users-and-teams-manually.md)
+* [Group and isolate cluster resources](group-resources.md)
+* [Grant role-access to cluster resources](grant-permissions.md)

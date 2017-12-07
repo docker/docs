@@ -36,7 +36,7 @@ For example, each user has a private collection with the path,
 the access label: `com.docker.ucp.access.label = /Shared/Private/molly`.
 
 To deploy applications into a custom collection, you must define the collection
-first. For an example, see [Deploy stateless app with RBAC](rbac-howto-deploy-stateless-app.md).
+first. For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 When a user deploys a resource without an access label, Docker EE automatically
 places the resource in the user's default collection.
 
@@ -53,13 +53,13 @@ the user, which specifies the operations that are allowed against the target.
 
 Docker EE provides a number of built-in collections.
 
-| Default collection | Description                                                                                                                                                                                                                                           |
-|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here.                                                                                                                                                               |
-| `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable.                                                                                                                          |
-| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](./rbac-howto-isolate-nodes/). |
-| `/Shared/Private/` | Path to a user's private collection.                                                                                                                                                                                                                  |
-| `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower).                                                                                                                                                                             |
+| Default collection | Description                                                                                                                                                                                                                                |
+|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/`                | Path to all resources in the Swarm cluster. Resources not in a collection are put here.                                                                                                                                                    |
+| `/System`          | Path to UCP managers, DTR nodes, and UCP/DTR system services. By default, only admins have access, but this is configurable.                                                                                                               |
+| `/Shared`          | Default path to all worker nodes for scheduling. In Docker EE Standard, all worker nodes are located here. In [Docker EE Advanced](https://www.docker.com/enterprise-edition), worker nodes can be moved and [isolated](isolate-nodes.md). |
+| `/Shared/Private/` | Path to a user's private collection.                                                                                                                                                                                                       |
+| `/Shared/Legacy`   | Path to the access control labels of legacy versions (UCP 2.1 and lower).                                                                                                                                                                  |
 
 This diagram shows the `/System` and `/Shared` collections created by Docker EE.
 User private collections are children of the `/Shared/private` collection. Here,
@@ -143,10 +143,10 @@ one of the nodes under `/Shared`.
 
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
-permission, to the team. [Isolate swarm nodes to a specific team](rbac-howto-isolate-nodes.md).
+permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes.md).
 
 ## Next case
 
-* [Create and configure users and teams](rbac-basics-create-subjects.md)
-* [Define roles with authorized API operations](rbac-basics-define-roles.md)
-* [Grant role-access to cluster resources](rbac-basics-grant-permissions.md)
+* [Create and configure users and teams](create-users-and-teams-manually.md)
+* [Define roles with authorized API operations](define-roles.md)
+* [Grant role-access to cluster resources](grant-permissions.md)

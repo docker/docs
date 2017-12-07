@@ -18,7 +18,7 @@ administrators might take the following high-level steps:
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
 - Create **grants** by marrying subject + role + resource group.
 
-For an example, see [Deploy stateless app with RBAC](rbac-howto-deploy-stateless-app.md).
+For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 
 ## Subjects
 
@@ -32,7 +32,7 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see: [Create and configure users and teams](rbac-basics-create-subjects.md)
+For more, see: [Create and configure users and teams](create-users-and-teams-manually.md)
 
 ## Roles
 
@@ -48,7 +48,7 @@ Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](rbac-basics-define-roles.md)
+For more, see: [Define roles with authorized API operations](define-roles.md)
 
 ## Resources
 
@@ -72,7 +72,7 @@ namespaces _cannot be nested_.
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
 > Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
 
-For more, see: [Group and isolate cluster resources](rbac-basics-group-resources.md).
+For more, see: [Group and isolate cluster resources](group-resources.md).
 
 ## Grants
 
@@ -88,11 +88,11 @@ Only an administrator can manage grants, subjects, roles, and resources.
 > into directories or namespaces, define roles by selecting allowable operations,
 > and apply grants to users and teams.
 
-For more, see: [Grant access to cluster resources](rbac-basics-grant-permissions.md).
+For more, see: [Grant access to cluster resources](grant-permissions.md).
 
 ## Next steps
 
-* [Create and configure users and teams](rbac-basics-create-subjects.md)
-* [Define roles with authorized API operations](rbac-basics-define-roles.md)
-* [Group and isolate cluster resources](rbac-basics-group-resources.md)
-* [Grant role-access to cluster resources](rbac-basics-grant-permissions.md)
+* [Create and configure users and teams](create-users-and-teams-manually.md)
+* [Define roles with authorized API operations](define-roles.md)
+* [Group and isolate cluster resources](group-resources.md)
+* [Grant role-access to cluster resources](grant-permissions.md)

@@ -21,7 +21,7 @@ nodes.
 Navigate to the **Organizations & Teams** page to create two teams in your
 organization, named "Dev" and "Prod". Add a user who's not a UCP administrator
 to the Dev team, and add another non-admin user to the Prod team.
-[Learn how to create and manage teams](rbac-basics-create-subjects.md).
+[Learn how to create and manage teams](create-users-and-teams-manually.md).
 
 ## Create resource collections
 
@@ -93,4 +93,4 @@ created by the Dev and Prod users.
 
 ## Next steps
 
-* [Isolate Swarm nodes in Docker Advanced](rbac-howto-isolate-nodes)
+* [Isolate Swarm nodes in Docker Advanced](isolate-nodes.md)

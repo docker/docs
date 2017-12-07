@@ -109,7 +109,7 @@ a secure and controlled interface, leveraging Database networks and secrets.
 
 > **Note:** In Docker Enterprise Standard, all resources are deployed across the
 > same  group of UCP worker nodes. Node segmentation is provided in Docker
-> Enterprise Advanced and discussed in the [next tutorial](./deploy/rbac/rbac-howto-orcabank1-advanced).
+> Enterprise Advanced and discussed in the [next tutorial](ee-advanced.md).
 
 ![image](../images/design-access-control-adv-2.png){: .with-border}
 
@@ -130,4 +130,4 @@ minus the database tier that is managed by the `db` team.
 
 ## Next steps
 
-* [Access control design with Docker EE Advanced](rbac-howto-orcabank1-advanced.md)
+* [Access control design with Docker EE Advanced](ee-advanced.md)
