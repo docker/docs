@@ -9,23 +9,29 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Hardware and software requirements
 
-You can install UCP on-premises or on a cloud provider. To install UCP,
-all nodes must have:
+You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
+* [Docker EE Engine](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
+* A static IP address
+
+### Minimum requirements
+
 * 8GB of RAM for manager nodes or nodes running DTR
 * 4GB of RAM for worker nodes
 * 3GB of free disk space
-* A static IP address
 
-Also, make sure the nodes are running one of these operating systems:
+### Recommended production requirements
 
-* A maintained version of CentOS 7. Archived versions aren't supported or tested.
-* Red Hat Enterprise Linux 7.0, 7.1, 7.2, 7.3, or 7.4
-* Ubuntu 14.04 LTS or 16.04 LTS
-* SUSE Linux Enterprise 12
-* Oracle Linux 7.3
+ * 16GB of RAM for manager nodes or nodes running DTR
+ * 4 vCPUs for manager nodes or nodes running DTR
+ * 25-100GB of free disk space
+ 
+Note that Windows container images are typically larger than Linux ones and for
+this reason, you should consider provisioning more local storage for Windows
+nodes and for DTR setups that will store Windows container images.
+
+Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
@@ -35,7 +41,7 @@ between hosts.
 > These requirements assume that manager nodes won't run regular workloads.
 > If you plan to run additional workloads on manager nodes, you may need to
 > provision more powerful nodes. If manager nodes become overloaded, the
-> swarm may experience issues.
+> cluster may experience issues.
 
 ## Ports used
 
@@ -93,9 +99,9 @@ unexpected behavior may cause poor performance or even failures.
 
 Docker EE is a software subscription that includes three products:
 
-* Docker Engine with enterprise-grade support,
-* Docker Trusted Registry,
-* Docker Universal Control Plane.
+* Docker Engine with enterprise-grade support
+* Docker Trusted Registry
+* Docker Universal Control Plane
 
 Learn more about compatibility and the maintenance lifecycle for these products:
 
@@ -107,14 +113,9 @@ Learn more about compatibility and the maintenance lifecycle for these products:
 UCP {{ page.ucp_version }} requires minimum versions of the following Docker components:
 
 - Docker EE Engine 17.06 or higher
-- DTR 2.3 or higher
-
-<!--
-- Docker Remote API 1.25
-- Compose 1.9
--->
+- DTR 2.5 or higher
 
 ## Where to go next
 
-* [UCP architecture](../../architecture.md)
+* [UCP architecture](/enterprise/ucp-architecture.md)
 * [Plan your installation](plan-installation.md)
