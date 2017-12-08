@@ -3,7 +3,7 @@
 ### Install using the convenience script
 
 Docker provides convenience scripts at [get.docker.com](https://get.docker.com/)
-and [test.docker.com](https://test.docker.com/) for installing stable and
+and [test.docker.com](https://test.docker.com/) for installing edge and
 testing versions of Docker CE into development environments quickly and
 non-interactively. The source code for the scripts is in the
 [`docker-install` repository](https://github.com/docker/docker-install).
@@ -21,11 +21,13 @@ them:
 - The scripts install all dependencies and recommendations of the package
   manager without asking for confirmation. This may install a large number of
   packages, depending on the current configuration of your host machine.
+- The script does not provide options to specify which version of Docker to install,
+  and will install the latest version that is released in the "edge" channel.
 - Do not use the convenience script if Docker has already been installed on the
   host machine using another mechanism.
 
 This example uses the script at [get.docker.com](https://get.docker.com/) to
-install the latest stable release of Docker CE on Linux. To install the latest
+install the latest release of Docker CE on Linux. To install the latest
 testing version, use [test.docker.com](https://test.docker.com/) instead. In
 each of the commands below, replace each occurrence of `get` with `test`.
 

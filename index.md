@@ -338,9 +338,9 @@ the industry to modernize all applications. Docker EE Advanced comes with enterp
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="datacenter/ucp/2.2/guides/"> <img src="../images/UCP_48.svg" alt="Universal Control Plane"> </a>
+                    <a href="datacenter/ucp/{{ site.ucp_version }}/guides/"> <img src="../images/UCP_48.svg" alt="Universal Control Plane"> </a>
                 </div>
-                <h3 id="ucp"><a href="datacenter/ucp/2.2/guides/">Universal Control Plane</a></h3>
+                <h3 id="ucp"><a href="datacenter/ucp/{{ site.ucp_version }}/guides/">Universal Control Plane</a></h3>
                 <p>(UCP) Manage a cluster of on-premise Docker hosts like a single machine with this enterprise product.</p>
             </div>
         </div>
@@ -348,9 +348,9 @@ the industry to modernize all applications. Docker EE Advanced comes with enterp
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="datacenter/dtr/2.3/guides/"> <img src="../images/dtr_48.svg" alt="Docker Trusted Registry"> </a>
+                    <a href="datacenter/dtr/{{ site.dtr_version }}/guides/"> <img src="../images/dtr_48.svg" alt="Docker Trusted Registry"> </a>
                 </div>
-                <h3 id="dtr"><a href="datacenter/dtr/2.3/guides/">Docker Trusted Registry</a></h3>
+                <h3 id="dtr"><a href="datacenter/dtr/{{ site.dtr_version }}/guides/">Docker Trusted Registry</a></h3>
                 <p>(DTR) An enterprise image storage solution you can install behind a firewall to manage images and access.</p>
             </div>
         </div>

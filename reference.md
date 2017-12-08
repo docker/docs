@@ -22,8 +22,8 @@ various APIs, CLIs, and file formats.
 | [Engine CLI](/engine/reference/commandline/cli/)          | The main CLI for Docker, includes all `docker` and [`dockerd`](/engine/reference/commandline/dockerd/) commands|
 | [Compose CLI](/compose/reference/overview/)           | The CLI for Docker Compose, which allows you to build and run multi-container applications                       |
 | [Machine CLI](/machine/reference/)                    | Manages virtual machines that are pre-configured to run Docker                                                   |
-| [UCP CLI](/datacenter/ucp/2.2/reference/cli/index.md) | Deploy and manage Universal Control Plane                                                                       |
-| [DTR CLI](/datacenter/dtr/2.4/reference/cli/index.md) | Deploy and manage Docker Trusted Registry                                                                                       |
+| [UCP CLI](/datacenter/ucp/{{ site.ucp_version }}/reference/cli/index.md) | Deploy and manage Universal Control Plane                                                                       |
+| [DTR CLI](/datacenter/dtr/{{ site.dtr_version }}/reference/cli/index.md) | Deploy and manage Docker Trusted Registry                                                                                       |
 
 ## Application programming interfaces (APIs)
 
@@ -44,3 +44,9 @@ various APIs, CLIs, and file formats.
 | [Machine drivers](/machine/drivers/os-base/)           | Enables support for given cloud providers when provisioning resources with Machine |
 | [Registry token authentication](/registry/spec/auth/)  | Outlines the Docker registry authentication scheme                                 |
 | [Registry storage drivers](/registry/storage-drivers/) | Enables support for given cloud providers when storing images with Registry        |
+
+## Compliance control reference
+
+| Reference | Description |
+| --------- | ----------- |
+| [NIST 800-53 control reference](/compliance/reference/800-53/) | All of the NIST 800-53 Rev. 4 controls applicable to Docker Enterprise Edition can be referenced in this section. |

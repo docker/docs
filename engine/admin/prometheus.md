@@ -276,4 +276,4 @@ level.
 ## Next steps
 
 - Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" }
-- Set up some [alerts](https://prometheus.io/docs/alerting/rules/){: target="_blank" class="_" }
+- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" }

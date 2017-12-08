@@ -63,13 +63,6 @@ Docker depend on Docker containers, you can use a process manager such as
 [systemd](http://freedesktop.org/wiki/Software/systemd/), or
 [supervisor](http://supervisord.org/) instead.
 
-A process manager runs within the container and checks whether a process is
-running and starts it if not. It is not Docker-aware, but just monitors
-operating system processes within the container.
-
-Docker does not recommend this approach, because it is platform-dependent
-and even differs within different versions of a given Linux distribution.
-
 > **Warning**: Do not try to combine Docker restart policies with host-level
 > process managers, because the two will conflict.
 
@@ -77,4 +70,13 @@ To use a process manager, configure it to start your container or service using
 the same `docker start` or `docker service` command you would normally use to
 start the container manually. Consult the documentation for the specific
 process manager for more details.
+
+### Using a process manager inside containers
+
+Process managers can also run within the container to check whether a process is
+running and starts/restart it if not. 
+
+> **Warning**: These are not Docker-aware and just monitor operating system processes within the container.
+>
+> Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
 
