@@ -119,6 +119,10 @@ How long to wait between retries. Defaults to 1 second.
 
 The maximum number of retries. Defaults to 10.
 
+### fluentd-sub-second-precision
+
+Generates event logs in nanosecond resolution. Defaults to false.
+
 ## Fluentd daemon management with Docker
 
 About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
