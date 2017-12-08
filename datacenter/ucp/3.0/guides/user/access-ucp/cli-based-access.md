@@ -4,32 +4,21 @@ description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords: ucp, cli, administration
 ---
 
-Docker UCP secures your swarm by using role-based access control,
-so that only authorized users can perform changes to the cluster.
+With Universal Control Plane you can continue using the tools you know and
+love like the Docker CLI client and Kubectl. You just need to download and use
+a UCP client bundle.
 
-For this reason, when running docker commands on a UCP node, you need to
-authenticate your request with client certificates. When trying to run docker
-commands without a valid certificate, you get an authentication error:
+A client bundle contains a private and public key pair that authorizes your
+requests in UCP. It also contains utility scripts you can use to configure
+your Docker and Kubectl client tools to talk to your UCP deployment.
 
-```none
-$ docker ps
-
-x509: certificate signed by unknown authority
-```
-
-There are two different types of client certificates:
-
-* Admin user certificate bundles: allow running docker commands on the
-  Docker Engine of any node,
-* User certificate bundles: only allow running docker commands through a UCP
-  manager node.
 
 ## Download client certificates
 
 To download a client certificate bundle, log in to the UCP web UI and
-navigate to your **My Profile** page.
+navigate to the **My Profile** page.
 
-In the left pane, click **Client Bundles** and click **New Client Bundle**
+In the left pane, click **Client Bundles** and choose **New Client Bundle**
 to download the certificate bundle.
 
 ![](../../images/cli-based-access-1.png){: .with-border}
@@ -39,38 +28,78 @@ to download the certificate bundle.
 Once you've downloaded a client certificate bundle to your local computer, you
 can use it to authenticate your requests.
 
-Navigate to the directory where you downloaded the user bundle, and unzip it.
-Then source the `env.sh` script.
+Navigate to the directory where you downloaded the user bundle, and extract the
+zip file into a directory. Then use the utility script appropriate for your
+system:
 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#linux">Linux and macOS</a></li>
+  <li><a data-toggle="tab" data-target="#cmd">Cmd</a></li>
+  <li><a data-toggle="tab" data-target="#powershell">PowerShell</a></li>
+</ul>
+<div class="tab-content">
+<div id="linux" class="tab-pane fade in active" markdown="1">
 ```bash
-$ unzip ucp-bundle-dave.lauper.zip
-$ eval "$(<env.sh)"
+cd client-bundle && eval "$(<env.sh)"
 ```
+<hr>
+</div>
+<div id="cmd" class="tab-pane fade" markdown="1">
+```cmd
+REM Run this from an elevated prompt session
+cd client-bundle && env.cmd
+```
+<hr>
+</div>
+<div id="powershell" class="tab-pane fade" markdown="1">
+```cmd
+# Run this from an elevated PowerShell session
+cd client-bundle; Import-Module .\env.ps1
+```
+<hr>
+</div>
+</div>
 
-The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
-local Docker CLI communicate with UCP. It also updates the `DOCKER_CERT_PATH`
-environment variable to use the client certificates that are included in the
-client bundle you downloaded.
+The client bundle utility scripts update the the environment variables
+`DOCKER_HOST` to make your client tools communicate with your UCP deployment,
+and the `DOCKER_CERT_PATH` environment variable to use the client certificates
+that are included in the client bundle you downloaded. The utility scripts also
+run the `kubectl config` command to configure Kubectl.
 
-> **Note**: The bundle includes scripts for setting up Windows nodes. To set up a
-> Windows environment, run `env.cmd` in an elevated command prompt, or run
-> `env.ps1` in an elevated PowerShell prompt.
+To confirm that your client tools are now communicating with UCP, run:
 
-To verify a client certificate bundle has been loaded and the client is
-successfully communicating with UCP, look for `ucp` in the `Server Version`
-returned by `docker version`.
-
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#docker">Docker</a></li>
+  <li><a data-toggle="tab" data-target="#kube">Kubectl</a></li>
+</ul>
+<div class="tab-content">
+<div id="docker" class="tab-pane fade in active" markdown="1">
 ```bash
 {% raw %}
-$ docker version --format '{{.Server.Version}}'
+docker version --format '{{.Server.Version}}'
 {% endraw %}
 {{ page.ucp_repo }}/{{ page.ucp_version }}
 ```
+<hr>
+</div>
+<div id="kube" class="tab-pane fade" markdown="1">
+```bash
+kubectl config current-context
+```
+<hr>
+</div>
+</div>
 
-From now on, when you use the Docker CLI client, it includes your client
-certificates as part of the request to the Docker Engine. You can now use the
-Docker CLI to create services, networks, volumes, and other resources on a swarm
-that's managed by UCP.
+You can now use the Docker and Kubectl clients to create resources in UCP.
+
+## Client certificates for administrators
+
+UCP issues different types of certificates depending on the user:
+
+* User certificate bundles: only allow running docker commands through a UCP
+  manager node.
+* Admin user certificate bundles: allow running docker commands on the
+  Docker Engine of any node.
 
 ## Download client certificates by using the REST API
 
