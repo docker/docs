@@ -548,8 +548,6 @@ guides:
 reference:
 - sectiontitle: File formats
   section:
-  - title: File formats overview
-    path: /reference/#file-formats
   - title: Dockerfile reference
     path: /engine/reference/builder/
   - title: Compose file reference
@@ -561,8 +559,6 @@ reference:
 
 - sectiontitle: Command-Line Interfaces (CLIs)
   section:
-  - title: CLIs overview
-    path: /reference/#command-line-interfaces-clis
   - sectiontitle: Docker CLI (docker)
     section:
     - sectiontitle: Stable
@@ -1282,10 +1278,6 @@ reference:
 
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
-  - title: APIs overview
-    path: /reference/#application-programming-interfaces-apis
-  - title: File formats overview
-    path: /reference/#file-formats
   - sectiontitle: Docker Engine API
     section:
     - path: /engine/api/
