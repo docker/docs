@@ -9,15 +9,17 @@ notoc: true
 Usage: down [options]
 
 Options:
-    --rmi type          Remove images. Type must be one of:
-                        'all': Remove all images used by any service.
-                        'local': Remove only images that don't have a custom tag
-                        set by the `image` field.
-    -v, --volumes       Remove named volumes declared in the `volumes` section
-                        of the Compose file and anonymous volumes
-                        attached to containers.
-    --remove-orphans    Remove containers for services not defined in the
-                        Compose file
+    --rmi type              Remove images. Type must be one of:
+                              'all': Remove all images used by any service.
+                              'local': Remove only images that don't have a
+                              custom tag set by the `image` field.
+    -v, --volumes           Remove named volumes declared in the `volumes`
+                            section of the Compose file and anonymous volumes
+                            attached to containers.
+    --remove-orphans        Remove containers for services not defined in the
+                            Compose file
+    -t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.
+                            (default: 10)
 ```
 
 Stops containers and removes containers, networks, volumes, and images
