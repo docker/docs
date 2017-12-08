@@ -61,6 +61,8 @@ Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
 Starting with Docker 17.03, Docker uses a time-based release schedule, outlined
 below.
 
+Major new versions of Docker Enterprise Edition are releasae twice per year.
+
 {% include docker_schedule_matrix.md %}
 
 ### Updates, and patches
