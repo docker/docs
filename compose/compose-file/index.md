@@ -314,6 +314,23 @@ those used by other software.
         - "com.example.department=Finance"
         - "com.example.label-with-empty-value"
 
+#### shm_size
+
+> Added in [version 3.5](compose-versioning.md#version-35) file format
+
+Set the size of the `/dev/shm` partition for this build's containers. Specify
+as an integer value representing the number of bytes or as a string expressing
+a [byte value](#specifying-byte-values).
+
+    build:
+      context: .
+      shm_size: '2gb'
+
+
+    build:
+      context: .
+      shm_size: 10000000
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -1781,6 +1798,22 @@ format that looks like this:
 The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 
+## Specifying byte values
+
+Some configuration options, such as the `shm_size` sub-option for
+[`build`](#build), accept a byte value as a string in a format
+that looks like this:
+
+    2b
+    1024kb
+    2048k
+    300m
+    1gb
+
+The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
+`mb` and `gb`. Please note that decimal values are not supported at this time.
+
+
 ## Volume configuration reference
 
 While it is possible to declare [volumes](#volumes) on the file as part of the
@@ -1897,6 +1930,25 @@ conflicting with those used by other software.
       - "com.example.description=Database volume"
       - "com.example.department=IT/Ops"
       - "com.example.label-with-empty-value"
+
+### name
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34)
+
+Set a custom name for this volume.
+
+    version: '3.4'
+    volumes:
+      data:
+        name: my-app-data
+
+It can also be used in conjuction with the `external` property:
+
+    version: '3.4'
+    volumes:
+      data:
+        external: true
+        name: my-app-data
 
 ## Network configuration reference
 
@@ -2062,6 +2114,25 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+### name
+
+> [Added in version 3.5 file format](compose-versioning.md#version-35)
+
+Set a custom name for this network.
+
+    version: '3.5'
+    networks:
+      network1:
+        name: my-app-net
+
+It can also be used in conjuction with the `external` property:
+
+    version: '3.5'
+    networks:
+      network1:
+        external: true
+        name: my-app-net
+
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
@@ -2073,6 +2144,8 @@ stack. The source of the config is either `file` or `external`.
 - `external`: If set to true, specifies that this config has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
+- `name`: The actual name of the config object in Docker. Introduced with the
+  3.5 file format.
 
 In this example, `my_first_config` will be created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
@@ -2116,6 +2189,8 @@ stack. The source of the secret is either `file` or `external`.
 - `external`: If set to true, specifies that this secret has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
+- `name`: The actual name of the config object in Docker. Introduced with the
+  3.5 file format.
 
 In this example, `my_first_secret` will be created (as
 `<stack_name>_my_first_secret)`when the stack is deployed,
