@@ -467,83 +467,17 @@ guides:
 
 - sectiontitle: Open source at Docker
   section:
-  - path: /opensource/code/
-    title: Quickstart contribution
-  - sectiontitle: Set up for Docker development
-    section:
-    - path: /opensource/project/who-written-for/
-      title: README first
-    - path: /opensource/project/software-required/
-      title: Get the required software
-    - path: /opensource/project/software-req-win/
-      title: Set up for development on Windows
-    - path: /opensource/project/set-up-git/
-      title: Configure Git for contributing
-    - path: /opensource/project/set-up-dev-env/
-      title: Work with a development container
-    - path: /opensource/project/test-and-docs/
-      title: Run tests and test documentation
-    - sectiontitle: Contribution workflow
-      section:
-      - path: /opensource/workflow/make-a-contribution/
-        title: Understand how to contribute
-      - path: /opensource/workflow/find-an-issue/
-        title: Find and claim an issue
-      - path: /opensource/workflow/work-issue/
-        title: Work on your issue
-      - path: /opensource/workflow/create-pr/
-        title: Create a pull request (PR)
-      - path: /opensource/workflow/review-pr/
-        title: Participate in the PR review
-      - path: /opensource/workflow/advanced-contributing/
-        title: Advanced contributing
-      - path: /opensource/workflow/coding-style/
-        title: Coding style checklist
-    - sectiontitle: Other ways to contribute
-      section:
-      - path: /opensource/ways/meetups/
-        title: Organize a Docker meetup
-      - path: /opensource/ways/issues/
-        title: Organize our issues
-      - path: /opensource/ways/community/
-        title: Support the community
-      - path: /opensource/ways/test/
-        title: Testing contributions
-    - sectiontitle: Contribute to Kitematic
-      section:
-      - path: /opensource/kitematic/get_started/
-        title: Get started
-      - path: /opensource/kitematic/find_issue/
-        title: Find an issue
-      - path: /opensource/kitematic/set_up_dev/
-        title: Set up for Kitematic development
-      - path: /opensource/kitematic/work_issue/
-        title: Develop in Kitematic (work on an issue)
-      - path: /opensource/kitematic/create_pr/
-        title: Create a pull request (PR)
-      - path: /opensource/kitematic/next_steps/
-        title: Where to learn more
-    - sectiontitle: Governance
-      section:
-      - path: /opensource/governance/dgab-info/
-        title: Docker governance advisory board
-      - path: /opensource/governance/board-profiles/
-        title: Board member profiles
-      - path: /opensource/governance/conduct-code/
-        title: Code of conduct
-  - path: /opensource/FAQ/
-    title: FAQ for contributors
-  - path: /opensource/get-help/
-    title: Where to chat or get help
-  - path: /opensource/doc-style/
-    title: Style guide for Docker documentation
+  - path: /opensource/
+    title: Contribute to documentation
+  - path: /opensource/ways/
+    title: Other ways to contribute
 
-- sectiontitle:
+- sectiontitle: Documentation archive
   section:
   - path: /docsarchive/
     title: View the docs archives
-  - title: Docs hackathon results
-    path: /hackathon/
+  - path: /hackathon/
+    title: Docs hackathon results
 
 reference:
 - sectiontitle: File formats

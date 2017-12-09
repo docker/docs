@@ -107,12 +107,3 @@ information you are looking for on the GitHub repository.
 ## Looking for Moby?
 
 {% include content/moby.md %}
-
-## Legacy fun and practice
-
-For practice with GitHub and contributing to a codebase, read through
-[Contribute to Kitematic](/opensource/kitematic/index.md) which incorporates the
-kind of walkthrough we originally provided as an open source contributor guide
-here. See also, the [Kitematic
-README](https://github.com/docker/kitematic/blob/master/README.md), and the
-[Kitematic user guide](/kitematic/userguide.md).
