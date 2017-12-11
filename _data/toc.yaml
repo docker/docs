@@ -1579,6 +1579,8 @@ manuals:
           title: Manage and deploy private images
         - path: /datacenter/ucp/3.0/guides/admin/configure/set-orchestrator-type/
           title: Set the orchestrator type for a node
+        - path: /datacenter/ucp/3.0/guides/admin/configure/view-namespace-resources/
+          title: View Kubernetes objects in a namespace
         - sectiontitle: Join nodes to your cluster
           section:
           - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/
