@@ -65,7 +65,7 @@ links in the **Kubernetes** section of the left pane.
 
 ## Expose the server
 
-The NGINX server is up and running, but it's not accessble from outside of the
+The NGINX server is up and running, but it's not accessible from outside of the
 cluster. Add a `NodePort` service to expose the server on a specified port:
 
 ```yaml
