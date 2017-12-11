@@ -19,6 +19,21 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
+
+* Upgrades
+  - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+
+* Bug fixes and minor changes
+  - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
+  - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
+  - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277]()https://github.com/docker/for-win/issues/1277
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
+  - Increased timeout for VM boot startup to 2 minutes. 
+  
+
 ### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
 
 [Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
