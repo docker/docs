@@ -19,6 +19,16 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.1-ce-mac42 2017-12-11 (Stable)
+
+* Upgrades
+  - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+
+* Bug fixes and minor changes
+  - Fix bug not allowing to move qcow disk in some cases.
+
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06 (Stable)
 
 [Download](https://download.docker.com/mac/stable/19661/Docker.dmg)
