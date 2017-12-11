@@ -29,7 +29,7 @@ about both kinds of releases, and download stable and edge product installers at
 * Bug fixes and minor changes
   - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
   - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
-  - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277]()https://github.com/docker/for-win/issues/1277
+  - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277](https://github.com/docker/for-win/issues/1277)
   - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
   - Increased timeout for VM boot startup to 2 minutes. 
   
