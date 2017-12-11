@@ -18,11 +18,13 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 
 docker_ce_stable_version: "17.09"
 latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.09"
+docker_ce_edge_version: "17.11"
 docker_ee_version: "17.06"
-compose_version: "1.16.1"
-machine_version: "0.12.2"
+compose_version: "1.17.0"
+machine_version: "0.13.0"
 distribution_version: "2.6"
+dtr_version: "2.4"
+ucp_version: "2.2"
 
 ucp_versions:
   - version: "2.2"
@@ -36,8 +38,10 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: "2.3"
+  - version: "2.4"
+    path: /datacenter/dtr/2.4/guides/
     latest: true
+  - version: "2.3"
     path: /datacenter/dtr/2.3/guides/
   - version: "2.2"
     path: /datacenter/dtr/2.2/guides/
@@ -45,6 +49,13 @@ dtr_versions:
     path: /datacenter/dtr/2.1/guides/
   - version: "2.0"
     path: /datacenter/dtr/2.0/
+
+tablabels:
+  ucp-3.0: Universal Control Plane 3.0
+  ucp-2.2: Universal Control Plane 2.2
+  docker-cli-linux: Docker CLI on Mac/Linux
+  docker-cli-win: Docker CLI on Windows
+  kubectl: Kubernetes CLI
 
 collections:
   samples:
@@ -105,8 +116,8 @@ defaults:
   - scope:
       path: "engine"
     values:
-      assignee: "mstanleyjones"
-      win_server_zip_url: "https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.2-ee-4.zip"
+      assignee: "mistyhacks"
+      win_latest_build: "docker-17.06.2-ee-6"
   - scope:
       path: "kitematic"
     values:
@@ -126,7 +137,7 @@ defaults:
   - scope:
       path: "swarm"
     values:
-      assignee: "mstanleyjones"
+      assignee: "mistyhacks"
   - scope:
       path: "toolbox"
     values:
@@ -134,21 +145,28 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.3"
-      dtr_latest_image: "docker/dtr:2.3.4"
+      ucp_latest_image: "docker/ucp:2.2.4"
+      dtr_latest_image: "docker/dtr:2.4.1"
       enterprise: true
   - scope:
-      path: "datacenter/dtr/2.3"
+      path: "datacenter/dtr/2.4"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.4"
+      dtr_version: "2.4.1"
+  - scope:
+      path: "datacenter/dtr/2.3"
+    values:
+      hide_from_sitemap: true
+      dtr_org: "docker"
+      dtr_repo: "dtr"
+      dtr_version: "2.3.5"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.9"
+      docker_image: "docker/dtr:2.2.10"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -164,7 +182,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.3"
+      ucp_version: "2.2.4"
   - scope:
       path: "datacenter/ucp/2.1"
     values:

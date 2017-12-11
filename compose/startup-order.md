@@ -1,7 +1,7 @@
 ---
 description: How to control service startup order in Docker Compose
 keywords: documentation, docs, docker, compose, startup, order
-title: Controlling startup order in Compose
+title: Control startup order in Compose
 notoc: true
 ---
 
@@ -29,7 +29,7 @@ need this level of resilience, you can work around the problem with a wrapper
 script:
 
 -   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-    [dockerize](https://github.com/jwilder/dockerize) or sh-compatible
+    [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
     [wait-for](https://github.com/Eficode/wait-for). These are small
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
@@ -63,7 +63,7 @@ script:
         shift
         cmd="$@"
 
-        until psql -h "$host" -U "postgres" -c '\l'; do
+        until psql -h "$host" -U "postgres" -c '\q'; do
           >&2 echo "Postgres is unavailable - sleeping"
           sleep 1
         done

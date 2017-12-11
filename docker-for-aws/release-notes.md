@@ -15,8 +15,8 @@ title: Docker for AWS release notes
 
 - Docker engine 17.06 EE
 - For Std/Adv external logging has been removed, as it is now handled by [UCP](https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/){: target="_blank" class="_"}
-- UCP 2.2.0
-- DTR 2.3.0
+- UCP 2.2.3
+- DTR 2.3.3
 
 ### 17.03 EE
 
@@ -84,19 +84,18 @@ Release date: 03/01/2017
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
 
-## Test channel
+## Edge channel
 
-### 17.05.0-ce-rc1
+### 17.10 CE
 
-Release date: 04/12/2017
-
-{{aws_blue_test}}
+{{aws_blue_edge}}
 
 **New**
 
-- Docker Engine upgraded to [Docker 17.05.0 CE RC1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
-- Terminated instances will now automatically be removed from the Swarm.
-- [Bug Fix] [meta-server] fixed crashing issue, when an instance had no public IP address.
+Release date: 10/18/2017
+
+- Docker Engine upgraded to [Docker 17.10.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce){: target="_blank" class="_"}
+- Editions container log to stdout instead of disk, preventing hdd fill-up
 
 ## Template archive
 

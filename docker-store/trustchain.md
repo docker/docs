@@ -1,5 +1,5 @@
 ---
-title: Docker Store Trust Chain
+title: Docker Store trust chain
 keywords: trust, chain, store
 ---
 
@@ -57,3 +57,7 @@ image certification and publishing process as outlined below:
     ```
 
 ![Store Trust Chain signing process](images/image_0.png)
+
+To learn more the trust chain and certification for publishing content, see
+[Security and Audit Policies](publish.md#security-and-audit-policies) in the
+publishers guide.

@@ -27,7 +27,7 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 4. Enter a password between 6 and 128 characters long.
 
-3. Click **Sign Up**.
+3. Click **Sign up**.
 
    Docker sends a verification email to the address you provided.
 

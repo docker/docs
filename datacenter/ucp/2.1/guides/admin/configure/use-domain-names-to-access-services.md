@@ -11,9 +11,9 @@ running.
 
 ![swarm routing mesh](../../images/use-domain-names-1.svg)
 
-In this example, the wordpress service is being served on port 8080.
+In this example, the wordpress service is being served on port 8000.
 Users can access wordpress using the IP address of any node
-in the cluster and port 8080. If wordpress is not running in that node, the
+in the cluster and port 8000. If wordpress is not running in that node, the
 request is redirected to a node that is.
 
 UCP extends this and provides an HTTP routing mesh for application-layer
@@ -22,7 +22,7 @@ using a domain name instead of an IP.
 
 ![http routing mesh](../../images/use-domain-names-2.svg)
 
-In this example, the Wordpress service listens on port 8080 and is attached to
+In this example, the Wordpress service listens on port 8000 and is attached to
 the `ucp-hrm` network. There's also a DNS entry mapping `wordpress.example.org`
 to the IP addresses of the UCP nodes.
 

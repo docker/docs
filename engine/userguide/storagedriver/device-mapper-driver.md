@@ -117,7 +117,7 @@ For production systems, see
     <output truncated>
     ```
 
-  This host is running in `loop-lvm` node, which is **not** supported on
+  This host is running in `loop-lvm` mode, which is **not** supported on
   production systems. This is indicated by the fact that the `Data loop file`
   and a `Metadata loop file` are on files under
   `/var/lib/docker/devicemapper`. These are loopback-mounted
@@ -622,6 +622,16 @@ block device and other parameters to suit your situation.
      Metadata Space Available: 1.069 GB
     <output truncated>
     ```
+
+### Activate the `devicemapper` after reboot
+
+If you reboot the host and find that the docker service failed to start,
+you'll see the error, "Non existing device". You need to re-activate the
+logical volumes with this command:
+
+```bash
+sudo lvchange -ay docker/thinpool
+```
 
 ## How the `devicemapper` storage driver works
 

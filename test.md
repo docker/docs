@@ -5,6 +5,26 @@ hide_from_sitemap: true
 toc_min: 1
 ---
 
+Welcome to the Docker documentation test page!
+
+This is a demo of components, tags, styles, tools, and strategies we use for the
+docs. We explain the code behind the published page and demo the effects. So, if
+you want to see, for example, how admonitions and notes are coded in markdown,
+read the section on [Admonitions (notes)](/test/#admonitions-notes) on the web
+published page and study the pre-processed `test.md` to see how they are
+implemented. The Docker documentation team uses this page as "note to self"
+reminders. Since we invite docs suggestions and contributions from the
+community, we've always made the test page generally available.
+
+If you want to understand how something in the docs is coded, use this page is
+as a resource.
+
+If, in the course of making docs updates and suggestions, you develop a new
+strategy or component for the docs, feel free to add a demo and explanation to
+this test page and submit a PR for it so we can review and discuss it.
+
+Cool? Let's dive in!
+
 # Heading 1
 
 Most pages don't actually have a H1 heading. The page title from the metadata is
@@ -274,6 +294,8 @@ page or displaying content as "cards".
 
 ## Jekyll / Liquid tricks
 
+### Assignment
+
 This paragraph is centered and colored green by setting CSS directly on the element.
 **Even though you can do this and it's sometimes the right way to go, remember that if
 we re-skin the site, any inline styles will need to be dealt with manually!**
@@ -295,6 +317,12 @@ You can nest captures within each other to represent more complex logic with Liq
 - Things set in the page's metadata, either via the defaults in `_config.yml` or per page, are available as page variables, like `{{ page.title }}`.
 - In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
 - If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
+
+### Image formatting
+
+This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
+
+![alt_text](machine/img/provision-use-case.png){: .white-bg}
 
 ## Bootstrap and CSS tricks
 

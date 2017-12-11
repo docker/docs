@@ -22,11 +22,12 @@ If you have not already done so, please install Docker for Mac. You can download
 installers from the Stable or beta channel.
 
 Both Stable and Edge installers come with <a
-href="https://github.com/moby/moby/blob/master/experimental/README.md">
+href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md">
 experimental features in Docker Engine</a> enabled by default and configurable
-on [Docker Daemon preferences](/docker-for-mac/index.md#daemon-experimental-mode) for
-experimental mode. We recommend that you disable experimental features for
-apps in production.
+on [Docker Daemon
+preferences](/docker-for-mac/index.md#daemon-experimental-mode) for experimental
+mode. We recommend that you disable experimental features for apps in
+production.
 
 On both channels, we welcome your <a
 href="troubleshoot/#diagnose-problems-send-feedback-and-create-github-issues">feedback</a>
@@ -100,7 +101,7 @@ for Docker for Mac, and how the two products can coexist.
 
 * **System Requirements**: Docker for Mac will launch only if all of these
   requirements are met.
-  
+
   - Mac hardware must be a 2010 or newer model, with Intel's hardware support for memory
     management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
     Unrestricted Mode. You can check to see if your machine has this support by

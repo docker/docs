@@ -192,6 +192,17 @@ $ docker network create \
   my-network
 ```
 
+##### Overlay network size limitations
+
+You should create overlay networks with `/24` blocks (the default), which limits
+you to 256 IP addresses, when you create networks using the default VIP-based
+endpoint-mode. This recommendation addresses
+[limitations with swarm mode](https://github.com/moby/moby/issues/30820). If you
+need more than 256 IP addresses, do not increase the IP block size. You can either
+use `dnsrr` endpoint mode with an external load balancer, or use multiple smaller
+overlay networks. See [Configure service discovery](#configure-service-discovery)
+for more information about different endpoint modes.
+
 #### Configure encryption of application data
 
 Management and control plane data related to a swarm is always encrypted.
@@ -255,7 +266,7 @@ round robin (DNSRR). You can configure this per service.
   addresses, and the client connects directly to one of these.
 
   DNS round-robin is useful in cases where you want to use your own load
-  balancer. To configure a service to use DNSRR, use the flag
+  balancer, such as HAProxy. To configure a service to use DNSRR, use the flag
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
 
@@ -299,7 +310,7 @@ services which publish ports, such as a WordPress service which publishes port
 
     ```bash
     $ docker network create \
-      -d overlay \
+      --driver overlay \
       --ingress \
       --subnet=10.11.0.0/16 \
       --gateway=10.11.0.2 \
@@ -356,31 +367,31 @@ and management traffic for maintaining the swarm itself and data traffic to and
 from the service containers.
 
 In Docker 17.06 and higher, it is possible to separate this traffic by passing
-the `--datapath-addr` flag when initializing or joining the swarm. If there are
+the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
-`--datapath-addr` defaults to `--advertise-addr` if not specified. Traffic about
+`--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
 joining, leaving, and managing the swarm will be sent over the
 `--advertise-addr` interface, and traffic among a service's containers will be
-sent over the `--datapath-addr` interface. These flags can take an IP address or
+sent over the `--data-path-addr` interface. These flags can take an IP address or
 a network device name, such as `eth0`.
 
-This example initializes a swarm with a separate `--datapath-addr`. It assumes
+This example initializes a swarm with a separate `--data-path-addr`. It assumes
 that your Docker host has two different network interfaces: 10.0.0.1 should be
 used for control and management traffic and 192.168.0.1 should be used for
 traffic relating to services.
 
 ```bash
-$ docker swarm init --advertise-addr 10.0.0.1 --datapath-addr 192.168.0.1
+$ docker swarm init --advertise-addr 10.0.0.1 --data-path-addr 192.168.0.1
 ```
 
 This example joins the swarm managed by host `192.168.99.100:2377` and sets the
-`--advertise-addr` flag to `eth0` and the `--datapath-addr` flag to `eth1`.
+`--advertise-addr` flag to `eth0` and the `--data-path-addr` flag to `eth1`.
 
 ```bash
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
   --advertise-addr eth0 \
-  --datapath-addr eth1 \
+  --data-path-addr eth1 \
   192.168.99.100:2377
 ```
 

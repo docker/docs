@@ -99,9 +99,19 @@ If containers depend on each other, you can use [Docker container networks](http
 
 ### Minimize the number of layers
 
-You need to find the balance between readability (and thus long-term
-maintainability) of the `Dockerfile` and minimizing the number of layers it
-uses. Be strategic and cautious about the number of layers you use.
+Prior to Docker 17.05, and even more, prior to Docker 1.10, it was important
+to minimize the number of layers in your image. The following improvements have
+mitigated this need:
+
+- In Docker 1.10 and higher, only `RUN`, `COPY`, and `ADD` instructions create
+  layers. Other instructions create temporary intermediate images, and no longer
+  directly increase the size of the build.
+
+- Docker 17.05 and higher add support for
+  [multi-stage builds](multistage-build.md), which allow you to copy only the
+  artifacts you need into the final image. This allows you to include tools and
+  debug information in your intermediate build stages without increasing the
+  size of the final image.
 
 ### Sort multi-line arguments
 
@@ -167,8 +177,8 @@ various instructions available for use in a `Dockerfile`.
 [Dockerfile reference for the FROM instruction](../../reference/builder.md#from)
 
 Whenever possible, use current Official Repositories as the basis for your
-image. We recommend the [Debian image](https://hub.docker.com/_/debian/)
-since it’s very tightly controlled and kept minimal (currently under 150 mb),
+image. We recommend the [Alpine image](https://hub.docker.com/_/alpine/)
+since it’s very tightly controlled and kept minimal (currently under 5 mb),
 while still being a full distribution.
 
 ### LABEL
@@ -192,10 +202,10 @@ LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
 ```
 
-An image can have more than one label. To specify multiple labels, Docker
-recommends combining labels into a single `LABEL` instruction where possible.
-Each `LABEL` instruction produces a new layer which can result in an inefficient
-image if you use many labels. This example results in a single image layer.
+An image can have more than one label. Prior to Docker 1.10, it was recommended
+to combine all labels into a single `LABEL` instruction, to prevent extra layers
+from being created. This is no longer necessary, but combining labels is still
+supported.
 
 ```conf
 # Set multiple labels on one line
@@ -234,14 +244,14 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the parent images won't upgrade inside an unprivileged
-container. If a package contained in the parent image is out-of-date, you should
-contact its maintainers.
-If you know there’s a particular package, `foo`, that needs to be updated, use
+“essential” packages from the parent images won't upgrade inside an
+[unprivileged container](https://docs.docker.com/engine/reference/run/#security-configuration).
+If a package contained in the parent image is out-of-date, you should contact its
+maintainers. If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.
 
-Always combine  `RUN apt-get update` with `apt-get install` in the same `RUN`
-statement, for example:
+Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
+statement. For example:
 
         RUN apt-get update && apt-get install -y \
             package-bar \

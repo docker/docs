@@ -11,6 +11,33 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## 2.3.5
+
+(20 November 2017)
+
+**Bug fixes**
+
+* Fixed a bug that caused certain vulnerabilities to not be found during scanning.
+* Fixed a bug with downloading storage yaml file on Firefox.
+* Increased the speed of lock expiration in case of failed joins.
+* Changed storage backend to "local" when using the bootstrapper to switch to NFS.
+* Fixed the notification when toggling active status of webhooks.
+* Fixed a bug where garbage collection ran in a suboptimal mode if scheduled as
+a cron from the UI.
+* Fixed a potential issue with the way we untar files in uploads of the
+vulnerability database.
+* Fixed a bug with not backing up repository team permissions correctly.
+
+**General improvements**
+
+* Improved resilience of garbage collection.
+* Improved logging of garbage collection.
+* Improved memory usage during backup.
+* Improved error handling when uploading invalid vulnerability databases.
+* Fail faster in case of nfs volume issues.
+* Improved resilience of DTR join operations.
+* Hide secrets on storage config pages.
+
 ## DTR 2.3.4
 
 (12 October 2017)

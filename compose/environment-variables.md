@@ -89,7 +89,7 @@ Values in the shell take precedence over those specified in the `.env` file. If 
       web:
         image: 'webapp:v2.0'
    
-When values are provided with both with shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken **from environment key first and then from environment file, then from a `Dockerfile` `ENV`–entry**:
+When values are provided both with a shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken **from environment key first and then from environment file, then from a `Dockerfile` `ENV`–entry**:
 
     $ cat ./Docker/api/api.env
     NODE_ENV=test

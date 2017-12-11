@@ -66,7 +66,7 @@ description of expected and actual behavior, and steps to reproduce the issue.
 
 <a name="logs"></a>
 
-## Checking the logs
+## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
 browse the logs yourself.
@@ -163,8 +163,7 @@ contains the Dockerfile and volume.
 ### Recreate or update your containers after Beta 18 upgrade
 
 Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
-RC3. (For more information, see [https://github.com/moby/moby/issues/24343#issuecomment-230623542]
-(https://github.com/moby/moby/issues/24343#issuecomment-230623542).)
+RC3. (For more information, see (For more information, see [moby/moby#24343 (comment)](https://github.com/moby/moby/issues/24343#issuecomment-230623542).)
 
 You may get the following error when you try to start a container created with
 pre-Beta 18 Docker for Mac applications.

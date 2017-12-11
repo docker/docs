@@ -55,6 +55,7 @@ command.
 | `--admin-password`       | The UCP administrator password                                                                   |
 | `--san`                  | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)     |
 | `--host-address`         | The network address to advertise to other nodes. Format: IP address or network interface name    |
+| `--data-path-addr`       | Address or interface to use for data path traffic. Format: IP address or network interface name  |
 | `--swarm-port`           | Port for the Docker Swarm manager. Used for backwards compatibility                              |
 | `--controller-port`      | Port for the web UI and API                                                                      |
 | `--swarm-grpc-port`      | Port for communication between nodes                                                             |

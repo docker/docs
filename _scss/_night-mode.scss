@@ -26,7 +26,7 @@ body.night {
     }
     ol,
     ul {
-        color: #c7c9ca;
+        color: #c7c9ca !important;
     }
     .header {
         background-color: #101c29!important;
@@ -287,6 +287,10 @@ body.night {
     }
     h6.dropdown-header {
         color: $white;
+    }
+    /** apply to images with garbled text **/
+    img.white-bg {
+	  background-color: white;
     }
 }
 

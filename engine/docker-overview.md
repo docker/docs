@@ -164,7 +164,7 @@ and fast, when compared to other virtualization technologies.
 
 #### Containers
 
-A container is a runnable instance of an image. You can create, run, stop,
+A container is a runnable instance of an image. You can create, start, stop,
 move, or delete a container using the Docker API or CLI. You can connect a
 container to one or more networks, attach storage to it, or even create a new
 image based on its current state.
@@ -175,7 +175,7 @@ or other underlying subsystems are from other containers or from the host
 machine.
 
 A container is defined by its image as well as any configuration options you
-provide to it when you create or run it. When a container is removed, any changes to
+provide to it when you create or start it. When a container is removed, any changes to
 its state that are not stored in persistent storage disappear.
 
 ##### Example `docker run` command

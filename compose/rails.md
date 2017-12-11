@@ -20,10 +20,10 @@ Dockerfile consists of:
     RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
     RUN mkdir /myapp
     WORKDIR /myapp
-    ADD Gemfile /myapp/Gemfile
-    ADD Gemfile.lock /myapp/Gemfile.lock
+    COPY Gemfile /myapp/Gemfile
+    COPY Gemfile.lock /myapp/Gemfile.lock
     RUN bundle install
-    ADD . /myapp
+    COPY . /myapp
 
 That'll put your application code inside an image that will build a container
 with Ruby, Bundler and all your dependencies inside it. For more information on

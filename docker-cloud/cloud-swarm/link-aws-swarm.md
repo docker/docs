@@ -18,7 +18,7 @@ the new policy to your existing role by following the instructions
 
 ## Create a dockercloud-swarm-role role with an embedded policy
 
-1.  Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>. Click **Create new role**.
+1.  Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>. Click **Create role**.
 
 2.  Select **Another AWS account** to allow your Docker Cloud account to perform actions in this AWS account.
 
@@ -80,7 +80,7 @@ the new policy to your existing role by following the instructions
 
     The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. You'll use the ARN in the next step.
 
-    ![](images/aws-swarm-iam-role-2.png)
+    ![Role summary showing Role ARN](images/aws-swarm-iam-role-2.png)
 
 Now skip down to the topic on how to
 [Add your AWS account credentials to Docker Cloud](#add-your-aws-account-credentials-to-docker-cloud).
@@ -126,12 +126,12 @@ Role ARN, go back to Docker Cloud to connect the account.
 1.  In Docker Cloud, click the account menu at the upper right and select **Cloud settings**.
 2.  In the **Service providers** section, click the plug icon next to Amazon Web Services.
 
-    ![](images/aws-arn-wizard.png)
+    ![Add AWS Credentials popup](images/aws-arn-wizard.png)
 
 3.  Enter the full `Role ARN` for the role you just created.
 4.  Click **Save**.
 
-    ![](images/aws-creds-cloud.png)
+    ![Service providers list, showing newly added AWS credentials](images/aws-creds-cloud.png)
 
 You are now ready to deploy a swarm!
 

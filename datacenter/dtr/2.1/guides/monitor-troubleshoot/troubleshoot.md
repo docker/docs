@@ -41,8 +41,27 @@ synchronized clocks to function correctly.
 
 Run this on the UCP node that has a DTR replica with the given replica id:
 
-```
-docker run --rm -it --net dtr-br -p 9999:8080 svendowideit/ambassador dtr-rethinkdb-$REPLICA_ID 8080
+```bash
+REPLICA_ID=""
+
+docker run \
+  --rm \
+  --net dtr-ol \
+  --name db-proxy \
+  -v dtr-ca-$REPLICA_ID:/ca \
+  -p 9999:8080 \
+  rethinkdb:2.3 \
+    rethinkdb \
+      proxy \
+      --bind all \
+      --canonical-address db-proxy \
+      --driver-tls-key /ca/rethink/key.pem \
+      --driver-tls-cert /ca/rethink/cert.pem \
+      --driver-tls-ca /ca/rethink/cert.pem \
+      --cluster-tls-key /ca/rethink/key.pem \
+      --cluster-tls-cert /ca/rethink/cert.pem \
+      --cluster-tls-ca /ca/rethink/cert.pem \
+      --join dtr-rethinkdb-$REPLICA_ID.dtr-ol
 ```
 
 Options to make this more secure:

@@ -289,7 +289,7 @@ it automatically is part of the network.
       --name=web \
       --network=my-net \
       --env="constraint:node==mhs-demo0" \
-      nginx
+      nginx:alpine
     ```
 
 4.  Run a `busybox` instance on the `mhs-demo1` instance and get the contents of
@@ -307,7 +307,7 @@ it automatically is part of the network.
     2c5ac3f849df: Pull complete
     Digest: sha256:5551dbdfc48d66734d0f01cafee0952cb6e8eeecd1e2492240bf2fd9640c2279
     Status: Downloaded newer image for busybox:latest
-    Connecting to web (10.0.0.2:80)
+    Connecting to web (10.0.9.2:80)
     <!DOCTYPE html>
     <html>
     <head>
@@ -380,7 +380,7 @@ to have external connectivity outside of their cluster.
 
 2.  Check the Nginx container's network interfaces.
 
-    ```basj
+    ```bash
     $ docker exec web ip addr
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default
@@ -391,7 +391,7 @@ to have external connectivity outside of their cluster.
         valid_lft forever preferred_lft forever
     22: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default
     link/ether 02:42:0a:00:09:03 brd ff:ff:ff:ff:ff:ff
-    inet 10.0.9.3/24 scope global eth0
+    inet 10.0.9.2/24 scope global eth0
         valid_lft forever preferred_lft forever
     inet6 fe80::42:aff:fe00:903/64 scope link
         valid_lft forever preferred_lft forever
@@ -403,9 +403,9 @@ to have external connectivity outside of their cluster.
         valid_lft forever preferred_lft forever
     ```
 
-  The `eth0` interface represents the container interface that is connected to
-  the `my-net` overlay network. While the `eth1` interface represents the
-  container interface that is connected to the `docker_gwbridge` network.
+   The `eth0` interface represents the container interface that is connected to
+   the `my-net` overlay network. While the `eth1` interface represents the
+   container interface that is connected to the `docker_gwbridge` network.
 
 ### Extra credit with Docker Compose
 

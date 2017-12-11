@@ -198,7 +198,7 @@ own Btrfs subvolume or snapshot. The base layer of an image is stored as a
 subvolume whereas child image layers and containers are stored as snapshots.
 This is shown in the diagram below.
 
-![](images/btfs_container_layer.jpg)
+![Btrfs container layers](images/btfs_container_layer.jpg)
 
 The high level process for creating images and containers on Docker hosts
 running the `btrfs` driver is as follows:

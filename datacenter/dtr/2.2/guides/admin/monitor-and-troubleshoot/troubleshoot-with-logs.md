@@ -69,6 +69,10 @@ tool launches an interactive prompt where you can run RethinkDB
 queries such as:
 
 ```none
+# List problems detected within the rethinkdb cluster
+> r.db("rethinkdb").table("current_issues")
+...
+
 # List all the DBs in RethinkDB
 > r.dbList()
 [ 'dtr2',
@@ -95,10 +99,6 @@ queries such as:
     namespaceAccountID: '924bf131-6213-43fa-a5ed-d73c7ccf392e',
     pk: 'cf5e8bf1197e281c747f27e203e42e22721d5c0870b06dfb1060ad0970e99ada',
     visibility: 'public' },
-...
-
-# List problems detected within the rethinkdb cluster
-> r.db("rethinkdb").table("current_issues")
 ...
 ```
 

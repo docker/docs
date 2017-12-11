@@ -7,14 +7,14 @@ title: Webhooks for automated builds
 If you have an automated build repository in Docker Hub, you can use Webhooks to
 cause an action in another application in response to an event in the
 repository. Docker Hub webhooks fire when an image is built in, or a new tag
-added to, your automated build repository.
+is added to, your automated build repository.
 
 Configure webhooks on `https://hub.docker.com/r/<USERNAME>/<REPOSITORY>/~/settings/webhooks/`.
 
 ![Create Webhook](/docker-hub/images/webhooks.png)
 
-With your webhook, you specify a target URL and a JSON payload to deliver. The
-example webhook below generates an HTTP POST that delivers a JSON payload:
+With your webhook, you specify a target URL to POST to. Docker Hub will POST
+the URL with the following payload:
 
 ```json
 {

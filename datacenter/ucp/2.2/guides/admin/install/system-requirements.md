@@ -9,23 +9,27 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Hardware and software requirements
 
-You can install UCP on-premises or on a cloud provider. To install UCP,
-all nodes must have:
+You can install UCP on-premises or on a cloud provider. Common requirements:
 
 * [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
-* 8.00 GB of RAM for manager nodes or nodes running DTR
-* 4.00 GB of RAM for worker nodes
-* 3.00 GB of available disk space
 * A static IP address
 
-Also, make sure the nodes are running one of these operating systems:
+### Minimum requirements
 
-* A maintained version of CentOS 7. Archived versions aren't supported or tested.
-* Red Hat Enterprise Linux 7.0, 7.1, 7.2, 7.3, or 7.4
-* Ubuntu 14.04 LTS or 16.04 LTS
-* SUSE Linux Enterprise 12
-* Oracle Linux 7.3
+* 8GB of RAM for manager nodes or nodes running DTR
+* 4GB of RAM for worker nodes
+* 3GB of free disk space
+
+### Recommended production requirements
+
+ * 16GB of RAM for manager nodes or nodes running DTR
+ * 4 vCPUs for manager nodes or nodes running DTR
+ * 25-100GB of free disk space
+ 
+Note that Windows container images are typically larger than Linux ones and for that reason, you should consider provisioning more local storage for Windows nodes and for DTR setups that will store Windows container images.
+
+Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
@@ -46,6 +50,7 @@ When installing UCP on a host, make sure the following ports are open:
 | managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
 | managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
 | managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
+| workers           |   out     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
 | managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
 | managers, workers |  in, out  | TCP, UDP 7946           | Port for gossip-based clustering                                                  |
 | managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
@@ -89,7 +94,10 @@ Docker EE is a software subscription that includes three products:
 * Docker Trusted Registry,
 * Docker Universal Control Plane.
 
-[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
+Learn more about compatibility and the maintenance lifecycle for these products:
+
+- [Compatibility Matrix](https://success.docker.com/Policies/Compatibility_Matrix)
+- [Maintenance Lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle)
 
 ## Version compatibility
 

@@ -19,12 +19,31 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
+
+* Upgrades
+  - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+
+* Bug fixes and minor changes
+  - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
+  - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
+  - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277](https://github.com/docker/for-win/issues/1277)
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
+  - Increased timeout for VM boot startup to 2 minutes. 
+  
+
 ### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
+
+[Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
 
 * Bug fixes
   - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
 ### Docker Community Edition 17.09.0-ce-win32 2017-10-02 (Stable)
+
+[Download](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -33,13 +52,13 @@ about both kinds of releases, and download stable and edge product installers at
   - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
   - Linux Kernel 4.9.49
   - AUFS 20170911
-  
+
 * New
   - Windows Docker daemon is now started as service for better lifecycle management
   - Store Linux daemon configuration in ~\.docker\daemon.json instead of settings file
   - Store Windows daemon configuration in C:\ProgramData\Docker\config\daemon.json instead of settings file
   - VPNKit: add support for ping!
-  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled 
+  - VPNKit: add slirp/port-max-idle-timeout to allow the timeout to be adjusted or even disabled
   - VPNKit: bridge mode is default everywhere now
   - Add `Skip This version` button in update window
 
@@ -47,14 +66,14 @@ about both kinds of releases, and download stable and edge product installers at
   - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
 
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING 
-  - Rotate logs in the VM more often (docker/for-win#244) 
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING
+  - Rotate logs in the VM more often (docker/for-win#244)
   - Reset to default stops all engines and removes settings including all daemon.json files
   - Better backend service checks (related to https://github.com/docker/for-win/issues/953)
   - Fix auto updates checkbox, no need to restart the application
   - Fix check for updates menu when auto updates was disable
   - VPNKit: do not block startup when ICMP permission is denied. (Fixes docker/for-win#1036, docker/for-win#1035, docker/for-win#1040)
-  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: change protocol to support error messages reported back from the server
   - VPNKit: fix a bug which causes a socket to leak if the corresponding TCP connection is idle
     for more than 5 minutes (related to [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
   - VPNKit: improve the logging around the Unix domain socket connections
@@ -63,11 +82,15 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.06.2-ce-win27 2017-09-06 (Stable)
 
+[Download](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
-### Docker Community Edition 17.06.1-ce-rc1-win20 2017-08-21 (stable)
+### Docker Community Edition 17.06.1-ce-rc1-win24 2017-08-24 (stable)
+
+[Download](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe)
 
 **Upgrades**
 
@@ -78,9 +101,11 @@ about both kinds of releases, and download stable and edge product installers at
 **Bug fixes and minor**
 
 - Fix locked container id file (Fixes [docker/for-win#818](https://github.com/docker/for-win/issues/818))
-- Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859)))
+- Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859))
 
 ### Docker Community Edition 17.06.0-ce-win18 2017-06-28 (stable)
+
+[Download](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe)
 
 **Upgrades**
 
@@ -120,11 +145,15 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.03.1-ce-win12  2017-05-12 (stable)
 
+[Download](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe)
+
 **Upgrades**
 
 - Security fix for CVE-2017-7308  
 
 ### Docker Community Edition 17.03.0, 2017-03-02 (stable)
+
+[Download](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe)
 
 **New**
 
@@ -159,6 +188,8 @@ progressively
 
 ### Docker for Windows 1.13.1, 2017-02-09 (stable)
 
+[Download](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi)
+
 **Upgrades**
 
 - [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
@@ -173,6 +204,8 @@ progressively
 - Fix in Hyper-V VM setup (should fix `ObjectNotFound` errors)
 
 ### Docker for Windows 1.13.0, 2017-01-19 (stable)
+
+[Download](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi)
 
 **Upgrades**
 
@@ -213,6 +246,8 @@ progressively
 
 ### Docker for Windows 1.12.5, 2016-12-20 (stable)
 
+[Download](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
+
 **Upgrades**
 
 - Docker 1.12.5
@@ -223,6 +258,8 @@ progressively
 We did not distribute a 1.12.4 stable release
 
 ### Docker for Windows 1.12.3, 2016-11-09 (stable)
+
+[Download](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi)
 
 **New**
 
@@ -304,6 +341,8 @@ We did not distribute a 1.12.4 stable release
 - Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Windows 1.12.1, 2016-09-16 (stable)
+
+[Download](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi)
 
 >**Important Note**:
 >
@@ -398,6 +437,8 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Windows 1.12.0, 2016-07-28 (stable)
 
+[Download](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi)
+
 * First stable release
 
 **Components**
@@ -408,11 +449,66 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
+
+### Docker Community Edition 17.11.0-ce-rc4-win39 2017-11-17 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - Linux Kernel 4.9.60
+ 
+* Bug fixes and minor changes
+  - Increased timeout for VM boot startup to 2 minutes.
+
+### Docker Community Edition 17.11.0-ce-rc3-win38 2017-11-09 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc3)
+
+* New
+  - Use Microsoft localhost port forwarder for Windows and LCOW Containers when it is available (insider build RS4)
+
+* Bug fixes and minor changes
+  - Fix docker build exits successfully but fails to build image [moby/#35413](https://github.com/moby/moby/issues/35413)
+  - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
+  - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
+  - Do not propose toolbox migration popup after clicking "Try LCOW" on first startup
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)
+
+### Docker Community Edition 17.11.0-ce-rc2-win37 2017-11-02 (Edge)
+
+* Upgrades
+  - [Docker 17.11.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc2)
+  - [Docker compose 1.17.0](https://github.com/docker/compose/releases/tag/1.17.0)
+  - Linuxkit blueprint updated to [linuxkit/linuxkit#2633](https://github.com/linuxkit/linuxkit/pull/2633), fixes CVE-2017-15650
+
+* New
+  - Add localhost port forwarder for Windows and LCOW Containers (thanks @simonferquel)
+
+* Bug fixes and minor changes
+  - Fix centos:5 & centos:6 images not starting properly with LinuxKit VM (fixes [docker/for-win#1245](https://github.com/docker/for-win/issues/1245)).
+
+### Docker Community Edition 17.10.0-ce-win36 2017-10-24 (Edge)
+
+* Upgrades
+  - [Docker 17.10.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
+  - [Docker compose 1.17.0-rc1](https://github.com/docker/compose/releases/tag/1.17.0-rc1)
+
+* New
+  - VM entirely built with Linuxkit
+  - Experimental support for Microsoft Linux Containers On Windows, on Windows 10 RS3.
+  
+
 ### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
 
 * Bug fixes
   - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
-  
+
 
 ### Docker Community Edition 17.09.0-ce-win31 2017-09-29 (Edge)
 
@@ -421,7 +517,7 @@ We did not distribute a 1.12.4 stable release
 
 * Bug fixes and minor changes
   - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
-  
+
 
 ### Docker Community Edition 17.09.0-ce-rc3-win30 2017-09-22 (Edge)
 
@@ -436,8 +532,8 @@ We did not distribute a 1.12.4 stable release
   - AUFS 20170911
 
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING 
-  - Rotate logs in the VM more often (docker/for-win#244) 
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING
+  - Rotate logs in the VM more often (docker/for-win#244)
   - Vpnkit : do not block startup when ICMP permission is denied. (Fixes docker/for-win#1036, docker/for-win#1035, docker/for-win#1040)
   - Fix minor bug on update checks
 
@@ -452,7 +548,7 @@ We did not distribute a 1.12.4 stable release
   - Add `Skip This version` button in update window
 
 * Bug fixes and minor changes
-  - VPNKit: change protocol to support error messages reported back from the server 
+  - VPNKit: change protocol to support error messages reported back from the server
   - Reset to default stops all engines and removes settings including all daemon.json files
   - Better backend service checks (related to https://github.com/docker/for-win/issues/953)
   - Fix auto updates checkbox, no need to restart the application

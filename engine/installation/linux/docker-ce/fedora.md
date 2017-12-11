@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 title: Get Docker CE for Fedora
+toc_max: 4
 ---
 
 To get started with Docker CE on Fedora, make sure you
@@ -23,8 +24,8 @@ and distributions for different Docker editions, see
 
 To install Docker, you need the 64-bit version of one of these Fedora versions:
 
-- 24
 - 25
+- 26
 
 ### Uninstall old versions
 

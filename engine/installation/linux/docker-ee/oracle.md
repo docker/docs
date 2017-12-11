@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/oracle/
 - /engine/installation/linux/oracle/
 title: Get Docker EE for Oracle Linux
+toc_max: 4
 ---
 
 {% assign linux-dist = "oraclelinux" %}

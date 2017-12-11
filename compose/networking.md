@@ -54,7 +54,7 @@ Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
 look like `postgres://{DOCKER_IP}:8001`.
 
-## Updating containers
+## Update containers
 
 If you make a configuration change to a service and run `docker-compose up` to update it, the old container will be removed and the new one will join the network under a different IP address but the same name. Running containers will be able to look up that name and connect to the new address, but the old address will stop working.
 
@@ -78,13 +78,13 @@ See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
 
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode consult the [Docker Stacks](/compose/bundles.md) documentation.
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/compose/bundles.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
 Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster will use the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
 
-## Specifying custom networks
+## Specify custom networks
 
 Instead of just using the default app network, you can specify your own networks with the top-level `networks` key. This lets you create more complex topologies and specify [custom network drivers](/engine/extend/plugins_network/) and options. You can also use it to connect services to externally-created networks which aren't managed by Compose.
 
@@ -127,7 +127,7 @@ For full details of the network configuration options available, see the followi
 - [Top-level `networks` key](compose-file.md#network-configuration-reference)
 - [Service-level `networks` key](compose-file.md#networks)
 
-## Configuring the default network
+## Configure the default network
 
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
@@ -146,7 +146,7 @@ Instead of (or as well as) specifying your own networks, you can also change the
         # Use a custom driver
         driver: custom-driver-1
 
-## Using a pre-existing network
+## Use a pre-existing network
 
 If you want your containers to join a pre-existing network, use the [`external` option](compose-file.md#network-configuration-reference):
 

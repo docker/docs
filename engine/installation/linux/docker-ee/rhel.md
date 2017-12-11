@@ -6,6 +6,7 @@ redirect_from:
 - /installation/rhel/
 - /engine/installation/linux/rhel/
 title: Get Docker EE for Red Hat Enterprise Linux
+toc_max: 4
 ---
 
 {% assign linux-dist = "rhel" %}
@@ -32,6 +33,16 @@ running on an x86 hardware platform, or `s390x` (IBM Z) architecture.
 In addition, you must use the `devicemapper` storage driver. On production
 systems, you must use `direct-lvm` mode, which requires one or more dedicated
 block devices. Fast storage such as solid-state media (SSD) is recommended.
+
+{% capture selinux-warning %}
+> **Warning**: There is currently no support for `selinux` on IBM Z systems. If
+> you try to install Docker EE on an IBM Z system with `selinux` enabled, you get
+> an error about the `container-selinux` package, which is missing from Red Hat's
+> repository for IBM Z. The only current workaround is to disable `selinux`
+> before installing or upgrading Docker on IBM Z.
+{:.warning}
+{% endcapture %}
+{{ selinux-warning }}
 
 ### Uninstall old versions
 
@@ -67,6 +78,8 @@ from the repository.
 
 #### Install Docker EE
 
+{{ selinux-warning }}
+
 {% include ee-linux-install-reuse.md section="install-using-yum-repo" %}
 
 #### Upgrade Docker EE
@@ -74,6 +87,8 @@ from the repository.
 {% include ee-linux-install-reuse.md section="upgrade-using-yum-repo" %}
 
 ### Install from a package
+
+{{ selinux-warning }}
 
 {% include ee-linux-install-reuse.md section="install-using-yum-package" %}
 

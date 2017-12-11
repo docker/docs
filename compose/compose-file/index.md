@@ -629,6 +629,8 @@ documentation.
             constraints:
               - node.role == manager
               - engine.labels.operatingsystem == ubuntu 14.04
+            preferences:
+              - spread: node.labels.zone
 
 #### replicas
 
@@ -659,8 +661,8 @@ Each of these is a single value, analogous to its [docker service
 create](/engine/reference/commandline/service_create.md) counterpart.
 
 In this general example, the `redis` service is constrained to use no more than
-50M of memory and `0.001` (0.1%) of available processing time (CPU), and has
-`20M` of memory and `0.0001` CPU time reserved (as always available to it).
+50M of memory and `0.50` (50%) of available processing time (CPU), and has
+`20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```none
 version: '3'
@@ -670,10 +672,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.001'
+          cpus: '0.50'
           memory: 50M
         reservations:
-          cpus: '0.0001'
+          cpus: '0.25'
           memory: 20M
 ```
 
@@ -739,9 +741,13 @@ updates.
   (default: `pause`).
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
+- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks will briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
+
+> **Note**: `order` is only supported for v3.4 and higher of the compose
+file format.
 
 ```none
-version: '3'
+version: '3.4'
 services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -752,6 +758,7 @@ services:
       update_config:
         parallelism: 2
         delay: 10s
+        order: stop-first
 ```
 
 #### Not supported for `docker stack deploy`
@@ -1942,6 +1949,45 @@ discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-netw
 networking concepts lab on the [Overlay Driver Network
 Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
 
+#### host or none
+
+Use the host's networking stack, or no networking. Equivalent to
+`docker run --net=host` or `docker run --net=none`. Only used if you use
+`docker stack` commands. If you use the `docker-compose` command,
+use [network_mode](#network_mode) instead.
+
+The syntax for using built-in networks like `host` and `none` is a little
+different. Define an external network with the name `host` or `none` (which
+Docker has already created automatically) and an alias that Compose can use
+(`hostnet` or `nonet` in these examples), then grant the service access to that
+network, using the alias.
+
+```yaml
+services:
+  web:
+    ...
+    networks:
+      hostnet: {}
+
+networks:
+  hostnet:
+    external:
+      name: host
+```
+
+```yaml
+services:
+  web:
+    ...
+    networks:
+      nonet: {}
+
+networks:
+  nonet:
+    external:
+      name: none
+```
+
 ### driver_opts
 
 Specify a list of options as key-value pairs to pass to the driver for this
@@ -2149,6 +2195,12 @@ stack.
 ## Variable substitution
 
 {% include content/compose-var-sub.md %}
+
+## Extension fields
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34).
+
+{% include content/compose-extfields-sub.md %}
 
 ## Compose documentation
 

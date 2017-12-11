@@ -77,7 +77,7 @@ To view the Docker Security Scanning results:
     You can view Official Images even while logged out, however the scan results are only available once you log in.
 2. Navigate to the official repository whose security scan you want to view.
 3. Click the `Tags` tab to see a list of tags and their security scan summaries.
-    ![](images/scan-drilldown.gif)
+    ![Viewing CVEs from Docker images](images/scan-drilldown.gif)
 
 You can click into a tag's detail page to see more information about which
 layers in the image and which components within the layer are vulnerable.

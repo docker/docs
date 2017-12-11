@@ -6,6 +6,7 @@ redirect_from:
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 title: Get Docker CE for Debian
+toc_max: 4
 ---
 
 To get started with Docker CE on Debian, make sure you
@@ -25,8 +26,9 @@ and distributions for different Docker editions, see
 To install Docker CE, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Stretch (stable) / Raspbian Stretch
-- Jessie 8.0 (LTS) / Raspbian Jessie
+- Buster 10 (Docker CE 17.11 Edge only)
+- Stretch 9 (stable) / Raspbian Stretch
+- Jessie 8 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
 Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` architectures for Jessie and

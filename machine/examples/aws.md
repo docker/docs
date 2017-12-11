@@ -182,7 +182,7 @@ other machine):
     eval $(docker-machine env -u)
     docker container ls -a
     ```
-    
+
 3. Reset aws-sandbox as the active docker machine:
 
     ```bash
@@ -196,7 +196,7 @@ other machine):
     > container on another port, update the security group to reflect that.
 
     In this example, the `-p` option is used to expose port 80 from the `nginx`
-    container and make it accessible on port `8000` of the `aws-sandbox` host.
+    container and make it accessible on port `8000` of the `aws-sandbox` host:
 
     ```bash
     $ docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
@@ -211,16 +211,16 @@ other machine):
     ```
 
     In a web browser, go to `http://<host_ip>:8000` to bring up the webserver
-    home page. You got the `<host_ip>` from the output of the `docker-machine ip
-    <machine>` command you ran in a previous step. Use the port you exposed in
-    the `docker run` command.
+    home page. You got the `<host_ip>` from the output of the `docker-machine ip <machine>`
+    command you ran in a previous step. Use the port you exposed in the
+    `docker run` command.
 
     ![nginx webserver](../img/nginx-webserver.png)
 
 ### Step 4. Use Machine to remove the instance
 
-    To remove an instance and all of its containers and images, first stop the
-    machine, then use `docker-machine rm`:
+To remove an instance and all of its containers and images, first stop the
+machine, then use `docker-machine rm`.
 
 ## Where to go next
 

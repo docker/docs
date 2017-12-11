@@ -36,7 +36,7 @@ To opt in:
 
 3. Check **Monitor with Docker Security Scanning** to add the service to your plan.
 
-    ![](images/scan-enable.png)
+    ![Security scanning checkbox](images/scan-enable.png)
 
 The scanning process begins immediately for the three most recent tags in each
 of your private repositories. The scan results should be available within 48

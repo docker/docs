@@ -60,37 +60,44 @@ Once this service is running, it deploys containers with other UCP components,
 and it ensures they keep running. The UCP components that are deployed
 on a node depend on whether the node is a manager or a worker.
 
+> OS-specific component names
+>
+> Some UCP component names depend on the node's operating system. For example,
+> on Windows, the `ucp-agent` component is named `ucp-agent-win`.
+> [Learn about architecture-specific images](admin/install/architecture-specific-images.md).
+
 ### UCP components in manager nodes
 
 Manager nodes run all UCP services, including the web UI and data stores that
 persist the state of UCP. These are the UCP services running on manager nodes:
 
-| UCP component       | Description                                                                                                                                                                                       |
-|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ucp-agent           | Monitors the node and ensures the right UCP services are running                                                                                                                                  |
-| ucp-reconcile       | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. 							  |
-| ucp-auth-api        | The centralized service for identity and authentication used by UCP and DTR                                                                                                                       |
-| ucp-auth-store      | Stores authentication configurations and data for users, organizations, and teams                                                                                                                 |
-| ucp-auth-worker     | Performs scheduled LDAP synchronizations and cleans authentication and authorization data                                                                                                         |
-| ucp-client-root-ca  | A certificate authority to sign client bundles                                                                                                                                                    |
-| ucp-cluster-root-ca | A certificate authority used for TLS communication between UCP components                                                                                                                         |
-| ucp-controller      | The UCP web server                                                                                                                                                                                |
-| ucp-kv              | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only                                                                                         |
-| ucp-metrics         | Used to collect and process metrics for a node, like the disk space available                                                                                                                     |
-| ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                 |
-| ucp-swarm-manager   | Used to provide backwards-compatibility with Docker Swarm                                                                                                                                         |
-
+|    UCP component    |                                                                                                                             Description                                                                                                                              |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp-agent           | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
+| ucp-reconcile       | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
+| ucp-auth-api        | The centralized service for identity and authentication used by UCP and DTR                                                                                                                                                                                          |
+| ucp-auth-store      | Stores authentication configurations and data for users, organizations, and teams                                                                                                                                                                                    |
+| ucp-auth-worker     | Performs scheduled LDAP synchronizations and cleans authentication and authorization data                                                                                                                                                                            |
+| ucp-client-root-ca  | A certificate authority to sign client bundles                                                                                                                                                                                                                       |
+| ucp-cluster-root-ca | A certificate authority used for TLS communication between UCP components                                                                                                                                                                                            |
+| ucp-controller      | The UCP web server                                                                                                                                                                                                                                                   |
+| ucp-dsinfo          | Docker system information collection script to assist with troubleshooting                                                                                                                                                                                           |
+| ucp-kv              | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only                                                                                                                                                            |
+| ucp-metrics         | Used to collect and process metrics for a node, like the disk space available                                                                                                                                                                                        |
+| ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                                                                                    |
+| ucp-swarm-manager   | Used to provide backwards-compatibility with Docker Swarm                                                                                                                                                                                                            |
 
 ### UCP components in worker nodes
 
 Worker nodes are the ones where you run your applications. These are the UCP
 services running on worker nodes:
 
-| UCP component | Description                                                                                                                                                                                       |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ucp-agent     | Monitors the node and ensures the right UCP services are running                                                                                                                                  |
-| ucp-reconcile | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. 							                  |
-| ucp-proxy     | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                 |
+| UCP component |                                                                                                                             Description                                                                                                                              |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp-agent     | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
+| ucp-dsinfo    | Docker system information collection script to assist with troubleshooting                                                                                                                                                                                           |
+| ucp-reconcile | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
+| ucp-proxy     | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                                                                                    |
 
 ## Volumes used by UCP
 

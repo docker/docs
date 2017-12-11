@@ -12,6 +12,19 @@ to control how much memory, CPU, or block IO a container can use, setting runtim
 configuration flags of the `docker run` command. This section provides details
 on when you should set such limits and the possible implications of setting them.
 
+Many of these features require your kernel to support Linux capabilities. To
+check for support, you can use the
+[`docker info`](/engine/reference/commandline/info.md) command. If a capability
+is disabled in your kernel, you may see a warning at the end of the output like
+the following:
+
+```none
+WARNING: No swap limit support
+```
+
+Consult your operating system's documentation for enabling them.
+[Learn more](/engine/installation/linux/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
+
 ## Memory
 
 ### Understand the risks of running out of memory

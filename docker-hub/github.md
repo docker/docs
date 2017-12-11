@@ -55,7 +55,9 @@ If you selected to link your GitHub account with only a "Limited Access" link,
 then after creating your automated build, you will need to either manually
 trigger a Docker Hub build using the "Start a Build" button, or add the GitHub
 webhook manually, as described in [GitHub Service
-Hooks](github.md#github-service-hooks).
+Hooks](github.md#github-service-hooks). This will only work for repositories
+under the user account, and adding an automated build to a public GitHub
+organization using a "Limited Access" link is not possible.
 
 ## Changing the GitHub user link
 

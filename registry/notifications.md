@@ -10,7 +10,7 @@ pushes and pulls and layer pushes and pulls. These actions are serialized into
 events. The events are queued into a registry-internal broadcast system which
 queues and dispatches events to [_Endpoints_](notifications.md#endpoints).
 
-![](images/notifications.png)
+![Workflow of registry notifications](images/notifications.png)
 
 ## Endpoints
 
@@ -127,7 +127,7 @@ only the digest and repository will be sent.
 },
 ```
 
-> __NOTE:__ As of version 2.1, the `length` field for event targets
+> **Note**: As of version 2.1, the `length` field for event targets
 > is being deprecated for the `size` field, bringing the target in line with
 > common nomenclature. Both will continue to be set for the foreseeable
 > future. Newer code should favor `size` but accept either.

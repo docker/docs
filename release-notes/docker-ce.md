@@ -20,6 +20,51 @@ Release notes for stable versions are listed first. You can
 
 # Stable releases
 
+
+## 17.09.1-ce (2017-12-07)
+
+### Builder
+
+- Fix config leakage on shared parent stage [moby/moby#33753](https://github.com/moby/moby/issues/33753)
+- Warn on empty continuation lines only, not on comment-only lines [moby/moby#35004](https://github.com/moby/moby/pull/35004)
+
+### Client
+
+- Set API version on Client even when Ping fails [docker/cli#546](https://github.com/docker/cli/pull/546)
+
+### Networking
+
+- Overlay fix for transient IP reuse [docker/libnetwork#2016](https://github.com/docker/libnetwork/pull/2016)
+- Fix reapTime logic in NetworkDB and handle DNS cleanup for attachable container [docker/libnetwork#2017](https://github.com/docker/libnetwork/pull/2017)
+- Disable hostname lookup on chain exists check [docker/libnetwork#2019](https://github.com/docker/libnetwork/pull/2019)
+- Fix lint issues [docker/libnetwork#2020](https://github.com/docker/libnetwork/pull/2020)
+- Restore error type in FindNetwork [moby/moby#35634](https://github.com/moby/moby/pull/35634)
+
+### Runtime
+
+- Protect `health monitor` Go channel [moby/moby#35482](https://github.com/moby/moby/pull/35482)
+- Fix test failure on stopped container [moby/moby#34730](https://github.com/moby/moby/pull/34730)
+- Fix leaking container/exec state [moby/moby#35484](https://github.com/moby/moby/pull/35484)
+- Add /proc/scsi to masked paths (patch to work around [CVE-2017-16539](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16539)) [moby/moby/#35399](https://github.com/moby/moby/pull/35399)
+- Vendor tar-split: fix to prevent memory exhaustion issue that could crash Docker daemon [moby/moby/#35424](https://github.com/moby/moby/pull/35424) Fixes [CVE-2017-14992](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14992)
+- Fix P/Z HubPullSuite tests  [moby/moby#34837](https://github.com/moby/moby/pull/34837)
++ Windows: Add support for version filtering on pull [moby/moby#35090](https://github.com/moby/moby/pull/35090)
+- Windows: Stop filtering Windows manifest lists by version [moby/moby#35117](https://github.com/moby/moby/pull/35117)
+- Use rslave instead of rprivate in chroot archive [moby/moby/#35217](https://github.com/moby/moby/pull/35217)
+- Remove container rootfs mountPath after unmount [moby/moby#34573](https://github.com/moby/moby/pull/34573)
+- Fix honoring tmpfs size of user /dev/shm mount [moby/moby#35316](https://github.com/moby/moby/pull/35316)
+- Don't abort when setting may_detach_mounts (log the error instead)  [moby/moby#35172](https://github.com/moby/moby/pull/35172)
+- Fix version comparison when negotiating the API version [moby/moby#35008](https://github.com/moby/moby/pull/35008)
+
+### Swarm mode
+
+* Increase gRPC request timeout when sending snapshots [docker/swarmkit#2404](https://github.com/docker/swarmkit/pull/2404)
+- Fix node filtering when there is no log driver [docker/swarmkit#2442](https://github.com/docker/swarmkit/pull/2442)
+- Add an error on attempt to change cluster name [docker/swarmkit/#2454](https://github.com/docker/swarmkit/pull/2454)
+- Delete node attachments when node is removed [docker/swarmkit/#2456](https://github.com/docker/swarmkit/pull/2456)
+- Provide custom gRPC dialer to override default proxy dialer [docker/swarmkit/#2457](https://github.com/docker/swarmkit/pull/2457)
+- Avoids recursive readlock on swarm info [moby/moby#35388](https://github.com/moby/moby/pull/35388)
+
 ## 17.09.0-ce (2017-09-26)
 
 ### Builder
@@ -337,6 +382,127 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 * (experimental)
 
 # Edge releases
+
+## 17.11.0-ce (2017-11-20)
+
+> **Important**: Docker CE 17.11 is the first Docker release based on
+[containerd 1.0 beta](https://github.com/containerd/containerd/releases/tag/v1.0.0-beta.2).
+Docker CE 17.11 and later won't recognize containers started with
+previous Docker versions. If using
+[Live Restore](https://docs.docker.com/engine/admin/live-restore/#enable-the-live-restore-option),
+you must stop all containers before upgrading to Docker CE 17.11.
+If you don't, any containers started by Docker versions that predate
+17.11 won't be recognized by Docker after the upgrade and will keep
+running, un-managed, on the system.
+{:.important}
+
+### Builder
+
+* Test & Fix build with rm/force-rm matrix [moby/moby#35139](https://github.com/moby/moby/pull/35139)
+- Fix build with `--stream` with a large context [moby/moby#35404](https://github.com/moby/moby/pull/35404)
+
+### Client
+
+* Hide help flag from help output [docker/cli#645](https://github.com/docker/cli/pull/645)
+* Support parsing of named pipes for compose volumes [docker/cli#560](https://github.com/docker/cli/pull/560)
+* [Compose] Cast values to expected type after interpolating values [docker/cli#601](https://github.com/docker/cli/pull/601)
++ Add output for "secrets" and "configs" on `docker stack deploy` [docker/cli#593](https://github.com/docker/cli/pull/593)
+- Fix flag description for `--host-add` [docker/cli#648](https://github.com/docker/cli/pull/648)
+* Do not truncate ID on docker service ps --quiet [docker/cli#579](https://github.com/docker/cli/pull/579)
+
+### Deprecation
+
+* Update bash completion and deprecation for synchronous service updates [docker/cli#610](https://github.com/docker/cli/pull/610)
+
+### Logging
+
+* copy to log driver's bufsize, fixes #34887 [moby/moby#34888](https://github.com/moby/moby/pull/34888)
++ Add TCP support for GELF log driver [moby/moby#34758](https://github.com/moby/moby/pull/34758)
++ Add credentials endpoint option for awslogs driver [moby/moby#35055](https://github.com/moby/moby/pull/35055)
+
+### Networking
+
+- Fix network name masking network ID on delete [moby/moby#34509](https://github.com/moby/moby/pull/34509)
+- Fix returned error code for network creation from 500 to 409 [moby/moby#35030](https://github.com/moby/moby/pull/35030)
+- Fix tasks fail with error "Unable to complete atomic operation, key modified" [docker/libnetwork#2004](https://github.com/docker/libnetwork/pull/2004)
+
+### Runtime
+
+* Switch to Containerd 1.0 client [moby/moby#34895](https://github.com/moby/moby/pull/34895)
+* Increase container default shutdown timeout on Windows [moby/moby#35184](https://github.com/moby/moby/pull/35184)
+* LCOW: API: Add `platform` to /images/create and /build [moby/moby#34642](https://github.com/moby/moby/pull/34642)
+* Stop filtering Windows manifest lists by version [moby/moby#35117](https://github.com/moby/moby/pull/35117)
+* Use windows console mode constants from Azure/go-ansiterm [moby/moby#35056](https://github.com/moby/moby/pull/35056)
+* Windows Daemon should respect DOCKER_TMPDIR [moby/moby#35077](https://github.com/moby/moby/pull/35077)
+* Windows: Fix startup logging [moby/moby#35253](https://github.com/moby/moby/pull/35253)
++ Add support for Windows version filtering on pull [moby/moby#35090](https://github.com/moby/moby/pull/35090)
+- Fixes LCOW after containerd 1.0 introduced regressions [moby/moby#35320](https://github.com/moby/moby/pull/35320)
+* ContainerWait on remove: don't stuck on rm fail [moby/moby#34999](https://github.com/moby/moby/pull/34999)
+* oci: obey CL_UNPRIVILEGED for user namespaced daemon [moby/moby#35205](https://github.com/moby/moby/pull/35205)
+* Don't abort when setting may_detach_mounts [moby/moby#35172](https://github.com/moby/moby/pull/35172)
+- Fix panic on get container pid when live restore containers [moby/moby#35157](https://github.com/moby/moby/pull/35157)
+- Mask `/proc/scsi` path for containers to prevent removal of devices (CVE-2017-16539) [moby/moby#35399](https://github.com/moby/moby/pull/35399)
+* Update to github.com/vbatts/tar-split@v0.10.2 (CVE-2017-14992) [moby/moby#35424](https://github.com/moby/moby/pull/35424)
+
+### Swarm Mode
+
+* Modifying integration test due to new ipam options in swarmkit [moby/moby#35103](https://github.com/moby/moby/pull/35103)
+- Fix deadlock on getting swarm info [moby/moby#35388](https://github.com/moby/moby/pull/35388)
++ Expand the scope of the `Err` field in `TaskStatus` to also cover non-terminal errors that block the task from progressing [docker/swarmkit#2287](https://github.com/docker/swarmkit/pull/2287)
+
+### Packaging
+
++ Build packages for Debian 10 (Buster) [docker/docker-ce-packaging#50](https://github.com/docker/docker-ce-packaging/pull/50)
++ Build packages for Ubuntu 17.10 (Artful) [docker/docker-ce-packaging#55](https://github.com/docker/docker-ce-packaging/pull/55)
+
+## 17.10.0-ce (2017-10-17)
+
+> **Important**: Starting with this release, `docker service create`, `docker service update`,
+`docker service scale` and `docker service rollback` use non-detached mode as default,
+use `--detach` to keep the old behaviour.
+{: .important }
+
+### Builder
+
+* Reset uid/gid to 0 in uploaded build context to share build cache with other clients [docker/cli#513](https://github.com/docker/cli/pull/513)
++ Add support for `ADD` urls without any sub path [moby/moby#34217](https://github.com/moby/moby/pull/34217)
+
+### Client
+
+* Move output of `docker stack rm` to stdout [docker/cli#491](https://github.com/docker/cli/pull/491)
+* Use natural sort for secrets and configs in cli [docker/cli#307](https://github.com/docker/cli/pull/307)
+* Use non-detached mode as default for `docker service` commands [docker/cli#525](https://github.com/docker/cli/pull/525)
+* Set APIVersion on the client, even when Ping fails [docker/cli#546](https://github.com/docker/cli/pull/546)
+- Fix loader error with different build syntax in `docker stack deploy` [docker/cli#544](https://github.com/docker/cli/pull/544)
+* Change the default output format for `docker container stats` to show `CONTAINER ID` and `NAME` [docker/cli#565](https://github.com/docker/cli/pull/565)
++ Add `--no-trunc` flag to `docker container stats` [docker/cli#565](https://github.com/docker/cli/pull/565)
++ Add experimental `docker trust`: `view`, `revoke`, `sign` subcommands [docker/cli#472](https://github.com/docker/cli/pull/472)
+- Various doc and shell completion fixes [docker/cli#610](https://github.com/docker/cli/pull/610) [docker/cli#611](https://github.com/docker/cli/pull/611) [docker/cli#618](https://github.com/docker/cli/pull/618) [docker/cli#580](https://github.com/docker/cli/pull/580) [docker/cli#598](https://github.com/docker/cli/pull/598) [docker/cli#603](https://github.com/docker/cli/pull/603)
+
+### Networking
+
+* Enabling ILB/ELB on windows using per-node, per-network LB endpoint [moby/moby#34674](https://github.com/moby/moby/pull/34674)
+* Overlay fix for transient IP reuse [docker/libnetwork#1935](https://github.com/docker/libnetwork/pull/1935)
+* Serializing bitseq alloc [docker/libnetwork#1788](https://github.com/docker/libnetwork/pull/1788)
+- Disable hostname lookup on chain exists check [docker/libnetwork#1974](https://github.com/docker/libnetwork/pull/1974)
+
+### Runtime
+
+* LCOW: Add UVM debuggability by grabbing logs before tear-down [moby/moby#34846](https://github.com/moby/moby/pull/34846)
+* LCOW: Prepare work for bind mounts [moby/moby#34258](https://github.com/moby/moby/pull/34258)
+* LCOW: Support for docker cp, ADD/COPY on build [moby/moby#34252](https://github.com/moby/moby/pull/34252)
+* LCOW: VHDX boot to readonly [moby/moby#34754](https://github.com/moby/moby/pull/34754)
+* Volume: evaluate symlinks before relabeling mount source [moby/moby#34792](https://github.com/moby/moby/pull/34792)
+- Fixing ‘docker cp’ to allow new target file name in a host symlinked directory [moby/moby#31993](https://github.com/moby/moby/pull/31993)
++ Add support for Windows version filtering on pull [moby/moby#35090](https://github.com/moby/moby/pull/35090)
+
+### Swarm mode
+
+* Produce an error if `docker swarm init --force-new-cluster` is executed on worker nodes [moby/moby#34881](https://github.com/moby/moby/pull/34881)
++ Add support for `.Node.Hostname` templating in swarm services [moby/moby#34686](https://github.com/moby/moby/pull/34686)
+* Increase gRPC request timeout to 20 seconds for sending snapshots [docker/swarmkit#2391](https://github.com/docker/swarmkit/pull/2391)
+- Do not filter nodes if logdriver is set to `none` [docker/swarmkit#2396](https://github.com/docker/swarmkit/pull/2396)
++ Adding ipam options to ipam driver requests [docker/swarmkit#2324](https://github.com/docker/swarmkit/pull/2324)
 
 ## 17.07.0-ce (2017-08-29)
 

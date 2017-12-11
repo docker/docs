@@ -18,16 +18,18 @@ In the daemon mode, it will only allow connections from clients
 authenticated by a certificate signed by that CA. In the client mode,
 it will only connect to servers with a certificate signed by that CA.
 
-> **Warning**:
+> Advanced topic
+>
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
 > with OpenSSL, x509 and TLS before using it in production.
-{:.warning}
+{:.important}
 
-> **Warning**:
+> Only works on Linux
+>
 > These TLS commands will only generate a working set of certificates on Linux.
 > macOS comes with a version of OpenSSL that is incompatible with the
 > certificates that Docker requires.
-{:.warning}
+{:.important}
 
 ## Create a CA, server and client keys with OpenSSL
 
@@ -43,6 +45,7 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
     e is 65537 (0x10001)
     Enter pass phrase for ca-key.pem:
     Verifying - Enter pass phrase for ca-key.pem:
+
     $ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
     Enter pass phrase for ca-key.pem:
     You are about to be asked to enter information that will be incorporated
@@ -72,6 +75,7 @@ name) matches the hostname you will use to connect to Docker:
     .....................................................................++
     .................................................................................................++
     e is 65537 (0x10001)
+
     $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 
 Next, we're going to sign the public key with our CA:
@@ -113,6 +117,7 @@ request:
     .........................................................++
     ................++
     e is 65537 (0x10001)
+
     $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 
 To make the key suitable for client authentication, create an extensions
@@ -156,7 +161,9 @@ providing a certificate trusted by our CA:
 To be able to connect to Docker and validate its certificate, you now
 need to provide your client keys, certificates and trusted CA:
 
-> **Note**: This step should be run on your Docker client machine. As such, you
+> Run it on the client machine
+>
+> This step should be run on your Docker client machine. As such, you
 > need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
 
@@ -186,6 +193,7 @@ the files to the `.docker` directory in your home directory -- and set the
 
     $ mkdir -pv ~/.docker
     $ cp -v {ca,cert,key}.pem ~/.docker
+
     $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
 
 Docker will now connect securely by default:

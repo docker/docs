@@ -156,16 +156,19 @@ needs to write a large volume of non-persistent state data.
 
 If you use either bind mounts or volumes, keep the following in mind:
 
-- If the container's image contains data at the mount point, this data will be
-  propagated into the bind mount or volume. This is a good way to pre-populate
-  data that the Docker host needs (in the case of bind mounts) or that another
-  container needs (in the case of volumes).
+- If you mount an **empty volume** into a directory in the container in which files
+  or directories exist, these files or directories will be propagated (copied) 
+  into the volume. Similarly, if you start a container and specify a volume which
+  does not already exist, an empty volume is created for you.
+  This is a good way to pre-populate data that another container needs.
 
-- If you mount a bind mount or volume into a directory in the container in which
-  files or directories have already been written, these files or directories are
+- If you mount a **bind mount or non-empty volume** into a directory in the container 
+  in which some files or directories exist, these files or directories are
   obscured by the mount, just as if you saved files into `/mnt` on a Linux host
   and then mounted a USB drive into `/mnt`. The contents of `/mnt` would be
   obscured by the contents of the USB drive until the USB drive were unmounted.
+  The obscured files are not removed or altered, but are not accessible while the
+  bind mount or volume is mounted.
 
 ## Next steps
 
