@@ -177,8 +177,8 @@ various instructions available for use in a `Dockerfile`.
 [Dockerfile reference for the FROM instruction](../../reference/builder.md#from)
 
 Whenever possible, use current Official Repositories as the basis for your
-image. We recommend the [Debian image](https://hub.docker.com/_/debian/)
-since it’s very tightly controlled and kept minimal (currently under 150 mb),
+image. We recommend the [Alpine image](https://hub.docker.com/_/alpine/)
+since it’s very tightly controlled and kept minimal (currently under 5 mb),
 while still being a full distribution.
 
 ### LABEL
