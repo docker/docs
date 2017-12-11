@@ -19,16 +19,14 @@ is shared by any bind mount from macOS into a container.
 
 On macOS Sierra and lower, the default file system is **HFS+**. On macOS High
 Sierra, the default file system is **APFS**. Both are case-insensitive by
-default but available in case-sensitive and  case-insensitive variants.
+default but available in case-sensitive and case-insensitive variants.
 
-To get case-sensitive behavior from your bind mounts, you must either create and
-format a ramdisk or external volume as HFS+ or APFS with case-sensitivity, or
-else you must reformat your OS root partition with HFS+ or APFS with
-case-sensitivity. See the
+To get case-sensitive behavior, format the volume used in your bind mount as
+HFS+ or APFS with case-sensitivity. See the
 [APFS FAQ](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html).
 
-We do not recommend reformatting your root partition as some Mac software
-dubiously relies on case-insensitivity to function.
+We do not recommend reformatting your root partition as some Mac software relies
+on case-insensitivity to function.
 
 ### Access control
 
