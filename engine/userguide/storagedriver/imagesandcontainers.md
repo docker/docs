@@ -235,9 +235,9 @@ layers are the same.
     ```bash
     $ docker images
 
-    REPOSITORY                                            TAG                          IMAGE ID            CREATED             SIZE
-    acme/my-final-image                                   1.0                          dbf995fc07ff        58 seconds ago      103MB
-    acme/my-base-image                                    1.0                          bd09118bcef6        3 minutes ago       103MB
+    REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
+    acme/my-final-image                1.0                     dbf995fc07ff        58 seconds ago      103MB
+    acme/my-base-image                 1.0                     bd09118bcef6        3 minutes ago       103MB
     ```
 
 8.  Check out the layers that comprise each image:
@@ -346,12 +346,12 @@ examines how much room they take up.
 2.  Run the `docker ps` command to verify the 5 containers are running.
 
     ```bash
-    CONTAINER ID        IMAGE                     COMMAND                  CREATED              STATUS              PORTS               NAMES
-    1a174fc216cc        acme/my-final-image:1.0   "bash"                   About a minute ago   Up About a minute                       my_container_5
-    38fa94212a41        acme/my-final-image:1.0   "bash"                   About a minute ago   Up About a minute                       my_container_4
-    1e7264576d78        acme/my-final-image:1.0   "bash"                   About a minute ago   Up About a minute                       my_container_3
-    dcad7101795e        acme/my-final-image:1.0   "bash"                   About a minute ago   Up About a minute                       my_container_2
-    c36785c423ec        acme/my-final-image:1.0   "bash"                   About a minute ago   Up About a minute                       my_container_1
+    CONTAINER ID      IMAGE                     COMMAND     CREATED              STATUS              PORTS      NAMES
+    1a174fc216cc      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_5
+    38fa94212a41      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_4
+    1e7264576d78      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_3
+    dcad7101795e      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_2
+    c36785c423ec      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_1
     ```
 
 
