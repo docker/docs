@@ -1683,6 +1683,8 @@ manuals:
           title: Deploy application resources to a collection
         - path: /datacenter/ucp/3.0/guides/user/services/deploy-kubernetes-workload/
           title: Deploy a workload to a Kubernetes cluster
+        - path: /datacenter/ucp/3.0/guides/user/services/deploy-compose-on-kubernetes/
+          title: Deploy a Compose-based app to a Kubernetes cluster
       - sectiontitle: Secrets
         section:
         - path: /datacenter/ucp/3.0/guides/user/secrets/
