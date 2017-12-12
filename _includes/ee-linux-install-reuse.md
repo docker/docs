@@ -176,29 +176,20 @@ You can install Docker EE in different ways, depending on your needs:
     users are added to the group.
 
 {% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-3.  If you need to use `devicemapper`, edit `/etc/docker/daemon.json`. If it
-    does not yet exist, create it. Assuming that the file was empty, add the
-    following contents.
-
-    ```json
-    {
-      "storage-driver": "devicemapper"
-    }
-    ```
-
-4.  For production systems using `devicemapper`, you must use `direct-lvm` mode,
-    which requires you to prepare the block devices. Follow the procedure in the
+3.  If you need to use `devicemapper`, follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
-    **before starting Docker**.
+    **before starting Docker**. For production systems using `devicemapper`,
+    you must use `direct-lvm` mode,
+    which requires you to prepare the block devices.
 {% endif %}
 
-5.  Start Docker.
+4.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-6.  Verify that Docker EE is installed correctly by running the `hello-world`
+5.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -280,29 +271,20 @@ upgrade Docker EE.
     users are added to the group.
 
 {% if linux-dist == "centos" or linux-dist == "rhel" or linux-dist == "oraclelinux" %}
-3.  If you need to use `devicemapper`, edit `/etc/docker/daemon.json`. If it
-    does not yet exist, create it. Assuming that the file was empty, add the
-    following contents.
-
-    ```json
-    {
-      "storage-driver": "devicemapper"
-    }
-    ```
-
-4.  For production systems using `devicemapper`, you must use `direct-lvm` mode,
-    which requires you to prepare the block devices. Follow the procedure in the
+3.  If you need to use `devicemapper`, follow the procedure in the
     [devicemapper storage driver guide](/engine/userguide/storagedriver/device-mapper-driver.md#configure-direct-lvm-mode-for-production){: target="_blank" class="_" }
-    **before starting Docker**.
+    **before starting Docker**. For production systems using `devicemapper`,
+    you must use `direct-lvm` mode,
+    which requires you to prepare the block devices.
 {% endif %}
 
-5.  Start Docker.
+4.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-6.  Verify that Docker EE is installed correctly by running the `hello-world`
+5.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
