@@ -337,8 +337,8 @@ Keep reading for more information and use cases for each of these methods.
 #### Publish a service's ports using the routing mesh
 
 To publish a service's ports externally to the swarm, use the
-`--publish <TARGET-PORT>:<SERVICE-PORT>` flag. The swarm makes the service
-accessible at the target port **on every swarm node**. If an external host
+`--publish <PUBLISHED-PORT>:<SERVICE-PORT>` flag. The swarm makes the service
+accessible at the published port **on every swarm node**. If an external host
 connects to that port on any swarm node, the routing mesh routes it to a task.
 The external host does not need to know the IP addresses or internally-used
 ports of the service tasks to interact with the service. When a user or process
@@ -354,7 +354,7 @@ three tasks on a 10-node swarm:
 ```bash
 $ docker service create --name my_web \
                         --replicas 3 \
-                        --publish target=8080,port=80 \
+                        --publish published=8080,target=80 \
                         nginx
 ```
 
