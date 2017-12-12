@@ -103,7 +103,12 @@ from the repository.
 
 2.  Install packages to allow `apt` to use a repository over HTTPS:
 
-    **Jessie or Stretch**:
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#jessie">Jessie or newer</a></li>
+      <li><a data-toggle="tab" data-target="#wheezy">Wheezy or older</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="jessie" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo apt-get install \
@@ -114,7 +119,8 @@ from the repository.
          software-properties-common
     ```
 
-    **Wheezy**:
+    </div>
+    <div id="wheezy" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo apt-get install \
@@ -123,6 +129,9 @@ from the repository.
          curl \
          python-software-properties
     ```
+
+    </div>
+    </div> <!-- tab-content -->
 
 3.  Add Docker's official GPG key:
 
@@ -155,7 +164,12 @@ from the repository.
     To also add the **edge** repository, add `edge` after `stable` on the last
     line of the command.
 
-    **x86_64**:
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
@@ -164,13 +178,17 @@ from the repository.
        stable"
     ```
 
-    **armhf**:
+    </div>
+    <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ echo "deb [arch=armhf] {{ download-url-base }} \
          $(lsb_release -cs) stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
+
+    </div>
+    </div> <!-- tab-content -->
 
 5.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or

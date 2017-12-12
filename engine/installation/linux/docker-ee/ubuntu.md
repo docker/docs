@@ -147,15 +147,24 @@ from the repository.
         software-properties-common
     ```
 
-3.  Add Docker's official GPG key using your customer Docker EE repository URL:
+3.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This will
+    only persist until you log out of the session. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
+
+      ```bash
+      $ DOCKER_EE_URL="<DOCKER-EE-URL>"
+      ```
+
+4.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
     ```bash
-    $ curl -fsSL <DOCKER-EE-URL>/ubuntu/gpg | sudo apt-key add -
+    $ curl -fsSL "${DOCKER_EE_URL}/ubuntu/gpg" | sudo apt-key add -
     ```
 
     Verify that you now have the key with the fingerprint
     `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
-    last eight characters of the fingerprint.
+    last eight characters of the fingerprint. Use the command as-is. It will
+    work because of the variable you set earlier.
 
     ```bash
     $ sudo apt-key fingerprint 6D085F96
@@ -166,41 +175,50 @@ from the repository.
     sub   4096R/6D085F96 2017-02-22
     ```
 
-4.  Use the following command to set up the **stable** repository, replacing
-    `<DOCKER-EE-URL>` with the URL you noted down in the
-    [prerequisites](#prerequisites).
+5.  Use the following command to set up the **stable** repository. Use the
+    command as-is. It will work because of the variable you set earlier.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`.
     >
 
-    **x86_64**:
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64el_repo">IBM Power (ppc64el)</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
+       "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
        stable-{{ site.docker_ee_version }}"
     ```
 
-    **s390x**:
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=s390x] {{ download-url-base }} \
+       "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
        stable-{{ site.docker_ee_version }}"
     ```
 
-    **ppc64el**:
+    </div>
+    <div id="ppc64el_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=ppc64el] {{ download-url-base }} \
+       "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
        stable-{{ site.docker_ee_version }}"
     ```
 
+    </div>
+    </div> <!-- tab-content -->
 
 #### Install Docker EE
 

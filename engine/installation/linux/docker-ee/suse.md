@@ -165,37 +165,60 @@ from the repository.
 
 #### Set up the repository
 
-1.  Use the following command to set up the **stable** repository, using the
-    Docker EE repository URL you located in the [prerequisites](#prerequisites).
+1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This will
+    only persist until you log out of the session. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
 
-    **x86_64**:
+    ```bash
+    $ DOCKER_EE_URL="<DOCKER-EE-URL>"
+    ```
+
+2.  Use the following command to set up the **stable** repository. Use the
+    command as-is. It will work because of the variable you set in the previous
+    step.
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/sles/12.3/x86_64/stable-{{ site.docker_ee_version }} \
+        "${DOCKER_EE_URL}/sles/12.3/x86_64/stable-{{ site.docker_ee_version }}" \
         docker-ee-stable
     ```
 
-    **s390x**:
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/sles/12.3/s390x/stable-{{ site.docker_ee_version }} \
+        "${DOCKER_EE_URL}/sles/12.3/s390x/stable-{{ site.docker_ee_version }}" \
         docker-ee-stable
     ```
 
-    **ppc64le**:
+    </div>
+
+    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo zypper addrepo \
-        <DOCKER-EE-URL>/sles/12.3/ppc64le/stable-{{ site.docker_ee_version }} \
+        "${DOCKER_EE_URL}/sles/12.3/ppc64le/stable-{{ site.docker_ee_version }}" \
         docker-ee-stable
     ```
 
-2.  Import the GPG key from the repository.
+    </div>
+    </div><!--tab-content-->
+
+
+3.  Import the GPG key from the repository. Use the command as-is. It will work
+    because of the variable you set earlier.
 
     ```bash
-    $ sudo rpm --import <DOCKER-EE-URL/sles/gpg
+    $ sudo rpm --import "${DOCKER_EE_URL}/sles/gpg"
     ```
 
 #### Install Docker EE
