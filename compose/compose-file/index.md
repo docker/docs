@@ -769,8 +769,6 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [cgroup_parent](#cgroup_parent)
 - [container_name](#container_name)
 - [devices](#devices)
-- [dns](#dns)
-- [dns_search](#dns_search)
 - [tmpfs](#tmpfs)
 - [external_links](#external_links)
 - [links](#links)
@@ -847,10 +845,6 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
-
 ### dns_search
 
 Custom DNS search domains. Can be a single value or a list.
@@ -859,10 +853,6 @@ Custom DNS search domains. Can be a single value or a list.
     dns_search:
       - dc1.example.com
       - dc2.example.com
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
 
 ### tmpfs
 
