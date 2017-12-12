@@ -6,7 +6,7 @@ redirect_from:
 title: File system sharing (osxfs)
 ---
 
-`osxfs` is a new  shared file system solution, exclusive to Docker for Mac.
+`osxfs` is a new shared file system solution, exclusive to Docker for Mac.
 `osxfs` provides a close-to-native user experience for bind mounting macOS file
 system trees into Docker containers. To this end, `osxfs` features a number of
 unique capabilities as well as differences from a classical Linux file system.
@@ -25,7 +25,7 @@ To get case-sensitive behavior, format the volume used in your bind mount as
 HFS+ or APFS with case-sensitivity. See the
 [APFS FAQ](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html).
 
-We do not recommend reformatting your root partition as some Mac software relies
+Reformatting your root partition is not recommended as some Mac software relies
 on case-insensitivity to function.
 
 ### Access control
