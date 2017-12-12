@@ -14,6 +14,14 @@ You can configure UCP for sending logs to a remote logging service:
 
 ![](../../images/configure-logs-1.png){: .with-border}
 
+> External system for logs
+>
+> Administrators should configure Docker EE to store logs using an external
+> system. By default, the Docker daemon doesn't delete logs, which means that
+> in a production system with intense usage, your logs can consume a
+> significant amount of disk space.
+{: .important}
+
 ## Example: Setting up an ELK stack
 
 One popular logging stack is composed of Elasticsearch, Logstash, and
