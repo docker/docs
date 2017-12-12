@@ -6,7 +6,7 @@ keywords: ucp, troubleshoot, health, swarm
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the
-[individual UCP components](../../architecture.md). Only administrator users can
+[individual UCP components](/enterprise/ucp-architecture.md). Only administrator users can
 see information about UCP system containers.
 
 ## Check the logs from the UI
