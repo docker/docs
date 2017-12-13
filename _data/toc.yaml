@@ -1591,6 +1591,8 @@ manuals:
             title: Join Windows worker nodes to your cluster
           - path: /datacenter/ucp/3.0/guides/admin/configure/join-nodes/use-a-load-balancer/
             title: Use a load balancer
+        - path: /datacenter/ucp/3.0/guides/admin/configure/integrate-with-multiple-registries/
+          title: Integrate with multiple registries
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /datacenter/ucp/3.0/guides/admin/monitor-and-troubleshoot/
