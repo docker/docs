@@ -41,7 +41,7 @@ the new policy to your existing role by following the instructions
 
     * Leave **Require MFA** unchecked.
 
-    Click **Next Permissions**.
+    Click **Next: Permissions**.
 
 5.  On the next screen, do not select a policy (you will add the policy in a later step).
 
