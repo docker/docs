@@ -469,6 +469,23 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc2-mac41 2017-12-13 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc2)
+  - [Docker compose 1.18.0-rc2](https://github.com/docker/compose/releases/tag/1.18.0-rc2)
+
+* New
+  - VM disk size can be changed in settings. (See docker/for-mac#1037).
+
+* Bug fixes and minor changes
+  - Avoid VM reboot when changing host proxy settings. 
+  - Don't break HTTP traffic between containers by forwarding them via the external proxy (docker/for-mac#981)
+  - Filesharing settings are now stored in settings.json
+  - Daemon restart button has been moved to settings / Reset Tab
+  - Display various component versions in About box
+  - Better VM state handling & error messsages in case of VM crashes
+
 ### Docker Community Edition 17.11.0-ce-mac40 2017-11-22 (Edge)
 
 * Upgrades
