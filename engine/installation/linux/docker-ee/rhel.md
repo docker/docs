@@ -30,11 +30,21 @@ Docker Community Edition (Docker CE) is not supported on {{ linux-dist-long }}.
 To install Docker EE, you need the 64-bit version of {{ linux-dist-long }}
 running on `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures.
 
-In addition, you must use the `overlay2` or `devicemapper` storage driver.
-**The `overlay2` storage driver is only supported on RHEL 7.2 or higher.** On
-production systems using `devicemapper`, you must use `direct-lvm` mode, which
-requires one or more dedicated block devices. Fast storage such as solid-state
-media (SSD) is recommended.
+In addition, you must use the `overlay2` or `devicemapper` storage driver. The
+`overlay2` driver is preferred for ease of configuration, if you are able to
+use it. The following limitations apply:
+
+**OverlayFS**:
+
+- The `overlay2` storage driver is only supported on RHEL 7.2 or higher.
+- If `selinux` is enabled, the `overlay2` storage driver is only supported on
+  RHEL 7.4 or higher.
+
+**Devicemapper**:
+
+- On production systems using `devicemapper`, you must use `direct-lvm` mode,
+  which requires one or more dedicated block devices. Fast storage such as
+  solid-state media (SSD) is recommended.
 
 {% capture selinux-warning %}
 > **Warning**: There is currently no support for `selinux` on IBM Z systems. If
