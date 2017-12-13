@@ -185,7 +185,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.0"
+      ucp_version: "3.0.0-beta1"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
