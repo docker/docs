@@ -457,10 +457,10 @@ We did not distribute a 1.12.4 stable release
 
 
 * Bug fixes and minor changes
-  - Fix a class of startup failures where the database fails to start, see [docker/for-win#498]
+  - Fix a class of startup failures where the database fails to start, see [docker/for-win#498](https://github.com/docker/for-win/issues/498)
   - Display various component versions in About box
   - Better removal of LCOW images & containers when uninstalling Docker
-  - Links in Update changelog open the default browser instead of IE (fixes docker/for-win#1311)
+  - Links in Update changelog open the default browser instead of IE (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
 ### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
 
