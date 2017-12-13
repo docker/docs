@@ -368,7 +368,7 @@ the initial period.
 
 Many Official images will transition to the Docker Certified program and will be
 maintained and updated by the original owner of the software. Docker will
-continue to maintain of some base OS images and language frameworks.  
+continue to maintain some of the base OS images and language frameworks.  
 
 #### How will certification of plugins be handled?
 
