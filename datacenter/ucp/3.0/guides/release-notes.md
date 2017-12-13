@@ -19,7 +19,7 @@ upgrade your installation to the latest release.
 * UCP now supports Kubernetes as an orchestrator, in addition to the existing
 Swarmkit and "Classic" Swarm orchestrators. Kubernetes system components are
 installed automatically on all manager and worker nodes in the cluster.
-Kubernetes in UCP is not yet supported on Windows or IBM Z nodes. 
+Kubernetes in UCP is not yet supported on Windows or IBM Z nodes.
 * Worker nodes can be allocated to run only Swarm workloads, only Kubernetes
 workloads, or mixed workloads. Mixed workloads are not recommended for use in
 a production environment due to potential resource contention issues across
@@ -38,7 +38,7 @@ advantage of the added features.
 * UCP 3.0 Beta1 has been tested on Ubuntu 16.04 and RHEL 7.3.
 * Installation on SLES 12 and Ubuntu 14.04 is not currently possible because of
 an iptables incompatibility.
-* UCP 3.0 requires more resources to run than UCP 2.2 and is unlikely to work 
+* UCP 3.0 requires more resources to run than UCP 2.2 and is unlikely to work
 correctly on nodes with less than 4GB of total memory.
 * The kubernetes SPDY operations such as `kubectl logs` or `kubectl exec` are
 not possible when using the client bundle feature. As a workaround, you may
@@ -49,7 +49,7 @@ while all other service accounts have admin-level permissions and are usable
 only by admin users.  Admins should create custom service accounts for workloads
 intended to use the service account feature.
 * Security hardening of Kubernetes managed by Docker EE is not fully complete.
-Only use this release for testing and validation in controlled environments with 
+Only use this release for testing and validation in controlled environments with
 trusted users. Apps that rely on the default Kubernetes service account may not
 work because of access restrictions.
 * The product versions reported by components in the beta release are
@@ -59,7 +59,7 @@ fully scale-tested or optimized and the default settings in the beta release
 are not optimized for production use.
 * HRM supports configuring a catch-all fallback service for requests that do
 not match any routing directive. Interlock does not support this feature.
-* When changing the mode for a worker node between Kubernetes, Swarm and Mixed, 
+* When changing the mode for a worker node between Kubernetes, Swarm and Mixed,
 when going back to "Swarm" some Kubernetes tasks may not be evicted from the
 node.
 * A Kubernetes bug causes workloads published using `NodePort` to only be
@@ -75,5 +75,14 @@ to delete them.
 node set.
 * When promoting nodes from worker to master, not all required labels and taints
 are correctly applied. This can cause cluster failure if master nodes are lost.
-Reconciliation may fail on RHEL and CentOS because of problems with mounting the 
+Reconciliation may fail on RHEL and CentOS because of problems with mounting the
 `/var` folder.
+* The Docker Kubernetes flex-volume bridge doesn't work with volumes created
+with volume plugins. Only local volumes (and v1 plugin volumes) work.
+* Rotating UCP certificates can cause Kubernetes networking to stop working.
+* Currently, the only tested and supported Kubernetes CNI networking plugin is
+Calico (which is included).
+* Kubernetes resources with identical names in different namespaces are not
+visible in the UI because of a problem with the middleware object store.
+* If all the nodes in UCP are using IBM Z, Kubernetes functionality will show
+up on the web UI but not be available for use.
