@@ -195,6 +195,19 @@ at build time is the value in the environment where Compose is running.
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
 
+#### extra_hosts
+
+Add hostname mappings at build-time. Use the same values as the docker client `--add-host` parameter.
+
+    extra_hosts:
+     - "somehost:162.242.195.82"
+     - "otherhost:50.31.209.229"
+
+An entry with the ip address and hostname will be created in `/etc/hosts` inside containers for this build, e.g:
+
+    162.242.195.82  somehost
+    50.31.209.229   otherhost
+
 #### labels
 
 > Added in [version 2.1](compose-versioning.md#version-21) file format
@@ -259,7 +272,7 @@ a [byte value](#specifying-byte-values).
 
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](engine/userguide/eng-image/multistage-build.md) for
+[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
 details.
 
       build:
@@ -948,6 +961,7 @@ port (a random host port will be chosen).
      - "127.0.0.1:8001:8001"
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
+     - "12400-12500:1240"
 
 ### security_opt
 
@@ -1024,16 +1038,21 @@ Disables the user namespace for this service, if Docker daemon is configured wit
 See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
 more information.
 
-### volumes, volume\_driver
+### volumes
 
-Mount paths or named volumes, optionally specifying a path on the host machine
-(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-For [version 2 files](compose-versioning.md#version-2), named volumes need to be specified with the
+Mount host folders or named volumes. Named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
 
 You can mount a relative path on the host, which will expand relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
+
+#### Short syntax
+
+The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where
+`SOURCE` can be either a host path or volume name. `TARGET` is the container
+path where the volume will be mounted. Standard modes are `ro` for read-only
+and `rw` for read-write (default).
 
     volumes:
       # Just specify a path and let the Engine create a volume
@@ -1051,26 +1070,69 @@ should always begin with `.` or `..`.
       # Named volume
       - datavolume:/var/lib/mysql
 
-If you do not use a host path, you may specify a `volume_driver`.
+#### Long syntax
+
+> [Added in version 2.3 file format](compose-versioning.md#version-23).
+
+The long form syntax allows the configuration of additional fields that can't be
+expressed in the short form.
+
+- `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
+- `source`: the source of the mount, a path on the host for a bind mount, or the
+  name of a volume defined in the
+  [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
+- `target`: the path in the container where the volume will be mounted
+- `read_only`: flag to set the volume as read-only
+- `bind`: configure additional bind options
+  - `propagation`: the propagation mode used for the bind
+- `volume`: configure additional volume options
+  - `nocopy`: flag to disable copying of data from a container when a volume is
+    created
+
+
+```none
+version: "3.2"
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./static
+        target: /opt/app/static
+
+networks:
+  webnet:
+
+volumes:
+  mydata:
+```
+
+> **Note:** When creating bind mounts, using the long syntax requires the
+> referenced folder to be created beforehand. Using the short syntax will
+> create the folder on the fly if it doesn't exist.
+> See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
+> for more information.
+
+### volume\_driver
+
+Specify a default volume driver to be used for all declared volumes on this
+service.
 
     volume_driver: mydriver
 
-There are several things to note, depending on which
-[Compose file version](#versioning) you're using:
+> **Note:** In [version 2 files](compose-versioning.md#version-2), this
+> option will only apply to anonymous volumes (those specified in the image,
+> or specified under `volumes` without an explicit named volume or host path).
+> To configure the driver for a named volume, use the `driver` key under the
+> entry in the [top-level `volumes` option](#volume-configuration-reference).
 
--   You can use `volume_driver` in [version 2 files](compose-versioning.md#version-2),
-    but it will only apply to anonymous volumes (those specified in the image,
-    or specified under `volumes` without an explicit named volume or host path).
-    To configure the driver for a named volume, use the `driver` key under the
-    entry in the
-    [top-level `volumes` option](#volume-configuration-reference).
-
--   For [version 1 files](compose-versioning.md#version-1), both named volumes and
-    container volumes use the specified driver. This changes in version 2 per the above reference to anonymous volumes.
-
--   No path expansion will be done if you have also specified a `volume_driver`.
-    For example, if you specify a mapping of `./foo:/data`, the `./foo` part
-    will be passed straight to the volume driver without being expanded.
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
@@ -1110,13 +1172,15 @@ then read-write will be used.
 
 {: id="cpu-and-other-resources"}
 
-### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu_count, cpu_percent, cpu\_shares, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
 
 > **Note:** The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
+> The following options were added in [version 2.1](compose-versioning.md#version-21):
+> `oom_kill_disable`
 
     cpu_count: 2
     cpu_percent: 50
@@ -1139,6 +1203,7 @@ Each of these is a single value, analogous to its
     privileged: true
 
     oom_score_adj: 500
+    oom_kill_disable: true
 
     read_only: true
     shm_size: 64M
@@ -1434,6 +1499,26 @@ refer to it within the Compose file:
       outside:
         external:
           name: actual-name-of-network
+
+### name
+
+> [Added in version 2.1 file format](compose-versioning.md#version-21)
+
+Set a custom name for this network.
+
+    version: '2.1'
+    networks:
+      network1:
+        name: my-app-net
+
+It can also be used in conjuction with the `external` property:
+
+    version: '2.1'
+    networks:
+      network1:
+        external: true
+        name: my-app-net
+
 
 ## Variable substitution
 
