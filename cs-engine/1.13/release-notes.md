@@ -18,6 +18,28 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 [Looking for the release notes for Docker CS Engine 1.12?](/cs-engine/1.12/release-notes/index.md)
 
+## CS Engine 1.13.1-cs9 (2017-12-13)
+
+* Handle cleanup DNS for attachable container to prevent leak in name resolution
+[docker/libnetwork#1999](https://github.com/docker/libnetwork/pull/1999)
+* When a node is removed, delete all of its attachment tasks so networks use
+by those tasks can be removed [docker/swarmkit#2417](https://github.com/docker/swarmkit/pull/2417)
+* Increase gRPC request timeout to 20 seconds for sending snapshots to prevent
+`context deadline exceeded` errors [docker/swarmkit#2406](https://github.com/docker/swarmkit/pull/2406)
+* Avoid using a map for log attributes to prevent panic
+[moby/moby#34174](https://github.com/moby/moby/pull/34174)
+* Fix "raw" mode with the Splunk logging driver
+[moby/moby#34520](https://github.com/moby/moby/pull/34520)
+* Don't unmount entire plugin manager tree on remove
+[moby/moby#33422](https://github.com/moby/moby/pull/33422)
+* Redact secret data on secret creation [moby/moby#33884](https://github.com/moby/moby/pull/33884)
+* Sort secrets and configs to ensure idempotence and prevent
+`docker stack deploy` from useless restart of services [docker/cli#509](https://github.com/docker/cli/pull/509)
+* Automatically set `may_detach_mounts=1` on startup to prevent
+`device or resource busy` errors [moby/moby#34886](https://github.com/moby/moby/pull/34886)
+* Don't abort when setting `may_detach_mounts`
+[moby/moby#35172](https://github.com/moby/moby/pull/35172)
+
 ## CS Engine 1.13.1-cs8 (2017-11-17)
 
 * Protect health monitor channel to prevent engine panic [moby/moby#35482](https://github.com/moby/moby/pull/35482)
