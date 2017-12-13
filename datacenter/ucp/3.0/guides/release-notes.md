@@ -40,6 +40,14 @@ advantage of the added features.
 an iptables incompatibility.
 * UCP 3.0 requires more resources to run than UCP 2.2 and is unlikely to work 
 correctly on nodes with less than 4GB of total memory.
+* The kubernetes SPDY operations such as `kubectl logs` or `kubectl exec` are
+not possible when using the client bundle feature. As a workaround, you may
+change all references from `:443` to `:6443` in the `kube.yml` and `env.sh`
+files of a user client bundle.
+* The default service account of each namespace currently has no permissions,
+while all other service accounts have admin-level permissions and are usable
+only by admin users.  Admins should create custom service accounts for workloads
+intended to use the service account feature.
 * Security hardening of Kubernetes managed by Docker EE is not fully complete.
 Only use this release for testing and validation in controlled environments with 
 trusted users. Apps that rely on the default Kubernetes service account may not
