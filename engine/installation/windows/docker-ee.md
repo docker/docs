@@ -1,7 +1,7 @@
 ---
-description: How to install Docker EE for Windows
+description: How to install Docker EE for Windows Server
 keywords: Windows, Windows Server, install, download, ucp, Docker EE
-title: Install Docker Enterprise Edition for Windows Server 2016
+title: Install Docker Enterprise Edition for Windows Server
 redirect_from:
 - /docker-ee-for-windows/install/
 ---
@@ -10,9 +10,9 @@ redirect_from:
 {% capture download_url %}https://download.docker.com/components/engine/windows-server/{{ site.docker_ee_version }}/{{ filename }}{% endcapture %}
 
 
-Docker Enterprise Edition for Windows Server 2016 (*Docker EE*) enables native
-Docker containers on Windows Server 2016. The Docker EE installation package
-includes everything you need to run Docker on Windows Server 2016.
+Docker Enterprise Edition for Windows Server (*Docker EE*) enables native
+Docker containers on Windows Server. Windows Server 2016 and later versions are supported (currently Windows Server 2016 and Windows Server 1709). The Docker EE installation package
+includes everything you need to run Docker on Windows Server.
 This topic describes pre-install considerations, and how to download and
 install Docker EE.
 
@@ -36,7 +36,7 @@ on Windows Server 2016 and you have a
 >To use UCP, for now please use the current LTSB Windows release and not 1709.
 
 
-Docker EE for Windows requires Windows Server 2016. See
+Docker EE for Windows requires Windows Server 2016 or later. See
 [What to know before you install](#what-to-know-before-you-install) for a
 full list of prerequisites.
 
@@ -170,7 +170,7 @@ Start-Service Docker
 provides [Docker Engine](/engine/userguide/intro.md) and the
 [Docker CLI client](https://docs.docker.com/engine/reference/commandline/cli/).
 
-## About Docker EE containers and Windows Server 2016
+## About Docker EE containers and Windows Server
 
 Looking for information on using Docker EE containers?
 
@@ -182,7 +182,7 @@ Windows containers.
 * [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md)
 describes environment setup in detail.
 
-* Docker Container Platform for Windows Server 2016 [articles and blog
+* Docker Container Platform for Windows Server [articles and blog
 posts](https://www.docker.com/microsoft/) on the Docker website.
 
 ## Where to go next
