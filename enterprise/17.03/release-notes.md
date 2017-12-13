@@ -13,14 +13,26 @@ it references. However, Docker EE also includes back-ported fixes
 defect fixes that you can use in environments where new features cannot be
 adopted as quickly for consistency and compatibility reasons.
 
-## Docker EE 17.03.2-ee-7
-(2017-10-04)
+## Docker EE 17.03.2-ee-8 (2017-12-13)
+
+* Handle cleanup DNS for attachable container to prevent leak in name resolution [docker/libnetwork#1999](https://github.com/docker/libnetwork/pull/1999)
+* When a node is removed, delete all of its attachment tasks so networks used by those tasks can be removed [docker/swarmkit#2417](https://github.com/docker/swarmkit/pull/2417)
+* Increase gRPC request timeout to 20 seconds for sending snapshots to prevent `context deadline exceeded` errors [docker/swarmkit#2406](https://github.com/docker/swarmkit/pull/2406)
+* Avoid using a map for log attributes to prevent panic [moby/moby#34174](https://github.com/moby/moby/pull/34174)
+* Fix "raw" mode with the Splunk logging driver [moby/moby#34520](https://github.com/moby/moby/pull/34520)
+* Don't unmount entire plugin manager tree on remove [moby/moby#33422](https://github.com/moby/moby/pull/33422)
+* Redact secret data on secret creation [moby/moby#33884](https://github.com/moby/moby/pull/33884)
+* Sort secrets and configs to ensure idempotence and prevent `docker stack deploy` from useless restart of services [docker/cli#509](https://github.com/docker/cli/pull/509)
+* Automatically set `may_detach_mounts=1` on startup to prevent `device or resource busy` errors [moby/moby#34886](https://github.com/moby/moby/pull/34886)
+* Don't abort when setting `may_detach_mounts` [moby/moby#35172](https://github.com/moby/moby/pull/35172)
+* Protect health monitor channel to prevent engine panic [moby/moby#35482](https://github.com/moby/moby/pull/35482)
+
+## Docker EE 17.03.2-ee-7 (2017-10-04)
 
 * Fix logic in network resource reaping to prevent memory leak [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
 * Increase max GRPC message size to 128MB for larger snapshots so newly added managers can successfully join [docker/swarmkit#2375](https://github.com/docker/swarmkit/pull/2375)
 
-## Docker EE 17.03.2-ee-6
-(2017-08-24)
+## Docker EE 17.03.2-ee-6 (2017-08-24)
 
 * Fix daemon panic on docker image push [moby/moby#33105](https://github.com/moby/moby/pull/33105)
 * Fix panic in concurrent network creation/deletion operations [docker/libnetwork#1861](https://github.com/docker/libnetwork/pull/1861)
@@ -29,8 +41,7 @@ adopted as quickly for consistency and compatibility reasons.
 * Lock goroutine to OS thread while changing NS [docker/libnetwork#1911](https://github.com/docker/libnetwork/pull/1911)
 * Ignore PullOptions for running tasks [docker/swarmkit#2351](https://github.com/docker/swarmkit/pull/2351)
 
-## Docker EE 17.03.2-ee-5
-(20 Jul 2017)
+## Docker EE 17.03.2-ee-5 (20 Jul 2017)
 
 * Add more locking to storage drivers [#31136](https://github.com/moby/moby/pull/31136)
 * Prevent data race on `docker network connect/disconnect` [#33456](https://github.com/moby/moby/pull/33456)
@@ -49,29 +60,24 @@ adopted as quickly for consistency and compatibility reasons.
 * Fix issue where slow/dead `docker logs` clients can block the container [#33897](https://github.com/moby/moby/pull/33897)
 * Fix potential panic on Windows when running as a service [#32244](https://github.com/moby/moby/pull/32244)
 
-## Docker EE 17.03.2-ee-4
-(01 Jun 2017)
+## Docker EE 17.03.2-ee-4 (01 Jun 2017)
 
 Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.2-ce) of all changes since the release of Docker EE 17.03.1-ee-3
 
 **Note**: This release includes a fix for potential data loss under certain
 circumstances with the local (built-in) volume driver.
 
-## Docker EE 17.03.1-ee-3
-(30 Mar 2017)
+## Docker EE 17.03.1-ee-3 (30 Mar 2017)
 
 * Fix an issue with the SELinux policy for Oracle Linux [#31501](https://github.com/docker/docker/pull/31501)
 
-## Docker EE 17.03.1-ee-2
-(28 Mar 2017)
+## Docker EE 17.03.1-ee-2 (28 Mar 2017)
 
 * Fix issue with swarm CA timeouts [#2063](https://github.com/docker/swarmkit/pull/2063) [#2064](https://github.com/docker/swarmkit/pull/2064/files)
 
 Refer to the [detailed list](https://github.com/moby/moby/releases/tag/v17.03.1-ce) of all changes since the release of Docker EE 17.03.0-ee-1
 
-## Docker EE 17.03.0-ee-1
-
-(2 Mar 2017)
+## Docker EE 17.03.0-ee-1 (2 Mar 2017)
 
 Initial Docker EE release, based on Docker CE 17.03.0
 
