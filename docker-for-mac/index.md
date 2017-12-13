@@ -21,11 +21,13 @@ Welcome to Docker for Mac!
 Docker is a full development platform for creating containerized apps, and
 Docker for Mac is the best way to get started with Docker on a Mac.
 
-> **Got Docker for Mac?** If you have not yet installed Docker for Mac, please see [Install Docker for Mac](install.md) for an explanation of stable and edge
-channels, system requirements, and download/install information.
+> **Got Docker for Mac?** If you have not yet installed Docker for Mac,
+> see [Install Docker for Mac](install.md) for an explanation of stable and edge
+> channels, system requirements, and download/install information.
 
 >**Looking for system requirements?** Check out
-[What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
+> [What to know before you install](install.md#what-to-know-before-you-install),
+> which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
 ## Check versions of Docker Engine, Compose, and Machine
@@ -292,6 +294,47 @@ and reboot Docker. Or, to cancel changes, click another preference tab, then
 choose to discard or not apply changes when asked.
 
 ![Docker Daemon](/docker-for-mac/images/settings-daemon-beta.png)
+
+### Kubernetes
+
+**Kubernetes is only available if you are part of the private beta for Docker for Mac 17.12. To access beta builds, you must be signed in within Docker for Mac using your Docker ID.**
+
+If you are participating in the Docker beta program, you can access Docker for
+Mac 17.12 CE Edge, which includes a standalone Kubernetes server that runs on
+your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+The Kubernetes client command, `kubectl`, is included and configured to connect
+to the local Kubernetes server.
+
+To log in with your Docker ID, select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Sign in / Create Docker ID** from the menu bar.
+
+- To enable Kubernetes support and install a standalone instance of Kubernetes
+  running as a Docker container, select **Enable Kubernetes** and click the
+  **Apply and restart** button.
+
+  ![Enable Kubernetes](/docker-for-mac/images/kubernetes/kubernetes-enable.png)
+
+  An internet connection is required. Images required to run the Kubernetes
+  server are downloaded and instantiated as containers, and the
+  `/usr/local/bin/kubectl` command is installed on your Mac.
+
+  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png)
+
+  When Kubernetes is enabled and running, an additional status bar item displays
+  at the bottom right of the Docker for Mac Preferences dialog.
+
+  ![Kubernetes status](/docker-for-mac/images/kubernetes/kubernetes-status.png)
+
+- By default, Kubernetes containers are hidden from commands like `docker
+  service ls`, because managing them manually is not supported. To make them
+  visible, select **Show system containers (advanced)** and click **Apply and restart**.
+  Most users do not need this option.
+
+- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
+  The Kubernetes containers are stopped and removed, and the
+  `/usr/local/bin/kubectl` command is removed.
+
+  For more about using the Kubernetes integration with
+  Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md).
 
 ## Uninstall or reset
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
