@@ -449,6 +449,19 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc2)
+  - [Docker compose 1.18.0-rc2](https://github.com/docker/compose/releases/tag/1.18.0-rc2)
+
+
+* Bug fixes and minor changes
+  - Fix a class of startup failures where the database fails to start, see [docker/for-win#498]
+  - Display various component versions in About box
+  - Better removal of LCOW images & containers when uninstalling Docker
+  - Links in Update changelog open the default browser instead of IE (fixes docker/for-win#1311)
+
 ### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
 
 * Upgrades
