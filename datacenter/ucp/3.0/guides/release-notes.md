@@ -42,9 +42,8 @@ an iptables incompatibility.
 correctly on nodes with less than 4GB of total memory.
 * Security hardening of Kubernetes managed by Docker EE is not fully complete.
 Only use this release for testing and validation in controlled environments with 
-trusted users. In-progress hardening also means that some Kubernetes conformance 
-tests do not currently pass. Specifically, apps that rely on the default
-Kubernetes service account may not work because of access restrictions.
+trusted users. Apps that rely on the default Kubernetes service account may not
+work because of access restrictions.
 * The product versions reported by components in the beta release are
 preliminary and will change for the GA final release.
 * Interlock, the successor to the HTTP Routing Mesh (HRM), has not yet been
