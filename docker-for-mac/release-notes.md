@@ -476,11 +476,11 @@ events or unexpected unmounts.
   - [Docker compose 1.18.0-rc2](https://github.com/docker/compose/releases/tag/1.18.0-rc2)
 
 * New
-  - VM disk size can be changed in settings. (See docker/for-mac#1037).
+  - VM disk size can be changed in settings. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037)).
 
 * Bug fixes and minor changes
   - Avoid VM reboot when changing host proxy settings. 
-  - Don't break HTTP traffic between containers by forwarding them via the external proxy (docker/for-mac#981)
+  - Don't break HTTP traffic between containers by forwarding them via the external proxy [docker/for-mac#981](https://github.com/docker/for-mac/issues/981)
   - Filesharing settings are now stored in settings.json
   - Daemon restart button has been moved to settings / Reset Tab
   - Display various component versions in About box
