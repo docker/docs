@@ -184,7 +184,43 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### How do I reduce the size of Docker.qcow2?
+### Disk Usage
+
+#### Qcow2 or Raw?
+
+By default Docker for Mac stores containers and images in a file
+`Docker.raw` or `Docker.qcow2` in the directory
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
+Starting with High Sierra with APFS (Apple Filesystem) enabled, Docker
+uses the "raw" format (`Docker.raw`), otherwise it uses the Qcow2
+format (`Docker.qcow2`).
+
+#### `Docker.raw` consumes an insane amount of disk space!
+
+This is an illusion.  Docker uses the raw format on Macs running the
+Apple Filesystem (APFS).  APFS supports sparse files, i.e., files
+where long series of "zeros" are compressed.  Calling `ls` is
+misleading, because it reveals the logical size of the file, not its
+physical size; be sure to use `-s` to display the physical size:
+
+```bash
+..ker/Data/com.docker.driver.amd64-linux $ ls -klsh Docker.raw
+2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
+```
+
+here, the logical size (or max space allowed) is 64GB, but only
+2,333,548KB are physically consumed.
+
+Alternatively, you may use GNU ls or `du` (disk usage):
+
+```bash
+..ker/Data/com.docker.driver.amd64-linux $ gls -slh Docker.raw
+2,3G -rw-r--r-- 1 akim staff 64G Dec 13 17:44 Docker.raw
+..ker/Data/com.docker.driver.amd64-linux $ du -h Docker.raw
+2,2G	Docker.raw
+```
+
+#### How do I reduce the size of Docker.qcow2?
 
 By default Docker for Mac stores containers and images in a file
 `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2`.
