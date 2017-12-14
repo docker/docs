@@ -10,6 +10,7 @@ permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
+incremental: false
 
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
