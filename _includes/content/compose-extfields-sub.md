@@ -22,7 +22,7 @@ configuration:
 logging:
   options:
     max-size: '12m'
-    max-file: 5
+    max-file: '5'
   driver: json-file
 ```
 
@@ -34,7 +34,7 @@ x-logging:
   &default-logging
   options:
     max-size: '12m'
-    max-file: 5
+    max-file: '5'
   driver: json-file
 
 services:
