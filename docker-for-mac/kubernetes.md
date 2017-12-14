@@ -6,9 +6,10 @@ title: Deploy to Kubernetes
 
 **Kubernetes is only available in the private beta of Docker for Mac 17.12 CE Edge through the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
 
-Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server and client,
-as well as Docker CLI integration. The Kubernetes server runs locally within
-your Docker instance, is not configurable, and is a single-node cluster.
+If you are part of the Docker Beta program, Docker for Mac 17.12 CE Edge
+includes a standalone Kubernetes server and client, as well as Docker CLI
+integration. The Kubernetes server runs locally within your Docker instance, is
+not configurable, and is a single-node cluster.
 
 The Kubernetes server runs within a Docker container on your Mac, and is only
 for local testing. When Kubernetes support is enabled, you can deploy your
@@ -20,11 +21,10 @@ See [Docker for Mac > Getting started](/docker-for-mac/index.md#kubernetes) to
 enable Kubernetes and begin testing the deployment of your workloads on
 Kubernetes.
 
-> If you independently installed the Kubernetes CLI, `kubectl`, make sure that it
-> is pointing to `docker-for-desktop` and not some other context such as minikube
-> or a gke cluster. Run: `kubectl config use-context docker-for-desktop`. If you
-> installed `kubectl` with homebrew and encounter a symlink error, remove
-> `/usr/local/bin/kubectl`.
+> If you independently installed the Kubernetes CLI, `kubectl`, make sure that
+> it is pointing to `docker-for-desktop` and not some other context such as
+> `minikube` or a GKE cluster. Run: `kubectl config use-context docker-for-desktop`.
+> If you experience conflicts with an existing `kubectl` installation, remove `/usr/local/bin/kubectl`.
 
 ## Use Docker commands
 
