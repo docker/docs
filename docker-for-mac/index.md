@@ -309,9 +309,11 @@ pointing to some other environment, such as minikube or a gke cluster, be sure
 to change context so that kubectl is pointing to `docker-for-desktop`:
 
 ```
-kubectl config view
+kubectl config get-contexts
 kubectl config use-context docker-for-desktop
 ```
+
+If you installed `kubectl` with homebrew and encounter a symlink error, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the

@@ -18,9 +18,13 @@ workloads.
 
 See [Docker for Mac > Getting started](/docker-for-mac/index.md#kubernetes) to
 enable Kubernetes and begin testing the deployment of your workloads on
-Kubernetes. If you independently installed the Kubernetes CLI, `kubectl`, make
-sure that it is pointing to `docker-for-desktop` and not some other context such
-as minikube or a gke cluster. Run: `kubectl config use-context docker-for-desktop`.
+Kubernetes.
+
+> If you independently installed the Kubernetes CLI, `kubectl`, make sure that it
+> is pointing to `docker-for-desktop` and not some other context such as minikube
+> or a gke cluster. Run: `kubectl config use-context docker-for-desktop`. If you
+> installed `kubectl` with homebrew and encounter a symlink error, remove
+> `/usr/local/bin/kubectl`.
 
 ## Use Docker commands
 
