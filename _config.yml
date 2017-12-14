@@ -23,6 +23,8 @@ docker_ee_version: "17.06"
 compose_version: "1.17.0"
 machine_version: "0.13.0"
 distribution_version: "2.6"
+dtr_version: "2.4"
+ucp_version: "2.2"
 
 ucp_versions:
   - version: "2.2"

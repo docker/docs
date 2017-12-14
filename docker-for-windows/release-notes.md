@@ -19,6 +19,21 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
+
+* Upgrades
+  - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
+  - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+
+* Bug fixes and minor changes
+  - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
+  - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
+  - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277](https://github.com/docker/for-win/issues/1277)
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
+  - Increased timeout for VM boot startup to 2 minutes. 
+  
+
 ### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
 
 [Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
@@ -433,6 +448,19 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Edge Release Notes
+
+### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc2)
+  - [Docker compose 1.18.0-rc2](https://github.com/docker/compose/releases/tag/1.18.0-rc2)
+
+
+* Bug fixes and minor changes
+  - Fix a class of startup failures where the database fails to start, see [docker/for-win#498](https://github.com/docker/for-win/issues/498)
+  - Display various component versions in About box
+  - Better removal of LCOW images & containers when uninstalling Docker
+  - Links in Update changelog open the default browser instead of IE (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
 ### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
 

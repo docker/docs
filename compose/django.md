@@ -20,7 +20,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
     The Dockerfile defines an application's image content via one or more build
     commands that configure that image. Once built, you can run the image in a
-    container.  For more information on `Dockerfiles`, see the [Docker user
+    container.  For more information on `Dockerfile`, see the [Docker user
     guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
     and the [Dockerfile reference](/engine/reference/builder.md).
 
@@ -93,7 +93,7 @@ In this step, you create a Django starter project by building the image from the
 2. Create the Django project by running
 the [docker-compose run](/compose/reference/run/) command as follows.
 
-        docker-compose run web django-admin.py startproject composeexample .
+        sudo docker-compose run web django-admin.py startproject composeexample .
 
     This instructs Compose to run `django-admin.py startproject composeexample`
     in a container, using the `web` service's image and configuration. Because

@@ -11,7 +11,7 @@ title: Configure the Docker for AWS load balancer
 When you create a service, any ports that are exposed with `-p` are automatically exposed through the platform load balancer:
 
 ```bash
-$ docker service create --name nginx --publish target=80,port=80 nginx
+$ docker service create --name nginx --publish published=80,target=80 nginx
 ```
 
 This opens up port 80 on the Elastic Load Balancer (ELB) and direct any traffic
@@ -36,8 +36,8 @@ described in the service label `com.docker.aws.lb.arn`
 $ docker service create \
   --name demo \
   --detach=true \
-  --publish target=80,port=80 \
-  --publish target=443,port=80 \
+  --publish published=80,target=80 \
+  --publish published=443,target=80 \
   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963" \
   yourname/your-image:latest
 ```
@@ -70,8 +70,8 @@ Listen for HTTP on ports 80 and HTTPS on 444
 $ docker service create \
   --name demo \
   --detach=true \
-  --publish target=80,port=80 \
-  --publish target=444,port=80 \
+  --publish published=80,target=80 \
+  --publish published=444,target=80 \
   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@444" \
    yourname/your-image:latest
 ```
@@ -82,8 +82,8 @@ $ docker service create \
 $ docker service create \
   --name demo \
   --detach=true \
-  --publish target=80,port=80 \
-  --publish target=444,port=80 \
+  --publish published=80,target=80 \
+  --publish published=444,target=80 \
   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@443,444" \
    yourname/your-image:latest
 ```
@@ -94,7 +94,7 @@ $ docker service create \
 $ docker service create \
   --name demo \
   --detach=true \
-  --publish target=8080,port=80 \
+  --publish published=8080,target=80 \
   --label com.docker.aws.lb.arn="arn:aws:acm:us-east-1:0123456789:certificate/c02117b6-2b5f-4507-8115-87726f4ab963@8080" \
   yourname/your-image:latest
 ```
