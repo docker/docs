@@ -11,7 +11,7 @@ redirect_from:
 
 
 Docker Enterprise Edition for Windows Server (*Docker EE*) enables native
-Docker containers on Windows Server. Windows Server 2016 and later versions are supported (currently Windows Server 2016 and Windows Server 1709). The Docker EE installation package
+Docker containers on Windows Server. Windows Server 2016 and later versions are supported. The Docker EE installation package
 includes everything you need to run Docker on Windows Server.
 This topic describes pre-install considerations, and how to download and
 install Docker EE.
