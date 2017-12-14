@@ -297,7 +297,7 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available in the private beta of Docker for Mac 17.12 CE Edge through the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
+**Kubernetes is only available in Docker for Mac 17.12 CE Edge to participants in the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
 
 If you are participating in the Docker beta program, you can access Docker for
 Mac 17.12 CE Edge, which includes a standalone Kubernetes server that runs on
