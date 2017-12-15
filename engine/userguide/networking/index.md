@@ -580,8 +580,6 @@ configure it in different ways:
 
 ### Configure the Docker Client
 
-{% include edge_only.md section="option" %}
-
 1.  On the Docker client, create or edit the file `~/.config.json` in the
     home directory of the user which starts containers. Add JSON such as the
     following, substituting the type of proxy with `httpsProxy` or `ftpProxy` if
