@@ -74,14 +74,20 @@ Go back to the **DTR web UI** to validate that the tag was successfully pushed.
 
 ### Windows images
 
-Official Microsoft Windows images or any image you create based on them aren't
-distributable by default. When you push a Windows image to DTR, Docker only
-pushes the image manifest but not the image layers. This means that:
+The base layers of the Microsoft Windows base images have restrictions on how
+they can be redistributed. When you push a Windows image to DTR, Docker only
+pushes the image manifest and all the layers on top of the Windows base layers.
+The Windows base layers are not pushed to DTR. This means that:
 
 * DTR won't be able to scan those images for vulnerabilities since DTR doesn't
-have access to the layers
-* When a user pulls a Windows image from DTR, they are redirected to a
-Microsoft registry to fetch the layers
+have access to the layers (the Windows base layers are scanned by Docker Store,
+however).
+* When a user pulls a Windows image from DTR, the Windows base layers are
+automatically fetched from Microsoft and the other layers are fetched from DTR.
+
+This default behavior is recommended for standard Docker EE installations, but
+for air-gapped or similarly limited setups Docker can optionally optionally also
+push the Windows base layers to DTR.
 
 To configure Docker to always push Windows layers to DTR, add the following
 to your `C:\ProgramData\docker\config\daemon.json` configuration file:
