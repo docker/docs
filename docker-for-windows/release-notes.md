@@ -449,6 +449,14 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc3-win43 2017-12-15 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
+
+* Bug fixes and minor changes
+  - Fix installer check for not supported Windows `CoreCountrySpecific` Edition.
+
 ### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13 (Edge)
 
 * Upgrades
