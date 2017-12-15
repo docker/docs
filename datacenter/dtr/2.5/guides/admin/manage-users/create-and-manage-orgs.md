@@ -37,7 +37,7 @@ this organization.
 
 For this, click the **Add user** button, **select the users** that you want to
 grant permissions to manage the organization, and click
-**Save**. Then change their permissions from 'Member' to **Admin**.
+**Save**. Then change their permissions from 'Member' to **Org Owner**.
 
 ![](../../images/create-and-manage-orgs-3.png){: .with-border}
 
