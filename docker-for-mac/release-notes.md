@@ -469,6 +469,14 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
+
+* Bug fixes and minor changes
+  - Fix filesharing migration issue ([docker/for-mac#2317](https://github.com/docker/for-mac/issues/2317))
+
 ### Docker Community Edition 17.12.0-ce-rc2-mac41 2017-12-13 (Edge)
 
 * Upgrades
