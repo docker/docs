@@ -297,15 +297,24 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available if you are part of the private beta for Docker for Mac 17.12. To access beta builds, you must be signed in within Docker for Mac using your Docker ID.**
+**Kubernetes is only available in Docker for Mac 17.12 CE Edge to participants in the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
 
 If you are participating in the Docker beta program, you can access Docker for
 Mac 17.12 CE Edge, which includes a standalone Kubernetes server that runs on
 your Mac, so that you can test deploying your Docker workloads on Kubernetes.
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server.
 
-To log in with your Docker ID, select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Sign in / Create Docker ID** from the menu bar.
+The Kubernetes client command, `kubectl`, is included and configured to connect
+to the local Kubernetes server. If you have `kubectl` already installed and
+pointing to some other environment, such as `minikube` or a GKE cluster, be sure
+to change context so that `kubectl` is pointing to `docker-for-desktop`:
+
+```
+kubectl config get-contexts
+kubectl config use-context docker-for-desktop
+```
+
+If you installed `kubectl` with Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the

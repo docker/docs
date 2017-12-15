@@ -4,24 +4,27 @@ keywords: mac, edge, kubernetes, kubectl, orchestration
 title: Deploy to Kubernetes
 ---
 
-**Kubernetes is only available if you are part of the private beta for Docker for Mac 17.12. To access beta builds, you must be signed in within Docker for Mac using your Docker ID.**
+**Kubernetes is only available in Docker for Mac 17.12 CE Edge to participants in the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
 
-If you are participating in the [Docker Beta program](https://beta.docker.com/),
-you can access the beta for Docker for Mac 17.12 CE. This version includes a
-standalone Kubernetes server and client, as well as Docker CLI integration.
+If you are part of the Docker Beta program, Docker for Mac 17.12 CE Edge
+includes a standalone Kubernetes server and client, as well as Docker CLI
+integration. The Kubernetes server runs locally within your Docker instance, is
+not configurable, and is a single-node cluster.
 
-To log in with your Docker ID, select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Sign in / Create Docker ID** from the menu bar.
+The Kubernetes server runs within a Docker container on your Mac, and is only
+for local testing. When Kubernetes support is enabled, you can deploy your
+workloads, in parallel, on Kubernetes, Swarm, and as standalone containers.
+Enabling or disabling the Kubernetes server does not affect your other
+workloads.
 
-[You can enable this feature](/docker-for-mac/index.md#kubernetes) to test
-deploying your workloads on Kubernetes. The Kubernetes server runs within a
-Docker container on your Mac, and is only for local testing. When Kubernetes
-support is enabled, you are able to deploy your workloads, in parallel, on
-Kubernetes, Swarm, and as standalone containers. Enabling or disabling the
-Kubernetes server does not affect your other workloads.
+See [Docker for Mac > Getting started](/docker-for-mac/index.md#kubernetes) to
+enable Kubernetes and begin testing the deployment of your workloads on
+Kubernetes.
 
-The Kubernetes server runs locally within your Docker instance, is not
-configurable, and is a single-node cluster. It is provided for development and
-testing only.
+> If you independently installed the Kubernetes CLI, `kubectl`, make sure that
+> it is pointing to `docker-for-desktop` and not some other context such as
+> `minikube` or a GKE cluster. Run: `kubectl config use-context docker-for-desktop`.
+> If you experience conflicts with an existing `kubectl` installation, remove `/usr/local/bin/kubectl`.
 
 ## Use Docker commands
 
