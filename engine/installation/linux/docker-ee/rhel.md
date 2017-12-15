@@ -30,9 +30,11 @@ Docker Community Edition (Docker CE) is not supported on {{ linux-dist-long }}.
 To install Docker EE, you need the 64-bit version of {{ linux-dist-long }}
 running on `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures.
 
-In addition, you must use the `overlay2` or `devicemapper` storage driver. The
-`overlay2` driver is preferred for ease of configuration, if you are able to
-use it. The following limitations apply:
+In addition, you must use the `overlay2` or `devicemapper` storage driver.
+Beginning with Docker EE 17.06.2-ee-5 the `overlay2` storage driver is the
+recommended storage driver.
+
+The following limitations apply:
 
 **OverlayFS**:
 
