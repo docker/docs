@@ -127,7 +127,7 @@ storage driver, be sure to read about
 
 Docker for Mac and Docker for Windows are intended for development, rather
 than production. Modifying the storage driver on these platforms is not
-supported.
+possible.
 
 ## Supported backing filesystems
 
