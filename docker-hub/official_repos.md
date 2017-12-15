@@ -5,7 +5,7 @@ title: Official repositories on Docker Hub
 ---
 
 The Docker [Official Repositories](https://hub.docker.com/official/) are a
-curated set of Docker repositories that are promoted on Docker Hub. They are
+curated set of Docker repositories hosted on Docker Hub. They are
 designed to:
 
 * Provide essential base OS repositories (for example,
@@ -25,15 +25,10 @@ designed to:
   particularly important as many Official Repositories are some of the most
   popular on Docker Hub.
 
-* Provide a channel for software vendors to redistribute up-to-date and
-  supported versions of their products. Organization accounts on Docker Hub can
-  also serve this purpose, without the careful review or restrictions on what
-  can be published.
-
 Docker, Inc. sponsors a dedicated team that is responsible for reviewing and
-publishing all Official Repositories content. This team works in collaboration
-with upstream software maintainers, security experts, and the broader Docker
-community.
+publishing all content in the official repositories. This team works in
+collaboration with upstream software maintainers, security experts, and the
+broader Docker community.
 
 While it is preferable to have upstream software authors maintaining their
 corresponding Official Repositories, this is not a strict requirement. Creating
@@ -65,11 +60,11 @@ these efforts.
 
 ## How do I know the Official Repositories are secure?
 
-Docker provides a preview version of Docker Cloud's
-[Security Scanning service](/docker-cloud/builds/image-scan/) for all of the
-Official Repositories located on Docker Hub. These security scan results provide
-valuable information about which images contain security vulnerabilities, which
-you should use to help you choose secure components for your own projects.
+Each of the imagse in the Official Repositories is scanned using Docker Cloud's
+[Security Scanning service](/docker-cloud/builds/image-scan/). The results of
+these security scans provide valuable information about which images contain
+security vulnerabilities, and allow you to choose images that align with your
+security standards.
 
 To view the Docker Security Scanning results:
 
