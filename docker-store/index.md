@@ -4,11 +4,9 @@ keywords: Docker, docker, store, publishers, publish images
 title: Docker Store overview
 ---
 
-**The Docker Store is now generally available!**
-
-To learn more about publishing, browse the topics below along with the
-[publishers guide](publish.md), and [apply to be a
-publisher](https://store.docker.com/publisher/signup).
+To learn more about publishing on Docker Store, browse the topics below along
+with the [publishers guide](publish.md), and
+[apply to be a publisher](https://store.docker.com/publisher/signup).
 
 -----------------
 
