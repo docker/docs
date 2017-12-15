@@ -42,7 +42,7 @@ $ docker stack deploy -c test.yml smokestack
 ```
 {% elsif include.version=="docker-cli-win" %}
 ```powershell
-PS> docker stack deploy -c test.yml smokestack
+docker stack deploy -c test.yml smokestack
 ```
 {% elsif include.version=="kubectl" %}
 ```bash

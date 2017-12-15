@@ -86,7 +86,7 @@ installs, or install on air-gapped systems.
 
     ```PowerShell
     # On an online machine, download the zip file.
-    PS> invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
+    invoke-webrequest -UseBasicparsing -Outfile {{ filename }} {{ download_url }}
     ```
 
 2.  Copy the zip file to the machine where you want to install Docker. In a
@@ -95,36 +95,36 @@ installs, or install on air-gapped systems.
 
     ```PowerShell
     # Extract the archive.
-    PS> Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles
+    Expand-Archive {{ filename }} -DestinationPath $Env:ProgramFiles
 
     # Clean up the zip file.
-    PS> Remove-Item -Force {{ filename }}
+    Remove-Item -Force {{ filename }}
 
     # Install Docker. This will require rebooting.
     $null = Install-WindowsFeature containers
 
     # Add Docker to the path for the current session.
-    PS> $env:path += ";$env:ProgramFiles\docker"
+    $env:path += ";$env:ProgramFiles\docker"
 
     # Optionally, modify PATH to persist across sessions.
-    PS> $newPath = "$env:ProgramFiles\docker;" +
+    $newPath = "$env:ProgramFiles\docker;" +
     [Environment]::GetEnvironmentVariable("PATH",
     [EnvironmentVariableTarget]::Machine)
 
-    PS> [Environment]::SetEnvironmentVariable("PATH", $newPath,
+    [Environment]::SetEnvironmentVariable("PATH", $newPath,
     [EnvironmentVariableTarget]::Machine)
 
     # Register the Docker daemon as a service.
-    PS> dockerd --register-service
+    dockerd --register-service
 
     # Start the Docker service.
-    PS> Start-Service docker
+    Start-Service docker
     ```
 
 3.  Test your Docker EE installation by running the `hello-world` container.
 
     ```PowerShell
-    PS> docker container run hello-world:nanoserver
+    docker container run hello-world:nanoserver
     ```
 
 ## Install a specific version

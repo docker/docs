@@ -213,19 +213,19 @@ This example assumes that you have PowerShell installed.
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
-    PS> docker swarm init
+    docker swarm init
     ```
 
 3.  Save the `index.html` file as a swarm config named `homepage`.
 
     ```powershell
-    PS> docker config create homepage index.html
+    docker config create homepage index.html
     ```
 
 4.  Create an IIS service and grant it access to the `homepage` config.
 
     ```powershell
-    PS> docker service create
+    docker service create
         --name my-iis
         --publish published=8000,target=8000
         --config src=homepage,target="\inetpub\wwwroot\index.html"
@@ -238,9 +238,9 @@ This example assumes that you have PowerShell installed.
 6.  Remove the service and the config.
 
     ```powershell
-    PS> docker service rm my-iis
+    docker service rm my-iis
 
-    PS> docker config rm homepage
+    docker config rm homepage
     ```
 
 ### Advanced example: Use configs with a Nginx service
