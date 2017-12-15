@@ -54,6 +54,11 @@ the installer runs in interactive mode and prompts you for any additional
 information that is necessary.
 [Learn more about the installer](../../../reference/cli/install.md).
 
+By default DTR is deployed with self-signed certificates, so your UCP deployment
+might not be able to pull images from DTR.
+Use the `--dtr-external-url <dtr-domain>:<port>` optional flag while deploying
+DTR, so that UCP is automatically reconfigured to trust DTR.
+
 ## Step 4. Check that DTR is running
 
 In your browser, navigate to the Docker **Universal Control Plane**
