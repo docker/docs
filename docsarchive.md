@@ -17,7 +17,10 @@ run:
 ```
 docker run -ti -p 4000:4000 {{ archive.image }}
 ```
+
 {% else %}
+
+{% if archive.name != 'edge' %}
 
 ## {{ archive.name }}
 
@@ -27,5 +30,7 @@ run:
 ```
 docker run -ti -p 4000:4000 {{ archive.image }}
 ```
+
+{% endif %} <!-- edge check -->
 {% endif %}
 {% endfor %}
