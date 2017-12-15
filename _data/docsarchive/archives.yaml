@@ -2,6 +2,11 @@
   name: v17.09
   image: docs/docker.github.io:latest
   current: true
+# When you make a new stable archive version, move the edge one to be second in
+# the list. The image for edge should be the same as latest.
+- archive:
+  name: Edge
+  image: docs/docker.github.io:latest
 - archive:
   name: v17.06
   image: docs/docker.github.io:v17.06
