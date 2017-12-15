@@ -1,7 +1,7 @@
 ---
-title: Isolate Swarm nodes in Docker Advanced
+title: Isolate cluster nodes in Docker Advanced
 description: Create grants that limit access to nodes to specific teams.
-keywords: ucp, grant, role, permission, authentication
+keywords: ucp, grant, role, permission, authentication, node, Kubernetes
 ---
 
 With Docker EE Advanced, you can enable physical isolation of resources
@@ -118,18 +118,22 @@ The same steps apply for the nodes in the `/Prod` collection.
 
 ![](../images/isolate-nodes-2.png){: .with-border}
 
-## Deploy a service as a team member
+The cluster is set up for node isolation. Users with access to nodes in the
+`/Prod` collection can deploy [Swarm services](#deploy-a-service-as-a-team-member)
+and [Kubernetes apps](#kubernetes-apps), and their workloads won't be scheduled
+on nodes that aren't in the collection.
 
-Your swarm is ready to show role-based access control in action. When a user
-deploys a service, UCP assigns its resources to the user's default collection.
-From the target collection of a resource, UCP walks up the ancestor collections
-until it finds nodes that the user has `Scheduler` access to. In this example,
-UCP assigns the user's service to the `/Prod/Webserver` collection and schedules
-tasks on nodes in the `/Prod` collection.
+## Deploy a Swarm service as a team member
 
-As a user on the Ops team, set your default collection to `/Prod/Webserver`.
+When a user deploys a Swarm service, UCP assigns its resources to the user's
+default collection. From the target collection of a resource, UCP walks up the
+ancestor collections until it finds nodes that the user has `Scheduler` access
+to. In this example, UCP assigns the user's service to the `/Prod/Webserver`
+collection and schedules tasks on nodes in the `/Prod` collection.
 
-1.  Log in as a user on the Ops team.
+As a user on the `Ops` team, set your default collection to `/Prod/Webserver`.
+
+1.  Log in as a user on the `Ops` team.
 2.  Navigate to the **Collections** page, and in the **Prod** collection,
     click **View Children**.
 3.  In the **Webserver** collection, click the **More Options** icon and
@@ -157,7 +161,7 @@ All resources are deployed under the user's default collection,
 
     ![](../images/isolate-nodes-4.png){: .with-border}
 
-## Alternative: Use a grant instead of the default collection
+### Alternative: Use a grant instead of the default collection
 
 Another approach is to use a grant instead of changing the user's default
 collection. An administrator can create a grant for a role that has the
@@ -165,6 +169,110 @@ collection. An administrator can create a grant for a role that has the
 collection. In this case, the user sets the value of the service's access label,
 `com.docker.ucp.access.label`, to the new collection or one of its children
 that has a `Service Create` grant for the user.
+
+## Deploy a Kubernetes application
+
+Starting in Docker EE Platform 2.0, you can deploy a Kubernetes workload to
+worker nodes, based on a Kubernetes namespace. 
+
+1.  Convert a node to use the Kubernetes orchestrator.
+2.  Create a Kubernetes namespace.
+3.  Create a grant for the namespace.
+4.  Link the namespace to a node collection.
+5.  Deploy a Kubernetes workload.
+
+### Convert a node to Kubernetes 
+
+To deploy Kubernetes workloads, an administrator must convert a worker node to
+use the Kubernetes orchestrator.
+[Learn how to set the orchestrator type](../admin/configure/set-orchestrator-type.md)
+for your nodes in the `/Prod` collection. 
+
+### Create a Kubernetes namespace
+
+An administrator must create a Kubernetes namespace to enable node isolation
+for Kubernetes workloads.
+
+1.  In the left pane, click **Kubernetes**.
+2.  Click **Create** to open the **Create Kubernetes Object** page.
+3.  In the **Object YAML** editor, paste the following YAML.  
+
+    ```yaml
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      Name: ops-nodes
+    ```
+4.  Click **Create** to create the `ops-nodes` namespace.
+
+### Grant access to the Kubernetes namespace
+
+Create a grant to the `ops-nodes` namespace for the `Ops` team by following the
+same steps that you used to grant access to the `/Prod` collection, only this
+time, on the **Create Grant** page, pick **Namespaces**, instead of
+**Collections**.
+
+![](../images/isolate-nodes-5.png){: .with-border}
+
+Select the **ops-nodes** namespace, and create a `Full Control` grant for the
+`Ops` team.
+
+![](../images/isolate-nodes-6.png){: .with-border}
+
+### Link the namespace to a node collection
+
+The last step is to link the Kubernetes namespace the `/Prod` collection.
+
+1.  Navigate to the **Namespaces** page, and find the **ops-nodes** namespace
+    in the list.
+2.  Click the **More options** icon and select **Link nodes in collection**. 
+    
+    ![](../images/isolate-nodes-7.png){: .with-border}
+
+3.  In the **Choose collection** section, click **View children** on the
+    **Swarm** collection to navigate to the **Prod** collection.
+4.  On the **Prod** collection, click **Select collection**.
+5.  Click **Confirm** to link the namespace to the collection.
+
+    ![](../images/isolate-nodes-8.png){: .with-border}
+
+### Deploy a Kubernetes workload to the node collection
+
+1.  Log in in as a non-admin who's on the `Ops` team.
+2.  In the left pane, open the **Kubernetes** section.
+3.  Confirm that **ops-nodes** is displayed under **Namespaces**.
+4.  Click **Create**, and in the **Object YAML** editor, paste the following
+    YAML definition for an NGINX server.
+
+    ```yaml
+    apiVersion: v1
+    kind: ReplicationController
+    metadata:
+    name: nginx
+    spec:
+    replicas: 1
+    selector:
+        app: nginx
+    template:
+        metadata:
+        name: nginx
+        labels:
+            app: nginx
+        spec:
+        containers:
+        - name: nginx
+            image: nginx
+            ports:
+            - containerPort: 80
+    ```
+
+    ![](../images/isolate-nodes-9.png){: .with-border}
+
+5.  Click **Create** to deploy the workload.
+6.  In the left pane, click **Pods** and confirm that the workload is running
+    on pods in the `ops-nodes` namespace. 
+
+    ![](../images/isolate-nodes-10.png){: .with-border}
 
 ## Next steps
 
