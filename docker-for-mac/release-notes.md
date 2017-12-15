@@ -475,7 +475,7 @@ events or unexpected unmounts.
   - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
 
 * Bug fixes and minor changes
-  - Fix filesharing migration issue (docker/for-mac#2317)
+  - Fix filesharing migration issue ([docker/for-mac#2317](https://github.com/docker/for-mac/issues/2317))
 
 ### Docker Community Edition 17.12.0-ce-rc2-mac41 2017-12-13 (Edge)
 
