@@ -7,19 +7,32 @@ title: Docker Store Customer FAQs
 # Customer FAQs
 
 #### How do I log in to the Docker Store?
-Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
+
+Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID
+yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
 
 # Certification Program
 
 #### What is the certification program for images and plugins, and what are some benefits?
-The Docker Certification program for Infrastructure, Images, and Plugins is designed for both technology partners and enterprise customers to recognize Containers and Plugins that excel in quality, provide collaborative support, and ensures compatibility with Docker EE. Docker Certification is aligned to the available Docker EE infrastructure and gives enterprises a trusted way to run more technology in containers with support from both Docker and the publisher.
+
+The Docker Certification program for Infrastructure, Images, and Plugins is
+designed for both technology partners and enterprise customers to recognize
+high-quality Containers and Plugins, provide collaborative support, and ensure
+compatibility with Docker EE. Docker Certification is aligned to the available
+Docker EE infrastructure and gives enterprises a trusted way to run more
+technology in containers with support from both Docker and the publisher.
 
 ## End user experience
 
 #### Why do I see the pull command for a few products and no pull command in other products?
-If a publisher publishes multiple images as part of their plan - we do not display the pull command. The pull command visual is exclusively for submissions that have a single image.
 
-As a future feature we would like to start bringing in the concept of compositions because it is more connected to real world usage of containers. Our intent is to start surfacing a better UX by Q1 '18.
+If a publisher publishes multiple images as part of their plan - we do not
+display the pull command. The pull command visual is exclusively for submissions
+that have a single image.
+
+As a future feature we would like to start bringing in the concept of
+compositions because it is more connected to real world usage of containers. Our
+intent is to start surfacing a better UX by Q1 '18.
 
 ### Where can I see all of my purchases?
 

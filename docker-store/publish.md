@@ -7,15 +7,15 @@ title: Publish content on Docker Store
 ## Permitted Content and Support Options
 
 * Content that runs on a Docker Enterprise Edition (i.e. Docker Certified
-Infrastructure) may be published in the Store.  This content may also qualify to
-become a Docker Certified Container or Plugin image and be backed by
-collaborative Docker/Publisher support
+  Infrastructure) may be published in the Store. This content may also qualify
+  to become a Docker Certified Container or Plugin image and be backed by
+  collaborative Docker/Publisher support
 
-* Content that runs on the Docker Community Edition may be published in  the
-Store, but will not be supported by Docker nor is it eligible for certification.
+* Content that runs on the Docker Community Edition may be published in the
+  Store, but will not be supported by Docker nor is it eligible for certification.
 
 * Content that requires a non Certified Infrastructure environment may not be
-published in the Store.
+  published in the Store.
 
 
 | If your content: | Can publish on Store  | Can be certified and supported by Docker | Supported by publisher |
@@ -97,7 +97,11 @@ containerized application.  To avoid this, you can:
 
 * Follow best practices when using the `apt-get` command.
 
-* Make sure to run `apt-get-remove` to destroy any components required to build but not actually run your application.  Usually, this involves creating multi-line Dockerfile directives, as seen below.  The following example shows how to remove `curl` and `python-pip` after they are used to install the Python `requests` package, all in a single Dockerfile directive:
+* Make sure to run `apt-get-remove` to destroy any components required to build
+but not actually run your application.  Usually, this involves creating
+multi-line Dockerfile directives, as seen below.  The following example shows
+how to remove `curl` and `python-pip` after they are used to install the
+Python `requests` package, all in a single Dockerfile directive:
 
 ```shell
 RUN apt-get update && \
@@ -118,11 +122,11 @@ vulnerabilities over time and are consequently patched.  To optimize your
 product’s integrity, you must keep your images up-to-date:
 
 * Periodically update your base image's version, especially if you’re using a
-version deemed to be vulnerable.
+  version deemed to be vulnerable.
 
 * Re-build your image periodically.  Directives including commands such as
-`apt-get install ...` pull the latest versions of dependencies, which may
-include security fixes.
+  `apt-get install ...` pull the latest versions of dependencies, which may
+  include security fixes.
 
 ### Scan your own private repositories
 
@@ -134,9 +138,8 @@ Program.
 
 ## Create and maintain your publisher profile in the Store
 
-Let the Docker community
-know who you are.  Add your details, your company story, and what you do.  At
-the very minimum, we require:
+Let the Docker community know who you are.  Add your details, your company
+story, and what you do.  At the very minimum, we require:
 
 * Legal entity name
 * Company website
@@ -170,7 +173,8 @@ discoverable:
 
 #### How the manifest information is displayed in the UI
 
-(Please note that this is an approximate representation. We frequently make enhancements to the look and some elements might shift around.)
+(Please note that this is an approximate representation. We frequently make
+enhancements to the look and some elements might shift around.)
 
 ![manifest information displayed on store UI](images/subscribed.png)
 
@@ -182,14 +186,14 @@ submission will save support time in the future.
 
 ### Support information
 
-If you provide support along with your content, include that information.  Is
-there a support website?  What email address can users contact for help?  Are
+If you provide support along with your content, include that information. Is
+there a support website? What email address can users contact for help? Are
 there self-help or troubleshooting resources available?
 
 ### Support SLA
 
 Include a Service Level Agreement (SLA) for each image you're offering for the
-Store.  An SLA is your commitment to your users about the nature and level of
+Store. An SLA is your commitment to your users about the nature and level of
 support you provide to them. Make sure your SLA includes support hours and
 response-time expectations, where applicable.
 
@@ -198,11 +202,11 @@ response-time expectations, where applicable.
 ### Docker Security Scanning
 
 We use Docker Security Scanning to automatically and continuously assess your
-products’ integrity.  The tool deconstructs images, conducts a binary scan of
+products’ integrity. The tool deconstructs images, conducts a binary scan of
 the bits to identify the open-source components present in each image layer, and
-associates those components with known vulnerabilities and exposures.  We then
+associates those components with known vulnerabilities and exposures. We then
 share the scan results with you as the publisher, so that you can modify your
-images’ content accordingly.  Your scan results are private, and are never
+images’ content accordingly. Your scan results are private, and are never
 shared with end customers or other publishers.
 
 To interpret the results, refer to the
@@ -210,50 +214,52 @@ To interpret the results, refer to the
 
 #### Classification of issues
 
-* All Scan results will include the CVE numbers and a CVSS (Common Vulnerability Scoring System) Score.
+* All Scan results will include the CVE numbers and a CVSS (Common Vulnerability
+  Scoring System) Score.
 
-  * CVE Identifiers (also referred to by the community as "CVE names," "CVE
+* CVE Identifiers (also referred to by the community as "CVE names," "CVE
   numbers," "CVE entries," "CVE-IDs," and "CVEs") are unique identifiers for
   publicly-known, cyber-security vulnerabilities.
 
-  * The Common Vulnerability Scoring System (CVSS) provides an open
-    framework for communicating the characteristics and impacts of
-    IT vulnerabilities.  Its quantitative model ensures repeatable,
-    accurate measurement while enabling users to see the underlying
-    vulnerability characteristics that were used to generate the scores.  
-    As a result, CVSS is well-suited as a standard measurement system
-    for industries, organizations, and governments that need accurate
-    and consistent vulnerability-impact scores.  CVSS is commonly used
-    to prioritize vulnerability-remediation activities, and calculate
-    the severity of vulnerabilities discovered on systems. The
-    National Vulnerability Database (NVD) provides CVSS scores for
-    almost all known vulnerabilities.
+* The Common Vulnerability Scoring System (CVSS) provides an open
+  framework for communicating the characteristics and impacts of
+  IT vulnerabilities.  Its quantitative model ensures repeatable,
+  accurate measurement while enabling users to see the underlying
+  vulnerability characteristics that were used to generate the scores.
+  As a result, CVSS is well-suited as a standard measurement system
+  for industries, organizations, and governments that need accurate
+  and consistent vulnerability-impact scores.  CVSS is commonly used
+  to prioritize vulnerability-remediation activities, and calculate
+  the severity of vulnerabilities discovered on systems. The
+  National Vulnerability Database (NVD) provides CVSS scores for
+  almost all known vulnerabilities.
 
-  * Docker classifies the severity of issues per CVSS range, Docker classification, and service level agreement (SLA) as follows.
+* Docker classifies the severity of issues per CVSS range, Docker classification,
+  and service level agreement (SLA) as follows.
 
-    | CVSS range | Docker classification | SLA for fixing issues |
-    |:-----|:--------|:------|
-    | 7.0 to 10.0  | Critical | Within 72 hours of notification |                                                
-    | 4.0 to 6.9  | Major | Within 7 days of notification |  
-    | 0.1 to 3.9 | Minor | No SLA. Best-effort to fix or address in documentation. |
+| CVSS range | Docker classification | SLA for fixing issues |
+|:-----|:--------|:------|
+| 7.0 to 10.0  | Critical | Within 72 hours of notification |
+| 4.0 to 6.9  | Major | Within 7 days of notification |
+| 0.1 to 3.9 | Minor | No SLA. Best-effort to fix or address in documentation. |
 
 * In addition to CVSS, the Docker Security team can identify or classify
-vulnerabilities that need to be fixed, and categorize them in the
-minor-to-critical range.
+  vulnerabilities that need to be fixed, and categorize them in the
+  minor-to-critical range.
 
 * The publisher is presented with initial scan results, including all components
-with their CVEs and their CVSS scores.
+  with their CVEs and their CVSS scores.
 
 * If you use Docker’s Scanning Service, you can subscribe to a notification
-service for new vulnerabilities.
+  service for new vulnerabilities.
 
-* Failure to meet above SLAs may cause the listing is put on “hold”.  
+* Failure to meet above SLAs may cause the listing is put on “hold”.
 
 * A warning label shows up on the marketplace listing. An email is sent to the
-users who have downloaded and subscribed for notifications.
+  users who have downloaded and subscribed for notifications.
 
 * A Repo’s listing can stay in the "hold" state for a maximum of 1 month, after
-which the listing will be revoked.
+  which the listing will be revoked.
 
 ### Usage Audit and Reporting
 
@@ -344,20 +350,20 @@ Partner](https://goto.docker.com/partners){: target="_blank" class="_"}
 * Requires acceptance of partnership agreement for completion
 
 * Identify commercial content that can be listed on Store and includes a support
-offering
+  offering
 
 * Test your image against the Docker CS Engine 1.12+ or on a Docker Certified
-Infrastructure version 17.03 and above  (Plugins must run on 17.03 and above)
+  Infrastructure version 17.03 and above  (Plugins must run on 17.03 and above)
 
 * Submit your image for Certification through the publisher portal. Docker will
-scan the image and work with you to address vulnerabilities.  Docker will also
-conduct a best practices review of the image.
+  scan the image and work with you to address vulnerabilities.  Docker will also
+  conduct a best practices review of the image.
 
 * Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or
-join the Docker Limited Group.
+  join the Docker Limited Group.
 
 * Upon completion of Certification criteria, and acceptance by
-Docker, Publisher’s product page will be updated to reflect Certified status.
+  Docker, Publisher’s product page will be updated to reflect Certified status.
 
 #### Is there a fee to join the program?
 
@@ -368,7 +374,7 @@ the initial period.
 
 Many Official images will transition to the Docker Certified program and will be
 maintained and updated by the original owner of the software. Docker will
-continue to maintain some of the base OS images and language frameworks.  
+continue to maintain some of the base OS images and language frameworks.
 
 #### How will certification of plugins be handled?
 
