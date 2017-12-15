@@ -332,10 +332,6 @@ assumes that the Docker daemon is in the `stopped` state.
     `devicemapper` storage driver. If the file was previously empty, it should
     now contain the following contents:
 
-    > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`,
-    > is not yet supported on RHEL, CentOS, or Ubuntu 14.04 when using the
-    > default kernel. Support was added in the upstream kernel version 3.18.
-
     ```json
     {
         "storage-driver": "devicemapper",
