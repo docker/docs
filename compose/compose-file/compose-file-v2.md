@@ -259,7 +259,7 @@ a [byte value](#specifying-byte-values).
 
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](engine/userguide/eng-image/multistage-build.md) for
+[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
 details.
 
       build:
