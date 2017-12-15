@@ -44,9 +44,15 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ## Explore the application and run examples
 
-The next few steps take you through some examples. These are just suggestions for ways to experiment with Docker on your system, check version information, and make sure `docker` commands are working properly.
+The next few steps take you through some examples. These are just suggestions
+for ways to experiment with Docker on your system, check version information,
+and make sure `docker` commands are working properly.
 
-**Note for Windows Users**: Remember to use double quotes (") instead of single quotes (') when specifying parameters in docker commands while using CMD/Powershell.
+> Quote syntax
+>
+> Remember to use double quotes (") instead of single quotes (') when specifying
+> parameters in docker commands while using CMD/Powershell.
+{: .important}
 
 1.  Open a shell (`cmd.exe`, PowerShell, or other).
 
