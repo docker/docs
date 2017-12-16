@@ -119,8 +119,8 @@ The same steps apply for the nodes in the `/Prod` collection.
 ![](../images/isolate-nodes-2.png){: .with-border}
 
 The cluster is set up for node isolation. Users with access to nodes in the
-`/Prod` collection can deploy [Swarm services](#deploy-a-service-as-a-team-member)
-and [Kubernetes apps](#kubernetes-apps), and their workloads won't be scheduled
+`/Prod` collection can deploy [Swarm services](#deploy-a-swarm-service-as-a-team-member)
+and [Kubernetes apps](#deploy-a-kubernetes-application), and their workloads won't be scheduled
 on nodes that aren't in the collection.
 
 ## Deploy a Swarm service as a team member
