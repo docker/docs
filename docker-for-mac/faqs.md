@@ -251,7 +251,7 @@ $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
 
-In this listing, the logical size is 64GB, but the logical size is
+In this listing, the logical size is 64GB, but the physical size is
 only 2.3GB.
 
 Alternatively, you may use `du` (disk usage):
