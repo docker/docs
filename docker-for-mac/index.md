@@ -477,23 +477,19 @@ how to set the client TLS certificate for verification, see [Verify repository
 client with certificates](/engine/security/certificates.md) in the Docker Engine
 topics.
 
-## Install completion
+## Install shell completion
 
-If you are using [bash
-completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
-such as [homebrew bash-completion on
-Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/), or 
-the [zsh completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
-completion scripts for the following commands may be found inside `Docker.app`,
-in the `Contents/Resources/etc/` directory:
+Docker for Mac comes with scripts to enable completion for the `docker`,
+`docker-machine`, and `docker-compose` commands. The completion scripts may be
+found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
+installed both in Bash and Zsh.
 
-- docker
-- docker-machine
-- docker-compose
+### Bash
 
-To activate bash completion, these files need to be copied or symlinked to your
-`bash_completion.d/` directory. For example, if you installed bash via
-[Homebrew](http://brew.sh/):
+Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
+To activate completion for Docker commands, these files need to be copied or
+symlinked to your `bash_completion.d/` directory. For example, if you installed
+bash via [Homebrew](http://brew.sh/):
 
 ```bash
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
@@ -501,9 +497,12 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-comple
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
 ```
 
-To activate zsh completion, these files need to be copied or symlinked to your 
-zsh `site-functions/` directory. For example, if you installed zsh via 
-[Homebrew](http://brew.sh/):
+### Zsh
+
+In Zsh, the [completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
+takes care of things. To activate completion for Docker commands, these files
+need to be copied or symlinked to your Zsh `site-functions/` directory. For
+example, if you installed Zsh via [Homebrew](http://brew.sh/):
 
 ```bash
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
