@@ -101,6 +101,8 @@ CMD ["python", "app.py"]
 > ENV http_proxy host:port
 > ENV https_proxy host:port
 > ```
+>
+> Add these lines before the call to `pip` so that the installation succeeds.
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.
