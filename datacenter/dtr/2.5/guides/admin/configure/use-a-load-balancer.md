@@ -15,22 +15,31 @@ This allows users to access DTR using a centralized domain name. If a replica
 goes down, the load balancer can detect that and stop forwarding requests to
 it, so that the failure goes unnoticed by users.
 
-## Load balancing DTR
+DTR exposes several endpoints you can use to assess if a DTR replica is healthy
+or not:
+
+* `/_ping`: Is an unauthenticated endpoint that checks if the DTR replica is
+healthy. This is useful for load balancing or other automated health check tasks.
+* `/nginx_status`: Returns the number of connections being handled by the
+NGINX front-end used by DTR.
+* `/api/v0/meta/cluster_status`: Returns extensive information about all DTR
+replicas.
+
+## Load balance DTR
 
 DTR does not provide a load balancing service. You can use an on-premises
 or cloud-based load balancer to balance requests across multiple DTR replicas.
 
-Make sure you configure your load balancer to:
+You can use the unauthenticated `/_ping` endpoint on each DTR replica,
+to check if the replica is healthy and if it should remain in the load balancing
+pool or not.
 
-* Load balance TCP traffic on ports 80 and 443
-* Make sure the load balancer is not buffering requests
-* Make sure the load balancer is forwarding the `Host` HTTP header correctly
-* Make sure there's no timeout for idle connections, or set it to more than 10 minutes
-* Use the unauthenticated `/_ping` endpoint (note the lack of an `/api/v0/` in
-the path) on each DTR replica, to check if the replica is healthy and if it
-should remain in the load balancing pool or not
+Also, make sure you configure your load balancer to:
 
-## Health check endpoints
+* Load balance TCP traffic on ports 80 and 443.
+* Make sure the load balancer is not buffering requests.
+* Make sure the load balancer is forwarding the `Host` HTTP header correctly.
+* Make sure there's no timeout for idle connections, or set it to more than 10 minutes.
 
 The `/_ping` endpoint returns a JSON object for the replica being queried of
 the form:
@@ -53,37 +62,9 @@ with more details on any one of these services:
 * Metadata persistence (rethinkdb)
 * Content trust (notary)
 
-Note that this endpoint is for checking the health of a *single* replica. To get
-the health of every replica in a cluster, querying each replica individiually is
+Note that this endpoint is for checking the health of a single replica. To get
+the health of every replica in a cluster, querying each replica individually is
 the preferred way to do it in real time.
-
-The `/api/v0/meta/cluster_status`
-[endpoint](../../../reference/api)
-returns a JSON object for the entire cluster *as observed* by the replica being
-queried, and it takes the form:
-
-```json
-{
-  "replica_health": {
-    "replica id": "OK",
-    "another replica id": "error message"
-  },
-  "replica_timestamp": {
-    "replica id": "2006-01-02T15:04:05Z07:00",
-    "another replica id": "2006-01-02T15:04:05Z07:00"
-  },
-  "(other fields go here)": "..."
-}
-```
-
-Health statuses for the replicas is available in the `"replica_health"` object.
-These statuses are taken from a cache which is last updated by each replica
-individually at the time specified in the `"replica_timestamp"` object.
-
-The response also contains information about the internal DTR storage state,
-which is around 45 KB of data. This, combined with the fact that the endpoint
-requires admin credentials, means it is not particularly appropriate for load
-balance checks. Use `/_ping` instead for those kinds of checks.
 
 
 ## Configuration examples
@@ -287,4 +268,4 @@ docker run --detach \
 ## Where to go next
 
 * [Backups and disaster recovery](../backups-and-disaster-recovery.md)
-* [DTR architecture](../../architecture.md)
+* [Monitor and troubleshoot](../monitor-and-troubleshoot/index.md)
