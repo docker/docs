@@ -14,10 +14,15 @@ create user-defined networks in addition to the default bridge network.
 You can set up your own bridge before starting Docker and configure Docker to
 use your bridge instead of the default `docker0` bridge.
 
+> **Note**: These instructions use the `ip` command, which is available on
+> all modern Linux distributions. If you do not have the `ip` command, you may
+> need to use the `brctl` command. Instructions for that command are out of
+> scope for this topic.
+
 1.  Configure the new bridge.
 
     ```bash
-    $ sudo brctl addbr bridge0
+    $ sudo ip link set dev br0 up
 
     $ sudo ip addr add 192.168.5.1/24 dev bridge0
 
@@ -67,16 +72,15 @@ use your bridge instead of the default `docker0` bridge.
     ```bash
     $ sudo ip link set dev docker0 down
 
-    $ sudo brctl delbr docker0
+    $ sudo ip link del name br0
 
     $ sudo iptables -t nat -F POSTROUTING
     ```
 
 5.  Create a new container, and verify that it is in the new IP address range.
 
-
-You can use the `brctl show` command to see Docker add and remove interfaces
-from the bridge as you start and stop containers, and can run `ip addr` and `ip
-route` inside a container to confirm that it has an address in the bridge's IP
-address range and uses the Docker host's IP address on the bridge as its default
-gateway to the rest of the Internet.
+You can add and remove interfaces from the bridge as you start and stop
+containers, and can run `ip addr` and `ip route` inside a container to confirm
+that it has an address in the bridge's IP address range and uses the Docker
+host's IP address on the bridge as its default gateway to the rest of the
+Internet.
