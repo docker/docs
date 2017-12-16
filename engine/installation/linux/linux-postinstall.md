@@ -59,17 +59,17 @@ To create the `docker` group and add your user:
     your user to the `docker` group, you may see the following error,
     which indicates that your `~/.docker/` directory was created with
     incorrect permissions due to the `sudo` commands.
-    
+
     ```none
     WARNING: Error loading config file: /home/user/.docker/config.json -
     stat /home/user/.docker/config.json: permission denied
     ```
-    
+
     To fix this problem, either remove the `~/.docker/` directory
     (it will be recreated automatically, but any custom settings
     will be lost), or change its ownership and pemissions using the
     following commands:
-    
+
     ```bash
     $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
     $ sudo chmod g+rwx "/home/$USER/.docker" -R
@@ -338,50 +338,26 @@ to configure your firewall to allow incoming connections on the Docker port,
 which defaults to `2376` if TLS encrypted transport is enabled or `2375`
 otherwise.
 
-#### Specific instructions for UFW
+Two common firewall daemons are
+[UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) (often
+used for Ubuntu systems) and [firewalld](http://www.firewalld.org/) (often used
+for RPM-based systems). Consult the documentation for your OS and firewall, but
+the following information might help you get started. These options are fairly
+permissive and you may want to use a different configuration that locks your
+system down more.
 
-[UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) drops all
-forwarding traffic and all incoming traffic by default. If you want to access
-the Docker Remote API from another host and you have enabled remote access, you
-need to configure UFW to allow incoming connections on the Docker port, which
-defaults to `2376` if TLS encrypted transport is enabled or `2375` otherwise. By
-default, Docker runs **without** TLS enabled. If you do not use TLS, you are
-strongly discouraged from allowing access to the Docker Remote API from remote
-hosts, to prevent remote privilege-escalation attacks.
+- **UFW**: Set `DEFAULT_FORWARD_POLICY="ACCEPT"` in your configuration.
 
-To configure UFW and allow incoming connections on the Docker port:
+- **firewalld**: Add rules similar to the following to your policy (one for
+  incoming requests and one for outgoing requests). Be sure the interface names
+  and chain names are correct.
 
-1.  Verify that UFW is enabled.
-
-    ```bash
-    $ sudo ufw status
-    ```
-
-    If `ufw` is not enabled, the remaining steps will not be helpful.
-
-2.  Edit the UFW configuration file, which is usually `/etc/default/ufw` or
-    `/etc/sysconfig/ufw`. Set the `DEFAULT_FORWARD_POLICY` policy to `ACCEPT`.
-
-    ```none
-    DEFAULT_FORWARD_POLICY="ACCEPT"
-    ```
-
-    Save and close the file.
-
-3.  If you need to enable access to the Docker Remote API from external hosts
-    and understand the security implications (see the section before this
-    procedure), then configure UFW to allow incoming connections on the Docker port,
-    which is `2375` if you do not use TLS, and `2376` if you do.
-
-    ```bash
-    $ sudo ufw allow 2376/tcp
-    ```
-
-4.  Reload UFW.
-
-    ```bash
-    $ sudo ufw reload
-    ```
+  ```xml
+  <direct>
+     [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -i zt0 -j ACCEPT </rule> ]
+     [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -o zt0 -j ACCEPT </rule> ]
+  </direct>
+  ```
 
 ### `Your kernel does not support cgroup swap limit capabilities`
 
