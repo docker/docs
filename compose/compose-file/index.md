@@ -1098,6 +1098,16 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 
 ### links
 
+>**Warning**: >The `--link` flag is a legacy feature of Docker. It
+may eventually be removed. Unless you absolutely need to continue using it, we
+recommend that you use [user-defined networks](/engine/userguide/networking//#user-defined-networks)
+to facilitate communication between two containers instead of using `--link`.
+One feature that user-defined networks do not support that you can do with
+`--link` is sharing environmental variables between containers. However, you can
+use other mechanisms such as volumes to share environment variables between
+containers in a more controlled way.
+{:.warning}
+
 Link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
 
