@@ -184,11 +184,50 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### How do I reduce the size of Docker.qcow2?
+### Disk Usage
+
+#### Qcow2 or Raw?
 
 By default Docker for Mac stores containers and images in a file
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2`.
-This file grows on-demand up to a default maximum file size of 64GiB.
+`Docker.raw` or `Docker.qcow2` in the directory
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
+Starting with High Sierra with APFS (Apple Filesystem) enabled, Docker
+uses the "raw" format (`Docker.raw`), otherwise it uses the Qcow2
+format (`Docker.qcow2`).
+
+#### Docker.raw consumes an insane amount of disk space!
+
+This is an illusion.  Docker uses the raw format on Macs running the
+Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
+long runs of zeroes representing unused space.  The output of `ls` is
+misleading, because it lists the logical size of the file rather than
+its physical size. To see the physical size, add the `-ks` switch; to
+see the logical size in human readable form, add `-lh`:
+
+```bash
+$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
+$ ls -klsh Docker.raw
+2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
+```
+
+In this listing, the logical size is 64GB, but the logical size is
+only 2.3GB.
+
+Alternatively, you may use `du` (disk usage):
+
+```bash
+$ du -h Docker.raw
+2,2G	Docker.raw
+```
+
+#### How do I reduce the size of Docker.qcow2?
+
+By default Docker for Mac stores containers and images in a file saved
+in the directory
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
+If your Docker for Mac uses the Qcow format, this file is
+`Docker.qcow2`.  This file grows on-demand up to a default maximum
+file size of 64GiB.
 
 In Docker 1.12 the only way to free space on the host is to delete
 this file and restart the app. Unfortunately this removes all images
@@ -209,7 +248,7 @@ In 1.13 a background `cron` job runs `fstrim` every 15 minutes.
 If the space needs to be reclaimed sooner, run this command:
 
 ```bash
-docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
+$ docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
 ```
 
 Once the `fstrim` has completed, restart the app. When the app shuts down, it
