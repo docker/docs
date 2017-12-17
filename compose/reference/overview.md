@@ -135,7 +135,7 @@ For an example of using the `-f` option at the command line, suppose you are
 running the [Compose Rails sample](https://docs.docker.com/compose/rails/), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
 use a command like [docker-compose pull](/compose/reference/pull.md) to get the
-postgress image for the `db` service from anywhere by using the `-f` flag as
+postgres image for the `db` service from anywhere by using the `-f` flag as
 follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 
 Here's the full example:
