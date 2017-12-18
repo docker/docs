@@ -1,7 +1,7 @@
 ---
-title: Monitor the swarm status
+title: Monitor the cluster status
 description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
-keywords: UCP, troubleshoot, health, swarm
+keywords: UCP, troubleshoot, health, cluster
 ---
 
 You can monitor the status of UCP by using the web UI or the CLI.

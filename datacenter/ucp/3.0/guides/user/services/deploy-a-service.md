@@ -1,6 +1,6 @@
 ---
 title: Deploy a service
-description: Learn how to deploy services to a swarm managed by Universal Control Plane.
+description: Learn how to deploy services to a cluster managed by Universal Control Plane.
 keywords: ucp, deploy, service
 ---
 
@@ -36,7 +36,7 @@ click **Publish Port** and fill in the following fields:
 Click **Confirm** to map the ports for the NGINX service. 
 
 Once you've specified the service image and ports, click **Create** to
-deploy the service into the UCP swarm.
+deploy the service into the UCP cluster.
 
 Once the service is up and running, you'll be able to see the default NGINX
 page, by going to `http://<node-ip>:8000`.

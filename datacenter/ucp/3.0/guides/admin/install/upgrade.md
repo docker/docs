@@ -15,30 +15,30 @@ other relevant information for upgrading to a particular version.
 ## Plan the upgrade
 
 As part of the upgrade process, you'll be upgrading the Docker Engine
-installed in each node of the swarm to version 17.06 Enterprise Edition.
+installed in each node of the cluster to version 17.06 Enterprise Edition.
 You should plan for the upgrade to take place outside of business hours,
 to ensure there's minimal impact to your users.
 
 Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
 
-## Back up your swarm
+## Back up your cluster
 
-Before starting an upgrade, make sure that your swarm is healthy. If a problem
+Before starting an upgrade, make sure that your cluster is healthy. If a problem
 occurs, this makes it easier to find and troubleshoot it.
 
-[Create a backup](../backups-and-disaster-recovery.md) of your swarm.
+[Create a backup](../backups-and-disaster-recovery.md) of your cluster.
 This allows you to recover if something goes wrong during the upgrade process.
 
 > Upgrading and backup archives
 >
 > The backup archive is version-specific, so you can't use it during the
 > upgrade process. For example, if you create a backup archive for a UCP 2.2
-> swarm, you can't use the archive file after you upgrade to UCP 3.0.
+> cluster, you can't use the archive file after you upgrade to UCP 3.0.
 
 ## Upgrade Docker Engine
 
-For each node that is part of your swarm, upgrade the Docker Engine
+For each node that is part of your cluster, upgrade the Docker Engine
 installed on that node to Docker Engine version 17.06 or higher. Be sure
 to install the Docker Enterprise Edition.
 
@@ -49,7 +49,7 @@ Starting with the manager nodes, and then worker nodes:
 3. Make sure the node is healthy.
 
     In your browser, navigate to the **Nodes** page in the UCP web UI,
-    and check that the node is healthy and is part of the swarm.
+    and check that the node is healthy and is part of the cluster.
 
 ## Upgrade UCP
 
@@ -71,7 +71,7 @@ Select a version to upgrade to using the **Available UCP Versions** dropdown,
 then click to upgrade.
 
 Before the upgrade happens, a confirmation dialog along with important
-information regarding swarm and UI availability is displayed.
+information regarding cluster and UI availability is displayed.
 
 ![](../../images/upgrade-ucp-3.png){: .with-border}
 

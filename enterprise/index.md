@@ -5,10 +5,10 @@ description: Learn about Docker Enterprise Edition, the enterprise-grade cluster
 keywords: Docker EE, UCP, DTR, orchestration, cluster
 ---
 
-Docker Enterprise Edition (*Docker EE*) is a Containers-as-a-Service (CaaS)
-platform that enables a secure software supply chain and deploys diverse
-applications for high availability across disparate infrastructure, both
-on-premises and in the cloud.
+Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
+Containers-as-a-Service (CaaS) platform that enables a secure software supply
+chain and deploys diverse applications for high availability across disparate
+infrastructure, both on-premises and in the cloud.
 
 Docker Enterprise Edition is a secure, scalable, and supported container
 platform for building and orchestrating applications across multi-tenant Linux,
@@ -25,16 +25,16 @@ communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
 
-Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
-solution from Docker. You install it on-premises or in your virtual private
-cloud, and it helps you manage your Docker swarm and applications through a
-single interface.
+Docker EE Platform includes Docker Universal Control Plane (UCP), the
+enterprise-grade cluster management solution from Docker. You install it
+on-premises or in your virtual private cloud, and it helps you manage your
+cluster and applications through a single interface.
 
 ![](images/docker-ee-overview-1.png){: .with-border}
 
 ## Docker Enterprise Edition features
 
-Docker EE 18.01 provides multi-architecture orchestration for Kubernetes and
+Docker EE Platform provides multi-architecture orchestration for Kubernetes and
 Swarm workloads. Docker EE enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
@@ -58,22 +58,22 @@ Kubernetes features on Docker EE include:
 - Interoperability between Swarm and Kubernetes workloads for networking and
   storage
 
-The default Docker EE installation includes both Swarm and Kubernetes
+The default Docker EE installation includes both  Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
-to schedule Kubernetes or Swarm workloads
+to schedule Kubernetes or Swarm workloads.
 
 > IBM z Systems
-> 
+>
 > Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
 > cluster with z Systems, Docker EE won't schedule Kubernetes workloads
 > on z Systems nodes.
 {: .important}
 
-### Orchestration platform
+### Orchestration platform features
 
 ![](images/docker-ee-overview-4.svg){: .with-border}
 
-- Docker EE Manager Nodes are both Swarm managers and Kubernetes masters to enable
+- Docker EE manager nodes are both Swarm managers and Kubernetes masters to enable
   high availability
 - Allocate nodes for Swarm and Kubernetes workloads
 - Single pane of glass for monitoring apps

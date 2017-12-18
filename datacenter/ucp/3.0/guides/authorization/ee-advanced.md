@@ -54,7 +54,7 @@ OrcaBank's four teams now have different needs in production and staging:
 OrcaBank has decided to replace their custom `Ops` role with the built-in
 `Full Control` role.
 
-- `View Only` (default role) allows users to see but not edit all Swarm
+- `View Only` (default role) allows users to see but not edit all cluster
   resources.
 - `Full Control` (default role) allows users complete control of all collections
   granted to them. They can also create containers without restriction but

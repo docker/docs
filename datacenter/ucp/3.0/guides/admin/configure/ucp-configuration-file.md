@@ -11,11 +11,11 @@ create UCP manager nodes. This is useful for scripted installations.
 
 The `ucp-agent` service uses a configuration file to set up UCP.
 You can use the configuration file in different ways to set up your UCP
-swarms.
+cluster.
 
 - Install one cluster and use the UCP web UI to configure it as desired,
   extract the configuration file, edit it as needed, and use the edited
-  config file to make copies to multiple other swarms.
+  config file to make copies to multiple other cluster.
 - Install a UCP cluster, extract and edit the configuration file, and use the
   CLI to apply the new configuration to the same cluster.
 - Run the `example-config` command, edit the example configuration file, and
@@ -49,7 +49,7 @@ commands to create and apply the configuration from the file.
 ```bash
 # NEXT_CONFIG_NAME will be the name of the new UCP configuration
 NEXT_CONFIG_NAME=${CURRENT_CONFIG_NAME%%-*}-$((${CURRENT_CONFIG_NAME##*-}+1))
-# Create the new swarm configuration from the file ucp-config.toml
+# Create the new cluster configuration from the file ucp-config.toml
 docker config create $NEXT_CONFIG_NAME  ucp-config.toml
 # Use the `docker service update` command to remove the current configuration
 # and apply the new configuration to the `ucp-agent` service.

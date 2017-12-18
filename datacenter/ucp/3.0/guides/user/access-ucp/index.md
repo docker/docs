@@ -10,11 +10,11 @@ way, from your browser.
 ![](../../../../../images/ucp.png){: .with-border}
 
 
-Docker UCP secures your swarm by using
+Docker UCP secures your cluster by using
 [role-based access control](../../access-control/index.md).
 From the browser, administrators can:
 
-* Manage swarm configurations,
+* Manage cluster configurations,
 * Manage the permissions of users, teams, and organizations,
 * See all images, networks, volumes, and containers.
 * Grant permissions to users for scheduling tasks on specific nodes

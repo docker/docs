@@ -6,7 +6,7 @@ keywords: UCP, LDAP, config
 
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and automatically
-propagate this information to UCP and DTR. You can set up your swarm's LDAP
+propagate this information to UCP and DTR. You can set up your cluster's LDAP
 configuration by using the UCP web UI, or you can use a
 [UCP configuration file](../ucp-configuration-file.md).
 
@@ -57,7 +57,7 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
     ```
 
 6.  Wait a few moments for the `ucp-agent` service tasks to update across
-    your swarm. If you set `jit_user_provisioning = true` in the LDAP
+    your cluster. If you set `jit_user_provisioning = true` in the LDAP
     configuration, users matching any of your specified search queries will
     have their accounts created when they log in with their username and LDAP
     password.

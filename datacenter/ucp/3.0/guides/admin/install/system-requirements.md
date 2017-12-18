@@ -85,13 +85,13 @@ to communicate before they time out.
 | Gossip protocol for overlay networking | 5000         | no           |
 | etcd                                   | 500          | yes          |
 | RethinkDB                              | 10000        | no           |
-| Stand-alone swarm                      | 90000        | no           |
+| Stand-alone cluster                    | 90000        | no           |
 
 ## Time Synchronization
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
-the engines in a UCP swarm, all engines should regularly synchronize time
+the engines in a UCP cluster, all engines should regularly synchronize time
 with a Network Time Protocol (NTP) server. If a server's clock is skewed,
 unexpected behavior may cause poor performance or even failures.
 

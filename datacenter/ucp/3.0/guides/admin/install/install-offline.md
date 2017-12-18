@@ -14,7 +14,7 @@ to the internet to download a single package with all the images. Then you
 copy this package to the host where you install UCP. The offline installation
 process works only if one of the following is true:
 
--  All of the swarm nodes, managers and workers alike, have internet access
+-  All of the cluster nodes, managers and workers alike, have internet access
    to Docker Hub, and
 -  None of the nodes, managers and workers alike, have internet access to
    Docker Hub.

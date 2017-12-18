@@ -1,7 +1,7 @@
 ---
-title: Troubleshoot your swarm
+title: Troubleshoot your cluster
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords: ucp, troubleshoot, health, swarm
+keywords: ucp, troubleshoot, health, cluster
 ---
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
