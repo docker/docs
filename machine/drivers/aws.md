@@ -75,7 +75,6 @@ You can use environment variables:
 -   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
 -   `--amazonec2-endpoint`:  Optional endpoint URL (hostname only or fully qualified URI)
 -   `--amazonec2-insecure-transport`:  Disable SSL when sending requests
--   `--amazonec2-userdata`:  path to file with cloud-init user data
 
 
 
