@@ -11,6 +11,8 @@ performance and more space used on disk than other storage drivers. However, it
 is robust, stable, and works in every environment. It can also be used as a
 mechanism to verify other storage back-ends against, in a testing environment.
 
+Docker 17.12 and higher include support for quotas when using the VFS driver.
+
 ## Configure Docker with the `vfs` storage driver
 
 1. Stop Docker.
@@ -19,7 +21,7 @@ mechanism to verify other storage back-ends against, in a testing environment.
    $ sudo systemctl stop docker
    ```
 
-4.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+2.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
     that the file was empty, add the following contents.
 
     ```json
@@ -28,10 +30,19 @@ mechanism to verify other storage back-ends against, in a testing environment.
     }
     ```
 
+    If you want to set a quota to control the maximum size the VFS storage
+    driver can use, set the `size` option on the `storage-drivers` key. Quotas
+    are only supported in Docker 17.12 CE and higher.
+
+    ```json
+    {
+      "storage-opts": ["size=256M"]
+    }
+    ```
 
     Docker will not start if the `daemon.json` file contains badly-formed JSON.
 
-5.  Start Docker.
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
