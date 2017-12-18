@@ -58,7 +58,7 @@ driver options.
 Specify template to set `CONTAINER_TAG` value in `journald` logs. Refer to
 [log tag option documentation](log_tags.md) to customize the log tag format.
 
-### `labels`, `env`, and `eng-regex`
+### `labels`, `env`, and `env-regex`
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
