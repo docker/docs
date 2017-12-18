@@ -4,7 +4,7 @@ description: Learn about the Docker Universal Control Plane architecture, and th
 keywords: UCP, install, Docker EE
 ---
 
-Docker Universal Control Plane helps you manage your container swarm from a
+Docker Universal Control Plane helps you manage your container cluster from a
 centralized place. This article explains what you need to consider before
 deploying Docker Universal Control Plane for production.
 
@@ -19,14 +19,14 @@ machines) that you'll manage with UCP:
 ## Hostname strategy
 
 Docker UCP requires Docker Enterprise Edition. Before installing Docker EE on
-your swarm nodes, you should plan for a common hostname strategy.
+your cluster nodes, you should plan for a common hostname strategy.
 
 Decide if you want to use short hostnames, like `engine01`, or Fully Qualified
 Domain Names (FQDN), like `engine01.docker.vm`. Whichever you choose,
 ensure that your naming strategy is consistent across the cluster, because
 Docker Engine and UCP use hostnames.
 
-For example, if your swarm has three hosts, you can name them:
+For example, if your cluster has three hosts, you can name them:
 
 ```none
 node1.company.example.org
@@ -44,7 +44,7 @@ this.
 
 In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
-the engines in a UCP swarm, all engines should regularly synchronize time
+the engines in a UCP cluster, all engines should regularly synchronize time
 with a Network Time Protocol (NTP) server. If a server's clock is skewed,
 unexpected behavior may cause poor performance or even failures.
 

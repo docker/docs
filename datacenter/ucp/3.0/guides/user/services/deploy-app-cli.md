@@ -1,6 +1,6 @@
 ---
 title: Deploy an app from the CLI
-description: Learn how to deploy containerized applications on a swarm, with Docker Universal Control Plane.
+description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords: ucp, deploy, application, stack, service, compose
 ---
 
@@ -10,10 +10,10 @@ application that allows users to vote on whether they prefer cats or dogs.
 
 ## Get a client certificate bundle
 
-Docker UCP secures your Docker swarm with
+Docker UCP secures your Docker cluster with
 [role-based access control](../../access-control/index.md),
 so that only authorized users can deploy applications. To be able to run Docker
-commands on a swarm managed by UCP, you need to configure your Docker CLI
+commands on a cluster managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates. 
 [Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).
 
@@ -162,7 +162,7 @@ constraint in the `deploy` key for the `db` service.
 
 Let `docker stack deploy` handle any image pulls for you, instead of using
 `docker pull`. This way, your deployment won't try to pull from nodes that
-are down. Also, when new nodes are added to the swarm, images are pulled
+are down. Also, when new nodes are added to the cluster, images are pulled
 automatically.
 
 ## Cleanup

@@ -121,7 +121,7 @@ uses MySQL as a storage backend:
 
 This creates the WordPress service attached to the same network as the MySQL
 service so that they can communicate, and maps the port 80 of the service to
-port 8000 of the swarm routing mesh.
+port 8000 of the cluster routing mesh.
 
 ![](../../images/manage-secrets-5.png){: .with-border}
 

@@ -11,7 +11,7 @@ running.
 ![swarm routing mesh](../../images/use-domain-names-1.svg)
 
 In this example, the WordPress service is being served on port 8000.
-Users can access WordPress using the IP address of any node in the swarm
+Users can access WordPress using the IP address of any node in the cluster
 and port 8000. If WordPress is not running in that node, the
 request is redirected to a node that is.
 

@@ -1,7 +1,7 @@
 ---
-title: Troubleshoot swarm configurations
+title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, swarm
+keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, cluster
 ---
 
 UCP automatically tries to heal itself by monitoring its internal
@@ -16,7 +16,7 @@ removing the unhealthy node from the cluster and joining it again.
 
 UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
 key-value store and [RethinkDB](https://rethinkdb.com/) database that are
-replicated on all manager nodes of the UCP swarm. These data stores are for
+replicated on all manager nodes of the UCP cluster. These data stores are for
 internal use only and should not be used by other applications.
 
 ### With the HTTP API
@@ -80,7 +80,7 @@ To learn more about the `etcdctl` utility, check the
 
 User and organization data for Docker Enterprise Edition is stored in a
 RethinkDB database which is replicated across all manager nodes in the UCP
-swarm.
+cluster.
 
 Replication and failover of this database is typically handled automatically by
 UCP's own configuration management processes, but detailed database status and

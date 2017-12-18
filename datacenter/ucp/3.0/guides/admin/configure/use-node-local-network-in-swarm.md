@@ -1,11 +1,11 @@
 ---
-title: Use a local node network in a swarm
-description: Learn how to use a local node network, like MAC VLAN, in a UCP swarm.
+title: Use a local node network in a cluster
+description: Learn how to use a local node network, like MAC VLAN, in a UCP cluster.
 keywords: ucp, network, macvlan
 ---
 
 Docker Universal Control Plane can use your local networking drivers to
-orchestrate your swarm. You can create a *config* network, with a driver like
+orchestrate your cluster. You can create a *config* network, with a driver like
 MAC VLAN, and you use it like any other named network in UCP. If it's set up
 as attachable, you can attach containers.
 

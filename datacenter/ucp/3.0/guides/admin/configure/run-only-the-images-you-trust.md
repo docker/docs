@@ -1,6 +1,6 @@
 ---
 title: Run only the images you trust
-description: Configure a Docker UCP swarm to only allow running applications that use images you trust.
+description: Configure a Docker UCP cluster to only allow running applications that use images you trust.
 keywords: ucp, dtr, security, trust
 ---
 
@@ -13,7 +13,7 @@ that is not trusted, and won’t continue with the deployment if that’s the ca
 
 By signing and verifying the Docker images, you ensure that the images being
 used in your cluster are the ones you trust and haven’t been altered either in
-the image registry or on their way from the image registry to your UCP swarm.
+the image registry or on their way from the image registry to your UCP cluster.
 
 ## Example workflow
 

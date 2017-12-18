@@ -26,13 +26,13 @@ also add them after installation.
     the **Nodes** page.
 2.  Click on a manager node, and in the details pane, click **Configure**. 
 3.  In the **SANs** section, click **Add SAN**, and enter one or more SANs
-    for the swarm.
+    for the cluster.
     ![](../../images/add-sans-to-cluster-1.png){: .with-border}
 4.  Once you're done, click **Save**.
 
-You will have to do this on every manager node in the swarm, but once you
+You will have to do this on every manager node in the cluster, but once you
 have done so, the SANs are applied automatically to any new manager nodes
-that join the swarm.
+that join the cluster.
 
 You can also do this from the CLI by first running:
 
