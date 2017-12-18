@@ -29,15 +29,14 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge only)
+- Artful 17.10 (Docker CE 17.11 Edge and higher only)
 - Zesty 17.04
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `ppc64le` (IBM POWER) and `s390x` (IBM z
-Systems) architectures.
+Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
 
-> **`ppc64le` and `s390x` limitations**: IBM Power and z Systems .debs are only available on Ubuntu Xenial and above.
+> **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
 
 ### Uninstall old versions
 
