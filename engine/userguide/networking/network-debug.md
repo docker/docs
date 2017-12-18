@@ -11,7 +11,7 @@ provides diagnostic information. The network debugging tool should only be
 started to debug specific issues, and should not be left running all the time.
 
 Information about networks is stored in a database, which can be examined using
-the API. The database consists of one table per network.
+the API.
 
 The Docker API exposes endpoints to query and control the network debugging
 tool. CLI integration is provided as a preview, but the implementation is not
@@ -105,7 +105,7 @@ OK
 /join
 ```
 
-### Join or leave the swarm
+### Join or leave the network database cluster
 
 ```bash
 $ curl localhost:2000/join?members=ip1,ip2,...
@@ -154,7 +154,7 @@ $ curl localhost:2000/<method>?nid=<network id>&tname=<table name>&key=<key>[&va
 The CLI is provided as a preview and is not yet stable. Commands or options may
 change at any time.
 
-The CLI executable is called `debugClient` and is made available using a
+The CLI executable is called `diagnosticClient` and is made available using a
 standalone container.
 
 The following flags are supported:
