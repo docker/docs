@@ -1497,7 +1497,7 @@ manuals:
   - path: /enterprise/supported-platforms/
     title: Supported platforms
   - path: /engine/installation/
-    title: Install Docker EE
+    title: Install Docker EE Engine
     nosync: true
   - title: Try Docker EE (no install)
     path: https://dockertrial.com
