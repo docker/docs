@@ -139,11 +139,17 @@ $ curl localhost:2000/networkpeers?nid=<network id>
 
 ### Dump database tables
 
+The tables are called `endpoint_table` and `overlay_peer_table`. These names may
+change.
+
 ```bash
 $ curl localhost:2000/gettable?nid=<network id>&tname=<table name>
 ```
 
 ### Interact with a specific database table
+
+The tables are called `endpoint_table` and `overlay_peer_table`. These names may
+change.
 
 ```bash
 $ curl localhost:2000/<method>?nid=<network id>&tname=<table name>&key=<key>[&value=<value>]
@@ -195,7 +201,8 @@ The CLI is provided as a container that needs to run using privileged mode.
 
 ### Examples
 
-#### Dump the Service discovery table and verify the node ownership
+The following commands dump the service discovery table and verify node
+ownership.
 
 **Standalone network:**
 
