@@ -85,7 +85,7 @@ docker-for-desktop   Ready     master    3h        v1.8.2
 ## Example app
 
 Docker has created the following demo app that you can deploy to swarm mode or
-to to Kubernetes using the `docker stack deploy` command.
+to Kubernetes using the `docker stack deploy` command.
 
 ```yaml
 version: '3.3'
