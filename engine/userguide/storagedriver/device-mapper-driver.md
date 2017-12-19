@@ -774,7 +774,7 @@ use `loop-lvm`, the blocks may not be freed. This is another reason not to use
 - **`allocate-on demand` performance impact**:
 
   The `devicemapper` storage driver uses an `allocate-on-demand` operation to
-  allocate new blocks from the thin pool into to a container's writable layer.
+  allocate new blocks from the thin pool into a container's writable layer.
   Each block is 64KB, so this is the minimum amount of space that will be used
   for a write.
 
