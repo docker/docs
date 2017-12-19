@@ -66,10 +66,8 @@ you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
-{% raw %}
 sudo tar -cf {{ image_backup_file }} \
-$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
-{% endraw %}
+{% raw %}$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>)){% endraw %}
 ```
 
 If you're using a different storage backend, follow the best practices
@@ -89,7 +87,7 @@ docker run --log-driver none -i --rm \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --ucp-username <ucp-username> \
-  --existing-replica-id <replica-id> > backup-metadata.tar
+  --existing-replica-id <replica-id> > {{ metadata_backup_file }}
 ```
 
 Where:
@@ -108,7 +106,7 @@ without affecting your users. Also, the backup contains sensitive information
 like private keys, so you can encrypt the backup by running:
 
 ```none
-gpg --symmetric {{ backup-metadata.tar }}
+gpg --symmetric {{ metadata_backup_file }}
 ```
 
 This prompts you for a password to encrypt the backup, copies the backup file
@@ -130,7 +128,7 @@ dtr-backup-v{{ page.dtr_version }}/rethink/layers/
 And the backup of the DTR metadata should look like:
 
 ```none
-tar -tf {{ backup-metadata.tar }}
+tar -tf {{ metadata_backup_file }}
 
 # The archive should look like this
 dtr-backup-v{{ page.dtr_version }}/
@@ -142,7 +140,7 @@ dtr-backup-v{{ page.dtr_version }}/rethink/properties/0
 If you've encrypted the metadata backup, you can use:
 
 ```none
-gpg -d /tmp/backup.tar.gpg | tar -t
+gpg -d {{ metadata_backup_file }} | tar -t
 ```
 
 You can also create a backup of a UCP cluster and restore it into a new
