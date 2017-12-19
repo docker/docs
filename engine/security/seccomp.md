@@ -18,12 +18,10 @@ $ cat /boot/config-`uname -r` | grep CONFIG_SECCOMP=
 CONFIG_SECCOMP=y
 ```
 
-> **Note**: `seccomp` profiles require seccomp 2.2.1 and are only
-> available starting with Debian 9 "Stretch", Ubuntu 16.04 "Xenial",
-> Fedora 22, CentOS 7, and Oracle Linux 7. To use this feature on Ubuntu 14.04,
-> Debian Wheezy, or Debian Jessie, you must download the
-> [latest static Docker Linux binary](../installation/binaries.md).
-> This feature is currently *not* available on other distributions.
+> **Note**: `seccomp` profiles require seccomp 2.2.1 which is not available on
+> Ubuntu 14.04, Debian Wheezy, or Debian Jessie. To use `seccomp` on these
+> distributions, you must download the [latest static Linux binaries](/engine/installation/linux/docker-ce/binaries.md)
+> (rather than packages).
 
 ## Pass a profile for a container
 
