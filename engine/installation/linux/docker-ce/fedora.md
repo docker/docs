@@ -26,6 +26,7 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 
 - 25
 - 26
+- 27
 
 ### Uninstall old versions
 
@@ -145,11 +146,11 @@ from the repository.
     ```bash
     $ dnf list docker-ce  --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc24                               docker-ce-stable  
+    docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc26                              docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and
-    will be specific to your version of Fedora (indicated by the `.fc24` suffix
+    will be specific to your version of Fedora (indicated by the `.fc26` suffix
     on the version, in this example). Choose a specific version to install. The
     second column is the version string. The third column is the repository
     name, which indicates which repository the package is from and by extension
