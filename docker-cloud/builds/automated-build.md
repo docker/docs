@@ -321,7 +321,7 @@ For example if you want to update the image tagged with `latest` at the same
 time as you a tag an image for a specific version, you could enter
 `{sourceref},latest` in the Docker Tag field.
 
-If you need to update a tag _in another repository_, use [a post_build hook](advanced.md#push-to-multiple-tags) to push to a second repository.
+If you need to update a tag _in another repository_, use [a post_build hook](advanced.md#push-to-multiple-repos) to push to a second repository.
 
 ## Build repositories with linked private submodules
 

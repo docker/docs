@@ -102,11 +102,9 @@ docker run --privileged \
   centurylink/golang-builder
 ```
 
-#### Push to multiple tags
+#### Push to multiple repos
 
-By default the build process tags the resulting Docker image with a single tag and pushes the image only to the repository where the build settings are configured.
-
-If you needed to give the resulting image multiple tags, or push the same image to multiple repositories, you could set up a `post_push` hook to add additional tags and push to more repositories.
+By default the build process pushes the image only to the repository where the build settings are configured. If you need to push the same image to multiple repositories, you can set up a `post_push` hook to add additional tags and push to more repositories.
 
 ```none
 docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
