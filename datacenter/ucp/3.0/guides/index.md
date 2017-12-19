@@ -76,5 +76,5 @@ that use Docker images you know and trust.
 
 ## Where to go next
 
-* [UCP architecture](/enterprise/ucp-architecture.md)
+* [Docker EE Platform 2.0 architecture](/enterprise/docker-ee-architecture.md)
 * [Install UCP](admin/install/index.md)
