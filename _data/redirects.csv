@@ -1,4 +1,4 @@
-/source,destination
+source,destination
 /engine/quickstart/,/get-started/
 /engine/containers/,/engine/tutorials/
 /win/,/docker-for-windows/
