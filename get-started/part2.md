@@ -16,11 +16,6 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
   docker run hello-world
   ```
 
-> **Tip**: Please use up-to-date Docker versions and clients to help the
-tutorial go swimmingly. For example, legacy apps like Docker Toolbox
-might give you unexpected results for local IP addresses and older
-versions of Docker do not support all features demo'ed here.
-
 ## Introduction
 
 It's time to begin building an app the Docker way. We'll start at the bottom of
@@ -191,8 +186,6 @@ $ docker images
 REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 ```
-
-> **Tip**: You can use the commands `docker images` or the newer `docker image ls` list images. They give you the same output.
 
 ## Run the app
 
@@ -369,10 +362,6 @@ Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
 Status: Downloaded newer image for john/get-started:part2
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
-
-> **Note**: If you don't specify the `:tag` portion of these commands,
-  the tag of `:latest` will be assumed, both when you build and when you run
-  images. Docker will use the last version of the image that ran without a tag specified (not necessarily the most recent image).
 
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
