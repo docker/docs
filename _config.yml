@@ -12,15 +12,15 @@ safe: false
 lsi: false
 url: https://docs.docker.com
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06"]
+keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06", "v17.09"]
 exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
 
-docker_ce_stable_version: "17.09"
-latest_stable_docker_engine_api_version: "1.33"
-docker_ce_edge_version: "17.11"
+docker_ce_stable_version: "17.12"
+latest_stable_docker_engine_api_version: "1.35"
+docker_ce_edge_version: "17.12"
 docker_ee_version: "17.06"
 compose_version: "1.18.0"
 machine_version: "0.13.0"
