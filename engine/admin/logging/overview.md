@@ -114,18 +114,19 @@ documentation for its configurable options, if applicable. If you are using
 [logging driver plugins](/engine/admin/logging/plugins.md), you may
 see more options.
 
-| Driver                      | Description                                                                                                   |
-|:----------------------------|:--------------------------------------------------------------------------------------------------------------|
-| `none`                      | No logs will be available for the container and `docker logs` will not return any output.                     |
-| [`json-file`](json-file.md) | The logs are formatted as JSON. The default logging driver for Docker.                                        |
-| [`syslog`](syslog.md)       | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
-| [`journald`](journald.md)   | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
-| [`gelf`](gelf.md)           | Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.             |
-| [`fluentd`](fluentd.md)     | Writes log messages to `fluentd` (forward input). The `fluentd` daemon must be running on the host machine. | |
-| [`awslogs`](awslogs.md)     | Writes log messages to Amazon CloudWatch Logs.                                                                |
-| [`splunk`](splunk.md)       | Writes log messages to `splunk` using the HTTP Event Collector.                                               |
-| [`etwlogs`](etwlogs.md)     | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.           |
-| [`gcplogs`](gcplogs.md)     | Writes log messages to Google Cloud Platform (GCP) Logging.                                                   |
+| Driver                        | Description                                                                                                   |
+|:------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| `none`                        | No logs will be available for the container and `docker logs` will not return any output.                     |
+| [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
+| [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
+| [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |
+| [`gelf`](gelf.md)             | Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.             |
+| [`fluentd`](fluentd.md)       | Writes log messages to `fluentd` (forward input). The `fluentd` daemon must be running on the host machine.   |
+| [`awslogs`](awslogs.md)       | Writes log messages to Amazon CloudWatch Logs.                                                                |
+| [`splunk`](splunk.md)         | Writes log messages to `splunk` using the HTTP Event Collector.                                               |
+| [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.           |
+| [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                   |
+| [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                     |
 
 ## Limitations of logging drivers
 
