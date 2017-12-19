@@ -477,18 +477,25 @@ flag. For more information, see
 ### Customize a service's isolation mode
 
 Docker 17.12 CE and higher allow you to specify a swarm service's isolation
-mode. This setting applies to Windows hosts only and is ignored for Linux hosts.
-The isolation mode can be one of the following:
+mode. **This setting applies to Windows hosts only and is ignored for Linux
+hosts.** The isolation mode can be one of the following:
 
 - `default`: Use the default isolation mode configured for the Docker host, as
   configured by the `-exec-opt` flag or `exec-opts` array in `daemon.json`. If
-  the daemon does not specify an isolation technology, `process` is the default.
+  the daemon does not specify an isolation technology, `process` is the default
+  for Windows Server, and `hyperv` is the default (and only) choice for
+  Windows 10.
+
 - `process`: Run the service tasks as a separate process on the host.
+
+  > **Note**: `process` isolation mode is only supported on Windows Server.
+  > Windows 10 only supports `hyperv` isolation mode.
+
 - `hyperv`: Run the service tasks as isolated `hyperv` tasks. This increases
   overhead but provides more isolation.
 
-You can specify the isolation mode when creating a new service or updating an
-existing service.
+You can specify the isolation mode when creating or updating a new service using
+the `--isolation` flag.
 
 ### Control service placement
 
