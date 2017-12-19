@@ -222,6 +222,8 @@ guides:
     title: Get started with macvlan network driver
   - path: /engine/userguide/networking/overlay-security-model/
     title: Swarm mode overlay network security model
+  - path: /engine/userguide/networking/network-debug/
+    title: Debug overlay or swarm networking issues
   - path: /engine/userguide/networking/configure-dns/
     title: Configure container DNS in user-defined networks
   - sectiontitle: Default bridge network
