@@ -2,6 +2,8 @@
 title: UCP System requirements
 description: Learn about the system requirements for installing Docker Universal Control Plane.
 keywords: UCP, architecture, requirements, Docker EE
+redirect_from:
+- /enterprise/admin/install/system-requirements/
 ---
 
 Docker Universal Control Plane can be installed on-premises or on the cloud.
