@@ -21,7 +21,7 @@
     }
     .tabs li a {
         font-size: 13px;
-        padding: 19px 10px 11px;
+        padding: 17px 9px 14px 5px;
     }
 
     h1,
@@ -52,8 +52,6 @@
     }
     .search-form {
         float: left;
-        margin: 5px 15px 0 0px;
-        width: 250px;
     }
   }
 
@@ -181,7 +179,6 @@
     }
     .search-form {
         display: block!important;
-        width: 230px;
     }
     .component-full {
         text-align: center;
@@ -372,8 +369,6 @@
   and (orientation: landscape) {
     .search-form {
         float: left;
-        margin: 10px 15px 0 0px;
-        width: 160px;
     }
     .ctrl-right {
         display: block;

@@ -4,6 +4,13 @@
 *
 */
 
+.archive-panel {
+    padding: 10px 5px;
+    height: 100px;
+    width: 100%;
+    display: none;
+}
+
 .reading-time {
     font-style: italic;
     font-size: 12px;
@@ -11,6 +18,9 @@
     color: rgba(13, 86, 125, 0.55);
 }
 
+.break {
+    margin-bottom: 20px!important;
+}
 /*
 *
 * tables
@@ -97,8 +107,8 @@ img.inline {
 
 .search-form {
     float: left;
-    margin: 5px 15px 0 0px;
-    width: 250px;
+    margin: 5px 5px 0 0px;
+    // width: 200px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
         background-position: 10px 9px;
@@ -123,7 +133,7 @@ img.inline {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    width: 250px;
+    width: 100%;
 }
 
 .search-form input[type=text]:focus {
@@ -280,12 +290,6 @@ div#autocompleteResults span {
   * google-Results  **********************************************************
   *
   */
-
-
-// .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2,input.gsc-search-button {
-//     width: auto!important
-//     height: auto!important;
-// }
 
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
     display: none!important;

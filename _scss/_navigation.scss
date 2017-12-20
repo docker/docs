@@ -4,7 +4,7 @@
 *
 */
 .nav-container {
-    height: 50px;
+    height: 55px;
 }
 
 
@@ -85,6 +85,10 @@
         top: 0;
         position: fixed;
         z-index: 100;
+    }
+    .search-form {
+        margin: 5px 27px 0 0px;
+        width: 240px;
     }
 }
 
@@ -309,7 +313,7 @@ input:checked+.slider:before {
 
 .tabs li a {
     color: $white;
-    padding: 17px 13px 11px;
+    padding: 17px 7px 14px 7px;
     float: left;
     font-weight: 600;
 }
