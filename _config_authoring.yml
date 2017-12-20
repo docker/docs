@@ -6,25 +6,25 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
   toc_levels: 2..3
-incremental: true
 permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06"]
+incremental: false
 
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
 
+# TO USE ME:
+# jekyll serve --incremental --config _config_authoring.yml
+
 docker_ce_stable_version: "17.09"
 latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.11"
+docker_ce_edge_version: "17.09"
 docker_ee_version: "17.06"
-compose_version: "1.18.0"
-machine_version: "0.13.0"
+compose_version: "1.16.1"
+machine_version: "0.12.2"
 distribution_version: "2.6"
-dtr_version: "2.4"
-ucp_version: "2.2"
 
 ucp_versions:
   - version: "2.2"
@@ -38,10 +38,8 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
-  - version: "2.4"
-    path: /datacenter/dtr/2.4/guides/
-    latest: true
   - version: "2.3"
+    latest: true
     path: /datacenter/dtr/2.3/guides/
   - version: "2.2"
     path: /datacenter/dtr/2.2/guides/
@@ -49,22 +47,6 @@ dtr_versions:
     path: /datacenter/dtr/2.1/guides/
   - version: "2.0"
     path: /datacenter/dtr/2.0/
-
-tablabels:
-  ucp-3.0: Universal Control Plane 3.0
-  ucp-2.2: Universal Control Plane 2.2
-  docker-cli-linux: Docker CLI on Mac/Linux
-  docker-cli-win: Docker CLI on Windows
-  kubectl: Kubernetes CLI
-
-collections:
-  samples:
-    output: true
-
-plugins:
-  - jekyll-redirect-from
-  - jekyll-relative-links
-  - jekyll-sitemap
 
 defaults:
   -
@@ -78,95 +60,27 @@ defaults:
       toc_max: 3
       tree: true
   - scope:
-      path: "compose"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "cs-engine"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "datacenter"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "datacenter/ucp"
-    values:
-      assignee: "jimgalasyn"
-  - scope:
-      path: "docker-cloud"
-    values:
-      assignee: "londoncalling"
-  - scope:
-      path: "docker-for-mac"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "docker-for-windows"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "docker-hub"
-    values:
-      assignee: "johndmulhausen"
-  - scope:
-      path: "docker-store"
-    values:
-      assignee: "johndmulhausen"
-  - scope:
       path: "engine"
     values:
-      assignee: "mistyhacks"
-      win_latest_build: "docker-17.06.2-ee-6"
-  - scope:
-      path: "kitematic"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "machine"
-    values:
-      assignee: "gbarr01"
-  - scope:
-      path: "notary"
-    values:
-      assignee: "johndmulhausen"
-  - scope:
-      path: "registry"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
-      path: "swarm"
-    values:
-      assignee: "mistyhacks"
-  - scope:
-      path: "toolbox"
-    values:
-      assignee: "gbarr01"
+      win_server_zip_url: "https://download.docker.com/components/engine/windows-server/17.06/docker-17.06.2-ee-4.zip"
   - scope:
       path: "datacenter"
     values:
-      ucp_latest_image: "docker/ucp:2.2.4"
-      dtr_latest_image: "docker/dtr:2.4.1"
+      ucp_latest_image: "docker/ucp:2.2.3"
+      dtr_latest_image: "docker/dtr:2.3.4"
       enterprise: true
-  - scope:
-      path: "datacenter/dtr/2.4"
-    values:
-      dtr_org: "docker"
-      dtr_repo: "dtr"
-      dtr_version: "2.4.1"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
-      hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.5"
+      dtr_version: "2.3.4"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.10"
+      docker_image: "docker/dtr:2.2.9"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -182,7 +96,7 @@ defaults:
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "2.2.4"
+      ucp_version: "2.2.3"
   - scope:
       path: "datacenter/ucp/2.1"
     values:

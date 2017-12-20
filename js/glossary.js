@@ -1,8 +1,7 @@
 ---
 layout: null
 ---
-{
-"terms":[
+var glossary = [
 {% for entry in site.data.glossary %}
 {
 "term": {{ entry[0] | jsonify }},
@@ -10,4 +9,3 @@ layout: null
 }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
-}

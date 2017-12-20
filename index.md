@@ -13,9 +13,9 @@ notags: true
 
 ## Get started with Docker
 
-Try our new multi-part walkthrough that goes from writing your first app,
-data storage, networking, and swarms, ending with your app running on
-production servers in the cloud. Total reading time is less than an hour!
+Try our new multi-part walkthrough that covers writing your first app,
+data storage, networking, and swarms, and ends with your app running on
+production servers in the cloud. Total reading time is less than an hour.
 
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 
@@ -26,8 +26,8 @@ production servers in the cloud. Total reading time is less than an hour!
 
 Run your solution in production with Docker Enterprise Edition and you'll get a
 management dashboard, security scanning, LDAP integration, content signing,
-multi-cloud support, and more. Click below to test
-drive a running instance of Docker EE, without installing anything.
+multi-cloud support, and more. Click below to test-drive a running instance of
+Docker EE without installing anything.
 
 [Try Docker Enterprise Edition](https://dockertrial.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 

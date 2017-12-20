@@ -44,7 +44,7 @@ runtime, all travel together.
 
 These portable images are defined by something called a `Dockerfile`.
 
-## Define a container with a `Dockerfile`
+## Define a container with `Dockerfile`
 
 `Dockerfile` will define what goes on in the environment inside your
 container. Access to resources like networking interfaces and disk drives is
@@ -202,8 +202,7 @@ mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
 
 Go to that URL in a web browser to see the display content served up on a
-web page, including "Hello World" text, the container ID, and the Redis error
-message.
+web page.
 
 ![Hello World in browser](images/app-in-browser.png)
 

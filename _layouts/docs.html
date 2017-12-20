@@ -97,7 +97,18 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- temp css will be removed -->
 	<link rel="stylesheet" href="/css/temp.css">
-	{% seo %}
+	<!-- SEO stuff -->
+	<title>{{ page.title }} | Docker Documentation</title>
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="{{ page.description }}" />
+<meta property="og:description" content="{{ page.description }}" />
+<link rel="canonical" href="{{ page.url }}" />
+<meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+<meta property="og:site_name" content="Docker Documentation" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+	<!-- END SEO STUFF -->
 	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 	<script language="javascript">
 	// Default to assuming this is an archive and hiding some stuff
@@ -296,20 +307,24 @@
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
+	var pageURL = '{{ page.url }}';
+	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
+	<script defer src="/js/metadata.js"></script>
+	<script src="/js/glossary.js"></script>
+	<script src="/js/collections_tocs.js"></script>
 	<script defer src="/js/docs.js"></script>
+	<script defer src="/js/toc.js"></script>
 	<script language="javascript">
 	jQuery(document).ready(function(){
-			$.getJSON( "/metadata.txt", function( data ) {
-				metadata = data;
 				hookupTOCEvents();
-				$.getJSON( "/glossary.txt", function( data ) {
-					glossary = data;
-					renderTagsPage();
-				});
 			});
-	});
 	</script>
 </body>
 
