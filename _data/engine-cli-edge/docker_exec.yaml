@@ -7,7 +7,7 @@ long: |-
   process (`PID 1`) is running, and it is not restarted if the container is
   restarted.
 
-  COMMAND will run in the default directory of the container. It the
+  COMMAND will run in the default directory of the container. If the
   underlying image has a custom directory specified with the WORKDIR directive
   in its Dockerfile, this will be used instead.
 
@@ -63,6 +63,13 @@ options:
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
   experimental: false
+- option: workdir
+  shorthand: w
+  value_type: string
+  description: Working directory inside the container
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
 examples: "### Run `docker exec` on a running container\n\nFirst, start a container.\n\n```bash\n$
   docker run --name ubuntu_bash --rm -i -t ubuntu bash\n```\n\nThis will create a
   container named `ubuntu_bash` and start a Bash session.\n\nNext, execute a command
@@ -74,14 +81,17 @@ examples: "### Run `docker exec` on a running container\n\nFirst, start a contai
   bash session.\n\n```bash\n$ docker exec -it -e VAR=1 ubuntu_bash bash\n```\n\nThis
   will create a new Bash session in the container `ubuntu_bash` with environment \nvariable
   `$VAR` set to \"1\". Note that this environment variable will only be valid \non
-  the current Bash session.\n\n\n### Try to run `docker exec` on a paused container\n\nIf
-  the container is paused, then the `docker exec` command will fail with an error:\n\n```bash\n$
-  docker pause test\n\ntest\n\n$ docker ps\n\nCONTAINER ID        IMAGE               COMMAND
-  \            CREATED             STATUS                   PORTS               NAMES\n1ae3b36715d2
-  \       ubuntu:latest       \"bash\"              17 seconds ago      Up 16 seconds
-  (Paused)                       test\n\n$ docker exec test ls\n\nFATA[0000] Error
-  response from daemon: Container test is paused, unpause the container before exec\n\n$
-  echo $?\n1\n```"
+  the current Bash session.\n\nBy default `docker exec` command runs in the same working
+  directory set when container was created.\n\n```bash\n$ docker exec -it ubuntu_bash
+  pwd\n/\n```\n\nYou can select working directory for the command to execute into\n\n```bash\n$
+  docker exec -it -w /root ubuntu_bash pwd\n/root\n```\n\n\n### Try to run `docker
+  exec` on a paused container\n\nIf the container is paused, then the `docker exec`
+  command will fail with an error:\n\n```bash\n$ docker pause test\n\ntest\n\n$ docker
+  ps\n\nCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS
+  \                  PORTS               NAMES\n1ae3b36715d2        ubuntu:latest
+  \      \"bash\"              17 seconds ago      Up 16 seconds (Paused)                       test\n\n$
+  docker exec test ls\n\nFATA[0000] Error response from daemon: Container test is
+  paused, unpause the container before exec\n\n$ echo $?\n1\n```"
 deprecated: false
 experimental: false
 

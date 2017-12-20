@@ -42,6 +42,12 @@ options:
   description: Skip image verification
   deprecated: false
   experimental: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
 examples: |-
   ### Pull an image from Docker Hub
 

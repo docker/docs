@@ -224,6 +224,12 @@ options:
   description: Do not use cache when building the image
   deprecated: false
   experimental: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
 - option: pull
   value_type: bool
   default_value: "false"
@@ -429,7 +435,7 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   copies of the image, one for the build cache with all the cache\n  layers in tact,
   and one for the squashed version.\n- While squashing layers may produce smaller
   images, it may have a negative\n  impact on performance, as a single layer takes
-  longer to extract, and\n  downloading a single layer cannot be paralellized.\n-
+  longer to extract, and\n  downloading a single layer cannot be parallelized.\n-
   When attempting to squash an image that does not make changes to the\n  filesystem
   (for example, the Dockerfile only contains `ENV` instructions),\n  the squash step
   will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)\n\n####

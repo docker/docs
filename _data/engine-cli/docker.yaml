@@ -49,6 +49,7 @@ cname:
 - docker system
 - docker tag
 - docker top
+- docker trust
 - docker unpause
 - docker update
 - docker version
@@ -104,6 +105,7 @@ clink:
 - docker_system.yaml
 - docker_tag.yaml
 - docker_top.yaml
+- docker_trust.yaml
 - docker_unpause.yaml
 - docker_update.yaml
 - docker_version.yaml
