@@ -1,0 +1,28 @@
+# Example YAML file for an IBM Watson Conversation service deployed to a Docker for IBM Cloud swarm.
+version: "3.4"
+services:
+  # The name of your service, in this case "chat"
+  chat:
+    # This example uses IBM Cloud Container Registry, with the namespace and image:tag matching the ones used when building the Docker image.
+    image: registry.ng.bluemix.net/mynamespace/watson_conversation:latest
+    ports:
+      - 3000:3000
+    deploy:
+      replicas: 2
+      update_configs:
+        parallelism: 1
+      restart_policy:
+        condition: on-failure
+    # Not all IBM Cloud services use workspace IDs.
+    # To retrieve the Watson Conversation service workpace ID, take the following steps:
+    # Log in to IBM Cloud, select the Watson Conversation service, click "Launch tool"
+    # Click the "Actions" expand button in the corner of your service tile, click "View Details", click the "Workspace ID" copy icon
+    environment:
+      - WORKSPACE_ID-11aa1111-a1aa-1111-aa11-11aa1a1a11aa
+    # secret name matches the `--service-key <secret-name>` flag of the `bx d4ic key-create` command.
+    secrets:
+      - watson_conversation
+secrets:
+  # secret name matches the `--service-key <secret-name>` flag of the `bx d4ic key-create` command.
+  watson_conversation:
+    external: true

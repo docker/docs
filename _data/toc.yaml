@@ -65,6 +65,42 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
+  - sectiontitle: Docker for IBM Cloud (Beta)
+    section:
+    - path: /docker-for-ibm-cloud/why/
+      title: Why Docker for IBM Cloud?
+    - path: /docker-for-ibm-cloud/quickstart/
+      title: Quick start
+    - path: /docker-for-ibm-cloud/
+      title: "Setup & prerequisites"
+    - path: /docker-for-ibm-cloud/administering-swarms/
+      title: Administer clusters
+    - path: /docker-for-ibm-cloud/scaling/
+      title: Scale clusters
+    - path: /docker-for-ibm-cloud/deploy/
+      title: Deploy apps
+    - path: /docker-for-ibm-cloud/binding-services/
+      title: Bind IBM Cloud services
+    - sectiontitle: Use registry images in clusters
+      section:
+      - path: /docker-for-ibm-cloud/registry/
+        title: Registry overview
+      - path: /docker-for-ibm-cloud/dtr-ibm-cos/
+        title: Set up DTR to use IBM Cloud Object Storage
+      - path: /docker-for-ibm-cloud/ibm-registry/
+        title: Use images in IBM Cloud Container Registry
+    - path: /docker-for-ibm-cloud/persistent-data-volumes/
+      title: Save persistent data in storage volumes
+    - path: /docker-for-ibm-cloud/load-balancer/
+      title: Use a load balancer
+    - path: /docker-for-ibm-cloud/logging/
+      title: Send logging and metric data to IBM Cloud
+    - path: /docker-for-ibm-cloud/cli-ref/
+      title: CLI reference for bx d4ic commands
+    - path: /docker-for-ibm-cloud/faqs/
+      title: FAQs
+    - path: /docker-for-ibm-cloud/opensource/
+      title: Open source licensing
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/why/
