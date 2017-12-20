@@ -50,6 +50,13 @@ options:
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
   experimental: false
+- option: workdir
+  shorthand: w
+  value_type: string
+  description: Working directory inside the container
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
 deprecated: false
 experimental: false
 
