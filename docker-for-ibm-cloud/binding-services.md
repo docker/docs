@@ -8,6 +8,7 @@ With Docker EE for IBM Cloud, you can easily bind services to your cluster to en
 
 ## Bind IBM Cloud services
 Before you begin:
+
 * Ensure that you have [set up your IBM Cloud account](/docker-for-ibm-cloud/index.md).
 * [Install the IBM Cloud CLI and plug-ins](/docker-for-ibm-cloud/index.md#install-the-clis).
 * [Create a cluster](administering-swarms.md).
@@ -19,6 +20,7 @@ Before you begin:
    * Example [docker-service.yaml file](https://github.com/docker/docker.github.io/tree/master/docker-for-ibm-cloud/scripts/docker-stack.yaml)
 
 There are three main steps in binding IBM Cloud services to your Docker EE for IBM Cloud cluster:
+
 1. Create a Docker secret.
 2. Build a Docker image that uses the IBM Cloud service.
 3. Create a Docker service.
@@ -26,11 +28,13 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
 ### Step 1: Create a Docker secret
 
 1. Log in to IBM Cloud. If you have a federated account, use the `--sso` option.
+
    ```bash
    $ bx login [--sso]
    ```
 
 2. Target the org and space that has the service:
+
    ```bash
    $ bx target --cf
    ```
@@ -47,6 +51,7 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
    ```
 
 4. Verify the secret is created:
+
    ```bash
    $ docker secret ls
    ```
@@ -116,11 +121,13 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
 4. Test the image locally before pushing to your registry.
 
 5. Tag the image:
+
    ```bash
    $ docker tag my_image_name registry-path/namespace/image:tag
    ```
 
 6. Push the image to your registry:
+
    ```bash
    $ docker push registry-path/namespace/image:tag
    ```
@@ -128,6 +135,7 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
 ### Step 3: Create a Docker service
 
 1. Develop a `docker-service.yaml` file using the [compose file reference](/compose/compose-file/).
+
    * Save the file in an easily accessible directory, such as the one that has the Dockerfile that you used in the previous step.
    * For the `image` field, use the same `registry/namespace/image:tag` path that you made in the previous step for the for the service `image` field.
    * For the service `environment` field, use a service environment, such as a workspace ID, from the IBM Cloud service that you made before you began.

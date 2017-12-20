@@ -70,7 +70,7 @@ guides:
     - path: /docker-for-ibm-cloud/why/
       title: Why Docker for IBM Cloud?
     - path: /docker-for-ibm-cloud/quickstart/
-      title: Quick Start
+      title: Quick start
     - path: /docker-for-ibm-cloud/
       title: "Setup & prerequisites"
     - path: /docker-for-ibm-cloud/administering-swarms/
@@ -81,10 +81,10 @@ guides:
       title: Deploy apps
     - path: /docker-for-ibm-cloud/binding-services/
       title: Bind IBM Cloud services
-    - sectiontitle: Set up a registry to use images in clusters
+    - sectiontitle: Use registry images in clusters
       section:
       - path: /docker-for-ibm-cloud/registry/
-        title: Registry Overview
+        title: Registry overview
       - path: /docker-for-ibm-cloud/dtr-ibm-cos/
         title: Set up DTR to use IBM Cloud Object Storage
       - path: /docker-for-ibm-cloud/ibm-registry/
@@ -92,7 +92,7 @@ guides:
     - path: /docker-for-ibm-cloud/persistent-data-volumes/
       title: Save persistent data in storage volumes
     - path: /docker-for-ibm-cloud/load-balancer/
-      title: Load balancer
+      title: Use a load balancer
     - path: /docker-for-ibm-cloud/logging/
       title: Send logging and metric data to IBM Cloud
     - path: /docker-for-ibm-cloud/cli-ref/

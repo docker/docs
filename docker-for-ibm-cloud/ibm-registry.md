@@ -31,10 +31,11 @@ To prevent repeatedly logging in with `bx cr login`, you can create a non-expiri
     ```
 
 ### Log in with other private registries
-You can also log in to Docker with other private registries. View that registry's documentation for the appropriate authentication methods. To use Docker Trusted Registry, you must [configure external IBM Cloud Object Storage](dtr-ibm-cos.md).
+You can also log in to Docker with other private registries. View that registry's documentation for the appropriate authentication methods. To use Docker Trusted Registry, [configure external IBM Cloud Object Storage](dtr-ibm-cos.md).
 
 ### Log in before running certain Docker commands
-You must log in to Docker (whether by the registry log-in, token, or other method) before running the following Docker commands:
+Log in to Docker (whether by the registry log-in, token, or other method) before running the following Docker commands:
+
 - `docker pull` to download an image from IBM Cloud Container Registry.
 - `docker push` to upload an image to IBM Cloud Container Registry.
 - `docker service create` to create a service that uses an image that is stored in IBM Cloud Container Registry.
@@ -44,6 +45,7 @@ You must log in to Docker (whether by the registry log-in, token, or other metho
 You can create a container using a registry image. You might want to run the image locally to test it before [creating a swarm service](#create-a-swarm-service-using-an-ibm-cloud-container-registry-image) based on the image.
 
 **Before you begin**:
+
 - [Install the registry CLI and set up a namespace](#install-the-cli-and-set-up-a-namespace).
 - [Add an image in your registry namespace](https://console.bluemix.net/docs/services/Registry/registry_images_.html#registry_images_) to use to create the swarm service.
 - [Log in to Docker](#log-in-to-docker-with-private-registry-credentials) with the appropriate registry credentials.
@@ -51,11 +53,13 @@ You can create a container using a registry image. You might want to run the ima
 To create a local container that uses an IBM Cloud Container Registry image:
 
 1. Get the name and tag of the image you want to use to create the service:
+
     ```bash
     $ bx cr images
     ```
 
 2. Run the image locally:
+
     ```bash
     $ docker run --name my_container my_image:tag
     ```
@@ -66,6 +70,7 @@ To create a local container that uses an IBM Cloud Container Registry image:
 You can create a service that schedules tasks to spawn containers that are based on an image in your IBM Cloud Container Registry.
 
 **Before you begin**:
+
 - Install the Docker for IBM Cloud CLI.
 - [Install the registry CLI and set up a namespace](#install-the-cli-and-set-up-a-namespace).
 - [Add an image in your registry namespace](https://console.bluemix.net/docs/services/Registry/registry_images_.html#registry_images_) to use to create the service.
@@ -75,21 +80,25 @@ You can create a service that schedules tasks to spawn containers that are based
 To create a Docker swarm service that uses an IBM Cloud Container Registry image:
 
 1. Get the name and tag of the image you want to use to create the service:
+
     ```bash
     $ bx cr images
     ```
 
 2. Connect to your Docker for IBM Cloud swarm. Navigate to the directory where you [downloaded the UCP credentials](administering-swarms.md#download-client-certificates) and run the script. For example:
+
    ```bash
    $ cd filepath/to/certificate/repo && source env.sh
    ```
 
 3. Send the registry authentication details when creating the Docker service for the image `<your-image:tag>`:
+
     ```bash
     $ docker service create --name my_service --with-registry-auth my_image:tag
     ```
 
 4. Verify that your service was created:
+
     ```bash
     $ docker service ls --filter name=my_service
     ```

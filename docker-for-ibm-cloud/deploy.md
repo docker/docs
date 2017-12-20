@@ -6,6 +6,7 @@ title: Deploy your app on Docker EE for IBM Cloud
 
 ## Deploy apps
 Before you begin:
+
 * Ensure that you [completed the account prerequisites](/docker-for-ibm-cloud/index.md).
 * [Create a swarm](administering-swarms.md#create-swarms).
 * [Set the environment variables to your swarm](administering-swarms.md#download-client-certificates).
@@ -13,6 +14,7 @@ Before you begin:
 * Review [Docker Compose file reference](/compose/compose-file/) for creating a YAML to define services, networks, or volumes that your app uses.
 
 Steps:
+
 * To deploy services and applications, see the [UCP documentation](/datacenter/ucp/2.2/guides/user/services/deploy-a-service/).
 * To deploy IBM Cloud services such as Watson, see [Binding IBM Cloud services to swarms](binding-services.md).
 

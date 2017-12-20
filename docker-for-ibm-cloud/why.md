@@ -23,7 +23,9 @@ Likewise, setting up and using Docker swarm mode functionality for container orc
 ## Self-cleaning and self-healing
 Even the most conscientious admin can be caught off guard by issues such as exhaustive logging or the Linux kernel unexpectedly ending memory-hungry processes. In Docker EE for IBM Cloud, your cluster is resilient to a variety of such issues by default.
 
-You can enable or disable logging for swarms, so chatty logs won't use up all of your disk space. Likewise, the "system prune" option allows you to ensure unused Docker resources such as old images are cleaned up automatically. The lifecycle of nodes is managed using InfraKit, so that if a node enters an unhealthy state for unforeseen reasons, the node is removed from service and replaced automatically. Container tasks that were running on the unhealthy node are rescheduled.
+You can enable or disable logging for swarms, so chatty logs won't use up all of your disk space. Likewise, the "system prune" option allows you to ensure unused Docker resources such as old images are cleaned up automatically.
+
+The lifecycle of nodes is managed using InfraKit, so that if a node enters an unhealthy state for unforeseen reasons, the node is removed from service and replaced automatically. Container tasks that were running on the unhealthy node are rescheduled.
 
 You can breathe easier as these self-cleaning and self-healing properties reduce the risk of downtime.
 

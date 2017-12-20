@@ -16,6 +16,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   You can navigate to user permissions by going to **Account > Users > User name > Permissions**.
 
   Make sure that you enable the permissions in the following table.
+
   * The **View Only** user role does not have any of these enabled by default.
   * The **Basic User** role has some of these enabled by default. Permissions marked with `*` designate new permissions that **Basic Users** need.
   * The **Super User** role has everything enabled.
@@ -118,11 +119,15 @@ You must enable logging. See [Enabling logging and metric data for your swarm](l
 
 ## Why don't `bx d4ic` commands work?
 
-The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Cloud infrastructure resources. As such, many `bx d4ic` commands require you to provide your infrastructure account user name and API key credentials as options during the command (`--sl-user <user.name.1234567> --sl-api-key <api-key>`). Instead of including these in each command, you can [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables).
+The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Cloud infrastructure resources. As such, many `bx d4ic` commands require you to provide your infrastructure account user name and API key credentials as options during the command (`--sl-user <user.name.1234567> --sl-api-key <api-key>`).
+
+Instead of including these in each command, you can [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables).
 
 ## Why do swarm cluster provisioning or `docker node` commands fail?
 
-Make sure that you have [set up all the necessary accounts](/docker-for-ibm-cloud/index.md), including your Docker EE subscription URL, IBM Cloud account, and IBM Cloud infrastructure credentials. Set your [infrastructure credentials to your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables), or include them in the `bx d4ic create` command when [provisioning your cluster](administering-swarms.md#create-swarms).
+Make sure that you have [set up all the necessary accounts](/docker-for-ibm-cloud/index.md), including your Docker EE subscription URL, IBM Cloud account, and IBM Cloud infrastructure credentials.
+
+Set your [infrastructure credentials to your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables), or include them in the `bx d4ic create` command when [provisioning your cluster](administering-swarms.md#create-swarms).
 
 When provisioning the swarm or using `docker node` commands, you might encounter error messages similar to `Discovery error: No cluster leader` or `Error response from daemon: No elected primary cluster manager`, or `Leader Election: Cluster leadership lost`.
 

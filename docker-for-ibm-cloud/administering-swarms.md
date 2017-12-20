@@ -4,31 +4,39 @@ keywords: ibm, ibm cloud, logging, iaas, tutorial
 title: Administer swarm clusters with Docker EE for IBM Cloud
 ---
 
-Docker Enterprise Edition for IBM Cloud (Beta) comes with a variety of integrations that simplify the swarm administration process. Use the Docker EE for IBM Cloud CLI plug-in (`bx d4ic`) to quickly provision swarm mode clusters and resources. Manage your cluster with the `bx d4ic` plug-in and the Docker EE Universal Control Plane (UCP) browser-accessed interface.
+Docker Enterprise Edition for IBM Cloud (Beta) comes with a variety of integrations that simplify the swarm administration process.
+
+Use the Docker EE for IBM Cloud CLI plug-in (`bx d4ic`) to provision swarm mode clusters and resources. Manage your cluster with the `bx d4ic` plug-in and the Docker EE Universal Control Plane (UCP) web UI.
 
 ## Create swarms
 Create a Docker EE swarm cluster in IBM Cloud.
 
 > Your beta license allows you to provision up to 20 nodes
 >
-> For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes. If you need more nodes than this, work with your Docker representative to acquire an additional Docker EE license.
+> During the beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes. If you need more nodes than this, work with your Docker representative to acquire an additional Docker EE license.
 
 Before you begin:
-* [Complete the setup requirements](/docker-for-ibm-cloud/index.md).
+
+* [Complete the setup requirements](/docker-for-ibm-cloud/index.md#prerequisites).
 * Make sure that you have the appropriate [IBM Cloud infrastructure permissions](faqs.md).
 * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), note its label, and locate the file path of the private SSH key on your machine.
 * Retrieve the Docker EE installation URL that you received in your beta welcome email.
 
 To create a Docker EE for IBM Cloud cluster from the CLI:
+
 1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
+
    ```bash
    $ bx login [--sso]
    ```
+
 2. Target the IBM Cloud org and space.
+
    ```bash
    $ bx target --cf
    ```
+
 3. Review the `bx d4ic create` command parameters. Parameters that are marked `Required` must be provided during the create command. Optional parameters are set to the default.
 
    | Parameter | Description | Default Value | Required? |
@@ -44,10 +52,11 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    | `--datacenter`, `-d` | The location (data center) that you deploy the cluster to. Availabe locations are dal12, dal13, fra02, hkg02, lon04, par01, syd01, syd04, tor01, wdc06, wdc07. | wdc07 | Optional |
    | `--verbose`, `-v` | Enable verbose mode | | Optional |
    | `--hardware` | If "dedicated" then the nodes are created on hosts with compute instances in the same account. | Shared | Optional |
-   | `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.2x4 | Optional |
-   | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
+   | `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. More powerful machine types cost more, but deliver better performance. For example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.2x4 | Optional |
+   | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. More powerful machine types cost more, but deliver better performance. For example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
 
 4. Create the cluster. Use the `--swarm-name` flag to name your cluster, and fill in the credentials, SSH, and Docker EE installation URL variables with the information that you retrieved before you began.
+
     ```bash
     $ bx d4ic create --swarm-name my_swarm \
     --sl-user user.name.1234567 \
@@ -134,7 +143,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
       ```
       {% endraw %}
 
-After creating the cluster, you must [log in to Docker UCP and download the Docker UCP client certificate bundle](#use-the-universal-control-plane).
+After creating the cluster, [log in to Docker UCP and download the Docker UCP client certificate bundle](#use-the-universal-control-plane).
 
 ## Use the Universal Control Plane
 Docker EE for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to provide integrated container management and security, from development to production.
@@ -143,6 +152,7 @@ Docker EE for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/
 Before you begin, [create a cluster](#create-swarms). Note the its **Name** and **ID**.
 
 1. Retrieve your UCP password by using the cluster **Name** and **ID** that you made when you [created the cluster](#create-swarms).
+
    ```bash
    $ docker logs cluster-name_ID
 
@@ -152,6 +162,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
    ```
 
 2. Retrieve the load balancer IP address.
+
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
    ```
@@ -175,9 +186,10 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 
    > Keep your client bundle handy
    >
-   > Move the certificate environment variable directory to a safe and accessible location on your machine. You'll use it a lot!
+   > Move the certificate environment variable directory to a safe and accessible location on your machine. It contains secret information. You'll use it a lot!
 
-6. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by running the `env.sh` script.
+6. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.
+
    ```bash
    $ source env.sh
    ```
@@ -187,6 +199,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
    > Repeat this to set your environment variables each time you enter a new terminal session, or after you unset your variables, to connect to the Docker EE for IBM Cloud swarm.
 
 7. Verify that your certificates are being sent to Docker Engine. The command returns information on your swarm.
+
    ```bash
    $ docker info
    ```
@@ -197,6 +210,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 To review resources used within a particular Docker EE cluster, use the CLI or UCP.
 
 **CLI**: The `bx d4ic` CLI lists, modifies, and automates cluster infrastructure, as well as the URLs to access UCP, DTR, or exposed Docker services.
+
   * Use `bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key` to review a list of your clusters and their UCP URLs.
   * Use `bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key` to review details about the cluster, such as the IP address of manager nodes or the status of the cluster load balancers.
 
@@ -204,11 +218,12 @@ To review resources used within a particular Docker EE cluster, use the CLI or U
 
 ### Account-level resources
 For an account-level view of services and infrastructure that can be used in your swarm, log in to your [IBM Cloud](https://console.bluemix.net/) account.
+
 * The IBM Cloud dashboard provides information on connected IBM Cloud services in the account, such as Watson and Internet of Things.
 * The IBM Cloud infrastructure portal shows account infrastructure resources such as virtual devices, storage, and networking.
 
 ### Other resources
-For logging and metric data from your swarm, you must first [enable logging for the cluster](logging.md), and then access the data in your IBM Cloud organization and space.
+To gather logging and metric data from your swarm, first [enable logging for the cluster](logging.md), and then access the data in your IBM Cloud organization and space.
 
 ## UCP and CLIs
 Docker EE for IBM Cloud employs a flexible architecture and integration with IBM Cloud that you can use to leverage IBM Cloud resources and customize your swarm environment. Docker EE UCP exposes the standard Docker API, and as such, includes certain functions that instead should be done by using Docker EE for IBM Cloud capabilities.
@@ -241,19 +256,26 @@ For Docker EE cluster access management, use the [UCP Access Control documentati
 
 ## Delete swarms
 Before you begin:
+
 * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 * Retrieve the label of your IBM Cloud infrastructure SSH key, and locate the file path of the private SSH key on your machine.
 
 To delete a swarm:
+
 1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
+
    ```bash
    $ bx login [--sso]
    ```
+
 2. Target the IBM Cloud org and space:
+
    ```bash
    $ bx target --cf
    ```
+
 3. Delete the swarm:
+
    ```bash
    $ bx d4ic delete (--swarm-name my_swarm | --id swarm_ID )\
    --sl-user user.name.1234567 \
@@ -261,7 +283,9 @@ To delete a swarm:
    --ssh-key filepath_to_my_ssh_key \
    [--force]
    ```
+
 4. Restore the default Docker client settings by running the commands shown in the CLI:
+
    ```none
    unset DOCKER_HOST
    unset DOCKER_TLS_VERIFY

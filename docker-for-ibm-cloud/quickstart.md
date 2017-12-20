@@ -13,57 +13,68 @@ Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are e
 ## Step 1: Get all your accounts in order
 
 1. Set up your IBM Cloud account:
-   * [Register for a Pay As You Go IBM Cloud account](https://console.bluemix.net/registration/).
-   * If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/pricing/index.html#accounts).
+
+    * [Register for a Pay As You Go IBM Cloud account](https://console.bluemix.net/registration/).
+    * If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/pricing/index.html#accounts).
 
 2. Get your IBM Cloud infrastructure credentials:
-   * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), label it, and note the label.
-   * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**. 
+
+    * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), label it, and note the label.
+    * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 
 3. If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) to use when using IBM Cloud services.
 
 4. Get the Docker EE URL associated with your subscription. For beta, you received this in your welcome email.
 
 5. Set your environment variables to use your IBM Cloud infrastructure credentials and your Docker EE installation URL. For example:
-   ```none
-   export SOFTLAYER_USERNAME=user.name.1234567
-   export SOFTLAYER_API_KEY=api-key
-   export D4IC_DOCKER_EE_URL=my_docker-ee-url
-   ```
+
+    ```none
+    export SOFTLAYER_USERNAME=user.name.1234567
+    export SOFTLAYER_API_KEY=api-key
+    export D4IC_DOCKER_EE_URL=my_docker-ee-url
+    ```
 
 Now let's download some Docker for IBM Cloud tools.
 
 ## Step 2: Install the CLIs
 
 1. Install the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started).
+
 2. Install the Docker for IBM Cloud plug-in. The prefix for running commands is `bx d4ic`.
-   ```bash
-   $ bx plugin install docker-for-ibm-cloud -r Bluemix
-   ```
+
+    ```bash
+    $ bx plugin install docker-for-ibm-cloud -r Bluemix
+    ```
+
 3. Optional: To manage a private IBM Cloud Container Registry, install the plug-in. The prefix for running commands is `bx cr`.
-   ```bash
-   $ bx plugin install container-registry -r Bluemix
-   ```
+
+    ```bash
+    $ bx plugin install container-registry -r Bluemix
+    ```
+
 4. Verify that the plug-ins have been installed properly:
-   ```bash
-   $ bx plugin list
-   ```
+    ```bash
+    $ bx plugin list
+    ```
 
 Now we're ready to get to the fun stuff: making a cluster!
 
 ## Step 3: Create clusters
+
 Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes.
 
 
 1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
-   ```bash
-   $ bx login [--sso]
-   ```
+
+    ```bash
+    $ bx login [--sso]
+    ```
 
 2. Target the IBM Cloud org and space:
-   ```bash
-   $ bx target --cf
-   ```
+
+    ```bash
+    $ bx target --cf
+    ```
 
 3. Create the cluster. Use the `--swarm-name` flag to name your cluster, and fill in the credentials, SSH, and Docker EE installation URL variables with the information that you previously retrieved.
 
@@ -81,6 +92,7 @@ Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a
 4. Note the cluster **Name** and **ID**.
 
 Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manager node is deployed. Then, the rest of the infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
+
 * To check manager node status: `docker logs cluster-name_ID`.
 * To check infrastructure resources: `bx d4ic show --swarm-name cluster-name --sl-user user.name.1234567 --sl-api-key api_key`.
 
@@ -91,6 +103,7 @@ Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/
 ### Step 4a: Access UCP
 
 1. Get your UCP password from the Docker logs **Outputs**:
+
    ```bash
    $ docker logs cluster-name_ID
    ...
@@ -99,9 +112,10 @@ Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/
    ```
 
 2. Retrieve your cluster's load balancer URL:
-  ```bash
-  $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
-  ```
+
+    ```bash
+    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
+    ```
 
 3. Copy the **UCP URL** for your swarm from the `bx d4ic list` command, and in your browser navigate to it.
 
@@ -118,6 +132,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
 
 4. In a terminal, navigate and unzip the client bundle:
+
    ```bash
    $ cd Downloads && unzip ucp-bundle-admin.zip
    ```
@@ -139,6 +154,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 That's it! Your Docker EE for IBM Cloud cluster is provisioned, connected to UCP, and ready to go.
 
 What's next, you ask? Why not try to:
+
 * [Learn when to use UCP and the CLIs](administering-swarms.md#ucp-and-clis).
 * [Deploy an app](deploy.md).
 * [Scale your swarm cluster](scaling.md).

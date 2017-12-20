@@ -8,6 +8,7 @@ With the Docker EE for IBM Cloud (Beta) plug-in for the IBM Cloud CLI, you can m
 
 ## Docker for IBM Cloud plug-in commands
 Refer to these commands to manage your Docker EE for IBM Cloud clusters.
+
 * To view a list of commands, run the `bx d4ic help` command.
 * For help with a specific command, run `bx d4ic help [command_name]`.
 * To view the version of your Docker for IBM Cloud plug-in, run the `bx d4ic version` command.
@@ -23,6 +24,7 @@ Refer to these commands to manage your Docker EE for IBM Cloud clusters.
 Create a Docker EE swarm cluster.
 
 ### Usage
+
 ```bash
 $ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-label SSH_KEY_LABEL --ssh-key SSH_KEY_PATH --docker-ee-url DOCKER_EE_URL --swarm-name SWARM_NAME [--datacenter DATACENTER] [--workers NUMBER] [--managers NUMBER] [--hardware SHARED|DEDICATED] [--manager-machine-type MANAGER_MACHINE_TYPE] [--worker-machine-type WORKER_MACHINE_TYPE] [-v] [--version VERSION]
 ```
@@ -51,6 +53,7 @@ $ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --s
 Delete a Docker EE swarm cluster.
 
 ### Usage
+
 ```bash
 $ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-key SSH_KEY_PATH [--insecure] [--force]
 ```
@@ -72,6 +75,7 @@ $ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAM
 Create a key for a service instance. Before you can create a key, create an IBM Cloud service.
 
 ### Usage
+
 ```bash
 $ bx d4ic key-create (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH --service-name SERVICE_NAME --service-key SERVICE_KEY --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY
 ```
@@ -92,6 +96,7 @@ $ bx d4ic key-create (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH -
 List the clusters in your Docker EE for IBM Cloud account.
 
 ### Usage
+
 ```bash
 $ bx d4ic list --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY [--json]
 ```
@@ -110,6 +115,7 @@ $ bx d4ic list --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY [--js
 Enable or disable transmission of container log and metric data to IBM Cloud [Log Analysis](https://console.bluemix.net/docs/services/CloudLogAnalysis/log_analysis_ov.html#log_analysis_ov) and [Monitoring](https://console.bluemix.net/docs/services/cloud-monitoring/monitoring_ov.html#monitoring_ov) services.
 
 ### Usage
+
 ```bash
 $ bx d4ic logmet (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY [--enable | --disable]
 ```
@@ -130,6 +136,7 @@ $ bx d4ic logmet (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH --sl-
 Show information about the IBM Cloud infrastructure components, such as load balancer URLs, of a specific cluster.
 
 ### Usage
+
 ```bash
 $ bx d4ic show (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY [--json]
 ```
