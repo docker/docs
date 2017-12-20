@@ -69,6 +69,47 @@ drastically reduce the size of your final image, without the need to
 jump through hoops to reduce the number of intermediate layers or remove
 intermediate files during the build.
 
+Images being built by the final stage only, you can most of the time benefit
+both the build cache and minimize images layers.
+
+Your build stage may contain several layers, ordered from the less frequently changed
+to the more frequently changed for example:
+
+* Install tools you need to build your application
+
+* Install or update library dependencies
+
+* Generate your application
+
+A Dockerfile for a go application could look like:
+
+```
+FROM golang:1.9.2-alpine3.6 AS build
+
+# Install tools required to build the project
+# We will need to run `docker build --no-cache .` to update those dependencies
+RUN apk add --no-cache git
+RUN go get github.com/golang/dep/cmd/dep
+
+# Gopkg.toml and Gopkg.lock lists project dependencies
+# These layers will only be re-built when Gopkg files are updated
+COPY Gopkg.lock Gopkg.toml /go/src/project/
+WORKDIR /go/src/project/
+# Install library dependencies
+RUN dep ensure -vendor-only
+
+# Copy all project and build it
+# This layer will be rebuilt when ever a file has changed in the project directory
+COPY . /go/src/project/
+RUN go build -o /bin/project
+
+# This results in a single layer image
+FROM scratch
+COPY --from=build /bin/project /bin/project
+ENTRYPOINT ["/bin/project"]
+CMD ["--help"]
+```
+
 ### Avoid installing unnecessary packages
 
 In order to reduce complexity, dependencies, file sizes, and build times, you
