@@ -54,12 +54,12 @@ images are maintained as open source community projects. All official images
 adhere to strict guidelines but are not necessarily backed by a commercial
 entity.
 
-> **Note**: Docker Hub and Docker Store leverage the same backend, the Docker Public
-Registry. In general - all publicly available community content should be
-visible via both Docker Hub and Docker Store, and this includes official
-images. Any content that has explicitly been added by a commercial entity and
-has gone through a vetting process with respect to content submission and best
-practices, is only available on Docker Store.
+> **Note**: Docker Hub and Docker Store leverage the same backend, the Docker
+> Public Registry. In general, all publicly available community content should
+> be visible via both Docker Hub and Docker Store, and this includes official
+> images. Any content that has explicitly been added by a commercial entity and
+> has gone through a vetting process with respect to content submission and best
+> practices, is only available on Docker Store.
 
 ## Distribution models
 

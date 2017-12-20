@@ -20,46 +20,46 @@ title: Publish content on Docker Store
 
 | If your content: | Can publish on Store  | Can be certified and supported by Docker | Supported by publisher |
 |:-----|:--------|:------|:-----|
-| Works on Docker Enterprise Edition  | YES | YES |  Required |                                                
-| Works on Docker Community Edition  | YES | NO  |  Optional |  
+| Works on Docker Enterprise Edition  | YES | YES |  Required |
+| Works on Docker Community Edition  | YES | NO  |  Optional |
 | Does not work on Docker Certified Infrastructure | NO                       |   N/A       |    N/A     |
 
 
 ## Onboarding
 
 The publishing process for the Docker Store is straightforward, and can be
-initiated from the landing page.  You can sign in with your Docker ID, and
-specify a product name and image source from a private repository.  We require
+initiated from the landing page. You can sign in with your Docker ID, and
+specify a product name and image source from a private repository. We require
 that your product images are stored in private repositories via Docker Cloud
 and/or Hub, as they serve as an internal staging area from which you can revise
 and submit content for review.
 
 Once you specify a private-repository source for your product, you can provide
-the content-manifest items to populate your product’s details page.  These items
+the content-manifest items to populate your product’s details page. These items
 include logos, descriptions, and licensing and support links so that customers
-can make informed decisions about your image.  These items are submitted
+can make informed decisions about your image. These items are submitted
 alongside the image itself for moderation.
 
 The Docker Store team then conducts a comprehensive review of your image and
-metadata.  We use Docker Security Scanning to evaluate your product images’
-security, and share results with you as the publisher.  During the
+metadata. We use Docker Security Scanning to evaluate your product images’
+security, and share results with you as the publisher. During the
 image-moderation phase, we iterate back and forth with publishers to address
 outstanding vulnerabilities and content-manifest issues until the image is ready
 for publication.
 
 Commercial content and other supported images may qualify for the Docker
-Certified Container or Plugins quality mark.  The testing for this program goes
+Certified Container or Plugins quality mark. The testing for this program goes
 beyond the vulnerability scan and also evaluates container images for Docker
-best practices developed over years of experience.  Collaborative support
-capability between Docker and the publisher is also established.  Please refer
+best practices developed over years of experience. Collaborative support
+capability between Docker and the publisher is also established. Please refer
 to the diagram below for a high-level summary:
 
 ![publishing workflow](images/publish-diagram.png)
 
 ## Create great content
 
-Create your content, and follow our best practices to Dockerize it.  Keep your
-images small, your layers few, and your components secure.  Please refer to the
+Create your content, and follow our best practices to Dockerize it. Keep your
+images small, your layers few, and your components secure. Please refer to the
 links and guidelines listed below to build and deliver great content:
 
 * [Best practices for writing Dockerfiles](/engine/userguide/eng-image/dockerfile_best-practices/)
@@ -93,13 +93,13 @@ images for all container applications.
 ### Remove unused components
 
 Often, vulnerabilities exist in components that aren't actually used in the
-containerized application.  To avoid this, you can:
+containerized application. To avoid this, you can:
 
 * Follow best practices when using the `apt-get` command.
 
 * Make sure to run `apt-get-remove` to destroy any components required to build
-but not actually run your application.  Usually, this involves creating
-multi-line Dockerfile directives, as seen below.  The following example shows
+but not actually run your application. Usually, this involves creating
+multi-line Dockerfile directives, as seen below. The following example shows
 how to remove `curl` and `python-pip` after they are used to install the
 Python `requests` package, all in a single Dockerfile directive:
 
@@ -111,20 +111,19 @@ RUN apt-get update && \
          rm -rf /var/lib/apt/lists/
 ```
 
-> **Note**: Keep in mind, any file introduced in one directive of
-your Dockerfile can only be removed in the same directive (and not
-in subsequent directives in your Dockerfile).
+> **Note**: Files introduced in one directive of your Dockerfile can only be 
+> removed in the same directive (and not in subsequent directives in your Dockerfile).
 
 ### Keep required components up-to-date
 
 Your images are comprised of open-source libraries and packages that amass
-vulnerabilities over time and are consequently patched.  To optimize your
+vulnerabilities over time and are consequently patched. To optimize your
 product’s integrity, you must keep your images up-to-date:
 
 * Periodically update your base image's version, especially if you’re using a
   version deemed to be vulnerable.
 
-* Re-build your image periodically.  Directives including commands such as
+* Re-build your image periodically. Directives including commands such as
   `apt-get install ...` pull the latest versions of dependencies, which may
   include security fixes.
 
@@ -138,8 +137,8 @@ Program.
 
 ## Create and maintain your publisher profile in the Store
 
-Let the Docker community know who you are.  Add your details, your company
-story, and what you do.  At the very minimum, we require:
+Let the Docker community know who you are. Add your details, your company
+story, and what you do. At the very minimum, we require:
 
 * Legal entity name
 * Company website
@@ -181,7 +180,7 @@ enhancements to the look and some elements might shift around.)
 ## Support your users
 
 Docker users who download your content from the Store might need your help
-later, so be prepared for questions!  The information you provide with your
+later, so be prepared for questions! The information you provide with your
 submission will save support time in the future.
 
 ### Support information
@@ -223,12 +222,12 @@ To interpret the results, refer to the
 
 * The Common Vulnerability Scoring System (CVSS) provides an open
   framework for communicating the characteristics and impacts of
-  IT vulnerabilities.  Its quantitative model ensures repeatable,
+  IT vulnerabilities. Its quantitative model ensures repeatable,
   accurate measurement while enabling users to see the underlying
   vulnerability characteristics that were used to generate the scores.
   As a result, CVSS is well-suited as a standard measurement system
   for industries, organizations, and governments that need accurate
-  and consistent vulnerability-impact scores.  CVSS is commonly used
+  and consistent vulnerability-impact scores. CVSS is commonly used
   to prioritize vulnerability-remediation activities, and calculate
   the severity of vulnerabilities discovered on systems. The
   National Vulnerability Database (NVD) provides CVSS scores for
@@ -303,7 +302,7 @@ the partner.
 Docker Certified Container images and plugins are meant to differentiate high
 quality content on Docker Store. Customers can consume Certified Containers with
 confidence knowing that both Docker and the publisher will stand behind the
-solution.  Further details can be found in the [Docker Partner Program Guide](https://www.docker.com/partnerprogramguide){: target="_blank" class="_"}.
+solution. Further details can be found in the [Docker Partner Program Guide](https://www.docker.com/partnerprogramguide){: target="_blank" class="_"}.
 
 #### What are the benefits of Docker Certified?
 
@@ -311,7 +310,7 @@ Docker Store will promote Docker Certified Containers and Plugins running on
 Docker Certified Infrastructure trusted and high quality content. With over 8B
 image pulls and access to Docker’s large customer base, a publisher can
 differentiate their content by certifying their images and plugins. With a
-revenue share agreement, Docker can be a channel for your content.   The Docker
+revenue share agreement, Docker can be a channel for your content. The Docker
 Certified badge can also be listed alongside external references to your
 product.
 
@@ -336,10 +335,10 @@ on Docker Store.
 All Docker Certified Container images and plugins running on Docker Certified
 Infrastructure come with SLA based support provided by the publisher and Docker.
 Normally, a customer contacts the publisher for container and application level
-issues.   Likewise, a customer will contact Docker for Docker Edition support.
+issues. Likewise, a customer will contact Docker for Docker Edition support.
 In the case where a customer calls Docker (or vice versa) about an issue on the
 application, Docker will advise the customer about the publisher support process
-and will perform a handover directly to the publisher if required.  TSAnet is
+and will perform a handover directly to the publisher if required. TSAnet is
 required for exchange of support tickets between the publisher and Docker.
 
 #### How does a publisher apply to the Docker Certified program?
@@ -353,10 +352,10 @@ Partner](https://goto.docker.com/partners){: target="_blank" class="_"}
   offering
 
 * Test your image against the Docker CS Engine 1.12+ or on a Docker Certified
-  Infrastructure version 17.03 and above  (Plugins must run on 17.03 and above)
+  Infrastructure version 17.03 and above (Plugins must run on 17.03 and above)
 
 * Submit your image for Certification through the publisher portal. Docker will
-  scan the image and work with you to address vulnerabilities.  Docker will also
+  scan the image and work with you to address vulnerabilities. Docker will also
   conduct a best practices review of the image.
 
 * Be a [TSAnet](https://www.tsanet.org/){: target="_blank" class="_"} member or
@@ -380,7 +379,7 @@ continue to maintain some of the base OS images and language frameworks.
 
 Docker Certification program recognizes the need to apply special scrutiny and
 testing to containers that access system level interfaces like storage volumes
-and networking.   Docker identifies these special containers as “Plugins” which
-require additional testing by the publisher or Docker.  These plugins employ the
+and networking. Docker identifies these special containers as “Plugins” which
+require additional testing by the publisher or Docker. These plugins employ the
 V2 Plugin Architecture that was first made available in 1.12 (experimental) and
 now available in Docker Enterprise Edition 17.03

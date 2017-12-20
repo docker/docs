@@ -13,7 +13,7 @@ available on Docker Store.
 There are two types of BYOL plans available to Independent Software Vendors
 (ISVs):
 - **Ungated** customer access to content: customers can see and access an
-  ISV's BYOL  product listing by subscribing to the product with their Docker ID.
+  ISV's BYOL product listing by subscribing to the product with their Docker ID.
 
 - **Gated** customer access to content: customers can see an ISV's BYOL product
   listing, but cannot access the content until the ISV creates an order for the
@@ -105,7 +105,9 @@ or look up information about the order after it has been created. 
 
 ### Gated BYOL plan setup
 
-Once a publisher has been onboarded to create an gated BYOL plan, the publisher center will begin to allow them to set up a new, unpublished plan with the gated BYOL option:
+Once a publisher has been onboarded to create an gated BYOL plan, the publisher
+center will begin to allow them to set up a new, unpublished plan with the gated
+BYOL option:
 
 ![byol plan](images/publish_byol.png)
 
@@ -116,7 +118,7 @@ license from the publisher.
 
 ## API reference for ISVs
 
-### Endpoint, Authorization, Content
+### Endpoint, authorization, content
 
 All API requests should be made to: <https://store.docker.com/api/fulfillment/v1/...>
 
