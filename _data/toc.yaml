@@ -1295,6 +1295,10 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.35/
+        title: v1.33 reference
+      - path: /engine/api/v1.34/
+        title: v1.33 reference
       - path: /engine/api/v1.33/
         title: v1.33 reference
       - path: /engine/api/v1.32/
