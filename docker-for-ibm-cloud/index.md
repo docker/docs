@@ -28,7 +28,7 @@ To create a swarm cluster in IBM Cloud, you must have certain accounts, credenti
 
 ### Credentials
 * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), label it, and note the label for use when [administering swarms](administering-swarms.md).
-* Get your IBM Cloud infrastructure [account API credentials](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
+* Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 
 ### Environment
 * If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) in IBM Cloud.
@@ -64,13 +64,14 @@ The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Clo
 Steps:
 1. [Log in to IBM Cloud infrastructure user profile](https://control.bluemix.net/account/user/profile).
 2. Under the **API Access Information** section, locate your **API Username** and **Authentication Key**.
-3. From the CLI, set the environment variables with your infrastructure credentials and your Docker EE installation URL:
+3. Retrieve your Docker EE installation URL. For beta, you received this in your welcome email.
+4. From the CLI, set the environment variables with your infrastructure credentials and your Docker EE installation URL:
    ```none
    export SOFTLAYER_USERNAME=user.name.1234567
    export SOFTLAYER_API_KEY=my_authentication_key
    export D4IC_DOCKER_EE_URL=my_docker-ee-url
    ```
-4. Verify that your environment variables were set.
+5. Verify that your environment variables were set.
    ```bash
    $ env | grep SOFTLAYER && env | grep D4IC_DOCKER_EE_URL
    SOFTLAYER_API_KEY=my_authentication_key

@@ -16,8 +16,8 @@ Create a Docker EE swarm cluster in IBM Cloud.
 Before you begin:
 * [Complete the setup requirements](/docker-for-ibm-cloud/index.md).
 * Make sure that you have the appropriate [IBM Cloud infrastructure permissions](faqs.md).
-* Retrieve your IBM Cloud infrastructure [API username and key](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
-* Create an SSH key, add the public SSH key to IBM Cloud infrastructure and note its label, and locate the file path of the private SSH key on your machine.
+* Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
+* [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), note its label, and locate the file path of the private SSH key on your machine.
 * Retrieve the Docker EE installation URL that you received in your beta welcome email.
 
 To create a Docker EE for IBM Cloud cluster from the CLI:
@@ -29,9 +29,9 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    ```bash
    $ bx target --cf
    ```
-3. Review the required variables. Flag variables that are marked `Required` must be provided during the create command. Optional flags are set to the default.
+3. Review the `bx d4ic create` command parameters. Parameters that are marked `Required` must be provided during the create command. Optional parameters are set to the default.
 
-   | Flag variable | Description | Default Value | Required? |
+   | Parameter | Description | Default Value | Required? |
    | ---- | ----------- | ------------- | --- |
    | `--sl-user`, `-u` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **API Username** under the API Access Information section. | | Required |
    | `--sl-api-key`, `-k` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **Authentication Key** under the API Access Information section. | | Required |
@@ -74,65 +74,65 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    > First, the manager node is deployed. Then, the additional infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
 
    * **Provisioning Stage 1**: Check the status of the manager node:
-   {% raw %}
-   ```bash
-   $ docker logs cluster-name_ID
-
-   Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
-
-   The state of your infrastructure has been saved to the path
-   below. This state is required to modify and destroy your
-   infrastructure, so keep it safe. To inspect the complete state
-   use the `terraform show` command.
-
-   State path:
-
-   Outputs:
-
-   manager_public_ip = 169.##.###.##
-   swarm_d4ic_id = ID
-   swarm_name = cluster-name
-   ucp_password = UCP-password
-   ```
-   {% endraw %}
-
-   * **Provisioning Stage 2**: Check the status of the cluster infrastructure:
     {% raw %}
     ```bash
-     $ bx d4ic show --swarm-name cluster-name --sl-user user.name.1234567 --sl-api-key api_key
-     Getting swarm information...
-     Infrastructure Details
+    $ docker logs cluster-name_ID
 
-     Swarm
-     ID           ID
-     Name         cluster-name
-     Created By   user.name.1234567
+    Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
-     Nodes
-     ID         Name                           Public IP       Private IP      CPU   Memory   Datacenter   Infrakit Group
-     46506407   cluster-name-mgr1              169.##.###.##   10.###.###.##   2     4096     wdc07        managers
-     ...
+    The state of your infrastructure has been saved to the path
+    below. This state is required to modify and destroy your
+    infrastructure, so keep it safe. To inspect the complete state
+    use the `terraform show` command.
 
-     Load Balancers
-     ID                                     Name                Address                                          Type
-     ID-string                              cluster-name-mgr    cluster-name-mgr-1234567-wdc07.lb.bluemix.net    mgr
-     ...
+    State path:
 
-     Subnets
-     ID        Gateway          Datacenter
-     ID-number 10.###.###.##   wdc07
+    Outputs:
 
-     NFS Volumes
-     ID              ID-number
-     Mount Address   fsf-wdc0701b-fz.adn.networklayer.com:/ID_number/data01
-     Datacenter      wdc07
-     Capacity        20
-     Type            ENDURANCE_FILE_STORAGE
-     Tier Level      10_IOPS_PER_GB
-
-     OK
+    manager_public_ip = 169.##.###.##
+    swarm_d4ic_id = ID
+    swarm_name = cluster-name
+    ucp_password = UCP-password
     ```
     {% endraw %}
+
+   * **Provisioning Stage 2**: Check the status of the cluster infrastructure:
+     {% raw %}
+     ```bash
+      $ bx d4ic show --swarm-name cluster-name --sl-user user.name.1234567 --sl-api-key api_key
+      Getting swarm information...
+      Infrastructure Details
+
+      Swarm
+      ID           ID
+      Name         cluster-name
+      Created By   user.name.1234567
+
+      Nodes
+      ID         Name                           Public IP       Private IP      CPU   Memory   Datacenter   Infrakit Group
+      46506407   cluster-name-mgr1              169.##.###.##   10.###.###.##   2     4096     wdc07        managers
+      ...
+
+      Load Balancers
+      ID                                     Name                Address                                          Type
+      ID-string                              cluster-name-mgr    cluster-name-mgr-1234567-wdc07.lb.bluemix.net    mgr
+      ...
+
+      Subnets
+      ID        Gateway          Datacenter
+      ID-number 10.###.###.##   wdc07
+
+      NFS Volumes
+      ID              ID-number
+      Mount Address   fsf-wdc0701b-fz.adn.networklayer.com:/ID_number/data01
+      Datacenter      wdc07
+      Capacity        20
+      Type            ENDURANCE_FILE_STORAGE
+      Tier Level      10_IOPS_PER_GB
+
+      OK
+      ```
+      {% endraw %}
 
 After creating the cluster, you must [log in to Docker UCP and download the Docker UCP client certificate bundle](#use-the-universal-control-plane).
 
@@ -140,7 +140,7 @@ After creating the cluster, you must [log in to Docker UCP and download the Dock
 Docker EE for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to provide integrated container management and security, from development to production.
 
 ### Access UCP
-Before you begin, [create a cluster](#create-swarms). Note the UCP password.
+Before you begin, [create a cluster](#create-swarms). Note the its **Name** and **ID**.
 
 1. Retrieve your UCP password by using the cluster **Name** and **ID** that you made when you [created the cluster](#create-swarms).
    ```bash
@@ -156,7 +156,7 @@ Before you begin, [create a cluster](#create-swarms). Note the UCP password.
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
    ```
 
-3. Copy the **UCP URL** from the `bx d4ic list` command, and in your browser navigate to it.
+3. Copy the **UCP URL** for your cluster from the `bx d4ic list` command, and in your browser navigate to it.
 
 4. Log in to UCP. Your credentials are `admin` and the UCP password from the `docker logs` command, or the credentials that your admin created for you.
 
@@ -164,8 +164,8 @@ Before you begin, [create a cluster](#create-swarms). Note the UCP password.
 [Download the client certificate bundle](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/#download-client-certificates) to create objects and deploy services from a local Docker client.
 
 1. [Access UCP](#access-ucp).
-2. Under your user name (for example, *admin*), click *My Profile*.
-3. Click *Client Bundles* > *New Client Bundle*. A zip file is generated.
+2. Under your user name (for example, **admin**), click **My Profile**.
+3. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
 5. In a terminal, navigate and unzip the client bundle.
 
@@ -196,7 +196,7 @@ Before you begin, [create a cluster](#create-swarms). Note the UCP password.
 ### Cluster-level resources
 To review resources used within a particular Docker EE cluster, use the CLI or UCP.
 
-**CLI**: The `bx d4ic` CLI lists, modifies, and automates cluster infrastructure, as well as the initial information to log in to UCP.
+**CLI**: The `bx d4ic` CLI lists, modifies, and automates cluster infrastructure, as well as the URLs to access UCP, DTR, or exposed Docker services.
   * Use `bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key` to review a list of your clusters and their UCP URLs.
   * Use `bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key` to review details about the cluster, such as the IP address of manager nodes or the status of the cluster load balancers.
 
@@ -213,7 +213,10 @@ For logging and metric data from your swarm, you must first [enable logging for 
 ## UCP and CLIs
 Docker EE for IBM Cloud employs a flexible architecture and integration with IBM Cloud that you can use to leverage IBM Cloud resources and customize your swarm environment. Docker EE UCP exposes the standard Docker API, and as such, includes certain functions that instead should be done by using Docker EE for IBM Cloud capabilities.
 
-For example, Docker EE for IBM Cloud uses the InfraKit toolkit to support self-healing infrastructure. After you create the swarm, the cluster maintains that specified number of nodes. If a manager node fails, you do not need to promote a worker node to manager; the swarm self-recovers the manager node. Do not use UCP to modify a cluster's underlying infrastructure, such as adding or promoting worker nodes to managers.
+> Self-healing capabilities so you don't have to modify cluster infrastructure.
+>
+> Docker EE for IBM Cloud uses the InfraKit toolkit to support self-healing infrastructure. After you create the swarm, the cluster maintains that specified number of nodes. If a manager node fails, you do not need to promote a worker node to manager; the swarm self-recovers the manager node.
+> Do not use UCP to modify a cluster's underlying infrastructure, such as adding or promoting worker nodes to managers.
 
 The table outlines when to use UCP and when to use the `bx d4ic` CLI for various types of tasks.
 
@@ -238,7 +241,7 @@ For Docker EE cluster access management, use the [UCP Access Control documentati
 
 ## Delete swarms
 Before you begin:
-* Retrieve your IBM Cloud infrastructure [API username and key](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
+* Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 * Retrieve the label of your IBM Cloud infrastructure SSH key, and locate the file path of the private SSH key on your machine.
 
 To delete a swarm:

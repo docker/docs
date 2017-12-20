@@ -18,7 +18,7 @@ Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are e
 
 2. Get your IBM Cloud infrastructure credentials:
    * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), label it, and note the label.
-   * Get your [account API credentials](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
+   * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**. 
 
 3. If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) to use when using IBM Cloud services.
 
@@ -75,12 +75,10 @@ Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a
    --ssh-key filepath_to_my_ssh_key \
    --docker-ee-url my_docker-ee-url
    ```
-
-  > Customize your cluster
-  >
-  > You can customize your cluster by [using other flags and options](cli-ref.md#bx-d4ic-create) with `bx d4ic help create`, but for now, we'll just stick with a basic swarm.
-
-5. Note the cluster **Name** and **ID**.
+   > Customize your cluster
+   >
+   > You can customize your cluster by [using other flags and options](cli-ref.md#bx-d4ic-create) with `bx d4ic help create`, but for now, we'll just stick with a basic swarm.
+4. Note the cluster **Name** and **ID**.
 
 Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manager node is deployed. Then, the rest of the infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
 * To check manager node status: `docker logs cluster-name_ID`.
@@ -105,7 +103,7 @@ Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/
   $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
   ```
 
-3. Copy the **UCP URL** from the `bx d4ic list` command, and in your browser navigate to it.
+3. Copy the **UCP URL** for your swarm from the `bx d4ic list` command, and in your browser navigate to it.
 
 4. Log in to UCP. Your credentials are `admin` and the UCP password from the `docker logs` command, or the credentials that your admin created for you.
 
@@ -113,9 +111,9 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
 ### Step 4b: Download client certificates
 
-1. From the UCP GUI under your user name (for example, *admin*), click *My Profile*.
+1. From the UCP GUI under your user name (for example, **admin**), click **My Profile**.
 
-2. Click *Client Bundles* > *New Client Bundle*. A zip file is generated.
+2. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 
 3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
 
