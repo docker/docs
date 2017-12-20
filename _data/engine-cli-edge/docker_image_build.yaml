@@ -122,6 +122,12 @@ options:
   description: Do not use cache when building the image
   deprecated: false
   experimental: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
 - option: pull
   value_type: bool
   default_value: "false"

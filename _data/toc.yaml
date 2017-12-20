@@ -847,6 +847,30 @@ reference:
         title: docker tag
       - path: /engine/reference/commandline/top/
         title: docker top
+      - sectiontitle: docker trust *
+        section:
+        - path: /engine/reference/commandline/trust/
+          title: docker trust
+        - path: /engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /engine/reference/commandline/trust_key_load/
+          title: docker trust key load
+        - path: /engine/reference/commandline/trust_revoke/
+          title: docker trust revoke
+        - path: /engine/reference/commandline/trust_sign/
+          title: docker trust sign
+        - path: /engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
+        - path: /engine/reference/commandline/trust_view/
+          title: docker trust view
       - path: /engine/reference/commandline/unpause/
         title: docker unpause
       - path: /engine/reference/commandline/update/
@@ -867,6 +891,7 @@ reference:
           title: docker volume rm
       - path: /engine/reference/commandline/wait/
         title: docker wait
+
     - sectiontitle: Edge
       section:
       - path: /edge/engine/reference/run/
@@ -1195,10 +1220,24 @@ reference:
         section:
         - path: /edge/engine/reference/commandline/trust/
           title: docker trust
+        - path: /edge/engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /edge/engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /edge/engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /edge/engine/reference/commandline/trust_key_load/
+          title: docker trust key load
         - path: /edge/engine/reference/commandline/trust_revoke/
           title: docker trust revoke
         - path: /edge/engine/reference/commandline/trust_sign/
           title: docker trust sign
+        - path: /edge/engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /edge/engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /edge/engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
         - path: /edge/engine/reference/commandline/trust_view/
           title: docker trust view
       - path: /edge/engine/reference/commandline/unpause/
