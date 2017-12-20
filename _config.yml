@@ -54,6 +54,7 @@ dtr_versions:
     path: /datacenter/dtr/2.0/
 
 tablabels:
+  deep-2.0: Docker Enterprise Edition Platform 2.0
   ucp-3.0: Universal Control Plane 3.0
   ucp-2.2: Universal Control Plane 2.2
   dtr-2.5: Docker Trusted Registry 2.5

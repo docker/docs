@@ -1,26 +1,71 @@
 ---
 name: Manage usage data collection
 title: Manage usage data collection
-description: Understand and manage usage data collected by Docker EE and sent to Docker.
+description: |
+  Understand and manage usage data collected by Docker EE and sent to Docker.
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+cli_tabs:
+- version: docker-cli-linux
 keywords: enterprise, telemetry, data collection
 ---
+{% if include.ui %}
 
-Docker EE version 17.06 and later includes a telemetry plugin. The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0 and on the rest of the EE-supported Linux distributions starting with version 17.06.2-ee-5. The telemetry plugin is not part of Docker EE for Windows Server.
+{% if include.version=="ucp-3.0" %}
 
-The telemetry plugin sends system information to Docker Inc. Docker uses this information to improve Docker EE. For details about the telemetry plugin and the types of data it collects, see the
+Docker EE Engine version 17.06 and later includes a telemetry plugin.
+The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0
+and on the rest of the EE-supported Linux distributions starting with version
+17.06.2-ee-5. The telemetry plugin is not part of Docker EE for Windows Server.
+
+The telemetry plugin sends system information to Docker Inc. Docker uses this
+information to improve Docker EE. For details about the telemetry plugin and
+the types of data it collects, see the
 [`telemetry` plugin documentation](https://store.docker.com/community/images/docker/telemetry).
 
 If your Docker instance runs in an environment with no internet connectivity,
-the telemetry plugin does not collect or attempt to send any information to Docker Inc.
+the telemetry plugin does not collect or attempt to send any information to
+Docker Inc.
 
 ## Manage data collection
 
-If you do not wish to send any usage data to Docker Inc., you can disable the plugin,
-either using the Docker CLI or using Universal Control Plane.
+If you don't wish to send any usage data to Docker Inc., you can disable the
+plugin, either using the Docker CLI or using Universal Control Plane.
 
- > **Note**: If you're using Docker EE Standard or Advanced with Universal Control Plane, use Universal Control Plane (UCP) to enable and disable metrics. Only use the CLI if you do not have UCP. UCP re-enables the telemetry plugin for hosts where it was disabled with the CLI.
+> UCP and CLI
+>
+> If you're using Docker EE Standard or Advanced with Universal Control Plane
+> (UCP), use UCP to enable and disable metrics. Use the CLI only if you don't
+> have UCP. UCP re-enables the telemetry plugin for hosts where it was
+> disabled with the CLI.
+{: .warning}
 
-### Use the Docker CLI
+### Use Universal Control Plane
+
+If you use Universal Control Plane with Docker EE, do not use the Docker CLI to
+disable the telemetry plugin. Instead, you can manage the information sent to
+Docker by going to **Admin Settings** and choosing **Usage**.
+
+![UCP admin settings Usage defaults](images/usage-defaults.png){: .with-border}
+
+To disable the telemetry plugin, disable all three options and click **Save**.
+Enabling either or both of the top two options will enable the telemetry plugin.
+You can find out more about an individual option by clicking the **?** icon.
+
+> API usage metrics
+>
+> If API usage statistics are enabled, Docker gathers only aggregate stats
+> about what API endpoints are used. API payload contents aren't collected.
+{: .important}
+
+
+ {% endif %}
+ {% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
 
@@ -56,5 +101,8 @@ To disable the telemetry plugin, disable all three options and click **Save**.
 Enabling either or both of the top two options enable the telemetry plugin.
 You can find out more about an individual option by clicking the **?** icon.
 
-> **Note**: If API usage statistics are enabled, Docker only gathers aggregate stats about what API endpoints are used. API payload contents are not collected.
+> **Note**: If API usage statistics are enabled, Docker only gathers aggregate
+stats about what API endpoints are used. API payload contents are not collected.
 
+{% endif %}
+{% endif %}
