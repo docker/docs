@@ -11,7 +11,7 @@ title: Docker Store Customer FAQs
 Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID
 yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
 
-## Certification Program
+## Certification program
 
 ### What is the certification program for images and plugins, and what are some benefits?
 

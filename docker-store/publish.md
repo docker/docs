@@ -4,7 +4,7 @@ keywords: Docker, docker, store, purchase images
 title: Publish content on Docker Store
 ---
 
-## Permitted Content and Support Options
+## Permitted content and support options
 
 * Content that runs on a Docker Enterprise Edition (i.e. Docker Certified
   Infrastructure) may be published in the Store. This content may also qualify
@@ -56,7 +56,7 @@ to the diagram below for a high-level summary:
 
 ![publishing workflow](images/publish-diagram.png)
 
-## Create Great Content
+## Create great content
 
 Create your content, and follow our best practices to Dockerize it.  Keep your
 images small, your layers few, and your components secure.  Please refer to the
@@ -197,7 +197,7 @@ Store. An SLA is your commitment to your users about the nature and level of
 support you provide to them. Make sure your SLA includes support hours and
 response-time expectations, where applicable.
 
-## Security and Audit Policies
+## Security and audit policies
 
 ### Docker Security Scanning
 
@@ -261,7 +261,7 @@ To interpret the results, refer to the
 * A Repo’s listing can stay in the "hold" state for a maximum of 1 month, after
   which the listing will be revoked.
 
-### Usage Audit and Reporting
+### Usage audit and reporting
 
 Unless otherwise negotiated, an audit of activity on publisher content will be
 retained for no less than 180 days.

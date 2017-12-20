@@ -61,12 +61,12 @@ images. Any content that has explicitly been added by a commercial entity and
 has gone through a vetting process with respect to content submission and best
 practices, is only available on Docker Store.
 
-## Distribution Models
+## Distribution models
 
 The Docker Store welcomes free and open-source content, as well as software sold
 directly by publishers. We support the following commercial models:
 
-### Paid Via Docker
+### Paid via Docker
 
 This commercial model allows customers to pay for ISV content via Docker, as
 described in the Store Vendor Partner agreement. Paid-via-Docker content
@@ -74,7 +74,7 @@ includes both software that can be deployed on a host, as well as software that
 runs in the cloud and can be accessed by the customer via an agent
 (containerized cloud services, for example).
 
-### Licensed Content via Docker Store BYOL Program
+### Licensed content via Docker Store BYOL program
 
 ISVs can use Docker Store as an entitlement and distribution platform. Using
 APIs provided by Docker, ISVs can entitle users and distribute their Dockerized
@@ -87,7 +87,7 @@ Docker provides a fulfillment service so that ISVs can programmatically entitle
 users, by creating subscriptions to their content in Docker Store. For more
 information, see [Bring Your Own License (BYOL) products on Store](byol.md).
 
-### Plugins and Agents
+### Plugins and agents
 
 ISVs have the ability to create and distribute [plugin images](https://store.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise Edition deployments.
 

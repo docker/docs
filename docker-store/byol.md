@@ -4,7 +4,7 @@ keywords: Docker, docker, store, purchase images
 title: Bring Your Own License (BYOL) products on Store
 ---
 
-## What is Bring Your Own License? (BYOL)?
+## What is Bring Your Own License (BYOL)?
 
 Bring Your Own License (BYOL) allows customers with existing software licenses
 to easily migrate to the containerized version of the software you make
@@ -34,14 +34,14 @@ users, by creating subscriptions to their content in Docker Store.
 
 ## Ungated BYOL
 
-### Prerequisites and Setup
+### Prerequisites and setup
 
 To use Docker as your fulfillment service, an ISV must:
 - [Apply and be approved as a Docker Store Publisher](https://store.docker.com/publisher/signup)
 - Apply and be approved to list an Ungated BYOL product
 - Create one or more Ungated BYOL product plans, in the Docker Store Publisher center.
 
-## Creating an Ungated BYOL Plan
+## Creating an ungated BYOL plan
 
 In Plans & Pricing section of the Publisher Center, ensure the following:
 - Price/Month should be set to $0
@@ -50,7 +50,7 @@ In Plans & Pricing section of the Publisher Center, ensure the following:
 
 ## Gated BYOL
 
-### Prerequisites and Setup
+### Prerequisites and setup
 
 To use Docker Store as your fulfillment service, an ISV must:
 - Apply and be approved as a Docker Store Publisher.
@@ -61,7 +61,7 @@ Docker will provide:
 - One or more authorization tokens to the publisher for making API requests to the Docker fulfillment service.
 - A partner identifier.
 
-### Fulfillment and Orders Usage
+### Fulfillment and orders usage
 
 Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form or URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
 
@@ -92,18 +92,18 @@ directly change or cancel it, as it represents an entitlement under the control
 of the ISV. The Store UI will direct the user to contact the ISV for any desired
 changes.
 
-### Product Keys
+### Product keys
 
 If an ISV's software uses product keys, these may be supplied at the time of order creation. Once the order has been fulfilled, the product keys will be available to the user from the user's subscription detail page. The ISV's installation documentation should refer the user to look for the keys there.
 
-### API Usage
+### API usage
 
 An approved ISV only needs to make a single API request to create an order and
 obtain an access token for a user, the "Create Order" request documented below.
 Other API requests are needed only if the ISV needs to alter/cancel the order,
 or look up information about the order after it has been created. 
 
-### Gated BYOL Plan Setup
+### Gated BYOL plan setup
 
 Once a publisher has been onboarded to create an gated BYOL plan, the publisher center will begin to allow them to set up a new, unpublished plan with the gated BYOL option:
 
@@ -114,7 +114,7 @@ In this stage of the publisher flow, note the **Pull Requirements** selection a
 include an external reference to where a customer must go to acquire their
 license from the publisher.
 
-## API Reference for ISVs
+## API reference for ISVs
 
 ### Endpoint, Authorization, Content
 
@@ -135,7 +135,7 @@ and alert Docker if it has been compromised or needs replacement.
 
 All request and response bodies must/will be encoded with JSON using UTF-8.
 
-### Data Structures
+### Data structures
 
 ### OrderCreateRequest (object)
 
@@ -240,7 +240,7 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 
 #### Requests
 
-#### Create Order [POST]
+#### Create order [POST]
 
 Create an order.
 
@@ -248,7 +248,7 @@ Create an order.
 
   * Attributes (OrderCreateRequest)
 
-#### List Orders by Token [GET /orders{?token}]
+#### List orders by token [GET /orders{?token}]
 
 Retrieve an order with the given token. An empty array will be returned if no orders for the given token are found.
 
@@ -257,7 +257,7 @@ Retrieve an order with the given token. An empty array will be returned if no or
   * token: `DOCKER-TOKEN-2324234` (string, required) - The order token.
 * Request (application/json)
 
-#### List Orders by Partner [GET /orders{?partner\_id}]
+#### List orders by partner [GET /orders{?partner\_id}]
 
 List orders associated with the the given partner. An empty array will be returned if there are no orders associated with the partner.
 
@@ -273,7 +273,7 @@ List orders associated with the the given partner. An empty array will be return
 * Parameters
   * order\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order id.
 
-#### Get Order [GET]
+#### Get order [GET]
 
 Retrieve an order by id.
 
@@ -282,7 +282,7 @@ Retrieve an order by id.
 
   * Attributes (Order)
 
-#### Update Order [PATCH]
+#### Update order [PATCH]
 
 A number of operations can be performed by `PATCH`ing an order:
 
@@ -303,12 +303,12 @@ A number of operations can be performed by `PATCH`ing an order:
 
   * Attributes (Order)
 
-### Order Item Product Keys [/order-items/{order\_item\_id}/product-keys]
+### Order item product keys [/order-items/{order\_item\_id}/product-keys]
 
 * Parameters
   * order\_item\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order item id.
 
-#### List Product Keys for Order Item [GET]
+#### List product keys for order item [GET]
 
 Retrieve all product keys for an order item by id. An empty array will be returned if the order item does not have any product keys.
 
@@ -317,7 +317,7 @@ Retrieve all product keys for an order item by id. An empty array will be return
 
   * Attributes (array[ProductKey])
 
-#### Create Product Key for Order Item [POST]
+#### Create product key for order item [POST]
 
 Create a product key for an existing order item. Note that adding new product keys will not affect existing product keys.
 
@@ -328,16 +328,16 @@ Create a product key for an existing order item. Note that adding new product ke
 
   * Attributes (ProductKey)
 
-## Group Product Keys
+## Group product keys
 
 A product key is a resource attached to an order item that a publisher manages on behalf of their customer. When an order is fulfilled and subscriptions are created for a customer, the product keys associated with that order item can be accessed by the customer.
 
-### Product Key [/product-keys/{product\_key\_id}]
+### Product key [/product-keys/{product\_key\_id}]
 
 * Parameters
   * product\_key\_id: `23443-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The product key id.
 
-#### Get Product Key [GET]
+#### Get product key [GET]
 
 Retrieve a product key by id.
 
@@ -346,7 +346,7 @@ Retrieve a product key by id.
 
   * Attributes (ProductKey)
 
-#### Update Product Key [PUT]
+#### Update product key [PUT]
 
 Update a product key by id. All fields shown are required.
 
@@ -357,13 +357,13 @@ Update a product key by id. All fields shown are required.
 
   * Attributes (ProductKey)
 
-#### Delete Product Key [DELETE]
+#### Delete product key [DELETE]
 
 Delete a product key by id.
 
 * Request (application/json)
 * Response 204 (application/json)
 
-## What's Next?
+## What's next?
 
 More information about the publishing flow can be found [here](publish.md).

@@ -4,7 +4,7 @@ keywords: Docker, docker, store, purchase images
 title: Docker Store Publisher FAQs
 ---
 
-## Certification Program
+## Certification program
 
 ### What is the certification program for images and plugins, and what are some benefits?
 
@@ -18,7 +18,7 @@ technology in containers with support from both Docker and the publisher. The
 explains the Technology Partner program and the Docker Certification Program for
 Infrastructure, Images, and Plugins in more detail.
 
-## Publisher Signup and Approval
+## Publisher signup and approval
 
 ### How do I get started with the publisher signup and approval process?
 
@@ -43,7 +43,7 @@ Publisher’s product page will be updated to reflect Certified status.
 
 Yes. You can submit your content as a team.
 
-## Product Submission
+## Product submission
 
 ### How long does it typically take to have an image approved?
 
@@ -127,8 +127,8 @@ invite-only rollouts (included in BYOL documentation being addressed by Bryan
 Lee). Via the invite-only rollout, only selected users can get entitled to
 content, but the product page will be discoverable by everyone).
 
-## Licensing, Terms and Conditions, and Pricing
-> Note: Check out BYOL Document first! (@kickingthetv TBD)
+## Licensing, terms and conditions, and pricing
+> **Note**: Check out BYOL Document first! (@kickingthetv TBD)
 
 ### What options are presented to users to pull an image?
 
@@ -163,7 +163,7 @@ and stop the container. (_We do not build anything into the container, it is up 
 Publisher can provide two different tokens or let customers use the same token
 and internally map the customer to a paid plan vs a free trial.
 
-### What are Docker Store Pricing plans like? Can I have metered pricing?
+### What are Docker Store pricing plans like? Can I have metered pricing?
 
 As a publisher you can charge a subscription fee every month in USD. The amount
 is determined by you. We are working on other pricing options. If you have
@@ -204,7 +204,7 @@ Here are a few screenshots that illustrate the preview experience for markdown c
 Product Description preview [screenshot](https://user-images.githubusercontent.com/2453622/32344591-9cd6b456-bfc4-11e7-9505-1f7e8235f812.png).
 Install instructions description preview [screenshot](https://user-images.githubusercontent.com/2453622/32344592-9cf2e234-bfc4-11e7-9e60-d773b62eae07.png).
 
-## Misc Features
+## Other FAQs
 
 ### Can a publisher respond to a review of their product?
 
