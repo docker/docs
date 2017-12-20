@@ -4,8 +4,6 @@ keywords: Docker, docker, store, publishers, publish images
 title: Docker Store overview
 ---
 
-### What is Docker Store?
-
 For developers and operators, Docker Store is the best way to discover
 high-quality Docker content.
 
@@ -38,7 +36,7 @@ experience the following benefits:
   “Docker Certified” badge within the Docker Store (which can be used in
   external marketing).
 
-### How is Docker Store different from Docker Hub? What about Official Images?
+## How is Docker Store different from Docker Hub? What about Official Images?
 
 Docker Hub contains community content - these are images that have been created
 by entities that are not vetted or curated. You can think of the community
@@ -56,12 +54,12 @@ images are maintained as open source community projects. All official images
 adhere to strict guidelines but are not necessarily backed by a commercial
 entity.
 
-*Note*: Docker Hub and Docker Store leverage the same backend, the Docker Public
-*Registry. In general - all publicly available community content should be
-*visible via both Docker Hub and Docker Store, and this includes official
-*images. Any content that has explicitly been added by a commercial entity and
-*has gone through a vetting process with respect to content submission and best
-*practices, is only available on Docker Store.
+> **Note**: Docker Hub and Docker Store leverage the same backend, the Docker Public
+Registry. In general - all publicly available community content should be
+visible via both Docker Hub and Docker Store, and this includes official
+images. Any content that has explicitly been added by a commercial entity and
+has gone through a vetting process with respect to content submission and best
+practices, is only available on Docker Store.
 
 ## Distribution Models
 

@@ -171,7 +171,7 @@ discoverable:
 11. Installation instructions
 12. Link to license agreements
 
-#### How the manifest information is displayed in the UI
+### How the manifest information is displayed in the UI
 
 (Please note that this is an approximate representation. We frequently make
 enhancements to the look and some elements might shift around.)

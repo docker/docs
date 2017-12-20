@@ -114,9 +114,9 @@ In this stage of the publisher flow, note the **Pull Requirements** selection a
 include an external reference to where a customer must go to acquire their
 license from the publisher.
 
-# API Reference for ISVs
+## API Reference for ISVs
 
-## Endpoint, Authorization, Content
+### Endpoint, Authorization, Content
 
 All API requests should be made to: <https://store.docker.com/api/fulfillment/v1/...>
 
@@ -135,11 +135,11 @@ and alert Docker if it has been compromised or needs replacement.
 
 All request and response bodies must/will be encoded with JSON using UTF-8.
 
-## Data Structures
+### Data Structures
 
-## OrderCreateRequest (object)
+### OrderCreateRequest (object)
 
-### Properties
+#### Properties
 
 * partner\_id (PartnerID, required) - Business entity creating this order.
 * customer (Customer, optional) - Order customer information.
@@ -147,9 +147,9 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * token (string, optional) - If supplied, the customer access token for this order.
 * metadata (OrderMetadata, optional) - Key/value strings to be stored with order.
 
-## Order (object)
+### Order (object)
 
-### Properties
+#### Properties
 
 * order\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order id.
 * token: `DOCKER-TOKEN-234` (string, required) - The access token created for this order by the fulfillment service.
@@ -165,9 +165,9 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * created: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 order creation timestamp.
 * updated: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 order updated timestamp.
 
-## OrderItem (object)
+### OrderItem (object)
 
-### Properties
+#### Properties
 
 * id: `390745e6-faba-11e6-bc64-92361f002671` (string, required) - The order item id.
 * product\_id: `bf8f7c15-0c3b-4dc5-b5b3-1595ba9b589e` (string, required) - The Store product id associated with the order item.
@@ -178,9 +178,9 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * metadata (OrderItemMetadata, optional) - Any key/value strings given for this item in the order creation request.
 * product\_keys (array[ProductKey], optional) - Product keys associated with the order item.
 
-## OrderItemCreateRequest (object)
+### OrderItemCreateRequest (object)
 
-### Properties
+#### Properties
 
 * sku: ZZ456A (string, optional) - The order item SKU.
 * product\_id: `bf8f7c15-0c3b-4dc5-b5b3-1595ba9b589e` (string, optional) - The Store product id associated with the order item.
@@ -191,16 +191,16 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * metadata (OrderItemMetadata, optional) - Mapping of key/value strings for this order item.
 * product\_keys (array[ProductKeyCreateRequest], optional) - Product keys associated with the order item.
 
-## PricingComponent (object)
+### PricingComponent (object)
 
-### Properties
+#### Properties
 
 * name: `Nodes` (string, required) - The pricing component slug. For example Nodes or Engines.
 * value: 25 (number, required) - The quantity for the given pricing component. For example 1 support, 15 docker engines, or 5 private repos.
 
-## ProductKeyCreateRequest (object)
+### ProductKeyCreateRequest (object)
 
-### Properties
+#### Properties
 
 * label: `Production` (string, required) - The human-readable label for the given product key that will be displayed to the customer.
 * media\_type: `text/plain` (enum, required) - An accepted IANA Media Type for this product key. This suggests to the user interface how to display the product key for the customer to use.
@@ -209,9 +209,9 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * file\_name: `production-key.txt` (string, optional) - The file name for the downloaded file if the product key is a blob that requires or allows download by the customer.
 * value: `AbKe13894Aksel` (string, required) - The contents of the product key as a string. If the value is blob that cannot be represented as a string, the contents will be encoded as a Base64 string.
 
-## ProductKey (object)
+### ProductKey (object)
 
-### Properties
+#### Properties
 
 * id: `390745e6-faba-11e6-bc64-92361f002671` (string, required) - The product key id.
 * order\_item\_id: `85717ec8-6fcf-4fd9-9dbf-051af0ce1eb3` (string, required) - The id of the order item that this product key is associated with.
@@ -224,23 +224,23 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * created: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 product key creation timestamp.
 * updated: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 product key updated timestamp.
 
-## OrderFulfillmentRequest (object)
+### OrderFulfillmentRequest (object)
 
-### Properties
+#### Properties
 
 * state: `fulfilled` (string, required) - The desired order state. Only a fulfilled state may be specified.
 * docker\_id: `a76808b87b6c11e68b7786f30ca893d3` (string, required) - The docker id (user or org id) to fulfill the order for.
 * eusa\_accepted: true (boolean, required) - Whether or not the EUSA associated with the order has been accepted
 
-## OrderCancellationRequest (object)
+### OrderCancellationRequest (object)
 
-### Properties
+#### Properties
 
 * state: `cancelled` (string, required) - The desired order state. Only a cancelled state may be specified.
 
-### Requests
+#### Requests
 
-### Create Order [POST]
+#### Create Order [POST]
 
 Create an order.
 
@@ -248,7 +248,7 @@ Create an order.
 
   * Attributes (OrderCreateRequest)
 
-### List Orders by Token [GET /orders{?token}]
+#### List Orders by Token [GET /orders{?token}]
 
 Retrieve an order with the given token. An empty array will be returned if no orders for the given token are found.
 
@@ -257,7 +257,7 @@ Retrieve an order with the given token. An empty array will be returned if no or
   * token: `DOCKER-TOKEN-2324234` (string, required) - The order token.
 * Request (application/json)
 
-### List Orders by Partner [GET /orders{?partner\_id}]
+#### List Orders by Partner [GET /orders{?partner\_id}]
 
 List orders associated with the the given partner. An empty array will be returned if there are no orders associated with the partner.
 
@@ -268,12 +268,12 @@ List orders associated with the the given partner. An empty array will be return
 
   * Attributes (array[Order])
 
-## Order [/orders/{order\_id}]
+### Order [/orders/{order\_id}]
 
 * Parameters
   * order\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order id.
 
-### Get Order [GET]
+#### Get Order [GET]
 
 Retrieve an order by id.
 
@@ -282,7 +282,7 @@ Retrieve an order by id.
 
   * Attributes (Order)
 
-### Update Order [PATCH]
+#### Update Order [PATCH]
 
 A number of operations can be performed by `PATCH`ing an order:
 
@@ -303,12 +303,12 @@ A number of operations can be performed by `PATCH`ing an order:
 
   * Attributes (Order)
 
-## Order Item Product Keys [/order-items/{order\_item\_id}/product-keys]
+### Order Item Product Keys [/order-items/{order\_item\_id}/product-keys]
 
 * Parameters
   * order\_item\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order item id.
 
-### List Product Keys for Order Item [GET]
+#### List Product Keys for Order Item [GET]
 
 Retrieve all product keys for an order item by id. An empty array will be returned if the order item does not have any product keys.
 
@@ -317,7 +317,7 @@ Retrieve all product keys for an order item by id. An empty array will be return
 
   * Attributes (array[ProductKey])
 
-### Create Product Key for Order Item [POST]
+#### Create Product Key for Order Item [POST]
 
 Create a product key for an existing order item. Note that adding new product keys will not affect existing product keys.
 
@@ -328,16 +328,16 @@ Create a product key for an existing order item. Note that adding new product ke
 
   * Attributes (ProductKey)
 
-# Group Product Keys
+## Group Product Keys
 
 A product key is a resource attached to an order item that a publisher manages on behalf of their customer. When an order is fulfilled and subscriptions are created for a customer, the product keys associated with that order item can be accessed by the customer.
 
-## Product Key [/product-keys/{product\_key\_id}]
+### Product Key [/product-keys/{product\_key\_id}]
 
 * Parameters
   * product\_key\_id: `23443-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The product key id.
 
-### Get Product Key [GET]
+#### Get Product Key [GET]
 
 Retrieve a product key by id.
 
@@ -346,7 +346,7 @@ Retrieve a product key by id.
 
   * Attributes (ProductKey)
 
-### Update Product Key [PUT]
+#### Update Product Key [PUT]
 
 Update a product key by id. All fields shown are required.
 
@@ -357,7 +357,7 @@ Update a product key by id. All fields shown are required.
 
   * Attributes (ProductKey)
 
-### Delete Product Key [DELETE]
+#### Delete Product Key [DELETE]
 
 Delete a product key by id.
 

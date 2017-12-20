@@ -4,16 +4,16 @@ keywords: Docker, docker, store, purchase images
 title: Docker Store Customer FAQs
 ---
 
-# Customer FAQs
+## Customer FAQs
 
-#### How do I log in to the Docker Store?
+### How do I log in to the Docker Store?
 
 Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID
 yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
 
-# Certification Program
+## Certification Program
 
-#### What is the certification program for images and plugins, and what are some benefits?
+### What is the certification program for images and plugins, and what are some benefits?
 
 The Docker Certification program for Infrastructure, Images, and Plugins is
 designed for both technology partners and enterprise customers to recognize
@@ -24,7 +24,7 @@ technology in containers with support from both Docker and the publisher.
 
 ## End user experience
 
-#### Why do I see the pull command for a few products and no pull command in other products?
+### Why do I see the pull command for a few products and no pull command in other products?
 
 If a publisher publishes multiple images as part of their plan - we do not
 display the pull command. The pull command visual is exclusively for submissions
