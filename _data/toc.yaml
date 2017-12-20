@@ -81,14 +81,14 @@ guides:
       title: Deploy apps
     - path: /docker-for-ibm-cloud/binding-services/
       title: Bind IBM Cloud services
-      - sectiontitle: Set up a registry to use images in clusters
-        section:
-        - path: /docker-for-ibm-cloud/registry/
-          title: Registry Overview
-        - path: /docker-for-ibm-cloud/dtr-ibm-cos/
-          title: Set up DTR to use IBM Cloud Object Storage
-        - path: /docker-for-ibm-cloud/ibm-registry
-          title: Use images in IBM Cloud Container Registry
+    - sectiontitle: Set up a registry to use images in clusters
+      section:
+      - path: /docker-for-ibm-cloud/registry/
+        title: Registry Overview
+      - path: /docker-for-ibm-cloud/dtr-ibm-cos/
+        title: Set up DTR to use IBM Cloud Object Storage
+      - path: /docker-for-ibm-cloud/ibm-registry
+        title: Use images in IBM Cloud Container Registry
     - path: /docker-for-ibm-cloud/persistent-data-volumes/
       title: Save persistent data in storage volumes
     - path: /docker-for-ibm-cloud/load-balancer/
