@@ -19,9 +19,9 @@ Before you begin:
    * Example [docker-service.yaml file](https://github.com/docker/docker.github.io/tree/master/docker-for-ibm-cloud/scripts/docker-stack.yaml)
 
 There are three main steps in binding IBM Cloud services to your Docker EE for IBM Cloud cluster:
-1. [Create a Docker secret](#step-1--create-a-Docker-secret).
-2. [Build a Docker image that uses the IBM Cloud service](#step-2--build-a-Docker-image).
-3. [Create a Docker service](#step-3--create-a-Docker-service).
+1. Create a Docker secret.
+2. Build a Docker image that uses the IBM Cloud service.
+3. Create a Docker service.
 
 ### Step 1: Create a Docker secret
 

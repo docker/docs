@@ -52,7 +52,7 @@ Delete a Docker EE swarm cluster.
 
 ### Usage
 ```bash
-$ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-label SSH_KEY_LABEL --ssh-key SSH_KEY_PATH [--insecure] [--force]
+$ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-key SSH_KEY_PATH [--insecure] [--force]
 ```
 
 ### Options
@@ -61,7 +61,6 @@ $ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAM
 |---|---|---|---|
 | `--sl-user`, `-u` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **API Username** under the API Access Information section. | | Required |
 | `--sl-api-key`, `-k` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **Authentication Key** under the API Access Information section. | | Required |
-| `--ssh-label`, `--label` | Your IBM Cloud infrastructure SSH key label for the manager node. To create a key, [log in to IBM Cloud infrastructure](https://control.softlayer.com/) and select **Devices > Manage > SSH Keys > Add**. Copy the key label and insert it here. | | Required |
 | `--ssh-key` | The path to the SSH key on your local client that matches the SSH key label in your IBM Cloud infrastructure account. | | Required |
 | `--swarm-name`, `--name` | The name of your cluster. If the name is not provided, you must provide the ID. | | Required |
 | `--id` | The ID of your cluster. If the ID is not provided, you must provide the name. | | Required |
