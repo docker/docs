@@ -87,7 +87,7 @@ guides:
         title: Registry Overview
       - path: /docker-for-ibm-cloud/dtr-ibm-cos/
         title: Set up DTR to use IBM Cloud Object Storage
-      - path: /docker-for-ibm-cloud/ibm-registry
+      - path: /docker-for-ibm-cloud/ibm-registry/
         title: Use images in IBM Cloud Container Registry
     - path: /docker-for-ibm-cloud/persistent-data-volumes/
       title: Save persistent data in storage volumes

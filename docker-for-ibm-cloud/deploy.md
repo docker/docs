@@ -6,7 +6,7 @@ title: Deploy your app on Docker EE for IBM Cloud
 
 ## Deploy apps
 Before you begin:
-* Ensure that you [completed the account prerequisites](index.md#prerequisites).
+* Ensure that you [completed the account prerequisites](/docker-for-ibm-cloud/index.md).
 * [Create a swarm](administering-swarms.md#create-swarms).
 * [Set the environment variables to your swarm](administering-swarms.md#download-client-certificates).
 * Review [best practices for creating a Dockerfile](/engine/userguide/eng-image/dockerfile_best-practices/) for your app's image.

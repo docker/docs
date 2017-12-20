@@ -6,7 +6,9 @@ title: Modify your Docker EE for IBM Cloud swarm infrastructure
 
 ## Scale workers
 
-Before you begin, [create a cluster](administering-swarms.md#create-swarms).
+Before you begin:
+* [Create a cluster](administering-swarms.md#create-swarms).
+* Retrieve your IBM Cloud infrastructure [API username and key](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
 
 Steps:
 1. Connect to your Docker EE for IBM Cloud swarm. Navigate to the directory where you [downloaded the UCP credentials](administering-swarms.md#download-client-certificates) and run the script. For example:
@@ -15,7 +17,7 @@ Steps:
    $ cd filepath/to/certificate/repo && source env.sh
    ```
 
-2. Note the name of the cluster that you want to scale. If you have not [set your infrastructure credentials as environment variables](index.md#set-infrastructure-environment-variables), authenticate in the command:
+2. Note the name of the cluster that you want to scale:
 
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key

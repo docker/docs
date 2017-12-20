@@ -14,7 +14,7 @@ Create a Docker EE swarm cluster in IBM Cloud.
 > For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes. If you need more nodes than this, work with your Docker representative to acquire an additional Docker EE license.
 
 Before you begin:
-* [Complete the setup requirements](index.md).
+* [Complete the setup requirements](/docker-for-ibm-cloud/index.md).
 * Make sure that you have the appropriate [IBM Cloud infrastructure permissions](faqs.md).
 * Retrieve your IBM Cloud infrastructure [API username and key](https://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key).
 * Create an SSH key, add the public SSH key to IBM Cloud infrastructure and note its label, and locate the file path of the private SSH key on your machine.
@@ -219,7 +219,7 @@ The table outlines when to use UCP and when to use the `bx d4ic` CLI for various
 
 | Task type | UCP or `bx d4ic` CLI | Description |
 | --- | --- | --- |
-| Swarm nodes | CLI | [Create](#create-swarms), update, modify, and delete[#deleting_swarms] swarm nodes. |
+| Swarm nodes | CLI | [Create](#create-swarms), update, modify, and [delete](#delete-swarms) swarm nodes. |
 | Certificates | UCP and CLI | From UCP, [download client bundles](#download-client-certificates) after swarm is created in CLI, and every time certificates are changed. From the CLI, run the script from the client bundle downloaded from UCP. |
 | Labels | UCP | [Add and modify labels](/engine/userguide/labels-custom-metadata/). If the swarm nodes are removed or modified (such as during a rolling update), the labels must be re-created. |
 | Access | UCP | Control access and grant permissions by users, roles, and teams. |

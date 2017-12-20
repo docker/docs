@@ -103,8 +103,7 @@ Before you begin:
 2. [Add or an import an SSL certificate](https://knowledgelayer.softlayer.com/topic/ssl-certificates) to use. In your infrastructure account, you can access the page from **Security** > **SSL** > **Certificates**.
 3. Note the certificate **Common Name**.
 
-**Start a service that uses SSL termination**
-Start a service that listens on ports `80` and `443`. The service load balancer provides SSL termination on port `443` that uses your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
+**Start a service that uses SSL termination**: Start a service that listens on ports `80` and `443`. The service load balancer provides SSL termination on port `443` that uses your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
 
 In the label, you must append `@HTTPS:port` to list the ports you want to expose.
 
@@ -121,8 +120,7 @@ To specify other or multiple ports, append them as follows:
 * Links HTTPS to port 444: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444`
 * Links HTTPS to ports 444 and 8080: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444,HTTPS:8080`
 
-**Set a health check path**
-By default, the service load balancer sets a health check path to `/`. If the service cannot respond with a 200 message to a `GET` request on the `/` path, then you must include a health monitor path label when you create the service. For example:
+**Set a health check path**: By default, the service load balancer sets a health check path to `/`. If the service cannot respond with a 200 message to a `GET` request on the `/` path, then you must include a health monitor path label when you create the service. For example:
 
 ```bash
 --label com.ibm.d4ic.healthcheck.path=/demo/hello@443
@@ -130,8 +128,7 @@ By default, the service load balancer sets a health check path to `/`. If the se
 
 When the route is published, the health check is set to the path that you specify in the label. Choose a path that can respond with a 200 message to a `GET` request.
 
-**Example command**
-The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is exposed on a different port than the default and includes a health check path. It is based on the `vfarcic/go-demo` image.
+**Example command**: The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is exposed on a different port than the default and includes a health check path. It is based on the `vfarcic/go-demo` image.
 
 ```bash
 $ docker service create --name go-demo \

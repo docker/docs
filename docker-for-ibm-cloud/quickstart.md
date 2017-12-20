@@ -1,3 +1,9 @@
+---
+description: Docker EE for IBM Cloud (Beta) Quick Start
+keywords: ibm, ibm cloud, quickstart, iaas, tutorial
+title: Docker EE for IBM Cloud (Beta) Quick Start
+---
+
 # Docker Enterprise Edition for IBM Cloud (Beta) Quick Start
 
 Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are enhanced with the full suite of secure IBM Cloud platform, infrastructure, and Watson services? Great! Let's get you started.

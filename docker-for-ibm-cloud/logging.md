@@ -12,7 +12,7 @@ You can enable Docker Enterprise Edition for IBM Cloud to send logging and metri
 ## Enable logging and metrics
 By default, logging and metrics are disabled. After you enable logging and metrics, containers are deployed to your cluster and begin to transmit data to IBM Cloud [Log Analysis](https://console.bluemix.net/docs/services/CloudLogAnalysis/log_analysis_ov.html#log_analysis_ov) and [Monitoring](https://console.bluemix.net/docs/services/cloud-monitoring/monitoring_ov.html#monitoring_ov) services.
 
-Before you begin, make sure that you [installed the IBM Cloud CLI and Docker for IBM Cloud plug-in](index.md).
+Before you begin, make sure that you [installed the IBM Cloud CLI and Docker for IBM Cloud plug-in](/docker-for-ibm-cloud/index.md).
 
 To enable logging and metrics:
 
@@ -31,7 +31,7 @@ To enable logging and metrics:
    $ cd filepath/to/certificate/repo && source env.sh
    ```
 
-4. Get the name of your cluster. If you did not [set your environment variables](index.md#set-infrastructure-environment-variables), include your IBM Cloud infrastructure credentials.
+4. Get the name of your cluster. If you did not [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables), include your IBM Cloud infrastructure credentials.
     ```bash
     $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
     ```
@@ -62,5 +62,5 @@ Use the following links to access Kibana and Grafana for data transmitted to IBM
 
 | Region | Logging | Metrics|
 | --- | --- | --- |
-| US South | https://logging.ng.bluemix.net/ | https://metrics.ng.bluemix.net/ |
-| United Kingdom | https://logmet.eu-gb.bluemix.net/ | https://metrics.eu-gb.bluemix.net/ |
+| US South | [https://logging.ng.bluemix.net/](https://logging.ng.bluemix.net/) | [https://metrics.ng.bluemix.net/](https://metrics.ng.bluemix.net/) |
+| United Kingdom | [https://logmet.eu-gb.bluemix.net/](https://logmet.eu-gb.bluemix.net/)| [https://metrics.eu-gb.bluemix.net/](https://metrics.eu-gb.bluemix.net/) |
