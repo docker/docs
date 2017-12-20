@@ -211,10 +211,9 @@ available with Docker Engine version **1.13.0+**.  Version 2.2 files are
 supported by **Compose 1.13.0+**. This version also allows you to specify
 default scale numbers inside the service's configuration.
 
-Introduces the following additional parameters:
+Introduces the following additional parameter:
 
 - [`init`](compose-file-v2.md#init)
-- [`scale`](compose-file-v2.md#scale)
 
 ### Version 2.3
 
