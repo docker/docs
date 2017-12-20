@@ -429,6 +429,12 @@ options:
   description: Tune container pids limit (set -1 for unlimited)
   deprecated: false
   experimental: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
 - option: privileged
   value_type: bool
   default_value: "false"
