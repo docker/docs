@@ -1,11 +1,22 @@
 ---
 title: Universal Control Plane overview
-description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
-  management solution from Docker.
-keywords: ucp, overview, orchestration, clustering
+description: |
+  Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+next_steps:
+- path: admin/install/
+  title: Install UCP
+- path: /enterprise/docker-ee-architecture/
+  title: Docker EE Platform 2.0 architecture
+keywords: ucp, overview, orchestration, cluster
 redirect_from:
 - /ucp/
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
 solution from Docker. You install it on-premises or in your virtual private
@@ -25,31 +36,6 @@ from a centralized place.
 You can manage and monitor your container cluster using a graphical UI.
 
 ![](../../../images/try-ddc-2.png){: .with-border}
-
-Since UCP exposes the standard Docker API, you can continue using the tools
-you already know, including the Docker CLI client, to deploy and manage your
-applications.
-
-As an example, you can use the `docker info` command to check the
-status of a cluster managed by UCP:
-
-```none
-$ docker info
-
-Containers: 38
-Running: 23
-Paused: 0
-Stopped: 15
-Images: 17
-Server Version: 17.06
-...
-Swarm: active
-NodeID: ocpv7el0uz8g9q7dmw8ay4yps
-Is Manager: true
-ClusterID: tylpv1kxjtgoik2jnrg8pvkg6
-Managers: 1
-…
-```
 
 ## Deploy, manage, and monitor
 
@@ -74,7 +60,41 @@ are safe and can't be tampered with.
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
-## Where to go next
+{% endif %}
+{% endif %}
 
-* [Docker EE Platform 2.0 architecture](/enterprise/docker-ee-architecture.md)
-* [Install UCP](admin/install/index.md)
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
+
+Because UCP exposes the standard Docker API, you can continue using the tools
+you already know, including the Docker CLI client, to deploy and manage your
+applications.
+
+For example, you can use the `docker info` command to check the status of a
+cluster that's managed by UCP:
+
+```bash
+docker info
+```
+
+This command produces the output that you expect from the Docker EE Engine:
+
+```bash
+Containers: 38
+Running: 23
+Paused: 0
+Stopped: 15
+Images: 17
+Server Version: 17.06
+...
+Swarm: active
+NodeID: ocpv7el0uz8g9q7dmw8ay4yps
+Is Manager: true
+ClusterID: tylpv1kxjtgoik2jnrg8pvkg6
+Managers: 1
+…
+```
+
+{% endif %}
+{% endif %}
