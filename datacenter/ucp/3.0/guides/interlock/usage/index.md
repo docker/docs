@@ -3,7 +3,12 @@ title: Basic deployment
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 Once Interlock has been deployed you are now ready to launch and publish applications.
 Using [Service Labels](https://docs.docker.com/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label)
@@ -59,3 +64,5 @@ demo scaled to 4
 
 The four service replicas will be configured as upstreams.  The load balancer will balance traffic
 across all service replicas.
+
+{% endif %}

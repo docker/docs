@@ -3,7 +3,12 @@ title: Context/path based routing
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service using context or path based routing.
 
@@ -55,3 +60,5 @@ $> curl -vs -H "Host: demo.local" http://127.0.0.1/app/
 < x-upstream-response-time: 1510928717.306
 ...
 ```
+
+{% endif %}

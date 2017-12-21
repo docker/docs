@@ -3,7 +3,12 @@ title: Deploy Interlock for Production
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 ## Production Deployment
 In this section you will find documentation on configuring Interlock
@@ -82,3 +87,5 @@ addresses of the dedicated ingress workers.  This will direct all traffic to the
 
 You have now configured Interlock for a dedicated ingress production environment.  See the [Configuration](/config/interlock/) section
 if you want to continue tuning.
+
+{% endif %}

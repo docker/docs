@@ -3,7 +3,12 @@ title: Websockets
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service and configure support for websockets.
 
@@ -33,3 +38,5 @@ This uses the browser for websocket communication so you will need to have an en
 Interlock will detect once the service is available and publish it.  Once the tasks are running
 and the proxy service has been updated the application should be available via `http://demo.local`.  Open
 two instances of your browser and you should see text on both instances as you type.
+
+{% endif %}

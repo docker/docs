@@ -3,7 +3,12 @@ title: Interlock service labels
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 Applications that publish using Interlock use service labels to configure how they are published.
 The following table describes the available options and what they do.
@@ -25,3 +30,5 @@ The following table describes the available options and what they do.
 | `com.docker.lb.sticky_session_cookie`  | Cookie to use for sticky sessions                                                                                                                | `none`                 |
 | `com.docker.lb.redirects`              | Semi-colon separated list of redirects to add in the format of `<source>,<target>`.  Example: (`http://old.example.com,http://new.example.com;`) | `none`                 |
 | `com.docker.lb.ssl_passthrough`        | Enable SSL passthrough                                                                                                                           | `false`                |
+
+{% endif %}

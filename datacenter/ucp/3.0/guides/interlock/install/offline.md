@@ -3,7 +3,12 @@ title: Deploy Interlock offline
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 To install Interlock on a Docker cluster without internet access the Docker images will
 need to be loaded.  This guide will show how to export the images from a local Docker
@@ -36,3 +41,5 @@ $> docker load < nginx:alpine.tar
 
 After running on each node, you can continue to the [Deployment](index.md#deployment) section to
 continue the installation.
+
+{% endif %}

@@ -3,7 +3,12 @@ title: Interlock architecture
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 The following are definitions that are used:
 
@@ -37,3 +42,5 @@ are configured using the data created by the corresponding extension service.
 
 Interlock manages both the extension and proxy service updates for both configuration changes
 and application service deployments.  There is no intervention from the operator required.
+
+{% endif %}
