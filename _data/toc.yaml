@@ -1571,8 +1571,6 @@ manuals:
           title: UCP configuration file
         - path: /datacenter/ucp/3.0/guides/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
-        - path: /datacenter/ucp/3.0/guides/admin/configure/use-domain-names-to-access-services/
-          title: Use domain names to access services
         - path: /datacenter/ucp/3.0/guides/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /datacenter/ucp/3.0/guides/admin/configure/manage-and-deploy-private-images/
@@ -1707,6 +1705,8 @@ manuals:
         section:
         - title: Get started
           path: /datacenter/ucp/3.0/guides/interlock/install/
+        - title: Manual deployment
+          path: /datacenter/ucp/3.0/guides/interlock/install/manual-deployment/
         - title: Production
           path: /datacenter/ucp/3.0/guides/interlock/install/production/
         - title: Offline install

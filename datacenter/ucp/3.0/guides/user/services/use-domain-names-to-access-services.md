@@ -14,9 +14,8 @@ to users at `http://wordpress.example.org`.
 
 ## Enable the HTTP routing mesh
 
-Before you start, make sure an administrator user has
-[enabled the HTTP routing mesh service](../../admin/configure/use-domain-names-to-access-services.md).
-You also need permissions to attach services to the `ucp-hrm` network.
+Before you start, make sure an administrator user has enabled the HTTP routing
+mesh service You also need permissions to attach services to the `ucp-hrm` network.
 
 ## Deploy WordPress
 
