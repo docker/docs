@@ -34,7 +34,7 @@ Steps:
 4. Get the public IP address of the leader node, replacing _my_swarm_ with the swarm you want to scale:
 
     ```bash
-    $ bx d4ic show my_swarm --sl-user user.name.1234567 --sl-api-key api_key
+    $ bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key
     ```
 
 5. Connect to the leader node using the _leaderIP_ you previously retrieved:

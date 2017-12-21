@@ -44,7 +44,7 @@ Log in to Docker (whether by the registry log-in, token, or other method) before
 ## Create a container using an IBM Cloud Container Registry image
 You can create a container using a registry image. You might want to run the image locally to test it before [creating a swarm service](#create-a-swarm-service-using-an-ibm-cloud-container-registry-image) based on the image.
 
-**Before you begin**:
+Before you begin:
 
 - [Install the registry CLI and set up a namespace](#install-the-cli-and-set-up-a-namespace).
 - [Add an image in your registry namespace](https://console.bluemix.net/docs/services/Registry/registry_images_.html#registry_images_) to use to create the swarm service.
@@ -69,7 +69,7 @@ To create a local container that uses an IBM Cloud Container Registry image:
 ## Create a swarm service using an IBM Cloud Container Registry image
 You can create a service that schedules tasks to spawn containers that are based on an image in your IBM Cloud Container Registry.
 
-**Before you begin**:
+Before you begin:
 
 - Install the Docker for IBM Cloud CLI.
 - [Install the registry CLI and set up a namespace](#install-the-cli-and-set-up-a-namespace).

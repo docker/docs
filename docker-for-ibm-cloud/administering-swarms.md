@@ -9,6 +9,7 @@ Docker Enterprise Edition for IBM Cloud (Beta) comes with a variety of integrati
 Use the Docker EE for IBM Cloud CLI plug-in (`bx d4ic`) to provision swarm mode clusters and resources. Manage your cluster with the `bx d4ic` plug-in and the Docker EE Universal Control Plane (UCP) web UI.
 
 ## Create swarms
+
 Create a Docker EE swarm cluster in IBM Cloud.
 
 > Your beta license allows you to provision up to 20 nodes
@@ -71,7 +72,9 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    > You can set your infrastructure API credentials and Docker EE installation URL as environment variables so that you do not have to include them as options when using `bx d4ic` commands. For example:
    >
    > export SOFTLAYER_USERNAME=user.name.1234567
+   >
    > export SOFTLAYER_API_KEY=api-key
+   >
    > export D4IC_DOCKER_EE_URL=my_docker-ee-url
 
 
@@ -83,27 +86,27 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    > First, the manager node is deployed. Then, the additional infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
 
    * **Provisioning Stage 1**: Check the status of the manager node:
-    {% raw %}
+     {% raw %}
     ```bash
-    $ docker logs cluster-name_ID
+     $ docker logs cluster-name_ID
 
-    Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+     Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
-    The state of your infrastructure has been saved to the path
-    below. This state is required to modify and destroy your
-    infrastructure, so keep it safe. To inspect the complete state
-    use the `terraform show` command.
+     The state of your infrastructure has been saved to the path
+     below. This state is required to modify and destroy your
+     infrastructure, so keep it safe. To inspect the complete state
+     use the `terraform show` command.
 
-    State path:
+     State path:
 
-    Outputs:
+     Outputs:
 
-    manager_public_ip = 169.##.###.##
-    swarm_d4ic_id = ID
-    swarm_name = cluster-name
-    ucp_password = UCP-password
-    ```
-    {% endraw %}
+     manager_public_ip = 169.##.###.##
+     swarm_d4ic_id = ID
+     swarm_name = cluster-name
+     ucp_password = UCP-password
+     ```
+     {% endraw %}
 
    * **Provisioning Stage 2**: Check the status of the cluster infrastructure:
      {% raw %}
@@ -146,9 +149,11 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
 After creating the cluster, [log in to Docker UCP and download the Docker UCP client certificate bundle](#use-the-universal-control-plane).
 
 ## Use the Universal Control Plane
+
 Docker EE for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to provide integrated container management and security, from development to production.
 
 ### Access UCP
+
 Before you begin, [create a cluster](#create-swarms). Note the its **Name** and **ID**.
 
 1. Retrieve your UCP password by using the cluster **Name** and **ID** that you made when you [created the cluster](#create-swarms).
@@ -172,6 +177,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 4. Log in to UCP. Your credentials are `admin` and the UCP password from the `docker logs` command, or the credentials that your admin created for you.
 
 ### Download client certificates
+
 [Download the client certificate bundle](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/#download-client-certificates) to create objects and deploy services from a local Docker client.
 
 1. [Access UCP](#access-ucp).
@@ -207,30 +213,35 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 ## View swarm resources
 
 ### Cluster-level resources
+
 To review resources used within a particular Docker EE cluster, use the CLI or UCP.
 
 **CLI**: The `bx d4ic` CLI lists, modifies, and automates cluster infrastructure, as well as the URLs to access UCP, DTR, or exposed Docker services.
 
-  * Use `bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key` to review a list of your clusters and their UCP URLs.
-  * Use `bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key` to review details about the cluster, such as the IP address of manager nodes or the status of the cluster load balancers.
+  * To review a list of your clusters and their UCP URLs: `bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key`.
+  * To review details about the cluster, such as the IP address of manager nodes or the status of the cluster load balancers: `bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key`.
 
-**UCP**: The Docker EE Universal Control Plane provides a web-based GUI to manage swarm users and deployed applications. You can view swarm-related stacks, services, containers, images, nodes, networks, volumes, and secrets.
+**UCP**: The Docker EE Universal Control Plane provides a web UI to manage swarm users and deployed applications. You can view swarm-related stacks, services, containers, images, nodes, networks, volumes, and secrets.
 
 ### Account-level resources
+
 For an account-level view of services and infrastructure that can be used in your swarm, log in to your [IBM Cloud](https://console.bluemix.net/) account.
 
 * The IBM Cloud dashboard provides information on connected IBM Cloud services in the account, such as Watson and Internet of Things.
 * The IBM Cloud infrastructure portal shows account infrastructure resources such as virtual devices, storage, and networking.
 
 ### Other resources
+
 To gather logging and metric data from your swarm, first [enable logging for the cluster](logging.md), and then access the data in your IBM Cloud organization and space.
 
 ## UCP and CLIs
+
 Docker EE for IBM Cloud employs a flexible architecture and integration with IBM Cloud that you can use to leverage IBM Cloud resources and customize your swarm environment. Docker EE UCP exposes the standard Docker API, and as such, includes certain functions that instead should be done by using Docker EE for IBM Cloud capabilities.
 
 > Self-healing capabilities so you don't have to modify cluster infrastructure.
 >
 > Docker EE for IBM Cloud uses the InfraKit toolkit to support self-healing infrastructure. After you create the swarm, the cluster maintains that specified number of nodes. If a manager node fails, you do not need to promote a worker node to manager; the swarm self-recovers the manager node.
+>
 > Do not use UCP to modify a cluster's underlying infrastructure, such as adding or promoting worker nodes to managers.
 
 The table outlines when to use UCP and when to use the `bx d4ic` CLI for various types of tasks.
@@ -250,11 +261,13 @@ The table outlines when to use UCP and when to use the `bx d4ic` CLI for various
 | Logging | UCP and CLI | From UCP, can send logs to a remote syslog server. From the CLI, [enable logging and monitoring](logging.md) to IBM Cloud and access by using Grafana and Kibana GUIs. |
 
 ## Grant user access
+
 For IBM Cloud account access management, consult the [IBM Cloud Identity and Access Management documentation](https://console.bluemix.net/docs/iam/quickstart.html#getstarted).
 
 For Docker EE cluster access management, use the [UCP Access Control documentation](/datacenter/ucp/2.2/guides/access-control/).
 
 ## Delete swarms
+
 Before you begin:
 
 * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
