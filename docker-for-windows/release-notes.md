@@ -449,6 +449,17 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc4-win44 2017-12-21 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
+  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
+
+* Bug fixes and minor changes
+  - Fix DNS "search domain" and "domain name" settings. See docker/for-win#1437
+  - Fix Vpnkit issue when username has spaces. See docker/for-win#1429
+  - Diagnostic improvements to get VM logs before VM shutdown.
+
 ### Docker Community Edition 17.12.0-ce-rc3-win43 2017-12-15 (Edge)
 
 * Upgrades
