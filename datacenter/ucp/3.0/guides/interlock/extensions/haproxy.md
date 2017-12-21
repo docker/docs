@@ -3,7 +3,12 @@ title: Use HAProxy with Interlock
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 The following configuration options are available:
 
@@ -26,3 +31,5 @@ The following configuration options are available:
 
 When using SSL termination the certificate and key must be combined into a single certificate (i.e. `cat cert.pem key.pem > combined.pem`).  The HAProxy extension
 will use the certificate label only to configure SSL.
+
+{% endif %}

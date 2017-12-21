@@ -3,7 +3,12 @@ title: Host mode networking
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In some scenarios operators cannot use the overlay networks.  Interlock supports
 host mode networking in a variety of ways (proxy only, Interlock only, application only, hybrid).
@@ -143,3 +148,5 @@ curl -vs -H "Host: demo.local" http://127.0.0.1/ping
 <
 {"instance":"897d3c7b9e9c","version":"0.1","metadata":"demo","request_id":"e4180a8fc6ee15f8d46f11df67c24a7d"}
 ```
+
+{% endif %}

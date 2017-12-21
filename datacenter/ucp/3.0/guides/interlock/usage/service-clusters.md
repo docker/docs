@@ -3,8 +3,12 @@ title: Service clusters
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
 
+{% if include.version=="ucp-3.0" %}
 
 In this example we will configure an eight (8) node Swarm cluster that uses service clusters
 to route traffic to different proxies.  There are three (3) managers
@@ -198,3 +202,5 @@ $> curl -H "Host: demo-west.local" http://$(docker node inspect -f '{{ .Status.A
 Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy will only be updated if it has corresponding updates
 to its designated service cluster.  So in this example, updates to the `us-east` cluster will not affect the `us-west` cluster.  If there is a problem
 the others will not be affected.
+
+{% endif %}

@@ -3,7 +3,12 @@ title: Applications with SSL
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a demo service to the host `demo.local` using SSL.
 
@@ -218,3 +223,5 @@ $> curl -vsk https://demo.local/ping
 Application traffic will travel securely fully encrypted from the request all the way to the application service.
 Notice that Interlock cannot add the metadata response headers (version info, request ID, etc) as this is using
 TCP passthrough and cannot add the metadata.
+
+{% endif %}

@@ -3,8 +3,12 @@ title: Deploy Interlock manually
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
 
+{% if include.version=="ucp-3.0" %}
 
 ## Requirements
 
@@ -80,3 +84,5 @@ sjpgq7h621ex        interlock           replicated          1/1                 
 ```
 
 The Interlock traffic layer is now deployed.  Continue with the [Deploying Applications](/usage/index.md) to publish applications.
+
+{% endif %}

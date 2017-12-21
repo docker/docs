@@ -3,7 +3,12 @@ title: Persistent (sticky) sessions
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service and configure the proxy for persistent (sticky) sessions.
 
@@ -128,3 +133,5 @@ to a specific backend.
 Note: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
 expected as internally the proxy uses the new set of replicas to decide on a backend on which to pin.  Once the upstreams are
 determined a new "sticky" backend will be chosen and that will be the dedicated upstream.
+
+{% endif %}

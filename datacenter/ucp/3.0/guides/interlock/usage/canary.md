@@ -3,7 +3,12 @@ title: Canary application instances
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 In this example we will publish a service and deploy an updated service as canary instances.
 
@@ -105,3 +110,5 @@ demo-v1
 
 This will route all application traffic to the new version.  If you need to rollback, simply scale the v1 service
 back up and v2 down.
+
+{% endif %}

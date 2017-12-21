@@ -3,7 +3,12 @@ title: Use NGINX with Interlock
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 The following configuration options are available for the Nginx extension:
 
@@ -28,3 +33,5 @@ The following configuration options are available for the Nginx extension:
 | `ErrorLogPath`          | string | Path to use for error logs (default: `/dev/stdout`)                                                 |
 | `MainLogFormat`         | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for main logger  |
 | `TraceLogFormat`        | string | [Format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format) to use for trace logger |
+
+{% endif %}

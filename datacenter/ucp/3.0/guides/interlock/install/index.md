@@ -3,7 +3,12 @@ title: Get started with Interlock
 description: earn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 Docker Enterprise Edition has a routing mesh that allows you to make your
 services available to the outside world using a domain name. This is also
@@ -40,3 +45,5 @@ UCP web UI, navigate to the **Admin Settings** page, and click the
 By default, the routing mesh service listens on port 80 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
 them.
+
+{% endif %}

@@ -3,7 +3,12 @@ title: What is Interlock
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 Interlock is an application routing proxy service for Docker.
 
@@ -58,3 +63,5 @@ balancing resources for uses such as region or organization based load balancing
 Interlock supports (and recommends) being deployed where the load balancing
 proxies do not need to be colocated with a Swarm manager.  This makes the
 deployment more secure by not exposing the Docker API access to the extension or proxy services.
+
+{% endif %}

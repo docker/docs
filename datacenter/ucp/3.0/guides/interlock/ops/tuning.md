@@ -3,7 +3,12 @@ title: Tune Interlock
 description: Learn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 It is [recommended](/install/production/) to constrain the proxy service to multiple dedicated worker nodes.
 Here are a few other tips for tuning:
@@ -33,3 +38,5 @@ thirty (30) seconds between updates you can use the following:
 ```bash
 $> docker service update --update-delay=30s interlock=proxy
 ```
+
+{% endif %}
