@@ -1673,8 +1673,6 @@ manuals:
         section:
         - path: /datacenter/ucp/3.0/guides/user/services/deploy-a-service/
           title: Deploy a service
-        - path: /datacenter/ucp/3.0/guides/user/services/use-domain-names-to-access-services/
-          title: Use domain names to access services
         - path: /datacenter/ucp/3.0/guides/user/services/
           title: Deploy an app from the UI
         - path: /datacenter/ucp/3.0/guides/user/services/deploy-app-cli/
