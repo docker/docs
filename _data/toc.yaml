@@ -1326,17 +1326,62 @@ reference:
     path: /compose/reference/overview/
     nosync: true
 
-- sectiontitle: Docker Enterprise Edition references
+- sectiontitle: Docker Enterprise Edition
   section:
-  - title: Trusted Registry API
-    path: /datacenter/dtr/2.5/reference/api/
+  - title: DTR 2.5 API
+    path: /reference/dtr/2.5/api/
+  - sectiontitle: DTR 2.5 CLI
+    section:
+    - path: /reference/dtr/2.5/cli/
+      title: Overview
+    - path: /reference/dtr/2.5/cli/backup/
+      title: backup
+    - path: /reference/dtr/2.5/cli/destroy/
+      title: destroy
+      title: images
+    - path: /reference/dtr/2.5/cli/install/
+      title: install
+    - path: /reference/dtr/2.5/cli/join/
+      title: join
+    - path: /reference/dtr/2.5/cli/reconfigure/
+      title: reconfigure
+    - path: /reference/dtr/2.5/cli/remove/
+      title: remove
+    - path: /reference/dtr/2.5/cli/restore/
+      title: restore
+    - path: /reference/dtr/2.5/cli/upgrade/
+      title: upgrade
+  - title: UCP 3.0 API
+    path: /datacenter/ucp/3.0/reference/api/
+  - sectiontitle: UCP 3.0 CLI
+    section:
+    - path: /datacenter/ucp/3.0/reference/cli/
+      title: docker/ucp overview
+    - path: /datacenter/ucp/3.0/reference/cli/backup/
+      title: backup
+    - path: /datacenter/ucp/3.0/reference/cli/dump-certs/
+      title: dump-certs
+    - path: /datacenter/ucp/3.0/reference/cli/example-config/
+      title: example-config
+    - path: /datacenter/ucp/3.0/reference/cli/id/
+      title: id
+    - path: /datacenter/ucp/3.0/reference/cli/images/
+      title: images
+    - path: /datacenter/ucp/3.0/reference/cli/install/
+      title: install
+    - path: /datacenter/ucp/3.0/reference/cli/restart/
+      title: restart
+    - path: /datacenter/ucp/3.0/reference/cli/restore/
+      title: restore
+    - path: /datacenter/ucp/3.0/reference/cli/stop/
+      title: stop
+    - path: /datacenter/ucp/3.0/reference/cli/support/
+      title: support
+    - path: /datacenter/ucp/3.0/reference/cli/uninstall-ucp/
+      title: uninstall-ucp
+    - path: /datacenter/ucp/3.0/reference/cli/upgrade/
+      title: upgrade
 
-  - title: Trusted Registry CLI
-    path: /datacenter/dtr/2.5/reference/cli/
-    nosync: true
-  - title: Universal Control Plane CLI
-    path: /datacenter/ucp/3.0/reference/cli/
-    nosync: true
 
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
@@ -1603,34 +1648,7 @@ manuals:
           title: Troubleshoot configurations
       - path: /datacenter/ucp/3.0/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
-      - sectiontitle: CLI reference
-        section:
-        - path: /datacenter/ucp/3.0/reference/cli/
-          title: docker/ucp overview
-        - path: /datacenter/ucp/3.0/reference/cli/backup/
-          title: backup
-        - path: /datacenter/ucp/3.0/reference/cli/dump-certs/
-          title: dump-certs
-        - path: /datacenter/ucp/3.0/reference/cli/example-config/
-          title: example-config
-        - path: /datacenter/ucp/3.0/reference/cli/id/
-          title: id
-        - path: /datacenter/ucp/3.0/reference/cli/images/
-          title: images
-        - path: /datacenter/ucp/3.0/reference/cli/install/
-          title: install
-        - path: /datacenter/ucp/3.0/reference/cli/restart/
-          title: restart
-        - path: /datacenter/ucp/3.0/reference/cli/restore/
-          title: restore
-        - path: /datacenter/ucp/3.0/reference/cli/stop/
-          title: stop
-        - path: /datacenter/ucp/3.0/reference/cli/support/
-          title: support
-        - path: /datacenter/ucp/3.0/reference/cli/uninstall-ucp/
-          title: uninstall-ucp
-        - path: /datacenter/ucp/3.0/reference/cli/upgrade/
-          title: upgrade
+
     - sectiontitle: Authorize role-based access
       section:
       - path: /datacenter/ucp/3.0/guides/authorization/
@@ -1747,8 +1765,6 @@ manuals:
           path: /datacenter/ucp/3.0/guides/interlock/ops/
         - title: Tuning
           path: /datacenter/ucp/3.0/guides/interlock/ops/tuning/
-    - path: /datacenter/ucp/3.0/reference/api/
-      title: API reference
     - path: /datacenter/ucp/3.0/guides/release-notes/
       title: Release notes
     - path: /datacenter/ucp/3.0/guides/get-support/
@@ -2361,27 +2377,6 @@ manuals:
           title: Troubleshoot batch jobs
       - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
-      - sectiontitle: CLI reference
-        section:
-        - path: /datacenter/dtr/2.5/reference/cli/
-          title: Overview
-        - path: /datacenter/dtr/2.5/reference/cli/backup/
-          title: backup
-        - path: /datacenter/dtr/2.5/reference/cli/destroy/
-          title: destroy
-          title: images
-        - path: /datacenter/dtr/2.5/reference/cli/install/
-          title: install
-        - path: /datacenter/dtr/2.5/reference/cli/join/
-          title: join
-        - path: /datacenter/dtr/2.5/reference/cli/reconfigure/
-          title: reconfigure
-        - path: /datacenter/dtr/2.5/reference/cli/remove/
-          title: remove
-        - path: /datacenter/dtr/2.5/reference/cli/restore/
-          title: restore
-        - path: /datacenter/dtr/2.5/reference/cli/upgrade/
-          title: upgrade
     - sectiontitle: User guides
       section:
       - sectiontitle: Access DTR
@@ -2416,8 +2411,6 @@ manuals:
         title: Create and manage webhooks
       - path: /datacenter/dtr/2.5/guides/user/create-promotion-policies/
         title: Create promotion policies
-    - path: /datacenter/dtr/2.5/reference/api/
-      title: API reference
     - path: /datacenter/dtr/2.5/guides/release-notes/
       title: Release notes
     - path: /datacenter/dtr/2.5/guides/support/
