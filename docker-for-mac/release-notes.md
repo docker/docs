@@ -469,6 +469,16 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
+  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
+
+* Bug fixes and minor changes
+  - Display actual size used by the VM disk, especially useful for disks using raw format. See [docker/for-mac#2297](https://github.com/docker/for-mac/issues/2297).
+  - Fix more specific edge cases in filesharing settings migration. 
+
 ### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
 
 * Upgrades
