@@ -48,7 +48,7 @@ UCP.
 To install UCP, you use the `docker/ucp` image, which has commands to install
 and manage UCP.
 
-Make sure you follow the [UCP System requirements](system-requirements.md) in regards to networking ports. 
+Make sure you follow the [UCP System requirements](system-requirements.md) in regards to networking ports.
 Ensure that your hardware or software firewalls are open appropriately or disabled.
 
 To install UCP:
@@ -72,7 +72,7 @@ To install UCP:
     This runs the install command in interactive mode, so that you're
     prompted for any necessary configuration values.
     To find what other options are available in the install command, check the
-    [reference documentation](../../../reference/cli/install.md).
+    [reference documentation](/reference/ucp/3.0/cli/install.md).
 
 ## Step 5: License your installation
 
