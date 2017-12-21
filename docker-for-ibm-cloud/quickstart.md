@@ -8,6 +8,8 @@ title: Docker EE for IBM Cloud (Beta) Quick Start
 
 Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are enhanced with the full suite of secure IBM Cloud platform, infrastructure, and Watson services? Great! Let's get you started.
 
+To request access to the closed beta, [contact us](https://www.ibm.com/us-en/marketplace/docker-for-ibm-cloud).
+
 ![Getting started with Docker for IBM Cloud in 4 easy steps](img/quickstart.png)
 
 ## Step 1: Get all your accounts in order
@@ -61,7 +63,7 @@ Now we're ready to get to the fun stuff: making a cluster!
 
 ## Step 3: Create clusters
 
-Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes.
+Create a Docker EE swarm cluster in IBM Cloud. During the beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes. If you need more nodes than this, work with your Docker representative to acquire an additional Docker EE license.
 
 
 1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
@@ -80,9 +82,9 @@ Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a
 
    ```bash
    $ bx d4ic create --swarm-name my_swarm \
-   --ssh-label my_ssh_label \
    --sl-user user.name.1234567 \
    --sl-api-key api_key \
+   --ssh-label my_ssh_label \
    --ssh-key filepath_to_my_ssh_key \
    --docker-ee-url my_docker-ee-url
    ```
@@ -98,7 +100,7 @@ Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manag
 
 ## Step 4: Use UCP
 
-Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to help you manage your cluster through a simple interface!
+Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to help you manage your cluster through a simple web UI!
 
 ### Step 4a: Access UCP
 
@@ -141,7 +143,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
    >
    > Move the certificate environment variable directory to a safe and accessible location on your machine. You'll use it a lot!
 
-5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by running the `env.sh` script:
+5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.:
 
    ```bash
    $ source env.sh

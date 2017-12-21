@@ -156,12 +156,13 @@ Before you begin:
 - [Set up file storage for persistent data](#set-up-file-storage-for-persistent-data-volumes).
 
 Create a service that specifies the volume you want to use. The example creates _my_service_ that schedules a task to spawn swarm containers based on the Alpine image, creates 3 repliacs, mounts to _my_volume_, and sets the volume destination (dst) path within each container to the _/dst/directory_.
-    ```bash
-    $ docker service create
-      --name my_service
-      --mount type=volume,source=my_volume,dst=/dst/directory,volume-driver=d4ic-volume
-      --replicas=3 alpine ping 8.8.8.8
-    ```
+
+ ```bash
+ $ docker service create --name my_service \
+   --mount type=volume,source=my_volume,dst=/dst/directory,volume-driver=d4ic-volume \
+   --replicas=3 \
+   alpine ping 8.8.8.8
+ ```
 
 > Do not provision a volume when you create a Docker service
 >
@@ -178,9 +179,9 @@ Before you begin:
 
 Create a task that specifies the volume you want to use. The example creates a task that spawns an image based on the Busybox image, mounts it to _my_volume_, and creates the volume path within the container to the _/dst/directory_.
 
-    ```bash
-    $ docker run -it --volume my_volume:/dst/directory busybox sh
-    ```
+  ```bash
+  $ docker run -it --volume my_volume:/dst/directory busybox sh
+  ```
 
 ## Clean up volumes in your swarm
 
@@ -212,4 +213,4 @@ You can disconnect a particular IBM Cloud infrastructure file storage volume.
 
 1. Log in to your IBM Cloud infrastructure account and access the file storage volume that you want to disconnect.
 
-2. Under notes, delete the `docker_volume_name:my_volume;docker_swarm_id:my_swarmID` entry.
+2. Under notes, delete the entry `docker_volume_name:my_volume;docker_swarm_id:my_swarmID`.

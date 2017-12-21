@@ -48,7 +48,7 @@ Steps:
 
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
-   $ bx d4ic show --swarm-name mycluster
+   $ bx d4ic show --swarm-name mycluster --sl-user user.name.1234567 --sl-api-key api_key
    ...
    Load Balancers
    ID                                     Name                Address                                          Type

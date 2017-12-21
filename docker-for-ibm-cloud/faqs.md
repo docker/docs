@@ -123,16 +123,6 @@ The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Clo
 
 Instead of including these in each command, you can [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables).
 
-## Why do swarm cluster provisioning or `docker node` commands fail?
-
-Make sure that you have [set up all the necessary accounts](/docker-for-ibm-cloud/index.md), including your Docker EE subscription URL, IBM Cloud account, and IBM Cloud infrastructure credentials.
-
-Set your [infrastructure credentials to your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables), or include them in the `bx d4ic create` command when [provisioning your cluster](administering-swarms.md#create-swarms).
-
-When provisioning the swarm or using `docker node` commands, you might encounter error messages similar to `Discovery error: No cluster leader` or `Error response from daemon: No elected primary cluster manager`, or `Leader Election: Cluster leadership lost`.
-
-Docker EE for IBM Cloud uses Docker Swarm for container orchestration. Swarm uses an external discovery backend, which means that there might be additional time during provisioning. To account for this, [increase the TTL delay](/swarm/reference/manage/#--replication-ttl--leader-lock-release-time-on-failure) to a minimum of 20s.
-
 ## Can I manually change the load balancer configuration?
 
 No. If you make any manual changes to the load balancer, they are removed the next time that the load balancer is updated or swarm changes are made. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the load balancer manually, they could conflict with what is in cluster, and cause issues.

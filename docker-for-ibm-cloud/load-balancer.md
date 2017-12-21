@@ -81,7 +81,7 @@ on that port to your service.
 1. Connect to your Docker EE for IBM Cloud swarm. Navigate to the directory where you [downloaded the UCP credentials](administering-swarms.md#download-client-certificates) and run the script. For example:
 
    ```bash
-   $ cd filepath/to/certificate/repo && source env.
+   $ cd filepath/to/certificate/repo && source env.sh
    ```
 
 2. Create the service specifying the port on which you want the service exposed. For example:
