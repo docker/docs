@@ -14,9 +14,13 @@ application traffic.
 - [Introduction](intro/index.md)
   - [What is Interlock](intro/index.md)
   - [Architecture](intro/architecture.md)
-- [Deployment](install/)
-  - [Requirements](install/index.md#requirements)
-  - [Installation](install/index.md#deployment)
+
+## Deployment
+
+- [Get started](install/index.md)
+- [Deploy Interlock manually](install/manual-deployment.md)
+- [Deploy Interlock offline](install/offline.md)
+- [Deploy Interlock for production](install/production.md)
 
 ## Configuration
 

@@ -1,82 +1,42 @@
 ---
 title: Get started with Interlock
-description: Learn about Interlock, an application routing and load balancing system
+description: earn about Interlock, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
 ---
 
+Docker Enterprise Edition has a routing mesh that allows you to make your
+services available to the outside world using a domain name. This is also
+known as a layer 7 load balancer.
 
-## Requirements
+![swarm routing mesh](../../images/interlock-install-1.svg)
 
-- [Docker](https://www.docker.com) version 17.06+ is required to use Interlock
-- Docker must be running in [Swarm mode](https://docs.docker.com/engine/swarm/)
-- Internet access (see [Offline Installation](offline.md) for installing without internet access)
+In this example, the WordPress service is being served on port 8000.
+Users can access WordPress using the IP address of any node in the cluster
+and port 8000. If WordPress is not running in that node, the
+request is redirected to a node that is.
 
-## Deployment
-Interlock uses a configuration file for the core service. The following is an example config
-to get started.  In order to utilize the deployment and recovery features in Swarm we will
-create a Docker Config object:
+Docker EE extends this and provides a routing mesh for application-layer
+load balancing. This allows you to access services with HTTP and HTTPS
+endpoints using a domain name instead of an IP.
 
-```bash
-$> cat << EOF | docker config create service.interlock.conf -
-ListenAddr = ":8080"
-DockerURL = "unix:///var/run/docker.sock"
-PollInterval = "3s"
+![http routing mesh](../../images/interlock-install-2.svg)
 
-[Extensions]
-  [Extensions.default]
-    Image = "interlockpreview/interlock-extension-nginx:2.0.0-preview"
-    Args = ["-D"]
-    ProxyImage = "nginx:alpine"
-    ProxyArgs = []
-    ProxyConfigPath = "/etc/nginx/nginx.conf"
-    ServiceCluster = ""
-    PublishMode = "ingress"
-    PublishedPort = 80
-    TargetPort = 80
-    PublishedSSLPort = 443
-    TargetSSLPort = 443
-    [Extensions.default.Config]
-      User = "nginx"
-      PidPath = "/var/run/proxy.pid"
-      WorkerProcesses = 1
-      RlimitNoFile = 65535
-      MaxConnections = 2048
-EOF
-oqkvv1asncf6p2axhx41vylgt
-```
+In this example, the WordPress service listens on port 8000, but it is made
+available to the outside world as `wordpress.example.org`.
 
-Next we will create a dedicated network for Interlock and the extensions:
+When users access `wordpress.example.org`, the HTTP routing mesh routes
+the request to the service running WordPress in a way that is transparent to
+them.
 
-```bash
-$> docker network create -d overlay interlock
-```
+## Enable the routing mesh
 
-Now we can create the Interlock service.  Note the requirement to constrain to a manager.  The
-Interlock core service must have access to a Swarm manager, however the extension and proxy services
-are recommended to run on workers.  See the [Production](production.md) section for more information
-on setting up for an production environment.
+To enable the HTTP routing mesh, Log in as an administrator, go to the
+UCP web UI, navigate to the **Admin Settings** page, and click the
+**Routing Mesh** option. Check the **Enable routing mesh** option.
 
-```bash
-$> docker service create \
-    --name interlock \
-    --mount src=/var/run/docker.sock,dst=/var/run/docker.sock,type=bind \
-    --network interlock \
-    --constraint node.role==manager \
-    --config src=service.interlock.conf,target=/config.toml \
-    interlockpreview/interlock:2.0.0-preview -D run -c /config.toml
-sjpgq7h621exno6svdnsvpv9z
-```
+![http routing mesh](../../images/interlock-install-3.png){: .with-border}
 
-There should be three (3) services created.  One for the Interlock service,
-one for the extension service and one for the proxy service:
-
-```bash
-$> docker service ls
-ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
-lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                *:80->80/tcp *:443->443/tcp
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 interlockpreview/interlock-extension-nginx:2.0.0-preview
-sjpgq7h621ex        interlock           replicated          1/1                 interlockpreview/interlock:2.0.0-preview
-```
-
-The Interlock traffic layer is now deployed.  Continue with the [Deploying Applications](/usage/index.md) to publish applications.
+By default, the routing mesh service listens on port 80 for HTTP and port
+8443 for HTTPS. Change the ports if you already have services that are using
+them.

@@ -23,7 +23,3 @@ or not.
 
 Having a grant with the `Scheduler` role against the `/` collection takes
 precedence over any other grants with `Node Schedule` on subcollections.
-
-## Where to go next
-
-* [Use domain names to access your services](use-domain-names-to-access-services.md)
