@@ -32,8 +32,8 @@ COPY index.html ${TARGET}/index.html
 
 # The static HTML is now ready to go
 
-# Copy the Nginx config from the docs-config image
-COPY --from=docs/docker.github.io:docs-config /conf/nginx-overrides.conf /etc/nginx/conf.d/default.conf
+# Copy the Nginx config from the nginx-onbuild image
+COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 # Serve the docs
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
