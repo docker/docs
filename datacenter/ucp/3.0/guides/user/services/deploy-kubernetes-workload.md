@@ -1,6 +1,6 @@
 ---
 title: Deploy a workload to a Kubernetes cluster
-description: Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files. 
+description: Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.
 keywords: UCP, Docker EE, orchestration, Kubernetes, cluster
 ---
 
@@ -48,17 +48,17 @@ later section.
 
 ## Inspect the deployment
 
-The Docker EE web UI shows the status of your deployment when you click the 
+The Docker EE web UI shows the status of your deployment when you click the
 links in the **Kubernetes** section of the left pane.
 
 1.  In the left pane. click **Controllers** to see the resource controllers
     that Docker EE created for the NGINX server.
 2.  Click the **nginx-deployment** controller, and in the details pane, scroll
-    to the **Template** section. This shows the values that Docker EE used to 
+    to the **Template** section. This shows the values that Docker EE used to
     create the deployment.
 3.  In the left pane, click **Pods** to see the pods that are provisioned for
     the NGINX server. Click one of the pods, and in the details pane, scroll to
-    the **Status** section to see that pod's phase, IP address, and other 
+    the **Status** section to see that pod's phase, IP address, and other
     properties.
 
 ![](../../images/deploy-kubernetes-workload-2.png){: .with-border}
@@ -81,7 +81,7 @@ spec:
     - port: 80
       nodePort: 30080
   selector:
-    app: nginx 
+    app: nginx
 ```
 
 The service connects the cluster's internal port 80 to the external port
@@ -89,11 +89,11 @@ The service connects the cluster's internal port 80 to the external port
 
 1.  Repeat the previous steps and copy-paste the YAML that defines the `nginx`
     service into the **Object YAML** editor on the
-    **Create Kubernetes Object** page. When you click **Create**, the 
+    **Create Kubernetes Object** page. When you click **Create**, the
     **Load Balancers** page opens.
 2.  Click the **nginx** service, and in the details pane, find the **Ports**
     section.
-3.  Click the link that's labeled **URL** to 
+3.  Click the link that's labeled **URL** to
 
 ![](../../images/deploy-kubernetes-workload-3.png){: .with-border}
 
@@ -105,7 +105,7 @@ app label `nginx` and a corresponding label selector.
 
 Update an existing deployment by applying an updated YAML file. In this
 example, the server is scaled up to four replicas and updated to a later
-version of NGINX. 
+version of NGINX.
 
 ```yaml
 ...
@@ -189,7 +189,7 @@ spec:
 ```
 
 Save the previous YAML to a file named "deployment.yaml", and use the following
-command to deploy the NGINX server: 
+command to deploy the NGINX server:
 
 ```bash
 kubectl apply -f deployment.yaml
@@ -197,7 +197,7 @@ kubectl apply -f deployment.yaml
 
 ## Inspect the deployment
 
-Use the `describe deployment` option to inspect the deployment: 
+Use the `describe deployment` option to inspect the deployment:
 
 ```bash
 kubectl describe deployment nginx-deployment
@@ -208,7 +208,7 @@ controllers.
 
 ## Update the deployment
 
-Update an existing deployment by applying an updated YAML file. 
+Update an existing deployment by applying an updated YAML file.
 
 Edit deployment.yaml and change the following lines:
 
@@ -216,7 +216,7 @@ Edit deployment.yaml and change the following lines:
 - Update the NGINX version by specifying **image: nginx:1.8**.
 
 Save the edited YAML to a file named "update.yaml", and use the following
-command to deploy the NGINX server: 
+command to deploy the NGINX server:
 
 ```bash
 kubectl apply -f update.yaml
@@ -248,5 +248,20 @@ You should see the currently running image:
     Image:        nginx:1.8
 ```
 
+## Kubernetes limitations
 
+There's a few limitations you should be aware when creating Kubernetes
+workloads:
 
+* Docker EE has its own RBAC system, so it's not possible to create
+ClusterRole objects, ClusterRoleBinding objects, or any other object that is
+created using the `/apis/rbac.authorization.k8s.io` endpoints.
+* To make sure your cluster is secure, only admin users can deploy Pods with
+privileged options. These are options like `PodSpec.hostIPC`, `PodSpec.hostNetwork`,
+`PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
+`SecurityContext.capabilities`, `SecurityContext.privileged`, and
+`Volume.hostPath`.
+* You can't grant permissions to Kubernetes service accounts.
+The `default` service account has no permissions and cannot use the Kubernetes
+API. All other service accounts have full admin permissions and can only be used
+by Docker EE administrators.
