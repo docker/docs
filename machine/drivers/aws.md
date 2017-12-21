@@ -72,9 +72,6 @@ You can use environment variables:
 -   `--amazonec2-volume-type`: The Amazon EBS volume type to be attached to the instance.
 -   `--amazonec2-vpc-id`: Your VPC ID to launch the instance in.
 -   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
--   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
--   `--amazonec2-endpoint`:  Optional endpoint URL (hostname only or fully qualified URI)
--   `--amazonec2-insecure-transport`:  Disable SSL when sending requests
 
 
 
