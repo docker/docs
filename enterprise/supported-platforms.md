@@ -4,7 +4,7 @@ description: |
   Information about Docker Enterprise Edition Platform 2.0
 ui_tabs:
 - version: deep-2.0
-  orhigher: true
+  orhigher: false
 next_steps:
 - path: /engine/install
   title: Install Docker

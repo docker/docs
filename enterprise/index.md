@@ -1,9 +1,23 @@
 ---
-title: Docker Enterprise Edition
-description: Learn about Docker Enterprise Edition, the enterprise-grade cluster
-  management solution from Docker.
-keywords: Docker EE, UCP, DTR, orchestration, cluster
+title: Docker Enterprise Edition Platform
+description: |
+  Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
+ui_tabs:
+- version: deep-2.0
+  orhigher: false
+cli_tabs:
+- version: docker-cli-linux
+- version: kubectl
+next_steps:
+- path: supported-platforms/
+  title: Supported platforms
+- path: docker-ee-architecture/
+  title: Docker EE architecture  
+keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
 ---
+{% if include.ui %}
+
+{% if include.version=="deep-2.0" %}
 
 Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
 Containers-as-a-Service (CaaS) platform that enables a secure software supply
@@ -50,7 +64,7 @@ Kubernetes features on Docker EE include:
 - Kubernetes orchestration full feature set
 - CNCF Certified Kubernetes conformance
 - Kubernetes app deployment by using web UI or CLI
-- Compose stack deployment for both Swarm and Kubernetes apps
+- Compose stack deployment for Swarm and Kubernetes apps
 - Role-based access control for Kubernetes workloads
 - Pod-based autoscaling, to increase and decrease pod count based on CPU usage
 - Blue-Green deployments, for load balancing to different app versions
@@ -73,8 +87,8 @@ to schedule Kubernetes or Swarm workloads.
 
 ![](images/docker-ee-overview-4.svg){: .with-border}
 
-- Docker EE manager nodes are both Swarm managers and Kubernetes masters to enable
-  high availability
+- Docker EE manager nodes are both Swarm managers and Kubernetes masters,
+  to enable high availability
 - Allocate nodes for Swarm and Kubernetes workloads
 - Single pane of glass for monitoring apps
 - Enhanced Swarm hostname routing mesh with Interlock 2.0
@@ -123,6 +137,13 @@ are safe and can't be tampered with.
 You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
+
 ## Docker EE and the CLI
 
 Docker EE exposes the standard Docker API, so you can continue using the tools
@@ -150,6 +171,8 @@ Managers: 1
 …
 ```
 
+{% elsif include.version=="kubectl" %}
+
 Docker EE exposes the standard Kubernetes API, and it installs the command-line
 tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
 `kubectl cluster-info`:
@@ -157,3 +180,6 @@ tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
 ```bash
 $ kubectl cluster-info
 ```
+
+{% endif %}
+{% endif %}
