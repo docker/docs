@@ -6,6 +6,7 @@ keywords: ucp, interlock, load balancing
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
+- version: ucp-2.2
 ---
 
 {% if include.version=="ucp-3.0" %}
@@ -64,5 +65,9 @@ demo scaled to 4
 
 The four service replicas will be configured as upstreams.  The load balancer will balance traffic
 across all service replicas.
+
+{% elsif include.version=="ucp-2.2" %}
+
+* [Use domain names to access services](/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services.md)
 
 {% endif %}
