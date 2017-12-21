@@ -58,13 +58,13 @@
 @media only screen 
     and (min-width : 376px)
     and (max-width : 900px) {  
-    .tabs {
-        padding: 0 0 0 10px;
-    }
-    .tabs li a {
-        font-size: 13px;
-        padding: 19px 10px 11px;
-    }
+    // .tabs {
+    //     padding: 0 0 0 10px;
+    // }
+    // .tabs li a {
+    //     font-size: 13px;
+    //     padding: 19px 10px 11px;
+    // }
     .sidebar {
         position: fixed;
         width: 100%;
@@ -216,7 +216,7 @@
       padding: 5px 0 0 0;
     }
     .tabs li a {
-      padding: 15px 0 10px 0;
+      // padding: 15px 0 10px 0;
       margin-left: 0;
       font-weight: normal;
     }
@@ -264,10 +264,10 @@
     .tabs {
         padding-left: 22px;
     }
-    .tabs li a {
-        padding: 17px 9px 12px 5px;
-        font-size: 12px;
-    }
+    // .tabs li a {
+    //     padding: 17px 9px 12px 5px;
+    //     font-size: 12px;
+    // }
     .nav-sidebar a {
         color: #a8a8a8;
     }
@@ -295,19 +295,6 @@
     }
 }
 
-
-/* Portrait and Landscape iphone 4 + S */
-// @media only screen 
-//   and (min-device-width: 320px) 
-//   and (max-device-width: 480px)
-//   and (-webkit-min-device-pixel-ratio: 2) {
-//     .tabs {
-//         padding: 5px 0 0 8px;
-//     }
-//     .tabs li a {
-//         padding: 15px 9px 10px 4px;
-//     }
-// }
 
 /*
 *
