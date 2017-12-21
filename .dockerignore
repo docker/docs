@@ -1,0 +1,6 @@
+.dockerignore
+Dockerfile
+.git
+.github
+tests
+_site

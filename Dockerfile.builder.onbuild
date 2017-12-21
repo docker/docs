@@ -1,0 +1,16 @@
+# Get Jekyll build env
+FROM docs/docker.github.io:docs-builder AS builder
+
+# Make the version accessible to this build-stage
+ONBUILD ARG VER
+
+# Build the docs from this branch
+ONBUILD COPY . /source
+ONBUILD RUN jekyll build --source /source --destination /site/${VER}
+
+# Do post-processing on archive
+ONBUILD RUN /scripts/fix-archives.sh /site/ ${VER}
+
+# Make an index.html and 404.html which will redirect / to /${VER}/
+ONBUILD RUN echo "<html><head><title>Redirect for ${VER}</title><meta http-equiv=\"refresh\" content=\"0;url='/${VER}/'\" /></head><body><p>If you are not redirected automatically, click <a href=\"/${VER}/\">here</a>.</p></body></html>" > /site/index.html
+ONBUILD RUN echo "<html><head><title>Redirect for ${VER}</title><meta http-equiv=\"refresh\" content=\"0;url='/${VER}/'\" /></head><body><p>If you are not redirected automatically, click <a href=\"/${VER}/\">here</a>.</p></body></html>" > /site/404.html
