@@ -6,6 +6,7 @@ keywords: ucp, interlock, load balancing
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
+- version: ucp-2.2
 ---
 
 {% if include.version=="ucp-3.0" %}
@@ -45,5 +46,9 @@ UCP web UI, navigate to the **Admin Settings** page, and click the
 By default, the routing mesh service listens on port 80 for HTTP and port
 8443 for HTTPS. Change the ports if you already have services that are using
 them.
+
+{% elsif include.version=="ucp-2.2" %}
+
+* [Configure UCP 2.2 HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services.md)
 
 {% endif %}
