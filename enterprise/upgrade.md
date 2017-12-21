@@ -1,9 +1,16 @@
 ---
 title: Upgrade Docker EE
-description: Learn how to upgrade your Docker Enterprise Edition, to start using
-  the latest features and security patches.
+description: |
+  Learn how to upgrade your Docker Enterprise Edition, to start using the latest features and security patches.
+ui_tabs:
+- version: deep-2.0
+  orhigher: false
+next_steps:
+- path: backup/
+  title: Backup Docker EE
 keywords: enterprise, upgrade
 ---
+{% if include.version=="deep-2.0" %}
 
 To upgrade Docker Enterprise Edition you need to individually upgrade each of the
 following components:
@@ -105,6 +112,4 @@ Log in into the DTR web UI to check if there's a new version available.
 Then follow these [instructions to upgrade DTR](/datacenter/dtr/2.3/guides/admin/upgrade.md).
 When this is finished, your Docker EE has been upgraded.
 
-## Where to go next
-
-* [Backup Docker EE](backup.md)
+{% endif %}

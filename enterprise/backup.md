@@ -1,9 +1,16 @@
 ---
 title: Backup Docker EE
-description: Learn how to create a backup of your Docker Enterprise Edition, and
-  how to restore from a backup
+description: |
+  Learn how to create a backup of your Docker Enterprise Edition, and how to restore from a backup.
+ui_tabs:
+- version: deep-2.0
+  orhigher: false
+next_steps:
+- path: upgrade/
+  title: Upgrade Docker EE
 keywords: enterprise, backup, restore
 ---
+{% if include.version=="deep-2.0" %}
 
 To backup Docker Enterprise Edition you need to create individual backups
 for each of the following components:
@@ -33,6 +40,4 @@ components one by one:
 2. Universal Control Plane (UCP). [Learn more](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md#restore-your-swarm).
 3. Docker Trusted Registry (DTR). [Learn more](/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery.md#restore-dtr-data).
 
-## Where to go next
-
-* [Upgrade Docker EE](upgrade.md)
+{% endif %}
