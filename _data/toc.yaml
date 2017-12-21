@@ -1352,34 +1352,34 @@ reference:
     - path: /reference/dtr/2.5/cli/upgrade/
       title: upgrade
   - title: UCP 3.0 API
-    path: /datacenter/ucp/3.0/reference/api/
+    path: /reference/ucp/3.0/api/
   - sectiontitle: UCP 3.0 CLI
     section:
-    - path: /datacenter/ucp/3.0/reference/cli/
+    - path: /reference/ucp/3.0/cli/
       title: docker/ucp overview
-    - path: /datacenter/ucp/3.0/reference/cli/backup/
+    - path: /reference/ucp/3.0/cli/backup/
       title: backup
-    - path: /datacenter/ucp/3.0/reference/cli/dump-certs/
+    - path: /reference/ucp/3.0/cli/dump-certs/
       title: dump-certs
-    - path: /datacenter/ucp/3.0/reference/cli/example-config/
+    - path: /reference/ucp/3.0/cli/example-config/
       title: example-config
-    - path: /datacenter/ucp/3.0/reference/cli/id/
+    - path: /reference/ucp/3.0/cli/id/
       title: id
-    - path: /datacenter/ucp/3.0/reference/cli/images/
+    - path: /reference/ucp/3.0/cli/images/
       title: images
-    - path: /datacenter/ucp/3.0/reference/cli/install/
+    - path: /reference/ucp/3.0/cli/install/
       title: install
-    - path: /datacenter/ucp/3.0/reference/cli/restart/
+    - path: /reference/ucp/3.0/cli/restart/
       title: restart
-    - path: /datacenter/ucp/3.0/reference/cli/restore/
+    - path: /reference/ucp/3.0/cli/restore/
       title: restore
-    - path: /datacenter/ucp/3.0/reference/cli/stop/
+    - path: /reference/ucp/3.0/cli/stop/
       title: stop
-    - path: /datacenter/ucp/3.0/reference/cli/support/
+    - path: /reference/ucp/3.0/cli/support/
       title: support
-    - path: /datacenter/ucp/3.0/reference/cli/uninstall-ucp/
+    - path: /reference/ucp/3.0/cli/uninstall-ucp/
       title: uninstall-ucp
-    - path: /datacenter/ucp/3.0/reference/cli/upgrade/
+    - path: /reference/ucp/3.0/cli/upgrade/
       title: upgrade
 
 

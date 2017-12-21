@@ -35,7 +35,7 @@ $ docker container run --rm -it \
 This runs the uninstall command in interactive mode, so that you are prompted
 for any necessary configuration values. Running this command on a single manager
 node will uninstall UCP from the entire cluster. [Check the reference
-documentation](../../../reference/cli/index.md) to learn the options available
+documentation](/reference/ucp/3.0/cli/index.md) to learn the options available
 in the `uninstall-ucp` command.
 
 ## Swarm mode CA

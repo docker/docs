@@ -104,7 +104,7 @@ UCP issues different types of certificates depending on the user:
 ## Download client certificates by using the REST API
 
 You can also download client bundles by using the
-[UCP REST API](../../../reference/api/index.md). In this example,
+[UCP REST API](/reference/ucp/3.0/api/). In this example,
 we use `curl` to make the web requests to the API, and `jq` to parse the
 responses.
 
