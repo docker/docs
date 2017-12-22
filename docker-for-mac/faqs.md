@@ -225,9 +225,16 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### Disk Usage
+### Can I pass through a USB device to a container?
 
-#### What is the disk image?
+Unfortunately it is not possible to pass through a USB device (or a
+serial port) to a container. For use cases requiring this, we
+recommend the use of [Docker Toolbox](/toolbox/overview.md).
+
+
+## Disk Usage
+
+### What is the disk image?
 
 The containers and images are stored in a _disk image_ named
 `Docker.raw` or `Docker.qcow2` depending on your settings (see below).
@@ -236,13 +243,13 @@ By default, the disk image is stored in
 subdirectory starting with Docker for Mac 17.12, and
 `com.docker.driver.amd64-linux` before.
 
-#### Qcow2 or Raw?
+### Qcow2 or Raw?
 
 Starting with High Sierra with Apple Filesystem (APFS) enabled, Docker
 uses disk images in the "raw" format (`Docker.raw`), otherwise in the
 Qcow2 format (`Docker.qcow2`).
 
-#### Docker.raw consumes an insane amount of disk space!
+### Docker.raw consumes an insane amount of disk space!
 
 This is an illusion.  Docker uses the raw format on Macs running the
 Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
@@ -268,7 +275,7 @@ $ du -h Docker.raw
 2,2G	Docker.raw
 ```
 
-#### How do I reduce the size of Docker.qcow2?
+### How do I reduce the size of Docker.qcow2?
 
 If your Docker for Mac uses the Qcow format, the [disk image
 file](#what-is-the-disk-image) is `Docker.qcow2`.  This file grows
@@ -305,11 +312,6 @@ For background conversation thread on this, see
 [Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
-### Can I pass through a USB device to a container?
-
-Unfortunately it is not possible to pass through a USB device (or a
-serial port) to a container. For use cases requiring this, we
-recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
 ## Components of Docker for Mac
 ### What is HyperKit?
