@@ -227,14 +227,20 @@ the Getting Started topic.
 
 ### Disk Usage
 
+#### What is the disk image?
+
+The containers and images are stored in a _disk image_ named
+`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
+By default, the disk image is stored in
+`~/Library/Containers/com.docker.docker/Data`, in the `vm`
+subdirectory starting with Docker for Mac 17.12, and
+`com.docker.driver.amd64-linux` before.
+
 #### Qcow2 or Raw?
 
-By default Docker for Mac stores containers and images in a file
-`Docker.raw` or `Docker.qcow2` in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-Starting with High Sierra with APFS (Apple Filesystem) enabled, Docker
-uses the "raw" format (`Docker.raw`), otherwise it uses the Qcow2
-format (`Docker.qcow2`).
+Starting with High Sierra with Apple Filesystem (APFS) enabled, Docker
+uses disk images in the "raw" format (`Docker.raw`), otherwise in the
+Qcow2 format (`Docker.qcow2`).
 
 #### Docker.raw consumes an insane amount of disk space!
 
@@ -246,7 +252,8 @@ its physical size. To see the physical size, add the `-ks` switch; to
 see the logical size in human readable form, add `-lh`:
 
 ```bash
-$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
+$ cd ~/Library/Containers/com.docker.docker/Data
+$ cd vm   # or com.docker.driver.amd64-linux
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
@@ -263,12 +270,9 @@ $ du -h Docker.raw
 
 #### How do I reduce the size of Docker.qcow2?
 
-By default Docker for Mac stores containers and images in a file saved
-in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-If your Docker for Mac uses the Qcow format, this file is
-`Docker.qcow2`.  This file grows on-demand up to a default maximum
-file size of 64GiB.
+If your Docker for Mac uses the Qcow format, the [disk image
+file](#what-is-the-disk-image) is `Docker.qcow2`.  This file grows
+on-demand up to a default maximum file size of 64GiB.
 
 In Docker 1.12 the only way to free space on the host is to delete
 this file and restart the app. Unfortunately this removes all images
