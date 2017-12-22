@@ -87,6 +87,8 @@ the following:
         build: .
         ports:
          - "5000:5000"
+        links:
+         - redis
       redis:
         image: "redis:alpine"
 
