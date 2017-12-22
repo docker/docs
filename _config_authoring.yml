@@ -25,6 +25,8 @@ docker_ee_version: "17.06"
 compose_version: "1.16.1"
 machine_version: "0.12.2"
 distribution_version: "2.6"
+dtr_version: "2.4"
+ucp_version: "2.2"
 
 ucp_versions:
   - version: "2.2"
@@ -38,6 +40,9 @@ ucp_versions:
     path: /datacenter/ucp/1.1/overview/
 
 dtr_versions:
+  - version: "2.4"
+    path: /datacenter/dtr/2.4/guides/
+    latest: true
   - version: "2.3"
     latest: true
     path: /datacenter/dtr/2.3/guides/
@@ -47,6 +52,16 @@ dtr_versions:
     path: /datacenter/dtr/2.1/guides/
   - version: "2.0"
     path: /datacenter/dtr/2.0/
+
+tablabels:
+  deep-2.0: Docker Enterprise Edition Platform 2.0
+  ucp-3.0: Universal Control Plane 3.0
+  ucp-2.2: Universal Control Plane 2.2
+  dtr-2.5: Docker Trusted Registry 2.5
+  docker-cli-linux: Docker CLI on Mac/Linux
+  docker-cli-win: Docker CLI on Windows
+  kubectl: Kubernetes CLI
+  cli: CLI
 
 defaults:
   -
