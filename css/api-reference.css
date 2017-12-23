@@ -17,3 +17,9 @@ api-logo img {
     width: 136px !important;
     margin: 32px 0 0 50px;
 }
+/**
+ * Disable request-type badges, see https://github.com/Rebilly/ReDoc/issues/61
+ */
+redoc .operation-type {
+    display: none !important;
+}
