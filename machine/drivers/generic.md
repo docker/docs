@@ -15,8 +15,10 @@ The driver will perform a list of tasks on create:
 -   If docker is not running on the host, it will be installed automatically.
 -   It will update the host packages (`apt-get update`, `yum update`...).
 -   It will generate certificates to secure the docker daemon.
+-   If the host uses systemd, it will create /etc/systemd/system/docker.service.d/10-machine.conf
 -   The docker daemon will be restarted, thus all running containers will be stopped.
 -   The hostname will be changed to fit the machine name.
+
 
 ### Example
 
@@ -57,3 +59,15 @@ as a sudoer with `NOPASSWD`. See https://help.ubuntu.com/community/Sudoers.
 | `--generic-ssh-key`        | `GENERIC_SSH_KEY`    | -                         |
 | `--generic-ssh-user`       | `GENERIC_SSH_USER`   | `root`                    |
 | `--generic-ssh-port`       | `GENERIC_SSH_PORT`   | `22`                      |
+
+### Systemd settings
+
+For systems that use systemd, if you have an existing configuration defined in 
+'/etc/systemd/system/docker.service.d/' this  may conflict with the settings created by
+docker-machine.  Make sure you don't have any other configuration files in this location 
+that override the [ExecStart] setting.
+
+Once you have confirmed any conflicting settings have been removed, run 
+`sudo systemctl daemon reload` followed by `sudo systemctl restart docker`
+
+
