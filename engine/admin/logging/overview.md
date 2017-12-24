@@ -89,6 +89,26 @@ json-file
 {% endraw %}
 ```
 
+## Configure the delivery mode of log messages from container to log driver
+
+Docker provides two modes for delivering messages from the container to the log driver since Docker 17.04:
+1. (default) direct, blocking delivery from container to driver
+2. non-blocking delivery that stores log messages in an intermediate per-container ring buffer
+
+The non-blocking mode of message delivery is useful for ensuring that applications will not block when the logging sub-system is unable to keep up with message throughput.
+
+*WARNING*: the oldest messages in memory *will be dropped* when the buffer is full, but this is often preferable to blocking the log-writing process of an application.  
+
+The `mode` log option controls whether to use the `blocking` (default) or `non-blocking` message delivery.
+
+When `mode` is set to `non-blocking`, the `max-buffer-size` log option may be used to control the size of the ring buffer used for intermediate message storage.  `max-buffer-size` defaults to 1 megabyte.
+
+The following example starts an Alpine container with log output in non-blocking mode and a 4 megabyte buffer:
+
+```bash
+$ docker run --log-opt mode=non-blocking --log-opt max-buffer-size=4m alpine sh
+```
+
 ### Use environment variables or labels with logging drivers
 
 Some logging drivers add the value of a container's `--env|-e` or `--label`
