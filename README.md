@@ -76,17 +76,7 @@ each of the required images locally and tag it appropriately:
     > FROM docs/docker.github.io:nginx-onbuild
     > ```
 
-3.  After repeating step 2 for each archive branch, build the `docs-base` image:
-
-    ```bash
-    $ git checkout docs-base
-    $ docker build -t docker.github.io/docs:docs-base .
-    ```
-
-    This copies all the static HTML from each of the images created in step 2
-    into the `docs-base` image.
-
-4.  After building `docs-base`, build the image for `master`:
+3.  After repeating step 2 for each archive branch, build the image for `master`:
 
     ```bash
     $ git checkout master
