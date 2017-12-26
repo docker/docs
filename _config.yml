@@ -19,7 +19,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 # You can't have - characters in these for non-YAML reasons
 
 docker_ce_stable_version: "17.09"
-latest_stable_docker_engine_api_version: "1.32"
+latest_stable_docker_engine_api_version: "1.33"
 docker_ce_edge_version: "17.11"
 docker_ee_version: "17.06"
 compose_version: "1.18.0"

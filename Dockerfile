@@ -1,3 +1,15 @@
+# This Dockerfile builds the docs for https://docs.docker.com/
+# from the master branch of https://github.com/docker/docker.github.io
+#
+# Here is the sequence:
+# 1.  Set up the build
+# 2.  Fetch upstream resources
+# 3.  Build master
+# 4.  Copy static HTML from already-built archive images
+# 5.  Copy Nginx config
+#
+# When the image is run, it starts Nginx and serves the docs at port 4000
+
 # Get basic configs and Jekyll env
 FROM docs/docker.github.io:docs-builder AS builder
 
@@ -7,23 +19,9 @@ ENV TARGET=/usr/share/nginx/html
 # Set the source directory to md_source
 ENV SOURCE=md_source
 
-# Put the archives into place
-# This looks like it is going in the wrong direction, but the static
-# HTML is in the "TARGET" location in the docs-base image, and we need to
-# get it into our "SOURCE" location because it is part of our source.
-
-COPY --from=docs/docker.github.io:docs-base ${TARGET} ${SOURCE}
-# Get a colliding file out of the way
-RUN rm ${SOURCE}/index.html
-
 # Get the current docs from the checked out branch
 # ${SOURCE} will contain a directory for each archive
 COPY . ${SOURCE}
-
-# ${SOURCE} now contains the static HTML for the archives in vrsion-specific
-# directories, as well as the Markdown files for master.
-# We still need to fetch upstream resources and then to build with Jekyll.
-
 
 ####### START UPSTREAM RESOURCES ########
 # Set vars used by fetch-upstream-resources.sh script
@@ -31,8 +29,8 @@ COPY . ${SOURCE}
 ## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 
 # Engine
-ENV ENGINE_SVN_BRANCH="branches/17.06.x"
-ENV ENGINE_BRANCH="17.06.x"
+ENV ENGINE_SVN_BRANCH="branches/17.09.x"
+ENV ENGINE_BRANCH="17.09.x"
 
 # Distribution
 ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -50,6 +48,7 @@ RUN jekyll build -s ${SOURCE} -d ${TARGET} --config ${SOURCE}/_config.yml
 # Fix up some links, don't touch the archives
 RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
+# BUILD OF MASTER DOCS IS NOW DONE!
 # Reset to alpine so we don't get any docs source or extra apps
 FROM nginx:alpine
 
@@ -58,6 +57,22 @@ ENV TARGET=/usr/share/nginx/html
 
 # Get the built docs output from the previous step
 COPY --from=builder ${TARGET} ${TARGET}
+
+# Get all the archive static HTML and put it into place
+# To add a new archive, add it here
+# AND ALSO edit _data/docsarchives/archives.yaml to add it to the drop-down
+COPY --from=docs/docker.github.io:v1.4 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.5 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.6 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.7 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.8 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.9 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.10 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.11 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.12 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.13 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 
 # Get the nginx config from the nginx-onbuild image
 COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
