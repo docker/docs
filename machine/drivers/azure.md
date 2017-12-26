@@ -46,23 +46,23 @@ Required:
 
 Optional:
 
+- `--azure-availability-set`: Azure Availability Set to place the virtual machine into. [[?][av-set]]
+- `--azure-docker-port`: Port number for Docker engine.
+- `--azure-environment`: Azure environment (e.g. `AzurePublicCloud`, `AzureChinaCloud`).
 - `--azure-image`: Azure virtual machine image in the format of Publisher:Offer:Sku:Version [[?][vm-image]]
 - `--azure-location`: Azure region to create the virtual machine. [[?][location]]
+- `--azure-no-public-ip`: Do not create a public IP address for the machine (implies `--azure-use-private-ip`). Should be used only when creating machines from an Azure VM within the same subnet.
+- `--azure-open-port`: Make additional port number(s) accessible from the Internet [[?][nsg]]
+- `--azure-private-ip-address`: Specify a static private IP address for the machine.
 - `--azure-resource-group`: Azure Resource Group name to create the resources in.
 - `--azure-size`: Size for Azure Virtual Machine. [[?][vm-size]]
 - `--azure-ssh-user`: Username for SSH login.
-- `--azure-vnet`: Azure Virtual Network name to connect the virtual machine.
-  [[?][vnet]] To specify a Virtual Network from another resource group, use `resourcegroup:vnet-name` format.
+- `--azure-static-public-ip`: Assign a static public IP address to the machine.
 - `--azure-subnet`: Azure Subnet Name to be used within the Virtual Network.
 - `--azure-subnet-prefix`: Private CIDR block. Used to create subnet if it does not exist. Must match in the case that the subnet does exist.
-- `--azure-availability-set`: Azure Availability Set to place the virtual machine into. [[?][av-set]]
-- `--azure-open-port`: Make additional port number(s) accessible from the Internet [[?][nsg]]
-- `--azure-private-ip-address`: Specify a static private IP address for the machine.
 - `--azure-use-private-ip`: Use private IP address of the machine to connect. It's useful for managing Docker machines from another machine on the same network e.g. while deploying Swarm.
-- `--azure-no-public-ip`: Do not create a public IP address for the machine (implies `--azure-use-private-ip`). Should be used only when creating machines from an Azure VM within the same subnet.
-- `--azure-static-public-ip`: Assign a static public IP address to the machine.
-- `--azure-docker-port`: Port number for Docker engine.
-- `--azure-environment`: Azure environment (e.g. `AzurePublicCloud`, `AzureChinaCloud`).
+- `--azure-vnet`: Azure Virtual Network name to connect the virtual machine.
+  [[?][vnet]] To specify a Virtual Network from another resource group, use `resourcegroup:vnet-name` format.
 
 [vm-image]: https://azure.microsoft.com/en-us/documentation/articles/resource-groups-vm-searching/
 [location]: https://azure.microsoft.com/en-us/regions/
@@ -74,23 +74,23 @@ Optional:
 
 | CLI option                      | Environment variable          | Default            |
 | ------------------------------- | ----------------------------- | ------------------ |
-| **`--azure-subscription-id`**   | `AZURE_SUBSCRIPTION_ID`       | -                  |
+| `--azure-availability-set`      | `AZURE_AVAILABILITY_SET`      | `docker-machine`   |
+| `--azure-docker-port`           | `AZURE_DOCKER_PORT`           | `2376`             |
 | `--azure-environment`           | `AZURE_ENVIRONMENT`           | `AzurePublicCloud` |
 | `--azure-image`                 | `AZURE_IMAGE`                 | `canonical:UbuntuServer:16.04.0-LTS:latest` |
 | `--azure-location`              | `AZURE_LOCATION`              | `westus`           |
+| `--azure-no-public-ip`          | -                             | -                  |
+| `--azure-open-port`             | -                             | -                  |
+| `--azure-private-ip-address`    | -                             | -                  |
 | `--azure-resource-group`        | `AZURE_RESOURCE_GROUP`        | `docker-machine`   |
 | `--azure-size`                  | `AZURE_SIZE`                  | `Standard_A2`      |
 | `--azure-ssh-user`              | `AZURE_SSH_USER`              | `docker-user`      |
-| `--azure-vnet`                  | `AZURE_VNET`                  | `docker-machine`   |
-| `--azure-subnet`                | `AZURE_SUBNET`                | `docker-machine`   |
-| `--azure-subnet-prefix`         | `AZURE_SUBNET_PREFIX`         | `192.168.0.0/16`   |
-| `--azure-availability-set`      | `AZURE_AVAILABILITY_SET`      | `docker-machine`   |
-| `--azure-open-port`             | -                             | -                  |
-| `--azure-private-ip-address`    | -                             | -                  |
-| `--azure-use-private-ip`        | -                             | -                  |
-| `--azure-no-public-ip`          | -                             | -                  |
 | `--azure-static-public-ip`      | -                             | -                  |
-| `--azure-docker-port`           | `AZURE_DOCKER_PORT`           | `2376`             |
+| `--azure-subnet-prefix`         | `AZURE_SUBNET_PREFIX`         | `192.168.0.0/16`   |
+| `--azure-subnet`                | `AZURE_SUBNET`                | `docker-machine`   |
+| **`--azure-subscription-id`**   | `AZURE_SUBSCRIPTION_ID`       | -                  |
+| `--azure-use-private-ip`        | -                             | -                  |
+| `--azure-vnet`                  | `AZURE_VNET`                  | `docker-machine`   |
 
 ## Notes
 
