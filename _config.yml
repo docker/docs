@@ -1,1 +1,1 @@
-exclude: ["src","highlight","hooks"]
+exclude: ["src","hooks"]
