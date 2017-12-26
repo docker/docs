@@ -40,6 +40,7 @@ including purchasing options, see
 
 Docker CE and EE are available on multiple platforms, on cloud and on-premises.
 Use the following tables to choose the best installation path for you.
+Click on platform name to navigate to platform-specific installation instructions.
 
 ### Desktop
 
