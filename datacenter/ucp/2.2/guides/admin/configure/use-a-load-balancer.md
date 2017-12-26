@@ -134,6 +134,9 @@ backend ucp_upstream_servers_443
         "Timeout": 2,
         "UnhealthyThreshold": 4
     },
+    "ConnectionSettings": {
+    "IdleTimeout": 600
+    },
     "VPCId": "vpc-XXXXXX",
     "BackendServerDescriptions": [],
     "Instances": [
