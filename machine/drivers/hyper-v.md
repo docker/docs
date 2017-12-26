@@ -44,11 +44,11 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 | CLI option                   | Environment variable       | Default                  |
 | ---------------------------- | -------------------------- | ------------------------ |
 | `--hyperv-boot2docker-url`   | `HYPERV_BOOT2DOCKER_URL`   | _Latest boot2docker url_ |
-| `--hyperv-virtual-switch`    | `HYPERV_VIRTUAL_SWITCH`    | _first found_            |
+| `--hyperv-cpu-count`         | `HYPERV_CPU_COUNT`         | `1`                      |
 | `--hyperv-disk-size`         | `HYPERV_DISK_SIZE`         | `20000`                  |
 | `--hyperv-memory`            | `HYPERV_MEMORY`            | `1024`                   |
-| `--hyperv-cpu-count`         | `HYPERV_CPU_COUNT`         | `1`                      |
 | `--hyperv-static-macaddress` | `HYPERV_STATIC_MACADDRESS` | _undefined_              |
+| `--hyperv-virtual-switch`    | `HYPERV_VIRTUAL_SWITCH`    | _first found_            |
 | `--hyperv-vlan-id`           | `HYPERV_VLAN_ID`           | _undefined_              |
 
 ## Example
