@@ -61,7 +61,7 @@ create a file called `Dockerfile`, copy-and-paste the following content into
 that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
 
-```conf
+```dockerfile
 # Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
