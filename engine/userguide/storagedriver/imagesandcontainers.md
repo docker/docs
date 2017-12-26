@@ -199,7 +199,9 @@ layers are the same.
 4.  Copy the contents of the second Dockerfile above into a new file called
     `Dockerfile`.
 
-5.  Within the `cow-test/` directory, build the first image.
+5.  Within the `cow-test/` directory, build the first image. Don't forget to
+    include the final `.` in the command. That sets the `PATH`, which tells
+    Docker where to look for any files that need to be added to the image.
 
     ```bash
     $ docker build -t acme/my-base-image:1.0 -f Dockerfile.base .
