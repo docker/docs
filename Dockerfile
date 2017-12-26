@@ -74,6 +74,12 @@ COPY --from=docs/docker.github.io:v1.13 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
 COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
 
+# The archives are self-browseable and each come with an index.html. This creates
+# a conflict with the index.html and 404.html from the master build. The easiest
+# solution is to just overwrite them again here.
+COPY --from=builder ${TARGET}/index.html ${TARGET}/index.html
+COPY --from=builder ${TARGET}/404.html ${TARGET}/404.html
+
 # Get the nginx config from the nginx-onbuild image
 COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
