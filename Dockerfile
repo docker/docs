@@ -1,5 +1,11 @@
-FROM starefossen/github-pages:137
+# Set to the version for this archive
+ARG VER=v17.03
 
-COPY . /usr/src/app
+# This image comes from the Dockerfile.builder.onbuild file in the publish-tools branch
+# https://github.com/docker/docker.github.io/blob/publish-tools/Dockerfile.builder.onbuild
+FROM docs/docker.github.io:docs-builder-onbuild AS builder
 
-CMD bundle exec jekyll serve -d /_site --watch -H 0.0.0.0 -P 4000
+# Reset the docs/docker.github.io:nginx-onbuild image, which is based on nginx:alpine
+# This image comes from the Dockerfule.nginx.onbuild in the publish-tools branch
+# https://github.com/docker/docker.github.io/blob/publish-tools/Dockerfile.nginx.onbuild
+FROM docs/docker.github.io:nginx-onbuild
