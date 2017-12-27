@@ -34,7 +34,7 @@ decreases. Don't leave that replica offline for long.
 * Adding too many replicas to the cluster might also lead to performance
 degradation, as data needs to be replicated across all replicas.
 
-To have high-availability on UCP and DTR, you need a minimum of:
+To have high-availability on UCP and DTR, it is recommended to have a minimum of:
 
 * 3 dedicated nodes to install UCP with high availability,
 * 3 dedicated nodes to install DTR with high availability,
