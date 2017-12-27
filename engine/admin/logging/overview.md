@@ -108,7 +108,7 @@ The `max-buffer-size` log option controls the size of the ring buffer used for i
 The following example starts an Alpine container with log output in non-blocking mode and a 4 megabyte buffer:
 
 ```bash
-$ docker run --log-opt mode=non-blocking --log-opt max-buffer-size=4m alpine sh
+$ docker run -it --log-opt mode=non-blocking --log-opt max-buffer-size=4m alpine ping 127.0.0.1
 ```
 
 ### Use environment variables or labels with logging drivers
