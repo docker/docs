@@ -289,11 +289,10 @@ images, see the [README in the publish-tools branch](https://github.com/docker/d
   for details.
 - Each archive branch automatically builds an image tagged
   `docs/docker.github.io:v<VERSION>` when a change is merged into that branch.
-- The `docs-base` branch has a Dockerfile which gathers the static HTML from all
-  archive branches into an image called `docs/docker.github.io:docs-base`.
-- The `master` branch has a Dockerfile which uses the static HTML from the
-  `docs/docker.github.io:docs-base` image, in combination with the Markdown
-  files in `master`, to create the full site at https://docs.docker.com/. All
+- The `master` branch has a Dockerfile which uses the static HTML from each
+  archive image, in combination with the Markdown
+  files in `master` and some upstream resources which are fetched at build-time,
+  to create the full site at https://docs.docker.com/. All
   of the long-running branches, such as `vnext-engine`, `vnext-compose`, etc,
   use the same logic.
 
@@ -306,7 +305,7 @@ is archived into a version-specific branch like `v17.09`, by doing the following
 
     ```bash
     $ git checkout <HASH>
-    $ git checkokut -b v17.09
+    $ git checkout -b v17.09
     ```
 
 2.  Run the `_scripts/fetch-upstream-resources.sh` script. This puts static
@@ -317,7 +316,8 @@ is archived into a version-specific branch like `v17.09`, by doing the following
     $ _scripts/fetch-upstream/resources.sh
     ```
 
-3.  Overwrite the `Dockerfile` with the `Dockerfile.archive`. Edit the resulting
+3.  Overwrite the `Dockerfile` with the `Dockerfile.archive` (use `cp` rather
+    than `mv` so you don't inadvertently remove either file). Edit the resulting
     `Dockerfile` and set the `VER` build argument to the appropriate value, like
     `v17.09`.
 
