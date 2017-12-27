@@ -63,8 +63,8 @@ Cloud Logging driver options:
 |:----------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `gcp-project`   | optional | Which GCP project to log to. Defaults to discovering this value from the GCE metadata service.                                                               |
 | `gcp-log-cmd`   | optional | Whether to log the command that the container was started with. Defaults to false.                                                                           |
-| `labels`        | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for container.                                    |
-| `env`           | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for container.                  |
+| `labels`        | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                    |
+| `env`           | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.                  |
 | `env-regex`     | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). |
 | `gcp-meta-zone` | optional | Zone name for the instance.                                                                                                                                  |
 | `gcp-meta-name` | optional | Instance name.                                                                                                                                               |
