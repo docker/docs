@@ -115,7 +115,7 @@ by step instructions are also included below.
     {: .important}
 
     If you have problems installing with `curl`, see
-    [Alternative Install Options](install.md#alternative-install-options).
+    [Alternative Install Options](install.md#alternative-install-options) tab above.
 
 2.  Apply executable permissions to the binary:
 
