@@ -91,7 +91,7 @@ json-file
 
 ## Configure the delivery mode of log messages from container to log driver
 
-Docker provides two modes for delivering messages from the container to the log driver since Docker 17.04:
+Docker provides two modes for delivering messages from the container to the log driver:
 
 * (default) direct, blocking delivery from container to driver
 * non-blocking delivery that stores log messages in an intermediate per-container ring buffer for consumption by driver
