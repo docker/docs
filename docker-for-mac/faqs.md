@@ -225,18 +225,31 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### Disk Usage
+### Can I pass through a USB device to a container?
 
-#### Qcow2 or Raw?
+Unfortunately it is not possible to pass through a USB device (or a
+serial port) to a container. For use cases requiring this, we
+recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
-By default Docker for Mac stores containers and images in a file
-`Docker.raw` or `Docker.qcow2` in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-Starting with High Sierra with APFS (Apple Filesystem) enabled, Docker
-uses the "raw" format (`Docker.raw`), otherwise it uses the Qcow2
-format (`Docker.qcow2`).
 
-#### Docker.raw consumes an insane amount of disk space!
+## Disk Usage
+
+### What is the disk image?
+
+The containers and images are stored in a _disk image_ named
+`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
+By default, the disk image is stored in
+`~/Library/Containers/com.docker.docker/Data`, in the `vm`
+subdirectory starting with Docker for Mac 17.12, and
+`com.docker.driver.amd64-linux` before.
+
+### Qcow2 or Raw?
+
+Starting with High Sierra with Apple Filesystem (APFS) enabled, Docker
+uses disk images in the "raw" format (`Docker.raw`), otherwise in the
+Qcow2 format (`Docker.qcow2`).
+
+### Docker.raw consumes an insane amount of disk space!
 
 This is an illusion.  Docker uses the raw format on Macs running the
 Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
@@ -246,7 +259,8 @@ its physical size. To see the physical size, add the `-ks` switch; to
 see the logical size in human readable form, add `-lh`:
 
 ```bash
-$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
+$ cd ~/Library/Containers/com.docker.docker/Data
+$ cd vm   # or com.docker.driver.amd64-linux
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
@@ -261,14 +275,11 @@ $ du -h Docker.raw
 2,2G	Docker.raw
 ```
 
-#### How do I reduce the size of Docker.qcow2?
+### How do I reduce the size of Docker.qcow2?
 
-By default Docker for Mac stores containers and images in a file saved
-in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-If your Docker for Mac uses the Qcow format, this file is
-`Docker.qcow2`.  This file grows on-demand up to a default maximum
-file size of 64GiB.
+If your Docker for Mac uses the Qcow format, the [disk image
+file](#what-is-the-disk-image) is `Docker.qcow2`.  This file grows
+on-demand up to a default maximum file size of 64GiB.
 
 In Docker 1.12 the only way to free space on the host is to delete
 this file and restart the app. Unfortunately this removes all images
@@ -301,11 +312,6 @@ For background conversation thread on this, see
 [Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
-### Can I pass through a USB device to a container?
-
-Unfortunately it is not possible to pass through a USB device (or a
-serial port) to a container. For use cases requiring this, we
-recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
 ## Components of Docker for Mac
 ### What is HyperKit?
