@@ -341,8 +341,8 @@ is archived into a version-specific branch like `v17.09`, by doing the following
 5.  Make sure the archive builds.
 
     ```bash
-    $ docker build -t docker build -t docker.github.io/docs:v17.09 .
-    $ docker run --rm -it -p 4000:4000 docker.github.io/docs:v17.09
+    $ docker build -t docker build -t docs/docker.github.io:v17.09 .
+    $ docker run --rm -it -p 4000:4000 docs/docker.github.io:v17.09
     ```
 
     After the `docker run` command, browse to `http://localhost:4000/` and
