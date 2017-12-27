@@ -195,7 +195,7 @@ function hookupTOCEvents()
 }
 
 jQuery(document).ready(function(){
-    $.getJSON( "/metadata.txt", function( data ) {
+    $.getJSON( "/v1.12/metadata.txt", function( data ) {
       metadata = data;
       hookupTOCEvents();
     });
