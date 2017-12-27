@@ -4,8 +4,7 @@ images used by the Docker docs publication process.
 
 > **Warning**: Each time a change is pushed to this branch, all the images built
 from this branch will be automatically rebuilt on Docker Cloud. This will in
-turn cause all the docs archives and the docs-base image (which has a copy of
-each doc archive in a separate directory) to be rebuilt.
+turn cause all the docs archives to be rebuilt.
 
 ## Overview of creating an archive image
 
