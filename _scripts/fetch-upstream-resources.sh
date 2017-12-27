@@ -38,7 +38,7 @@ DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
 DISTRIBUTION_BRANCH="release/2.6"
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
-svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ${SOURCE}engine/extend || (echo "Failed engine/extend download" && exit -1)
+svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/cli/docs/extend ${SOURCE}/engine/extend || (echo "Failed engine/extend download" && exit -1)
 svn co https://github.com/docker/docker-ce/"$ENGINE_SVN_BRANCH"/components/engine/docs/api ${SOURCE}/engine/api || (echo "Failed engine/api download" && exit -1) # This will only get you the old API MD files 1.18 through 1.24
 svn co https://github.com/docker/distribution/"$DISTRIBUTION_SVN_BRANCH"/docs/spec ${SOURCE}/registry/spec || (echo "Failed registry/spec download" && exit -1)
 svn co https://github.com/docker/compliance/trunk/docs/compliance ${SOURCE}/compliance || (echo "Failed docker/compliance download" && exit -1)
