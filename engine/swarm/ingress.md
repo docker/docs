@@ -26,10 +26,10 @@ service.
 ## Publish a port for a service
 
 Use the `--publish` flag to publish a port when you create a service. `target`
-is the port inside the container, and `publish` is the port to bind on the
-routing mesh. If you leave off the `publish` port, a random high-numbered port is
-bound for each service task. You will need to inspect the task to determine the
-port.
+is used to specify the port inside the container, and `published` is used to
+specify the port to bind on the routing mesh. If you leave off the `published`
+port, a random high-numbered port is bound for each service task. You will
+need to inspect the task to determine the port.
 
 ```bash
 $ docker service create \
