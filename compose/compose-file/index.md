@@ -140,7 +140,7 @@ tutorial.
 
 - [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
 
-- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
+- [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
 
 Another good reference is the Compose file for the voting app sample used in the
 [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
