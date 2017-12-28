@@ -120,13 +120,6 @@ Q4 '17.
 
 Not yet. ETA to present more than 2 plans is Q1 2018.
 
-#### Do you allow limited beta's or invite-only rollouts for products?
-
-All products are discoverable on the Store, but we provide a means for
-invite-only rollouts (included in BYOL documentation being addressed by Bryan
-Lee). Via the invite-only rollout, only selected users can get entitled to
-content, but the product page will be discoverable by everyone).
-
 ## Licensing, terms and conditions, and pricing
 > **Note**: Check out BYOL Document first! (@kickingthetv TBD)
 
