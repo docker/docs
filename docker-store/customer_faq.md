@@ -1,17 +1,43 @@
 ---
 description: Docker Store frequently asked questions
 keywords: Docker, docker, store, purchase images
-title: Consumer FAQs
+title: Docker Store Customer FAQs
 ---
+
+## Customer FAQs
 
 ### How do I log in to the Docker Store?
 
-Log in to the Docker Store using your free Docker ID. Don't have a Docker ID yet? Go to [Docker Cloud](https://cloud.docker.com/) to sign up.
+Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID
+yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
+
+## Certification program
+
+### What is the certification program for images and plugins, and what are some benefits?
+
+The Docker Certification program for Infrastructure, Images, and Plugins is
+designed for both technology partners and enterprise customers to recognize
+high-quality Containers and Plugins, provide collaborative support, and ensure
+compatibility with Docker EE. Docker Certification is aligned to the available
+Docker EE infrastructure and gives enterprises a trusted way to run more
+technology in containers with support from both Docker and the publisher.
+
+## End user experience
+
+### Why do I see the pull command for a few products and no pull command in other products?
+
+If a publisher publishes multiple images as part of their plan - we do not
+display the pull command. The pull command visual is exclusively for submissions
+that have a single image.
+
+As a future feature we would like to start bringing in the concept of
+compositions because it is more connected to real world usage of containers. Our
+intent is to start surfacing a better UX by Q1 '18.
 
 ### Where can I see all of my purchases?
 
 To view your purchases, go to the account menu at the upper right corner, and
-click **Subscriptions**. The page that appears lists all of your active
+click **My Content**. The page that appears lists all of your active
 subscriptions, and any lapsed or canceled subscriptions.
 
 ### Can I buy subscriptions for my organization?
@@ -21,7 +47,7 @@ for use in their Organization. Once purchased, images are available for any
 organization member to pull.
 
 Organization owners can view the organization's subscriptions by changing the
-selected account on the **Subscriptions** page.
+selected account on the **My Content** page.
 
 ### How can I become a Docker Store publisher?
 
@@ -76,5 +102,5 @@ contact our [Billing Support team](mailto:billing@docker.com).
 You can view and download your all active licenses for an organization from the
 Subscriptions page.
 
-Click the user icon menu at the top right, choose **Subscriptions** and then
+Click the user icon menu at the top right, choose **My Content** and then
 select the organization from the **Accounts** drop down menu.
