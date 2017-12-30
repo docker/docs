@@ -180,7 +180,12 @@ from the repository.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  To configure the Docker service to start automatically at boot time, run the following command:
+    ```bash
+    $ sudo systemctl enable docker
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -231,7 +236,12 @@ a new file each time you want to upgrade Docker.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  To configure the Docker service to start automatically at boot time, run the following command:
+    ```bash
+    $ sudo systemctl enable docker
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
