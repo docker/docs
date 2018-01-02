@@ -186,6 +186,9 @@ the previous command (`docker container ls -q`).
 > address later in the tutorial. For now, the visitor counter isn't working
 > for the same reason; we haven't yet added a service to persist data.
 
+> Unable to connect to localhost?
+> 
+> Check also http://0.0.0.0/
 
 ## Scale the app
 
