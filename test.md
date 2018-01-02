@@ -120,7 +120,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   from the URL, and use that as the link in your docs file.
 
   - Keep in mind that this link doesn't resolve until you merge the PR and
-  your docs are published on [docs.docker.com](https://docs.docker.com/).
+  your docs are published on [docs.docker.com](/).
 
 {: id="custom-target-id"}
 
@@ -258,7 +258,7 @@ only need to do it on the first one. If you have a `<th>`, set it there.
 The glossary source lives in the documentation repository
 [docker.github.io](https://github.com/docker/docker.github.io) in
 `_data/glossary.yaml`. The glossary publishes to
-[https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
+[https://docs.docker.com/glossary/](/glossary/).
 
 To update glossary content, edit `_data/glossary.yaml`.
 

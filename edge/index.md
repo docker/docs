@@ -16,7 +16,7 @@ still need to subscribe to the stable channel as well.
 Commercial support is not available for Docker CE.
 
 For information about all Docker release channels and expectations about
-support, see [Docker channels](/engine/installation/#docker-channels).
+support, see [Docker channels](/install/index.md#docker-channels).
 
 This page lists features that are only available in Docker CE Edge releases.
 Where applicable, the API and CLI reference documentation has been updated to

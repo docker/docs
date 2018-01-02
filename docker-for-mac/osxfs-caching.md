@@ -7,9 +7,9 @@ toc_min: 2
 ---
 
 [Docker 17.04 CE
-Edge](https://docs.docker.com/edge/#docker-ce-edge-new-features) adds support
+Edge](/edge/index.md#docker-ce-edge-new-features) adds support
 for two new flags to the [docker run `-v`,
-`--volume`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
+`--volume`](/engine/reference/run/#volume-shared-filesystems)
 option, `cached` and `delegated`, that can significantly improve the performance
 of mounted volume access on Docker for Mac. These options begin to solve some of
 the challenges discussed in [Performance issues, solutions, and
@@ -100,8 +100,8 @@ temporary discrepancies are allowed between container and host.
 
 Each of these configurations (`consistent`, `cached`, `delegated`) can be
 specified as a suffix to the
-[`-v`](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems)
-option of [`docker run`](https://docs.docker.com/engine/reference/run.md). For
+[`-v`](/engine/reference/run/#volume-shared-filesystems)
+option of [`docker run`](/engine/reference/run.md). For
 example, to bind-mount `/Users/yallop/project` in a container under the path
 `/project`, you might run the following command:
 

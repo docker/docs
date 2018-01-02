@@ -4,6 +4,7 @@ keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, u
 redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
+- /engine/installatioin/linux/docker-ee/suse/
 title: Get Docker EE for SLES
 toc_max: 4
 ---
@@ -426,6 +427,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).

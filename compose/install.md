@@ -16,12 +16,12 @@ have Docker Engine installed either locally or remote, depending on your setup.
 included as part of those desktop installs.
 
 - On Linux systems, first install the
-[Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
+[Docker](/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/installation/linux/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](/install/linux/linux-postinstall.md).
 
 ## Install Compose
 
@@ -58,7 +58,7 @@ install Compose separately. Docker install instructions for these are here:
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 **If you are running the Docker daemon and client directly on Microsoft
-Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
+Windows Server 2016** (with [Docker EE for Windows Server 2016](/install/windows/docker-ee.md), you _do_ need to install
 Docker Compose. To do so, follow these steps:
 
 1.  Start an "elevated" PowerShell (run it as administrator).

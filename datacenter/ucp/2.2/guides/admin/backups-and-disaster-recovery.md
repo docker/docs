@@ -164,7 +164,7 @@ UCP restore recovers the following assets from the backup file:
   authentication backends.
 
 UCP restore does not include swarm assets such as cluster membership, services, networks,
-secrets, etc.  [Learn to backup a swarm](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm).
+secrets, etc.  [Learn to backup a swarm](/engine/swarm/admin_guide/#back-up-the-swarm).
 
 There are two ways to restore UCP:
 

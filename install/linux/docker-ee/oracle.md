@@ -4,6 +4,7 @@ keywords: requirements, installation, oracle, ol, rpm, install, uninstall, upgra
 redirect_from:
 - /engine/installation/oracle/
 - /engine/installation/linux/oracle/
+- /engine/installation/linux/docker-ee/oracle/
 title: Get Docker EE for Oracle Linux
 toc_max: 4
 ---

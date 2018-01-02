@@ -33,7 +33,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](https://docs.docker.com/opensource/project/who-written-for/).
+[Contribution guidelines](/opensource/project/who-written-for/).
 
 ### Files not edited here
 
@@ -117,7 +117,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](https://docs.docker.com/compose/install/).
+    [follow these installation instructions](/compose/install/).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
@@ -250,7 +250,7 @@ no_ratings: true
 
 ### Creating tabs
 
-The use of tabs, as on pages like https://docs.docker.com/engine/api/, requires
+The use of tabs, as on pages like [https://docs.docker.com/engine/api/](/engine/api/), requires
 the use of HTML. The tabs use Bootstrap CSS/JS, so refer to those docs for more
 advanced usage. For a basic horizontal tab set, copy/paste starting from this
 code and implement from there. Keep an eye on those `href="#id"` and `id="id"`
@@ -292,7 +292,7 @@ images, see the [README in the publish-tools branch](https://github.com/docker/d
 - The `master` branch has a Dockerfile which uses the static HTML from each
   archive image, in combination with the Markdown
   files in `master` and some upstream resources which are fetched at build-time,
-  to create the full site at https://docs.docker.com/. All
+  to create the full site at [https://docs.docker.com/](/). All
   of the long-running branches, such as `vnext-engine`, `vnext-compose`, etc,
   use the same logic.
 

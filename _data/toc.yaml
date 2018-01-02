@@ -18,21 +18,21 @@ horizontalnav:
 guides:
 - sectiontitle: Get Docker
   section:
-  - path: /engine/installation/
+  - path: /install/
     title: Install Docker
   - sectiontitle: Docker EE
     section:
-    - path: /engine/installation/windows/docker-ee/
+    - path: /install/windows/docker-ee/
       title: Windows Server
-    - path: /engine/installation/linux/docker-ee/ubuntu/
+    - path: /install/linux/docker-ee/ubuntu/
       title: Ubuntu
-    - path: /engine/installation/linux/docker-ee/rhel/
+    - path: /install/linux/docker-ee/rhel/
       title: RHEL
-    - path: /engine/installation/linux/docker-ee/centos/
+    - path: /install/linux/docker-ee/centos/
       title: CentOS
-    - path: /engine/installation/linux/docker-ee/oracle/
+    - path: /install/linux/docker-ee/oracle/
       title: Oracle Linux
-    - path: /engine/installation/linux/docker-ee/suse/
+    - path: /install/linux/docker-ee/suse/
       title: SLES
   - sectiontitle: Docker CE
     section:
@@ -40,23 +40,23 @@ guides:
       title: Mac
     - path: /docker-for-windows/install/
       title: Windows
-    - path: /engine/installation/linux/docker-ce/ubuntu/
+    - path: /install/linux/docker-ce/ubuntu/
       title: Ubuntu
-    - path: /engine/installation/linux/docker-ce/debian/
+    - path: /install/linux/docker-ce/debian/
       title: Debian
-    - path: /engine/installation/linux/docker-ce/centos/
+    - path: /install/linux/docker-ce/centos/
       title: CentOS
-    - path: /engine/installation/linux/docker-ce/fedora/
+    - path: /install/linux/docker-ce/fedora/
       title: Fedora
-    - path: /engine/installation/linux/docker-ce/binaries/
+    - path: /install/linux/docker-ce/binaries/
       title: Binaries
   - sectiontitle: Platforms supporting Docker EE and Docker CE
     section:
-    - path: /engine/installation/linux/centos/
+    - path: /install/linux/centos/
       title: CentOS
-    - path: /engine/installation/linux/ubuntu/
+    - path: /install/linux/ubuntu/
       title: Ubuntu
-  - path: /engine/installation/linux/linux-postinstall/
+  - path: /install/linux/linux-postinstall/
     title: Optional Linux post-installation steps
   - sectiontitle: Docker Edge
     section:
@@ -1446,7 +1446,7 @@ manuals:
   section:
   - path: /enterprise/
     title: About Docker EE
-  - path: /engine/installation/
+  - path: /install/
     title: Install Docker EE
     nosync: true
   - title: Try Docker EE (no install)

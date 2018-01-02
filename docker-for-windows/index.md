@@ -396,9 +396,9 @@ access the mounted volumes.
  or `cannot start service` you may need to enable shared drives. See
  [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
-* If possible, avoid volume mounts from the Windows host, and instead  mount on
+* If possible, avoid volume mounts from the Windows host, and instead mount on
 the MobyVM, or use a [data
-volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+volume](/engine/tutorials/dockervolumes.md#data-volumes)
 (named volume) or [data
 container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
 There are a number of issues with using host-mounted volumes and network paths

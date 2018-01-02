@@ -141,14 +141,14 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
+[Install Docker](/install/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
 > **Note**: version 1.13 or higher is required
 
 When you run `docker run hello-world`, look for a response like this:
-> **Note**: You may need to add your user to the `docker` group to call this command without sudo. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
+> **Note**: You may need to add your user to the `docker` group to call this command without sudo. [Read more](https://docs.docker.com/install/linux/linux-postinstall/)
 
-> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](https://docs.docker.com/get-started/part2/) of the tutorial.
+> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](/get-started/part2/) of the tutorial.
 
 ```shell
 $ docker run hello-world
