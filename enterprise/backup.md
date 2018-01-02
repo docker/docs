@@ -16,8 +16,8 @@ To backup Docker Enterprise Edition you need to create individual backups
 for each of the following components:
 
 1. Docker Swarm. [Backup Swarm resources like service and network definitions](/engine/swarm/admin_guide.md#back-up-the-swarm).
-2. Universal Control Plane (UCP). [Backup UCP configurations](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md).
-3. Docker Trusted Registry (DTR). [Backup DTR configurations and images](/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
+2. Universal Control Plane (UCP). [Backup UCP configurations](/datacenter/ucp/3.0/guides/admin/backups-and-disaster-recovery.md).
+3. Docker Trusted Registry (DTR). [Backup DTR configurations and images](/datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery.md).
 
 Before proceeding to backup the next component, you should test the backup you've
 created to make sure it's not corrupt. One way to test your backups is to do
@@ -37,7 +37,7 @@ To restore Docker Enterprise Edition, you need to restore the individual
 components one by one:
 
 1. Docker Engine. [Learn more](/engine/swarm/admin_guide.md#recover-from-disaster).
-2. Universal Control Plane (UCP). [Learn more](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md#restore-your-swarm).
-3. Docker Trusted Registry (DTR). [Learn more](/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery.md#restore-dtr-data).
+2. Universal Control Plane (UCP). [Learn more](/datacenter/ucp/3.0/guides/admin/backups-and-disaster-recovery.md#restore-your-swarm).
+3. Docker Trusted Registry (DTR). [Learn more](/datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery.md#restore-dtr-data).
 
 {% endif %}

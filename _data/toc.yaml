@@ -1562,14 +1562,12 @@ manuals:
     title: Upgrade Docker EE
   - path: /enterprise/docker-ee-architecture/
     title: Docker EE Architecture
-  - path: /enterprise/ucp-architecture/
-    title: UCP Architecture
-  - path: /enterprise/dtr-architecture/
-    title: DTR Architecture
   - sectiontitle: Universal Control Plane
     section:
     - path: /datacenter/ucp/3.0/guides/
       title: Universal Control Plane overview
+    - path: /datacenter/ucp/3.0/guides/ucp-architecture/
+      title: UCP Architecture
     - sectiontitle: Administration
       section:
       - sectiontitle: Install

@@ -2,9 +2,18 @@
 title: Deploy Enterprise Edition on Linux servers
 description: Learn how to get a trial license and install Docker Enterprise Edition.
 keywords: ucp, dtr, install, orchestration
+ui_tabs:
+- version: deep-2.0
+  orhigher: true
+next_steps:
+- path: ../ucp/3.0/guides/admin/configure/scale-your-cluster/
+  title: Scale your UCP cluster
+- path: ../ucp/3.0/guides/user/services/
+  title: Deploy an application
 redirect_from:
 - /datacenter/try/
 ---
+{% if include.version=="deep-2.0" %}
 
 The best way to try Docker Enterprise Edition for yourself is to get the [30-day
 trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).
@@ -26,7 +35,7 @@ Also, make sure the hosts are running one of these operating systems:
 * SUSE Linux Enterprise 12
 * Oracle Linux 7.3
 
-[Learn more about Docker EE system requirements](../ucp/2.2/guides/admin/install/system-requirements.md).
+[Learn more about Docker EE system requirements](../ucp/3.0/guides/admin/install/system-requirements.md).
 
 ## Step 1: Install Docker EE Container Engine
 
@@ -41,7 +50,7 @@ your images, applications, networks, and other computing resources.
 Use ssh to log in to the host where you want to install UCP and run:
 
 ```bash
-$ docker container run --rm -it --name ucp \
+docker container run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_latest_image }} install \
   --host-address <node-ip-address> \
@@ -51,10 +60,10 @@ $ docker container run --rm -it --name ucp \
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
 
-[Learn more about the UCP installation](../ucp/2.2/guides/admin/install/index.md).
+[Learn more about the UCP installation](../ucp/3.0/guides/admin/install/index.md).
 
 >**What about Windows?** When you have UCP installed, you can
-[join Windows worker nodes to a swarm](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/).
+[join Windows worker nodes to a swarm](../ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster.md).
 
 ## Step 3: License your installation
 
@@ -95,7 +104,7 @@ a node that is being managed by UCP.
 Use ssh to log in to the host where you already installed UCP, and run:
 
 ```bash
-$ docker container run -it --rm \
+docker container run -it --rm \
   {{ page.dtr_latest_image }} install \
   --ucp-node <node-hostname> \
   --ucp-insecure-tls
@@ -105,7 +114,4 @@ Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
 DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
 
-## Where to go next
-
-* [Scale your UCP cluster](../ucp/2.2/guides/admin/configure/scale-your-cluster.md)
-* [Deploy an application](../ucp/2.2/guides/user/services/index.md)
+{% endif %}

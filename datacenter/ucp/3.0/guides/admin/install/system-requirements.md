@@ -119,5 +119,5 @@ UCP {{ page.ucp_version }} requires minimum versions of the following Docker com
 
 ## Where to go next
 
-* [UCP architecture](/enterprise/ucp-architecture.md)
-* [Plan your installation](plan-installation.md)
+* [UCP architecture](/datacenter/ucp/3.0/guides/ucp-architecture.md)
+* [Plan your installation](/datacenter/ucp/3.0/guides/admin/install/plan-installation.md)

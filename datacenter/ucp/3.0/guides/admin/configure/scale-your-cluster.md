@@ -25,7 +25,7 @@ When joining a node to a cluster you can specify its role: manager or worker.
 
     Manager nodes also run all UCP components in a replicated way, so by adding
     additional manager nodes, you're also making UCP highly available.
-    [Learn more about the UCP architecture.](../../architecture.md)
+    [Learn more about the UCP architecture.](../../ucp-architecture.md)
 
 * **Worker nodes**
 
@@ -154,4 +154,4 @@ $ docker node rm <node-hostname>
 ## Where to go next
 
 * [Use your own TLS certificates](use-your-own-tls-certificates.md)
-* [Set up high availability](set-up-high-availability.md)
+* [Set up high availability](join-nodes/index.md)

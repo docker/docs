@@ -15,7 +15,6 @@ next_steps:
   title: Docker EE architecture  
 keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
 ---
-{% if include.ui %}
 
 {% if include.version=="deep-2.0" %}
 
@@ -138,7 +137,6 @@ You can also enforce security policies and only allow running applications
 that use Docker images you know and trust.
 
 {% endif %}
-{% endif %}
 
 {% if include.cli %}
 
@@ -155,7 +153,11 @@ status of a Swarm managed by Docker EE:
 
 ```bash
 docker info
+```
 
+Which produces output similar to the following:
+
+```bash
 Containers: 38
 Running: 23
 Paused: 0
@@ -178,7 +180,16 @@ tool, `kubectl`, by default, so you can use the usual Kubernetes commands, like
 `kubectl cluster-info`:
 
 ```bash
-$ kubectl cluster-info
+kubectl cluster-info
+```
+
+Which produces output similar to the following:
+
+```bash
+Kubernetes master is running at https://54.200.115.43:6443
+KubeDNS is running at https://54.200.115.43:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
 {% endif %}
