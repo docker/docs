@@ -101,7 +101,7 @@ Click on the banner, and choose the version you want to upgrade to.
 ![UCP upgrade page - version selection](images/upgrade-2.png){: .with-border}
 
 Once you click **Upgrade UCP**, the upgrade starts. If you want you can upgrade
-UCP from the CLI instead. [Learn more](/datacenter/ucp/2.2/guides/admin/install/upgrade.md).
+UCP from the CLI instead. [Learn more](/datacenter/ucp/3.0/guides/admin/install/upgrade.md).
 
 ## Upgrade DTR
 
@@ -109,7 +109,7 @@ Log in into the DTR web UI to check if there's a new version available.
 
 ![DTR settings page](images/upgrade-3.png){: .with-border}
 
-Then follow these [instructions to upgrade DTR](/datacenter/dtr/2.3/guides/admin/upgrade.md).
+Then follow these [instructions to upgrade DTR](/datacenter/dtr/2.5/guides/admin/upgrade.md).
 When this is finished, your Docker EE has been upgraded.
 
 {% endif %}

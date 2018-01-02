@@ -4,7 +4,7 @@ title: Manage usage data collection
 description: |
   Understand and manage usage data collected by Docker EE and sent to Docker.
 ui_tabs:
-- version: ucp-3.0
+- version: deep-2.0
   orhigher: true
 cli_tabs:
 - version: docker-cli-linux
@@ -12,7 +12,7 @@ keywords: enterprise, telemetry, data collection
 ---
 {% if include.ui %}
 
-{% if include.version=="ucp-3.0" %}
+{% if include.version=="deep-2.0" %}
 
 Docker EE Engine version 17.06 and later includes a telemetry plugin.
 The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0
@@ -70,7 +70,7 @@ You can find out more about an individual option by clicking the **?** icon.
 To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
 
 ```bash
-$ docker plugin ls
+docker plugin ls
 ID                  NAME                                           [..]
 114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
 
@@ -82,11 +82,11 @@ This command must be run on each Docker host.
 To re-enable the telemetry plugin, you can use `docker plugin enable` with either the plugin NAME or ID:
 
 ```bash
-$ docker plugin ls
+docker plugin ls
 ID                  NAME                                           [..]
 114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
 
-$ docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
+docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
 ```
 
 ### Use Universal Control Plane

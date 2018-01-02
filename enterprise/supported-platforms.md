@@ -6,14 +6,12 @@ ui_tabs:
 - version: deep-2.0
   orhigher: false
 next_steps:
-- path: /engine/install
+- path: /engine/installation/
   title: Install Docker
 - path: /get-started/
   title: Get Started with Docker
 keywords: enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine
 ---
-{% if include.ui %}
-
 {% if include.version=="deep-2.0" %}
 
 Docker Enterprise Edition (*Docker EE*) is designed for enterprise
@@ -80,5 +78,4 @@ deployed version, or you can upgrade to the latest Docker EE version. For
 more info, see [Scope of Coverage and Maintenance
 Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
 
-{% endif %}
 {% endif %}

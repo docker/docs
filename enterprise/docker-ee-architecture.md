@@ -2,7 +2,17 @@
 title: Docker EE architecture
 description: Learn about the architecture of Docker Enterprise Edition and how it delivers high availability for your workloads. 
 keywords: Docker EE, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability
+ui_tabs:
+- version: deep-2.0
+  orhigher: false
+next_steps:
+- path: /datacenter/ucp/3.0/guides/ucp-architecture/
+  title: UCP architecture
+- path: /datacenter/dtr/2.5/guides/architecture/
+  title: DTR architecture
 ---
+
+{% if include.version=="deep-2.0" %}
 
 Docker Enterprise Edition (EE) enables deploying your workloads for high
 availability (HA) onto the orchestrator of your choice. Docker EE system
@@ -57,7 +67,7 @@ deployment.
 
 ### Universal Control Plane (UCP)
 
-Docker UCP is a containerized application that runs on [Docker EE Engine](../index.md)
+Docker UCP is a containerized application that runs on [Docker EE Engine](../engine/index.md)
 and extends its functionality to make it easier to deploy, configure, and
 monitor your applications at scale.
 
@@ -68,23 +78,23 @@ containers and pods across your Docker cluster.
 UCP also secures Docker with role-based access control so that only authorized
 users can make changes and deploy applications to your cluster.
 
-![](images/ucp-architecture-1.svg){: .with-border}
+![](/datacenter/ucp/3.0/guides/images/ucp-architecture-1.svg){: .with-border}
 
 Once a UCP instance is deployed, you don't interact with Docker EE Engine
 directly. Instead, you interact with UCP. Since UCP exposes the standard
 Docker API and the full Kubernetes API transparently, you can use the tools
 you already know and love, like `kubectl`, the Docker CLI client, and Docker
 Compose.
-[Learn about UCP architecture](ucp-architecture.md).
+[Learn about UCP architecture](/datacenter/ucp/3.0/guides/ucp-architecture.md).
 
-![](images/ucp-architecture-2.svg){: .with-border}
+![](/datacenter/ucp/3.0/guides/images/ucp-architecture-2.svg){: .with-border}
 
 ### Docker Trusted Registry (DTR)
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker UCP cluster.
 
-![](images/dtr-architecture-1.svg){: .with-border}
+![](/datacenter/dtr/2.5/guides/images/architecture-1.svg){: .with-border}
 
 Once you have DTR deployed, you use your Docker CLI client to login, push, and
 pull images.
@@ -92,15 +102,10 @@ pull images.
 For high-availability, you can deploy multiple DTR replicas, one on each UCP
 worker node.
 
-![](images/dtr-architecture-2.svg){: .with-border}
+![](/datacenter/dtr/2.5/guides/images/architecture-2.svg){: .with-border}
 
 All DTR replicas run the same set of services, and changes to their configuration
 are automatically propagated to other replicas.
-[Learn about DTR architecture](dtr-architecture.md).
+[Learn about DTR architecture](/datacenter/dtr/2.5/guides/architecture.md).
 
-## Where to go next
-
-- [UCP architecture](ucp-architecture.md)
-- [DTR architecture](dtr-architecture.md)
-
-    
+{% endif %}
