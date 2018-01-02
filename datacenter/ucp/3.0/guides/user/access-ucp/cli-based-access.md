@@ -111,7 +111,7 @@ responses.
 To install these tools on a Ubuntu distribution, you can run:
 
 ```bash
-$ sudo apt-get update && apt-get install curl jq
+$ sudo apt-get update && sudo apt-get install curl jq
 ```
 
 Then you get an authentication token from UCP, and use it to download the
