@@ -2,7 +2,16 @@
 title: Uninstall UCP
 description: Learn how to uninstall a Docker Universal Control Plane swarm.
 keywords: UCP, uninstall, install, Docker EE
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../configure/join-nodes/
+  title: Join nodes to your cluster
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker UCP is designed to scale as your applications grow in size and usage.
 You can [add and remove nodes](../configure/scale-your-cluster.md) from the
@@ -26,7 +35,7 @@ To uninstall UCP, log in to a manager node using ssh, and run the following
 command:
 
 ```bash
-$ docker container run --rm -it \
+docker container run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --name ucp \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} uninstall-ucp --interactive
@@ -49,6 +58,8 @@ in the swarm won't be able to communicate at all. To fix this, either reinstall
 UCP before the certificates expire or disable swarm mode by running
 `docker swarm leave --force` on every node.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Join nodes to your cluster](../configure/join-nodes/index.md)
+Learn about [uninstalling UCP](/datacenter/ucp/2.2/guides/admin/install/uninstall.md).
+
+{% endif %}
