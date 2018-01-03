@@ -2,7 +2,16 @@
 title: Upgrade to UCP 3.0
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords: UCP, upgrade, update
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../../release-notes/
+  title: UCP release notes
 ---
+{% if include.version=="ucp-3.0" %}
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version {{ page.ucp_version }}.
@@ -86,9 +95,9 @@ To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
 ```
 # Get the latest version of UCP
-$ docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
-$ docker container run --rm -it \
+docker container run --rm -it \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
@@ -101,6 +110,8 @@ for any necessary configuration values.
 Once the upgrade finishes, navigate to the UCP web UI and make sure that
 all the nodes managed by UCP are healthy.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [UCP release notes](../../release-notes/index.md)
+Learn about [upgrading UCP](/datacenter/ucp/2.2/guides/admin/install/upgrade.md).
+
+{% endif %}

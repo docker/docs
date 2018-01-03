@@ -2,9 +2,21 @@
 title: UCP System requirements
 description: Learn about the system requirements for installing Docker Universal Control Plane.
 keywords: UCP, architecture, requirements, Docker EE
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: plan-installation/
+  title: Plan your installation
+- path: ../../ucp-architecture/
+  title: UCP architecture
 redirect_from:
 - /enterprise/admin/install/system-requirements/
 ---
+
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
@@ -117,7 +129,10 @@ UCP {{ page.ucp_version }} requires minimum versions of the following Docker com
 - Docker EE Engine 17.06 or higher
 - DTR 2.5 or higher
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [UCP architecture](/datacenter/ucp/3.0/guides/ucp-architecture.md)
-* [Plan your installation](/datacenter/ucp/3.0/guides/admin/install/plan-installation.md)
+[UCP System requirements](/datacenter/ucp/2.2/guides/admin/install/system-requirements.md).
+
+{% endif %}
+
+

@@ -2,7 +2,18 @@
 title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production.
 keywords: Universal Control Plane, UCP, install, Docker EE
+ui_tabs:
+- version: ucp-3.0
+  orhigher: true
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../configure/use-your-own-tls-certificates/
+  title: Use your own TLS certificates
+- path: ../configure/join-nodes/
+  title: Join nodes to your cluster
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane (UCP) is a containerized application that you
 can install on-premise or on a cloud infrastructure.
@@ -38,7 +49,7 @@ Docker UCP uses named volumes to persist data. If you want
 to customize the drivers used to manage these volumes, you can create the
 volumes before installing UCP. When you install UCP, the installer
 will notice that the volumes already exist, and will start using them.
-[Learn about the named volumes used by UCP](../../architecture.md).
+[Learn about the named volumes used by UCP](../../ucp-architecture.md).
 
 If these volumes don't exist, they'll be automatically created when installing
 UCP.
@@ -59,10 +70,10 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
+    docker image pull {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }}
 
     # Install UCP
-    $ docker container run --rm -it --name ucp \
+    docker container run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} install \
       --host-address <node-ip-address> \
@@ -141,7 +152,9 @@ To add more computational resources to your swarm, you can join worker nodes.
 These nodes execute tasks assigned to them by the manager nodes. Follow the
 same steps as before, but don't check the **Add node as a manager** option.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Use your own TLS certificates](../configure/use-your-own-tls-certificates.md)
-* [Join nodes to your cluster](../configure/join-nodes/index.md)
+Learn about [installing UCP for production](/datacenter/ucp/2.2/guides/admin/install/index.md).
+
+{% endif %}
+
