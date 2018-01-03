@@ -8,13 +8,13 @@ keywords: rbac, ucp, grant, role, permission, authentication, resource collectio
 
 A
 [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
-is a logical area for a Kubernetes cluster. Kuberenetes comes with a "default"
+is a logical area for a Kubernetes cluster. Kubernetes comes with a "default"
 namespace for your cluster objects (plus two more for system and public
 resources). You can create custom namespaces, but unlike Swarm collections,
 namespaces _cannot be nested_.
 
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
-> Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
+> Deployments, NetworkPolicies, Nodes, Services, Secrets, and many more.
 
 Resources are placed into a namespace when you create a kubernetes object. A
 drop down displays all available namespaces and one must be selected.
@@ -85,7 +85,7 @@ set.
 > Default collections are good for users who ony work on a well-defined slice of
 > the system, as well as users who deploy stacks and don't want to edit the
 > contents of their compose files. A user with more versatile roles in the
-> system, such as an adminitrator, might find it better to set custom labels for
+> system, such as an administrator, might find it better to set custom labels for
 > each resource.
 
 ### Collections and labels

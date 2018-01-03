@@ -2,7 +2,15 @@
 title: Set the orchestrator type for a node
 description: Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.
 keywords: Docker EE, UCP, cluster, orchestrator
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+cli_tabs:
+- version: docker-cli-linux
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 When you add a node to the cluster, the node's workloads are managed by a
 default orchestrator, either Docker Swarm or Kubernetes. When you install
@@ -113,7 +121,12 @@ avoid changing the orchestrator setting. If you do change the orchestrator for a
 node, your workloads are evicted, and you must deploy them again through the
 new orchestrator.
 
-## Set the orchestrator by using the CLI
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 Set the orchestrator on a node by assigning the orchestrator labels,
 `com.docker.ucp.orchestrator.swarm` or `com.docker.ucp.orchestrator.kubernetes`,
@@ -176,4 +189,5 @@ The value can be `swarm` or `kubernetes`.
 
 [Learn to set up Docker EE by using a config file](ucp-configuration-file.md).
 
-
+{% endif %}
+{% endif %}

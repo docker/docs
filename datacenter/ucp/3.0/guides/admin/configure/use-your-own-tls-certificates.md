@@ -2,7 +2,16 @@
 title: Use your own TLS certificates
 description: Learn how to configure Docker Universal Control Plane to use your own certificates.
 keywords: Universal Control Plane, UCP, certificate, authentication, tls
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../../user/access-ucp/cli-based-access/
+  title: Access UCP from the CLI
 ---
+{% if include.version=="ucp-3.0" %}
 
 All UCP services are exposed using HTTPS, to ensure all communications between
 clients and UCP are encrypted. By default, this is done using self-signed TLS
@@ -53,8 +62,10 @@ web UI and [get new client certificate bundles](../../user/access-ucp/cli-based-
 
 If you deployed Docker Trusted Registry, you'll also need to reconfigure it
 to trust the new UCP TLS certificates.
-[Learn how to configure DTR](/datacenter/dtr/2.3/reference/cli/reconfigure.md).
+[Learn how to configure DTR](/reference/dtr/2.5/cli/reconfigure.md).
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Access UCP from the CLI](../../user/access-ucp/cli-based-access.md)
+Learn about [using your own TLS certificates](/datacenter/ucp/2.2/guides/admin/configure/use-your-own-tls-certificates.md).
+
+{% endif %}

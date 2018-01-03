@@ -2,7 +2,17 @@
 title: Join Linux nodes to your cluster
 description: Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.
 keywords: Docker EE, UCP, cluster, scale, worker, manager
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+cli_tabs:
+- version: docker-cli-linux
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 Docker EE is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the cluster to scale it
@@ -140,7 +150,16 @@ the node to leave the cluster manually. To do this, connect to the target node
 through SSH and run `docker swarm leave --force` directly against the local
 Docker EE Engine.
 
-## Join nodes by using the CLI
+{% elsif include.version=="ucp-2.2" %}
+
+Learn how to [scale your cluster](/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster.md).
+
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 You can use the command line to join a node to a Docker EE cluster.
 To get the join token, run the following command on a manager node:
@@ -192,4 +211,5 @@ the cluster.
 docker node rm <nodeID or hostname>
 ```
 
-
+{% endif %}
+{% endif %}

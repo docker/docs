@@ -2,7 +2,20 @@
 title: Set up high availability
 description: Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures.
 keywords: ucp, high availability, replica
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: join-linux-nodes-to-cluster/
+  title: Join nodes to your cluster
+- path: join-windows-nodes-to-cluster/
+  title: Join Windows worker nodes to your cluster
+- path: use-a-load-balancer/
+  title: Use a load balancer
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane is designed for high availability (HA). You can
 join multiple manager nodes to the cluster, so that if one manager node fails,
@@ -35,7 +48,8 @@ For production-grade deployments, follow these rules of thumb:
   degradation, as changes to configurations need to be replicated across all
   manager nodes. The maximum advisable is seven manager nodes.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Join nodes to your cluster](join-linux-nodes-to-cluster.md)
-* [Use a load balancer](use-a-load-balancer.md)
+Learn about [scaling your cluster](/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster.md).
+
+{% endif %}

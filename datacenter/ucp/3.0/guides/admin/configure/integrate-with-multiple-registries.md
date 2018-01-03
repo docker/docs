@@ -2,7 +2,14 @@
 title: Integrate with multiple registries
 description: Integrate UCP with multiple registries
 keywords: trust, registry, integrate, UCP, DTR
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+next_steps:
+- path: external-auth/enable-ldap-config-file/
+  title: Integrate with LDAP by using a configuration file
 ---
+{% if include.version=="ucp-3.0" %}
 
 Universal Control Plane can pull and run images from any image registry,
 including Docker Trusted Registry and Docker Store.
@@ -65,4 +72,5 @@ EOL
 
 You can then append the content of `trust-dtr.toml` to your current UCP
 configuration to make UCP trust this DTR deployment.
-[Learn how to customize your UCP configuration file](external-auth/enable-ldap-config-file.md).
+
+{% endif %}

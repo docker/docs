@@ -2,7 +2,13 @@
 title: UCP configuration file
 description: Set up UCP deployments by using a configuration file.
 keywords: Docker EE, UCP, configuration, config
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 Override the default UCP settings by providing a configuration file when you
 create UCP manager nodes. This is useful for scripted installations.
@@ -62,7 +68,7 @@ You can see an example TOML config file that shows how to configure UCP
 settings. From the command line, run UCP with the `example-config` option:
 
 ```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
+docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
 ```
 
 
@@ -248,3 +254,9 @@ custom_kube_controller_manager_flags = ["--service-sync-period=5m0s"]
 custom_kubelet_flags = ["--http-check-frequency=20s"]
 custom_kube_scheduler_flags = ["--algorithm-provider=DefaultProvider"]
 ```
+
+{% elsif include.version=="ucp-2.2" %}
+
+Learn about [UCP configuration files](/datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file.md).
+
+{% endif %}
