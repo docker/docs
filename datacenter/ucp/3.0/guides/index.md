@@ -5,6 +5,8 @@ description: |
 ui_tabs:
 - version: ucp-3.0
   orhigher: true
+cli_tabs:
+- version: docker-cli-linux
 next_steps:
 - path: admin/install/
   title: Install UCP

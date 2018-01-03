@@ -2,7 +2,18 @@
 title: Integrate with LDAP by using a configuration file
 description: Set up LDAP authentication by using a configuration file.
 keywords: UCP, LDAP, config
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../../../authorization/create-teams-with-ldap/
+  title: Create teams with LDAP
+- path: ../../../authorization/create-users-and-teams-manually/
+  title: Create users and teams manually
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and automatically
@@ -15,7 +26,7 @@ run UCP with the `example-config` option.
 [Learn about UCP configuration files](../ucp-configuration-file.md).
 
 ```bash
-$ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
+docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} example-config
 ```
 
 ## Set up LDAP by using a configuration file
@@ -33,7 +44,7 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
 
     ```bash
     {% raw %}
-    $ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > config.toml
+    docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > config.toml
     {% endraw %}
     ```
 
@@ -45,7 +56,7 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
     Config object by using the following command.
 
     ```bash
-    $ NEW_CONFIG_NAME="com.docker.ucp.config-$(( $(cut -d '-' -f 2 <<< "$CURRENT_CONFIG_NAME") + 1 ))"
+    NEW_CONFIG_NAME="com.docker.ucp.config-$(( $(cut -d '-' -f 2 <<< "$CURRENT_CONFIG_NAME") + 1 ))"
     docker config create $NEW_CONFIG_NAME config.toml
     ```
 
@@ -53,7 +64,7 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
     and add a reference to the new config.
 
     ```bash
-    $ docker service update --config-rm "$CURRENT_CONFIG_NAME" --config-add "source=${NEW_CONFIG_NAME},target=/etc/ucp/ucp.toml" ucp-agent
+    docker service update --config-rm "$CURRENT_CONFIG_NAME" --config-add "source=${NEW_CONFIG_NAME},target=/etc/ucp/ucp.toml" ucp-agent
     ```
 
 6.  Wait a few moments for the `ucp-agent` service tasks to update across
@@ -62,7 +73,8 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
     have their accounts created when they log in with their username and LDAP
     password.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
--  [Create and manage users](../../../access-control/create-and-manage-users.md)
--  [Create and manage teams](../../../access-control/create-and-manage-teams.md)
+Learn about [integrating with LDAP by using a configuration file](/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file.md).
+
+{% endif %}

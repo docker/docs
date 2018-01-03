@@ -2,7 +2,16 @@
 title: Use a load balancer
 description: Learn how to set up a load balancer to access the UCP web UI using an hostname.
 keywords: UCP, high-availability, load balancer
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../add-labels-to-cluster-nodes/
+  title: Add labels to cluster nodes
 ---
+{% if include.version=="ucp-3.0" %}
 
 Once you've joined multiple manager nodes for high-availability, you can
 configure your own load balancer to balance user requests across all
@@ -210,6 +219,8 @@ docker run --detach \
   </div>
 </div>
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Add labels to cluster nodes](../add-labels-to-cluster-nodes.md)
+Learn about [using a load balancer](/datacenter/ucp/2.2/guides/admin/configure/use-a-load-balancer.md).
+
+{% endif %}

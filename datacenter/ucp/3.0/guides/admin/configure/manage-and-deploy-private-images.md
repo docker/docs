@@ -2,7 +2,11 @@
 title: Manage and deploy private images
 description: Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.
 keywords: Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker Enterprise Edition (EE) has its own image registry (DTR) so that
 you can store and manage the images that you deploy to your cluster.
@@ -31,15 +35,15 @@ using the Kubernetes orchestrator.
 
 ## Push an image to DTR
 
-Instead of building an image from scratch, we'll pull the official Wordpress
-image from Docker Hub, tag it, and push it to DTR. Once that wordpress version
+Instead of building an image from scratch, we'll pull the official WordPress
+image from Docker Hub, tag it, and push it to DTR. Once that WordPress version
 is in DTR, only authorized users can change it.
 
 To push images to DTR, you need CLI access to a licensed installation of
 Docker EE.
 
 - [License your installation](license-your-installation.md).
-- [Set up your Docker CLI](/datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access.md).
+- [Set up your Docker CLI](../../user/access-ucp/cli-based-access.md).
 
 When you're set up for CLI-based access to a licensed Docker EE instance,
 you can push images to DTR.
@@ -133,3 +137,5 @@ from outside the cluster.
 7.  Click the URL to open the default WordPress home page.  
 
     ![](../../images/manage-and-deploy-private-images-4.png){: .with-border}
+
+{% endif %}

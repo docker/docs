@@ -2,7 +2,22 @@
 title: Scale your cluster
 description: Learn how to scale Docker Universal Control Plane cluster, by adding and removing nodes.
 keywords: UCP, cluster, scale
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+cli_tabs:
+- version: docker-cli-linux
+next_steps:
+- path: use-your-own-tls-certificates/
+  title: Use your own TLS certificates
+- path: join-nodes/
+  title: Set up high availability
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
@@ -58,7 +73,7 @@ Copy the displayed command, use ssh to log into the host that you want to
 join to the cluster, and run the `docker swarm join` command on the host.
 
 To add a Windows node, click **Windows** and follow the instructions in
-[Join Windows worker nodes to a cluster](join-windows-worker-nodes.md). 
+[Join Windows worker nodes to a cluster](join-nodes/join-windows-nodes-to-cluster.md). 
 
 After you run the join command in the node, the node is displayed in the UCP
 web UI.
@@ -111,13 +126,18 @@ If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your
 load-balancing pool.
 
-## Scale your cluster from the CLI
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 You can also use the command line to do all of the above operations. To get the
 join token, run the following command on a manager node:
 
 ```bash
-$ docker swarm join-token worker
+docker swarm join-token worker
 ```
 
 If you want to add a new manager node instead of a worker node, use
@@ -125,7 +145,7 @@ If you want to add a new manager node instead of a worker node, use
 address, add the `--listen-addr` arg:
 
 ```bash
-$ docker swarm join \
+docker swarm join \
     --token SWMTKN-1-2o5ra9t7022neymg4u15f3jjfh0qh3yof817nunoioxa9i7lsp-dkmt01ebwp2m0wce1u31h6lmj \
     --listen-addr 234.234.234.234 \
     192.168.99.100:2377
@@ -134,13 +154,13 @@ $ docker swarm join \
 Once your node is added, you can see it by running `docker node ls` on a manager:
 
 ```bash
-$ docker node ls
+docker node ls
 ```
 
 To change the node's availability, use:
 
 ```bash
-$ docker node update --availability drain node2
+docker node update --availability drain node2
 ```
 
 You can set the availability to `active`, `pause`, or `drain`.
@@ -148,10 +168,13 @@ You can set the availability to `active`, `pause`, or `drain`.
 To remove the node, use:
 
 ```bash
-$ docker node rm <node-hostname>
+docker node rm <node-hostname>
 ```
 
 ## Where to go next
 
 * [Use your own TLS certificates](use-your-own-tls-certificates.md)
 * [Set up high availability](join-nodes/index.md)
+
+{% endif %}
+{% endif %}

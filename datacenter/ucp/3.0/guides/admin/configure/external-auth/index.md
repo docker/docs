@@ -1,9 +1,22 @@
 ---
-title: Integrate with an LDAP Directory
+title: Integrate with an LDAP directory
 description: Learn how to integrate UCP with an LDAP service, so that you can
   manage users from a single place.
 keywords: LDAP, UCP, authentication, user management
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: enable-ldap-config-file/
+  title: Enable LDAP integration by using a configuration file
+- path: ../../../authorization/create-teams-with-ldap/
+  title: Create teams with LDAP
+- path: ../../../authorization/create-users-and-teams-manually/
+  title: Create users and teams manually
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker UCP integrates with LDAP directory services, so that you can manage
 users and groups from your organization's directory and it will automatically
@@ -123,7 +136,7 @@ to the private collections of new users. For example, if you change the value
 to `View Only`, all users who log in for the first time after the setting is
 changed have `View Only` access to their private collections, but permissions
 remain unchanged for all existing users.
-[Learn more about permission levels](../../../access-control/permission-levels.md).
+[Learn more about permission levels](../../../authorization/define-roles.md).
 
 ## LDAP enabled
 
@@ -216,11 +229,10 @@ UCP does not store any additional data from the directory server.
 
 UCP enables syncing teams with a search query or group in your organization's
 LDAP directory.
-[Sync team members with your organization's LDAP directory](../../../access-control/create-and-manage-teams.md).
+[Sync team members with your organization's LDAP directory](../../../authorization/create-teams-with-ldap.md).
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
--  [Create and manage users](../../../access-control/create-and-manage-users.md)
--  [Create and manage teams](../../../access-control/create-and-manage-teams.md)
--  [UCP permission levels](../../../access-control/permission-levels.md)
--  [Enable LDAP integration by using a configuration file](enable-ldap-config-file.md)
+Learn about [integrating with an LDAP directory](/datacenter/ucp/2.2/guides/admin/configure/external-auth/index.md).
+
+{% endif %}

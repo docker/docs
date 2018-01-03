@@ -2,16 +2,25 @@
 title: Integrate with Docker Trusted Registry
 description: Integrate UCP with Docker Trusted Registry
 keywords: trust, registry, integrate, UCP, DTR
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: use-your-own-tls-certificates/
+  title: Use your own TLS certificates
 ---
+{% if include.version=="ucp-3.0" %}
 
 Once you deploy Docker Trusted Registry (DTR), you can use it to store your
 Docker images and deploy services to UCP using these images.
-[Learn how to deploy DTR](/datacenter/dtr/2.3/guides/admin/install/index.md).
+[Learn how to deploy DTR](/datacenter/dtr/2.5/guides/admin/install/index.md).
 
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR).
 This means that you can deploy services from the UCP web UI, using Docker
 images that are stored in DTR. You can also use a
-[UCP client bundle](../access-ucp/cli-based-access.md) to do the same from the
+[UCP client bundle](../../user/access-ucp/cli-based-access.md) to do the same from the
 CLI.
 
 If you've configured DTR to use TLS certificates issued by a globally-trusted
@@ -57,26 +66,26 @@ system:
 
   ```bash
   # Download the DTR CA certificate
-  $ sudo curl -k https://<dtr-url>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
+  sudo curl -k https://<dtr-url>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
 
   # Refresh the list of certificates to trust
-  $ sudo update-ca-certificates
+  sudo update-ca-certificates
 
   # Restart the Docker daemon
-  $ sudo service docker restart
+  sudo service docker restart
   ```
 
 * For CentOS or RHEL:
 
   ```bash
   # Download the DTR CA certificate
-  $ sudo curl -k https://<dtr-url>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
+  sudo curl -k https://<dtr-url>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
 
   # Refresh the list of certificates to trust
-  $ sudo update-ca-trust
+  sudo update-ca-trust
 
   # Restart the Docker daemon
-  $ sudo /bin/systemctl restart docker.service
+  sudo /bin/systemctl restart docker.service
   ```
 
 ## 2. Test your local setup
@@ -137,7 +146,8 @@ For each UCP node:
 2.  Configure the system to trust the DTR TLS certificates, following the same
 steps as you used to configure your local computer.
 
+{% elsif include.version=="ucp-2.2" %}
 
-## Where to go next
+Learn about [integrating with DTR](/datacenter/ucp/2.2/guides/admin/configure/integrate-with-dtr.md).
 
-* [Use your own TLS certificates](use-your-own-tls-certificates.md)
+{% endif %}

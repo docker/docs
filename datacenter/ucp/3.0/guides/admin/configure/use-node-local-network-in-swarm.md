@@ -2,7 +2,13 @@
 title: Use a local node network in a cluster
 description: Learn how to use a local node network, like MAC VLAN, in a UCP cluster.
 keywords: ucp, network, macvlan
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane can use your local networking drivers to
 orchestrate your cluster. You can create a *config* network, with a driver like
@@ -43,3 +49,9 @@ the networks won't have the right access labels and won't be available in UCP.
    collection placement are inherited from the related config-only networks.
 
 6. Click **Create** to create the network.
+
+{% elsif include.version=="ucp-2.2" %}
+
+Learn about [using a local node network in a cluster](/datacenter/ucp/2.2/guides/admin/configure/use-node-local-network-in-swarm.md).
+
+{% endif %}

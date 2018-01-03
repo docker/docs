@@ -64,13 +64,13 @@ assign application resources to that path.
 
 A
 [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
-is a logical area for a Kubernetes cluster. Kuberenetes comes with a "default"
+is a logical area for a Kubernetes cluster. Kubernetes comes with a "default"
 namespace for your cluster objects (plus two more for system and public
 resources). You can create custom namespaces, but unlike Swarm collections,
 namespaces _cannot be nested_.
 
 > Resource types that can be placed into a Kubernetes namespace include: Pods,
-> Deployments, NetworkPolcies, Nodes, Services, Secrets, and many more.
+> Deployments, NetworkPolicies, Nodes, Services, Secrets, and many more.
 
 For more, see: [Group and isolate cluster resources](group-resources.md).
 
