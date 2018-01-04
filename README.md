@@ -51,9 +51,9 @@ each of the required images locally and tag it appropriately:
 
     ```bash
     $ git checkout publish-tools
-    $ docker build -t docker.github.io/docs:docs-builder -f Dockerfile.builder .
-    $ docker build -t docker.github.io/docs:docs-builder-onbuild -f Dockerfile.builder.onbuild .
-    $ docker build -t docker.github.io/docs:nginx-onbuild -f Dockerfile.nginx.onbuild .
+    $ docker build -t docs/docker.github.io:docs-builder -f Dockerfile.builder .
+    $ docker build -t docs/docker.github.io:docs-builder-onbuild -f Dockerfile.builder.onbuild .
+    $ docker build -t docs/docker.github.io:nginx-onbuild -f Dockerfile.nginx.onbuild .
     ```
 
 2.  For each archive branch (`v1.4` through whatever is the newest archive
@@ -62,7 +62,7 @@ each of the required images locally and tag it appropriately:
 
     ```bash
     $ git checkout v1.4
-    $ docker build -t docker.github.io/docs:v1.4 .
+    $ docker build -t docs/docker.github.io:v1.4 .
     ```
 
     > **Note**: The archive Dockerfile looks like this (comments have been
@@ -79,14 +79,14 @@ each of the required images locally and tag it appropriately:
 
     ```bash
     $ git checkout master
-    $ docker build -t docker.github.io/docs:latest -t docker.github.io/docs:livedocs .
+    $ docker build -t docs/docker.github.io:latest -t docker.github.io/docs:livedocs .
     ```
 
     The resulting image has the static HTML for each archive and for the
     contents of `master`. To test it:
 
     ```bash
-    $ docker run --rm -it -p 4000:4000 docker.github.io/docs:latest
+    $ docker run --rm -it -p 4000:4000 docs/docker.github.io:latest
     ```
 
 ## When to change each file in this branch
