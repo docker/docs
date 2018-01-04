@@ -5,7 +5,7 @@ description: Learn how to install Docker Universal Control Plane. on a machine w
 keywords: UCP, install, offline, Docker EE
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:

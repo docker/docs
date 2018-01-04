@@ -2,7 +2,16 @@
 title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, cluster
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../../get-support/
+  title: Get support
 ---
+{% if include.version=="ucp-3.0" %}
 
 UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
@@ -27,7 +36,7 @@ store REST API, and `jq` to process the responses.
 You can install these tools on a Ubuntu distribution by running:
 
 ```bash
-$ sudo apt-get update && apt-get install curl jq
+sudo apt-get update && sudo apt-get install curl jq
 ```
 
 1. Use a client bundle to authenticate your requests.
@@ -38,9 +47,9 @@ $ sudo apt-get update && apt-get install curl jq
    bundle.
 
    ```bash
-   $ export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
+   export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
 
-   $ curl -s \
+   curl -s \
         --cert ${DOCKER_CERT_PATH}/cert.pem \
         --key ${DOCKER_CERT_PATH}/key.pem \
         --cacert ${DOCKER_CERT_PATH}/ca.pem \
@@ -58,7 +67,7 @@ client for etcd. You can run it using the `docker exec` command.
 The examples below assume you are logged in with ssh into a UCP manager node.
 
 ```bash
-$ docker exec -it ucp-kv etcdctl \
+docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \
@@ -143,6 +152,8 @@ time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"
 {% endraw %}
 ```
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Get support](../../get-support.md)
+Learn how to [troubleshoot cluster configurations](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations.md).
+
+{% endif %}

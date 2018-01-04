@@ -126,6 +126,10 @@ If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your
 load-balancing pool.
 
+{% elsif include.version=="ucp-2.2" %}
+
+Learn about [scaling your cluster](/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster.md).
+
 {% endif %}
 {% endif %}
 
@@ -170,11 +174,6 @@ To remove the node, use:
 ```bash
 docker node rm <node-hostname>
 ```
-
-## Where to go next
-
-* [Use your own TLS certificates](use-your-own-tls-certificates.md)
-* [Set up high availability](join-nodes/index.md)
 
 {% endif %}
 {% endif %}

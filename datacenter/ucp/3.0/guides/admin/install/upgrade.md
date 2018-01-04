@@ -4,7 +4,7 @@ description: Learn how to upgrade Docker Universal Control Plane with minimal im
 keywords: UCP, upgrade, update
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:

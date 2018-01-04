@@ -2,7 +2,13 @@
 title: Troubleshoot UCP node states
 description: Learn how to troubleshoot individual UCP nodes.
 keywords: UCP, troubleshoot, health, swarm
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 There are several cases in the lifecycle of UCP when a node is actively
 transitioning from one state to another, such as when a new node is joining the
@@ -27,3 +33,9 @@ UCP node, their explanation, and the expected duration of a given step.
 | Unhealthy UCP Controller: node is unreachable        | Other manager nodes of the cluster have not received a heartbeat message from the affected node within a predetermined timeout. This usually indicates that there's either a temporary or permanent interruption in the network link to that manager node. Ensure the underlying networking infrastructure is operational, and [contact support](../../get-support.md) if the symptom persists.                                                                            | Until resolved        |
 | Unhealthy UCP Controller: unable to reach controller | The controller that we are currently communicating with is not reachable within a predetermined timeout. Please refresh the node listing to see if the symptom persists. If the symptom appears intermittently, this could indicate latency spikes between manager nodes, which can lead to temporary loss in the availability of UCP itself. Please ensure the underlying networking infrastructure is operational, and [contact support](../../get-support.md) if the symptom persists. | Until resolved        |
 | Unhealthy UCP Controller: Docker Swarm Cluster: Local node `<ip>` has status Pending | The Engine ID of an engine is not unique in the swarm. When a node first joins the cluster, it's added to the node inventory and discovered as `Pending` by Docker Swarm. The engine is "validated" if a `ucp-swarm-manager` container can connect to it via TLS, and if its Engine ID is unique in the swarm. If you see this issue repeatedly, make sure that your engines don't have duplicate IDs. Use `docker info` to see the Engine ID. Refresh the ID by removing the `/etc/docker/key.json` file and restarting the daemon. | Until resolved        |
+
+{% elsif include.version=="ucp-2.2" %}
+
+Learn how to [troubleshoot UCP node states](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages.md).
+
+{% endif %}

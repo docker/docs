@@ -4,7 +4,7 @@ description: Learn how to deploy Docker Universal Control Plane using images tha
 keywords: UCP, Docker EE, image, IBM z, Windows
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:

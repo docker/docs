@@ -2,7 +2,16 @@
 title: Troubleshoot your cluster
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: ucp, troubleshoot, health, cluster
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: troubleshoot-configurations/
+  title: Troubleshoot configurations
 ---
+{% if include.version=="ucp-3.0" %}
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the
@@ -96,7 +105,8 @@ transition to a different state. The `ucp-reconcile` container is responsible
 for creating and removing containers, issuing certificates, and pulling
 missing images.
 
+{% elsif include.version=="ucp-2.2" %}
 
-## Where to go next
+Learn how to [troubleshoot cluster configurations](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs.md).
 
-* [Troubleshoot configurations](troubleshoot-configurations.md)
+{% endif %}

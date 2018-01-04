@@ -4,7 +4,7 @@ description: Learn how to uninstall a Docker Universal Control Plane swarm.
 keywords: UCP, uninstall, install, Docker EE
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:

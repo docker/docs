@@ -4,7 +4,7 @@ description: Learn how to install Docker Universal Control Plane on production.
 keywords: Universal Control Plane, UCP, install, Docker EE
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:
