@@ -2,7 +2,16 @@
 title: CLI-based access
 description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords: ucp, cli, administration
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: ../services/
+  title: Deploy a service 
 ---
+{% if include.version=="ucp-3.0" %}
 
 With Universal Control Plane you can continue using the tools you know and
 love like the Docker CLI client and Kubectl. You just need to download and use
@@ -11,7 +20,6 @@ a UCP client bundle.
 A client bundle contains a private and public key pair that authorizes your
 requests in UCP. It also contains utility scripts you can use to configure
 your Docker and Kubectl client tools to talk to your UCP deployment.
-
 
 ## Download client certificates
 
@@ -111,7 +119,7 @@ responses.
 To install these tools on a Ubuntu distribution, you can run:
 
 ```bash
-$ sudo apt-get update && sudo apt-get install curl jq
+sudo apt-get update && sudo apt-get install curl jq
 ```
 
 Then you get an authentication token from UCP, and use it to download the
@@ -119,12 +127,14 @@ client certificates.
 
 ```bash
 # Create an environment variable with the user security token
-$ AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' https://<ucp-ip>/auth/login | jq -r .auth_token)
+AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' https://<ucp-ip>/auth/login | jq -r .auth_token)
 
 # Download the client certificate bundle
-$ curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
+curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
 ```
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Access the UCP web UI](index.md)
+Learn about [CLI-based access](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
+
+{% endif %}

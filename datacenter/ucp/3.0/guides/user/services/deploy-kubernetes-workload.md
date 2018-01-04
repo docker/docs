@@ -2,7 +2,15 @@
 title: Deploy a workload to a Kubernetes cluster
 description: Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.
 keywords: UCP, Docker EE, orchestration, Kubernetes, cluster
+ui_tabs:
+- version: ucp-3.0
+  orlower: false
+cli_tabs:
+- version: kubectl
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 The Docker EE web UI enables deploying your Kubernetes YAML files. In most
 cases, no modifications are necessary to deploy on a cluster that's managed by
@@ -140,12 +148,17 @@ spec:
 4.  Find the **image: nginx:1.7.9** entry and change it to **image: nginx:1.8**.
 5.  Click **Edit** to update the deployment with the new YAML.
 
-## Deploy by using the CLI
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="kubectl" %}
 
 With Docker EE, you deploy your Kubernetes objects on the command line by using
 `kubectl`. [Install and set up kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-Use a client bundle to configure your client tools, like Docker CLI and `kubctl`
+Use a client bundle to configure your client tools, like Docker CLI and `kubectl`
 to communicate with UCP instead of the local deployments you might have running.
 [Get your client bundle by using the Docker EE web UI or the command line](../access-ucp/cli-based-access.md).
 
@@ -250,18 +263,21 @@ You should see the currently running image:
 
 ## Kubernetes limitations
 
-There's a few limitations you should be aware when creating Kubernetes
-workloads:
+There are a few limitations that you should be aware of when creating
+Kubernetes workloads:
 
 * Docker EE has its own RBAC system, so it's not possible to create
-ClusterRole objects, ClusterRoleBinding objects, or any other object that is
-created using the `/apis/rbac.authorization.k8s.io` endpoints.
+  ClusterRole objects, ClusterRoleBinding objects, or any other object that is
+  created using the `/apis/rbac.authorization.k8s.io` endpoints.
 * To make sure your cluster is secure, only admin users can deploy Pods with
-privileged options. These are options like `PodSpec.hostIPC`, `PodSpec.hostNetwork`,
-`PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
-`SecurityContext.capabilities`, `SecurityContext.privileged`, and
-`Volume.hostPath`.
+  privileged options. These are options like `PodSpec.hostIPC`, `PodSpec.hostNetwork`,
+  `PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
+  `SecurityContext.capabilities`, `SecurityContext.privileged`, and
+  `Volume.hostPath`.
 * You can't grant permissions to Kubernetes service accounts.
-The `default` service account has no permissions and cannot use the Kubernetes
-API. All other service accounts have full admin permissions and can only be used
-by Docker EE administrators.
+  The `default` service account has no permissions and cannot use the Kubernetes
+  API. All other service accounts have full admin permissions and can only be
+  used by Docker EE administrators.
+
+{% endif %}
+{% endif %}

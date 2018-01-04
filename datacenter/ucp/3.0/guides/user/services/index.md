@@ -2,7 +2,14 @@
 title: Deploy an app from the UI
 description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords: ucp, deploy, application, stack, service, compose
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: deploy-app-cli/
+  title: Deploy an app from the CLI
 ---
+{% if include.version=="ucp-3.0" %}
 
 With Docker Universal Control Plane you can deploy applications from the UI
 using `docker-compose.yml` files. In this example, we're going to deploy an
@@ -28,7 +35,7 @@ select **Services**.
 
 Paste the following YAML into the **COMPOSE.YML** editor:
 
-```none
+```yaml
 version: "3"
 services:
 
@@ -171,6 +178,4 @@ To overcome these limitations, you can
 Also, UCP doesn't store the compose file used to deploy the application. You can
 use your version control system to persist that file.
 
-## Where to go next
-
-* [Deploy an app from the CLI](deploy-app-cli.md)
+{% endif %}
