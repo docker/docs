@@ -23,6 +23,14 @@ if ! [ -d "$TARGET" ]; then
 fi
 
 # Create permalinks for archived versions
+# first the HTML, then JS which is used to build the TOC in 17.09+
+# Note: pattern '\(src\|href\)=\("\{0,1\}\)' matches:
+# - src=
+# - href=
+# followed by an optional double quote
+# the pattern for the JS regex matches exactly: "path":"<absolute path>"
+# The goal is to change URLs like /blah to /v17.09/blah
 printf "Creating permalinks for $VER"
 printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/#\1=\2/'"$BASEURL"'#g';
+printf "."; find ${TARGET}/js -type f -name '*.js' -print0 | xargs -0 sed -i 's#"path":"/#"path":"/'"$BASEURL"'#g';
 echo "done"

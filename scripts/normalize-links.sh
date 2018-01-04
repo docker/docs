@@ -27,6 +27,7 @@ fi
 # - src=
 # - href=
 # followed by an optional double quote
+# The goal is to change URLs to all be absolute links starting at /
 
 printf "Cleaning up $VER"
 
