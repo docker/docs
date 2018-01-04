@@ -1,13 +1,24 @@
 ---
+title: Backups and disaster recovery
 description: Learn how to backup your Docker Universal Control Plane swarm, and
   to recover your swarm from an existing backup.
 keywords: ucp, backup, restore, recovery
-title: Backups and disaster recovery
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: configure/join-nodes/
+  title: Set up high availability
+- path: ../ucp-architecture/
+  title: UCP architecture
 ---
+{% if include.version=="ucp-3.0" %}
 
 When you decide to start using Docker Universal Control Plane on a production
 setting, you should
-[configure it for high availability](configure/set-up-high-availability.md).
+[configure it for high availability](configure/join-nodes/index.md).
 
 The next step is creating a backup policy and disaster recovery plan.
 
@@ -25,7 +36,7 @@ UCP maintains data about:
 | Volumes               | All [UCP named volumes](../architecture/#volumes-used-by-ucp), which include all UCP component certs and data        |
 
 This data is persisted on the host running UCP, using named volumes.
-[Learn more about UCP named volumes](../architecture.md).
+[Learn more about UCP named volumes](../ucp-architecture.md).
 
 ## Backup steps
 
@@ -33,18 +44,18 @@ Back up your Docker EE components in the following order:
 
 1. [Back up your swarm](/engine/swarm/admin_guide/#back-up-the-swarm)
 2. Back up UCP
-3. [Back up DTR](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md)
+3. [Back up DTR](../../../../dtr/2.5/guides/admin/backups-and-disaster-recovery.md)
 
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
 DTR is backed up independently.
-[Learn about DTR backups and recovery](../../../../dtr/2.3/guides/admin/backups-and-disaster-recovery.md).
+[Learn about DTR backups and recovery](../../../../dtr/2.5/guides/admin/backups-and-disaster-recovery.md).
 
 To create a UCP backup, run the `{{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup` command
 on a single UCP manager. This command creates a tar archive with the
-contents of all the [volumes used by UCP](../architecture.md) to persist data
-and streams it to stdout. The backup doesn't include the swarm-mode state,
+contents of all the [volumes used by UCP](../ucp-architecture.md) to persist data
+and streams it to `stdout`. The backup doesn't include the swarm-mode state,
 like service definitions and overlay network definitions.
 
 You only need to run the backup command on a single UCP manager node. Since UCP
@@ -66,7 +77,7 @@ temporarily unable to:
 
 To minimize the impact of the backup policy on your business, you should:
 
-* Configure UCP for [high availability](configure/set-up-high-availability.md).
+* Configure UCP for [high availability](configure/join-nodes/index.md).
   This allows load-balancing user requests across multiple UCP manager nodes.
 * Schedule the backup to take place outside business hours.
 
@@ -77,14 +88,14 @@ verify its contents:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --log-driver none --rm -i --name ucp \
+docker container run --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
 
 # Ensure the backup is a valid tar and list its contents
 # In a valid backup file, over 100 files should appear in the list
 # and the `./ucp-node-certs/key.pem` file should be present
-$ tar --list -f /tmp/backup.tar
+tar --list -f /tmp/backup.tar
 ```
 
 A backup file may optionally be encrypted using a passphrase, as in the
@@ -92,13 +103,13 @@ following example:
 
 ```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --log-driver none --rm -i --name ucp \
+docker container run --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive \
   --passphrase "secret" > /tmp/backup.tar
 
 # Decrypt the backup and list its contents
-$ gpg --decrypt /tmp/backup.tar | tar --list
+gpg --decrypt /tmp/backup.tar | tar --list
 ```
 
 ### Security-Enhanced Linux (SELinux)
@@ -108,7 +119,7 @@ which is typical for RHEL hosts, you need to include `--security-opt label=disab
 in the `docker` command:
 
 ```bash
-$ docker container run --security-opt label=disable --log-driver none --rm -i --name ucp \
+docker container run --security-opt label=disable --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
 ```
@@ -129,7 +140,7 @@ UCP from an existing backup file, presumed to be located at
 `/tmp/backup.tar`:
 
 ```none
-$ docker container run --rm -i --name ucp \
+docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore < /tmp/backup.tar
 ```
@@ -138,17 +149,17 @@ If the backup file is encrypted with a passphrase, you will need to provide the
 passphrase to the restore operation:
 
 ```none
-$ docker container run --rm -i --name ucp \
+docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore --passphrase "secret" < /tmp/backup.tar
 ```
 
 The restore command may also be invoked in interactive mode, in which case the
 backup file should be mounted to the container rather than streamed through
-stdin:
+`stdin`:
 
 ```none
-$ docker container run --rm -i --name ucp \
+docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /tmp/backup.tar:/config/backup.tar \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} restore -i
@@ -164,7 +175,7 @@ UCP restore recovers the following assets from the backup file:
   authentication backends.
 
 UCP restore does not include swarm assets such as cluster membership, services, networks,
-secrets, etc.  [Learn to backup a swarm](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm).
+secrets, etc.  [Learn to backup a swarm](/engine/swarm/admin_guide/#back-up-the-swarm).
 
 There are two ways to restore UCP:
 
@@ -184,7 +195,7 @@ recommend making backups regularly.
 It is important to note that this procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for
-[high availability](configure/set-up-high-availability.md).
+[high availability](configure/join-nodes/index.md).
 
 1. On one of the remaining manager nodes, perform `docker swarm init
    --force-new-cluster`. You may also need to specify an
@@ -201,10 +212,11 @@ manager failures, the system should be configured for
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
    command.
 6. If any nodes are listed as `down`, you'll have to manually [remove these
-   nodes](../configure/scale-your-cluster.md) from the swarm and then re-join
+   nodes](configure/scale-your-cluster.md) from the swarm and then re-join
    them using a `docker swarm join` operation with the swarm's new join-token.
 
-## Where to go next
+{% elsif include.version=="ucp-2.2" %}
 
-* [Set up high availability](configure/set-up-high-availability.md)
-* [UCP architecture](../architecture.md)
+Learn about [backups and disaster recovery](/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery.md).
+
+{% endif %}

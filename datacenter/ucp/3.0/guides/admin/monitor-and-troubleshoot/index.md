@@ -2,12 +2,25 @@
 title: Monitor the cluster status
 description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
 keywords: UCP, troubleshoot, health, cluster
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+cli_tabs:
+- version: docker-cli-linux
+next_steps:
+- path: troubleshoot-with-logs/
+  title: Troubleshoot with logs
+- path: troubleshoot-node-messages/
+  title: Troubleshoot node states
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 You can monitor the status of UCP by using the web UI or the CLI.
 You can also use the `_ping` endpoint to build monitoring automation.
-
-## Check status from the UI
 
 The first place to check the status of UCP is the UCP web UI, since it
 shows warnings for situations that require your immediate attention.
@@ -27,21 +40,28 @@ Click the node to get more info on its status. In the details pane, click
 **Actions** and select **Agent logs** to see the log entries from the
 node. 
 
+{% elsif include.version=="ucp-2.2" %}
 
-## Check status from the CLI
+Learn how to [monitor the cluster status](/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/index.md).
+
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 You can also monitor the status of a UCP cluster using the Docker CLI client.
 Download [a UCP client certificate bundle](../../user/access-ucp/cli-based-access.md)
 and then run:
 
-```none
-$ docker node ls
+```bash
+docker node ls
 ```
 
 As a rule of thumb, if the status message starts with `[Pending]`, then the
 current state is transient and the node is expected to correct itself back
 into a healthy state. [Learn more about node status](troubleshoot-node-messages.md).
-
 
 ## Monitoring automation
 
@@ -64,9 +84,5 @@ URL of a manager node, and not a load balancer. In addition, please be aware tha
 pinging the endpoint with HEAD will result in a 404 error code. It is better to 
 use GET instead.
 
-
-
-## Where to go next
-
-* [Troubleshoot with logs](troubleshoot-with-logs.md)
-* [Troubleshoot node states](./troubleshoot-node-messages.md)
+{% endif %}
+{% endif %}

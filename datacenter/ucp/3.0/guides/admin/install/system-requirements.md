@@ -4,7 +4,7 @@ description: Learn about the system requirements for installing Docker Universal
 keywords: UCP, architecture, requirements, Docker EE
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:

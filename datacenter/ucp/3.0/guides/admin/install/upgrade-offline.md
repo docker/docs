@@ -4,7 +4,7 @@ description: Learn how to upgrade Docker Universal Control Plane on a machine wi
 keywords: ucp, upgrade, offline
 ui_tabs:
 - version: ucp-3.0
-  orhigher: true
+  orhigher: false
 - version: ucp-2.2
   orlower: true
 next_steps:
