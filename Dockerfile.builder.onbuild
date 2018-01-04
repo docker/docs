@@ -6,7 +6,7 @@ ONBUILD ARG VER
 
 # Build the docs from this branch
 ONBUILD COPY . /source
-ONBUILD RUN jekyll build --source /source --destination /site/${VER}
+ONBUILD RUN JEKYLL_ENV="/${VER}" jekyll build --source /source --destination /site/${VER}
 
 # Do post-processing on archive
 ONBUILD RUN /scripts/fix-archives.sh /site/ ${VER}

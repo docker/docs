@@ -31,6 +31,6 @@ fi
 # the pattern for the JS regex matches exactly: "path":"<absolute path>"
 # The goal is to change URLs like /blah to /v17.09/blah
 printf "Creating permalinks for $VER"
-printf "."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/#\1=\2/'"$BASEURL"'#g';
-printf "."; find ${TARGET}/js -type f -name '*.js' -print0 | xargs -0 sed -i 's#"path":"/#"path":"/'"$BASEURL"'#g';
+printf ".HTML..."; find ${TARGET} -type f -name '*.html' -print0 | xargs -0 sed -i 's#\(src\|href\)=\("\{0,1\}\)/#\1=\2/'"$BASEURL"'#g';
+printf ".JS..."; find ${TARGET} -type f -name 'toc.js' -print0 | xargs -0 sed -i 's#"path":"/#"path":"/'"$BASEURL"'#g';
 echo "done"
