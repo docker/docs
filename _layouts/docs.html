@@ -312,7 +312,13 @@
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
 	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
-	var pageURL = '{{ page.url }}';
+	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+	var jekyllEnv = '{{ jekyll.environment }}';
+	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+	if (jekyllEnv == 'development') {
+		jekyllEnv = '';
+	}
+	var pageURL = jekyllEnv + '{{ page.url }}';
 	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
