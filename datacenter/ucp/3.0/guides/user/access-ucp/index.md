@@ -2,7 +2,16 @@
 title: Web-based access
 description: Learn how to access Docker Universal Control Plane from the web browser.
 keywords: ucp, web, administration
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: ../../authorization/
+  title: Authorization
+- path: cli-based-access/
+  title: Access UCP from the CLI  
 ---
+{% if include.version=="ucp-3.0" %}
 
 Docker Universal Control Plane allows you to manage your cluster in a visual
 way, from your browser.
@@ -25,7 +34,4 @@ From the browser, administrators can:
 Non-admin users can only see and change the images, networks, volumes, and
 containers, and only when they're granted access by an administrator.
 
-# Where to go next
-
-* [Authorization](../../access-control/index.md)
-* [Access UCP from the CLI](cli-based-access.md)
+{% endif %}

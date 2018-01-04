@@ -2,7 +2,11 @@
 title: Give access to secrets
 description: Learn how to use labels to give permissions to secrets in Docker UCP.
 keywords: UCP, secret, password, certificate, private key
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 UCP gives you access control, so that you can specify which users can use a
 specific secret in their services and which users can delete the secret.
@@ -31,6 +35,4 @@ secret data.
 To revoke access to a secret you can edit the secret to change the access label,
 or update the permissions a team has for a label.
 
-## Where to go next
-
-* [Manage secrets](index.md)
+{% endif %}

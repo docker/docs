@@ -2,7 +2,14 @@
 title: Manage secrets
 description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE
 keywords: UCP, secret, password, certificate, private key
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: grant-revoke-access/
+  title: Grant access to secrets
 ---
+{% if include.version=="ucp-3.0" %}
 
 When deploying and orchestrating services, you often need to configure them
 with sensitive information like passwords, TLS certificates, or private keys.
@@ -188,6 +195,4 @@ WordPress application is running and using the new password.
 
 You can find additional documentation on managing secrets through the CLI at [How Docker manages secrets](/engine/swarm/secrets/#read-more-about-docker-secret-commands).
 
-## Where to go next
-
-[Grant access to secrets](grant-revoke-access.md)
+{% endif %}

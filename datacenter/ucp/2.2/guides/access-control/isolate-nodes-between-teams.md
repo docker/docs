@@ -149,7 +149,7 @@ All resources are deployed under the user's default collection,
 4.  Click the **NGINX** container, and in the details pane, confirm that its
     **Collection** is **/Prod/Webserver**.
 
-    ![](../../images/isolate-nodes-3.png){: .with-border}
+    ![](../images/isolate-nodes-3.png){: .with-border}
 
 5.  Click **Inspect Resource**, and in the dropdown, select **Nodes**.
 6.  Click the node, and in the details pane, confirm that its **Collection**

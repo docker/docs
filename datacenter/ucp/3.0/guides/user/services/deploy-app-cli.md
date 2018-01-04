@@ -2,7 +2,11 @@
 title: Deploy an app from the CLI
 description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords: ucp, deploy, application, stack, service, compose
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 With Docker Universal Control Plane you can deploy your apps from the CLI,
 using `docker-compose.yml` files. In this example, we're going to deploy an
@@ -11,7 +15,7 @@ application that allows users to vote on whether they prefer cats or dogs.
 ## Get a client certificate bundle
 
 Docker UCP secures your Docker cluster with
-[role-based access control](../../access-control/index.md),
+[role-based access control](../../authorization/index.md),
 so that only authorized users can deploy applications. To be able to run Docker
 commands on a cluster managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates. 
@@ -32,7 +36,7 @@ The application we're going to deploy is composed of several services:
 After setting up your Docker CLI client to authenticate using client certificates,
 create a file named `docker-compose.yml` with the following contents:
 
-```none
+```yaml
 version: "3"
 services:
 
@@ -135,7 +139,7 @@ docker stack deploy --compose-file docker-compose.yml VotingApp
 Test that the voting app is up and running using `docker stack services`:
 
 ```bash
-$ docker stack services VotingApp
+docker stack services VotingApp
 
 ID            NAME                  MODE        REPLICAS  IMAGE
 df7uqiqyqi1n  VotingApp_visualizer  replicated  1/1       manomarks/visualizer:latest
@@ -171,7 +175,7 @@ When you're all done, you can take down the entire stack by using `docker stack
 rm`:
 
 ```bash
-$ docker stack rm VotingApp
+docker stack rm VotingApp
 
 Removing service VotingApp_visualizer
 Removing service VotingApp_result
@@ -184,6 +188,4 @@ Removing network VotingApp_frontend
 Removing network VotingApp_default
 ```
 
-## Where to go next
-
-* [Deploy an app from the UI](index.md)
+{% endif %}
