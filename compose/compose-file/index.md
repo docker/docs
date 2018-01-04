@@ -182,7 +182,7 @@ Configuration options that are applied at build time.
 context:
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build: ./dir
@@ -192,7 +192,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build:
