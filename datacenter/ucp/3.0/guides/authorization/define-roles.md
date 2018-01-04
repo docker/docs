@@ -2,7 +2,18 @@
 title: Define roles with authorized API operations
 description: Learn how to create roles and set permissions in Docker Universal Control Plane.
 keywords: rbac, authorization, authentication, users, teams, UCP
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: create-users-and-teams-manually/
+  title: Create and configure users and teams
+- path: group-resources/
+  title: Group and isolate cluster resources
+- path: grant-permissions/
+  title: Grant role-access to cluster resources
 ---
+{% if include.version=="ucp-3.0" %}
 
 A role defines a set of API operations permitted against a group of resources.
 Roles are applied to users and teams with grants.
@@ -46,8 +57,4 @@ the same name to different collections or namespaces.
 > - Roles used within a grant can only be deleted after first deleting the grant.
 > - Only administrators can create and delete roles.
 
-## Next steps
-
-* [Create and configure users and teams](create-users-and-teams-manually.md)
-* [Group and isolate cluster resources](group-resources.md)
-* [Grant role-access to cluster resources](grant-permissions.md)
+{% endif %}

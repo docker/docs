@@ -1,10 +1,14 @@
 ---
 title: Reset a user password
-description: Learn how to recover your Docker Datacenter credentials.
-keywords: ucp, authentication
+description: Learn how to recover your Docker Enterprise Edition credentials.
+keywords: ucp, authentication, password
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
-## User passwords
+## Change user passwords
 
 Docker EE administrators can reset user passwords managed in UCP:
 
@@ -18,7 +22,7 @@ Users passwords managed with an LDAP service must be changed on the LDAP server.
 
 ![](../images/recover-a-user-password-1.png){: .with-border}
 
-## Administrator passwords
+## Change administrator passwords
 
 Administrators who need a password change can ask another administrator for help
 or use **ssh** to log in to a manager node managed by Docker EE and run:
@@ -30,3 +34,7 @@ docker exec -it ucp-auth-api enzi \
   passwd -i
 {% endraw %}
 ```
+
+{% endif %}
+
+

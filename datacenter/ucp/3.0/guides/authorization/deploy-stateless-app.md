@@ -2,7 +2,11 @@
 title: Deploy a simple stateless app with RBAC
 description: Learn how to deploy a simple application and customize access to resources.
 keywords: rbac, authorize, authentication, users, teams, UCP, Docker
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
 ---
+{% if include.version=="ucp-3.0" %}
 
 This tutorial explains how to deploy a nginx web server and limit access to one
 team with role-based access control (RBAC).
@@ -64,7 +68,7 @@ simple role for the ops team:
 4. On the **Operations** tab, check all **Kubernetes Deployment Operations**.
 5. Click **Create**.
 
-See: [Create and configure users and teams](define-roles.md).
+See: [Create and configure users and teams](create-users-and-teams-manually.md).
 
 ### Grant access
 
@@ -83,7 +87,7 @@ You've configured Docker EE. The `ops` team can now deploy `nginx`.
 2. Click **Kubernetes** > **Namespaces**.
 3. Paste the following manifest in the terminal window and click **Create**.
 
-```
+```yaml
 apiVersion: apps/v1beta2  # Use apps/v1beta1 for versions < 1.8.0
 kind: Deployment
 metadata:
@@ -109,7 +113,7 @@ spec:
 - `dba` (alex) cannot see `nginx-namespace`.
 - `dev` (bett) cannot see `nginx-namespace`.
 
-## Swarm Stack
+## Swarm stack
 
 In this section, we deploy `nginx` as a Swarm service. See [Kubernetes Deployment](#kubernetes-deployment)
 for the same exercise with Swarm.
@@ -153,7 +157,7 @@ acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
 
 See: [Grant role-access to cluster resources](grant-permissions.md).
 
-### Deploy Nginx
+### Deploy NGINX
 
 You've configured Docker EE. The `ops` team can now deploy an `nginx` Swarm
 service.
@@ -171,3 +175,5 @@ service.
 7. Log on to UCP as each user and ensure that:
    - `dba` (alex) cannot see `nginx-collection`.
    - `dev` (bett) cannot see `nginx-collection`.
+
+{% endif %}

@@ -2,7 +2,16 @@
 title: Isolate cluster nodes in Docker Advanced
 description: Create grants that limit access to nodes to specific teams.
 keywords: ucp, grant, role, permission, authentication, node, Kubernetes
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
+next_steps:
+- path: isolate-volumes/
+  title: Isolate volumes
 ---
+{% if include.version=="ucp-3.0" %}
 
 With Docker EE Advanced, you can enable physical isolation of resources
 by organizing nodes into collections and granting `Scheduler` access for
@@ -274,6 +283,9 @@ The last step is to link the Kubernetes namespace the `/Prod` collection.
 
     ![](../images/isolate-nodes-10.png){: .with-border}
 
-## Next steps
 
-* [Isolate volumes](isolate-volumes.md)
+{% elsif include.version=="ucp-2.2" %}
+
+Learn about [isolating cluster nodes in Docker Advanced](/datacenter/ucp/2.2/guides/access-control/isolate-nodes-between-teams.md).
+
+{% endif %}

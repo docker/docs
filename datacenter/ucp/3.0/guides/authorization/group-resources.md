@@ -1,8 +1,19 @@
 ---
 title: Group and isolate cluster resources
 description: Learn how to group resources into collections or namespaces to control access.
-keywords: rbac, ucp, grant, role, permission, authentication, resource collection
+keywords: rbac, ucp, grant, role, permission, authentication, resource collection, namespace
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+next_steps:
+- path: create-users-and-teams-manually/
+  title: Create and configure users and teams
+- path: define-roles/
+  title: Define roles with authorized API operations
+- path: grant-permissions/
+  title: Grant role-access to cluster resources
 ---
+{% if include.version=="ucp-3.0" %}
 
 ## Kubernetes namespace
 
@@ -145,8 +156,4 @@ If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
 permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes.md).
 
-## Next case
-
-* [Create and configure users and teams](create-users-and-teams-manually.md)
-* [Define roles with authorized API operations](define-roles.md)
-* [Grant role-access to cluster resources](grant-permissions.md)
+{% endif %}
