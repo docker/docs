@@ -1,8 +1,21 @@
 ---
 title: Create users and teams manually
 description: Learn how to add users and define teams in Docker Universal Control Plane.
-keywords: rbac, authorize, authentication, users, teams, UCP, Docker
+keywords: rbac, authorize, authentication, users, teams, UCP
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: create-teams-with-ldap/
+  title: Synchronize teams with LDAP
+- path: define-roles/
+  title: Define roles with authorized API operations
+- path: group-resources/
+  title: Group and isolate cluster resources
+- path: grant-permissions/
+  title: Grant role-access to cluster resources
 ---
+{% if include.version=="ucp-3.0" %}
 
 Users, teams, and organizations are referred to as subjects in Docker EE.
 
@@ -44,7 +57,7 @@ The general flow of designing an organization with teams in UCP is:
 
 ### Create an organization with teams
 
-To create an organzation in UCP:
+To create an organization in UCP:
 
 1. Click **Organization & Teams** under **User Management**.
 2. Click **Create Organization**.
@@ -69,7 +82,7 @@ New users are assigned a default permission level so that they can access the
 cluster. To extend a user's default permissions, add them to a team and [create grants](grant-permissions.md). You can optionally grant them Docker EE
 administrator permissions.
 
-To manally create users in UCP:
+To manually create users in UCP:
 
 1. Click **Users** under **User Management**.
 2. Click **Create User**.
@@ -83,10 +96,4 @@ To manally create users in UCP:
 ![](../images/ucp_usermgmt_users_create01.png){: .with-border}
 ![](../images/ucp_usermgmt_users_create02.png){: .with-border}
 
-
-# Next steps
-
-* [Synchronize teams with LDAP](create-teams-with-ldap.md)
-* [Define roles with authorized API operations](define-roles.md)
-* [Group and isolate cluster resources](group-resources.md)
-* [Grant role-access to cluster resources](grant-permissions.md)
+{% endif %}

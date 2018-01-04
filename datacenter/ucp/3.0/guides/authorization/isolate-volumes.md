@@ -2,7 +2,14 @@
 title: Isolate volumes to a specific team
 description: Create grants that limit access to volumes to specific teams.
 keywords: ucp, grant, role, permission, authentication
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+next_steps:
+- path: isolate-nodes/
+  title: Isolate Swarm nodes in Docker Advanced
 ---
+{% if include.version=="ucp-3.0" %}
 
 In this example, two teams are granted access to volumes in two different
 resource collections. UCP access control prevents the teams from viewing and
@@ -91,6 +98,4 @@ created by the Dev and Prod users.
 
 ![](../images/isolate-volumes-4.png){: .with-border}
 
-## Next steps
-
-* [Isolate Swarm nodes in Docker Advanced](isolate-nodes.md)
+{% endif %}
