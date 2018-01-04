@@ -2971,7 +2971,7 @@ manuals:
       title: Customer FAQs
     - path: /docker-store/publisher_faq/
       title: Publisher FAQs
-  - sectiontitle: Publisher
+  - sectiontitle: For Publishers
     section:
     - path: /docker-store/publish/
       title: Publish content on Docker Store
