@@ -3007,13 +3007,21 @@ manuals:
 - sectiontitle: Docker Store
   section:
   - path: /docker-store/
-    title: Docker Store overview
-  - path: /docker-store/publish/
-    title: Publish content on Docker Store
-  - path: /docker-store/trustchain/
-    title: Docker Store Trust Chain
-  - path: /docker-store/faq/
-    title: Consumer FAQs
+    title: About Docker Store
+  - sectiontitle: Docker Store FAQs
+    section:
+    - path: /docker-store/customer_faq/
+      title: Customer FAQs
+    - path: /docker-store/publisher_faq/
+      title: Publisher FAQs
+  - sectiontitle: For Publishers
+    section:
+    - path: /docker-store/publish/
+      title: Publish content on Docker Store
+    - path: /docker-store/trustchain/
+      title: Docker Store trust chain
+    - path: /docker-store/byol/
+      title: Bring Your Own License (BYOL)
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
