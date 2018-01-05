@@ -1,4 +1,4 @@
-wrappedNode(label: 'linux && x86_64') {
+wrappedNode(label: 'ubuntu-1604 && x86_64') {
   timeout(time: 60, unit: 'MINUTES') {
     deleteDir()
     stage "checkout"
