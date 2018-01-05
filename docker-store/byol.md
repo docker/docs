@@ -63,7 +63,7 @@ Docker will provide:
 
 ### Fulfillment and orders usage
 
-Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form or URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
+Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form of URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
 
 The BYOL program at Docker Store helps ISVs control access to their products for multiple use cases, such as:
 - New customers purchasing software from the ISV for the first time
