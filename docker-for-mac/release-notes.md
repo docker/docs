@@ -469,6 +469,18 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
+
+* New
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See https://docs.docker.com/docker-for-mac/kubernetes/
+  - DNS name `docker.for.mac.host.internal` shoud be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+
+* Bug fixes and minor changes
+  - The docker engine is configured to use VPNKit as an HTTP proxy, fixing 'docker pull' in environments with no DNS. Fixes [docker/for-mac#2320](https://github.com/docker/for-mac/issues/2320)
+
 ### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21 (Edge)
 
 * Upgrades
