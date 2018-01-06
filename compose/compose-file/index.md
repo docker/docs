@@ -787,6 +787,7 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [external_links](#external_links)
 - [links](#links)
 - [network_mode](#network_mode)
+- [restart](#restart)
 - [security_opt](#security_opt)
 - [stop_signal](#stop_signal)
 - [sysctls](#sysctls)
@@ -1764,6 +1765,10 @@ on-failure error.
     restart: always
     restart: on-failure
     restart: unless-stopped
+    
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
