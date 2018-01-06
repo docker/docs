@@ -37,7 +37,7 @@ users, by creating subscriptions to their content in Docker Store.
 ### Prerequisites and setup
 
 To use Docker as your fulfillment service, an ISV must:
-- [Apply and be approved as a Docker Store Publisher](https://store.docker.com/publisher/signup)
+- [Apply and be approved as a Docker Store Vendor Partner](https://goto.docker.com/partners)
 - Apply and be approved to list an Ungated BYOL product
 - Create one or more Ungated BYOL product plans, in the Docker Store Publisher center.
 
