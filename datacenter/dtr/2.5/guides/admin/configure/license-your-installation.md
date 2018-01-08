@@ -2,7 +2,15 @@
 title: License your installation
 description: Learn how to license your Docker Trusted Registry installation.
 keywords: dtr, install, license
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: enable-single-sign-on/
+  title: Enable single sign-on
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 By default, you don't need to license your Docker Trusted Registry. When
 installing DTR, it automatically starts using the same license file used on
@@ -33,7 +41,4 @@ page**.
 
 Click the **Apply new license** button, and upload your new license file.
 
-
-## Where to go next
-
-* [Enable single sign-on](enable-single-sign-on.md)
+{% endif %}

@@ -2,8 +2,15 @@
 title: Deploy DTR caches
 description: Learn how to deploy and configure DTR caches, so that users can pull images faster.
 keywords: registry, dtr, cache
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: tls/
+  title: Deploy caches with TLS
 ---
 
+{% if include.version=="dtr-2.5" %}
 
 You can configure DTR to have multiple caches. Once you've deployed caches,
 users can configure their DTR user account to specify which cache to pull from.
@@ -129,7 +136,7 @@ The only requirements are that:
 On the host where the cache will be deployed, create a `config.yml` file with
 the following content:
 
-```
+```yaml
 version: 0.1
 storage:
   delete:
@@ -156,14 +163,14 @@ defines where DTR can be reached, and which CA certificates should be trusted.
 
 Now we need to download the CA certificate used by DTR. For this, run:
 
-```
+```bash
 curl -k https://<dtr-url>/ca > dtr-ca.pem
 ```
 
 Now that we've got the cache configuration file and DTR CA certificate, we can
 deploy the cache by running:
 
-```none
+```bash
 docker run --detach --restart always \
   --name dtr-cache \
   --publish 5000:5000 \
@@ -215,10 +222,8 @@ that the cache is being used, and troubleshoot problems.
 
 In the host where you've deployed the `region-us` cache, run:
 
-```
+```bash
 docker container logs dtr-cache
 ```
 
-## Where to go next
-
-* [Deploy caches with TLS](tls.md)
+{% endif %}

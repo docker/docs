@@ -2,7 +2,15 @@
 title: Use NFS
 description: Learn how to integrate Docker Trusted Registry with NFS
 keywords: registry, dtr, storage, nfs
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: index/
+  title: Configure where images are stored
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 You can configure DTR to store Docker images in an NFS directory.
 
@@ -30,7 +38,7 @@ mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory>
 
 One way to configure DTR to use an NFS directory is at install time:
 
-```none
+```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} install \
   --nfs-storage-url <nfs-storage-url> \
   <other options>
@@ -49,7 +57,7 @@ NFS you can continue using the same configurations.
 If you want to start using the new DTR built-in support for NFS you can
 reconfigure DTR:
 
-```none
+```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} reconfigure \
   --nfs-storage-url <nfs-storage-url>
 ```
@@ -57,7 +65,7 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version }} rec
 If you want to reconfigure DTR to stop using NFS storage, leave the option
 in blank:
 
-```none
+```bash
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ dtr_version}} reconfigure \
   --nfs-storage-url ""
 ```
@@ -66,6 +74,4 @@ If the IP address of your NFS server changes, even if the DNS address is kept
 the same, you should reconfigure DTR to stop using NFS storage, and then
 add it back again.
 
-## Where to go next
-
-* [Configure where images are stored](index.md)
+{% endif %}

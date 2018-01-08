@@ -2,7 +2,12 @@
 title: Configure DTR image storage
 description: Storage configuration for Docker Trusted Registry
 keywords: storage drivers, NFS, Azure, S3
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 By default DTR uses the local filesystem of the node where it is running to
 store your Docker images. You can configure DTR to use an external storage
@@ -51,7 +56,7 @@ same images.
 To check how much space your images are taking in the local filesystem, you
 can ssh into the node where DTR is deployed and run:
 
-```
+```bash
 {% raw %}
 # Find the path to the volume
 docker volume inspect dtr-registry-<replica-id>
@@ -74,3 +79,5 @@ all replicas can share the same storage backend.
 
 DTR supports AWS3 or other storage systems that are S3-compatible like Minio.
 [Learn how to configure DTR with Amazon S3](s3.md).
+
+{% endif %}
