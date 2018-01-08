@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>dr-overview-2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="4" cy="4" r="4"></circle>
+        <circle id="path-2" cx="4" cy="4" r="4"></circle>
+        <circle id="path-3" cx="4" cy="4" r="4"></circle>
+        <circle id="path-4" cx="4" cy="4" r="4"></circle>
+        <circle id="path-5" cx="4" cy="4" r="4"></circle>
+    </defs>
+    <g id="dtr-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="dr-overview-2">
+            <g id="group" transform="translate(29.000000, 55.000000)">
+                <g id="dtr">
+                    <g id="network" transform="translate(0.000000, 120.000000)">
+                        <rect id="Rectangle-138" fill="#82949E" x="0" y="7" width="682" height="14" rx="2"></rect>
+                        <g id="error" transform="translate(327.000000, 0.000000)">
+                            <circle id="Oval-3" fill="#82949E" cx="14" cy="14" r="14"></circle>
+                            <path d="M14,14 L6,14 L14,14 L14,6 L14,14 Z M14,14 L14,22 L14,14 L22,14 L14,14 Z" id="Path-5" stroke="#FFFFFF" stroke-width="3" transform="translate(14.000000, 14.000000) rotate(45.000000) translate(-14.000000, -14.000000) "></path>
+                        </g>
+                    </g>
+                    <g id="arrows" transform="translate(229.000000, 102.000000)"></g>
+                    <g id="nodes">
+                        <g id="node-3-copy" transform="translate(476.000000, 0.000000)">
+                            <g id="arrow" transform="translate(48.500000, 119.000000) rotate(-90.000000) translate(-48.500000, -119.000000) translate(32.000000, 115.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#82949E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#82949E" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="node">
+                                <g id="node-label">
+                                    <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#82949E"></path>
+                                    <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="6" y="14">worker node</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g id="engine" transform="translate(0.000000, 43.000000)" fill="#82949E">
+                                <rect id="Rectangle-138" x="0" y="0" width="97" height="59" rx="2"></rect>
+                            </g>
+                            <rect id="node-border" stroke="#82949E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
+                            <g id="error" transform="translate(32.000000, 55.000000)">
+                                <circle id="Oval-3" fill="#FFFFFF" cx="17" cy="17" r="17"></circle>
+                                <text id="!" font-family="CourierNewPS-BoldMT, Courier New" font-size="30" font-weight="bold" fill="#82949E">
+                                    <tspan x="8.49853516" y="27">!</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <g id="node-4" transform="translate(367.000000, 0.000000)">
+                            <g id="arrow" transform="translate(48.500000, 119.000000) rotate(-90.000000) translate(-48.500000, -119.000000) translate(32.000000, 115.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#439FD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#439FD1" fill-rule="evenodd" xlink:href="#path-2"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="node">
+                                <g id="node-label">
+                                    <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
+                                    <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="6" y="14">worker node</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g id="engine" transform="translate(1.000000, 43.000000)">
+                                <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="58" rx="2"></rect>
+                                <text id="DTR" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="38.4980469" y="33">DTR</tspan>
+                                </text>
+                            </g>
+                            <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
+                        </g>
+                        <g id="node-3" transform="translate(218.000000, 0.000000)">
+                            <g id="arrow" transform="translate(48.500000, 119.000000) rotate(-90.000000) translate(-48.500000, -119.000000) translate(32.000000, 115.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#82949E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#82949E" fill-rule="evenodd" xlink:href="#path-3"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="node">
+                                <g id="node-label">
+                                    <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#82949E"></path>
+                                    <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="6" y="14">worker node</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g id="engine" transform="translate(0.000000, 43.000000)" fill="#82949E">
+                                <rect id="Rectangle-138" x="0" y="0" width="97" height="59" rx="2"></rect>
+                            </g>
+                            <rect id="node-border" stroke="#82949E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
+                            <g id="error" transform="translate(32.000000, 55.000000)">
+                                <circle id="Oval-3" fill="#FFFFFF" cx="17" cy="17" r="17"></circle>
+                                <text id="!" font-family="CourierNewPS-BoldMT, Courier New" font-size="30" font-weight="bold" fill="#82949E">
+                                    <tspan x="8.49853516" y="27">!</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <g id="node-2" transform="translate(109.000000, 0.000000)">
+                            <g id="arrow" transform="translate(48.500000, 119.000000) rotate(-90.000000) translate(-48.500000, -119.000000) translate(32.000000, 115.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#82949E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#82949E" fill-rule="evenodd" xlink:href="#path-4"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="node">
+                                <g id="node-label">
+                                    <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#82949E"></path>
+                                    <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="6" y="14">worker node</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g id="engine" transform="translate(0.000000, 43.000000)" fill="#82949E">
+                                <rect id="Rectangle-138" x="0" y="0" width="97" height="59" rx="2"></rect>
+                            </g>
+                            <rect id="node-border" stroke="#82949E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
+                            <g id="error" transform="translate(32.000000, 55.000000)">
+                                <circle id="Oval-3" fill="#FFFFFF" cx="17" cy="17" r="17"></circle>
+                                <text id="!" font-family="CourierNewPS-BoldMT, Courier New" font-size="30" font-weight="bold" fill="#82949E">
+                                    <tspan x="8.49853516" y="27">!</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <g id="node-1">
+                            <g id="arrow" transform="translate(48.500000, 119.000000) rotate(-90.000000) translate(-48.500000, -119.000000) translate(32.000000, 115.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#82949E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#82949E" fill-rule="evenodd" xlink:href="#path-5"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="node">
+                                <g id="node-label">
+                                    <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#82949E"></path>
+                                    <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="6" y="14">worker node</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g id="engine" transform="translate(0.000000, 43.000000)" fill="#82949E">
+                                <rect id="Rectangle-138" x="0" y="0" width="97" height="59" rx="2"></rect>
+                            </g>
+                            <rect id="node-border" stroke="#82949E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
+                            <g id="error" transform="translate(32.000000, 55.000000)">
+                                <circle id="Oval-3" fill="#FFFFFF" cx="17" cy="17" r="17"></circle>
+                                <text id="!" font-family="CourierNewPS-BoldMT, Courier New" font-size="30" font-weight="bold" fill="#82949E">
+                                    <tspan x="8.49853516" y="27">!</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

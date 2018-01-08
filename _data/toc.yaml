@@ -2373,8 +2373,18 @@ manuals:
           title: Troubleshoot with logs
         - path: /datacenter/dtr/2.5/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
           title: Troubleshoot batch jobs
-      - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
-        title: Backups and disaster recovery
+      - sectiontitle: Disaster recovery
+        section:
+        - title: Overview
+          path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/
+        - title: Repair a single replica
+          path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/repair-a-single-replica/
+        - title: Repair a cluster
+          path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/repair-a-cluster/
+        - title: Create a backup
+          path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/create-a-backup/
+        - title: Restore from a backup
+          path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/restore-from-backup/
     - sectiontitle: User guides
       section:
       - sectiontitle: Access DTR

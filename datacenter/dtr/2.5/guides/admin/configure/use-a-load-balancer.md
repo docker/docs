@@ -267,5 +267,4 @@ docker run --detach \
 
 ## Where to go next
 
-* [Backups and disaster recovery](../backups-and-disaster-recovery.md)
-* [Monitor and troubleshoot](../monitor-and-troubleshoot/index.md)
+* [DTR architecture](../../architecture.md)
