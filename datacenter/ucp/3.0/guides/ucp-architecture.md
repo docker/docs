@@ -3,7 +3,7 @@ title: UCP architecture
 description: Learn about the architecture of Docker Universal Control Plane.
 keywords: ucp, architecture
 ui_tabs:
-- version: deep-2.0
+- version: ucp-3.0
   orhigher: false
 next_steps:
 - path: admin/install/system-requirements
@@ -11,7 +11,7 @@ next_steps:
 - path: admin/install/plan-installation
   title: Plan your installation
 ---
-{% if include.version=="deep-2.0" %}
+{% if include.version=="ucp-3.0" %}
 
 Universal Control Plane is a containerized application that runs on
 [Docker Enterprise Edition](/enterprise/index.md) and extends its functionality

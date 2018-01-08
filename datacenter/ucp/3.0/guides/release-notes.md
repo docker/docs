@@ -3,7 +3,13 @@ title: UCP 3.0 Beta1 release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
+ui_tabs:
+- version: ucp-3.0
+  orhigher: false
+- version: ucp-2.2
+  orlower: true
 ---
+{% if include.version=="ucp-3.0" %}
 
 Here you can learn about new features, bug fixes, breaking changes, and
 known issues for the latest UCP version.
@@ -40,7 +46,7 @@ advantage of the added features.
 an iptables incompatibility.
 * UCP 3.0 requires more resources to run than UCP 2.2 and is unlikely to work
 correctly on nodes with less than 4GB of total memory.
-* The kubernetes SPDY operations such as `kubectl logs` or `kubectl exec` are
+* The Kubernetes SPDY operations such as `kubectl logs` or `kubectl exec` are
 not possible when using the client bundle feature. As a workaround, you may
 change all references from `:443` to `:6443` in the `kube.yml` and `env.sh`
 files of a user client bundle.
@@ -86,3 +92,12 @@ Calico (which is included).
 visible in the UI because of a problem with the middleware object store.
 * If all the nodes in UCP are using IBM Z, Kubernetes functionality will show
 up on the web UI but not be available for use.
+
+{% elsif include.version=="ucp-2.2" %}
+
+- [UCP 2.2 release notes](/datacenter/ucp/2.2/guides/release-notes.md)
+- [UCP 2.1 release notes](/datacenter/ucp/2.1/guides/release-notes/index.md)
+- [UCP 2.0 release notes](/datacenter/ucp/2.0/guides/release-notes.md)
+- [UCP 1.1 release notes](/datacenter/ucp/1.1/release_notes.md)
+
+{% endif %}

@@ -3,14 +3,14 @@ title: Upgrade Docker EE
 description: |
   Learn how to upgrade your Docker Enterprise Edition, to start using the latest features and security patches.
 ui_tabs:
-- version: deep-2.0
+- version: dee-2.0
   orhigher: false
 next_steps:
 - path: backup/
   title: Backup Docker EE
 keywords: enterprise, upgrade
 ---
-{% if include.version=="deep-2.0" %}
+{% if include.version=="dee-2.0" %}
 
 To upgrade Docker Enterprise Edition you need to individually upgrade each of the
 following components:

@@ -3,8 +3,8 @@ title: Deploy Enterprise Edition on Linux servers
 description: Learn how to get a trial license and install Docker Enterprise Edition.
 keywords: ucp, dtr, install, orchestration
 ui_tabs:
-- version: deep-2.0
-  orhigher: true
+- version: dee-2.0
+  orhigher: false
 next_steps:
 - path: ../ucp/3.0/guides/admin/configure/scale-your-cluster/
   title: Scale your UCP cluster
@@ -13,7 +13,7 @@ next_steps:
 redirect_from:
 - /datacenter/try/
 ---
-{% if include.version=="deep-2.0" %}
+{% if include.version=="dee-2.0" %}
 
 The best way to try Docker Enterprise Edition for yourself is to get the [30-day
 trial available at the Docker Store](https://store.docker.com/search?offering=enterprise&type=edition).

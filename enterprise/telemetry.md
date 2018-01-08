@@ -4,15 +4,15 @@ title: Manage usage data collection
 description: |
   Understand and manage usage data collected by Docker EE and sent to Docker.
 ui_tabs:
-- version: deep-2.0
-  orhigher: true
+- version: dee-2.0
+  orhigher: false
 cli_tabs:
 - version: docker-cli-linux
 keywords: enterprise, telemetry, data collection
 ---
 {% if include.ui %}
 
-{% if include.version=="deep-2.0" %}
+{% if include.version=="dee-2.0" %}
 
 Docker EE Engine version 17.06 and later includes a telemetry plugin.
 The plugin is enabled by default on Ubuntu starting with Docker EE 17.06.0

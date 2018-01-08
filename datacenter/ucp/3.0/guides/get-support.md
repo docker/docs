@@ -2,7 +2,16 @@
 title: Get support
 description: Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.
 keywords: support, help
+ui_tabs:
+- version: ucp-3.0
+  orlower: true
+cli_tabs:
+- version: docker-cli-linux
+- version: docker-cli-win
 ---
+{% if include.ui %}
+
+{% if include.version=="ucp-3.0" %}
 
 Your Docker Enterprise Edition subscription gives you access to prioritized
 support. The service levels depend on your subscription.
@@ -18,20 +27,23 @@ Docker Support engineers may ask you to provide a UCP support dump, which is an
 archive that contains UCP system logs and diagnostic information. To obtain a
 support dump:
 
-## From the UI
-
 1. Log into the UCP web UI with an administrator account.
 2. In the top-left menu, click your username and choose
    **Download Logs**.
 
 ![](images/get-support-1.png){: .with-border}
 
-## From the CLI
+{% endif %}
+{% endif %}
+
+{% if include.cli %}
+
+{% if include.version=="docker-cli-linux" %}
 
 To get the support dump from the CLI, use SSH to log into a UCP manager node
 and run:
 
-```none
+```bash
 docker container run --rm \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -44,11 +56,16 @@ This support dump only contains logs for the node where you're running the
 command. If your UCP is highly available, you should collect support dumps
 from all of the manager nodes.
 
+{% elsif include.version=="docker-cli-win" %}
+
 On Windows worker nodes, run the following command to generate a local support dump:
 
-```ps
-PS> docker container run --name windowssupport -v 'C:\ProgramData\docker\daemoncerts:C:\ProgramData\docker\daemoncerts' -v 'C:\Windows\system32\winevt\logs:C:\eventlogs:ro' {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}; docker cp windowssupport:'C:\dsinfo' .; docker rm -f windowssupport
+```powershell
+docker container run --name windowssupport -v 'C:\ProgramData\docker\daemoncerts:C:\ProgramData\docker\daemoncerts' -v 'C:\Windows\system32\winevt\logs:C:\eventlogs:ro' {{ page.ucp_org }}/ucp-dsinfo-win:{{ page.ucp_version }}; docker cp windowssupport:'C:\dsinfo' .; docker rm -f windowssupport
 ```
 
 This command creates a directory named `dsinfo` in your current directory.
 If you want an archive file, you need to create it from the `dsinfo` directory.
+
+{% endif %}
+{% endif %}
