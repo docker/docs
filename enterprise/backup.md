@@ -3,14 +3,14 @@ title: Backup Docker EE
 description: |
   Learn how to create a backup of your Docker Enterprise Edition, and how to restore from a backup.
 ui_tabs:
-- version: deep-2.0
+- version: dee-2.0
   orhigher: false
 next_steps:
 - path: upgrade/
   title: Upgrade Docker EE
 keywords: enterprise, backup, restore
 ---
-{% if include.version=="deep-2.0" %}
+{% if include.version=="dee-2.0" %}
 
 To backup Docker Enterprise Edition you need to create individual backups
 for each of the following components:

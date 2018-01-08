@@ -3,7 +3,7 @@ title: Docker Enterprise Edition Platform
 description: |
   Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.
 ui_tabs:
-- version: deep-2.0
+- version: dee-2.0
   orhigher: false
 cli_tabs:
 - version: docker-cli-linux
@@ -16,7 +16,7 @@ next_steps:
 keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
 ---
 
-{% if include.version=="deep-2.0" %}
+{% if include.version=="dee-2.0" %}
 
 Docker Enterprise Edition Platform 2.0 (*Docker EE*) is a
 Containers-as-a-Service (CaaS) platform that enables a secure software supply
