@@ -1306,30 +1306,34 @@ The corresponding network configuration in the
 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
 you must use a version 2.x Compose file, such as the one below.
 
+> **Note**: These options do not currently work in swarm mode.
+
 An example:
 
-    version: '2.1'
+```yaml
+version: '2.1'
 
-    services:
-      app:
-        image: busybox
-        command: ifconfig
-        networks:
-          app_net:
-            ipv4_address: 172.16.238.10
-            ipv6_address: 2001:3984:3989::10
-
+services:
+  app:
+    image: busybox
+    command: ifconfig
     networks:
       app_net:
-        driver: bridge
-        enable_ipv6: true
-        ipam:
-          driver: default
-          config:
-          -
-            subnet: 172.16.238.0/24
-          -
-            subnet: 2001:3984:3989::/64
+        ipv4_address: 172.16.238.10
+        ipv6_address: 2001:3984:3989::10
+
+networks:
+  app_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.16.238.0/24
+      -
+        subnet: 2001:3984:3989::/64
+```
 
 ### pid
 
