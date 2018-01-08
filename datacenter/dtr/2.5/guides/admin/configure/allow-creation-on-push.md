@@ -5,7 +5,7 @@ description: By default Docker Trusted Registry only allows pushing images to
 keywords: dtr, repository
 ui_tabs:
 - version: dtr-2.5
-  orhigher: true
+  orlower: true
 cli_tabs:
 - version: cli
 ---

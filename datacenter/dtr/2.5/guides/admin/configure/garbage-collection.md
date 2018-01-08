@@ -3,7 +3,15 @@ title: Garbage collection
 description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
 keywords: registry, garbage collection, gc, space, disk space
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: deploy-caches/
+  title: Deploy DTR caches
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 You can configure Docker Trusted Registry to automatically delete unused image
 layers, thus saving you disk space. This process is also known as garbage collection.
@@ -80,6 +88,4 @@ referenced.
 3. If a file is never referenced, that means that no image tag uses it, so it
 can be safely deleted.
 
-## Where to go next
-
-* [Deploy DTR caches](deploy-caches/index.md)
+{% endif %}

@@ -2,8 +2,15 @@
 title: Use your own TLS certificates
 description: Learn how to configure Docker Trusted Registry with your own TLS certificates.
 keywords: dtr, tls
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: external-storage/
+  title: Set up external storage
 ---
 
+{% if include.version=="dtr-2.5" %}
 
 By default the DTR services are exposed using HTTPS, to ensure all
 communications between clients and DTR is encrypted. Since DTR
@@ -40,6 +47,4 @@ any web browser or client tool should now trust DTR. If you're using an internal
 certificate authority, you'll need to configure your system to trust that
 certificate authority.
 
-## Where to go next
-
-* [Set up external storage](external-storage/index.md)
+{% endif %}

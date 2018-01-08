@@ -2,7 +2,15 @@
 title: Set up high availability
 description: Lean how to scale Docker Trusted Registry by adding and removing replicas.
 keywords: dtr, install, deploy
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: set-up-vulnerability-scans/
+  title: Set up vulnerability scans
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry is designed to scale horizontally as your usage
 increases. You can add more replicas to make DTR scale to your demand and for
@@ -48,7 +56,7 @@ To add replicas to an existing DTR deployment:
 
 2.  Run the DTR join command:
 
-    ```none
+    ```bash
     docker run -it --rm \
       {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
       --ucp-node <ucp-node-name> \
@@ -68,7 +76,7 @@ To remove a DTR replica from your deployment:
 1. Use ssh to log into any node that is part of UCP.
 2.  Run the DTR remove command:
 
-```none
+```bash
 docker run -it --rm \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
   --ucp-insecure-tls
@@ -84,6 +92,4 @@ unhealthy replica
 If you're load-balancing user requests across multiple DTR replicas, don't
 forget to remove this replica from the load balancing pool.
 
-## Where to go next
-
-* [Set up vulnerability scans](set-up-vulnerability-scans.md)
+{% endif %}

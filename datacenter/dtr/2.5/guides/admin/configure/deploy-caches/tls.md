@@ -2,7 +2,15 @@
 title: Deploy caches with TLS
 description: Learn how to deploy and secure caches for Docker Trusted Registry, leveraging TLS
 keywords: dtr, tls
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: chaining/
+  title: Chain multiple caches
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 When running DTR caches on a production environment, you should secure them
 with TLS. In this example we're going to deploy a DTR cache that uses TLS.
@@ -29,7 +37,7 @@ the directory where you've stored the TLS certificate and keys.
 
 Create the `config.yml` file with the following content:
 
-```
+```yaml
 version: 0.1
 storage:
   delete:
@@ -60,14 +68,14 @@ The configuration file mentions:
 
 Run this command to download the CA certificate used by DTR:
 
-```
+```bash
 curl -k https://<dtr-url>/ca > dtr-ca.pem
 ```
 
 Now that we've got the cache configuration file and TLS certificates, we can
 deploy the cache by running:
 
-```none
+```bash
 docker run --detach --restart always \
   --name dtr-cache \
   --publish 5000:5000 \
@@ -87,7 +95,4 @@ Learn more [about Let's Encrypt](https://letsencrypt.org/how-it-works/), and
 how to
 [create a configuration file that leverages it](/registry/configuration.md#letsencrypt).
 
-
-## Where to go next
-
-* [Chain multiple caches](chaining.md)
+{% endif %}

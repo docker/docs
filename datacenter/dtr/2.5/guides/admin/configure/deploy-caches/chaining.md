@@ -2,7 +2,12 @@
 title: Chain multiple caches
 description: Learn how to deploy and chain multiple caches for Docker Trusted Registry, to cover multiple regions or offices
 keywords: dtr, tls
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 If your users are distributed geographically, consider chaining multiple DTR
 caches together for faster pulls.
@@ -73,3 +78,5 @@ middleware:
 Since the China cache doesn't need to communicate directly with DTR,
 it only needs to trust the CA certificates for the next hop, in this case
 the CA certificate used by the Asia cache.
+
+{% endif %}
