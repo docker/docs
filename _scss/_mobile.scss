@@ -6,11 +6,10 @@
 
 @media only screen 
     and (min-width : 376px)
-    and (max-width : 1024px) {  
+    and (max-width : 1130px) {  
     .nav-primary,
     .hero-text,
     .banner,
-    .ctrl-right,
     ul.primary.nav.navbar-nav,
     .nav-secondary .logo {
         display: none;
@@ -21,7 +20,7 @@
     }
     .tabs li a {
         font-size: 13px;
-        padding: 17px 9px 14px 5px;
+        // padding: 16px 20px;
     }
 
     h1,
@@ -50,21 +49,18 @@
     .nav-secondary  {
         overflow: hidden;
     }
-    .search-form {
-        float: left;
-    }
   }
 
 @media only screen 
     and (min-width : 376px)
     and (max-width : 900px) {  
-    // .tabs {
-    //     padding: 0 0 0 10px;
-    // }
-    // .tabs li a {
-    //     font-size: 13px;
-    //     padding: 19px 10px 11px;
-    // }
+    .tabs {
+        padding: 0 0 0 10px;
+    }
+    .tabs li a {
+        font-size: 13px;
+        padding: 19px 10px 11px;
+    }
     .sidebar {
         position: fixed;
         width: 100%;
@@ -93,7 +89,7 @@
     .hero-text,
     .banner,
     .ctrl-right {
-        display: none;
+        display: none;///// CHECK THIS /////
     }
     .nav-container {
         overflow: visible;
@@ -139,6 +135,7 @@
     }
     .nav-sidebar a {
         color: #a8a8a8;
+        text-align: center;
     }
     .tabs {
         float: left;
@@ -151,7 +148,6 @@
         float: left;
         opacity: 0.7;
         font-size: 12px;
-        margin-left: -10px;
     }
     .content {
         padding: 120px 25px;
@@ -216,7 +212,6 @@
       padding: 5px 0 0 0;
     }
     .tabs li a {
-      // padding: 15px 0 10px 0;
       margin-left: 0;
       font-weight: normal;
     }
@@ -253,7 +248,6 @@
     }
     .nav-secondary {
         background: $black;
-        // height: 55px;
     }
     .content {
         padding: 120px 20px;
@@ -261,13 +255,6 @@
     .main-content {
         padding: 0px 10px;
     }
-    .tabs {
-        padding-left: 22px;
-    }
-    // .tabs li a {
-    //     padding: 17px 9px 12px 5px;
-    //     font-size: 12px;
-    // }
     .nav-sidebar a {
         color: #a8a8a8;
     }
@@ -328,10 +315,6 @@
     }
     h4 {
         font-size: 16px;
-    }
-    .tabs li a {
-        font-size: 12px;
-        padding: 20px 7px 11px 5px;
     }
     .toc-nav a {
         font-size: 11px;

@@ -7,7 +7,6 @@
     height: 55px;
 }
 
-
 .primary {
     padding: 5px 0 0 20px;
 }
@@ -29,7 +28,6 @@
     float: right;
     padding: 16px 15px 0 0;
 }
-
 
 /*
 *
@@ -63,7 +61,6 @@
     background: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
-    // overflow: hidden;
 }
 
 
@@ -87,7 +84,7 @@
         z-index: 100;
     }
     .search-form {
-        margin: 5px 27px 0 0px;
+        margin: 5px 27px 0 -10px;
         width: 240px;
     }
 }
@@ -216,7 +213,6 @@ div#side-toc-title {
     margin: 10px 0 20px 15px;
 }
 
-
 /*
 *
 * Toggle Switches **************************************************************
@@ -262,7 +258,7 @@ div#side-toc-title {
     bottom: 0;
     background-color: $slider-bg;
     border: 1px solid #c3e4f7;
-    // transition: 0.4s;
+    transition: 0.4s;
 }
 
 .slider:before {
@@ -273,7 +269,7 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    // transition: 0.4s;
+    transition: 0.4s;
 }
 
 input:focus+.slider {
@@ -304,23 +300,20 @@ input:checked+.slider:before {
     float: left;
     margin: 0;
     padding: 0;
-}
-
-.tabs li {
-    float: left;
-    list-style: none;
-}
-
-.tabs li a {
-    color: $white;
-    padding: 17px 7px 14px 7px;
-    float: left;
-    font-weight: 600;
-}
-
-.tabs li a:hover {
-    background: rgba(0, 0, 0, 0.17) !important;
-    border-bottom: 4px solid #fff;
+    li {
+        float: left;
+        list-style: none;
+        a {
+            color: $white;
+            padding: 17px 20px 12px 15px;
+            float: left;
+            font-weight: 600;
+            &:hover {
+                background: rgba(0, 0, 0, 0.17) !important;
+                border-bottom: 4px solid #fff;
+            }
+        }
+    }
 }
 
 .tabs li.active a {
@@ -329,7 +322,6 @@ input:checked+.slider:before {
     cursor: default;
     border-bottom: 4px solid #fff;
 }
-
 
 /*
 *

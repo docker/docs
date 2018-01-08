@@ -107,7 +107,7 @@ img.inline {
 
 .search-form {
     float: left;
-    margin: 5px 5px 0 0px;
+    margin: 5px 0 0px;
     // width: 200px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
@@ -177,9 +177,6 @@ input[type=text] {
     background-position: 10px 9px;
     border: 1px solid transparent;
     box-shadow: none;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
 
@@ -189,7 +186,6 @@ input[type=text] {
     border: 1px solid transparent;
     box-shadow: none;
     border-radius: 0;
-    // color: #fff;
     padding: 0px 0 0 35px;
 }
 
