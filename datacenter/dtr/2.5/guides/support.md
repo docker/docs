@@ -3,7 +3,12 @@ title: Get support for DTR
 description: Your Docker subscription gives you access to prioritized support. You
   can file tickets via email, your the support portal.
 keywords: support, help
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 Your Docker Data Center, or Docker Trusted Registry subscription gives you
 access to prioritized support. The service levels depend on your subscription.
@@ -14,3 +19,5 @@ If you need help, you can file a ticket via:
 * [Docker support page](https://support.docker.com/)
 
 Be sure to use your company email when filing tickets.
+
+{% endif %}
