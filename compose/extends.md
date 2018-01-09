@@ -302,7 +302,7 @@ replaces the old value.
 > was defined in the original service.
 >
 > For example, if the original service defines `image: webapp` and the
-> local service defines `build: .` then the resulting service will have
+> local service defines `build: .` then the resulting service has a
 > `build: .` and no `image` option.
 >
 > This is because `build` and `image` cannot be used together in a version 1

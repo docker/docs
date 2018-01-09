@@ -101,7 +101,7 @@ webapp:
 ```
 
 If the `docker-compose.admin.yml` also specifies this same service, any matching
-fields will override the previous file. New values, add to the `webapp` service
+fields override the previous file. New values, add to the `webapp` service
 configuration.
 
 ```

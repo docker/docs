@@ -11,7 +11,7 @@ Docker Cloud offers a large number of data stores in the *Jumpstart* library,
 including Redis, MongoDB, PostgreSQL, and MySQL.
 
 You may have noticed that your app has a visit counter that's been disabled up
-until now. In this step you'll add a data backend that your service will use. In
+until now. In this step you'll add a data backend for your service to use. In
 this specific tutorial we'll use a Redis cache, but most concepts apply to any
 data backend.
 
@@ -27,7 +27,7 @@ $ docker-cloud service run \
 --name redis \
 redis
 ```
-**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service, only services **linked** to your *Redis service* will be able to connect to it.
+**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service, only services **linked** to your *Redis service* can connect to it.
 
 Use `docker-cloud service ps` to check if your new redis service is *running*. This might take a minute or two.
 

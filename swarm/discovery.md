@@ -24,7 +24,7 @@ For details about libkv and a detailed technical overview of the supported backe
 
 1. On each node, start the Swarm agent.
 
-    The node IP address doesn't have to be public as long as the Swarm manager can access it. In a large cluster, the nodes joining swarm may trigger request spikes to discovery. For example, a large number of nodes are added by a script, or recovered from a network partition. This may result in discovery failure. You can use `--delay` option to specify a delay limit. Swarm join will add a random delay less than this limit to reduce pressure to discovery.
+    The node IP address doesn't have to be public as long as the Swarm manager can access it. In a large cluster, the nodes joining swarm may trigger request spikes to discovery. For example, a large number of nodes are added by a script, or recovered from a network partition. This may result in discovery failure. You can use `--delay` option to specify a delay limit. The `swarm join` command adds a random delay less than this limit to reduce pressure to discovery.
 
     **Etcd**:
 
@@ -38,7 +38,7 @@ For details about libkv and a detailed technical overview of the supported backe
 
         swarm join --advertise=<node_ip:2375> zk://<zookeeper_addr1>,<zookeeper_addr2>/<optional path prefix>
 
-2. Start the Swarm manager on any machine or your laptop.
+2. Start the swarm manager on any machine or your laptop.
 
     **Etcd**:
 
@@ -92,15 +92,15 @@ swarm join \
     consul://<consul_addr>/<optional path prefix>
 ```
 
-This works the same way for the Swarm `manage` and `list` commands.
+This works the same way for the swarm `manage` and `list` commands.
 
 ## A static file or list of nodes
 
-> **Note**: This discovery method is incompatible with replicating Swarm
+> **Note**: This discovery method is incompatible with replicating swarm
 managers. If you require replication, you should use a hosted discovery key
 store.
 
-You can use a static file or list of nodes for your discovery backend. The file must be stored on a host that is accessible from the Swarm manager. You can also pass a node list as an option when you start Swarm.
+You can use a static file or list of nodes for your discovery backend. The file must be stored on a host that is accessible from the swarm manager. You can also pass a node list as an option when you start Swarm.
 
 Both the static file and the `nodes` option support an IP address range. To specify a range supply a pattern, for example, `10.0.0.[10:200]` refers to nodes starting from `10.0.0.10` to `10.0.0.200`. For example for the `file` discovery method.
 
@@ -122,7 +122,7 @@ Or with node discovery:
 
     This example creates a file named `/tmp/my_cluster`. You can use any name you like.
 
-2. Start the Swarm manager on any machine.
+2. Start the swarm manager on any machine.
 
         swarm manage -H tcp://<swarm_ip:swarm_port> file:///tmp/my_cluster
 
@@ -183,11 +183,11 @@ swarm is connected to the public internet. To create your cluster:
 
 2. Create each node and join them to the cluster.
 
-    On each of your nodes, start the swarm agent. The node IP address doesn't have to be public (eg. 192.168.0.X) but the Swarm manager must be able to access it.
+    On each of your nodes, start the swarm agent. The node IP address doesn't have to be public (eg. 192.168.0.X) but the swarm manager must be able to access it.
 
         $ swarm join --advertise=<node_ip:2375> token://<cluster_id>
 
-3. Start the Swarm manager.
+3. Start the swarm manager.
 
     This can be on any machine or even your laptop.
 

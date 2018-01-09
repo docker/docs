@@ -4,9 +4,8 @@ keywords: registry, on-prem, images, tags, repository, distribution, recipes, ad
 title: Recipes overview
 ---
 
-You will find here a list of "recipes", end-to-end scenarios for exotic or otherwise advanced use-cases.
-
-Most users are not expected to have a use for these.
+This list of "recipes" provides end-to-end scenarios for exotic or otherwise advanced use-cases.
+These recipes are not useful for most standard set-ups.
 
 ## Requirements
 

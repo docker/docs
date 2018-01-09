@@ -47,7 +47,7 @@ Various container options that affect container domain name services.
     </td>
     <td>
     <p>
-     In addition to <code>--name</code> as described above, a container is discovered by one or more 
+     In addition to <code>--name</code> as described above, a container is discovered by one or more
      of its configured <code>--network-alias</code> (or <code>--alias</code> in <code>docker network connect</code> command)
      within the user-defined network. The embedded DNS server maintains the mapping between
      all of the container aliases and its IP address on a specific user-defined network.
@@ -67,8 +67,8 @@ Various container options that affect container domain name services.
       Using this option as you <code>run</code> a container gives the embedded DNS
       an extra entry named <code>ALIAS</code> that points to the IP address
       of the container identified by <code>CONTAINER_NAME</code>. When using <code>--link</code>
-      the embedded DNS will guarantee that localized lookup result only on that
-      container where the <code>--link</code> is used. This lets processes inside the new container 
+      the embedded DNS guarantees that localized lookup result only on that
+      container where the <code>--link</code> is used. This lets processes inside the new container
       connect to container without having to know its name or IP.
     </p>
     </td>
@@ -82,7 +82,7 @@ Various container options that affect container domain name services.
      server to forward the DNS query if embedded DNS server is unable to resolve a name
      resolution request from the containers.
      These <code>--dns</code> IP addresses are managed by the embedded DNS server and
-     will not be updated in the container's <code>/etc/resolv.conf</code> file.
+     are not updated in the container's <code>/etc/resolv.conf</code> file.
     </p></td>
   </tr>
   <tr>
@@ -92,10 +92,10 @@ Various container options that affect container domain name services.
     <td><p>
     Sets the domain names that are searched when a bare unqualified hostname is
     used inside of the container. These <code>--dns-search</code> options are managed by the
-    embedded DNS server and will not be updated in the container's <code>/etc/resolv.conf</code> file.
+    embedded DNS server and are not updated in the container's <code>/etc/resolv.conf</code> file.
     When a container process attempts to access <code>host</code> and the search
-    domain <code>example.com</code> is set, for instance, the DNS logic will not only
-    look up <code>host</code> but also <code>host.example.com</code>.
+    domain <code>example.com</code> is set, for instance, the DNS logic looks up
+    both <code>host</code> and <code>host.example.com</code>.
     </p>
     </td>
   </tr>
@@ -105,7 +105,7 @@ Various container options that affect container domain name services.
     </p></td>
     <td><p>
       Sets the options used by DNS resolvers. These options are managed by the embedded
-      DNS server and will not be updated in the container's <code>/etc/resolv.conf</code> file.
+      DNS server and are not updated in the container's <code>/etc/resolv.conf</code> file.
     </p>
     <p>
     See documentation for <code>resolv.conf</code> for a list of valid options.
@@ -125,7 +125,7 @@ unreachable from the container's network. After this filtering, if there are
 no more `nameserver` entries left in the container's `/etc/resolv.conf` file,
 the daemon adds public Google DNS nameservers (8.8.8.8 and 8.8.4.4) to the
 container's DNS configuration. If IPv6 is enabled on the daemon, the public
-IPv6 Google DNS nameservers will also be added (2001:4860:4860::8888 and
+IPv6 Google DNS nameservers are also added (2001:4860:4860::8888 and
 2001:4860:4860::8844).
 
 > **Note**: If you need access to a host's localhost resolver, you must modify

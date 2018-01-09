@@ -69,7 +69,7 @@ All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
 containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
 should work as expected. If a macOS path is not shared and does not exist in the
-VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
+VM, an attempt to bind mount it fails rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
 
@@ -82,14 +82,14 @@ an object is told that its `uid` and `gid` own the object. When any
 containerized process changes the ownership of a shared file system
 object, e.g. with `chown`, the new ownership information is persisted in
 the `com.docker.owner` extended attribute of the object. Subsequent
-requests for ownership metadata will return the previously set
+requests for ownership metadata return the previously set
 values. Ownership-based permissions are only enforced at the macOS file
 system level with all accessing processes behaving as the user running
 Docker. If the user does not have permission to read extended attributes
 on an object (such as when that object's permissions are `0000`), `osxfs`
-will attempt to add an access control list (ACL) entry that allows
+attempts to add an access control list (ACL) entry that allows
 the user to read and write extended attributes. If this attempt
-fails, the object will appear to be owned by the process accessing
+fails, the object appears to be owned by the process accessing
 it until the extended attribute is readable again.
 
 ### File system events
@@ -186,7 +186,7 @@ At the highest level, there are two dimensions to file system performance:
 throughput (read/write IO) and latency (roundtrip time). In a traditional file
 system on a modern SSD, applications can generally expect throughput of a few
 GB/s. With large sequential IO operations, `osxfs` can achieve throughput of
-around 250 MB/s which, while not native speed, will not be the bottleneck for
+around 250 MB/s which, while not native speed, is not likely to be the bottleneck for
 most applications which perform acceptably on HDDs.
 
 Latency is the time it takes for a file system call to complete. For instance,
@@ -198,10 +198,10 @@ sequential roundtrips, this results in significant observable slowdown.
 Reducing the latency requires shortening the data path from a Linux system call to
 macOS and back again. This requires tuning each component in the data path in
 turn -- some of which require significant engineering effort. Even if we achieve
-a huge latency reduction of 65μs/roundtrip, we will still "only" see a doubling
+a huge latency reduction of 65μs/roundtrip, we still "only" see a doubling
 of performance. This is typical of performance engineering, which requires
 significant effort to analyze slowdowns and develop optimized components. We
-know a number of approaches that will probably reduce the roundtrip time but we
+know a number of approaches that may reduce the roundtrip time but we
 haven't implemented all those improvements yet (more on this below in
 [What you can do](osxfs.md#what-you-can-do)).
 
@@ -234,7 +234,7 @@ coherence:
 
 1. A rake example (see below) appears to attempt to access 37000+
 different files that don't exist on the shared volume. Even with a 2× speedup
-via latency reduction this use case will still seem "slow".
+via latency reduction this use case still seems "slow".
 With caching enabled the performance increases around 3.5×, as described in
 the [user-guided caching post](link-TODO).
 We expect to see further performance improvements for rake with a "negative dcache" that
@@ -249,7 +249,7 @@ so must be invalidated if macOS ever reports an event delivery failure.
 2. Running `ember build` in a shared file system results in ember creating many
 different temporary directories and performing lots of intermediate activity
 within them. An empty ember project is over 300MB. This usage pattern does not
-require coherence between Linux and macOS, and will be significantly improved by
+require coherence between Linux and macOS, and is significantly improved by
 write caching.
 
 These two examples come from performance use cases contributed by users and they
@@ -308,13 +308,13 @@ can be easily tracked.
 
 #### What you can expect
 
-We will continue to work toward an optimized shared file system implementation
+We continue to work toward an optimized shared file system implementation
 on the Edge channel of Docker for Mac.
 
 You can expect some of the performance improvement work mentioned above to reach
 the Edge channel in the coming release cycles.
 
-In due course, we will open source all of our shared file system components. At
+We plan to eventually open source all of our shared file system components. At
 that time, we would be very happy to collaborate with you on improving the
 implementation of `osxfs` and related software.
 

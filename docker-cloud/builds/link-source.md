@@ -11,7 +11,7 @@ code service to Docker Cloud so that it can access your source code
 repositories. You can configure this link for user accounts or
 organizations.
 
-If you will only push pre-built images to Docker Cloud's registry, you do not
+If you only push pre-built images to Docker Cloud's registry, you do not
 need to link your source code provider.
 
 > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.

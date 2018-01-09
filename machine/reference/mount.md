@@ -23,7 +23,7 @@ bar
 
 
 Now you can use the directory on the machine, for mounting into containers.
-Any changes done in the local directory, will be reflected in the machine too.
+Any changes done in the local directory, is reflected in the machine too.
 
 ```none
 $ eval $(docker-machine env dev)

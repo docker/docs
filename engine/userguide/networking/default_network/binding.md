@@ -10,8 +10,8 @@ The information in this section explains binding container ports within the Dock
 create user-defined networks in addition to the default bridge network.
 
 By default Docker containers can make connections to the outside world, but the
-outside world cannot connect to containers. Each outgoing connection will
-appear to originate from one of the host machine's own IP addresses thanks to an
+outside world cannot connect to containers. Each outgoing connection
+appears to originate from one of the host machine's own IP addresses thanks to an
 `iptables` masquerading rule on the host machine that the Docker server creates
 when it starts:
 
@@ -27,7 +27,7 @@ MASQUERADE  all  --  172.17.0.0/16       0.0.0.0/0
 The Docker server creates a masquerade rule that lets containers connect to IP
 addresses in the outside world.
 
-If you want containers to accept incoming connections, you will need to provide
+If you want containers to accept incoming connections, you need to provide
 special options when invoking `docker run`. There are two approaches.
 
 First, you can supply `-P` or `--publish-all=true|false` to `docker run` which
@@ -66,7 +66,7 @@ DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.
 ```
 
 You can see that Docker has exposed these container ports on `0.0.0.0`, the
-wildcard IP address that will match any possible incoming port on the host
+wildcard IP address that matchs any possible incoming port on the host
 machine. If you want to be more restrictive and only allow container services to
 be contacted through a specific external interface on the host machine, you have
 two choices. When you invoke `docker run` you can use either `-p
@@ -83,7 +83,7 @@ exposure is achieved purely through iptables rules, and no attempt to bind the
 exposed port is ever made. This means that nothing prevents shadowing a
 previously listening service outside of Docker through exposing the same port
 for a container. In such conflicting situation, Docker created iptables rules
-will take precedence and route to the container.
+take precedence and route to the container.
 
 The `--userland-proxy` parameter, true by default, provides a userland
 implementation for inter-container and outside-to-container communication. When

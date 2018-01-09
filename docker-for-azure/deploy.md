@@ -6,10 +6,10 @@ title: Deploy your app on Docker for Azure
 
 ## Connecting to your manager nodes using SSH
 
-This section will walk you through connecting to your installation and deploying
+This section walksk you through connecting to your installation and deploying
 applications.
 
-First, you will obtain the public IP address for a manager node. Any manager
+First, you obtain the public IP address for a manager node. Any manager
 node can be used for administrating the swarm.
 
 ##### Manager Public IP and SSH ports on Azure
@@ -46,7 +46,7 @@ If you don't want to pass `-H` when using the tunnel, you can set the `DOCKER_HO
 ## Connecting to your Linux worker nodes using SSH
 
 The Linux worker nodes have SSH enabled. SSH access is not possible to the worker nodes from the public
-Internet directly. To access the worker nodes, you will need to first connect to a
+Internet directly. To access the worker nodes, you need to first connect to a
 manager node (see above) and then `ssh` to the worker node, over the private
 network. Make sure you have SSH agent forwarding enabled (see below). If you run
 the `docker node ls` command you can see the full list of nodes in your swarm.
@@ -59,7 +59,7 @@ SSH agent forwarding allows you to forward along your ssh keys when connecting f
 You can use this feature to SSH into worker nodes from a manager node without
 installing keys directly on the manager.
 
-If your haven't added your ssh key to the `ssh-agent` you will also need to do this first.
+If your haven't added your ssh key to the `ssh-agent` you also need to do this first.
 
 To see the keys in the agent already, run:
 
@@ -73,7 +73,7 @@ If you don't see your key, add it like this.
 $ ssh-add ~/.ssh/your_key
 ```
 
-On Mac OS X, the `ssh-agent` will forget this key, once it gets restarted. But you can import your SSH key into your Keychain like this. This will have your key survive restarts.
+On Mac OS X, the `ssh-agent` forgets this key, once it gets restarted. But you can import your SSH key into your Keychain like this so your key can survive restarts.
 
 ```
 $ ssh-add -K ~/.ssh/your_key
@@ -106,7 +106,7 @@ $ ssh docker@manager0
 ## Connecting to your Windows worker nodes using RDP
 
 The Windows worker nodes have RDP enabled. RDP access is not possible to the worker nodes from the public
-Internet. To access the worker nodes using RDP, you will need to first connect to a
+Internet. To access the worker nodes using RDP, you need to first connect to a
 manager node (see above) over `ssh`, establish a SSH tunnel and then use RDP to connect to the worker node over the SSH tunnel.
 
 To get started, first login to a manager node and determine the private IP address of the Windows worker VM:
@@ -121,7 +121,7 @@ Next, in your local machine, establish the SSH tunnel to the manager for the RDP
 $ ssh -L <local-port>:<windows-worker-ip>:3389 -p <manager-ssh-port> docker@<manager-ip>
 ```
 
-Finally you can use a RDP client on your local machine to connect to `local-host`:`local-port` and the connection will be forwarded to the RDP server running in the Windows worker node over the SSH tunnel created above.
+Finally you can use a RDP client on your local machine to connect to `local-host`:`local-port` and the connection is forwarded to the RDP server running in the Windows worker node over the SSH tunnel created above.
 
 ## Running apps
 
@@ -141,11 +141,11 @@ There are cases (such as installing a volume plugin) wherein a docker command ma
 
 Usage : `swarm-exec {Docker command}`
 
-The following will install a test plugin in all the nodes in the cluster.
+The following installs a test plugin in all the nodes in the cluster.
 
 Example : `swarm-exec docker plugin install --grant-all-permissions mavenugo/test-docker-netplugin`
 
-This tool internally makes use of docker global-mode service that runs a task on each of the nodes in the cluster. This task in turn executes your docker command. The global-mode service also guarantees that when a new node is added to the cluster or during upgrades, a new task is executed on that node and hence the docker command will be automatically executed.
+This tool internally makes use of docker global-mode service that runs a task on each of the nodes in the cluster. This task in turn executes your docker command. The global-mode service also guarantees that when a new node is added to the cluster or during upgrades, a new task is executed on that node and hence the docker command is automatically executed.
 
 ### Docker Stack deployment
 
@@ -159,7 +159,7 @@ docker stack deploy -f docker-compose.yml myapp
 
 A good sample app to test deployment of stacks is the [Docker voting app](https://github.com/docker/example-voting-app).
 
-By default, apps deployed with stacks do not have ports publicly exposed. Update port mappings for services, and Docker will automatically wire up the underlying platform load balancers:
+By default, apps deployed with stacks do not have ports publicly exposed. Update port mappings for services, and Docker automatically wires up the underlying platform load balancers:
 
     docker service update --publish-add published=80,target=80 <example-service>
 
@@ -172,4 +172,4 @@ To create swarm services using images in private repos, first make sure you're a
     docker service create --with-registry-auth user/private-repo
     ...
 
-This will cause swarm to cache and use the cached registry credentials when creating containers for the service.
+This causes swarm to cache and use the cached registry credentials when creating containers for the service.

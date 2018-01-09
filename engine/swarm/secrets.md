@@ -83,7 +83,7 @@ management data.
 
 > **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
 > Swarm managers run an earlier version, and one of those managers becomes the
-> manager of the swarm, the secrets will be stored unencrypted in that node's
+> manager of the swarm, the secrets are stored unencrypted in that node's
 > Raft logs. Before adding any secrets, update all of your manager nodes to
 > Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
 > logs.
@@ -252,7 +252,7 @@ real-world example, continue to
     ```
 
 8.  Repeat steps 3 and 4 again, verifying that the service no longer has access
-    to the secret. The container ID will be different, because the
+    to the secret. The container ID is different, because the
     `service update` command redeploys the service.
 
     ```none
@@ -417,13 +417,13 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 9.  The `site.csr` and `site.cnf` files are not needed by the Nginx service, but
-    you will need them if you want to generate a new site certificate. Protect
+    you need them if you want to generate a new site certificate. Protect
     the `root-ca.key` file.
 
 #### Configure the Nginx container
 
 1.  Produce a very basic Nginx configuration that serves static files over HTTPS.
-    The TLS certificate and key will be stored as Docker secrets so that they
+    The TLS certificate and key are stored as Docker secrets so that they
     can be rotated easily.
 
     In the current directory, create a new file called `site.conf` with the
@@ -446,7 +446,7 @@ generate the site key and certificate, name the files `site.key` and
 2.  Create three secrets, representing the key, the certificate, and the
     `site.conf`. You can store any file as a secret as long as it is smaller
     than 500 KB. This allows you to decouple the key, certificate, and
-    configuration from the services that will use them. In each of these
+    configuration from the services that use them. In each of these
     commands, the last argument represents the path to the file to read the
     secret from on the host machine's filesystem. In these examples, the secret
     name and the file name are the same.
@@ -689,7 +689,7 @@ line.
 
     The secrets are stored in the encrypted Raft logs for the swarm.
 
-2.  Create a user-defined overlay network which will be used for communication
+2.  Create a user-defined overlay network which is used for communication
     between the MySQL and WordPress services. There is no need to expose the
     MySQL service to any external host or container.
 
@@ -697,7 +697,7 @@ line.
     $ docker network create -d overlay mysql_private
     ```
 
-3.  Create the MySQL service. The MySQL service will have the following
+3.  Create the MySQL service. The MySQL service has the following
     characteristics:
 
     - Because the scale is set to `1`, only a single MySQL task runs.
@@ -720,8 +720,8 @@ line.
       passwords are stored in the MySQL system database itself.
     - Sets environment variables `MYSQL_USER` and `MYSQL_DATABASE`. A new
       database called `wordpress` is created when the container starts, and the
-      `wordpress` user will have full permissions for this database only. This
-      user will not be able to create or drop databases or change the MySQL
+      `wordpress` user has full permissions for this database only. This
+      user cannot create or drop databases or change the MySQL
       configuration.
 
       ```bash
@@ -751,7 +751,7 @@ line.
     At this point, you could actually revoke the `mysql` service's access to the
     `mysql_password` and `mysql_root_password` secrets because the passwords
     have been saved in the MySQL system database. Don't do that for now, because
-    we will use them later to facilitate rotating the MySQL password.
+    we use them later to facilitate rotating the MySQL password.
 
 5.  Now that MySQL is set up, create a WordPress service that connects to the
     MySQL service. The WordPress service has the following characteristics:
@@ -767,12 +767,12 @@ line.
       `mysql` container, and also publishes port 80 to port 30000 on all swarm
       nodes.
     - Has access to the `mysql_password` secret, but specifies a different
-      target file name within the container. The WordPress container will use
+      target file name within the container. The WordPress container uses
       the mount point `/run/secrets/wp_db_password`. Also specifies that the
       secret is not group-or-world-readable, by setting the mode to
       `0400`.
     - Sets the environment variable `WORDPRESS_DB_PASSWORD_FILE` to the file
-      path where the secret is mounted. The WordPress service will read the
+      path where the secret is mounted. The WordPress service reads the
       MySQL password string from that file and add it to the `wp-config.php`
       configuration file.
     - Connects to the MySQL container using the username `wordpress` and the
@@ -816,7 +816,7 @@ line.
 
     At this point, you could actually revoke the WordPress service's access to
     the `mysql_password` secret, because WordPress has copied the secret to its
-    configuration file `wp-config.php`. Don't do that for now, because we will
+    configuration file `wp-config.php`. Don't do that for now, because we
     use it later to facilitate rotating the MySQL password.
 
 7.  Access `http://localhost:30000/` from any swarm node and set up WordPress
@@ -824,7 +824,7 @@ line.
     `wordpress` database. WordPress automatically generates a password for your
     WordPress user, which is completely different from the password WordPress
     uses to access MySQL. Store this password securely, such as in a password
-    manager. You will need it to log into WordPress after
+    manager. You need it to log into WordPress after
     [rotating the secret](#example-rotate-a-secret).
 
     Go ahead and write a blog post or two and install a WordPress plugin or
@@ -882,7 +882,7 @@ use it, then remove the old secret.
     in `/run/secrets` but does not expose them on the command line or save them
     in the shell history.
 
-    Do this quickly and move on to the next step, because WordPress will lose
+    Do this quickly and move on to the next step, because WordPress loses
     the ability to connect to MySQL.
 
     First, find the ID of the `mysql` container task.
@@ -910,8 +910,8 @@ use it, then remove the old secret.
 
 4.  Update the `wordpress` service to use the new password, keeping the target
     path at `/run/secrets/wp_db_secret` and keeping the file permissions at
-    `0400`.  This will trigger a rolling restart of the WordPress service and
-    the new secret will be used.
+    `0400`.  This triggers a rolling restart of the WordPress service and
+    the new secret is used.
 
     ```bash
     $ docker service update \
@@ -1027,12 +1027,12 @@ a compose file.
 The keyword `secrets:` defines two secrets `db_password:` and
 `db_root_password:`.
 
-When deploying, Docker will create these two secrets and populate them with the
+When deploying, Docker creates these two secrets and populate them with the
 content from the file specified in the compose file.
 
 The db service uses both secrets, and the wordpress is using one.
 
-When you deploy, Docker will mount a file under `/run/secrets/<secret_name>` in the
+When you deploy, Docker mounts a file under `/run/secrets/<secret_name>` in the
 services. These files are never persisted in disk, but are managed in memory.
 
 Each service uses environment variables to specify where the service should look

@@ -19,7 +19,7 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 1. Go to the [Docker Cloud sign up page](https://cloud.docker.com).
 
-2. Enter a username that will become your Docker ID.
+2. Enter a username that is also your Docker ID.
 
     Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters.
 

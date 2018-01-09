@@ -262,9 +262,9 @@ needed.
     when connecting it to a network, by using the `--ip` or `--ip6` flag. When
     you specify an IP address in this way while using a user-defined network,
     the configuration is preserved as part of the container's configuration and
-    will be applied when the container is reloaded. Assigned IP addresses are not
+    is applied when the container is reloaded. Assigned IP addresses are not
     preserved when using non-user-defined networks, because there is no guarantee
-    that a container's subnet will not change when the Docker daemon restarts unless
+    that a container's subnet does not change when the Docker daemon restarts unless
     you use user-defined networks.
 
 5.  Inspect the network resources used by `container3`. The
@@ -490,7 +490,7 @@ The following example briefly describes how to use `--link`.
     ```
 
     This is a little tricky, because `container5` does not exist yet. When
-    `container5` is created, `container4` will be able to resolve the name `c5` to
+    `container5` is created, `container4` can to resolve the name `c5` to
     `container5`'s IP address.
 
     >**Note**: Any link between containers created with *legacy link* is static in
@@ -499,7 +499,7 @@ The following example briefly describes how to use `--link`.
     networks supports dynamic links between containers, and tolerates restarts and
     IP address changes in the linked container.
 
-    Since you have not yet created container `container5` trying to ping it will result
+    Since you have not yet created container `container5` trying to ping it results
     in an error. Attach to `container4` and try to ping either `container5` or `c5`:
 
     ```bash
@@ -592,7 +592,7 @@ default `bridge` network.
 
 In addition, if a container belongs to multiple networks, a given linked alias
 is scoped within a given network. Thus, a container can be linked to different
-aliases in different networks, and the aliases will not work for containers which
+aliases in different networks, and the aliases do not work for containers which
 are not on the same network.
 
 The following example illustrates these points.
@@ -809,8 +809,8 @@ The following example illustrates how to set up and use network aliases.
     ```
 
     When multiple containers share the same alias, one of those containers
-    will resolve to the alias. If that container is unavailable, another
-    container with the alias will be resolved. This provides a sort of high
+    resolves to the alias. If that container is unavailable, another
+    container with the alias is resolved. This provides a sort of high
     availability within the cluster.
 
     > **Note**: When the IP address is resolved, the container chosen to resolve
@@ -840,7 +840,7 @@ The following example illustrates how to set up and use network aliases.
     ```
 
     In the terminal attached to `container4`, observe the `ping` output.
-    It will pause when `container6` goes down, because the `ping` command
+    It pauses when `container6` goes down, because the `ping` command
     looks up the IP when it is first invoked, and that IP is no longer reachable.
     However, the `ping` command has a very long timeout by default, so no error
     occurs.
@@ -868,7 +868,7 @@ The following example illustrates how to set up and use network aliases.
 
     In the terminal attached to `container4`, run the `ping` command again. It
     might now resolve to `container6` again. If you start and stop the `ping`
-    several times, you will see responses from each of the containers.
+    several times, you can see responses from each of the containers.
 
     ```bash
     $ docker attach container4

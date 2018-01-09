@@ -75,7 +75,7 @@ Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 - For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
   `overlay2` drivers are not supported by that kernel version.
 
-If you need to use `aufs`, you will need to do additional preparation as
+If you need to use `aufs`, you need to do additional preparation as
 outlined below.
 
 #### Extra steps for aufs
@@ -88,7 +88,7 @@ outlined below.
 <div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
 
 For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
-and Docker CE will use the `overlay2` storage driver by default. If you need
+and Docker CE uses the `overlay2` storage driver by default. If you need
 to use `aufs` instead, you need to configure it manually.
 See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
@@ -147,8 +147,8 @@ from the repository.
         software-properties-common
     ```
 
-3.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This will
-    only persist until you log out of the session. Replace `<DOCKER-EE-URL>`
+3.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
+    only persists until you log out of the session. Replace `<DOCKER-EE-URL>`
     with the URL you noted down in the [prerequisites](#prerequisites).
 
       ```bash
@@ -163,8 +163,8 @@ from the repository.
 
     Verify that you now have the key with the fingerprint
     `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
-    last eight characters of the fingerprint. Use the command as-is. It will
-    work because of the variable you set earlier.
+    last eight characters of the fingerprint. Use the command as-is. It works
+    because of the variable you set earlier.
 
     ```bash
     $ sudo apt-key fingerprint 6D085F96
@@ -176,7 +176,7 @@ from the repository.
     ```
 
 5.  Use the following command to set up the **stable** repository. Use the
-    command as-is. It will work because of the variable you set earlier.
+    command as-is. It works because of the variable you set earlier.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`.
@@ -239,7 +239,7 @@ from the repository.
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command will always install the highest possible version,
+    > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning}
 
@@ -254,7 +254,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled,
-    and will be specific to your version of Ubuntu (indicated by the `xenial`
+    and aree specific to your version of Ubuntu (indicated by the `xenial`
     suffix on the version, in this example). Choose a specific version to
     install. The second column is the version string. The third column is the
     repository name, which indicates which repository the package is from and
@@ -300,7 +300,7 @@ To upgrade Docker EE:
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker EE, you can download the
-`.deb` file for your release and install it manually. You will need to download
+`.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your

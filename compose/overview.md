@@ -24,8 +24,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Lastly, run
-`docker-compose up` and Compose will start and run your entire app.
+3. Run `docker-compose up` and Compose starts and runs your entire app.
 
 A `docker-compose.yml` looks like this:
 

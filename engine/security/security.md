@@ -86,8 +86,8 @@ Docker daemon**. This is a direct consequence of some powerful Docker
 features. Specifically, Docker allows you to share a directory between
 the Docker host and a guest container; and it allows you to do so
 without limiting the access rights of the container. This means that you
-can start a container where the `/host` directory will be the `/` directory
-on your host; and the container will be able to alter your host filesystem
+can start a container where the `/host` directory is the `/` directory
+on your host; and the container is able to alter your host filesystem
 without any restriction. This is similar to how virtualization systems
 allow filesystem resource sharing. Nothing prevents you from sharing your
 root filesystem (or even your root block device) with a virtual machine.
@@ -108,7 +108,7 @@ socket.
 
 You can also expose the REST API over HTTP if you explicitly decide to do so.
 However, if you do that, being aware of the above mentioned security
-implication, you should ensure that it will be reachable only from a
+implication, you should ensure that it is reachable only from a
 trusted network or VPN; or protected with e.g., `stunnel` and client SSL
 certificates. You can also secure them with [HTTPS and
 certificates](https.md).
@@ -120,12 +120,6 @@ subprocess on Linux/Unix platforms, being the first-step in a wider effort
 toward privilege separation. As of Docker 1.10.0, all images are stored and
 accessed by the cryptographic checksums of their contents, limiting the
 possibility of an attacker causing a collision with an existing image.
-
-Eventually, it is expected that the Docker daemon will run restricted
-privileges, delegating operations to well-audited sub-processes,
-each with its own (very limited) scope of Linux capabilities,
-virtual network setup, filesystem management, etc. That is, most likely,
-pieces of the Docker engine itself will run inside of containers.
 
 Finally, if you run Docker on a server, it is recommended to run
 exclusively Docker on the server, and move all other services within
@@ -154,12 +148,12 @@ tools (e.g., to handle DHCP, WPA, or VPNs), and much more. A container is
 very different, because almost all of those tasks are handled by the
 infrastructure around the container:
 
- - SSH access will typically be managed by a single server running on
+ - SSH access are typically managed by a single server running on
    the Docker host;
  - `cron`, when necessary, should run as a user
    process, dedicated and tailored for the app that needs its
    scheduling service, rather than as a platform-wide facility;
- - log management will also typically be handed to Docker, or by
+ - log management is also typically handed to Docker, or to
    third-party services like Loggly or Splunk;
  - hardware management is irrelevant, meaning that you never need to
    run `udevd` or equivalent daemons within
@@ -171,7 +165,7 @@ infrastructure around the container:
    is specifically engineered to behave like a router or firewall, of
    course).
 
-This means that in most cases, containers will not need "real" root
+This means that in most cases, containers do not need "real" root
 privileges *at all*. And therefore, containers can run with a reduced
 capability set; meaning that "root" within a container has much less
 privileges than the real "root". For instance, it is possible to:
@@ -185,11 +179,11 @@ privileges than the real "root". For instance, it is possible to:
  - and many others.
 
 This means that even if an intruder manages to escalate to root within a
-container, it will be much harder to do serious damage, or to escalate
+container, it is much harder to do serious damage, or to escalate
 to the host.
 
-This won't affect regular web apps; but malicious users will find that
-the arsenal at their disposal has shrunk considerably! By default Docker
+This won't affect regular web apps, but reduces the vectors of attack by
+malicious users considerably. By default Docker
 drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30),
 a whitelist instead of a blacklist approach. You can see a full list of
@@ -218,8 +212,8 @@ While Docker currently only enables capabilities, it doesn't interfere
 with the other systems. This means that there are many different ways to
 harden a Docker host. Here are a few examples.
 
- - You can run a kernel with GRSEC and PAX. This will add many safety
-   checks, both at compile-time and run-time; it will also defeat many
+ - You can run a kernel with GRSEC and PAX. This adds many safety
+   checks, both at compile-time and run-time; it also defeats many
    exploits, thanks to techniques like address randomization. It doesn't
    require Docker-specific configuration, since those security features
    apply system-wide, independent of containers.

@@ -25,11 +25,11 @@ troubleshoot it:
     aws ec2 run-instances --dry-run --image-id ami-4d883350 --instance-type m3.medium
     ```
 
-This will try to dry-run an Ubuntu 14.04 LTS 64-bit in `sa-east-1` (Sao Paulo,
+This tries to dry-run an Ubuntu 14.04 LTS 64-bit in `sa-east-1` (Sao Paulo,
 South America). You can look for the AMI in the region you want to deploy to
 [here](http://cloud-images.ubuntu.com/locator/ec2/){: target="_blank"
 class="_"}. It should show you the error message. If your configuration is
-correct, you will see the following message:
+correct, you see the following message:
 
 ```
 A client error (DryRunOperation) occurred when calling the RunInstances operation: Request would have succeeded, but DryRun flag is set.
@@ -63,9 +63,9 @@ In the launch node cluster view, you can choose:
 - VPC dropdown:
     1. `Auto` - Delegates creation of the VPC to Docker Cloud.
     2. `vpc-XXXX (dc-vpc)` - Docker Cloud's default VPC. This only appears if you have already deployed nodes to that region. Note that you can choose subnets and security groups with the VPC. See "Which objects does Docker Cloud create in my EC2 account" for detailed info.
-    3. `vpc-XXXX` - You can select one of the VPCs already created by you. If you tag name them, it will be displayed too.
+    3. `vpc-XXXX` - You can select one of the VPCs already created by you. If you tag name them, it is displayed too.
 - Subnets dropdown:
-    1. `Auto` - Delegates the management of the subnets to Docker Cloud. Will create them if they do not exist or will use the ones tagged with `dc-subnet`.
+    1. `Auto` - Delegates the management of the subnets to Docker Cloud. Creates them if they do not exist or uses the ones tagged with `dc-subnet`.
     2. Multiple selection of existing subnets. See `How does Docker Cloud balance my nodes among different availability zones?` section for detailed info.
 - Security groups dropdown:
     1. `Auto`

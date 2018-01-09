@@ -31,8 +31,8 @@ Manager nodes handle cluster management tasks:
 Using a [Raft](https://raft.github.io/raft.pdf) implementation, the managers
 maintain a consistent internal state of the entire swarm and all the services
 running on it. For testing purposes it is OK to run a swarm with a single
-manager. If the manager in a single-manager swarm fails, your services will
-continue to run, but you will need to create a new cluster to recover.
+manager. If the manager in a single-manager swarm fails, your services
+continue to run, but you need to create a new cluster to recover.
 
 To take advantage of swarm mode's fault-tolerance features, Docker recommends
 you implement an odd number of nodes according to your organization's
@@ -42,7 +42,7 @@ from the failure of a manager node without downtime.
 * A three-manager swarm tolerates a maximum loss of one manager.
 * A five-manager swarm tolerates a maximum simultaneous loss of two
 manager nodes.
-* An `N` manager cluster will tolerate the loss of at most
+* An `N` manager cluster tolerates the loss of at most
 `(N-1)/2` managers.
 * Docker recommends a maximum of seven manager nodes for a swarm.
 
@@ -58,7 +58,7 @@ state, make scheduling decisions, or serve the swarm mode HTTP API.
 You can create a swarm of one manager node, but you cannot have a worker node
 without at least one manager node. By default, all managers are also workers.
 In a single manager node cluster, you can run commands like `docker service
-create` and the scheduler will place all tasks on the local Engine.
+create` and the scheduler places all tasks on the local Engine.
 
 To prevent the scheduler from placing tasks on a manager node in a multi-node
 swarm, set the availability for the manager node to `Drain`. The scheduler

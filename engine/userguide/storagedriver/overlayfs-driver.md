@@ -24,11 +24,11 @@ OverlayFS is supported if you meet the following prerequisites:
 
 - The `overlay2` driver is supported for Docker EE and recommended
   for Docker CE.
-  
+
 - The `overlay` driver is allowed but not recommended for Docker CE.
 
 - Version 4.0 or higher of the Linux kernel. If you use an older kernel, you
-  will need to use the `overlay` driver, which is not recommended.
+  need to use the `overlay` driver, which is not recommended.
 
 - The following backing filesystems are supported:
   - `ext4` (RHEL 7.1 only)
@@ -36,7 +36,7 @@ OverlayFS is supported if you meet the following prerequisites:
     `xfs_info` to verify that the `ftype` option is set to `1`. To format an
     `xfs` filesystem correctly, use the flag `-n ftype=1`.
 
-- Changing the storage driver will make any containers you have already
+- Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   not need to re-create them later.
@@ -102,7 +102,7 @@ Before following this procedure, you must first meet all the
     - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
     - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
 
-    Docker will not start if the `daemon.json` file contains badly-formed JSON.
+    Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
 5.  Start Docker.
 
@@ -422,7 +422,7 @@ Consider some scenarios where files in a container are modified.
   - OverlayFS only works with two layers. This means that performance should
     be better than AUFS, which can suffer noticeable latencies when searching
     for files in images with many layers. This advantage applies to both
-    `overlay` and `overlay2` drivers. `overlayfs2` will be slightly
+    `overlay` and `overlay2` drivers. `overlayfs2` is slightly
     less performant than `overlayfs` on initial read, because it has to look
     through more layers, but it caches the results so this is only a small
     penalty.
@@ -504,7 +504,7 @@ filesystems:
   in the image (`lowerdir`) and the `fd2` references the file in the container
   (`upperdir`). A workaround for this is to `touch` the files which causes the
   copy-up operation to happen. All subsequent `open(2)` operations regardless of
-  read-only or read-write access mode will be referencing the file in the
+  read-only or read-write access mode reference the file in the
   container (`upperdir`).
 
   `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.

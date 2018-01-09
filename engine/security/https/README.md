@@ -26,4 +26,4 @@ Start another terminal:
     root@boot2docker:/# cd docker/docs/articles/https
     root@boot2docker:/# make client
 
-The last will connect first with `--tls` and then with `--tlsverify`, both should succeed.
+The last connects first with `--tls` and then with `--tlsverify`, both should succeed.

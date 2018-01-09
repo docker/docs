@@ -52,9 +52,9 @@ baz
 When you copy files to a remote server with `docker-machine scp` for app
 deployment, make sure `docker-compose` and the Docker daemon know how to find
 them. You can specify absolute paths, e.g. `/home/myuser/workspace` in a
-[Compose file](/compose/compose-file/index.md), which will be mounted into the
+[Compose file](/compose/compose-file/index.md), which is mounted into the
 container at `/workspace`, from the absolute path on the remote host where the
-Docker daemon is running. Local client paths (e.g., on your laptop) will not
+Docker daemon is running. Local client paths (e.g., on your laptop) does not
 work for daemons running on a remote machine, so avoid using relative paths.
 
 For example, imagine you want to transfer your local directory

@@ -5,7 +5,7 @@ keywords: docker, documentation, about, technology, kitematic, gui, rethink, tut
 title: 'Kitematic tutorial: Create a local RethinkDB database for development'
 ---
 
-In this tutorial, you will:
+This tutorial guides you through these steps:
 
 - Create a RethinkDB Container for Development
 - (Advanced) Clone a small Node.js application and write data into RethinkDB.
@@ -19,7 +19,7 @@ this:
 ![Rethink create button](images/rethink-create.png)
 
 Click on the _Create_ button of the `rethinkdb` image listing in the recommended
-list as shown above. This will download & run a RethinkDB container within a few
+list as shown above. This downloads and runs a RethinkDB container within a few
 minutes. Once it's done, you'll have a local RethinkDB database up and running.
 
 ![Rethink container](images/rethink-container.png)

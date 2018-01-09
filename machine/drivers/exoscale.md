@@ -17,14 +17,14 @@ Get your API key and API secret key from [API details](https://portal.exoscale.c
 
 ## Options
 
--   `--exoscale-affinity-group`: [Anti-affinity group][anti-affinity] the machine will be started in.
+-   `--exoscale-affinity-group`: [Anti-affinity group][anti-affinity] the machine is started in.
 -   `--exoscale-api-key`: **required** Your API key;
 -   `--exoscale-api-secret-key`: **required** Your API secret key;
 -   `--exoscale-availability-zone`: Exoscale [availability zone][datacenters] (ch-dk-2, at-vie-1, de-fra-1, ...);
 -   `--exoscale-disk-size`: Disk size for the host in GB (10, 50, 100, 200, 400);
 -   `--exoscale-image`: Image template (e.g. `ubuntu-16.04` also known as `Linux Ubuntu 16.04 LTS 64-bit`, [see below](#image-template-name));
 -   `--exoscale-instance-profile`: Instance profile (Small, Medium, Large, ...);
--   `--exoscale-security-group`: Security group. _It will be created if it doesn't exist_;
+-   `--exoscale-security-group`: Security group. _It is created if it doesn't exist_;
 -   `--exoscale-ssh-user`: SSH username (e.g. `ubuntu`, [see below](#ssh-username));
 -   `--exoscale-url`: Your API endpoint;
 -   `--exoscale-userdata`: Path to file containing user data for [cloud-init](https://cloud-init.io/);

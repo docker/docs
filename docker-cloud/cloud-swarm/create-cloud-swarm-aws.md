@@ -13,7 +13,7 @@ To create a swarm, you need to give Docker Cloud permission to deploy swarm
 nodes on your behalf in your cloud services provider account.
 
 If you haven't yet linked Docker Cloud to AWS, follow the steps in [Link Amazon Web Services to Docker Cloud](link-aws-swarm.md). Once it's
-linked, it will show up on the **Swarms -> Create** page as a connected service
+linked, it shows up on the **Swarms -> Create** page as a connected service
 provider.
 
 ![](images/aws-creds-cloud.png)
@@ -92,7 +92,7 @@ provider.
     when using Docker for AWS. (To learn more, see
     [Why Docker for AWS](/docker-for-aws/why.md).)
 
-    This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
+    This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 
     ![](images/aws-create-swarm-7-list.png)
 

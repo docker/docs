@@ -12,7 +12,7 @@ The `docker stack deploy` command supports any Compose file of version "3.0" or
 above. If you have an older version, see the [upgrade
 guide](/compose/compose-file.md#upgrading).
 
-To run through this tutorial, you will need:
+To run through this tutorial, you need:
 
 1.  A Docker Engine of version 1.13.0 or later, running in [swarm
     mode](/engine/swarm/swarm-mode.md). If you're not familiar with swarm mode,
@@ -129,7 +129,7 @@ counter whenever you visit it.
 
     Note that the image for the web app is built using the Dockerfile defined
     above. It's also tagged with `127.0.0.1:5000` - the address of the registry
-    created earlier. This will be important when distributing the app to the
+    created earlier. This is important when distributing the app to the
     swarm.
 
 
@@ -139,7 +139,7 @@ counter whenever you visit it.
     pull the Redis image if you don't already have it, and create two
     containers.
 
-    You will see a warning about the Engine being in swarm mode. This is because
+    You see a warning about the Engine being in swarm mode. This is because
     Compose doesn't take advantage of swarm mode, and deploys everything to a
     single node. You can safely ignore this.
 
@@ -149,7 +149,7 @@ counter whenever you visit it.
     WARNING: The Docker Engine you're using is running in swarm mode.
 
     Compose does not use swarm mode to deploy services to multiple nodes in
-    a swarm. All containers will be scheduled on the current node.
+    a swarm. All containers are scheduled on the current node.
 
     To deploy your application across the swarm, use `docker stack deploy`.
 

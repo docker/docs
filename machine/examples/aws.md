@@ -17,7 +17,7 @@ from those Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
-> Docker Machine will still work as described here, but Docker Cloud
+> Docker Machine still works as described here, but Docker Cloud
 supercedes Machine for this purpose.
 {: .important}
 

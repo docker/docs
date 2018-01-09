@@ -15,7 +15,7 @@ The errors you get might be specific to certificates, like this:
 
       Error checking TLS connection: Error checking and/or regenerating the certs: There was an error validating certificates for host "192.168.99.100:2376": dial tcp 192.168.99.100:2376: i/o timeout
 
-Others will explicitly suggest regenerating certificates:
+Others explicitly suggest regenerating certificates:
 
       Error checking TLS connection: Error checking and/or regenerating the certs: There was an error validating certificates for host "192.168.99.100:2376": x509: certificate is valid for 192.168.99.101, not 192.168.99.100
       You can attempt to regenerate them using 'docker-machine regenerate-certs [name]'.

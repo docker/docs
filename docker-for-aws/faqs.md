@@ -37,12 +37,12 @@ or the associated subnets, etc. This causes a problem when using our
 CloudFormation template because we are using the
 [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html)
 function they provide to determine which availability zones you have access to.
-When used in a region where you have **EC2-Classic**, this function will return
+When used in a region where you have **EC2-Classic**, this function returns
 all availability zones for a region, even ones you don't have access to. When
-you have an **EC2-VPC** account, it will return only the availability zones you
+you have an **EC2-VPC** account, it returns only the availability zones you
 have access to.
 
-This will cause an error like the following:
+This causes an error like the following:
 
 > "Value (us-east-1a) for parameter availabilityZone is invalid.
 Subnets can currently only be created in the following availability
@@ -51,23 +51,21 @@ zones: us-east-1d, us-east-1c, us-east-1b, us-east-1e."
 If you have an **EC2-Classic** account, and you don't have access to the `a` and
 `b` availability zones for that region.
 
-There isn't anything we can do right now to fix this issue, we have contacted
-Amazon, and we are hoping they will be able to provide us with a way to
-determine if an account is either **EC2-Classic** or **EC2-VPC**, so we can act
-accordingly.
+There isn't anything we can do right now to fix this issue. We have contacted
+Amazon to provide a solution.
 
 ### How to tell if you are in the EC2-Classic region.
 
 [This AWS documentation
 page](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
-will describe how you can tell if you have EC2-Classic, EC2-VPC or both.
+describes how you can tell if you have EC2-Classic, EC2-VPC or both.
 
 ### Possible fixes to the EC2-Classic region issue:
 There are a few workarounds that you can try to get Docker for AWS up and running for you.
 
 1. Create your own VPC, then [install Docker for AWS with a pre-existing VPC](/docker-for-aws/index.md#install-with-an-existing-vpc).
-2. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.
-3. Create an new AWS account, all new accounts will be setup using **EC2-VPC** and will not have this problem.
+2. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions should be set up with **EC2-VPC** and the issue shouldn't occur.
+3. Create an new AWS account, all new accounts are setup using **EC2-VPC** and do not have this problem.
 4. Contact AWS support to convert your **EC2-Classic** account to a **EC2-VPC** account. For more information checkout the following answer for **"Q. I really want a default VPC for my existing EC2 account. Is that possible?"** on https://aws.amazon.com/vpc/faqs/#Default_VPCs
 
 ### Helpful links:
@@ -119,15 +117,15 @@ Yes, see [install Docker for AWS with a pre-existing VPC](/docker-for-aws/index.
 * **Subnets:** Subnet1, Subnet2, Subnet3
 
 ##### Subnet note:
-If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you will need to make sure you pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
+If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you need to pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
 
-## Which AWS regions will this work with?
+## Which AWS regions does this work with?
 
 Docker for AWS should work with all regions except for AWS US Gov Cloud (us-gov-west-1) and AWS China, which are a little different than the other regions.
 
 ## How many Availability Zones does Docker for AWS use?
 
-Docker for AWS determines the correct amount of Availability Zone's to use based on the region. In regions that support it, we will use 3 Availability Zones, and 2 for the rest of the regions. We recommend running production workloads only in regions that have at least 3 Availability Zones.
+Docker for AWS determines the correct amount of Availability Zone's to use based on the region. In regions that support it, we use 3 Availability Zones, and 2 for the rest of the regions. We recommend running production workloads only in regions that have at least 3 Availability Zones.
 
 ## What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
@@ -151,14 +149,14 @@ Benchmark of 3 Managers (m4.large) + 200 workers (t2.medium):
 	* Scaling: 20 workers -> 200 workers via ASG = ~15mins
 
 
-> **Note**: During a Stack upgrade, you will need to match the Auto-Scaling Group worker count, otherwise AWS will scale it back down (aka type 200 workers in the input box)
+> **Note**: During a Stack upgrade, you need to match the Auto-Scaling Group worker count, otherwise AWS scales it back down (aka type 200 workers in the input box)
 
 
 ## Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
-In AWS, if your stack is misbehaving, please run the following diagnostic tool from one of the managers - this will collect your docker logs and send them to Docker:
+In AWS, if your stack is misbehaving, please run the following diagnostic tool from one of the managers - this collects your docker logs and send them to Docker:
 
 ```bash
 $ docker-diagnose
@@ -170,7 +168,7 @@ Your diagnostics session ID is 1234567890-xxxxxxxxxxxxxx
 Please provide this session ID to the maintainer debugging your issue.
 ```
 
-> **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
+> **Note**: Your output may be slightly different from the above, depending on your swarm configuration.
 
 ## Metrics
 
@@ -178,7 +176,7 @@ Docker for AWS sends anonymized minimal metrics to Docker (heartbeat). These met
 
 ## How do I run administrative commands?
 
-By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
+By default when you SSH into a manager, you are logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:
 
 ```bash

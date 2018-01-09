@@ -16,7 +16,7 @@ those Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
-> Docker Machine will still work as described below, but Docker Cloud
+> Docker Machine still works as described below, but Docker Cloud
 supercedes Machine for this purpose.
 {: .important}
 
@@ -143,9 +143,12 @@ To remove a host and all of its containers and images, first stop the machine, t
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
     default   *        virtualbox   Running   tcp:////xxx.xxx.xx.xxx:xxxx
 
-If you monitor the Digital Ocean console while you run these commands, you will see it update first to reflect that the Droplet was stopped, and then removed.
+If you monitor the Digital Ocean console while you run these commands, notice
+that it updates first to reflect that the Droplet was stopped, and then removed.
 
-If you create a host with Docker Machine, but remove it through the cloud provider console, Machine will lose track of the server status. So please use the `docker-machine rm` command for hosts you create with `docker-machine create`.
+If you create a host with Docker Machine, but remove it through the cloud
+provider console, Machine loses track of the server status. Use the
+`docker-machine rm` command for hosts you create with `docker-machine create`.
 
 ## Where to go next
 

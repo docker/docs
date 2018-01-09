@@ -20,7 +20,7 @@ Options:
 ## Timeout
 
 The `ls` command tries to reach each host in parallel. If a given host does not
-answer in less than 10 seconds, the `ls` command will state that this host is in
+answer in less than 10 seconds, the `ls` command states that this host is in
 `Timeout` state. In some circumstances (poor connection, high load, or while
 troubleshooting), you may want to increase or decrease this value. You can use
 the -t flag for this purpose with a numerical value in seconds.
@@ -72,7 +72,7 @@ foo2   *        virtualbox   Running   tcp://192.168.99.107:2376           v1.9.
 
 ## Formatting
 
-The formatting option (`--format`) will pretty-print machines using a Go template.
+The formatting option (`--format`) pretty-prints machines using a Go template.
 
 Valid placeholders for the Go template are listed below:
 
@@ -90,8 +90,8 @@ Valid placeholders for the Go template are listed below:
 | .DockerVersion | Docker Daemon version                    |
 | .ResponseTime  | Time taken by the host to respond        |
 
-When using the `--format` option, the `ls` command will either output the data exactly as the template declares or,
-when using the table directive, will include column headers as well.
+When using the `--format` option, the `ls` command either outputs the data exactly as the template declares or,
+when using the table directive, includes column headers as well.
 
 The following example uses a template without headers and outputs the `Name` and `Driver` entries separated by a colon
 for all running machines:

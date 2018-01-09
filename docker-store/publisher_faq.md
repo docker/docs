@@ -28,12 +28,12 @@ Start by applying to be a Docker Technology Partner at https://goto.docker.com/p
 * Identify content that can be listed on Store and includes a support offering
 * Test your image against Docker Certified Infrastructure version 17.03 and
 above (Plugins must run on 17.03 and above).
-* Submit your image for Certification through the publisher portal. Docker will
-scan the image and work with you to address vulnerabilities. Docker will also
-conduct a best practices review of the image.
+* Submit your image for Certification through the publisher portal. Docker
+scans the image and work with you to address vulnerabilities. Docker also
+conducts a best practices review of the image.
 * Be a TSAnet member or join the Docker Limited Group.
 * Upon completion of Certification criteria, and acceptance by Docker,
-Publisher’s product page will be updated to reflect Certified status.
+Publisher’s product page is updated to reflect Certified status.
 
 ### What is the Docker Store Publisher Program application timeline?
 
@@ -53,10 +53,10 @@ Yes. You can submit your content as a team.
 
 Edit the same product and update with the newly tagged repos.
 
-### On the Information page, organization details are required. Do we need to fill those in again for every product we publish, or will they be carried over? And if we change them for a later image publish, will they be updated for all images published by our organization?
+### On the Information page, organization details are required. Do we need to fill those in again for every product we publish, or are they carried over? And if we change them for a later image publish, are they updated for all images published by our organization?
 
 Organization details need to be filled in only once. Updating organization info
-once will update this for all images published by your organization.
+once updates this for all images published by your organization.
 
 ### On the page for another vendor’s product on Docker store, I see the following chunks of data: How do these fields map to the following that are required in the publish process?
 
@@ -87,9 +87,7 @@ once will update this for all images published by your organization.
 ### How can I remove a submission? I don’t want to currently have this image published as it is missing several information.
 
 If you would like your submission removed, let us know by contacting us at
-publisher-support@docker.com. We are redesigning our publisher portal, and will
-present this capability to you soon. ETA for ability to delete submissions that
-are not yet live is Q4 2017.
+publisher-support@docker.com.
 
 ### Can publishers publish multi-container apps?
 
@@ -143,10 +141,10 @@ The expectation is that the publisher would take care of License Keys within the
 container. The License Key itself can be presented to the customer via Docker
 Store. We expect the Publisher to build short circuits into the container, so
 the container stops running once the License Key expires. Once a customer
-cancels, or if the customer subscription expires - the customer will not be able
-to download updates from the Store.
+cancels, or if the customer subscription expires - the customer cannot
+download updates from the Store.
 
-If a user cancels their subscription, they will not be able to download updates
+If a user cancels their subscription, they cannot download updates
 from the Store. The container may continue running. If you have a licensing
 scheme built into the container, the licensing scheme can be a forcing function
 and stop the container. (_We do not build anything into the container, it is up to the publisher_).
@@ -164,7 +162,7 @@ feedback about pricing, send us an email at publisher-support@docker.com
 
 ### As a publisher, I have not setup any payment account. How does money get to me if my commercial content gets purchased by customers?
 
-We (Docker) will cut you a check post a revenue share. Your Docker Store Vendor
+We (Docker) cut you a check post a revenue share. Your Docker Store Vendor
 Agreement should cover specifics.
 
 ### How does Docker handle Export control? Can individual countries be specified if differing from Docker's list of embargoed countries?
@@ -183,10 +181,10 @@ Content. Go to https://store.docker.com/publisher/center and click on "Actions"
 for the product you'd like to view analytics for. Here is a
 [screenshot](https://user-images.githubusercontent.com/2453622/32352202-6e87ce6e-bfdd-11e7-8fb0-08fe5a3e8930.png).
 
-### How will metrics differentiate between Free and Paid subscribers?
+### How do metrics differentiate between Free and Paid subscribers?
 
-The Analytics reports will contain information about the Subscriber and the
-relevant product plan. You will be able to identify subscribers for each plan
+The Analytics reports contain information about the Subscriber and the
+relevant product plan. You can identify subscribers for each plan
 for each product.
 
 ### Can I preview my submission before publishing?

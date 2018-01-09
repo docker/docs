@@ -41,7 +41,7 @@ JSON keys to learn more about the configuration section corresponding to that ke
 
 The `trust_dir` specifies the location (as an absolute path or a path
 relative to the directory of the configuration file) where the TUF metadata
-and private keys will be stored.
+and private keys are stored.
 
 This is normally defaults to `~/.notary`, but specifying `~/.docker/trust`
 facilitates interoperability with content trust.
@@ -116,21 +116,19 @@ Remote server example:
 The `trust_pinning` specifies how to bootstrap trust for the root of a
 Notary client's trusted collection.
 
-This section is optional, Notary will use TOFU over HTTPS by default and
+This section is optional, Notary uses TOFU over HTTPS by default and
 trust certificates in the downloaded root file.
 
 In this section, one can provide specific certificates to pin to, or a CA
 to pin to as a root of trust for a GUN.  Multiple sections can be specified,
-but the pinned certificates will take highest priority for validation, followed
+but the pinned certificates take highest priority for validation, followed
 by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
 describes this validation flow:
 
-<center>
-<img src="https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png"></img>
-</center>
+![validation flow](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png")
 
-Only one trust pinning option will be used to validate a GUN even if multiple
-sections are specified, and any validation failure will result in a failed
+Only one trust pinning option is used to validate a GUN even if multiple
+sections are specified, and any validation failure results in a failed
 bootstrapping of the repo.
 
 <table>
@@ -167,8 +165,8 @@ bootstrapping of the repo.
 
 The following environment variables containing signing key passphrases can
 be used to facilitate [Notary client CLI interaction](../advanced_usage.md).
-If provided, these passwords will be used initially to sign TUF metadata.
-If the passphrase is incorrect, you will be prompted to enter the correct
+If provided, these passwords are used initially to sign TUF metadata.
+If the passphrase is incorrect, you are prompted to enter the correct
 passphrase.
 
 
@@ -180,5 +178,5 @@ passphrase.
 |`NOTARY_DELEGATION_PASSPHRASE` | The delegation (an online) key passphrase |
 
 
-Please note that if provided, the passphrase in `NOTARY_DELEGATION_PASSPHRASE`
-will be attempted for all delegation roles that notary attempts to sign with.
+If provided, the passphrase in `NOTARY_DELEGATION_PASSPHRASE`
+is tried for all delegation roles that notary attempts to sign with.

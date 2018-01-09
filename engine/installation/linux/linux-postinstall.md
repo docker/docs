@@ -66,8 +66,8 @@ To create the `docker` group and add your user:
     ```
 
     To fix this problem, either remove the `~/.docker/` directory
-    (it will be recreated automatically, but any custom settings
-    will be lost), or change its ownership and pemissions using the
+    (it is recreated automatically, but any custom settings
+    are lost), or change its ownership and permissions using the
     following commands:
 
     ```bash
@@ -123,7 +123,7 @@ your host's Linux distribution and available kernel drivers.
 
 ### Kernel compatibility
 
-Docker will not run correctly if your kernel is older than version 3.10 or if it
+Docker cannot run correctly if your kernel is older than version 3.10 or if it
 is missing some modules. To check kernel compatibility, you can download and
 run the [`check-compatibility.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
 script.
@@ -134,7 +134,7 @@ $ curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-conf
 $ bash ./check-config.sh
 ```
 
-The script will only work on Linux, not macOS.
+The script only works on Linux, not macOS.
 
 ### `Cannot connect to the Docker daemon`
 
@@ -202,7 +202,7 @@ Linux systems which use a GUI often have a network manager running, which uses a
 `dnsmasq` instance running on a loopback address such as `127.0.0.1` or
 `127.0.1.1` to cache DNS requests, and adds this entry to
 `/etc/resolv.conf`. The `dnsmasq` service speeds up
-DNS look-ups and also provides DHCP services. This configuration will not work
+DNS look-ups and also provides DHCP services. This configuration does not work
 within a Docker container which has its own network namespace, because
 the Docker container resolves loopback addresses such as `127.0.0.1` to
 **itself**, and it is very unlikely to be running a DNS server on its own
@@ -224,11 +224,11 @@ $ ps aux |grep dnsmasq
 ```
 
 If your container needs to resolve hosts which are internal to your network, the
-public nameservers will not be adequate. You have two choices:
+public nameservers are not adequate. You have two choices:
 
 - You can specify a DNS server for Docker to use, **or**
 - You can disable `dnsmasq` in NetworkManager. If you do this, NetworkManager
-  will add your true DNS nameserver to `/etc/resolv.conf`, but you will lose the
+  adds your true DNS nameserver to `/etc/resolv.conf`, but you lose the
   possible benefits of `dnsmasq`.
 
 **You only need to use one of these methods.**
@@ -393,10 +393,10 @@ and a 10% overall performance degradation, even if Docker is not running.
     $ sudo update-grub
     ```
 
-    If your GRUB configuration file has incorrect syntax, an error will occur.
+    If your GRUB configuration file has incorrect syntax, an error occurs.
     In this case, repeat steps 3 and 4.
 
-    The changes will take effect when the system is rebooted.
+    The changes take effect when the system is rebooted.
 
 ## Next steps
 

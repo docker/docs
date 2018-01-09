@@ -41,7 +41,7 @@ adding or removing tasks to maintain the desired state.
 the cluster state and reconciles any differences between the actual state and your
 expressed desired state. For example, if you set up a service to run 10
 replicas of a container, and a worker machine hosting two of those replicas
-crashes, the manager will create two new replicas to replace the replicas that
+crashes, the manager creates two new replicas to replace the replicas that
 crashed. The swarm manager assigns the new replicas to workers that are
 running and available.
 

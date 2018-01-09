@@ -22,7 +22,7 @@ them:
   manager without asking for confirmation. This may install a large number of
   packages, depending on the current configuration of your host machine.
 - The script does not provide options to specify which version of Docker to install,
-  and will install the latest version that is released in the "edge" channel.
+  and installs the latest version that is released in the "edge" channel.
 - Do not use the convenience script if Docker has already been installed on the
   host machine using another mechanism.
 
@@ -48,9 +48,9 @@ adding your user to the "docker" group with something like:
 
   sudo usermod -aG docker your-user
 
-Remember that you will have to log out and back in for this to take effect!
+Remember that you have to log out and back in for this to take effect!
 
-WARNING: Adding a user to the "docker" group will grant the ability to run
+WARNING: Adding a user to the "docker" group grants the ability to run
          containers which can be used to obtain root privileges on the
          docker host.
          Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface

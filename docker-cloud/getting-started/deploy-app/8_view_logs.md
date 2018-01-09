@@ -39,7 +39,7 @@ $ docker-cloud container logs web-1
 ```
 
 Visit your application using curl or your browser again. Run the `service logs
-web` command again, and you will see another log message for your visit.
+web` command again to see another log message for your visit.
 
 ## What's Next?
 

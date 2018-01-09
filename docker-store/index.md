@@ -32,7 +32,7 @@ experience the following benefits:
   when your content has upgrades or updates available.
 
 * **Become Docker Certified.** Publisher container images and plugins that meet
-  the quality, security, and support criteria of the program will display a
+  the quality, security, and support criteria of the program displays a
   “Docker Certified” badge within the Docker Store (which can be used in
   external marketing).
 

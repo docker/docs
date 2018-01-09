@@ -46,7 +46,7 @@ Docker Cloud uses system containers to do the following:
 - Rotate container logs when they exceed 10 MB
 - Remove `Terminated` images (images not used by a container for 30 minutes)
 
-  > **Note**: If this is not sufficient for your needs, you can add a logging container to your services. In future versions of Docker Cloud, you will be able to add a logging driver.
+  > **Note**: If this is not sufficient for your needs, you can add a logging container to your services.
 
 ## Internal overlay network
 

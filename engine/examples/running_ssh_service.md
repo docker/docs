@@ -66,7 +66,7 @@ If you're setting values in the `Dockerfile` using `ENV`, you'll need to push th
 to a shell initialization file like the `/etc/profile` example in the `Dockerfile`
 above.
 
-If you need to pass`docker run -e ENV=value` values, you will need to write a
+If you need to pass`docker run -e ENV=value` values, you need to write a
 short script to do the same before you start `sshd -D` and then replace the
 `CMD` with that script.
 

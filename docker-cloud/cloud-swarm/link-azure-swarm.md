@@ -8,7 +8,7 @@ title: Link Microsoft Azure Cloud Services to Docker Cloud
 You can link your [Microsoft Azure Cloud Services](https://portal.azure.com/) account so that Docker Cloud can provision and
 manage swarms on your behalf.
 
-For this, you will need an SSH key and your Azure subscription ID to authenticate Docker to your service provider. Also, you need to enable your Azure subscription on behalf of Docker Cloud.
+For this, you need an SSH key and your Azure subscription ID to authenticate Docker to your service provider. Also, you need to enable your Azure subscription on behalf of Docker Cloud.
 
 ## Create or locate the SSH key you want to use
 
@@ -16,7 +16,7 @@ When you are ready to create and deploy swarms, you must have an [SSH](`/engine/
 
 ## Find your Azure subscription ID
 
-You will also need your Azure Cloud Services subscription ID to provide to
+You also need your Azure Cloud Services subscription ID to provide to
 Docker Cloud. There are a few ways to navigate to it on Azure.
 
 You can click a resource from the Dashboard and find the subscription ID under
@@ -48,7 +48,7 @@ Microsoft Azure.
 3.  Provide your subscription ID and click **Save**.
 
     This grants Docker Cloud access to your Microsoft Azure account, and links
-    the two accounts. Your Azure login credentials will automatically populate
+    the two accounts. Your Azure login credentials automatically populate
     to Docker Cloud under **Service Providers -> Microsoft Azure**.
 
     ![Microsoft Azure entry in Service providers list](images/azure-creds-cloud.png)
@@ -57,7 +57,7 @@ Microsoft Azure.
 
 You need to verify Microsoft Azure terms of use and manually enable your Azure subscription on behalf of Docker Cloud. You need do this only once, before you attempt to deploy a Docker Cloud Microsoft Azure swarm for the first time.
 
->**Tip:** If your Azure subscription is not enabled first, the swarm deployment will fail. The error will show up on your **Azure portal -> resource groups -> _ResourceGroupForYourSwarm_ -> deployments**.
+>**Tip:** If your Azure subscription is not enabled first, the swarm deployment fails. The error shows up on your **Azure portal -> resource groups -> _ResourceGroupForYourSwarm_ -> deployments**.
 
 1.  Go to the [Microsoft Azure Marketplace](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryFeaturedMenuItemBlade/selectedMenuItemId/home) and search for **Docker**, or specifically **Docker for Azure CE**.
 

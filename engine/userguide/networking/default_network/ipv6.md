@@ -19,10 +19,10 @@ reside on layer 3 of the [OSI model](http://en.wikipedia.org/wiki/OSI_model).
 
 By default, the Docker daemon configures the container network for IPv4 only.
 You can enable IPv4/IPv6 dualstack support by running the Docker daemon with the
-`--ipv6` flag. Docker will set up the bridge `docker0` with the IPv6 [link-local
+`--ipv6` flag. Docker sets up the bridge `docker0` with the IPv6 [link-local
 address](http://en.wikipedia.org/wiki/Link-local_address) `fe80::1`.
 
-By default, containers that are created will only get a link-local IPv6 address.
+By default, containers that are created only get a link-local IPv6 address.
 To assign globally routable IPv6 addresses to your containers you have to
 specify an IPv6 subnet to pick the addresses from. Set the IPv6 subnet via the
 `--fixed-cidr-v6` parameter when starting Docker daemon:
@@ -59,20 +59,20 @@ $ sysctl net.ipv6.conf.default.forwarding=1
 $ sysctl net.ipv6.conf.all.forwarding=1
 ```
 
-All traffic to the subnet `2001:db8:1::/64` will now be routed via the `docker0`
+All traffic to the subnet `2001:db8:1::/64` is routed via the `docker0`
 interface.
 
 > **Note**: IPv6 forwarding may interfere with your existing IPv6
 > configuration: If you are using Router Advertisements to get IPv6 settings for
 > your host's interfaces, set `accept_ra` to `2` using the following command.
-> Otherwise IPv6 enabled forwarding will result in rejecting Router Advertisements.
+> Otherwise IPv6 enabled forwarding results in rejecting Router Advertisements.
 >
 >    $ sysctl net.ipv6.conf.eth0.accept_ra=2
 
 ![IPv6 basic host configuration](images/ipv6_basic_host_config.svg)
 
-Every new container will get an IPv6 address from the defined subnet, and a
-default route will be added on `eth0` in the container via the address specified
+Each new container gets an IPv6 address from the defined subnet, and a
+default route is added on `eth0` in the container via the address specified
 by the daemon option `--default-gateway-v6` (or `default-gateway-v6` in
 `daemon.json`) if present. The default gateway defaults to `fe80::1`.
 
@@ -95,7 +95,7 @@ default via fe80::1 dev eth0  metric 1024
 
 In this example, the container is assigned a link-local address with the subnet
 `/64` (`fe80::42:acff:fe11:3/64`) and a globally routable IPv6 address
-(`2001:db8:1:0:0:242:ac11:3/64`). The container will create connections to
+(`2001:db8:1:0:0:242:ac11:3/64`). The container creates connections to
 addresses outside of the `2001:db8:1::/64` network via the link-local gateway at
 `fe80::1` on `eth0`.
 
@@ -110,7 +110,7 @@ In this setup the subnet `2001:db8:23:42::/64` with a range from
 `2001:db8:23:42:0:0:0:0` to `2001:db8:23:42:ffff:ffff:ffff:ffff` is attached to
 `eth0`, with the host listening at `2001:db8:23:42::1`. The subnet
 `2001:db8:23:42:1::/80` with an address range from `2001:db8:23:42:1:0:0:0` to
-`2001:db8:23:42:1:ffff:ffff:ffff` is attached to `docker0` and will be used by
+`2001:db8:23:42:1:ffff:ffff:ffff` is attached to `docker0` and is used by
 containers.
 
 ### Using NDP proxying
@@ -137,8 +137,8 @@ $ ip -6 addr show
 
 To slit up the configurable address range into two subnets
 `2001:db8::c000/125` and `2001:db8::c008/125`, use the following `daemon.json`
-settings. The first subnet will be used by non-Docker processes on the host, and
-the second will be used by Docker.
+settings. The first subnet is used by non-Docker processes on the host, and
+the second is used by Docker.
 
 ```json
 {
@@ -174,7 +174,7 @@ $ ip -6 neigh add proxy 2001:db8::c009 dev eth0
 
 From now on, the kernel answers neighbor solicitation addresses for this address
 on the device `eth0`. All traffic to this IPv6 address is routed through the
-Docker host, which will forward it to the container's network according to its
+Docker host, which forwards it to the container's network according to its
 routing table via the `docker0` device:
 
 ```bash
@@ -208,11 +208,11 @@ three routes configured:
 - Route all traffic to `2001:db8:2::/64` via Host2 with IP `2001:db8::2`
 
 Host1 also acts as a router on OSI layer 3. When one of the network clients
-tries to contact a target that is specified in Host1's routing table Host1 will
-forward the traffic accordingly. It acts as a router for all networks it knows:
+tries to contact a target that is specified in Host1's routing table Host1
+forwards the traffic accordingly. It acts as a router for all networks it knows:
 `2001:db8::/64`, `2001:db8:1::/64`, and `2001:db8:2::/64`.
 
-On Host2 we have nearly the same configuration. Host2's containers will get IPv6
+On Host2 we have nearly the same configuration. Host2's containers gets IPv6
 addresses from `2001:db8:2::/64`. Host2 has three routes configured:
 
 - Route all traffic to `2001:db8:0::/64` via `eth0`
@@ -225,7 +225,7 @@ attached to Host2 via its `docker0` interface whereas Host2 reaches
 
 This way every container is able to contact every other container. The
 containers `Container1-*` share the same subnet and contact each other directly.
-The traffic between `Container1-*` and `Container2-*` will be routed via Host1
+The traffic between `Container1-*` and `Container2-*` are routed via Host1
 and Host2 because those containers do not share the same subnet.
 
 In a switched environment every host has to know all routes to every subnet.
@@ -249,10 +249,10 @@ on every host.
 ![IPv6 routed network example](images/ipv6_routed_network_example.png)
 
 In this scenario containers of the same host can communicate directly with each
-other. The traffic between containers on different hosts will be routed via
-their hosts and the router. For example packet from `Container1-1` to
-`Container2-1` will be routed through `Host1`, `Router`, and `Host2` until it
-arrives at `Container2-1`.
+other. The traffic between containers on different hosts is routed via
+their hosts and the router. For example, packets from `Container1-1` to
+`Container2-1` are routed through `Host1`, `Router`, and `Host2` until they
+arrive at `Container2-1`.
 
 To keep the IPv6 addresses short in this example a `/48` network is assigned to
 every host. The hosts use a `/64` subnet of this for its own services and one

@@ -40,7 +40,7 @@ You can still run `docker` CLI commands on a host that is running the Docker Clo
 
 6. Confirm that the new Linux host appears in the Node dashboard in Docker Cloud. The node is now ready to accept container deployments!
 
-7. Repeat this process for each host on which you will run nodes.
+7. Repeat this process for each host.
 
 ## Install the Docker Cloud Agent using the CLI
 
@@ -126,7 +126,7 @@ installed, `apt-get` removes the older `docker` installation, then installs the
 `docker` binary that is bundled with `dockercloud-agent`. The installation
 script also tries to install the kernel headers required for `AUFS` support.
 
-> **Note**: If you remove, upgrade, or install over the version of Docker Engine bundled with the Docker Cloud Agent, your nodes may not maintain a connection with Docker Cloud correctly. You will have to reinstall a compatible Engine version (currently version 1.11.2-cs5). Contact Docker Support for more information.
+> **Note**: If you remove, upgrade, or install over the version of Docker Engine bundled with the Docker Cloud Agent, your nodes may not maintain a connection with Docker Cloud correctly. You must reinstall a compatible Engine version (currently version 1.11.2-cs5). Contact Docker Support for more information.
 
 * If you were already using the `AUFS` storage driver before installing `dockercloud-agent`, your existing containers and images appear automatically once installation finishes.
-* If you were using `devicemapper` or any other storage driver, and the `AUFS` driver installs successfully you will not be able to use your existing containers and images. You can check if the installation succeeded by running `docker info | grep Storage`.
+* If you were using `devicemapper` or any other storage driver, and the `AUFS` driver installs successfully you can't use your existing containers and images. You can check if the installation succeeded by running `docker info | grep Storage`.

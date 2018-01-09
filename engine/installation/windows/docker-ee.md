@@ -100,7 +100,7 @@ installs, or install on air-gapped systems.
     # Clean up the zip file.
     Remove-Item -Force {{ filename }}
 
-    # Install Docker. This will require rebooting.
+    # Install Docker. This requires rebooting.
     $null = Install-WindowsFeature containers
 
     # Add Docker to the path for the current session.
@@ -156,7 +156,7 @@ Install-Package -Name docker -ProviderName DockerProvider -Update -Force
 ```
 
 If Docker Universal Control Plane (UCP) is installed, run the
-[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script). 
+[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
 
 Start the Docker service:
 

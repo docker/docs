@@ -99,7 +99,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   </td>
   </tr></tbody></table>
 
-## Which IBM Cloud region and locations (data centers) will this work with?
+## Which IBM Cloud region and locations (data centers) does this work with?
 
 Docker EE for IBM Cloud is available in the following IBM Cloud regions and locations (data centers).
 
@@ -162,4 +162,4 @@ Your diagnostics session ID is 1234567890-xxxxxxxxxxxxxx
 Please provide this session ID to the maintainer debugging your issue.
 ```
 
-> **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
+> **Note**: Your output may be slightly different from the above, depending on your swarm configuration.

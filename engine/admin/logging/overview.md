@@ -96,7 +96,7 @@ Docker provides two modes for delivering messages from the container to the log 
 * (default) direct, blocking delivery from container to driver
 * non-blocking delivery that stores log messages in an intermediate per-container ring buffer for consumption by driver
 
-The `non-blocking` message delivery mode prevents applications from blocking due to logging back pressure. Applications will likely fail in unexpected ways when STDERR or STDOUT streams block.
+The `non-blocking` message delivery mode prevents applications from blocking due to logging back pressure. Applications are likely to fail in unexpected ways when STDERR or STDOUT streams block.
 
 > **WARNING**: When the buffer is full and a new message is enqueued, the oldest message in memory is dropped.  Dropping messages is often preferred to blocking the log-writing process of an application.  
 {: .warning}
@@ -138,7 +138,7 @@ see more options.
 
 | Driver                        | Description                                                                                                   |
 |:------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| `none`                        | No logs will be available for the container and `docker logs` will not return any output.                     |
+| `none`                        | No logs are available for the container and `docker logs` does not return any output.                         |
 | [`json-file`](json-file.md)   | The logs are formatted as JSON. The default logging driver for Docker.                                        |
 | [`syslog`](syslog.md)         | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine.    |
 | [`journald`](journald.md)     | Writes log messages to `journald`. The `journald` daemon must be running on the host machine.                 |

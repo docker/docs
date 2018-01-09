@@ -67,7 +67,7 @@ This would bind port 5000 in the container to a randomly available port
 between 8000 and 9000 on the host.
 
 There are also a few other ways you can configure the `-p` flag. By
-default the `-p` flag will bind the specified port to all interfaces on
+default the `-p` flag binds the specified port to all interfaces on
 the host machine. But you can also specify a binding to a specific
 interface, for example only to the `localhost`.
 
@@ -88,7 +88,7 @@ You can also bind UDP ports by adding a trailing `/udp`. For example:
 You also learned about the useful `docker port` shortcut which showed us the
 current port bindings. This is also useful for showing you specific port
 configurations. For example, if you've bound the container port to the
-`localhost` on the host machine, then the `docker port` output will reflect that.
+`localhost` on the host machine, then the `docker port` output reflects that.
 
     $ docker port nostalgic_morse 5000
 
@@ -147,7 +147,7 @@ You can also use `docker inspect` to return the container's name.
 > one container `web`. If you want to re-use a container name you must delete
 > the old container (with `docker rm`) before you can create a new
 > container with the same name. As an alternative you can use the `--rm`
-> flag with the `docker run` command. This will delete the container
+> flag with the `docker run` command. This deletes the container
 > immediately after it is stopped.
 
 ## Communication across links
@@ -172,7 +172,7 @@ Now, create a new `web` container and link it with your `db` container.
 
     $ docker run -d -P --name web --link db:db training/webapp python app.py
 
-This will link the new `web` container with the `db` container you created
+This links the new `web` container with the `db` container you created
 earlier. The `--link` flag takes the form:
 
     --link <name or id>:alias
@@ -183,7 +183,7 @@ The `--link` flag also takes the form:
 
 	--link <name or id>
 
-In which case the alias will match the name. You could have written the previous
+In this case the alias matches the name. You could write the previous
 example as:
 
     $ docker run -d -P --name web --link db training/webapp python app.py
@@ -218,7 +218,7 @@ recipient container in two ways:
 
 Docker creates several environment variables when you link containers. Docker
 automatically creates environment variables in the target container based on
-the `--link` parameters. It will also expose all environment variables
+the `--link` parameters. It also exposes all environment variables
 originating from Docker from the source container. These include variables from:
 
 * the `ENV` commands in the source container's Dockerfile
@@ -298,8 +298,8 @@ with
 `DB_`, which is populated from the `alias` you specified above. If the `alias`
 were `db1`, the variables would be prefixed with `DB1_`. You can use these
 environment variables to configure your applications to connect to the database
-on the `db` container. The connection will be secure and private; only the
-linked `web` container will be able to talk to the `db` container.
+on the `db` container. The connection is secure and private; only the
+linked `web` container can communicate with the `db` container.
 
 ### Important notes on Docker environment variables
 
@@ -309,7 +309,7 @@ if the source container is restarted. We recommend using the host entries in
 `/etc/hosts` to resolve the IP address of linked containers.
 
 These environment variables are only set for the first process in the
-container. Some daemons, such as `sshd`, will scrub them when spawning shells
+container. Some daemons, such as `sshd`, scrub them when spawning shells
 for connection.
 
 ### Updating the `/etc/hosts` file
@@ -329,10 +329,10 @@ container:
 You can see two relevant host entries. The first is an entry for the `web`
 container that uses the Container ID as a host name. The second entry uses the
 link alias to reference the IP address of the `db` container. In addition to
-the alias you provide, the linked container's name--if unique from the alias
-provided to the `--link` parameter--and the linked container's hostname will
-also be added in `/etc/hosts` for the linked container's IP address. You can ping
-that host now via any of these entries:
+the alias you provide, the linked container's name, if unique from the alias
+provided to the `--link` parameter, and the linked container's hostname are
+also added to `/etc/hosts` for the linked container's IP address. You can ping
+that host via any of these entries:
 
     root@aed84ee21bde:/opt/webapp# apt-get install -yqq inetutils-ping
 
@@ -356,8 +356,8 @@ to make use of your `db` container.
 > example, you could have multiple (differently named) web containers attached to your
 >`db` container.
 
-If you restart the source container, the linked containers `/etc/hosts` files
-will be automatically updated with the source container's new IP address,
+If you restart the source container, the `/etc/hosts` files on the linked containers
+are automatically updated with the source container's new IP address,
 allowing linked communication to continue.
 
     $ docker restart db

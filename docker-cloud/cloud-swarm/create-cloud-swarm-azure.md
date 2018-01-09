@@ -15,7 +15,7 @@ To create a swarm, you need to give Docker Cloud permission to deploy swarm
 nodes on your behalf in your cloud services provider account.
 
 If you haven't yet linked Docker Cloud to Azure, follow the steps in [Link Microsoft Azure Cloud Services to Docker Cloud](link-azure-swarm/). Once it's
-linked, it will show up on the **Swarms -> Create** page as a connected service
+linked, it shows up on the **Swarms -> Create** page as a connected service
 provider.
 
 ![](images/azure-creds-cloud.png)
@@ -59,7 +59,7 @@ Subscription you want to use.
 
     ![](images/azure-create-swarm-3-resource-group.png)
 
-    >**Tip:** Be sure to create a new resource group for a swarm. If you choose to use an existing group, the swarm will fail as Azure does not currently support this.
+    >**Tip:** Be sure to create a new resource group for a swarm. If you choose to use an existing group, the swarm fails as Azure does not currently support this.
 
 6.  Choose how many swarm managers and worker nodes to deploy.
 
@@ -98,7 +98,7 @@ Subscription you want to use.
     your own instances, security groups, or load balancers when using Docker for
     Azure. (To learn more, see [Why Docker for Azure](/docker-for-azure/why.md).)
 
-    This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
+    This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 
     ![](images/azure-create-swarm-7-list.png)
 

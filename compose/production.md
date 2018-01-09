@@ -48,7 +48,7 @@ recreate your app's containers. To redeploy a service called
     $ docker-compose build web
     $ docker-compose up --no-deps -d web
 
-This will first rebuild the image for `web` and then stop, destroy, and recreate
+This first rebuilds the image for `web` and then stop, destroy, and recreate
 *just* the `web` service. The `--no-deps` flag prevents Compose from also
 recreating any services which `web` depends on.
 
@@ -62,7 +62,7 @@ remote Docker hosts very easy, and is recommended even if you're not deploying
 remotely.
 
 Once you've set up your environment variables, all the normal `docker-compose`
-commands will work with no further configuration.
+commands work with no further configuration.
 
 ### Running Compose on a Swarm cluster
 

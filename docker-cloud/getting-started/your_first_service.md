@@ -31,7 +31,7 @@ From any page on Docker Cloud, click the **Services** section, then click **Crea
 
 For the purposes of this tutorial, click the rocket icon and look for the **Miscellaneous** section.
 
-You will see an image called `dockercloud/hello-world`.
+You see an image called `dockercloud/hello-world`.
 ![](images/first-service-wizard.png)
 
 Click the **dockercloud/hello-world** image. This image creates a container that runs NGINX, and shows a simple *hello world* web page.
@@ -66,8 +66,8 @@ Next, Cloud sends you to the Service's detailed view. The detailed view contains
   - **Containers**: lists the containers that are part of this service and their status. This is also where you'd go to launch more containers to scale a service.
   - **Endpoints**: shows a list of available service and container endpoints.
   - **Triggers**: allows you to set triggers that perform automatic actions such as scaling a node or redeploying an image when the source updates.
-  - **Links**: lists the links between services. For this tutorial this section will be empty.
-  - **Volumes**: lists the volumes attached to the service to store data. For this tutorial this section will be empty.
+  - **Links**: lists the links between services. For this tutorial this section is empty.
+  - **Volumes**: lists the volumes attached to the service to store data. For this tutorial this section is empty.
   - **Environment Variables**: lists the environment variables for the service.
 
 Two additional tabs of information are available for each service:
@@ -91,7 +91,7 @@ hello-world-1: Inspecting and checking its configuration
 hello-world-1: Running in 8468426e-tutorial.node.dockerapp.io
 ```
 
-The web interface will look something like this:
+The web interface looks something like this:
 
 ![](images/first-service-timeline.png)
 

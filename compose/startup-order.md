@@ -10,7 +10,7 @@ You can control the order of service startup with the
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
-However, Compose will not wait until a container is "ready" (whatever that means
+However, Compose does not wait until a container is "ready" (whatever that means
 for your particular application) - only until it's running. There's a good
 reason for this.
 
@@ -31,7 +31,7 @@ script:
 -   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
     [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
     [wait-for](https://github.com/Eficode/wait-for). These are small
-    wrapper scripts which you can include in your application's image and will
+    wrapper scripts which you can include in your application's image to
     poll a given host and port until it's accepting TCP connections.
 
     For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:

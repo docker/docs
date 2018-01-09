@@ -87,7 +87,7 @@ Version 1 files cannot declare named
 
 Compose does not take advantage of [networking](/compose/networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
-reachable from every other container at its IP address. You will need to use
+reachable from every other container at its IP address. You need to use
 [links](compose-file-v1.md#links) to enable discovery between containers.
 
 Example:

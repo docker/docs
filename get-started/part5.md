@@ -31,7 +31,7 @@ by `docker-machine start myvm2` to boot the worker.
 
 - Have the swarm you created in [part 4](part4.md) running and ready. Run
 `docker-machine ssh myvm1 "docker node ls"` to verify this. If the swarm is up,
-both nodes will report a `ready` status. If not, reinitialze the swarm and join
+both nodes report a `ready` status. If not, reinitialze the swarm and join
 the worker as described in [Set up your
 swarm](/get-started/part4.md#set-up-your-swarm).
 
@@ -50,7 +50,7 @@ application (though very complex applications may want to use multiple stacks).
 Some good news is, you have technically been working with stacks since part 3,
 when you created a Compose file and used `docker stack deploy`. But that was a
 single service stack running on a single host, which is not usually what takes
-place in production. Here, you will take what you've learned, make
+place in production. Here, you can take what you've learned, make
 multiple services relate to each other, and run them on multiple machines.
 
 You're doing great, this is the home stretch!
@@ -126,7 +126,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
       ```
 
 3.  Re-run the `docker stack deploy` command on the manager, and
-whatever services need updating will be updated:
+whatever services need updating are updated:
 
     ```shell
     $ docker stack deploy -c docker-compose.yml getstartedlab
@@ -138,7 +138,7 @@ whatever services need updating will be updated:
 
     You saw in the Compose file that `visualizer` runs on port 8080. Get the
     IP address of one of your nodes by running `docker-machine ls`. Go
-    to either IP address at port 8080 and you will see the visualizer running:
+    to either IP address at port 8080 and you can see the visualizer running:
 
     ![Visualizer screenshot](images/get-started-visualizer1.png)
 
@@ -153,7 +153,7 @@ whatever services need updating will be updated:
     The visualizer is a standalone service that can run in any app
     that includes it in the stack. It doesn't depend on anything else.
     Now let's create a service that *does* have a dependency: the Redis
-    service that will provide a visitor counter.
+    service that provides a visitor counter.
 
 ## Persist the data
 
@@ -232,7 +232,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     - The placement constraint you put on the Redis service, ensuring that it
       always uses the same host.
-    - The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host will persist, enabling continuity.
+    - The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host persists, enabling continuity.
 
     You are ready to deploy your new Redis-using stack.
 

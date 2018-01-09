@@ -29,7 +29,7 @@ The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
-A service definition contains configuration which will be applied to each
+A service definition contains configuration which is applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`.
 
@@ -63,7 +63,7 @@ Attempting to do so results in an error.
 
 Alternate Dockerfile.
 
-Compose will use an alternate file to build with. A build path must also be
+Compose uses an alternate file to build with. A build path must also be
 specified.
 
       build: .
@@ -163,10 +163,10 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note**: Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` both overrides any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clear out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it will be ignored.
+> clears out any default command on the image - meaning that if there's a `CMD`
+> instruction in the Dockerfile, it is ignored.
 
 ### env_file
 
@@ -192,12 +192,12 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     RACK_ENV=development
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files will _not_ be automatically visible during the
+> defined in environment files are _not_ automatically visible during the
 > build.
 
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
-quotes will be included in the value passed to Compose.
+quotes are included in the value passed to Compose.
 
 Keep in mind that _the order of files in the list is significant in determining
 the value assigned to a variable that shows up more than once_. The files in the
@@ -228,7 +228,7 @@ and
 VAR=hello
 ```
 
-$VAR will be `hello`.
+$VAR is `hello`.
 
 ### environment
 
@@ -250,7 +250,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SESSION_SECRET
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` will _not_ be automatically visible during the
+> defined in `environment` are _not_ automatically visible during the
 > build.
 
 ### expose
@@ -311,7 +311,7 @@ Add hostname mappings. Use the same values as the docker client `--add-host` par
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
-An entry with the ip address and hostname will be created in `/etc/hosts` inside containers for this service, e.g:
+An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
@@ -364,7 +364,7 @@ a link alias (`SERVICE:ALIAS`), or just the service name.
        - db:database
        - redis
 
-Containers for the linked service will be reachable at a hostname identical to
+Containers for the linked service are reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
@@ -411,19 +411,19 @@ id.
 
     pid: "host"
 
-Sets the PID mode to the host PID mode.  This turns on sharing between
-container and the host operating system the PID address space.  Containers
-launched with this flag will be able to access and manipulate other
+Sets the PID mode to the host PID mode. This turns on sharing between
+container and the host operating system the PID address space. Containers
+launched with this flag can able to access and manipulate other
 containers in the bare-metal machine's namespace and vise-versa.
 
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
-port (a random host port will be chosen).
+port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
-> erroneous results when using a container port lower than 60, because YAML will
-> parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> erroneous results when using a container port lower than 60, because YAML
+> parses numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:
@@ -447,7 +447,7 @@ Override the default labeling scheme for each container.
 ### stop_signal
 
 Sets an alternative signal to stop the container. By default `stop` uses
-SIGTERM. Setting an alternative signal using `stop_signal` will cause
+SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
 
     stop_signal: SIGUSR1
@@ -470,10 +470,10 @@ Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 For [version 2 files](compose-versioning#version-2), named volumes need to be specified with the
 [top-level `volumes` key](compose-file-v2.md#volume-configuration-reference).
-When using [version 1](compose-versioning#version-1), the Docker Engine will create the named
+When using [version 1](compose-versioning#version-1), the Docker Engine creates the named
 volume automatically if it doesn't exist.
 
-You can mount a relative path on the host, which will expand relative to
+You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 
@@ -501,11 +501,11 @@ There are several things to note, depending on which
 [Compose file version](compose-versioning#versioning) you're using:
 
 -   For [version 1 files](compose-versioning#version-1), both named volumes and
-    container volumes will use the specified driver.
+    container volumes use the specified driver.
 
--   No path expansion will be done if you have also specified a `volume_driver`.
+-   No path expansion is done if you have also specified a `volume_driver`.
     For example, if you specify a mapping of `./foo:/data`, the `./foo` part
-    will be passed straight to the volume driver without being expanded.
+    is passed straight to the volume driver without being expanded.
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
@@ -514,7 +514,7 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 
 Mount all of the volumes from another service or container, optionally
 specifying read-only access (``ro``) or read-write (``rw``). If no access level
-is specified, then read-write will be used.
+is specified, then read-write is used.
 
     volumes_from:
      - service_name

@@ -12,7 +12,7 @@ to have the Docker client and the daemon communicate securely over HTTPS.  TLS e
 
 This article demonstrates how to ensure the traffic between the Docker registry (i.e., *a server*) and the Docker daemon (i.e., *a client*) traffic is encrypted and a properly authenticated using *certificate-based client-server authentication*.
 
-We will show you how to install a Certificate Authority (CA) root certificate
+We show you how to install a Certificate Authority (CA) root certificate
 for the registry and how to set the client TLS certificate for verification.
 
 ## Understanding the configuration
@@ -22,9 +22,9 @@ A custom certificate is configured by creating a directory under
 `localhost`). All `*.crt` files are added to this directory as CA roots.
 
 > **Note**:
-> As of docker 1.13, on Linux any root certificates authorities will be merged
+> As of docker 1.13, on Linux any root certificates authorities are merged
 > in with the system defaults (i.e., host's root CA set). Prior to 1.13 and on
-> Windows, the system default certificates will only be used when there are no
+> Windows, the system default certificates are only used when there are no
 > custom root certificates provided.
 
 The presence of one or more `<filename>.key/cert` pairs indicates to Docker
@@ -32,9 +32,9 @@ that there are custom certificates required for access to the desired
 repository.
 
 > **Note**:
-> If there are multiple certificates, each will be tried in alphabetical
+> If there are multiple certificates, each is tried in alphabetical
 > order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
-> will continue to try with the next certificate.
+> continues to try with the next certificate.
 
 The following illustrates a configuration with custom certificates:
 
@@ -54,14 +54,14 @@ creating an os-provided bundled certificate chain.
 
 ## Creating the client certificates
 
-You will use OpenSSL's `genrsa` and `req` commands to first generate an RSA
+Use OpenSSL's `genrsa` and `req` commands to first generate an RSA
 key and then use the key to create the certificate.   
 
     $ openssl genrsa -out client.key 4096
     $ openssl req -new -x509 -text -key client.key -out client.cert
 
 > **Note**:
-> These TLS commands will only generate a working set of certificates on Linux.
+> These TLS commands only generate a working set of certificates on Linux.
 > The version of OpenSSL in macOS is incompatible with the type of
 > certificate Docker requires.
 

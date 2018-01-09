@@ -16,8 +16,8 @@ Options:
    --format, -f 	Format the output using the given go template.
 ```
 
-By default, this will render information about a machine as JSON. If a format is
-specified, the given template will be executed for each result.
+By default, this renders information about a machine as JSON. If a format is
+specified, the given template is executed for each result.
 
 Go's [text/template](http://golang.org/pkg/text/template/) package
 describes all the details of the format.

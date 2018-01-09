@@ -219,7 +219,7 @@ Node left the swarm.
 When a node leaves the swarm, the Docker Engine stops running in swarm
 mode. The orchestrator no longer schedules tasks to the node.
 
-If the node is a manager node, you will receive a warning about maintaining the
+If the node is a manager node, you receive a warning about maintaining the
 quorum. To override the warning, pass the `--force` flag. If the last manager
 node leaves the swarm, the swarm becomes unavailable requiring you to take
 disaster recovery measures.

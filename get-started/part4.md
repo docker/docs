@@ -63,7 +63,7 @@ machine what it can and cannot do.
 Up until now, you have been using Docker in a single-host mode on your local
 machine. But Docker also can be switched into **swarm mode**, and that's what
 enables the use of swarms. Enabling swarm mode instantly makes the current
-machine a swarm manager. From then on, Docker will run the commands you execute
+machine a swarm manager. From then on, Docker runs the commands you execute
 on the swarm you're managing, rather than just on the current machine.
 
 ## Set up your swarm
@@ -115,7 +115,7 @@ docker-machine create --driver virtualbox myvm2
 #### VMs on your local machine (Windows 10)
 
 First, quickly create a virtual switch for your virtual machines (VMs) to share,
-so they will be able to connect to each other.
+so they can connect to each other.
 
 1. Launch Hyper-V Manager
 2. Click **Virtual Switch Manager** in the right-hand menu
@@ -158,8 +158,8 @@ myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.
 
 #### Initialize the swarm and add nodes
 
-The first machine will act as the manager, which executes management commands
-and authenticates workers to join the swarm, and the second will be a worker.
+The first machine acts as the manager, which executes management commands
+and authenticates workers to join the swarm, and the second is a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
 to become a swarm manager with `docker swarm init` and you'll see output like
@@ -189,8 +189,8 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 > Having trouble using SSH? Try the --native-ssh flag
 >
-> Docker Machine has [the option to let you use your own system's SSH](/machine/reference/ssh/#different-types-of-ssh), if 
-> for some reason you're having trouble sending commands to your Swarm manager. Just specify the 
+> Docker Machine has [the option to let you use your own system's SSH](/machine/reference/ssh/#different-types-of-ssh), if
+> for some reason you're having trouble sending commands to your Swarm manager. Just specify the
 > `--native-ssh` flag when invoking the `ssh` command:
 >
 > ```
@@ -432,8 +432,8 @@ image](part2.md#publish-the-image)).
 In either case, simply run `docker stack deploy` again to deploy these changes.
 
 You can join any machine, physical or virtual, to this swarm, using the
-same `docker swarm join` command you used on `myvm2`, and capacity will be added
-to your cluster. Just run `docker stack deploy` afterwards, and your app will
+same `docker swarm join` command you used on `myvm2`, and capacity is added
+to your cluster. Just run `docker stack deploy` afterwards, and your app can
 take advantage of the new resources.
 
 ## Cleanup and reboot
@@ -470,7 +470,7 @@ see the [Machine topic on unsetting environment variables](/machine/get-started/
 
 ### Restarting Docker machines
 
-If you shut down your local host, Docker machines will stop running. You can check the status of machines by running `docker-machine ls`.
+If you shut down your local host, Docker machines stops running. You can check the status of machines by running `docker-machine ls`.
 
 ```
 $ docker-machine ls

@@ -12,8 +12,8 @@ storage driver as `devicemapper`, and the kernel framework as `Device Mapper`.
 
 For the systems where it is supported, `devicemapper` support is included in
 the Linux kernel. However, specific configuration is required to use it with
-Docker. For instance, on a stock installation of RHEL or CentOS, Docker will
-default to `overlay`, which is not a supported configuration.
+Docker. For instance, on a stock installation of RHEL or CentOS, Docker
+defaults to `overlay`, which is not a supported configuration.
 
 The `devicemapper` driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
@@ -33,7 +33,7 @@ a filesystem at the level of the operating system.
 - `devicemapper` is also supported on Docker CE running on CentOS, Fedora,
   Ubuntu, or Debian.
 
-- Changing the storage driver will make any containers you have already
+- Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   not need to re-create them later.
@@ -73,7 +73,7 @@ For production systems, see
     - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
     - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
 
-    Docker will not start if the `daemon.json` file contains badly-formed JSON.
+    Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
 3.  Start Docker.
 
@@ -137,7 +137,7 @@ After you have satisfied the [prerequisites](#prerequisites), follow the steps
 below to configure Docker to use the `devicemapper` storage driver in
 `direct-lvm` mode.
 
-> **Warning**: Changing the storage driver will make any containers you have already
+> **Warning**: Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   don't need to recreate them later.
@@ -187,23 +187,23 @@ Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
 
 > **Warning**: Changing these values after Docker has prepared the block device
-> for you is not supported and will cause an error.
+> for you is not supported and causes an error.
 
 You still need to [perform periodic maintenance tasks](#manage-devicemapper).
 
 #### Configure direct-lvm mode manually
 
-The procedure below will create a logical volume configured as a thin pool to
+The procedure below creates a logical volume configured as a thin pool to
 use as backing for the storage pool. It assumes that you have a spare block
 device at `/dev/xvdf` with enough free space to complete the task. The device
 identifier and volume sizes may be different in your environment and you
 should substitute your own values throughout the procedure. The procedure also
 assumes that the Docker daemon is in the `stopped` state.
 
-1.  Identify the block device you want to use. The device will be located under
+1.  Identify the block device you want to use. The device is located under
     `/dev/` (such as `/dev/xvdf`) and needs enough free space to store the
-    images and container layers for the workloads that host will be running.
-    Ideally, this will be a solid state drive.
+    images and container layers for the workloads that host runs.
+    A solid state drive is ideal.
 
 2.  Stop Docker.
 
@@ -286,7 +286,7 @@ assumes that the Docker daemon is in the `stopped` state.
     `thin_pool_autoextend_percent` is the amount of space to add to the device
     when automatically extending (0 = disabled).
 
-    The example below will add 20% more capacity when the disk usage reaches
+    The example below adds 20% more capacity when the disk usage reaches
     80%.
 
     ```none
@@ -307,7 +307,7 @@ assumes that the Docker daemon is in the `stopped` state.
     ```
 
 11. Enable monitoring for logical volumes on your host. Without this step,
-    automatic extension will not occur even in the presence of the LVM profile.
+    automatic extension does not occur even in the presence of the LVM profile.
 
     ```bash
     $ sudo lvs -o+seg_monitor
@@ -390,8 +390,8 @@ assumes that the Docker daemon is in the `stopped` state.
     <output truncated>
     ```
 
-    If Docker is configured correctly, the `Data file` and `Metadata file` will
-    be blank, and the pool name will be `docker-thinpool`.
+    If Docker is configured correctly, the `Data file` and `Metadata file` is
+    blank, and the pool name is `docker-thinpool`.
 
 16. After you have verified that the configuration is correct, you can remove the
     `/var/lib/docker.bk` directory which contains the previous configuration.
@@ -404,8 +404,8 @@ assumes that the Docker daemon is in the `stopped` state.
 
 ### Monitor the thin pool
 
-Do not rely on LVM auto-extension alone. The volume group will
-automatically extend, but the volume can still fill up. You can monitor
+Do not rely on LVM auto-extension alone. The volume group
+automatically extends, but the volume can still fill up. You can monitor
 free space on the volume using `lvs` or `lvs -a`. Consider using a monitoring
 tool at the OS level, such a Nagios.
 
@@ -466,7 +466,7 @@ In `loop-lvm` mode, a loopback device is used to store the data, and another
 to store the metadata. `loop-lvm` mode is only supported for testing, because
 it has significant performance and stability drawbacks.
 
-If you are using `loop-lvm` mode, the output of `docker info` will show file
+If you are using `loop-lvm` mode, the output of `docker info` shows file
 paths for `Data loop file` and `Metadata loop file`:
 
 ```bash
@@ -775,7 +775,7 @@ use `loop-lvm`, the blocks may not be freed. This is another reason not to use
 
   The `devicemapper` storage driver uses an `allocate-on-demand` operation to
   allocate new blocks from the thin pool into a container's writable layer.
-  Each block is 64KB, so this is the minimum amount of space that will be used
+  Each block is 64KB, so this is the minimum amount of space that is used
   for a write.
 
 - **Copy-on-write performance impact**: The first time a container modifies a

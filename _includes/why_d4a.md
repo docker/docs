@@ -14,12 +14,12 @@ operational complexity and adding unneeded additional APIs to the Docker stack.
 Docker for {{cloudprovider}} allows you to interact with Docker directly
 (including native Docker orchestration), instead of distracting you with the
 need to navigate extra layers on top of Docker. You can focus instead on the
-thing that matters most: running your workloads. This will help you and your
+thing that matters most: running your workloads. This helps you and your
 team to deliver more value to the business faster, to speak one common
 "language", and to have fewer details to keep in your head at once.
 
-The skills that you and your team have already learned, and will continue to
-learn, using Docker on the desktop or elsewhere will automatically carry over to
+The skills that you and your team have already learned, and continue to
+learn, using Docker on the desktop or elsewhere automatically carry over to
 using Docker on {{cloudprovider}}. The added consistency across clouds also
 helps to ensure that a migration or multi-cloud strategy is easier to accomplish
 in the future if desired.
@@ -69,8 +69,8 @@ logs won't use up all of your disk space. Likewise, the "system prune" option
 allows you to ensure unused Docker resources such as old images are cleaned up
 automatically. The lifecycle of nodes is managed using auto-scaling groups or
 similar constructs, so that if a node enters an unhealthy state for unforeseen
-reasons, the node will be taken out of load balancer rotation and/or replaced
-automatically and all of its container tasks will be rescheduled.
+reasons, the node is taken out of load balancer rotation and/or replaced
+automatically and all of its container tasks are rescheduled.
 
 These self-cleaning and self-healing properties are enabled by default and don't
 need configuration, so you can breathe easier as the risk of downtime is
@@ -91,7 +91,7 @@ communicating the current state of your infrastructure and the issues you are
 seeing to the upstream. In Docker for {{cloudprovider}}, you receive new tools
 to communicate any issues you experience quickly and securely to Docker
 employees. The Docker for {{cloudprovider}} shell includes a `docker-diagnose`
-script which, at your request, will transmit detailed diagnostic information to
+script which, at your request, transmits detailed diagnostic information to
 Docker support staff to reduce the traditional
 "please-post-the-output-of-this-command" back and forth frequently encountered
 in bug reports.

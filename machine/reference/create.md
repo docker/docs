@@ -121,7 +121,7 @@ Options:
 You may notice that some flags specify environment variables that they are
 associated with as well (located to the far left hand side of the row).  If
 these environment variables are set when `docker-machine create` is invoked,
-Docker Machine will use them for the default value of the flag.
+Docker Machine uses them for the default value of the flag.
 
 ## Specifying configuration options for the created Docker engine
 
@@ -156,7 +156,7 @@ $ docker-machine create -d virtualbox \
     foobarmachine
 ```
 
-This will create a virtual machine running locally in Virtualbox which uses the
+This creates a virtual machine running locally in Virtualbox which uses the
 `overlay` storage backend, has the key-value pairs `foo=bar` and `spam=eggs` as
 labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the
@@ -227,7 +227,7 @@ allows you to access [experimental features](https://github.com/docker/swarm/tre
 in Docker Swarm.
 
 If you're not sure how to configure these options, it is best to not specify
-configuration at all. Docker Machine will choose sensible defaults for you and
+configuration at all. Docker Machine chooses sensible defaults for you and
 you won't have to worry about it.
 
 Example create:
@@ -242,7 +242,7 @@ $ docker-machine create -d virtualbox \
     upbeat
 ```
 
-This will set the swarm scheduling strategy to "binpack" (pack in containers as
+This sets the swarm scheduling strategy to "binpack" (pack in containers as
 tightly as possible per host instead of spreading them out), and the "heartbeat"
 interval to 5 seconds.
 
@@ -253,7 +253,7 @@ they can successfully perform a create (e.g. VirtualBox should be installed, or
 the provided API credentials should be valid), Docker Machine has a "pre-create
 check" which is specified at the driver level.
 
-If this pre-create check succeeds, Docker Machine will proceed with the creation
-as normal.  If the pre-create check fails, the Docker Machine process will exit
+If this pre-create check succeeds, Docker Machine proceeds with the creation
+as normal.  If the pre-create check fails, the Docker Machine process exits
 with status code 3 to indicate that the source of the non-zero exit was the
 pre-create check failing.

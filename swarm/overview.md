@@ -20,15 +20,15 @@ are not limited to, the following:
 And of course, the Docker client itself is also supported.
 
 Like other Docker projects, Docker Swarm follows the "swap, plug, and play"
-principle. As initial development settles, an API will develop to enable
+principle. As initial development settles, an API develops to enable
 pluggable backends. This means you can swap out the scheduling backend
 Docker Swarm uses out-of-the-box with a backend you prefer. Swarm's swappable design provides a smooth out-of-box experience for most use cases, and allows large-scale production deployments to swap for more powerful backends, like Mesos.
 
 ## Understand Swarm cluster creation
 
-The first step to creating a Swarm cluster on your network is to pull the Docker Swarm image. Then, using Docker, you configure the Swarm manager and all the nodes to run Docker Swarm. This method requires that you:
+The first step to creating a swarm cluster on your network is to pull the Docker Swarm image. Then, using Docker, you configure the swarm manager and all the nodes to run Docker Swarm. This method requires that you:
 
-* open a TCP port on each node for communication with the Swarm manager
+* open a TCP port on each node for communication with the swarm manager
 * install Docker on each node
 * create and manage TLS certificates to secure your cluster
 
@@ -44,7 +44,7 @@ cluster.
 
 Using Docker Machine is the best method for users getting started with Swarm for the first time. To try the recommended method of getting started, see [Get Started with Docker Swarm](install-w-machine.md).
 
-If you are interested manually installing or interested in contributing, see [Build a Swarm cluster for production](install-manual.md).
+If you are interested manually installing or interested in contributing, see [Build a swarm cluster for production](install-manual.md).
 
 ## Discovery services
 

@@ -37,7 +37,7 @@ You can simply add the following snippet to your `README.md` file:
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)
 ```
 
-Docker Cloud will detect the HTTP referer header and deploy the stack file found in the repository, branch and relative path where the source `README.md` file is stored.
+Docker Cloud detects the HTTP referer header and deploy the stack file found in the repository, branch and relative path where the source `README.md` file is stored.
 
 
 ## Add the 'Deploy to Docker Cloud' button in Docker Hub

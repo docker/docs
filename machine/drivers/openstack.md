@@ -9,8 +9,8 @@ Create machines on [OpenStack](http://www.openstack.org/software/)
 Mandatory:
 
 -   `--openstack-auth-url`: Keystone service base URL.
--   `--openstack-flavor-id` or `--openstack-flavor-name`: Identify the flavor that will be used for the machine.
--   `--openstack-image-id` or `--openstack-image-name`: Identify the image that will be used for the machine.
+-   `--openstack-flavor-id` or `--openstack-flavor-name`: Identify the flavor used for the machine.
+-   `--openstack-image-id` or `--openstack-image-name`: Identify the image used for the machine.
 
 ## Usage
 
@@ -23,21 +23,21 @@ Mandatory:
 -   `--openstack-domain-name` or `--openstack-domain-id`: Domain to use for authentication (Keystone v3 only).
 -   `--openstack-endpoint-type`: Endpoint type can be `internalURL`, `adminURL`, or `publicURL`. It is a helper for the driver
     to choose the right URL in the OpenStack service catalog. If not provided the default is `publicURL`.
--   `--openstack-floatingip-pool`: The IP pool that will be used to get a public IP can assign it to the machine. If there is an
-    IP address already allocated but not assigned to any machine, this IP will be chosen and assigned to the machine. If
-    there is no IP address already allocated, a new IP will be allocated and assigned to the machine.
+-   `--openstack-floatingip-pool`: The IP pool used to get a public IP can assign it to the machine. If there is an
+    IP address already allocated but not assigned to any machine, this IP is chosen and assigned to the machine. If
+    there is no IP address already allocated, a new IP is allocated and assigned to the machine.
 -   `--openstack-keypair-name`: Specify the existing Nova keypair to use.
--   `--openstack-insecure`: Explicitly allow openstack driver to perform "insecure" SSL (https) requests. The server's certificate will not be verified against any certificate authorities. This option should be used with caution.
--   `--openstack-ip-version`: If the instance has both IPv4 and IPv6 address, you can select IP version. If not provided `4` will be used.
--   `--openstack-net-name` or `--openstack-net-id`: Identify the private network the machine will be connected on. If your OpenStack project contains only one private network it will be use automatically.
+-   `--openstack-insecure`: Explicitly allow openstack driver to perform "insecure" SSL (https) requests. The server's certificate is not verified against any certificate authorities. This option should be used with caution.
+-   `--openstack-ip-version`: If the instance has both IPv4 and IPv6 address, you can select IP version. If not provided, defaults to `4`.
+-   `--openstack-net-name` or `--openstack-net-id`: Identify the private network the machine is connected to. If your OpenStack project contains only one private network it is used automatically.
 -   `--openstack-password`: User password. It can be omitted if the standard environment variable `OS_PASSWORD` is set.
 -   `--openstack-private-key-file`: Used with `--openstack-keypair-name`, associates the private key to the keypair.
 -   `--openstack-region`: The region to work on. Can be omitted if there is only one region on the OpenStack.
 -   `--openstack-sec-groups`: If security groups are available on your OpenStack you can specify a comma separated list
     to use for the machine (e.g. `secgrp001,secgrp002`).
 -   `--openstack-ssh-port`: Customize the SSH port if the SSH server on the machine does not listen on the default port.
--   `--openstack-ssh-user`: The username to use for SSH into the machine. If not provided `root` will be used.
--   `--openstack-tenant-name` or `--openstack-tenant-id`: Identify the tenant in which the machine will be created.
+-   `--openstack-ssh-user`: The username to use for SSH into the machine. If not provided defaults to `root`.
+-   `--openstack-tenant-name` or `--openstack-tenant-id`: Identify the tenant in which the machine is created.
 -   `--openstack-user-data-file`: File containing an OpenStack userdata script.
 -   `--openstack-username`: User identifier to authenticate with.
 

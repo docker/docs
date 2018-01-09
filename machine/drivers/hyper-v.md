@@ -15,9 +15,9 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 > **Notes**:
 >
-> * You will need to use an Administrator level account to create and manage Hyper-V machines.
+> * You must use an Administrator level account to create and manage Hyper-V machines.
 >
->* You will need an existing virtual switch to use the
+>* You need an existing virtual switch to use the
 > driver. Hyper-V can share an external network interface (aka
 > bridging), see [this blog](http://blogs.technet.com/b/canitpro/archive/2014/03/11/step-by-step-enabling-hyper-v-for-use-on-windows-8-1.aspx).
 > If you would like to use NAT, create an internal network, and use
@@ -98,7 +98,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
     ```shell
     docker-machine create -d hyperv --hyperv-virtual-switch "<NameOfVirtualSwitch>" <nameOfNode>
     ```
-    
+
     Here is an example of creating `manager1` node:
 
     ```shell
@@ -129,7 +129,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
     ```
 *   Use the same process, driver, and network switch to create the other nodes.
 
-    For our example, the commands will look like this:
+    For our example, the commands are:
 
     ```shell
     docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1

@@ -40,7 +40,7 @@ Docker 17.12 and higher include support for quotas when using the VFS driver.
     }
     ```
 
-    Docker will not start if the `daemon.json` file contains badly-formed JSON.
+    Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
 3.  Start Docker.
 

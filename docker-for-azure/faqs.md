@@ -30,7 +30,7 @@ No, at this time we only support the default Docker for Azure VHD.
 
 Not at this time, but it is on our roadmap for future releases.
 
-## Which Azure regions will Docker for Azure work with?
+## Which Azure regions does Docker for Azure work with?
 
 Docker for Azure should work with all supported Azure Marketplace regions.
 
@@ -42,7 +42,7 @@ All container logs are aggregated within the `xxxxlog` storage account.
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for Azure](https://github.com/docker/for-azure) GitHub repositories.
 
-In Azure, if your resource group is misbehaving, please run the following diagnostic tool from one of the managers - this will collect your docker logs and send them to Docker:
+In Azure, if your resource group is misbehaving, please run the following diagnostic tool from one of the managers - this collects your docker logs and sends them to Docker:
 
 ```bash
 $ docker-diagnose
@@ -54,7 +54,7 @@ Your diagnostics session ID is 1234567890-xxxxxxxxxxxxxx
 Please provide this session ID to the maintainer debugging your issue.
 ```
 
-> **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
+> **Note**: Your output may be slightly different from the above, depending on your swarm configuration.
 
 ## Metrics
 
@@ -62,7 +62,7 @@ Docker for Azure sends anonymized minimal metrics to Docker (heartbeat). These m
 
 ## How do I run administrative commands?
 
-By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
+By default when you SSH into a manager, you are logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/Azure portal (e.g. 10.0.0.4), you could run:
 
 ```bash

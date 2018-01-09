@@ -23,7 +23,7 @@ Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
 -   `--rackspace-ssh-user`: SSH user for the newly booted machine.
 -   `--rackspace-username`: **required** Rackspace account username.
 
-The Rackspace driver will use `821ba5f4-712d-4ec8-9c65-a3fa4bc500f9` (Ubuntu 16.04 LTS) by default.
+The Rackspace driver uses `821ba5f4-712d-4ec8-9c65-a3fa4bc500f9` (Ubuntu 16.04 LTS) by default.
 
 #### Environment variables and default values
 

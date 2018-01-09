@@ -17,8 +17,8 @@ Compose to set up and run WordPress. Before starting, you'll need to have
     This directory is the context for your application image. The
     directory should only contain resources to build that image.
 
-    This project directory will contain a `docker-compose.yml` file which will
-    be complete in itself for a good starter wordpress project.
+    This project directory contains a `docker-compose.yml` file which
+    is complete in itself for a good starter wordpress project.
 
     >**Tip**: You can use either a `.yml` or `.yaml` extension for
     this file. They both work.
@@ -29,7 +29,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
 
         cd my_wordpress/
 
-3.  Create a `docker-compose.yml` file that will start your
+3.  Create a `docker-compose.yml` file that starts your
     `WordPress` blog and a separate `MySQL` instance with a volume
     mount for data persistence:
 
@@ -112,7 +112,7 @@ At this point, WordPress should be running on port `8000` of your Docker Host,
 and you can complete the "famous five-minute installation" as a WordPress
 administrator.
 
-> **Note**: The WordPress site will not be immediately available on port `8000`
+> **Note**: The WordPress site is not immediately available on port `8000`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
 

@@ -7,7 +7,7 @@ redirect_from:
 title: Prepare the application
 ---
 
-In this step, you will prepare a simple application that can be deployed.
+In this step, you prepare a simple application that can be deployed.
 
 ## Clone the sample app
 

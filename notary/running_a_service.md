@@ -14,15 +14,15 @@ and [Docker Compose](/compose/overview/).
 
 The quickest way to spin up a full Notary service for testing and development
 purposes is to use the Docker compose file in the
-<a href="https://github.com/docker/notary" target="_blank">Notary project</a>.
+[Notary project](https://github.com/docker/notary).
 
-```plain
+```bash
 $ git clone https://github.com/docker/notary.git
 $ cd notary
 $ docker-compose up
 ```
 
-This will build the development Notary server and Notary signer images, and
+This builds the development Notary server and Notary signer images, and
 start up containers for the Notary server, Notary signer, and the MySQL
 database that both of them share. The MySQL data is stored in a volume.
 
@@ -32,7 +32,7 @@ listens for HTTPS traffic on port 4443.
 
 By default, this development Notary server container runs with the testing
 self-signed TLS certificates. In order to be able to successfully connect to
-it, you will have to use the root CA file in `fixtures/root-ca.crt`.
+it, you must use the root CA file in `fixtures/root-ca.crt`.
 
 For example, to connect using OpenSSL:
 
@@ -44,7 +44,8 @@ To connect using the Notary Client CLI, please see [Getting Started](getting_sta
 documentation. Please note that the version of Notary server and signer
 should be greater than or equal to that of the Notary Client CLI to ensure feature compatibility,
 i.e. if you are using Notary Client CLI 0.2, ensure you are using a server and signer tagged with
-an equal or higher version than 0.2 from the <a href="https://github.com/docker/notary/releases">releases page</a>.
+an equal or higher version than 0.2 from the
+[Releases page](https://github.com/docker/notary/releases).
 
 The self-signed certificate's subject name and subject alternative names are
 `notary-server`, `notaryserver`, and `localhost`, so if your Docker host is not
@@ -71,8 +72,9 @@ the following command line arguments:
 - `-config=<config file>` - specify the path to the JSON configuration file.
 
 - `-debug` - Passing this flag enables the debugging server on `localhost:8080`.
-	The debugging server provides <a href="https://golang.org/pkg/net/http/pprof/" target="_blank">pprof</a>
-	and <a href="https://golang.org/pkg/expvar/" target="_blank">expvar</a> endpoints.
+	The debugging server provides
+	[pprof](https://golang.org/pkg/net/http/pprof) and
+	[expvar](ttps://golang.org/pkg/expvar/) endpoints.
 	(Remember, this is localhost with respect to the running container - this endpoint is not
 	exposed from the container).
 
@@ -114,11 +116,10 @@ You would need to set the environment variable `NOTARY_SERVER_STORAGE_DB_URL`,
 because the `db_url` is in the `storage` section of the Notary server
 configuration JSON.
 
-Note that you cannot override a key whose value is another map.
-For instance, setting
-`NOTARY_SERVER_STORAGE='{"storage": {"backend": "memory"}}'` will not
-set in-memory storage. It just fails to parse. You can only override keys
-whose values are strings or numbers.
+ou cannot override a key whose value is another map. For instance, setting
+`NOTARY_SERVER_STORAGE='{"storage": {"backend": "memory"}}'` does not set
+in-memory storage. It just fails to parse. You can only override keys whose
+values are strings or numbers.
 
 For example, let's say that you wanted to run a single Notary server instance:
 
@@ -177,8 +178,8 @@ One way to do this would be:
 		{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
 		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
 
-You can do the same using [Docker
-Compose](/compose/overview/) by setting volumes,
+You can do the same using
+[Docker Compose](/compose/overview/) by setting volumes,
 environment variables, and overriding the default command for the Notary server
 containers in the Compose file.
 
@@ -191,11 +192,11 @@ that must be made to ensure security and scalability.
 ### Certificates
 
 The Notary repository includes sample certificates in the fixtures directory.
-When you initialize a development service using the provided docker-compose.yml
+When you initialize a development service using the provided `docker-compose.yml`
 file, these sample certificates are used to create a more production like
 environment.
 
-**You must acquire _your_ _own_ _certificates_ to use in a production deployment.**
+**You must acquire your own certificates to use in a production deployment.**
 
 The sample private key files in the Notary repository are obviously public knowledge
 and using them in a production deployment is highly insecure.
@@ -223,11 +224,11 @@ only their own databases:
 
 ### High Availability
 
-Most production users will want to increase availability by running multiple instances
-of both the server and signer applications. These can be scaled arbitrarily and
-independently. The database may also be scaled independently but this is left as
-and exercise for experienced DBAs and Operations teams. A typical deployment will
-look like the below diagram:
+To increase availability, you can run multiple instances
+of both the server and signer applications. These can scale arbitrarily and
+independently. The database can also scale independently but this is left as
+an exercise for experienced DBAs and Operations teams. A typical deployment
+looks like this:
 
 ![Notary server Deployment Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/service-deployment.svg)
 

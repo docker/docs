@@ -25,8 +25,8 @@ Options:
    --no-proxy	Add machine IP to NO_PROXY environment variable
 ```
 
-`docker-machine env machinename` will print out `export` commands which can be
-run in a subshell. Running `docker-machine env -u` will print `unset` commands
+`docker-machine env machinename` prints out `export` commands which can be
+run in a subshell. Running `docker-machine env -u` prints `unset` commands
 which reverse this effect.
 
 ```none
@@ -37,7 +37,7 @@ DOCKER_HOST=tcp://192.168.99.101:2376
 DOCKER_CERT_PATH=/Users/nathanleclaire/.docker/machines/.client
 DOCKER_TLS_VERIFY=1
 DOCKER_MACHINE_NAME=dev
-$ # If you run a docker command, now it will run against that host.
+$ # If you run a docker command, now it runs against that host.
 $ eval "$(docker-machine env -u)"
 $ env | grep DOCKER
 $ # The environment variables have been unset.
@@ -50,7 +50,7 @@ supports. Docker Machine detects the shells available in your environment and li
 Docker supports `bash`, `cmd`, `powershell`, and `emacs`.
 
 If you are using `fish` and the `SHELL` environment variable is correctly set to
-the path where `fish` is located, `docker-machine env name` will print out the
+the path where `fish` is located, `docker-machine env name` prints out the
 values in the format which `fish` expects:
 
 ```none
@@ -93,7 +93,7 @@ set DOCKER_MACHINE_NAME=dev
 
 ## Excluding the created machine from proxies
 
-The env command supports a `--no-proxy` flag which will ensure that the created
+The env command supports a `--no-proxy` flag which ensures that the created
 machine's IP address is added to the [`NO_PROXY`/`no_proxy` environment
 variable](https://wiki.archlinux.org/index.php/Proxy_settings).
 

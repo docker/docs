@@ -63,7 +63,7 @@ the mount point of the config within a given container.
 
 To update a stack, make changes to your Compose file, then re-run `docker
 stack deploy -c <new-compose-file> <stack-name>`. If you use a new config in
-that file, your services will start using them. Keep in mind that configurations
+that file, your services start using them. Keep in mind that configurations
 are immutable, so you won't be able to change the file for an existing service.
 Instead, you create a new config to use a different file
 
@@ -175,7 +175,7 @@ real-world example, continue to
     ```
 
 7.  Repeat steps 3 and 4 again, verifying that the service no longer has access
-    to the config. The container ID will be different, because the
+    to the config. The container ID is different, because the
     `service update` command redeploys the service.
 
     ```none
@@ -336,13 +336,13 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 9.  The `site.csr` and `site.cnf` files are not needed by the Nginx service, but
-    you will need them if you want to generate a new site certificate. Protect
+    you need them if you want to generate a new site certificate. Protect
     the `root-ca.key` file.
 
 #### Configure the Nginx container
 
 1.  Produce a very basic Nginx configuration that serves static files over HTTPS.
-    The TLS certificate and key will be stored as Docker secrets so that they
+    The TLS certificate and key are stored as Docker secrets so that they
     can be rotated easily.
 
     In the current directory, create a new file called `site.conf` with the
@@ -364,7 +364,7 @@ generate the site key and certificate, name the files `site.key` and
 
 2.  Create two secrets, representing the key and the certificate. You can store
     any file as a secret as long as it is smaller than 500 KB. This allows you
-    to decouple the key and certificate from the services that will use them.
+    to decouple the key and certificate from the services that use them.
     In these examples, the secret name and the file name are the same.
 
     ```bash

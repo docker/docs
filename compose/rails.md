@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers
 title: "Quickstart: Compose and Rails"
 ---
 
-This Quickstart guide will show you how to use Docker Compose to set up and run
+This Quickstart guide shows you how to use Docker Compose to set up and run
 a Rails/PostgreSQL app. Before starting, you'll need to have [Compose
 installed](install.md).
 
@@ -25,7 +25,7 @@ Dockerfile consists of:
     RUN bundle install
     COPY . /myapp
 
-That'll put your application code inside an image that will build a container
+That'll put your application code inside an image that builds a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
 how to write Dockerfiles, see the [Docker user
 guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
@@ -71,8 +71,8 @@ using [docker-compose run](/compose/reference/run/):
 
     docker-compose run web rails new . --force --database=postgresql
 
-First, Compose will build the image for the `web` service using the
-`Dockerfile`. Then it will run `rails new` inside a new container, using that
+First, Compose builds the image for the `web` service using the
+`Dockerfile`. Then it runs `rails new` inside a new container, using that
 image. Once it's done, you should have generated a fresh app.
 
 List the files.
@@ -240,7 +240,7 @@ To restart the application:
 ### Rebuild the application
 
 If you make changes to the Gemfile or the Compose file to try out some different
-configurations, you will need to rebuild. Some changes will require only
+configurations, you need to rebuild. Some changes require only
 `docker-compose up --build`, but a full rebuild requires a re-run of
 `docker-compose run web bundle install` to sync changes in the `Gemfile.lock` to
 the host, followed by `docker-compose up --build`.

@@ -93,7 +93,7 @@ the code repository service where the image's source code is stored.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
-    disabled will be built for test purposes (if enabled at the repository
+    disabled are built for test purposes (if enabled at the repository
     level), but the built Docker image is not pushed to the repository.
 
 10. For each branch or tag, enable or disable the **Build Caching** toggle.
@@ -108,7 +108,7 @@ run an initial test.
 
     A webhook is automatically added to your source code repository to notify
     Docker Cloud on every push. Only pushes to branches that are listed as the
-    source for one or more tags will trigger a build.
+    source for one or more tags trigger a build.
 
 ### Set up build rules
 
@@ -224,7 +224,7 @@ to automatically build.
 
 At the minimum you need a build rule composed of a source branch (or tag) and
 destination Docker tag to set up an automated build. You can also change where
-the build looks for the Dockerfile, set a path to the files the build will use
+the build looks for the Dockerfile, set a path to the files the build use
 (the build context), set up multiple static tags or branches to build from, and
 use regular expressions (regexes) to dynamically select source code to build and
 create dynamic tags.
@@ -236,7 +236,7 @@ of the repository you want to edit, click the **Builds** tab, and click
 
 ### Tag and Branch builds
 
-You can configure your automated builds so that pushes to specific branches or tags will trigger a build.
+You can configure your automated builds so that pushes to specific branches or tags triggers a build.
 
 1. In the **Build Rules** section, click the plus sign to add more sources to build.
 
@@ -329,14 +329,14 @@ Docker Cloud sets up a deploy key in your source code repository that allows it
 to clone the repository and build it, however this key only works for a single,
 specific code repository. If your source code repository uses private Git
 submodules (or requires that you clone other private repositories to build),
-Docker Cloud cannot access these additional repos, your build will not complete,
+Docker Cloud cannot access these additional repos, your build cannot complete,
 and you'll see an error in your build timeline.
 
 To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Cloud's build system access to the repositories.
 
 > **Note**: If you are using autobuild for teams, use [the process below](automated-build.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Cloud's access to your source repositories.
 
-1. Generate a SSH keypair that you will use for builds only, and add the public key to your source code provider account.
+1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access.
 
@@ -382,13 +382,13 @@ For organizations and teams, we recommend creating a dedicated service account
 builds break as individual users' access permissions change, and that an
 individual user's personal projects are not exposed to an entire organization.
 
-This service account should have access to any repositories that will be built,
+This service account should have access to any repositories to be built,
 and must have administrative access to the source code repositories so it can
 manage deploy keys. If needed, you can limit this account to only a specific
 set of repositories required for a specific build.
 
 If you are building repositories with linked private submodules (private
-dependencies), you will also need to add an override `SSH_PRIVATE` environment
+dependencies), you also need to add an override `SSH_PRIVATE` environment
 variable to automated builds associated with the account.
 
 1. Create a service user account on your source provider, and generate SSH keys for it.

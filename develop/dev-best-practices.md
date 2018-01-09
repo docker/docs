@@ -32,8 +32,8 @@ keep image size small:
     number of separate `RUN` commands in your Dockerfile. You can do this by
     consolidating multiple commands into a single `RUN` line and using your
     shell's mechanisms to combine them together. Consider the following two
-    fragments. The first will create two layers in the image, while the second
-    will only create one.
+    fragments. The first creates two layers in the image, while the second
+    only creates one.
 
     ```conf
     RUN apt-get -y update
@@ -47,7 +47,7 @@ keep image size small:
 - If you have multiple images with a lot in common, consider creating your own
   [base image](/engine/userguide/eng-image/baseimages.md) with the shared
   components, and basing your unique images on that. Docker only needs to load
-  the common layers once, and they will be cached. This means that your
+  the common layers once, and they are cached. This means that your
   derivative images use memory on the Docker host more efficiently and load more
   quickly.
 
@@ -57,7 +57,7 @@ keep image size small:
 
 - When building images, always tag them with useful tags which codify version
   information, intended destination (`prod` or `test`, for instance), stability,
-  or other information that will be useful when deploying the application in
+  or other information that is useful when deploying the application in
   different environments. Do not rely on the automatically-created `latest` tag.
 
 ## Where and how to persist application data

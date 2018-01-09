@@ -12,7 +12,7 @@ balance between the containers using a proxy or load balancer.
 
 In this tutorial, you'll use the **dockercloud/hello-world** image as a sample
 web service and **dockercloud/haproxy** to load balance traffic to the service.
-If you follow this tutorial exactly, your traffic will be distributed evenly
+If you follow this tutorial exactly, your traffic is distributed evenly
 between eight containers in a node cluster containing four nodes.
 
 ## Create a Node Cluster

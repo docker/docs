@@ -39,7 +39,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   is not immediately obvious.
   - In the case of bind mounts, the first field is the path to the file or
     directory on the **host machine**.
-  - The second field is the path where the file or directory will be mounted in
+  - The second field is the path where the file or directory is mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`, `consistent`, `delegated`, `cached`, `z`, and `Z`. These options
@@ -50,12 +50,12 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
   - The `type` of the mount, which can be `bind`, `volume`, or `tmpfs`. This
-    topic discusses bind mounts, so the type will always be `bind`.
+    topic discusses bind mounts, so the type is always `bind`.
   - The `source` of the mount. For bind mounts, this is the path to the file
     or directory on the Docker daemon host. May be specified as `source` or
     `src`.
   - The `destination` takes as its value the path where the file or directory
-    will be mounted in the container. May be specified as `destination`, `dst`,
+    is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
     the container as read-only](#use-a-read-only-bind-mount).
@@ -78,7 +78,7 @@ time, their behavior cannot be changed. This means that **there is one behavior
 that is different between `-v` and `--mount`.**
 
 If you use `-v` or `--volume` to bind-mount a file or directory that does not
-yet exist on the Docker host, `-v` will create the endpoint for you. **It is
+yet exist on the Docker host, `-v` creates the endpoint for you. **It is
 always created as a directory.**
 
 If you use `--mount` to bind-mount a file or directory that does not
@@ -160,12 +160,12 @@ $ docker container rm devtest
 ### Mounting into a non-empty directory on the container
 
 If you bind-mount into a non-empty directory on the container, the directory's
-existing contents will be obscured by the bind mount. This can be beneficial,
+existing contents are obscured by the bind mount. This can be beneficial,
 such as when you want to test a new version of your application without
 building a new image. However, it can also be surprising and this behavior
 differs from that of [docker volumes](volumes.md).
 
-This example is contrived to be extreme, but will replace the contents of the
+This example is contrived to be extreme, but replaces the contents of the
 container's `/usr/` directory with the `/tmp/` directory on the host machine. In
 most cases, this would result in a non-functioning container.
 
@@ -345,7 +345,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Now if you create `/app/foo/`, `/app2/foo/` will also exist.
+Now if you create `/app/foo/`, `/app2/foo/` also exists.
 
 ## Configure the selinux label
 
@@ -359,7 +359,7 @@ consequences outside of the scope of Docker.
 - The `Z` option indicates that the bind mount content is private and unshared.
 
 Use **extreme** caution with these options. Bind-mounting a system directory
-such as `/home` or `/usr` with the `Z` option will render your host machine
+such as `/home` or `/usr` with the `Z` option renders your host machine
 inoperable and you may need to relabel the host machine files by hand.
 
 > **Important**: When using bind mounts with services, selinux labels

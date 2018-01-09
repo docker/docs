@@ -87,7 +87,7 @@ documentation. Some places to go next include:
 
 If you use a `daemon.json` file and also pass options to the `dockerd`
 command manually or using start-up scripts, and these options conflict,
-Docker will fail to start with an error such as:
+Docker fails to start with an error such as:
 
 ```none
 unable to configure the Docker daemon with file /etc/docker/daemon.json:
@@ -127,7 +127,7 @@ There are other times when you might need to configure `systemd` with Docker, su
 [configuring a HTTP or HTTPS proxy](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy).
 
 > **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
-> or a `-H` flag when starting Docker manually, Docker will fail to start.
+> or a `-H` flag when starting Docker manually, Docker fails to start.
 
 Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker starts
 successfully, it is now listening on the IP address specified in the `hosts` key of the
@@ -209,7 +209,7 @@ Docker platform.
 Instead of following this procedure, you can also stop the Docker daemon and
 restart it manually with the `-D` flag. However, this may result in Docker
 restarting with a different environment than the one the hosts' startup scripts
-will create, and this may make debugging more difficult.
+create, and this may make debugging more difficult.
 
 ### Force a stack trace to be logged
 
@@ -228,11 +228,11 @@ by sending a `SIGUSR1` signal to the daemon.
 
   Run the executable with the flag `--pid=<PID of daemon>`.
 
-This will force a stack trace to be logged but will not stop the daemon.
-Daemon logs will show the stack trace or the path to a file containing the
+This forces a stack trace to be logged but does not stop the daemon.
+Daemon logs show the stack trace or the path to a file containing the
 stack trace if it was logged to a file.
 
-The daemon will continue operating after handling the `SIGUSR1` signal and
+The daemon continues operating after handling the `SIGUSR1` signal and
 dumping the stack traces to the log. The stack traces can be used to determine
 the state of all goroutines and threads within the daemon.
 

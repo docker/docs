@@ -72,7 +72,7 @@ You can configure both the Docker Engine CLI and the Docker Engine daemon to req
 TLS for authentication. Configuring TLS means that all communications between
 the Docker Engine CLI and the Docker Engine daemon must be accompanied with, and signed by a
 trusted digital certificate. The Docker Engine CLI must provide its digital certificate
-before the Docker Engine daemon will accept incoming commands from it.
+before the Docker Engine daemon accepts incoming commands from it.
 
 The Docker Engine daemon must also trust the certificate that the Docker Engine CLI uses.
 This trust is usually established by way of a trusted third party. The Docker Engine

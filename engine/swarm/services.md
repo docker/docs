@@ -80,7 +80,7 @@ You can change almost everything about an existing service using the
 `docker service update` command. When you update a service, Docker stops its
 containers and restarts them with the new configuration.
 
-Since Nginx is a web service, it will work much better if you publish port 80
+Since Nginx is a web service, it work much better if you publish port 80
 to clients outside the swarm. You can specify this when you create the service,
 using the `-p` or `--publish` flag. When updating an existing service, the flag
 is `--publish-add`. There is also a `--publish-rm` flag to remove a port that
@@ -140,8 +140,8 @@ container:
 * the working directory inside the container using the `--workdir` flag
 * the username or UID using the `--user` flag
 
-The following service's containers will have an environment variable `$MYVAR`
-set to `myvalue`, will run from the `/tmp/` directory, and will run as the
+The following service's containers have an environment variable `$MYVAR`
+set to `myvalue`, run from the `/tmp/` directory, and run as the
 `my_user` user.
 
 ```bash
@@ -182,7 +182,7 @@ An image version can be expressed in several different ways:
   ```
 
   Some tags represent discrete releases, such as `ubuntu:16.04`. Tags like this
-  will almost always resolve to a stable digest over time. It is recommended
+  almost always resolve to a stable digest over time. It is recommended
   that you use this kind of tag when possible.
 
   Other types of tags, such as `latest` or `nightly`, may resolve to a new
@@ -213,7 +213,7 @@ An image version can be expressed in several different ways:
 
 When you create a service, the image's tag is resolved to the specific digest
 the tag points to **at the time of service creation**. Worker nodes for that
-service will use that specific digest forever unless the service is explicitly
+service use that specific digest forever unless the service is explicitly
 updated. This feature is particularly important if you do use often-changing tags
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
@@ -229,7 +229,7 @@ of the image.
 If the manager is not able to resolve the tag to a digest, each worker
 node is responsible for resolving the tag to a digest, and different nodes may
 use different versions of the image. If this happens, a warning like the
-following will be logged, substituting the placeholders for real information.
+following is logged, substituting the placeholders for real information.
 
 ```none
 unable to pin image <IMAGE-NAME> to digest: <REASON>
@@ -358,9 +358,9 @@ $ docker service create --name my_web \
                         nginx
 ```
 
-Three tasks will run on up to three nodes. You don't need to know which nodes
-are running the tasks; connecting to port 8080 on **any** of the 10 nodes will
-connect you to one of the three `nginx` tasks. You can test this using `curl`.
+Three tasks run on up to three nodes. You don't need to know which nodes
+are running the tasks; connecting to port 8080 on **any** of the 10 nodes
+connects you to one of the three `nginx` tasks. You can test this using `curl`.
 The following example assumes that `localhost` is one of the swarm nodes. If
 this is not the case, or `localhost` does not resolve to an IP address on your
 host, substitute the host's IP address or resolvable host name.
@@ -395,14 +395,14 @@ option to the `--publish` flag.
 > definition, which causes Docker to assign a random port for each task.
 >
 > In addition, if you use `mode=host` and you do not use the
-> `--mode=global` flag on `docker service create`, it will be difficult to know
+> `--mode=global` flag on `docker service create`, it difficult to know
 > which nodes are running the service in order to route work to them.
 
 ##### Example: Run a `nginx` web server service on every swarm node
 
 [nginx](https://hub.docker.com/_/nginx/) is an open source reverse proxy, load
 balancer, HTTP cache, and a web server. If you run nginx as a service using the
-routing mesh, connecting to the nginx port on any swarm node will show you the
+routing mesh, connecting to the nginx port on any swarm node shows you the
 web page for (effectively) **a random swarm node** running the service.
 
 The following example runs nginx as a service on each node in your swarm and
@@ -417,7 +417,7 @@ $ docker service create \
 ```
 
 You can reach the nginx server on port 8080 of every swarm node. If you add a
-node to the swarm, a nginx task will be started on it. You cannot start another
+node to the swarm, a nginx task is started on it. You cannot start another
 service or container on any swarm node which binds to port 8080.
 
 > **Note**: This is a naive example. Creating an application-layer
@@ -508,7 +508,7 @@ placement of services on different nodes.
 
 - You can configure the service's
   [CPU or memory requirements](#reserve-memory-or-cpus-for-a-service), and the
-  service will only run on nodes which can meet those requirements.
+  service only runs on nodes which can meet those requirements.
 
 - [Placement constraints](#placement-constraints) let you configure the service
   to run only on nodes with specific (arbitrary) metadata set, and cause the
@@ -526,14 +526,14 @@ placement of services on different nodes.
   placement constraints, placement preferences, and other node-specific
   limitations into account.
 
-  Unlike constraints, placement preferences are best-effort, and a service will
+  Unlike constraints, placement preferences are best-effort, and a service does
   not fail to deploy if no nodes can satisfy the preference. If you specify a
   placement preference for a service, nodes that match that preference are
   ranked higher when the swarm managers decide which nodes should run the
   service tasks. Other factors, such as high availability of the service,
-  will also factor into which nodes are scheduled to run service tasks. For
+  also factor into which nodes are scheduled to run service tasks. For
   example, if you have N nodes with the rack label (and then some others), and
-  your service is configured to run N+1 replicas, the +1 will be scheduled on a
+  your service is configured to run N+1 replicas, the +1 is scheduled on a
   node that doesn't already have the service on it if there is one, regardless
   of whether that node has the `rack` label or not.
 
@@ -603,10 +603,10 @@ Use placement constraints to control the nodes a service can be assigned to. In
 the following example, the service only runs on nodes with the
 [label](engine/swarm/manage-nodes.md#add-or-remove-label-metadata)
 `region` set to `east`. If no appropriately-labelled nodes are available,
-deployment will fail. The `--constraint` flag uses an equality operator
-(`==` or `!=`). For replicated services, it is possible that all services will
-run on the same node, or each node will only run one replica, or that some nodes
-won't run any replicas. For global services, the service will run on every node
+deployment fails. The `--constraint` flag uses an equality operator
+(`==` or `!=`). For replicated services, it is possible that all services
+run on the same node, or each node only runs one replica, or that some nodes
+don't run any replicas. For global services, the service runs on every node
 that meets the placement constraint and any
 [resource requirements](#reserve-cpu-or-memory-for-a-service).
 
@@ -621,7 +621,7 @@ $ docker service create \
 You can also use the `constraint` service-level key in a `docker-compose.yml`
 file.
 
-If you specify multiple placement constraints, the service will only deploy onto
+If you specify multiple placement constraints, the service only deploys onto
 nodes where they are all met. The following example limits the service to run on
 all nodes where `region` is set to `east` and `type` is not set to `devel`:
 
@@ -635,7 +635,7 @@ $ docker service create \
 ```
 
 You can also use placement constraints in conjunction with placement preferences
-and CPU/memory constraints. Be careful not to use settings that will not be
+and CPU/memory constraints. Be careful not to use settings that are not
 possible to fulfill.
 
 For more information on constraints, refer to the `docker service create`
@@ -648,17 +648,17 @@ can run on, _placement preferences_ try to place services on appropriate nodes
 in an algorithmic way (currently, only spread evenly). For instance, if you
 assign each node a `rack` label, you can set a placement preference to spread
 the service evenly across nodes with the `rack` label, by value. This way, if
-you lose a rack, the service will still be running on nodes on other racks.
+you lose a rack, the service is still running on nodes on other racks.
 
 Placement preferences are not strictly enforced. If no node has the label
-you specify in your preference, the service will be deployed as though the
+you specify in your preference, the service is deployed as though the
 preference were not set.
 
 > Placement preferences are ignored for global services.
 
 The following example sets a preference to spread the deployment across nodes
 based on the value of the `datacenter` label. If some nodes have
-`datacenter=us-east` and others have `datacenter=us-west`, the service will be
+`datacenter=us-east` and others have `datacenter=us-west`, the service is
 deployed as evenly as possible across the two sets of nodes.
 
 ```bash
@@ -671,9 +671,9 @@ $ docker service create \
 
 > Missing or null labels
 >
-> Nodes which are missing the label used to spread will still receive
-> task assignments. As a group, these nodes will receive tasks in equal
-> proportion to  any of the other groups identified by a specific label
+> Nodes which are missing the label used to spread still receive
+> task assignments. As a group, these nodes receive tasks in equal
+> proportion to any of the other groups identified by a specific label
 > value. In a sense, a missing label is the same as having the label with
 > a null value attached to it. If the service should **only** run on
 > nodes with the label being used for the the spread preference, the
@@ -694,7 +694,7 @@ $ docker service create \
 ```
 
 You can also use placement preferences in conjunction with placement constraints
-or CPU/memory constraints. Be careful not to use settings that will not be
+or CPU/memory constraints. Be careful not to use settings that are not
 possible to fulfill.
 
 This diagram illustrates how placement preferences work:
@@ -746,7 +746,7 @@ $ docker service create \
 The `--update-max-failure-ratio` flag controls what fraction of tasks can fail
 during an update before the update as a whole is considered to have failed. For
 example, with `--update-max-failure-ratio 0.1 --update-failure-action pause`,
-after 10% of the tasks being updated fail, the update will be paused.
+after 10% of the tasks being updated fail, the update is paused.
 
 An individual task update is considered to have failed if the task doesn't
 start up, or if it stops running within the monitoring period specified with
@@ -759,7 +759,7 @@ after that is not counted.
 
 In case the updated version of a service doesn't function as expected, it's
 possible to manually roll back to the previous version of the service using
-`docker service update`'s `--rollback` flag. This will revert the service
+`docker service update`'s `--rollback` flag. This reverts the service
 to the configuration that was in place before the most recent
 `docker service update` command.
 
@@ -781,7 +781,7 @@ Related to the new automatic rollback feature, in Docker 17.04 and higher,
 manual rollback is handled at the server side, rather than the client, if the
 daemon is running Docker 17.04 or higher. This allows manually-initiated
 rollbacks to respect the new rollback parameters. The client is version-aware,
-so it will still use the old method against an older daemon.
+so it still uses the old method against an older daemon.
 
 Finally, in Docker 17.04 and higher, `--rollback` cannot be used in conjunction
 with other flags to `docker service update`.
@@ -910,7 +910,7 @@ The following examples show bind mount syntax:
 >   containers at any time if they become unhealthy or unreachable.
 >
 > - Host bind mounts are completely non-portable. When you use bind mounts,
->   there is no guarantee that your application will run the same way in
+>   there is no guarantee that your application runs the same way in
 >   development as it does in production.
 
 ### Create services using templates

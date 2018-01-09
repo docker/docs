@@ -5,7 +5,7 @@ keywords: docker, documentation, about, technology, kitematic, gui, nginx, tutor
 title: 'Kitematic tutorial: Serve a static website with NGINX'
 ---
 
-In this tutorial, you will:
+This tutorial guides you through these steps:
 
 - Download and run a web server container
 - Explore the container's website data natively on your Mac
@@ -24,8 +24,8 @@ Kitematic](index.md). Once installed and running, the app should look like this:
 ![Nginx create](images/nginx-create.png)
 
 Click on the _Create_ button of the `hello-world-nginx` listing as shown above.
-Kitematic will download (also known as pull the image) and then run a tiny Nginx web server
-in a Docker container, allowing it to serve website data to your Mac.
+Kitematic pulls and runs a tiny Nginx web server in a Docker container, allowing
+it to serve website data to your Mac.
 
 ![download Nginx hello world](images/nginx-hello-world.png)
 

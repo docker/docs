@@ -44,8 +44,8 @@ You can use hostnames to connect any container in your Docker Cloud account to
 any other container on your account without having to create service links or
 manage environment variables. This is the recommended service discovery method.
 
-Hostnames will always resolve to the correct IP for the service or container,
-and will update as the service scales up, scales down, or redeploys. The Docker
+Hostnames always resolve to the correct IP for the service or container,
+and update as the service scales up, scales down, or redeploys. The Docker
 Cloud automatic DNS service resolves the service name to the correct IP on the
 overlay network, even if the container has moved or is now on a different host.
 
@@ -72,7 +72,7 @@ IPs of all containers on the service `webapp`.
 To find a service or a container on another stack, append `.<stack_name>` to the
 service or container name. For example, if `webapp-1` on the stack `production`
 needs to access container `db-1` on the stack `common`, it could use the
-hostname `db-1.common` which Docker Cloud will resolve to the appropriate IP.
+hostname `db-1.common` which Docker Cloud resolves to the appropriate IP.
 
 ### Discovering services or containers not included in a stack
 
@@ -80,7 +80,7 @@ To find a container or service that is not included in a stack, use the service
 or container name as the hostname.
 
 If the container making the query is part of a stack, and there is a local match
-on the same stack, the local match will take precedence over the service or
+on the same stack, the local match takes precedence over the service or
 container that is outside the stack.
 
 > **Tip**: To work around this, you can rename the local match so that it has a
@@ -112,8 +112,8 @@ applications deployed to multiple nodes. These strategies enable automatic
 deployments of containers to nodes, and sometimes auto-linking of containers.
 Note that if a service with
 [EVERY_NODE](/docker-cloud/infrastructure/deployment-strategies.md#every-node)
-strategy is linked to another service with EVERY_NODE strategy, containers will
-be linked one-to-one on each node.
+strategy is linked to another service with EVERY_NODE strategy, containers are
+linked one-to-one on each node.
 
 ### Service link example
 
@@ -124,7 +124,7 @@ diagram.
 
 Imagine that you are running a web service (`my-web-app`) with 2 containers
 (`my-web-app-1` and `my-web-app-2`). You want to add a proxy service
-(`my-proxy`) with one container (`my-proxy-1`) that will balance HTTP traffic to
+(`my-proxy`) with one container (`my-proxy-1`) to balance HTTP traffic to
 each of the containers in your `my-web-app` application, with a link name of
 `web`.
 
@@ -164,7 +164,7 @@ This example snippet creates a directional link from `my-proxy` to `my-web-app`,
 
 ### DNS hostnames vs service links
 
-> **Note**: Hostnames are updated during runtime if the service scales up or down. Environment variables are only set or updated at deploy or redeploy. If your services will scale up or down frequently, you should use hostnames rather than service links.
+> **Note**: Hostnames are updated during runtime if the service scales up or down. Environment variables are only set or updated at deploy or redeploy. If your services scale up or down frequently, you should use hostnames rather than service links.
 
 In the example, the `my-proxy` containers can access the service links using following hostnames:
 
@@ -216,7 +216,7 @@ In addition to the standard Docker environment variables, Docker Cloud also sets
 special environment variables that enable containers to self-configure. These
 environment variables are updated on redeploy.
 
-In the example above, you will also find the following environment variables in the `my-proxy` containers:
+In the example above, the following environment variables are available in the `my-proxy` containers:
 
 | Name                           | Value                                                                                 |
 |:-------------------------------|:--------------------------------------------------------------------------------------|

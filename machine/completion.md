@@ -30,7 +30,7 @@ Place the completion script in `/etc/bash_completion.d/` as follows:
     sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
     ```
 
-Completion will be available upon next login.
+Completion is available upon next login.
 
 
 ### Zsh
@@ -62,7 +62,7 @@ exec $SHELL -l
 
 ## Available completions
 
-Depending on what you typed on the command line so far, it will complete:
+Depending on what you typed on the command line so far, it completes:
 
 - commands and their options
 - container IDs and names

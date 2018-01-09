@@ -10,7 +10,7 @@ redirect_from:
 
 If you have multiple instances of Docker running in your environment (e.g.,
 multiple physical or virtual machines, all running the Docker daemon), each time
-one of them requires an image that it doesn’t have it will go out to the
+one of them requires an image that it doesn’t have it goes out to the
 internet and fetch it from the public Docker registry. By running a local
 registry mirror, you can keep most of the redundant image fetch traffic on your
 local network.
@@ -42,15 +42,15 @@ serve the image from its own storage.
 
 ### What if the content changes on the Hub?
 
-When a pull is attempted with a tag, the Registry will check the remote to
-ensure if it has the latest version of the requested content.  If it doesn't it
-will fetch the latest content and cache it.
+When a pull is attempted with a tag, the Registry checks the remote to
+ensure if it has the latest version of the requested content.  Otherwise, it
+fetches and caches the latest content.
 
 ### What about my disk?
 
 In environments with high churn rates, stale data can build up in the cache.
-When running as a pull through cache the Registry will periodically remove old
-content to save disk space. Subsequent requests for removed content will cause a
+When running as a pull through cache the Registry periodically removes old
+content to save disk space. Subsequent requests for removed content causes a
 remote fetch and local re-caching.
 
 To ensure best performance and guarantee correctness the Registry cache should
@@ -62,8 +62,8 @@ The easiest way to run a registry as a pull through cache is to run the official
 Registry image.
 
 Multiple registry caches can be deployed over the same back-end.  A single
-registry cache will ensure that concurrent requests do not pull duplicate data,
-but this property will not hold true for a registry cache cluster.
+registry cache ensures that concurrent requests do not pull duplicate data,
+but this property does not hold true for a registry cache cluster.
 
 ### Configure the cache
 
@@ -81,8 +81,8 @@ proxy:
 ```
 
 > **Warning**: If you specify a username and password, it's very important to
-> understand that private resources that this user has access to Docker Hub will
-> be made available on your mirror. **You must secure your mirror** by
+> understand that private resources that this user has access to Docker Hub is
+> made available on your mirror. **You must secure your mirror** by
 > implementing authentication if you expect these resources to stay private!
 
 > **Warning**: In order for the scheduler to clean up old entries, `delete` must
@@ -114,7 +114,7 @@ Save the file and reload Docker for the change to take effect.
 > ```
 >
 > It's telling you that the file doesn't exist yet in the local cache and is
-> being pulled from upstream. 
+> being pulled from upstream.
 
 
 ## Use case: the China registry mirror

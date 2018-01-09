@@ -24,7 +24,7 @@ potential performance advantages over the `aufs` storage driver.
 - If you use Ubuntu, you need to
   [install extra packages](/engine/installation/linux/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
   to add the AUFS module to the kernel. If you do not install these packages,
-  you will need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
+  you need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
   or `overlay2` on Ubuntu 16.04 and higher, which is also supported.
 - AUFS cannot use the following backing filesystems: `aufs`, `btrfs`, or
   `ecryptfs`. This means that the filesystem which contains
@@ -59,7 +59,7 @@ storage driver is configured, Docker uses it by default.
     ```
 
 3.  If you are using a different storage driver, either AUFS is not included in
-    the kernel (in which case a different default driver will be used) or that
+    the kernel (in which case a different default driver is used) or that
     Docker has been explicitly configured to use a different driver. Check
     `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
     if Docker has been started with the `--storage-driver` flag.
@@ -118,7 +118,7 @@ subdirectories of `/var/lib/docker/aufs/`.
   file contains the IDs of all the layers below it in the stack (its parents).
 - `mnt/`: Mount points, one per image or container layer, which are used to
   assemble and mount the unified filesystem for a container. For images, which
-  are read-only, these directories will always be empty.
+  are read-only, these directories are always empty.
 
 #### The container layer
 

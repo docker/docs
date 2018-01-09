@@ -12,14 +12,14 @@ following components:
 2. Universal Control Plane (UCP).
 3. Docker Trusted Registry (DTR).
 
-While upgrading, some of these components will become temporarily unavailable.
+While upgrading, some of these components become temporarily unavailable.
 So you should schedule your upgrades to take place outside business peak hours
 to make sure there's no impact to your business.
 
 ## Create a backup
 
 Before upgrading Docker EE, you should make sure you [create a backup](backup.md).
-This will make it possible to recover if anything goes wrong during the upgrade.
+This makes it possible to recover if anything goes wrong during the upgrade.
 
 ## Check the compatibility matrix
 
@@ -27,7 +27,7 @@ You should also check the [compatibility matrix](https://success.docker.com/Poli
 to make sure all Docker EE components are certified to work with one another.
 You may also want to check the
 [Docker EE maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
-to understand until when your version will be supported.
+to understand until when your version may be supported.
 
 ## Upgrade Docker Engine
 
@@ -37,7 +37,7 @@ drain the nodes of any workloads before starting the upgrade.
 
 If you have workloads running as containers as opposed to swarm services,
 make sure they are configured with a [restart policy](/engine/admin/start-containers-automatically/).
-This will make sure your containers are started automatically after the upgrade.
+This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
 

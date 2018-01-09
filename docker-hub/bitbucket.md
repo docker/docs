@@ -12,7 +12,7 @@ Build](bitbucket.md#creating-an-automated-build).
 
 In order to set up an Automated Build of a repository on Bitbucket, you need to
 link your [Docker Hub](https://hub.docker.com/account/authorized-services/)
-account to a Bitbucket account. This will allow the registry to see your
+account to a Bitbucket account. This allows the registry to see your
 Bitbucket repositories.
 
 To add, remove, or view your linked account, go to the **Linked Accounts &

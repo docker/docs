@@ -32,7 +32,7 @@ verify completion of the process when pulling an image from Docker Store:
 
 The Docker Store has a thorough and well-defined certification process to ensure
 top-quality content from producers is delivered to consumers in a trusted
-manner. As a producer of content, you will be required to sign your images so
+manner. As a producer of content, you are required to sign your images so
 that Docker can verify that your content is not tampered with upon starting the
 image certification and publishing process as outlined below:
 

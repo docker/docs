@@ -13,11 +13,11 @@ skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 > Automated Builds currently require *read* and *write* access since
 > [Docker Hub](https://hub.docker.com) needs to set up a GitHub service
 > hook. We have no choice here, this is how GitHub manages permissions.
-> We do guarantee nothing else will be touched in your account.
+> We do guarantee nothing else is touched in your account.
 
 In order to set up an Automated Build of a repository on GitHub, you need to
 link [Docker Hub](https://hub.docker.com/account/authorized-services/) to your
-GitHub account. This will allow the registry to see your GitHub repositories.
+GitHub account. This allows the registry to see your GitHub repositories.
 
 To add, remove or view your linked account, go to the "Linked Accounts &
 Services" section of your Hub profile "Settings".
@@ -40,22 +40,22 @@ Follow the onscreen instructions to authorize and link your GitHub account to
 Docker Hub. Once it is linked, you'll be able to choose a source repository from
 which to create the Automatic Build.
 
-You will be able to review and revoke Docker Hub's access by visiting the
+You can review and revoke Docker Hub's access by visiting the
 [GitHub User's Applications settings](https://github.com/settings/applications).
 
 > **Note**: If you delete the GitHub account linkage that is used for one of your
-> automated build repositories, the previously built images will still be available.
+> automated build repositories, the previously built images are still available.
 > If you re-link to that GitHub account later, the automated build can be started
 > using the "Start Build" button on the Hub, or if the webhook on the GitHub repository
-> still exists, it will be triggered by any subsequent commits.
+> still exists, it is triggered by any subsequent commits.
 
 ## Auto builds and limited linked GitHub accounts.
 
 If you selected to link your GitHub account with only a "Limited Access" link,
-then after creating your automated build, you will need to either manually
+then after creating your automated build, you need to either manually
 trigger a Docker Hub build using the "Start a Build" button, or add the GitHub
 webhook manually, as described in [GitHub Service
-Hooks](github.md#github-service-hooks). This will only work for repositories
+Hooks](github.md#github-service-hooks). This only works for repositories
 under the user account, and adding an automated build to a public GitHub
 organization using a "Limited Access" link is not possible.
 
@@ -72,9 +72,9 @@ You can now re-link your account at any time.
 
 ## GitHub organizations
 
-GitHub organizations and private repositories forked from organizations will be
+GitHub organizations and private repositories forked from organizations are
 made available to auto build using the "Docker Hub Registry" application, which
-needs to be added to the organization - and then will apply to all users.
+needs to be added to the organization - and then applies to all users.
 
 To check, or request access, go to your GitHub user's "Setting" page, select the
 "Applications" section from the left side bar, then click the "View" button for
@@ -84,7 +84,7 @@ To check, or request access, go to your GitHub user's "Setting" page, select the
 
 The organization's administrators may need to go to the Organization's "Third
 party access" screen in "Settings" to grant or deny access to the Docker Hub
-Registry application. This change will apply to all organization members.
+Registry application. This change applies to all organization members.
 
 ![Check Docker Hub application access to Organization](images/gh-check-admin-org-dh-app-access.png)
 
@@ -105,7 +105,7 @@ Once you've selected the source repository, you can then configure:
 - If the visibility of the Docker repository: "Public" or "Private"
   You can change the accessibility options after the repository has been created.
   If you add a Private repository to a Hub user namespace, then you can only add other users
-  as collaborators, and those users will be able to view and pull all images in that
+  as collaborators, and those users can view and pull all images in that
   repository. To configure more granular access permissions, such as using teams of
   users or allow different users access to different image tags, then you need
   to add the Private repository to a Hub organization for which your user has Administrator
@@ -120,7 +120,7 @@ You can also select one or more:
 
 You can modify the description for the repository by clicking the "Description" section
 of the repository view.
-Note that the "Full Description" will be over-written by the README.md file when the
+The "Full Description" is over-written by the README.md file when the
 next build is triggered.
 
 ## GitHub private submodules
@@ -188,7 +188,7 @@ When you create an Automated Build from a GitHub user that has full "Public and
 Private" linking, a Service Hook should get automatically added to your GitHub
 repository.
 
-If your GitHub account link to the Docker Hub is "Limited Access", then you will
+If your GitHub account link to the Docker Hub is "Limited Access", then you
 need to add the Service Hook manually.
 
 To add, confirm, or modify the service hook, log in to GitHub, then navigate to

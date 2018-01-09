@@ -59,7 +59,7 @@ the daemon restarts with a different bridge IP or a different graphdriver.
 
 A lengthy absence of the daemon can impact running containers. The containers
 process writes to FIFO logs for daemon consumption. If the daemon is unavailable
-to consume the output, the buffer will fill up and block further writes to the
+to consume the output, the buffer fills up and blocks further writes to the
 log. A full log blocks the process until further space is available. The default
 buffer size is typically 64K.
 

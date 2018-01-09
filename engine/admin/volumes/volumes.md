@@ -56,7 +56,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - In the case of named volumes, the first field is the name of the volume, and is
     unique on a given host machine. For anonymous volumes, the first field is
     omitted.
-  - The second field is the path where the file or directory will be mounted in
+  - The second field is the path where the file or directory are mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
@@ -66,13 +66,13 @@ If you need to specify volume driver options, you must use `--mount`.
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
   - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
-    [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type will always
-    be `volume`.
+    [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type is always
+    `volume`.
   - The `source` of the mount. For named volumes, this is the name of the volume.
     For anonymous volumes, this field is omitted. May be specified as `source`
     or `src`.
   - The `destination` takes as its value the path where the file or directory
-    will be mounted in the container. May be specified as `destination`, `dst`,
+    is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
     the container as read-only](#use-a-read-only-volume).
@@ -200,7 +200,7 @@ $ docker volume rm myvol2
 
 ### Start a service with volumes
 
-When you start a service and define a volume, each service container will use its own
+When you start a service and define a volume, each service container uses its own
 local volume. None of the containers can share this data if you use the `local`
 volume driver, but some volume drivers do support shared storage. Docker for AWS and
 Docker for Azure both support persistent storage using the Cloudstor plugin.
@@ -241,8 +241,8 @@ flag.
 
 If you start a container which creates a new volume, as above, and the container
 has files or directories in the directory to be mounted (such as `/app/` above),
-the directory's contents will be copied into the volume. The container will then
-mount and use the volume, and other containers which use the volume will also
+the directory's contents are copied into the volume. The container then
+mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
 
 To illustrate this, this example starts an `nginx` container and populates the
@@ -366,7 +366,7 @@ $ docker volume rm nginx-vol
 When you create a volume using `docker volume create`, or when you start a
 container which uses a not-yet-created volume, you can specify a volume driver.
 The following examples use the `vieux/sshfs` volume driver, first when creating
-a standalone volume, and then when starting a container which will create a new
+a standalone volume, and then when starting a container which creates a new
 volume.
 
 ### Initial set-up

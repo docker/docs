@@ -12,7 +12,7 @@ title: Use Ansible
 To use this guide you'll need a working installation of
 [Ansible](https://www.ansible.com/) version 2.1.0 or later.
 
-Requirements on the host that will execute the module:
+Requirements on the host that execute the module:
 
 ```
 python >= 2.6
@@ -22,7 +22,7 @@ Docker API >= 1.20
 
 ## Installation
 
-The `docker_container` module is a core module, and will ship with
+The `docker_container` module is a core module, and ships with
 Ansible by default.
 
 ## Usage

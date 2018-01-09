@@ -58,7 +58,7 @@ persistent volumes:
  not started until the volume it mounts becomes available.
 
  Sharing/mounting the same Cloudstor volume backed by EBS among multiple tasks
- is not a supported scenario and will lead to data loss. If you need a Cloudstor
+ is not a supported scenario and leads to data loss. If you need a Cloudstor
  volume to share data between tasks, choose the appropriate EFS backed `shared`
  volume option. Using a `relocatable` Cloudstor volume backed by EBS is
  supported on all AWS regions that support EBS. The default `backing` option is
@@ -75,7 +75,7 @@ data loss, since EFS makes the data available to all swarm nodes over NFS.
 When swarm tasks using a `shared` Cloudstor volume get rescheduled from one node
 to another within the same or across different availability zones, the
 persistent data backed by EFS volumes is always available. `shared` Cloudstor
-volumes will only work in those AWS regions where EFS is supported. If EFS
+volumes only work in those AWS regions where EFS is supported. If EFS
 Support is selected during setup/installation, the default "backing" option for
 Cloudstor volumes is set to `shared` so that EFS is used by default.
 
@@ -201,7 +201,7 @@ $ docker volume create \
 
 Sharing the same `relocatable` Cloudstor volume across multiple tasks of a
 service or across multiple independent containers is not supported when
-`backing=relocatable` is specified. Attempting to do so will result in IO errors.
+`backing=relocatable` is specified. Attempting to do so results in IO errors.
 
 ### Use a unique volume per task using EFS
 
@@ -241,7 +241,7 @@ Cloudstor across the swarm.
 
 You can use `docker volume rm [volume name]` to remove a Cloudstor volume from
 any node. If you remove a volume from one node, make sure it is not being used
-by another active node, since those tasks/containers in another node will lose
+by another active node, since those tasks/containers in another node lose
 access to their data.
 
 Before deleting a Docker4AWS stack through CloudFormation, you should remove all

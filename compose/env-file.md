@@ -15,11 +15,11 @@ These syntax rules apply to the `.env` file:
 * Compose expects each line in an `env` file to be in `VAR=VAL` format.
 * Lines beginning with `#` (i.e. comments) are ignored.
 * Blank lines are ignored.
-* There is no special handling of quotation marks (i.e. **they will be part of the VAL**, you have been warned ;) ).
+* There is no special handling of quotation marks (i.e. **they are part of the VAL**).
 
 ## Compose file and CLI variables
 
-The environment variables you define here will be used for [variable
+The environment variables you define here is used for [variable
 substitution](compose-file/index.md#variable-substitution) in your Compose file,
 and can also be used to define the following [CLI
 variables](reference/envvars.md):
@@ -36,7 +36,7 @@ variables](reference/envvars.md):
 
 > **Notes**
 >
-> * Values present in the environment at runtime will always override
+> * Values present in the environment at runtime always override
 those defined inside the `.env` file. Similarly, values passed via command-line
 arguments take precedence as well.
 >

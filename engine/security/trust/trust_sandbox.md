@@ -16,7 +16,7 @@ overview](content_trust.md).
 ### Prerequisites
 
 These instructions assume you are running in Linux or macOS. You can run
-this sandbox on a local machine or on a virtual machine. You will need to
+this sandbox on a local machine or on a virtual machine. You need to
 have privileges to run docker commands on your local machine or in the VM.
 
 This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
@@ -39,7 +39,7 @@ production trust environment, and sets up these additional components.
 | Registry server | A local registry service.                                                                                                                 |
 | Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
 
-This means you will be running your own content trust (Notary) server and registry.
+This means you run your own content trust (Notary) server and registry.
 If you work exclusively with the Docker Hub, you would not need with these components.
 They are built into the Docker Hub for you. For the sandbox, however, you build
 your own entire, mock production environment.
@@ -53,9 +53,9 @@ sandbox is configured to store all the keys and files inside the `trustsandbox`
 container. Since the keys you create in the sandbox are for play only,
 destroying the container destroys them as well.
 
-By using a docker-in-docker image for the `trustsandbox` container, you will also
-not pollute your real docker daemon cache with any images you push and pull.  The
-images will instead be stored in an anonymous volume attached to this container,
+By using a docker-in-docker image for the `trustsandbox` container, you also
+don't pollute your real Docker daemon cache with any images you push and pull.
+The images are stored in an anonymous volume attached to this container,
 and can be destroyed after you destroy the container.
 
 ## Build the sandbox
@@ -120,13 +120,13 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ docker-compose up -d
 
     The first time you run this, the docker-in-docker, Notary server, and registry
-    images will be first downloaded from Docker Hub.
+    images are downloaded from Docker Hub.
 
 
 ## Playing in the sandbox
 
 Now that everything is setup, you can go into your `trustsandbox` container and
-start testing Docker content trust.  From your host machine, obtain a shell
+start testing Docker content trust. From your host machine, obtain a shell
 in the `trustsandbox` container.
 
     $ docker exec -it trustsandbox sh
@@ -192,7 +192,10 @@ Now, you'll pull some images from within the `trustsandbox` container.
         Finished initializing "sandboxregistry:5000/test/trusttest"
         Successfully signed "sandboxregistry:5000/test/trusttest":latest
 
-    Because you are pushing this repository for the first time, docker creates new root and repository keys and asks you for passphrases with which to encrypt them.  If you push again after this, it will only ask you for repository passphrase so it can decrypt the key and sign again.
+    Because you are pushing this repository for the first time, Docker creates
+    new root and repository keys and asks you for passphrases with which to
+    encrypt them. If you push again after this, it only asks you for repository
+    passphrase so it can decrypt the key and sign again.
 
 7. Try pulling the image you just pushed:
 
@@ -259,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8. Pull the image again.  This will download the image from the registry, because we don't have it cached.
+8. Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest

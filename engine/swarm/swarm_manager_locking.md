@@ -52,8 +52,8 @@ command and provide the following key:
 Store the key in a safe place, such as in a password manager.
 
 When Docker restarts, you need to
-[unlock the swarm](swarm_manager_locking.md#unlock-a-swarm). You will see an
-error like the following and services will not start.
+[unlock the swarm](swarm_manager_locking.md#unlock-a-swarm). A locked swarm
+causes an error like the following when you try to start or restart a service:
 
 ```bash
 $ sudo service docker restart
@@ -81,7 +81,7 @@ will not be able to restart the manager.
 ```
 
 To disable autolock, set `--autolock` to `false`. The mutual TLS key and the
-encryption key used to read and write Raft logs will be stored unencrypted on
+encryption key used to read and write Raft logs are stored unencrypted on
 disk. There is a trade-off between the risk of storing the encryption key
 unencrypted at rest and the convenience of being able to restart a swarm without
 needing to unlock each manager.

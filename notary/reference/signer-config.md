@@ -16,7 +16,8 @@ specified on the command line using the `-config` flag.
 Here is a full signer configuration file example; please click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
-<pre><code class="language-json">{
+```json
+{
   <a href="signer-config.md#server-section-required">"server"</a>: {
     "http_addr": ":4444",
     "grpc_addr": ":7899",
@@ -39,7 +40,7 @@ learn more about the configuration section corresponding to that key:
     }
   }
 }
-</code></pre>
+```
 
 ## server section (required)
 
@@ -74,7 +75,7 @@ Example:
 				hence all interfaces, such as those listed when you run
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:4444"</code> means listen on port 4444 on
-				localhost only.  That means that the server will not be
+				localhost only.  That means that the server is not
 				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
@@ -90,7 +91,7 @@ Example:
 				hence all interfaces, such as those listed when you run
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:7899"</code> means listen on port 7899 on
-				localhost only.  That means that the server will not be
+				localhost only.  That means that the server is not
 				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
@@ -115,8 +116,8 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">The root certificate to trust for
 			mutual authentication. If provided, any clients connecting to
-			Notary signer will have to have a client certificate signed by
-			this root. If not provided, mutual authentication will not be
+			Notary signer need a client certificate signed by
+			this root. If not provided, mutual authentication is not
 			required. The path is relative to the directory of the
 			configuration file.</td>
 	</tr>
@@ -163,7 +164,7 @@ Example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">This parameter specifies the alias of the current
 			password used to encrypt the private keys in the DB.  All new
-			private keys will be encrypted using this password, which
+			private keys are encrypted using this password, which
 			must also be provided as the environment variable
 			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.
 			Please see the <a href="signer-config.md#environment-variables-required-if-using-mysql">environment variable</a>
@@ -184,7 +185,7 @@ For example, the configuration above specifies the default password alias to be
 
 If this configuration is used, then you must:
 
-```
+```bash
 export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
 ```
 
@@ -215,13 +216,13 @@ export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
 export NOTARY_SIGNER_PASSWORDALIAS2=mynewfancypassword
 ```
 
-That way, all new keys will be encrypted and decrypted using the passphrase
+That way, all new keys are encrypted and decrypted using the passphrase
 `mynewfancypassword`, but old keys that were encrypted using the passphrase
 `mypassword` can still be decrypted.
 
 The environment variables for the older passwords are optional, but Notary
-Signer will not be able to decrypt older keys if they are not provided, and
-attempts to sign data using those keys will fail.
+Signer cannot decrypt older keys if they are not provided, and
+attempts to sign data using those keys fail.
 
 
 ## Related information

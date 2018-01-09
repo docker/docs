@@ -57,13 +57,13 @@ To use Docker Store as your fulfillment service, an ISV must:
 - Apply and be approved to use the Gated BYOL feature.
 - Create a BYOL, "bring your own license" plans, in the Docker Store Publisher center.
 
-Docker will provide:
+Docker provides:
 - One or more authorization tokens to the publisher for making API requests to the Docker fulfillment service.
 - A partner identifier.
 
 ### Fulfillment and orders usage
 
-Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form of URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
+Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form of URLs) for customer subscriptions to their products. ISVs can also access reports and usage information about their products on Docker Store.
 
 The BYOL program at Docker Store helps ISVs control access to their products for multiple use cases, such as:
 - New customers purchasing software from the ISV for the first time
@@ -87,14 +87,14 @@ the ISV can change or cancel the corresponding subscription by making requests
 to the Store billing service.
 
 The subscription that a user receives at the end of this process appears with
-their other subscriptions in Docker Store. However, the user will not be able to
+their other subscriptions in Docker Store. However, the user cannot
 directly change or cancel it, as it represents an entitlement under the control
-of the ISV. The Store UI will direct the user to contact the ISV for any desired
+of the ISV. The Store UI directs the user to contact the ISV for any desired
 changes.
 
 ### Product keys
 
-If an ISV's software uses product keys, these may be supplied at the time of order creation. Once the order has been fulfilled, the product keys will be available to the user from the user's subscription detail page. The ISV's installation documentation should refer the user to look for the keys there.
+If an ISV's software uses product keys, these may be supplied at the time of order creation. Once the order has been fulfilled, the product keys are available to the user from the user's subscription detail page. The ISV's installation documentation should refer the user to look for the keys there.
 
 ### API usage
 
@@ -106,7 +106,7 @@ or look up information about the order after it has been created. 
 ### Gated BYOL plan setup
 
 Once a publisher has been onboarded to create an gated BYOL plan, the publisher
-center will begin to allow them to set up a new, unpublished plan with the gated
+center allows them to set up a new, unpublished plan with the gated
 BYOL option:
 
 ![byol plan](images/publish_byol.png)
@@ -122,20 +122,20 @@ license from the publisher.
 
 All API requests should be made to: <https://store.docker.com/api/fulfillment/v1/...>
 
-For example, the full path for the "Create Order" API will POST to: https://store.docker.com/api/fulfillment/v1/orders
+For example, the full path for the "Create Order" API POSTs to: https://store.docker.com/api/fulfillment/v1/orders
 
 All API requests to the fulfillment service must have an "Authorization: Bearer"
-header with an authorization string that will be provided by Docker. An example
+header with an authorization string provided by Docker. An example
 header is:
 
-```
+```none
 Authorization: Bearer 9043ea5c-172a-4d4b-b255-a1dab96fb631
 ```
 
 ISVs should closely protect their authorization token as if it were a password,
 and alert Docker if it has been compromised or needs replacement.
 
-All request and response bodies must/will be encoded with JSON using UTF-8.
+All request and response bodies are encoded with JSON using UTF-8.
 
 ### Data structures
 
@@ -174,8 +174,8 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * id: `390745e6-faba-11e6-bc64-92361f002671` (string, required) - The order item id.
 * product\_id: `bf8f7c15-0c3b-4dc5-b5b3-1595ba9b589e` (string, required) - The Store product id associated with the order item.
 * rate\_plan\_id: `85717ec8-6fcf-4fd9-9dbf-051af0ce1eb3` (string, required) - The Store rate plan id associated with the order item.
-* subscription\_start\_date: `2016-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription start date. If not specified, the subscription will start at order fulfillment time.
-* subscription\_end\_date: `2019-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription end date. If not specified, the subscription will end based on the plan duration period.
+* subscription\_start\_date: `2016-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription start date. If not specified, the subscription starts at order fulfillment time.
+* subscription\_end\_date: `2019-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription end date. If not specified, the subscription ends based on the plan duration period.
 * pricing\_components (array[PricingComponent], required) - One or more pricing components associated with the order item.
 * metadata (OrderItemMetadata, optional) - Any key/value strings given for this item in the order creation request.
 * product\_keys (array[ProductKey], optional) - Product keys associated with the order item.
@@ -187,8 +187,8 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 * sku: ZZ456A (string, optional) - The order item SKU.
 * product\_id: `bf8f7c15-0c3b-4dc5-b5b3-1595ba9b589e` (string, optional) - The Store product id associated with the order item.
 * rate\_plan\_id: `85717ec8-6fcf-4fd9-9dbf-051af0ce1eb3` (string, optional) - The Store rate plan id associated with the order item.
-* subscription\_start\_date: `2016-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription start date. If not specified, the subscription will start at order fulfillment time.
-* subscription\_end\_date: `2019-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription end date. If not specified, the subscription will end based on the plan duration period.
+* subscription\_start\_date: `2016-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription start date. If not specified, the subscription starts at order fulfillment time.
+* subscription\_end\_date: `2019-06-02T05:10:54Z` (string, optional) - An ISO-8601 timestamp representing the subscription end date. If not specified, the subscription ends based on the plan duration period.
 * pricing\_components (array[PricingComponent], required) - One or more pricing components associated with the order item.
 * metadata (OrderItemMetadata, optional) - Mapping of key/value strings for this order item.
 * product\_keys (array[ProductKeyCreateRequest], optional) - Product keys associated with the order item.
@@ -204,12 +204,12 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 
 #### Properties
 
-* label: `Production` (string, required) - The human-readable label for the given product key that will be displayed to the customer.
+* label: `Production` (string, required) - The human-readable label for the given product key that is displayed to the customer.
 * media\_type: `text/plain` (enum, required) - An accepted IANA Media Type for this product key. This suggests to the user interface how to display the product key for the customer to use.
   * text/plain
   * application/json
 * file\_name: `production-key.txt` (string, optional) - The file name for the downloaded file if the product key is a blob that requires or allows download by the customer.
-* value: `AbKe13894Aksel` (string, required) - The contents of the product key as a string. If the value is blob that cannot be represented as a string, the contents will be encoded as a Base64 string.
+* value: `AbKe13894Aksel` (string, required) - The contents of the product key as a string. If the value is blob that cannot be represented as a string, the contents are encoded as a Base64 string.
 
 ### ProductKey (object)
 
@@ -217,12 +217,12 @@ All request and response bodies must/will be encoded with JSON using UTF-8.
 
 * id: `390745e6-faba-11e6-bc64-92361f002671` (string, required) - The product key id.
 * order\_item\_id: `85717ec8-6fcf-4fd9-9dbf-051af0ce1eb3` (string, required) - The id of the order item that this product key is associated with.
-* label: `Production` (string, required) - The human-readable label for the given product key that will be displayed to the customer.
+* label: `Production` (string, required) - The human-readable label for the given product key that is displayed to the customer.
 * media\_type: `text/plain` (enum, required) - An accepted IANA Media Type for this product key. This suggests to the user interface how to display the product key for the customer to use.
   * text/plain
   * application/json
 * file\_name: `production-key.txt` (string, optional) - The file name for the downloaded file if the product key is a blob that requires or allows download by the customer.
-* value: `AbKe13894Aksel` (string, required) - The contents of the product key as a string. If the value is blob that cannot be represented as a string, the contents will be encoded as a Base64 string.
+* value: `AbKe13894Aksel` (string, required) - The contents of the product key as a string. If the value is blob that cannot be represented as a string, the contents are encoded as a Base64 string.
 * created: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 product key creation timestamp.
 * updated: `2016-06-02T05:10:54Z` (string, required) - An ISO-8601 product key updated timestamp.
 
@@ -252,7 +252,7 @@ Create an order.
 
 #### List orders by token [GET /orders{?token}]
 
-Retrieve an order with the given token. An empty array will be returned if no orders for the given token are found.
+Retrieve an order with the given token. An empty array is returned if no orders for the given token are found.
 
 * Parameters
 
@@ -261,7 +261,7 @@ Retrieve an order with the given token. An empty array will be returned if no or
 
 #### List orders by partner [GET /orders{?partner\_id}]
 
-List orders associated with the the given partner. An empty array will be returned if there are no orders associated with the partner.
+List orders associated with the the given partner. An empty array is returned if there are no orders associated with the partner.
 
 * Parameters
 
@@ -288,7 +288,7 @@ Retrieve an order by id.
 
 A number of operations can be performed by `PATCH`ing an order:
 
-**Fulfill** an order. Fulfilling an order will put it in a fulfilled state, and will kick off a process to create subscriptions for each order item associated with the order.
+**Fulfill** an order. Fulfilling an order puts it in a fulfilled state, and kicks off a process to create subscriptions for each order item associated with the order.
 
 * Request (application/json)
 
@@ -297,7 +297,7 @@ A number of operations can be performed by `PATCH`ing an order:
 
   * Attributes (Order)
 
-**Cancel** an order. Canceling an order will put it in a cancelled state. The order is frozen once cancelled (that is, no further changes may be made to it).
+**Cancel** an order. Canceling an order puts it in a cancelled state. The order is frozen once cancelled (that is, no further changes may be made to it).
 
 * Request (application/json)
   * Attributes (OrderCancellationRequest)
@@ -312,7 +312,7 @@ A number of operations can be performed by `PATCH`ing an order:
 
 #### List product keys for order item [GET]
 
-Retrieve all product keys for an order item by id. An empty array will be returned if the order item does not have any product keys.
+Retrieve all product keys for an order item by id. An empty array is returned if the order item does not have any product keys.
 
 * Request (application/json)
 * Response 200 (application/json)
@@ -321,7 +321,7 @@ Retrieve all product keys for an order item by id. An empty array will be return
 
 #### Create product key for order item [POST]
 
-Create a product key for an existing order item. Note that adding new product keys will not affect existing product keys.
+Create a product key for an existing order item. Adding new product keys does not affect existing product keys.
 
 * Request (application/json)
 

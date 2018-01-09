@@ -39,11 +39,16 @@ For a complete list of `docker-machine` subcommands, see the
 
 ## Custom root Certificate Authority for Registry
 
-Users using their own Docker Registry will experience `x509: certificate signed by unknown authority`
-error messages if their registry is signed by custom root Certificate Authority and it is
-not registered with Docker Engine. As discussed in the
+if your registry is signed by acustom root Certificate Authority and it is
+not registered with Docker Engine, you may see the following error message:
+
+```none
+x509: certificate signed by unknown authority
+```
+
+As discussed in the
 [Docker Engine documentation](/engine/security/certificates.md#understanding-the-configuration)
-certificates should be placed at `/etc/docker/certs.d/hostname/ca.crt`
+place the certificates in `/etc/docker/certs.d/hostname/ca.crt`
 where `hostname` is your Registry server's hostname.
 
 ```console
@@ -62,15 +67,15 @@ or firewall issues. There are also reasons from the other end of the chain:
 your cloud provider or the network in between.
 
 To help `docker-machine` be as stable as possible, we added a monitoring of
-crashes whenever you try to `create` or `upgrade` a host. This will send, over
+crashes whenever you try to `create` or `upgrade` a host. This sends, over
 HTTPS, to Bugsnag some information about your `docker-machine` version, build,
 OS, ARCH, the path to your current shell and, the history of the last command as
 you could see it with a `--debug` option. This data is sent to help us pinpoint
-recurring issues with `docker-machine` and will only be transmitted in the case
+recurring issues with `docker-machine` and is only transmitted in the case
 of a crash of `docker-machine`.
 
 If you wish to opt out of error reporting, you can create a `no-error-report`
-file in your `$HOME/.docker/machine` directory, and Docker Machine will disable
+file in your `$HOME/.docker/machine` directory, and Docker Machine disables
 this behavior.  e.g.:
 
     $ mkdir -p ~/.docker/machine && touch ~/.docker/machine/no-error-report

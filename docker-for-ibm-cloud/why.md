@@ -13,7 +13,7 @@ Docker EE for IBM Cloud provides a Docker-native solution that you can use to av
 
 Docker EE for IBM Cloud allows you to interact with Docker directly (including native Docker orchestration), instead of distracting you with the need to navigate extra layers on top of Docker. You can focus instead on the thing that matters most: running your workloads. This helps you and your team to deliver more value to the business faster, to speak one common "language", and to have fewer details to keep in your head at once.
 
-The skills that you and your team have already learned, and will continue to learn, using Docker on the desktop or elsewhere will automatically carry over to using Docker EE for IBM Cloud. The added consistency across clouds also helps to ensure that a migration or multi-cloud strategy is easier to accomplish in the future, if desired.
+The skills that you and your team have already learned, and continue to learn, using Docker on the desktop or elsewhere automatically carry over to using Docker EE for IBM Cloud. The added consistency across clouds also helps to ensure that a migration or multi-cloud strategy is easier to accomplish in the future, if desired.
 
 ## Skip the boilerplate and maintenance work
 Docker EE for IBM Cloud bootstraps all of the recommended infrastructure to start using Docker on IBM Cloud automatically. You don't need to worry about rolling your own instances, security groups, or load balancers when using Docker EE for IBM Cloud.

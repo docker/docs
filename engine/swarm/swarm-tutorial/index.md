@@ -40,12 +40,12 @@ from a Linux, Mac, or Windows host. Check out
 [Getting started - Swarms](/get-started/part4.md#prerequisites)
 for one possible set-up for the hosts.
 
-One of these machines will be a manager (called `manager1`) and two of them will
-be workers (`worker1` and `worker2`).
+One of these machines is a manager (called `manager1`) and two of them are
+workers (`worker1` and `worker2`).
 
 
 >**Note**: You can follow many of the tutorial steps to test single-node swarm
-as well, in which case you need only one host. Multi-node commands will not
+as well, in which case you need only one host. Multi-node commands do not
 work, but you can initialize a swarm, create services, and scale them.
 
 ###  Docker Engine 1.12 or newer
@@ -72,12 +72,12 @@ single-node and multi-node swarm scenarios on Linux machines.
 Alternatively, install the latest [Docker for Mac](/docker-for-mac/index.md) or
 [Docker for Windows](/docker-for-windows/index.md) application on one
 computer. You can test both single-node and multi-node swarm from this computer,
-but you will need to use Docker Machine to test the multi-node scenarios.
+but you need to use Docker Machine to test the multi-node scenarios.
 
 * You can use Docker for Mac or Windows to test _single-node_ features of swarm
 mode, including initializing a swarm with a single node, creating services,
 and scaling services. Docker "Moby" on Hyperkit (Mac) or Hyper-V (Windows)
-will serve as the single swarm node.
+serve as the single swarm node.
 
 <p />
 
@@ -86,7 +86,7 @@ _multi-node_ swarm. However, you can use the included version of [Docker
 Machine](/machine/overview.md) to create the swarm nodes (see [Get started with Docker Machine and a local VM](/machine/get-started.md)), then follow the
 tutorial for all multi-node features. For this scenario, you run commands from
 a Docker for Mac or Docker for Windows host, but that Docker host itself is
-_not_ participating in the swarm (i.e., it will not be `manager1`, `worker1`,
+_not_ participating in the swarm (i.e., it is not `manager1`, `worker1`,
 or `worker2` in our example). After you create the nodes, you can run all
 swarm commands as shown from the Mac terminal or Windows PowerShell with
 Docker for Mac or Docker for Windows running.
@@ -117,8 +117,8 @@ The following ports must be available. On some systems, these ports are open by 
 * **TCP** and **UDP port 7946** for communication among nodes
 * **UDP port 4789** for overlay network traffic
 
-If you are planning on creating an overlay network with encryption (`--opt encrypted`),
-you will also need to ensure **ip protocol 50** (**ESP**) traffic is allowed.
+If you plan on creating an overlay network with encryption (`--opt encrypted`),
+you also need to ensure **ip protocol 50** (**ESP**) traffic is allowed.
 
 ## What's next?
 

@@ -58,11 +58,10 @@ e is 65537 (0x10001)
 
 ```
 
-They should keep `delegation.key` private - this is what they will use to sign
-tags.
+They should keep `delegation.key` private because it is used to sign tags.
 
 Then they need to generate an x509 certificate containing the public key, which is
-what they will give to you.  Here is the command to generate a CSR (certificate
+what you need from them. Here is the command to generate a CSR (certificate
 signing request):
 
 ```
@@ -84,14 +83,14 @@ by a CA.
 
 If your repository was created using a version of Docker Engine prior to 1.11,
 then before adding any delegations, you should rotate the snapshot key to the server
-so that collaborators will not require your snapshot key to sign and publish tags:
+so that collaborators don't need your snapshot key to sign and publish tags:
 
 ```
 $ notary key rotate docker.io/<username>/<imagename> snapshot -r
 ```
 
 This tells Notary to rotate a key for your particular image repository - note that
-you must include the `docker.io/` prefix.  `snapshot -r` specifies that you want
+you must include the `docker.io/` prefix. `snapshot -r` specifies that you want
 to rotate the snapshot key specifically, and you want the server to manage it (`-r`
 stands for "remote").
 
@@ -108,14 +107,14 @@ $ notary publish docker.io/<username>/<imagename>
 ```
 
 The preceding example illustrates a request to add the delegation
-`targets/releases` to the image repository, if it doesn't exist.  Be sure to use
+`targets/releases` to the image repository, if it doesn't exist. Be sure to use
 `targets/releases` - Notary supports multiple delegation roles, so if you mistype
-the delegation name, the Notary CLI will not error.  However, Docker Engine
+the delegation name, the Notary CLI does not error. However, Docker Engine
 supports reading only from `targets/releases`.
 
 It also adds the collaborator's public key to the delegation, enabling them to sign
 the `targets/releases` delegation so long as they have the private key corresponding
-to this public key.  The `--all-paths` flag tells Notary not to restrict the tag
+to this public key. The `--all-paths` flag tells Notary not to restrict the tag
 names that can be signed into `targets/releases`, which we highly recommend for
 `targets/releases`.
 
@@ -151,15 +150,15 @@ $ notary delegation remove docker.io/<username>/<imagename> targets/releases 729
 Removal of delegation role targets/releases with keys [729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a], to repository "docker.io/<username>/<imagename>" staged for next publish.
 ```
 
-The revocation will take effect as soon as you publish:
+The revocation takes effect as soon as you publish:
 
 ```
 $ notary publish docker.io/<username>/<imagename>
 ```
 
 Note that by removing all the keys from the `targets/releases` delegation, the
-delegation (and any tags that are signed into it) is removed.  That means that
-these tags will all be deleted, and you may end up with older, legacy tags that
+delegation (and any tags that are signed into it) is removed. That means that
+these tags are all deleted, and you may end up with older, legacy tags that
 were signed directly by the targets key.
 
 ## Removing the `targets/releases` delegation entirely from a repository
@@ -197,19 +196,19 @@ $ notary key import delegation.key --role user
 where `delegation.key` is the file containing your PEM-encoded private key.
 
 After you have done so, running `docker push` on any repository that
-includes your key in the `targets/releases` delegation will automatically sign
+includes your key in the `targets/releases` delegation automatically signs
 tags using this imported key.
 
 ## `docker push` behavior
 
 When running `docker push` with Docker Content Trust, Docker Engine
-will attempt to sign and push with the `targets/releases` delegation if it exists.
-If it does not, the targets key will be used to sign the tag, if the key is available.
+attempts to sign and push with the `targets/releases` delegation if it exists.
+If it does not, the targets key is used to sign the tag, if the key is available.
 
 ## `docker pull` and `docker build` behavior
 
 When running `docker pull` or `docker build` with Docker Content Trust, Docker
-Engine will pull tags only signed by the `targets/releases` delegation role or
+Engine pullsl tags only signed by the `targets/releases` delegation role or
 the legacy tags that were signed directly with the `targets` key.
 
 ## Related information

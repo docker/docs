@@ -83,8 +83,8 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 | **UNREACHABLE**        | The swarm is sending heartbeat pings and Docker Cloud is receiving them, but Cloud cannot connect to the swarm. | Remove |
 | **UNAVAILABLE**        | Docker Cloud is not receiving heartbeats from the swarm. | Remove |
 | **TERMINATING**        | Docker Cloud is in the process of destroying this swarm. | None |
-| **TERMINATED**        | The swarm has been destroyed and will be removed from the list in 5 minutes. | None |
-| **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm will be removed from list in 5 minutes. | None |
+| **TERMINATED**        | The swarm has been destroyed and is removed from the list in 5 minutes. | None |
+| **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm is removed from list in 5 minutes. | None |
 | **FAILED**        | Provisioning failed. | Remove |
 
 ### Understanding and resolving problems

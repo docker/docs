@@ -89,9 +89,9 @@ settings are deleted along with any Docker Security Scan results. However, this
 does not affect the code in the linked source code repository, and does not
 remove the source code provider link.
 
-If you are running a service from deleted repository , the service will continue
+If you are running a service from deleted repository , the service continues
 to run, but cannot be scaled up or redeployed. If any builds use the Docker
-`FROM` directive and reference a deleted repository, those builds will fail.
+`FROM` directive and reference a deleted repository, those builds fail.
 
 To delete a repository:
 
@@ -132,8 +132,8 @@ registry.
 
     > **Note**: These credentials must have **push** permission in order to push
     built images back to the repository. If you provide **read-only**
-    credentials, you will be able to run automated tests and deploy from the
-    repository to your nodes, but you will not be able to push built images to
+    credentials, you can run automated tests and deploy from the
+    repository to your nodes, but you cannot push built images to
     it.
 
 6. Click **Import**.

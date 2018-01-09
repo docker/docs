@@ -22,4 +22,4 @@ Images must have digests stored, which requires interaction with a
 Docker registry. If digests aren't stored for all images, you can fetch
 them with `docker-compose pull` or `docker-compose push`. To push images
 automatically when bundling, pass `--push-images`. Only services with
-a `build` option specified will have their images pushed.
+a `build` option specified have their images pushed.

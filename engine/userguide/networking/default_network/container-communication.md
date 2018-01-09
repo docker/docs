@@ -17,9 +17,9 @@ factor is whether the host machine is forwarding its IP packets. The second is
 whether the host's `iptables` allow this particular connection.
 
 IP packet forwarding is governed by the `ip_forward` system parameter.  Packets
-can only pass between containers if this parameter is `1`.  Usually you will
-simply leave the Docker server at its default setting `--ip-forward=true` and
-Docker will go set `ip_forward` to `1` for you when the server starts up. If you
+can only pass between containers if this parameter is `1`. Usually, the default
+setting of `--ip-forward=true` is correct, and causes and
+Docker to set `ip_forward` to `1` for you when the server starts up. If you
 set `--ip-forward=false` and your system's kernel has it enabled, the
 `--ip-forward=false` option has no effect. To check the setting on your kernel
 or to turn it on manually:
@@ -39,15 +39,15 @@ or to turn it on manually:
 > **Note**: this setting does not affect containers that use the host
 > network stack (`--network=host`).
 
-Many using Docker will want `ip_forward` to be on, to at least make
+Many using Docker need `ip_forward` to be on, to at least make
 communication _possible_ between containers and the wider world. May also be
 needed for inter-container communication if you are in a multiple bridge setup.
 
-Docker will never make changes to your system `iptables` rules if you set
-`--iptables=false` when the daemon starts.  Otherwise the Docker server will
-append forwarding rules to the `DOCKER` filter chain.
+Docker never makes changes to your system `iptables` rules if you set
+`--iptables=false` when the daemon starts.  Otherwise the Docker server
+appends forwarding rules to the `DOCKER` filter chain.
 
-Docker will flush any pre-existing rules from the `DOCKER` and `DOCKER-ISOLATION`
+Docker flushes any pre-existing rules from the `DOCKER` and `DOCKER-ISOLATION`
 filter chains, if they exist. For this reason, any rules needed to further
 restrict access to containers need to be added after Docker has started.
 
@@ -67,13 +67,13 @@ where *ext_if* is the name of the interface providing external connectivity to t
 
 Whether two containers can communicate is governed, at the operating system level, by two factors.
 
-- Does the network topology even connect the containers' network interfaces?  By default Docker will attach all containers to a single `docker0` bridge, providing a path for packets to travel between them.  See the later sections of this document for other possible topologies.
+- Does the network topology even connect the containers' network interfaces?  By default Docker attaches all containers to a single `docker0` bridge, providing a path for packets to travel between them.  See the later sections of this document for other possible topologies.
 
-- Do your `iptables` allow this particular connection? Docker will never make changes to your system `iptables` rules if you set `--iptables=false` when the daemon starts.  Otherwise the Docker server will add a default rule to the `FORWARD` chain with a blanket `ACCEPT` policy if you retain the default `--icc=true`, or else will set the policy to `DROP` if `--icc=false`.
+- Do your `iptables` allow this particular connection? Docker never makes changes to your system `iptables` rules if you set `--iptables=false` when the daemon starts.  Otherwise the Docker server adds a default rule to the `FORWARD` chain with a blanket `ACCEPT` policy if you retain the default `--icc=true`, or else sets the policy to `DROP` if `--icc=false`.
 
 It is a strategic question whether to leave `--icc=true` or change it to
-`--icc=false` so that `iptables` will protect other containers -- and the main
-host -- from having arbitrary ports probed or accessed by a container that gets
+`--icc=false` so that `iptables` can protect other containers, and the Docker
+host, from having arbitrary ports probed or accessed by a container that gets
 compromised.
 
 If you choose the most secure setting of `--icc=false`, then how can containers
@@ -82,14 +82,14 @@ The answer is the `--link=CONTAINER_NAME_or_ID:ALIAS` option, which was
 mentioned in the previous section because of its effect upon name services.  If
 the Docker daemon is running with both `--icc=false` and `--iptables=true`
 then, when it sees `docker run` invoked with the `--link=` option, the Docker
-server will insert a pair of `iptables` `ACCEPT` rules so that the new
+server inserts a pair of `iptables` `ACCEPT` rules so that the new
 container can connect to the ports exposed by the other container -- the ports
 that it mentioned in the `EXPOSE` lines of its `Dockerfile`.
 
 > **Note**: The value `CONTAINER_NAME` in `--link=` must either be an
 auto-assigned Docker name like `stupefied_pare` or the name you assigned
 with `--name=` when you ran `docker run`.  It cannot be a hostname, which Docker
-will not recognize in the context of the `--link=` option.
+does not recognize in the context of the `--link=` option.
 
 You can run the `iptables` command on your Docker host to see whether the `FORWARD` chain has a default policy of `ACCEPT` or `DROP`:
 

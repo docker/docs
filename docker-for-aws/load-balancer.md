@@ -105,7 +105,7 @@ Docker for AWS version 17.07.0 and later also support the `HTTPS` listener proto
 
 Use the `HTTPS` protocol if your app relies on checking the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header for resolving the client IP address. Note that the client IP is also available with `SSL` by using the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but many apps and app frameworks don't support this.
 
-The only valid options are `HTTPS` and `SSL`. Specifying any other value will cause `SSL` to be selected. For backwards compatibility the default protocol is `SSL`.
+The only valid options are `HTTPS` and `SSL`. Specifying any other value cause `SSL` to be selected. For backwards compatibility the default protocol is `SSL`.
 
 #### A HTTPS listener on port 443
 
@@ -131,7 +131,7 @@ com.docker.aws.lb.arn="arn:...@HTTPS:443,8080"
 
 #### A SSL (TCP) listener on port 443 and 8080
 
-Since BAD isn't a valid option, it will revert back to a SSL (TCP) port for 443.
+Since BAD isn't a valid option, it reverts back to a SSL (TCP) port for 443.
 
 ```none
 com.docker.aws.lb.arn="arn:...@BAD:443,8080"

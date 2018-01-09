@@ -14,7 +14,7 @@ Macvlan offers a number of unique features and plenty of room for further innova
 
 - The examples on this page are all single host and setup using Docker 1.12.0+
 
-- All of the examples can be performed on a single host running Docker. Any examples using a sub-interface like `eth0.10` can be replaced with `eth0` or any other valid parent interface on the Docker host. Sub-interfaces with a `.` are created on the fly. `-o parent` interfaces can also be left out of the `docker network create` all together and the driver will create a `dummy` interface that will enable local host connectivity to perform the examples.
+- All of the examples can be performed on a single host running Docker. Any examples using a sub-interface like `eth0.10` can be replaced with `eth0` or any other valid parent interface on the Docker host. Sub-interfaces with a `.` are created on the fly. `-o parent` interfaces can also be left out of the `docker network create` all together and the driver creates a `dummy` interface that enables local host connectivity to perform the examples.
 
 - Kernel requirements:
 
@@ -43,7 +43,7 @@ In the following example, `eth0` on the docker host has an IP on the `172.16.86.
 
 > **Note**: For Macvlan bridge mode the subnet values need to match the NIC's interface of the Docker host. For example, Use the same subnet and gateway of the Docker host ethernet interface that is specified by the `-o parent=` option.
 
-- The parent interface used in this example is `eth0` and it is on the subnet `172.16.86.0/24`. The containers in the `docker network` will also need to be on this same subnet as the parent `-o parent=`. The gateway is an external router on the network, not any ip masquerading or any other local proxy.
+- The parent interface used in this example is `eth0` and it is on the subnet `172.16.86.0/24`. The containers in the `docker network` also need to be on this same subnet as the parent `-o parent=`. The gateway is an external router on the network, not any ip masquerading or any other local proxy.
 
 - The driver is specified with `-d driver_name` option. In this case `-d macvlan`
 
@@ -91,9 +91,9 @@ ip route
 # In this case the containers cannot ping the -o parent=172.16.86.250
 ```
 
-You can explicitly specify the `bridge` mode option `-o macvlan_mode=bridge`. It is the default so will be in `bridge` mode either way.
+You can explicitly specify the `bridge` mode option `-o macvlan_mode=bridge`. It is the default so is in `bridge` mode either way.
 
-While the `eth0` interface does not need to have an IP address in Macvlan Bridge it is not uncommon to have an IP address on the interface. Addresses can be excluded from getting an address from the default built in IPAM by using the `--aux-address=x.x.x.x` flag. This will blacklist the specified address from being handed out to containers. The same network example above blocking the `-o parent=eth0` address from being handed out to a container.
+While the `eth0` interface does not need to have an IP address in Macvlan Bridge it is not uncommon to have an IP address on the interface. Addresses can be excluded from getting an address from the default built in IPAM by using the `--aux-address=x.x.x.x` flag. This blacklists the specified address from being handed out to containers. The same network example above blocking the `-o parent=eth0` address from being handed out to a container.
 
 ```
 docker network create -d macvlan \
@@ -103,7 +103,7 @@ docker network create -d macvlan \
     -o parent=eth0 pub_net
 ```
 
-Another option for subpool IP address selection in a network provided by the default Docker IPAM driver is to use `--ip-range=`. This specifies the driver to allocate container addresses from this pool rather then the broader range from the `--subnet=` argument from a network create as seen in the following example that will allocate addresses beginning at `192.168.32.128` and increment upwards from there.
+Another option for subpool IP address selection in a network provided by the default Docker IPAM driver is to use `--ip-range=`. This specifies the driver to allocate container addresses from this pool rather then the broader range from the `--subnet=` argument from a network create as seen in the following example that allocates addresses beginning at `192.168.32.128` and increment upwards from there.
 
 ```
 docker network create -d macvlan  \
@@ -125,19 +125,19 @@ docker network rm <network_name or id>
 > Communication with the Docker host over macvlan
 >
 > - When using macvlan, you cannot ping or communicate with the default namespace IP address.
->   For example, if you create a container and try to ping the Docker host's `eth0`, it will
+>   For example, if you create a container and try to ping the Docker host's `eth0`, it does
 >   **not** work. That traffic is explicitly filtered by the kernel modules themselves to
 >   offer additional provider isolation and security.
 >  
 > - A macvlan subinterface can be added to the Docker host, to allow traffic between the Docker
 >   host and containers. The IP address needs to be set on this subinterface and removed from
 >   the parent address.
-  
+
 ```
-ip link add mac0 link $PARENTDEV type macvlan mode bridge 
+ip link add mac0 link $PARENTDEV type macvlan mode bridge
 ```
 
-On Debian or Ubuntu, adding the following to `/etc/network/interfaces` will make this persistent.
+On Debian or Ubuntu, adding the following to `/etc/network/interfaces` makes this persistent.
 Consult your operating system documentation for more details.
 
 ```none
@@ -150,7 +150,7 @@ iface mac0 inet dhcp
   post-down ip link del mac0 link eno1 type macvlan mode bridge
 ```
 
-For more on Docker networking commands, see 
+For more on Docker networking commands, see
 Working with Docker network commands](/engine/userguide/networking/work-with-networks/).
 
 ## Macvlan 802.1q Trunk Bridge Mode example usage
@@ -165,7 +165,7 @@ Trunking 802.1q to a Linux host is notoriously painful for many in operations. I
 
 Like all of the Docker network drivers, the overarching goal is to alleviate the operational pains of managing network resources. To that end, when a network receives a sub-interface as the parent that does not exist, the drivers create the VLAN tagged interfaces while creating the network.
 
-In the case of a host reboot, instead of needing to modify often complex network configuration files the driver will recreate all network links when the Docker daemon restarts. The driver tracks if it created the VLAN tagged sub-interface originally with the network create and will **only** recreate the sub-interface after a restart or delete `docker network rm` the link if it created it in the first place with `docker network create`.
+In the case of a host reboot, instead of needing to modify often complex network configuration files the driver recreates all network links when the Docker daemon restarts. The driver tracks if it created the VLAN tagged sub-interface originally with the network create and **only** recreates the sub-interface after a restart or delete `docker network rm` the link if it created it in the first place with `docker network create`.
 
 If the user doesn't want Docker to modify the `-o parent` sub-interface, the user simply needs to pass an existing link that already exists as the parent interface. Parent interfaces such as `eth0` are not deleted, only sub-interfaces that are not master links.
 

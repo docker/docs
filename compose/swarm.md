@@ -13,8 +13,8 @@ you were using a single Docker host.
 The actual extent of integration depends on which version of the [Compose file
 format](compose-file.md#versioning) you are using:
 
-1.  If you're using version 1 along with `links`, your app will work, but Swarm
-    will schedule all containers on one host, because links between containers
+1.  If you're using version 1 along with `links`, your app work work, but Swarm
+    schedules all containers on one host, because links between containers
     do not work across hosts with the old networking system.
 
 2. If you're using version 2, your app should work with no changes:
@@ -35,7 +35,7 @@ set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overl
 ### Building images
 
 Swarm can build an image from a Dockerfile just like a single-host Docker
-instance can, but the resulting image will only live on a single node and won't
+instance can, but the resulting image only lives on a single node and won't
 be distributed to other nodes.
 
 If you want to use Compose to scale the service in question to multiple nodes,
@@ -56,7 +56,7 @@ and reference it from `docker-compose.yml`:
 
 If a service has multiple dependencies of the type which force co-scheduling
 (see [Automatic scheduling](swarm.md#automatic-scheduling) below), it's possible that
-Swarm will schedule the dependencies on different nodes, making the dependent
+Swarm schedules the dependencies on different nodes, making the dependent
 service impossible to schedule. For example, here `foo` needs to be co-scheduled
 with `bar` and `baz`:
 
@@ -130,7 +130,7 @@ There are two viable workarounds for this problem:
           web-logs:
             driver: custom-volume-driver
 
--   Remove the old container before creating the new one. You will lose any data
+-   Remove the old container before creating the new one. You lose any data
     in the volume.
 
         $ docker-compose stop web
@@ -141,7 +141,7 @@ There are two viable workarounds for this problem:
 
 ### Automatic scheduling
 
-Some configuration options will result in containers being automatically
+Some configuration options result in containers being automatically
 scheduled on the same Swarm node to ensure that they work correctly. These are:
 
 -   `network_mode: "service:..."` and `network_mode: "container:..."` (and

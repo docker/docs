@@ -43,7 +43,7 @@ illustrate how they are integrated. You'll use Machine to create both the
 key-value store server and the host cluster using a standalone swarm.
 
 >**Note**: These examples are not relevant to Docker running in swarm mode and
-> will not work in such a configuration.
+> do not work in such a configuration.
 
 ### Prerequisites
 
@@ -111,13 +111,13 @@ Keep your terminal open and move on to
 
 In this step, you use `docker-machine` to provision the hosts for your network.
 You won't actually create the network yet. You'll create several
-Docker machines in VirtualBox. One of the machines will act as the swarm manager
+Docker machines in VirtualBox. One of the machines acts as the swarm manager
 and you'll create that first. As you create each host, you'll pass the Docker
 daemon on that machine options that are needed by the `overlay` network driver.
 
 > **Note**: This creates a standalone swarm cluster, rather than using Docker
 > in swarm mode. These examples are not relevant to Docker running in swarm mode
-> and will not work in such a configuration.
+> and do not work in such a configuration.
 
 1.  Create a swarm manager.
 

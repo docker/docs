@@ -55,8 +55,8 @@ lightweight macOS virtualization solution built on top of the
 [Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
 10.10 Yosemite and higher.
 
-Currently, there is no `docker-machine create` driver for HyperKit, so you will
-use `virtualbox` driver to create local machines. (See the [Docker Machine
+Currently, there is no `docker-machine create` driver for HyperKit, so
+use the `virtualbox` driver to create local machines. (See the [Docker Machine
 driver for Oracle VirtualBox](drivers/virtualbox.md).) Note that you can run
 both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
@@ -71,7 +71,7 @@ Docker for Mac and Docker for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
 Toolbox.
 
-* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), you will use the `virtualbox` driver to create a local
+* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), use the `virtualbox` driver to create a local
 machine based on Oracle [VirtualBox](https://www.virtualbox.org/){:
 target="_blank" class="_"}.  (See the [Docker Machine driver for Oracle
 VirtualBox](drivers/virtualbox.md).)
@@ -173,12 +173,12 @@ choose another name for this new machine.
         $ eval "$(docker-machine env default)"
 
       **Note**: If you are using `fish`, or a Windows shell such as
-      Powershell/`cmd.exe` the above method will not work as described.
+      Powershell/`cmd.exe`, the above method does not work as described.
       Instead, see [the `env` command's documentation](/machine/reference/env.md){: target="_blank" class="_"}
       to learn how to set the environment variables for your shell.
 
     This sets environment variables for the current shell that the Docker
-    client will read which specify the TLS settings. You need to do this
+    client reads which specify the TLS settings. You need to do this
     each time you open a new shell or restart your machine. (See also, how to
       [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).)
 
@@ -239,7 +239,7 @@ Run a container with `docker run` to verify your set up.
             </body>
             </html>
 
-  You can create and manage as many local VMs running Docker as you please; just run `docker-machine create` again. All created machines will appear in the output of `docker-machine ls`.
+  You can create and manage as many local VMs running Docker as you please; just run `docker-machine create` again. All created machines appearsin the output of `docker-machine ls`.
 
 ## Start and stop machines
 
@@ -250,7 +250,7 @@ If you are finished using a host for the time being, you can stop it with `docke
 
 ## Operate on machines without specifying the name
 
-Some `docker-machine` commands will assume that the given operation should be run on a machine named `default` (if it exists) if no machine name is specified.  Because using a local VM named `default` is such a common pattern, this allows you to save some typing on the most frequently used Machine commands.
+Some `docker-machine` commands assume that the given operation should be run on a machine named `default` (if it exists) if no machine name is specified.  Because using a local VM named `default` is such a common pattern, this allows you to save some typing on the most frequently used Machine commands.
 
 For example:
 

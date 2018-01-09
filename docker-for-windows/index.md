@@ -140,8 +140,8 @@ and make sure `docker` commands are working properly.
     ```
 
     >**Note**: The outputs above are examples. Your output for commands like
-    > `docker version` and `docker info` will vary depending on your product
-    > versions (e.g., as you install newer versions).
+    > `docker version` and `docker info` varies depending on your product
+    > versions.
 
 3.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
 
@@ -164,7 +164,7 @@ and make sure `docker` commands are working properly.
     PS C:\Users\jdoe> docker run -it ubuntu bash
     ```
 
-    This will download the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
+    This downloads the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
 
     ```none
     PS C:\Users\jdoe> docker run -it ubuntu bash
@@ -187,7 +187,7 @@ and make sure `docker` commands are working properly.
     PS C:\Users\jdoe> docker run -d -p 80:80 --name webserver nginx
     ```
 
-    This will download the `nginx` container image and start it. Here is the
+    This downloads the `nginx` container image and start it. Here is the
     output of running this command in a powershell.
 
     ```none
@@ -226,13 +226,13 @@ and make sure `docker` commands are working properly.
 
 8.  Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port
+    The `nginx` webserver continues to run in the container on that port
     until you stop and/or remove the container. If you want to stop the
     webserver, type: `docker stop webserver` and start it again with `docker
     start webserver`.
 
     To stop and remove the running container with a single command, type:
-    `docker rm -f webserver`. This will remove the container, but not the
+    `docker rm -f webserver`. This removes the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
     want to keep some images around so that you don't have to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
@@ -378,13 +378,13 @@ available to your containers.
 
 ![Shared Drives](images/settings-shared-drives.png)
 
-You will be asked to provide your Windows system username and password (domain
+You are prompted for your Windows system username and password (domain
 user) to apply shared drives. You can select an option to have Docker store the
 credentials so that you don't have to re-enter them every time.
 
 Permissions to access shared drives are tied to the credentials you provide
 here. If you run `docker` commands and tasks under a different username than the
-one used here to set up sharing, your containers will not have permissions to
+one used here to set up sharing, your containers do not have permissions to
 access the mounted volumes.
 
 > Tips on shared drives, permissions, and volume mounts
@@ -464,7 +464,7 @@ Cancel.
 
 * **Memory** - Change the amount of memory the Docker for Windows Linux VM uses.
 
-Please note, updating these settings requires a reconfiguration and reboot of the Linux VM. This will take a few seconds.
+Please note, updating these settings requires a reconfiguration and reboot of the Linux VM. This takes a few seconds.
 
 ### Network
 
@@ -489,11 +489,11 @@ Note that updating these settings requires a reconfiguration and reboot of the L
 ### Proxies
 
 Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker will use this proxy when pulling containers.
+For example, if you set your proxy settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
 ![Proxies](/docker-for-windows/images/proxies.png)
 
-When you start a container, you will see that your proxy settings propagate into the containers. For example:
+When you start a container, your proxy settings propagate into the containers. For example:
 
 ```ps
 PS C:\Users\jdoe> docker run alpine env
@@ -514,7 +514,7 @@ If you have containers that you wish to keep running across restarts, you should
 ### Docker daemon
 
 You can configure options on the Docker daemon that determine how your
-containers will run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
+containers run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
@@ -755,7 +755,7 @@ behavior, and steps to reproduce the issue.
 
 * **Reset to Toolbox default machine content** - Imports containers and images
   from the existing Docker Toolbox machine named `default`. (This option is
-  enabled only if you have Toolbox installed.) The VirtualBox VM will not be
+  enabled only if you have Toolbox installed.) The VirtualBox VM is not
   removed.
 
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is

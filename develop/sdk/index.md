@@ -57,14 +57,14 @@ your Docker daemon and Docker client.
 
 A given version of the Docker Engine SDK supports a specific version of the
 Docker Engine API, as well as all earlier versions. If breaking changes occur,
-they will be documented prominently.
+they are documented prominently.
 
 > Daemon and client API mismatches
 >
 > The Docker daemon and client do not necessarily need to be the same version
 > at all times. However, keep the following in mind.
 >
-> - If the daemon is newer than the client, the client will not know about new
+> - If the daemon is newer than the client, the client does not know about new
 >   features or deprecated API endpoints in the daemon.
 >
 > - If the client is newer than the daemon, the client can request API

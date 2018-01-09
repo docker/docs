@@ -9,7 +9,7 @@ notoc: true
 
 > **Note**: Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the [docker-compose.yml documentation](compose-file.md#links) for details.
 >
-> Environment variables will only be populated if you're using the [legacy version 1 Compose file format](compose-file.md#versioning).
+> Environment variables are only populated if you're using the [legacy version 1 Compose file format](compose-file.md#versioning).
 
 Compose uses [Docker links](/engine/userguide/networking/default_network/dockerlinks.md)
 to expose services' containers to one another. Each linked container injects a set of

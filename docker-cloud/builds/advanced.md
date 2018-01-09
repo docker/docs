@@ -44,7 +44,7 @@ process. (You can also set up [custom build phase hooks](#custom-build-phase-hoo
 
 **Use these hooks with caution.** The contents of these hook files replace the
 basic `docker` commands, so you must include a similar build, test or push
-command in the hook or your automated process will not complete.
+command in the hook or your automated process does not complete.
 
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a file called
@@ -85,7 +85,7 @@ docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME .
 
 > **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build.md) command
 used by the builder, so you must include a similar build command in the hook or
-the automated build will fail.
+the automated build fails.
 
 To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#set-build-time-variables-build-arg).
 

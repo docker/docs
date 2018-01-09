@@ -120,9 +120,9 @@ auto-generated reports on packages.
 
 ### Make sure certificates are set up correctly
 
-Docker for Mac will ignore certificates listed under insecure registries, and
-will not send client certificates to them. Commands like `docker run` that
-attempt to pull from the registry will produce error messages on the command
+Docker for Mac ignores certificates listed under insecure registries, and
+does not send client certificates to them. Commands like `docker run` that
+attempt to pull from the registry produces error messages on the command
 line, like this:
 
 ```bash
@@ -140,11 +140,11 @@ For more about using client and server side certificates, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app
+### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
 
 If, after installing Docker for Mac, you [change the name of your macOS user
 account and home folder](https://support.apple.com/en-us/HT201548), Docker for
-Mac will fail to start. To solve this problem, uninstall then reinstall Docker for Mac under the new user account.
+Mac fails to start. To solve this problem, uninstall and reinstall Docker for Mac under the new user account.
 
 See also, the discussion on the issue [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I need to reinstall Docker for Mac if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account) in the FAQs.
 
@@ -237,9 +237,9 @@ sysctl kern.hv_support
 ```
 
 If your Mac supports the Hypervisor Framework,
-the command will print `kern.hv_support: 1`.
+the command prints `kern.hv_support: 1`.
 
-If not, the command will print `kern.hv_support: 0`.
+If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
@@ -279,7 +279,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version
-  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you will get an
+  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you get an
   "application in use" error when you try to copy the new app
   from the `.dmg` to `/Applications`.
 
@@ -293,13 +293,13 @@ know before you install](install.md#what-to-know-before-you-install).
 
   * Make sure you are not using the legacy Docker Machine environment in your shell or command window. You do not need `DOCKER_HOST` set, so unset it as it
 may be pointing at another Docker (e.g. VirtualBox). If you use bash, `unset
-${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
+${!DOCKER_*}` unsets existing `DOCKER` environment variables you have set.
 
   * For other shells, unset each environment variable individually as described in [Setting up to run Docker for Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 <p></p>
 
-* Note that network connections will fail if the macOS Firewall is set to
+* Network connections fail if the macOS Firewall is set to
 "Block all incoming connections". You can enable the firewall, but `bootpd` must be allowed incoming connections so that the VM can get an IP address.
 
 <p></p>
@@ -324,7 +324,7 @@ your docker app.
 
 ## Known issues
 
-* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you will see a network
+* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you see a network
 timeout when you run `docker` commands that need access to external network
 servers. The aforementioned releases include a workaround for this because
 Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DNS addresses" in
@@ -352,7 +352,7 @@ Hardware Accelerated Execution Manager
 (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
 the current workaround is not to run them at the same time. You can pause
 `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This
-will allow you to continue work with the other tools and prevent `HyperKit` from
+allows you to continue work with the other tools and prevent `HyperKit` from
 interfering.
 
 <p></p>

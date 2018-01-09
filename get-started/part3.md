@@ -12,7 +12,7 @@ description: Learn how to define load-balanced and scalable service that runs co
 - Get [Docker Compose](/compose/overview.md). On [Docker for
 Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) it's pre-installed, so you're good-to-go.
-On Linux systems you will need to [install it
+On Linux systems you need to [install it
 directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
 _without Hyper-V_, use [Docker
 Toolbox](https://docs.docker.com/toolbox/overview.md).
@@ -104,7 +104,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 - Map port 80 on the host to `web`'s port 80.
 
 - Instruct `web`'s containers to share port 80 via a load-balanced network
-  called `webnet`. (Internally, the containers themselves will publish to
+  called `webnet`. (Internally, the containers themselves publish to
   `web`'s port 80 at an ephemeral port.)
 
 - Define the `webnet` network with the default settings (which is a
@@ -139,12 +139,12 @@ docker service ls
 ```
 
 You'll see output for the `web` service, prepended with your app name. If you
-named it the same as shown in this example, the name will be
+named it the same as shown in this example, the name is
 `getstartedlab_web`. The service ID is listed as well, along with the number of
 replicas, image name, and exposed ports.
 
 A single container running in a service is called a **task**. Tasks are given unique
-IDs that numerically increment, up to the number of `replicas` you defined in 
+IDs that numerically increment, up to the number of `replicas` you defined in
 `docker-compose.yml`. List the tasks for your service:
 
 ```shell
@@ -152,7 +152,7 @@ docker service ps getstartedlab_web
 ```
 
 Tasks also show up if you just list all the containers on your system, though that
-will not be filtered by service:
+is not filtered by service:
 
 ```shell
 docker container ls -q
@@ -165,7 +165,7 @@ your browser and hit refresh a few times.
 
 Either way, you'll see the container ID change, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
-round-robin fashion, to respond. The container IDs will match your output from
+round-robin fashion, to respond. The container IDs matches your output from
 the previous command (`docker container ls -q`).
 
 > Running Windows 10?
@@ -173,16 +173,16 @@ the previous command (`docker container ls -q`).
 > Windows 10 PowerShell should already have `curl` available, but if not you can
 > grab a Linux terminal emulator like
 > [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
-> or download 
+> or download
 > [wget for Windows](http://gnuwin32.sourceforge.net/packages/wget.htm)
 > which is very similar.
 
 > Slow response times?
 >
-> Depending on your environment's networking configuration, it may take up to 30 
+> Depending on your environment's networking configuration, it may take up to 30
 > seconds for the containers
 > to respond to HTTP requests. This is not indicative of Docker or
-> swarm performance, but rather an unmet Redis dependency that we will
+> swarm performance, but rather an unmet Redis dependency that we
 > address later in the tutorial. For now, the visitor counter isn't working
 > for the same reason; we haven't yet added a service to persist data.
 
@@ -196,7 +196,7 @@ saving the change, and re-running the `docker stack deploy` command:
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
-Docker will do an in-place update, no need to tear the stack down first or kill
+Docker performs an in-place update, no need to tear the stack down first or kill
 any containers.
 
 Now, re-run `docker container ls -q` to see the deployed instances reconfigured.
@@ -219,7 +219,7 @@ started.
 
 It's as easy as that to stand up and scale your app with Docker. You've taken a
 huge step towards learning how to run containers in production. Up next, you
-will learn how to run this app as a bonafide swarm on a cluster of Docker
+learn how to run this app as a bonafide swarm on a cluster of Docker
 machines.
 
 > **Note**: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using [Docker

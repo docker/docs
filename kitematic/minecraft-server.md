@@ -54,7 +54,7 @@ Docker container onto your computer.
 
 ![Minecraft data volume](images/minecraft-data-volume.png)
 
-The Finder will open, allowing you to replace your current map with the new one
+The Finder opens, allowing you to replace your current map with the new one
 you desire.
 
 ![Minecraft maps](images/minecraft-map.png)

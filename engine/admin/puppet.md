@@ -51,7 +51,7 @@ This is equivalent to running:
 
     $ docker pull ubuntu
 
-Note that it will only be downloaded if an image of that name does not
+It is only downloaded if an image of that name does not
 already exist. This is downloading a large binary so on first run can
 take a while. For that reason this define turns off the default 5 minute
 timeout for the exec type. Note that you can also remove images you no

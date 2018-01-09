@@ -4,7 +4,7 @@ keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure
 ---
 
-You will need an Azure Subscription to use this Docker Machine driver.
+You need an Azure Subscription to use this Docker Machine driver.
 [Sign up for a free trial.][trial]
 
 > **NOTE:** This documentation is for the new version of the Azure driver, which started
@@ -17,7 +17,7 @@ You will need an Azure Subscription to use this Docker Machine driver.
 
 ## Authentication
 
-The first time you try to create a machine, Azure driver will ask you to
+The first time you try to create a machine, Azure driver asks you to
 authenticate:
 
     $ docker-machine create --driver azure --azure-subscription-id <subs-id> <machine-name>
@@ -25,7 +25,7 @@ authenticate:
     Microsoft Azure: To sign in, use a web browser to open the page https://aka.ms/devicelogin.
     Enter the code [...] to authenticate.
 
-After authenticating, the driver will remember your credentials up to two weeks.
+After authenticating, the driver remembers your credentials up to two weeks.
 
 > **KNOWN ISSUE:** There is a known issue with Azure Active Directory causing stored
 > credentials to expire within hours rather than 14 days when the user logs in with

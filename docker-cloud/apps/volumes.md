@@ -21,7 +21,7 @@ creating a service.
 
 To define a data volume in a service, specify the **container path** where it
 should be created in the **Volumes** step of the **Create new service** wizard.
-Each container of the service will have its own volume. Data volumes are reused
+Each container of the service has its own volume. Data volumes are reused
 when the service is redeployed (data persists in this case), and deleted if the
 service is terminated.
 
@@ -43,7 +43,7 @@ You can reuse data volumes from another service. To do this when creating a serv
 
 All reused data volumes are mounted on the same paths as in the source service.
 Containers must be on the same host in order to share volumes, so the containers
-of the new service will deploy to the same nodes where the source service
+of the new service deploy to the same nodes where the source service
 containers are deployed.
 
 > **Note**: A service with data volumes cannot be terminated until all services that are using its volumes have also been terminated.
@@ -62,7 +62,7 @@ You might find it helpful to download or back up the data from volumes that are 
 
 2. Run a `scp` (secure-copy) to download the files to your local machine.
 
-   In the example snippet below, replace `downloader-1.uuid.cont.dockerapp.io` with the container's Fully Qualified Domain Name (FQDN), and replace `/var/lib/mysql` with the path within the container from which you want to download the data. The data will be downloaded to the current local folder.
+   In the example snippet below, replace `downloader-1.uuid.cont.dockerapp.io` with the container's Fully Qualified Domain Name (FQDN), and replace `/var/lib/mysql` with the path within the container from which you want to download the data. The data is downloaded to the current local folder.
 
    ```
    $ scp -r -P 2222 root@downloader-1.uuid.cont.dockerapp.io:/var/lib/mysql .

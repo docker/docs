@@ -202,7 +202,7 @@ migrate your existing containers after upgrading Compose. This is because, as of
 version 1.3, Compose uses Docker labels to keep track of containers, and so they
 need to be recreated with labels added.
 
-If Compose detects containers that were created without labels, it will refuse
+If Compose detects containers that were created without labels, it refuses
 to run so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
@@ -213,7 +213,7 @@ docker-compose migrate-to-labels
 ```
 
 Alternatively, if you're not worried about keeping them, you can remove them.
-Compose will just create new ones.
+Compose just creates new ones.
 
 ```bash
 docker rm -f -v myapp_web_1 myapp_db_1 ...

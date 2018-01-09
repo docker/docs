@@ -86,15 +86,15 @@ Status: Downloaded newer image for swarm
 ```
 
 The output of the `swarm create` command is a cluster token. Copy the token to a
-safe place you will remember. Once you have the token, you can provision the
-Swarm nodes and join them to the cluster_id. The rest of this documentation,
+safe place. Once you have the token, you can provision the
+swarm nodes and join them to the cluster_id. The rest of this documentation,
 refers to this token as the `SWARM_CLUSTER_TOKEN`.
 
-## Provision Swarm nodes
+## Provision swarm nodes
 
-All Swarm nodes in a cluster must have Engine installed. With Machine and the
+All swarm nodes in a cluster must have Engine installed. With Machine and the
 `SWARM_CLUSTER_TOKEN` you can provision a host with Engine and configure it as a
-Swarm node with one Machine command. To create a Swarm manager node on a new VM
+swarm node with one Machine command. To create a swarm manager node on a new VM
 called `swarm-manager`, you do the following:
 
 ```
@@ -136,7 +136,7 @@ eval "$(docker-machine env local)"
 ```
 
 Docker Machine provides a special `--swarm` flag with its `env` command to
-connect to Swarm nodes.
+connect to swarm nodes.
 
 ```bash
 docker-machine env --swarm HOST_NODE_NAME
@@ -148,7 +148,7 @@ export DOCKER_MACHINE_NAME="swarm-manager"
 # eval $(docker-machine env --swarm HOST_NODE_NAME)
 ```
 
-To set your SHELL connect to a Swarm node called `swarm-manager`, you would do
+To set your SHELL connect to a swarm node called `swarm-manager`, you would do
 this:
 
 ```

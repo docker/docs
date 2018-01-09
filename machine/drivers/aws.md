@@ -112,7 +112,7 @@ You can use environment variables:
 
 ## Default AMIs
 
-By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
+By default, the Amazon EC2 driver uses a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
 | -------------- | ------------ |
@@ -131,13 +131,13 @@ By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 
 ## Security Group
 
-Note that a security group will be created and associated to the host. This security group will have the following ports opened inbound:
+Note that a security group is created and associated to the host. This security group has the following ports opened inbound:
 
 -   ssh (22/tcp)
 -   docker (2376/tcp)
 -   swarm (3376/tcp), only if the node is a swarm master
 
-If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports will be checked and opened and the security group modified.
+If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports are checked and opened and the security group modified.
 If you want more ports to be opened, like application specific ports, use the AWS console and modify the configuration manually.
 
 ## VPC ID
@@ -163,7 +163,7 @@ This example assumes the VPC ID was found in the `a` availability zone. Use the`
 ## VPC Connectivity
 Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.
 
-If you use the flag `--amazonec2-private-address-only`, you will need to ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
+If you use the flag `--amazonec2-private-address-only`, ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
 
 Configuration of VPCs is beyond the scope of this guide, however the first step in troubleshooting is ensuring if you are using private subnets that you follow the design guidance in the [AWS VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html) and have some form of NAT available so that the set up process can access the internet to complete set up.
 
