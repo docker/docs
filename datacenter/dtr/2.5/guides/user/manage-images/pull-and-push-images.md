@@ -2,7 +2,15 @@
 title: Pull and push images
 description: Learn how to pull and push images to Docker Trusted Registry.
 keywords: registry, push, pull
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
+next_steps:
+- path: delete-images/
+  title: Delete images
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 {% assign domain="dtr.example.org" %}
 {% assign org="library" %}
@@ -34,8 +42,8 @@ Click on the repository to see its details.
 To pull the {{ tag }} tag of the {{ org }}/{{ repo }} image, run:
 
 ```bash
-$ docker login {{ domain }}
-$ docker pull {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
+docker login {{ domain }}
+docker pull {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 ```
 
 ## Push an image
@@ -52,10 +60,10 @@ from, and where it will be pushed to.
 
 ```bash
 # Pull from Docker Hub the {{ tag }} tag of the {{ repo }} image
-$ docker pull {{ repo }}:{{ tag }}
+docker pull {{ repo }}:{{ tag }}
 
 # Tag the {{ repo }}:{{ tag }} image with the full repository name we've created in DTR
-$ docker tag {{ repo }}:{{ tag }} {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
+docker tag {{ repo }}:{{ tag }} {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 ```
 
 ### Push the image
@@ -64,8 +72,8 @@ Now that you have tagged the image, you only need to authenticate and push the
 image to DTR.
 
 ```bash
-$ docker login {{ domain }}
-$ docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
+docker login {{ domain }}
+docker push {{ domain }}/{{ org }}/{{ repo }}:{{ tag }}
 ```
 
 Go back to the **DTR web UI** to validate that the tag was successfully pushed.
@@ -92,10 +100,8 @@ push the Windows base layers to DTR.
 To configure Docker to always push Windows layers to DTR, add the following
 to your `C:\ProgramData\docker\config\daemon.json` configuration file:
 
-```
+```json
 "allow-nondistributable-artifacts": ["<dtr-domain>:<dtr-port>"]
 ```
 
-## Where to go next
-
-* [Delete images](delete-images.md)
+{% endif %}

@@ -2,7 +2,12 @@
 title: Sign an image
 description: Learn how to sign the images you push to Docker Trusted Registry.
 keywords: registry, sign, trust
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 By default, when you push an image to DTR, the Docker CLI client doesn't
 sign the image.
@@ -15,7 +20,7 @@ you created, or a forged one.
 
 To sign an image, you can run:
 
-```none
+```bash
 export DOCKER_CONTENT_TRUST=1
 docker push <dtr-domain>/<repository>/<image>:<tag>
 ```
@@ -96,7 +101,7 @@ UCP requires that you delegate trust to two different roles:
 
 In this example we'll delegate trust to `targets/releases` and `targets/admin`:
 
-```none
+```bash
 # Delegate trust, and add that public key with the role targets/releases
 notary delegation add --publish \
   dtr.example.org/dev/nginx targets/releases \
@@ -168,3 +173,5 @@ signed. For each repository there are four files.
 | `timestamp.json` | Has data about the digest, size, and version number for the snapshot.json file. This data is signed by the timestamp key. |
 
 [Learn more about trust metadata](/notary/service_architecture.md).
+
+{% endif %}

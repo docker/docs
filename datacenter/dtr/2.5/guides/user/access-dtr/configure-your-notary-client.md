@@ -2,7 +2,12 @@
 title: Configure your Notary client
 description: Learn how to configure your Notary client to push and pull images from Docker Trusted Registry.
 keywords: registry, notary, trust
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 The Docker CLI client makes it easy to sign images but to streamline that
 process it generates a set of private and public keys that are not tied
@@ -131,3 +136,5 @@ notary key list
 ```
 
 The key you've imported should be listed with the role `delegation`.
+
+{% endif %}
