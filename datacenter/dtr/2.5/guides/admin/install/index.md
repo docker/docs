@@ -2,7 +2,18 @@
 title: Install Docker Trusted Registry
 description: Learn how to install Docker Trusted Registry for production.
 keywords: dtr, registry, install
+ui_tabs:
+- version: dtr-2.5
+  orhigher: false
+- version: dtr-2.4
+  orlower: true
+next_steps:
+- path: install-offline/
+  title: Install DTR offline
+- path: ../upgrade/
+  title: Upgrade DTR
 ---
+{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 swarm managed by Docker Universal Control Plane (UCP). It can be installed
@@ -37,7 +48,7 @@ choose **Docker Trusted Registry**.
 After you configure all the options, you'll have a snippet that you can use
 to deploy DTR. It should look like this:
 
-```none
+```bash
 # Pull the latest version of DTR
 $ docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 
@@ -115,7 +126,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
     Then run:
 
-    ```none
+    ```bash
     docker run -it --rm \
       {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
       --ucp-node <ucp-node-name> \
@@ -130,7 +141,8 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
     ![](../../images/install-dtr-6.png){: .with-border}
 
-## See also
+{% elsif include.version=="dtr-2.4" %}
 
-* [Install DTR offline](install-offline.md)
-* [Upgrade DTR](../upgrade.md)
+Learn about [installing Docker Trusted Registry](/datacenter/dtr/2.4/guides/admin/install/index.md).
+
+{% endif %}

@@ -2,7 +2,16 @@
 title: Docker Trusted Registry system requirements
 description: Learn about the system requirements for installing Docker Trusted Registry.
 keywords: DTR, architecture, requirements
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: ../../architecture/
+  title: DTR architecture
+- path: ../install/
+  title: Install DTR
 ---
+{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
@@ -36,7 +45,4 @@ Docker Enterprise Edition is a software subscription that includes three product
 
 [Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
 
-## Where to go next
-
-* [DTR architecture](../../architecture.md)
-* [Install DTR](index.md)
+{% endif %}

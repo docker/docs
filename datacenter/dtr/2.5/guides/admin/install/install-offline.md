@@ -3,7 +3,18 @@ title: Install Docker Trusted Registry offline
 description: Learn how to install Docker Trusted Registry on a machine with no internet
   access.
 keywords: registry, install, offline
+ui_tabs:
+- version: dtr-2.5
+  orhigher: false
+- version: dtr-2.4
+  orlower: true
+next_steps:
+- path: ../../architecture/
+  title: DTR architecture
+- path: ../install/
+  title: Install DTR
 ---
+{% if include.version=="dtr-2.5" %}
 
 The procedure to install Docker Trusted Registry on a host is the same,
 whether that host has access to the internet or not.
@@ -64,7 +75,8 @@ DTR makes outgoing connections to:
 All of these uses of online connections are optional. You can choose to
 disable or not use any or all of these features on the admin settings page.
 
-## Where to go next
+{% elsif include.version=="dtr-2.4" %}
 
-* [DTR architecture](../../architecture.md)
-* [Install DTR](index.md)
+Learn about [installing Docker Trusted Registry offline](/datacenter/dtr/2.4/guides/admin/install/install-offline.md).
+
+{% endif %}
