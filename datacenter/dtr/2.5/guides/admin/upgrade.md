@@ -2,9 +2,18 @@
 title: Upgrade DTR
 description: Learn how to upgrade your Docker Trusted Registry
 keywords: dtr, upgrade, install
+ui_tabs:
+- version: dtr-2.5
+  orhigher: false
+- version: dtr-2.4
+  orlower: true
+next_steps:
+- path: ../release-notes/
+  title: Release notes
 ---
+{% if include.version=="dtr-2.5" %}
 
-{% assign previous_version="2.3" %}
+{% assign previous_version="2.4" %}
 
 DTR uses [semantic versioning](http://semver.org/) and we aim to achieve specific
 guarantees while upgrading between versions. We never support downgrading. We
@@ -54,8 +63,8 @@ Make sure you're running DTR {{ previous_version }}. If that's not the case,
 
 Then pull the latest version of DTR:
 
-```none
-$ docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
+```bash
+docker pull {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }}
 ```
 
 If the node you're upgrading doesn't have access to the internet, you can
@@ -65,8 +74,8 @@ to get the images.
 Once you have the latest image on your machine (and the images on the target
 nodes if upgrading offline), run the upgrade command:
 
-```none
-$ docker run -it --rm \
+```bash
+docker run -it --rm \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} upgrade \
   --ucp-insecure-tls
 ```
@@ -85,6 +94,8 @@ command and it will resume from where it left off.
 A patch upgrade changes only the DTR containers and it's always safer than a minor
 upgrade. The command is the same as for a minor upgrade.
 
-## Where to go next
+{% elsif include.version=="dtr-2.4" %}
 
-* [Release notes](../release-notes.md)
+Learn about [upgrading Docker Trusted Registry](/datacenter/dtr/2.4/guides/admin/upgrade.md).
+
+{% endif %}
