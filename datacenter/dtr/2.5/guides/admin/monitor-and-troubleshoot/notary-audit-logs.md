@@ -3,7 +3,12 @@ title: Check Notary audit logs
 description: When you push signed images, Docker Trusted Registry keeps audit
   logs for the changes made to the image metadata. Learn how to view these logs.
 keywords: registry, monitor, troubleshoot
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 Docker Content Trust (DCT) keeps audit logs of changes made to trusted repositories.
 Every time you push a signed image to a repository, or delete trust data for a
@@ -264,3 +269,5 @@ curl --insecure --silent \
 --header "Authorization: Bearer $TOKEN" \
 "https://<dtr-url>/v2/<dtr-url>/<dtr-repo>/_trust/changefeed?records=10&change_id=0" | jq .
 ```
+
+{% endif %}
