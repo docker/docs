@@ -3,7 +3,17 @@ title: Create and manage organizations
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
 keywords: registry, security, permissions, organizations
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: create-and-manage-users/
+  title: Create and manage users
+- path: create-and-manage-teams/
+  title: Create and manage teams
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 When a user creates a repository, only that user has permissions to make changes
 to the repository.
@@ -26,7 +36,7 @@ Repositories owned by this organization will contain the organization name, so
 to pull an image from that repository, you'll use:
 
 ```bash
-$ docker pull <dtr-domain-name>/<organization>/<repository>:<tag>
+docker pull <dtr-domain-name>/<organization>/<repository>:<tag>
 ```
 
 Click **Save** to create the organization, and then **click the organization**
@@ -41,7 +51,4 @@ grant permissions to manage the organization, and click
 
 ![](../../images/create-and-manage-orgs-3.png){: .with-border}
 
-## Where to go next
-
-* [Create and manage users](create-and-manage-users.md)
-* [Create and manage teams](create-and-manage-teams.md)
+{% endif %}

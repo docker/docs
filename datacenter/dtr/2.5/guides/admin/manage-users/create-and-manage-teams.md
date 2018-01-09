@@ -3,7 +3,17 @@ title: Create and manage teams in DTR
 description: Learn how to manage teams to enforce fine-grain access control in Docker
   Trusted Registry.
 keywords: registry, security, permissions, teams
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: create-and-manage-users/
+  title: Create and manage users
+- path: permission-levels/
+  title: Permission levels
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 You can extend a user's default permissions by granting them individual
 permissions in other image repositories, by adding the user to a team. A team
@@ -49,7 +59,4 @@ There are three permission levels available:
 | Read & Write     | View repository, pull and push images.                           |
 | Admin            | Manage repository and change its settings, pull and push images. |
 
-## Where to go next
-
-* [Create and manage users](create-and-manage-users.md)
-* [Permission levels](permission-levels.md)
+{% endif %}

@@ -2,7 +2,15 @@
 title: Authentication and authorization in DTR
 description: Learn about the permission levels available on Docker Trusted Registry.
 keywords: registry, security, permissions, users
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: create-and-manage-users/
+  title: Create and manage users
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 With DTR you get to control which users have access to your image repositories.
 
@@ -51,6 +59,4 @@ repository,
 * Members of the billing team can manage the whale/golang repository, and push
 and pull images from the whale/java repository.
 
-## Where to go next
-
-* [Create and manage users](create-and-manage-users.md)
+{% endif %}
