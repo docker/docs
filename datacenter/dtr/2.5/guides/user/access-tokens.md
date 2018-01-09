@@ -5,10 +5,9 @@ description: Learn how to create and manage your personal DTR access tokens to s
 keywords: dtr, security, access tokens
 ui_tabs:
   - version: dtr-2.5
-    orhigher: true
+    orlower: true
 ---
 
-{% if include.ui %}
 {% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry allows you to issue access tokens so that you can
@@ -34,20 +33,19 @@ purpose for the token. Administrators can also create tokens for other users.
 Once the token is created you won’t be able to see it again, but you can
 rename it if needed.
 
-{% endif %}
-{% endif %}
-
 ## Use the access token
 
 You can use an access token in any place that requires your DTR password.
 As an example you can use access tokens to login in from your Docker CLI client:
 
-```
+```bash
 docker login dtr.example.org --username <username> --password <token>
 ```
 
 To use the DTR API to list the repositories your user has access to:
 
-```
+```bash
 curl --silent --insecure --user <username>:<token> dtr.example.org/api/v0/repositories
 ```
+
+{% endif %}

@@ -2,7 +2,15 @@
 title: Manage webhooks
 description: Learn how to create, configure, and test webhooks in Docker Trusted Registry.
 keywords: registry, webhooks
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
+next_steps:
+- path: create-promotion-policies/
+  title: Create promotion policies
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 DTR has webhooks so that you can run custom logic when an event happens. This
 lets you build complex CI and CD pipelines with your Docker images.
@@ -19,7 +27,7 @@ information about the event. Once everything is set up, click **Test** for
 DTR to send a JSON payload to the URL you set up, so that you can validate
 that the integration is working. You'll get an event that looks like this:
 
-```
+```json
 {
   "contents": {
     "architecture": "amd64",
@@ -43,6 +51,4 @@ the event is triggered.
 
 ![](../images/manage-webhooks-2.png){: .with-border}
 
-## Where to go next
-
-* [Create deployment policies](create-deployment-policies.md)
+{% endif %}

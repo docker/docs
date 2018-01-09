@@ -2,7 +2,12 @@
 title: Scan images for vulnerabilities
 description: Learn how to scan your Docker images for vulnerabilities.
 keywords: registry, scan, vulnerability
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 [![Image Security Scanning](../../images/scanning_video.png)](https://www.youtube.com/watch?v=121poCB0Nn8 "Images Security Scanning"){: target="_blank" ._}
 
@@ -154,3 +159,5 @@ components that provide the same functionality. When you have updated the source
 code, run a build to create a new image, tag the image, and push the updated
 image to your DTR instance. You can then re-scan the image to confirm that you
 have addressed the vulnerabilities.
+
+{% endif %}

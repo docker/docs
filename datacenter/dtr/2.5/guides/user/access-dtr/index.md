@@ -2,7 +2,15 @@
 title: Configure your Docker Engine
 description: Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.
 keywords: registry, TLS, certificates
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
+next_steps:
+- path: use-a-cache/
+  title: Use a cache
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
@@ -11,8 +19,8 @@ If DTR is using the default configurations or was configured to use self-signed
 certificates, you need to configure your Docker Engine to trust DTR. Otherwise,
 when you try to log in, push to, or pull images from DTR, you'll get an error:
 
-```none
-$ docker login dtr.example.org
+```bash
+docker login dtr.example.org
 
 x509: certificate signed by unknown authority
 ```
@@ -52,22 +60,22 @@ After adding the CA certificate to Windows, restart Docker for Windows.
 
 ```bash
 # Download the DTR CA certificate
-$ sudo curl -k https://<dtr-domain-name>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
+sudo curl -k https://<dtr-domain-name>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
 # Refresh the list of certificates to trust
-$ sudo update-ca-certificates
+sudo update-ca-certificates
 # Restart the Docker daemon
-$ sudo service docker restart
+sudo service docker restart
 ```
 
 ### RHEL/ CentOS
 
 ```bash
 # Download the DTR CA certificate
-$ sudo curl -k https://<dtr-domain-name>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
+sudo curl -k https://<dtr-domain-name>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
 # Refresh the list of certificates to trust
-$ sudo update-ca-trust
+sudo update-ca-trust
 # Restart the Docker daemon
-$ sudo /bin/systemctl restart docker.service
+sudo /bin/systemctl restart docker.service
 ```
 
 ### Boot2Docker
@@ -116,6 +124,4 @@ DTR.
 docker login dtr.example.org
 ```
 
-## Where to go next
-
-* [Use a cache](use-a-cache.md)
+{% endif %}

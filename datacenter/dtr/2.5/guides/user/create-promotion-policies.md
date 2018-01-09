@@ -4,7 +4,12 @@ description: Learn how to create a promotion policies that can automatically
   promote an image to production if it passes all tests and doesn't have
   vulnerabilities.
 keywords: registry, promotion, pipeline
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 Once you've made changes to your application and want to make them available
 to your users, you typically push an image to DTR, or have a CI/CD pipeline
@@ -97,3 +102,5 @@ A repository admin can define the promotion policies, and only
 allow access to push to the first repository in that pipeline. Once users push
 to the fist repository, the image gets promoted to the other repositories as
 long as it satisfies the promotion policies.
+
+{% endif %}

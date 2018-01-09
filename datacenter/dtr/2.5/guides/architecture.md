@@ -4,7 +4,7 @@ description: Learn about the architecture of Docker Trusted Registry.
 keywords: registry, dtr, architecture
 ui_tabs:
 - version: dtr-2.5
-  orhigher: false
+  orlower: true
 next_steps:
 - path: admin/install/system-requirements/
   title: System requirements

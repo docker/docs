@@ -2,7 +2,15 @@
 title: Create a repository
 description: Learn how to create new repositories in Docker Trusted Registry.
 keywords: registry, repository
+ui_tabs:
+  - version: dtr-2.5
+    orlower: true
+next_steps:
+- path: pull-and-push-images/
+  title: Pull and push images
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 Since DTR is secure by default, you need to create the image repository before
 being able to push the image to DTR.
@@ -32,6 +40,4 @@ When creating a repository in DTR, the full name of the repository becomes
 `<dtr-domain-name>/<user-or-org>/<repository-name>`. In this example, the full
 name of our repository will be `dtr.example.org/dave.lauper/golang`.
 
-## Where to go next
-
-* [Pull and push images](pull-and-push-images.md)
+{% endif %}
