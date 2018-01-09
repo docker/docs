@@ -2,7 +2,11 @@
 title: Create a backup
 description: Learn how to create a backup of Docker Trusted Registry, for disaster recovery.
 keywords: dtr, disaster recovery
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+{% if include.version=="dtr-2.5" %}
 
 {% assign metadata_backup_file = "dtr-metadata-backup.tar" %}
 {% assign image_backup_file = "dtr-image-backup.tar" %}
@@ -20,7 +24,7 @@ Docker Trusted Registry maintains data about:
 | Notary data                        | Notary tags and signatures                                                                                                                        |
 | Scan results                       | Security scanning results for images                                                                                                              |
 | Certificates and keys              | The certificates, public keys, and private keys that are used for mutual TLS communication                                                        |
-| Images content                     | The images you push to DTR. This can be stored on the filesystem of the node running DTR, or other storage system, depending on the configuration |
+| Images content                     | The images you push to DTR. This can be stored on the file system of the node running DTR, or other storage system, depending on the configuration |
 
 This data is persisted on the host running DTR, using named volumes.
 [Learn more about DTR named volumes](../architecture.md).
@@ -56,7 +60,7 @@ restore.
 Since you can configure the storage backend that DTR uses to store images,
 the way you backup images depends on the storage backend you're using.
 
-If you've configured DTR to store images on the local filesystem or NFS mount,
+If you've configured DTR to store images on the local file system or NFS mount,
 you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
@@ -149,3 +153,5 @@ gpg -d {{ metadata_backup_file }} | tar -t
 You can also create a backup of a UCP cluster and restore it into a new
 cluster. Then restore DTR on that new cluster to confirm that everything is
 working as expected.
+
+{% endif %}
