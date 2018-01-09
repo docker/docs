@@ -19,6 +19,26 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-win46 2018-01-09 (Stable)
+
+* Upgrades
+  - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
+  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
+  - Linux Kernel 4.9.60
+
+* New
+  - VM entirely built with Linuxkit
+  - Add localhost port forwarder for Windows (thanks @simonferquel). Use Microsoft localhost port forwarder when it is available (insider build RS4).
+
+* Bug fixes and minor changes
+  - Display various component versions in About box.
+  - Fix Vpnkit issue when username has spaces. See [docker/for-win#1429](https://github.com/docker/for-win/issues/1429)
+  - Diagnostic improvements to get VM logs before VM shutdown.
+  - Fix installer check for not supported Windows `CoreCountrySpecific` Edition.
+  - Fix a class of startup failures where the database fails to start. See [docker/for-win#498](https://github.com/docker/for-win/issues/498)
+  - Links in Update changelog now open the default browser instead of IE. (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
+
 ### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
 
 * Upgrades
