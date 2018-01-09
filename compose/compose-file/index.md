@@ -632,7 +632,7 @@ in the [swarm](/engine/swarm/) topics.)
 
 #### placement
 
-Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
+Specify placement of constraints and preferences. See the `docker service create` documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
 
     version: '3'
     services:
@@ -1161,7 +1161,7 @@ Logging configuration for the service.
         syslog-address: "tcp://192.168.0.42:123"
 
 The `driver`  name specifies a logging driver for the service's
-containers, as with the ``--log-driver`` option for docker run
+containers, as with the ``--log-driver`` option for `docker container create`
 ([documented here](/engine/admin/logging/overview.md)).
 
 The default value is json-file.
@@ -1174,7 +1174,7 @@ The default value is json-file.
 available directly from `docker-compose up` and `docker-compose logs`.
 Using any other driver will not print any logs.
 
-Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
+Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker container create`.
 
 Logging options are key-value pairs. An example of `syslog` options:
 
@@ -1754,7 +1754,7 @@ services:
 ```
 
 Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker for Mac topic [Performance tuning for
+`docker container create` counterparts is in the Docker for Mac topic [Performance tuning for
 volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 
 ### restart
@@ -1772,7 +1772,7 @@ on-failure error.
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker container create](/engine/reference/commandline/container_create.md) counterpart.
 
     user: postgresql
     working_dir: /code
@@ -2005,7 +2005,7 @@ Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-
 #### host or none
 
 Use the host's networking stack, or no networking. Equivalent to
-`docker run --net=host` or `docker run --net=none`. Only used if you use
+`docker container create --net=host` or `docker container create --net=none`. Only used if you use
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
