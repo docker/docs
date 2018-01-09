@@ -2,7 +2,17 @@
 title: Repair a cluster
 description: Learn how to repair DTR when the majority of replicas are unhealthy.
 keywords: dtr, disaster recovery
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
+next_steps:
+- path: create-a-backup/
+  title: Create a backup
+- path: restore-from-backup/
+  title: Restore from an existing backup
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 For a DTR cluster to be healthy, a majority of its replicas (n/2 + 1) need to
 be healthy and be able to communicate with the other replicas. This is known
@@ -46,7 +56,7 @@ Start by finding the ID of the DTR replica that you want to repair from.
 You can find the list of replicas by navigating to the UCP web UI, or by using
 a UCP client bundle to run:
 
-```
+```bash
 {% raw %}
 docker ps --format "{{.Names}}" | grep dtr
 
@@ -57,7 +67,7 @@ docker ps --format "{{.Names}}" | grep dtr
 
 Then, use your UCP client bundle to run the emergency repair command:
 
-```
+```bash
 {% raw %}
 docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} emergency-repair \
   --ucp-insecure-tls \
@@ -75,7 +85,4 @@ If the emergency repair command fails, try running it again using a different
 replica ID. As a last resort, you can restore your cluster from an existing
 backup.
 
-## Where to go next
-
-* [Create a backup](create-a-backup.md)
-* [Restore from an existing backup](restore-from-backup.md)
+{% endif %}

@@ -3,10 +3,15 @@ title: DTR disaster recovery overview
 description: Learn the multiple disaster recovery strategies you can use with
   Docker Trusted Registry.
 keywords: dtr, disaster recovery
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+{% if include.version=="dtr-2.5" %}
 
 Docker Trusted Registry is a clustered application. You can join multiple
 replicas for high availability.
+
 For a DTR cluster to be healthy, a majority of its replicas (n/2 + 1) need to
 be healthy and be able to communicate with the other replicas. This is also
 known as maintaining quorum.
@@ -22,6 +27,7 @@ healthy and able to communicate with one another.
 
 In this example the DTR cluster has five replicas but one of the nodes stopped
 working, and the other has problems with the DTR overlay network.
+
 Even though these two replicas are unhealthy the DTR cluster has a majority
 of replicas still working, which means that the cluster is healthy.
 
@@ -56,3 +62,5 @@ backup. Restoring from a backup should be only used as a last resort, since
 doing an emergency repair might prevent some data loss.
 
 [Learn how to restore from a backup](restore-from-backup.md).
+
+{% endif %}
