@@ -2,7 +2,12 @@
 title: Troubleshoot batch jobs
 description: Learn how Docker Trusted Registry run batch jobs, so that you can troubleshoot when something goes wrong
 keywords: dtr, troubleshoot
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 DTR uses a job queue to schedule batch jobs. A job is placed on this work queue,
 and a job runner component of DTR consumes work from this cluster-wide job
@@ -230,3 +235,5 @@ see those jobs using the `GET /api/v0/crons` endpoint:
 ```
 
 The `schedule` uses a Unix crontab syntax.
+
+{% endif %}

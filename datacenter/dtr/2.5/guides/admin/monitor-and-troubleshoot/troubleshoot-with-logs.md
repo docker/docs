@@ -2,7 +2,12 @@
 title: Troubleshoot Docker Trusted Registry
 description: Learn how to troubleshoot your DTR installation.
 keywords: registry, monitor, troubleshoot
+ui_tabs:
+- version: dtr-2.5
+  orlower: true
 ---
+
+{% if include.version=="dtr-2.5" %}
 
 This guide contains tips and tricks for troubleshooting DTR problems.
 
@@ -15,7 +20,7 @@ and see if they can ping one another.
 
 Use SSH to log into a UCP node, and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test1 \
   --entrypoint sh {{ page.dtr_org }}/{{ page.dtr_repo }}
@@ -23,7 +28,7 @@ docker run -it --rm \
 
 Then use SSH to log into another UCP node and run:
 
-```none
+```bash
 docker run -it --rm \
   --net dtr-ol --name overlay-test2 \
   --entrypoint ping {{ page.dtr_org }}/{{ page.dtr_repo }} -c 3 overlay-test1
@@ -119,7 +124,7 @@ Warning: The following replicas are unhealthy: 59e4e9b0a254; Reasons: Replica re
 To fix this, you should remove the unhealthy replica from the DTR cluster,
 and join a new one. Start by running:
 
-```none
+```bash
 docker run -it --rm \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} remove \
   --ucp-insecure-tls
@@ -127,9 +132,11 @@ docker run -it --rm \
 
 And then:
 
-```none
+```bash
 docker run -it --rm \
   {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version }} join \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
+
+{% endif %}
