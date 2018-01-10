@@ -4,14 +4,12 @@ description: Save disk space by configuring the garbage collection settings in
   Docker Trusted Registry
 keywords: registry, garbage collection, gc, space, disk space
 ui_tabs:
-- version: dtr-2.5
-  orlower: true
+  - version: dtr-2.5
+  - version: dtr-2.4
 next_steps:
-- path: deploy-caches/
-  title: Deploy DTR caches
+  - path: deploy-caches/
+    title: Deploy DTR caches
 ---
-
-{% if include.version=="dtr-2.5" %}
 
 You can configure Docker Trusted Registry to automatically delete unused image
 layers, thus saving you disk space. This process is also known as garbage collection.
@@ -19,14 +17,30 @@ layers, thus saving you disk space. This process is also known as garbage collec
 ## How DTR deletes unused layers
 
 First you configure DTR to run a garbage collection job on a fixed schedule. At
-the scheduled time:
+the scheduled time DTR:
 
-1. DTR becomes read-only. Images can be pulled, but pushes are not allowed.
-2. DTR identifies and marks all unused image layers.
-3. DTR deletes the marked image layers.
+2. Identifies and marks unused image layers.
+3. Deletes the marked image layers.
 
+{% if include.version=="dtr-2.4" %}
 Since this process puts DTR in read-only mode and is CPU-intensive, you should
 run garbage collection jobs outside business peak hours.
+{% elsif include.version=="dtr-2.5" %}
+By default, when the garbage collection job starts DTR is put in read-only mode.
+
+Starting in DTR 2.5, you can configure DTR not to when running garbage collection
+jobs. To enable this, navigate to the **DTR web UI**, go to **Settings** and
+choose **Garbage collection**.
+
+![upgrade garbage collection](../../images/garbage-collection-0.png){: .with-border}
+
+Once enabled this setting can't be changed back. The upgrade process might
+take a while depending on the amount of Docker images that you have stored.
+
+During this upgrade users can still push and pull images from DTR, but
+the garbage collection job will be temporarily disabled.
+
+{% endif %}
 
 ## Schedule garbage collection
 
@@ -87,5 +101,3 @@ changing the underlying files in the filesystem.
 referenced.
 3. If a file is never referenced, that means that no image tag uses it, so it
 can be safely deleted.
-
-{% endif %}
