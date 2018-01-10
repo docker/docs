@@ -1398,15 +1398,19 @@ reference:
 
 
 samples:
-- path: /samples/#tutorial-labs
-  title: Tutorial labs
+- title: Samples home
+  path: /samples/
+- title: Docker Enterprise walkthrough
+  path: /samples/#docker-enterprise-edition-walkthrough
+- title: Play with Docker
+  path: /samples/#play-with-docker
+- title: Tutorial labs
+  path: /samples/#tutorial-labs
 - sectiontitle: Library references
   section:
   - generateTOC: library
 - sectiontitle: Sample applications
   section:
-  - path: /samples/
-    title: Samples home
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/

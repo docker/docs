@@ -2,13 +2,49 @@
 title: Samples
 ---
 
+## Docker Enterprise Edition walkthrough
+
+Test drive a running instance of Docker EE, without installing anything; this
+walkthrough instructs you on how to perform various common tasks with the Docker
+EE dashboard. You'll probably never want to use Docker without a UI again.
+
+[Launch Docker Enterprise Edition walkthrough](https://dockertrial.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Samples Page', 'Click');"}
+
+## Play with Docker
+
+Learn how to use Docker through our guided labs that let you actually
+run Docker in a sandboxed environment we host for you, all in your browser.
+These labs cover general Docker use cases that are useful for both Docker
+Community Edition and Enterprise Edition.
+
+<script language="JavaScript" src="/js/jquery.js"></script>
+<script language="JavaScript">
+    var output = '';
+		$.ajax({
+         type: "get",
+         url: "http://training.play-with-docker.com/feed.xml",
+         dataType: "xml",
+         success: function(data) {
+             /* handle data here */
+             console.log(data)
+         },
+         error: function(xhr, status) {
+             /* handle error here */
+             console.log(status)
+         }
+     });
+</script>
+
+<div id="PWDTable"></div>
+
 {% assign labsbase = "https://github.com/docker/labs/tree/master" %}
 
-## Tutorial labs
+## GitHub-hosted samples
 
 Learn how to develop and ship containerized applications, by walking through a
-sample that exhibits canonical practices. These labs are from the [Docker Labs
-repository]({{ labsbase }}).
+GitHub-hosted sample that exhibits canonical practices, with README walkthroughs
+explaining things along the way as a lab. These samples are from the
+[Docker Labs repository]({{ labsbase }}).
 
 | Sample | Description |
 | ------ | ----------- |
