@@ -1325,12 +1325,7 @@ reference:
   - title: Compose (docker-compose) CLI
     path: /compose/reference/overview/
     nosync: true
-
-- sectiontitle: Docker Enterprise Edition
-  section:
-  - title: DTR 2.5 API
-    path: /reference/dtr/2.5/api/
-  - sectiontitle: DTR 2.5 CLI
+  - sectiontitle: DTR CLI
     section:
     - path: /reference/dtr/2.5/cli/
       title: Overview
@@ -1351,9 +1346,7 @@ reference:
       title: restore
     - path: /reference/dtr/2.5/cli/upgrade/
       title: upgrade
-  - title: UCP 3.0 API
-    path: /reference/ucp/3.0/api/
-  - sectiontitle: UCP 3.0 CLI
+  - sectiontitle: UCP CLI
     section:
     - path: /reference/ucp/3.0/cli/
       title: docker/ucp overview
@@ -1380,8 +1373,7 @@ reference:
     - path: /reference/ucp/3.0/cli/uninstall-ucp/
       title: uninstall-ucp
     - path: /reference/ucp/3.0/cli/upgrade/
-      title: upgrade
-
+      title: upgrade    
 
 - sectiontitle: Application Programming Interfaces (APIs)
   section:
@@ -1439,8 +1431,10 @@ reference:
         title: v1.19 reference
       - path: /engine/api/v1.18/
         title: v1.18 reference
-  - title: Trusted Registry API
-    path: /datacenter/dtr/2.4/reference/api/
+  - title: DTR API
+    path: /reference/dtr/2.5/api/
+  - title: UCP API
+    path: /reference/ucp/3.0/api/
   - title: Registry API
     path: /registry/spec/api/
     nosync: true
@@ -1646,7 +1640,9 @@ manuals:
           title: Troubleshoot configurations
       - path: /datacenter/ucp/3.0/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
-
+      - title: CLI reference
+        path: /reference/ucp/3.0/cli/
+        nosync: true
     - sectiontitle: Authorize role-based access
       section:
       - path: /datacenter/ucp/3.0/guides/authorization/
@@ -1763,6 +1759,9 @@ manuals:
           path: /datacenter/ucp/3.0/guides/interlock/ops/
         - title: Tuning
           path: /datacenter/ucp/3.0/guides/interlock/ops/tuning/
+    - title: API reference
+      path: /reference/ucp/3.0/api/
+      nosync: true
     - path: /datacenter/ucp/3.0/guides/release-notes/
       title: Release notes
     - path: /datacenter/ucp/3.0/guides/get-support/
@@ -2387,6 +2386,9 @@ manuals:
           path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/create-a-backup/
         - title: Restore from a backup
           path: /datacenter/dtr/2.5/guides/admin/disaster-recovery/restore-from-backup/
+      - title: CLI reference
+        path: /reference/dtr/2.5/cli/
+        nosync: true
     - sectiontitle: User guides
       section:
       - sectiontitle: Access DTR
@@ -2433,6 +2435,9 @@ manuals:
         title: Create and manage webhooks
       - title: Manage access tokens
         path: /datacenter/dtr/2.5/guides/user/access-tokens/
+    - title: API reference
+      path: /reference/dtr/2.5/api/
+      nosync: true
     - path: /datacenter/dtr/2.5/guides/release-notes/
       title: Release notes
     - path: /datacenter/dtr/2.5/guides/support/
