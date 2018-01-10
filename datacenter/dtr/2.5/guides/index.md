@@ -3,9 +3,6 @@ title: Docker Trusted Registry overview
 description: Learn how to install, configure, and use Docker Trusted Registry.
 keywords: registry, repository, images
 redirect_from:
-- /docker-hub-enterprise/
-- /docker-trusted-registry/overview/
-- /docker-trusted-registry/
 ui_tabs:
 - version: dtr-2.5
   orlower: true
