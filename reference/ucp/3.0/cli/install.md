@@ -59,11 +59,13 @@ command.
 | `--swarm-port`           | Port for the Docker Swarm manager. Used for backwards compatibility                              |
 | `--controller-port`      | Port for the web UI and API                                                                      |
 | `--swarm-grpc-port`      | Port for communication between nodes                                                             |
+| `--cni-installer-url`    | A URL pointing to a Kubernetes YAML file to be used as an installer for the CNI plugin of the cluster. If specified, the default CNI plugin is not installed. If the URL uses the HTTPS scheme, no certificate verification is performed. |
 | `--dns`                  | Set custom DNS servers for the UCP containers                                                    |
 | `--dns-opt`              | Set DNS options for the UCP containers                                                           |
 | `--dns-search`           | Set custom DNS search domains for the UCP containers                                             |
 | `--unlock-key`           | The unlock key for this swarm-mode cluster, if one exists.                                       |
 | `--existing-config`      | Use an existing UCP config during this installation. The install fails if a config is not found. |
+| `--force-minimums`       | Force the install/upgrade even if the system doesn't meet the minimum requirements.              |
 | `--pull`                 | Pull UCP images: `always`, when `missing`, or `never`                                            |
 | `--registry-username`    | Username to use when pulling images                                                              |
 | `--registry-password`    | Password to use when pulling images                                                              |

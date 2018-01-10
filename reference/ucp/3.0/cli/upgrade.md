@@ -34,15 +34,16 @@ healthy, before upgrading other nodes.
 
 ## Options
 
-| Option                    | Description                |
-|:--------------------------|:---------------------------|
-|`--debug, D`|Enable debug mode|
-|`--jsonlog`|Produce json formatted output for easier parsing|
-|`--interactive, i`|Run in interactive mode and prompt for configuration values|
-|`--admin-username`|The UCP administrator username|
-|`--admin-password`|The UCP administrator password|
-|`--pull`|Pull UCP images: `always`, when `missing`, or `never`|
-|`--registry-username`|Username to use when pulling images|
-|`--registry-password`|Password to use when pulling images|
-|`--id`|The ID of the UCP instance to upgrade|
-|`--host-address`|Override the previously configured host address with this IP or network interface|
+|        Option         |                                     Description                                     |
+| :-------------------- | :---------------------------------------------------------------------------------- |
+| `--debug, D`          | Enable debug mode                                                                   |
+| `--jsonlog`           | Produce json formatted output for easier parsing                                    |
+| `--interactive, i`    | Run in interactive mode and prompt for configuration values                         |
+| `--admin-username`    | The UCP administrator username                                                      |
+| `--admin-password`    | The UCP administrator password                                                      |
+| `--pull`              | Pull UCP images: `always`, when `missing`, or `never`                               |
+| `--registry-username` | Username to use when pulling images                                                 |
+| `--registry-password` | Password to use when pulling images                                                 |
+| `--id`                | The ID of the UCP instance to upgrade                                               |
+| `--host-address`      | Override the previously configured host address with this IP or network interface   |
+| `--force-minimums`    | Force the install/upgrade even if the system does not meet the minimum requirements |
