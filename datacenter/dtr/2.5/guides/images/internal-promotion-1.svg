@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>internal-promotion-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="dtr-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="internal-promotion-1">
+            <g id="all" transform="translate(144.000000, 3.000000)">
+                <g id="middle" transform="translate(251.000000, 0.000000)">
+                    <text id="dtr.example.org" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                        <tspan x="11.025" y="234.009524">dtr.example.org</tspan>
+                    </text>
+                    <rect id="group" stroke="#82949E" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="200" height="245" rx="2"></rect>
+                    <g id="website-prod" transform="translate(31.000000, 145.000000)">
+                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                            <tspan x="38" y="40">2018-01-16</tspan>
+                        </text>
+                        <path d="M31.5,31.5 L31.5,40.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
+                        <text id="qa/website" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
+                            <tspan x="31" y="19">qa/website</tspan>
+                        </text>
+                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
+                            <tspan x="0" y="22"></tspan>
+                        </text>
+                    </g>
+                    <g id="website-dev" transform="translate(31.000000, 16.000000)">
+                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                            <tspan x="38" y="40">1</tspan>
+                            <tspan x="38" y="57">2</tspan>
+                            <tspan x="38" y="74">3-stable</tspan>
+                        </text>
+                        <path d="M31.5,31.5 L31.5,73.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
+                        <text id="dev/website" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
+                            <tspan x="31" y="19">dev/website</tspan>
+                        </text>
+                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
+                            <tspan x="0" y="22"></tspan>
+                        </text>
+                    </g>
+                    <g id="arrow-3" transform="translate(145.000000, 84.000000)">
+                        <circle id="Oval" fill="#E0E4E7" cx="4" cy="60" r="4"></circle>
+                        <path d="M3.41908766,0.636305719 C3.41908766,0.636305719 12.6017022,12.0306637 12.6017022,30.660122 C12.6017022,49.2895802 3.41908766,60.6839382 3.41908766,60.6839382" id="Path-3" stroke="#E0E4E7" stroke-width="2"></path>
+                        <g id="annotation" transform="translate(20.000000, 17.000000)">
+                            <circle id="Oval-Copy" fill="#E0E4E7" cx="12" cy="12" r="12"></circle>
+                            <text id="1" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#FFFFFF">
+                                <tspan x="8" y="18">2</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g id="arrow-1" transform="translate(175.000000, 78.000000)">
+                    <circle id="Oval" fill="#E0E4E7" cx="65" cy="44" r="4"></circle>
+                    <path d="M0,44 C0,44 10.5912352,34.4565357 32.0154397,34.4565357 C53.4396442,34.4565357 64.0308794,44 64.0308794,44" id="Path-3" stroke="#E0E4E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g id="annotation" transform="translate(20.000000, 0.000000)">
+                        <circle id="Oval-Copy" fill="#E0E4E7" cx="12" cy="12" r="12"></circle>
+                        <text id="1" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#FFFFFF">
+                            <tspan x="8" y="18">1</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="terminal" transform="translate(0.000000, 71.000000)">
+                    <rect id="Rectangle-2" fill="#254356" x="0" y="0" width="170" height="102" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy" fill="#82949E" x="0" y="0" width="170" height="20" rx="2"></rect>
+                    <text id="&gt;-docker-push-dtr.ex" font-family="CourierNewPS-BoldMT, Courier New" font-size="13" font-weight="bold" line-spacing="18" fill="#E0E4E7">
+                        <tspan x="11" y="38">&gt; docker push</tspan>
+                        <tspan x="11" y="56"></tspan>
+                        <tspan x="11" y="74">dtr.example.org/</tspan>
+                        <tspan x="11" y="92">dev/website:3-stable</tspan>
+                    </text>
+                    <text id="localhost" font-family="CourierNewPS-BoldMT, Courier New" font-size="12" font-weight="bold" fill="#254356">
+                        <tspan x="51" y="13">localhost</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
