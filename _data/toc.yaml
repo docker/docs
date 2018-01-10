@@ -2349,6 +2349,8 @@ manuals:
             title: Chain multiple caches
         - path: /datacenter/dtr/2.5/guides/admin/configure/garbage-collection/
           title: Garbage collection
+        - title: Allow users to create repositories when pushing
+          path: /datacenter/dtr/2.5/guides/admin/configure/allow-creation-on-push/
         - path: /datacenter/dtr/2.5/guides/admin/configure/use-a-web-proxy/
           title: Use a web proxy
       - sectiontitle: Manage users

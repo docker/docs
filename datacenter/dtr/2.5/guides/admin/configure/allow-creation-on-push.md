@@ -22,7 +22,7 @@ You can configure DTR to allow pushing to repositories that don't exist yet.
 As an administrator, log into the **DTR web UI**, navigate to the **Settings**
 page, and enable **Create repository on push**.
 
-![DTR settings page](images/create-on-push-1.png){: .with-border}
+![DTR settings page](../../images/create-on-push-1.png){: .with-border}
 
 From now on, when a user pushes to their personal sandbox
 (`<user-name>/<repository>`), or if the user is an administrator for the
