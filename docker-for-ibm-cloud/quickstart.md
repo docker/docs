@@ -90,7 +90,10 @@ Create a Docker EE swarm cluster in IBM Cloud. During the beta, your cluster can
    ```
    > Customize your cluster
    >
-   > You can customize your cluster by [using other flags and options](cli-ref.md#bx-d4ic-create) with `bx d4ic help create`, but for now, we'll just stick with a basic swarm.
+   > You can customize your cluster by
+   > [using other flags and options](cli-ref.md#bx-d4ic-create) with
+   > `bx d4ic help create`, but this example uses a basic swarm.
+
 4. Note the cluster **Name** and **ID**.
 
 Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manager node is deployed. Then, the rest of the infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.

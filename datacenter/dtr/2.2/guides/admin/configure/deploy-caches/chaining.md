@@ -12,7 +12,7 @@ caches together for faster pulls.
 Too many levels of chaining might slow down pulls, so you should try different
 configurations and benchmark them, to find out the right configuration.
 
-In this example we'll show how to configure two caches. A dedicated cache for
+This example shows how to configure two caches. A dedicated cache for
 the Asia region that pulls images directly from DTR, and a cache for China, that
 pulls images from the Asia cache.
 
@@ -73,7 +73,7 @@ middleware:
             - /certs/dtr-ca.pem
 ```
 
-Both CAs are needed for the downstream cache. 
+Both CAs are needed for the downstream cache.
 
-Similarly, the China cache needs to be registered with DTR. See [deploy a simple cache](/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/#deploy-a-simple-cache) for how to use the API. 
-Ultimately the downstream cache needs to be configured for the user in question. 
+Similarly, the China cache needs to be registered with DTR. See [deploy a simple cache](/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/#deploy-a-simple-cache) for how to use the API.
+Ultimately the downstream cache needs to be configured for the user in question.

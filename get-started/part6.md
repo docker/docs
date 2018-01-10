@@ -14,8 +14,8 @@ description: Deploy your app to production using Docker CE or EE.
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
-be using that shared image here.
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
 slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
@@ -190,7 +190,7 @@ These are the ports you need to expose for each service:
 
 Methods for doing this vary depending on your cloud provider.
 
-We'll use Amazon Web Services (AWS) as an example.
+We use Amazon Web Services (AWS) as an example.
 
 > What about the redis service to persist data?
 >

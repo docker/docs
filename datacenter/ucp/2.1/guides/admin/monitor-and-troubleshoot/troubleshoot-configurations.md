@@ -20,7 +20,7 @@ replicated on all manager nodes of the UCP cluster. These data stores are for
 internal use only, and should not be used by other applications.
 
 ### With the HTTP API
-In this example we'll use `curl` for making requests to the key-value
+In this example we use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:

@@ -43,8 +43,7 @@ macOS system to test drive your new containerized database.
 First, if you don't have it yet, [download and install
 Node.js](http://nodejs.org/).
 
-> **Note**: This example needs Xcode installed. We'll replace it with something
-> with fewer dependencies soon.
+> **Note**: This example needs Xcode installed.
 
 In your terminal, type:
 

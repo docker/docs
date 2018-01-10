@@ -82,7 +82,7 @@ To install UCP:
 
 2.  Use the `docker/ucp install` command to install UCP.
 
-    In this example we'll be running the install command interactively, so that
+    In this example we run the install command interactively, so that
     the command prompts for the necessary configuration values.
     You can also use flags to pass values to the install command.
 
@@ -161,9 +161,9 @@ For each node that you want to install as a controller replica:
 
 3.  Use the join command with the replica option:
 
-    In this example we'll be running the join command interactively, so that
-    the command prompts for the necessary configuration values. We'll also
-    be passing the backup.tar file from the previous step in order to ensure
+    In this example wwe run the join command interactively, so that
+    the command prompts for the necessary configuration values. We also
+    pass the backup.tar file from the previous step in order to ensure
     that the CAs are replicated to the new controller node.
 
     ```none

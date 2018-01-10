@@ -18,7 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We'll start at the bottom of
+It's time to begin building an app the Docker way. We start at the bottom of
 the hierarchy of such an app, which is a container, which we cover on this page.
 Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
@@ -220,7 +220,7 @@ $ curl http://localhost:4000
 
 This port remapping of `4000:80` is to demonstrate the difference
 between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we'll just map port 80 on the host to port 80
+`docker run -p`. In later steps, we just map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
@@ -270,7 +270,7 @@ images&#8212;sort of like a GitHub repository, except the code is already built.
 An account on a registry can create many repositories. The `docker` CLI uses
 Docker's public registry by default.
 
-> **Note**: We'll be using Docker's public registry here just because it's free
+> **Note**: We use Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
 even set up your own private registry using [Docker Trusted
 Registry](/datacenter/dtr/2.2/guides/).

@@ -24,7 +24,7 @@ two services:
 
 Instead of configuring our services to use a plain text password stored in an
 environment variable, we're going to create a secret to store the password.
-When we deploy those services, we'll attach the secret to them, which creates
+When we deploy those services, we attach the secret to them, which creates
 a file with the password inside the container running the service.
 Our services will be able to use that file, but no one else will be able
 to see the plain text password.

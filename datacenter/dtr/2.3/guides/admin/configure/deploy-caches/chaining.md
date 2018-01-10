@@ -12,7 +12,7 @@ caches together for faster pulls.
 Too many levels of chaining might slow down pulls, so you should try different
 configurations and benchmark them, to find out the right configuration.
 
-In this example we'll show how to configure two caches. A dedicated cache for
+This example shows how to configure two caches. A dedicated cache for
 the Asia region that pulls images directly from DTR, and a cache for China, that
 pulls images from the Asia cache.
 

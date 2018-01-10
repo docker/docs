@@ -56,7 +56,7 @@ $ pip install docker-cloud
 
 #### Install on macOS
 
-We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions at [http://brew.sh](http://brew.sh){:target="_blank" class="_"}.
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -118,4 +118,4 @@ $ export DOCKERCLOUD_NAMESPACE=my-organization
  See the [CLI documentation](../../installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
 
 
-Next up, we'll [Prepare the app](3_prepare_the_app.md).
+Next up, we [prepare the app](3_prepare_the_app.md).

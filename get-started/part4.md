@@ -22,8 +22,8 @@ Windows](/docker-for-windows/index.md), but on Linux systems you need to
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
-be using that shared image here.
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
 slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
@@ -72,7 +72,7 @@ A swarm is made up of multiple nodes, which can be either physical or virtual
 machines. The basic concept is simple enough: run `docker swarm init` to enable
 swarm mode and make your current machine a swarm manager, then run
 `docker swarm join` on other machines to have them join the swarm as workers.
-Choose a tab below to see how this plays out in various contexts. We'll use VMs
+Choose a tab below to see how this plays out in various contexts. We use VMs
 to quickly create a two-machine cluster and turn it into a swarm.
 
 ### Create a cluster

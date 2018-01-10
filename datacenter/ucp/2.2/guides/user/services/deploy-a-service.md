@@ -5,7 +5,7 @@ keywords: ucp, deploy, service
 ---
 
 You can deploy and monitor your services from the UCP web UI. In this example
-we'll deploy an [NGINX](https://www.nginx.com/) web server and make it
+we deploy an [NGINX](https://www.nginx.com/) web server and make it
 accessible on port `8000`.
 
 In your browser, navigate to the UCP web UI and click **Services**. On the
@@ -29,11 +29,11 @@ click **Publish Port** and fill in the following fields:
 | Internal port | 80    |
 | Protocol      | tcp   |
 | Publish mode  | Ingress |
-| Public port   | 8000  | 
+| Public port   | 8000  |
 
 ![](../../images/deploy-a-service-2.png){: .with-border}
 
-Click **Confirm** to map the ports for the NGINX service. 
+Click **Confirm** to map the ports for the NGINX service.
 
 Once you've specified the service image and ports, click **Create** to
 deploy the service into the UCP swarm.

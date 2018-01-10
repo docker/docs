@@ -80,4 +80,4 @@ $ docker-cloud up -f /usr/dockercloud/quickstart-python/docker-cloud.yml
 
 ## What's Next?
 
-Next, we'll do some [Data management with Volumes](12_data_management_with_volumes.md).
+Next, we do some [data management with volumes](12_data_management_with_volumes.md).

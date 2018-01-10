@@ -98,7 +98,7 @@ as a bootable ISO, is a free download, and works well with VirtualBox.
 
 5. Download a disk partitioning tool ISO
 
-  To resize the volume, we'll use [GParted](https://sourceforge.net/projects/gparted/files/).
+  To resize the volume, we use [GParted](https://sourceforge.net/projects/gparted/files/).
   Once you've downloaded the tool, add the ISO to the Boot2Docker VM IDE bus.
   You might need to create the bus before you can add the ISO.
 

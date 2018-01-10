@@ -15,7 +15,7 @@ description: Learn how to create a multi-container application that uses all the
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
+[pushing it to a registry](/get-started/part2.md#share-your-image). We
 use that shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
@@ -105,7 +105,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
     Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays
     Docker services running on a swarm in a diagram.
 
-    We'll talk more about placement constraints and volumes in a moment.
+    We talk more about placement constraints and volumes in a moment.
 
 2.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 

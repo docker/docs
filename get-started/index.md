@@ -74,7 +74,7 @@ actually does.
 
 ## Prerequisites
 
-While we'll define concepts along the way, it is good for you to understand
+While we define concepts along the way, it is good for you to understand
 [what Docker is](https://www.docker.com/what-docker) before we begin.
 
 We also need to assume you are familiar with a few concepts before we continue:
@@ -85,7 +85,7 @@ We also need to assume you are familiar with a few concepts before we continue:
 - Basic familiarity with the ideas of code dependencies and building
 - Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
 
-Finally, though we'll remind you again when you need these things, you can
+Finally, though we remind you again when you need these things, you can
 save yourself some distraction at that time by [signing up for a
 Docker ID](https://cloud.docker.com) and using it on your local machine
 by running the following command:
@@ -177,6 +177,7 @@ application, system dependencies are not an issue, and resource density is
 increased. Orchestration of scaling behavior is a matter of spinning up new
 executables, not new VM hosts.
 
-We'll be learning about all of these things, but first let's learn to walk.
+This tutorial discusses all of these things, but first let's start with the
+basics.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}

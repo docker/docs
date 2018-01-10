@@ -11,8 +11,7 @@ This tutorial guides you through these steps:
 - Explore the container's website data natively on your Mac
 - Use volumes to modify the website data
 
-In this example website we'll be serving the popular 2048 game, as shown below.
-Let's get to it!
+This example website serves the popular 2048 game. Let's get to it!
 
 ![2048 game](images/nginx-2048.png)
 

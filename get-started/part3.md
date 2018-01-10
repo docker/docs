@@ -22,8 +22,8 @@ Toolbox](https://docs.docker.com/toolbox/overview.md).
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
-use that shared image here.
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
 slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
@@ -113,13 +113,13 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 ## Run your new load-balanced app
 
-Before we can use the `docker stack deploy` command we'll first run:
+Before we can use the `docker stack deploy` command we first run:
 
 ```shell
 docker swarm init
 ```
 
->**Note**: We'll get into the meaning of that command in [part 4](part4.md).
+>**Note**: We get into the meaning of that command in [part 4](part4.md).
 > If you don't run `docker swarm init` you'll get an error that "this node is not a swarm manager."
 
 Now let's run it. You have to give your app a name. Here, it is set to

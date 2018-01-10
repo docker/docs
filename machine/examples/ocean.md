@@ -53,7 +53,7 @@ To generate your access token:
 
 1.  Run `docker-machine create` with the `digitalocean` driver and pass your key to the `--digitalocean-access-token` flag, along with a name for the new cloud server.
 
-    For this example, we'll call our new Droplet "docker-sandbox".
+    For this example, the new Droplet is called `docker-sandbox`:
 
     ```none
     $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox

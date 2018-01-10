@@ -5,7 +5,7 @@ keywords: docker, ucp, deploy, service
 ---
 
 You can deploy and monitor your services from the UCP web UI. In this example
-we'll deploy an NGINX web server, and make it accessible on port `8000`.
+we deploy an NGINX web server, and make it accessible on port `8000`.
 
 Navigate to the **UCP web UI**, click the **Resources** tab, and choose
 **Services**.

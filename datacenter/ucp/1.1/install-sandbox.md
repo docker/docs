@@ -10,7 +10,7 @@ keywords: Docker Datacenter, orchestration, trial
 This page introduces Docker Datacenter (also known as DDC): a combination of
 Docker Universal Control Plane (UCP) and Docker Trusted Registry (DTR), and
 walks you through installing it on a local (non-production) host or sandbox.
-Once you've installed, we'll also give you a guided tour so you can evaluate its
+Once you've installed, we also give you a guided tour so you can evaluate its
 features.
 
 The instructions here are for a sandbox installation on Mac OS X or Windows
@@ -26,14 +26,14 @@ configuration.
 
 ## Introduction: About this example
 
-In this tutorial, we'll use Docker's provisioning tool - Docker Machine - to
+In this tutorial, we use Docker's provisioning tool - Docker Machine - to
 create two virtual hosts. These two hosts are VirtualBox VMs running a small
 footprint Linux image called `boot2docker.iso`, with the open source version of
 Docker Engine installed.
 
 ![Docker Machine setup](images/explain.png)
 
-A UCP installation consists of an UCP controller and one or more hosts. We'll
+A UCP installation consists of an UCP controller and one or more hosts. We
 install UCP on one host, then join the second node to UCP as a swarm member. The
 two VMs create a simple swarm cluster with one controller, which by default
 secures the cluster via self-signed TLS certificates.
@@ -41,7 +41,7 @@ secures the cluster via self-signed TLS certificates.
 ![Sandbox](images/sandbox.png)
 
 DDC's second component is DTR, which must be installed on a host that's a member
-of the UCP swarm. So next, we'll then install DTR on that second node.
+of the UCP swarm. So next, we install DTR on that second node.
 
 Once you've installed UCP and DTR you'll [work through a tutorial](install-sandbox-2.md) to deploy a
 container through UCP, and explore the user interface.
@@ -311,7 +311,7 @@ you want to add.
 
 ## Step 5: Install Docker Trusted Registry
 
-Next, we'll install Docker Trusted Registry (DTR). DTR provides a secure
+Next, we install Docker Trusted Registry (DTR). DTR provides a secure
 location to store your organization's Docker images. Images are used by UCP to
 run containers that make up a service. By providing a secure connection between
 DTR and UCP, you can verify that your production services contain only signed

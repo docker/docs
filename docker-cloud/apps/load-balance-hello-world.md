@@ -100,11 +100,11 @@ browser and view the **dockercloud/hello-world** web page. Note the hostname fo
 
 ## Launch the load balancer
 
-We verified that the web service is working, so now we'll set up the load balancer.
+We verified that the web service is working, so now we can set up the load balancer.
 
 1. Click **Services** in the left navigation bar, and click **Create** again.
 
-    This time we'll launch a load balancer that listens on port 80 and balances the traffic across the 8 containers that are running the `web` service. 
+    This time we launch a load balancer that listens on port 80 and balances the traffic across the 8 containers that are running the `web` service. 
 
 3. Click the **rocket icon** if necessary and find the **Proxies** section.
 

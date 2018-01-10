@@ -59,8 +59,8 @@ work for daemons running on a remote machine, so avoid using relative paths.
 
 For example, imagine you want to transfer your local directory
 `/Users/londoncalling/webapp` to a remote machine and bind mount it into a
-container on the remote host. (We'll suppose the remote user is `ubuntu`.) You
-could do something like this:
+container on the remote host. If the remote user is `ubuntu`, use a command like
+this:
 
 ```none
 $ docker-machine scp -r /Users/londoncalling/webapp MACHINE-NAME:/home/ubuntu/webapp

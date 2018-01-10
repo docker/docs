@@ -49,13 +49,13 @@ Subscription you want to use.
 
     You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
 
-    In this example, we'll use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
+    In this example, we use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
 
     ![](images/azure-create-swarm-0.png)
 
 5.  Make sure that **Create new resource group** is selected, provide a name for the group, and select a location from the drop-down menu.
 
-    We'll call our example app "swarm_vote_resources", and choose a location in West US.
+    Our example app is called `swarm_vote_resources`, and it is located in West US.
 
     ![](images/azure-create-swarm-3-resource-group.png)
 

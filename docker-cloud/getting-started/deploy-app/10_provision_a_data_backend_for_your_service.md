@@ -12,7 +12,7 @@ including Redis, MongoDB, PostgreSQL, and MySQL.
 
 You may have noticed that your app has a visit counter that's been disabled up
 until now. In this step you'll add a data backend for your service to use. In
-this specific tutorial we'll use a Redis cache, but most concepts apply to any
+this specific tutorial we use a Redis cache, but most concepts apply to any
 data backend.
 
 ## Provision the service
@@ -41,7 +41,7 @@ lb                   2f0d4b38  ▶ Running         dockercloud/haproxy:latest   
 
 ## Link the web service to the redis service
 
-Next, we'll set up the link between the `redis` service and the `web` service.
+Next, we set up the link between the `redis` service and the `web` service.
 
 ```bash
 $ docker-cloud service set --link redis:redis --redeploy web
@@ -68,4 +68,4 @@ Hello World</br>Hostname: web-3</br>Counter: 5%
 
 ## What's Next?
 
-Next, we'll look at [Stackfiles for your service](11_service_stacks.md).
+Next, we look at [Stackfiles for your service](11_service_stacks.md).

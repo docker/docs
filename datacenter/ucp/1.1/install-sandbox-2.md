@@ -12,7 +12,7 @@ installation including both UCP and DTR using the instructions
 [here](install-sandbox.md). If you haven't done this, we can't promise that this
 tutorial workflow will work exactly the same.
 
-In the second half of this tutorial, we'll walk you through a typical deployment
+In the second half of this tutorial, we walk you through a typical deployment
 workflow using your sandbox installation of DDC as if it was a production
 instance installed on your organization's network.
 
@@ -27,7 +27,7 @@ Over the course of this tutorial, we will:
 
 ## Step 1: Set --insecure registry or set up DTR trust and log in
 
-First, we'll set up a security exception that allows a the Docker-machine hosts
+First, we set up a security exception that allows a the Docker-machine hosts
 used in your UCP cluster to push images to and pull images from DTR even though
 the DTR instance has a self-signed certificate. For a production deployment,
 you would
@@ -42,8 +42,8 @@ configuration steps for a production deployment.
 {:.warning}
 
 To allow the Docker Engine to connect to DTR despite it having a self-signed
-certificate, we'll specify that there is one insecure registry that we'll allow
-the Engine instance to connect to. We'll add this exception by editing the
+certificate, we specify that there is one insecure registry that we allow
+the Engine instance to connect to. We add this exception by editing the
 configuration file where docker-machine stores the host's configuration details.
 
 1. Edit the file found at `~/.docker/machine/machines/node1/config.json` using
@@ -80,7 +80,7 @@ registry.
 
 ## Step 2: Create an image repository in DTR
 
-In this step, we'll create an image repository in DTR that you will be able to
+In this step, we create an image repository in DTR that you will be able to
 push Docker images to. Remember a Docker image is a combination of code and
 filesystem used as a template to create a container.
 
@@ -192,7 +192,7 @@ inside of it.
 
 3. Click **+ Deploy Container**.
 
-   We'll deploy the simple `nginx` container you just pulled, using specific
+   Deploy the simple `nginx` container you just pulled, using specific
    values for each field. If you already know what you're doing, feel free to
    explore once you've completed this example.
 

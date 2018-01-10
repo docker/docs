@@ -21,7 +21,7 @@ Instead, use collections to organize access to your swarm.
 
 ## Apply labels to a node
 
-In this example we'll apply the `ssd` label to a node. Then we'll deploy
+In this example we apply the `ssd` label to a node. Then we deploy
 a service with a deployment constraint to make sure the service is always
 scheduled to run on a node that has the `ssd` label.
 
@@ -31,12 +31,12 @@ details pane, click **Configure**.
 
 In the **Edit Node** page, scroll down to the **Labels** section.
 
-Click **Add Label**, and add a label with the key `disk` and a value of `ssd`. 
+Click **Add Label**, and add a label with the key `disk` and a value of `ssd`.
 
 ![](../../images/add-labels-to-cluster-nodes-2.png){: .with-border}
 
 Click **Save** and dismiss the **Edit Node** page. In the node's details
-pane, click **Labels** to view the labels that are applied to the node. 
+pane, click **Labels** to view the labels that are applied to the node.
 
 You can also do this from the CLI by running:
 
@@ -114,7 +114,7 @@ dropdown and select **Containers**.
 
 Dismiss the filter and navigate to the **Nodes** page. Click a node that
 doesn't have the `disk` label. In the details pane, click the
-**Inspect Resource** dropdown and select **Containers**. There are no 
+**Inspect Resource** dropdown and select **Containers**. There are no
 WordPress containers scheduled on the node. Dismiss the filter.
 
 ## Add a constraint to a service by using the UCP web UI
@@ -123,12 +123,12 @@ You can declare the deployment constraints in your docker-stack.yml file or
 when you're creating a stack. Also, you can apply them when you're creating
 a service.
 
-To check if a service has deployment constraints, navigate to the 
+To check if a service has deployment constraints, navigate to the
 **Services** page and choose the service that you want to check.
 In the details pane, click **Constraints** to list the constraint labels.
 
 To edit the labels on the service, click **Configure** and select
-**Environment**. 
+**Environment**.
 
 ![](../../images/add-constraint-to-service.png)
 

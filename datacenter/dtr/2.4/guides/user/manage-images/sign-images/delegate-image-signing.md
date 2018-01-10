@@ -49,7 +49,7 @@ UCP requires that you delegate trust to two different roles:
 * `targets/releases`
 * `targets/<role>`, where `<role>` is the UCP team the user belongs to
 
-In this example we'll delegate trust to `targets/releases` and `targets/qa`:
+In this example we delegate trust to `targets/releases` and `targets/qa`:
 
 ```none
 # Delegate trust, and add that public key with the role targets/releases
