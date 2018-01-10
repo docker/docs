@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>pull-mirror-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M245.593068,112 C231.520568,112 220.063068,123.09 219.405568,137 L211.843068,137 L223.185568,151.7925 L234.343068,137 L226.905568,137 C227.555568,127.245 235.675568,119.5 245.593068,119.5 C255.933068,119.5 264.343068,127.91 264.343068,138.25 C264.343068,148.59 255.933068,157 245.593068,157 C239.640568,157 234.338068,154.2025 230.903068,149.865 L226.285568,155.9875 C231.083068,161.2075 237.945568,164.5 245.593068,164.5 C260.088068,164.5 271.843068,152.745 271.843068,138.25 C271.843068,123.755 260.088068,112 245.593068,112 Z" id="path-1"></path>
+    </defs>
+    <g id="dtr-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="pull-mirror-1">
+            <g id="all" transform="translate(129.000000, 3.000000)">
+                <g id="right" transform="translate(283.000000, 0.000000)">
+                    <text id="DTR-at-qa.example.or" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                        <tspan x="11.025" y="234.009524">DTR at qa.example.org</tspan>
+                    </text>
+                    <rect id="group" stroke="#82949E" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="200" height="245" rx="2"></rect>
+                    <g id="website-dev" transform="translate(31.000000, 47.000000)">
+                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                            <tspan x="38" y="40">1</tspan>
+                            <tspan x="38" y="57">2</tspan>
+                            <tspan x="38" y="74">3-stable</tspan>
+                        </text>
+                        <path d="M31.5,31.5 L31.5,73.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
+                        <text id="website/ui" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
+                            <tspan x="31" y="19">website/ui</tspan>
+                        </text>
+                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
+                            <tspan x="0" y="22"></tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="Shape" fill-rule="nonzero" transform="translate(241.843068, 138.250000) scale(-1, -1) rotate(40.000000) translate(-241.843068, -138.250000) ">
+                    <use fill="#E0E4E7" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <path stroke="#FFFFFF" stroke-width="2" d="M228.006563,136 L236.3499,136 L223.192113,153.444461 L209.816159,136 L218.468211,136 C219.619218,121.956444 231.360995,111 245.593068,111 C260.640353,111 272.843068,123.202715 272.843068,138.25 C272.843068,153.297285 260.640353,165.5 245.593068,165.5 C237.880263,165.5 230.688331,162.255799 225.549293,156.664182 L224.985423,156.050654 L230.88375,148.229861 L231.687013,149.24417 C235.041218,153.479647 240.114277,156 245.593068,156 C255.380783,156 263.343068,148.037715 263.343068,138.25 C263.343068,128.462285 255.380783,120.5 245.593068,120.5 C236.61632,120.5 229.121771,127.231201 228.006563,136 Z"></path>
+                </g>
+                <g id="middle">
+                    <text id="DTR-at-dev.example.o" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                        <tspan x="11.025" y="234.009524">DTR at dev.example.org</tspan>
+                    </text>
+                    <rect id="group" stroke="#82949E" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="200" height="245" rx="2"></rect>
+                    <g id="website-dev" transform="translate(31.000000, 47.000000)">
+                        <text id="tags" font-family="OpenSans-Semibold, Open Sans" font-size="12" font-weight="500" fill="#82949E">
+                            <tspan x="38" y="40">1</tspan>
+                            <tspan x="38" y="57">2</tspan>
+                            <tspan x="38" y="74">3-stable</tspan>
+                        </text>
+                        <path d="M31.5,31.5 L31.5,73.5" id="Line" stroke="#E0E4E7" stroke-linecap="square"></path>
+                        <text id="website/ui" font-family="OpenSans-Semibold, Open Sans" font-size="14" font-weight="500" fill="#82949E">
+                            <tspan x="31" y="19">website/ui</tspan>
+                        </text>
+                        <text id="" font-family="FontAwesome" font-size="26" font-weight="normal" fill="#8F9EA8">
+                            <tspan x="0" y="22"></tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -2417,10 +2417,20 @@ manuals:
             title: Delegate image signing
           - path: /datacenter/dtr/2.5/guides/user/manage-images/sign-images/manage-trusted-repositories/
             title: Manage trusted repositories
+      - sectiontitle: Promotion policies and mirroring
+        section:
+          - title: Overview
+            path: /datacenter/dtr/2.5/guides/user/promotion-policies/
+          - title: Promote an image using policies
+            path: /datacenter/dtr/2.5/guides/user/promotion-policies/internal-promotion/
+          - title: Mirror images to another registry
+            path: /datacenter/dtr/2.5/guides/user/promotion-policies/push-mirror/
+          - title: Mirror images from another registry
+            path: /datacenter/dtr/2.5/guides/user/promotion-policies/pull-mirror/
+          - title: Template reference
+            path: /datacenter/dtr/2.5/guides/user/promotion-policies/templates/
       - path: /datacenter/dtr/2.5/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
-      - path: /datacenter/dtr/2.5/guides/user/create-promotion-policies/
-        title: Create promotion policies
       - title: Manage access tokens
         path: /datacenter/dtr/2.5/guides/user/access-tokens/
     - path: /datacenter/dtr/2.5/guides/release-notes/
