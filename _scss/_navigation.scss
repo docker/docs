@@ -50,7 +50,6 @@
     }
 }
 
-
 /*
 *
 * Secondary Navigation  **********************************************************
@@ -77,7 +76,7 @@
     position: absolute;
     width: 100%;
     &.affix {
-        background: #0C5176;
+        background: $bg-secondary;
         box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
         top: 0;
         position: fixed;
@@ -116,8 +115,7 @@
     }
 }
 
-.nav-sidebar .nav ul
-{
+.nav-sidebar .nav ul {
   padding: 0px 0px 0px 15px;
 }
 
@@ -136,13 +134,14 @@
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav>li>a:focus {
     cursor: default;
+    background: #F3F4F4;
     color: #2089C4;
-    border-left: 4px solid #21cbc9;
+    border-left: 4px solid #077CBC;
     font-weight: 600;
 }
 
 .nav-sidebar ul li li a {
-    border-left: 1px solid #21cbc9;
+    border-left: 1px solid #077CBC;
     font-size: 12px;
     margin-left: 15px;
 }
@@ -172,15 +171,15 @@
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding-left: 0;
-    line-height: 24px;
+    padding-left: 10px;
+    line-height: 20px;
     li {
-        padding: 2px 8px 2px 15px;
+        padding: 2px 8px 2px 0;
         width: 100%;
         a {
             display: inline-block;
             font-size: 12px;
-            padding: 0 10px 0 10px;
+            padding: 0px 10px 8px 10px;
             text-decoration: none;
         }
     }
@@ -188,7 +187,7 @@
 
 .toc-nav li a.active {
     color: #2089C4;
-    border-left: 4px solid #21cbc9;
+    border-left: 4px solid #2089C4;
     font-weight: bold;
 }
 
@@ -258,7 +257,7 @@ div#side-toc-title {
     bottom: 0;
     background-color: $slider-bg;
     border: 1px solid #c3e4f7;
-    transition: 0.4s;
+    // transition: 0.4s;
 }
 
 .slider:before {
@@ -269,7 +268,7 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    transition: 0.4s;
+    // transition: 0.4s;
 }
 
 input:focus+.slider {
@@ -295,17 +294,25 @@ input:checked+.slider:before {
 * Tabs ***********************************************************************
 *
 */
-
-.tabs {
+#tabs {
     float: left;
     margin: 0;
-    padding: 0;
+    padding-left: 8px; 
+    ul {
+        padding: 0;
+    }
+}
+
+
+
+.tabs {
+
     li {
         float: left;
         list-style: none;
         a {
             color: $white;
-            padding: 17px 20px 12px 15px;
+            padding: 17px 19px 14px 15px;
             float: left;
             font-weight: 600;
             &:hover {
@@ -333,7 +340,6 @@ input:checked+.slider:before {
     margin: 50px 0 10px 0;
 }
 
-
 /* polldaddy */
 
 #rating_info_8453675 {
@@ -344,7 +350,6 @@ input:checked+.slider:before {
     font: inherit !important;
     color: inherit !important;
 }
-
 
 /*
 *
@@ -360,7 +365,7 @@ input:checked+.slider:before {
 
 .ctrl-right {
     float: right;
-    padding: 5px 2px 12px;
+    padding: 5px 0px;
 }
 
 .ctrl-right .btn-group {

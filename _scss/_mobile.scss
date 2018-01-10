@@ -6,7 +6,7 @@
 
 @media only screen 
     and (min-width : 376px)
-    and (max-width : 1130px) {  
+    and (max-width : 1150px) {  
     .nav-primary,
     .hero-text,
     .banner,
@@ -54,21 +54,14 @@
 @media only screen 
     and (min-width : 376px)
     and (max-width : 900px) {  
-    .tabs {
-        padding: 0 0 0 10px;
-    }
-    .tabs li a {
-        font-size: 13px;
-        padding: 19px 10px 11px;
-    }
     .sidebar {
         position: fixed;
         width: 100%;
         z-index: 100;
     }
-    .content {
-        padding: 50px;
-    }
+    // .content {
+    //     padding: 50px;
+    // }
     .main-content {
         padding: 22px 35px 25px 30px;
     }
@@ -144,7 +137,7 @@
     }
     .tabs li a {
         color: #fff;
-        padding: 15px 12px 10px 6px;
+        padding: 17px 6px 10px 4px;
         float: left;
         opacity: 0.7;
         font-size: 12px;
@@ -248,6 +241,7 @@
     }
     .nav-secondary {
         background: $black;
+        height: 100px;
     }
     .content {
         padding: 120px 20px;

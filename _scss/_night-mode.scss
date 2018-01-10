@@ -83,17 +83,15 @@ body.night {
     .nav-sidebar.nav>li>a:focus,
     .toc-nav li a.active {
         color: $active-sidebar-night;
-        border-left: 4px solid #21cbc9;
+        background: $black;
+        border-left: 4px solid #077CBC;//add to variables
     }
     .tabs li.active a {
-        border-bottom: 4px solid #21cbc9;
+        border-bottom: 4px solid #077CBC;//add to variables
     }
     .slider {
         background-color: #344658;
         border: 1px solid #192837;
-    }
-    .slider:before {
-        background-color: rgb(26, 162, 161);
     }
     ul {
         color: $body-text-night;
@@ -172,13 +170,9 @@ body.night {
         background: $bg-search-results-night;
         border: 1px solid $black;
         color: $white;
-        padding: 20px 55px 15px 15px;
+        padding: 20px 0 15px 0px;
         margin: 10px 0 0 0;
         position: absolute;
-        -webkit-transition: all 0.5s;
-        -moz-transition: all 0.5s;
-        -o-transition: all 0.5s;
-        transition: all 0.5s;
         width: 800px;
     }
     ul.autocompleteList {
@@ -189,7 +183,6 @@ body.night {
         padding: 5px 0 7px 0;
     }
     div#autocompleteResults span {
-        background-color: rgba(32, 137, 196, 0.34) !important;
         color: #b7a4de;
     }
     .autocompleteTitle {

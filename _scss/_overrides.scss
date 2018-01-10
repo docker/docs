@@ -100,24 +100,57 @@
     background-color: #0c5176;
 }
 
+/*
+*
+* Bootstrap expand/collapse accordions
+*
+*/
+
+.panel-heading .chevron:after {
+    content: "\f0d8";
+}
+
+.panel-heading.collapsed .chevron:after {
+    content: "\f0d7";
+}
+
+.panel-heading:hover{
+    background-color: #fafdfe;
+}
+
 
 /*
 *
 * override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
 */
+.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+    color: #27343B!important;
+    line-height: 23px!important;
+}
+.gsc-webResult .gsc-result {
+    padding: 20px 0 20px 20px!important;
+}
 
 a.gs-title {
     color: #2089C4!important;
     text-decoration: none;
 }
 
+.gs-webResult.gs-result a.gs-title:visited, .gs-webResult.gs-result a.gs-title:visited b, .gs-imageResult a.gs-title:visited, .gs-imageResult a.gs-title:visited b {
+    color: #F993A6!important;
+}
 .gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
     color: #82949E!important;
 }
 
 .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
     font-size: 14px!important;
+}
+
+.gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea {
+    border-color: #f7f7f761 !important;
+    background: transparent;
 }
 
 img.with-border {
