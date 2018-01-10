@@ -27,7 +27,7 @@ For an overview of how services work, see
 To create a single-replica service with no extra configuration, you only need
 to supply the image name. This command starts an Nginx service with a
 randomly-generated name and no published ports. This is a naive example, since
-you won't be able to interact with the Nginx service.
+you can't interact with the Nginx service.
 
 ```bash
 $ docker service create nginx

@@ -64,7 +64,7 @@ the mount point of the config within a given container.
 To update a stack, make changes to your Compose file, then re-run `docker
 stack deploy -c <new-compose-file> <stack-name>`. If you use a new config in
 that file, your services start using them. Keep in mind that configurations
-are immutable, so you won't be able to change the file for an existing service.
+are immutable, so you can't change the file for an existing service.
 Instead, you create a new config to use a different file
 
 You can run `docker stack rm` to stop the app and take down the stack. This

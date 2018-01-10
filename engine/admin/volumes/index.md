@@ -7,7 +7,7 @@ keywords: storage, persistence, data persistence, volumes, mounts, bind mounts
 It is possible to store data within the writable layer of a container, but there
 are some downsides:
 
-- The data won't persist when that container is no longer running, and it can be
+- The data don't persist when that container is no longer running, and it can be
   difficult to get the data out of the container if another process needs it.
 - A container's writable layer is tightly coupled to the host machine
   where the container is running. You can't easily move the data somewhere else.
@@ -157,7 +157,7 @@ needs to write a large volume of non-persistent state data.
 If you use either bind mounts or volumes, keep the following in mind:
 
 - If you mount an **empty volume** into a directory in the container in which files
-  or directories exist, these files or directories are propagated (copied) 
+  or directories exist, these files or directories are propagated (copied)
   into the volume. Similarly, if you start a container and specify a volume which
   does not already exist, an empty volume is created for you.
   This is a good way to pre-populate data that another container needs.

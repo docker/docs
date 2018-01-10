@@ -8,7 +8,7 @@ title: Run only the images you trust
 With Docker Universal Control Plane you can enforce applications to only use
 Docker images signed by UCP users you trust. When a user tries to deploy an
 application to the cluster, UCP checks if the application uses a Docker image
-that is not trusted, and won't continue with the deployment if that's the case.
+that is not trusted, and doesn't continue with the deployment if that's the case.
 
 By signing and verifying the Docker images, you ensure that the images being
 used in your cluster are the ones you trust and haven't been altered either

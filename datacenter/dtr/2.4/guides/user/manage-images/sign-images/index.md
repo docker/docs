@@ -29,7 +29,7 @@ to the Notary Server internal to DTR.
 
 ## Sign images that UCP can trust
 
-With the command above you'll be able to sign your DTR images, but UCP won't
+With the command above you'll be able to sign your DTR images, but UCP doesn't
 trust them because it can't tie the private key you're using to sign the images
 to your UCP account.
 
@@ -79,7 +79,7 @@ repository.
 
 ![DTR](../../../images/sign-an-image-3.png){: .with-border}
 
-DTR shows that the image is signed, but UCP won't trust the image
+DTR shows that the image is signed, but UCP doesn't trust the image
 because it doesn't have any information about the private keys used to sign
 the image.
 

@@ -78,7 +78,7 @@ Official Microsoft Windows images or any image you create based on them aren't
 distributable by default. When you push a Windows image to DTR, Docker only
 pushes the image manifest but not the image layers. This means that:
 
-* DTR won't be able to scan those images for vulnerabilities since DTR doesn't
+* DTR can't scan those images for vulnerabilities since DTR doesn't
 have access to the layers
 * When a user pulls a Windows image from DTR, they are redirected to a
 Microsoft registry to fetch the layers

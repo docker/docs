@@ -21,7 +21,7 @@ When you create a service in the Docker Cloud web interface, a wizard walks you 
 1. **Configure the Service** From here, give the service a name, set the initial number of containers, expose/publish ports, modify the run command or entrypoint, set memory and CPU limits.
 1. **Set Environment variables** Set the edit environment variables and link your service to other existing services in Docker Cloud.
 
-> **Note**: In this Quickstart tutorial we won't be working with environment variables or connecting [data volumes](../apps/volumes.md), but these are also available as optional steps in the wizard.
+> **Note**: In this Quickstart tutorial we don't work with environment variables or connect [data volumes](../apps/volumes.md), but these are also available as optional steps in the wizard.
 
 ## Select a Service Image
 

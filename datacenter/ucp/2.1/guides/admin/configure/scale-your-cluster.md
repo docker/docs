@@ -75,8 +75,8 @@ in UCP.
 2. If the status of the worker node is `Ready`, you'll need to manually force
    the node to leave the swarm. To do this, connect to the target node through
    SSH and run `docker swarm leave --force` directly against the local docker
-   engine. 
-   
+   engine.
+
    >**Warning**:
    >Do not perform this step if the node is still a manager, as
    >that may cause loss of quorum.
@@ -97,7 +97,7 @@ so that it is:
 
 * Active: the node can receive and execute tasks.
 * Paused: the node continues running existing tasks, but doesn't receive new ones.
-* Drained: the node won't receive new tasks. Existing tasks are stopped and
+* Drained: the node can't receive new tasks. Existing tasks are stopped and
 replica tasks are launched in active nodes.
 
 ![](../../images/scale-your-cluster-3.png){: .with-border}

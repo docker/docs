@@ -117,7 +117,7 @@ by our development team during internal testing
 
 In UCP 2.1.3, if you try to upload externally-signed controller
 certificates through the **Admin Settings** page on the UI, you'll see a
-"Success" message, but the certificates won't be updated on any
+"Success" message, but the certificates isn't updated on any
 of the controller nodes.
 
 The workaround is to update the contents of the `ucp-controller-server-certs`

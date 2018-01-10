@@ -63,7 +63,7 @@ configure this app to use our SQL Server database, and then create a
     image. Create this script in a file called `entrypoint.sh` and paste the
     contents below.
 
-    > **Note**: Make sure to use UNIX line delimiters. The script won't work if
+    > **Note**: Make sure to use UNIX line delimiters. The script doesn't work if
     > you use Windows-based delimiters (Carriage return and line feed).
 
     ```bash

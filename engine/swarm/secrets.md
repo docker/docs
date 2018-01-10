@@ -669,7 +669,7 @@ line.
     The value returned is not the password, but the ID of the secret. In the
     remainder of this tutorial, the ID output is omitted.
 
-    Generate a second secret for the MySQL `root` user. This secret won't be
+    Generate a second secret for the MySQL `root` user. This secret isn't
     shared with the WordPress service created later. It's only needed to
     bootstrap the `mysql` service.
 

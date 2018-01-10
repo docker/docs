@@ -113,7 +113,7 @@ avoid these situations.
 3.  If there are any locations on the Docker host where the unprivileged
     user needs to write, adjust the permissions of those locations
     accordingly. This is also true if you want to use the `dockremap` user
-    automatically created by Docker, but you won't be able to modify the
+    automatically created by Docker, but you can't modify the
     permissions until after configuring and restarting Docker.
 
 4.  Enabling `userns-remap` effectively masks existing image and container

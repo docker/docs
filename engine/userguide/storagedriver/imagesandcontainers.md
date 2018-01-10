@@ -325,7 +325,7 @@ To verify the way that copy-on-write works, the following procedures spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 
-> **Note**: This procedure won't work on Docker for Mac or Docker for Windows.
+> **Note**: This procedure doesn't work on Docker for Mac or Docker for Windows.
 
 1.  From a terminal on your Docker host, run the following `docker run` commands.
     The strings at the end are the IDs of each container.

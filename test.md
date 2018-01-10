@@ -119,7 +119,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   - Go to the file in a web browser, grab everything after the domain name
   from the URL, and use that as the link in your docs file.
 
-  - Keep in mind that this link won't resolve until you merge the PR and
+  - Keep in mind that this link doesn'tresolve until you merge the PR and
   your docs are published on [docs.docker.com](https://docs.docker.com/).
 
 {: id="custom-target-id"}
@@ -593,7 +593,7 @@ support these broad categories of admonitions:
 The new styles include prepended icons, color sidebars, and bold color titles
 for multi-paragraph notes, but no auto-prepended text. These are defined in a
 way that does not impact admonitions formatted with the original styles, so
-notes in your published documents won't be adversely affected.
+notes in your published documents are not adversely affected.
 
 Examples of both styles are shown below.
 

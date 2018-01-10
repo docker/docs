@@ -258,7 +258,7 @@ repository.Remove()
 docker-cloud repository rm registry.local/user1/image1
 ```
 
-Removes the external repository from Docker Cloud. It won't remove the repository from the third party registry where it's stored.
+Removes the external repository from Docker Cloud. It doesn't remove the repository from the third party registry where it's stored.
 
 ### Endpoint Type
 

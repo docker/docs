@@ -587,7 +587,7 @@ The following example briefly describes how to use `--link`.
 
 When you link containers, whether using the legacy `link` method or using
 user-defined networks, any aliases you specify only have meaning to the
-container where they are specified, and won't work on other containers on the
+container where they are specified, and don't work on other containers on the
 default `bridge` network.
 
 In addition, if a container belongs to multiple networks, a given linked alias

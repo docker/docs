@@ -96,7 +96,7 @@ keep image size small:
   features allow you to keep your images as generic as possible and to avoid
   storing sensitive data within the Docker images or containers themselves.
 - Let `docker stack deploy` handle any image pulls for you, instead of using
-  `docker pull`. This way, your deployment won't try to pull from nodes
+  `docker pull`. This way, your deployment doesn't try to pull from nodes
   that are down. Also, when new nodes are added to the swarm, images are
   pulled automatically.
 

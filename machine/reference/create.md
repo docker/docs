@@ -228,7 +228,7 @@ in Docker Swarm.
 
 If you're not sure how to configure these options, it is best to not specify
 configuration at all. Docker Machine chooses sensible defaults for you and
-you won't have to worry about it.
+you don't have to worry about it.
 
 Example create:
 

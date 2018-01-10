@@ -13,7 +13,7 @@ redirect_from:
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
 Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
-scale Docker apps and solutions quickly and easily. If Go or Python won't work
+scale Docker apps and solutions quickly and easily. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or

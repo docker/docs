@@ -43,7 +43,7 @@ In the **UCP web UI**, navigate to **Resources**, and click **Secrets**.
 ![](../../images/manage-secrets-1.png){: .with-border}
 
 Click **Create Secret** to create a new secret. Once you create the secret,
-you won't be able to edit it or see the secret data again.
+you can't edit it or see the secret data again.
 
 ![](../../images/manage-secrets-2.png){: .with-border}
 
@@ -153,7 +153,7 @@ Start by updating the `wordpress-db` service to stop using the secret
 `wordpress-password-v1` and use the new version instead.
 
 The `MYSQL_ROOT_PASSWORD_FILE` environment variable is currently set to look for
-a file at `/run/secrets/wordpress-password-v1` which won't exist after we
+a file at `/run/secrets/wordpress-password-v1` which no longer exists after we
 update the service. So we have two options:
 
 1. Update the environment variable to have the value

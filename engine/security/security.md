@@ -182,7 +182,7 @@ This means that even if an intruder manages to escalate to root within a
 container, it is much harder to do serious damage, or to escalate
 to the host.
 
-This won't affect regular web apps, but reduces the vectors of attack by
+This doesn't affect regular web apps, but reduces the vectors of attack by
 malicious users considerably. By default Docker
 drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30),

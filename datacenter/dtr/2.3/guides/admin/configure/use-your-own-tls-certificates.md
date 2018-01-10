@@ -8,7 +8,7 @@ keywords: dtr, tls
 By default the DTR services are exposed using HTTPS, to ensure all
 communications between clients and DTR is encrypted. Since DTR
 replicas use self-signed certificates for this, when a client accesses
-DTR, their browsers won't trust this certificate, so the browser displays a
+DTR, their browsers don't trust this certificate, so the browser displays a
 warning message.
 
 You can configure DTR to use your own certificates, so that it is automatically

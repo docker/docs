@@ -197,7 +197,7 @@ host for the controller works fine.
       --swarm-port 3376 --host-address $(docker-machine ip node1)
     ```
 
-    > **Note**: If you are on a Windows system, your shell won't be able to
+    > **Note**: If you are on a Windows system, your shell can't
     resolve the `$(docker-machine ip node1)` variable. Instead, edit the command
     supplied to replace it with the actual IP address.
 
@@ -275,7 +275,7 @@ you want to add.
 
 3.  Run the `docker/ucp join` command.
 
-    > **Note**: If you are on a Windows system, your shell won't be able to
+    > **Note**: If you are on a Windows system, your shell can't
     resolve the `$(docker-machine ip node2)` variable. Instead, edit the command
     supplied to replace it with the actual IP address.
 

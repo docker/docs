@@ -299,7 +299,7 @@ Strategy | Description
 -------- | -----------
 EMPTIEST_NODE | It will deploy containers to the node with the lower total amount of running containers (default).
 HIGH_AVAILABILITY | It will deploy containers to the node with the lower amount of running containers of the same service.
-EVERY_NODE | It will deploy one container on every node. The service won't be able to scale manually. New containers will be deployed to new nodes automatically.
+EVERY_NODE | It will deploy one container on every node. The service can't scale manually. New containers will be deployed to new nodes automatically.
 
 
 ### Network Modes

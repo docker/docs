@@ -119,7 +119,7 @@ of minimizing the amount of data transfer necessary from the repository and
 speeding up the build because it pulls only the minimal code necessary.
 
 Because of this, if you need to perform a custom action that relies on a different
-branch (such as a `post_push` hook), you won't be able checkout that branch, unless
+branch (such as a `post_push` hook), you can't checkout that branch, unless
 you do one of the following:
 
 * You can get a shallow checkout of the target branch by doing the following:

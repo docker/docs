@@ -65,7 +65,7 @@ processes. In Docker for {{cloudprovider}}, your cluster is resilient to a
 variety of such issues by default.
 
 Log rotation native to the host is configured for you automatically, so chatty
-logs won't use up all of your disk space. Likewise, the "system prune" option
+logs don't use up all of your disk space. Likewise, the "system prune" option
 allows you to ensure unused Docker resources such as old images are cleaned up
 automatically. The lifecycle of nodes is managed using auto-scaling groups or
 similar constructs, so that if a node enters an unhealthy state for unforeseen

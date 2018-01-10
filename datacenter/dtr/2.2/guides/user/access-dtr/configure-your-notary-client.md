@@ -7,7 +7,7 @@ keywords: docker, registry, notary, trust
 The Docker CLI client makes it easy to sign images but to streamline that
 process it generates a set of private and public keys that are not tied
 to your UCP account. This means that you'll be able to push and sign images to
-DTR, but UCP won't trust those images since it doesn't know anything about
+DTR, but UCP doesn't trust those images since it doesn't know anything about
 the keys you're using.
 
 So before signing and pushing images to DTR you should:

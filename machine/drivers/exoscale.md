@@ -60,7 +60,7 @@ For any Linux template, you may use the shorter name composed only of the name a
 | Linux CentOS 7.3 64-bit         | `centos-7.3`         |
 | Linux CoreOS stable 1298 64-bit | `coreos-stable-1298` |
 
-**NB:** Docker won't work for non-Linux machines like OpenBSD and Windows Server.
+**NB:** Docker doesn't work for non-Linux machines like OpenBSD and Windows Server.
 
 ### SSH Username
 

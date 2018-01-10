@@ -102,8 +102,8 @@ filesystem used as a template to create a container.
 1. In your terminal, make sure `node1` is active using `docker-machine ls`.
 
    This is the node that you configured the security exception for, and if you
-   are connecting to a Docker Engine without this exception you won't be able
-   to push to your DTR instance.
+   are connecting to a Docker Engine without this exception you can't
+   push to your DTR instance.
 
    If necessary, use `docker-machine env` to make `node1` active.
 

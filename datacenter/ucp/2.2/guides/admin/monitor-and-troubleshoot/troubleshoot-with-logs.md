@@ -31,7 +31,7 @@ specially useful if the UCP web application is not working.
     When using the Docker CLI client, you need to authenticate using client
     certificates.
     [Learn how to use client certificates](../../user/access-ucp/cli-based-access.md).
-    If your client certificate bundle is for a non-admin user, you won't have
+    If your client certificate bundle is for a non-admin user, you don't have
     permissions to see the UCP system containers.
 
 2.  Check the logs of UCP system containers. By default, system containers
@@ -68,7 +68,7 @@ changing UCP configurations.
 Then you can increase the UCP log level to debug, making it easier to understand
 the status of the UCP cluster. Changing the UCP log level restarts all UCP
 system components and introduces a small downtime window to UCP. Your
-applications won't be affected by this.
+applications isn't affected by this.
 
 To increase the UCP log level, navigate to the UCP web UI, go to the
 **Admin Settings** tab, and choose **Logs**.

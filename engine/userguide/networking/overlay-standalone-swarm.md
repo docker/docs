@@ -110,7 +110,7 @@ Keep your terminal open and move on to
 ### Create a swarm cluster
 
 In this step, you use `docker-machine` to provision the hosts for your network.
-You won't actually create the network yet. You'll create several
+You don't actually create the network yet. You'll create several
 Docker machines in VirtualBox. One of the machines acts as the swarm manager
 and you'll create that first. As you create each host, you'll pass the Docker
 daemon on that machine options that are needed by the `overlay` network driver.

@@ -285,7 +285,7 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the parent images won't upgrade inside an
+“essential” packages from the parent images can't upgrade inside an
 [unprivileged container](https://docs.docker.com/engine/reference/run/#security-configuration).
 If a package contained in the parent image is out-of-date, you should contact its
 maintainers. If you know there’s a particular package, `foo`, that needs to be updated, use
@@ -488,7 +488,7 @@ Results in fewer cache invalidations for the `RUN` step, than if you put the
 
 Because image size matters, using `ADD` to fetch packages from remote URLs is
 strongly discouraged; you should use `curl` or `wget` instead. That way you can
-delete the files you no longer need after they've been extracted and you won't
+delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 

@@ -42,12 +42,12 @@ Upload your certificates and keys:
 * A `ca.pem` file with the root CA public certificate.
 * A `cert.pem` file with the TLS certificate for your domain and any intermediate public
 certificates, in this order.
-* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. 
+* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password.
 Encrypted keys should have `ENCRYPTED` in the first line.
 
 Finally, click **Update** for the changes to take effect.
 
-After replacing the TLS certificates your users won't be able to authenticate
+After replacing the TLS certificates your users can't authenticate
 with their old client certificate bundles. Ask your users to go to the UCP
 web UI and [get new client certificate bundles](../../user/access-ucp/cli-based-access.md).
 
