@@ -489,12 +489,27 @@ guides:
   section:
   - path: /compliance/
     title: Docker standards and compliance
-  - path: /compliance/nist/800_53/
-    title: NIST 800-53
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker EE Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker CE Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
   - path: /compliance/fedramp/
     title: FedRAMP
-  - path: /compliance/cis/
-    title: CIS
+  
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
