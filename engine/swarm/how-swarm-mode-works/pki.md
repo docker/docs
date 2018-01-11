@@ -29,7 +29,7 @@ under the certificate common name (CN) and the role under the organizational
 unit (OU). The node ID serves as the cryptographically secure node identity for
 the lifetime of the node in the current swarm.
 
-The diagram below illustrates how worker manager nodes and worker nodes encrypt
+The diagram below illustrates how manager nodes and worker nodes encrypt
 communications using a minimum of TLS 1.2.
 
 ![tls diagram](/engine/swarm/images/tls.png)
