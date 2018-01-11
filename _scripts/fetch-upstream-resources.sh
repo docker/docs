@@ -31,7 +31,7 @@ sed -i "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_dock
 # Engine stable
 ENGINE_SVN_BRANCH="branches/17.12"
 ENGINE_BRANCH="17.12"
-ENGINE_EDGE_BRANCH="17.12"
+ENGINE_EDGE_BRANCH="18.01"
 
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
