@@ -83,7 +83,7 @@ body.night {
     .nav-sidebar.nav>li>a:focus,
     .toc-nav li a.active {
         color: $active-sidebar-night;
-        background: $black;
+        background: #0a151a;
         border-left: 4px solid #077CBC;//add to variables
     }
     .tabs li.active a {
