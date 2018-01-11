@@ -76,7 +76,7 @@ assign application resources to that path.
 > Networks, Nodes, Services, Secrets, and Volumes.
 
 A
-[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[namespace](https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 is a logical area for a Kubernetes cluster. Kubernetes comes with a "default"
 namespace for your cluster objects (plus two more for system and public
 resources). You can create custom namespaces, but unlike Swarm collections,
