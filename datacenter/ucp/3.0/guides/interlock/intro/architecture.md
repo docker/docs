@@ -1,6 +1,6 @@
 ---
-title: Interlock architecture
-description: Learn about Interlock, an application routing and load balancing system
+title: Layer 7 routing architecture
+description: Learn about Layer 7 routing, an application routing and load balancing system
   for Docker Swarm.
 keywords: ucp, interlock, load balancing
 ui_tabs:
@@ -21,7 +21,7 @@ The following are definitions that are used:
 - GRPC: A high-performance RPC framework
 
 ## Services
-Interlock runs entirely as Docker Swarm services.  There are three core services
+Layer 7 routing runs entirely as Docker Swarm services.  There are three core services
 in an Interlock routing layer: core, extension and proxy.
 
 ## Core
@@ -30,17 +30,17 @@ an upstream configuration for the extensions.  This is served on a GRPC API that
 extensions are configured to access.
 
 ## Extension
-The extension service is a helper service that queries the Interlock GRPC API for the
-upstream configuration.  The extension service uses this to configure
-the proxy service.  For proxy services that use files such as Nginx or HAProxy the
-extension service generates the file and sends it to Interlock using the GRPC API.  Interlock
+The extension service is a helper service that queries the Layer 7 routing GRPC API for the
+upstream configuration. The extension service uses this to configure
+the proxy service. For proxy services that use files such as Nginx or HAProxy the
+extension service generates the file and sends it to Interlock using the GRPC API. Interlock
 then updates the corresponding Docker Config object for the proxy service.
 
 ## Proxy
 The proxy service handles the actual requests for the upstream application services.  These
 are configured using the data created by the corresponding extension service.
 
-Interlock manages both the extension and proxy service updates for both configuration changes
-and application service deployments.  There is no intervention from the operator required.
+Layer 7 routing manages both the extension and proxy service updates for both configuration changes
+and application service deployments. There is no intervention from the operator required.
 
 {% endif %}

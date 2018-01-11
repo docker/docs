@@ -1701,13 +1701,13 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/3.0/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
-    - sectiontitle: Interlock
+    - sectiontitle: Layer 7 routing
       section:
-      - title: Interlock overview
+      - title: Layer 7 routing overview
         path: /datacenter/ucp/3.0/guides/interlock/
       - sectiontitle: Introduction
         section:
-        - title: What is Interlock
+        - title: What is Layer 7 routing
           path: /datacenter/ucp/3.0/guides/interlock/intro/
         - title: Architecture
           path: /datacenter/ucp/3.0/guides/interlock/intro/architecture/
@@ -1723,7 +1723,7 @@ manuals:
           path: /datacenter/ucp/3.0/guides/interlock/install/offline/
       - sectiontitle: Configuration
         section:
-        - title: Interlock
+        - title: Layer 7 routing
           path: /datacenter/ucp/3.0/guides/interlock/configuration/
         - title: Service labels
           path: /datacenter/ucp/3.0/guides/interlock/configuration/service-labels/
@@ -1733,7 +1733,7 @@ manuals:
           path: /datacenter/ucp/3.0/guides/interlock/extensions/nginx/
         - title: HAProxy
           path: /datacenter/ucp/3.0/guides/interlock/extensions/haproxy/
-      - sectiontitle: Deploy apps with Interlock
+      - sectiontitle: Deploy apps with Layer 7 routing
         section:
         - title: Basic deployment
           path: /datacenter/ucp/3.0/guides/interlock/usage/
