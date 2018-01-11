@@ -20,7 +20,7 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 
 docker_ce_stable_version: "17.12"
 latest_stable_docker_engine_api_version: "1.35"
-docker_ce_edge_version: "17.12"
+docker_ce_edge_version: "18.01"
 docker_ee_version: "17.06"
 compose_version: "1.18.0"
 machine_version: "0.13.0"
