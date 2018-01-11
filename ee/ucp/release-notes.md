@@ -94,6 +94,8 @@ Calico (which is included).
 visible in the UI because of a problem with the middleware object store.
 * If all the nodes in UCP are using IBM Z, Kubernetes functionality will show
 up on the web UI but not be available for use.
+* Deploying a Compose V2 or older file as a Kubernetes is not supported but
+currently UCP doesn't present a meaningful error message to the user.
 
 {% elsif include.version=="ucp-2.2" %}
 
