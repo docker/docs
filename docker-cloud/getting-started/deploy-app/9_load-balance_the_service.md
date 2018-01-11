@@ -74,7 +74,7 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
 Hello Friendly Users!</br>Hostname: web-2</br>Counter: Redis Cache not found, counter disabled.%
 ```
 
-You can learn more about *dockercloud/haproxy*, our free open source HAProxy image <a href="https://github.com/moby/mobycloud-haproxy" target="_blank">here</a>.
+You can learn more about *dockercloud/haproxy*, our free open source HAProxy image <a href="https://github.com/docker/dockercloud-haproxy" target="_blank">here</a>.
 
 ## What's Next?
 
