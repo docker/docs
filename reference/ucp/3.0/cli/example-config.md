@@ -13,10 +13,5 @@ docker container run --rm -i \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
-    example-config > ucp.config
+    example-config
 ```
-
-## Description
-
-This command emits an example configuration file for setting up UCP.
-[Learn about UCP configuration files](../../guides/admin/configure/ucp-configuration-file.md). 
