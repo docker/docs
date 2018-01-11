@@ -33,10 +33,33 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> It should not be used in production environments.
+> This command is experimental on the Docker daemon. It should not be used in production environments.
 {: .important }
 
 {% endif %}
+
+{% if site.data[include.datafolder][include.datafile].experimentalcli %}
+
+> This command is experimental.
+>
+> This  command is experimental on the Docker client. It should not be used in production environments.
+{: .important }
+
+{% endif %}
+
+{% capture command-orchestrator %}
+{% if site.data[include.datafolder][include.datafile].swarm %}
+
+<span class="badge badge-info">Swarm</span> This command works with the Swarm orchestrator.
+
+{% endif %}
+{% if site.data[include.datafolder][include.datafile].kubernetes %}
+
+<span class="badge badge-info">Kubernetes</span> This command works with the Kubernetes orchestrator.
+
+{% endif %}
+{% endcapture %}{{ command-orchestrator }}
+
 
 {% if site.data[include.datafolder][include.datafile].usage %}
 
@@ -48,7 +71,11 @@ your client and daemon API versions.
 
 {% endif %}
 {% if site.data[include.datafolder][include.datafile].options %}
-
+  {% if site.data[include.datafolder][include.datafile].inherited_options %}
+    {% assign alloptions = site.data[include.datafolder][include.datafile].options | concat:site.data[include.datafolder][include.datafile].inherited_options %}
+  {% else %}
+    {% assign alloptions = site.data[include.datafolder][include.datafile].options %}
+  {% endif %}
 ## Options
 
 <table>
@@ -60,11 +87,12 @@ your client and daemon API versions.
   </tr>
 </thead>
 <tbody>
-{% for option in site.data[include.datafolder][include.datafile].options %}
+{% for option in alloptions %}
 
   {% capture min-api %}{% if option.min_api_version %}<span class="badge badge-info">API {{ option.min_api_version }}+</span>&nbsp;{% endif %}{%endcapture%}
-  {% capture stability-string %}{% if option.deprecated and option.experimental %}<span class="badge badge-danger">deprecated</span>&nbsp;<span class="badge badge-warning">experimental</span>&nbsp;{% elsif option.deprecated %}<span class="badge badge-danger">deprecated</span>&nbsp;{% elsif option.experimental %}<span class="badge badge-warning">experimental</span>&nbsp;{% endif %}{% endcapture %}
-  {% capture all-badges %}{% unless min-api == '' and stability-string == '' %}{{ min-api }}{{ stability-string }}<br />{% endunless %}{% endcapture %}
+  {% capture stability-string %}{% if option.deprecated and (option.experimental or option.experimentalcli) %}<span class="badge badge-danger">deprecated</span>&nbsp;<span class="badge badge-warning">experimental</span>&nbsp;{% elsif option.deprecated %}<span class="badge badge-danger">deprecated</span>&nbsp;{% elsif (option.experimental or option.experimentalcli) %}<span class="badge badge-warning">experimental</span>&nbsp;{% endif %}{% endcapture %}
+  {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info">Kubernetes</span>{% endif %}{% endcapture %}
+  {% capture all-badges %}{% unless min-api == '' and stability-string == '' %}{{ min-api }}{{ stability-string }}{{ flag-orchestrator }}<br />{% endunless %}{% endcapture %}
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
