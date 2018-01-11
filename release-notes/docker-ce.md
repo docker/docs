@@ -7,7 +7,7 @@ toc_min: 1
 ---
 
 {% raw %}
-For Docker Enterprise Edition, see [Docker EE](/enterprise/index.md).
+For Docker Enterprise Edition, see [Docker EE](/ee/index.md).
 
 For Docker releases prior to 17.03.0, see
 [Docker Engine release notes](/release-notes/docker-engine.md).
