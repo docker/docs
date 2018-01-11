@@ -59,8 +59,8 @@ To move your project to a later version, see the [Upgrading](#upgrading)
 section.
 
 > **Note**: If you're using
-> [multiple Compose files](extends.md#different-environments) or
-> [extending services](extends.md#extending-services), each file must be of the
+> [multiple Compose files](/compose/extends.md#multiple-compose-files) or
+> [extending services](/compose/extends.md#extending-services), each file must be of the
 > same version - you cannot, for example, mix version 1 and 2 in a single
 > project.
 
