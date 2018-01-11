@@ -66,7 +66,7 @@ Jobs can be in one of the following status:
 | done            | The job has successfully completed                                                                                                        |
 | error           | The job has completed with errors                                                                                                         |
 | cancel_request  | The worker monitors the job statuses in the database. If the status for a job changes to `cancel_request`, the worker will cancel the job |
-| cancel          | The job has been cancelled and not fully executed                                                                                         |
+| cancel          | The job has been canceled and not fully executed                                                                                          |
 | deleted         | The job and logs have been removed                                                                                                        |
 | worker_dead     | The worker for this job has been declared `dead` and the job will not continue                                                            |
 | worker_shutdown | The worker that was running this job has been gracefully stopped                                                                          |

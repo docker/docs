@@ -299,7 +299,7 @@ adopted as quickly for consistency and compatibility reasons.
 + Add Support swarm-mode services with node-local networks such as macvlan, ipvlan, bridge, host [#32981](https://github.com/moby/moby/pull/32981)
 + Pass driver-options to network drivers on service creation [#32981](https://github.com/moby/moby/pull/33130)
 + Isolate Swarm Control-plane traffic from Application data traffic using --data-path-addr [#32717](https://github.com/moby/moby/pull/32717)
-* Several improvments to Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
+* Several improvements to Service Discovery [#docker/libnetwork/1796](https://github.com/docker/libnetwork/pull/1796)
 + Allow user to replace, and customize the ingress network [#31714](https://github.com/moby/moby/pull/31714)
 - Fix UDP traffic in containers not working after the container is restarted [#32505](https://github.com/moby/moby/pull/32505)
 - Fix files being written to `/var/lib/docker` if a different data-root is set [#32505](https://github.com/moby/moby/pull/32505)
