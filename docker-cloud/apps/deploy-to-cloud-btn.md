@@ -12,7 +12,8 @@ one click in Docker Cloud as long as they are logged in. The button is intended
 to be added to `README.md` files in public GitHub repositories, although it can
 be used anywhere else.
 
-> **Note**: You must be _logged in_ to Docker Cloud for the button to work correctly. If you are not logged in, you'll see a 404 error instead.
+> **Note**: You must be _logged in_ to Docker Cloud for the button to work
+> Otherwise, the link results in a 404 error.
 
 This is an example button to deploy our [python quickstart](https://github.com/docker/dockercloud-quickstart-python){: target="_blank" class="_"}:
 

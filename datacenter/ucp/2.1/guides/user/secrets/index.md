@@ -117,16 +117,16 @@ Click the **Deploy Now** button to deploy the WordPress service.
 
 ![](../../images/manage-secrets-5.png){: .with-border}
 
-Once you deploy this service, you'll be able to access it using the
+Once you deploy this service, you can access it using the
 IP address of any node in your UCP cluster, on port 8000.
 
 ![](../../images/manage-secrets-6.png){: .with-border}
 
 ## Update a secret
 
-If the secret gets compromised you'll need to rotate it so that your services
-start using a new secret. In this case we need to change the password we're
-using and update the MySQL and WordPress services to use the new password.
+If the secret gets compromised you need to rotate it so that your services
+start using a new secret. This example changes the password and updates the
+MySQL and WordPress services to use the new password.
 
 Since secrets are immutable in the sense that you cannot change the data
 they store after they are created, we can use the following process to achieve

@@ -5,14 +5,13 @@ title: "Quickstart: Compose and Rails"
 ---
 
 This Quickstart guide shows you how to use Docker Compose to set up and run
-a Rails/PostgreSQL app. Before starting, you'll need to have [Compose
-installed](install.md).
+a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 
 ### Define the project
 
-Start by setting up the four files you'll need to build the app. First, since
+Start by setting up the four files needed to build the app. First, since
 your app is going to run inside a Docker container containing all of its
-dependencies, you'll need to define exactly what needs to be included in the
+dependencies, define exactly what needs to be included in the
 container. This is done using a file called `Dockerfile`. To begin with, the
 Dockerfile consists of:
 
@@ -37,7 +36,7 @@ in a moment by `rails new`.
     source 'https://rubygems.org'
     gem 'rails', '5.0.0.1'
 
-You'll need an empty `Gemfile.lock` in order to build our `Dockerfile`.
+Create an empty `Gemfile.lock` in order to build our `Dockerfile`.
 
     touch Gemfile.lock
 

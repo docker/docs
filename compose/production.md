@@ -14,8 +14,8 @@ up your application, you can run Compose apps on a Swarm cluster.
 
 ### Modify your Compose file for production
 
-You'll almost certainly want to make changes to your app configuration that are
-more appropriate to a live environment. These changes may include:
+You probably need to make changes to your app configuration to make it ready for
+production. These changes may include:
 
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
@@ -25,7 +25,7 @@ more appropriate to a live environment. These changes may include:
 - Specifying a restart policy (e.g., `restart: always`) to avoid downtime
 - Adding extra services (e.g., a log aggregator)
 
-For this reason, you'll probably want to define an additional Compose file, say
+For this reason, consider defining an additional Compose file, say
 `production.yml`, which specifies production-appropriate
 configuration. This configuration file only needs to include the changes you'd
 like to make from the original Compose file. The additional Compose file
@@ -41,9 +41,9 @@ complete example.
 
 ### Deploying changes
 
-When you make changes to your app code, you'll need to rebuild your image and
+When you make changes to your app code, remember to rebuild your image and
 recreate your app's containers. To redeploy a service called
-`web`, you would use:
+`web`, use:
 
     $ docker-compose build web
     $ docker-compose up --no-deps -d web

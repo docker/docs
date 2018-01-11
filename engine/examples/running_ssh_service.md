@@ -62,7 +62,7 @@ Using the `sshd` daemon to spawn shells makes it complicated to pass environment
 variables to the user's shell via the normal Docker mechanisms, as `sshd` scrubs
 the environment before it starts the shell.
 
-If you're setting values in the `Dockerfile` using `ENV`, you'll need to push them
+If you're setting values in the `Dockerfile` using `ENV`, you need to push them
 to a shell initialization file like the `/etc/profile` example in the `Dockerfile`
 above.
 

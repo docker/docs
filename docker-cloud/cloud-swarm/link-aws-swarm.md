@@ -78,7 +78,7 @@ the new policy to your existing role by following the instructions
 
 15. Back on the role view, click into the new role to view details, and copy the full **Role ARN** string.
 
-    The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. You'll use the ARN in the next step.
+    The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. The next step requires the.
 
     ![Role summary showing Role ARN](images/aws-swarm-iam-role-2.png)
 
@@ -108,7 +108,7 @@ policy, and re-link your account.
 9.  If the validation succeeds, click **Apply Policy**.
 
 10.  Select and copy the **Role ARN** on the role screen.
-    It shouldn't have changed, but you'll use it to re-link your account.
+     It shouldn't have changed, but you need it to re-link your account.
 
 Because you edited the role's permissions, you need to re-link
 to your account. Back in Docker Cloud, click the account menu and

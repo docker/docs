@@ -210,8 +210,8 @@ generate new images and the cache is not used.
 
 ## The Dockerfile instructions
 
-Below you'll find recommendations for the best way to write the
-various instructions available for use in a `Dockerfile`.
+These recommendations help you to write an efficient and maintainable
+`Dockerfile`.
 
 ### FROM
 

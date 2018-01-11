@@ -120,7 +120,7 @@ docker swarm init
 ```
 
 >**Note**: We get into the meaning of that command in [part 4](part4.md).
-> If you don't run `docker swarm init` you'll get an error that "this node is not a swarm manager."
+> If you don't run `docker swarm init` you get an error that "this node is not a swarm manager."
 
 Now let's run it. You have to give your app a name. Here, it is set to
 `getstartedlab`:
@@ -138,7 +138,7 @@ Get the service ID for the one service in our application:
 docker service ls
 ```
 
-You'll see output for the `web` service, prepended with your app name. If you
+Look for output for the `web` service, prepended with your app name. If you
 named it the same as shown in this example, the name is
 `getstartedlab_web`. The service ID is listed as well, along with the number of
 replicas, image name, and exposed ports.
@@ -163,7 +163,7 @@ your browser and hit refresh a few times.
 
 ![Hello World in browser](images/app80-in-browser.png)
 
-Either way, you'll see the container ID change, demonstrating the
+Either way, the container ID changes, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs matches your output from
 the previous command (`docker container ls -q`).

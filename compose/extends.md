@@ -205,7 +205,7 @@ looks like this:
       volumes:
         - "/data"
 
-In this case, you'll get exactly the same result as if you wrote
+In this case, you get exactly the same result as if you wrote
 `docker-compose.yml` with the same `build`, `ports` and `volumes` configuration
 values defined directly under `web`.
 

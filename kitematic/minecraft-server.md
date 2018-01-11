@@ -18,7 +18,7 @@ button.
 
 ![create Minecraft container](images/minecraft-create.png)
 
-After the image finishes downloading, you'll see the home screen for the
+After the image finishes downloading, you see the home screen for the
 Minecraft container. Your Minecraft server is now up and running inside a Docker
 container. Note that we've marked the IP and port you can use to connect to
 your Minecraft server in red (your IP and port may be different from what's
@@ -48,7 +48,7 @@ Click on the play button to connect to your Minecraft server and enjoy!
 
 ### Change map using Docker volume
 
-Open the "data" folder from Kitematic (You'll need to "Enable all volumes to edit
+Open the "data" folder from Kitematic (Select "Enable all volumes to edit
 files via Finder"). We use Docker Volume to map the folder from the Minecraft
 Docker container onto your computer.
 

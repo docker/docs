@@ -7,7 +7,7 @@ keywords: dtr, configure, http, proxy
 
 Docker Trusted Registry makes outgoing connections to check for new versions,
 automatically renew its license, and update its vulnerability database.
-If DTR can't access the internet, then you'll have to manually apply updates.
+If DTR can't access the internet, then you need to manually apply updates.
 
 One option to keep your environment secure while still allowing DTR access to
 the internet is to use a web proxy. If you have an HTTP or HTTPS proxy, you

@@ -15,12 +15,9 @@ continue running in swarm mode. You applications will continue running normally.
 If you wish to remove a single node from the UCP cluster, you should instead
 [Remove that node from the cluster](../configure/scale-your-cluster.md).
 
-After you uninstall UCP from the cluster, you'll no longer be able to enforce
-role-based access control to the cluster, or have a centralized way to monitor
-and manage the cluster.
-
-After uninstalling UCP from the cluster, you will no longer be able to join new
-nodes using `docker swarm join`, unless you reinstall UCP.
+After you uninstall UCP from the cluster, you can't enforce role-based access
+control to the cluster or centrally monitor and manage the cluster. You can
+no longer join new nodes to the cluster using `docker swarm join`.
 
 To uninstall UCP, log in to a manager node using ssh, and run the following
 command:

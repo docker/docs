@@ -9,7 +9,7 @@ title: Use Ansible
 
 ## Requirements
 
-To use this guide you'll need a working installation of
+To use this guide you need a working installation of
 [Ansible](https://www.ansible.com/) version 2.1.0 or later.
 
 Requirements on the host that execute the module:

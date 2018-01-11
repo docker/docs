@@ -26,7 +26,7 @@ or pull Docker images from DTR. This includes:
 * Your local computer or any other that wants to push or pull Docker images
   from DTR
 
-If your host isn't configured to trust the DTR TLS certificates, you'll get an
+If your host isn't configured to trust the DTR TLS certificates, you get an
 error like:
 
 ```none

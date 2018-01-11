@@ -10,8 +10,8 @@ deploying Docker Universal Control Plane for production.
 
 ## System requirements
 
-Before installing UCP you should make sure that all nodes (physical or virtual
-machines) that you'll manage with UCP:
+Before installing UCP, make sure that all nodes (physical or virtual
+machines) that UCP manages:
 
 * [Comply with the system requirements](system-requirements.md), and
 * Are running the same version of Docker Engine.
@@ -53,7 +53,7 @@ unexpected behavior may cause poor performance or even failures.
 Docker UCP doesn't include a load balancer. You can configure your own
 load balancer to balance user requests across all manager nodes.
 
-If you plan to use a load balancer, you need to decide whether you'll
+If you plan to use a load balancer, you need to decide whether to
 add the nodes to the load balancer using their IP addresses or their FQDNs.
 Whichever you choose, be consistent across nodes. When this is decided,
 take note of all IPs or FQDNs before starting the installation.

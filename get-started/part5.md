@@ -41,7 +41,7 @@ In [part 4](part4.md), you learned how to set up a swarm, which is a cluster of
 machines running Docker, and deployed an application to it, with containers
 running in concert on multiple machines.
 
-Here in part 5, you'll reach the top of the hierarchy of distributed
+Here in part 5, you reach the top of the hierarchy of distributed
 applications: the **stack**. A stack is a group of interrelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
@@ -98,7 +98,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
     ```
 
     The only thing new here is the peer service to `web`, named `visualizer`.
-    You'll see two new things here: a `volumes` key, giving the visualizer
+    Notice two new things here: a `volumes` key, giving the visualizer
     access to the host's socket file for Docker, and a `placement` key, ensuring
     that this service only ever runs on a swarm manager -- never a worker.
     That's because this container, built from [an open source project created by
@@ -277,11 +277,11 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ```
 
-6.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.
+6.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and take a look at the results of the visitor counter, which is now live and storing information on Redis.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
-    Also, check the visualizer at port 8080 on either node's IP address, and you'll see the `redis` service running along with the `web` and `visualizer` services.
+    Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
 
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 

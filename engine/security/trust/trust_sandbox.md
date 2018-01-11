@@ -25,8 +25,6 @@ and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 Docker Compose, see the
 [detailed instructions here](/compose/install/).
 
-Finally, you'll need to have a text editor installed on your local system or VM.
-
 ## What is in the sandbox?
 
 If you are just using trust out-of-the-box you only need your Docker Engine
@@ -48,7 +46,7 @@ Within the `trustsandbox` container, you interact with your local registry rathe
 than the Docker Hub. This means your everyday image repositories are not used.
 They are protected while you play.
 
-When you play in the sandbox, you'll also create root and repository keys. The
+When you play in the sandbox, you also create root and repository keys. The
 sandbox is configured to store all the keys and files inside the `trustsandbox`
 container. Since the keys you create in the sandbox are for play only,
 destroying the container destroys them as well.
@@ -60,7 +58,7 @@ and can be destroyed after you destroy the container.
 
 ## Build the sandbox
 
-In this section, you'll use Docker Compose to specify how to set up and link together
+In this section, you use Docker Compose to specify how to set up and link together
 the `trustsandbox` container, the Notary server, and the Registry server.
 
 
@@ -134,7 +132,7 @@ in the `trustsandbox` container.
 
 ### Test some trust operations
 
-Now, you'll pull some images from within the `trustsandbox` container.
+Now, pull some images from within the `trustsandbox` container.
 
 1. Download a `docker` image to test with.
 
@@ -214,33 +212,35 @@ What happens when data is corrupted and you try to pull it when trust is
 enabled? In this section, you go into the `sandboxregistry` and tamper with some
 data. Then, you try and pull it.
 
-1. Leave the `trustsandbox` shell and container running.
+1.  Leave the `trustsandbox` shell and container running.
 
-2. Open a new interactive terminal from your host, and obtain a shell into the
-`sandboxregistry` container.
+2.  Open a new interactive terminal from your host, and obtain a shell into the
+    `sandboxregistry` container.
 
         $ docker exec -it sandboxregistry bash
         root@65084fc6f047:/#
 
-3. List the layers for the `test/trusttest` image you pushed:
+3.  List the layers for the `test/trusttest` image you pushed:
 
-        root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
-        total 12
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
-        drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
+    ```bash
+    root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+    total 12
+    drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+    drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+    drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
+    ```
 
-4. Change into the registry storage for one of those layers (note that this is in a different directory):
+4.  Change into the registry storage for one of those layers (note that this is in a different directory):
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
-5. Add malicious data to one of the `trusttest` layers:
+5.  Add malicious data to one of the `trusttest` layers:
 
         root@65084fc6f047:/# echo "Malicious data" > data
 
-6. Go back to your `trustsandbox` terminal.
+6.  Go back to your `trustsandbox` terminal.
 
-7. List the `trusttest` image.
+7.  List the `trusttest` image.
 
         / # docker images | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
@@ -248,7 +248,7 @@ data. Then, you try and pull it.
         sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
         sandboxregistry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
 
-8. Remove the `trusttest:latest` image from our local cache.
+8.  Remove the `trusttest:latest` image from our local cache.
 
         / # docker rmi -f cc7629d1331a
         Untagged: docker/trusttest:latest
@@ -262,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8. Pull the image again. This downloads the image from the registry, because we don't have it cached.
+8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest
@@ -273,7 +273,7 @@ data. Then, you try and pull it.
         a3ed95caeb02: Download complete
         error pulling image configuration: unexpected EOF
 
-      You'll see the pull did not complete because the trust system was
+      The pull did not complete because the trust system was
       unable to verify the image.
 
 ## More play in the sandbox

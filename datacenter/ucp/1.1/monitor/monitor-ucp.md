@@ -8,8 +8,7 @@ title: Monitor your cluster
 ---
 
 This article gives you an overview of how to monitor your Docker UCP
-cluster. Here you'll also find the information you need to troubleshoot
-if something goes wrong.
+cluster and how to troubleshoot if something goes wrong.
 
 
 ## Check the cluster status from the UI

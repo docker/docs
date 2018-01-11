@@ -242,8 +242,8 @@ For each node that you want to add to your UCP cluster:
 
 ## Step 11. Download a client certificate bundle
 
-To validate that your cluster is correctly configured, you should try accessing
-the cluster with the Docker CLI client. For this, you'll need to get a client
+To validate that your cluster is correctly configured, try accessing
+the cluster with the Docker CLI client. For this, you need to get a client
 certificate bundle.
 [Learn more about user bundles](../access-ucp/cli-based-access.md).
 

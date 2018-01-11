@@ -205,7 +205,7 @@ Some features are not yet supported on Windows nodes:
   a port for your service in the host where it is running, and use the HTTP
   routing mesh to make your service accessible using a domain name.
   * Encrypted networks are not supported. If you've upgraded from a previous
-  version, you'll also need to recreate the `ucp-hrm` network to make it
+  version, you also need to recreate the `ucp-hrm` network to make it
   unencrypted.
 * Secrets
   * When using secrets with Windows services, Windows stores temporary secret

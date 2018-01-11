@@ -13,7 +13,7 @@ An internal service multiplexes all the logs from all the containers of a
 service into a single stream. To see a service's logs run the `docker-cloud
 service logs` command with the name of the service.
 
-If we run `docker-cloud service logs web`, you'll see logs for both *web-1* and
+If we run `docker-cloud service logs web`, you see logs for both *web-1* and
 *web-2*, like the example below.
 
 ```none

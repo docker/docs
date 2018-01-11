@@ -46,7 +46,7 @@ To generate your access token:
 
     ![Copy and save personal access token](../img/ocean_save_token.png)
 
-    This is the personal access token you'll use in the next step to create your cloud server.
+    This is the personal access token used in the next step to create your cloud server.
 
 ### Step 3. Use Machine to create the Droplet
 
@@ -86,7 +86,11 @@ To generate your access token:
         default          -        virtualbox     Running   tcp://192.168.99.100:2376
         docker-sandbox   *        digitalocean   Running   tcp://45.55.139.48:2376
 
-    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (\*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
+    The new `docker-sandbox` machine is running, and it is the active host as
+    indicated by the asterisk (\*). When you create a new machine, your command
+    shell automatically connects to it. If for some reason your new machine is
+    not the active host, run `docker-machine env docker-sandbox`, followed by
+    `eval $(docker-machine env docker-sandbox)` to connect to it.
 
 ### Step 4. Run Docker commands on the Droplet
 

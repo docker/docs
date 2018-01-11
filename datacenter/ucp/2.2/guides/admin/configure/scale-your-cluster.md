@@ -50,7 +50,7 @@ Click **Add Node** to add a new node.
 
 -  Click **Manager** if you want to add the node as a manager.
 -  Check the **Use a custom listen address** option to specify the
-   IP address of the host that you'll be joining to the cluster.
+   IP address of the host that you want to join to the cluster.
 -  Check the **Use a custom listen address** option to specify the
    IP address that's advertised to all members of the swarm for API access.
 
@@ -75,7 +75,7 @@ web UI.
    * From the CLI, perform `docker node ls` and identify the nodeID or hostname
    of the target node. Then, run `docker node demote <nodeID or hostname>`.
 
-2. If the status of the worker node is `Ready`, you'll need to manually force
+2. If the status of the worker node is `Ready`, you need to manually force
    the node to leave the swarm. To do this, connect to the target node through
    SSH and run `docker swarm leave --force` directly against the local docker
    engine.

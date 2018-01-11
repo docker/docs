@@ -51,7 +51,7 @@ After replacing the TLS certificates, your users can't authenticate
 with their old client certificate bundles. Ask your users to go to the UCP
 web UI and [get new client certificate bundles](../../user/access-ucp/cli-based-access.md).
 
-If you deployed Docker Trusted Registry, you'll also need to reconfigure it
+If you deployed Docker Trusted Registry, you also need to reconfigure it
 to trust the new UCP TLS certificates.
 [Learn how to configure DTR](/datacenter/dtr/2.3/reference/cli/reconfigure.md).
 

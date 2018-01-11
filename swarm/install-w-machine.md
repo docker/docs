@@ -95,7 +95,7 @@ Daemon running on each node. Other discovery service backends such as
 
 5.  Save the token in a safe place.
 
-	  You'll use this token in the next step to create a Docker Swarm.
+	  You use this token in the next step to create a Docker Swarm.
 
 
 ## Launch the Swarm manager

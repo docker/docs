@@ -10,7 +10,7 @@ In the previous step, we set up Redis but didn't provide it a way to store the
 data it's caching. This means that if you redeployed the redis service, or if
 the container crashed, the data would be lost. To save the data so it persists
 beyond the life of a container, or share data from one container to another,
-you'll need to define a volume.
+you need to define a volume.
 
 ## Data persistence
 
@@ -21,7 +21,7 @@ Docker Cloud [here](/docker-cloud/apps/volumes.md).
 
 ### Test for lack of persistence
 
-If you `redeploy` the Redis service you created earlier, you'll see that the counter resets.
+If you `redeploy` the Redis service you created earlier, the counter resets.
 
 Let's try that. First, redeploy the redis service to reset the counter.
 
@@ -117,7 +117,7 @@ up, restore, or migrate a volume to a local host or a cloud storage provider.
 
 ## Download volume data for backup
 
-In this next step, you'll download the `/data` volume from Redis to your local host using SCP (secure copy).
+In this next step, you download the `/data` volume from Redis to your local host using SCP (secure copy).
 
 First, run an SSH service that mounts the volumes of the redis you want to back up:
 

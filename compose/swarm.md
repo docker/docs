@@ -39,8 +39,8 @@ instance can, but the resulting image only lives on a single node and won't
 be distributed to other nodes.
 
 If you want to use Compose to scale the service in question to multiple nodes,
-you'll have to build it yourself, push it to a registry (e.g. the Docker Hub)
-and reference it from `docker-compose.yml`:
+build the image, push it to a registry (e.g. the Docker Hub), and reference it
+from `docker-compose.yml`:
 
     $ docker build -t myusername/web .
     $ docker push myusername/web

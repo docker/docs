@@ -38,8 +38,8 @@ Click **Confirm** to map the ports for the NGINX service.
 Once you've specified the service image and ports, click **Create** to
 deploy the service into the UCP swarm.
 
-Once the service is up and running, you'll be able to see the default NGINX
-page, by going to `http://<node-ip>:8000`.
+Once the service is up and running, the default NGINX is available at
+`http://<node-ip>:8000`.
 
 ![](../../images/deploy-a-service-4.png){: .with-border}
 

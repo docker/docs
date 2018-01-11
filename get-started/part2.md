@@ -231,7 +231,7 @@ Hit `CTRL+C` in your terminal to quit.
  type `CTRL+C` to get the prompt back (or open another shell), then type
  `docker container ls` to list the running containers, followed by
  `docker container stop <Container NAME or ID>` to stop the
- container. Otherwise, you'll get an error response from the daemon
+ container. Otherwise, you get an error response from the daemon
  when you try to re-run the container in the next step.
 
 Now let's run the app in the background, in detached mode:
@@ -251,7 +251,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED
 1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
 ```
 
-You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
+Notice that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
 Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
@@ -262,7 +262,7 @@ docker container stop 1fa4ab2cf395
 ## Share your image
 
 To demonstrate the portability of what we just created, let's upload our built
-image and run it somewhere else. After all, you'll need to learn how to push to
+image and run it somewhere else. After all, you need to know how to push to
 registries when you want to deploy containers to production.
 
 A registry is a collection of repositories, and a repository is a collection of

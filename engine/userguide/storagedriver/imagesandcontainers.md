@@ -7,14 +7,10 @@ redirect_from:
 - /engine/installation/userguide/storagedriver/
 ---
 
-To use storage drivers effectively, you must understand how Docker builds and
-stores images. Then, you need an understanding of how these images are used by
-containers. Finally, you'll need a short introduction to the technologies that
-enable both images and container operations.
-
-Understanding how Docker manages the data within your images and containers
-helps you understand the best way to design your containers and Dockerize your
-applications, and avoid performance problems along the way.
+To use storage drivers effectively, it's important to know how Docker builds and
+stores images, how these images are used by containers. You can use this
+information to make informed choices about the best way to persist data from
+your applications and  avoid performance problems along the way.
 
 ## Images and layers
 

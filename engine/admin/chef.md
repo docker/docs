@@ -11,7 +11,7 @@ title: Use Chef
 
 ## Requirements
 
-To use this guide you'll need a working installation of
+To use this guide you need a working installation of
 [Chef](https://www.chef.io/). This cookbook supports a variety of
 operating systems.
 

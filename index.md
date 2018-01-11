@@ -24,7 +24,7 @@ production servers in the cloud. Total reading time is less than an hour.
 
 ## Try Docker Enterprise Edition
 
-Run your solution in production with Docker Enterprise Edition and you'll get a
+Run your solution in production with Docker Enterprise Edition to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
 Docker EE without installing anything.

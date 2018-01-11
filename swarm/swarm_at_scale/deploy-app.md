@@ -26,7 +26,7 @@ on are not part of the `voteapp` overlay container network.
 ## Task 1. Set up volume and network
 
 This application relies on both an overlay container network and a container
-volume. The Docker Engine provides these two features. You'll create them both
+volume. The Docker Engine provides these two features. Create them both
 on the swarm manager instance.
 
 1. Direct your local environment to the swarm manager host.
@@ -163,7 +163,7 @@ command below, look for the value constraint.
 ## Task 3. Check your work and update /etc/hosts
 
 In this step, you check your work to make sure the Nginx configuration recorded
-the containers correctly. You'll update your local systems `/etc/hosts` file to
+the containers correctly. Update your local systems `/etc/hosts` file to
 allow you to take advantage of the loadbalancer.
 
 1. Change to the `loadbalancer` node.
@@ -245,7 +245,7 @@ Now, you can test your application.
 3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
 4. Try changing your vote.
 
-    You'll see both sides change as you switch your vote.
+    Both sides change as you switch your vote.
 
     ![Voting and results page](/swarm/images/votes.gif)
 

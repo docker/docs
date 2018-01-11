@@ -330,7 +330,7 @@ to clone the repository and build it, however this key only works for a single,
 specific code repository. If your source code repository uses private Git
 submodules (or requires that you clone other private repositories to build),
 Docker Cloud cannot access these additional repos, your build cannot complete,
-and you'll see an error in your build timeline.
+and an error is logged in your build timeline.
 
 To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Cloud's build system access to the repositories.
 
@@ -393,7 +393,7 @@ variable to automated builds associated with the account.
 
 1. Create a service user account on your source provider, and generate SSH keys for it.
 2. Create a "build" team in your organization.
-3. Ensure that the new "build" team has access to each repository and submodule you'll be building.
+3. Ensure that the new "build" team has access to each repository and submodule you need to build.
 
     Go to the repository's **Settings** page. On Github, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
 

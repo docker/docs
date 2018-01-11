@@ -4,8 +4,8 @@ keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and Django"
 ---
 
-This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting, you'll need to have
-[Compose installed](install.md).
+This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
+[install Compose](install.md).
 
 ### Define the project components
 

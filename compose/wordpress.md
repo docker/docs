@@ -6,7 +6,7 @@ title: "Quickstart: Compose and WordPress"
 
 You can use Docker Compose to easily run WordPress in an isolated environment
 built with Docker containers. This quick-start guide demonstrates how to use
-Compose to set up and run WordPress. Before starting, you'll need to have
+Compose to set up and run WordPress. Before starting, install
 [Compose installed](/compose/install.md).
 
 ### Define the project

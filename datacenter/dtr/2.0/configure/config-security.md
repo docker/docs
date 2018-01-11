@@ -131,7 +131,7 @@ $ sudo /bin/systemctl restart docker.service
 
 #### Docker Machine and Boot2Docker
 
-You'll need to make some persistent changes using `bootsync.sh` in your
+You need to make some persistent changes using `bootsync.sh` in your
 Boot2Docker-based virtual machine (as documented in [local customization](https://github.com/boot2docker/boot2docker/blob/master/doc/FAQ.md#local-customisation-with-persistent-partition)). To do this:
 
 1.  `docker-machine ssh dev` to enter the VM
@@ -167,7 +167,7 @@ If for some reason you can't install the certificate chain on a client Docker
 host, or your certificates do not have a global CA, you can configure your
 Docker daemon to run in "insecure" mode. This is done by adding an extra flag,
 `--insecure-registry host-ip|domain-name`, to your client Docker daemon startup
-flags. You'll need to restart the Docker daemon for the change to take effect.
+flags. Restart the Docker daemon for the change to take effect.
 
 This flag means that the communications between your Docker client and the
 Trusted Registry server are still encrypted, but the client Docker daemon is not

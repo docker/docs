@@ -139,14 +139,14 @@ Certificate:
 <output truncated>
 ```
 
-Later, you'll use this certificate to sign keys for other servers in the
+Later, you use this certificate to sign keys for other servers in the
 infrastructure.
 
 ## Step 3: Create and sign keys
 
 Now that you have a working CA, you need to create key pairs for the swarm
 manager, swarm nodes, and remote Docker Engine client. The commands and process
-to create key pairs is identical for all servers. You'll create the following keys:
+to create key pairs is identical for all servers. You create the following keys:
 
 | Key | Description |
 | --- | ----------- |
@@ -266,7 +266,7 @@ infrastructure. Each server needs three files:
 - It's own public key (cert)
 
 The procedure below shows you how to copy these files from the CA server to each
-server using `scp`. As part of the copy procedure, you'll rename each file as
+server using `scp`. As part of the copy procedure, rename each file as
 follows on each node:
 
 | Original name           | Copied name |
@@ -415,7 +415,7 @@ Your swarm cluster is now configured to use TLS.
 
 ## Step 8: Test the swarm manager configuration
 
-Now that you have a swarm cluster built and configured to use TLS, you'll test that it works with a Docker Engine CLI.
+Now that you have a swarm cluster built and configured to use TLS, test that it works with a Docker Engine CLI.
 
 1. Open a terminal onto your `client` server.
 
@@ -468,11 +468,13 @@ Now that you have a swarm cluster built and configured to use TLS, you'll test t
 ## Step 9: Configure the Engine CLI to use TLS
 
 You can configure the Engine so that you don't have to pass the TLS options when
-you issue a command. To do this, you'll configure the `Docker Engine host` and
+you issue a command. To do this, configure the `Docker Engine host` and
 `TLS` settings as defaults on your Docker Engine client.
 
-To do this, you place the client's keys in your `~/.docker` configuration folder. If you have other users on your system using the Engine command line, you'll need to configure their account's `~/.docker` as well. The procedure below shows how to do this for the `ubuntu` user on
-your Docker Engine client.
+To do this, you place the client's keys in your `~/.docker` configuration
+folder. If you have other users on your system using the Engine command line,
+configure their account's `~/.docker` as well. The procedure below shows how to
+do this for the `ubuntu` user on your Docker Engine client.
 
 1.  Open a terminal onto your `client` server.
 

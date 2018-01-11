@@ -197,10 +197,10 @@ but may be less stable.
 
 ## Upgrading
 
-If you're upgrading from Compose 1.2 or earlier, you'll need to remove or
+If you're upgrading from Compose 1.2 or earlier, remove or
 migrate your existing containers after upgrading Compose. This is because, as of
-version 1.3, Compose uses Docker labels to keep track of containers, and so they
-need to be recreated with labels added.
+version 1.3, Compose uses Docker labels to keep track of containers, and your
+containers need to be recreated to add the labels.
 
 If Compose detects containers that were created without labels, it refuses
 to run so that you don't end up with two sets of them. If you want to keep using

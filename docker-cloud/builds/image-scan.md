@@ -138,8 +138,8 @@ this free period.
 #### Will Docker Security Scanning always be available for free?
 
 No. We are making Security Scanning available as a free preview for a limited
-time. After that, you'll be able to purchase Security Scanning for your private
-repository subscriptions.
+time. After that, Security Scanning will be available as a purchase for your
+private repository subscriptions.
 
 #### Can I scan my organization's repositories (public and/or private)?
 

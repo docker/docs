@@ -150,7 +150,7 @@ sandbox DTR instance.
 ## Step 4: Pull your image from DTR into UCP
 
 UCP does not automatically pull images from DTR. To make an image from DTR
-appear in UCP, you'll use the UCP web UI to perform a `docker pull`. This `pull`
+appear in UCP, you use the UCP web UI to perform a `docker pull`. This `pull`
 command pulls the image and makes it available on all nodes in the UCP cluster.
 
 1. From the UCP dashboard, click **Images** in the left navigation.
@@ -178,7 +178,7 @@ an Nginx web server or a database like Postgres.
 
 A UCP administrator initiates Engine actions using the UCP dashboard or the
 Docker Engine CLI. In this step, you deploy a container from the UCP dashboard.
-The container runs an Nginx server, so you'll need to launch the `nginx` image
+The container runs an Nginx server, so you need to launch the `nginx` image
 inside of it.
 
 1. Log in to the UCP **Dashboard**.
@@ -252,7 +252,7 @@ running. In this step, you open the running server.
 
 3. Scroll down to the ports section.
 
-    You'll see an IP address with port `8080` for the server.
+    Look for an IP address with port `8080` for the server.
 
 4. Copy the IP address to your browser and paste the information you copied.
 

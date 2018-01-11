@@ -107,7 +107,7 @@ avoid these situations.
     avoid overlap.
 
     If you want to use the `dockremap` user automatically created by Docker,
-    you'll need to check for the `dockremap` entry in these files **after**
+    check for the `dockremap` entry in these files **after**
     configuring and restarting Docker.
 
 3.  If there are any locations on the Docker host where the unprivileged

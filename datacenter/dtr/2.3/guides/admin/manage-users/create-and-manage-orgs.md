@@ -22,8 +22,8 @@ organization.
 
 ![](../../images/create-and-manage-orgs-2.png){: .with-border}
 
-Repositories owned by this organization will contain the organization name, so
-to pull an image from that repository, you'll use:
+Repositories owned by this organization contain the organization name, so
+to pull an image from that repository, use:
 
 ```bash
 $ docker pull <dtr-domain-name>/<organization>/<repository>:<tag>

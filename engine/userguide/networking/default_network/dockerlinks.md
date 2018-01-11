@@ -178,7 +178,7 @@ earlier. The `--link` flag takes the form:
     --link <name or id>:alias
 
 Where `name` is the name of the container we're linking to and `alias` is an
-alias for the link name. You'll see how that alias gets used shortly.
+alias for the link name. That alias is used shortly.
 The `--link` flag also takes the form:
 
 	--link <name or id>
@@ -203,7 +203,7 @@ So what does linking the containers actually do? You've learned that a link allo
 source container to provide information about itself to a recipient container. In
 our example, the recipient, `web`, can access information about the source `db`. To do
 this, Docker creates a secure tunnel between the containers that doesn't need to
-expose any ports externally on the container; you'll note when we started the
+expose any ports externally on the container; when we started the
 `db` container we did not use either the `-P` or `-p` flags. That's a big benefit of
 linking: we don't need to expose the source container, here the PostgreSQL database, to
 the network.
@@ -344,7 +344,7 @@ that host via any of these entries:
     56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
 
 > **Note**:
-> In the example, you'll note you had to install `ping` because it was not included
+> In the example, you had to install `ping` because it was not included
 > in the container initially.
 
 Here, you used the `ping` command to ping the `db` container using its host entry,

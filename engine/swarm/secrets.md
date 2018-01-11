@@ -921,7 +921,7 @@ use it, then remove the old secret.
     ```
 
 5.  Verify that WordPress works by browsing to http://localhost:30000/ on any
-    swarm node again. You'll need to use the WordPress username and password
+    swarm node again. Use the WordPress username and password
     from when you ran through the WordPress wizard in the previous task.
 
     Verify that the blog post you wrote still exists, and if you changed any

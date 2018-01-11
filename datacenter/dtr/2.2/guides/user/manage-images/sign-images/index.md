@@ -29,7 +29,7 @@ to the Notary Server internal to DTR.
 
 ## Sign images that UCP can trust
 
-With the command above you'll be able to sign your DTR images, but UCP doesn't
+With the command above you can sign your DTR images, but UCP doesn't
 trust them because it can't tie the private key you're using to sign the images
 to your UCP account.
 
@@ -41,8 +41,8 @@ To sign images in a way that UCP trusts them you need to:
 
 In this example we're going to pull an NGINX image from Docker Store,
 re-tag it as `dtr.example.org/dev/nginx:1`, push the image to DTR and sign it
-in a way that is trusted by UCP. If you manage multiple repositories, you'll
-have to do the same procedure for every one of them.
+in a way that is trusted by UCP. If you manage multiple repositories, you
+need to do the same procedure for every one of them.
 
 ### Configure your Notary client
 
@@ -108,7 +108,7 @@ notary delegation add --publish \
   --all-paths <ucp-cert.pem>
 ```
 
-To push the new signing metadata to the Notary server, you'll have to push
+To push the new signing metadata to the Notary server, you need to push
 the image again:
 
 ```none

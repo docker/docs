@@ -11,7 +11,7 @@ Docker Cloud offers a large number of data stores in the *Jumpstart* library,
 including Redis, MongoDB, PostgreSQL, and MySQL.
 
 You may have noticed that your app has a visit counter that's been disabled up
-until now. In this step you'll add a data backend for your service to use. In
+until now. In this step you add a data backend for your service to use. In
 this specific tutorial we use a Redis cache, but most concepts apply to any
 data backend.
 
@@ -49,7 +49,7 @@ $ docker-cloud service set --link redis:redis --redeploy web
 
 In this command, we're creating a link from the `web` service (specified at the end of the command) to the `redis` service, and naming the link `redis`.
 
-Next, visit or `curl` the load balanced web endpoint again. You'll notice that the web service now counts of the number of visits to the web service. This uses the Redis data backend, and is synchronized between all of the service's containers.
+Next, visit or `curl` the load balanced web endpoint again. The web service now counts of the number of visits to the web service. This uses the Redis data backend, and is synchronized between all of the service's containers.
 
 If you're using curl, you should see the counter incrementing like this:
 

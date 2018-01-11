@@ -209,7 +209,7 @@ to view the nodes.
 
 2.  On the left menu, go to Network & Security > **Security Groups**.
 
-    You'll see security groups related to your swarm
+    See the ecurity groups related to your swarm
     for `getstartedlab-Manager-<xxx>`, `getstartedlab-Nodes-<xxx>`,
     and `getstartedlab-SwarmWide-<xxx>`.
 
@@ -279,7 +279,7 @@ file from directly within the UI](/datacenter/ucp/2.1/guides/user/services/){: o
 
 ![Deploy an app on DDC](/datacenter/ucp/2.1/guides/images/deploy-app-ui-1.png)
 
-After that, you'll see it running, and can change any aspect of the application
+After that, you can see it running, and can change any aspect of the application
 you choose, or even edit the Compose file itself.
 
 ![Managing app on DDC](/datacenter/ucp/2.1/guides/images/deployed_visualizer.png)

@@ -13,7 +13,7 @@ Launching a container on one host, makes the container available to all hosts in
 that container network. Another name for this capability is multi-host networking.
 
 This page explains how to use the `engine-discovery` command to enable
-multi-host container networks on your UCP installation. You'll do a complete
+multi-host container networks on your UCP installation. The end result is a complete
 configuration on all nodes within your UCP deployment.
 
 ## About container networks and UCP
@@ -206,7 +206,7 @@ the remaining nodes in the cluster.
 Once your UCP installation is up and running, you may need to add a new worker
 node or a new replica node. If you add a new worker node, you must run
 `engine-discovery` on the node after you `join` it to the cluster. If you need
-to add a replica, you'll need:
+to add a replica, you need:
 
 1. Re-run network configuration process on the controller to add the replica..
 2. Run network configuration process  on the new replica.
@@ -270,7 +270,7 @@ A ping requires that inbound ICMP requests are allowed on the controller.
     $ sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
     ```
 
-Remember, you'll need to restart the daemon each time you change the start options.
+Remember to restart the daemon each time you change the start options.
 
 ## Where to go next
 

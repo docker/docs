@@ -4,7 +4,7 @@ keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, doc
 title: Configure automated builds from GitHub
 ---
 
-If you've previously linked Docker Hub to your GitHub account, you'll be able to
+If you've previously linked Docker Hub to your GitHub account,
 skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 
 ## Linking Docker Hub to a GitHub account
@@ -24,7 +24,7 @@ Services" section of your Hub profile "Settings".
 
 ![authorized-services](images/authorized-services.png)
 
-When linking to GitHub, you'll need to select either "Public and Private",
+When linking to GitHub, select either "Public and Private",
 or "Limited Access" linking.
 
 ![add-authorized-github-service.png](images/add-authorized-github-service.png)
@@ -37,7 +37,7 @@ If you choose "Limited Access", Docker Hub only gets permission to access your
 public data and public repositories.
 
 Follow the onscreen instructions to authorize and link your GitHub account to
-Docker Hub. Once it is linked, you'll be able to choose a source repository from
+Docker Hub. Once it is linked, you can choose a source repository from
 which to create the Automatic Build.
 
 You can review and revoke Docker Hub's access by visiting the
@@ -125,8 +125,7 @@ next build is triggered.
 
 ## GitHub private submodules
 
-If your GitHub repository contains links to private submodules, you'll get an
-error message in your build.
+If your GitHub repository contains links to private submodules, your build fails.
 
 Normally, the Docker Hub sets up a deploy key in your GitHub repository.
 Unfortunately, GitHub only allows a repository deploy key to access a single

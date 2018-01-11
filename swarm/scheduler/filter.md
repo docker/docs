@@ -132,7 +132,7 @@ f8b693db9cd6        mysql:latest        "mysqld"            Up About a minute   
 The scheduler selected `node-2` since it was started with the `storage=disk` label.
 
 Finally, build args can be used to apply node constraints to a `docker build`.
-Again, you'll avoid flash drives.
+This example shows how to avoid flash drives.
 
 ```bash
 $ mkdir sinatra

@@ -23,7 +23,7 @@ Docker Machine driver plugins are available for many cloud platforms, so you can
 use Machine to provision cloud hosts. When you use Docker Machine for
 provisioning, you create cloud hosts with Docker Engine installed on them.
 
-You'll need to install and run Docker Machine, and create an account with the
+Install and run Docker Machine, and create an account with the
 cloud provider.
 
 Then you provide account verification, security credentials, and configuration

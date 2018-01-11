@@ -103,7 +103,7 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
 
    | Argument | Description | Example values |
    |----------|-------------|---------|
-   | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. | `sp1` |
+   | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important. Choose something recognizable in the Azure portal. | `sp1` |
    | `rg-name` | The name of the new resource group to be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal is scoped to this resource group. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `swarm1` |
    | `rg-region` | The name of Azure's region/location where the resource group is to be created. This needs to be one of the regions supported by Azure. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions. |
 

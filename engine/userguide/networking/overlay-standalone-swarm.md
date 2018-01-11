@@ -39,7 +39,7 @@ To use Docker with an external key-value store, you need the following:
 
 Docker Machine and Docker Swarm are not mandatory to experience Docker
 multi-host networking with a key-value store. However, this example uses them to
-illustrate how they are integrated. You'll use Machine to create both the
+illustrate how they are integrated. You use Machine to create both the
 key-value store server and the host cluster using a standalone swarm.
 
 >**Note**: These examples are not relevant to Docker running in swarm mode and
@@ -73,7 +73,7 @@ key-value stores. This example uses Consul.
     When you provision a new machine, the process adds Docker to the
     host. This means rather than installing Consul manually, you can create an
     instance using the [consul image from Docker
-    Hub](https://hub.docker.com/_/consul/). You'll do this in the next step.
+    Hub](https://hub.docker.com/_/consul/). You do this in the next step.
 
 3.  Set your local environment to the `mh-keystore` machine.
 
@@ -110,9 +110,9 @@ Keep your terminal open and move on to
 ### Create a swarm cluster
 
 In this step, you use `docker-machine` to provision the hosts for your network.
-You don't actually create the network yet. You'll create several
+You don't actually create the network yet. You create several
 Docker machines in VirtualBox. One of the machines acts as the swarm manager
-and you'll create that first. As you create each host, you'll pass the Docker
+and you create that first. As you create each host, you pass the Docker
 daemon on that machine options that are needed by the `overlay` network driver.
 
 > **Note**: This creates a standalone swarm cluster, rather than using Docker

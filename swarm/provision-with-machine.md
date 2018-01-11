@@ -34,8 +34,8 @@ instructions for [macOS](/docker-for-mac/) or
 
 Machine supports installing on AWS, Digital Ocean, Google Cloud Platform, IBM
 Softlayer, Microsoft Azure and Hyper-V, OpenStack, Rackspace, VirtualBox, VMware
-Fusion&reg;, vCloud&reg; Air<sup>TM</sup> and vSphere&reg;. In this example,
-you'll use VirtualBox to run several VMs based on the `boot2docker.iso` image.
+Fusion&reg;, vCloud&reg; Air<sup>TM</sup> and vSphere&reg;. This example uses
+VirtualBox to run several VMs based on the `boot2docker.iso` image.
 This image is a small-footprint Linux distribution for running Engine.
 
 The Toolbox installation gives you VirtualBox and the `boot2docker.iso` image

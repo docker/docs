@@ -32,7 +32,7 @@ to understand until when your version may be supported.
 ## Upgrade Docker Engine
 
 To avoid application downtime, you should be running Docker in Swarm mode and
-deploying your workloads as Docker services. That way you'll be able to
+deploying your workloads as Docker services. That way you can
 drain the nodes of any workloads before starting the upgrade.
 
 If you have workloads running as containers as opposed to swarm services,
@@ -45,7 +45,7 @@ To ensure that workloads running as Swarm services have no downtime, you need to
 2. Upgrade the Docker Engine on that node.
 3. Make the node available again.
 
-If you do this sequentially for every node, you'll be able to upgrade with no
+If you do this sequentially for every node, you can upgrade with no
 application downtime.
 When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same

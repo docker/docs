@@ -63,7 +63,7 @@ of the technologies, policies and procedures provided by PKI include:
 
 ## How does Docker Engine authenticate using TLS
 
-In this section, you'll learn how Docker Engine and Swarm use PKI and
+This section shows how Docker Engine and Swarm use PKI and
 certificates to increase security.
 
 <!--[metadata]>Need to know about encryption too<![end-metadata]-->

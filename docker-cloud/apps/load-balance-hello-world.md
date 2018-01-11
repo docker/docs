@@ -10,7 +10,7 @@ title: Create a proxy or load balancer
 When you deploy a web service to multiple containers, you might want to load
 balance between the containers using a proxy or load balancer.
 
-In this tutorial, you'll use the **dockercloud/hello-world** image as a sample
+In this tutorial, you use the **dockercloud/hello-world** image as a sample
 web service and **dockercloud/haproxy** to load balance traffic to the service.
 If you follow this tutorial exactly, your traffic is distributed evenly
 between eight containers in a node cluster containing four nodes.
@@ -83,20 +83,22 @@ ready to continue and launch our web service.
 
 ## Test the web service
 
-1. Once your containers are all green (running), scroll down to the
-**Endpoints** section.
+1.  Once your containers are all green (running), scroll down to the
+    **Endpoints** section.
 
-    Here you'll see a list of all the endpoints available for this service on the public internet.
+    A list shows all the endpoints available for this service on the public internet.
 
-    ![](images/lbd-endpoints.png)
+    ![Available endpoints](images/lbd-endpoints.png)
 
-2. Click an endpoint URL (it should look something like
-`http://web-1.username.cont.dockerapp.io:49154`) to open a new tab in your
-browser and view the **dockercloud/hello-world** web page. Note the hostname for the page that loads.
+2.  Click an endpoint URL (it should look something like
+    `http://web-1.username.cont.dockerapp.io:49154`) to open a new tab in your
+    browser and view the **dockercloud/hello-world** web page. Note the hostname
+    for the page that loads.
 
-    ![](images/lbd-hostname-1.png)
+    ![Endpoint URL details](images/lbd-hostname-1.png)
 
-3. Click other endpoints and check the hostnames. You'll see different hostnames which match the container name (web-2, web-3, and so on).
+3.  Click other endpoints and check the hostnames. You see different hostnames
+    which match the container name (web-2, web-3, and so on).
 
 ## Launch the load balancer
 
@@ -146,32 +148,35 @@ add the link.
     This links the load balancing service `lb` with the web service `web`. The
     link appears in the table in the Links section.
 
-    ![](images/lbd-lb-envvar.png)
+    ![Links section](images/lbd-lb-envvar.png)
 
-    You'll also notice that a new set of `WEB` environment variables
-    appears in the service we're about to launch. You can read more about
+    A new set of `WEB` environment variables appears in the service we're about
+    to launch. You can read more about
     service link environment variables [here](../apps/service-links.md).
 
 13. Click **Create and deploy** and confirm that the service launches.
 
 ## Test the load-balanced web service
 
-1. On the load balancer service detail page, scroll down to the **endpoints** section.
+1.  On the load balancer service detail page, scroll down to the **endpoints**
+    section.
 
-    Unlike on the web service, you'll see that this time the HTTP URL for the load balancer is mapped to port 80. 
+    Unlike on the web service, this time the HTTP URL for the load balancer is
+    mapped to port 80. 
 
-    ![](images/lbd-lb-endpoint.png)
+    ![Load balancer mapped to port 80](images/lbd-lb-endpoint.png)
 
-2. Click the endpoint URL to open it in a new tab.
+2.  Click the endpoint URL to open it in a new tab.
 
-    You'll see the same hello-world webpage you saw earlier. Make note of the hostname.
+    The same hello-world webpage you saw earlier is shown. Make note of the
+    hostname.
 
-3. Refresh the web page.
+3.  Refresh the web page.
 
     With each refresh, the hostname changes as the requests are load-balanced to
     different containers. 
 
-    ![](images/lbd-reload.gif)
+    ![Changing hostname](images/lbd-reload.gif)
 
     Each container in the web service has a different hostname, which
     appears in the webpage as `container_name-#`. When you refresh the

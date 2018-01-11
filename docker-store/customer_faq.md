@@ -53,7 +53,7 @@ selected account on the **My Content** page.
 
 You can apply to become a Docker Store publisher by filling out
 the form [here](https://store.docker.com/publisher/signup). When you've been
-accepted to the program, you'll set up a publisher profile and submit your
+accepted to the program, you can set up a publisher profile and submit your
 images for review. Learn more about the publisher duties and requirements
 [here](https://success.docker.com/Store).
 

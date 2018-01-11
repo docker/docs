@@ -12,13 +12,13 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.0.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release-notes.md) for the version you are upgrading to.
-There you'll find information about the new features, breaking changes, and
+[release notes](../release-notes.md) for the version you are upgrading to,
+for information about the features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
 ## Plan the upgrade
 
-As part of the upgrade process, you'll be upgrading the CS Docker Engine
+As part of the upgrade process, you upgrade the CS Docker Engine
 installed in each node of the cluster to version 1.12. If you're currently
 running CS Docker Engine 1.11.2-cs3, all containers will be stopped during the
 upgrade, causing some downtime to UCP and your applications.
@@ -92,8 +92,8 @@ that you've installed using that node's root CA material.
     This runs the upgrade command in interactive mode, so that you are prompted
     for any necessary configuration values.
 
-    The upgrade command will make configuration changes to Docker Engine.
-    You'll be prompted to restart the Docker Engine, and run the upgrade
+    The upgrade command makes configuration changes to Docker Engine.
+    You are prompted to restart the Docker Engine and run the upgrade
     command again, to continue the upgrade.
 
 4. Make sure the node is healthy.

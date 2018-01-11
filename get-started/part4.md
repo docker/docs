@@ -87,7 +87,7 @@ to quickly create a two-machine cluster and turn it into a swarm.
 
 #### VMs on your local machine (Mac, Linux, Windows 7 and 8)
 
-First, you'll need a hypervisor that can create virtual machines (VMs), so
+You need a hypervisor that can create virtual machines (VMs), so
 [install Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your
 machine's OS.
 
@@ -162,7 +162,7 @@ The first machine acts as the manager, which executes management commands
 and authenticates workers to join the swarm, and the second is a worker.
 
 You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
-to become a swarm manager with `docker swarm init` and you'll see output like
+to become a swarm manager with `docker swarm init` and look for output like
 this:
 
 ```shell
@@ -351,8 +351,8 @@ docker stack deploy -c docker-compose.yml getstartedlab
 And that's it, the app is deployed on a swarm cluster!
 
 Now you can use the same [docker commands you used in part
-3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time you'll
-see that the services (and associated containers) have been distributed between
+3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time notice
+that the services (and associated containers) have been distributed between
 both `myvm1` and `myvm2`.
 
 ```
@@ -397,7 +397,7 @@ browser, hitting refresh (or just `curl` them).
 
 ![Hello World in browser](images/app-in-browser-swarm.png)
 
-You'll see five possible container IDs all cycling by randomly, demonstrating
+There are five possible container IDs all cycling by randomly, demonstrating
 the load-balancing.
 
 The reason both IP addresses work is that nodes in a swarm participate in an
@@ -451,7 +451,7 @@ docker stack rm getstartedlab
 > At some point later, you can remove this swarm if you want to with
 > `docker-machine ssh myvm2 "docker swarm leave"` on the worker
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
-> manager, but _you'll need this swarm for part 5, so please keep it
+> manager, but _you need this swarm for part 5, so please keep it
 > around for now_.
 
 ### Unsetting docker-machine shell variable settings

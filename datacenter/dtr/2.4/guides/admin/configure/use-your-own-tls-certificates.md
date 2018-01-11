@@ -37,7 +37,7 @@ Finally, click **Save** for the changes to take effect.
 
 If you're using certificates issued by a globally trusted certificate authority,
 any web browser or client tool should now trust DTR. If you're using an internal
-certificate authority, you'll need to configure your system to trust that
+certificate authority, configure your system to trust that
 certificate authority.
 
 ## Where to go next

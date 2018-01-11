@@ -306,7 +306,7 @@ services. For example, to see what environment variables are available to the
 
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which also shows you available commands.
 
-If you started Compose with `docker-compose up -d`, you'll probably want to stop
+If you started Compose with `docker-compose up -d`, stop
 your services once you've finished with them:
 
     $ docker-compose stop

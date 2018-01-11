@@ -512,7 +512,7 @@ Nehalem based Mac Pros and so do newer generations of Intel processors.
 
 #### Typical failures we see with nested virtualization
 
-* Slow boot time of the Linux VM. If you look in the logs, you'll see
+* Slow boot time of the Linux VM. If you look in the logs and find
 some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds to
 boot the Linux VM; roughly the time between the `Connected` log entry and the `*
 Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Windows

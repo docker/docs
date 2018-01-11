@@ -621,8 +621,8 @@ block device and other parameters to suit your situation.
 
 ### Activate the `devicemapper` after reboot
 
-If you reboot the host and find that the docker service failed to start,
-you'll see the error, "Non existing device". You need to re-activate the
+If you reboot the host and find that the `docker` service failed to start,
+look for the error, "Non existing device". You need to re-activate the
 logical volumes with this command:
 
 ```bash

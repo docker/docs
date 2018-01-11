@@ -30,8 +30,8 @@ Fill-in the following fields:
 Once you've specified the service image and ports, click **Deploy now** to
 deploy the service into a node in the UCP cluster.
 
-Once the service is up and running, you'll be able to see the default NGINX
-page, by going to `http://<node-ip>:8000`.
+Once the service is up and running, the default NGINX
+page is available at `http://<node-ip>:8000`.
 
 ![](../../images/deploy-a-service-4.png){: .with-border}
 

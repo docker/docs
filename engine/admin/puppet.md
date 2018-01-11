@@ -13,7 +13,7 @@ title: Use Puppet
 
 ## Requirements
 
-To use this guide you'll need a working installation of Puppet from
+To use this guide you need a working installation of Puppet from
 [Puppet Labs](https://puppetlabs.com) .
 
 The module also currently uses the official PPA so only works with
