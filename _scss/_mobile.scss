@@ -20,7 +20,6 @@
     }
     .tabs li a {
         font-size: 13px;
-        // padding: 16px 20px;
     }
 
     h1,
@@ -49,6 +48,14 @@
     .nav-secondary  {
         overflow: hidden;
     }
+    ul.nav {
+        padding-top: 70px;
+    }
+    .nav-sidebar ul li li a {
+        border-left: 0;
+        font-size: 12px;
+        margin-left: 0;
+    }
   }
 
 @media only screen 
@@ -59,9 +66,6 @@
         width: 100%;
         z-index: 100;
     }
-    // .content {
-    //     padding: 50px;
-    // }
     .main-content {
         padding: 22px 35px 25px 30px;
     }

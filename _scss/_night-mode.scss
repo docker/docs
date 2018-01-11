@@ -7,18 +7,19 @@
 body.night {
     background-color: $bg-body-night;
     color: $body-text-color-night;
+    p,
+    .rating-nero-value,
+    .reading-time {
+        color: $body-text-color-night!important;
+    }
     h1,
     h2,
     h3,
     h4,
     h5,
     h6,
-    .component h3,
-    .component p,
-    p,
-    .rating-nero-value,
-    .reading-time {
-        color: $body-text-color-night!important;
+    .component h3 {
+        color: $white!important;
     }
     a,
     .toc-nav i.fa {
