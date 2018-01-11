@@ -8,4 +8,7 @@ plink: docker_config.yaml
 deprecated: false
 min_api_version: "1.30"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

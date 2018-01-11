@@ -15,11 +15,17 @@ options:
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print nodes using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -27,6 +33,9 @@ options:
   description: Only display IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME        STATUS
   \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready
   \  Active\n38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active\ne216jshn25ckzbvmwlnh5jr3g
@@ -78,4 +87,7 @@ examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME   
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 
