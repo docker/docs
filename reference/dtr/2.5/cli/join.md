@@ -26,7 +26,9 @@ For setting DTR for high-availability, create 3, 5, or 7 replicas of DTR.
 | `--help-extended` | $DTR_EXTENDED_HELP | Display extended help text for a given command. |
 | `--replica-http-port` | $REPLICA_HTTP_PORT | The public HTTP port for the DTR replica. Default is 80.This allows you to customize the HTTP port where users can reach DTR. Once users access  the HTTP port, they are redirected to use an HTTPS connection, using the port specified  with --replica-https-port. This port can also be used for unencrypted health checks. |
 | `--replica-https-port` | $REPLICA_HTTPS_PORT | The public HTTPS port for the DTR replica. Default is 443.This allows you to customize the HTTPS port where users can reach DTR. Each replica can  use a different port. |
-| `--replica-id` | $DTR_INSTALL_REPLICA_ID | Assign an ID to the DTR replica. Random by default. |
+| `--replica-id` | $DTR_INSTALL_REPLICA_ID | Assign a 12-character hexadecimal ID to the DTR replica. Random by default. |
+| `--replica-rethinkdb-cache-mb` | $RETHINKDB_CACHE_MB | The maximum amount of space for rethinkdb in-memory cache use for the given replica in MB.
+			Default is auto. Auto is (available_memory - 1024) / 2.This config allows changing the rethinkdb cache usage per replica. You need to run it once per replica to change each one.. |
 | `--skip-network-test` | $DTR_SKIP_NETWORK_TEST | Don't test if overlay networks are working correctly between UCP nodes.For high-availalibity, DTR creates an overlay network between UCP nodes and tests  that it is working when joining replicas. Don't use this option for production deployments. |
 | `--ucp-ca` | $UCP_CA | Use a PEM-encoded TLS CA certificate for UCP.Download the UCP TLS CA certificate from https://<ucp-url>/ca, and  use --ucp-ca "$(cat ca.pem)". |
 | `--ucp-insecure-tls` | $UCP_INSECURE_TLS | Disable TLS verification for UCP.The installation uses TLS but always trusts  the TLS certificate used by UCP, which can lead to man-in-the-middle attacks.  For production deployments, use --ucp-ca "$(cat ca.pem)" instead. |
