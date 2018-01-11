@@ -13,6 +13,9 @@ options:
   description: Force remove a node from the swarm
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Remove a stopped node from the swarm
 
@@ -51,4 +54,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 

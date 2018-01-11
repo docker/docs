@@ -59,18 +59,27 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: aux-address
   value_type: map
   default_value: map[]
   description: Auxiliary IPv4 or IPv6 addresses used by Network driver
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: config-from
   value_type: string
   description: The network from which copying the configuration
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: config-only
   value_type: bool
   default_value: "false"
@@ -78,6 +87,9 @@ options:
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: driver
   shorthand: d
   value_type: string
@@ -85,12 +97,18 @@ options:
   description: Driver to manage the Network
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: gateway
   value_type: stringSlice
   default_value: '[]'
   description: IPv4 or IPv6 Gateway for the master subnet
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ingress
   value_type: bool
   default_value: "false"
@@ -98,41 +116,62 @@ options:
   deprecated: false
   min_api_version: "1.29"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: internal
   value_type: bool
   default_value: "false"
   description: Restrict external access to the network
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ip-range
   value_type: stringSlice
   default_value: '[]'
   description: Allocate container ip from a sub-range
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ipam-driver
   value_type: string
   default_value: default
   description: IP Address Management Driver
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ipam-opt
   value_type: map
   default_value: map[]
   description: Set IPAM driver specific options
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: ipv6
   value_type: bool
   default_value: "false"
   description: Enable IPv6 networking
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: label
   value_type: list
   description: Set metadata on a network
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: opt
   shorthand: o
   value_type: map
@@ -140,18 +179,27 @@ options:
   description: Set driver specific options
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: scope
   value_type: string
   description: Control the network's scope
   deprecated: false
   min_api_version: "1.30"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: subnet
   value_type: stringSlice
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Connect containers
 
@@ -276,4 +324,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 
