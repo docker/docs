@@ -1,8 +1,8 @@
 ---
-title: Get started with Interlock
-description: earn about Interlock, an application routing and load balancing system
+title: Get started with Layer 7 routing
+description: Learn about Layer 7 routing, an application routing and load balancing system
   for Docker Swarm.
-keywords: ucp, interlock, load balancing
+keywords: ucp, layer 7, routing, load balancing
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
