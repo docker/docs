@@ -12,7 +12,7 @@ long: "Login to a registry.\n\n### Login to a self-hosted registry\n\nIf you wan
   `root`, except when:\n\n1.  connecting to a remote daemon, such as a `docker-machine`
   provisioned `docker engine`.\n2.  user is added to the `docker` group.  This will
   impact the security of your system; the `docker` group is `root` equivalent.  See
-  [Docker Daemon Attack Surface](https://docs.docker.com/security/security/#docker-daemon-attack-surface)
+  [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
   for details.\n\nYou can log into any public or private repository for which you
   have\ncredentials.  When you log in, the command stores credentials in\n`$HOME/.docker/config.json`
   on Linux or `%USERPROFILE%/.docker/config.json` on\nWindows, via the procedure described
@@ -78,18 +78,30 @@ options:
   description: Password
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: password-stdin
   value_type: bool
   default_value: "false"
   description: Take the password from stdin
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: username
   shorthand: u
   value_type: string
   description: Username
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

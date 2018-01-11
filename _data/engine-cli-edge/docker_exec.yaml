@@ -25,11 +25,17 @@ options:
   description: 'Detached mode: run command in the background'
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: detach-keys
   value_type: string
   description: Override the key sequence for detaching a container
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: env
   shorthand: e
   value_type: list
@@ -37,6 +43,9 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: interactive
   shorthand: i
   value_type: bool
@@ -44,12 +53,18 @@ options:
   description: Keep STDIN open even if not attached
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: privileged
   value_type: bool
   default_value: "false"
   description: Give extended privileges to the command
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: tty
   shorthand: t
   value_type: bool
@@ -57,12 +72,18 @@ options:
   description: Allocate a pseudo-TTY
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: user
   shorthand: u
   value_type: string
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: workdir
   shorthand: w
   value_type: string
@@ -70,6 +91,9 @@ options:
   deprecated: false
   min_api_version: "1.35"
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### Run `docker exec` on a running container\n\nFirst, start a container.\n\n```bash\n$
   docker run --name ubuntu_bash --rm -i -t ubuntu bash\n```\n\nThis will create a
   container named `ubuntu_bash` and start a Bash session.\n\nNext, execute a command
@@ -94,4 +118,7 @@ examples: "### Run `docker exec` on a running container\n\nFirst, start a contai
   paused, unpause the container before exec\n\n$ echo $?\n1\n```"
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 
