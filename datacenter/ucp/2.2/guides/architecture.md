@@ -5,7 +5,7 @@ keywords: ucp, architecture
 ---
 
 Universal Control Plane is a containerized application that runs on
-[Docker Enterprise Edition](/enterprise/index.md) and extends its functionality
+[Docker Enterprise Edition](/ee/index.md) and extends its functionality
 to make it easier to deploy, configure, and monitor your applications at scale.
 
 UCP also secures Docker with role-based access control so that only authorized
@@ -71,8 +71,8 @@ on a node depend on whether the node is a manager or a worker.
 Manager nodes run all UCP services, including the web UI and data stores that
 persist the state of UCP. These are the UCP services running on manager nodes:
 
-|    UCP component    |                                                                                                                             Description                                                                                                                              |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UCP component       | Description                                                                                                                                                                                                                                                          |
+|:--------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ucp-agent           | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
 | ucp-reconcile       | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
 | ucp-auth-api        | The centralized service for identity and authentication used by UCP and DTR                                                                                                                                                                                          |
@@ -92,8 +92,8 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 Worker nodes are the ones where you run your applications. These are the UCP
 services running on worker nodes:
 
-| UCP component |                                                                                                                             Description                                                                                                                              |
-| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UCP component | Description                                                                                                                                                                                                                                                          |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ucp-agent     | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
 | ucp-dsinfo    | Docker system information collection script to assist with troubleshooting                                                                                                                                                                                           |
 | ucp-reconcile | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
@@ -114,7 +114,7 @@ Docker UCP uses these named volumes to persist data in all nodes where it runs:
 | ucp-cluster-root-ca         | Root key material for the UCP root CA that issues certificates for swarm members         |
 | ucp-controller-client-certs | Certificate and keys used by the UCP web server to communicate with other UCP components |
 | ucp-controller-server-certs | Certificate and keys for the UCP web server running in the node                          |
-| ucp-kv                      | UCP configuration data, replicated across managers                                      |
+| ucp-kv                      | UCP configuration data, replicated across managers                                       |
 | ucp-kv-certs                | Certificates and keys for the key-value store                                            |
 | ucp-metrics-data            | Monitoring data gathered by UCP                                                          |
 | ucp-metrics-inventory       | Configuration file used by the ucp-metrics service                                       |

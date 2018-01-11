@@ -30,7 +30,7 @@ ucp_version: "3.0"
 
 ucp_versions:
   - version: "3.0"
-    path: /datacenter/ucp/3.0/guides/
+    path: /ee/ucp/
     latest: true
   - version: "2.2"
     path: /datacenter/ucp/2.2/guides/
@@ -43,7 +43,7 @@ ucp_versions:
 
 dtr_versions:
   - version: "2.5"
-    path: /datacenter/dtr/2.5/guides/
+    path: /ee/dtr/
     latest: true
   - version: "2.4"
     path: /datacenter/dtr/2.4/guides/

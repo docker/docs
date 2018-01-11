@@ -31,7 +31,7 @@ ucp_version: "3.0"
 
 ucp_versions:
   - version: "3.0"
-    path: /datacenter/ucp/3.0/guides/
+    path: /ee/ucp/
     latest: true
   - version: "2.2"
     path: /datacenter/ucp/2.2/guides/
@@ -44,7 +44,7 @@ ucp_versions:
 
 dtr_versions:
   - version: "2.5"
-    path: /datacenter/dtr/2.5/guides/
+    path: /ee/dtr/
     latest: true
   - version: "2.4"
     path: /datacenter/dtr/2.4/guides/
@@ -151,7 +151,7 @@ defaults:
       dtr_latest_image: "docker/dtr:2.5.0"
       enterprise: true
   - scope:
-      path: "datacenter/dtr/2.5"
+      path: "ee/dtr"
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
@@ -187,7 +187,7 @@ defaults:
       ucp_version: "1.1"
       dtr_version: "2.0"
   - scope:
-      path: "datacenter/ucp/3.0"
+      path: "ee/ucp"
     values:
       ucp_org: "docker"
       ucp_repo: "ucp"

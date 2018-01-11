@@ -6,7 +6,7 @@ title: Docker Release Notes
 
 Find out what's new in Docker products!
 
-- [Docker EE](/enterprise/17.03/release-notes.md) or [Commercially Supported Docker Engine](/cs-engine/1.13/release-notes/)
+- [Docker EE](/ee/17.06/index.md) or [Commercially Supported Docker Engine](/cs-engine/1.13/release-notes/)
 - [Docker CE](docker-ce.md)
 - [Docker Engine (archived)](docker-engine.md)
 - [Docker for Mac](/docker-for-mac/release-notes.md) ([Edge Releases](/docker-for-mac/edge-release-notes.md))
