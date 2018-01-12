@@ -14,6 +14,7 @@ next_steps:
   title: Upgrade DTR
 redirect_from:
  - /datacenter/dtr/2.3/guides/admin/install/
+ - /datacenter/dtr/2.5/guides/admin/install/
 ---
 {% if include.version=="dtr-2.5" %}
 
