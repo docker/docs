@@ -19,6 +19,12 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-mac47 2018-01-12 (Stable)
+
+* Bug fixes and minor changes
+  - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
+  - Separate internal ports used to proxy HTTP and HTTPS content.
+
 ### Docker Community Edition 17.12.0-ce-mac46 2018-01-09 (Stable)
 
 * Upgrades
