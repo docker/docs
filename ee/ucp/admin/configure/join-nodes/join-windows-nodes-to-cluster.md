@@ -7,6 +7,8 @@ ui_tabs:
   orhigher: false
 - version: ucp-2.2
   orlower: true
+redirect_from:
+  - /datacenter/ucp/3.0/guides/admin/configure/join-nodes/join-windows-nodes-to-cluster/
 ---
 {% if include.version=="ucp-3.0" %}
 

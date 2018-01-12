@@ -12,6 +12,8 @@ next_steps:
   title: Define roles with authorized API operations
 - path: grant-permissions/
   title: Grant role-access to cluster resources
+redirect_from:
+  - /datacenter/ucp/3.0/guides/authorization/group-resources/
 ---
 {% if include.version=="ucp-3.0" %}
 

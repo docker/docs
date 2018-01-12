@@ -8,6 +8,8 @@ ui_tabs:
 next_steps:
 - path: deploy-stateless-app/
   title: Deploy a simple stateless app with RBAC
+redirect_from:
+  - /datacenter/ucp/3.0/guides/authorization/grant-permissions/
 ---
 {% if include.version=="ucp-3.0" %}
 

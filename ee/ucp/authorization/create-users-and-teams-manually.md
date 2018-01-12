@@ -14,6 +14,8 @@ next_steps:
   title: Group and isolate cluster resources
 - path: grant-permissions/
   title: Grant role-access to cluster resources
+redirect_from:
+  - /datacenter/ucp/3.0/guides/authorization/create-users-and-teams-manually/
 ---
 {% if include.version=="ucp-3.0" %}
 
