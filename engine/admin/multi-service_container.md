@@ -58,7 +58,7 @@ this in a few different ways.
   # if it detects that either of the processes has exited.
   # Otherwise it will loop forever, waking up every 60 seconds
 
-  while /bin/true; do
+  while sleep 60; do
     ps aux |grep my_first_process |grep -q -v grep
     PROCESS_1_STATUS=$?
     ps aux |grep my_second_process |grep -q -v grep
@@ -69,7 +69,6 @@ this in a few different ways.
       echo "One of the processes has already exited."
       exit -1
     fi
-    sleep 60
   done
   ```
 
