@@ -367,7 +367,8 @@
 
 @media (max-width: 1024px) {
     .nav-secondary-tabs.affix-top {
-        background-color: $bg-secondary;
+        // background-color: $bg-secondary;
+        background-color: rgba(0,0,0,.05);
         position: fixed;
         top: 0;
     }
