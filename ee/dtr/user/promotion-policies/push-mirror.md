@@ -88,6 +88,14 @@ with the policy, it automatically gets promoted.
 
 ![choose policy](../../images/push-mirror-5.png){: .with-border}
 
+## Metadata persistence
+
+When an image is pushed to another registry using a mirroring policy, scanning
+and signing data is not persisted in the destination repository.
+
+If you have scanning enable for the destination repository, DTR is going to scan
+the image pushed. If you want the image to be signed, you need to do it manually.
+
 ## Where to go next
 
 * [Mirror images from another registry](pull-mirror.md)
