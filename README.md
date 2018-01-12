@@ -175,7 +175,7 @@ To read the docs offline, you can use either a standalone container or a swarm s
 To see all available tags, go to
 [Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
 The following examples use the `latest` tag:
-    
+
 - Run a single container:
 
   ```bash
@@ -277,6 +277,83 @@ after all the content. Otherwise the script may try to run before JQuery and
 Bootstrap JS are loaded.
 
 > **Note**: In general, this is a bad idea.
+
+## Building archives and the live published docs
+
+All the images described below are automatically built using Docker Cloud. To
+build the site manually, from scratch, including all utility and archive
+images, see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
+
+- Some utility images are built from Dockerfiles in the `publish-tools` branch.
+  See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
+  for details.
+- Each archive branch automatically builds an image tagged
+  `docs/docker.github.io:v<VERSION>` when a change is merged into that branch.
+- The `master` branch has a Dockerfile which uses the static HTML from each
+  archive image, in combination with the Markdown
+  files in `master` and some upstream resources which are fetched at build-time,
+  to create the full site at https://docs.docker.com/. All
+  of the long-running branches, such as `vnext-engine`, `vnext-compose`, etc,
+  use the same logic.
+
+## Creating a new archive
+
+When a new Docker CE Stable version is released, the previous state of `master`
+is archived into a version-specific branch like `v17.09`, by doing the following:
+
+1.  Create branch based off the commit hash before the new version was released.
+
+    ```bash
+    $ git checkout <HASH>
+    $ git checkout -b v17.09
+    ```
+
+2.  Run the `_scripts/fetch-upstream-resources.sh` script. This puts static
+    copies of the files in place that the `master`  build typically fetches
+    each build.
+
+    ```bash
+    $ _scripts/fetch-upstream/resources.sh
+    ```
+
+3.  Overwrite the `Dockerfile` with the `Dockerfile.archive` (use `cp` rather
+    than `mv` so you don't inadvertently remove either file). Edit the resulting
+    `Dockerfile` and set the `VER` build argument to the appropriate value, like
+    `v17.09`.
+
+    ```bash
+    $ mv Dockerfile.archive Dockerfile
+    $ vi Dockerfile
+
+      < edit the variable and save >
+    ```
+
+4.  Do `git status` and add all changes, being careful not to add anything extra
+    by accident. Commit your work.
+
+    ```bash
+    $ git status
+    $ git add <filename>
+    $ git add <filename> (etc etc etc)
+    $ git commit -m "Creating archive for 17.09 docs"
+    ```
+
+5.  Make sure the archive builds.
+
+    ```bash
+    $ docker build -t docker build -t docs/docker.github.io:v17.09 .
+    $ docker run --rm -it -p 4000:4000 docs/docker.github.io:v17.09
+    ```
+
+    After the `docker run` command, browse to `http://localhost:4000/` and
+    verify that the archive is self-browseable.
+
+6.  Push the branch to the upstream repository. Do not create a pull request
+    as there is no reference branch to compare against.
+
+    ```bash
+    $ git push upstream v17.09
+    ```
 
 ## Copyright and license
 

@@ -22,18 +22,26 @@ either using the Docker CLI or using Universal Control Plane.
 
 ### Use the Docker CLI
 
-To disable the telemetry plugin, use the `docker plugin disable` command:
+To disable the telemetry plugin, use the `docker plugin disable` with either the plugin NAME or ID:
 
 ```bash
-$ docker plugin disable telemetry
+$ docker plugin ls
+ID                  NAME                                           [..]
+114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
+
+$ docker plugin disable docker/telemetry:1.0.0.linux-x86_64-stable
 ```
 
 This command must be run on each Docker host.
 
-To re-enable the telemetry plugin, you can use `docker plugin enable`.
+To re-enable the telemetry plugin, you can use `docker plugin enable` with either the plugin NAME or ID:
 
 ```bash
-$ docker plugin enable telemetry
+$ docker plugin ls
+ID                  NAME                                           [..]
+114dbeaa400c        docker/telemetry:1.0.0.linux-x86_64-stable     [..]
+
+$ docker plugin enable docker/telemetry:1.0.0.linux-x86_64-stable
 ```
 
 ### Use Universal Control Plane

@@ -127,7 +127,7 @@ storage driver, be sure to read about
 
 Docker for Mac and Docker for Windows are intended for development, rather
 than production. Modifying the storage driver on these platforms is not
-supported.
+possible.
 
 ## Supported backing filesystems
 
@@ -200,15 +200,10 @@ storage drivers. Make sure to use equivalent hardware and workloads to match
 production conditions, so you can see which storage driver offers the best
 overall performance.
 
-## Check and set your current storage driver
+## Check your current storage driver
 
 The detailed documentation for each individual storage driver details all of the
-set-up steps to use a given storage driver. This is a very high-level summary of
-how to change the storage driver.
-
-> **Important**: Some storage driver types, such as `devicemapper`, `btrfs`, and
-> `zfs`, require additional set-up at the operating system level before you can
-> use them with Docker.
+set-up steps to use a given storage driver.
 
 To see what storage driver Docker is currently using, use `docker info` and look
 for the `Storage Driver` line:
@@ -223,35 +218,16 @@ Storage Driver: overlay
 <output truncated>
 ```
 
+To change the storage driver, see the specific instructions for the new storage
+driver. Some drivers require additional configuration, including configuration
+to physical or logical disks on the Docker host.
 
-
-To set the storage driver, you can use the `--storage-driver` flag when starting
-the Docker daemon manually, or (recommended) set the option in the `daemon.json`
-file, which is located in `/etc/docker/` on Linux and
-`C:\ProgramData\docker\config\` on Windows Server.
-
-> **Note**: Using the `--storage-driver` flag when running `dockerd` manually or
-> using an init script is not recommended. We recommend setting the option in
-> the `daemon.json` file instead, because this mechanism is cross-platform,
-> and will not create configuration conflicts with the default init scripts for
-> your operating system.
-
-Changing the storage driver on Docker for Mac or Docker for Windows is not
-supported.
-
-If the `daemon.json` file does not exist, create it. Assuming there are no other
-settings in the file, it should have the following contents:
-
-```json
-{
-  "storage-driver": "devicemapper"
-}
-```
-
-You can specify any valid storage driver in place of `devicemapper`.
-
-Restart Docker for the changes to take effect. After restarting, run
-`docker info` again to verify that the new storage driver is being used.
+> **Important**: When you change the storage driver, any existing images and
+> containers become inaccessible. This is because their layers cannot be used
+> by the new storage driver. If you revert your changes, you will be able to
+> access the old images and containers again, but any that you pulled or
+> created using the new driver will then be inaccessible.
+{:.important}
 
 ## Related information
 

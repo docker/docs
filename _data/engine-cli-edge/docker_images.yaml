@@ -27,29 +27,44 @@ options:
   description: Show all images (default hides intermediate images)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: digests
   value_type: bool
   default_value: "false"
   description: Show digests
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: filter
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print images using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-trunc
   value_type: bool
   default_value: "false"
   description: Don't truncate output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -57,6 +72,9 @@ options:
   description: Only show numeric IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### List the most recently created images
 
@@ -346,4 +364,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

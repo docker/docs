@@ -14,7 +14,6 @@ repository]({{ labsbase }}).
 | ------ | ----------- |
 | [Docker for Beginners]({{ labsbase }}/beginner/){: target="_blank"} | A good "Docker 101" course. |
 | [Docker Swarm mode]({{ labsbase}}/swarm-mode){: target="_blank"} | Use Docker for natively managing a cluster of Docker Engines called a swarm. |
-| [Service deployment in the cloud]({{ labsbase}}/swarm-mode/cloud-quick-start){: target="_blank"} | This script creates a swarm cluster and deploys a simple service on a cloud provider. |
 | [Configuring developer tools and programming languages]({{ labsbase }}/developer-tools/README.md){: target="_blank"} | How to set-up and use common developer tools and programming languages with Docker. |
 | [Live Debugging Java with Docker]({{ labsbase }}/developer-tools/java-debugging){: target="_blank"} | Java developers can use Docker to build a development environment where they can run, test, and live debug code running within a container. |
 | [Docker for Java Developers]({{ labsbase }}/developer-tools/java/){: target="_blank"} | Offers Java developers an intro-level and self-paced hands-on workshop with Docker. |

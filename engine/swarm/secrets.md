@@ -145,7 +145,7 @@ a similar way, see
 
 ### Defining and using secrets in compose files
 
-Both the `docker compose` and `docker stack` commands support defining secrets
+Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
 [the Compose file reference](/compose/compose-file/#secrets) for details.
 
@@ -291,19 +291,19 @@ This example assumes that you have PowerShell installed.
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
-    PS> docker swarm init
+    docker swarm init
     ```
 
 3.  Save the `index.html` file as a swarm secret named `homepage`.
 
     ```powershell
-    PS> docker secret create homepage index.html
+    docker secret create homepage index.html
     ```
 
 4.  Create an IIS service and grant it access to the `homepage` secret.
 
     ```powershell
-    PS> docker service create
+    docker service create
         --name my-iis
         --publish published=8000,target=8000
         --secret src=homepage,target="\inetpub\wwwroot\index.html"
@@ -320,10 +320,9 @@ This example assumes that you have PowerShell installed.
 6.  Remove the service and the secret.
 
     ```powershell
-    PS> docker service rm my-iis
-
-    PS> docker secret rm homepage
-    PS> docker image remove secret-test
+    docker service rm my-iis
+    docker secret rm homepage
+    docker image remove secret-test
     ```
 
 ### Intermediate example: Use secrets with a Nginx service

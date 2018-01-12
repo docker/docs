@@ -10,6 +10,7 @@ title: Frequently asked questions (FAQ)
 [Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles,
 FAQs, technical support for various subscription levels, and more.
 
+## Questions about Docker.app
 ### Stable and Edge channels
 
 **Q: How do I get the Stable or Edge version of Docker for Mac?**
@@ -77,6 +78,44 @@ Do the following each time:
 and higher) to run containers, meaning that _**no separate VirtualBox is
 required**_.
 
+### What are system requirements for Docker for Mac?
+
+Note that you need a Mac that supports hardware virtualization and can run at
+least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
+[What to know before you install](install.md#what-to-know-before-you-install) in
+the install guide.
+
+### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
+
+Yes, if you [change the name of your macOS user account and home
+folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
+already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac will fail to start. See also,
+[Docker for Mac will not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-will-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+
+### Do I need to uninstall Docker Toolbox to use Docker for Mac?
+
+No, you can use these side by side. Docker Toolbox leverages a Docker daemon
+installed using `docker-machine` in a machine called `default`. Running `eval
+$(docker-machine env default)` in a shell sets DOCKER environment variables
+locally to connect to the default machine using Engine from Toolbox. To check
+whether Toolbox DOCKER environment variables are set, run `env | grep DOCKER`.
+
+To make the client talk to the Docker for Mac Engine, run the command `unset
+${!DOCKER_*}` to unset all DOCKER environment variables in the current shell.
+(Now, `env | grep DOCKER` should return no output.) You can have multiple
+command line shells open, some set to talk to Engine from Toolbox and others set
+to talk to Docker for Mac. The same applies to `docker-compose`.
+
+### How do I uninstall Docker Toolbox?
+
+You might decide that you do not need Toolbox now that you have Docker for Mac,
+and want to uninstall it. For details on how to perform a clean uninstall of
+Toolbox on the Mac, see [How to uninstall
+Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
+Toolbox Mac topics.
+
+
+## Questions about feedback and help
 ### What kind of feedback are we looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
@@ -109,7 +148,9 @@ response.
 If you do not want auto-send of usage data, use the Stable channel. For more
 information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is the difference between the Stable and Edge versions of Docker for Mac?").
 
-### Can I use Docker for Mac with new swarm mode?
+
+## How can I...?
+### Can I use Docker for Mac with swarm mode?
 
 Yes, you can use Docker for Mac to test single-node features of [swarm
 mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
@@ -184,11 +225,61 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
+### Can I pass through a USB device to a container?
+
+Unfortunately it is not possible to pass through a USB device (or a
+serial port) to a container. For use cases requiring this, we
+recommend the use of [Docker Toolbox](/toolbox/overview.md).
+
+
+## Disk Usage
+
+### What is the disk image?
+
+The containers and images are stored in a _disk image_ named
+`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
+By default, the disk image is stored in
+`~/Library/Containers/com.docker.docker/Data`, in the `vm`
+subdirectory starting with Docker for Mac 17.12, and
+`com.docker.driver.amd64-linux` before.
+
+### Qcow2 or Raw?
+
+Starting with High Sierra with Apple Filesystem (APFS) enabled, Docker
+uses disk images in the "raw" format (`Docker.raw`), otherwise in the
+Qcow2 format (`Docker.qcow2`).
+
+### Docker.raw consumes an insane amount of disk space!
+
+This is an illusion.  Docker uses the raw format on Macs running the
+Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
+long runs of zeroes representing unused space.  The output of `ls` is
+misleading, because it lists the logical size of the file rather than
+its physical size. To see the physical size, add the `-ks` switch; to
+see the logical size in human readable form, add `-lh`:
+
+```bash
+$ cd ~/Library/Containers/com.docker.docker/Data
+$ cd vm   # or com.docker.driver.amd64-linux
+$ ls -klsh Docker.raw
+2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
+```
+
+In this listing, the logical size is 64GB, but the physical size is
+only 2.3GB.
+
+Alternatively, you may use `du` (disk usage):
+
+```bash
+$ du -h Docker.raw
+2,2G	Docker.raw
+```
+
 ### How do I reduce the size of Docker.qcow2?
 
-By default Docker for Mac stores containers and images in a file
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2`.
-This file grows on-demand up to a default maximum file size of 64GiB.
+If your Docker for Mac uses the Qcow format, the [disk image
+file](#what-is-the-disk-image) is `Docker.qcow2`.  This file grows
+on-demand up to a default maximum file size of 64GiB.
 
 In Docker 1.12 the only way to free space on the host is to delete
 this file and restart the app. Unfortunately this removes all images
@@ -209,7 +300,7 @@ In 1.13 a background `cron` job runs `fstrim` every 15 minutes.
 If the space needs to be reclaimed sooner, run this command:
 
 ```bash
-docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
+$ docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
 ```
 
 Once the `fstrim` has completed, restart the app. When the app shuts down, it
@@ -221,42 +312,8 @@ For background conversation thread on this, see
 [Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
-### What are system requirements for Docker for Mac?
 
-Note that you need a Mac that supports hardware virtualization and can run at
-least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
-[What to know before you install](install.md#what-to-know-before-you-install) in
-the install guide.
-
-### Do I need to reinstall Docker for Mac if I change the name of my macOS account?
-
-Yes, if you [change the name of your macOS user account and home
-folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
-already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac will fail to start. See also,
-[Docker for Mac will not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-will-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
-
-### Do I need to uninstall Docker Toolbox to use Docker for Mac?
-
-No, you can use these side by side. Docker Toolbox leverages a Docker daemon
-installed using `docker-machine` in a machine called `default`. Running `eval
-$(docker-machine env default)` in a shell sets DOCKER environment variables
-locally to connect to the default machine using Engine from Toolbox. To check
-whether Toolbox DOCKER environment variables are set, run `env | grep DOCKER`.
-
-To make the client talk to the Docker for Mac Engine, run the command `unset
-${!DOCKER_*}` to unset all DOCKER environment variables in the current shell.
-(Now, `env | grep DOCKER` should return no output.) You can have multiple
-command line shells open, some set to talk to Engine from Toolbox and others set
-to talk to Docker for Mac. The same applies to `docker-compose`.
-
-### How do I uninstall Docker Toolbox?
-
-You might decide that you do not need Toolbox now that you have Docker for Mac,
-and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on the Mac, see [How to uninstall
-Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
-Toolbox Mac topics.
-
+## Components of Docker for Mac
 ### What is HyperKit?
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10
@@ -276,9 +333,3 @@ tailor made for Docker workloads on the Mac.
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process will not consume any resources unless
 Docker.app connects to it, so it's safe to ignore.
-
-### Can I pass through a USB device to a container?
-
- Unfortunately it is not possible to pass through a USB device (or a serial
- port) to a container. For use cases requiring this, we recommend the use of
- [Docker Toolbox](/toolbox/overview.md).

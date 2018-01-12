@@ -116,7 +116,7 @@ real-world example, continue to
     you can customize the file name on the container using the `target` option.
 
     ```bash
-    $ docker service  create --name redis --config my-config redis:alpine
+    $ docker service create --name redis --config my-config redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
@@ -213,23 +213,23 @@ This example assumes that you have PowerShell installed.
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
-    PS> docker swarm init
+    docker swarm init
     ```
 
 3.  Save the `index.html` file as a swarm config named `homepage`.
 
     ```powershell
-    PS> docker config create homepage index.html
+    docker config create homepage index.html
     ```
 
 4.  Create an IIS service and grant it access to the `homepage` config.
 
     ```powershell
-    PS> docker service create
+    docker service create
         --name my-iis
         --publish published=8000,target=8000
         --config src=homepage,target="\inetpub\wwwroot\index.html"
-        microsoft/iis:nanoserver  
+        microsoft/iis:nanoserver
     ```
 
 5.  Access the IIS service at `http://localhost:8000/`. It should serve
@@ -238,9 +238,9 @@ This example assumes that you have PowerShell installed.
 6.  Remove the service and the config.
 
     ```powershell
-    PS> docker service rm my-iis
+    docker service rm my-iis
 
-    PS> docker config rm homepage
+    docker config rm homepage
     ```
 
 ### Advanced example: Use configs with a Nginx service
@@ -249,7 +249,7 @@ This example is divided into two parts.
 [The first part](#generate-the-site-certificate) is all about generating
 the site certificate and does not directly involve Docker configs at all, but
 it sets up [the second part](#configure-the-nginx-container), where you store
-and use the site certificate as a series of secrets and the  Nginx configuration
+and use the site certificate as a series of secrets and the Nginx configuration
 as a config.
 
 #### Generate the site certificate
@@ -293,7 +293,7 @@ generate the site key and certificate, name the files `site.key` and
 4.  Sign the certificate.
 
     ```bash
-    $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
+    $ openssl x509 -req -days 3650 -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
                    root_ca
@@ -312,7 +312,7 @@ generate the site key and certificate, name the files `site.key` and
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
 
-7.  Configure the site certificate. Edit a new file  called `site.cnf` and
+7.  Configure the site certificate. Edit a new file called `site.cnf` and
     paste the following contents into it. This constrains the site
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
@@ -331,7 +331,7 @@ generate the site key and certificate, name the files `site.key` and
 
     ```bash
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
-        -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
+        -CA "root-ca.crt" -CAkey "root-ca.key" -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
     ```
 

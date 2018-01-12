@@ -21,6 +21,8 @@ for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/installation/linux/linux-postinstall.md).
+
 ## Install Compose
 
 Follow the instructions below to install Compose on Mac, Windows, Windows Server
@@ -113,7 +115,7 @@ by step instructions are also included below.
     {: .important}
 
     If you have problems installing with `curl`, see
-    [Alternative Install Options](install.md#alternative-install-options).
+    [Alternative Install Options](install.md#alternative-install-options) tab above.
 
 2.  Apply executable permissions to the binary:
 

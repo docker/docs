@@ -19,6 +19,34 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-win47 2018-01-12 (Stable)
+
+* Bug fixes and minor changes
+  - Fix linuxKit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
+  - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
+  - Fix Mount compatibility when mounting drives with `-v //c/...`, now mounted in /host_mnt/c in the LinuxKit VM. Fixes [docker/for-win#1509](https://github.com/docker/for-win/issues/1509), [docker/for-win#1516](https://github.com/docker/for-win/issues/1516), [docker/for-win#1497](https://github.com/docker/for-win/issues/1497)
+  - Fix icon displaying edge. Fixes [docker/for-win#1508](https://github.com/docker/for-win/issues/1508)
+
+### Docker Community Edition 17.12.0-ce-win46 2018-01-09 (Stable)
+
+* Upgrades
+  - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
+  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
+  - Linux Kernel 4.9.60
+
+* New
+  - VM entirely built with Linuxkit
+  - Add localhost port forwarder for Windows (thanks @simonferquel). Use Microsoft localhost port forwarder when it is available (insider build RS4).
+
+* Bug fixes and minor changes
+  - Display various component versions in About box.
+  - Fix Vpnkit issue when username has spaces. See [docker/for-win#1429](https://github.com/docker/for-win/issues/1429)
+  - Diagnostic improvements to get VM logs before VM shutdown.
+  - Fix installer check for not supported Windows `CoreCountrySpecific` Edition.
+  - Fix a class of startup failures where the database fails to start. See [docker/for-win#498](https://github.com/docker/for-win/issues/498)
+  - Links in Update changelog now open the default browser instead of IE. (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
+
 ### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
 
 * Upgrades
@@ -448,6 +476,30 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Edge Release Notes
+
+### Docker Community Edition 17.12.0-ce-win45 2018-01-05 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
+
+### Docker Community Edition 17.12.0-ce-rc4-win44 2017-12-21 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
+  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
+
+* Bug fixes and minor changes
+  - Fix DNS "search domain" and "domain name" settings. See [docker/for-win#1437](https://github.com/docker/for-win/issues/1437).
+  - Fix Vpnkit issue when username has spaces. See [docker/for-win#1429](https://github.com/docker/for-win/issues/1429).
+  - Diagnostic improvements to get VM logs before VM shutdown.
+
+### Docker Community Edition 17.12.0-ce-rc3-win43 2017-12-15 (Edge)
+
+* Upgrades
+  - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
+
+* Bug fixes and minor changes
+  - Fix installer check for not supported Windows `CoreCountrySpecific` Edition.
 
 ### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13 (Edge)
 

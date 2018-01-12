@@ -29,15 +29,14 @@ To learn more about Docker EE, see
 To install Docker CE, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Artful 17.10 (Docker CE 17.11 Edge only)
+- Artful 17.10 (Docker CE 17.11 Edge and higher only)
 - Zesty 17.04
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker CE is supported on Ubuntu on `x86_64`, `armhf`, and `s390x` (IBM z
-Systems) architectures.
+Docker CE is supported on Ubuntu on `x86_64`, `armhf`, `s390x` (IBM Z), and `ppc64le` (IBM Power) architectures.
 
-> **`s390x` limitations**: System Z is only supported on Ubuntu Xenial and Zesty.
+> **`ppc64le` and `s390x` limitations**: Packages for IBM Z and Power architectures are only available on Ubuntu Xenial and above.
 
 ### Uninstall old versions
 
@@ -53,20 +52,34 @@ It's OK if `apt-get` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
 
-### If you need to use aufs
+### Supported storage drivers
 
-Docker CE now uses the `overlay2` storage driver by default, and it is
-recommended that you use it instead of `aufs`. If you need to use `aufs`, you
-will need to do additional preparation.
+Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 
-#### Xenial 16.04 and newer
+- For new installations on version 4 and higher of the Linux kernel, `overlay2`
+  is supported and preferred over `aufs`.
+- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
+  `overlay2` drivers are not supported by that kernel version.
+
+If you need to use `aufs`, you will need to do additional preparation as
+outlined below.
+
+#### Extra steps for aufs
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 and newer</a></li>
+  <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
+</ul>
+<div class="tab-content">
+<div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
 
 For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
 and Docker CE will use the `overlay2` storage driver by default. If you need
 to use `aufs` instead, you need to configure it manually.
 See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
-#### Trusty 14.04
+</div>
+<div id="aufs_prep_trusty" class="tab-pane fade" markdown="1">
 
 Unless you have a strong reason not to, install the
 `linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
@@ -79,6 +92,9 @@ $ sudo apt-get install \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual
 ```
+
+</div>
+</div> <!-- tab-content -->
 
 ## Install Docker CE
 
@@ -154,7 +170,15 @@ the repository.
     > to your parent Ubuntu distribution. For example, if you are using
     >  `Linux Mint Rafaela`, you could use `trusty`.
 
-    **amd64**:
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#armhf">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64le_repo">IBM Power (ppc64le)</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
@@ -163,7 +187,8 @@ the repository.
        stable"
     ```
 
-    **armhf**:
+    </div>
+    <div id="armhf" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
@@ -172,7 +197,18 @@ the repository.
        stable"
     ```
 
-    **s390x**:
+    </div>
+    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=ppc64el] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
+
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
@@ -180,6 +216,9 @@ the repository.
        $(lsb_release -cs) \
        stable"
     ```
+
+    </div>
+    </div> <!-- tab-content -->
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
@@ -243,7 +282,8 @@ the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker commands.
+Docker CE is installed and running. The `docker` group is created but no users
+are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](../linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -262,8 +302,8 @@ a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),
     choose your Ubuntu version, browse to `pool/stable/` and choose `amd64`,
-    `armhf`, or `s390x`. Download the `.deb` file for the Docker version you
-    want to install.
+    `armhf`, `ppc64el`, or `s390x`. Download the `.deb` file for the Docker
+    version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
@@ -288,7 +328,8 @@ a new file each time you want to upgrade Docker CE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker CE is installed and running. You need to use `sudo` to run Docker commands.
+Docker CE is installed and running. The `docker` group is created but no users
+are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.

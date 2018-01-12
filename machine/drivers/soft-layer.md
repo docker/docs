@@ -15,22 +15,22 @@ You need to generate an API key in the softlayer control panel.
 
 ## Options
 
--   `--softlayer-memory`: Memory for host in MB.
--   `--softlayer-disk-size`: A value of `0` will set the SoftLayer default.
--   `--softlayer-user`: **required** Username for your SoftLayer account, API key needs to match this user.
--   `--softlayer-api-key`: **required** API key for your user account.
--   `--softlayer-region`: SoftLayer region.
--   `--softlayer-cpu`: Number of CPUs for the machine.
--   `--softlayer-hostname`: Hostname for the machine.
--   `--softlayer-domain`: **required** Domain name for the machine.
 -   `--softlayer-api-endpoint`: Change SoftLayer API endpoint.
+-   `--softlayer-api-key`: **required** API key for your user account.
+-   `--softlayer-cpu`: Number of CPUs for the machine.
+-   `--softlayer-disk-size`: A value of `0` will set the SoftLayer default.
+-   `--softlayer-domain`: **required** Domain name for the machine.
+-   `--softlayer-hostname`: Hostname for the machine.
 -   `--softlayer-hourly-billing`: Specifies that hourly billing should be used, otherwise monthly billing is used.
--   `--softlayer-local-disk`: Use local machine disk instead of SoftLayer SAN.
--   `--softlayer-private-net-only`: Disable public networking.
 -   `--softlayer-image`: OS Image to use.
--   `--softlayer-public-vlan-id`: Your public VLAN ID.
--   `--softlayer-private-vlan-id`: Your private VLAN ID.
+-   `--softlayer-local-disk`: Use local machine disk instead of SoftLayer SAN.
+-   `--softlayer-memory`: Memory for host in MB.
 -   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (e.g., 1000, 100, 10).
+-   `--softlayer-private-net-only`: Disable public networking.
+-   `--softlayer-private-vlan-id`: Your private VLAN ID.
+-   `--softlayer-public-vlan-id`: Your public VLAN ID.
+-   `--softlayer-region`: SoftLayer region.
+-   `--softlayer-user`: **required** Username for your SoftLayer account, API key needs to match this user.
 
 The SoftLayer driver will use `UBUNTU_LATEST` as the image type by default.
 
@@ -38,18 +38,18 @@ The SoftLayer driver will use `UBUNTU_LATEST` as the image type by default.
 
 | CLI option                     | Environment variable        | Default                     |
 | ------------------------------ | --------------------------- | --------------------------- |
-| `--softlayer-memory`           | `SOFTLAYER_MEMORY`          | `1024`                      |
-| `--softlayer-disk-size`        | `SOFTLAYER_DISK_SIZE`       | `0`                         |
-| **`--softlayer-user`**         | `SOFTLAYER_USER`            | -                           |
-| **`--softlayer-api-key`**      | `SOFTLAYER_API_KEY`         | -                           |
-| `--softlayer-region`           | `SOFTLAYER_REGION`          | `dal01`                     |
-| `--softlayer-cpu`              | `SOFTLAYER_CPU`             | `1`                         |
-| `--softlayer-hostname`         | `SOFTLAYER_HOSTNAME`        | `docker`                    |
-| **`--softlayer-domain`**       | `SOFTLAYER_DOMAIN`          | -                           |
 | `--softlayer-api-endpoint`     | `SOFTLAYER_API_ENDPOINT`    | `api.softlayer.com/rest/v3` |
+| **`--softlayer-api-key`**      | `SOFTLAYER_API_KEY`         | -                           |
+| `--softlayer-cpu`              | `SOFTLAYER_CPU`             | `1`                         |
+| `--softlayer-disk-size`        | `SOFTLAYER_DISK_SIZE`       | `0`                         |
+| **`--softlayer-domain`**       | `SOFTLAYER_DOMAIN`          | -                           |
+| `--softlayer-hostname`         | `SOFTLAYER_HOSTNAME`        | `docker`                    |
 | `--softlayer-hourly-billing`   | `SOFTLAYER_HOURLY_BILLING`  | `false`                     |
-| `--softlayer-local-disk`       | `SOFTLAYER_LOCAL_DISK`      | `false`                     |
-| `--softlayer-private-net-only` | `SOFTLAYER_PRIVATE_NET`     | `false`                     |
 | `--softlayer-image`            | `SOFTLAYER_IMAGE`           | `UBUNTU_LATEST`             |
-| `--softlayer-public-vlan-id`   | `SOFTLAYER_PUBLIC_VLAN_ID`  | `0`                         |
+| `--softlayer-local-disk`       | `SOFTLAYER_LOCAL_DISK`      | `false`                     |
+| `--softlayer-memory`           | `SOFTLAYER_MEMORY`          | `1024`                      |
+| `--softlayer-private-net-only` | `SOFTLAYER_PRIVATE_NET`     | `false`                     |
 | `--softlayer-private-vlan-id`  | `SOFTLAYER_PRIVATE_VLAN_ID` | `0`                         |
+| `--softlayer-public-vlan-id`   | `SOFTLAYER_PUBLIC_VLAN_ID`  | `0`                         |
+| `--softlayer-region`           | `SOFTLAYER_REGION`          | `dal01`                     |
+| **`--softlayer-user`**         | `SOFTLAYER_USER`            | -                           |

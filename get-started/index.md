@@ -75,8 +75,7 @@ actually does.
 ## Prerequisites
 
 While we'll define concepts along the way, it is good for you to understand
-[what Docker is](https://www.docker.com/what-docker) and [why you would use
-Docker](https://www.docker.com/use-cases) before we begin.
+[what Docker is](https://www.docker.com/what-docker) before we begin.
 
 We also need to assume you are familiar with a few concepts before we continue:
 
@@ -85,6 +84,15 @@ We also need to assume you are familiar with a few concepts before we continue:
 - Editing configuration files
 - Basic familiarity with the ideas of code dependencies and building
 - Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
+
+Finally, though we'll remind you again when you need these things, you can
+save yourself some distraction at that time by [signing up for a
+Docker ID](https://cloud.docker.com) and using it on your local machine
+by running the following command:
+
+```
+docker login
+```
 
 ## A brief explanation of containers
 

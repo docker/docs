@@ -12,4 +12,7 @@ clink:
 - docker_trust_key_load.yaml
 deprecated: false
 experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
 

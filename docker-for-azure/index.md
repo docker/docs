@@ -12,7 +12,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for Azure
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn”}
+[Deploy Docker Enterprise Edition (EE) for Azure](https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description){: target=“_blank” class=“button outline-btn _blank_”}
 
 
 ## Docker Community Edition (CE) for Azure
@@ -49,7 +49,11 @@ For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.m
 
 ### Configuration
 
-Docker for Azure is installed with an Azure template that configures Docker in swarm-mode, running on VMs backed by a custom VHD. There are two ways you can deploy Docker for Azure. You can use the Azure Portal (browser based), or use the Azure CLI. Both have the following configuration options.
+Docker for Azure is installed with an Azure template that configures Docker in
+swarm mode, running on VMs backed by a custom virtual hard drive (VHD). There
+are two ways you can deploy Docker for Azure. You can use the Azure Portal
+(browser based), or use the Azure CLI. Both have the following configuration
+options.
 
 #### Configuration options
 
@@ -69,12 +73,13 @@ The number of workers you want in your swarm (1-100).
 
 #### Service principal
 
-A [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
+A
+[Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
 is required to set up Docker for Azure. The Service Principal is used to invoke Azure APIs as you scale the number of nodes up
 and down or deploy apps on your swarm that require configuration of the Azure Load Balancer. Docker provides a
 containerized helper script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
-1.  On a Linux machie, download the latest version of `docker4x/create-sp-azure` to your local environment:
+1.  On a Linux machine, download the latest version of `docker4x/create-sp-azure` to your local environment:
 
    ```bash
    docker pull docker4x/create-sp-azure:latest
@@ -94,7 +99,7 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
 
    If you have multiple Azure subscriptions, make sure to create the
    Service Principal with the subscription ID that you will be using
-   to deploy Docker for Azure.
+   to deploy Docker for Azure. The arguments are provided below.
 
    | Argument | Description | Example values |
    |----------|-------------|---------|
@@ -102,21 +107,20 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
    | `rg-name` | The name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `swarm1` |
    | `rg-region` | The name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions. |
 
-- **Docker Community Edition for Azure**: `rg-name` and `rg-region` are optional, but specifying them is recommended
-  so that the Azure resource group is created up front and the service principal is scoped to that specific resource
-  group.
+   If you do not supply the `rg-name` and `rg-region` here, you will be prompted
+   for that information each time you create a new service. The resource group
+   will be created automatically and services will be scoped to that resource
+   group.
 
-- **Docker Enterprise Edition for Azure**: `rg-name` and `rg-region` are optional, but specifying them is recommended
-  so that the Azure resource group is created up front and the service principal is scoped to that specific resource
-  group.
+If the script fails, it may be because your Azure user account does not have
+sufficient privileges. Contact your Azure administrator.
 
-
-If the script fails, your Azure user account may not have sufficient privileges. Contact your Azure administrator.
-
-When setting up the ARM template, you will be prompted for the App ID (a UUID) and the app secret. If you are
-deploying Docker Community Edition for Azure and specified the resource group name and location parameters,
-choose the option to deploy the template into an **existing resource group** and pass the same name and
-region/location that you used when running the `create-sp-azure` helper script.
+When setting up the Azure Resource Manager (ARM) template, you will be prompted
+for the App ID (a UUID) and the app secret. **If you are deploying Docker
+Community Edition for Azure and specify the resource group name and location
+parameters, choose the option to deploy the template into an **existing resource
+group** and pass the same name and region/location that you used when running
+the `create-sp-azure` helper script.**
 
 <img src="img/service-principal.png" />
 
@@ -127,11 +131,15 @@ Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. Dur
     ssh-keygen -y -f my-key.pem
 
 
-#### Installing with the CLI
+#### Install with the CLI
 
-You can also invoke the Docker for Azure template from the [Azure CLI](https://docs.microsoft.com/cs-cz/cli/azure/install-azure-cli):
+You can also invoke the Docker for Azure template from the
+[Azure CLI](https://docs.microsoft.com/cs-cz/cli/azure/install-azure-cli):
 
-The [Docker for Azure Template](https://download.docker.com/azure/stable/Docker.tmpl) provides default values for the amount and type of managers / worker nodes, but you'll need to provide the following input :
+The
+[Docker for Azure Template](https://download.docker.com/azure/stable/Docker.tmpl)
+provides default values for the number and type of manager and worker nodes,
+but you may need to provide the following values:
 
 - AppID
 - AppSecret
@@ -139,7 +147,7 @@ The [Docker for Azure Template](https://download.docker.com/azure/stable/Docker.
 
 Below is an example of how to use the CLI. Make sure you populate all requested parameter values.
 
-The command below assumes there is a resource group called `docker-resource-group` present. This resource group can be created 
+The command below assumes there is a resource group called `docker-resource-group` present. This resource group can be created
 
 - Via the Azure Portal web interface
 - Via the Azure CLI (`az group create --name docker-resource-group`)

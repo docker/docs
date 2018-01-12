@@ -13,7 +13,7 @@ When you create a swarm by running `docker swarm init`, Docker designates itself
 as a manager node. By default, the manager node generates a new root Certificate
 Authority (CA) along with a key pair, which are used to secure communications
 with other nodes that join the swarm. If you prefer, you can specify your own
-externally-generated root CA, using the the `--external-ca` flag of the
+externally-generated root CA, using the `--external-ca` flag of the
 [docker swarm init](/engine/reference/commandline/swarm_init.md) command.
 
 The manager node also generates two tokens to use when you join additional nodes
@@ -29,7 +29,7 @@ under the certificate common name (CN) and the role under the organizational
 unit (OU). The node ID serves as the cryptographically secure node identity for
 the lifetime of the node in the current swarm.
 
-The diagram below illustrates how worker manager nodes and worker nodes encrypt
+The diagram below illustrates how manager nodes and worker nodes encrypt
 communications using a minimum of TLS 1.2.
 
 ![tls diagram](/engine/swarm/images/tls.png)

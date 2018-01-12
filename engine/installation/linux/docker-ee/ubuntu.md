@@ -42,9 +42,15 @@ To install Docker EE, you need the 64-bit version of one of these Ubuntu version
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-Docker EE is supported on `x86_64` (or `amd64`) and `s390x` (IBM Z) architectures.
+Docker EE is supported on `x86_64` (or `amd64`), `s390x` (IBM Z), and `ppc64el`
+(IBM Power) architectures.
 
-The only supported storage driver for Docker EE on Ubuntu is `aufs`.
+Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+
+- For new installations on version 4 and higher of the Linux kernel, `overlay2`
+  is supported and preferred over `aufs`.
+- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
+  `overlay2` drivers are not supported by that kernel version.
 
 ### Uninstall old versions
 
@@ -60,11 +66,38 @@ It's OK if `apt-get` reports that none of these packages are installed.
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker EE package is now called `docker-ee`.
 
-### Extra packages for Trusty 14.04
+### Supported storage drivers
 
-Docker EE users must use the `aufs` storage driver on production systems. Install
-the `linux-image-extra-*` packages, which allow Docker EE to use the `aufs`
-storage driver.
+Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+
+- For new installations on version 4 and higher of the Linux kernel, `overlay2`
+  is supported and preferred over `aufs`.
+- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
+  `overlay2` drivers are not supported by that kernel version.
+
+If you need to use `aufs`, you will need to do additional preparation as
+outlined below.
+
+#### Extra steps for aufs
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#aufs_prep_xenial">Xenial 16.04 and newer</a></li>
+  <li><a data-toggle="tab" data-target="#aufs_prep_trusty">Trusty 14.04</a></li>
+</ul>
+<div class="tab-content">
+<div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
+
+For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
+and Docker CE will use the `overlay2` storage driver by default. If you need
+to use `aufs` instead, you need to configure it manually.
+See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
+
+</div>
+<div id="aufs_prep_trusty" class="tab-pane fade" markdown="1">
+
+Unless you have a strong reason not to, install the
+`linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
+drivers.
 
 ```bash
 $ sudo apt-get update
@@ -73,6 +106,9 @@ $ sudo apt-get install \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual
 ```
+
+</div>
+</div> <!-- tab-content -->
 
 ## Install Docker EE
 
@@ -111,15 +147,24 @@ from the repository.
         software-properties-common
     ```
 
-3.  Add Docker's official GPG key using your customer Docker EE repository URL:
+3.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This will
+    only persist until you log out of the session. Replace `<DOCKER-EE-URL>`
+    with the URL you noted down in the [prerequisites](#prerequisites).
+
+      ```bash
+      $ DOCKER_EE_URL="<DOCKER-EE-URL>"
+      ```
+
+4.  Add Docker's official GPG key using your customer Docker EE repository URL:
 
     ```bash
-    $ curl -fsSL <DOCKER-EE-URL>/ubuntu/gpg | sudo apt-key add -
+    $ curl -fsSL "${DOCKER_EE_URL}/ubuntu/gpg" | sudo apt-key add -
     ```
 
     Verify that you now have the key with the fingerprint
     `DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96`, by searching for the
-    last eight characters of the fingerprint.
+    last eight characters of the fingerprint. Use the command as-is. It will
+    work because of the variable you set earlier.
 
     ```bash
     $ sudo apt-key fingerprint 6D085F96
@@ -130,31 +175,50 @@ from the repository.
     sub   4096R/6D085F96 2017-02-22
     ```
 
-4.  Use the following command to set up the **stable** repository, replacing
-    `<DOCKER-EE-URL>` with the URL you noted down in the
-    [prerequisites](#prerequisites).
+5.  Use the following command to set up the **stable** repository. Use the
+    command as-is. It will work because of the variable you set earlier.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`.
     >
 
-    **x86_64**:
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">IBM Z (s390x)</a></li>
+      <li><a data-toggle="tab" data-target="#ppc64el_repo">IBM Power (ppc64el)</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] <DOCKER-EE-URL>/ubuntu \
+       "deb [arch=amd64] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
        stable-{{ site.docker_ee_version }}"
     ```
 
-    **s390x**:
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=s390x] {{ download-url-base }} \
+       "deb [arch=s390x] $DOCKER_EE_URL/ubuntu \
        $(lsb_release -cs) \
        stable-{{ site.docker_ee_version }}"
     ```
+
+    </div>
+    <div id="ppc64el_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=ppc64el] $DOCKER_EE_URL/ubuntu \
+       $(lsb_release -cs) \
+       stable-{{ site.docker_ee_version }}"
+    ```
+
+    </div>
+    </div> <!-- tab-content -->
 
 #### Install Docker EE
 
@@ -213,7 +277,8 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. You need to use `sudo` to run Docker
+Docker EE is installed and running. The `docker` group is created but no users
+are added to it. You need to use `sudo` to run Docker
 commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -241,7 +306,7 @@ a new file each time you want to upgrade Docker EE.
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
     `ubuntu/x86_64/stable-{{ site.docker_ee_version }}` and download the `.deb` file for the
-    Docker EE version you want to install.
+    Docker EE version and architecture you want to install.
 
 2.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker EE package.
@@ -262,7 +327,8 @@ a new file each time you want to upgrade Docker EE.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker EE is installed and running. You need to use `sudo` to run Docker
+Docker EE is installed and running. The `docker` group is created but no users
+are added to it. You need to use `sudo` to run Docker
 commands. Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.

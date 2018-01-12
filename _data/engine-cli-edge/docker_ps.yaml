@@ -12,17 +12,26 @@ options:
   description: Show all containers (default shows just running)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: filter
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print containers using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: last
   shorthand: "n"
   value_type: int
@@ -30,6 +39,9 @@ options:
   description: Show n last created containers (includes all states)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: latest
   shorthand: l
   value_type: bool
@@ -37,12 +49,18 @@ options:
   description: Show the latest created container (includes all states)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-trunc
   value_type: bool
   default_value: "false"
   description: Don't truncate output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -50,6 +68,9 @@ options:
   description: Only display numeric IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: size
   shorthand: s
   value_type: bool
@@ -57,6 +78,9 @@ options:
   description: Display total file sizes
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Prevent truncating output
 
@@ -442,4 +466,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

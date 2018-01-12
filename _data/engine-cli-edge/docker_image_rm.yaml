@@ -13,12 +13,21 @@ options:
   description: Force removal of the image
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-prune
   value_type: bool
   default_value: "false"
   description: Do not delete untagged parents
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

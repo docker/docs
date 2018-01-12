@@ -140,7 +140,7 @@ tutorial.
 
 - [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
 
-- [Adding a new service and redeploying](/get-started/part5.md#adding-a-new-service-and-redeploying)
+- [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
 
 Another good reference is the Compose file for the voting app sample used in the
 [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
@@ -160,10 +160,10 @@ They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
-`docker run`. Likewise, network and volume definitions are analogous to
+`docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
+As with `docker container create`, options specified in the Dockerfile (e.g., `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
@@ -182,7 +182,7 @@ Configuration options that are applied at build time.
 context:
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build: ./dir
@@ -192,7 +192,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build:
@@ -313,6 +313,23 @@ those used by other software.
         - "com.example.description=Accounting webapp"
         - "com.example.department=Finance"
         - "com.example.label-with-empty-value"
+
+#### shm_size
+
+> Added in [version 3.5](compose-versioning.md#version-35) file format
+
+Set the size of the `/dev/shm` partition for this build's containers. Specify
+as an integer value representing the number of bytes or as a string expressing
+a [byte value](#specifying-byte-values).
+
+    build:
+      context: .
+      shm_size: '2gb'
+
+
+    build:
+      context: .
+      shm_size: 10000000
 
 ### cap_add, cap_drop
 
@@ -615,10 +632,7 @@ in the [swarm](/engine/swarm/) topics.)
 
 #### placement
 
-Specify placement constraints. For a full description of the syntax and
-available types of constraints, see the
-[docker service create](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
-documentation.
+Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
 
     version: '3'
     services:
@@ -769,8 +783,6 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [cgroup_parent](#cgroup_parent)
 - [container_name](#container_name)
 - [devices](#devices)
-- [dns](#dns)
-- [dns_search](#dns_search)
 - [tmpfs](#tmpfs)
 - [external_links](#external_links)
 - [links](#links)
@@ -847,10 +859,6 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
-
 ### dns_search
 
 Custom DNS search domains. Can be a single value or a list.
@@ -859,10 +867,6 @@ Custom DNS search domains. Can be a single value or a list.
     dns_search:
       - dc1.example.com
       - dc2.example.com
-
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
 
 ### tmpfs
 
@@ -1108,6 +1112,16 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 
 ### links
 
+>**Warning**: >The `--link` flag is a legacy feature of Docker. It
+may eventually be removed. Unless you absolutely need to continue using it, we
+recommend that you use [user-defined networks](/engine/userguide/networking//#user-defined-networks)
+to facilitate communication between two containers instead of using `--link`.
+One feature that user-defined networks do not support that you can do with
+`--link` is sharing environmental variables between containers. However, you can
+use other mechanisms such as volumes to share environment variables between
+containers in a more controlled way.
+{:.warning}
+
 Link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
 
@@ -1292,30 +1306,34 @@ The corresponding network configuration in the
 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
 you must use a version 2.x Compose file, such as the one below.
 
+> **Note**: These options do not currently work in swarm mode.
+
 An example:
 
-    version: '2.1'
+```yaml
+version: '2.1'
 
-    services:
-      app:
-        image: busybox
-        command: ifconfig
-        networks:
-          app_net:
-            ipv4_address: 172.16.238.10
-            ipv6_address: 2001:3984:3989::10
-
+services:
+  app:
+    image: busybox
+    command: ifconfig
     networks:
       app_net:
-        driver: bridge
-        enable_ipv6: true
-        ipam:
-          driver: default
-          config:
-          -
-            subnet: 172.16.238.0/24
-          -
-            subnet: 2001:3984:3989::/64
+        ipv4_address: 172.16.238.10
+        ipv6_address: 2001:3984:3989::10
+
+networks:
+  app_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.16.238.0/24
+      -
+        subnet: 2001:3984:3989::/64
+```
 
 ### pid
 
@@ -1788,6 +1806,22 @@ format that looks like this:
 The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 
+## Specifying byte values
+
+Some configuration options, such as the `shm_size` sub-option for
+[`build`](#build), accept a byte value as a string in a format
+that looks like this:
+
+    2b
+    1024kb
+    2048k
+    300m
+    1gb
+
+The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
+`mb` and `gb`. Please note that decimal values are not supported at this time.
+
+
 ## Volume configuration reference
 
 While it is possible to declare [volumes](#volumes) on the file as part of the
@@ -1904,6 +1938,25 @@ conflicting with those used by other software.
       - "com.example.description=Database volume"
       - "com.example.department=IT/Ops"
       - "com.example.label-with-empty-value"
+
+### name
+
+> [Added in version 3.4 file format](compose-versioning.md#version-34)
+
+Set a custom name for this volume.
+
+    version: '3.4'
+    volumes:
+      data:
+        name: my-app-data
+
+It can also be used in conjuction with the `external` property:
+
+    version: '3.4'
+    volumes:
+      data:
+        external: true
+        name: my-app-data
 
 ## Network configuration reference
 
@@ -2108,6 +2161,25 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+### name
+
+> [Added in version 3.5 file format](compose-versioning.md#version-35)
+
+Set a custom name for this network.
+
+    version: '3.5'
+    networks:
+      network1:
+        name: my-app-net
+
+It can also be used in conjuction with the `external` property:
+
+    version: '3.5'
+    networks:
+      network1:
+        external: true
+        name: my-app-net
+
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
@@ -2119,6 +2191,8 @@ stack. The source of the config is either `file` or `external`.
 - `external`: If set to true, specifies that this config has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
+- `name`: The actual name of the config object in Docker. Introduced with the
+  3.5 file format.
 
 In this example, `my_first_config` will be created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
@@ -2162,6 +2236,8 @@ stack. The source of the secret is either `file` or `external`.
 - `external`: If set to true, specifies that this secret has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
+- `name`: The actual name of the config object in Docker. Introduced with the
+  3.5 file format.
 
 In this example, `my_first_secret` will be created (as
 `<stack_name>_my_first_secret)`when the stack is deployed,

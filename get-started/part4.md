@@ -187,6 +187,15 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 > which is the Docker daemon port. Do not use this port or
 > [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2){: target="_blank" class="_"}.
 
+> Having trouble using SSH? Try the --native-ssh flag
+>
+> Docker Machine has [the option to let you use your own system's SSH](/machine/reference/ssh/#different-types-of-ssh), if 
+> for some reason you're having trouble sending commands to your Swarm manager. Just specify the 
+> `--native-ssh` flag when invoking the `ssh` command:
+>
+> ```
+> docker-machine --native-ssh ssh myvm1 ...
+> ```
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy

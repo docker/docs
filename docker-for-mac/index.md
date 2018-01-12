@@ -297,15 +297,26 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available if you are part of the private beta for Docker for Mac 17.12. To access beta builds, you must be signed in within Docker for Mac using your Docker ID.**
+**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
+support is not included in Docker for Mac 17.12 CE Stable. To find out
+more about Stable and Edge channels and how to switch between them, see
+[General configuration](/docker-for-mac/#general).
 
-If you are participating in the Docker beta program, you can access Docker for
-Mac 17.12 CE Edge, which includes a standalone Kubernetes server that runs on
-your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server that runs
+on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+
 The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server.
+to the local Kubernetes server. If you have `kubectl` already installed and
+pointing to some other environment, such as `minikube` or a GKE cluster, be sure
+to change context so that `kubectl` is pointing to `docker-for-desktop`:
 
-To log in with your Docker ID, select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Sign in / Create Docker ID** from the menu bar.
+```bash
+kubectl config get-contexts
+kubectl config use-context docker-for-desktop
+```
+
+If you installed `kubectl` with Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
@@ -468,27 +479,37 @@ how to set the client TLS certificate for verification, see [Verify repository
 client with certificates](/engine/security/certificates.md) in the Docker Engine
 topics.
 
-## Install bash completion
+## Install shell completion
 
-If you are using [bash
-completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1),
-such as [homebrew bash-completion on
-Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/) bash
-completion scripts for the following commands may be found inside `Docker.app`,
-in the `Contents/Resources/etc/` directory:
+Docker for Mac comes with scripts to enable completion for the `docker`,
+`docker-machine`, and `docker-compose` commands. The completion scripts may be
+found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
+installed both in Bash and Zsh.
 
-- docker
-- docker-machine
-- docker-compose
+### Bash
 
-To activate bash completion, these files need to be copied or symlinked to your
-`bash_completion.d/` directory. For example, if you use
-[Homebrew](http://brew.sh/):
+Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
+To activate completion for Docker commands, these files need to be copied or
+symlinked to your `bash_completion.d/` directory. For example, if you installed
+bash via [Homebrew](http://brew.sh/):
 
 ```bash
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
+```
+
+### Zsh
+
+In Zsh, the [completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
+takes care of things. To activate completion for Docker commands, these files
+need to be copied or symlinked to your Zsh `site-functions/` directory. For
+example, if you installed Zsh via [Homebrew](http://brew.sh/):
+
+```bash
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
 ## Give feedback and get help

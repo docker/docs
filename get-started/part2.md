@@ -16,11 +16,6 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
   docker run hello-world
   ```
 
-> **Tip**: Please use up-to-date Docker versions and clients to help the
-tutorial go swimmingly. For example, legacy apps like Docker Toolbox
-might give you unexpected results for local IP addresses and older
-versions of Docker do not support all features demo'ed here.
-
 ## Introduction
 
 It's time to begin building an app the Docker way. We'll start at the bottom of
@@ -49,7 +44,7 @@ runtime, all travel together.
 
 These portable images are defined by something called a `Dockerfile`.
 
-## Define a container with a `Dockerfile`
+## Define a container with `Dockerfile`
 
 `Dockerfile` will define what goes on in the environment inside your
 container. Access to resources like networking interfaces and disk drives is
@@ -66,7 +61,7 @@ create a file called `Dockerfile`, copy-and-paste the following content into
 that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
 
-```conf
+```dockerfile
 # Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
@@ -101,6 +96,8 @@ CMD ["python", "app.py"]
 > ENV http_proxy host:port
 > ENV https_proxy host:port
 > ```
+>
+> Add these lines before the call to `pip` so that the installation succeeds.
 
 This `Dockerfile` refers to a couple of files we haven't created yet, namely
 `app.py` and `requirements.txt`. Let's create those next.
@@ -190,8 +187,6 @@ REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
 ```
 
-> **Tip**: You can use the commands `docker images` or the newer `docker image ls` list images. They give you the same output.
-
 ## Run the app
 
 Run the app, mapping your machine's port 4000 to the container's published port
@@ -207,8 +202,7 @@ mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
 
 Go to that URL in a web browser to see the display content served up on a
-web page, including "Hello World" text, the container ID, and the Redis error
-message.
+web page.
 
 ![Hello World in browser](images/app-in-browser.png)
 
@@ -368,10 +362,6 @@ Status: Downloaded newer image for john/get-started:part2
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 
-> **Note**: If you don't specify the `:tag` portion of these commands,
-  the tag of `:latest` will be assumed, both when you build and when you run
-  images. Docker will use the last version of the image that ran without a tag specified (not necessarily the most recent image).
-
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and the host machine doesn't have to
@@ -398,9 +388,9 @@ Here is a list of the basic Docker commands from this page, and some related
 ones if you'd like to explore a bit before moving on.
 
 ```shell
-docker build -t friendlyname .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
-docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
 docker container ls                                # List all running containers
 docker container ls -a             # List all containers, even those not running
 docker container stop <hash>           # Gracefully stop the specified container

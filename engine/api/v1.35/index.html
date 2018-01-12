@@ -1,0 +1,35 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Docker Engine API v1.35 Reference</title>
+    <!-- needed for adaptive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Reference for the API served by Docker Engine.">
+    <meta charset="utf-8"/>
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      api-logo {
+        background-image: linear-gradient(0deg, #15A4D7 0%, #1488C6 100%);
+        height: 100px;
+        text-align: left !important;
+      }
+      api-logo img {
+        width: 136px !important;
+        margin: 32px 0 0 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <redoc spec-url="swagger.yaml" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
+    <script src="redoc.1.11.0.min.js"> </script>
+  </body>
+</html>

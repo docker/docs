@@ -31,8 +31,8 @@ on GitHub.
     If you are running on **Linux**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
-    chmod +x /tmp/docker-machine &&
+    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && \
+    chmod +x /tmp/docker-machine && \
     sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 

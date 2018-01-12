@@ -23,7 +23,7 @@
 <!-- Logic for 'edit this button' -->
 {% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
 {% for entry in site.data.not_edited_here.overrides %}
-	{% if page.url contains entry.path %}
+	{% if page.path contains entry.path %}
 		{% if entry.source %}
 			{% assign edit_url = entry.source %}
 		{% else %}
@@ -95,7 +95,18 @@
 
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	{% seo %}
+	<!-- SEO stuff -->
+	<title>{{ page.title }} | Docker Documentation</title>
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="{{ page.description }}" />
+<meta property="og:description" content="{{ page.description }}" />
+<link rel="canonical" href="{{ page.url }}" />
+<meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+<meta property="og:site_name" content="Docker Documentation" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+	<!-- END SEO STUFF -->
 	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 	<script language="javascript">
 	// Default to assuming this is an archive and hiding some stuff
@@ -294,20 +305,30 @@
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
+	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+	var jekyllEnv = '{{ jekyll.environment }}';
+	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+	if (jekyllEnv == 'development') {
+		jekyllEnv = '';
+	}
+	var pageURL = jekyllEnv + '{{ page.url }}';
+	</script>
 	<script src="/js/archive.js"></script>
 	<script src="/js/stickyfill.min.js"></script>
+	<script defer src="/js/metadata.js"></script>
+	<script src="/js/glossary.js"></script>
+	<script src="/js/collections_tocs.js"></script>
 	<script defer src="/js/docs.js"></script>
+	<script defer src="/js/toc.js"></script>
 	<script language="javascript">
 	jQuery(document).ready(function(){
-			$.getJSON( "/metadata.txt", function( data ) {
-				metadata = data;
 				hookupTOCEvents();
-				$.getJSON( "/glossary.txt", function( data ) {
-					glossary = data;
-					renderTagsPage();
-				});
 			});
-	});
 	</script>
 </body>
 

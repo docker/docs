@@ -59,8 +59,8 @@ To move your project to a later version, see the [Upgrading](#upgrading)
 section.
 
 > **Note**: If you're using
-> [multiple Compose files](extends.md#different-environments) or
-> [extending services](extends.md#extending-services), each file must be of the
+> [multiple Compose files](/compose/extends.md#multiple-compose-files) or
+> [extending services](/compose/extends.md#extending-services), each file must be of the
 > same version - you cannot, for example, mix version 1 and 2 in a single
 > project.
 
@@ -202,6 +202,7 @@ Introduces the following additional parameters:
 - [`healthcheck`](compose-file-v2.md#healthcheck)
 - [`sysctls`](compose-file-v2.md#sysctls)
 - [`pids_limit`](compose-file-v2.md#pidslimit)
+- [`oom_kill_disable`](compose-file-v2.md#oomkilldisable)
 
 ### Version 2.2
 
@@ -223,9 +224,10 @@ supported by **Compose 1.16.0+**.
 
 Introduces the following additional parameters:
 
-- [`target`](compose-file-v2.md#target) and [`shm_size`](compose-file-v2.md#shm_size)
-  for [build configurations](compose-file-v2.md#build)
+- [`target`](compose-file-v2.md#target), [`extra_hosts`](compose-file-v2.md#extrahosts) and
+  [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
+- ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 
 ### Version 3
 
@@ -264,6 +266,16 @@ Introduces the following additional parameters:
 - `order` for [update configurations](/compose/compose-file/index.md#update_config)
 - `name` for [volumes](/compose/compose-file/index.md#volume-configuration-reference)
 
+### Version 3.5
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **17.12.0** and higher.
+
+Introduces the following additional parameters:
+
+- [`isolation`](index.md#isolation) in service definitions
+- `name` for networks, secrets and configs
+- `shm_size` in [build configurations](index.md#build)
 
 ## Upgrading
 

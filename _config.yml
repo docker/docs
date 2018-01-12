@@ -11,16 +11,18 @@ permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06"]
+# This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
+keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12", "v1.13", "v17.03", "v17.06", "v17.09"]
+exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
 
-docker_ce_stable_version: "17.09"
-latest_stable_docker_engine_api_version: "1.32"
-docker_ce_edge_version: "17.11"
+docker_ce_stable_version: "17.12"
+latest_stable_docker_engine_api_version: "1.35"
+docker_ce_edge_version: "18.01"
 docker_ee_version: "17.06"
-compose_version: "1.17.0"
+compose_version: "1.18.0"
 machine_version: "0.13.0"
 distribution_version: "2.6"
 dtr_version: "2.4"
@@ -61,10 +63,10 @@ collections:
   samples:
     output: true
 
-gems:
+plugins:
   - jekyll-redirect-from
-  - jekyll-seo-tag
   - jekyll-relative-links
+  - jekyll-sitemap
 
 defaults:
   -
@@ -164,20 +166,17 @@ defaults:
   - scope:
       path: "datacenter/dtr/2.2"
     values:
-      hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/dtr:2.2.10"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
-      hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
   - scope:
       path: "datacenter/dtr/2.0"
     values:
-      hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
   - scope:
@@ -189,39 +188,20 @@ defaults:
   - scope:
       path: "datacenter/ucp/2.1"
     values:
-      hide_from_sitemap: true
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/ucp:2.1.5"
   - scope:
       path: "datacenter/ucp/2.0"
     values:
-      hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
       docker_image: "docker/ucp:2.0.3"
   - scope:
       path: "datacenter/ucp/1.1"
     values:
-      hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
-  - scope:
-      path: "apidocs/v1.3.3"
-    values:
-      hide_from_sitemap: true
-  - scope:
-      path: "apidocs/v1.4.0"
-    values:
-      hide_from_sitemap: true
-  - scope:
-      path: "apidocs/v2.0.0"
-    values:
-      hide_from_sitemap: true
-  - scope:
-      path: "apidocs/v2.0.1"
-    values:
-      hide_from_sitemap: true
 
 # Assets
 #

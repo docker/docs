@@ -60,7 +60,7 @@ options:
 - option: detach
   shorthand: d
   value_type: bool
-  default_value: "true"
+  default_value: "false"
   description: |
     Exit immediately instead of waiting for the service to converge
   deprecated: false
@@ -129,6 +129,16 @@ options:
   deprecated: false
   min_api_version: "1.25"
   experimental: false
+- option: generic-resource-add
+  value_type: list
+  description: Add a Generic resource
+  deprecated: false
+  experimental: false
+- option: generic-resource-rm
+  value_type: list
+  description: Remove a Generic resource
+  deprecated: false
+  experimental: false
 - option: group-add
   value_type: list
   description: Add an additional supplementary user group to the container
@@ -176,9 +186,9 @@ options:
   experimental: false
 - option: host-add
   value_type: list
-  description: Add or update a custom host-to-IP mapping (host:ip)
+  description: Add a custom host-to-IP mapping (host:ip)
   deprecated: false
-  min_api_version: "1.25"
+  min_api_version: "1.32"
   experimental: false
 - option: host-rm
   value_type: list
@@ -196,6 +206,12 @@ options:
   value_type: string
   description: Service image tag
   deprecated: false
+  experimental: false
+- option: isolation
+  value_type: string
+  description: Service container isolation mode
+  deprecated: false
+  min_api_version: "1.35"
   experimental: false
 - option: label-add
   value_type: list
@@ -535,6 +551,21 @@ examples: |-
   myservice
   ```
 
+  ### Add or remove published service ports
+
+  Use the `--publish-add` or `--publish-rm` flags to add or remove a published
+  port for a service. You can use the short or long syntax discussed in the
+  [docker service create](service_create/#attach-a-service-to-an-existing-network-network)
+  reference.
+
+  The following example adds a published service port to an existing service.
+
+  ```bash
+  $ docker service update \
+    --publish-add published=8080,target=80 \
+    myservice
+  ```
+
   ### Roll back to the previous version of a service
 
   Use the `--rollback` option to roll back to the previous version of the service.
@@ -618,6 +649,12 @@ examples: |-
 
   Some flags of `service update` support the use of templating.
   See [`service create`](./service_create.md#templating) for the reference.
+
+
+  ### Specify isolation mode (Windows)
+
+  `service update` supports the same `--isolation` flag as `service create`
+  See [`service create`](./service_create.md) for the reference.
 deprecated: false
 min_api_version: "1.24"
 experimental: false

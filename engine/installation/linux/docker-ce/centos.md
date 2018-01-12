@@ -31,6 +31,8 @@ The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
 [re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
 
+The `overlay2` storage driver is recommended.
+
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are

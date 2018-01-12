@@ -65,6 +65,42 @@ guides:
     - path: /edge/engine/reference/commandline/docker/
       title: Docker Edge CLI reference
       nosync: true
+  - sectiontitle: Docker for IBM Cloud (Beta)
+    section:
+    - path: /docker-for-ibm-cloud/why/
+      title: Why Docker for IBM Cloud?
+    - path: /docker-for-ibm-cloud/quickstart/
+      title: Quick start
+    - path: /docker-for-ibm-cloud/
+      title: "Setup & prerequisites"
+    - path: /docker-for-ibm-cloud/administering-swarms/
+      title: Administer clusters
+    - path: /docker-for-ibm-cloud/scaling/
+      title: Scale clusters
+    - path: /docker-for-ibm-cloud/deploy/
+      title: Deploy apps
+    - path: /docker-for-ibm-cloud/binding-services/
+      title: Bind IBM Cloud services
+    - sectiontitle: Use registry images in clusters
+      section:
+      - path: /docker-for-ibm-cloud/registry/
+        title: Registry overview
+      - path: /docker-for-ibm-cloud/dtr-ibm-cos/
+        title: Set up DTR to use IBM Cloud Object Storage
+      - path: /docker-for-ibm-cloud/ibm-registry/
+        title: Use images in IBM Cloud Container Registry
+    - path: /docker-for-ibm-cloud/persistent-data-volumes/
+      title: Save persistent data in storage volumes
+    - path: /docker-for-ibm-cloud/load-balancer/
+      title: Use a load balancer
+    - path: /docker-for-ibm-cloud/logging/
+      title: Send logging and metric data to IBM Cloud
+    - path: /docker-for-ibm-cloud/cli-ref/
+      title: CLI reference for bx d4ic commands
+    - path: /docker-for-ibm-cloud/faqs/
+      title: FAQs
+    - path: /docker-for-ibm-cloud/opensource/
+      title: Open source licensing
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/why/
@@ -153,7 +189,6 @@ guides:
       - path: /release-notes/docker-ce/
         title: Docker CE
         nosync: true
-
 - sectiontitle: Get started
   section:
   - sectiontitle: Get started with Docker
@@ -176,7 +211,6 @@ guides:
       title: Network containers
   - path: /engine/docker-overview/
     title: Docker overview
-
 - sectiontitle: Develop with Docker
   section:
     - sectiontitle: Develop your apps on Docker
@@ -240,7 +274,6 @@ guides:
       title: Understand container communication
     - path: /engine/userguide/networking/default_network/ipv6/
       title: IPv6 with Docker
-
 - sectiontitle: Manage application data
   section:
     - path: /engine/admin/volumes/
@@ -273,7 +306,6 @@ guides:
         title: Use the ZFS storage driver
       - path: /engine/userguide/storagedriver/vfs-driver/
         title: Use the VFS storage driver
-
 - sectiontitle: Run your app in production
   section:
     - sectiontitle: The basics
@@ -453,18 +485,31 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: Plugins API
-
 - sectiontitle: Standards and compliance
   section:
   - path: /compliance/
     title: Docker standards and compliance
-  - path: /compliance/nist/800_53/
-    title: NIST 800-53
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker EE Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker CE Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
   - path: /compliance/fedramp/
     title: FedRAMP
-  - path: /compliance/cis/
-    title: CIS
-
+  
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
@@ -817,6 +862,30 @@ reference:
         title: docker tag
       - path: /engine/reference/commandline/top/
         title: docker top
+      - sectiontitle: docker trust *
+        section:
+        - path: /engine/reference/commandline/trust/
+          title: docker trust
+        - path: /engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /engine/reference/commandline/trust_key_load/
+          title: docker trust key load
+        - path: /engine/reference/commandline/trust_revoke/
+          title: docker trust revoke
+        - path: /engine/reference/commandline/trust_sign/
+          title: docker trust sign
+        - path: /engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
+        - path: /engine/reference/commandline/trust_view/
+          title: docker trust view
       - path: /engine/reference/commandline/unpause/
         title: docker unpause
       - path: /engine/reference/commandline/update/
@@ -837,6 +906,7 @@ reference:
           title: docker volume rm
       - path: /engine/reference/commandline/wait/
         title: docker wait
+
     - sectiontitle: Edge
       section:
       - path: /edge/engine/reference/run/
@@ -1165,10 +1235,24 @@ reference:
         section:
         - path: /edge/engine/reference/commandline/trust/
           title: docker trust
+        - path: /edge/engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /edge/engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /edge/engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /edge/engine/reference/commandline/trust_key_load/
+          title: docker trust key load
         - path: /edge/engine/reference/commandline/trust_revoke/
           title: docker trust revoke
         - path: /edge/engine/reference/commandline/trust_sign/
           title: docker trust sign
+        - path: /edge/engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /edge/engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /edge/engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
         - path: /edge/engine/reference/commandline/trust_view/
           title: docker trust view
       - path: /edge/engine/reference/commandline/unpause/
@@ -1226,6 +1310,10 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.35/
+        title: v1.35 reference
+      - path: /engine/api/v1.34/
+        title: v1.34 reference
       - path: /engine/api/v1.33/
         title: v1.33 reference
       - path: /engine/api/v1.32/
@@ -2934,13 +3022,21 @@ manuals:
 - sectiontitle: Docker Store
   section:
   - path: /docker-store/
-    title: Docker Store overview
-  - path: /docker-store/publish/
-    title: Publish content on Docker Store
-  - path: /docker-store/trustchain/
-    title: Docker Store Trust Chain
-  - path: /docker-store/faq/
-    title: Consumer FAQs
+    title: About Docker Store
+  - sectiontitle: Docker Store FAQs
+    section:
+    - path: /docker-store/customer_faq/
+      title: Customer FAQs
+    - path: /docker-store/publisher_faq/
+      title: Publisher FAQs
+  - sectiontitle: For Publishers
+    section:
+    - path: /docker-store/publish/
+      title: Publish content on Docker Store
+    - path: /docker-store/trustchain/
+      title: Docker Store trust chain
+    - path: /docker-store/byol/
+      title: Bring Your Own License (BYOL)
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/

@@ -50,24 +50,29 @@ $ docker run --log-driver=journald ...
 
 ## Options
 
-Use the `--log-opt NAME=VALUE` flag to specify additional `journald` logging
-driver options.
+Use the `--log-opt NAME=VALUE` flag to specify additional `journald` logging driver options.
 
-### `tag`
+| Option | Required | Description |
+| -- | -- | -- |
+| `tag` | optional | Specify template to set `CONTAINER_TAG` value in journald logs. Refer to [log tag option documentation](/engine/admin/logging/log_tags/) to customize the log tag format |
+| `label` | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container. |
+| `env` | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container. |
+| `env-regex` | optional | Similar to and compatible with env. A regular expression to match logging-related environment variables. Used for advanced [log tag options](/engine/admin/logging/log_tags/).
 
-Specify template to set `CONTAINER_TAG` value in `journald` logs. Refer to
-[log tag option documentation](log_tags.md) to customize the log tag format.
+If a collision occurs between label and env keys, the value of the env takes precedence. Each option adds additional fields to the attributes of a logging message.
 
-### `labels`, `env`, and `eng-regex`
+Below is an example of the logging options required to log to journald.
 
-The `labels` and `env` options each take a comma-separated list of keys. If
-there is collision between `label` and `env` keys, the value of the `env` takes
-precedence. Each option adds additional metadata to the journal with each
-message.
+```bash
+docker run --log-driver=journald \
+    --log-opt labels=location \
+    --log-opt env=TEST \
+    --env "TEST=false" \
+    --label location=west \
+    your/application
+```
 
-`env-regex` is similar to and compatible with `env`. Set it to a regular
-expression to match logging-related environment variables. It is used for
-advanced [log tag options](log_tags.md).
+This configuration also directs the driver to include in the payload the label location, and the environment variable TEST.  If the `--env "TEST=false"` or `--label location=west` arguments were omitted, the corresponding key would not be set in the journald log.
 
 ## Note regarding container names
 

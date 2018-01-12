@@ -6,7 +6,9 @@ notoc: true
 ---
 
 ```
-Usage: run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
+Usage:
+    run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+        SERVICE [COMMAND] [ARGS...]
 
 Options:
     -d                    Detached mode: Run container in the background, print
@@ -14,6 +16,7 @@ Options:
     --name NAME           Assign a name to the container
     --entrypoint CMD      Override the entrypoint of the image.
     -e KEY=VAL            Set an environment variable (can be used multiple times)
+    -l, --label KEY=VAL   Add or override a label (can be used multiple times)
     -u, --user=""         Run as specified username or uid
     --no-deps             Don't start linked services.
     --rm                  Remove container after run. Ignored in detached mode.
