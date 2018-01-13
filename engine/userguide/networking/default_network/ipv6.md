@@ -80,7 +80,7 @@ This example provides a way to examine the IPv6 network settings within a
 running container.
 
 ```bash
-docker run -it alpine ash -c "ip -6 addr show dev eth0; ip -6 route show"
+docker run -it alpine sh -c "ip -6 addr show dev eth0; ip -6 route show"
 
 15: eth0: <BROADCAST,UP,LOWER_UP> mtu 1500
    inet6 2001:db8:1:0:0:242:ac11:3/64 scope global
