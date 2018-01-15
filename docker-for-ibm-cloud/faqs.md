@@ -141,6 +141,10 @@ SSH into a manager node. Manager nodes are accessed on port 56422.
 alias ssh-docker='function __t() { ssh-keygen -R [$1]:56422 > /dev/null 2>&1; ssh -A -p 56422 -o StrictHostKeyChecking=no docker@$1; unset -f __t; }; __t'
 ```
 
+## Are there any known issues?
+
+Yes. News, updates, and known issues are recorded by version on the [Release notes](release-notes.md) page.
+
 ## Where do I report problems or bugs?
 
 Contact us through email at docker-for-ibmcloud-beta@docker.com.
