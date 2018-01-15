@@ -38,7 +38,7 @@ Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select you
 
 ### Environment
 
-If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) in IBM Cloud.
+If you have not already, [create an organization and space](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) in IBM Cloud. You must be the account owner or administrator to complete this step.
 
 ## Install the CLIs
 

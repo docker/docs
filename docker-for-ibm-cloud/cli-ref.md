@@ -37,14 +37,14 @@ $ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --s
 | `--sl-api-key`, `-k` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **Authentication Key** under the API Access Information section. | | Required |
 | `--ssh-label`, `--label` | Your IBM Cloud infrastructure SSH key label for the manager node. To create a key, [log in to IBM Cloud infrastructure](https://control.softlayer.com/) and select **Devices > Manage > SSH Keys > Add**. Copy the key label and insert it here. | | Required |
 | `--ssh-key` | The path to the SSH key on your local client that matches the SSH key label in your IBM Cloud infrastructure account. | | Required |
-| `--swarm-name`, `--name` | The name for your swarm and prefix for the names of each node. | d4ic | Required |
+| `--swarm-name`, `--name` | The name for your swarm and prefix for the names of each node. | | Required |
 | `--docker-ee-url` | The Docker EE installation URL associated with your subscription. For beta, you received this in your welcome email. | | Required |
 | `--manager` | Deploy 1, 3, or 5 manager nodes. | 3 | Optional |
 | `--workers`, `-w` | Deploy a minimum of 1 and maximum of 10 worker nodes. | 3 | Optional |
 | `--datacenter`, `-d` | The location (data center) that you deploy the cluster to. Availabe locations are dal12, dal13, fra02, hkg02, lon04, par01, syd01, syd04, tor01, wdc06, wdc07. | wdc07 | Optional |
 | `--verbose`, `-v` | Enable verbose mode | | Optional |
 | `--hardware` | If "dedicated" then the nodes are created on hosts with compute instances in the same account. | Shared | Optional |
-| `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.2x4 | Optional |
+| `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | b1c.4x16 | Optional |
 | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
 | `--version` | The Docker EE version of the created cluster. For the beta, only the default version is available. | Default version | Optional |
 

@@ -123,6 +123,10 @@ The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Clo
 
 Instead of including these in each command, you can [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables).
 
+## Why can't I target an organization or space in IBM Cloud?
+
+Before you can target an organization or space in IBM Cloud, the account owner or administrator must set them up. See [Creating organizations and spaces](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) for more information.
+
 ## Can I manually change the load balancer configuration?
 
 No. If you make any manual changes to the load balancer, they are removed the next time that the load balancer is updated or swarm changes are made. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the load balancer manually, they could conflict with what is in cluster, and cause issues.
