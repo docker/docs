@@ -1905,6 +1905,9 @@ called `data` and mount it into the `db` service's containers.
       data:
         external: true
 
+> [external.name was deprecated in version 3.4 file format](compose-versioning.md#version-34)
+> use `name` instead.
+
 You can also specify the name of the volume separately from the name used to
 refer to it within the Compose file:
 
@@ -1947,7 +1950,9 @@ conflicting with those used by other software.
 
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
-Set a custom name for this volume.
+Set a custom name for this volume. The name field can be used to reference
+networks which contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 
     version: '3.4'
     volumes:
@@ -2157,6 +2162,10 @@ service's containers to it.
       outside:
         external: true
 
+
+> [external.name was deprecated in version 3.5 file format](compose-versioning.md#version-35)
+> use `name` instead.
+
 You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
@@ -2169,7 +2178,9 @@ refer to it within the Compose file:
 
 > [Added in version 3.5 file format](compose-versioning.md#version-35)
 
-Set a custom name for this network.
+Set a custom name for this network. The name field can be used to reference
+networks which contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 
     version: '3.5'
     networks:
@@ -2195,8 +2206,10 @@ stack. The source of the config is either `file` or `external`.
 - `external`: If set to true, specifies that this config has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
-- `name`: The actual name of the config object in Docker. Introduced with the
-  3.5 file format.
+- `name`: The name of the config object in Docker. This field can be used to
+   reference configs which contain special characters. The name is used as is
+   and will **not** be scoped with the stack name. Introduced in version 3.5
+   file format.
 
 In this example, `my_first_config` will be created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
@@ -2240,8 +2253,10 @@ stack. The source of the secret is either `file` or `external`.
 - `external`: If set to true, specifies that this secret has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
-- `name`: The actual name of the config object in Docker. Introduced with the
-  3.5 file format.
+- `name`: The name of the secret object in Docker. This field can be used to
+   reference secrets which contain special characters. The name is used as is
+   and will **not** be scoped with the stack name. Introduced in version 3.5
+   file format.
 
 In this example, `my_first_secret` will be created (as
 `<stack_name>_my_first_secret)`when the stack is deployed,
