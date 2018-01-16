@@ -1051,8 +1051,12 @@ for details on how healthchecks work.
       interval: 1m30s
       timeout: 10s
       retries: 3
+      start_period: 40s
 
-`interval` and `timeout` are specified as [durations](#specifying-durations).
+`interval`, `timeout` and `start_period` are specified as [durations](#specifying-durations).
+
+> **Note**: `start_period` is only supported for v3.4 and higher of the compose
+file format.
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
