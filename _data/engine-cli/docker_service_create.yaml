@@ -682,7 +682,7 @@ examples: "### Create a service\n\n```bash\n$ docker service create --name redis
   of using the long format\nfor the same service as above:\n\n```bash\n$ docker service
   create --name my_web --replicas 3 --publish published=8080,target=80 nginx\n```\n\nThe
   options you can specify are:\n\n<table>\n<thead>\n<tr>\n  <th>Option</th>\n  <th>Short
-  syntax</th>\n  <th>Long syntax</th>\n  <th>Description</th>\n</tr>\n<tr>\n  <td>published
+  syntax</th>\n  <th>Long syntax</th>\n  <th>Description</th>\n</tr>\n</thead><tr>\n  <td>published
   and target port </td>\n  <td><tt></tt></td>\n  <td><tt></tt></td>\n  <td></td>\n</tr>\n<tr>\n
   \ <td>protocol</td>\n  <td><tt>--publish 8080:80</tt></td>\n  <td><tt>--publish
   published=8080,target=80</tt></td>\n  <td><p>\n    The port to publish the service
