@@ -185,7 +185,7 @@ guides:
         title: FAQ
   - sectiontitle: Release notes
     section:
-      - path: /ee/17.06/
+      - path: /ee/engine/release-notes/
         title: Docker EE
         nosync: true
       - path: /release-notes/docker-ce/
@@ -1544,12 +1544,6 @@ manuals:
     path: https://dockertrial.com
   - path: /ee/telemetry/
     title: Manage usage data collection
-  - sectiontitle: Release notes
-    section:
-    - path: /ee/17.03/release-notes/
-      title: "17.03"
-    - path: /ee/17.06/
-      title: "17.06"
   - path: /datacenter/install/linux/
     title: Deploy Docker EE standard on Linux
   - path: /ee/backup/
@@ -1558,6 +1552,10 @@ manuals:
     title: Upgrade Docker EE
   - path: /ee/docker-ee-architecture/
     title: Docker EE Architecture
+  - sectiontitle: Docker EE Engine
+    section:
+    - title: Release notes
+      path: /ee/engine/release-notes/
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
@@ -3635,7 +3633,7 @@ manuals:
   section:
     - path: /release-notes/
       title: Overview
-    - path: /ee/17.06/
+    - path: /ee/engine/release-notes/
       title: Docker EE
       nosync: true
     - path: /release-notes/docker-ce/
