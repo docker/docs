@@ -509,7 +509,7 @@ guides:
       title: Kubernetes Benchmark
   - path: /compliance/fedramp/
     title: FedRAMP
-  
+
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
@@ -923,8 +923,6 @@ reference:
         section:
         - path: /edge/engine/reference/commandline/checkpoint/
           title: docker checkpoint
-        - path: /edge/engine/reference/commandline/checkpoint_create/
-          title: docker checkpoint create
         - path: /edge/engine/reference/commandline/checkpoint_create/
           title: docker checkpoint create
         - path: /edge/engine/reference/commandline/checkpoint_ls/
