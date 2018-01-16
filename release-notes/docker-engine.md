@@ -7,7 +7,7 @@ toc_max: 2
 
 These release notes are for Docker Engine versions 1.13.1 and lower. For newer
 Docker releases, see [Docker CE](docker-ce.md) or
-[Docker EE](/ee/17.03/release-notes.md).
+[Docker EE](/ee/engine/release-notes.md).
 
 ## 1.13.1 (2017-02-08)
 
