@@ -60,6 +60,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <li>View bandwidth statistics</li>
   <li>Add IP addresses</li>
   <li>Manage email delivery service</li>
+  <li>*Manage Network VLAN Spanning</li>
   </ul></td>
   </tr>
   <tr>
