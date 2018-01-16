@@ -101,6 +101,8 @@ guides:
       title: FAQs
     - path: /docker-for-ibm-cloud/opensource/
       title: Open source licensing
+    - path: /docker-for-ibm-cloud/release-notes/
+      title: Release notes
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/why/
@@ -509,7 +511,7 @@ guides:
       title: Kubernetes Benchmark
   - path: /compliance/fedramp/
     title: FedRAMP
-  
+
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
