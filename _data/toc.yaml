@@ -927,8 +927,6 @@ reference:
           title: docker checkpoint
         - path: /edge/engine/reference/commandline/checkpoint_create/
           title: docker checkpoint create
-        - path: /edge/engine/reference/commandline/checkpoint_create/
-          title: docker checkpoint create
         - path: /edge/engine/reference/commandline/checkpoint_ls/
           title: docker checkpoint ls
         - path: /edge/engine/reference/commandline/checkpoint_rm/
