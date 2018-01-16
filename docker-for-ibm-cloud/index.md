@@ -9,7 +9,7 @@ redirect_from:
 
 Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cloud that runs Docker Enterprise Edition software. Docker EE for IBM Cloud is available on **December 20th 2017 as a closed Beta**.
 
-[Email us to request access to the closed beta](mailto:sealbou@us.ibm.com). In the welcome email you receive, you are given the Docker EE installation URL that you use for the beta.
+[Email IBM to request access to the closed beta](mailto:sealbou@us.ibm.com). In the welcome email you receive, you are given the Docker EE installation URL that you use for the beta.
 
 ## Prerequisites
 

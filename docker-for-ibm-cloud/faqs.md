@@ -125,7 +125,7 @@ Instead of including these in each command, you can [set your environment variab
 
 ## Why can't I target an organization or space in IBM Cloud?
 
-Before you can target an organization or space in IBM Cloud, the account owner or administrator must set them up. See [Creating organizations and spaces](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) for more information.
+Before you can target an organization or space in IBM Cloud, the account owner or administrator must set up the organization or space. See [Creating organizations and spaces](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) for more information.
 
 ## Can I manually change the load balancer configuration?
 

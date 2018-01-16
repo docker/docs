@@ -47,7 +47,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    | `--ssh-label`, `--label` | Your IBM Cloud infrastructure SSH key label for the manager node. To create a key, [log in to IBM Cloud infrastructure](https://control.softlayer.com/) and select **Devices > Manage > SSH Keys > Add**. Copy the key label and insert it here. | | Required |
    | `--ssh-key` | The path to the SSH key on your local client that matches the SSH key label in your IBM Cloud infrastructure account. | | Required |
    | `--swarm-name`, `--name` | The name for your swarm and prefix for the names of each node. | | Required |
-   | `--docker-ee-url` | The Docker EE installation URL associated with your subscription. [Email us](mailto:sealbou@us.ibm.com) to get a trial subscription during the beta. | | Required |
+   | `--docker-ee-url` | The Docker EE installation URL associated with your subscription. [Email IBM](mailto:sealbou@us.ibm.com) to get a trial subscription during the beta. | | Required |
    | `--manager` | Deploy 1, 3, or 5 manager nodes. | 3 | Optional |
    | `--workers`, `-w` | Deploy a minimum of 1 and maximum of 10 worker nodes. | 3 | Optional |
    | `--datacenter`, `-d` | The location (data center) that you deploy the cluster to. Availabe locations are dal12, dal13, fra02, hkg02, lon04, par01, syd01, syd04, tor01, wdc06, wdc07. | wdc07 | Optional |

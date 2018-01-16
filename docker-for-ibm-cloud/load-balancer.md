@@ -63,7 +63,7 @@ Use the load balancer to access [DTR](/datacenter/dtr/2.4/guides/).
 
 ## Service load balancer
 
-When you create a service, any ports that are opened with `-p` are automatically exposed through the load balancer.
+When you create a service, any ports that are opened with `--publish` or `-p` are automatically published through the load balancer.
 
 > Reserved ports
 >
@@ -107,14 +107,14 @@ Get a publicly accessible HTTP URL for your app by publishing a Docker service o
      nginx
    ```
 
-3. List the name of the cluster, and then use it to show the service `svc` load balancer URL:
+3. List the name of the cluster such as `mycluster`, and then use it to show the service (**svc**) load balancer URL:
 
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
    $ bx d4ic show --swarm-name mycluster --sl-user user.name.1234567 --sl-api-key api_key
    ```
 
-4. To access the service that you exposed on a port, use the service `svc` load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
+4. To access the service that you exposed on a port, use the service (**svc**) load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
 
    ```bash
    $ curl mycluster-svc-1234567-wdc07.lb.bluemix.net:8080/
@@ -139,9 +139,9 @@ When you create the Docker service to expose your app with an HTTPS URL, you nee
 * Set the health check path.
 
 **Start a service that uses SSL termination**:
-Start a service that listens on ports `80` and `444`. The service load balancer provides SSL termination on port `444` that uses your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
+Start a service that listens on ports that you specify. The service load balancer provides SSL termination on ports that use your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
 
-In the label, you must append `@HTTPS:port` to list the ports you want to expose.
+In the label, you must append `@HTTPS:port` to list the ports that you want to publish.
 
 For example:
 
@@ -168,7 +168,7 @@ When the route is published, the health check is set to the path that you specif
 
 #### Example command for HTTPS
 
-The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is exposed on a different port than the default and includes a health check path.
+The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is published on a different port than the default and includes a health check path.
 
 Before you begin:
 
@@ -197,14 +197,14 @@ Steps:
      nginx
    ```
 
-3. List the name of the cluster, and then use it to show the service `svc` load balancer URL:
+3. List the name of the cluster such as `mycluster`, and then use it to show the service (**svc**) load balancer URL:
 
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
    $ bx d4ic show --swarm-name mycluster --sl-user user.name.1234567 --sl-api-key api_key
    ```
 
-4. To access the service that you exposed on a port, use the service `svc` load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
+4. To access the service that you exposed on a port, use the service (**svc**) load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
 
    ```bash
    $ curl --cacert https://mycluster-svc-1234567-wdc07.lb.bluemix.net:444
