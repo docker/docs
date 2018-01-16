@@ -10,7 +10,6 @@ Here you can learn about new features, bug fixes, breaking changes, and known is
 
 (20 December 2017)
 
-### News
 Docker Enterprise Edition for IBM Cloud is a Container-as-a-Service platform that helps you modernize and extend your applications. It provides an unmanaged, native Docker environment running within IBM Cloud, giving you the ability to enhance your apps with services from the IBM Cloud catalog such as Watson, Internet of Things, Data, Logging, Monitoring, and many more.
 
 The beta is based on the latest Docker EE version 17.06. You receive a 90-day Docker EE license for 20 Linux x86-64 nodes that you use when creating a cluster with the IBM Cloud `bx d4ic` CLI plug-in.
