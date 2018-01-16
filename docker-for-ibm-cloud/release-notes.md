@@ -15,7 +15,7 @@ Docker Enterprise Edition for IBM Cloud is a Container-as-a-Service platform tha
 
 The beta is based on the latest Docker EE version 17.06. You receive a 90-day Docker EE license for 20 Linux x86-64 nodes that you use when creating a cluster with the IBM Cloud `bx d4ic` CLI plug-in.
 
-[Sign up for the closed beta](https://www.ibm.com/us-en/marketplace/docker-for-ibm-cloud). Then use the [quick start](quickstart.md) to spin up your first Docker EE for IBM Cloud swarm.
+[Sign up for the closed beta](mailto:sealbou@us.ibm.com). Then use the [quick start](quickstart.md) to spin up your first Docker EE for IBM Cloud swarm.
 
 ### Known issues
 
