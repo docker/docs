@@ -27,6 +27,8 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.12.0-ce-mac46 2018-01-09 (Stable)
 
+[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
   - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
@@ -50,6 +52,8 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)) 
 
 ### Docker Community Edition 17.09.1-ce-mac42 2017-12-11 (Stable)
+
+[Download](https://download.docker.com/mac/stable/21090/Docker.dmg)
 
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
