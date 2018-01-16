@@ -61,7 +61,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06 (Stable)
 
-[Download](https://download.docker.com/mac/stable/19661/Docker.dmg)
+[Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
 
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
