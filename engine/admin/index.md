@@ -99,7 +99,7 @@ If you see an error similar to this one and you are starting the daemon manually
 you may need to adjust your flags or the `daemon.json` to remove the conflict.
 
 > **Note**: If you see this specific error, continue to the
-> [next section](#use-the-hosts-eky-in-daemon-json-with-systemd) for a workaround.
+> [next section](#use-the-hosts-key-in-daemon-json-with-systemd) for a workaround.
 
 If you are starting Docker using your operating system's init scripts, you may
 need to override the defaults in these scripts in ways that are specific to the
