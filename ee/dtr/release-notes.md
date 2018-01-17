@@ -3,6 +3,8 @@ title: DTR 2.5 release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
 toc_max: 2
+redirect_from:
+  - /datacenter/dtr/2.5/guides/release-notes/
 ui_tabs:
 - version: dtr-2.5
   orhigher: false
@@ -16,6 +18,65 @@ known issues for each DTR version.
 
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
+
+## 2.5.0 Beta 2 (2017-1-16)
+
+### New features
+
+* You can now configure DTR to automatically create a new repository when
+users push to a repository in their personal namespace that doesn't exist yet.
+This makes the behavior of DTR consistent with Docker Hub. By default this
+setting is disabled, so that DTR continues behaving the same way after an upgrade.
+[Learn about creating repositories on push](https://beta.docs.docker.com/ee/dtr/admin/configure/allow-creation-on-push/).
+* You can create push mirroring policies to automatically push an image to
+another DTR deployment or Docker Hub, when the image complies with a policy
+of your choice.
+[Learn about push mirroring](https://beta.docs.docker.com/ee/dtr/user/promotion-policies/push-mirror/).
+* You can configure a repository in a DTR deployment to mirror a repository
+in a different DTR deployment by constantly monitoring it and pulling new
+images when they are available.
+[Learn about pull mirroring](https://beta.docs.docker.com/ee/dtr/user/promotion-policies/pull-mirror/).
+* Added the `emergency-repair` command to the DTR CLI tool. This allows you to
+recover your DTR cluster from a loss of quorum and is an alternative to
+restoring from a backup.
+[Learn about the emergency-repair command](https://beta.docs.docker.com/ee/dtr/admin/disaster-recovery/repair-a-cluster/).
+* Users can now create access tokens that can be used to authenticate in the
+DTR API without providing their credentials.
+[Learn about access tokens](https://beta.docs.docker.com/ee/dtr/user/access-tokens/).
+* You can now configure DTR to run garbage collection jobs without putting DTR
+in read-only mode. This is still experimental.
+[Learn about garbage collection](https://beta.docs.docker.com/ee/dtr/admin/configure/garbage-collection/).
+* Administrators can hide vulnerabilities in given image layers if they
+know that the vulnerability has been fixed.
+* You can now connect one DTR deployment to multiple UCPs, allowing you to
+use Docker Content Trust in a seamless way between multiple UCPs.
+* Added new endpoints to the DTR API to query the results of the Vulnerability
+scanner:
+  * `/api/v0/imagescan/scansummary/repositories/{namespace}/{reponame}/{tag}` returns
+  the scanning summary for a given tag.
+  * `/api/v0/imagescan/scansummary/cve/{cve}` gets the scan summary by CVE.
+  * `/api/v0/imagescan/scansummary/layer/{layerid}` gets the scan summary by layer SHA.
+  * `/api/v0/imagescan/scansummary/license/{license}` gets the scan summary by
+  license type.
+  * `/api/v0/imagescan/scansummary/component/{component}` get the scan summary by
+  component.
+
+### Bug fixes
+
+* UI
+  * Several improvements to the UI to make it more stable
+* User accounts
+  * When a user changes their password they are automatically logged out.
+* Vulnerability scanner
+  * Fixed problem causing errors when trying to view scanning information when
+an image has not been scanned yet.
+* docker/dtr tool
+  * When using `docker/dtr reconfigure --log-host`, you now need to also
+specify `--log-protocol`.
+  * You can now tune the RethinkDB cache size for improved performance. Use the
+  `--replica-rethinkdb-cache-mb` option available on install, join, or reconfigure.
+* Misc
+  * Removed support for manifest schema v1. This doesn't  affect users.
 
 {% elsif include.version=="dtr-2.4" %}
 
