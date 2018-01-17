@@ -10,21 +10,6 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
-## Version 2.2.5
-
-(16 January 2018)
-
-**Bug fixes**
-
-* Security
-  * Role-based access control is now enforced for volumes managed by 3rd party
-volume plugins (for example using the NetApp or other volume plugins). This is a
-critical security fix for customers that use 3rd party volume drivers and rely
-on Docker Universal Control Plane for tenant isolation of workloads and data.
-**Caution** is advised when applying this update because users or automated
-workflows may have come to rely on lack of access control enforcement when
-manipulating volumes created with 3rd party volume plugins.
-
 ## Version 2.2.4
 
 (2 November 2017)
