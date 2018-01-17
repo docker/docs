@@ -90,7 +90,8 @@ and choosing "Open" from the pop-up menu.
 
 4. Provide your password to continue with the installation.
 
-     When it completes, the installer provides you with some shortcuts. You can ignore this for now and click **Continue**.
+     When it completes, the installer provides you with some
+     shortcuts. You can ignore this for now and click **Continue**.
 
      ![Quickstart](images/mac-page-quickstart.png)
 
@@ -239,9 +240,15 @@ owned by UID 1000 and GID 50.
 
 Removing Toolbox involves removing all the Docker components it includes.
 
-A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
+A full uninstall also includes removing the local and remote machines
+you created with Docker Machine. In some cases, you might want to keep
+machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of
+Docker for Mac you can continue to manage those machines through
+Docker. Or, if you have remote machines on a cloud provider and you
+plan to manage them using the provider, you wouldn't want to remove
+them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on a Mac, do the following:
 
@@ -285,13 +292,11 @@ To uninstall Toolbox on a Mac, do the following:
 
 6. Optionally, remove the `~/.docker` directory.
 
-    If you want to remove Docker entirely, you
-    can remove the `~/.docker` directory
-    recursively. This directory stores some
-    Docker program configuration and/or state
-    (e.g., information about created machines such
-    as certificates). Removing this directory
-    is typically not necessary.
+    If you want to remove Docker entirely, you can remove the
+    `~/.docker` directory recursively. This directory stores some
+    Docker program configuration and/or state (e.g., information about
+    created machines such as certificates). Removing this directory is
+    typically not necessary.
 
 
 7. Uninstall Oracle VirtualBox, which is
