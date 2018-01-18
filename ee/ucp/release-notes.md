@@ -1,5 +1,5 @@
 ---
-title: UCP 3.0 Beta1 release notes
+title: UCP 3.0 Beta release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
