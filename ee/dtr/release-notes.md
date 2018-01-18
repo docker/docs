@@ -1,5 +1,5 @@
 ---
-title: DTR 2.5 release notes
+title: DTR 2.5 Beta release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
 toc_max: 2
