@@ -20,7 +20,7 @@ upgrade your installation to the latest release.
 
 ## Version 3.0.0-beta2
 
-(16 January 2018)
+(18 January 2018)
 
 **New features**
 
