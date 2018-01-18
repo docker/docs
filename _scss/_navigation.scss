@@ -4,9 +4,8 @@
 *
 */
 .nav-container {
-    height: 50px;
+    height: 55px;
 }
-
 
 .primary {
     padding: 5px 0 0 20px;
@@ -30,7 +29,6 @@
     padding: 16px 15px 0 0;
 }
 
-
 /*
 *
 * user-nav ***********************************************************************
@@ -52,7 +50,6 @@
     }
 }
 
-
 /*
 *
 * Secondary Navigation  **********************************************************
@@ -63,7 +60,6 @@
     background: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
-    // overflow: hidden;
 }
 
 
@@ -80,11 +76,15 @@
     position: absolute;
     width: 100%;
     &.affix {
-        background: #0C5176;
+        background: $bg-secondary;
         box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
         top: 0;
         position: fixed;
         z-index: 100;
+    }
+    .search-form {
+        margin: 5px 27px 0 -10px;
+        width: 240px;
     }
 }
 
@@ -115,8 +115,7 @@
     }
 }
 
-.nav-sidebar .nav ul
-{
+.nav-sidebar .nav ul {
   padding: 0px 0px 0px 15px;
 }
 
@@ -135,13 +134,14 @@
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav>li>a:focus {
     cursor: default;
+    background: #F3F4F4;
     color: #2089C4;
-    border-left: 4px solid #21cbc9;
+    border-left: 4px solid #077CBC;
     font-weight: 600;
 }
 
 .nav-sidebar ul li li a {
-    border-left: 1px solid #21cbc9;
+    border-left: 1px solid #077CBC;
     font-size: 12px;
     margin-left: 15px;
 }
@@ -171,15 +171,15 @@
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding-left: 0;
-    line-height: 24px;
+    padding-left: 10px;
+    line-height: 20px;
     li {
-        padding: 2px 8px 2px 15px;
+        padding: 2px 8px 2px 0;
         width: 100%;
         a {
             display: inline-block;
             font-size: 12px;
-            padding: 0 10px 0 10px;
+            padding: 5px 10px 5px 10px;
             text-decoration: none;
         }
     }
@@ -187,7 +187,7 @@
 
 .toc-nav li a.active {
     color: #2089C4;
-    border-left: 4px solid #21cbc9;
+    border-left: 4px solid #2089C4;
     font-weight: bold;
 }
 
@@ -211,7 +211,6 @@ div#side-toc-title {
 .edit {
     margin: 10px 0 20px 15px;
 }
-
 
 /*
 *
@@ -295,28 +294,33 @@ input:checked+.slider:before {
 * Tabs ***********************************************************************
 *
 */
-
-.tabs {
+#tabs {
     float: left;
     margin: 0;
-    padding: 0;
+    padding-left: 8px; 
+    ul {
+        padding: 0;
+    }
 }
 
-.tabs li {
-    float: left;
-    list-style: none;
-}
 
-.tabs li a {
-    color: $white;
-    padding: 17px 13px 11px;
-    float: left;
-    font-weight: 600;
-}
 
-.tabs li a:hover {
-    background: rgba(0, 0, 0, 0.17) !important;
-    border-bottom: 4px solid #fff;
+.tabs {
+
+    li {
+        float: left;
+        list-style: none;
+        a {
+            color: $white;
+            padding: 17px 19px 14px 15px;
+            float: left;
+            font-weight: 600;
+            &:hover {
+                background: rgba(0, 0, 0, 0.17) !important;
+                border-bottom: 4px solid #fff;
+            }
+        }
+    }
 }
 
 .tabs li.active a {
@@ -325,7 +329,6 @@ input:checked+.slider:before {
     cursor: default;
     border-bottom: 4px solid #fff;
 }
-
 
 /*
 *
@@ -337,7 +340,6 @@ input:checked+.slider:before {
     margin: 50px 0 10px 0;
 }
 
-
 /* polldaddy */
 
 #rating_info_8453675 {
@@ -348,7 +350,6 @@ input:checked+.slider:before {
     font: inherit !important;
     color: inherit !important;
 }
-
 
 /*
 *
@@ -364,7 +365,7 @@ input:checked+.slider:before {
 
 .ctrl-right {
     float: right;
-    padding: 5px 2px 12px;
+    padding: 5px 0px;
 }
 
 .ctrl-right .btn-group {
