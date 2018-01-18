@@ -19,7 +19,7 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
-## 2.5.0 Beta 2 (2017-1-16)
+## 2.5.0 Beta 3 (2017-1-18)
 
 ### New features
 
