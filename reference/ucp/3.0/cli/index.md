@@ -23,7 +23,7 @@ Additional help is available for each command with the `--help` flag.
 docker container run -it --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} \
+    docker/ucp \
     command [command arguments]
 ```
 
