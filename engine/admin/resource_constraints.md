@@ -143,7 +143,7 @@ a container. Consider the following scenarios:
   memory that actually exists on the host machine. You can configure the
   kernel memory to never go over what is available on the host machine,
   and containers which need more memory need to wait for it.
-- **Limited memory, umlimited kernel memory**: The overall memory is
+- **Limited memory, unlimited kernel memory**: The overall memory is
   limited, but the kernel memory is not.
 - **Limited memory, limited kernel memory**: Limiting both user and kernel
   memory can be useful for debugging memory-related problems. If a container
