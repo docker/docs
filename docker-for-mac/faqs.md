@@ -239,8 +239,8 @@ recommend the use of [Docker Toolbox](/toolbox/overview.md).
 The containers and images are stored in a _disk image_ named
 `Docker.raw` or `Docker.qcow2` depending on your settings (see below).
 By default, the disk image is stored in
-`~/Library/Containers/com.docker.docker/Data`, in the `vm`
-subdirectory starting with Docker for Mac 17.12, and
+`~/Library/Containers/com.docker.docker/Data`, in the `vms/0`
+subdirectory starting with Docker for Mac 18.01, and
 `com.docker.driver.amd64-linux` before.
 
 ### Qcow2 or Raw?
@@ -260,7 +260,7 @@ see the logical size in human readable form, add `-lh`:
 
 ```bash
 $ cd ~/Library/Containers/com.docker.docker/Data
-$ cd vm   # or com.docker.driver.amd64-linux
+$ cd vms/0   # or com.docker.driver.amd64-linux
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
