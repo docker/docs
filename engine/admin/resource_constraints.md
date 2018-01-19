@@ -226,9 +226,9 @@ operating system.
 To run containers using the realtime scheduler, run the Docker daemon with
 the `--cpu-rt-runtime` flag set to the maximum number of microseconds reserved
 for realtime tasks per runtime period. For instance, with the default period of
-10000 microseconds (1 second), setting `--cpu-rt-runtime=95000` ensures that
-containers using the realtime scheduler can run for 95000 microseconds for every
-10000-microsecond period, leaving at least 5000 microseconds available for
+1000000 microseconds (1 second), setting `--cpu-rt-runtime=950000` ensures that
+containers using the realtime scheduler can run for 950000 microseconds for every
+1000000-microsecond period, leaving at least 50000 microseconds available for
 non-realtime tasks. To make this configuration permanent on systems which use
 `systemd`, see [Control and configure Docker with systemd](systemd.md).
 
@@ -248,7 +248,7 @@ The following example command sets each of these three flags on a `debian:jessie
 container.
 
 ```bash
-$ docker run --it --cpu-rt-runtime=95000 \
+$ docker run --it --cpu-rt-runtime=950000 \
                   --ulimit rtprio=99 \
                   --cap-add=sys_nice \
                   debian:jessie
