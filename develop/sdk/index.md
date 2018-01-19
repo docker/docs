@@ -266,6 +266,7 @@ file them with the library maintainers.
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
+| NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
 | PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
 | Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
