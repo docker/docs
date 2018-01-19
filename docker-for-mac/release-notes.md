@@ -19,6 +19,17 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
+
+* Bug fixes and minor changes
+  - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
+  - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
+  - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
+  - Allow individual IP addresses to be added to HTTP proxy excludes.
+  - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.  
+
 ### Docker Community Edition 17.12.0-ce-mac47 2018-01-12 (Stable)
 
 * Bug fixes and minor changes
