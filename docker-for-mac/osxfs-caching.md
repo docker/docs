@@ -170,10 +170,9 @@ container runtime a degree of flexibility:
 
 6. Containers **_may_** retain file data and metadata (including directory
 structure, existence of nodes, etc) indefinitely and this cache **_may_**
-desynchronize from the file system state of the host. Implementors are
-encouraged to expire caches when host file system changes occur but,
-due to platform limitations, may be unable to do this in any specific
-timeframe.
+desynchronize from the file system state of the host. Implementors should expire
+caches when host file system changes occur, but this may be difficult to do on
+a guaranteed timeframe due to platform limitations.
 
 7. If changes to the mount source directory are present on the host
 file system, those changes **_may_** be lost when the `delegated` mount

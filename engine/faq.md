@@ -185,7 +185,7 @@ When building Docker images on Debian and Ubuntu you may have seen errors like:
     unable to initialize frontend: Dialog
 
 These errors don't stop the image from being built but inform you that the
-installation process tried to open a dialog box, but was unable to. Generally,
+installation process tried to open a dialog box, but couldn't. Generally,
 these errors are safe to ignore.
 
 Some people circumvent these errors by changing the `DEBIAN_FRONTEND`

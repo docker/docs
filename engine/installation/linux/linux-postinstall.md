@@ -173,7 +173,7 @@ from connecting.
 ### IP forwarding problems
 
 If you manually configure your network using `systemd-network` with `systemd`
-version 219 or higher, Docker containers may be unable to access your network.
+version 219 or higher, Docker containers may not be able to access your network.
 Beginning with `systemd` version 220, the forwarding setting for a given network
 (`net.ipv4.conf.<interface>.forwarding`) defaults to *off*. This setting
 prevents IP forwarding. It also conflicts with Docker's behavior of enabling

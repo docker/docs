@@ -79,7 +79,7 @@ Various container options that affect container domain name services.
     </p></td>
     <td><p>
      The IP addresses passed via the <code>--dns</code> option is used by the embedded DNS
-     server to forward the DNS query if embedded DNS server is unable to resolve a name
+     server to forward the DNS query if embedded DNS server can't resolve a name
      resolution request from the containers.
      These <code>--dns</code> IP addresses are managed by the embedded DNS server and
      are not updated in the container's <code>/etc/resolv.conf</code> file.

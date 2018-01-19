@@ -47,7 +47,7 @@ The live restore feature supports restoring containers to the daemon for
 upgrades from one minor release to the next. For example from Docker Engine
 1.12.1 to 1.12.2.
 
-If you skip releases during an upgrade, the daemon may not restore its connection to the containers. If the daemon is unable to restore the connection, it ignores the running containers and you must manage them manually.
+If you skip releases during an upgrade, the daemon may not restore its connection to the containers. If the daemon can't restore the connection, it ignores the running containers and you must manage them manually.
 
 ## Live restore upon restart
 

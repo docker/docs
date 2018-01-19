@@ -273,8 +273,8 @@ data. Then, you try and pull it.
         a3ed95caeb02: Download complete
         error pulling image configuration: unexpected EOF
 
-      The pull did not complete because the trust system was
-      unable to verify the image.
+      The pull did not complete because the trust system couldn't verify the
+      image.
 
 ## More play in the sandbox
 

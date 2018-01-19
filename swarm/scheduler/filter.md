@@ -177,7 +177,7 @@ $ docker daemon --label containerslots=3
 
 Swarm runs up to 3 containers at this node, if all nodes are "full",
 an error is thrown indicating no suitable node can be found.
-If the value is not castable to an integer number or is not present,
+If the value cannot be cast to an integer number or is not present,
 there is no limit on container number.
 
 ## Container filters
