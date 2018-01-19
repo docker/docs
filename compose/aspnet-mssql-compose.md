@@ -27,7 +27,7 @@ configure this app to use our SQL Server database, and then create a
     This directory is the context of your docker-compose project. For
     [Docker for Windows](https://docs.docker.com/docker-for-windows/#/shared-drives) and
     [Docker for Mac](https://docs.docker.com/docker-for-mac/#/file-sharing), you
-    have to set up file sharing for the volume that you need to map.
+    need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `aspnetcore-build` Docker image to generate a
     sample web application within the container under the `/app` directory and

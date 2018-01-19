@@ -52,7 +52,7 @@ troubleshooting steps if you do lose the quorum of managers.
 
 ## Configure the manager to advertise on a static IP address
 
-When initiating a swarm, you have to specify the `--advertise-addr` flag to
+When initiating a swarm, you must specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
 information, see [Run Docker Engine in swarm mode](/engine/swarm/swarm-mode.md#configure-the-advertise-address). Because manager nodes are
 meant to be a stable component of the infrastructure, you should use a *fixed

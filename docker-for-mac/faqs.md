@@ -196,7 +196,7 @@ in the Networking topic.
 ### How do I connect to a container from the Mac?
 
 Our current recommendation is to publish a port, or to connect from another
-container. Note that this is what you have to do even on Linux if the container
+container. Note that this is what you need to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 For a full explanation and examples, see
@@ -216,7 +216,7 @@ the Getting Started topic.
 
 ### How do I add client certificates?
 
-Starting with Docker for Mac 17.06.0-ce, you do not have to push your
+Starting with Docker for Mac 17.06.0-ce, you do not need to push your
 certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.

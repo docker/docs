@@ -31,7 +31,7 @@ Click the **Add SAN** button, and add one or more SANs to the node.
 
 Once you're done, click **Save Changes**.
 
-You will have to do this on every manager node in the cluster, but once you
+You need to do this on every manager node in the cluster, but once you
 have done so, the SANs will be automatically applied to any new manager nodes
 that join the cluster.
 

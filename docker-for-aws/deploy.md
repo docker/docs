@@ -172,7 +172,7 @@ the docker command is automatically executed.
 
 ### Docker Stack deployment
 
-To deploy complex multi-container apps, you can use the `docker stack deploy` command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the `docker-compose.yml` file (for example using `scp`) to a manager node, SSH into the manager and then run `docker stack deploy` (if you have multiple managers, you have to ensure that your session is on one that has the stack file).
+To deploy complex multi-container apps, you can use the `docker stack deploy` command. You can either deploy a bundle on your machine over an SSH tunnel, or copy the `docker-compose.yml` file (for example using `scp`) to a manager node, SSH into the manager and then run `docker stack deploy` (if you have multiple managers, ensure that your session is on one that has the stack file).
 
 For example:
 

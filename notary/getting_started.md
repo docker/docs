@@ -135,7 +135,7 @@ $ notary -s https://notary.docker.io publish docker.io/library/alpine
 
 ## Configure the client
 
-It is verbose and tedious to always have to provide the `-s` and `-d` flags
+It is verbose and tedious to always provide the `-s` and `-d` flags
 manually to most commands. A simple way to create preconfigured versions of the
 Notary command is via aliases. Add the following to your `.bashrc` or
 equivalent:

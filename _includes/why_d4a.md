@@ -3,7 +3,7 @@ project was created and is being actively developed to ensure that Docker users
 can enjoy a fantastic out-of-the-box experience on {{cloudprovider}}. It is now
 generally available and can now be used by everyone.
 
-As an informed user, you might be curious to know what this project has to offer
+As an informed user, you might be curious to know what this project offers
 you for running your development, staging, or production workloads.
 
 ## Native to Docker

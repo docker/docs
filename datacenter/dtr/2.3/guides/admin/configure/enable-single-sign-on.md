@@ -1,14 +1,14 @@
 ---
 title: Enable single sign-on
-description: Learn how to set up single sign-on between UCP and DTR, so that your users only have to authenticate once
+description: Learn how to set up single sign-on between UCP and DTR, so that your users only need to authenticate once
 keywords: dtr, login, sso
 ---
 
-By default, users are shared between UCP and DTR, but you have to authenticate
+By default, users are shared between UCP and DTR, but you need to authenticate
 separately on the web UI of both applications.
 
 You can configure DTR to have single sign-on (SSO) with UCP, so that users only
-have to authenticate once.
+need to authenticate once.
 
 ## At installation time
 

@@ -66,7 +66,7 @@ Define the application dependencies.
       > loop lets us attempt our request multiple times if the redis service is
       > not available. This is useful at startup while the application comes
       > online, but also makes our application more resilient if the Redis
-      > service has to be restarted anytime during the app's lifetime. In a
+      > service needs to be restarted anytime during the app's lifetime. In a
       > cluster, this also helps handling momentary connection drops between
       > nodes.
 

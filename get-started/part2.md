@@ -33,9 +33,9 @@ stack, defining the interactions of all the services, covered in
 
 In the past, if you were to start writing a Python app, your first
 order of business was to install a Python runtime onto your machine. But,
-that creates a situation where the environment on your machine has to be just
-so in order for your app to run as expected; ditto for the server that runs
-your app.
+that creates a situation where the environment on your machine needs to be
+perfect for your app to run as expected, and also needs to match your production
+environment.
 
 With Docker, you can just grab a portable Python runtime as an image, no
 installation necessary. Then, your build can include the base Python image
@@ -49,7 +49,7 @@ These portable images are defined by something called a `Dockerfile`.
 `Dockerfile` defines what goes on in the environment inside your
 container. Access to resources like networking interfaces and disk drives is
 virtualized inside this environment, which is isolated from the rest of your
-system, so you have to map ports to the outside world, and
+system, so you need to map ports to the outside world, and
 be specific about what files you want to "copy in" to that environment. However,
 after doing that, you can expect that the build of your app defined in this
 `Dockerfile` behaves exactly the same wherever it runs.
@@ -364,8 +364,8 @@ Status: Downloaded newer image for john/get-started:part2
 
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
-travels together in a neat little package, and the host machine doesn't have to
-install anything but Docker to run it.
+travels together in a neat little package, and you don't need to install
+anything on the host machine for Docker to run it.
 
 ## Conclusion of part two
 

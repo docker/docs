@@ -206,7 +206,7 @@ To summarize some of the performance related aspects already mentioned:
 
 - The AUFS storage driver can introduce significant latencies into container
   write performance. This is because the first time a container writes to any
-  file, the file has to be located and copied into the containers top writable
+  file, the file needs to be located and copied into the containers top writable
   layer. These latencies increase and are compounded when these files exist below
   many image layers and the files themselves are large.
 

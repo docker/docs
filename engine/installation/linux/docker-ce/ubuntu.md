@@ -166,7 +166,7 @@ the repository.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
-    > like Linux Mint, you might have to change `$(lsb_release -cs)`
+    > like Linux Mint, you might need to change `$(lsb_release -cs)`
     > to your parent Ubuntu distribution. For example, if you are using
     >  `Linux Mint Rafaela`, you could use `trusty`.
 

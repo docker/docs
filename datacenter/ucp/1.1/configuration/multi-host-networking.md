@@ -95,7 +95,7 @@ Do this procedure on one node at a time:
 
 Do this procedure on one node at a time because if you restart all the
 controller daemons at the same time, you can increase the startup delay. This is
-because `etcd` has to come up and establish quorum before the daemons can fully
+because `etcd` needs to start and establish quorum before the daemons can fully
 recover.
 
 To enable the networking feature, do the following.

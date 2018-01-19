@@ -177,7 +177,7 @@ certificates and trusted CA:
 > Docker over TLS should run on TCP port 2376.
 
 > **Warning**:
-> As shown in the example above, you don't have to run the `docker` client
+> As shown in the example above, you don't need to run the `docker` client
 > with `sudo` or the `docker` group when you use certificate authentication.
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard

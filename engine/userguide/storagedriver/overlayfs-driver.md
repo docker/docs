@@ -423,7 +423,7 @@ Consider some scenarios where files in a container are modified.
     be better than AUFS, which can suffer noticeable latencies when searching
     for files in images with many layers. This advantage applies to both
     `overlay` and `overlay2` drivers. `overlayfs2` is slightly
-    less performant than `overlayfs` on initial read, because it has to look
+    less performant than `overlayfs` on initial read, because it must look
     through more layers, but it caches the results so this is only a small
     penalty.
 
@@ -457,7 +457,7 @@ Both `overlay2` and `overlay` drivers are more performant than `aufs` and
   makes the `overlay` and `overlay2` drivers efficient with memory and a good
   option for high-density use cases such as PaaS.
 
-- **copy_up**. As with AUFS, OverlayFS has to perform copy-up operations
+- **copy_up**. As with AUFS, OverlayFS performs copy-up operations
   whenever a container writes to a file for the first time. This can add latency
   into the write operation, especially for large files. However, once the file
   has been copied up, all subsequent writes to that file occur in the upper

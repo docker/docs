@@ -158,7 +158,7 @@ You have three options:
        bundle install
        ```
 
-       >**Note**: You may have to install some packages manually.   
+       >**Note**: You may need to install some packages manually.   
 
     f. Change the directory to `docker.github.io`.
 

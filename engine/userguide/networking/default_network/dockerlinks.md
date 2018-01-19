@@ -143,7 +143,7 @@ You can also use `docker inspect` to return the container's name.
 
 
 > **Note**:
-> Container names have to be unique. That means you can only call
+> Container names must be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
 > the old container (with `docker rm`) before you can create a new
 > container with the same name. As an alternative you can use the `--rm`

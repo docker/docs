@@ -24,7 +24,7 @@ For details about libkv and a detailed technical overview of the supported backe
 
 1. On each node, start the Swarm agent.
 
-    The node IP address doesn't have to be public as long as the Swarm manager can access it. In a large cluster, the nodes joining swarm may trigger request spikes to discovery. For example, a large number of nodes are added by a script, or recovered from a network partition. This may result in discovery failure. You can use `--delay` option to specify a delay limit. The `swarm join` command adds a random delay less than this limit to reduce pressure to discovery.
+    The node IP address doesn't need to be public as long as the Swarm manager can access it. In a large cluster, the nodes joining swarm may trigger request spikes to discovery. For example, a large number of nodes are added by a script, or recovered from a network partition. This may result in discovery failure. You can use `--delay` option to specify a delay limit. The `swarm join` command adds a random delay less than this limit to reduce pressure to discovery.
 
     **Etcd**:
 
@@ -183,7 +183,7 @@ swarm is connected to the public internet. To create your cluster:
 
 2. Create each node and join them to the cluster.
 
-    On each of your nodes, start the swarm agent. The node IP address doesn't have to be public (eg. 192.168.0.X) but the swarm manager must be able to access it.
+    On each of your nodes, start the swarm agent. The node IP address doesn't need to be public (eg. 192.168.0.X) but the swarm manager must be able to access it.
 
         $ swarm join --advertise=<node_ip:2375> token://<cluster_id>
 

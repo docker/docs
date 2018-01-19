@@ -467,7 +467,7 @@ Now that you have a swarm cluster built and configured to use TLS, test that it 
 
 ## Step 9: Configure the Engine CLI to use TLS
 
-You can configure the Engine so that you don't have to pass the TLS options when
+You can configure the Engine so that you don't need to pass the TLS options when
 you issue a command. To do this, configure the `Docker Engine host` and
 `TLS` settings as defaults on your Docker Engine client.
 

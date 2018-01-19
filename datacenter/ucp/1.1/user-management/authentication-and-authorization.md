@@ -16,8 +16,8 @@ manage permissions to enforce fine-grained access control. For that:
 
 * Start by creating a user and assigning them with a default permission.
 
-    Default permissions specify the permission a user has to create and edit
-    resources. You can choose from four permission levels that range from
+    Default permissions specifies the resources a user has access to create and
+    edit. You can choose from four permission levels that range from
     no access to full control over the resources.
 
     When a user only has a default permission assigned, only them and admin

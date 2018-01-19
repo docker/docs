@@ -116,8 +116,8 @@ These configurations are differentiated by the type of entity acting as the Cert
 
 An external CA is a trusted 3rd party company that provides a means of creating,
 issuing, revoking, and otherwise managing certificates. They are *trusted* in
-the sense that they have to fulfill specific conditions and maintain high levels
-of security and business practices to win your business. You also have to
+the sense that they need to fulfill specific conditions and maintain high levels
+of security and business practices to win your business. You also need to
 install the external CA's root certificates for you computers and services to
 *trust* them.
 

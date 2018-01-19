@@ -48,7 +48,7 @@ adding your user to the "docker" group with something like:
 
   sudo usermod -aG docker your-user
 
-Remember that you have to log out and back in for this to take effect!
+Remember to log out and back in for this to take effect!
 
 WARNING: Adding a user to the "docker" group grants the ability to run
          containers which can be used to obtain root privileges on the

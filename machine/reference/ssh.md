@@ -80,7 +80,7 @@ situations where you may not have access to traditional UNIX tools, such as if
 you are using Docker Machine on Windows without having msysgit installed
 alongside of it.
 
-In most situations, you do not have to worry about this implementation detail
+In most situations, you do not need to worry about this implementation detail
 and Docker Machine acts sensibly out of the box. However, if you
 deliberately want to use the Go native version, you can do so with a global
 command line flag / environment variable like so:

@@ -46,7 +46,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 1.  Optionally, create an AWS credential file.
 
     You can create an `~/.aws/credentials` file to hold your AWS keys so that
-    you don't have to type them every time you run the `docker-machine create`
+    you don't need to type them every time you run the `docker-machine create`
     command. Here is an example of a credentials file.
 
     ```conf

@@ -345,7 +345,7 @@ at all, given that they have access to all the keys.
 | All keys         | yes               | yes                             | yes               |
 
 If the Notary Service holds the snapshot key and the attacker has Notary Service
-write credentials, then they don't even have to rotate the snapshot and timestamp
+write credentials, then they don't even need to rotate the snapshot and timestamp
 keys because the server generates and signs the snapshot and timestamp for them.
 
 #### Mitigations

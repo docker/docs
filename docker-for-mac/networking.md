@@ -95,7 +95,7 @@ Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the Mac.
 
 Our current recommendation is to publish a port, or to connect from another
-container. Note that this is what you have to do even on Linux if the container
+container. Note that this is what you need to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting

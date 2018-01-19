@@ -95,7 +95,7 @@ Yes. Publishers can provide multiple images and add a compose file in the
 install instructions to describe how the multi-container app can be used. For
 now, we recommend asking publishers to look at this example from Microsoft
 https://store.docker.com/images/mssql-server-linux where they have Supported
-Tags listed in the Install instructions (you don't necessarily have to list it
+Tags listed in the Install instructions (you don't necessarily need to list it
 in the readme).
 
 ### Regarding source repo tags: it says not to use “latest”. However, if we want users to be able to download the images without specifying a tag, then presumably an image tagged “latest” is required. So how do we go about that?
@@ -129,7 +129,7 @@ We provide users the following options to access your software
 * all users (including users without Docker Identity)
 Here is a [screenshot](https://user-images.githubusercontent.com/2453622/32067299-00cf1210-ba83-11e7-89f8-15deed6fef62.png) to describe how publishers can update the options provided to customers.
 
-### If something is published as a free tier, for subscribed users only, does a user have to explicitly click Accept on the license terms for which we provide the link before they can download the image?
+### If something is published as a free tier, for subscribed users only, does a user need to explicitly click Accept on the license terms for which we provide the link before they can download the image?
 Yes
 
 ### Do you have a license enforcement system for docker images sold on store? How are they protected, once they have been downloaded? What happens if a customer stop paying for the image I am selling after, let's say, 2 months?

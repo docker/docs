@@ -26,7 +26,7 @@ automatically trusted by your browser and client tools.
 To ensure minimal impact to your business, you should plan for this change to
 happen outside business peak hours. Your applications will continue running
 normally, but existing UCP client certificates will become invalid, so users
-will have to download new ones to [access UCP from the CLI](../../user/access-ucp/cli-based-access.md).
+need to download new ones to [access UCP from the CLI](../../user/access-ucp/cli-based-access.md).
 
 ## Configure UCP to use your own TLS certificates and keys
 

@@ -59,7 +59,7 @@ at [docs.docker.com](https://docs.docker.com/).
 [https://github.com/docker/docker.github.io/issues](https://github.com/docker/docker.github.io/issues).
 
   This is similar to clicking **Request doc changes** on a published docs
-  page, but if you manually file an issue you have to fill in links to
+  page, but if you manually file an issue you need to fill in links to
   the related pages.
 
 - Fork the documentation, make changes or add new content on your local

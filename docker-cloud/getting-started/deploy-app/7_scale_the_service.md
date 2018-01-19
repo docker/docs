@@ -43,7 +43,7 @@ web-1                  6c89f20e  ▶ Running   my-username/python-quickstart:lat
 web-2                  ab045c42  ⚙ Starting  my-username/python-quickstart:latest                                                        80/tcp
 ```
 
-Containers aren't assigned a *PORT* until they are *running*, so you have to wait until the Service status goes from *Scaling* to *Running* to see what port is assigned to them.
+Containers aren't assigned a *PORT* until they are *running*, so you need to wait until the Service status goes from *Scaling* to *Running* to see what port is assigned to them.
 
 ```none
 $ docker-cloud container ps

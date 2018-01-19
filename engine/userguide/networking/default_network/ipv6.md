@@ -23,7 +23,7 @@ You can enable IPv4/IPv6 dualstack support by running the Docker daemon with the
 address](http://en.wikipedia.org/wiki/Link-local_address) `fe80::1`.
 
 By default, containers that are created only get a link-local IPv6 address.
-To assign globally routable IPv6 addresses to your containers you have to
+To assign globally routable IPv6 addresses to your containers you need to
 specify an IPv6 subnet to pick the addresses from. Set the IPv6 subnet via the
 `--fixed-cidr-v6` parameter when starting Docker daemon:
 
@@ -184,7 +184,7 @@ $ ip -6 route show
 2001:db8::/64 dev eth0  proto kernel  metric 256
 ```
 
-You have to execute the `ip -6 neigh add proxy ...` command for every IPv6
+Execute the `ip -6 neigh add proxy ...` command for every IPv6
 address in your Docker subnet. Unfortunately there is no functionality for
 adding a whole subnet by executing one command. An alternative approach would be
 to use an NDP proxy daemon such as
@@ -228,8 +228,8 @@ containers `Container1-*` share the same subnet and contact each other directly.
 The traffic between `Container1-*` and `Container2-*` are routed via Host1
 and Host2 because those containers do not share the same subnet.
 
-In a switched environment every host has to know all routes to every subnet.
-You always have to update the hosts' routing tables once you add or remove a
+In a switched environment every host needs to know all routes to every subnet.
+You always need to update the hosts' routing tables once you add or remove a
 host to the cluster.
 
 Every configuration in the diagram that is shown below the dashed line is
@@ -240,11 +240,11 @@ adapted to the individual environment.
 
 ### Routed network environment
 In a routed network environment you replace the layer 2 switch with a layer 3
-router. Now the hosts just have to know their default gateway (the router) and
+router. Now the hosts just need to know their default gateway (the router) and
 the route to their own containers (managed by Docker). The router holds all
 routing information about the Docker subnets. When you add or remove a host to
-this environment you just have to update the routing table in the router - not
-on every host.
+this environment, just update the routing table in the router, rather than on
+every host.
 
 ![IPv6 routed network example](images/ipv6_routed_network_example.png)
 

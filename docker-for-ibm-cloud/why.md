@@ -6,7 +6,7 @@ title: Why Docker EE for IBM Cloud?
 
 Docker Enterprise Edition for IBM Cloud (Beta) was created and is being actively developed to ensure that Docker users can enjoy a fantastic out-of-the-box experience on Docker for enterprise-grade workloads. It is now available as a beta.
 
-As an informed user, you might be curious to know what this project has to offer you for running your development, staging, or production workloads.
+As an informed user, you might be curious to know what this project offers you for running your development, staging, or production workloads.
 
 ## Native to Docker
 Docker EE for IBM Cloud provides a Docker-native solution that you can use to avoid operational complexity and using unneeded additional APIs to the Docker stack.

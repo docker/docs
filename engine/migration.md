@@ -16,7 +16,7 @@ layers even if they didn’t come from the same build.
 
 Addressing images by their content also lets us more easily detect if something
 has already been downloaded. Because we have separated images and layers, you
-don’t have to pull the configurations for every image that was part of the
+don’t need to pull the configurations for every image that was part of the
 original build chain. We also don’t need to create layers for the build
 instructions that didn’t modify the filesystem.
 
@@ -35,7 +35,7 @@ transparent.
 
 ## Prepare for upgrade
 
-To make your current images accessible to the new model we have to migrate them
+To make your current images accessible to the new model we need to migrate them
 to content addressable storage. This means calculating the secure checksums for
 your current data.
 

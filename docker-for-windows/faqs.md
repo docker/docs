@@ -176,7 +176,7 @@ in the Docker Engine topics.
 
 ### How do I add client certificates?
 
-Starting with Docker for Windows 17.06.0-ce, you do not have to push your
+Starting with Docker for Windows 17.06.0-ce, you do not need to push your
 certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.

@@ -280,7 +280,7 @@ performance.
 
 Without a reproduction, it is very difficult for us to analyze your use case and
 determine what improvements would speed it up. When you don't provide a
-reproduction, one of us has to take the time to figure out the specific software
+reproduction, one of us needs to figure out the specific software
 you are using and guess and hope that we have configured it in a typical way or
 a way that has poor performance. That usually takes 1-4 hours depending on your
 use case and once it is done, we must then determine what regular performance is

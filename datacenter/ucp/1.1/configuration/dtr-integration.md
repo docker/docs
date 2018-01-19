@@ -17,7 +17,7 @@ At an high-level, there are three steps to integrate UCP with DTR:
 * Configure the Docker Engine running on each UCP node to trust DTR.
 
 When this is done, you can use a [UCP client bundle](../access-ucp/cli-based-access.md)
-to push and pull your private images to a UCP node, without have to run the
+to push and pull your private images to a UCP node, without running the
 `docker login` command.
 
 You can also pull images from the UCP web UI, without having to

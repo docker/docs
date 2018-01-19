@@ -24,7 +24,7 @@ experience the following benefits:
   a) logged-in users, b) users who have purchased a license, or c) all Docker
   users. We’ll help you manage and control your distribution.
 
-* **We handle checkout.** You don’t have to set up your own digital
+* **We handle checkout.** You don’t need to set up your own digital
   e-commerce site when you sell your content through the Docker Store. Choose
   how much you want to charge for your products and we handle the billing.
 

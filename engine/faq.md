@@ -233,7 +233,7 @@ command and start it with `docker-machine start` if needed.
 
     $ docker-machine start default
 
-You have to tell Docker to talk to that machine. You can do this with the
+You need to tell Docker to talk to that machine. You can do this with the
 `docker-machine env` command. For example,
 
     $ eval "$(docker-machine env default)"

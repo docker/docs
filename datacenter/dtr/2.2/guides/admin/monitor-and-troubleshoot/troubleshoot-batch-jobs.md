@@ -124,7 +124,7 @@ are available:
 ```
 
 Our worker can pick up job id `0` and `2` since it has the capacity
-for both, while id `1` will have to wait until the previous scan job is complete:
+for both, while id `1` needs to wait until the previous scan job is complete:
 
 ```json
 {

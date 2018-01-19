@@ -23,8 +23,8 @@ cluster settings. This includes:
 Regular users can't change cluster settings, and they are assigned with a
 default permission level.
 
-The default permission level specify the permission a user has to access or
-edit resources. You can choose from four permission levels that range from no
+The default permission level specify the resources a user access or edit You
+can choose from four permission levels that range from no
 access to full control over the resources.
 
 | Default permission level | Description                                                                                                                                                                                                  |

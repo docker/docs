@@ -1,4 +1,4 @@
----
+ ---
 description: Learn how to configure Docker Universal Control Plane to use your own
   certificates.
 keywords: Universal Control Plane, UCP, certificate, authentication, tls
@@ -27,7 +27,7 @@ automatically trusted by your browser and client tools.
 To ensure minimal impact to your business, you should plan for this change to
 happen outside business peak hours. Your applications will continue running
 normally, but existing UCP client certificates will become invalid, so users
-will have to download new ones to [access UCP from the CLI](../access-ucp/cli-based-access.md).
+need to download new ones to [access UCP from the CLI](../access-ucp/cli-based-access.md).
 
 ## Customize the UCP TLS certificates
 

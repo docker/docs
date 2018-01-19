@@ -95,7 +95,7 @@ docker-machine version 0.10.0, build 76ed2a6
     To stop and remove the running container with a single command, type:
     `docker rm -f webserver`. This removes the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
-    want to keep some images around so that you don't have to pull them again
+    want to keep some images around so that you don't need to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.

@@ -5,7 +5,7 @@ published: false
 This is an initial attempt to make it easier to test the examples in the https.md
 doc.
 
-At this point, it has to be a manual thing, and I've been running it in boot2docker.
+At this point, it is a manual thing, and I've been running it in boot2docker.
 
 My process is as following:
 

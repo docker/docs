@@ -482,7 +482,7 @@ We did not distribute a 1.12.4 stable release
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
-  
+
 * Bug fixes and minor changes
   - Fix linuxKit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
@@ -1840,7 +1840,7 @@ are working on a solution.
 
 - Docker needs to open ports on the firewall. Sometimes, the user sees a firewall alert dialog. The user should allow the ports to be opened.
 
-- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. Users might have to close any Powershell/Cmd windows that were already open before the update to get the new `PATH`. In some cases, users may need to log off and on again.
+- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. Users might need to close any Powershell/Cmd windows that were already open before the update to get the new `PATH`. In some cases, users may need to log off and on again.
 
 **Bug Fixes**
 
@@ -1882,7 +1882,7 @@ are working on a solution.
 
 - Docker needs to open ports on the firewall, which can activate a firewall alert dialog. Users should allow the ports to be opened.
 
-- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. If users have Powershell/Cmd windows already open before the update, they might have to close them to catch the new PATH. In some cases, users need to log off and on again.
+- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. If users have Powershell/Cmd windows already open before the update, they might need to close them to catch the new PATH. In some cases, users need to log off and on again.
 
 **Bug Fixes**
 

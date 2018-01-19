@@ -8,7 +8,7 @@ Copy files from your local host to a machine, from machine to machine, or from a
 machine to your local host using `scp`.
 
 The notation is `machinename:/path/to/files` for the arguments; in the host
-machine's case, you don't have to specify the name, just the path.
+machine's case, you don't need to specify the name, just the path.
 
 ## Example
 
