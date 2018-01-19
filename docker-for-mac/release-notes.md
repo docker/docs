@@ -503,6 +503,30 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
+  - Linux Kernel 4.9.75
+ 
+* New
+  - The directory holding the disk images was renamed (from `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux` to ~/Library/Containers/com.docker.docker/Data/vms/0`).
+ 
+* Bug fixes and minor changes
+  - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
+  - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
+  - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
+  - Allow individual IP addresses to be added to HTTP proxy excludes.
+  - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
+  - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
+  - Separate internal ports used to proxy HTTP and HTTPS content.
+  - If kubectl was already installed before Docker For Mac, restore the existing kubectl when sitching Kubernetes off in Docker for Mac.  
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
+ 
+
 ### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
 
 * Upgrades
