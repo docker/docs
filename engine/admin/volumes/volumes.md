@@ -149,7 +149,6 @@ after running the first one.
 
 ```bash
 $ docker run -d \
-  -it \
   --name devtest \
   --mount source=myvol2,target=/app \
   nginx:latest
@@ -160,7 +159,6 @@ $ docker run -d \
 
 ```bash
 $ docker run -d \
-  -it \
   --name devtest \
   -v myvol2:/app \
   nginx:latest
@@ -263,7 +261,6 @@ The `--mount` and `-v` examples have the same end result.
 
 ```bash
 $ docker run -d \
-  -it \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
   nginx:latest
@@ -274,7 +271,6 @@ $ docker run -d \
 
 ```bash
 $ docker run -d \
-  -it \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
   nginx:latest
@@ -319,7 +315,6 @@ The `--mount` and `-v` examples have the same result.
 
 ```bash
 $ docker run -d \
-  -it \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
   nginx:latest
@@ -330,7 +325,6 @@ $ docker run -d \
 
 ```bash
 $ docker run -d \
-  -it \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
   nginx:latest
@@ -408,7 +402,6 @@ must use the `--mount` flag to mount the volume, rather than `-v`.**
 
 ```bash
 $ docker run -d \
-  -it \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
   --mount src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
