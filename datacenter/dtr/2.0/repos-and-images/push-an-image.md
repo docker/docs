@@ -12,7 +12,7 @@ title: Push an image to DTR
 Pushing an image to Docker Trusted Registry is the same as pushing an image
 to Docker Hub.
 Since DTR is secure by default, you need to create the image repository before
-being able to push the image to DTR.
+you can push the image to DTR.
 
 In this example, we create the 'golang' repository in DTR, and push the
 Golang 1.7 image to it.

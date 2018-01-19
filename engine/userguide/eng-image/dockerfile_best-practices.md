@@ -611,10 +611,10 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 > useradd works around this issue.  The Debian/Ubuntu `adduser` wrapper
 > does not support the `--no-log-init` flag and should be avoided.
 
-You should avoid installing or using `sudo` since it has unpredictable TTY and
-signal-forwarding behavior that can cause more problems than it solves. If
-you absolutely need functionality similar to `sudo` (e.g., initializing the
-daemon as root but running it as non-root), you may be able to use
+Avoid installing or using `sudo` since it has unpredictable TTY and
+signal-forwarding behavior that can cause problems. If
+you absolutely need functionality similar to `sudo`, such as initializing the
+daemon as `root` but running it as non-`root`), consider using
 [“gosu”](https://github.com/tianon/gosu).
 
 Lastly, to reduce layers and complexity, avoid switching `USER` back

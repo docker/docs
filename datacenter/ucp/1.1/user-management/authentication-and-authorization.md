@@ -34,7 +34,7 @@ manage permissions to enforce fine-grained access control. For that:
 
 When users create a container with no label, that container is only visible to
 them and administrator users.
-For a team of users to be able to see and edit the same container, that
+For a team of users to see and edit the same container, that
 container needs to have the `com.docker.ucp.access.label` label applied.
 
 ![](../images/secure-your-infrastructure-1.svg)

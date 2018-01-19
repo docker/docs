@@ -83,7 +83,7 @@ will not be able to restart the manager.
 To disable autolock, set `--autolock` to `false`. The mutual TLS key and the
 encryption key used to read and write Raft logs are stored unencrypted on
 disk. There is a trade-off between the risk of storing the encryption key
-unencrypted at rest and the convenience of being able to restart a swarm without
+unencrypted at rest and the convenience of restarting a swarm without
 needing to unlock each manager.
 
 ```bash

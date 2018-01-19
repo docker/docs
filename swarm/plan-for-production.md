@@ -172,7 +172,7 @@ For swarm clusters serving high-demand, line-of-business applications, it is
 recommended to have 5 or more discovery service instances. This due to the
 replication/HA technologies they use (such as Paxos/Raft) requiring a strong
 quorum. Having 5 instances allows you to take one down for maintenance, suffer
-an unexpected failure, and still be able to achieve a strong quorum.
+an unexpected failure, and still maintain a strong quorum.
 
 When creating a highly available swarm discovery service, you should take care
 to distribute each discovery service instance over as many failure domains as

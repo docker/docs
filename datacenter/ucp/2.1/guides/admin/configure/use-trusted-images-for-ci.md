@@ -17,8 +17,8 @@ name the account "jenkins". As an admin user logged in to UCP, navigate to "User
 and select "Add User". Create a user with the name "jenkins" and set a strong password.
 
 Next, create a team called "CI" and add the "jenkins" user to this team. All signing
-policy is team based, so if we want only a single user to be able to sign images
-destined to be deployed on the cluster, we must create a team for this one user.
+policy is team based, so if we want only a single user to sign images
+destined to be deployed on the cluster, we create a team for this one user.
 
 ## Set up the signing policy
 
@@ -105,17 +105,17 @@ will still need to provide them for the commands to work correctly.
 
 Now that the repository is initialized, we need to create the delegations for Jenkins. Docker
 Content Trust treats a delegation role called `targets/releases` specially. It considers this
-delegation to contain the canonical list of published images for the repository. It is therefore
-generally desirable to add all users to this delegation with the following command:
+delegation to contain the canonical list of published images for the repository. Therefore,
+add all users to this delegation with the following command:
 
 ```
 notary delegation add my_repository targets/releases --all-paths /path/to/cert.pem
 ```
 
 This solves a number of prioritization problems that would result from needing to determine
-which delegation should ultimately be trusted for a specific image. However, because it
-is anticipated that any user will be able to sign the `targets/releases` role it is not trusted
-in determining if a signing policy has been met. Therefore it is also necessary to create a
+which delegation should ultimately be trusted for a specific image. However, because any user
+can sign the `targets/releases` role it is not trusted
+in determining if a signing policy has been met. Therefore, we also create a
 delegation specifically for Jenkins:
 
 ```

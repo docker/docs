@@ -69,8 +69,7 @@ code provider.
 
 If you are the owner of a Github organization you can grant or revoke Docker
 Cloud's access to the organization's repositories. Depending on the GitHub
-organization's settings, you might be able to grant this access even if you are
-not an organization owner.
+organization's settings, you may need to be an organization owner.
 
 If the organization has not had specific access granted or revoked before, you
 can often grant access at the same time as you link your user account. In this

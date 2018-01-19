@@ -59,8 +59,8 @@ WARNING: Adding a user to the "docker" group grants the ability to run
 
 Docker CE is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
-`systemctl` or `service` command. As the message indicates, non-root users are
-not able to run Docker commands by default.
+`systemctl` or `service` command. As the message indicates, non-root users can't
+run Docker commands by default.
 
 #### Upgrade Docker after using the convenience script
 

@@ -258,7 +258,7 @@ Look in the Docker logs for a message like the following:
 ```
 
 The locations where Docker saves these stack traces and dumps depends on your
-operating system and configuration. You may be able to get useful diagnostic
+operating system and configuration. You can sometimes get useful diagnostic
 information straight from the stack traces and dumps. Otherwise, you can provide
 this information to Docker for help diagnosing the problem.
 

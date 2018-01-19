@@ -80,7 +80,7 @@ keep image size small:
 
 ## Use swarm services when possible
 
-- When possible, design your application to be able to scale using swarm
+- When possible, design your application with the ability to scale using swarm
   services.
 - Even if you only need to run a single instance of your application, swarm
   services provide several advantages over standalone containers. A service's

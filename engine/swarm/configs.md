@@ -280,8 +280,8 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 3.  Configure the root CA. Edit a new file called `root-ca.cnf` and paste
-    the following contents into it. This constrains the root CA to only be
-    able to sign leaf certificates and not intermediate CAs.
+    the following contents into it. This constrains the root CA to only sign
+    leaf certificates and not intermediate CAs.
 
     ```none
     [root_ca]

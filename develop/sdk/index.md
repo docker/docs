@@ -140,8 +140,8 @@ code:
 - If you're starting a new project, use the
   [latest version](/engine/api/latest/), but do specify the version you are
   using. This helps prevent surprises.
-- If you need a new feature, update your code use at least the oldest version
-  that supports the feature, and prefer the latest version you are able to use.
+- If you need a new feature, update your code to use at least the minimum version
+  that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
 
 ## SDK and API quickstart

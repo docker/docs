@@ -83,8 +83,9 @@ docker0         8000.3a1d7362b4ee       no              veth65f9
                                                         vethdda6
 ```
 
-If the `brctl` command is not installed on your Docker host, then on Ubuntu you
-should be able to run `sudo apt-get install bridge-utils` to install it.
+If the `brctl` command is not installed on your Docker host, run
+`sudo apt-get install bridge-utils` (on Ubuntu hosts) to install it. For other
+operating systems, consult the OS documentation.
 
 Finally, the `docker0` Ethernet bridge settings are used every time you create a
 new container. Docker selects a free IP address from the range available on the

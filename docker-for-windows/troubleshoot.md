@@ -351,8 +351,8 @@ Task Manager.
 
 ![Task Manager](images/win-virtualization-enabled.png)
 
-See also, the user reported issue [Unable to run Docker for Windows on Windows
-10 Enterprise](https://github.com/docker/for-win/issues/74)
+Also, see the user-reported issue
+[Unable to run Docker for Windows on Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
 
 ### Networking and WiFi problems upon Docker for Windows install
 
@@ -518,7 +518,7 @@ boot the Linux VM; roughly the time between the `Connected` log entry and the `*
 Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Windows
 VM, this may take considerably longer. We have a timeout of 60s or so. If the VM
 hasn't started by that time, we retry. If the retry fails we print an error. You
-may be able to work around this by providing more resources to the Windows VM.
+can sometimes work around this by providing more resources to the Windows VM.
 
 * Sometimes the VM fails to boot when Linux tries to calibrate the
 time stamp counter (TSC). This process is quite timing sensitive and may fail

@@ -35,7 +35,7 @@ To see how to connect Docker to this machine, run: docker-machine env dev
 
 ## Accessing driver-specific flags in the help text
 
-The `docker-machine create` command has some flags which are applicable to all
+The `docker-machine create` command has some flags which apply to all
 drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
@@ -213,8 +213,8 @@ specify arbitrary environment variables to be set within the engine with the syn
 
 ## Specifying Docker Swarm options for the created machine
 
-In addition to being able to configure Docker Engine options as listed above,
-you can use Machine to specify how the created Swarm master should be
+In addition to configuring Docker Engine options as listed above,
+you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
 the [scheduling strategy](/swarm/scheduler/strategy.md)
 which Docker Swarm should use (Machine defaults to the `spread` strategy).

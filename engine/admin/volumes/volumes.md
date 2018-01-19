@@ -292,12 +292,11 @@ $ docker volume rm nginx-vol
 
 ## Use a read-only volume
 
-For some development applications, it is useful for the container to be able to
-write into the bind mount, in order for changes to be propagated back to the
-Docker host. At other times, the container should only be able to read the
-data and not modify it. Remember that multiple containers can mount the same
-volume, and it can be mounted read-write for some of them and read-only for
-others, simultaneously.
+For some development applications, the container needs to write into the bind
+mount so that changes are propagated back to the Docker host. At other times,
+the container only needs read access to the data. Remember that multiple
+containers can mount the same volume, and it can be mounted read-write for some
+of them and read-only for others, at the same time.
 
 This example modifies the one above but mounts the directory as a read-only
 volume, by adding `ro` to the (empty by default) list of options, after the

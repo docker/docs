@@ -160,6 +160,6 @@ host2: eth0/192.168.8.1, docker0/172.18.0.0/16
 ```
 If the container running on `host1` needs the ability to communicate directly
 with a container on `host2`, you need a route from `host1` to `host2`. After
-the route exists, `host2` needs to be able to accept packets destined for its
+the route exists, `host2` needs the ability to accept packets destined for its
 running container, and forward them along. Setting the policy to `ACCEPT`
 accomplishes this.

@@ -31,7 +31,7 @@ Notary server and Notary signer communicate over mutually authenticated TLS
 listens for HTTPS traffic on port 4443.
 
 By default, this development Notary server container runs with the testing
-self-signed TLS certificates. In order to be able to successfully connect to
+self-signed TLS certificates. Before you can successfully connect to
 it, you must use the root CA file in `fixtures/root-ca.crt`.
 
 For example, to connect using OpenSSL:
@@ -49,7 +49,7 @@ an equal or higher version than 0.2 from the
 
 The self-signed certificate's subject name and subject alternative names are
 `notary-server`, `notaryserver`, and `localhost`, so if your Docker host is not
-on `localhost` (for example if you are using Docker Machine), 
+on `localhost` (for example if you are using Docker Machine),
 update your hosts file such that the name `notary-server` is associated with
 the IP address of your Docker host.
 

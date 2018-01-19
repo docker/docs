@@ -7,7 +7,7 @@ title: Docker Swarm discovery
 ---
 
 Docker Swarm comes with multiple discovery backends. You use a hosted discovery service with Docker Swarm. The service maintains a list of IPs in your cluster.
-This page describes the different types of hosted discovery available to you. These are:
+This page describes the different types of hosted discovery. These are:
 
 
 ## Using a distributed key/value store

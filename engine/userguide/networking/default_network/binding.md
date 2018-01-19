@@ -43,7 +43,7 @@ It allows you to particularize which port on docker server - which can be any
 port at all, not just one within the _ephemeral port range_ -- you want mapped
 to which port in the container.
 
-Either way, you should be able to peek at what Docker has accomplished in your
+Either way, you can peek at what Docker has accomplished in your
 network stack by examining your NAT tables.
 
 ```

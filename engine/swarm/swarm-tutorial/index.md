@@ -17,8 +17,7 @@ The tutorial guides you through the following activities:
 * managing the swarm once you have everything running
 
 This tutorial uses Docker Engine CLI commands entered on the command line of a
-terminal window. You should be able to install Docker on networked machines and
-be comfortable with running commands in the shell of your choice.
+terminal window.
 
 If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
@@ -94,7 +93,7 @@ Docker for Mac or Docker for Windows running.
 ### The IP address of the manager machine
 
 The IP address must be assigned to a network interface available to the host
-operating system. All nodes in the swarm must be able to access the manager at
+operating system. All nodes in the swarm need to connect to the manager at
 the IP address.
 
 Because other nodes contact the manager node on its IP address, you should use a

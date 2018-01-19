@@ -119,7 +119,7 @@ Some use cases for volumes include:
 - When you want to store your container's data on a remote host or a cloud
   provider, rather than locally.
 
-- When you need to be able to back up, restore, or migrate data from one Docker
+- When you need to back up, restore, or migrate data from one Docker
   host to another, volumes are a better choice. You can stop containers using
   the volume, then back up the volume's directory
   (such as `/var/lib/docker/volumes/<volume-name>`).

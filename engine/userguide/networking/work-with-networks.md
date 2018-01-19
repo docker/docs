@@ -455,7 +455,7 @@ After you complete the steps in
 `container2` can resolve `container3`'s name automatically because both containers
 are connected to the `isolated_nw` network. However, containers connected to the
 default `bridge` network cannot resolve each other's container name. If you need
-containers to be able to communicate with each other over the `bridge` network,
+containers to communicate with each other over the `bridge` network,
 you need to use the legacy [link](default_network/dockerlinks.md) feature.
 This is the only use case where using `--link` is recommended. You should
 strongly consider using user-defined networks instead.

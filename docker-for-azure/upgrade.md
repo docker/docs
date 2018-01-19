@@ -12,7 +12,7 @@ Docker for Azure supports upgrading from one version to the next within a specif
 
 ## Prerequisites
 
- * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during an upgrade.
+ * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm can't maintain quorum during an upgrade.
  * You can only upgrade one version at a time. Skipping a version during an upgrade is not supported.
  * Downgrades are not tested.
  * Upgrading across channels (`stable`, `edge`, or `testing`) is not supported.

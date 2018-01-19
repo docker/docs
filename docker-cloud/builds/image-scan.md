@@ -73,7 +73,11 @@ To view scan results:
 
     ![Scanned results](images/scan-view.png)
 
-    > **Note**: *Base Layers* contain components that are included in the parent image, but that you did not build and that you may not be able to edit. If a Base Layer contains a vulnerability, you should switch to a version of the parent image that does not have any vulnerabilities, or to a similar but more secure image.
+    > **Note**: *Base Layers* contain components that are included in the parent
+    > image, but that you did not build and that you may not have access to edit.
+    > If a Base Layer contains a vulnerability, you should switch to a version
+    > of the parent image that does not have any vulnerabilities, or to a similar
+    > but more secure image.
 
 5. Click a square in the grid to see the vulnerability report for that specific component.
 
@@ -100,8 +104,8 @@ using an updated version of the component, or a different component entirely.
 When you push an update to the code, the new image push re-triggers the scan.
 
 If the vulnerability is in a `base layer` you might not be able to correct the
-issue in the image. In this case, you might switch to a different version of the
-base layer, or you might find an equivalent, less vulnerable base layer. You
+issue in the image. Consider switching to a different version of the
+base layer or an equivalent, less vulnerable base layer. You
 might also decide that the vulnerability or exposure is acceptable.
 
 ## The Docker Security Scan process
@@ -132,7 +136,7 @@ for a limited time. Security scanning is only available for Docker Official
 Images on Docker Hub, and for paid private repositories in Docker Cloud during
 this free period.
 
-<b>We invite you to try it out! Send us your feedback through our <a href="https://forums.docker.com/c/docker-cloud/docker-security-scanning" target="_blank" >Docker Product Forums</a>.</b>
+<b>We invite you to try it out! Send us your feedback through our <a href="https://forums.docker.com/c/docker-cloud/docker-security-scanning" target="_blank" class="_" >Docker Product Forums</a>.</b>
 
 
 #### Will Docker Security Scanning always be available for free?

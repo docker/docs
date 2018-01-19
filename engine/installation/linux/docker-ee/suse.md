@@ -47,7 +47,7 @@ BTRFS filesystem.
 #### Firewall configuration
 
 Docker creates a `DOCKER` iptables chain when it starts. The SUSE firewall may
-block access to this chain, which can prevent you from being able to run
+block access to this chain, which can prevent you from running
 containers with published ports. You may see errors such as the following:
 
 ```none

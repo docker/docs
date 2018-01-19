@@ -196,7 +196,7 @@ Metric                      | Description
 **blkio.sectors**           | Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
 **blkio.io_service_bytes**  | Indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.
 **blkio.io_serviced**       | The number of I/O operations performed, regardless of their size. It also has 4 counters per device.
-**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. Note that the opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which is therefore able to handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
+**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. Note that the opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
 
 ## Network metrics
 
@@ -270,7 +270,7 @@ The `ip-netns exec` command allows you to execute any
 program (present in the host system) within any network namespace
 visible to the current process. This means that your host can
  enter the network namespace of your containers, but your containers
-won't be able to access the host, nor their sibling containers.
+can't access the host or other peer containers.
 Containers can interact with their sub-containers, though.
 
 The exact format of the command is:

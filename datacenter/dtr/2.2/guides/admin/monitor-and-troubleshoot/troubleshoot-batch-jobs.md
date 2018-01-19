@@ -123,7 +123,7 @@ are available:
 }
 ```
 
-Our worker will be able to pick up job id `0` and `2` since it has the capacity
+Our worker can pick up job id `0` and `2` since it has the capacity
 for both, while id `1` will have to wait until the previous scan job is complete:
 
 ```json

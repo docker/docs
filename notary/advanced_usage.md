@@ -172,7 +172,7 @@ For the `targets/releases` delegation role to sign content, the delegation user
 must possess the private key corresponding to this public key. This command
 restricts this delegation to only publish content under pathnames prefixed by
 `delegation/path`. With the given path of "delegation/path", the `targets/releases`
-role would be able to sign paths like "delegation/path/content.txt", "delegation/path_file.txt"
+role could sign paths like "delegation/path/content.txt", "delegation/path_file.txt"
 and "delegation/path.txt". You can add more paths in a comma-separated list under
 `--paths`, or pass the `--all-paths` flag to allow this delegation to publish
 content under any pathname.

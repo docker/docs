@@ -45,7 +45,7 @@ The `MANAGER STATUS` column shows node participation in the Raft consensus:
 * `Reachable` means the node is a manager node participating in the Raft
   consensus quorum. If the leader node becomes unavailable, the node is eligible for
   election as the new leader.
-* `Unavailable` means the node is a manager that is not able to communicate with
+* `Unavailable` means the node is a manager that can't communicate with
   other managers. If a manager node becomes unavailable, you should either join a
   new manager node to the swarm or promote a worker node to be a
   manager.
@@ -98,7 +98,7 @@ Changing node availability lets you:
 * drain a manager node so that only performs swarm management tasks and is
   unavailable for task assignment.
 * drain a node so you can take it down for maintenance.
-* pause a node so it is unavailable to receive new tasks.
+* pause a node so it can't receive new tasks.
 * restore unavailable or paused nodes available status.
 
 For example, to change a manager node to `Drain` availability:

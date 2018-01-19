@@ -19,9 +19,9 @@ a subset of a much larger problem of distributed systems. In production, your
 database could become unavailable or move hosts at any time. Your application
 needs to be resilient to these types of failures.
 
-To handle this, your application should attempt to re-establish a connection to
+To handle this, design your application to attempt to re-establish a connection to
 the database after a failure. If the application retries the connection,
-it should eventually be able to connect to the database.
+it can eventually connect to the database.
 
 The best solution is to perform this check in your application code, both at
 startup and whenever a connection is lost for any reason. However, if you don't

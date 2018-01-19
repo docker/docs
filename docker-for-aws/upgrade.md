@@ -15,7 +15,7 @@ Docker for AWS. Depending on changes in the next version, an upgrade involves:
 ## Prerequisites
 
  * We recommend only attempting upgrades of swarms with at least 3 managers.
- A 1-manager swarm may not be able to maintain quorum during the upgrade.
+ A 1-manager swarm can't maintain quorum during the upgrade.
 
  * You can only upgrade one version at a time. Skipping a version during
   an upgrade is not supported. Downgrades are not tested.

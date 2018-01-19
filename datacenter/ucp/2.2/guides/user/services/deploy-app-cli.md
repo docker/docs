@@ -12,7 +12,7 @@ application that allows users to vote on whether they prefer cats or dogs.
 
 Docker UCP secures your Docker swarm with
 [role-based access control](../../access-control/index.md),
-so that only authorized users can deploy applications. To be able to run Docker
+so that only authorized users can deploy applications. To run Docker
 commands on a swarm managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates.
 [Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).

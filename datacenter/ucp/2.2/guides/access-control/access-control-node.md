@@ -14,16 +14,16 @@ includes users that are deploying in their private collections
 enabled by a built-in grant that grants every UCP user the `scheduler`
 capability against the `/Shared` collection.
 
-Node Access Control works by placing nodes in to custom collections outside of
+Node Access Control works by placing nodes into custom collections outside of
 `/Shared`. If the `scheduler` capability is granted via a role to a user or
-group of users against a collection then they will be able to schedule
+group of users against a collection, they can schedule
 containers and services on these nodes. In the following example, users with
-`scheduler` capability against `/collection1` will be able to schedule
-applications on those nodes. 
+`scheduler` capability against `/collection1` can schedule
+applications on those nodes.
 
 Note that in the directory these collections lie outside of the `/Shared`
 collection so users without grants will not have access to these collections
-unless explicitly granted access. These users will only be able to deploy
+unless explicitly granted access. These users can only deploy
 applications on the built-in `/Shared` collection nodes.
 
 ![image](../images/design-access-control-adv-custom-grant.png){: .with-border}

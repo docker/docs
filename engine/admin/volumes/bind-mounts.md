@@ -214,10 +214,9 @@ $ docker container rm broken-container
 
 ## Use a read-only bind mount
 
-For some development applications, it is useful for the container to be able to
-write into the bind mount, in order for changes to be propagated back to the
-Docker host. At other times, the container should only be able to read the
-data and not modify it.
+For some development applications, the container needs to
+write into the bind mount, so changes are propagated back to the
+Docker host. At other times, the container only needs read access.
 
 This example modifies the one above but mounts the directory as a read-only
 bind mount, by adding `ro` to the (empty by default) list of options, after the

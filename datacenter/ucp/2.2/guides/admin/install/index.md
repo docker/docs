@@ -48,7 +48,7 @@ UCP.
 To install UCP, you use the `docker/ucp` image, which has commands to install
 and manage UCP.
 
-Make sure you follow the [UCP System requirements](system-requirements.md) in regards to networking ports. 
+Make sure you follow the [UCP System requirements](system-requirements.md) in regards to networking ports.
 Ensure that your hardware or software firewalls are open appropriately or disabled.
 
 To install UCP:
@@ -121,7 +121,7 @@ To join manager nodes to the swarm,
     to other swarm members for API access, click
     **Use a custom advertise address** and enter the IP address and port.
     By default, this is also the outbound address used by the new node to
-    contact UCP. The joining node should be able to contact itself at this
+    contact UCP. The joining node can contact itself at this
     address. The format is `interface:port` or `ip:port`.
 
     Click the copy icon ![](../../images/copy-swarm-token.png) to copy the

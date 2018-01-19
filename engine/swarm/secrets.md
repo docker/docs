@@ -27,7 +27,8 @@ runtime but you don't want to store in the image or in source control, such as:
 
 > **Note**: Docker secrets are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
-> to run as a service with a scale of 1.
+> to run as a service. Stateful containers can typically run with a scale of 1
+> without changing the container code.
 
 Another use case for using secrets is to provide a layer of abstraction between
 the container and a set of credentials. Consider a scenario where you have
@@ -361,8 +362,8 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 3.  Configure the root CA. Edit a new file called `root-ca.cnf` and paste
-    the following contents into it. This constrains the root CA to only be
-    able to sign leaf certificates and not intermediate CAs.
+    the following contents into it. This constrains the root CA to signing leaf
+    certificates and not intermediate CAs.
 
     ```none
     [root_ca]

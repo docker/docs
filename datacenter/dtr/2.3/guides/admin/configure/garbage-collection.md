@@ -73,7 +73,7 @@ files of that image tag since it's possible that there are other tags that
 also use the same files.
 
 To delete unused image layers, DTR:
-1. Becomes read-only to make sure that no one is able to push an image, thus
+1. Becomes read-only to make sure that no one can push an image, thus
 changing the underlying files in the filesystem.
 2. Check all the manifest files and keep a record of the files that are
 referenced.

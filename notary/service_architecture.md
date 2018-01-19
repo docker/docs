@@ -158,8 +158,8 @@ used to communicate with Notary signer, and therefore, access to arbitrary signi
 operations with any key the Signer holds.
 
 - **Denial of Service** - An attacker could reject client requests and corrupt
-  or delete metadata from the database, thus preventing clients from being
-  able to download or upload metadata.
+  or delete metadata from the database, thus preventing clients from the ability
+  to download or upload metadata.
 
 - **Malicious Content** - An attacker can create, store, and serve arbitrary
   metadata content for one or more trusted collections. However, they do not have
@@ -188,9 +188,8 @@ operations with any key the Signer holds.
 
 > **Note**: the timestamp and snapshot keys cannot be compromised in a server-only
 > compromise, so a key rotation would not be necessary. Once the Server
-> compromise is mitigated, an attacker is not
-> able to generate valid timestamp or snapshot metadata and serve them on a
-> malicious mirror, for example.
+> compromise is mitigated, an attacker cannot generate valid timestamp or
+> snapshot metadata and serve them on a malicious mirror, for example.
 
 ### Notary signer compromise
 
@@ -202,7 +201,7 @@ private material.
 
 - **Denial of Service** - An attacker could reject all Notary server requests
   and corrupt or delete keys from the database (or even delete keys from an
-  HSM), and thus prevent Notary servers from being able to sign generated
+  HSM), and thus prevent Notary servers from signing generated
   timestamps or snapshots.
 
 - **Key Compromise** - If the Notary signer uses a database as its backend,
@@ -250,8 +249,8 @@ mix up the targets in a collection, but only within the particular delegation
 roles that the key can sign for. Depending on the restrictions on that role,
 they may be restricted in what type of content they can modify. They may also
 add or remove the capabilities of other delegation keys below it on the key hierarchy
-(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it would only be
-able to modify the capabilities of `DelegationKey4` and `DelegationKey5`).
+(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it could
+only modify the capabilities of `DelegationKey4` and `DelegationKey5`).
 
 ##### Decrypted Delegation Key + Decrypted Snapshot Key, only
 
@@ -277,8 +276,8 @@ mix up the targets in a collection, but only within the particular delegation
 roles that the key can sign for. Depending on the restrictions on that role,
 they may be restricted in what type of content they can modify. They may also
 add or remove the capabilities of other delegation keys below it on the key hierarchy
-(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it would only be
-able to modify the capabilities of `DelegationKey4` and `DelegationKey5`).
+(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it could
+only modify the capabilities of `DelegationKey4` and `DelegationKey5`).
 
 ##### Decrypted Targets Key, only
 

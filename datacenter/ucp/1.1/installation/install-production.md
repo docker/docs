@@ -197,7 +197,7 @@ the controllers that are part of the cluster.
 When you installed and joined replica controllers, the Docker daemon on that
 host was configured to use that key-value store.
 
-To make the cluster fault-tolerant and be able to recover faster with less
+To make the cluster fault-tolerant and able to recover faster with less
 downtime, you need to configure the Docker daemon on each controller node to
 know about the key-value store that is running on the other nodes.
 

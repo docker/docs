@@ -8,7 +8,7 @@ UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
 
 In most cases, if a single UCP component is in a failed state persistently,
-you should be able to restore the cluster to a healthy state by
+you can restore the cluster to a healthy state by
 removing the unhealthy node from the cluster and joining it again.
 [Learn how to remove and join nodes](../configure/scale-your-cluster.md).
 

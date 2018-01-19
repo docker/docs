@@ -87,7 +87,7 @@ features. Specifically, Docker allows you to share a directory between
 the Docker host and a guest container; and it allows you to do so
 without limiting the access rights of the container. This means that you
 can start a container where the `/host` directory is the `/` directory
-on your host; and the container is able to alter your host filesystem
+on your host; and the container can alter your host filesystem
 without any restriction. This is similar to how virtualization systems
 allow filesystem resource sharing. Nothing prevents you from sharing your
 root filesystem (or even your root block device) with a virtual machine.

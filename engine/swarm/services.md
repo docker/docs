@@ -226,7 +226,7 @@ of the image.
 > digest, the request fails.
 {: id="image_resolution_with_trust" }
 
-If the manager is not able to resolve the tag to a digest, each worker
+If the manager can't resolve the tag to a digest, each worker
 node is responsible for resolving the tag to a digest, and different nodes may
 use different versions of the image. If this happens, a warning like the
 following is logged, substituting the placeholders for real information.
@@ -275,8 +275,8 @@ points to and updates the service tasks to use that digest.
 > client resolves image and the swarm manager receives the image and digest,
 >  rather than a tag.
 
-Usually, the manager is able to resolve the tag to a new digest and the service
-updates, redeploying each task to use the new image. If the manager is unable to
+Usually, the manager can resolve the tag to a new digest and the service
+updates, redeploying each task to use the new image. If the manager can't
 resolve the tag or some other problem occurs, the next two sections outline what
 to expect.
 
@@ -582,8 +582,8 @@ information on constraints, refer to the `docker service create`
 To reserve a given amount of memory or number of CPUs for a service, use the
 `--reserve-memory` or `--reserve-cpu` flags. If no available nodes can satisfy
 the requirement (for instance, if you request 4 CPUs and no node in the swarm
-has 4 CPUs), the service remains in a pending state until a node is available to
-run its tasks.
+has 4 CPUs), the service remains in a pending state until an appropriate node is
+available to run its tasks.
 
 ##### Out Of Memory Exceptions (OOME)
 

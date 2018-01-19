@@ -22,7 +22,7 @@ at any time.
 
 Since client certificate bundles are signed and verified with the UCP server
 certificates, if you replace the UCP server certificates, users have to
-download new client certificate bundles to be able to run Docker commands on
+download new client certificate bundles to run Docker commands on
 the cluster.
 
 ## Replace existing certificates

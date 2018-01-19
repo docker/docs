@@ -223,7 +223,7 @@ The difference to Host1 is that the network `2001:db8:2::/64` is directly
 attached to Host2 via its `docker0` interface whereas Host2 reaches
 `2001:db8:1::/64` via Host1's IPv6 address `2001:db8::1`.
 
-This way every container is able to contact every other container. The
+This way every container can contact every other container. The
 containers `Container1-*` share the same subnet and contact each other directly.
 The traffic between `Container1-*` and `Container2-*` are routed via Host1
 and Host2 because those containers do not share the same subnet.

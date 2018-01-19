@@ -152,7 +152,7 @@ a cookie in the response. When the user makes a new request, their browser
 will send the cookie, and the HTTP routing mesh can use it to decide to which
 service to route to.
 
-Since this requires the HTTP routing mesh to be able to read the cookie, this
+Since this requires the HTTP routing mesh to read the cookie, this
 option only works with HTTP routes.
 
 Sticky sessions might stop temporarily if the service is reconfigured to

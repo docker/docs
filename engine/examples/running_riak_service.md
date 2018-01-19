@@ -88,7 +88,7 @@ Populate it with the following program definitions:
 
 ## Build the Docker image for Riak
 
-Now you should be able to build a Docker image for Riak:
+Now you can build a Docker image for Riak:
 
     $ docker build -t "<yourname>/riak" .
 
