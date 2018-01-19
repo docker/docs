@@ -6,11 +6,10 @@
 
 @media only screen 
     and (min-width : 376px)
-    and (max-width : 1024px) {  
+    and (max-width : 1150px) {  
     .nav-primary,
     .hero-text,
     .banner,
-    .ctrl-right,
     ul.primary.nav.navbar-nav,
     .nav-secondary .logo {
         display: none;
@@ -21,7 +20,6 @@
     }
     .tabs li a {
         font-size: 13px;
-        padding: 19px 10px 11px;
     }
 
     h1,
@@ -50,30 +48,20 @@
     .nav-secondary  {
         overflow: hidden;
     }
-    .search-form {
-        float: left;
-        margin: 5px 15px 0 0px;
-        width: 250px;
+    .nav-sidebar ul li li a {
+        border-left: 0;
+        font-size: 12px;
+        margin-left: 0;
     }
   }
 
 @media only screen 
     and (min-width : 376px)
     and (max-width : 900px) {  
-    .tabs {
-        padding: 0 0 0 10px;
-    }
-    .tabs li a {
-        font-size: 13px;
-        padding: 19px 10px 11px;
-    }
     .sidebar {
         position: fixed;
         width: 100%;
         z-index: 100;
-    }
-    .content {
-        padding: 50px;
     }
     .main-content {
         padding: 22px 35px 25px 30px;
@@ -95,7 +83,7 @@
     .hero-text,
     .banner,
     .ctrl-right {
-        display: none;
+        display: none;///// CHECK THIS /////
     }
     .nav-container {
         overflow: visible;
@@ -141,6 +129,7 @@
     }
     .nav-sidebar a {
         color: #a8a8a8;
+        text-align: center;
     }
     .tabs {
         float: left;
@@ -149,11 +138,10 @@
     }
     .tabs li a {
         color: #fff;
-        padding: 15px 12px 10px 6px;
+        padding: 17px 6px 10px 4px;
         float: left;
         opacity: 0.7;
         font-size: 12px;
-        margin-left: -10px;
     }
     .content {
         padding: 120px 25px;
@@ -181,7 +169,6 @@
     }
     .search-form {
         display: block!important;
-        width: 230px;
     }
     .component-full {
         text-align: center;
@@ -219,7 +206,6 @@
       padding: 5px 0 0 0;
     }
     .tabs li a {
-      padding: 15px 0 10px 0;
       margin-left: 0;
       font-weight: normal;
     }
@@ -256,20 +242,13 @@
     }
     .nav-secondary {
         background: $black;
-        // height: 55px;
+        height: 100px;
     }
     .content {
         padding: 120px 20px;
     }
     .main-content {
         padding: 0px 10px;
-    }
-    .tabs {
-        padding-left: 22px;
-    }
-    .tabs li a {
-        padding: 17px 9px 12px 5px;
-        font-size: 12px;
     }
     .nav-sidebar a {
         color: #a8a8a8;
@@ -298,19 +277,6 @@
     }
 }
 
-
-/* Portrait and Landscape iphone 4 + S */
-// @media only screen 
-//   and (min-device-width: 320px) 
-//   and (max-device-width: 480px)
-//   and (-webkit-min-device-pixel-ratio: 2) {
-//     .tabs {
-//         padding: 5px 0 0 8px;
-//     }
-//     .tabs li a {
-//         padding: 15px 9px 10px 4px;
-//     }
-// }
 
 /*
 *
@@ -345,10 +311,6 @@
     h4 {
         font-size: 16px;
     }
-    .tabs li a {
-        font-size: 12px;
-        padding: 20px 7px 11px 5px;
-    }
     .toc-nav a {
         font-size: 11px;
     }
@@ -372,8 +334,6 @@
   and (orientation: landscape) {
     .search-form {
         float: left;
-        margin: 10px 15px 0 0px;
-        width: 160px;
     }
     .ctrl-right {
         display: block;
@@ -404,7 +364,8 @@
 
 @media (max-width: 1024px) {
     .nav-secondary-tabs.affix-top {
-        background-color: $bg-secondary;
+        // background-color: $bg-secondary;
+        background-color: rgba(0,0,0,.05);
         position: fixed;
         top: 0;
     }

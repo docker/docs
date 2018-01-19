@@ -67,7 +67,7 @@ For more details, see [Docker Architecture](#docker-architecture) below.
 Docker streamlines the development lifecycle by allowing developers to work in
 standardized environments using local containers which provide your applications
 and services. Containers are great for continuous integration and continuous
-development (CI/CD) workflows.
+delivery (CI/CD) workflows.
 
 Consider the following example scenario:
 

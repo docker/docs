@@ -7,7 +7,7 @@ title: Docker for IBM Cloud frequently asked questions (FAQs)
 ## How do I sign up?
 Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cloud that runs Docker Enterprise Edition software. Docker EE for IBM Cloud is available on **December 20th 2017 as a closed Beta**.
 
-[Request access to the beta here](https://www.ibm.com/us-en/marketplace/docker-for-ibm-cloud). Once you do, we'll be in touch shortly!
+[Request access to the beta](mailto:sealbou@us.ibm.com). Once you do, we'll be in touch shortly!
 
 ## What IBM Cloud infrastructure permissions do I need?
 
@@ -60,6 +60,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <li>View bandwidth statistics</li>
   <li>Add IP addresses</li>
   <li>Manage email delivery service</li>
+  <li>*Manage Network VLAN Spanning</li>
   </ul></td>
   </tr>
   <tr>
@@ -123,6 +124,10 @@ The Docker EE for IBM Cloud CLI plug-in simplifies your interaction with IBM Clo
 
 Instead of including these in each command, you can [set your environment variables](/docker-for-ibm-cloud/index.md#set-infrastructure-environment-variables).
 
+## Why can't I target an organization or space in IBM Cloud?
+
+Before you can target an organization or space in IBM Cloud, the account owner or administrator must set up the organization or space. See [Creating organizations and spaces](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) for more information.
+
 ## Can I manually change the load balancer configuration?
 
 No. If you make any manual changes to the load balancer, they are removed the next time that the load balancer is updated or swarm changes are made. This is because the swarm service configuration is the source of record for service ports. If you add listeners to the load balancer manually, they could conflict with what is in cluster, and cause issues.
@@ -136,6 +141,10 @@ SSH into a manager node. Manager nodes are accessed on port 56422.
 ```none
 alias ssh-docker='function __t() { ssh-keygen -R [$1]:56422 > /dev/null 2>&1; ssh -A -p 56422 -o StrictHostKeyChecking=no docker@$1; unset -f __t; }; __t'
 ```
+
+## Are there any known issues?
+
+Yes. News, updates, and known issues are recorded by version on the [Release notes](release-notes.md) page.
 
 ## Where do I report problems or bugs?
 

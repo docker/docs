@@ -160,10 +160,10 @@ They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
-`docker run`. Likewise, network and volume definitions are analogous to
+`docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
+As with `docker container create`, options specified in the Dockerfile (e.g., `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
@@ -182,7 +182,7 @@ Configuration options that are applied at build time.
 context:
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build: ./dir
@@ -192,7 +192,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```none
-version: '2'
+version: '3'
 services:
   webapp:
     build:
@@ -787,6 +787,7 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [external_links](#external_links)
 - [links](#links)
 - [network_mode](#network_mode)
+- [restart](#restart)
 - [security_opt](#security_opt)
 - [stop_signal](#stop_signal)
 - [sysctls](#sysctls)
@@ -1051,8 +1052,12 @@ for details on how healthchecks work.
       interval: 1m30s
       timeout: 10s
       retries: 3
+      start_period: 40s
 
-`interval` and `timeout` are specified as [durations](#specifying-durations).
+`interval`, `timeout` and `start_period` are specified as [durations](#specifying-durations).
+
+> **Note**: `start_period` is only supported for v3.4 and higher of the compose
+file format.
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
@@ -1306,30 +1311,34 @@ The corresponding network configuration in the
 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set, and
 you must use a version 2.x Compose file, such as the one below.
 
+> **Note**: These options do not currently work in swarm mode.
+
 An example:
 
-    version: '2.1'
+```yaml
+version: '2.1'
 
-    services:
-      app:
-        image: busybox
-        command: ifconfig
-        networks:
-          app_net:
-            ipv4_address: 172.16.238.10
-            ipv6_address: 2001:3984:3989::10
-
+services:
+  app:
+    image: busybox
+    command: ifconfig
     networks:
       app_net:
-        driver: bridge
-        enable_ipv6: true
-        ipam:
-          driver: default
-          config:
-          -
-            subnet: 172.16.238.0/24
-          -
-            subnet: 2001:3984:3989::/64
+        ipv4_address: 172.16.238.10
+        ipv6_address: 2001:3984:3989::10
+
+networks:
+  app_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.16.238.0/24
+      -
+        subnet: 2001:3984:3989::/64
+```
 
 ### pid
 
@@ -1764,6 +1773,10 @@ on-failure error.
     restart: always
     restart: on-failure
     restart: unless-stopped
+    
+> **Note**: This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
@@ -1897,6 +1910,9 @@ called `data` and mount it into the `db` service's containers.
       data:
         external: true
 
+> [external.name was deprecated in version 3.4 file format](compose-versioning.md#version-34)
+> use `name` instead.
+
 You can also specify the name of the volume separately from the name used to
 refer to it within the Compose file:
 
@@ -1939,7 +1955,9 @@ conflicting with those used by other software.
 
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
-Set a custom name for this volume.
+Set a custom name for this volume. The name field can be used to reference
+networks which contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 
     version: '3.4'
     volumes:
@@ -2149,6 +2167,10 @@ service's containers to it.
       outside:
         external: true
 
+
+> [external.name was deprecated in version 3.5 file format](compose-versioning.md#version-35)
+> use `name` instead.
+
 You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
@@ -2161,7 +2183,9 @@ refer to it within the Compose file:
 
 > [Added in version 3.5 file format](compose-versioning.md#version-35)
 
-Set a custom name for this network.
+Set a custom name for this network. The name field can be used to reference
+networks which contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 
     version: '3.5'
     networks:
@@ -2187,8 +2211,10 @@ stack. The source of the config is either `file` or `external`.
 - `external`: If set to true, specifies that this config has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
-- `name`: The actual name of the config object in Docker. Introduced with the
-  3.5 file format.
+- `name`: The name of the config object in Docker. This field can be used to
+   reference configs which contain special characters. The name is used as is
+   and will **not** be scoped with the stack name. Introduced in version 3.5
+   file format.
 
 In this example, `my_first_config` will be created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
@@ -2232,8 +2258,10 @@ stack. The source of the secret is either `file` or `external`.
 - `external`: If set to true, specifies that this secret has already been
   created. Docker will not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
-- `name`: The actual name of the config object in Docker. Introduced with the
-  3.5 file format.
+- `name`: The name of the secret object in Docker. This field can be used to
+   reference secrets which contain special characters. The name is used as is
+   and will **not** be scoped with the stack name. Introduced in version 3.5
+   file format.
 
 In this example, `my_first_secret` will be created (as
 `<stack_name>_my_first_secret)`when the stack is deployed,

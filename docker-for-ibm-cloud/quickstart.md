@@ -8,7 +8,7 @@ title: Docker EE for IBM Cloud (Beta) Quick Start
 
 Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are enhanced with the full suite of secure IBM Cloud platform, infrastructure, and Watson services? Great! Let's get you started.
 
-To request access to the closed beta, [contact us](https://www.ibm.com/us-en/marketplace/docker-for-ibm-cloud).
+To request access to the closed beta, [email IBM](mailto:sealbou@us.ibm.com).
 
 ![Getting started with Docker for IBM Cloud in 4 easy steps](img/quickstart.png)
 
@@ -24,9 +24,9 @@ To request access to the closed beta, [contact us](https://www.ibm.com/us-en/mar
     * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), label it, and note the label.
     * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 
-3. If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) to use when using IBM Cloud services.
+3. If you have not already, [create an organization and space](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) to use when using IBM Cloud services. You must be the account owner or administrator to complete this step.
 
-4. Get the Docker EE URL associated with your subscription. For beta, you received this in your welcome email.
+4. Get the Docker EE URL associated with your subscription. [Email IBM](mailto:sealbou@us.ibm.com) to get a trial subscription during the beta.
 
 5. Set your environment variables to use your IBM Cloud infrastructure credentials and your Docker EE installation URL. For example:
 
@@ -113,7 +113,7 @@ Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/
    ...
    ```
 
-2. Retrieve your cluster's load balancer URL:
+2. Retrieve your cluster's **UCP URL**:
 
     ```bash
     $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key

@@ -154,5 +154,5 @@ will not be able to restart the manager.
 > **Warning**:
 > When you rotate the unlock key, keep a record of the old key
 > around for a few minutes, so that if a manager goes down before it gets the new
-> key, it may still be locked with the old one.
+> key, it may still be unlocked with the old one.
 {:.warning}

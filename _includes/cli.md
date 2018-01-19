@@ -12,9 +12,9 @@
 
 {% if site.data[include.datafolder][include.datafile].min_api_version %}
 
-<span class="badge badge-info">API {{ site.data[include.datafolder][include.datafile].min_api_version }}+</span>&nbsp;
+<a href="/engine/api/v{{ site.data[include.datafolder][include.datafile].min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ site.data[include.datafolder][include.datafile].min_api_version }} API reference (in a new window)">API {{ site.data[include.datafolder][include.datafile].min_api_version }}+</span></a>&nbsp;
 The client and daemon API must both be at least
-{{ site.data[include.datafolder][include.datafile].min_api_version }}
+<a href="/engine/api/v{{ site.data[include.datafolder][include.datafile].min_api_version }}/" target="_blank" class="_">{{ site.data[include.datafolder][include.datafile].min_api_version }}</a>
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 
@@ -22,7 +22,7 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].deprecated %}
 
-> This command is deprecated.
+> This command is [deprecated](/engine/deprecated.md){: target="_blank" class="_"}.
 >
 > It may be removed in a future Docker version.
 {: .warning }
@@ -33,10 +33,39 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> It should not be used in production environments.
+> This command is experimental on the Docker daemon. It should not be used in production environments.
+> To enable experimental features on the Docker daemon, edit the
+> [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
+> and set `experimental` to `true`.
 {: .important }
 
 {% endif %}
+
+{% if site.data[include.datafolder][include.datafile].experimentalcli %}
+
+> This command is experimental.
+>
+> This  command is experimental on the Docker client. It should not be used in production environments.
+> To enable experimental features in the Docker CLI, edit the
+> [config.json](/engine/reference/commandline/cli.md#configuration-files)
+> and set `experimental` to `enabled`.
+{: .important }
+
+{% endif %}
+
+{% capture command-orchestrator %}
+{% if site.data[include.datafolder][include.datafile].swarm %}
+
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Swarm orchestrator.">Swarm</span> This command works with the Swarm orchestrator.
+
+{% endif %}
+{% if site.data[include.datafolder][include.datafile].kubernetes %}
+
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Kubernetes orchestrator.">Kubernetes</span> This command works with the Kubernetes orchestrator.
+
+{% endif %}
+{% endcapture %}{{ command-orchestrator }}
+
 
 {% if site.data[include.datafolder][include.datafile].usage %}
 
@@ -48,7 +77,11 @@ your client and daemon API versions.
 
 {% endif %}
 {% if site.data[include.datafolder][include.datafile].options %}
-
+  {% if site.data[include.datafolder][include.datafile].inherited_options %}
+    {% assign alloptions = site.data[include.datafolder][include.datafile].options | concat:site.data[include.datafolder][include.datafile].inherited_options %}
+  {% else %}
+    {% assign alloptions = site.data[include.datafolder][include.datafile].options %}
+  {% endif %}
 ## Options
 
 <table>
@@ -60,17 +93,22 @@ your client and daemon API versions.
   </tr>
 </thead>
 <tbody>
-{% for option in site.data[include.datafolder][include.datafile].options %}
+{% for option in alloptions %}
 
-  {% capture min-api %}{% if option.min_api_version %}<span class="badge badge-info">API {{ option.min_api_version }}+</span>&nbsp;{% endif %}{%endcapture%}
-  {% capture stability-string %}{% if option.deprecated and option.experimental %}<span class="badge badge-danger">deprecated</span>&nbsp;<span class="badge badge-warning">experimental</span>&nbsp;{% elsif option.deprecated %}<span class="badge badge-danger">deprecated</span>&nbsp;{% elsif option.experimental %}<span class="badge badge-warning">experimental</span>&nbsp;{% endif %}{% endcapture %}
-  {% capture all-badges %}{% unless min-api == '' and stability-string == '' %}{{ min-api }}{{ stability-string }}<br />{% endunless %}{% endcapture %}
+  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated.md" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli.md#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ site.data[include.datafolder][include.datafile].min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
+  {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
+
+  {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
+
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
     <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{{ all-badges | strip }}{{ option.description | strip }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
   </tr>
 
 {% endfor %} <!-- end for option -->

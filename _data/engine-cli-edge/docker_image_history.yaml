@@ -10,6 +10,9 @@ options:
   description: Pretty-print images using a Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: human
   shorthand: H
   value_type: bool
@@ -17,12 +20,18 @@ options:
   description: Print sizes and dates in human readable format
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-trunc
   value_type: bool
   default_value: "false"
   description: Don't truncate output
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: quiet
   shorthand: q
   value_type: bool
@@ -30,6 +39,12 @@ options:
   description: Only show numeric IDs
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

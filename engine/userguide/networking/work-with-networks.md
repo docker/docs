@@ -724,7 +724,7 @@ The following example illustrates this limitation.
     round-trip min/avg/max = 0.070/0.081/0.097 ms
 
     / # ping -w 4 container6
-    PING container5 (172.25.0.6): 56 data bytes
+    PING container6 (172.25.0.6): 56 data bytes
     64 bytes from 172.25.0.6: seq=0 ttl=64 time=0.070 ms
     64 bytes from 172.25.0.6: seq=1 ttl=64 time=0.080 ms
     64 bytes from 172.25.0.6: seq=2 ttl=64 time=0.080 ms

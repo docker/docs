@@ -533,6 +533,47 @@ You can have <span class="badge badge-info">badges</span>. You can also have
 <span class="badge badge-warning">yellow badges</span> or
 <span class="badge badge-danger">red badges</span>.
 
+#### Badges as links
+
+You can make a badge a link. Wrap the `<span>` with an `<a>` (not the other way
+around) so that the text on the badge is still white.
+
+```html
+<a href="/test/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page (in a new window)">Test</span></a>
+```
+
+<a href="/test/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page (in a new window)">Test</span></a>
+
+
+You can also put tooltips on badges (as the example above shows). Keep reading for tooltips.
+
+### Tooltips
+
+To add a tooltip to any element, set `data-toggle="tooltip"` and set a `title`.
+Hovering over the element with the mouse pointer will make it visible. Tooltips
+are not visible on mobile devices or touchscreens, so don't rely on them as the
+only way to communicate important info.
+
+```html
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page">Test</span>
+```
+
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page">Test</span>
+
+You can optionally set the `data-placement` attribute to `top`, `bottom`,
+`middle`, `center`, `left`, or `right`. Only set it if not setting it causes
+layout issues.
+
+You don't have to use HTML. You can also set these attributes using Markdown.
+
+```markdown
+This is a paragraph that has a tooltip. We position it to the left so it doesn't align with the middle top of the paragraph (that looks weird).
+{:data-toggle="tooltip" data-placement="left" title="Markdown tooltip example"}
+```
+
+This is a paragraph that has a tooltip. We position it to the left so it doesn't align with the middle top of the paragraph (that looks weird).
+{:data-toggle="tooltip" data-placement="left" title="Markdown tooltip example"}
+
 ## Running in-page Javascript
 
 If you need to run custom Javascript within a page, and it depends upon JQuery

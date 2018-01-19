@@ -62,7 +62,17 @@ Use the load balancer to access [DTR](/datacenter/dtr/2.4/guides/).
    **Tip**: Your user name is `admin` or the user name that your admin created for you. You got the password when you [created the cluster](administering-swarms.md#create-swarms) or when your admin created your credentials.
 
 ## Service load balancer
-When you create a service, any ports that are opened with `-p` are automatically exposed through the load balancer. For example:
+
+When you create a service, any ports that are opened with `--publish` or `-p` are automatically published through the load balancer.
+
+> Reserved ports
+>
+> Several ports are reserved and cannot be used to expose services:
+> * 56501 for the service load balancer management.
+> * 443 for the UCP web UI.
+> * 56443 for the Agent.
+
+For example:
 
 ```bash
 $ docker service create --name nginx -p 80:80 nginx
@@ -74,9 +84,13 @@ on that port to your service.
 > Note: 10 ports on the service load balancer
 >
 > Each cluster's service load balancer can have 10 ports opened. If you create new services or update a service to publish it on a port but already used 10 ports, new ports are not added and the service cannot be accessed through the load balancer.
-> If you need more than 10 ports, you can explore alternative solutions such as [UCP domain names](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/) or [Træfik](https://github.com/containous/traefik). You can also [create another cluster](administering-swarms.md#create-swarms).
+> If you need more than 10 ports, you can explore alternative solutions such as [UCP domain names](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/) or [Træfik](https://github.com/containous/traefik). You can also [create another cluster](administering-swarms.md#create-swarms).
 
-### Accessing a service with the service load balancer
+To learn more about general swarm networking, see the [Docker container networking](/engine/userguide/networking/) and [Manage swarm service networks](/engine/swarm/networking/) guides.
+
+### Access a service with the service load balancer
+
+Get a publicly accessible HTTP URL for your app by publishing a Docker service on an unused port. For secure HTTPS URLs, see [Services with SSL certificates](#services-with-ssl-certificates).
 
 1. Connect to your Docker EE for IBM Cloud swarm. Navigate to the directory where you [downloaded the UCP credentials](administering-swarms.md#download-client-certificates) and run the script. For example:
 
@@ -84,33 +98,77 @@ on that port to your service.
    $ cd filepath/to/certificate/repo && source env.sh
    ```
 
-2. Create the service specifying the port on which you want the service exposed. For example:
+2. Create the service that you want to expose by using the `docker service create` [command](/engine/reference/commandline/service_create/). For example:
 
    ```bash
-   $ docker service create --name go-demo \
-     -e DB=go-demo-db \
-     --network go-demo \
-     --publish 8080:8080 \
-     vfarcic/go-demo
+   $ docker service create --name nginx-test \
+     --publish 8080:80 \
+     --replicas 3 \
+     nginx
    ```
 
-3. Get the name of the cluster, and then use it to get the service load balancer URL:
+3. List the name of the cluster such as `mycluster`, and then use it to show the service (**svc**) load balancer URL:
 
    ```bash
    $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
-   $ bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key
+   $ bx d4ic show --swarm-name mycluster --sl-user user.name.1234567 --sl-api-key api_key
    ```
 
-4. To access a service that you have previously exposed on a port, use the `service-lb-url` that you retrieved. For example:
+4. To access the service that you exposed on a port, use the service (**svc**) load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
 
    ```bash
-   $ curl https://service-lb-url:8080/demo/hello
+   $ curl mycluster-svc-1234567-wdc07.lb.bluemix.net:8080/
+   ...
+   <title>Welcome to nginx!</title>
+   ...
    ```
 
 ### Services with SSL certificates
-Use [IBM Cloud infrastructure SSL Certificates](https://knowledgelayer.softlayer.com/topic/ssl-certificates) to authenticate and encrypt online transactions that are transmitted through your cluster's load balancer.
+
+You can publicly expose your app securely with an HTTPS URL. Use [IBM Cloud infrastructure SSL Certificates](https://knowledgelayer.softlayer.com/topic/ssl-certificates) to authenticate and encrypt online transactions that are transmitted through your cluster's load balancer.
 
 When you create a certificate for your domain, specify the **Common Name**. When you create the Docker service, include the certificate common name to use the certificate for SSL termination for your service.
+
+Learn more about the [labels for SSL termination and health check paths](#labels-for-ssl-termination-and-health-check-paths), then follow along with an [example command to expose a service on HTTPS](#example-command-for-https).
+
+#### Labels for SSL termination and health check paths
+
+When you create the Docker service to expose your app with an HTTPS URL, you need to specify two labels that:
+
+* Specify your SSL certificate's **Common Name**.
+* Set the health check path.
+
+**Start a service that uses SSL termination**:
+Start a service that listens on ports that you specify. The service load balancer provides SSL termination on ports that use your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
+
+In the label, you must append `@HTTPS:port` to list the ports that you want to publish.
+
+For example:
+
+```bash
+$ docker service create --name name \
+...
+--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444
+...
+```
+
+To specify other or multiple ports, append them as follows:
+
+* Links HTTPS to port 444: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444`
+* Links HTTPS to ports 444 and 8080: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444,HTTPS:8080`
+
+**Set a health check path when using SSL termination**:
+By default, the service load balancer sets a health check path to `/`. If the service cannot respond with a 200 message to a `GET` request on the `/` path, then you must include a health monitor path label when you create the service. For example:
+
+```bash
+--label com.ibm.d4ic.healthcheck.path=/demo/hello@444
+```
+
+When the route is published, the health check is set to the path that you specify in the label. Choose a path that can respond with a 200 message to a `GET` request.
+
+#### Example command for HTTPS
+
+The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is published on a different port than the default and includes a health check path.
 
 Before you begin:
 
@@ -120,41 +178,37 @@ Before you begin:
 
 3. Note the certificate **Common Name**.
 
-**Start a service that uses SSL termination**: Start a service that listens on ports `80` and `443`. The service load balancer provides SSL termination on port `443` that uses your SSL certificate's common name, `com.ibm.d4ic.lb.cert=certificate-common-name`, when you create the service.
+Steps:
 
-In the label, append `@HTTPS:port` to list the ports you want to expose.
+1. Connect to your Docker EE for IBM Cloud swarm. Navigate to the directory where you [downloaded the UCP credentials](administering-swarms.md#download_client_certificates) and run the script. For example:
 
-For example:
+   ```bash
+   $ cd filepath/to/certificate/repo && source env.
+   ```
 
-```bash
-$ docker service create --name name \
-...
---label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:443
-...
-```
+2. Create the service that you want to expose by using the `docker service create` [command](/engine/reference/commandline/service_create/). For example:
 
-To specify other or multiple ports, append them as follows:
+   ```bash
+   $ docker service create --name nginx-test \
+     --publish 444:80 \
+     --replicas 3 \
+     --label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444 \
+     --label com.ibm.d4ic.healthcheck.path=/@444 \
+     nginx
+   ```
 
-* Links HTTPS to port 444: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444`
-* Links HTTPS to ports 444 and 8080: `--label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:444,HTTPS:8080`
+3. List the name of the cluster such as `mycluster`, and then use it to show the service (**svc**) load balancer URL:
 
-**Set a health check path**: By default, the service load balancer sets a health check path to `/`. If the service cannot respond with a 200 message to a `GET` request on the `/` path, then include a health monitor path label when you create the service. For example:
+   ```bash
+   $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
+   $ bx d4ic show --swarm-name mycluster --sl-user user.name.1234567 --sl-api-key api_key
+   ```
 
-```bash
---label com.ibm.d4ic.healthcheck.path=/demo/hello@443
-```
+4. To access the service that you exposed on a port, use the service (**svc**) load balancer URL that you retrieved. The load balancer might need a few minutes to update. For example:
 
-When the route is published, the health check is set to the path that you specify in the label. Choose a path that can respond with a 200 message to a `GET` request.
-
-**Example command**: The following `docker service create` command expands on the example from the [previous section](#access-a-service-with-the-service-load-balancer) to create a demo service that is exposed on a different port than the default and includes a health check path. It is based on the `vfarcic/go-demo` image.
-
-```bash
-$ docker service create --name go-demo \
-  -e DB=go-demo-db \
-  --network go-demo \
-  --publish 8080:8080 \
-  --replicas 3 \
-  --label com.ibm.d4ic.lb.cert=certificate-common-name@HTTPS:8080 \
-  --label com.ibm.d4ic.healthcheck.path=/demo/hello@8080 \
-  vfarcic/go-demo
-```
+   ```bash
+   $ curl --cacert https://mycluster-svc-1234567-wdc07.lb.bluemix.net:444
+   ...
+   <title>Welcome to nginx!</title>
+   ...
+   ```

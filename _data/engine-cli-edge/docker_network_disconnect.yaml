@@ -14,10 +14,16 @@ options:
   description: Force the container to disconnect from a network
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ```bash
     $ docker network disconnect multi-host-network container1
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

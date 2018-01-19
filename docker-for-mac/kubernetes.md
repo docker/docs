@@ -4,12 +4,14 @@ keywords: mac, edge, kubernetes, kubectl, orchestration
 title: Deploy to Kubernetes
 ---
 
-**Kubernetes is only available in Docker for Mac 17.12 CE Edge to participants in the [Docker Beta program](https://beta.docker.com/). To access beta builds, you must be signed in with your Docker ID within Docker for Mac: select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> Sign in / Create Docker ID from the menu bar.**
+**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
+support is not included in Docker for Mac 17.12 CE Stable. To find out
+more about Stable and Edge channels and how to switch between them, see
+[General configuration](/docker-for-mac/#general).
 
-If you are part of the Docker Beta program, Docker for Mac 17.12 CE Edge
-includes a standalone Kubernetes server and client, as well as Docker CLI
-integration. The Kubernetes server runs locally within your Docker instance, is
-not configurable, and is a single-node cluster.
+Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server and client,
+as well as Docker CLI integration. The Kubernetes server runs locally within
+your Docker instance, is not configurable, and is a single-node cluster.
 
 The Kubernetes server runs within a Docker container on your Mac, and is only
 for local testing. When Kubernetes support is enabled, you can deploy your

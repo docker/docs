@@ -75,8 +75,7 @@ actually does.
 ## Prerequisites
 
 While we'll define concepts along the way, it is good for you to understand
-[what Docker is](https://www.docker.com/what-docker) and [why you would use
-Docker](https://www.docker.com/use-cases) before we begin.
+[what Docker is](https://www.docker.com/what-docker) before we begin.
 
 We also need to assume you are familiar with a few concepts before we continue:
 

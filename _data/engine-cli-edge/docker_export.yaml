@@ -18,6 +18,9 @@ options:
   description: Write to a file, instead of STDOUT
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ch of these commands has the same result.
 
@@ -30,4 +33,7 @@ examples: |-
   ```
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

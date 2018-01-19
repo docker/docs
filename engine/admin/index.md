@@ -99,7 +99,7 @@ If you see an error similar to this one and you are starting the daemon manually
 you may need to adjust your flags or the `daemon.json` to remove the conflict.
 
 > **Note**: If you see this specific error, continue to the
-> [next section](#use-the-hosts-eky-in-daemon-json-with-systemd) for a workaround.
+> [next section](#use-the-hosts-key-in-daemon-json-with-systemd) for a workaround.
 
 If you are starting Docker using your operating system's init scripts, you may
 need to override the defaults in these scripts in ways that are specific to the
@@ -167,7 +167,8 @@ subsystem used:
 | Debian                | `/var/log/daemon.log`                                                                    |
 | Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service`                                           |
 | Ubuntu 14.10-         | `/var/log/upstart/docker.log`                                                            |
-| macOS                 | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
+| macOS (Docker 18.01+) | `~/Library/Containers/com.docker.docker/Data/vms/0/console-ring`                         |
+| macOS (Docker <18.01) | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
 | Windows               | `AppData\Local`                                                                          |
 
 

@@ -1,0 +1,23 @@
+command: docker trust
+short: Manage trust on Docker images (experimental)
+long: Manage trust on Docker images (experimental)
+usage: docker trust
+pname: docker
+plink: docker.yaml
+cname:
+- docker trust inspect
+- docker trust key
+- docker trust revoke
+- docker trust sign
+- docker trust signer
+- docker trust view
+clink:
+- docker_trust_inspect.yaml
+- docker_trust_key.yaml
+- docker_trust_revoke.yaml
+- docker_trust_sign.yaml
+- docker_trust_signer.yaml
+- docker_trust_view.yaml
+deprecated: false
+experimental: false
+

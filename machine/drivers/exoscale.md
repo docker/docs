@@ -20,9 +20,9 @@ Get your API key and API secret key from [API details](https://portal.exoscale.c
 -   `--exoscale-affinity-group`: [Anti-affinity group][anti-affinity] the machine will be started in.
 -   `--exoscale-api-key`: **required** Your API key;
 -   `--exoscale-api-secret-key`: **required** Your API secret key;
--   `--exoscale-availability-zone`: Exoscale [availability zone][datacenters] (CH-DK-2, AT-VIE-1, DE-FRA-1, ...);
+-   `--exoscale-availability-zone`: Exoscale [availability zone][datacenters] (ch-dk-2, at-vie-1, de-fra-1, ...);
 -   `--exoscale-disk-size`: Disk size for the host in GB (10, 50, 100, 200, 400);
--   `--exoscale-image`: Image template (e.g. `Linux Ubuntu 16.04 LTS 64-bit` also known as `ubuntu-16.04`, [see below](#image-template-name));
+-   `--exoscale-image`: Image template (e.g. `ubuntu-16.04` also known as `Linux Ubuntu 16.04 LTS 64-bit`, [see below](#image-template-name));
 -   `--exoscale-instance-profile`: Instance profile (Small, Medium, Large, ...);
 -   `--exoscale-security-group`: Security group. _It will be created if it doesn't exist_;
 -   `--exoscale-ssh-user`: SSH username (e.g. `ubuntu`, [see below](#ssh-username));
@@ -38,7 +38,7 @@ Get your API key and API secret key from [API details](https://portal.exoscale.c
 | **`--exoscale-api-secret-key`** | `EXOSCALE_API_SECRET`        | -                                 |
 | `--exoscale-availability-zone`  | `EXOSCALE_AVAILABILITY_ZONE` | `ch-dk-2`                         |
 | `--exoscale-disk-size`          | `EXOSCALE_DISK_SIZE`         | `50`                              |
-| `--exoscale-image`              | `EXOSCALE_IMAGE`             | `Linux Ubuntu 16.04 LTS 64-bit`   |
+| `--exoscale-image`              | `EXOSCALE_IMAGE`             | `ubuntu-16.04`   |
 | `--exoscale-instance-profile`   | `EXOSCALE_INSTANCE_PROFILE`  | `small`                           |
 | `--exoscale-security-group`     | `EXOSCALE_SECURITY_GROUP`    | `docker-machine`                  |
 | `--exoscale-ssh-user`           | `EXOSCALE_SSH_USER`          | -                                 |

@@ -37,7 +37,7 @@ users, by creating subscriptions to their content in Docker Store.
 ### Prerequisites and setup
 
 To use Docker as your fulfillment service, an ISV must:
-- [Apply and be approved as a Docker Store Publisher](https://store.docker.com/publisher/signup)
+- [Apply and be approved as a Docker Store Vendor Partner](https://goto.docker.com/partners)
 - Apply and be approved to list an Ungated BYOL product
 - Create one or more Ungated BYOL product plans, in the Docker Store Publisher center.
 
@@ -63,7 +63,7 @@ Docker will provide:
 
 ### Fulfillment and orders usage
 
-Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form or URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
+Docker Store provides an API for ISVs to create product orders and generate access tokens (in the form of URLs) for customer subscriptions to their products. ISVs will also be able to access reports and usage information about their products on Docker Store.
 
 The BYOL program at Docker Store helps ISVs control access to their products for multiple use cases, such as:
 - New customers purchasing software from the ISV for the first time

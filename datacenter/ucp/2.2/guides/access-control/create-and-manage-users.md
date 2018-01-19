@@ -8,7 +8,7 @@ keywords: authorize, authentication, users, teams, UCP, Docker
 Docker Universal Control Plane provides built-in authentication and also
 integrates with LDAP directory services. If you want to manage
 users and groups from your organization's directory, choose LDAP. 
-[Learn to integrate with an LDAP directory](../configure/external-auth/index.md).
+[Learn to integrate with an LDAP directory](../admin/configure/external-auth/index.md).
 
 When using the UCP built-in authentication, you need to create users and
 optionally grant them UCP administrator permissions.

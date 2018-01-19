@@ -35,10 +35,11 @@ Mandatory:
 -   `--openstack-region`: The region to work on. Can be omitted if there is only one region on the OpenStack.
 -   `--openstack-sec-groups`: If security groups are available on your OpenStack you can specify a comma separated list
     to use for the machine (e.g. `secgrp001,secgrp002`).
--   `--openstack-username`: User identifier to authenticate with.
 -   `--openstack-ssh-port`: Customize the SSH port if the SSH server on the machine does not listen on the default port.
 -   `--openstack-ssh-user`: The username to use for SSH into the machine. If not provided `root` will be used.
 -   `--openstack-tenant-name` or `--openstack-tenant-id`: Identify the tenant in which the machine will be created.
+-   `--openstack-user-data-file`: File containing an OpenStack userdata script.
+-   `--openstack-username`: User identifier to authenticate with.
 
 #### Environment variables and default values
 
@@ -68,4 +69,5 @@ Mandatory:
 | `--openstack-ssh-user`          | `OS_SSH_USER`          | `root`      |
 | `--openstack-tenant-id`         | `OS_TENANT_ID`         | -           |
 | `--openstack-tenant-name`       | `OS_TENANT_NAME`       | -           |
+| `--openstack-user-data-file`    | `OS_USER_DATA_FILE`    | -           |
 | `--openstack-username`          | `OS_USERNAME`          | -           |

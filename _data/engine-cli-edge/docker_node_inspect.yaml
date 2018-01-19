@@ -16,12 +16,18 @@ options:
   description: Format the output using the given Go template
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: pretty
   value_type: bool
   default_value: "false"
   description: Print the information in a human friendly format
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: "### Inspect a node\n\n```none\n$ docker node inspect swarm-manager\n\n[\n{\n
   \   \"ID\": \"e216jshn25ckzbvmwlnh5jr3g\",\n    \"Version\": {\n        \"Index\":
   10\n    },\n    \"CreatedAt\": \"2017-05-16T22:52:44.9910662Z\",\n    \"UpdatedAt\":
@@ -61,4 +67,7 @@ examples: "### Inspect a node\n\n```none\n$ docker node inspect swarm-manager\n\
 deprecated: false
 min_api_version: "1.24"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
 
