@@ -41,7 +41,7 @@ $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_
 ```
 
 To connect using the Notary Client CLI, please see [Getting Started](getting_started.md)
-documentation. Please note that the version of Notary server and signer
+documentation. The version of Notary server and signer
 should be greater than or equal to that of the Notary Client CLI to ensure feature compatibility,
 i.e. if you are using Notary Client CLI 0.2, ensure you are using a server and signer tagged with
 an equal or higher version than 0.2 from the
@@ -156,8 +156,8 @@ One way to do this would be:
 		  }
 		}
 
-	Note that we are including a remote trust service and a database storage
-	type in order to demonstrate how environment variables can override
+	NWe include a remote trust service and a database storage
+	type to demonstrate how environment variables can override
 	configuration parameters.
 
 3. Run the following command (assuming you've already built or pulled a Notary server docker image):

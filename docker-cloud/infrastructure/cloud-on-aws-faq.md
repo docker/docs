@@ -62,7 +62,7 @@ In the launch node cluster view, you can choose:
 
 - VPC dropdown:
     1. `Auto` - Delegates creation of the VPC to Docker Cloud.
-    2. `vpc-XXXX (dc-vpc)` - Docker Cloud's default VPC. This only appears if you have already deployed nodes to that region. Note that you can choose subnets and security groups with the VPC. See "Which objects does Docker Cloud create in my EC2 account" for detailed info.
+    2. `vpc-XXXX (dc-vpc)` - Docker Cloud's default VPC. This only appears if you have already deployed nodes to that region. You can choose subnets and security groups with the VPC. See "Which objects does Docker Cloud create in my EC2 account" for detailed info.
     3. `vpc-XXXX` - You can select one of the VPCs already created by you. If you tag name them, it is displayed too.
 - Subnets dropdown:
     1. `Auto` - Delegates the management of the subnets to Docker Cloud. Creates them if they do not exist or uses the ones tagged with `dc-subnet`.

@@ -80,7 +80,7 @@ required**_.
 
 ### What are system requirements for Docker for Mac?
 
-Note that you need a Mac that supports hardware virtualization and can run at
+You need a Mac that supports hardware virtualization and can run at
 least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
 [What to know before you install](install.md#what-to-know-before-you-install) in
 the install guide.
@@ -196,7 +196,7 @@ in the Networking topic.
 ### How do I connect to a container from the Mac?
 
 Our current recommendation is to publish a port, or to connect from another
-container. Note that this is what you need to do even on Linux if the container
+container. This is what you need to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 For a full explanation and examples, see

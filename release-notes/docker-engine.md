@@ -1273,7 +1273,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 ### Distribution
 
 * Use content-addressable storage for images and layers [#17924](https://github.com/docker/docker/pull/17924)
-  Note that a migration is performed the first time docker is run; it can take a significant amount of time depending on the number of images and containers present.
+  A migration is performed the first time docker is run; it can take a significant amount of time depending on the number of images and containers present.
   Images no longer depend on the parent chain but contain a list of layer references.
   `docker load`/`docker save` tarballs now also contain content-addressable image configurations.
   For more information: https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration

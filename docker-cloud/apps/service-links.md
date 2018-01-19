@@ -110,7 +110,7 @@ variables are created when a service scales up or down.
 >**Tip:** You can specify one of several [container distribution strategies](/docker-cloud/infrastructure/deployment-strategies.md) for
 applications deployed to multiple nodes. These strategies enable automatic
 deployments of containers to nodes, and sometimes auto-linking of containers.
-Note that if a service with
+If a service with
 [EVERY_NODE](/docker-cloud/infrastructure/deployment-strategies.md#every-node)
 strategy is linked to another service with EVERY_NODE strategy, containers are
 linked one-to-one on each node.

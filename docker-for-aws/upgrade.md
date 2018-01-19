@@ -32,7 +32,7 @@ scaled services should not experience downtime during an upgrade.
 
 ![Upgrade in AWS console](img/cloudformation_update.png)
 
-Note that single containers started (for example) with `docker run -d` are
+Single containers started (for example) with `docker run -d` are
 **not** preserved during an upgrade. This is because they're not Docker Swarm
 objects, but are known only to the individual Docker engines.
 

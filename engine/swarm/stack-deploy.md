@@ -127,7 +127,7 @@ counter whenever you visit it.
         image: redis:alpine
     ```
 
-    Note that the image for the web app is built using the Dockerfile defined
+    The image for the web app is built using the Dockerfile defined
     above. It's also tagged with `127.0.0.1:5000` - the address of the registry
     created earlier. This is important when distributing the app to the
     swarm.

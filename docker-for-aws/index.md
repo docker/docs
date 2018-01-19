@@ -102,7 +102,7 @@ For more information about adding an SSH key pair to your account, please refer
 to the [Amazon EC2 Key Pairs
 docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
-Note that the China and US Gov Cloud AWS partitions are not currently supported.
+The China and US Gov Cloud AWS partitions are not currently supported.
 
 ### Configuration
 

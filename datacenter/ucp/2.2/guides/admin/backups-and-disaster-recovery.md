@@ -181,7 +181,7 @@ restored through the following disaster recovery procedure. If your cluster has
 lost quorum, you can still take a backup of one of the remaining nodes, but we
 recommend making backups regularly.
 
-It is important to note that this procedure is not guaranteed to succeed with
+This procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for
 [high availability](configure/set-up-high-availability.md).

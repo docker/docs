@@ -20,7 +20,7 @@ button.
 
 After the image finishes downloading, you see the home screen for the
 Minecraft container. Your Minecraft server is now up and running inside a Docker
-container. Note that we've marked the IP and port you can use to connect to
+container. We've marked the IP and port you can use to connect to
 your Minecraft server in red (your IP and port may be different from what's
 shown).
 

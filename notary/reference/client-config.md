@@ -46,7 +46,7 @@ and private keys are stored.
 This is normally defaults to `~/.notary`, but specifying `~/.docker/trust`
 facilitates interoperability with content trust.
 
-Note that this option can be overridden with the command line flag `--trustDir`.
+This option can be overridden with the command line flag `--trustDir`.
 
 ## remote_server section (optional)
 

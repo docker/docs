@@ -172,8 +172,8 @@ discoverable:
 
 ### How the manifest information is displayed in the UI
 
-(Please note that this is an approximate representation. We frequently make
-enhancements to the look and some elements might shift around.)
+This is an approximate representation. We frequently make
+enhancements to the look and some elements might shift around.
 
 ![manifest information displayed on store UI](images/subscribed.png)
 

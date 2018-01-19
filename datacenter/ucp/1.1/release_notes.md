@@ -34,7 +34,7 @@ could be used to perform unauthorized actions on the cluster
 These issues affect UCP version 1.1.5 and below. They were discovered by our
 development team during internal testing.
 
-We've revised our guidelines on access control permissions as well. Read 
+We've revised our guidelines on access control permissions as well. Read
 the [permissions levels section](user-management/permission-levels.md) for more details.
 
 ## Version 1.1.5
@@ -181,7 +181,7 @@ clusters, and is not compatible with swarm-mode based APIs, e.g. `docker service
 * docker/ucp image
   * It's now possible to configure the election timeout of the UCP key-value store
   with the `docker/ucp install --kv-timeout` option. This is useful when running
-  UCP across multiple regions. Note that the heartbeat interval will be 1/10th of
+  UCP across multiple regions. The heartbeat interval will be 1/10th of
   the specified election timeout value.
   [Learn more](https://coreos.com/etcd/docs/latest/tuning.html)
   * It's now possible to skip TLS verification when joining new nodes to the

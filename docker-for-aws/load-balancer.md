@@ -103,7 +103,7 @@ $ docker service create \
 
 Docker for AWS version 17.07.0 and later also support the `HTTPS` listener protocol when using ACM certificates.
 
-Use the `HTTPS` protocol if your app relies on checking the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header for resolving the client IP address. Note that the client IP is also available with `SSL` by using the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but many apps and app frameworks don't support this.
+Use the `HTTPS` protocol if your app relies on checking the [X-Forwarded-For](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html) header for resolving the client IP address. The client IP is also available with `SSL` by using the [Proxy Protocol](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html#proxy-protocol), but many apps and app frameworks don't support this.
 
 The only valid options are `HTTPS` and `SSL`. Specifying any other value cause `SSL` to be selected. For backwards compatibility the default protocol is `SSL`.
 

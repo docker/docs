@@ -206,7 +206,7 @@ private material.
 
 - **Key Compromise** - If the Notary signer uses a database as its backend,
   an attacker can exfiltrate all the (timestamp and snapshot) private material.
-  Note that the capabilities of an attacker are the same as of a Notary server
+  The capabilities of an attacker are the same as of a Notary server
   compromise in terms of signing arbitrary metadata, with the important detail
   that in this particular case key rotations are necessary to recover from
   the attack.

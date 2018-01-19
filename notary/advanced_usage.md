@@ -140,7 +140,7 @@ targets key or allow a collaborator write access to all targets of the
 collection.
 
 Before adding any delegations, you should rotate the snapshot key to the server.
-Note that this is done by default for new collections created with a Docker Engine 1.11 client.
+This is done by default for new collections created with a Docker Engine 1.11 client.
 Delegation roles do not require the snapshot key to publish
 their own targets to the collection, since the server can publish the valid
 snapshot with the delegation targets:

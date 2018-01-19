@@ -25,7 +25,7 @@ toc_max: 2
 - Added support for `extra_hosts` in build configuration
 
 - Added support for the [long syntax](/compose/compose-file.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
-  Note that using this syntax will create [mounts](/engine/admin/volumes/bind-mounts.md) instead of volumes.
+  Using this syntax will create [mounts](/engine/admin/volumes/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
 
@@ -322,7 +322,7 @@ toc_max: 2
 
 - Added support for `scale` in service definitions. The configuration's value
   can be overridden using the `--scale` flag in `docker-compose up`.
-  Please note that the `scale` command is disabled for this file format
+  The `scale` command is disabled for this file format
 
 #### Compose file version 2.x
 
@@ -586,7 +586,7 @@ toc_max: 2
 New Features
 
 - Interactive mode for `docker-compose run` and `docker-compose exec` is
-  now supported on Windows platforms. Please note that the `docker` binary
+  now supported on Windows platforms. The `docker` binary
   is required to be present on the system for this feature to work.
 
 - Introduced version 2.1 of the `docker-compose.yml` specification. This

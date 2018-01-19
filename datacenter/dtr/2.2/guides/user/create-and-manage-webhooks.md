@@ -110,12 +110,12 @@ fake data. To send a test payload, fire a `POST` request to
 ```
 
 Change `type` to the event type that you want to receive. DTR will then send
-an example payload to the endpoint specified. Note that the example
+an example payload to the endpoint specified. The example
 payload sent is always the same.
 
 ## Content structure
 
-Note that comments (`// here`) are added for documentation only; they are not
+Comments (`// here`) are added for documentation only; they are not
 present in POST payloads.
 
 ### Repository event content structure
@@ -307,7 +307,6 @@ To delete a webhook subscription send a `DELETE` request to
 `/api/v0/webhooks/{id}`, replacing `{id}` with the webhook subscription ID
 which you would like to delete.
 
-Note that in order to delete a subscription you must be either a system
-administrator or an administrator for the resource which the payload subscribes
-to. For example, as a normal user you can only delete subscriptions for
-repositories which you are an admin of.
+Only a system administrator or an administrator for the resource which the
+payload subscribes to can delete a subscription. As a normal user, you can only
+delete subscriptions for repositories which you administer.

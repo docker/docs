@@ -155,7 +155,7 @@ All request and response bodies are encoded with JSON using UTF-8.
 
 * order\_id: `ord-93b2dba2-79e3-11e6-8b77-86f30ca893d3` (string, required) - The order id.
 * token: `DOCKER-TOKEN-234` (string, required) - The access token created for this order by the fulfillment service.
-* docker\_id: `a76808b87b6c11e68b7786f30ca893d3` (string, optional) - The docker id of the user that fulfilled the order. Note that this is not set unless the order is in a fulfilled state.
+* docker\_id: `a76808b87b6c11e68b7786f30ca893d3` (string, optional) - The docker id of the user that fulfilled the order. This is not set unless the order is in a fulfilled state.
 * state: created (enum, required) - The order state.
   * created
   * fulfilled

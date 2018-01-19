@@ -139,7 +139,7 @@ that they are running themselves using the `--insecure-registry` flag for the
 daemon. Docker Machine supports the configuration of such options for the
 created engines via the `create` command flags which begin with `--engine`.
 
-Note that Docker Machine simply sets the configured parameters on the daemon
+Docker Machine only sets the configured parameters on the daemon
 and does not set up any of the "dependencies" for you. For instance, if you
 specify that the created daemon should use `btrfs` as a storage driver, you
 still must ensure that the proper dependencies are installed, the BTRFS

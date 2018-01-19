@@ -125,7 +125,7 @@ The following arguments can be passed to `docker network create` for any network
 
 The following example uses `-o` to bind to a specific IP address available on the host when binding
 ports, then uses `docker network inspect` to inspect the network, and finally
-attaches a new container to the new network. Note that you should replace the IP address `172.23.0.1` shown in the
+attaches a new container to the new network. Replace the IP address `172.23.0.1` shown in the
 example with an IP address available on a network interface in your host.
 
 ```bash

@@ -182,7 +182,7 @@ com.docker.ucp.mesh.http.2=external_route=sni://example.org
 
 ### X-Forwarded-For header
 
-Because HRM forwards traffic to your application, the requests that your application receives will all appear to come from HRM's IP address. If you add `include_forwarded_for=true` in the HRM label for your service, HRM will add an HTTP header to every request called `X-Forwarded-For` that will contain the IP address that the original request came from. Note that this feature will only work if your external_route field begins with `http://`.
+Because HRM forwards traffic to your application, the requests that your application receives will all appear to come from HRM's IP address. If you add `include_forwarded_for=true` in the HRM label for your service, HRM will add an HTTP header to every request called `X-Forwarded-For` that will contain the IP address that the original request came from. This feature will only work if your external_route field begins with `http://`.
 
 ### Default Service
 

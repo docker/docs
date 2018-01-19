@@ -376,7 +376,7 @@ as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 Consider an example where you have something like one tab per language, and
 you have multiple tab sets like this on a page. You might want them to all
 toggle together. We have Javascript that loads on every page that lets you
-do this by setting the `data-group` attributes to be the same. Note that the
+do this by setting the `data-group` attributes to be the same. The
 `data-target` attributes still need to point to unique div IDs.
 
 In this example, selecting `Go` or `Python` in one tab set toggles the

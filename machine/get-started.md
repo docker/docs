@@ -57,7 +57,7 @@ lightweight macOS virtualization solution built on top of the
 
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the [Docker Machine
-driver for Oracle VirtualBox](drivers/virtualbox.md).) Note that you can run
+driver for Oracle VirtualBox](drivers/virtualbox.md).) You can run
 both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
 

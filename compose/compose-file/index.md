@@ -1773,7 +1773,7 @@ on-failure error.
     restart: always
     restart: on-failure
     restart: unless-stopped
-    
+
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
@@ -1828,7 +1828,7 @@ that looks like this:
     1gb
 
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
-`mb` and `gb`. Please note that decimal values are not supported at this time.
+`mb` and `gb`. Decimal values are not supported at this time.
 
 
 ## Volume configuration reference

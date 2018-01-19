@@ -36,7 +36,7 @@ For more detailed information about how to use Notary outside of the default
 Docker Content Trust use cases, please refer to the
 [Notary CLI documentation](/notary/getting_started.md).
 
-Note that when publishing and listing delegation changes using the Notary client,
+When publishing and listing delegation changes using the Notary client,
 your Docker Hub credentials are required.
 
 ## Generating delegation keys
@@ -89,9 +89,9 @@ so that collaborators don't need your snapshot key to sign and publish tags:
 $ notary key rotate docker.io/<username>/<imagename> snapshot -r
 ```
 
-This tells Notary to rotate a key for your particular image repository - note that
-you must include the `docker.io/` prefix. `snapshot -r` specifies that you want
-to rotate the snapshot key specifically, and you want the server to manage it (`-r`
+This tells Notary to rotate a key for your particular image repository. The
+`docker.io/` prefix is required. `snapshot -r` specifies that you want
+to rotate the snapshot key and that you want the server to manage it (`-r`
 stands for "remote").
 
 When adding a delegation, your must acquire
@@ -156,7 +156,7 @@ The revocation takes effect as soon as you publish:
 $ notary publish docker.io/<username>/<imagename>
 ```
 
-Note that by removing all the keys from the `targets/releases` delegation, the
+By removing all the keys from the `targets/releases` delegation, the
 delegation (and any tags that are signed into it) is removed. That means that
 these tags are all deleted, and you may end up with older, legacy tags that
 were signed directly by the targets key.

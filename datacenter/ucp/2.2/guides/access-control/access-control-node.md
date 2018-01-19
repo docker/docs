@@ -21,7 +21,7 @@ containers and services on these nodes. In the following example, users with
 `scheduler` capability against `/collection1` can schedule
 applications on those nodes.
 
-Note that in the directory these collections lie outside of the `/Shared`
+In the directory these collections lie outside of the `/Shared`
 collection so users without grants will not have access to these collections
 unless explicitly granted access. These users can only deploy
 applications on the built-in `/Shared` collection nodes.

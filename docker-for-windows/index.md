@@ -484,7 +484,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 > `8.8.8.8`. For more information, see
 > [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
-Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
+Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Proxies
 
@@ -600,7 +600,7 @@ In that topic, see also:
 
 * [Windows configuration file](/engine/reference/commandline/dockerd.md#windows-configuration-file)
 
-Note that updating these settings requires a reconfiguration and reboot of the
+Updating these settings requires a reconfiguration and reboot of the
 Linux VM.
 
 ### Switch between Windows and Linux containers

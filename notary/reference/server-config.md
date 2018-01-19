@@ -260,7 +260,7 @@ Example:
 }
 ```
 
-Note that this entire section is optional.  However, if you would like
+This entire section is optional.  However, if you would like
 authentication for your server, then you need the required parameters below to
 configure it.
 
@@ -318,7 +318,7 @@ Example:
 			role.  This value is sett on the cache control headers for
 			GET-ting metadata.
 
-			Note that `must-revalidate` is also set on the cache control headers
+			`must-revalidate` is also set on the cache control headers
 			for current metadata, as current metadata may change whenever new
 			metadata is signed into a repo.
 

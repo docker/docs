@@ -131,7 +131,7 @@ By default, the Amazon EC2 driver uses a daily image of Ubuntu 16.04 LTS.
 
 ## Security Group
 
-Note that a security group is created and associated to the host. This security group has the following ports opened inbound:
+A security group is created and associated to the host. This security group has the following ports opened inbound:
 
 -   ssh (22/tcp)
 -   docker (2376/tcp)

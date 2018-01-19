@@ -70,7 +70,7 @@ https://portal.azure.com/#resource/subscriptions/[subscription-id]/resourceGroup
 `[subscription-id]` and `[resource-group]` are placeholders which are replaced by
 real values.
 
-Note that in the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you can't access the node and if you were logged in, your SSH connection drop.
+In the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you can't access the node and if you were logged in, your SSH connection drop.
 
 ## Post upgrade
 

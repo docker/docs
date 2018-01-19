@@ -1,3 +1,4 @@
+
 ---
 advisory: toolbox
 description: How to install Toolbox on Mac
@@ -284,10 +285,8 @@ To uninstall Toolbox on a Mac, do the following:
     ```
 
 5.  Remove the `docker`, `docker-compose`, and `docker-machine`
-    commands from the `/usr/local/bin` folder.  Note that Docker for
-    Mac and Brew are also likely to have installed them: in case of
-    doubt leave them, or reinstall them via Brew, or rerun Docker for
-    Mac (no need to reinstall it).
+    commands from the `/usr/local/bin` folder. Docker for
+    Mac and Brew may have installed them.
 
     ```
     $ rm /usr/local/bin/docker

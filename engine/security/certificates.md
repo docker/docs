@@ -73,7 +73,7 @@ as client certificates. If a CA certificate is accidentally given the extension
 following error message:
 
 ```
-Missing key KEY_NAME for client certificate CERT_NAME. Note that CA certificates should use the extension .crt.
+Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
 ```
 
 If the Docker registry is accessed without a port number, do not add the port to the directory name.  The following shows the configuration for a registry on default port 443 which is accessed with `docker login my-https.registry.example.com`:

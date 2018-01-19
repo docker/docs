@@ -306,7 +306,7 @@ several options have been removed:
 
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
     have been replaced by the [resources](/compose/compose-file/index.md#resources) key under
-    `deploy`. Note that `deploy` configuration only takes effect when using
+    `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
 -   `extends`: This option has been removed for `version: "3.x"`

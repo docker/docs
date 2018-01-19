@@ -86,7 +86,7 @@ more pseudo-files exist and contain statistics.
 
 ### Memory metrics: `memory.stat`
 
-Memory metrics are found in the "memory" cgroup. Note that the memory
+Memory metrics are found in the "memory" cgroup. The memory
 control group adds a little overhead, because it does very fine-grained
 accounting of the memory usage on your host. Therefore, many distros
 chose to not enable it by default. Generally, to enable it, all you have
@@ -146,7 +146,7 @@ Metric                                | Description
 **pgfault**, **pgmajfault**           | Indicate the number of times that a process of the cgroup triggered a "page fault" and a "major fault", respectively. A page fault happens when a process accesses a part of its virtual memory space which is nonexistent or protected. The former can happen if the process is buggy and tries to access an invalid address (it is sent a `SIGSEGV` signal, typically killing it with the famous `Segmentation fault` message). The latter can happen when the process reads from a memory zone which has been swapped out, or which corresponds to a mapped file: in that case, the kernel loads the page from disk, and let the CPU complete the memory access. It can also happen when the process writes to a copy-on-write memory zone: likewise, the kernel preempts the process, duplicate the memory page, and resume the write operation on the process` own copy of the page. "Major" faults happen when the kernel actually needs to read the data from disk. When it just  duplicates an existing page, or allocate an empty page, it's a regular (or "minor") fault.
 **swap**                              | The amount of swap currently used by the processes in this cgroup.
 **active_anon**, **inactive_anon**    | The amount of *anonymous* memory that has been identified has respectively *active* and *inactive* by the kernel. "Anonymous" memory is the memory that is *not* linked to disk pages. In other words, that's the equivalent of the rss counter described above. In fact, the very definition of the rss counter is **active_anon** + **inactive_anon** - **tmpfs** (where tmpfs is the amount of memory used up by `tmpfs` filesystems mounted by this control group). Now, what's the difference between "active" and "inactive"? Pages are initially "active"; and at regular intervals, the kernel sweeps over the memory, and tags some pages as "inactive". Whenever they are accessed again, they are immediately retagged "active". When the kernel is almost out of memory, and time comes to swap out to disk, the kernel swaps "inactive" pages.
-**active_file**, **inactive_file**    | Cache memory, with *active* and *inactive* similar to the *anon* memory above. The exact formula is **cache** = **active_file** + **inactive_file** + **tmpfs**. The exact rules used by the kernel to move memory pages between active and inactive sets are different from the ones used for anonymous memory, but the general principle is the same. Note that when the kernel needs to reclaim memory, it is cheaper to reclaim a clean (=non modified) page from this pool, since it can be reclaimed immediately (while anonymous pages and dirty/modified pages need to be written to disk first).
+**active_file**, **inactive_file**    | Cache memory, with *active* and *inactive* similar to the *anon* memory above. The exact formula is **cache** = **active_file** + **inactive_file** + **tmpfs**. The exact rules used by the kernel to move memory pages between active and inactive sets are different from the ones used for anonymous memory, but the general principle is the same. When the kernel needs to reclaim memory, it is cheaper to reclaim a clean (=non modified) page from this pool, since it can be reclaimed immediately (while anonymous pages and dirty/modified pages need to be written to disk first).
 **unevictable**                       | The amount of memory that cannot be reclaimed; generally, it accounts for memory that has been "locked" with `mlock`. It is often used by crypto frameworks to make sure that secret keys and other sensitive material never gets swapped out to disk.
 **memory_limit**, **memsw_limit**     | These are not really metrics, but a reminder of the limits applied to this cgroup. The first one indicates the maximum amount of physical memory that can be used by the processes of this control group; the second one indicates the maximum amount of RAM+swap.
 
@@ -196,7 +196,7 @@ Metric                      | Description
 **blkio.sectors**           | Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
 **blkio.io_service_bytes**  | Indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.
 **blkio.io_serviced**       | The number of I/O operations performed, regardless of their size. It also has 4 counters per device.
-**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. Note that the opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
+**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. The opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
 
 ## Network metrics
 
@@ -323,7 +323,7 @@ $ ip netns exec $CID netstat -i
 
 ## Tips for high-performance metric collection
 
-Note that running a new process each time you want to update metrics is
+Running a new process each time you want to update metrics is
 (relatively) expensive. If you want to collect metrics at high
 resolutions, and/or over a large number of containers (think 1000
 containers on a single host), you do not want to fork a new process each
