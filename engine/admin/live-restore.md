@@ -27,13 +27,13 @@ Use your favorite editor to enable the `live-restore` option in the
 
 ```bash
 {
-"live-restore": true
+  "live-restore": true
 }
 ```
 
 You have to send a `SIGHUP` signal to the daemon process for it to reload the
 configuration. For more information on how to configure the Docker daemon using
-config.json, see [daemon configuration file](../reference/commandline/dockerd.md#daemon-configuration-file).
+`daemon.json`, see [daemon configuration file](../reference/commandline/dockerd.md#daemon-configuration-file).
 
 * When you start the Docker daemon, pass the `--live-restore` flag:
 
