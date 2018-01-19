@@ -21,19 +21,6 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
 
-* Upgrades
-  - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
-  - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
-  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
-  - Linux Kernel 4.9.60
-
-* New
-  - VM entirely built with Linuxkit.
-  - VM disk size can be changed in disk preferences. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037))
-  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This improves disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.  
-  Existing disks are kept in qcow format, if you want to switch to raw format you need to "Remove all data" or "Reset to factory defaults". See https://docs.docker.com/docker-for-mac/faqs/#disk-usage
-  - DNS name `docker.for.mac.host.internal` shoud be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost. See  https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06.
-
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
   - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
@@ -42,15 +29,6 @@ about both kinds of releases, and download stable and edge product installers at
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.  
-  - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
-  - Separate internal ports used to proxy HTTP and HTTPS content.
-  - Display various component versions in About box.
-  - Avoid VM reboot when changing host proxy settings.
-  - Don't break HTTP traffic between containers by forwarding them via the external proxy. (See [docker/for-mac#981](https://github.com/docker/for-mac/issues/981))
-  - Filesharing settings are now stored in settings.json.
-  - Daemon restart button has been moved to settings / Reset Tab.
-  - Better VM state handling & error messsages in case of VM crashes.
-  - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)) 
 
 ### Docker Community Edition 17.12.0-ce-mac47 2018-01-12 (Stable)
 
