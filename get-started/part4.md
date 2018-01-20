@@ -333,7 +333,7 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 ### Deploy the app on the swarm manager
 
 Now that you have my `myvm1`, you can use its powers as a swarm manager to
-deploy your app by using the same `docker stack deploy` This command takes time
+deploy your app by using the same `docker stack deploy`. This command may take a few seconds
 to complete and the deployment takes some time to be available. Use the
 `docker service ps <service_name>` command on a swarm manager to verify that
 all services have been redeployed. 
