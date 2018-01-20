@@ -23,7 +23,7 @@ different storage backend allows you to:
 * Take advantage of other features that are critical to your organization
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
-[installing](../install/index.md) them on your system in order to familiarize
+[installing](../install/index.md) them on your system to familiarize
 yourself with them. However, for various reasons such as deployment purposes or
 continuous integration, it makes sense to think about your long term
 organization’s needs when selecting a storage backend. The Trusted Registry

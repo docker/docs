@@ -8,7 +8,7 @@ title: Administer and maintain a swarm of Docker Engines
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
 for managing the swarm and storing the swarm state. It is important to
-understand some key features of manager nodes in order to properly deploy and
+understand some key features of manager nodes to properly deploy and
 maintain the swarm.
 
 Refer to [How nodes work](/engine/swarm/how-swarm-mode-works/nodes.md)
@@ -35,8 +35,8 @@ operations are subject to the same constraints as state replication.
 ### Maintain the quorum of managers
 
 If the swarm loses the quorum of managers, the swarm cannot perform management
-tasks. If your swarm has multiple managers, always have more than two. In order
-to maintain quorum, a majority of managers must be available. An odd number of
+tasks. If your swarm has multiple managers, always have more than two.
+To maintain quorum, a majority of managers must be available. An odd number of
 managers is recommended, because the next even number does not make the quorum
 easier to keep. For instance, whether you have 3 or 4 managers, you can still
 only lose 1 manager and maintain the quorum. If you have 5 or 6 managers, you
@@ -245,7 +245,7 @@ swarm.
 
 You can back up the swarm using any manager. Use the following procedure.
 
-1.  If the swarm has auto-lock enabled, you need the unlock key in order
+1.  If the swarm has auto-lock enabled, you need the unlock key
     to restore the swarm from backup. Retrieve the unlock key if necessary and
     store it in a safe location. If you are unsure, read
     [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).

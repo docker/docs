@@ -70,7 +70,7 @@ but this property does not hold true for a registry cache cluster.
 To configure a Registry to run as a pull through cache, the addition of a
 `proxy` section is required to the config file.
 
-In order to access private images on the Docker Hub, a username and password can
+To access private images on the Docker Hub, a username and password can
 be supplied.
 
 ```yaml
@@ -85,7 +85,7 @@ proxy:
 > made available on your mirror. **You must secure your mirror** by
 > implementing authentication if you expect these resources to stay private!
 
-> **Warning**: In order for the scheduler to clean up old entries, `delete` must
+> **Warning**: For the scheduler to clean up old entries, `delete` must
 > be enabled in the registry configuration. See
 > [Registry Configuration](/registry/configuration.md) for more details.
 

@@ -27,15 +27,14 @@ The webhook events you can subscribe to are:
 
 - Security scanner update complete
 
-In order to subscribe to an event you need to be at least an admin of the
-particular repository (for repository events) or namespace
-(for namespace events). A global administrator can subscribe to any event.
+You need to be at least an admin of the repository or namespace in question to
+subscribe to an event for the repository or namespace. A global administrator can subscribe to any event.
 For example, a user must be an admin of repository "foo/bar" to subscribe to
 its tag push events.
 
 ## Subscribing to events
 
-In order to subscribe to events you must send an API query to
+To subscribe to events you must send an API query to
 `/api/v0/webhooks` with the following payload:
 
 ```

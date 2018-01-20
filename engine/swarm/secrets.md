@@ -35,7 +35,7 @@ the container and a set of credentials. Consider a scenario where you have
 separate development, test, and production environments for your application.
 Each of these environments can have different credentials, stored in the
 development, test, and production swarms with the same secret name. Your
-containers only need to know the name of the secret in order to function in all
+containers only need to know the name of the secret to function in all
 three environments.
 
 You can also use secrets to manage non-sensitive data, such as configuration
@@ -115,7 +115,7 @@ secrets. You cannot remove a secret that a running service is
 using. See [Rotate a secret](secrets.md#example-rotate-a-secret) for a way to
 remove a secret without disrupting running services.
 
-In order to update or roll back secrets more easily, consider adding a version
+To update or roll back secrets more easily, consider adding a version
 number or date to the secret name. This is made easier by the ability to control
 the mount point of the secret within a given container.
 

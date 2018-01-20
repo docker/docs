@@ -163,7 +163,7 @@ For each node that you want to install as a controller replica:
 
     In this example wwe run the join command interactively, so that
     the command prompts for the necessary configuration values. We also
-    pass the backup.tar file from the previous step in order to ensure
+    pass the backup.tar file from the previous step to ensure
     that the CAs are replicated to the new controller node.
 
     ```none

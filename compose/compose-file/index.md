@@ -793,10 +793,10 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
->**Tip:** See also, the section on [how to configure volumes
+>**Tip:** See the section on [how to configure volumes
 for services, swarms, and docker-stack.yml
-files](#volumes-for-services-swarms-and-stack-files).  Volumes _are_ supported
-but in order to work with swarms and services, they must be configured properly,
+files](#volumes-for-services-swarms-and-stack-files).  olumes _are_ supported
+but to work with swarms and services, they must be configured
 as named volumes or associated with services that are constrained to nodes with
 access to the requisite volumes.
 
@@ -1149,7 +1149,7 @@ Links also express dependency between services in the same way as
 > **Notes**
 >
 > * If you define both links and [networks](#networks), services with
-> links between them must share at least one network in common in order to
+> links between them must share at least one network in common to
 > communicate.
 >
 > *  This option is ignored when
@@ -1708,7 +1708,7 @@ volume present.
 As an example, the `docker-stack.yml` file for the
 [votingapp sample in Docker
 Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) defines a service called `db` that runs a `postgres` database. It is
-configured as a named volume in order to persist the data on the swarm,
+configured as a named volume to persist the data on the swarm,
 _and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```none

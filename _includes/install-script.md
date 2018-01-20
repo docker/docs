@@ -11,7 +11,7 @@ non-interactively. The source code for the scripts is in the
 environments**, and you should understand the potential risks before you use
 them:
 
-- The scripts require `root` or `sudo` privileges in order to run. Therefore,
+- The scripts require `root` or `sudo` privileges to run. Therefore,
   you should carefully examine and audit the scripts before running them.
 - The scripts attempt to detect your Linux distribution and version and
   configure your package management system for you. In addition, the scripts do

@@ -48,9 +48,9 @@ you can't edit it or see the secret data again.
 ![](../../images/manage-secrets-2.png){: .with-border}
 
 Assign a unique name to the secret and set its value. You can optionally define
-a permission label so that other users have permission to use this secret. Also,
-a service and secret must have the same permission label (or both
-must have no permission label at all) in order to be used together.
+a permission label to give other users permission to use this secret. Also,
+a service and secret must have the same permission label (or each
+must have no permission label at all) to use them together.
 
 In this example our secret is named `wordpress-password-v1`, to make it easier
 to track which version of the password our services are using.

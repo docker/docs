@@ -161,7 +161,7 @@ It is very common to have a compute host requirement of running multiple virtual
 
 ![Multi Tenant 802.1q Vlans](images/multi_tenant_8021q_vlans.png)
 
-Trunking 802.1q to a Linux host is notoriously painful for many in operations. It requires configuration file changes in order to be persistent through a reboot. If a bridge is involved, a physical NIC needs to be moved into the bridge and the bridge then gets the IP address. This has lead to many a stranded servers since the risk of cutting off access during that convoluted process is high.
+Trunking 802.1q to a Linux host is notoriously painful for many in operations. It requires configuration file changes to be persistent through a reboot. If a bridge is involved, a physical NIC needs to be moved into the bridge and the bridge then gets the IP address. This has lead to many a stranded servers since the risk of cutting off access during that convoluted process is high.
 
 Like all of the Docker network drivers, the overarching goal is to alleviate the operational pains of managing network resources. To that end, when a network receives a sub-interface as the parent that does not exist, the drivers create the VLAN tagged interfaces while creating the network.
 

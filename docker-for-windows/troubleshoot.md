@@ -206,7 +206,7 @@ Compose file documentation.
 
 ### Local security policies can block shared drives and cause login errors
 
-You need permissions to mount shared drives in order to use the Docker for
+You need permissions to mount shared drives to use the Docker for
 Windows [shared drives](/docker-for-windows/index.md#shared-drives) feature.
 
 If local policy prevents this, you get errors when you attempt to enable
@@ -442,7 +442,7 @@ Using `curl http://localhost`, or pointing your web browser at
 `http://localhost` does not display the `nginx` web page (as it would do with
 Linux containers).
 
-In order to reach a Windows container from the local host, you need to specify
+To reach a Windows container from the local host, you need to specify
 the IP address and port for the container that is running the service.
 
 You can get the container IP address by using [`docker inspect`](/engine/reference/commandline/inspect.md) with some
@@ -643,7 +643,7 @@ unsets existing `DOCKER` environment variables you have set. For other shells, u
 
 ### Make sure Docker is running for webserver examples
 
-For the `hello-world-nginx` example and others, Docker for Windows must be running in order to get to the webserver on `http://localhost/`. Make sure that the Docker whale is showing in the menu bar, and that you run the Docker commands in a shell that is connected to the Docker for Windows Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page not available" error when you go to `docker`.
+For the `hello-world-nginx` example and others, Docker for Windows must be running to get to the webserver on `http://localhost/`. Make sure that the Docker whale is showing in the menu bar, and that you run the Docker commands in a shell that is connected to the Docker for Windows Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page not available" error when you go to `docker`.
 
 ### How to solve `port already allocated` errors
 

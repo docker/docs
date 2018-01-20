@@ -255,7 +255,7 @@ write caching.
 These two examples come from performance use cases contributed by users and they
 are incredibly helpful in prioritizing aspects of file system performance to
 improve. We are developing statistical file system trace analysis tools
-to characterize slow-performing workloads more easily in order to decide what to
+to characterize slow-performing workloads more easily to decide what to
 work on next.
 
 Under development, we have:

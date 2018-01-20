@@ -167,7 +167,7 @@ FROM docker/trusttest:latest
 RUN echo
 ```
 
-In order to build a container successfully using this Dockerfile, one can do:
+To build a container successfully using this Dockerfile, one can do:
 
 ```
 $  docker build --disable-content-trust -t <username>/nottrusttest:latest .

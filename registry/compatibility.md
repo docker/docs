@@ -16,7 +16,7 @@ known as _Schema 1_.
 
 With the move toward multiple architecture images the distribution project
 introduced two new manifest types: Schema 2 manifests and manifest lists. Registry
-2.3 supports all three manifest types and in order to be compatible
+2.3 supports all three manifest types and to be compatible
 with older Docker engines sometimes performs an on-the-fly
 transformation of a manifest before serving the JSON in the response.
 

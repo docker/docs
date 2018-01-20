@@ -42,7 +42,7 @@ You can reuse data volumes from another service. To do this when creating a serv
 ![](images/volumes-from-wizard.png)
 
 All reused data volumes are mounted on the same paths as in the source service.
-Containers must be on the same host in order to share volumes, so the containers
+Containers must be on the same host to share volumes, so the containers
 of the new service deploy to the same nodes where the source service
 containers are deployed.
 

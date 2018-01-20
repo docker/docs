@@ -93,7 +93,7 @@ installation. In this case, a UCP cluster will be restored from the backup.
 * On a docker engine that is not participating in a swarm. In this case, a new
 swarm will be created and UCP will be restored on top.
 
-In order to restore an existing UCP installation from a backup, you will need to
+To restore an existing UCP installation from a backup, you will need to
 first uninstall UCP from the cluster by using the `uninstall-ucp` command.
 [Learn to uninstall a UCP cluster](install/uninstall.md).
 

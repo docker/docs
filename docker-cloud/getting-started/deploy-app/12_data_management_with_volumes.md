@@ -14,7 +14,7 @@ you need to define a volume.
 
 ## Data persistence
 
-In order to persist, data in Docker Cloud must be stored in a volume. The volume
+To persist, data in Docker Cloud must be stored in a volume. The volume
 can be defined on the image (for example in the Dockerfile), or specified when
 you create a new service in the Docker Cloud web UI. Learn more about volumes in
 Docker Cloud [here](/docker-cloud/apps/volumes.md).

@@ -15,7 +15,7 @@ skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 > hook. We have no choice here, this is how GitHub manages permissions.
 > We do guarantee nothing else is touched in your account.
 
-In order to set up an Automated Build of a repository on GitHub, you need to
+To set up an Automated Build of a repository on GitHub, you need to
 link [Docker Hub](https://hub.docker.com/account/authorized-services/) to your
 GitHub account. This allows the registry to see your GitHub repositories.
 

@@ -146,7 +146,7 @@ installed.
 > **Note**: version 1.13 or higher is required
 
 When you run `docker run hello-world`, look for a response like this:
-> **Note**: You may need to add your user to the `docker` group in order to call this command without sudo. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
+> **Note**: You may need to add your user to the `docker` group to call this command without sudo. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
 
 > **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](https://docs.docker.com/get-started/part2/) of the tutorial.
 

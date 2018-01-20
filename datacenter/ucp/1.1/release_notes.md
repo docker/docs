@@ -148,7 +148,7 @@ on a Docker Engine 1.12, UCP creates a "classic" Docker Swarm 1.2.3 cluster.
 * UI
   * The dashboard now notifies admin users when an update for UCP is available.
   * It's now possible to see which specific controllers need to have root CAs
-  inserted in order to achieve high-availability.
+  inserted to achieve high-availability.
   * It's now possible to filter images on the `Images` tab.
 
 **Bug Fixes**

@@ -84,7 +84,7 @@ Hub based repository.
 
 ## Pushing a repository image to Docker Hub
 
-In order to push a repository to the Docker Hub, you need to
+To push a repository to the Docker Hub, you need to
 name your local image using your Docker Hub username, and the
 repository name that you created in the previous step.
 You can add multiple images to a repository, by adding a specific `:<tag>` to
@@ -225,7 +225,7 @@ URLs are contacted after the callback has been validated.
 
 ### Validating a callback
 
-In order to validate a callback in a webhook chain, you need to
+To validate a callback in a webhook chain, you need to
 
 1. Retrieve the `callback_url` value in the request's JSON payload.
 1. Send a POST request to this URL containing a valid JSON body.

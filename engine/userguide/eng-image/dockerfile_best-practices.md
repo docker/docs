@@ -112,7 +112,7 @@ CMD ["--help"]
 
 ### Avoid installing unnecessary packages
 
-In order to reduce complexity, dependencies, file sizes, and build times, you
+To reduce complexity, dependencies, file sizes, and build times, you
 should avoid installing extra or unnecessary packages just because they
 might be “nice to have.” For example, you don’t need to include a text editor
 in a database image.
@@ -439,7 +439,7 @@ the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
 
 [Dockerfile reference for the ENV instruction](../../reference/builder.md#env)
 
-In order to make new software easier to run, you can use `ENV` to update the
+To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
 example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD [“nginx”]`
 just works.

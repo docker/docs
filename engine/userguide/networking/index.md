@@ -504,9 +504,9 @@ $ docker network create --driver weave mynet
 ```
 
 You can inspect the network, connect and disconnect containers from it, and
-remove it. A specific plugin may have specific requirements in order to be
-used. Check that plugin's documentation for specific information. For more
-information on writing plugins, see
+remove it. A specific plugin may have specific requirements. Check that plugin's
+documentation for specific information. For more information on writing plugins,
+see
 [Extending Docker](../../extend/legacy_plugins.md) and
 [Writing a network driver plugin](../../extend/plugins_network.md).
 

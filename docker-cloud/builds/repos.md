@@ -130,7 +130,7 @@ registry.
 
 5. Enter credentials for the registry.
 
-    > **Note**: These credentials must have **push** permission in order to push
+    > **Note**: These credentials must have **push** permission to push
     built images back to the repository. If you provide **read-only**
     credentials, you can run automated tests and deploy from the
     repository to your nodes, but you cannot push built images to

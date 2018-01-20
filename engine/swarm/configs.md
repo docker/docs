@@ -57,7 +57,7 @@ configs. You cannot remove a config that a running service is
 using. See [Rotate a config](configs.md#example-rotate-a-config) for a way to
 remove a config without disrupting running services.
 
-In order to update or roll back configs more easily, consider adding a version
+To update or roll back configs more easily, consider adding a version
 number or date to the config name. This is made easier by the ability to control
 the mount point of the config within a given container.
 

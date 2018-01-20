@@ -74,8 +74,7 @@ disable security features of your operating system, such as the need to disable
 For Docker EE and CS-Engine, the definitive resource for which storage drivers
 are supported is the
 [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
-In order to get commercial support from Docker, you must use a supported
-configuration.
+To get commercial support from Docker, you must use a supported configuration.
 
 ### Docker CE
 

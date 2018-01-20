@@ -63,7 +63,7 @@ limitation.
 ## Create an automated build
 
 Automated build repositories rely on the integration with your code repository
-in order to build. However, you can also push already-built images to these
+To build. However, you can also push already-built images to these
 repositories using the `docker push` command.
 
 1. Select **Create** > **Create Automated Build** from Docker Hub.

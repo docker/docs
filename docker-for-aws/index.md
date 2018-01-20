@@ -70,7 +70,7 @@ There are two ways to deploy Docker for AWS:
 We recommend allowing Docker for AWS to create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
 
 #### Create a new VPC
-This approach creates a new VPC, subnets, gateways, and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+This approach creates a new VPC, subnets, gateways, and everything else needed to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
 
 All you need to do is run the CloudFormation template, answer some questions, and you are good to go.
 
@@ -240,7 +240,7 @@ CloudWatch.
 ### System containers
 
 Each node has a few system containers running on it to help run your
-swarm cluster. In order for everything to run smoothly, keep those
+swarm cluster. For everything to run smoothly, keep those
 containers running, and don't make any changes. If you make any changes, Docker
 for AWS does not work correctly.
 

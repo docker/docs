@@ -11,7 +11,7 @@ accept connections on published ports for any service running in the swarm, even
 if there's no task running on the node. The routing mesh routes all
 incoming requests to published ports on available nodes to an active container.
 
-In order to use the ingress network in the swarm, you need to have the following
+To use the ingress network in the swarm, you need to have the following
 ports open between the swarm nodes before you enable swarm mode:
 
 * Port `7946` TCP/UDP for container network discovery.

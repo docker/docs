@@ -355,7 +355,7 @@ shell to talk to different Docker engines.
 
 ## Start local machines on startup
 
-In order to ensure that the Docker client is automatically configured at the
+To ensure that the Docker client is automatically configured at the
 start of each shell session, some users like to embed `eval $(docker-machine env
 default)` in their shell profiles (e.g., the `~/.bash_profile` file). However,
 this fails if the `default` machine is not running. If desired, you can

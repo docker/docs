@@ -8,7 +8,7 @@ title: Link Amazon Web Services to Docker Cloud
 You can create a role with AWS IAM (Identity and Access Management) so that
 Docker Cloud can provision and manage swarms on your behalf.
 
-> **Note**: Your AWS account must support EC2-VPC in order to deploy swarms, and
+> **Note**: Your AWS account must support EC2-VPC to deploy swarms, and
 you must also have an [SSH key in each AWS region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 you deploy swarms in.
 

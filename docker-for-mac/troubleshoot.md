@@ -304,7 +304,7 @@ ${!DOCKER_*}` unsets existing `DOCKER` environment variables you have set.
 
 <p></p>
 
-* For the `hello-world-nginx` example, Docker for Mac must be running in order to get to the webserver on `http://localhost/`. Make sure that the Docker whale
+* For the `hello-world-nginx` example, Docker for Mac must be running to get to the webserver on `http://localhost/`. Make sure that the Docker whale
 is showing in the menu bar, and that you run the Docker commands in a shell that
 is connected to the Docker for Mac Engine (not Engine from Toolbox). Otherwise,
 you might start the webserver container but get a "web page not available" error

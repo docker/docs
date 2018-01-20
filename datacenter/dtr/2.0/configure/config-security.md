@@ -13,7 +13,7 @@ This cert must be accompanied by its private key, entered below.
 * *SSL Private Key*: The hash from the private key associated with the provided
 SSL Certificate (as a standard x509 key pair).
 
-In order to run, the Trusted Registry requires encrypted communications through
+The Trusted Registry requires encrypted communications through
 HTTPS/SSL between (a) the Trusted Registry and your Docker Engine(s), and (b)
 between your web browser and the Trusted Registry admin server. There are a few
 options for setting this up:

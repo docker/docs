@@ -20,7 +20,7 @@ While there is a default storage backend, `filesystem`, the Trusted Registry off
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
  [installing](../install/index.md)
-them on your system in order to familiarize yourself with them.
+them on your system to familiarize yourself with them.
 However, for various reasons such as deployment purposes or continuous
 integration, it makes sense to think about your long term organization’s needs
 when selecting a storage backend. The Trusted Registry natively supports TLS and

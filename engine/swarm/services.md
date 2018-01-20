@@ -220,7 +220,7 @@ of the image.
 
 > **Note**: If [content trust](/engine/security/trust/content_trust.md) is
 > enabled, the client actually resolves the image's tag to a digest before
-> contacting the swarm manager, in order to verify that the image is signed.
+> contacting the swarm manager, to verify that the image is signed.
 > Thus, if you use content trust, the swarm manager receives the request
 > pre-resolved. In this case, if the client cannot resolve the image to a
 > digest, the request fails.
@@ -396,7 +396,7 @@ option to the `--publish` flag.
 >
 > In addition, if you use `mode=host` and you do not use the
 > `--mode=global` flag on `docker service create`, it difficult to know
-> which nodes are running the service in order to route work to them.
+> which nodes are running the service to route work to them.
 
 ##### Example: Run a `nginx` web server service on every swarm node
 

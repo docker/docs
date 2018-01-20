@@ -382,7 +382,7 @@ the VM but doesn't give you immediate access to files on your local host.
 >
 > * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
 to copy files across machines, but Windows users need a Linux terminal emulator
-like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} in order for this to work.
+like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} for this to work.
 >
 > This tutorial demos both `docker-machine ssh` and
 `docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
@@ -411,7 +411,7 @@ look:
 
 > Having connectivity trouble?
 >
-> Keep in mind that in order to use the ingress network in the swarm,
+> Keep in mind that to use the ingress network in the swarm,
 > you need to have the following ports open between the swarm nodes
 > before you enable swarm mode:
 >

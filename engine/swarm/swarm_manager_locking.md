@@ -111,7 +111,7 @@ you locked the swarm or rotated the key, and the swarm unlocks.
 Consider a situation where your swarm is running as expected, then a manager
 node becomes unavailable. You troubleshoot the problem and bring the physical
 node back online, but you need to unlock the manager by providing the unlock
-key in order to read the encrypted credentials and Raft logs.
+key to read the encrypted credentials and Raft logs.
 
 If the key has not been rotated since the node left the swarm, and you have a
 quorum of functional manager nodes in the swarm, you can view the current unlock

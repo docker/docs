@@ -78,7 +78,7 @@ rm ./app
 ```
 
 When you run the `build.sh` script, it needs to build the first image, create
-a container from it in order to copy the artifact out, then build the second
+a container from it to copy the artifact out, then build the second
 image. Both images take up room on your system and you still have the `app`
 artifact on your local disk as well.
 
