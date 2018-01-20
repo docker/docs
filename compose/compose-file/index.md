@@ -881,7 +881,17 @@ Mount a temporary file system inside the container. Can be a single value or a l
 
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> with a (version 3-3.5) Compose file.
+
+> [Version 3.6 file format](compose-versioning.md#version-3) and up.
+
+Mount a temporary file system inside the container. Size parameter specifies the size
+of the tmpfs mount in bytes. Unlimited by default.
+
+     - type: tmpfs
+         target: /app
+         tmpfs:
+           size: 1000
 
 ### entrypoint
 
