@@ -1669,6 +1669,8 @@ manuals:
           title: Isolate volumes
         - path: /ee/ucp/authorization/isolate-nodes/
           title: Isolate nodes
+        - path: /ee/ucp/authorization/migrate-kubernetes-roles/
+          title: Migrate Kubernetes roles to Docker EE authorization
         - path: /ee/ucp/authorization/ee-standard/
           title: Docker EE Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
