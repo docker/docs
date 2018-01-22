@@ -100,6 +100,14 @@ interacts with Kubernetes to fail.
 supported with v3 Compose files and later. A bug means that pre-v3 files are not
 rejected and deployment silently fails.
 * In-product interactive Kubernetes docs are currently broken.
+* Backup and restore of Kubernetes-related data is currently likely to fail or
+be incomplete because of etcd configuration problems.
+* Kubernetes features of Docker EE 2.0 do not currently work on Microsoft Azure
+because of Kubernetes overlay networking configuration issues.
+* Deploying UCP on a port other than 443 might result in errors in the UCP web
+UI. Either use the default port 443, or after deploying UCP remove the
+`ucp-kube-apiserver` container and wait for the UCP reconciler to start it
+again with the correct settings.
 
 ## Version 3.0 Beta1
 
