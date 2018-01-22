@@ -1766,8 +1766,6 @@ manuals:
       nosync: true
     - path: /ee/ucp/release-notes/
       title: Release notes
-    - path: /ee/ucp/get-support/
-      title: Get support
     - sectiontitle: Previous versions
       section:
       - sectiontitle: Universal Control Plane 2.2
@@ -2442,8 +2440,6 @@ manuals:
       nosync: true
     - path: /ee/dtr/release-notes/
       title: Release notes
-    - path: /ee/dtr/support/
-      title: Get support
     - sectiontitle: Previous versions
       section:
       - sectiontitle: Docker Trusted Registry 2.4
@@ -3064,6 +3060,8 @@ manuals:
             title: API v1.3.3
         - path: /datacenter/dtr/2.0/support/
           title: Get support
+  - title: Get support
+    path: /ee/get-support/
 - sectiontitle: Docker Cloud
   section:
   - sectiontitle: Migration
