@@ -32,7 +32,8 @@ script:
     [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
     [wait-for](https://github.com/Eficode/wait-for). These are small
     wrapper scripts which you can include in your application's image and will
-    poll a given host and port until it's accepting TCP connections.
+    poll a given host and port until it's accepting TCP connections. [Using a `wait` service](https://medium.com/@edgar/how-to-wait-for-a-container-to-be-ready-before-starting-another-container-using-docker-compose-92bab2fc1633)
+    is similar.
 
     For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
 
@@ -76,7 +77,6 @@ script:
     ```none
     command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
     ```
-
 
 ## Compose documentation
 
