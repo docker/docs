@@ -4,7 +4,8 @@ keywords: aws, amazon, iaas, release, edge, stable
 title: Docker for AWS template archive
 ---
 
-CloudFormation templates for past releases. If starting out, please use the latest version.
+CloudFormation templates for past releases. If you are just starting out, use
+the latest version.
 
 ## CE (Stable)
 

@@ -33,7 +33,7 @@ available on your path
 	Notary server used for images in Docker Hub.
 
 For more detailed information about how to use Notary outside of the default
-Docker Content Trust use cases, please refer to the
+Docker Content Trust use cases, refer to the
 [Notary CLI documentation](/notary/getting_started.md).
 
 When publishing and listing delegation changes using the Notary client,

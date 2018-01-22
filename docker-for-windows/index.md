@@ -20,7 +20,7 @@ Docker is a full development platform for creating containerized apps, and
 Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
-> **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
+> **Got Docker for Windows?** If you have not yet installed Docker for Windows, see [Install Docker for Windows](install.md) for an explanation of stable
 and edge channels, system requirements, and download/install information.
 
 >**Looking for system requirements?** Check out
@@ -403,7 +403,7 @@ volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
 (named volume) or [data
 container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
 There are a number of issues with using host-mounted volumes and network paths
-for database files. Please see the troubleshooting topic on [Volume mounts from
+for database files. see the troubleshooting topic on [Volume mounts from
 host paths use a nobrl option to override database
 locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
@@ -464,7 +464,7 @@ Cancel.
 
 * **Memory** - Change the amount of memory the Docker for Windows Linux VM uses.
 
-Please note, updating these settings requires a reconfiguration and reboot of the Linux VM. This takes a few seconds.
+After you change these settings, the Linux VM restarts. This takes a few seconds.
 
 ### Network
 
@@ -641,9 +641,8 @@ If you are interested in working with Windows containers, here are some guides t
   [forked here to use containers](https://github.com/friism/MusicStore), is a
   good example of a multi-container application.
 
-  > **Disclaimer:** This lab is still in work, and is based off of the blog, but
-  > you can test and leverage the example walkthroughs now, if you want to start
-  > experimenting. Please check back as the lab evolves.
+  > **Disclaimer:** This lab is still under development, and is adapted from a
+  > blog post. Check back as the lab evolves.
 
 * This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
 [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)

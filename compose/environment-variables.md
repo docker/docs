@@ -120,4 +120,5 @@ Several environment variables are available for you to configure the Docker Comp
 
 ## Environment variables created by links
 
-When using the ['links' option](compose-file.md#links) in a [v1 Compose file](compose-file.md#version-1), environment variables are created for each link. They are documented in the [Link environment variables reference](link-env-deprecated.md). Please note, however, that these variables are deprecated - you should just use the link alias as a hostname instead.
+When using the ['links' option](compose-file.md#links) in a [v1 Compose file](compose-file.md#version-1), environment variables are created for each link. They are documented in
+the [Link environment variables reference](link-env-deprecated.md). However, these variables are deprecated. Use the link alias as a hostname instead.

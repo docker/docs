@@ -45,7 +45,7 @@ backup file under /config/backup.tar, and run the restore command with the
 
 Notes:
 
-  * Please run `uninstall-ucp` before attempting the restore operation on an
+  * Run `uninstall-ucp` before attempting the restore operation on an
     existing UCP cluster.
 
   * If your swarm-mode cluster has lost quorum and the original set of managers

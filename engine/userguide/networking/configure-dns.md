@@ -11,7 +11,7 @@ to `default bridge` network.
 
 > **Note**: To maintain backward compatibility, the DNS configuration
 > in `default bridge` network is retained with no behavioral change.
-> Please refer to the [DNS in default bridge network](default_network/configure-dns.md)
+> Refer to the [DNS in default bridge network](default_network/configure-dns.md)
 > for more information on DNS configuration in the `default bridge` network.
 
 As of Docker 1.10, the docker daemon implements an embedded DNS server which

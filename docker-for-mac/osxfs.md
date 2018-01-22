@@ -73,7 +73,8 @@ VM, an attempt to bind mount it fails rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
 
->Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
+> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 ### Ownership
 
@@ -155,7 +156,8 @@ between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
->Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
+> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 With regard to reported performance issues ([GitHub issue 77: File access in
 mounted volumes extremely slow](https://github.com/docker/for-mac/issues/77)),
@@ -287,7 +289,7 @@ use case and once it is done, we must then determine what regular performance is
 like and what kind of slow-down your use case is experiencing. In some cases, it
 is not obvious what operation is even slow in your specific development
 workflow. The additional set-up to reproduce the problem means we have less time
-to fix bugs, develop analysis tools, or improve performance. So, please include
+to fix bugs, develop analysis tools, or improve performance. So, include
 simple, immediate performance issue reproduction test cases. The [rake
 reproduction
 case](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/103)
@@ -338,5 +340,5 @@ engineering work on custom low-level components.
 
 We appreciate your understanding as we continue development of the product and
 work on all dimensions of performance. We want to continue to work with the
-community on this, so please continue to report issues as you find them. We look
+community on this, so continue to report issues as you find them. We look
 forward to collaborating with you on ideas and on the source code itself.

@@ -451,7 +451,7 @@ docker stack rm getstartedlab
 > At some point later, you can remove this swarm if you want to with
 > `docker-machine ssh myvm2 "docker swarm leave"` on the worker
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
-> manager, but _you need this swarm for part 5, so please keep it
+> manager, but _you need this swarm for part 5, so keep it
 > around for now_.
 
 ### Unsetting docker-machine shell variable settings

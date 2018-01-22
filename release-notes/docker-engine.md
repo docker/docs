@@ -779,7 +779,7 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 
 **IMPORTANT**: With Docker 1.12, a Linux docker installation now has two
 additional binaries; `dockerd`, and `docker-proxy`. If you have scripts for
-installing docker, please make sure to update them accordingly.
+installing docker, make sure to update them accordingly.
 
 ### Builder
 
@@ -969,7 +969,7 @@ installing docker, please make sure to update them accordingly.
 
 ## 1.11.0 (2016-04-13)
 
-**IMPORTANT**: With Docker 1.11, a Linux docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on docker being a single static binaries, please make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows docker installation remains a single binary, `docker.exe`.
+**IMPORTANT**: With Docker 1.11, a Linux docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on docker being a single static binaries, make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows docker installation remains a single binary, `docker.exe`.
 
 ### Builder
 
@@ -1320,7 +1320,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 + Add support to set the mount propagation mode for a volume [#17034](https://github.com/docker/docker/pull/17034)
 * Add `ls` and `inspect` endpoints to volume plugin API [#16534](https://github.com/docker/docker/pull/16534)
   Existing plugins need to make use of these new APIs to satisfy users' expectation
-  For that, please use the new MIME type `application/vnd.docker.plugins.v1.2+json` [#19549](https://github.com/docker/docker/pull/19549)
+  For that, use the new MIME type `application/vnd.docker.plugins.v1.2+json` [#19549](https://github.com/docker/docker/pull/19549)
 - Fix data not being copied to named volumes [#19175](https://github.com/docker/docker/pull/19175)
 - Fix issues preventing volume drivers from being containerized [#19500](https://github.com/docker/docker/pull/19500)
 - Fix `docker volumes ls --dangling=false` to now show all non-dangling volumes [#19671](https://github.com/docker/docker/pull/19671)

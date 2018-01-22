@@ -197,7 +197,7 @@ In this section, you set up the database connection for Django.
     >
     >       ALLOWED_HOSTS = ['*']
     >
-    > Please note this value is **not** safe for production usage.  Refer to the
+    > This value is **not** safe for production usage.  Refer to the
      [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
 
 5.  List running containers.

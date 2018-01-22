@@ -43,7 +43,7 @@ The above would configure the registry with an endpoint to send events to
 5 failures happen consecutively, the registry backs off for 1 second before
 trying again.
 
-For details on the fields, please see the [configuration documentation](configuration.md#notifications).
+For details on the fields, see the [configuration documentation](configuration.md#notifications).
 
 A properly configured endpoint should lead to a log message from the registry
 upon startup:
@@ -338,6 +338,6 @@ The notification system is designed around a series of interchangeable _sinks_
 which can be wired up to achieve interesting behavior. If this system doesn't
 provide acceptable guarantees, adding a transactional `Sink` to the registry
 is a possibility, although it may have an effect on request service time.
-Please see the
+See the
 [godoc](http://godoc.org/github.com/docker/distribution/notifications#Sink)
 for more information.

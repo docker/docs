@@ -101,7 +101,7 @@ configurations. For example, if you've bound the container port to the
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Please refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
+> Refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one

@@ -115,7 +115,7 @@ TLS results in the following message:
 ```none
 FATA[0000] Error response from daemon: v1 ping attempt failed with error:
 Get https://myregistrydomain.com:5000/v1/_ping: tls: oversized record received with length 20527.
-If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add
+If this private registry supports only HTTP or HTTPS with an unknown CA certificate, add
 `--insecure-registry myregistrydomain.com:5000` to the daemon's arguments.
 In the case of HTTPS, if you have access to the registry's CA certificate, no need for the flag;
 simply place the CA certificate at /etc/docker/certs.d/myregistrydomain.com:5000/ca.crt

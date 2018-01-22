@@ -230,7 +230,7 @@ Run a container with `docker run` to verify your set up.
             <p>If you see this page, the nginx web server is successfully installed and
             working. Further configuration is required.</p>
 
-            <p>For online documentation and support please refer to
+            <p>For online documentation and support, refer to
             <a href="http://nginx.org/">nginx.org</a>.<br/>
             Commercial support is available at
             <a href="http://nginx.com/">nginx.com</a>.</p>
@@ -239,7 +239,7 @@ Run a container with `docker run` to verify your set up.
             </body>
             </html>
 
-  You can create and manage as many local VMs running Docker as you please; just run `docker-machine create` again. All created machines appearsin the output of `docker-machine ls`.
+  You can create and manage as many local VMs running Docker as your local resources permit; just run `docker-machine create` again. All created machines appearsin the output of `docker-machine ls`.
 
 ## Start and stop machines
 

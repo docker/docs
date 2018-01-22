@@ -6,7 +6,7 @@ redirect_from:
 title: Docker for Mac vs. Docker Toolbox
 ---
 
-If you already have an installation of Docker Toolbox, please read these topics
+If you already have an installation of Docker Toolbox, read these topics
 first to learn how Docker for Mac and Docker Toolbox differ, and how they can
 coexist.
 

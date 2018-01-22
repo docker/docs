@@ -138,7 +138,7 @@ You can learn about the project's security policy
 
 ### Why do I need to sign my commits to Docker with the DCO?
 
-Please read [our blog post](
+Read [our blog post](
 http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
 
 ### When building an image, should I prefer system libraries or bundled ones?

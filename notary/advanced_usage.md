@@ -11,7 +11,7 @@ their own Notary service. Make sure you have first read and understood how to
 ## An important note about the examples
 
 This document's command examples omit the `-s` and `-d` flags. If you do not
-know what these options do, please read the [Getting
+know what these options do, read the [Getting
 Started](getting_started.md) docs or run `notary --help` before continuing. Once
 you understand what these flags do, you must provide your own values for these
 options while following this document. You can also configure these options, see
@@ -26,8 +26,8 @@ $ notary init example.com/collection
 
 No root keys found. Generating a new root key...
 You are about to create a new root signing key passphrase. This passphrase
-is used to protect the most sensitive key in your signing system. Please
-choose a long, complex passphrase and be careful to keep the password and the
+is used to protect the most sensitive key in your signing system.
+Choose a long, complex passphrase and be careful to keep the password and the
 key file itself secure and backed up. It is highly recommended that you use a
 password manager to generate the passphrase and keep it safe. There is no
 way to recover this key. You can find the key in your config directory.
@@ -241,8 +241,8 @@ delegation as the canonical source of a trusted image tag, if it exists.
 
 When running `docker pull` with Docker Content Trust on Docker Engine 1.10,
 Docker attempts to search the `targets/releases` role for the signed image tag,
-and falls back to the default `targets` role if it does not exist. Please note
-that when searching the default `targets` role, Docker 1.10 may pick up on other
+and falls back to the default `targets` role if it does not exist. When
+searching the default `targets` role, Docker 1.10 may pick up on other
 non-`targets/releases` delegation roles' signed images if they exist for this tag.
 In Docker 1.11, this behavior is changed such that all `docker pull` commands with
 Docker Content Trust must pull tags only signed by the `targets/releases` delegation role

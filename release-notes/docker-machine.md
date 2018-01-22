@@ -456,7 +456,7 @@ This is a patch release to fix a regression with STDOUT/STDERR behavior (#2587).
 
 ## 0.5.3 (2015-12-14)
 
-**Please note**: With this release Machine will be reverting back to distribution in a single binary, which is more efficient on bandwidth and hard disk space. All the core driver plugins are now included in the main binary. You will want to delete the old driver binaries that you might have in your path.
+With this release Machine will be reverting back to distribution in a single binary, which is more efficient on bandwidth and hard disk space. All the core driver plugins are now included in the main binary. You will want to delete the old driver binaries that you might have in your path.
 
 e.g.:
 
@@ -464,7 +464,7 @@ e.g.:
 $ rm /usr/local/bin/docker-machine-driver-{amazonec2,azure,digitalocean,exoscale,generic,google,hyperv,none,openstack,rackspace,softlayer,virtualbox,vmwarefusion,vmwarevcloudair,vmwarevsphere}
 ```
 
-Non-core driver plugins should still work as intended (in externally distributed binaries of the form `docker-machine-driver-name`.  Please report any issues you encounter them with externally loaded plugins.
+Non-core driver plugins should still work as intended (in externally distributed binaries of the form `docker-machine-driver-name`.  Report any issues you encounter them with externally loaded plugins.
 
 ### General
 

@@ -129,7 +129,7 @@ Docker for AWS determines the correct amount of Availability Zone's to use based
 
 ## What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
-For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
+For more information about adding an SSH key pair to your account, refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
 ## Where are my container logs?
 
@@ -156,7 +156,7 @@ Benchmark of 3 Managers (m4.large) + 200 workers (t2.medium):
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
-In AWS, if your stack is misbehaving, please run the following diagnostic tool from one of the managers - this collects your docker logs and send them to Docker:
+In AWS, if your stack is misbehaving, run the following diagnostic tool from one of the managers - this collects your docker logs and send them to Docker:
 
 ```bash
 $ docker-diagnose

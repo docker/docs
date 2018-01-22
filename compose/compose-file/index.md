@@ -703,7 +703,7 @@ services or containers in a swarm.
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource
 options](compose-file-v2.md#cpu-and-other-resources).
-If you have further questions, please refer to the discussion on the GitHub
+If you have further questions, refer to the discussion on the GitHub
 issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
 {: .important}
 

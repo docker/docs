@@ -150,7 +150,7 @@ Yes. News, updates, and known issues are recorded by version on the [Release not
 
 Contact us through email at docker-for-ibmcloud-beta@docker.com.
 
-If your stack is misbehaving, please run the following diagnostic tool from one of the managers to collect your docker logs and send them to Docker:
+If your stack is misbehaving, run the following diagnostic tool from one of the managers to collect your docker logs and send them to Docker:
 
 ```bash
 $ docker-diagnose

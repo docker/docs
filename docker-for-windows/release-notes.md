@@ -9,7 +9,7 @@ title: Docker for Windows Release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see
+For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _edge_ releases are listed below. (Starting with
@@ -374,7 +374,7 @@ We did not distribute a 1.12.4 stable release
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1182,7 +1182,7 @@ dialogs](/docker-for-windows/index.md#about-the-docker-windows-containers-specif
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1218,7 +1218,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1257,7 +1257,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannotinstall this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1295,7 +1295,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1328,7 +1328,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1354,7 +1354,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1381,7 +1381,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 

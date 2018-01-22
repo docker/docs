@@ -330,15 +330,14 @@ servers. The aforementioned releases include a workaround for this because
 Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DNS addresses" in
 [Workarounds for common problems](troubleshoot.md#workarounds-for-common-problems).
 
-<p></p>
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac (`ValueError: Extra Data`). We've identified this is likely related to data and/or events being passed all at once rather than one by one, so sometimes the data comes back as 2+ objects concatenated and causes an error.
 
-<p></p>
 
-* Force-ejecting the `.dmg` after running `Docker.app` from it results in an unresponsive whale in the menu bar, Docker tasks "not responding" in activity monitor, helper processes running, and supporting technologies consuming large percentages of CPU. Please reboot, and then re-start Docker for Mac. If needed,`force quit` any Docker related applications as part of the reboot.
-
-<p></p>
+* Force-ejecting the `.dmg` after running `Docker.app` from it can cause the
+  whale icon to become unresponsive, Docker tasks to show as not responding in
+  the Activity Monitor, and for some processes to consume a large amount of CPU
+  resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in
 ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This is related to a set of issues with Docker
@@ -391,10 +390,8 @@ directories in Docker volumes, perform temporary file system operations outside
 of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
 synchronize between container directories and bind-mounted directories. We are
 actively working on `osxfs` performance using a number of different techniques.
-To learn more, please see the topic on [Performance issues, solutions, and
+To learn more, see the topic on [Performance issues, solutions, and
 roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
-
-<p></p>
 
 * If your system does not have access to an NTP server, then after a hibernate the time seen by Docker for Mac may be considerably out of sync with the host. Furthermore, the time may slowly drift out of sync during use. To manually reset the time after hibernation, run:
 

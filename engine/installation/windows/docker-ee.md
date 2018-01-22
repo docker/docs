@@ -33,7 +33,7 @@ on Windows Server 2016 and you have a
 >Windows Server 1709
 >
 >Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
->To use UCP, for now please use the current LTSB Windows release and not 1709.
+>To use UCP, for now, use the current LTSB Windows release and not 1709.
 
 
 Docker EE for Windows requires Windows Server 2016 or later. See
@@ -142,7 +142,7 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 ## Update Docker EE
 
 > **Check that you have the Docker module**
-> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, please remove this module and use Docker's module:
+> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, remove this module and use Docker's module:
 >
 > ```none
 > Uninstall-Module DockerMsftProvider -Force

@@ -133,7 +133,7 @@ but rather sets permissions to a default value of
 (`read`, `write`, `execute` permissions for `user`, `read` and `execute`
 for `group`) which is not configurable.
 
-For workarounds and to learn more, please see [Permissions errors on data
+For workarounds and to learn more, see [Permissions errors on data
 directories for shared
 volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 

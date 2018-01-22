@@ -60,7 +60,7 @@ $ sudo service docker restart
 
 $ docker service ls
 
-Error response from daemon: Swarm is encrypted and needs to be unlocked before it can be used. Please use "docker swarm unlock" to unlock it.
+Error response from daemon: Swarm is encrypted and needs to be unlocked before it can be used. Use "docker swarm unlock" to unlock it.
 ```
 
 ## Enable or disable autolock on an existing swarm

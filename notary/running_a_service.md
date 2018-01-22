@@ -40,7 +40,7 @@ For example, to connect using OpenSSL:
 $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_ssl3 -no_ssl2
 ```
 
-To connect using the Notary Client CLI, please see [Getting Started](getting_started.md)
+To connect using the Notary Client CLI, see [Getting Started](getting_started.md)
 documentation. The version of Notary server and signer
 should be greater than or equal to that of the Notary Client CLI to ensure feature compatibility,
 i.e. if you are using Notary Client CLI 0.2, ensure you are using a server and signer tagged with

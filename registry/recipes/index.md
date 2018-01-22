@@ -9,9 +9,7 @@ These recipes are not useful for most standard set-ups.
 
 ## Requirements
 
-You should have followed entirely the basic [deployment guide](../deploying.md).
-
-If you have not, please take the time to do so.
+Before following these steps, work through the [deployment guide](../deploying.md).
 
 At this point, it's assumed that:
 

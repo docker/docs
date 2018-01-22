@@ -9,7 +9,7 @@ title: Docker for Mac release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see
+For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _edge_ releases are listed below. (Starting with
@@ -25,7 +25,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
   - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
   - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
-  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386)
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.  
@@ -60,7 +60,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Filesharing settings are now stored in settings.json.
   - Daemon restart button has been moved to settings / Reset Tab.
   - Better VM state handling & error messsages in case of VM crashes.
-  - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)) 
+  - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201))
 
 ### Docker Community Edition 17.09.1-ce-mac42 2017-12-11 (Stable)
 
@@ -516,19 +516,19 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
 
- 
+
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
- 
+
 * New
   - The directory holding the disk images was renamed (from `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux` to ~/Library/Containers/com.docker.docker/Data/vms/0`).
- 
+
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
   - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
   - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
-  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386)
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
@@ -536,7 +536,7 @@ events or unexpected unmounts.
   - Separate internal ports used to proxy HTTP and HTTPS content.
   - If kubectl was already installed before Docker For Mac, restore the existing kubectl when sitching Kubernetes off in Docker for Mac.  
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
- 
+
 
 ### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
 
@@ -558,7 +558,7 @@ events or unexpected unmounts.
 
 * Bug fixes and minor changes
   - Display actual size used by the VM disk, especially useful for disks using raw format. See [docker/for-mac#2297](https://github.com/docker/for-mac/issues/2297).
-  - Fix more specific edge cases in filesharing settings migration. 
+  - Fix more specific edge cases in filesharing settings migration.
 
 ### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
 
@@ -578,7 +578,7 @@ events or unexpected unmounts.
   - VM disk size can be changed in settings. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037)).
 
 * Bug fixes and minor changes
-  - Avoid VM reboot when changing host proxy settings. 
+  - Avoid VM reboot when changing host proxy settings.
   - Don't break HTTP traffic between containers by forwarding them via the external proxy [docker/for-mac#981](https://github.com/docker/for-mac/issues/981)
   - Filesharing settings are now stored in settings.json
   - Daemon restart button has been moved to settings / Reset Tab

@@ -98,7 +98,7 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 - SSH key in AWS in the region where you want to deploy (required to access the completed Docker install)
 - AWS account that support EC2-VPC (See the [FAQ for details about EC2-Classic](faqs.md))
 
-For more information about adding an SSH key pair to your account, please refer
+For more information about adding an SSH key pair to your account, refer
 to the [Amazon EC2 Key Pairs
 docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 

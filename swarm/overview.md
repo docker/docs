@@ -68,10 +68,10 @@ Docker Swarm is still in its infancy and under active development. If you need
 help, would like to contribute, or simply want to talk about the project with
 like-minded individuals, we have a number of open channels for communication.
 
-* To report bugs or file feature requests: please use the [issue tracker on Github](https://github.com/docker/swarm/issues).
+* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/swarm/issues).
 
-* To talk about the project with people in real time: please join the `#docker-swarm` channel on IRC.
+* To talk about the project with people in real time, join the `#docker-swarm` channel on IRC.
 
-* To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/swarm/pulls).
+* To contribute code or documentation changes, submit a [pull request on Github](https://github.com/docker/swarm/pulls).
 
-For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).
+For more information and resources, visit the [Getting Help project page](/opensource/get-help/).

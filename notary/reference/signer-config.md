@@ -13,7 +13,7 @@ Notary signer [requires environment variables](signer-config.md#environment-vari
 to encrypt private keys at rest. It also requires a configuration file, the path to which is
 specified on the command line using the `-config` flag.
 
-Here is a full signer configuration file example; please click on the top level JSON keys to
+Here is a full signer configuration file example; click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
 ```json
@@ -157,7 +157,7 @@ Example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include <code>parseTime=true</code> as part of the the DSN)</td>
+			(include <code>parseTime=true</code> as part of the the DSN)</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>default_alias</code></td>
@@ -167,7 +167,7 @@ Example:
 			private keys are encrypted using this password, which
 			must also be provided as the environment variable
 			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.
-			Please see the <a href="signer-config.md#environment-variables-required-if-using-mysql">environment variable</a>
+			See the <a href="signer-config.md#environment-variables-required-if-using-mysql">environment variable</a>
 			section for more information.</td>
 	</tr>
 </table>

@@ -89,5 +89,5 @@ command line flag / environment variable like so:
 $ docker-machine --native-ssh ssh dev
 ```
 
-There are some variations in behavior between the two methods, so please report
+There are some variations in behavior between the two methods, so report
 any issues or inconsistencies if you come across them.

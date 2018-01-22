@@ -15,7 +15,7 @@ line.
 
 Notary server also allows you to [increase/decrease](server-config.md#hot-logging-level-reload) the logging level without having to restart.
 
-Here is a full server configuration file example; please click on the top level JSON keys to
+Here is a full server configuration file example; click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
 ```json
@@ -236,7 +236,7 @@ DB storage example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include <code>parseTime=true</code> as part of the DSN)</td>
+			( include <code>parseTime=true</code> as part of the DSN)</td>
 	</tr>
 </table>
 

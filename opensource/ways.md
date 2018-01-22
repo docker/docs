@@ -66,7 +66,7 @@ We can support the co-organizers of the Docker Meetup Groups based on their spec
 ### Want to host a Docker Meetup?
 
 We are always looking for new office space to host Docker Meetups. If your
-company is willing to host a Docker Meetup, please contact us by email at
+company is willing to host a Docker Meetup, contact us by email at
 meetup@docker.com. Previous Docker Meetups have been hosted by companies such
 as Rackspace, Twitter, MongoDB, BrightCove, DigitalOcean, Viadeo and Edmodo.
 #### How many attendees?

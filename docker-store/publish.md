@@ -51,7 +51,7 @@ Commercial content and other supported images may qualify for the Docker
 Certified Container or Plugins quality mark. The testing for this program goes
 beyond the vulnerability scan and also evaluates container images for Docker
 best practices developed over years of experience. Collaborative support
-capability between Docker and the publisher is also established. Please refer
+capability between Docker and the publisher is also established. Refer
 to the diagram below for a high-level summary:
 
 ![publishing workflow](images/publish-diagram.png)
@@ -59,7 +59,7 @@ to the diagram below for a high-level summary:
 ## Create great content
 
 Create your content, and follow our best practices to Dockerize it. Keep your
-images small, your layers few, and your components secure. Please refer to the
+images small, your layers few, and your components secure. Refer to the
 links and guidelines listed below to build and deliver great content:
 
 * [Best practices for writing Dockerfiles](/engine/userguide/eng-image/dockerfile_best-practices/)

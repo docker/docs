@@ -88,14 +88,14 @@ Docker Machine is still in its infancy and under active development. If you need
 help, would like to contribute, or simply want to talk about the project with
 like-minded individuals, we have a number of open channels for communication.
 
-- To report bugs or file feature requests: please use the
+- To report bugs or file feature requests, use the
   [issue tracker on Github](https://github.com/docker/machine/issues).
-- To talk about the project with people in real time: please join the
+- To talk about the project with people in real time,  join the
   `#docker-machine` channel on IRC.
-- To contribute code or documentation changes: please
+- To contribute code or documentation changes,
   [submit a pull request on Github](https://github.com/docker/machine/pulls).
 
-For more information and resources, please visit
+For more information and resources, visit
 [our help page](/opensource/get-help.md).
 
 ## Where to go next

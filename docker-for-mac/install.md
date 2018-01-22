@@ -18,7 +18,7 @@ the command line, preferences, and tools.
 
 ## Download Docker for Mac
 
-If you have not already done so, please install Docker for Mac. You can download
+If you have not already done so, install Docker for Mac. You can download
 installers from the Stable or beta channel.
 
 Both Stable and Edge installers come with <a
@@ -70,7 +70,7 @@ For more about Stable and Edge channels, see the
 </table>
 
 * Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or newer Mac, with Intel's  hardware support for MMU virtualization.
-The app runs on 10.10.3 Yosemite, but with limited support. Please see [What
+The app runs on 10.10.3 Yosemite, but with limited support. See [What
 to know before you install](#what-to-know-before-you-install) for a full
 explanation and list of prerequisites.
 

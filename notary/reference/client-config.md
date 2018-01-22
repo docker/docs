@@ -13,11 +13,11 @@ but the path to a different configuration file can be specified using the
 
 ## Overview of the file
 
-In addition to the configuration file format, please see the optional password
+In addition to the configuration file format, see the optional password
 [environment variables](client-config.md#environment-variables-optional) that the Notary client
 can take for ease of use.
 
-Here is a full client configuration file example; please click on the top level
+Here is a full client configuration file example; click on the top level
 JSON keys to learn more about the configuration section corresponding to that key:
 
 

@@ -548,7 +548,7 @@ We are currently investigating this issue.
 #### Networking issues on pre Beta 10 versions
 Docker for Windows Beta 10 and later fixed a number of issues around the
 networking setup. If you still experience networking issue, this may be related
-to previous Docker for Windows installations. In this case, please quit Docker
+to previous Docker for Windows installations. In this case, quit Docker
 for Windows and perform the following steps:
 
 ##### 1. Remove multiple `DockerNAT` VMswitches
