@@ -7,12 +7,15 @@ keywords: support, help
 Your Docker Enterprise Edition subscription gives you access to prioritized
 support. The service levels depend on your subscription.
 
-If you need help, you can file a ticket via:
+Before reaching out to Docker Support, make sure you're listed as an authorized
+support contact for your account. If you're not listed as an authorized
+support contact, find a person that is, and ask them to open a case with
+Docker Support in your behalf.
 
-* [Email](mailto:support@docker.com)
-* [Docker support page](https://support.docker.com/)
-
-Be sure to use your company email when filing tickets.
+You can open a new support case in the [Docker support page](https://support.docker.com/).
+If you're unable to submit a new case in the support page, fill-in the
+[Docker account support form](https://success.docker.com/support) using your
+company email.
 
 Docker Support engineers may ask you to provide a UCP support dump, which is an
 archive that contains UCP system logs and diagnostic information. To obtain a
