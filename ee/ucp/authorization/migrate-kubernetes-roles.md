@@ -24,7 +24,7 @@ Learn about [UCP roles and grants](grant-permissions.md).
 
 > Kubernetes yaml in UCP
 > 
-> The Docker EE authorization system isn't compatible with the Kubernetes
+> Docker EE has its own RBAC system that's distinct from the Kubernetes
 > system, so you can't create any objects that are returned by the
 > `/apis/rbac.authorization.k8s.io` endpoints. If the yaml for your Kubernetes
 > app contains definitions for `Role`, `ClusterRole`, `RoleBinding` or

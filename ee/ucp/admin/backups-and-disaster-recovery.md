@@ -29,7 +29,7 @@ UCP maintains data about:
 |         Data          |                                                     Description                                                      |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
 | Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker EE license and swarm and client CAs |
-| Access control        | Permissions for teams to swarm resources, including collections, grants, and roles                                   |
+| Access control        | Permissions for teams to cluster resources, including resource sets, grants, and roles                                   |
 | Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication        |
 | Metrics data          | Monitoring data gathered by UCP                                                                                      |
 | Organizations         | Your users, teams, and orgs                                                                                          |

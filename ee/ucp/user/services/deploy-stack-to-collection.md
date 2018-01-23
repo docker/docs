@@ -6,8 +6,8 @@ ui_tabs:
 - version: ucp-3.0
   orlower: true
 next_steps:
-- path: ../../authorization/
-  title: Access control model
+- path: deploy-compose-on-kubernetes/
+  title: Deploy a Compose-based app to a Kubernetes cluster
 - path: /engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label/
   title: Set metadata on a service (-l, –label)
 - path: /engine/userguide/labels-custom-metadata/
