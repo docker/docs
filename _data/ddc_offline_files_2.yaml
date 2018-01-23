@@ -59,7 +59,7 @@
   version: "2.5"
   tar-files:
     - description: "DTR 2.5.0-beta3 Linux x86"
-      url: https:/packages.docker.com/caas/dtr_images_2.5.0-beta3.tar.gz
+      url: https://packages.docker.com/caas/dtr_images_2.5.0-beta3.tar.gz
 - product: "dtr"
   version: "2.4"
   tar-files:
