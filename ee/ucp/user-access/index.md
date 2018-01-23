@@ -9,7 +9,9 @@ next_steps:
 - path: ../../authorization/
   title: Authorization
 - path: cli-based-access/
-  title: Access UCP from the CLI  
+  title: Access UCP from the CLI
+redirect_from:
+  - /ee/ucp/user/access-ucp/
 ---
 {% if include.version=="ucp-3.0" %}
 

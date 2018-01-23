@@ -22,26 +22,26 @@ NGINX service.
 
 Fill in the following fields:
 
-| Field         | Value |
-|:--------------|:------|
-| Service name  | nginx |
-| Image name    | nginx:latest |
+| Field        | Value        |
+|:-------------|:-------------|
+| Service name | nginx        |
+| Image name   | nginx:latest |
 
 ![](../../images/deploy-a-service-1.png){: .with-border}
 
 In the left pane, click **Network**. In the **Ports** section,
 click **Publish Port** and fill in the following fields:
 
-| Field         | Value |
-|:--------------|:------|
-| Internal port | 80    |
-| Protocol      | tcp   |
+| Field         | Value   |
+|:--------------|:--------|
+| Internal port | 80      |
+| Protocol      | tcp     |
 | Publish mode  | Ingress |
-| Public port   | 8000  | 
+| Public port   | 8000    |
 
 ![](../../images/deploy-a-service-2.png){: .with-border}
 
-Click **Confirm** to map the ports for the NGINX service. 
+Click **Confirm** to map the ports for the NGINX service.
 
 Once you've specified the service image and ports, click **Create** to
 deploy the service into the UCP cluster.
@@ -59,7 +59,7 @@ page, by going to `http://<node-ip>:8000`.
 {% if include.version=="docker-cli-linux" %}
 
 You can also deploy the same service from the CLI. Once you've set up your
-[UCP client bundle](../access-ucp/cli-based-access.md), run:
+[UCP client bundle](../user-access/cli.md), run:
 
 ```bash
 docker service create --name nginx \

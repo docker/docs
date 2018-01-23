@@ -13,7 +13,7 @@ you can store and manage the images that you deploy to your cluster.
 In this topic, you push an image to DTR and later deploy it to your cluster,
 using the Kubernetes orchestrator.
 
-## Open the DTR web UI 
+## Open the DTR web UI
 
 1.  In the Docker EE web UI, click **Admin Settings**.
 2.  In the left pane, click **Docker Trusted Registry**.
@@ -29,7 +29,7 @@ using the Kubernetes orchestrator.
 1.  In the DTR web UI, click **Repositories**.
 2.  Click **New Repository**, and in the **Repository Name** field, enter
     "wordpress".
-3.  Click **Save** to create the repository. 
+3.  Click **Save** to create the repository.
 
     ![](../../images/manage-and-deploy-private-images-2.png){: .with-border}
 
@@ -43,7 +43,7 @@ To push images to DTR, you need CLI access to a licensed installation of
 Docker EE.
 
 - [License your installation](license-your-installation.md).
-- [Set up your Docker CLI](../../user/access-ucp/cli-based-access.md).
+- [Set up your Docker CLI](../../user-acccess/cli.md).
 
 When you're set up for CLI-based access to a licensed Docker EE instance,
 you can push images to DTR.
@@ -133,7 +133,7 @@ from outside the cluster.
 5.  Click **Create**. When the Kubernetes objects are created,
     the **Load Balancers** page opens.
 6.  Click **wordpress-service**, and in the details pane, find the **Ports**
-    section. 
+    section.
 7.  Click the URL to open the default WordPress home page.  
 
     ![](../../images/manage-and-deploy-private-images-4.png){: .with-border}

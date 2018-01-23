@@ -161,7 +161,7 @@ UCP also exposes the standard Docker API, so you can continue using existing
 tools like the Docker CLI client. Since UCP secures your cluster with role-based
 access control, you need to configure your Docker CLI client and other client
 tools to authenticate your requests using
-[client certificates](user/access-ucp/index.md) that you can download
+[client certificates](user-access/index.md) that you can download
 from your UCP profile page.
 
 {% endif %}

@@ -40,7 +40,7 @@ sudo apt-get update && sudo apt-get install curl jq
 ```
 
 1. Use a client bundle to authenticate your requests.
-[Learn more](../../user/access-ucp/cli-based-access.md).
+[Learn more](../../user-access/cli.md).
 
 2. Use the REST API to access the cluster configurations. The `$DOCKER_HOST`
    and `$DOCKER_CERT_PATH` environment variables are set when using the client
@@ -143,11 +143,11 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # number of replicas equal to the number of manager nodes in the cluster.
 docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
 
-time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..." 
-time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]" 
-time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1" 
-time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..." 
-time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\"" 
+time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..."
+time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]"
+time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1"
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
 ...
 {% endraw %}
 ```
