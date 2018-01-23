@@ -8,7 +8,7 @@ ui_tabs:
 - version: ucp-2.2
   orlower: true
 next_steps:
-- path: ../services/
+- path: ../swarm/
   title: Deploy a service
 redirect_from:
   - /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/

@@ -1681,86 +1681,82 @@ manuals:
         title: Web-based access
       - path: /ee/ucp/user-access/cli/
         title: CLI-based access
-    - sectiontitle: User guides
+    - sectiontitle: Deploy apps with Swarm
       section:
-      - sectiontitle: Deploy an application
+      - title: Deploy a single service
+        path: /ee/ucp/swarm/
+      - title: Deploy an app from the UI
+        path: /ee/ucp/swarm/deploy-from-ui/
+      - title: Deploy an app from the CLI
+        path: /ee/ucp/swarm/deploy-from-cli/
+      - title: Deploy application resources to a collection
+        path: /ee/ucp/swarm/deploy-to-collection/
+      - title: Use secrets in your services
+        path: /ee/ucp/swarm/use-secrets/
+      - sectiontitle: Route traffic to your apps
         section:
-        - path: /ee/ucp/user/services/deploy-a-service/
-          title: Deploy a service
-        - path: /ee/ucp/user/services/
-          title: Deploy an app from the UI
-        - path: /ee/ucp/user/services/deploy-app-cli/
-          title: Deploy an app from the CLI
-        - path: /ee/ucp/user/services/deploy-stack-to-collection/
-          title: Deploy application resources to a collection
-        - path: /ee/ucp/user/services/deploy-kubernetes-workload/
-          title: Deploy a workload to a Kubernetes cluster
-        - path: /ee/ucp/user/services/deploy-compose-on-kubernetes/
-          title: Deploy a Compose-based app to a Kubernetes cluster
-      - sectiontitle: Secrets
-        section:
-        - path: /ee/ucp/user/secrets/
-          title: Manage secrets
-        - path: /ee/ucp/user/secrets/grant-revoke-access/
-          title: Grant access to secrets
-    - sectiontitle: Layer 7 routing
+        - title: Layer 7 routing overview
+          path: /ee/ucp/interlock/
+        - sectiontitle: Introduction
+          section:
+          - title: What is Layer 7 routing
+            path: /ee/ucp/interlock/intro/
+          - title: Architecture
+            path: /ee/ucp/interlock/intro/architecture/
+        - sectiontitle: Deployment
+          section:
+          - title: Get started
+            path: /ee/ucp/interlock/install/
+          - title: Manual deployment
+            path: /ee/ucp/interlock/install/manual-deployment/
+          - title: Production
+            path: /ee/ucp/interlock/install/production/
+          - title: Offline install
+            path: /ee/ucp/interlock/install/offline/
+        - sectiontitle: Configuration
+          section:
+          - title: Layer 7 routing
+            path: /ee/ucp/interlock/configuration/
+          - title: Service labels
+            path: /ee/ucp/interlock/configuration/service-labels/
+        - sectiontitle: Extensions
+          section:
+          - title: Nginx
+            path: /ee/ucp/interlock/extensions/nginx/
+          - title: HAProxy
+            path: /ee/ucp/interlock/extensions/haproxy/
+        - sectiontitle: Deploy apps with Layer 7 routing
+          section:
+          - title: Basic deployment
+            path: /ee/ucp/interlock/usage/
+          - title: Applications with SSL
+            path: /ee/ucp/interlock/usage/ssl/
+          - title: Application redirects
+            path: /ee/ucp/interlock/usage/redirects/
+          - title: Persistent (sticky) sessions
+            path: /ee/ucp/interlock/usage/sessions/
+          - title: Websockets
+            path: /ee/ucp/interlock/usage/websockets/
+          - title: Canary application instances
+            path: /ee/ucp/interlock/usage/canary/
+          - title: Service clusters
+            path: /ee/ucp/interlock/usage/service-clusters/
+          - title: Context/Path based routing
+            path: /ee/ucp/interlock/usage/context/
+          - title: Host mode networking
+            path: /ee/ucp/interlock/usage/host-mode-networking/
+        - sectiontitle: Operations
+          section:
+          - title: Updates
+            path: /ee/ucp/interlock/ops/
+          - title: Tuning
+            path: /ee/ucp/interlock/ops/tuning/
+    - sectiontitle: Deploy apps with Kubernetes
       section:
-      - title: Layer 7 routing overview
-        path: /ee/ucp/interlock/
-      - sectiontitle: Introduction
-        section:
-        - title: What is Layer 7 routing
-          path: /ee/ucp/interlock/intro/
-        - title: Architecture
-          path: /ee/ucp/interlock/intro/architecture/
-      - sectiontitle: Deployment
-        section:
-        - title: Get started
-          path: /ee/ucp/interlock/install/
-        - title: Manual deployment
-          path: /ee/ucp/interlock/install/manual-deployment/
-        - title: Production
-          path: /ee/ucp/interlock/install/production/
-        - title: Offline install
-          path: /ee/ucp/interlock/install/offline/
-      - sectiontitle: Configuration
-        section:
-        - title: Layer 7 routing
-          path: /ee/ucp/interlock/configuration/
-        - title: Service labels
-          path: /ee/ucp/interlock/configuration/service-labels/
-      - sectiontitle: Extensions
-        section:
-        - title: Nginx
-          path: /ee/ucp/interlock/extensions/nginx/
-        - title: HAProxy
-          path: /ee/ucp/interlock/extensions/haproxy/
-      - sectiontitle: Deploy apps with Layer 7 routing
-        section:
-        - title: Basic deployment
-          path: /ee/ucp/interlock/usage/
-        - title: Applications with SSL
-          path: /ee/ucp/interlock/usage/ssl/
-        - title: Application redirects
-          path: /ee/ucp/interlock/usage/redirects/
-        - title: Persistent (sticky) sessions
-          path: /ee/ucp/interlock/usage/sessions/
-        - title: Websockets
-          path: /ee/ucp/interlock/usage/websockets/
-        - title: Canary application instances
-          path: /ee/ucp/interlock/usage/canary/
-        - title: Service clusters
-          path: /ee/ucp/interlock/usage/service-clusters/
-        - title: Context/Path based routing
-          path: /ee/ucp/interlock/usage/context/
-        - title: Host mode networking
-          path: /ee/ucp/interlock/usage/host-mode-networking/
-      - sectiontitle: Operations
-        section:
-        - title: Updates
-          path: /ee/ucp/interlock/ops/
-        - title: Tuning
-          path: /ee/ucp/interlock/ops/tuning/
+      - title: Deploy a workload
+        path: /ee/ucp/kubernetes/
+      - title: Deploy a Compose-based app
+        path: /ee/ucp/kubernetes/deploy-with-compose/
     - title: API reference
       path: /reference/ucp/3.0/api/
       nosync: true

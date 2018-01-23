@@ -2,6 +2,8 @@
 title: Deploy a service
 description: Learn how to deploy services to a cluster managed by Universal Control Plane.
 keywords: ucp, deploy, service
+redirect_from:
+  - /ee/ucp/user/services/deploy-a-service/
 ui_tabs:
 - version: ucp-3.0
   orlower: true
@@ -27,7 +29,7 @@ Fill in the following fields:
 | Service name | nginx        |
 | Image name   | nginx:latest |
 
-![](../../images/deploy-a-service-1.png){: .with-border}
+![](../images/deploy-a-service-1.png){: .with-border}
 
 In the left pane, click **Network**. In the **Ports** section,
 click **Publish Port** and fill in the following fields:
@@ -39,7 +41,7 @@ click **Publish Port** and fill in the following fields:
 | Publish mode  | Ingress |
 | Public port   | 8000    |
 
-![](../../images/deploy-a-service-2.png){: .with-border}
+![](../images/deploy-a-service-2.png){: .with-border}
 
 Click **Confirm** to map the ports for the NGINX service.
 
@@ -49,7 +51,7 @@ deploy the service into the UCP cluster.
 Once the service is up and running, you'll be able to see the default NGINX
 page, by going to `http://<node-ip>:8000`.
 
-![](../../images/deploy-a-service-4.png){: .with-border}
+![](../images/deploy-a-service-4.png){: .with-border}
 
 {% endif %}
 {% endif %}

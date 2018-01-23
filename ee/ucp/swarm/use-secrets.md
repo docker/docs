@@ -2,12 +2,11 @@
 title: Manage secrets
 description: Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE
 keywords: UCP, secret, password, certificate, private key
+redirect_from:
+  - /ee/ucp/user/secrets/
 ui_tabs:
 - version: ucp-3.0
   orlower: true
-next_steps:
-- path: grant-revoke-access/
-  title: Grant access to secrets
 ---
 {% if include.version=="ucp-3.0" %}
 
@@ -45,12 +44,12 @@ In the UCP web UI, navigate to **Secrets** page and click **Create Secret**
 to create a new secret. Once you create the secret you won't be able to edit
 it or see the secret data again.
 
-![](../../images/manage-secrets-1.png){: .with-border}
+![](../images/manage-secrets-1.png){: .with-border}
 
 Click **Create Secret** to create a new secret. Once you create the secret
 you won't be able to edit it or see the secret data again.
 
-![](../../images/manage-secrets-2.png){: .with-border}
+![](../images/manage-secrets-2.png){: .with-border}
 
 Assign a unique name to the secret and set its value. You can optionally define
 a permission label so that other users have permission to use this secret. Also
@@ -69,7 +68,7 @@ that they're going to use to communicate with one another.
 Navigate to the **Networks** page, and create the `wordpress-network` with the
 default configurations.
 
-![](../../images/manage-secrets-3.png){: .with-border}
+![](../images/manage-secrets-3.png){: .with-border}
 
 Now create the MySQL service:
 
@@ -101,7 +100,7 @@ We also set the `MYSQL_ROOT_PASSWORD_FILE` environment variable to configure
 MySQL to use the content of the `/run/secrets/wordpress-password-v1` file as
 the root password.
 
-![](../../images/manage-secrets-4.png){: .with-border}
+![](../images/manage-secrets-4.png){: .with-border}
 
 Now that the MySQL service is running, we can deploy a WordPress service that
 uses MySQL as a storage backend:
@@ -130,12 +129,12 @@ This creates the WordPress service attached to the same network as the MySQL
 service so that they can communicate, and maps the port 80 of the service to
 port 8000 of the cluster routing mesh.
 
-![](../../images/manage-secrets-5.png){: .with-border}
+![](../images/manage-secrets-5.png){: .with-border}
 
 Once you deploy this service, you'll be able to access it using the
 IP address of any node in your UCP cluster, on port 8000.
 
-![](../../images/manage-secrets-6.png){: .with-border}
+![](../images/manage-secrets-6.png){: .with-border}
 
 ## Update a secret
 
@@ -155,7 +154,7 @@ this:
 Let's rotate the secret we've created. Navigate to the **Secrets** page
 and create a new secret named `wordpress-password-v2`.
 
-![](../../images/manage-secrets-7.png){: .with-border}
+![](../images/manage-secrets-7.png){: .with-border}
 
 This example is simple, and we know which services we need to update,
 but in the real world, this might not always be the case.
@@ -163,7 +162,7 @@ but in the real world, this might not always be the case.
 Click the **wordpress-password-v1** secret. In the details pane,
 click **Inspect Resource**, and in the dropdown, select **Services**.
 
-![](../../images/manage-secrets-8.png){: .with-border}
+![](../images/manage-secrets-8.png){: .with-border}
 
 Start by updating the `wordpress-db` service to stop using the secret
 `wordpress-password-v1` and use the new version instead.
@@ -186,7 +185,7 @@ the file with the content of `wordpress-password-v2` be mounted in
 
 Delete the `wordpress-password-v1` secret, and click **Update**.
 
-![](../../images/manage-secrets-9.png){: .with-border}
+![](../images/manage-secrets-9.png){: .with-border}
 
 Then do the same thing for the WordPress service. After this is done, the
 WordPress application is running and using the new password.
