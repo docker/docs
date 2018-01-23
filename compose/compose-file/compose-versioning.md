@@ -277,6 +277,16 @@ Introduces the following additional parameters:
 - `name` for networks, secrets and configs
 - `shm_size` in [build configurations](index.md#build)
 
+### Version 3.6
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **17.12.0** and higher.
+
+Introduces the following additional parameters:
+
+- [`tmpfs`](index.md#tmpfs) in volume definitions using the [Long Syntax](index.md#long-syntax-3)
+- `size` optional parameter for a tmpfs volume
+
 ## Upgrading
 
 ### Version 2.x to 3.x
