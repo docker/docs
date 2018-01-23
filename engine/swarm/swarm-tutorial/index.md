@@ -80,13 +80,13 @@ serve as the single swarm node.
 
 <p />
 
-* Currently, you cannot use Docker for Mac or Windows alone to test a
+* Currently, you cannot use Docker for Mac or Docker for Windows alone to test a
 _multi-node_ swarm. However, you can use the included version of [Docker
-Machine](/machine/overview.md) to create the swarm nodes (see [Get started with Docker Machine and a local VM](/machine/get-started.md)), then follow the
-tutorial for all multi-node features. For this scenario, you run commands from
-a Docker for Mac or Docker for Windows host, but that Docker host itself is
-_not_ participating in the swarm (i.e., it is not `manager1`, `worker1`,
-or `worker2` in our example). After you create the nodes, you can run all
+Machine](/machine/overview.md) to create the swarm nodes (see
+[Get started with Docker Machine and a local VM](/machine/get-started.md)), then
+follow the tutorial for all multi-node features. For this scenario, you run
+commands from a Docker for Mac or Docker for Windows host, but that Docker host itself is
+_not_ participating in the swarm. After you create the nodes, you can run all
 swarm commands as shown from the Mac terminal or Windows PowerShell with
 Docker for Mac or Docker for Windows running.
 

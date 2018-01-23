@@ -22,7 +22,7 @@ This is a [namespaced endpoint](#namespaced-endpoints).
 Attribute | Description
 --------- | -----------
 resource_uri | A unique API endpoint that represents the repository
-name | Name of the repository, i.e. `my.registry.com/myrepo`
+name | Name of the repository, such as `my.registry.com/myrepo`
 in_use | If the image is being used by any of your services
 registry | Resource URI of the registry where this image is hosted
 
@@ -123,7 +123,7 @@ Available in Docker Cloud's **REST API**
 
 Parameter | Description
 --------- | -----------
-name | Name of the repository, i.e. 'my.registry.com/myrepo'
+name | Name of the repository, such as 'my.registry.com/myrepo'
 username | Username to authenticate with the third party registry
 password | Password to authenticate with the third party registry
 

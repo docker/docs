@@ -251,7 +251,7 @@ PowerShell Module as follows.
 >
 > * Make sure you have administrator permissions to run an elevated PowerShell.
 
-1.  Start an "elevated" PowerShell (i.e., run it as administrator).
+1.  Start an "elevated" PowerShell, running as an administrator.
 
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
@@ -389,12 +389,11 @@ access the mounted volumes.
 
 > Tips on shared drives, permissions, and volume mounts
 >
- * Shared drives are only required for volume mounting
+ * Shared drives are only required for mounting volumes in
  [Linux containers](#switch-between-windows-and-linux-containers), not for
- Windows containers. For Linux containers, you need to share the drive where
- your project is located (i.e., where the Dockerfile and volume are located).
- Runtime errors such as file not found or cannot start service may indicate
- shared drives are needed. (See also
+ Windows containers. For Linux containers, you need to share the drive where the
+ Dockerfile and volume are located. If you get errors such as `file not found`
+ or `cannot start service` you may need to enable shared drives. See
  [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
 * If possible, avoid volume mounts from the Windows host, and instead  mount on

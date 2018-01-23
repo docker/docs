@@ -24,13 +24,6 @@ it only connects to servers with a certificate signed by that CA.
 > with OpenSSL, x509 and TLS before using it in production.
 {:.important}
 
-> Only works on Linux
->
-> These TLS commands only generate a working set of certificates on Linux.
-> macOS comes with a version of OpenSSL that is incompatible with the
-> certificates that Docker requires.
-{:.important}
-
 ## Create a CA, server and client keys with OpenSSL
 
 > **Note**: replace all instances of `$HOST` in the following example with the
@@ -64,8 +57,8 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
     Email Address []:Sven@home.org.au
 
 Now that you have a CA, you can create a server key and certificate
-signing request (CSR). Make sure that "Common Name" (i.e., server FQDN or YOUR
-name) matches the hostname you use to connect to Docker:
+signing request (CSR). Make sure that "Common Name" matches the hostname you use
+to connect to Docker:
 
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.

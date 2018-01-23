@@ -6,7 +6,7 @@ title: Publish content on Docker Store
 
 ## Permitted content and support options
 
-* Content that runs on a Docker Enterprise Edition (i.e. Docker Certified
+* Content that runs on a Docker Enterprise Edition (Docker Certified
   Infrastructure) may be published in the Store. This content may also qualify
   to become a Docker Certified Container or Plugin image and be backed by
   collaborative Docker/Publisher support

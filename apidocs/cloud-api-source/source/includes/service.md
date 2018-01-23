@@ -408,8 +408,8 @@ Available in Docker Cloud's **REST API**
 
 Parameter | Description
 --------- | -----------
-image | (required) The image used to deploy this service in docker format, i.e. `tutum/hello-world`
-name | (optional) A human-readable name for the service, i.e. `my-hello-world-app` (default: `image` without namespace)
+image | (required) The image used to deploy this service in docker format, such as `tutum/hello-world`
+name | (optional) A human-readable name for the service, such as `my-hello-world-app` (default: `image` without namespace)
 target_num_containers | (optional) The number of containers to run for this service initially (default: 1)
 run_command | (optional) The command used to start the containers of this service, overriding the value specified in the image, i.e. `/run.sh` (default: `null`)
 entrypoint | (optional) The command prefix used to start the containers of this service, overriding the value specified in the image, i.e. `/usr/sbin/sshd` (default: `null`)

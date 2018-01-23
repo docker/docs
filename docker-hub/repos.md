@@ -153,11 +153,10 @@ Private repositories are just like public ones. However, it isn't possible to
 browse them or search their content on the public registry. They do not get
 cached the same way as a public repository either.
 
-It is possible to give access to a private repository to those whom you
-designate (i.e., collaborators) from its "Settings" page. From there, you can
-also switch repository status (*public* to *private*, or vice-versa). You
-need an available private repository slot open before you can do such a
-switch. If you don't have any available, you can always upgrade your
+You can designate collaborators and manage their access to a private
+repository from that repository's *Settings* page. You can also toggle the
+repository's status between public and private, if you have an available
+repository slot open. Otherwise, you can upgrade your
 [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 
 ## Webhooks

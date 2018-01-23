@@ -361,8 +361,8 @@ Simple example:
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 A healthcheck indicates that you want a dependency to wait
-for another container to be "healthy" (i.e. its healthcheck advertises a
-successful state) before starting.
+for another container to be "healthy" (as indicated by a successful state from
+the healthcheck) before starting.
 
 Example:
 
@@ -464,7 +464,8 @@ empty or undefined.
       - /opt/secrets.env
 
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
-beginning with `#` (i.e. comments) are ignored, as are blank lines.
+beginning with `#` are processed as comments and are ignored. Blank lines are
+also ignored.
 
     # Set Rails/Rack environment
     RACK_ENV=development

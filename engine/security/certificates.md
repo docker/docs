@@ -10,7 +10,9 @@ In [Running Docker with HTTPS](https.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order
 to have the Docker client and the daemon communicate securely over HTTPS.  TLS ensures authenticity of the registry endpoint and that traffic to/from registry is encrypted.
 
-This article demonstrates how to ensure the traffic between the Docker registry (i.e., *a server*) and the Docker daemon (i.e., *a client*) traffic is encrypted and a properly authenticated using *certificate-based client-server authentication*.
+This article demonstrates how to ensure the traffic between the Docker registry
+server and the Docker daemon (a client of the registry server) is encrypted and
+properly authenticated using *certificate-based client-server authentication*.
 
 We show you how to install a Certificate Authority (CA) root certificate
 for the registry and how to set the client TLS certificate for verification.
@@ -22,10 +24,11 @@ A custom certificate is configured by creating a directory under
 `localhost`. All `*.crt` files are added to this directory as CA roots.
 
 > **Note**:
-> As of docker 1.13, on Linux any root certificates authorities are merged
-> in with the system defaults (i.e., host's root CA set). Prior to 1.13 and on
-> Windows, the system default certificates are only used when there are no
-> custom root certificates provided.
+> As of Docker 1.13, on Linux any root certificates authorities are merged
+> with the system defaults, including as the host's root CA set. On prior
+versions of Docker, and on Docker Enterprise Edition for Windows Server,
+> the system default certificates are only used when no custom root certificates
+> are configured.
 
 The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired

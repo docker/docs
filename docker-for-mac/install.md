@@ -103,7 +103,7 @@ for Docker for Mac, and how the two products can coexist.
   requirements are met.
 
   - Mac hardware must be a 2010 or newer model, with Intel's hardware support for memory
-    management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
+    management unit (MMU) virtualization, including Extended Page Tables (EPT) and
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 

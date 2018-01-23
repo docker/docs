@@ -189,7 +189,7 @@ lower (to `1`) if you want Docker for Mac to use less memory.
 
 #### Disk image location (storage)
 
-You can specify the **Disk image location** of the Linux volume; i.e., where
+You can specify the **Disk image location** of the Linux volume, which is where
 containers and images are stored.
 
 You can move the disk image location.

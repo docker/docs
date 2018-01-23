@@ -173,7 +173,7 @@ Available in Docker Cloud's **REST API**
 
 Parameter | Description
 --------- | -----------
-name | (required) A human-readable name for the stack, i.e. `my-hello-world-stack`
+name | (required) A human-readable name for the stack, such as `my-hello-world-stack`
 nickname | (optional) A user-friendly name for the stack (`name` by default)
 services | (optional) List of services belonging to the stack. Each service accepts the same parameters as a [Create new service](#create-a-new-service) operation (default: `[]`) plus the ability to refer "links" and "volumes-from" by the name of another service in the stack (see example).
 

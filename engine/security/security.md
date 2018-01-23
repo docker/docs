@@ -236,21 +236,19 @@ by default.
 Refer to the [daemon command](../reference/commandline/dockerd.md#daemon-user-namespace-options)
 in the command line reference for more information on this feature.
 Additional information on the implementation of User Namespaces in Docker
-can be found in <a href="https://integratedcode.us/2015/10/13/user-namespaces-have-arrived-in-docker/" target="_blank">this blog post</a>.
+can be found in
+[this blog post](https://integratedcode.us/2015/10/13/user-namespaces-have-arrived-in-docker/).
 
 ## Conclusions
 
 Docker containers are, by default, quite secure; especially if you take
-care of running your processes inside the containers as non-privileged
-users (i.e., non-`root`).
+run your processes as non-privileged users inside the container.
 
 You can add an extra layer of safety by enabling AppArmor, SELinux,
-GRSEC, or your favorite hardening solution.
+GRSEC, or another appropriate hardening system.
 
-Last but not least, if you see interesting security features in other
-containerization systems, these are simply kernels features that may
-be implemented in Docker as well. We welcome users to submit issues,
-pull requests, and communicate via the mailing list.
+If you think of ways to make docker more secure, we welcome feature requests,
+pull requests, or comments on the Docker community forums.
 
 ## Related information
 

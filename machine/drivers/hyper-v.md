@@ -83,7 +83,7 @@ For this example, we created a virtual switch called `Primary Virtual Switch`.
 
 #### 4. Create the nodes with Docker Machine and the Microsoft Hyper-V driver
 
-* Start an "elevated" PowerShell (i.e., running as administrator). To do this, search for PowerShell, right-click, and choose Run as administrator.
+* Start an "elevated" PowerShell with administrator privileges. To do this, search for PowerShell, right-click, and choose Run as administrator.
 
 * Run the `docker-machine create` commands to create machines.
 

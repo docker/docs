@@ -89,16 +89,16 @@ notary -s https://my_notary_server.com -d ~/.docker/trust key rotate my_reposito
 notary -s https://my_notary_server.com -d ~/.docker/trust publish my_repository
 ```
 
-N.B. the `-s` flag provides the server hosting a notary service. If you are operating against
+The `-s` flag provides the server hosting a notary service. If you are operating against
 Docker Hub, this will be `https://notary.docker.io`. If you are operating against your own DTR
 instance, this will be the same hostname you use in image names when running docker commands preceded
 by the `https://` scheme. For example, if you would run `docker push my_dtr:4443/me/an_image` the value
 of the `-s` flag would be expected to be `https://my_dtr:4443`.
 
-N.B. if you are using DTR, the name of the repository should be identical to the full name you use
-in a `docker push` command. If however you use Docker Hub, the name you use in a `docker push`
-must be preceded by `docker.io/`. i.e. if you ran `docker push me/alpine`, you would
-`notary init docker.io/me/alpine`.
+If you use DTR, the name of the repository should be identical to the full name you use
+in a `docker push` command. If you use Docker Hub, the name you use in a `docker push`
+must be preceded by `docker.io/`. For instance, if you ran `docker push me/alpine`, you then
+use `notary init docker.io/me/alpine`.
 
 For brevity, we will exclude the `-s` and `-d` flags from subsequent command, but be aware you
 will still need to provide them for the commands to work correctly.

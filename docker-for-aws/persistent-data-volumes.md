@@ -160,7 +160,7 @@ EBS volumes typically take a few minutes to be created. Besides
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `size`    | Required parameter that indicates the size of the EBS volumes to create in GB.                                                                                                                                                                                                                                 |
 | `ebstype` | Optional parameter that indicates the type of the EBS volumes to create (`gp2`, `io1`, `st1`, `sc1`}. The default `ebstype` is Standard/Magnetic. For further details about EBS volume types, see the [EBS volume type documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html). |
-| `iops`    | Required if `ebstype` specified is `io1` i.e. provisioned IOPs. Needs to be in the appropriate range as required by EBS.                                                                                                                                                                                       |
+| `iops`    | Required if `ebstype` specified is `io1`, which enables provisioned IOPs. Needs to be in the appropriate range as required by EBS.                                                                                                                                                                                       |
 
 Example usage:
 

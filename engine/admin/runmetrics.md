@@ -164,21 +164,20 @@ simple in comparison. CPU metrics are in the
 `cpuacct` controller.
 
 For each container, a pseudo-file `cpuacct.stat` contains the CPU usage
-accumulated by the processes of the container, broken down between `user` and
-`system` time. If you're not familiar with the distinction, `user` is the time
-during which the processes were in direct control of the CPU (i.e., executing
-process code), and `system` is the time during which the CPU was executing
-system calls on behalf of those processes.
+accumulated by the processes of the container, broken down into `user` and
+`system` time. The distinction is:
 
-Those times are expressed in ticks of 1/100th of a second. Actually,
-they are expressed in "user jiffies". There are `USER_HZ`
-*"jiffies"* per second, and on x86 systems,
-`USER_HZ` is 100. This used to map exactly to the
-number of scheduler "ticks" per second; but with the advent of higher
-frequency scheduling, as well as [tickless kernels](
-http://lwn.net/Articles/549580/), the number of kernel ticks
-wasn't relevant anymore. It stuck around anyway, mainly for legacy and
-compatibility reasons.
+- `user` time is the amount of time a process has direct control of the CPU,
+  executing process code.
+- `system` time is the time the kernel is executing system calls on behalf of
+  the process.
+
+Those times are expressed in ticks of 1/100th of a second, also called "user
+jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
+`USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
+"ticks" per second, but higher frequency scheduling and
+[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+ticks irrelevant.
 
 ### Block I/O metrics
 
@@ -303,11 +302,11 @@ container, we need to:
 - Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
 - Execute `ip netns exec <somename> ....`
 
-Review [Enumerating Cgroups](#enumerating-cgroups) to learn how to find
-the cgroup of a process running in the container of which you want to
-measure network usage. From there, you can examine the pseudo-file named
-`tasks`, which contains the PIDs that are in the
-control group (i.e., in the container). Pick any one of them.
+Review [Enumerating Cgroups](#enumerating-cgroups)for how to find
+the cgroup of an in-container process whose network usage you want to measure.
+From there, you can examine the pseudo-file named
+`tasks`, which contains all the PIDs in the
+cgroup (and thus, in the container). Pick any one of the PIDs.
 
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:

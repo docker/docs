@@ -71,7 +71,7 @@ You can use environment variables:
 -   `--amazonec2-userdata`: Path to file with cloud-init user data.
 -   `--amazonec2-volume-type`: The Amazon EBS volume type to be attached to the instance.
 -   `--amazonec2-vpc-id`: Your VPC ID to launch the instance in.
--   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
+-   `--amazonec2-zone`: The AWS zone to launch the instance in (one of a,b,c,d,e).
 
 
 

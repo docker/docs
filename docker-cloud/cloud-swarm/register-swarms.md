@@ -93,8 +93,9 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 
 * If a swarm is UNAVAILABLE check the swarm from your infrastructure provider. The manager node(s) may be unresponsive or the server proxy service might not be running. You can SSH into an UNAVAILABLE swarm.
 
-* Removing a swarm only removes the swarm from the interface in Docker Cloud (i.e., [unregisters](#unregister-a-swarm-from-docker-cloud) it). It does not
-change the swarm itself or any processes running on the swarm.
+* Removing a swarm only removes the swarm from the interface in Docker Cloud, effectively
+  [unregistering](#unregister-a-swarm-from-docker-cloud) it. It does not
+  change the swarm itself or any processes running on the swarm.
 
 ## Unregister a swarm from Docker Cloud
 

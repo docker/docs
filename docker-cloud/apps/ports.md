@@ -114,8 +114,8 @@ detail views, in the **Endpoints** tab.
 
 ### Service endpoints
 
-Each service that has at least one port published with a fixed host port (i.e.
-not dynamic) is assigned a DNS endpoint in the format
+Each service that has at least one port published with a fixed (not dynamic)
+host port is assigned a DNS endpoint in the format
 `service-name[.stack-name].shortuuid.svc.dockerapp.io`. This DNS endpoint
 (multiple A record) resolves to the IPs of the nodes where the containers are
 running, in a [round-robin

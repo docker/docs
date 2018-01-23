@@ -54,7 +54,7 @@ where `<repo_url>` is the path to your GitHub repository (see below).
 
 ## Add the 'Deploy to Docker Cloud' button anywhere else
 
-If you want to use the button somewhere else (i.e. from external documentation, or a landing site), you just need to create a link to the following URL:
+If you want to use the button somewhere else, such as from external documentation or a landing site, you just need to create a link to the following URL:
 
 ```html
 https://cloud.docker.com/stack/deploy/?repo=<repo_url>

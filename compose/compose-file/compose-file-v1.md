@@ -186,7 +186,8 @@ these values.
       - /opt/secrets.env
 
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
-beginning with `#` (i.e. comments) are ignored, as are blank lines.
+beginning with `#` are processed as comments and are ignored. Blank lines are
+also ignored.
 
     # Set Rails/Rack environment
     RACK_ENV=development

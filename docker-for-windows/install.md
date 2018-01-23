@@ -99,7 +99,7 @@ Windows accounts use the same VM to build and run containers.
 <p />
 * Nested virtualization scenarios, such as running Docker for Windows
 on a VMWare or Parallels instance, might work, but come with no
-guarantees (i.e., not officially supported). For more information, see
+guarantees. For more information, see
 [Running Docker for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
 <p />
 * **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/), Docker CLI client, [Docker Compose](/compose/overview.md), [Docker Machine](/machine/overview.md), and [Kitematic](/kitematic/userguide.md).

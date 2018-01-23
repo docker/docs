@@ -95,10 +95,10 @@ instance, this will be the same hostname you use in image names when running doc
 by the `https://` scheme. For example, if you would run `docker image push my_dtr:4443/me/an_image` the value
 of the `-s` flag would be expected to be `https://my_dtr:4443`.
 
-If you are using DTR, the name of the repository should be identical to the full name you use
-in a `docker image push` command. If however you use Docker Hub, the name you use in a `docker image push`
-must be preceded by `docker.io/`. i.e. if you ran `docker image push me/alpine`, you would
-`notary init docker.io/me/alpine`.
+If you use DTR, the name of the repository should be identical to the full name you use
+in a `docker image push` command. If you use Docker Hub, the name you use in a `docker image push`
+must be preceded by `docker.io/`. For instance, if you ran `docker image push me/alpine`, you then
+use `notary init docker.io/me/alpine`.
 
 For brevity, we will exclude the `-s` and `-d` flags from subsequent command, but be aware you
 will still need to provide them for the commands to work correctly.
