@@ -14,6 +14,10 @@ availability. `DRAIN` availability  prevents a node from receiving new tasks
 from the swarm manager. It also means the manager stops tasks running on the
 node and launches replica tasks on a node with `ACTIVE` availability.
 
+> Note: setting a node to `DRAIN` does not remove containers from that node that 
+were created with `docker run` or `docker-compose up`.  `DRAIN` only acts on swarm
+services.
+
 1.  If you haven't already, open a terminal and ssh into the machine where you
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
