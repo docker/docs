@@ -56,127 +56,156 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited you want to learn how to use Docker.
+Welcome! We are excited you want to learn how to use Docker. Docker lets you
+easily **build, ship, and run** any application on any platform. Let's get
+started.
 
-In this six-part tutorial, you will:
+The Docker _Get Started_ tutorial teaches you how to:
 
-1. Get set up and oriented, on this page.
-2. [Build and run your first app](part2.md)
-3. [Turn your app into a scaling service](part3.md)
-4. [Span your service across multiple machines](part4.md)
-5. [Add a visitor counter that persists data](part5.md)
-6. [Deploy your swarm to production](part6.md)
+1. Set up your Docker environment (on this page)
+2. [Build an image and run it as one container](part2.md)
+3. [Scale your app to run multiple containers](part3.md)
+4. [Distribute your app across a cluster](part4.md)
+5. [Stack services by adding a backend database](part5.md)
+6. [Deploy your app to production](part6.md)
 
-The application itself is very simple so that you are not too distracted by
-what the code is doing. After all, the value of Docker is in how it can build,
-ship, and run applications; it's totally agnostic as to what your application
-actually does.
-
-## Prerequisites
-
-While we'll define concepts along the way, it is good for you to understand
-[what Docker is](https://www.docker.com/what-docker) before we begin.
-
-We also need to assume you are familiar with a few concepts before we continue:
-
-- IP Addresses and Ports
-- Virtual Machines
-- Editing configuration files
-- Basic familiarity with the ideas of code dependencies and building
-- Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
-
-Finally, though we'll remind you again when you need these things, you can
-save yourself some distraction at that time by [signing up for a
-Docker ID](https://cloud.docker.com) and using it on your local machine
-by running the following command:
-
-```
-docker login
-```
-
-## A brief explanation of containers
+## Images and containers
 
 An **image** is a lightweight, stand-alone, executable package that includes
-everything needed to run a piece of software, including the code, a runtime,
-libraries, environment variables, and config files.
+everything needed to run a piece of software&#8212;the code, a runtime,
+libraries, environment variables, and configuration files. You can find
+thousands of images on [Docker Hub](https://hub.docker.com/explore/).
 
 A **container** is a runtime instance of an image&#8212;what the image becomes
-in memory when actually executed. It runs completely isolated from the host
-environment by default, only accessing host files and ports if configured to do
+in memory when executed. By default, a container runs completely isolated from
+the host environment, only accessing host files and ports if configured to do
 so.
 
-Containers run apps natively on the host machine's kernel. They have better
-performance characteristics than virtual machines that only get virtual access
-to host resources through a hypervisor. Containers can get native access, each
-one running in a discrete process, taking no more memory than any other
-executable.
+The use of Linux containers to build, deploy, and run applications is called
+[containerization](https://en.wikipedia.org/wiki/Operating-system-level_virtualization).
+Containers are not new but their use for easily deploying applications is.
 
 ## Containers vs. virtual machines
 
-Consider this diagram comparing virtual machines to containers:
+Each **virtual machine** (VM) runs a "guest" operating system (OS) with only
+virtual access to host resources through a hypervisor. VMs are resource
+intensive, and the resulting disk image and application state is an entanglement
+of OS settings, system-installed dependencies, OS security patches, and other
+easy-to-lose, hard-to-replicate ephemera. VMs provide an environment with far
+more resources than most applications need.
 
-### Virtual Machine diagram
+By contrast, a **container** runs applications natively and shares the kernel of
+the host machine with other containers, keeping it lightweight. Each container
+runs in a discrete process, taking no more memory than any other executable. The
+only information needed in a container image is the executable and its package
+dependencies, which never need to be installed on the host system. Because
+containers house their dependencies, a containerized app is portable and “runs
+anywhere.”
 
-![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
+![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png){:width="300px"} | ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png){:width="300px"}
 
-Virtual machines run guest operating systems&#8212;note the OS layer in each
-box. This is resource intensive, and the resulting disk image and application
-state is an entanglement of OS settings, system-installed dependencies, OS
-security patches, and other easy-to-lose, hard-to-replicate ephemera.
+## Prepare your Docker environment
 
-### Container diagram
+Install a [supported version](https://docs.docker.com/engine/installation/#supported-platforms){:target="_blank"}
+of Docker Community Edition (CE) or Enterprise Edition (EE).
 
-![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
-
-Containers can share a single kernel, and the only information that needs to be
-in a container image is the executable and its package dependencies, which never
-need to be installed on the host system. These processes run like native
-processes, and you can manage them individually by running commands like `docker
-ps`&#8212;just like you would run `ps` on Linux to see active processes.
-Finally, because they contain all their dependencies, there is no configuration
-entanglement; a containerized app "runs anywhere."
-
-## Setup
-
-Before we get started, make sure your system has the latest version of Docker
-installed.
+For full [Kubernetes integration on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){:target="_blank"},
+install [17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#edge-release-notes){:target="_blank"} or higher.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
-> **Note**: version 1.13 or higher is required
 
-You should be able to run `docker run hello-world` and see a response like this:
-> **Note**: You may need to add your user to the `docker` group in order to call this command without sudo. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
+### Test Docker version
 
-> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](https://docs.docker.com/get-started/part2/) of the tutorial.
+Ensure that you have a supported version of Docker:
+
+```shell
+$ docker --version
+Docker version 17.12.0-ce, build c97c6d6
+```
+
+Run `docker version`(without `--`) or `docker info` to view even more details
+about your docker installation:
+
+```shell
+$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 17.12.0-ce
+Storage Driver: overlay2
+...
+```
+
+> **Note**: To avoid permission errors (and the use of sudo), you may need to
+> add your user to the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){:target="_blank"}.
+
+### Test Docker installation
+
+Test that your installation works by running a simple Docker image:
 
 ```shell
 $ docker run hello-world
 
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+ca4f61b1923c: Pull complete
+Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+Status: Downloaded newer image for hello-world:latest
+
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
-...(snipped)...
+...
 ```
 
-Now would also be a good time to make sure you are using version 1.13 or higher. Run `docker --version` to check it out.
+List the `hello-world` image:
 
 ```shell
-$ docker --version
-Docker version 17.05.0-ce-rc1, build 2878a85
+$ docker image ls
 ```
 
-If you see messages like the ones above, you are ready to begin your journey.
+List the `hello-world` container, which exited after displaying its message. If
+it were still running, you would _not_ need the `--all` option:
 
-## Conclusion
+```shell
+$ docker container ls --all
+```
 
-The unit of scale being an individual, portable executable has vast
-implications. It means CI/CD can push updates to any part of a distributed
-application, system dependencies are not an issue, and resource density is
-increased. Orchestration of scaling behavior is a matter of spinning up new
-executables, not new VM hosts.
+## Recap and cheat sheet
 
-We'll be learning about all of these things, but first let's learn to walk.
+```shell
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Excecute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, quiet mode)
+docker container ls
+docker container ls -a
+docker container ls -a -q
+```
+
+## Conclusion of part one
+
+Container images are portable executables that make [CI/CD](https://www.docker.com/use-cases/cicd){:target="_blank"} seamless. For example:
+
+- applications have no system dependencies
+- updates can be pushed to any part of a distributed application
+- resource density can be optimized.
+
+With Docker, scaling your application is a matter of spinning up new
+executables, not running heavy VM hosts.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
