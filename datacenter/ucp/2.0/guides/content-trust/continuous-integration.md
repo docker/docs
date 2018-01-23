@@ -39,8 +39,9 @@ this user. It is also recommended to change the description associated with the 
 key stored in UCP such that you can identify in the future which key is being used for
 signing.
 
-N.B. each time a user retrieves a new client bundle, a new keypair is generated. It is therefore
-necessary to keep track of a specific bundle that a user chooses to designate as their signing bundle.
+Each time a user retrieves a new client bundle, a new keypair is generated.
+Therefore, you need to keep track of a specific bundle that a user chooses to
+designate as their signing bundle.
 
 Once you have decompressed the client bundle, the only two files you need for the purposes
 of signing are `cert.pem` and `key.pem`. These represent the public and private parts of

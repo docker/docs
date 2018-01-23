@@ -103,9 +103,9 @@ image manifest from the Docker registry.
 Notary generates and stores signing keys on the host it's running on. This means
 that the Docker Hub cannot delete tags from the trust data, they must be deleted
 using the Notary client. You can do this with the `notary remove` command.
-Again, you must direct it to speak to the correct Notary server (N.B. neither
-you nor the author has permissions to delete tags from the official alpine
-repository, the output below is for demonstration only):
+Again, you must direct it to speak to the correct Notary server. Neither
+you nor the author has permissions to delete tags from the official `alpine`
+repository, so the output below is for demonstration only:
 
 ```bash
 $ notary -s https://notary.docker.io -d ~/.docker/trust remove docker.io/library/alpine 2.6
