@@ -1,14 +1,14 @@
 ---
 title: Deploy a simple stateless app with RBAC
 description: Learn how to deploy a simple application and customize access to resources.
-keywords: rbac, authorize, authentication, users, teams, UCP, Docker
+keywords: rbac, authorize, authentication, user, team, UCP, Kubernetes
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
 ---
 {% if include.version=="ucp-3.0" %}
 
-This tutorial explains how to deploy a nginx web server and limit access to one
+This tutorial explains how to deploy a NGINX web server and limit access to one
 team with role-based access control (RBAC).
 
 ## Scenario
@@ -17,9 +17,10 @@ You are the Docker EE system administrator at Acme Company and need to configure
 permissions to company resources. The best way to do this is to:
 
 - Build the organization with teams and users.
-- Define roles with allowable operations per resource types (can run containers, etc.).
-- Create collections or namespaces for storing actual resources.
-- Create grants that join team + role + resources.
+- Define roles with allowable operations per resource types, like 
+  permission to run containers.
+- Create collections or namespaces for accessing actual resources.
+- Create grants that join team + role + resource set.
 
 ## Build the organization
 
@@ -36,16 +37,16 @@ acme-datacenter
     └── Chad Chavez
 ```
 
-See: [Create and configure users and teams](create-users-and-teams-manually.md).
+Learn to [create and configure users and teams](create-users-and-teams-manually.md).
 
 ## Kubernetes deployment
 
-In this section, we deploy `nginx` with Kubernetes. See [Swarm stack](#swarm-stack)
+In this section, we deploy NGINX with Kubernetes. See [Swarm stack](#swarm-stack)
 for the same exercise with Swarm.
 
 ### Create namespace
 
-Create a namespace to logically store the nginx application:
+Create a namespace to logically store the NGINX application:
 
 1. Click **Kubernetes** > **Namespaces**.
 2. Paste the following manifest in the terminal window and click **Create**.
@@ -68,7 +69,7 @@ simple role for the ops team:
 4. On the **Operations** tab, check all **Kubernetes Deployment Operations**.
 5. Click **Create**.
 
-See: [Create and configure users and teams](create-users-and-teams-manually.md).
+Learn to [create and configure users and teams](create-users-and-teams-manually.md).
 
 ### Grant access
 
@@ -79,11 +80,11 @@ custom role, **Kube Deploy**.
 acme-datacenter/ops + Kube Deploy + nginx-namespace
 ```
 
-### Deploy Nginx
+### Deploy NGINX
 
 You've configured Docker EE. The `ops` team can now deploy `nginx`.
 
-1. Log on to UCP as chad (on the `ops`team).
+1. Log on to UCP as "chad" (on the `ops`team).
 2. Click **Kubernetes** > **Namespaces**.
 3. Paste the following manifest in the terminal window and click **Create**.
 
@@ -110,17 +111,17 @@ spec:
 ```
 
 4. Log on to UCP as each user and ensure that:
-- `dba` (alex) cannot see `nginx-namespace`.
-- `dev` (bett) cannot see `nginx-namespace`.
+- `dba` (alex) can't see `nginx-namespace`.
+- `dev` (bett) can't see `nginx-namespace`.
 
 ## Swarm stack
 
 In this section, we deploy `nginx` as a Swarm service. See [Kubernetes Deployment](#kubernetes-deployment)
-for the same exercise with Swarm.
+for the same exercise with Kubernetes.
 
 ### Create collection paths
 
-Create a collection for nginx resources, nested under the `/Shared` collection:
+Create a collection for NGINX resources, nested under the `/Shared` collection:
 
 ```
 /
@@ -131,7 +132,7 @@ Create a collection for nginx resources, nested under the `/Shared` collection:
 
 > **Tip**: To drill into a collection, click **View Children**.
 
-See: [Group and isolate cluster resources](group-resources.md).
+Learn to [group and isolate cluster resources](group-resources.md).
 
 ### Define roles
 
@@ -144,18 +145,18 @@ simple role for the ops team:
 4. On the **Operations** tab, check all **Service Operations**.
 5. Click **Create**.
 
-See: [Create and configure users and teams](define-roles.md).
+Learn to [create and configure users and teams](define-roles.md).
 
 ### Grant access
 
-Grant the ops team (and only the ops team) access to nginx-collection with the
-built-in role, **Swarm Deploy**.
+Grant the ops team (and only the ops team) access to `nginx-collection` with
+the built-in role, **Swarm Deploy**.
 
 ```
 acme-datacenter/ops + Swarm Deploy + /Shared/nginx-collection
 ```
 
-See: [Grant role-access to cluster resources](grant-permissions.md).
+Learn to [grant role-access to cluster resources](grant-permissions.md).
 
 ### Deploy NGINX
 

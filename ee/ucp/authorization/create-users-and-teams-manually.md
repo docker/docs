@@ -93,7 +93,7 @@ To manually create users in UCP:
 5. [optional] Check "Is a Docker EE Admin".
 
 > A `Docker EE Admin` can grant users permission to change the cluster
-> configuration and manage grants, roles, and collections.
+> configuration and manage grants, roles, and resource sets.
 
 ![](../images/ucp_usermgmt_users_create01.png){: .with-border}
 ![](../images/ucp_usermgmt_users_create02.png){: .with-border}

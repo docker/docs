@@ -83,7 +83,7 @@ for modifying this config file.
 | Parameter               | Required | Description                                                                                                                                                                        |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `backend`               | no       | The name of the authorization backend to use, either `managed` or `ldap`. The default is `managed`.                                                                                |
-| `default_new_user_role` | no       | The role that new users get for their private collections. Values are `admin`, `viewonly`, `scheduler`, `restrictedcontrol`, or `fullcontrol`. The default is `restrictedcontrol`. |
+| `default_new_user_role` | no       | The role that new users get for their private resource sets. Values are `admin`, `viewonly`, `scheduler`, `restrictedcontrol`, or `fullcontrol`. The default is `restrictedcontrol`. |
 
 
 ## auth.sessions

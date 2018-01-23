@@ -25,8 +25,9 @@ lifecycle, or the hardware resources they have.
 ![](../../images/add-labels-to-cluster-nodes-1.svg)
 
 Don't create labels for authorization and permissions to resources.
-Instead, use collections to organize access to your swarm.
-[Learn about managing access with collections](../../authorization/group-resources.md).   
+Instead, use resource sets, either UCP collections or Kubernetes namespaces,
+to organize access to your cluster.
+[Learn about managing access with resource sets](../../authorization/group-resources.md).   
 
 ## Apply labels to a node
 

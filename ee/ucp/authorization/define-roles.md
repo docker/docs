@@ -15,8 +15,8 @@ next_steps:
 ---
 {% if include.version=="ucp-3.0" %}
 
-A role defines a set of API operations permitted against a group of resources.
-Roles are applied to users and teams with grants.
+A role defines a set of API operations permitted against a resource set.
+You apply roles to users and teams by creating grants.
 
 ![Diagram showing UCP permission levels](../images/permissions-ucp.svg)
 
@@ -40,7 +40,7 @@ organization.
 
 You can give a role a global name, such as "Remove Images", which might enable the
 **Remove** and **Force Remove** operations for images. You can apply a role with
-the same name to different collections or namespaces.
+the same name to different resource sets.
 
 1. Click **Roles** under **User Management**.
 2. Click **Create Role**.
@@ -53,8 +53,8 @@ the same name to different collections or namespaces.
 
 > **Some important rules regarding roles**:
 > - Roles are always enabled.
-> - Roles cannot be edited--they must be deleted and recreated.
-> - Roles used within a grant can only be deleted after first deleting the grant.
+> - Roles can't be edited. To edit a role, you must delete and recreate it.
+> - Roles used within a grant can be deleted only after first deleting the grant.
 > - Only administrators can create and delete roles.
 
 {% endif %}

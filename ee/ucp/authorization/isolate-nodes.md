@@ -91,7 +91,7 @@ Move a worker node by changing the value of its access label key,
 
 ## Grant access for a team
 
-You'll need two grants to control access to nodes and container resources:
+You need two grants to control access to nodes and container resources:
 
 -  Grant the `Ops` team the `Restricted Control` role for the `/Prod/Webserver`
    resources.
@@ -129,8 +129,8 @@ The same steps apply for the nodes in the `/Prod` collection.
 
 The cluster is set up for node isolation. Users with access to nodes in the
 `/Prod` collection can deploy [Swarm services](#deploy-a-swarm-service-as-a-team-member)
-and [Kubernetes apps](#deploy-a-kubernetes-application), and their workloads won't be scheduled
-on nodes that aren't in the collection.
+and [Kubernetes apps](#deploy-a-kubernetes-application), and their workloads
+won't be scheduled on nodes that aren't in the collection.
 
 ## Deploy a Swarm service as a team member
 
@@ -181,8 +181,8 @@ that has a `Service Create` grant for the user.
 
 ## Deploy a Kubernetes application
 
-Starting in Docker EE Platform 2.0, you can deploy a Kubernetes workload to
-worker nodes, based on a Kubernetes namespace. 
+Starting in Docker Enterprise Edition 2.0, you can deploy a Kubernetes workload
+to worker nodes, based on a Kubernetes namespace. 
 
 1.  Convert a node to use the Kubernetes orchestrator.
 2.  Create a Kubernetes namespace.

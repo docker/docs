@@ -1,10 +1,12 @@
 ---
 title: Access control model
 description: Manage access to resources with role-based access control.
-keywords: ucp, grant, role, permission, authentication, authorization
+keywords: ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes
 ui_tabs:
 - version: ucp-3.0
-  orlower: true
+  orlower: false
+- version: ucp-2.2
+  orlower: false
 next_steps:
 - path: create-users-and-teams-manually/
   title: Create and configure users and teams
@@ -29,7 +31,7 @@ administrators might take the following high-level steps:
 - Define custom **roles** (or use defaults) by adding permitted operations per
   resource types.
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
-- Create **grants** by marrying subject + role + resource group.
+- Create **grants** by combining subject + role + resource group.
 
 For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 
@@ -45,62 +47,67 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-For more, see: [Create and configure users and teams](create-users-and-teams-manually.md)
+Learn to [create and configure users and teams](create-users-and-teams-manually.md)
 
 ## Roles
 
 Roles define what operations can be done by whom. A role is a set of permitted
-operations against a *resource type* (such as an image, container, volume) that
-is assigned to a user or team with a grant.
+operations against a *resource type*, like a container or volume, that's
+assigned to a user or team with a grant.
 
 For example, the built-in role, **Restricted Control**, includes permission to
 view and schedule nodes but not to update nodes. A custom **DBA** role might
-include permissions to r-w-x volumes and secrets.
+include permissions to `r-w-x` volumes and secrets.
 
 Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-For more, see: [Define roles with authorized API operations](define-roles.md)
+Learn to [define roles with authorized API operations](define-roles.md)
 
-## Resources
+## Resource sets
 
-Cluster resources are grouped into Swarm collections or Kubernetes namespaces.
+To control user access, cluster resources are grouped into Docker Swarm *collections*
+or Kubernetes *namespaces*.
 
-A collection is a directory that holds Swarm resources. You can create
-collections in UCP by both defining a directory path and moving resources into
-it. Or you can create the path in UCP and use *labels* in your YAML file to
-assign application resources to that path.
+- **Swarm collections**: A collection has a directory-like structure that holds
+  Swarm resources. You can create collections in UCP by defining a directory path
+  and moving resources into it. Also, you can create the path in UCP and use
+  *labels* in your YAML file to assign application resources to the path.
+  Resource types that users can access in a Swarm collection include containers,
+  networks, nodes, services, secrets, and volumes.
 
-> Resource types that can be placed into a Swarm collection include: Containers,
-> Networks, Nodes, Services, Secrets, and Volumes.
-
-A
+- **Kubernetes namespaces**: A
 [namespace](https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
-is a logical area for a Kubernetes cluster. Kubernetes comes with a "default"
-namespace for your cluster objects (plus two more for system and public
-resources). You can create custom namespaces, but unlike Swarm collections,
-namespaces _cannot be nested_.
+  is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
+  namespace for your cluster objects, plus two more namespaces for system and
+  public resources. You can create custom namespaces, but unlike Swarm
+  collections, namespaces _can't be nested_. Resource types that users can
+  access in a Kubernetes namespace include pods, deployments, network policies,
+  nodes, services, secrets, and many more.
 
-> Resource types that can be placed into a Kubernetes namespace include: Pods,
-> Deployments, NetworkPolicies, Nodes, Services, Secrets, and many more.
-
-For more, see: [Group and isolate cluster resources](group-resources.md).
+Together, collections and namespaces are named *resource sets*. Learn to
+[group and isolate cluster resources](group-resources.md).
 
 ## Grants
 
-A grant is made up of *subject*, *role*, and *resource group*.
+A grant is made up of *subject*, *role*, and *resource set*.
 
 Grants define which users can access what resources in what way. Grants are
-effectively Access Control Lists (ACLs), and when grouped together, can
+effectively Access Control Lists (ACLs), and when grouped together, they
 provide comprehensive access policies for an entire organization.
 
-Only an administrator can manage grants, subjects, roles, and resources.
+Only an administrator can manage grants, subjects, roles, and access to
+resources.
 
-> Administrators are users who create subjects, group resources by moving them
-> into directories or namespaces, define roles by selecting allowable operations,
-> and apply grants to users and teams.
+> About administrators
+>
+> An administrator is a user who creates subjects, groups resources by moving them
+> into collections or namespaces, defines roles by selecting allowable operations,
+> and applies grants to users and teams.
 
-For more info, see: [Grant access to cluster resources](grant-permissions.md).
+{% elsif include.version=="ucp-2.2" %}
+
+Learn about [access control model in UCP](/datacenter/ucp/2.2/guides/access-control/index.md).
 
 {% endif %}

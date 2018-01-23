@@ -1,10 +1,12 @@
 ---
 title: Group and isolate cluster resources
-description: Learn how to group resources into collections or namespaces to control access.
-keywords: rbac, ucp, grant, role, permission, authentication, resource collection, namespace
+description: Learn how to group resources into collections or namespaces to control user access.
+keywords: rbac, ucp, grant, role, permission, authentication, resource set, collection, namespace, Kubernetes
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
+- version: ucp-2.2
+  orlower: false
 next_steps:
 - path: create-users-and-teams-manually/
   title: Create and configure users and teams
@@ -21,7 +23,7 @@ redirect_from:
 
 A
 [namespace](https://v1-8.docs.kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
-is a logical area for a Kubernetes cluster. Kubernetes comes with a "default"
+is a logical area for a Kubernetes cluster. Kubernetes comes with a `default`
 namespace for your cluster objects (plus two more for system and public
 resources). You can create custom namespaces, but unlike Swarm collections,
 namespaces _cannot be nested_.
@@ -157,5 +159,9 @@ one of the nodes under `/Shared`.
 If you want to isolate nodes against other teams, place these nodes in new
 collections, and assign the `Scheduler` role, which contains the `Node Schedule`
 permission, to the team. [Isolate swarm nodes to a specific team](isolate-nodes.md).
+
+{% elsif include.version=="ucp-2.2" %}
+
+Learn to [manage access to resources by using collections](/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections.md).
 
 {% endif %}
