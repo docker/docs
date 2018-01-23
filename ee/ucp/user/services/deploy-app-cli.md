@@ -18,8 +18,8 @@ Docker UCP secures your Docker cluster with
 [role-based access control](../../authorization/index.md),
 so that only authorized users can deploy applications. To be able to run Docker
 commands on a cluster managed by UCP, you need to configure your Docker CLI
-client to authenticate to UCP using client certificates. 
-[Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).
+client to authenticate to UCP using client certificates.
+[Learn how to set your CLI to use client certificates](../user-access/cli.md).
 
 ## Deploy the voting application
 

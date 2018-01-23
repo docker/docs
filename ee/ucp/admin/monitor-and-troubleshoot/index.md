@@ -34,11 +34,11 @@ managed by UCP are healthy or not.
 ![UCP dashboard](../../images/monitor-ucp-1.png){: .with-border}
 
 Each node has a status message explaining any problems with the node.
-In this example, a Windows worker node is down. 
+In this example, a Windows worker node is down.
 [Learn more about node status](troubleshoot-node-messages.md).
 Click the node to get more info on its status. In the details pane, click
 **Actions** and select **Agent logs** to see the log entries from the
-node. 
+node.
 
 {% elsif include.version=="ucp-2.2" %}
 
@@ -52,7 +52,7 @@ Learn how to [monitor the cluster status](/datacenter/ucp/2.2/guides/admin/monit
 {% if include.version=="docker-cli-linux" %}
 
 You can also monitor the status of a UCP cluster using the Docker CLI client.
-Download [a UCP client certificate bundle](../../user/access-ucp/cli-based-access.md)
+Download [a UCP client certificate bundle](../../user-access/cli.md)
 and then run:
 
 ```bash
@@ -81,7 +81,7 @@ If you're accessing the `_ping` endpoint through a load balancer, you'll have no
 way of knowing which UCP manager node is not healthy, since any manager node
 might be serving your request. Make sure you're connecting directly to the
 URL of a manager node, and not a load balancer. In addition, please be aware that
-pinging the endpoint with HEAD will result in a 404 error code. It is better to 
+pinging the endpoint with HEAD will result in a 404 error code. It is better to
 use GET instead.
 
 {% endif %}

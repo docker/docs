@@ -160,7 +160,7 @@ With Docker EE, you deploy your Kubernetes objects on the command line by using
 
 Use a client bundle to configure your client tools, like Docker CLI and `kubectl`
 to communicate with UCP instead of the local deployments you might have running.
-[Get your client bundle by using the Docker EE web UI or the command line](../access-ucp/cli-based-access.md).
+[Get your client bundle by using the Docker EE web UI or the command line](../user-access/cli.md).
 
 When you have the client bundle set up, you can deploy a Kubernetes object
 from YAML.

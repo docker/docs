@@ -1675,14 +1675,14 @@ manuals:
           title: Docker EE Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
           title: Docker EE Advanced use case
+    - sectiontitle: Access UCP
+      section:
+      - path: /ee/ucp/user-access/
+        title: Web-based access
+      - path: /ee/ucp/user-access/cli/
+        title: CLI-based access
     - sectiontitle: User guides
       section:
-      - sectiontitle: Access UCP
-        section:
-        - path: /ee/ucp/user/access-ucp/
-          title: Web-based access
-        - path: /ee/ucp/user/access-ucp/cli-based-access/
-          title: CLI-based access
       - sectiontitle: Deploy an application
         section:
         - path: /ee/ucp/user/services/deploy-a-service/

@@ -20,7 +20,7 @@ Docker images and deploy services to UCP using these images.
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR).
 This means that you can deploy services from the UCP web UI, using Docker
 images that are stored in DTR. You can also use a
-[UCP client bundle](../../user/access-ucp/cli-based-access.md) to do the same from the
+[UCP client bundle](../../user-access/cli.md) to do the same from the
 CLI.
 
 If you've configured DTR to use TLS certificates issued by a globally-trusted

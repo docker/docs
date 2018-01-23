@@ -12,6 +12,7 @@ next_steps:
   title: Deploy a service
 redirect_from:
   - /datacenter/ucp/3.0/guides/user/access-ucp/cli-based-access/
+  - /ee/ucp/user/access-ucp/cli-based-access/
 ---
 {% if include.version=="ucp-3.0" %}
 

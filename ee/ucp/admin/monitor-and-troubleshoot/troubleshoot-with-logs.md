@@ -39,7 +39,7 @@ specially useful if the UCP web application is not working.
 
     When using the Docker CLI client, you need to authenticate using client
     certificates.
-    [Learn how to use client certificates](../../user/access-ucp/cli-based-access.md).
+    [Learn how to use client certificates](../../user-access/cli.md).
     If your client certificate bundle is for a non-admin user, you won't have
     permissions to see the UCP system containers.
 
