@@ -2,11 +2,13 @@
 title: Deploy application resources to a collection
 description: Learn how to manage user access to application resources by using collections.
 keywords: UCP, authentication, user management, stack, collection, role, application, resources
+redirect_from:
+  - /ee/ucp/user/services/deploy-stack-to-collection/
 ui_tabs:
 - version: ucp-3.0
   orlower: true
 next_steps:
-- path: deploy-compose-on-kubernetes/
+- path: ../kubernetes/deploy-with-compose/
   title: Deploy a Compose-based app to a Kubernetes cluster
 - path: /engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label/
   title: Set metadata on a service (-l, –label)
@@ -19,7 +21,7 @@ Docker Universal Control Plane enforces role-based access control when you
 deploy services. By default, you don't need to do anything, because UCP deploys
 your services to a default collection, unless you specify another one. You can
 customize the default collection in your UCP profile page.
-[Learn more about access control and collections](../../authorization/index.md).
+[Learn more about access control and collections](../authorization/index.md).
 
 UCP defines a collection by its path. For example, a user's default collection
 has the path `/Shared/Private/<username>`. To deploy a service to a collection
@@ -28,7 +30,7 @@ service. The access label is named `com.docker.ucp.access.label`.
 
 When UCP deploys a service, it doesn't automatically create the collections
 that correspond with your access labels. An administrator must create these
-collections and [grant users access to them](../../authorization/grant-permissions.md).
+collections and [grant users access to them](../authorization/grant-permissions.md).
 Deployment fails if UCP can't find a specified collection or if the user
 doesn't have access to it.
 
@@ -101,6 +103,6 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
 3. On the **Services** page, click **wordpress_mysql**. In the details pane,
    make sure that the **Collection** is `/Shared/wordpress`.
 
-![](../../images/deploy-stack-to-collection.png){: .with-border}
+![](../images/deploy-stack-to-collection.png){: .with-border}
 
 {% endif %}

@@ -2,6 +2,8 @@
 title: Deploy a workload to a Kubernetes cluster
 description: Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.
 keywords: UCP, Docker EE, orchestration, Kubernetes, cluster
+redirect_from:
+  - /ee/ucp/user/services/deploy-kubernetes-workload/
 ui_tabs:
 - version: ucp-3.0
   orlower: false
@@ -52,7 +54,7 @@ later section.
 4. In the **Object YAML** editor, paste the previous YAML.
 5. Click **Create**.
 
-![](../../images/deploy-kubernetes-workload-1.png){: .with-border}
+![](../images/deploy-kubernetes-workload-1.png){: .with-border}
 
 ## Inspect the deployment
 
@@ -69,7 +71,7 @@ links in the **Kubernetes** section of the left pane.
     the **Status** section to see that pod's phase, IP address, and other
     properties.
 
-![](../../images/deploy-kubernetes-workload-2.png){: .with-border}
+![](../images/deploy-kubernetes-workload-2.png){: .with-border}
 
 ## Expose the server
 
@@ -103,7 +105,7 @@ The service connects the cluster's internal port 80 to the external port
     section.
 3.  Click the link that's labeled **URL** to
 
-![](../../images/deploy-kubernetes-workload-3.png){: .with-border}
+![](../images/deploy-kubernetes-workload-3.png){: .with-border}
 
 The YAML definition connects the service to the NGINX server by using the
 app label `nginx` and a corresponding label selector.

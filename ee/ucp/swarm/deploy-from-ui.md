@@ -2,11 +2,13 @@
 title: Deploy an app from the UI
 description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords: ucp, deploy, application, stack, service, compose
+redirect_from:
+  - /ee/ucp/user/services/
 ui_tabs:
 - version: ucp-3.0
   orlower: true
 next_steps:
-- path: deploy-app-cli/
+- path: deploy-from-cli/
   title: Deploy an app from the CLI
 ---
 {% if include.version=="ucp-3.0" %}
@@ -31,7 +33,7 @@ In your browser, log in to the UCP web UI, and navigate to the
 **Stacks** page. Click **Create Stack** to deploy a new application.
 
 Give the application a name, like "VotingApp", and in the **Mode** field,
-select **Services**. 
+select **Services**.
 
 Paste the following YAML into the **COMPOSE.YML** editor:
 
@@ -121,7 +123,7 @@ volumes:
   db-data:
 ```
 
-![](../../images/deploy-app-ui-1.png){: .with-border}
+![](../images/deploy-app-ui-1.png){: .with-border}
 
 > When "Services" is selected, you can define services in this YAML file that
 have a `deploy:` key, which schedules the containers on certain nodes, defines
@@ -137,17 +139,17 @@ you deployed across your nodes. Click the `VotingApp_vote` service and find
 the **Published Endpoint** field in the details pane. Click the link to visit
 the voting page, which is published on port `5000`.
 
-![Screenshot of deployed service](../../images/deployed_visualizer.png){: .with-border}
+![Screenshot of deployed service](../images/deployed_visualizer.png){: .with-border}
 
-Click **Cats** and **Dogs** a few times to register some votes, and notice 
+Click **Cats** and **Dogs** a few times to register some votes, and notice
 that each click is processed by a different container.
 
-Go back to the **Services** page in the UCP web UI. Click the 
+Go back to the **Services** page in the UCP web UI. Click the
 `VotingApp_result` service and find the **Published Endpoint** field in
 the details pane. It has the same URL as the other `VotingApp` services,
 but it's published on port `5001`. Click the link to view the vote tally.
 
-Back in the **Services** page, click the 
+Back in the **Services** page, click the
 `VotingApp_visualizer` service and find the **Published Endpoint** field in
 the details pane. You'll see a link to your UCP instance's URL that includes
 the published port of the visualizer service, which is 8080 in this case.
@@ -155,7 +157,7 @@ the published port of the visualizer service, which is 8080 in this case.
 Visiting this URL accesses the running instance of the `VotingApp_visualizer`
 service in your browser, which shows a map of how this application was deployed:
 
-![Screenshot of visualizer](../../images/deployed_visualizer_detail.png){: .with-border}
+![Screenshot of visualizer](../images/deployed_visualizer_detail.png){: .with-border}
 
 You can see some of the characteristics of the deployment specification
 from the Compose file in play. For example, the manager node is running the
@@ -173,7 +175,7 @@ Compose keywords are not supported:
 * env_file
 
 To overcome these limitations, you can
-[deploy your apps from the CLI](deploy-app-cli.md).
+[deploy your apps from the CLI](deploy-from-cli.md).
 
 Also, UCP doesn't store the compose file used to deploy the application. You can
 use your version control system to persist that file.

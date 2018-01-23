@@ -2,6 +2,8 @@
 title: Deploy an app from the CLI
 description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords: ucp, deploy, application, stack, service, compose
+redirect_from:
+  - /ee/ucp/user/services/deploy-app-cli/
 ui_tabs:
 - version: ucp-3.0
   orlower: true
@@ -15,7 +17,7 @@ application that allows users to vote on whether they prefer cats or dogs.
 ## Get a client certificate bundle
 
 Docker UCP secures your Docker cluster with
-[role-based access control](../../authorization/index.md),
+[role-based access control](../authorization/index.md),
 so that only authorized users can deploy applications. To be able to run Docker
 commands on a cluster managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates.
@@ -155,7 +157,7 @@ published to port 8080. Visiting that port accesses the running instance of
 the visualizer service in your browser, which shows a map of how this application
 was deployed:
 
-![Screenshot of visualizer](../../images/deployed_visualizer_detail.png){: .with-border}
+![Screenshot of visualizer](../images/deployed_visualizer_detail.png){: .with-border}
 
 Here you can see some of the characteristics of the deployment specification
 from the Compose file in play. For example, the manager node is running the

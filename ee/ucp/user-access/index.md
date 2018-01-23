@@ -6,9 +6,9 @@ ui_tabs:
 - version: ucp-3.0
   orlower: true
 next_steps:
-- path: ../../authorization/
+- path: ../authorization/
   title: Authorization
-- path: cli-based-access/
+- path: cli/
   title: Access UCP from the CLI
 redirect_from:
   - /ee/ucp/user/access-ucp/
