@@ -56,9 +56,8 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited you want to learn how to use Docker. Docker lets you
-easily **build, ship, and run** any application on any platform. Let's get
-started.
+Welcome! We are excited that you want to learn Docker. Docker lets you easily
+**build, ship, and run** any application on any platform. Let's get started.
 
 The Docker _Get Started_ tutorial teaches you how to:
 
@@ -72,45 +71,48 @@ The Docker _Get Started_ tutorial teaches you how to:
 ## Images and containers
 
 An **image** is a lightweight, stand-alone, executable package that includes
-everything needed to run a piece of software&#8212;the code, a runtime,
-libraries, environment variables, and configuration files. You can find
-thousands of images on [Docker Hub](https://hub.docker.com/explore/).
+everything needed to run a piece of software--the code, a runtime, libraries,
+environment variables, and configuration files. You can find thousands of images
+on [Docker Hub](https://hub.docker.com/explore/){: target="_blank" class="_"}.
 
-A **container** is a runtime instance of an image&#8212;what the image becomes
-in memory when executed. By default, a container runs completely isolated from
-the host environment, only accessing host files and ports if configured to do
-so.
+A **container** is a runtime instance of an image--what the image becomes in
+memory when executed. By default, a container runs completely isolated from the
+host environment, only accessing host files and ports if configured to do so.
 
 The use of Linux containers to build, deploy, and run applications is called
-[containerization](https://en.wikipedia.org/wiki/Operating-system-level_virtualization).
+[containerization](https://en.wikipedia.org/wiki/Operating-system-level_virtualization){: target="_blank" class="_"}.
 Containers are not new but their use for easily deploying applications is.
 
 ## Containers vs. virtual machines
 
-Each **virtual machine** (VM) runs a "guest" operating system (OS) with only
-virtual access to host resources through a hypervisor. VMs are resource
-intensive, and the resulting disk image and application state is an entanglement
-of OS settings, system-installed dependencies, OS security patches, and other
-easy-to-lose, hard-to-replicate ephemera. VMs provide an environment with far
-more resources than most applications need.
+A **virtual machine** (VM) runs a "guest" operating system (OS) with virtual (as
+opposed to native) access to host resources through a hypervisor. VMs are
+resource intensive, and the resulting disk image and application state is an
+entanglement of OS settings, system-installed dependencies, OS security patches,
+and other ephemera. VMs provide an environment with more resources than most
+applications need.
 
-By contrast, a **container** runs applications natively and shares the kernel of
-the host machine with other containers, keeping it lightweight. Each container
-runs in a discrete process, taking no more memory than any other executable. The
-only information needed in a container image is the executable and its package
-dependencies, which never need to be installed on the host system. Because
-containers house their dependencies, a containerized app is portable and “runs
-anywhere.”
+By contrast, a **container** runs applications natively and shares the kernel
+of the host machine with other containers, keeping it lightweight. Each
+container runs in a discrete process, taking no more memory than any other
+executable. The only information needed in a container is the executable and its
+package dependencies, which never need to be installed on the host system.
+Because containers house their dependencies, a containerized app is portable and
+“runs anywhere.”
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png){:width="300px"} | ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png){:width="300px"}
 
 ## Prepare your Docker environment
 
-Install a [supported version](https://docs.docker.com/engine/installation/#supported-platforms){:target="_blank"}
-of Docker Community Edition (CE) or Enterprise Edition (EE).
+Install a [maintained version](https://docs.docker.com/engine/installation/#updates-and-patches){: target="_blank" class="_"}
+of Docker Community Edition (CE) or Enterprise Edition (EE) on a
+[supported platform](https://docs.docker.com/engine/installation/#supported-platforms){: target="_blank" class="_"}.
 
-For full [Kubernetes integration on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){:target="_blank"},
-install [17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#edge-release-notes){:target="_blank"} or higher.
+> For full
+[Kubernetes integration on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"},
+install
+[17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
+or higher.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
@@ -139,12 +141,13 @@ Storage Driver: overlay2
 ...
 ```
 
-> **Note**: To avoid permission errors (and the use of sudo), you may need to
-> add your user to the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){:target="_blank"}.
+> **Note**: To avoid permission errors (and the use of `sudo`), add your user to
+> the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
 
 ### Test Docker installation
 
-Test that your installation works by running a simple Docker image:
+Test that your installation works by running the simple Docker image,
+[hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
 ```shell
 $ docker run hello-world
@@ -160,17 +163,20 @@ This message shows that your installation appears to be working correctly.
 ...
 ```
 
-List the `hello-world` image:
+List the `hello-world` image that was downloaded to your machine:
 
 ```shell
 $ docker image ls
 ```
 
-List the `hello-world` container, which exited after displaying its message. If
-it were still running, you would _not_ need the `--all` option:
+List the `hello-world` container (spawned by the image), which exited after
+displaying its message. If it were still running, you would _not_ need the
+`--all` option:
 
 ```shell
 $ docker container ls --all
+CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
 ```
 
 ## Recap and cheat sheet
@@ -191,15 +197,17 @@ docker run hello-world
 ## List Docker images
 docker image ls
 
-## List Docker containers (running, all, quiet mode)
+## List Docker containers (running, all, all in quiet mode)
 docker container ls
-docker container ls -a
+docker container ls -all
 docker container ls -a -q
 ```
 
 ## Conclusion of part one
 
-Container images are portable executables that make [CI/CD](https://www.docker.com/use-cases/cicd){:target="_blank"} seamless. For example:
+Container images are portable executables that make
+[CI/CD](https://www.docker.com/use-cases/cicd){: target="_blank" class="_"} seamless.
+For example:
 
 - applications have no system dependencies
 - updates can be pushed to any part of a distributed application
