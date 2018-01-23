@@ -109,4 +109,22 @@ UCP web UI.
 
 User "jane" has access to inspect pods in the `default` namespace.
 
+## Kubernetes limitations
+
+There are a few limitations that you should be aware of when creating
+Kubernetes workloads:
+
+* Docker EE has its own RBAC system, so it's not possible to create
+  `ClusterRole` objects, `ClusterRoleBinding` objects, or any other object that is
+  created by using the `/apis/rbac.authorization.k8s.io` endpoints.
+* To make sure your cluster is secure, only admin users can deploy pods with
+  privileged options. These are options like `PodSpec.hostIPC`, `PodSpec.hostNetwork`,
+  `PodSpec.hostPID`, `SecurityContext.allowPrivilegeEscalation`,
+  `SecurityContext.capabilities`, `SecurityContext.privileged`, and
+  `Volume.hostPath`.
+* You can't grant permissions to Kubernetes service accounts.
+  The `default` service account has no permissions and can't use the Kubernetes
+  API. All other service accounts have full admin permissions and can only be
+  used by Docker EE administrators.
+
 {% endif %}
