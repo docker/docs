@@ -32,7 +32,7 @@ navigate to the **My Profile** page.
 In the left pane, click **Client Bundles** and choose **New Client Bundle**
 to download the certificate bundle.
 
-![](../../images/cli-based-access-1.png){: .with-border}
+![](../images/cli-based-access-1.png){: .with-border}
 
 ## Use client certificates
 

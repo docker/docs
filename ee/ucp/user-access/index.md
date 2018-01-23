@@ -18,7 +18,7 @@ redirect_from:
 Docker Universal Control Plane allows you to manage your cluster in a visual
 way, from your browser.
 
-![](../../../../../images/ucp.png){: .with-border}
+![](../images/web-based-access-1.png){: .with-border}
 
 
 Docker UCP secures your cluster by using
@@ -31,7 +31,7 @@ From the browser, administrators can:
 * Grant permissions to users for scheduling tasks on specific nodes
   (with the Docker EE Advanced license).  
 
-![](../../images/web-based-access-2.png){: .with-border}
+![](../images/web-based-access-2.png){: .with-border}
 
 Non-admin users can only see and change the images, networks, volumes, and
 containers, and only when they're granted access by an administrator.
