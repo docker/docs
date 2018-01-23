@@ -23,7 +23,7 @@ associated pull request for the additional `docker run -v` flags is
 The following topics describe the challenges of bind-mounted volumes on `osxfs`,
 and the caching options provided to optimize performance.
 
-This blog post on  [Docker on Mac
+This blog post on [Docker on Mac
 Performance](https://stories.amazee.io/docker-on-mac-performance-docker-machine-vs-docker-for-mac-4c64c0afdf99)
 gives a nice, quick summary.
 
@@ -45,14 +45,14 @@ reflected in the other environment, and file system events (`inotify`,
 `FSEvents`) are consistently propagated in both directions.
 
 On Linux, these guarantees carry no overhead, since the underlying VFS is
-shared directly between host and container.  However, on macOS (and
+shared directly between host and container. However, on macOS (and
 other non-Linux platforms) there are significant overheads to
 guaranteeing perfect consistency, since messages describing file system
-actions must be passed synchronously between container and host.  The
+actions must be passed synchronously between container and host. The
 current implementation is sufficiently efficient for most tasks, but
 with certain types of workloads the overhead of maintaining perfect
 consistency can result in significantly worse performance than a
-native (non-Docker) environment.  For example,
+native (non-Docker) environment. For example,
 
  * running `go list ./...` in the bind-mounted `docker/docker` source tree
    takes around 26 seconds
@@ -60,13 +60,13 @@ native (non-Docker) environment.  For example,
  * writing 100MB in 1k blocks into a bind-mounted directory takes
    around 23 seconds
 
- * running `ember build` on a freshly created (i.e. empty) application
+ * running `ember build` on a freshly created (empty) application
    involves around 70000 sequential syscalls, each of which translates
    into a request and response passed between container and host.
 
 Optimizations to reduce latency throughout the stack have brought
 significant improvements to these workloads, and a few further
-optimization opportunities remain.  However, even when latency is
+optimization opportunities remain. However, even when latency is
 minimized, the constraints of maintaining consistency mean that these
 workloads remain unacceptably slow for some use cases.
 
@@ -75,25 +75,25 @@ workloads remain unacceptably slow for some use cases.
 **_Fortunately, in many cases where the performance degradation is most
 severe, perfect consistency between container and host is unnecessary._**
 In particular, in many cases there is no need for writes performed in a
-container to be immediately reflected on the host.  For example, while
+container to be immediately reflected on the host. For example, while
 interactive development requires that writes to a bind-mounted directory
 on the host immediately generate file system events within a container,
 there is no need for writes to build artifacts within the container to
-be immediately reflected on the host file system.  Distinguishing between
+be immediately reflected on the host file system. Distinguishing between
 these two cases makes it possible to significantly improve performance.
 
 There are three broad scenarios to consider, based on which you can dial in the
-level of consistency you need.  In each case, the container has an
+level of consistency you need. In each case, the container has an
 internally-consistent view of bind-mounted directories, but in two cases
 temporary discrepancies are allowed between container and host.
 
- * `consistent`: perfect consistency  
+ * `consistent`: perfect consistency
    (host and container have an identical view of the mount at all times)
 
- * `cached`: the host's view is authoritative  
+ * `cached`: the host's view is authoritative
    (permit delays before updates on the host appear in the container)
 
- * `delegated`: the container's view is authoritative  
+ * `delegated`: the container's view is authoritative
    (permit delays before updates on the container appear in the host)
 
 ## Examples
@@ -105,14 +105,14 @@ option of [`docker run`](https://docs.docker.com/engine/reference/run.md). For
 example, to bind-mount `/Users/yallop/project` in a container under the path
 `/project`, you might run the following command:
 
-```
+```bash
 docker run -v /Users/yallop/project:/project:cached alpine command
 ```
 
 The caching configuration can be varied independently for each bind mount,
 so you can mount each directory in a different mode:
 
-```
+```bash
 docker run -v /Users/yallop/project:/project:cached \
  -v /host/another-path:/mount/another-point:consistent
  alpine command
@@ -121,7 +121,7 @@ docker run -v /Users/yallop/project:/project:cached \
 ## Semantics
 
 The semantics of each configuration is described as a set of guarantees
-relating to the observable effects of file system operations.  In this
+relating to the observable effects of file system operations. In this
 specification, "host" refers to the file system of the user's Docker
 client.
 
@@ -130,15 +130,14 @@ client.
 The `delegated` configuration provides the weakest set of guarantees.
 For directories mounted with `delegated` the container's view of the
 file system is authoritative, and writes performed by containers may not
-be immediately reflected on the host file system.  As with (e.g.) NFS
+be immediately reflected on the host file system. In situations such as NFS
 asynchronous mode, if a running container with a `delegated` bind mount
 crashes, then writes may be lost.
 
-However, by relinquishing consistency, `delegated` mounts can offer
-significantly better performance than the other configurations.  Where
-the data written is ephemeral or readily reproducible (e.g. scratch
-space or build artifacts) `delegated` may be optimal for a user's
-workload.
+However, by relinquishing consistency, `delegated` mounts offer
+significantly better performance than the other configurations. Where
+the data written is ephemeral or readily reproducible, such as from scratch
+space or build artifacts, `delegated` may be the right choice.
 
 A `delegated` mount offers the following guarantees, which are presented
 as constraints on the container run-time:
@@ -149,7 +148,7 @@ state at the time the event was generated if no container modifications
 pertain to related file system state.
 
 2.  If flush or sync operations are performed, relevant data **_must_** be
-written back to the host file system.  Between flush or sync
+written back to the host file system.Between flush or sync
 operations containers **_may_** cache data written, metadata modifications,
 and directory structure changes.
 
@@ -184,7 +183,7 @@ synchronizes with the host source directory.
 
 The `cached` configuration provides all the guarantees of the `delegated`
 configuration, and some additional guarantees around the visibility of writes
-performed by containers.  As such, `cached` typically improves the performance
+performed by containers. As such, `cached` typically improves the performance
 of read-heavy workloads, at the cost of some temporary inconsistency between the
 host and the container.
 
@@ -218,13 +217,13 @@ namely:
 ### consistent
 
 The `consistent` configuration places the most severe restrictions on
-the container run-time.  For directories mounted with `consistent` the
+the container run-time. For directories mounted with `consistent` the
 container and host views are always synchronized: writes performed
 within the container are immediately visible on the host, and writes
 performed on the host are immediately visible within the container.
 
 The `consistent` configuration most closely reflects the behavior of
-bind mounts on Linux.  However, the overheads of providing strong
+bind mounts on Linux. However, the overheads of providing strong
 consistency guarantees make it unsuitable for a few use cases, where
 performance is a priority and maintaining perfect consistency has low
 priority.

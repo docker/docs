@@ -116,9 +116,9 @@ applications](https://github.com/remy/nodemon#application-isnt-restarting)
 ### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
-application file is not found, a volume mount is denied, or a service cannot
-start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might need
-to enable [shared drives](/docker-for-windows/index.md#shared-drives).
+application file is not found, access is denied to a volume mount, or a service
+cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
+you might need to enable [shared drives](/docker-for-windows/index.md#shared-drives).
 
 Volume mounting requires shared drives for Linux containers
 (not for Windows containers). Go to
@@ -497,10 +497,13 @@ to work with Linux containers.
 
 #### If you still want to use nested virtualization
 
-* Make sure your VMWare or Parallels has nested virtualization support enabled.
-The path in both apps should be similar, e.g., **Hardware -> CPU & Memory -> Advanced Options -> Enable nested virtualization**.
+* Make sure nested virtualization support is enabled in VMWare or Parallels.
+Check the settings in
+**Hardware -> CPU & Memory -> Advanced Options -> Enable nested virtualization**
+(the exact menu sequence might vary slightly).
 
-* Configure your VM with at least 2 CPUs and sufficient memory (e.g., 6GB).
+* Configure your VM with at least 2 CPUs and sufficient memory to run your
+workloads.
 
 * Make sure your system is more or less idle.
 
@@ -637,9 +640,9 @@ Restart your PC to stop / discard any vestige of the daemon running from the pre
 
 ### Unset `DOCKER_HOST`
 
-You do not need `DOCKER_HOST` set, so unset as it may be pointing at
-another Docker (e.g. VirtualBox). If you use bash, `unset ${!DOCKER_*}`
-unsets existing `DOCKER` environment variables you have set. For other shells, unset each environment variable individually.
+The `DOCKER_HOST` environmental variable does not need to be set.
+If you use bash, use the command `unset ${!DOCKER_*}` to unset it.
+For other shells, consult the shell's documentation.
 
 ### Make sure Docker is running for webserver examples
 
@@ -660,7 +663,13 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-**Some firewalls and anti-virus software might be incompatible with Microsoft Windows 10 builds** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
+**Some firewalls and anti-virus software might be incompatible with Microsoft
+**Windows 10 builds**, such as Windows 10 Anniversary Update. The conflict
+typically occurs after a Windows update or new install of the firewall, and
+manifests as an error response from the Docker daemon and a **Docker for
+Windows start failure**. The Comodo Firewall was one example of this problem,
+but users report that software has since been updated to work with these
+Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)

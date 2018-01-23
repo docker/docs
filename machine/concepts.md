@@ -74,13 +74,12 @@ you could see it with a `--debug` option. This data is sent to help us pinpoint
 recurring issues with `docker-machine` and is only transmitted in the case
 of a crash of `docker-machine`.
 
-If you wish to opt out of error reporting, you can create a `no-error-report`
-file in your `$HOME/.docker/machine` directory, and Docker Machine disables
-this behavior.  e.g.:
+To opt out of error reporting, create a `no-error-report`
+file in your `$HOME/.docker/machine` directory:
 
     $ mkdir -p ~/.docker/machine && touch ~/.docker/machine/no-error-report
 
-Leaving the file empty is fine -- Docker Machine just checks for its presence.
+The file doesn't need to have any contents.
 
 ## Getting help
 

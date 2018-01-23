@@ -63,7 +63,7 @@ To view scan results:
     Colored stripes in yellow, orange, and red indicate minor, major, and
     critical vulnerabilities respectively.
 
-    >**Tip:** Vulnerability scores are defined by the entity that issues the vulnerability (e.g., [NVD](https://nvd.nist.gov/)), and are based on a [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale) defined as part of the [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document).
+    >**Tip:** Vulnerability scores are defined by the entity that issues the vulnerability, such as [NVD](https://nvd.nist.gov/), and are based on a [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale) defined as part of the [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document).
 
 4. Click a scan summary to see more detailed results for the specific tag.
 

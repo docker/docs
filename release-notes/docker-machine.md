@@ -456,9 +456,7 @@ This is a patch release to fix a regression with STDOUT/STDERR behavior (#2587).
 
 ## 0.5.3 (2015-12-14)
 
-With this release Machine will be reverting back to distribution in a single binary, which is more efficient on bandwidth and hard disk space. All the core driver plugins are now included in the main binary. You will want to delete the old driver binaries that you might have in your path.
-
-e.g.:
+With this release Machine reverts to distribution in a single binary, which is more efficient on bandwidth and hard disk space. All the core driver plugins are now included in the main binary. Delete the old driver binaries that you might have in your path.
 
 ```console
 $ rm /usr/local/bin/docker-machine-driver-{amazonec2,azure,digitalocean,exoscale,generic,google,hyperv,none,openstack,rackspace,softlayer,virtualbox,vmwarefusion,vmwarevcloudair,vmwarevsphere}

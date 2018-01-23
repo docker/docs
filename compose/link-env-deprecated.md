@@ -18,22 +18,22 @@ environment variables, each of which begins with the uppercase name of the conta
 To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
 
 <b><i>name</i>\_PORT</b><br>
-Full URL, e.g. `DB_PORT=tcp://172.17.0.5:5432`
+Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
 
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
-Full URL, e.g. `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
 
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
-Container's IP address, e.g. `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
 
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
-Exposed port number, e.g. `DB_PORT_5432_TCP_PORT=5432`
+Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
 
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
-Protocol (tcp or udp), e.g. `DB_PORT_5432_TCP_PROTO=tcp`
+Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
 
 <b><i>name</i>\_NAME</b><br>
-Fully qualified container name, e.g. `DB_1_NAME=/myapp_web_1/myapp_db_1`
+Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 
 ## Related information
 

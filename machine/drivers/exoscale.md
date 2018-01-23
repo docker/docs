@@ -22,10 +22,10 @@ Get your API key and API secret key from [API details](https://portal.exoscale.c
 -   `--exoscale-api-secret-key`: **required** Your API secret key;
 -   `--exoscale-availability-zone`: Exoscale [availability zone][datacenters] (ch-dk-2, at-vie-1, de-fra-1, ...);
 -   `--exoscale-disk-size`: Disk size for the host in GB (10, 50, 100, 200, 400);
--   `--exoscale-image`: Image template (e.g. `ubuntu-16.04` also known as `Linux Ubuntu 16.04 LTS 64-bit`, [see below](#image-template-name));
+-   `--exoscale-image`: Image template, for example `ubuntu-16.04`, also known as `Linux Ubuntu 16.04 LTS 64-bit`, [see below](#image-template-name));
 -   `--exoscale-instance-profile`: Instance profile (Small, Medium, Large, ...);
 -   `--exoscale-security-group`: Security group. _It is created if it doesn't exist_;
--   `--exoscale-ssh-user`: SSH username (e.g. `ubuntu`, [see below](#ssh-username));
+-   `--exoscale-ssh-user`: SSH username, such as `ubuntu`, [see below](#ssh-username));
 -   `--exoscale-url`: Your API endpoint;
 -   `--exoscale-userdata`: Path to file containing user data for [cloud-init](https://cloud-init.io/);
 
@@ -51,7 +51,8 @@ Get your API key and API secret key from [API details](https://portal.exoscale.c
 
 The [VM templates][templates] available at Exoscale are listed on the Portal when adding a new instance.
 
-For any Linux template, you may use the shorter name composed only of the name and version. E.g.
+For any Linux template, you may use the shorter name composed only of the name
+and version, as shown below.
 
 | Full name                       | Short name           |
 | ------------------------------- | -------------------- |

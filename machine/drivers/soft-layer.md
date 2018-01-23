@@ -25,7 +25,7 @@ You need to generate an API key in the softlayer control panel.
 -   `--softlayer-image`: OS Image to use.
 -   `--softlayer-local-disk`: Use local machine disk instead of SoftLayer SAN.
 -   `--softlayer-memory`: Memory for host in MB.
--   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (e.g., 1000, 100, 10).
+-   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (1000, 100, 10).
 -   `--softlayer-private-net-only`: Disable public networking.
 -   `--softlayer-private-vlan-id`: Your private VLAN ID.
 -   `--softlayer-public-vlan-id`: Your public VLAN ID.

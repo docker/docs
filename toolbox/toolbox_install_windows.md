@@ -265,10 +265,9 @@ To uninstall Toolbox on Windows, do the following:
     the `.docker` directory under your user path.
     If it is still there, remove it manually.
     This directory stores some Docker
-    program configuration and/or state
-    (e.g., information about created machines such
-    as certificates).  Removing this directory
-    is typically not necessary.
+    program configuration and state, such as
+    information about created machines and
+    certificates. You usually don't need to remove this directory.
 
 6. Uninstall Oracle VirtualBox, which is
   installed as a part of the Toolbox install.

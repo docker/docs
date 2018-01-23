@@ -1470,9 +1470,9 @@ that allows to add build-time environment variables (#15182)
 
 + Add `awslogs` logging driver for Amazon CloudWatch (#15495)
 + Add generic `tag` log option to allow customizing container/image
-information passed to driver (e.g. show container names) (#15384)
+information passed to driver (#15384)
 - Implement the `docker logs` endpoint for the journald driver (#13707)
-- DEPRECATE driver-specific log tags (e.g. `syslog-tag`, etc.) (#15384)
+- DEPRECATE driver-specific log tags (#15384)
 
 ### Distribution
 

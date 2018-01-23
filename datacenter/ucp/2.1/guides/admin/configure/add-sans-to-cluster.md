@@ -44,9 +44,9 @@ default-cs,127.0.0.1,172.17.0.1
 {% endraw %}
 ```
 
-This will get the current set of SANs for the given manager node. Append your
-desired SAN to this list (e.g. `default-cs,127.0.0.1,172.17.0.1,example.com`)
-and then run:
+This gets the current set of SANs for the given manager node. Append your
+desired SAN to this list. For example, `default-cs,127.0.0.1,172.17.0.1,example.com`.
+The run:
 
 ```bash
 $ docker node update --label-add com.docker.ucp.SANs=<SANs-list> <node-id>

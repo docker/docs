@@ -65,7 +65,7 @@ You can use environment variables:
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-ssh-user`: The SSH Login username, which must match the default SSH user set in the ami used.
 -   `--amazonec2-subnet-id`: AWS VPC subnet ID.
--   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
+-   `--amazonec2-tags`: AWS extra tag key-value pairs. Comma-separated. For example, `key1,value1,key2,value2`.
 -   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-use-private-address`: Use the private IP address for docker-machine, but still create a public IP address.
 -   `--amazonec2-userdata`: Path to file with cloud-init user data.
@@ -163,7 +163,7 @@ This example assumes the VPC ID was found in the `a` availability zone. Use the`
 ## VPC Connectivity
 Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.
 
-If you use the flag `--amazonec2-private-address-only`, ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
+If you use the flag `--amazonec2-private-address-only`, ensure that you can access the new instance from within the internal network of the VPC, such as a corporate VPN to the VPC, a VPN instance inside the VPC, or using `docker-machine` from an instance within your VPC.
 
 Configuration of VPCs is beyond the scope of this guide, however the first step in troubleshooting is ensuring if you are using private subnets that you follow the design guidance in the [AWS VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html) and have some form of NAT available so that the set up process can access the internet to complete set up.
 

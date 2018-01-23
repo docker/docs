@@ -101,7 +101,7 @@ Here are examples of this type of error:
 
 When Toolbox creates virtual machines (VMs) it runs `start.sh`, where it gets values for `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, and passes them as `create` options to create the `default machine`.
 
-You can reconfigure HTTP proxy settings for private networks on already-created Docker machines (e.g., `default`), then change the configuration when you are using the same system on a different network.
+You can reconfigure HTTP proxy settings for private networks on already-created Docker machines, such as the `default` machine, then change the configuration when you are using the same system on a different network.
 
 Alternatively, you can modify proxy settings on your machine(s) manually through the configuration file at `/var/lib/boot2docker/profile` inside the VM, or configure proxy settings as a part of a `docker-machine create` command.
 
@@ -115,7 +115,8 @@ This file lives on the VM itself, so you need to `ssh` into the machine, then ed
 
 You can add your machine addresses as values for a `NO_PROXY` setting, and also specify proxy servers that you know about and you want to use. Typically setting your Docker machine URLs to `NO_PROXY` solves this type of connectivity problem, so that example is shown here.
 
-1. Use `ssh` to log in to the virtual machine (e.g., `default`).
+1. Use `ssh` to log in to the virtual machine. This example logs in to the
+   `default` machine.
 
         $ docker-machine ssh default
         docker@default:~$ sudo vi /var/lib/boot2docker/profile

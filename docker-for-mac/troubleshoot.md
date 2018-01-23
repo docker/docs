@@ -151,8 +151,8 @@ See also, the discussion on the issue [docker/for-mac#1209](https://github.com/d
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
-application file is not found, a volume mount is denied, or a service cannot
-start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
+application file is not found, access to a volume mount is denied, or a service cannot
+start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
 need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
@@ -249,7 +249,7 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ### Workarounds for common problems
 
-* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac, which typically manifests as a network timeout when running `docker` commands that need access to external network servers (e.g., `docker pull busybox`).
+* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac. If you try to use it, network timeouts occur when running `docker` commands that need access to external network servers, such as `docker pull` or `docker push`.
 
         $ docker pull busybox
         Using default tag: latest
@@ -287,22 +287,20 @@ know before you install](install.md#what-to-know-before-you-install).
 
   * Run the uninstall commands from the menu.
 
-  <p></p>
 
-* If `docker` commands aren't working properly or as expected:
+* If `docker` commands aren't working properly or as expected, you may need to
+  unset some environment variables, to make sure you are not using the legacy
+  Docker Machine environment in your shell or command window. Unset the
+  `DOCKER_HOST` environment variable and related variables.
 
-  * Make sure you are not using the legacy Docker Machine environment in your shell or command window. You do not need `DOCKER_HOST` set, so unset it as it
-may be pointing at another Docker (e.g. VirtualBox). If you use bash, `unset
-${!DOCKER_*}` unsets existing `DOCKER` environment variables you have set.
+  * If you use bash, use the following command: `unset ${!DOCKER_*}`
 
   * For other shells, unset each environment variable individually as described in [Setting up to run Docker for Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
-<p></p>
 
 * Network connections fail if the macOS Firewall is set to
 "Block all incoming connections". You can enable the firewall, but `bootpd` must be allowed incoming connections so that the VM can get an IP address.
 
-<p></p>
 
 * For the `hello-world-nginx` example, Docker for Mac must be running to get to the webserver on `http://localhost/`. Make sure that the Docker whale
 is showing in the menu bar, and that you run the Docker commands in a shell that
@@ -354,20 +352,18 @@ the current workaround is not to run them at the same time. You can pause
 allows you to continue work with the other tools and prevent `HyperKit` from
 interfering.
 
-<p></p>
 
 *  If you are working with applications like [Apache Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker instances through Unix sockets. For example:
 
         export DOCKER_HOST=unix:///var/run/docker.sock
 
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for `localunixsocket.local` which can take 5s to timeout on some networks. If `docker-compose` commands seem very slow but seem to speed up when the network is disabled (e.g. when disconnected from wifi), try appending `127.0.0.1 localunixsocket.local` to the file `/etc/hosts`.
+* `docker-compose` 1.7.1 performs DNS unnecessary lookups for `localunixsocket.local` which can take 5s to timeout on some networks. If `docker-compose` commands seem very slow but seem to speed up when the network is disabled, try appending `127.0.0.1 localunixsocket.local` to the file `/etc/hosts`.
 Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 
         docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
 
   	and then `export DOCKER_HOST=tcp://localhost:1234`.
 
-<p></p>
 
 <a name="bind-mounted-dirs"></a>
 

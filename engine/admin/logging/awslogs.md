@@ -225,7 +225,7 @@ INFO Another message was logged
 
 ### tag
 
-Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`).
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets Go template markup, such as `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`.
 See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` overrides the template specified with `tag`.

@@ -99,8 +99,8 @@ In this example, the container is assigned a link-local address with the subnet
 addresses outside of the `2001:db8:1::/64` network via the link-local gateway at
 `fe80::1` on `eth0`.
 
-Often servers or virtual machines get a `/64` IPv6 subnet assigned (e.g.
-`2001:db8:23:42::/64`). In this case you can split it up further and provide
+If your server or virtual machine has a `/64` IPv6 subnet assigned to it, such
+as `2001:db8:23:42::/64`, you can split it up further and provide
 Docker a `/80` subnet while using a separate `/80` subnet for other applications
 on the host:
 

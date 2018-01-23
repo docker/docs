@@ -87,10 +87,10 @@ Microsoft Hyper-V](drivers/hyper-v.md).)
   to install Docker Machine, VirtualBox is
   automatically installed.
 
-* If you used the Quickstart Terminal to launch your first machine and set your terminal environment to point to it, a default machine was automatically
-created. If this is the case, you can still follow along with these steps, but
-create another machine and name it something other than "default" (e.g., staging
-or sandbox).
+* If you used the Quickstart Terminal to launch your first machine and set your
+  terminal environment to point to it, a default machine was automatically
+  created. If so, you can still follow along with these steps, but
+  create another machine and name it something other than `default`.
 
 ##  Use Machine to run Docker containers
 
@@ -355,17 +355,18 @@ shell to talk to different Docker engines.
 
 ## Start local machines on startup
 
-To ensure that the Docker client is automatically configured at the
-start of each shell session, some users like to embed `eval $(docker-machine env
-default)` in their shell profiles (e.g., the `~/.bash_profile` file). However,
-this fails if the `default` machine is not running. If desired, you can
-configure your system to start the `default` machine automatically.
+To ensure that the Docker client is automatically configured at the start of
+each shell session, you can embed `eval $(docker-machine env default)` in your
+shell profiles, by adding it to the `~/.bash_profile` file or the equivalent
+configuration file for your shell. However, this fails if a machine called
+`default` is not running. You can configure your system to start the `default`
+machine automatically. The following example shows how to do this in macOS.
 
-Here is an example of how to configure this on macOS.
 
-Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchAgents` with the following content:
+Create a file called `com.docker.machine.default.plist` in the
+`~/Library/LaunchAgents/` directory, with the following content:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -389,7 +390,8 @@ Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchA
 </plist>
 ```
 
-You can change the `default` string above to make this `LaunchAgent` start any  machine(s) you desire.
+You can change the `default` string above to make this `LaunchAgent` start a
+different machine.
 
 ## Where to go next
 

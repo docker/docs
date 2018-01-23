@@ -222,8 +222,9 @@ It is up to the user to choose an appropriate password, and to protect their key
 from offline brute-force attacks.
 
 The severity of the compromise of a trust collection owner/administrator's
-decrypted key depends on the type and combination of keys that were compromised
-(e.g. the snapshot key and targets key, or just the targets key).
+decrypted key depends on the type and combination of keys compromised. For
+example, were the snapshot and targets key both compromised, or just the targets
+key?
 
 #### Possible attacks given the credentials compromised:
 
@@ -249,8 +250,9 @@ mix up the targets in a collection, but only within the particular delegation
 roles that the key can sign for. Depending on the restrictions on that role,
 they may be restricted in what type of content they can modify. They may also
 add or remove the capabilities of other delegation keys below it on the key hierarchy
-(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it could
-only modify the capabilities of `DelegationKey4` and `DelegationKey5`).
+For example, if `DelegationKey2` in the above key hierarchy is compromised, the
+compromised key could
+only modify the capabilities of `DelegationKey4` and `DelegationKey5`.
 
 ##### Decrypted Delegation Key + Decrypted Snapshot Key, only
 
@@ -274,10 +276,10 @@ generates and signs the timestamp for them.
 An attacker can add malicious content, remove legitimate content from a collection, and
 mix up the targets in a collection, but only within the particular delegation
 roles that the key can sign for. Depending on the restrictions on that role,
-they may be restricted in what type of content they can modify. They may also
+they may be restricted in what type of content they can modify. A key may also
 add or remove the capabilities of other delegation keys below it on the key hierarchy
-(e.g. if `DelegationKey2` in the above key hierarchy were compromised, it could
-only modify the capabilities of `DelegationKey4` and `DelegationKey5`).
+For example, if `DelegationKey2` in the above key hierarchy is compromised, it can
+only modify the capabilities of `DelegationKey4` and `DelegationKey5`.
 
 ##### Decrypted Targets Key, only
 
@@ -297,10 +299,10 @@ keys because the server generates and signs the snapshot and timestamp for them.
 
 An attacker can add any malicious content, remove any legitimate content from a
 collection, and mix up the targets in a collection. They may also add or remove
-the capabilities of any top level delegation key or role (e.g. `Delegation1`,
-`Delegation2`, and `Delegation3` in the key hierarchy diagram). If they remove
-the roles entirely, they'd break the trust chain to the lower delegation roles
-(e.g. `Delegation4`, `Delegation5`).
+the capabilities of any top level delegation key or role, such as `Delegation1`,
+`Delegation2`, and `Delegation3` in the key hierarchy diagram. If they remove
+the roles entirely, they break the trust chain to the lower delegation roles,
+such as `Delegation4` or `Delegation5`.
 
 ##### Decrypted Targets Key + Decrypted Snapshot Key, only
 
@@ -323,10 +325,10 @@ generates and signs the timestamp for them.
 
 An attacker can add any malicious content, remove any legitimate content from a
 collection, and mix up the targets in a collection. They may also add or remove
-the capabilities of any top level delegation key or role (e.g. `Delegation1`,
-`Delegation2`, and `Delegation3` in the key hierarchy diagram). If they remove
-the roles entirely, they'd break the trust chain to the lower delegation roles
-(e.g. `Delegation4`, `Delegation5`).
+the capabilities of any top level delegation key or role, for example, `Delegation1`,
+`Delegation2`, and `Delegation3` in the key hierarchy diagram. If they remove
+the roles entirely, they'd break the trust chain to the lower delegation roles,
+such as `Delegation4` or `Delegation5`.
 
 ##### Decrypted Root Key + none or any combination of decrypted keys, only
 
@@ -359,9 +361,7 @@ any of the malicious changes.
 If a targets key compromise is detected, the root key holder
 must rotate the compromised key and push a clean set of targets using the new key.
 
-If a delegations key compromise is detected, a higher level key (e.g. if
-`Delegation4` were compromised, then `Delegation2`; if
-`Delegation2` were compromised, then the `Targets` key)
+If a delegations key compromise is detected, a higher level key
 holder must rotate the compromised key, and push a clean set of targets using the new key.
 
 If a Notary Service credential compromise is detected, the credentials should be

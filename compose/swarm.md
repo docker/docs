@@ -39,7 +39,7 @@ instance can, but the resulting image only lives on a single node and won't
 be distributed to other nodes.
 
 If you want to use Compose to scale the service in question to multiple nodes,
-build the image, push it to a registry (e.g. the Docker Hub), and reference it
+build the image, push it to a registry such as Docker Hub, and reference it
 from `docker-compose.yml`:
 
     $ docker build -t myusername/web .
@@ -97,7 +97,7 @@ all three services end up on the same node:
 
 ### Host ports and recreating containers
 
-If a service maps a port from the host, e.g. `80:8000`, then you may get an
+If a service maps a port from the host, such as `80:8000`, then you may get an
 error like this when running `docker-compose up` on it after the first time:
 
     docker: Error response from daemon: unable to find a node that satisfies

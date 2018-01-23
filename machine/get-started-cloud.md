@@ -72,9 +72,9 @@ specific to the cloud service you are using
 
 For convenience, `docker-machine` uses sensible defaults for choosing
 settings such as the image that the server is based on, but you override the
-defaults using the respective flags (e.g. `--digitalocean-image`). This is
+defaults using the respective flags, such as `--digitalocean-image`. This is
 useful if, for example, you want to create a cloud server with a lot of memory
-and CPUs (by default `docker-machine` creates a small server).
+and CPUs, rather than the default behavior of creating smaller servers.
 
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the

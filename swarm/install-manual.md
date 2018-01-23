@@ -146,10 +146,9 @@ If so, use `sudo` or give the user root privileges.
 Docker Engine and then re-use it to create the other instances. Doing so
 produces errors.
 
-* If your host cannot reach Docker Hub, the `docker run` commands that pull
-container images may fail. In that case, check that your VPC is associated with
-a security group with a rule that allows inbound traffic (e.g.,
-HTTP/TCP/80/0.0.0.0/0). Also Check the [Docker Hub status
+* If your host cannot reach Docker Hub, `docker run` commands that pull
+images fail. In that case, check that your VPC is associated with
+a security group with a rule that allows inbound traffic. Also check the [Docker Hub status
 page](http://status.docker.com/) for service availability.
 
 ## Step 4. Set up a discovery backend

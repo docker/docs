@@ -277,7 +277,7 @@ To participate in the Docs Hackathon you must submit a pull request that handles
 
 Multiple entries per person allowed and encouraged.
 
-Participation in the Docs Hackathon and submission of content therein gives Docker rights to use submitted content (e.g., text, code, and images) for potential future promotional marketing activities.
+Participation in the Docs Hackathon and submission of content therein gives Docker rights to use submitted content, including text, code, and images, for potential future promotional marketing activities.
 
 For the purposes of copyright all content submitted to Docker for the Docs Hackathon belongs to Docker.
 

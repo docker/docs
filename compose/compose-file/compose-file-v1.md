@@ -33,8 +33,8 @@ A service definition contains configuration which is applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`.
 
-As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
-`EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
+As with `docker run`, options specified in the Dockerfile, such as `CMD`,
+`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
 This section contains a list of all configuration options supported by a service

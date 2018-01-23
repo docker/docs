@@ -35,14 +35,16 @@ Completion is available upon next login.
 
 ### Zsh
 
-Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`:
+Place the completion script in your a `completion` file within the ZSH
+configuration directory, such as `~/.zsh/completion/`.
 
 ```shell
 mkdir -p ~/.zsh/completion
 curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
 ```
 
-Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:
+Include the directory in your `$fpath`, by adding a like the following to the
+`~/.zshrc` configuration file.
 
 ```shell
 fpath=(~/.zsh/completion $fpath)

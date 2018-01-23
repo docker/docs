@@ -52,14 +52,14 @@ completion.
 
 ### Zsh
 
-Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`:
+Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
 
 ```shell
 $ mkdir -p ~/.zsh/completion
 $ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 ```
 
-Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:
+Include the directory in your `$fpath` by adding in `~/.zshrc`:
 
 ```shell
 fpath=(~/.zsh/completion $fpath)
@@ -83,8 +83,8 @@ Depending on what you typed on the command line so far, it completes:
 
  - available docker-compose commands
  - options that are available for a particular command
- - service names that make sense in a given context (e.g. services with running or stopped instances or services based on images vs. services based on Dockerfiles). For `docker-compose scale`, completed service names automatically have "=" appended.
- - arguments for selected options, e.g. `docker-compose kill -s` completes some signals like SIGHUP and SIGUSR1.
+ - service names that make sense in a given context, such as services with running or stopped instances or services based on images vs. services based on Dockerfiles. For `docker-compose scale`, completed service names automatically have "=" appended.
+ - arguments for selected options. For example, `docker-compose kill -s` completes some signals like SIGHUP and SIGUSR1.
 
 Enjoy working with Compose faster and with less typos!
 

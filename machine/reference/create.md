@@ -248,10 +248,10 @@ interval to 5 seconds.
 
 ## Pre-create check
 
-Since many drivers require a certain set of conditions to be in place before
-they can successfully perform a create (e.g. VirtualBox should be installed, or
-the provided API credentials should be valid), Docker Machine has a "pre-create
-check" which is specified at the driver level.
+Many drivers require a certain set of conditions to be in place before
+machines can be created. For instance, VirtualBox needs to be installed before
+the `virtualbox` driver can be used. For this reason, Docker Machine has a
+"pre-create check" which is specified at the driver level.
 
 If this pre-create check succeeds, Docker Machine proceeds with the creation
 as normal.  If the pre-create check fails, the Docker Machine process exits

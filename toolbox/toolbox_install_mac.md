@@ -296,8 +296,8 @@ To uninstall Toolbox on a Mac, do the following:
 
 6.  Optionally, remove the `~/.docker/machine` directory.
 
-    This directory stores some configuration and/or state (e.g.,
-    information about created machines such as certificates).
+    This directory stores some configuration and/or state, such as
+    information about created machines and certificates.
 
 
 7.  Uninstall Oracle VirtualBox, which is installed as a part of the

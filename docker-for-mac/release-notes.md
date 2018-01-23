@@ -175,7 +175,7 @@ about both kinds of releases, and download stable and edge product installers at
 - Interpret system proxy setting of `localhost` correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All Docker binaries bundled with Docker for Mac are now signed
 - Display all Docker Cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
-- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+- OSXFS: improved latency for many common operations, such as read and write, by approximately 25%
 - Fixed GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
 - Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
 - More detailed VirtualBox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
@@ -803,7 +803,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Interpret system proxy setting of localhost correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All docker binaries bundled with Docker for Mac are now signed
 - Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
-- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+- OSXFS: improved latency for many common operations, such as read and write by approximately 25%
 
 ### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
 
@@ -1558,7 +1558,7 @@ events or unexpected unmounts.
 **Bug fixes and minor changes**
 
 * VPNKit: Improved scalability as number of network connections increases
-* The docker API proxy was failing to deal with some 1.12 features (e.g. health check)
+* The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
 **Known issues**
 
@@ -1579,7 +1579,7 @@ events or unexpected unmounts.
 
 * VPNKit: Improved scalability as number of network connections increases
 * Interrupting a `docker build` with Ctrl-C will actually stop the build
-* The docker API proxy was failing to deal with some 1.12 features (e.g. health check)
+* The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
 **Known issues**
 
@@ -1697,7 +1697,7 @@ events or unexpected unmounts.
   - setting `atime` and `mtime` of nodes is now supported
   - Fixed major regression in Beta 12 with ENOENT, ENOTEMPY, and other spurious errors after a directory rename. This manifested as `npm install` failure and other directory traversal issues.
   - Fixed temporary file ENOENT errors
-  - Fixed in-place editing file truncation error (e.g. `perl -i`)w
+  - Fixed in-place editing file truncation error, such as when running `perl -i`
 * improved time synchronisation after sleep
 
 ### Beta 12 Release (2016-05-17 1.11.1-beta12)

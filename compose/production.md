@@ -20,10 +20,10 @@ production. These changes may include:
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
 - Binding to different ports on the host
-- Setting environment variables differently (e.g., to decrease the verbosity of
+- Setting environment variables differently, such as when you need to decrease the verbosity of
   logging, or to enable email sending)
-- Specifying a restart policy (e.g., `restart: always`) to avoid downtime
-- Adding extra services (e.g., a log aggregator)
+- Specifying a restart policy like `restart: always` to avoid downtime
+- Adding extra services such as a log aggregator
 
 For this reason, consider defining an additional Compose file, say
 `production.yml`, which specifies production-appropriate

@@ -107,10 +107,10 @@ use traditional UNIX permission checks to limit access to the control
 socket.
 
 You can also expose the REST API over HTTP if you explicitly decide to do so.
-However, if you do that, being aware of the above mentioned security
-implication, you should ensure that it is reachable only from a
-trusted network or VPN; or protected with e.g., `stunnel` and client SSL
-certificates. You can also secure them with [HTTPS and
+However, if you do that, be aware of the above mentioned security
+implications. Ensure that it is reachable only from a
+trusted network or VPN or protected with a mechanism such as `stunnel` and
+client SSL certificates. You can also secure API endpoints with [HTTPS and
 certificates](https.md).
 
 The daemon is also potentially vulnerable to other inputs, such as image
@@ -141,12 +141,10 @@ privileges are usually needed.
 
 This means a lot for container security; let's see why!
 
-Your average server (bare metal or virtual machine) needs to run a bunch
-of processes as root. Those typically include SSH, cron, syslogd;
-hardware management tools (e.g., load modules), network configuration
-tools (e.g., to handle DHCP, WPA, or VPNs), and much more. A container is
-very different, because almost all of those tasks are handled by the
-infrastructure around the container:
+Typical servers run several processes as `root`, including the SSH daemon,
+`cron` daemon, logging daemons, kernel modules, network configuration tools,
+and more. A container is different, because almost all of those tasks are
+handled by the infrastructure around the container:
 
  - SSH access are typically managed by a single server running on
    the Docker host;
@@ -225,10 +223,9 @@ harden a Docker host. Here are a few examples.
  - You can define your own policies using your favorite access control
    mechanism.
 
-Just like there are many third-party tools to augment Docker containers
-with e.g., special network topologies or shared filesystems, you can
-expect to see tools to harden existing Docker containers without
-affecting Docker's core.
+Just as you can use third-party tools to augment Docker containers, including
+special network topologies or shared filesystems, tools exist to harden Docker
+containers without the need to modify Docker itself.
 
 As of Docker 1.10 User Namespaces are supported directly by the docker
 daemon. This feature allows for the root user in a container to be mapped

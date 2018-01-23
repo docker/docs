@@ -163,8 +163,8 @@ container started for that service, much like passing command-line parameters to
 `docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker container create`, options specified in the Dockerfile (e.g., `CMD`,
-`EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
+As with `docker container create`, options specified in the Dockerfile, such as `CMD`,
+`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like

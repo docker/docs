@@ -78,20 +78,19 @@ be exported from macOS.
 
 ### Ownership
 
-Initially, any containerized process that requests ownership metadata of
-an object is told that its `uid` and `gid` own the object. When any
-containerized process changes the ownership of a shared file system
-object, e.g. with `chown`, the new ownership information is persisted in
-the `com.docker.owner` extended attribute of the object. Subsequent
-requests for ownership metadata return the previously set
-values. Ownership-based permissions are only enforced at the macOS file
-system level with all accessing processes behaving as the user running
-Docker. If the user does not have permission to read extended attributes
-on an object (such as when that object's permissions are `0000`), `osxfs`
-attempts to add an access control list (ACL) entry that allows
-the user to read and write extended attributes. If this attempt
-fails, the object appears to be owned by the process accessing
-it until the extended attribute is readable again.
+Initially, any containerized process that requests ownership metadata of an
+object is told that its `uid` and `gid` own the object. When any containerized
+process changes the ownership of a shared file system object, such as by using
+the `chown` command, the new ownership information is persisted in the
+`com.docker.owner` extended attribute of the object. Subsequent requests for
+ownership metadata return the previously set values. Ownership-based permissions
+are only enforced at the macOS file system level with all accessing processes
+behaving as the user running Docker. If the user does not have permission to
+read extended attributes on an object (such as when that object's permissions
+are `0000`), `osxfs` attempts to add an access control list (ACL) entry that
+allows the user to read and write extended attributes. If this attempt fails,
+the object appears to be owned by the process accessing it until the extended
+attribute is readable again.
 
 ### File system events
 

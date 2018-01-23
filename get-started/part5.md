@@ -277,7 +277,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ```
 
-6.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and take a look at the results of the visitor counter, which is now live and storing information on Redis.
+6.  Check the web page at one of your nodes, such as `http://192.168.99.101`, and take a look at the results of the visitor counter, which is now live and storing information on Redis.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 

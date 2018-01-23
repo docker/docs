@@ -115,7 +115,7 @@ To get started, first login to a manager node and determine the private IP addre
 $ docker node inspect <windows-worker-node-id> | jq -r ".[0].Status.Addr"
 ```
 
-Next, in your local machine, establish the SSH tunnel to the manager for the RDP connection to the worker. The local port can be any free port and typically a high value e.g. 9001.
+Next, in your local machine, establish the SSH tunnel to the manager for the RDP connection to the worker. The local port can be any free port and typically a high value, such as 9001.
 
 ```
 $ ssh -L <local-port>:<windows-worker-ip>:3389 -p <manager-ssh-port> docker@<manager-ip>

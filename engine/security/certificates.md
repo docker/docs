@@ -18,8 +18,8 @@ for the registry and how to set the client TLS certificate for verification.
 ## Understanding the configuration
 
 A custom certificate is configured by creating a directory under
-`/etc/docker/certs.d` using the same name as the registry's hostname (e.g.,
-`localhost`). All `*.crt` files are added to this directory as CA roots.
+`/etc/docker/certs.d` using the same name as the registry's hostname, such as
+`localhost`. All `*.crt` files are added to this directory as CA roots.
 
 > **Note**:
 > As of docker 1.13, on Linux any root certificates authorities are merged
@@ -32,8 +32,8 @@ that there are custom certificates required for access to the desired
 repository.
 
 > **Note**:
-> If there are multiple certificates, each is tried in alphabetical
-> order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
+> If multiple certificates exist, each is tried in alphabetical
+> order. If there is a 4xx-level or 5xx-level authentication error, Docker
 > continues to try with the next certificate.
 
 The following illustrates a configuration with custom certificates:

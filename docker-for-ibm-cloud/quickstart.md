@@ -134,7 +134,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
 2. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 
-3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
+3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
 
 4. In a terminal, navigate and unzip the client bundle:
 

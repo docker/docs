@@ -148,7 +148,7 @@ does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
 
 Docker for Windows supports symbolic links (symlinks) created within containers.
 Symlinks resolve within and across containers.
-Symlinks created elsewhere (e.g., on the host) do not work.
+Symlinks created outside of Docker do not work.
 
 To learn more about the reasons for this limitation, see the following discussions:
 
@@ -200,7 +200,7 @@ To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](/engine/security/certificates.md)
 in the Docker Engine topics.
 
-### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
+### Why does Docker for Windows sometimes lose network connectivity, causing `push` or `pull` commands to fail?
 
 Networking is not yet fully Stable across network changes and system sleep
 cycles. Exit and start Docker to restore connectivity.

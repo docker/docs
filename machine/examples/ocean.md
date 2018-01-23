@@ -38,7 +38,7 @@ To generate your access token:
 
     ![Generate token](../img/ocean_gen_token.png)
 
-3.  Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
+3.  Give the token a descriptive name, make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
 
     ![Name and generate token](../img/ocean_token_create.png)
 

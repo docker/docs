@@ -183,7 +183,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 1. [Access UCP](#access-ucp).
 2. Under your user name (for example, **admin**), click **My Profile**.
 3. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
-4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
+4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
 5. In a terminal, navigate and unzip the client bundle.
 
    ```bash

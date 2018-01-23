@@ -78,7 +78,7 @@ The features of Compose that make it effective are:
 
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
 
-* on a dev host, to create multiple copies of a single environment (e.g., you want to run a stable copy for each feature branch of a project)
+* on a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
 * on a CI server, to keep builds from interfering with each other, you can set
   the project name to a unique build number
 * on a shared host or dev host, to prevent different projects, which may use the

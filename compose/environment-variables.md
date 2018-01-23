@@ -104,7 +104,7 @@ When values are provided both with a shell `environment` variable and with an `e
         environment:
          - NODE_ENV=production
 
-You can test this with for e.g. a _NodeJS_ container in the CLI:
+You can test this with a command like the following command that starts a _NodeJS_ container in the CLI:
 
     $ docker-compose exec api node
     > process.env.NODE_ENV

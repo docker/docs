@@ -47,7 +47,7 @@ docker-machine version 0.10.0, build 76ed2a6
 ```
 
 > **Note**: The above is an example. Your output may differ if you are running
-> different (e.g., newer) versions.
+> different versions.
 
 ## Explore the application and run examples
 

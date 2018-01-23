@@ -419,8 +419,8 @@ toc_max: 2
   to separate the `COMPOSE_FILE` environment value using the
   `COMPOSE_PATH_SEPARATOR` environment variable
 
-- Added support for port range to single port in port mappings
-  (e.g. `8000-8010:80`)
+- Added support for port range to single port in port mappings, such as
+  `8000-8010:80`.
 
 ### Bugfixes
 
@@ -1147,7 +1147,7 @@ https://github.com/docker/compose/blob/8cc8e61/docs/compose-file.md#variable-sub
 
 ### New features
 
--   You can now optionally pass a mode to `volumes_from`, e.g.
+-   You can now optionally pass a mode to `volumes_from`. For example,
     `volumes_from: ["servicename:ro"]`.
 
 -   Since Docker now lets you create volumes with names, you can refer to those
@@ -1178,10 +1178,10 @@ https://github.com/docker/compose/blob/8cc8e61/docs/compose-file.md#variable-sub
 -   If you install Compose with pip or use it as a library, it now works with
     Python 3.
 
--   `image` now supports image digests (in addition to ids and tags), e.g.
+-   `image` now supports image digests (in addition to ids and tags). For example,
     `image: "busybox@sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d"`
 
--   `ports` now supports ranges of ports, e.g.
+-   `ports` now supports ranges of ports. For example,
 
         ports:
           - "3000-3005"
@@ -1372,7 +1372,7 @@ Besides that, there’s a lot of new stuff in this release:
 
 - We’ve made a few small changes to ensure that Compose will work with Swarm, Docker’s new clustering tool (https://github.com/docker/swarm). Eventually you'll be able to point Compose at a Swarm cluster instead of a standalone Docker host and it’ll run your containers on the cluster with no extra work from you. As Swarm is still developing, integration is rough and lots of Compose features don't work yet.
 
-- `docker-compose run` now has a `--service-ports` flag for exposing ports on the given service. This is useful for e.g. running your webapp with an interactive debugger.
+- `docker-compose run` now has a `--service-ports` flag for exposing ports on the given service. This is useful for running your webapp with an interactive debugger, for example.
 
 - You can now link to containers outside your app with the `external_links` option in docker-compose.yml.
 
@@ -1418,7 +1418,7 @@ The highlights:
 
  - There is a new `fig restart` command which restarts a service's containers.
 
- - Fig creates multiple containers in service by appending a number to the service name (e.g. `db_1`, `db_2`, etc). As a convenience, Fig will now give the first container an alias of the service name (e.g. `db`).
+ - Fig creates multiple containers in service by appending a number to the service name. For example,  `db_1`, `db_2`. As a convenience, Fig will now give the first container an alias of the service name. For example, `db`.
 
    This link alias is also a valid hostname and added to `/etc/hosts` so you can connect to linked services using their hostname. For example, instead of resolving the environment variables `DB_PORT_5432_TCP_ADDR` and `DB_PORT_5432_TCP_PORT`, you could just use the hostname `db` and port `5432` directly.
 

@@ -36,7 +36,8 @@ default   -        virtualbox   Running   tcp://192.168.99.100:2376           v1
 ## Filtering
 
 The filtering flag (`--filter`) format is a `key=value` pair. If there is more
-than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`)
+than one filter, then pass multiple flags. For example:
+`--filter "foo=bar" --filter "bif=baz"`
 
 The currently supported filters are:
 

@@ -49,7 +49,7 @@ To create a machine instance, specify `--driver google`, the project ID and the 
 -   `--google-tags`: Instance tags (comma-separated).
 -   `--google-use-existing`: Don't create a new VM, use an existing one. This is useful when you'd like to provision Docker on a VM you created yourself, maybe because it uses create options not supported by this driver.
 -   `--google-use-internal-ip-only`: When this option is used during create, the new VM is not assigned a public IP address. This is useful only when the host running `docker-machine` is located inside the Google Cloud infrastructure; otherwise, `docker-machine` can't reach the VM to provision the Docker daemon. The presence of this flag implies `--google-use-internal-ip`.
--   `--google-use-internal-ip`: When this option is used during create, docker-machine uses internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network e.g. while deploying swarm.
+-   `--google-use-internal-ip`: When this option is used during create, docker-machine uses internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network, such as when deploying swarm.
 -   `--google-username`: The username to use for the instance.
 -   `--google-zone`: The zone to launch the instance.
 

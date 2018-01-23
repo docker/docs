@@ -63,7 +63,7 @@ Docker for Azure sends anonymized minimal metrics to Docker (heartbeat). These m
 ## How do I run administrative commands?
 
 By default when you SSH into a manager, you are logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
-For example to ping one of the nodes, after finding its IP via the Azure/Azure portal (e.g. 10.0.0.4), you could run:
+For example to ping one of the nodes, after finding its IP via the Azure/Azure portal, such as, 10.0.0.4, you could run:
 
 ```bash
 $ sudo ping 10.0.0.4

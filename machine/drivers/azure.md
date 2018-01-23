@@ -48,7 +48,7 @@ Optional:
 
 - `--azure-availability-set`: Azure Availability Set to place the virtual machine into. [[?][av-set]]
 - `--azure-docker-port`: Port number for Docker engine.
-- `--azure-environment`: Azure environment (e.g. `AzurePublicCloud`, `AzureChinaCloud`).
+- `--azure-environment`: Azure environment. For example, `AzurePublicCloud` or`AzureChinaCloud`.
 - `--azure-image`: Azure virtual machine image in the format of Publisher:Offer:Sku:Version [[?][vm-image]]
 - `--azure-location`: Azure region to create the virtual machine. [[?][location]]
 - `--azure-no-public-ip`: Do not create a public IP address for the machine (implies `--azure-use-private-ip`). Should be used only when creating machines from an Azure VM within the same subnet.
@@ -60,7 +60,7 @@ Optional:
 - `--azure-static-public-ip`: Assign a static public IP address to the machine.
 - `--azure-subnet`: Azure Subnet Name to be used within the Virtual Network.
 - `--azure-subnet-prefix`: Private CIDR block. Used to create subnet if it does not exist. Must match in the case that the subnet does exist.
-- `--azure-use-private-ip`: Use private IP address of the machine to connect. It's useful for managing Docker machines from another machine on the same network e.g. while deploying Swarm.
+- `--azure-use-private-ip`: Use private IP address of the machine to connect. Useful for managing Docker machines from another machine on the same network, such as when deploying Swarm.
 - `--azure-vnet`: Azure Virtual Network name to connect the virtual machine.
   [[?][vnet]] To specify a Virtual Network from another resource group, use `resourcegroup:vnet-name` format.
 
