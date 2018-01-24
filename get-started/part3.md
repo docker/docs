@@ -165,7 +165,7 @@ your browser and hit refresh a few times.
 
 Either way, the container ID changes, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
-round-robin fashion, to respond. The container IDs matches your output from
+round-robin fashion, to respond. The container IDs match your output from
 the previous command (`docker container ls -q`).
 
 > Running Windows 10?

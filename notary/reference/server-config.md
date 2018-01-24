@@ -315,7 +315,7 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">The max age, in seconds, for caching services to cache
 			the latest metadata for a role and the metadata by checksum for a
-			role.  This value is sett on the cache control headers for
+			role.  This value is set on the cache control headers for
 			GET-ting metadata.
 
 			`must-revalidate` is also set on the cache control headers

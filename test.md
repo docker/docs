@@ -119,7 +119,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   - Go to the file in a web browser, grab everything after the domain name
   from the URL, and use that as the link in your docs file.
 
-  - Keep in mind that this link doesn'tresolve until you merge the PR and
+  - Keep in mind that this link doesn't resolve until you merge the PR and
   your docs are published on [docs.docker.com](https://docs.docker.com/).
 
 {: id="custom-target-id"}

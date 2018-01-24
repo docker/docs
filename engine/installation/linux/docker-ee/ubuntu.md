@@ -254,7 +254,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled,
-    and aree specific to your version of Ubuntu (indicated by the `xenial`
+    and are specific to your version of Ubuntu (indicated by the `xenial`
     suffix on the version, in this example). Choose a specific version to
     install. The second column is the version string. The third column is the
     repository name, which indicates which repository the package is from and

@@ -80,7 +80,7 @@ You can change almost everything about an existing service using the
 `docker service update` command. When you update a service, Docker stops its
 containers and restarts them with the new configuration.
 
-Since Nginx is a web service, it work much better if you publish port 80
+Since Nginx is a web service, it works much better if you publish port 80
 to clients outside the swarm. You can specify this when you create the service,
 using the `-p` or `--publish` flag. When updating an existing service, the flag
 is `--publish-add`. There is also a `--publish-rm` flag to remove a port that
@@ -395,7 +395,7 @@ option to the `--publish` flag.
 > definition, which causes Docker to assign a random port for each task.
 >
 > In addition, if you use `mode=host` and you do not use the
-> `--mode=global` flag on `docker service create`, it difficult to know
+> `--mode=global` flag on `docker service create`, it is difficult to know
 > which nodes are running the service to route work to them.
 
 ##### Example: Run a `nginx` web server service on every swarm node

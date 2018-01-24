@@ -424,7 +424,7 @@ port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
-> parses numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:

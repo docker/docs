@@ -7,7 +7,7 @@ keywords: engine, edge, installation
 The current Docker CE Edge release is {{ site.docker_ce_edge_version }}. The Docker CE
 Edge channel provides monthly releases which allow you to try new features of
 Docker and verify bug fixes quickly. Edge releases are only supported for one
-month, and a given Edge release do not receive any updates once a new edge
+month, and a given Edge release does not receive any updates once a new Edge
 release is available.
 
 Stable releases are not published to the Edge channel, so Linux repository users

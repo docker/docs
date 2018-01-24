@@ -203,7 +203,7 @@ Add hostname mappings at build-time. Use the same values as the docker client `-
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
-An entry with the ip address and hostname ise created in `/etc/hosts` inside containers for this build, e.g:
+An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this build, e.g:
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
@@ -950,7 +950,7 @@ port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
-> parses numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:

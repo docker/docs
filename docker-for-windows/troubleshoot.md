@@ -77,7 +77,7 @@ volumes](/docker-for-windows/index.md#shared-drives) to a default value of
 [0755](http://permissions-calculator.org/decode/0755/) (`read`, `write`,
 `execute` permissions for `user`, `read` and `execute` for `group`). If you are
 working with applications that require permissions different than this default,
-you mayy get errors similar to the following.
+you may get errors similar to the following.
 
 ```none
 Data directory (/var/www/html/data) is readable by other users. Please change the permissions to 0755 so that the directory cannot be listed by other users.

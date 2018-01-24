@@ -131,7 +131,7 @@ Certifies support for CentOS 7.1.
 (21 May 2015)
 
 For customers running Docker Engine on [supported versions of RedHat Enterprise Linux](https://www.docker.com/enterprise/support/) with SELinux enabled, the `docker build` and `docker run` commands will not have DNS host name resolution and bind-mounted volumes may not be accessible. As a result, customers with
-SELinux can't use hostname-based network access in either `docker build` or `docker run` or run `docker run` containers that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
+SELinux will be unable to use hostname-based network access in either `docker build` or `docker run`, nor will they be able to `docker run` containers that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
 
 For example, you see will failures such as:
 

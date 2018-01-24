@@ -163,7 +163,7 @@ command below, look for the value constraint.
 ## Task 3. Check your work and update /etc/hosts
 
 In this step, you check your work to make sure the Nginx configuration recorded
-the containers correctly. Update your local systems `/etc/hosts` file to
+the containers correctly. Update your local system's `/etc/hosts` file to
 allow you to take advantage of the loadbalancer.
 
 1. Change to the `loadbalancer` node.

@@ -14,11 +14,11 @@ causes the Engine to receive a manifest it cannot use and the pull fails.
 Historically, the registry has supported a [single manifest type](./spec/manifest-v2-1.md)
 known as _Schema 1_.
 
-With the move toward multiple architecture images the distribution project
+With the move toward multiple architecture images, the distribution project
 introduced two new manifest types: Schema 2 manifests and manifest lists. Registry
-2.3 supports all three manifest types and to be compatible
-with older Docker engines sometimes performs an on-the-fly
-transformation of a manifest before serving the JSON in the response.
+2.3 supports all three manifest types and sometimes performs an on-the-fly
+transformation of a manifest before serving the JSON in the response, to
+preserve compatibility with older versions of Docker Engine..
 
 This conversion has some implications for pulling manifests by digest and this
 document enumerates these implications.

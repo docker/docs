@@ -51,7 +51,7 @@ The swarm cluster that you have deployed has a single Consul container on a
 single node performing the cluster discovery service. In this setup, if the
 Consul container exits or the node fails, the application continues to
 operate in its current configuration. However, certain cluster management
-operations fails. These include registering new containers in the cluster
+operations fail. These include registering new containers in the cluster
 and making lookups against the cluster configuration.
 
 If the failure is the `consul` container unexpectedly exiting, Docker
@@ -68,7 +68,7 @@ multiple failure domains within your infrastructure.
 If you operate your swarm cluster with a single discovery backend service and
 this service fails and is unrecoverable, you can start a new empty instance of
 the discovery backend and the swarm agents on each node in the cluster
-repopulates it.
+repopulate it.
 
 
 ### Handling failures
@@ -123,9 +123,9 @@ on two separate nodes. They operate behind an Interlock load balancer that
 distributes incoming connections across both.
 
 In the event that one of the web containers or nodes fails, the load balancer
-startst directing all incoming requests to surviving instance. Once the
+starts directing all incoming requests to surviving instance. Once the
 failed instance is back up, or a replacement is added, the load balancer
-adds it to the configuration and start sending a portion of the incoming requests
+adds it to the configuration and starts sending a portion of the incoming requests
 to it.
 
 For highest availability you should deploy the two frontend web services
@@ -143,7 +143,7 @@ an unhealthy `redis` instance is encountered, remove the `voting-app` and
 ## Worker (vote-worker) failures
 
 If the worker container exits, or the node that is hosting it fails, the redis
-containers queues votes until the worker container comes back up. This
+containers queue votes until the worker container comes back up. This
 situation can prevail indefinitely, though a worker needs to come back at some
 point and process the votes.
 

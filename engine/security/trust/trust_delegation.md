@@ -208,7 +208,7 @@ If it does not, the targets key is used to sign the tag, if the key is available
 ## `docker pull` and `docker build` behavior
 
 When running `docker pull` or `docker build` with Docker Content Trust, Docker
-Engine pullsl tags only signed by the `targets/releases` delegation role or
+Engine pulls tags only signed by the `targets/releases` delegation role or
 the legacy tags that were signed directly with the `targets` key.
 
 ## Related information

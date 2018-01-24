@@ -9,11 +9,10 @@ redirect_from:
 ## Use-case
 
 If you have multiple instances of Docker running in your environment, such as
-multiple physical or virtual machines all running the Docker daemon, each time
-one of them requires an image that it doesn’t have it goes out to the
-internet and fetch it from the public Docker registry. By running a local
-registry mirror, you can keep most of the redundant image fetch traffic on your
-local network.
+multiple physical or virtual machines all running Docker, each daemon goes out
+to the internet and fetches an image it doesn't have locally, from the Docker
+repository. You can run a local registry mirror and point all your daemons
+there, to avoid this extra internet traffic.
 
 ### Alternatives
 
@@ -30,7 +29,7 @@ Hub can be mirrored.
 
 ### Solution
 
-The Registry can be configured as a pull through cache.  In this mode a Registry
+The Registry can be configured as a pull through cache. In this mode a Registry
 responds to all normal docker pull requests but stores all content locally.
 
 ## How does it work?
@@ -43,7 +42,7 @@ serve the image from its own storage.
 ### What if the content changes on the Hub?
 
 When a pull is attempted with a tag, the Registry checks the remote to
-ensure if it has the latest version of the requested content.  Otherwise, it
+ensure if it has the latest version of the requested content. Otherwise, it
 fetches and caches the latest content.
 
 ### What about my disk?
@@ -61,7 +60,7 @@ be configured to use the `filesystem` driver for storage.
 The easiest way to run a registry as a pull through cache is to run the official
 Registry image.
 
-Multiple registry caches can be deployed over the same back-end.  A single
+Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
 
@@ -130,7 +129,7 @@ $ docker pull registry.docker-cn.com/library/ubuntu
 
 You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array
 in [`/etc/docker/daemon.json`](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
-to pull from the China registry mirror by default.  
+to pull from the China registry mirror by default.
 
 ```json
 {

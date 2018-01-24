@@ -6,7 +6,7 @@ title: Deploy your app on Docker for Azure
 
 ## Connecting to your manager nodes using SSH
 
-This section walksk you through connecting to your installation and deploying
+This section walks you through connecting to your installation and deploying
 applications.
 
 First, you obtain the public IP address for a manager node. Any manager

@@ -87,7 +87,7 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Create a `docker-compose.yml` file. Write the following in the file, and
     make sure to replace the password in the `SA_PASSWORD` environment variable
-    under `db` below. This file defines the way the images interacts as
+    under `db` below. This file defines the way the images interact as
     independent services.
 
     > **Note**: The SQL Server container requires a secure password to startup:

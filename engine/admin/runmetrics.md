@@ -226,7 +226,7 @@ $ iptables -I OUTPUT -p tcp --sport 80
 ```
 
 There is no `-j` or `-g` flag,
-so the rule just counts matched packets and go to the following
+so the rule just counts matched packets and goes to the following
 rule.
 
 Later, you can check the values of the counters, with:

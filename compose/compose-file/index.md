@@ -158,7 +158,7 @@ The default path for a Compose file is `./docker-compose.yml`.
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
 They both work.
 
-A service definition contains configuration which is applied to each
+A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
 `docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
@@ -412,7 +412,7 @@ the service's task containers.
 - `source`: The name of the config as it exists in Docker.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
-- `uid` and `gid`: The numeric UID or GID which owns the mounted config file
+- `uid` and `gid`: The numeric UID or GID that owns the mounted config file
   within in the service's task containers. Both default to `0` on Linux if not
   specified. Not supported on Windows.
 - `mode`: The permissions for the file that is mounted within the service's
@@ -533,8 +533,8 @@ Specify a service discovery method for external clients connecting to a swarm.
 
 > **[Version 3.3](compose-versioning.md#version-3) only.**
 
-* `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP),
-which acts as the “front end” for clients to reach the service on a
+* `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP)
+that acts as the “front end” for clients to reach the service on a
 network. Docker routes requests between the client and available worker
 nodes for the service, without client knowledge of how many nodes
 are participating in the service or their IP addresses or ports.
@@ -795,7 +795,7 @@ The following sub-options (supported for `docker compose up` and `docker compose
 
 >**Tip:** See the section on [how to configure volumes
 for services, swarms, and docker-stack.yml
-files](#volumes-for-services-swarms-and-stack-files).  olumes _are_ supported
+files](#volumes-for-services-swarms-and-stack-files). Volumes _are_ supported
 but to work with swarms and services, they must be configured
 as named volumes or associated with services that are constrained to nodes with
 access to the requisite volumes.
@@ -814,7 +814,8 @@ client create option.
 
 ### depends_on
 
-Express dependency between services, which has two effects:
+Express dependency between services, Service dependencies cause the following
+behaviors:
 
 - `docker-compose up` starts services in dependency order. In the following
   example, `db` and `redis` is started before `web`.
@@ -1019,7 +1020,7 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 > **Notes:**
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
-must be connected to at least one of the same networks as the service which is
+must be connected to at least one of the same networks as the service that is
 linking to them. [Links](compose-file-v2#links) are a
 legacy option. We recommend using [networks](#networks) instead.
 >
@@ -1361,7 +1362,7 @@ port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
-> parses numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:
@@ -1447,13 +1448,13 @@ the service's task containers.
 - `source`: The name of the secret as it exists in Docker.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
-- `uid` and `gid`: The numeric UID or GID which owns the file within
+- `uid` and `gid`: The numeric UID or GID that owns the file within
   `/run/secrets/` in the service's task containers. Both default to `0` if not
   specified.
 - `mode`: The permissions for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation. For instance, `0444`
   represents world-readable. The default in Docker 1.13.1 is `0000`, but is
-  be `0444` in nwer versions. Secrets cannot be writable because they are mounted
+  be `0444` in newer versions. Secrets cannot be writable because they are mounted
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
@@ -1625,7 +1626,7 @@ volumes:
 Optionally specify a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 
-You can mount a relative path on the host, which expands relative to
+You can mount a relative path on the host, that expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 
@@ -1695,7 +1696,7 @@ volumes:
 
 When working with services, swarms, and `docker-stack.yml` files, keep in mind
 that the tasks (containers) backing a service can be deployed on any node in a
-swarm, which may be a different node each time the service is updated.
+swarm, and this may be a different node each time the service is updated.
 
 In the absence of having named volumes with specified sources, Docker creates an
 anonymous volume for each task backing a service. Anonymous volumes do not
@@ -1957,7 +1958,7 @@ conflicting with those used by other software.
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
 Set a custom name for this volume. The name field can be used to reference
-networks which contain special characters. The name is used as is
+networks that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
     version: '3.4'
@@ -2073,7 +2074,7 @@ documentation for more information. Optional.
 Only used when the `driver` is set to `overlay`. If set to `true`, then
 standalone containers can attach to this network, in addition to services. If a
 standalone container attaches to an overlay network, it can communicate with
-services and standalone containers which are also attached to the overlay
+services and standalone containers that are also attached to the overlay
 network from other Docker daemons.
 
 ```yaml
@@ -2204,7 +2205,7 @@ It can also be used in conjuction with the `external` property:
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
-[configs](/engine/swarm/configs.md) which can be granted to the services in this
+[configs](/engine/swarm/configs.md) that can be granted to the services in this
 stack. The source of the config is either `file` or `external`.
 
 - `file`: The config is created with the contents of the file at the specified
@@ -2213,7 +2214,7 @@ stack. The source of the config is either `file` or `external`.
   created. Docker does not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
 - `name`: The name of the config object in Docker. This field can be used to
-   reference configs which contain special characters. The name is used as is
+   reference configs that contain special characters. The name is used as is
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
@@ -2251,7 +2252,7 @@ stack.
 ## secrets configuration reference
 
 The top-level `secrets` declaration defines or references
-[secrets](/engine/swarm/secrets.md) which can be granted to the services in this
+[secrets](/engine/swarm/secrets.md) that can be granted to the services in this
 stack. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified
@@ -2260,7 +2261,7 @@ stack. The source of the secret is either `file` or `external`.
   created. Docker does not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
 - `name`: The name of the secret object in Docker. This field can be used to
-   reference secrets which contain special characters. The name is used as is
+   reference secrets that contain special characters. The name is used as is
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 

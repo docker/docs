@@ -26,5 +26,5 @@ Waiting for VM to start...
 
 > **Note**: If you are using a custom boot2docker ISO specified using
 > `--virtualbox-boot2docker-url` or an equivalent flag, running an upgrade on
-> that machine completely the specified ISO with the latest
+> that machine completely replaces the specified ISO with the latest
 > "vanilla" boot2docker ISO available.

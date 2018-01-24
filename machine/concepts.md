@@ -39,7 +39,7 @@ For a complete list of `docker-machine` subcommands, see the
 
 ## Custom root Certificate Authority for Registry
 
-if your registry is signed by acustom root Certificate Authority and it is
+if your registry is signed by a custom root Certificate Authority and it is
 not registered with Docker Engine, you may see the following error message:
 
 ```none

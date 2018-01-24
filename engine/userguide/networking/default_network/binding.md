@@ -66,7 +66,7 @@ DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.
 ```
 
 You can see that Docker has exposed these container ports on `0.0.0.0`, the
-wildcard IP address that matchs any possible incoming port on the host
+wildcard IP address that matches any possible incoming port on the host
 machine. If you want to be more restrictive and only allow container services to
 be contacted through a specific external interface on the host machine, you have
 two choices. When you invoke `docker run` you can use either `-p

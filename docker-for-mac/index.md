@@ -164,7 +164,7 @@ See [Namespaces](osxfs.md#namespaces) in the topic on
 
 > **Tip**: File sharing is required for volume mounting if the project lives
 > outside of the `/Users` directory. In that case, share the drive where the
-> Dockerfile and volume are located. Otherwise, you get `file not found `or
+> Dockerfile and volume are located. Otherwise, you get `file not found` or
 > `cannot start service errors at runtime`. (See also
 > [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
@@ -436,7 +436,7 @@ for Mac `xhyve` virtual machine).
 Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from
-the registry  produce error messages on the command line, as well as on the
+the registry produce error messages on the command line, as well as on the
 registry.
 
 ### Directory structures for certificates

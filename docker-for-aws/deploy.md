@@ -105,7 +105,7 @@ If you don't see your key, add it like this.
 $ ssh-add ~/.ssh/your_key
 ```
 
-On macOS, the `ssh-agent` forgetd this key on restart. But
+On macOS, the `ssh-agent` forgets this key on restart. But
 you can import your SSH key into your Keychain so that your key survives
 restarts.
 

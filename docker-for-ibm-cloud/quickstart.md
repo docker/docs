@@ -144,7 +144,8 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
    > Keep your client bundle handy
    >
-   > Move the certificate environment variable directory to a safe and accessible location on your machine. It gets used a lot.
+   > Move the certificate environment variable directory to a safe and
+   > accessible location on your machine. It gets used a lot.
 
 5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.:
 

@@ -264,5 +264,5 @@ While the root user inside a user-namespaced container process has many of the
 expected privileges of the superuser within the container, the Linux kernel
 imposes restrictions based on internal knowledge that this is a user-namespaced
 process. One notable restriction is the inability to use the `mknod` command.
-Permission ise denied for device creation within the container when run by
+Permission is denied for device creation within the container when run by
 the `root` user.

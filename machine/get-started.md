@@ -239,7 +239,7 @@ Run a container with `docker run` to verify your set up.
             </body>
             </html>
 
-  You can create and manage as many local VMs running Docker as your local resources permit; just run `docker-machine create` again. All created machines appearsin the output of `docker-machine ls`.
+  You can create and manage as many local VMs running Docker as your local resources permit; just run `docker-machine create` again. All created machines appear in the output of `docker-machine ls`.
 
 ## Start and stop machines
 

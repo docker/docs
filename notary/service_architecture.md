@@ -162,18 +162,18 @@ operations with any key the Signer holds.
   to download or upload metadata.
 
 - **Malicious Content** - An attacker can create, store, and serve arbitrary
-  metadata content for one or more trusted collections. However, they do not have
-  access to any client-side keys, such as root, targets, and potentially the
-  snapshot keys for the existing trusted collections.
+  metadata content for one or more trusted collections. However, the attacker
+  has no access to any client-side keys, such as root, targets, and potentially
+  the snapshot keys for the existing trusted collections.
 
-  Only clients who have never seen the trusted collections, and who do not have any
-  form of pinned trust, can be tricked into downloading and
-  trusting the malicious content for these trusted collections.
+  A client can only be tricked into downloading and trusting the malicious
+  content for these trusted collections if it has never seen the trusted
+  collections and does not have any form of pinned trust.
 
-  Clients that have previously interacted with any trusted collection, or that have
-  their trust pinned to a specific certificate for the collections immediately
-  detects that the content is malicious and would not trust any root, targets,
-  or (maybe) snapshot metadata for these collections.
+  If a client has previously interacted with any trusted collection or has its
+  trust pinned to a specific certificate for the collections, the client
+  immediately detects that the content is malicious and doesn't trust any root,
+  targets, or (maybe) snapshot metadata for these collections.
 
 - **Rollback, Freeze, Mix and Match** - The attacker can request that
   the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata

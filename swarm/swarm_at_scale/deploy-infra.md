@@ -17,7 +17,7 @@ architecture](about.md).
 
 This example assumes you are running on a Mac or Windows system and enabling
 Docker Engine `docker` commands by provisioning local VirtualBox virtual
-machines thru Docker Machine. For this evaluation installation, you need 6 (six)
+machines using Docker Machine. For this evaluation installation, you need 6 (six)
 VirtualBox VMs.
 
 While this example uses Docker Machine, this is only one example of an
@@ -166,7 +166,7 @@ support the container network you create later.
 
 ## Task 3. Add the load balancer
 
-The application uses [Internlock](https://github.com/ehazlett/interlock) and Nginx as a
+The application uses [Interlock](https://github.com/ehazlett/interlock) and Nginx as a
 loadbalancer. Before you build the load balancer host, create the
 configuration for Nginx.
 

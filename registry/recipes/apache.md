@@ -26,7 +26,7 @@ We also implement push restriction (to a limited user group) for the sake of the
 
 While this model gives you the ability to use whatever authentication backend you want through the secondary authentication mechanism implemented inside your proxy, it also requires that you move TLS termination from the Registry to the proxy itself.
 
-Furthermore, introducing an extra http layer in your communication pipeline adds complexity when deploying maintaining, and debugging.
+Furthermore, introducing an extra http layer in your communication pipeline adds complexity when deploying, maintaining, and debugging.
 
 ## Setting things up
 

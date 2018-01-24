@@ -13,7 +13,7 @@ you were using a single Docker host.
 The actual extent of integration depends on which version of the [Compose file
 format](compose-file.md#versioning) you are using:
 
-1.  If you're using version 1 along with `links`, your app work work, but Swarm
+1.  If you're using version 1 along with `links`, your app works, but Swarm
     schedules all containers on one host, because links between containers
     do not work across hosts with the old networking system.
 
