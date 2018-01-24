@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: mac, beta, edge, alpha, tutorial
+keywords: mac, edge, tutorial
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -301,6 +301,9 @@ choose to discard or not apply changes when asked.
 support is not included in Docker for Mac 17.12 CE Stable. To find out
 more about Stable and Edge channels and how to switch between them, see
 [General configuration](/docker-for-mac/#general).
+
+The addition of Kubernetes support increases the total binary size by about
+300 MB.
 
 Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server that runs
 on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
