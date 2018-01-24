@@ -131,7 +131,7 @@ that expression:
 $ docker run --log-driver=awslogs \
              --log-opt awslogs-region=us-east-1 \
              --log-opt awslogs-group=myLogGroup \
-             --log-opt awslogs-datetime-format='[%b %d, %Y %H:%M:%S]' \
+             --log-opt awslogs-datetime-format='\[%b %d, %Y %H:%M:%S\]' \
              ...
 ```
 
