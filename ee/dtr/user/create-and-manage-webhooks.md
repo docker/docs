@@ -2,6 +2,8 @@
 title: Manage webhooks
 description: Learn how to create, configure, and test webhooks in Docker Trusted Registry.
 keywords: registry, webhooks
+redirect_from:
+  - /datacenter/dtr/2.5/guides/user/create-and-manage-webhooks/
 ui_tabs:
   - version: dtr-2.5
     orlower: true

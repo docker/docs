@@ -4,6 +4,8 @@ description: Learn how to create a promotion policies that can automatically
   promote an image to production if it passes all tests and doesn't have
   vulnerabilities.
 keywords: registry, promotion, pipeline
+redirect_from:
+  - /datacenter/dtr/2.5/guides/user/create-promotion-policies/
 ui_tabs:
   - version: dtr-2.5
   - version: dtr-2.4
