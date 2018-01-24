@@ -19,7 +19,7 @@ Create a Docker EE swarm cluster in IBM Cloud.
 Before you begin:
 
 * [Complete the setup requirements](/docker-for-ibm-cloud/index.md#prerequisites).
-* Make sure that you have the appropriate [IBM Cloud infrastructure permissions](faqs.md).
+* Make sure that you have the appropriate [IBM Cloud infrastructure permissions](faqs.md#what-ibm-cloud-infrastructure-permissions-do-i-need).
 * Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select your user profile, and under the **API Access Information** section retrieve your **API Username** and **Authentication Key**.
 * [Add your SSH key to IBM Cloud infrastructure](https://knowledgelayer.softlayer.com/procedure/add-ssh-key), note its label, and locate the file path of the private SSH key on your machine.
 * Retrieve the Docker EE installation URL that you received in your beta welcome email.
@@ -38,7 +38,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    $ bx target --cf
    ```
 
-3. Review the `bx d4ic create` command parameters. Parameters that are marked `Required` must be provided during the create command. Optional parameters are set to the default.
+3. Review the `bx d4ic create` command parameters. You must provide parameters that are marked `Required`. Optional parameters are set to the default.
 
    | Parameter | Description | Default Value | Required? |
    | ---- | ----------- | ------------- | --- |
@@ -55,6 +55,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    | `--hardware` | If "dedicated" then the nodes are created on hosts with compute instances in the same account. | Shared | Optional |
    | `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. More powerful machine types cost more, but deliver better performance. For example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | b1c.4x16 | Optional |
    | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. More powerful machine types cost more, but deliver better performance. For example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
+   | `--disable-dtr-storage` | By default, the `bx d4ic create` command orders an IBM Cloud Swift API Object Storage account and creates a container named `dtr-container`. If you want to prevent this, include the `--disable-dtr-storage`. Note that you must then [set up IBM Cloud Object Storage](dtr-ibm-cos.md) yourself so that DTR works with your cluster. | Enabled by default. | Optional |
 
 4. Create the cluster. Use the `--swarm-name` flag to name your cluster, and fill in the credentials, SSH, and Docker EE installation URL variables with the information that you retrieved before you began.
 
@@ -69,7 +70,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
 
    > Tip to set environment variables
    >
-   > You can set your infrastructure API credentials and Docker EE installation URL as environment variables so that you do not need to include them as options when using `bx d4ic` commands. For example:
+   > You can set your infrastructure API credentials and Docker EE installation URL as environment variables so that you do not have to include them as options when using `bx d4ic` commands. For example:
    >
    > export SOFTLAYER_USERNAME=user.name.1234567
    >
@@ -78,7 +79,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    > export D4IC_DOCKER_EE_URL=my_docker-ee-url
 
 
-5. Note the cluster **Name** and **ID**.
+5. Note the cluster **Name**, **ID**, and **UCP Password**.
 
    > Swarm provisioning
    >
@@ -154,9 +155,9 @@ Docker EE for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/
 
 ### Access UCP
 
-Before you begin, [create a cluster](#create-swarms). Note the its **Name** and **ID**.
+Before you begin, [create a cluster](#create-swarms). Note its **Name**, **ID**, and **UCP Password**.
 
-1. Retrieve your UCP password by using the cluster **Name** and **ID** that you made when you [created the cluster](#create-swarms).
+1. If you have the **Name**, **ID**, and **UCP Password**, proceed to Step 2. Retrieve your UCP password by using the cluster **Name** and **ID** that you made when you [created the cluster](#create-swarms).
 
    ```bash
    $ docker logs cluster-name_ID
@@ -165,6 +166,8 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
    ucp_password = UCP-password
    ...
    ```
+
+   **Tip**: If you need to get the **Name** and **ID** of your cluster, run `bx d4ic list --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY`.
 
 2. Retrieve the **UCP URL** address.
 
@@ -183,7 +186,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 1. [Access UCP](#access-ucp).
 2. Under your user name (for example, **admin**), click **My Profile**.
 3. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
-4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
+4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
 5. In a terminal, navigate and unzip the client bundle.
 
    ```bash
@@ -192,8 +195,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 
    > Keep your client bundle handy
    >
-   > Move the certificate environment variable directory to a safe and accessible
-   > location on your machine. It contains secret information that gets used a lot.
+   > Move the certificate environment variable directory to a safe and accessible location on your machine. It contains secret information. You'll use it a lot!
 
 6. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.
 
@@ -239,7 +241,7 @@ To gather logging and metric data from your swarm, first [enable logging for the
 
 Docker EE for IBM Cloud employs a flexible architecture and integration with IBM Cloud that you can use to leverage IBM Cloud resources and customize your swarm environment. Docker EE UCP exposes the standard Docker API, and as such, includes certain functions that instead should be done by using Docker EE for IBM Cloud capabilities.
 
-> Self-healing capabilities so you don't need to modify cluster infrastructure.
+> Self-healing capabilities so you don't have to modify cluster infrastructure.
 >
 > Docker EE for IBM Cloud uses the InfraKit toolkit to support self-healing infrastructure. After you create the swarm, the cluster maintains that specified number of nodes. If a manager node fails, you do not need to promote a worker node to manager; the swarm self-recovers the manager node.
 >
@@ -266,6 +268,46 @@ The table outlines when to use UCP and when to use the `bx d4ic` CLI for various
 For IBM Cloud account access management, consult the [IBM Cloud Identity and Access Management documentation](https://console.bluemix.net/docs/iam/quickstart.html#getstarted).
 
 For Docker EE cluster access management, use the [UCP Access Control documentation](/datacenter/ucp/2.2/guides/access-control/).
+
+## Secure public network access to swarms
+
+By default, Docker EE for IBM Cloud uses [IBM Cloud Security Groups](https://console.bluemix.net/docs/infrastructure/security-groups/sg_index.html#getting-started-with-security-groups) to control access to your clusters by setting rules for incoming and outgoing traffic. You need to have [permissions in your IBM Cloud infrastructure account](faqs.md#what-ibm-cloud-infrastructure-permissions-do-i-need) to manage security groups so that you can provision clusters with security groups. There are two security groups: one for the DTR and worker nodes, and one for the manager nodes.
+
+The security group for DTR and worker nodes blocks all traffic on the public network. DTR and service load balancers communicate with these nodes through the cluster's private network. For public access to services that are running on worker nodes, [use the service load balancer](load-balancer.md#service-load-balancer).
+
+The security group for the manager nodes allows public network traffic to the manager nodes only through port 56422. To access the cluster's manager nodes:
+
+1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
+
+   ```bash
+   $ bx login [--sso]
+   ```
+
+2. Target the IBM Cloud org and space:
+
+   ```bash
+   $ bx target --cf
+   ```
+
+3. Retrieve your swarm name:
+
+  ```bash
+  $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
+  ```
+
+4. Get the **Public IP** of the manager you want to access, such as `my_swarm-mgr1`:
+
+   ```bash
+   $ bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key
+   ```
+
+5. Access the manager:
+
+   ```bash
+   $ ssh -A docker@managerIP -p 56422
+   ```
+
+The first time that you access a manager node, you might be asked to confirm the connection and add the public IP and port to the list of known hosts.
 
 ## Delete swarms
 
@@ -305,3 +347,9 @@ To delete a swarm:
    unset DOCKER_TLS_VERIFY
    unset DOCKER_CERT_PATH
    ```
+
+> Cloud Object Storage is not deleted by default
+>
+> When you create a swarm, by default you create an IBM Cloud Swift API Object Storage account and a container named `dtr-container` so that DTR can securely store images outside the swarm. When you delete the swarm, the Cloud Object Storage account is not deleted and remains in your IBM Cloud infrastructure account.
+>
+> If you want to delete it, see [Delete IBM Cloud Object Storage](dtr-ibm-cos.md#delete-ibm-cloud-object-storage). If you keep the account, you can link it to future swarms by using the `--disable-dtr-storage` parameter when you [create the new swarm](#create-swarms) and then by [configuring IBM Cloud Object Storage Regional Swift API for DTR](dtr-ibm-cos.md#configure-ibm-cloud-object-storage-regional-swift-api-for-dtr).
