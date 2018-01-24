@@ -4,7 +4,28 @@ keywords: ibm cloud, ibm, iaas, release notes
 title: Docker EE for IBM Cloud (beta) release notes
 ---
 
-Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest Docker EE for IBM Cloud (beta) version.
+Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest Docker Enterprise Edition (EE) for IBM Cloud (beta) version.
+
+## Version 1.0.2 (closed beta)
+
+(26 January 2017)
+
+Start using version 1.0.2 of Docker EE for IBM Cloud today!
+
+1. Update the CLI plug-in:
+
+   ```bash
+   $ bx plugin update docker-for-ibm-cloud -r Bluemix
+   ```
+
+2. [Deploy a new cluster](administer-swarmd.md#create-swarms).
+
+The second release of the closed beta includes the following enhancements:
+
+* [IBM Cloud Security Groups](https://console.bluemix.net/docs/infrastructure/security-groups/sg_overview.html#about-security-groups) securely control access to cluster traffic.
+* Users get their UCP password in the output of the [cluster create process](administer-swarmd.md#create-swarms).
+* By default, IBM Cloud Swift API Object Storage is used for the DTR container instead of local storage volume to improve high availability.
+* The [previous known issue](#service-load-balancer-has-the-configuration-of-an-older-service) about the service load balancer having the configuration of an older service is resolved.
 
 ## Version 1.0.1 (closed beta)
 
