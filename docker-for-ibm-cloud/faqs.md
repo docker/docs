@@ -18,12 +18,15 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   Make sure that you enable the permissions in the following table.
 
   * The **View Only** user role does not have any of these enabled by default.
-  * The **Basic User** role has some of these enabled by default. Permissions marked with `*` designate new permissions that **Basic Users** need.
-  * The **Super User** role has everything enabled.
+  * The **Basic User** role has some of these enabled by default.
+  * The **Super User** role has most of these enabled by default.
 
   > Save your setting changes!
   >
   > Don't forget to click **Set Permissions** as you go through the tabs of each permission set so that you don't lose your settings.
+
+  {% capture superscript-link1 %}[1](#edge-footnote1){: style="vertical-align: super; font-size: smaller;" }{% endcapture %}
+  {% capture superscript-link2 %}[2](#edge-footnote2){: style="vertical-align: super; font-size: smaller;" }{% endcapture %}
 
   <table summary="The minimum user permissions that are required to provision and manage a Docker EE swarm mode cluster for IBM Cloud.">
   <caption>Table 1. The minimum user permissions that are required to provision and manage a Docker EE swarm mode cluster for IBM Cloud.
@@ -46,7 +49,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <li>Manage load balancers</li>
   <li>Manage device monitoring</li>
   <li>Reboot server and view IPMI system information</li>
-  <li>*Issue OS Reloads and initial rescue kernel</li>
+  <li>Issue OS Reloads and initial rescue kernel {{ superscript-link1 }} </li>
   <li>Manage port control</li>
   </ul>
   </td>
@@ -56,11 +59,12 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <td>Provision, connect, and expose IP addresses.</td>
   <td>
   <ul>
-  <li>*Add compute with public network port</li>
+  <li>Add compute with public network port {{ superscript-link2 }} </li>
   <li>View bandwidth statistics</li>
   <li>Add IP addresses</li>
   <li>Manage email delivery service</li>
-  <li>*Manage Network VLAN Spanning</li>
+  <li>Manage network VLAN spanning {{ superscript-link1 }} </li>
+  <li>Manage security groups {{ superscript-link2 }} </li>
   </ul></td>
   </tr>
   <tr>
@@ -70,16 +74,16 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View CDN bandwidth statistics</li>
   <li>Vulnerability scanning</li>
-  <li>*Manage CDN account</li>
-  <li>*Manage CDN file transfers</li>
+  <li>Manage CDN account {{ superscript-link1 }} </li>
+  <li>Manage CDN file transfers {{ superscript-link1 }} </li>
   <li>View licenses</li>
   <li>Manage DNS, reverse DNS, and WHOIS</li>
   <li>Antivirus/spyware</li>
   <li>Host IDS</li>
-  <li>*Manage SSH keys</li>
-  <li>*Manage storage</li>
-  <li>*View Certificates (SSL)</li>
-  <li>*Manage Certificates (SSL)</li>
+  <li>Manage SSH keys {{ superscript-link1 }} </li>
+  <li>Manage storage {{ superscript-link1 }} </li>
+  <li>View Certificates (SSL) {{ superscript-link1 }} </li>
+  <li>Manage Certificates (SSL) {{ superscript-link1 }} </li>
   </ul>
   </td>
   </tr>
@@ -90,16 +94,22 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View account summary</li>
   <li>Manage notification subscribers</li>
-  <li>*Add/upgrade cloud instances</li>
-  <li>*Cancel server</li>
-  <li>*Cancel services</li>
-  <li>*Add server</li>
-  <li>*Add/upgrade services</li>
+  <li>Add/upgrade cloud instances {{ superscript-link1 }} </li>
+  <li>Cancel server {{ superscript-link1 }} </li>
+  <li>Cancel services {{ superscript-link1 }} </li>
+  <li>Add server {{ superscript-link1 }} </li>
+  <li>Add/upgrade services {{ superscript-link1 }} </li>
   </ul>
   </td>
   </tr></tbody></table>
 
-## Which IBM Cloud region and locations (data centers) does this work with?
+`1`: A **Basic User** needs these permissions added to the account.
+{: id="edge-footnote1" }
+
+`2`: Both **Basic** and **Super** users need these permissions added to the account.
+{: id="edge-footnote2" }
+
+## Which IBM Cloud region and locations (data centers) will this work with?
 
 Docker EE for IBM Cloud is available in the following IBM Cloud regions and locations (data centers).
 
