@@ -2,6 +2,8 @@
 title: Pull and push images
 description: Learn how to pull and push images to Docker Trusted Registry.
 keywords: registry, push, pull
+redirect_from:
+  - /datacenter/dtr/2.5/guides/user/manage-images/pull-and-push-images/
 ui_tabs:
   - version: dtr-2.5
     orlower: true
