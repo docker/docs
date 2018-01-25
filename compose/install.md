@@ -97,7 +97,7 @@ Docker Compose. To do so, follow these steps:
 <div id="linux" class="tab-pane fade" markdown="1">
 ### Install Compose on Linux systems
 
-*[The package repository set up for Docker instalation](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#upgrade-docker-ce) contains a docker-compose package. If you installed Docker this way, simply run * `sudo apt-get install docker-compose`.
+*[The package repository set up for Docker instalation](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#upgrade-docker-ce) contains a docker-compose package. If you installed Docker this way, simply run* `sudo apt-get install docker-compose`.
 
 On **Linux**, you can download the Docker Compose binary from the [Compose
 repository release page on GitHub](https://github.com/docker/compose/releases){:
