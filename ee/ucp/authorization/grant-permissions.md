@@ -16,20 +16,20 @@ redirect_from:
 {% if include.version=="ucp-3.0" %}
 
 Docker EE administrators can create _grants_ to control how users and
-organizations access resources.
+organizations access [resource sets](group-resources.md).
 
 A grant defines _who_ has _how much_ access to _what_ resources. Each grant is a
 1:1:1 mapping of _subject_, _role_, and _resource set_. For example, you can
-grant the "Prod Team" "Restricted Control" of services in the "/Production"
-collection.
+grant the "Prod Team" "Restricted Control" over services in the "/Production"
+collection. 
 
 A common workflow for creating grants has four steps:
 
 - Add and configure **subjects** (users and teams).
 - Define custom **roles** (or use defaults) by adding permitted API operations
-  per resource type.
+  per type of resource.
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
-- Create **grants** by marrying subject + role + resource group.
+- Create **grants** by combining subject + role + resource set.
 
 ## Kubernetes grants
 
@@ -44,9 +44,9 @@ To create a Kubernetes grant in UCP:
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.
 3. Click **Namespaces** under **Kubernetes**.
-4. Click **View Children** until you get to the desired resource group and **Select**.
-5. On the Roles tab, select a role.
-6. On the Subjects tab, select a user, team, or organization to authorize.
+4. Click **View Children** until you get to the desired namespace and **Select**.
+5. On the **Roles** tab, select a role.
+6. On the **Subjects** tab, select a user, team, or organization to authorize.
 7. Click **Create**.
 
 > By default, all new users are placed in the `docker-datacenter` organization.
@@ -69,9 +69,9 @@ To create a grant in UCP:
 1. Click **Grants** under **User Management**.
 2. Click **Create Grant**.
 3. On the Collections tab, click **Collections** (for Swarm).
-4. Click **View Children** until you get to the desired resource group and **Select**.
-5. On the Roles tab, select a role.
-6. On the Subjects tab, select a user, team, or organization to authorize.
+4. Click **View Children** until you get to the desired collection and **Select**.
+5. On the **Roles** tab, select a role.
+6. On the **Subjects** tab, select a user, team, or organization to authorize.
 7. Click **Create**.
 
 > By default, all new users are placed in the `docker-datacenter` organization.
