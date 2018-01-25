@@ -22,23 +22,23 @@ next_steps:
 [Docker Universal Control Plane (UCP)](../index.md),
 the UI for [Docker EE](https://www.docker.com/enterprise-edition), lets you
 authorize users to view, edit, and use cluster resources by granting role-based
-permissions against resource types.
+permissions against resource sets.
 
 To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
 
 - Add and configure **subjects** (users and teams).
 - Define custom **roles** (or use defaults) by adding permitted operations per
-  resource types.
+  type of resource.
 - Group cluster **resources** into Swarm collections or Kubernetes namespaces.
-- Create **grants** by combining subject + role + resource group.
+- Create **grants** by combining subject + role + resource set.
 
 For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 
 ## Subjects
 
 A subject represents a user, team, or organization. A subject can be granted a
-role that defines permitted operations against one or more resource types.
+role that defines permitted operations against one or more resource sets.
 
 - **User**: A person authenticated by the authentication backend. Users can
   belong to one or more teams and one or more organizations.
@@ -47,12 +47,12 @@ role that defines permitted operations against one or more resource types.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
 
-Learn to [create and configure users and teams](create-users-and-teams-manually.md)
+Learn to [create and configure users and teams](create-users-and-teams-manually.md).
 
 ## Roles
 
 Roles define what operations can be done by whom. A role is a set of permitted
-operations against a *resource type*, like a container or volume, that's
+operations against a type of resource, like a container or volume, that's
 assigned to a user or team with a grant.
 
 For example, the built-in role, **Restricted Control**, includes permission to
@@ -63,7 +63,7 @@ Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
 resource they are accessing.
 
-Learn to [define roles with authorized API operations](define-roles.md)
+Learn to [define roles with authorized API operations](define-roles.md).
 
 ## Resource sets
 

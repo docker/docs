@@ -19,6 +19,14 @@ redirect_from:
 ---
 {% if include.version=="ucp-3.0" %}
 
+Docker EE enables access control to cluster resources by grouping resources
+into *resource sets*. Combine resource sets with [grants](grant-permissions)
+to give users permission to access specific cluster resources.
+
+A resource set can be a UCP collection or a Kubernetes namespace, depending 
+on the orchestrator. Use collections for Swarm workloads, and use namespaces
+for Kubernetes workloads. 
+
 ## Kubernetes namespace
 
 A
@@ -134,6 +142,9 @@ within the stack/compose file.
 The Docker EE Advanced license enables access control on worker nodes. Admin
 users can move worker nodes from the default `/Shared` collection into other
 collections and create corresponding grants for scheduling tasks.
+
+Also, you can [isolate a Kubernetes workload](isolate-nodes.md##deploy-a-Kubernetes-application)
+to specific worker nodes, based on a Kubernetes namespace.
 
 In this example, an administrator has moved worker nodes to a `/prod`
 collection:
