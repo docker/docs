@@ -182,6 +182,58 @@ There are a few ways to address this problem and keep using your older
 machines. One solution is to use a version manager like
 [DVM](https://github.com/getcarina/dvm).
 
+## Migrating from Docker Toolbox to Docker for Mac
+
+Docker for Mac does not proposeToolbox image migration as part of the Docker for
+Mac (D4M for short) installer since version 18.01.0.  Migrating existing Docker
+Toolbox images can be done with the scripts described below.  (Note that this
+migration cannot merge images from both D4M and Toolbox: any existing D4M image
+will be *replaced* by the Toolbox images.)
+
+In order to run these instructions you need to now how to run shell
+commands in a terminal.  You also need a working `qemu-img`; it is
+part of the qemu package in both MacPorts and Brew:
+```sh
+$ brew install qemu  # or sudo port install qemu
+```
+
+First, find out where are you Toolbox disk images.  It is very likely that you
+have just one: `~/.docker/machine/machines/default/disk.vmdk`.
+
+```sh
+$ vmdk=~/.docker/machine/machines/default/disk.vmdk
+$ file "$vmdk"
+/Users/akim/.docker/machine/machines/default/disk.vmdk: VMware4 disk image
+```
+
+Second, find out the location and format of the disk image used by your D4M.
+
+```sh
+$ settings=~/Library/Group\ Containers/group.com.docker/settings.json
+$ dimg=$(sed -En 's/.*diskPath.*:.*"(.*)".*/\1/p' < "$settings")
+$ echo "$dimg"
+/Users/akim/Library/Containers/com.docker.docker/Data/vms/0/Docker.raw
+```
+
+In this case the format is `raw` (it could have been `qcow2`), and the location
+is `~Library/Containers/com.docker.docker/Data/vms/0/` (it could have been
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`).
+
+Then:
+- if your format is qcow2, run
+```sh
+$ qemu-img convert -p -f vmdk -O qcow2 -o lazy_refcounts=on "$vmdk" "$dimg"
+```
+- if your format is raw, run the following command.  If you are short on disk
+space, it is likely to fail.
+```sh
+$ qemu-img convert -p -f vmdk -O raw "$vmdk" "$dimg"
+```
+
+Finally (optional), if you are done with Docker Toolbox, you may fully
+[uninstall
+it](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox).
+
 ## How do I uninstall Docker Toolbox?
 
 You might decide that you do not need Toolbox now that you have Docker for Mac,
