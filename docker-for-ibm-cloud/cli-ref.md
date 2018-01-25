@@ -4,9 +4,10 @@ keywords: ibm, ibm cloud, cli, iaas, reference
 title: CLI reference for Docker EE for IBM Cloud
 ---
 
-With the Docker EE for IBM Cloud (Beta) plug-in for the IBM Cloud CLI, you can manage your Docker swarms alongside other IBM Cloud operations.
+With the Docker EE for IBM Cloud (beta) plug-in for the IBM Cloud CLI, you can manage your Docker swarms alongside other IBM Cloud operations.
 
 ## Docker for IBM Cloud plug-in commands
+
 Refer to these commands to manage your Docker EE for IBM Cloud clusters.
 
 * To view a list of commands, run the `bx d4ic help` command.
@@ -26,7 +27,7 @@ Create a Docker EE swarm cluster.
 ### Usage
 
 ```bash
-$ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-label SSH_KEY_LABEL --ssh-key SSH_KEY_PATH --docker-ee-url DOCKER_EE_URL --swarm-name SWARM_NAME [--datacenter DATACENTER] [--workers NUMBER] [--managers NUMBER] [--hardware SHARED|DEDICATED] [--manager-machine-type MANAGER_MACHINE_TYPE] [--worker-machine-type WORKER_MACHINE_TYPE] [-v] [--version VERSION]
+$ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-label SSH_KEY_LABEL --ssh-key SSH_KEY_PATH --docker-ee-url DOCKER_EE_URL --swarm-name SWARM_NAME [--datacenter DATACENTER] [--workers NUMBER] [--managers NUMBER] [--hardware SHARED|DEDICATED] [--manager-machine-type MANAGER_MACHINE_TYPE] [--worker-machine-type WORKER_MACHINE_TYPE] [--disable-dtr-storage] [-v] [--version VERSION]
 ```
 
 ### Options
@@ -46,16 +47,18 @@ $ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --s
 | `--hardware` | If "dedicated" then the nodes are created on hosts with compute instances in the same account. | Shared | Optional |
 | `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | b1c.4x16 | Optional |
 | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
+| `--disable-dtr-storage` | By default, the `bx d4ic create` command orders an IBM Cloud Swift API Object Storage account and creates a container named `dtr-container`. If you want to prevent this, include the `--disable-dtr-storage`. Note that you must then [set up IBM Cloud Object Storage](dtr-ibm-cos.md) yourself so that DTR works with your cluster. | Enabled by default. | Optional |
 | `--version` | The Docker EE version of the created cluster. For the beta, only the default version is available. | Default version | Optional |
 
 
 ## bx d4ic delete
+
 Delete a Docker EE swarm cluster.
 
 ### Usage
 
 ```bash
-$ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-key SSH_KEY_PATH [--insecure] [--force]
+$ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --ssh-label SSH_KEY_LABEL --ssh-key SSH_KEY_PATH [--insecure] [--force]
 ```
 
 ### Options
@@ -64,6 +67,7 @@ $ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAM
 |---|---|---|---|
 | `--sl-user`, `-u` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **API Username** under the API Access Information section. | | Required |
 | `--sl-api-key`, `-k` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **Authentication Key** under the API Access Information section. | | Required |
+| `--ssh-label`, `--label` | Your IBM Cloud infrastructure SSH key label for the manager node. To create a key, [log in to IBM Cloud infrastructure](https://control.softlayer.com/) and select **Devices > Manage > SSH Keys > Add**. Copy the key label and insert it here. | | Required |
 | `--ssh-key` | The path to the SSH key on your local client that matches the SSH key label in your IBM Cloud infrastructure account. | | Required |
 | `--swarm-name`, `--name` | The name of your cluster. If the name is not provided, you must provide the ID. | | Required |
 | `--id` | The ID of your cluster. If the ID is not provided, you must provide the name. | | Required |
@@ -72,6 +76,7 @@ $ bx d4ic delete (--swarm-name SWARM_NAME | --id ID) --sl-user SOFTLAYER_USERNAM
 | `--force`, `-f` | Force deletion without confirmation. | | Optional |
 
 ## bx d4ic key-create
+
 Create a key for a service instance. Before you can create a key, create an IBM Cloud service.
 
 ### Usage
@@ -93,6 +98,7 @@ $ bx d4ic key-create (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH -
 | `--sl-api-key`, `-k` | [Log in to IBM Cloud infrastructure](https://control.softlayer.com/), select your profile, and locate your **Authentication Key** under the API Access Information section. | | Required |
 
 ## bx d4ic list
+
 List the clusters in your Docker EE for IBM Cloud account.
 
 ### Usage
@@ -133,6 +139,7 @@ $ bx d4ic logmet (--swarm-name SWARM_NAME | --id ID) --cert-path CERT_PATH --sl-
 | `--disable` | Disable sending log activity to IBM Cloud Log Analysis and Monitoring services. You must include either `--enable` or `--disable` in the command. | | Optional |
 
 ## bx d4ic show
+
 Show information about the IBM Cloud infrastructure components, such as load balancer URLs, of a specific cluster.
 
 ### Usage
