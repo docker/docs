@@ -56,10 +56,8 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited that you want to learn Docker. Docker lets you easily
-**build, ship, and run** any application on any platform. Let's get started.
-
-The Docker _Get Started_ tutorial teaches you how to:
+Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
+teaches you how to:
 
 1. Set up your Docker environment (on this page)
 2. [Build an image and run it as one container](part2.md)
@@ -68,37 +66,54 @@ The Docker _Get Started_ tutorial teaches you how to:
 5. [Stack services by adding a backend database](part5.md)
 6. [Deploy your app to production](part6.md)
 
-## Images and containers
+## Docker concepts
 
-An **image** is a lightweight, stand-alone, executable package that includes
-everything needed to run a piece of software--the code, a runtime, libraries,
-environment variables, and configuration files. You can find thousands of images
-on [Docker Hub](https://hub.docker.com/explore/){: target="_blank" class="_"}.
+Docker is a platform for developers and sysadmins to **develop, deploy, and run**
+applications in containers. Like ship containers, Docker containers (based on
+Linux containers) are isolated user spaces that let you more easily control your
+software.
+
+The use of Linux containers to deploy applications is called _containerization_.
+Containers are not new, but their use for easily deploying applications is.
+Containerization is increasingly popular because containers are:
+
+- Flexible: Even the most complex applications can be containerized.
+- Lightweight: Containers leverage and share the host kernel.
+- Interchangeable: You can deploy updates and upgrades on-the-fly.
+- Portable: You can build locally, deploy to the cloud, and run anywhere.
+- Scalable: You can increase and automatically distribute container replicas.
+- Stackable: You can stack services vertically and on-the-fly.
+
+At its core, the Docker platform is a client-server application that runs on any
+x64 host with a modern Linux kernel. Throughout this tutorial, we use the Docker
+CLI to talk to the Docker server or daemon.
+
+![Containers are portable](images/laurel-docker-containers.png){:width="300px"} 
+
+### Images and containers
+
+A container is launched by running an image. An **image** is an executable
+package that includes everything needed to run an appplication--the code, a
+runtime, libraries, environment variables, and configuration files.
 
 A **container** is a runtime instance of an image--what the image becomes in
-memory when executed. By default, a container runs completely isolated from the
-host environment, only accessing host files and ports if configured to do so.
+memory when executed (that is, an image with state, or a user process). More
+specifically, a container is the user space within memory in which the the user
+process runs.
 
-The use of Linux containers to build, deploy, and run applications is called
-[containerization](https://en.wikipedia.org/wiki/Operating-system-level_virtualization){: target="_blank" class="_"}.
-Containers are not new but their use for easily deploying applications is.
+But its okay to think of containers as the processes themselves. In fact, you
+can see a list of your running containers with the command, `docker ps`, just as
+you would in Linux. More on this later.
 
-## Containers vs. virtual machines
+### Containers and virtual machines
 
-A **virtual machine** (VM) runs a "guest" operating system (OS) with virtual (as
-opposed to native) access to host resources through a hypervisor. VMs are
-resource intensive, and the resulting disk image and application state is an
-entanglement of OS settings, system-installed dependencies, OS security patches,
-and other ephemera. VMs provide an environment with more resources than most
-applications need.
+A **container** runs _natively_ on Linux and shares the kernel of the host
+machine with other containers. It runs a discrete process, taking no more memory
+than any other executable, making it lightweight.
 
-By contrast, a **container** runs applications natively and shares the kernel
-of the host machine with other containers, keeping it lightweight. Each
-container runs in a discrete process, taking no more memory than any other
-executable. The only information needed in a container is the executable and its
-package dependencies, which never need to be installed on the host system.
-Because containers house their dependencies, a containerized app is portable and
-“runs anywhere.”
+By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
+system with _virtual_ access to host resources through a hypervisor. In general,
+VMs provide an environment with more resources than most applications need.
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png){:width="300px"} | ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png){:width="300px"}
 
@@ -108,9 +123,10 @@ Install a [maintained version](https://docs.docker.com/engine/installation/#upda
 of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 [supported platform](https://docs.docker.com/engine/installation/#supported-platforms){: target="_blank" class="_"}.
 
-> For full
-[Kubernetes integration on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"},
-install
+> For full Kubernetes Integration
+>
+> [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in
 [17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
 or higher.
 
@@ -169,7 +185,7 @@ List the `hello-world` image that was downloaded to your machine:
 $ docker image ls
 ```
 
-List the `hello-world` container (spawned by the image), which exited after
+List the `hello-world` container (spawned by the image), which exits after
 displaying its message. If it were still running, you would _not_ need the
 `--all` option:
 
@@ -205,9 +221,7 @@ docker container ls -a -q
 
 ## Conclusion of part one
 
-Container images are portable executables that make
-[CI/CD](https://www.docker.com/use-cases/cicd){: target="_blank" class="_"} seamless.
-For example:
+Containerization makes [CI/CD](https://www.docker.com/use-cases/cicd){: target="_blank" class="_"} seamless. For example:
 
 - applications have no system dependencies
 - updates can be pushed to any part of a distributed application
