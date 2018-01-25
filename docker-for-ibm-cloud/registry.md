@@ -15,9 +15,9 @@ To deploy a container image in Docker swarm mode, you create a service that uses
 
 ## Docker Trusted Registry
 
-[Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/) is a private registry that runs on a Docker EE cluster. Once deployed, you can use the DTR GUI or Docker CLI to manage your Docker images. Set up DTR to save images on external storage. Use DTR when you need a secure image registry that's integrated with Docker EE UCP.
+[Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/) is a private registry that runs on a Docker EE cluster. Once deployed, you can use the DTR GUI or Docker CLI to manage your Docker images. You must set up DTR to save images on external storage. Use DTR when you need a secure image registry that's integrated with Docker EE UCP.
 
-Before you can use DTR, [configure DTR to use IBM Cloud Object Storage](dtr-ibm-cos.md) to securely store your images externally.
+DTR uses IBM Cloud Object Storage to securely store your images externally. By default, an IBM Cloud Object Storage Swift account and `dtr-container` is created during [cluster provisioning](#administering-swarms.md#create-swarms). If you prevented the `dtr-container` from creating with the `--disable-dtr-storage` parameter, then [configure DTR to use IBM Cloud Object Storage S3](dtr-ibm-cos.md).
 
 ## IBM Cloud Container Registry
 
