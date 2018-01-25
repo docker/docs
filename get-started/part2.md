@@ -8,125 +8,129 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Prerequisites
 
-- [Install Docker version 1.13 or higher](/engine/installation/).
-- Read the orientation in [Part 1](index.md).
-- Give your environment a quick test run to make sure you're all set up:
+This part assumes that you:
 
-  ```shell
-  docker run hello-world
-  ```
+- Completed [Part 1](index.md).
+- Installed a [maintained version](https://docs.docker.com/engine/installation/#updates-and-patches){: target="_blank" class="_"}
+of Docker Community Edition (CE) or Enterprise Edition (EE) on a
+[supported platform](https://docs.docker.com/engine/installation/#supported-platforms){: target="_blank" class="_"}.
+
+> For full Kubernetes Integration
+>
+> [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in
+[17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
+or higher.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We'll start at the bottom of
-the hierarchy of such an app, which is a container, which we cover on this page.
-Above this level is a service, which defines how containers behave in
-production, covered in [Part 3](part3.md). Finally, at the top level is the
-stack, defining the interactions of all the services, covered in
-[Part 5](part5.md).
+This tutorial teaches you how to build a simple Python web application (with
+[Flask](http://flask.pocoo.org/){:target="_blank"}) that prints **"Hello, Moby Dock!"**
+on a blue canvas. We later add a [Redis](https://hub.docker.com/_/redis/){:target="_blank"}
+database to count the number of visitors to our site.
+
+Here in part 2, we start by building a Docker application image, `hellomoby`,
+then run it as a single container on localhost. We also tag and push the new
+image to Docker's public registry via [Docker Hub](https://hub.docker.com/){:target="_blank"}.
+
+In [Part 3](part3.md), we run our image as a "Docker Service" so we can scale
+the number of containers and do other operations. In [Part 4](part4.md), we
+employ container orchestration and distribute the multiple containers running
+our application across multiple nodes. In [Part 5](part5.md), we add a service
+(for a redis database) and rebuild our image as a Docker stack.
 
 - Stack
-- Services
+- Docker Service
 - **Container** (you are here)
 
-## Your new development environment
+## Define app image with Dockerfile
 
-In the past, if you were to start writing a Python app, your first
-order of business was to install a Python runtime onto your machine. But,
-that creates a situation where the environment on your machine has to be just
-so in order for your app to run as expected; ditto for the server that runs
-your app.
+Typically, creating a Python application requires that you install a Python
+runtime, along with the server, and configure it all _perfectly_ on your
+platform for the app to run as expected. With Docker, you simply pull a portable
+Python runtime image from [Docker Hub](https://hub.docker.com/_/python/){:target="_blank"}
+(or [Docker Store](https://store.docker.com/images/python)) and build it with
+your application code (as another image).
 
-With Docker, you can just grab a portable Python runtime as an image, no
-installation necessary. Then, your build can include the base Python image
-right alongside your app code, ensuring that your app, its dependencies, and the
-runtime, all travel together.
+To ensure the integrity and portability of an application, we build images with
+a [Dockerfile](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+A `Dockerfile` defines the environment inside a container. Access to resources,
+such as networking interfaces and disk drives, is virtualized inside this
+environment. The container is isolated from the rest of your system, so you must
+map ports to the outside world, and be specific about what files you want to
+copy into that environment. Let's start.
 
-These portable images are defined by something called a `Dockerfile`.
+Create an empty directory and change directories into this new directory:
 
-## Define a container with `Dockerfile`
+```shell
+$ mkdir ~/hellomoby && cd ~/hellomoby
+```
 
-`Dockerfile` will define what goes on in the environment inside your
-container. Access to resources like networking interfaces and disk drives is
-virtualized inside this environment, which is isolated from the rest of your
-system, so you have to map ports to the outside world, and
-be specific about what files you want to "copy in" to that environment. However,
-after doing that, you can expect that the build of your app defined in this
-`Dockerfile` will behave exactly the same wherever it runs.
+Create a file named "Dockerfile" with the following content and save.
 
-### `Dockerfile`
-
-Create an empty directory. Change directories (`cd`) into the new directory,
-create a file called `Dockerfile`, copy-and-paste the following content into
-that file, and save it. Take note of the comments that explain each statement in
-your new Dockerfile.
+> Our file refers to `app.py` and `requirements.txt` which we have not yet
+> created. We do this next.
 
 ```dockerfile
-# Use an official Python runtime as a parent image
+## Dockerfile
+## Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
-# Set the working directory to /app
+## Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+## Copy the current directory contents into the container at /app
 ADD . /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+## Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
 
-# Make port 80 available to the world outside this container
+## Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Define environment variable
-ENV NAME World
+## Define environment variable
+ENV NAME Moby Dock
 
-# Run app.py when the container launches
+## Run app.py when the container launches
 CMD ["python", "app.py"]
 ```
 
 > Are you behind a proxy server?
 >
-> Proxy servers can block connections to your web app once it's up and running.
-> If you are behind a proxy server, add the following lines to your
-> Dockerfile, using the `ENV` command to specify the host and port for your
-> proxy servers:
+> Proxy servers can block connections to your web app once it’s up and running.
+> If you are behind a proxy server, add the following lines to your Dockerfile,
+> (before the call to `pip`):
 >
 > ```conf
 > # Set proxy server, replace host:port with values for your servers
 > ENV http_proxy host:port
 > ENV https_proxy host:port
 > ```
->
-> Add these lines before the call to `pip` so that the installation succeeds.
 
-This `Dockerfile` refers to a couple of files we haven't created yet, namely
-`app.py` and `requirements.txt`. Let's create those next.
+## Code, build, and run the app
 
-## The app itself
+A Dockerfile defines _how_ to build the Docker image; but we also need to code
+the application itself.
+
+### Code the app
 
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
-folder with the `Dockerfile`. This completes our app, which as you can see is
-quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` will be present because of that `Dockerfile`'s `ADD` command,
-and the output from `app.py` will be accessible over HTTP thanks to the `EXPOSE`
-command.
-
-### `requirements.txt`
+directory as `Dockerfile`.
 
 ```
-Flask
-Redis
+## requirements.txt
+flask
+redis
 ```
-
-### `app.py`
 
 ```python
+## app.py
 from flask import Flask
 from redis import Redis, RedisError
 import os
 import socket
 
-# Connect to Redis
+## Connect to Redis
 redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 app = Flask(__name__)
@@ -136,149 +140,130 @@ def hello():
     try:
         visits = redis.incr("counter")
     except RedisError:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
+        visits = "<i>Cannot connect to Redis, counter disabled.</i>"
 
-    html = "<h3>Hello {name}!</h3>" \
+    html = "<h3>Hello, {name}!</h3>" \
+           "<body bgcolor={bgcolor}>" \
            "<b>Hostname:</b> {hostname}<br/>" \
            "<b>Visits:</b> {visits}"
-    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+    return html.format(name=os.getenv("NAME", "whale"), bgcolor='#72AAFD', hostname=socket.gethostname(), visits=visits)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 ```
 
-Now we see that `pip install -r requirements.txt` installs the Flask and Redis
-libraries for Python, and the app prints the environment variable `NAME`, as
-well as the output of a call to `socket.gethostname()`. Finally, because Redis
-isn't running (as we've only installed the Python library, and not Redis
-itself), we should expect that the attempt to use it here will fail and produce
-the error message.
+Scroll up and take another look at `Dockerfile`. The `ADD` command bundles
+`app.py` and `requirements.txt` into the build. The `EXPOSE` command makes the
+output from `app.py` accessible over HTTP.
 
-> **Note**: Accessing the name of the host when inside a container retrieves the
-container ID, which is like the process ID for a running executable.
+The command, `RUN pip install -r requirements.txt`, installs the Python
+libraries for Flask and Redis. The app prints the environment variable `NAME`
+and the output of the call to `socket.gethostname()`, _which is the container ID._
 
-That's it! You don't need Python or anything in `requirements.txt` on your
-system, nor will building or running this image install them on your system. It
-doesn't seem like you've really set up an environment with Python and Flask, but
-you have.
+### Build the app
 
-## Build the app
-
-We are ready to build the app. Make sure you are still at the top level of your new directory. Here's what `ls` should show:
+We are ready to build the app. Make sure you are still at the top level of your
+new directory and check your files:
 
 ```shell
 $ ls
 Dockerfile		app.py			requirements.txt
 ```
 
-Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name.
+Build the image with the files in _this_ directory (`.`) and tag it with a
+meaningful name such as `hellomoby`:
 
 ```shell
-docker build -t friendlyhello .
+$ docker build ---tag hellomoby .
 ```
 
-Where is your built image? It's in your machine's local Docker image registry:
+You can find `hellomoby` in your machine's local Docker image registry:
 
 ```shell
-$ docker images
-
-REPOSITORY            TAG                 IMAGE ID
-friendlyhello         latest              326387cea398
+$ docker image ls
+REPOSITORY      TAG          IMAGE ID           CREATED              SIZE
+hellomoby       latest       88b087bf9a5e       2 minutes ago        148MB
+python          2.7-slim     4fd30fc83117       3 weeks ago          138MB
+hello-world     latest       f2a91732366c       6 weeks ago          1.85kB
+...
 ```
 
-## Run the app
+### Run the app
 
-Run the app, mapping your machine's port 4000 to the container's published port
-80 using `-p`:
+Run the app, and use the port flag, `-p`, to map port 4000 on your machine to
+port 80 published by the container:
 
 ```shell
-docker run -p 4000:80 friendlyhello
+$ docker run -p 4000:80 hellomoby
 ```
 
-You should see a message that Python is serving your app at `http://0.0.0.0:80`.
-But that message is coming from inside the container, which doesn't know you
-mapped port 80 of that container to 4000, making the correct URL
-`http://localhost:4000`.
+Point a browser to [http://localhost:4000](http://localhost:4000).
 
-Go to that URL in a web browser to see the display content served up on a
-web page.
+> On Windows 7, with Docker Toolbox, use the Docker Machine IP instead of
+> `localhost` (for example, http://192.168.99.100:4000). To find the IP
+> address, run `docker-machine ip`.
 
-![Hello World in browser](images/app-in-browser.png)
+You should see:
 
-> **Note**: If you are using Docker Toolbox on Windows 7, use the Docker Machine IP
-> instead of `localhost`. For example, http://192.168.99.100:4000/. To find the IP
-> address, use the command `docker-machine ip`.
+- **Hello, Moby Dock!**  (on a blue canvas)
+- **Hostname:** `CONTAINER ID`
+- **Visits:** _Cannot connect to Redis, counter disabled._
 
-You can also use the `curl` command in a shell to view the same content.
+![Hello, Moby Dock in browser](images/hellomoby-web.png){:width="500px"}
+
+Python serves your app at http://0.0.0.0:80, but that message comes from
+_inside_ the container, so Python does not know you remapped the port to 4000.
+Remapping here demonstrates the difference between what you `EXPOSE` within the
+`Dockerfile`, and what you _publish_ using `docker run -p`.
+
+> Expected Redis error
+>
+> Because Redis is not running (as we only installed the Python library, and
+> not Redis itself), the attempt to use it here fails. We fix that in [Part 5](part5.md).
+
+Press `CTRL+C` in your terminal to quit.
+
+> On Windows, press `CTRL+C` to get the prompt back, then manually stop the
+> running container:
+> ```shell
+> docker container ls
+> docker container stop <CONTAINER ID or NAMES>
+> ```
+
+Run the app again in _detached_ mode (with `-d`). The full CONTAINER ID displays
+while the container runs in the background:
 
 ```shell
-$ curl http://localhost:4000
-
-<h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
+$ docker run -d -p 4000:80 hellomoby
+7c96ed69a93403785f49b321447f2754d320aaf76fce2fd41e09da62d92af8bf
 ```
 
-This port remapping of `4000:80` is to demonstrate the difference
-between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we'll just map port 80 on the host to port 80
-in the container and use `http://localhost`.
-
-Hit `CTRL+C` in your terminal to quit.
-
- > On Windows, explicitly stop the container
- >
- > On Windows systems, `CTRL+C` does not stop the container. So, first
- type `CTRL+C` to get the prompt back (or open another shell), then type
- `docker container ls` to list the running containers, followed by
- `docker container stop <Container NAME or ID>` to stop the
- container. Otherwise, you'll get an error response from the daemon
- when you try to re-run the container in the next step.
-
-Now let's run the app in the background, in detached mode:
-
-```shell
-docker run -d -p 4000:80 friendlyhello
-```
-
-You get the long container ID for your app and then are kicked back to your
-terminal. Your container is running in the background. You can also see the
-abbreviated container ID with `docker container ls` (and both work interchangeably when
-running commands):
+List the abbreviated CONTAINER ID, NAMES, and other info:
 
 ```shell
 $ docker container ls
-CONTAINER ID        IMAGE               COMMAND             CREATED
-1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
+CONTAINER ID      IMAGE          COMMAND              CREATED             NAMES
+7c96ed69a934      hellomoby      "python app.py"      28 seconds ago      vigilant_mccarthy
 ```
 
-You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
-
-Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
+Refresh the browser at http://localhost:4000 and notice that "Hostname" reflects
+the new `CONTAINER ID`. Stop the container using `CONTAINER ID` or `NAMES`:
 
 ```shell
-docker container stop 1fa4ab2cf395
+$ docker container stop vigilant_mccarthy
 ```
 
 ## Share your image
 
-To demonstrate the portability of what we just created, let's upload our built
-image and run it somewhere else. After all, you'll need to learn how to push to
-registries when you want to deploy containers to production.
+To demonstrate the portability of your application, first upload the `hellomoby`
+image to [Docker Hub](https://hub.docker.com/){:target="_blank"}, delete the
+local image, then rerun the application. The Docker CLI pulls the image from the
+Docker public registry.
 
-A registry is a collection of repositories, and a repository is a collection of
-images&#8212;sort of like a GitHub repository, except the code is already built.
-An account on a registry can create many repositories. The `docker` CLI uses
-Docker's public registry by default.
-
-> **Note**: We'll be using Docker's public registry here just because it's free
-and pre-configured, but there are many public ones to choose from, and you can
-even set up your own private registry using [Docker Trusted
-Registry](/datacenter/dtr/2.2/guides/).
-
-### Log in with your Docker ID
+### Log in to Docker Hub
 
 If you don't have a Docker account, sign up for one at
-[cloud.docker.com](https://cloud.docker.com/){: target="_blank" class="_" }.
+[https://hub.docker.com/](https://hub.docker.com/){: target="_blank"}.
 Make note of your username.
 
 Log in to the Docker public registry on your local machine.
@@ -290,66 +275,79 @@ $ docker login
 ### Tag the image
 
 The notation for associating a local image with a repository on a registry is
-`username/repository:tag`. The tag is optional, but recommended, since it is
-the mechanism that registries use to give Docker images a version. Give the
-repository and tag meaningful names for the context, such as
-`get-started:part2`. This will put the image in the `get-started` repository and
-tag it as `part2`.
+`username/repository:tag`. The tag is optional, but recommended, as it is
+the mechanism that registries use to give Docker images a version.
 
-Now, put it all together to tag the image. Run `docker tag image` with your
-username, repository, and tag names so that the image will upload to your
-desired destination. The syntax of the command is:
+Create a repository name and tag (and remember to use _your_ Docker account
+username):
 
 ```shell
-docker tag image username/repository:tag
+$ docker tag hellomoby username/hellomoby:v1
 ```
 
-For example:
+> Use meaningful names for the repository and tag. Here, the image is stored in
+> the `hellomoby` repository (in your Docker account) and tagged as v1 (for
+> version 1).
+
+View your your newly tagged image and notice the duplicate IMAGE ID:
 
 ```shell
-docker tag friendlyhello john/get-started:part2
-```
-
-Run [docker images](/engine/reference/commandline/images/) to see your newly
-tagged image. (You can also use `docker image ls`.)
-
-```shell
-$ docker images
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
-john/get-started         part2               d9e555c53008        3 minutes ago       195MB
-python                   2.7-slim            1c7128a655f6        5 days ago          183MB
+$ docker image ls
+REPOSITORY           TAG          IMAGE ID           CREATED              SIZE
+john/hellomoby       v1           88b087bf9a5e       3 minutes ago        148MB
+hellomoby            latest       88b087bf9a5e       2 hours ago          148MB
+python               2.7-slim     4fd30fc83117       3 weeks ago          138MB
+hello-world          latest       f2a91732366c       6 weeks ago          1.85kB
 ...
 ```
 
 ### Publish the image
 
-Upload your tagged image to the repository:
+Upload your tagged image to the repository: `docker push username/repository:tag`, for example:
 
 ```shell
-docker push username/repository:tag
+$ docker push john/hellomoby:v1
+The push refers to repository [docker.io/john/hellomoby]
+c24b3fc5bf45: Pushed
+6c3968f050d2: Pushed
+b39336ac153e: Pushed
+94b0b6f67798: Mounted from library/python
+e0c374004259: Mounted from library/python
+56ee7573ea0f: Mounted from library/python
+cfce7a8ae632: Mounted from library/python
+v1: digest: sha256:857747a6dafd94f6452ad025e89b4678256a2e2eebce424b762d46dd4775829f size: 1787
 ```
 
-Once complete, the results of this upload are publicly available. If you log in
-to [Docker Hub](https://hub.docker.com/), you will see the new image there, with
-its pull command.
+Once complete, the results of this upload are publicly available. Log in to
+[Docker Hub](https://hub.docker.com/) to see your image and its pull command.
 
-### Pull and run the image from the remote repository
+### Run image from remote repository
 
-From now on, you can use `docker run` and run your app on any machine with this
-command:
+With your application image in the Docker registry, you can run your app on any
+machine with `username/repository:tag`. If the image isn't available locally,
+Docker pulls it from the repository. Let's test it.
+
+Stop any running `hellomoby` containers:
 
 ```shell
-docker run -p 4000:80 username/repository:tag
+docker container stop CONTAINER_ID
 ```
 
-If the image isn't available locally on the machine, Docker will pull it from
-the repository.
+> To stop all running containers, run: `docker container stop ($docker ps -q)`
+
+Remove all `hellomoby` images:
 
 ```shell
-$ docker run -p 4000:80 john/get-started:part2
-Unable to find image 'john/get-started:part2' locally
-part2: Pulling from john/get-started
+docker image rm username/hellomoby:v1
+docker image rm hellomoby:latest
+```
+
+Run the `hellomoby` image from your remote repository, for example:
+
+```shell
+$ docker run -p 4000:80 john/hellomoby:v1
+Unable to find image 'john/hellomoby:v1' locally
+v1: Pulling from john/hellomoby
 10a267c67f42: Already exists
 f68a39a6a5e4: Already exists
 9beaffc0cf19: Already exists
@@ -358,50 +356,50 @@ f68a39a6a5e4: Already exists
 ee7d8f576a14: Already exists
 fbccdcced46e: Already exists
 Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
-Status: Downloaded newer image for john/get-started:part2
+Status: Downloaded newer image for john/hellomoby:v1
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
-travels together in a neat little package, and the host machine doesn't have to
+travels together in a neat little package, and the host machine does not have to
 install anything but Docker to run it.
+
+## Recap and cheat sheet
+
+```shell
+## Create working directory and files:
+mkdir ~/hellomoby && cd ~/hellomoby
+[create Dockerfile, requirements.txt, app.py]
+
+## Build `hellomoby` image and list:
+docker build --tag hellomoby .
+docker image ls
+
+## Run `hellomoby` image as container and map ports:
+docker run -p 4000:80 hellomoby
+CTRL+C
+
+## Run again in detached mode then stop container (by ID or NAMES):
+docker run -d -p 4000:80 hellomoby
+docker container stop CONTAINER_ID
+
+## Login into Docker Hub, then tag and push `hellomboby` (with your username):
+docker login
+docker tag hellomoby username/hellomoby:v1
+docker push username/hellomoby:v1
+
+## Remove local copies of the `hellomoby` image then run from Docker Hub:
+docker container stop CONTAINER_ID
+#docker container stop ($docker ps -q)
+docker image rm username/hellomoby:v1
+docker image rm hellomoby:latest
+docker run -p 4000:80 username/hellomoby:v1
+```
 
 ## Conclusion of part two
 
-That's all for this page. In the next section, we will learn how to scale our
-application by running this container in a **service**.
+In the next section, we learn how to scale our application by running the
+container in a **Docker service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
-
-
-## Recap and cheat sheet (optional)
-
-Here's [a terminal recording of what was covered on this
-page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):
-
-<script type="text/javascript"
-src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js"
-id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
-
-Here is a list of the basic Docker commands from this page, and some related
-ones if you'd like to explore a bit before moving on.
-
-```shell
-docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
-docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
-docker container ls                                # List all running containers
-docker container ls -a             # List all containers, even those not running
-docker container stop <hash>           # Gracefully stop the specified container
-docker container kill <hash>         # Force shutdown of the specified container
-docker container rm <hash>        # Remove specified container from this machine
-docker container rm $(docker container ls -a -q)         # Remove all containers
-docker image ls -a                             # List all images on this machine
-docker image rm <image id>            # Remove specified image from this machine
-docker image rm $(docker image ls -a -q)   # Remove all images from this machine
-docker login             # Log in this CLI session using your Docker credentials
-docker tag <image> username/repository:tag  # Tag <image> for upload to registry
-docker push username/repository:tag            # Upload tagged image to registry
-docker run username/repository:tag                   # Run image from a registry
-```
