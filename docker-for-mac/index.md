@@ -297,16 +297,14 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
-support is not included in Docker for Mac 17.12 CE Stable. To find out
-more about Stable and Edge channels and how to switch between them, see
-[General configuration](/docker-for-mac/#general).
+**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge
+channel.** Kubernetes support is not included in Docker for Mac Stable releases.
+To find out more about Stable and Edge channels and how to switch between them,
+see [General configuration](/docker-for-mac/#general).
 
-The addition of Kubernetes support increases the total binary size by about
-300 MB.
-
-Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server that runs
-on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
+that runs on your Mac, so that you can test deploying your Docker workloads on
+Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and

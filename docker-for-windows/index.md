@@ -709,14 +709,8 @@ Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ### Kubernetes
 
-**Kubernetes is only available in Docker for Windows 18.02 CE Edge users who
-participants in the [Docker Beta program](https://beta.docker.com/). To access
-beta builds, you must be signed in with your Docker ID within Docker for Windows.
-Select ![whale menu](/docker-for-windows/images/whale-x.png){: .inline} -> Sign in / Create Docker ID
-from the menu bar.**
-
-The addition of Kubernetes support increases the total binary size by about
-300 MB.
+**Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
+upport is not included in Docker for Windows 18.02 CE Stable.
 
 To find out more about Stable and Edge channels and how to switch between them,
 see [General configuration](/docker-for-windows/#general).

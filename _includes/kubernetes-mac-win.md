@@ -15,8 +15,8 @@ Usage: {% include kubernetes-mac-win.md platform="mac" %}
   {% capture min-version %}{{ product }} 17.12 CE Edge{% endcapture %}
 
   {% capture version-caveat %}
-**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
-support is not included in Docker for Mac 17.12 CE Stable.
+**Kubernetes is only available in {{ min-version }} and higher, on the Edge
+channel.** Kubernetes support is not included in Docker for Mac Stable releases.
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
@@ -35,11 +35,8 @@ support is not included in Docker for Mac 17.12 CE Stable.
   {% capture min-version %}{{ product }} 18.02 CE Edge{% endcapture %}
 
   {% capture version-caveat %}
-**Kubernetes is only available in Docker for Windows 18.02 CE Edge users who
-participants in the [Docker Beta program](https://beta.docker.com/). To access
-beta builds, you must be signed in with your Docker ID within Docker for Windows.
-Select ![whale menu](/docker-for-windows/images/whale-x.png){: .inline} -> Sign in / Create Docker ID
-from the menu bar.**
+  **Kubernetes is only available in {{ min-version }}.** Kubernetes
+  support is not included in {{ product }} 18.02 CE Stable.
   {% endcapture %}
 
   {% capture local-kubectl-warning %}
