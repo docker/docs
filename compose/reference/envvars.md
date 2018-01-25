@@ -91,6 +91,29 @@ Supported values: `true` or `1` to enable, `false` or `0` to disable.
 If set, the value of the `COMPOSE_FILE` environment variable is separated
 using this character as path separator.
 
+## COMPOSE\_FORCE\_WINDOWS\_HOST
+
+If set, volume declarations using the [short syntax](../compose-file/index.md#short-syntax-3)
+will be parsed assuming the host path is a Windows path, even if Compose is
+running on a UNIX-based system.
+Supported values: `true` or `1` to enable, `false` or `0` to disable.
+
+## COMPOSE\_IGNORE\_ORPHANS
+
+If set, Compose will not try to detect orphaned containers for the project.
+Supported values: `true` or `1` to enable, `false` or `0` to disable.
+
+## COMPOSE\_PARALLEL\_LIMIT
+
+Sets a limit for the number of operations Compose can execute in parallel. The
+default value is `64`, and may not be set lower than `2`.
+
+## COMPOSE\_INTERACTIVE\_NO\_CLI
+
+If set, Compose will not attempt to use the Docker CLI for interactive `run`
+and `exec` operations. This option is not available on Windows where the CLI
+is required for the aforementioned operations.
+Supported: `true` or `1` to enable, `false` or `0` to disable.
 
 ## Related information
 
