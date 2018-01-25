@@ -38,13 +38,25 @@ bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
 
 Here are some key points to know about Docker for Mac before you get started:
 
-* Docker for Mac does not use VirtualBox, but rather [HyperKit](https://github.com/docker/HyperKit/), a lightweight macOS virtualization solution built on top of Hypervisor.framework in macOS 10.10 Yosemite and higher.
+* Docker for Mac does not use VirtualBox, but rather
+  [HyperKit](https://github.com/docker/HyperKit/), a lightweight macOS
+  virtualization solution built on top of Hypervisor.framework in macOS 10.10
+  Yosemite and higher.
 
-* Installing Docker for Mac does not affect machines you created with Docker Machine. The install offers to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If chosen, content from `default` is copied to the new Docker for Mac HyperKit VM, and your original `default` machine is kept as is.
+* Installing Docker for Mac does not affect machines you created with Docker
+  Machine. The install offers to copy containers and images from your local
+  `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If
+  chosen, content from `default` is copied to the new Docker for Mac HyperKit
+  VM, and your original `default` machine is kept as is.
 
-* The Docker for Mac application does not use `docker-machine` to provision that VM; but rather creates and manages it directly.
+* The Docker for Mac application does not use `docker-machine` to provision that
+  VM; but rather creates and manages it directly.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
+* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine
+  Linux, running Docker Engine. It exposes the docker API on a socket in
+  `/var/run/docker.sock`. Since this is the default location where `docker` will
+  look if no environment variables are set, you can start using `docker` and
+  `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
@@ -72,9 +84,12 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
     If this command returns no output, you are ready to use Docker for Mac.
 
-    If it returns output (as shown in the example), you need to unset the `DOCKER` environment variables to make the client talk to the Docker for Mac Engine (next step).
+    If it returns output (as shown in the example), you need to unset
+    the `DOCKER` environment variables to make the client talk to the
+    Docker for Mac Engine (next step).
 
-2. Run the `unset` command on the following `DOCKER` environment variables to unset them in the current shell.
+2. Run the `unset` command on the following `DOCKER` environment variables to
+   unset them in the current shell.
 
         unset DOCKER_TLS_VERIFY
         unset DOCKER_CERT_PATH
@@ -86,10 +101,13 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
           $ env | grep DOCKER
 
   If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all
-DOCKER environment variables at once. (This will not work in other shells such
-as `zsh`; you will need to unset each variable individually.)
+  DOCKER environment variables at once. (This will not work in other shells such
+  as `zsh`; you will need to unset each variable individually.)
 
->**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
+> **Note**: If you have a shell script as part of your profile that
+> sets these `DOCKER` environment variables automatically each time
+> you open a command window, then you will need to unset these each
+> time you want to use Docker for Mac.
 
 > If you install Docker for Mac on a machine where Docker Toolbox is installed..
 >
@@ -160,7 +178,9 @@ is running a different version of server.
 
 You might also run into a similar situation with Docker Universal Control Plane (UCP).
 
-There are a few ways to address this problem and keep using your older machines. One solution is to use a version manager like [DVM](https://github.com/getcarina/dvm).
+There are a few ways to address this problem and keep using your older
+machines. One solution is to use a version manager like
+[DVM](https://github.com/getcarina/dvm).
 
 ## How do I uninstall Docker Toolbox?
 
