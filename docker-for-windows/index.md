@@ -20,7 +20,7 @@ Docker is a full development platform for creating containerized apps, and
 Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
-> **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
+> **Got Docker for Windows?** If you have not yet installed Docker for Windows, see [Install Docker for Windows](install.md) for an explanation of stable
 and edge channels, system requirements, and download/install information.
 
 >**Looking for system requirements?** Check out
@@ -140,8 +140,8 @@ and make sure `docker` commands are working properly.
     ```
 
     >**Note**: The outputs above are examples. Your output for commands like
-    > `docker version` and `docker info` will vary depending on your product
-    > versions (e.g., as you install newer versions).
+    > `docker version` and `docker info` varies depending on your product
+    > versions.
 
 3.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
 
@@ -164,7 +164,7 @@ and make sure `docker` commands are working properly.
     PS C:\Users\jdoe> docker run -it ubuntu bash
     ```
 
-    This will download the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
+    This downloads the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
 
     ```none
     PS C:\Users\jdoe> docker run -it ubuntu bash
@@ -187,7 +187,7 @@ and make sure `docker` commands are working properly.
     PS C:\Users\jdoe> docker run -d -p 80:80 --name webserver nginx
     ```
 
-    This will download the `nginx` container image and start it. Here is the
+    This downloads the `nginx` container image and start it. Here is the
     output of running this command in a powershell.
 
     ```none
@@ -226,15 +226,15 @@ and make sure `docker` commands are working properly.
 
 8.  Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port
+    The `nginx` webserver continues to run in the container on that port
     until you stop and/or remove the container. If you want to stop the
     webserver, type: `docker stop webserver` and start it again with `docker
     start webserver`.
 
     To stop and remove the running container with a single command, type:
-    `docker rm -f webserver`. This will remove the container, but not the
+    `docker rm -f webserver`. This removes the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
-    want to keep some images around so that you don't have to pull them again
+    want to keep some images around so that you don't need to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples) are great places to start.
@@ -251,7 +251,7 @@ PowerShell Module as follows.
 >
 > * Make sure you have administrator permissions to run an elevated PowerShell.
 
-1.  Start an "elevated" PowerShell (i.e., run it as administrator).
+1.  Start an "elevated" PowerShell, running as an administrator.
 
     To do this, search for PowerShell, right-click, and choose **Run as administrator**.
 
@@ -378,23 +378,22 @@ available to your containers.
 
 ![Shared Drives](images/settings-shared-drives.png)
 
-You will be asked to provide your Windows system username and password (domain
+You are prompted for your Windows system username and password (domain
 user) to apply shared drives. You can select an option to have Docker store the
-credentials so that you don't have to re-enter them every time.
+credentials so that you don't need to re-enter them every time.
 
 Permissions to access shared drives are tied to the credentials you provide
 here. If you run `docker` commands and tasks under a different username than the
-one used here to set up sharing, your containers will not have permissions to
+one used here to set up sharing, your containers do not have permissions to
 access the mounted volumes.
 
 > Tips on shared drives, permissions, and volume mounts
 >
- * Shared drives are only required for volume mounting
+ * Shared drives are only required for mounting volumes in
  [Linux containers](#switch-between-windows-and-linux-containers), not for
- Windows containers. For Linux containers, you need to share the drive where
- your project is located (i.e., where the Dockerfile and volume are located).
- Runtime errors such as file not found or cannot start service may indicate
- shared drives are needed. (See also
+ Windows containers. For Linux containers, you need to share the drive where the
+ Dockerfile and volume are located. If you get errors such as `file not found`
+ or `cannot start service` you may need to enable shared drives. See
  [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 >
 * If possible, avoid volume mounts from the Windows host, and instead  mount on
@@ -403,7 +402,7 @@ volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
 (named volume) or [data
 container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
 There are a number of issues with using host-mounted volumes and network paths
-for database files. Please see the troubleshooting topic on [Volume mounts from
+for database files. see the troubleshooting topic on [Volume mounts from
 host paths use a nobrl option to override database
 locking](/docker-for-windows/troubleshoot.md#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
 >
@@ -464,7 +463,7 @@ Cancel.
 
 * **Memory** - Change the amount of memory the Docker for Windows Linux VM uses.
 
-Please note, updating these settings requires a reconfiguration and reboot of the Linux VM. This will take a few seconds.
+After you change these settings, the Linux VM restarts. This takes a few seconds.
 
 ### Network
 
@@ -484,16 +483,16 @@ You can configure Docker for Windows networking to work on a virtual private net
 > `8.8.8.8`. For more information, see
 > [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
-Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
+Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ### Proxies
 
 Docker for Windows lets you configure HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker will use this proxy when pulling containers.
+For example, if you set your proxy settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
 ![Proxies](/docker-for-windows/images/proxies.png)
 
-When you start a container, you will see that your proxy settings propagate into the containers. For example:
+When you start a container, your proxy settings propagate into the containers. For example:
 
 ```ps
 PS C:\Users\jdoe> docker run alpine env
@@ -514,7 +513,7 @@ If you have containers that you wish to keep running across restarts, you should
 ### Docker daemon
 
 You can configure options on the Docker daemon that determine how your
-containers will run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
+containers run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
 configured directly in the JSON as well. This version just surfaces
@@ -600,7 +599,7 @@ In that topic, see also:
 
 * [Windows configuration file](/engine/reference/commandline/dockerd.md#windows-configuration-file)
 
-Note that updating these settings requires a reconfiguration and reboot of the
+Updating these settings requires a reconfiguration and reboot of the
 Linux VM.
 
 ### Switch between Windows and Linux containers
@@ -641,9 +640,8 @@ If you are interested in working with Windows containers, here are some guides t
   [forked here to use containers](https://github.com/friism/MusicStore), is a
   good example of a multi-container application.
 
-  > **Disclaimer:** This lab is still in work, and is based off of the blog, but
-  > you can test and leverage the example walkthroughs now, if you want to start
-  > experimenting. Please check back as the lab evolves.
+  > **Disclaimer:** This lab is still under development, and is adapted from a
+  > blog post. Check back as the lab evolves.
 
 * This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
 [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
@@ -755,7 +753,7 @@ behavior, and steps to reproduce the issue.
 
 * **Reset to Toolbox default machine content** - Imports containers and images
   from the existing Docker Toolbox machine named `default`. (This option is
-  enabled only if you have Toolbox installed.) The VirtualBox VM will not be
+  enabled only if you have Toolbox installed.) The VirtualBox VM is not
   removed.
 
 * **Reset to factory defaults** - Resets Docker to factory defaults. This is

@@ -19,7 +19,7 @@ You can place the credentials of your IBM Cloud account into Docker by running t
 $ bx cr login
 ```
 
-The `bx cr login` command periodically expires, so you might have to run the command again when working with Docker or use a token.
+The `bx cr login` command periodically expires, so you might need to run the command again when working with Docker or use a token.
 
 ### Log in with IBM Cloud Container Registry tokens
 To prevent repeatedly logging in with `bx cr login`, you can create a non-expiring registry token with read-write permissions to use with Docker. Each token that you create is unique to the registry region. Repeat the steps for each registry region that you want to use with Docker.

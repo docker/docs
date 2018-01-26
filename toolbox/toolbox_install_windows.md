@@ -187,7 +187,7 @@ Docker command.
 
 Typically, the above steps work out-of-the-box, but some scenarios can cause problems. If your `docker run hello-world` didn't work and resulted in errors, check out [Troubleshooting](faqs/troubleshoot.md) for quick fixes to common problems.
 
-A Windows specific problem you might encounter has to do with the NDIS6 host network filter driver, which is known to cause issues on some Windows
+A Windows specific problem you might encounter relates to the NDIS6 host network filter driver, which is known to cause issues on some Windows
 versions. For Windows Vista systems and newer, VirtualBox installs NDIS6 driver by default. Issues can range from system slowdowns to networking problems for the virtual machine (VM). If you notice problems, **re-run the Docker Toolbox installer**, and select the option to _**install VirtualBox with the NDIS5 driver**_.
 
 ## Optional: Add shared directories
@@ -265,10 +265,9 @@ To uninstall Toolbox on Windows, do the following:
     the `.docker` directory under your user path.
     If it is still there, remove it manually.
     This directory stores some Docker
-    program configuration and/or state
-    (e.g., information about created machines such
-    as certificates).  Removing this directory
-    is typically not necessary.
+    program configuration and state, such as
+    information about created machines and
+    certificates. You usually don't need to remove this directory.
 
 6. Uninstall Oracle VirtualBox, which is
   installed as a part of the Toolbox install.

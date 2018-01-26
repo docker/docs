@@ -299,7 +299,7 @@ Strategy | Description
 -------- | -----------
 EMPTIEST_NODE | It will deploy containers to the node with the lower total amount of running containers (default).
 HIGH_AVAILABILITY | It will deploy containers to the node with the lower amount of running containers of the same service.
-EVERY_NODE | It will deploy one container on every node. The service won't be able to scale manually. New containers will be deployed to new nodes automatically.
+EVERY_NODE | It will deploy one container on every node. The service can't scale manually. New containers will be deployed to new nodes automatically.
 
 
 ### Network Modes
@@ -408,15 +408,15 @@ Available in Docker Cloud's **REST API**
 
 Parameter | Description
 --------- | -----------
-image | (required) The image used to deploy this service in docker format, i.e. `tutum/hello-world`
-name | (optional) A human-readable name for the service, i.e. `my-hello-world-app` (default: `image` without namespace)
+image | (required) The image used to deploy this service in docker format, such as `tutum/hello-world`
+name | (optional) A human-readable name for the service, such as `my-hello-world-app` (default: `image` without namespace)
 target_num_containers | (optional) The number of containers to run for this service initially (default: 1)
 run_command | (optional) The command used to start the containers of this service, overriding the value specified in the image, i.e. `/run.sh` (default: `null`)
 entrypoint | (optional) The command prefix used to start the containers of this service, overriding the value specified in the image, i.e. `/usr/sbin/sshd` (default: `null`)
 container_ports | (optional) An array of objects with port information to be published in the containers for this service, which will be added to the image port information, i.e. `[{"protocol": "tcp", "inner_port": 80, "outer_port": 80}]` (default: `[]`) (See table `Service Port attributes` below)
 container_envvars | (optional) An array of objects with environment variables to be added in the service containers on launch (overriding any image-defined environment variables), i.e. `[{"key": "DB_PASSWORD", "value": "mypass"}]` (default: `[]`) (See table `Service Environment Variable attributes` below)
 linked_to_service | (optional) An array of service resource URIs to link this service to, including the link name, i.e. `[{"to_service": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "name": "db"}]` (default: `[]`) (See table `Related services attributes` below)
-bindings | (optional) An array of bindings this service has to mount, i.e. `[{"volumes_from": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "rewritable": true}]` (default: `[]`) (See table `Related bindings attributes` below)
+bindings | (optional) An array of bindings this service mounts, i.e. `[{"volumes_from": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "rewritable": true}]` (default: `[]`) (See table `Related bindings attributes` below)
 autorestart | (optional) Whether the containers for this service should be restarted if they stop, i.e. `ALWAYS` (default: `OFF`, possible values: `OFF`, `ON_FAILURE`, `ALWAYS`) (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
 autodestroy | (optional) Whether the containers should be terminated if they stop, i.e. `OFF` (default: `OFF`, possible values: `OFF`, `ON_SUCCESS`, `ALWAYS`) (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
 sequential_deployment | (optional) Whether the containers should be launched and scaled in sequence, i.e. `true` (default: `false`) (see [Service scaling](/docker-cloud/apps/service-scaling/) for more information)

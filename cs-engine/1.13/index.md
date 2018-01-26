@@ -119,7 +119,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-8.  Only users with `sudo` access will be able to run `docker` commands.
+8.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 
@@ -209,7 +209,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-6.  Only users with `sudo` access will be able to run `docker` commands.
+6.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 
@@ -288,7 +288,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-6.  Only users with `sudo` access will be able to run `docker` commands.
+6.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 

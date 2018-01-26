@@ -58,7 +58,7 @@ options.
 #### Configuration options
 
 ##### Manager count
-The number of Managers in your swarm. You can pick either 1, 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There are no failover guarantees with 1 manager — if the single manager fails the swarm will go down as well. Additionally, upgrading single-manager swarms is not currently guaranteed to succeed.
+The number of Managers in your swarm. You can pick either 1, 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There are no failover guarantees with 1 manager — if the single manager fails the swarm goes down as well. Additionally, upgrading single-manager swarms is not currently guaranteed to succeed.
 
 We recommend at least 3 managers, and if you have a lot of workers, you should pick 5 managers.
 
@@ -98,24 +98,24 @@ containerized helper script called `docker4x/create-sp-azure` to help you create
    ```
 
    If you have multiple Azure subscriptions, make sure to create the
-   Service Principal with the subscription ID that you will be using
+   Service Principal with the subscription ID that you use
    to deploy Docker for Azure. The arguments are provided below.
 
    | Argument | Description | Example values |
    |----------|-------------|---------|
-   | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. | `sp1` |
-   | `rg-name` | The name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `swarm1` |
-   | `rg-region` | The name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions. |
+   | `sp-name` | The name of the authentication app that the script creates with Azure. The name is not important. Choose something recognizable in the Azure portal. | `sp1` |
+   | `rg-name` | The name of the new resource group to be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal is scoped to this resource group. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `swarm1` |
+   | `rg-region` | The name of Azure's region/location where the resource group is to be created. This needs to be one of the regions supported by Azure. Specify this when deploying Docker Community Edition for Azure. Do not specify this when deploying Docker Enterprise Edition for Azure. | `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions. |
 
-   If you do not supply the `rg-name` and `rg-region` here, you will be prompted
+   If you do not supply the `rg-name` and `rg-region` here, you are prompted
    for that information each time you create a new service. The resource group
-   will be created automatically and services will be scoped to that resource
+   is created automatically and services are scoped to that resource
    group.
 
 If the script fails, it may be because your Azure user account does not have
 sufficient privileges. Contact your Azure administrator.
 
-When setting up the Azure Resource Manager (ARM) template, you will be prompted
+When setting up the Azure Resource Manager (ARM) template, you are prompted
 for the App ID (a UUID) and the app secret. **If you are deploying Docker
 Community Edition for Azure and specify the resource group name and location
 parameters, choose the option to deploy the template into an **existing resource
@@ -126,7 +126,7 @@ the `create-sp-azure` helper script.**
 
 #### SSH Key
 
-Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. During setup, you will be prompted for a SSH public key. If you don't have a SSH key, you can generate one with `puttygen` or `ssh-keygen`. You only need the public key component to set up Docker for Azure. Here's how to get the public key from a .pem file:
+Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. During setup, you are prompted for a SSH public key. If you don't have a SSH key, you can generate one with `puttygen` or `ssh-keygen`. You only need the public key component to set up Docker for Azure. Here's how to get the public key from a .pem file:
 
     ssh-keygen -y -f my-key.pem
 

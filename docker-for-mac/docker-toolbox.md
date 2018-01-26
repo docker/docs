@@ -6,7 +6,7 @@ redirect_from:
 title: Docker for Mac vs. Docker Toolbox
 ---
 
-If you already have an installation of Docker Toolbox, please read these topics
+If you already have an installation of Docker Toolbox, read these topics
 first to learn how Docker for Mac and Docker Toolbox differ, and how they can
 coexist.
 
@@ -102,12 +102,11 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
   If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all
   DOCKER environment variables at once. (This does not work in other shells such
-  as `zsh`; unset each variable individually.)
+  as `zsh`; you need to unset each variable individually.)
 
-> **Note**: If you have a shell script as part of your profile that
-> sets these `DOCKER` environment variables automatically each time
-> you open a command window, then you need to unset these each
-> time you want to use Docker for Mac.
+> **Note**: If you have a shell script as part of your profile that sets these
+> `DOCKER` environment variables automatically each time you open a command
+> window, then you need to unset these each time you want to use Docker for Mac.
 
 > If you install Docker for Mac on a machine where Docker Toolbox is installed..
 >

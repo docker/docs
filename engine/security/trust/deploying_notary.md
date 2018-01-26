@@ -23,6 +23,6 @@ for [Notary](https://github.com/docker/notary#using-notary) depending on which o
 
 ## If you want to use Notary in production
 
-Please check back here for instructions after Notary Server has an official
+Check back here for instructions after Notary Server has an official
 stable release. To get a head start on deploying Notary in production, see
 [the Notary repository](https://github.com/docker/notary).

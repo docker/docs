@@ -207,7 +207,7 @@ cash in our rewards store at http://www.cafepress.com/dockerdocshackathon.
 
 Our points-to-cash conversion rate will be figured out at the end of the
 hackathon, and will essentially be a function of the number of points that
-hackathon participants logged, and the number of dollars we have to spend on
+hackathon participants logged, and the number of dollars we need to spend on
 prizes.
 
 [View our available prizes](http://www.cafepress.com/dockerdocshackathon){: class="button primary-btn"}
@@ -261,7 +261,7 @@ there.
 You'll see point values for each of the bugs, such as `points/100` and `points/250`. Opening an accepted PR that
 fixes these bugs by the end of the hackathon earns you that number of points.
 
-So if you fix a 100-point bug, that's $10 you have to spend in [the swag store](http://www.cafepress.com/dockerdocshackathon).
+So if you fix a 100-point bug, that's $10 you need to spend in [the swag store](http://www.cafepress.com/dockerdocshackathon).
 
 ### Questions?
 
@@ -277,7 +277,7 @@ To participate in the Docs Hackathon you must submit a pull request that handles
 
 Multiple entries per person allowed and encouraged.
 
-Participation in the Docs Hackathon and submission of content therein gives Docker rights to use submitted content (e.g., text, code, and images) for potential future promotional marketing activities.
+Participation in the Docs Hackathon and submission of content therein gives Docker rights to use submitted content, including text, code, and images, for potential future promotional marketing activities.
 
 For the purposes of copyright all content submitted to Docker for the Docs Hackathon belongs to Docker.
 

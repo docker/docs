@@ -23,7 +23,7 @@ Before you begin, make sure that you are signed into the Slack team that you wan
     The Docker Cloud page refreshes to show a Slack authorization screen.
 
 4. On the page that appears, double check that you're signed in to the correct Slack team. (If necessary sign in to the correct one.)
-5. Select the channel that will receive notifications.
+5. Select the channel that should receive notifications.
 6. Click **Authorize**.
 
     Once you click **Authorize**, you should see a message in the Slack channel notifying you of the new integration.

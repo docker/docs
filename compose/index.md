@@ -20,5 +20,5 @@ Compose is a tool for defining and running multi-container Docker applications. 
 - [Environment file](env-file.md)
 
 To see a detailed list of changes for past and current releases of Docker
-Compose, please refer to the
+Compose, refer to the
 [CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md).

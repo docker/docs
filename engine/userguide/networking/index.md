@@ -57,8 +57,8 @@ docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
 > Running on Docker for Mac or Docker for Windows?
 >
 > If you are using Docker for Mac (or running Linux containers on Docker for Windows), the
-`docker network ls` command will work as described above, but the
-`ip addr show` and `ifconfig` commands may be present, but will give you information about
+`docker network ls` command works as described above, but the
+`ip addr show` and `ifconfig` commands may be present, but give you information about
 the IP addresses for your local host, not Docker container networks.
 This is because Docker uses network interfaces running inside a thin VM,
 instead of on the host machine itself.
@@ -163,7 +163,7 @@ $ docker run -itd --name=container2 busybox
 
 Inspect the `bridge` network again after starting two containers. Both of the
 `busybox` containers are connected to the network. Make note of their IP
-addresses, which will be different on your host machine than in the example
+addresses, which is different on your host machine than in the example
 below.
 
 ```none
@@ -213,7 +213,7 @@ $ docker network inspect bridge
 
 Containers connected to the default `bridge` network can communicate with each
 other by IP address. **Docker does not support automatic service discovery on the
-default bridge network. If you want containers to be able to resolve IP addresses
+default bridge network. If you want containers to resolve IP addresses
 by container name, you should use _user-defined networks_ instead**. You can link
 two containers together using the legacy `docker run --link` option, but this
 is not recommended in most cases.
@@ -292,7 +292,7 @@ You can also manually start the `dockerd` with the flags `--bridge=none
 --iptables=false`. However, this may not start the daemon with the same
 environment as the system init scripts, so other behaviors may be changed.
 
-Disabling the default bridge network is an advanced option that most users will
+Disabling the default bridge network is an advanced option that most users do
 not need.
 
 ## User-defined networks
@@ -489,7 +489,7 @@ think you may need to use overlay networks in this way, see
 
 If your needs are not addressed by any of the above network mechanisms, you can
 write your own network driver plugin, using Docker's plugin infrastructure.
-The plugin will run as a separate process on the host which runs the Docker
+The plugin runs as a separate process on the host which runs the Docker
 daemon. Using network plugins is an advanced topic.
 
 Network plugins follow the same restrictions and installation rules as other
@@ -504,9 +504,9 @@ $ docker network create --driver weave mynet
 ```
 
 You can inspect the network, connect and disconnect containers from it, and
-remove it. A specific plugin may have specific requirements in order to be
-used. Check that plugin's documentation for specific information. For more
-information on writing plugins, see
+remove it. A specific plugin may have specific requirements. Check that plugin's
+documentation for specific information. For more information on writing plugins,
+see
 [Extending Docker](../../extend/legacy_plugins.md) and
 [Writing a network driver plugin](../../extend/plugins_network.md).
 
@@ -515,9 +515,9 @@ information on writing plugins, see
 Docker daemon runs an embedded DNS server which provides DNS resolution among
 containers connected to the same user-defined network, so that these containers
 can resolve container names to IP addresses. If the embedded DNS server is
-unable to resolve the request, it will be forwarded to any external DNS servers
+unable to resolve the request, it is forwarded to any external DNS servers
 configured for the container. To facilitate this when the container is created,
-only the embedded DNS server reachable at `127.0.0.11` will be listed in the
+only the embedded DNS server reachable at `127.0.0.11` is listed in the
 container's `resolv.conf` file. For more information on embedded DNS server on
 user-defined networks, see
 [embedded DNS server in user-defined networks](configure-dns.md)
@@ -538,7 +538,7 @@ network and user-defined bridge networks.
   available high-order port (higher than `30000`) on the host machine, unless
   you specify the port to map to on the host machine at runtime. You cannot
   specify the port to map to on the host machine when you build the image (in the
-  Dockerfile), because there is no way to guarantee that the port will be available
+  Dockerfile), because there is no way to guarantee that the port is available
   on the host machine where you run the image.
 
   This example publishes port 80 in the container to a random high
@@ -556,7 +556,7 @@ network and user-defined bridge networks.
   ```
 
   The next example specifies that port 80 should be mapped to port 8080 on the
-  host machine. It will fail if port 8080 is not available.
+  host machine. It fails if port 8080 is not available.
 
   ```bash
   $ docker run -it -d -p 8080:80 nginx
@@ -606,7 +606,7 @@ configure it in different ways:
 
     Save the file.
 
-2.  When you create or start new containers, the environment variables will be
+2.  When you create or start new containers, the environment variables are
     set automatically within the container.
 
 ### Set the environment variables manually
@@ -662,7 +662,7 @@ way to make `iptables` rules persistent.
 
 Docker dynamically manages `iptables` rules for the daemon, as well as your
 containers, services, and networks. In Docker 17.06 and higher, you can add
-rules to a new table called `DOCKER-USER`, and these rules will be loaded before
+rules to a new table called `DOCKER-USER`, and these rules are loaded before
 any rules Docker creates automatically. This can be useful if you need to
 pre-populate `iptables` rules that need to be in place before Docker runs.
 

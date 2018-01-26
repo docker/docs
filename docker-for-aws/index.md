@@ -70,7 +70,7 @@ There are two ways to deploy Docker for AWS:
 We recommend allowing Docker for AWS to create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
 
 #### Create a new VPC
-This approach creates a new VPC, subnets, gateways, and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+This approach creates a new VPC, subnets, gateways, and everything else needed to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
 
 All you need to do is run the CloudFormation template, answer some questions, and you are good to go.
 
@@ -81,9 +81,9 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 
 2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables.
 
-3. You need to have three different subnets, ideally each in their own availability zone. If you are running in a region with only two Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have three or more Availability Zones.
+3. You need to have three different subnets, ideally each in their own availability zone. If you are running in a region with only two Availability Zones, you need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have three or more Availability Zones.
 
-4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPCs. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
+4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPCs. This template prompts you for the VPC and subnets that you want to use for Docker for AWS.
 
 ### Prerequisites
 
@@ -98,11 +98,11 @@ If you need to install Docker for AWS with an existing VPC, you need to do a few
 - SSH key in AWS in the region where you want to deploy (required to access the completed Docker install)
 - AWS account that support EC2-VPC (See the [FAQ for details about EC2-Classic](faqs.md))
 
-For more information about adding an SSH key pair to your account, please refer
+For more information about adding an SSH key pair to your account, refer
 to the [Amazon EC2 Key Pairs
 docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 
-Note that the China and US Gov Cloud AWS partitions are not currently supported.
+The China and US Gov Cloud AWS partitions are not currently supported.
 
 ### Configuration
 
@@ -116,7 +116,7 @@ options.
 
 ##### KeyName
 
-Pick the SSH key that will be used when you SSH into the manager nodes.
+Pick the SSH key to be used when you SSH into the manager nodes.
 
 ##### InstanceType
 
@@ -136,7 +136,7 @@ The number of workers you want in your swarm (0-1000).
 The number of managers in your swarm. On Docker CE, you can select either 1,
 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There
 are no failover guarantees with 1 manager — if the single manager fails the
-swarm will go down as well. Additionally, upgrading single-manager swarms is not
+swarm goes down as well. Additionally, upgrading single-manager swarms is not
 currently guaranteed to succeed.
 
 On Docker EE, you can choose to run with 3 or 5 managers.
@@ -149,9 +149,9 @@ use 5 managers.
 Enable if you want Docker for AWS to automatically cleanup unused space on your
 swarm nodes.
 
-When enabled, `docker system prune` will run staggered every day, starting at
+When enabled, `docker system prune` runs staggered every day, starting at
 1:42AM UTC on both workers and managers. The prune times are staggered slightly
-so that not all nodes will be pruned at the same time. This limits resource
+so that not all nodes are pruned at the same time. This limits resource
 spikes on the swarm.
 
 Pruning removes the following:
@@ -204,7 +204,7 @@ To fully automate installs, you can use the [AWS Cloudformation API](http://docs
 
 ### How it works
 
-Docker for AWS starts with a CloudFormation template that will create everything
+Docker for AWS starts with a CloudFormation template that creates everything
 that you need from scratch. There are only a few prerequisites that are listed
 above.
 
@@ -222,7 +222,7 @@ steps.
 
 If you increase the number of instances running in your worker Auto Scaling
 Group (via the AWS console, or updating the CloudFormation configuration), the
-new nodes that will start up will automatically join the swarm.
+new nodes that start up automatically join the swarm.
 
 Elastic Load Balancers (ELBs) are set up to help with routing traffic to your
 swarm.
@@ -239,10 +239,10 @@ CloudWatch.
 
 ### System containers
 
-Each node will have a few system containers running on them to help run your
-swarm cluster. In order for everything to run smoothly, please keep those
+Each node has a few system containers running on it to help run your
+swarm cluster. For everything to run smoothly, keep those
 containers running, and don't make any changes. If you make any changes, Docker
-for AWS will not work correctly.
+for AWS does not work correctly.
 
 ### Uninstalling or removing a stack
 

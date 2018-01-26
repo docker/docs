@@ -45,7 +45,7 @@ automatically have Read permissions:
 - `Write` access allows users to push to non-automated repositories on the Docker Hub.
 - `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility and "Delete".
 
-> **Note**: A User who has not yet verified their email address will only have
+> **Note**: A User who has not yet verified their email address only has
 > `Read` access to the repository, regardless of the rights their team
 > membership has given them.
 

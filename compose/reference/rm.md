@@ -16,12 +16,12 @@ Options:
 
 Removes stopped service containers.
 
-By default, anonymous volumes attached to containers will not be removed. You
+By default, anonymous volumes attached to containers are not removed. You
 can override this with `-v`. To list all volumes,  use `docker volume ls`.
 
-Any data which is not in a volume will be lost.
+Any data which is not in a volume is lost.
 
-Running the command with no options will also remove one-off containers created
+Running the command with no options also removes one-off containers created
 by `docker-compose up` or `docker-compose run`:
 
 ```none

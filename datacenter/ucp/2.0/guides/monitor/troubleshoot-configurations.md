@@ -14,7 +14,7 @@ troubleshooting configuration problems in your cluster.
 
 ## Using the REST API
 
-In this example we'll be using `curl` for making requests to the key-value
+In this example we use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:

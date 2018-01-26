@@ -33,7 +33,7 @@ on Windows Server 2016 and you have a
 >Windows Server 1709
 >
 >Docker Universal Control Plane is not currently supported on Windows Server 1709 due to image incompatibility issues.
->To use UCP, for now please use the current LTSB Windows release and not 1709.
+>To use UCP, for now, use the current LTSB Windows release and not 1709.
 
 
 Docker EE for Windows requires Windows Server 2016 or later. See
@@ -100,7 +100,7 @@ installs, or install on air-gapped systems.
     # Clean up the zip file.
     Remove-Item -Force {{ filename }}
 
-    # Install Docker. This will require rebooting.
+    # Install Docker. This requires rebooting.
     $null = Install-WindowsFeature containers
 
     # Add Docker to the path for the current session.
@@ -142,7 +142,7 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 ## Update Docker EE
 
 > **Check that you have the Docker module**
-> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, please remove this module and use Docker's module:
+> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, remove this module and use Docker's module:
 >
 > ```none
 > Uninstall-Module DockerMsftProvider -Force
@@ -156,7 +156,7 @@ Install-Package -Name docker -ProviderName DockerProvider -Update -Force
 ```
 
 If Docker Universal Control Plane (UCP) is installed, run the
-[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script). 
+[UCP installation script for Windows](/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/#run-the-windows-node-setup-script).
 
 Start the Docker service:
 

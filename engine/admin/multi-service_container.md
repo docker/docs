@@ -54,16 +54,16 @@ this in a few different ways.
 
   # Naive check runs checks once a minute to see if either of the processes exited.
   # This illustrates part of the heavy lifting you need to do if you want to run
-  # more than one service in a container. The container will exit with an error
+  # more than one service in a container. The container exits with an error
   # if it detects that either of the processes has exited.
-  # Otherwise it will loop forever, waking up every 60 seconds
+  # Otherwise it loops forever, waking up every 60 seconds
 
   while sleep 60; do
     ps aux |grep my_first_process |grep -q -v grep
     PROCESS_1_STATUS=$?
     ps aux |grep my_second_process |grep -q -v grep
     PROCESS_2_STATUS=$?
-    # If the greps above find anything, they will exit with 0 status
+    # If the greps above find anything, they exit with 0 status
     # If they are not both 0, then something is wrong
     if [ $PROCESS_1_STATUS -ne 0 -o $PROCESS_2_STATUS -ne 0 ]; then
       echo "One of the processes has already exited."
@@ -85,7 +85,7 @@ this in a few different ways.
 - Use a process manager like `supervisord`. This is a moderately heavy-weight
   approach that requires you to package `supervisord` and its configuration in
   your image (or base your image on one that includes `supervisord`), along with
-  the different applications it will manage. Then you start `supervisord`, which
+  the different applications it manages. Then you start `supervisord`, which
   manages your processes for you. Here is an example Dockerfile using this
   approach, that assumes the pre-written `supervisord.conf`, `my_first_process`,
   and `my_second_process` files all exist in the same directory as your

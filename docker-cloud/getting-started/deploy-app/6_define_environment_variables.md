@@ -82,4 +82,4 @@ ENV NAME World
 
 ## What's Next?
 
-Next, we'll try [Scaling the service](7_scale_the_service.md).
+Next, we [scale the service](7_scale_the_service.md).

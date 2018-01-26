@@ -50,8 +50,8 @@ running Kibana and browse log/event entries. You should specify the "time"
 field for indexing.
 
 When deployed in a production environment, you should secure your ELK
-stack. UCP does not do this itself, but there are a number of 3rd party
-options that can accomplish this (e.g. Shield plug-in for Kibana)
+stack. UCP does not do this itself, but a number of third-party
+options can accomplish this, such as Shield plug-in for Kibana.
 
 ## Where to go next
 

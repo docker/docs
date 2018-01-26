@@ -125,7 +125,7 @@ Give the application a name (such as "VotingApp," used here), and click
 Once UCP deploys the application, click on **VotingApp** or go to **Services** on the left navigation,
 to see the details of the services you have deployed across your nodes. Try
 clicking on the `visualizer` service, and scroll to the bottom of the detail page.
-You'll see a link to your UCP instance's URL that includes the published port
+You see a link to your UCP instance's URL that includes the published port
 of that service, which is 8080 in this case.
 
 ![Screenshot of deployed service](../../images/deployed_visualizer.png){: .with-border}

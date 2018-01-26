@@ -124,5 +124,5 @@ know.
 If you have questions about how to write for Docker's documentation, have a look
 at the [style guide](https://docs.docker.com/opensource/doc-style/). The style
 guide provides guidance about grammar, syntax, formatting, styling, language, or
-tone. If something isn't clear in the guide, please submit an issue to let us
+tone. If something isn't clear in the guide, submit an issue to let us
 know or submit a pull request to help us improve it.

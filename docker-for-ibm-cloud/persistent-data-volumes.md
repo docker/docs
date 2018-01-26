@@ -18,7 +18,7 @@ With Docker EE for IBM Cloud, you can create new or use existing IBM Cloud infra
 
 Create an IBM Cloud infrastructure file storage volume from Docker EE for IBM Cloud. The volume might take a few minutes to provision. It has default settings of `Endurance` storage type, `2` IOPS, and `20` capacity (measured in GB).
 
-If you want to change the default settings for storage type, IOPS, or capacity, [review file storage provisioning](https://console.bluemix.net/docs/infrastructure/FileStorage/index.html#provisioning) information. Note that for Docker EE for IBM Cloud, the minimum IOPS per GB is 2.
+If you want to change the default settings for storage type, IOPS, or capacity, [review file storage provisioning](https://console.bluemix.net/docs/infrastructure/FileStorage/index.html#provisioning) information. For Docker EE for IBM Cloud, the minimum IOPS per GB is 2.
 
 1. Connect to your cluster manager node:
 

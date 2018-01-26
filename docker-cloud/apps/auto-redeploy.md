@@ -17,7 +17,7 @@ built.
 >* **Autoredeploy** works only for hub images with the _latest_ tag.
 >
 >* To enable **autoredeploy** on an image stored in a third party registry,
-> you will need to use [redeploy triggers](triggers.md) instead.
+> you need to use [redeploy triggers](triggers.md) instead.
 
 ## Launch a new service with autoredeploy
 

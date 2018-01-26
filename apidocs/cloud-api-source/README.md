@@ -3,7 +3,7 @@ dockercloud/api-docs
 
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)
 
-If you find a typo or mismatch between the API and this documentation, please send us a pull request!
+If you find a typo or mismatch between the API and this documentation, send us a pull request!
 
 
 ## Usage

@@ -26,7 +26,7 @@ ones.
 
 ## Create a full image using tar
 
-In general, you'll want to start with a working machine that is running
+In general, start with a working machine that is running
 the distribution you'd like to package as a parent image, though that is
 not required for some tools like Debian's
 [Debootstrap](https://wiki.debian.org/Debootstrap), which you can also

@@ -192,7 +192,7 @@ from the repository.
 
 5.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
     repository that does not exist. You need to comment out this repository or
-    running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
+    running `apt-get update` fails. Edit `/etc/apt/sources.list`. Find the
     line like the following, and comment it out or remove it:
 
     ```none
@@ -228,7 +228,7 @@ from the repository.
     >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command will always install the highest possible version,
+    > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning}
 
@@ -289,7 +289,7 @@ to install.
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker CE, you can download the
-`.deb` file for your release and install it manually. You will need to download
+`.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
 1.  Go to `{{ download-url-base }}/dists/`,

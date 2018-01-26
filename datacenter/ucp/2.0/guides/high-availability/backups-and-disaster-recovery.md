@@ -91,7 +91,7 @@ You should now have your UCP cluster up and running.
 
 Additionally, in the event where half or more controller nodes are lost and
 cannot be recovered to a healthy state, the system can only be restored through
-the following disaster recovery procedure. It is important to note that this
+the following disaster recovery procedure. This
 procedure is not guaranteed to succeed with no loss of either swarm services or
 UCP configuration data:
 

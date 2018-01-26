@@ -25,7 +25,7 @@ your applications can continue running.
 After UCP is uninstalled you can use the 'docker swarm leave' and
 'docker node rm' commands to remove nodes from the swarm.
 
-Once UCP is uninstalled, you won't be able to join nodes to the swarm unless
+Once UCP is uninstalled, you can't join nodes to the swarm unless
 UCP is installed again.
 
 
