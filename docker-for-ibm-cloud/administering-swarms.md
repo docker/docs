@@ -87,8 +87,9 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
    > First, the manager node is deployed. Then, the additional infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
 
    * **Provisioning Stage 1**: Check the status of the manager node:
+
      {% raw %}
-    ```bash
+     ```bash
      $ docker logs cluster-name_ID
 
      Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
@@ -110,6 +111,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
      {% endraw %}
 
    * **Provisioning Stage 2**: Check the status of the cluster infrastructure:
+
      {% raw %}
      ```bash
       $ bx d4ic show --swarm-name cluster-name --sl-user user.name.1234567 --sl-api-key api_key
@@ -291,9 +293,9 @@ The security group for the manager nodes allows public network traffic to the ma
 
 3. Retrieve your swarm name:
 
-  ```bash
-  $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
-  ```
+   ```bash
+   $ bx d4ic list --sl-user user.name.1234567 --sl-api-key api_key
+   ```
 
 4. Get the **Public IP** of the manager you want to access, such as `my_swarm-mgr1`:
 
