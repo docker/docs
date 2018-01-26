@@ -1,8 +1,14 @@
+---
+description: Docker EE for IBM Cloud (Beta) Quick Start
+keywords: ibm, ibm cloud, quickstart, iaas, tutorial
+title: Docker EE for IBM Cloud (Beta) Quick Start
+---
+
 # Docker Enterprise Edition for IBM Cloud (Beta) Quick Start
 
 Are you ready to orchestrate Docker Enterprise Edition swarm clusters that are enhanced with the full suite of secure IBM Cloud platform, infrastructure, and Watson services? Great! Let's get you started.
 
-To request access to the closed beta, [email IBM](mailto:sealbou@us.ibm.com).
+To request access to the closed beta, [contact IBM](mailto:sealbou@us.ibm.com).
 
 ![Getting started with Docker for IBM Cloud in 4 easy steps](img/quickstart.png)
 
@@ -11,7 +17,7 @@ To request access to the closed beta, [email IBM](mailto:sealbou@us.ibm.com).
 1. Set up your IBM Cloud account:
 
    * [Register for a Pay As You Go IBM Cloud account](https://console.bluemix.net/registration/).
-   * If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/pricing/index.html#accounts).
+   * If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/account/index.html#accounts).
 
 2. Get your IBM Cloud infrastructure credentials:
 
@@ -57,8 +63,8 @@ Now let's download some Docker for IBM Cloud tools.
 Now we're ready to get to the fun stuff: making a cluster!
 
 ## Step 3: Create clusters
-Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes.
 
+Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a maximum of 20 nodes, up to 14 of which can be worker nodes. If you need more nodes than this, work with your Docker representative to acquire an additional Docker EE license.
 
 1. Log in to the IBM Cloud CLI. If you have a federated ID, use the `--sso` option.
 
@@ -76,9 +82,9 @@ Create a Docker EE swarm cluster in IBM Cloud. For beta, your cluster can have a
 
    ```bash
    $ bx d4ic create --swarm-name my_swarm \
-   --ssh-label my_ssh_label \
    --sl-user user.name.1234567 \
    --sl-api-key api_key \
+   --ssh-label my_ssh_label \
    --ssh-key filepath_to_my_ssh_key \
    --docker-ee-url my_docker-ee-url
    ```
@@ -118,9 +124,9 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
 ### Step 4b: Download client certificates
 
-1. From the UCP GUI under your user name (for example, *admin*), click *My Profile*.
+1. From the UCP GUI under your user name (for example, **admin**), click **My Profile**.
 
-2. Click *Client Bundles* > *New Client Bundle*. A zip file is generated.
+2. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 
 3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
 
@@ -135,7 +141,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
    > Move the certificate environment variable directory to a safe and
    > accessible location on your machine. It gets used a lot.
 
-5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by running the `env.sh` script:
+5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment:
 
    ```bash
    $ source env.sh
@@ -149,7 +155,7 @@ That's it! Your Docker EE for IBM Cloud cluster is provisioned, connected to UCP
 
 What's next, you ask? Why not try to:
 
-* [Learn when to use UCP and the CLIs](administering-swarms.md#ucp_and_clis).
+* [Learn when to use UCP and the CLIs](administering-swarms.md#ucp-and-clis).
 * [Deploy an app](deploy.md).
 * [Scale your swarm cluster](scaling.md).
 * [Set up DTR to use IBM Cloud Object Storage](dtr-ibm-cos.md).
