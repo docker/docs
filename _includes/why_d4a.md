@@ -1,4 +1,4 @@
-The [Docker for {{cloudprovider}}](https://docs.docker.com/docker-for-{{cloudprovider | downcase}}/)
+The [Docker for {{cloudprovider}}](/docker-for-{{cloudprovider | downcase}}/)
 project was created and is being actively developed to ensure that Docker users
 can enjoy a fantastic out-of-the-box experience on {{cloudprovider}}. It is now
 generally available and can now be used by everyone.
@@ -98,7 +98,7 @@ in bug reports.
 
 # Try it today
 
-Ready to get started? [Try Docker for {{cloudprovider}} today](https://docs.docker.com/docker-for-{{cloudprovider | downcase}}/).
+Ready to get started? [Try Docker for {{cloudprovider}} today](/docker-for-{{cloudprovider | downcase}}/).
 We'd be happy to hear your feedback via e-mail at docker-for-iaas@docker.com or
 in the issue repository
 [for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}).

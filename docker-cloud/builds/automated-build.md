@@ -73,8 +73,8 @@ the code repository service where the image's source code is stored.
     Selecting **Edge** lets you to take advantage of [multi-stage builds](/engine/userguide/eng-image/multistage-build/). For more information and examples, see the topic on how to [use multi-stage builds](/engine/userguide/eng-image/multistage-build/#use-multi-stage-builds).
 
     You can learn more about **stable** and **edge** channels in the
-    [Install Docker overview](https://docs.docker.com/engine/installation/)
-    and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+    [Install Docker overview](/install/)
+    and the [Docker CE Edge](/edge/) topics.
 
 7.  Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 

@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
+- /engine/installation/linux/docker-ee/ubuntu/
 title: Get Docker EE for Ubuntu
 toc_max: 4
 ---
@@ -16,7 +17,7 @@ To get started with Docker EE on Ubuntu, make sure you
 ## Prerequisites
 
 Docker CE users should go to
-[Get Docker CE for Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md)
+[Get Docker CE for Ubuntu](/install/linux/docker-ce/ubuntu.md)
 **instead of this topic**.
 
 To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
@@ -329,7 +330,7 @@ a new file each time you want to upgrade Docker EE.
 
 Docker EE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+commands. Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 
@@ -358,6 +359,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md).
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
 
 - Continue with the [User Guide](/engine/userguide/index.md).

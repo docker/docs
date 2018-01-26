@@ -15,9 +15,9 @@ daemon if you run into issues.
 ## Start the daemon using operating system utilities
 
 The command to start Docker depends on your operating system. Check the correct
-page under [Install Docker](/engine/installation/index.md). To configure Docker
+page under [Install Docker](/install/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](/engine/installation/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
 
 ## Start the daemon manually
 
@@ -124,7 +124,7 @@ ExecStart=/usr/bin/dockerd
 ```
 
 There are other times when you might need to configure `systemd` with Docker, such as
-[configuring a HTTP or HTTPS proxy](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy).
+[configuring a HTTP or HTTPS proxy](/engine/admin/systemd/#httphttps-proxy).
 
 > **Note**: If you override this option and then do not specify a `hosts` entry in the `daemon.json`
 > or a `-H` flag when starting Docker manually, Docker fails to start.

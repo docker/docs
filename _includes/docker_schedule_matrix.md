@@ -1,7 +1,7 @@
-{% capture green-check %}![yes](/engine/installation/images/green-check.svg){: style="height: 14px; display: inline-block"}{% endcapture %}
+{% capture green-check %}![yes](/install/images/green-check.svg){: style="height: 14px; display: inline-block"}{% endcapture %}
 {: style="width: 75%" }
 
-| Month     | Docker CE Edge    | Docker CE Stable  | 
+| Month     | Docker CE Edge    | Docker CE Stable  |
 |:----------|:------------------|:------------------|
 | January   | {{ green-check }} |                   |
 | February  | {{ green-check }} |                   |

@@ -63,15 +63,15 @@ docker node update --availability drain <node>
 
 ### Perform the upgrade
 
-Upgrade the Docker Engine on the node by following the instructions for your
+Upgrade Docker Engine on the node by following the instructions for your
 specific distribution:
 
-* [Windows Server](/engine/installation/windows/docker-ee.md#update-docker-ee)
-* [Ubuntu](/engine/installation/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
-* [RHEL](/engine/installation/linux/docker-ee/rhel.md#upgrade-docker-ee)
-* [CentOS](/engine/installation/linux/docker-ee/centos.md#upgrade-docker-ee)
-* [Oracle Linux](/engine/installation/linux/docker-ee/oracle.md#upgrade-docker-ee)
-* [SLES](/engine/installation/linux/docker-ee/suse.md#upgrade-docker-ee)
+* [Windows Server](/install/windows/docker-ee.md#update-docker-ee)
+* [Ubuntu](/install/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
+* [RHEL](/install/linux/docker-ee/rhel.md#upgrade-docker-ee)
+* [CentOS](/install/linux/docker-ee/centos.md#upgrade-docker-ee)
+* [Oracle Linux](/install/linux/docker-ee/oracle.md#upgrade-docker-ee)
+* [SLES](/install/linux/docker-ee/suse.md#upgrade-docker-ee)
 
 ### Make the node active
 

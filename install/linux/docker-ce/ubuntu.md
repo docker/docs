@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
+- /engine/installation/linux/docker-ce/ubuntu/
 title: Get Docker CE for Ubuntu
 toc_max: 4
 ---
@@ -18,7 +19,7 @@ To get started with Docker CE on Ubuntu, make sure you
 ### Docker EE customers
 
 To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for Ubuntu](/engine/installation/linux/docker-ee/ubuntu/)
+[Get Docker EE for Ubuntu](/install/linux/docker-ee/ubuntu.md)
 **instead of this topic**.
 
 To learn more about Docker EE, see
@@ -223,7 +224,7 @@ the repository.
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
 
-    [Learn about **stable** and **edge** channels](/engine/installation/).
+    [Learn about **stable** and **edge** channels](/install/index.md).
 
 
 #### Install Docker CE
@@ -284,7 +285,7 @@ the repository.
 
 Docker CE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](../linux-postinstall.md) to allow
+Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -307,7 +308,7 @@ a new file each time you want to upgrade Docker CE.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the  URL to `edge`.
-    > [Learn about **stable** and **edge** channels](/engine/installation/).
+    > [Learn about **stable** and **edge** channels](/install/index.md).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
@@ -330,7 +331,7 @@ a new file each time you want to upgrade Docker CE.
 
 Docker CE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md) to allow
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -361,6 +362,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).

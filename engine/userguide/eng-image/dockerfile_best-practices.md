@@ -127,7 +127,7 @@ the web application, database, and an in-memory cache in a decoupled manner.
 You may have heard that there should be "one process per container". While this
 mantra has good intentions, it is not necessarily true that there should be only
 one operating system process per container. In addition to the fact that
-containers can now be [spawned with an init process](https://docs.docker.com/engine/reference/run/#/specifying-an-init-process),
+containers can now be [spawned with an init process](/engine/reference/run/#/specifying-an-init-process),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
 processes, or [Apache](https://httpd.apache.org/) might create a process per
@@ -135,7 +135,7 @@ request. While "one process per container" is frequently a good rule of thumb,
 it is not a hard and fast rule. Use your best judgment to keep containers as
 clean and modular as possible.
 
-If containers depend on each other, you can use [Docker container networks](https://docs.docker.com/engine/userguide/networking/)
+If containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
  to ensure that these containers can communicate.
 
 ### Minimize the number of layers
@@ -286,7 +286,7 @@ out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
 “essential” packages from the parent images can't upgrade inside an
-[unprivileged container](https://docs.docker.com/engine/reference/run/#security-configuration).
+[unprivileged container](/engine/reference/run/#security-configuration).
 If a package contained in the parent image is out-of-date, you should contact its
 maintainers. If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.

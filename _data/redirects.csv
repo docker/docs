@@ -8,7 +8,7 @@ source,destination
 /articles/,/engine/articles/
 /examples/,/engine/examples/
 /extend/,/engine/extend/
-/installation/,/engine/installation/
+/installation/,/install/
 /introduction/,/engine/introduction/
 /misc/,/engine/misc/
 /project/,/opensource/project/
@@ -16,7 +16,7 @@ source,destination
 /security/,/engine/security/
 /static_files/,/engine/static_files/
 /userguide/,/engine/userguide/
-/en/latest/installation/,/engine/installation/
+/en/latest/installation/,/install/
 /docker-hub-enterprise/install/,/docker-trusted-registry/install/
 /docker-io/builds/,/docker-hub/builds/
 /docker-trusted-registry/license/install-csengine.md,/docker-trusted-registry/install/install-csengine/
@@ -24,7 +24,7 @@ source,destination
 /engine/project/set-up-git/,/opensource/project/set-up-git/
 /engine/reference/articles/basics.md,/engine/userguide/basics/
 /engine/userguide/dockerlinks/,/engine/userguide/networking/default_network/dockerlinks/
-/installation/,/engine/installation/
+/installation/,/install/
 /networking/,/engine/userguide/networking/
 /opensource/project/advanced-contributing/,/opensource/workflow/advanced-contributing/
 /opensource/project/create-pr/,/opensource/workflow/create-pr/

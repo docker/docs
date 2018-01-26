@@ -4,6 +4,7 @@ keywords: Docker, Docker documentation, requirements, apt, installation, ubuntu,
 title: Post-installation steps for Linux
 redirect_from:
 - /engine/installation/linux/docker-ee/linux-postinstall/
+- /engine/installation/linux/linux-postinstall/
 ---
 
 
@@ -354,8 +355,8 @@ system down more.
 
   ```xml
   <direct>
-     [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -i zt0 -j ACCEPT </rule> ]
-     [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -o zt0 -j ACCEPT </rule> ]
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -i zt0 -j ACCEPT </rule> ]
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -o zt0 -j ACCEPT </rule> ]
   </direct>
   ```
 

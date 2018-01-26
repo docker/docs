@@ -55,7 +55,7 @@ This endpoint only checks the health of a *single* replica. To get
 the health of every replica in a cluster, query each replica individually.
 
 The `/api/v0/meta/cluster_status`
-[endpoint](https://docs.docker.com/datacenter/dtr/2.2/reference/api/)
+[endpoint](/datacenter/dtr/2.2/reference/api/)
 returns a JSON object for the entire cluster *as observed* by the replica being
 queried, and it takes the form:
 

@@ -12,6 +12,7 @@ redirect_from:
 - /engine/installation/linux/gentoolinux/
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
+- /engine/installation/
 title: Install Docker
 ---
 
