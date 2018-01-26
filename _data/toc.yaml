@@ -2905,6 +2905,8 @@ manuals:
     title: Getting started
   - path: /docker-for-windows/install/
     title: Install Docker for Windows
+  - path: /docker-for-windows/kubernetes/
+    title: Deploy on Kubernetes
   - path: /docker-for-windows/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-windows/faqs/

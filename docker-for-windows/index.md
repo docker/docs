@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: windows, beta, edge, alpha, tutorial
+keywords: windows, edge, tutorial
 redirect_from:
 - /winkit/getting-started/
 - /winkit/
@@ -704,6 +704,57 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
 Need a direct link to Cloud? [Take me to Docker
 Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
+
+### Kubernetes
+
+**Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
+upport is not included in Docker for Windows 18.02 CE Stable.
+
+To find out more about Stable and Edge channels and how to switch between them,
+see [General configuration](/docker-for-windows/#general).
+
+Docker for Windows 18.02 CE Edge includes a standalone Kubernetes server that runs
+on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
+
+The Kubernetes client command, `kubectl`, is included and configured to connect
+to the local Kubernetes server. If you have `kubectl` already installed and
+pointing to some other environment, such as `minikube` or a GKE cluster, be sure
+to change context so that `kubectl` is pointing to `docker-for-desktop`:
+
+```bash
+kubectl config get-contexts
+kubectl config use-context docker-for-desktop
+```
+
+If you installed `kubectl` by another method, and
+experience conflicts, remove it.
+
+- To enable Kubernetes support and install a standalone instance of Kubernetes
+  running as a Docker container, select **Enable Kubernetes** and click the
+  **Apply and restart** button.
+
+  ![Enable Kubernetes](/docker-for-windows/images/kubernetes/kubernetes-enable.png)
+
+  An internet connection is required. Images required to run the Kubernetes
+  server are downloaded and instantiated as containers, and the
+  `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` command is installed.
+
+  When Kubernetes is enabled and running, an additional status bar item displays
+  at the bottom left of the Docker for Windows Preferences dialog.
+
+  ![Kubernetes status](/docker-for-windows/images/kubernetes/kubernetes-status.png)
+
+- By default, Kubernetes containers are hidden from commands like `docker
+  service ls`, because managing them manually is not supported. To make them
+  visible, select **Show system containers (advanced)** and click **Apply and restart**.
+  Most users do not need this option.
+
+- To disable Kubernetes support at any time, deselect **Enable Kubernetes**.
+  The Kubernetes containers are stopped and removed, and the
+  `/usr/local/bin/kubectl` command is removed.
+
+  For more about using the Kubernetes integration with
+  Docker for Windows, see [Deploy to Kubernetes](/docker-for-windows/kubernetes.md).
 
 ### Giving feedback and getting help
 
