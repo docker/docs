@@ -921,8 +921,8 @@ Example usage:
 Specify a priority to indicate in which order Compose should connect the
 service's containers to its networks. If unspecified, the default value is `0`.
 
-In the following example, the `app` service will connect to `app_net_1` first
-as it has the highest priority. It will then connect to `app_net_3`, then
+In the following example, the `app` service connects to `app_net_1` first
+as it has the highest priority. It then connect to `app_net_3`, then
 `app_net_2`, which uses the default priority value of `0`.
 
     version: '2.3'

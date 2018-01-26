@@ -34,9 +34,9 @@ provide inline default values using typical shell syntax:
 
 Similarly, the following syntax will allow you to specify mandatory variables:
 
-- `${VARIABLE:?err}` will exit with an error message containing `err` if
+- `${VARIABLE:?err}` exits with an error message containing `err` if
   `VARIABLE` is unset or empty in the environment.
-- `${VARIABLE?err}` will exit with an error message containing `err` if
+- `${VARIABLE?err}` exits with an error message containing `err` if
   `VARIABLE` is unset in the environment.
 
 Other extended shell-style features, such as `${VARIABLE/foo/bar}`, are not

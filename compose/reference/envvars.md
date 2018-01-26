@@ -94,13 +94,13 @@ using this character as path separator.
 ## COMPOSE\_FORCE\_WINDOWS\_HOST
 
 If set, volume declarations using the [short syntax](../compose-file/index.md#short-syntax-3)
-will be parsed assuming the host path is a Windows path, even if Compose is
+are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 
 ## COMPOSE\_IGNORE\_ORPHANS
 
-If set, Compose will not try to detect orphaned containers for the project.
+If set, Compose doesn't try to detect orphaned containers for the project.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 
 ## COMPOSE\_PARALLEL\_LIMIT
@@ -110,7 +110,7 @@ default value is `64`, and may not be set lower than `2`.
 
 ## COMPOSE\_INTERACTIVE\_NO\_CLI
 
-If set, Compose will not attempt to use the Docker CLI for interactive `run`
+If set, Compose doesn't attempt to use the Docker CLI for interactive `run`
 and `exec` operations. This option is not available on Windows where the CLI
 is required for the aforementioned operations.
 Supported: `true` or `1` to enable, `false` or `0` to disable.
