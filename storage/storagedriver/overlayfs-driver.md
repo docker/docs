@@ -15,7 +15,9 @@ storage driver as `overlay` or `overlay2`.
 
 > **Note**: If you use OverlayFS, use the `overlay2` driver rather than the
 > `overlay` driver, because it is more efficient in terms of inode utilization.
-> To use the new driver, you need version 4.0 or higher of the Linux kernel.
+> To use the new driver, you need version 4.0 or higher of the Linux kernel,
+> unless you are a Docker EE user on RHEL or CentOS, in which case you need
+> version 3.10.0-693 or higher of the kernel and to follow some extra steps.
 >
 > For more information about differences between `overlay` vs `overlay2`, refer
 > to [Select a storage driver](selectadriver.md#overlay-vs-overlay2).
@@ -29,14 +31,24 @@ OverlayFS is supported if you meet the following prerequisites:
 
 - The `overlay` driver is allowed but not recommended for Docker CE.
 
-- Version 4.0 or higher of the Linux kernel. If you use an older kernel, you
-  need to use the `overlay` driver, which is not recommended.
+- Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
+  version 3.10.0-693 of the kernel or higher. Docker EE users using kernels older
+  than 4.0 need to follow some extra steps, outlined below.
+  If you use an older kernel, you need to use the `overlay` driver, which is not
+  recommended.
 
 - The following backing filesystems are supported:
   - `ext4` (RHEL 7.1 only)
   - `xfs` (RHEL 7.2 and higher), but only with `d_type=true` enabled. Use
     `xfs_info` to verify that the `ftype` option is set to `1`. To format an
     `xfs` filesystem correctly, use the flag `-n ftype=1`.
+
+    > **Warning**: Running on XFS without d_type support inow canses Docker to
+    > skip the attempt to use the `overlay` or `overlay2` driver. Existing
+    > installs will continue to run, but produce an error. This is to allow
+    > users o migrate their data. In a future version, this will be a fatal
+    > error, which will prevent Docker from starting.
+    {:.warning}
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
@@ -84,22 +96,27 @@ Before following this procedure, you must first meet all the
     }
     ```
 
+    > **Note**: RHEL and CentOS users on Docker EE 17.06
+    >
+    > You need to add a second option to the `daemon.json` to disable the check
+    > for version 4.0 or higher of the Linux kernel. Your `daemon.json` should
+    > look like the following. **This is only needed for Docker EE users of RHEL
+    > or CentOS.** Do not attempt to use `overlay2` with kernel versions older
+    > than 3.10.0-693.
+    >
+    > ```json
+    > {
+    >   "storage-driver": "overlay2",
+    >   "storage-opts": [
+    >     "overlay2.override_kernel_check=true"
+    >   ]
+    > }
+    > ```
+
     If you need to use the legacy `overlay` driver, specify it instead.
 
-    To use `overlay2` on CentOS (Docker CE only), you must also set the storage
-    option `overlay2.override_kernel_check`. In this case the `daemon.json`
-    would look like this:
-
-    ```json
-    {
-      "storage-driver": "overlay2",
-      "storage-opts": [
-        "overlay2.override_kernel_check=true"
-      ]
-    }
-    ```
-
-    See all storage options for each storage driver:
+    More storage options are available. See all storage options for each storage
+    driver:
 
     - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
     - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
