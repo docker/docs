@@ -24,7 +24,7 @@ In your browser, log in to the UCP web UI, and navigate to the
 **Stacks** page. Click **Create Stack** to deploy a new application.
 
 Give the application a name, like "VotingApp", and in the **Mode** field,
-select **Services**. 
+select **Services**.
 
 Paste the following YAML into the **COMPOSE.YML** editor:
 
@@ -132,17 +132,17 @@ the voting page, which is published on port `5000`.
 
 ![Screenshot of deployed service](../../images/deployed_visualizer.png){: .with-border}
 
-Click **Cats** and **Dogs** a few times to register some votes, and notice 
+Click **Cats** and **Dogs** a few times to register some votes, and notice
 that each click is processed by a different container.
 
-Go back to the **Services** page in the UCP web UI. Click the 
+Go back to the **Services** page in the UCP web UI. Click the
 `VotingApp_result` service and find the **Published Endpoint** field in
 the details pane. It has the same URL as the other `VotingApp` services,
 but it's published on port `5001`. Click the link to view the vote tally.
 
-Back in the **Services** page, click the 
+Back in the **Services** page, click the
 `VotingApp_visualizer` service and find the **Published Endpoint** field in
-the details pane. You'll see a link to your UCP instance's URL that includes
+the details pane. A link to your UCP instance's URL includes
 the published port of the visualizer service, which is 8080 in this case.
 
 Visiting this URL accesses the running instance of the `VotingApp_visualizer`

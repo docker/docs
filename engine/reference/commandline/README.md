@@ -16,7 +16,7 @@ The output files are composed from two sources:
 - The **Extended Description** and **Examples** sections are pulled into the
   YAML from the files in [https://github.com/moby/moby/tree/master/docs/reference/commandline](https://github.com/moby/moby/tree/master/docs/reference/commandline)
   Specifically, the Markdown inside the `## Description` and `## Examples`
-  headings are parsed. Please submit corrections to the text in that repository.
+  headings are parsed. Submit corrections to the text in that repository.
 
 # Updating the YAML files
 

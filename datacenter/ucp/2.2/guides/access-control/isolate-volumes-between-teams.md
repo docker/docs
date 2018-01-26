@@ -21,11 +21,11 @@ nodes.
 Navigate to the **Organizations & Teams** page to create two teams in your
 organization, named "Dev" and "Prod". Add a user who's not a UCP administrator
 to the Dev team, and add another non-admin user to the Prod team.
-[Learn how to create and manage teams](create-and-manage-teams.md). 
+[Learn how to create and manage teams](create-and-manage-teams.md).
 
 ## Create resource collections
 
-In this example, the Dev and Prod teams use two different volumes, which they 
+In this example, the Dev and Prod teams use two different volumes, which they
 access through two corresponding resource collections. The collections are
 placed under the `/Shared` collection.
 
@@ -47,7 +47,7 @@ with the `/Shared/prod-volumes` collection.
 1.  Navigate to the **Grants** page and click **Create Grant**.
 2.  In the left pane, click **Collections**, and in the **Swarm** collection,
     click **View Children**.
-3.  In the **Shared** collection, click **View Children**. 
+3.  In the **Shared** collection, click **View Children**.
 4.  In the list, find **/Shared/dev-volumes** and click **Select Collection**.
 3.  Click **Roles**, and in the dropdown, select **Restricted Control**.
 4.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
@@ -82,7 +82,7 @@ Team members have permission to create volumes in their assigned collection.
 
 Now you can see role-based access control in action for volumes. The user on
 the Prod team can't see the Dev team's volumes, and if you log in again as a
-user on the Dev team, you won't see the Prod team's volumes.
+user on the Dev team, you can't see the Prod team's volumes.
 
 ![](../images/isolate-volumes-3.png){: .with-border}
 

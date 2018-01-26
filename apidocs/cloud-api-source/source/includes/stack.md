@@ -157,7 +157,9 @@ Content-Type: application/json
 docker-cloud stack create --name hello-world -f docker-compose.yml
 ```
 
-Creates a new stack without starting it. Note that the JSON syntax is abstracted by both, the Docker Cloud CLI and our UI, in order to use [Stack YAML files](/docker-cloud/apps/stack-yaml-reference/).
+Creates a new stack without starting it. The JSON syntax is abstracted to use
+[Stack YAML files](/docker-cloud/apps/stack-yaml-reference/) in both
+the Docker Cloud CLI and our UI,
 
 ### Endpoint Type
 
@@ -171,7 +173,7 @@ Available in Docker Cloud's **REST API**
 
 Parameter | Description
 --------- | -----------
-name | (required) A human-readable name for the stack, i.e. `my-hello-world-stack`
+name | (required) A human-readable name for the stack, such as `my-hello-world-stack`
 nickname | (optional) A user-friendly name for the stack (`name` by default)
 services | (optional) List of services belonging to the stack. Each service accepts the same parameters as a [Create new service](#create-a-new-service) operation (default: `[]`) plus the ability to refer "links" and "volumes-from" by the name of another service in the stack (see example).
 

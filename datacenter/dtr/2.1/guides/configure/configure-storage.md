@@ -20,7 +20,7 @@ While there is a default storage backend, `filesystem`, the Trusted Registry off
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
  [installing](../install/index.md)
-them on your system in order to familiarize yourself with them.
+them on your system to familiarize yourself with them.
 However, for various reasons such as deployment purposes or continuous
 integration, it makes sense to think about your long term organization’s needs
 when selecting a storage backend. The Trusted Registry natively supports TLS and
@@ -198,13 +198,19 @@ include:
 
 **To configure**:
 
-1. Navigate to the Trusted Registry UI > Settings > Storage.
-2. Select Download to get the text based file. It contains a minimum amount
-of information and you're going to need additional data based on your driver and
-business requirements.
-3. Go [here](/registry/configuration.md#list-of-configuration-options") to see the open source YAML file. Copy the sections you need and paste into your `storage.yml` file. Note that some settings may contradict others, so
-ensure your choices make sense.
-4. Save the YAML file and return to the UI.
+1.  Navigate to the Trusted Registry UI > Settings > Storage.
+
+2.  Select Download to get the text based file. It contains a minimum amount of
+    information and you're going to need additional data based on your driver
+    and business requirements.
+
+3.  Go [here](/registry/configuration.md#list-of-configuration-options") to see
+    the open source YAML file. Copy the sections you need and paste into your
+    `storage.yml` file. Some settings may contradict others, so ensure your
+    choices make sense.
+
+4.  Save the YAML file and return to the UI.
+
 5. On the Storage screen, upload the file, review your changes, and click Save.
 
 ## See also

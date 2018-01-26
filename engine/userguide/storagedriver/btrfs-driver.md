@@ -30,7 +30,7 @@ Btrfs Filesystem as Btrfs.
   [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix)
   for all supported configurations for commercially-supported Docker.
 
-- Changing the storage driver will make any containers you have already
+- Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   not need to re-create them later.
@@ -153,7 +153,7 @@ $ sudo btrfs filesystem balance /var/lib/docker
 ```
 
 > **Note**: While you can do these operations with Docker running, performance
-> will suffer. It might be best to plan an outage window to balance the Btrfs
+> suffers. It might be best to plan an outage window to balance the Btrfs
 > filesystem.
 
 ## How the `btrfs` storage driver works
@@ -255,7 +255,7 @@ storage driver.
 
 > **Note**: Many of these factors are mitigated by using Docker volumes for
 > write-heavy workloads, rather than relying on storing data in the container's
-> writable layer. However, in the case of Btrfs, Docker volumes will still suffer
+> writable layer. However, in the case of Btrfs, Docker volumes still suffer
 > from these draw-backs unless `/var/lib/docker/volumes/` is **not** backed by
 > Btrfs.
 

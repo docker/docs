@@ -8,7 +8,7 @@ title: Administer and maintain a swarm of Docker Engines
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
 for managing the swarm and storing the swarm state. It is important to
-understand some key features of manager nodes in order to properly deploy and
+understand some key features of manager nodes to properly deploy and
 maintain the swarm.
 
 Refer to [How nodes work](/engine/swarm/how-swarm-mode-works/nodes.md)
@@ -35,8 +35,8 @@ operations are subject to the same constraints as state replication.
 ### Maintain the quorum of managers
 
 If the swarm loses the quorum of managers, the swarm cannot perform management
-tasks. If your swarm has multiple managers, always have more than two. In order
-to maintain quorum, a majority of managers must be available. An odd number of
+tasks. If your swarm has multiple managers, always have more than two.
+To maintain quorum, a majority of managers must be available. An odd number of
 managers is recommended, because the next even number does not make the quorum
 easier to keep. For instance, whether you have 3 or 4 managers, you can still
 only lose 1 manager and maintain the quorum. If you have 5 or 6 managers, you
@@ -52,7 +52,7 @@ troubleshooting steps if you do lose the quorum of managers.
 
 ## Configure the manager to advertise on a static IP address
 
-When initiating a swarm, you have to specify the `--advertise-addr` flag to
+When initiating a swarm, you must specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
 information, see [Run Docker Engine in swarm mode](/engine/swarm/swarm-mode.md#configure-the-advertise-address). Because manager nodes are
 meant to be a stable component of the infrastructure, you should use a *fixed
@@ -95,7 +95,7 @@ impossible to demote the last manager node. This ensures you maintain access to
 the swarm and that the swarm can still process requests. Scaling down to a
 single manager is an unsafe operation and is not recommended. If
 the last node leaves the swarm unexpectedly during the demote operation, the
-swarm will become unavailable until you reboot the node or restart with
+swarm becomes unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
 You manage swarm membership with the `docker swarm` and `docker node`
@@ -144,12 +144,11 @@ assigning tasks to the node.
 ## Add worker nodes for load balancing
 
 [Add nodes to the swarm](/engine/swarm/join-nodes.md) to balance your swarm's
-load. Replicated service tasks will be distributed across the swarm as evenly as
+load. Replicated service tasks are distributed across the swarm as evenly as
 possible over time, as long as the worker nodes are matched to the requirements
 of the services. When limiting a service to run on only specific types of nodes,
 such as nodes with a specific number of CPUs or amount of memory, remember that
-worker nodes that do not meet these requirements will not be able to run these
-tasks.
+worker nodes that do not meet these requirements cannot run these tasks.
 
 ## Monitor swarm health
 
@@ -241,12 +240,12 @@ you demote or remove a manager.
 
 Docker manager nodes store the swarm state and manager logs in the
 `/var/lib/docker/swarm/` directory. In 1.13 and higher, this data includes the
-keys used to encrypt the Raft logs. Without these keys, you will not be able
-to restore the swarm.
+keys used to encrypt the Raft logs. Without these keys, you cannot restore the
+swarm.
 
 You can back up the swarm using any manager. Use the following procedure.
 
-1.  If the swarm has auto-lock enabled, you will need the unlock key in order
+1.  If the swarm has auto-lock enabled, you need the unlock key
     to restore the swarm from backup. Retrieve the unlock key if necessary and
     store it in a safe location. If you are unsure, read
     [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).
@@ -254,9 +253,8 @@ You can back up the swarm using any manager. Use the following procedure.
 2.  Stop Docker on the manager before backing up the data, so that no data is
     being changed during the backup. It is possible to take a backup while the
     manager is running (a "hot" backup), but this is not recommended and your
-    results will be less predictable when restoring. While the manager is down,
-    other nodes will continue generating swarm data that will not be part of
-    this backup.
+    results are less predictable when restoring. While the manager is down,
+    other nodes continue generating swarm data that is not part of this backup.
 
     > **Note**: Be sure to maintain the quorum of swarm managers. During the
     > time that a manager is shut down, your swarm is more vulnerable to
@@ -279,7 +277,7 @@ After backing up the swarm as described in
 [Back up the swarm](#back-up-the-swarm), use the following procedure to
 restore the data to a new swarm.
 
-1.  Shut down Docker on the target host machine where the swarm will be restored.
+1.  Shut down Docker on the target host machine for the restored swarm.
 
 3.  Remove the contents of the `/var/lib/docker/swarm` directory on the new
     swarm.
@@ -287,13 +285,13 @@ restore the data to a new swarm.
 4.  Restore the `/var/lib/docker/swarm` directory with the contents of the
     backup.
 
-    > **Note**: The new node will use the same encryption key for on-disk
+    > **Note**: The new node uses the same encryption key for on-disk
     > storage as the old one. It is not possible to change the on-disk storage
     > encryption keys at this time.
     >
     > In the case of a swarm with auto-lock enabled, the unlock key is also the
-    > same as on the old swarm, and the unlock key will be needed to
-    > restore.
+    > same as on the old swarm, and the unlock key is needed to restore the
+    > swarm.
 
 5.  Start Docker on the new node. Unlock the swarm if necessary. Re-initialize
     the swarm using the following command, so that this node does not attempt
@@ -321,7 +319,7 @@ restore the data to a new swarm.
 Swarm is resilient to failures and the swarm can recover from any number
 of temporary node failures (machine reboots or crash with restart) or other
 transient errors. However, a swarm cannot automatically recover if it loses a
-quorum. Tasks on existing worker nodes will continue to run, but administrative
+quorum. Tasks on existing worker nodes continue to run, but administrative
 tasks are not possible, including scaling or updating services and joining or
 removing nodes from the swarm. The best way to recover is to bring the missing
 manager nodes back online. If that is not possible, continue reading for some
@@ -358,7 +356,7 @@ When you run the `docker swarm init` command with the `--force-new-cluster`
 flag, the Docker Engine where you run the command becomes the manager node of a
 single-node swarm which is capable of managing and running services. The manager
 has all the previous information about services and tasks, worker nodes are
-still part of the swarm, and services are still running. You will need to add or
+still part of the swarm, and services are still running. You need to add or
 re-add  manager nodes to achieve your previous task distribution and ensure that
 you have enough managers to maintain high availability and prevent losing the
 quorum.
@@ -377,9 +375,9 @@ is eventual balance, with minimal disruption to the end user.
 
 In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
 `docker service update` command to force the service to redistribute its tasks
-across the available worker nodes. This will cause the service tasks to restart.
+across the available worker nodes. This causes the service tasks to restart.
 Client applications may be disrupted. If you have configured it, your service
-will use a [rolling update](/engine/swarm/swarm-tutorial.md#rolling-update).
+uses a [rolling update](/engine/swarm/swarm-tutorial.md#rolling-update).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm

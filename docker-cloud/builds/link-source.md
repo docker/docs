@@ -11,7 +11,7 @@ code service to Docker Cloud so that it can access your source code
 repositories. You can configure this link for user accounts or
 organizations.
 
-If you will only push pre-built images to Docker Cloud's registry, you do not
+If you only push pre-built images to Docker Cloud's registry, you do not
 need to link your source code provider.
 
 > **Note**: If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](automated-build.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
@@ -69,8 +69,7 @@ code provider.
 
 If you are the owner of a Github organization you can grant or revoke Docker
 Cloud's access to the organization's repositories. Depending on the GitHub
-organization's settings, you might be able to grant this access even if you are
-not an organization owner.
+organization's settings, you may need to be an organization owner.
 
 If the organization has not had specific access granted or revoked before, you
 can often grant access at the same time as you link your user account. In this

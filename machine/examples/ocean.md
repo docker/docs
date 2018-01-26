@@ -16,7 +16,7 @@ those Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
-> Docker Machine will still work as described below, but Docker Cloud
+> Docker Machine still works as described below, but Docker Cloud
 supercedes Machine for this purpose.
 {: .important}
 
@@ -38,7 +38,7 @@ To generate your access token:
 
     ![Generate token](../img/ocean_gen_token.png)
 
-3.  Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
+3.  Give the token a descriptive name, make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
 
     ![Name and generate token](../img/ocean_token_create.png)
 
@@ -46,14 +46,14 @@ To generate your access token:
 
     ![Copy and save personal access token](../img/ocean_save_token.png)
 
-    This is the personal access token you'll use in the next step to create your cloud server.
+    This is the personal access token used in the next step to create your cloud server.
 
 ### Step 3. Use Machine to create the Droplet
 
 
 1.  Run `docker-machine create` with the `digitalocean` driver and pass your key to the `--digitalocean-access-token` flag, along with a name for the new cloud server.
 
-    For this example, we'll call our new Droplet "docker-sandbox".
+    For this example, the new Droplet is called `docker-sandbox`:
 
     ```none
     $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox
@@ -86,7 +86,11 @@ To generate your access token:
         default          -        virtualbox     Running   tcp://192.168.99.100:2376
         docker-sandbox   *        digitalocean   Running   tcp://45.55.139.48:2376
 
-    The new `docker-sandbox` machine is running, and it is the active host as indicated by the asterisk (\*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env docker-sandbox`, followed by `eval $(docker-machine env docker-sandbox)` to connect to it.
+    The new `docker-sandbox` machine is running, and it is the active host as
+    indicated by the asterisk (\*). When you create a new machine, your command
+    shell automatically connects to it. If for some reason your new machine is
+    not the active host, run `docker-machine env docker-sandbox`, followed by
+    `eval $(docker-machine env docker-sandbox)` to connect to it.
 
 ### Step 4. Run Docker commands on the Droplet
 
@@ -143,9 +147,12 @@ To remove a host and all of its containers and images, first stop the machine, t
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
     default   *        virtualbox   Running   tcp:////xxx.xxx.xx.xxx:xxxx
 
-If you monitor the Digital Ocean console while you run these commands, you will see it update first to reflect that the Droplet was stopped, and then removed.
+If you monitor the Digital Ocean console while you run these commands, notice
+that it updates first to reflect that the Droplet was stopped, and then removed.
 
-If you create a host with Docker Machine, but remove it through the cloud provider console, Machine will lose track of the server status. So please use the `docker-machine rm` command for hosts you create with `docker-machine create`.
+If you create a host with Docker Machine, but remove it through the cloud
+provider console, Machine loses track of the server status. Use the
+`docker-machine rm` command for hosts you create with `docker-machine create`.
 
 ## Where to go next
 

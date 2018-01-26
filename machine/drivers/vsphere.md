@@ -4,7 +4,10 @@ keywords: machine, VMware vSphere, driver
 title: VMware vSphere
 ---
 
-Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere) Virtual Infrastructure. The machine must have a working vSphere ESXi installation. You can use a paid license or free 60 day trial license. Your installation may also include an optional VCenter server.
+Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere)
+Virtual Infrastructure. The machine must have a working vSphere ESXi
+installation. You can use a paid license or free 60 day trial license. Your
+installation may also include an optional VCenter server.
 
 ## Usage
 
@@ -17,9 +20,9 @@ Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere) V
 -   `--vmwarevsphere-datacenter`: Datacenter for Docker VM (must be set to `ha-datacenter` when connecting to a single host).
 -   `--vmwarevsphere-datastore`: Datastore for Docker VM.
 -   `--vmwarevsphere-disk-size`: Size of disk for Docker VM (in MB).
--   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM will be instantiated. This can be omitted if using a cluster with DRS.
+-   `--vmwarevsphere-hostsystem`: vSphere compute resource where the docker VM is instantiated. This can be omitted if using a cluster with DRS.
 -   `--vmwarevsphere-memory-size`: Size of memory for Docker VM (in MB).
--   `--vmwarevsphere-network`: Network where the Docker VM will be attached.
+-   `--vmwarevsphere-network`: Network where the Docker VM is attached.
 -   `--vmwarevsphere-password`: **required** vSphere Password.
 -   `--vmwarevsphere-pool`: Resource pool for Docker VM.
 -   `--vmwarevsphere-username`: **required** vSphere Username.

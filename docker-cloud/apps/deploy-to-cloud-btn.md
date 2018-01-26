@@ -12,7 +12,8 @@ one click in Docker Cloud as long as they are logged in. The button is intended
 to be added to `README.md` files in public GitHub repositories, although it can
 be used anywhere else.
 
-> **Note**: You must be _logged in_ to Docker Cloud for the button to work correctly. If you are not logged in, you'll see a 404 error instead.
+> **Note**: You must be _logged in_ to Docker Cloud for the button to work
+> Otherwise, the link results in a 404 error.
 
 This is an example button to deploy our [python quickstart](https://github.com/docker/dockercloud-quickstart-python){: target="_blank" class="_"}:
 
@@ -37,7 +38,7 @@ You can simply add the following snippet to your `README.md` file:
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)
 ```
 
-Docker Cloud will detect the HTTP referer header and deploy the stack file found in the repository, branch and relative path where the source `README.md` file is stored.
+Docker Cloud detects the HTTP referer header and deploy the stack file found in the repository, branch and relative path where the source `README.md` file is stored.
 
 
 ## Add the 'Deploy to Docker Cloud' button in Docker Hub
@@ -53,7 +54,7 @@ where `<repo_url>` is the path to your GitHub repository (see below).
 
 ## Add the 'Deploy to Docker Cloud' button anywhere else
 
-If you want to use the button somewhere else (i.e. from external documentation, or a landing site), you just need to create a link to the following URL:
+If you want to use the button somewhere else, such as from external documentation or a landing site, you just need to create a link to the following URL:
 
 ```html
 https://cloud.docker.com/stack/deploy/?repo=<repo_url>

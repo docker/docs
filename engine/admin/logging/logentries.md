@@ -28,9 +28,8 @@ To set the logging driver for a specific container, pass the
 $ docker run --log-driver=logentries ...
 ```
 
-Before using this logging driver, you'll need to create a new Log Set in the
-Logentries web interface. Then, you'll need to pass the token of that log set
-to Docker:
+Before using this logging driver, you need to create a new Log Set in the
+Logentries web interface and pass the token of that log set to Docker:
 
 ```bash
 $ docker run --log-driver=logentries --log-opt logentries-token=abcd1234-12ab-34cd-5678-0123456789ab

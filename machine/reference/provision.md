@@ -23,8 +23,8 @@ Setting Docker configuration on the remote daemon...
 
 The Machine provisioning process will:
 
-1.  Set the hostname on the instance to the name Machine addresses it by (e.g.
-    `default`).
+1.  Set the hostname on the instance to the name Machine addresses it by, such
+    as `default`.
 2.  Install Docker if it is not present already.
 3.  Generate a set of certificates (usually with the default, self-signed CA) and
     configure the daemon to accept connections over TLS.

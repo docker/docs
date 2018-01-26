@@ -5,9 +5,9 @@ keywords: registry, repository
 ---
 
 Since DTR is secure by default, you need to create the image repository before
-being able to push the image to DTR.
+you can push the image to DTR.
 
-In this example, we'll create the 'golang' repository in DTR.
+In this example, we create the 'golang' repository in DTR.
 
 ## Create a repository
 

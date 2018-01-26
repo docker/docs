@@ -51,7 +51,7 @@ Click the **Add Node button** to add a new node.
 
 Check the 'Add node as a manager' option if you want to add the node as manager.
 Also, set the 'Use a custom listen address' option to specify the IP of the
-host that you'll be joining to the cluster.
+host to be joined to the cluster.
 
 Then you can copy the command displayed, use ssh to **log into the host** that
 you want to join to the cluster, and **run the command** on that host.
@@ -69,7 +69,7 @@ so that it is:
 
 * Active: the node can receive and execute tasks.
 * Paused: the node continues running existing tasks, but doesn't receive new ones.
-* Drained: the node won't receive new tasks. Existing tasks are stopped and
+* Drained: the node can't receive new tasks. Existing tasks are stopped and
 replica tasks are launched in active nodes.
 
 ![](../images/scale-your-cluster-4.png){: .with-border}

@@ -16,14 +16,14 @@ Docker desktop applications. See Docker Cloud (Edge feature) on
 [Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
 [Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
 >
-> Docker Machine will still work as described here, but Docker Cloud supercedes Machine for this purpose.
+> Docker Machine still works as described here, but Docker Cloud supercedes Machine for this purpose.
 {: .important}
 
 Docker Machine driver plugins are available for many cloud platforms, so you can
 use Machine to provision cloud hosts. When you use Docker Machine for
 provisioning, you create cloud hosts with Docker Engine installed on them.
 
-You'll need to install and run Docker Machine, and create an account with the
+Install and run Docker Machine, and create an account with the
 cloud provider.
 
 Then you provide account verification, security credentials, and configuration
@@ -70,11 +70,11 @@ specific to the cloud service you are using
 
 * `<machine>` - name of the host you want to create
 
-For convenience, `docker-machine` will use sensible defaults for choosing
+For convenience, `docker-machine` uses sensible defaults for choosing
 settings such as the image that the server is based on, but you override the
-defaults using the respective flags (e.g. `--digitalocean-image`). This is
+defaults using the respective flags, such as `--digitalocean-image`. This is
 useful if, for example, you want to create a cloud server with a lot of memory
-and CPUs (by default `docker-machine` creates a small server).
+and CPUs, rather than the default behavior of creating smaller servers.
 
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the

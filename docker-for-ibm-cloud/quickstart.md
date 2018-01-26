@@ -90,7 +90,10 @@ Create a Docker EE swarm cluster in IBM Cloud. During the beta, your cluster can
    ```
    > Customize your cluster
    >
-   > You can customize your cluster by [using other flags and options](cli-ref.md#bx-d4ic-create) with `bx d4ic help create`, but for now, we'll just stick with a basic swarm.
+   > You can customize your cluster by
+   > [using other flags and options](cli-ref.md#bx-d4ic-create) with
+   > `bx d4ic help create`, but this example uses a basic swarm.
+
 4. Note the cluster **Name** and **ID**.
 
 Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manager node is deployed. Then, the rest of the infrastructure resources are deployed, including the worker nodes, DTR nodes, load balancers, subnet, and NFS volume.
@@ -131,7 +134,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
 2. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 
-3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
+3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
 
 4. In a terminal, navigate and unzip the client bundle:
 
@@ -141,7 +144,8 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
    > Keep your client bundle handy
    >
-   > Move the certificate environment variable directory to a safe and accessible location on your machine. You'll use it a lot!
+   > Move the certificate environment variable directory to a safe and
+   > accessible location on your machine. It gets used a lot.
 
 5. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.:
 

@@ -61,7 +61,7 @@ internal components are working, and returns the following HTTP error codes:
 * 200, if all components are healthy
 * 500, if one or more components are not healthy
 
-If you're accessing this endpoint through a load balancer, you'll have no way to
+If you're accessing this endpoint through a load balancer, you have no way to
 know which UCP manager node is not healthy. So make sure you make a request
 directly to each manager node.
 

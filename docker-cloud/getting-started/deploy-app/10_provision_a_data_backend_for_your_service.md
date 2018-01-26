@@ -11,8 +11,8 @@ Docker Cloud offers a large number of data stores in the *Jumpstart* library,
 including Redis, MongoDB, PostgreSQL, and MySQL.
 
 You may have noticed that your app has a visit counter that's been disabled up
-until now. In this step you'll add a data backend that your service will use. In
-this specific tutorial we'll use a Redis cache, but most concepts apply to any
+until now. In this step you add a data backend for your service to use. In
+this specific tutorial we use a Redis cache, but most concepts apply to any
 data backend.
 
 ## Provision the service
@@ -27,7 +27,7 @@ $ docker-cloud service run \
 --name redis \
 redis
 ```
-**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service, only services **linked** to your *Redis service* will be able to connect to it.
+**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service, only services **linked** to your *Redis service* can connect to it.
 
 Use `docker-cloud service ps` to check if your new redis service is *running*. This might take a minute or two.
 
@@ -41,7 +41,7 @@ lb                   2f0d4b38  ▶ Running         dockercloud/haproxy:latest   
 
 ## Link the web service to the redis service
 
-Next, we'll set up the link between the `redis` service and the `web` service.
+Next, we set up the link between the `redis` service and the `web` service.
 
 ```bash
 $ docker-cloud service set --link redis:redis --redeploy web
@@ -49,7 +49,7 @@ $ docker-cloud service set --link redis:redis --redeploy web
 
 In this command, we're creating a link from the `web` service (specified at the end of the command) to the `redis` service, and naming the link `redis`.
 
-Next, visit or `curl` the load balanced web endpoint again. You'll notice that the web service now counts of the number of visits to the web service. This uses the Redis data backend, and is synchronized between all of the service's containers.
+Next, visit or `curl` the load balanced web endpoint again. The web service now counts of the number of visits to the web service. This uses the Redis data backend, and is synchronized between all of the service's containers.
 
 If you're using curl, you should see the counter incrementing like this:
 
@@ -68,4 +68,4 @@ Hello World</br>Hostname: web-3</br>Counter: 5%
 
 ## What's Next?
 
-Next, we'll look at [Stackfiles for your service](11_service_stacks.md).
+Next, we look at [Stackfiles for your service](11_service_stacks.md).

@@ -9,7 +9,7 @@ title: Docker for Mac release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see
+For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _edge_ releases are listed below. (Starting with
@@ -25,7 +25,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
   - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
   - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
-  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386)
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.  
@@ -60,7 +60,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Filesharing settings are now stored in settings.json.
   - Daemon restart button has been moved to settings / Reset Tab.
   - Better VM state handling & error messsages in case of VM crashes.
-  - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)) 
+  - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201))
 
 ### Docker Community Edition 17.09.1-ce-mac42 2017-12-11 (Stable)
 
@@ -175,7 +175,7 @@ about both kinds of releases, and download stable and edge product installers at
 - Interpret system proxy setting of `localhost` correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All Docker binaries bundled with Docker for Mac are now signed
 - Display all Docker Cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
-- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+- OSXFS: improved latency for many common operations, such as read and write, by approximately 25%
 - Fixed GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
 - Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials
 - More detailed VirtualBox uninstall requirements ( [docker/for-mac#1343](https://github.com/docker/for-mac/issues/1343))
@@ -516,19 +516,19 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
 
- 
+
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
- 
+
 * New
   - The directory holding the disk images was renamed (from `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux` to ~/Library/Containers/com.docker.docker/Data/vms/0`).
- 
+
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
   - Fix additional allocated disk space not available in containers. Fixes [docker/for-mac#2449](https://github.com/docker/for-mac/issues/2449)
   - Vpnkit port max idle time default restored to 300s. Fixes [docker/for-mac#2442](https://github.com/docker/for-mac/issues/2442)
-  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386) 
+  - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386)
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
@@ -536,7 +536,7 @@ events or unexpected unmounts.
   - Separate internal ports used to proxy HTTP and HTTPS content.
   - If kubectl was already installed before Docker For Mac, restore the existing kubectl when sitching Kubernetes off in Docker for Mac.  
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
- 
+
 
 ### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
 
@@ -558,7 +558,7 @@ events or unexpected unmounts.
 
 * Bug fixes and minor changes
   - Display actual size used by the VM disk, especially useful for disks using raw format. See [docker/for-mac#2297](https://github.com/docker/for-mac/issues/2297).
-  - Fix more specific edge cases in filesharing settings migration. 
+  - Fix more specific edge cases in filesharing settings migration.
 
 ### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
 
@@ -578,7 +578,7 @@ events or unexpected unmounts.
   - VM disk size can be changed in settings. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037)).
 
 * Bug fixes and minor changes
-  - Avoid VM reboot when changing host proxy settings. 
+  - Avoid VM reboot when changing host proxy settings.
   - Don't break HTTP traffic between containers by forwarding them via the external proxy [docker/for-mac#981](https://github.com/docker/for-mac/issues/981)
   - Filesharing settings are now stored in settings.json
   - Daemon restart button has been moved to settings / Reset Tab
@@ -803,7 +803,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Interpret system proxy setting of localhost correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All docker binaries bundled with Docker for Mac are now signed
 - Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
-- OSXFS: improved latency for many common operations (e.g. read and write) by approximately 25%
+- OSXFS: improved latency for many common operations, such as read and write by approximately 25%
 
 ### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
 
@@ -1558,7 +1558,7 @@ events or unexpected unmounts.
 **Bug fixes and minor changes**
 
 * VPNKit: Improved scalability as number of network connections increases
-* The docker API proxy was failing to deal with some 1.12 features (e.g. health check)
+* The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
 **Known issues**
 
@@ -1579,7 +1579,7 @@ events or unexpected unmounts.
 
 * VPNKit: Improved scalability as number of network connections increases
 * Interrupting a `docker build` with Ctrl-C will actually stop the build
-* The docker API proxy was failing to deal with some 1.12 features (e.g. health check)
+* The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
 **Known issues**
 
@@ -1697,7 +1697,7 @@ events or unexpected unmounts.
   - setting `atime` and `mtime` of nodes is now supported
   - Fixed major regression in Beta 12 with ENOENT, ENOTEMPY, and other spurious errors after a directory rename. This manifested as `npm install` failure and other directory traversal issues.
   - Fixed temporary file ENOENT errors
-  - Fixed in-place editing file truncation error (e.g. `perl -i`)w
+  - Fixed in-place editing file truncation error, such as when running `perl -i`
 * improved time synchronisation after sleep
 
 ### Beta 12 Release (2016-05-17 1.11.1-beta12)

@@ -43,7 +43,7 @@ If you don't specify access labels in the Compose file, resources are placed in
 the user's default collection when the stack is deployed.
 
 You can place a stack's resources into multiple collections, but most of the
-time, you won't need to do this.
+time, you don't need to do this.
 
 Here's an example of a Compose file that specifies two services, WordPress and
 MySQL, and gives them the access label `/Shared/wordpress`:
@@ -75,7 +75,7 @@ services:
 To deploy the application:
 
 1. In the UCP web UI, navigate to the **Stacks** page and click **Create Stack**.
-2. Name the app "wordpress". 
+2. Name the app "wordpress".
 3. From the **Mode** dropdown, select **Services**.
 4. Copy and paste the previous compose file into the **Compose.yml** editor.
 5. Click **Create** to deploy the application, and click **Done** when the
@@ -89,7 +89,7 @@ To confirm that the service deployed to the `/Shared/wordpress` collection:
 1. In the **Stacks** page, click **wordpress**.
 2. In the details pane, click **Inspect Resource** and select **Services**.
 3. On the **Services** page, click **wordpress_mysql**. In the details pane,
-   make sure that the **Collection** is `/Shared/wordpress`. 
+   make sure that the **Collection** is `/Shared/wordpress`.
 
 ![](../../images/deploy-stack-to-collection.png){: .with-border}
 
@@ -103,10 +103,10 @@ you have three options:
   the legacy collection and grant permissions before you can deploy to it.
 
 - **Deploy to the default collection.** To specify the user's default
-  collection instead of a legacy collection, remove the 
+  collection instead of a legacy collection, remove the
   `com.docker.ucp.access.label` keys from the Compose file. In this case,
   UCP deploys resources automatically to the default collection, and no
-  administrator action is required. 
+  administrator action is required.
 
 - **Update the collection.** Change the access label to refer to a new
   collection. Be sure to use path notation. For example,

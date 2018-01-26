@@ -125,8 +125,8 @@ from the repository.
     ```
 
     If this is the first time you are installing a package from a recently added
-    repository, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint matches
+    repository, you are prompted to accept the GPG key, and
+    the key's fingerprint is shown. Verify that the fingerprint matches
     `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
     key.
 
@@ -134,7 +134,7 @@ from the repository.
     >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command will always install the highest possible version,
+    > `dnf update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
@@ -150,7 +150,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled, and
-    will be specific to your version of Fedora (indicated by the `.fc26` suffix
+    are specific to your version of Fedora (indicated by the `.fc26` suffix
     on the version, in this example). Choose a specific version to install. The
     second column is the version string. The third column is the repository
     name, which indicates which repository the package is from and by extension
@@ -192,7 +192,7 @@ to install.
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
-`.rpm` file for your release and install it manually. You will need to download
+`.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your

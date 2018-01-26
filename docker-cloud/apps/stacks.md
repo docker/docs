@@ -56,7 +56,7 @@ To create a stack from the Docker Cloud web interface:
 
 ### Create a stack using the API
 
-You can also create a new stack by uploading a stack file directly using the Docker Cloud API. When you use the API, the stack file has to be in **JSON** format, like the following example:
+You can also create a new stack by uploading a stack file directly using the Docker Cloud API. When you use the API, the stack file is in **JSON** format, like the following example:
 
 ```json
 POST /api/v1/stack/ HTTP/1.1
@@ -100,7 +100,7 @@ To update a stack from the Docker Cloud web interface:
 
 ### Update an existing stack using the API
 
-You can also update a stack by uploading the new stack file directly using the Docker Cloud API. When you use the API, the stack file has to be in **JSON** format, like the following example:
+You can also update a stack by uploading the new stack file directly using the Docker Cloud API. When you use the API, the stack file is in **JSON** format, like the following example:
 
 ```json
 PATCH /api/app/v1/stack/(uuid)/ HTTP/1.1

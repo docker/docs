@@ -779,7 +779,7 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 
 **IMPORTANT**: With Docker 1.12, a Linux docker installation now has two
 additional binaries; `dockerd`, and `docker-proxy`. If you have scripts for
-installing docker, please make sure to update them accordingly.
+installing docker, make sure to update them accordingly.
 
 ### Builder
 
@@ -969,7 +969,7 @@ installing docker, please make sure to update them accordingly.
 
 ## 1.11.0 (2016-04-13)
 
-**IMPORTANT**: With Docker 1.11, a Linux docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on docker being a single static binaries, please make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows docker installation remains a single binary, `docker.exe`.
+**IMPORTANT**: With Docker 1.11, a Linux docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on docker being a single static binaries, make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows docker installation remains a single binary, `docker.exe`.
 
 ### Builder
 
@@ -1273,7 +1273,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 ### Distribution
 
 * Use content-addressable storage for images and layers [#17924](https://github.com/docker/docker/pull/17924)
-  Note that a migration is performed the first time docker is run; it can take a significant amount of time depending on the number of images and containers present.
+  A migration is performed the first time docker is run; it can take a significant amount of time depending on the number of images and containers present.
   Images no longer depend on the parent chain but contain a list of layer references.
   `docker load`/`docker save` tarballs now also contain content-addressable image configurations.
   For more information: https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration
@@ -1320,7 +1320,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 + Add support to set the mount propagation mode for a volume [#17034](https://github.com/docker/docker/pull/17034)
 * Add `ls` and `inspect` endpoints to volume plugin API [#16534](https://github.com/docker/docker/pull/16534)
   Existing plugins need to make use of these new APIs to satisfy users' expectation
-  For that, please use the new MIME type `application/vnd.docker.plugins.v1.2+json` [#19549](https://github.com/docker/docker/pull/19549)
+  For that, use the new MIME type `application/vnd.docker.plugins.v1.2+json` [#19549](https://github.com/docker/docker/pull/19549)
 - Fix data not being copied to named volumes [#19175](https://github.com/docker/docker/pull/19175)
 - Fix issues preventing volume drivers from being containerized [#19500](https://github.com/docker/docker/pull/19500)
 - Fix `docker volumes ls --dangling=false` to now show all non-dangling volumes [#19671](https://github.com/docker/docker/pull/19671)
@@ -1470,9 +1470,9 @@ that allows to add build-time environment variables (#15182)
 
 + Add `awslogs` logging driver for Amazon CloudWatch (#15495)
 + Add generic `tag` log option to allow customizing container/image
-information passed to driver (e.g. show container names) (#15384)
+information passed to driver (#15384)
 - Implement the `docker logs` endpoint for the journald driver (#13707)
-- DEPRECATE driver-specific log tags (e.g. `syslog-tag`, etc.) (#15384)
+- DEPRECATE driver-specific log tags (#15384)
 
 ### Distribution
 

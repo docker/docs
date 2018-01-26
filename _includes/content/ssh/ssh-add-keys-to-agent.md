@@ -8,7 +8,7 @@
 <div id="mac-add-keys" class="tab-pane fade in active">
 <br>
 {% capture mac-content-add %}
-1.  Start the `ssh-agent` in the background using the command `eval "$(ssh-agent -s)"`. You will get the agent process ID in return.
+1.  Start the `ssh-agent` in the background using the command `eval "$(ssh-agent -s)"`. You get the agent process ID in return.
 
     ```none
     eval "$(ssh-agent -s)"

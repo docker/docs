@@ -14,8 +14,8 @@ description: Deploy your app to production using Docker CE or EE.
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
-be using that shared image here.
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
 slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
@@ -27,7 +27,7 @@ username/repo:tag`, then visit `http://localhost/`.
 
 You've been editing the same Compose file for this entire tutorial. Well, we
 have good news. That Compose file works just as well in production as it does
-on your machine. Here, we'll go through some options for running your
+on your machine. Here, We go through some options for running your
 Dockerized application.
 
 ## Choose an option
@@ -43,7 +43,7 @@ To set up and deploy:
 - Use Docker Cloud to create your computing resources and create your swarm.
 - Deploy your app.
 
-> **Note**: We will be linking into the Docker Cloud documentation here; be sure
+> **Note**: We do not link into the Docker Cloud documentation here; be sure
   to come back to this page after completing each step.
 
 ### Connect Docker Cloud
@@ -188,9 +188,9 @@ These are the ports you need to expose for each service:
 | `visualizer`   | HTTP    | TCP      |  8080   |
 | `redis`        | TCP     | TCP      |  6379   |
 
-Methods for doing this will vary depending on your cloud provider.
+Methods for doing this vary depending on your cloud provider.
 
-We'll use Amazon Web Services (AWS) as an example.
+We use Amazon Web Services (AWS) as an example.
 
 > What about the redis service to persist data?
 >
@@ -209,12 +209,12 @@ to view the nodes.
 
 2.  On the left menu, go to Network & Security > **Security Groups**.
 
-    You'll see security groups related to your swarm
+    See the ecurity groups related to your swarm
     for `getstartedlab-Manager-<xxx>`, `getstartedlab-Nodes-<xxx>`,
     and `getstartedlab-SwarmWide-<xxx>`.
 
 3.  Select the "Node" security group for the swarm. The group name
-will be something like this: `getstartedlab-NodeVpcSG-9HV9SMHDZT8C`.
+is something like this: `getstartedlab-NodeVpcSG-9HV9SMHDZT8C`.
 
 4.  Add Inbound rules for the `web`, `visualizer`, and `redis`
 services, setting the Type, Protocol and Port for each as shown in the
@@ -223,7 +223,7 @@ services, setting the Type, Protocol and Port for each as shown in the
     ![open web service port](images/cloud-aws-web-port-open.png)
 
     > **Tip**: When you save the new rules, HTTP and TCP
-    ports will be auto-created for both IPv4 and IPv6 style addresses.
+    ports are auto-created for both IPv4 and IPv6 style addresses.
 
     ![security groups rules](images/cloud-aws-web-and-visualizer-ports.png)
 
@@ -259,9 +259,9 @@ image](part2.md#publish-the-image)).
   ```
 
 Unlike the scenario where you were running the swarm on local Docker machine
-VMs, your swarm and any apps deployed on it will continue to run on cloud
+VMs, your swarm and any apps deployed on it continue to run on cloud
 servers regardless of whether you shut down your local host.
-    
+
 {% endcapture %}
 {% capture enterpriseboilerplate %}
 Customers of Docker Enterprise Edition run a stable, commercially-supported
@@ -279,7 +279,7 @@ file from directly within the UI](/datacenter/ucp/2.1/guides/user/services/){: o
 
 ![Deploy an app on DDC](/datacenter/ucp/2.1/guides/images/deploy-app-ui-1.png)
 
-After that, you'll see it running, and can change any aspect of the application
+After that, you can see it running, and can change any aspect of the application
 you choose, or even edit the Compose file itself.
 
 ![Managing app on DDC](/datacenter/ucp/2.1/guides/images/deployed_visualizer.png)

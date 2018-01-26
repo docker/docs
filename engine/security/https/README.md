@@ -5,7 +5,7 @@ published: false
 This is an initial attempt to make it easier to test the examples in the https.md
 doc.
 
-At this point, it has to be a manual thing, and I've been running it in boot2docker.
+At this point, it is a manual thing, and I've been running it in boot2docker.
 
 My process is as following:
 
@@ -26,4 +26,4 @@ Start another terminal:
     root@boot2docker:/# cd docker/docs/articles/https
     root@boot2docker:/# make client
 
-The last will connect first with `--tls` and then with `--tlsverify`, both should succeed.
+The last connects first with `--tls` and then with `--tlsverify`, both should succeed.

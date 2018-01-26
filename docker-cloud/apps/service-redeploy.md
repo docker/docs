@@ -8,7 +8,7 @@ title: Redeploy a running service
 
 You can **redeploy** services in Docker Cloud while they are running to
 regenerate a service's containers. You might do this when a new version of the
-image is pushed to the registry, or in order to apply changes that you made to
+image is pushed to the registry, or to apply changes that you made to
 the service's settings.
 
 When you redeploy a service, Docker Cloud terminates the current service

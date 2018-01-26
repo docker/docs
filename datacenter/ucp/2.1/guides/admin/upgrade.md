@@ -9,13 +9,13 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.1.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release-notes/index.md) for this version.
-There you'll find information about the new features, breaking changes, and
+[release notes](../release-notes/index.md) for this version for information
+about new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
 ## Plan the upgrade
 
-As part of the upgrade process, you'll be upgrading the Docker Engine
+As part of the upgrade process, you upgrade the Docker Engine
 installed in each node of the cluster to version 1.13.
 You should plan for the upgrade to take place outside business hours, to ensure
 there's minimal impact to your users.

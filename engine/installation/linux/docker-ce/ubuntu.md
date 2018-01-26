@@ -61,7 +61,7 @@ Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 - For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
   `overlay2` drivers are not supported by that kernel version.
 
-If you need to use `aufs`, you will need to do additional preparation as
+If you need to use `aufs`, you need to do additional preparation as
 outlined below.
 
 #### Extra steps for aufs
@@ -74,7 +74,7 @@ outlined below.
 <div id="aufs_prep_xenial" class="tab-pane fade in active" markdown="1">
 
 For Ubuntu 16.04 and higher, the Linux kernel includes support for OverlayFS,
-and Docker CE will use the `overlay2` storage driver by default. If you need
+and Docker CE uses the `overlay2` storage driver by default. If you need
 to use `aufs` instead, you need to configure it manually.
 See [aufs](/engine/userguide/storagedriver/aufs-driver.md)
 
@@ -166,7 +166,7 @@ the repository.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
-    > like Linux Mint, you might have to change `$(lsb_release -cs)`
+    > like Linux Mint, you might need to change `$(lsb_release -cs)`
     > to your parent Ubuntu distribution. For example, if you are using
     >  `Linux Mint Rafaela`, you could use `trusty`.
 
@@ -245,7 +245,7 @@ the repository.
     >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command will always install the highest possible version,
+    > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
@@ -297,7 +297,7 @@ to install.
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker CE, you can download the
-`.deb` file for your release and install it manually. You will need to download
+`.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/),

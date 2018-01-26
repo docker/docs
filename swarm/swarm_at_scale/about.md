@@ -91,7 +91,7 @@ As the previous diagram shows, each node in the cluster runs the following conta
   - Container: Swarm agent
 
 
-After deploying the application, you'll configure your local system so that you
+After deploying the application, configure your local system so that you
 can test the application from your local browser. In production, of course, this
 step wouldn't be needed.
 

@@ -14,7 +14,7 @@ Create an empty file called `Dockerfile`:
     $ touch Dockerfile
 
 Next, define the parent image you want to use to build your image on top
-of. We'll use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
+of. We use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 `trusty`), which is available on [Docker Hub](https://hub.docker.com):
 
     # Riak
@@ -88,7 +88,7 @@ Populate it with the following program definitions:
 
 ## Build the Docker image for Riak
 
-Now you should be able to build a Docker image for Riak:
+Now you can build a Docker image for Riak:
 
     $ docker build -t "<yourname>/riak" .
 

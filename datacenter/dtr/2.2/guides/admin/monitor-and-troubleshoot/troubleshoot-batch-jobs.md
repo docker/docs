@@ -68,7 +68,7 @@ Jobs can be in one of the following status:
 
 ## Job capacity
 
-Each job runner has a limited capacity and won't claim jobs that require an
+Each job runner has a limited capacity and doesn't claim jobs that require an
 higher capacity. You can see the capacity of a job runner using the
 `GET /api/v0/workers` endpoint:
 
@@ -123,8 +123,8 @@ are available:
 }
 ```
 
-Our worker will be able to pick up job id `0` and `2` since it has the capacity
-for both, while id `1` will have to wait until the previous scan job is complete:
+Our worker can pick up job id `0` and `2` since it has the capacity
+for both, while id `1` needs to wait until the previous scan job is complete:
 
 ```json
 {

@@ -15,11 +15,11 @@ the secret.
 
 ![](../../images/grant-access-secrets-1.png){: .with-border}
 
-Users that are part of a team with access to that label will be able to see
+Users that are part of a team with access to that label can see
 and use the secret.
 
 In this example, if Jenny is part of a team that has 'Restricted Control' over
-the `com.docker.ucp.access.label=blog` label, she will be able to use the
+the `com.docker.ucp.access.label=blog` label, she can use the
 secret in her services, as long as the service also has the same label.
 
 This ensures that users can use a secret in their services without having

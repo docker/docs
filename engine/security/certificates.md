@@ -10,31 +10,34 @@ In [Running Docker with HTTPS](https.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order
 to have the Docker client and the daemon communicate securely over HTTPS.  TLS ensures authenticity of the registry endpoint and that traffic to/from registry is encrypted.
 
-This article demonstrates how to ensure the traffic between the Docker registry (i.e., *a server*) and the Docker daemon (i.e., *a client*) traffic is encrypted and a properly authenticated using *certificate-based client-server authentication*.
+This article demonstrates how to ensure the traffic between the Docker registry
+server and the Docker daemon (a client of the registry server) is encrypted and
+properly authenticated using *certificate-based client-server authentication*.
 
-We will show you how to install a Certificate Authority (CA) root certificate
+We show you how to install a Certificate Authority (CA) root certificate
 for the registry and how to set the client TLS certificate for verification.
 
 ## Understanding the configuration
 
 A custom certificate is configured by creating a directory under
-`/etc/docker/certs.d` using the same name as the registry's hostname (e.g.,
-`localhost`). All `*.crt` files are added to this directory as CA roots.
+`/etc/docker/certs.d` using the same name as the registry's hostname, such as
+`localhost`. All `*.crt` files are added to this directory as CA roots.
 
 > **Note**:
-> As of docker 1.13, on Linux any root certificates authorities will be merged
-> in with the system defaults (i.e., host's root CA set). Prior to 1.13 and on
-> Windows, the system default certificates will only be used when there are no
-> custom root certificates provided.
+> As of Docker 1.13, on Linux any root certificates authorities are merged
+> with the system defaults, including as the host's root CA set. On prior
+versions of Docker, and on Docker Enterprise Edition for Windows Server,
+> the system default certificates are only used when no custom root certificates
+> are configured.
 
 The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired
 repository.
 
 > **Note**:
-> If there are multiple certificates, each will be tried in alphabetical
-> order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
-> will continue to try with the next certificate.
+> If multiple certificates exist, each is tried in alphabetical
+> order. If there is a 4xx-level or 5xx-level authentication error, Docker
+> continues to try with the next certificate.
 
 The following illustrates a configuration with custom certificates:
 
@@ -54,14 +57,14 @@ creating an os-provided bundled certificate chain.
 
 ## Creating the client certificates
 
-You will use OpenSSL's `genrsa` and `req` commands to first generate an RSA
+Use OpenSSL's `genrsa` and `req` commands to first generate an RSA
 key and then use the key to create the certificate.   
 
     $ openssl genrsa -out client.key 4096
     $ openssl req -new -x509 -text -key client.key -out client.cert
 
 > **Note**:
-> These TLS commands will only generate a working set of certificates on Linux.
+> These TLS commands only generate a working set of certificates on Linux.
 > The version of OpenSSL in macOS is incompatible with the type of
 > certificate Docker requires.
 
@@ -73,7 +76,7 @@ as client certificates. If a CA certificate is accidentally given the extension
 following error message:
 
 ```
-Missing key KEY_NAME for client certificate CERT_NAME. Note that CA certificates should use the extension .crt.
+Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
 ```
 
 If the Docker registry is accessed without a port number, do not add the port to the directory name.  The following shows the configuration for a registry on default port 443 which is accessed with `docker login my-https.registry.example.com`:

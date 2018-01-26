@@ -22,24 +22,24 @@ When you run a container with the `-p` argument, for example:
 ```
 $ docker run -p 80:80 -d nginx
 ```
-Docker for Mac will make whatever is running on port 80 in the container (in this case, `nginx`) available on port 80 of `localhost`. In this example, the host and container ports are the same. What if you need to specify a different host port? If, for example, you already have something running on port 80 of your host machine, you can connect the container to a different port:
+Docker for Mac makes whatever is running on port 80 in the container (in this case, `nginx`) available on port 80 of `localhost`. In this example, the host and container ports are the same. What if you need to specify a different host port? If, for example, you already have something running on port 80 of your host machine, you can connect the container to a different port:
 
 ```
 $ docker run -p 8081:80 -d nginx
 ```
 
-Now, connections to `localhost:8081` will be sent to port 80 in the container. The syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
+Now, connections to `localhost:8081` are sent to port 80 in the container. The syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 ### HTTP/HTTPS Proxy Support
 
-Docker for Mac will detect HTTP/HTTPS Proxy Settings from macOS and
+Docker for Mac detects HTTP/HTTPS Proxy Settings from macOS and
 automatically propagate these to Docker and to your containers. For example, if
-you set your proxy settings to `http://proxy.example.com` in macOS, Docker will
-use this proxy when pulling containers.
+you set your proxy settings to `http://proxy.example.com` in macOS, Docker
+uses this proxy when pulling containers.
 
 ![macOS Proxy Settings](images/proxy-settings.png)
 
-When you start a container, you will see that your proxy settings propagate into
+When you start a container, your proxy settings propagate into
 the containers. For example:
 
 ```
@@ -71,7 +71,7 @@ Because of the way networking is implemented in Docker for Mac, you cannot see a
 
 ### I cannot ping my containers
 
-Docker for Mac is unable to route traffic to containers, and from containers
+Docker for Mac can't traffic to containers, and from containers
 back to the host.
 
 ### Per-container IP addressing is not possible
@@ -80,13 +80,13 @@ The docker (Linux) bridge network is not reachable from the macOS host.
 
 ### Use cases and workarounds
 
-There are two scenarios that the above limitations will affect:
+There are two scenarios that the above limitations affect:
 
 #### I want to connect from a container to a service on the host
 
 The Mac has a changing IP address (or none if you have no network access). From
 17.06 onwards our recommendation is to connect to the special Mac-only DNS
-name `docker.for.mac.localhost` which will resolve to the internal IP address
+name `docker.for.mac.localhost` which resolves to the internal IP address
 used by the host.
 
 #### I want to connect to a container from the Mac
@@ -95,7 +95,7 @@ Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the Mac.
 
 Our current recommendation is to publish a port, or to connect from another
-container. Note that this is what you have to do even on Linux if the container
+container. This is what you need to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting

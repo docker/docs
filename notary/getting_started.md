@@ -5,9 +5,9 @@ title: Getting started with Docker Notary
 ---
 
 This document describes basic use of the Notary CLI as a tool supporting Docker
-Content Trust. For more advanced use cases, you must [run your own Notary
-service](running_a_service.md) and should read the [use the Notary client for
-advanced users](advanced_usage.md) documentation.
+Content Trust. For more advanced use cases, you must
+[run your own Notary service](running_a_service.md). Read the
+[use the Notary client for advanced users](advanced_usage.md) documentation.
 
 ## What is Notary
 
@@ -17,7 +17,7 @@ and origin of content. This ability is built on a straightforward key management
 and signing interface to create signed collections and configure trusted publishers.
 
 With Notary anyone can provide trust over arbitrary collections of data. Using
-<a href="https://www.theupdateframework.com/" target="_blank">The Update Framework (TUF)</a>
+[The Update Framework (TUF)](https://www.theupdateframework.com/)
 as the underlying security framework, Notary takes care of the operations necessary
 to create, manage, and distribute the metadata necessary to ensure the integrity and
 freshness of your content.
@@ -26,10 +26,9 @@ freshness of your content.
 
 You can download precompiled notary binary for 64 bit Linux or macOS from the
 Notary repository's
-<a href="https://github.com/docker/notary/releases" target="_blank">releases page on
-GitHub</a>. Windows is not officially
-supported, but if you are a developer and Windows user, we would appreciate any
-insight you can provide regarding issues.
+[Releases page on Github](https://github.com/docker/notary/releases).
+Windows is not officially tested, but if you are a developer and Windows user,
+we would appreciate any insight you can provide regarding issues.
 
 ## Understand Notary naming
 
@@ -39,9 +38,9 @@ when interacting with Docker Hub through the Notary client. When specifying
 Docker image names for the Notary client, the GUN format is:
 
 - For official images (identifiable by the "Official Repository" moniker), the
-image name as displayed on Docker Hub, prefixed with `docker.io/library/`. For
-example, if you would normally type `docker pull ubuntu` you must enter `notary
-{cmd} docker.io/library/ubuntu`.
+  image name as displayed on Docker Hub, prefixed with `docker.io/library/`. For
+  example, if you would normally type `docker pull ubuntu` you must enter `notary
+  {cmd} docker.io/library/ubuntu`.
 - For all other images, the image name as displayed on Docker Hub, prefixed by `docker.io`.
 
 The Docker Engine client takes care of these name expansions for you so do not
@@ -58,7 +57,8 @@ tell the client which repository server it should communicate with.
 
 The official Docker Hub Notary servers are located at
 `https://notary.docker.io`. If you would like to use your own Notary server,
-it is important to use the same or a newer <a href="https://github.com/docker/notary/releases">Notary version</a>
+it is important to use the same or a newer
+[Notary version](https://github.com/docker/notary/releases),
 as the client for feature compatibility (ex: client version 0.2, server/signer version >= 0.2).
 Additionally, Notary stores your own signing keys,
 and a cache of previously downloaded trust metadata in a directory, provided
@@ -68,7 +68,7 @@ found at `.docker/trust` within the calling user's home directory (failing to
 use this directory may result in errors when publishing updates to your trust
 data):
 
-```
+```bash
 $ notary -s https://notary.docker.io -d ~/.docker/trust list docker.io/library/alpine
    NAME                                 DIGEST                                SIZE (BYTES)    ROLE
 ------------------------------------------------------------------------------------------------------
@@ -92,9 +92,9 @@ collaborators.
 When you run a `docker pull` command, Docker Engine is using an integrated
 Notary library (the same one as Notary CLI) to request the mapping of tag
 to sha256 digest for the one tag you are interested in (or if you passed the
-`--all` flag, the client will use the list operation to efficiently retrieve all
+`--all` flag, the client uses the list operation to efficiently retrieve all
 the mappings). Having validated the signatures on the trust data, the client
-will then instruct the Engine to do a "pull by digest". During this pull, the
+instructs the Engine to do a "pull by digest". During this pull, the
 Engine uses the sha256 checksum as a content address to request and validate the
 image manifest from the Docker registry.
 
@@ -103,11 +103,11 @@ image manifest from the Docker registry.
 Notary generates and stores signing keys on the host it's running on. This means
 that the Docker Hub cannot delete tags from the trust data, they must be deleted
 using the Notary client. You can do this with the `notary remove` command.
-Again, you must direct it to speak to the correct Notary server (N.B. neither
-you nor the author has permissions to delete tags from the official alpine
-repository, the output below is for demonstration only):
+Again, you must direct it to speak to the correct Notary server. Neither
+you nor the author has permissions to delete tags from the official `alpine`
+repository, so the output below is for demonstration only:
 
-```
+```bash
 $ notary -s https://notary.docker.io -d ~/.docker/trust remove docker.io/library/alpine 2.6
 Removal of 2.6 from docker.io/library/alpine staged for next publish.
 ```
@@ -119,11 +119,11 @@ a `notary publish` is run for that repository.
 
 You can see a pending change by running `notary status` for the modified
 repository. The `status` subcommand is an offline operation and as such, does
-not require the `-s` flag, however it will silently ignore the flag if provided.
+not require the `-s` flag, however it silently ignores the flag if provided.
 Failing to provide the correct value for the `-d` flag may show the wrong
 (probably empty) change list:
 
-```
+```bash
 $ notary -d ~/.docker/trust status docker.io/library/alpine
 Unpublished changes for docker.io/library/alpine:
 
@@ -135,12 +135,12 @@ $ notary -s https://notary.docker.io publish docker.io/library/alpine
 
 ## Configure the client
 
-It is verbose and tedious to always have to provide the `-s` and `-d` flags
+It is verbose and tedious to always provide the `-s` and `-d` flags
 manually to most commands. A simple way to create preconfigured versions of the
 Notary command is via aliases. Add the following to your `.bashrc` or
 equivalent:
 
-```
+```bash
 alias dockernotary="notary -s https://notary.docker.io -d ~/.docker/trust"
 ```
 

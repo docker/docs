@@ -22,7 +22,7 @@ Docker configures `docker0` with an IP address, netmask, and IP allocation range
 Containers which are connected to the default bridge are allocated IP addresses
 within this range. Certain default settings apply to the default bridge unless
 you specify otherwise. For instance, the default maximum transmission unit (MTU),
-or the largest packet length that the container will allow, defaults to 1500
+or the largest packet length that the container allows, defaults to 1500
 bytes.
 
 You can configure the default bridge network's settings using flags to the
@@ -56,7 +56,7 @@ each:
   `172.16.1.0/28`. This range must be an IPv4 range for fixed IPs, and must
   be a subset of the bridge IP range (`docker0` or set
   using `--bridge` or the `bip` key in the `daemon.json` file). For example,
-  with `--fixed-cidr=192.168.1.0/25`, IPs for your containers will be chosen from
+  with `--fixed-cidr=192.168.1.0/25`, IPs for your containers are chosen from
   the first half of addresses included in the 192.168.1.0/24 subnet.
 
 - `--mtu=BYTES`: override the maximum packet length on `docker0`.
@@ -83,8 +83,9 @@ docker0         8000.3a1d7362b4ee       no              veth65f9
                                                         vethdda6
 ```
 
-If the `brctl` command is not installed on your Docker host, then on Ubuntu you
-should be able to run `sudo apt-get install bridge-utils` to install it.
+If the `brctl` command is not installed on your Docker host, run
+`sudo apt-get install bridge-utils` (on Ubuntu hosts) to install it. For other
+operating systems, consult the OS documentation.
 
 Finally, the `docker0` Ethernet bridge settings are used every time you create a
 new container. Docker selects a free IP address from the range available on the
@@ -115,8 +116,8 @@ default via 172.17.42.1 dev eth0
 root@f38c87f2a42d:/# exit
 ```
 
-Remember that the Docker host will not be willing to forward container packets
-out on to the Internet unless its `ip_forward` system setting is `1` -- see the
+The Docker host does not forward container packets
+out to the outside world unless its `ip_forward` system setting is `1` -- see the
 section on
 [Communicating to the outside world](container-communication.md#communicating-to-the-outside-world)
 for details.

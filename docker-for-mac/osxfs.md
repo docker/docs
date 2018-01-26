@@ -69,28 +69,28 @@ All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
 containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
 should work as expected. If a macOS path is not shared and does not exist in the
-VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
+VM, an attempt to bind mount it fails rather than create it in the VM. Paths
 that already exist in the VM and contain files are reserved by Docker and cannot
 be exported from macOS.
 
->Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
+> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 ### Ownership
 
-Initially, any containerized process that requests ownership metadata of
-an object is told that its `uid` and `gid` own the object. When any
-containerized process changes the ownership of a shared file system
-object, e.g. with `chown`, the new ownership information is persisted in
-the `com.docker.owner` extended attribute of the object. Subsequent
-requests for ownership metadata will return the previously set
-values. Ownership-based permissions are only enforced at the macOS file
-system level with all accessing processes behaving as the user running
-Docker. If the user does not have permission to read extended attributes
-on an object (such as when that object's permissions are `0000`), `osxfs`
-will attempt to add an access control list (ACL) entry that allows
-the user to read and write extended attributes. If this attempt
-fails, the object will appear to be owned by the process accessing
-it until the extended attribute is readable again.
+Initially, any containerized process that requests ownership metadata of an
+object is told that its `uid` and `gid` own the object. When any containerized
+process changes the ownership of a shared file system object, such as by using
+the `chown` command, the new ownership information is persisted in the
+`com.docker.owner` extended attribute of the object. Subsequent requests for
+ownership metadata return the previously set values. Ownership-based permissions
+are only enforced at the macOS file system level with all accessing processes
+behaving as the user running Docker. If the user does not have permission to
+read extended attributes on an object (such as when that object's permissions
+are `0000`), `osxfs` attempts to add an access control list (ACL) entry that
+allows the user to read and write extended attributes. If this attempt fails,
+the object appears to be owned by the process accessing it until the extended
+attribute is readable again.
 
 ### File system events
 
@@ -155,7 +155,8 @@ between macOS userspace processes and the macOS kernel.
 
 ### Performance issues, solutions, and roadmap
 
->Please see **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)** to learn about new configuration options available with the Docker 17.04 CE Edge release.
+> See **[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md)**
+> to learn about new configuration options available with the Docker 17.04 CE Edge release.
 
 With regard to reported performance issues ([GitHub issue 77: File access in
 mounted volumes extremely slow](https://github.com/docker/for-mac/issues/77)),
@@ -186,7 +187,7 @@ At the highest level, there are two dimensions to file system performance:
 throughput (read/write IO) and latency (roundtrip time). In a traditional file
 system on a modern SSD, applications can generally expect throughput of a few
 GB/s. With large sequential IO operations, `osxfs` can achieve throughput of
-around 250 MB/s which, while not native speed, will not be the bottleneck for
+around 250 MB/s which, while not native speed, is not likely to be the bottleneck for
 most applications which perform acceptably on HDDs.
 
 Latency is the time it takes for a file system call to complete. For instance,
@@ -198,10 +199,10 @@ sequential roundtrips, this results in significant observable slowdown.
 Reducing the latency requires shortening the data path from a Linux system call to
 macOS and back again. This requires tuning each component in the data path in
 turn -- some of which require significant engineering effort. Even if we achieve
-a huge latency reduction of 65μs/roundtrip, we will still "only" see a doubling
+a huge latency reduction of 65μs/roundtrip, we still "only" see a doubling
 of performance. This is typical of performance engineering, which requires
 significant effort to analyze slowdowns and develop optimized components. We
-know a number of approaches that will probably reduce the roundtrip time but we
+know a number of approaches that may reduce the roundtrip time but we
 haven't implemented all those improvements yet (more on this below in
 [What you can do](osxfs.md#what-you-can-do)).
 
@@ -234,7 +235,7 @@ coherence:
 
 1. A rake example (see below) appears to attempt to access 37000+
 different files that don't exist on the shared volume. Even with a 2× speedup
-via latency reduction this use case will still seem "slow".
+via latency reduction this use case still seems "slow".
 With caching enabled the performance increases around 3.5×, as described in
 the [user-guided caching post](link-TODO).
 We expect to see further performance improvements for rake with a "negative dcache" that
@@ -249,13 +250,13 @@ so must be invalidated if macOS ever reports an event delivery failure.
 2. Running `ember build` in a shared file system results in ember creating many
 different temporary directories and performing lots of intermediate activity
 within them. An empty ember project is over 300MB. This usage pattern does not
-require coherence between Linux and macOS, and will be significantly improved by
+require coherence between Linux and macOS, and is significantly improved by
 write caching.
 
 These two examples come from performance use cases contributed by users and they
 are incredibly helpful in prioritizing aspects of file system performance to
 improve. We are developing statistical file system trace analysis tools
-to characterize slow-performing workloads more easily in order to decide what to
+to characterize slow-performing workloads more easily to decide what to
 work on next.
 
 Under development, we have:
@@ -280,14 +281,14 @@ performance.
 
 Without a reproduction, it is very difficult for us to analyze your use case and
 determine what improvements would speed it up. When you don't provide a
-reproduction, one of us has to take the time to figure out the specific software
+reproduction, one of us needs to figure out the specific software
 you are using and guess and hope that we have configured it in a typical way or
 a way that has poor performance. That usually takes 1-4 hours depending on your
 use case and once it is done, we must then determine what regular performance is
 like and what kind of slow-down your use case is experiencing. In some cases, it
 is not obvious what operation is even slow in your specific development
 workflow. The additional set-up to reproduce the problem means we have less time
-to fix bugs, develop analysis tools, or improve performance. So, please include
+to fix bugs, develop analysis tools, or improve performance. So, include
 simple, immediate performance issue reproduction test cases. The [rake
 reproduction
 case](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/103)
@@ -308,13 +309,13 @@ can be easily tracked.
 
 #### What you can expect
 
-We will continue to work toward an optimized shared file system implementation
+We continue to work toward an optimized shared file system implementation
 on the Edge channel of Docker for Mac.
 
 You can expect some of the performance improvement work mentioned above to reach
 the Edge channel in the coming release cycles.
 
-In due course, we will open source all of our shared file system components. At
+We plan to eventually open source all of our shared file system components. At
 that time, we would be very happy to collaborate with you on improving the
 implementation of `osxfs` and related software.
 
@@ -338,5 +339,5 @@ engineering work on custom low-level components.
 
 We appreciate your understanding as we continue development of the product and
 work on all dimensions of performance. We want to continue to work with the
-community on this, so please continue to report issues as you find them. We look
+community on this, so continue to report issues as you find them. We look
 forward to collaborating with you on ideas and on the source code itself.

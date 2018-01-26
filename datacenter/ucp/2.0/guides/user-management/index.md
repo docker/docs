@@ -12,8 +12,8 @@ manage permissions to enforce fine-grained access control. For that:
 
 * Start by creating a user and assigning them with a default permission.
 
-    Default permissions specify the permission a user has to create and edit
-    resources. You can choose from four permission levels that range from
+    Default permissions specify the resources a user has access to create or
+    edit. You can choose from four permission levels that range from
     no access to full control over the resources.
 
 * Extend the user permissions by adding users to a team.
@@ -26,7 +26,7 @@ manage permissions to enforce fine-grained access control. For that:
 
 When users create services or networks with no label, those resources are only
 visible to them and administrator users.
-For a team of users to be able to see and edit the same resources, the
+For a team of users to see and edit the same resources, the
 resources needs to have the `com.docker.ucp.access.label` label applied.
 
 ![](../images/secure-your-infrastructure-1.svg)

@@ -78,7 +78,7 @@ rm ./app
 ```
 
 When you run the `build.sh` script, it needs to build the first image, create
-a container from it in order to copy the artifact out, then build the second
+a container from it to copy the artifact out, then build the second
 image. Both images take up room on your system and you still have the `app`
 artifact on your local disk as well.
 
@@ -132,7 +132,7 @@ number, starting with 0 for the first `FROM` instruction. However, you can
 name your stages, by adding an `as <NAME>` to the `FROM` instruction. This
 example improves the previous one by naming the stages and using the name in
 the `COPY` instruction. This means that even if the instructions in your
-Dockerfile are re-ordered later, the `COPY` won't break.
+Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```conf
 FROM golang:1.7.3 as builder

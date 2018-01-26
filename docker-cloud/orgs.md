@@ -28,7 +28,7 @@ To create an organization:
 2. In the dialog that appears, enter a name for your organization.
 3. Enter billing information for the organization.
 
-    This will be used for paid features used by the Organization account, including private repositories and additional nodes.
+    This is used for paid features used by the Organization account, including private repositories and additional nodes.
 
 4. Click **Save**.
 
@@ -43,21 +43,21 @@ at any time.
 
 ### Convert a user to an Organization
 
-Individual user accounts can be converted to organizations if needed. You will
-no longer be able to log in to the account; email addresses, linked source
-repositories and collaborators will be removed. Automated builds will be
+Individual user accounts can be converted to organizations if needed. You can
+no longer log in to the account; email addresses, linked source
+repositories and collaborators are removed. Automated builds are
 migrated. **Account conversion cannot be undone.**
 
-You will need another valid Docker ID (not the account you are converting) for
-the user who will become the first member of the `Owners` team. All existing
-automated builds are migrated to this user, and they will be able to configure
+You need another valid Docker ID (not the account you are converting) for
+the user who is the first member of the `Owners` team. All existing
+automated builds are migrated to this user, and they can configure
 the newly converted organization's settings to grant access to other users.
 
 1. Log in to Docker Cloud using the user account that you want to convert.
 2. Click **Settings** in the user account menu in the top right corner.
 3. Scroll down and click `Convert to organization`.
 4. Read through the list of warnings and actions.
-5. Enter the Docker ID of the user who will be the first member of the Owners team.
+5. Enter the Docker ID of the user to be the first member of the Owners team.
 6. Click **Save and Continue**.
 
 The UI refreshes. Log in from the Docker ID you specified as the first Owner, and then continue on to configure the organization as described below.
@@ -175,7 +175,7 @@ To edit a team's permission level, select a new setting in the **Permission** dr
 
 To remove a team's access to the repository, click the **trashcan** icon next to the team's access permission line.
 
-> **Note**: If the organization's repository is _public_, team members without explicit access permissions will still have read-only access to the repository. If the repository is _private_, removing a team's access completely prevents the team members from seeing the repository.
+> **Note**: If the organization's repository is _public_, team members without explicit access permissions still have read-only access to the repository. If the repository is _private_, removing a team's access completely prevents the team members from seeing the repository.
 
 ### Docker Cloud team permission reference
 
@@ -279,7 +279,7 @@ If the repository is _private_, this leaves it accessible only to members of the
 
 4. Once the repository has been created, navigate to it and click **Permissions**.
 
-5. [Grant access](#change-team-permissions-for-an-individual-repository) to any teams that will require access to the repository.
+5. [Grant access](#change-team-permissions-for-an-individual-repository) to any teams that require access to the repository.
 
 #### Manage organization settings
 

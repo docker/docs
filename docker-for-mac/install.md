@@ -18,7 +18,7 @@ the command line, preferences, and tools.
 
 ## Download Docker for Mac
 
-If you have not already done so, please install Docker for Mac. You can download
+If you have not already done so, install Docker for Mac. You can download
 installers from the Stable or beta channel.
 
 Both Stable and Edge installers come with <a
@@ -70,12 +70,12 @@ For more about Stable and Edge channels, see the
 </table>
 
 * Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or newer Mac, with Intel's  hardware support for MMU virtualization.
-The app will run on 10.10.3 Yosemite, but with limited support. Please see [What
+The app runs on 10.10.3 Yosemite, but with limited support. See [What
 to know before you install](#what-to-know-before-you-install) for a full
 explanation and list of prerequisites.
 
 * You can switch between Edge and Stable versions, but you must have only one
-   app installed at a time. Also, you will need to save images and export
+   app installed at a time. Also, you need to save images and export
    containers you want to keep before uninstalling the current version before
    installing another. For more about this, see the
    [FAQs about Stable and Edge channels](faqs.md#stable-and-edge-channels).
@@ -90,7 +90,7 @@ impact of this installation on your existing setup, how to set your environment
 for Docker for Mac, and how the two products can coexist.
 
 * **Relationship to Docker Machine**: Installing Docker for Mac does not affect
-  machines you created with Docker Machine. You'll get the option to copy
+  machines you created with Docker Machine. You have the option to copy
   containers and images from your local `default` machine (if one exists) to the
   new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/) VM. When
   you are running Docker for Mac, you do not need Docker Machine nodes running
@@ -99,11 +99,11 @@ for Docker for Mac, and how the two products can coexist.
   VirtualBox system. To learn more, see
   [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
-* **System Requirements**: Docker for Mac will launch only if all of these
+* **System Requirements**: Docker for Mac launches only if all of these
   requirements are met.
 
   - Mac hardware must be a 2010 or newer model, with Intel's hardware support for memory
-    management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
+    management unit (MMU) virtualization, including Extended Page Tables (EPT) and
     Unrestricted Mode. You can check to see if your machine has this support by
     running the following command  in a terminal: `sysctl kern.hv_support`
 
@@ -112,7 +112,7 @@ for Docker for Mac, and how the two products can coexist.
     that going forward 10.10.x is a use-at-your-own risk proposition.
 
   - Starting with Docker for Mac Stable release 1.13, and concurrent
-    Edge releases, we will no longer address issues specific to macOS Yosemite
+    Edge releases, we no longer address issues specific to macOS Yosemite
     10.10. In future releases, Docker for Mac could stop working on macOS Yosemite
     10.10 due to the deprecated status of this macOS version. We recommend
     upgrading to the latest version of macOS.
@@ -141,7 +141,7 @@ for Docker for Mac, and how the two products can coexist.
 
 	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
-	  You will be asked to authorize `Docker.app` with your system password after you launch it.
+	  You are prompted to authorize `Docker.app` with your system password after you launch it.
 	  Privileged access is needed to install networking components and links to the Docker apps.
 
 	  The whale in the top status bar indicates that Docker is running, and accessible from a terminal.

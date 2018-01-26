@@ -19,7 +19,7 @@ built images to your Docker Cloud repository, enable [Automated Builds](automate
 ## Set up automated test files
 
 To set up your automated tests, create a `docker-compose.test.yml` file which
-defines a `sut` service that lists the tests to be run. This file has a structure 
+defines a `sut` service that lists the tests to be run. This file has a structure
 similar to the [docker-cloud.yml](https://docs.docker.com/docker-cloud/apps/stack-yaml-reference/).
 The `docker-compose.test.yml` file should be located in the same directory that
 contains the Dockerfile used to build the image.
@@ -50,7 +50,7 @@ You can also use [custom build
 hooks](advanced.md#override-build-test-or-push-commands) to further customize
 your test behavior.
 
-> **Note**: If you enable Automated builds, they will also run any tests defined
+> **Note**: If you enable Automated builds, they also run any tests defined
 in the `test.yml` files.
 
 ## Enable automated tests on a repository
@@ -61,7 +61,7 @@ configured on the same page as [automated builds](automated-build.md), however
 you do not need to enable Autobuilds to use `Autotest`. Autobuild is enabled per
 branch or tag, and you do not need to enable it at all.
 
-Only branches that are configured to use **Autobuild** will push images to the
+Only branches that are configured to use **Autobuild** push images to the
 Docker repository, regardless of the Autotest settings.
 
 1. Log in to Docker Cloud and select **Repositories** in the left navigation.
@@ -96,9 +96,9 @@ Docker repository, regardless of the Autotest settings.
     pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
-    limited on public repositories. Private images will not be pulled and
-    environment  variables defined in Docker Cloud will not be
-    available. Automated builds will  continue to work as usual.
+    limited on public repositories. Private images are not pulled and
+    environment  variables defined in Docker Cloud ware not
+    available. Automated builds continue to work as usual.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.

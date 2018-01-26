@@ -35,7 +35,7 @@ To see how to connect Docker to this machine, run: docker-machine env dev
 
 ## Accessing driver-specific flags in the help text
 
-The `docker-machine create` command has some flags which are applicable to all
+The `docker-machine create` command has some flags which apply to all
 drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
@@ -121,7 +121,7 @@ Options:
 You may notice that some flags specify environment variables that they are
 associated with as well (located to the far left hand side of the row).  If
 these environment variables are set when `docker-machine create` is invoked,
-Docker Machine will use them for the default value of the flag.
+Docker Machine uses them for the default value of the flag.
 
 ## Specifying configuration options for the created Docker engine
 
@@ -139,7 +139,7 @@ that they are running themselves using the `--insecure-registry` flag for the
 daemon. Docker Machine supports the configuration of such options for the
 created engines via the `create` command flags which begin with `--engine`.
 
-Note that Docker Machine simply sets the configured parameters on the daemon
+Docker Machine only sets the configured parameters on the daemon
 and does not set up any of the "dependencies" for you. For instance, if you
 specify that the created daemon should use `btrfs` as a storage driver, you
 still must ensure that the proper dependencies are installed, the BTRFS
@@ -156,7 +156,7 @@ $ docker-machine create -d virtualbox \
     foobarmachine
 ```
 
-This will create a virtual machine running locally in Virtualbox which uses the
+This creates a virtual machine running locally in Virtualbox which uses the
 `overlay` storage backend, has the key-value pairs `foo=bar` and `spam=eggs` as
 labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the
@@ -213,8 +213,8 @@ specify arbitrary environment variables to be set within the engine with the syn
 
 ## Specifying Docker Swarm options for the created machine
 
-In addition to being able to configure Docker Engine options as listed above,
-you can use Machine to specify how the created Swarm master should be
+In addition to configuring Docker Engine options as listed above,
+you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
 the [scheduling strategy](/swarm/scheduler/strategy.md)
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
@@ -227,8 +227,8 @@ allows you to access [experimental features](https://github.com/docker/swarm/tre
 in Docker Swarm.
 
 If you're not sure how to configure these options, it is best to not specify
-configuration at all. Docker Machine will choose sensible defaults for you and
-you won't have to worry about it.
+configuration at all. Docker Machine chooses sensible defaults for you and
+you don't need to worry about it.
 
 Example create:
 
@@ -242,18 +242,18 @@ $ docker-machine create -d virtualbox \
     upbeat
 ```
 
-This will set the swarm scheduling strategy to "binpack" (pack in containers as
+This sets the swarm scheduling strategy to "binpack" (pack in containers as
 tightly as possible per host instead of spreading them out), and the "heartbeat"
 interval to 5 seconds.
 
 ## Pre-create check
 
-Since many drivers require a certain set of conditions to be in place before
-they can successfully perform a create (e.g. VirtualBox should be installed, or
-the provided API credentials should be valid), Docker Machine has a "pre-create
-check" which is specified at the driver level.
+Many drivers require a certain set of conditions to be in place before
+machines can be created. For instance, VirtualBox needs to be installed before
+the `virtualbox` driver can be used. For this reason, Docker Machine has a
+"pre-create check" which is specified at the driver level.
 
-If this pre-create check succeeds, Docker Machine will proceed with the creation
-as normal.  If the pre-create check fails, the Docker Machine process will exit
+If this pre-create check succeeds, Docker Machine proceeds with the creation
+as normal.  If the pre-create check fails, the Docker Machine process exits
 with status code 3 to indicate that the source of the non-zero exit was the
 pre-create check failing.

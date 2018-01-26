@@ -7,15 +7,15 @@ title: docker/ucp help
 Docker Universal Control Plane Tool
 
 This tool has commands to 'install' the UCP initial controller and
-'join' nodes to that controller.  The tool can also 'uninstall' the product.
+'join' nodes to that controller. The tool can also 'uninstall' the product.
 This tool must run as a container with a well-known name and with the
 docker.sock volume mounted, which you can cut-and-paste from the usage
 example below.
 
 This tool will generate TLS certificates and will attempt to determine
-your hostname and primary IP addresses.  This may be overridden with the
-'--host-address' option.  The tool may not be able to discover your
-externally visible fully qualified hostname.  For proper certificate
+your hostname and primary IP addresses. This may be overridden with the
+'--host-address' option. The tool may not discover your
+externally visible fully qualified hostname. For proper certificate
 verification, you should pass one or more Subject Alternative Names with
 '--san' during 'install' and 'join' that matches the fully qualified
 hostname you intend to use to access the given system.
