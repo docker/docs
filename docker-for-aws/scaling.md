@@ -6,8 +6,8 @@ title: Modify Docker install on AWS
 
 ## Scaling workers
 
-You can scale the worker count using the AWS Auto Scaling group. Docker will
-automatically join or remove new instances to the Swarm.
+You can scale the worker count using the AWS Auto Scaling group. Docker
+automatically joins or removes new instances to the Swarm.
 
 There are currently two ways to scale your worker group. You can "update" your
 stack, and change the number of workers in the CloudFormation template
@@ -32,9 +32,9 @@ Change the "Desired" field to the size of the worker pool that you would like, a
 
 ![save autoscale settings](img/autoscale_save.png)
 
-This will take a few minutes and add the new workers to your swarm
+This takes a few minutes and add the new workers to your swarm
 automatically. To lower the number of workers back down, you just need to update
-"Desired" again, with the lower number, and it will shrink the worker pool until
+"Desired" again, with the lower number, and it shrinks the worker pool until
 it reaches the new size.
 
 ### CloudFormation update
@@ -47,9 +47,9 @@ stack you want to update. Then Click on the action button at the top, and select
 
 Pick "Use current template", and then click "Next". Fill out the same parameters
 you have specified before, but this time, change your worker count to the new
-count, click "Next". Answer the rest of the form questions. CloudFormation will
-show you a preview of the changes it will make. Review the changes and if they
-look good, click "Update". CloudFormation will change the worker pool size to
-the new value you specified. It will take a few minutes (longer for a larger
-increase / decrease of nodes), but when complete you will have your swarm with
+count, click "Next". Answer the rest of the form questions. CloudFormation
+shows you a preview of the changes. Review the changes and if they
+look good, click "Update". CloudFormation changes the worker pool size to
+the new value you specified. It takes a few minutes (longer for a larger
+increase / decrease of nodes), but when complete the swarm has
 the new worker pool size.

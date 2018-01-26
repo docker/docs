@@ -283,14 +283,14 @@ services which publish ports, those services need to be removed before you can
 remove the `ingress` network.
 
 During the time that no `ingress` network exists, existing services which do not
-publish ports will continue to function but are not load-balanced. This affects
+publish ports continue to function but are not load-balanced. This affects
 services which publish ports, such as a WordPress service which publishes port
 80.
 
 1.  Inspect the `ingress` network using `docker network inspect ingress`, and
     remove any services whose containers are connected to it. These are services
     that publish ports, such as a WordPress service which publishes port 80. If
-    all such services are not stopped, the next step will fail.
+    all such services are not stopped, the next step fails.
 
 2.  Remove the existing `ingress` network:
 
@@ -299,7 +299,7 @@ services which publish ports, such as a WordPress service which publishes port
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
     in your swarm run the same docker engine version. Otherwise, removal may not
-    be effective and functionality of newly create ingress networks will be
+    be effective and functionality of newly created ingress networks will be
     impaired.
     Are you sure you want to continue? [y/N]
     ```
@@ -320,7 +320,7 @@ services which publish ports, such as a WordPress service which publishes port
 
     > **Note**: You can name your `ingress` network something other than
     > `ingress`, but you can only have one. An attempt to create a second one
-    > will fail.
+    > fails.
 
 4.  Restart the services that you stopped in the first step.
 
@@ -370,8 +370,8 @@ In Docker 17.06 and higher, it is possible to separate this traffic by passing
 the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
-joining, leaving, and managing the swarm will be sent over the
-`--advertise-addr` interface, and traffic among a service's containers will be
+joining, leaving, and managing the swarm is sent over the
+`--advertise-addr` interface, and traffic among a service's containers is sent
 sent over the `--data-path-addr` interface. These flags can take an IP address or
 a network device name, such as `eth0`.
 

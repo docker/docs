@@ -59,7 +59,7 @@ at [docs.docker.com](https://docs.docker.com/).
 [https://github.com/docker/docker.github.io/issues](https://github.com/docker/docker.github.io/issues).
 
   This is similar to clicking **Request doc changes** on a published docs
-  page, but if you manually file an issue you have to fill in links to
+  page, but if you manually file an issue you need to fill in links to
   the related pages.
 
 - Fork the documentation, make changes or add new content on your local
@@ -101,8 +101,8 @@ repository](https://github.com/docker/community/blob/master/README.md){:
 target="_blank" class="_"} for resources and information on the community.
 
 The topics in this guide on [Other ways to contribute](/opensource/ways/)
-provide some additional information,  but it's likely you'll find the community
-information you are looking for on the GitHub repository.
+provide some additional information,  but the community
+information you are looking for is probably available on the GitHub repository.
 
 ## Looking for Moby?
 

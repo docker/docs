@@ -78,7 +78,7 @@ This configuration also directs the driver to include in the payload the label l
 
 The value logged in the `CONTAINER_NAME` field is the name of the container that
 was set at startup. If you use `docker rename` to rename a container, the new
-name **is not reflected** in the journal entries. Journal entries will continue
+name **is not reflected** in the journal entries. Journal entries continue
 to use the original name.
 
 ## Retrieve log messages with `journalctl`

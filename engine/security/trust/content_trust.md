@@ -1,6 +1,6 @@
 ---
 description: Enabling content trust in Docker
-keywords: content, trust, security, docker,  documentation
+keywords: content, trust, security, docker, documentation
 title: Content trust in Docker
 ---
 
@@ -130,7 +130,7 @@ read how to [manage keys for content trust](trust_key_mng.md).
 ## Survey of typical content trust operations
 
 This section surveys the typical trusted operations users perform with Docker
-images. Specifically, we will be going through the following steps to help us exercise
+images. Specifically, we go through the following steps to help us exercise
 these various trusted operations:
 
 * Build and push an unsigned image
@@ -167,7 +167,7 @@ FROM docker/trusttest:latest
 RUN echo
 ```
 
-In order to build a container successfully using this Dockerfile, one can do:
+To build a container successfully using this Dockerfile, one can do:
 
 ```
 $  docker build --disable-content-trust -t <username>/nottrusttest:latest .
@@ -219,10 +219,11 @@ Enter passphrase for new repository key with id docker.io/<username>/trusttest (
 Repeat passphrase for new repository key with id docker.io/<username>/trusttest (3a932f1):
 Finished initializing "docker.io/<username>/trusttest"
 ```
-When you push your first tagged image with content trust enabled, the  `docker`
+
+When you push your first tagged image with content trust enabled, the `docker`
 client recognizes this is your first push and:
 
- - alerts you that it will create a new root key
+ - alerts you that it is creating a new root key
  - requests a passphrase for the root key
  - generates a root key in the `~/.docker/trust` directory
  - requests a passphrase for the repository key

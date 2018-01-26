@@ -8,7 +8,7 @@ title: Run only the images you trust
 With Docker Universal Control Plane you can enforce applications to only use
 Docker images signed by UCP users you trust. When a user tries to deploy an
 application to the cluster, UCP checks if the application uses a Docker image
-that is not trusted, and won't continue with the deployment if that's the case.
+that is not trusted, and doesn't continue with the deployment if that's the case.
 
 By signing and verifying the Docker images, you ensure that the images being
 used in your cluster are the ones you trust and haven't been altered either
@@ -35,10 +35,10 @@ by any UCP user whose keys are trusted in a Notary delegation role.
 
 ## Set up the Docker Notary CLI client
 
-Once you've configured UCP to only run applications that use Docker images you
-trust, you'll need to specify which Docker images can be trusted. This is done
-by using the Docker Notary server that is built into Docker Trusted Registry.
-You'll configure the Notary server to store signed metadata about the Docker
+After you configure UCP to only run applications that use Docker images you
+trust, you need to specify which Docker images can be trusted using the Docker
+Notary server that is built into Docker Trusted Registry.
+You configure the Notary server to store signed metadata about the Docker
 images you trust.
 
 To interact with the Notary server, you need to
@@ -58,7 +58,7 @@ Where `-s` specifies the notary server to talk to, and `-d` specifies the
 directory to store private keys and cache data.
 
 If your Docker Trusted Registry is not using certificates signed by a globally
-trusted certificate authority, you'll also need to configure notary to use the
+trusted certificate authority, you also need to configure notary to use the
 certificate of the DTR CA:
 
 ```bash

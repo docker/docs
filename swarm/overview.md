@@ -20,15 +20,15 @@ are not limited to, the following:
 And of course, the Docker client itself is also supported.
 
 Like other Docker projects, Docker Swarm follows the "swap, plug, and play"
-principle. As initial development settles, an API will develop to enable
+principle. As initial development settles, an API develops to enable
 pluggable backends. This means you can swap out the scheduling backend
 Docker Swarm uses out-of-the-box with a backend you prefer. Swarm's swappable design provides a smooth out-of-box experience for most use cases, and allows large-scale production deployments to swap for more powerful backends, like Mesos.
 
 ## Understand Swarm cluster creation
 
-The first step to creating a Swarm cluster on your network is to pull the Docker Swarm image. Then, using Docker, you configure the Swarm manager and all the nodes to run Docker Swarm. This method requires that you:
+The first step to creating a swarm cluster on your network is to pull the Docker Swarm image. Then, using Docker, you configure the swarm manager and all the nodes to run Docker Swarm. This method requires that you:
 
-* open a TCP port on each node for communication with the Swarm manager
+* open a TCP port on each node for communication with the swarm manager
 * install Docker on each node
 * create and manage TLS certificates to secure your cluster
 
@@ -44,7 +44,7 @@ cluster.
 
 Using Docker Machine is the best method for users getting started with Swarm for the first time. To try the recommended method of getting started, see [Get Started with Docker Swarm](install-w-machine.md).
 
-If you are interested manually installing or interested in contributing, see [Build a Swarm cluster for production](install-manual.md).
+If you are interested manually installing or interested in contributing, see [Build a swarm cluster for production](install-manual.md).
 
 ## Discovery services
 
@@ -68,10 +68,10 @@ Docker Swarm is still in its infancy and under active development. If you need
 help, would like to contribute, or simply want to talk about the project with
 like-minded individuals, we have a number of open channels for communication.
 
-* To report bugs or file feature requests: please use the [issue tracker on Github](https://github.com/docker/swarm/issues).
+* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/swarm/issues).
 
-* To talk about the project with people in real time: please join the `#docker-swarm` channel on IRC.
+* To talk about the project with people in real time, join the `#docker-swarm` channel on IRC.
 
-* To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/swarm/pulls).
+* To contribute code or documentation changes, submit a [pull request on Github](https://github.com/docker/swarm/pulls).
 
-For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).
+For more information and resources, visit the [Getting Help project page](/opensource/get-help/).

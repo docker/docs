@@ -31,7 +31,7 @@ Click the **Add SAN** button, and add one or more SANs to the node.
 
 Once you're done, click **Save Changes**.
 
-You will have to do this on every manager node in the cluster, but once you
+You need to do this on every manager node in the cluster, but once you
 have done so, the SANs will be automatically applied to any new manager nodes
 that join the cluster.
 
@@ -44,9 +44,9 @@ default-cs,127.0.0.1,172.17.0.1
 {% endraw %}
 ```
 
-This will get the current set of SANs for the given manager node. Append your
-desired SAN to this list (e.g. `default-cs,127.0.0.1,172.17.0.1,example.com`)
-and then run:
+This gets the current set of SANs for the given manager node. Append your
+desired SAN to this list. For example, `default-cs,127.0.0.1,172.17.0.1,example.com`.
+The run:
 
 ```bash
 $ docker node update --label-add com.docker.ucp.SANs=<SANs-list> <node-id>

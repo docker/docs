@@ -38,7 +38,7 @@ Here you can configure GC to run **until it's done** or **with a timeout**.
 The timeout ensures that your registry will be in read-only mode for a maximum
 amount of time.
 
-Select an option (either "Until done" or "For N minutes") and you'll have the
+Select an option (either "Until done" or "For N minutes") and you have the
 option to configure GC to run via a cron job, with several default crons
 provided:
 
@@ -88,7 +88,7 @@ If we delete `example.com/user/blog:latest` but *not*
 `example.com/user/blog:1.11.0` we expect that `example.com/user/blog:1.11.0`
 can still be pulled.
 
-This means that we can't delete layers when tags or manifests are deleted. 
+This means that we can't delete layers when tags or manifests are deleted.
 Instead, we need to pause writing and take reference counts to see how many
 times a file is used. If the file is never used only then is it safe to delete.
 

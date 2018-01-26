@@ -20,7 +20,7 @@ next_steps:
   title: Get Started with Docker
 ---
 {% if include.ui %}
-To do this foobar task, you'll want to flip the switch under **Tasks > Foobar**,
+To do this foobar task, flip the switch under **Tasks > Foobar**,
 enter your Lorem Ipsum value for {{ site.tablabels[tab.version] }}, then
 click **Save**.
 

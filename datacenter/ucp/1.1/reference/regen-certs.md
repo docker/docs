@@ -50,5 +50,5 @@ invalid and new bundles must be downloaded.
 | `--interactive, -i`                   | Enable interactive mode.  You will be prompted to enter all required information            |
 | `--root-ca-only`                      | Regenerate the Root CAs on this node (Do only once in an HA cluster!)                       |
 | `--id`                                | The ID of the UCP instance to regenerate certificates for                                   |
-| `--san` `[--san option --san option]` | Additional Subject Alternative Names for certs (e.g. --san foo1.bar.com --san foo2.bar.com) |
+| `--san` `[--san option --san option]` | Additional Subject Alternative Names for certs. For example, `--san foo1.bar.com --san foo2.bar.com` |
 | `--external-server-cert`              | Omit regenerating the UCP Controller web server certificate signed with an external CA      |

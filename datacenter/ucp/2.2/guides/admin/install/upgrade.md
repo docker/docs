@@ -8,16 +8,16 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.2.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../../release-notes/index.md) for this version.
-There you'll find information about the new features, breaking changes, and
-other relevant information for upgrading to a particular version.
+[release notes](../../release-notes/index.md) for this version for information
+about new features, breaking changes, and other relevant information about
+upgrading to a particular version.
 
 ## Plan the upgrade
 
-As part of the upgrade process, you'll be upgrading the Docker Engine
-installed in each node of the swarm to version 17.06 Enterprise Edition.
-You should plan for the upgrade to take place outside of business hours,
-to ensure there's minimal impact to your users.
+As part of the upgrade process, you upgrade the Docker Engine instance installed
+in each node of the swarm to version 17.06 Enterprise Edition. Plan for the
+upgrade to take place outside of business hours, to ensure there's minimal
+impact to your users.
 
 Also, don't make changes to UCP configurations while you're upgrading it.
 This can lead to misconfigurations that are difficult to troubleshoot.
@@ -80,10 +80,10 @@ information regarding swarm and UI availability is displayed.
 
 ![](../../images/upgrade-ucp-3.png){: .with-border}
 
-During the upgrade, the UI will be unavailable, and you should wait
-until completion before continuing to interact with it. When the upgrade
-completes, you'll see a notification that a newer version of the UI
-is available and a browser refresh is required to see the latest UI.
+During the upgrade, the UI is unavailable, so wait until the upgrade is complete
+before trying to use the UI. When the upgrade completes, a notification alerts
+you that a newer version of the UI is available, and you can see the new UI
+after you refresh your browser.
 
 ### Use the CLI to perform an upgrade
 
@@ -109,7 +109,7 @@ all the nodes managed by UCP are healthy.
 ## Recommended upgrade paths
 
 If you're running a UCP version that's lower than 2.1, first upgrade to the
-latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade 
+latest 2.1 version, then upgrade to 2.2. Use these rules for your upgrade
 path to UCP 2.2:
 
 - From UCP 1.1: UCP 1.1 -> UCP 2.1 -> UCP 2.2

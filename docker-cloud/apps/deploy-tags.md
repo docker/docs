@@ -94,7 +94,7 @@ To deploy a service to a specific node using tags, you must first specify one or
 
 2. Select tags from the **deployment constraints** list to add to this service. Only tags that already exist on your nodes appear in the list.
 
-    Tags in a service define which nodes will be used on deployment: only nodes that match *all* tags specified in the service will be used for deployment.
+    Tags in a service define which nodes are used on deployment: only nodes that match *all* tags specified in the service are used for deployment.
 
 ### Update or add tags to a service
 
@@ -108,8 +108,8 @@ You can add or remove tags on a running service from the service's detail view.
 3. Click **Save Changes**.
 
 **If you update the tags on a service, you must redeploy the service for them to take effect.** To do this you can terminate all containers and relaunch them, or you can scale
-your service down to zero nodes and then scale it back up. New containers will
-be deployed to the nodes that match the new tags.
+your service down to zero nodes and then scale it back up. New containers are
+deployed to the nodes that match the new tags.
 
 ## Using deployment tags in the API and CLI
 

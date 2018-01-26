@@ -6,4 +6,4 @@ tree: false
 ---
 
 We've sent you a welcome email with links to previous newsletters.
-Please check your inbox to confirm you received it.
+Check your inbox to confirm you received it.

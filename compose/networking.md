@@ -56,9 +56,9 @@ look like `postgres://{DOCKER_IP}:8001`.
 
 ## Update containers
 
-If you make a configuration change to a service and run `docker-compose up` to update it, the old container will be removed and the new one will join the network under a different IP address but the same name. Running containers will be able to look up that name and connect to the new address, but the old address will stop working.
+If you make a configuration change to a service and run `docker-compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 
-If any containers have connections open to the old container, they will be closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
+If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
 
 ## Links
 
@@ -66,7 +66,7 @@ Links allow you to define extra aliases by which a service is reachable from ano
 
     version: "3"
     services:
-      
+
       web:
         build: .
         links:
@@ -78,11 +78,11 @@ See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
 
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/compose/bundles.md) documentation.
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/compose/bundles.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
-Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster will use the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
+Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
 
 ## Specify custom networks
 
@@ -94,7 +94,7 @@ Here's an example Compose file defining two custom networks. The `proxy` service
 
     version: "3"
     services:
-      
+
       proxy:
         build: ./proxy
         networks:
@@ -133,7 +133,7 @@ Instead of (or as well as) specifying your own networks, you can also change the
 
     version: "3"
     services:
-    
+
       web:
         build: .
         ports:
@@ -155,4 +155,4 @@ If you want your containers to join a pre-existing network, use the [`external` 
         external:
           name: my-pre-existing-network
 
-Instead of attempting to create a network called `[projectname]_default`, Compose will look for a network called `my-pre-existing-network` and connect your app's containers to it.
+Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connect your app's containers to it.

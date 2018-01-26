@@ -16,8 +16,8 @@ manage permissions to enforce fine-grained access control. For that:
 
 * Start by creating a user and assigning them with a default permission.
 
-    Default permissions specify the permission a user has to create and edit
-    resources. You can choose from four permission levels that range from
+    Default permissions specifies the resources a user has access to create and
+    edit. You can choose from four permission levels that range from
     no access to full control over the resources.
 
     When a user only has a default permission assigned, only them and admin
@@ -34,7 +34,7 @@ manage permissions to enforce fine-grained access control. For that:
 
 When users create a container with no label, that container is only visible to
 them and administrator users.
-For a team of users to be able to see and edit the same container, that
+For a team of users to see and edit the same container, that
 container needs to have the `com.docker.ucp.access.label` label applied.
 
 ![](../images/secure-your-infrastructure-1.svg)

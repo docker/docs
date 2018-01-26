@@ -24,7 +24,7 @@ Click the **Create** button to create a new team.
 Give a name to the team, and choose if the team is managed by UCP, or
 discovered from an LDAP service:
 
-* Managed: You'll manage the team and manually define the users that are part
+* Managed: You manage the team and manually define the users that are part
 of the team.
 * Discovered: When integrating with an LDAP service, you can map a team to
 an LDAP group. When a user is added to the LDAP group, it is automatically added

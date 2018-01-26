@@ -17,7 +17,7 @@ architecture](about.md).
 
 This example assumes you are running on a Mac or Windows system and enabling
 Docker Engine `docker` commands by provisioning local VirtualBox virtual
-machines thru Docker Machine. For this evaluation installation, you'll need 6 (six)
+machines using Docker Machine. For this evaluation installation, you need 6 (six)
 VirtualBox VMs.
 
 While this example uses Docker Machine, this is only one example of an
@@ -59,8 +59,8 @@ href="https://www.consul.io/" target="blank">Consul</a> container.
    --engine-opt="label=com.function=consul"  keystore
    ```
 
-   You can set options for the Engine daemon with the `--engine-opt` flag. You'll
-   use it to label this Engine instance.
+   You can set options for the Engine daemon with the `--engine-opt` flag. In
+   this command, you use it to label this Engine instance.
 
 2. Set your local shell to the `keystore` Docker host.
 
@@ -68,8 +68,7 @@ href="https://www.consul.io/" target="blank">Consul</a> container.
    $ eval $(docker-machine env keystore)
    ```
 
-3. Run <a href="https://hub.docker.com/r/progrium/consul/" target="_blank">the
-`consul` container</a>.
+3. Run [the consul container](https://hub.docker.com/r/progrium/consul/){:target="_blank" class="_"}.
 
    ```bash
    $ docker run --restart=unless-stopped -d -p 8500:8500 -h consul progrium/consul -server -bootstrap
@@ -102,9 +101,9 @@ scheduling resources against the cluster. In a real-world production deployment,
 you should configure additional replica Swarm managers as secondaries for high
 availability (HA).
 
-You'll use the `--eng-opt` flag to set the `cluster-store` and
+Use the `--eng-opt` flag to set the `cluster-store` and
 `cluster-advertise` options to refer to the `keystore` server. These options
-support the container network you'll create later.
+support the container network you create later.
 
 1. Create the `manager` host.
 
@@ -167,10 +166,9 @@ support the container network you'll create later.
 
 ## Task 3. Add the load balancer
 
-The application uses <a
-href="https://github.com/ehazlett/interlock">Interlock</a> and Nginx as a
-loadbalancer. Before you build the load balancer host, you'll create the
-configuration you'll use for Nginx.
+The application uses [Interlock](https://github.com/ehazlett/interlock) and Nginx as a
+loadbalancer. Before you build the load balancer host, create the
+configuration for Nginx.
 
 1. On your local host, create a `config` directory.
 
@@ -266,7 +264,7 @@ in Step 4.
     and get a Conflict error such as:
 
     ```bash
-    docker: Error response from daemon: Conflict. The name "/interlock" is already in use by container d846b801a978c76979d46a839bb05c26d2ab949ff9f4f740b06b5e2564bae958. You have to remove (or rename) that container to be able to reuse that name.
+    docker: Error response from daemon: Conflict. The name "/interlock" is already in use by container d846b801a978c76979d46a839bb05c26d2ab949ff9f4f740b06b5e2564bae958. You have to remove (or rename) that container to reuse that name.
     ```
 
      Remove the interlock container with the `docker rm interlock` and try again.
@@ -304,7 +302,7 @@ for example:
 --engine-opt="label=com.function=frontend01"
 ```
 
-You'll use these labels later when starting application containers. In the
+These labels are used later when starting application containers. In the
 commands below, notice the label you are applying to each node.
 
 

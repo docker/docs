@@ -20,7 +20,7 @@ Know all this stuff already? Skip to [Link to your infrastructure](connect-infra
 A node is an individual Linux host used to deploy and run your applications. Docker Cloud does not provide hosting services, so all of your applications, services, and containers run on your own hosts. Your hosts can come from several different sources, including physical servers, virtual machines or cloud providers.
 
 ## What is a node cluster?
-When launching a node from a cloud provider you'll actually be creating a node cluster. Node Clusters are groups of nodes of the same type and from the same cloud provider. Node clusters allow you to scale the infrastructure by provisioning more nodes with a drag of a slider.
+When launching a node from a cloud provider you actually create a node cluster. Node Clusters are groups of nodes of the same type and from the same cloud provider. Node clusters allow you to scale the infrastructure by provisioning more nodes with a drag of a slider.
 
 ### Use cloud service providers
 Docker Cloud makes it easy to provision nodes from existing cloud providers. If you already have an account with an infrastructure as a service provider, you can provision new nodes directly from within Docker Cloud. Today we have native support for Amazon Web Services, DigitalOcean, Microsoft Azure, Packet.net, and IBM SoftLayer.

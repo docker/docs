@@ -15,10 +15,11 @@ line.
 
 Notary server also allows you to [increase/decrease](server-config.md#hot-logging-level-reload) the logging level without having to restart.
 
-Here is a full server configuration file example; please click on the top level JSON keys to
+Here is a full server configuration file example; click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
-<pre><code class="language-json">{
+```json
+{
   <a href="server-config.md#server-section-required">"server"</a>: {
     "http_addr": ":4443",
     "tls_key_file": "./fixtures/notary-server.key",
@@ -65,7 +66,7 @@ learn more about the configuration section corresponding to that key:
     "gun_prefixes": ["docker.io/", "my-own-registry.com/"]
   }
 }
-</code></pre>
+```
 
 ## server section (required)
 
@@ -94,7 +95,7 @@ Example:
 				hence all interfaces, such as those listed when you run
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:4443"</code> means listen on port 4443 on
-				localhost only.  That means that the server will not be
+				localhost only.  That means that the server is not
 				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
@@ -105,7 +106,7 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">The path to the private key to use for
 			HTTPS.  Must be provided together with <code>tls_cert_file</code>,
-			or not at all. If neither are provided, the server will use HTTP
+			or not at all. If neither are provided, the server uses HTTP
 			instead of HTTPS. The path is relative to the directory of the
 			configuration file.</td>
 	</tr>
@@ -114,7 +115,7 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">The path to the certificate to use for HTTPS.
 			Must be provided together with <code>tls_key_file</code>, or not
-			at all. If neither are provided, the server will use HTTP instead
+			at all. If neither are provided, the server uses HTTP instead
 			of HTTPS. The path is relative to the directory of the
 			configuration file.</td>
 	</tr>
@@ -235,7 +236,7 @@ DB storage example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include <code>parseTime=true</code> as part of the DSN)</td>
+			( include <code>parseTime=true</code> as part of the DSN)</td>
 	</tr>
 </table>
 
@@ -259,15 +260,14 @@ Example:
 }
 ```
 
-Note that this entire section is optional.  However, if you would like
+This entire section is optional.  However, if you would like
 authentication for your server, then you need the required parameters below to
 configure it.
 
 **Token authentication:**
 
 This is an implementation of the same authentication used by version 2 of the
-<a href="https://github.com/docker/distribution" target="_blank">Docker registry</a>.  (JWT token-based
-authentication post login.)
+[Docker Registry](https://github.com/docker/distribution).
 
 <table>
 	<tr>
@@ -278,13 +278,13 @@ authentication post login.)
 	<tr>
 		<td valign="top"><code>type</code></td>
 		<td valign="top">yes</td>
-		<td valign="top">Must be <code>"token"</code>; all other values will result in no
-			authentication (and the rest of the parameters will be ignored)</td>
+		<td valign="top">Must be <code>"token"</code>; all other values result in no
+			authentication (and the rest of the parameters are ignored)</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>options</code></td>
 		<td valign="top">yes</td>
-		<td valign="top">The options for token auth.  Please see
+		<td valign="top">The options for token auth. See
 			<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md#token">
 			the registry token configuration documentation</a>
 			for the parameter details.</td>
@@ -315,10 +315,10 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">The max age, in seconds, for caching services to cache
 			the latest metadata for a role and the metadata by checksum for a
-			role.  This value will be set on the cache control headers for
+			role.  This value is set on the cache control headers for
 			GET-ting metadata.
 
-			Note that `must-revalidate` is also set on the cache control headers
+			`must-revalidate` is also set on the cache control headers
 			for current metadata, as current metadata may change whenever new
 			metadata is signed into a repo.
 
@@ -347,15 +347,16 @@ Example:
 	<tr>
 		<td valign="top"><code>gun_prefixes</code></td>
 		<td valign="top">no</td>
-		<td valign="top">A list of GUN prefixes that will be accepted by this
+		<td valign="top">A list of GUN prefixes accepted by this
 			server.  POST operations on an image beginning with any other prefix
-			will be rejected with a 400, and GET/DELETE operations will be rejected
+			are rejected with a 400, and GET/DELETE operations are rejected
 			with a 404.
 		</td>
 	</tr>
 </table>
 
 ## Hot logging level reload
+
 We don't support completely reloading notary configuration files yet at present. What we support for now is:
 - increase logging level by signaling `SIGUSR1`
 - decrease logging level by signaling `SIGUSR2`
@@ -364,21 +365,25 @@ Example:
 
 To increase logging level
 
-```
+```bash
 $ kill -s SIGUSR1 PID
+```
 
 or
 
+```bash
 $ docker exec -i CONTAINER_ID kill -s SIGUSR1 PID
 ```
 
 To decrease logging level
 
-```
+```bash
 $ kill -s SIGUSR2 PID
+```
 
 or
 
+```bash
 $ docker exec -i CONTAINER_ID kill -s SIGUSR2 PID
 ```
 
@@ -387,11 +392,13 @@ the container with some kind of wrapper startup script or something.
 
 You can get the PID of `notary-server` through
 
-```
+```bash
 $ docker exec CONTAINER_ID ps aux
+```
 
 or
 
+```bash
 $ ps aux | grep "notary-server -config" | grep -v "grep"
 ```
 

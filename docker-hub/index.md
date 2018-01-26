@@ -36,7 +36,7 @@ Docker Hub provides the following major features:
 
 ## Create a Docker ID
 
-To explore Docker Hub, you'll need to create an account by following the
+To explore Docker Hub, you need to create an account by following the
 directions in [Your Docker ID](/docker-hub/accounts.md).
 
 > **Note**: You can search for and pull Docker images from Hub without logging

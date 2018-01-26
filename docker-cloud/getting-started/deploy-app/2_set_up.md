@@ -33,7 +33,7 @@ package manager, which is a package manager for
 [Python](https://www.python.org/) applications.
 
 * If you already have 2.x or Python 3.x installed, you probably have `pip` and
-`setuptools`, but will need to upgrade per the instructions
+`setuptools`, but need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
 
   > The Docker Cloud CLI does not currently support Python 3.x.
@@ -56,7 +56,7 @@ $ pip install docker-cloud
 
 #### Install on macOS
 
-We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions at [http://brew.sh](http://brew.sh){:target="_blank" class="_"}.
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -94,7 +94,7 @@ You must log in to continue this tutorial.
 
 ## Set your username as an environment variable
 
-For simplicity in this tutorial, we use an environment variable for your Docker Cloud username. If you will be copying and pasting the tutorial commands, set the environment variable using the command below. (Change `my-username` to your username.)
+For simplicity in this tutorial, we use an environment variable for your Docker Cloud username. If you plan to copy and paste the tutorial commands, set the environment variable using the command below. (Change `my-username` to your username.)
 
 If you don't want to do this, make sure you substitute your username for $DOCKER_ID_USER whenever you see it in the example commands.
 
@@ -118,4 +118,4 @@ $ export DOCKERCLOUD_NAMESPACE=my-organization
  See the [CLI documentation](../../installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
 
 
-Next up, we'll [Prepare the app](3_prepare_the_app.md).
+Next up, we [prepare the app](3_prepare_the_app.md).

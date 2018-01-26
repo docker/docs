@@ -12,7 +12,7 @@ We really want your feedback, and we've made it easy. You can edit, rate, or
 file an issue at the bottom of every page on
 [https://docs.docker.com/](https://docs.docker.com/).
 
-**Please only file issues about the documentation in this repository.** One way
+**Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
 don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
@@ -21,7 +21,7 @@ or confusing in the docs.
   ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
-  of Docker, or have found a bug in part of Docker, please file that issue in
+  of Docker, or have found a bug in part of Docker, file that issue in
   the project's code repository.
 
 ## Contributing
@@ -158,7 +158,7 @@ You have three options:
        bundle install
        ```
 
-       >**Note**: You may have to install some packages manually.   
+       >**Note**: You may need to install some packages manually.   
 
     f. Change the directory to `docker.github.io`.
 

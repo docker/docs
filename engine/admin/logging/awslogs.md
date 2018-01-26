@@ -77,7 +77,7 @@ specified, the container ID is used as the log stream.
 
 ### awslogs-create-group
 
-Log driver will return an error by default if the log group does not exist. However, you can set the
+Log driver returns an error by default if the log group does not exist. However, you can set the
 `awslogs-create-group` to `true` to automatically create the log group as needed.
 The `awslogs-create-group` option defaults to `false`.
 
@@ -135,7 +135,7 @@ $ docker run --log-driver=awslogs \
              ...
 ```
 
-This will parse the logs into the following CloudWatch log events:
+This parses the logs into the following CloudWatch log events:
 
 ```none
 # First event
@@ -209,7 +209,7 @@ $ docker run --log-driver=awslogs \
              ...
 ```
 
-This will parse the logs into the following CloudWatch log events:
+This parses the logs into the following CloudWatch log events:
 
 ```none
 # First event
@@ -225,10 +225,10 @@ INFO Another message was logged
 
 ### tag
 
-Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`).
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets Go template markup, such as `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`.
 See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
 
-When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
+When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` overrides the template specified with `tag`.
 
 If not specified, the container ID is used as the log stream.
 
@@ -237,7 +237,7 @@ If not specified, the container ID is used as the log stream.
 > The CloudWatch log API doesn't support `:` in the log name. This can cause some issues when using the `{{ .ImageName }}` as a tag, since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
 > Template markup can be used to get the proper format.
 > To get the image name and the first 12 characters of the container ID, you can use: `--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'`
-> the output will be something like: `alpine_latest-bf0072049c76`
+> the output is something like: `alpine_latest-bf0072049c76`
 {% endraw %}
 
 

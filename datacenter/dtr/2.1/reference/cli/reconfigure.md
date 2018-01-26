@@ -53,5 +53,5 @@ effect. To have no down time, configure your DTR for high-availability.
 |`--etcd-snapshot-count`|Set etcd's number of changes before creating a snapshot.|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--nfs-storage-url`|URL (with IP address or hostname) of the NFS mount if using NFS (e.g. nfs://<ip address>/<mount point>)|
+|`--nfs-storage-url`|URL (with IP address or hostname) of the NFS mount if using NFS. For example, `nfs://<ip address>/<mount point>`|
 |`--existing-replica-id`|ID of an existing replica in a cluster|

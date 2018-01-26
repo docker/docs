@@ -17,7 +17,7 @@ created to make sure it's not corrupt. One way to test your backups is to do
 a fresh installation in a separate infrastructure and restore the new installation
 using the backup you've created.
 
-If you create backups for a single component, you won't be able to restore your
+If you create backups for a single component, you can't restore your
 deployment to its previous state.
 
 ## Restore Docker Enterprise Edition

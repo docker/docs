@@ -6,7 +6,7 @@ redirect_from:
 title: Docker for Mac vs. Docker Toolbox
 ---
 
-If you already have an installation of Docker Toolbox, please read these topics
+If you already have an installation of Docker Toolbox, read these topics
 first to learn how Docker for Mac and Docker Toolbox differ, and how they can
 coexist.
 
@@ -44,7 +44,7 @@ Here are some key points to know about Docker for Mac before you get started:
 
 * The Docker for Mac application does not use `docker-machine` to provision that VM; but rather creates and manages it directly.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
+* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` looks if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
@@ -86,14 +86,14 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
           $ env | grep DOCKER
 
   If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all
-DOCKER environment variables at once. (This will not work in other shells such
-as `zsh`; you will need to unset each variable individually.)
+DOCKER environment variables at once. (This does not work in other shells such
+as `zsh`; you need to unset each variable individually.)
 
->**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
+>**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you need to unset these each time you want to use Docker for Mac.
 
 > If you install Docker for Mac on a machine where Docker Toolbox is installed..
 >
-> Docker for Mac will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
+> Docker for Mac replaces the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
 See also [Unset environment variables in the current
@@ -107,7 +107,7 @@ you want to use Docker for Mac, make sure all DOCKER environment variables are
 unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use
 one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval
 $(docker-machine env default)` (or the name of the machine you want to target).
-This will switch the current command shell to talk to the specified Toolbox
+This switches the current command shell to talk to the specified Toolbox
 machine.
 
 This setup is represented in the following diagram.

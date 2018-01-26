@@ -11,7 +11,7 @@ example illustrates a typical development process. After you establish an
 infrastructure, you create a Swarm cluster and deploy the application against
 the cluster.
 
-After building and manually deploying the voting application, you'll construct a
+After building and manually deploying the voting application, you can construct a
 Docker Compose file. You (or others) can use the file to deploy and scale the
 application further. The article also provides a troubleshooting section you can
 use while developing or deploying the voting application.

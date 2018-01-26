@@ -9,7 +9,7 @@ notoc: true
 ---
 
 Docker Cloud uses Docker Hub as its native registry for storing both public and
-private repositories. Once you push your images to Docker Hub, they will be
+private repositories. Once you push your images to Docker Hub, they are
 available in Docker Cloud.
 
 If you don't have Swarm Mode enable, images pushed to Docker Hub automatically appear for you on the **Services/Wizard** page on Docker Cloud.

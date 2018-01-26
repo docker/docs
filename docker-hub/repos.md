@@ -63,17 +63,17 @@ when you `docker save` an image.
 
 ## Creating a new repository on Docker Hub
 
-When you first create a Docker Hub user, you will have a "Get started with
+When you first create a Docker Hub user, you see a "Get started with
 Docker Hub." screen, from which you can click directly into "Create Repository".
 You can also use the "Create &#x25BC;" menu to "Create Repository".
 
 When creating a new repository, you can choose to put it in your Docker ID
 namespace, or that of any [organization](/docker-hub/orgs.md) that you are in the "Owners"
-team. The Repository Name will need to be unique in that namespace, can be two
+team. The Repository Name needs to be unique in that namespace, can be two
 to 255 characters, and can only contain lowercase letters, numbers or `-` and
 `_`.
 
-The "Short Description" of 100 characters will be used in the search results,
+The "Short Description" of 100 characters is used in the search results,
 while the "Full Description" can be used as the Readme for the repository, and
 can use Markdown to add simple formatting.
 
@@ -84,7 +84,7 @@ Hub based repository.
 
 ## Pushing a repository image to Docker Hub
 
-In order to push a repository to the Docker Hub, you need to
+To push a repository to the Docker Hub, you need to
 name your local image using your Docker Hub username, and the
 repository name that you created in the previous step.
 You can add multiple images to a repository, by adding a specific `:<tag>` to
@@ -100,7 +100,7 @@ Now you can push this repository to the registry designated by its name or tag.
 
     $ docker push <hub-user>/<repo-name>:<tag>
 
-The image will then be uploaded and available for use by your team-mates and/or
+The image is then uploaded and available for use by your team-mates and/or
 the community.
 
 
@@ -119,7 +119,7 @@ appropriate, you can flag them for review.
 ## Collaborators and their role
 
 A collaborator is someone you want to give access to a private repository. Once
-designated, they can `push` and `pull` to your repositories. They will not be
+designated, they can `push` and `pull` to your repositories. They are not
 allowed to perform any administrative tasks such as deleting the repository or
 changing its status from private to public.
 
@@ -138,7 +138,7 @@ want to keep private, either to your own account or within an organization or
 team.
 
 To work with a private repository on [Docker Hub](https://hub.docker.com), you
-will need to add one using the [Add Repository](https://hub.docker.com/add/repository/) button. You get one private
+need to add one using the [Add Repository](https://hub.docker.com/add/repository/) button. You get one private
 repository for free with your Docker Hub user account (not usable for
 organizations you're a member of). If you need more accounts you can upgrade
 your [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
@@ -153,11 +153,10 @@ Private repositories are just like public ones. However, it isn't possible to
 browse them or search their content on the public registry. They do not get
 cached the same way as a public repository either.
 
-It is possible to give access to a private repository to those whom you
-designate (i.e., collaborators) from its "Settings" page. From there, you can
-also switch repository status (*public* to *private*, or vice-versa). You will
-need to have an available private repository slot open before you can do such a
-switch. If you don't have any available, you can always upgrade your
+You can designate collaborators and manage their access to a private
+repository from that repository's *Settings* page. You can also toggle the
+repository's status between public and private, if you have an available
+repository slot open. Otherwise, you can upgrade your
 [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 
 ## Webhooks
@@ -220,17 +219,17 @@ successfully tested, then update a separate Changelog once the deployment is
 complete. After clicking the "Add webhook" button, simply add as many URLs as
 necessary in your chain.
 
-The first webhook in a chain will be called after a successful push. Subsequent
-URLs will be contacted after the callback has been validated.
+The first webhook in a chain is called after a successful push. Subsequent
+URLs are contacted after the callback has been validated.
 
 ### Validating a callback
 
-In order to validate a callback in a webhook chain, you need to
+To validate a callback in a webhook chain, you need to
 
 1. Retrieve the `callback_url` value in the request's JSON payload.
 1. Send a POST request to this URL containing a valid JSON body.
 
-> **Note**: A chain request will only be considered complete once the last
+> **Note**: A chain request is only considered complete once the last
 > callback has been validated.
 
 To help you debug or simply view the results of your webhook(s), view the
@@ -241,9 +240,9 @@ To help you debug or simply view the results of your webhook(s), view the
 The following parameters are recognized in callback data:
 
 * `state` (required): Accepted values are `success`, `failure`, and `error`.
-  If the state isn't `success`, the webhook chain will be interrupted.
-* `description`: A string containing miscellaneous information that will be
-  available on the Docker Hub. Maximum 255 characters.
+  If the state isn't `success`, the webhook chain is interrupted.
+* `description`: A string containing miscellaneous information that is
+  available on Docker Hub. Maximum 255 characters.
 * `context`: A string containing the context of the operation. Can be retrieved
   from the Docker Hub. Maximum 100 characters.
 * `target_url`: The URL where the results of the operation can be found. Can be

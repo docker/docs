@@ -40,14 +40,14 @@ To install Docker EE, you need the 64-bit version of SLES 12.x, running on
 `x86_64`, `s390x` (IBM Z), or `ppc64le` (IBM Power) architectures. Docker EE is
 not supported on OpenSUSE.
 
-The only supported storage driver for Docker EE on SLES is Btrfs, which will be
+The only supported storage driver for Docker EE on SLES is Btrfs, which is
 used by default if the underlying filesystem hosting `/var/lib/docker/` is a
 BTRFS filesystem.
 
 #### Firewall configuration
 
 Docker creates a `DOCKER` iptables chain when it starts. The SUSE firewall may
-block access to this chain, which can prevent you from being able to run
+block access to this chain, which can prevent you from running
 containers with published ports. You may see errors such as the following:
 
 ```none
@@ -97,7 +97,7 @@ BTRFS filesystem and mount it on `/var/lib/docker/`.
 
 1.  Check whether `/` (or `/var/` or `/var/lib/` or `/var/lib/docker/` if they
     are separate mount points) are formatted using Btrfs. If you do not have
-    separate mount points for any of these, a duplicate result for `/` will be
+    separate mount points for any of these, a duplicate result for `/` is
     returned.
 
     ```bash
@@ -165,8 +165,8 @@ from the repository.
 
 #### Set up the repository
 
-1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This will
-    only persist until you log out of the session. Replace `<DOCKER-EE-URL>`
+1.  Temporarily add a `$DOCKER_EE_URL` variable into your environment. This
+    only persists until you log out of the session. Replace `<DOCKER-EE-URL>`
     with the URL you noted down in the [prerequisites](#prerequisites).
 
     ```bash
@@ -174,7 +174,7 @@ from the repository.
     ```
 
 2.  Use the following command to set up the **stable** repository. Use the
-    command as-is. It will work because of the variable you set in the previous
+    command as-is. It works because of the variable you set in the previous
     step.
 
     <ul class="nav nav-tabs">
@@ -214,7 +214,7 @@ from the repository.
     </div><!--tab-content-->
 
 
-3.  Import the GPG key from the repository. Use the command as-is. It will work
+3.  Import the GPG key from the repository. Use the command as-is. It works
     because of the variable you set earlier.
 
     ```bash
@@ -230,8 +230,8 @@ from the repository.
     ```
 
     If this is the first time you have refreshed the package index since adding
-    the Docker repositories, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint matches
+    the Docker repositories, you are prompted to accept the GPG key, and
+    the key's fingerprint is shown. Verify that the fingerprint matches
     `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
     key.
 
@@ -334,7 +334,7 @@ To upgrade Docker EE:
 ### Install from a package
 
 If you cannot use the official Docker repository to install Docker EE, you can
-download the `.rpm` file for your release and install it manually. You will
+download the `.rpm` file for your release and install it manually. You
 need to download a new file each time you want to upgrade Docker EE.
 
 1.  Go to the Docker EE repository URL associated with your

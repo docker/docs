@@ -69,7 +69,7 @@ To create a Docker EE for IBM Cloud cluster from the CLI:
 
    > Tip to set environment variables
    >
-   > You can set your infrastructure API credentials and Docker EE installation URL as environment variables so that you do not have to include them as options when using `bx d4ic` commands. For example:
+   > You can set your infrastructure API credentials and Docker EE installation URL as environment variables so that you do not need to include them as options when using `bx d4ic` commands. For example:
    >
    > export SOFTLAYER_USERNAME=user.name.1234567
    >
@@ -183,7 +183,7 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 1. [Access UCP](#access-ucp).
 2. Under your user name (for example, **admin**), click **My Profile**.
 3. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
-4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, e.g., _d4ic-ucp_.
+4. In the GUI, you are now shown a label and public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
 5. In a terminal, navigate and unzip the client bundle.
 
    ```bash
@@ -192,7 +192,8 @@ Before you begin, [create a cluster](#create-swarms). Note the its **Name** and 
 
    > Keep your client bundle handy
    >
-   > Move the certificate environment variable directory to a safe and accessible location on your machine. It contains secret information. You'll use it a lot!
+   > Move the certificate environment variable directory to a safe and accessible
+   > location on your machine. It contains secret information that gets used a lot.
 
 6. From the client bundle directory, update your `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables by loading the `env.sh` script contents into your environment.
 
@@ -238,7 +239,7 @@ To gather logging and metric data from your swarm, first [enable logging for the
 
 Docker EE for IBM Cloud employs a flexible architecture and integration with IBM Cloud that you can use to leverage IBM Cloud resources and customize your swarm environment. Docker EE UCP exposes the standard Docker API, and as such, includes certain functions that instead should be done by using Docker EE for IBM Cloud capabilities.
 
-> Self-healing capabilities so you don't have to modify cluster infrastructure.
+> Self-healing capabilities so you don't need to modify cluster infrastructure.
 >
 > Docker EE for IBM Cloud uses the InfraKit toolkit to support self-healing infrastructure. After you create the swarm, the cluster maintains that specified number of nodes. If a manager node fails, you do not need to promote a worker node to manager; the swarm self-recovers the manager node.
 >

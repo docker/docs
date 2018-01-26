@@ -9,7 +9,7 @@ title: Docker for Windows Release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see
+For system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _edge_ releases are listed below. (Starting with
@@ -59,8 +59,8 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
   - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277](https://github.com/docker/for-win/issues/1277)
   - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
-  - Increased timeout for VM boot startup to 2 minutes. 
-  
+  - Increased timeout for VM boot startup to 2 minutes.
+
 
 ### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
 
@@ -146,7 +146,7 @@ about both kinds of releases, and download stable and edge product installers at
 **New**
 
 - Windows Server 2016 support
-- Windows 10586 is marked as deprecated; it will not be supported going forward in stable releases
+- Windows 10586 is marked as deprecated; it is not supported going forward in stable releases
 - Integration with Docker Cloud, with the ability to control remote Swarms from the local command line interface (CLI) and view your repositories
 - Unified login between the Docker CLI and Docker Hub, Docker Cloud.
 - Sharing a drive can be done on demand, the first time a mount is requested
@@ -374,7 +374,7 @@ We did not distribute a 1.12.4 stable release
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -384,7 +384,7 @@ We did not distribute a 1.12.4 stable release
 
 * To support trusted registry transparently, all trusted CAs (root or intermediate) on the Windows host are automatically copied to Moby
 
-* `Reset Credentials` will also unshare the shared drives
+* `Reset Credentials` also unshares the shared drives
 
 * Logs are now rotated every day
 
@@ -409,7 +409,7 @@ We did not distribute a 1.12.4 stable release
 
 * Uploading a diagnostic now shows a proper status message in the Settings
 
-* Docker will stop asking to import from Toolbox after an upgrade
+* Docker stops asking to import from Toolbox after an upgrade
 
 * Docker can now import from Toolbox just after HyperV is activated
 
@@ -439,7 +439,7 @@ We did not distribute a 1.12.4 stable release
 
 * VnpKit: reduce the number of sockets used by UDP NAT, reduce the probability
 
-* `slirp`: reduce the number of sockets used by UDP NAT, reduce the probability that NAT rules will time out earlier than expected
+* `slirp`: reduce the number of sockets used by UDP NAT, reduce the probability that NAT rules time out earlier than expected
 
 * Fixed password handling for host file system sharing
 
@@ -461,7 +461,7 @@ We did not distribute a 1.12.4 stable release
 
 **Known issues**
 
-* Docker will automatically disable lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 ### Docker for Windows 1.12.0, 2016-07-28 (stable)
 
@@ -482,7 +482,7 @@ We did not distribute a 1.12.4 stable release
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
-  
+
 * Bug fixes and minor changes
   - Fix linuxKit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
@@ -536,7 +536,7 @@ We did not distribute a 1.12.4 stable release
   - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
   - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
   - Linux Kernel 4.9.60
- 
+
 * Bug fixes and minor changes
   - Increased timeout for VM boot startup to 2 minutes.
 
@@ -578,7 +578,7 @@ We did not distribute a 1.12.4 stable release
 * New
   - VM entirely built with Linuxkit
   - Experimental support for Microsoft Linux Containers On Windows, on Windows 10 RS3.
-  
+
 
 ### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
 
@@ -876,7 +876,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 **New**
 
 - Introduce Docker Community Edition
-- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature will be rolled out to all users progressively.
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is being rolled out to all users progressively.
 
 **Upgrades**
 
@@ -1182,7 +1182,7 @@ dialogs](/docker-for-windows/index.md#about-the-docker-windows-containers-specif
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1196,7 +1196,7 @@ work. Some insider builds may not work.
 **New**
 
 - Restore the VM's configuration when it was changed by the user
-- Overlay2 is now the default storage driver. After a factory reset overlay2 will automatically be used
+- Overlay2 is now the default storage driver. After a factory reset overlay2 is automatically used
 - Detect firewall configuration that might block the file sharing
 - Send more GUI usage statistics to help us improve the product
 
@@ -1218,7 +1218,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1257,7 +1257,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1295,7 +1295,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1303,11 +1303,11 @@ work. Some insider builds may not work.
 
 **New**
 
-* Basic support for Windows containers. On Windows 10 build >= 14372, a switch in the `systray` icon will change which daemon (Linux or Windows) the Docker CLI talks to
+* Basic support for Windows containers. On Windows 10 build >= 14372, a switch in the `systray` icon changes which daemon (Linux or Windows) the Docker CLI talks to
 
 * To support trusted registry transparently, all trusted CAs (root or intermediate) on the Windows host are automatically copied to Moby
 
-* `Reset Credentials` will also unshare the shared drives
+* `Reset Credentials` also unshares the shared drives
 
 * Logs are now rotated every day
 
@@ -1328,7 +1328,7 @@ work. Some insider builds may not work.
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1348,13 +1348,13 @@ work. Some insider builds may not work.
 
 * Only UTF-8 passwords are supported for host filesystem sharing
 
-* Docker will automatically disable lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 ### Beta 24 Release (2016-08-23 1.12.1-beta24)
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1369,19 +1369,19 @@ work. Some insider builds may not work.
 
 **Bug fixes and minor changes**
 
-* `slirp`: reduce the number of sockets used by UDP NAT, reduce the probability that NAT rules will time out earlier than expected
+* `slirp`: reduce the number of sockets used by UDP NAT, reduce the probability that NAT rules time out earlier than expected
 
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing.
 
-* Docker will automatically disable lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 ### Beta 23 Release (2016-08-16 1.12.1-rc1-beta23)
 
 >**Important Note**:
 >
-> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
 
 > [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
@@ -1404,7 +1404,7 @@ work. Some insider builds may not work.
 * Fixed password handling for host file system sharing
 * Automatically disable lingering net adapters that prevent Docker from starting or using the network
 * Automatically delete duplicated MobyLinuxVMs on a `reset to factory defaults`
-* Docker will stop asking to import from toolbox after an upgrade
+* Docker stops asking to import from toolbox after an upgrade
 * Docker can now import from toolbox just after hyperV is activated
 * Fixed Moby Diagnostics and Update Kernel
 * Added more debug information to the diagnostics
@@ -1422,7 +1422,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker will automatically disable lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -1430,13 +1430,13 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker will automatically disable lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 
 **New**
 
-* Docker for Windows is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](/docker-for-windows/index.md#download-docker-for-windows).
+* Docker for Windows is now available from 2 channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](/docker-for-windows/index.md#download-docker-for-windows).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 
@@ -1482,7 +1482,7 @@ Unreleased. See Beta 23 for changes.
 
 **New**
 
-* Added an option to opt-out from sending usage statistics (will be available on the future stable channel)
+* Added an option to opt-out from sending usage statistics (only on the Edge channel for now)
 * New error dialog box to upload crash reports
 
 **Upgrades**
@@ -1545,7 +1545,7 @@ Unreleased. See Beta 23 for changes.
 
 **Bug fixes and minor changes**
 
-* Interrupting a `docker build` with Ctrl-C will actually stop the build
+* Interrupting a `docker build` with Ctrl-C actually stops the build
 * The docker API proxy was failing to deal with 1.12 features (health check for, for example)
 * When killing the VM process, ignore when the process is already stopped
 * When stopping the VM, always stop the docker proxy
@@ -1731,7 +1731,7 @@ This Beta release includes some significant changes:
 
 * Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](troubleshoot.md) for more details.
 
-* Logs for the windows service are not aggregated with logs from the GUI. This will be fixed in future versions.
+* Logs for the windows service are not aggregated with logs from the GUI. This is expected to be fixed in future versions.
 
 
 ## Beta 10 Release (2016-05-03 1.11.0-beta10)
@@ -1793,7 +1793,7 @@ are working on a solution.
 **Bug fixes and minor changes**
 
 * Better UI in the ShareDrive window
-* The firewall alert dialog will not come up as often as it was
+* The firewall alert dialog does not come up as often as previously
 * Configured MobyLinux VM with a fixed memory of 2GB
 * User password is no longer stored on the host-side KVP
 * Uninstall shortcut is available in registry
@@ -1818,10 +1818,10 @@ are working on a solution.
 * Allow DNS/DHCP processes to restart on bind error
 * Less destructive migration from Docker Toolbox
 * Improved documentation
-* Better error handling: Moby will restart itself if start takes too long.
+* Better error handling: Moby restarts itself if start takes too long.
 * Kill proxy and exit docker before a new version is installed
 * The application cannot start twice now
-* The proxy will stop automatically when the GUI is not running
+* The proxy stops automatically when the GUI is not running
 * Removed existing proxy firewall rules before starting Moby
 * The application now collects more and better information on crashes and other issues
 * Improved all dialogs and windows
@@ -1836,11 +1836,11 @@ are working on a solution.
 
 **Known issues**
 
-- Settings are now serialized in JSON. This install will lose the current settings.
+- Settings are now serialized in JSON. This install loses the current settings.
 
-- Docker needs to open ports on the firewall. Sometimes, the user will see a firewall alert dialog. The user should allow the ports to be opened.
+- Docker needs to open ports on the firewall. Sometimes, the user sees a firewall alert dialog. The user should allow the ports to be opened.
 
-- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. Users might have to close any Powershell/Cmd windows that were already open before the update to get the new `PATH`. In some cases, users may need to log off and on again.
+- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. Users might need to close any Powershell/Cmd windows that were already open before the update to get the new `PATH`. In some cases, users may need to log off and on again.
 
 **Bug Fixes**
 
@@ -1882,7 +1882,7 @@ are working on a solution.
 
 - Docker needs to open ports on the firewall, which can activate a firewall alert dialog. Users should allow the ports to be opened.
 
-- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. If users have Powershell/Cmd windows already open before the update, they might have to close them to catch the new PATH. In some cases, users will need to log off and on again.
+- The application was upgraded to 64 bits. The installation path changed to `C:\Program Files\Docker\Docker`. If users have Powershell/Cmd windows already open before the update, they might need to close them to catch the new PATH. In some cases, users need to log off and on again.
 
 **Bug Fixes**
 
@@ -1931,7 +1931,7 @@ are working on a solution.
 
 - Display the third party licenses
 - Display the license agreement
-- The application will refuse to start if Hyper-v is not enabled
+- The application refuses to start if Hyper-v is not enabled
 - Rename `console` to `debug console`
 - Remove `machine` from notification
 - Open the feedback forum

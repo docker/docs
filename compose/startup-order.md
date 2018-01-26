@@ -10,7 +10,7 @@ You can control the order of service startup with the
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
-However, Compose will not wait until a container is "ready" (whatever that means
+However, Compose does not wait until a container is "ready" (whatever that means
 for your particular application) - only until it's running. There's a good
 reason for this.
 
@@ -19,9 +19,9 @@ a subset of a much larger problem of distributed systems. In production, your
 database could become unavailable or move hosts at any time. Your application
 needs to be resilient to these types of failures.
 
-To handle this, your application should attempt to re-establish a connection to
+To handle this, design your application to attempt to re-establish a connection to
 the database after a failure. If the application retries the connection,
-it should eventually be able to connect to the database.
+it can eventually connect to the database.
 
 The best solution is to perform this check in your application code, both at
 startup and whenever a connection is lost for any reason. However, if you don't
@@ -31,7 +31,7 @@ script:
 -   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
     [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
     [wait-for](https://github.com/Eficode/wait-for). These are small
-    wrapper scripts which you can include in your application's image and will
+    wrapper scripts which you can include in your application's image to
     poll a given host and port until it's accepting TCP connections.
 
     For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
@@ -48,7 +48,7 @@ script:
           db:
             image: postgres
 
-    >**Tip**: There are limitations to this first solution; e.g., it doesn't verify when a specific service is really ready. If you add more arguments to the command, you'll need to use the `bash shift` command with a loop, as shown in the next example.
+    >**Tip**: There are limitations to this first solution. For example, it doesn't verify when a specific service is really ready. If you add more arguments to the command, use the `bash shift` command with a loop, as shown in the next example.
 
 -   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely

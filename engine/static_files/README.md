@@ -5,7 +5,7 @@ published: false
 Static files dir
 ================
 
-Files you put in /static_files/ will be copied to the web visible /_static/
+Files you put in /static_files/ are copied to the web visible /_static/
 
 Be careful not to override pre-existing static files from the template.
 

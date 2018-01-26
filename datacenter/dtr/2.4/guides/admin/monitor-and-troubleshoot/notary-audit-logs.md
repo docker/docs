@@ -258,8 +258,8 @@ export TOKEN=$(curl --insecure --silent \
 'https://<dtr-url>/auth/token?realm=dtr&service=dtr&scope=repository:<dtr-url>/<repository>:pull' | jq --raw-output .token)
 
 # Get audit logs for all repositories and pretty-print it
-# If you pushed the image less than 60 seconds ago, it's possible that
-# Docker Content Trust won't show any events. Retry the command after a while.
+# If you pushed the image less than 60 seconds ago, Docker Content Trust may not
+# show any events. Retry the command after a while.
 curl --insecure --silent \
 --header "Authorization: Bearer $TOKEN" \
 "https://<dtr-url>/v2/<dtr-url>/<dtr-repo>/_trust/changefeed?records=10&change_id=0" | jq .
