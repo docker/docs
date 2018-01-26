@@ -5,7 +5,6 @@ redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
-- /install/linux/docker-ce/debian/
 title: Get Docker CE for Debian
 toc_max: 4
 ---
