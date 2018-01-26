@@ -25,9 +25,6 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   >
   > Don't forget to click **Set Permissions** as you go through the tabs of each permission set so that you don't lose your settings.
 
-  {% capture superscript-link1 %}[1](#edge-footnote1){: style="vertical-align: super; font-size: smaller;" }{% endcapture %}
-  {% capture superscript-link2 %}[2](#edge-footnote2){: style="vertical-align: super; font-size: smaller;" }{% endcapture %}
-
   <table summary="The minimum user permissions that are required to provision and manage a Docker EE swarm mode cluster for IBM Cloud.">
   <caption>Table 1. The minimum user permissions that are required to provision and manage a Docker EE swarm mode cluster for IBM Cloud.
   </caption>
@@ -49,7 +46,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <li>Manage load balancers</li>
   <li>Manage device monitoring</li>
   <li>Reboot server and view IPMI system information</li>
-  <li>Issue OS Reloads and initial rescue kernel {{ superscript-link1 }} </li>
+  <li>Issue OS Reloads and initial rescue kernel<a href="#edge-footnote1"><sup>1</sup></a></li>
   <li>Manage port control</li>
   </ul>
   </td>
@@ -59,12 +56,12 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <td>Provision, connect, and expose IP addresses.</td>
   <td>
   <ul>
-  <li>Add compute with public network port {{ superscript-link2 }} </li>
+  <li>Add compute with public network port<a href="#edge-footnote2"><sup>2</sup></a></li>
   <li>View bandwidth statistics</li>
   <li>Add IP addresses</li>
   <li>Manage email delivery service</li>
-  <li>Manage network VLAN spanning {{ superscript-link1 }} </li>
-  <li>Manage security groups {{ superscript-link2 }} </li>
+  <li>Manage network VLAN spanning<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage security groups<a href="#edge-footnote2"><sup>2</sup></a></li>
   </ul></td>
   </tr>
   <tr>
@@ -74,16 +71,16 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View CDN bandwidth statistics</li>
   <li>Vulnerability scanning</li>
-  <li>Manage CDN account {{ superscript-link1 }} </li>
-  <li>Manage CDN file transfers {{ superscript-link1 }} </li>
+  <li>Manage CDN account<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage CDN file transfers<a href="#edge-footnote1"><sup>1</sup></a></li>
   <li>View licenses</li>
   <li>Manage DNS, reverse DNS, and WHOIS</li>
   <li>Antivirus/spyware</li>
   <li>Host IDS</li>
-  <li>Manage SSH keys {{ superscript-link1 }} </li>
-  <li>Manage storage {{ superscript-link1 }} </li>
-  <li>View Certificates (SSL) {{ superscript-link1 }} </li>
-  <li>Manage Certificates (SSL) {{ superscript-link1 }} </li>
+  <li>Manage SSH keys<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage storage<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>View Certificates (SSL)<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage Certificates (SSL)<a href="#edge-footnote1"><sup>1</sup></a></li>
   </ul>
   </td>
   </tr>
@@ -94,11 +91,11 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View account summary</li>
   <li>Manage notification subscribers</li>
-  <li>Add/upgrade cloud instances {{ superscript-link1 }} </li>
-  <li>Cancel server {{ superscript-link1 }} </li>
-  <li>Cancel services {{ superscript-link1 }} </li>
-  <li>Add server {{ superscript-link1 }} </li>
-  <li>Add/upgrade services {{ superscript-link1 }} </li>
+  <li>Add/upgrade cloud instances<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Cancel server<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Cancel services<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Add server<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Add/upgrade services<a href="#edge-footnote1"><sup>1</sup></a></li>
   </ul>
   </td>
   </tr></tbody></table>
