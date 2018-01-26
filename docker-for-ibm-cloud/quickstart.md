@@ -104,7 +104,7 @@ Congrats! Your Docker EE for IBM Cloud cluster is provisioning. First, the manag
 
 ## Step 4: Use UCP
 
-Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to help you manage your cluster through a simple interface!
+Check it out: Docker for IBM Cloud uses [Docker Universal Control Plane (UCP)](/datacenter/ucp/2.2/guides/) to help you manage your cluster through a simple web UI!
 
 ### Step 4a: Access UCP
 
@@ -128,7 +128,7 @@ We're almost done! We just need to download the UCP certificate bundle so that y
 
 2. Click **Client Bundles** > **New Client Bundle**. A zip file is generated.
 
-3. In the GUI, you are shown a labeland public key. You can edit the label by clicking the pencil icon and giving it a name, such as _d4ic-ucp_.
+3. In the GUI, you see a label and public key. To edit the label, click the pencil icon and give it a name, such as _d4ic-ucp_.
 
 4. In a terminal, navigate and unzip the client bundle:
 

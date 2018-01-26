@@ -6,7 +6,7 @@ title: Set up IBM Cloud Object Storage for Docker Trusted Registry
 
 # Use DTR with Docker EE for IBM Cloud
 
-To use [Docker Trusted Registry (DTR)](docs.docker.com/datacenter/dtr/2.4/guides/) with Docker EE for IBM Cloud, DTR stores images on [IBM Cloud Object Storage (COS)](https://ibm-public-cos.github.io/crs-docs/).
+To use [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/) with Docker EE for IBM Cloud, DTR stores images on [IBM Cloud Object Storage (COS)](https://ibm-public-cos.github.io/crs-docs/).
 
 > COS for DTR enabled by default
 >
@@ -239,7 +239,7 @@ Verify that DTR is set up properly by [pulling and pushing an image](/datacenter
 
 3. For the object storage **Account Name** that you want to delete, click the cancel icon.
 
-   > Tip to find your object storage account name
+   > Find your object storage account name
    >
    > You can see the name of the swarm associated with the object storage account in the description field.
    > Alternatively, you can find the object storage account name for your swarm by running `bx d4ic show --swarm-name my_swarm --sl-user user.name.1234567 --sl-api-key api_key`.
