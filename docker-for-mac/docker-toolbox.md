@@ -38,37 +38,36 @@ bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
 
 Here are some key points to know about Docker for Mac before you get started:
 
-* Docker for Mac does not use VirtualBox, but rather
-  [HyperKit](https://github.com/docker/HyperKit/), a lightweight macOS
-  virtualization solution built on top of Hypervisor.framework in macOS 10.10
-  Yosemite and higher.
+* Docker for Mac uses
+  [HyperKit](https://github.com/docker/HyperKit/) instead of Virtual Box.
+  Hyperkit is a lightweight macOS virtualization solution built on top of
+  Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
-* Installing Docker for Mac does not affect machines you created with Docker
-  Machine. The install offers to copy containers and images from your local
-  `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If
-  chosen, content from `default` is copied to the new Docker for Mac HyperKit
-  VM, and your original `default` machine is kept as is.
+* When you install Docker for Mac, machines created with Docker Machine are
+  not affected. The Docker for Mac detects and offers to copy containers and
+  images from your local `default` machine (if one exists) to the new
+  Docker for Mac HyperKit VM. If you choose to do this, the image is copied,
+  but the original `default` machine is still kept exactly as it was.
 
-* The Docker for Mac application does not use `docker-machine` to provision that
-  VM; but rather creates and manages it directly.
+* Docker for Mac application does not use `docker-machine` to provision
+  the Hyperkit-based VM it uses. The Docker Engine API is exposed on a
+  socket available to the Mac host at `/var/run/docker.sock`. This is the
+  default location Docker and Docker Compose clients use to connect to
+  the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
+  on your Mac.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine
-  Linux, running Docker Engine. It exposes the docker API on a socket in
-  `/var/run/docker.sock`. Since this is the default location where `docker`
-  looks if no environment variables are set, you can start using `docker` and
-  `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
 ![Docker for Mac Install](images/docker-for-mac-install.png)
 
-With Docker for Mac, you get only one VM, and you don't manage it. It is managed
-by the Docker for Mac application, which includes autoupdate to update the
-client and server versions of Docker.
+With Docker for Mac, you only get (and only usually need) one VM, managed by Docker
+for Mac. Docker for Mac automatically upgrades the Docker client and
+daemon when updates are available.
 
-If you need several VMs and want to manage the version of the Docker client or
-server you are using, you can continue to use `docker-machine`, on the same
-machine, as described in [Docker Toolbox and Docker for Mac
+If you do need multiple VMs, such as when testing multi-node swarms, you can
+continue to use Docker Machine, which operates outside the scope of Docker for
+Mac. See [Docker Toolbox and Docker for Mac
 coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
 
