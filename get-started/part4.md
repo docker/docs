@@ -333,8 +333,11 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 ### Deploy the app on the swarm manager
 
 Now that you have `myvm1`, you can use its powers as a swarm manager to
-deploy your app by using the same `docker stack deploy` command you used in part
-3 to `myvm1`, and your local copy of `docker-compose.yml.`
+deploy your app by using the same `docker stack deploy` command you used in part 
+3 to `myvm1`, and your local copy of `docker-compose.yml.`. This command may take a few seconds
+to complete and the deployment takes some time to be available. Use the
+`docker service ps <service_name>` command on a swarm manager to verify that
+all services have been redeployed. 
 
 You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
@@ -344,7 +347,7 @@ sure you are in the same directory as before, which includes the
 
 Just like before, run the following command to deploy the app on `myvm1`.
 
-```
+```bash
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
@@ -355,7 +358,7 @@ Now you can use the same [docker commands you used in part
 that the services (and associated containers) have been distributed between
 both `myvm1` and `myvm2`.
 
-```
+```bash
 $ docker stack ps getstartedlab
 
 ID            NAME                  IMAGE                   NODE   DESIRED STATE
