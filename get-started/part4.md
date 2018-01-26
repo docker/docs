@@ -15,7 +15,7 @@ description: Learn how to create clusters of Dockerized machines.
 [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md), but on Linux systems you need to
 [install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, as well as Windows 10 Home, use
-[Docker Toolbox](https://docs.docker.com/toolbox/overview.md).
+[Docker Toolbox](/toolbox/overview.md).
 
 - Read the orientation in [Part 1](index.md).
 

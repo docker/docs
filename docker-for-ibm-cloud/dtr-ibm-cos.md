@@ -5,7 +5,7 @@ title: Set up IBM Cloud Object Storage for Docker Trusted Registry
 ---
 
 # Use DTR with Docker EE for IBM Cloud
-To use [Docker Trusted Registry (DTR)](docs.docker.com/datacenter/dtr/2.4/guides/) with Docker EE for IBM Cloud, configure DTR to store images on [IBM Cloud Object Storage (COS)](https://ibm-public-cos.github.io/crs-docs/).
+To use [Docker Trusted Registry (DTR)](/datacenter/dtr/2.4/guides/) with Docker EE for IBM Cloud, configure DTR to store images on [IBM Cloud Object Storage (COS)](https://ibm-public-cos.github.io/crs-docs/).
 
 Your DTR files are stored in "buckets", and users have permissions to read, write, and delete files from those buckets. When you integrate DTR with IBM Cloud Object Storage, DTR sends all read and write operations to the COS bucket so that the images are persisted there.
 

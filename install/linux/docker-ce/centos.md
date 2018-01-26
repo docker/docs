@@ -1,32 +1,38 @@
 ---
-description: Instructions for installing Docker CE on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
+description: Instructions for installing Docker CE on CentOS
+keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
-- /engine/installation/fedora/
-- /engine/installation/linux/fedora/
-title: Get Docker CE for Fedora
+- /engine/installation/centos/
+- /engine/installation/linux/docker-ce/centos/
+title: Get Docker CE for CentOS
 toc_max: 4
 ---
 
-To get started with Docker CE on Fedora, make sure you
+To get started with Docker CE on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
-[install Docker](#install-docker).
+[install Docker](#install-docker-ce).
 
 ## Prerequisites
 
 ### Docker EE customers
 
-Docker EE is not supported on Fedora. For a list of supported operating systems
-and distributions for different Docker editions, see
-[Docker variants](/engine/installation/#docker-variants).
+To install Docker Enterprise Edition (Docker EE), go to
+[Get Docker EE for CentOS](/install/linux/docker-ee/centos/)
+**instead of this topic**.
+
+To learn more about Docker EE, see
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Fedora versions:
+To install Docker CE, you need a maintained version of CentOS 7. Archived
+versions aren't supported or tested.
 
-- 25
-- 26
-- 27
+The `centos-extras` repository must be enabled. This repository is enabled by
+default, but if you have disabled it, you need to
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+
+The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
 
@@ -34,14 +40,13 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them, along with associated dependencies.
 
 ```bash
-$ sudo dnf remove docker \
+$ sudo yum remove docker \
                   docker-common \
                   docker-selinux \
-                  docker-engine-selinux \
                   docker-engine
 ```
 
-It's OK if `dnf` reports that none of these packages are installed.
+It's OK if `yum` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
@@ -66,18 +71,21 @@ You can install Docker CE in different ways, depending on your needs:
 ### Install using the repository
 
 Before you install Docker CE for the first time on a new host machine, you need
-to set up the Docker repository. Afterward, you can install and update Docker CE
+to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/fedora" %}
+{% assign download-url-base = "https://download.docker.com/linux/centos" %}
 
-1.  Install the `dnf-plugins-core` package which provides the commands to manage
-    your DNF repositories from the command line.
+1.  Install required packages. `yum-utils` provides the `yum-config-manager`
+    utility, and `device-mapper-persistent-data` and `lvm2` are required by the
+    `devicemapper` storage driver.
 
     ```bash
-    $ sudo dnf -y install dnf-plugins-core
+    $ sudo yum install -y yum-utils \
+      device-mapper-persistent-data \
+      lvm2
     ```
 
 2.  Use the following command to set up the **stable** repository. You always
@@ -85,7 +93,7 @@ from the repository.
     **edge** or **test** repositories as well.
 
     ```bash
-    $ sudo dnf config-manager \
+    $ sudo yum-config-manager \
         --add-repo \
         {{ download-url-base }}/docker-ce.repo
     ```
@@ -95,25 +103,25 @@ from the repository.
     by default. You can enable them alongside the stable repository.
 
     ```bash
-    $ sudo dnf config-manager --set-enabled docker-ce-edge
+    $ sudo yum-config-manager --enable docker-ce-edge
     ```
 
     ```bash
-    $ sudo dnf config-manager --set-enabled docker-ce-test
+    $ sudo yum-config-manager --enable docker-ce-test
     ```
 
     You can disable the **edge** or **test** repository by running the
-    `dnf config-manager` command with the `--disable` flag. To re-enable it, use
+    `yum-config-manager` command with the `--disable` flag. To re-enable it, use
     the `--enable` flag. The following command disables the **edge** repository.
 
     ```bash
-    $ sudo dnf config-manager --set-disabled docker-ce-edge
+    $ sudo yum-config-manager --disable docker-ce-edge
     ```
 
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
 
-    [Learn about **stable** and **edge** channels](/engine/installation/).
+    [Learn about **stable** and **edge** builds](/install/index.md).
 
 #### Install Docker CE
 
@@ -121,22 +129,23 @@ from the repository.
     specific version.
 
     ```bash
-    $ sudo dnf install docker-ce
+    $ sudo yum install docker-ce
     ```
+
+    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > or updating without specifying a version in the `yum install` or
+    > `yum update` command always installs the highest possible version,
+    > which may not be appropriate for your stability needs.
+    {:.warning}
 
     If this is the first time you are installing a package from a recently added
     repository, you are prompted to accept the GPG key, and
-    the key's fingerprint is shown. Verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
-    key.
+    the key's fingerprint is shown. Verify that the fingerprint is
+    correct, and if so, accept the key. The fingerprint should match
+    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
 
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
-    {:.warning-vanilla}
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
 
 2.  On production systems, you should install a specific version of Docker CE
     instead of always using the latest. List the available versions. This
@@ -144,30 +153,35 @@ from the repository.
     highest to lowest, and is truncated.
 
     ```bash
-    $ dnf list docker-ce  --showduplicates | sort -r
+    $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64  {{ site.docker_ce_stable_version }}.0.fc26                              docker-ce-stable
+    docker-ce.x86_64            {{ site.docker_ce_stable_version }}.ce-1.el7.centos             docker-ce-stable
     ```
 
     The contents of the list depend upon which repositories are enabled, and
-    are specific to your version of Fedora (indicated by the `.fc26` suffix
+    are specific to your version of CentOS (indicated by the `.el7` suffix
     on the version, in this example). Choose a specific version to install. The
-    second column is the version string. The third column is the repository
-    name, which indicates which repository the package is from and by extension
-    its stability level. To install a specific version, append the version
-    string to the package name and separate them by a hyphen (`-`):
+    second column is the version string. You can use the entire version string,
+    but **you need to include at least to the first hyphen**. The third column
+    is the repository name, which indicates which repository the package is from
+    and by extension its stability level. To install a specific version, append
+    the version string to the package name and separate them by a hyphen (`-`).
+
+    > **Note**: The version string is the package name plus the version up to
+    > the first hyphen. In the example above, the fully qualified package name
+    > is `docker-ce-17.06.1.ce`.
 
     ```bash
-    $ sudo dnf -y install docker-ce-<VERSION>
+    $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
     ```
 
-4.  Start Docker.
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -178,8 +192,7 @@ from the repository.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to
-[Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
+commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -193,21 +206,25 @@ to install.
 
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker CE.
+a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
-    version of Fedora. Go to `x86_64/stable/Packages/`
+1.  Go to
+    [{{ download-url-base }}/7/x86_64/stable/Packages/]({{ download-url-base }}/7/x86_64/stable/Packages/)
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the above URL to `edge`.
+    > [Learn about **stable** and **edge** channels](/install/index.md).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
-    $ sudo dnf -y install /path/to/package.rpm
+    $ sudo yum install /path/to/package.rpm
     ```
+
+    Docker is installed but not started. The `docker` group is created, but no
+    users are added to the group.
 
 3.  Start Docker.
 
@@ -215,7 +232,7 @@ a new file each time you want to upgrade Docker CE.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -226,15 +243,15 @@ a new file each time you want to upgrade Docker CE.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md) to allow
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
 #### Upgrade Docker CE
 
 To upgrade Docker CE, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), using `dnf -y upgrade`
-instead of `dnf -y install`, and pointing to the new file.
+[installation procedure](#install-from-a-package), using `yum -y upgrade`
+instead of `yum -y install`, and pointing to the new file.
 
 {% include install-script.md %}
 
@@ -243,7 +260,7 @@ instead of `dnf -y install`, and pointing to the new file.
 1.  Uninstall the Docker package:
 
     ```bash
-    $ sudo dnf remove docker-ce
+    $ sudo yum remove docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
@@ -258,6 +275,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).

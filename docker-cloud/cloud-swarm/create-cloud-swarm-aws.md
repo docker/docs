@@ -37,7 +37,7 @@ provider.
 
 4.  Select Amazon Web Services as the service provider and select a channel (`Stable` or `Edge`) from the drop-down menu.
 
-    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](/install/) and the [Docker CE Edge](/edge/) topics.
 
     In this example, we use the `Stable` channel.
 
@@ -54,7 +54,7 @@ provider.
 
     ![](images/aws-create-swarm-3-region.png)
 
-    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](https://docs.docker.com/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
+    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
 
 6.  Choose how many swarm managers and swarm worker nodes to deploy.
 

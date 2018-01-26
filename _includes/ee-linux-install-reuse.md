@@ -330,7 +330,7 @@ You must delete any edited configuration files manually.
 
 {% elsif section == "linux-install-nextsteps" %}
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).
 

@@ -195,7 +195,7 @@ write-ahead logging (WAL) with SQLite, as described in
 
 If possible, avoid using shared drives for volume mounts on the host with network paths, and
 instead mount on the MobyVM, or create a [data
-volume](https://docs.docker.com/engine/tutorials/dockervolumes.md#data-volumes)
+volume](/engine/tutorials/dockervolumes.md#data-volumes)
 (named volume) or [data
 container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
 See also, the [volumes key under service

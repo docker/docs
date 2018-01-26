@@ -55,7 +55,7 @@ your work on that project's `vnext` branch.** These branches were created by
 cloning `master` and then importing a project's `master` branch's docs into it
 (at the time of the migration), in a way that preserved the commit history. When
 a project has a release, its `vnext` branch will be merged into `master` and your
-work will be visible on docs.docker.com.
+work will be visible on [https://docs.docker.com/](/).
 
 The following `vnext` branches currently exist:
 
@@ -122,7 +122,7 @@ know.
 ## Style guide
 
 If you have questions about how to write for Docker's documentation, have a look
-at the [style guide](https://docs.docker.com/opensource/doc-style/). The style
+at the [style guide](/opensource/doc-style/). The style
 guide provides guidance about grammar, syntax, formatting, styling, language, or
 tone. If something isn't clear in the guide, submit an issue to let us
 know or submit a pull request to help us improve it.

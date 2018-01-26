@@ -4,7 +4,7 @@ The files in this directory are stub files which include the file
 `/_includes/cli.md`, which parses YAML files generated from the
 [`docker/docker`](https://github.com/moby/moby) repository. The YAML files
 are parsed into output files like
-[https://docs.docker.com/engine/reference/commandline/build/](https://docs.docker.com/engine/reference/commandline/build/).
+[/engine/reference/commandline/build/](/engine/reference/commandline/build/).
 
 ## How the output is generated
 

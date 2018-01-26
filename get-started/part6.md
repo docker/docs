@@ -7,7 +7,7 @@ description: Deploy your app to production using Docker CE or EE.
 
 ## Prerequisites
 
-- [Install Docker version 1.13 or higher](/engine/installation/).
+- [Install Docker](/install/index.md).
 - Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
 - Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
 - Read the orientation in [Part 1](index.md).
@@ -310,7 +310,7 @@ essentially involves two steps:
 1. [Get Docker Enterprise Edition for your server's OS from Docker Store](https://store.docker.com/search?offering=enterprise&type=edition){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Get Docker EE for your OS');"}.
 2. Follow the [instructions to install Datacenter on your own host](/datacenter/install/linux/){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'BYOH setup guide');"}.
 
-> **Note**: Running Windows containers? View our [Windows Server setup guide](/engine/installation/windows/docker-ee.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
+> **Note**: Running Windows containers? View our [Windows Server setup guide](/install/windows/docker-ee.md){: onclick="ga('send', 'event', 'Get Started Referral', 'Enterprise', 'Windows Server setup guide');"}.
 
 {{ enterprisedeployapp }}
 {% endcapture %}

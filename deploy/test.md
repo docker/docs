@@ -25,9 +25,9 @@ enter your Lorem Ipsum value for {{ site.tablabels[tab.version] }}, then
 click **Save**.
 
 {% if include.version=="ucp-3.0" %}
-![Image number 1](https://docs.docker.com/datacenter/ucp/2.2/guides/images/monitor-ucp-0.png)
+![Image number 1](/datacenter/ucp/2.2/guides/images/monitor-ucp-0.png)
 {% elsif include.version=="ucp-2.2" %}
-![Image number 2](https://docs.docker.com/datacenter/ucp/2.2/guides/images/monitor-ucp-1.png)
+![Image number 2](/datacenter/ucp/2.2/guides/images/monitor-ucp-1.png)
 {% endif %}
 {% endif %}
 
