@@ -54,8 +54,8 @@ Here are some key points to know about Docker for Mac before you get started:
 
 * At installation time, Docker for Mac provisions an HyperKit VM based on Alpine
   Linux, running Docker Engine. It exposes the docker API on a socket in
-  `/var/run/docker.sock`. Since this is the default location where `docker` will
-  look if no environment variables are set, you can start using `docker` and
+  `/var/run/docker.sock`. Since this is the default location where `docker`
+  looks if no environment variables are set, you can start using `docker` and
   `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
@@ -101,17 +101,18 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
           $ env | grep DOCKER
 
   If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all
-  DOCKER environment variables at once. (This will not work in other shells such
-  as `zsh`; you will need to unset each variable individually.)
+  DOCKER environment variables at once. (This does not work in other shells such
+  as `zsh`; unset each variable individually.)
 
 > **Note**: If you have a shell script as part of your profile that
 > sets these `DOCKER` environment variables automatically each time
-> you open a command window, then you will need to unset these each
+> you open a command window, then you need to unset these each
 > time you want to use Docker for Mac.
 
 > If you install Docker for Mac on a machine where Docker Toolbox is installed..
 >
-> Docker for Mac will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
+> Docker for Mac replaces the `docker` and `docker-compose` command lines in
+> `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
 See also [Unset environment variables in the current
@@ -125,7 +126,7 @@ you want to use Docker for Mac, make sure all DOCKER environment variables are
 unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use
 one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval
 $(docker-machine env default)` (or the name of the machine you want to target).
-This will switch the current command shell to talk to the specified Toolbox
+This switches the current command shell to talk to the specified Toolbox
 machine.
 
 This setup is represented in the following diagram.
@@ -184,21 +185,22 @@ machines. One solution is to use a version manager like
 
 ## Migrating from Docker Toolbox to Docker for Mac
 
-Docker for Mac does not proposeToolbox image migration as part of the Docker for
-Mac (D4M for short) installer since version 18.01.0.  Migrating existing Docker
-Toolbox images can be done with the scripts described below.  (Note that this
-migration cannot merge images from both D4M and Toolbox: any existing D4M image
-will be *replaced* by the Toolbox images.)
+Docker for Mac does not propose Toolbox image migration as part of the Docker
+for Mac installer since version 18.01.0.  You can migrate existing Docker
+Toolbox images with the scripts described below. (Note that this migration
+cannot merge images from both Docker and Toolbox: any existing Docker image are
+*replaced* by the Toolbox images.)
 
-In order to run these instructions you need to now how to run shell
-commands in a terminal.  You also need a working `qemu-img`; it is
-part of the qemu package in both MacPorts and Brew:
+To run these instructions you need to now how to run shell commands in a
+terminal. You also need a working `qemu-img`; it is part of the qemu package in
+both MacPorts and Brew:
+
 ```sh
 $ brew install qemu  # or sudo port install qemu
 ```
 
-First, find out where are you Toolbox disk images.  It is very likely that you
-have just one: `~/.docker/machine/machines/default/disk.vmdk`.
+First, find your Toolbox disk images. You probably have just one:
+`~/.docker/machine/machines/default/disk.vmdk`.
 
 ```sh
 $ vmdk=~/.docker/machine/machines/default/disk.vmdk
@@ -206,7 +208,8 @@ $ file "$vmdk"
 /Users/akim/.docker/machine/machines/default/disk.vmdk: VMware4 disk image
 ```
 
-Second, find out the location and format of the disk image used by your D4M.
+Second, find out the location and format of the disk image used by your Docker
+for Mac.
 
 ```sh
 $ settings=~/Library/Group\ Containers/group.com.docker/settings.json
@@ -224,8 +227,8 @@ Then:
 ```sh
 $ qemu-img convert -p -f vmdk -O qcow2 -o lazy_refcounts=on "$vmdk" "$dimg"
 ```
-- if your format is raw, run the following command.  If you are short on disk
-space, it is likely to fail.
+- if your format is raw, run the following command. If you are short on disk
+  space, it is likely to fail.
 ```sh
 $ qemu-img convert -p -f vmdk -O raw "$vmdk" "$dimg"
 ```
