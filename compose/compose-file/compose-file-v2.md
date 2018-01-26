@@ -916,6 +916,35 @@ Example usage:
       app_net:
         driver: bridge
 
+#### priority
+
+Specify a priority to indicate in which order Compose should connect the
+service's containers to its networks. If unspecified, the default value is `0`.
+
+In the following example, the `app` service connects to `app_net_1` first
+as it has the highest priority. It then connect to `app_net_3`, then
+`app_net_2`, which uses the default priority value of `0`.
+
+    version: '2.3'
+    services:
+      app:
+        image: busybox
+        command: top
+        networks:
+          app_net_1:
+            priority: 1000
+          app_net_2:
+
+          app_net_3:
+            priority: 100
+    networks:
+      app_net_1:
+      app_net_2:
+      app_net_3:
+
+> **Note:** If multiple networks have the same priority, the connection order
+> is undefined.
+
 ### pid
 
     pid: "host"
@@ -963,6 +992,19 @@ port (an ephemeral host port is chosen).
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
      - "12400-12500:1240"
+
+### runtime
+
+> [Added in version 2.3 file format](compose-versioning.md#version-23)
+
+Specify which runtime to use for the service's containers. Default runtime
+and available runtimes are listed in the output of `docker info`.
+
+    web:
+      image: busybox:latest
+      command: true
+      runtime: runc
+
 
 ### scale
 
