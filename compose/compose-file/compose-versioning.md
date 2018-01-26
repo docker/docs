@@ -228,6 +228,7 @@ Introduces the following additional parameters:
   [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
+- [`runtime`](compose-file-v2.md#runtime) for service definitions
 
 ### Version 3
 
