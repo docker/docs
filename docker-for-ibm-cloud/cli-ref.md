@@ -47,7 +47,7 @@ $ bx d4ic create --sl-user SOFTLAYER_USERNAME --sl-api-key SOFTLAYER_API_KEY --s
 | `--hardware` | If "dedicated" then the nodes are created on hosts with compute instances in the same account. | Shared | Optional |
 | `--manager-machine-type` | The machine type of the manager nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | b1c.4x16 | Optional |
 | `--worker-machine-type` | The machine type of the worker nodes: u1c.1x2, u1c.2x4, b1c.4x16, b1c.16x64, b1c.32x128, or b1c.56x242. Higher machine types cost more, but deliver better performance: for example, u1c.2x4 is 2 cores and 4 GB memory, and b1c.56x242 is 56 cores and 242 GB memory. | u1c.1x2 | Optional |
-| `--disable-dtr-storage` | By default, the `bx d4ic create` command orders an IBM Cloud Swift API Object Storage account and creates a container named `dtr-container`. If you want to prevent this, include the `--disable-dtr-storage`. Note that you must then [set up IBM Cloud Object Storage](dtr-ibm-cos.md) yourself so that DTR works with your cluster. | Enabled by default. | Optional |
+| `--disable-dtr-storage` | By default, the `bx d4ic create` command orders an IBM Cloud Swift API Object Storage account and creates a container named `dtr-container`. If you want to prevent this, include the `--disable-dtr-storage`. Then, [set up IBM Cloud Object Storage](dtr-ibm-cos.md) yourself so that DTR works with your cluster. | Enabled by default. | Optional |
 | `--version` | The Docker EE version of the created cluster. For the beta, only the default version is available. | Default version | Optional |
 
 
