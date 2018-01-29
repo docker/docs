@@ -7,7 +7,7 @@ keywords: storage, persistence, data persistence, volumes, mounts, bind mounts
 It is possible to store data within the writable layer of a container, but there
 are some downsides:
 
-- The data don't persist when that container is no longer running, and it can be
+- The data doesn't persist when that container is no longer running, and it can be
   difficult to get the data out of the container if another process needs it.
 - A container's writable layer is tightly coupled to the host machine
   where the container is running. You can't easily move the data somewhere else.
