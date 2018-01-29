@@ -76,7 +76,7 @@ your new tag:
 
 
 In this example, if a tag in the `docker/website-dev` doesn't have
-vulnerabilities and the tag name contains `stable`, we'll automatically
+vulnerabilities and the tag name contains `stable`, we automatically
 push that image to `docker/website-prod` and tag it with the timestamp of
 when the image was promoted.
 

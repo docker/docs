@@ -18,7 +18,7 @@ the telemetry plugin does not collect or attempt to send any information to Dock
 If you do not wish to send any usage data to Docker Inc., you can disable the plugin,
 either using the Docker CLI or using Universal Control Plane.
 
- > **Note**: If you're using Docker EE Standard or Advanced with Universal Control Plane, use Universal Control Plane (UCP) to enable and disable metrics. Only use the CLI if you do not have UCP. UCP will re-enable the telemetry plugin for hosts where it was disabled with the CLI.
+ > **Note**: If you're using Docker EE Standard or Advanced with Universal Control Plane, use Universal Control Plane (UCP) to enable and disable metrics. Only use the CLI if you do not have UCP. UCP re-enables the telemetry plugin for hosts where it was disabled with the CLI.
 
 ### Use the Docker CLI
 
@@ -53,7 +53,7 @@ Docker by going to **Admin Settings** and choosing **Usage**.
 ![UCP admin settings Usage defaults](images/usage-defaults.png){: .with-border}
 
 To disable the telemetry plugin, disable all three options and click **Save**.
-Enabling either or both of the top two options will enable the telemetry plugin.
+Enabling either or both of the top two options enable the telemetry plugin.
 You can find out more about an individual option by clicking the **?** icon.
 
 > **Note**: If API usage statistics are enabled, Docker only gathers aggregate stats about what API endpoints are used. API payload contents are not collected.

@@ -83,8 +83,8 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 | **UNREACHABLE**        | The swarm is sending heartbeat pings and Docker Cloud is receiving them, but Cloud cannot connect to the swarm. | Remove |
 | **UNAVAILABLE**        | Docker Cloud is not receiving heartbeats from the swarm. | Remove |
 | **TERMINATING**        | Docker Cloud is in the process of destroying this swarm. | None |
-| **TERMINATED**        | The swarm has been destroyed and will be removed from the list in 5 minutes. | None |
-| **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm will be removed from list in 5 minutes. | None |
+| **TERMINATED**        | The swarm has been destroyed and is removed from the list in 5 minutes. | None |
+| **REMOVED**        | The swarm was unregistered from Docker Cloud but not destroyed. The swarm is removed from list in 5 minutes. | None |
 | **FAILED**        | Provisioning failed. | Remove |
 
 ### Understanding and resolving problems
@@ -93,8 +93,9 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 
 * If a swarm is UNAVAILABLE check the swarm from your infrastructure provider. The manager node(s) may be unresponsive or the server proxy service might not be running. You can SSH into an UNAVAILABLE swarm.
 
-* Removing a swarm only removes the swarm from the interface in Docker Cloud (i.e., [unregisters](#unregister-a-swarm-from-docker-cloud) it). It does not
-change the swarm itself or any processes running on the swarm.
+* Removing a swarm only removes the swarm from the interface in Docker Cloud, effectively
+  [unregistering](#unregister-a-swarm-from-docker-cloud) it. It does not
+  change the swarm itself or any processes running on the swarm.
 
 ## Unregister a swarm from Docker Cloud
 

@@ -1,6 +1,6 @@
 ---
 description: Automating content push pulls with trust
-keywords: trust, security, docker,  documentation, automation
+keywords: trust, security, docker, documentation, automation
 title: Automation with content trust
 ---
 
@@ -35,7 +35,7 @@ latest: digest: sha256:d149ab53f871 size: 3355
 Signing and pushing trust metadata
 ```
 
-When working directly with the Notary client, it will use its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
+When working directly with the Notary client, it uses its [own set of environment variables](/notary/reference/client-config.md#environment-variables-optional).
 
 ## Building with content trust
 

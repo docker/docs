@@ -45,7 +45,7 @@ backup file under /config/backup.tar, and run the restore command with the
 
 Notes:
 
-  * Please run `uninstall-ucp` before attempting the restore operation on an
+  * Run `uninstall-ucp` before attempting the restore operation on an
     existing UCP cluster.
 
   * If your swarm-mode cluster has lost quorum and the original set of managers
@@ -64,6 +64,6 @@ Notes:
 |`--jsonlog`|Produce json formatted output for easier parsing|
 |`--interactive, i`|Run in interactive mode and prompt for configuration values|
 |`--passphrase`|Decrypt the backup tar file with the provided passphrase|
-|`--san`|Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)|
+|`--san`|Add subject alternative names to certificates. For example, ``--san www1.acme.com --san www2.acme.com`|
 |`--host-address`|The network address to advertise to other nodes. Format: IP address or network interface name|
 |`--unlock-key`|The unlock key for this swarm-mode cluster, if one exists.|

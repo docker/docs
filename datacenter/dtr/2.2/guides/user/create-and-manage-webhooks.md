@@ -27,15 +27,14 @@ The webhook events you can subscribe to are:
 
 - Security scanner update complete
 
-In order to subscribe to an event you need to be at least an admin of the
-particular repository (for repository events) or namespace
-(for namespace events). A global administrator can subscribe to any event.
+You need to be at least an admin of the repository or namespace in question to
+subscribe to an event for the repository or namespace. A global administrator can subscribe to any event.
 For example, a user must be an admin of repository "foo/bar" to subscribe to
 its tag push events.
 
 ## Subscribing to events
 
-In order to subscribe to events you must send an API query to
+To subscribe to events you must send an API query to
 `/api/v0/webhooks` with the following payload:
 
 ```
@@ -110,12 +109,12 @@ fake data. To send a test payload, fire a `POST` request to
 ```
 
 Change `type` to the event type that you want to receive. DTR will then send
-an example payload to the endpoint specified. Note that the example
+an example payload to the endpoint specified. The example
 payload sent is always the same.
 
 ## Content structure
 
-Note that comments (`// here`) are added for documentation only; they are not
+Comments (`// here`) are added for documentation only; they are not
 present in POST payloads.
 
 ### Repository event content structure
@@ -307,7 +306,6 @@ To delete a webhook subscription send a `DELETE` request to
 `/api/v0/webhooks/{id}`, replacing `{id}` with the webhook subscription ID
 which you would like to delete.
 
-Note that in order to delete a subscription you must be either a system
-administrator or an administrator for the resource which the payload subscribes
-to. For example, as a normal user you can only delete subscriptions for
-repositories which you are an admin of.
+Only a system administrator or an administrator for the resource which the
+payload subscribes to can delete a subscription. As a normal user, you can only
+delete subscriptions for repositories which you administer.

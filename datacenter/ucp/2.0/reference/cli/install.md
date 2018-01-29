@@ -32,7 +32,7 @@ When installing UCP you can customize:
 
 * The license used by UCP, by bind-mounting the file at
   '/config/docker_subscription.lic' in the tool.
-  E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
+  For example, `-v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic`
 
 * The initial users, permissions and settings of the system, using a backup of
   an existing UCP cluster. Bind-mount the backup file under
@@ -58,7 +58,7 @@ firewall:
 |`--interactive, i`|Run in interactive mode and prompt for configuration values|
 |`--admin-username`|The UCP administrator username|
 |`--admin-password`|The UCP administrator password|
-|`--san`|Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)|
+|`--san`|Add subject alternative names to certificates. For example, `-san www1.acme.com --san www2.acme.com`|
 |`--host-address`|The network address to advertise to other nodes. Format: IP address or network interface name|
 |`--swarm-port`|Port for the Docker Swarm manager. Used for backwards compatibility|
 |`--controller-port`|Port for the web UI and API|

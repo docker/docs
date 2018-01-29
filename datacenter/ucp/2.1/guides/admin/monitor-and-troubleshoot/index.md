@@ -54,7 +54,7 @@ If an administrator client certificate is used as a TLS client certificate for
 the `_ping` endpoint, a detailed error message is returned if any component is
 unhealthy.
 
-If you're accessing the `_ping` endpoint through a load balancer, you'll have no
+If you're accessing the `_ping` endpoint through a load balancer, you have no
 way of knowing which UCP manager node is not healthy, since any manager node
 might be serving your request. Make sure you're connecting directly to the
 URL of a manager node, and not a load balancer.

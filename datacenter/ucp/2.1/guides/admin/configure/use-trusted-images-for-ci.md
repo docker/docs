@@ -17,8 +17,8 @@ name the account "jenkins". As an admin user logged in to UCP, navigate to "User
 and select "Add User". Create a user with the name "jenkins" and set a strong password.
 
 Next, create a team called "CI" and add the "jenkins" user to this team. All signing
-policy is team based, so if we want only a single user to be able to sign images
-destined to be deployed on the cluster, we must create a team for this one user.
+policy is team based, so if we want only a single user to sign images
+destined to be deployed on the cluster, we create a team for this one user.
 
 ## Set up the signing policy
 
@@ -39,8 +39,9 @@ this user. It is also recommended to change the description associated with the 
 key stored in UCP such that you can identify in the future which key is being used for
 signing.
 
-N.B. each time a user retrieves a new client bundle, a new keypair is generated. It is therefore
-necessary to keep track of a specific bundle that a user chooses to designate as their signing bundle.
+Each time a user retrieves a new client bundle, a new keypair is generated.
+Therefore, you need to keep track of a specific bundle that a user chooses to
+designate as their signing bundle.
 
 Once you have decompressed the client bundle, the only two files you need for the purposes
 of signing are `cert.pem` and `key.pem`. These represent the public and private parts of
@@ -89,33 +90,33 @@ notary -s https://my_notary_server.com -d ~/.docker/trust key rotate my_reposito
 notary -s https://my_notary_server.com -d ~/.docker/trust publish my_repository
 ```
 
-N.B. the `-s` flag provides the server hosting a notary service. If you are operating against
+The `-s` flag provides the server hosting a notary service. If you are operating against
 Docker Hub, this will be `https://notary.docker.io`. If you are operating against your own DTR
 instance, this will be the same hostname you use in image names when running docker commands preceded
 by the `https://` scheme. For example, if you would run `docker push my_dtr:4443/me/an_image` the value
 of the `-s` flag would be expected to be `https://my_dtr:4443`.
 
-N.B. if you are using DTR, the name of the repository should be identical to the full name you use
-in a `docker push` command. If however you use Docker Hub, the name you use in a `docker push`
-must be preceded by `docker.io/`. i.e. if you ran `docker push me/alpine`, you would
-`notary init docker.io/me/alpine`.
+If you use DTR, the name of the repository should be identical to the full name you use
+in a `docker push` command. If you use Docker Hub, the name you use in a `docker push`
+must be preceded by `docker.io/`. For instance, if you ran `docker push me/alpine`, you then
+use `notary init docker.io/me/alpine`.
 
 For brevity, we will exclude the `-s` and `-d` flags from subsequent command, but be aware you
 will still need to provide them for the commands to work correctly.
 
 Now that the repository is initialized, we need to create the delegations for Jenkins. Docker
 Content Trust treats a delegation role called `targets/releases` specially. It considers this
-delegation to contain the canonical list of published images for the repository. It is therefore
-generally desirable to add all users to this delegation with the following command:
+delegation to contain the canonical list of published images for the repository. Therefore,
+add all users to this delegation with the following command:
 
 ```
 notary delegation add my_repository targets/releases --all-paths /path/to/cert.pem
 ```
 
 This solves a number of prioritization problems that would result from needing to determine
-which delegation should ultimately be trusted for a specific image. However, because it
-is anticipated that any user will be able to sign the `targets/releases` role it is not trusted
-in determining if a signing policy has been met. Therefore it is also necessary to create a
+which delegation should ultimately be trusted for a specific image. However, because any user
+can sign the `targets/releases` role it is not trusted
+in determining if a signing policy has been met. Therefore, we also create a
 delegation specifically for Jenkins:
 
 ```

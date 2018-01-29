@@ -9,7 +9,7 @@ image registry like Docker Trusted Registry.
 
 If DTR is using the default configurations or was configured to use
 self-signed certificates, you need to configure your Docker Engine to trust DTR.
-Otherwise, when you try to login or push and pull images to DTR, you'll get an
+Otherwise, when you try to login or push and pull images to DTR, you get an
 error:
 
 ```bash

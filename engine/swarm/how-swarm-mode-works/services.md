@@ -5,7 +5,7 @@ title: How services work
 ---
 
 To deploy an application image when Docker Engine is in swarm mode, you create a
-service. Frequently a service will be the image for a microservice within the
+service. Frequently a service is the image for a microservice within the
 context of some larger application. Examples of services might include an HTTP
 server, a database, or any other type of executable program that you wish to run
 in a distributed environment.
@@ -14,7 +14,7 @@ When you create a service, you specify which container image to use and which
 commands to execute inside running containers. You also define options for the
 service including:
 
-* the port where the swarm will make the service available outside the swarm
+* the port where the swarm makes the service available outside the swarm
 * an overlay network for the service to connect to other services in the swarm
 * CPU and memory limits and reservations
 * a rolling update policy
@@ -76,17 +76,17 @@ Here are a few examples of when a service might remain in state `pending`.
 
 > **Note**: If your only intention is to prevent a service from
 being deployed, scale the service to 0 instead of trying to configure it in
-such a way that it will remain in `pending`.
+such a way that it remains in `pending`.
 
-- If all nodes are paused or drained, and you create a service, it will be
+- If all nodes are paused or drained, and you create a service, it is
   pending until a node becomes available. In reality, the first node to become
-  available will get all of the tasks, so this is not a good thing to do in a
+  available gets all of the tasks, so this is not a good thing to do in a
   production environment.
 
 - You can reserve a specific amount of memory for a service. If no node in the
-  swarm has the required amount of memory, the service will remain in a pending
+  swarm has the required amount of memory, the service remains in a pending
   state until a node is available which can run its tasks. If you specify a very
-  large value, such as 500 GB, the task will be pending forever, unless you
+  large value, such as 500 GB, the task stays pending forever, unless you
   really have a node which can satisfy it.
 
 - You can impose placement constraints on the service, and the constraints may

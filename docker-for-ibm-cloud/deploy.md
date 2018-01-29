@@ -58,7 +58,7 @@ To deploy complex multi-container apps, you can use [distributed application
 bundles](/compose/bundles.md). You can either run `docker deploy` to deploy a
 bundle on your machine over an SSH tunnel, or copy the bundle (for example using
 `scp`) to a manager node, SSH into the manager, and then run `docker deploy` (if
-you have multiple managers, you have to ensure that your session is on one that
+you have multiple managers, ensure that your session is on one that
 has the bundle file).
 
 > SSH into manager

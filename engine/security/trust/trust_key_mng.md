@@ -64,7 +64,8 @@ Docker Content Trust can store and sign with root keys from a Yubikey 4. The
 Yubikey is prioritized over keys stored in the filesystem. When you initialize a
 new repository with content trust, Docker Engine looks for a root key locally. If a
 key is not found and the Yubikey 4 exists, Docker Engine creates a root key in the
-Yubikey 4. Please consult the [Notary documentation](/notary/advanced_usage.md#use-a-yubikey) for more details.
+Yubikey 4. Consult the [Notary documentation](/notary/advanced_usage.md#use-a-yubikey)
+for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 

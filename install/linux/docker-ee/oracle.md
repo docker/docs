@@ -4,6 +4,7 @@ keywords: requirements, installation, oracle, ol, rpm, install, uninstall, upgra
 redirect_from:
 - /engine/installation/oracle/
 - /engine/installation/linux/oracle/
+- /engine/installation/linux/docker-ee/oracle/
 title: Get Docker EE for Oracle Linux
 toc_max: 4
 ---
@@ -37,10 +38,10 @@ Docker EE. On production systems, you must use `direct-lvm` mode, which
 requires one or more dedicated block devices. Fast storage such as solid-state
 media (SSD) is recommended.
 
-> **Docker EE will not install on {{ linux-dist }} with `selinux` enabled!**
+> **Docker EE cannot install on {{ linux-dist }} with `selinux` enabled!**
 >
 > If you have `selinux` enabled and you attempt to install Docker EE 17.06.1,
-> you will get an error that the `container-selinux` package cannot be found.
+> you get an error that the `container-selinux` package cannot be found.
 {:.warning }
 
 ### Uninstall old versions

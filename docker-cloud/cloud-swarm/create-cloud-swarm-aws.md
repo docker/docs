@@ -13,7 +13,7 @@ To create a swarm, you need to give Docker Cloud permission to deploy swarm
 nodes on your behalf in your cloud services provider account.
 
 If you haven't yet linked Docker Cloud to AWS, follow the steps in [Link Amazon Web Services to Docker Cloud](link-aws-swarm.md). Once it's
-linked, it will show up on the **Swarms -> Create** page as a connected service
+linked, it shows up on the **Swarms -> Create** page as a connected service
 provider.
 
 ![](images/aws-creds-cloud.png)
@@ -37,9 +37,9 @@ provider.
 
 4.  Select Amazon Web Services as the service provider and select a channel (`Stable` or `Edge`) from the drop-down menu.
 
-    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](/install/) and the [Docker CE Edge](/edge/) topics.
 
-    In this example, we'll use the `Stable` channel.
+    In this example, we use the `Stable` channel.
 
     ![](images/aws-create-swarm-0.png)
 
@@ -54,7 +54,7 @@ provider.
 
     ![](images/aws-create-swarm-3-region.png)
 
-    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](https://docs.docker.com/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
+    For guidance on setting up a VPC, see [Recommended VPC and subnet setup](/docker-for-aws/faqs/#can-i-use-my-existing-vpc) in the Docker for AWS topics.
 
 6.  Choose how many swarm managers and swarm worker nodes to deploy.
 
@@ -92,7 +92,7 @@ provider.
     when using Docker for AWS. (To learn more, see
     [Why Docker for AWS](/docker-for-aws/why.md).)
 
-    This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
+    This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 
     ![](images/aws-create-swarm-7-list.png)
 

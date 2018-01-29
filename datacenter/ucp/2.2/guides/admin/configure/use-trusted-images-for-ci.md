@@ -17,7 +17,7 @@ name the account "jenkins". As an admin user logged in to UCP, navigate to "User
 and select "Add User". Create a user with the name "jenkins" and set a strong password.
 
 Next, create a team called "CI" and add the "jenkins" user to this team. All signing
-policy is team based, so if we want only a single user to be able to sign images
+policy is team based, so if we want to grant only a single user the ability to sign images
 destined to be deployed on the cluster, we must create a team for this one user.
 
 ## Set up the signing policy
@@ -95,27 +95,27 @@ instance, this will be the same hostname you use in image names when running doc
 by the `https://` scheme. For example, if you would run `docker image push my_dtr:4443/me/an_image` the value
 of the `-s` flag would be expected to be `https://my_dtr:4443`.
 
-If you are using DTR, the name of the repository should be identical to the full name you use
-in a `docker image push` command. If however you use Docker Hub, the name you use in a `docker image push`
-must be preceded by `docker.io/`. i.e. if you ran `docker image push me/alpine`, you would
-`notary init docker.io/me/alpine`.
+If you use DTR, the name of the repository should be identical to the full name you use
+in a `docker image push` command. If you use Docker Hub, the name you use in a `docker image push`
+must be preceded by `docker.io/`. For instance, if you ran `docker image push me/alpine`, you then
+use `notary init docker.io/me/alpine`.
 
 For brevity, we will exclude the `-s` and `-d` flags from subsequent command, but be aware you
 will still need to provide them for the commands to work correctly.
 
 Now that the repository is initialized, we need to create the delegations for Jenkins. Docker
 Content Trust treats a delegation role called `targets/releases` specially. It considers this
-delegation to contain the canonical list of published images for the repository. It is therefore
-generally desirable to add all users to this delegation with the following command:
+delegation to contain the canonical list of published images for the repository. For this reason,
+you should add all users to this delegation with the following command:
 
 ```
 notary delegation add my_repository targets/releases --all-paths /path/to/cert.pem
 ```
 
-This solves a number of prioritization problems that would result from needing to determine
-which delegation should ultimately be trusted for a specific image. However, because it
-is anticipated that any user will be able to sign the `targets/releases` role it is not trusted
-in determining if a signing policy has been met. Therefore it is also necessary to create a
+This solves a number of prioritization problems that would result from the need to determine
+which delegation should ultimately be trusted for a specific image. However, since any user
+can sign the `targets/releases` role it is not trusted
+in determining if a signing policy has been met. Therefore, you also need to create a
 delegation specifically for Jenkins:
 
 ```

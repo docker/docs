@@ -24,10 +24,10 @@ two services:
 
 Instead of configuring our services to use a plain text password stored in an
 environment variable, we're going to create a secret to store the password.
-When we deploy those services, we'll attach the secret to them, which creates
+When we deploy those services, we attach the secret to them, which creates
 a file with the password inside the container running the service.
-Our services will be able to use that file, but no one else will be able
-to see the plain text password.
+Our running services can use that file, but other services or containers, or
+processes external to Docker, can't see the plain text password.
 
 To make things simpler, we're not going to configure the database service to
 persist data. When the service stops, the data is lost.
@@ -35,20 +35,20 @@ persist data. When the service stops, the data is lost.
 ## Create a secret
 
 In the UCP web UI, navigate to **Secrets** page and click **Create Secret**
-to create a new secret. Once you create the secret you won't be able to edit
+to create a new secret. Once you create the secret you can't edit
 it or see the secret data again.
 
 ![](../../images/manage-secrets-1.png){: .with-border}
 
 Click **Create Secret** to create a new secret. Once you create the secret
-you won't be able to edit it or see the secret data again.
+you can't edit it or see the secret data again.
 
 ![](../../images/manage-secrets-2.png){: .with-border}
 
 Assign a unique name to the secret and set its value. You can optionally define
-a permission label so that other users have permission to use this secret. Also
-note that a service and secret must have the same permission label (or both
-must have no permission label at all) in order to be used together.
+a permission label so that other users have permission to use this secret. Also,
+a service and secret must have the same permission label (or both
+must have no permission label at all) to be used together.
 
 In this example our secret is named `wordpress-password-v1`, to make it easier
 to track which version of the password our services are using.
@@ -125,16 +125,16 @@ port 8000 of the swarm routing mesh.
 
 ![](../../images/manage-secrets-5.png){: .with-border}
 
-Once you deploy this service, you'll be able to access it using the
+Once you deploy this service, you can access it using the
 IP address of any node in your UCP cluster, on port 8000.
 
 ![](../../images/manage-secrets-6.png){: .with-border}
 
 ## Update a secret
 
-If the secret gets compromised, you'll need to rotate it so that your services
-start using a new secret. In this case, we need to change the password we're
-using and update the MySQL and WordPress services to use the new password.
+If the secret gets compromised, you need to rotate it so that your services
+start using a new secret. This example changes the password and updates the
+MySQL and WordPress services to use the new password.
 
 Since secrets are immutable in the sense that you can't change the data
 they store after they are created, we can use the following process to achieve
@@ -162,7 +162,7 @@ Start by updating the `wordpress-db` service to stop using the secret
 `wordpress-password-v1` and use the new version instead.
 
 The `MYSQL_ROOT_PASSWORD_FILE` environment variable is currently set to look for
-a file at `/run/secrets/wordpress-password-v1` which won't exist after we
+a file at `/run/secrets/wordpress-password-v1` which doesn't exist after we
 update the service. So we have two options:
 
 1. Update the environment variable to have the value

@@ -62,7 +62,7 @@ environment variable](./reference/envvars.md#compose-project-name).
 
 Typically, you want `docker-compose up`. Use `up` to start or restart all the
 services defined in a `docker-compose.yml`. In the default "attached"
-mode, you'll see all the logs from all the containers. In "detached" mode (`-d`),
+mode, you see all the logs from all the containers. In "detached" mode (`-d`),
 Compose exits after starting the containers, but the containers continue to run
 in the background.
 
@@ -99,7 +99,7 @@ You should use a `volume` if you want to make changes to your code and see them
 reflected immediately, for example when you're developing code and your server
 supports hot code reloading or live-reload.
 
-There may be cases where you'll want to use both. You can have the image
+There may be cases where you want to use both. You can have the image
 include the code using a `COPY`, and use a `volume` in your Compose file to
 include the code from the host during development. The volume overrides
 the directory contents of the image.

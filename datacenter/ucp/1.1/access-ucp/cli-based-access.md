@@ -78,7 +78,7 @@ Cluster Managers: 1
 ## Download client certificates using the REST API
 
 You can also download client certificate bundles using the UCP REST API. In
-this example we'll be using `curl` for making the web requests to the API, and
+this example we use `curl` for making the web requests to the API, and
 `jq` to parse the responses.
 
 To install these tools on an Ubuntu distribution, you can run:

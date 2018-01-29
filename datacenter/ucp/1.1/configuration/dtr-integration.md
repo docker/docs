@@ -16,11 +16,11 @@ At an high-level, there are three steps to integrate UCP with DTR:
 * Configure DTR to trust UCP,
 * Configure the Docker Engine running on each UCP node to trust DTR.
 
-When this is done, you'll be able to use a [UCP client bundle](../access-ucp/cli-based-access.md)
-to push and pull your private images to a UCP node, without have to run the
+When this is done, you can use a [UCP client bundle](../access-ucp/cli-based-access.md)
+to push and pull your private images to a UCP node, without running the
 `docker login` command.
 
-You'll also be to able pull images from the UCP web UI, without having to
+You can also pull images from the UCP web UI, without having to
 provide your credentials.
 
 ## Prerequisites
@@ -107,7 +107,7 @@ the **DTR** tab.
 
 ## Step 4. Configure DTR to trust UCP
 
-In this step, you'll configure DTR to trust the UCP cluster root CA. This way,
+In this step, you configure DTR to trust the UCP cluster root CA. This way,
 requests to DTR that present a certificate issued by the UCP cluster root CA
 are authorized:
 
@@ -189,10 +189,10 @@ commands in the UCP cluster.
 
 ## Troubleshooting
 
-When UCP or DTR are misconfigured, you'll get errors when pushing and pulling
+When UCP or DTR are misconfigured, you get errors when pushing and pulling
 images from a UCP node to a private DTR repository.
 
-When UCP can't communicate with DTR, you'll get:
+When UCP can't communicate with DTR, you see:
 
 ```none
 $ docker push dtr/username/hello-world:1
@@ -207,7 +207,7 @@ In this case, check that UCP is properly configured and that it can communicate
 with DTR.
 
 When one of the components is misconfigured, and doesn't trust the root CA
-certificate of the other components, you'll get an error like:
+certificate of the other components, you see an error like:
 
 ```none
 $ docker push dtr/username/hello-world:1

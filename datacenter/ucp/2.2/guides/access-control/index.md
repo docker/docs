@@ -11,11 +11,11 @@ access control as needed.
 
 ## Grant access to swarm resources
 
-If you're a UCP administrator, you can create *grants* to control how users 
+If you're a UCP administrator, you can create *grants* to control how users
 and organizations access swarm resources.
 
 A grant is made up of a *subject*, a *role*, and a *resource collection*.
-A grant defines who (subject) has how much access (role) 
+A grant defines who (subject) has how much access (role)
 to a set of resources (collection).
 [Learn how to grant permissions to users based on roles](grant-permissions.md).
 
@@ -25,7 +25,7 @@ An administrator is a user who can manage grants, subjects, roles, and
 collections. An administrator identifies which operations can be performed
 against specific resources and who can perform these actions. An administrator
 can create and manage role assignments against subject in the system.
-Only an administrator can manage subjects, grants, roles, and collections. 
+Only an administrator can manage subjects, grants, roles, and collections.
 
 ## Subjects
 
@@ -46,13 +46,13 @@ role for a collection of resources.
 A role is a set of permitted API operations that you can assign to a specific
 subject and collection by using a grant. UCP administrators view and manage
 roles by navigating to the **Roles** page.
-[Learn more about roles and permissions](permission-levels.md). 
+[Learn more about roles and permissions](permission-levels.md).
 
 ## Resource collections
 
 Docker EE enables controlling access to swarm resources by using
 *collections*. A collection is a grouping of swarm cluster resources that you
-access by specifying a directory-like path. 
+access by specifying a directory-like path.
 
 Swarm resources that can be placed in to a collection include:
 
@@ -63,7 +63,7 @@ Swarm resources that can be placed in to a collection include:
 - Volumes
 - Secrets
 - Application configs
- 
+
 ## Collection architecture
 
 Grants tie together who has which kind of access to what resources. Grants
@@ -86,7 +86,7 @@ prod
 ```
 
 > A subject that has access to any level in a collection hierarchy will have
-> that same access to any collections below it. 
+> that same access to any collections below it.
 
 ## Role composition
 
@@ -116,20 +116,20 @@ default and custom roles, and also teams of users that are in UCP.
 
 ## Access architecture
 
-The resulting access architecture defined by these grants is depicted below. 
+The resulting access architecture defined by these grants is depicted below.
 
 ![image](../images/access-control-collection-architecture.png){: .with-border}
 
 There are four teams that are given access to cluster resources:
 
 - `security` can see, but not edit, all resources shown, as it has `View Only`
-  access to the entire `/prod` collection. 
+  access to the entire `/prod` collection.
 - `ops` has `Full Control` against the entire `/prod` collection, giving it the
   capability to deploy, view, edit, and remove applications and application
   resources.
 - `mobile` has the `Dev` role against the `/prod/mobile` collection. This team
-  is able to see and `exec` in to their own applications, but will not see any
-  of the `payments` applications. 
+  can see and `exec` in to their own applications, but can't see any
+  of the `payments` applications.
 - `payments` has the same type of access but for the `/prod/payments` collection.
 
 [See a deeper tutorial on how to design access control architectures.](access-control-design-ee-standard.md)

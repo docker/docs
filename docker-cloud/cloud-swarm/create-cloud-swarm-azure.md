@@ -15,7 +15,7 @@ To create a swarm, you need to give Docker Cloud permission to deploy swarm
 nodes on your behalf in your cloud services provider account.
 
 If you haven't yet linked Docker Cloud to Azure, follow the steps in [Link Microsoft Azure Cloud Services to Docker Cloud](link-azure-swarm/). Once it's
-linked, it will show up on the **Swarms -> Create** page as a connected service
+linked, it shows up on the **Swarms -> Create** page as a connected service
 provider.
 
 ![](images/azure-creds-cloud.png)
@@ -47,19 +47,19 @@ Manager](https://azure.microsoft.com/en-us/blog/working-with-marketplace-images-
 4.  Select Microsoft Azure as the service provider, select a channel (`Stable` or `Edge`) from the drop-down menu, provide an App name, and select the Azure
 Subscription you want to use.
 
-    You can learn more about **stable** and **edge** channels in the [Install Docker overview](https://docs.docker.com/engine/installation/) and the [Docker CE Edge](https://docs.docker.com/edge/) topics.
+    You can learn more about **stable** and **edge** channels in the [Install Docker overview](install/) and the [Docker CE Edge](/edge/) topics.
 
-    In this example, we'll use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
+    In this example, we use the `Stable` channel, our app name is "voting_app" and we've selected a Pay-As-You-Go subscription.
 
     ![](images/azure-create-swarm-0.png)
 
 5.  Make sure that **Create new resource group** is selected, provide a name for the group, and select a location from the drop-down menu.
 
-    We'll call our example app "swarm_vote_resources", and choose a location in West US.
+    Our example app is called `swarm_vote_resources`, and it is located in West US.
 
     ![](images/azure-create-swarm-3-resource-group.png)
 
-    >**Tip:** Be sure to create a new resource group for a swarm. If you choose to use an existing group, the swarm will fail as Azure does not currently support this.
+    >**Tip:** Be sure to create a new resource group for a swarm. If you choose to use an existing group, the swarm fails as Azure does not currently support this.
 
 6.  Choose how many swarm managers and worker nodes to deploy.
 
@@ -98,7 +98,7 @@ Subscription you want to use.
     your own instances, security groups, or load balancers when using Docker for
     Azure. (To learn more, see [Why Docker for Azure](/docker-for-azure/why.md).)
 
-    This will take a few minutes. When the swarm is ready, its indicator on the Swarms page will show steady green.
+    This takes a few minutes. When the swarm is ready, its indicator on the Swarms page shows steady green.
 
     ![](images/azure-create-swarm-7-list.png)
 

@@ -88,7 +88,7 @@ Supported values: `true` or `1` to enable, `false` or `0` to disable.
 
 ## COMPOSE\_PATH\_SEPARATOR
 
-If set, the value of the `COMPOSE_FILE` environment variable will be separated
+If set, the value of the `COMPOSE_FILE` environment variable is separated
 using this character as path separator.
 
 

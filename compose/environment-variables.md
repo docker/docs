@@ -34,7 +34,7 @@ You can pass environment variables from your shell straight through to a service
       environment:
         - DEBUG
 
-The value of the `DEBUG` variable in the container will be taken from the value for the same variable in the shell in which Compose is run.
+The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
 
 ## The “env_file” configuration option
@@ -56,7 +56,7 @@ You can also pass a variable through from the shell by not giving it a value:
 
     docker-compose run -e DEBUG web python console.py
 
-The value of the `DEBUG` variable in the container will be taken from the value for the same variable in the shell in which Compose is run.
+The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
 
 ## The “.env” file
@@ -88,12 +88,12 @@ Values in the shell take precedence over those specified in the `.env` file. If 
     services:
       web:
         image: 'webapp:v2.0'
-   
-When values are provided both with a shell `environment` variable and with an `env_file` configuration file, values of environment variables will be taken **from environment key first and then from environment file, then from a `Dockerfile` `ENV`–entry**:
+
+When values are provided both with a shell `environment` variable and with an `env_file` configuration file, values of environment variables is taken **from environment key first and then from environment file, then from a `Dockerfile` `ENV`–entry**:
 
     $ cat ./Docker/api/api.env
     NODE_ENV=test
-    
+
     $ cat docker-compose.yml
     version: '3'
     services:
@@ -104,15 +104,15 @@ When values are provided both with a shell `environment` variable and with an `e
         environment:
          - NODE_ENV=production
 
-You can test this with for e.g. a _NodeJS_ container in the CLI:
+You can test this with a command like the following command that starts a _NodeJS_ container in the CLI:
 
     $ docker-compose exec api node
     > process.env.NODE_ENV
     'production'
 
-Having any `ARG` or `ENV` setting in a `Dockerfile` will evaluate only if there is _no_ Docker _Compose_ entry for `environment` or `env_file`.
+Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is _no_ Docker _Compose_ entry for `environment` or `env_file`.
 
-_Spcecifics for NodeJS containers:_ If you have a `package.json` entry for `script:start` like `NODE_ENV=test node server.js`, then this will overrule _any_ setting in your `docker-compose.yml` file.
+_Spcecifics for NodeJS containers:_ If you have a `package.json` entry for `script:start` like `NODE_ENV=test node server.js`, then this overrules _any_ setting in your `docker-compose.yml` file.
 
 ## Configuring Compose using environment variables
 
@@ -120,4 +120,5 @@ Several environment variables are available for you to configure the Docker Comp
 
 ## Environment variables created by links
 
-When using the ['links' option](compose-file.md#links) in a [v1 Compose file](compose-file.md#version-1), environment variables will be created for each link. They are documented in the [Link environment variables reference](link-env-deprecated.md). Please note, however, that these variables are deprecated - you should just use the link alias as a hostname instead.
+When using the ['links' option](compose-file.md#links) in a [v1 Compose file](compose-file.md#version-1), environment variables are created for each link. They are documented in
+the [Link environment variables reference](link-env-deprecated.md). However, these variables are deprecated. Use the link alias as a hostname instead.

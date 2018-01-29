@@ -12,7 +12,7 @@ This document is intended to act as a reference for the available 3rd-party
 driver plugins available in the ecosystem beyond the core Machine drivers.  If
 you have created a Docker Machine driver, we highly encourage you to submit a
 pull request adding the relevant information to the list.  Submitting your
-driver here will allow others to discover it and the core Machine team to keep
+driver here allows others to discover it and the core Machine team to keep
 you informed of upstream changes.
 
 **NOTE**: The linked repositories are not maintained by or formally associated

@@ -4,6 +4,7 @@ keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgr
 redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
+- /engine/installation/linux/docker-ce/fedora/
 title: Get Docker CE for Fedora
 toc_max: 4
 ---
@@ -18,7 +19,7 @@ To get started with Docker CE on Fedora, make sure you
 
 Docker EE is not supported on Fedora. For a list of supported operating systems
 and distributions for different Docker editions, see
-[Docker variants](/engine/installation/#docker-variants).
+[Docker variants](/install/index.md#docker-variants).
 
 ### OS requirements
 
@@ -113,7 +114,7 @@ from the repository.
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
 
-    [Learn about **stable** and **edge** channels](/engine/installation/).
+    [Learn about **stable** and **edge** channels](/install/index.md).
 
 #### Install Docker CE
 
@@ -125,8 +126,8 @@ from the repository.
     ```
 
     If this is the first time you are installing a package from a recently added
-    repository, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint matches
+    repository, you are prompted to accept the GPG key, and
+    the key's fingerprint is shown. Verify that the fingerprint matches
     `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
     key.
 
@@ -134,7 +135,7 @@ from the repository.
     >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command will always install the highest possible version,
+    > `dnf update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning-vanilla}
 
@@ -150,7 +151,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled, and
-    will be specific to your version of Fedora (indicated by the `.fc26` suffix
+    are specific to your version of Fedora (indicated by the `.fc26` suffix
     on the version, in this example). Choose a specific version to install. The
     second column is the version string. The third column is the repository
     name, which indicates which repository the package is from and by extension
@@ -179,7 +180,7 @@ from the repository.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker
 commands. Continue to
-[Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
+[Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -192,7 +193,7 @@ to install.
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
-`.rpm` file for your release and install it manually. You will need to download
+`.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker CE.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
@@ -226,7 +227,7 @@ a new file each time you want to upgrade Docker CE.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md) to allow
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -258,6 +259,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).

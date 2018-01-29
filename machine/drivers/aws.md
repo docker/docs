@@ -65,13 +65,13 @@ You can use environment variables:
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-ssh-user`: The SSH Login username, which must match the default SSH user set in the ami used.
 -   `--amazonec2-subnet-id`: AWS VPC subnet ID.
--   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
+-   `--amazonec2-tags`: AWS extra tag key-value pairs. Comma-separated. For example, `key1,value1,key2,value2`.
 -   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-use-private-address`: Use the private IP address for docker-machine, but still create a public IP address.
 -   `--amazonec2-userdata`: Path to file with cloud-init user data.
 -   `--amazonec2-volume-type`: The Amazon EBS volume type to be attached to the instance.
 -   `--amazonec2-vpc-id`: Your VPC ID to launch the instance in.
--   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
+-   `--amazonec2-zone`: The AWS zone to launch the instance in (one of a,b,c,d,e).
 
 
 
@@ -112,7 +112,7 @@ You can use environment variables:
 
 ## Default AMIs
 
-By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
+By default, the Amazon EC2 driver uses a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
 | -------------- | ------------ |
@@ -131,13 +131,13 @@ By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 
 ## Security Group
 
-Note that a security group will be created and associated to the host. This security group will have the following ports opened inbound:
+A security group is created and associated to the host. This security group has the following ports opened inbound:
 
 -   ssh (22/tcp)
 -   docker (2376/tcp)
 -   swarm (3376/tcp), only if the node is a swarm master
 
-If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports will be checked and opened and the security group modified.
+If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports are checked and opened and the security group modified.
 If you want more ports to be opened, like application specific ports, use the AWS console and modify the configuration manually.
 
 ## VPC ID
@@ -163,7 +163,7 @@ This example assumes the VPC ID was found in the `a` availability zone. Use the`
 ## VPC Connectivity
 Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.
 
-If you use the flag `--amazonec2-private-address-only`, you will need to ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
+If you use the flag `--amazonec2-private-address-only`, ensure that you can access the new instance from within the internal network of the VPC, such as a corporate VPN to the VPC, a VPN instance inside the VPC, or using `docker-machine` from an instance within your VPC.
 
 Configuration of VPCs is beyond the scope of this guide, however the first step in troubleshooting is ensuring if you are using private subnets that you follow the design guidance in the [AWS VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html) and have some form of NAT available so that the set up process can access the internet to complete set up.
 

@@ -99,4 +99,4 @@ Release date: 10/18/2017
 
 ## Template archive
 
-If you are looking for templates from older releases, please check out the [template archive](/docker-for-aws/archive.md).
+If you are looking for templates from older releases, check out the [template archive](/docker-for-aws/archive.md).

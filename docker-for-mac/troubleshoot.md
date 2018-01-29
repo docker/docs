@@ -120,9 +120,9 @@ auto-generated reports on packages.
 
 ### Make sure certificates are set up correctly
 
-Docker for Mac will ignore certificates listed under insecure registries, and
-will not send client certificates to them. Commands like `docker run` that
-attempt to pull from the registry will produce error messages on the command
+Docker for Mac ignores certificates listed under insecure registries, and
+does not send client certificates to them. Commands like `docker run` that
+attempt to pull from the registry produces error messages on the command
 line, like this:
 
 ```bash
@@ -140,19 +140,19 @@ For more about using client and server side certificates, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app
+### Docker for Mac does not start if Mac user account and home folder are renamed after installing the app
 
 If, after installing Docker for Mac, you [change the name of your macOS user
 account and home folder](https://support.apple.com/en-us/HT201548), Docker for
-Mac will fail to start. To solve this problem, uninstall then reinstall Docker for Mac under the new user account.
+Mac fails to start. To solve this problem, uninstall and reinstall Docker for Mac under the new user account.
 
 See also, the discussion on the issue [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I need to reinstall Docker for Mac if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account) in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
-application file is not found, a volume mount is denied, or a service cannot
-start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
+application file is not found, access to a volume mount is denied, or a service cannot
+start, such as when using [Docker Compose](/compose/gettingstarted.md), you might
 need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
@@ -237,9 +237,9 @@ sysctl kern.hv_support
 ```
 
 If your Mac supports the Hypervisor Framework,
-the command will print `kern.hv_support: 1`.
+the command prints `kern.hv_support: 1`.
 
-If not, the command will print `kern.hv_support: 0`.
+If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
@@ -249,7 +249,7 @@ know before you install](install.md#what-to-know-before-you-install).
 
 ### Workarounds for common problems
 
-* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac, which typically manifests as a network timeout when running `docker` commands that need access to external network servers (e.g., `docker pull busybox`).
+* IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac. If you try to use it, network timeouts occur when running `docker` commands that need access to external network servers, such as `docker pull` or `docker push`.
 
         $ docker pull busybox
         Using default tag: latest
@@ -279,7 +279,7 @@ know before you install](install.md#what-to-know-before-you-install).
 * If Docker for Mac fails to install or start properly:
 
   * Make sure you quit Docker for Mac before installing a new version
-  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you will get an
+  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you get an
   "application in use" error when you try to copy the new app
   from the `.dmg` to `/Applications`.
 
@@ -287,24 +287,22 @@ know before you install](install.md#what-to-know-before-you-install).
 
   * Run the uninstall commands from the menu.
 
-  <p></p>
 
-* If `docker` commands aren't working properly or as expected:
+* If `docker` commands aren't working properly or as expected, you may need to
+  unset some environment variables, to make sure you are not using the legacy
+  Docker Machine environment in your shell or command window. Unset the
+  `DOCKER_HOST` environment variable and related variables.
 
-  * Make sure you are not using the legacy Docker Machine environment in your shell or command window. You do not need `DOCKER_HOST` set, so unset it as it
-may be pointing at another Docker (e.g. VirtualBox). If you use bash, `unset
-${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
+  * If you use bash, use the following command: `unset ${!DOCKER_*}`
 
   * For other shells, unset each environment variable individually as described in [Setting up to run Docker for Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
-<p></p>
 
-* Note that network connections will fail if the macOS Firewall is set to
+* Network connections fail if the macOS Firewall is set to
 "Block all incoming connections". You can enable the firewall, but `bootpd` must be allowed incoming connections so that the VM can get an IP address.
 
-<p></p>
 
-* For the `hello-world-nginx` example, Docker for Mac must be running in order to get to the webserver on `http://localhost/`. Make sure that the Docker whale
+* For the `hello-world-nginx` example, Docker for Mac must be running to get to the webserver on `http://localhost/`. Make sure that the Docker whale
 is showing in the menu bar, and that you run the Docker commands in a shell that
 is connected to the Docker for Mac Engine (not Engine from Toolbox). Otherwise,
 you might start the webserver container but get a "web page not available" error
@@ -324,21 +322,20 @@ your docker app.
 
 ## Known issues
 
-* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you will see a network
+* IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you see a network
 timeout when you run `docker` commands that need access to external network
 servers. The aforementioned releases include a workaround for this because
 Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DNS addresses" in
 [Workarounds for common problems](troubleshoot.md#workarounds-for-common-problems).
 
-<p></p>
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac (`ValueError: Extra Data`). We've identified this is likely related to data and/or events being passed all at once rather than one by one, so sometimes the data comes back as 2+ objects concatenated and causes an error.
 
-<p></p>
 
-* Force-ejecting the `.dmg` after running `Docker.app` from it results in an unresponsive whale in the menu bar, Docker tasks "not responding" in activity monitor, helper processes running, and supporting technologies consuming large percentages of CPU. Please reboot, and then re-start Docker for Mac. If needed,`force quit` any Docker related applications as part of the reboot.
-
-<p></p>
+* Force-ejecting the `.dmg` after running `Docker.app` from it can cause the
+  whale icon to become unresponsive, Docker tasks to show as not responding in
+  the Activity Monitor, and for some processes to consume a large amount of CPU
+  resources. Reboot and restart Docker to resolve these issues.
 
 * Docker does not auto-start on login even when it is enabled in
 ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This is related to a set of issues with Docker
@@ -352,23 +349,21 @@ Hardware Accelerated Execution Manager
 (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
 the current workaround is not to run them at the same time. You can pause
 `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This
-will allow you to continue work with the other tools and prevent `HyperKit` from
+allows you to continue work with the other tools and prevent `HyperKit` from
 interfering.
 
-<p></p>
 
 *  If you are working with applications like [Apache Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker instances through Unix sockets. For example:
 
         export DOCKER_HOST=unix:///var/run/docker.sock
 
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for `localunixsocket.local` which can take 5s to timeout on some networks. If `docker-compose` commands seem very slow but seem to speed up when the network is disabled (e.g. when disconnected from wifi), try appending `127.0.0.1 localunixsocket.local` to the file `/etc/hosts`.
+* `docker-compose` 1.7.1 performs DNS unnecessary lookups for `localunixsocket.local` which can take 5s to timeout on some networks. If `docker-compose` commands seem very slow but seem to speed up when the network is disabled, try appending `127.0.0.1 localunixsocket.local` to the file `/etc/hosts`.
 Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 
         docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
 
   	and then `export DOCKER_HOST=tcp://localhost:1234`.
 
-<p></p>
 
 <a name="bind-mounted-dirs"></a>
 
@@ -391,10 +386,8 @@ directories in Docker volumes, perform temporary file system operations outside
 of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
 synchronize between container directories and bind-mounted directories. We are
 actively working on `osxfs` performance using a number of different techniques.
-To learn more, please see the topic on [Performance issues, solutions, and
+To learn more, see the topic on [Performance issues, solutions, and
 roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
-
-<p></p>
 
 * If your system does not have access to an NTP server, then after a hibernate the time seen by Docker for Mac may be considerably out of sync with the host. Furthermore, the time may slowly drift out of sync during use. To manually reset the time after hibernation, run:
 

@@ -35,7 +35,13 @@ Docker Cloud currently offers a **HTTP REST API** and a **Websocket Stream API**
 
 # Authentication
 
-In order to be able to make requests to the Docker Cloud API, you should first obtain an ApiKey for your account. For this, log into Docker Cloud, click on the menu on the upper right corner of the screen, select **Account info** and then select **API keys**.
+To make requests to the Docker Cloud API, you need an ApiKey for your account.
+To get one:
+
+1. Log into Docker Cloud.
+2. Click on the menu on the upper right corner of the screen.
+3. Select **Account info**.
+4. Select **API keys**.
 
 ## REST API
 

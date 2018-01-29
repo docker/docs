@@ -8,8 +8,8 @@ title: Upgrade UCP
 This page guides you on upgrading Docker Universal Control Plane (UCP).
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release_notes.md) for the version you are upgrading to.
-There you'll find information about the new features, breaking changes, and
+[release notes](../release_notes.md) for the version you are upgrading to,
+including information about new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
 Before starting an upgrade, make sure your cluster is healthy. If a problem
@@ -28,7 +28,7 @@ When you run the upgrade command, it:
 2. Checks if it is possible to upgrade directly to the new version.
 
     Depending on the version you have installed, it might not be possible
-    to upgrade directly to the latest version. In that case, you'll need
+    to upgrade directly to the latest version. In that case, you need
     to upgrade to intermediate versions before upgrading to the latest version.
 
     Check the [release notes](../release_notes.md) to see if its possible to

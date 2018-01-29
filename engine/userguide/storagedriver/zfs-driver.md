@@ -37,7 +37,7 @@ use unless you have substantial experience with ZFS on Linux.
 - ZFS is not supported on Docker EE or CS-Engine, or any other Linux platforms.
 - The `/var/lib/docker/` directory must be mounted on a ZFS-formatted
   filesystem.
-- Changing the storage driver will make any containers you have already
+- Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so that you
   not need to re-create them later.

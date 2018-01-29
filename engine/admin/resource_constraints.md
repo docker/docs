@@ -7,7 +7,7 @@ keywords: "docker, daemon, configuration"
 ---
 
 By default, a container has no resource constraints and can use as much of a
-given resource as the host's kernel scheduler will allow. Docker provides ways
+given resource as the host's kernel scheduler allows. Docker provides ways
 to control how much memory, CPU, or block IO a container can use, setting runtime
 configuration flags of the `docker run` command. This section provides details
 on when you should set such limits and the possible implications of setting them.
@@ -23,7 +23,7 @@ WARNING: No swap limit support
 ```
 
 Consult your operating system's documentation for enabling them.
-[Learn more](/engine/installation/linux/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
+[Learn more](/install/linux/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
 
 ## Memory
 
@@ -32,16 +32,16 @@ Consult your operating system's documentation for enabling them.
 It is important not to allow a running container to consume too much of the
 host machine's memory. On Linux hosts, if the kernel detects that there is not
 enough memory to perform important system functions, it throws an `OOME`, or
-`Out Of Memory Exception`, and starts killing processes in order to free up
+`Out Of Memory Exception`, and starts killing processes to free up
 memory. Any process is subject to killing, including Docker and other important
 applications. This can effectively bring the entire system down if the wrong
 process is killed.
 
 Docker attempts to mitigate these risks by adjusting the OOM priority on the
-Docker daemon so that it will be less likely to be killed than other processes
+Docker daemon so that it is less likely to be killed than other processes
 on the system. The OOM priority on containers is not adjusted. This makes it more
-likely that an individual container will be killed than that the Docker daemon
-or other system processes will be killed. You should not try to circumvent
+likely for an individual container to be killed than for the Docker daemon
+or other system processes to be killed. You should not try to circumvent
 these safeguards by manually setting `--oom-score-adj` to an extreme negative
 number on the daemon or a container, or by setting `--oom-disable-kill` on a
 container.
@@ -79,7 +79,7 @@ Most of these options take a positive integer, followed by a suffix of `b`, `k`,
 | `-m` or `--memory=`    | The maximum amount of memory the container can use. If you set this option, the minimum allowed value is `4m` (4 megabyte).                                                                                                                                                                                                                                                                      |
 | `--memory-swap`*       | The amount of memory this container is allowed to swap to disk. See [`--memory-swap` details](resource_constraints.md#--memory-swap-details).                                                                                                                                                                                                                                                    |
 | `--memory-swappiness`  | By default, the host kernel can swap out a percentage of anonymous pages used by a container. You can set `--memory-swappiness` to a value between 0 and 100, to tune this percentage. See [`--memory-swappiness` details](resource_constraints.md#--memory-swappiness-details).                                                                                                                 |
-| `--memory-reservation` | Allows you to specify a soft limit smaller than `--memory` which is activated when Docker detects contention or low memory on the host machine. If you use `--memory-reservation`, it must be set lower than `--memory` in order for it to take precedence. Because it is a soft limit, it does not guarantee that the container will not exceed the limit.                                      |
+| `--memory-reservation` | Allows you to specify a soft limit smaller than `--memory` which is activated when Docker detects contention or low memory on the host machine. If you use `--memory-reservation`, it must be set lower than `--memory` for it to take precedence. Because it is a soft limit, it does not guarantee that the container doesn't exceed the limit.                                      |
 | `--kernel-memory`      | The maximum amount of kernel memory the container can use. The minimum allowed value is `4m`. Because kernel memory cannot be swapped out, a container which is starved of kernel memory may block host machine resources, which can have side effects on the host machine and on other containers. See [`--kernel-memory` details](resource_constraints.md#--kernel-memory-details).            |
 | `--oom-kill-disable`   | By default, if an out-of-memory (OOM) error occurs, the kernel kills processes in a container. To change this behavior, use the `--oom-kill-disable` option. Only disable the OOM killer on containers where you have also set the `-m/--memory` option. If the `-m` flag is not set, the host can run out of memory and the kernel may need to kill the host system's processes to free memory. |
 
@@ -105,7 +105,7 @@ Its setting can have complicated effects:
   treated as unset.
 
 - If `--memory-swap` is set to the same value as `--memory`, and `--memory` is
-  set to a positive integer, **the container will not have access to swap**.
+  set to a positive integer, **the container does not have access to swap**.
   See
   [Prevent a container from using swap](#prevent-a-container-from-using-swap).
 
@@ -119,7 +119,7 @@ Its setting can have complicated effects:
 
 #### Prevent a container from using swap
 
-If `--memory` and `--memory-swap` are set to the same value, this will prevent
+If `--memory` and `--memory-swap` are set to the same value, this prevents
 containers from using any swap. This is because `--memory-swap` is the amount of
 combined memory and swap that can be used, while `--memory` is only the amount
 of physical memory that can be used.
@@ -147,12 +147,12 @@ a container. Consider the following scenarios:
   limited, but the kernel memory is not.
 - **Limited memory, limited kernel memory**: Limiting both user and kernel
   memory can be useful for debugging memory-related problems. If a container
-  is using an unexpected amount of either type of memory, it will run out
+  is using an unexpected amount of either type of memory, it runs out
   of memory without affecting other containers or the host machine. Within
   this setting, if the kernel memory limit is lower than the user memory
-  limit, running out of kernel memory will cause the container to experience
+  limit, running out of kernel memory causes the container to experience
   an OOM error. If the kernel memory limit is higher than the user memory
-  limit, the kernel limit will not cause the container to experience an OOM.
+  limit, the kernel limit does not cause the container to experience an OOM.
 
 When you turn on any kernel memory limits, the host machine tracks "high water
 mark" statistics on a per-process basis, so you can track which processes (in
@@ -163,7 +163,7 @@ by viewing `/proc/<PID>/status` on the host machine.
 
 By default, each container's access to the host machine's CPU cycles is unlimited.
 You can set various constraints to limit a given container's access to the host
-machine's CPU cycles. Most users will use and configure the
+machine's CPU cycles. Most users use and configure the
 [default CFS scheduler](#configure-the-default-cfs-scheduler). In Docker 1.13
 and higher, you can also configure the
 [realtime scheduler](#configure-the-realtime-scheduler).
@@ -177,13 +177,13 @@ the container's cgroup on the host machine.
 
 | Option                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--cpus=<value>`       | Specify how much of the available CPU resources a container can use. For instance, if the host machine has two CPUs and you set `--cpus="1.5"`, the container will be guaranteed to be able to access at most one and a half of the CPUs. This is the equivalent of setting `--cpu-period="100000"` and `--cpu-quota="150000"`. Available in Docker 1.13 and higher.                                                                                                                                                                                                                                 |
+| `--cpus=<value>`       | Specify how much of the available CPU resources a container can use. For instance, if the host machine has two CPUs and you set `--cpus="1.5"`, the container is guaranteed at most one and a half of the CPUs. This is the equivalent of setting `--cpu-period="100000"` and `--cpu-quota="150000"`. Available in Docker 1.13 and higher.                                                                                                                                                                                                                                 |
 | `--cpu-period=<value>` | Specify the CPU CFS scheduler period, which is used alongside  `--cpu-quota`. Defaults to 100 micro-seconds. Most users do not change this from the default. If you use Docker 1.13 or higher, use `--cpus` instead.                                                                                                                                                                                                                                                                                                                                                              |
 | `--cpu-quota=<value>`  | Impose a CPU CFS quota on the container. The number of microseconds per `--cpu-period` that the container is guaranteed CPU access. In other words, `cpu-quota / cpu-period`. If you use Docker 1.13 or higher, use `--cpus` instead.                                                                                                                                                                                                                                                                                                                                                                |
 | `--cpuset-cpus`        | Limit the specific CPUs or cores a container can use. A comma-separated list or hyphen-separated range of CPUs a container can use, if you have more than one CPU. The first CPU is numbered 0. A valid value might be `0-3` (to use the first, second, third, and fourth CPU) or `1,3` (to use the second and fourth CPU).                                                                                                                                                                                                                                                                          |
 | `--cpu-shares`         | Set this flag to a value greater or less than the default of 1024 to increase or reduce the container's weight, and give it access to a greater or lesser proportion of the host machine's CPU cycles. This is only enforced when CPU cycles are constrained. When plenty of CPU cycles are available, all containers use as much CPU as they need. In that way, this is a soft limit. `--cpu-shares` does not prevent containers from being scheduled in swarm mode. It prioritizes container CPU resources for the available CPU cycles. It does not guarantee or reserve any specific CPU access. |
 
-If you have 1 CPU, each of the following commands will guarantee the container at
+If you have 1 CPU, each of the following commands guarantees the container at
 most 50% of the CPU every second.
 
 **Docker 1.13 and higher**:
@@ -254,4 +254,4 @@ $ docker run --it --cpu-rt-runtime=950000 \
                   debian:jessie
 ```
 
-If the kernel or Docker daemon is not configured correctly, an error will occur.
+If the kernel or Docker daemon is not configured correctly, an error occurs.

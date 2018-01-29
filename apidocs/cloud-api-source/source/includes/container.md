@@ -331,7 +331,7 @@ protocol | The protocol of the port, either `tcp` or `udp`
 inner_port | The published port number inside the container
 outer_port | The published port number in the node public network interface
 port_name | Name of the service associated to this port
-uri_protocol | The protocol to be used in the endpoint for this port (i.e. `http`)
+uri_protocol | The protocol to be used in the endpoint for this port, such as `http`
 endpoint_uri | The URI of the endpoint for this port
 published | Whether the port has been published in the host public network interface or not. Non-published ports can only be accessed via links.
 
