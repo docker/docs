@@ -12,7 +12,7 @@ authenticate your request with client certificates. When trying to run docker
 commands without a valid certificate, you get an authentication error:
 
 ```none
-$ docker ps
+docker ps
 
 x509: certificate signed by unknown authority
 ```
@@ -43,8 +43,8 @@ Navigate to the directory where you downloaded the user bundle, and unzip it.
 Then source the `env.sh` script.
 
 ```bash
-$ unzip ucp-bundle-dave.lauper.zip
-$ eval "$(<env.sh)"
+unzip ucp-bundle-dave.lauper.zip
+eval "$(<env.sh)"
 ```
 
 The `env.sh` script updates the `DOCKER_HOST` environment variable to make your
@@ -62,7 +62,7 @@ returned by `docker version`.
 
 ```bash
 {% raw %}
-$ docker version --format '{{.Server.Version}}'
+docker version --format '{{.Server.Version}}'
 {% endraw %}
 {{ page.ucp_repo }}/{{ page.ucp_version }}
 ```
@@ -82,7 +82,7 @@ responses.
 To install these tools on a Ubuntu distribution, you can run:
 
 ```bash
-$ sudo apt-get update && sudo apt-get install curl jq
+sudo apt-get update && sudo apt-get install curl jq
 ```
 
 Then you get an authentication token from UCP, and use it to download the
@@ -90,11 +90,19 @@ client certificates.
 
 ```bash
 # Create an environment variable with the user security token
-$ AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' https://<ucp-ip>/auth/login | jq -r .auth_token)
+AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' https://<ucp-ip>/auth/login | jq -r .auth_token)
 
 # Download the client certificate bundle
-$ curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
+curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
 ```
+
+On Windows Server 2016, open an elevated PowerShell prompt and run:
+
+```powershell
+$AUTHTOKEN=((Invoke-WebRequest -Body '{"username":"<username>", "password":"<password>"}' -Uri https://`<ucp-ip`>/auth/login -Method POST).Content)|ConvertFrom-Json|select auth_token -ExpandProperty auth_token
+
+[io.file]::WriteAllBytes("ucp-bundle.zip", ((Invoke-WebRequest -Uri https://`<ucp-ip`>/api/clientbundle -Headers @{"Authorization"="Bearer $AUTHTOKEN"}).Content))
+ ```
 
 ## Where to go next
 
