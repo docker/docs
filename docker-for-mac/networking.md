@@ -85,8 +85,8 @@ There are two scenarios that the above limitations affect:
 #### I want to connect from a container to a service on the host
 
 The Mac has a changing IP address (or none if you have no network access). From
-17.06 onwards our recommendation is to connect to the special Mac-only DNS
-name `docker.for.mac.localhost` which resolves to the internal IP address
+17.12 onwards our recommendation is to connect to the special Mac-only DNS
+name `docker.for.mac.host.internal`, which resolves to the internal IP address
 used by the host.
 
 #### I want to connect to a container from the Mac
