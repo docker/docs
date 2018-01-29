@@ -48,9 +48,9 @@ Click **Add Node** to add a new node.
 
 ![](../../../../../images/try-ddc-3.png){: .with-border}
 
--  Click **Manager** if you want to add the node as a manager. 
+-  Click **Manager** if you want to add the node as a manager.
 -  Check the **Use a custom listen address** option to specify the
-   IP address of the host that you'll be joining to the cluster.
+   IP address of the host that you want to join to the cluster.
 -  Check the **Use a custom listen address** option to specify the
    IP address that's advertised to all members of the swarm for API access.
 
@@ -58,7 +58,7 @@ Copy the displayed command, use ssh to log into the host that you want to
 join to the cluster, and run the `docker swarm join` command on the host.
 
 To add a Windows node, click **Windows** and follow the instructions in
-[Join Windows worker nodes to a swarm](join-windows-worker-nodes.md). 
+[Join Windows worker nodes to a swarm](join-windows-worker-nodes.md).
 
 After you run the join command in the node, the node is displayed in the UCP
 web UI.
@@ -75,13 +75,13 @@ web UI.
    * From the CLI, perform `docker node ls` and identify the nodeID or hostname
    of the target node. Then, run `docker node demote <nodeID or hostname>`.
 
-2. If the status of the worker node is `Ready`, you'll need to manually force
+2. If the status of the worker node is `Ready`, you need to manually force
    the node to leave the swarm. To do this, connect to the target node through
    SSH and run `docker swarm leave --force` directly against the local docker
-   engine. 
-   
+   engine.
+
    > Loss of quorum
-   > 
+   >
    > Do not perform this step if the node is still a manager, as
    > this may cause loss of quorum.
 
@@ -100,7 +100,7 @@ so that it is:
 
 * Active: the node can receive and execute tasks.
 * Paused: the node continues running existing tasks, but doesn't receive new ones.
-* Drained: the node won't receive new tasks. Existing tasks are stopped and
+* Drained: the node can't receive new tasks. Existing tasks are stopped and
   replica tasks are launched in active nodes.
 
 In the UCP web UI, browse to the **Nodes** page and select the node. In the details pane, click the **Configure** to open the **Edit Node** page.

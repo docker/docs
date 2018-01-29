@@ -12,7 +12,7 @@ Docker for Azure supports upgrading from one version to the next within a specif
 
 ## Prerequisites
 
- * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during an upgrade.
+ * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm can't maintain quorum during an upgrade.
  * You can only upgrade one version at a time. Skipping a version during an upgrade is not supported.
  * Downgrades are not tested.
  * Upgrading across channels (`stable`, `edge`, or `testing`) is not supported.
@@ -67,14 +67,14 @@ https://portal.azure.com/#resource/subscriptions/[subscription-id]/resourceGroup
 ```none
 https://portal.azure.com/#resource/subscriptions/[subscription-id]/resourceGroups/[resource-group]/providers/Microsoft.Compute/virtualMachineScaleSets/swarm-worker-vmss/instances
 ```
-`[subscription-id]` and `[resource-group]` are placeholders which will be replaced by
+`[subscription-id]` and `[resource-group]` are placeholders which are replaced by
 real values.
 
-Note that in the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you won't be able to access the node and if you were logged in, your SSH connection will drop.
+In the last stage of the upgrade, the manager node where the upgrade is initiated from needs to be shut down, upgraded and reimaged. During this time, you can't access the node and if you were logged in, your SSH connection drop.
 
 ## Post upgrade
 
-After the upgrade, the IP address and the port needed to SSH into the manager nodes do not change. However, the host identity of the manager nodes does change as the VMs get reimaged. So when you try to SSH in after a successful upgrade, your SSH client may suspect a Man-In-The-Middle attack. You will need to delete the old entries in your SSH client's store [typically `~/.ssh/known_hosts`] for new SSH connections to succeed to the upgraded manager nodes.
+After the upgrade, the IP address and the port needed to SSH into the manager nodes do not change. However, the host identity of the manager nodes does change as the VMs get reimaged. So when you try to SSH in after a successful upgrade, your SSH client may suspect a Man-In-The-Middle attack. You need to delete the old entries in your SSH client's store [typically `~/.ssh/known_hosts`] for new SSH connections to succeed to the upgraded manager nodes.
 
 ## Changing instance sizes and other template parameters
 

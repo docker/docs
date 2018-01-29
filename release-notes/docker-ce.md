@@ -144,7 +144,6 @@ Release notes for stable versions are listed first. You can
 ### Runtime
 
 - Protect `health monitor` Go channel [moby/moby#35482](https://github.com/moby/moby/pull/35482)
-- Fix test failure on stopped container [moby/moby#34730](https://github.com/moby/moby/pull/34730)
 - Fix leaking container/exec state [moby/moby#35484](https://github.com/moby/moby/pull/35484)
 - Add /proc/scsi to masked paths (patch to work around [CVE-2017-16539](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16539)) [moby/moby/#35399](https://github.com/moby/moby/pull/35399)
 - Vendor tar-split: fix to prevent memory exhaustion issue that could crash Docker daemon [moby/moby/#35424](https://github.com/moby/moby/pull/35424) Fixes [CVE-2017-14992](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14992)
@@ -545,12 +544,12 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 > **Important**: Docker CE 17.11 is the first Docker release based on
 [containerd 1.0 beta](https://github.com/containerd/containerd/releases/tag/v1.0.0-beta.2).
-Docker CE 17.11 and later won't recognize containers started with
+Docker CE 17.11 and later don't recognize containers started with
 previous Docker versions. If using
 [Live Restore](https://docs.docker.com/engine/admin/live-restore/#enable-the-live-restore-option),
 you must stop all containers before upgrading to Docker CE 17.11.
 If you don't, any containers started by Docker versions that predate
-17.11 won't be recognized by Docker after the upgrade and will keep
+17.11 aren't recognized by Docker after the upgrade and keep
 running, un-managed, on the system.
 {:.important}
 

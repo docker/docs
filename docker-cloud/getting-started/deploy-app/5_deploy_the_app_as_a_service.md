@@ -7,7 +7,7 @@ redirect_from:
 title: Deploy the app as a Docker Cloud service
 ---
 
-In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same **image:tag**.
+In this step you deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same **image:tag**.
 
 ## Deploy app with Docker Engine installed locally
 
@@ -36,7 +36,7 @@ The **-p 80** flag publishes port 80 in the container so that it is publicly
 accessible, and maps it to a dynamically assigned port in the node.
 
 It might take a minute or two to get your service up and running. Once it
-completes the startup process, it will be in the *running* state.
+completes the startup process, it is in the *running* state.
 
 To check the status of your service from the CLI use the `docker-cloud service ps` command.
 

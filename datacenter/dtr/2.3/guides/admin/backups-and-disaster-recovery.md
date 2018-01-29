@@ -163,7 +163,7 @@ To restore DTR, you need to:
 
 You need to restore DTR on the same UCP cluster where you've created the
 backup. If you restore on a different UCP cluster, all DTR resources will be
-owned by users that don't exist, so you'll not be able to manage the resources,
+owned by users that don't exist, so you can't manage the resources,
 even though they're stored in the DTR data store.
 
 When restoring, you need to use the same version of the `docker/dtr` image

@@ -12,14 +12,14 @@ following components:
 2. Universal Control Plane (UCP).
 3. Docker Trusted Registry (DTR).
 
-While upgrading, some of these components will become temporarily unavailable.
+While upgrading, some of these components become temporarily unavailable.
 So you should schedule your upgrades to take place outside business peak hours
 to make sure there's no impact to your business.
 
 ## Create a backup
 
 Before upgrading Docker EE, you should make sure you [create a backup](backup.md).
-This will make it possible to recover if anything goes wrong during the upgrade.
+This makes it possible to recover if anything goes wrong during the upgrade.
 
 ## Check the compatibility matrix
 
@@ -27,17 +27,17 @@ You should also check the [compatibility matrix](https://success.docker.com/Poli
 to make sure all Docker EE components are certified to work with one another.
 You may also want to check the
 [Docker EE maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
-to understand until when your version will be supported.
+to understand until when your version may be supported.
 
 ## Upgrade Docker Engine
 
 To avoid application downtime, you should be running Docker in Swarm mode and
-deploying your workloads as Docker services. That way you'll be able to
+deploying your workloads as Docker services. That way you can
 drain the nodes of any workloads before starting the upgrade.
 
 If you have workloads running as containers as opposed to swarm services,
 make sure they are configured with a [restart policy](/engine/admin/start-containers-automatically/).
-This will make sure your containers are started automatically after the upgrade.
+This ensures that your containers are started automatically after the upgrade.
 
 To ensure that workloads running as Swarm services have no downtime, you need to:
 
@@ -45,7 +45,7 @@ To ensure that workloads running as Swarm services have no downtime, you need to
 2. Upgrade the Docker Engine on that node.
 3. Make the node available again.
 
-If you do this sequentially for every node, you'll be able to upgrade with no
+If you do this sequentially for every node, you can upgrade with no
 application downtime.
 When upgrading manager nodes, make sure the upgrade of a node finishes before
 you start upgrading the next node. Upgrading multiple manager nodes at the same
@@ -63,15 +63,15 @@ docker node update --availability drain <node>
 
 ### Perform the upgrade
 
-Upgrade the Docker Engine on the node by following the instructions for your
+Upgrade Docker Engine on the node by following the instructions for your
 specific distribution:
 
-* [Windows Server](/engine/installation/windows/docker-ee.md#update-docker-ee)
-* [Ubuntu](/engine/installation/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
-* [RHEL](/engine/installation/linux/docker-ee/rhel.md#upgrade-docker-ee)
-* [CentOS](/engine/installation/linux/docker-ee/centos.md#upgrade-docker-ee)
-* [Oracle Linux](/engine/installation/linux/docker-ee/oracle.md#upgrade-docker-ee)
-* [SLES](/engine/installation/linux/docker-ee/suse.md#upgrade-docker-ee)
+* [Windows Server](/install/windows/docker-ee.md#update-docker-ee)
+* [Ubuntu](/install/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
+* [RHEL](/install/linux/docker-ee/rhel.md#upgrade-docker-ee)
+* [CentOS](/install/linux/docker-ee/centos.md#upgrade-docker-ee)
+* [Oracle Linux](/install/linux/docker-ee/oracle.md#upgrade-docker-ee)
+* [SLES](/install/linux/docker-ee/suse.md#upgrade-docker-ee)
 
 ### Make the node active
 

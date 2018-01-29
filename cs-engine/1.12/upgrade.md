@@ -162,7 +162,7 @@ Use these instructions to update APT-based systems.
 ## Upgrade from a legacy version
 
 Use these instructions if you're upgrading your CS Docker Engine from a version
-prior to 1.9. In this case you'll have to first uninstall CS Docker Engine, and
+prior to 1.9. In this case, first uninstall CS Docker Engine, and
 then install the latest version.
 
 ### CentOS 7.1 & RHEL 7.0/7.1

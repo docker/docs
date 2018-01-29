@@ -116,7 +116,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-8.  Only users with `sudo` access will be able to run `docker` commands.
+8.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 
@@ -207,7 +207,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-6.  Only users with `sudo` access will be able to run `docker` commands.
+6.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 
@@ -286,7 +286,7 @@ to update its RHEL kernel.
     $ sudo docker info
     ```
 
-6.  Only users with `sudo` access will be able to run `docker` commands.
+6.  Only users with `sudo` access can run `docker` commands.
     Optionally, add non-sudo access to the Docker socket by adding your user
     to the `docker` group.
 
@@ -298,7 +298,7 @@ to update its RHEL kernel.
 
 7.  [Configure Btrfs for graph storage](/engine/userguide/storagedriver/btrfs-driver.md).
     This is the only graph storage driver supported on SLES.
-    
+
 ## Install using packages
 
 If you need to install Docker on an air-gapped system with no access to the

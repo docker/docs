@@ -12,13 +12,13 @@ as attachable, you can attach containers.
 > Security
 >
 > Encrypting communication between containers on different nodes works only on
-> overlay networks. 
+> overlay networks.
 
 ## Use UCP to create node-specific networks
 
-Always use UCP to create node-specific networks. You can use the UCP web UI 
+Always use UCP to create node-specific networks. You can use the UCP web UI
 or the CLI (with an admin bundle). If you create the networks without UCP,
-the networks won't have the right access labels and won't be available in UCP.
+the networks don't have the right access labels and aren't available in UCP.
 
 ## Create a MAC VLAN network
 

@@ -18,7 +18,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
 
 ## Introduction
 
-It's time to begin building an app the Docker way. We'll start at the bottom of
+It's time to begin building an app the Docker way. We start at the bottom of
 the hierarchy of such an app, which is a container, which we cover on this page.
 Above this level is a service, which defines how containers behave in
 production, covered in [Part 3](part3.md). Finally, at the top level is the
@@ -33,9 +33,9 @@ stack, defining the interactions of all the services, covered in
 
 In the past, if you were to start writing a Python app, your first
 order of business was to install a Python runtime onto your machine. But,
-that creates a situation where the environment on your machine has to be just
-so in order for your app to run as expected; ditto for the server that runs
-your app.
+that creates a situation where the environment on your machine needs to be
+perfect for your app to run as expected, and also needs to match your production
+environment.
 
 With Docker, you can just grab a portable Python runtime as an image, no
 installation necessary. Then, your build can include the base Python image
@@ -46,13 +46,13 @@ These portable images are defined by something called a `Dockerfile`.
 
 ## Define a container with `Dockerfile`
 
-`Dockerfile` will define what goes on in the environment inside your
+`Dockerfile` defines what goes on in the environment inside your
 container. Access to resources like networking interfaces and disk drives is
 virtualized inside this environment, which is isolated from the rest of your
-system, so you have to map ports to the outside world, and
+system, so you need to map ports to the outside world, and
 be specific about what files you want to "copy in" to that environment. However,
 after doing that, you can expect that the build of your app defined in this
-`Dockerfile` will behave exactly the same wherever it runs.
+`Dockerfile` behaves exactly the same wherever it runs.
 
 ### `Dockerfile`
 
@@ -107,8 +107,8 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` will be present because of that `Dockerfile`'s `ADD` command,
-and the output from `app.py` will be accessible over HTTP thanks to the `EXPOSE`
+`requirements.txt` is present because of that `Dockerfile`'s `ADD` command,
+and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 
 ### `requirements.txt`
@@ -151,14 +151,14 @@ Now we see that `pip install -r requirements.txt` installs the Flask and Redis
 libraries for Python, and the app prints the environment variable `NAME`, as
 well as the output of a call to `socket.gethostname()`. Finally, because Redis
 isn't running (as we've only installed the Python library, and not Redis
-itself), we should expect that the attempt to use it here will fail and produce
+itself), we should expect that the attempt to use it here fails and produces
 the error message.
 
 > **Note**: Accessing the name of the host when inside a container retrieves the
 container ID, which is like the process ID for a running executable.
 
 That's it! You don't need Python or anything in `requirements.txt` on your
-system, nor will building or running this image install them on your system. It
+system, nor does building or running this image install them on your system. It
 doesn't seem like you've really set up an environment with Python and Flask, but
 you have.
 
@@ -220,7 +220,7 @@ $ curl http://localhost:4000
 
 This port remapping of `4000:80` is to demonstrate the difference
 between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
-`docker run -p`. In later steps, we'll just map port 80 on the host to port 80
+`docker run -p`. In later steps, we just map port 80 on the host to port 80
 in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
@@ -231,7 +231,7 @@ Hit `CTRL+C` in your terminal to quit.
  type `CTRL+C` to get the prompt back (or open another shell), then type
  `docker container ls` to list the running containers, followed by
  `docker container stop <Container NAME or ID>` to stop the
- container. Otherwise, you'll get an error response from the daemon
+ container. Otherwise, you get an error response from the daemon
  when you try to re-run the container in the next step.
 
 Now let's run the app in the background, in detached mode:
@@ -251,7 +251,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED
 1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
 ```
 
-You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
+Notice that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
 Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
@@ -262,7 +262,7 @@ docker container stop 1fa4ab2cf395
 ## Share your image
 
 To demonstrate the portability of what we just created, let's upload our built
-image and run it somewhere else. After all, you'll need to learn how to push to
+image and run it somewhere else. After all, you need to know how to push to
 registries when you want to deploy containers to production.
 
 A registry is a collection of repositories, and a repository is a collection of
@@ -270,7 +270,7 @@ images&#8212;sort of like a GitHub repository, except the code is already built.
 An account on a registry can create many repositories. The `docker` CLI uses
 Docker's public registry by default.
 
-> **Note**: We'll be using Docker's public registry here just because it's free
+> **Note**: We use Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
 even set up your own private registry using [Docker Trusted
 Registry](/datacenter/dtr/2.2/guides/).
@@ -293,11 +293,11 @@ The notation for associating a local image with a repository on a registry is
 `username/repository:tag`. The tag is optional, but recommended, since it is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
-`get-started:part2`. This will put the image in the `get-started` repository and
+`get-started:part2`. This puts the image in the `get-started` repository and
 tag it as `part2`.
 
 Now, put it all together to tag the image. Run `docker tag image` with your
-username, repository, and tag names so that the image will upload to your
+username, repository, and tag names so that the image uploads to your
 desired destination. The syntax of the command is:
 
 ```shell
@@ -331,7 +331,7 @@ docker push username/repository:tag
 ```
 
 Once complete, the results of this upload are publicly available. If you log in
-to [Docker Hub](https://hub.docker.com/), you will see the new image there, with
+to [Docker Hub](https://hub.docker.com/), you see the new image there, with
 its pull command.
 
 ### Pull and run the image from the remote repository
@@ -343,7 +343,7 @@ command:
 docker run -p 4000:80 username/repository:tag
 ```
 
-If the image isn't available locally on the machine, Docker will pull it from
+If the image isn't available locally on the machine, Docker pulls it from
 the repository.
 
 ```shell
@@ -364,12 +364,12 @@ Status: Downloaded newer image for john/get-started:part2
 
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
-travels together in a neat little package, and the host machine doesn't have to
-install anything but Docker to run it.
+travels together in a neat little package, and you don't need to install
+anything on the host machine for Docker to run it.
 
 ## Conclusion of part two
 
-That's all for this page. In the next section, we will learn how to scale our
+That's all for this page. In the next section, we learn how to scale our
 application by running this container in a **service**.
 
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}

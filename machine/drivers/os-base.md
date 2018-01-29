@@ -46,5 +46,5 @@ provider's image flag and one of its available images. For example, to select a
 
 If you change the parent image for a provider, you may also need to change
 the SSH user. For example, the default Red Hat AMI on EC2 expects the
-SSH user to be `ec2-user`, so you would have to specify this with
+SSH user to be `ec2-user`, so you need to specify this with
 `--amazonec2-ssh-user ec2-user`.

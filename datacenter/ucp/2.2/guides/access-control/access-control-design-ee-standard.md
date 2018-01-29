@@ -94,7 +94,7 @@ The resulting access architecture shows applications connecting across
 collection boundaries. Multiple grants per team allow Mobile applications and
 Databases to connect to the same networks and use the same secrets so they can
 securely connect with each other but through a secure and controlled interface.
-Note that these resources are still deployed across the same group of UCP
+These resources are still deployed across the same group of UCP
 worker nodes. Node segmentation is discussed in the [next tutorial](#).
 
 ![image](../images/design-access-control-adv-2.png){: .with-border}
@@ -103,14 +103,14 @@ worker nodes. Node segmentation is discussed in the [next tutorial](#).
 
 The `db` team is responsible for deploying and managing the full lifecycle
 of the databases used by the application teams. They have the full set of
-operations against all database resources. 
+operations against all database resources.
 
 ![image](../images/design-access-control-adv-3.png){: .with-border}
 
 ### Mobile team
 
 The `mobile` team is responsible for deploying their own application stack,
-minus the database tier which is managed by the `db` team. 
+minus the database tier which is managed by the `db` team.
 
 ![image](../images/design-access-control-adv-4.png){: .with-border}
 

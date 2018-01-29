@@ -11,7 +11,7 @@ non-interactively. The source code for the scripts is in the
 environments**, and you should understand the potential risks before you use
 them:
 
-- The scripts require `root` or `sudo` privileges in order to run. Therefore,
+- The scripts require `root` or `sudo` privileges to run. Therefore,
   you should carefully examine and audit the scripts before running them.
 - The scripts attempt to detect your Linux distribution and version and
   configure your package management system for you. In addition, the scripts do
@@ -22,7 +22,7 @@ them:
   manager without asking for confirmation. This may install a large number of
   packages, depending on the current configuration of your host machine.
 - The script does not provide options to specify which version of Docker to install,
-  and will install the latest version that is released in the "edge" channel.
+  and installs the latest version that is released in the "edge" channel.
 - Do not use the convenience script if Docker has already been installed on the
   host machine using another mechanism.
 
@@ -48,9 +48,9 @@ adding your user to the "docker" group with something like:
 
   sudo usermod -aG docker your-user
 
-Remember that you will have to log out and back in for this to take effect!
+Remember to log out and back in for this to take effect!
 
-WARNING: Adding a user to the "docker" group will grant the ability to run
+WARNING: Adding a user to the "docker" group grants the ability to run
          containers which can be used to obtain root privileges on the
          docker host.
          Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
@@ -59,8 +59,8 @@ WARNING: Adding a user to the "docker" group will grant the ability to run
 
 Docker CE is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
-`systemctl` or `service` command. As the message indicates, non-root users are
-not able to run Docker commands by default.
+`systemctl` or `service` command. As the message indicates, non-root users can't
+run Docker commands by default.
 
 #### Upgrade Docker after using the convenience script
 

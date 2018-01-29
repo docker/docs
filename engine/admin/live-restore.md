@@ -31,7 +31,7 @@ Use your favorite editor to enable the `live-restore` option in the
 }
 ```
 
-You have to send a `SIGHUP` signal to the daemon process for it to reload the
+You need to send a `SIGHUP` signal to the daemon process for it to reload the
 configuration. For more information on how to configure the Docker daemon using
 `daemon.json`, see [daemon configuration file](../reference/commandline/dockerd.md#daemon-configuration-file).
 
@@ -47,7 +47,7 @@ The live restore feature supports restoring containers to the daemon for
 upgrades from one minor release to the next. For example from Docker Engine
 1.12.1 to 1.12.2.
 
-If you skip releases during an upgrade, the daemon may not restore its connection to the containers. If the daemon is unable to restore the connection, it ignores the running containers and you must manage them manually.
+If you skip releases during an upgrade, the daemon may not restore its connection to the containers. If the daemon can't restore the connection, it ignores the running containers and you must manage them manually.
 
 ## Live restore upon restart
 
@@ -59,7 +59,7 @@ the daemon restarts with a different bridge IP or a different graphdriver.
 
 A lengthy absence of the daemon can impact running containers. The containers
 process writes to FIFO logs for daemon consumption. If the daemon is unavailable
-to consume the output, the buffer will fill up and block further writes to the
+to consume the output, the buffer fills up and blocks further writes to the
 log. A full log blocks the process until further space is available. The default
 buffer size is typically 64K.
 

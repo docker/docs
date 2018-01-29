@@ -44,7 +44,7 @@ will be retrieved from that backup. Add the following volume mount:
 | `--admin-username`                                         | Specify the UCP admin username [$UCP_ADMIN_USER]                                                  |
 | `--admin-password`                                         | Specify the UCP admin password [$UCP_ADMIN_PASSWORD]                                              |
 | `--fresh-install`                                          | Destroy any existing state and start fresh.                                                       |
-| `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs (e.g. `--san foo1.bar.com --san foo2.bar.com`).    |
+| `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs. For example, `--san foo1.bar.com --san foo2.bar.com`.    |
 | `--host-address`                                           | Specify the visible IP/hostname for this node. (override automatic detection) [$UCP_HOST_ADDRESS] |
 | `--swarm-port "2376"`                                      | Select what port to run the local Swarm manager on (default: 2376)                                |
 | `--controller-port "443"`                                  | Select what port to run the local Controller on (default: 443)                                    |

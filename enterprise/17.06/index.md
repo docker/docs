@@ -95,7 +95,7 @@ adopted as quickly for consistency and compatibility reasons.
 ### Networking
 
 * Fix for garbage collection logic in NetworkDB. Entries were not properly garbage collected and deleted within the expected time [docker/libnetwork#1944](https://github.com/docker/libnetwork/pull/1944) [docker/libnetwork#1960](https://github.com/docker/libnetwork/pull/1960)
-* Allow configuration of max packet size in network DB to use the full available MTU. Note this will require a configuration in the docker daemon and need a dockerd restart [docker/libnetwork#1839](https://github.com/docker/libnetwork/pull/1839)
+* Allow configuration of max packet size in network DB to use the full available MTU. This requires a configuration in the docker daemon and need a dockerd restart [docker/libnetwork#1839](https://github.com/docker/libnetwork/pull/1839)
 * Overlay fix for transient IP reuse [docker/libnetwork#1935](https://github.com/docker/libnetwork/pull/1935) [docker/libnetwork#1968](https://github.com/docker/libnetwork/pull/1968)
 * Serialize IP allocation [docker/libnetwork#1788](https://github.com/docker/libnetwork/pull/1788)
 
@@ -139,7 +139,7 @@ adopted as quickly for consistency and compatibility reasons.
 - Docker 17.06 by default disables communication with legacy (v1)
   registries. If you require interaction with registries that have not yet
   migrated to the v2 protocol, set the `--disable-legacy-registry=false` daemon
-  option. Interaction with v1 registries will be removed in Docker 17.12.
+  option.
 
 
 ### Builder
@@ -345,7 +345,7 @@ adopted as quickly for consistency and compatibility reasons.
 + Add support for "grace periods" on healthchecks through the `HEALTHCHECK --start-period` and `--health-start-period` flag to
   `docker service create`, `docker service update`, `docker create`, and `docker run` to support containers with an initial startup
   time [#28938](https://github.com/moby/moby/pull/28938)
-* `docker service create` now omits fields that are not specified by the user, when possible. This will allow defaults to be applied inside the manager [#32284](https://github.com/moby/moby/pull/32284)
+* `docker service create` now omits fields that are not specified by the user, when possible. This allows defaults to be applied inside the manager [#32284](https://github.com/moby/moby/pull/32284)
 * `docker service inspect` now shows default values for fields that are not specified by the user [#32284](https://github.com/moby/moby/pull/32284)
 * Move `docker service logs` out of experimental [#32462](https://github.com/moby/moby/pull/32462)
 * Add support for Credential Spec and SELinux to services to the API [#32339](https://github.com/moby/moby/pull/32339)
@@ -391,8 +391,8 @@ adopted as quickly for consistency and compatibility reasons.
 ### Known issues
 
 If a container is spawned on node A, using the same IP of a container destroyed
-on nodeB within 5 min from the time that it exit, the container on node A will
-not be reachable until one of these 2 conditions happens:
+on nodeB within 5 min from the time that it exit, the container on node A is
+not reachable until one of these 2 conditions happens:
 
 1. Container on A sends a packet out,
 2. The timer that cleans the arp entry in the overlay namespace is triggered (around 5 minutes).

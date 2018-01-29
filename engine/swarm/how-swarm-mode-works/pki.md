@@ -61,7 +61,7 @@ reference for details.
 ## Rotating the CA certificate
 
 In the event that a cluster CA key or a manager node is compromised, you can
-rotate the swarm root CA so that none of the nodes will trust certificates
+rotate the swarm root CA so that none of the nodes trust certificates
 signed by the old root CA anymore.
 
 Run `docker swarm ca --rotate` to generate a new CA certificate and key. If you
@@ -77,7 +77,7 @@ happen in sequence:
     the new root CA certificate is signed with the old root CA certificate.
     This cross-signed certificate is used as an intermediate certificate for all
     new node certificates. This ensures that nodes that still trust the old root
-    CA will be able to validate a certificate signed by the new CA.
+    CA can still validate a certificate signed by the new CA.
 
 2.  In Docker 17.06 and higher, Docker also tells all nodes to immediately
     renew their TLS certificates. This process may take several minutes,
@@ -86,21 +86,21 @@ happen in sequence:
     > **Note**: If your swarm has nodes with different Docker versions, the
     > following two things are true:
     > - Only a manager that is running as the leader **and** running Docker 17.06
-    >   or higher will tell nodes to renew their TLS certificates.
-    > - Only nodes running Docker 17.06 or higher will obey this directive.
+    >   or higher tells nodes to renew their TLS certificates.
+    > - Only nodes running Docker 17.06 or higher obey this directive.
     >
     > For the most predictable behavior, ensure that all swarm nodes are running
     > Docker 17.06 or higher.
 
 3.  After every node in the swarm has a new TLS certificate signed by the new CA,
-    Docker will forget about the old CA certificate and key material, and tell
+    Docker forgets about the old CA certificate and key material, and tells
     all the nodes to trust the new CA certificate only.
 
-    This will also cause a change in the swarm's join tokens. The previous
-    join tokens will no longer be valid.
+    This also causes a change in the swarm's join tokens. The previous
+    join tokens are no longer valid.
 
-From this point on, all new node certificates issued will be signed with the new
-root CA, and will not contain any intermediates.
+From this point on, all new node certificates issued are signed with the new
+root CA, and do not contain any intermediates.
 
 ## Learn More
 

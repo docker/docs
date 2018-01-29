@@ -11,7 +11,7 @@ Docker Trusted Registry (DTR) is designed for high availability.
 When you first install DTR, you create a cluster with a single DTR replica.
 Replicas are single instances of DTR that can be joined together to form a
 cluster.
-When joining new replicas to the cluster, you'll be creating new DTR instances
+When joining new replicas to the cluster, you create new DTR instances
 that are running the same set of services. Any change to the state of an
 instance is replicated across all other instances.
 

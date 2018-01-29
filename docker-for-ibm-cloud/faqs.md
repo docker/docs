@@ -18,8 +18,8 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   Make sure that you enable the permissions in the following table.
 
   * The **View Only** user role does not have any of these enabled by default.
-  * The **Basic User** role has some of these enabled by default. Permissions marked with `*` designate new permissions that **Basic Users** need.
-  * The **Super User** role has everything enabled.
+  * The **Basic User** role has some of these enabled by default.
+  * The **Super User** role has most of these enabled by default.
 
   > Save your setting changes!
   >
@@ -46,7 +46,7 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <li>Manage load balancers</li>
   <li>Manage device monitoring</li>
   <li>Reboot server and view IPMI system information</li>
-  <li>*Issue OS Reloads and initial rescue kernel</li>
+  <li>Issue OS Reloads and initial rescue kernel<a href="#edge-footnote1"><sup>1</sup></a></li>
   <li>Manage port control</li>
   </ul>
   </td>
@@ -56,11 +56,12 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <td>Provision, connect, and expose IP addresses.</td>
   <td>
   <ul>
-  <li>*Add compute with public network port</li>
+  <li>Add compute with public network port<a href="#edge-footnote2"><sup>2</sup></a></li>
   <li>View bandwidth statistics</li>
   <li>Add IP addresses</li>
   <li>Manage email delivery service</li>
-  <li>*Manage Network VLAN Spanning</li>
+  <li>Manage network VLAN spanning<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage security groups<a href="#edge-footnote2"><sup>2</sup></a></li>
   </ul></td>
   </tr>
   <tr>
@@ -70,16 +71,16 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View CDN bandwidth statistics</li>
   <li>Vulnerability scanning</li>
-  <li>*Manage CDN account</li>
-  <li>*Manage CDN file transfers</li>
+  <li>Manage CDN account<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage CDN file transfers<a href="#edge-footnote1"><sup>1</sup></a></li>
   <li>View licenses</li>
   <li>Manage DNS, reverse DNS, and WHOIS</li>
   <li>Antivirus/spyware</li>
   <li>Host IDS</li>
-  <li>*Manage SSH keys</li>
-  <li>*Manage storage</li>
-  <li>*View Certificates (SSL)</li>
-  <li>*Manage Certificates (SSL)</li>
+  <li>Manage SSH keys<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage storage<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>View Certificates (SSL)<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Manage Certificates (SSL)<a href="#edge-footnote1"><sup>1</sup></a></li>
   </ul>
   </td>
   </tr>
@@ -90,14 +91,20 @@ Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cl
   <ul>
   <li>View account summary</li>
   <li>Manage notification subscribers</li>
-  <li>*Add/upgrade cloud instances</li>
-  <li>*Cancel server</li>
-  <li>*Cancel services</li>
-  <li>*Add server</li>
-  <li>*Add/upgrade services</li>
+  <li>Add/upgrade cloud instances<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Cancel server<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Cancel services<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Add server<a href="#edge-footnote1"><sup>1</sup></a></li>
+  <li>Add/upgrade services<a href="#edge-footnote1"><sup>1</sup></a></li>
   </ul>
   </td>
   </tr></tbody></table>
+
+`1`: A **Basic User** needs these permissions added to the account.
+{: id="edge-footnote1" }
+
+`2`: Both **Basic** and **Super** users need these permissions added to the account.
+{: id="edge-footnote2" }
 
 ## Which IBM Cloud region and locations (data centers) will this work with?
 
@@ -150,7 +157,7 @@ Yes. News, updates, and known issues are recorded by version on the [Release not
 
 Contact us through email at docker-for-ibmcloud-beta@docker.com.
 
-If your stack is misbehaving, please run the following diagnostic tool from one of the managers to collect your docker logs and send them to Docker:
+If your stack is misbehaving, run the following diagnostic tool from one of the managers to collect your docker logs and send them to Docker:
 
 ```bash
 $ docker-diagnose
@@ -162,4 +169,4 @@ Your diagnostics session ID is 1234567890-xxxxxxxxxxxxxx
 Please provide this session ID to the maintainer debugging your issue.
 ```
 
-> **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
+> **Note**: Your output may be slightly different from the above, depending on your swarm configuration.

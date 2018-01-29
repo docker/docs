@@ -74,7 +74,7 @@ actually does.
 
 ## Prerequisites
 
-While we'll define concepts along the way, it is good for you to understand
+While we define concepts along the way, it is good for you to understand
 [what Docker is](https://www.docker.com/what-docker) before we begin.
 
 We also need to assume you are familiar with a few concepts before we continue:
@@ -85,7 +85,7 @@ We also need to assume you are familiar with a few concepts before we continue:
 - Basic familiarity with the ideas of code dependencies and building
 - Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
 
-Finally, though we'll remind you again when you need these things, you can
+Finally, though we remind you again when you need these things, you can
 save yourself some distraction at that time by [signing up for a
 Docker ID](https://cloud.docker.com) and using it on your local machine
 by running the following command:
@@ -141,14 +141,14 @@ entanglement; a containerized app "runs anywhere."
 Before we get started, make sure your system has the latest version of Docker
 installed.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
+[Install Docker](/install/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
 > **Note**: version 1.13 or higher is required
 
-You should be able to run `docker run hello-world` and see a response like this:
-> **Note**: You may need to add your user to the `docker` group in order to call this command without sudo. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/)
+When you run `docker run hello-world`, look for a response like this:
+> **Note**: You may need to add your user to the `docker` group to call this command without sudo. [Read more](https://docs.docker.com/install/linux/linux-postinstall/)
 
-> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](https://docs.docker.com/get-started/part2/) of the tutorial.
+> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](/get-started/part2/) of the tutorial.
 
 ```shell
 $ docker run hello-world
@@ -177,6 +177,7 @@ application, system dependencies are not an issue, and resource density is
 increased. Orchestration of scaling behavior is a matter of spinning up new
 executables, not new VM hosts.
 
-We'll be learning about all of these things, but first let's learn to walk.
+This tutorial discusses all of these things, but first let's start with the
+basics.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}

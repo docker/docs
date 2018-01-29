@@ -63,7 +63,7 @@ of the technologies, policies and procedures provided by PKI include:
 
 ## How does Docker Engine authenticate using TLS
 
-In this section, you'll learn how Docker Engine and Swarm use PKI and
+This section shows how Docker Engine and Swarm use PKI and
 certificates to increase security.
 
 <!--[metadata]>Need to know about encryption too<![end-metadata]-->
@@ -72,7 +72,7 @@ You can configure both the Docker Engine CLI and the Docker Engine daemon to req
 TLS for authentication. Configuring TLS means that all communications between
 the Docker Engine CLI and the Docker Engine daemon must be accompanied with, and signed by a
 trusted digital certificate. The Docker Engine CLI must provide its digital certificate
-before the Docker Engine daemon will accept incoming commands from it.
+before the Docker Engine daemon accepts incoming commands from it.
 
 The Docker Engine daemon must also trust the certificate that the Docker Engine CLI uses.
 This trust is usually established by way of a trusted third party. The Docker Engine
@@ -116,8 +116,8 @@ These configurations are differentiated by the type of entity acting as the Cert
 
 An external CA is a trusted 3rd party company that provides a means of creating,
 issuing, revoking, and otherwise managing certificates. They are *trusted* in
-the sense that they have to fulfill specific conditions and maintain high levels
-of security and business practices to win your business. You also have to
+the sense that they need to fulfill specific conditions and maintain high levels
+of security and business practices to win your business. You also need to
 install the external CA's root certificates for you computers and services to
 *trust* them.
 

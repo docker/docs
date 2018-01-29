@@ -6,7 +6,7 @@ redirect_from:
 title: Docker for Mac vs. Docker Toolbox
 ---
 
-If you already have an installation of Docker Toolbox, please read these topics
+If you already have an installation of Docker Toolbox, read these topics
 first to learn how Docker for Mac and Docker Toolbox differ, and how they can
 coexist.
 
@@ -38,25 +38,36 @@ bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
 
 Here are some key points to know about Docker for Mac before you get started:
 
-* Docker for Mac does not use VirtualBox, but rather [HyperKit](https://github.com/docker/HyperKit/), a lightweight macOS virtualization solution built on top of Hypervisor.framework in macOS 10.10 Yosemite and higher.
+* Docker for Mac uses
+  [HyperKit](https://github.com/docker/HyperKit/) instead of Virtual Box.
+  Hyperkit is a lightweight macOS virtualization solution built on top of
+  Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
-* Installing Docker for Mac does not affect machines you created with Docker Machine. The install offers to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If chosen, content from `default` is copied to the new Docker for Mac HyperKit VM, and your original `default` machine is kept as is.
+* When you install Docker for Mac, machines created with Docker Machine are
+  not affected. The Docker for Mac detects and offers to copy containers and
+  images from your local `default` machine (if one exists) to the new
+  Docker for Mac HyperKit VM. If you choose to do this, the image is copied,
+  but the original `default` machine is still kept exactly as it was.
 
-* The Docker for Mac application does not use `docker-machine` to provision that VM; but rather creates and manages it directly.
+* Docker for Mac application does not use `docker-machine` to provision
+  the Hyperkit-based VM it uses. The Docker Engine API is exposed on a
+  socket available to the Mac host at `/var/run/docker.sock`. This is the
+  default location Docker and Docker Compose clients use to connect to
+  the Docker daemon, so you to use `docker` and `docker-compose` CLI commands
+  on your Mac.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
 ![Docker for Mac Install](images/docker-for-mac-install.png)
 
-With Docker for Mac, you get only one VM, and you don't manage it. It is managed
-by the Docker for Mac application, which includes autoupdate to update the
-client and server versions of Docker.
+With Docker for Mac, you only get (and only usually need) one VM, managed by Docker
+for Mac. Docker for Mac automatically upgrades the Docker client and
+daemon when updates are available.
 
-If you need several VMs and want to manage the version of the Docker client or
-server you are using, you can continue to use `docker-machine`, on the same
-machine, as described in [Docker Toolbox and Docker for Mac
+If you do need multiple VMs, such as when testing multi-node swarms, you can
+continue to use Docker Machine, which operates outside the scope of Docker for
+Mac. See [Docker Toolbox and Docker for Mac
 coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
 
@@ -72,9 +83,12 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
     If this command returns no output, you are ready to use Docker for Mac.
 
-    If it returns output (as shown in the example), you need to unset the `DOCKER` environment variables to make the client talk to the Docker for Mac Engine (next step).
+    If it returns output (as shown in the example), you need to unset
+    the `DOCKER` environment variables to make the client talk to the
+    Docker for Mac Engine (next step).
 
-2. Run the `unset` command on the following `DOCKER` environment variables to unset them in the current shell.
+2. Run the `unset` command on the following `DOCKER` environment variables to
+   unset them in the current shell.
 
         unset DOCKER_TLS_VERIFY
         unset DOCKER_CERT_PATH
@@ -86,14 +100,17 @@ coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
           $ env | grep DOCKER
 
   If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all
-DOCKER environment variables at once. (This will not work in other shells such
-as `zsh`; you will need to unset each variable individually.)
+  DOCKER environment variables at once. (This does not work in other shells such
+  as `zsh`; you need to unset each variable individually.)
 
->**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
+> **Note**: If you have a shell script as part of your profile that sets these
+> `DOCKER` environment variables automatically each time you open a command
+> window, then you need to unset these each time you want to use Docker for Mac.
 
 > If you install Docker for Mac on a machine where Docker Toolbox is installed..
 >
-> Docker for Mac will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
+> Docker for Mac replaces the `docker` and `docker-compose` command lines in
+> `/usr/local/bin` with symlinks to its own versions.
 {:.warning}
 
 See also [Unset environment variables in the current
@@ -107,7 +124,7 @@ you want to use Docker for Mac, make sure all DOCKER environment variables are
 unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use
 one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval
 $(docker-machine env default)` (or the name of the machine you want to target).
-This will switch the current command shell to talk to the specified Toolbox
+This switches the current command shell to talk to the specified Toolbox
 machine.
 
 This setup is represented in the following diagram.
@@ -160,7 +177,63 @@ is running a different version of server.
 
 You might also run into a similar situation with Docker Universal Control Plane (UCP).
 
-There are a few ways to address this problem and keep using your older machines. One solution is to use a version manager like [DVM](https://github.com/getcarina/dvm).
+There are a few ways to address this problem and keep using your older
+machines. One solution is to use a version manager like
+[DVM](https://github.com/getcarina/dvm).
+
+## Migrating from Docker Toolbox to Docker for Mac
+
+Docker for Mac does not propose Toolbox image migration as part of the Docker
+for Mac installer since version 18.01.0.  You can migrate existing Docker
+Toolbox images with the scripts described below. (Note that this migration
+cannot merge images from both Docker and Toolbox: any existing Docker image are
+*replaced* by the Toolbox images.)
+
+To run these instructions you need to now how to run shell commands in a
+terminal. You also need a working `qemu-img`; it is part of the qemu package in
+both MacPorts and Brew:
+
+```sh
+$ brew install qemu  # or sudo port install qemu
+```
+
+First, find your Toolbox disk images. You probably have just one:
+`~/.docker/machine/machines/default/disk.vmdk`.
+
+```sh
+$ vmdk=~/.docker/machine/machines/default/disk.vmdk
+$ file "$vmdk"
+/Users/akim/.docker/machine/machines/default/disk.vmdk: VMware4 disk image
+```
+
+Second, find out the location and format of the disk image used by your Docker
+for Mac.
+
+```sh
+$ settings=~/Library/Group\ Containers/group.com.docker/settings.json
+$ dimg=$(sed -En 's/.*diskPath.*:.*"(.*)".*/\1/p' < "$settings")
+$ echo "$dimg"
+/Users/akim/Library/Containers/com.docker.docker/Data/vms/0/Docker.raw
+```
+
+In this case the format is `raw` (it could have been `qcow2`), and the location
+is `~Library/Containers/com.docker.docker/Data/vms/0/` (it could have been
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`).
+
+Then:
+- if your format is qcow2, run
+```sh
+$ qemu-img convert -p -f vmdk -O qcow2 -o lazy_refcounts=on "$vmdk" "$dimg"
+```
+- if your format is raw, run the following command. If you are short on disk
+  space, it is likely to fail.
+```sh
+$ qemu-img convert -p -f vmdk -O raw "$vmdk" "$dimg"
+```
+
+Finally (optional), if you are done with Docker Toolbox, you may fully
+[uninstall
+it](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox).
 
 ## How do I uninstall Docker Toolbox?
 

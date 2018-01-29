@@ -14,7 +14,7 @@ shows a few examples of how to customize Docker's settings.
 
 ### Start manually
 
-Once Docker is installed, you will need to start the Docker daemon.
+Once Docker is installed, you need to start the Docker daemon.
 Most Linux distributions use `systemctl` to start services. If you
 do not have `systemctl`, use the `service` command.
 
@@ -33,7 +33,7 @@ do not have `systemctl`, use the `service` command.
 ### Start automatically at system boot
 
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](/engine/installation/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
 
 ## Custom Docker daemon options
 
@@ -69,7 +69,7 @@ these environment variables using the `daemon.json` file.
 This example overrides the default `docker.service` file.
 
 If you are behind an HTTP or HTTPS proxy server, for example in corporate settings,
-you will need to add this configuration in the Docker systemd service file.
+you need to add this configuration in the Docker systemd service file.
 
 1.  Create a systemd drop-in directory for the docker service:
 

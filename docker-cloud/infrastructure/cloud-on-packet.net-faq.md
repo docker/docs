@@ -41,7 +41,7 @@ If you turn off the device, Docker Cloud marks it as `Unreachable` because the
 node has not been terminated, but Cloud cannot contact it.
 
 If you created the host yourself, added it to Docker Cloud as a "Bring Your Own
-Node" and then terminated it, the node will be marked as `Unreachable` until you
+Node" and then terminated it, the node is marked as `Unreachable` until you
 manually remove it.
 
 ## How can I log in to a Packet.net node managed by Docker Cloud?

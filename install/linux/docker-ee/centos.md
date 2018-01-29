@@ -3,6 +3,7 @@ description: Instructions for installing Docker EE on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/centos/
+- /engine/installation/linux/docker-ee/centos/
 title: Get Docker EE for CentOS
 toc_max: 4
 ---
@@ -18,7 +19,7 @@ toc_max: 4
 ## Prerequisites
 
 Docker CE users should go to
-[Get docker CE for CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/)
+[Get docker CE for CentOS](/install/linux/docker-ce/centos.md)
 **instead of this topic**.
 
 ### Docker EE repository URL

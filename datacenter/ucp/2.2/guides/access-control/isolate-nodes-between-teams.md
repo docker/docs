@@ -28,13 +28,13 @@ complete this example.
 In the web UI, navigate to the **Organizations & Teams** page to create a team
 named "Ops" in your organization. Add a user who isn't a UCP administrator to
 the team.
-[Learn to create and manage teams](create-and-manage-teams.md). 
+[Learn to create and manage teams](create-and-manage-teams.md).
 
 ## Create a node collection and a resource collection
 
 In this example, the Ops team uses an assigned group of nodes, which it
 accesses through a collection. Also, the team has a separate collection
-for its resources. 
+for its resources.
 
 Create two collections: one for the team's worker nodes and another for the
 team's resources.
@@ -44,14 +44,14 @@ team's resources.
 2.  Click **Create collection** and name the new collection "Prod".
 3.  Click **Create** to create the collection.
 4.  Find **Prod** in the list, and click **View children**.
-5.  Click **Create collection**, and name the child collection 
-    "Webserver". This creates a sub-collection for access control. 
+5.  Click **Create collection**, and name the child collection
+    "Webserver". This creates a sub-collection for access control.
 
 You've created two new collections. The `/Prod` collection is for the worker
 nodes, and the `/Prod/Webserver` sub-collection is for access control to
 an application that you'll deploy on the corresponding worker nodes.
 
-## Move a worker node to a collection 
+## Move a worker node to a collection
 
 By default, worker nodes are located in the `/Shared` collection.
 Worker nodes that are running DTR are assigned to the `/System` collection.
@@ -66,15 +66,15 @@ Move a worker node by changing the value of its access label key,
     because you can't move nodes that are in the `/System` collection. By
     default, worker nodes are assigned to the `/Shared` collection.  
 3.  When you've found an available node, in the details pane, click
-    **Configure**. 
+    **Configure**.
 3.  In the **Labels** section, find `com.docker.ucp.access.label` and change
-    its value from `/Shared` to `/Prod`. 
+    its value from `/Shared` to `/Prod`.
 4.  Click **Save** to move the node to the `/Prod` collection.
 
 > Docker EE Advanced required
 >
-> If you don't have a Docker EE Advanced license, you'll get the following 
-> error message when you try to change the access label: 
+> If you don't have a Docker EE Advanced license, you see the following
+> error message when you try to change the access label:
 > **Nodes must be in either the shared or system collection without an advanced license.**
 > [Get a Docker EE Advanced license](https://www.docker.com/pricing).
 
@@ -82,7 +82,7 @@ Move a worker node by changing the value of its access label key,
 
 ## Grant access for a team
 
-You'll need two grants to control access to nodes and container resources:
+You need two grants to control access to nodes and container resources:
 
 -  Grant the `Ops` team the `Restricted Control` role for the `/Prod/Webserver`
    resources.
@@ -99,9 +99,9 @@ Create two grants for team access to the two collections:
 5.  In the left pane, click **Roles**, and select **Restricted Control**
     in the dropdown.
 6.  Click **Subjects**, and under **Select subject type**, click **Organizations**.
-7.  Select your organization, and in the **Team** dropdown, select **Ops**. 
+7.  Select your organization, and in the **Team** dropdown, select **Ops**.
 8.  Click **Create** to grant the Ops team access to the `/Prod/Webserver`
-    collection. 
+    collection.
 
 The same steps apply for the nodes in the `/Prod` collection.
 
@@ -112,9 +112,9 @@ The same steps apply for the nodes in the `/Prod` collection.
 4.  In the left pane, click **Roles**, and in the dropdown, select **Scheduler**.
 5.  In the left pane, click **Subjects**, and under **Select subject type**, click
     **Organizations**.
-6.  Select your organization, and in the **Team** dropdown, select **Ops** . 
+6.  Select your organization, and in the **Team** dropdown, select **Ops** .
 7.  Click **Create** to grant the Ops team `Scheduler` access to the nodes in the
-    `/Prod` collection. 
+    `/Prod` collection.
 
 ![](../images/isolate-nodes-2.png){: .with-border}
 
@@ -125,13 +125,13 @@ deploys a service, UCP assigns its resources to the user's default collection.
 From the target collection of a resource, UCP walks up the ancestor collections
 until it finds nodes that the user has `Scheduler` access to. In this example,
 UCP assigns the user's service to the `/Prod/Webserver` collection and schedules
-tasks on nodes in the `/Prod` collection. 
+tasks on nodes in the `/Prod` collection.
 
 As a user on the Ops team, set your default collection to `/Prod/Webserver`.
 
 1.  Log in as a user on the Ops team.
 2.  Navigate to the **Collections** page, and in the **Prod** collection,
-    click **View Children**. 
+    click **View Children**.
 3.  In the **Webserver** collection, click the **More Options** icon and
     select **Set to default**.
 

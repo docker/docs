@@ -6,8 +6,8 @@ keywords: registry, notary, trust
 
 The Docker CLI client makes it easy to sign images but to streamline that
 process it generates a set of private and public keys that are not tied
-to your UCP account. This means that you'll be able to push and sign images to
-DTR, but UCP won't trust those images since it doesn't know anything about
+to your UCP account. This means that you can push and sign images to
+DTR, but UCP doesn't trust those images since it doesn't know anything about
 the keys you're using.
 
 So before signing and pushing images to DTR you should:
@@ -121,7 +121,7 @@ Import the private key in your UCP bundle into the Notary CLI client:
 notary key import <path-to-key.pem>
 ```
 
-The private key is copied to `~/.docker/trust`, and you'll be prompted for a
+The private key is copied to `~/.docker/trust`, and you are prompted for a
 password to encrypt it.
 
 You can validate what keys Notary knows about by running:

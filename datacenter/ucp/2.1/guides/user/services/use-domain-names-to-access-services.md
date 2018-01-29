@@ -139,7 +139,7 @@ a cookie in the response. When the user makes a new request, the user's browser
 will send the cookie, and the HTTP routing mesh can use it to decide to which
 service to route to.
 
-Since this requires the HTTP routing mesh to be able to read the cookie, this
+Since this requires the HTTP routing mesh to read the cookie, this
 option only works with HTTP routes.
 
 Sticky sessions might stop temporarily if the service is reconfigured to
@@ -179,12 +179,12 @@ enabling the HTTP routing mesh:
 The HTTP routing mesh will route to all services in these networks, but services
 on different networks can't communicate directly.
 
-When using a UCP client bundle for an admin user, or a user with administrator privileges, 
+When using a UCP client bundle for an admin user, or a user with administrator privileges,
 you can create an overlay network that contains the `com.docker.mesh.http` label by running the following command.
 
 ```none
 docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-network
 ```
 
-If you're creating a new HRM network you need to disable the HRM service first, or disable 
+If you're creating a new HRM network you need to disable the HRM service first, or disable
 and enable the HRM service after you create the network else HRM will not be available on new network.

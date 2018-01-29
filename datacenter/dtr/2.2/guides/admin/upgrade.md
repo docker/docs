@@ -13,8 +13,8 @@ support upgrades according to the following rules:
 * When upgrading between minor versions, you can't skip versions, but you can
   upgrade from any patch versions of the previous minor version to any patch
   version of the current minor version.
-* When upgrading between major versions you also have to upgrade one major
-  version at a time, but you have to upgrade to the earliest available minor
+* When upgrading between major versions you also need to upgrade one major
+  version at a time, but you need to upgrade to the earliest available minor
   version. We also strongly recommend upgrading to the latest minor/patch
   version for your major version first.
 

@@ -9,10 +9,9 @@ title: The Docker Cloud CLI
 ---
 
 Docker Cloud maintains a Command Line Interface (CLI) tool that you can use
-to interact with the service. We highly recommend installing the CLI, as it will
-allow you to script and automate actions in Docker Cloud without using the web
-interface. If you will only ever be using the web interface, this is not
-necessary.
+to interact with the service. We highly recommend installing the CLI, as it
+allows you to script and automate actions in Docker Cloud without using the web
+interface. If you only ever use the web interface, this is not necessary.
 
 ## Install
 
@@ -38,7 +37,7 @@ package manager, which is a package manager for
 [Python](https://www.python.org/) applications.
 
 * If you already have Python 2.x or 3.x installed, you probably have `pip` and
-`setuptools`, but will need to upgrade per the instructions
+`setuptools`, but need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
 
 > The Docker Cloud CLI does not currently support Python 3.x.
@@ -134,7 +133,7 @@ To learn more, see the [Docker Cloud CLI README](https://github.com/docker/docke
 
 ## Upgrade the docker-cloud CLI
 
-Periodically, Docker will add new features and fix bugs in the existing CLI. To use these new features, you must upgrade the CLI.
+Periodically, Docker adds new features and fixes bugs in the existing CLI. To use these new features, you must upgrade the CLI.
 
 #### Upgrade the docker-cloud CLI on Linux or Windows
 

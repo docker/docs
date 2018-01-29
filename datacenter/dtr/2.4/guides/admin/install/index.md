@@ -34,7 +34,7 @@ choose **Docker Trusted Registry**.
 
 ![](../../images/install-dtr-2.png){: .with-border}
 
-After you configure all the options, you'll have a snippet that you can use
+After you configure all the options, you have a snippet that you can use
 to deploy DTR. It should look like this:
 
 ```none

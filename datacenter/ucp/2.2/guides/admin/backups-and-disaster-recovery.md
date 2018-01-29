@@ -164,7 +164,7 @@ UCP restore recovers the following assets from the backup file:
   authentication backends.
 
 UCP restore does not include swarm assets such as cluster membership, services, networks,
-secrets, etc.  [Learn to backup a swarm](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm).
+secrets, etc.  [Learn to backup a swarm](/engine/swarm/admin_guide/#back-up-the-swarm).
 
 There are two ways to restore UCP:
 
@@ -181,7 +181,7 @@ restored through the following disaster recovery procedure. If your cluster has
 lost quorum, you can still take a backup of one of the remaining nodes, but we
 recommend making backups regularly.
 
-It is important to note that this procedure is not guaranteed to succeed with
+This procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for
 [high availability](configure/set-up-high-availability.md).
@@ -200,7 +200,7 @@ manager failures, the system should be configured for
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
    command.
-6. If any nodes are listed as `down`, you'll have to manually [remove these
+6. If any nodes are listed as `down`, you need to manually [remove these
    nodes](../configure/scale-your-cluster.md) from the swarm and then re-join
    them using a `docker swarm join` operation with the swarm's new join-token.
 

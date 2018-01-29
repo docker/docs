@@ -11,7 +11,7 @@ understandable even if you're not familiar with it.
 
 ## Prerequisites
 
-Make sure you have already installed both [Docker Engine](/engine/installation/) and [Docker
+Make sure you have already installed both [Docker Engine](/install/index.md) and [Docker
 Compose](install.md). You don't need to install Python or Redis, as both are
 provided by Docker images.
 
@@ -66,7 +66,7 @@ Define the application dependencies.
       > loop lets us attempt our request multiple times if the redis service is
       > not available. This is useful at startup while the application comes
       > online, but also makes our application more resilient if the Redis
-      > service has to be restarted anytime during the app's lifetime. In a
+      > service needs to be restarted anytime during the app's lifetime. In a
       > cluster, this also helps handling momentary connection drops between
       > nodes.
 
@@ -304,9 +304,9 @@ services. For example, to see what environment variables are available to the
 
     $ docker-compose run web env
 
-See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which will also show you available commands.
+See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which also shows you available commands.
 
-If you started Compose with `docker-compose up -d`, you'll probably want to stop
+If you started Compose with `docker-compose up -d`, stop
 your services once you've finished with them:
 
     $ docker-compose stop

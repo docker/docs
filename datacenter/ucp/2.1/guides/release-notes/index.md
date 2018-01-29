@@ -116,8 +116,8 @@ by our development team during internal testing
 **Known issues**
 
 In UCP 2.1.3, if you try to upload externally-signed controller
-certificates through the **Admin Settings** page on the UI, you'll see a
-"Success" message, but the certificates won't be updated on any
+certificates through the **Admin Settings** page on the UI, you see a
+"Success" message, but the certificates isn't updated on any
 of the controller nodes.
 
 The workaround is to update the contents of the `ucp-controller-server-certs`
@@ -234,7 +234,7 @@ curl -u admin "https://$UCP_HOST/enzi/v0/config/sessions" \
   -d '{"lifetimeHours": 72, "renewalThresholdHours": 24, "perUserLimit": 5}'
 ```
 
-You'll now be able to log into UCP and DTR.
+You can now log into UCP and DTR.
 
 **New features**
 

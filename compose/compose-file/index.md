@@ -158,13 +158,13 @@ The default path for a Compose file is `./docker-compose.yml`.
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
 They both work.
 
-A service definition contains configuration which will be applied to each
+A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
 `docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker container create`, options specified in the Dockerfile (e.g., `CMD`,
-`EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
+As with `docker container create`, options specified in the Dockerfile, such as `CMD`,
+`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like
@@ -208,7 +208,7 @@ with the `webapp` and optional `tag` specified in `image`:
     build: ./dir
     image: webapp:tag
 
-This will result in an image named `webapp` and tagged `tag`, built from `./dir`.
+This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
@@ -222,7 +222,7 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose will build and tag it with a generated name, and use that image
+Compose builds and tags it with a generated name, and use that image
 thereafter.
 
     build:
@@ -232,7 +232,7 @@ thereafter.
 
 Alternate Dockerfile.
 
-Compose will use an alternate file to build with. A build path must also be
+Compose uses an alternate file to build with. A build path must also be
 specified.
 
     build:
@@ -281,7 +281,7 @@ at build time is the value in the environment where Compose is running.
 
 > **Note:** This option is new in v3.2
 
-A list of images that the engine will use for cache resolution.
+A list of images that the engine uses for cache resolution.
 
     build:
       context: .
@@ -365,7 +365,7 @@ configuration. Two different syntax variants are supported.
 
 > **Note**: The config must already exist or be
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
-> of this stack file, or stack deployment will fail.
+> of this stack file, or stack deployment fails.
 
 For more information on configs, see [configs](/engine/swarm/configs.md).
 
@@ -410,12 +410,12 @@ The long syntax provides more granularity in how the config is created within
 the service's task containers.
 
 - `source`: The name of the config as it exists in Docker.
-- `target`: The path and name of the file that will be mounted in the service's
+- `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
-- `uid` and `gid`: The numeric UID or GID which will own the mounted config file
+- `uid` and `gid`: The numeric UID or GID that owns the mounted config file
   within in the service's task containers. Both default to `0` on Linux if not
   specified. Not supported on Windows.
-- `mode`: The permissions for the file that will be mounted within the service's
+- `mode`: The permissions for the file that is mounted within the service's
   task containers, in octal notation. For instance, `0444`
   represents world-readable. The default is `0444`. Configs cannot be writable
   because they are mounted in a temporary filesystem, so if you set the writable
@@ -533,8 +533,8 @@ Specify a service discovery method for external clients connecting to a swarm.
 
 > **[Version 3.3](compose-versioning.md#version-3) only.**
 
-* `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP),
-which acts as the “front end” for clients to reach the service on a
+* `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP)
+that acts as the “front end” for clients to reach the service on a
 network. Docker routes requests between the client and available worker
 nodes for the service, without client knowledge of how many nodes
 are participating in the service or their IP addresses or ports.
@@ -593,7 +593,7 @@ mode topics.
 
 #### labels
 
-Specify labels for the service. These labels will *only* be set on the service,
+Specify labels for the service. These labels are *only* set on the service,
 and *not* on any containers for the service.
 
     version: "3"
@@ -703,7 +703,7 @@ services or containers in a swarm.
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource
 options](compose-file-v2.md#cpu-and-other-resources).
-If you have further questions, please refer to the discussion on the GitHub
+If you have further questions, refer to the discussion on the GitHub
 issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
 {: .important}
 
@@ -755,7 +755,7 @@ updates.
   (default: `pause`).
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
-- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks will briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
+- `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
 
 > **Note**: `order` is only supported for v3.4 and higher of the compose
 file format.
@@ -793,10 +793,10 @@ The following sub-options (supported for `docker compose up` and `docker compose
 - [sysctls](#sysctls)
 - [userns_mode](#userns_mode)
 
->**Tip:** See also, the section on [how to configure volumes
+>**Tip:** See the section on [how to configure volumes
 for services, swarms, and docker-stack.yml
-files](#volumes-for-services-swarms-and-stack-files).  Volumes _are_ supported
-but in order to work with swarms and services, they must be configured properly,
+files](#volumes-for-services-swarms-and-stack-files). Volumes _are_ supported
+but to work with swarms and services, they must be configured
 as named volumes or associated with services that are constrained to nodes with
 access to the requisite volumes.
 
@@ -814,14 +814,15 @@ client create option.
 
 ### depends_on
 
-Express dependency between services, which has two effects:
+Express dependency between services, Service dependencies cause the following
+behaviors:
 
-- `docker-compose up` will start services in dependency order. In the following
-  example, `db` and `redis` will be started before `web`.
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` is started before `web`.
 
-- `docker-compose up SERVICE` will automatically include `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` will also
-  create and start `db` and `redis`.
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
+  creates and starts `db` and `redis`.
 
 Simple example:
 
@@ -839,7 +840,7 @@ Simple example:
 
 > There are several things to be aware of when using `depends_on`:
 >
-> - `depends_on` will not wait for `db` and `redis` to be "ready" before
+> - `depends_on` does not wait for `db` and `redis` to be "ready" before
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 >   for more on this problem and strategies for solving it.
@@ -901,10 +902,10 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note**: Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` both overrides any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clear out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it will be ignored.
+> clears out any default command on the image - meaning that if there's a `CMD`
+> instruction in the Dockerfile, it is ignored.
 
 ### env_file
 
@@ -925,19 +926,20 @@ empty or undefined.
       - /opt/secrets.env
 
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
-beginning with `#` (i.e. comments) are ignored, as are blank lines.
+beginning with `#` are treated as comments and are ignored. Blank lines are
+also ignored.
 
     # Set Rails/Rack environment
     RACK_ENV=development
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files will _not_ be automatically visible during the
+> defined in environment files are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
-quotes will be included in the value passed to Compose.
+quotes are included in the value passed to Compose.
 
 Keep in mind that _the order of files in the list is significant in determining
 the value assigned to a variable that shows up more than once_. The files in the
@@ -968,7 +970,7 @@ and
 VAR=hello
 ```
 
-$VAR will be `hello`.
+$VAR is `hello`.
 
 ### environment
 
@@ -990,7 +992,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SESSION_SECRET
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` will _not_ be automatically visible during the
+> defined in `environment` are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
@@ -1018,7 +1020,7 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 > **Notes:**
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
-must be connected to at least one of the same networks as the service which is
+must be connected to at least one of the same networks as the service that is
 linking to them. [Links](compose-file-v2#links) are a
 legacy option. We recommend using [networks](#networks) instead.
 >
@@ -1033,7 +1035,7 @@ Add hostname mappings. Use the same values as the docker client `--add-host` par
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
-An entry with the ip address and hostname will be created in `/etc/hosts` inside containers for this service, e.g:
+An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
@@ -1136,7 +1138,7 @@ a link alias (`SERVICE:ALIAS`), or just the service name.
        - db:database
        - redis
 
-Containers for the linked service will be reachable at a hostname identical to
+Containers for the linked service are reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links are not required to enable services to communicate - by default,
@@ -1149,7 +1151,7 @@ Links also express dependency between services in the same way as
 > **Notes**
 >
 > * If you define both links and [networks](#networks), services with
-> links between them must share at least one network in common in order to
+> links between them must share at least one network in common to
 > communicate.
 >
 > *  This option is ignored when
@@ -1177,7 +1179,7 @@ The default value is json-file.
 
 > **Note**: Only the `json-file` and `journald` drivers make the logs
 available directly from `docker-compose up` and `docker-compose logs`.
-Using any other driver will not print any logs.
+Using any other driver does not print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
 
@@ -1254,7 +1256,7 @@ Aliases (alternative hostnames) for this service on the network. Other container
 
 Since `aliases` is network-scoped, the same service can have different aliases on different networks.
 
-> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name will resolve to is not guaranteed.
+> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
 
 The general format is shown here.
 
@@ -1346,7 +1348,7 @@ networks:
 
 Sets the PID mode to the host PID mode.  This turns on sharing between
 container and the host operating system the PID address space.  Containers
-launched with this flag will be able to access and manipulate other
+launched with this flag can access and manipulate other
 containers in the bare-metal machine's namespace and vise-versa.
 
 ### ports
@@ -1356,11 +1358,11 @@ Expose ports.
 #### Short syntax
 
 Either specify both ports (`HOST:CONTAINER`), or just the container
-port (a random host port will be chosen).
+port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
-> erroneous results when using a container port lower than 60, because YAML will
-> parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> erroneous results when using a container port lower than 60, because YAML
+> parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:
@@ -1382,7 +1384,7 @@ expressed in the short form.
 - `published`: the publicly exposed port
 - `protocol`: the port protocol (`tcp` or `udp`)
 - `mode`: `host` for publishing a host port on each node, or `ingress` for a swarm
-   mode port which will be load balanced.
+   mode port to be load balanced.
 
 ```none
 ports:
@@ -1402,7 +1404,7 @@ configuration. Two different syntax variants are supported.
 
 > **Note**: The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
-> of this stack file, or stack deployment will fail.
+> of this stack file, or stack deployment fails.
 
 For more information on secrets, see [secrets](/engine/swarm/secrets.md).
 
@@ -1444,15 +1446,15 @@ The long syntax provides more granularity in how the secret is created within
 the service's task containers.
 
 - `source`: The name of the secret as it exists in Docker.
-- `target`: The name of the file that will be mounted in `/run/secrets/` in the
+- `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
-- `uid` and `gid`: The numeric UID or GID which will own the file within
+- `uid` and `gid`: The numeric UID or GID that owns the file within
   `/run/secrets/` in the service's task containers. Both default to `0` if not
   specified.
-- `mode`: The permissions for the file that will be mounted in `/run/secrets/`
+- `mode`: The permissions for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation. For instance, `0444`
-  represents world-readable. The default in Docker 1.13.1 is `0000`, but will
-  be `0444` in the future. Secrets cannot be writable because they are mounted
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but is
+  be `0444` in newer versions. Secrets cannot be writable because they are mounted
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
@@ -1515,7 +1517,7 @@ SIGKILL.
 ### stop_signal
 
 Sets an alternative signal to stop the container. By default `stop` uses
-SIGTERM. Setting an alternative signal using `stop_signal` will cause
+SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
 
     stop_signal: SIGUSR1
@@ -1624,7 +1626,7 @@ volumes:
 Optionally specify a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 
-You can mount a relative path on the host, which will expand relative to
+You can mount a relative path on the host, that expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 
@@ -1654,7 +1656,7 @@ expressed in the short form.
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
   [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
-- `target`: the path in the container where the volume will be mounted
+- `target`: the path in the container where the volume is mounted
 - `read_only`: flag to set the volume as read-only
 - `bind`: configure additional bind options
   - `propagation`: the propagation mode used for the bind
@@ -1694,7 +1696,7 @@ volumes:
 
 When working with services, swarms, and `docker-stack.yml` files, keep in mind
 that the tasks (containers) backing a service can be deployed on any node in a
-swarm, which may be a different node each time the service is updated.
+swarm, and this may be a different node each time the service is updated.
 
 In the absence of having named volumes with specified sources, Docker creates an
 anonymous volume for each task backing a service. Anonymous volumes do not
@@ -1708,7 +1710,7 @@ volume present.
 As an example, the `docker-stack.yml` file for the
 [votingapp sample in Docker
 Labs](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) defines a service called `db` that runs a `postgres` database. It is
-configured as a named volume in order to persist the data on the swarm,
+configured as a named volume to persist the data on the swarm,
 _and_ is constrained to run only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```none
@@ -1764,7 +1766,7 @@ volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
 
 ### restart
 
-`no` is the default restart policy, and it will not restart a container under
+`no` is the default restart policy, and it does not restart a container under
 any circumstance. When `always` is specified, the container always restarts. The
 `on-failure` policy restarts a container if the exit code indicates an
 on-failure error.
@@ -1773,7 +1775,7 @@ on-failure error.
     restart: always
     restart: on-failure
     restart: unless-stopped
-    
+
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
@@ -1828,7 +1830,7 @@ that looks like this:
     1gb
 
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
-`mb` and `gb`. Please note that decimal values are not supported at this time.
+`mb` and `gb`. Decimal values are not supported at this time.
 
 
 ## Volume configuration reference
@@ -1862,15 +1864,15 @@ up:
     volumes:
       data-volume:
 
-An entry under the top-level `volumes` key can be empty, in which case it will
-use the default driver configured by the Engine (in most cases, this is the
+An entry under the top-level `volumes` key can be empty, in which case it
+uses the default driver configured by the Engine (in most cases, this is the
 `local` driver). Optionally, you can configure it with the following keys:
 
 ### driver
 
 Specify which volume driver should be used for this volume. Defaults to whatever
 driver the Docker Engine has been configured to use, which in most cases is
-`local`. If the driver is not available, the Engine will return an error when
+`local`. If the driver is not available, the Engine returns an error when
 `docker-compose up` tries to create the volume.
 
      driver: foobar
@@ -1888,14 +1890,14 @@ documentation for more information. Optional.
 ### external
 
 If set to `true`, specifies that this volume has been created outside of
-Compose. `docker-compose up` will not attempt to create it, and will raise
+Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other volume configuration keys
 (`driver`, `driver_opts`).
 
 In the example below, instead of attempting to create a volume called
-`[projectname]_data`, Compose will look for an existing volume simply
+`[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
     version: '2'
@@ -1923,7 +1925,7 @@ refer to it within the Compose file:
 
 > External volumes are always created with docker stack deploy
 >
-External volumes that do not exist _will be created_ if you use [docker stack
+External volumes that do not exist _are created_ if you use [docker stack
 deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
 (instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
 volume is automatically created when it is defined by a service. As service
@@ -1956,7 +1958,7 @@ conflicting with those used by other software.
 > [Added in version 3.4 file format](compose-versioning.md#version-34)
 
 Set a custom name for this volume. The name field can be used to reference
-networks which contain special characters. The name is used as is
+networks that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
     version: '3.4'
@@ -1989,10 +1991,10 @@ Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 Specify which driver should be used for this network.
 
 The default driver depends on how the Docker Engine you're using is configured,
-but in most instances it will be `bridge` on a single host and `overlay` on a
+but in most instances it is `bridge` on a single host and `overlay` on a
 Swarm.
 
-The Docker Engine will return an error if the driver is not available.
+The Docker Engine returns an error if the driver is not available.
 
     driver: overlay
 
@@ -2072,7 +2074,7 @@ documentation for more information. Optional.
 Only used when the `driver` is set to `overlay`. If set to `true`, then
 standalone containers can attach to this network, in addition to services. If a
 standalone container attaches to an overlay network, it can communicate with
-services and standalone containers which are also attached to the overlay
+services and standalone containers that are also attached to the overlay
 network from other Docker daemons.
 
 ```yaml
@@ -2139,15 +2141,15 @@ conflicting with those used by other software.
 ### external
 
 If set to `true`, specifies that this network has been created outside of
-Compose. `docker-compose up` will not attempt to create it, and will raise
+Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other network configuration keys
 (`driver`, `driver_opts`, `ipam`, `internal`).
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
-attempting to create a network called `[projectname]_outside`, Compose will
-look for an existing network simply called `outside` and connect the `proxy`
+attempting to create a network called `[projectname]_outside`, Compose
+looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
     version: '2'
@@ -2203,20 +2205,20 @@ It can also be used in conjuction with the `external` property:
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
-[configs](/engine/swarm/configs.md) which can be granted to the services in this
+[configs](/engine/swarm/configs.md) that can be granted to the services in this
 stack. The source of the config is either `file` or `external`.
 
 - `file`: The config is created with the contents of the file at the specified
   path.
 - `external`: If set to true, specifies that this config has already been
-  created. Docker will not attempt to create it, and if it does not exist, a
+  created. Docker does not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
 - `name`: The name of the config object in Docker. This field can be used to
-   reference configs which contain special characters. The name is used as is
+   reference configs that contain special characters. The name is used as is
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_config` will be created (as
+In this example, `my_first_config` is created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
 and `my_second_config` already exists in Docker.
 
@@ -2229,7 +2231,7 @@ configs:
 ```
 
 Another variant for external configs is when the name of the config in Docker
-is different from the name that will exist within the service. The following
+is different from the name that exists within the service. The following
 example modifies the previous one to use the external config called
 `redis_config`.
 
@@ -2250,20 +2252,20 @@ stack.
 ## secrets configuration reference
 
 The top-level `secrets` declaration defines or references
-[secrets](/engine/swarm/secrets.md) which can be granted to the services in this
+[secrets](/engine/swarm/secrets.md) that can be granted to the services in this
 stack. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified
   path.
 - `external`: If set to true, specifies that this secret has already been
-  created. Docker will not attempt to create it, and if it does not exist, a
+  created. Docker does not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
 - `name`: The name of the secret object in Docker. This field can be used to
-   reference secrets which contain special characters. The name is used as is
+   reference secrets that contain special characters. The name is used as is
    and will **not** be scoped with the stack name. Introduced in version 3.5
    file format.
 
-In this example, `my_first_secret` will be created (as
+In this example, `my_first_secret` is created (as
 `<stack_name>_my_first_secret)`when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
@@ -2276,7 +2278,7 @@ secrets:
 ```
 
 Another variant for external secrets is when the name of the secret in Docker
-is different from the name that will exist within the service. The following
+is different from the name that exists within the service. The following
 example modifies the previous one to use the external secret called
 `redis_secret`.
 

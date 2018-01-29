@@ -30,19 +30,21 @@ Place the completion script in `/etc/bash_completion.d/` as follows:
     sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
     ```
 
-Completion will be available upon next login.
+Completion is available upon next login.
 
 
 ### Zsh
 
-Place the completion script in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`:
+Place the completion script in your a `completion` file within the ZSH
+configuration directory, such as `~/.zsh/completion/`.
 
 ```shell
 mkdir -p ~/.zsh/completion
 curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
 ```
 
-Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`:
+Include the directory in your `$fpath`, by adding a like the following to the
+`~/.zshrc` configuration file.
 
 ```shell
 fpath=(~/.zsh/completion $fpath)
@@ -62,7 +64,7 @@ exec $SHELL -l
 
 ## Available completions
 
-Depending on what you typed on the command line so far, it will complete:
+Depending on what you typed on the command line so far, it completes:
 
 - commands and their options
 - container IDs and names
