@@ -1685,10 +1685,8 @@ manuals:
       section:
       - title: Deploy a single service
         path: /ee/ucp/swarm/
-      - title: Deploy an app from the UI
-        path: /ee/ucp/swarm/deploy-from-ui/
-      - title: Deploy an app from the CLI
-        path: /ee/ucp/swarm/deploy-from-cli/
+      - title: Deploy a multi-service app
+        path: /ee/ucp/swarm/deploy-multi-service-app/
       - title: Deploy application resources to a collection
         path: /ee/ucp/swarm/deploy-to-collection/
       - title: Use secrets in your services

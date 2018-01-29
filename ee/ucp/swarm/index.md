@@ -1,5 +1,5 @@
 ---
-title: Deploy a service
+title: Deploy a single service
 description: Learn how to deploy services to a cluster managed by Universal Control Plane.
 keywords: ucp, deploy, service
 redirect_from:
@@ -65,7 +65,7 @@ You can also deploy the same service from the CLI. Once you've set up your
 
 ```bash
 docker service create --name nginx \
-  --publish 8000:80 \
+  --publish mode=ingress,target=80,published=8000 \
   --label com.docker.ucp.access.owner=<your-username> \
   nginx
 ```
