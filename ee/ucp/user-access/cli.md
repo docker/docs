@@ -136,6 +136,14 @@ AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' http
 curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
 ```
 
+On Windows Server 2016, open an elevated PowerShell prompt and run:
+
+```powershell
+$AUTHTOKEN=((Invoke-WebRequest -Body '{"username":"<username>", "password":"<password>"}' -Uri https://`<ucp-ip`>/auth/login -Method POST).Content)|ConvertFrom-Json|select auth_token -ExpandProperty auth_token
+
+[io.file]::WriteAllBytes("ucp-bundle.zip", ((Invoke-WebRequest -Uri https://`<ucp-ip`>/api/clientbundle -Headers @{"Authorization"="Bearer $AUTHTOKEN"}).Content))
+ ```
+
 {% elsif include.version=="ucp-2.2" %}
 
 Learn about [CLI-based access](/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access.md).
