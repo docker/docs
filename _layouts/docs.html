@@ -110,12 +110,6 @@
 {"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
 	<!-- END SEO STUFF -->
 	{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
-	<script language="javascript">
-	// Default to assuming this is an archive and hiding some stuff
-	// See js/archive.js and js/docs.js for logic relating to this
-	var isArchive = true;
-	var dockerVersion = 'v{{ site.docker_ce_stable_version }}';
-	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
 	<header>
