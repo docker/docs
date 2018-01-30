@@ -24,8 +24,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Lastly, run
-`docker-compose up` and Compose will start and run your entire app.
+3. Run `docker-compose up` and Compose starts and runs your entire app.
 
 A `docker-compose.yml` looks like this:
 
@@ -79,7 +78,7 @@ The features of Compose that make it effective are:
 
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
 
-* on a dev host, to create multiple copies of a single environment (e.g., you want to run a stable copy for each feature branch of a project)
+* on a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
 * on a CI server, to keep builds from interfering with each other, you can set
   the project name to a unique build number
 * on a shared host or dev host, to prevent different projects, which may use the
@@ -167,7 +166,7 @@ For details on using production-oriented features, see
 ## Release notes
 
 To see a detailed list of changes for past and current releases of Docker
-Compose, please refer to the
+Compose, refer to the
 [CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md).
 
 ## Getting help
@@ -176,11 +175,11 @@ Docker Compose is under active development. If you need help, would like to
 contribute, or simply want to talk about the project with like-minded
 individuals, we have a number of open channels for communication.
 
-* To report bugs or file feature requests: please use the [issue tracker on Github](https://github.com/docker/compose/issues).
+* To report bugs or file feature requests: use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
-* To talk about the project with people in real time: please join the
+* To talk about the project with people in real time: join the
   `#docker-compose` channel on freenode IRC.
 
-* To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/compose/pulls).
+* To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
 
-For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).
+For more information and resources, visit the [Getting Help project page](/opensource/get-help/).

@@ -53,7 +53,7 @@
     $ ls -al ~/.ssh
     ```
 
-    This will list files in your `.ssh` directory.
+    This lists files in your `.ssh` directory.
 
 2.  Check to see if you already have SSH keys you can use.
 
@@ -91,7 +91,7 @@
     $ ls -al ~/.ssh
     ```
 
-    This will list files in your `.ssh` directory.
+    This lists files in your `.ssh` directory.
 
 2.  Check to see if you already have a SSH keys you can use.
 

@@ -14,7 +14,7 @@ configured. More information about PowerShell DSC can be found at
 
 ## Requirements
 
-To use this guide you'll need a Windows host with PowerShell v4.0 or newer.
+To use this guide you need a Windows host with PowerShell v4.0 or newer.
 
 The included DSC configuration script also uses the official PPA so
 only an Ubuntu target is supported. The Ubuntu target must already have the

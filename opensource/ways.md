@@ -26,10 +26,9 @@ by becoming a co-organizer of a Docker Meetup group.
 
 If a Meetup group does not already exist in your area and you are willing to
 start a new one, the best way to proceed is to contact us so that we can create
-it for you. We will always agree to create a new Docker Meetup group as long as
-it makes sense geographically speaking.
+it for you, as long as it makes sense geographically speaking.
 
-If you have already created a Docker Meetup group that is fine, we will simply
+If you have already created a Docker Meetup group that is fine, we
 ask you to add us as a co-organizer so that we can ensure a consistent support
 to the group in terms of community and Meetup management.
 
@@ -51,7 +50,7 @@ suggestions to help you get started:
 
 ### How Docker can help you organize
 
-We can support the co-organizers of the Docker Meetup Groups based on their specific needs. For instance, we might / will be able to:
+We can support the co-organizers of the Docker Meetup Groups based on their specific needs. For instance, we might be able to:
 
 * Send you Docker T-shirts and stickers
 * Put you in contact with other people interested in being a co-organizer of a Docker Meetup group, and which are in the same area
@@ -67,7 +66,7 @@ We can support the co-organizers of the Docker Meetup Groups based on their spec
 ### Want to host a Docker Meetup?
 
 We are always looking for new office space to host Docker Meetups. If your
-company is willing to host a Docker Meetup, please contact us by email at
+company is willing to host a Docker Meetup, contact us by email at
 meetup@docker.com. Previous Docker Meetups have been hosted by companies such
 as Rackspace, Twitter, MongoDB, BrightCove, DigitalOcean, Viadeo and Edmodo.
 #### How many attendees?
@@ -90,7 +89,7 @@ resources and information on the community. Those pages are the most
 up-to-date for finding out about the community and making connections.
 
 The topics below provide some additional links, but it's likely that everything
-you need will be on the GitHub repository.
+you need is on the GitHub repository.
 
 ### Become a Mentor
 

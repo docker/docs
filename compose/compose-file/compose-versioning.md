@@ -28,7 +28,7 @@ There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
 >
 > We recommend keeping up-to-date with newer releases as much as possible.
 However, if you are using an older version of Docker and want to determine which
-Compose release is compatible, please refer to the [Compose release
+Compose release is compatible, refer to the [Compose release
 notes](https://github.com/docker/compose/releases/). Each set of release notes
 gives details on which versions of Docker Engine are supported, along
 with compatible Compose file format versions. (See also, the discussion in
@@ -87,7 +87,7 @@ Version 1 files cannot declare named
 
 Compose does not take advantage of [networking](/compose/networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
-reachable from every other container at its IP address. You will need to use
+reachable from every other container at its IP address. You need to use
 [links](compose-file-v1.md#links) to enable discovery between containers.
 
 Example:
@@ -238,7 +238,7 @@ several more.
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
 `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
 the [upgrading](#upgrading) guide for how to migrate away from these.
-(For more information on `extends`, please see [Extending services](/compose/extends.md#extending-services).)
+(For more information on `extends`, see [Extending services](/compose/extends.md#extending-services).)
 
 - Added: [deploy](/compose/compose-file/index.md#deploy)
 
@@ -306,11 +306,11 @@ several options have been removed:
 
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
     have been replaced by the [resources](/compose/compose-file/index.md#resources) key under
-    `deploy`. Note that `deploy` configuration only takes effect when using
+    `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
 -   `extends`: This option has been removed for `version: "3.x"`
-Compose files. (For more information, please see [Extending services](/compose/extends.md#extending-services).)
+Compose files. (For more information, see [Extending services](/compose/extends.md#extending-services).)
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in

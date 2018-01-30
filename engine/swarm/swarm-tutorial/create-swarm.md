@@ -89,5 +89,5 @@ Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-
 
 ## What's next?
 
-In the next section of the tutorial, we'll [add two more nodes](add-nodes.md) to
+In the next section of the tutorial, we [add two more nodes](add-nodes.md) to
 the cluster.

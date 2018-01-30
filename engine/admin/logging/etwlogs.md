@@ -26,10 +26,10 @@ included in most installations of Windows:
    2. Run your container(s) with the etwlogs driver, by adding `--log-driver=etwlogs`
    to the Docker run command, and generate log messages.
    3. `logman stop -ets DockerContainerLogs`
-   4. This will generate an etl file that contains the events. One way to convert this file into
+   4. This generates an etl file that contains the events. One way to convert this file into
    human-readable form is to run: `tracerpt -y trace.etl`.
 
-Each ETW event will contain a structured message string in this format:
+Each ETW event contains a structured message string in this format:
 
     container_name: %s, image_name: %s, container_id: %s, image_id: %s, source: [stdout | stderr], log: %s
 
@@ -54,7 +54,7 @@ Here is an example event message:
     log: Hello world!
 
 A client can parse this message string to get both the log message, as well as its
-context information. Note that the time stamp is also available within the ETW event.
+context information. The timestamp is also available within the ETW event.
 
 > **Note**:  This ETW provider emits only a message string, and not a specially
 > structured ETW event. Therefore, it is not required to register a manifest file

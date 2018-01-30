@@ -49,7 +49,7 @@ UCP requires that you delegate trust to two different roles:
 * `targets/releases`
 * `targets/<role>`, where `<role>` is the UCP team the user belongs to
 
-In this example we'll delegate trust to `targets/releases` and `targets/qa`:
+In this example we delegate trust to `targets/releases` and `targets/qa`:
 
 ```none
 # Delegate trust, and add that public key with the role targets/releases
@@ -63,9 +63,9 @@ notary delegation add --publish \
   --all-paths <user-1-cert.pem> <user-2-cert.pem>
 ```
 
-Now members from the QA team just have to [configure their Notary CLI client
+Now members from the QA team just need to [configure their Notary CLI client
 with UCP private keys](../../access-dtr/configure-your-notary-client.md)
-to be able to [push and sign images](index.md) into the `dev/nginx` repository.
+before [pushing and signing images](index.md) into the `dev/nginx` repository.
 
 ## Where to go next
 

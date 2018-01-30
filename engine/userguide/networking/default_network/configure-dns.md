@@ -8,7 +8,7 @@ The information in this section explains configuring container DNS within
 the Docker default bridge. This is a `bridge` network named `bridge` created
 automatically when you install Docker.
 
-> **Note**: The [Docker networks feature](../index.md) allows you to create user-defined networks in addition to the default bridge network. Please refer to the [Docker Embedded DNS](../configure-dns.md) section for more information on DNS configurations in user-defined networks.
+> **Note**: The [Docker networks feature](../index.md) allows you to create user-defined networks in addition to the default bridge network. Refer to the [Docker Embedded DNS](../configure-dns.md) section for more information on DNS configurations in user-defined networks.
 
 How can Docker supply each container with a hostname and DNS configuration, without having to build a custom image with the hostname written inside?  Its trick is to overlay three crucial `/etc` files inside the container with virtual files where it can write fresh information.  You can see this by running `mount` inside a container:
 
@@ -38,9 +38,9 @@ Four different options affect container domain name services.
       Sets the hostname by which the container knows itself.  This is written
       into <code>/etc/hostname</code>, into <code>/etc/hosts</code> as the name
       of the container's host-facing IP address, and is the name that
-      <code>/bin/bash</code> inside the container will display inside its
+      <code>/bin/bash</code> inside the container displays inside its
       prompt.  But the hostname is not easy to see from outside the container.
-      It will not appear in <code>docker ps</code> nor in the
+      It does not appear in <code>docker ps</code> nor in the
       <code>/etc/hosts</code> file of any other container.
     </p>
     </td>
@@ -73,7 +73,7 @@ Four different options affect container domain name services.
     <td><p>
      Sets the IP addresses added as <code>nameserver</code> lines to the container's
      <code>/etc/resolv.conf</code> file.  Processes in the container, when
-     confronted with a hostname not in <code>/etc/hosts</code>, will connect to
+     confronted with a hostname not in <code>/etc/hosts</code>, connect to
      these IP addresses on port 53 looking for name resolution services.     </p></td>
   </tr>
   <tr>
@@ -85,7 +85,7 @@ Four different options affect container domain name services.
     used inside of the container, by writing <code>search</code> lines into the
     container's <code>/etc/resolv.conf</code>. When a container process attempts
     to access <code>host</code> and the search domain <code>example.com</code>
-    is set, for instance, the DNS logic will not only look up <code>host</code>
+    is set, for instance, the DNS logic not only looks up <code>host</code>
     but also <code>host.example.com</code>.
     </p>
     <p>
@@ -114,14 +114,14 @@ Four different options affect container domain name services.
 
 Regarding DNS settings, in the absence of the `--dns=IP_ADDRESS...`, `--dns-search=DOMAIN...`, or `--dns-opt=OPTION...` options, Docker makes each container's `/etc/resolv.conf` look like the `/etc/resolv.conf` of the host machine (where the `docker` daemon runs).  When creating the container's `/etc/resolv.conf`, the daemon filters out all localhost IP address `nameserver` entries from the host's original file.
 
-Filtering is necessary because all localhost addresses on the host are unreachable from the container's network.  After this filtering, if there  are no more `nameserver` entries left in the container's `/etc/resolv.conf` file, the daemon adds public Google DNS nameservers (8.8.8.8 and 8.8.4.4) to the container's DNS configuration.  If IPv6 is enabled on the daemon, the public IPv6 Google DNS nameservers will also be added (2001:4860:4860::8888 and 2001:4860:4860::8844).
+Filtering is necessary because all localhost addresses on the host are unreachable from the container's network.  After this filtering, if there  are no more `nameserver` entries left in the container's `/etc/resolv.conf` file, the daemon adds public Google DNS nameservers (8.8.8.8 and 8.8.4.4) to the container's DNS configuration.  If IPv6 is enabled on the daemon, the public IPv6 Google DNS nameservers are also added (2001:4860:4860::8888 and 2001:4860:4860::8844).
 
 > **Note**: If you need access to a host's localhost resolver, you must modify your DNS service on the host to listen on a non-localhost address that is reachable from within the container.
 
-You might wonder what happens when the host machine's `/etc/resolv.conf` file changes.  The `docker` daemon has a file change notifier active which will watch for changes to the host DNS configuration.
+You might wonder what happens when the host machine's `/etc/resolv.conf` file changes.  The `docker` daemon has a file change notifier active which watches for changes to the host DNS configuration.
 
-> **Note**: The file change notifier relies on the Linux kernel's inotify feature. Because this feature is currently incompatible with the overlay filesystem  driver, a Docker daemon using "overlay" will not be able to take advantage of the `/etc/resolv.conf` auto-update feature.
+> **Note**: The file change notifier relies on the Linux kernel's inotify feature. Because this feature is currently incompatible with the overlay filesystem  driver, a Docker daemon using "overlay" cannot take advantage of the `/etc/resolv.conf` auto-update feature.
 
-When the host file changes, all stopped containers which have a matching `resolv.conf` to the host will be updated immediately to this newest host configuration.  Containers which are running when the host configuration changes will need to stop and start to pick up the host changes due to lack of a facility to ensure atomic writes of the `resolv.conf` file while the container is running. If the container's `resolv.conf` has been edited since it was started with the default configuration, no replacement will be attempted as it would overwrite the changes performed by the container. If the options (`--dns`, `--dns-search`, or `--dns-opt`) have been used to modify the default host configuration, then the replacement with an updated host's `/etc/resolv.conf` will not happen as well.
+When the host file changes, all stopped containers which have a matching `resolv.conf` to the host are updated immediately to this newest host configuration.  Containers which are running when the host configuration changes need to stop and start to pick up the host changes due to lack of a facility to ensure atomic writes of the `resolv.conf` file while the container is running. If the container's `resolv.conf` has been edited since it was started with the default configuration, no replacement is attempted as it would overwrite the changes performed by the container. If the options (`--dns`, `--dns-search`, or `--dns-opt`) have been used to modify the default host configuration, then the replacement with an updated host's `/etc/resolv.conf` does not happen.
 
-> **Note**: For containers which were created prior to the implementation of the `/etc/resolv.conf` update feature in Docker 1.5.0: those containers will **not** receive updates when the host `resolv.conf` file changes. Only containers created with Docker 1.5.0 and above will utilize this auto-update feature.
+> **Note**: For containers which were created prior to the implementation of the `/etc/resolv.conf` update feature in Docker 1.5.0: those containers do **not** receive updates when the host `resolv.conf` file changes. Only containers created with Docker 1.5.0 and above utilize this auto-update feature.

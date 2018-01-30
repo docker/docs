@@ -16,8 +16,8 @@ string. In the example above, if `POSTGRES_VERSION` is not set, the value for
 the `image` option is `postgres:`.
 
 You can set default values for environment variables using a
-[`.env` file](../env-file.md), which Compose will automatically look for. Values
-set in the shell environment will override those set in the `.env` file.
+[`.env` file](../env-file.md), which Compose automatically looks for. Values
+set in the shell environment override those set in the `.env` file.
 
 > **Important**: The `.env file` feature only works when you use the
 > `docker-compose up` command and does not work with `docker stack deploy`.
@@ -27,9 +27,9 @@ Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Additionally when using
 the [2.1 file format](compose-versioning.md#version-21), it is possible to
 provide inline default values using typical shell syntax:
 
-- `${VARIABLE:-default}` will evaluate to `default` if `VARIABLE` is unset or
+- `${VARIABLE:-default}` evaluates to `default` if `VARIABLE` is unset or
   empty in the environment.
-- `${VARIABLE-default}` will evaluate to `default` only if `VARIABLE` is unset
+- `${VARIABLE-default}` evaluates to `default` only if `VARIABLE` is unset
   in the environment.
 
 Other extended shell-style features, such as `${VARIABLE/foo/bar}`, are not
@@ -45,6 +45,6 @@ Compose.
       command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
 
 If you forget and use a single dollar sign (`$`), Compose interprets the value
-as an environment variable and will warn you:
+as an environment variable and warns you:
 
 The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.

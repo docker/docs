@@ -93,7 +93,7 @@ installation. In this case, a UCP cluster will be restored from the backup.
 * On a docker engine that is not participating in a swarm. In this case, a new
 swarm will be created and UCP will be restored on top.
 
-In order to restore an existing UCP installation from a backup, you will need to
+To restore an existing UCP installation from a backup, you will need to
 first uninstall UCP from the cluster by using the `uninstall-ucp` command.
 [Learn to uninstall a UCP cluster](install/uninstall.md).
 
@@ -132,7 +132,7 @@ In the event where half or more manager nodes are lost and cannot be recovered
 to a healthy state, the system is considered to have lost quorum and can only be
 restored through the following disaster recovery procedure.
 
-It is important to note that this procedure is not guaranteed to succeed with
+This procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
 
@@ -150,7 +150,7 @@ manager failures, the system should be configured for [high availability](config
 4. Perform a restore operation on the recovered swarm manager node.
 5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
    command.
-6. If any nodes are listed as `down`, you'll have to manually [remove these
+6. If any nodes are listed as `down`, you need to manually [remove these
    nodes](configure/scale-your-cluster.md) from the cluster and then re-join
    them using a `docker swarm join` operation with the cluster's new join-token.
 

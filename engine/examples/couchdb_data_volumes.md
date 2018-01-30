@@ -14,7 +14,7 @@ different versions of CouchDB on the same data, etc.
 
 ## Create first database
 
-Note that we're marking `/var/lib/couchdb` as a data volume.
+We're marking `/var/lib/couchdb` as a data volume.
 
     $ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
 

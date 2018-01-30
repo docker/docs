@@ -18,7 +18,7 @@ This might make it difficult to trace back the image to the build that generated
 it.
 
 To prevent this from happening, you can configure a repository to be immutable.
-Once you push a tag, DTR won't allow anyone else to push another tag with the same
+Once you push a tag, DTR doesn't allow anyone else to push another tag with the same
 name.
 
 ## Make tags immutable

@@ -87,19 +87,19 @@ A Dockerfile for a go application could look like:
 FROM golang:1.9.2-alpine3.6 AS build
 
 # Install tools required to build the project
-# We will need to run `docker build --no-cache .` to update those dependencies
+# We need to run `docker build --no-cache .` to update those dependencies
 RUN apk add --no-cache git
 RUN go get github.com/golang/dep/cmd/dep
 
 # Gopkg.toml and Gopkg.lock lists project dependencies
-# These layers will only be re-built when Gopkg files are updated
+# These layers are only re-built when Gopkg files are updated
 COPY Gopkg.lock Gopkg.toml /go/src/project/
 WORKDIR /go/src/project/
 # Install library dependencies
 RUN dep ensure -vendor-only
 
 # Copy all project and build it
-# This layer will be rebuilt when ever a file has changed in the project directory
+# This layer is rebuilt when ever a file has changed in the project directory
 COPY . /go/src/project/
 RUN go build -o /bin/project
 
@@ -112,7 +112,7 @@ CMD ["--help"]
 
 ### Avoid installing unnecessary packages
 
-In order to reduce complexity, dependencies, file sizes, and build times, you
+To reduce complexity, dependencies, file sizes, and build times, you
 should avoid installing extra or unnecessary packages just because they
 might be “nice to have.” For example, you don’t need to include a text editor
 in a database image.
@@ -127,7 +127,7 @@ the web application, database, and an in-memory cache in a decoupled manner.
 You may have heard that there should be "one process per container". While this
 mantra has good intentions, it is not necessarily true that there should be only
 one operating system process per container. In addition to the fact that
-containers can now be [spawned with an init process](https://docs.docker.com/engine/reference/run/#/specifying-an-init-process),
+containers can now be [spawned with an init process](/engine/reference/run/#/specifying-an-init-process),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
 processes, or [Apache](https://httpd.apache.org/) might create a process per
@@ -135,7 +135,7 @@ request. While "one process per container" is frequently a good rule of thumb,
 it is not a hard and fast rule. Use your best judgment to keep containers as
 clean and modular as possible.
 
-If containers depend on each other, you can use [Docker container networks](https://docs.docker.com/engine/userguide/networking/)
+If containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
  to ensure that these containers can communicate.
 
 ### Minimize the number of layers
@@ -157,7 +157,7 @@ mitigated this need:
 ### Sort multi-line arguments
 
 Whenever possible, ease later changes by sorting multi-line arguments
-alphanumerically. This will help you avoid duplication of packages and make the
+alphanumerically. This helps you avoid duplication of packages and make the
 list much easier to update. This also makes PRs a lot easier to read and
 review. Adding a space before a backslash (`\`) helps as well.
 
@@ -172,16 +172,16 @@ Here’s an example from the [`buildpack-deps` image](https://github.com/docker-
 
 ### Build cache
 
-During the process of building an image Docker will step through the
+During the process of building an image Docker steps through the
 instructions in your `Dockerfile` executing each in the order specified.
-As each instruction is examined Docker will look for an existing image in its
+As each instruction is examined Docker looks for an existing image in its
 cache that it can reuse, rather than creating a new (duplicate) image.
 If you do not want to use the cache at all you can use the `--no-cache=true`
 option on the `docker build` command.
 
 However, if you do let Docker use its cache then it is very important to
-understand when it will, and will not, find a matching image. The basic rules
-that Docker will follow are outlined below:
+understand when it can, and cannot, find a matching image. The basic rules
+that Docker follows are outlined below:
 
 * Starting with a parent image that is already in the cache, the next
 instruction is compared against all child images derived from that base
@@ -199,19 +199,19 @@ these checksums. During the cache lookup, the checksum is compared against the
 checksum in the existing images. If anything has changed in the file(s), such
 as the contents and metadata, then the cache is invalidated.
 
-* Aside from the `ADD` and `COPY` commands, cache checking will not look at the
+* Aside from the `ADD` and `COPY` commands, cache checking does not look at the
 files in the container to determine a cache match. For example, when processing
 a `RUN apt-get -y update` command the files updated in the container
-will not be examined to determine if a cache hit exists.  In that case just
-the command string itself will be used to find a match.
+are not examined to determine if a cache hit exists.  In that case just
+the command string itself is used to find a match.
 
-Once the cache is invalidated, all subsequent `Dockerfile` commands will
-generate new images and the cache will not be used.
+Once the cache is invalidated, all subsequent `Dockerfile` commands
+generate new images and the cache is not used.
 
 ## The Dockerfile instructions
 
-Below you'll find recommendations for the best way to write the
-various instructions available for use in a `Dockerfile`.
+These recommendations help you to write an efficient and maintainable
+`Dockerfile`.
 
 ### FROM
 
@@ -285,8 +285,8 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the parent images won't upgrade inside an
-[unprivileged container](https://docs.docker.com/engine/reference/run/#security-configuration).
+“essential” packages from the parent images can't upgrade inside an
+[unprivileged container](/engine/reference/run/#security-configuration).
 If a package contained in the parent image is out-of-date, you should contact its
 maintainers. If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.
@@ -361,7 +361,7 @@ each line can also prevent mistakes in package duplication.
 
 In addition, when you clean up the apt cache by removing `/var/lib/apt/lists`
 reduces the image size, since the apt cache is not stored in a layer. Since the
-`RUN` statement starts with `apt-get update`, the package cache will always be
+`RUN` statement starts with `apt-get update`, the package cache is always
 refreshed prior to `apt-get install`.
 
 > **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
@@ -424,7 +424,7 @@ works.
 
 [Dockerfile reference for the EXPOSE instruction](../../reference/builder.md#expose)
 
-The `EXPOSE` instruction indicates the ports on which a container will listen
+The `EXPOSE` instruction indicates the ports on which a container listens
 for connections. Consequently, you should use the common, traditional port for
 your application. For example, an image containing the Apache web server would
 use `EXPOSE 80`, while an image containing MongoDB would use `EXPOSE 27017` and
@@ -439,9 +439,9 @@ the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
 
 [Dockerfile reference for the ENV instruction](../../reference/builder.md#env)
 
-In order to make new software easier to run, you can use `ENV` to update the
+To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
-example, `ENV PATH /usr/local/nginx/bin:$PATH` will ensure that `CMD [“nginx”]`
+example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD [“nginx”]`
 just works.
 
 The `ENV` instruction is also useful for providing required environment
@@ -473,7 +473,7 @@ not immediately obvious. Consequently, the best use for `ADD` is local tar file
 auto-extraction into the image, as in `ADD rootfs.tar.xz /`.
 
 If you have multiple `Dockerfile` steps that use different files from your
-context, `COPY` them individually, rather than all at once. This will ensure that
+context, `COPY` them individually, rather than all at once. This ensures that
 each step's build cache is only invalidated (forcing the step to be re-run) if the
 specifically required files change.
 
@@ -488,7 +488,7 @@ Results in fewer cache invalidations for the `RUN` step, than if you put the
 
 Because image size matters, using `ADD` to fetch packages from remote URLs is
 strongly discouraged; you should use `curl` or `wget` instead. That way you can
-delete the files you no longer need after they've been extracted and you won't
+delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 
@@ -611,10 +611,10 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 > useradd works around this issue.  The Debian/Ubuntu `adduser` wrapper
 > does not support the `--no-log-init` flag and should be avoided.
 
-You should avoid installing or using `sudo` since it has unpredictable TTY and
-signal-forwarding behavior that can cause more problems than it solves. If
-you absolutely need functionality similar to `sudo` (e.g., initializing the
-daemon as root but running it as non-root), you may be able to use
+Avoid installing or using `sudo` since it has unpredictable TTY and
+signal-forwarding behavior that can cause problems. If
+you absolutely need functionality similar to `sudo`, such as initializing the
+daemon as `root` but running it as non-`root`), consider using
 [“gosu”](https://github.com/tianon/gosu).
 
 Lastly, to reduce layers and complexity, avoid switching `USER` back
@@ -649,9 +649,9 @@ builds arbitrary user software written in that language within the
 Images built from `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
-Be careful when putting `ADD` or `COPY` in `ONBUILD`. The “onbuild” image will
-fail catastrophically if the new build's context is missing the resource being
-added. Adding a separate tag, as recommended above, will help mitigate this by
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The “onbuild” image
+fails catastrophically if the new build's context is missing the resource being
+added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
 ## Examples for Official Repositories

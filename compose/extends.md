@@ -205,7 +205,7 @@ looks like this:
       volumes:
         - "/data"
 
-In this case, you'll get exactly the same result as if you wrote
+In this case, you get exactly the same result as if you wrote
 `docker-compose.yml` with the same `build`, `ports` and `volumes` configuration
 values defined directly under `web`.
 
@@ -302,7 +302,7 @@ replaces the old value.
 > was defined in the original service.
 >
 > For example, if the original service defines `image: webapp` and the
-> local service defines `build: .` then the resulting service will have
+> local service defines `build: .` then the resulting service has a
 > `build: .` and no `image` option.
 >
 > This is because `build` and `image` cannot be used together in a version 1
@@ -326,8 +326,10 @@ For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
       - "4000"
       - "5000"
 
-In the case of `environment`, `labels`, `volumes` and `devices`, Compose
-"merges" entries together with locally-defined values taking precedence:
+In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
+"merges" entries together with locally-defined values taking precedence. For
+`environment` and `labels`, the environment variable or label name determines
+which value is used:
 
     # original service
     environment:
@@ -345,6 +347,24 @@ In the case of `environment`, `labels`, `volumes` and `devices`, Compose
       - BAR=local
       - BAZ=local
 
+Entries for `volumes` and `devices` are merged using the mount path in the
+container:
+
+    # original service
+    volumes:
+      - ./original:/foo
+      - ./original:/bar
+
+    # local service
+    volumes:
+      - ./local:/bar
+      - ./local:/baz
+
+    # result
+    volumes:
+      - ./original:/foo
+      - ./local:/bar
+      - ./local:/baz
 
 
 

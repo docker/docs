@@ -71,7 +71,7 @@ resources on a swarm managed by UCP.
 ## Download client certificates using the REST API
 
 You can also download client bundles using the UCP REST API. In
-this example we'll be using `curl` for making the web requests to the API, and
+this example we use `curl` for making the web requests to the API, and
 `jq` to parse the responses.
 
 To install these tools on a Ubuntu distribution, you can run:

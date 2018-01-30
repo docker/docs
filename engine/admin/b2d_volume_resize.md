@@ -81,7 +81,7 @@ as a bootable ISO, is a free download, and works well with VirtualBox.
 2. Clone the VMDK image to a VDI image
 
   Boot2Docker ships with a VMDK image, which can't be resized by VirtualBox's
-  native tools. We will instead create a VDI volume and clone the VMDK volume to
+  native tools. We instead create a VDI volume and clone the VMDK volume to
   it.
 
 3. Using the command line VirtualBox tools, clone the VMDK image to a VDI image:
@@ -90,15 +90,15 @@ as a bootable ISO, is a free download, and works well with VirtualBox.
 
 4. Resize the VDI volume
 
-  Choose a size that will be appropriate for your needs. If you're spinning up a
-  lot of containers, or your containers are particularly large, larger will be
+  Choose a size appropriate for your needs. If you're spinning up a
+  lot of containers, or your containers are particularly large, larger is
   better:
 
       $ vboxmanage modifyhd /full/path/to/<newVDIimage>.vdi --resize <size in MB>
 
 5. Download a disk partitioning tool ISO
 
-  To resize the volume, we'll use [GParted](https://sourceforge.net/projects/gparted/files/).
+  To resize the volume, we use [GParted](https://sourceforge.net/projects/gparted/files/).
   Once you've downloaded the tool, add the ISO to the Boot2Docker VM IDE bus.
   You might need to create the bus before you can add the ISO.
 
@@ -134,7 +134,7 @@ as a bootable ISO, is a free download, and works well with VirtualBox.
   Manually start the Boot2Docker VM in VirtualBox, and the disk partitioning ISO
   should start up. Using GParted, choose the **GParted Live (default settings)**
   option. Choose the default keyboard, language, and XWindows settings, and the
-  GParted tool will start up and display the VDI volume you created. Right click
+  GParted tool starts up and displays the VDI volume you created. Right click
   on the VDI and choose **Resize/Move**.
 
   <img src="/articles/b2d_volume_images/gparted.png">

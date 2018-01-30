@@ -12,7 +12,7 @@ To load-balance your application, you need to deploy a load-balancing service.
 This service distributes incoming requests to all of the available containers in
 the application.
 
-In this example, you need a load balancer that will forward incoming requests to
+In this example, you need a load balancer that forwards incoming requests to
 both container #1 (web-1) and container #2 (web-2). For this tutorial, you'll
 use [Docker Cloud's HAProxy image](https://github.com/docker/dockercloud-haproxy){: target="_blank" class="_"} to load balance, but you could also use other custom load balancers.
 
@@ -28,7 +28,7 @@ $ docker-cloud service run \
 dockercloud/haproxy
 ```
 
-**-p 80:80/tcp** publishes port 80 of the container, and maps it to port 80 of the node in which it will be deployed.
+**-p 80:80/tcp** publishes port 80 of the container, and maps it to port 80 of the node.
 
 **--role global** grants [API access](../../apps/api-roles.md) to this service. You can use this to query the Docker Cloud API from within the service.
 

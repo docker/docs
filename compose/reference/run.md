@@ -49,7 +49,7 @@ If you start a service configured with links, the `run` command first checks to 
 
     docker-compose run db psql -h db -U docker
 
-This will open an interactive PostgreSQL shell for the linked `db` container.
+This opens an interactive PostgreSQL shell for the linked `db` container.
 
 If you do not want the `run` command to start linked containers, use the `--no-deps` flag:
 

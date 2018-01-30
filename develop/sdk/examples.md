@@ -10,7 +10,7 @@ redirect_from:
 ---
 
 After you
-[install Docker](/engine/installation.md), you can
+[install Docker](/install/index.md), you can
 [install the Go and Python SDKs](/develop/sdk/index.md#install-the-sdks) and
 also try out the Docker Engine API.
 
@@ -286,7 +286,7 @@ Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
 
 > **Note**: Don't run this on a production server. Also, if you are using swarm
-> services, the containers will stop, but Docker will create new ones to keep
+> services, the containers stop, but Docker creates new ones to keep
 > the service running in its configured state.
 
 <ul class="nav nav-tabs">
@@ -656,7 +656,7 @@ print image.id
 
 <div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
 
-This example will leave the credentials in your shell's history, so consider
+This example leaves the credentials in your shell's history, so consider
 this a naive implementation. The credentials are passed as a Base-64-encoded
 JSON structure.
 

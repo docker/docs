@@ -8,9 +8,9 @@ title: Link Amazon Web Services to Docker Cloud
 You can create a role with AWS IAM (Identity and Access Management) so that
 Docker Cloud can provision and manage swarms on your behalf.
 
-> **Note**: Your AWS account must support EC2-VPC in order to deploy swarms, and
+> **Note**: Your AWS account must support EC2-VPC to deploy swarms, and
 you must also have an [SSH key in each AWS region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-you will deploy swarms in.
+you deploy swarms in.
 
 If you used Docker Cloud with AWS to deploy classic Node Clusters, you can add
 the new policy to your existing role by following the instructions
@@ -29,12 +29,12 @@ the new policy to your existing role by following the instructions
 4. Select **Require external ID (Best practice when a third party will assume this role)**.
 
     * In the **External ID** field, enter the namespace
-    you will be linking.
+    to link.
 
-      This will either be your Docker Cloud username,
+      This is either your Docker Cloud username,
       or if you are using Organizations in Docker Cloud,
       the organization name. Failure to use the correct
-      name will result in the following error
+      name results in the following error
       message: `Invalid AWS credentials or insufficient
       EC2 permissions` when attempting to link your
       Docker account to your AWS account.
@@ -43,7 +43,7 @@ the new policy to your existing role by following the instructions
 
     Click **Next: Permissions**.
 
-5.  On the next screen, do not select a policy (you will add the policy in a later step).
+5.  On the next screen, do not select a policy (you add the policy in a later step).
 
     Click **Next: Review**.
 
@@ -52,7 +52,7 @@ the new policy to your existing role by following the instructions
 6.  Give the new role a name, such as `dockercloud-swarm-role`.
 
     > **Note**: You must use one role per Docker Cloud account
-    namespace, so if you will be using a single AWS account for
+    namespace, so if you use a single AWS account for
     multiple Docker Cloud accounts, you should add an
     identifying namespace to the end of the name. For example,
     you might have `dockercloud-swarm-role-moby` and
@@ -78,7 +78,7 @@ the new policy to your existing role by following the instructions
 
 15. Back on the role view, click into the new role to view details, and copy the full **Role ARN** string.
 
-    The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. You'll use the ARN in the next step.
+    The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-swarm-role`. The next step requires the.
 
     ![Role summary showing Role ARN](images/aws-swarm-iam-role-2.png)
 
@@ -88,7 +88,7 @@ Now skip down to the topic on how to
 ## Attach a policy for legacy AWS links
 
 If you already have your AWS account connected to Docker Cloud and used the
-legacy node cluster functionality you will need to create and attach a new
+legacy node cluster functionality you need to create and attach a new
 policy, and re-link your account.
 
 1.  Go to the AWS IAM Roles list at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
@@ -108,7 +108,7 @@ policy, and re-link your account.
 9.  If the validation succeeds, click **Apply Policy**.
 
 10.  Select and copy the **Role ARN** on the role screen.
-    It shouldn't have changed, but you'll use it to re-link your account.
+     It shouldn't have changed, but you need it to re-link your account.
 
 Because you edited the role's permissions, you need to re-link
 to your account. Back in Docker Cloud, click the account menu and

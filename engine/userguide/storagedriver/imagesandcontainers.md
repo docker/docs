@@ -7,14 +7,10 @@ redirect_from:
 - /engine/installation/userguide/storagedriver/
 ---
 
-To use storage drivers effectively, you must understand how Docker builds and
-stores images. Then, you need an understanding of how these images are used by
-containers. Finally, you'll need a short introduction to the technologies that
-enable both images and container operations.
-
-Understanding how Docker manages the data within your images and containers will
-help you understand the best way to design your containers and Dockerize your
-applications, and avoid performance problems along the way.
+To use storage drivers effectively, it's important to know how Docker builds and
+stores images, how these images are used by containers. You can use this
+information to make informed choices about the best way to persist data from
+your applications and  avoid performance problems along the way.
 
 ## Images and layers
 
@@ -81,18 +77,18 @@ command. Two different columns relate to size.
   each container
 
 - `virtual size`: the amount of data used for the read-only image data
-  used by the container plus the container's writable layer `size`. 
+  used by the container plus the container's writable layer `size`.
   Multiple containers may share some or all read-only
   image data. Two containers started from the same image share 100% of the
   read-only data, while two containers with different images which have layers
   in common share those common layers. Therefore, you can't just total the
-  virtual sizes. This will over-estimate the total disk usage by a potentially
+  virtual sizes. This over-estimates the total disk usage by a potentially
   non-trivial amount.
 
 The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
-multiple containers started from the same exact image, the total size on disk for 
-these containers would be SUM (`size` of containers) plus one container's 
+multiple containers started from the same exact image, the total size on disk for
+these containers would be SUM (`size` of containers) plus one container's
 (`virtual size`- `size`).
 
 This also does not count the following additional ways a container can take up
@@ -172,7 +168,7 @@ CMD /app/hello.sh
 The second image contains all the layers from the first image, plus a new layer
 with the `CMD` instruction, and a read-write container layer. Docker already
 has all the layers from the first image, so it does not need to pull them again.
-The two images will share any layers they have in common.
+The two images share any layers they have in common.
 
 If you build images from the two Dockerfiles, you can use `docker images` and
 `docker history` commands to verify that the cryptographic IDs of the shared
@@ -305,7 +301,7 @@ Btrfs, ZFS, and other drivers handle the copy-on-write differently. You can
 read more about the methods of these drivers later in their detailed
 descriptions.
 
-Containers that write a lot of data will consume more space than containers
+Containers that write a lot of data consume more space than containers
 that do not. This is because most write operations consume new space in the
 container's thin writable top layer.
 
@@ -325,7 +321,7 @@ To verify the way that copy-on-write works, the following procedures spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 
-> **Note**: This procedure won't work on Docker for Mac or Docker for Windows.
+> **Note**: This procedure doesn't work on Docker for Mac or Docker for Windows.
 
 1.  From a terminal on your Docker host, run the following `docker run` commands.
     The strings at the end are the IDs of each container.

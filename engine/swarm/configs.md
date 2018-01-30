@@ -57,14 +57,14 @@ configs. You cannot remove a config that a running service is
 using. See [Rotate a config](configs.md#example-rotate-a-config) for a way to
 remove a config without disrupting running services.
 
-In order to update or roll back configs more easily, consider adding a version
+To update or roll back configs more easily, consider adding a version
 number or date to the config name. This is made easier by the ability to control
 the mount point of the config within a given container.
 
 To update a stack, make changes to your Compose file, then re-run `docker
 stack deploy -c <new-compose-file> <stack-name>`. If you use a new config in
-that file, your services will start using them. Keep in mind that configurations
-are immutable, so you won't be able to change the file for an existing service.
+that file, your services start using them. Keep in mind that configurations
+are immutable, so you can't change the file for an existing service.
 Instead, you create a new config to use a different file
 
 You can run `docker stack rm` to stop the app and take down the stack. This
@@ -175,7 +175,7 @@ real-world example, continue to
     ```
 
 7.  Repeat steps 3 and 4 again, verifying that the service no longer has access
-    to the config. The container ID will be different, because the
+    to the config. The container ID is different, because the
     `service update` command redeploys the service.
 
     ```none
@@ -280,8 +280,8 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 3.  Configure the root CA. Edit a new file called `root-ca.cnf` and paste
-    the following contents into it. This constrains the root CA to only be
-    able to sign leaf certificates and not intermediate CAs.
+    the following contents into it. This constrains the root CA to only sign
+    leaf certificates and not intermediate CAs.
 
     ```none
     [root_ca]
@@ -336,13 +336,13 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 9.  The `site.csr` and `site.cnf` files are not needed by the Nginx service, but
-    you will need them if you want to generate a new site certificate. Protect
+    you need them if you want to generate a new site certificate. Protect
     the `root-ca.key` file.
 
 #### Configure the Nginx container
 
 1.  Produce a very basic Nginx configuration that serves static files over HTTPS.
-    The TLS certificate and key will be stored as Docker secrets so that they
+    The TLS certificate and key are stored as Docker secrets so that they
     can be rotated easily.
 
     In the current directory, create a new file called `site.conf` with the
@@ -364,7 +364,7 @@ generate the site key and certificate, name the files `site.key` and
 
 2.  Create two secrets, representing the key and the certificate. You can store
     any file as a secret as long as it is smaller than 500 KB. This allows you
-    to decouple the key and certificate from the services that will use them.
+    to decouple the key and certificate from the services that use them.
     In these examples, the secret name and the file name are the same.
 
     ```bash
@@ -447,7 +447,7 @@ generate the site key and certificate, name the files `site.key` and
     <p>If you see this page, the nginx web server is successfully installed and
     working. Further configuration is required.</p>
 
-    <p>For online documentation and support please refer to
+    <p>For online documentation and support, refer to
     <a href="http://nginx.org/">nginx.org</a>.<br/>
     Commercial support is available at
     <a href="http://nginx.com/">nginx.com</a>.</p>

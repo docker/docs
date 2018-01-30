@@ -4,6 +4,7 @@ keywords: binaries, installation, docker, documentation, linux
 title: Install Docker CE from binaries
 redirect_from:
 - /engine/installation/binaries/
+- /engine/installation/linux/docker-ce/binaries/
 ---
 
 > **Note**: You may have been redirected to this page because there is no longer
@@ -64,7 +65,7 @@ instructions for enabling and configuring AppArmor or SELinux.
   [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
 
 - Enable user namespaces if possible. See the
-  [Daemon user namespace options](/engine/reference/commandline/dockerd/#/daemon-user-namespace-options).
+  [Daemon user namespace options](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options).
 
 ### Install static binaries
 
@@ -111,7 +112,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 ### Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).
 
@@ -161,4 +162,4 @@ version.
 
 ## Next steps
 
-Continue with the [User Guide](../userguide/index.md).
+Continue with the [User Guide](/engine/userguide/index.md).

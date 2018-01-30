@@ -39,12 +39,12 @@ You can set the logging driver for a specific container by using the
 This log driver does not implement a reader so it is incompatible with
 `docker logs`.
 
-If Docker detects that it is running in a Google Cloud Project, it will discover
+If Docker detects that it is running in a Google Cloud Project, it discovers
 configuration from the
 [instance metadata service](https://cloud.google.com/compute/docs/metadata){: target="_blank" class="_"}.
 Otherwise, the user must specify
-which project to log to using the `--gcp-project` log option and Docker will
-attempt to obtain credentials from the
+which project to log to using the `--gcp-project` log option and Docker
+attempts to obtain credentials from the
 [Google Application Default Credential](https://developers.google.com/identity/protocols/application-default-credentials){: target="_blank" class="_"}.
 The `--gcp-project` flag takes precedence over information discovered from the
 metadata server so a Docker daemon running in a Google Cloud Project can be
@@ -52,7 +52,7 @@ overridden to log to a different Google Cloud Project using `--gcp-project`.
 
 Docker fetches the values for zone, instance name and instance ID from Google
 Cloud metadata server. Those values can be provided via options if metadata
-server is not available. They will not override the values from metadata server.
+server is not available. They do not override the values from metadata server.
 
 ## gcplogs options
 

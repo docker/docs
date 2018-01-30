@@ -22,7 +22,7 @@ at any time.
 
 Since client certificate bundles are signed and verified with the UCP server
 certificates, if you replace the UCP server certificates, users have to
-download new client certificate bundles to be able to run Docker commands on
+download new client certificate bundles to run Docker commands on
 the cluster.
 
 ## Replace existing certificates
@@ -41,7 +41,7 @@ To replace the server certificates used by UCP, for each controller node:
     $ docker cp ca.pem replace-certs:/data/ca.pem
     $ docker cp key.pem replace-certs:/data/key.pem
 
-    # Remove the container, since you won't need it any longer
+    # Remove the container, since you don't need it any longer
     $ docker rm replace-certs
     ```
 
@@ -56,6 +56,6 @@ To replace the server certificates used by UCP, for each controller node:
 
 4.  Let your users know.
 
-    After replacing the certificates your users won't be able to authenticate
+    After replacing the certificates your users can't authenticate
     with their old client certificate bundles. Ask your users to go to the UCP
     web UI and [get new client certificate bundles](../access-ucp/cli-based-access.md).

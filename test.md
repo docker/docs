@@ -37,7 +37,7 @@ topics).
 By default, this is the highest heading included in the right navigation bar. To
 include more heading levels, set `toc_min: 1` in the page's front-matter (as is
 done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
-geater than `toc_max` then no headings will show.
+geater than `toc_max` then no headings are shown.
 
 ### Heading 3
 
@@ -119,8 +119,8 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   - Go to the file in a web browser, grab everything after the domain name
   from the URL, and use that as the link in your docs file.
 
-  - Keep in mind that this link won't resolve until you merge the PR and
-  your docs are published on [docs.docker.com](https://docs.docker.com/).
+  - Keep in mind that this link doesn't resolve until you merge the PR and
+  your docs are published on [docs.docker.com](/).
 
 {: id="custom-target-id"}
 
@@ -258,7 +258,7 @@ only need to do it on the first one. If you have a `<th>`, set it there.
 The glossary source lives in the documentation repository
 [docker.github.io](https://github.com/docker/docker.github.io) in
 `_data/glossary.yaml`. The glossary publishes to
-[https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
+[https://docs.docker.com/glossary/](/glossary/).
 
 To update glossary content, edit `_data/glossary.yaml`.
 
@@ -298,13 +298,13 @@ page or displaying content as "cards".
 
 This paragraph is centered and colored green by setting CSS directly on the element.
 **Even though you can do this and it's sometimes the right way to go, remember that if
-we re-skin the site, any inline styles will need to be dealt with manually!**
+we re-skin the site, any inline styles need to be dealt with manually!**
 {: style="text-align:center; color: green" }
 
 {% assign my-text="foo" %}
 
 The Liquid assignment just before this line fills in the following token {{ my-text }}.
-This will be effective for the rest of this file unless the token is reset.
+This is effective for the rest of this file unless the token is reset.
 
 {% capture my-other-text %}foo{% endcapture %}
 Here is another way: {{ my-other-text }}
@@ -348,7 +348,7 @@ The `<hr>`'s are included simply to add visual separation between tabbed content
 and the other topics on the page.
 
 If you have Markdown inside the content of the `<div>`, just add `markdown="1"`
-as an attribute in the HTML for the `<div>` and Kramdown will render it.
+as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
@@ -376,10 +376,10 @@ as an attribute in the HTML for the `<div>` and Kramdown will render it.
 Consider an example where you have something like one tab per language, and
 you have multiple tab sets like this on a page. You might want them to all
 toggle together. We have Javascript that loads on every page that lets you
-do this by setting the `data-group` attributes to be the same. Note that the
+do this by setting the `data-group` attributes to be the same. The
 `data-target` attributes still need to point to unique div IDs.
 
-In this example, selecting `Go` or `Python` in one tab set will toggle the
+In this example, selecting `Go` or `Python` in one tab set toggles the
 other tab set to match.
 
 <ul class="nav nav-tabs">
@@ -410,12 +410,12 @@ a row, each of which takes up 1/3 (4/12) of the row. You need a couple `<br />`s
 to clear the row before.<br /><br />
 
 <div class="row">
-  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
-then it will take up the whole row.</div>
-  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
-then it will take up the whole row.</div>
-  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
-then it will take up the whole row.</div>
+  <div class="panel col-xs-12 col-md-4">This takes up 1/3 of the row unless the screen is small,
+then it takes up the whole row.</div>
+  <div class="panel col-xs-12 col-md-4">This takes up 1/3 of the row unless the screen is small,
+then it takes up the whole row.</div>
+  <div class="panel col-xs-12 col-md-4">This takes up 1/3 of the row unless the screen is small,
+then it takes up the whole row.</div>
 </div>
 
 ### Expand/Collapse accordions
@@ -515,16 +515,13 @@ This example uses a HTML div. This example uses a HTML div. This example uses a 
 This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
 </div>
 
-This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
-break the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
+This example does it with Markdown. You can't have any blank lines or it breaks the Markdown block up.
 {: style="column-count: 3 "}
 
 ### Badges
@@ -595,8 +592,8 @@ support these broad categories of admonitions:
 
 The new styles include prepended icons, color sidebars, and bold color titles
 for multi-paragraph notes, but no auto-prepended text. These are defined in a
-way that will not impact admonitions formatted with the original styles, so
-notes in your published documents won't be adversely affected.
+way that does not impact admonitions formatted with the original styles, so
+notes in your published documents are not adversely affected.
 
 Examples of both styles are shown below.
 

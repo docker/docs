@@ -36,7 +36,7 @@ trusted images. After pushing images in the Trusted Registry, you can see
 which image tags were signed by viewing the appropriate repositories through
 Trusted Registry's web interface.
 
-To configure your Docker client to be able to push signed images to Docker
+To configure your Docker client to push signed images to Docker
 Trusted Registry refer to the CLI Reference's [Environment Variables
 Section](/engine/reference/commandline/cli.md#environment-variables) and
 [Notary Section](/engine/reference/commandline/cli.md#notary).

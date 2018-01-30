@@ -30,7 +30,7 @@ Autodestroy is set to `OFF` (deactivated) by default.
 
 You can enable autodestroy when launching a service through the API or CLI.
 
-If not provided, it will have a default value of `OFF`. Check our [API documentation](/apidocs/docker-cloud.md) for more information.
+If not provided, it has a default value of `OFF`. Check our [API documentation](/apidocs/docker-cloud.md) for more information.
 
 #### Launch with autodestroy using the API
 ```

@@ -112,8 +112,8 @@ share.
 
 | Option     | Description                                                                                             | Default                 |
 |:-----------|:--------------------------------------------------------------------------------------------------------|:------------------------|
-| `uid`      | User ID that will own all files on the volume.                                                          | `0` = `root`            |
-| `gid`      | Group ID that will own all files on the volume.                                                         | `0` = `root`            |
+| `uid`      | User ID that owns all files on the volume.                                                          | `0` = `root`            |
+| `gid`      | Group ID that owns all files on the volume.                                                         | `0` = `root`            |
 | `filemode` | Permissions for all files on the volume.                                                                | `0777`                  |
 | `dirmode`  | Permissions for all directories on the volume.                                                          | `0777`                  |
 | `share`    | Name to associate with file share so that the share can be easily located in the Azure Storage Account. | MD5 hash of volume name |
@@ -135,7 +135,7 @@ Cloudstor across the swarm.
 
 You can use `docker volume rm [volume name]` to remove a Cloudstor volume from
 any node. If you remove a volume from one node, make sure it is not being used
-by another active node, since those tasks/containers in another node will lose
+by another active node, since those tasks/containers in another node lose
 access to their data.
 
 ## Use a different storage endpoint

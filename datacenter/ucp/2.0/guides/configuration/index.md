@@ -1,4 +1,4 @@
----
+ ---
 description: Learn how to configure Docker Universal Control Plane to use your own
   certificates.
 keywords: Universal Control Plane, UCP, certificate, authentication, tls
@@ -27,7 +27,7 @@ automatically trusted by your browser and client tools.
 To ensure minimal impact to your business, you should plan for this change to
 happen outside business peak hours. Your applications will continue running
 normally, but existing UCP client certificates will become invalid, so users
-will have to download new ones to [access UCP from the CLI](../access-ucp/cli-based-access.md).
+need to download new ones to [access UCP from the CLI](../access-ucp/cli-based-access.md).
 
 ## Customize the UCP TLS certificates
 
@@ -42,16 +42,16 @@ Upload your certificates and keys:
 * A `ca.pem` file with the root CA public certificate.
 * A `cert.pem` file with the TLS certificate for your domain and any intermediate public
 certificates, in this order.
-* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password. 
+* A `key.pem` file with TLS private key. Make sure it is not encrypted with a password.
 Encrypted keys should have `ENCRYPTED` in the first line.
 
 Finally, click **Update** for the changes to take effect.
 
-After replacing the TLS certificates your users won't be able to authenticate
+After replacing the TLS certificates your users can't authenticate
 with their old client certificate bundles. Ask your users to go to the UCP
 web UI and [get new client certificate bundles](../access-ucp/cli-based-access.md).
 
-If you deployed Docker Trusted Registry, you'll also need to reconfigure it
+If you deployed Docker Trusted Registry, you also need to reconfigure it
 to trust the new UCP TLS certificates.
 [Learn how to configure DTR](/datacenter/dtr/2.1/reference/cli/reconfigure.md).
 

@@ -15,7 +15,7 @@ To create a new team, go to the UCP web UI, and navigate to the
 
 If you want to put the team in a new organization, click
 **Create Organization** and give the new organization a name, like
-"engineering". Click **Create** to create it. 
+"engineering". Click **Create** to create it.
 
 In the list, click the organization where you want to create the new team.
 Name the team, give it an optional description, and click **Create** to
@@ -26,7 +26,7 @@ create a new team.
 ## Add users to a team
 
 You can now add and remove users from the team. In the current organization's
-teams list, click the new team, and in the details pane, click **Add Users**. 
+teams list, click the new team, and in the details pane, click **Add Users**.
 Choose the users that you want to add to the team, and when you're done, click
 **Add Users**.
 
@@ -80,8 +80,8 @@ are fully synced.
 
 Create a grant to manage the team's permissions.
 [Learn how to grant permissions to users based on roles](grant-permissions.md).
-In this example, you'll create a collection for the "Data Center" team, 
-where they can deploy services and resources, and you'll create a grant that
+In this example, you create a collection for the "Data Center" team,
+where they can deploy services and resources, and you create a grant that
 gives the team permission to access the collection.
 
 ![](../images/team-grant-diagram.svg){: .with-border}
@@ -98,10 +98,10 @@ gives the team permission to access the collection.
 8.  In the left pane, click **Roles** and in the **Role** dropdown, select
     **Restricted Control**.   
 9.  In the left pane, click **Subjects** and select the **Organizations**
-    subject type. 
+    subject type.
 10. In the **Organization** dropdown, select **docker-datacenter**, and in the
    **Teams** dropdown, select **Data Center**.
-11. Click **Create** to create the grant. 
+11. Click **Create** to create the grant.
 
 ![](../images/create-and-manage-teams-4.png){: .with-border}
 

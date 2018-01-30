@@ -51,7 +51,7 @@ There are many ways to contribute:
 
 - Edit, rate, or file an issue or question directly on the site by
 using the links available on the right-side menu on every page
-at [docs.docker.com](https://docs.docker.com/).
+at [docs.docker.com](/).
 
   ![Docs feedback links](images/docs-site-feedback.png)
 
@@ -59,7 +59,7 @@ at [docs.docker.com](https://docs.docker.com/).
 [https://github.com/docker/docker.github.io/issues](https://github.com/docker/docker.github.io/issues).
 
   This is similar to clicking **Request doc changes** on a published docs
-  page, but if you manually file an issue you have to fill in links to
+  page, but if you manually file an issue you need to fill in links to
   the related pages.
 
 - Fork the documentation, make changes or add new content on your local
@@ -90,7 +90,7 @@ To learn more about working on the documentation, see these topics:
 
 - [README on docker/docker.github.io](https://github.com/docker/docker.github.io/blob/master/README.md)
 
-- [Docs Test page](https://docs.docker.com/test/) - This is on the
+- [Docs Test page](/test.md) - This is on the
 published site. It explains how to use Docs components, resources, and
 formats, and gives us a way to test and demo them.
 
@@ -101,8 +101,8 @@ repository](https://github.com/docker/community/blob/master/README.md){:
 target="_blank" class="_"} for resources and information on the community.
 
 The topics in this guide on [Other ways to contribute](/opensource/ways/)
-provide some additional information,  but it's likely you'll find the community
-information you are looking for on the GitHub repository.
+provide some additional information,  but the community
+information you are looking for is probably available on the GitHub repository.
 
 ## Looking for Moby?
 

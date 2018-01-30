@@ -8,7 +8,7 @@ UCP automatically tries to heal itself by monitoring it's internal
 components and trying to bring them to a healthy state.
 
 In most cases, if a single UCP component is persistently in a
-failed state, you should be able to restore the cluster to a healthy state by
+failed state, you can often restore the cluster to a healthy state by
 removing the unhealthy node from the cluster and joining it again.
 [Lean how to remove and join modes](../configure/scale-your-cluster.md).
 
@@ -20,7 +20,7 @@ replicated on all manager nodes of the UCP cluster. These data stores are for
 internal use only, and should not be used by other applications.
 
 ### With the HTTP API
-In this example we'll use `curl` for making requests to the key-value
+In this example we use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:
