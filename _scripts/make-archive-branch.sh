@@ -3,10 +3,8 @@
 while getopts ":hv:s:" opt; do
   case ${opt} in
     v ) version="$OPTARG"
-        break
       ;;
     s ) SHA="$OPTARG"
-        break
       ;;
     \? ) echo "Usage: $0 [-h] | -v <docker-version> -s <GIT-SHA-OF-ARCHIVE>"
          echo ""
@@ -48,9 +46,9 @@ fi
 ## Make sure our working branch is clean
 
 BRANCH_STATUS=$(git diff --cached --exit-code)
-BRANCH_STATUS_UNTRACKED=$(git ls-files --other --directory --exclude-standard)
+BRANCH_STATUS_UNTRACKED=$(git ls-files --other --directory --exclude-standard | head -n 1)
 
-if ! [ -z $BRANCH_STATUS -a -z $BRANCH_STATUS_UNTRACKED ]; then
+if [ $BRANCH_STATUS -o "$BRANCH_STATUS_UNTRACKED" ]; then
   echo "Branch has uncommitted changes or untracked files. Exiting to protect you."
   echo "Use a fresh clone for this, not your normal working clone."
   echo "If you don't want to set up all your remotes again,"
@@ -66,7 +64,7 @@ git pull -q
 git checkout -q ${SHA}
 status=$?
 
-if [ $status !- 0 ]; then
+if [ $status -ne 0 ]; then
   echo "Failed to check out $SHA. Exiting."
   exit 1
 fi
@@ -117,28 +115,35 @@ echo "    /samples/ entries except /samples/ itself."
 echo "    A valid example for samples would look like:"
 
 cat << EOF
-samples:
-- sectiontitle: Sample applications
-  section:
-  - path: /samples/
-    title: Samples home
+          samples:
+          - sectiontitle: Sample applications
+            section:
+            - path: /samples/
+              title: Samples home
 EOF
 
 echo "    Do this for the following sections:"
 for dir in "${only_live_contents[@]}"; do
-  echo "        \/$dir\/"
+  echo "      /$dir/"
 done
+echo
 
 echo "2.  Do a local build and run to test your archive."
 echo "        docker build -t archivetest ."
 echo "        docker run --rm -it -p 4000:4000 archivetest"
 
-echo "3.  After carefully reviewing the output of `git status` to make sure no"
+echo "3.  After carefully reviewing the output of 'git status' to make sure no"
 echo "    files are being added by mistake, Run the following to add and commit"
 echo "    all your changes, including new files:"
 echo "        git commit -m \"Created archive branch v$version\" -A"
 
 echo "4.  Push your archive to the upstream remote:"
 echo "        git push upstream v$version"
+echo
+echo "99. If you want to bail out of this operation completely,"
+echo "    and get back to master, run the following:"
+echo
+echo "      git reset --hard; git clean -fd; git checkout master; git branch -D v$version"
+echo
 
 
