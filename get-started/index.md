@@ -69,12 +69,10 @@ teaches you how to:
 ## Docker concepts
 
 Docker is a platform for developers and sysadmins to **develop, deploy, and run**
-applications in containers. Like ship containers, Docker containers (based on
-Linux containers) are isolated user spaces that let you more easily control your
-software.
+applications with containers. The use of Linux containers to deploy applications
+is called _containerization_. Containers are not new, but their use for easily
+deploying applications is.
 
-The use of Linux containers to deploy applications is called _containerization_.
-Containers are not new, but their use for easily deploying applications is.
 Containerization is increasingly popular because containers are:
 
 - Flexible: Even the most complex applications can be containerized.
@@ -84,11 +82,7 @@ Containerization is increasingly popular because containers are:
 - Scalable: You can increase and automatically distribute container replicas.
 - Stackable: You can stack services vertically and on-the-fly.
 
-At its core, the Docker platform is a client-server application that runs on any
-x64 host with a modern Linux kernel. Throughout this tutorial, we use the Docker
-CLI to talk to the Docker server or daemon.
-
-![Containers are portable](images/laurel-docker-containers.png){:width="300px"} 
+![Containers are portable](images/laurel-docker-containers.png){:width="300px"}
 
 ### Images and containers
 
@@ -97,13 +91,9 @@ package that includes everything needed to run an appplication--the code, a
 runtime, libraries, environment variables, and configuration files.
 
 A **container** is a runtime instance of an image--what the image becomes in
-memory when executed (that is, an image with state, or a user process). More
-specifically, a container is the user space within memory in which the the user
-process runs.
-
-But its okay to think of containers as the processes themselves. In fact, you
-can see a list of your running containers with the command, `docker ps`, just as
-you would in Linux. More on this later.
+memory when executed (that is, an image with state, or a user process). You can
+see a list of your running containers with the command, `docker ps`, just as you
+would in Linux.
 
 ### Containers and virtual machines
 
@@ -125,9 +115,13 @@ of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 
 > For full Kubernetes Integration
 >
-> [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+> - [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
 is available in
 [17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
+or higher.
+> - [Kubernetes on Docker for Windows](https://docs.docker.com/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+is available in
+[18.02.0-ce Edge](https://docs.docker.com/docker-for-windows/release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26-edge){: target="_blank" class="_"}
 or higher.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
