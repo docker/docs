@@ -59,7 +59,7 @@ You can install Docker EE in different ways, depending on your needs:
 
 2.  Temporarily store the Docker EE repository URL you noted down in the
     [prerequisites](#prerequisites) in an environment variable.
-    This will not persist when the current session ends.
+    This does not persist when the current session ends.
 
     ```bash
     $ export DOCKERURL='<DOCKER-EE-URL>'
@@ -139,8 +139,8 @@ You can install Docker EE in different ways, depending on your needs:
     ```
 
     If this is the first time you are installing a package from a recently added
-    repository, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint matches
+    repository, you are prompted to accept the GPG key, and
+    the key's fingerprint is shown. Verify that the fingerprint matches
     `{{ gpg-fingerprint }}` and if so, accept the key.
 
 2.  On production systems, you should install a specific version of Docker EE
@@ -155,7 +155,7 @@ You can install Docker EE in different ways, depending on your needs:
     ```
 
     The contents of the list depend upon which repositories you have enabled,
-    and will be specific to your version of {{ linux-dist-long }}
+    and is specific to your version of {{ linux-dist-long }}
     (indicated by the `.el7` suffix on the version, in this example). Choose a
     specific version to install. The second column is the version string. You
     can use the entire version string, but **you need to include at least to the
@@ -223,7 +223,7 @@ To upgrade Docker EE:
 
 If you cannot use the official Docker repository to install Docker EE, you can
 download the `.{{ package-format | downcase }}` file for your release and
-install it manually. You will need to download a new file each time you want to
+install it manually. You need to download a new file each time you want to
 upgrade Docker EE.
 
 {% if linux-dist == "rhel" %}
@@ -330,7 +330,7 @@ You must delete any edited configuration files manually.
 
 {% elsif section == "linux-install-nextsteps" %}
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).
 

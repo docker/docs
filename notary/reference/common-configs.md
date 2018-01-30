@@ -25,7 +25,7 @@ Example:
 }
 ```
 
-Note that this entire section is optional.  However, if you would like to
+This entire section is optional.  However, if you would like to
 specify a different log level, then you need the required parameters
 below to configure it.
 
@@ -62,7 +62,7 @@ about these configuration parameters.
 }
 ```
 
-Note that this entire section is optional.  If you want to report errors to
+This entire section is optional.  If you want to report errors to
 Bugsnag, then you need to include a `bugsnag` subsection, along with the
 required parameters below, to configure it.
 

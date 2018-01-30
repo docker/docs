@@ -29,7 +29,7 @@ When installing UCP you can customize:
     `--external-server-cert` flag.
 
   * The license used by UCP, by bind-mounting the file at
-    '/config/docker_subscription.lic' in the tool.  E.g. -v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic
+    '/config/docker_subscription.lic' in the tool.  For example, `-v /path/to/my/config/docker_subscription.lic:/config/docker_subscription.lic`
     or by specifying with '--license "$(cat license.lic)"
 
 If you're joining more nodes to this swarm, open the following ports in your
@@ -53,7 +53,7 @@ command.
 | `--interactive, i`       | Run in interactive mode and prompt for configuration values                                      |
 | `--admin-username`       | The UCP administrator username                                                                   |
 | `--admin-password`       | The UCP administrator password                                                                   |
-| `--san`                  | Add subject alternative names to certificates (e.g. --san www1.acme.com --san www2.acme.com)     |
+| `--san`                  | Add subject alternative names to certificates. For example, `-san www1.acme.com --san www2.acme.com`     |
 | `--host-address`         | The network address to advertise to other nodes. Format: IP address or network interface name    |
 | `--data-path-addr`       | Address or interface to use for data path traffic. Format: IP address or network interface name  |
 | `--swarm-port`           | Port for the Docker Swarm manager. Used for backwards compatibility                              |
@@ -78,5 +78,5 @@ command.
 | `--random`               | Set the Docker Swarm scheduler to random mode. Used for backwards compatibility                  |
 | `--external-service-lb`  | Set the external service load balancer reported in the UI                                        |
 | `--enable-profiling`     | Enable performance profiling                                                                     |
-| `--license`              | Add a license: e.g. --license "$(cat license.lic)"                                               |
+| `--license`              | Add a license. For example, `--license "$(cat license.lic)"`                                               |
 | `--force-insecure-tcp`   | Force install to continue even with unauthenticated Docker Engine ports                         |

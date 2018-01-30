@@ -23,7 +23,7 @@ offers a high-level tool with several powerful functionalities:
  - *Portable deployment across machines.* Docker defines a format for bundling
  an application and all its dependencies into a single object called a container. This container can be
  transferred to any Docker-enabled machine. The container can be executed there with the
- guarantee that the execution environment exposed to the application will be the
+ guarantee that the execution environment exposed to the application is the
  same in development, testing, and production. LXC implements process sandboxing, which is an important pre-requisite
  for portable deployment, but is not sufficient for portable deployment.
  If you sent me a copy of your application installed in a custom LXC
@@ -138,7 +138,7 @@ You can learn about the project's security policy
 
 ### Why do I need to sign my commits to Docker with the DCO?
 
-Please read [our blog post](
+Read [our blog post](
 http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
 
 ### When building an image, should I prefer system libraries or bundled ones?
@@ -147,12 +147,11 @@ http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certi
 https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
 
 Virtually all programs depend on third-party libraries. Most frequently, they
-will use dynamic linking and some kind of package dependency, so that when
+use dynamic linking and some kind of package dependency, so that when
 multiple programs need the same library, it is installed only once.
 
-Some programs, however, will bundle their third-party libraries, because they
-rely on very specific versions of those libraries. For instance, Node.js bundles
-OpenSSL; MongoDB bundles V8 and Boost (among others).
+Some programs, however, bundle their third-party libraries, because they
+rely on very specific versions of those libraries.
 
 When creating a Docker image, is it better to use the bundled libraries, or
 should you build those programs so that they use the default system libraries
@@ -186,7 +185,7 @@ When building Docker images on Debian and Ubuntu you may have seen errors like:
     unable to initialize frontend: Dialog
 
 These errors don't stop the image from being built but inform you that the
-installation process tried to open a dialog box, but was unable to. Generally,
+installation process tried to open a dialog box, but couldn't. Generally,
 these errors are safe to ignore.
 
 Some people circumvent these errors by changing the `DEBIAN_FRONTEND`
@@ -198,10 +197,10 @@ This prevents the installer from opening dialog boxes during installation which
 stops the errors.
 
 While this may sound like a good idea, it *may* have side effects. The
-`DEBIAN_FRONTEND` environment variable will be inherited by all images and
+`DEBIAN_FRONTEND` environment variable is inherited by all images and
 containers built from your image, effectively changing their behavior. People
-using those images will run into problems when installing software
-interactively, because installers will not show any dialog boxes.
+using those images run into problems when installing software
+interactively, because installers do not show any dialog boxes.
 
 Because of this, and because setting `DEBIAN_FRONTEND` to `noninteractive` is
 mainly a 'cosmetic' change, we *discourage* changing it.
@@ -234,7 +233,7 @@ command and start it with `docker-machine start` if needed.
 
     $ docker-machine start default
 
-You have to tell Docker to talk to that machine. You can do this with the
+You need to tell Docker to talk to that machine. You can do this with the
 `docker-machine env` command. For example,
 
     $ eval "$(docker-machine env default)"

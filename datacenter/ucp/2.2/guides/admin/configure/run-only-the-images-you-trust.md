@@ -43,12 +43,12 @@ With this setting, UCP allows deploying any image as long as the image has
 been signed. It doesn't matter who signed the image.
 
 To enforce that the image needs to be signed by specific teams, click the
-dropdown and select those teams from the list. 
+dropdown and select those teams from the list.
 
 > Team must be in docker-datacenter
 >
-> You need to select a team that's part of the `docker-datacenter` organization
-> in order to use this feature.
+> Select a team that's part of the `docker-datacenter` organization
+> to use this feature.
 {: .important}
 
 ![UCP settings](../../images/run-only-the-images-you-trust-3.png){: .with-border}
@@ -58,7 +58,7 @@ team, or someone that is a member of all those teams, again which must be a part
 of the `docker-datacenter` organization.
 
 > Signing with teams
-> 
+>
 > Teams used for signing policy enforcement must be in the `docker-datacenter`
 > organization.
 

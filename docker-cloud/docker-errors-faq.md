@@ -134,7 +134,7 @@ Python 3.x.
 
 ### Workarounds
 
-* Please use Python 2.x with the Docker Cloud CLI.
+* Use Python 2.x with the Docker Cloud CLI.
 
 ---
 
@@ -156,7 +156,7 @@ running `docker-cloud` inside a container using `docker run`.
 
 ### Workarounds
 
-* If you encounter problems with the installation, please use Python 2.x.
+* If you encounter problems with the installation, use Python 2.x.
 
 * Before attempting to run `docker-cloud` in a container with `docker run`,
 make sure that you [have Linux containers

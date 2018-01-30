@@ -45,7 +45,7 @@ $ swarm manage --filter=health --filter=dependency
 When creating a container or building an image, you use a `constraint` or
 `health` filter to select a subset of nodes to consider for scheduling.
 If a node in Swarm cluster has a label with key `containerslots`
-and a number-value, Swarm will not launch more containers than the given number.
+and a number-value, Swarm does not launch more containers than the given number.
 
 ### Use a constraint filter
 
@@ -132,7 +132,7 @@ f8b693db9cd6        mysql:latest        "mysqld"            Up About a minute   
 The scheduler selected `node-2` since it was started with the `storage=disk` label.
 
 Finally, build args can be used to apply node constraints to a `docker build`.
-Again, you'll avoid flash drives.
+This example shows how to avoid flash drives.
 
 ```bash
 $ mkdir sinatra
@@ -175,10 +175,10 @@ You may give your Docker nodes the containerslots label
 $ docker daemon --label containerslots=3
 ```
 
-Swarm will run up to 3 containers at this node, if all nodes are "full",
+Swarm runs up to 3 containers at this node, if all nodes are "full",
 an error is thrown indicating no suitable node can be found.
-If the value is not castable to an integer number or is not present,
-there will be no limit on container number.
+If the value cannot be cast to an integer number or is not present,
+there is no limit on container number.
 
 ## Container filters
 
@@ -329,7 +329,7 @@ Currently, dependencies are declared as follows:
 
 Swarm attempts to co-locate the dependent container on the same node. If it
 cannot be done (because the dependent container doesn't exist, or because the
-node doesn't have enough resources), it will prevent the container creation.
+node doesn't have enough resources), it prevents the container creation.
 
 The combination of multiple dependencies are honored if possible. For
 instance, if you specify `--volumes-from=A --net=container:B`, the scheduler
@@ -373,7 +373,7 @@ CONTAINER ID        IMAGE          COMMAND        PORTS                         
 87c4376856a8        nginx:latest   "nginx"        192.168.0.42:80->80/tcp         node-1/prickly_engelbart
 ```
 
-Again, repeating the same command will result in the selection of `node-3`,
+Again, repeating the same command results in the selection of `node-3`,
 since port `80` is neither available on `node-1` nor `node-2`:
 
 ```bash
@@ -387,7 +387,7 @@ f8b693db9cd6   nginx:latest        "nginx"        192.168.0.44:80->80/tcp       
 87c4376856a8   nginx:latest        "nginx"        192.168.0.42:80->80/tcp         node-1/prickly_engelbart
 ```
 
-Finally, Docker Swarm will refuse to run another container that requires port
+Finally, Docker Swarm refuses to run another container that requires port
 `80`, because it is not available on any node in the cluster:
 
 ```bash

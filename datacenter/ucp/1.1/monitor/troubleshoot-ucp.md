@@ -35,7 +35,7 @@ specially useful if the UCP web application is not working.
     certificates.
     [Learn how to use client certificates](../access-ucp/cli-based-access.md).
 
-    If your client certificate bundle is for a non-admin user, you won't have
+    If your client certificate bundle is for a non-admin user, you don't have
     permissions to see the UCP system containers.
 
 2.  Check the logs of UCP system containers.

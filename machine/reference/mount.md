@@ -23,7 +23,7 @@ bar
 
 
 Now you can use the directory on the machine, for mounting into containers.
-Any changes done in the local directory, will be reflected in the machine too.
+Any changes done in the local directory, is reflected in the machine too.
 
 ```none
 $ eval $(docker-machine env dev)
@@ -46,5 +46,5 @@ You can also call `fuserunmount` (or `fusermount -u`) commands directly.
 $ docker-machine mount -u dev:/home/docker/foo foo
 $ rmdir foo
 ```
-**Note that files are actually being stored on the machine, *not* on the host.**
+**Files are actually being stored on the machine, *not* on the host.**
 So make sure to make a copy of any files you want to keep, before removing it!

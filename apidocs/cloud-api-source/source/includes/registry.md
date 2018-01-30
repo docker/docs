@@ -26,7 +26,7 @@ Attribute | Description
 --------- | -----------
 resource_uri | A unique API endpoint that represents the registry
 name | Human-readable name of the registry
-host | FQDN of the registry, i.e. `registry-1.docker.io`
+host | FQDN of the registry, such as `registry-1.docker.io`
 is_docker_registry | Whether this registry is run by Docker
 is_ssl | Whether this registry has SSL activated or not
 port | The port number where the registry is listening to

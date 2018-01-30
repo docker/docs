@@ -66,7 +66,7 @@ avoid these situations.
 ## Prerequisites
 
 1.  The subordinate UID and GID ranges must be associated with an existing user,
-    even though the association is an implementation detail. The user will own
+    even though the association is an implementation detail. The user owns
     the namespaced storage directories under `/var/lib/docker/`. If you don't
     want to use an existing user, Docker can create one for you and use that. If
     you want to use an existing username or user ID, it must already exist.
@@ -97,8 +97,8 @@ avoid these situations.
     testuser:231072:65536
     ```
 
-    This means that user-namespaced processes started by `testuser` will be
-    owned by host UID `231072` (which will look like UID `0` inside the
+    This means that user-namespaced processes started by `testuser` are
+    owned by host UID `231072` (which looks like UID `0` inside the
     namespace) through 296608 (231072 + 65536). These ranges should not overlap,
     to ensure that namespaced processes cannot access each other's namespaces.
 
@@ -107,26 +107,26 @@ avoid these situations.
     avoid overlap.
 
     If you want to use the `dockremap` user automatically created by Docker,
-    you'll need to check for the `dockremap` entry in these files **after**
+    check for the `dockremap` entry in these files **after**
     configuring and restarting Docker.
 
 3.  If there are any locations on the Docker host where the unprivileged
     user needs to write, adjust the permissions of those locations
     accordingly. This is also true if you want to use the `dockremap` user
-    automatically created by Docker, but you won't be able to modify the
+    automatically created by Docker, but you can't modify the
     permissions until after configuring and restarting Docker.
 
-4.  Enabling `userns-remap` will effectively mask existing image and container
+4.  Enabling `userns-remap` effectively masks existing image and container
     layers, as well as other Docker objects within `/var/lib/docker/`. This is
     because Docker needs to adjust the ownership of these resources and actually
     stores them in a subdirectory within `/var/lib/docker/`. It is best to enable
     this feature on a new Docker installation rather than an existing one.
 
-    Along the same lines, if you disable `userns-remap` you will not see any
+    Along the same lines, if you disable `userns-remap` you can't access any
     of the resources created while it was enabled.
 
 5.  Check the [limitations](#user-namespace-known-restrictions) on user
-    namespaces to be sure your use case will be possible.
+    namespaces to be sure your use case is possible.
 
 ## Enable userns-remap on the daemon
 
@@ -140,11 +140,11 @@ $ dockerd --userns-remap="testuser:testuser"
 ```
 
 1.  Edit `/etc/docker/daemon.json`. Assuming the file was previously empty, the
-    following entry will enable `userns-remap` using user and group called
+    following entry enables `userns-remap` using user and group called
     `testuser`. You can address the user and group by ID or name. You only need to
     specify the group name or ID if it is different from the user name or ID. If
     you provide both the user and group name or ID, separate them by a colon
-    (`:`) character. The following formats will all work for the value, assuming
+    (`:`) character. The following formats all work for the value, assuming
     the UID and GID of `testuser` are `1001`:
 
     - `testuser`
@@ -230,7 +230,7 @@ $ dockerd --userns-remap="testuser:testuser"
     The directories which are owned by the remapped user are used instead
     of the same directories directly beneath `/var/lib/docker/` and the
     unused versions (such as `/var/lib/docker/tmp/` in the example here)
-    can be removed. Docker will not use them while `userns-remap` is
+    can be removed. Docker does not use them while `userns-remap` is
     enabled.
 
 ## Disable namespace remapping for a container
@@ -264,5 +264,5 @@ While the root user inside a user-namespaced container process has many of the
 expected privileges of the superuser within the container, the Linux kernel
 imposes restrictions based on internal knowledge that this is a user-namespaced
 process. One notable restriction is the inability to use the `mknod` command.
-Permission will be denied for device creation within the container when run by
+Permission is denied for device creation within the container when run by
 the `root` user.

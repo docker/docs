@@ -17,14 +17,14 @@ incremental back-off algorithm.
 
 The following Autorestart options are available:
 
-- `OFF`: the container will not be restarted, regardless of the exit code.
-- `ON_FAILURE`: the container will be restarted *only* if it stops with an exit code other than 0. (0 is for normal shutdown.)
-- `ALWAYS`: the container will be restarted automatically, regardless of the exit code.
+- `OFF`: the container does not restart, regardless of the exit code.
+- `ON_FAILURE`: the container restarts *only* if it stops with an exit code other than 0. (0 is for normal shutdown.)
+- `ALWAYS`: the container restarts automatically, regardless of the exit code.
 
 > **Note**: If you are using **Autorestart** set to `ALWAYS`, **Autodestroy** must be set to `OFF`.
 
 If the Docker daemon in a node restarts (because it was upgraded, or because the
-underlying node was restarted), the daemon will only restart containers that
+underlying node was restarted), the daemon only restarts containers that
 have **Autorestart** set to `ALWAYS`.
 
 ## Launching a Service with Autorestart

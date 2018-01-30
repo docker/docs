@@ -106,7 +106,7 @@ information, see [Stable and Edge channels](#questions-about-stable-and-edge-cha
 Yes! You can use Docker for Windows to test single-node features of
 [swarm mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
 initializing a swarm with a single node, creating services, and scaling
-services. Docker “Moby” on Hyper-V will serve as the single swarm node. You can
+services. Docker “Moby” on Hyper-V serves as the single swarm node. You can
 also use Docker Machine, which comes with Docker for Windows, to create and
 experiment with a multi-node swarm. Check out the tutorial at
 [Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md).
@@ -133,7 +133,7 @@ but rather sets permissions to a default value of
 (`read`, `write`, `execute` permissions for `user`, `read` and `execute`
 for `group`) which is not configurable.
 
-For workarounds and to learn more, please see [Permissions errors on data
+For workarounds and to learn more, see [Permissions errors on data
 directories for shared
 volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 
@@ -147,8 +147,8 @@ does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
 ### Are symlinks supported?
 
 Docker for Windows supports symbolic links (symlinks) created within containers.
-Symlinks will resolve within and across containers.
-Symlinks created elsewhere (e.g., on the host) will not work.
+Symlinks resolve within and across containers.
+Symlinks created outside of Docker do not work.
 
 To learn more about the reasons for this limitation, see the following discussions:
 
@@ -167,7 +167,7 @@ Certification Authorities or Intermediate Certification Authorities.
 
 Docker for Windows creates a certificate bundle of all user-trusted CAs based on
 the Windows certificate store, and appends it to Moby trusted certificates. So
-if an enterprise SSL certificate is trusted by the user on the host, it will be
+if an enterprise SSL certificate is trusted by the user on the host, it is
 trusted by Docker for Windows.
 
 To learn more about how to install a CA root certificate for the registry, see
@@ -176,7 +176,7 @@ in the Docker Engine topics.
 
 ### How do I add client certificates?
 
-Starting with Docker for Windows 17.06.0-ce, you do not have to push your
+Starting with Docker for Windows 17.06.0-ce, you do not need to push your
 certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
@@ -190,17 +190,17 @@ directory on Moby (the Docker for Windows virtual machine running on Hyper-V).
  the changes to take effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](/docker-for-windows/index.md#docker-daemon)). Docker for Windows will
-ignore certificates listed under insecure registries, and will not send client
+Daemon](/docker-for-windows/index.md#docker-daemon)). Docker for Windows
+ignores certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from
-the registry will produce error messages on the command line, as well as on the
+the registry produce error messages on the command line, as well as on the
 registry.
 
 To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](/engine/security/certificates.md)
 in the Docker Engine topics.
 
-### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
+### Why does Docker for Windows sometimes lose network connectivity, causing `push` or `pull` commands to fail?
 
 Networking is not yet fully Stable across network changes and system sleep
 cycles. Exit and start Docker to restore connectivity.

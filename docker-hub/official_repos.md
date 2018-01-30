@@ -90,8 +90,8 @@ questions should be directed to `#docker-library` on Freenode IRC.
 ## How do I create a new Official Repository?
 
 From a high level, an Official Repository starts out as a proposal in the form
-of a set of GitHub pull requests. You'll find detailed and objective proposal
-requirements in the following GitHub repositories:
+of a set of GitHub pull requests. Detailed and objective proposal
+requirements are documented in the following GitHub repositories:
 
 * [docker-library/official-images](https://github.com/docker-library/official-images)
 

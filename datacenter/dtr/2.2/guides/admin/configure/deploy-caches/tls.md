@@ -15,16 +15,16 @@ You can learn more about the supported configuration in the
 ## Get the TLS certificate and keys
 
 Before deploying a DTR cache with TLS, you need to get a public key
-certificate for the domain name where you'll deploy the cache. You'll also
+certificate for the domain name used to deploy the cache. You also
 need the public and private key files for that certificate.
 
-Once you have then, transfer those files to the host where you'll deploy
+Once you have then, transfer those files to the host used to deploy
 the DTR cache.
 
 
 ## Create the cache configuration
 
-Use SSH to log into the host where you'll deploy the DTR cache, and navigate to
+Use SSH to log into the host used to deploy the DTR cache, and navigate to
 the directory where you've stored the TLS certificate and keys.
 
 Create the `config.yml` file with the following content:

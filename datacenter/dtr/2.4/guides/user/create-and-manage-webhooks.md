@@ -17,7 +17,7 @@ the **Webhooks** tab, and click **New Webhook**.
 Select the event that will trigger the webhook, and set the URL to send
 information about the event. Once everything is set up, click **Test** for
 DTR to send a JSON payload to the URL you set up, so that you can validate
-that the integration is working. You'll get an event that looks like this:
+that the integration is working. You get an event that looks like this:
 
 ```
 {
@@ -45,4 +45,4 @@ the event is triggered.
 
 ## Where to go next
 
-* [Create deployment policies](create-deployment-policies.md)
+* [Create promotion policies](create-promotion-policies.md)

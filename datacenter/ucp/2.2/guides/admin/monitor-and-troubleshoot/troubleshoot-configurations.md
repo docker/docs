@@ -8,7 +8,7 @@ UCP automatically tries to heal itself by monitoring its internal
 components and trying to bring them to a healthy state.
 
 In most cases, if a single UCP component is in a failed state persistently,
-you should be able to restore the cluster to a healthy state by
+you can restore the cluster to a healthy state by
 removing the unhealthy node from the cluster and joining it again.
 [Learn how to remove and join nodes](../configure/scale-your-cluster.md).
 
@@ -21,7 +21,7 @@ internal use only and should not be used by other applications.
 
 ### With the HTTP API
 
-In this example we'll use `curl` for making requests to the key-value
+In this example we use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:
@@ -134,11 +134,11 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # number of replicas equal to the number of manager nodes in the cluster.
 docker container run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
 
-time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..." 
-time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]" 
-time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1" 
-time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..." 
-time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\"" 
+time="2017-07-14T20:46:09Z" level=debug msg="Connecting to db ..."
+time="2017-07-14T20:46:09Z" level=debug msg="connecting to DB Addrs: [192.168.1.25:12383]"
+time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to 1"
+time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
+time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
 ...
 {% endraw %}
 ```

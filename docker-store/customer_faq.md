@@ -53,7 +53,7 @@ selected account on the **My Content** page.
 
 You can apply to become a Docker Store publisher by filling out
 the form [here](https://store.docker.com/publisher/signup). When you've been
-accepted to the program, you'll set up a publisher profile and submit your
+accepted to the program, you can set up a publisher profile and submit your
 images for review. Learn more about the publisher duties and requirements
 [here](https://success.docker.com/Store).
 
@@ -73,7 +73,7 @@ pricing stable and consistent, rather than fluctuating with exchange rates.
 ### When do you charge my credit card?
 
 We automatically charge your credit card on the first day of your billing cycle
-each month, and the charge will come from Docker, Inc. Your billing cycle is a
+each month, and the charge comes from Docker, Inc. Your billing cycle is a
 30 day period starting on the day you subscribe.
 
 ### What do I do if my payment fails?
@@ -90,7 +90,7 @@ organization name from the **Account** menu before updating the information.
 
 ### How does cancellation work? Do you offer refunds?
 
-You can cancel a subscription at any time, however you will still be billed
+You can cancel a subscription at any time, however you are still billed
 for the full month, and have access to the subscription content until the end of
 that billing period.
 

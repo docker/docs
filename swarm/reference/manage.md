@@ -82,7 +82,7 @@ Use `--filter <value>` or `-f <value>` to tell the Docker Swarm scheduler which 
 Where `<value>` is:
 
   * `health` — Use nodes that are running and communicating with the discovery backend.
-  * `port` — For containers that have a static port mapping, use nodes whose corresponding port number is available (i.e., not occupied by another container or process).
+  * `port` — For containers that have a static port mapping, use nodes whose corresponding port number is available and not occupied by another container or process.
   * `dependency` — For containers that have a declared dependency, use nodes that already have a container with the same dependency.
   * `affinity` — For containers that have a declared affinity, use nodes that already have a container with the same affinity.
   * `constraint` — For containers that have a declared constraint, use nodes that already have a container with the same constraint.

@@ -20,13 +20,13 @@ get a $10 credit:
 ## Link your DigitalOcean Account
 
 To link your DigitalOcean account so you can launch **nodes** using Docker
-Cloud, navigate to **Account info \> Cloud Providers**. You'll see a list of all
-the providers that you can link to Docker Cloud. Click **Link account** next to
+Cloud, navigate to **Account info \> Cloud Providers**. A list of all
+the providers that you can link to Docker Cloud is shown. Click **Link account** next to
 DigitalOcean.
 
 ![](images/do-link-account.png)
 
-You'll be redirected to a DigitalOcean login screen. Use your **DigitalOcean**
+You're redirected to a DigitalOcean login screen. Use your **DigitalOcean**
 credentials to log in to your account.
 
 ![](images/do-login-screen.png)

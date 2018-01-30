@@ -5,7 +5,7 @@ keywords: Cloud, SSH keys, Azure, link
 title: Set up SSH keys
 ---
 
-You can link your Cloud and Service providers so that Docker Cloud can provision and manage swarms on your behalf. For this, you will need an SSH key to authenticate Docker to your provider.
+You can link your Cloud and Service providers so that Docker Cloud can provision and manage swarms on your behalf. For this, you need an SSH key to authenticate Docker to your provider.
 
 ## About SSH
 
@@ -35,7 +35,7 @@ key](#create-a-new-ssh-key-for-use-by-docker-cloud).
 
 ## Copy your public key for use with Docker Cloud
 
-You will need your SSH public key to provide to Docker Cloud. When you are ready
+You need your SSH public key to provide to Docker Cloud. When you are ready
 to add it, you can copy the public key as follows.
 
 {% include content/ssh/ssh-copy-key.md %}

@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: mac, beta, edge, alpha, tutorial
+keywords: mac, edge, tutorial
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -46,8 +46,8 @@ $ docker-machine --version
 docker-machine version 0.10.0, build 76ed2a6
 ```
 
-> **Note**: The above is an example. Your output will differ if you are running
-> different (e.g., newer) versions.
+> **Note**: The above is an example. Your output may differ if you are running
+> different versions.
 
 ## Explore the application and run examples
 
@@ -64,7 +64,7 @@ docker-machine version 0.10.0, build 76ed2a6
     docker run -d -p 80:80 --name webserver nginx
     ```
 
-    If the image is not found locally, Docker will pull it from Docker Hub.
+    If the image is not found locally, Docker pulls it from Docker Hub.
 
     In a web browser, go to `http://localhost/` to bring up the home page.
     (Since you specified the default HTTP port, it isn't necessary to append
@@ -86,16 +86,16 @@ docker-machine version 0.10.0, build 76ed2a6
     ```
 4.  Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port
+    The `nginx` webserver continues to run in the container on that port
     until you stop and/or remove the container. If you want to stop the
     webserver, type: `docker stop webserver` and start it again with `docker
-    start webserver`. A stopped container will not show up with `docker ps`; for
+    start webserver`. A stopped container does not show up with `docker ps`; for
     that, you need to run `docker ps -a`.
 
     To stop and remove the running container with a single command, type:
-    `docker rm -f webserver`. This will remove the container, but not the
+    `docker rm -f webserver`. This removes the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
-    want to keep some images around so that you don't have to pull them again
+    want to keep some images around so that you don't need to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
@@ -164,8 +164,8 @@ See [Namespaces](osxfs.md#namespaces) in the topic on
 
 > **Tip**: File sharing is required for volume mounting if the project lives
 > outside of the `/Users` directory. In that case, share the drive where the
-> Dockerfile and volume are located. Otherwise, you will get file not found or
-> cannot start service errors at runtime. (See also
+> Dockerfile and volume are located. Otherwise, you get `file not found` or
+> `cannot start service errors at runtime`. (See also
 > [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 
@@ -189,22 +189,22 @@ lower (to `1`) if you want Docker for Mac to use less memory.
 
 #### Disk image location (storage)
 
-You can specify the **Disk image location** of the Linux volume; i.e., where
+You can specify the **Disk image location** of the Linux volume, which is where
 containers and images are stored.
 
 You can move the disk image location.
 
 If you attempt to move the disk image to a location that
-already has one, you will get a prompt asking if you want to use the existing
+already has one, you get a prompt asking if you want to use the existing
 image or replace it.
 
 ![Advanced settings](images/settings-advanced-beta.png)
 
 ### HTTP proxy settings
 
-Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate
+Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker will use this proxy when pulling
+settings to `http://proxy.example.com`, Docker uses this proxy when pulling
 containers.
 
 ![Proxies settings](/docker-for-mac/images/settings-proxies.png)
@@ -213,7 +213,7 @@ containers.
 ### Docker Daemon
 
 You can configure options on the Docker daemon that determine how your
-containers will run. You can configure some **Basic** options on the daemon with
+containers run. You can configure some **Basic** options on the daemon with
 interactive settings, or switch to **Advanced** to edit the JSON directly.
 
 The settings offered on **Basic** dialog can be
@@ -284,7 +284,7 @@ certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates) in the FAQs.
 #### Edit the daemon configuration file
 
 On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
-the JSON file, and determine entirely how your containers will run. For a full
+the JSON file, and determine entirely how your containers run. For a full
 list of options on the Docker daemon, see
 [daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine
 command line reference.
@@ -297,13 +297,14 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
-support is not included in Docker for Mac 17.12 CE Stable. To find out
-more about Stable and Edge channels and how to switch between them, see
-[General configuration](/docker-for-mac/#general).
+**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge
+channel.** Kubernetes support is not included in Docker for Mac Stable releases.
+To find out more about Stable and Edge channels and how to switch between them,
+see [General configuration](/docker-for-mac/#general).
 
-Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server that runs
-on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
+that runs on your Mac, so that you can test deploying your Docker workloads on
+Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
@@ -367,7 +368,7 @@ a reset to factory defaults (which would cause you to lose settings).
 
 Alternatively, you can uninstall Docker for Mac from the command line with this
 command: `<DockerforMacPath> --uninstall`. If Docker is installed in the default
-location, the following command will provide a clean uninstall.
+location, the following command provides a clean uninstall.
 
 ```shell
 $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
@@ -389,11 +390,11 @@ registries) to your Docker daemon.
 All trusted CAs (root or intermediate) are supported.
 Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
 Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
-SSL certificate is trusted by the user on the host, it will be trusted by Docker
+SSL certificate is trusted by the user on the host, it is trusted by Docker
 for Mac.
 
 To manually add a custom, self-signed certificate, start by adding
-the certificate to the Mac’s keychain, which will be picked up by Docker for
+the certificate to the macOS keychain, which is picked up by Docker for
 Mac. Here is an example.
 
 ```bash
@@ -433,10 +434,10 @@ for Mac `xhyve` virtual machine).
  the changes to take effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac will ignore
-certificates listed under insecure registries, and will not send client
+Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
+certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from
-the registry will produce error messages on the command line, as well as on the
+the registry produce error messages on the command line, as well as on the
 registry.
 
 ### Directory structures for certificates

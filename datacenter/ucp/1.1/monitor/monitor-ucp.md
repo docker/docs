@@ -8,8 +8,7 @@ title: Monitor your cluster
 ---
 
 This article gives you an overview of how to monitor your Docker UCP
-cluster. Here you'll also find the information you need to troubleshoot
-if something goes wrong.
+cluster and how to troubleshoot if something goes wrong.
 
 
 ## Check the cluster status from the UI
@@ -42,7 +41,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
     certificates.
     [Learn how to use client certificates](../access-ucp/cli-based-access.md).
 
-    If your client certificate bundle is for a non-admin user, you won't have
+    If your client certificate bundle is for a non-admin user, you don't have
     permissions to execute all docker commands, or see all information about
     the cluster.
 2.  Use the `docker info` command to check the cluster status.

@@ -18,21 +18,21 @@ You need to generate an API key in the softlayer control panel.
 -   `--softlayer-api-endpoint`: Change SoftLayer API endpoint.
 -   `--softlayer-api-key`: **required** API key for your user account.
 -   `--softlayer-cpu`: Number of CPUs for the machine.
--   `--softlayer-disk-size`: A value of `0` will set the SoftLayer default.
+-   `--softlayer-disk-size`: A value of `0` sets the SoftLayer default.
 -   `--softlayer-domain`: **required** Domain name for the machine.
 -   `--softlayer-hostname`: Hostname for the machine.
 -   `--softlayer-hourly-billing`: Specifies that hourly billing should be used, otherwise monthly billing is used.
 -   `--softlayer-image`: OS Image to use.
 -   `--softlayer-local-disk`: Use local machine disk instead of SoftLayer SAN.
 -   `--softlayer-memory`: Memory for host in MB.
--   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (e.g., 1000, 100, 10).
+-   `--softlayer-network-max-speed`: Speed of network uplinks in Mbps (1000, 100, 10).
 -   `--softlayer-private-net-only`: Disable public networking.
 -   `--softlayer-private-vlan-id`: Your private VLAN ID.
 -   `--softlayer-public-vlan-id`: Your public VLAN ID.
 -   `--softlayer-region`: SoftLayer region.
 -   `--softlayer-user`: **required** Username for your SoftLayer account, API key needs to match this user.
 
-The SoftLayer driver will use `UBUNTU_LATEST` as the image type by default.
+The SoftLayer driver uses `UBUNTU_LATEST` as the image type by default.
 
 #### Environment variables and default values
 

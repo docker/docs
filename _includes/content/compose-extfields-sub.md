@@ -13,7 +13,7 @@ x-custom:
   name: "custom"
 ```
 
-The contents of those fields will be ignored by Compose, but they can be
+The contents of those fields are ignored by Compose, but they can be
 inserted in your resource definitions using [YAML anchors](http://www.yaml.org/spec/1.2/spec.html#id2765878).
 For example, if you want several of your services to use the same logging
 configuration:

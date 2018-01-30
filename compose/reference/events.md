@@ -14,7 +14,7 @@ Options:
 
 Stream container events for every container in the project.
 
-With the `--json` flag, a json object will be printed one per line with the
+With the `--json` flag, a json object is printed one per line with the
 format:
 
 ```

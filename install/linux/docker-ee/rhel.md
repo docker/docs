@@ -5,6 +5,7 @@ redirect_from:
 - /engine/installation/rhel/
 - /installation/rhel/
 - /engine/installation/linux/rhel/
+- /engine/installation/linux/docker-ee/rhel/
 title: Get Docker EE for Red Hat Enterprise Linux
 toc_max: 4
 ---

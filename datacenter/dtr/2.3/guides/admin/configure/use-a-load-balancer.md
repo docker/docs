@@ -53,7 +53,7 @@ with more details on any one of these services:
 * Metadata persistence (rethinkdb)
 * Content trust (notary)
 
-Note that this endpoint is for checking the health of a *single* replica. To get
+This endpoint is for checking the health of a *single* replica. To get
 the health of every replica in a cluster, querying each replica individiually is
 the preferred way to do it in real time.
 

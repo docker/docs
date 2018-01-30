@@ -19,9 +19,10 @@ To create a swarm cluster in IBM Cloud, you must have certain accounts, credenti
 
 If you do not have an IBM Cloud account, [register for a Pay As You Go IBM Cloud account](https://console.bluemix.net/registration/).
 
-If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/pricing/index.html#accounts).
+If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/account/index.html#accounts).
 
-For a full list of infrastructure permissions, see [What IBM Cloud infrastructure permissions do I need?](faqs.md). In general you must be able to provision the following types of resources:
+For a full list of infrastructure permissions, see [What IBM Cloud infrastructure permissions do I need?](faqs.md). In general you need the ability
+to provision the following types of resources:
 
   * File and block storage.
   * Load balancers.

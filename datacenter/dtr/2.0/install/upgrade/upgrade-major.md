@@ -26,7 +26,7 @@ To upgrade to DTR 2.0, you first need to do a fresh installation of DTR 2.0.
 This can be done on the same node where DTR 1.4.3 is already running or on a
 new node.
 
-If you decide to install the new DTR on the same node, you'll need
+If you decide to install the new DTR on the same node, you need
 to install it on a port other than 443, since DTR 1.4.3 is already using it.
 Use these instructions to install DTR 2.0:
 

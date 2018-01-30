@@ -56,7 +56,7 @@ this decision, there are three high-level factors to consider:
   [Supported backing filesystems](#supported-backing-filesystems).
 
 - After you have narrowed down which storage drivers you can choose from, your
-  choice will be determined by the characteristics of your workload and the
+  choice are determined by the characteristics of your workload and the
   level of stability you need. See [Other considerations](#other-considerations)
   for help making the final decision.
 
@@ -74,8 +74,7 @@ disable security features of your operating system, such as the need to disable
 For Docker EE and CS-Engine, the definitive resource for which storage drivers
 are supported is the
 [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix).
-In order to get commercial support from Docker, you must use a supported
-configuration.
+To get commercial support from Docker, you must use a supported configuration.
 
 ### Docker CE
 
@@ -97,7 +96,7 @@ use `aufs` on new installations going forward, you need to explicitly configure
 it, and you may need to install extra packages, such as `linux-image-extra`.
 See [aufs](aufs-driver.md).
 
-On existing installations using `aufs`, it will continue to be used.
+On existing installations using `aufs`, it is still used.
 
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to
@@ -119,7 +118,7 @@ storage driver, be sure to read about
 > users. If you use a recommended configuration and find a reproducible issue,
 > it is likely to be fixed very quickly. If the driver that you want to use is
 > not recommended according to this table, you can run it at your own risk. You
-> can and should still report any issues you run into. However, such issues will
+> can and should still report any issues you run into. However, such issues
 > have a lower priority than issues encountered when using a recommended
 > configuration.
 
@@ -224,9 +223,9 @@ to physical or logical disks on the Docker host.
 
 > **Important**: When you change the storage driver, any existing images and
 > containers become inaccessible. This is because their layers cannot be used
-> by the new storage driver. If you revert your changes, you will be able to
+> by the new storage driver. If you revert your changes, you can
 > access the old images and containers again, but any that you pulled or
-> created using the new driver will then be inaccessible.
+> created using the new driver are then inaccessible.
 {:.important}
 
 ## Related information

@@ -301,9 +301,12 @@ The following notable issues have been remediated:
 
 **DHE 1.0 Upgrade Warning**
 
-Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume
-settings to move to Docker Trusted Registry. Note that automatic upgrading has
-been disabled for DHE users because of these issues.
+If you currently use DHE 1.0, you **must** follow the
+[upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925)
+in our support Knowledge Base. These instructions show you how to modify
+existing authentication data and storage volume settings to move to Docker
+Trusted Registry. Automatic upgrading has been disabled for DHE users because of
+these issues.
 
 ## Version 1.0.1
 (11 May 2015)

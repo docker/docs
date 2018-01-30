@@ -25,7 +25,7 @@ Then, use one of the detailed tutorials below to link your account. You should o
 
 ## Link to your own hosts (Bring Your Own Node - BYON)
 
-If you are not using a cloud services provider and are using your own hosts, you'll need to install the Docker Cloud Agent on those hosts so that Docker Cloud can communicate with them. Follow the directions at [Bring Your Own Node instructions](../infrastructure/byoh.md). Open these instructions in a new window or tab so you can return to this tutorial once you're done linking your hosts.
+If you are not using a cloud services provider but using your own hosts, install the Docker Cloud Agent on those hosts so that Docker Cloud can communicate with them. Follow the directions at [Bring Your Own Node instructions](../infrastructure/byoh.md). Open these instructions in a new window or tab so you can return to this tutorial once you're done linking your hosts.
 
 ## Ready to go?
 Once you've linked to your cloud services provider or to your own hosts, [continue the tutorial and deploy your first node](your_first_node.md).

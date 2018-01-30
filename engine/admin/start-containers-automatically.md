@@ -15,7 +15,7 @@ using process managers to start containers.
 
 Restart policies are different from the `--live-restore` flag of the `dockerd`
 command. Using `--live-restore` allows you to keep your containers running
-during a Docker upgrade, though networking and user input will be interrupted.
+during a Docker upgrade, though networking and user input are interrupted.
 
 ## Use a restart policy
 
@@ -64,7 +64,7 @@ Docker depend on Docker containers, you can use a process manager such as
 [supervisor](http://supervisord.org/) instead.
 
 > **Warning**: Do not try to combine Docker restart policies with host-level
-> process managers, because the two will conflict.
+> process managers, because this creates conflicts.
 
 To use a process manager, configure it to start your container or service using
 the same `docker start` or `docker service` command you would normally use to
@@ -74,7 +74,7 @@ process manager for more details.
 ### Using a process manager inside containers
 
 Process managers can also run within the container to check whether a process is
-running and starts/restart it if not. 
+running and starts/restart it if not.
 
 > **Warning**: These are not Docker-aware and just monitor operating system processes within the container.
 >

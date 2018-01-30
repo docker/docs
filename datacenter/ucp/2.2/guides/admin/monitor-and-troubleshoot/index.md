@@ -21,11 +21,11 @@ managed by UCP are healthy or not.
 ![UCP dashboard](../../images/monitor-ucp-1.png){: .with-border}
 
 Each node has a status message explaining any problems with the node.
-In this example, a Windows worker node is down. 
+In this example, a Windows worker node is down.
 [Learn more about node status](troubleshoot-node-messages.md).
 Click the node to get more info on its status. In the details pane, click
 **Actions** and select **Agent logs** to see the log entries from the
-node. 
+node.
 
 
 ## Check status from the CLI
@@ -57,12 +57,11 @@ If an administrator client certificate is used as a TLS client certificate for
 the `_ping` endpoint, a detailed error message is returned if any component is
 unhealthy.
 
-If you're accessing the `_ping` endpoint through a load balancer, you'll have no
-way of knowing which UCP manager node is not healthy, since any manager node
+If you're accessing the `_ping` endpoint through a load balancer, you have no
+way to know which UCP manager node is not healthy, since any manager node
 might be serving your request. Make sure you're connecting directly to the
-URL of a manager node, and not a load balancer. In addition, please be aware that
-pinging the endpoint with HEAD will result in a 404 error code. It is better to 
-use GET instead.
+URL of a manager node, and not a load balancer. In addition, pinging the
+endpoint with a `HEAD` results in a 404 error code. Use a `GET` request instead.
 
 
 

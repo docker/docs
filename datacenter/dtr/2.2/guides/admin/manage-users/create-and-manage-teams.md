@@ -12,7 +12,7 @@ defines the permissions a set of users have for a set of repositories.
 To create a new team, go to the **DTR web UI**, and navigate to the
 **Organizations** page.
 Then **click the organization** where you want to create the team. In this
-example, we'll create the 'billing' team under the 'whale' organization.
+example, we create the 'billing' team under the 'whale' organization.
 
 ![](../../images/create-and-manage-teams-1.png)
 

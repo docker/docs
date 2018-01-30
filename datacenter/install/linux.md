@@ -13,7 +13,7 @@ Once you get your trial license, you can install Docker EE on your
 Linux servers. Make sure all the hosts you want to manage with Docker
 EE have a minimum of:
 
-* [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
+* [Docker Enterprise Edition](/install/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
 * 4.00 GB of RAM
 * 3.00 GB of available disk space
@@ -31,7 +31,7 @@ Also, make sure the hosts are running one of these operating systems:
 ## Step 1: Install Docker EE Container Engine
 
 Install the Docker Enterprise Edition container engine on all hosts you want
-to manage by following [these instructions](/engine/installation/index.md).
+to manage by following [these instructions](/install/index.md).
 
 ## Step 2: Install Universal Control Plane
 

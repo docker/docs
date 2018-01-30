@@ -42,10 +42,10 @@ the `--mount` flag was used for swarm services. However, starting with Docker
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
   - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
-    [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type will always
-    be `tmpfs`.
+    [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
+    `tmpfs`.
   - The `destination` takes as its value the path where the `tmpfs` mount
-    will be mounted in the container. May be specified as `destination`, `dst`,
+    is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `tmpfs-type` and `tmpfs-mode` options. See
     [tmpfs options](#tmpfs-options).

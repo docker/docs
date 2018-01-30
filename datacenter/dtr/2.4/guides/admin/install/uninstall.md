@@ -5,7 +5,13 @@ keywords: dtr, install, uninstall
 ---
 
 Uninstalling DTR can be done by simply removing all data associated with each
-replica. To do that, you just run the destroy command once per replica:
+replica. To do that, you just run the remove command once per replica and destroy the last one :
+
+```none
+docker run -it --rm \
+  docker/dtr:{{ page.dtr_version }} remove \
+  --ucp-insecure-tls
+```
 
 ```none
 docker run -it --rm \
@@ -14,10 +20,10 @@ docker run -it --rm \
 ```
 
 You will be prompted for the UCP URL, UCP credentials, and which replica to
-destroy.
+remove/destroy.
 
-To see what options are available in the destroy command, check the
-[destroy command reference documentation](../../../reference/cli/destroy.md).
+To see what options are available in the remove/destroy commands, check the
+[remove command reference documentation](../../../reference/cli/remove.md) and [destroy command reference documentation](../../../reference/cli/destroy.md).
 
 ## Where to go next
 

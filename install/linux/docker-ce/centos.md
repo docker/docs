@@ -3,6 +3,7 @@ description: Instructions for installing Docker CE on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/centos/
+- /engine/installation/linux/docker-ce/centos/
 title: Get Docker CE for CentOS
 toc_max: 4
 ---
@@ -16,7 +17,7 @@ To get started with Docker CE on CentOS, make sure you
 ### Docker EE customers
 
 To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for CentOS](/engine/installation/linux/docker-ee/centos/)
+[Get Docker EE for CentOS](/install/linux/docker-ee/centos/)
 **instead of this topic**.
 
 To learn more about Docker EE, see
@@ -120,7 +121,7 @@ from the repository.
     > **Note**: Starting with Docker 17.06, stable releases are also pushed to
     > the **edge** and **test** repositories.
 
-    [Learn about **stable** and **edge** builds](/engine/installation/).
+    [Learn about **stable** and **edge** builds](/install/index.md).
 
 #### Install Docker CE
 
@@ -133,13 +134,13 @@ from the repository.
 
     > **Warning**: If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `yum install` or
-    > `yum update` command will always install the highest possible version,
+    > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
     {:.warning}
 
     If this is the first time you are installing a package from a recently added
-    repository, you will be prompted to accept the GPG key, and
-    the key's fingerprint will be shown. Verify that the fingerprint is
+    repository, you are prompted to accept the GPG key, and
+    the key's fingerprint is shown. Verify that the fingerprint is
     correct, and if so, accept the key. The fingerprint should match
     `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35`.
 
@@ -158,7 +159,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled, and
-    will be specific to your version of CentOS (indicated by the `.el7` suffix
+    are specific to your version of CentOS (indicated by the `.el7` suffix
     on the version, in this example). Choose a specific version to install. The
     second column is the version string. You can use the entire version string,
     but **you need to include at least to the first hyphen**. The third column
@@ -191,7 +192,7 @@ from the repository.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](/engine/installation/linux/linux-postinstall.md) to allow
+commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -204,7 +205,7 @@ to install.
 ### Install from a package
 
 If you cannot use Docker's repository to install Docker, you can download the
-`.rpm` file for your release and install it manually. You will need to download
+`.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
 1.  Go to
@@ -213,7 +214,7 @@ a new file each time you want to upgrade Docker.
 
     > **Note**: To install an **edge**  package, change the word
     > `stable` in the above URL to `edge`.
-    > [Learn about **stable** and **edge** channels](/engine/installation/).
+    > [Learn about **stable** and **edge** channels](/install/index.md).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
@@ -242,7 +243,7 @@ a new file each time you want to upgrade Docker.
     container runs, it prints an informational message and exits.
 
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md) to allow
+Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
@@ -274,6 +275,6 @@ You must delete any edited configuration files manually.
 
 ## Next steps
 
-- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 
 - Continue with the [User Guide](/engine/userguide/index.md).

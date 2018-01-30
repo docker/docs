@@ -59,7 +59,7 @@ ambassador.
 The following example shows what the `svendowideit/ambassador` container
 does automatically (with a tiny amount of `sed`)
 
-On the Docker host (192.168.1.52) that Redis will run on:
+On the Docker host (192.168.1.52) that Redis runs on:
 
     # start actual redis server
     $ docker run -d --name redis crosbymichael/redis

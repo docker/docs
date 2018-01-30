@@ -30,8 +30,8 @@ for the UCP controller by specifying '--external-server-cert'.  Create a storage
 volume named 'ucp-controller-server-certs' with ca.pem, cert.pem, and key.pem
 in the root directory before running the install.
 
-A license file can optionally be injected during install by volume
-mounting the file at '/docker_subscription.lic' in the tool.  E.g.
+You can inject a license file during install by mounting the file as a volume
+at '/docker_subscription.lic' in the tool. For example,
 `-v /path/to/my/docker_subscription.lic:/docker_subscription.lic`
 
 ## Options
@@ -44,7 +44,7 @@ mounting the file at '/docker_subscription.lic' in the tool.  E.g.
 | `--admin-username`                                         | Specify the UCP admin username [$UCP_ADMIN_USER]                                                        |
 | `--admin-password`                                         | Specify the UCP admin password [$UCP_ADMIN_PASSWORD]                                                    |
 | `--fresh-install`                                          | Destroy any existing state and start fresh.                                                             |
-| `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs (e.g. `--san foo1.bar.com --san foo2.bar.com`).          |
+| `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs. For example, `--san foo1.bar.com --san foo2.bar.com`.          |
 | `--host-address`                                           | Specify the visible IP for this node.                                                                   |
 | `--swarm-port "2376"`                                      | Select what port to run the local Swarm manager on (default: 2376)                                      |
 | `--controller-port "443"`                                  | Select what port to run the local Controller on (default: 443)                                          |

@@ -35,7 +35,7 @@ your cluster:
 
 When sizing your cluster, follow these rules of thumb:
 
-* Don't create a cluster with just one replica. Your cluster won't tolerate any
+* Don't create a cluster with just one replica. Your cluster can't tolerate any
 failures, and it's possible that you experience performance degradation.
 * When a replica fails, the number of failures tolerated by your cluster
 decreases. Don't leave that replica offline for long.

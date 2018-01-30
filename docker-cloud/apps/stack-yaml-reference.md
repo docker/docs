@@ -180,7 +180,7 @@ labels:
 ## links
 Link to another service.
 
-Either specify both the service unique name and the link alias (`SERVICE:ALIAS`), or just the service unique name (which will also be used for the alias). If a service you want to link to is part of a different stack, specify the external stack name too.
+Either specify both the service unique name and the link alias (`SERVICE:ALIAS`), or just the service unique name (which is also used for the alias). If a service you want to link to is part of a different stack, specify the external stack name too.
 
 - If the target service belongs to *this* stack, its service unique name is its service name.
 - If the target service does not belong to *any* stacks (it is a standalone service), its service unique name is its service name.
@@ -203,14 +203,14 @@ net: host
 ```
 
 ## pid
-Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system PID address space. Containers launched with this (optional) flag will be able to access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
+Sets the PID mode to the host PID mode. This turns on sharing between container and the host operating system PID address space. Containers launched with this (optional) flag can access and be accessed by other containers in the namespace belonging to the host running the Docker daemon.
 
 ```yml
 pid: "host"
 ```
 
 ## ports
-Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container port (a random host port will be chosen). `udp` ports can be specified with a `/udp` suffix.
+Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container port (an ephemeral host port is chosen). `udp` ports can be specified with a `/udp` suffix.
 
 ```yml
 ports:
@@ -287,10 +287,10 @@ volumes:
 ```
 
 ## volumes_from
-Mount all of the volumes from another service by specifying a service unique name. 
+Mount all of the volumes from another service by specifying a service unique name.
 
-- If the target service belongs to this stack, its service unique name is its service name. 
-- If the target service does not belong to any stack, its service unique name is its service name. 
+- If the target service belongs to this stack, its service unique name is its service name.
+- If the target service does not belong to any stack, its service unique name is its service name.
 - If the target service belongs to another stack, its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
 
 ```yml

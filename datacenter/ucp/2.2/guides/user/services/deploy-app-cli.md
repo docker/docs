@@ -12,9 +12,9 @@ application that allows users to vote on whether they prefer cats or dogs.
 
 Docker UCP secures your Docker swarm with
 [role-based access control](../../access-control/index.md),
-so that only authorized users can deploy applications. To be able to run Docker
+so that only authorized users can deploy applications. To run Docker
 commands on a swarm managed by UCP, you need to configure your Docker CLI
-client to authenticate to UCP using client certificates. 
+client to authenticate to UCP using client certificates.
 [Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).
 
 ## Deploy the voting application
@@ -161,7 +161,7 @@ constraint in the `deploy` key for the `db` service.
 ## Pull images with stack deploy
 
 Let `docker stack deploy` handle any image pulls for you, instead of using
-`docker pull`. This way, your deployment won't try to pull from nodes that
+`docker pull`. This way, your deployment doesn't try to pull from nodes that
 are down. Also, when new nodes are added to the swarm, images are pulled
 automatically.
 

@@ -35,8 +35,8 @@ This setting is typically used to increase the service availability.
 
 A service using the `HIGH_AVAILABILITY` strategy deploys its containers to the
 node that matches its deploy tags with the **fewest containers of that service**
-at the time of each container's deployment. This means that the containers will
-be spread across all nodes that match the deploy tags for the service.
+at the time of each container's deployment. This means that the containers are
+spread across all nodes that match the deploy tags for the service.
 
 ### Every node
 
@@ -44,10 +44,10 @@ A service using the `EVERY_NODE` strategy deploys one container **on each node**
 
 When a service uses the `EVERY_NODE` strategy:
 
-* A new container will be deployed to every new node that matches the service's deploy tags.
+* A new container is deployed to every new node that matches the service's deploy tags.
 * The service cannot be manually scaled.
-* If the service uses volumes, each container on each node will have a different volume.
-* If an `EVERY_NODE` "client" service is linked to a "server" service that is also using the `EVERY_NODE` strategy, containers will be linked one-to-one on each node. The "client" services will *not* be automatically linked to "server" services on other nodes.
+* If the service uses volumes, each container on each node has a different volume.
+* If an `EVERY_NODE` "client" service is linked to a "server" service that is also using the `EVERY_NODE` strategy, containers are linked one-to-one on each node. The "client" services are *not* automatically linked to "server" services on other nodes.
 
 > **Note**: Because of how links are configured when using the **every node**
 > strategy, you cannot currently switch from **every node** to **high
