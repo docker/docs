@@ -189,7 +189,7 @@ Next, start a single-replica Prometheus service using this configuration.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-run" data-group="linux">Docker for Linux</a></li>
-<li class="active"><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker for Mac</a></li>
+<li><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker for Mac</a></li>
 <li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker for Windows or Windows Server</a></li>
 </ul>
 
@@ -205,7 +205,7 @@ $ docker service create --replicas 1 --name my-prometheus \
 ```
 
 </div><!-- linux -->
-<div id="mac-run" class="tab-pane fade in active" markdown="1">
+<div id="mac-run" class="tab-pane fade" markdown="1">
 
 ```bash
 $ docker service create --replicas 1 --name my-prometheus \
