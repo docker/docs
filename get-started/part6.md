@@ -209,7 +209,7 @@ to view the nodes.
 
 2.  On the left menu, go to Network & Security > **Security Groups**.
 
-    See the ecurity groups related to your swarm
+    See the security groups related to your swarm
     for `getstartedlab-Manager-<xxx>`, `getstartedlab-Nodes-<xxx>`,
     and `getstartedlab-SwarmWide-<xxx>`.
 
