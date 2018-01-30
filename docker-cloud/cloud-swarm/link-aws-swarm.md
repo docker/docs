@@ -66,15 +66,17 @@ the new policy to your existing role by following the instructions
 
 9.  On the **Permissions** tab, click **+ Add an inline policy**.
 
-11. On the next page, click **Custom Policy** and click **Select**.
+11. Choose the **JSON** tab.
 
-12. On the **Policy Editor** page that appears, give the policy a name like `dockercloud-swarm-policy`.
-
-13. In the **Policy Document** section, copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
+12. Copy and paste the policy document found in the [Docker for AWS page](/docker-for-aws/iam-permissions/).
 
     ![attach a policy](images/aws-swarm-iam-role-4-policy.png)
 
-14. Click **Apply Policy**.
+13. Click **Review Policy**. The policy validator reports any syntax errors.
+    Give the policy a name like `dockercloud-swarm-policy` and an optional
+    description.
+
+14.  Click **Create Policy** to save your work.
 
 15. Back on the role view, click into the new role to view details, and copy the full **Role ARN** string.
 
