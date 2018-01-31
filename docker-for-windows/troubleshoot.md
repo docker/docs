@@ -349,6 +349,8 @@ Docker for Windows cannot start.
 Verify that virtualization is enabled by checking the Performance tab on the
 Task Manager.
 
+To enbale virtualization on Windows 10, reboot your machine to enter BIOS Advanced settings( Press F10 while booting the machine). Once you enter BIOS settings, check "Virtualization Technology(VTx)", Save and Exit, select Save modified changes. 
+
 ![Task Manager](images/win-virtualization-enabled.png)
 
 Also, see the user-reported issue
