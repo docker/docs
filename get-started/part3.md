@@ -177,7 +177,8 @@ Before we can deploy, we need to initiate [swarm mode](https://docs.docker.com/e
     {% raw %}$ docker inspect --format='{{.Status.ContainerStatus.ContainerID}}' TASK_ID{% endraw %}
     ```
 
-7.  Point a browser to [http://localhost](http://127.0.0.1/){: target="_blank" class="_"}
+7.  Point a browser to [http://localhost](http://localhost){: target="_blank" class="_"}
+    (or [http://localhost](http://127.0.0.1/){: target="_blank" class="_"})
     and refresh three times. The CONTAINER ID changes, demonstrating Docker
     [service discovery and internal connection-based load-balancing](https://docs.docker.com/engine/swarm/networking/#configure-service-discovery).
 
