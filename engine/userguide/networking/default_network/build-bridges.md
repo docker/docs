@@ -22,8 +22,9 @@ use your bridge instead of the default `docker0` bridge.
 1.  Configure the new bridge.
 
     ```bash
+    $ sudo brctl addbr br0
     $ sudo ip link set dev br0 up
-
+    $ sudo brctl addbr bridge0
     $ sudo ip addr add 192.168.5.1/24 dev bridge0
 
     $ sudo ip link set dev bridge0 up
