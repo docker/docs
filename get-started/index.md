@@ -56,128 +56,172 @@ redirect_from:
 
 {% include_relative nav.html selected="1" %}
 
-Welcome! We are excited you want to learn how to use Docker.
+Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
+teaches you how to:
 
-In this six-part tutorial, you will:
+1. Set up your Docker environment (on this page)
+2. [Build an image and run it as one container](part2.md)
+3. [Scale your app to run multiple containers](part3.md)
+4. [Distribute your app across a cluster](part4.md)
+5. [Stack services by adding a backend database](part5.md)
+6. [Deploy your app to production](part6.md)
 
-1. Get set up and oriented, on this page.
-2. [Build and run your first app](part2.md)
-3. [Turn your app into a scaling service](part3.md)
-4. [Span your service across multiple machines](part4.md)
-5. [Add a visitor counter that persists data](part5.md)
-6. [Deploy your swarm to production](part6.md)
+## Docker concepts
 
-The application itself is very simple so that you are not too distracted by
-what the code is doing. After all, the value of Docker is in how it can build,
-ship, and run applications; it's totally agnostic as to what your application
-actually does.
+Docker is a platform for developers and sysadmins to **develop, deploy, and run**
+applications with containers. The use of Linux containers to deploy applications
+is called _containerization_. Containers are not new, but their use for easily
+deploying applications is.
 
-## Prerequisites
+Containerization is increasingly popular because containers are:
 
-While we define concepts along the way, it is good for you to understand
-[what Docker is](https://www.docker.com/what-docker) before we begin.
+- Flexible: Even the most complex applications can be containerized.
+- Lightweight: Containers leverage and share the host kernel.
+- Interchangeable: You can deploy updates and upgrades on-the-fly.
+- Portable: You can build locally, deploy to the cloud, and run anywhere.
+- Scalable: You can increase and automatically distribute container replicas.
+- Stackable: You can stack services vertically and on-the-fly.
 
-We also need to assume you are familiar with a few concepts before we continue:
+![Containers are portable](images/laurel-docker-containers.png){:width="300px"}
 
-- IP Addresses and Ports
-- Virtual Machines
-- Editing configuration files
-- Basic familiarity with the ideas of code dependencies and building
-- Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
+### Images and containers
 
-Finally, though we remind you again when you need these things, you can
-save yourself some distraction at that time by [signing up for a
-Docker ID](https://cloud.docker.com) and using it on your local machine
-by running the following command:
+A container is launched by running an image. An **image** is an executable
+package that includes everything needed to run an appplication--the code, a
+runtime, libraries, environment variables, and configuration files.
 
-```
-docker login
-```
+A **container** is a runtime instance of an image--what the image becomes in
+memory when executed (that is, an image with state, or a user process). You can
+see a list of your running containers with the command, `docker ps`, just as you
+would in Linux.
 
-## A brief explanation of containers
+### Containers and virtual machines
 
-An **image** is a lightweight, stand-alone, executable package that includes
-everything needed to run a piece of software, including the code, a runtime,
-libraries, environment variables, and config files.
+A **container** runs _natively_ on Linux and shares the kernel of the host
+machine with other containers. It runs a discrete process, taking no more memory
+than any other executable, making it lightweight.
 
-A **container** is a runtime instance of an image&#8212;what the image becomes
-in memory when actually executed. It runs completely isolated from the host
-environment by default, only accessing host files and ports if configured to do
-so.
+By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
+system with _virtual_ access to host resources through a hypervisor. In general,
+VMs provide an environment with more resources than most applications need.
 
-Containers run apps natively on the host machine's kernel. They have better
-performance characteristics than virtual machines that only get virtual access
-to host resources through a hypervisor. Containers can get native access, each
-one running in a discrete process, taking no more memory than any other
-executable.
+![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png){:width="300px"} | ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png){:width="300px"}
 
-## Containers vs. virtual machines
+## Prepare your Docker environment
 
-Consider this diagram comparing virtual machines to containers:
+Install a [maintained version](https://docs.docker.com/engine/installation/#updates-and-patches){: target="_blank" class="_"}
+of Docker Community Edition (CE) or Enterprise Edition (EE) on a
+[supported platform](https://docs.docker.com/engine/installation/#supported-platforms){: target="_blank" class="_"}.
 
-### Virtual Machine diagram
+> For full Kubernetes Integration
+>
+> - [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in
+[17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05-edge){: target="_blank" class="_"}
+or higher.
+> - [Kubernetes on Docker for Windows](https://docs.docker.com/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+is available in
+[18.02.0-ce Edge](https://docs.docker.com/docker-for-windows/release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26-edge){: target="_blank" class="_"}
+or higher.
 
-![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
-
-Virtual machines run guest operating systems&#8212;note the OS layer in each
-box. This is resource intensive, and the resulting disk image and application
-state is an entanglement of OS settings, system-installed dependencies, OS
-security patches, and other easy-to-lose, hard-to-replicate ephemera.
-
-### Container diagram
-
-![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
-
-Containers can share a single kernel, and the only information that needs to be
-in a container image is the executable and its package dependencies, which never
-need to be installed on the host system. These processes run like native
-processes, and you can manage them individually by running commands like `docker
-ps`&#8212;just like you would run `ps` on Linux to see active processes.
-Finally, because they contain all their dependencies, there is no configuration
-entanglement; a containerized app "runs anywhere."
-
-## Setup
-
-Before we get started, make sure your system has the latest version of Docker
-installed.
-
-[Install Docker](/install/index.md){: class="button outline-btn"}
+[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
-> **Note**: version 1.13 or higher is required
 
-When you run `docker run hello-world`, look for a response like this:
-> **Note**: You may need to add your user to the `docker` group to call this command without sudo. [Read more](https://docs.docker.com/install/linux/linux-postinstall/)
+### Test Docker version
 
-> **Note**: If there are networking issues in your setup, `docker run hello-world` may fail to execute successfully. In case you are behind a proxy server and you suspect that it blocks the connection, check the [next part](/get-started/part2/) of the tutorial.
+Ensure that you have a supported version of Docker:
+
+```shell
+$ docker --version
+Docker version 17.12.0-ce, build c97c6d6
+```
+
+Run `docker version`(without `--`) or `docker info` to view even more details
+about your docker installation:
+
+```shell
+$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 17.12.0-ce
+Storage Driver: overlay2
+...
+```
+
+> **Note**: To avoid permission errors (and the use of `sudo`), add your user to
+> the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
+
+### Test Docker installation
+
+Test that your installation works by running the simple Docker image,
+[hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
 ```shell
 $ docker run hello-world
 
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+ca4f61b1923c: Pull complete
+Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+Status: Downloaded newer image for hello-world:latest
+
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
-...(snipped)...
+...
 ```
 
-Now would also be a good time to make sure you are using version 1.13 or higher. Run `docker --version` to check it out.
+List the `hello-world` image that was downloaded to your machine:
 
 ```shell
-$ docker --version
-Docker version 17.05.0-ce-rc1, build 2878a85
+$ docker image ls
 ```
 
-If you see messages like the ones above, you are ready to begin your journey.
+List the `hello-world` container (spawned by the image), which exits after
+displaying its message. If it were still running, you would _not_ need the
+`--all` option:
 
-## Conclusion
+```shell
+$ docker container ls --all
+CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+```
 
-The unit of scale being an individual, portable executable has vast
-implications. It means CI/CD can push updates to any part of a distributed
-application, system dependencies are not an issue, and resource density is
-increased. Orchestration of scaling behavior is a matter of spinning up new
-executables, not new VM hosts.
+## Recap and cheat sheet
 
-This tutorial discusses all of these things, but first let's start with the
-basics.
+```shell
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Excecute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls -all
+docker container ls -a -q
+```
+
+## Conclusion of part one
+
+Containerization makes [CI/CD](https://www.docker.com/use-cases/cicd){: target="_blank" class="_"} seamless. For example:
+
+- applications have no system dependencies
+- updates can be pushed to any part of a distributed application
+- resource density can be optimized.
+
+With Docker, scaling your application is a matter of spinning up new
+executables, not running heavy VM hosts.
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
