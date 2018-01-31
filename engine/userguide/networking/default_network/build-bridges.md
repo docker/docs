@@ -19,17 +19,16 @@ use your bridge instead of the default `docker0` bridge.
 > need to use the `brctl` command. Instructions for that command are out of
 > scope for this topic.
 
-1.  Configure the new bridge.
+1.  Create the new bridge, configure it to use the IP address pool
+    `192.168.5.0 - 192.168.5.255`, and activate it.
 
     ```bash
-    $ sudo ip link set dev br0 up
-
+    $ sudo ip link add name bridge0 type bridge
     $ sudo ip addr add 192.168.5.1/24 dev bridge0
-
     $ sudo ip link set dev bridge0 up
     ```
 
-    Confirm the new bridge's settings.
+    Display the new bridge's settings.
 
     ```bash
     $ ip addr show bridge0
@@ -67,7 +66,7 @@ use your bridge instead of the default `docker0` bridge.
     MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
     ```
 
-4.  Remove the now-unused `docker0` bridge.
+4.  Remove the now-unused `docker0` bridge and flush the `POSTROUTING` table.
 
     ```bash
     $ sudo ip link set dev docker0 down
@@ -77,10 +76,10 @@ use your bridge instead of the default `docker0` bridge.
     $ sudo iptables -t nat -F POSTROUTING
     ```
 
-5.  Create a new container, and verify that it is in the new IP address range.
+5.  Create a new container, and verify that it uses an IP the new IP address range.
 
-You can add and remove interfaces from the bridge as you start and stop
-containers, and can run `ip addr` and `ip route` inside a container to confirm
+When you add and remove interfaces from the bridge by starting and stopping
+containers, you can run `ip addr` and `ip route` inside a container to confirm
 that it has an address in the bridge's IP address range and uses the Docker
 host's IP address on the bridge as its default gateway to the rest of the
 Internet.
