@@ -2,11 +2,13 @@
 description: Learn how to optimize your use of OverlayFS driver.
 keywords: container, storage, driver, OverlayFS
 title: Use the OverlayFS storage driver
+redirect_from:
+- /engine/userguide/storagedriver/overlayfs-driver/
 ---
 
 OverlayFS is a modern *union filesystem* that is similar to AUFS, but faster
-and with a simpler implementation. Docker provides a storage driver for
-OverlayFS.
+and with a simpler implementation. Docker provides two storage drivers for
+OverlayFS: the original `overlay`, and the newer and more stable `overlay2`.
 
 This topic refers to the Linux kernel driver as `OverlayFS` and to the Docker
 storage driver as `overlay` or `overlay2`.

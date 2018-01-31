@@ -278,35 +278,33 @@ guides:
       title: IPv6 with Docker
 - sectiontitle: Manage application data
   section:
-    - path: /engine/admin/volumes/
+    - path: /storage/
       title: Storage overview
-    - path: /engine/admin/volumes/volumes/
+    - path: /storage/volumes/
       title: Volumes
-    - path: /engine/admin/volumes/bind-mounts/
+    - path: /storage/bind-mounts/
       title: Bind mounts
-    - path: /engine/admin/volumes/tmpfs/
+    - path: /storage/tmpfs/
       title: tmpfs mounts
-    - path: /engine/admin/troubleshooting_volume_errors/
+    - path: /storage/troubleshooting_volume_errors/
       title: Troubleshoot volume problems
     - sectiontitle: Store data within containers
       section:
-      - path: /engine/userguide/storagedriver/
-        title: Storage driver overview
-      - path: /engine/userguide/storagedriver/imagesandcontainers/
-        title: About images, containers, and storage drivers
-      - path: /engine/userguide/storagedriver/selectadriver/
+      - path: /storage/storagedriver/
+        title: About storage drivers
+      - path: /storage/storagedriver/select-storage-driver/
         title: Select a storage driver
-      - path: /engine/userguide/storagedriver/aufs-driver/
+      - path: /storage/storagedriver/aufs-driver/
         title: Use the AUFS storage driver
-      - path: /engine/userguide/storagedriver/btrfs-driver/
+      - path: /storage/storagedriver/btrfs-driver/
         title: Use the Btrfs storage driver
-      - path: /engine/userguide/storagedriver/device-mapper-driver/
+      - path: /storage/storagedriver/device-mapper-driver/
         title: Use the Device mapper storage driver
-      - path: /engine/userguide/storagedriver/overlayfs-driver/
+      - path: /storage/storagedriver/overlayfs-driver/
         title: Use the OverlayFS storage driver
-      - path: /engine/userguide/storagedriver/zfs-driver/
+      - path: /storage/storagedriver/zfs-driver/
         title: Use the ZFS storage driver
-      - path: /engine/userguide/storagedriver/vfs-driver/
+      - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
 - sectiontitle: Run your app in production
   section:

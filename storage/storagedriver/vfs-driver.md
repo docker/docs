@@ -2,6 +2,8 @@
 description: Learn how to optimize your use of VFS driver.
 keywords: 'container, storage, driver, vfs'
 title: Use the VFS storage driver
+redirect_from:
+- /engine/userguide/storagedriver/vfs-driver/
 ---
 
 The VFS storage driver is not a union filesystem; instead, each layer is a
@@ -130,9 +132,6 @@ same amount of room on disk. This is one of the disadvantages of using the
 
 ## Related information
 
+* [Volumes](/storage/volumes.md)
 * [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
-* [AUFS storage driver in practice](aufs-driver.md)
-* [OverlayFS storage driver in practice](overlayfs-driver.md)
-* [Btrfs storage driver in practice](btrfs-driver.md)
-* [Device Mapper storage driver in practice](device-mapper-driver.md)
+

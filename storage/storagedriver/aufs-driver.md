@@ -2,6 +2,8 @@
 description: Learn how to optimize your use of AUFS driver.
 keywords: 'container, storage, driver, AUFS '
 title: Use the AUFS storage driver
+redirect_from:
+- /engine/userguide/storagedriver/aufs-driver/
 ---
 
 AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
@@ -226,7 +228,7 @@ The following generic performance best practices also apply to AUFS.
 
 ## Related information
 
+* [Volumes](/storage/volumes.md)
 * [Understand images, containers, and storage drivers](imagesandcontainers.md)
 * [Select a storage driver](selectadriver.md)
-* [Btrfs storage driver in practice](btrfs-driver.md)
-* [Device Mapper storage driver in practice](device-mapper-driver.md)
+
