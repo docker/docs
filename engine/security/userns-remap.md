@@ -71,7 +71,7 @@ avoid these situations.
     want to use an existing user, Docker can create one for you and use that. If
     you want to use an existing username or user ID, it must already exist.
     Typically, this means that the relevant entries need to be in
-    `/etc/password` and `/etc/group`, but if you are using a different
+    `/etc/passwd` and `/etc/group`, but if you are using a different
     authentication back-end, this requirement may translate differently.
 
     To verify this, use the `id` command:
