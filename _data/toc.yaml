@@ -221,19 +221,19 @@ guides:
           title: App development overview
         - path: /develop/dev-best-practices/
           title: App development best practices
-        - sectiontitle: Work with images
+        - sectiontitle: Develop images
           section:
-          - path: /engine/userguide/eng-image/dockerfile_best-practices/
+          - path: /develop/develop-images/dockerfile_best-practices/
             title: Best practices for writing Dockerfiles
-          - path: /engine/userguide/eng-image/baseimages/
+          - path: /develop/develop-images/baseimages/
             title: Create a base image
-          - path: /engine/userguide/eng-image/multistage-build/
+          - path: /develop/develop-images/multistage-build/
             title: Use multi-stage builds
           - path: /engine/reference/builder/
             title: Dockerfile reference
             nosync: true
-          - path: /engine/userguide/eng-image/image_management/
-            title: Image management
+          - path: /develop/develop-images/image_management/
+            title: Manage images
         - path: /samples/
           title: Docker app examples
           nosync: true
@@ -308,61 +308,93 @@ guides:
         title: Use the VFS storage driver
 - sectiontitle: Run your app in production
   section:
-    - sectiontitle: The basics
-      section:
-      - path: /engine/userguide/
-        title: Overview
-      - path: /engine/admin/
-        title: Configuring and running Docker
-      - path: /engine/admin/prometheus/
-        title: Collect Docker metrics with Prometheus
-      - path: /engine/admin/start-containers-automatically/
-        title: Start containers automatically
-      - path: /engine/admin/resource_constraints/
-        title: Limit a container's resources
-      - path: /engine/userguide/labels-custom-metadata/
-        title: Apply custom metadata
-      - path: /engine/admin/pruning/
-        title: Prune unused Docker objects
-      - path: /engine/admin/live-restore/
-        title: Keep containers alive during daemon downtime
-      - path: /engine/admin/systemd/
-        title: Control and configure Docker with systemd
-      - path: /engine/admin/formatting/
-        title: Format command and log output
-      - path: /registry/recipes/mirror/
-        title: Run a local registry mirror
-        nosync: true
+  - sectiontitle: Configure all objects
+    section:
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to objects
+    - path: /config/pruning/
+      title: Prune unused objects
+    - path: /config/formatting/
+      title: Format command and log output
+  - sectiontitle: Configure the daemon
+    section:
+    - path: /config/daemon/
+      title: Configure and run Docker
+    - path: /config/daemon/systemd/
+      title: Control Docker with systemd
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to daemons
+      nosync: true
+    - path: /config/containers/logging/
+      title: Configuring default drivers
+      nosync: true
+    - path: /config/thirdparty/prometheus/
+      title: Collect Docker metrics with Prometheus
+  - sectiontitle: Configure containers
+    section:
+    - path: /config/containers/start-containers-automatically/
+      title: Start containers automatically
+    - path: /config/containers/live-restore/
+      title: Keep containers alive during daemon downtime
+    - path: /config/containers/multi-service_container/
+      title: Run multiple services in a container
+    - path: /config/containers/runmetrics/
+      title: Container runtime metrics
+    - path: /config/containers/resource_constraints/
+      title: Limit a container's resources
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to containers
+      nosync: true
+    - path: /config/pruning/
+      title: Prune unused containers
+      nosync: true
     - sectiontitle: Logging
       section:
-      - path: /engine/admin/logging/view_container_logs/
+      - path: /config/containers/logging/
         title: View a container's logs
-      - path: /engine/admin/logging/overview/
-        title: Configuring logging drivers
-      - path: /engine/admin/logging/plugins/
+      - path: /config/containers/logging/configure/
+        title: Configure logging drivers
+      - path: /config/containers/logging/plugins/
         title: Use a logging driver plugin
-      - path: /engine/admin/logging/log_tags/
-        title: Log tags for logging driver
-      - path: /engine/admin/logging/logentries/
-        title: Logentries logging driver
-      - path: /engine/admin/logging/json-file/
-        title: JSON File logging driver
-      - path: /engine/admin/logging/gelf/
-        title: Graylog Extended Format (GELF) logging driver
-      - path: /engine/admin/logging/syslog/
-        title: Syslog logging driver
-      - path: /engine/admin/logging/awslogs/
-        title: Amazon CloudWatch logs logging driver
-      - path: /engine/admin/logging/etwlogs/
-        title: ETW logging driver
-      - path: /engine/admin/logging/fluentd/
-        title: Fluentd logging driver
-      - path: /engine/admin/logging/gcplogs/
-        title: Google Cloud logging driver
-      - path: /engine/admin/logging/journald/
-        title: Journald logging driver
-      - path: /engine/admin/logging/splunk/
-        title: Splunk logging driver
+      - path: /config/containers/logging/log_tags/
+        title: Customize log driver output
+      - sectiontitle: Logging driver details
+        section:
+        - path: /config/containers/logging/logentries/
+          title: Logentries logging driver
+        - path: /config/containers/logging/json-file/
+          title: JSON File logging driver
+        - path: /config/containers/logging/gelf/
+          title: Graylog Extended Format (GELF) logging driver
+        - path: /config/containers/logging/syslog/
+          title: Syslog logging driver
+        - path: /config/containers/logging/awslogs/
+          title: Amazon CloudWatch logs logging driver
+        - path: /config/containers/logging/etwlogs/
+          title: ETW logging driver
+        - path: /config/containers/logging/fluentd/
+          title: Fluentd logging driver
+        - path: /config/containers/logging/gcplogs/
+          title: Google Cloud logging driver
+        - path: /config/containers/logging/journald/
+          title: Journald logging driver
+        - path: /config/containers/logging/splunk/
+          title: Splunk logging driver
+    - path: /registry/recipes/mirror/
+      title: Run a local registry mirror
+      nosync: true
+    - sectiontitle: Work with external tools
+      section:
+      - path: /config/thirdparty/dsc/
+        title: PowerShell DSC usage
+      - path: /config/thirdparty/ansible/
+        title: Ansible
+      - path: /config/thirdparty/chef/
+        title: Chef
+      - path: /config/thirdparty/puppet/
+        title: Puppet
+      - path: /config/thirdparty/ambassador_pattern_linking/
+        title: (Obsolete) Link via an ambassador container
     - sectiontitle: Security
       section:
       - path: /engine/security/security/
@@ -453,22 +485,6 @@ guides:
         title: Swarm administration guide
       - path: /engine/swarm/raft/
         title: Raft consensus in swarm mode
-    - sectiontitle: Work with external tools
-      section:
-      - path: /engine/admin/dsc/
-        title: PowerShell DSC usage
-      - path: /engine/admin/ansible/
-        title: Using Ansible
-      - path: /engine/admin/chef/
-        title: Using Chef
-      - path: /engine/admin/puppet/
-        title: Using Puppet
-      - path: /engine/admin/multi-service_container/
-        title: Run multiple services in a container
-      - path: /engine/admin/runmetrics/
-        title: Runtime metrics
-      - path: /engine/admin/ambassador_pattern_linking/
-        title: Link via an ambassador container
     - sectiontitle: Extend Docker
       section:
       - path: /engine/extend/
