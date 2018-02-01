@@ -1,7 +1,10 @@
 ---
 description: Learn how to select the proper storage driver for your container.
-keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
-title: Select a storage driver
+keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2
+title: Docker storage drivers
+redirect_from:
+- /engine/userguide/storagedriver/
+- /engine/userguide/storagedriver/selectadriver/
 ---
 
 Ideally, very little data is written to a container's writable layer, and you
@@ -236,3 +239,6 @@ to physical or logical disks on the Docker host.
 * [`overlay` and `overlay2` storage drivers in practice](overlayfs-driver.md)
 * [`btrfs` storage driver in practice](btrfs-driver.md)
 * [`zfs` storage driver in practice](zfs-driver.md)
+
+
+

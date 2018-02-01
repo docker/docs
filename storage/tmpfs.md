@@ -2,6 +2,8 @@
 description: Using tmpfs mounts
 title: Use tmpfs mounts
 keywords: storage, persistence, data persistence, tmpfs
+redirect_from:
+- /engine/admin/volumes/tmpfs/
 ---
 
 [Volumes](volumes.md) and [bind mounts](bind-mounts.md) are mounted into the
@@ -143,4 +145,4 @@ docker run -d \
 
 - Learn about [volumes](volumes.md)
 - Learn about [bind mounts](bind-mounts.md)
-- Learn about [storage drivers](/engine/userguide/storagedriver.md)
+- Learn about [storage drivers](/storage/storagedriver/)
