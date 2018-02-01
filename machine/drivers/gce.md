@@ -26,7 +26,7 @@ Or, manually download the credentials.json file to the local, and set the `GOOGL
 
 To create a machine instance, specify `--driver google`, the project ID and the machine name.
 
-    $ gcloud auth login
+    $ gcloud auth application-default login
     $ docker-machine create --driver google --google-project PROJECT_ID vm01
     $ docker-machine create --driver google \
       --google-project PROJECT_ID \
