@@ -2,6 +2,8 @@
 description: Using bind mounts
 title: Use bind mounts
 keywords: storage, persistence, data persistence, mounts, bind mounts
+redirect_from:
+- /engine/admin/volumes/bind-mounts/
 ---
 
 Bind mounts have been around since the early days of Docker. Bind mounts have
@@ -438,4 +440,4 @@ $ docker run -d \
 
 - Learn about [volumes](volumes.md).
 - Learn about [tmpfs mounts](tmpfs.md).
-- Learn about [storage drivers](/engine/userguide/storagedriver.md).
+- Learn about [storage drivers](/storage/storagedriver/).

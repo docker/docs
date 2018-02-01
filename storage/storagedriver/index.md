@@ -1,16 +1,24 @@
 ---
 description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
-title: About images, containers, and storage drivers
+title: About storage drivers
 redirect_from:
 - /en/latest/terms/layer/
 - /engine/installation/userguide/storagedriver/
+- /engine/userguide/storagedriver/imagesandcontainers/
 ---
 
 To use storage drivers effectively, it's important to know how Docker builds and
 stores images, how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
-your applications and  avoid performance problems along the way.
+your applications and avoid performance problems along the way.
+
+> **Note**: Storage drivers allow you to persist data in the writable layer of
+> your container. This is the least efficient way to persist data.
+> [Volumes](/storage/volumes/) or [bind mounts](/storage/bind-mounts/) provide
+> much better read and write performance, and volumes provide more security
+> and isolation than either storage drivers or bind mounts. Neither volumes nor
+> bind mounts use most of the concepts described in this topic.
 
 ## Images and layers
 
@@ -417,7 +425,5 @@ For detailed information about data volumes, see
 
 ## Related information
 
+* [Volumes](/storage/volumes.md)
 * [Select a storage driver](selectadriver.md)
-* [AUFS storage driver in practice](aufs-driver.md)
-* [Btrfs storage driver in practice](btrfs-driver.md)
-* [Device Mapper storage driver in practice](device-mapper-driver.md)

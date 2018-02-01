@@ -2,6 +2,8 @@
 description: Learn how to optimize your use of device mapper driver.
 keywords: container, storage, driver, device mapper
 title: Use the Device Mapper storage driver
+redirect_from:
+- /engine/userguide/storagedriver/device-mapper-driver/
 ---
 
 Device Mapper is a kernel-based framework that underpins many advanced
@@ -813,8 +815,6 @@ storage driver.
 
 ## Related Information
 
+* [Volumes](/storage/volumes.md)
 * [Understand images, containers, and storage drivers](imagesandcontainers.md)
 * [Select a storage driver](selectadriver.md)
-* [AUFS storage driver in practice](aufs-driver.md)
-* [Btrfs storage driver in practice](btrfs-driver.md)
-* [daemon reference](../../reference/commandline/dockerd.md#storage-driver-options)

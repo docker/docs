@@ -2,6 +2,8 @@
 description: Learn how to optimize your use of Btrfs driver.
 keywords: 'container, storage, driver, Btrfs '
 title: Use the BTRFS storage driver
+redirect_from:
+- /engine/userguide/storagedriver/btrfs-driver/
 ---
 
 Btrfs is a next generation copy-on-write filesystem that supports many advanced
@@ -311,7 +313,6 @@ storage driver.
 
 ## Related Information
 
+* [Volumes](/storage/volumes.md)
 * [Understand images, containers, and storage drivers](imagesandcontainers.md)
 * [Select a storage driver](selectadriver.md)
-* [AUFS storage driver in practice](aufs-driver.md)
-* [Device Mapper storage driver in practice](device-mapper-driver.md)
