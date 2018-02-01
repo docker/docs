@@ -96,10 +96,6 @@ defaults:
     values:
       assignee: "jimgalasyn"
   - scope:
-      path: "docker-cloud"
-    values:
-      assignee: "londoncalling"
-  - scope:
       path: "docker-for-mac"
     values:
       assignee: "gbarr01"
@@ -118,7 +114,6 @@ defaults:
   - scope:
       path: "engine"
     values:
-      assignee: "mistyhacks"
       win_latest_build: "docker-17.06.2-ee-6"
   - scope:
       path: "kitematic"
@@ -136,10 +131,6 @@ defaults:
       path: "registry"
     values:
       assignee: "joaofnfernandes"
-  - scope:
-      path: "swarm"
-    values:
-      assignee: "mistyhacks"
   - scope:
       path: "toolbox"
     values:
