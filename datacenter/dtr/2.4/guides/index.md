@@ -63,7 +63,7 @@ DTR ships with [Notary](/notary/getting_started.md)
 built in so that you can use
 [Docker Content Trust](/engine/security/trust/content_trust.md) to sign
 and verify images. For more information about managing Notary data in DTR see
-the [DTR-specific notary documentation](user/manage-images/manage-trusted-repositories.md).
+the [DTR-specific notary documentation](user/manage-images/sign-images/manage-trusted-repositories.md).
 
 ## Where to go next
 
