@@ -31,14 +31,15 @@ To view your current connection settings, log in to Docker Hub and choose
 
 ## Limitations
 
-Currently Docker Hub does not support Git LFS (Large File Storage). If you have
-binaries in your build context that are managed by Git LFS, only the pointer
-file is present in the clone made during the automated build, which is not
-what you want.
+- Currently Docker Hub does not support Git LFS (Large File Storage). If you have
+  binaries in your build context that are managed by Git LFS, only the pointer
+  file is present in the clone made during the automated build, which is not
+  what you want.
 
-Subscribe to the [GitHub
-issue](https://github.com/docker/hub-feedback/issues/500) tracking this
-limitation.
+  Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500)
+  tracking this limitation.
+
+- Building Windows containers is not supported.
 
 ## Link to a hosted repository service
 
