@@ -94,6 +94,11 @@ command and it will resume from where it left off.
 A patch upgrade changes only the DTR containers and it's always safer than a minor
 upgrade. The command is the same as for a minor upgrade.
 
+## Download the vulnerability database
+
+After upgrading DTR, you need to re-download the vulnerability database.
+[Learn how to update your vulnerability database](configure/set-up-vulnerability-scans.md#update-the-cve-scanning-database).
+
 {% elsif include.version=="dtr-2.4" %}
 
 Learn about [upgrading Docker Trusted Registry](/datacenter/dtr/2.4/guides/admin/upgrade.md).
