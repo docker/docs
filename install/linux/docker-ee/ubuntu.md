@@ -172,7 +172,7 @@ from the repository.
 
     pub   4096R/0EBFCD88 2017-02-22
           Key fingerprint = DD91 1E99 5A64 A202 E859  07D6 BC14 F10B 6D08 5F96
-    uid                  Docker Release (CE deb) <docker@docker.com>
+    uid                  Docker Release (EE deb) <docker@docker.com>
     sub   4096R/6D085F96 2017-02-22
     ```
 
