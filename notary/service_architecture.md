@@ -69,7 +69,7 @@ for multiple trusted collections in an associated database, and a Notary signer,
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
 
-![Notary Service Architecture Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/service-architecture.svg)
+![Notary Service Architecture Diagram](/notary/images/service-architecture.svg)
 
 Root, targets, and (sometimes) snapshot metadata are generated and signed by
 clients, who upload the metadata to the Notary server. The server is
