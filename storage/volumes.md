@@ -98,7 +98,7 @@ container.
 **Create a volume**:
 
 ```bash
-$ docker volume create my-vol
+$ docker volume create --name my-vol
 ```
 
 **List volumes**:
@@ -390,7 +390,7 @@ configurable options, each of which is specified using an `-o` flag.
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
-  sshvolume
+  --name sshvolume
 ```
 
 ### Start a container which creates a volume using a volume driver
