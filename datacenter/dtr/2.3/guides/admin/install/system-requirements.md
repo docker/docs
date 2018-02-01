@@ -34,7 +34,7 @@ Docker Enterprise Edition is a software subscription that includes three product
 * Docker Trusted Registry,
 * Docker Universal Control Plane.
 
-[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
+[Learn more about the maintenance lifecycle for these products](https://success.docker.com/article/Compatibility_Matrix).
 
 ## Where to go next
 
