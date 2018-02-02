@@ -101,7 +101,7 @@ You need two grants to control access to nodes and container resources:
 Create two grants for team access to the two collections:
 
 1.  Navigate to the **Grants** page and click **Create Grant**.
-2.  In the left pane, click **Collections**, and in the **Swarm** collection,
+2.  In the left pane, click **Resource Sets**, and in the **Swarm** collection,
     click **View Children**.
 3.  In the **Prod** collection, click **View Children**.
 4.  In the **Webserver** collection, click **Select Collection**.
