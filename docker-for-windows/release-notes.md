@@ -477,6 +477,20 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.02.0-ce-rc2-win51 2018-02-02 (Edge)
+
+* Upgrades
+  - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
+  - [Docker compose 1.19.0-rc2](https://github.com/docker/compose/releases/tag/1.19.0-rc2)
+  - [Kubernetes 1.9.2](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v192). If you have Kubernetes enabled, the upgrade will be performed automatically when starting Docker for Windows.
+
+* New
+  - VM disk size can be changed in settings. Fixes [docker/for-win#105](https://github.com/docker/for-win/issues/105)
+  - New menu item to restart Docker.
+
+* Bug fixes and minor changes
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Windows installer (still possible to migrate Toolbox images manually).
+
 ### Docker Community Edition 18.02.0-ce-rc1-win50 2018-01-26 (Edge)
 
 * Upgrades
