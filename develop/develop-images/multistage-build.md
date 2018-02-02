@@ -158,8 +158,7 @@ following command assumes you are using the previous `Dockerfile` but stops at
 the stage named `builder`:
 
 ```bash
-$ docker build -t docker build --target builder \
-  -t alexellis2/href-counter:latest .
+$ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 
 A few scenarios where this might be very powerful are:
