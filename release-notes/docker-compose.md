@@ -5,7 +5,7 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
-## 1.19.0 (2018-01-31)
+## 1.19.0 (2018-02-07)
 
 ### Breaking changes
 
@@ -69,11 +69,17 @@ toc_max: 2
 - Fixed a bug where setting TLS options with environment and CLI flags
   simultaneously would result in part of the configuration being ignored
 
+- Fixed a bug where the DOCKER_TLS_VERIFY environment variable was being
+  ignored by Compose
+
 - Fixed a bug where the `-d` and `--timeout` flags in `up` were erroneously
   marked as incompatible
 
 - Fixed a bug where the recreation of a service would break if the image
   associated with the previous container had been removed
+
+- Fixed a bug where updating a mount's target would break Compose when
+  trying to recreate the associated service
 
 - Fixed a bug where `tmpfs` volumes declared using the extended syntax in
   Compose files using version 3.2 would be erroneously created as anonymous
