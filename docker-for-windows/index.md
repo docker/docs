@@ -228,14 +228,14 @@ and make sure `docker` commands are working properly.
 
     The `nginx` webserver continues to run in the container on that port
     until you stop and/or remove the container. If you want to stop the
-    webserver, type: `docker stop webserver` and start it again with `docker
+    webserver, type: `docker container stop webserver` and start it again with `docker
     start webserver`.
 
     To stop and remove the running container with a single command, type:
-    `docker rm -f webserver`. This removes the container, but not the
-    `nginx` image. You can list local images with `docker images`. You might
+    `docker container rm -f webserver`. This removes the container, but not the
+    `nginx` image. You can list local images with `docker image ls`. You might
     want to keep some images around so that you don't need to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
+    from Docker Hub. To remove an image you no longer need, use `docker image rm` followed by an image ID or image name. For example, `docker image rm nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples) are great places to start.
 

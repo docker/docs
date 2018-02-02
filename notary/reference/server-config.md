@@ -372,7 +372,7 @@ $ kill -s SIGUSR1 PID
 or
 
 ```bash
-$ docker exec -i CONTAINER_ID kill -s SIGUSR1 PID
+$ docker container exec -i CONTAINER_ID kill -s SIGUSR1 PID
 ```
 
 To decrease logging level
@@ -384,7 +384,7 @@ $ kill -s SIGUSR2 PID
 or
 
 ```bash
-$ docker exec -i CONTAINER_ID kill -s SIGUSR2 PID
+$ docker container exec -i CONTAINER_ID kill -s SIGUSR2 PID
 ```
 
 PID is the process id of `notary-server` and it may not the PID 1 process if you are running
@@ -393,7 +393,7 @@ the container with some kind of wrapper startup script or something.
 You can get the PID of `notary-server` through
 
 ```bash
-$ docker exec CONTAINER_ID ps aux
+$ docker container exec CONTAINER_ID ps aux
 ```
 
 or

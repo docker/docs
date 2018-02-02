@@ -76,7 +76,7 @@ Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
 ```bash
-$ docker stop test_sshd
-$ docker rm test_sshd
-$ docker rmi eg_sshd
+$ docker container stop test_sshd
+$ docker container rm test_sshd
+$ docker image rm eg_sshd
 ```

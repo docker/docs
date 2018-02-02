@@ -243,7 +243,7 @@ See
 for some of these limitations.
 
 To disable user namespaces for a specific container, add the `--userns=host`
-flag to the `docker create`, `docker run`, or `docker exec` command.
+flag to the `docker container create`, `docker container run`, or `docker container exec` command.
 
 ## User namespace known limitations
 

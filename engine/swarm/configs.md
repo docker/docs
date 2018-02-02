@@ -158,7 +158,7 @@ real-world example, continue to
     ```
 
 4.  Get the ID of the `redis` service task container using `docker ps`, so that
-    you can use `docker exec` to connect to the container and read the contents
+    you can use `docker container exec` to connect to the container and read the contents
     of the config data file, which defaults to being readable by all and has the
     same name as the name of the config. The first command below illustrates
     how to find the container ID, and the second and third commands use shell
@@ -169,11 +169,11 @@ real-world example, continue to
 
     5cb1c2348a59
 
-    $ docker exec $(docker ps --filter name=redis -q) ls -l /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) ls -l /my-config
 
     -r--r--r--    1 root     root            12 Jun  5 20:49 my-config                                                     
 
-    $ docker exec $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) cat /my-config
 
     This is a config
     ```
@@ -207,7 +207,7 @@ real-world example, continue to
     `service update` command redeploys the service.
 
     ```none
-    $ docker exec -it $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec -it $(docker ps --filter name=redis -q) cat /my-config
 
     cat: can't open '/my-config': No such file or directory
     ```

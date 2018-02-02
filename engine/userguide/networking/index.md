@@ -77,7 +77,7 @@ container lacks a network interface. Attaching to such a container and looking
 at its stack you see this:
 
 ```bash
-$ docker attach nonenetcontainer
+$ docker container attach nonenetcontainer
 
 root@0cb243cd1293:/# cat /etc/hosts
 127.0.0.1	localhost
@@ -223,7 +223,7 @@ inside the container. You are connected as `root`, so your command prompt is
 a `#` character.
 
 ```none
-$ docker attach container1
+$ docker container attach container1
 
 root@3386a527aa08:/# ip -4 addr
 

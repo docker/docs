@@ -437,7 +437,7 @@ Reticulating spline 5...
 
 ## List all images
 
-List the images on your Engine, similar to `docker images`:
+List the images on your Engine, similar to `docker image ls`:
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>

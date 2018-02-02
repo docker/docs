@@ -90,7 +90,7 @@ file and execute configurations against multiple nodes as such:
 
 ### Images
 Image configuration is equivalent to running: `docker pull [image]` or
-`docker rmi -f [IMAGE]`.
+`docker image rm -f [IMAGE]`.
 
 Using the same steps defined above, execute `DockerClient` with the `Image`
 parameter and apply the configuration:
@@ -124,7 +124,7 @@ docker run -d --name="[containername]" -p '[port]' -e '[env]' --link '[link]'\
 or
 
 ```
-docker rm -f [containername]
+docker container rm -f [containername]
 ```
 
 To create or remove containers, you can use the `Container` parameter with one
