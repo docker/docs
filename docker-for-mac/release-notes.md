@@ -514,6 +514,19 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
+  - [Docker compose 1.19.0-rc2](https://github.com/docker/compose/releases/tag/1.19.0-rc2)
+  - [Kubernetes 1.9.2](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v192). If you have Kubernetes enabled, the upgrade will be performed automatically when starting Docker for Mac.
+
+* Bug fixes and minor changes
+  - Fix Kubernetes-compose integration update that was causing startup failure. Fixes [docker/for-mac#2536](https://github.com/docker/for-mac/issues/2536)
+  - Fix some cases where selecting "Reset" after an error did not reset properly.
+  - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
+
 ### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26 (Edge)
 
  
