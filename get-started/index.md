@@ -87,7 +87,7 @@ Containerization is increasingly popular because containers are:
 ### Images and containers
 
 A container is launched by running an image. An **image** is an executable
-package that includes everything needed to run an appplication--the code, a
+package that includes everything needed to run an application--the code, a
 runtime, libraries, environment variables, and configuration files.
 
 A **container** is a runtime instance of an image--what the image becomes in
