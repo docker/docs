@@ -32,8 +32,7 @@ on GitHub.
 
     ```console
     $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && \
-    chmod +x /tmp/docker-machine && \
-    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+    sudo install /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
     If you are running with **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
