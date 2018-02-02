@@ -42,7 +42,7 @@ Docker EE is available in three tiers:
 
 ## Docker Enterprise Edition release cycles
 
-Docker EE is released quarterly. Releases use a time-based versioning
+Major new versions of Docker Enterprise Edition are released twice per year. Releases use a time-based versioning
 scheme, so for example, Docker EE version 17.03 was released
 in March 2017. For schedule details, see
 [Time-based release schedule](/install/index.md#time-based-release-schedule).
