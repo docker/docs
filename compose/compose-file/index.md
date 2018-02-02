@@ -1663,7 +1663,8 @@ expressed in the short form.
 - `volume`: configure additional volume options
   - `nocopy`: flag to disable copying of data from a container when a volume is
     created
-
+- `tmpfs`: configure additional tmpfs options
+  - `size`: the size for the tmpfs mount in bytes
 
 ```none
 version: "3.2"
