@@ -76,7 +76,7 @@ The example below shows how to create a backup of a UCP manager node and
 verify its contents:
 
 ```none
-# Create a backup, encrypt it, and store it on /tmp/backup.tar
+# Create a backup and store it in /tmp/backup.tar
 $ docker container run --log-driver none --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
