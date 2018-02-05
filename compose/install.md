@@ -216,7 +216,7 @@ Alternatively, if you're not worried about keeping them, you can remove them.
 Compose just creates new ones.
 
 ```bash
-docker rm -f -v myapp_web_1 myapp_db_1 ...
+docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation

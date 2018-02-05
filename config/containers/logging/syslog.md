@@ -57,7 +57,7 @@ Restart Docker for the changes to take effect.
 > **Note**: The syslog-address supports both UDP and TCP.
 
 You can set the logging driver for a specific container by using the
-`--log-driver` flag to `docker create` or `docker run`:
+`--log-driver` flag to `docker container create` or `docker run`:
 
 ```bash
 docker run \

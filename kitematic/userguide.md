@@ -93,7 +93,7 @@ so this resets this log view.
 
 ### Starting a terminal in a container
 
-The "Terminal" icon at the top of the container summary runs `docker exec -i -t <your container> sh`.
+The "Terminal" icon at the top of the container summary runs `docker container exec -i -t <your container> sh`.
 This allows you to make quick changes, or to debug a problem.
 
 > **Note**: Your exec'ed `sh` process does not have the same environment settings

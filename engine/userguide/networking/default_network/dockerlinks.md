@@ -145,7 +145,7 @@ You can also use `docker inspect` to return the container's name.
 > **Note**:
 > Container names must be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
-> the old container (with `docker rm`) before you can create a new
+> the old container (with `docker container rm`) before you can create a new
 > container with the same name. As an alternative you can use the `--rm`
 > flag with the `docker run` command. This deletes the container
 > immediately after it is stopped.
@@ -166,7 +166,7 @@ image, which contains a PostgreSQL database.
 Now, you need to delete the `web` container you created previously so you can replace it
 with a linked one:
 
-    $ docker rm -f web
+    $ docker container rm -f web
 
 Now, create a new `web` container and link it with your `db` container.
 

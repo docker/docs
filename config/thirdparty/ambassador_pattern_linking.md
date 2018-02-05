@@ -124,7 +124,7 @@ containers `env`:
 This environment is used by the ambassador `socat` script to expose Redis
 to the world (via the `-p 6379:6379` port mapping):
 
-    $ docker rm redis_ambassador
+    $ docker container rm redis_ambassador
     $ CMD="apk update && apk add socat && sh"
     $ docker run -t -i --link redis:redis --name redis_ambassador -p 6379:6379 alpine:3.2 sh -c "$CMD"
     [...]

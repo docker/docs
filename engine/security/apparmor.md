@@ -13,7 +13,7 @@ Docker automatically generates and loads a default profile for containers named
 `docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
 this profile in `tmpfs` and then loads it into the kernel. On Docker versions
 earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead. 
+instead.
 
 > **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 
@@ -176,7 +176,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 4. Exec into the running container.
 
    ```bash
-   $ docker exec -it apparmor-nginx bash
+   $ docker container exec -it apparmor-nginx bash
    ```
 
 5. Try some operations to test the profile.
@@ -222,7 +222,7 @@ In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
 > **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
-> users might run into some issues when trying to `docker exec`.
+> users might run into some issues when trying to `docker container exec`.
 
 Look at another log line:
 

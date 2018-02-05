@@ -268,7 +268,7 @@ replica.
 
 3. Shut down the primary manager, replacing `<id_name>` with the container's id or name (for example, "8862717fe6d3" or "trusting_lamarr").
 
-        docker rm -f <id_name>
+        docker container rm -f <id_name>
 
 4. Start the swarm manager. For example:
 

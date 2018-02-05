@@ -178,7 +178,7 @@ with the `CMD` instruction, and a read-write container layer. Docker already
 has all the layers from the first image, so it does not need to pull them again.
 The two images share any layers they have in common.
 
-If you build images from the two Dockerfiles, you can use `docker images` and
+If you build images from the two Dockerfiles, you can use `docker image ls` and
 `docker history` commands to verify that the cryptographic IDs of the shared
 layers are the same.
 
@@ -239,7 +239,7 @@ layers are the same.
 7.  Check out the sizes of the images:
 
     ```bash
-    $ docker images
+    $ docker image ls
 
     REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
     acme/my-final-image                1.0                     dbf995fc07ff        58 seconds ago      103MB

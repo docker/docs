@@ -267,7 +267,7 @@ in Step 4.
     docker: Error response from daemon: Conflict. The name "/interlock" is already in use by container d846b801a978c76979d46a839bb05c26d2ab949ff9f4f740b06b5e2564bae958. You have to remove (or rename) that container to reuse that name.
     ```
 
-     Remove the interlock container with the `docker rm interlock` and try again.
+     Remove the interlock container with the `docker container rm interlock` and try again.
 
 
 11. Start an `nginx` container on the load balancer.

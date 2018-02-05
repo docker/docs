@@ -175,7 +175,7 @@ Then, get the IP address of your `web`
 
 Now, open a shell to your running `db` container:
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping 172.17.0.2
     ping 172.17.0.2
@@ -195,7 +195,7 @@ Docker networking allows you to attach a container to as many networks as you li
 
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping web
     PING web (10.0.0.2) 56(84) bytes of data.

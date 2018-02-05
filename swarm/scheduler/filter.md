@@ -154,7 +154,7 @@ Step 3 : RUN gem install sinatra
 Removing intermediate container 68671d4a17b0
 Successfully built cd70495a1514
 
-$ docker images
+$ docker image ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 dockerswarm/swarm   manager             8c2c56438951        2 days ago          795.7 MB
 ouruser/sinatra     v2                  cd70495a1514        35 seconds ago      318.7 MB
@@ -280,7 +280,7 @@ As you can see here, the containers were only scheduled on nodes that had the
 `redis` image. Instead of the image name, you could have specified the image ID.
 
 ```bash
-$ docker images
+$ docker image ls
 REPOSITORY                         TAG                       IMAGE ID            CREATED             VIRTUAL SIZE
 redis                              latest                    06a1f75304ba        2 days ago          111.1 MB
 
