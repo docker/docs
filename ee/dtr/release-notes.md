@@ -61,6 +61,9 @@ scanner:
   license type.
   * `/api/v0/imagescan/scansummary/component/{component}` get the scan summary by
   component.
+* The API endpoint `/api/v0/repositories/{namespace}/{reponame}/manifests/{reference}`
+has been deprecated. Use `/api/v0/repositories/{namespace}/{reponame}/tags/{tag}`
+instead.
 
 ### Bug fixes
 
