@@ -149,8 +149,8 @@ You can now boot the app with [docker-compose up](/compose/reference/up/):
 
     docker-compose up
 
-If all's well, you should see some PostgreSQL output, and then&8212;after a few
-seconds&8212;the familiar refrain:
+If all's well, you should see some PostgreSQL output, and then &#8212; after a few
+seconds &#8212; the familiar refrain:
 
     Starting rails_db_1 ...
     Starting rails_db_1 ... done
