@@ -726,7 +726,7 @@ Configures if and how to restart containers when they exit. Replaces
 - `delay`: How long to wait between restart attempts, specified as a
   [duration](#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving
-  up (default: never give up).
+  up (default: never give up). If the restart has not succeeded within the configured `window`, this attempt will not count toward the configured `max_attempts` value. For example, if `max_attempts` is set to '2', and there is no successful restart on the first attempt, more than two restarts may be attempted. 
 - `window`: How long to wait before deciding if a restart has succeeded,
   specified as a [duration](#specifying-durations) (default:
   decide immediately).
