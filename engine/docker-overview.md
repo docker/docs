@@ -193,7 +193,7 @@ the default registry configuration):
 1.  If you do not have the `ubuntu` image locally, Docker pulls it from your
     configured registry, as though you had run `docker pull ubuntu` manually.
 
-2.  Docker creates a new container, as though you had run a `docker create`
+2.  Docker creates a new container, as though you had run a `docker container create`
     command manually.
 
 3.  Docker allocates a read-write filesystem to the container, as its final
