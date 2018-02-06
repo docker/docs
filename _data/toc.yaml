@@ -207,10 +207,6 @@ guides:
       path: /get-started/part5/
     - title: "Part 6: Deploy your app"
       path: /get-started/part6/
-  - sectiontitle: Learn by example
-    section:
-    - path: /engine/tutorials/networkingcontainers/
-      title: Network containers
   - path: /engine/docker-overview/
     title: Docker overview
 - sectiontitle: Develop with Docker
