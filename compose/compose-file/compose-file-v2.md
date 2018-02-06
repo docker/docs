@@ -1179,7 +1179,7 @@ then read-write is used.
 
 ### restart
 
-`no` is the default restart policy, and it does restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+`no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
       - restart: no
       - restart: always
