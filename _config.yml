@@ -112,7 +112,7 @@ defaults:
     values:
       assignee: "johndmulhausen"
   - scope:
-      path: "engine"
+      path: "install"
     values:
       win_latest_build: "docker-17.06.2-ee-6"
   - scope:
