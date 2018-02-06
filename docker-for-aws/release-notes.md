@@ -25,6 +25,8 @@ title: Docker for AWS release notes
 - DTR 2.2.7
 
 
+> **Note** Starting with 18.02.0-CE EFS encryption option has been removed to prevent the [recreation of the EFS volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html){: target="_blank" class="_"}.
+
 ## Stable channel
 
 ### 17.12 CE

@@ -36,8 +36,6 @@ Single containers started (for example) with `docker run -d` are
 **not** preserved during an upgrade. This is because they're not Docker Swarm
 objects, but are known only to the individual Docker engines.
 
-_NIB: Please note that if EFS encryption is enabled, upgrade will [recreate the EFS volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html){: target="_blank" class="_"}_
-
 ## Changing instance sizes and other template parameters
 
 In addition to upgrading Docker for AWS from one version to the next you can
