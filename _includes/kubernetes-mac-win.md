@@ -119,7 +119,7 @@ docker stack deploy --compose-file /path/to/docker-compose.yml mystack
 ## Use the kubectl command
 
 The {{ platform }} Kubernetes integration provides the Kubernetes CLI command
-at `{{ kubernetes-path }}`. This location may not be in your shell's `PATH`
+at `{{ kubectl-path }}`. This location may not be in your shell's `PATH`
 variable, so you may need to type the full path of the command or add it to
 the `PATH`. For more information about `kubectl`, see the
 [official `kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/).
@@ -168,6 +168,3 @@ services:
 
 If you already have a Kubernetes YAML file, you can deploy it using the
 `kubectl` command.
-
-
-
