@@ -29,7 +29,8 @@ This topic does **not** go into OS-specific details about how Docker networks
 work, so you will not find information about how Docker manipulates `iptables`
 rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See
+packets or handles encryption. See [Docker and iptables](/network/iptables.md)
+and
 [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
 for a much greater depth of technical detail.
 
