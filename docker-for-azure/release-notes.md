@@ -26,9 +26,16 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
-### 17.09 CE
+### 17.12 CE
 
 {{azure_blue_latest}}
+
+Release date: 1/9/2018
+
+- Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
+- Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
+
+### 17.09 CE
 
 Release date: 10/6/2017
 
