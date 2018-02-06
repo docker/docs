@@ -116,9 +116,18 @@ Release date: 01/18/2017
 
 ## Edge channel
 
-### 17.10 CE
+### 18.01 CE
 
 {{aws_blue_edge}}
+
+**New**
+
+Release date: 1/18/2018
+
+- Docker Engine upgraded to [Docker 18.01.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce){: target="_blank" class="_"}
+
+
+### 17.10 CE
 
 **New**
 
