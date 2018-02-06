@@ -6,6 +6,7 @@ redirect_from:
 - /en/latest/terms/layer/
 - /engine/installation/userguide/storagedriver/
 - /engine/userguide/storagedriver/imagesandcontainers/
+- /storage/storagedriver/imagesandcontainers/
 ---
 
 To use storage drivers effectively, it's important to know how Docker builds and
