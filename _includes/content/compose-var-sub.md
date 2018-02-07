@@ -32,7 +32,7 @@ provide inline default values using typical shell syntax:
 - `${VARIABLE-default}` evaluates to `default` only if `VARIABLE` is unset
   in the environment.
 
-Similarly, the following syntax will allow you to specify mandatory variables:
+Similarly, the following syntax allows you to specify mandatory variables:
 
 - `${VARIABLE:?err}` exits with an error message containing `err` if
   `VARIABLE` is unset or empty in the environment.
