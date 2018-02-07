@@ -10,9 +10,9 @@ inserts into your `iptables` policies.
 
 ## Add iptables policies before Docker's rules
 
-All of Docker's `iptables` rules are added to the `DOCKER` table. Do not
+All of Docker's `iptables` rules are added to the `DOCKER` chain. Do not
 manipulate this table manually. If you need to add rules which load before
-Docker's rules, add them to the `DOCKER-USER` table. These rules are loaded
+Docker's rules, add them to the `DOCKER-USER` chain. These rules are loaded
 before any rules Docker creates automatically.
 
 ### Restrict connections to the Docker daemon
