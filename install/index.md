@@ -59,12 +59,13 @@ Digital Ocean, Packet, SoftLayer, or Bring Your Own Cloud.
 
 ## Time-based release schedule
 
-Starting with Docker 17.03, Docker uses a time-based release schedule, outlined
-below.
+Starting with Docker 17.03, Docker uses a time-based release schedule.
 
-Major new versions of Docker Enterprise Edition are released twice per year.
-
-{% include docker_schedule_matrix.md %}
+- Docker CE Edge releases generally happen monthly.
+- Docker CE Stable releases generally happen quarterly, with patch releases as
+  needed.
+- Docker EE releases generally happen twice per year, with patch releases as
+  needed.
 
 ### Updates, and patches
 
