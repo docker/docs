@@ -60,28 +60,56 @@ GitHub Repo:
 
 ## Create a simple parent image using scratch
 
-You can use Docker's reserved, minimal image, `scratch`, as a starting point for building containers. Using the `scratch` "image" signals to the build process that you want the next command in the `Dockerfile` to be the first filesystem layer in your image.
+You can use Docker's reserved, minimal image, `scratch`, as a starting point for
+building containers. Using the `scratch` "image" signals to the build process
+that you want the next command in the `Dockerfile` to be the first filesystem
+layer in your image.
 
-While `scratch` appears in Docker's repository on the hub, you can't pull it, run it, or tag any image with the name `scratch`. Instead, you can refer to it in your `Dockerfile`. For example, to create a minimal container using `scratch`:
+While `scratch` appears in Docker's repository on the hub, you can't pull it,
+run it, or tag any image with the name `scratch`. Instead, you can refer to it
+in your `Dockerfile`. For example, to create a minimal container using
+`scratch`:
 
-    FROM scratch
-    ADD hello /
-    CMD ["/hello"]
+```Dockerfile
+FROM scratch
+ADD hello /
+CMD ["/hello"]
+```
 
-Assuming you built the "hello" executable example [from the Docker GitHub example C-source code](https://github.com/docker-library/hello-world/blob/master/hello.c), and you compiled it with the `-static` flag, you can then build this Docker image using: `docker build --tag hello .`
+Assuming you built the "hello" executable example by following the instructions
+at
+[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/),
+and you compiled it with the `-static` flag, you can build this Docker
+image using this `docker build` command:
 
-> **Note**: Because Docker for Mac and Docker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up
-> with a Linux binary. Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
+```bash
+docker build --tag hello .
+```
 
-    $ docker run --rm -it -v $PWD:/build ubuntu:16.04
-    container# apt-get update && apt-get install build-essential
-    container# cd /build
-    container# gcc -o hello -static -nostartfiles hello.c
+Don't forget the `.` character at the end, which sets the build context to the
+current directory.
 
-Then you can run it (on Linux, Mac, or Windows) using: `docker run --rm hello`
+> **Note**: Because Docker for Mac and Docker for Windows use a Linux VM, you
+> you need a Linux binary, rather than a Mac or Windows binary.
+> You can use a Docker container to build it:
+>
+> ```bash
+> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+>
+> container# apt-get update && apt-get install build-essential
+> container# cd /build
+> container# gcc -o hello -static -nostartfiles hello.c
+> ```
+
+To run your new image, use the `docker run` command:
+
+```bash
+docker run --rm hello
+```
 
 This example creates the hello-world image used in the tutorials.
-If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world).
+If you want to test it out, you can clone
+[the image repo](https://github.com/docker-library/hello-world).
 
 
 ## More resources
