@@ -7,6 +7,8 @@ redirect_from:
 - /opensource/ways/meetups/
 - /opensource/ways/issues/
 - /opensource/ways/test/
+- /project/who-written-for/
+- /project/make-a-contribution/
 ---
 
 Beyond the documentation contributions we cover here, there are many other ways
