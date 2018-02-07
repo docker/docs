@@ -580,7 +580,7 @@ configure it in different ways:
 
 ### Configure the Docker Client
 
-1.  On the Docker client, create or edit the file `~/.config.json` in the
+1.  On the Docker client, create or edit the file `~/.docker/config.json` in the
     home directory of the user which starts containers. Add JSON such as the
     following, substituting the type of proxy with `httpsProxy` or `ftpProxy` if
     necessary, and substituting the address and port of the proxy server. You
