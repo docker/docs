@@ -7,7 +7,7 @@ redirect_from:
 - /engine/userguide/networking/default_network/binding/
 ---
 
-The type of network a container uses, whether it is a [brudge](bridges.md), an
+The type of network a container uses, whether it is a [bridge](bridges.md), an
 [overlay](overlay.md), a [macvlan network](macvlan.md), or a custom network
 plugin, is transparent from within the container. From the container's point of
 view, it has a network interface with an IP address, a gateway, a routing table,
