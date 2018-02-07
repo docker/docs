@@ -7,7 +7,6 @@ redirect_from:
 - /engine/installation/linux/linux-postinstall/
 ---
 
-
 This section contains optional procedures for configuring Linux hosts to work
 better with Docker.
 
@@ -119,6 +118,79 @@ For information about the different storage engines, see
 [Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
+
+## Configure where the Docker daemon listens for connections
+
+By default, the Docker daemon listens for connections on a UNIX socket. To
+enable Docker to accept requests from remote hosts, you can configure it to
+listen on an IP address and port as well. It still needs to listen on the UNIX
+socket as well, to accept requests from local clients.
+
+1.  Set the `hosts` array in the `/etc/docker/daemon.json` to connect to the
+    UNIX socket and an IP address, as follows:
+
+    ```json
+    {
+      "hosts": ["fd://", "tcp://0.0.0.0:2375"]
+    }
+    ```
+
+2.  Restart Docker. Check to see whether the value was honored, by looking for
+    the `dockerd` process. If step 1 worked, the Docker daemon shows multiple
+    `-H` flags:
+
+    ```bash
+    $ sudo ps aux |grep dockerd
+
+    root     31239  0.7  0.2 1007880 72816 ?       Ssl  15:03   0:00 /usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+    ```
+
+    **If you see multiple `-H` values, you are done. If you do not see multiple
+    `-H` values, go to the next step.**
+
+3.  On some Linux distributions, such as RHEL and CentOS, the `hosts` key in the
+    `/etc/docker/daemon.json` file is overridden by the contents of the
+    `docker.service` service configuration file. In this case, you need to
+    edit this file manually.
+
+    1.  Use the command `sudo systemctl edit docker.service` to open the
+        `docker.service` file in a text editor.
+
+    2.  Add or modify the following lines, substituting your own values.
+
+        ```none
+        [Service]
+        ExecStart=
+        ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+        ```
+
+        Save the file.
+
+    3. Reload the `systemctl` configuration.
+
+      ```bash
+      $ sudo systemctl daemon-reload
+      ```
+
+    4.  Restart Docker.
+
+        ```bash
+        $ sudo systemctl restart docker.service
+        ```
+
+    5.  Check again to see if the `dockerd` command now listens on both the
+        file descriptor and the network address.
+
+        ```bash
+        $ sudo ps aux |grep dockerd
+
+        root     31239  0.7  0.2 1007880 72816 ?       Ssl  15:03   0:00 /usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+        ```
+
+## Enable IPv6 on the Docker daemon
+
+To enable IPv6 on the Docker daemon, see
+[Enable IPv6 support](/config/daemon/ipv6.md).
 
 ## Troubleshooting
 
