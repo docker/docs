@@ -25,7 +25,6 @@ and distributions for different Docker editions, see
 
 To install Docker, you need the 64-bit version of one of these Fedora versions:
 
-- 25
 - 26
 - 27
 
