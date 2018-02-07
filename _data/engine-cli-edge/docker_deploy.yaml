@@ -121,5 +121,5 @@ min_api_version: "1.25"
 experimental: true
 experimentalcli: false
 kubernetes: false
-swarm: false
+swarm: true
 
