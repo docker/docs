@@ -1340,6 +1340,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.36/
+        title: v1.36 reference
       - path: /engine/api/v1.35/
         title: v1.35 reference
       - path: /engine/api/v1.34/
