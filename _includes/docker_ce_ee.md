@@ -1,4 +1,4 @@
-{% assign green-check = '![yes](/engine/installation/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
 |  Capabilities                                                                 | Community Edition | Enterprise Edition Basic | Enterprise Edition Standard | Enterprise Edition Advanced |
 |:------------------------------------------------------------------|:------------------|:-------------------------|:----------------------------|:----------------------------|

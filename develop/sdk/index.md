@@ -13,7 +13,7 @@ redirect_from:
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
 Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
-scale Docker apps and solutions quickly and easily. If Go or Python won't work
+scale Docker apps and solutions quickly and easily. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
@@ -57,14 +57,14 @@ your Docker daemon and Docker client.
 
 A given version of the Docker Engine SDK supports a specific version of the
 Docker Engine API, as well as all earlier versions. If breaking changes occur,
-they will be documented prominently.
+they are documented prominently.
 
 > Daemon and client API mismatches
 >
 > The Docker daemon and client do not necessarily need to be the same version
 > at all times. However, keep the following in mind.
 >
-> - If the daemon is newer than the client, the client will not know about new
+> - If the daemon is newer than the client, the client does not know about new
 >   features or deprecated API endpoints in the daemon.
 >
 > - If the client is newer than the daemon, the client can request API
@@ -125,6 +125,21 @@ You can specify the API version to use, in one of the following ways:
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
+### Docker EE and CE API mismatch
+
+If you use Docker EE in production, we recommend using Docker EE in development
+too. If you can't, such as when your developers use Docker for Mac or Docker for
+Windows and manually build and push images, then your developers need to configure
+their Docker clients to use the same version of the API reported by their Docker
+daemon. This prevents the developer from using a feature that is not yet supported
+on the daemon where the workload runs in production. You can do this one of two ways:
+
+- Configure the Docker client to connect to an external daemon running Docker EE.
+  You can use the `-H` flag on the `docker` command or set the `DOCKER_HOST`
+  environment variable. The client uses the daemon's latest supported API version.
+- Configure the Docker client to use a specific API by setting the `DOCKER_API_VERSION`
+  environment variable to the API version to use, such as `1.30`.
+
 ### API version matrix
 
 Docker does not recommend running versions prior to 1.12, which means you
@@ -140,8 +155,8 @@ code:
 - If you're starting a new project, use the
   [latest version](/engine/api/latest/), but do specify the version you are
   using. This helps prevent surprises.
-- If you need a new feature, update your code use at least the oldest version
-  that supports the feature, and prefer the latest version you are able to use.
+- If you need a new feature, update your code to use at least the minimum version
+  that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
 
 ## SDK and API quickstart
@@ -266,6 +281,7 @@ file them with the library maintainers.
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
+| NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
 | PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
 | Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |

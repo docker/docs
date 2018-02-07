@@ -14,7 +14,7 @@ application.
 ## Get a client certificate bundle
 
 Docker UCP secures your cluster with role-based access control, so that only
-authorized users can deploy applications to the cluster. To be able to run
+authorized users can deploy applications to the cluster. To run
 Docker commands on the UCP cluster, you need to authenticate your requests using
 client certificates.
 

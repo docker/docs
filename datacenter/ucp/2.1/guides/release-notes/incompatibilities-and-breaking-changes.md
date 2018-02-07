@@ -15,7 +15,7 @@ When using the HTTP routing mesh you need to apply specific labels to your
 services to make them accessible using a hostname.
 The syntax used for these labels has changed on 2.1.
 
-If you were using this feature on UCP 2.0, after you upgrade you'll have to
+If you were using this feature on UCP 2.0, after you upgrade you need to
 update your services to use a new label syntax.
 You can do this from the UCP web UI or from the CLI using the
 `docker service update` command.

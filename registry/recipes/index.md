@@ -4,15 +4,12 @@ keywords: registry, on-prem, images, tags, repository, distribution, recipes, ad
 title: Recipes overview
 ---
 
-You will find here a list of "recipes", end-to-end scenarios for exotic or otherwise advanced use-cases.
-
-Most users are not expected to have a use for these.
+This list of "recipes" provides end-to-end scenarios for exotic or otherwise advanced use-cases.
+These recipes are not useful for most standard set-ups.
 
 ## Requirements
 
-You should have followed entirely the basic [deployment guide](../deploying.md).
-
-If you have not, please take the time to do so.
+Before following these steps, work through the [deployment guide](../deploying.md).
 
 At this point, it's assumed that:
 
@@ -20,7 +17,7 @@ At this point, it's assumed that:
  * you have installed Docker Compose
  * it's HIGHLY recommended that you get a certificate from a known CA instead of self-signed certificates
  * inside the current directory, you have a X509 `domain.crt` and `domain.key`, for the CN `myregistrydomain.com`
- * be sure you have stopped and removed any previously running registry (typically `docker stop registry && docker rm -v registry`)
+ * be sure you have stopped and removed any previously running registry (typically `docker container stop registry && docker container rm -v registry`)
 
 ## The List
 

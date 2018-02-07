@@ -22,6 +22,9 @@ options:
   description: Skip image signing
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Push a new image to a registry
 
@@ -54,4 +57,7 @@ examples: |-
   listed.
 deprecated: false
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

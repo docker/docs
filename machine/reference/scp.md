@@ -8,7 +8,7 @@ Copy files from your local host to a machine, from machine to machine, or from a
 machine to your local host using `scp`.
 
 The notation is `machinename:/path/to/files` for the arguments; in the host
-machine's case, you don't have to specify the name, just the path.
+machine's case, you don't need to specify the name, just the path.
 
 ## Example
 
@@ -51,16 +51,14 @@ baz
 
 When you copy files to a remote server with `docker-machine scp` for app
 deployment, make sure `docker-compose` and the Docker daemon know how to find
-them. You can specify absolute paths, e.g. `/home/myuser/workspace` in a
-[Compose file](/compose/compose-file/index.md), which will be mounted into the
-container at `/workspace`, from the absolute path on the remote host where the
-Docker daemon is running. Local client paths (e.g., on your laptop) will not
-work for daemons running on a remote machine, so avoid using relative paths.
+them. Avoid using relative paths, but specify absolute paths in
+[Compose files](/compose/compose-file/index.md). It's best to specify absolute
+paths both for the location on the Docker daemon and within the container.
 
 For example, imagine you want to transfer your local directory
 `/Users/londoncalling/webapp` to a remote machine and bind mount it into a
-container on the remote host. (We'll suppose the remote user is `ubuntu`.) You
-could do something like this:
+container on the remote host. If the remote user is `ubuntu`, use a command like
+this:
 
 ```none
 $ docker-machine scp -r /Users/londoncalling/webapp MACHINE-NAME:/home/ubuntu/webapp

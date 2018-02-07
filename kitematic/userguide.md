@@ -14,7 +14,7 @@ interface (GUI) for running Docker containers.  Kitematic integrates with
 [Docker Machine](/machine/) to provision a VirtualBox VM
 and install the Docker Engine locally on your machine.
 
-Once installed, the Kitematic GUI launches and from the home screen you will be
+Once installed, the Kitematic GUI launches and from the home screen you are
 presented with curated images that you can run instantly. You can search for any
 public images on Docker Hub from Kitematic just by typing in the search bar.
 You can use the GUI to create, run and manage your containers just by clicking
@@ -60,10 +60,10 @@ and run the container.
 
 ## Working with a container
 
-If you select a non-running container, either stopped, or paused, you will be able
-to "Restart" or "Stop" the container using the icons. You can also view the entire
+If you select a non-running container, either stopped, or paused, you can
+"Restart" or "Stop" the container using the icons. You can also view the entire
 main container process' output logs, and in the Settings section you can make
-changes which will be used if you "Restart" this container.
+changes which are used if you "Restart" this container.
 
 By selecting a running container from the left list, you can see some state information
 for your container - either a preview of the HTML output for a container that has a web
@@ -72,12 +72,12 @@ configured.
 
 ![Redis container in Kitematic](images/cli-redis-container.png)
 
-The summary page will show different things depending on the image metadata. If
+The summary page shows different things depending on the image metadata. If
 a known "web" port (see below) is `EXPOSED`, then Kitematic assumes its a web page,
-and will show a preview of the site at `/`. If other ports are exposed, then it
-will show a list of those ports, and the Docker daemon IP and port they are mapped
-to. If there are any `VOLUMES`, then these will be shown. At minimum, the summary
-screen will show the main container process' log output.
+and shows a preview of the site at `/`. If other ports are exposed, then it
+shows a list of those ports, and the Docker daemon IP and port they are mapped
+to. If there are any `VOLUMES`, then these are shown. At minimum, the summary
+screen shows the main container process' log output.
 
 The currently detected "web" ports are, `80`, `8000`, `8080`, `3000`, `5000`,
 `2368`, `9200`, and `8983`.
@@ -88,15 +88,15 @@ You can view the entire main container process' log output either by clicking on
 preview image, or by clicking on the "Logs" tab.
 
 You can then scroll through the logs from the current running container. Note that
-if you make changes to the container settings, then the container will be restarted,
-so this will reset this log view.
+if you make changes to the container settings, then the container is restarted,
+so this resets this log view.
 
 ### Starting a terminal in a container
 
-The "Terminal" icon at the top of the container summary will `docker exec -i -t <your container> sh`.
-This will allow you to make quick changes, or to debug a problem.
+The "Terminal" icon at the top of the container summary runs `docker container exec -i -t <your container> sh`.
+This allows you to make quick changes, or to debug a problem.
 
-> **Note**: Your exec'ed `sh` process will not have the same environment settings
+> **Note**: Your exec'ed `sh` process does not have the same environment settings
 > as the main container process and its children.
 > Get the environment commands for your shell: `docker-machine env default`.
 
@@ -113,7 +113,7 @@ Quick access to this folder (or directory) is available via the app:
 ![Accessing the volumes directory](images/volumes-dir.png)
 
 > **Note**: When you "Enable all volumes to edit files in Finder", the Docker
-> container will be stopped, removed and re-created with the new `volumes`
+> container is stopped, removed and re-created with the new `volumes`
 > flag.
 
 #### Changing Volume Directories
@@ -130,7 +130,7 @@ screen allows you to set the mappings individually.
 ![screen shot 2015-02-28 at 2 48 01 pm](images/change-folder.png)
 
 > **Note**: When you "Change Folders", the Docker
-> container will be stopped, removed and re-created with the new `volumes`
+> container is stopped, removed and re-created with the new `volumes`
 > flag.
 
 ### Setting the container name
@@ -140,7 +140,7 @@ with a `-<number>` if there are more than one.
 To simplify administration, or when using container linking or volumes, you may
 want to rename it.
 
-> **Note**: When you rename the container it will be stopped, removed and
+> **Note**: When you rename the container it is stopped, removed and
 > re-created with the new name (due to the default volumes mapping).
 
 ### Adding Environment variables
@@ -149,20 +149,20 @@ Many images use environment variables to let you customize them. The "General"
 "Settings" tab allows you to add and modify the environment variables used to
 start a container.
 
-The list of environment variables will show any that have been set on the image
+The list of environment variables shows any that have been set on the image
 metadata - for example, using the `ENV` instruction in the Dockerfile.
 
-When you "Save" the changed environment variables, the container will be
+When you "Save" the changed environment variables, the container is
 stopped, removed and re-created.
 
 ### Delete container
 
 On the "General" "Settings" tab, you can delete the container. Clicking "Delete
-Container" will also stop the container if necessary.
+Container" also stops the container if necessary.
 
 You can also delete a container by clicking the `X` icon in the container list.
 
-Kitematic will prompt you to confirm that you want to delete.
+Kitematic prompts you to confirm that you want to delete.
 
 #### List the exposed Ports and how to access them
 
@@ -186,15 +186,15 @@ shown below:
 
 Start by opening a Docker-CLI ready terminal by clicking the whale button as
 described above. Once the terminal opens, enter `docker run -d -P redis`. This
-will pull and run a new Redis container via the Docker CLI.
+pulls, creates, and runs a new Redis container via the Docker CLI.
 
 ![Docker CLI terminal window](images/cli-terminal.png)
 
 > **Note**: If you're creating containers from the command line, use `docker run -d`
 > so that Kitematic can re-create the container when settings are changed via the
-> Kitematic user interface. Containers started without `-d` will fail to re-start.
+> Kitematic user interface. Containers started without `-d` fails to restart.
 
-Now, go back to Kitematic. The Redis container should now be visible.
+Now, go back to Kitematic. The Redis container is now visible.
 
 ![Redis container in Kitematic](images/cli-redis-container.png)
 

@@ -9,7 +9,7 @@ redirect_from:
 
 Docker EE for IBM Cloud is an unmanaged, native Docker environment within IBM Cloud that runs Docker Enterprise Edition software. Docker EE for IBM Cloud is available on **December 20th 2017 as a closed Beta**.
 
-[Request access to the closed beta here](https://www.ibm.com/us-en/marketplace/docker-for-ibm-cloud). In the welcome email you receive, you are given the Docker EE installation URL that you use for the beta.
+[Email IBM to request access to the closed beta](mailto:sealbou@us.ibm.com). In the welcome email you receive, you are given the Docker EE installation URL that you use for the beta.
 
 ## Prerequisites
 
@@ -19,9 +19,10 @@ To create a swarm cluster in IBM Cloud, you must have certain accounts, credenti
 
 If you do not have an IBM Cloud account, [register for a Pay As You Go IBM Cloud account](https://console.bluemix.net/registration/).
 
-If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/pricing/index.html#accounts).
+If you already have an IBM Cloud account, make sure that you can provision infrastructure resources. You might need to [upgrade or link your account](https://console.bluemix.net/docs/account/index.html#accounts).
 
-For a full list of infrastructure permissions, see [What IBM Cloud infrastructure permissions do I need?](faqs.md). In general you must be able to provision the following types of resources:
+For a full list of infrastructure permissions, see [What IBM Cloud infrastructure permissions do I need?](faqs.md). In general you need the ability
+to provision the following types of resources:
 
   * File and block storage.
   * Load balancers.
@@ -38,7 +39,7 @@ Log in to [IBM Cloud infrastructure](https://control.softlayer.com/), select you
 
 ### Environment
 
-If you have not already, [create a space](https://console.bluemix.net/docs/admin/orgs_spaces.html#spaceinfo) in IBM Cloud.
+If you have not already, [create an organization and space](https://console.bluemix.net/docs/admin/orgs_spaces.html#orgsspacesusers) in IBM Cloud. You must be the account owner or administrator to complete this step.
 
 ## Install the CLIs
 

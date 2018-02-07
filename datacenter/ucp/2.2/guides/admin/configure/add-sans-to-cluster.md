@@ -24,13 +24,13 @@ also add them after installation.
 
 1.  In the UCP web UI, log in with administrator credentials and navigate to
     the **Nodes** page.
-2.  Click on a manager node, and in the details pane, click **Configure**. 
+2.  Click on a manager node, and in the details pane, click **Configure**.
 3.  In the **SANs** section, click **Add SAN**, and enter one or more SANs
     for the swarm.
     ![](../../images/add-sans-to-cluster-1.png){: .with-border}
 4.  Once you're done, click **Save**.
 
-You will have to do this on every manager node in the swarm, but once you
+You need to do this on every manager node in the swarm, but once you
 have done so, the SANs are applied automatically to any new manager nodes
 that join the swarm.
 

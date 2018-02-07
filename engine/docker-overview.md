@@ -47,7 +47,7 @@ _Docker Engine_ is a client-server application with these major components:
 
 * A command line interface (CLI) client (the `docker` command).
 
-![Docker Engine Components Flow](article-img/engine-components-flow.png)
+![Docker Engine Components Flow](/engine/images/engine-components-flow.png)
 
 The CLI uses the Docker REST API to control or interact with the Docker daemon
 through scripting or direct CLI commands. Many other Docker applications use the
@@ -67,7 +67,7 @@ For more details, see [Docker Architecture](#docker-architecture) below.
 Docker streamlines the development lifecycle by allowing developers to work in
 standardized environments using local containers which provide your applications
 and services. Containers are great for continuous integration and continuous
-development (CI/CD) workflows.
+delivery (CI/CD) workflows.
 
 Consider the following example scenario:
 
@@ -107,7 +107,7 @@ run on the same system, or you can connect a Docker client to a remote Docker
 daemon. The Docker client and daemon communicate using a REST API, over UNIX
 sockets or a network interface.
 
-![Docker Architecture Diagram](article-img/architecture.svg)
+![Docker Architecture Diagram](/engine/images/architecture.svg)
 
 ### The Docker daemon
 
@@ -193,7 +193,7 @@ the default registry configuration):
 1.  If you do not have the `ubuntu` image locally, Docker pulls it from your
     configured registry, as though you had run `docker pull ubuntu` manually.
 
-2.  Docker creates a new container, as though you had run a `docker create`
+2.  Docker creates a new container, as though you had run a `docker container create`
     command manually.
 
 3.  Docker allocates a read-write filesystem to the container, as its final

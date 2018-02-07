@@ -16,12 +16,12 @@ have Docker Engine installed either locally or remote, depending on your setup.
 included as part of those desktop installs.
 
 - On Linux systems, first install the
-[Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
+[Docker](/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/installation/linux/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](/install/linux/linux-postinstall.md).
 
 ## Install Compose
 
@@ -58,7 +58,7 @@ install Compose separately. Docker install instructions for these are here:
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 **If you are running the Docker daemon and client directly on Microsoft
-Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
+Windows Server 2016** (with [Docker EE for Windows Server 2016](/install/windows/docker-ee.md), you _do_ need to install
 Docker Compose. To do so, follow these steps:
 
 1.  Start an "elevated" PowerShell (run it as administrator).
@@ -115,7 +115,7 @@ by step instructions are also included below.
     {: .important}
 
     If you have problems installing with `curl`, see
-    [Alternative Install Options](install.md#alternative-install-options).
+    [Alternative Install Options](install.md#alternative-install-options) tab above.
 
 2.  Apply executable permissions to the binary:
 
@@ -197,12 +197,12 @@ but may be less stable.
 
 ## Upgrading
 
-If you're upgrading from Compose 1.2 or earlier, you'll need to remove or
+If you're upgrading from Compose 1.2 or earlier, remove or
 migrate your existing containers after upgrading Compose. This is because, as of
-version 1.3, Compose uses Docker labels to keep track of containers, and so they
-need to be recreated with labels added.
+version 1.3, Compose uses Docker labels to keep track of containers, and your
+containers need to be recreated to add the labels.
 
-If Compose detects containers that were created without labels, it will refuse
+If Compose detects containers that were created without labels, it refuses
 to run so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
@@ -213,10 +213,10 @@ docker-compose migrate-to-labels
 ```
 
 Alternatively, if you're not worried about keeping them, you can remove them.
-Compose will just create new ones.
+Compose just creates new ones.
 
 ```bash
-docker rm -f -v myapp_web_1 myapp_db_1 ...
+docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation

@@ -48,7 +48,7 @@ use:
     $ docker logs -f test_apt_cacher_ng
 
 To get your Debian-based containers to use the proxy, you have
-following options.  Note that you must replace `dockerhost` with the
+following options. Replace `dockerhost` with the
 IP address or FQDN of the host running the `test_apt_cacher_ng`
 container.
 
@@ -70,14 +70,13 @@ a local version of a common base:
 
     # docker build -t my_ubuntu .
 
-**Option 2** is good for testing, but will break other HTTP clients
+**Option 2** is good for testing, but breaks other HTTP clients
 which obey `http_proxy`, such as `curl`, `wget` and others:
 
     $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 
-**Option 3** is the least portable, but there will be times when you
-might need to do it and you can do it from your `Dockerfile`
-too.
+**Option 3** is the least portable, but you might need to do it and you can do it
+from your `Dockerfile` too.
 
 **Option 4** links Debian-containers to the proxy server using following command:
 
@@ -117,6 +116,6 @@ instruction, and the image we built to run the service:
 Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
-    $ docker stop test_apt_cacher_ng
-    $ docker rm test_apt_cacher_ng
-    $ docker rmi eg_apt_cacher_ng
+    $ docker container stop test_apt_cacher_ng
+    $ docker container rm test_apt_cacher_ng
+    $ docker image rm eg_apt_cacher_ng

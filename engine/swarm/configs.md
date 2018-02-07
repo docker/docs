@@ -24,6 +24,24 @@ conjunction with environment variables or labels, for maximum flexibility.
 
 Configs are supported on both Linux and Windows services.
 
+### Windows support
+
+Docker 17.06 and higher include support for configs on Windows containers.
+Where there are differences in the implementations, they are called out in the
+examples below. Keep the following notable differences in mind:
+
+- Config files with custom targets are not directly bind-mounted into Windows
+  containers, since Windows does not support non-directory file bind-mounts.
+  Instead, configs for a container are all mounted in
+  `C:\ProgramData\Docker\internal\configs` (an implementation detail which
+  should not be relied upon by applications) within the container. Symbolic
+  links are used to point from there to the desired target of the config within
+  the container. The default target is `C:\ProgramData\Docker\configs`.
+
+- When creating a service which uses Windows containers, the options to specify
+  UID, GID, and mode are not supported for configs. Configs are currently only
+  accessible by administrators and users with `system` access within the
+  container.
 
 ## How Docker manages configs
 
@@ -39,6 +57,16 @@ the container defaults to `/<config-name>` in Linux containers. In Windows
 containers, configs are all mounted into `C:\ProgramData\Docker\configs` and
 symbolic links are created to the desired location, which defaults to
 `C:\<config-name>`.
+
+You can set the ownership (`uid` and `gid`) or the config, using either the
+numerical ID or the name of the user or group. You can also specify the file
+permissions (`mode`). These settings are ignored for Windows containers.
+
+- If not set, the config is owned by the user and that running the container
+  command (often `root`) and that user's default group (also often `root`).
+- If not set, the config has world-readable permissions (mode `0444`), unless a
+  `umask` is set within the container, in which case the mode is impacted by
+  that `umask` value.
 
 You can update a service to grant it access to additional configs or revoke its
 access to a given config at any time.
@@ -57,14 +85,14 @@ configs. You cannot remove a config that a running service is
 using. See [Rotate a config](configs.md#example-rotate-a-config) for a way to
 remove a config without disrupting running services.
 
-In order to update or roll back configs more easily, consider adding a version
+To update or roll back configs more easily, consider adding a version
 number or date to the config name. This is made easier by the ability to control
 the mount point of the config within a given container.
 
 To update a stack, make changes to your Compose file, then re-run `docker
 stack deploy -c <new-compose-file> <stack-name>`. If you use a new config in
-that file, your services will start using them. Keep in mind that configurations
-are immutable, so you won't be able to change the file for an existing service.
+that file, your services start using them. Keep in mind that configurations
+are immutable, so you can't change the file for an existing service.
 Instead, you create a new config to use a different file
 
 You can run `docker stack rm` to stop the app and take down the stack. This
@@ -116,7 +144,7 @@ real-world example, continue to
     you can customize the file name on the container using the `target` option.
 
     ```bash
-    $ docker service  create --name redis --config my-config redis:alpine
+    $ docker service create --name redis --config my-config redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
@@ -130,7 +158,7 @@ real-world example, continue to
     ```
 
 4.  Get the ID of the `redis` service task container using `docker ps`, so that
-    you can use `docker exec` to connect to the container and read the contents
+    you can use `docker container exec` to connect to the container and read the contents
     of the config data file, which defaults to being readable by all and has the
     same name as the name of the config. The first command below illustrates
     how to find the container ID, and the second and third commands use shell
@@ -141,11 +169,11 @@ real-world example, continue to
 
     5cb1c2348a59
 
-    $ docker exec $(docker ps --filter name=redis -q) ls -l /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) ls -l /my-config
 
     -r--r--r--    1 root     root            12 Jun  5 20:49 my-config                                                     
 
-    $ docker exec $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) cat /my-config
 
     This is a config
     ```
@@ -175,11 +203,11 @@ real-world example, continue to
     ```
 
 7.  Repeat steps 3 and 4 again, verifying that the service no longer has access
-    to the config. The container ID will be different, because the
+    to the config. The container ID is different, because the
     `service update` command redeploys the service.
 
     ```none
-    $ docker exec -it $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec -it $(docker ps --filter name=redis -q) cat /my-config
 
     cat: can't open '/my-config': No such file or directory
     ```
@@ -229,7 +257,7 @@ This example assumes that you have PowerShell installed.
         --name my-iis
         --publish published=8000,target=8000
         --config src=homepage,target="\inetpub\wwwroot\index.html"
-        microsoft/iis:nanoserver  
+        microsoft/iis:nanoserver
     ```
 
 5.  Access the IIS service at `http://localhost:8000/`. It should serve
@@ -249,8 +277,9 @@ This example is divided into two parts.
 [The first part](#generate-the-site-certificate) is all about generating
 the site certificate and does not directly involve Docker configs at all, but
 it sets up [the second part](#configure-the-nginx-container), where you store
-and use the site certificate as a series of secrets and the  Nginx configuration
-as a config.
+and use the site certificate as a series of secrets and the Nginx configuration
+as a config. The example shows how to set options on the config, such as the
+target location within the container and the file permissions (`mode`).
 
 #### Generate the site certificate
 
@@ -280,8 +309,8 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
 3.  Configure the root CA. Edit a new file called `root-ca.cnf` and paste
-    the following contents into it. This constrains the root CA to only be
-    able to sign leaf certificates and not intermediate CAs.
+    the following contents into it. This constrains the root CA to only sign
+    leaf certificates and not intermediate CAs.
 
     ```none
     [root_ca]
@@ -293,7 +322,7 @@ generate the site key and certificate, name the files `site.key` and
 4.  Sign the certificate.
 
     ```bash
-    $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
+    $ openssl x509 -req -days 3650 -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
                    root_ca
@@ -312,7 +341,7 @@ generate the site key and certificate, name the files `site.key` and
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
 
-7.  Configure the site certificate. Edit a new file  called `site.cnf` and
+7.  Configure the site certificate. Edit a new file called `site.cnf` and
     paste the following contents into it. This constrains the site
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
@@ -331,18 +360,18 @@ generate the site key and certificate, name the files `site.key` and
 
     ```bash
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
-        -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
+        -CA "root-ca.crt" -CAkey "root-ca.key" -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
     ```
 
 9.  The `site.csr` and `site.cnf` files are not needed by the Nginx service, but
-    you will need them if you want to generate a new site certificate. Protect
+    you need them if you want to generate a new site certificate. Protect
     the `root-ca.key` file.
 
 #### Configure the Nginx container
 
 1.  Produce a very basic Nginx configuration that serves static files over HTTPS.
-    The TLS certificate and key will be stored as Docker secrets so that they
+    The TLS certificate and key are stored as Docker secrets so that they
     can be rotated easily.
 
     In the current directory, create a new file called `site.conf` with the
@@ -364,7 +393,7 @@ generate the site key and certificate, name the files `site.key` and
 
 2.  Create two secrets, representing the key and the certificate. You can store
     any file as a secret as long as it is smaller than 500 KB. This allows you
-    to decouple the key and certificate from the services that will use them.
+    to decouple the key and certificate from the services that use them.
     In these examples, the secret name and the file name are the same.
 
     ```bash
@@ -391,14 +420,15 @@ generate the site key and certificate, name the files `site.key` and
 
 
 4.  Create a service that runs Nginx and has access to the two secrets and the
-    config.
+    config. Set the mode to `0440` so that the file is only readable by its
+    owner and that owner's group, not the world.
 
     ```bash
     $ docker service create \
          --name nginx \
          --secret site.key \
          --secret site.crt \
-         --config source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --config source=site.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
          --publish published=3000,target=443 \
          nginx:latest \
          sh -c "exec nginx -g 'daemon off;'"
@@ -447,7 +477,7 @@ generate the site key and certificate, name the files `site.key` and
     <p>If you see this page, the nginx web server is successfully installed and
     working. Further configuration is required.</p>
 
-    <p>For online documentation and support please refer to
+    <p>For online documentation and support, refer to
     <a href="http://nginx.org/">nginx.org</a>.<br/>
     Commercial support is available at
     <a href="http://nginx.com/">nginx.com</a>.</p>
@@ -550,7 +580,7 @@ configuration file.
     ```bash
     $ docker service update \
       --config-rm site.conf \
-      --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf \
+      --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
       nginx
     ```
 

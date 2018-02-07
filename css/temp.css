@@ -1,65 +1,28 @@
-
-
 /*
 *
 * this css will be integrated into master. for now testing.......
 *
 */
 
-@media print
-{
-    .footer
-    {
-        display: none !important;
-    }
-    .col-toc
-    {
-      display: none !important;
-    }
-    .col-nav
-    {
-      display: none !important;
-    }
-    .glyphicon-tags
-    {
-      display: none !important;
-    }
-    #ratings-div 
-    {
-      display: none !important;
-    }
+/* Archive butterbar */
+#archive-butterbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 34px;
+  border: 1px solid #254356;
+  background-color: #FFE1C0;
+  color: #254356;
+  width: 100%;
+  z-index: 9999;
 }
 
-.alert-info {
-    border: 0;
-    border-radius: 0;
-    color: #31708f;
-    background-color: #3F51B5!important;
-    border-color: #bce8f1;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 0;
+#archive-butterbar.top {
+  position: relative;
+  margin-top: 0;
 }
 
-.alert-info ul {
-  list-style-type: none;
-}
-
-.close {
-    float: right;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fffdfd;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: .2;
-    margin: 10px 15px 0 0;
-}
-
-/* Make table headings  bold, give tables some breathing room */
-
-.content table {
-  margin-top: 20px;
-  margin-bottom: 20px;
+/* Archive butterbar when the top nav is fixed */
+#archive-butterbar.fixed {
+  position: fixed;
+  top: 55px;
 }

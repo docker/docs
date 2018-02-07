@@ -55,9 +55,9 @@ lightweight macOS virtualization solution built on top of the
 [Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
 10.10 Yosemite and higher.
 
-Currently, there is no `docker-machine create` driver for HyperKit, so you will
-use `virtualbox` driver to create local machines. (See the [Docker Machine
-driver for Oracle VirtualBox](drivers/virtualbox.md).) Note that you can run
+Currently, there is no `docker-machine create` driver for HyperKit, so
+use the `virtualbox` driver to create local machines. (See the [Docker Machine
+driver for Oracle VirtualBox](drivers/virtualbox.md).) You can run
 both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
 
@@ -71,7 +71,7 @@ Docker for Mac and Docker for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
 Toolbox.
 
-* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), you will use the `virtualbox` driver to create a local
+* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), use the `virtualbox` driver to create a local
 machine based on Oracle [VirtualBox](https://www.virtualbox.org/){:
 target="_blank" class="_"}.  (See the [Docker Machine driver for Oracle
 VirtualBox](drivers/virtualbox.md).)
@@ -87,10 +87,10 @@ Microsoft Hyper-V](drivers/hyper-v.md).)
   to install Docker Machine, VirtualBox is
   automatically installed.
 
-* If you used the Quickstart Terminal to launch your first machine and set your terminal environment to point to it, a default machine was automatically
-created. If this is the case, you can still follow along with these steps, but
-create another machine and name it something other than "default" (e.g., staging
-or sandbox).
+* If you used the Quickstart Terminal to launch your first machine and set your
+  terminal environment to point to it, a default machine was automatically
+  created. If so, you can still follow along with these steps, but
+  create another machine and name it something other than `default`.
 
 ##  Use Machine to run Docker containers
 
@@ -173,12 +173,12 @@ choose another name for this new machine.
         $ eval "$(docker-machine env default)"
 
       **Note**: If you are using `fish`, or a Windows shell such as
-      Powershell/`cmd.exe` the above method will not work as described.
+      Powershell/`cmd.exe`, the above method does not work as described.
       Instead, see [the `env` command's documentation](/machine/reference/env.md){: target="_blank" class="_"}
       to learn how to set the environment variables for your shell.
 
     This sets environment variables for the current shell that the Docker
-    client will read which specify the TLS settings. You need to do this
+    client reads which specify the TLS settings. You need to do this
     each time you open a new shell or restart your machine. (See also, how to
       [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).)
 
@@ -230,7 +230,7 @@ Run a container with `docker run` to verify your set up.
             <p>If you see this page, the nginx web server is successfully installed and
             working. Further configuration is required.</p>
 
-            <p>For online documentation and support please refer to
+            <p>For online documentation and support, refer to
             <a href="http://nginx.org/">nginx.org</a>.<br/>
             Commercial support is available at
             <a href="http://nginx.com/">nginx.com</a>.</p>
@@ -239,7 +239,7 @@ Run a container with `docker run` to verify your set up.
             </body>
             </html>
 
-  You can create and manage as many local VMs running Docker as you please; just run `docker-machine create` again. All created machines will appear in the output of `docker-machine ls`.
+  You can create and manage as many local VMs running Docker as your local resources permit; just run `docker-machine create` again. All created machines appear in the output of `docker-machine ls`.
 
 ## Start and stop machines
 
@@ -250,7 +250,7 @@ If you are finished using a host for the time being, you can stop it with `docke
 
 ## Operate on machines without specifying the name
 
-Some `docker-machine` commands will assume that the given operation should be run on a machine named `default` (if it exists) if no machine name is specified.  Because using a local VM named `default` is such a common pattern, this allows you to save some typing on the most frequently used Machine commands.
+Some `docker-machine` commands assume that the given operation should be run on a machine named `default` (if it exists) if no machine name is specified.  Because using a local VM named `default` is such a common pattern, this allows you to save some typing on the most frequently used Machine commands.
 
 For example:
 
@@ -355,17 +355,18 @@ shell to talk to different Docker engines.
 
 ## Start local machines on startup
 
-In order to ensure that the Docker client is automatically configured at the
-start of each shell session, some users like to embed `eval $(docker-machine env
-default)` in their shell profiles (e.g., the `~/.bash_profile` file). However,
-this fails if the `default` machine is not running. If desired, you can
-configure your system to start the `default` machine automatically.
+To ensure that the Docker client is automatically configured at the start of
+each shell session, you can embed `eval $(docker-machine env default)` in your
+shell profiles, by adding it to the `~/.bash_profile` file or the equivalent
+configuration file for your shell. However, this fails if a machine called
+`default` is not running. You can configure your system to start the `default`
+machine automatically. The following example shows how to do this in macOS.
 
-Here is an example of how to configure this on macOS.
 
-Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchAgents` with the following content:
+Create a file called `com.docker.machine.default.plist` in the
+`~/Library/LaunchAgents/` directory, with the following content:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -389,7 +390,8 @@ Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchA
 </plist>
 ```
 
-You can change the `default` string above to make this `LaunchAgent` start any  machine(s) you desire.
+You can change the `default` string above to make this `LaunchAgent` start a
+different machine.
 
 ## Where to go next
 

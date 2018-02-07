@@ -52,15 +52,15 @@ command and provide the following key:
 Store the key in a safe place, such as in a password manager.
 
 When Docker restarts, you need to
-[unlock the swarm](swarm_manager_locking.md#unlock-a-swarm). You will see an
-error like the following and services will not start.
+[unlock the swarm](swarm_manager_locking.md#unlock-a-swarm). A locked swarm
+causes an error like the following when you try to start or restart a service:
 
 ```bash
 $ sudo service docker restart
 
 $ docker service ls
 
-Error response from daemon: Swarm is encrypted and needs to be unlocked before it can be used. Please use "docker swarm unlock" to unlock it.
+Error response from daemon: Swarm is encrypted and needs to be unlocked before it can be used. Use "docker swarm unlock" to unlock it.
 ```
 
 ## Enable or disable autolock on an existing swarm
@@ -81,9 +81,9 @@ will not be able to restart the manager.
 ```
 
 To disable autolock, set `--autolock` to `false`. The mutual TLS key and the
-encryption key used to read and write Raft logs will be stored unencrypted on
+encryption key used to read and write Raft logs are stored unencrypted on
 disk. There is a trade-off between the risk of storing the encryption key
-unencrypted at rest and the convenience of being able to restart a swarm without
+unencrypted at rest and the convenience of restarting a swarm without
 needing to unlock each manager.
 
 ```bash
@@ -111,7 +111,7 @@ you locked the swarm or rotated the key, and the swarm unlocks.
 Consider a situation where your swarm is running as expected, then a manager
 node becomes unavailable. You troubleshoot the problem and bring the physical
 node back online, but you need to unlock the manager by providing the unlock
-key in order to read the encrypted credentials and Raft logs.
+key to read the encrypted credentials and Raft logs.
 
 If the key has not been rotated since the node left the swarm, and you have a
 quorum of functional manager nodes in the swarm, you can view the current unlock
@@ -154,5 +154,5 @@ will not be able to restart the manager.
 > **Warning**:
 > When you rotate the unlock key, keep a record of the old key
 > around for a few minutes, so that if a manager goes down before it gets the new
-> key, it may still be locked with the old one.
+> key, it may still be unlocked with the old one.
 {:.warning}

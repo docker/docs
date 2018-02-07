@@ -4,6 +4,13 @@
 *
 */
 
+.archive-panel {
+    padding: 10px 5px;
+    height: 100px;
+    width: 100%;
+    display: none;
+}
+
 .reading-time {
     font-style: italic;
     font-size: 12px;
@@ -11,12 +18,14 @@
     color: rgba(13, 86, 125, 0.55);
 }
 
+.break {
+    margin-bottom: 20px!important;
+}
 /*
 *
 * tables
 *
 */
-
 
 table {
     border: 1px solid rgba(204, 204, 204, 0.29);
@@ -41,12 +50,12 @@ td.th {
 }
 
 thead {
-    background: rgba(96, 125, 139, 0.16);
+    background: $table-head;
 }
 
 i.fa.fa-indent,
 i.fa.fa-outdent {
-    color: #fff;
+    color: $white;
     padding: 16px 15px 0 0;
     font-size: 1.5rem;
     opacity: 0.5;
@@ -69,26 +78,6 @@ img.inline {
     display: inline;
 }
 
-
-/*
-*
-* Bootstrap expand/collapse accordions
-*
-*/
-
-.panel-heading .chevron:after {
-    content: "\f0d8";
-}
-
-.panel-heading.collapsed .chevron:after {
-    content: "\f0d7";
-}
-
-.panel-heading:hover{
-    background-color: #fafdfe;
-}
-
-
 /*
 * Search *********************************************************************
 *
@@ -97,8 +86,8 @@ img.inline {
 
 .search-form {
     float: left;
-    margin: 5px 15px 0 0px;
-    width: 250px;
+    margin: 5px 0 0px;
+    // width: 200px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
         background-position: 10px 9px;
@@ -123,7 +112,7 @@ img.inline {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    width: 250px;
+    width: 100%;
 }
 
 .search-form input[type=text]:focus {
@@ -138,24 +127,6 @@ input[type=text],
     margin: 0;
 }
 
-.search-form input[type=text]::-webkit-input-placeholder {
-    color: #fff;
-}
-
-.search-form input[type=text]:-moz-placeholder {
-    /* Firefox 18- */
-    color: #fff;
-}
-
-.search-form input[type=text]::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #fff;
-}
-
-.search-form input[type=text]:-ms-input-placeholder {
-    color: #fff;
-}
-
 .nav-secondary-tabs .search-form input[type=search]:focus {
     background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
     background-position: 10px 9px;
@@ -167,28 +138,26 @@ input[type=text] {
     background-position: 10px 9px;
     border: 1px solid transparent;
     box-shadow: none;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
 
 .nav-secondary input[type=search] {
-    background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat;
+    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
     background-position: 10px 9px;
-    border: 1px solid transparent;
+    border: 0;
     box-shadow: none;
+    color: #fff;
     border-radius: 0;
-    // color: #fff;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
     padding: 0px 0 0 35px;
 }
 
 .nav-secondary .search-form input[type=search]:focus {
-    background: rgb(51, 112, 144) url(/images/search.png) no-repeat;
+    background: rgba(255,255,255,0.17) url(/images/search.png) no-repeat;
     background-position: 10px 9px;
-    border: 1px solid rgba(91, 149, 179, 0.44);
-    box-shadow: none;
-    color: #fff;
 }
 
 .search-form input[type=search]::-webkit-input-placeholder {
@@ -213,6 +182,24 @@ input[type=text] {
     opacity: 1;
 }
 
+// .search-form input[type=text]::-webkit-input-placeholder {
+//     color: #fff;
+// }
+
+// .search-form input[type=text]:-moz-placeholder {
+//     /* Firefox 18- */
+//     color: #fff;
+// }
+
+// .search-form input[type=text]::-moz-placeholder {
+//     /* Firefox 19+ */
+//     color: #fff;
+// }
+
+// .search-form input[type=text]:-ms-input-placeholder {
+//     color: #fff;
+// }
+
 /*
   *
   * autocompleteResults  **********************************************************
@@ -224,8 +211,9 @@ div#autocompleteResults {
 }
 
 div#autocompleteResults {
-    background: #f6fcff;
+    background: #E6F5FD;
     border: 1px solid #eee;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.28);
     padding: 20px 0 15px 0px;
     margin: 10px 0 0 0;
     position: absolute;
@@ -242,7 +230,7 @@ ul.autocompleteList {
 }
 
 div#autocompleteResults span {
-    background: #b8e2f9!important;
+    background: transparent!important;
     color: #518cad;
 }
 
@@ -254,21 +242,24 @@ div#autocompleteResults span {
 .autocompleteSelected {
   background-color: #f5f5f5;
 }
-.autocompleteList
-{
+
+.autocompleteList {
   list-style-type: none;
   width: 400px;
 /* commented out 0px padding to allow inherit padding, search results on autocompleteList were getting smashed up against left margin due to this */
 /*  padding:0px; */
   margin-bottom: 0px;
 }
+
 .autoCompleteResult {
-  border-bottom: 1px solid #6db9d1;
-  padding-bottom: 10px;
+    border-bottom: 1px solid rgba(203, 205, 209, 0.4);
+    padding: 15px;
 }
+
 #autocompleteShowAll {
-  padding-bottom: 10px;
+  padding: 20px 15px 0 0;
 }
+
 .autocompleteList li {
   width: 380px;
   border: 0px;
@@ -281,12 +272,71 @@ div#autocompleteResults span {
   *
   */
 
-
-// .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2,input.gsc-search-button {
-//     width: auto!important
-//     height: auto!important;
-// }
-
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
     display: none!important;
+}
+
+
+/*
+*
+* moved from temp css
+*
+*/
+
+@media print
+{
+    .footer
+    {
+        display: none !important;
+    }
+    .col-toc
+    {
+      display: none !important;
+    }
+    .col-nav
+    {
+      display: none !important;
+    }
+    .glyphicon-tags
+    {
+      display: none !important;
+    }
+    #ratings-div 
+    {
+      display: none !important;
+    }
+}
+
+.alert-info {
+    border: 0;
+    border-radius: 0;
+    color: #31708f;
+    background-color: #3F51B5!important;
+    border-color: #bce8f1;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.alert-info ul {
+  list-style-type: none;
+}
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fffdfd;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    margin: 10px 15px 0 0;
+}
+
+/* Make table headings  bold, give tables some breathing room */
+
+.content table {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

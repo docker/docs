@@ -60,7 +60,7 @@ these efforts.
 
 ## How do I know the Official Repositories are secure?
 
-Each of the imagse in the Official Repositories is scanned using Docker Cloud's
+Each of the images in the Official Repositories is scanned using Docker Cloud's
 [Security Scanning service](/docker-cloud/builds/image-scan/). The results of
 these security scans provide valuable information about which images contain
 security vulnerabilities, and allow you to choose images that align with your
@@ -90,8 +90,8 @@ questions should be directed to `#docker-library` on Freenode IRC.
 ## How do I create a new Official Repository?
 
 From a high level, an Official Repository starts out as a proposal in the form
-of a set of GitHub pull requests. You'll find detailed and objective proposal
-requirements in the following GitHub repositories:
+of a set of GitHub pull requests. Detailed and objective proposal
+requirements are documented in the following GitHub repositories:
 
 * [docker-library/official-images](https://github.com/docker-library/official-images)
 

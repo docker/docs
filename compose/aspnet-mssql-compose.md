@@ -9,14 +9,14 @@ Compose to set up and run the sample ASP.NET Core application using the
 [ASP.NET Core Build image](https://hub.docker.com/r/microsoft/aspnetcore-build/)
 with the
 [SQL Server on Linux image](https://hub.docker.com/r/microsoft/mssql-server-linux/).
-You just need to have [Docker Engine](https://docs.docker.com/engine/installation/)
-and [Docker Compose](https://docs.docker.com/compose/install/) installed on your
+You just need to have [Docker Engine](/install/index.md)
+and [Docker Compose](/compose/install/) installed on your
 platform of choice: Linux, Mac or Windows.
 
-For this sample, we will create a sample .NET Core Web Application using the
-`aspnetcore-build` Docker image. After that, we will create a `Dockerfile`,
+For this sample, we create a sample .NET Core Web Application using the
+`aspnetcore-build` Docker image. After that, we create a `Dockerfile`,
 configure this app to use our SQL Server database, and then create a
-`docker-compose.yml` that will define the behavior of all of these components.
+`docker-compose.yml` that defines the behavior of all of these components.
 
 > **Note**: This sample is made for Docker Engine on Linux. For Windows
 > Containers, visit
@@ -24,10 +24,10 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Create a new directory for your application.
 
-    This directory will be the context of your docker-compose project. For
-    [Docker for Windows](https://docs.docker.com/docker-for-windows/#/shared-drives) and
-    [Docker for Mac](https://docs.docker.com/docker-for-mac/#/file-sharing), you
-    have to set up file sharing for the volume that you need to map.
+    This directory is the context of your docker-compose project. For
+    [Docker for Windows](/docker-for-windows/#/shared-drives) and
+    [Docker for Mac](/docker-for-mac/#/file-sharing), you
+    need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `aspnetcore-build` Docker image to generate a
     sample web application within the container under the `/app` directory and
@@ -53,17 +53,17 @@ configure this app to use our SQL Server database, and then create a
     CMD /bin/bash ./entrypoint.sh
     ```
 
-    This file defines how to build the web app image. It will use the
+    This file defines how to build the web app image. It uses the
     [microsoft/aspnetcore-build](https://hub.docker.com/r/microsoft/aspnetcore-build/),
     map the volume with the generated code, restore the dependencies, build the
-    project and expose port 80. After that, it will call an `entrypoint` script
-    that we will create in the next step.
+    project and expose port 80. After that, it calls an `entrypoint` script
+    that we create in the next step.
 
 1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
     image. Create this script in a file called `entrypoint.sh` and paste the
     contents below.
 
-    > **Note**: Make sure to use UNIX line delimiters. The script won't work if
+    > **Note**: Make sure to use UNIX line delimiters. The script doesn't work if
     > you use Windows-based delimiters (Carriage return and line feed).
 
     ```bash
@@ -81,13 +81,13 @@ configure this app to use our SQL Server database, and then create a
     exec $run_cmd
     ```
 
-    This script will restore the database after it starts up, and then will run
+    This script restores the database after it starts up, and then runs
     the application. This allows some time for the SQL Server database image to
     start up.
 
 1.  Create a `docker-compose.yml` file. Write the following in the file, and
     make sure to replace the password in the `SA_PASSWORD` environment variable
-    under `db` below. This file will define the way the images will interact as
+    under `db` below. This file defines the way the images interact as
     independent services.
 
     > **Note**: The SQL Server container requires a secure password to startup:
@@ -145,8 +145,8 @@ configure this app to use our SQL Server database, and then create a
     }
     [...]
     ```
-    
-1.  Go to `app.csproj`. You will find a line like:
+
+1.  Go to `app.csproj`. You see a line like:
 
     ```
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" />
@@ -158,7 +158,7 @@ configure this app to use our SQL Server database, and then create a
     ```
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
     ```
-    
+
     The Sqlite dependency was at version 1.1.2 at the time of this writing. Use the same
     version for the SQL Server dependency.
 
@@ -170,8 +170,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 4GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker for Mac](https://docs.docker.com/docker-for-mac/#/advanced) and
-    [Docker for Windows](https://docs.docker.com/docker-for-windows/#/advanced).
+    [Docker for Mac](/docker-for-mac/#/advanced) and
+    [Docker for Windows](/docker-for-windows/#/advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able
@@ -183,7 +183,7 @@ configure this app to use our SQL Server database, and then create a
     $ docker-compose up
     ```
 
-    Go ahead and try out the website! This sample will use the SQL Server
+    Go ahead and try out the website! This sample uses the SQL Server
     database image in the back-end for authentication.
 
 Ready! You now have a ASP.NET Core application running against SQL Server in

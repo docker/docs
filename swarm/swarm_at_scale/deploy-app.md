@@ -1,7 +1,7 @@
 ---
 advisory: swarm-standalone
 hide-from-sitemap: true
-description: Try Swarm at scale
+description: Try swarm at scale
 keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
 - /swarm/swarm_at_scale/04-deploy-app/
@@ -9,7 +9,7 @@ title: Deploy the application
 ---
 
 You've
-[deployed the load balancer, the discovery backend, and a Swarm cluster](deploy-infra.md)
+[deployed the load balancer, the discovery backend, and a swarm cluster](deploy-infra.md)
 so now you can build and deploy the voting application itself. You do this by
 starting a number of "Dockerized applications" running in containers.
 
@@ -18,7 +18,7 @@ container network, `voteapp`.
 
 ![Voteapp deployment overview](/swarm/images/final-result.png)
 
-In this procedure you will connect containers to this network. The `voteapp`
+In this procedure you connect containers to this network. The `voteapp`
 network is available to all Docker hosts using the Consul discovery backend.
 Notice that the `interlock`, `nginx`, `consul`, and `swarm manager` containers
 on are not part of the `voteapp` overlay container network.
@@ -26,10 +26,10 @@ on are not part of the `voteapp` overlay container network.
 ## Task 1. Set up volume and network
 
 This application relies on both an overlay container network and a container
-volume. The Docker Engine provides these two features. You'll create them both
-on the Swarm `manager` instance.
+volume. The Docker Engine provides these two features. Create them both
+on the swarm manager instance.
 
-1. Direct your local environment to the Swarm manager host.
+1. Direct your local environment to the swarm manager host.
 
    ```bash
    $ eval $(docker-machine env manager)
@@ -84,7 +84,7 @@ images and which do not:
 
 You can launch these containers from any host in the cluster using the commands
 in this section. Each command includes a `-H `flag so that they execute against
-the Swarm manager.
+the swarm manager.
 
 The commands also all use the `-e` flag which is a Swarm constraint. The
 constraint tells the manager to look for a node with a matching function label.
@@ -163,7 +163,7 @@ command below, look for the value constraint.
 ## Task 3. Check your work and update /etc/hosts
 
 In this step, you check your work to make sure the Nginx configuration recorded
-the containers correctly. You'll update your local systems `/etc/hosts` file to
+the containers correctly. Update your local system's `/etc/hosts` file to
 allow you to take advantage of the loadbalancer.
 
 1. Change to the `loadbalancer` node.
@@ -174,7 +174,7 @@ allow you to take advantage of the loadbalancer.
 2. Check your work by reviewing the configuration of nginx.
 
    ```html
-   $ docker exec interlock cat /etc/conf/nginx.conf
+   $ docker container exec interlock cat /etc/conf/nginx.conf
    ... output snipped ...
 
    upstream results.myenterprise.example.com {
@@ -245,7 +245,7 @@ Now, you can test your application.
 3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
 4. Try changing your vote.
 
-    You'll see both sides change as you switch your vote.
+    Both sides change as you switch your vote.
 
     ![Voting and results page](/swarm/images/votes.gif)
 
@@ -266,7 +266,7 @@ the containers at once. This extra credit
 
         $ DOCKER_HOST=$(docker-machine ip manager):3376
 
-    b. List all the application containers on the Swarm.
+    b. List all the application containers on the swarm.
 
     c. Stop and remove each container.
 
@@ -306,7 +306,7 @@ the containers at once. This extra credit
 
 4. When you are satisfied, save the `docker-compose.yml` file to your system.
 
-5. Set `DOCKER_HOST` to the Swarm manager.
+5. Set `DOCKER_HOST` to the swarm manager.
 
    ```bash
    $ DOCKER_HOST=$(docker-machine ip manager):3376
@@ -350,7 +350,7 @@ the containers at once. This extra credit
    Creating scale_result-app_1
    ```
 
-7. Use the `docker ps` command to see the containers on the Swarm cluster.
+7. Use the `docker ps` command to see the containers on the swarm cluster.
 
    ```bash
    $ docker -H $(docker-machine ip manager):3376 ps
@@ -416,7 +416,7 @@ the containers at once. This extra credit
 ## Next steps
 
 Congratulations. You have successfully walked through manually deploying a
-microservice-based application to a Swarm cluster. Of course, not every
+microservice-based application to a swarm cluster. Of course, not every
 deployment goes smoothly. Now that you've learned how to successfully deploy an
 application at scale, you should learn [what to consider when troubleshooting
-large applications running on a Swarm cluster](troubleshoot.md).
+large applications running on a swarm cluster](troubleshoot.md).

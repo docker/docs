@@ -12,12 +12,9 @@ You can also uninstall Docker Universal Control plane from your cluster. In this
 case the UCP services are stopped and removed, but your Docker Engines will
 continue running in swarm mode. You applications will continue running normally.
 
-After you uninstall UCP from the cluster, you'll no longer be able to enforce
-role-based access control to the cluster, or have a centralized way to monitor
-and manage the cluster.
-
-WARNING: After uninstalling UCP from the cluster, you will no longer be able to
-join new nodes using `docker swarm join` unless you reinstall UCP.
+After you uninstall UCP from the cluster, you can't enforce role-based access
+control to the cluster or centrally monitor and manage the cluster. You can
+no longer join new nodes to the cluster using `docker swarm join`.
 
 To uninstall UCP, log in into a manager node using ssh, and run:
 

@@ -20,7 +20,7 @@ For more details, find the June post in the [release notes category](https://for
 
 ## Docker Cloud May 2016 release notes
 
-In our May 2016 release, we introduced a new user interface for Docker Cloud. Please try it out and share your feedback in the [Docker Cloud Product Forums](https://forums.docker.com/c/docker-cloud)!
+In our May 2016 release, we introduced a new user interface for Docker Cloud. Try it out and share your feedback in the [Docker Cloud Product Forums](https://forums.docker.com/c/docker-cloud)!
 
 ### Added
 

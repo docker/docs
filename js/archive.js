@@ -7,7 +7,7 @@ if (window.navigator.onLine) {
   var suppressButterBar = false;
   /* This JSON file contains a current list of all docs versions of Docker */
   $.getJSON("/js/archives.json", function(result){
-    var outerDivStart = '<div style="padding-top: 10px; padding-bottom: 10px; min-height: 34px; border: 1px solid #254356; background-color: #FFE1C0; color: #254356"><div class="container"><div style="text-align: center"><span id="archive-list">This is <b><a href="https://docs.docker.com/docsarchive/" style="color: #254356; text-decoration: underline !important">archived documentation</a></b> for Docker&nbsp;' + dockerVersion + '. Go to the <a style="color: #254356; text-decoration: underline !important" href="https://docs.docker.com/">latest docs</a> or a different version:&nbsp;&nbsp;</span>' +
+    var outerDivStart = '<div id="archive-butterbar"><div class="container"><div style="text-align: center"><span id="archive-list">This is <b><a href="https://docs.docker.com/docsarchive/" style="color: #254356; text-decoration: underline !important">archived documentation</a></b> for Docker&nbsp;' + dockerVersion + '. Go to the <a style="color: #254356; text-decoration: underline !important" href="https://docs.docker.com/">latest docs</a> or a different version:&nbsp;&nbsp;</span>' +
                                '<span style="z-index: 1001" class="dropdown">';
     var listStart = '<ul class="dropdown-menu" role="menu" aria-labelledby="archive-menu">';
     var listEnd = '</ul>';
@@ -31,6 +31,7 @@ if (window.navigator.onLine) {
         }
       }
     });
+
     // only append the butterbar if we are NOT the current version
     // Also set the isArchive variable to true if it's an archive. It defaults
     // to true, set in _layouts/docs.html. We default to true because it looks
@@ -38,12 +39,20 @@ if (window.navigator.onLine) {
     if ( suppressButterBar == false ) {
       $( 'body' ).prepend(outerDivStart + buttonCode + listStart + listItems.join("") + listEnd + outerDivEnd);
       isArchive = true;
+      // If the butterbar exists, deal with positioning it
+      // Depends on some logic in _layout/docs.html
+      $(document).scroll(function() {
+        if ( $( 'nav' ).hasClass( 'affix' ) ) {
+          $('#archive-butterbar').addClass('fixed').removeClass('top');
+        } else {
+          $('#archive-butterbar').addClass('top').removeClass('fixed');
+        }
+      });
     } else {
       isArchive = false;
       /* This is only relevant to /enterprise/index.md */
       if (document.getElementById('ee-version-div')) {
         document.getElementById('ee-version-div').textContent += "The latest version of Docker EE is {{ site.docker_ee_version }}.";
       }
-    }
-  });
+    }  });
 }

@@ -30,13 +30,13 @@ The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
-A [container](/engine/reference/glossary.md#container) definition contains configuration which will be applied to each
+A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
-As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
-`EXPOSE`, `VOLUME`, `ENV`) are respected by default - you don't need to
+As with `docker run`, options specified in the Dockerfile, such as `CMD`,
+`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like
@@ -126,7 +126,7 @@ with the `webapp` and optional `tag` specified in `image`:
     build: ./dir
     image: webapp:tag
 
-This will result in an image named `webapp` and tagged `tag`, built from `./dir`.
+This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 
 #### context
 
@@ -139,7 +139,7 @@ When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
 
-Compose will build and tag it with a generated name, and use that image thereafter.
+Compose builds and tags it with a generated name, and use that image thereafter.
 
     build:
       context: ./dir
@@ -148,7 +148,7 @@ Compose will build and tag it with a generated name, and use that image thereaft
 
 Alternate Dockerfile.
 
-Compose will use an alternate file to build with. A build path must also be
+Compose uses an alternate file to build with. A build path must also be
 specified.
 
     build:
@@ -203,7 +203,7 @@ Add hostname mappings at build-time. Use the same values as the docker client `-
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
-An entry with the ip address and hostname will be created in `/etc/hosts` inside containers for this build, e.g:
+An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this build, e.g:
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
@@ -237,7 +237,7 @@ those used by other software.
 
 > Added in [version 2.2](compose-versioning.md#version-22) file format
 
-Set the network containers will connect to for the `RUN` instructions during
+Set the network containers connect to for the `RUN` instructions during
 build.
 
     build:
@@ -332,11 +332,11 @@ client create option.
 
 Express dependency between services, which has two effects:
 
-- `docker-compose up` will start services in dependency order. In the following
-  example, `db` and `redis` will be started before `web`.
+- `docker-compose up` starts services in dependency order. In the following
+  example, `db` and `redis` are started before `web`.
 
-- `docker-compose up SERVICE` will automatically include `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` will also
+- `docker-compose up SERVICE` automatically include `SERVICE`'s
+  dependencies. In the following example, `docker-compose up web` also
   create and start `db` and `redis`.
 
 Simple example:
@@ -353,7 +353,7 @@ Simple example:
       db:
         image: postgres
 
-> **Note**: `depends_on` will not wait for `db` and `redis` to be "ready" before
+> **Note**: `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
@@ -361,8 +361,8 @@ Simple example:
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
 
 A healthcheck indicates that you want a dependency to wait
-for another container to be "healthy" (i.e. its healthcheck advertises a
-successful state) before starting.
+for another container to be "healthy" (as indicated by a successful state from
+the healthcheck) before starting.
 
 Example:
 
@@ -382,7 +382,7 @@ Example:
         healthcheck:
           test: "exit 0"
 
-In the above example, Compose will wait for the `redis` service to be started
+In the above example, Compose waits for the `redis` service to be started
 (legacy behavior) and the `db` service to be healthy before starting `web`.
 
 See the [healthcheck section](#healthcheck) for complementary
@@ -440,10 +440,10 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note**: Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` both overrides any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clear out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it will be ignored.
+> clears out any default command on the image - meaning that if there's a `CMD`
+> instruction in the Dockerfile, it is ignored.
 
 ### env_file
 
@@ -464,19 +464,20 @@ empty or undefined.
       - /opt/secrets.env
 
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
-beginning with `#` (i.e. comments) are ignored, as are blank lines.
+beginning with `#` are processed as comments and are ignored. Blank lines are
+also ignored.
 
     # Set Rails/Rack environment
     RACK_ENV=development
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files will _not_ be automatically visible during the
+> defined in environment files are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
-quotes will be included in the value passed to Compose.
+quotes are included in the value passed to Compose.
 
 Keep in mind that _the order of files in the list is significant in determining
 the value assigned to a variable that shows up more than once_. The files in the
@@ -507,7 +508,7 @@ and
 VAR=hello
 ```
 
-$VAR will be `hello`.
+$VAR is `hello`.
 
 ### environment
 
@@ -529,7 +530,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SESSION_SECRET
 
 > **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` will _not_ be automatically visible during the
+> defined in `environment` are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
@@ -595,7 +596,7 @@ Add hostname mappings. Use the same values as the docker client `--add-host` par
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
-An entry with the ip address and hostname will be created in `/etc/hosts` inside containers for this service, e.g:
+An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
@@ -603,7 +604,7 @@ An entry with the ip address and hostname will be created in `/etc/hosts` inside
 ### group_add
 
 Specify additional groups (by name or number) which the user inside the
-container will be a member of. Groups must exist in both the container and the
+container should be a member of. Groups must exist in both the container and the
 host system to be added. An example of where this is useful is when multiple
 containers (running as different users) need to all read or write the same
 file on the host system. That file can be owned by a group shared by all the
@@ -622,7 +623,7 @@ services:
       - mail
 ```
 
-Running `id` inside the created container will show that the user belongs to
+Running `id` inside the created container shows that the user belongs to
 the `mail` group, which would not have been the case if `group_add` were not
 used.
 
@@ -741,7 +742,7 @@ a link alias (`"SERVICE:ALIAS"`), or just the service name.
        - "db:database"
        - "redis"
 
-Containers for the linked service will be reachable at a hostname identical to
+Containers for the linked service are reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
@@ -772,7 +773,7 @@ The default value is json-file.
     driver: "none"
 
 > **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
-> `docker-compose up` and `docker-compose logs`. Using any other driver will not
+> `docker-compose up` and `docker-compose logs`. Using any other driver does not
 > print any logs.
 
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
@@ -815,7 +816,7 @@ Aliases (alternative hostnames) for this service on the network. Other container
 
 Since `aliases` is network-scoped, the same service can have different aliases on different networks.
 
-> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name will resolve to is not guaranteed.
+> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
 
 The general format is shown here.
 
@@ -922,12 +923,12 @@ Example usage:
     pid: "service:foobar"
 
 If set to one of the following forms: `container:<container_name>`,
-`service:<service_name>`, the service will share the PID address space of the
+`service:<service_name>`, the service shares the PID address space of the
 designated container or service.
 
-If set to "host", the service's PID mode will be the host PID mode.  This turns
+If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
-space. Containers launched with this flag will be able to access and manipulate
+space. Containers launched with this flag can access and manipulate
 other containers in the bare-metal machine's namespace and vise-versa.
 
 > **Note**: the `service:` and `container:` forms require
@@ -945,11 +946,11 @@ Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
-port (a random host port will be chosen).
+port (an ephemeral host port is chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
-> erroneous results when using a container port lower than 60, because YAML will
-> parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
+> erroneous results when using a container port lower than 60, because YAML
+> parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 
     ports:
@@ -968,7 +969,7 @@ port (a random host port will be chosen).
 > [Added in version 2.2 file format](compose-versioning.md#version-22)
 
 Specify the default number of containers to deploy for this service. Whenever
-you run `docker-compose up`, Compose will create or remove containers to match
+you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
 [`--scale`](/compose/reference/up.md) flag.
 
@@ -1001,7 +1002,7 @@ SIGKILL.
 ### stop_signal
 
 Sets an alternative signal to stop the container. By default `stop` uses
-SIGTERM. Setting an alternative signal using `stop_signal` will cause
+SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
 
     stop_signal: SIGUSR1
@@ -1057,7 +1058,7 @@ more information.
 Mount host folders or named volumes. Named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
 
-You can mount a relative path on the host, which will expand relative to
+You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 
@@ -1065,7 +1066,7 @@ should always begin with `.` or `..`.
 
 The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where
 `SOURCE` can be either a host path or volume name. `TARGET` is the container
-path where the volume will be mounted. Standard modes are `ro` for read-only
+path where the volume is mounted. Standard modes are `ro` for read-only
 and `rw` for read-write (default).
 
     volumes:
@@ -1095,7 +1096,7 @@ expressed in the short form.
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
   [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
-- `target`: the path in the container where the volume will be mounted
+- `target`: the path in the container where the volume is mounted
 - `read_only`: flag to set the volume as read-only
 - `bind`: configure additional bind options
   - `propagation`: the propagation mode used for the bind
@@ -1129,8 +1130,8 @@ volumes:
 ```
 
 > **Note:** When creating bind mounts, using the long syntax requires the
-> referenced folder to be created beforehand. Using the short syntax will
-> create the folder on the fly if it doesn't exist.
+> referenced folder to be created beforehand. Using the short syntax
+> creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
 > for more information.
 
@@ -1142,7 +1143,7 @@ service.
     volume_driver: mydriver
 
 > **Note:** In [version 2 files](compose-versioning.md#version-2), this
-> option will only apply to anonymous volumes (those specified in the image,
+> option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
 > entry in the [top-level `volumes` option](#volume-configuration-reference).
@@ -1155,7 +1156,7 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 
 Mount all of the volumes from another service or container, optionally
 specifying read-only access (``ro``) or read-write (``rw``). If no access level is specified,
-then read-write will be used.
+then read-write is used.
 
     volumes_from:
      - service_name
@@ -1178,7 +1179,7 @@ then read-write will be used.
 
 ### restart
 
-`no` is the default restart policy, and it will not restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+`no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
       - restart: no
       - restart: always
@@ -1253,7 +1254,7 @@ that looks like this:
     1gb
 
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
-`mb` and `gb`. Please note that decimal values are not supported at this time.
+`mb` and `gb`. Decimal values are not supported at this time.
 
 ## Volume configuration reference
 
@@ -1283,15 +1284,15 @@ up:
     volumes:
       data-volume:
 
-An entry under the top-level `volumes` key can be empty, in which case it will
-use the default driver configured by the Engine (in most cases, this is the
+An entry under the top-level `volumes` key can be empty, in which case it
+uses the default driver configured by the Engine (in most cases, this is the
 `local` driver). Optionally, you can configure it with the following keys:
 
 ### driver
 
 Specify which volume driver should be used for this volume. Defaults to whatever
 driver the Docker Engine has been configured to use, which in most cases is
-`local`. If the driver is not available, the Engine will return an error when
+`local`. If the driver is not available, the Engine returns an error when
 `docker-compose up` tries to create the volume.
 
      driver: foobar
@@ -1309,14 +1310,14 @@ documentation for more information. Optional.
 ### external
 
 If set to `true`, specifies that this volume has been created outside of
-Compose. `docker-compose up` will not attempt to create it, and will raise
+Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other volume configuration keys
 (`driver`, `driver_opts`).
 
 In the example below, instead of attempting to create a volume called
-`[projectname]_data`, Compose will look for an existing volume simply
+`[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
     version: '2'
@@ -1394,10 +1395,10 @@ explanation of Compose's use of Docker networking features, see the
 Specify which driver should be used for this network.
 
 The default driver depends on how the Docker Engine you're using is configured,
-but in most instances it will be `bridge` on a single host and `overlay` on a
+but in most instances it is `bridge` on a single host and `overlay` on a
 Swarm.
 
-The Docker Engine will return an error if the driver is not available.
+The Docker Engine returns an error if the driver is not available.
 
     driver: overlay
 
@@ -1478,15 +1479,15 @@ conflicting with those used by other software.
 ### external
 
 If set to `true`, specifies that this network has been created outside of
-Compose. `docker-compose up` will not attempt to create it, and will raise
+Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other network configuration keys
 (`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
-attempting to create a network called `[projectname]_outside`, Compose will
-look for an existing network simply called `outside` and connect the `proxy`
+attempting to create a network called `[projectname]_outside`, Compose
+looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
     version: '2'

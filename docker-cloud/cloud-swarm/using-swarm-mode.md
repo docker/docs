@@ -24,7 +24,7 @@ Docker Cloud!
 
 ### Already a Docker Cloud user?
 
-If you are already a Docker Cloud user, you will still have access to legacy
+If you are already a Docker Cloud user, you still have access to legacy
 features for managing [node clusters](/docker-cloud/infrastructure/). You also
 have the option to switch to the Beta Swarm Mode interface. Swarm management
 replaces node cluster management features when Swarm Mode is enabled.
@@ -37,7 +37,7 @@ Click the **Swarm Mode** toggle to enable the Swarm Mode interface.
 
 You can switch between node cluster and Swarm Mode at any time, and enabling
 Swarm Mode does _not_ remove or disconnect existing node clusters. The content,
-stacks, and node clusters you already created will be available to you and
+stacks, and node clusters you already created are available to you and
 collaborators.
 
 ## Swarm Mode and organizations
@@ -49,7 +49,7 @@ swarms they need. If necessary, you can create new teams to manage beta swarm
 access.
 
 If you use Swarm Mode as a member of a team other than the `owners` team,
-you will only see the swarms that you have been granted access to.
+you only see the swarms that you have been granted access to.
 
 Members of the `owners` team must switch to the Swarm Mode Docker Cloud
 interface to grant teams access to an organization's swarms. Swarms only appear

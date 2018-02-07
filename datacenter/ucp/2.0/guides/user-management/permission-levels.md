@@ -23,8 +23,8 @@ cluster settings. This includes:
 Regular users can't change cluster settings, and they are assigned with a
 default permission level.
 
-The default permission level specify the permission a user has to access or
-edit resources. You can choose from four permission levels that range from no
+The default permission level specify resources a user has access to create or
+edit. You can choose from four permission levels that range from no
 access to full control over the resources.
 
 | Default permission level | Description                                                                                                                                                                                                  |
@@ -37,8 +37,8 @@ access to full control over the resources.
 When a user only has a default permission assigned, only them and admin
 users can see the containers they deploy in the cluster.
 
-**NOTE**: Full-control users can utilize host-mounted volumes, which can potentially gain 
- access to sensitive material on the cluster. We recommend giving full-control permissions 
+**NOTE**: Full-control users can utilize host-mounted volumes, which can potentially gain
+ access to sensitive material on the cluster. We recommend giving full-control permissions
  to users you would trust with admin-level access.
 
 ## Team permission levels

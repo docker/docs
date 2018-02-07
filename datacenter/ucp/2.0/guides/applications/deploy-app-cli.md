@@ -12,7 +12,7 @@ application.
 ## Get a client certificate bundle
 
 Docker UCP secures your Docker swarm with role-based access control, so that only
-authorized users can deploy applications. To be able to run
+authorized users can deploy applications. To run
 Docker commands on a swarm managed by UCP, you need to configure your Docker CLI
 client to authenticate to UCP using client certificates.
 

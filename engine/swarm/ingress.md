@@ -11,7 +11,7 @@ accept connections on published ports for any service running in the swarm, even
 if there's no task running on the node. The routing mesh routes all
 incoming requests to published ports on available nodes to an active container.
 
-In order to use the ingress network in the swarm, you need to have the following
+To use the ingress network in the swarm, you need to have the following
 ports open between the swarm nodes before you enable swarm mode:
 
 * Port `7946` TCP/UDP for container network discovery.
@@ -26,10 +26,10 @@ service.
 ## Publish a port for a service
 
 Use the `--publish` flag to publish a port when you create a service. `target`
-is the port inside the container, and `publish` is the port to bind on the
-routing mesh. If you leave off the `publish` port, a random high-numbered port is
-bound for each service task. You will need to inspect the task to determine the
-port.
+is used to specify the port inside the container, and `published` is used to
+specify the port to bind on the routing mesh. If you leave off the `published`
+port, a random high-numbered port is bound for each service task. You
+need to inspect the task to determine the port.
 
 ```bash
 $ docker service create \
@@ -164,9 +164,9 @@ given node, you are always accessing the instance of the service running on
 that node. This is referred to as `host` mode. There are a few things to keep
 in mind.
 
-- If you access a node which is not running a service task, the service will not
-  be listening on that port. It is possible that nothing will be listening, or
-  that a completely different application will be listening.
+- If you access a node which is not running a service task, the service does not
+  listen on that port. It is possible that nothing is listening, or
+  that a completely different application is listening.
 
 - If you expect to run multiple service tasks on each node (such as when you
   have 5 nodes but run 10 replicas), you cannot specify a static target port.

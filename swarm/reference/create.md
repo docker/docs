@@ -11,7 +11,7 @@ The `create` command uses Docker Hub's hosted discovery backend to create a uniq
     $ docker run --rm  swarm create
     86222732d62b6868d441d430aee4f055
 
-Later, when you use [`manage`](manage.md) or [`join`](join.md) to create Swarm managers and nodes, you use the discovery token in the `<discovery>` argument (e.g., `token://86222732d62b6868d441d430aee4f055`). The discovery backend registers each new Swarm manager and node that uses the token as a member of your cluster.
+Later, when you use [`manage`](manage.md) or [`join`](join.md) to create Swarm managers and nodes, you use the discovery token in the `<discovery>` argument. For instance, `token://86222732d62b6868d441d430aee4f055`. The discovery backend registers each new Swarm manager and node that uses the token as a member of your cluster.
 
 Some documentation also refers to the discovery token as a *cluster_id*.
 

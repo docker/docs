@@ -84,11 +84,14 @@ You can remove a container from a network by disconnecting the container. To do 
 
     $ docker network disconnect bridge networktest
 
-While you can disconnect a container from a network, you cannot remove the builtin `bridge` network named `bridge`. Networks are natural ways to isolate containers from other containers or other networks. So, as you get more experienced with Docker, you'll want to create your own networks.
+While you can disconnect a container from a network, you cannot remove the
+builtin `bridge` network named `bridge`. Networks are natural ways to isolate
+containers from other containers or other networks. So, as you get more
+experienced with Docker, create your own networks.
 
 ## Create your own bridge network
 
-Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, you'll create a bridge network:
+Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, create a bridge network:
 
     $ docker network create -d bridge my_bridge
 
@@ -102,7 +105,7 @@ The `-d` flag tells Docker to use the `bridge` driver for the new network. You c
     18a2866682b8        none                null
     c288470c46f6        host                host
 
-If you inspect the network, you'll find that it has nothing in it.
+If you inspect the network, it has nothing in it.
 
     $ docker network inspect my_bridge
 
@@ -137,7 +140,7 @@ Launch a container running a PostgreSQL database and pass it the `--net=my_bridg
 
     $ docker run -d --net=my_bridge --name db training/postgres
 
-If you inspect your `my_bridge` you'll see it has a container attached.
+If you inspect your `my_bridge` you can see it has a container attached.
 You can also inspect your container to see where it is connected:
 
     {% raw %}
@@ -153,7 +156,7 @@ Now, go ahead and start your by now familiar web application. This time don't sp
 
 ![bridge2](bridge2.png)
 
-Which network is your `web` application running under? Inspect the application and you'll find it is running in the default `bridge` network.
+Which network is your `web` application running under? Inspect the application to verify that it is running in the default `bridge` network.
 
     {% raw %}
     $ docker inspect --format='{{json .NetworkSettings.Networks}}'  web
@@ -172,7 +175,7 @@ Then, get the IP address of your `web`
 
 Now, open a shell to your running `db` container:
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping 172.17.0.2
     ping 172.17.0.2
@@ -181,7 +184,7 @@ Now, open a shell to your running `db` container:
     --- 172.17.0.2 ping statistics ---
     44 packets transmitted, 0 received, 100% packet loss, time 43185ms
 
-After a bit, use `CTRL-C` to end the `ping` and you'll find the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the `exit` command to close the container.
+After a bit, use `CTRL-C` to end the `ping` and notice that the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the `exit` command to close the container.
 
 Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running `web` app to the `my_bridge`.
 
@@ -192,7 +195,7 @@ Docker networking allows you to attach a container to as many networks as you li
 
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping web
     PING web (10.0.0.2) 56(84) bytes of data.

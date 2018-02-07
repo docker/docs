@@ -224,6 +224,12 @@ options:
   description: Do not use cache when building the image
   deprecated: false
   experimental: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
 - option: pull
   value_type: bool
   default_value: "false"
@@ -406,35 +412,52 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   stage by name as a final stage for the resulting\nimage. Commands after the target
   stage will be skipped.\n\n```Dockerfile\nFROM debian AS build-env\n...\n\nFROM alpine
   AS production-env\n...\n```\n\n```bash\n$ docker build -t mybuildimage --target
-  build-env .\n```\n\n### Squash an image's layers (--squash) **Experimental Only**\n\n####
+  build-env .\n```\n\n### Squash an image's layers (--squash) (experimental)\n\n####
   Overview\n\nOnce the image is built, squash the new layers into a new image with
   a single\nnew layer. Squashing does not destroy any existing image, rather it creates
   a new\nimage with the content of the squashed layers. This effectively makes it
   look\nlike all `Dockerfile` commands were created with a single layer. The build\ncache
-  is preserved with this method.\n\n**Note**: using this option means the new image
-  will not be able to take\nadvantage of layer sharing with other images and may use
-  significantly more\nspace.\n\n**Note**: using this option you may see significantly
-  more space used due to\nstoring two copies of the image, one for the build cache
-  with all the cache\nlayers in tact, and one for the squashed version.\n\n#### Prerequisites\n\nThe
-  example on this page is using experimental mode in Docker 1.13.\n\nExperimental
+  is preserved with this method.\n\nThe `--squash` option is an experimental feature,
+  and should not be considered\nstable.\n\n\nSquashing layers can be beneficial if
+  your Dockerfile produces multiple layers\nmodifying the same files, for example,
+  file that are created in one step, and\nremoved in another step. For other use-cases,
+  squashing images may actually have\na negative impact on performance; when pulling
+  an image consisting of multiple\nlayers, layers can be pulled in parallel, and allows
+  sharing layers between\nimages (saving space).\n\nFor most use cases, multi-stage
+  are a better alternative, as they give more\nfine-grained control over your build,
+  and can take advantage of future\noptimizations in the builder. Refer to the [use
+  multi-stage builds](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)\nsection
+  in the userguide for more information.\n\n\n#### Known limitations\n\nThe `--squash`
+  option has a number of known limitations:\n\n- When squashing layers, the resulting
+  image cannot take advantage of layer \n  sharing with other images, and may use
+  significantly more space. Sharing the\n  base image is still supported.\n- When
+  using this option you may see significantly more space used due to\n  storing two
+  copies of the image, one for the build cache with all the cache\n  layers in tact,
+  and one for the squashed version.\n- While squashing layers may produce smaller
+  images, it may have a negative\n  impact on performance, as a single layer takes
+  longer to extract, and\n  downloading a single layer cannot be parallelized.\n-
+  When attempting to squash an image that does not make changes to the\n  filesystem
+  (for example, the Dockerfile only contains `ENV` instructions),\n  the squash step
+  will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)\n\n####
+  Prerequisites\n\nThe example on this page is using experimental mode in Docker 1.13.\n\nExperimental
   mode can be enabled by using the `--experimental` flag when starting the Docker
   daemon or setting `experimental: true` in the `daemon.json` configuration file.\n\nBy
   default, experimental mode is disabled. To see the current configuration, use the
-  `docker version` command.\n\n```none\n\nServer:\n Version:      1.13.1\n API version:
+  `docker version` command.\n\n```none\nServer:\n Version:      1.13.1\n API version:
   \ 1.26 (minimum version 1.12)\n Go version:   go1.7.5\n Git commit:   092cba3\n
   Built:        Wed Feb  8 06:35:24 2017\n OS/Arch:      linux/amd64\n Experimental:
-  false\n\n [...]\n\n```\n\nTo enable experimental mode, users need to restart the
-  docker daemon with the experimental flag enabled.\n\n#### Enable Docker experimental\n\nExperimental
+  false\n\n [...]\n```\n\nTo enable experimental mode, users need to restart the docker
+  daemon with the experimental flag enabled.\n\n#### Enable Docker experimental\n\nExperimental
   features are now included in the standard Docker binaries as of version 1.13.0.
   For enabling experimental features, you need to start the Docker daemon with `--experimental`
-  flag. You can also enable the daemon flag via /etc/docker/daemon.json. e.g.\n\n```\n\n{\n
-  \   \"experimental\": true\n}\n\n```\nThen make sure the experimental flag is enabled:\n\n```bash\n\n$
-  docker version -f '{{.Server.Experimental}}'\ntrue\n\n```\n\n#### Build an image
-  with `--squash` argument\n\nThe following is an example of docker build with `--squash`
-  argument\n\n```Dockerfile\n\nFROM busybox\nRUN echo hello > /hello\nRUN echo world
-  >> /hello\nRUN touch remove_me /remove_me\nENV HELLO world\nRUN rm /remove_me\n\n```\nAn
-  image named `test` is built with `--squash` argument.\n\n```bash\n\n$ docker build
-  --squash -t test .\n\n[...]\n\n```\n\nIf everything is right, the history will look
+  flag. You can also enable the daemon flag via /etc/docker/daemon.json. e.g.\n\n```json\n{\n
+  \   \"experimental\": true\n}\n```\n\nThen make sure the experimental flag is enabled:\n\n```bash\n$
+  docker version -f '{{.Server.Experimental}}'\ntrue\n```\n\n#### Build an image with
+  `--squash` argument\n\nThe following is an example of docker build with `--squash`
+  argument\n\n```Dockerfile\nFROM busybox\nRUN echo hello > /hello\nRUN echo world
+  >> /hello\nRUN touch remove_me /remove_me\nENV HELLO world\nRUN rm /remove_me\n```\n\nAn
+  image named `test` is built with `--squash` argument.\n\n```bash\n$ docker build
+  --squash -t test .\n\n[...]\n```\n\nIf everything is right, the history will look
   like this:\n\n```bash\n$ docker history test \n\nIMAGE               CREATED             CREATED
   BY                                      SIZE                COMMENT\n4e10cb5b4cac
   \       3 seconds ago                                                       12 B
@@ -447,7 +470,7 @@ examples: "### Build with PATH\n\n```bash\n$ docker build .\n\nUploading context
   /hello                 0 B\n<missing>           6 minutes ago       /bin/sh -c echo
   hello > /hello                  0 B\n<missing>           7 weeks ago         /bin/sh
   -c #(nop) CMD [\"sh\"]                    0 B\n<missing>           7 weeks ago         /bin/sh
-  -c #(nop) ADD file:47ca6e777c36a4cfff   1.113 MB\n\n```\nWe could find that all
+  -c #(nop) ADD file:47ca6e777c36a4cfff   1.113 MB\n```\n\nWe could find that all
   layer's name is `<missing>`, and there is a new layer with COMMENT `merge`.\n\nTest
   the image, check for `/remove_me` being gone, make sure `hello\\nworld` is in `/hello`,
   make sure the `HELLO` envvar's value is `world`."

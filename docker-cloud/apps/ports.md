@@ -13,7 +13,7 @@ containers, just like you can in Docker Engine (as documented
 * **Exposed ports** are ports that a container or service is using either to
 provide a service, or listen on. By default, exposed ports in Docker Cloud are
 only privately accessible. This means only other services that are linked to
-the service which is exposing the ports will be able to communicate over the
+the service which is exposing the ports can communicate over the
 exposed port.
 
     *Exposed ports* cannot be accessed publicly over the internet.
@@ -73,7 +73,7 @@ how to launch a service with a published port.
 
 The **Endpoints** section in the Service view lists the published ports for a service. Ports that are exposed internally are not listed in this section but can be viewed by editing the service configuration.
 
-* The **Service endpoints** list shows the endpoints that will automatically round-robin route to the containers in a service.
+* The **Service endpoints** list shows the endpoints that automatically round-robin route to the containers in a service.
 * The **Container endpoints** list shows the endpoints for each individual container. Click the blue "link" icon to open the endpoint URL in a new tab.
 
 <!--  DCUI-741
@@ -107,15 +107,15 @@ DNS endpoint in the format
 `container-name[.stack-name].shortuuid.cont.dockerapp.io`. This DNS endpoint
 (single A record) resolves to the public IP of the node where the container is
 running. If the container is redeployed into another node, the DNS updates
-automatically and will resolve to the new node or host.
+automatically and resolves to the new node or host.
 
 You can see a list of container endpoints on the stack, service or container
 detail views, in the **Endpoints** tab.
 
 ### Service endpoints
 
-Each service that has at least one port published with a fixed host port (i.e.
-not dynamic) is assigned a DNS endpoint in the format
+Each service that has at least one port published with a fixed (not dynamic)
+host port is assigned a DNS endpoint in the format
 `service-name[.stack-name].shortuuid.svc.dockerapp.io`. This DNS endpoint
 (multiple A record) resolves to the IPs of the nodes where the containers are
 running, in a [round-robin

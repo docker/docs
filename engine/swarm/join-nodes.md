@@ -66,7 +66,7 @@ from the scheduler.
 When you run `docker swarm join` and pass the manager token, the Docker Engine
 switches into swarm mode the same as for workers. Manager nodes also participate
 in the raft consensus. The new nodes should be `Reachable`, but the existing
-manager will remain the swarm `Leader`.
+manager remains the swarm `Leader`.
 
 Docker recommends three or five manager nodes per cluster to implement high
 availability. Because swarm mode manager nodes share data using Raft, there

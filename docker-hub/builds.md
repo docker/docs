@@ -31,14 +31,15 @@ To view your current connection settings, log in to Docker Hub and choose
 
 ## Limitations
 
-Currently Docker Hub does not support Git LFS (Large File Storage). If you have
-binaries in your build context that are managed by Git LFS, only the pointer
-file will be present in the clone made during the automated build, which is not
-what you want.
+- Currently Docker Hub does not support Git LFS (Large File Storage). If you have
+  binaries in your build context that are managed by Git LFS, only the pointer
+  file is present in the clone made during the automated build, which is not
+  what you want.
 
-Subscribe to the [GitHub
-issue](https://github.com/docker/hub-feedback/issues/500) tracking this
-limitation.
+  Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500)
+  tracking this limitation.
+
+- Building Windows containers is not supported.
 
 ## Link to a hosted repository service
 
@@ -63,7 +64,7 @@ limitation.
 ## Create an automated build
 
 Automated build repositories rely on the integration with your code repository
-in order to build. However, you can also push already-built images to these
+To build. However, you can also push already-built images to these
 repositories using the `docker push` command.
 
 1. Select **Create** > **Create Automated Build** from Docker Hub.
@@ -142,8 +143,8 @@ can click **Cancel** to end them.
 
 The statuses are:
 
-* **Queued**: You're in line and your image will be built soon. Queue time varies depending on number of concurrent builds available to you.
-* **Building**: The image is being built.
+* **Queued**: You're in line for your image to be built. Queue time varies depending on number of concurrent builds available to you.
+* **Building**: The image is building.
 * **Success**: The image has been built with no issues.
 * **Error**: There was an issue with your image. Click the row to go to the Builds Details screen. The banner at the top of the page displays the last sentence of the log file, which indicates what the error was. If you need more information, scroll to the bottom of the screen to the logs section.
 

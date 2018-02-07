@@ -24,8 +24,8 @@ Check the 'Is a UCP admin' option, if you want to grant permissions for the
 user to change cluster configurations. Also, assign the user with a default
 permission level.
 
-Default permissions specify the permission a user has to create and edit
-resources in the cluster. There are four permission levels:
+Default permissions specify the resources a user has access to create or edit
+in the cluster. There are four permission levels:
 
 | Default permission level | Description                                                                                                                                                                                                  |
 |:-------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

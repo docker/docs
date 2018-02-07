@@ -4,9 +4,8 @@ keywords: docker, container, cluster, swarm
 title: Swarm mode overview
 ---
 
-To use Docker in swarm mode, install Docker `1.12.0` or later. Install
-instructions for all platforms are
-[here](https://docs.docker.com/engine/installation/).
+To use Docker in swarm mode, install Docker. See
+[installation instructions](/install/) for all operating systems and platforms.
 
 Current versions of Docker include *swarm mode* for natively managing a cluster
 of Docker Engines called a *swarm*. Use the Docker CLI to create a swarm, deploy
@@ -41,7 +40,7 @@ adding or removing tasks to maintain the desired state.
 the cluster state and reconciles any differences between the actual state and your
 expressed desired state. For example, if you set up a service to run 10
 replicas of a container, and a worker machine hosting two of those replicas
-crashes, the manager will create two new replicas to replace the replicas that
+crashes, the manager creates two new replicas to replace the replicas that
 crashed. The swarm manager assigns the new replicas to workers that are
 running and available.
 

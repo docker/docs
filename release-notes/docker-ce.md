@@ -20,6 +20,107 @@ Release notes for stable versions are listed first. You can
 
 # Stable releases
 
+## 17.12.0-ce (2017-12-27)
+
+### Known Issues
+* AWS logs batch size calculation [moby/moby#35726](https://github.com/moby/moby/pull/35726)
+* Health check no longer uses the container's working directory [moby/moby#35843](https://github.com/moby/moby/issues/35843)
+* Errors not returned from client in stack deploy configs [moby/moby#757](https://github.com/docker/cli/pull/757)
+* Daemon aborts when project quota fails [moby/moby#35827](https://github.com/moby/moby/pull/35827)
+* Docker cannot use memory limit when using systemd options [moby/moby#35123](https://github.com/moby/moby/issues/35123)
+
+### Builder
+
+- Fix build cache hash for broken symlink [moby/moby#34271](https://github.com/moby/moby/pull/34271)
+- Fix long stream sync [moby/moby#35404](https://github.com/moby/moby/pull/35404)
+- Fix dockerfile parser failing silently on long tokens [moby/moby#35429](https://github.com/moby/moby/pull/35429)
+
+### Client
+
+* Remove secret/config duplication in cli/compose [docker/cli#671](https://github.com/docker/cli/pull/671)
+* Add `--local` flag to `docker trust sign` [docker/cli#575](https://github.com/docker/cli/pull/575)
+* Add `docker trust inspect` [docker/cli#694](https://github.com/docker/cli/pull/694)
++ Add `name` field to secrets and configs to allow interpolation in Compose files [docker/cli#668](https://github.com/docker/cli/pull/668)
++ Add `--isolation` for setting swarm service isolation mode [docker/cli#426](https://github.com/docker/cli/pull/426)
+* Remove deprecated "daemon" subcommand [docker/cli#689](https://github.com/docker/cli/pull/689)
+- Fix behaviour of `rmi -f` with unexpected errors [docker/cli#654](https://github.com/docker/cli/pull/654)
+* Integrated Generic resource in service create [docker/cli#429](https://github.com/docker/cli/pull/429)
+- Fix external networks in stacks [docker/cli#743](https://github.com/docker/cli/pull/743)
+* Remove support for referencing images by image shortid [docker/cli#753](https://github.com/docker/cli/pull/753) and [moby/moby#35790](https://github.com/moby/moby/pull/35790)
+* Use commit-sha instead of tag for containerd [moby/moby#35770](https://github.com/moby/moby/pull/35770)
+
+### Documentation
+
+* Update API version history for 1.35 [moby/moby#35724](https://github.com/moby/moby/pull/35724)
+
+### Logging
+
+* Logentries driver line-only=true []byte output fix [moby/moby#35612](https://github.com/moby/moby/pull/35612)
+* Logentries line-only logopt fix to maintain backwards compatibility [moby/moby#35628](https://github.com/moby/moby/pull/35628)
++ Add `--until` flag for docker logs [moby/moby#32914](https://github.com/moby/moby/pull/32914)
++ Add gelf log driver plugin to Windows build [moby/moby#35073](https://github.com/moby/moby/pull/35073)
+* Set timeout on splunk batch send [moby/moby#35496](https://github.com/moby/moby/pull/35496)
+* Update Graylog2/go-gelf [moby/moby#35765](https://github.com/moby/moby/pull/35765)
+
+### Networking
+
+* Move load balancer sandbox creation/deletion into libnetwork [moby/moby#35422](https://github.com/moby/moby/pull/35422)
+* Only chown network files within container metadata [moby/moby#34224](https://github.com/moby/moby/pull/34224)
+* Restore error type in FindNetwork [moby/moby#35634](https://github.com/moby/moby/pull/35634)
+- Fix consumes MIME type for NetworkConnect [moby/moby#35542](https://github.com/moby/moby/pull/35542)
++ Added support for persisting Windows network driver specific options [moby/moby#35563](https://github.com/moby/moby/pull/35563)
+- Fix timeout on netlink sockets and watchmiss leak [moby/moby#35677](https://github.com/moby/moby/pull/35677)
++ New daemon config for networking diagnosis [moby/moby#35677](https://github.com/moby/moby/pull/35677)
+- Clean up node management logic [docker/libnetwork#2036](https://github.com/docker/libnetwork/pull/2036)
+- Allocate VIPs when endpoints are restored [docker/swarmkit#2474](https://github.com/docker/swarmkit/pull/2474)
+
+### Runtime
+
+* Update to containerd v1.0.0 [moby/moby#35707](https://github.com/moby/moby/pull/35707)
+* Have VFS graphdriver use accelerated in-kernel copy [moby/moby#35537](https://github.com/moby/moby/pull/35537)
+* Introduce `workingdir` option for docker exec [moby/moby#35661](https://github.com/moby/moby/pull/35661)
+* Bump Go to 1.9.2 [moby/moby#33892](https://github.com/moby/moby/pull/33892) [docker/cli#716](https://github.com/docker/cli/pull/716)
+* `/dev` should not be readonly with `--readonly` flag [moby/moby#35344](https://github.com/moby/moby/pull/35344)
++ Add custom build-time Graphdrivers priority list [moby/moby#35522](https://github.com/moby/moby/pull/35522)
+* LCOW: CLI changes to add platform flag - pull, run, create and build [docker/cli#474](https://github.com/docker/cli/pull/474)
+* Fix width/height on Windoes for `docker exec` [moby/moby#35631](https://github.com/moby/moby/pull/35631)
+* Detect overlay2 support on pre-4.0 kernels [moby/moby#35527](https://github.com/moby/moby/pull/35527)
+* Devicemapper: remove container rootfs mountPath after umount [moby/moby#34573](https://github.com/moby/moby/pull/34573)
+* Disallow overlay/overlay2 on top of NFS [moby/moby#35483](https://github.com/moby/moby/pull/35483)
+- Fix potential panic during plugin set. [moby/moby#35632](https://github.com/moby/moby/pull/35632)
+- Fix some issues with locking on the container [moby/moby#35501](https://github.com/moby/moby/pull/35501)
+- Fixup some issues with plugin refcounting [moby/moby#35265](https://github.com/moby/moby/pull/35265)
++ Add missing lock in ProcessEvent [moby/moby#35516](https://github.com/moby/moby/pull/35516)
++ Add vfs quota support [moby/moby#35231](https://github.com/moby/moby/pull/35231)
+* Skip empty directories on prior graphdriver detection [moby/moby#35528](https://github.com/moby/moby/pull/35528)
+* Skip xfs quota tests when running in user namespace [moby/moby#35526](https://github.com/moby/moby/pull/35526)
++ Added SubSecondPrecision to config option. [moby/moby#35529](https://github.com/moby/moby/pull/35529)
+* Update fsnotify to fix deadlock in removing watch [moby/moby#35453](https://github.com/moby/moby/pull/35453)
+- Fix "duplicate mount point" when `--tmpfs /dev/shm` is used [moby/moby#35467](https://github.com/moby/moby/pull/35467)
+- Fix honoring tmpfs-size for user `/dev/shm` mount [moby/moby#35316](https://github.com/moby/moby/pull/35316)
+- Fix EBUSY errors under overlayfs and v4.13+ kernels [moby/moby#34948](https://github.com/moby/moby/pull/34948)
+* Container: protect health monitor channel [moby/moby#35482](https://github.com/moby/moby/pull/35482)
+* Container: protect the health status with mutex [moby/moby#35517](https://github.com/moby/moby/pull/35517)
+* Container: update real-time resources [moby/moby#33731](https://github.com/moby/moby/pull/33731)
+* Create labels when volume exists only remotely [moby/moby#34896](https://github.com/moby/moby/pull/34896)
+- Fix leaking container/exec state [moby/moby#35484](https://github.com/moby/moby/pull/35484)
+* Disallow using legacy (v1) registries [moby/moby#35751](https://github.com/moby/moby/pull/35751) and [docker/cli#747](https://github.com/docker/cli/pull/747)
+- Windows: Fix case insensitive filename matching against builder cache [moby/moby#35793](https://github.com/moby/moby/pull/35793)
+- Fix race conditions around process handling and error checks [moby/moby#35809](https://github.com/moby/moby/pull/35809)
+* Ensure containers are stopped on daemon startup [moby/moby#35805](https://github.com/moby/moby/pull/35805)
+* Follow containerd namespace conventions [moby/moby#35812](https://github.com/moby/moby/pull/35812)
+
+### Swarm Mode
+
++ Added support for swarm service isolation mode [moby/moby#34424](https://github.com/moby/moby/pull/34424)
+- Fix task clean up for tasks that are complete [docker/swarmkit#2477](https://github.com/docker/swarmkit/pull/2477)
+
+### Packaging
+
++ Add Packaging for Fedora 27 [docker/docker-ce-packaging#59](https://github.com/docker/docker-ce-packaging/pull/59)
+* Change default versioning scheme to 0.0.0-dev unless specified for packaging [docker/docker-ce-packaging#67](https://github.com/docker/docker-ce-packaging/pull/67)
+* Pass Version to engine static builds [docker/docker-ce-packaging#70](https://github.com/docker/docker-ce-packaging/pull/70)
++ Added support for aarch64 on Debian (stretch/jessie) and Ubuntu Zesty or newer [docker/docker-ce-packaging#35](https://github.com/docker/docker-ce-packaging/pull/35)
 
 ## 17.09.1-ce (2017-12-07)
 
@@ -43,7 +144,6 @@ Release notes for stable versions are listed first. You can
 ### Runtime
 
 - Protect `health monitor` Go channel [moby/moby#35482](https://github.com/moby/moby/pull/35482)
-- Fix test failure on stopped container [moby/moby#34730](https://github.com/moby/moby/pull/34730)
 - Fix leaking container/exec state [moby/moby#35484](https://github.com/moby/moby/pull/35484)
 - Add /proc/scsi to masked paths (patch to work around [CVE-2017-16539](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16539)) [moby/moby/#35399](https://github.com/moby/moby/pull/35399)
 - Vendor tar-split: fix to prevent memory exhaustion issue that could crash Docker daemon [moby/moby/#35424](https://github.com/moby/moby/pull/35424) Fixes [CVE-2017-14992](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14992)
@@ -383,16 +483,73 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 
 # Edge releases
 
+## 18.01.0-ce (2018-01-10)
+
+### Builder
+
+* Fix files not being deleted if user-namespaces are enabled [moby/moby#35822](https://github.com/moby/moby/pull/35822)
+- Add support for expanding environment-variables in `docker commit --change ...` [moby/moby#35582](https://github.com/moby/moby/pull/35582)
+
+### Client
+
+* Return errors from client in stack deploy configs [docker/cli#757](https://github.com/docker/cli/pull/757)
+- Fix description of filter flag in prune commands [docker/cli#774](https://github.com/docker/cli/pull/774)
++ Add "pid" to unsupported options list [docker/cli#768](https://github.com/docker/cli/pull/768)
++ Add support for experimental Cli configuration [docker/cli#758](https://github.com/docker/cli/pull/758)
++ Add support for generic resources to bash completion [docker/cli#749](https://github.com/docker/cli/pull/749)
+- Fix error in zsh completion script for docker exec [docker/cli#751](https://github.com/docker/cli/pull/751)
++ Add a debug message when client closes websocket attach connection [moby/moby#35720](https://github.com/moby/moby/pull/35720)
+- Fix bash completion for `"docker swarm"` [docker/cli#772](https://github.com/docker/cli/pull/772)
+
+
+### Documentation
+* Correct references to `--publish` long syntax in docs [docker/cli#746](https://github.com/docker/cli/pull/746)
+* Corrected descriptions for MAC_ADMIN and MAC_OVERRIDE [docker/cli#761](https://github.com/docker/cli/pull/761)
+* Updated developer doc to explain external CLI [moby/moby#35681](https://github.com/moby/moby/pull/35681)
+- Fix `"on-failure"` restart policy being documented as "failure" [docker/cli#754](https://github.com/docker/cli/pull/754)
+- Fix anchors to "Storage driver options" [docker/cli#748](https://github.com/docker/cli/pull/748)
+
+### Experimental
+
++ Add kubernetes support to `docker stack` command [docker/cli#721](https://github.com/docker/cli/pull/721)
+* Don't append the container id to custom directory checkpoints. [moby/moby#35694](https://github.com/moby/moby/pull/35694)
+
+### Logging
+
+* Fix daemon crash when using the GELF log driver over TCP when the GELF server goes down [moby/moby#35765](https://github.com/moby/moby/pull/35765)
+- Fix awslogs batch size calculation for large logs [moby/moby#35726](https://github.com/moby/moby/pull/35726)
+
+### Networking
+
+- Windows: Fix to allow docker service to start on Windows VM [docker/libnetwork#1916](https://github.com/docker/libnetwork/pull/1916)
+- Fix for docker intercepting DNS requests on ICS network [docker/libnetwork#2014](https://github.com/docker/libnetwork/pull/2014)
++ Windows: Added a new network creation driver option [docker/libnetwork#2021](https://github.com/docker/libnetwork/pull/2021)
+
+
+### Runtime
+
+* Validate Mount-specs on container start to prevent missing host-path [moby/moby#35833](https://github.com/moby/moby/pull/35833)
+- Fix overlay2 storage driver inside a user namespace [moby/moby#35794](https://github.com/moby/moby/pull/35794)
+* Zfs: fix busy error on container stop [moby/moby#35674](https://github.com/moby/moby/pull/35674)
+- Fix health checks not using the container's working directory [moby/moby#35845](https://github.com/moby/moby/pull/35845)
+- Fix VFS graph driver failure to initialize because of failure to setup fs quota [moby/moby#35827](https://github.com/moby/moby/pull/35827)
+- Fix containerd events being processed twice [moby/moby#35896](https://github.com/moby/moby/pull/35896)
+
+### Swarm mode
+
+- Fix published ports not being updated if a service has the same number of host-mode published ports with Published Port 0 [docker/swarmkit#2376](https://github.com/docker/swarmkit/pull/2376)
+* Make the task termination order deterministic [docker/swarmkit#2265](https://github.com/docker/swarmkit/pull/2265)
+
 ## 17.11.0-ce (2017-11-20)
 
 > **Important**: Docker CE 17.11 is the first Docker release based on
 [containerd 1.0 beta](https://github.com/containerd/containerd/releases/tag/v1.0.0-beta.2).
-Docker CE 17.11 and later won't recognize containers started with
+Docker CE 17.11 and later don't recognize containers started with
 previous Docker versions. If using
 [Live Restore](https://docs.docker.com/engine/admin/live-restore/#enable-the-live-restore-option),
 you must stop all containers before upgrading to Docker CE 17.11.
 If you don't, any containers started by Docker versions that predate
-17.11 won't be recognized by Docker after the upgrade and will keep
+17.11 aren't recognized by Docker after the upgrade and keep
 running, un-managed, on the system.
 {:.important}
 

@@ -33,7 +33,7 @@ specially useful if the UCP web application is not working.
     certificates.
     [Learn how to use client certificates](../../user/access-ucp/cli-based-access.md).
 
-    If your client certificate bundle is for a non-admin user, you won't have
+    If your client certificate bundle is for a non-admin user, you don't have
     permissions to see the UCP system containers.
 
 2.  Check the logs of UCP system containers.
@@ -81,7 +81,7 @@ find related messages in the logs of specific components on manager nodes:
 of the `ucp-reconcile` container.
 * If the problem occurs in the normal state of the system, check the logs
 of the `ucp-controller` container.
-* If you are able to visit the UCP web UI but unable to log in, check the
+* If you can browse to the UCP web UI but can't log in, check the
 logs of the `ucp-auth-api` and `ucp-auth-store` containers.
 
 It's normal for the `ucp-reconcile` container to be in a stopped state. This

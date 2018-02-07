@@ -11,7 +11,7 @@ title: Push the image to Docker Cloud's registry
 
 ## Overview
 
-In this step you will take the image that you built in the previous step, and push it to Docker Cloud.
+In this step you take the image that you built in the previous step, and push it to Docker Cloud.
 
 In step 2, you set your Docker Cloud username as an environment variable called **DOCKER_ID_USER**. If you skipped this step, change the `$DOCKER_ID_USER` to your Docker ID username before running this command.
 

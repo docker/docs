@@ -11,7 +11,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 You can install UCP on-premises or on a cloud provider. Common requirements:
 
-* [Docker Enterprise Edition](/engine/installation/index.md) version 17.06 or higher
+* [Docker Enterprise Edition](/install/index.md) version 17.06 or higher
 * Linux kernel version 3.10 or higher
 * A static IP address
 
@@ -26,8 +26,10 @@ You can install UCP on-premises or on a cloud provider. Common requirements:
  * 16GB of RAM for manager nodes or nodes running DTR
  * 4 vCPUs for manager nodes or nodes running DTR
  * 25-100GB of free disk space
- 
-Note that Windows container images are typically larger than Linux ones and for that reason, you should consider provisioning more local storage for Windows nodes and for DTR setups that will store Windows container images.
+
+Windows container images are typically larger than Linux ones and for that reason, you should consider provisioning more local storage for Windows nodes and for DTR setups that will store Windows container images.
+
+When planning for host storage, workflows based around `docker pull` through UCP will result in higher storage requirements on manager nodes, since `docker pull` through UCP results in the image being pulled on all nodes.
 
 Also, make sure the nodes are running an [operating system support by Docker EE](https://success.docker.com/Policies/Compatibility_Matrix).
 
@@ -36,7 +38,7 @@ between hosts.
 
 > Workloads on manager nodes
 >
-> These requirements assume that manager nodes won't run regular workloads.
+> These requirements assume that manager nodes don't run regular workloads.
 > If you plan to run additional workloads on manager nodes, you may need to
 > provision more powerful nodes. If manager nodes become overloaded, the
 > swarm may experience issues.

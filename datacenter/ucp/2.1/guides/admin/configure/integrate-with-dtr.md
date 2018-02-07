@@ -25,7 +25,7 @@ or pull Docker images from DTR. This includes:
 * All UCP nodes
 * Your local computer or any other that wants to push or pull Docker images from DTR
 
-If your host is not configured to trust the DTR TLS certificates, you'll get an
+If your host is not configured to trust the DTR TLS certificates, you get an
 error like:
 
 ```none

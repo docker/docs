@@ -31,9 +31,8 @@ on GitHub.
     If you are running on **Linux**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
-    chmod +x /tmp/docker-machine &&
-    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+    $ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && \
+    sudo install /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
     If you are running with **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
@@ -44,7 +43,7 @@ curl -L https://github.com/docker/machine/releases/download/v{{site.machine_vers
 chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
-    > The above command will work on Windows only if you use a
+    > The above command works on Windows only if you use a
     terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
 
@@ -103,7 +102,7 @@ To uninstall Docker Machine:
 and other data related to each virtual machine created by `docker-machine`
 is stored in `~/.docker/machine/machines/` on Mac and Linux and in
 `~\.docker\machine\machines\` on Windows. We recommend that you do not edit or
-remove those files directly as this will only affect information for the Docker
+remove those files directly as this only affects information for the Docker
 CLI, not the actual VMs, regardless of whether they are local or on remote
 servers.
 

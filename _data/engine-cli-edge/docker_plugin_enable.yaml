@@ -13,6 +13,9 @@ options:
   description: HTTP client timeout (in seconds)
   deprecated: false
   experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   The following example shows that the `sample-volume-plugin` plugin is installed,
   but disabled:
@@ -39,4 +42,7 @@ examples: |-
 deprecated: false
 min_api_version: "1.25"
 experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
 

@@ -99,7 +99,7 @@ vulnerability database.
 
 ### Known issues
 
-* You can't upgrade from 2.3.0 to 2.3.1. Please upgrade to 2.3.2 directly.
+* You can't upgrade from 2.3.0 to 2.3.1. Upgrade to 2.3.2 directly.
 
 ## DTR 2.3.0
 

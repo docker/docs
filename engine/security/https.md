@@ -14,21 +14,14 @@ If you need Docker to be reachable via the network in a safe manner, you can
 enable TLS by specifying the `tlsverify` flag and pointing Docker's
 `tlscacert` flag to a trusted CA certificate.
 
-In the daemon mode, it will only allow connections from clients
+In the daemon mode, it only allows connections from clients
 authenticated by a certificate signed by that CA. In the client mode,
-it will only connect to servers with a certificate signed by that CA.
+it only connects to servers with a certificate signed by that CA.
 
 > Advanced topic
 >
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
 > with OpenSSL, x509 and TLS before using it in production.
-{:.important}
-
-> Only works on Linux
->
-> These TLS commands will only generate a working set of certificates on Linux.
-> macOS comes with a version of OpenSSL that is incompatible with the
-> certificates that Docker requires.
 {:.important}
 
 ## Create a CA, server and client keys with OpenSSL
@@ -63,9 +56,9 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
     Common Name (e.g. server FQDN or YOUR name) []:$HOST
     Email Address []:Sven@home.org.au
 
-Now that we have a CA, you can create a server key and certificate
-signing request (CSR). Make sure that "Common Name" (i.e., server FQDN or YOUR
-name) matches the hostname you will use to connect to Docker:
+Now that you have a CA, you can create a server key and certificate
+signing request (CSR). Make sure that "Common Name" matches the hostname you use
+to connect to Docker:
 
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
@@ -139,10 +132,10 @@ two certificate signing requests:
 
     $ rm -v client.csr server.csr
 
-With a default `umask` of 022, your secret keys will be *world-readable* and
+With a default `umask` of 022, your secret keys are *world-readable* and
 writable for you and your group.
 
-In order to protect your keys from accidental damage, you will want to remove their
+To protect your keys from accidental damage, remove their
 write permissions. To make them only readable by you, change file modes as follows:
 
     $ chmod -v 0400 ca-key.pem key.pem server-key.pem
@@ -153,13 +146,13 @@ prevent accidental damage:
     $ chmod -v 0444 ca.pem server-cert.pem cert.pem
 
 Now you can make the Docker daemon only accept connections from clients
-providing a certificate trusted by our CA:
+providing a certificate trusted by your CA:
 
     $ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
       -H=0.0.0.0:2376
 
-To be able to connect to Docker and validate its certificate, you now
-need to provide your client keys, certificates and trusted CA:
+To connect to Docker and validate its certificate, provide your client keys,
+certificates and trusted CA:
 
 > Run it on the client machine
 >
@@ -177,7 +170,7 @@ need to provide your client keys, certificates and trusted CA:
 > Docker over TLS should run on TCP port 2376.
 
 > **Warning**:
-> As shown in the example above, you don't have to run the `docker` client
+> As shown in the example above, you don't need to run the `docker` client
 > with `sudo` or the `docker` group when you use certificate authentication.
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard
@@ -196,7 +189,7 @@ the files to the `.docker` directory in your home directory -- and set the
 
     $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
 
-Docker will now connect securely by default:
+Docker now connects securely by default:
 
     $ docker ps
 
@@ -219,7 +212,7 @@ Docker in various other modes by mixing the flags.
  - `tlsverify`, `tlscacert`, `tlscert`, `tlskey`: Authenticate with client
    certificate and authenticate server based on given CA
 
-If found, the client will send its client certificate, so you just need
+If found, the client sends its client certificate, so you just need
 to drop your keys into `~/.docker/{ca,cert,key}.pem`. Alternatively,
 if you want to store your keys in another location, you can specify that
 location using the environment variable `DOCKER_CERT_PATH`.

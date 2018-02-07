@@ -15,7 +15,7 @@ description: Learn how to create a multi-container application that uses all the
 - Learn how to create containers in [Part 2](part2.md).
 
 - Make sure you have published the `friendlyhello` image you created by
-[pushing it to a registry](/get-started/part2.md#share-your-image). We'll
+[pushing it to a registry](/get-started/part2.md#share-your-image). We
 use that shared image here.
 
 - Be sure your image works as a deployed container. Run this command,
@@ -31,7 +31,7 @@ by `docker-machine start myvm2` to boot the worker.
 
 - Have the swarm you created in [part 4](part4.md) running and ready. Run
 `docker-machine ssh myvm1 "docker node ls"` to verify this. If the swarm is up,
-both nodes will report a `ready` status. If not, reinitialze the swarm and join
+both nodes report a `ready` status. If not, reinitialze the swarm and join
 the worker as described in [Set up your
 swarm](/get-started/part4.md#set-up-your-swarm).
 
@@ -41,7 +41,7 @@ In [part 4](part4.md), you learned how to set up a swarm, which is a cluster of
 machines running Docker, and deployed an application to it, with containers
 running in concert on multiple machines.
 
-Here in part 5, you'll reach the top of the hierarchy of distributed
+Here in part 5, you reach the top of the hierarchy of distributed
 applications: the **stack**. A stack is a group of interrelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
@@ -50,7 +50,7 @@ application (though very complex applications may want to use multiple stacks).
 Some good news is, you have technically been working with stacks since part 3,
 when you created a Compose file and used `docker stack deploy`. But that was a
 single service stack running on a single host, which is not usually what takes
-place in production. Here, you will take what you've learned, make
+place in production. Here, you can take what you've learned, make
 multiple services relate to each other, and run them on multiple machines.
 
 You're doing great, this is the home stretch!
@@ -98,14 +98,14 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
     ```
 
     The only thing new here is the peer service to `web`, named `visualizer`.
-    You'll see two new things here: a `volumes` key, giving the visualizer
+    Notice two new things here: a `volumes` key, giving the visualizer
     access to the host's socket file for Docker, and a `placement` key, ensuring
     that this service only ever runs on a swarm manager -- never a worker.
     That's because this container, built from [an open source project created by
     Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays
     Docker services running on a swarm in a diagram.
 
-    We'll talk more about placement constraints and volumes in a moment.
+    We talk more about placement constraints and volumes in a moment.
 
 2.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](part4.md#configure-a-docker-machine-shell-to-the-swarm-manager)).
 
@@ -126,7 +126,7 @@ with the following. Be sure to replace `username/repo:tag` with your image detai
       ```
 
 3.  Re-run the `docker stack deploy` command on the manager, and
-whatever services need updating will be updated:
+whatever services need updating are updated:
 
     ```shell
     $ docker stack deploy -c docker-compose.yml getstartedlab
@@ -138,7 +138,7 @@ whatever services need updating will be updated:
 
     You saw in the Compose file that `visualizer` runs on port 8080. Get the
     IP address of one of your nodes by running `docker-machine ls`. Go
-    to either IP address at port 8080 and you will see the visualizer running:
+    to either IP address at port 8080 and you can see the visualizer running:
 
     ![Visualizer screenshot](images/get-started-visualizer1.png)
 
@@ -153,7 +153,7 @@ whatever services need updating will be updated:
     The visualizer is a standalone service that can run in any app
     that includes it in the stack. It doesn't depend on anything else.
     Now let's create a service that *does* have a dependency: the Redis
-    service that will provide a visitor counter.
+    service that provides a visitor counter.
 
 ## Persist the data
 
@@ -197,7 +197,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
         ports:
           - "6379:6379"
         volumes:
-          - /home/docker/data:/data
+          - "/home/docker/data:/data"
         deploy:
           placement:
             constraints: [node.role == manager]
@@ -232,7 +232,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     - The placement constraint you put on the Redis service, ensuring that it
       always uses the same host.
-    - The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host will persist, enabling continuity.
+    - The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host persists, enabling continuity.
 
     You are ready to deploy your new Redis-using stack.
 
@@ -277,11 +277,11 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
 
     ```
 
-6.  Check the web page at one of your nodes (e.g. `http://192.168.99.101`) and you'll see the results of the visitor counter, which is now live and storing information on Redis.
+6.  Check the web page at one of your nodes, such as `http://192.168.99.101`, and take a look at the results of the visitor counter, which is now live and storing information on Redis.
 
     ![Hello World in browser with Redis](images/app-in-browser-redis.png)
 
-    Also, check the visualizer at port 8080 on either node's IP address, and you'll see the `redis` service running along with the `web` and `visualizer` services.
+    Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
 
     ![Visualizer with redis screenshot](images/visualizer-with-redis.png)
 

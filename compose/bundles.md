@@ -145,7 +145,7 @@ A service has the following fields:
         Image (required) <code>string</code>
     </dt>
     <dd>
-        The image that the service will run. Docker images should be referenced
+        The image that the service runs. Docker images should be referenced
         with full content hash to fully specify the deployment artifact for the
         service. Example:
         <code>postgres@sha256:e0a230a9f5b4e1b8b03bb3e8cf7322b0e42b7838c5c87f4545edb48f5eb8f077</code>

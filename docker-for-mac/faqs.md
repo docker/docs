@@ -80,7 +80,7 @@ required**_.
 
 ### What are system requirements for Docker for Mac?
 
-Note that you need a Mac that supports hardware virtualization and can run at
+You need a Mac that supports hardware virtualization and can run at
 least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
 [What to know before you install](install.md#what-to-know-before-you-install) in
 the install guide.
@@ -89,8 +89,8 @@ the install guide.
 
 Yes, if you [change the name of your macOS user account and home
 folder](https://support.apple.com/en-us/HT201548) after Docker for Mac is
-already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac will fail to start. See also,
-[Docker for Mac will not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-will-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
+already installed, you need to uninstall and reinstall Docker for Mac. Otherwise, Docker for Mac fails to start. See also,
+[Docker for Mac does not start if Mac user account and home folder are renamed after installing Docker for Mac](troubleshoot.md#docker-for-mac-does-not-start-if-mac-user-account-and-home-folder-are-renamed-after-installing-the-app) in Troubleshooting.
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
@@ -155,7 +155,7 @@ information, see [Stable and Edge channels](#stable-and-edge-channels) ("What is
 Yes, you can use Docker for Mac to test single-node features of [swarm
 mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
 initializing a swarm with a single node, creating services, and scaling
-services. Docker “Moby” on Hyperkit will serve as the single swarm node. You can
+services. Docker “Moby” on Hyperkit serves as the single swarm node. You can
 also use Docker Machine, which comes with Docker for Mac, to create and
 experiment a multi-node swarm. Check out the tutorial at [Get started with swarm
 mode](/engine/swarm/swarm-tutorial/index.md).
@@ -196,7 +196,7 @@ in the Networking topic.
 ### How do I connect to a container from the Mac?
 
 Our current recommendation is to publish a port, or to connect from another
-container. Note that this is what you have to do even on Linux if the container
+container. This is what you need to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 For a full explanation and examples, see
@@ -216,7 +216,7 @@ the Getting Started topic.
 
 ### How do I add client certificates?
 
-Starting with Docker for Mac 17.06.0-ce, you do not have to push your
+Starting with Docker for Mac 17.06.0-ce, you do not need to push your
 certificates with `git` commands anymore. You can put your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
@@ -225,18 +225,31 @@ For full information on adding server and client side certs, see [Adding
 TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
 the Getting Started topic.
 
-### Disk Usage
+### Can I pass through a USB device to a container?
 
-#### Qcow2 or Raw?
+Unfortunately it is not possible to pass through a USB device (or a
+serial port) to a container. For use cases requiring this, we
+recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
-By default Docker for Mac stores containers and images in a file
-`Docker.raw` or `Docker.qcow2` in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-Starting with High Sierra with APFS (Apple Filesystem) enabled, Docker
-uses the "raw" format (`Docker.raw`), otherwise it uses the Qcow2
-format (`Docker.qcow2`).
 
-#### Docker.raw consumes an insane amount of disk space!
+## Disk Usage
+
+### What is the disk image?
+
+The containers and images are stored in a _disk image_ named
+`Docker.raw` or `Docker.qcow2` depending on your settings (see below).
+By default, the disk image is stored in
+`~/Library/Containers/com.docker.docker/Data`, in the `vms/0`
+subdirectory starting with Docker for Mac 18.01, and
+`com.docker.driver.amd64-linux` before.
+
+### Qcow2 or Raw?
+
+Starting with High Sierra with Apple Filesystem (APFS) enabled, Docker
+uses disk images in the "raw" format (`Docker.raw`), otherwise in the
+Qcow2 format (`Docker.qcow2`).
+
+### Docker.raw consumes an insane amount of disk space!
 
 This is an illusion.  Docker uses the raw format on Macs running the
 Apple Filesystem (APFS).  APFS supports _sparse files_, which compress
@@ -246,7 +259,8 @@ its physical size. To see the physical size, add the `-ks` switch; to
 see the logical size in human readable form, add `-lh`:
 
 ```bash
-$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
+$ cd ~/Library/Containers/com.docker.docker/Data
+$ cd vms/0   # or com.docker.driver.amd64-linux
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 akim  staff    64G Dec 13 17:42 Docker.raw
 ```
@@ -261,14 +275,11 @@ $ du -h Docker.raw
 2,2G	Docker.raw
 ```
 
-#### How do I reduce the size of Docker.qcow2?
+### How do I reduce the size of Docker.qcow2?
 
-By default Docker for Mac stores containers and images in a file saved
-in the directory
-`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux`.
-If your Docker for Mac uses the Qcow format, this file is
-`Docker.qcow2`.  This file grows on-demand up to a default maximum
-file size of 64GiB.
+If your Docker for Mac uses the Qcow format, the [disk image
+file](#what-is-the-disk-image) is `Docker.qcow2`.  This file grows
+on-demand up to a default maximum file size of 64GiB.
 
 In Docker 1.12 the only way to free space on the host is to delete
 this file and restart the app. Unfortunately this removes all images
@@ -284,7 +295,7 @@ removing unneeded containers and images with the following commands:
   volumes not used by at least one container, and all images without at least one
   referring container.
 
-Note the `Docker.qcow2` will not shrink in size immediately.
+Note the `Docker.qcow2` does not shrink in size immediately.
 In 1.13 a background `cron` job runs `fstrim` every 15 minutes.
 If the space needs to be reclaimed sooner, run this command:
 
@@ -293,19 +304,14 @@ $ docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n
 ```
 
 Once the `fstrim` has completed, restart the app. When the app shuts down, it
-will compact the file and free up space. The app will
-take longer than usual to restart because it must wait for the
+compacts the file and free up space. The app
+takes longer than usual to restart because it must wait for the
 compaction to complete.
 
 For background conversation thread on this, see
 [Docker.qcow2 never shrinks ..](https://github.com/docker/for-mac/issues/371)
 on Docker for Mac GitHub issues.
 
-### Can I pass through a USB device to a container?
-
-Unfortunately it is not possible to pass through a USB device (or a
-serial port) to a container. For use cases requiring this, we
-recommend the use of [Docker Toolbox](/toolbox/overview.md).
 
 ## Components of Docker for Mac
 ### What is HyperKit?
@@ -325,5 +331,5 @@ tailor made for Docker workloads on the Mac.
 ### Why is com.docker.vmnetd running after I quit the app?
 
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
-runs in the background. The process will not consume any resources unless
+runs in the background. The process does not consume any resources unless
 Docker.app connects to it, so it's safe to ignore.

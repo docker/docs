@@ -10,7 +10,7 @@ keywords: Docker Datacenter, orchestration, trial
 This page introduces Docker Datacenter (also known as DDC): a combination of
 Docker Universal Control Plane (UCP) and Docker Trusted Registry (DTR), and
 walks you through installing it on a local (non-production) host or sandbox.
-Once you've installed, we'll also give you a guided tour so you can evaluate its
+Once you've installed, we also give you a guided tour so you can evaluate its
 features.
 
 The instructions here are for a sandbox installation on Mac OS X or Windows
@@ -26,14 +26,14 @@ configuration.
 
 ## Introduction: About this example
 
-In this tutorial, we'll use Docker's provisioning tool - Docker Machine - to
+In this tutorial, we use Docker's provisioning tool - Docker Machine - to
 create two virtual hosts. These two hosts are VirtualBox VMs running a small
 footprint Linux image called `boot2docker.iso`, with the open source version of
 Docker Engine installed.
 
 ![Docker Machine setup](images/explain.png)
 
-A UCP installation consists of an UCP controller and one or more hosts. We'll
+A UCP installation consists of an UCP controller and one or more hosts. We
 install UCP on one host, then join the second node to UCP as a swarm member. The
 two VMs create a simple swarm cluster with one controller, which by default
 secures the cluster via self-signed TLS certificates.
@@ -41,9 +41,9 @@ secures the cluster via self-signed TLS certificates.
 ![Sandbox](images/sandbox.png)
 
 DDC's second component is DTR, which must be installed on a host that's a member
-of the UCP swarm. So next, we'll then install DTR on that second node.
+of the UCP swarm. So next, we install DTR on that second node.
 
-Once you've installed UCP and DTR you'll [work through a tutorial](install-sandbox-2.md) to deploy a
+Once you've installed UCP and DTR, use this [tutorial](install-sandbox-2.md) to deploy a
 container through UCP, and explore the user interface.
 
 <!-- >**Note**: The command examples in this page were tested for a Mac OS X
@@ -63,7 +63,7 @@ This example requires that you have:
 
 ## Step 1: Provision hosts with Engine
 
-In this step, you'll provision two VMs for your UCP sandbox installation. One
+In this step, you provision two VMs for your UCP sandbox installation. One
 will run UCP and one will be used to run containers, so the host specifications
 will be slightly different.
 
@@ -119,14 +119,14 @@ Set up the nodes for your evaluation:
 
 ## About the ucp tool
 
-To install UCP, you'll use the Docker CLI to pull and run the `docker/ucp`
+To install UCP, use the Docker CLI to pull and run the `docker/ucp`
 image, which contains a bootstrapper tool designed to make UCP easier
 to install than many enterprise-grade applications. The `ucp` tool runs
 `docker run` commands to `install` a UCP controller or `join` a node to a UCP
 controller.
 
 The general format of these commands is `docker run --rm -it docker/ucp` with
-one or more subcommands, and you'll find them later in this document. For this
+one or more subcommands, which are discussed later in this document. For this
 tutorial, we use the `-i` option for "interactive" install mode, but
 you can run these commands without `-i` (unattended) in production.
 
@@ -197,7 +197,7 @@ host for the controller works fine.
       --swarm-port 3376 --host-address $(docker-machine ip node1)
     ```
 
-    > **Note**: If you are on a Windows system, your shell won't be able to
+    > **Note**: If you are on a Windows system, your shell can't
     resolve the `$(docker-machine ip node1)` variable. Instead, edit the command
     supplied to replace it with the actual IP address.
 
@@ -219,12 +219,12 @@ host for the controller works fine.
     to set up individual "leaf certificates."
 
     When it completes, the `ucp` tool prompts you to log in into the UCP web
-    interface and gives you its location. You'll do this in the next step so
+    interface and gives you its location. You do this in the next step so
     you can install a license.
 
 ## Step 3. License your installation
 
-In this step, you'll get a license, log in to the UCP web interface and install
+In this step, you get a license, log in to the UCP web interface and install
 the license. Docker allows you to run an evaluation version of UCP with a single
 controller and node for up to 30 days.
 
@@ -275,7 +275,7 @@ you want to add.
 
 3.  Run the `docker/ucp join` command.
 
-    > **Note**: If you are on a Windows system, your shell won't be able to
+    > **Note**: If you are on a Windows system, your shell can't
     resolve the `$(docker-machine ip node2)` variable. Instead, edit the command
     supplied to replace it with the actual IP address.
 
@@ -311,7 +311,7 @@ you want to add.
 
 ## Step 5: Install Docker Trusted Registry
 
-Next, we'll install Docker Trusted Registry (DTR). DTR provides a secure
+Next, we install Docker Trusted Registry (DTR). DTR provides a secure
 location to store your organization's Docker images. Images are used by UCP to
 run containers that make up a service. By providing a secure connection between
 DTR and UCP, you can verify that your production services contain only signed
@@ -333,7 +333,7 @@ commands to the node on which you will install DTR.
      --dtr-external-url $(docker-machine ip node2)
    ```
 
-   You'll be prompted for the credentials of the UCP administrator.
+   You are prompted for the credentials of the UCP administrator.
 
 4. Verify that DTR is running by navigating your browser to the DTR server's IP.
 
