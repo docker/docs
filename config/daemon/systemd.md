@@ -136,6 +136,11 @@ you need to add this configuration in the Docker systemd service file.
     Environment=HTTPS_PROXY=https://proxy.example.com:443/
     ```
 
+## Configure where the Docker daemon listens for connections
+
+See
+[Configure where the Docker daemon listens for connections](/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+
 ## Manually create the systemd unit files
 
 When installing the binary without a package, you may want
