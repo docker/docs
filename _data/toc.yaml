@@ -1075,6 +1075,18 @@ reference:
         title: docker logout
       - path: /edge/engine/reference/commandline/logs/
         title: docker logs
+      - sectiontitle: docker manifest *
+        section:
+        - path: /edge/engine/reference/commandline/manifest/
+          title: docker manifest
+        - path: /edge/engine/reference/commandline/manifest_annotate/
+          title: docker manifest annotate
+        - path: /edge/engine/reference/commandline/manifest_create/
+          title: docker manifest create
+        - path: /edge/engine/reference/commandline/manifest_inspect/
+          title: docker manifest inspect
+        - path: /edge/engine/reference/commandline/manifest_push/
+          title: docker manifest push
       - sectiontitle: docker network *
         section:
         - path: /edge/engine/reference/commandline/network/

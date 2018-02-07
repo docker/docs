@@ -1,6 +1,6 @@
 command: docker config inspect
-short: Display detailed information on one or more configuration files
-long: Display detailed information on one or more configuration files
+short: Display detailed information on one or more configs
+long: Display detailed information on one or more configs
 usage: docker config inspect [OPTIONS] CONFIG [CONFIG...]
 pname: docker config
 plink: docker_config.yaml

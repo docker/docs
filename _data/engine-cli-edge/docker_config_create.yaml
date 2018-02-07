@@ -1,6 +1,6 @@
 command: docker config create
-short: Create a configuration file from a file or STDIN as content
-long: Create a configuration file from a file or STDIN as content
+short: Create a config from a file or STDIN
+long: Create a config from a file or STDIN
 usage: docker config create [OPTIONS] CONFIG file|-
 pname: docker config
 plink: docker_config.yaml
