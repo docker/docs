@@ -216,3 +216,5 @@ docker network create -d overlay --label com.docker.ucp.mesh.http=true new-hrm-n
 
 If you're creating a a new HRM network you need to disable the HRM service first, or disable
 and enable the HRM service after you create the network else HRM will not be available on new network.
+
+Note:- Docker on Windows Server doesn't support Swarm Mode Routing Mesh, which means the hrm service is exposed only through the manager node's ip. Therefore DNS needs to configured so that all the host names ('wordpress.example.org' in this example) point to manager nodes and not the worker nodes.
