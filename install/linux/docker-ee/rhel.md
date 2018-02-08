@@ -39,7 +39,8 @@ The following limitations apply:
 
 **OverlayFS**:
 
-- The `overlay2` storage driver is only supported on RHEL 7.2 or higher.
+- The `overlay2` storage driver is only supported on RHEL 7.2 or higher systems
+  using version 3.10.0-693 or high of the kernel.
 - If `selinux` is enabled, the `overlay2` storage driver is only supported on
   RHEL 7.4 or higher.
 

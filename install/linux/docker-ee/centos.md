@@ -28,17 +28,27 @@ Docker CE users should go to
 
 ### OS requirements
 
-To install Docker EE, you need a maintained version of CentOS 7. Archived
-versions aren't supported or tested.
+To install Docker EE, you need the 64-bit version of {{ linux-dist-long }}
+running on `x86_64`.
 
-The `centos-extras` repository must be enabled. This repository is enabled by
-default, but if you have disabled it, you need to
-[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+In addition, you must use the `overlay2` or `devicemapper` storage driver.
+Beginning with Docker EE 17.06.2-ee-5 the `overlay2` storage driver is the
+recommended storage driver.
 
-In addition, you must use the `overlay2` or `devicemapper` storage driver if you
-use Docker EE. On production systems using `devicemapper`, you must use
-`direct-lvm` mode, which requires one or more dedicated block devices. Fast
-storage such as solid-state media (SSD) is recommended.
+The following limitations apply:
+
+**OverlayFS**:
+
+- The `overlay2` storage driver is only supported on CentOS 7 systems
+  using version 3.10.0-693 or high of the kernel.
+- If `selinux` is enabled, the `overlay2` storage driver is only supported on
+  RHEL 7.4 or higher.
+
+**Devicemapper**:
+
+- On production systems using `devicemapper`, you must use `direct-lvm` mode,
+  which requires one or more dedicated block devices. Fast storage such as
+  solid-state media (SSD) is recommended.
 
 ### Uninstall old versions
 
