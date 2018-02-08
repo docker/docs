@@ -271,6 +271,8 @@ guides:
         title: Docker and iptables
       - path: /config/containers/container-networking/
         title: Container networking
+      - path: /network/proxy/
+        title: Configure Docker to use a proxy server
     - sectiontitle: Legacy networking content
       section:
       - path: /network/links/
