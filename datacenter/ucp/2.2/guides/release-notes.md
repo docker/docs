@@ -25,6 +25,12 @@ on Docker Universal Control Plane for tenant isolation of workloads and data.
 workflows may have come to rely on lack of access control enforcement when
 manipulating volumes created with 3rd party volume plugins.
 
+**Known issues**
+
+* The web UI might not allow users to create volumes using a volume plugin, and
+add the volume to a collection other than `/Shared`. As a workaround,
+create the volume from the CLI.
+
 ## Version 2.2.4
 
 (2 November 2017)
