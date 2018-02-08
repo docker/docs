@@ -1444,6 +1444,10 @@ The Docker Engine returns an error if the driver is not available.
 
     driver: overlay
 
+Starting in Compose file format 2.1, overlay networks are always created as
+`attachable`, and this is not configurable. This means that standalone
+containers can connect to overlay networks.
+
 ### driver_opts
 
 Specify a list of options as key-value pairs to pass to the driver for this

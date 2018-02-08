@@ -39,6 +39,15 @@ When you run `docker-compose up`, the following happens:
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
 
+> **In v2.1+, overlay networks are always `attachable`**
+>
+> Starting in Compose file format 2.1, overlay networks are always created as
+> `attachable`, and this is not configurable. This means that standalone
+> containers can connect to overlay networks.
+>
+> In Compose file format 3.x, you can optionally set the `attachable` property
+> to `false`.
+
 Each container can now look up the hostname `web` or `db` and
 get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
