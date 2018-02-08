@@ -62,3 +62,12 @@ It puts a separator between each element in the list.
 	{% raw %}
 	$ docker inspect --format "{{upper .Name}}" container
 	{% endraw %}
+
+
+## println
+
+`println` prints each value on a new line.
+
+	{% raw %}
+	$ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
+	{% endraw %}
