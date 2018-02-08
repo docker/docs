@@ -38,9 +38,7 @@ Release date: 1/9/2018
 - Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
 - Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
 
-**notes**
-
-There is currently an issue in LinuxKit that prevents containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
+> **Note** There is currently an issue in LinuxKit that prevents containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
 
 ### 17.09 CE
 
