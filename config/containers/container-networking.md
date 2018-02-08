@@ -63,3 +63,8 @@ settings on a per-container basis.
 | `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
 | `--hostname`   | The hostname a container uses for itself. Defaults to the container's name if not specified.                                                                                                                                                                        |
+
+## Proxy server
+
+If your container needs to use a proxy server, see
+[Use a proxy server](/network/proxy.md).
