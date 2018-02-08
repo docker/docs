@@ -26,9 +26,18 @@ title: Docker for Azure Release Notes
 
 ## Stable channel
 
-### 17.09 CE
+### 17.12 CE
 
 {{azure_blue_latest}}
+
+Release date: 1/9/2018
+
+- Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
+- Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
+
+> **Note** There is currently an issue in LinuxKit that prevents containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
+
+### 17.09 CE
 
 Release date: 10/6/2017
 
@@ -105,9 +114,18 @@ Release date: 01/18/2017
 
 ## Edge channel
 
-### 17.10 CE
+### 18.01 CE
 
 {{aws_blue_edge}}
+
+**New**
+
+Release date: 1/18/2018
+
+- Docker Engine upgraded to [Docker 18.01.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce){: target="_blank" class="_"}
+
+
+### 17.10 CE
 
 **New**
 
