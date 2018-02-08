@@ -56,14 +56,16 @@ func main() {
 		panic(err)
 	}
 
-	_, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
+	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
 		Cmd:   []string{"echo", "hello world"},
+		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
 		panic(err)
