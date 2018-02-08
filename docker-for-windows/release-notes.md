@@ -477,6 +477,12 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.02.0-ce-win52 2018-02-08 (Edge)
+
+* Upgrades
+  - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
+  - [Docker compose 1.19.0](https://github.com/docker/compose/releases/tag/1.19.0)
+
 ### Docker Community Edition 18.02.0-ce-rc2-win51 2018-02-02 (Edge)
 
 * Upgrades
