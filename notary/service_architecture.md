@@ -12,7 +12,7 @@ This document assumes familiarity with
 [The Update Framework](https://www.theupdateframework.com/){:target="_blank" class="_"},
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
-!TUF Key Hierarchy[](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
+![TUF Key Hierarchy](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
 
 - The root key is the root of all trust. It signs the
   [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" class="_"},
