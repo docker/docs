@@ -93,7 +93,7 @@ and will be connected together using an overlay network called `ingress`.
       <IP-ADDRESS-OF-MANAGER>:2377
     ```
 
-3.  On `worker-1`, join the swarm. If the host only has one network interface,
+3.  On `worker-2`, join the swarm. If the host only has one network interface,
     the `--advertise-addr` flag is optional.
 
     ```bash
