@@ -379,7 +379,10 @@ The example uses Linux hosts, but the same commands work on Windows.
               --network test-net \
               alpine
     ```
-
+    The `-dit` flags mean to start the container detached
+    (in the background), interactive (with the ability to type into it), and
+    with a TTY (so you can see the input and output).
+    
     > **Note**: There is nothing to prevent you from using the same container
     > name on multiple hosts, but automatic service discovery will not work if
     > you do, and you will need to refer to the containers by IP address.
