@@ -56,7 +56,7 @@ To accomplish this, set the following flags in the `daemon.json` file:
 
 ```none
 {
-    "graph": "/mnt/docker-data",
+    "data-root": "/mnt/docker-data",
     "storage-driver": "overlay"
 }
 ```
