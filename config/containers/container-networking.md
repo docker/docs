@@ -5,6 +5,7 @@ keywords: networking, container, standalone
 redirect_from:
 - /engine/userguide/networking/configure-dns/
 - /engine/userguide/networking/default_network/binding/
+- /engine/userguide/networking/default_network/container-communication/
 ---
 
 The type of network a container uses, whether it is a [bridge](bridges.md), an
