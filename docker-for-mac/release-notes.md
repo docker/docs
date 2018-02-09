@@ -514,6 +514,17 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.02.0-ce-mac52 2018-02-08 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
+  - [Docker compose 1.19.0](https://github.com/docker/compose/releases/tag/1.19.0)
+
+* Bug fixes and minor changes
+  - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
+  - Clearer error message when incompatible hardware is detected. Diagnostics are not proposed in the error popup in this case.
+
 ### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02 (Edge)
 
  
