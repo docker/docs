@@ -1,36 +1,40 @@
 ---
 description: Docker for Windows and Docker Toolbox
 keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
-title: Docker for Windows vs. Docker Toolbox
+title: Migrate Docker Toolbox
 ---
 
-If you already have an installation of Docker Toolbox, read these topics
-to learn how to migrate to Docker for Windows.
+This page explains how to migrate your Docker Toolbox disk image, or images if
+you have them, to Docker for Windows.
 
-## Migrating from Docker Toolbox to Docker for Mac
+In version 18.01.0 and higher, the Docker for Windows installer no longer
+prompts users to migrate from Docker Toolbox--you must do so manually.
 
-Docker for Windows does not propose Toolbox image migration as part of the
-Docker for Windows installer since version 18.01.0.  You can migrate existing
-Docker Toolbox images with the scripts described below. (Note that this
-migration cannot merge images from both Docker and Toolbox: any existing Docker
-image are *replaced* by the Toolbox images.)
+## How to migrate Docker Toolbox disk images to Docker for Windows
 
-To run these instructions you need to now how to run shell commands in a
-terminal. You also need a working `qemu-img.exe`; download it from https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip. 
+> **Warning**: Migrating disk images from Docker Toolbox _clobbers_ Docker
+> images if they exist. The migration process replaces the entire VM with your
+> previous Docker Toolbox data.
 
-Then:
-1. After installing Docker for Windows, stop Docker for Windows if you have started it.
-2. Move or delete your current Docker VM disk. (Keep in mind the Toolbox migration does not merge any image, it just replaces the entire VM with your previous Toolbox data)
- `mv 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx' C:/...`
-3. Convert your Toolbox image: 
-`qemu-img.exe convert 'C:\Users\<username>\.docker\machine\machines\default\disk.vmdk' -O vhdx -o subformat=dynamic -p 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx'`
-4. Restart Docker for Windows. It will start using the converted disk at `C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx`
+1.  Install [qemu](https://www.qemu.org/){: target="_blank" class="_"} (a machine emulator): [https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip](https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip).
+2.  Install [Docker for Windows](/docker-for-windows/install/){: target="_blank" class="_"}.
+3.  Stop Docker for Windows, if running.
+4.  Move your current Docker VM disk to a safe location:
 
-Optionally, if you are done with Docker Toolbox, you may fully uninstall
-it, see below.
+    ```shell
+    mv 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx' C:/<any directory>
+    ```
 
-## How do I uninstall Docker Toolbox?
+5.  Convert your Toolbox disk image:
 
-You might decide that you do not need Toolbox now that you have Docker for
-Windowsd, and want to uninstall it. For details on how to perform a clean
-uninstall of Toolbox, see [How to uninstall Toolbox](/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox).
+    ```shell
+    qemu-img.exe convert 'C:\Users\<username>\.docker\machine\machines\default\disk.vmdk' -O vhdx -o subformat=dynamic -p 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx'
+    ```
+
+6.  Restart Docker for Windows (with your converted disk).
+
+## How to uninstall Docker Toolbox
+
+Whether or not you migrate your Docker Toolbox images, you may decide to
+uninstall it. For details on how to perform a clean uninstall of Toolbox,
+see [How to uninstall Toolbox](/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox){: target="_blank" class="_"}.
