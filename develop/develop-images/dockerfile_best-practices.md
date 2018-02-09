@@ -461,6 +461,47 @@ Similar to having constant variables in a program (as opposed to hard-coding
 values), this approach lets you change a single `ENV` instruction to
 auto-magically bump the version of the software in your container.
 
+Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
+means that even if you unset the environment variable in a future layer, it
+still persists in this layer and its value can be dumped. You can test this by
+creating a Dockerfile like the following, and then building it.
+
+```Dockerfile
+FROM alpine
+ENV ADMIN_USER="mark"
+RUN echo $ADMIN_USER > ./mark
+RUN unset ADMIN_USER
+CMD sh
+```
+
+```bash
+$ docker run --rm -it test sh echo $ADMIN_USER
+
+mark
+```
+
+To prevent this, and really unset the environment variable, use a `RUN` command
+with shell commands, to set, use, and unset the variable all in a single layer.
+You can separate your commands with `;` or `&&`. If you use the second method,
+and one of the commands fails, the `docker build` also fails. This is usually a
+good idea. Using `\` as a line continuation character for Linux Dockerfiles
+improves readability. You could also put all of the commands into a shell script
+and have the `RUN` command just run that shell script.
+
+```Dockerfile
+FROM alpine
+RUN export ADMIN_USER="mark" \
+    && echo $ADMIN_USER > ./mark \
+    && unset ADMIN_USER
+CMD sh
+```
+
+```bash
+$ docker run --rm -it test sh echo $ADMIN_USER
+
+```
+
+
 ### ADD or COPY
 
 - [Dockerfile reference for the ADD instruction](/engine/reference/builder.md#add)
