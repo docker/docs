@@ -461,6 +461,31 @@ Similar to having constant variables in a program (as opposed to hard-coding
 values), this approach lets you change a single `ENV` instruction to
 auto-magically bump the version of the software in your container.
 
+Because a new intermediate layer is created after running the ENV command, the environment variable is effectively persisted.
+If you try to unset the variable afterwards, then the set value of the lower lying layer is used instead:
+Dockerfile
+`FROM alpine
+ENV ADMIN_USER="mark"
+RUN echo $ADMIN_USER > ./mark
+RUN unset ADMIN_USER
+CMD sh`
+
+Build and run: `$ docker run --rm -it test sh` shows:
+`/ # echo $ADMIN_USER
+mark
+`
+
+If the environment variable needs to be unset afther the command, or its content should not be serialized, use:
+Dockerfile
+`FROM alpine
+RUN export ADMIN_USER="mark"; echo $ADMIN_USER > ./mark;  unset ADMIN_USER
+CMD sh`
+
+Build and run: `$ docker run --rm -it test sh` shows:
+`/ # echo $ADMIN_USER
+
+`
+
 ### ADD or COPY
 
 - [Dockerfile reference for the ADD instruction](/engine/reference/builder.md#add)
