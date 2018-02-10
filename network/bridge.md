@@ -52,7 +52,7 @@ network.**
   flag for each. This means the Docker host needs to block access to the
   database port by other means.
 
-- **User-defined brides provide automatic DNS resolution between containers**.
+- **User-defined bridges provide automatic DNS resolution between containers**.
 
   Containers on the default bridge network can only access each other by IP
   addresses, unless you use the [`--link` option](/network/links/), which is
