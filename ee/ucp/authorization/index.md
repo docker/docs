@@ -27,18 +27,20 @@ permissions against resource sets.
 To authorize access to cluster resources across your organization, UCP
 administrators might take the following high-level steps:
 
-- Add and configure **subjects** (users and teams).
+- Add and configure **subjects** (users, teams, and service accounts).
 - Define custom **roles** (or use defaults) by adding permitted operations per
   type of resource.
-- Group cluster **resources** into Swarm collections or Kubernetes namespaces.
+- Group cluster **resources** into resource sets of Swarm collections or
+  Kubernetes namespaces.
 - Create **grants** by combining subject + role + resource set.
 
 For an example, see [Deploy stateless app with RBAC](deploy-stateless-app.md).
 
 ## Subjects
 
-A subject represents a user, team, or organization. A subject can be granted a
-role that defines permitted operations against one or more resource sets.
+A subject represents a user, team, organization, or service account. A subject
+can be granted a role that defines permitted operations against one or more
+resource sets.
 
 - **User**: A person authenticated by the authentication backend. Users can
   belong to one or more teams and one or more organizations.
@@ -46,6 +48,8 @@ role that defines permitted operations against one or more resource sets.
   team can be in one organization only.
 - **Organization**: A group of teams that share a specific set of permissions,
   defined by the roles of the organization.
+- **Service account**: A Kubernetes object that enables a workload to access
+  cluster resources that are assigned to a namespace.
 
 Learn to [create and configure users and teams](create-users-and-teams-manually.md).
 
@@ -67,8 +71,8 @@ Learn to [define roles with authorized API operations](define-roles.md).
 
 ## Resource sets
 
-To control user access, cluster resources are grouped into Docker Swarm *collections*
-or Kubernetes *namespaces*.
+To control user access, cluster resources are grouped into Docker Swarm
+*collections* or Kubernetes *namespaces*.
 
 - **Swarm collections**: A collection has a directory-like structure that holds
   Swarm resources. You can create collections in UCP by defining a directory path
@@ -105,6 +109,7 @@ resources.
 > An administrator is a user who creates subjects, groups resources by moving them
 > into collections or namespaces, defines roles by selecting allowable operations,
 > and applies grants to users and teams.
+{: .important}
 
 {% elsif include.version=="ucp-2.2" %}
 
