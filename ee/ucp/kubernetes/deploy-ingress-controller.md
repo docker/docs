@@ -290,7 +290,7 @@ at `/` and serves 200 on the `/healthz` endpoint.
     >
     > It may take several seconds for the HTTP backend and the ingress controller's
     > `Deployment` and `ReplicaSet` objects to be scheduled.
-    { .important }
+    {: .important}
 
     ![](../images/deploy-ingress-controller-2.png){: .with-border}
 
