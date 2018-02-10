@@ -306,7 +306,7 @@ connected to both networks.
 
     $ docker run -dit --name alpine4 --network alpine-net alpine ash
 
-    $ docker network connect alpine-net alpine4
+    $ docker network connect bridge alpine4
     ```
 
     Verify that all containers are running:
