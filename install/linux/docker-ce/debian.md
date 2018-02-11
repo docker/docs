@@ -168,6 +168,7 @@ from the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -184,6 +185,15 @@ from the repository.
 
     ```bash
     $ echo "deb [arch=armhf] {{ download-url-base }} \
+         $(lsb_release -cs) stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
+    ```
+
+    </div>
+    <div id="arm64_repo" class="tab-pane fade" markdown="1">
+
+    ```bash
+    $ echo "deb [arch=arm64] {{ download-url-base }} \
          $(lsb_release -cs) stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
