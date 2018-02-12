@@ -12,6 +12,29 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.7
+
+(13 February 2018)
+
+**Security Notice**
+
+The user must use `--log-driver=none` to disable the log driver for containers
+started by backup operations. This is a critical security fix for customers that
+rely on Universal Control Plane 2.1 and a log driver to capture logs from all
+containers across the platform.
+
+Caution is advised: any sensitive information that has already been disclosed in
+the logs will NOT be removed by this update. Sensitive information needs to be
+purged manually from the logs.
+Use the backup encryption mechanism with the `--passphrase` option when running a
+UCP backup.
+
+A full credentials re-generation and update transition procedure is available:
+[https://success.docker.com/article/KB000623](https://success.docker.com/article/KB000623)
+
+This is a breaking change on UCP backup operation. It is now mandatory to specify
+`--log-driver none` option for `docker run` for all UCP backups.
+
 ## Version 2.1.6
 
 (16 January 2018)
