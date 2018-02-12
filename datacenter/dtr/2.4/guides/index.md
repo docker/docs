@@ -34,10 +34,10 @@ and metadata such that if a machine fails, DTR continues to operate and can be r
 
 ## Efficiency
 
-DTR has the ability to [cache images closer to users](../admin/configure/deploy-caches/index.md)
+DTR has the ability to [cache images closer to users](admin/configure/deploy-caches/index.md)
 to reduce the amount of bandwidth used during docker pulls.
 
-DTR has the ability to [clean up unreferenced manifests and layers](../configure/garbage-collection.md).
+DTR has the ability to [clean up unreferenced manifests and layers](admin/configure/garbage-collection.md).
 
 ## Built-in access control
 
@@ -52,10 +52,10 @@ DTR has a built in security scanner that can be used to discover what versions
 of software are used in your images. It scans each layer and aggregates the
 results to give you a complete picture of what you are shipping as a part of
 your stack. Most importantly, it co-relates this information with a
-vulnerability database that is kept up to date through [periodic
-updates](admin/configure/set-up-vulnerability-scans.md). This
-gives you [unprecedented insight into your exposure to known security
-threats](user/manage-images/scan-images-for-vulnerabilities.md).
+vulnerability database that is kept up to date through
+[periodic updates](admin/configure/set-up-vulnerability-scans.md). This
+gives you
+[unprecedented insight into your exposure to known security threats](user/manage-images/scan-images-for-vulnerabilities.md).
 
 ## Image signing
 
@@ -63,7 +63,7 @@ DTR ships with [Notary](/notary/getting_started.md)
 built in so that you can use
 [Docker Content Trust](/engine/security/trust/content_trust.md) to sign
 and verify images. For more information about managing Notary data in DTR see
-the [DTR-specific notary documentation](user/manage-images/sign-images/manage-trusted-repositories.md).
+the [DTR-specific notary documentation](user/manage-images/sign-images/index.md).
 
 ## Where to go next
 
