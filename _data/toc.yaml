@@ -1756,7 +1756,9 @@ manuals:
       - title: Deploy a Compose-based app
         path: /ee/ucp/kubernetes/deploy-with-compose/
       - title: Deploy an ingress controller
-        path: /ee/ucp/kubernetes/deploy-ingress-controller/        
+        path: /ee/ucp/kubernetes/deploy-ingress-controller/
+      - title: Create a service account for a Kubernetes app
+        path: /ee/ucp/kubernetes/create-service-account/
     - title: API reference
       path: /reference/ucp/3.0/api/
       nosync: true
