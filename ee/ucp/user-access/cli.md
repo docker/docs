@@ -17,12 +17,12 @@ redirect_from:
 {% if include.version=="ucp-3.0" %}
 
 With Universal Control Plane you can continue using the tools you know and
-love like the Docker CLI client and Kubectl. You just need to download and use
+love like the Docker CLI client and kubectl. You just need to download and use
 a UCP client bundle.
 
 A client bundle contains a private and public key pair that authorizes your
 requests in UCP. It also contains utility scripts you can use to configure
-your Docker and Kubectl client tools to talk to your UCP deployment.
+your Docker and kubectl client tools to talk to your UCP deployment.
 
 ## Download client certificates
 
@@ -75,7 +75,7 @@ The client bundle utility scripts update the the environment variables
 `DOCKER_HOST` to make your client tools communicate with your UCP deployment,
 and the `DOCKER_CERT_PATH` environment variable to use the client certificates
 that are included in the client bundle you downloaded. The utility scripts also
-run the `kubectl config` command to configure Kubectl.
+run the `kubectl config` command to configure kubectl.
 
 To confirm that your client tools are now communicating with UCP, run:
 
@@ -94,6 +94,7 @@ docker version --format '{{.Server.Version}}'
 <hr>
 </div>
 <div id="kube" class="tab-pane fade" markdown="1">
+
 ```bash
 kubectl config current-context
 ```
@@ -101,7 +102,7 @@ kubectl config current-context
 </div>
 </div>
 
-You can now use the Docker and Kubectl clients to create resources in UCP.
+You can now use the Docker and kubectl clients to create resources in UCP.
 
 ## Client certificates for administrators
 
@@ -116,16 +117,16 @@ UCP issues different types of certificates depending on the user:
 
 You can also download client bundles by using the
 [UCP REST API](/reference/ucp/3.0/api/). In this example,
-we use `curl` to make the web requests to the API, and `jq` to parse the
-responses.
+we use `curl` to make the web requests to the API, `jq` to parse the
+responses, and `unzip` to unpack the zip archive.
 
-To install these tools on a Ubuntu distribution, you can run:
+To install these tools on an Ubuntu distribution, you can run:
 
 ```bash
-sudo apt-get update && sudo apt-get install curl jq
+sudo apt-get update && sudo apt-get install curl jq unzip
 ```
 
-Then you get an authentication token from UCP, and use it to download the
+Then you get an authentication token from UCP and use it to download the
 client certificates.
 
 ```bash
@@ -134,6 +135,12 @@ AUTHTOKEN=$(curl -sk -d '{"username":"<username>","password":"<password>"}' http
 
 # Download the client certificate bundle
 curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundle -o bundle.zip
+
+# Unzip the bundle.
+unzip bundle.zip
+
+# Run the utility script.
+eval "$(<env.sh)"
 ```
 
 On Windows Server 2016, open an elevated PowerShell prompt and run:
