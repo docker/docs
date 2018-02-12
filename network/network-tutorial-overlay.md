@@ -186,7 +186,7 @@ connect a service to each of them.
       port 80 on one of the 5 service tasks, even if no tasks are currently
       running on the node you browse to. If you want to publish the port using
       `host` mode, you can add `mode=host` to the `--publish` output. However,
-      you should also use `--global` instead of `--replicas=5` in this case,
+      you should also use `--mode global` instead of `--replicas=5` in this case,
       since only one service task can bind a given port on a given node.
 
 3.  Run `docker service ls` to monitor the progress of service bring-up, which
