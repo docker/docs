@@ -12,6 +12,10 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.1.7
+
+(12 February 2018)
+
 ## Version 2.1.6
 
 (16 January 2018)
