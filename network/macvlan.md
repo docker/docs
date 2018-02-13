@@ -32,7 +32,7 @@ trunk bridge mode.
 
 - In bridge mode,Macvlan traffic goes through a physical device on the host.
 
-- In 8021.q trunk bridge mode, traffic goes through an 8021.q sub-interface
+- In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
   which Docker creates on the fly. This allows you to control routing and
   filtering at a more granular level.
 
@@ -61,7 +61,7 @@ $ docker network create -d macvlan  \
   -o parent=eth0 macnet32
 ```
 
-### 8021.q trunk bridge mode
+### 802.1q trunk bridge mode
 
 If you specify a `parent` interface name with a dot included, such as `eth0.50`,
 Docker interprets that as a sub-interface of `eth0` and creates the sub-interface
