@@ -4,11 +4,14 @@ keywords: Docker, docker, scan, scanning, security, registry, plans, Docker Clou
 title: Docker Security Scanning
 ---
 
+> **The Docker Security Scanning preview service will end on March 31st, 2018, for private repos (not official repos) in both Docker Cloud and Docker Hub. Until then, scanning in private repos is limited to one scan per day on the “latest” tag.**
+
 Docker Cloud and Docker Hub can scan images in private repositories to verify
 that they are free from known security vulnerabilities or exposures, and report
 the results of the scan for each image tag.
 
-> **Note**: Docker Security Scanning uses an older user interface style on Docker Hub, and looks a little different than the images in this document.
+On Docker Hub, Docker Security Scanning looks a little different than the images
+in this document.
 
 ![Scanned results](images/scan-view.png)
 
