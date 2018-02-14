@@ -59,33 +59,39 @@ between hosts.
 
 ## Ports used
 
-When installing UCP on a host, make sure the following ports are open:
+When installing UCP on a host, a series of ports need to be opened to incoming
+traffic. Each of these ports will expect incoming traffic from a set of hosts,
+indicated as the "Scope" of that port. The three scopes are:
+- External: Traffic arrives from outside the cluster through end-user
+  interaction.
+- Internal: Traffic arrives from other hosts in the same cluster.
+- Self: Traffic arrives to that port only from processes on the same host.
 
-|       Hosts       | Direction |          Port           |                                      Purpose                                      |
-| :---------------- | :-------: | :---------------------- | :-------------------------------------------------------------------------------- |
-| managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
-| managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
-| managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
-| workers           |    out    | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
-| managers, workers |  in, out  | TCP 4194                | Port for Kubelet cAdvisor                                                         |
-| managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
-| managers, workers |  in, out  | TCP 6443                | Port for Kubernetes API server                                                    |
-| managers, workers |  in, out  | TCP 6444                | Port for Kubernetes reverse proxy                                                 |
-| managers, workers |  in, out  | TCP, UDP 7946           | Port for gossip-based clustering                                                  |
-| managers, workers |  in, out  | TCP 10248               | Port for Kubelet healthz                                                          |
-| managers, workers |  in, out  | TCP 10250               | Port for Kubelet                                                                  |
-| managers, workers |  in, out  | TCP 10256               | Port for Kubernetes proxy healthz                                                 |
-| managers, workers |  in, out  | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
-| managers, workers |  in, out  | TCP 12378               | Port for Etcd reverse proxy                                                       |
-| managers          |  in, out  | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |  in, out  | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |  in, out  | TCP 12381               | Port for the certificate authority                                                |
-| managers          |  in, out  | TCP 12382               | Port for the UCP certificate authority                                            |
-| managers          |  in, out  | TCP 12383               | Port for the authentication storage backend                                       |
-| managers          |  in, out  | TCP 12384               | Port for the authentication storage backend for replication across managers       |
-| managers          |  in, out  | TCP 12385               | Port for the authentication service API                                           |
-| managers          |  in, out  | TCP 12386               | Port for the authentication worker                                                |
-| managers          |  in, out  | TCP 12387               | Port for the metrics service                                                      |
+Make sure the following ports are open for incoming traffic on the respective
+host types:
+
+|       Hosts       |          Port           |          Scope          |                                      Purpose                                      |
+| :---------------- | :---------------------- | :---------------------- | :-------------------------------------------------------------------------------- |
+| managers, workers | TCP 179                 | Internal                | Port for BGP peers, used for kubernetes networking                                |
+| managers          | TCP 443  (configurable) | External, Internal      | Port for the UCP web UI and API                                                   |
+| managers          | TCP 2376 (configurable) | Internal                | Port for the Docker Swarm manager. Used for backwards compatibility               |
+| managers          | TCP 2377 (configurable) | Internal,               | Port for control communication between swarm nodes                                |
+| managers, workers | UDP 4789                | Internal,               | Port for overlay networking                                                       |
+| managers          | TCP 6443 (configurable) | External, Internal      | Port for Kubernetes API server                                                    |
+| managers, workers | TCP 6444                | Self                    | Port for Kubernetes API reverse proxy                                             |
+| managers, workers | TCP, UDP 7946           | Internal                | Port for gossip-based clustering                                                  |
+| managers, workers | TCP 10250               | Internal                | Port for Kubelet                                                                  |
+| managers, workers | TCP 12376               | Internal                | Port for a TLS authentication proxy that provides access to the Docker Engine     |
+| managers, workers | TCP 12378               | Self                    | Port for Etcd reverse proxy                                                       |
+| managers          | TCP 12379               | Internal                | Port for Etcd Control API															|
+| managers          | TCP 12380               | Internal                | Port for Etcd Peer API                                                            |
+| managers          | TCP 12381               | Internal                | Port for the UCP cluster certificate authority                                    |
+| managers          | TCP 12382               | Internal                | Port for the UCP client certificate authority                                     |
+| managers          | TCP 12383               | Internal                | Port for the authentication storage backend                                       |
+| managers          | TCP 12384               | Internal                | Port for the authentication storage backend for replication across managers       |
+| managers          | TCP 12385               | Internal                | Port for the authentication service API                                           |
+| managers          | TCP 12386               | Internal                | Port for the authentication worker                                                |
+| managers          | TCP 12387               | Internal                | Port for the metrics service                                                      |
 
 For overlay networks with encryption to work, you need to ensure that
 IP protocol 50 (ESP) traffic is allowed.
