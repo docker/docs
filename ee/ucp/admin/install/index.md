@@ -87,6 +87,14 @@ To install UCP:
     To find what other options are available in the install command, check the
     [reference documentation](/reference/ucp/3.0/cli/install.md).
 
+> Custom CNI plugins
+>
+> If you want to use a third-party Container Networking Interface (CNI) plugin,
+> like Flannel or Weave, modify the previous command line to include the 
+> `--cni-installer-url` option. Learn how to
+> [install a CNI plugin](../../kubernetes/install-cni-plugin.md).
+{: important}
+
 ## Step 5: License your installation
 
 Now that UCP is installed, you need to license it.
