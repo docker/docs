@@ -360,7 +360,7 @@ And that's it, the app is deployed on a swarm cluster!
 > ```bash
 > docker login registry.example.com
 >
-> docker stack deploy --with-registry-auth -c docker-compose-yml getstartedlab
+> docker stack deploy --with-registry-auth -c docker-compose.yml getstartedlab
 > ```
 > 
 > This passes the login token from your local client to the swarm nodes where the
