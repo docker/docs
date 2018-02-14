@@ -5,6 +5,7 @@ keywords: network, overlay, user-defined, swarm, service
 redirect_from:
 - /engine/swarm/networking/
 - /engine/userguide/networking/overlay-security-model/
+- /config/containers/overlay/
 ---
 
 The `overlay` network driver creates a distributed network among multiple
@@ -286,4 +287,3 @@ routing on the individual Docker daemon hosts.
 - Learn about [networking from the container's point of view](/config/containers/container-networking.md)
 - Learn about [standalone bridge networks](/network/bridge.md)
 - Learn about [Macvlan networks](/network/macvlan.md)
-
