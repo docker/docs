@@ -121,6 +121,13 @@ avoid changing the orchestrator setting. If you do change the orchestrator for a
 node, your workloads are evicted, and you must deploy them again through the
 new orchestrator.
 
+> Node demotion and orchestrator type
+>
+> When you promote a worker node to be a manager, its orchestrator type
+> automatically changes to `Mixed`. If you demote the same node to be a worker,
+> its orchestrator type remains as `Mixed`.
+{: important}
+
 {% endif %}
 {% endif %}
 
