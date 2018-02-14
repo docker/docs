@@ -7,6 +7,7 @@ redirect_from:
 - /engine/userguide/networking/default_network/dockerlinks/
 - /engine/userguide/networking/default_network/build-bridges/
 - /engine/userguide/networking/work-with-networks/
+- /config/containers/bridges/
 ---
 
 In terms of networking, a bridge network is a Link Layer device
