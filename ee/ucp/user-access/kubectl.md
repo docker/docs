@@ -12,6 +12,8 @@ next_steps:
   title: Deploy to Kubernetes on Docker for Mac
 ---
 
+{% if include.version=="ucp-3.0" %}
+
 Docker EE installs Kubernetes automatically when you install UCP, and the
 web UI enables deploying Kubernetes workloads and monitoring pods. You can
 also interact with the Kubernetes deployment by using the Kubernetes
@@ -100,4 +102,6 @@ objects, you'll see something like this:
 NAME             TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 svc/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   5d
 ```
+
+{% endif %}
 
