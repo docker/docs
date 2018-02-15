@@ -134,7 +134,7 @@ Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. Dur
 #### Install with the CLI
 
 You can also invoke the Docker for Azure template from the
-[Azure CLI](https://docs.microsoft.com/cs-cz/cli/azure/install-azure-cli):
+[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli):
 
 The
 [Docker for Azure Template](https://download.docker.com/azure/stable/Docker.tmpl)
