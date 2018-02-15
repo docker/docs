@@ -27,9 +27,10 @@ manipulating volumes created with 3rd party volume plugins.
 
 **Known issues**
 
-* The web UI might not allow users to create volumes using a volume plugin, and
-add the volume to a collection other than `/Shared`. As a workaround,
-create the volume from the CLI.
+* UCP doesn't allow enforcing role-based access control for third-party
+volume plugins. If you're using third-party volume plugins and are planning on
+upgrade UCP, you can skip 2.2.5 and wait for the upcomming 2.2.6 release, which
+will provide an option to turn of RBAC enforcement for volumes.
 
 ## Version 2.2.4
 
