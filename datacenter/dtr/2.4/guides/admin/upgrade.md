@@ -73,7 +73,7 @@ $ docker run -it --rm \
 
 By default the upgrade command runs in interactive mode and prompts you for
 any necessary information. You can also check the
-[reference documentation](../../../reference/cli/index.md) for other existing flags.
+[reference documentation](../../reference/cli/index.md) for other existing flags.
 
 The upgrade command will start replacing every container in your DTR cluster,
 one replica at a time. It will also perform certain data migrations. If anything
