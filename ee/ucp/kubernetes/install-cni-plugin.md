@@ -1,7 +1,7 @@
 ---
 title: Install a CNI plugin
 description: Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane.
-keywords: ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave
+keywords: ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave, ipip, calico
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
@@ -66,5 +66,36 @@ Use the following commands to get the YAML files for popular CNI plugins.
   # Get the URL for the Romana CNI plugin.
   CNI_URL="https://raw.githubusercontent.com/romana/romana/master/docs/kubernetes/romana-kubeadm.yml"
   ```
+
+## Disable IP in IP overlay tunneling
+
+The Calico CNI plugin supports both overlay (IPIP) and underlay forwarding
+technologies. By default, Docker UCP uses IPIP overlay tunneling.
+
+If you're used to managing applications at the network level through the 
+underlay visibility, or you want to reuse existing networking tools in the
+underlay, you may want to disable the IPIP functionality. Run the following
+commands on the Kubernetes master node to disable IPIP overlay tunneling.
+
+```bash
+# Exec into the Calico Kubernetes controller container.
+docker exec -it $(docker ps --filter name=k8s_calico-kube-controllers_calico-kube-controllers -q) sh
+
+# Download calicoctl, which must be included in the container image.
+apk update && apk add ca-certificates && update-ca-certificates && apk add openssl
+wget https://github.com/projectcalico/calicoctl/releases/download/v1.6.3/calicoctl
+
+# Get the IP pool configuration. 
+./calicoctl get ippool -o yaml > ippool.yaml
+
+# Edit the file: Disable IPIP in ippool.yaml by setting "enabled: false".
+
+# Apply the edited file to the Calico plugin.
+./calicoctl apply -f ippool.yaml
+
+```
+
+These steps disable overlay tunneling, and Calico uses the underlay networking,
+in environments where it's supported.
 
 {% endif %}
