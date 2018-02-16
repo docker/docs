@@ -245,7 +245,7 @@ The Docker daemon log can be viewed by using one of the following methods:
 - By running `journalctl -u docker.service` on Linux systems using `systemctl`
 - `/var/log/messages`, `/var/log/daemon.log`, or `/var/log/docker.log` on older
   Linux systems
-- By running `Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-5) | Sort-Object Time` on Docker EE for Windows Server
+- By running `Get-EventLog -LogName Application -Source Docker -After (Get-Date).AddMinutes(-5) | Sort-Object Time | Export-CSV ~/last5minutes.CSV` on Docker EE for Windows Server
 
 > **Note**: It is not possible to manually generate a stack trace on Docker for
 > Mac or Docker for Windows. However, you can click the Docker taskbar icon and
