@@ -34,13 +34,13 @@ Compose to set up and run WordPress. Before starting, install
     mount for data persistence:
 
     ```none
-    version: '3'
+    version: '3.3'
 
     services:
        db:
          image: mysql:5.7
          volumes:
-           - db_data:/var/lib/mysql
+           - dbdata:/var/lib/mysql
          restart: always
          environment:
            MYSQL_ROOT_PASSWORD: somewordpress
@@ -60,7 +60,7 @@ Compose to set up and run WordPress. Before starting, install
            WORDPRESS_DB_USER: wordpress
            WORDPRESS_DB_PASSWORD: wordpress
     volumes:
-        db_data:
+        dbdata:
     ```
 
    > **Notes**:
