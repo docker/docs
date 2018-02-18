@@ -34,6 +34,7 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 -   `--digitalocean-region`: The region to create the droplet in, see [Regions API](https://developers.digitalocean.com/documentation/v2/#regions) for how to get a list.
 -   `--digitalocean-size`: The size of the Digital Ocean droplet (larger than default options are of the form `2gb`).
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
+-   `--digitalocean-ssh-key-path`: SSH private key path.
 -   `--digitalocean-ssh-port`: SSH port.
 -   `--digitalocean-ssh-user`: SSH username.
 -   `--digitalocean-tags`: Comma-separated list of tags to apply to the Droplet, see [Droplet tagging](https://developers.digitalocean.com/documentation/v2/#tags)
@@ -53,6 +54,7 @@ The DigitalOcean driver uses `ubuntu-16-04-x64` as the default image.
 | `--digitalocean-region`             | `DIGITALOCEAN_REGION`             | `nyc3`             |
 | `--digitalocean-size`               | `DIGITALOCEAN_SIZE`               | `512mb`            |
 | `--digitalocean-ssh-key-fingerprint`| `DIGITALOCEAN_SSH_KEY_FINGERPRINT`| -                  |
+| `--digitalocean-ssh-key-path`       | `DIGITALOCEAN_SSH_KEY_PATH`       | -                  |
 | `--digitalocean-ssh-port`           | `DIGITALOCEAN_SSH_PORT`           | 22                 |
 | `--digitalocean-ssh-user`           | `DIGITALOCEAN_SSH_USER`           | `root`             |
 | `--digitalocean-tags`               | `DIGITALOCEAN_TAGS`               | -                  |
