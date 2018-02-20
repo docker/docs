@@ -73,7 +73,21 @@ Kubernetes features on Docker EE include:
 - Interoperability between Swarm and Kubernetes workloads for networking and
   storage
 
-The default Docker EE installation includes both  Kubernetes and Swarm
+In addition, UCP integrates with Kubernetes by using admission controllers,
+which enable:
+
+- Authenticating user client bundle certificates when communicating directly
+  with the Kubernetes API server
+- Authorizing requests via the UCP role-based access control model
+- Assigning nodes to a namespace by injecting a `NodeSelector` automatically
+  to workloads via admission control
+- Keeping all nodes in both Kubernetes and Swarm orchestrator inventories
+- Fine-grained access control and privilege escalation prevention without
+  the `PodSecurityPolicy` admission controller
+- Resolving images of deployed workloads automatically, and accepting or
+  rejecting images based on UCP's signing-policy feature
+
+The default Docker EE installation includes both Kubernetes and Swarm
 components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
 
