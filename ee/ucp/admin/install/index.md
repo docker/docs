@@ -50,7 +50,7 @@ Skip this step if you want to use the defaults provided by UCP.
 Docker UCP uses named volumes to persist data. If you want
 to customize the drivers used to manage these volumes, you can create the
 volumes before installing UCP. When you install UCP, the installer
-will notice that the volumes already exist, and will start using them.
+will notice that the volumes already exist, and it will start using them.
 [Learn about the named volumes used by UCP](../../ucp-architecture.md).
 
 If these volumes don't exist, they'll be automatically created when installing
@@ -61,8 +61,19 @@ UCP.
 To install UCP, you use the `docker/ucp` image, which has commands to install
 and manage UCP.
 
-Make sure you follow the [UCP System requirements](system-requirements.md) in regards to networking ports.
-Ensure that your hardware or software firewalls are open appropriately or disabled.
+Make sure you follow the [UCP System requirements](system-requirements.md)
+for opening networking ports. Ensure that your hardware or software firewalls
+are open appropriately or disabled.
+
+> Ubuntu 14.04 mounts
+> 
+> For UCP to install correctly on Ubuntu 14.04, `/mnt` and other mounts
+> must be shared:
+> ```
+> sudo mount --make-shared /mnt
+> sudo mount --make-shared / 
+> sudo mount --make-shared /run 
+> ```
 
 To install UCP:
 
