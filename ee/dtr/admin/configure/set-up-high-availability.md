@@ -48,6 +48,9 @@ To have high-availability on UCP and DTR, you need a minimum of:
 * 3 dedicated nodes to install DTR with high availability,
 * As many nodes as you want for running your containers and applications.
 
+You also need to configure the DTR replicas to share the
+[same object storage](external-storage/index.md).
+
 ## Join more DTR replicas
 
 To add replicas to an existing DTR deployment:

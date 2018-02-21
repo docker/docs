@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="740px" height="350px" viewBox="0 0 740 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
-    <title>architecture-4</title>
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>set-up-high-availability-1</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="4" cy="4" r="4"></circle>
@@ -10,49 +10,50 @@
         <circle id="path-4" cx="4" cy="4" r="4"></circle>
         <circle id="path-5" cx="4" cy="4" r="4"></circle>
         <circle id="path-6" cx="4" cy="4" r="4"></circle>
+        <circle id="path-7" cx="4" cy="4" r="4"></circle>
+        <circle id="path-8" cx="4" cy="4" r="4"></circle>
+        <circle id="path-9" cx="4" cy="4" r="4"></circle>
     </defs>
     <g id="dtr-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="architecture-4">
+        <g id="set-up-high-availability-1">
             <g id="ddc" transform="translate(30.000000, 56.000000)">
                 <g id="swarm-group" transform="translate(0.000000, 42.000000)">
                     <text id="Docker-swarm" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" fill="#E0E4E7">
-                        <tspan x="15.8218828" y="236.009524">Docker swarm</tspan>
+                        <tspan x="11.8218828" y="146.009524">Docker swarm</tspan>
                     </text>
-                    <rect id="group" stroke="#E0E4E7" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="703" height="245" rx="2"></rect>
+                    <rect id="group" stroke="#E0E4E7" stroke-width="2" stroke-dasharray="5,5,5,5" x="0" y="0" width="703" height="154" rx="2"></rect>
+                </g>
+                <g id="network" transform="translate(369.000000, 209.000000)">
+                    <rect id="Rectangle-138" fill="#FFB463" x="0" y="0" width="313" height="22" rx="2"></rect>
+                    <text id="shared-object-storag" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="105.921387" y="15">shared object storage</tspan>
+                    </text>
+                </g>
+                <g id="arrows" transform="translate(413.000000, 148.000000)">
+                    <g id="arrow-copy-2" transform="translate(218.500000, 32.500000) rotate(-90.000000) translate(-218.500000, -32.500000) translate(186.500000, 28.500000)">
+                        <path d="M3,4 L64,4" id="Line" stroke="#FFB463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <g id="Oval">
+                            <use fill="#FFB463" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                        </g>
+                    </g>
+                    <g id="arrow-copy-3" transform="translate(111.500000, 32.500000) rotate(-90.000000) translate(-111.500000, -32.500000) translate(79.500000, 28.500000)">
+                        <path d="M3,4 L64,4" id="Line" stroke="#FFB463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <g id="Oval">
+                            <use fill="#FFB463" fill-rule="evenodd" xlink:href="#path-2"></use>
+                            <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                        </g>
+                    </g>
+                    <g id="arrow-copy-4" transform="translate(4.500000, 32.500000) rotate(-90.000000) translate(-4.500000, -32.500000) translate(-27.500000, 28.500000)">
+                        <path d="M3,4 L64,4" id="Line" stroke="#FFB463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <g id="Oval">
+                            <use fill="#FFB463" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                        </g>
+                    </g>
                 </g>
                 <g id="load-balancers" transform="translate(23.000000, 0.000000)">
                     <g id="right" transform="translate(347.000000, 0.000000)">
-                        <g id="main">
-                            <rect id="Rectangle-138" fill="#445D6E" x="0" y="0" width="309" height="22" rx="2"></rect>
-                            <text id="your-load-balancer" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="111.437988" y="15">your load balancer</tspan>
-                            </text>
-                        </g>
-                        <g id="arrows" transform="translate(43.000000, 21.000000)">
-                            <g id="arrow-copy-3" transform="translate(218.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-218.500000, -17.000000) translate(202.000000, 13.000000)">
-                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <g id="Oval">
-                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-1"></use>
-                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
-                                </g>
-                            </g>
-                            <g id="arrow-copy" transform="translate(111.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-111.500000, -17.000000) translate(95.000000, 13.000000)">
-                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <g id="Oval">
-                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-2"></use>
-                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
-                                </g>
-                            </g>
-                            <g id="arrow-copy-2" transform="translate(4.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-4.500000, -17.000000) translate(-12.000000, 13.000000)">
-                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <g id="Oval">
-                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-3"></use>
-                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                    <g id="left">
                         <g id="main">
                             <rect id="Rectangle-138" fill="#445D6E" x="0" y="0" width="309" height="22" rx="2"></rect>
                             <text id="your-load-balancer" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
@@ -83,59 +84,42 @@
                             </g>
                         </g>
                     </g>
+                    <g id="left">
+                        <g id="main">
+                            <rect id="Rectangle-138" fill="#445D6E" x="0" y="0" width="309" height="22" rx="2"></rect>
+                            <text id="your-load-balancer" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="111.437988" y="15">your load balancer</tspan>
+                            </text>
+                        </g>
+                        <g id="arrows" transform="translate(43.000000, 21.000000)">
+                            <g id="arrow-copy-3" transform="translate(218.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-218.500000, -17.000000) translate(202.000000, 13.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-7"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="arrow-copy" transform="translate(111.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-111.500000, -17.000000) translate(95.000000, 13.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-8"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                            <g id="arrow-copy-2" transform="translate(4.500000, 17.000000) scale(1, -1) rotate(-90.000000) translate(-4.500000, -17.000000) translate(-12.000000, 13.000000)">
+                                <path d="M2,4 L33,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <g id="Oval">
+                                    <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-9"></use>
+                                    <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
                 </g>
                 <g id="swam" transform="translate(22.000000, 54.000000)">
                     <g id="nodes">
-                        <g id="workers" transform="translate(216.000000, 118.000000)">
-                            <g id="node-1">
-                                <g id="node">
-                                    <g id="node-label">
-                                        <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
-                                        <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                            <tspan x="6" y="14">worker node</tspan>
-                                        </text>
-                                    </g>
-                                </g>
-                                <g id="engine" transform="translate(1.000000, 79.000000)">
-                                    <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="7.59716797" y="15">Docker Engine EE</tspan>
-                                    </text>
-                                </g>
-                                <g id="ucp" transform="translate(1.000000, 56.000000)">
-                                    <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="20.4755859" y="15">UCP worker</tspan>
-                                    </text>
-                                </g>
-                                <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
-                            </g>
-                            <g id="node-1-copy-3" transform="translate(107.000000, 0.000000)">
-                                <g id="node">
-                                    <g id="node-label">
-                                        <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
-                                        <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
-                                            <tspan x="6" y="14">worker node</tspan>
-                                        </text>
-                                    </g>
-                                </g>
-                                <g id="engine" transform="translate(1.000000, 79.000000)">
-                                    <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="7.59716797" y="15">Docker Engine EE</tspan>
-                                    </text>
-                                </g>
-                                <g id="ucp" transform="translate(1.000000, 56.000000)">
-                                    <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="20.4755859" y="15">UCP worker</tspan>
-                                    </text>
-                                </g>
-                                <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
-                            </g>
-                        </g>
                         <g id="workers-dtr" transform="translate(347.000000, 0.000000)">
-                            <g id="node-1-copy-4">
+                            <g id="node-1-copy-6" transform="translate(214.000000, 0.000000)">
                                 <g id="node">
                                     <g id="node-label">
                                         <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
@@ -193,7 +177,7 @@
                                 </g>
                                 <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
                             </g>
-                            <g id="node-1-copy-6" transform="translate(214.000000, 0.000000)">
+                            <g id="node-1-copy-4">
                                 <g id="node">
                                     <g id="node-label">
                                         <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
@@ -235,8 +219,8 @@
                                 </g>
                                 <g id="engine" transform="translate(1.000000, 79.000000)">
                                     <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="7.59716797" y="15">Docker Engine EE</tspan>
+                                    <text id="CS-Docker-Engine" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="7.26025391" y="15">CS Docker Engine</tspan>
                                     </text>
                                 </g>
                                 <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -258,8 +242,8 @@
                                 </g>
                                 <g id="engine" transform="translate(1.000000, 79.000000)">
                                     <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="7.59716797" y="15">Docker Engine EE</tspan>
+                                    <text id="CS-Docker-Engine" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="7.26025391" y="15">CS Docker Engine</tspan>
                                     </text>
                                 </g>
                                 <g id="ucp" transform="translate(1.000000, 56.000000)">
@@ -281,8 +265,8 @@
                                 </g>
                                 <g id="engine" transform="translate(1.000000, 79.000000)">
                                     <rect id="Rectangle-138" fill="#1488C6" x="0" y="0" width="95" height="22" rx="2"></rect>
-                                    <text id="Docker-Engine-EE" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                        <tspan x="7.59716797" y="15">Docker Engine EE</tspan>
+                                    <text id="CS-Docker-Engine" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                        <tspan x="7.26025391" y="15">CS Docker Engine</tspan>
                                     </text>
                                 </g>
                                 <g id="ucp" transform="translate(1.000000, 56.000000)">
