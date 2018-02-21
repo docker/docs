@@ -4,7 +4,7 @@ keywords: Search, Docker, documentation, manual, guide, reference, api
 noratings: true
 notoc: true
 notags: true
-title: "Docs search <span id='searchTerm'></span>"
+title: "Docs search"
 tree: false
 ---
 
@@ -45,10 +45,13 @@ tree: false
 <script defer>
 setTimeout(function(){
   $(document).ready(function() {
-    if (decodeURI(queryString().q) != "undefined" && decodeURI(queryString().q) && decodeURI(queryString().q).length > 0) {
-      $("#st-search-input").val(decodeURI(queryString().q));
+    let searchTerm = decodeURI(queryString().q);
+    if(searchTerm != 'undefined' && searchTerm != "") {
+      $("#st-search-input").val(searchTerm);
       $("#st-search-input").focus();
-      $("#searchTerm").html("results for: " + decodeURI(queryString().q))
+      // Update heading with term user searched for
+      let currHeading = $("h1").text();
+      $("h1").text(currHeading + " results for: " + searchTerm);
     }
   });
 }, 1);
