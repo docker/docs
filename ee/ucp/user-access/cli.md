@@ -24,15 +24,33 @@ A client bundle contains a private and public key pair that authorizes your
 requests in UCP. It also contains utility scripts you can use to configure
 your Docker and kubectl client tools to talk to your UCP deployment.
 
+## Get the Docker CLI client
+
+Download the Docker CLI client by using the UCP web UI. The web UI ensures that
+you have the right version of the CLI tools for the current version of UCP.
+
+1.  From the dashboard, click **Learn more** in the **Docker CLI** card at the
+    bottom of the page.
+    
+    ![](../images/cli-based-access-2.png){: .with-border}
+
+2.  On the **Create and manage services using the CLI** page, click 
+    **Download Linux client binary** or **Download MacOS client binary**.
+
+    ![](../images/cli-based-access-3.png){: .with-border}
+
+3.  Unzip the `docker` archive.
+
 ## Download client certificates
 
-To download a client certificate bundle, log in to the UCP web UI and
-navigate to the **My Profile** page.
+To use the Docker CLI with UCP, download a client certificate bundle by using 
+the UCP web UI.
 
-In the left pane, click **Client Bundles** and choose **New Client Bundle**
-to download the certificate bundle.
+1.  Navigate to the **My Profile** page.
+2.  In the left pane, click **Client Bundles** and choose **New Client Bundle**
+    to download the certificate bundle.
 
-![](../images/cli-based-access-1.png){: .with-border}
+    ![](../images/cli-based-access-1.png){: .with-border}
 
 ## Use client certificates
 
