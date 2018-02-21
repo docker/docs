@@ -82,6 +82,11 @@ specify `--log-protocol`.
 * Misc
   * Removed support for manifest schema v1. This doesn't  affect users.
 
+### Known issues
+
+* When deleting a repository with signed images, the DTR web UI no longer
+shows instructions on how to delete trust data.
+
 {% elsif include.version=="dtr-2.4" %}
 
 - [DTR 2.4 release notes](/datacenter/dtr/2.4/guides/release-notes.md)
