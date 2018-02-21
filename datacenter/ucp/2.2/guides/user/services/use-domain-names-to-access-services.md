@@ -70,6 +70,15 @@ Now that WordPress is deployed, add a new DNS entry that maps
 When testing locally, you can also change your `/etc/hosts` file to
 create this mapping, instead of using a DNS service.
 
+> #### HRM with Windows Server:
+> Windows Server doesn't support Swarm Mode Routing Mesh yet 
+> (*not considering Windows Server version 1709 which will be out soon*).
+> This means the hrm service is exposed only through the manager node's ip 
+> (*since Windows Server cannot be a manager node*).
+> DNS entry for the host name('wordpress.example.org' in this example) should 
+> therefore be mapped to manager nodes and not to any of the Windows worker 
+> nodes.
+
 Once this is done, you can access the wordpress service from your browser.
 
 ![](../../images/use-domain-names-7.png){: .with-border}
