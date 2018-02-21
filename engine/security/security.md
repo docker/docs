@@ -241,7 +241,7 @@ can be found in
 
 ## Conclusions
 
-Docker containers are, by default, quite secure; especially if you take
+Docker containers are, by default, quite secure; especially if you
 run your processes as non-privileged users inside the container.
 
 You can add an extra layer of safety by enabling AppArmor, SELinux,
