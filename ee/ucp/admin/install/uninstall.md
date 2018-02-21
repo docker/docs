@@ -58,6 +58,12 @@ in the swarm won't be able to communicate at all. To fix this, either reinstall
 UCP before the certificates expire or disable swarm mode by running
 `docker swarm leave --force` on every node.
 
+## Restore IP tables
+
+When you install UCP, the Calico network plugin changes the host's IP tables.
+When you uninstall UCP, the IP tables aren't reverted to their previous state.
+After you uninstall UCP, restart the node to restore its IP tables.
+
 {% elsif include.version=="ucp-2.2" %}
 
 Learn about [uninstalling UCP](/datacenter/ucp/2.2/guides/admin/install/uninstall.md).
