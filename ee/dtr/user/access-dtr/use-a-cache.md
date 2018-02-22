@@ -13,8 +13,10 @@ Docker Trusted Registry can be configured to have one or more caches. This
 allows you to choose from which cache to pull images from for faster
 download times.
 
-If an administrator has set up caches, you can choose which cache to use when
-pulling images. In the **DTR web UI**, navigate to your **user profile**,
+If an administrator has [set up caches](../../admin/configure/deploy-caches/simple.md),
+you can choose which cache to use when pulling images.
+
+In the **DTR web UI**, navigate to your **Account**,
 and check the **Content Cache** options.
 
 ![](../../images/use-a-cache-1.png){: .with-border}

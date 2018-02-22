@@ -2340,12 +2340,16 @@ manuals:
           title: Set up vulnerability scans
         - sectiontitle: Deploy caches
           section:
-          - path: /ee/dtr/admin/configure/deploy-caches/
-            title: Overview
-          - path: /ee/dtr/admin/configure/deploy-caches/tls/
-            title: Deploy caches with TLS
-          - path: /ee/dtr/admin/configure/deploy-caches/chaining/
-            title: Chain multiple caches
+          - title: Cache overview
+            path: /ee/dtr/admin/configure/deploy-caches/
+          - title: Cache deployment strategy
+            path: /ee/dtr/admin/configure/deploy-caches/strategy/
+          - title: Deploy a DTR cache
+            path: /ee/dtr/admin/configure/deploy-caches/simple/
+          - title: Configure caches for high availability
+            path: /ee/dtr/admin/configure/deploy-caches/high-availability/
+          - title: Cache configuration reference
+            path: /ee/dtr/admin/configure/deploy-caches/configuration-reference/
         - path: /ee/dtr/admin/configure/garbage-collection/
           title: Garbage collection
         - title: Allow users to create repositories when pushing
