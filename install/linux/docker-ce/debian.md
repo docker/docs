@@ -32,7 +32,7 @@ Raspbian versions:
 - Jessie 8 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
-Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` architectures for Jessie and
+Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` (or `arm64`) architectures for Jessie and
 Stretch.
 
 ### Uninstall old versions
@@ -168,6 +168,7 @@ from the repository.
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
+      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -188,6 +189,15 @@ from the repository.
         sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
+    </div>
+    <div id="arm64_repo" class="tab-pane fade" markdown="1">
+    
+    ```bash
+    $ echo "deb [arch=arm64] {{ download-url-base }} \
+         $(lsb_release -cs) stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list
+    ```
+    
     </div>
     </div> <!-- tab-content -->
 
@@ -259,7 +269,7 @@ from the repository.
 4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
-    **x86_64**:
+    **x86_64 or arm64**:
 
     ```bash
     $ sudo docker run hello-world
