@@ -70,7 +70,7 @@ obj\
 
 ## Build and run the Docker image
 
-1.  In the command prompt and navigate to your project folder.
+1.  Open a command prompt and navigate to your project folder.
 2.  Use the following commands to build and run your Docker image:
 
 ```console
