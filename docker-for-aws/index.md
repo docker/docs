@@ -252,3 +252,8 @@ Console](https://aws.amazon.com/){: target="_blank" class="_"}, navigate to
 the Docker stack you want to remove.
 
 ![uninstall](img/aws-delete-stack.png)
+
+Stack removal does not remove EBS and EFS volumes created by the cloudstor
+volume plugin or the S3 bucket associated with DTR.  Those resources need to be
+removed manually.  See the [cloudstor](/docker-for-aws/persistent-data-volumes/#list-or-remove-volumes-created-by-cloudstor)
+docs for instructions on removing volumes.
