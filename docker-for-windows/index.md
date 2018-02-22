@@ -708,7 +708,7 @@ Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 ### Kubernetes
 
 **Kubernetes is only available in Docker for Windows 18.02 CE Edge.** Kubernetes
-upport is not included in Docker for Windows 18.02 CE Stable.
+support is not included in Docker for Windows 18.02 CE Stable.
 
 To find out more about Stable and Edge channels and how to switch between them,
 see [General configuration](/docker-for-windows/#general).
