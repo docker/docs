@@ -6,7 +6,9 @@ title: Migrate Docker Cloud stack to Docker CE swarm
 
 ## Voting-app example
 
-This page demonstrates how to migrate an application running as a Docker Cloud stack to an application running as a *service stack* on a cluster of Docker Community Edition (CE) nodes in swarm mode. We **deploy** the [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to Docker Cloud, **convert** the Cloud stackfile to a service stack format, and **test** in the new environment to ensure that it is safe to migrate.
+This page explains how you can prepare your applications for migration from Docker Cloud to applications running as *service stacks* on clusters of Docker Community Edition (CE) nodes in swarm mode. We demonstrate with the [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} by **building** a target environment of Docker CE nodes in swarm mode, **converting** the Cloud stackfile to service stack format, and **testing** in the new environment to ensure that it is safe to migrate.
+
+> **Note**: The actual process of migrating (switching customers from your Docker Cloud applications to Docker CE applications) will vary by application and environment and is outside the scope of this document.
 
 In the Docker Cloud stackfile, the voting app is defined as a stack of six microservices:
 
@@ -22,13 +24,13 @@ Votes are accepted with the `vote` service and stored in persistent backend data
 The Docker Cloud stack is defined in [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"} and the Docker CE service stack is defined in
 [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}. This doc explains how `dockercloud.yml` is converted to `docker-stack.yml` so that you have the tools to do the same for your applications.
 
-![image of voting app arch](images/voting_architecture.png){:width="400px"}
+![image of voting app arch](images/votingapp-architecture.png){:width="400px"}
 
 ## Migration prerequisites
 
 To complete the migration from Docker Cloud to Docker Swarm on Docker CE, you need:
 
-- **Docker CE nodes** (in a public cloud or on-premise) organized as a swarm cluster
+- **Docker CE nodes** (in a public cloud or on-premises) organized as a swarm cluster
 - **SSH access** to the nodes in the swarm cluster.
 
 You *may* also need the following application-specific things:
@@ -40,13 +42,13 @@ You *may* also need the following application-specific things:
 
 Our target environment is a cluster of Docker CE nodes configured into a swarm cluster. A swarm cluster comprises one or more manager and worker nodes.
 
-To ensure high availability (HA) of the swarm control plane in production, your environment you should include an odd number (3+) of manager nodes, usually no more than seven. They should be spread across availability zones and connected by high-speed reliable networks. See [Swarm mode overview](https://docs.docker.com/engine/swarm/){: target="_blank" class="_"}, for information on building a secure HA swarm cluster for production.
+To ensure high availability (HA) of the swarm control plane in production, you should include an odd number (3+) of manager nodes, usually no more than seven. They should be spread across availability zones and connected by high-speed reliable networks. See [Swarm mode overview](https://docs.docker.com/engine/swarm/){: target="_blank" class="_"}, for information on building a secure HA swarm cluster for production.
 
 ### Plan Docker CE nodes
 
 Planning and building your nodes is specific to your requirements, but includes such things as:
 
-- Choosing a **platform** (cloud or on-prem) to host your Docker CE nodes.
+- Choosing a **platform** (cloud or on-premises) to host your Docker CE nodes.
 - Estimating **node size and spec** (your Docker Cloud nodes can be a guide)
 - Deciding **node distribution** across availability zones for high availability (HA).
 - Calculating the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
@@ -85,16 +87,16 @@ In this demo, we build a swarm cluster with three nodes (one manager, two worker
 3.  Extract and **safely store** the command and manager *join-token* required to add manager nodes.
 
     ```
-    $ docker swarm <manager join-token> manager
+    $ docker swarm join-token manager
     ```
 
 4.  Extract and **safely store** the command and worker *join-token* required to add worker nodes.
 
     ```
-    $ docker swarm <manager join-token> worker
+    $ docker swarm join-token worker
     ```
 
-    > **Note**: Join tokens are required to add managers/workers to a swarm. Don't lose them!
+    > **Note**: Keep your join tokens safe and secure as bad people can join managers with them!
 
 5.  **[optional]** If you deployed extra nodes, you can add manager nodes with the _manager_ join token. Run on each node designated as a manager. The join token and network details will differ in your environment.
 
@@ -108,7 +110,7 @@ In this demo, we build a swarm cluster with three nodes (one manager, two worker
     $ docker swarm join --token <insert-worker-join-token> <IP-and-port>
     ```
 
-7. List the nodes on each manager (if you have more than one) to verify the
+7. List the nodes from one of the managers (if you have more than one) to verify the
    status of the swarm. In the `MANAGER STATUS` column, manager nodes are either
    "Leader" or "Reachable". Worker nodes are blank.
 
@@ -131,7 +133,7 @@ To prepare your applications for migration from Docker Cloud to Docker CE (in sw
 
 > **Note**: To find the stackfiles for each of your existing applications in Docker Cloud, select **Stacks** > _your_stack_ > **Edit**.
 
-**Cloud source**: In the Docker Cloud stackfile, the six services in our `example-voting-app` are defined as a **top-level key**:
+**Cloud source**: In the Docker Cloud stackfile, the six services in our `example-voting-app` are defined as **top-level keys**:
 
 ```
 db:
@@ -142,7 +144,7 @@ vote:
 worker:
 ```
 
-**Swarm target**: In the *service stack* stackfile, services should be listed as individual **sub-level keys** (below the top-level key, `services:`). The Compose file format version must also be defined (at the top).
+**Swarm target**: In the *service stack* stackfile, services should be listed as individual **sub-level keys** (below the top-level key, `services`). The Compose file format version must also be defined (at the top).
 
 ```
 version: "3.5"
@@ -156,10 +158,9 @@ services:
 
 Another difference in the *service stack* stackfile is that we removed the `lb` service because it is not needed in Swarm. In Cloud, the load-balancer was used to balance internal application traffic. Swarm has built-in load balancing with a native transport-layer routing mesh called the Swarm service mesh.
 
-In the following sections, we step through each service of
-[example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} and explain how Cloud source file
- ([dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}) is converted to the service stack target file
- ([docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}). We provide a simple version, that literally converts the target file, and an extended version that demonstrates more features in swarm mode.
+In the following sections, we step through each service in [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} and explain how the Docker Cloud source file
+([dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}) is converted to the service stack target file
+ ([docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}). We provide a simple version, that literally converts the source file, and an extended version that demonstrates more features in swarm mode.
 
  - **Simple example:** Only includes the necessary features for the migration to work
  - **Extended example:** Includes some advanced features that improves application management.
@@ -183,7 +184,7 @@ db:
     placement:
       constraints: [node.role == manager]
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 **Swarm target (extended)**: You can also add some best practices, documentation, and advanced features, to improve application management:
@@ -199,7 +200,7 @@ db:
       placement:
         constraints: [node.role == manager]
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 Let's step through some fields:
@@ -227,7 +228,7 @@ redis:
   image: redis:latest
   deploy:
   restart_policy:
-    condition: on-failure
+    condition: any
 ```
 
 **Swarm target (extended)**:
@@ -245,7 +246,7 @@ redis:
       parallelism: 2
       delay: 10s
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 Let's step through each field.
@@ -279,12 +280,12 @@ result:
     - 5001:80
   deploy:
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 Notice the different port mappings in the two stackfiles. Docker Cloud allows multiple services on a single port. Docker Swarm does not. In the Docker Cloud stackfile, the voting application publishes two services on port 80. The `result` service is published directly on port 80, and the `vote` service is published indirectly on port 80 using the `lb` service. To get around this in swarm mode, we publish the `result` service on port 5001.
 
-> **Note**: If you cannot publish to a 2nd port, you may be able to *front* the service with a load balancer that listens on port 80 and forwards to 5001 behind the scenes. You may even use an application-layer load-balancer such as the Docker EE HRM to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers. This topic beyond the scope of this document.
+> **Note**: If publishing to a different port is a problem, you may be able to *front* the service with a load balancer that listens on port 80 and forwards to 5001 behind the scenes. You may even use an application-layer load-balancer such as the Docker EE HRM to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers. This topic beyond the scope of this document.
 
 **Swarm target (extended)**
 
@@ -303,7 +304,7 @@ result:
       parallelism: 2
       delay: 10s
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 This adds the following:
@@ -318,12 +319,13 @@ This adds the following:
 
 In Docker Cloud, the `lb` service was used to proxy connections on port 80 to the `vote` service. It was deployed as a `global` service so that an instance of it would always run on every node in the Docker Cloud node cluster. We do not need to migrate the `lb` service because Docker CE in swarm mode has native load balancing built into its service mesh.
 
-If your applications are running load banalcers, such as `dockercloud/haproxy`, you ___may___ no longer need them when migrating to stacks on Docker CE.
-Be sure to test your application and consult with your Docker technical account manager for further details.
+If your applications are running load balancers, such as `dockercloud/haproxy`, you ___may___ no longer need them when migrating to stacks on Docker CE. Be sure to test your application and consult with your Docker technical account manager for further details.
 
 ### vote service
 
 The Docker Cloud `vote` service defines an image, a restart policy, service replicas. It also defines an `autoredeploy` policy which is not supported natively in *service stacks*.
+
+> Autoredeploy is a Docker Cloud feature that automatically updates your running application every time an updated image is pushed or built. It is not native to Docker CE, AKS or GKE, but you may be able to regain it using Docker Cloud auto-builds, and web-hooks on your Docker Cloud repository for the image, back to your CI/CD pipeline.
 
 **Cloud source**:
 
@@ -345,7 +347,7 @@ vote:
   deploy:
     replicas: 5
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 As with the `result` service, Docker Swarm only allows a single service to be published on any given port in a swarm cluster. The Docker Cloud version of the voting application publishes both the `result` and `vote` services on port 80 (the vote services is made available on port 80 with the `lb` service). To get around this in swarm mode, we publish the `vote` service on port 5000 (as we did with the `result` service on port 5001).
@@ -366,7 +368,7 @@ vote:
     update_config:
       parallelism: 2
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 ### worker service
@@ -389,7 +391,7 @@ worker:
   deploy:
     replicas: 3
     restart_policy:
-      condition: on-failure
+      condition: any
 ```
 
 **Swarm target (extended)**:
@@ -405,7 +407,7 @@ worker:
     replicas: 3
     labels: [APP=VOTING]
     restart_policy:
-      condition: on-failure
+      condition: any
       delay: 10s
       max_attempts: 3
       window: 120s
@@ -417,9 +419,9 @@ All of the settings mentioned here are application specific and may not be neede
 
 - `replicas` here are attached to two networks--frontend and backend--allowing them to communicate with services on either network.
 - `placement.constraints` ensure that replicas for this service always tart on a manager node.
-- `restart_policy` attempts to restart any service replica that exits with a non-zero return code (on-failure). It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
+- `restart_policy` attempts to restart any service replica that exits with a non-zero return code (any). It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
 
-## Test Docker Swarm stackfile
+## Test converted stackfile
 
 Before migrating, you should thoroughly test each new *service stack* stackfile in a Docker CE cluster in swarm mode. Test the simple stackfile first--that is, the stackfile that most literally mimics what you have in Docker Cloud. Once that works, start testing some of the more robust features in the extended examples.
 
@@ -448,17 +450,17 @@ The following steps explain how to deploy your app from the **target** Docker Sw
     ```
     $ docker stack ps example-stack
     ID                  NAME                    IMAGE                                          NODE                DESIREDSTATE       CURRENT STATE            ERROR                       PORTS
-    x3bwp962jupw        bigstack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    ymfaw93x7oe4        bigstack_db.1           postgres:9.4                                   node1               Running            Running 35 minutes ago
-    w35zadj7fs9i        bigstack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
-    ukhutap9l1oi        bigstack_vote.1         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
-    qtv23fa4uam7        bigstack_result.1       dockersamples/examplevotingapp_result:latest   node1               Running            Running 35 minutes ago
-    yjhvjpf75tr4        bigstack_redis.1        redis:alpine                                   node1               Running            Running 35 minutes ago
-    0szg5x4wysk2        bigstack_worker.2       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    8kk849j1ozqv         \_ bigstack_worker.2   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
-    om6ga0ayozin        bigstack_vote.2         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
-    skfu11dcp00r        bigstack_worker.3       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    qbuu5l2r9ay7         \_ bigstack_worker.3   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
+    x3bwp962jupw        example-stack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
+    ymfaw93x7oe4        example-stack_db.1           postgres:9.4                                   node1               Running            Running 35 minutes ago
+    w35zadj7fs9i        example-stack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
+    ukhutap9l1oi        example-stack_vote.1         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
+    qtv23fa4uam7        example-stack_result.1       dockersamples/examplevotingapp_result:latest   node1               Running            Running 35 minutes ago
+    yjhvjpf75tr4        example-stack_redis.1        redis:alpine                                   node1               Running            Running 35 minutes ago
+    0szg5x4wysk2        example-stack_worker.2       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
+    8kk849j1ozqv         \_ example-stack_worker.2   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
+    om6ga0ayozin        example-stack_vote.2         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
+    skfu11dcp00r        example-stack_worker.3       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
+    qbuu5l2r9ay7         \_ example-stack_worker.3   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
     ```
 
 4.  Continue testing. With the stack deployed and all services running, test failure scenarios, increasing load, scaling operations, updates, rollbacks, and any other operations that are considered important for the lifecycle of the application.
@@ -467,6 +469,13 @@ The following steps explain how to deploy your app from the **target** Docker Sw
 
 ## Migrate application from Docker Cloud
 
-How you migrate your applications is unique to your environment and applications. Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
+How you migrate your applications is unique to your environment and applications.
+
+- Plan with all developers and operations teams
+- Plan with customers
+- Plan with owners of other applications that interact with your Docker Cloud app
+- Plan a rollback strategy if problems occur
+
+Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
 
 <span class="badge badge-danger">Warning</span> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.

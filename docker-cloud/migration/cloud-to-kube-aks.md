@@ -1,184 +1,135 @@
 ---
 description: Migrating from Docker Cloud
 keywords: cloud, swarm, migration
-title: Migrate Docker Cloud stack to Kubernetes on AKS
+title: Migrate Docker Cloud stack to Kubernetes with AKS
 ---
 
-## Introduction
 
-Docker Cloud applications are defined in declarative configuration files and run on cloud instances in the public cloud. Kubernetes applications are defined in declarative manifest files and can also run on cloud instances in the public cloud.
+## Voting-app example
 
-This document will guide you through the process of converting your Docker Cloud application into a Kubernetes application, and then running it on a Microsoft's Azure Container Service (AKS) cluster.
+This page explains how you can prepare your applications for migration from Docker Cloud to Kubernetes applications on AKS clusters in Microsoft Azure. We demonstrate with the [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} by **building** a target environment of AKS nodes (with a hosted Kubernetes service), **converting** the Cloud stackfile to a Kubernetes manifest, and **testing** the Kubernetes manifest in the new environment to ensure that it is safe to migrate.
 
-AKS is a hosted Kubernetes service on the Microsoft Azure public cloud. It exposes all of the standard Kubernetes API endpoints, meaning you can use standard Kubernetes tools and manifests. This means that the manifest files you create can be used to run your application on any Kubernetes infrastructure --- different public clouds and on-premises.
+> **Note**: Azure Container Service (AKS) is Microsoft’s hosted Kubernetes service. It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
-The high-level process will involve:
+In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}, the voting app is defined as a stack of six microservices:
 
-- Building a Kubernetes cluster on AKS (this is equivalent of your *node cluster* in Docker Cloud)
-- Converting your Docker Cloud stack into a Kubernetes application defined in a Kubernetes manifest file
-- Testing the Kubernetes application on AKS
-- Deploying the Kubernetes application on AKS
+- **vote**: Web front-end that displays voting options
+- **redis**: In-memory k/v store that collects votes
+- **worker**: Stores votes in database
+- **db**: Persistent store for votes
+- **result**: Web server that pulls and displays results from database
+- **lb**: Container-based load balancer
 
-The actual process of performing the migration (switching customers from using your Docker Cloud application to using your AKS application) will vary considerably between applications, and is therefore outside the scope of this document. This document will walk you through the process of converting your Docker Cloud app into a Kubernetes app, and testing it works. It will not outline migration steps.
+Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis` and `worker`. The vote tally is viewed with the `result` service. The `lb` service balances internal traffic between containers.
 
-## Things that will be different after migration
+![image of voting app arch](images/votingapp-architecture.png){:width="400px"}
 
-> %% I need to dig around and find out what AKS does and does not offer before we can document what will be lost. It's currently in public beta.
+## Migration prerequisites
 
-Many things about your application will stay the same. For example, your Docker images and overall application functionality will not change --- if your application uses a Docker image called `myorg/webfe:v3` and is accessible on port `80`, none of this will change. Also, the way your customers and other applications interact with your application will not change.
-
-## Pre-reqs
-
-To complete the migration, you will need:
+To complete the migration from Docker Cloud to Kubernetes on AKS, you need:
 
 - An active Azure subscription with billing enabled.
 
-## Sample Application
-
-We'll use the following sample application to walk you through the process of converting your application from Docker Cloud to Kubernetes.
-
-https://github.com/dockersamples/example-voting-app/blob/master/dockercloud.yml
-
-The Docker Cloud stackfile (`dockercloud.yml`) defines the application. As we can see, it is comprised of 6 application services:
-
-- **vote:** Web front-end displaying voting options
-- **redis:** In-memory k/v store that collects votes
-- **worker:** Stores votes in database
-- **db:** Persistent store for votes
-- **result:** Web server that pulls and displays results from database
-- **lb:** Container-based load balancer
-
-The application accepts votes via the `vote` service and stores them in a persistent backend database (`db`). The `lb`, `redis`, and `worker` services assist in the process, and you can view results of the vote via the `result` service. The high-level architecture of the application is shown below.
-
-![]()  < put image here.
-
-Your application will be different, but the overall process of converting it into a Kubernetes application will be the same.
-
 ## Build target environment
 
-Azure Container Service (AKS) is a managed Kubernetes service. As such, Azure takes care of all of the Kubernetes control plane management --- delivering the control plane APIs, managing control plane HA, managing control plane upgrades etc. You only need to look after worker nodes --- how many, size & spec, where to deploy them etc.
+Azure Container Service (AKS) is a managed Kubernetes service. Azure takes care of all of the Kubernetes control plane management--delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes--how many, size and spec, where to deploy them, etc.
 
-We'll complete the following three high-level steps as part of building your Azure AKS cluster:
+Building an AKS cluster involves the following high-level steps:
 
-1. Create an Azure Application Registration
-2. Build an AKS cluster
-3. Connect to the AKS cluster
+1.  Create an Azure Application Registration.
+2.  Deploy an AKS cluster.
+3.  Connect to the AKS cluster.
 
-### Create and Azure Application Registration
+### Create an Azure application registration
 
-1. Log in to the [Azure portal](https://portal.azure.com).
+Currently, AKS needs to be manually registered with Azure Active Directory so that it can receive security tokens and integrate with secure sign-on and authorization.
 
-2. Click `Azure Active Directory` > `App registrations` > `New application registration`.
+1.  Log in to the [Azure portal](https://portal.azure.com){: target="_blank" class="_"}.
+2.  Click **Azure Active Directory** > **App registrations** > **New application registration**.
+3.  Give the application a **Name**, select application type **Web app/API**, and enter a **Sign-on URL**. The sign-on URL needs to be a valid DNS name but does not need to be resolvable. An example might be `https://k8s-vote.com`.
+4.  Click **Create**.
+5.  Copy and save the Application ID (this is your **Service principal client ID**).
+6.  Click **Settings** > **Keys** and set a description and duration.
+7.  Click **Save**.
+8.  Copy the **Value** field contents to a safe place (this is your **Service principal client secret**).
 
-3. Give it a `Name`, select `Web app/API` as the `Application type`, and enter a `Sign-on URL`
+The application registration is now complete. Time to build the AKS cluster.
 
-    The sign-on URL needs to be a valid DNS name but does not need to be resolvable. An example might be `https://k8s-vote.com`
+### Deploy an AKS cluster
 
+In this section, we build a three-node cluster; yours should probably be based on the configuration of your Docker Cloud node cluster.
 
-4. Click `Create`.
+> **Note**: To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
-5. Copy the Application ID to a safe place you will need it in a later step.
+Before continuing, ensure you know:
 
-6. Click `Settings` > `Keys` and set a description and duration.
+- Your **Azure subscription credentials**
+- **Azure region** to which you want to deploy your AKS cluster
+- **SSH public key** to use when connecting to AKS nodes
+- **Service principal client ID** and **Service principal client secret** (from the previous section)
+- The  **number, size, and spec** of the nodes you want.
 
-7. Click `Save`.
+To deploy a cluster of AKS nodes:
 
-8. Copy contents of the `Value` field as this is a password that you will need in a later step.
+1.  Select **+New** from the top-left of the Azure portal main dashboard.
+2.  Select **Containers** > **Azure Container Service - AKS (preview)**. _Do not select the other ACS option._
+3.  Fill out the form with the required details.
 
-The application registration is now complete. Time to build your AKS cluster.
+    - **Cluster name**: This is the name you want to use to identify this AKS cluster.
+    - **Kubernetes version**: Choose one of the 1.8.x versions.
+    - **Subscription**: Choose the subscription that you want to use to pay for the cluster.
+    - **Resource group**: Create a new resource group or choose one from your existing list.
+    - **Location**: Select the Azure region that you want to deploy the AKS cluster to. AKS may not be available in all Azure regions.
 
-### Build an AKS cluster
+4.  Click **OK**.
+5.  Configure the additional AKS cluster parameters.
 
-In this section, we'll create an Azure AKS cluster. We'll build a 3-node cluster in the `West Europe` Region. Your cluster will be different, and should probably be based on the configuration of your Docker Cloud *node cluster*.
+    - **User name**: The default option should be fine.
+    - **SSH public key**: This is the public key (certificate) of a key-pair that you own that can be used for SSH. You can generate this using a number of different tools such as PuTTY. It should be a minimum of 2048 bits of type ssh-rsa.
+    - **Service principal client ID**: This is the application ID that you copied in an earlier step.
+    - **Service principal client secret**: This is password value that you copied in a previous step.
+    - **Node count**: This is the number of **worker** nodes that you want in the cluster. It should probably match the number of **worker** nodes in your existing Docker Cloud node cluster.
+    - **Node virtual machine size**: This is the size and specification of each AKS node. It only applies to **worker** nodes, and should probably match the configuration of your existing Docker Cloud node cluster.
 
-You can use one of the following methods to see the configuration of your Docker Cloud *node cluster*:
-
-- **Docker Cloud classic mode users:** Log-in to Docker Cloud and select `Node Clusters` under `INFRASTRUCTURE`. From here you can select any of your node clusters to find information such as; cloud provider, number of nodes, spec of nodes, region and availability zone.
-- **Docker Cloud Swarm mode users:** Log-in to Docker Cloud and select `Swarms` from the top menu. Select one of your Swarms.
-
-Before continuing, you will need to know all of the following:
-
-- Your Azure subscription
-- Azure *Region* that you want to deploy your AKS cluster to
-- An SSH public key to use when connecting to AKS nodes
-- The *Service principal ID* and *Service Principal secret* from the previous section
-- Number of nodes
-- Size and spec of nodes
-
-
-1. Select `+New` from the Azure portal main dashboard.
-
-2. Select `Containers` and choose `Azure Container Service - AKS (preview)`. **Do not select the other ACS option.**
-
-3. Fill out the form with the required details.
-
-    - **Cluster name:** This is the name you want to use to identify this AKS cluster.
-    - **Kubernetes version:** Choose one of the 1.8.x versions.
-    - **Subscription:** Choose the subscription that you want to use to pay for the cluster.
-    - **Resource group:** Create a new resource group or choose one from your existing list.
-    - **Location:** Select the Azure region that you want to deploy the AKS cluster to. AKS may not be available in all Azure locations.
-
-4. Click `OK`.
-
-5. Configure the additional AKS cluster parameters.
-
-    - **User name:** The default option should be fine.
-    - **SSH public key:** This is the public key (certificate) of a key-pair that you own that can be used for SSH. You can generate this using a number of different tools such as PuTTY. It should be a minimum of 2048 bits of type ssh-rsa.
-    - **Service principal client ID:** This is the application ID that you copied in an earlier step.
-    - **Service principal client secret:** This is password value that you copied in a previous step.
-    - **Node count:** This is the number of nodes that you want in the cluster. It should probably match the number of nodes in your existing Docker Cloud node cluster.
-    - **Node virtual machine size:** This is the size and specification of each AKS node. It should probably match the configuration of your existing Docker Cloud node cluster.
-
-6. Click `OK`.
-
-7. Review the configuration on the Summary screen and click `OK` to deploy the cluster.
-
-It will take a few minutes for the cluster to deploy.
+6.  Click **OK**.
+7.  Review the configuration on the Summary screen and click **OK** to deploy the cluster. It will take a few minutes.
 
 ### Connect to the AKS cluster
 
-You can use the web-based Azure cloud shell to connect to your cluster. However, this section will show you how to configure your laptop, or other local terminal, to connect to your cluster.
+You can connect to your AKS cluster from the web-based Azure cloud shell; but to do so from your laptop, or other local terminal, you must:
 
-We'll complete the following high-level steps:
+- Install the Azure CLI tool (`az`).
+- Install the Kubernetes CLI (`kubectl`) with the `az` tool.
+- Configure `kubectl` to connect to your AKS cluster.
 
-- Install the Azure `az` CLI tool
-- Install `kubectl` --- the Kubernetes command line tool
-- Configure `kubectl` to connect to your cluster.
+To connect to your AKS cluster from a local terminal:
 
-Let's install the Azure CLI tool.
+1.  Download and install the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest){: target="_blank" class="_"} for your Operating System.
+2.  With the Azure CLI, install the Kubernetes CLI, `kubectl`.
 
-1. Click this [link](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) and download the Azure CLI tool for your relevant Operating System.
+    ```
+    > az aks install-cli
+    Downloading client to C:\Program Files (x86)\kubectl.exe from...
+    ```
 
-2. Install the Azure CLI.
-
-Use the Azure CLI tool to install the Kubernete command line tool (`kubectl`).
-
-```
-> az aks install-cli
-Downloading client to C:\Program Files (x86)\kubectl.exe from...
-```
-
-Now that `kubectl` is installed you need to configure it to connect to your AKS cluster.
-
-1. Start the Azure login process.
+3.  Start the Azure login process:
 
     ```
     > az login
-    To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter...
+    To sign in, use a web browser to open the page [https://aka.ms/devicelogin](https://aka.ms/devicelogin){: target="_blank" class="_"} and enter...
     ```
 
-2. Open the devicelogin page in a browser tab and paste in the authentication code.
+4.  Open the "devicelogin" page in a browser and paste the authentication code. When complete, the CLI returns some JSON.
+5.  Get the credentials and use them to configure `kubectl`:
 
-    When complete it will return some JSON.
-
-3. Get the credentials and use them to configure `kubectl`
+    The values for `--resource-group` and `--name` are the Resource Group and Cluster Name that you set in the previous steps. Substitute the values below with the values for your environment.
 
     ```
     > az aks get-credentials --resource-group=k8s-vote --name=k8s-vote
     Merged "k8s-vote" as current context in C:\Users\nigel\.kube\config
     ```
 
-4. Test that `kubectl` can connect to your cluster.
+6.  Test that `kubectl` can connect to your cluster.
 
     ```
     > kubectl get nodes
@@ -188,23 +139,17 @@ Now that `kubectl` is installed you need to configure it to connect to your AKS 
     aks-agentpool-29046111-2   Ready     agent     2m        v1.8.1
     ```
 
-    The `kubectl get nodes` command lists information about the nodes in the cluster it is configured to communicate with. If the values  returned by the command match your AKS cluster (number of nodes, age, and version) then you have successfully configured `kubectl` to manage your AKS cluster.
+    The `kubectl get nodes` command returns information about the nodes in the cluster. If the values returned by the command match your AKS cluster (number of nodes, age, and version), you have successfully configured `kubectl` to manage your AKS cluster.
 
-You now have an AKS cluster and have configured the `kubectl` Kubernetes client to manage the cluster. Let's look at how to convert your Docker Cloud app into a Kubernetes app.
+You now have an AKS cluster and have configured the `kubectl` Kubernetes client to manage it. Let's switch tak and convert a Docker Cloud app into a Kubernetes app.
 
-## Converting the application
+## Convert Docker Cloud stackfile
 
-Your application is currently deployed as a Docker Cloud stack on the Docker Cloud platform. The steps in this section will guide you through the process of converting your application into a Kubernetes application (one that can be deployed on a Kubernetes cluster).
+To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
-We'll use a sample application to demonstrate the process of converting a Docker Cloud stack into a Kubernetes application. Your application will be different, but the overall process will be the same.
+> **Note**: To find the stackfiles for each of your existing applications in Docker Cloud, select **Stacks** > _your_stack_ > **Edit**.
 
-Your Docker Cloud application probably comprises several services defined in a single Docker Cloud stackfile called `dockercloud.yml`. Kubernetes applications are defined in *manifest* files that are also YAML. However, Kubernetes manifest files tend to be longer.
-
-We'll refer to your existing Docker cloud stackfile as the **source** file, and the new Kubernetes manifest file as the **target**.
-
-Your **source** Docker Cloud application (stack) will be defined in a YAML file. This is the Docker Cloud stackfile (`dockercloud.yml`) from the example app. Yours will be different, and you can find it in the Docker Cloud web UI by selecting your stack and clicking `Edit`.
-
-The example Docker Cloud application comprises six Docker services, each of which is defined in the Docker Cloud stackfile as a top-level key:
+In the Docker Cloud stackfile, the six Docker _services_ in our `example-voting-app` stack are defined as a **top-level key**:
 
 ```
 db:
@@ -215,17 +160,24 @@ vote:
 worker:
 ```
 
-Let's step through the process of converting each one.
+Kubernetes applications are built from objects (such as [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/){: target="_blank" class="_"})
+and object abstractions (such as [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}
+and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment/Service set spawns Pods. A Pod is a set of containers and also the smallest unit of work in Kubernetes.
 
-We'll deploy the application on Kubernetes as a set of Kubernetes *Deployments* and Kubernetes *Services*. We'll create one *Deployment* and *Service* per Docker Cloud stack service.
+> A [Docker serivce](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/){: target="_blank" class="_"} is one component of an application that is generated from one image.
+> A [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"} is a networking construct that load-balances Pods behind a proxy.
 
-A Kubernetes *Deployment* defines the application service. This includes things such as; which Docker image to use, and which container ports to map. You can also define how rolling updates work, rollbacks, and may other advanced features. However, these are beyond the scope of this document.
+A Kubernetes Deployment defines the application "service"--which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define how rolling updates work, rollbacks, and other advanced features.
 
-A Kubernetes *Service* provides in an abstraction that provides stable networking for a set of *Pods* defined in a *Deployment*. It also allows you to create cloud-native load-balancers.
+A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP for accessing the Pods, and also create cloud-native load-balancers.
 
-### Converting the `db` service
+The diagram shows four Pods deployed as part of a single Deployment. Each Pod is labeled as “app=vote” and the Deployment has a label selector with “app=vote”. This combination of labels and label selector is what allows the Deployment object to manage Pods (create, terminate, scale, update, roll back…). The Service object selects Pods on the same label (“app-vote”). This time the label and label selector allow the service to provide a stable network abstraction (IP and DNS name) for the Pods.
 
-The sample Docker Cloud stackfile defines an image and a restart policy for the `db` service.
+![Voting app vote Kube pods](images/votingapp-kube-pods-vote.png){:width="400px"}
+
+### db service
+
+**Docker Cloud stackfile**: The Docker Cloud stackfile defines an image and a restart policy for the `db` service.
 
 ```
 db:
@@ -233,7 +185,7 @@ db:
   restart: always
 ```
 
-This can be represented in a Kubernetes manifest as follows:
+**Kubernetes manifest**: The Kubernetes translation defines two object types or "kinds": a _Deployment_ and a _Service_ (separated by three dashes `---`). Each object includes an API version, metadata (labels and name), and each spawns Pods defined under "spec.template".
 
 ```
 apiVersion: apps/v1beta1
@@ -266,37 +218,25 @@ spec:
     app: db
 ```
 
-Two things to note:
+About the Kubernetes fields in general:
 
-1. This is a lot longer than the Docker Cloud definition
-2. The manifest defines a *Deployment* and a *Service* separated by three dashes `---`.
+- `apiVersion` sets the schema version for Kubernetes to use when managing the object. The versions set here are supported on AKS (1.7.7 and 1.8.1).
+- `kind` defines the object type. In this example, we only define Deployments and Services but there are many others.
+- `metadata` assigns a name and set of labels to the object.
+- `spec` is where we configure the object. In a Deployment, `spec` defines the Pods to deploy.
 
-Every Kubernetes object (*Deployments*, *Services* etc.) needs to specify an `apiVersion` and `kind`.
+It is important that **Pod labels** (`Deployment.spec.template.metadata.labels`) match both **Deployment labels** (`Deployment.metadata.labels`) and **Service labels** (`Service.spec.selector`). This is how the Deployment object knows which Pods to manage and how the Service knows which Pods for which to provie networking.
 
-The `apiVersion` tells Kubernetes which schema version to use when defining and managing the object. The versions used in the examples will work on all versions of Kubernetes currently supported on AKS (1.7.7 and 1.8.1).
+For the `db` Deployment, we define a container called `db` based on the `postgres:9.4` Docker image, and define a restart policy. All Pods created by this Deployment have the label, `app=db`.
 
-The `kind` field tells Kubernetes what type of object is being defined. This guide will only define *Deployments* and *Services*.
+The `db` Service is a “headless” service (`clusterIP: None`). Headless services are useful when you want a stable DNS name but do not need the cluster-wide VIP. They create a stable DNS record, but instead of creating a VIP, they map the DNS name to multiple
+[A records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-records){: target="_blank" class="_"}--one for each Pod associated with the Service.
 
-The `metadata` section gives the object a name and a set of labels. The example is naming and labelling as everything as `db` to keep it in line with the Docker Cloud `db` service.
+The label selector (`Service.spec.selector`) has the value, "app=db". This means the Service provides stable networking and load-balancing for all Pods on the cluster labeled as “app=db”. Pods defined in the Deployment section are all labelled as "app-db". It is this mapping between the Service label selector and the Pod labels that tells the Service object which Pods for which to provide networking.
 
-The `spec` sections is where the configuration of the object is defined.
+### redis service
 
-In the *Deployment* section, it defines the Kubernetes *Pods* to deploy. Think of Kubernetes *Pods* as containers. In this example, we're defining a container called `db` based on the `postgres:9.4` Docker image, and defining a restart policy. We're also labelling all *Pods* (containers) with the `app=db` label.
-
-It's important that the *Pod* (container) labels (`Deployment.spec.template.metadata.labels`) match the *Deployment* labels (`Deployment.metadata.labels`) as this is how the deployment knows which *Pods* on the cluster to manage.
-
-It's possible to define a lot more as part of a Kubernetes *Deployment*, but the options we've configured are enough to replicate what was defined for the `db` service on Docker Cloud.
-
-We've also defined a Kubernetes *Service* for the `db` service.
-
-> %% May be add something explaining that the Service's label selector doesn't have to match every Pod label. E.g. Pods can have more labels, all that's required for the Service to manage them is that the Pods have all of the labels that the Service is selecting on
-
-By naming the *Service* "db", we've ensured that a cluster-wide DNS mapping has been created for `db` pointing to this *Service*. We've then defined a label selector (`Service.spec.selector`) with a value of "app=db". This means that the service will provide stable networking a load-balancing for all *Pods* (containers) on the cluster with matching labels. Notice that the *Pods* defined in the *Deployment* section of the file are all labelled as "app-db". It is this mapping between the *Service's* label selector and the *Pod* labels that tell the *Service* object which Pods to provide networking for.
-
-
-### Converting the `redis` service
-
-The Docker Cloud stackfile defines an image and a restart policy for the `redis` service.
+**Docker Cloud stackfile**:
 
 ```
 redis:
@@ -304,7 +244,7 @@ redis:
   restart: always
 ```
 
-This can be represented in a Kubernetes manifest as follows:
+**Kubernetes manifest**:
 
 ```
 apiVersion: apps/v1beta1
@@ -340,23 +280,25 @@ spec:
     app: redis
 ```
 
-This is very similar to the `db` service.
+Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also ensures that `labels` for both the Deployment and its Pods have the same value ("redis") to tie the two together.
 
-The *Deployment* section names and labels the the *Deployment* as "redis", deploys a *Pod* (container) called "redis" from the `redis:alpine` image, and sets the container port to be `6379`. It also makes Sure the *Pod* labels match the *Deployment* labels to tie the two together.
+The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and load-balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port`; and the Pod listens on the `targetPort`. Again, `labels` for both Service (`Service.metadata.labels`) and Pods (`Service.spec.selector`) match ("redis") to tie the two together.
 
-The *Service* section of the file creates a Kubernetes *Service* and cluster-wide DNS mapping for the name "redis" on port 6379. This maps traffic for `tcp://redis:6379` will be routed to this *Service* and load-balanced across all *Pods* on the cluster with the "app=redis" label.
+The diagram shows traffic intended for tcp://redis:6379 being sent to the redis Service and then load-balanced across all Pods that match the Service label selector.
 
-Again, it's vital that the *Service's* label selector (`Service.spec.selector`) matches the labels assigned to the `redis` *Pods*.
+![Voting app redis Kube pods](images/votingapp-kube-pods-redis.png){:width="400px"}
 
-### Converting the `lb` service
+### lb service
 
-The Docker Cloud stackfile defines an `lb` service to load balance traffic to the vote service. This is not needed in Kubernetes on AKS, because Kubernetes lets you define a *Service* object with `type=loadbalancer` that creates a native Azure load-balancer to do this job. You'll see it in the next section.
+The Docker Cloud stackfile defines an `lb` service to load balance traffic to the vote service. This is not needed in Kubernetes on AKS, because you can define a Kubernetes Service that creates a native Azure load-balancer to do this job. We demonstrate in the `vote` section.
 
-### Converting the `vote` service
+### vote service
 
-The Docker Cloud stackfile defines an image, a restart policy, and a specific number of containers for the `vote` service. It also defines the Docker Cloud `autoredeploy` feature.
+The Docker Cloud stackfile defines an image, a restart policy, and a specific number containers (5) for the `vote` service. It also enables the Docker Cloud `autoredeploy` feature. We can infer that it listens on port 80 by either inspecting its image, or seeing that the Docker Cloud `lb` service was forwarding traffic to it on port 80.
 
-The Docker Cloud `autoredeploy` feature is no supported in Azure AKS....  <<  %% Need to look into this.
+> **Note**: The Docker Cloud `autoredeploy` feature is not natively supported in Azure AKS, but you may be able to regain it using Docker Cloud auto-builds, and web-hooks on your Docker Cloud repository for the image, back to your CI/CD pipeline.
+
+**Docker Cloud stackfile**:
 
 ```
 vote:
@@ -366,7 +308,7 @@ vote:
   target_num_containers: 5
 ```
 
-This can be represented in a Kubernetes manifest as follows:
+**Kubernetes manifest**:
 
 ```
 apiVersion: apps/v1beta1
@@ -403,13 +345,15 @@ spec:
     app: vote
 ```
 
-The *Deployment* section of the file defines the required labels and *Pod* (container) specification. Importantly, this one sets the number of *Pod* replicas to 5 (`Deployment.spec.replicas`). This is to match the `target_num_containers` from the Docker Cloud stackfile.
+Again, we ensure that both Deployment and Service objects can find the Pods with matching labels ("app=vote"). We also set the number of Pod replicas to five (`Deployment.spec.replicas`) to match the `target_num_containers` from the Docker Cloud stackfile.
 
-The *Services* section of the file defines the required name and labels to provide stable networking for all *Pods* in the cluster with the "app=vote" label. However, this time it defines the *Service* as "type=loadbalancer". This will create a native Azure load-balancer that will create a stable, publicly routable, IP for the service. It also maps port 80. This means that any traffic hitting the load-balancer's publically routable IP on port 80 will be load-balanced across all 5 *Pod replicas* in the cluster.  This is why the `lb` service from the Docker Cloud app is not needed.
+We define the Service as "type=loadbalancer". This creates a native Azure load-balancer with a stable, publicly routable IP for the service. It also maps port 80 so that traffic hitting port 80 is load-balanced across all five Pod replicas in the cluster.  This is why the `lb` service from the Docker Cloud app is not needed.
 
-### Converting the `worker` service
+### worker service
 
-The definition of the `worker` service in the Docker Cloud stackfile is similar to the `vote` service. It defines an image, a restart policy, and a specified number of containers (replicas). It also defines the Docker Cloud `autoredeploy` policy. As previously mentioned...... <<  %% Need info on AKS equivalent of autoredeploy.
+Like the `vote` service, the `worker` service defines an image, a restart policy, and a specified number of containers (replicas). It also defines the Docker Cloud `autoredeploy` policy (which is not supported in AKS).
+
+**Docker Cloud stackfile**:
 
 ```
 worker:
@@ -419,7 +363,7 @@ worker:
   target_num_containers: 3
 ```
 
-This can be represented in a Kubernetes manifest as follows:
+**Kubernetes manifest**:
 
 ```
 apiVersion: apps/v1beta1
@@ -455,13 +399,14 @@ spec:
     app: worker
 ```
 
-The *Deployment* section defines the required names labels and *Pod* spec.
+Again, we ensure that both Deployment and Service objects can find the Pods with matching labels ("app=worker").
 
-The *Service* section defines a service that will provide a stable internal networking endpoint for all *Pods* deployed as part of the *Deployment* (Deployment.spec.template.metadata.labels.app=worker).
+The Service is another “headless” service where a DNS name is created and mapped to individual
+[A records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-records){: target="_blank" class="_"} for each Pod rather than a cluster-wide VIP.
 
-### Converting the `result` service
+### result service
 
-The Docker Cloud stackfile defines an image and a restart policy for the `result` service.
+**Docker Cloud stackfile**:
 
 ```
 result:
@@ -472,7 +417,7 @@ result:
   restart: always
 ```
 
-This can be represented in a Kubernetes manifest as follows:
+**Kubernetes manifest**:
 
 ```
 apiVersion: apps/v1beta1
@@ -488,11 +433,7 @@ spec:
         app: result
     spec:
       containers:
-      - args:
-        - nodemon
-        - --debug
-        - server.js
-        image: docker/example-voting-app-result:latest
+      - image: docker/example-voting-app-result:latest
         name: result
         ports:
         - containerPort: 80
@@ -512,15 +453,14 @@ spec:
     app: result
 ```
 
-The *Deployment* section defines the usual names, labels and *Pod* (container) spec.
+The Deployment section defines the usual names, labels and Pod (container) spec. The Service section defines another Azure-native load-balancer to load balance external traffic to the cluster on port 80.
 
-The *Service* section defines another Azure-native load-balancer to load balance external traffic to the cluster on port 80.
 
 ### The Kubernetes manifest file
 
-You can choose to include all *Deployments* and *Services* in a single YAML file, or have one YAML file per Docker Cloud service. The choice is yours, but it's easier to deploy and manage as a single file.
+You can choose to include all Deployments and Services in a single YAML file, or have one YAML file per Docker Cloud service. The choice is yours, but it's usually easier to deploy and manage as a single file.
 
-The example below shows them all defined in a single long YMAL file called "k8s-vote.yml". You should manage your Kubernetes manifest files the way you manage your application code --- checking them in and out of version control repositories etc.
+The example below shows them all defined in a single long YMAL file called "k8s-vote.yml". You should manage your Kubernetes manifest files the way you manage your application code--checking them in and out of version control repositories etc.
 
 ```
 apiVersion: apps/v1beta1
@@ -682,18 +622,17 @@ spec:
     app: result
 ```
 
-
-Save the Kubernetes manifest file. The examples that follow will assume it's called `k8s-vote.yml`.
+Save the Kubernetes manifest file and check it into version control.
 
 ## Test the app on AKS
 
 You should thoroughly test your application on your AKS cluster before starting the migration. This includes deploying the application from the new Kubernetes manifest file, performing scaling operations, updates and rollbacks. You should also manage the manifest file in a version control system.
 
-The following steps will show you how to deploy your app from the Kubernetes manifest files and test it.
+The following steps show you how to deploy your app from the Kubernetes manifest file and test it. They are based on the sample application used throughout this guide, but the general commands work for your cluster.
 
-Perform the following from an Azure cloud shell or local terminal with the azure client and `kubectl` Kubernetes client installed. It will need to be configured to talk to your AKS cluster.
+Perform the following from an Azure cloud shell or local terminal with the azure client and `kubectl` Kubernetes client installed. `kubectl` must be configured to talk to your AKS cluster.
 
-1. Verify that you shell/terminal is configured to talk to your AKS cluster.
+1.  Verify that you shell/terminal is configured to talk to your AKS cluster. If the output matches your cluster, you're ready to proceed with the next steps.
 
     ```
     > kubectl get nodes
@@ -703,11 +642,7 @@ Perform the following from an Azure cloud shell or local terminal with the azure
     aks-agentpool-29046111-2   Ready     agent     6h        v1.8.1
     ```
 
-    If the output matches your cluster you're ready to proceed with the next steps.
-
-2. Deploy your Kubernetes application to your cluster.
-
-    This example assumes the application is defined in a Kubernetes manifest file called `ks8-vote.yml` in your system's PATH. You will need to substitute the name of your manifest file.
+2.  Deploy your Kubernetes application to your cluster. This example assumes the application is defined in a Kubernetes manifest file called `ks8-vote.yml` in your system's PATH. Substitute the name of your manifest file.
 
     ```
     > kubectl create -f k8s-vote.yml
@@ -724,12 +659,10 @@ Perform the following from an Azure cloud shell or local terminal with the azure
     service "result" created
     ```
 
-3. Check the status of the app.
-
-    Use the following two commands to check the status of the *Deployments* and *Services*.
+3.  Check the status of the app (both Deployments and Services):
 
     ```
-    > kubectl get deploy
+    > kubectl get deployments
     NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     db        1         1         1            1           43s
     redis     1         1         1            1           43s
@@ -737,7 +670,7 @@ Perform the following from an Azure cloud shell or local terminal with the azure
     vote      5         5         5            5           43s
     worker    3         3         3            3           43s
 
-    > kubectl get svc
+    > kubectl get services
     NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
     db           ClusterIP      None           <none>        55555/TCP      48s
     kubernetes   ClusterIP      10.0.0.1       <none>        443/TCP        6h
@@ -747,16 +680,18 @@ Perform the following from an Azure cloud shell or local terminal with the azure
     worker       ClusterIP      None           <none>        55555/TCP      48s
     ```
 
-    Notice that the two `LoadBalancer` services are `pending`. This is because it takes a minute or two to provision an Azure load-balancer. You can run the `kubectl get svc --watch` command to see when they have finished provisioning. Once they're provisioned the output will look like this (the external IPs will be different in your environment).
+    Both `LoadBalancer` services are `pending` because it takes a minute or two to provision an Azure load-balancer. You can run the `kubectl get svc --watch` command to see when they have finished provisioning. Once they're provisioned, the output looks like this (with different external IPs):
 
     ```
-    > kubectl get svc
+    > kubectl get services
     <Snip>
     result    LoadBalancer   10.0.76.157   52.174.195.232   80:31033/TCP   7m
     vote      LoadBalancer   10.0.244.254  52.174.196.199   80:31330/TCP   8m
     ```
 
-4. Check that the application works.
+4. Check that the application works in your environment.
+
+    The example application exposes to web front-ends: one for casting votes and the other for seeing results. Both can be tested.
 
     Copy the `EXTERNAL-IP` value for the `vote` service, paste it into a browser tab and cast a vote.
 
@@ -766,10 +701,19 @@ You should thoroughly test the application now that the stack is deployed and al
 
 You can extend your Kubernetes manifest file to include advanced features such as how to perform rolling updates and simple rollbacks. But you should not do this until you have confirmed your application is working with the simplified manifest file.
 
-You should also test failure scenarios, increasing load, scaling operations, updates, rollbacks, and any other operations that are considered important for the lifecycle of the application. These tests will be specific to each of your apps, and are beyond the scope of this document. However, you should be sure to complete them before beginning the migration of your application.
+You should also test failure scenarios, increasing load, scaling operations, updates, rollbacks, and any other operations that are considered important for the lifecycle of the application. These tests are specific to each of your apps, and are beyond the scope of this document. However, you should be sure to complete them before beginning the migration of your application.
 
 If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stack, you should build, test, and implement one for the app on AKS.
 
-## Start migration
+## Migrate application from Docker Cloud
 
-You should not terminate your Docker Cloud stacks or node clusters until a while after the migration has been signed off as successful. Keeping them on hand is a good precaution in case you experience issues with the migration and need to switch back for any reason.
+How you migrate your applications is unique to your environment and applications.
+
+- Plan with all developers and operations teams
+- Plan with customers
+- Plan with owners of other applications that interact with your Docker Cloud app
+- Plan a rollback strategy if problems occur
+
+Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
+
+<span class="badge badge-danger">Warning</span> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.

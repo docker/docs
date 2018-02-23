@@ -29,6 +29,6 @@ What changes is the way in which you manage your Docker applications. For exampl
 - Authorize users within the Docker platform
 - **Autoredeploy** of your applications.
 
-> Autoredeploy is a Docker Cloud feature that automatically updates your running application every time an updated image is pushed or built. This advanced feature is not a native feature of service stacks, but you should be able to regain it using Docker Cloud auto-builds and web-hooks back to your CI/CD pipeline.
+> Autoredeploy is a Docker Cloud feature that automatically updates your running application every time an updated image is pushed or built. It is not native to Docker CE, AKS or GKE, but you may be able to regain it using Docker Cloud auto-builds, and web-hooks on your Docker Cloud repository for the image, back to your CI/CD pipeline.
 
 However, if you migrate to Docker Swarm on Docker CE, you should be able to keep all of your Docker Cloud _application features_ because Cloud and Swarm stacks have similar declarative syntax and lifecycle operations. Also, while you will lose some features as part of the migration, you may be able to add some advanced features that were not available as part of Docker Cloud.
