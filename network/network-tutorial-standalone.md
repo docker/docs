@@ -211,7 +211,7 @@ need to have Docker installed and running.
     ping: bad address 'alpine2'
     ```
 
-7.  Detach from `alpine2` without stopping it by using the detach sequence,
+7.  Detach from `alpine1` without stopping it by using the detach sequence,
     `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
     If you wish, attach to `alpine2` and repeat steps 4, 5, and 6 there,
     substituting `alpine1` for `alpine2`.
