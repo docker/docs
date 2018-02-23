@@ -44,8 +44,8 @@ full list of prerequisites.
 1.  Open a PowerShell command prompt, and type the following commands.
 
     ```PowerShell
-    Install-Module DockerProvider -Force
-    Install-Package Docker -ProviderName DockerProvider -Force
+    Install-Module DockerMsftProvider -Force
+    Install-Package Docker -ProviderName DockerMsftProvider -Force
     ```
 
 2.  Test your Docker EE installation by running the `hello-world` container.
@@ -136,7 +136,7 @@ To install a specific Docker version, you can use the
 `MaximumVersion`,`MinimumVersion` or 'RequiredVersion' flags. For example:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerProvider -Force -RequiredVersion 17.06.2-ee-5
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force -RequiredVersion 17.06.2-ee-5
 ...
 Name                           Version          Source           Summary
 ----                           -------          ------           -------
@@ -145,18 +145,10 @@ Docker                         17.03.0-ee       Docker           Contains Docker
 
 ## Update Docker EE
 
-> **Check that you have the Docker module**
-> You may have previously installed Docker using a Microsoft provided module. To ensure you get the latest Docker patches, remove this module and use Docker's module:
->
-> ```none
-> Uninstall-Module DockerMsftProvider -Force
-> Install-Module DockerProvider -Force
-> ```
-
 To update Docker EE on Windows Server 2016:
 
 ```PowerShell
-Install-Package -Name docker -ProviderName DockerProvider -Update -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -Update -Force
 ```
 
 If Docker Universal Control Plane (UCP) is installed, run the
