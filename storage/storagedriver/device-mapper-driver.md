@@ -22,9 +22,6 @@ the block level, rather than the file level. These devices can be extended by
 adding physical storage to your Docker host, and they perform better than using
 a filesystem at the level of the operating system.
 
-**If you use Docker EE on RHEL, CentOS, or Oracle Linux, you must use the
-`devicemapper` storage driver.**
-
 ## Prerequisites
 
 - `devicemapper` storage driver is the only supported storage driver for Docker
