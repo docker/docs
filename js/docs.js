@@ -56,11 +56,11 @@ function findMyTopic(tree)
       } else {
         if (branch[k].path == pageURL && !branch[k].nosync)
         {
-          console.log(branch[k].path + ' was == ' + pageURL)
+          // console.log(branch[k].path + ' was == ' + pageURL)
           thisIsIt = true;
           break;
         } else {
-          console.log(branch[k].path + ' was != ' + pageURL)
+          // console.log(branch[k].path + ' was != ' + pageURL)
         }
       }
     }
