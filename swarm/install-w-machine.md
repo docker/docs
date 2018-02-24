@@ -2,11 +2,11 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Swarm release notes
-keywords: docker, swarm, clustering, discovery, release,  notes
+keywords: docker, swarm, clustering, discovery, release, notes
 menu:
   main:
     parent: workw_swarm
-title: Install and Create a Docker Swarm
+title: Install and create a Docker Swarm
 ---
 
 You use Docker Swarm to host and schedule a cluster of Docker containers. This section introduces you to Docker Swarm by teaching you how to create a swarm
@@ -42,7 +42,7 @@ Daemon running on each node. Other discovery service backends such as
     docker-vm    *        virtualbox   Running   tcp://192.168.99.100:2376
     ```
 
-	  This example was run a macOS system with Docker Toolbox installed. So, the `docker-vm` virtual machine is in the list.
+	  This example was run on a macOS system with Docker Toolbox installed. So, the `docker-vm` virtual machine is in the list.
 
 2.  Create a VirtualBox machine called `local` on your system.
 
@@ -85,7 +85,7 @@ Daemon running on each node. Other discovery service backends such as
     fe0cc96a72cf04dba8c1c4aa79536ec3
     ```
 
-  	The `swarm create` command returned the  `fe0cc96a72cf04dba8c1c4aa79536ec3`
+  	The `swarm create` command returned the `fe0cc96a72cf04dba8c1c4aa79536ec3`
   	token.
 
   	**Note**: This command relies on Docker Swarm's hosted discovery service. If
