@@ -821,7 +821,7 @@ Express dependency between services, Service dependencies cause the following
 behaviors:
 
 - `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` is started before `web`.
+  example, `db` and `redis` are started before `web`.
 
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
