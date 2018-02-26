@@ -35,5 +35,9 @@ source "https://rubygems.org"
 # gem install bundler
 # bundle install
 
-gem "github-pages", "172"
+# This only affects interactive builds (local build, Netlify) and not the
+# live site deploy, which uses the Dockerfiles found in the publish-tools
+# branch.
+
+gem "github-pages", "175"
 gem 'wdm' if Gem.win_platform?
