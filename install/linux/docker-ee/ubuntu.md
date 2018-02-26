@@ -280,7 +280,7 @@ from the repository.
 
 Docker EE is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker
-commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
+commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
