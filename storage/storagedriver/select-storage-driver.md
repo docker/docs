@@ -16,7 +16,7 @@ Docker supports several different storage drivers, using a pluggable
 architecture. The storage driver controls how images and containers are stored
 and managed on your Docker host.
 
-After you have read the [storage driver overview](imagesandcontainers.md), the
+After you have read the [storage driver overview](index.md), the
 next step is to choose the best storage driver for your workloads. In making
 this decision, there are three high-level factors to consider:
 
@@ -233,12 +233,9 @@ to physical or logical disks on the Docker host.
 
 ## Related information
 
-* [About images, containers, and storage drivers](imagesandcontainers.md)
+* [About images, containers, and storage drivers](index.md)
 * [`aufs` storage driver in practice](aufs-driver.md)
 * [`devicemapper` storage driver in practice](device-mapper-driver.md)
 * [`overlay` and `overlay2` storage drivers in practice](overlayfs-driver.md)
 * [`btrfs` storage driver in practice](btrfs-driver.md)
 * [`zfs` storage driver in practice](zfs-driver.md)
-
-
-
