@@ -65,8 +65,14 @@ Docker Compose. To do so, follow these steps:
     Search for PowerShell, right-click, and choose
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
+    
+    In Powershell, since Github now requires TLS1.2, run the following:
+    
+    ```none  
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    ```
 
-    In PowerShell, run the following command to download
+    Then run the following command to download
     Docker Compose, replacing `$dockerComposeVersion` with the specific
     version of Compose you want to use:
 
