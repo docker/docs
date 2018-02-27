@@ -37,13 +37,13 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and
 
 ```shell
 $ docker --version
-Docker version 17.12.0-ce, build c97c6d6
+Docker version {{ site.docker_ce_stable_version }}, build c97c6d6
 
 $ docker-compose --version
-docker-compose version 1.18.0, build 8dd22a9
+docker-compose version {{ site.compose_version }}, build 8dd22a9
 
 $ docker-machine --version
-docker-machine version 0.13.0, build 9ba6da9
+docker-machine version {{ site.machine_version }}, build 9ba6da9
 ```
 
 > **Note**: The above is an example. Your output may differ if you are running
