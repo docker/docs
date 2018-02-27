@@ -485,7 +485,7 @@ We did not distribute a 1.12.4 stable release
 * New
   - VM Swap size can be changed in settings. 
   - Support NFS Volume sharing. Also works in Kubernetes. See [docker/for-win#1700](https://github.com/docker/for-win/issues/1700) 
-  - Allow to activate Windows container during installation (avoid vm disk creation and vm boot when working only on win containers). See [docker/for-win#217](https://github.com/docker/for-win/issues/217).
+  - Allow users to activate Windows container during installation (avoid vm disk creation and vm boot when working only on win containers). See [docker/for-win#217](https://github.com/docker/for-win/issues/217).
 
 * Bug fixes and minor changes
   - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
@@ -493,8 +493,8 @@ We did not distribute a 1.12.4 stable release
   - Fix risk of privilege escalation. (https://www.tenable.com/sc-report-templates/microsoft-windows-unquoted-service-path-vulnerability)
   - All users present in the docker-users group are now able to use docker. Fixes [docker/for-win#1732](https://github.com/docker/for-win/issues/1732)
   - Kubernetes Load balanced services are no longer marked as `Pending`. 
-  - Fixed hostPath mounts in Kubernetes.
-  - Updated Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
+  - Fix hostPath mounts in Kubernetes.
+  - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
   
 
 ### Docker Community Edition 18.02.0-ce-win52 2018-02-08 (Edge)
