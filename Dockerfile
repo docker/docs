@@ -3,9 +3,14 @@ FROM starefossen/github-pages
 # This is the source for docs/docs-base. Push to that location to ensure that
 # the production image gets your update :)
 
-# Install nginx
+# Install nginx as well as packages used by
+# _scripts/fetch-upstream-resources.sh (master branch)
 
-RUN apk update && apk add nginx && apk add git && apk add subversion && apk add wget
+RUN apk --no-cache add \
+	git \
+	nginx \
+	subversion \
+	wget
 
 # Forward nginx request and error logs to docker log collector
 
