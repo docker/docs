@@ -14,7 +14,7 @@ Options:
     --no-cache              Do not use cache when building the image.
     --pull                  Always attempt to pull a newer version of the image.
     -m, --memory MEM        Sets memory limit for the build container.
-    --build-arg key=val     Set build-time variables for one service.
+    --build-arg key=val     Set build-time variables for services.
 ```
 
 Services are built once and then tagged, by default as `project_service`. For

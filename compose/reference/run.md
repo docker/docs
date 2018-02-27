@@ -11,7 +11,7 @@ Usage:
         SERVICE [COMMAND] [ARGS...]
 
 Options:
-    -d                    Detached mode: Run container in the background, print
+    -d, --detach          Detached mode: Run container in the background, print
                           new container name.
     --name NAME           Assign a name to the container
     --entrypoint CMD      Override the entrypoint of the image.
@@ -23,6 +23,8 @@ Options:
     -p, --publish=[]      Publish a container's port(s) to the host
     --service-ports       Run command with the service's ports enabled and mapped
                           to the host.
+    --use-aliases         Use the service's network aliases in the network(s) the
+                          container connects to.
     -v, --volume=[]       Bind mount a volume (default [])
     -T                    Disable pseudo-tty allocation. By default `docker-compose run`
                           allocates a TTY.
