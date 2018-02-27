@@ -18,9 +18,9 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 # Component versions -- address like site.docker_ce_stable_version
 # You can't have - characters in these for non-YAML reasons
 
-docker_ce_stable_version: "17.12"
 latest_stable_docker_engine_api_version: "1.36"
-docker_ce_edge_version: "18.02"
+docker_ce_stable_version: "17.12.0"
+docker_ce_edge_version: "18.02.0"
 docker_ee_version: "17.06"
 compose_version: "1.19.0"
 machine_version: "0.13.0"
