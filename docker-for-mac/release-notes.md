@@ -19,6 +19,12 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-mac55 2018-02-27 (Stable)
+
+* Bug fixes and minor changes
+  - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
+  - Fix VPNKit proxy for docker.for.mac.http.internal.
+
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
 
 * Bug fixes and minor changes
