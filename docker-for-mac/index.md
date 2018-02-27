@@ -210,6 +210,7 @@ containers.
 ![Proxies settings](/docker-for-mac/images/settings-proxies.png)
 
 <p id="daemon-experimental-mode" />
+
 ### Docker Daemon
 
 You can configure options on the Docker daemon that determine how your
@@ -495,9 +496,9 @@ symlinked to your `bash_completion.d/` directory. For example, if you installed
 bash via [Homebrew](http://brew.sh/):
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
 ### Zsh
