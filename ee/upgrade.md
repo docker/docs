@@ -38,6 +38,23 @@ You may also want to check the
 [Docker EE maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
 to understand until when your version may be supported.
 
+## Apply firewall rules
+
+Before you upgrade, make sure:
+
+- Your firewall rules are configured to allow traffic in the ports UCP uses
+  for communication. Learn about [UCP port requirements](ucp/admin/install/system-requirements.md#ports-used).
+- Make sure you don't have containers or services that are listening on ports
+  used by UCP.
+- Configure your load balancer to forward TCP traffic to the Kubernetes API
+  server port (6443/TCP by default) running on manager nodes.
+
+> Certificates
+>
+> Externally signed certificates are used by the Kubernetes API server and
+> the UCP controller.
+{: .important}
+
 ## Upgrade Docker Engine
 
 To avoid application downtime, you should be running Docker in Swarm mode and
