@@ -2,6 +2,7 @@ name: Docker Documentation
 markdown: kramdown
 kramdown:
   input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
