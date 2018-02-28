@@ -434,7 +434,6 @@ flag with the `config` command.
 > resulting configuration is only an approximate using non-Swarm mode
 > properties, it may produce unexpected results.
 
-
 ## Compose file format references
 
 - [Compose file version 3](index.md)
