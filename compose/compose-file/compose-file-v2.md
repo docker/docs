@@ -318,6 +318,16 @@ Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
 
+### device_cgroup_rules
+
+> [Added in version 2.3 file format](compose-versioning.md#version-23).
+
+Add rules to the cgroup allowed devices list.
+
+    device_cgroup_rules:
+      - 'c 1:3 mr'
+      - 'a 7:* rmw'
+
 ### devices
 
 List of device mappings.  Uses the same format as the `--device` docker
@@ -1145,6 +1155,8 @@ expressed in the short form.
 - `volume`: configure additional volume options
   - `nocopy`: flag to disable copying of data from a container when a volume is
     created
+- `tmpfs`: configure additional tmpfs options
+  - `size`: the size for the tmpfs mount in bytes
 
 
 ```none
