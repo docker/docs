@@ -331,6 +331,18 @@ a [byte value](#specifying-byte-values).
       context: .
       shm_size: 10000000
 
+#### target
+
+> Added in [version 3.4](compose-versioning.md#version-34) file format
+
+Build the specified stage as defined inside the `Dockerfile`. See the
+[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
+details.
+
+      build:
+        context: .
+        target: prod
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
