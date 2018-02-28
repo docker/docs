@@ -57,7 +57,12 @@ if you are upgrading from Docker CE to Docker EE, remove the Docker CE package.
 
 ```bash
 $ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
                   docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
                   docker-engine \
