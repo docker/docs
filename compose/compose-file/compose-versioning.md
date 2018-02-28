@@ -229,6 +229,7 @@ Introduces the following additional parameters:
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 - [`runtime`](compose-file-v2.md#runtime) for service definitions
+- [`device_cgroup_rules`](compose-file-v2.md#devicecgrouprules)
 
 ### Version 3
 
@@ -410,6 +411,27 @@ It's more complicated if you're using particular configuration features:
         volumes:
           data:
             external: true
+
+## Compatibility mode
+
+`docker-compose` 1.20.0 introduces a new `--compatibility` flag designed to
+help developers transition to version 3 more easily. When enabled,
+`docker-compose` reads the `deploy` section of each service's definition and
+attempts to translate it into the equivalent version 2 parameter. Currently,
+the following deploy keys are translated:
+
+- [resources](index.md#resources) limits and memory reservations
+- [replicas](index.md#replicas)
+- [restart_policy](index.md#restartpolicy) `condition` and `max_attempts`
+
+All other keys are ignored and produce a warning if present. You can review
+the configuration that will be used to deploy by using the `--compatibility`
+flag with the `config` command.
+
+> **Note:** We recommend against using `--compatibility` mode in production.
+> Because the resulting configuration is only an approximate using non-Swarm
+> mode properties, it may produce unexpected results.
+
 
 ## Compose file format references
 
