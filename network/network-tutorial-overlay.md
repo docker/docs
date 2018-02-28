@@ -48,7 +48,7 @@ This tutorial does not go into operation-system-specific details about how
 overlay networks are implemented, but focuses on how the overlay functions from
 the point of view of a service.
 
-### Prereqisites
+### Prerequisites
 
 This tutorial requires three physical or virtual Docker hosts which can all
 communicate with one another, all running new installations of Docker 17.03 or
