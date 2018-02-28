@@ -446,7 +446,6 @@ flag with the `config` command.
 =======
 >>>>>>> b3a1eb7... Use updated notes format
 
-
 ## Compose file format references
 
 - [Compose file version 3](index.md)
