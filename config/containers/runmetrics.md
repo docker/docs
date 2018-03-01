@@ -303,7 +303,7 @@ container, we need to:
 - Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
 - Execute `ip netns exec <somename> ....`
 
-Review [Enumerating Cgroups](#enumerating-cgroups)for how to find
+Review [Enumerate Cgroups](#enumerate-cgroups) for how to find
 the cgroup of an in-container process whose network usage you want to measure.
 From there, you can examine the pseudo-file named
 `tasks`, which contains all the PIDs in the
