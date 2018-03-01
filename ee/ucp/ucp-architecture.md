@@ -115,7 +115,6 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | ucp-swarm-manager               | Used to provide backwards-compatibility with Docker Swarm.                                                                                                                                                                                                                                                                                                      |
 
 
-
 ### UCP components in worker nodes
 
 Worker nodes are the ones where you run your applications. These are the UCP
@@ -123,15 +122,17 @@ services running on worker nodes:
 
 | UCP component               | Description                                                                                                                                                                                                                                                          |
 |:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| k8s_calico-node             | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                               |
+| k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                 |
+| k8s_POD_calico-node         | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
 | ucp-agent                   | Monitors the node and ensures the right UCP services are running                                                                                                                                                                                                     |
+| ucp-interlock-extension     | Helper service that reconfigures the ucp-interlock-proxy service based on the swarm workloads that are running.                                                                                                                                                      |
+| ucp-interlock-proxy         | A service that provides load balancing and proxying for swarm workloads. Only runs when you enable Layer 7 routing.                                                                                                                                                  |
 | ucp-dsinfo                  | Docker system information collection script to assist with troubleshooting                                                                                                                                                                                           |
+| ucp-kubelet                 | The kubernetes node agent running on every node, which is responsible for running Kubernetes pods, reporting the health of the node, and monitoring resource usage                                                                                                   |
+| ucp-kube-proxy              | The networking proxy running on every node, which enables pods to contact Kubernetes services and other pods, via cluster IP addresses                                                                                                                               |
 | ucp-reconcile               | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
 | ucp-proxy                   | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                                                                                    |
-| ucp-kubelet                 | The Kubernetes node agent running on every node, which is responsible for running Kubernetes pods, reporting the health of the node, and monitoring resource usage                                                                                                   |
-| ucp-kube-proxy              | The networking proxy running on every node, which enables pods to contact Kubernetes services and other pods, via cluster IP addresses                                                                                                                               |
-| k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                                 |
-| k8s_calico-node             | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes.                                                                                               |
-| k8s_POD_calico-node         | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`.                                                                                                                                       |
 
 ## Pause containers
 
@@ -182,6 +183,16 @@ driver.
 
 By default, the data for these volumes can be found at
 `/var/lib/docker/volumes/<volume-name>/_data`.
+
+## Configurations use by UCP
+
+| Configuration name             | Description                                                                                      |
+|:-------------------------------|:-------------------------------------------------------------------------------------------------|
+| com.docker.interlock.extension | Configuration for the Interlock extension service that monitors and configures the proxy service |
+| com.docker.interlock.proxy     | Configuration for the service responsible for handling user requests and routing them            |
+| com.docker.license             | The Docker EE license                                                                            |
+| com.docker.ucp.config          | The UCP controller configuration. Most of the settings available on the UCP UI are stored here   |
+| com.docker.ucp.interlock.conf  | Configuration for the core Interlock service                                                     |
 
 ## How you interact with UCP
 
