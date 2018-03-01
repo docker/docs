@@ -172,7 +172,7 @@ need to have Docker installed and running.
     address shown for `alpine1` in the previous step.
 
 5.  From within `alpine1`, make sure you can connect to the internet by
-    pinging `google.com`. The `-c 2` flag limits the command two two `ping`
+    pinging `google.com`. The `-c 2` flag limits the command to two `ping`
     attempts.
 
     ```bash
