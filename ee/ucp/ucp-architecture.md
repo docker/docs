@@ -95,20 +95,20 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | ucp-metrics                 | Used to collect and process metrics for a node, like the disk space available.                                                                                                                                                                                        |
 | ucp-proxy                   | A TLS proxy. It allows secure access to the local Docker Engine to UCP components.                                                                                                                                                                                    |
 | ucp-swarm-manager           | Used to provide backwards-compatibility with Docker Swarm.                                                                                                                                                                                                            |
-| ucp-kubelet                 | The kubernetes node agent running on every node, which is responsible for running kubernetes pods, reporting the health of the node, and monitoring resource usage.                                                                                                   |
+| ucp-kubelet                 | The Kubernetes node agent running on every node, which is responsible for running Kubernetes pods, reporting the health of the node, and monitoring resource usage.                                                                                                   |
 | ucp-kube-apiserver          | A master component that serves the Kubernetes API. It persists its state in `etcd` directly, and all other components communicate with API server directly.                                                                                                           |
 | ucp-kube-controller-manager | A master component that manages the desired state of controllers and other Kubernetes objects. It monitors the API server and performs background tasks when needed.                                                                                                  |
 | ucp-kube-proxy              | The networking proxy running on every node, which enables pods to contact Kubernetes services and other pods, via cluster IP addresses.                                                                                                                               |
 | ucp-kube-scheduler          | A master component that handles scheduling of pods. It communicates with the API server only to obtain workloads that need to be scheduled.                                                                                                                           |
 | k8s_ucp-kubedns                | The main Kubernetes DNS Service, used by pods to [resolve service names](https://v1-8.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/). Part of the `kube-dns` deployment. Runs on one manager node only. Provides service discovery for Kubernetes services and pods. A set of three containers deployed via Kubernetes as a single pod. |
-| k8s_POD_kube-dns | "Pause" container for the `kube-dns` pod. By default, this container is hidden, but you can see it by running `docker ps -a`. |
-| k8s_ucp-kube-compose | A custom kubernetes resource component that's responsible for translating Compose files into Kubernetes constructs. Part of the `compose` deployment. Runs on one manager node only. |
-| k8s_POD_compose | "Pause" container for the Compose pod. By default, this container is hidden, but you can see it by running `docker ps -a`. |
-| k8s_calico-kube-controllers | A cluster-scoped Kubernetes controller used to coordinate calico networking. Runs on one manager node only. |
-| k8s_POD_calico-kube-controllers | "Pause" container for the `calico-kube-controllers` pod. By default, this container is hidden, but you can see it by running `docker ps -a`. |
+| k8s_POD_kube-dns | Pause container for the `kube-dns` pod. |
+| k8s_ucp-kube-compose | A custom Kubernetes resource component that's responsible for translating Compose files into Kubernetes constructs. Part of the `compose` deployment. Runs on one manager node only. |
+| k8s_POD_compose | Pause container for the `compose` pod. |
+| k8s_calico-kube-controllers | A cluster-scoped Kubernetes controller used to coordinate Calico networking. Runs on one manager node only. |
+| k8s_POD_calico-kube-controllers | Pause container for the `calico-kube-controllers` pod. |
 | k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes. |
 | k8s_calico-node | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. Configure the CNI plugin by using the `--cni-installer-url` flag. If this flag isn't set, UCP uses Calico as the default CNI plugin. |
-| k8s_POD_calico-node | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`. |
+| k8s_POD_calico-node | Pause container for the `calico-node` pod. |
 | k8s_ucp-kubedns-sidecar | Health checking and metrics daemon of the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only. |
 | k8s_ucp-dnsmasq-nanny | A dnsmasq instance used in the Kubernetes DNS Service. Part of the `kube-dns` deployment. Runs on one manager node only. |
 
@@ -123,11 +123,31 @@ services running on worker nodes:
 | ucp-dsinfo     | Docker system information collection script to assist with troubleshooting                                                                                                                                                                                           |
 | ucp-reconcile  | When ucp-agent detects that the node is not running the right UCP components, it starts the ucp-reconcile container to converge the node to its desired state. It is expected for the ucp-reconcile container to remain in an exited state when the node is healthy. |
 | ucp-proxy      | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                                                                                    |
-| ucp-kubelet    | The kubernetes node agent running on every node, which is responsible for running Kubernetes pods, reporting the health of the node, and monitoring resource usage                                                                                                   |
+| ucp-kubelet    | The Kubernetes node agent running on every node, which is responsible for running Kubernetes pods, reporting the health of the node, and monitoring resource usage                                                                                                   |
 | ucp-kube-proxy | The networking proxy running on every node, which enables pods to contact Kubernetes services and other pods, via cluster IP addresses                                                                                                                               |
 | k8s_install-cni_calico-node | A container that's responsible for installing the Calico CNI plugin binaries and configuration on each host. Part of the `calico-node` daemonset. Runs on all nodes. |
 | k8s_calico-node | The Calico node agent, which coordinates networking fabric according to the cluster-wide Calico configuration. Part of the `calico-node` daemonset. Runs on all nodes. |
-| k8s_POD_calico-node | "Pause" container for the Calico-node pod. By default, this container is hidden, but you can see it by running `docker ps -a`. |
+| k8s_POD_calico-node | Pause container for the `calico-node` pod. |
+
+## Pause containers
+
+Every pod in Kubernetes has a _pause_ container, which is an "empty" container
+that bootstraps the pod to establish all of the namespaces. Pause containers
+hold the cgroups, reservations, and namespaces of a pod before its individual
+containers are created. The pause container's image is always present, so the
+allocation of the pod's resources is instantaneous. 
+
+By default, pause containers are hidden, but you can see them by running
+`docker ps -a`.
+
+```
+docker ps -a | grep -I pause
+
+8c9707885bf6        dockereng/ucp-pause:3.0.0-6d332d3        "/pause"                 47 hours ago        Up 47 hours                                                                                               k8s_POD_calico-kube-controllers-559f6948dc-5c84l_kube-system_d00e5130-1bf4-11e8-b426-0242ac110011_0
+258da23abbf5        dockereng/ucp-pause:3.0.0-6d332d3        "/pause"                 47 hours ago        Up 47 hours                                                                                               k8s_POD_kube-dns-6d46d84946-tqpzr_kube-system_d63acec6-1bf4-11e8-b426-0242ac110011_0
+2e27b5d31a06        dockereng/ucp-pause:3.0.0-6d332d3        "/pause"                 47 hours ago        Up 47 hours                                                                                               k8s_POD_compose-698cf787f9-dxs29_kube-system_d5866b3c-1bf4-11e8-b426-0242ac110011_0
+5d96dff73458        dockereng/ucp-pause:3.0.0-6d332d3        "/pause"                 47 hours ago        Up 47 hours                                                                                               k8s_POD_calico-node-4fjgv_kube-system_d043a0ea-1bf4-11e8-b426-0242ac110011_0
+```
 
 ## Volumes used by UCP
 
