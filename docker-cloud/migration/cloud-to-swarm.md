@@ -4,11 +4,13 @@ keywords: cloud, swarm, migration
 title: Migrate Docker Cloud stack to Docker CE swarm
 ---
 
+## Docker CE in swarm mode
+
+This page explains how to prepare your applications for migration from Docker Cloud to applications running as _service stacks_ on clusters of Docker Community Edition (CE) nodes in swarm mode. To demonstrate, we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile for [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to a service stack format, and **test** in the new environment to ensure that it is safe to migrate.
+
+> The actual process of migrating -- switching customers from your Docker Cloud applications to Docker CE applications -- will vary by application and environment.
+
 ## Voting-app example
-
-This page explains how you can prepare your applications for migration from Docker Cloud to applications running as *service stacks* on clusters of Docker Community Edition (CE) nodes in swarm mode. We demonstrate with the [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} by **building** a target environment of Docker CE nodes in swarm mode, **converting** the Cloud stackfile to service stack format, and **testing** in the new environment to ensure that it is safe to migrate.
-
-> **Note**: The actual process of migrating (switching customers from your Docker Cloud applications to Docker CE applications) will vary by application and environment and is outside the scope of this document.
 
 In the Docker Cloud stackfile, the voting app is defined as a stack of six microservices:
 
@@ -19,12 +21,12 @@ In the Docker Cloud stackfile, the voting app is defined as a stack of six micro
 - **result**: Web server that pulls and displays results from database
 - **lb**: Container-based load balancer
 
-Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis` and `worker`. The vote tally is viewed with the `result` service. The `lb` service balances internal traffic between containers.
+Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
 
 The Docker Cloud stack is defined in [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"} and the Docker CE service stack is defined in
 [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}. This doc explains how `dockercloud.yml` is converted to `docker-stack.yml` so that you have the tools to do the same for your applications.
 
-![image of voting app arch](images/votingapp-architecture.png){:width="400px"}
+![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
 
 ## Migration prerequisites
 
@@ -33,7 +35,7 @@ To complete the migration from Docker Cloud to Docker Swarm on Docker CE, you ne
 - **Docker CE nodes** (in a public cloud or on-premises) organized as a swarm cluster
 - **SSH access** to the nodes in the swarm cluster.
 
-You *may* also need the following application-specific things:
+You _may_ also need the following application-specific things:
 
 - Permanent public IP and DNS **addresses** for nodes.
 - External **load balancers** configured to direct traffic to Docker CE nodes.
@@ -53,11 +55,11 @@ Planning and building your nodes is specific to your requirements, but includes 
 - Deciding **node distribution** across availability zones for high availability (HA).
 - Calculating the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
 - Ensuring **nodes can communicate** over the network and have stable resolvable DNS names.
-- Configuring a **load balancer**.
+- Configuring **load balancers**.
 
 Your swarm cluster of Docker CE nodes should probably resemble your existing Docker Cloud node cluster. For example, if you currently have five managers and seven workers of a particular size and spec, in hosted availability zones, your target swarm cluster should probably match that.
 
-> **Note**: To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
+> To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
 This diagram shows a six-node swarm cluster spread across two availability zones:
 
@@ -82,21 +84,21 @@ In this demo, we build a swarm cluster with three nodes (one manager, two worker
     $ docker swarm init
     ```
 
-    > **Note**: Our swarm cluster uses self-signed certificates. To use an external CA, initialize with the option, [`--external-ca`](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}. You should also build your nodes in appropriate failure domains.
+    > Our swarm cluster uses self-signed certificates. To use an external CA, initialize with the option, [`--external-ca`](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}. You should also build your nodes in appropriate failure domains.
 
-3.  Extract and **safely store** the command and manager *join-token* required to add manager nodes.
+3.  Extract and **safely store** the manager _join-token_ required to add manager nodes.
 
     ```
     $ docker swarm join-token manager
     ```
 
-4.  Extract and **safely store** the command and worker *join-token* required to add worker nodes.
+4.  Extract and **safely store** the worker _join-token_ required to add worker nodes.
 
     ```
     $ docker swarm join-token worker
     ```
 
-    > **Note**: Keep your join tokens safe and secure as bad people can join managers with them!
+    > Keep your join tokens safe and secure as bad people can join managers with them!
 
 5.  **[optional]** If you deployed extra nodes, you can add manager nodes with the _manager_ join token. Run on each node designated as a manager. The join token and network details will differ in your environment.
 
@@ -129,9 +131,11 @@ With your target environment configured, let us look at the application and conv
 
 ## Convert Docker Cloud stackfile
 
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml){: target="_blank" class="_"}.**
+
 To prepare your applications for migration from Docker Cloud to Docker CE (in swarm mode), you must recreate your Docker Cloud stackfiles (**source** files) as stackfiles for service stacks (**target** files). Once you have each application defined as a service stack, you can test and deploy.
 
-> **Note**: To find the stackfiles for each of your existing applications in Docker Cloud, select **Stacks** > _your_stack_ > **Edit**.
+> To find the stackfiles for your existing applications in Docker Cloud, you can (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
 
 **Cloud source**: In the Docker Cloud stackfile, the six services in our `example-voting-app` are defined as **top-level keys**:
 
@@ -144,7 +148,7 @@ vote:
 worker:
 ```
 
-**Swarm target**: In the *service stack* stackfile, services should be listed as individual **sub-level keys** (below the top-level key, `services`). The Compose file format version must also be defined (at the top).
+**Swarm target**: In the _service stack_ stackfile, services should be listed as individual **sub-level keys** (below the top-level key, `services`). The Compose file format version must also be defined (at the top).
 
 ```
 version: "3.5"
@@ -156,7 +160,7 @@ services:
   worker:
 ```
 
-Another difference in the *service stack* stackfile is that we removed the `lb` service because it is not needed in Swarm. In Cloud, the load-balancer was used to balance internal application traffic. Swarm has built-in load balancing with a native transport-layer routing mesh called the Swarm service mesh.
+In the _service stack_ stackfile, we remove the `lb` service because it is not needed in Swarm. The `lb` service in Docker Cloud accepts incoming traffic on port 80 and load balances across all replicas in the `vote` front-end service. Swarm has built-in load balancing with a native transport-layer routing mesh called the Swarm service mesh.
 
 In the following sections, we step through each service in [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} and explain how the Docker Cloud source file
 ([dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}) is converted to the service stack target file
@@ -181,8 +185,6 @@ db:
 db:
   image: postgres:9.4
   deploy:
-    placement:
-      constraints: [node.role == manager]
     restart_policy:
       condition: any
 ```
@@ -205,11 +207,12 @@ db:
 
 Let's step through some fields:
 
-- `volumes` places the Postgres database on a named volume called **db-data** and mounts it into each service replica at `/var/lib/postgresql/data`. This ensures that the data written by the application persists in the event that the Postgres container fails.
+- `volumes` places the Postgres database on a named volume called **db-data** and mounts it into the service replica at `/var/lib/postgresql/data`. This ensures that the data written by the application persists in the event that the Postgres container fails.
 - `networks` adds security by putting the service on a backend network.
 - `deploy.placement.constraints` forces the service to run on manager nodes. In a single-manager swarm, this ensures that the service always starts on the same node and has access to the same volume.
+- `deploy.restart_policy.condition=any` is the Docker swarm equivalent of the Docker Cloud `restart=always` policy.
 
-> **Note**: Consider using a hosted database service for production databases. This is something that, ideally, should not change as part of your migration away from Docker Cloud stacks.
+> Consider using a hosted database service for production databases. This is something that, ideally, should not change as part of your migration away from Docker Cloud stacks.
 
 ### redis service
 
@@ -283,9 +286,13 @@ result:
       condition: any
 ```
 
-Notice the different port mappings in the two stackfiles. Docker Cloud allows multiple services on a single port. Docker Swarm does not. In the Docker Cloud stackfile, the voting application publishes two services on port 80. The `result` service is published directly on port 80, and the `vote` service is published indirectly on port 80 using the `lb` service. To get around this in swarm mode, we publish the `result` service on port 5001.
+Notice the different port mappings in the two stackfiles. The Docker Cloud application makes two services available on port 80 (using unique nodes). The `result` service is published directly on port 80, and the `vote` service is published indirectly on port 80 using the `lb` service.
 
-> **Note**: If publishing to a different port is a problem, you may be able to *front* the service with a load balancer that listens on port 80 and forwards to 5001 behind the scenes. You may even use an application-layer load-balancer such as the Docker EE HRM to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers. This topic beyond the scope of this document.
+Docker Swarm does not let you publish multiple services on the same port in a cluster. In the _service stack_ stackfile, then, we publish these two services on different ports -- `vote` on port 5000 and `result` service on port 5001. If this is a problem for your users or application, you may be able to
+
+- Publish this service on port 80 and any other service on a different port.
+- Front the service with a load balancer that listens on port 80 and forward to 5000 and 5001 behind the scenes.
+- Use an application-layer load-balancer, such as the [Docker EE HTTP Routing Mesh (HRM)](https://success.docker.com/article/Docker_Reference_Architecture-_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing#thehttproutingmesh), to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers.
 
 **Swarm target (extended)**
 
@@ -317,15 +324,15 @@ This adds the following:
 
 ### lb service
 
-In Docker Cloud, the `lb` service was used to proxy connections on port 80 to the `vote` service. It was deployed as a `global` service so that an instance of it would always run on every node in the Docker Cloud node cluster. We do not need to migrate the `lb` service because Docker CE in swarm mode has native load balancing built into its service mesh.
+In Docker Cloud, the `lb` service was used to proxy connections on port 80 to the `vote` service. We do not need to migrate the `lb` service because Docker CE in swarm mode has native load balancing built into its service mesh.
 
-If your applications are running load balancers, such as `dockercloud/haproxy`, you ___may___ no longer need them when migrating to stacks on Docker CE. Be sure to test your application and consult with your Docker technical account manager for further details.
+If your applications are running load balancers, such as `dockercloud/haproxy`, you _may_ no longer need them when migrating to stacks on Docker CE. Be sure to test your application and consult with your Docker technical account manager for further details.
 
 ### vote service
 
-The Docker Cloud `vote` service defines an image, a restart policy, service replicas. It also defines an `autoredeploy` policy which is not supported natively in *service stacks*.
+The Docker Cloud `vote` service defines an image, a restart policy, service replicas. It also defines an `autoredeploy` policy which is not supported natively in _service stacks_.
 
-> Autoredeploy is a Docker Cloud feature that automatically updates your running application every time an updated image is pushed or built. It is not native to Docker CE, AKS or GKE, but you may be able to regain it using Docker Cloud auto-builds, and web-hooks on your Docker Cloud repository for the image, back to your CI/CD pipeline.
+> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you build an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
 **Cloud source**:
 
@@ -350,7 +357,9 @@ vote:
       condition: any
 ```
 
-As with the `result` service, Docker Swarm only allows a single service to be published on any given port in a swarm cluster. The Docker Cloud version of the voting application publishes both the `result` and `vote` services on port 80 (the vote services is made available on port 80 with the `lb` service). To get around this in swarm mode, we publish the `vote` service on port 5000 (as we did with the `result` service on port 5001).
+As with the `result` service, Docker Swarm only allows a single service to be published on any given port in a swarm cluster. The Docker Cloud version of the voting application publishes both the `result` and `vote` services on port 80 (where the `vote` service is made available on port 80 with the `lb` service).
+
+To get around this in swarm mode, we publish the `vote` service on port 5000 (as we did with the `result` service on port 5001).
 
 **Swarm target (extended)**:
 
@@ -373,7 +382,7 @@ vote:
 
 ### worker service
 
-**Cloud source**: The Docker Cloud `worker` service defines an image, a restart policy, and a number of service replicas. It also defines an `autoredeploy` policy which is not supported natively in *service stacks*.
+**Cloud source**: The Docker Cloud `worker` service defines an image, a restart policy, and a number of service replicas. It also defines an `autoredeploy` policy which is not supported natively in _service stacks_.
 
 ```
 worker:
@@ -417,19 +426,19 @@ worker:
 
 All of the settings mentioned here are application specific and may not be needed in your application.
 
-- `replicas` here are attached to two networks--frontend and backend--allowing them to communicate with services on either network.
-- `placement.constraints` ensure that replicas for this service always tart on a manager node.
+- `replicas` here are attached to two networks (frontend and backend) allowing them to communicate with services on either network.
+- `placement.constraints` ensure that replicas for this service always start on a manager node.
 - `restart_policy` attempts to restart any service replica that exits with a non-zero return code (any). It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
 
 ## Test converted stackfile
 
-Before migrating, you should thoroughly test each new *service stack* stackfile in a Docker CE cluster in swarm mode. Test the simple stackfile first--that is, the stackfile that most literally mimics what you have in Docker Cloud. Once that works, start testing some of the more robust features in the extended examples.
+Before migrating, you should thoroughly test each new _service stack_ stackfile in a Docker CE cluster in swarm mode. Test the simple stackfile first -- that is, the stackfile that most literally mimics what you have in Docker Cloud. Once that works, start testing some of the more robust features in the extended examples.
 
-Healthy testing includes spinning up the application with the new *service stack* stackfile, performing scaling operations, and doing updates and rollbacks. You should also manage your *service stack* stackfiles in a version control system.
+Healthy testing includes spinning up the application with the new _service stack_ stackfile, performing scaling operations, and doing updates and rollbacks. You should also manage your _service stack_ stackfiles in a version control system.
 
 The following steps explain how to deploy your app from the **target** Docker Swarm stackfile and verify that it is running. Perform the following from a manager node in your swarm cluster.
 
-1. Deploy the app from the *service stack* stackfile you created.
+1. Deploy the app from the _service stack_ stackfile you created.
 
     ```
     $ docker stack deploy -c example-stack.yaml example-stack
@@ -467,7 +476,7 @@ The following steps explain how to deploy your app from the **target** Docker Sw
 
     These tests are specific to each of your apps, and are beyond the scope of this document. Be sure to complete them before beginning the migration of your application. If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stack, you should build, test, and implement one for the app on Docker CE.
 
-## Migrate application from Docker Cloud
+## Migrate apps from Docker Cloud
 
 How you migrate your applications is unique to your environment and applications.
 
@@ -478,4 +487,7 @@ How you migrate your applications is unique to your environment and applications
 
 Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
 
-<span class="badge badge-danger">Warning</span> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.
+> Think before you terminate stacks and clusters
+>
+> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.
+{: .warning}

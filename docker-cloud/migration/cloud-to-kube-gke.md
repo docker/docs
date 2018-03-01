@@ -4,11 +4,15 @@ keywords: cloud, kubernetes, migration
 title: Migrate Docker Cloud stack to Kubernetes on GKE
 ---
 
+## GKE Kubernetes
+
+This page explains how to prepare your applications for migration from Docker Cloud to to Kubernetes on [Google GKE](https://cloud.google.com/free/). To demonstrate, we **build** a target environment of GKE nodes (a hosted Kubernetes service), **convert** the Cloud stackfile for [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to a Kubernetes YAML format, and **test** in the new environment to ensure that it is safe to migrate.
+
+Google Container Engine (GKE) is a hosted Kubernetes service on Google Cloud Platform (GCP). It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
+
+> The actual process of migrating -- switching customers from your Docker Cloud applications to GKE applications -- will vary by application and environment.
+
 ## Voting-app example
-
-This page explains how you can prepare your applications for migration from Docker Cloud to a Google Kubernetes Engine (GKE) cluster. We demonstrate with the [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} by **building** a target environment of GKE nodes (with a hosted Kubernetes service), **converting** the Cloud stackfile to a Kubernetes manifest, and **testing** the Kubernetes manifest in the new environment to ensure that it is safe to migrate.
-
-> **Note**: GKE is a hosted Kubernetes service on the Google public cloud. It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
 In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}, the voting app is defined as a stack of six microservices:
 
@@ -19,9 +23,9 @@ In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/
 - **result**: Web server that pulls and displays results from database
 - **lb**: Container-based load balancer
 
-Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis` and `worker`. The vote tally is viewed with the `result` service. The `lb` service balances internal traffic between containers.
+Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
 
-![image of voting app arch](images/votingapp-architecture.png){:width="400px"}
+![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
 
 ## Migration prerequisites
 
@@ -31,7 +35,7 @@ To complete the migration from Docker Cloud to Kubernetes on GKE, you need:
 
 ## Build target environment
 
-Google Kubernetes Engine (GKE) is a managed Kubernetes service on the Google Cloud Platform (GCP). It takes care of all of the Kubernetes control plane management--delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes--how many, size and spec, where to deploy them, etc.
+Google Kubernetes Engine (GKE) is a managed Kubernetes service on the Google Cloud Platform (GCP). It takes care of all of the Kubernetes control plane management -- delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes -- how many, size and spec, where to deploy them, etc.
 
 Building a GKE cluster involves the following high-level steps:
 
@@ -57,7 +61,7 @@ Everything in the Google Cloud Platform has to sit inside of a *project*. Let's 
 
 In this section, we build a three-node cluster; yours should probably be based on the configuration of your Docker Cloud node cluster.
 
-> **Note**: To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
+> To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
 Before continuing, you will need to know all of the following:
 
@@ -78,7 +82,7 @@ To build:
     - **Zone/Region:** The zone or region to deploy the cluster to.
     - **Cluster version:** The version of Kubernetes to use. You should probably use a 1.8.x or 1.9.x version.
     - **Machine type:** The type of GCE VM to use as worker nodes in the cluster. This should probably match your Docker Cloud node cluster.
-    - **Node image:** The OS to run on each Kubernetes worker node. Use Ubuntu if you require NFS, glusterfs, Sysdig, or Debian packages.
+    - **Node image:** The OS to run on each Kubernetes worker node. Use Ubuntu if you require NFS, glusterfs, Sysdig, or Debian packages, otherwise use COS.
     - **Size:** How many nodes to have in the cluster.
 
     There are various other options that you can configure, and you should carefully consider them. However, the majority of deployments should be OK with default values for these.
@@ -141,11 +145,13 @@ You now have a GKE cluster and have configured `kubectl` to manage it. Let's loo
 
 ## Convert Docker Cloud stackfile
 
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml){: target="_blank" class="_"}.**
+
 To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
-> **Note**: To find the stackfiles for each of your existing applications in Docker Cloud, select **Stacks** > _your_stack_ > **Edit**.
+> To find the stackfiles for your existing applications in Docker Cloud, you can (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
 
-In the Docker Cloud stackfile, the six Docker _services_ in our `example-voting-app` stack are defined as a **top-level key**:
+In the Docker Cloud stackfile, the six Docker _services_ in our `example-voting-app` stack are defined as **top-level keys**:
 
 ```
 db:
@@ -158,12 +164,12 @@ worker:
 
 Kubernetes applications are built from objects (such as [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/){: target="_blank" class="_"})
 and object abstractions (such as [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}
-and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment/Service set spawns Pods. A Pod is a set of containers and also the smallest unit of work in Kubernetes.
+and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment spawns Pods. A Pod is a set of containers and also the smallest unit of work in Kubernetes.
 
 > A [Docker serivce](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/){: target="_blank" class="_"} is one component of an application that is generated from one image.
 > A [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"} is a networking construct that load-balances Pods behind a proxy.
 
-A Kubernetes Deployment defines the application "service"--which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define how rolling updates work, rollbacks, and other advanced features.
+A Kubernetes Deployment defines the application "service" -- which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define how rolling updates work, rollbacks, and other advanced features.
 
 A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP for accessing the Pods, and also create cloud-native load-balancers.
 
@@ -181,7 +187,7 @@ db:
   restart: always
 ```
 
-**Kubernetes manifest**: The Kubernetes translation defines two object types or "kinds": a _Deployment_ and a _Service_ (separated by three dashes `---`). Each object includes an API version, metadata (labels and name), and each spawns Pods defined under "spec.template".
+**Kubernetes manifest**: The Kubernetes translation defines two object types or "kinds": a _Deployment_ and a _Service_ (separated by three dashes `---`). Each object includes an API version, metadata (labels and name), and a `spec` field for object configuration (that is, the Deployment Pods and the Service).
 
 ```
 apiVersion: apps/v1beta1
@@ -216,17 +222,17 @@ spec:
 
 About the Kubernetes fields in general:
 
-- `apiVersion` sets the schema version for Kubernetes to use when managing the object. The versions set here are supported on GKE.
+- `apiVersion` sets the schema version for Kubernetes to use when managing the object. The versions set here are supported on AKS (1.7.7 and 1.8.1).
 - `kind` defines the object type. In this example, we only define Deployments and Services but there are many others.
 - `metadata` assigns a name and set of labels to the object.
 - `spec` is where we configure the object. In a Deployment, `spec` defines the Pods to deploy.
 
-It is important that **Pod labels** (`Deployment.spec.template.metadata.labels`) match both **Deployment labels** (`Deployment.metadata.labels`) and **Service labels** (`Service.spec.selector`). This is how the Deployment object knows which Pods to manage and how the Service knows which Pods for which to provie networking.
+It is important that **Pod labels** (`Deployment.spec.template.metadata.labels`) match both **Deployment labels** (`Deployment.metadata.labels`) and **Service label selectors** (`Service.spec.selector`). This is how the Deployment object knows which Pods to manage and how the Service knows which Pods for which to provide networking.
 
 For the `db` Deployment, we define a container called `db` based on the `postgres:9.4` Docker image, and define a restart policy. All Pods created by this Deployment have the label, `app=db`.
 
 The `db` Service is a “headless” service (`clusterIP: None`). Headless services are useful when you want a stable DNS name but do not need the cluster-wide VIP. They create a stable DNS record, but instead of creating a VIP, they map the DNS name to multiple
-[A records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-records){: target="_blank" class="_"}--one for each Pod associated with the Service.
+[A records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-records){: target="_blank" class="_"} -- one for each Pod associated with the Service.
 
 The label selector (`Service.spec.selector`) has the value, "app=db". This means the Service provides stable networking and load-balancing for all Pods on the cluster labeled as “app=db”. Pods defined in the Deployment section are all labelled as "app-db". It is this mapping between the Service label selector and the Pod labels that tells the Service object which Pods for which to provide networking.
 
@@ -276,9 +282,9 @@ spec:
     app: redis
 ```
 
-Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also ensures that `labels` for both the Deployment and its Pods have the same value ("redis") to tie the two together.
+Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also ensures that `labels` for both the Deployment and its Pods have the same value ("app=redis") to tie the two together.
 
-The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and load-balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port`; and the Pod listens on the `targetPort`. Again, `labels` for both Service (`Service.metadata.labels`) and Pods (`Service.spec.selector`) match ("redis") to tie the two together.
+The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and load-balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port`; and the Pod listens on the `targetPort`. Again, the label-selector for the Service (Service.spec.selector) and the labels for the Pods (Deployment.spec.template.metadata.labels)  are what tie the two together.
 
 The diagram shows traffic intended for tcp://redis:6379 being sent to the redis Service and then load-balanced across all Pods that match the Service label selector.
 
@@ -286,13 +292,13 @@ The diagram shows traffic intended for tcp://redis:6379 being sent to the redis 
 
 ### lb service
 
-The Docker Cloud stackfile defines an `lb` service to load balance traffic to the vote service. This is not needed in Kubernetes on GKE, because Kubernetes lets you define a Service object with `type=loadbalancer` that creates a native GCPload-balancer to do this job. We demonstrate in the `vote` section.
+The Docker Cloud stackfile defines an `lb` service to load balance traffic to the vote service. This is not needed in Kubernetes on GKE, because Kubernetes lets you define a Service object with `type=loadbalancer` that creates a native GCP load-balancer to do this job. We demonstrate in the `vote` section.
 
 ### vote service
 
 The Docker Cloud stackfile defines an image, a restart policy, and a specific number containers (5) for the `vote` service. It also enables the Docker Cloud `autoredeploy` feature. We can infer that it listens on port 80 by either inspecting its image, or seeing that the Docker Cloud `lb` service was forwarding traffic to it on port 80.
 
-> **Note**: The Docker Cloud `autoredeploy` feature is not natively supported in GKE, but you may be able to regain it using Docker Cloud auto-builds, and web-hooks on your Docker Cloud repository for the image, back to your CI/CD pipeline.
+> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you build an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
 **Docker Cloud stackfile**:
 
@@ -451,11 +457,11 @@ spec:
 
 The Deployment section defines the usual names, labels and Pod (container) spec. The Service section defines another GCP-native load-balancer to load balance external traffic to the cluster on port 80.
 
-### The Kubernetes manifest file
+### Kubernetes manifest file
 
 You can choose to include all Deployments and Services in a single YAML file, or have one YAML file per Docker Cloud service. The choice is yours, but it's usually easier to deploy and manage as a single file.
 
-The example below shows them all defined in a single long YMAL file called "k8s-vote.yml". You should manage your Kubernetes manifest files the way you manage your application code--checking them in and out of version control repositories etc.
+The example below shows them all defined in a single long YAML file called "k8s-vote.yml". You should manage your Kubernetes manifest files the way you manage your application code -- checking them in and out of version control repositories etc.
 
 ```
 apiVersion: apps/v1beta1
@@ -621,11 +627,13 @@ Save the Kubernetes manifest file and check it into version control.
 
 ## Test the app on GKE
 
-You should thoroughly test your application on your GKE cluster before starting the migration. This includes deploying the application from the new Kubernetes manifest file, performing scaling operations, updates and rollbacks. You should also manage the manifest file in a version control system.
+Before migrating, you should thoroughly test each new Kubernetes manifest on an GKE cluster. Healthy testing includes deploying the application with the new manifest file, performing scaling operations, increasing load, running failure scenarios, and doing updates and rollbacks. These tests are specific to each of your applications. You should also manage your manifest files in a version control system.
 
-The following steps show you how to deploy your app from the Kubernetes manifest file and test it. They are based on the sample application used throughout this guide, but the general commands work for your cluster.
+If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stacks, you should build, test, and implement one for each application on AKS.
 
-Perform the following from an Google cloud shell or local terminal with `gcloud` and `kubectl` installed, with `kubectl` configured to talk to your GKE cluster.
+The following steps explain how to deploy your app from the Kubernetes manifest file and verify that it is running. They are based on the sample application used throughout this guide, but the general commands should work for your cluster.
+
+> Perform the following from an Google cloud shell or local terminal with `gcloud` and `kubectl` installed, with `kubectl` configured to talk to your GKE cluster.
 
 1.  Verify that you shell/terminal is configured to talk to your GKE cluster. If the output matches your cluster, you're ready to proceed with the next steps.
 
@@ -693,15 +701,9 @@ Perform the following from an Google cloud shell or local terminal with `gcloud`
 
     Copy the `EXTERNAL-IP` value for the `result` service, paste it into a browser tab and check that the vote registered.
 
-You should thoroughly test the application now that the stack is deployed and all services running.
+> You can extend your Kubernetes manifest file with advanced features to perform rolling updates and simple rollbacks. But you should not do this until you have confirmed your application is working with the simple manifest file.
 
-You can extend your Kubernetes manifest file to include advanced features such as how to perform rolling updates and simple rollbacks. But you should not do this until you have confirmed your application is working with the simplified manifest file.
-
-You should also test failure scenarios, increasing load, scaling operations, updates, rollbacks, and any other operations that are considered important for the lifecycle of the application. These tests are specific to each of your apps, and are beyond the scope of this document. However, you should be sure to complete them before beginning the migration of your application.
-
-If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stack, you should build, test, and implement one for the app on GKE.
-
-## Migrate application from Docker Cloud
+## Migrate apps from Docker Cloud
 
 How you migrate your applications is unique to your environment and applications.
 
@@ -710,6 +712,9 @@ How you migrate your applications is unique to your environment and applications
 - Plan with owners of other applications that interact with your Docker Cloud app
 - Plan a rollback strategy if problems occur
 
-Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
+Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the GKE infrastructure and getting expected results.
 
-<span class="badge badge-danger">Warning</span> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.
+> Think before you terminate stacks and clusters
+>
+> Do not terminate your Docker Cloud stacks or node clusters until some time after the migration has been signed off as successful. If there are problems, you may need to roll back and try again.
+{: .warning}
