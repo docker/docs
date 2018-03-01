@@ -35,7 +35,7 @@ Mandatory:
 -   `--openstack-private-key-file`: Used with `--openstack-keypair-name`, associates the private key to the keypair.
 -   `--openstack-region`: The region to work on. Can be omitted if there is only one region on the OpenStack.
 -   `--openstack-sec-groups`: If security groups are available on your OpenStack you can specify a comma separated list
-    to use for the machine, such as secgrp001,secgrp002`.
+    to use for the machine, such as `secgrp001,secgrp002`.
 -   `--openstack-ssh-port`: Customize the SSH port if the SSH server on the machine does not listen on the default port.
 -   `--openstack-ssh-user`: The username to use for SSH into the machine. If not provided defaults to `root`.
 -   `--openstack-tenant-name` or `--openstack-tenant-id`: Identify the tenant in which the machine is created.

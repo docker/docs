@@ -116,18 +116,23 @@ By default, the Amazon EC2 driver uses a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
 | -------------- | ------------ |
-| ap-northeast-1 | ami-b36d4edd |
-| ap-southeast-1 | ami-1069af73 |
-| ap-southeast-2 | ami-1d336a7e |
-| ca-central-1   | ami-ca6ddfae |
-| cn-north-1     | ami-79eb2214 |
-| eu-west-1      | ami-8aa67cf9 |
-| eu-central-1   | ami-fe408091 |
-| sa-east-1      | ami-185de774 |
-| us-east-1      | ami-26d5af4c |
-| us-west-1      | ami-9cbcd2fc |
-| us-west-2      | ami-16b1a077 |
-| us-gov-west-1  | ami-b0bad893 |
+| ap-northeast-1 | ami-785c491f |
+| ap-northeast-2 | ami-94d20dfa |
+| ap-southeast-1 | ami-2378f540 |
+| ap-southeast-2 | ami-e94e5e8a |
+| ap-south-1     | ami-49e59a26 |
+| ca-central-1   | ami-7ed56a1a |
+| cn-north-1     | ami-a163b4cc |
+| eu-central-1   | ami-1c45e273 |
+| eu-west-1      | ami-6d48500b |
+| eu-west-2      | ami-cc7066a8 |
+| eu-west-3      | ami-c1cf79bc |
+| sa-east-1      | ami-34afc458 |
+| us-east-1      | ami-d15a75c7 |
+| us-east-2      | ami-8b92b4ee |
+| us-west-1      | ami-73f7da13 |
+| us-west-2      | ami-835b4efa |
+| us-gov-west-1  | ami-939412f2 |
 
 ## Security Group
 
