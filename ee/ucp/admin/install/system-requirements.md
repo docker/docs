@@ -70,33 +70,45 @@ indicated as the "Scope" of that port. The three scopes are:
 Make sure the following ports are open for incoming traffic on the respective
 host types:
 
-|       Hosts       |          Port           |          Scope          |                                      Purpose                                      |
-| :---------------- | :---------------------- | :---------------------- | :-------------------------------------------------------------------------------- |
-| managers, workers | TCP 179                 | Internal                | Port for BGP peers, used for kubernetes networking                                |
-| managers          | TCP 443  (configurable) | External, Internal      | Port for the UCP web UI and API                                                   |
-| managers          | TCP 2376 (configurable) | Internal                | Port for the Docker Swarm manager. Used for backwards compatibility               |
-| managers          | TCP 2377 (configurable) | Internal,               | Port for control communication between swarm nodes                                |
-| managers, workers | UDP 4789                | Internal,               | Port for overlay networking                                                       |
-| managers          | TCP 6443 (configurable) | External, Internal      | Port for Kubernetes API server                                                    |
-| managers, workers | TCP 6444                | Self                    | Port for Kubernetes API reverse proxy                                             |
-| managers, workers | TCP, UDP 7946           | Internal                | Port for gossip-based clustering                                                  |
-| managers, workers | TCP 10250               | Internal                | Port for Kubelet                                                                  |
-| managers, workers | TCP 12376               | Internal                | Port for a TLS authentication proxy that provides access to the Docker Engine     |
-| managers, workers | TCP 12378               | Self                    | Port for Etcd reverse proxy                                                       |
-| managers          | TCP 12379               | Internal                | Port for Etcd Control API															|
-| managers          | TCP 12380               | Internal                | Port for Etcd Peer API                                                            |
-| managers          | TCP 12381               | Internal                | Port for the UCP cluster certificate authority                                    |
-| managers          | TCP 12382               | Internal                | Port for the UCP client certificate authority                                     |
-| managers          | TCP 12383               | Internal                | Port for the authentication storage backend                                       |
-| managers          | TCP 12384               | Internal                | Port for the authentication storage backend for replication across managers       |
-| managers          | TCP 12385               | Internal                | Port for the authentication service API                                           |
-| managers          | TCP 12386               | Internal                | Port for the authentication worker                                                |
-| managers          | TCP 12387               | Internal                | Port for the metrics service                                                      |
+|       Hosts       |          Port           |       Scope        |                                    Purpose                                    |
+| :---------------- | :---------------------- | :----------------- | :---------------------------------------------------------------------------- |
+| managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for kubernetes networking                            |
+| managers          | TCP 443  (configurable) | External, Internal | Port for the UCP web UI and API                                               |
+| managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
+| managers          | TCP 2377 (configurable) | Internal,          | Port for control communication between swarm nodes                            |
+| managers, workers | UDP 4789                | Internal,          | Port for overlay networking                                                   |
+| managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server                                                |
+| managers, workers | TCP 6444                | Self               | Port for Kubernetes API reverse proxy                                         |
+| managers, workers | TCP, UDP 7946           | Internal           | Port for gossip-based clustering                                              |
+| managers, workers | TCP 10250               | Internal           | Port for Kubelet                                                              |
+| managers, workers | TCP 12376               | Internal           | Port for a TLS authentication proxy that provides access to the Docker Engine |
+| managers, workers | TCP 12378               | Self               | Port for Etcd reverse proxy                                                   |
+| managers          | TCP 12379               | Internal           | Port for Etcd Control API                                                     |
+| managers          | TCP 12380               | Internal           | Port for Etcd Peer API                                                        |
+| managers          | TCP 12381               | Internal           | Port for the UCP cluster certificate authority                                |
+| managers          | TCP 12382               | Internal           | Port for the UCP client certificate authority                                 |
+| managers          | TCP 12383               | Internal           | Port for the authentication storage backend                                   |
+| managers          | TCP 12384               | Internal           | Port for the authentication storage backend for replication across managers   |
+| managers          | TCP 12385               | Internal           | Port for the authentication service API                                       |
+| managers          | TCP 12386               | Internal           | Port for the authentication worker                                            |
+| managers          | TCP 12387               | Internal           | Port for the metrics service                                                  |
+
+## Enable ESP traffic
 
 For overlay networks with encryption to work, you need to ensure that
-IP protocol 50 (ESP) traffic is allowed.
+IP protocol 50 (Encapsulating Security Payload) traffic is allowed.
 
-Also, make sure the networks you're using allow the UCP components enough time
+## Enable IP-in-IP traffic
+
+The default networking plugin for UCP is Calico, which uses IP Protocol
+Number 4 for IP-in-IP encapsulation.
+
+If you're deploying to AWS or another cloud provider, enable IP-in-IP
+traffic for your cloud provider's security group.
+ 
+## Timeout settings
+
+Make sure the networks you're using allow the UCP components enough time
 to communicate before they time out.
 
 | Component                              | Timeout (ms) | Configurable |
