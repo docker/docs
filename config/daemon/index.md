@@ -9,7 +9,7 @@ redirect_from:
 title: Configure and troubleshoot the Docker daemon
 ---
 
-After successfully installing Docker and starting Docker, the `dockerd` daemon
+After successfully installing and starting Docker, the `dockerd` daemon
 runs with its default configuration. This topic shows how to customize
 the configuration, start the daemon manually, and troubleshoot and debug the
 daemon if you run into issues.
@@ -61,7 +61,7 @@ $ dockerd -D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/se
 
 This command enables debugging (`-D`), enables TLS (`-tls`), specifies the server
 certificate and key (`--tlscert` and `--tlskey`), and specifies the network
-interface where the daemon listens for connections (`-H`).
+interface host where the daemon listens for connections (`-H`).
 
 A better approach is to put these options into the `daemon.json` file and
 restart Docker. This method works for every Docker platform. The following
@@ -111,8 +111,8 @@ operating system.
 
 One notable example of a configuration conflict that is difficult to troubleshoot
 is when you want to specify a different daemon address from
-the default. Docker listens on a socket by default. On Debian and Ubuntu systems using `systemd`),
-this means that a `-H` flag is always used when starting `dockerd`. If you specify a
+the default. Docker listens on a socket by default. On Debian and Ubuntu systems using `systemd`,
+this means that a host flag `-H` is always used when starting `dockerd`. If you specify a
 `hosts` entry in the `daemon.json`, this causes a configuration conflict (as in the above message)
 and Docker fails to start.
 
@@ -209,7 +209,7 @@ Docker platform.
     On Windows hosts, restart Docker.
 
 Instead of following this procedure, you can also stop the Docker daemon and
-restart it manually with the `-D` flag. However, this may result in Docker
+restart it manually with the debug flag `-D`. However, this may result in Docker
 restarting with a different environment than the one the hosts' startup scripts
 create, and this may make debugging more difficult.
 
@@ -277,4 +277,3 @@ utilities.
 
 Finally, you can check in the process list for the `dockerd` process, using
 commands like `ps` or `top`.
-
