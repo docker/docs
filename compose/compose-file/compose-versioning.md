@@ -428,9 +428,11 @@ All other keys are ignored and produce a warning if present. You can review
 the configuration that will be used to deploy by using the `--compatibility`
 flag with the `config` command.
 
-> **Note:** We recommend against using `--compatibility` mode in production.
-> Because the resulting configuration is only an approximate using non-Swarm
-> mode properties, it may produce unexpected results.
+> Do not use this in production!
+>
+> We recommend against using `--compatibility` mode in production. Because the
+> resulting configuration is only an approximate using non-Swarm mode
+> properties, it may produce unexpected results.
 
 
 ## Compose file format references
