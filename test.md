@@ -5,6 +5,8 @@ hide_from_sitemap: true
 toc_min: 1
 ---
 
+This is a simple test.
+
 Welcome to the Docker documentation test page!
 
 This is a demo of components, tags, styles, tools, and strategies we use for the
