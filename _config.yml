@@ -75,7 +75,7 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      defaultassignee: johndmulhausen
+      defaultassignee: gbarr01
       toc_min: 2
       toc_max: 3
       tree: true
@@ -106,11 +106,11 @@ defaults:
   - scope:
       path: "docker-hub"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
       path: "docker-store"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
       path: "install"
     values:
@@ -126,7 +126,7 @@ defaults:
   - scope:
       path: "notary"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
       path: "registry"
     values:
