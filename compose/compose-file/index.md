@@ -2066,6 +2066,7 @@ services:
 
 networks:
   hostnet:
+    external: true
     name: host
 ```
 
@@ -2078,6 +2079,7 @@ services:
 
 networks:
   nonet:
+    external: true
     name: none
 ```
 
