@@ -164,6 +164,15 @@ docker node update --label-add com.docker.ucp.orchestrator.kubernetes=true <node
 > for production deployments, because of the likelihood of resource contention.
 {: .warning}
 
+To change the orchestrator type for a node from Swarm to Kubernetes:
+
+```bash
+docker node update --label-add com.docker.ucp.orchestrator.kubernetes=true <node-id>
+docker node update --label-rm com.docker.ucp.orchestrator.swarm <node-id>
+```
+
+UCP detects the node label change and updates the Kubernetes node accordingly.
+
 Check the value of the orchestrator label by inspecting the node:
 
 ```bash
