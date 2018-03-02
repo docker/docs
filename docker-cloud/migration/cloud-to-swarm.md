@@ -1,12 +1,14 @@
 ---
-description: Migrating from Docker Cloud
+description: Migrating from Docker Cloud to Docker Swarm on Docker CE
 keywords: cloud, swarm, migration
-title: Migrate Docker Cloud stack to Docker CE swarm
+title: Migrate Docker Cloud stacks to Docker CE swarm
 ---
 
 ## Docker CE in swarm mode
 
-This page explains how to prepare your applications for migration from Docker Cloud to applications running as _service stacks_ on clusters of Docker Community Edition (CE) nodes in swarm mode. To demonstrate, we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile for [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to a service stack format, and **test** in the new environment to ensure that it is safe to migrate.
+This page explains how to prepare your applications for migration from Docker Cloud to applications running as _service stacks_ on clusters of Docker Community Edition (CE) nodes in swarm mode. You can also use [Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: target="_blank" class="_"} (Docker EE) for your target environment.
+
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile to a service stack format, and **test** the service stack file in swarm mode to ensure that it is safe to migrate.
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to Docker CE applications -- will vary by application and environment.
 
@@ -63,7 +65,7 @@ Your swarm cluster of Docker CE nodes should probably resemble your existing Doc
 
 This diagram shows a six-node swarm cluster spread across two availability zones:
 
-![Six-node Swarm](images/six-node-swarm.png){:width="500px"}
+![Swarm cluster](images/swarm-cluster.png){:width="500px"}
 
 ### Configure swarm cluster
 

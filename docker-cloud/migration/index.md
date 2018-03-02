@@ -8,12 +8,14 @@ title: Migrate Docker Cloud runtime apps
 
 <span class="badge badge-warning">Important</span>  **Cluster Management in Docker Cloud will be discontinued on May 11. You must migrate your applications from Docker Cloud to another platform.**
 
-The following documents explain how to migrate your Docker Cloud applications to **Docker Swarm** (on Docker CE) and **Kubernetes** (on [Microsoft AKS](https://azure.microsoft.com/en-us/services/container-service/){: target="_blank" class="_"}
+The Docker Cloud orchestration service that provides node management and swarm cluster management will be shutting down on <date>. Our Docker Cloud SaaS offerings, such as automated builds and registry storage services, will not be affected and will continue to be available for you and our other customers.
+
+The following documents explain how to migrate your Docker Cloud applications to **Docker Swarm** (on Docker CE) and **Kubernetes** (on [Microsoft AKS](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"}
 and [Google GKE](https://cloud.google.com/free/){: target="_blank" class="_"}).
 
 Migrating a Docker Cloud application requires that you:
 
-- **Set up** a target environment (Docker Swarm or Kubernetes cluster)
+- **Build** a target environment (Docker Swarm or Kubernetes cluster)
 - **Convert** your Docker Cloud YAML stackfile
 - **Point** your application CNAMES to new service endpoints
 - **Test** the converted YAML stackfile in the new environment
@@ -23,7 +25,7 @@ Migrating a Docker Cloud application requires that you:
 
 **How users and external systems interact with your Docker applications**. Your Docker images, autobuilds, and overall application functionality, remains the same. For example, if your application uses a Docker image called `myorg/webfe:v3`, and publishes container port `80` to external port `80`, none of this changes.
 
-Private repos, team management features, and autobuilds stay! We are _not_ removing them from Docker Cloud.
+Docker Cloud SaaS features stay! We are _not_ removing automated builds and registry storage services.
 
 ### What changes
 

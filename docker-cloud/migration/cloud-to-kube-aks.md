@@ -1,17 +1,16 @@
 ---
-description: Migrating from Docker Cloud
-keywords: cloud, swarm, migration
-title: Migrate Docker Cloud stack to Kubernetes on AKS
+description: Migrating from Docker Cloud to Kubernetes
+keywords: cloud, kubernetes, migration, azure, aks
+title: Migrate Docker Cloud stacks to Azure Container Service
 ---
-
 
 ## AKS Kubernetes
 
-This page explains how to prepare your applications for migration from Docker Cloud to Kubernetes on
-[Microsoft AKS](https://azure.microsoft.com/en-us/services/container-service/){: target="_blank" class="_"} clusters.
-To demonstrate, we **build** a target environment of AKS nodes (a hosted Kubernetes service), **convert** the Cloud stackfile for [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to a Kubernetes YAML format, and **test** in the new environment to ensure that it is safe to migrate.
+This page explains how to prepare your applications for migration from Docker Cloud to [Azure Container Service (AKS)](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"} clusters. AKS is a hosted Kubernetes service on Microsoft Azure. It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
-Azure Container Service (AKS) is a hosted Kubernetes service on Microsoft Azure. It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of AKS nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
+
+
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to AKS applications -- will vary by application and environment.
 
@@ -26,7 +25,7 @@ In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/
 - **result**: Web server that pulls and displays results from database
 - **lb**: Container-based load balancer
 
-Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
+Votes are accepted with the `vote` service and stored in a persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
 
 ![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
 
@@ -61,9 +60,11 @@ Currently, AKS needs to be manually registered with Azure Active Directory so th
 
 The application registration is now complete. Time to build the AKS cluster.
 
-### Deploy an AKS cluster
+### Build an AKS cluster
 
 In this section, we build a three-node cluster; yours should probably be based on the configuration of your Docker Cloud node cluster.
+
+Docker Cloud deploys work to all nodes in a cluster (managers and workers); Kubernetes only deploys work to nodes (workers). With this in mind, you should size your AKS cluster accordingly. For example, if your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your AKS cluster to have five nodes of a similar size.
 
 > To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
@@ -73,7 +74,7 @@ Before continuing, ensure you know:
 - **Azure region** to which you want to deploy your AKS cluster
 - **SSH public key** to use when connecting to AKS nodes
 - **Service principal client ID** and **Service principal client secret** (from the previous section)
-- The **number, size, and spec** of the nodes you want.
+- The **number, size, and spec** of the nodes (workers) you want.
 
 To deploy a cluster of AKS nodes:
 

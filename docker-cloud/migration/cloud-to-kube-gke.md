@@ -1,14 +1,14 @@
 ---
-description: Migrating from Docker Cloud
-keywords: cloud, kubernetes, migration
-title: Migrate Docker Cloud stack to Kubernetes on GKE
+description: Migrating from Docker Cloud to Kubernetes
+keywords: cloud, kubernetes, migration, google, gke, gcp
+title: Migrate Docker Cloud stacks to Google Kubernetes Engine
 ---
 
 ## GKE Kubernetes
 
-This page explains how to prepare your applications for migration from Docker Cloud to to Kubernetes on [Google GKE](https://cloud.google.com/free/). To demonstrate, we **build** a target environment of GKE nodes (a hosted Kubernetes service), **convert** the Cloud stackfile for [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"} to a Kubernetes YAML format, and **test** in the new environment to ensure that it is safe to migrate.
+This page explains how to prepare your applications for migration from Docker Cloud to [Google Kubernetes Engine (GKE)](https://cloud.google.com/free/){: target="_blank" class="_"} clusters. GKE is a hosted Kubernetes service on Google Cloud Platform (GCP). It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
-Google Container Engine (GKE) is a hosted Kubernetes service on Google Cloud Platform (GCP). It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of GKE nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to GKE applications -- will vary by application and environment.
 
@@ -23,7 +23,7 @@ In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/
 - **result**: Web server that pulls and displays results from database
 - **lb**: Container-based load balancer
 
-Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
+Votes are accepted with the `vote` service and stored in a persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
 
 ![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
 
@@ -61,12 +61,14 @@ Everything in the Google Cloud Platform has to sit inside of a *project*. Let's 
 
 In this section, we build a three-node cluster; yours should probably be based on the configuration of your Docker Cloud node cluster.
 
+Docker Cloud deploys work to all nodes in a cluster (managers and workers); GKE only deploys work to nodes (workers). With this in mind, you should size your GKE cluster accordingly. For example, if your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your GKE cluster to have five nodes of a similar size.
+
 > To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
 Before continuing, you will need to know all of the following:
 
 - The GCP *Region* and *Zone* to which you want to deploy your GKE cluster
-- The  **number, size, and spec** of the nodes you want.
+- The  **number, size, and spec** of the nodes  (workers) you want.
 
 To build:
 
