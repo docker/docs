@@ -89,7 +89,7 @@ docker build --tag hello .
 Don't forget the `.` character at the end, which sets the build context to the
 current directory.
 
-> **Note**: Because Docker for Mac and Docker for Windows use a Linux VM, you
+> **Note**: Because Docker for Mac and Docker for Windows use a Linux VM,
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
 >
