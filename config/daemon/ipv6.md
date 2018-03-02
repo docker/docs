@@ -35,4 +35,4 @@ addresses using the `--ip6` flag.
 ## Next steps
 
 - [Networking overview](/network/index.md)
-- [Container networking](/config/container/container-networking.md)
+- [Container networking](/config/containers/container-networking.md)
