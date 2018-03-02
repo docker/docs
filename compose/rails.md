@@ -50,6 +50,8 @@ to link them together and expose the web app's port.
     services:
       db:
         image: postgres
+        volumes:
+          - ./tmp/db:/var/lib/postgresql/data
       web:
         build: .
         command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -231,10 +233,7 @@ application with `docker-compose up`.
 
 ### Restart the application
 
-To restart the application:
-
-1. Run `docker-compose up` in the project directory.
-2. Run this command in another terminal to restart the database: `docker-compose run web rake db:create`
+To restart the application run `docker-compose up` in the project directory.
 
 ### Rebuild the application
 
@@ -254,8 +253,7 @@ the changes:
 ports: - "3001:3000"
 ```
 
-Now, rebuild and restart the app with `docker-compose up --build`, then restart
-the database: `docker-compose run web rake db:create`.
+Now, rebuild and restart the app with `docker-compose up --build`.
 
 Inside the container, your app is running on the same port as before `3000`, but
 the Rails Welcome is now available on `http://localhost:3001` on your local
