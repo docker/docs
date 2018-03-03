@@ -61,7 +61,7 @@ $ dockerd -D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/se
 
 This command enables debugging (`-D`), enables TLS (`-tls`), specifies the server
 certificate and key (`--tlscert` and `--tlskey`), and specifies the network
-interface host where the daemon listens for connections (`-H`).
+interface where the daemon listens for connections (`-H`).
 
 A better approach is to put these options into the `daemon.json` file and
 restart Docker. This method works for every Docker platform. The following
