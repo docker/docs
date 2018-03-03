@@ -47,7 +47,7 @@ for storing application data in a database, a service for video transcoding in
 the background after a user uploads something, a service for the front-end, and
 so on.
 
-Services are really just "containers in production." A service only runs one
+Services are really just "containers in production". A service only runs one
 image, but it codifies the way that image runs&#8212;what ports it should use,
 how many replicas of the container should run so the service has the capacity it
 needs, and so on. Scaling a service changes the number of container instances
