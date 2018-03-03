@@ -32,7 +32,7 @@ Raspbian versions:
 - Jessie 8 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
-Docker CE is supported on both `x86_64` (or `amd64`)  and `armhf` architectures for Jessie and
+Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures for Jessie and
 Stretch.
 
 ### Uninstall old versions
@@ -304,8 +304,8 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 a new file each time you want to upgrade Docker.
 
 1.  Go to `{{ download-url-base }}/dists/`,
-    choose your Debian version, browse to `pool/stable/`, choose either
-    `amd64` or `armhf`, and download the `.deb` file for the Docker CE version you
+    choose your Debian version, browse to `pool/stable/`, choose
+    `amd64`, `armhf`, or `arm64` and download the `.deb` file for the Docker CE version you
     want to install.
 
     > **Note**: To install an **edge**  package, change the word
