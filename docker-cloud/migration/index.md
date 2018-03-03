@@ -8,18 +8,21 @@ title: Migrate Docker Cloud runtime apps
 
 <span class="badge badge-warning">Important</span>  **Cluster Management in Docker Cloud will be discontinued on May 11. You must migrate your applications from Docker Cloud to another platform.**
 
-The Docker Cloud orchestration service that provides node management and swarm cluster management will be shutting down on <date>. Our Docker Cloud SaaS offerings, such as automated builds and registry storage services, will not be affected and will continue to be available for you and our other customers.
-
 The following documents explain how to migrate your Docker Cloud applications to **Docker Swarm** (on Docker CE) and **Kubernetes** (on [Microsoft AKS](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"}
 and [Google GKE](https://cloud.google.com/free/){: target="_blank" class="_"}).
 
-Migrating a Docker Cloud application requires that you:
+- [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm)
+- [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks)
+- [Migrate Docker Cloud stacks to Google Kubernetes Engine](cloud-to-kube-gke)
+
+At a high level, migrating your Docker Cloud applications requires that you:
 
 - **Build** a target environment (Docker Swarm or Kubernetes cluster)
-- **Convert** your Docker Cloud YAML stackfile
+- **Convert** your Docker Cloud YAML stackfiles
 - **Point** your application CNAMES to new service endpoints
-- **Test** the converted YAML stackfile in the new environment
-- **Migrate** the application from Docker Cloud to the new environment.
+- **Test** the converted YAML stackfiles in the new environment
+- **Migrate** your applications from Docker Cloud to the new environment
+- **Deregister** your Docker Cloud swarms if applicable.
 
 ### What stays the same
 

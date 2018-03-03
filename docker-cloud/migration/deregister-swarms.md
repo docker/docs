@@ -6,43 +6,37 @@ title: Deregister swarms on Docker Cloud
 
 ## Deregistering Swarms
 
-This page explains how to deregister a Swarm cluster from Docker Cloud so that it can be managed independently. We explain how to do this for Swarms on Amazon Web Services (AWS) and Microsoft Azure.
+This page explains how to deregister a Swarm cluster from Docker Cloud so that it can be managed independently. We explain how to deregister on both Amazon Web Services (AWS) and Microsoft Azure (because Docker Cloud swarms run on either AWS or Azure behind the scenes).
 
 You do not need to migrate or configure your applications as part of this procedure. The only thing that changes is that your Swarm cluster no longer integrates with Docker Cloud, Docker for Mac, or Docker for Windows, and other Docker services.
 
-## Prerequisites
+### Prerequisites
 
 To complete this procedure you need:
 
-- An AWS or Azure account that lets you inspect resources such as instances
+- An AWS or Azure account that lets you inspect resources such as instances.
 
-## High-level steps
+### High-level steps
 
-High-level steps to deregister your Swarm cluster from Docker Cloud are:
-
-- Verify you can SSH to your Swarm
+- Verify that you can SSH to your Swarm (on AWS and Azure)
 - Deregister your Swarm from Docker Cloud
 - Clean up old Docker Cloud resources.
 
-### Verify you can SSH to your Swarm
+## Verify you can SSH to your Swarm
 
-Your Docker Cloud Swarm runs on either AWS or Azure, and it is vital that you can SSH to it before you deregister it from Docker Cloud.
+> Your Docker Cloud Swarm runs on either AWS or Azure, and it is vital that you can SSH to it before you deregister it from Docker Cloud. To SSH to your Swarm nodes, you must know the public IP addresses or public DNS names of your nodes. The simplest way to find this information is via the native AWS or Azure tools.
 
-To SSH to your Swarm nodes, you must know the public IP addresses or public DNS names of your nodes. The simplest way to find this information is via the native AWS or Azure tools.
-
-#### AWS example
+### How to SSH to AWS nodes
 
 1.  Log on to the AWS console and open the EC2 Dashboard for the region that hosts your Swarm nodes.
 
-2.  Locate your instances and note their hostnames and IPs.
+2.  Locate your instances and note their hostnames, DNS names, and IPs.
 
     By default, AWS labels your Swarm nodes as _swarm-name_-worker or _swarm-name_-manager. For example, a Swarm called "prod-equus" in Docker Cloud, has manager and worker nodes in AWS labelled, "prod-equus-manager" and "prod-equus-worker" respectively.
 
     You will also have a load balancer (type=classic) that includes the name of the Swarm. It accepts Docker commands on port 2376 and balances them to all nodes in the Swarm.
 
-3.  Note the public IP addresses and DNS names of each node in your Swarm. You can also see the name of the public key used to    access each node.
-
-4.  Open an SSH session to a node in the cluster (test this on all nodes).
+3.  Open an SSH session to each node in the cluster.
 
     The example below opens an SSH session to a Swarm node with a public DNS name of “ec2-34-244-56-42.eu-west-1.compute.amazonaws.com” using a private key called “awskey.pem”. It also logs on using the “docker” username.
 
@@ -50,7 +44,7 @@ To SSH to your Swarm nodes, you must know the public IP addresses or public DNS 
     $ ssh -i ./awskey.pem docker@ec2-34-244-56-42.eu-west-1.compute.amazonaws.com
     ```
 
-#### Azure example
+### How to SSH to Azure nodes
 
 1.  Log on to the Azure portal and click **Resource groups**.
 
@@ -62,7 +56,7 @@ To SSH to your Swarm nodes, you must know the public IP addresses or public DNS 
 
    This takes you to the inbound NAT Rules for the external load balancer that provides SSH access to your Swarm. It displays a list of all of the Swarm managers including public IP address (DESTINATION) and port (SERVICE) that you can use to gain SSH access.
 
-5.  Test an SSH connection.
+5.  Open an SSH session to each node in the cluster.
 
     Use a combination of the public IP and port to make an SSH connection. The following command shows how to create an SSH session to a manager at 51.140.229.154 on port 50000 using the “azkey.pem” private key in the current directory. It also logs on using the “docker” username.
 
@@ -74,7 +68,7 @@ If you are not certain which private key you use to connect to your Swarm, you c
 
 Once you are certain you can gain SSH access to the nodes in your Swarm you can proceed to the next section
 
-### Deregister your Swarm from Docker Cloud
+## Deregister swarm from Docker Cloud
 
 > Proceed with caution
 >
@@ -89,7 +83,7 @@ Once you are certain you can gain SSH access to the nodes in your Swarm you can 
 
 The Swarm is now deregistered from the Docker Cloud web UI and no longer is visible in other products such as Docker for Mac and Docker for Windows.
 
-### Clean up old Docker Cloud resources
+## Clean up Docker Cloud resources
 
 The final step  is to clean up old Docker cloud resources.
 
