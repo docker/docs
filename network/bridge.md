@@ -66,8 +66,8 @@ network.**
   the application stack is running on.
 
   If you run the same application stack on the default bridge network, you need
-  to manually create links between the containers (using the legacy `--link`)
-  flag. These links need to be created in both directions, so you can see this
+  to manually create links between the containers (using the legacy `--link`
+  flag). These links need to be created in both directions, so you can see this
   gets complex with more than two containers which need to communicate.
   Alternatively, you can manipulate the `/etc/hosts` files within the containers,
   but this creates problems that are difficult to debug.
