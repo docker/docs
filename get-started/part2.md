@@ -311,10 +311,11 @@ docker tag friendlyhello john/get-started:part2
 ```
 
 Run [docker image ls](/engine/reference/commandline/image_ls/) to see your newly
-tagged image. (You can also use `docker image ls`.)
+tagged image.
 
 ```shell
 $ docker image ls
+
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
 john/get-started         part2               d9e555c53008        3 minutes ago       195MB
