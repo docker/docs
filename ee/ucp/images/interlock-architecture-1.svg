@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740px" height="310px" viewBox="0 0 740 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>interlock-architecture-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="4" cy="4" r="4"></circle>
+        <circle id="path-2" cx="4" cy="4" r="4"></circle>
+    </defs>
+    <g id="interlock-architecture-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="all" transform="translate(177.000000, 5.000000)">
+            <text id="Docker-swarm-managed" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" fill="#E0E4E7">
+                <tspan x="8" y="281">Docker swarm managed with UCP</tspan>
+            </text>
+            <g id="nodes" transform="translate(21.000000, 100.000000)">
+                <g id="workers" transform="translate(118.000000, 0.000000)">
+                    <g id="node" transform="translate(118.000000, 0.000000)">
+                        <text id="node-3" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" fill="#82949E">
+                            <tspan x="37.3129883" y="149">node-3</tspan>
+                        </text>
+                        <g id="ucp" transform="translate(1.000000, 112.000000)">
+                            <rect id="Rectangle-138" fill="#439FD1" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="43.6953125" y="15">UCP </tspan>
+                            </text>
+                        </g>
+                        <g id="wordpress-copy" transform="translate(1.000000, 89.000000)">
+                            <rect id="Rectangle-138" fill="#00B6B5" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="interlock-proxy:80" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="11.3442383" y="15">interlock-proxy:80</tspan>
+                            </text>
+                        </g>
+                        <g id="wordpress-copy-2" transform="translate(1.000000, 66.000000)">
+                            <rect id="Rectangle-138" fill="#FFB463" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="wordpress:8000" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="16.0390625" y="15">wordpress:8000</tspan>
+                            </text>
+                        </g>
+                        <g id="label">
+                            <g id="node-label">
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
+                                <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="6" y="14">worker node</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="108" height="135" rx="2"></rect>
+                    </g>
+                    <g id="node">
+                        <text id="node-2" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" fill="#82949E">
+                            <tspan x="37.3129883" y="149">node-2</tspan>
+                        </text>
+                        <g id="ucp" transform="translate(1.000000, 112.000000)">
+                            <rect id="Rectangle-138" fill="#439FD1" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="43.6953125" y="15">UCP </tspan>
+                            </text>
+                        </g>
+                        <g id="wordpress" transform="translate(1.000000, 89.000000)">
+                            <rect id="Rectangle-138" fill="#00B6B5" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="interlock-extension" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="8.35400391" y="15">interlock-extension</tspan>
+                            </text>
+                        </g>
+                        <g id="wordpress-copy" transform="translate(1.000000, 66.000000)">
+                            <rect id="Rectangle-138" fill="#00B6B5" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="interlock-proxy:80" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="11.3442383" y="15">interlock-proxy:80</tspan>
+                            </text>
+                        </g>
+                        <g id="label">
+                            <g id="node-label">
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
+                                <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="6" y="14">worker node</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="108" height="135" rx="2"></rect>
+                    </g>
+                </g>
+                <g id="managers">
+                    <g id="node">
+                        <text id="node-1" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" fill="#82949E">
+                            <tspan x="37.3129883" y="149">node-1</tspan>
+                        </text>
+                        <g id="ucp" transform="translate(1.000000, 112.000000)">
+                            <rect id="Rectangle-138" fill="#439FD1" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="43.6953125" y="15">UCP </tspan>
+                            </text>
+                        </g>
+                        <g id="wordpress" transform="translate(1.000000, 89.000000)">
+                            <rect id="Rectangle-138" fill="#00B6B5" x="0" y="0" width="106" height="22" rx="2"></rect>
+                            <text id="ucp-interlock" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="22.6435547" y="15">ucp-interlock</tspan>
+                            </text>
+                        </g>
+                        <g id="label">
+                            <g id="node-label">
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
+                                <text id="manager-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="6" y="14">manager node</tspan>
+                                </text>
+                            </g>
+                        </g>
+                        <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="108" height="135" rx="2"></rect>
+                    </g>
+                </g>
+            </g>
+            <g id="load-balancer" transform="translate(137.000000, 55.000000)">
+                <g id="L7">
+                    <rect id="Rectangle-138" fill="#445D6E" x="0" y="0" width="230" height="22" rx="2"></rect>
+                    <text id="your-load-balancer" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="71.4379883" y="15">your load balancer</tspan>
+                    </text>
+                </g>
+                <g id="arrow" transform="translate(174.000000, 33.000000) scale(1, -1) rotate(-90.000000) translate(-174.000000, -33.000000) translate(162.000000, 29.000000)">
+                    <path d="M2,4 L24,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g id="Oval">
+                        <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                    </g>
+                </g>
+                <g id="arrow" transform="translate(56.000000, 33.000000) scale(1, -1) rotate(-90.000000) translate(-56.000000, -33.000000) translate(44.000000, 29.000000)">
+                    <path d="M2,4 L24,4" id="Line" stroke="#445D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g id="Oval">
+                        <use fill="#445D6E" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        <circle stroke="#F7F8F9" stroke-width="2" cx="4" cy="4" r="5"></circle>
+                    </g>
+                </g>
+            </g>
+            <path d="M0,89.0026084 C0,87.8965983 0.898053234,87 2.00134865,87 L384.998651,87 C386.103966,87 387,87.8872198 387,89.0026084 L387,288.997392 C387,290.103402 386.101947,291 384.998651,291 L2.00134865,291 C0.896034311,291 0,290.11278 0,288.997392 L0,89.0026084 Z" id="group" stroke="#E0E4E7" stroke-width="2" stroke-dasharray="5,5,5,5"></path>
+            <g id="user" transform="translate(173.000000, 0.000000)" fill="#82949E">
+                <text id="http://wordpress.exa" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500">
+                    <tspan x="0.046875" y="42">http://wordpress.example.org:80</tspan>
+                </text>
+                <path d="M80,13 C83.59125,13 86.5,10.083125 86.5,6.5 C86.5,2.90875 83.59125,0 80,0 C76.40875,0 73.5,2.90875 73.5,6.5 C73.5,10.083125 76.40875,13 80,13 L80,13 Z M80,16.25 C75.669375,16.25 67,18.419375 67,22.75 L67,26 L93,26 L93,22.75 C93,18.419375 84.330625,16.25 80,16.25 L80,16.25 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
