@@ -1,6 +1,6 @@
 ---
-description: Kubernetes syntax primer
-keywords: cloud, kubernetes, kube, k8s, migration, primer, cheatsheet
+description: Kubernetes orchestration primer
+keywords: cloud, migration, kubernetes, primer
 title: Kubernetes primer
 ---
 
@@ -17,7 +17,7 @@ A Kubernetes cluster is made up of _masters_ and _nodes_. These can be cloud ins
 
 The diagram below shows a Kubernetes cluster with three masters and three nodes.
 
-![Swarm cluster](images/kube-cluster.png){:width="400px"}
+![Kubernetes cluster](images/kube-cluster.png){:width="400px"}
 
 ### Masters
 
@@ -78,7 +78,7 @@ Docker has a higher level construct called a _Docker service_ (different from a 
 
 The diagram below shows a Service object providing a DNS name and stable IP for a Deployment of 4 Pods.
 
-![Voting app redis Kube pods](images/votingapp-kube-pods-redis.png){:width="400px"}
+![Voting app redis Kube pods](images/votingapp-kube-pods-redis.png){:width="500px"}
 
 ## Managing Kubernetes apps
 

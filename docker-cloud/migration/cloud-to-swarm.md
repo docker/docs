@@ -1,6 +1,6 @@
 ---
-description: Migrating from Docker Cloud to Docker Swarm on Docker CE
-keywords: cloud, swarm, migration
+description: How to migrate apps from Docker Cloud to Docker CE
+keywords: cloud, migration, swarm, community
 title: Migrate Docker Cloud stacks to Docker CE swarm
 ---
 
@@ -173,6 +173,8 @@ In the following sections, we step through each service in [example-voting-app](
 
 ### db service
 
+> Consider using a hosted database service for production databases. This is something that, ideally, should not change as part of your migration away from Docker Cloud stacks.
+
 **Cloud source**: The Docker Cloud `db` service defines an image and a restart policy:
 
 ```
@@ -213,8 +215,6 @@ Let's step through some fields:
 - `networks` adds security by putting the service on a backend network.
 - `deploy.placement.constraints` forces the service to run on manager nodes. In a single-manager swarm, this ensures that the service always starts on the same node and has access to the same volume.
 - `deploy.restart_policy.condition=any` is the Docker swarm equivalent of the Docker Cloud `restart=always` policy.
-
-> Consider using a hosted database service for production databases. This is something that, ideally, should not change as part of your migration away from Docker Cloud stacks.
 
 ### redis service
 
@@ -334,7 +334,7 @@ If your applications are running load balancers, such as `dockercloud/haproxy`, 
 
 The Docker Cloud `vote` service defines an image, a restart policy, service replicas. It also defines an `autoredeploy` policy which is not supported natively in _service stacks_.
 
-> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you build an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
+> **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
 **Cloud source**:
 
@@ -434,9 +434,11 @@ All of the settings mentioned here are application specific and may not be neede
 
 ## Test converted stackfile
 
+> Remember to update your DNS for service endpoints.
+
 Before migrating, you should thoroughly test each new _service stack_ stackfile in a Docker CE cluster in swarm mode. Test the simple stackfile first -- that is, the stackfile that most literally mimics what you have in Docker Cloud. Once that works, start testing some of the more robust features in the extended examples.
 
-Healthy testing includes spinning up the application with the new _service stack_ stackfile, performing scaling operations, and doing updates and rollbacks. You should also manage your _service stack_ stackfiles in a version control system.
+Healthy testing includes _deploying_ the application with the new _service stack_ stackfile, performing _scaling_ operations, increasing _load_, running _failure_ scenarios, and doing _updates_ and _rollbacks_. These tests are specific to each of your applications. You should also manage your manifest files in a version control system.
 
 The following steps explain how to deploy your app from the **target** Docker Swarm stackfile and verify that it is running. Perform the following from a manager node in your swarm cluster.
 
@@ -474,9 +476,14 @@ The following steps explain how to deploy your app from the **target** Docker Sw
     qbuu5l2r9ay7         \_ example-stack_worker.3   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
     ```
 
-4.  Continue testing. With the stack deployed and all services running, test failure scenarios, increasing load, scaling operations, updates, rollbacks, and any other operations that are considered important for the lifecycle of the application.
+4. Test that the application works in your new environment.
 
-    These tests are specific to each of your apps, and are beyond the scope of this document. Be sure to complete them before beginning the migration of your application. If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stack, you should build, test, and implement one for the app on Docker CE.
+    For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results:
+
+    - Copy/paste the `EXTERNAL-IP` value for the `vote` service into a browser and cast a vote.
+    - Copy/paste the `EXTERNAL-IP` value for the `result` service into a browser and ensure your vote registered.
+
+If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stacks, you should build, test, and implement one for each application on Docker CE.
 
 ## Migrate apps from Docker Cloud
 
