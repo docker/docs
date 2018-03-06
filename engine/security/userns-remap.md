@@ -90,7 +90,7 @@ avoid these situations.
 
     Each file contains three fields: the username or ID of the user, followed by
     a beginning UID or GID (which is treated as UID or GID 0 within the namespace)
-    and a maxumum number of UIDs or GIDs available to the user. For instance,
+    and a maximum number of UIDs or GIDs available to the user. For instance,
     given the following entry:
 
     ```none
