@@ -5,7 +5,7 @@ keywords: release notes, machine
 toc_max: 2
 ---
 
-## 0.14.0 (2018-03-08)
+## 0.14.0 (2018-03-06)
 
 ### General
 
@@ -31,7 +31,9 @@ toc_max: 2
 
 `exoscale`
 * Updated driver library
-* Several improvements and fixes to the default machine template.
+* Several improvements and fixes to the default machine template
+* Added support for user-provided SSH key (`--exoscale-ssh-key`)
+* Added support for arbitrary disk size
 
 `google`
 * Enabled disk auto-deletion on newly created machines
