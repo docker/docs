@@ -8,7 +8,7 @@ RUN go get -d github.com/tdewolff/minify/cmd/minify \
 FROM starefossen/github-pages:177
 
 # Get some utilities we need for post-build steps
-RUN apk update && apk add bash wget subversion gzip
+RUN apk add --no-cache bash wget subversion gzip
 
 # Copy scripts used for static HTML post-processing.
 COPY scripts /scripts
