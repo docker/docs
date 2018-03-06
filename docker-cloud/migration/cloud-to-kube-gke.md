@@ -61,7 +61,7 @@ Everything in the Google Cloud Platform has to sit inside of a _project_. Let's 
 
 In this section, we build a three-node cluster; your cluster should probably be based on the configuration of your Docker Cloud node cluster.
 
-Unlike Docker Cloud, _Kubernetes only deploys work to worker nodes_; Docker Cloud deploys work to all nodes in a cluster (managers and workers). This affects how you should size your cluster. If your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your GKE cluster to have five nodes of a similar size.
+Whereas Docker Cloud deploys work to all nodes in a cluster (managers and workers), _Kubernetes only deploys work to worker nodes_. This affects how you should size your cluster. If your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your GKE cluster to have five nodes of a similar size.
 
 > To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
@@ -99,7 +99,7 @@ Once the cluster is created, you can click its name to see more details.
 
 ### Connect to the GKE cluster
 
-You can connect to your GKE cluster from the web-based [Google Cloud Shell](https://cloud.google.com/shell/); but to do so from your laptop, or other local terminal, you must:
+You can connect to your GKE cluster from the web-based [Google Cloud Shell](https://cloud.google.com/shell/){: target="_blank" class="_"}; but to do so from your laptop, or other local terminal, you must:
 
 - Install and configure the `gcloud` CLI tool.
 - Install the Kubernetes CLI (`kubectl`)
@@ -107,7 +107,7 @@ You can connect to your GKE cluster from the web-based [Google Cloud Shell](http
 
 The `gcloud` tool is the command-line tool for interacting with the Google Cloud Platform. It is installed as part of the Google Cloud SDK.
 
-1.  Download and install the [Cloud SDK](https://cloud.google.com/sdk/) for your operating system.
+1.  Download and install the [Cloud SDK](https://cloud.google.com/sdk/){: target="_blank" class="_"} for your operating system.
 
 2.  Configure `gcloud` and follow all the prompts:
 
@@ -120,16 +120,16 @@ The `gcloud` tool is the command-line tool for interacting with the Google Cloud
 3.  Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl):
 
     ```
-    gcloud components list
-    gcloud components install kubectl
+    $ gcloud components list
+    $ gcloud components install kubectl
     ```
 
-    > You can install 'kubectl' with or without `glcoud`. If you have `kubectl` already installed, ensure that the current context is correct:
-    >
-    > ```
-    > kubectl config get-context
-    > kubectl config use-context <my_gke_namespace>
-    > ```
+    You can install 'kubectl' with or without `glcoud`. If you have `kubectl` already installed, ensure that the current context is correct:
+
+    ```
+    $ kubectl config get-context
+    $ kubectl config use-context <my_gke_namespace>
+    ```
 
 4.  Configure `kubectl` to talk to your GKE cluster.
 
@@ -159,11 +159,11 @@ You now have a GKE cluster and have configured `kubectl` to manage it. Let's loo
 
 ## Convert Docker Cloud stackfile
 
-**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml){: target="_blank" class="_"}.**
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}.**
 
 To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
-> To find the stackfiles for your existing applications in Docker Cloud, you can (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
+> To find the stackfiles for your existing applications in Docker Cloud, you can do one of two things: (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
 
 In the Docker Cloud stackfile, the six Docker _services_ in our `example-voting-app` stack are defined as **top-level keys**:
 
@@ -686,7 +686,8 @@ Before migrating, you should thoroughly test each new Kubernetes manifest on a G
 
 The following steps explain how to deploy your app from the Kubernetes manifest file and verify that it is running. The steps are based on the sample application used throughout this guide, but the general commands should work for any app.
 
-> Run from a [Google Cloud Shell](https://cloud.google.com/shell/) or local terminal with `kubectl` configured to talk to your GKE cluster.
+> Run from a [Google Cloud Shell](https://cloud.google.com/shell/){: target="_blank" class="_"}
+ or lo{: target="_blank" class="_"}cal terminal with `kubectl` configured to talk to your GKE cluster.
 
 1.  Verify that you shell/terminal is configured to talk to your GKE cluster. If the output matches your cluster, you're ready to proceed with the next steps.
 

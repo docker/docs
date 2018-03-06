@@ -11,9 +11,9 @@ title: Migrate Docker Cloud runtime apps
 The following documents explain how to migrate your Docker Cloud applications to **Docker Swarm** (on Docker CE) and **Kubernetes** (on [Microsoft AKS](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"}
 and [Google GKE](https://cloud.google.com/free/){: target="_blank" class="_"}).
 
-- [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm)
-- [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks)
-- [Migrate Docker Cloud stacks to Google Kubernetes Engine](cloud-to-kube-gke)
+- [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm){: target="_blank" class="_"}
+- [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks){: target="_blank" class="_"}
+- [Migrate Docker Cloud stacks to Google Kubernetes Engine](cloud-to-kube-gke){: target="_blank" class="_"}
 
 At a high level, migrating your Docker Cloud applications requires that you:
 

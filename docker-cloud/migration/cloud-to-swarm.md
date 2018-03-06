@@ -46,7 +46,7 @@ You _may_ also need the following application-specific things:
 
 Our target environment is a cluster of Docker CE nodes configured into a swarm cluster. A swarm cluster comprises one or more manager and worker nodes.
 
-To ensure high availability (HA) of the swarm control plane in production, you should include an odd number (3+) of manager nodes, usually no more than seven. They should be spread across availability zones and connected by high-speed reliable networks. See [Swarm mode overview](https://docs.docker.com/engine/swarm/){: target="_blank" class="_"}, for information on building a secure HA swarm cluster for production.
+To ensure high availability (HA) of the swarm control plane in production, you should include an odd number (3+) of manager nodes, usually no more than seven. They should be spread across availability zones and connected by high-speed reliable networks. For information on building a secure HA swarm cluster for production, see [Swarm mode overview](https://docs.docker.com/engine/swarm/){: target="_blank" class="_"}.
 
 ### Plan Docker CE nodes
 
@@ -65,7 +65,7 @@ Your swarm cluster of Docker CE nodes should probably resemble your existing Doc
 
 This diagram shows a six-node swarm cluster spread across two availability zones:
 
-![Swarm cluster](images/swarm-cluster.png){:width="500px"}
+![Swarm cluster](images/swarm-cluster.png){:width="600px"}
 
 ### Configure swarm cluster
 
@@ -78,7 +78,7 @@ Configuring a swarm cluster of Docker CE nodes involves the following high-level
 
 In this demo, we build a swarm cluster with three nodes (one manager, two workers), but you can add extra. For manager HA, create a minimum of three manager nodes. You can add as many workers as you like.
 
-1.  Deploy three (or optionally more) nodes and install the latest version of [Docker CE](https://docs.docker.com/install/) on each.
+1.  Deploy three (or optionally more) nodes and install the latest version of [Docker CE](https://docs.docker.com/install/){: target="_blank" class="_"} on each.
 
 2.  Initialize a swarm cluster from one node (that automatically becomes the first manager in the swarm):
 
@@ -86,7 +86,7 @@ In this demo, we build a swarm cluster with three nodes (one manager, two worker
     $ docker swarm init
     ```
 
-    > Our swarm cluster uses self-signed certificates. To use an external CA, initialize with the option, [`--external-ca`](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}. You should also build your nodes in appropriate failure domains.
+    > Our swarm cluster uses self-signed certificates. To use an [external CA](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}, initialize with the option, `--external-ca`. You should also build your nodes in appropriate failure domains.
 
 3.  Extract and **safely store** the manager _join-token_ required to add manager nodes.
 
@@ -133,11 +133,11 @@ With your target environment configured, let us look at the application and conv
 
 ## Convert Docker Cloud stackfile
 
-**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml){: target="_blank" class="_"}.**
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}.**
 
 To prepare your applications for migration from Docker Cloud to Docker CE (in swarm mode), you must recreate your Docker Cloud stackfiles (**source** files) as stackfiles for service stacks (**target** files). Once you have each application defined as a service stack, you can test and deploy.
 
-> To find the stackfiles for your existing applications in Docker Cloud, you can (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
+> To find the stackfiles for your existing applications in Docker Cloud, you can do one of two things: (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
 
 **Cloud source**: In the Docker Cloud stackfile, the six services in our `example-voting-app` are defined as **top-level keys**:
 
@@ -294,7 +294,7 @@ Docker Swarm does not let you publish multiple services on the same port in a cl
 
 - Publish this service on port 80 and any other service on a different port.
 - Front the service with a load balancer that listens on port 80 and forward to 5000 and 5001 behind the scenes.
-- Use an application-layer load-balancer, such as the [Docker EE HTTP Routing Mesh (HRM)](https://success.docker.com/article/Docker_Reference_Architecture-_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing#thehttproutingmesh), to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers.
+- Use an application-layer load-balancer, such as the [Docker EE HTTP Routing Mesh (HRM)](https://success.docker.com/article/Docker_Reference_Architecture-_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing#thehttproutingmesh){: target="_blank" class="_"}, to publish multiple services on a single port and route traffic based on hostnames in the HTTP headers.
 
 **Swarm target (extended)**
 

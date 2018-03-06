@@ -62,7 +62,7 @@ The application registration is now complete. Time to build the AKS cluster.
 
 In this section, we build a three-node cluster; your cluster should probably be based on the configuration of your Docker Cloud node cluster.
 
-Unlike Docker Cloud, _Kubernetes only deploys work to worker nodes_; Docker Cloud deploys work to all nodes in a cluster (managers and workers). This affects how you should size your cluster. If your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your AKS cluster to have five nodes of a similar size.
+Whereas Docker Cloud deploys work to all nodes in a cluster (managers and workers), _Kubernetes only deploys work to worker nodes_. This affects how you should size your cluster. If your Docker Cloud node cluster was working well with three managers and two workers of a particular size, you should probably size your AKS cluster to have five nodes of a similar size.
 
 > To see the configuration of each of your clusters in Docker Cloud, select **Node Clusters** > _your_cluster_.
 
@@ -118,12 +118,12 @@ To connect to your AKS cluster from a local terminal:
     Downloading client to C:\Program Files (x86)\kubectl.exe from...
     ```
 
-    > You can install 'kubectl' with or without `az`. If you have `kubectl` already installed, ensure that the current context is correct:
-    >
-    > ```
+    You can install 'kubectl' with or without `az`. If you have `kubectl` already installed, ensure that the current context is correct:
+
+    ```
     > kubectl config get-context
     > kubectl config use-context <my_aks_namespace>
-    > ``
+    ```
 
 3.  Start the Azure login process:
 
@@ -159,11 +159,11 @@ You now have an AKS cluster and have configured `kubectl` to manage it. Let's lo
 
 ## Convert Docker Cloud stackfile
 
-**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml){: target="_blank" class="_"}.**
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}.**
 
 To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
-> To find the stackfiles for your existing applications in Docker Cloud, you can (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
+> To find the stackfiles for your existing applications in Docker Cloud, you can do one of two things: (1) Select **Stacks** > _your_stack_ > **Edit**, or (2) Select **Stacks** > _your_stack_ and scroll down.
 
 In the Docker Cloud stackfile, the six Docker _services_ in our `example-voting-app` stack are defined as **top-level keys**:
 

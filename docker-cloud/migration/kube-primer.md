@@ -39,7 +39,9 @@ You should run all of your work on nodes and _not_ on masters. This may differ f
 
 You can run a Kubernetes cluster on-premises where you manage everything yourself -- masters (control plane) and nodes. But Control plane high availability (HA) can be difficult to configure.
 
-Cloud providers such as [Microsoft Azure](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"}, [Google Cloud Platform (GCP)](https://cloud.google.com/free/){: target="_blank" class="_"}, and [Amazon Web Services (AWS)](https://aws.amazon.com/free/), provide hosted Kubernetes services:
+Cloud providers such as [Microsoft Azure](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"},
+[Google Cloud Platform (GCP)](https://cloud.google.com/free/){: target="_blank" class="_"}, and
+[Amazon Web Services (AWS)](https://aws.amazon.com/free/){: target="_blank" class="_"}, provide hosted Kubernetes services:
 
 - Azure Container Service (AKS)
 - Google Kubernetes Engine (GKE)
