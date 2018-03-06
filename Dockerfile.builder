@@ -5,7 +5,7 @@ RUN go get -d github.com/tdewolff/minify/cmd/minify \
  && go build -v -o /minify github.com/tdewolff/minify/cmd/minify
 
 # Set the version of Github Pages to use for each docs archive
-FROM starefossen/github-pages:latest
+FROM starefossen/github-pages:177
 
 # Get some utilities we need for post-build steps
 RUN apk update && apk add bash wget subversion gzip
