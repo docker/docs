@@ -19,8 +19,8 @@ storage driver as `overlay` or `overlay2`.
 > unless you are a Docker EE user on RHEL or CentOS, in which case you need
 > version 3.10.0-693 or higher of the kernel and to follow some extra steps.
 >
-> For more information about differences between `overlay` vs `overlay2`, refer
-> to [Select a storage driver](selectadriver.md#overlay-vs-overlay2).
+> For more information about differences between `overlay` vs `overlay2`, check
+> [Docker storage drivers](select-storage-driver.md).
 
 ## Prerequisites
 
