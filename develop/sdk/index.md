@@ -30,7 +30,7 @@ installed and coexist together.
 go get github.com/docker/docker/client
 ```
 The client requires a recent version of Go. Run `go version` and ensure that you 
-are running at least version 1.8 of Go
+are running at least version 1.9.4 of Go
 
 
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
