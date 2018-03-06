@@ -8,9 +8,17 @@ title: Migrate Docker Cloud stacks to Azure Container Service
 
 This page explains how to prepare your applications for migration from Docker Cloud to [Azure Container Service (AKS)](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"} clusters. AKS is a hosted Kubernetes service on Microsoft Azure. It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
-To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of AKS nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
+At a high level, migrating your Docker Cloud applications requires that you:
+
+- **Build** a target environment (Docker Swarm or Kubernetes cluster)
+- **Convert** your Docker Cloud YAML stackfiles
+- **Point** your application CNAMES to new service endpoints
+- **Test** the converted YAML stackfiles in the new environment
+- **Migrate** your applications from Docker Cloud to the new environment
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to AKS applications -- will vary by application and environment.
+
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of AKS nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
 
 ## Voting-app example
 

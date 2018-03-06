@@ -8,9 +8,17 @@ title: Migrate Docker Cloud stacks to Google Kubernetes Engine
 
 This page explains how to prepare your applications for migration from Docker Cloud to [Google Kubernetes Engine (GKE)](https://cloud.google.com/free/){: target="_blank" class="_"} clusters. GKE is a hosted Kubernetes service on Google Cloud Platform (GCP). It exposes standard Kubernetes APIs so that standard Kubernetes tools and apps run on it without needing to be reconfigured.
 
-To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of GKE nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
+At a high level, migrating your Docker Cloud applications requires that you:
+
+- **Build** a target environment (Docker Swarm or Kubernetes cluster)
+- **Convert** your Docker Cloud YAML stackfiles
+- **Point** your application CNAMES to new service endpoints
+- **Test** the converted YAML stackfiles in the new environment
+- **Migrate** your applications from Docker Cloud to the new environment
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to GKE applications -- will vary by application and environment.
+
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a target environment of GKE nodes, **convert** the Cloud stackfile to a Kubernetes manifest, and **test** the manifest in the new environment to ensure that it is safe to migrate.
 
 ## Voting-app example
 
@@ -687,7 +695,7 @@ Before migrating, you should thoroughly test each new Kubernetes manifest on a G
 The following steps explain how to deploy your app from the Kubernetes manifest file and verify that it is running. The steps are based on the sample application used throughout this guide, but the general commands should work for any app.
 
 > Run from a [Google Cloud Shell](https://cloud.google.com/shell/){: target="_blank" class="_"}
- or lo{: target="_blank" class="_"}cal terminal with `kubectl` configured to talk to your GKE cluster.
+ or local terminal with `kubectl` configured to talk to your GKE cluster.
 
 1.  Verify that you shell/terminal is configured to talk to your GKE cluster. If the output matches your cluster, you're ready to proceed with the next steps.
 

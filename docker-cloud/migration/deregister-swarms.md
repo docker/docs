@@ -1,7 +1,7 @@
 ---
 description: How to deregister swarms on Docker Cloud
 keywords: cloud, swarm, migration
-title: Deregister swarms on Docker Cloud
+title: Deregister Swarms on Docker Cloud
 ---
 
 ## Introduction

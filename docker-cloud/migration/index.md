@@ -6,23 +6,15 @@ title: Migrate Docker Cloud runtime apps
 
 ## Introduction
 
-<span class="badge badge-warning">Important</span>  **Cluster Management in Docker Cloud will be discontinued on May 11. You must migrate your applications from Docker Cloud to another platform.**
+<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down 11 May. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms. Docker SaaS features are _not_ affected.**
 
-The following documents explain how to migrate your Docker Cloud applications to **Docker Swarm** (on Docker CE) and **Kubernetes** (on [Microsoft AKS](https://azure.microsoft.com/en-us/free/){: target="_blank" class="_"}
-and [Google GKE](https://cloud.google.com/free/){: target="_blank" class="_"}).
+The Docker Cloud runtime, and _only_ the runtime, is being discontinued. This means that you must migrate your applications to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
 
 - [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Google Kubernetes Engine](cloud-to-kube-gke){: target="_blank" class="_"}
-
-At a high level, migrating your Docker Cloud applications requires that you:
-
-- **Build** a target environment (Docker Swarm or Kubernetes cluster)
-- **Convert** your Docker Cloud YAML stackfiles
-- **Point** your application CNAMES to new service endpoints
-- **Test** the converted YAML stackfiles in the new environment
-- **Migrate** your applications from Docker Cloud to the new environment
-- **Deregister** your Docker Cloud swarms if applicable.
+- [Deregister Swarms on Docker Cloud](deregister-swarms){: target="_blank" class="_"}
+- [Kubernetes primer](kube-primer){: target="_blank" class="_"}
 
 ## What stays the same
 

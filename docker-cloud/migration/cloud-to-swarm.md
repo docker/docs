@@ -8,9 +8,17 @@ title: Migrate Docker Cloud stacks to Docker CE swarm
 
 This page explains how to prepare your applications for migration from Docker Cloud to applications running as _service stacks_ on clusters of Docker Community Edition (CE) nodes in swarm mode. You can also use [Docker Enterprise Edition](https://www.docker.com/enterprise-edition){: target="_blank" class="_"} (Docker EE) for your target environment.
 
-To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile to a service stack format, and **test** the service stack file in swarm mode to ensure that it is safe to migrate.
+At a high level, migrating your Docker Cloud applications requires that you:
 
+- **Build** a target environment (Docker Swarm or Kubernetes cluster)
+- **Convert** your Docker Cloud YAML stackfiles
+- **Point** your application CNAMES to new service endpoints
+- **Test** the converted YAML stackfiles in the new environment
+- **Migrate** your applications from Docker Cloud to the new environment
+-
 > The actual process of migrating -- switching customers from your Docker Cloud applications to Docker CE applications -- will vary by application and environment.
+
+To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile to a service stack format, and **test** the service stack file in swarm mode to ensure that it is safe to migrate.
 
 ## Voting-app example
 
@@ -25,10 +33,10 @@ In the Docker Cloud stackfile, the voting app is defined as a stack of six micro
 
 Votes are accepted with the `vote` service and stored in persistent backend database (`db`) with the help of services, `redis`, `worker`, and `lb`. The vote tally is viewed with the `result` service.
 
+![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
+
 The Docker Cloud stack is defined in [dockercloud.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"} and the Docker CE service stack is defined in
 [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}. This doc explains how `dockercloud.yml` is converted to `docker-stack.yml` so that you have the tools to do the same for your applications.
-
-![image of voting app arch](images/votingapp-architecture.png){:width="500px"}
 
 ## Migration prerequisites
 
@@ -54,8 +62,8 @@ Planning and building your nodes is specific to your requirements, but includes 
 
 - Choosing a **platform** (cloud or on-premises) to host your Docker CE nodes.
 - Estimating **node size and spec** (your Docker Cloud nodes can be a guide)
-- Deciding **node distribution** across availability zones for high availability (HA).
 - Calculating the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
+- Deciding **node distribution** across availability zones for high availability (HA).
 - Ensuring **nodes can communicate** over the network and have stable resolvable DNS names.
 - Configuring **load balancers**.
 
@@ -86,7 +94,7 @@ In this demo, we build a swarm cluster with three nodes (one manager, two worker
     $ docker swarm init
     ```
 
-    > Our swarm cluster uses self-signed certificates. To use an [external CA](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}, initialize with the option, `--external-ca`. You should also build your nodes in appropriate failure domains.
+    > Our swarm cluster uses self-signed certificates. To use an [external CA](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}, initialize with the option, `--external-ca`. You should also build your nodes in appropriate availability zones.
 
 3.  Extract and **safely store** the manager _join-token_ required to add manager nodes.
 
@@ -205,8 +213,8 @@ db:
     deploy:
       placement:
         constraints: [node.role == manager]
-    restart_policy:
-      condition: any
+      restart_policy:
+        condition: any
 ```
 
 Let's step through some fields:
@@ -232,8 +240,8 @@ redis:
 redis:
   image: redis:latest
   deploy:
-  restart_policy:
-    condition: any
+    restart_policy:
+      condition: any
 ```
 
 **Swarm target (extended)**:
@@ -442,7 +450,7 @@ Healthy testing includes _deploying_ the application with the new _service stack
 
 The following steps explain how to deploy your app from the **target** Docker Swarm stackfile and verify that it is running. Perform the following from a manager node in your swarm cluster.
 
-1. Deploy the app from the _service stack_ stackfile you created.
+1.  Deploy the app from the _service stack_ stackfile you created.
 
     ```
     $ docker stack deploy -c example-stack.yaml example-stack
@@ -476,12 +484,12 @@ The following steps explain how to deploy your app from the **target** Docker Sw
     qbuu5l2r9ay7         \_ example-stack_worker.3   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
     ```
 
-4. Test that the application works in your new environment.
+4.  Test that the application works in your new environment.
 
-    For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results:
+    For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results. We exposed the `vote` service on port 5000, and the `result` service on port 5001. To connect to either of them, open a web browser and point it to the public IP or public DNS of any swarm node on the required port:
 
-    - Copy/paste the `EXTERNAL-IP` value for the `vote` service into a browser and cast a vote.
-    - Copy/paste the `EXTERNAL-IP` value for the `result` service into a browser and ensure your vote registered.
+    - Go to <public-IP-or-DNS>:5000 and cast a vote.
+    - Go to <public-IP-or-DNS>:5001 and view the result of your vote.
 
 If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stacks, you should build, test, and implement one for each application on Docker CE.
 
