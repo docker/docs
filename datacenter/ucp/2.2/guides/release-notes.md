@@ -16,14 +16,21 @@ upgrade your installation to the latest release.
 
 **Bug fixes**
 
-* Security
-  * Role-based access control is now enforced for volumes managed by 3rd party
-volume plugins (for example using the NetApp or other volume plugins). This is a
-critical security fix for customers that use 3rd party volume drivers and rely
-on Docker Universal Control Plane for tenant isolation of workloads and data.
+* Role-based access control is now enforced for volumes managed by
+third-party volume plugins. This is a critical security fix for customers that
+use third-party volume drivers and rely on Docker Universal Control Plane for
+tenant isolation of workloads and data.
 **Caution** is advised when applying this update because users or automated
 workflows may have come to rely on lack of access control enforcement when
 manipulating volumes created with 3rd party volume plugins.
+
+**Known issues**
+
+* UCP role-based access control is not compatible with all third-party volume
+plugins. If you’re using certain third-party volume plugins (such as Netapp)
+and are planning on upgrading UCP, you can skip 2.2.5 and wait for the upcoming
+2.2.6 release, which will provide an alternative way to turn on RBAC enforcement
+for volumes.
 
 ## Version 2.2.4
 

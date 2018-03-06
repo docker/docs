@@ -15,8 +15,8 @@ The next step is creating a backup policy and disaster recovery plan.
 
 UCP maintains data about:
 
-|         Data          |                                                     Description                                                      |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| Data                  | Description                                                                                                          |
+|:----------------------|:---------------------------------------------------------------------------------------------------------------------|
 | Configurations        | The UCP cluster configurations, as shown by `docker config ls`, including Docker EE license and swarm and client CAs |
 | Access control        | Permissions for teams to swarm resources, including collections, grants, and roles                                   |
 | Certificates and keys | The certificates, public keys, and private keys that are used for authentication and mutual TLS communication        |
@@ -75,26 +75,15 @@ To minimize the impact of the backup policy on your business, you should:
 The example below shows how to create a backup of a UCP manager node and
 verify its contents:
 
-```none
+```bash
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --log-driver none --rm -i --name ucp \
+docker container run \
+  --log-driver none --rm \
+  --interactive \
+  --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive > /tmp/backup.tar
-
-# Ensure the backup is a valid tar and list its contents
-# In a valid backup file, over 100 files should appear in the list
-# and the `./ucp-node-certs/key.pem` file should be present
-$ tar --list -f /tmp/backup.tar
-```
-
-A backup file may optionally be encrypted using a passphrase, as in the
-following example:
-
-```none
-# Create a backup, encrypt it, and store it on /tmp/backup.tar
-$ docker container run --log-driver none --rm -i --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup --interactive \
+  {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_version }} backup \
+  --id <ucp-instance-id> \
   --passphrase "secret" > /tmp/backup.tar
 
 # Decrypt the backup and list its contents
@@ -164,7 +153,7 @@ UCP restore recovers the following assets from the backup file:
   authentication backends.
 
 UCP restore does not include swarm assets such as cluster membership, services, networks,
-secrets, etc.  [Learn to backup a swarm](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm).
+secrets, etc.  [Learn to backup a swarm](/engine/swarm/admin_guide/#back-up-the-swarm).
 
 There are two ways to restore UCP:
 

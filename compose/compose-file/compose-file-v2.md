@@ -270,7 +270,6 @@ a [byte value](#specifying-byte-values).
 
 > Added in [version 2.3](compose-versioning.md#version-23) file format
 
-
 Build the specified stage as defined inside the `Dockerfile`. See the
 [multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
 details.
@@ -916,6 +915,35 @@ Example usage:
       app_net:
         driver: bridge
 
+#### priority
+
+Specify a priority to indicate in which order Compose should connect the
+service's containers to its networks. If unspecified, the default value is `0`.
+
+In the following example, the `app` service connects to `app_net_1` first
+as it has the highest priority. It then connects to `app_net_3`, then
+`app_net_2`, which uses the default priority value of `0`.
+
+    version: '2.3'
+    services:
+      app:
+        image: busybox
+        command: top
+        networks:
+          app_net_1:
+            priority: 1000
+          app_net_2:
+
+          app_net_3:
+            priority: 100
+    networks:
+      app_net_1:
+      app_net_2:
+      app_net_3:
+
+> **Note:** If multiple networks have the same priority, the connection order
+> is undefined.
+
 ### pid
 
     pid: "host"
@@ -963,6 +991,19 @@ port (an ephemeral host port is chosen).
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
      - "12400-12500:1240"
+
+### runtime
+
+> [Added in version 2.3 file format](compose-versioning.md#version-23)
+
+Specify which runtime to use for the service's containers. Default runtime
+and available runtimes are listed in the output of `docker info`.
+
+    web:
+      image: busybox:latest
+      command: true
+      runtime: runc
+
 
 ### scale
 
@@ -1179,7 +1220,7 @@ then read-write is used.
 
 ### restart
 
-`no` is the default restart policy, and it does restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+`no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
       - restart: no
       - restart: always
@@ -1401,6 +1442,10 @@ Swarm.
 The Docker Engine returns an error if the driver is not available.
 
     driver: overlay
+
+Starting in Compose file format 2.1, overlay networks are always created as
+`attachable`, and this is not configurable. This means that standalone
+containers can connect to overlay networks.
 
 ### driver_opts
 

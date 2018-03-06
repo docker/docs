@@ -11,6 +11,10 @@ title: Docker Store Customer FAQs
 Log in to the Docker Store using your free Docker ID. Don’t have a Docker ID
 yet? Go to [Docker Cloud](https://cloud.docker.com) to sign up.
 
+### I tried `docker login store.docker.com` via the CLI and it does not seem to work. Am I missing something?
+
+You should do `docker login` ( *not `docker login store.docker.com`* )  to login successfully, and pull content you might be entitled to.
+
 ## Certification program
 
 ### What is the certification program for images and plugins, and what are some benefits?

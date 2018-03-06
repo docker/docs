@@ -26,7 +26,7 @@ other with the group ID range. Consider the following entry in `/etc/subuid`:
 testuser:231072:65536
 ```
 
-This means that `testuser` is assigned a subordinate user ID range of `230172`
+This means that `testuser` is assigned a subordinate user ID range of `231072`
 and the next 65536 integers in sequence. UID `231072` is mapped within the
 namespace (within the container, in this case) as UID `0` (`root`). UID `231073`
 is mapped as UID `1`, and so forth. If a process attempts to escalate privilege
@@ -71,7 +71,7 @@ avoid these situations.
     want to use an existing user, Docker can create one for you and use that. If
     you want to use an existing username or user ID, it must already exist.
     Typically, this means that the relevant entries need to be in
-    `/etc/password` and `/etc/group`, but if you are using a different
+    `/etc/passwd` and `/etc/group`, but if you are using a different
     authentication back-end, this requirement may translate differently.
 
     To verify this, use the `id` command:
@@ -90,7 +90,7 @@ avoid these situations.
 
     Each file contains three fields: the username or ID of the user, followed by
     a beginning UID or GID (which is treated as UID or GID 0 within the namespace)
-    and a maxumum number of UIDs or GIDs available to the user. For instance,
+    and a maximum number of UIDs or GIDs available to the user. For instance,
     given the following entry:
 
     ```none
@@ -243,7 +243,7 @@ See
 for some of these limitations.
 
 To disable user namespaces for a specific container, add the `--userns=host`
-flag to the `docker create`, `docker run`, or `docker exec` command.
+flag to the `docker container create`, `docker container run`, or `docker container exec` command.
 
 ## User namespace known limitations
 

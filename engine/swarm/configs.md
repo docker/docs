@@ -24,6 +24,24 @@ conjunction with environment variables or labels, for maximum flexibility.
 
 Configs are supported on both Linux and Windows services.
 
+### Windows support
+
+Docker 17.06 and higher include support for configs on Windows containers.
+Where there are differences in the implementations, they are called out in the
+examples below. Keep the following notable differences in mind:
+
+- Config files with custom targets are not directly bind-mounted into Windows
+  containers, since Windows does not support non-directory file bind-mounts.
+  Instead, configs for a container are all mounted in
+  `C:\ProgramData\Docker\internal\configs` (an implementation detail which
+  should not be relied upon by applications) within the container. Symbolic
+  links are used to point from there to the desired target of the config within
+  the container. The default target is `C:\ProgramData\Docker\configs`.
+
+- When creating a service which uses Windows containers, the options to specify
+  UID, GID, and mode are not supported for configs. Configs are currently only
+  accessible by administrators and users with `system` access within the
+  container.
 
 ## How Docker manages configs
 
@@ -39,6 +57,16 @@ the container defaults to `/<config-name>` in Linux containers. In Windows
 containers, configs are all mounted into `C:\ProgramData\Docker\configs` and
 symbolic links are created to the desired location, which defaults to
 `C:\<config-name>`.
+
+You can set the ownership (`uid` and `gid`) or the config, using either the
+numerical ID or the name of the user or group. You can also specify the file
+permissions (`mode`). These settings are ignored for Windows containers.
+
+- If not set, the config is owned by the user and that running the container
+  command (often `root`) and that user's default group (also often `root`).
+- If not set, the config has world-readable permissions (mode `0444`), unless a
+  `umask` is set within the container, in which case the mode is impacted by
+  that `umask` value.
 
 You can update a service to grant it access to additional configs or revoke its
 access to a given config at any time.
@@ -130,7 +158,7 @@ real-world example, continue to
     ```
 
 4.  Get the ID of the `redis` service task container using `docker ps`, so that
-    you can use `docker exec` to connect to the container and read the contents
+    you can use `docker container exec` to connect to the container and read the contents
     of the config data file, which defaults to being readable by all and has the
     same name as the name of the config. The first command below illustrates
     how to find the container ID, and the second and third commands use shell
@@ -141,11 +169,11 @@ real-world example, continue to
 
     5cb1c2348a59
 
-    $ docker exec $(docker ps --filter name=redis -q) ls -l /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) ls -l /my-config
 
     -r--r--r--    1 root     root            12 Jun  5 20:49 my-config                                                     
 
-    $ docker exec $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec $(docker ps --filter name=redis -q) cat /my-config
 
     This is a config
     ```
@@ -179,7 +207,7 @@ real-world example, continue to
     `service update` command redeploys the service.
 
     ```none
-    $ docker exec -it $(docker ps --filter name=redis -q) cat /my-config
+    $ docker container exec -it $(docker ps --filter name=redis -q) cat /my-config
 
     cat: can't open '/my-config': No such file or directory
     ```
@@ -250,7 +278,8 @@ This example is divided into two parts.
 the site certificate and does not directly involve Docker configs at all, but
 it sets up [the second part](#configure-the-nginx-container), where you store
 and use the site certificate as a series of secrets and the Nginx configuration
-as a config.
+as a config. The example shows how to set options on the config, such as the
+target location within the container and the file permissions (`mode`).
 
 #### Generate the site certificate
 
@@ -391,14 +420,15 @@ generate the site key and certificate, name the files `site.key` and
 
 
 4.  Create a service that runs Nginx and has access to the two secrets and the
-    config.
+    config. Set the mode to `0440` so that the file is only readable by its
+    owner and that owner's group, not the world.
 
     ```bash
     $ docker service create \
          --name nginx \
          --secret site.key \
          --secret site.crt \
-         --config source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --config source=site.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
          --publish published=3000,target=443 \
          nginx:latest \
          sh -c "exec nginx -g 'daemon off;'"
@@ -550,7 +580,7 @@ configuration file.
     ```bash
     $ docker service update \
       --config-rm site.conf \
-      --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf \
+      --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
       nginx
     ```
 

@@ -174,7 +174,7 @@ allow you to take advantage of the loadbalancer.
 2. Check your work by reviewing the configuration of nginx.
 
    ```html
-   $ docker exec interlock cat /etc/conf/nginx.conf
+   $ docker container exec interlock cat /etc/conf/nginx.conf
    ... output snipped ...
 
    upstream results.myenterprise.example.com {

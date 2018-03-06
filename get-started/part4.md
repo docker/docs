@@ -15,7 +15,7 @@ description: Learn how to create clusters of Dockerized machines.
 [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md), but on Linux systems you need to
 [install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, as well as Windows 10 Home, use
-[Docker Toolbox](https://docs.docker.com/toolbox/overview.md).
+[Docker Toolbox](/toolbox/overview.md).
 
 - Read the orientation in [Part 1](index.md).
 
@@ -334,7 +334,10 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 
 Now that you have `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
-3 to `myvm1`, and your local copy of `docker-compose.yml.`
+3 to `myvm1`, and your local copy of `docker-compose.yml.`. This command may take a few seconds
+to complete and the deployment takes some time to be available. Use the
+`docker service ps <service_name>` command on a swarm manager to verify that
+all services have been redeployed.
 
 You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
@@ -344,18 +347,33 @@ sure you are in the same directory as before, which includes the
 
 Just like before, run the following command to deploy the app on `myvm1`.
 
-```
+```bash
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
 And that's it, the app is deployed on a swarm cluster!
+
+> **Note**: If your image is stored on a private registry instead of Docker Hub,
+> you need to be logged in using `docker login <your-registry>` and then you
+> need to add the `--with-registry-auth` flag to the above command. For example:
+>
+> ```bash
+> docker login registry.example.com
+>
+> docker stack deploy --with-registry-auth -c docker-compose.yml getstartedlab
+> ```
+> 
+> This passes the login token from your local client to the swarm nodes where the
+> service is deployed, using the encrypted WAL logs. With this information, the
+> nodes are able to log into the registry and pull the image.
+>
 
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time notice
 that the services (and associated containers) have been distributed between
 both `myvm1` and `myvm2`.
 
-```
+```bash
 $ docker stack ps getstartedlab
 
 ID            NAME                  IMAGE                   NODE   DESIRED STATE

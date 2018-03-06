@@ -20,6 +20,46 @@ Release notes for stable versions are listed first. You can
 
 # Stable releases
 
+## 17.12.1-ce (2018-02-27)
+
+### Client
+- Fix `node-generic-resource` typo [moby/moby#35970](https://github.com/moby/moby/pull/35970) and [moby/moby#36125](https://github.com/moby/moby/pull/36125)
+* Return errors from daemon on stack deploy configs create/update [docker/cli#757](https://github.com/docker/cli/pull/757)
+
+### Logging
+- awslogs: fix batch size calculation for large logs [moby/moby#35726](https://github.com/moby/moby/pull/35726)
+* Support a proxy in splunk log driver [moby/moby#36220](https://github.com/moby/moby/pull/36220)
+
+### Networking
+- Fix ingress network when upgrading from 17.09 to 17.12 [moby/moby#36003](https://github.com/moby/moby/pull/36003)
+* Add verbose info to partial overlay ID [moby/moby#35989](https://github.com/moby/moby/pull/35989)
+- Fix IPv6 networking being deconfigured if live-restore is being enabled [docker/libnetwork#2043](https://github.com/docker/libnetwork/pull/2043)
+- Fix watchMiss thread context [docker/libnetwork#2051](https://github.com/docker/libnetwork/pull/2051)
+
+### Packaging
+- Set TasksMax in docker.service [docker/docker-ce-packaging#78](https://github.com/docker/docker-ce-packaging/pull/78)
+
+### Runtime
+* Bump Golang to 1.9.4
+* Bump containerd to 1.0.1
+- Fix dockerd not being able to reconnect to containerd when it is restarted [moby/moby#36173](https://github.com/moby/moby/pull/36173)
+- Fix containerd events from being processed twice [moby/moby#35891](https://github.com/moby/moby/issues/35891)
+- Fix vfs graph driver failure to initialize because of failure to setup fs quota [moby/moby#35827](https://github.com/moby/moby/pull/35827)
+- Fix regression of health check not using container's working directory [moby/moby#35845](https://github.com/moby/moby/pull/35845)
+- Honor `DOCKER_RAMDISK` with containerd 1.0 [moby/moby#35957](https://github.com/moby/moby/pull/35957)
+- Update runc to fix hang during start and exec [moby/moby#36097](https://github.com/moby/moby/pull/36097)
+- Windows: Vendor of Microsoft/hcsshim @v.0.6.8 partial fix for import layer failing [moby/moby#35924](https://github.com/moby/moby/pull/35924)
+* Do not make graphdriver homes private mounts [moby/moby#36047](https://github.com/moby/moby/pull/36047)
+* Use rslave propogation for mounts from daemon root [moby/moby#36055](https://github.com/moby/moby/pull/36055)
+* Set daemon root to use shared mount propagation [moby/moby#36096](https://github.com/moby/moby/pull/36096)
+* Validate that mounted paths exist when container is started, not just during creation  [moby/moby#35833](https://github.com/moby/moby/pull/35833)
+* Add `REMOVE` and `ORPHANED` to TaskState [moby/moby#36146](https://github.com/moby/moby/pull/36146)
+- Fix issue where network inspect does not show Created time for networks in swarm scope [moby/moby#36095](https://github.com/moby/moby/pull/36095)
+* Nullify container read write layer upon release [moby/moby#36130](https://github.com/moby/moby/pull/36160) and [moby/moby#36343](https://github.com/moby/moby/pull/36242)
+
+### Swarm
+* Remove watchMiss from swarm mode [docker/libnetwork#2047](https://github.com/docker/libnetwork/pull/2047) 
+
 ## 17.12.0-ce (2017-12-27)
 
 ### Known Issues
@@ -403,6 +443,28 @@ Release notes for stable versions are listed first. You can
 
 * Disable legacy registry (v1) by default [#33629](https://github.com/moby/moby/pull/33629)
 
+## 17.03.2-ce (2017-05-29)
+
+### Networking
+
+- Fix a concurrency issue preventing network creation [#33273](https://github.com/moby/moby/pull/33273)
+
+### Runtime
+
+- Relabel secrets path to avoid a Permission Denied on selinux enabled systems [#33236](https://github.com/moby/moby/pull/33236) (ref [#32529](https://github.com/moby/moby/pull/32529)
+- Fix cases where local volume were not properly relabeled if needed [#33236](https://github.com/moby/moby/pull/33236) (ref [#29428](https://github.com/moby/moby/pull/29428))
+- Fix an issue while upgrading if a plugin rootfs was still mounted [#33236](https://github.com/moby/moby/pull/33236) (ref [#32525](https://github.com/moby/moby/pull/32525))
+- Fix an issue where volume wouldn't default to the `rprivate` propagation mode [#33236](https://github.com/moby/moby/pull/33236) (ref [#32851](https://github.com/moby/moby/pull/32851))
+- Fix a panic that could occur when a volume driver could not be retrieved [#33236](https://github.com/moby/moby/pull/33236) (ref [#32347](https://github.com/moby/moby/pull/32347))
++ Add a warning in `docker info` when the `overlay` or `overlay2` graphdriver is used on a filesystem without `d_type` support [#33236](https://github.com/moby/moby/pull/33236) (ref [#31290](https://github.com/moby/moby/pull/31290))
+- Fix an issue with backporting mount spec to older volumes [#33207](https://github.com/moby/moby/pull/33207)
+- Fix issue where a failed unmount can lead to data loss on local volume remove [#33120](https://github.com/moby/moby/pull/33120)
+
+### Swarm Mode
+
+- Fix a case where tasks could get killed unexpectedly [#33118](https://github.com/moby/moby/pull/33118)
+- Fix an issue preventing to deploy services if the registry cannot be reached despite the needed images being locally present [#33117](https://github.com/moby/moby/pull/33117)
+
 ## 17.03.1-ce (2017-03-27)
 
 ### Remote API (v1.27) & Client
@@ -482,6 +544,71 @@ Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk.
 * (experimental)
 
 # Edge releases
+
+## 18.02.0-ce (2018-02-07)
+
+### Builder
+
+- Gitutils: fix checking out submodules [moby/moby#35737](https://github.com/moby/moby/pull/35737)
+
+### Client
+
+* Attach: Ensure attach exit code matches container's [docker/cli#696](https://github.com/docker/cli/pull/696)
++ Added support for tmpfs-mode in compose file [docker/cli#808](https://github.com/docker/cli/pull/808)
++ Adds a new compose file version 3.6 [docker/cli#808](https://github.com/docker/cli/pull/808)
+- Fix issue of filter in `docker ps` where `health=starting` returns nothing [moby/moby#35940](https://github.com/moby/moby/pull/35940)
++ Improve presentation of published port ranges [docker/cli#581](https://github.com/docker/cli/pull/581)
+* Bump Go to 1.9.3 [docker/cli#827](https://github.com/docker/cli/pull/827)
+- Fix broken Kubernetes stack flags [docker/cli#831](https://github.com/docker/cli/pull/831)
+* Annotate "stack" commands to be "swarm" and "kubernetes" [docker/cli#804](https://github.com/docker/cli/pull/804)
+
+### Experimental
+
++ Add manifest command [docker/cli#138](https://github.com/docker/cli/pull/138)
+* LCOW remotefs - return error in Read() implementation [moby/moby#36051](https://github.com/moby/moby/pull/36051)
++ LCOW: Coalesce daemon stores, allow dual LCOW and WCOW mode [moby/moby#34859](https://github.com/moby/moby/pull/34859)
+- LCOW: Fix OpenFile parameters [moby/moby#36043](https://github.com/moby/moby/pull/36043)
+* LCOW: Raise minimum requirement to Windows RS3 RTM build (16299) [moby/moby#36065](https://github.com/moby/moby/pull/36065)
+
+### Logging
+
+* Improve daemon config reload; log active configuration [moby/moby#36019](https://github.com/moby/moby/pull/36019)
+- Fixed error detection using IsErrNotFound and IsErrNotImplemented for the ContainerLogs method [moby/moby#36000](https://github.com/moby/moby/pull/36000)
++ Add journald tag as SYSLOG_IDENTIFIER [moby/moby#35570](https://github.com/moby/moby/pull/35570)
+* Splunk: limit the reader size on error responses [moby/moby#35509](https://github.com/moby/moby/pull/35509)
+
+### Networking
+
+* Disable service on release network results in zero-downtime deployments with rolling upgrades [moby/moby#35960](https://github.com/moby/moby/pull/35960)
+- Fix services failing to start if multiple networks with the same name exist in different spaces [moby/moby#30897](https://github.com/moby/moby/pull/30897)
+- Fix duplicate networks being added with `docker service update --network-add` [docker/cli#780](https://github.com/docker/cli/pull/780)
+- Fixing ingress network when upgrading from 17.09 to 17.12. [moby/moby#36003](https://github.com/moby/moby/pull/36003)
+- Fix ndots configuration [docker/libnetwork#1995](https://github.com/docker/libnetwork/pull/1995)
+- Fix IPV6 networking being deconfigured if live-restore is enabled [docker/libnetwork#2043](https://github.com/docker/libnetwork/pull/2043)
++ Add support for MX type DNS queries in the embedded DNS server [docker/libnetwork#2041](https://github.com/docker/libnetwork/pull/2041)
+
+### Packaging
+
++ Added packaging for Fedora 26, Fedora 27, and Centos 7 on aarch64 [docker/docker-ce-packaging#71](https://github.com/docker/docker-ce-packaging/pull/71)
+- Removed support for Ubuntu Zesty [docker/docker-ce-packaging#73](https://github.com/docker/docker-ce-packaging/pull/73)
+- Removed support for Fedora 25 [docker/docker-ce-packaging#72](https://github.com/docker/docker-ce-packaging/pull/72)
+
+### Runtime
+
+- Fixes unexpected Docker Daemon shutdown based on pipe error [moby/moby#35968](https://github.com/moby/moby/pull/35968)
+- Fix some occurrences of hcsshim::ImportLayer failed in Win32: The system cannot find the path specified [moby/moby#35924](https://github.com/moby/moby/pull/35924)
+* Windows: increase the maximum layer size during build to 127GB [moby/moby#35925](https://github.com/moby/moby/pull/35925)
+- Fix Devicemapper: Error running DeleteDevice dm_task_run failed [moby/moby#35919](https://github.com/moby/moby/pull/35919)
++ Introduce « exec_die » event [moby/moby#35744](https://github.com/moby/moby/pull/35744)
+* Update API to version 1.36 [moby/moby#35744](https://github.com/moby/moby/pull/35744)
+- Fix `docker update` not updating cpu quota, and cpu-period of a running container [moby/moby#36030](https://github.com/moby/moby/pull/36030)
+* Make container shm parent unbindable [moby/moby#35830](https://github.com/moby/moby/pull/35830)
++ Make image (layer) downloads faster by using pigz [moby/moby#35697](https://github.com/moby/moby/pull/35697)
++ Protect the daemon from volume plugins that are slow or deadlocked [moby/moby#35441](https://github.com/moby/moby/pull/35441)
+- Fix `DOCKER_RAMDISK` environment variable not being honoured [moby/moby#35957](https://github.com/moby/moby/pull/35957)
+* Bump containerd to 1.0.1 (9b55aab90508bd389d7654c4baf173a981477d55) [moby/moby#35986](https://github.com/moby/moby/pull/35986)
+* Update runc to fix hang during start and exec [moby/moby#36097](https://github.com/moby/moby/pull/36097)
+- Fix "--node-generic-resource" singular/plural [moby/moby#36125](https://github.com/moby/moby/pull/36125)
 
 ## 18.01.0-ce (2018-01-10)
 

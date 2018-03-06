@@ -228,6 +228,7 @@ Introduces the following additional parameters:
   [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
+- [`runtime`](compose-file-v2.md#runtime) for service definitions
 
 ### Version 3
 
@@ -276,6 +277,15 @@ Introduces the following additional parameters:
 - [`isolation`](index.md#isolation) in service definitions
 - `name` for networks, secrets and configs
 - `shm_size` in [build configurations](index.md#build)
+
+### Version 3.6
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **18.02.0** and higher.
+
+Introduces the following additional parameters:
+
+- [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
 
 ## Upgrading
 

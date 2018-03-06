@@ -127,7 +127,7 @@ Now that everything is setup, you can go into your `trustsandbox` container and
 start testing Docker content trust. From your host machine, obtain a shell
 in the `trustsandbox` container.
 
-    $ docker exec -it trustsandbox sh
+    $ docker container exec -it trustsandbox sh
     / #
 
 ### Test some trust operations
@@ -217,7 +217,7 @@ data. Then, you try and pull it.
 2.  Open a new interactive terminal from your host, and obtain a shell into the
     `sandboxregistry` container.
 
-        $ docker exec -it sandboxregistry bash
+        $ docker container exec -it sandboxregistry bash
         root@65084fc6f047:/#
 
 3.  List the layers for the `test/trusttest` image you pushed:
@@ -242,7 +242,7 @@ data. Then, you try and pull it.
 
 7.  List the `trusttest` image.
 
-        / # docker images | grep trusttest
+        / # docker image ls | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
         docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
         sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
@@ -250,7 +250,7 @@ data. Then, you try and pull it.
 
 8.  Remove the `trusttest:latest` image from our local cache.
 
-        / # docker rmi -f cc7629d1331a
+        / # docker image rm -f cc7629d1331a
         Untagged: docker/trusttest:latest
         Untagged: sandboxregistry:5000/test/trusttest:latest
         Untagged: sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926

@@ -18,13 +18,21 @@ So before signing and pushing images to DTR you should:
 This allows you to  start signing images with the private keys in your UCP
 client bundle, that UCP can trace back to your user account.
 
+## System requirements
+
+The version of Notary you install, depends on the version of the Docker CLI
+you're using:
+
+* Docker CLI 17.08 or older, use Notary 0.4.3.
+* Docker CLI 17.09 or newer, use Notary 0.6.0.
+
 ## Download the Notary CLI client
 
 If you're using Docker for Mac or Docker for Windows, you already have the
 `notary` command installed.
 
-If you're running Docker on a Linux distribution, you can [download the
-latest version](https://github.com/docker/notary/releases). As an example:
+If you're running Docker on a Linux distribution, you can [download Notary
+from Github](https://github.com/docker/notary/releases). As an example:
 
 ```bash
 # Get the latest binary

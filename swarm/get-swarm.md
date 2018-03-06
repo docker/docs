@@ -86,7 +86,7 @@ The first time you use any image, Docker Engine checks to see if you already hav
 Using a Swarm container has three key benefits over other methods:
 
 * You don't need to install a binary on the system to use the image.
-* The single command `docker run` command gets and run the most recent version of the image every time.
+* The single command `docker run` gets and runs the most recent version of the image every time.
 * The container isolates Swarm from your host environment. You don't need to perform or maintain shell paths and environments.
 
 Running the Swarm image is the recommended way to create and manage your Swarm cluster. All of Docker's documentation and tutorials use this method.

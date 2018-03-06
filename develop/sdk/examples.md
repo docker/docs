@@ -10,7 +10,7 @@ redirect_from:
 ---
 
 After you
-[install Docker](/engine/installation.md), you can
+[install Docker](/install/index.md), you can
 [install the Go and Python SDKs](/develop/sdk/index.md#install-the-sdks) and
 also try out the Docker Engine API.
 
@@ -56,14 +56,16 @@ func main() {
 		panic(err)
 	}
 
-	_, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
+	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
 		Cmd:   []string{"echo", "hello world"},
+		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
 		panic(err)
@@ -437,7 +439,7 @@ Reticulating spline 5...
 
 ## List all images
 
-List the images on your Engine, similar to `docker images`:
+List the images on your Engine, similar to `docker image ls`:
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>

@@ -5,16 +5,55 @@
 # Relies on the following environment variables which are usually set by
 # the Dockerfile. Uncomment them here to override for debugging
 
-# Parse some variables from _config.yml and make them available to this script
-# This only finds top-level variables with _version in them that don't have any
-# leading space. This is brittle!
+# Helper functino to deal with sed differences between osx and Linux
+# See https://stackoverflow.com/a/38595160
+sedi () {
+    sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
+}
 
-SOURCE="$1"
+# Assume non-local mode until we check for -l
+LOCAL=0
 
+while getopts ":hl" opt; do
+  case ${opt} in
+    l ) LOCAL=1
+        echo "Running in local mode"
+        break
+      ;;
+    \? ) echo "Usage: $0 [-h] | -l"
+         echo "When running in local mode, operates on the current working directory."
+         echo "Otherwise, operates on md_source in the scope of the Dockerfile"
+         break
+      ;;
+  esac
+done
+
+# Do some sanity-checking to make sure we are running this from the right place
+if [ $LOCAL -eq 1 ]; then
+  SOURCE="."
+  if ! [ -f _config.yml ]; then
+    echo "Could not find _config.yml. We may not be in the right place. Bailing."
+    exit 1
+  fi
+else
+  SOURCE="md_source"
+  if ! [ -d md_source ]; then
+    echo "Could not find md_source directory. We may not be running in the right place. Bailing."
+    exit 1
+  fi
+fi
+
+# Reasonable default to find the Markdown files
 if [ -z "$SOURCE" ]; then
   echo "No source passed in, assuming md_source/..."
   SOURCE="md_source"
 fi
+
+echo "Operating on contents of $SOURCE"
+
+# Parse some variables from _config.yml and make them available to this script
+# This only finds top-level variables with _version in them that don't have any
+# leading space. This is brittle!
 
 while read i; do
   # Store the key as a variable name and the value as the variable value
@@ -25,13 +64,12 @@ while read i; do
 done < <(cat ${SOURCE}/_config.yml |grep '_version:' |grep '^[a-z].*')
 
 # Replace variable in toc.yml with value from above
-#echo "Replacing the string 'site.latest_stable_docker_engine_api_version' in _data/toc.yml with $latest_stable_docker_engine_api_version"
-sed -i "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" ${SOURCE}/_data/toc.yaml
+sedi "s/{{ site.latest_stable_docker_engine_api_version }}/$latest_stable_docker_engine_api_version/g" ${SOURCE}/_data/toc.yaml
 
 # Engine stable
 ENGINE_SVN_BRANCH="branches/17.12"
 ENGINE_BRANCH="17.12"
-ENGINE_EDGE_BRANCH="18.01"
+ENGINE_EDGE_BRANCH="18.02"
 
 # Distribution
 DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
@@ -100,13 +138,14 @@ wget -O ${SOURCE}/engine/api/v1.27/swagger.yaml https://raw.githubusercontent.co
 # directory into a new one in the docs git and change the index.html
 wget -O ${SOURCE}/engine/api/v1.28/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.04.0-ce/api/swagger.yaml || (echo "Failed 1.28 swagger download or the 1.28 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.29/swagger.yaml https://raw.githubusercontent.com/docker/docker/17.05.x/api/swagger.yaml || (echo "Failed 1.29 swagger download or the 1.29 directory doesn't exist" && exit -1)
-# New location for swagger.yaml for 17.06
+# New location for swagger.yaml for 17.06+
 wget -O ${SOURCE}/engine/api/v1.30/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.06/components/engine/api/swagger.yaml || (echo "Failed 1.30 swagger download or the 1.30 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.31/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.07/components/engine/api/swagger.yaml || (echo "Failed 1.31 swagger download or the 1.31 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.32/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.09/components/engine/api/swagger.yaml || (echo "Failed 1.32 swagger download or the 1.32 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.33/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.10/components/engine/api/swagger.yaml || (echo "Failed 1.33 swagger download or the 1.33 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.34/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.11/components/engine/api/swagger.yaml || (echo "Failed 1.34 swagger download or the 1.34 directory doesn't exist" && exit -1)
 wget -O ${SOURCE}/engine/api/v1.35/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/17.12/components/engine/api/swagger.yaml || (echo "Failed 1.35 swagger download or the 1.35 directory doesn't exist" && exit -1)
+wget -O ${SOURCE}/engine/api/v1.36/swagger.yaml https://raw.githubusercontent.com/docker/docker-ce/18.02/components/engine/api/swagger.yaml || (echo "Failed 1.36 swagger download or the 1.36 directory doesn't exist" && exit -1)
 
 # Get dockerd.md for stable and edge, from upstream
 wget -O ${SOURCE}/engine/reference/commandline/dockerd.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/commandline/dockerd.md || (echo "Failed to fetch stable dockerd.md" && exit -1)
@@ -114,7 +153,7 @@ wget -O ${SOURCE}/edge/engine/reference/commandline/dockerd.md https://raw.githu
 
 # Add an admonition to the edge dockerd file
 EDGE_DOCKERD_INCLUDE='{% include edge_only.md section=\"dockerd\" %}'
-sed -i "s/^#\ daemon/${EDGE_DOCKERD_INCLUDE}/1" ${SOURCE}/edge/engine/reference/commandline/dockerd.md
+sedi "s/^#\ daemon/${EDGE_DOCKERD_INCLUDE}/1" ${SOURCE}/edge/engine/reference/commandline/dockerd.md
 
 # Get a few one-off files that we use directly from upstream
 wget -O ${SOURCE}/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker-ce/"$ENGINE_BRANCH"/components/cli/docs/reference/builder.md || (echo "Failed engine/reference/builder.md download" && exit -1)

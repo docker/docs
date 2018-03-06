@@ -184,7 +184,7 @@ If you had DTR configured to store images on the local filesystem, you can
 extract your backup:
 
 ```none
-sudo tar -xzf {{ image_backup_file }} -C /var/lib/docker/volumes
+sudo tar -xf {{ image_backup_file }} -C /
 ```
 
 If you're using a different storage backend, follow the best practices

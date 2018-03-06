@@ -16,12 +16,12 @@ have Docker Engine installed either locally or remote, depending on your setup.
 included as part of those desktop installs.
 
 - On Linux systems, first install the
-[Docker](/engine/installation/index.md#server){: target="_blank" class="_"}
+[Docker](/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/installation/linux/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](/install/linux/linux-postinstall.md).
 
 ## Install Compose
 
@@ -58,15 +58,21 @@ install Compose separately. Docker install instructions for these are here:
 * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
 
 **If you are running the Docker daemon and client directly on Microsoft
-Windows Server 2016** (with [Docker EE for Windows Server 2016](/engine/installation/windows/docker-ee.md), you _do_ need to install
+Windows Server 2016** (with [Docker EE for Windows Server 2016](/install/windows/docker-ee.md), you _do_ need to install
 Docker Compose. To do so, follow these steps:
 
 1.  Start an "elevated" PowerShell (run it as administrator).
     Search for PowerShell, right-click, and choose
     **Run as administrator**. When asked if you want to allow this app
     to make changes to your device, click **Yes**.
+    
+    In Powershell, since Github now requires TLS1.2, run the following:
+    
+    ```none  
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    ```
 
-    In PowerShell, run the following command to download
+    Then run the following command to download
     Docker Compose, replacing `$dockerComposeVersion` with the specific
     version of Compose you want to use:
 
@@ -216,7 +222,7 @@ Alternatively, if you're not worried about keeping them, you can remove them.
 Compose just creates new ones.
 
 ```bash
-docker rm -f -v myapp_web_1 myapp_db_1 ...
+docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation

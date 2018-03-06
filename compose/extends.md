@@ -326,8 +326,10 @@ For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
       - "4000"
       - "5000"
 
-In the case of `environment`, `labels`, `volumes` and `devices`, Compose
-"merges" entries together with locally-defined values taking precedence:
+In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
+"merges" entries together with locally-defined values taking precedence. For
+`environment` and `labels`, the environment variable or label name determines
+which value is used:
 
     # original service
     environment:
@@ -345,6 +347,24 @@ In the case of `environment`, `labels`, `volumes` and `devices`, Compose
       - BAR=local
       - BAZ=local
 
+Entries for `volumes` and `devices` are merged using the mount path in the
+container:
+
+    # original service
+    volumes:
+      - ./original:/foo
+      - ./original:/bar
+
+    # local service
+    volumes:
+      - ./local:/bar
+      - ./local:/baz
+
+    # result
+    volumes:
+      - ./original:/foo
+      - ./local:/bar
+      - ./local:/baz
 
 
 

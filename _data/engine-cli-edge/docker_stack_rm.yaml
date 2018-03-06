@@ -65,6 +65,6 @@ deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: false
-swarm: false
+kubernetes: true
+swarm: true
 

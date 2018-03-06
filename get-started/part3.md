@@ -15,7 +15,7 @@ Windows](/docker-for-windows/index.md) it's pre-installed, so you're good-to-go.
 On Linux systems you need to [install it
 directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
 _without Hyper-V_, use [Docker
-Toolbox](https://docs.docker.com/toolbox/overview.md).
+Toolbox](/toolbox/overview.md).
 
 - Read the orientation in [Part 1](index.md).
 

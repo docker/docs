@@ -1,4 +1,3 @@
-
 ---
 advisory: toolbox
 description: How to install Toolbox on Mac

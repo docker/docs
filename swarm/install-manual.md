@@ -109,7 +109,7 @@ To create the instances do the following:
 
 ## Step 3. Install Engine on each node
 
-1.  [Install Docker](/engine/installation/){: target="_blank" class="_"} on each
+1.  [Install Docker](/install/){: target="_blank" class="_"} on each
     host, using the appropriate instructions for your operating system and
     distribution.
 
@@ -268,7 +268,7 @@ replica.
 
 3. Shut down the primary manager, replacing `<id_name>` with the container's id or name (for example, "8862717fe6d3" or "trusting_lamarr").
 
-        docker rm -f <id_name>
+        docker container rm -f <id_name>
 
 4. Start the swarm manager. For example:
 

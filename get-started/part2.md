@@ -181,7 +181,7 @@ docker build -t friendlyhello .
 Where is your built image? It's in your machine's local Docker image registry:
 
 ```shell
-$ docker images
+$ docker image ls
 
 REPOSITORY            TAG                 IMAGE ID
 friendlyhello         latest              326387cea398
@@ -310,11 +310,12 @@ For example:
 docker tag friendlyhello john/get-started:part2
 ```
 
-Run [docker images](/engine/reference/commandline/images/) to see your newly
-tagged image. (You can also use `docker image ls`.)
+Run [docker image ls](/engine/reference/commandline/image_ls/) to see your newly
+tagged image.
 
 ```shell
-$ docker images
+$ docker image ls
+
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
 john/get-started         part2               d9e555c53008        3 minutes ago       195MB

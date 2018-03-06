@@ -4,18 +4,20 @@ keywords: Docker, docker, scan, scanning, security, registry, plans, Docker Clou
 title: Docker Security Scanning
 ---
 
+> **The Docker Security Scanning preview service will end on March 31st, 2018, for private repos (not official repos) in both Docker Cloud and Docker Hub. Until then, scanning in private repos is limited to one scan per day on the “latest” tag.**
+
 Docker Cloud and Docker Hub can scan images in private repositories to verify
 that they are free from known security vulnerabilities or exposures, and report
 the results of the scan for each image tag.
 
-> **Note**: Docker Security Scanning uses an older user interface style on Docker Hub, and looks a little different than the images in this document.
+On Docker Hub, Docker Security Scanning looks a little different than the images
+in this document.
 
 ![Scanned results](images/scan-view.png)
 
 Docker Security Scanning is available as an add-on to Docker hosted private
 repositories on both Docker Cloud and Docker Hub. The feature is available as a
-free preview for private repository subscribers for a limited time. You can
-opt-in to begin using the service from the Plan page.
+free preview for private repository subscribers for a limited time.
 
 During the free period, Docker Security Scanning scans the three most recently
 updated tags in each of your private repositories. You can push an update to an
@@ -23,24 +25,6 @@ older tag to trigger a scan. The scan runs on each new image push, and updates
 the scan results when new information comes in from the CVE databases.
 
 You can also view scan results for Official Images on Docker Hub if you are logged in.
-
-## Opt in to Docker Security Scanning
-
-To opt in:
-
-1. Log in to Docker Cloud or Docker Hub.
-
-2. Go to the **Plan** details for your account.
-
-    On Docker Cloud these are located in the **Cloud Settings** in the lower left. On Docker Hub, these are in the **Billing and Plans** tab of the **Settings** menu.
-
-3. Check **Monitor with Docker Security Scanning** to add the service to your plan.
-
-    ![Security scanning checkbox](images/scan-enable.png)
-
-The scanning process begins immediately for the three most recent tags in each
-of your private repositories. The scan results should be available within 48
-hours at most.
 
 ## View Docker Security Scanning results
 

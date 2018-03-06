@@ -11,6 +11,24 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](admin/upgrade.md),
 to upgrade your installation to the latest release.
 
+## Version 2.3.6
+
+(13 February 2018)
+
+**Security notice**
+
+The log driver is now disabled for containers started by backup and HA cluster
+join operations. This is a critical security fix for customers that rely on
+Docker Trusted Registry 2.2, 2.3 and 2.4 with a log driver to capture logs from
+all containers across the platform.
+
+Caution is advised when applying this update, make sure you redeploy DTR, and in
+the process you will create new credentials because the previous ones were
+potentially disclosed due to the vulnerability.
+
+Use the `--log-driver=none` option for `docker run` when running a DTR backup, HA
+cluster join or dumpcerts.
+
 ## 2.3.5
 
 (20 November 2017)

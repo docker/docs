@@ -64,7 +64,7 @@ For more about Stable and Edge channels, see the
 
 * Legacy (`.msi`) installers are available for [Edge](https://download.docker.com/win/edge/InstallDocker.msi) and [Stable](https://download.docker.com/win/stable/InstallDocker.msi) channels.
 
-* The Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/engine/installation/windows/docker-ee.md). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/engine/installation/index.md).
+* Docker for Windows is designed to configure Docker development environments on Windows 10 and on Windows Server 2016. You can develop both Docker Linux containers and Docker Windows containers with Docker for Windows. To run Docker Windows containers in production, see instructions for [installing Docker EE on Windows Server 2016](/install/windows/docker-ee.md). To run Docker Linux containers in production, see [instructions for installing Docker on Linux](/install/index.md).
 
 * Docker for Windows requires 64bit Windows 10 Pro with Hyper-V available. See [What to know before you install](/docker-for-windows/install.md#what-to-know-before-you-install) for a full list
 of prerequisites.

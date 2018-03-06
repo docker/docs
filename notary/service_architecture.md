@@ -12,7 +12,7 @@ This document assumes familiarity with
 [The Update Framework](https://www.theupdateframework.com/){:target="_blank" class="_"},
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
-!TUF Key Hierarchy[](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
+![TUF Key Hierarchy](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
 
 - The root key is the root of all trust. It signs the
   [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" class="_"},
@@ -69,7 +69,7 @@ for multiple trusted collections in an associated database, and a Notary signer,
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
 
-![Notary Service Architecture Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/service-architecture.svg)
+![Notary Service Architecture Diagram](/notary/images/service-architecture.svg)
 
 Root, targets, and (sometimes) snapshot metadata are generated and signed by
 clients, who upload the metadata to the Notary server. The server is

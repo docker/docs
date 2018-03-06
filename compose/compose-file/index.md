@@ -331,6 +331,18 @@ a [byte value](#specifying-byte-values).
       context: .
       shm_size: 10000000
 
+#### target
+
+> Added in [version 3.4](compose-versioning.md#version-34) file format
+
+Build the specified stage as defined inside the `Dockerfile`. See the
+[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
+details.
+
+      build:
+        context: .
+        target: prod
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
@@ -726,7 +738,10 @@ Configures if and how to restart containers when they exit. Replaces
 - `delay`: How long to wait between restart attempts, specified as a
   [duration](#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving
-  up (default: never give up).
+  up (default: never give up). If the restart does not succeed within the configured 
+  `window`, this attempt doesn't count toward the configured `max_attempts` value. 
+  For example, if `max_attempts` is set to '2', and the restart fails on the first
+  attempt, more than two restarts may be attempted.
 - `window`: How long to wait before deciding if a restart has succeeded,
   specified as a [duration](#specifying-durations) (default:
   decide immediately).
@@ -818,7 +833,7 @@ Express dependency between services, Service dependencies cause the following
 behaviors:
 
 - `docker-compose up` starts services in dependency order. In the following
-  example, `db` and `redis` is started before `web`.
+  example, `db` and `redis` are started before `web`.
 
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
@@ -883,7 +898,17 @@ Mount a temporary file system inside the container. Can be a single value or a l
 
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> with a (version 3-3.5) Compose file.
+
+> [Version 3.6 file format](compose-versioning.md#version-3) and up.
+
+Mount a temporary file system inside the container. Size parameter specifies the size
+of the tmpfs mount in bytes. Unlimited by default.
+
+     - type: tmpfs
+         target: /app
+         tmpfs:
+           size: 1000
 
 ### entrypoint
 
@@ -1663,7 +1688,8 @@ expressed in the short form.
 - `volume`: configure additional volume options
   - `nocopy`: flag to disable copying of data from a container when a volume is
     created
-
+- `tmpfs`: configure additional tmpfs options
+  - `size`: the size for the tmpfs mount in bytes
 
 ```none
 version: "3.2"

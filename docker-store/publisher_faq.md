@@ -119,7 +119,6 @@ Q4 '17.
 Not yet. ETA to present more than 2 plans is Q1 2018.
 
 ## Licensing, terms and conditions, and pricing
-> **Note**: Check out BYOL Document first! (@kickingthetv TBD)
 
 ### What options are presented to users to pull an image?
 

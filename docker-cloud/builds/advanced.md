@@ -19,6 +19,7 @@ processes and do not affect your service's run environment.
 * `SOURCE_COMMIT`: the SHA1 hash of the commit being tested.
 * `COMMIT_MSG`: the message from the commit being tested and built.
 * `DOCKER_REPO`: the name of the Docker repository being built.
+* `DOCKERFILE_PATH`: the dockerfile currently being built.
 * `CACHE_TAG`: the Docker repository tag being built.
 * `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`:`CACHE_TAG`.)
 
@@ -77,10 +78,10 @@ The following hooks are available:
 
 Docker Cloud allows you to define build environment variables either in the hook files, or from the automated build UI (which you can then reference in hooks).
 
-In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Cloud build settings. `$IMAGE_NAME` is a variable that we provide with the name of the image being built.
+In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Cloud build settings. `$DOCKERFILE_PATH` is a variable that we provide with the name of the Dockerfile we wish to build, and `$IMAGE_NAME` is the name of the image being built.
 
 ```none
-docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME .
+docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
 > **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build.md) command

@@ -2,6 +2,7 @@ name: Docker Documentation
 markdown: kramdown
 kramdown:
   input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
@@ -19,10 +20,10 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks"]
 # You can't have - characters in these for non-YAML reasons
 
 docker_ce_stable_version: "17.12"
-latest_stable_docker_engine_api_version: "1.35"
-docker_ce_edge_version: "18.01"
+latest_stable_docker_engine_api_version: "1.36"
+docker_ce_edge_version: "18.02"
 docker_ee_version: "17.06"
-compose_version: "1.18.0"
+compose_version: "1.19.0"
 machine_version: "0.13.0"
 distribution_version: "2.6"
 dtr_version: "2.4"
@@ -75,7 +76,7 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      defaultassignee: johndmulhausen
+      defaultassignee: gbarr01
       toc_min: 2
       toc_max: 3
       tree: true
@@ -96,10 +97,6 @@ defaults:
     values:
       assignee: "jimgalasyn"
   - scope:
-      path: "docker-cloud"
-    values:
-      assignee: "londoncalling"
-  - scope:
       path: "docker-for-mac"
     values:
       assignee: "gbarr01"
@@ -110,15 +107,14 @@ defaults:
   - scope:
       path: "docker-hub"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
       path: "docker-store"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
-      path: "engine"
+      path: "install"
     values:
-      assignee: "mistyhacks"
       win_latest_build: "docker-17.06.2-ee-6"
   - scope:
       path: "kitematic"
@@ -131,15 +127,11 @@ defaults:
   - scope:
       path: "notary"
     values:
-      assignee: "johndmulhausen"
+      assignee: "gbarr01"
   - scope:
       path: "registry"
     values:
       assignee: "joaofnfernandes"
-  - scope:
-      path: "swarm"
-    values:
-      assignee: "mistyhacks"
   - scope:
       path: "toolbox"
     values:
@@ -155,20 +147,20 @@ defaults:
     values:
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.4.1"
+      dtr_version: "2.4.2"
   - scope:
       path: "datacenter/dtr/2.3"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.3.5"
+      dtr_version: "2.3.6"
   - scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.10"
+      docker_image: "docker/dtr:2.2.11"
   - scope:
       path: "datacenter/dtr/2.1"
     values:
@@ -190,7 +182,7 @@ defaults:
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/ucp:2.1.6"
+      docker_image: "docker/ucp:2.1.7"
   - scope:
       path: "datacenter/ucp/2.0"
     values:

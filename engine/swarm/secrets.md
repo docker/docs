@@ -197,7 +197,7 @@ real-world example, continue to
     ```
 
 4.  Get the ID of the `redis` service task container using `docker ps` , so that
-    you can use `docker exec` to connect to the container and read the contents
+    you can use `docker container exec` to connect to the container and read the contents
     of the secret data file, which defaults to being readable by all and has the
     same name as the name of the secret. The first command below illustrates
     how to find the container ID, and the second and third commands use shell
@@ -208,12 +208,12 @@ real-world example, continue to
 
     5cb1c2348a59
 
-    $ docker exec $(docker ps --filter name=redis -q) ls -l /run/secrets
+    $ docker container exec $(docker ps --filter name=redis -q) ls -l /run/secrets
 
     total 4
     -r--r--r--    1 root     root            17 Dec 13 22:48 my_secret_data
 
-    $ docker exec $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
+    $ docker container exec $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
 
     This is a secret
     ```
@@ -257,7 +257,7 @@ real-world example, continue to
     `service update` command redeploys the service.
 
     ```none
-    $ docker exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
+    $ docker container exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
     ```
@@ -898,14 +898,14 @@ use it, then remove the old secret.
     uses shell expansion to do it all in a single step.
 
     ```bash
-    $ docker exec <CONTAINER_ID> \
+    $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
     **or**:
 
     ```bash
-    $ docker exec $(docker ps --filter name=mysql -q) \
+    $ docker container exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 

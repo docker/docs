@@ -1,6 +1,6 @@
 ---
 description: Getting Started
-keywords: mac, beta, edge, alpha, tutorial
+keywords: mac, edge, tutorial
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -37,13 +37,13 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and
 
 ```shell
 $ docker --version
-Docker version 17.03.0-ce, build 60ccb22
+Docker version {{ site.docker_ce_stable_version }}, build c97c6d6
 
 $ docker-compose --version
-docker-compose version 1.11.2, build dfed245
+docker-compose version {{ site.compose_version }}, build 8dd22a9
 
 $ docker-machine --version
-docker-machine version 0.10.0, build 76ed2a6
+docker-machine version {{ site.machine_version }}, build 9ba6da9
 ```
 
 > **Note**: The above is an example. Your output may differ if you are running
@@ -88,15 +88,15 @@ docker-machine version 0.10.0, build 76ed2a6
 
     The `nginx` webserver continues to run in the container on that port
     until you stop and/or remove the container. If you want to stop the
-    webserver, type: `docker stop webserver` and start it again with `docker
+    webserver, type: `docker container stop webserver` and start it again with `docker
     start webserver`. A stopped container does not show up with `docker ps`; for
     that, you need to run `docker ps -a`.
 
     To stop and remove the running container with a single command, type:
-    `docker rm -f webserver`. This removes the container, but not the
-    `nginx` image. You can list local images with `docker images`. You might
+    `docker container rm -f webserver`. This removes the container, but not the
+    `nginx` image. You can list local images with `docker image ls`. You might
     want to keep some images around so that you don't need to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
+    from Docker Hub. To remove an image you no longer need, use `docker image rm` followed by an image ID or image name. For example, `docker image rm nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
 
@@ -297,13 +297,14 @@ choose to discard or not apply changes when asked.
 
 ### Kubernetes
 
-**Kubernetes is only available in Docker for Mac 17.12 CE Edge.** Kubernetes
-support is not included in Docker for Mac 17.12 CE Stable. To find out
-more about Stable and Edge channels and how to switch between them, see
-[General configuration](/docker-for-mac/#general).
+**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge
+channel.** Kubernetes support is not included in Docker for Mac Stable releases.
+To find out more about Stable and Edge channels and how to switch between them,
+see [General configuration](/docker-for-mac/#general).
 
-Docker for Mac 17.12 CE Edge includes a standalone Kubernetes server that runs
-on your Mac, so that you can test deploying your Docker workloads on Kubernetes.
+Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
+that runs on your Mac, so that you can test deploying your Docker workloads on
+Kubernetes.
 
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and

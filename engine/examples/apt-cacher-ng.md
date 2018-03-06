@@ -116,6 +116,6 @@ instruction, and the image we built to run the service:
 Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
-    $ docker stop test_apt_cacher_ng
-    $ docker rm test_apt_cacher_ng
-    $ docker rmi eg_apt_cacher_ng
+    $ docker container stop test_apt_cacher_ng
+    $ docker container rm test_apt_cacher_ng
+    $ docker image rm eg_apt_cacher_ng

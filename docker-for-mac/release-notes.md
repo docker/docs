@@ -19,6 +19,12 @@ about both kinds of releases, and download stable and edge product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.12.0-ce-mac55 2018-02-27 (Stable)
+
+* Bug fixes and minor changes
+  - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
+  - Fix VPNKit proxy for docker.for.mac.http.internal.
+
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
 
 * Bug fixes and minor changes
@@ -513,6 +519,59 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Edge Release Notes
+
+### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
+
+* New
+  - VM Swap size can be changed in settings. See [docker/for-mac#2566](https://github.com/docker/for-mac/issues/2566), [docker/for-mac#2389](https://github.com/docker/for-mac/issues/2389)
+  - Support NFS Volume sharing. Also works in Kubernetes. 
+
+* Bug fixes and minor changes
+  - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. This change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
+  - DNS name `host.docker.internal` shoud be used for host resolution from containers. Older aliases (still valid) are deprecated in favor of this one. (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
+  - Kubernetes Load balanced services are no longer marked as `Pending`.
+  - Fix hostPath mounts in Kubernetes.
+  - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
+
+### Docker Community Edition 18.02.0-ce-mac53 2018-02-09 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
+  - [Docker compose 1.19.0](https://github.com/docker/compose/releases/tag/1.19.0)
+
+* Bug fixes and minor changes
+  - Fix update startup failure in some cases. 
+  - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
+  - Clearer error message when incompatible hardware is detected. Diagnostics are not proposed in the error popup in this case.
+
+### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
+  - [Docker compose 1.19.0-rc2](https://github.com/docker/compose/releases/tag/1.19.0-rc2)
+  - [Kubernetes 1.9.2](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v192). If you have Kubernetes enabled, the upgrade will be performed automatically when starting Docker for Mac.
+
+* Bug fixes and minor changes
+  - Fix Kubernetes-compose integration update that was causing startup failure. Fixes [docker/for-mac#2536](https://github.com/docker/for-mac/issues/2536)
+  - Fix some cases where selecting "Reset" after an error did not reset properly.
+  - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
+
+### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26 (Edge)
+
+ 
+* Upgrades
+  - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
+
+* Bug fixes and minor changes
+  - Added "Restart" menu item. See [docker/for-mac#2407](https://github.com/docker/for-mac/issues/2407)
+  - Keep any existing kubectl binary when activating Kubenetes in Docker for Mac, and restore it when disabling Kubernetes. Fixes [docker/for-mac#2508](https://github.com/docker/for-mac/issues/2508), [docker/for-mac#2368](https://github.com/docker/for-mac/issues/2368)
+  - Fix Kubernetes context selector. Fixes [docker/for-mac#2495](https://github.com/docker/for-mac/issues/2495)
 
 ### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
 
