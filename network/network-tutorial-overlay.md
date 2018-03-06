@@ -6,7 +6,7 @@ keywords: networking, bridge, routing, ports, swarm, overlay
 
 This series of tutorials deals with networking for swarm services.
 For networking with standalone containers, see
-[Networking with swarm services](network-tutorial-standalone.md). If you need to
+[Networking with standalone containers](network-tutorial-standalone.md). If you need to
 learn more about Docker networking in general, see the [overview](index.md).
 
 This topic includes four different tutorials. You can run each of them on
