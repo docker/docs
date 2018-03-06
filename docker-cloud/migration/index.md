@@ -6,9 +6,9 @@ title: Migrate Docker Cloud runtime apps
 
 ## Introduction
 
-<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down on 11 May. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms. Docker SaaS features are _not_ affected.**
+<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down on May 11. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms.**
 
-The Docker Cloud runtime, and _only_ the runtime, is being discontinued. This means that you must migrate your applications to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
+The services on Docker Cloud that provide node and swarm cluster management, and _only_ cluster management, are being discontinued. This means that you must migrate your applications to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
 
 - [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks){: target="_blank" class="_"}
@@ -28,8 +28,7 @@ Docker Cloud SaaS features stay! We are _not_ removing automated builds and regi
 
 - Deploy and manage applications with the Docker Cloud web UI
 - Authorize users in the Docker platform with their Docker ID
+- Automated testing
 - Autoredeploy your applications.
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
-
-While you will lose some features as part of the migration, you may be able to regain them elsewhere and even add advanced features that were not available as part of Docker Cloud.
