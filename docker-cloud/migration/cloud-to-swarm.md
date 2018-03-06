@@ -15,14 +15,14 @@ At a high level, migrating your Docker Cloud applications requires that you:
 - **Point** your application CNAMES to new service endpoints
 - **Test** the converted YAML stackfiles in the new environment
 - **Migrate** your applications from Docker Cloud to the new environment
--
+
 > The actual process of migrating -- switching customers from your Docker Cloud applications to Docker CE applications -- will vary by application and environment.
 
 To demonstrate, we use [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" class="_"}: we **build** a Docker CE swarm cluster target environment, **convert** the Cloud stackfile to a service stack format, and **test** the service stack file in swarm mode to ensure that it is safe to migrate.
 
 ## Voting-app example
 
-In the Docker Cloud stackfile, the voting app is defined as a stack of six microservices:
+In the [Docker Cloud stackfile](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/dockercloud.yml){: target="_blank" class="_"}, the voting app is defined as a stack of six microservices:
 
 - **vote**: Web front-end that displays voting options
 - **redis**: In-memory k/v store that collects votes

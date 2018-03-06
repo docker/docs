@@ -22,7 +22,7 @@ To complete this procedure you need:
 - Deregister your Swarm from Docker Cloud
 - Clean up old Docker Cloud resources.
 
-## Verify you can SSH to your Swarm
+## SSH to your Swarm
 
 It is vital that you can SSH to your Docker Cloud Swarm before you deregister it from Docker Cloud.
 

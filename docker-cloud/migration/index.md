@@ -6,7 +6,7 @@ title: Migrate Docker Cloud runtime apps
 
 ## Introduction
 
-<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down 11 May. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms. Docker SaaS features are _not_ affected.**
+<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down on 11 May. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms. Docker SaaS features are _not_ affected.**
 
 The Docker Cloud runtime, and _only_ the runtime, is being discontinued. This means that you must migrate your applications to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
 
