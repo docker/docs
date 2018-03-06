@@ -10,11 +10,11 @@ This page explains how to prepare your applications for migration from Docker Cl
 
 At a high level, migrating your Docker Cloud applications requires that you:
 
-- **Build** a target environment (Docker Swarm or Kubernetes cluster)
-- **Convert** your Docker Cloud YAML stackfiles
-- **Point** your application CNAMES to new service endpoints
-- **Test** the converted YAML stackfiles in the new environment
-- **Migrate** your applications from Docker Cloud to the new environment
+- **Build** a target environment (Docker Swarm or Kubernetes cluster).
+- **Convert** your Docker Cloud YAML stackfiles.
+- **Point** your application CNAMES to new service endpoints.
+- **Test** the converted YAML stackfiles in the new environment.
+- **Migrate** your applications from Docker Cloud to the new environment.
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to Docker CE applications -- will vary by application and environment.
 
@@ -43,12 +43,12 @@ The Docker Cloud stack is defined in [dockercloud.yml](https://raw.githubusercon
 To complete the migration from Docker Cloud to Docker Swarm on Docker CE, you need:
 
 - **Docker CE nodes** (in a public cloud or on-premises) organized as a swarm cluster
-- **SSH access** to the nodes in the swarm cluster.
+- **SSH access** to the nodes in the swarm cluster
 
 You _may_ also need the following application-specific things:
 
-- Permanent public IP and DNS **addresses** for nodes.
-- External **load balancers** configured to direct traffic to Docker CE nodes.
+- Permanent public IP and DNS **addresses** for nodes
+- External **load balancers** configured to direct traffic to Docker CE nodes
 
 ## Build target environment
 
@@ -58,14 +58,14 @@ To ensure high availability (HA) of the swarm control plane in production, you s
 
 ### Plan Docker CE nodes
 
-Planning and building your nodes is specific to your requirements, but includes such things as:
+Planning and building your nodes is specific to your requirements and may require that you:
 
-- Choosing a **platform** (cloud or on-premises) to host your Docker CE nodes.
-- Estimating **node size and spec** (your Docker Cloud nodes can be a guide)
-- Calculating the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
-- Deciding **node distribution** across availability zones for high availability (HA).
-- Ensuring **nodes can communicate** over the network and have stable resolvable DNS names.
-- Configuring **load balancers**.
+- Choose a **platform** (cloud or on-premises) to host your Docker CE nodes.
+- Estimate **node size and spec** (your Docker Cloud nodes can be a guide).
+- Calculate the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
+- Decide **node distribution** across availability zones for high availability (HA).
+- Ensure **nodes can communicate** over the network and have stable resolvable DNS names.
+- Configure **load balancers**.
 
 Your swarm cluster of Docker CE nodes should probably resemble your existing Docker Cloud node cluster. For example, if you currently have five managers and seven workers of a particular size and spec, in hosted availability zones, your target swarm cluster should probably match that.
 
@@ -497,10 +497,10 @@ If you had a CI/CD pipeline with automated tests and deployments for your Docker
 
 How you migrate your applications is unique to your environment and applications.
 
-- Plan with all developers and operations teams
-- Plan with customers
-- Plan with owners of other applications that interact with your Docker Cloud app
-- Plan a rollback strategy if problems occur
+- Plan with all developers and operations teams.
+- Plan with customers.
+- Plan with owners of other applications that interact with your Docker Cloud app.
+- Plan a rollback strategy if problems occur.
 
 Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
 

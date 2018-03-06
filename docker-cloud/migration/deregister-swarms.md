@@ -18,8 +18,8 @@ To complete this procedure you need:
 
 ### High-level steps
 
-- Verify that you can SSH to your Swarm nodes (on AWS and Azure)
-- Deregister your Swarm from Docker Cloud
+- Verify that you can SSH to your Swarm nodes (on AWS and Azure).
+- Deregister your Swarm from Docker Cloud.
 - Clean up old Docker Cloud resources.
 
 ## SSH to your Swarm

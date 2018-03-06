@@ -10,11 +10,11 @@ This page explains how to prepare your applications for migration from Docker Cl
 
 At a high level, migrating your Docker Cloud applications requires that you:
 
-- **Build** a target environment (Docker Swarm or Kubernetes cluster)
-- **Convert** your Docker Cloud YAML stackfiles
-- **Point** your application CNAMES to new service endpoints
-- **Test** the converted YAML stackfiles in the new environment
-- **Migrate** your applications from Docker Cloud to the new environment
+- **Build** a target environment (Docker Swarm or Kubernetes cluster).
+- **Convert** your Docker Cloud YAML stackfiles.
+- **Point** your application CNAMES to new service endpoints.
+- **Test** the converted YAML stackfiles in the new environment.
+- **Migrate** your applications from Docker Cloud to the new environment.
 
 > The actual process of migrating -- switching customers from your Docker Cloud applications to AKS applications -- will vary by application and environment.
 
@@ -47,8 +47,8 @@ Azure Container Service (AKS) is a managed Kubernetes service. Azure takes care 
 
 High-level steps to build a working AKS cluster are:
 
-1.  Register your application
-2.  Deploy an AKS cluster
+1.  Register your application.
+2.  Deploy an AKS cluster.
 3.  Connect to the AKS cluster.
 
 ### Register your application
@@ -770,10 +770,10 @@ If you had a CI/CD pipeline with automated tests and deployments for your Docker
 
 How you migrate your applications is unique to your environment and applications.
 
-- Plan with all developers and operations teams
-- Plan with customers
-- Plan with owners of other applications that interact with your Docker Cloud app
-- Plan a rollback strategy if problems occur
+- Plan with all developers and operations teams.
+- Plan with customers.
+- Plan with owners of other applications that interact with your Docker Cloud app.
+- Plan a rollback strategy if problems occur.
 
 Once your migration is in process, check that the everything is working as expected. Ensure that users are hitting the new application on the Docker CE infrastructure and getting expected results.
 
