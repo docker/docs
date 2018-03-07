@@ -198,7 +198,7 @@ To enable IPv6 on the Docker daemon, see
 
 Docker cannot run correctly if your kernel is older than version 3.10 or if it
 is missing some modules. To check kernel compatibility, you can download and
-run the [`check-compatibility.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
+run the [`check-config.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
 script.
 
 ```bash
