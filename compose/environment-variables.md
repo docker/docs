@@ -126,10 +126,16 @@ services:
     image: 'webapp:v2.0'
 ```
 
-When values are provided both with a shell `environment` variable and with an
-`env_file` configuration file, values of environment variables is taken
-from environment key first and then from environment file, then from a
-`Dockerfile` `ENV`–entry:
+When you set the same environment variable in multiple files, here's the
+priority used by Compose to choose which value to use:
+
+1. Compose file,
+2. Environment file,
+3. Dockerfile,
+4. Variable is not defined.
+
+In the example below, we set the same environment variable on an Environment
+file, and the Compose file:
 
 ```bash
 $ cat ./Docker/api/api.env
@@ -146,8 +152,8 @@ services:
      - NODE_ENV=production
 ```
 
-You can test this with a command like the following command that starts a
-_NodeJS_ container in the CLI:
+When you run the container, the environment variable defined in the Compose
+file takes precedence.
 
 ```bash
 $ docker-compose exec api node
