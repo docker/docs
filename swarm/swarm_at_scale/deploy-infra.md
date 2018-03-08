@@ -41,7 +41,7 @@ actual value.
 ## Task 1. Create the keystore server
 
 To enable a Docker container network and Swarm discovery, you must
-deploy (or supply) a key-value store.  As a discovery backend, the key-value store
+deploy (or supply) a key-value store. As a discovery backend, the key-value store
 maintains an up-to-date list of cluster members and shares that list with the
 Swarm manager. The Swarm manager uses this list to assign tasks to the nodes.
 
@@ -138,7 +138,7 @@ support the container network you create later.
    the manager. This is key for the manager when it connects to other machines
    in the cluster.
 
-4. Test your work by using displaying the Docker daemon logs from the host.
+4. Test your work by displaying the Docker daemon logs from the host.
 
    ```bash
    $ docker-machine ssh manager
@@ -427,7 +427,7 @@ commands below, notice the label you are applying to each node.
     The command is acting on the Swarm port, so it returns information about the
     entire cluster. You have a manager and no nodes.
 
-## Next Step
+## Next step
 
 Your key-value store, load balancer, and Swarm cluster infrastructure are up. You are
 ready to [build and run the voting application](deploy-app.md) on it.
