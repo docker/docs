@@ -47,8 +47,8 @@ To complete the migration from Docker Cloud to Docker CE in swarm mode, you need
 
 You _may_ also need the following application-specific things:
 
-- Permanent public IP and DNS **addresses** for nodes
-- External **load balancers** configured to direct traffic to Docker CE nodes
+- **Permanent public IP addresses and hostnames** for nodes
+- **External load balancers** configured to direct traffic to Docker CE nodes
 
 ## Build target environment
 
@@ -64,7 +64,7 @@ How you plan and build your nodes will depend on your application requirements, 
 - Estimate **node size and spec** (your Docker Cloud nodes can be a guide).
 - Calculate the **number of nodes** for managers and workers (manager HA requires 3/5/7 managers).
 - Decide **node distribution** across availability zones for high availability (HA).
-- Ensure **nodes can communicate** over the network and have stable resolvable DNS names.
+- Ensure **nodes can communicate** over the network and have stable resolvable hostnames.
 - Configure **load balancers**.
 
 Your swarm cluster of Docker CE nodes should probably resemble your existing Docker Cloud node cluster. For example, if you currently have nodes of a particular size and spec, in hosted availability zones, your target swarm cluster should probably match that.

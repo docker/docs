@@ -1,7 +1,7 @@
 ---
 description: Migrating from Docker Cloud
 keywords: cloud, migration
-title: Migrate Docker Cloud runtime apps
+title: Migration overview
 ---
 
 ## Introduction

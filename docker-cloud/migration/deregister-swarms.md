@@ -26,13 +26,13 @@ To complete this procedure you need:
 
 It is vital that you can SSH to your Docker Cloud Swarm before you deregister it from Docker Cloud.
 
-Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nodes, you must know the public IP addresses or public hostnames of your nodes. The simplest way to find this information is with the native AWS or Azure tools.
+Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nodes, you must know the public IP addresses or public DNS names of your nodes. The simplest way to find this information is with the native AWS or Azure tools.
 
 ### How to SSH to AWS nodes
 
 1.  Log on to the AWS console and open the **EC2 Dashboard** for the **region** that hosts your Swarm nodes.
 
-2.  Locate your instances and note their hostnames and IPs.
+2.  Locate your instances and note their DNS names and IPs.
 
     By default, AWS labels your Swarm nodes as _swarm-name_-worker or _swarm-name_-manager. For example, a Swarm called "prod-equus" in Docker Cloud, has manager and worker nodes in AWS labelled, "prod-equus-manager" and "prod-equus-worker" respectively.
 
@@ -44,7 +44,7 @@ Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nod
 
     - Private key = “awskey.pem”
     - Username = “docker”
-    - Public hostname = “ec2-34-244-56-42.eu-west-1.compute.amazonaws.com”
+    - Public DNS name = “ec2-34-244-56-42.eu-west-1.compute.amazonaws.com”
 
     ```
     $ ssh -i ./awskey.pem docker@ec2-34-244-56-42.eu-west-1.compute.amazonaws.com
@@ -56,7 +56,7 @@ Once you are certain that you are able to SSH to _all nodes_ in your Swarm, you 
 
 ### How to SSH to Azure nodes
 
-In Azure, you can only SSH to manager nodes because worker nodes do not get public IPs and public hostnames. If you need to log on to worker nodes, you can use your manager nodes as jump hosts.
+In Azure, you can only SSH to manager nodes because worker nodes do not get public IPs and public DNS names. If you need to log on to worker nodes, you can use your manager nodes as jump hosts.
 
 1.  Log on to the Azure portal and click **Resource groups**.
 
@@ -89,7 +89,7 @@ Once you are certain that you are able to SSH to the manager nodes in your Swarm
 
 > Proceed with caution
 >
-> Only deregister if you know the details of your Swarm nodes (cloud provider, public hostnames, public IP address, etc.) and you have verified that you can SSH to each node with your private key.
+> Only deregister if you know the details of your Swarm nodes (cloud provider, public DNS names, public IP address, etc.) and you have verified that you can SSH to each node with your private key.
 {: .warning}
 
 1.  Open the Docker Cloud web UI and click **Swarms**.
