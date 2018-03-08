@@ -28,11 +28,13 @@ It is vital that you can SSH to your Docker Cloud Swarm before you deregister it
 
 Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nodes, you must know the public IP addresses or public DNS names of your nodes. The simplest way to find this information is with the native AWS or Azure tools.
 
+> If you need to deploy new SSH keys, see [authorizedkeys](https://github.com/docker/dockercloud-authorizedkeys/blob/master/README.md){: target="_blank" class="_"} in GitHub.
+
 ### How to SSH to AWS nodes
 
 1.  Log on to the AWS console and open the **EC2 Dashboard** for the **region** that hosts your Swarm nodes.
 
-2.  Locate your instances and note their hostnames, DNS names, and IPs.
+2.  Locate your instances and note their DNS names and IPs.
 
     By default, AWS labels your Swarm nodes as _swarm-name_-worker or _swarm-name_-manager. For example, a Swarm called "prod-equus" in Docker Cloud, has manager and worker nodes in AWS labelled, "prod-equus-manager" and "prod-equus-worker" respectively.
 
@@ -77,7 +79,8 @@ In Azure, you can only SSH to manager nodes because worker nodes do not get publ
 
     > If you do not know which private key to use, you can see the public key under `SSHPUBLICKEY` in the **Outputs** section of the Deployment. You can compare this value to the contents of public keys you have on file.
 
-6.  Log on to your worker nodes by using your manager nodes as jump hosts.
+6.  Log on to your worker nodes by using your manager nodes as jump hosts. With
+    [SSH agent forwarding enabled](https://docs.docker.com/docker-for-azure/deploy/#connecting-to-your-linux-worker-nodes-using-ssh), SSH from the manager nodes to the workers nodes over the private network.
 
 Once you are certain that you are able to SSH to the manager nodes in your Swarm you can [deregister from Docker Cloud](#deregister-swarm-from-docker-cloud).
 

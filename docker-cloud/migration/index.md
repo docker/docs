@@ -28,7 +28,6 @@ Docker Cloud SaaS features stay! We are _not_ removing automated builds and regi
 
 - Deploy and manage applications with the Docker Cloud web UI.
 - Authorize users in the Docker platform with their Docker ID.
-- Automate testing.
 - Autoredeploy your applications.
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
