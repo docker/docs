@@ -18,7 +18,7 @@ The Docker Cloud runtime is being discontinued. This means that you will no long
 
 ## What stays the same
 
-**How users and external systems interact with your Docker applications**. Your Docker images, autobuilds, and overall application functionality, remains the same. For example, if your application uses a Docker image called `myorg/webfe:v3`, and publishes container port `80` to external port `80`, none of this changes.
+**How users and external systems interact with your Docker applications**. Your Docker images, autobuilds, automated tests, and overall application functionality remain the same. For example, if your application uses a Docker image called `myorg/webfe:v3`, and publishes container port `80` to external port `80`, none of this changes.
 
 Docker Cloud SaaS features stay! We are _not_ removing automated builds and registry storage services.
 

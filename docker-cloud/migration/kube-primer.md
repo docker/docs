@@ -70,13 +70,13 @@ The manifest file (usually written in YAML) tells Kubernetes everything it needs
 
 In the Docker world, the atomic unit of deployment is the _Docker container_. In the Kubernetes world, it is the _Pod_. If you already understand containers, you can think of a **[Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/){: target="_blank" class="_"}** as one or more related containers. For the most part, Pods have a single container and are almost analogous to a container.
 
-A Kubernetes **[Service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}** is an object abstraction that sits in front of a set of Pods and provides a static virtual IP address and DNS name. These VIPs are used for stable access to Pods.
+A Kubernetes **[Service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}** is an object abstraction that sits in front of a set of Pods and provides a static virtual IP (VIP) address and DNS name. The main purpose of a Kubernetes Service is to provide stable networking for groups of Pods.
 
-Kubernetes Services can also be used to provision cloud-native load-balancers and provide powerful load-balancing of requests coming in to the cluster from external sources. Examples include integration with native load-balancers on AWS, Azure, and GCP.
+Kubernetes Services can also be used to provision cloud-native load balancers and provide load balancing of requests coming in to the cluster from external sources. Examples include integration with native load balancers on AWS, Azure, and GCP.
 
 ### Deployments
 
-Docker has a higher level construct called a _Docker service_ (different from a Kubernetes Service) that wraps around a container and adds things such as scalability and rolling updates. Kubernetes also has a higher level construct called a _Deployment_. A Kubernetes **[Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}** is a "controller" that wraps around a Pod and adds things such as scalability, rolling updates, and simple rollbacks.
+Docker has a higher level construct called a _Docker service_ (different from a Kubernetes Service) that wraps around a container and adds things such as scalability and rolling updates. Kubernetes also has a higher level construct called a _Deployment_. A Kubernetes **[Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}** is a "controller" that wraps around a set of Pods and adds things such as scalability, rolling updates, and simple rollbacks.
 
 The diagram below shows a Service object providing a DNS name and stable IP for a Deployment of 4 Pods.
 
@@ -111,7 +111,7 @@ Some other useful `kubectl` commands include:
 Below is a simple Kubernetes manifest file containing a Deployment and a Service.
 
 - The Deployment lists everything about the app, including how many Pod replicas to deploy, and the spec of the Pods to be deployed.
-- The Service defines an external load-balancer that listens on port 80 and load-balances traffic across all ports with the "app=vote" label.
+- The Service defines an external load balancer that listens on port 80 and load-balances traffic across all ports with the "app=vote" label.
 
 Everything in Kubernetes is loosely connected with labels. The three blue boxes show the **[labels and label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/){: target="_blank" class="_"}** that connect the service to the Pods, and the Pods to the Deployment.
 

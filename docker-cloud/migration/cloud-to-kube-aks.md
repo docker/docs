@@ -49,13 +49,17 @@ Azure Container Service (AKS) is a managed Kubernetes service. Azure takes care 
 
 High-level steps to build a working AKS cluster are:
 
-1.  Register your application.
-2.  Deploy an AKS cluster.
+1.  Generate credentials to register AKS with Azure AD.
+2.  Deploy an AKS cluster (and register with Azure AD).
 3.  Connect to the AKS cluster.
 
-### Register your application
+### Generate AD registration credentials
 
-Currently, AKS needs to be manually registered with Azure Active Directory so that it can receive security tokens and integrate with secure sign-on and authorization.
+Currently, AKS needs to be manually registered with Azure Active Directory (AD) so that it can receive security tokens and integrate with secure sign-on and authorization.
+
+> _When you register an [Azure AD "application"](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-application-objects){: target="_blank" class="_"}_ _in the Azure portal, two objects are created in your Azure AD tenant: an application object, and a service principal object._
+
+The following steps create the registration and output the credentials required to register AKS when deploying a cluster.
 
 1.  Log in to the [Azure portal](https://portal.azure.com){: target="_blank" class="_"}.
 2.  Click **Azure Active Directory** > **App registrations** > **New application registration**.
@@ -66,7 +70,7 @@ Currently, AKS needs to be manually registered with Azure Active Directory so th
 7.  Click **Save**.
 8.  Copy and save the **Value** (this your **Service principal client secret**, and also the only time you will see it, so don't lose it!).
 
-The application registration is now complete. Time to build the AKS cluster.
+You now have the credentials required to register AKS as part of the next section.
 
 ### Deploy an AKS cluster
 
@@ -169,7 +173,7 @@ You now have an AKS cluster and have configured `kubectl` to manage it. Let's lo
 
 ## Convert Docker Cloud stackfile
 
-**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}.**
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [k8s-vote.yml](#combined-manifest-k8s-vote.yml){: target="_blank" class="_"}.**
 
 To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
@@ -188,14 +192,14 @@ worker:
 
 Kubernetes applications are built from objects (such as [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/){: target="_blank" class="_"})
 and object abstractions (such as [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: target="_blank" class="_"}
-and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment spawns Pods. A Pod is a set of containers and also the smallest unit of work in Kubernetes.
+and [Services](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"}). For each _Docker service_ in our voting app stack, we create one Kubernetes Deployment and one _Kubernetes Service_. Each Kubernetes Deployment spawns Pods. A Pod represents one or more containers (usually one) and is the smallest unit of work in Kubernetes.
 
 > A [Docker serivce](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/){: target="_blank" class="_"} is one component of an application that is generated from one image.
 > A [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/){: target="_blank" class="_"} is a networking construct that load balances Pods behind a proxy.
 
 A Kubernetes Deployment defines the application "service" -- which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define rolling updates, rollbacks, and other advanced features.
 
-A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP for accessing the Pods, and also create cloud-native load balancers.
+A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP (VIP) for accessing the Pods, and also create cloud-native load balancers.
 
 This diagram shows four Pods deployed as part of a single Deployment. Each Pod is labeled as “app=vote”. The Deployment has a label selector, “app=vote”, and this combination of labels and label selector is what allows the Deployment object to manage Pods (create, terminate, scale, update, roll back, and so on). Likewise, the Service object selects Pods on the same label (“app-vote”) which allows the service to provide a stable network abstraction (IP and DNS name) for the Pods.
 
@@ -319,7 +323,7 @@ spec:
 
 Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also sets the `labels` for the Pods to the same value ("app=redis") as the Deployment’s label selector to tie the two together.
 
-The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port`; and the Pod listens on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
+The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
 
 The diagram shows traffic intended for `tcp://redis:6379` being sent to the redis Service and then load balanced across all Pods that match the Service label selector.
 
@@ -331,7 +335,7 @@ The Docker Cloud stackfile defines an `lb` service to  balance traffic to the vo
 
 ### vote service
 
-The Docker Cloud stackfile defines an image, a restart policy, and a specific number containers (5) for the `vote` service. It also enables the Docker Cloud `autoredeploy` feature. We can tell that it listens on port 80 because the Docker Cloud `lb` service forwards traffic to it on port 80; we can also inspect its image.
+The Docker Cloud stackfile for the `vote` service defines an image, a restart policy, and a specific number of Pods (replicas: 5). It also enables the Docker Cloud `autoredeploy` feature. We can tell that it listens on port 80 because the Docker Cloud `lb` service forwards traffic to it on port 80; we can also inspect its image.
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
@@ -391,7 +395,7 @@ We define the Service as "type=loadbalancer". This creates a native Azure load b
 
 ### worker service
 
-Like the `vote` service, the `worker` service defines an image, a restart policy, and a specified number of containers (replicas). It also defines the Docker Cloud `autoredeploy` policy (which is not supported in AKS).
+Like the `vote` service, the `worker` service defines an image, a restart policy, and a specific number of Pods (replicas: 5). It also defines the Docker Cloud `autoredeploy` policy (which is not supported in AKS).
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
@@ -503,7 +507,7 @@ spec:
 
 The Deployment section defines the usual names, labels and container spec. The `result` Service (like the `vote` Service) defines a native Azure load balancer to distribute external traffic to the cluster on port 80.
 
-### Kubernetes manifest file
+### Combined manifest k8s-vote.yml
 
 You can combine all Deployments and Services in a single YAML file, or have individual YAML files per Docker Cloud service. The choice is yours, but it's usually easier to deploy and manage one file.
 

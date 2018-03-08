@@ -475,22 +475,6 @@ The following steps explain how to deploy your app from the **target** Docker Sw
 
 3.  Get more details about the stack and the services running as part of it.
 
-    ```
-    $ docker stack ps example-stack
-    ID                  NAME                    IMAGE                                          NODE                DESIREDSTATE       CURRENT STATE            ERROR                       PORTS
-    x3bwp962jupw        example-stack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    ymfaw93x7oe4        example-stack_db.1           postgres:9.4                                   node1               Running            Running 35 minutes ago
-    w35zadj7fs9i        example-stack_worker.1       dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
-    ukhutap9l1oi        example-stack_vote.1         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
-    qtv23fa4uam7        example-stack_result.1       dockersamples/examplevotingapp_result:latest   node1               Running            Running 35 minutes ago
-    yjhvjpf75tr4        example-stack_redis.1        redis:alpine                                   node1               Running            Running 35 minutes ago
-    0szg5x4wysk2        example-stack_worker.2       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    8kk849j1ozqv         \_ example-stack_worker.2   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
-    om6ga0ayozin        example-stack_vote.2         dockersamples/examplevotingapp_vote:latest     node1               Running            Running 35 minutes ago
-    skfu11dcp00r        example-stack_worker.3       dockersamples/examplevotingapp_worker:latest   node1               Running            Running 35 minutes ago
-    qbuu5l2r9ay7         \_ example-stack_worker.3   dockersamples/examplevotingapp_worker:latest   node1               Shutdown            Failed 35 minutes ago    "task: non-zero exit (1)"
-    ```
-
 4.  Test that the application works in your new environment.
 
     For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results. We exposed the `vote` service on port 5000, and the `result` service on port 5001. To connect to either of them, open a web browser and point it to the public IP or public DNS of any swarm node on the required port:

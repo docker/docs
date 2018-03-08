@@ -26,9 +26,7 @@ To complete this procedure you need:
 
 It is vital that you can SSH to your Docker Cloud Swarm before you deregister it from Docker Cloud.
 
-Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nodes, you must know the public IP addresses or public DNS names of your nodes. The simplest way to find this information is with the native AWS or Azure tools.
-
-> If you need to deploy new SSH keys, see [authorizedkeys](https://github.com/docker/dockercloud-authorizedkeys/blob/master/README.md){: target="_blank" class="_"} in GitHub.
+Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nodes, you must know the public IP addresses or hostnames of your nodes. The simplest way to find this information is with the native AWS or Azure tools.
 
 ### How to SSH to AWS nodes
 
@@ -54,10 +52,11 @@ Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nod
 
 Once you are certain that you are able to SSH to _all nodes_ in your Swarm, you can [deregister from Docker Cloud](#deregister-swarm-from-docker-cloud).
 
+> If you do not have the keys required to SSH on to your nodes, you can deploy new public keys to your nodes using [this procedure](https://github.com/docker/dockercloud-authorizedkeys/blob/master/README.md){: target="_blank" class="_"}. You should perform this operation before deregistering your Swarm from Docker Cloud.
 
 ### How to SSH to Azure nodes
 
-In Azure, you can only SSH to manager nodes because worker nodes do not get public IPs and public DNS names. If you need to log on to worker nodes, you can use your manager nodes as jump hosts.
+In Azure, you can only SSH to manager nodes because worker nodes do not get public IPs and hostnames. If you need to log on to worker nodes, you can use your manager nodes as jump hosts.
 
 1.  Log on to the Azure portal and click **Resource groups**.
 
@@ -83,6 +82,8 @@ In Azure, you can only SSH to manager nodes because worker nodes do not get publ
     [SSH agent forwarding enabled](https://docs.docker.com/docker-for-azure/deploy/#connecting-to-your-linux-worker-nodes-using-ssh), SSH from the manager nodes to the workers nodes over the private network.
 
 Once you are certain that you are able to SSH to the manager nodes in your Swarm you can [deregister from Docker Cloud](#deregister-swarm-from-docker-cloud).
+
+> If you do not have the keys required to SSH on to your nodes, you can deploy new public keys to your nodes using [this procedure](https://github.com/docker/dockercloud-authorizedkeys/blob/master/README.md){: target="_blank" class="_"}. You should perform this operation before deregistering your Swarm from Docker Cloud.
 
 ## Deregister swarm from Docker Cloud
 

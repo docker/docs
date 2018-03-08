@@ -169,7 +169,7 @@ You now have a GKE cluster and have configured `kubectl` to manage it. Let's loo
 
 ## Convert Docker Cloud stackfile
 
-**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [docker-stack.yml](https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml){: target="_blank" class="_"}.**
+**In the following sections, we discuss each service definition separately, but you should group them into one stackfile with the `.yml` extension, for example, [k8s-vote.yml](#combined-manifest-k8s-vote.yml){: target="_blank" class="_"}.**
 
 To prepare your applications for migration from Docker Cloud to Kubernetes, you must recreate your Docker Cloud stackfiles as Kubernetes _manifests_. Once you have each application converted, you can test and deploy. Like Docker Cloud stackfiles, Kubernetes manifests are YAML files but usually longer and more complex.
 
@@ -195,7 +195,7 @@ and [Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 A Kubernetes Deployment defines the application "service" -- which Docker image to use and the runtime instructions (which container ports to map and the container restart policy). The Deployment is also where you define rolling updates, rollbacks, and other advanced features.
 
-A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP for accessing the Pods, and also create cloud-native load balancers.
+A Kubernetes Service object is an abstraction that provides stable networking for a set of Pods. A Service is where you can register a cluster-wide DNS name and virtual IP (VIP) for accessing the Pods, and also create cloud-native load balancers.
 
 This diagram shows four Pods deployed as part of a single Deployment. Each Pod is labeled as “app=vote”. The Deployment has a label selector, “app=vote”, and this combination of labels and label selector is what allows the Deployment object to manage Pods (create, terminate, scale, update, roll back, and so on). Likewise, the Service object selects Pods on the same label (“app-vote”) which allows the service to provide a stable network abstraction (IP and DNS name) for the Pods.
 
@@ -319,7 +319,7 @@ spec:
 
 Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also sets the `labels` for the Pods to the same value ("app=redis") as the Deployment’s label selector to tie the two together.
 
-The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port`; and the Pod listens on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
+The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
 
 The diagram shows traffic intended for `tcp://redis:6379` being sent to the redis Service and then load balanced across all Pods that match the Service label selector.
 
@@ -331,7 +331,7 @@ The Docker Cloud stackfile defines an `lb` service to  balance traffic to the vo
 
 ### vote service
 
-The Docker Cloud stackfile defines an image, a restart policy, and a specific number containers (5) for the `vote` service. It also enables the Docker Cloud `autoredeploy` feature. We can tell that it listens on port 80 because the Docker Cloud `lb` service forwards traffic to it on port 80; we can also inspect its image.
+The Docker Cloud stackfile for the `vote` service defines an image, a restart policy, and a specific number of Pods (replicas: 5). It also enables the Docker Cloud `autoredeploy` feature. We can tell that it listens on port 80 because the Docker Cloud `lb` service forwards traffic to it on port 80; we can also inspect its image.
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
@@ -391,7 +391,7 @@ We define the Service as "type=loadbalancer". This creates a native GCP load bal
 
 ### worker service
 
-Like the `vote` service, the `worker` service defines an image, a restart policy, and a specified number of containers (replicas). It also defines the Docker Cloud `autoredeploy` policy (which is not supported in GKE).
+Like the `vote` service, the `worker` service defines an image, a restart policy, and a specific number of Pods (replicas: 5). It also defines the Docker Cloud `autoredeploy` policy (which is not supported in GKE).
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
 
@@ -503,7 +503,7 @@ spec:
 
 The Deployment section defines the usual names, labels and container spec. The `result` Service (like the `vote` Service) defines a GCP-native load balancer to distribute external traffic to the cluster on port 80.
 
-### Kubernetes manifest file
+### Combined manifest k8s-vote.yml
 
 You can combine all Deployments and Services in a single YAML file, or have individual YAML files per Docker Cloud service. The choice is yours, but it's usually easier to deploy and manage one file.
 
