@@ -32,7 +32,7 @@ All nodes in a swarm cluster must bind their Docker Engine daemons to a network
 port. This brings with it all of the usual network related security
 implications such as man-in-the-middle attacks. These risks are compounded when
  the network in question is untrusted such as the internet. To mitigate these
-risks, Swarm and the Engine support Transport Layer Security(TLS) for
+risks, Swarm and the Engine support Transport Layer Security (TLS) for
 authentication.
 
 The Engine daemons, including the swarm manager, that are configured to use TLS
@@ -58,11 +58,11 @@ configure your firewalls and other network access control lists.
     - **Inbound 80/tcp (HTTP)**. This allows `docker pull` commands to work. If you plan to pull images from Docker Hub, you must allow Internet connections through port 80.
     - **Inbound 2375/tcp**. This allows Docker Engine CLI commands direct to the Engine daemon.
     - **Inbound 3375/tcp**. This allows Engine CLI commands to the swarm manager.
-    - **Inbound 22/tcp**. This allows remote management via SSH
+    - **Inbound 22/tcp**. This allows remote management via SSH.
 - **Service Discovery**:
     - **Inbound 80/tcp (HTTP)**. This allows `docker pull` commands to work. If you plan to pull images from Docker Hub, you must allow Internet connections through port 80.
     - **Inbound *Discovery service port***. This needs setting to the port that the backend discovery service listens on (consul, etcd, or zookeeper).
-    - **Inbound 22/tcp**. This allows remote management via SSH
+    - **Inbound 22/tcp**. This allows remote management via SSH.
 - **Swarm nodes**:
     - **Inbound 80/tcp (HTTP)**. This allows `docker pull` commands to work. If you plan to pull images from Docker Hub, you must allow Internet connections through port 80.
     - **Inbound 2375/tcp**. This allows Engine CLI commands direct to the Docker daemon.
@@ -84,7 +84,7 @@ connections from interfaces on known swarm devices.
 If your swarm cluster is configured for TLS, replace `2375` with `2376`, and
 `3375` with `3376`.
 
-The ports listed above are just for swarm cluster operations  such as; cluster
+The ports listed above are just for swarm cluster operations such as cluster
 creation, cluster management, and scheduling of containers against the cluster.
  You may need to open additional network ports for application-related
 communications.
@@ -244,7 +244,7 @@ cost, but comes with world class commercial support from Red Hat.
 
 When choosing the production operating system to use with your swarm clusters,
 choose one that closely matches what you have used in development and staging
-environments. Although containers abstract much of the underlying OS,  some
+environments. Although containers abstract much of the underlying OS, some
 features have configuration requirements. For example, to use Docker container
 networking with Docker Engine 1.10 or higher, your host must have a Linux kernel
 that is version 3.10 or higher. Refer to the change logs to understand the
@@ -285,7 +285,7 @@ Or perhaps there is nothing to consider when it comes to scheduling strategy and
 
 -->
 
-Scheduling strategies are how Swarm decides which nodes on a cluster to start
+Scheduling strategies are how Swarm decides which nodes in a cluster to start
 containers on. Swarm supports the following strategies:
 
 - spread
