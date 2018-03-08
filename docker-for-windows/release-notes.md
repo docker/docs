@@ -21,6 +21,8 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.12.0-ce-win47 2018-01-12 (Stable)
 
+[Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
+
 * Bug fixes and minor changes
   - Fix linuxKit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
@@ -28,6 +30,8 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix icon displaying edge. Fixes [docker/for-win#1508](https://github.com/docker/for-win/issues/1508)
 
 ### Docker Community Edition 17.12.0-ce-win46 2018-01-09 (Stable)
+
+[Download](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -48,6 +52,8 @@ about both kinds of releases, and download stable and edge product installers at
   - Links in Update changelog now open the default browser instead of IE. (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
 ### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
+
+[Download](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
@@ -479,6 +485,8 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker Community Edition 18.03.0-ce-rc1-win54 2018-02-27 (Edge)
 
+[Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
 
@@ -498,6 +506,8 @@ We did not distribute a 1.12.4 stable release
   
 
 ### Docker Community Edition 18.02.0-ce-win52 2018-02-08 (Edge)
+
+[Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
@@ -533,6 +543,8 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker Community Edition 18.01.0-ce-win48 2018-01-19 (Edge)
 
+[Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
@@ -543,6 +555,8 @@ We did not distribute a 1.12.4 stable release
   - Fix Mount compatibility when mounting drives with `-v //c/...`, now mounted in /host_mnt/c in the LinuxKit VM. Fixes [docker/for-win#1509](https://github.com/docker/for-win/issues/1509), [docker/for-win#1516](https://github.com/docker/for-win/issues/1516), [docker/for-win#1497](https://github.com/docker/for-win/issues/1497)
 
 ### Docker Community Edition 17.12.0-ce-win45 2018-01-05 (Edge)
+
+[Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -580,6 +594,8 @@ We did not distribute a 1.12.4 stable release
   - Links in Update changelog open the default browser instead of IE (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
 ### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
+
+[Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
