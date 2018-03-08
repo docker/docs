@@ -20,7 +20,7 @@ These syntax rules apply to the `.env` file:
 
 ## Compose file and CLI variables
 
-The environment variables you define here is used for [variable
+The environment variables you define here are used for [variable
 substitution](compose-file/index.md#variable-substitution) in your Compose file,
 and can also be used to define the following [CLI
 variables](reference/envvars.md):
