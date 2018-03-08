@@ -367,7 +367,7 @@ vote:
 
 Again, the Docker Cloud version of the voting application publishes both the `result` and `vote` services on port 80 (where the `vote` service is made available on port 80 with the `lb` service).
 
-Docker Swarm only allows a single service to be published on a swarm-wide port. To get around this, we publish the `vote` service on port 5000 (as we did with the `result` service on port 5001).
+Docker Swarm only allows a single service to be published on a swarm-wide port (because in this example, we are in swarm mode and using the routing mesh option for network configuration). To get around this, we publish the `vote` service on port 5000 (as we did with the `result` service on port 5001).
 
 > For the difference between swarm mode (with ingress networking) and host mode, see [Use swarm mode routing mesh](/../../engine/swarm/ingress/).
 
@@ -444,8 +444,8 @@ worker:
 
 All of the settings mentioned here are application specific and may not be needed in your application.
 
-- `deploy.replicas` here are attached to two networks (frontend and backend) allowing them to communicate with services on either network.
-- `deploy.placement.constraints` ensure that replicas for this service always start on a manager node.
+- `networks` tells Docker to attach replicas to two networks (named "frontend" and "backend") allowing them to communicate with services on either one.
+- `deploy.placement.constraints` ensures that replicas for this service always start on a manager node.
 - `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code). It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
 
 ## Test converted stackfile
@@ -476,10 +476,10 @@ The following steps explain how to deploy your app from the **target** Docker Sw
 
 4.  Test that the application works in your new environment.
 
-    For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results. We exposed the `vote` service on port 5000, and the `result` service on port 5001. To connect to either of them, open a web browser and point it to the public IP or public DNS of any swarm node on the required port:
+    For example, the voting app exposes two web front-ends -- one for casting votes and the other for viewing results. We exposed the `vote` service on port 5000, and the `result` service on port 5001. To connect to either of them, open a web browser and point it to the public IP or public hostname of any swarm node on the required port:
 
-    - Go to <public-IP-or-DNS>:5000 and cast a vote.
-    - Go to <public-IP-or-DNS>:5001 and view the result of your vote.
+    - Go to <public-IP-or-hostname>:5000 and cast a vote.
+    - Go to <public-IP-or-hostname>:5001 and view the result of your vote.
 
 If you had a CI/CD pipeline with automated tests and deployments for your Docker Cloud stacks, you should build, test, and implement one for each application on Docker CE.
 

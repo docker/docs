@@ -134,7 +134,7 @@ The `gcloud` tool is the command-line tool for interacting with the Google Cloud
     $ gcloud components install kubectl
     ```
 
-    You can install 'kubectl' with or without `glcoud`. If you have `kubectl` already installed, ensure that the current context is correct:
+    You can install `kubectl` with or without `glcoud`. If you have `kubectl` already installed, ensure that the current context is correct:
 
     ```
     $ kubectl config get-context
@@ -251,7 +251,7 @@ spec:
 
 About the Kubernetes fields in general:
 
-- `apiVersion` sets the schema version for Kubernetes to use when managing the object. You should probably use a 1.8.x or 1.9.x version.
+- `apiVersion` sets the schema version for Kubernetes to use when managing the object.
 - `kind` defines the object type. In this example, we only define Deployments and Services but there are many others.
 - `metadata` assigns a name and set of labels to the object.
 - `spec` is where we configure the object. In a Deployment, `spec` defines the Pods to deploy.
@@ -319,7 +319,7 @@ spec:
 
 Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also sets the `labels` for the Pods to the same value ("app=redis") as the Deployment’s label selector to tie the two together.
 
-The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
+The Service object defines a cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
 
 The diagram shows traffic intended for `tcp://redis:6379` being sent to the redis Service and then load balanced across all Pods that match the Service label selector.
 
@@ -697,7 +697,7 @@ The following steps explain how to deploy your app from the Kubernetes manifest 
 > Run from a [Google Cloud Shell](https://cloud.google.com/shell/){: target="_blank" class="_"}
  or local terminal with `kubectl` configured to talk to your GKE cluster.
 
-1.  Verify that you shell/terminal is configured to talk to your GKE cluster. If the output matches your cluster, you're ready to proceed with the next steps.
+1.  Verify that your shell/terminal is configured to talk to your GKE cluster. If the output matches your cluster, you're ready to proceed with the next steps.
 
     ```
     $ kubectl get nodes

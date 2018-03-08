@@ -132,7 +132,7 @@ To connect to your AKS cluster from a local terminal:
     Downloading client to C:\Program Files (x86)\kubectl.exe from...
     ```
 
-    You can install 'kubectl' with or without `az`. If you have `kubectl` already installed, ensure that the current context is correct:
+    You can install `kubectl` with or without `az`. If you have `kubectl` already installed, ensure that the current context is correct:
 
     ```
     > kubectl config get-context
@@ -323,7 +323,7 @@ spec:
 
 Here, the Deployment object deploys a Pod from the `redis:alpine` image and sets the container port to `6379`. It also sets the `labels` for the Pods to the same value ("app=redis") as the Deployment’s label selector to tie the two together.
 
-The Service object defines cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
+The Service object defines a cluster-wide DNS mapping for the name "redis" on port 6379. This means that traffic for `tcp://redis:6379` is routed to this Service and is load balanced across all Pods on the cluster with the "app=redis" label. The Service is accessed on the cluster-wide `port` and forwards to the Pods on the `targetPort`. Again, the label-selector for the Service and the labels for the Pods are what tie the two together.
 
 The diagram shows traffic intended for `tcp://redis:6379` being sent to the redis Service and then load balanced across all Pods that match the Service label selector.
 
