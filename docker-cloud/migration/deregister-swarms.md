@@ -36,7 +36,7 @@ Your Docker Cloud Swarm runs on either AWS or Azure, so to SSH to your Swarm nod
 
     By default, AWS labels your Swarm nodes as _swarm-name_-worker or _swarm-name_-manager. For example, a Swarm called "prod-equus" in Docker Cloud, has manager and worker nodes in AWS labelled, "prod-equus-manager" and "prod-equus-worker" respectively.
 
-    You will also have a load balancer (type=classic) that includes the name of the Swarm. It accepts Docker commands on port 2376 and balances them to all nodes in the Swarm.
+    You will also have a load balancer (type=classic) that includes the name of the Swarm. It accepts Docker commands on port 2376 and balances them to the manager nodes in the Swarm (as the server proxy is only deployed on the managers).
 
 3.  Open an SSH session to each node in the cluster.
 
@@ -89,7 +89,7 @@ Once you are certain that you are able to SSH to the manager nodes in your Swarm
 
 > Proceed with caution
 >
-> Only deregister if you know the details of your Swarm nodes (cloud provider, public DNS, public IP address, etc.) and you have verified that you can SSH to each node with your private key.
+> Only deregister if you know the details of your Swarm nodes (cloud provider, public hostnames, public IP address, etc.) and you have verified that you can SSH to each node with your private key.
 {: .warning}
 
 1.  Open the Docker Cloud web UI and click **Swarms**.
