@@ -21,6 +21,8 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.12.0-ce-win47 2018-01-12 (Stable)
 
+[Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
+
 * Bug fixes and minor changes
   - Fix linuxKit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
@@ -28,6 +30,8 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix icon displaying edge. Fixes [docker/for-win#1508](https://github.com/docker/for-win/issues/1508)
 
 ### Docker Community Edition 17.12.0-ce-win46 2018-01-09 (Stable)
+
+[Download](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -49,16 +53,18 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
 
+[Download](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
   - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
-  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
 
 * Bug fixes and minor changes
   - Fix bug during Windows fast-startup process. Fixes [for-win/#953](https://github.com/docker/for-win/issues/953)
   - Fix uninstaller issue (in some specific cases dockerd process was not killed properly)
   - Fix Net Promoter Score Gui bug. Fixes [for-win/#1277](https://github.com/docker/for-win/issues/1277)
-  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)  
+  - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)
   - Increased timeout for VM boot startup to 2 minutes.
 
 
@@ -177,7 +183,7 @@ about both kinds of releases, and download stable and edge product installers at
 
 **Upgrades**
 
-- Security fix for CVE-2017-7308  
+- Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.03.0, 2017-03-02 (stable)
 
@@ -479,12 +485,14 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker Community Edition 18.03.0-ce-rc1-win54 2018-02-27 (Edge)
 
+[Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
 
 * New
-  - VM Swap size can be changed in settings. 
-  - Support NFS Volume sharing. Also works in Kubernetes. See [docker/for-win#1700](https://github.com/docker/for-win/issues/1700) 
+  - VM Swap size can be changed in settings.
+  - Support NFS Volume sharing. Also works in Kubernetes. See [docker/for-win#1700](https://github.com/docker/for-win/issues/1700)
   - Allow users to activate Windows container during installation (avoid vm disk creation and vm boot when working only on win containers). See [docker/for-win#217](https://github.com/docker/for-win/issues/217).
 
 * Bug fixes and minor changes
@@ -492,12 +500,14 @@ We did not distribute a 1.12.4 stable release
   - Fix Linuxkit start on Windows Insider. Fixes [docker/for-win#1458](https://github.com/docker/for-win/issues/1458), [docker/for-win#1514](https://github.com/docker/for-win/issues/1514), [docker/for-win#1640](https://github.com/docker/for-win/issues/1640)
   - Fix risk of privilege escalation. (https://www.tenable.com/sc-report-templates/microsoft-windows-unquoted-service-path-vulnerability)
   - All users present in the docker-users group are now able to use docker. Fixes [docker/for-win#1732](https://github.com/docker/for-win/issues/1732)
-  - Kubernetes Load balanced services are no longer marked as `Pending`. 
+  - Kubernetes Load balanced services are no longer marked as `Pending`.
   - Fix hostPath mounts in Kubernetes.
   - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
-  
+
 
 ### Docker Community Edition 18.02.0-ce-win52 2018-02-08 (Edge)
+
+[Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
@@ -533,6 +543,8 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker Community Edition 18.01.0-ce-win48 2018-01-19 (Edge)
 
+[Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
+
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
   - Linux Kernel 4.9.75
@@ -543,6 +555,8 @@ We did not distribute a 1.12.4 stable release
   - Fix Mount compatibility when mounting drives with `-v //c/...`, now mounted in /host_mnt/c in the LinuxKit VM. Fixes [docker/for-win#1509](https://github.com/docker/for-win/issues/1509), [docker/for-win#1516](https://github.com/docker/for-win/issues/1516), [docker/for-win#1497](https://github.com/docker/for-win/issues/1497)
 
 ### Docker Community Edition 17.12.0-ce-win45 2018-01-05 (Edge)
+
+[Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -580,6 +594,8 @@ We did not distribute a 1.12.4 stable release
   - Links in Update changelog open the default browser instead of IE (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
 ### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
+
+[Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
@@ -832,7 +848,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 **Upgrades**
 
-- Security fix for CVE-2017-7308  
+- Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.0.5-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
 
@@ -1645,8 +1661,8 @@ Unreleased. See Beta 23 for changes.
 * Fixes to the VPN mode
 * Fixed the localhost port forwarding performance issue
 * Auto-detect mounted/unmounted drive in the list of shares
-	- Changed the name of the application from "DockerforWindows" to "Docker for Windows"
-	- Avoid multiple update windows being displayed at the same time
+    - Changed the name of the application from "DockerforWindows" to "Docker for Windows"
+    - Avoid multiple update windows being displayed at the same time
 
 ### Beta 15 Release (2016-06-10 1.11.2-beta15)
 

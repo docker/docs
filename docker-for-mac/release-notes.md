@@ -21,11 +21,15 @@ about both kinds of releases, and download stable and edge product installers at
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27 (Stable)
 
+[Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
+
 * Bug fixes and minor changes
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
   - Fix VPNKit proxy for docker.for.mac.http.internal.
 
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
+
+[Download](https://download.docker.com/mac/stable/21805/Docker.dmg)
 
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
@@ -34,9 +38,11 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix using an HTTP proxy with authentication. Fixes [docker/for-mac#2386](https://github.com/docker/for-mac/issues/2386)
   - Allow HTTP proxy excludes to be written as .docker.com as well as *.docker.com
   - Allow individual IP addresses to be added to HTTP proxy excludes.
-  - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.  
+  - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
 
 ### Docker Community Edition 17.12.0-ce-mac47 2018-01-12 (Stable)
+
+[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
 
 * Bug fixes and minor changes
   - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
@@ -55,7 +61,7 @@ about both kinds of releases, and download stable and edge product installers at
 * New
   - VM entirely built with Linuxkit
   - VM disk size can be changed in disk preferences. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037))
-  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This improves disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.  
+  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This improves disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.
   Existing disks are kept in qcow format, if you want to switch to raw format you need to "Remove all data" or "Reset to factory defaults". See https://docs.docker.com/docker-for-mac/faqs/#disk-usage
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost. See  https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06.
 
@@ -75,7 +81,7 @@ about both kinds of releases, and download stable and edge product installers at
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
   - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
-  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)  
+  - [Docker Machine 0.13.0](https://github.com/docker/machine/releases/tag/v0.13.0)
 
 * Bug fixes and minor changes
   - Fix bug not allowing to move qcow disk in some cases.
@@ -101,7 +107,7 @@ about both kinds of releases, and download stable and edge product installers at
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
   - [Docker Compose 1.16.1](https://github.com/docker/compose/releases/tag/1.16.1)
-  - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
+  - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
   - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
   - Linux Kernel 4.9.49
   - AUFS 20170911
@@ -120,7 +126,7 @@ about both kinds of releases, and download stable and edge product installers at
   - Fix instability on High Sierra (docker/for-mac#2069, docker/for-mac#2062, docker/for-mac#2052, docker/for-mac#2029, docker/for-mac#2024)
   - Fix password encoding/decoding (docker/for-mac#2008, docker/for-mac#2016, docker/for-mac#1919, docker/for-mac#712, docker/for-mac#1220).
   - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
-  - Rotate logs in the VM more often  
+  - Rotate logs in the VM more often
   - VPNKit: change protocol to support error messages reported back from the server
   - VPNKit: fix a bug which causes a socket to leak if the corresponding TCP connection is idle
     for more than 5 minutes (related to [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
@@ -522,13 +528,14 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27 (Edge)
 
- 
+[Download](https://download.docker.com/mac/edge/23022/Docker.dmg)
+
 * Upgrades
   - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
 
 * New
   - VM Swap size can be changed in settings. See [docker/for-mac#2566](https://github.com/docker/for-mac/issues/2566), [docker/for-mac#2389](https://github.com/docker/for-mac/issues/2389)
-  - Support NFS Volume sharing. Also works in Kubernetes. 
+  - Support NFS Volume sharing. Also works in Kubernetes.
 
 * Bug fixes and minor changes
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. This change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
@@ -539,19 +546,21 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.02.0-ce-mac53 2018-02-09 (Edge)
 
- 
+[Download](https://download.docker.com/mac/edge/22617/Docker.dmg)
+
 * Upgrades
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
   - [Docker compose 1.19.0](https://github.com/docker/compose/releases/tag/1.19.0)
 
 * Bug fixes and minor changes
-  - Fix update startup failure in some cases. 
+  - Fix update startup failure in some cases.
   - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
   - Clearer error message when incompatible hardware is detected. Diagnostics are not proposed in the error popup in this case.
 
 ### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02 (Edge)
 
- 
+[Download](https://download.docker.com/mac/edge/22446/Docker.dmg)
+
 * Upgrades
   - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
   - [Docker compose 1.19.0-rc2](https://github.com/docker/compose/releases/tag/1.19.0-rc2)
@@ -564,7 +573,8 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26 (Edge)
 
- 
+[Download](https://download.docker.com/mac/edge/22256/Docker.dmg)
+
 * Upgrades
   - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
 
@@ -575,6 +585,7 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
 
+[Download](https://download.docker.com/mac/edge/22004/Docker.dmg)
 
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
@@ -593,11 +604,13 @@ events or unexpected unmounts.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
   - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
   - Separate internal ports used to proxy HTTP and HTTPS content.
-  - If kubectl was already installed before Docker For Mac, restore the existing kubectl when sitching Kubernetes off in Docker for Mac.  
+  - If kubectl was already installed before Docker For Mac, restore the existing kubectl when sitching Kubernetes off in Docker for Mac.
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
 
 
 ### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
+
+[Download](https://download.docker.com/mac/edge/21669/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -611,6 +624,8 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21 (Edge)
 
+[Download](https://download.docker.com/mac/edge/21438/Docker.dmg)
+
 * Upgrades
   - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
   - [Docker compose 1.18.0](https://github.com/docker/compose/releases/tag/1.18.0)
@@ -620,6 +635,8 @@ events or unexpected unmounts.
   - Fix more specific edge cases in filesharing settings migration.
 
 ### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
+
+[Download](https://download.docker.com/mac/edge/21270/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
@@ -646,6 +663,8 @@ events or unexpected unmounts.
 
 ### Docker Community Edition 17.11.0-ce-mac40 2017-11-22 (Edge)
 
+[Download](https://download.docker.com/mac/edge/20561/Docker.dmg)
+
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
 
@@ -660,11 +679,11 @@ events or unexpected unmounts.
   - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
 
 * New
-  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.  
-  Existing disks are kept in qcow format, if you want to switch to raw format you need to "Reset to factory defaults". To query the space usage of the file, use a command like:  
-  `$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`  
-  `$ ls -ls Docker.raw`  
-  `3944768 -rw-r--r--@ 1 user  staff  68719476736 Nov 16 11:19 Docker.raw`  
+  - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.
+  Existing disks are kept in qcow format, if you want to switch to raw format you need to "Reset to factory defaults". To query the space usage of the file, use a command like:
+  `$ cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/`
+  `$ ls -ls Docker.raw`
+  `3944768 -rw-r--r--@ 1 user  staff  68719476736 Nov 16 11:19 Docker.raw`
   The first number (`3944768`) is the allocated space in blocks; the larger number `68719476736` is the maximum total amount of space the file may consume in future in bytes.
 
 ### Docker Community Edition 17.11.0-ce-rc3-mac38 2017-11-09 (Edge)
@@ -687,6 +706,8 @@ events or unexpected unmounts.
 
 
 ### Docker Community Edition 17.10.0-ce-mac36 2017-10-24 (Edge)
+
+[Download](https://download.docker.com/mac/edge/19824/Docker.dmg)
 
 * Upgrades
   - [Docker 17.10.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce)
@@ -724,7 +745,7 @@ events or unexpected unmounts.
 
 * Bug fixes and minor changes
   - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
-  - Rotate logs in the VM more often  
+  - Rotate logs in the VM more often
 
 ### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07 (Edge)
 
@@ -787,7 +808,7 @@ TCP connection is idle for more than 5 minutes (related to
 
 - [Docker 17.07.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc1)
 - [Docker compose 1.15.0](https://github.com/docker/compose/releases/tag/1.15.0)
-- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)  
+- [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 - Linux Kernel 4.9.38
 
 **New**
