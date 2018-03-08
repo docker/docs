@@ -45,7 +45,7 @@ To complete the migration from Docker Cloud to Kubernetes on GKE, you need:
 
 ## Build target environment
 
-Google Kubernetes Engine (GKE) is a managed Kubernetes service on the Google Cloud Platform (GCP). It takes care of all of the Kubernetes control plane management (the master nodes)-- delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes -- how many, the size and spec, where to deploy them, etc.
+Google Kubernetes Engine (GKE) is a managed Kubernetes service on the Google Cloud Platform (GCP). It takes care of all of the Kubernetes control plane management (the master nodes) -- delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes -- how many, the size and spec, where to deploy them, etc.
 
 High-level steps to build a working GKE cluster are:
 
@@ -98,7 +98,7 @@ To build:
     - **Zone/Region:** The zone or region in which to deploy the cluster.
     - **Cluster version:** The Kubernetes version. You should probably use a 1.8.x or 1.9.x version.
     - **Machine type:** The type of GKE VM for the worker nodes. This should probably match your Docker Cloud node cluster.
-    - **Node image:** The OS to run on each Kubernetes worker node. Use Ubuntu if you require NFS, glusterfs, Sysdig, or Debian packages, otherwise use a [container-optimized OS](https://cloud.google.com/container-optimized-os/).
+    - **Node image:** The OS to run on each Kubernetes worker node. Use Ubuntu if you require NFS, glusterfs, Sysdig, or Debian packages, otherwise use a [COS (container-optimized OS)](https://cloud.google.com/container-optimized-os/).
     - **Size:** The number of _worker_ nodes that you want in the GKE cluster. It should probably match the _total_ number of nodes in your existing Docker Cloud node cluster (managers + workers).
 
     You should carefully consider the other configuration options; but most deployments should be OK with default values.

@@ -45,7 +45,7 @@ To complete the migration from Docker Cloud to Kubernetes on AKS, you need:
 
 ## Build target environment
 
-Azure Container Service (AKS) is a managed Kubernetes service. Azure takes care of all of the Kubernetes control plane management (the master nodes)-- delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes -- how many, the size and spec, where to deploy them, etc.
+Azure Container Service (AKS) is a managed Kubernetes service. Azure takes care of all of the Kubernetes control plane management (the master nodes) -- delivering the control plane APIs, managing control plane HA, managing control plane upgrades, etc. You only need to look after worker nodes -- how many, the size and spec, where to deploy them, etc.
 
 High-level steps to build a working AKS cluster are:
 

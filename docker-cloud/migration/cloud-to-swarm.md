@@ -84,9 +84,9 @@ Configuring a swarm cluster of Docker CE nodes involves the following high-level
 3.  _[optional] Add manager nodes (for HA)._
 4.  Add worker nodes.
 
-In this demo, we build a swarm cluster with three nodes (one manager and two workers), but you can add extra of both. For manager HA, create a minimum of three manager nodes. You can add as many workers as you like.
+In this demo, we build a swarm cluster with six nodes (3 managers/3 workers), but you can use more (or fewer, for example, 1 manager/2 workers). For manager HA, create a minimum of three manager nodes. You can add as many workers as you like.
 
-1.  Deploy three (or optionally more) nodes and install the latest version of [Docker CE](https://docs.docker.com/install/){: target="_blank" class="_"} on each.
+1.  Deploy six nodes and install the latest version of [Docker CE](https://docs.docker.com/install/){: target="_blank" class="_"} on each.
 
 2.  Initialize a swarm cluster from one node (that automatically becomes the first manager in the swarm):
 
@@ -110,21 +110,19 @@ In this demo, we build a swarm cluster with three nodes (one manager and two wor
 
     > Keep your join tokens safe and secure as bad people can join managers with them!
 
-5.  **[optional]** If you deployed extra nodes, you can add manager nodes with the _manager_ join token. Run on each node designated as a manager. The join token and network details will differ in your environment.
+5.  **[optional]** If you deployed six nodes, you can add two manager nodes with the _manager_ join token. Run the command on each node designated as a manager. The join token and network details will differ in your environment.
 
     ```
     $ docker swarm join --token <insert-manager-join-token> <IP-and-port>
     ```
 
-6.  Add two or more worker nodes with the _worker_ join token. Run on each node designated as a worker. The join token and network details will differ in your environment.
+6.  Add two or more worker nodes with the _worker_ join token. Run the command on each node designated as a worker. The join token and network details will differ in your environment.
 
     ```
     $ docker swarm join --token <insert-worker-join-token> <IP-and-port>
     ```
 
-7. List the nodes from one of the managers (if you have more than one) to verify the
-   status of the swarm. In the `MANAGER STATUS` column, manager nodes are either
-   "Leader" or "Reachable". Worker nodes are blank.
+7. List the nodes from one of the managers (if you have more than one) to verify the status of the swarm. In the `MANAGER STATUS` column, manager nodes are either "Leader" or "Reachable". Worker nodes are blank.
 
     ```
     $ docker node ls
@@ -230,7 +228,7 @@ Let's step through some fields:
 - `volumes` places the Postgres database on a named volume called **db-data** and mounts it into the service replica at `/var/lib/postgresql/data`. This ensures that the data written by the application persists in the event that the Postgres container fails.
 - `networks` adds security by putting the service on a backend network.
 - `deploy.placement.constraints` forces the service to run on manager nodes. In a single-manager swarm, this ensures that the service always starts on the same node and has access to the same volume.
-- `deploy.restart_policy.condition=any` tells Swarm to always restart service replicas if they fail.
+- `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code).
 
 ### redis service
 
@@ -273,7 +271,7 @@ Let's step through each field.
 - `ports` defines the network port that the service should operate on -- this can actually be omitted as it's the default port for redis.
 - `networks` deploys the service on a network called `frontend`.
 - `deploy.replicas` ensures there is always one instance (one replica) of the service running.
-- `deploy.restart_policy` tells Docker to always restart service replicas if they fail.
+- `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code).
 
 ### result service
 
@@ -330,7 +328,7 @@ The extended version adds the following:
 - `networks` places all service replicas on a network called `backend`.
 - `depends_on` tells Docker to start the `db` service before starting this one.
 - `deploy.replicas` tells Docker to create a single replica for this service.
-- `deploy.restart_policy` tells Docker to always restart service replicas if they fail.
+- `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code).
 
 ### lb service
 
@@ -392,12 +390,13 @@ vote:
       condition: any
 ```
 
-The extended version adds the following:
+About some fields:
 
 - `networks` places all service replicas on a network called `frontend`.
 - `depends_on` tells Docker to start the `redis` service before starting the `vote` service.
 - `deploy.replicas` tells Docker to create 5 replicas for the `vote` service (and we need at least 3 for the parallelism setting).
-- `deploy.update_config` tells Swarm how to perform rolling updates on the service. While not strictly needed, `update_config` settings are extremely helpful when doing application updates. Here, `parallelism: 2` tells swarm to update two instances of the service at a time, and wait for 10 seconds in between each set of two.
+- `deploy.update_config` tells Docker how to perform rolling updates on the service. While not strictly needed, `update_config` settings are extremely helpful when doing application updates. Here, `parallelism: 2` tells swarm to update two instances of the service at a time, and wait for 10 seconds in between each set of two.
+- `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code).
 
 ### worker service
 
@@ -445,9 +444,9 @@ worker:
 
 All of the settings mentioned here are application specific and may not be needed in your application.
 
-- `replicas` here are attached to two networks (frontend and backend) allowing them to communicate with services on either network.
-- `placement.constraints` ensure that replicas for this service always start on a manager node.
-- `restart_policy` attempts to restart any service replica that fails. It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
+- `deploy.replicas` here are attached to two networks (frontend and backend) allowing them to communicate with services on either network.
+- `deploy.placement.constraints` ensure that replicas for this service always start on a manager node.
+- `deploy.restart_policy.condition` tells Docker to restart any service replica that has stopped (no matter the exit code). It makes 3 attempts to restart, gives each restart attempt 120 seconds to complete, and waits 10 seconds before trying again.
 
 ## Test converted stackfile
 
