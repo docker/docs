@@ -6,9 +6,9 @@ title: Migrate Docker Cloud runtime apps
 
 ## Introduction
 
-<span class="badge badge-warning">Important</span>  **Cluster management services in Docker Cloud are shutting down on May 11. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms.**
+<span class="badge badge-warning">Important</span>  **Cluster and application management services in Docker Cloud are shutting down on May 11. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms.**
 
-The services on Docker Cloud that provide node and swarm cluster management, and _only_ cluster management, are being discontinued. This means that you must migrate your applications to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
+The Docker Cloud runtime is being discontinued. This means that you will no longer be able to manage your nodes, swarm clusters, and the applications that run on them in Docker Cloud. To protect your applications, you must must migrate them to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
 
 - [Migrate Docker Cloud stacks to Docker CE swarm](cloud-to-swarm){: target="_blank" class="_"}
 - [Migrate Docker Cloud stacks to Azure Container Service](cloud-to-kube-aks){: target="_blank" class="_"}
@@ -24,10 +24,11 @@ Docker Cloud SaaS features stay! We are _not_ removing automated builds and regi
 
 ## What changes
 
-**How you manage your Docker applications**. We are removing node cluster management (specifically, Docker Cloud runtime) from Docker Cloud. Depending on how you migrate, you may lose the ability to:
+**How you manage your applications**. We are removing cluster management and the ability to deploy and manage Docker Cloud stacks. As part of the migration, you will no longer be able to:
 
-- Deploy and manage applications with the Docker Cloud web UI.
-- Authorize users in the Docker platform with their Docker ID.
+- Manage your nodes and clusters in Docker Cloud.
+- Deploy and manage applications from the Docker Cloud web UI.
 - Autoredeploy your applications.
+- Integrate users with other parts the Docker platform with their Docker ID.
 
 > **Autoredeploy options**: Autoredeploy is a Docker Cloud feature that automatically updates running applications every time you push an image. It is not native to Docker CE, AKS or GKE, but you may be able to regain it with Docker Cloud auto-builds, using web-hooks from the Docker Cloud repository for your image back to the CI/CD pipeline in your dev/staging/production environment.
