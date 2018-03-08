@@ -188,6 +188,7 @@ apply two labels to your service:
 com.docker.ucp.mesh.http.1=external_route=http://example.org,redirect=https://example.org
 com.docker.ucp.mesh.http.2=external_route=sni://example.org
 ```
+Note: It is not possible to redirect HTTPS to HTTP. 
 
 ### X-Forwarded-For header
 
