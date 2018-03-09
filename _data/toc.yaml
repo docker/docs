@@ -1693,10 +1693,12 @@ manuals:
         path: /ee/ucp/swarm/deploy-to-collection/
       - title: Use secrets in your services
         path: /ee/ucp/swarm/use-secrets/
-      - sectiontitle: Route traffic to your apps
+      - sectiontitle: Layer 7 routing
         section:
-        - title: Layer 7 routing overview
+        - title: Overview
           path: /ee/ucp/interlock/
+        - title: Architecture
+          path: /ee/ucp/interlock/architecture/
         - sectiontitle: Introduction
           section:
           - title: What is Layer 7 routing
