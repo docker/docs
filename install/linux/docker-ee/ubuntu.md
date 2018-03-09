@@ -46,13 +46,6 @@ To install Docker EE, you need the 64-bit version of one of these Ubuntu version
 Docker EE is supported on `x86_64` (or `amd64`), `s390x` (IBM Z), and `ppc64el`
 (IBM Power) architectures.
 
-Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
-
-- For new installations on version 4 and higher of the Linux kernel, `overlay2`
-  is supported and preferred over `aufs`.
-- For version 3 of the Linux kernel, `aufs` is supported because `overlay` or
-  `overlay2` drivers are not supported by that kernel version.
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. In addition,

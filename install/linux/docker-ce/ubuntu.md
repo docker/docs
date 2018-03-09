@@ -54,7 +54,7 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 
 ### Supported storage drivers
 
-Docker EE on Ubuntu supports `overlay2` and `aufs` storage drivers.
+Docker CE on Ubuntu supports `overlay2` and `aufs` storage drivers.
 
 - For new installations on version 4 and higher of the Linux kernel, `overlay2`
   is supported and preferred over `aufs`.
