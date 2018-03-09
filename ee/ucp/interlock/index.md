@@ -2,7 +2,7 @@
 title: Layer 7 routing overview
 description: Learn about Layer 7 routing, an application routing and load balancing system
   for Docker Swarm.
-keywords: ucp, layer 7, routing, load balancing
+keywords: ucp, interlock, routing, proxy
 ui_tabs:
 - version: ucp-3.0
   orhigher: false
@@ -16,48 +16,47 @@ redirect_from:
 ---
 {% if include.version=="ucp-3.0" %}
 
-Layer 7 routing is an application routing and load balancing system for Docker Swarm. It uses
-the Docker Remote API to automatically configure extensions such as Nginx or HAProxy for
-application traffic.
+Docker Engine running in swarm mode has a routing mesh, which makes it easy
+to expose your services to the outside world. Since all nodes participate
+in the routing mesh, users can access your service by contacting any node.
 
-## About
+![swarm routing mess](../images/interlock-overview-1.svg)
 
-- [Introduction](intro/index.md)
-  - [What is Layer 7 routing](intro/index.md)
-  - [Architecture](intro/architecture.md)
+In this example the WordPress service is listening on port 8000 of the routing
+mesh. Even though the service is running on a single node, users can access
+WordPress using the domain name or IP of any of the nodes that are part of
+the swarm.
 
-## Deployment
+UCP extends this one step further with application layer routing (also known
+as layer 7 routing), allowing users to access Docker services using domain names
+instead of IP addresses.
 
-- [Get started](install/index.md)
-- [Deploy Layer 7 routing manually](install/manual-deployment.md)
-- [Deploy Layer 7 routing offline](install/offline.md)
-- [Deploy Layer 7 routing for production](install/production.md)
+![layer 7 routing](../images/interlock-overview-2.svg)
 
-## Configuration
+In this example, users can access the WordPress service using
+`http://wordpress.example.org`. UCP and Docker Engine take care of routing
+the traffic to the right service.
 
-- [Layer 7 routing configuration](configuration/index.md)
-- [Service labels](configuration/service-labels.md)
+## Features and benefits
 
-## Extensions
+Layer 7 routing in UCP supports:
 
-- [NGINX](extensions/nginx.md)
-- [HAProxy](extensions/haproxy.md)
-
-## Usage
-
-- [Basic deployment](usage/index.md)
-- [Applications with SSL](usage/ssl.md)
-- [Application redirects](usage/redirects.md)
-- [Persistent (sticky) sessions](usage/sessions.md)
-- [Websockets](usage/websockets.md)
-- [Canary application instances](usage/canary.md)
-- [Service clusters](usage/service-clusters.md)
-- [Context/path based routing](usage/context.md)
-- [Host mode networking](usage/host-mode-networking.md)
-
-## Operations
-
-- [Updates](ops/index.md)
-- [Tuning](ops/tuning.md)
+* **High availability**: All the components used for layer 7 routing leverage
+Docker swarm for high availability, and handle failures gracefully.
+* **Automatic configuration**: UCP monitors your services and automatically
+reconfigures the proxy services so that everything handled for you.
+* **Scalability**: You can customize and tune the proxy services that handle
+user-facing requests to meet whatever demand your services have.
+* **TLS**: You can leverage Docker secrets to securely manage TLS Certificates
+and keys for your services. Both TLS termination and TCP passthrough are supported.
+* **Context-based routing**: You can define where to route the request based on
+context or path.
+* **Host mode networking**: By default layer 7 routing leverages the Docker Swarm
+routing mesh, but you don't have to. You can use host mode networking for maximum
+performance.
+* **Blue-green and canary deployments**: You can deploy a new version of your application
+while traffic is still being routed to the old one.
+* **Security**: The layer 7 routing components that are exposed to the outside
+world run on worker nodes. Even if they get compromised, your cluster won't.
 
 {% endif %}
