@@ -65,7 +65,7 @@ Compose to set up and run WordPress. Before starting, install
 
    > **Notes**:
    >
-   * The docker volume `db_data` persists any updates made by Wordpress
+   * The docker volume `db_data` persists any updates made by WordPress
    to the database. [Learn more about docker volumes](/engine/admin/volumes/volumes/)
    >
    * WordPress Multisite works only on ports `80` and `443`.
@@ -131,10 +131,10 @@ browser.
 ### Shutdown and cleanup
 
 The command [docker-compose down](/compose/reference/down.md) removes the
-containers and default network, but preserves your Wordpress database.
+containers and default network, but preserves your WordPress database.
 
 The command `docker-compose down --volumes` removes the containers, default
-network, and the Wordpress database.
+network, and the WordPress database.
 
 ## More Compose documentation
 
