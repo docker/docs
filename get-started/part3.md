@@ -244,6 +244,7 @@ it runs, using the same command that launched the service:
 Some commands to explore at this stage:
 
 ```shell
+docker swarm init                                          #Initialize a swarm
 docker stack ls                                            # List stacks or apps
 docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
 docker service ls                 # List running services associated with an app
