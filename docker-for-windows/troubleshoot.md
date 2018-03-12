@@ -71,7 +71,9 @@ certificates) and [How do I add client
 certificates?](/docker-for-windows/index.md#how-do-i-add-client-certificates) in
 the Getting Started topic.
 
-### Permissions errors on data directories for shared volumes
+### Volumes
+
+#### Permissions errors on data directories for shared volumes
 
 Docker for Windows sets permissions on [shared
 volumes](/docker-for-windows/index.md#shared-drives) to a default value of
@@ -102,7 +104,7 @@ in the FAQs, and for more of an explanation, the GitHub issue, [Controlling
 Unix-style perms on directories passed through from shared Windows
 drives](https://github.com/docker/docker.github.io/issues/3298).
 
-### inotify on shared drives does not work
+#### inotify on shared drives does not work
 
 Currently, `inotify` does not work on Docker for Windows. This becomes evident,
 for example, when an application needs to read/write to a container across a
@@ -118,7 +120,7 @@ polling features for your framework or programming language.
   drives does not
   work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
 
-### Volume mounting requires shared drives for Linux containers
+#### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
@@ -131,11 +133,11 @@ containers). Go to ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
 --> **Settings** --> **Shared Drives** and share the drive that contains the
 Dockerfile and volume.
 
-### Verify domain user has permissions for shared drives (volumes)
+#### Verify domain user has permissions for shared drives (volumes)
 
->**Tip**: Shared drives are only required for volume mounting [Linux
-containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers),
-not Windows containers.
+> **Tip**: Shared drives are only required for volume mounting [Linux
+> containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers),
+> not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
 use to set up [shared drives](/docker-for-windows/index.md#shared-drives). If
@@ -191,7 +193,7 @@ local user is `samstevens` and the domain user is `merlin`.
 See also, the related issue on GitHub, [Mounted volumes are empty in the
 container](https://github.com/docker/for-win/issues/25).
 
-### Volume mounts from host paths use a `nobrl` option to override database locking
+#### Volume mounts from host paths use a `nobrl` option to override database locking
 
 You may encounter problems using volume mounts on the host, depending on the
 database software and which options are enabled. Docker for Windows uses
@@ -217,7 +219,7 @@ configuration
 reference](/compose/compose-file/index.md#volume-configuration-reference) in the
 Compose file documentation.
 
-### Local security policies can block shared drives and cause login errors
+#### Local security policies can block shared drives and cause login errors
 
 You need permissions to mount shared drives to use the Docker for Windows
 [shared drives](/docker-for-windows/index.md#shared-drives) feature.
@@ -239,13 +241,13 @@ mount: mounting //10.0.75.1/C on /c failed: Invalid argument
 
 See also, <a href="https://github.com/docker/for-win/issues/98">Docker for Windows issue #98</a>.
 
-### Understand symlinks limitations
+#### Understand symlinks limitations
 
 Symlinks work within and across containers. However, symlinks created outside of
 containers (for example, on the host) do not work. To learn more, see [Are
 symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
 
-### Avoid unexpected syntax errors, use Unix style line endings for files in containers
+#### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
 Any file destined to run inside a container must use Unix style `\n` line
 endings. This includes files referenced at the command line for builds and in
@@ -263,7 +265,9 @@ For an example of this issue and the resolution, see this issue on GitHub:
 [Docker RUN fails to execute shell
 script](https://github.com/moby/moby/issues/24388).
 
-### Hyper-V
+### Virtualization
+
+#### Hyper-V
 
 Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
@@ -296,7 +300,7 @@ Hyper-V is enabled, an external network switch is active, and referenced in the
 flags for the `docker-machine create` command [as described in the Docker
 Machine driver example](/machine/drivers/hyper-v.md#example).
 
-### Virtualization must be enabled
+#### Virtualization must be enabled
 
 In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
 
@@ -310,6 +314,7 @@ Task Manager.
 
 Also, see the user-reported issue [Unable to run Docker for Windows on Windows
 10 Enterprise](https://github.com/docker/for-win/issues/74).
+
 
 ### Networking and WiFi problems upon Docker for Windows install
 
