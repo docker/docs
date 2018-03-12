@@ -43,10 +43,10 @@ OverlayFS is supported if you meet the following prerequisites:
     `xfs_info` to verify that the `ftype` option is set to `1`. To format an
     `xfs` filesystem correctly, use the flag `-n ftype=1`.
 
-    > **Warning**: Running on XFS without d_type support inow canses Docker to
+    > **Warning**: Running on XFS without d_type support now causes Docker to
     > skip the attempt to use the `overlay` or `overlay2` driver. Existing
     > installs will continue to run, but produce an error. This is to allow
-    > users o migrate their data. In a future version, this will be a fatal
+    > users to migrate their data. In a future version, this will be a fatal
     > error, which will prevent Docker from starting.
     {:.warning}
 
