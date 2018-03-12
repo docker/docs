@@ -105,7 +105,7 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar.
 
-![Docker context menu](images/menu-prefs-selected.png)
+![Docker context menu](images/menu/menu-prefs-selected.png)
 
 You can set the following runtime options.
 
@@ -550,7 +550,7 @@ Docker for Mac.
 From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or
 create one.
 
-![Docker Cloud sign-in](images/menu-cloud-sign-in.png)
+![Docker Cloud sign-in](images/menu/menu-cloud-sign-in.png)
 
 Then use the Docker for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
