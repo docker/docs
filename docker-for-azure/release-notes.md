@@ -30,6 +30,12 @@ title: Docker for Azure Release Notes
 
 {{azure_blue_latest}}
 
+Release date: 3/1/2018
+
+- Docker Engine upgraded to [Docker 17.12.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
+
+### 17.12 CE
+
 Release date: 1/9/2018
 
 - Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
