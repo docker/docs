@@ -23,12 +23,13 @@ documentation, on [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
 troubleshoot the log data. See [Diagnose and
-Feedback](/docker-for-windows/index.md#diagnose-and-feedback) to learn about diagnostics and how to
-create new issues on GitHub.
+Feedback](/docker-for-windows/index.md#diagnose-and-feedback) to learn about
+diagnostics and how to create new issues on GitHub.
 
 ## Checking the Logs
 
-In addition to using the diagnose and feedback option to submit logs, you can browse the logs yourself.
+In addition to using the diagnose and feedback option to submit logs, you can
+browse the logs yourself.
 
 ### Use the systray menu to view logs
 
@@ -39,19 +40,19 @@ history of logs in your `AppData\Local` folder.
 ### Use the systray menu to report and issue
 
 If you encounter an issue and the suggested troubleshoot procedures outlined
-below don't fix it you can generate a diagnostics report. Click on the `Diagnose &
-Feedback` menu entry in the systray and then on the `Upload diagnostic...` link.
-This uploads diagnostics to our server and provide you with a unique ID you
-can use in email or the forum to reference the upload.
+below don't fix it you can generate a diagnostics report. Click on the `Diagnose
+& Feedback` menu entry in the systray and then on the `Upload diagnostic...`
+link.  This uploads diagnostics to our server and provide you with a unique ID
+you can use in email or the forum to reference the upload.
 
 ## Troubleshooting
 
 ### Make sure certificates are set up correctly
 
-Docker for Windows ignores certificates listed under insecure registries,
-and does not send client certificates to them. Commands like `docker run` that
-attempt to pull from the registry produces error messages on the command
-line, like this:
+Docker for Windows ignores certificates listed under insecure registries, and
+does not send client certificates to them. Commands like `docker run` that
+attempt to pull from the registry produces error messages on the command line,
+like this:
 
 ```
 Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
@@ -103,28 +104,32 @@ drives](https://github.com/docker/docker.github.io/issues/3298).
 
 ### inotify on shared drives does not work
 
-Currently, `inotify` does not work on Docker for Windows. This becomes
-evident, for example, when an application needs to read/write to a
-container across a mounted drive. Instead of relying on filesystem inotify, we recommend using polling features for your framework or programming language.
+Currently, `inotify` does not work on Docker for Windows. This becomes evident,
+for example, when an application needs to read/write to a container across a
+mounted drive. Instead of relying on filesystem inotify, we recommend using
+polling features for your framework or programming language.
 
-* **Workaround for nodemon and Node.js** - If you are using [nodemon](https://github.com/remy/nodemon) with  `Node.js`, try the fallback
-polling mode described here: [nodemon isn't restarting node
-applications](https://github.com/remy/nodemon#application-isnt-restarting)
+* **Workaround for nodemon and Node.js** - If you are using
+  [nodemon](https://github.com/remy/nodemon) with `Node.js`, try the fallback
+  polling mode described here: [nodemon isn't restarting node
+  applications](https://github.com/remy/nodemon#application-isnt-restarting)
 
-* **Docker for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
+* **Docker for Windows issue on GitHub** - See the issue [Inotify on shared
+  drives does not
+  work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
 
 ### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](/compose/gettingstarted.md),
-you might need to enable [shared drives](/docker-for-windows/index.md#shared-drives).
+you might need to enable [shared
+drives](/docker-for-windows/index.md#shared-drives).
 
-Volume mounting requires shared drives for Linux containers
-(not for Windows containers). Go to
-![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
-**Settings** --> **Shared Drives** and share the drive that
-contains the Dockerfile and volume.
+Volume mounting requires shared drives for Linux containers (not for Windows
+containers). Go to ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
+--> **Settings** --> **Shared Drives** and share the drive that contains the
+Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 
@@ -133,10 +138,10 @@ containers](/docker-for-windows/index.md#switch-between-windows-and-linux-contai
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
-use to set up [shared drives](/docker-for-windows/index.md#shared-drives). If you run `docker`
-commands and tasks under a different username than the one used to set up shared
-drives, your containers don't have permissions to access the mounted volumes.
-The volumes show as empty.
+use to set up [shared drives](/docker-for-windows/index.md#shared-drives). If
+you run `docker` commands and tasks under a different username than the one used
+to set up shared drives, your containers don't have permissions to access the
+mounted volumes.  The volumes show as empty.
 
 The solution to this is to switch to the domain user account and reset
 credentials on shared drives.
@@ -149,35 +154,44 @@ local user is `samstevens` and the domain user is `merlin`.
 
 2. Run `net share c` to view user permissions for `<host>\<username>, FULL`.
 
-		PS C:\Users\jdoe> net share c
-		Share name        C
-		Path              C:\
-		Remark
-		Maximum users     No limit
-		Users             SAMSTEVENS
-		Caching           Caching disabled
-		Permission        windowsbox\samstevens, FULL
+   ```
+   PS C:\Users\jdoe> net share c
+   Share name        C
+   Path              C:\
+   Remark
+   Maximum users     No limit
+   Users             SAMSTEVENS
+   Caching           Caching disabled
+   Permission        windowsbox\samstevens, FULL
+   ```
 
 3. Run the following command to remove the share.
 
-		net share c /delete
+   ```
+   net share c /delete
+   ```
 
-4. Re-share the drive via the [Shared Drives dialog](/docker-for-windows/index.md#shared-drives), and provide the Windows domain user account credentials.
+4. Re-share the drive via the [Shared Drives
+   dialog](/docker-for-windows/index.md#shared-drives), and provide the Windows
+   domain user account credentials.
 
 5. Re-run `net share c`.
 
-		PS C:\Users\jdoe> net share c
-		Share name        C
-		Path              C:\
-		Remark
-		Maximum users     No limit
-		Users             MERLIN
-		Caching           Caching disabled
-		Permission        windowsbox\merlin, FULL
+   ```
+   PS C:\Users\jdoe> net share c
+   Share name        C
+   Path              C:\
+   Remark
+   Maximum users     No limit
+   Users             MERLIN
+   Caching           Caching disabled
+   Permission        windowsbox\merlin, FULL
+   ```
 
-See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
+See also, the related issue on GitHub, [Mounted volumes are empty in the
+container](https://github.com/docker/for-win/issues/25).
 
-### Volume mounts from host paths use a `nobrl` option to override database locking  
+### Volume mounts from host paths use a `nobrl` option to override database locking
 
 You may encounter problems using volume mounts on the host, depending on the
 database software and which options are enabled. Docker for Windows uses
@@ -193,10 +207,9 @@ can interfere with other aspects of database functionality (for example,
 write-ahead logging (WAL) with SQLite, as described in
 [docker/for-win#1886](https://github.com/Sonarr/Sonarr/issues/1886)).
 
-If possible, avoid using shared drives for volume mounts on the host with network paths, and
-instead mount on the MobyVM, or create a [data
-volume](/engine/tutorials/dockervolumes.md#data-volumes)
-(named volume) or [data
+If possible, avoid using shared drives for volume mounts on the host with
+network paths, and instead mount on the MobyVM, or create a [data
+volume](/engine/tutorials/dockervolumes.md#data-volumes) (named volume) or [data
 container](/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container).
 See also, the [volumes key under service
 configuration](/compose/compose-file/index.md#volumes) and the [volume
@@ -206,12 +219,12 @@ Compose file documentation.
 
 ### Local security policies can block shared drives and cause login errors
 
-You need permissions to mount shared drives to use the Docker for
-Windows [shared drives](/docker-for-windows/index.md#shared-drives) feature.
+You need permissions to mount shared drives to use the Docker for Windows
+[shared drives](/docker-for-windows/index.md#shared-drives) feature.
 
-If local policy prevents this, you get errors when you attempt to enable
-shared drives on Docker. This is not something Docker can resolve, since you do
-need these permissions to use the feature.
+If local policy prevents this, you get errors when you attempt to enable shared
+drives on Docker. This is not something Docker can resolve, since you do need
+these permissions to use the feature.
 
 Here are snip-its from example error messages:
 
@@ -228,7 +241,9 @@ See also, <a href="https://github.com/docker/for-win/issues/98">Docker for Windo
 
 ### Understand symlinks limitations
 
-Symlinks work within and across containers. However, symlinks created outside of containers (for example, on the host) do not work. To learn more, see [Are symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
+Symlinks work within and across containers. However, symlinks created outside of
+containers (for example, on the host) do not work. To learn more, see [Are
+symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
 
 ### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -250,9 +265,12 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Recreate or update your containers after Beta 18 upgrade
 
-Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
+Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
+RC3. (For more information, see
+https://github.com/moby/moby/issues/24343#issuecomment-230623542.)
 
-You may get the following error when you try to start a container created with pre-Beta 18 Docker for Windows applications.
+You may get the following error when you try to start a container created with
+pre-Beta 18 Docker for Windows applications.
 
     Error response from daemon: Unknown runtime specified default
 
@@ -264,7 +282,9 @@ If you get the error message shown above, we recommend recreating them.
 
 To recreate your containers, use Docker Compose.
 
-    docker-compose down && docker-compose up
+```
+docker-compose down && docker-compose up
+```
 
 #### Update your containers
 
@@ -309,8 +329,8 @@ To fix existing containers, follow these steps.
 ### Hyper-V
 
 Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
-Powershell to be installed and enabled. The Docker for Windows installer
-enables it for you.
+Powershell to be installed and enabled. The Docker for Windows installer enables
+it for you.
 
 See [these
 instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install)
@@ -323,7 +343,7 @@ specific, but typically the BIOS option is called `Virtualization Technology
 Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or
 off".
 
-![Hyper-V on Windows features](images/hyper-v-enable-status.png )
+![Hyper-V on Windows features](images/hyper-v-enable-status.png)
 
 #### Hyper-V driver for Docker Machine
 
@@ -351,8 +371,8 @@ Task Manager.
 
 ![Task Manager](images/win-virtualization-enabled.png)
 
-Also, see the user-reported issue
-[Unable to run Docker for Windows on Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
+Also, see the user-reported issue [Unable to run Docker for Windows on Windows
+10 Enterprise](https://github.com/docker/for-win/issues/74).
 
 ### Networking and WiFi problems upon Docker for Windows install
 
@@ -366,37 +386,37 @@ Hyper-V feature turns my wi-fi off
 
 Here are some steps to take if you encounter similar problems:
 
-1.	Make sure virtualization is enabled, as described in the [Virtualization
-troubleshooting topic](#virtualization-must-be-enabled).
+1. Make sure virtualization is enabled, as described in the [Virtualization
+   troubleshooting topic](#virtualization-must-be-enabled).
 
-2.	Make sure the Hyper-V is installed and enabled, as described in the previous
-[Hyper-V troubleshooting topic](#hyper-v).
+2. Make sure the Hyper-V is installed and enabled, as described in the previous
+   [Hyper-V troubleshooting topic](#hyper-v).
 
-3.	Check your network switches to see if `DockerNAT` is enabled.
+3. Check your network switches to see if `DockerNAT` is enabled.
 
-	Open the **Hyper-V Manager**. (On Windows 10, just search for the
-	Hyper-V Manager in the search field in the lower left search field.)
+   Open the **Hyper-V Manager**. (On Windows 10, just search for the Hyper-V
+   Manager in the search field in the lower left search field.)
 
-	Select the Virtual Switch Manager on the left-side **Actions** panel.
+   Select the Virtual Switch Manager on the left-side **Actions** panel.
 
-	![Hyper-V manager](images/hyperv-manager.png)
+   ![Hyper-V manager](images/hyperv-manager.png)
 
-4.	Set up an external network switch. If you plan at any point to use [Docker
-Machine](/machine/overview.md) to set up multiple local VMs, you need this
-anyway, as described in the topic on the [Hyper-V driver for [Docker
-Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT` with
-this switch.
+4. Set up an external network switch. If you plan at any point to use [Docker
+   Machine](/machine/overview.md) to set up multiple local VMs, you need this
+   anyway, as described in the topic on the [Hyper-V driver for [Docker
+   Machine](/machine/drivers/hyper-v.md#example). You can replace `DockerNAT`
+   with this switch.
 
-5.	If previous steps fail to solve the problems, follow steps on the
-[Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
+5. If previous steps fail to solve the problems, follow steps on the [Cleanup
+   README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
 
-	>Read full description of consequences before you run Windows cleanup script
-	>
-  >The cleanup command has a `-Cleanup` flag and a
-	 `-ForceDeleteAllSwitches` flag. Be sure to read the whole page
-	 before running any scripts, especially the warnings with regard
-	 to the `-ForceDeleteAllSwitches` option.
-	 {: .warning}
+    > Read full description of consequences before you run Windows cleanup
+    > script
+    >
+    > The cleanup command has a `-Cleanup` flag and a `-ForceDeleteAllSwitches`
+    > flag. Be sure to read the whole page before running any scripts,
+    > especially the warnings with regard to the `-ForceDeleteAllSwitches`
+    > option.  {: .warning}
 
 ### Windows containers and Windows Server 2016
 
@@ -413,11 +433,11 @@ Windows containers without Docker for Windows. However, if you install Docker
 this way, you cannot develop or run Linux containers. If you try to run a Linux
 container on the native Docker daemon, an error occurs:
 
-  ```none
-  C:\Program Files\Docker\docker.exe:
-   image operating system "linux" cannot be used on this platform.
-   See 'C:\Program Files\Docker\docker.exe run --help'.
-  ```
+```none
+C:\Program Files\Docker\docker.exe:
+ image operating system "linux" cannot be used on this platform.
+ See 'C:\Program Files\Docker\docker.exe run --help'.
+```
 
 ### Limitations of Windows containers for `localhost` and published ports
 
@@ -445,10 +465,11 @@ Linux containers).
 To reach a Windows container from the local host, you need to specify
 the IP address and port for the container that is running the service.
 
-You can get the container IP address by using [`docker inspect`](/engine/reference/commandline/inspect.md) with some
-`--format` options and the ID or name of the container. For the example above,
-the command would look like this, using the name we gave to the container
-(`webserver`) instead of the container ID:
+You can get the container IP address by using [`docker
+inspect`](/engine/reference/commandline/inspect.md) with some `--format` options
+and the ID or name of the container. For the example above, the command would
+look like this, using the name we gave to the container (`webserver`) instead of
+the container ID:
 
 ```bash
 {% raw %}
@@ -475,11 +496,14 @@ Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
 
 For more information, see:
 
-* Docker for Windows issue on GitHub: [Port binding does not work for locahost](https://github.com/docker/for-win/issues/458)
+* Docker for Windows issue on GitHub: [Port binding does not work for
+  locahost](https://github.com/docker/for-win/issues/458)
 
-* [Published Ports on Windows Containers Don't Do Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
+* [Published Ports on Windows Containers Don't Do
+  Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
 
-* [Windows NAT capabilities and limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
+* [Windows NAT capabilities and
+  limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
 
 
 ### Running Docker for Windows in nested virtualization scenarios
@@ -488,63 +512,73 @@ Docker for Windows can run inside a Windows 10 virtual machine (VM) running on
 apps like Parallels or VMware Fusion on a Mac provided that the VM is properly
 configured. However, problems and intermittent failures may still occur due to
 the way these apps virtualize the hardware. For these reasons, _**Docker for
-Windows is not supported for nested virtualization scenarios**_. It
-might work in some cases, and not in others.
+Windows is not supported for nested virtualization scenarios**_. It might work
+in some cases, and not in others.
 
 The better solution is to run Docker for Windows natively on a Windows system
-(to work with Windows or Linux containers), or Docker for Mac on Mac
-to work with Linux containers.
+(to work with Windows or Linux containers), or Docker for Mac on Mac to work
+with Linux containers.
 
 #### If you still want to use nested virtualization
 
 * Make sure nested virtualization support is enabled in VMWare or Parallels.
-Check the settings in
-**Hardware -> CPU & Memory -> Advanced Options -> Enable nested virtualization**
-(the exact menu sequence might vary slightly).
+Check the settings in **Hardware -> CPU & Memory -> Advanced Options -> Enable
+nested virtualization** (the exact menu sequence might vary slightly).
 
 * Configure your VM with at least 2 CPUs and sufficient memory to run your
-workloads.
+  workloads.
 
 * Make sure your system is more or less idle.
 
-* Make sure your Windows OS is up-to-date. There have been several issues with some insider builds.
+* Make sure your Windows OS is up-to-date. There have been several issues with
+  some insider builds.
 
-* The processor you have may also be relevant. For example, Westmere based
-Mac Pros have some additional hardware virtualization features over
-Nehalem based Mac Pros and so do newer generations of Intel processors.
+* The processor you have may also be relevant. For example, Westmere based Mac
+  Pros have some additional hardware virtualization features over Nehalem based
+  Mac Pros and so do newer generations of Intel processors.
 
 #### Typical failures we see with nested virtualization
 
-* Slow boot time of the Linux VM. If you look in the logs and find
-some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds to
-boot the Linux VM; roughly the time between the `Connected` log entry and the `*
-Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Windows
-VM, this may take considerably longer. We have a timeout of 60s or so. If the VM
-hasn't started by that time, we retry. If the retry fails we print an error. You
-can sometimes work around this by providing more resources to the Windows VM.
+* Slow boot time of the Linux VM. If you look in the logs and find some entries
+  prefixed with `Moby`. On real hardware, it takes 5-10 seconds to boot the
+  Linux VM; roughly the time between the `Connected` log entry and the `*
+  Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a
+  Windows VM, this may take considerably longer. We have a timeout of 60s or
+  so. If the VM hasn't started by that time, we retry. If the retry fails we
+  print an error. You can sometimes work around this by providing more resources
+  to the Windows VM.
 
-* Sometimes the VM fails to boot when Linux tries to calibrate the
-time stamp counter (TSC). This process is quite timing sensitive and may fail
-when executed inside a VM which itself runs inside a VM. CPU utilization is also
-likely to be higher.
+* Sometimes the VM fails to boot when Linux tries to calibrate the time stamp
+  counter (TSC). This process is quite timing sensitive and may fail when
+  executed inside a VM which itself runs inside a VM. CPU utilization is also
+  likely to be higher.
 
 #### Related issues
 
-Discussion thread on GitHub at [Docker for Windows issue 267](https://github.com/docker/for-win/issues/267)
+Discussion thread on GitHub at [Docker for Windows issue
+267](https://github.com/docker/for-win/issues/267)
 
 ### Networking issues
 
-Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/moby/moby/issues/22567).)
+Some users have reported problems connecting to Docker Hub on the Docker for
+Windows stable version. (See GitHub issue
+[22567](https://github.com/moby/moby/issues/22567).)
 
 Here is an example command and error message:
 
-	PS C:\Users\jdoe> docker run hello-world
-	Unable to find image 'hello-world:latest' locally
-	Pulling repository docker.io/library/hello-world
-	C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
-	See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
+```
+PS C:\Users\jdoe> docker run hello-world
+Unable to find image 'hello-world:latest' locally
+Pulling repository docker.io/library/hello-world
+C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
+See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
+```
 
-As an immediate workaround to this problem, reset the DNS server to use the Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings** -> **Network** dialog, as described in the topic [Network](/docker-for-windows/index.md#network). Docker automatically restarts when you apply this setting, which could take some time.
+As an immediate workaround to this problem, reset the DNS server to use the
+Google DNS fixed address: `8.8.8.8`. You can configure this via the **Settings**
+-> **Network** dialog, as described in the topic
+[Network](/docker-for-windows/index.md#network). Docker automatically restarts
+when you apply this setting, which could take some time.
 
 We are currently investigating this issue.
 
@@ -571,15 +605,17 @@ remove them.
 
 ##### 3. Remove stale NAT configurations
 
-You might have stale NAT configurations on the system. You should remove them with `Remove-NetNat DockerNAT` on an elevated Powershell prompt.
+You might have stale NAT configurations on the system. You should remove them
+with `Remove-NetNat DockerNAT` on an elevated Powershell prompt.
 
 ##### 4. Remove stale network adapters
 
-You might have stale Network Adapters on the system. You should remove them with the following commands on an elevated Powershell prompt:
+You might have stale Network Adapters on the system. You should remove them with
+the following commands on an elevated Powershell prompt:
 
 ```
-    PS C:\Users\jdoe> $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
-    Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
+PS C:\Users\jdoe> $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
+Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
 ```
 
 Then you can remove them manually via the `devmgmt.msc` (aka Device Manager).
@@ -618,13 +654,17 @@ To create a larger NAT prefix, do the following.
 
 1. Stop Docker for Windows and remove all NAT prefixes with `Remove-NetNAT`.
 
-2. Create a new shorter NAT prefix which covers the Docker for Windows NAT prefix but allows room for additional NAT prefixes. For example:
+2. Create a new shorter NAT prefix which covers the Docker for Windows NAT
+   prefix but allows room for additional NAT prefixes. For example:
 
-        New-NetNat -Name DockerNAT -InternalIPInterfaceAddressPrefix 10.0.0.0/16
+   ```
+   New-NetNat -Name DockerNAT -InternalIPInterfaceAddressPrefix 10.0.0.0/16
+   ```
 
-  The next time Docker for Windows starts, it uses the new, wider prefix.
+   The next time Docker for Windows starts, it uses the new, wider prefix.
 
-Alternatively, you can use a different NAT name and NAT prefix and adjust the NAT prefix Docker for Windows uses accordingly via the `Settings` panel.
+Alternatively, you can use a different NAT name and NAT prefix and adjust the
+NAT prefix Docker for Windows uses accordingly via the `Settings` panel.
 
 >**Note**: You also need to adjust your existing VMs to use IP addresses from within the new NAT prefix.
 
@@ -632,26 +672,36 @@ Alternatively, you can use a different NAT name and NAT prefix and adjust the NA
 
 ### `inotify` currently does not work on Docker for Windows
 
-If you are using `Node.js` with `nodemon`, a temporary workaround is to try the fallback polling mode described here: [nodemon isn't restarting node applications](https://github.com/remy/nodemon#application-isnt-restarting). See also this issue on GitHub [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
+If you are using `Node.js` with `nodemon`, a temporary workaround is to try the
+fallback polling mode described here: [nodemon isn't restarting node
+applications](https://github.com/remy/nodemon#application-isnt-restarting). See
+also this issue on GitHub [Inotify on shared drives does not
+work](https://github.com/docker/for-win/issues/56#issuecomment-242135705).
 
 ### Reboot
 
-Restart your PC to stop / discard any vestige of the daemon running from the previously installed version.
+Restart your PC to stop / discard any vestige of the daemon running from the
+previously installed version.
 
 ### Unset `DOCKER_HOST`
 
-The `DOCKER_HOST` environmental variable does not need to be set.
-If you use bash, use the command `unset ${!DOCKER_*}` to unset it.
-For other shells, consult the shell's documentation.
+The `DOCKER_HOST` environmental variable does not need to be set.  If you use
+bash, use the command `unset ${!DOCKER_*}` to unset it.  For other shells,
+consult the shell's documentation.
 
 ### Make sure Docker is running for webserver examples
 
-For the `hello-world-nginx` example and others, Docker for Windows must be running to get to the webserver on `http://localhost/`. Make sure that the Docker whale is showing in the menu bar, and that you run the Docker commands in a shell that is connected to the Docker for Windows Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page not available" error when you go to `docker`.
+For the `hello-world-nginx` example and others, Docker for Windows must be
+running to get to the webserver on `http://localhost/`. Make sure that the
+Docker whale is showing in the menu bar, and that you run the Docker commands in
+a shell that is connected to the Docker for Windows Engine (not Engine from
+Toolbox). Otherwise, you might start the webserver container but get a "web page
+not available" error when you go to `docker`.
 
 ### How to solve `port already allocated` errors
 
-If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated` or
- `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
+If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated`
+or `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
 
 These errors are often caused by some other software on Windows using those
 ports. To discover the identity of this software, either use the `resmon.exe`
@@ -666,10 +716,10 @@ docker app.
 **Some firewalls and anti-virus software might be incompatible with Microsoft
 **Windows 10 builds**, such as Windows 10 Anniversary Update. The conflict
 typically occurs after a Windows update or new install of the firewall, and
-manifests as an error response from the Docker daemon and a **Docker for
-Windows start failure**. The Comodo Firewall was one example of this problem,
-but users report that software has since been updated to work with these
-Windows 10 builds.
+manifests as an error response from the Docker daemon and a **Docker for Windows
+start failure**. The Comodo Firewall was one example of this problem, but users
+report that software has since been updated to work with these Windows 10
+builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
@@ -679,5 +729,5 @@ A Docker for Windows user-created issue describes the problem specifically as it
 relates to Docker: [Docker fails to start on Windows
 10](https://github.com/docker/for-win/issues/27).
 
-For a temporary workaround, uninstall the firewall or anti-virus software, or explore other
-workarounds suggested on the forum.
+For a temporary workaround, uninstall the firewall or anti-virus software, or
+explore other workarounds suggested on the forum.
