@@ -217,18 +217,18 @@ components. Assigning these values overrides the settings in a container's
 `/etc/resolv.conf` file. For more info, see
 [Configure container DNS](/engine/userguide/networking/default_network/configure-dns/).
 
-| Parameter                     | Required | Description                                                                                                                                    |
-| ----------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `controller_port`             | yes      | Configures the port that the `ucp-controller` listens to. The default is `443`.                                                                |
-| `swarm_port`                  | yes      | Configures the port that the `ucp-swarm-manager` listens to. The default is `2376`.                                                            |
-| `swarm_strategy`              | no       | Configures placement strategy for container scheduling. This doesn't affect swarm-mode services. Values are `spread`, `binpack`, and `random`. |
-| `dns`                         | yes      | Array of IP addresses to add as nameservers.                                                                                                   |
-| `dns_opt`                     | yes      | Array of options used by DNS resolvers.                                                                                                        |
-| `dns_search`                  | yes      | Array of domain names to search when a bare unqualified hostname is used inside of a container.                                                |
-| `profiling_enabled`           | no       | Set to `true` to enable specialized debugging endpoints for profiling UCP performance. The default is `false`.                                 |
-| `kv_timeout`                  | no       | Sets the key-value store timeout setting, in milliseconds. The default is `5000`.                                                              |
-| `kv_snapshot_count`           | no       | Sets the key-value store snapshot count setting. The default is `20000`.                                                                       |
-| `external_service_lb`         | no       | Specifies an optional external load balancer for default links to services with exposed ports in the web UI.                                   |
-| `metrics_retention_time`      | no       | Adjusts the metrics retention time.                                                                                                            |
-| `metrics_scrape_interval`     | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster.                                                        |
-| `metrics_disk_usage_interval` | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present.             |
+| Parameter                     | Required | Description                                                                                                                                                                   |
+| ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `controller_port`             | yes      | Configures the port that the `ucp-controller` listens to. The default is `443`.                                                                                               |
+| `swarm_port`                  | yes      | Configures the port that the `ucp-swarm-manager` listens to. The default is `2376`.                                                                                           |
+| `swarm_strategy`              | no       | Configures placement strategy for container scheduling. This doesn't affect swarm-mode services. Values are `spread`, `binpack`, and `random`.                                |
+| `dns`                         | yes      | Array of IP addresses to add as nameservers.                                                                                                                                  |
+| `dns_opt`                     | yes      | Array of options used by DNS resolvers.                                                                                                                                       |
+| `dns_search`                  | yes      | Array of domain names to search when a bare unqualified hostname is used inside of a container.                                                                               |
+| `profiling_enabled`           | no       | Set to `true` to enable specialized debugging endpoints for profiling UCP performance. The default is `false`.                                                                |
+| `kv_timeout`                  | no       | Sets the key-value store timeout setting, in milliseconds. The default is `5000`.                                                                                             |
+| `kv_snapshot_count`           | no       | Sets the key-value store snapshot count setting. The default is `20000`.                                                                                                      |
+| `external_service_lb`         | no       | Specifies an optional external load balancer for default links to services with exposed ports in the web UI.                                                                  |
+| `metrics_retention_time`      | no       | Adjusts the metrics retention time. Units can be `s/m/h` (`12h` for rexample).                                                                                                |
+| `metrics_scrape_interval`     | no       | Sets the interval for how frequently managers gather metrics from nodes in the cluster. Units can be `s/m/h` (`12h` for rexample).                                            |
+| `metrics_disk_usage_interval` | no       | Sets the interval for how frequently storage metrics are gathered. This operation can be expensive when large volumes are present. Units can be `s/m/h` (`12h` for rexample). |
