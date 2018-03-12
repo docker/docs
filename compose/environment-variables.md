@@ -165,7 +165,7 @@ $ docker-compose exec api node
 Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is
 no Docker Compose entry for `environment` or `env_file`.
 
-> Spcecifics for NodeJS containers
+> Specifics for NodeJS containers
 >
 > If you have a `package.json` entry for `script:start` like
 > `NODE_ENV=test node server.js`, then this overrules any setting in your
