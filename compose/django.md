@@ -79,6 +79,30 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
         depends_on:
           - db
     ```
+    
+    For `mysql` add the following cofiguration to the file.
+    
+    ```none
+    version: '3'
+
+    services:
+      db:
+        image: mysql
+        environment:
+          MYSQL_ROOT_PASSWORD: yourPassword
+          MYSQL_DATABASE: yourDatabase
+          MYSQL_USER: yourUser
+          MYSQL_PASSWORD: yourPassword      
+      web:
+        build: .
+        command: python3 manage.py runserver 0.0.0.0:8000
+        volumes:
+          - .:/code
+        ports:
+          - "8000:8000"
+        depends_on:
+          - db
+    ```
 
     This file defines two services: The `db` service and the `web` service.
 
@@ -113,6 +137,23 @@ the [docker-compose run](/compose/reference/run/) command as follows.
         -rw-rw-r-- 1 user   user   Dockerfile
         -rwxr-xr-x 1 root   root   manage.py
         -rw-rw-r-- 1 user   user   requirements.txt
+        
+    For `mysql`, open `composeexample/settings.py`, add mysql specific
+    configurations, similar to that has been specified in `docker-compose.yml`.
+    
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': 'yourDatabase',
+                'USER': 'yourUser',
+                'PASSWORD': 'yourPassword', 
+                'HOST': 'db',
+                'PORT': 3306,
+                }
+            }
+    
+    Note: `composeexample/settings.py` will have pre-existing `DATABASES`
+    configuration set up. Replace that with the above one for `mysql`.
 
     If you are running Docker on Linux, the files `django-admin` created are
     owned by root. This happens because the container runs as the root user.
