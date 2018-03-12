@@ -54,7 +54,7 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 1.  Open a command-line terminal, and run some Docker commands to verify that
     Docker is working as expected.
 
-	  Some good commands to try are `docker version` to check that you have the
+    Some good commands to try are `docker version` to check that you have the
     latest release installed, and `docker ps` and `docker run hello-world` to
     verify that Docker is running.
 
@@ -81,8 +81,8 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     webserver container.
 
     ```none
-		CONTAINER ID        IMAGE                COMMAND                  CREATED              STATUS              PORTS                              NAMES
-		56f433965490        nginx                "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
+    CONTAINER ID   IMAGE   COMMAND                  CREATED              STATUS              PORTS                              NAMES
+    56f433965490   nginx   "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
     ```
 4.  Stop or remove containers and images.
 
@@ -96,7 +96,9 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     `docker container rm -f webserver`. This removes the container, but not the
     `nginx` image. You can list local images with `docker image ls`. You might
     want to keep some images around so that you don't need to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker image rm` followed by an image ID or image name. For example, `docker image rm nginx`.
+    from Docker Hub. To remove an image you no longer need, use `docker image
+    rm` followed by an image ID or image name. For example, `docker image rm
+    nginx`.
 
 **Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
 
@@ -123,13 +125,14 @@ see [Docker Cloud](#docker-cloud).
   Uncheck this option if you don't want Docker to start when you
   open your session.
 
-* Docker for Mac is set to **automatically check for updates** and notify
-  you when an update is available. If an update is found, click **OK** to accept
-and install it (or cancel to keep the current version). If you disable the check
-for updates, you can still find out about updates manually by choosing ![whale
-menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
+* Docker for Mac is set to **automatically check for updates** and notify you
+  when an update is available. If an update is found, click **OK** to accept and
+  install it (or cancel to keep the current version). If you disable the check
+  for updates, you can still find out about updates manually by choosing ![whale
+  menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
 
-* Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
+* Check **Include VM in Time Machine backups** to back up the Docker for Mac
+  virtual machine. (By default, this is unchecked.)
 
 * You have the option to **Securely store Docker logins in MacOS keychain**,
   enabled by default. To "opt out" of storing your Docker login credentials,
@@ -148,7 +151,7 @@ You can decide which directories on your Mac to share with containers.
 * **Add a Directory** - Click `+` and navigate to the directory you
 want to add.
 
-	![File Sharing](images/settings-file-share.png)
+    ![File Sharing](images/settings-file-share.png)
 
 * Click **Apply & Restart** to make the directory available to
   containers using Docker's bind mount (`-v`) feature.
@@ -165,8 +168,9 @@ See [Namespaces](osxfs.md#namespaces) in the topic on
 > **Tip**: File sharing is required for volume mounting if the project lives
 > outside of the `/Users` directory. In that case, share the drive where the
 > Dockerfile and volume are located. Otherwise, you get `file not found` or
-> `cannot start service errors at runtime`. (See also
-> [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> `cannot start service errors at runtime`. (See also [Volume mounting requires
+> file sharing for any project directories outside of
+> `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 
 ### Advanced
@@ -176,9 +180,10 @@ See [Namespaces](osxfs.md#namespaces) in the topic on
 
 #### CPUs
 
-By default, Docker for Mac is set to use half the number of processors available on the host machine. You can increase
-processing power for the app by setting this to a higher number, or lower it to
-have Docker for Mac use fewer computing resources.
+By default, Docker for Mac is set to use half the number of processors available
+on the host machine. You can increase processing power for the app by setting
+this to a higher number, or lower it to have Docker for Mac use fewer computing
+resources.
 
 #### Memory
 
@@ -430,16 +435,16 @@ When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
 folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
 for Mac `xhyve` virtual machine).
 
-> * You need to restart Docker for Mac after making any changes to
- the keychain or to the `~/.docker/certs.d` directory in order for
- the changes to take effect.
+> * You need to restart Docker for Mac after making any changes to the keychain
+> or to the `~/.docker/certs.d` directory in order for the changes to take
+> effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
-certificates listed under insecure registries, and does not send client
-certificates. Commands like `docker run` that attempt to pull from
-the registry produce error messages on the command line, as well as on the
-registry.
+> Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
+> certificates listed under insecure registries, and does not send client
+> certificates. Commands like `docker run` that attempt to pull from the
+> registry produce error messages on the command line, as well as on the
+> registry.
 
 ### Directory structures for certificates
 
@@ -524,9 +529,8 @@ To report bugs or problems, log on to [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues), where you can review
 community reported issues, and file new ones. See [Diagnose problems, send
 feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As a part of reporting issues on GitHub, we can help you troubleshoot
-the log
-data.
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As
+a part of reporting issues on GitHub, we can help you troubleshoot the log data.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
