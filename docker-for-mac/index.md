@@ -327,20 +327,22 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply and restart** button.
+  **Apply** button.
 
   ![Enable Kubernetes](/docker-for-mac/images/kubernetes/kubernetes-enable.png)
 
-  An internet connection is required. Images required to run the Kubernetes
+  An Internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
   `/usr/local/bin/kubectl` command is installed on your Mac.
-
-  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png)
 
   When Kubernetes is enabled and running, an additional status bar item displays
   at the bottom right of the Docker for Mac Preferences dialog.
 
-  ![Kubernetes status](/docker-for-mac/images/kubernetes/kubernetes-status.png)
+  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png)
+
+  The status of Kubernetes also shows in the Docker menu.
+
+  ![Docker Menu with Kubernetes](/docker-for-mac/images/kubernetes/menu.png)
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
