@@ -497,15 +497,17 @@ installed both in Bash and Zsh.
 
 ### Bash
 
-Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
+Bash has [built-in support for
+completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
 To activate completion for Docker commands, these files need to be copied or
 symlinked to your `bash_completion.d/` directory. For example, if you installed
 bash via [Homebrew](http://brew.sh/):
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+etc=/Applications/Docker.app/Contents/Resources/etc
+ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
 ### Zsh
@@ -516,9 +518,10 @@ need to be copied or symlinked to your Zsh `site-functions/` directory. For
 example, if you installed Zsh via [Homebrew](http://brew.sh/):
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
+etc=/Applications/Docker.app/Contents/Resources/etc
+ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
+ln -s $etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
+ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
 ## Give feedback and get help
