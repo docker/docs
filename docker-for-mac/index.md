@@ -107,7 +107,7 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
 **Preferences** from the menu bar.
 
-![Docker context menu](images/menu/menu-prefs-selected.png)
+![Docker context menu](images/menu/menu.png)
 
 You can set the following runtime options.
 
