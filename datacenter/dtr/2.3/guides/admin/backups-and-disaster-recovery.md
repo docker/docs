@@ -66,11 +66,10 @@ you can backup the images by using ssh to log into a node where DTR is running,
 and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
-{% raw %}
 sudo tar -cf {{ image_backup_file }} \
-$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
-{% endraw %}
+  {% raw %}$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>)){% endraw %}
 ```
+
 
 If you're using a different storage backend, follow the best practices
 recommended for that system.

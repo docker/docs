@@ -58,8 +58,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
 
 5. Update your service code to use the secret that you created. For example:
 
-   ```none
    {% raw %}
+   ```none
    ...
    // WatsonSecret holds Watson VR service keys
    type WatsonSecret struct {
@@ -82,8 +82,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
    ...
 		   msgQ.Add("api_key", watsonSecrets.APIKey)
    ...
-   {% endraw %}
    ```
+   {% endraw %}
 
 ### Step 2: Build a Docker image
 1. Log in to the registry that you are using to store the image.
@@ -96,8 +96,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
 
    **Example** snippet for a Dockerfile that uses _mmssearch_ service.
 
-   ```none
    {% raw %}
+   ```none
    FROM golang:latest
    WORKDIR /go/src/mmssearch
    COPY . /go/src/mmssearch
@@ -109,8 +109,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
    COPY --from=0 go/src/mmssearch/main .
    CMD ["./main"]
    LABEL version=demo-3
-   {% endraw %}
    ```
+   {% endraw %}
 
 3. Navigate to the directory of the Dockerfile, and build the image. Don't forget the period in the `docker build` command.
 
@@ -141,8 +141,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
    * For the service `environment` field, use a service environment, such as a workspace ID, from the IBM Cloud service that you made before you began.
    * **Example** snippet for a `docker-service.yaml` that uses _mmssearch_ with a Watson secret.
 
-   ```none
    {% raw %}
+   ```none
    mmssearch:
      image: mmssearch:latest
      build: .
@@ -154,8 +154,8 @@ There are three main steps in binding IBM Cloud services to your Docker EE for I
    secrets:
      watson-secret:
      external: true
-   {% endraw %}
    ```
+   {% endraw %}
 
 2. Connect to your cluster by setting the environment variables from the [client certificate bundle that you downloaded](administering-swarms.md#download-client-certificates).
 

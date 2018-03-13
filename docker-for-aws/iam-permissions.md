@@ -14,8 +14,8 @@ For instructions, see [Link Amazon Web Services to Docker Cloud](/docker-cloud/c
 This feature is called [AWS CloudFormation Service Role](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console)
 follow the link for more information.
 
-```none
 {% raw %}
+```none
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -343,5 +343,5 @@ follow the link for more information.
         }
     ]
 }
-{% endraw %}
 ```
+{% endraw %}

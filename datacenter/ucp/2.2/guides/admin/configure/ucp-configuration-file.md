@@ -33,14 +33,14 @@ number that increases with each version, like `com.docker.ucp.config-1`. The
 Use the `docker config inspect` command to view the current settings and emit
 them to a file.
 
-```bash
 {% raw %}
+```bash
 # CURRENT_CONFIG_NAME will be the name of the currently active UCP configuration
 CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}')
 # Collect the current config with `docker config inspect`
 docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
-{% endraw %}
 ```
+{% endraw %}
 
 Edit the file, then use the `docker config create` and `docker service update`
 commands to create and apply the configuration from the file.

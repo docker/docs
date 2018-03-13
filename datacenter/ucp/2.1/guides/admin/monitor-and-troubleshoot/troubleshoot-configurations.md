@@ -88,8 +88,8 @@ The examples below assume you are logged in with ssh into a UCP manager node.
 
 ### Check the status of the database
 
-```bash
 {% raw %}
+```bash
 # NODE_ADDRESS will be the IP address of this Docker Swarm manager node
 NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
 # VERSION will be your most recent version of the docker/ucp-auth image
@@ -97,13 +97,13 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This command will output detailed status of all servers and database tables
 # in the RethinkDB cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
-{% endraw %}
 ```
+{% endraw %}
 
 ### Manually reconfigure database replication
 
-```bash
 {% raw %}
+```bash
 # NODE_ADDRESS will be the IP address of this Docker Swarm manager node
 NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
 # NUM_MANAGERS will be the current number of manager nodes in the cluster
@@ -113,8 +113,8 @@ VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
 # This reconfigure-db command will repair the RethinkDB cluster to have a
 # number of replicas equal to the number of manager nodes in the cluster.
 docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
-{% endraw %}
 ```
+{% endraw %}
 
 ## Where to go next
 
