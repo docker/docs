@@ -31,38 +31,46 @@ An Interlock service starts running on a manager node, an Interlock-extension
 service starts running on a worker node, and two replicas of the
 Interlock-proxy service run on worker nodes.
 
-## Routing lifecycle
+## Deployment lifecycle
 
 By default layer 7 routing is disabled, so an administrator first needs to
 enable this service from the UCP web UI.
 
-Once that happens, UCP creates the `ucp-interlock` overlay network. Then the
-`ucp-interlock` service starts and attaches to the Docker socket and the overlay
-network that was created. This allows the Interlock service to use the
-Docker API. That's also the reason why this service needs to run on a manger
-node.
+Once that happens:
 
-The `ucp-interlock` service then starts the `ucp-interlock-extension` service
+1. UCP creates the `ucp-interlock` overlay network.
+2. UCP deploys the `ucp-interlock` service and attaches it both to the Docker
+socket and the overlay network that was created. This allows the Interlock
+service to use the Docker API. That's also the reason why this service needs to
+run on a manger node.
+3. The `ucp-interlock` service starts the `ucp-interlock-extension` service
 and attaches it to the `ucp-interlock` network. This allows both services
 to communicate.
-
-The `ucp-interlock-extension` then generates a configuration to be used by
+4. The `ucp-interlock-extension` generates a configuration to be used by
 the proxy service. By default the proxy service is NGINX, so this service
-generates a standard NGING configuration.
-
-Finally, the `ucp-interlock` service takes this configuration and uses it to
+generates a standard NGINX configuration.
+5. The `ucp-interlock` service takes the proxy configuration and uses it to
 start the `ucp-interlock-proxy` service.
 
-At this point everything is ready for you to start using this service in your
-applications.
+At this point everything is ready for you to start using the layer 7 routing
+service with your swarm workloads.
 
-You deploy your service and apply labels to it describing how the proxy
-service should route traffic to that service. Once this happens, the
-`ucp-interlock-extension` service generates a new configuration based on those
-labels and forwards it to the `ucp-interlock` service, which in turn uses this
-to redeploy the `ucp-interlock-proxy` with the new settings.
+## Routing lifecycle
 
-This all happens in milliseconds and with rolling updates, so that service
-is never disrupted for incoming traffic.
+Once the layer 7 routing service is enabled, you apply specific labels to
+your swarm services. The labels define the hostnames that are routed to the
+service, the ports used, and other routing configurations.
+
+Once you deploy a swarm service with those labels:
+
+1. The `ucp-interlock` service is monitoring the Docker API for events and
+publishes the events to the `ucp-interlock-extension` service.
+2. That service in turn generates a new configuration for the proxy service,
+based on the labels you've added to your services.
+3. The `ucp-interlock` service takes the new configuration and reconfigures the
+`ucp-interlock-proxy` to start using it.
+
+This all happens in milliseconds and with rolling updates. Even though
+services are being reconfigured, users won't notice it.
 
 {% endif %}
