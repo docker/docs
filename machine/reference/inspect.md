@@ -53,12 +53,12 @@ $ docker-machine inspect dev
 For the most part, you can pick out any field from the JSON in a fairly
 straightforward manner.
 
-```none
 {% raw %}
+```none
 $ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 192.168.5.99
-{% endraw %}
 ```
+{% endraw %}
 
 **Formatting details:**
 
@@ -73,8 +73,8 @@ $ docker-machine inspect --format='{{json .Driver}}' dev-fusion
 While this is usable, it's not very human-readable. For this reason, there is
 `prettyjson`:
 
-```none
 {% raw %}
+```none
 $ docker-machine inspect --format='{{prettyjson .Driver}}' dev-fusion
 {
   "Boot2DockerURL": "",

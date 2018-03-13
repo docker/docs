@@ -160,21 +160,21 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash
 {% raw %}
+```bash
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-{% endraw %}
 ```
+{% endraw %}
 
 To query the status of the node as a worker that accept tasks:
 
-```bash
 {% raw %}
+```bash
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-{% endraw %}
 ```
+{% endraw %}
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.

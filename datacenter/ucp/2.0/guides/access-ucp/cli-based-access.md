@@ -56,12 +56,12 @@ To verify a client certificate bundle has been loaded and the client is
 successfully communicating with UCP, look for `ucp` in the `Server Version`
 returned by `docker version`.
 
-```bash
 {% raw %}
+```bash
 $ docker version --format '{{.Server.Version}}'
-{% endraw %}
 ucp/2.0.0
 ```
+{% endraw %}
 
 From now on, when you use the Docker CLI client, it includes your client
 certificates as part of the request to the Docker Engine.

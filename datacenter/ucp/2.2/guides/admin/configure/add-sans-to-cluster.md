@@ -36,12 +36,12 @@ that join the swarm.
 
 You can also do this from the CLI by first running:
 
-```bash
 {% raw %}
+```bash
 $ docker node inspect --format '{{ index .Spec.Labels "com.docker.ucp.SANs" }}' <node-id>
 default-cs,127.0.0.1,172.17.0.1
-{% endraw %}
 ```
+{% endraw %}
 
 This will get the current set of SANs for the given manager node. Append your
 desired SAN to this list, for example `default-cs,127.0.0.1,172.17.0.1,example.com`,

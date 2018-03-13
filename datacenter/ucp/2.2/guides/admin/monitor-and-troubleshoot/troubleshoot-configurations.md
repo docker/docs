@@ -91,8 +91,8 @@ The examples below assume you are logged in with ssh into a UCP manager node.
 
 ### Check the status of the database
 
-```bash
 {% raw %}
+```bash
 # NODE_ADDRESS will be the IP address of this Docker Swarm manager node
 NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
 # VERSION will be your most recent version of the docker/ucp-auth image
@@ -117,13 +117,13 @@ Server Status: [
   }
 ]
 ...
-{% endraw %}
 ```
+{% endraw %}
 
 ### Manually reconfigure database replication
 
-```bash
 {% raw %}
+```bash
 # NODE_ADDRESS will be the IP address of this Docker Swarm manager node
 NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
 # NUM_MANAGERS will be the current number of manager nodes in the cluster
@@ -140,8 +140,8 @@ time="2017-07-14T20:46:09Z" level=debug msg="Reconfiguring number of replicas to
 time="2017-07-14T20:46:09Z" level=debug msg="(00/16) Emergency Repairing Tables..."
 time="2017-07-14T20:46:09Z" level=debug msg="(01/16) Emergency Repaired Table \"grant_objects\""
 ...
-{% endraw %}
 ```
+{% endraw %}
 
 ## Where to go next
 

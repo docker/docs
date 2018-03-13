@@ -17,9 +17,7 @@ a [UCP support dump](..\..\get-support.md) to use an environment variable
 that indicates the current architecture:
 
 ```bash
-{% raw %}
-[[ $(docker info --format='{{.Architecture}}') == s390x ]] && export _ARCH='-s390x' || export _ARCH=''
-{% endraw %}
+{% raw %}[[ $(docker info --format='{{.Architecture}}') == s390x ]] && export _ARCH='-s390x' || export _ARCH=''{% endraw %}
 
 docker container run --rm \
   --name ucp \

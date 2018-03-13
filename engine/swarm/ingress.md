@@ -82,13 +82,13 @@ $ docker service update \
 You can use `docker service inspect` to view the service's published port. For
 instance:
 
-```bash
 {% raw %}
+```bash
 $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 
 [{"Protocol":"tcp","TargetPort":80,"PublishedPort":8080}]
-{% endraw %}
 ```
+{% endraw %}
 
 The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containers and the
 `<PUBLISHED-PORT>` (labeled `PublishedPort`) where nodes listen for requests for the service.

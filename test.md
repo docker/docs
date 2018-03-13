@@ -658,23 +658,23 @@ we use often.
 The raw markup is needed to keep Liquid from interperting the things with double
 braces as templating language.
 
+{% raw %}
 ```none
 none with raw
-{% raw %}
 $ some command with {{double braces}}
 $ some other command
-{% endraw %}
 ```
+{% endraw %}
 
 ### Raw, Bash
 
+{% raw %}
 ```bash
 bash with raw
-{% raw %}
 $ some command with {{double braces}}
 $ some other command
-{% endraw %}
 ```
+{% endraw %}
 
 ### Bash
 

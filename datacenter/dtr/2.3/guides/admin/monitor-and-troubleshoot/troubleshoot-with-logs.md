@@ -49,8 +49,8 @@ DTR replica to check the DTR internal state.
 Use SSH to log into a node that is running a DTR replica, and run the following
 commands:
 
-```bash
 {% raw %}
+```bash
 # REPLICA_ID will be the replica ID for the current node.
 REPLICA_ID=$(docker ps -lf name='^/dtr-rethinkdb-.{12}$' --format '{{.Names}}' | cut -d- -f3)
 # This command will start a RethinkDB client attached to the database
@@ -59,8 +59,8 @@ docker run -it --rm \
   --net dtr-ol \
   -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
   $REPLICA_ID
-{% endraw %}
 ```
+{% endraw %}
 
 This container connects to the local DTR replica and launches a RethinkDB client 
 that can be used to inspect the contents of the DB. RethinkDB 

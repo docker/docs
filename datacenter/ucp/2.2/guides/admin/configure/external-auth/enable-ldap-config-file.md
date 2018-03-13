@@ -23,19 +23,19 @@ $ docker container run --rm {{ page.ucp_org }}/{{ page.ucp_repo }}:{{ page.ucp_v
 1.  Use the following command to extract the name of the currently active
     configuration from the `ucp-agent` service.
 
-    ```bash
     {% raw %}
+    ```bash
     $ CURRENT_CONFIG_NAME=$(docker service inspect --format '{{ range $config := .Spec.TaskTemplate.ContainerSpec.Configs }}{{ $config.ConfigName }}{{ "\n" }}{{ end }}' ucp-agent | grep 'com.docker.ucp.config-')
-    {% endraw %}
     ```
+    {% endraw %}
 
 2.  Get the current configuration and save it to a TOML file.
 
-    ```bash
     {% raw %}
+    ```bash
     $ docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > config.toml
-    {% endraw %}
     ```
+    {% endraw %}
 
 3.  Use the output of the `example-config` command as a guide to edit your
     `config.toml` file. Under the `[auth]` sections, set `backend = "ldap"`

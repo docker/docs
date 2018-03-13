@@ -82,13 +82,13 @@ To find the current logging driver for a running container, if the daemon
 is using the `json-file` logging driver, run the following `docker inspect`
 command, substituting the container name or ID for `<CONTAINER>`:
 
-```bash
 {% raw %}
+```bash
 $ docker inspect -f '{{.HostConfig.LogConfig.Type}}' <CONTAINER>
 
 json-file
-{% endraw %}
 ```
+{% endraw %}
 
 ## Configure the delivery mode of log messages from container to log driver
 

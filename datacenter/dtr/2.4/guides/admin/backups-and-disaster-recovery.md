@@ -67,7 +67,7 @@ and creating a tar archive of the [dtr-registry volume](../architecture.md):
 
 ```none
 sudo tar -cf {{ image_backup_file }} \
-{% raw %}$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>)){% endraw %}
+  {% raw %}$(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>)){% endraw %}
 ```
 
 If you're using a different storage backend, follow the best practices

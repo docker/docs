@@ -450,25 +450,25 @@ You can get the container IP address by using [`docker inspect`](/engine/referen
 the command would look like this, using the name we gave to the container
 (`webserver`) instead of the container ID:
 
-```bash
 {% raw %}
+```bash
 $ docker inspect \
   --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
   webserver
-{% endraw %}
 ```
+{% endraw %}
 
 This gives you the IP address of the container, for example:
 
-```bash
 {% raw %}
+```bash
 $ docker inspect \
   --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
   webserver
 
 172.17.0.2
-{% endraw %}
 ```
+{% endraw %}
 
 Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
 `http://172.17.0.2`, since port `80` is the default HTTP port.)

@@ -76,15 +76,15 @@ create and mount a unique Cloudstor volume for each task in a swarm service.
 
 It is possible to use the templatized notation to indicate to Docker Swarm that a unique Cloudstor volume be created and mounted for each replica/task of a service. This may be useful if the tasks write to the same file under the same path which may lead to corruption in case of shared storage. Example:
 
-```bash
 {% raw %}
+```bash
 $ docker service create \
   --replicas 5 \
   --name ping2 \
   --mount type=volume,volume-driver=cloudstor:azure,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
   alpine ping docker.com
-{% endraw %}
 ```
+{% endraw %}
 
 A unique volume is created and mounted for each task participating in the
 `ping2` service. Each task mounts its own volume at `/mydata/` and all files

@@ -63,8 +63,8 @@ If you want to change the default settings for storage type, IOPS, or capacity, 
 
     Example output:
 
-    ```bash
     {% raw %}
+    ```bash
     [
       {
           "Driver": "d4ic-volume:latest",
@@ -89,8 +89,8 @@ If you want to change the default settings for storage type, IOPS, or capacity, 
                       }
         }
       ]
-      {% endraw %}
       ```
+      {% endraw %}
 
 > File storage provisioning
 >
@@ -110,11 +110,11 @@ Use an existing IBM Cloud infrastructure file storage volume with Docker EE for 
 
 2. Retrieve the cluster ID:
 
-   ```bash
    {% raw %}
+   ```bash
    $ docker info --format={{.Swarm.Cluster.ID}}
-   {% endraw %}
    ```
+   {% endraw %}
 
 3. From your browser, log in to your [IBM Cloud infrastructure account](https://control.softlayer.com/) and access the file storage volume that you want to use.
 
