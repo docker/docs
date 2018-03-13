@@ -22,7 +22,7 @@ Docker _on a Mac_.
 
 > See [Install Docker for Mac](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
 
-## Check versions of Docker Engine, Compose, and Machine
+## Check versions
 
 Ensure your versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and compatible with `Docker.app`. Your output may differ if you are running different versions.
 
@@ -37,7 +37,7 @@ $ docker-machine --version
 docker-machine version {{ site.machine_version }}, build 9ba6da9
 ```
 
-## Explore the application and run examples
+## Explore the application
 
 1.  Open a command-line terminal and test that your installation works by
     running the simple Docker image, [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
@@ -90,191 +90,147 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     $ docker image rm nginx
     ```
 
-## Preferences
+## Preferences menu
 
 Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
 
-![Docker context menu](images/menu/menu.png){:width="300px"}
+![Docker context menu](images/menu/d4m-menu-prefs.png){:width="250px"}
 
-### General
+### General tab
 
-![Preferences](/docker-for-mac/images/settings.png){:width="400px"}
+![Preferences](/docker-for-mac/images/menu/d4m-menu-prefs-general.png){:width="400px"}
 
-#### Auto-start, update, backups, usage data
+Gneral settings are:
 
-- Docker for Mac is set to automatically **start Docker when you log in**.
-  Uncheck this option if you don't want Docker to start when you
-  open your session.
+- **Start Docker when you log in**: Uncheck this option if you don't want Docker to start when you open your session.
 
-- Docker for Mac is set to **automatically check for updates** and notify you
-  when an update is available. If an update is found, click **OK** to accept and
-  install it (or cancel to keep the current version). If you disable the check
-  for updates, you can still find out about updates manually by choosing ![whale
-  menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
+- **Automatically check for updates** notifies you when an update is available.
+  Click **OK** to accept and install updates (or cancel to keep the current
+  version). If you disable this option, you can still find out about updates
+  manually by choosing ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
 
-- Check **Include VM in Time Machine backups** to back up the Docker for Mac
-  virtual machine. (By default, this is unchecked.)
+- **Include VM in Time Machine backups** backs up the Docker for Mac virtual machine. (Disabled by default.)
 
-- You have the option to **Securely store Docker logins in MacOS keychain**,
-  enabled by default. To "opt out" of storing your Docker login credentials,
-  uncheck this option.
+- **Securely store Docker logins in MacOS keychain** stores your Docker login credentials. (Enabled by default.)
 
-- **Send usage statistics** &mdash; You can set Docker for Mac to auto-send
-  diagnostics, crash reports, and usage data. This information can help Docker
-  improve the application and get more context for troubleshooting problems.
-  Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
-  more information in some cases, even with auto-send enabled.
+- **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage data to Docker. This information helps Docker improve the application and get more context for troubleshooting problems. (Enabled by default.)
 
-### File sharing
+### File sharing tab
 
-You can decide which directories on your Mac to share with containers.
+Choose which local directories to share with your containers. File sharing is
+required for volume mounting if the project lives outside of the `/Users`
+directory. In that case, share the drive where the Dockerfile and volume are
+located. Otherwise, you get `file not found` or `cannot start service errors at
+runtime`.
 
-File sharing is required for volume mounting if the project lives outside of the
-`/Users` directory. In that case, share the drive where the Dockerfile and
-volume are located. Otherwise, you get `file not found` or `cannot start service
-errors at runtime`.
+![File Sharing](images/menu/d4m-menu-prefs-fileshare.png){:width="400px"}
 
-![File Sharing](images/settings-file-share.png){:width="400px"}
+File share settings are:
 
-- **Add a Directory** - Click `+` and navigate to the directory you want to add.
+- **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
-- Click **Apply & Restart** to make the directory available to containers using Docker's bind mount (`-v`) feature.
+- **Apply & Restart** makes the directory available to containers using Docker's bind mount (`-v`) feature.
 
   There are some limitations on the directories that can be shared:
 
   - They cannot be a subdirectory of an already shared directory.
-
   - They cannot already exist inside of Docker.
-
 
 For more information, see:
 
--  [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on [osxfs file system sharing](osxfs.md) for more information.
+- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-### Advanced
+### Advanced tab
 
-![Advanced Preference settings-advanced](images/settings-advanced.png){:width="400px"}
+On the Advanced tab, you can limit resources available to Docker.
 
-#### CPUs
+![Advanced Preference settings-advanced](images/menu/d4m-menu-prefs-advanced.png){:width="400px"}
 
-By default, Docker for Mac is set to use half the number of processors available
-on the host machine. You can increase processing power for the app by setting
-this to a higher number, or lower it to have Docker for Mac use fewer computing
-resources.
+Advanced settings are:
 
-#### Memory
+**CPUs**: By default, Docker for Mac is set to use half the number of processors available
+on the host machine. To increase processing power, set this to a higher number;
+to decrease, lower the number.
 
-By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
-the total available memory on your Mac. You can increase the RAM on the app to
-get faster performance by setting this number higher (for example to `3`) or
-lower (to `1`) if you want Docker for Mac to use less memory.
+**Memory**: By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
+the total available memory on your Mac. To increase RAM, set this to a higher number;
+to decrease it, lower the number.
 
-#### Disk image location (storage)
+**Swap**: Configure swappiness as needed. The default is 1.
 
-You can specify the **Disk image location** of the Linux volume, which is where
-containers and images are stored.
+### Disk tab
+
+Specify the **Disk image location** of the Linux volume, where containers and images are stored.
 
 You can also move the disk image location. If you attempt to move the disk image
 to a location that already has one, you get a prompt asking if you want to use
 the existing image or replace it.
 
-### HTTP proxy settings
+![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
+
+### Proxies tab
 
 Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling
 containers.
 
-![Proxies settings](/docker-for-mac/images/settings-proxies.png){:width="400px"}
+![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
 
 <p id="daemon-experimental-mode" />
 
-### Docker Daemon
+### Daemon tab
 
-You can configure options on the Docker daemon that determine how your
-containers run.
+You can configure options on the Docker daemon that determine how your containers run.
 
 Select **Basic** to configure the daemon with interactive settings, or select
 **Advanced** to edit the JSON directly.
 
-![Daemon](/docker-for-mac/images/settings-advanced-experimental-beta.png){:width="400px"}
+![Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-basic.png){:width="400px"}
 
-- [Experimental mode](#experimental-mode){: target="_blank" class="_"}
-- [Custom registries](#custom-registries){: target="_blank" class="_"}
-- [Edit the daemon configuration file](#edit-the-daemon-configuration-file){: target="_blank" class="_"}
 
-#### Experimental mode
+#### Experimental features
 
 Both Docker for Mac Stable and Edge releases have experimental features enabled
-on Docker Engine, as described in the [Docker Experimental Features
-README](https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md){: target="_blank" class="_"} on
-GitHub.
-
-Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas. Some
-experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Edge releases, and never
-released on Stable.
-
-On both Edge and Stable releases, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker for Mac uses the current generally available
+on Docker Engine, as described [Docker Experimental Features README](https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md){: target="_blank" class="_"}. If you uncheck **experimental mode**, Docker for Mac uses the current generally available
 release of Docker Engine.
 
-You can check whether you are running experimental mode or not by typing `docker
-version` on the command line. Experimental mode is listed under `Server` data.
-If `Experimental` is `true`, then Docker is running in experimental mode, as
-shown here. (If `false`, Experimental mode is off.)
+> Don't enable experimental features in production
+>
+> Experimental features are not appropriate for production environments or workloads. They are meant to be sandbox experiments for new ideas. Some experimental features may become incorporated into upcoming stable releases, but others may be modified or pulled from subsequent Edge releases, and never released on Stable.
+
+You can see whether you are running experimental mode at the command line. If
+`Experimental` is `true`, then Docker is running in experimental mode, as shown
+here. (If `false`, Experimental mode is off.)
 
 ```bash
-$ docker version
-Client:
- Version:   18.03.0-ce-rc1
- API version:   1.37
- Go version:    go1.9.4
- Git commit:    c160c73
- Built: Thu Feb 22 02:34:03 2018
- OS/Arch:   darwin/amd64
- Experimental:  true
- Orchestrator:  swarm
-Server:
- Engine:
-  Version:  18.03.0-ce-rc1
-  API version:  1.37 (minimum version 1.12)
-  Go version:   go1.9.4
-  Git commit:   c160c73
-  Built:    Thu Feb 22 02:42:37 2018
-  OS/Arch:  linux/amd64
-  Experimental: true
+{% raw %}$ docker version -f {{.Server.Experimental}}{% endraw %}
+true
 ```
 
-#### Custom registries
+#### Insecure registries
 
-As an alternative to using [Docker Hub](https://hub.docker.com/){:target="_blank" class="_"}
-to store your public or private images or [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md),
-you can use Docker to set up your own insecure [registry](/registry/introduction.md){: target="_blank" class="_"}.
-Add URLs for insecure registries and registry mirrors on which to host your images.
+You can set up a custom and insecure [registry](/registry/introduction.md){: target="_blank" class="_"}
+to store your public or private images (instead of using [Docker Hub](https://hub.docker.com/){:target="_blank" class="_"}
+or [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md)).
+Add URLs for your insecure registries and registry mirrors on which to host your images.
 
-See also, [How do I add custom CA
-certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates) and
-[How do I add client
-certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates) in the FAQs.
+See also:
+- [How do I add custom CA certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates){:target="_blank" class="_"}
+- [How do I add client certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates){:target="_blank" class="_"}
 
-#### Edit the daemon configuration file
+#### Daemon configuration file
 
-On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
-the JSON file, and determine entirely how your containers run. For a full
-list of options on the Docker daemon, see
-[daemon](/engine/reference/commandline/dockerd.md){:target="_blank" class="_"}
-in the Docker Engine command line reference.
+Click the **Advanced** tab to configure the daemon from the JSON file. For a full
+list of options, see the Docker Engine [dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank" class="_"}.
 
-After editing the daemon configuration , click **Apply & Restart** to save it
-and reboot Docker. Or, to cancel changes, click another preference tab, then
-choose to discard or not apply changes when asked.
+Click **Apply & Restart** to save your settings and reboot Docker. Or, to cancel
+changes, click another preference tab, then choose to discard or not apply changes when asked.
 
-![Docker Daemon](/docker-for-mac/images/settings-daemon-beta.png){:width="400px"}
+![Docker Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
 
-### Kubernetes
+### Kubernetes tab
 
 **Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge channel.**
 Kubernetes support is not included in Docker for Mac Stable releases. To find
@@ -302,7 +258,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   running as a Docker container, select **Enable Kubernetes** and click the
   **Apply** button.
 
-  ![Enable Kubernetes](/docker-for-mac/images/kubernetes/kubernetes-enable.png){: .with-border width="400px"}
+  ![Enable Kubernetes](/docker-for-mac/images/menu/d4m-menu-prefs-kubernetes.png){: .with-border width="400px"}
 
 
   An Internet connection is required. Images required to run the Kubernetes
@@ -316,7 +272,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
   The status of Kubernetes shows in the Docker menu and the context points to `docker-for-desktop`.
 
-  ![Docker Menu with Kubernetes](/docker-for-mac/images/kubernetes/menu.png){: .with-border width="400px"}
+  ![Docker Menu with Kubernetes](/docker-for-mac/images/menu/d4m-menu-kube-context.png){: .with-border width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -330,36 +286,39 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   For more about using the Kubernetes integration with
   Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md){:target="_blank" class="_"}.
 
-## Uninstall or reset
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
-**Preferences** from the menu bar, then click **Uninstall / Reset** on the
-Preferences dialog.
+### Reset tab
 
-![Uninstall or reset Docker](images/settings-uninstall.png){:width="400px"}
+Select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
+**Preferences** from the menu bar, then click **Reset** to reset factory
+defaults, restart the Docker daemon, or uninstall.
+
+![Uninstall or reset Docker](images/menu/d4m-menu-prefs-reset.png){:width="400px"}
+
+Reset settings are:
+
+* **Restart** - Select to restart the Docker daemon.
 
 * **Remove all data** - This option removes/resets all Docker data _without_
 a reset to factory defaults (which would cause you to lose settings).
 
-* **Uninstall** - Choose this option to remove Docker for Mac from your system.
-
 * **Reset to factory defaults** - Choose this option to reset all options on
   Docker for Mac to its initial state, the same as when it was first installed.
 
+  * **Uninstall** - Choose this option to remove Docker for Mac from your system.
 
-### Uninstall from the command line
-
-Alternatively, you can uninstall Docker for Mac from the command line with this
-command: `<DockerforMacPath> --uninstall`. If Docker is installed in the default
-location, the following command provides a clean uninstall.
-
-```shell
-$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
-Docker is running, exiting...
-Docker uninstalled successfully. You can move the Docker application to the trash.
-```
-
-You might want to use the command-line uninstall if, for example, you find that
-the app is non-functional, and you cannot uninstall it from the menu.
+> Uninstall Docker for Mac from the commandline
+>
+> To uninstall Docker from Mac from a terminal, run: `<DockerforMacPath> --uninstall`.
+> If your instance is installed in the default location, this command provides a
+> clean uninstall:
+>
+> ```shell
+> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+> Docker is running, exiting...
+> Docker uninstalled successfully. You can move the Docker application to the trash.
+> ```
+> You might want to use the command-line uninstall if, for example, you find that
+> the app is non-functional, and you cannot uninstall it from the menu.
 
 ## Add TLS certificates
 
@@ -526,7 +485,7 @@ You can access your [Docker Cloud](/docker-cloud/index.md){:target="_blank" clas
 
 From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or create one.
 
-![Docker Cloud sign-in](images/menu/docker-sign-in.png){: .with-border width="250px"} | ![Docker Cloud sign-in](images/menu/docker-signed-in.png){:.with-border width="250px"}
+![Docker Cloud sign-in](images/menu/d4m-menu-sign-in.png){: .with-border width="250px"}
 
 Then use the Docker for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
