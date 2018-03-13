@@ -526,6 +526,19 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13 (Edge)
+
+* Upgrades
+  - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
+  - [Docker Machine 0.14.0](https://github.com/docker/machine/releases/tag/v0.14.0)
+  - [Docker compose 1.20.0-rc2](https://github.com/docker/compose/releases/tag/1.20.0-rc2)
+  - [Notary 0.6.0](https://github.com/docker/notary/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.87  
+
+* Bug fixes and minor changes
+  - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. "host.docker.internal", "docker.for.mac.host.internal", "docker.for.mac.localhost").
+  - Fix daemon not starting properly when setting TLS-related options. Fixes [docker/for-mac#2663](https://github.com/docker/for-mac/issues/2663)
+
 ### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27 (Edge)
 
 [Download](https://download.docker.com/mac/edge/23022/Docker.dmg)
