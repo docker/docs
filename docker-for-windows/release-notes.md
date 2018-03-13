@@ -483,6 +483,21 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.03.0-ce-rc3-win56 2018-03-13 (Edge)
+
+* Upgrades
+  - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
+  - [Docker Machine 0.14.0](https://github.com/docker/machine/releases/tag/v0.14.0)
+  - [Docker compose 1.20.0-rc2](https://github.com/docker/compose/releases/tag/1.20.0-rc2)
+  - [Notary 0.6.0](https://github.com/docker/notary/releases/tag/v0.6.0)
+  - Linux Kernel 4.9.87
+
+* Bug fixes and minor changes
+  - Fix port Windows Containers port forwarding on windows 10 build 16299 post KB4074588. Fixes [docker/for-win#1707](https://github.com/docker/for-win/issues/1707), [docker/for-win#1737](https://github.com/docker/for-win/issues/1737)
+  - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. "host.docker.internal", "docker.for.win.host.internal", "docker.for.win.localhost").
+  - If Kubernetes is enabled, switch CLI orchestrator option back to "swarm" when switching to Windows Containers.
+  - Fix daemon not starting properly when setting TLS-related options.
+
 ### Docker Community Edition 18.03.0-ce-rc1-win54 2018-02-27 (Edge)
 
 [Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
