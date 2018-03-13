@@ -164,7 +164,6 @@ from the repository.
 
     To also add the **edge** repository, add `edge` after `stable` on the last
     line of the command.
-    To add an unsupported operating Debian-based operating system, you will need to know which distribution you have, such as `jessie`.
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
