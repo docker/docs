@@ -16,24 +16,15 @@ toc_max: 4
 toc_min: 1
 ---
 
-Welcome to Docker for Mac!
+Welcome to Docker for Mac! Docker is a full development platform for creating
+containerized apps, and Docker for Mac is the best way to get started with
+Docker _on a Mac_.
 
-Docker is a full development platform for creating containerized apps, and
-Docker for Mac is the best way to get started with Docker on a Mac.
+> See [Install Docker for Mac](install.md){: target="_blank" class="_"} for information on system requirements and stable & edge channels.
 
-> **Got Docker for Mac?** If you have not yet installed Docker for Mac,
-> see [Install Docker for Mac](install.md) for an explanation of stable and edge
-> channels, system requirements, and download/install information.
+## Check versions
 
->**Looking for system requirements?** Check out
-> [What to know before you install](install.md#what-to-know-before-you-install),
-> which has moved to the new install topic.
-{: id="what-to-know-before-you-install" }
-
-## Check versions of Docker Engine, Compose, and Machine
-
-Run these commands to test if your versions of `docker`, `docker-compose`, and
-`docker-machine` are up-to-date and compatible with `Docker.app`.
+Ensure your versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and compatible with `Docker.app`. Your output may differ if you are running different versions.
 
 ```shell
 $ docker --version
@@ -46,262 +37,205 @@ $ docker-machine --version
 docker-machine version {{ site.machine_version }}, build 9ba6da9
 ```
 
-> **Note**: The above is an example. Your output may differ if you are running
-> different versions.
+## Explore the application
 
-## Explore the application and run examples
+1.  Open a command-line terminal and test that your installation works by
+    running the simple Docker image, [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
-1.  Open a command-line terminal, and run some Docker commands to verify that
-    Docker is working as expected.
+    ```shell
+    $ docker run hello-world
 
-	  Some good commands to try are `docker version` to check that you have the
-    latest release installed, and `docker ps` and `docker run hello-world` to
-    verify that Docker is running.
+    Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
 
-2.  For something more adventurous, start a Dockerized web server.
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
+    ...
+    ```
+
+2.  Start a Dockerized web server. Like the hello-world image above, if the
+    image is not found locally, Docker pulls it from Docker Hub.
 
     ```bash
-    docker run -d -p 80:80 --name webserver nginx
+    $ docker run -d -p 80:80 --name webserver nginx
     ```
 
-    If the image is not found locally, Docker pulls it from Docker Hub.
+3.  In a web browser, go to `http://localhost/` to view the nginx homepage. Because we specified the default HTTP port, it isn't necessary to append `:80` at the end of the URL.
 
-    In a web browser, go to `http://localhost/` to bring up the home page.
-    (Since you specified the default HTTP port, it isn't necessary to append
-    `:80` at the end of the URL.)
+    ![nginx home page](images/hello-world-nginx.png){:width="500px"}
 
-    ![nginx home page](images/hello-world-nginx.png)
-
-    > **Note**: Early beta releases used `docker` as the hostname to build the
+    > Early beta releases used `docker` as the hostname to build the
     > URL. Now, ports are exposed on the private IP addresses of the VM and
-    > forwarded to `localhost` with no other host name set. See also,
-    > [Release Notes](release-notes.md) for Beta 9.
+    > forwarded to `localhost` with no other host name set.
 
-3.  Run `docker ps` while your web server is running to see details on the
-    webserver container.
+4.  View the details on the container while your web server is running (with `docker container ls` or `docker ps`):
 
     ```none
-		CONTAINER ID        IMAGE                COMMAND                  CREATED              STATUS              PORTS                              NAMES
-		56f433965490        nginx                "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
+    $ docker container ls
+    CONTAINER ID   IMAGE   COMMAND                  CREATED              STATUS              PORTS                         NAMES
+    56f433965490   nginx   "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
     ```
-4.  Stop or remove containers and images.
 
-    The `nginx` webserver continues to run in the container on that port
-    until you stop and/or remove the container. If you want to stop the
-    webserver, type: `docker container stop webserver` and start it again with `docker
-    start webserver`. A stopped container does not show up with `docker ps`; for
-    that, you need to run `docker ps -a`.
+5.  Stop and remove containers and images with the following commands. Use the "all" flag (`--all` or `-a`) to view stopped containers.
 
-    To stop and remove the running container with a single command, type:
-    `docker container rm -f webserver`. This removes the container, but not the
-    `nginx` image. You can list local images with `docker image ls`. You might
-    want to keep some images around so that you don't need to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker image rm` followed by an image ID or image name. For example, `docker image rm nginx`.
+    ```shell
+    $ docker container ls
+    $ docker container stop webserver
+    $ docker container ls -a
+    $ docker container rm webserver
+    $ docker image ls
+    $ docker image rm nginx
+    ```
 
-**Want more example applications?** [Get Started](/get-started/) and [Samples](/samples/) are great places to start.
+## Preferences menu
 
-## Preferences
+Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Preferences** from the menu bar and configure the runtime options described below.
 
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
-**Preferences** from the menu bar.
+![Docker context menu](images/menu/d4m-menu-prefs.png){:width="250px"}
 
-![Docker context menu](images/menu-prefs-selected.png)
+### General tab
 
-You can set the following runtime options.
+![Preferences](/docker-for-mac/images/menu/d4m-menu-prefs-general.png){:width="400px"}
 
->**Note:** The above example shows a user signed in for integrated
-Docker Cloud access. To learn more about the feature,
-see [Docker Cloud](#docker-cloud).
+Gneral settings are:
 
-### General
+- **Start Docker when you log in**: Uncheck this option if you don't want Docker to start when you open your session.
 
-![Preferences](/docker-for-mac/images/settings.png)
+- **Automatically check for updates** notifies you when an update is available.
+  Click **OK** to accept and install updates (or cancel to keep the current
+  version). If you disable this option, you can still find out about updates
+  manually by choosing ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
 
-#### Auto-start, update, backups, usage data
+- **Include VM in Time Machine backups** backs up the Docker for Mac virtual machine. (Disabled by default.)
 
-* Docker for Mac is set to automatically **start Docker when you log in**.
-  Uncheck this option if you don't want Docker to start when you
-  open your session.
+- **Securely store Docker logins in MacOS keychain** stores your Docker login credentials. (Enabled by default.)
 
-* Docker for Mac is set to **automatically check for updates** and notify
-  you when an update is available. If an update is found, click **OK** to accept
-and install it (or cancel to keep the current version). If you disable the check
-for updates, you can still find out about updates manually by choosing ![whale
-menu](/docker-for-mac/images/whale-x.png){: .inline} -> **Check for Updates**.
+- **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage data to Docker. This information helps Docker improve the application and get more context for troubleshooting problems. (Enabled by default.)
 
-* Check **Include VM in Time Machine backups** to back up the Docker for Mac virtual machine. (By default, this is unchecked.)
+### File sharing tab
 
-* You have the option to **Securely store Docker logins in MacOS keychain**,
-  enabled by default. To "opt out" of storing your Docker login credentials,
-  uncheck this option.
+Choose which local directories to share with your containers. File sharing is
+required for volume mounting if the project lives outside of the `/Users`
+directory. In that case, share the drive where the Dockerfile and volume are
+located. Otherwise, you get `file not found` or `cannot start service errors at
+runtime`.
 
-* **Send usage statistics** &mdash; You can set Docker for Mac to auto-send
-  diagnostics, crash reports, and usage data. This information can help Docker
-  improve the application and get more context for troubleshooting problems.
-  Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
-  more information in some cases, even with auto-send enabled.
+![File Sharing](images/menu/d4m-menu-prefs-fileshare.png){:width="400px"}
 
-### File sharing
+File share settings are:
 
-You can decide which directories on your Mac to share with containers.
+- **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
-* **Add a Directory** - Click `+` and navigate to the directory you
-want to add.
-
-	![File Sharing](images/settings-file-share.png)
-
-* Click **Apply & Restart** to make the directory available to
-  containers using Docker's bind mount (`-v`) feature.
+- **Apply & Restart** makes the directory available to containers using Docker's bind mount (`-v`) feature.
 
   There are some limitations on the directories that can be shared:
 
-  * They cannot be a subdirectory of an already shared directory.
+  - They cannot be a subdirectory of an already shared directory.
+  - They cannot already exist inside of Docker.
 
-  * They cannot already exist inside of Docker.
+For more information, see:
 
-See [Namespaces](osxfs.md#namespaces) in the topic on
-[osxfs file system sharing](osxfs.md) for more information.
+- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on [osxfs file system sharing](osxfs.md).
+- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-> **Tip**: File sharing is required for volume mounting if the project lives
-> outside of the `/Users` directory. In that case, share the drive where the
-> Dockerfile and volume are located. Otherwise, you get `file not found` or
-> `cannot start service errors at runtime`. (See also
-> [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+### Advanced tab
 
+On the Advanced tab, you can limit resources available to Docker.
 
-### Advanced
+![Advanced Preference settings-advanced](images/menu/d4m-menu-prefs-advanced.png){:width="400px"}
 
-![Advanced Preference settings-advanced](images/settings-advanced.png)
+Advanced settings are:
 
+**CPUs**: By default, Docker for Mac is set to use half the number of processors available
+on the host machine. To increase processing power, set this to a higher number;
+to decrease, lower the number.
 
-#### CPUs
+**Memory**: By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
+the total available memory on your Mac. To increase RAM, set this to a higher number;
+to decrease it, lower the number.
 
-By default, Docker for Mac is set to use half the number of processors available on the host machine. You can increase
-processing power for the app by setting this to a higher number, or lower it to
-have Docker for Mac use fewer computing resources.
+**Swap**: Configure swappiness as needed. The default is 1.
 
-#### Memory
+### Disk tab
 
-By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
-the total available memory on your Mac. You can increase the RAM on the app to
-get faster performance by setting this number higher (for example to `3`) or
-lower (to `1`) if you want Docker for Mac to use less memory.
+Specify the **Disk image location** of the Linux volume, where containers and images are stored.
 
-#### Disk image location (storage)
+You can also move the disk image location. If you attempt to move the disk image
+to a location that already has one, you get a prompt asking if you want to use
+the existing image or replace it.
 
-You can specify the **Disk image location** of the Linux volume, which is where
-containers and images are stored.
+![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-disk.png){:width="400px"}
 
-You can move the disk image location.
-
-If you attempt to move the disk image to a location that
-already has one, you get a prompt asking if you want to use the existing
-image or replace it.
-
-![Advanced settings](images/settings-advanced-beta.png)
-
-### HTTP proxy settings
+### Proxies tab
 
 Docker for Mac detects HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling
 containers.
 
-![Proxies settings](/docker-for-mac/images/settings-proxies.png)
+![Proxies settings](/docker-for-mac/images/menu/d4m-menu-prefs-proxies.png){:width="400px"}
 
 <p id="daemon-experimental-mode" />
 
-### Docker Daemon
+### Daemon tab
 
-You can configure options on the Docker daemon that determine how your
-containers run. You can configure some **Basic** options on the daemon with
-interactive settings, or switch to **Advanced** to edit the JSON directly.
+You can configure options on the Docker daemon that determine how your containers run.
 
-The settings offered on **Basic** dialog can be
-configured directly in the JSON as well. This version just surfaces
-some of the common settings to make it easier to configure them.
+Select **Basic** to configure the daemon with interactive settings, or select
+**Advanced** to edit the JSON directly.
 
-* [Experimental mode](#experimental-mode)
-* [Custom registries](#custom-registries)
-* [Edit the daemon configuration file](#edit-the-daemon-configuration-file)
+![Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-basic.png){:width="400px"}
 
-![Daemon](/docker-for-mac/images/settings-advanced-experimental-beta.png)
 
-#### Experimental mode
+#### Experimental features
 
 Both Docker for Mac Stable and Edge releases have experimental features enabled
-on Docker Engine, as described in the [Docker Experimental Features
-README](https://github.com/moby/moby/blob/master/experimental/README.md) on
-GitHub.
-
-Experimental features are not appropriate for production environments or
-workloads. They are meant to be sandbox experiments for new ideas. Some
-experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsequent Edge releases, and never
-released on Stable.
-
-On both Edge and Stable releases, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker for Mac uses the current generally available
+on Docker Engine, as described [Docker Experimental Features README](https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md){: target="_blank" class="_"}. If you uncheck **experimental mode**, Docker for Mac uses the current generally available
 release of Docker Engine.
 
-You can check whether you are running experimental mode or not by typing `docker
-version` on the command line. Experimental mode is listed under `Server` data.
-If `Experimental` is `true`, then Docker is running in experimental mode, as
-shown here. (If `false`, Experimental mode is off.)
+> Don't enable experimental features in production
+>
+> Experimental features are not appropriate for production environments or workloads. They are meant to be sandbox experiments for new ideas. Some experimental features may become incorporated into upcoming stable releases, but others may be modified or pulled from subsequent Edge releases, and never released on Stable.
+
+You can see whether you are running experimental mode at the command line. If
+`Experimental` is `true`, then Docker is running in experimental mode, as shown
+here. (If `false`, Experimental mode is off.)
 
 ```bash
-$ docker version
-Client:
- Version:      1.13.0-rc3
- API version:  1.25
- Go version:   go1.7.3
- Git commit:   4d92237
- Built:        Tue Dec  6 01:15:44 2016
- OS/Arch:      darwin/amd64
-
-Server:
- Version:      1.13.0-rc3
- API version:  1.25 (minimum version 1.12)
- Go version:   go1.7.3
- Git commit:   4d92237
- Built:        Tue Dec  6 01:15:44 2016
- OS/Arch:      linux/amd64
- Experimental: true
+{% raw %}$ docker version -f {{.Server.Experimental}}{% endraw %}
+true
 ```
 
-#### Custom registries
+#### Insecure registries
 
-As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
-public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
-your own insecure [registry](/registry/introduction.md). Add URLs for insecure
-registries and registry mirrors on which to host your images.
+You can set up a custom and insecure [registry](/registry/introduction.md){: target="_blank" class="_"}
+to store your public or private images (instead of using [Docker Hub](https://hub.docker.com/){:target="_blank" class="_"}
+or [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md)).
+Add URLs for your insecure registries and registry mirrors on which to host your images.
 
-See also, [How do I add custom CA
-certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates) and
-[How do I add client
-certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates) in the FAQs.
+See also:
+- [How do I add custom CA certificates?](/docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates){:target="_blank" class="_"}
+- [How do I add client certificates](/docker-for-mac/faqs.md#how-do-i-client-certificates){:target="_blank" class="_"}
 
-#### Edit the daemon configuration file
+#### Daemon configuration file
 
-On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
-the JSON file, and determine entirely how your containers run. For a full
-list of options on the Docker daemon, see
-[daemon](/engine/reference/commandline/dockerd.md) in the Docker Engine
-command line reference.
+Click the **Advanced** tab to configure the daemon from the JSON file. For a full
+list of options, see the Docker Engine [dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank" class="_"}.
 
-After editing the daemon configuration , click **Apply & Restart** to save it
-and reboot Docker. Or, to cancel changes, click another preference tab, then
-choose to discard or not apply changes when asked.
+Click **Apply & Restart** to save your settings and reboot Docker. Or, to cancel
+changes, click another preference tab, then choose to discard or not apply changes when asked.
 
-![Docker Daemon](/docker-for-mac/images/settings-daemon-beta.png)
+![Docker Daemon](/docker-for-mac/images/menu/d4m-menu-prefs-daemon-adv.png){:width="400px"}
 
-### Kubernetes
+### Kubernetes tab
 
-**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge
-channel.** Kubernetes support is not included in Docker for Mac Stable releases.
-To find out more about Stable and Edge channels and how to switch between them,
-see [General configuration](/docker-for-mac/#general).
+**Kubernetes is only available in Docker for Mac 17.12 CE and higher, on the Edge channel.**
+Kubernetes support is not included in Docker for Mac Stable releases. To find
+out more about Stable and Edge channels and how to switch between them, see
+[General configuration](/docker-for-mac/#general){:target="_blank" class="_"}.
 
 Docker for Mac 17.12 CE (and higher) Edge includes a standalone Kubernetes server
 that runs on your Mac, so that you can test deploying your Docker workloads on
@@ -313,8 +247,8 @@ pointing to some other environment, such as `minikube` or a GKE cluster, be sure
 to change context so that `kubectl` is pointing to `docker-for-desktop`:
 
 ```bash
-kubectl config get-contexts
-kubectl config use-context docker-for-desktop
+$ kubectl config get-contexts
+$ kubectl config use-context docker-for-desktop
 ```
 
 If you installed `kubectl` with Homebrew, or by some other method, and
@@ -322,20 +256,23 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
 - To enable Kubernetes support and install a standalone instance of Kubernetes
   running as a Docker container, select **Enable Kubernetes** and click the
-  **Apply and restart** button.
+  **Apply** button.
 
-  ![Enable Kubernetes](/docker-for-mac/images/kubernetes/kubernetes-enable.png)
+  ![Enable Kubernetes](/docker-for-mac/images/menu/d4m-menu-prefs-kubernetes.png){: .with-border width="400px"}
 
-  An internet connection is required. Images required to run the Kubernetes
+
+  An Internet connection is required. Images required to run the Kubernetes
   server are downloaded and instantiated as containers, and the
   `/usr/local/bin/kubectl` command is installed on your Mac.
-
-  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png)
 
   When Kubernetes is enabled and running, an additional status bar item displays
   at the bottom right of the Docker for Mac Preferences dialog.
 
-  ![Kubernetes status](/docker-for-mac/images/kubernetes/kubernetes-status.png)
+  ![Installation complete](/docker-for-mac/images/kubernetes/kubernetes-install-complete.png){:width="400px"}
+
+  The status of Kubernetes shows in the Docker menu and the context points to `docker-for-desktop`.
+
+  ![Docker Menu with Kubernetes](/docker-for-mac/images/menu/d4m-menu-kube-context.png){: .with-border width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -347,38 +284,41 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with
-  Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md).
+  Docker for Mac, see [Deploy to Kubernetes](/docker-for-mac/kubernetes.md){:target="_blank" class="_"}.
 
-## Uninstall or reset
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
-**Preferences** from the menu bar, then click **Uninstall / Reset** on the
-Preferences dialog.
+### Reset tab
 
-![Uninstall or reset Docker](images/settings-uninstall.png)
+Select ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} ->
+**Preferences** from the menu bar, then click **Reset** to reset factory
+defaults, restart the Docker daemon, or uninstall.
+
+![Uninstall or reset Docker](images/menu/d4m-menu-prefs-reset.png){:width="400px"}
+
+Reset settings are:
+
+* **Restart** - Select to restart the Docker daemon.
 
 * **Remove all data** - This option removes/resets all Docker data _without_
 a reset to factory defaults (which would cause you to lose settings).
 
-* **Uninstall** - Choose this option to remove Docker for Mac from your system.
-
 * **Reset to factory defaults** - Choose this option to reset all options on
   Docker for Mac to its initial state, the same as when it was first installed.
 
+  * **Uninstall** - Choose this option to remove Docker for Mac from your system.
 
-### Uninstall from the command line
-
-Alternatively, you can uninstall Docker for Mac from the command line with this
-command: `<DockerforMacPath> --uninstall`. If Docker is installed in the default
-location, the following command provides a clean uninstall.
-
-```shell
-$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
-Docker is running, exiting...
-Docker uninstalled successfully. You can move the Docker application to the trash.
-```
-
-You might want to use the command-line uninstall if, for example, you find that
-the app is non-functional, and you cannot uninstall it from the menu.
+> Uninstall Docker for Mac from the commandline
+>
+> To uninstall Docker from Mac from a terminal, run: `<DockerforMacPath> --uninstall`.
+> If your instance is installed in the default location, this command provides a
+> clean uninstall:
+>
+> ```shell
+> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+> Docker is running, exiting...
+> Docker uninstalled successfully. You can move the Docker application to the trash.
+> ```
+> You might want to use the command-line uninstall if, for example, you find that
+> the app is non-functional, and you cannot uninstall it from the menu.
 
 ## Add TLS certificates
 
@@ -399,26 +339,24 @@ the certificate to the macOS keychain, which is picked up by Docker for
 Mac. Here is an example.
 
 ```bash
-sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
+$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 
 Or, if you prefer to add the certificate to your own local keychain only (rather
 than for all users), run this command instead:
 
 ```
-security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
+$ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
 ```
 
-See also, [Directory structures for
-certificates](#directory-structures-for-certificates).
+See also, [Directory structures for certificates](#directory-structures-for-certificates).
 
 > **Note:** You need to restart Docker for Mac after making any changes to
 the keychain or to the `~/.docker/certs.d` directory in order for
 the changes to take effect.
 
-For a complete explanation of how to do this, see the blog post [Adding
-Self-signed Registry Certs to Docker & Docker for
-Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
+For a complete explanation of how to do this, see the blog post
+[Adding Self-signed Registry Certs to Docker & Docker for Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/){:target="_blank" class="_"}.
 
 ### Add client certificates
 
@@ -430,16 +368,16 @@ When the Docker for Mac application starts up, it copies the `~/.docker/certs.d`
 folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
 for Mac `xhyve` virtual machine).
 
-> * You need to restart Docker for Mac after making any changes to
- the keychain or to the `~/.docker/certs.d` directory in order for
- the changes to take effect.
+> * You need to restart Docker for Mac after making any changes to the keychain
+> or to the `~/.docker/certs.d` directory in order for the changes to take
+> effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
-Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
-certificates listed under insecure registries, and does not send client
-certificates. Commands like `docker run` that attempt to pull from
-the registry produce error messages on the command line, as well as on the
-registry.
+> Daemon](/docker-for-mac/index.md#docker-daemon)). Docker for Mac ignores
+> certificates listed under insecure registries, and does not send client
+> certificates. Commands like `docker run` that attempt to pull from the
+> registry produce error messages on the command line, as well as on the
+> registry.
 
 ### Directory structures for certificates
 
@@ -490,43 +428,42 @@ installed both in Bash and Zsh.
 
 ### Bash
 
-Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
+Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank" class="_"}
 To activate completion for Docker commands, these files need to be copied or
 symlinked to your `bash_completion.d/` directory. For example, if you installed
 bash via [Homebrew](http://brew.sh/):
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+etc=/Applications/Docker.app/Contents/Resources/etc
+ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
 ### Zsh
 
-In Zsh, the [completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
+In Zsh, the [completion system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" class="_"}
 takes care of things. To activate completion for Docker commands, these files
 need to be copied or symlinked to your Zsh `site-functions/` directory. For
 example, if you installed Zsh via [Homebrew](http://brew.sh/):
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
+etc=/Applications/Docker.app/Contents/Resources/etc
+ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
+ln -s $etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
+ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
 ## Give feedback and get help
 
 To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Mac
-forum](https://forums.docker.com/c/docker-for-mac).
+discussion, log on to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
 
-To report bugs or problems, log on to [Docker for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues), where you can review
+To report bugs or problems, log on to [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"}, where you can review
 community reported issues, and file new ones. See [Diagnose problems, send
 feedback, and create GitHub
-issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As a part of reporting issues on GitHub, we can help you troubleshoot
-the log
-data.
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues). As
+a part of reporting issues on GitHub, we can help you troubleshoot the log data.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
@@ -534,45 +471,39 @@ options at the bottom of each docs page.
 ## Docker Store
 
 Choose **Docker Store** from the Docker for Mac menu to get to the Docker app
-downloads site. [Docker store](https://store.docker.com/) is a component of the
+downloads site. [Docker store](https://store.docker.com/){:target="_blank" class="_"} is a component of the
 next-generation Docker Hub, and the best place to find compliant, trusted
 commercial and free software distributed as Docker Images.
 
-![Docker Store](images/docker-store.png)
+![Docker Store](images/docker-store.png){:width="550px"}
 
 ## Docker Cloud
 
-You can access your [Docker Cloud](/docker-cloud/index.md) account from within
-Docker for Mac.
+You can access your [Docker Cloud](/docker-cloud/index.md){:target="_blank" class="_"}  account from within Docker for Mac.
 
-![Docker Cloud](images/docker-cloud.png)
+![Docker Cloud](images/docker-cloud.png){:width="550px"}
 
-From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or
-create one.
+From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or create one.
 
-![Docker Cloud sign-in](images/menu-cloud-sign-in.png)
+![Docker Cloud sign-in](images/menu/d4m-menu-sign-in.png){: .with-border width="250px"}
 
 Then use the Docker for Mac menu to create, view, or navigate directly to your
 Cloud resources, including **organizations**, **repositories**, and **swarms**.
 
-Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
+Check out these [Docker Cloud topics](/docker-cloud/index.md){:target="_blank" class="_"}  to learn more:
 
-* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
-* [Builds and Images](/docker-cloud/builds/index.md)
-* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
+* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md){:target="_blank" class="_"}
+* [Builds and Images](/docker-cloud/builds/index.md){:target="_blank" class="_"}
+* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md){:target="_blank" class="_"}
 
-Need a direct link to Cloud? [Take me to Docker
-Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
+Need a direct link to Cloud? [Take me to Docker Cloud](https://cloud.docker.com/){: target="_blank" class="_" }.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](/get-started/).
+* Try out the walkthrough at [Get Started](/get-started/){: target="_blank" class="_"}.
 
-* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
-  walkthroughs and source code.
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
-* For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](/engine/api.md).
+* For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/api.md){: target="_blank" class="_"}.
 
-* Check out the blog post
-  [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).
+* Check out the blog post, [What’s New in Docker 17.06 Community Edition (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" class="_"}.

@@ -157,7 +157,7 @@ for Docker for Mac, and how the two products can coexist.
 
 3.  Click the whale (![whale menu](/docker-for-mac/images/whale-x.png){: .inline}) to get Preferences and other options.
 
-	  ![Docker context menu](images/menu.png)
+	  ![Docker context menu](images/menu/menu.png)
 
 4.  Select **About Docker** to verify that you have the latest version.
 
