@@ -18,6 +18,12 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 3.0.0-beta3
+
+(8 March 2018)
+
+Several improvements since the Beta 2 release.
+
 ## Version 3.0.0-beta2
 
 (18 January 2018)
