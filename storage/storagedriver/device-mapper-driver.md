@@ -439,10 +439,10 @@ instead.
 ##### Use the device_tool utility
 
 A community-contributed script called `device_tool.go` is available in the
-`contrib/` directory of the Docker Github repository. You can use this tool to
-resize a `loop-lvm` thin pool, avoiding the long process above. This tool is
-not guaranteed to work, but you should only be using `loop-lvm` on non-production
-systems.
+[moby/moby](https://github.com/moby/moby/tree/master/contrib/docker-device-tool)
+Github repository. You can use this tool to resize a `loop-lvm` thin pool,
+avoiding the long process above. This tool is not guaranteed to work, but you
+should only be using `loop-lvm` on non-production systems.
 
 If you do not want to use `device_tool`, you can [resize the thin pool manually](#use-operating-system-utilities) instead.
 
