@@ -329,7 +329,7 @@ guides:
     - path: /config/labels-custom-metadata/
       title: Apply custom metadata to daemons
       nosync: true
-    - path: /config/containers/logging/
+    - path: /config/containers/logging/configure/
       title: Configuring default drivers
       nosync: true
     - path: /config/thirdparty/prometheus/
