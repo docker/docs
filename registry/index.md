@@ -48,7 +48,7 @@ The Registry is compatible with Docker engine **version 1.6.0 or higher**.
 
 Start your registry
 
-    docker run -d -p 5000:5000 --name registry registry:2
+    docker run -d -p 5000:5000 --name registry registry:2.6
 
 Pull (or build) some image from the hub
 
