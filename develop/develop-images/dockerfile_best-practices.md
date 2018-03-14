@@ -609,6 +609,7 @@ container start:
 
     COPY ./docker-entrypoint.sh /
     ENTRYPOINT ["/docker-entrypoint.sh"]
+    CMD ["postgres"]
 
 This script allows the user to interact with Postgres in several ways.
 
