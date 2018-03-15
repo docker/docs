@@ -1699,6 +1699,18 @@ manuals:
           path: /ee/ucp/interlock/
         - title: Architecture
           path: /ee/ucp/interlock/architecture/
+        - sectiontitle: Deploy
+          section:
+          - title: Simple deployment
+            path: /ee/ucp/interlock/deploy/
+          - title: Production deployment
+            path: /ee/ucp/interlock/deploy/production/
+          - title: Configure your deployment
+            path: /ee/ucp/interlock/deploy/configure/
+          - title: Configuration reference
+            path: /ee/ucp/interlock/deploy/configuration-reference/
+
+
         - sectiontitle: Introduction
           section:
           - title: What is Layer 7 routing
