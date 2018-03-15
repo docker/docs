@@ -106,4 +106,4 @@ information you are looking for is probably available on the GitHub repository.
 
 ## Looking for Moby?
 
-{% include content/moby.md %}
+See [Moby documentation](https://github.com/docker/docker.github.io/blob/master/_includes/content/moby.md).
