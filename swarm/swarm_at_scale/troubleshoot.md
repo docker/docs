@@ -2,7 +2,7 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Try Swarm at scale
-keywords: docker, swarm, scale, voting, application,  certificates
+keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
 - /swarm/swarm_at_scale/05-troubleshoot/
 title: Troubleshoot the application
@@ -79,7 +79,7 @@ to restart failed containers.
 One way to automatically restart failed containers is to explicitly start them
 with the `--restart=unless-stopped` flag. This tells the local Docker daemon
 to attempt to restart the container if it unexpectedly exits. This only
-works in situations where the node hosting the container and it's Docker daemon
+works in situations where the node hosting the container and its Docker daemon
 are still up. This cannot restart a container if the node hosting it has failed,
 or if the Docker daemon itself has failed.
 
@@ -92,7 +92,7 @@ drops below 10, the tool attempts to start more.
 In our simple voting-app example, the front-end is scalable and serviced by a
 load balancer. In the event that one of the two web containers fails (or the
 node that is hosting it fails), the load balancer stops routing requests to it and
-send all requests to the surviving web container. This solution is highly scalable
+sends all requests to the surviving web container. This solution is highly scalable
 meaning you can have up to *n* web containers behind the load balancer.
 
 ## Interlock load balancer failures
