@@ -14,7 +14,8 @@ Docker for Mac installed, and are ready to get started, skip to
 [Get started with Docker for Mac](index.md) for a quick tour of
 the command line, preferences, and tools.
 
->**Looking for Release Notes?** [Get release notes for all versions here](release-notes.md).
+>**Looking for Release Notes?** Get release notes for [Stable](release-notes.md)
+>and [Edge](edge-release-notes.md) releases.
 
 ## Download Docker for Mac
 
@@ -174,6 +175,8 @@ Congratulations! You are up and running with Docker for Mac.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
+* [Release Notes](release-notes.md) lists component updates, new features, and
+  improvements associated with Stable releases (or [Edge Release
+  Notes](edge-release-notes.md)).
 
 * [Get Started with Docker](/get-started/) provides a general Docker tutorial.

@@ -2930,7 +2930,9 @@ manuals:
   - path: /docker-for-mac/opensource/
     title: Open source licensing
   - path: /docker-for-mac/release-notes/
-    title: Release notes
+    title: Stable release notes
+  - path: /docker-for-mac/edge-release-notes/
+    title: Edge release notes
 - sectiontitle: Docker for Windows
   section:
   - path: /docker-for-windows/
@@ -2948,7 +2950,9 @@ manuals:
   - path: /docker-for-windows/opensource/
     title: Open source licensing
   - path: /docker-for-windows/release-notes/
-    title: Release notes
+    title: Stable release notes
+  - path: /docker-for-windows/edge-release-notes/
+    title: Edge release notes
 - title: Docker ID accounts
   path: /docker-id/
 - sectiontitle: Docker Machine
