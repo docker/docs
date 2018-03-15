@@ -1356,7 +1356,7 @@ This Beta release includes some significant changes:
 * Logs for the windows service are not aggregated with logs from the GUI. This is expected to be fixed in future versions.
 
 
-## Beta 10 Release (2016-05-03 1.11.0-beta10)
+### Beta 10 Release (2016-05-03 1.11.0-beta10)
 
 **New**
 
@@ -1573,9 +1573,7 @@ are working on a solution.
 - Properly unmount shares when the user un-selects the setting
 - Don't install on unsupported builds
 
-## Alpha Release Notes
-
-### Alpha 4 Release (A2016-03-10 1.10.4.0)
+### Alpha 4 Release (2016-03-10 1.10.4.0)
 
 - Faster Startup & Shutdown
 - Use host DNS parameters

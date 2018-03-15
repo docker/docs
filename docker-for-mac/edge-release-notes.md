@@ -1056,7 +1056,7 @@ events or unexpected unmounts.
 
 * osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount (docker/docker#24503)
 
-#### Docker for Mac 1.12.0 (2016-07-28 1.12.0-beta21)
+### Docker for Mac 1.12.0 (2016-07-28 1.12.0-beta21)
 
 **New**
 
