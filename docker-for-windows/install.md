@@ -10,7 +10,7 @@ install package includes everything you need to run Docker on a Windows system.
 This topic describes pre-install considerations, and how to download and install
 Docker for Windows.<br><br>
 
->**Installing Docker on Windows Server?** please see 
+>**Installing Docker on Windows Server?** Please see 
 [installing Docker EE on Windows Server](/install/windows/docker-ee.md).
 
 > **Already have Docker for Windows?**
