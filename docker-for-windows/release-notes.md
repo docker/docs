@@ -20,7 +20,7 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2018
 
-### Docker Community Edition 17.12.0-ce-win47 2018-01-12 (Stable)
+### Docker Community Edition 17.12.0-ce-win47 2018-01-12
 
 [Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
 
@@ -30,7 +30,7 @@ for Windows](install.md#download-docker-for-windows).
   - Fix Mount compatibility when mounting drives with `-v //c/...`, now mounted in /host_mnt/c in the LinuxKit VM. Fixes [docker/for-win#1509](https://github.com/docker/for-win/issues/1509), [docker/for-win#1516](https://github.com/docker/for-win/issues/1516), [docker/for-win#1497](https://github.com/docker/for-win/issues/1497)
   - Fix icon displaying edge. Fixes [docker/for-win#1508](https://github.com/docker/for-win/issues/1508)
 
-### Docker Community Edition 17.12.0-ce-win46 2018-01-09 (Stable)
+### Docker Community Edition 17.12.0-ce-win46 2018-01-09
 
 [Download](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
 
@@ -54,7 +54,7 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Stable Releases of 2017
 
-### Docker Community Edition 17.09.1-ce-win42 2017-12-11 (Stable)
+### Docker Community Edition 17.09.1-ce-win42 2017-12-11
 
 [Download](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
 
@@ -71,14 +71,14 @@ for Windows](install.md#download-docker-for-windows).
   - Increased timeout for VM boot startup to 2 minutes.
 
 
-### Docker Community Edition 17.09.0-ce-win33 2017-10-06 (Stable)
+### Docker Community Edition 17.09.0-ce-win33 2017-10-06
 
 [Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
 
 * Bug fixes
   - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
-### Docker Community Edition 17.09.0-ce-win32 2017-10-02 (Stable)
+### Docker Community Edition 17.09.0-ce-win32 2017-10-02
 
 [Download](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe)
 
@@ -117,7 +117,7 @@ for Windows](install.md#download-docker-for-windows).
   - VPNKit: automatically trim whitespace from int or bool database keys
   - Do not anymore move credentials in credential store at startup
 
-### Docker Community Edition 17.06.2-ce-win27 2017-09-06 (Stable)
+### Docker Community Edition 17.06.2-ce-win27 2017-09-06
 
 [Download](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe)
 
@@ -125,7 +125,7 @@ for Windows](install.md#download-docker-for-windows).
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
-### Docker Community Edition 17.06.1-ce-rc1-win24 2017-08-24 (stable)
+### Docker Community Edition 17.06.1-ce-rc1-win24 2017-08-24
 
 [Download](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe)
 
@@ -140,7 +140,7 @@ for Windows](install.md#download-docker-for-windows).
 - Fix locked container id file (Fixes [docker/for-win#818](https://github.com/docker/for-win/issues/818))
 - Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859))
 
-### Docker Community Edition 17.06.0-ce-win18 2017-06-28 (stable)
+### Docker Community Edition 17.06.0-ce-win18 2017-06-28
 
 [Download](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe)
 
@@ -180,7 +180,7 @@ for Windows](install.md#download-docker-for-windows).
 - Named pipe client connection should not trigger dead locks on `docker run` with data in stdin anymore
 - Buffered data should be treated correctly when docker client requests are upgraded to raw streams
 
-### Docker Community Edition 17.03.1-ce-win12  2017-05-12 (stable)
+### Docker Community Edition 17.03.1-ce-win12  2017-05-12
 
 [Download](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe)
 
@@ -188,7 +188,7 @@ for Windows](install.md#download-docker-for-windows).
 
 - Security fix for CVE-2017-7308
 
-### Docker Community Edition 17.03.0, 2017-03-02 (stable)
+### Docker Community Edition 17.03.0, 2017-03-02
 
 [Download](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe)
 
@@ -223,7 +223,7 @@ progressively
 - VPNKit: fix a source of occasional packet loss (truncation) on the virtual ethernet link
 - Fix negotiation of TimeSync protocol version (via kernel update)
 
-### Docker for Windows 1.13.1, 2017-02-09 (stable)
+### Docker for Windows 1.13.1, 2017-02-09
 
 [Download](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi)
 
@@ -240,7 +240,7 @@ progressively
 - Various typos fixes
 - Fix in Hyper-V VM setup (should fix `ObjectNotFound` errors)
 
-### Docker for Windows 1.13.0, 2017-01-19 (stable)
+### Docker for Windows 1.13.0, 2017-01-19
 
 [Download](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi)
 
@@ -283,7 +283,7 @@ progressively
 
 ## Stable Releases of 2016
 
-### Docker for Windows 1.12.5, 2016-12-20 (stable)
+### Docker for Windows 1.12.5, 2016-12-20
 
 [Download](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
 
@@ -292,11 +292,11 @@ progressively
 - Docker 1.12.5
 - Docker Compose 1.9.0
 
-### Skipped Docker for Windows 1.12.4 (stable)
+### Skipped Docker for Windows 1.12.4
 
 We did not distribute a 1.12.4 stable release
 
-### Docker for Windows 1.12.3, 2016-11-09 (stable)
+### Docker for Windows 1.12.3, 2016-11-09
 
 [Download](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi)
 
@@ -379,7 +379,7 @@ We did not distribute a 1.12.4 stable release
 
 - Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
 
-### Docker for Windows 1.12.1, 2016-09-16 (stable)
+### Docker for Windows 1.12.1, 2016-09-16
 
 [Download](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi)
 
@@ -474,7 +474,7 @@ We did not distribute a 1.12.4 stable release
 
 * Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
-### Docker for Windows 1.12.0, 2016-07-28 (stable)
+### Docker for Windows 1.12.0, 2016-07-28
 
 [Download](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi)
 

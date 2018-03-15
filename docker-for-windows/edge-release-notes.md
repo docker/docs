@@ -18,7 +18,7 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
-### Docker Community Edition 18.03.0-ce-rc3-win56 2018-03-13 (Edge)
+### Docker Community Edition 18.03.0-ce-rc3-win56 2018-03-13
 
 * Upgrades
   - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
@@ -33,7 +33,7 @@ for Windows](install.md#download-docker-for-windows).
   - If Kubernetes is enabled, switch CLI orchestrator option back to "swarm" when switching to Windows Containers.
   - Fix daemon not starting properly when setting TLS-related options.
 
-### Docker Community Edition 18.03.0-ce-rc1-win54 2018-02-27 (Edge)
+### Docker Community Edition 18.03.0-ce-rc1-win54 2018-02-27
 
 [Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
 
@@ -55,7 +55,7 @@ for Windows](install.md#download-docker-for-windows).
   - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
 
 
-### Docker Community Edition 18.02.0-ce-win52 2018-02-08 (Edge)
+### Docker Community Edition 18.02.0-ce-win52 2018-02-08
 
 [Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
 
@@ -63,7 +63,7 @@ for Windows](install.md#download-docker-for-windows).
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
   - [Docker compose 1.19.0](https://github.com/docker/compose/releases/tag/1.19.0)
 
-### Docker Community Edition 18.02.0-ce-rc2-win51 2018-02-02 (Edge)
+### Docker Community Edition 18.02.0-ce-rc2-win51 2018-02-02
 
 * Upgrades
   - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
@@ -77,7 +77,7 @@ for Windows](install.md#download-docker-for-windows).
 * Bug fixes and minor changes
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Windows installer (still possible to migrate Toolbox images manually).
 
-### Docker Community Edition 18.02.0-ce-rc1-win50 2018-01-26 (Edge)
+### Docker Community Edition 18.02.0-ce-rc1-win50 2018-01-26
 
 * Upgrades
   - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
@@ -91,7 +91,7 @@ for Windows](install.md#download-docker-for-windows).
   - Do not recreate Desktop icon on upgrade (effective on next upgrade). Fixes [docker/for-win#246](https://github.com/docker/for-win/issues/246), [docker/for-win#925](https://github.com/docker/for-win/issues/925), [docker/for-win#1551](https://github.com/docker/for-win/issues/1551)
   - Fix proxy for docker.for.win.localhost & docker.for.win.host.internal. Fixes [docker/for-win#1130](https://github.com/docker/for-win/issues/1130)
 
-### Docker Community Edition 18.01.0-ce-win48 2018-01-19 (Edge)
+### Docker Community Edition 18.01.0-ce-win48 2018-01-19
 
 [Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
 
@@ -104,7 +104,7 @@ for Windows](install.md#download-docker-for-windows).
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
   - Fix Mount compatibility when mounting drives with `-v //c/...`, now mounted in /host_mnt/c in the LinuxKit VM. Fixes [docker/for-win#1509](https://github.com/docker/for-win/issues/1509), [docker/for-win#1516](https://github.com/docker/for-win/issues/1516), [docker/for-win#1497](https://github.com/docker/for-win/issues/1497)
 
-### Docker Community Edition 17.12.0-ce-win45 2018-01-05 (Edge)
+### Docker Community Edition 17.12.0-ce-win45 2018-01-05
 
 [Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
 
@@ -112,7 +112,7 @@ for Windows](install.md#download-docker-for-windows).
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
 
 ## Edge Releases of 2017
-### Docker Community Edition 17.12.0-ce-rc4-win44 2017-12-21 (Edge)
+### Docker Community Edition 17.12.0-ce-rc4-win44 2017-12-21
 
 * Upgrades
   - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
@@ -123,7 +123,7 @@ for Windows](install.md#download-docker-for-windows).
   - Fix Vpnkit issue when username has spaces. See [docker/for-win#1429](https://github.com/docker/for-win/issues/1429).
   - Diagnostic improvements to get VM logs before VM shutdown.
 
-### Docker Community Edition 17.12.0-ce-rc3-win43 2017-12-15 (Edge)
+### Docker Community Edition 17.12.0-ce-rc3-win43 2017-12-15
 
 * Upgrades
   - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
@@ -131,7 +131,7 @@ for Windows](install.md#download-docker-for-windows).
 * Bug fixes and minor changes
   - Fix installer check for not supported Windows `CoreCountrySpecific` Edition.
 
-### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13 (Edge)
+### Docker Community Edition 17.12.0-ce-rc2-win41 2017-12-13
 
 * Upgrades
   - [Docker 17.12.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc2)
@@ -144,14 +144,14 @@ for Windows](install.md#download-docker-for-windows).
   - Better removal of LCOW images & containers when uninstalling Docker
   - Links in Update changelog open the default browser instead of IE (fixes [docker/for-win#1311](https://github.com/docker/for-win/issues/1311))
 
-### Docker Community Edition 17.11.0-ce-win40 2017-11-22 (Edge)
+### Docker Community Edition 17.11.0-ce-win40 2017-11-22
 
 [Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
 
-### Docker Community Edition 17.11.0-ce-rc4-win39 2017-11-17 (Edge)
+### Docker Community Edition 17.11.0-ce-rc4-win39 2017-11-17
 
 * Upgrades
   - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
@@ -161,7 +161,7 @@ for Windows](install.md#download-docker-for-windows).
 * Bug fixes and minor changes
   - Increased timeout for VM boot startup to 2 minutes.
 
-### Docker Community Edition 17.11.0-ce-rc3-win38 2017-11-09 (Edge)
+### Docker Community Edition 17.11.0-ce-rc3-win38 2017-11-09
 
 * Upgrades
   - [Docker 17.11.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc3)
@@ -176,7 +176,7 @@ for Windows](install.md#download-docker-for-windows).
   - Do not propose toolbox migration popup after clicking "Try LCOW" on first startup
   - Fix `docker.for.win.localhost` not working in proxy settings. Fixes [for-win/#1130](https://github.com/docker/for-win/issues/1130)
 
-### Docker Community Edition 17.11.0-ce-rc2-win37 2017-11-02 (Edge)
+### Docker Community Edition 17.11.0-ce-rc2-win37 2017-11-02
 
 * Upgrades
   - [Docker 17.11.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc2)
@@ -189,7 +189,7 @@ for Windows](install.md#download-docker-for-windows).
 * Bug fixes and minor changes
   - Fix centos:5 & centos:6 images not starting properly with LinuxKit VM (fixes [docker/for-win#1245](https://github.com/docker/for-win/issues/1245)).
 
-### Docker Community Edition 17.10.0-ce-win36 2017-10-24 (Edge)
+### Docker Community Edition 17.10.0-ce-win36 2017-10-24
 
 * Upgrades
   - [Docker 17.10.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce)
@@ -201,13 +201,13 @@ for Windows](install.md#download-docker-for-windows).
   - Experimental support for Microsoft Linux Containers On Windows, on Windows 10 RS3.
 
 
-### Docker Community Edition 17.09.0-ce-win34 2017-10-06 (Edge)
+### Docker Community Edition 17.09.0-ce-win34 2017-10-06
 
 * Bug fixes
   - Fix Docker For Windows unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
 
-### Docker Community Edition 17.09.0-ce-win31 2017-09-29 (Edge)
+### Docker Community Edition 17.09.0-ce-win31 2017-09-29
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -216,12 +216,12 @@ for Windows](install.md#download-docker-for-windows).
   - VPNKit: security fix to reduce the risk of DNS cache poisoning attack (reported by Hannes Mehnert https://hannes.nqsb.io/)
 
 
-### Docker Community Edition 17.09.0-ce-rc3-win30 2017-09-22 (Edge)
+### Docker Community Edition 17.09.0-ce-rc3-win30 2017-09-22
 
 * Upgrades
   - [Docker 17.09.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc3)
 
-### Docker Community Edition 17.09.0-ce-rc2-win29 2017-09-19 (Edge)
+### Docker Community Edition 17.09.0-ce-rc2-win29 2017-09-19
 
 * Upgrades
   - [Docker 17.09.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc2)
@@ -234,7 +234,7 @@ for Windows](install.md#download-docker-for-windows).
   - Vpnkit : do not block startup when ICMP permission is denied. (Fixes docker/for-win#1036, docker/for-win#1035, docker/for-win#1040)
   - Fix minor bug on update checks
 
-### Docker Community Edition 17.09.0-ce-rc1-win28 2017-09-07 (Edge)
+### Docker Community Edition 17.09.0-ce-rc1-win28 2017-09-07
 
 * Upgrades
   - [Docker 17.09.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc1)
@@ -251,14 +251,14 @@ for Windows](install.md#download-docker-for-windows).
   - Fix auto updates checkbox, no need to restart the application
   - Fix check for updates menu when auto updates was disable
 
-### Docker Community Edition 17.07.0-win26 Release Notes (2017-09-01 17.07.0-win26) (edge)
+### Docker Community Edition 17.07.0-win26 Release Notes (2017-09-01 17.07.0-win26)
 
 * Upgrades
   - [Docker 17.07.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce)
   - [Docker compose 1.16.0](https://github.com/docker/compose/releases/tag/1.16.0)
   - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
 
-### Docker Community Edition 17.07.0-rc4-win25 Release Notes (2017-08-24 17.07.0-win25) (edge)
+### Docker Community Edition 17.07.0-rc4-win25 Release Notes (2017-08-24 17.07.0-win25)
 
 **Upgrades**
 
@@ -275,7 +275,7 @@ TCP connection is idle for more than 5 minutes (related to
 Mac user reported this problem, which applied to both Mac and Windows
 and was fixed on both.
 
-### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23) (edge)
+### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23)
 
 **Upgrades**
 
@@ -294,14 +294,14 @@ and was fixed on both.
 - VPNKit: Improved the logging around the Unix domain socket connections
 - VPNKit: Automatically trim whitespace from `int` or `bool` database keys
 
-### Docker Community Edition 17.07.0-ce-rc2-win22 Release Notes (2017-08-11 17.06.0-win22) (edge)
+### Docker Community Edition 17.07.0-ce-rc2-win22 Release Notes (2017-08-11 17.06.0-win22)
 
 **Upgrades**
 
 - [Docker 17.07.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc2)
 - Linux Kernel 4.9.41
 
-### Docker Community Edition 17.07.0-ce-rc1-win21 Release Notes (2017-07-31 17.07.0-win21) (edge)
+### Docker Community Edition 17.07.0-ce-rc1-win21 Release Notes (2017-07-31 17.07.0-win21)
 
 **Upgrades**
 
@@ -320,7 +320,7 @@ and was fixed on both.
 - Fix `config.json` not being released properly (Fixes [docker/for-win#867](https://github.com/docker/for-win/issues/867))
 - Do not anymore move credentials in credential store at startup
 
-### Docker Community Edition 17.06.1-ce-rc1-win20 Release Notes (2017-07-18 17.06.1-win20) (edge)
+### Docker Community Edition 17.06.1-ce-rc1-win20 Release Notes (2017-07-18 17.06.1-win20)
 
 **Upgrades**
 
@@ -333,20 +333,20 @@ and was fixed on both.
 - Fix locked container id file (Fixes [docker/for-win#818](https://github.com/docker/for-win/issues/818))
 - Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859))
 
-### Docker Community Edition 17.06.0-win17 Release Notes (2017-06-28 17.06.0-win17) (edge)
+### Docker Community Edition 17.06.0-win17 Release Notes (2017-06-28 17.06.0-win17)
 
 **Upgrades**
 
 - [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
 
-### Docker Community Edition 17.06.0-win16 Release Notes (2017-06-21 17.06.0-rc5-ce-win16) (edge)
+### Docker Community Edition 17.06.0-win16 Release Notes (2017-06-21 17.06.0-rc5-ce-win16)
 
 **Upgrades**
 
 - [Docker 17.06.0-ce-rc5](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc5)
  - [Docker compose 1.14.0](https://github.com/docker/compose/releases/tag/1.14.0)
 
-### Docker Community Edition 17.06.0-win15 Release Notes (2017-06-16 17.06.0-rc4-ce-win15) (edge)
+### Docker Community Edition 17.06.0-win15 Release Notes (2017-06-16 17.06.0-rc4-ce-win15)
 
 **Upgrades**
 
@@ -355,7 +355,7 @@ and was fixed on both.
 - Linux Kernel 4.9.31
 
 
-### Docker Community Edition 17.06.0-win14 Release Notes (2017-06-08 17.06.0-rc2-ce-win14) (edge)
+### Docker Community Edition 17.06.0-win14 Release Notes (2017-06-08 17.06.0-rc2-ce-win14)
 
 **Upgrades**
 
@@ -373,7 +373,7 @@ and was fixed on both.
 - Fixed group access check for users logged in with Active Directory (fixes [docker/for-win#785](https://github.com/docker/for-win/issues/785))
 - Check environment variables and add some warnings in logs if they can cause docker to fail
 
-### Docker Community Edition 17.06.0-win13 Release Notes (2017-06-01 17.06.0-rc1-ce-win13) (edge)
+### Docker Community Edition 17.06.0-win13 Release Notes (2017-06-01 17.06.0-rc1-ce-win13)
 
 **Upgrades**
 
@@ -395,13 +395,13 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Named pipes are now created with more constrained security descriptors to improve security
 - Security fix : Users must be part of a specific group "docker-users" to run Docker for windows
 
-### Docker Community Edition 17.0.5-win11 Release Notes (2017-05-12 17.05.0-ce-win11) (edge)
+### Docker Community Edition 17.0.5-win11 Release Notes (2017-05-12 17.05.0-ce-win11)
 
 **Upgrades**
 
 - Security fix for CVE-2017-7308
 
-### Docker Community Edition 17.0.5-win9 Release Notes (2017-05-09 17.05.0-ce-win9) (edge)
+### Docker Community Edition 17.0.5-win9 Release Notes (2017-05-09 17.05.0-ce-win9)
 
 **Upgrades**
 
@@ -421,13 +421,13 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Fixed VM not starting when machine had very long name
 - Fixed a bug where Windows daemon.json file was not written (fixes [docker/for-win#670](https://github.com/docker/for-win/issues/670))
 
-### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8) (edge)
+### Docker Community Edition 17.0.5-win8 Release Notes (2017-04-13 17.05.0-ce-rc1-win8)
 
 **Upgrades**
 
 - [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
 
-### Docker Community Edition 17.0.4-win7 Release Notes (2017-04-06 17.04.0-ce-win7) (edge)
+### Docker Community Edition 17.0.4-win7 Release Notes (2017-04-06 17.04.0-ce-win7)
 
 **New**
 
@@ -444,7 +444,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 - Added patches to the kernel to fix VMBus crash
 
-### Docker Community Edition 17.04.0-ce-win6 Release Notes (2017-04-03 17.04.0-ce-rc2-win6) (edge)
+### Docker Community Edition 17.04.0-ce-win6 Release Notes (2017-04-03 17.04.0-ce-rc2-win6)
 
 **Upgrades**
 
@@ -457,7 +457,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Named pipe client connection should not trigger dead locks on `docker run` with data in stdin anymore
 - Buffered data should be treated correctly when docker client requests are upgraded to raw streams
 
-### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-rc1-win3) (edge)
+### Docker Community Edition 17.03.1 Release Notes (2017-03-28 17.03.1-ce-rc1-win3)
 
 **Upgrades**
 
@@ -469,7 +469,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 - VPNKit: capture up to 64KiB of NTP traffic for diagnostics, better handling of DNS
 
-### Docker Community Edition 17.03.0 Release Notes (2017-03-06 17.03.0-ce-win1) (edge)
+### Docker Community Edition 17.03.0 Release Notes (2017-03-06 17.03.0-ce-win1)
 
 **New**
 
@@ -492,7 +492,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Improved Firewall handling: stop listing the rules since it can take a lot of time
 - Don't rollback to the previous engine when the desired engine fails to start
 
-### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-win1) (edge)
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-win1)
 
 **New**
 

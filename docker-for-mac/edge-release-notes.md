@@ -18,7 +18,7 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
-### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13 (Edge)
+### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13
 
 [Download](https://download.docker.com/mac/edge/23352/Docker.dmg)
 
@@ -33,7 +33,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix for the HTTP/S transparent proxy when using "localhost" names (e.g. "host.docker.internal", "docker.for.mac.host.internal", "docker.for.mac.localhost").
   - Fix daemon not starting properly when setting TLS-related options. Fixes [docker/for-mac#2663](https://github.com/docker/for-mac/issues/2663)
 
-### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27 (Edge)
+### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27
 
 [Download](https://download.docker.com/mac/edge/23022/Docker.dmg)
 
@@ -51,7 +51,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix hostPath mounts in Kubernetes.
   - Update Compose on Kubernetes to v0.3.0 rc4. Existing Kubernetes stacks will be removed during migration and need to be re-deployed on the cluster.
 
-### Docker Community Edition 18.02.0-ce-mac53 2018-02-09 (Edge)
+### Docker Community Edition 18.02.0-ce-mac53 2018-02-09
 
 [Download](https://download.docker.com/mac/edge/22617/Docker.dmg)
 
@@ -64,7 +64,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix empty registry added by mistake in some cases in the Preference Daemon Pane. Fixes [docker/for-mac#2537](https://github.com/docker/for-mac/issues/2537)
   - Clearer error message when incompatible hardware is detected. Diagnostics are not proposed in the error popup in this case.
 
-### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02 (Edge)
+### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02
 
 [Download](https://download.docker.com/mac/edge/22446/Docker.dmg)
 
@@ -78,7 +78,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix some cases where selecting "Reset" after an error did not reset properly.
   - Fix incorrect ntp config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
 
-### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26 (Edge)
+### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26
 
 [Download](https://download.docker.com/mac/edge/22256/Docker.dmg)
 
@@ -90,7 +90,7 @@ for Mac](install.md#download-docker-for-mac).
   - Keep any existing kubectl binary when activating Kubenetes in Docker for Mac, and restore it when disabling Kubernetes. Fixes [docker/for-mac#2508](https://github.com/docker/for-mac/issues/2508), [docker/for-mac#2368](https://github.com/docker/for-mac/issues/2368)
   - Fix Kubernetes context selector. Fixes [docker/for-mac#2495](https://github.com/docker/for-mac/issues/2495)
 
-### Docker Community Edition 18.01.0-ce-mac48 2018-01-19 (Edge)
+### Docker Community Edition 18.01.0-ce-mac48 2018-01-19
 
 [Download](https://download.docker.com/mac/edge/22004/Docker.dmg)
 
@@ -115,7 +115,7 @@ for Mac](install.md#download-docker-for-mac).
   - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
 
 
-### Docker Community Edition 17.12.0-ce-mac45 2018-01-05 (Edge)
+### Docker Community Edition 17.12.0-ce-mac45 2018-01-05
 
 [Download](https://download.docker.com/mac/edge/21669/Docker.dmg)
 
@@ -131,7 +131,7 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2017
 
-### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21 (Edge)
+### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21
 
 [Download](https://download.docker.com/mac/edge/21438/Docker.dmg)
 
@@ -143,7 +143,7 @@ for Mac](install.md#download-docker-for-mac).
   - Display actual size used by the VM disk, especially useful for disks using raw format. See [docker/for-mac#2297](https://github.com/docker/for-mac/issues/2297).
   - Fix more specific edge cases in filesharing settings migration.
 
-### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15 (Edge)
+### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15
 
 [Download](https://download.docker.com/mac/edge/21270/Docker.dmg)
 
@@ -153,7 +153,7 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - Fix filesharing migration issue ([docker/for-mac#2317](https://github.com/docker/for-mac/issues/2317))
 
-### Docker Community Edition 17.12.0-ce-rc2-mac41 2017-12-13 (Edge)
+### Docker Community Edition 17.12.0-ce-rc2-mac41 2017-12-13
 
 * Upgrades
   - [Docker 17.12.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc2)
@@ -170,14 +170,14 @@ for Mac](install.md#download-docker-for-mac).
   - Display various component versions in About box
   - Better VM state handling & error messsages in case of VM crashes
 
-### Docker Community Edition 17.11.0-ce-mac40 2017-11-22 (Edge)
+### Docker Community Edition 17.11.0-ce-mac40 2017-11-22
 
 [Download](https://download.docker.com/mac/edge/20561/Docker.dmg)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
 
-### Docker Community Edition 17.11.0-ce-rc4-mac39 2017-11-17 (Edge)
+### Docker Community Edition 17.11.0-ce-rc4-mac39 2017-11-17
 
 * Upgrades
   - [Docker 17.11.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc4)
@@ -195,7 +195,7 @@ for Mac](install.md#download-docker-for-mac).
   `3944768 -rw-r--r--@ 1 user  staff  68719476736 Nov 16 11:19 Docker.raw`
   The first number (`3944768`) is the allocated space in blocks; the larger number `68719476736` is the maximum total amount of space the file may consume in future in bytes.
 
-### Docker Community Edition 17.11.0-ce-rc3-mac38 2017-11-09 (Edge)
+### Docker Community Edition 17.11.0-ce-rc3-mac38 2017-11-09
 
 * Upgrades
   - [Docker 17.11.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc3)
@@ -203,7 +203,7 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - Fix docker build exits successfully but fails to build image [moby/#35413](https://github.com/moby/moby/issues/35413).
 
-### Docker Community Edition 17.11.0-ce-rc2-mac37 2017-11-02 (Edge)
+### Docker Community Edition 17.11.0-ce-rc2-mac37 2017-11-02
 
 * Upgrades
   - [Docker 17.11.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce-rc2)
@@ -214,7 +214,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix centos:5 & centos:6 images not starting properly with LinuxKit VM (fixes [docker/for-mac#2169](https://github.com/docker/for-mac/issues/2169)).
 
 
-### Docker Community Edition 17.10.0-ce-mac36 2017-10-24 (Edge)
+### Docker Community Edition 17.10.0-ce-mac36 2017-10-24
 
 [Download](https://download.docker.com/mac/edge/19824/Docker.dmg)
 
@@ -226,12 +226,12 @@ for Mac](install.md#download-docker-for-mac).
 * New
   - VM entirely built with Linuxkit
 
-### Docker Community Edition 17.09.0-ce-mac34 2017-10-06 (Edge)
+### Docker Community Edition 17.09.0-ce-mac34 2017-10-06
 
 * Bug fixes and minor changes
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
-### Docker Community Edition 17.09.0-ce-mac31 2017-09-29 (Edge)
+### Docker Community Edition 17.09.0-ce-mac31 2017-09-29
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -240,12 +240,12 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - Fix password encoding/decoding. May require to re-login to docker cloud after this version is installed. (Fixes:docker/for-mac#2008, docker/for-mac#2016, docker/for-mac#1919, docker/for-mac#712, docker/for-mac#1220).
 
-### Docker Community Edition 17.09.0-ce-rc3-mac30 2017-09-22 (Edge)
+### Docker Community Edition 17.09.0-ce-rc3-mac30 2017-09-22
 
 * Upgrades
   - [Docker 17.09.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc3)
 
-### Docker Community Edition 17.09.0-ce-rc2-mac29 2017-09-19 (Edge)
+### Docker Community Edition 17.09.0-ce-rc2-mac29 2017-09-19
 
 * Upgrades
   - [Docker 17.09.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc2)
@@ -256,7 +256,7 @@ for Mac](install.md#download-docker-for-mac).
   - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
   - Rotate logs in the VM more often
 
-### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07 (Edge)
+### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07
 
 * Upgrades
   - [Docker 17.09.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce-rc1)
@@ -266,14 +266,14 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - VPNKit: change protocol to support error messages reported back from the server
 
-### Docker Community Edition 17.07.0-ce-mac26, 2017-09-01 (edge)
+### Docker Community Edition 17.07.0-ce-mac26, 2017-09-01
 
 * Upgrades
   - [Docker 17.07.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce)
   - [Docker compose 1.16.0](https://github.com/docker/compose/releases/tag/1.16.0)
   - [Docker Credential Helpers 0.6.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.0)
 
-### Docker Community Edition 17.07.0-ce-rc4-mac25, 2017-08-24 (edge)
+### Docker Community Edition 17.07.0-ce-rc4-mac25, 2017-08-24
 
 **Upgrades**
 
@@ -287,7 +287,7 @@ for Mac](install.md#download-docker-for-mac).
 TCP connection is idle for more than 5 minutes (related to
 [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
 
-### Docker Community Edition 17.07.0-ce-rc3-mac23, 2017-08-21 (edge)
+### Docker Community Edition 17.07.0-ce-rc3-mac23, 2017-08-21
 
 **Upgrades**
 
@@ -304,14 +304,14 @@ TCP connection is idle for more than 5 minutes (related to
 - VPNKit: Improved the logging around the Unix domain socket connections
 - VPNKit: Automatically trim whitespace from `int` or `bool` database keys
 
-### Docker Community Edition 17.07.0-ce-rc2-mac22, 2017-08-11 (edge)
+### Docker Community Edition 17.07.0-ce-rc2-mac22, 2017-08-11
 
 **Upgrades**
 
 - [Docker 17.07.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v17.07.0-ce-rc2)
 - Linux Kernel 4.9.41
 
-### Docker Community Edition 17.07.0-ce-rc1-mac21, 2017-07-31 (edge)
+### Docker Community Edition 17.07.0-ce-rc1-mac21, 2017-07-31
 
 **Upgrades**
 
@@ -332,7 +332,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
 - Support paging of Docker Cloud [repositories](/docker-cloud/builds/repos.md) and [organizations](/docker-cloud/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 
-### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18 (edge)
+### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18
 
 **Upgrades**
 
@@ -340,20 +340,20 @@ TCP connection is idle for more than 5 minutes (related to
 - Linux Kernel 4.9.36
 - AUFS 20170703
 
-### Docker Community Edition 17.06.0-ce-mac17, 2017-06-28 (edge)
+### Docker Community Edition 17.06.0-ce-mac17, 2017-06-28
 
 **Upgrades**
 
 - [Docker 17.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce)
 
-### Docker Community Edition 17.06.0-rc5-ce-mac16, 2017-06-21 (edge)
+### Docker Community Edition 17.06.0-rc5-ce-mac16, 2017-06-21
 
 **Upgrades**
 
 - [Docker 17.06.0-ce-rc5](https://github.com/docker/docker-ce/releases/tag/v17.06.0-ce-rc5)
 - [Docker compose 1.14.0](https://github.com/docker/compose/releases/tag/1.14.0)
 
-### Docker Community Edition 17.06.0-rc4-ce-mac15, 2017-06-16 (edge)
+### Docker Community Edition 17.06.0-rc4-ce-mac15, 2017-06-16
 
 **Upgrades**
 
@@ -361,7 +361,7 @@ TCP connection is idle for more than 5 minutes (related to
 - [Docker Credential Helpers 0.5.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.2)
 - Linux Kernel 4.9.31
 
-### Docker Community Edition 17.06.0-rc2-ce-mac14, 2017-06-08 (edge)
+### Docker Community Edition 17.06.0-rc2-ce-mac14, 2017-06-08
 
 **Upgrades**
 
@@ -369,7 +369,7 @@ TCP connection is idle for more than 5 minutes (related to
 - [Docker Machine 0.12.0](https://github.com/docker/machine/releases/tag/v0.12.0)
 - [Docker compose 1.14.0-rc2](https://github.com/docker/compose/releases/tag/1.14.0-rc2)
 
-### Docker Community Edition 17.06.0-rc1-ce-mac13, 2017-06-01 (edge)
+### Docker Community Edition 17.06.0-rc1-ce-mac13, 2017-06-01
 
 **Upgrades**
 
@@ -394,13 +394,13 @@ TCP connection is idle for more than 5 minutes (related to
 - Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
 - OSXFS: improved latency for many common operations, such as read and write by approximately 25%
 
-### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12 (edge)
+### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12
 
 **Upgrades**
 
 - Security fix for CVE-2017-7308
 
-### Docker Community Edition 17.05.0-ce-mac9, 2017-05-09 (edge)
+### Docker Community Edition 17.05.0-ce-mac9, 2017-05-09
 
 **Upgrades**
 
@@ -416,14 +416,14 @@ TCP connection is idle for more than 5 minutes (related to
 - You are now prompted for your password, if you changed it in Docker Cloud.
 - Request time sync after waking up to improve [docker/for-mac#17](https://github.com/docker/for-mac/issues/17)
 
-### Docker Community Edition 17.05.0-ce-rc1-mac8, 2017-04-13 (edge)
+### Docker Community Edition 17.05.0-ce-rc1-mac8, 2017-04-13
 
 **Upgrades**
 
 - [Docker 17.05.0-ce-rc1](https://github.com/docker/docker/releases/tag/v17.05.0-ce-rc1)
 
 
-### Docker Community Edition 17.04.0-ce-mac7, 2017-04-06 (edge)
+### Docker Community Edition 17.04.0-ce-mac7, 2017-04-06
 
 **New**
 
@@ -442,7 +442,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Add a reset to factory defaults button when application crashes
 - Toolbox import dialog now defaults to "Skip"
 
-### Docker Community Edition 17.04.0-ce-rc2-mac6, 2017-04-03 (edge)
+### Docker Community Edition 17.04.0-ce-rc2-mac6, 2017-04-03
 
 **Upgrades**
 
@@ -460,7 +460,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Diagnostics now contains more settings data
 
 
-### Docker Community Edition 17.03.1-ce-rc1-mac3, 2017-03-28 (edge)
+### Docker Community Edition 17.03.1-ce-rc1-mac3, 2017-03-28
 
 **Upgrades**
 
@@ -477,7 +477,7 @@ TCP connection is idle for more than 5 minutes (related to
 - Qcow: numerous bugfixes
 - osxfs: buffer readdir
 
-### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (edge)
+### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06
 
 **Hotfixes**
 
@@ -488,7 +488,7 @@ TCP connection is idle for more than 5 minutes (related to
 
 - [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
 
-### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (edge)
+### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02
 
 **New**
 

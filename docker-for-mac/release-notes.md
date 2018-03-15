@@ -20,7 +20,7 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Stable Releases of 2018
 
-### Docker Community Edition 17.12.0-ce-mac55 2018-02-27 (Stable)
+### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 
 [Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
 
@@ -28,7 +28,7 @@ for Mac](install.md#download-docker-for-mac).
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
   - Fix VPNKit proxy for docker.for.mac.http.internal.
 
-### Docker Community Edition 17.12.0-ce-mac49 2018-01-19 (Stable)
+### Docker Community Edition 17.12.0-ce-mac49 2018-01-19
 
 [Download](https://download.docker.com/mac/stable/21805/Docker.dmg)
 
@@ -41,7 +41,7 @@ for Mac](install.md#download-docker-for-mac).
   - Allow individual IP addresses to be added to HTTP proxy excludes.
   - Avoid hitting DNS timeouts when querying docker.for.mac.* when the upstream DNS servers are slow or missing.
 
-### Docker Community Edition 17.12.0-ce-mac47 2018-01-12 (Stable)
+### Docker Community Edition 17.12.0-ce-mac47 2018-01-12
 
 [Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
 
@@ -49,7 +49,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
   - Separate internal ports used to proxy HTTP and HTTPS content.
 
-### Docker Community Edition 17.12.0-ce-mac46 2018-01-09 (Stable)
+### Docker Community Edition 17.12.0-ce-mac46 2018-01-09
 
 [Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
 
@@ -76,7 +76,7 @@ for Mac](install.md#download-docker-for-mac).
   - Fix login into private repository with certificate issue. (See [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201))
 
 ## Stable Releases of 2017
-### Docker Community Edition 17.09.1-ce-mac42 2017-12-11 (Stable)
+### Docker Community Edition 17.09.1-ce-mac42 2017-12-11
 
 [Download](https://download.docker.com/mac/stable/21090/Docker.dmg)
 
@@ -88,21 +88,21 @@ for Mac](install.md#download-docker-for-mac).
 * Bug fixes and minor changes
   - Fix bug not allowing to move qcow disk in some cases.
 
-### Docker Community Edition 17.09.0-ce-mac35 2017-10-06 (Stable)
+### Docker Community Edition 17.09.0-ce-mac35 2017-10-06
 
 [Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
 
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
-### Docker Community Edition 17.09.0-ce-mac33 2017-10-03 (Stable)
+### Docker Community Edition 17.09.0-ce-mac33 2017-10-03
 
 [Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
 
 * Bug fix
   - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
 
-### Docker Community Edition 17.09.0-ce-mac32 2017-10-02 (Stable)
+### Docker Community Edition 17.09.0-ce-mac32 2017-10-02
 
 [Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
 
@@ -137,7 +137,7 @@ for Mac](install.md#download-docker-for-mac).
   - Diagnose can be cancelled & Improved help information. Fixes docker/for-mac#1134, docker/for-mac#1474
   - Support paging of docker-cloud repositories & orgs. Fixes docker/for-mac#1538
 
-### Docker Community Edition 17.06.2-ce-mac27 2017-09-06 (Stable)
+### Docker Community Edition 17.06.2-ce-mac27 2017-09-06
 
 [Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
 
@@ -145,7 +145,7 @@ for Mac](install.md#download-docker-for-mac).
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
-### Docker Community Edition 17.06.1-ce-mac24, 2017-08-21 (stable)
+### Docker Community Edition 17.06.1-ce-mac24, 2017-08-21
 
 [Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
 
@@ -160,7 +160,7 @@ for Mac](install.md#download-docker-for-mac).
 
 - Avoid unnecessary VM reboot (when changing proxy exclude, but no proxy set). Fixes [docker/for-mac#1809](https://github.com/docker/for-mac/issues/1809), [docker/for-mac#1801](https://github.com/docker/for-mac/issues/1801)
 
-### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28 (stable)
+### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28
 
 [Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
 
@@ -205,7 +205,7 @@ for Mac](install.md#download-docker-for-mac).
 - Disk trimming should work as expected
 - Diagnostics now contains more settings data
 
-### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12 (stable)
+### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12
 
 [Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
 
@@ -213,7 +213,7 @@ for Mac](install.md#download-docker-for-mac).
 
 - Security fix for CVE-2017-7308
 
-### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29 (stable)
+### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29
 
 [Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
 
@@ -222,7 +222,7 @@ for Mac](install.md#download-docker-for-mac).
 - [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
 
 
-### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (stable)
+### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02
 
 [Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
 
@@ -266,7 +266,7 @@ for Mac](install.md#download-docker-for-mac).
 - HyperKit: Dump guest physical and linear address from VMCS when dumping state
 - HyperKit: Kernel boots with panic=1 arg
 
-### Docker for Mac 1.13.1, 2017-02-09 (stable)
+### Docker for Mac 1.13.1, 2017-02-09
 
 [Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
 
@@ -283,7 +283,7 @@ for Mac](install.md#download-docker-for-mac).
 - `daemon.json` should render nicely in the UI
 - Allow to reset faulty `daemon.json` through a link in advanced subpanel
 
-### Docker for Mac 1.13.0, 2017-01-19 (stable)
+### Docker for Mac 1.13.0, 2017-01-19
 
 [Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
 
@@ -336,7 +336,7 @@ docker daemon (edit `daemon.json`)
 underestimate the number of active connections
 
 ## Stable Releases of 2016
-### Docker for Mac 1.12.5, 2016-12-20 (stable)
+### Docker for Mac 1.12.5, 2016-12-20
 
 [Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
 
@@ -345,11 +345,11 @@ underestimate the number of active connections
 - Docker 1.12.5
 - Docker Compose 1.9.0
 
-### Skipped Docker for Mac 1.12.4 (stable)
+### Skipped Docker for Mac 1.12.4
 
 We did not distribute a 1.12.4 stable release
 
-### Docker for Mac 1.12.3, 2016-11-09 (stable)
+### Docker for Mac 1.12.3, 2016-11-09
 
 [Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
 
@@ -416,7 +416,7 @@ We did not distribute a 1.12.4 stable release
 
 - Increase default ulimit for memlock (fixes [docker/for-mac#801](https://github.com/docker/for-mac/issues/801))
 
-### Docker for Mac 1.12.1, 2016-09-16 (stable)
+### Docker for Mac 1.12.1, 2016-09-16
 
 [Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
 
@@ -496,7 +496,7 @@ We did not distribute a 1.12.4 stable release
 
 * HyperKit updated with `dtrace` support and lock fixes
 
-### Docker for Mac 2016-08-11 1.12.0-a (stable)
+### Docker for Mac 2016-08-11 1.12.0-a
 
 [Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
 
@@ -515,7 +515,7 @@ events or unexpected unmounts.
 * osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 
-### Docker for Mac 1.12.0, 2016-07-28 (stable)
+### Docker for Mac 1.12.0, 2016-07-28
 
 [Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
 
