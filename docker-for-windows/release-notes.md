@@ -483,6 +483,15 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 18.03.0-ce-rc4-win57 2018-03-15 (Edge)
+
+* Upgrades
+  - [Docker 18.03.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc4)
+  - AUFS 20180312
+
+* Bug fixes and minor changes
+  - Fix support for AUFS. Fixes [docker/for-win#1831](https://github.com/docker/for-win/issues/1831)
+
 ### Docker Community Edition 18.03.0-ce-rc3-win56 2018-03-13 (Edge)
 
 * Upgrades
