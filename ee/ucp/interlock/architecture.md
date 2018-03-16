@@ -16,8 +16,8 @@ three components:
 * **Interlock-proxy**: This is a proxy/load-balancing service that handles the
 requests from the outside world. By default this service is a containerized
 NGINX deployment.
-* **Interlock-extension**: This service monitors changes in your services and
-generates the configuration used by the proxy service.
+* **Interlock-extension**: This is a helper service that generates the
+configuration used by the proxy service.
 * **Interlock**: This is the central piece of the layer 7 routing solution.
 It uses the Docker API to monitor events, and manages the extension and
 proxy services.
@@ -30,6 +30,9 @@ routing in UCP:
 An Interlock service starts running on a manager node, an Interlock-extension
 service starts running on a worker node, and two replicas of the
 Interlock-proxy service run on worker nodes.
+
+If you don't have any worker nodes in your cluster, then all Interlock
+components run on manager nodes.
 
 ## Deployment lifecycle
 
@@ -61,7 +64,7 @@ Once the layer 7 routing service is enabled, you apply specific labels to
 your swarm services. The labels define the hostnames that are routed to the
 service, the ports used, and other routing configurations.
 
-Once you deploy a swarm service with those labels:
+Once you deploy or update a swarm service with those labels:
 
 1. The `ucp-interlock` service is monitoring the Docker API for events and
 publishes the events to the `ucp-interlock-extension` service.
