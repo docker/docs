@@ -3207,7 +3207,7 @@ With the ongoing changes to the networking and execution subsystems of docker te
 
 + Website: new high-level overview
 - Makefile: Swap "go get" for "go get -d", especially to compile on go1.1rc
-* Packaging: packaging ubuntu; issue #510: Use goland-stable PPA package to build docker
+* Packaging: packaging ubuntu; issue #510: Use golang-stable PPA package to build docker
 
 ## 0.3.0 (2013-05-06)
 

@@ -14,7 +14,8 @@ Docker for Mac installed, and are ready to get started, skip to
 [Get started with Docker for Mac](index.md) for a quick tour of
 the command line, preferences, and tools.
 
->**Looking for Release Notes?** [Get release notes for all versions here](release-notes.md).
+>**Looking for Release Notes?** Get release notes for [Stable](release-notes.md)
+>and [Edge](edge-release-notes.md) releases.
 
 ## Download Docker for Mac
 
@@ -135,29 +136,29 @@ for Docker for Mac, and how the two products can coexist.
 1.  Double-click `Docker.dmg` to open the installer, then drag Moby the whale to
     the Applications folder.
 
-	  ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
+      ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
 
 2.  Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
 
-	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
+      ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
-	  You are prompted to authorize `Docker.app` with your system password after you launch it.
-	  Privileged access is needed to install networking components and links to the Docker apps.
+      You are prompted to authorize `Docker.app` with your system password after you launch it.
+      Privileged access is needed to install networking components and links to the Docker apps.
 
-	  The whale in the top status bar indicates that Docker is running, and accessible from a terminal.
+      The whale in the top status bar indicates that Docker is running, and accessible from a terminal.
 
-	  ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
+      ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
 
     If you just installed the app, you also get a success message with suggested
     next steps and a link to this documentation. Click the whale (![whale
     menu](/docker-for-mac/images/whale-x.png){: .inline}) in the status bar to
     dismiss this popup.
 
-	  ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
+      ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
 
 3.  Click the whale (![whale menu](/docker-for-mac/images/whale-x.png){: .inline}) to get Preferences and other options.
 
-	  ![Docker context menu](images/menu/menu.png)
+      ![Docker context menu](images/menu/menu.png)
 
 4.  Select **About Docker** to verify that you have the latest version.
 
@@ -165,15 +166,17 @@ Congratulations! You are up and running with Docker for Mac.
 
 ## Where to go next
 
-* [Getting started](index.md) provides an overview of Docker for Mac,
-basic Docker command examples, how to get help or give feedback, and
-links to all topics in the Docker for Mac guide.
+* [Getting started](index.md) provides an overview of Docker for Mac, basic
+  Docker command examples, how to get help or give feedback, and links to all
+  topics in the Docker for Mac guide.
 
-* [Troubleshooting](troubleshoot.md) describes common problems,
-workarounds, how to run and submit diagnostics, and submit issues.
+* [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
+  to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
+* [Release Notes](release-notes.md) lists component updates, new features, and
+  improvements associated with Stable releases (or [Edge Release
+  Notes](edge-release-notes.md)).
 
 * [Get Started with Docker](/get-started/) provides a general Docker tutorial.

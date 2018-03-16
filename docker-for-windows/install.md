@@ -19,8 +19,9 @@ Windows installed, and are ready to get started, skip to
 [Get started with Docker for Windows](index.md) for a quick tour of
 the command line, settings, and tools.
 
->**Looking for Release Notes?** [Get release notes for all
-versions here](release-notes.md).
+>**Looking for Release Notes?** Get release notes for [Stable](release-notes.md)
+>and [Edge](edge-release-notes.md) releases.
+
 
 ## Download Docker for Windows
 
@@ -166,16 +167,20 @@ Congratulations! You are up and running with Docker for Windows.
 
 ## Where to go next
 
-* [Getting started](index.md) provides an overview of Docker for Windows,
-basic Docker command examples, how to get help or give feedback, and
-links to all topics in the Docker for Windows guide.
+* [Getting started](index.md) provides an overview of Docker for Windows, basic
+  Docker command examples, how to get help or give feedback, and links to all
+  topics in the Docker for Windows guide.
 
 * [Get started with Docker](/get-started/) teaches you how to define and deploy
-applications with Docker.
+  applications with Docker.
 
-* [Troubleshooting](troubleshoot.md) describes common problems,
-workarounds, how to run and submit diagnostics, and submit issues.
+* [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
+  to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
+* [Release Notes](release-notes.md) lists component updates, new features, and
+  improvements associated with Stable releases (or [Edge Release
+  Notes](edge-release-notes.md)).
+
+* [Get Started with Docker](/get-started/) provides a general Docker tutorial.
