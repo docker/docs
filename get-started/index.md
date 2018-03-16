@@ -115,14 +115,13 @@ of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 
 > For full Kubernetes Integration
 >
-> - [Kubernetes on Docker for Mac](https://docs.docker.com/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+> - [Kubernetes on Docker for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
+[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
+> - [Kubernetes on Docker for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[17.12.0-ce Edge](https://docs.docker.com/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"}
-or higher.
-> - [Kubernetes on Docker for Windows](https://docs.docker.com/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.02.0-ce Edge](https://docs.docker.com/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"}
-or higher.
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"}
+and higher.
 
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
