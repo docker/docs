@@ -18,9 +18,21 @@ for Mac](install.md#download-docker-for-mac).
 
 ## Edge Releases of 2018
 
-### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13
+### Docker Community Edition 18.03.0-ce-rc4-mac57 2018-03-15
 
 [Download](https://download.docker.com/mac/edge/23352/Docker.dmg)
+
+* Upgrades
+  - [Docker 18.03.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc4)
+  - AUFS 20180312
+
+* Bug fixes and minor changes
+  - Fix support for AUFS. Fixes [docker/for-win#1831](https://github.com/docker/for-win/issues/1831)
+  - Fix synchronisation between CLI `docker login` and GUI login.
+
+### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13
+
+[Download](https://download.docker.com/mac/edge/23287/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)

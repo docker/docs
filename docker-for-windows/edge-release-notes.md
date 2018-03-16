@@ -18,7 +18,20 @@ for Windows](install.md#download-docker-for-windows).
 
 ## Edge Releases of 2018
 
+### Docker Community Edition 18.03.0-ce-rc4-win57 2018-03-15
+
+[Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe)
+
+* Upgrades
+  - [Docker 18.03.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc4)
+  - AUFS 20180312
+
+* Bug fixes and minor changes
+  - Fix support for AUFS. Fixes [docker/for-win#1831](https://github.com/docker/for-win/issues/1831)
+
 ### Docker Community Edition 18.03.0-ce-rc3-win56 2018-03-13
+
+[Download](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
