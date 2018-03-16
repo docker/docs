@@ -1709,6 +1709,11 @@ manuals:
             path: /ee/ucp/interlock/deploy/configure/
           - title: Configuration reference
             path: /ee/ucp/interlock/deploy/configuration-reference/
+        - sectiontitle: Route traffic to services
+          section:
+          - title: Simple swarm service
+            path: /ee/ucp/interlock/usage/
+
 
 
         - sectiontitle: Introduction
