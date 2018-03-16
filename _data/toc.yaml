@@ -1574,6 +1574,8 @@ manuals:
           title: Install
         - path: /ee/ucp/admin/install/install-offline/
           title: Install offline
+        - path: /ee/ucp/admin/install/install-on-azure/
+          title: Install on Azure
         - path: /ee/ucp/admin/install/upgrade/
           title: Upgrade
         - path: /ee/ucp/admin/install/upgrade-offline/
