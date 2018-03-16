@@ -188,11 +188,6 @@ and higher.
     54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
     ```
 
-> Older versions of Docker
->
-> In Docker 1.12 and lower, use `docker ps` instead of `docker container ls`.
-> For commands introduced in Docker 1.13, see the blog post, [Introducing Docker 1.13](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/){: target="_blank" class="_"}.
-
 ## Recap and cheat sheet
 
 ```shell
@@ -212,7 +207,7 @@ docker run hello-world
 docker image ls
 
 ## List Docker containers (running, all, all in quiet mode)
-docker container ls (or docker ps in v1.12 and lower)
+docker container ls
 docker container ls --all
 docker container ls -aq
 ```
