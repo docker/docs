@@ -227,7 +227,15 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Virtualization
 
-#### Hyper-V must be enabled
+In order for Docker for Windows to function properly your machine needs:
+
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview) installed and working
+
+2. Virtualization enabled
+
+
+#### Hyper-V
+
 
 Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker for Windows installer enables
@@ -235,7 +243,8 @@ it for you.
 
 See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows does not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
 
-Once Hyper-V is enabled, it shows up as such on "Turn Windows features on or off".
+
+From the start menu, type  in "Turn Windows features on or off" and hit enter. In the subequent screen, verify Hyper-V is enabled and has a checkmark:
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 
@@ -279,7 +288,7 @@ Here are some steps to take if you encounter similar problems:
 
 2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V must be enabled](#hyper-v-must-be-enabled).
 
-3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager** on the Actions tab of the **Hyper-V Manager**.
+3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager** on the Actions tab on the right side of the **Hyper-V Manager**.
 
     ![Hyper-V manager](images/hyperv-manager.png)
 
