@@ -128,70 +128,70 @@ and higher.
 
 ### Test Docker version
 
-Ensure that you have a supported version of Docker:
+1.  Run `docker --version` and ensure that you have a supported version of Docker:
 
-```shell
-docker --version
+    ```shell
+    docker --version
 
-Docker version 17.12.0-ce, build c97c6d6
-```
+    Docker version 17.12.0-ce, build c97c6d6
+    ```
 
-Run `docker version`(without `--`) or `docker info` to view even more details
-about your docker installation:
+2.  Run `docker info` or (`docker version` without `--`) to view even more details about your docker installation:
 
-```shell
-docker info
+    ```shell
+    docker info
 
-Containers: 0
- Running: 0
- Paused: 0
- Stopped: 0
-Images: 0
-Server Version: 17.12.0-ce
-Storage Driver: overlay2
-...
-```
+    Containers: 0
+     Running: 0
+     Paused: 0
+     Stopped: 0
+    Images: 0
+    Server Version: 17.12.0-ce
+    Storage Driver: overlay2
+    ...
+    ```
 
-> **Note**: To avoid permission errors (and the use of `sudo`), add your user to
-> the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
+> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](https://docs.docker.com/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
 
 ### Test Docker installation
 
-Test that your installation works by running the simple Docker image,
+1.  Test that your installation works by running the simple Docker image,
 [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
-```shell
-docker run hello-world
+    ```shell
+    docker run hello-world
 
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-ca4f61b1923c: Pull complete
-Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-Status: Downloaded newer image for hello-world:latest
+    Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
 
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-...
-```
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
+    ...
+    ```
 
-List the `hello-world` image that was downloaded to your machine:
+2.  List the `hello-world` image that was downloaded to your machine:
 
-```shell
-docker image ls
-```
+    ```shell
+    docker image ls
+    ```
 
-List the `hello-world` container (spawned by the image), which exits after
-displaying its message. If it were still running, you would _not_ need the
-`--all` option:
+3.  List the `hello-world` container (spawned by the image) which exits after
+    displaying its message. If it were still running, you would not need the `--all` option:
 
-```shell
-docker container ls --all
+    ```shell
+    docker container ls --all
 
-CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
-```
+    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
+    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
+    ```
 
-> If you have docker-ce 1.12 or lower, run `docker ps --all`. For commands introduced in docker-ce 1.13, see [Introducing Docker 1.13](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/){: target="_blank" class="_"}.
+> Older versions of Docker
+>
+> In Docker 1.12 and lower, use `docker ps` instead of `docker container ls`.
+> For commands introduced in Docker 1.13, see the blog post, [Introducing Docker 1.13](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/){: target="_blank" class="_"}.
 
 ## Recap and cheat sheet
 
