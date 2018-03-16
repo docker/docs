@@ -131,7 +131,8 @@ and higher.
 Ensure that you have a supported version of Docker:
 
 ```shell
-$ docker --version
+docker --version
+
 Docker version 17.12.0-ce, build c97c6d6
 ```
 
@@ -139,7 +140,8 @@ Run `docker version`(without `--`) or `docker info` to view even more details
 about your docker installation:
 
 ```shell
-$ docker info
+docker info
+
 Containers: 0
  Running: 0
  Paused: 0
@@ -159,7 +161,7 @@ Test that your installation works by running the simple Docker image,
 [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
 
 ```shell
-$ docker run hello-world
+docker run hello-world
 
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -175,7 +177,7 @@ This message shows that your installation appears to be working correctly.
 List the `hello-world` image that was downloaded to your machine:
 
 ```shell
-$ docker image ls
+docker image ls
 ```
 
 List the `hello-world` container (spawned by the image), which exits after
@@ -183,10 +185,13 @@ displaying its message. If it were still running, you would _not_ need the
 `--all` option:
 
 ```shell
-$ docker container ls --all
+docker container ls --all
+
 CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
 54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
 ```
+
+> If you have docker-ce 1.12 or lower, run `docker ps --all`. For commands introduced in docker-ce 1.13, see [Introducing Docker 1.13](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/){: target="_blank" class="_"}.
 
 ## Recap and cheat sheet
 
@@ -207,9 +212,9 @@ docker run hello-world
 docker image ls
 
 ## List Docker containers (running, all, all in quiet mode)
-docker container ls
+docker container ls (or docker ps in v1.12 and lower)
 docker container ls --all
-docker container ls -a -q
+docker container ls -aq
 ```
 
 ## Conclusion of part one
