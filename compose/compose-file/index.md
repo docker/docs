@@ -247,32 +247,32 @@ build process.
 First, specify the arguments in your Dockerfile:
 
     ARG buildno
-    ARG password
+    ARG gitcommithash
 
     RUN echo "Build number: $buildno"
-    RUN script-requiring-password.sh "$password"
+    RUN echo "Based on commit: $gitcommithash"
 
-Then specify the arguments under the `build` key. You can pass either a mapping
+Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
 
     build:
       context: .
       args:
         buildno: 1
-        password: secret
+        gitcommithash: cdc3b19
 
     build:
       context: .
       args:
         - buildno=1
-        - password=secret
+        - gitcommithash=cdc3b19
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
 
     args:
       - buildno
-      - password
+      - gitcommithash
 
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
@@ -738,8 +738,8 @@ Configures if and how to restart containers when they exit. Replaces
 - `delay`: How long to wait between restart attempts, specified as a
   [duration](#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving
-  up (default: never give up). If the restart does not succeed within the configured 
-  `window`, this attempt doesn't count toward the configured `max_attempts` value. 
+  up (default: never give up). If the restart does not succeed within the configured
+  `window`, this attempt doesn't count toward the configured `max_attempts` value.
   For example, if `max_attempts` is set to '2', and the restart fails on the first
   attempt, more than two restarts may be attempted.
 - `window`: How long to wait before deciding if a restart has succeeded,
