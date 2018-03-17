@@ -170,7 +170,7 @@ First, specify the arguments in your Dockerfile:
     RUN echo "Build number: $buildno"
     RUN echo "Based on commit: $gitcommithash"
 
-Then specify the arguments under the `build` key. You can pass either a mapping
+Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
 
     build:
