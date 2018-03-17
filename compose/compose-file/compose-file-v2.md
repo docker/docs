@@ -165,32 +165,32 @@ build process.
 First, specify the arguments in your Dockerfile:
 
     ARG buildno
-    ARG password
+    ARG gitcommithash
 
     RUN echo "Build number: $buildno"
-    RUN script-requiring-password.sh "$password"
+    RUN echo "Based on commit: $gitcommithash"
 
-Then specify the arguments under the `build` key. You can pass either a mapping
+Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
 
     build:
       context: .
       args:
         buildno: 1
-        password: secret
+        gitcommithash: cdc3b19
 
     build:
       context: .
       args:
         - buildno=1
-        - password=secret
+        - gitcommithash=cdc3b19
 
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
 
     args:
       - buildno
-      - password
+      - gitcommithash
 
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
