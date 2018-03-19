@@ -64,9 +64,7 @@ default server configuration is not chosen, then the last server configuration
 is always used, regardless of which one is actually the best match.
 
 
-## Version 2.2.5
-
-(16 January 2018)
+## Version 2.2.5 (16 January 2018)
 
 **Bug fixes**
 
@@ -86,9 +84,7 @@ and are planning on upgrading UCP, you can skip 2.2.5 and wait for the upcoming
 2.2.6 release, which will provide an alternative way to turn on RBAC enforcement
 for volumes.
 
-## Version 2.2.4
-
-(2 November 2017)
+## Version 2.2.4 (2 November 2017)
 
 **News**
 
@@ -119,9 +115,7 @@ for volumes.
  * Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by `failed to allocate network IP for task` Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.
  * The Swarm admin UI for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update "Task History Limit", "Heartbeat Period" and "Node Certificate Expiry" settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.
 
-## Version 2.2.3
-
-(13 September 2017)
+## Version 2.2.3 (13 September 2017)
 
 **Bug fixes**
 
@@ -173,9 +167,7 @@ for volumes.
  `<node-name>/<network-name>`.
 
 
-## version 2.2.2
-
-(30 August 2017)
+## version 2.2.2 (30 August 2017)
 
 **Bug fixes**
 
@@ -210,9 +202,7 @@ for volumes.
 include `external: true`, otherwise the deployment fails with the error
 `unable to inspect secret`.
 
-## Version 2.2.0
-
-(16 August 2017)
+## Version 2.2.0 (16 August 2017)
 
 **New features**
 
