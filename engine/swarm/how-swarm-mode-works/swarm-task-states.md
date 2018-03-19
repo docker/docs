@@ -6,23 +6,18 @@ redirect_from:
 - /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
 ---
 
-Docker lets you create services, which can start tasks.
-A service is a description of a desired state, and a task does the work.
+Docker lets you create services, which can start tasks. A service is a description of a desired state, and a task does the work.
 Work is scheduled on swarm nodes in this sequence:
 
-1. Create a service by using `docker service create` or the UCP web UI or CLI.
-2. The request goes to a Docker manager node.
-2. The Docker manager node schedules the service to run on particular nodes.
-3. Each service can start multiple tasks.
-4. Each task has a life cycle, with states like `NEW`, `PENDING`, and `COMPLETE`.
+1.  Create a service by using `docker service create` or the UCP web UI or CLI.
+2.  The request goes to a Docker manager node.
+3.  The Docker manager node schedules the service to run on particular nodes.
+4.  Each service can start multiple tasks.
+5.  Each task has a life cycle, with states like `NEW`, `PENDING`, and `COMPLETE`.
 
-Tasks are execution units that run once to completion. When a task stops,
-it isn't executed again, but a new task may take its place.
+Tasks are execution units that run once to completion. When a task stops, it isn't executed again, but a new task may take its place.
 
-Tasks advance through a number of states until they complete or fail. Tasks
-are initialized in the `NEW` state. The task progresses forward through a
-number of states, and its state doesn't go backward. For example, a task never
-goes from `COMPLETE` to `RUNNING`.
+Tasks advance through a number of states until they complete or fail. Tasks are initialized in the `NEW` state. The task progresses forward through a number of states, and its state doesn't go backward. For example, a task never goes from `COMPLETE` to `RUNNING`.
 
 Tasks go through the states in the following order:
 
