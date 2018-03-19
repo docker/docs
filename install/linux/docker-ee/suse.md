@@ -4,7 +4,7 @@ keywords: requirements, apt, installation, suse, opensuse, sles, rpm, install, u
 redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/suse/
-- /engine/installatioin/linux/docker-ee/suse/
+- /engine/installation/linux/docker-ee/suse/
 title: Get Docker EE for SLES
 toc_max: 4
 ---
