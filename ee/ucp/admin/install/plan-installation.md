@@ -69,6 +69,8 @@ add the nodes to the load balancer using their IP addresses or their FQDNs.
 Whichever you choose, be consistent across nodes. When this is decided,
 take note of all IPs or FQDNs before starting the installation.
 
+[Learn how to set up your load balancer](../configure/join-nodes/use-a-load-balancer.md).
+
 ## Load balancing UCP and DTR
 
 By default, UCP and DTR both use port 443. If you plan on deploying UCP and
