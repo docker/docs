@@ -92,9 +92,11 @@ There are two scenarios that the above limitations affect:
 #### I want to connect from a container to a service on the host
 
 The Mac has a changing IP address (or none if you have no network access). From
-17.12 onwards our recommendation is to connect to the special Mac-only DNS name
-`docker.for.mac.host.internal`, which resolves to the internal IP address used
-by the host.
+18.03 onwards our recommendation is to connect to the special Mac-only DNS name
+`host.docker.internal`, which resolves to the internal IP address used by the
+host.
+
+The gateway is also reachable as `gateway.docker.internal`.
 
 #### I want to connect to a container from the Mac
 
