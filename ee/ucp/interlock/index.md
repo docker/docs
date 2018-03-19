@@ -54,8 +54,6 @@ context or path.
 * **Host mode networking**: By default layer 7 routing leverages the Docker Swarm
 routing mesh, but you don't have to. You can use host mode networking for maximum
 performance.
-* **Blue-green and canary deployments**: You can deploy a new version of your application
-while traffic is still being routed to the old one.
 * **Security**: The layer 7 routing components that are exposed to the outside
 world run on worker nodes. Even if they get compromised, your cluster won't.
 
