@@ -40,7 +40,7 @@ Tasks go through the states in the following order:
 | `SHUTDOWN`  | Docker requested the task to shut down.                                                                     |
 | `REJECTED`  | The worker node rejected the task.                                                                          |
 | `ORPHANED`  | The node was down for too long.                                                                             |
-| `REMOVE`    | The node was removed.                                                                             |
+| `REMOVE`    | The task is ready for removal after shutdown succeeds. It will not be kept around in task history.          |
 
 ## View task state
 
