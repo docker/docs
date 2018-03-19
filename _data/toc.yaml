@@ -1713,7 +1713,8 @@ manuals:
           section:
           - title: Simple swarm service
             path: /ee/ucp/interlock/usage/
-
+          - title: Set a default backend
+            path: /ee/ucp/interlock/usage/default-service/
 
 
         - sectiontitle: Introduction
