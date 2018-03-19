@@ -6,7 +6,7 @@ title: Migration overview
 
 ## Introduction
 
-<span class="badge badge-warning">Important</span>  **Cluster and application management services in Docker Cloud are shutting down on May 11. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms.**
+<span class="badge badge-warning">Important</span>  **Cluster and application management services in Docker Cloud are shutting down on May 21. You must migrate your applications from Docker Cloud to another platform and deregister your Swarms.**
 
 The Docker Cloud runtime is being discontinued. This means that you will no longer be able to manage your nodes, swarm clusters, and the applications that run on them in Docker Cloud. To protect your applications, you must must migrate them to another platform, and if applicable, deregister your Swarms from Docker Cloud. The documents in this section explain how.
 
