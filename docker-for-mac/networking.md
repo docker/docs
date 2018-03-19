@@ -5,16 +5,18 @@ redirect_from:
 - /mackit/networking/
 title: Networking features in Docker for Mac
 ---
+{% assign Arch = 'Mac' %}
 
-Docker for Mac provides several networking features to make it easier to use.
+Docker for {{Arch}} provides several networking features to make it
+easier to use.
 
 ## Features
 
 ### VPN Passthrough
 
-Docker for Mac's networking can work when attached to a VPN. To do this, Docker
-for Mac intercepts traffic from the `HyperKit` and injects it into macOS as if
-it originated from the Docker application.
+Docker for {{Arch}}'s networking can work when attached to a VPN. To do this,
+Docker for {{Arch}} intercepts traffic from the containers and injects it into
+Windows as if it originated from the Docker application.
 
 ### Port Mapping
 
@@ -24,11 +26,11 @@ When you run a container with the `-p` argument, for example:
 $ docker run -p 80:80 -d nginx
 ```
 
-Docker for Mac makes whatever is running on port 80 in the container (in this
-case, `nginx`) available on port 80 of `localhost`. In this example, the host
-and container ports are the same. What if you need to specify a different host
-port? If, for example, you already have something running on port 80 of your
-host machine, you can connect the container to a different port:
+Docker for {{Arch}} makes whatever is running on port 80 in the container (in
+this case, `nginx`) available on port 80 of `localhost`. In this example, the
+host and container ports are the same. What if you need to specify a different
+host port? If, for example, you already have something running on port 80 of
+your host machine, you can connect the container to a different port:
 
 ```
 $ docker run -p 8000:80 -d nginx
@@ -68,18 +70,18 @@ using [restart policies](/engine/reference/run/#restart-policies-restart).
 
 ## Known limitations, use cases, and workarounds
 
-Following is a summary of current limitations on the Docker for Mac networking
-stack, along with some ideas for workarounds.
+Following is a summary of current limitations on the Docker for {{Arch}}
+networking stack, along with some ideas for workarounds.
 
 ### There is no docker0 bridge on macOS
 
 Because of the way networking is implemented in Docker for Mac, you cannot see a
-`docker0` interface in macOS. This interface is actually within `HyperKit`.
+`docker0` interface in macOS. This interface is actually within the virtual
+machine.
 
 ### I cannot ping my containers
 
-Docker for Mac can't traffic to containers, and from containers back to the
-host.
+Docker for Mac can't route traffic to containers.
 
 ### Per-container IP addressing is not possible
 
@@ -91,7 +93,7 @@ There are two scenarios that the above limitations affect:
 
 #### I want to connect from a container to a service on the host
 
-The Mac has a changing IP address (or none if you have no network access). From
+The host has a changing IP address (or none if you have no network access). From
 18.03 onwards our recommendation is to connect to the special Mac-only DNS name
 `host.docker.internal`, which resolves to the internal IP address used by the
 host.
@@ -101,7 +103,7 @@ The gateway is also reachable as `gateway.docker.internal`.
 #### I want to connect to a container from the Mac
 
 Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
-Ports exposed from Linux are forwarded to the Mac.
+Ports exposed from Linux are forwarded to the host.
 
 Our current recommendation is to publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
@@ -134,12 +136,3 @@ $ docker run -d -P --name webserver nginx
 
 See the [run command](/engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
-
-#### A view into implementation
-
-We understand that these workarounds are not ideal, but there are several
-problems. In particular, there is a bug in macOS that is only fixed in 10.12 and
-is not being backported as far as we can tell, which means that we could not
-support this in all supported macOS versions. In addition, this network setup
-would require root access which we are trying to avoid entirely in Docker for
-Mac (we currently have a very small root helper that we are trying to remove).
