@@ -96,6 +96,8 @@ In this demo, we build a swarm cluster with six nodes (3 managers/3 workers), bu
 
     > Our swarm cluster uses self-signed certificates. To use an [external CA](https://docs.docker.com/engine/reference/commandline/swarm_init/#--external-ca){: target="_blank" class="_"}, initialize with the option, `--external-ca`. You should also build your nodes in appropriate availability zones.
 
+    > You can use the flag, `--advertise-addr`, to define the IP and port that other nodes should use to connect to this manager. You can even specify an IP that does not exist on the node, such one for a load balancer. See [docker swarm init](https://docs.docker.com/engine/reference/commandline/swarm_init/#--advertise-addr){: target="_blank" class="_"}.
+
 3.  Extract and **safely store** the manager _join-token_ required to add manager nodes.
 
     ```
