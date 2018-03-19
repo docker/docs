@@ -10,6 +10,60 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.2.6 (2018-03-19)
+
+**New features**
+
+* Security
+  * Default TLS connections to TLS 1.2, and allow users to configure the minimum
+  TLS version used by the UCP controller.
+* Support and troubleshoot
+  * The support dump now includes the output of `dmesg`.
+  * Added more information to the telemetry data: kernel version, graph driver, and
+  logging driver.
+  * The `dsinfo` image used for support dumps is now smaller.
+
+**Bug fixes**
+
+* Core
+  * The HRM service is no longer deployed with constraints that might prevent
+  the service from ever getting scheduled.
+  * Fixed a problem causing the HRM service to be restarted multiple times.
+  * The `ucp-agent` service is now deployed without adding extra collection labels.
+  This doesn't change the behavior of the service.
+  * Fixed problem causing a healthy `ucp-auth-store` component to be reported as
+  unhealthy.
+  * Fixed a race condition causing the labels for the UCP controller container
+  to be reset.
+  * Fixed an issue causing the `ucp-agent` service to be deployed with the wrong
+  architecture on Windows nodes.
+* RBAC
+  * Role-based access control can now be enforced for third-party volume plugins,
+  fixing a known issue from UCP 2.2.5.
+  * Admins can now clean up volumes and networks that had inconsistent collection
+  labels across different nodes in the cluster. Previously, they would have had
+  to go onto each node and clean up those resources directly.
+  * When upgrading from UCP 2.1, inactive user accounts are no longer migrated
+  to the new RBAC model.
+  * Fixed an issue preventing users from seeing a collection when they have
+  permissions to deploy services on a child collection.
+  * Grants are now deleted when deleting an organization whose teams have grants.
+* UI
+  * Fixed a problem in the Settings page that would cause Docker to stop when
+  you made changes to UCP settings and a new manager node is promoted to leader.
+  * Fixed bug causing the Grants list page not to render after deleting an
+  organization mentioned used on a grant.
+  * Fixed a problem that would intermittently cause settings not to be persisted.
+  * Fixed an issue that prevented users from being able to change LDAP settings.
+
+**Known issues**
+
+* RethinkDB can only run with up to 127 CPU cores.
+* When integrating with LDAP and using multiple domain servers, if the
+default server configuration is not chosen, then the last server configuration
+is always used, regardless of which one is actually the best match.
+
+
 ## Version 2.2.5
 
 (16 January 2018)
